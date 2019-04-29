@@ -1,0 +1,36 @@
+{
+    "token" : "trm-efb607d9-61b3-43c4-886a-7caca6eb594c",
+    "type" : "BANK_ACCOUNT",
+    "status" : "ACTIVATED",
+    "verificationStatus" : "NOT_REQUIRED",
+    "createdOn" : "2019-03-04T19:17:46",
+    "transferMethodCountry" : "US",
+    "transferMethodCurrency" : "USD",
+    "bankName" : "JPMORGAN CHASE BANK                 ",
+    "bankId" : "021000021",
+    "branchId" : "021000021",
+    "bankAccountId" : "12345",
+    "bankAccountRelationship" : "SELF",
+    "bankAccountPurpose" : "SAVINGS",
+    "profileType" : "INDIVIDUAL",
+    "firstName" : "Neil",
+    "lastName" : "Tanner",
+    "dateOfBirth" : "1980-01-01",
+    "countryOfBirth" : "US",
+    "countryOfNationality" : "CA",
+    "gender" : "MALE",
+    "phoneNumber" : "+1 604 6666666",
+    "mobileNumber" : "604 666 6666",
+    "governmentId" : "987654321",
+    "addressLine1" : "950 Granville Street",
+    "city" : "Vancouver",
+    "stateProvince" : "BC",
+    "country" : "CA",
+    "postalCode" : "V6Z1L2",
+    "links" : [ {
+        "params" : {
+            "rel" : "self"
+        },
+        "href" : "https://localhost/rest/v3/users/usr-6bfca597-2d3f-473e-b5ac-4756c38d52f5/bank-accounts/trm-efb607d9-61b3-43c4-886a-7caca6eb594c"
+    } ]
+}

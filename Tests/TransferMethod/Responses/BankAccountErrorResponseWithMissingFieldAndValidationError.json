@@ -1,0 +1,13 @@
+{
+    "errors": [
+        {
+            "message": "You have to provide a value for this field",
+            "fieldName": "bankId",
+            "code": "CONSTRAIN_VALIDATION"
+        },
+        {
+            "message": "BankId: The value you provided for this field is already registered with another user ",
+            "code": "VALIDATION_ERROR"
+        }
+    ]
+}

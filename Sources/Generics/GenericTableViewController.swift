@@ -1,0 +1,222 @@
+//
+// Copyright 2018 - Present Hyperwallet
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+// and associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+// BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+import UIKit
+
+/// Generic TableView Controller
+class GenericTableViewController<T: GenericCell<ModelType>, ModelType>: UITableViewController, UISearchResultsUpdating {
+    private let reuseId = "cellId"
+    private let headerReuseId = "headerReuseId"
+    /// Enable the search controller
+    private var shouldDisplaySearchBar = false
+    /// The amount of items to enable the search bar to the Generic TableView
+    let amountOfItemsToEnableSearchBar = 20
+    var items = [ModelType]() {
+        didSet {
+            shouldDisplaySearchBar = items.count >= amountOfItemsToEnableSearchBar
+        }
+    }
+    var filteredItems = [ModelType]()
+    /// Event handler to indicate if the item cell should be marked
+    var shouldMarkCellAction: ((_ value: ModelType) -> Bool)?
+
+    /// Index  of the initial selected item
+    var initialSelectedItemIndex: Int?
+    /// Delegate to customise the filter content.
+    ///
+    /// - parameters: searchText - The text should be used to filter the items list and returned the filtered list.
+    var filterContentForSearchTextAction: ((_ items: [ModelType], _ searchText: String) -> [ModelType])? {
+        didSet {
+            if shouldDisplaySearchBar {
+                setupSeachBar()
+            } else {
+                setupWithoutSearchBar()
+            }
+        }
+    }
+    typealias SelectedHandler = (_ value: ModelType) -> Void
+    /// Event handler to return the item selected
+    var selectedHandler: SelectedHandler?
+
+    /// MARK: - Private properties
+    private let searchController: UISearchController = {
+        UISearchController(searchResultsController: nil)
+    }()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.titleDisplayMode(.never)
+        self.extendedLayoutIncludesOpaqueBars = true
+        setupTable()
+        setViewBackgroundColor()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        tableView.reloadData()
+        if let index = initialSelectedItemIndex, index < items.count {
+            tableView.scrollToRow(at: IndexPath(row: index, section: 0), at: .top, animated: true)
+        }
+    }
+
+    /// Registers the `GenericCell<ModelType>, ModelType>`
+    ///
+    /// - Parameter hasNib: The GenericCell<ModelType>, ModelType> is a xib file. By default is true
+    func registerGenericCell(hasNib: Bool = true) {
+        if hasNib {
+            tableView.register(UINib(nibName: String(describing: T.self),
+                                     bundle: HyperwalletBundle.bundle), forCellReuseIdentifier: reuseId)
+        } else {
+            tableView.register(T.self, forCellReuseIdentifier: reuseId)
+        }
+    }
+
+    // MARK: - Setup
+    /// Setup the Search Controller
+    private func setupUISearchController() {
+        searchController.searchResultsUpdater = self
+        definesPresentationContext = true
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.sizeToFit()
+    }
+
+    // MARK: - Private instance methods
+    /// Checks the search bar is empty
+    private func searchBarIsEmpty() -> Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+
+    /// Checks the search bar is active
+    private func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
+    }
+
+    // MARK: - UITableViewDataSource
+    override func tableView( _ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return retrieveItems().count
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseId, for: indexPath)
+
+        cell.accessoryType = .none
+
+        if shouldMarkCellAction?(retrieveItems()[indexPath.row]) ?? false {
+            cell.accessoryType = .checkmark
+        }
+
+        if let genericCell = cell as? GenericCell<ModelType> {
+            genericCell.item = retrieveItems()[indexPath.row]
+        }
+
+        return cell
+    }
+
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard #available(iOS 11.0, *) else {
+            if shouldDisplaySearchBar {
+                let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerReuseId)
+
+                headerView?.addSubview(searchController.searchBar)
+
+                return headerView
+            }
+
+            return nil
+        }
+
+        return nil
+    }
+
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        guard #available(iOS 11.0, *) else {
+            return shouldDisplaySearchBar ? searchController.searchBar.frame.size.height : 0.0
+        }
+
+        return 0.0
+    }
+    // MARK: - UITableViewDelegate
+    private func retrieveItems() -> [ModelType] {
+        if isFiltering() {
+            return filteredItems
+        } else {
+            return items
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Retrieve the item selected
+        if let performItemSelected = selectedHandler {
+            let item = retrieveItems()[indexPath.row]
+            performItemSelected(item)
+        }
+        navigationController?.popViewController(animated: true)
+    }
+
+    // MARK: - UISearchResultsUpdating
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let performFilter = filterContentForSearchTextAction,
+            let searchText = searchController.searchBar.text else {
+                return
+        }
+
+        filteredItems = performFilter(items, searchText)
+        tableView.reloadData()
+    }
+
+    private func setupSeachBar() {
+        setupUISearchController()
+        searchController.hidesNavigationBarDuringPresentation = false
+        if #available(iOS 11.0, *) {
+            navigationItem.searchController = self.searchController
+            navigationItem.hidesSearchBarWhenScrolling = false
+        }
+        ThemeManager.applyTo(searchBar: searchController.searchBar)
+    }
+
+    private func setupWithoutSearchBar() {
+        definesPresentationContext = false
+        if #available(iOS 11.0, *) {
+            navigationItem.searchController = nil
+        }
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        guard #available(iOS 11.0, *) else {
+            DispatchQueue.main.async {
+                self.searchController.searchBar.sizeToFit()
+            }
+
+            return
+        }
+    }
+}
+
+private extension GenericTableViewController {
+    func setupTable() {
+        tableView.tableFooterView = UIView()
+        tableView.estimatedRowHeight = Theme.Cell.rowHeight
+        tableView.rowHeight = UITableView.automaticDimension
+
+        tableView.register(UITableViewHeaderFooterView.self,
+                           forHeaderFooterViewReuseIdentifier: headerReuseId)
+    }
+}

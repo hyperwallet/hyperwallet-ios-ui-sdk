@@ -1,0 +1,9 @@
+{
+    "errors": [
+        {
+            "message": "The card is already registered.",
+            "fieldName": "cardNumber",
+            "code": "DUPLICATE_CARD_NUMBER"
+        }
+    ]
+}

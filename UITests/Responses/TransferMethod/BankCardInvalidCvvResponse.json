@@ -1,0 +1,9 @@
+{
+    "errors": [
+        {
+            "message": "The card cannot be registered - The CVV entered is invalid.",
+            "fieldName": "cardNumber",
+            "code": "VISADIRECT_UI_011"
+        }
+    ]
+}

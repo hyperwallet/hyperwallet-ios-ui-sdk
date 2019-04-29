@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="CountryCurrencyCell" customModule="HyperwalletExampleApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="United  States" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRn-5c-p9N" userLabel="valueLabel">
+                        <rect key="frame" x="160" y="11" width="144" height="22"/>
+                        <accessibility key="accessibilityConfiguration" identifier="selectCountry"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SPg-MQ-lOn" userLabel="titleLabel">
+                        <rect key="frame" x="16" y="11" width="144" height="22"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="SPg-MQ-lOn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="EUw-ix-YbP"/>
+                    <constraint firstItem="SPg-MQ-lOn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Gjf-eO-jrJ"/>
+                    <constraint firstItem="oRn-5c-p9N" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="IZD-XU-U9M"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="SPg-MQ-lOn" secondAttribute="bottom" id="Zb4-MZ-62E"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="oRn-5c-p9N" secondAttribute="bottom" id="aBD-RK-DMa"/>
+                    <constraint firstItem="oRn-5c-p9N" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="hM3-xF-3Ok"/>
+                    <constraint firstItem="oRn-5c-p9N" firstAttribute="leading" secondItem="SPg-MQ-lOn" secondAttribute="trailing" id="hXG-vx-c7z"/>
+                    <constraint firstItem="oRn-5c-p9N" firstAttribute="width" secondItem="SPg-MQ-lOn" secondAttribute="width" id="qlu-nA-yqH"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="titleLabel" destination="SPg-MQ-lOn" id="qVg-Wu-gq0"/>
+                <outlet property="valueLabel" destination="oRn-5c-p9N" id="dlG-QN-sbD"/>
+            </connections>
+            <point key="canvasLocation" x="56" y="48.575712143928037"/>
+        </tableViewCell>
+    </objects>
+</document>

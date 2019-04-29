@@ -1,0 +1,16 @@
+{
+    "token": "trm-6dab5471-65d1-4d48-aacb-fdd590f943d6",
+    "createdOn": "2019-03-19T23:10:37",
+    "transition": "DE_ACTIVATED",
+    "fromStatus": "ACTIVATED",
+    "toStatus": "DE_ACTIVATED",
+    "notes": "<span>Client initiated status transition.</span>",
+    "links": [
+        {
+            "params": {
+                "rel": "self"
+            },
+            "href": "http://localhost:8080/rest/v3/users/usr-token/transfer-methods?offset=0&status=ACTIVATED&limit=100"
+        }
+    ]
+}

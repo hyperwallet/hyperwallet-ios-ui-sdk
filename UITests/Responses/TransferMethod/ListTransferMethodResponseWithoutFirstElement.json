@@ -1,0 +1,119 @@
+{
+    "count": 3,
+    "offset": 0,
+    "limit": 50,
+    "data": [
+        {
+            "token": "trm-6ffc9828-4885-47cc-bc4b-58077b693a53",
+            "type": "BANK_ACCOUNT",
+            "status": "ACTIVATED",
+            "verificationStatus": "NOT_REQUIRED",
+            "createdOn": "2019-03-19T23:10:42",
+            "transferMethodCountry": "US",
+            "transferMethodCurrency": "USD",
+            "bankId": "021000021",
+            "branchId": "021000021",
+            "bankAccountId": "0000000000002",
+            "bankAccountRelationship": "SELF",
+            "bankAccountPurpose": "CHECKING",
+            "profileType": "INDIVIDUAL",
+            "firstName": "Neil",
+            "lastName": "Louis",
+            "dateOfBirth": "1980-01-01",
+            "countryOfBirth": "US",
+            "countryOfNationality": "CA",
+            "gender": "MALE",
+            "phoneNumber": "+1 604 6666666",
+            "mobileNumber": "604 666 6666",
+            "governmentId": "987654321",
+            "addressLine1": "950 Granville Street",
+            "city": "Vancouver",
+            "stateProvince": "BC",
+            "country": "CA",
+            "postalCode": "V6Z1L2",
+            "links": [
+                {
+                    "params": {
+                        "rel": "self"
+                    },
+                    "href": "https://localhost/rest/v3/users/usr-16960a42-c133-4048-b25c-a3c689267d86/transfer-methods/trm-6ffc9828-4885-47cc-bc4b-58077b693a53"
+                }
+            ]
+        },
+        {
+            "token": "trm-689d215b-40e0-4973-84e0-bb7cb7edaf37",
+            "type": "BANK_ACCOUNT",
+            "status": "ACTIVATED",
+            "verificationStatus": "NOT_REQUIRED",
+            "createdOn": "2019-03-19T23:10:45",
+            "transferMethodCountry": "US",
+            "transferMethodCurrency": "USD",
+            "bankId": "021000021",
+            "branchId": "021000021",
+            "bankAccountId": "0000000000003",
+            "bankAccountRelationship": "SELF",
+            "bankAccountPurpose": "CHECKING",
+            "profileType": "INDIVIDUAL",
+            "firstName": "Neil",
+            "lastName": "Louis",
+            "dateOfBirth": "1980-01-01",
+            "countryOfBirth": "US",
+            "countryOfNationality": "CA",
+            "gender": "MALE",
+            "phoneNumber": "+1 604 6666666",
+            "mobileNumber": "604 666 6666",
+            "governmentId": "987654321",
+            "addressLine1": "950 Granville Street",
+            "city": "Vancouver",
+            "stateProvince": "BC",
+            "country": "CA",
+            "postalCode": "V6Z1L2",
+            "links": [
+                {
+                    "params": {
+                        "rel": "self"
+                    },
+                    "href": "https://localhost/rest/v3/users/usr-16960a42-c133-4048-b25c-a3c689267d86/transfer-methods/trm-689d215b-40e0-4973-84e0-bb7cb7edaf37"
+                }
+            ]
+        },
+        {
+            "token" : "trm-5c380689-4074-46c4-8827-0574d88b509b",
+            "type" : "BANK_CARD",
+            "status" : "ACTIVATED",
+            "createdOn" : "2019-02-26T21:45:54",
+            "transferMethodCountry" : "US",
+            "transferMethodCurrency" : "USD",
+            "cardType" : "DEBIT",
+            "cardNumber" : "************0006",
+            "cardBrand" : "VISA",
+            "dateOfExpiry" : "2020-10",
+            "links" : [ {
+                "params" : {
+                    "rel" : "self"
+                },
+                "href" : "https://localhost:8181/rest/v3/users/usr-a51c7522-ccba-4bcf-a6a7-bc59dae8f9b0/bank-accounts/trm-33e6a84f-7ed1-4c96-8c1a-d4d456478fc7"
+            } ]
+        }
+    ],
+    "links": [
+        {
+            "params": {
+                "rel": "self"
+            },
+            "href": "https://localhost/rest/v3/users/usr-16960a42-c133-4048-b25c-a3c689267d86/transfer-methods?offset=0&limit=100&status=ACTIVATED"
+        },
+        {
+            "params": {
+                "rel": "next"
+            },
+            "href": "https://localhost/rest/v3/users/usr-16960a42-c133-4048-b25c-a3c689267d86/transfer-methods?offset=100&limit=100&status=ACTIVATED"
+        },
+        {
+            "params": {
+                "rel": "last"
+            },
+            "href": "https://localhost/rest/v3/users/usr-16960a42-c133-4048-b25c-a3c689267d86/transfer-methods?offset=41&limit=100&status=ACTIVATED"
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+{
+    "token": "trm-1f058460-18df-400a-a74a-a928f3aa4dde",
+    "type": "BANK_CARD",
+    "status": "ACTIVATED",
+    "createdOn": "2019-03-07T23:33:18",
+    "transferMethodCountry": "US",
+    "transferMethodCurrency": "USD",
+    "cardType": "DEBIT",
+    "cardNumber": "************0006",
+    "cardBrand": "VISA",
+    "dateOfExpiry": "2020-10",
+    "links": [
+        {
+            "params": {
+                "rel": "self"
+            },
+            "href": "https://localhost/rest/v3/users/usr-fc84d5af-1c5b-4277-a8a4-882d6d73e704/bank-cards/trm-1f058460-18df-400a-a74a-a928f3aa4dde"
+        }
+    ]
+}
