@@ -56,10 +56,6 @@
 		DB4679992260386D00E1AF49 /* IntegratorAuthenticationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4679982260386D00E1AF49 /* IntegratorAuthenticationProvider.swift */; };
 		DB4679BF2261083F00E1AF49 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4679BE2261083F00E1AF49 /* UIFont.swift */; };
 		DB4679C3226113D100E1AF49 /* HyperwalletBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4679C2226113D100E1AF49 /* HyperwalletBundle.swift */; };
-		DBA9FA4D2278E72000C1301A /* HyperwalletUISDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBCA37F5225E892400CD4137 /* HyperwalletUISDK.framework */; };
-		DBA9FA4E2278E72000C1301A /* HyperwalletUISDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DBCA37F5225E892400CD4137 /* HyperwalletUISDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DBA9FA532278E75A00C1301A /* HyperwalletSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DBA9FA522278E75900C1301A /* HyperwalletSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DBA9FA572278E82000C1301A /* HyperwalletSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBA9FA522278E75900C1301A /* HyperwalletSDK.framework */; };
 		DBA9FA59227912A000C1301A /* UserIndividualResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBA9FA58227912A000C1301A /* UserIndividualResponse.json */; };
 		DBA9FA5B2279143900C1301A /* UserBusinessResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBA9FA5A2279143900C1301A /* UserBusinessResponse.json */; };
 		DBA9FA5E22791B2900C1301A /* UserIndividualResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBA9FA5C227918B500C1301A /* UserIndividualResponse.json */; };
@@ -147,13 +143,6 @@
 			remoteGlobalIDString = DBCA37F4225E892400CD4137;
 			remoteInfo = HyperwalletUISDK;
 		};
-		DBA9FA4F2278E72000C1301A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DBCA37F4225E892400CD4137;
-			remoteInfo = HyperwalletUISDK;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -164,18 +153,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				DB2EB67122617C0F00FBEB3D /* HyperwalletUISDK.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DBA9FA512278E72000C1301A /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				DBA9FA532278E75A00C1301A /* HyperwalletSDK.framework in Embed Frameworks */,
-				DBA9FA4E2278E72000C1301A /* HyperwalletUISDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -225,7 +202,6 @@
 		DB4679982260386D00E1AF49 /* IntegratorAuthenticationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegratorAuthenticationProvider.swift; sourceTree = "<group>"; };
 		DB4679BE2261083F00E1AF49 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		DB4679C2226113D100E1AF49 /* HyperwalletBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletBundle.swift; sourceTree = "<group>"; };
-		DBA9FA362278E6CD00C1301A /* Demo2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBA9FA522278E75900C1301A /* HyperwalletSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HyperwalletSDK.framework; path = Carthage/Build/iOS/HyperwalletSDK.framework; sourceTree = "<group>"; };
 		DBA9FA58227912A000C1301A /* UserIndividualResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UserIndividualResponse.json; sourceTree = "<group>"; };
 		DBA9FA5A2279143900C1301A /* UserBusinessResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UserBusinessResponse.json; sourceTree = "<group>"; };
@@ -329,15 +305,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DBA9FA332278E6CD00C1301A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DBA9FA572278E82000C1301A /* HyperwalletSDK.framework in Frameworks */,
-				DBA9FA4D2278E72000C1301A /* HyperwalletUISDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,7 +503,6 @@
 				DB4679822260380C00E1AF49 /* Demo.app */,
 				DB18E9ED2261BA29004F6AC3 /* HyperwalletUISDKTests.xctest */,
 				DB2587FB2261BFF100E6236B /* HyperwalletUISDKUITests.xctest */,
-				DBA9FA362278E6CD00C1301A /* Demo2.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -767,25 +733,6 @@
 			productReference = DB4679822260380C00E1AF49 /* Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		DBA9FA352278E6CD00C1301A /* Demo2 */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DBA9FA482278E6CE00C1301A /* Build configuration list for PBXNativeTarget "Demo2" */;
-			buildPhases = (
-				DBA9FA322278E6CD00C1301A /* Sources */,
-				DBA9FA332278E6CD00C1301A /* Frameworks */,
-				DBA9FA342278E6CD00C1301A /* Resources */,
-				DBA9FA512278E72000C1301A /* Embed Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				DBA9FA502278E72000C1301A /* PBXTargetDependency */,
-			);
-			name = Demo2;
-			productName = Demo2;
-			productReference = DBA9FA362278E6CD00C1301A /* Demo2.app */;
-			productType = "com.apple.product-type.application";
-		};
 		DBCA37F4225E892400CD4137 /* HyperwalletUISDK */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DBCA3809225E892400CD4137 /* Build configuration list for PBXNativeTarget "HyperwalletUISDK" */;
@@ -825,9 +772,6 @@
 					DB4679812260380C00E1AF49 = {
 						CreatedOnToolsVersion = 10.1;
 					};
-					DBA9FA352278E6CD00C1301A = {
-						CreatedOnToolsVersion = 10.2.1;
-					};
 					DBCA37F4225E892400CD4137 = {
 						CreatedOnToolsVersion = 10.1;
 					};
@@ -850,7 +794,6 @@
 				DB18E9EC2261BA29004F6AC3 /* HyperwalletUISDKTests */,
 				DB2587FA2261BFF100E6236B /* HyperwalletUISDKUITests */,
 				DB4679812260380C00E1AF49 /* Demo */,
-				DBA9FA352278E6CD00C1301A /* Demo2 */,
 			);
 		};
 /* End PBXProject section */
@@ -904,13 +847,6 @@
 				DB46798F2260380D00E1AF49 /* LaunchScreen.storyboard in Resources */,
 				DB46798C2260380D00E1AF49 /* Assets.xcassets in Resources */,
 				DB46798A2260380C00E1AF49 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DBA9FA342278E6CD00C1301A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1000,13 +936,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DBA9FA322278E6CD00C1301A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		DBCA37F1225E892400CD4137 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1078,11 +1007,6 @@
 			target = DBCA37F4225E892400CD4137 /* HyperwalletUISDK */;
 			targetProxy = DB4FD4392261462600F00959 /* PBXContainerItemProxy */;
 		};
-		DBA9FA502278E72000C1301A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DBCA37F4225E892400CD4137 /* HyperwalletUISDK */;
-			targetProxy = DBA9FA4F2278E72000C1301A /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -1117,7 +1041,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 86FDS64Z83;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1141,7 +1065,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 86FDS64Z83;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1165,7 +1089,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 86FDS64Z83;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1191,7 +1115,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 86FDS64Z83;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1220,7 +1144,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BASE_URL = "http://localhost:8080";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 86FDS64Z83;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1247,7 +1171,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BASE_URL = "http://localhost:8080";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 86FDS64Z83;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1365,7 +1289,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 86FDS64Z83;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1389,7 +1313,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 86FDS64Z83;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1418,7 +1342,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BASE_URL = "http://localhost:8080";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 86FDS64Z83;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1437,78 +1361,6 @@
 				USER_TOKEN = "usr-token";
 			};
 			name = XCUITest;
-		};
-		DBA9FA452278E6CE00C1301A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 86FDS64Z83;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = Demo2/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.objc.Demo2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		DBA9FA462278E6CE00C1301A /* XCUITest */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 86FDS64Z83;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = Demo2/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.objc.Demo2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = XCUITest;
-		};
-		DBA9FA472278E6CE00C1301A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 86FDS64Z83;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = Demo2/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.objc.Demo2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
 		};
 		DBCA3807225E892400CD4137 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1721,16 +1573,6 @@
 				DB4679912260380D00E1AF49 /* Debug */,
 				DB5E931A2261C3CC00CD57F6 /* XCUITest */,
 				DB4679922260380D00E1AF49 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		DBA9FA482278E6CE00C1301A /* Build configuration list for PBXNativeTarget "Demo2" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DBA9FA452278E6CE00C1301A /* Debug */,
-				DBA9FA462278E6CE00C1301A /* XCUITest */,
-				DBA9FA472278E6CE00C1301A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
