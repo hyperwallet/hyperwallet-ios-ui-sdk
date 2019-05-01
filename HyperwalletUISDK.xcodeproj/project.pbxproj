@@ -143,6 +143,13 @@
 			remoteGlobalIDString = DBCA37F4225E892400CD4137;
 			remoteInfo = HyperwalletUISDK;
 		};
+		DBA9FA63227A146D00C1301A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB4679812260380C00E1AF49;
+			remoteInfo = Demo;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -202,7 +209,6 @@
 		DB4679982260386D00E1AF49 /* IntegratorAuthenticationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegratorAuthenticationProvider.swift; sourceTree = "<group>"; };
 		DB4679BE2261083F00E1AF49 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		DB4679C2226113D100E1AF49 /* HyperwalletBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletBundle.swift; sourceTree = "<group>"; };
-		DBA9FA522278E75900C1301A /* HyperwalletSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HyperwalletSDK.framework; path = Carthage/Build/iOS/HyperwalletSDK.framework; sourceTree = "<group>"; };
 		DBA9FA58227912A000C1301A /* UserIndividualResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UserIndividualResponse.json; sourceTree = "<group>"; };
 		DBA9FA5A2279143900C1301A /* UserBusinessResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UserBusinessResponse.json; sourceTree = "<group>"; };
 		DBA9FA5C227918B500C1301A /* UserIndividualResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UserIndividualResponse.json; sourceTree = "<group>"; };
@@ -485,7 +491,6 @@
 		DBCA37EB225E892400CD4137 = {
 			isa = PBXGroup;
 			children = (
-				DBA9FA522278E75900C1301A /* HyperwalletSDK.framework */,
 				DBD2667F2261A601002973C3 /* Deployment */,
 				DB18E9EE2261BA29004F6AC3 /* Tests */,
 				DB2587FC2261BFF100E6236B /* UITests */,
@@ -690,6 +695,7 @@
 			);
 			dependencies = (
 				DB18E9F42261BA29004F6AC3 /* PBXTargetDependency */,
+				DBA9FA64227A146D00C1301A /* PBXTargetDependency */,
 			);
 			name = HyperwalletUISDKTests;
 			productName = HyperwalletUISDKTests;
@@ -1006,6 +1012,11 @@
 			isa = PBXTargetDependency;
 			target = DBCA37F4225E892400CD4137 /* HyperwalletUISDK */;
 			targetProxy = DB4FD4392261462600F00959 /* PBXContainerItemProxy */;
+		};
+		DBA9FA64227A146D00C1301A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB4679812260380C00E1AF49 /* Demo */;
+			targetProxy = DBA9FA63227A146D00C1301A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
