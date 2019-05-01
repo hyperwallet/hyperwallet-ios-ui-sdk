@@ -115,7 +115,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
                       "The navigateToAddTransferMethodControllerPerformed should be performed")
 
         XCTAssertEqual(presenter.countryCurrencyCount, 2, "The countryCurrencyCount should be 2")
-        XCTAssertEqual(presenter.transferMethodTypesCount, 1, "The transferMethodTypesCount should be 3")
+        XCTAssertEqual(presenter.transferMethodTypesCount, 1, "The transferMethodTypesCount should be 1")
         XCTAssertNotNil(presenter.getCellConfiguration(for: 0), "The getCellConfiguration should not be nil")
         XCTAssertNotNil(presenter.getCountryCurrencyCellConfiguration(for: 0),
                         "The getCellConfiguration should not be nil")
