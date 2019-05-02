@@ -43,6 +43,14 @@ protocol SelectTransferMethodTypeView: class {
 final class SelectTransferMethodTypePresenter {
     // MARK: properties
     private unowned let view: SelectTransferMethodTypeView
+    private var defaultCountry: String? {
+        if let userAccountCountry = user?.country {
+            return  userAccountCountry
+        } else if let country = loadTranferMethodConfigurationCountries().first {
+            return country.value
+        }
+        return nil
+    }
     private var user: HyperwalletUser?
     private var transferMethodConfigurationKeyResult: HyperwalletTransferMethodConfigurationKeyResult?
     private var transferMethodTypes = [TransferMethodTypeDetail]()
@@ -50,11 +58,15 @@ final class SelectTransferMethodTypePresenter {
     private (set) var selectedCountry: String = "" {
         didSet {
             view.countryCurrencyTableViewReloadData()
+            loadCurrency(for: selectedCountry)
         }
     }
     private (set) var selectedCurrency: String = "" {
         didSet {
             view.countryCurrencyTableViewReloadData()
+
+            loadTransferMethodTypes(country: selectedCountry,
+                                    currency: selectedCurrency)
         }
     }
     /// Returns the amount of items in `countryCurrencyTitles`
@@ -152,14 +164,19 @@ final class SelectTransferMethodTypePresenter {
                     }
                     strongSelf.countryCurrencyTitles = ["Country", "Currency"]
                     strongSelf.transferMethodConfigurationKeyResult = result
-                    strongSelf.loadInitialData()
+
+                    guard let country = strongSelf.defaultCountry else {
+                        strongSelf.view.showAlert(message: "no_country_available_error_message".localized())
+                        return
+                    }
+                    strongSelf.selectedCountry = country
                 }
             }
     }
 
     /// Shows the Select Country View
     private func showSelectCountryView() {
-        view.showGenericTableView(items: self.loadCountries(),
+        view.showGenericTableView(items: self.loadTranferMethodConfigurationCountries(),
                                   title: "select_transfer_method_country".localized(),
                                   selectItemHandler: selectCountryHandler(),
                                   markCellHandler: countryMarkCellHandler(),
@@ -172,7 +189,7 @@ final class SelectTransferMethodTypePresenter {
             self.view.showAlert(message: "select_a_country_message".localized())
             return
         }
-        view.showGenericTableView(items: self.loadCurrenciesFrom(countryCode: selectedCountry),
+        view.showGenericTableView(items: self.loadTranferMethodConfigurationCurrencies(countryCode: selectedCountry),
                                   title: "select_transfer_method_currency".localized(),
                                   selectItemHandler: selectCurrencyHandler(),
                                   markCellHandler: currencyMarkCellHandler(),
@@ -185,19 +202,13 @@ final class SelectTransferMethodTypePresenter {
     private func selectCountryHandler() -> (_ value: CountryCurrencyCellConfiguration) -> Void {
         return { [weak self] (country) in
             self?.selectedCountry = country.value
-            self?.loadSelectedCountry(country.value)
         }
     }
 
     /// Handles the selection currency event at GenericTableView
     private func selectCurrencyHandler() -> (_ value: CountryCurrencyCellConfiguration) -> Void {
         return { [weak self]  (currency) in
-            guard let country = self?.selectedCountry else {
-                return
-            }
             self?.selectedCurrency = currency.value
-            self?.loadTransferMethodTypesFrom(country: country,
-                                              currency: currency.value)
         }
     }
 
@@ -225,7 +236,7 @@ final class SelectTransferMethodTypePresenter {
         }
     }
 
-    private func loadTransferMethodTypesFrom(country: String, currency: String) {
+    private func loadTransferMethodTypes(country: String, currency: String) {
         transferMethodTypes = [TransferMethodTypeDetail]()
         guard let profileType = user?.profileType?.rawValue,
             let result = transferMethodConfigurationKeyResult?.transferMethodTypes(country: country,
@@ -249,32 +260,18 @@ final class SelectTransferMethodTypePresenter {
         view.transferMethodTypeTableViewReloadData()
     }
 
-    private func loadInitialData() {
-        guard let firstCountry = loadCountries().first else {
-            self.view.showAlert(message: "no_country_available_error_message".localized())
-            return
-        }
-
-        selectedCountry = firstCountry.value
-        loadSelectedCountry(firstCountry.value)
-    }
-
-    private func loadSelectedCountry(_ selected: String) {
-        selectedCurrency = ""
-        let currencies = loadCurrenciesFrom(countryCode: selected)
-
+    private func loadCurrency(for country: String) {
+        let currencies = loadTranferMethodConfigurationCurrencies(countryCode: country)
         guard let firstCurrency = currencies.first else {
             view.showAlert(message: String(format: "no_currency_available_error_message".localized(),
-                                           selected.localized()))
+                                           country.localized()))
+            selectedCurrency = ""
             return
         }
         selectedCurrency = firstCurrency.value
-
-        loadTransferMethodTypesFrom(country: selected,
-                                    currency: selectedCurrency)
     }
 
-    private func loadCountries() -> [CountryCurrencyCellConfiguration] {
+    private func loadTranferMethodConfigurationCountries() -> [CountryCurrencyCellConfiguration] {
         guard let keyResult = transferMethodConfigurationKeyResult else {
             return [CountryCurrencyCellConfiguration]()
         }
@@ -284,7 +281,8 @@ final class SelectTransferMethodTypePresenter {
             .sorted { $0.title  < $1.title }
     }
 
-    private func loadCurrenciesFrom(countryCode: String) -> [CountryCurrencyCellConfiguration] {
+    private func loadTranferMethodConfigurationCurrencies(countryCode: String)
+        -> [CountryCurrencyCellConfiguration] {
         var currencies = [CountryCurrencyCellConfiguration]()
 
         if let keyResult = transferMethodConfigurationKeyResult {
