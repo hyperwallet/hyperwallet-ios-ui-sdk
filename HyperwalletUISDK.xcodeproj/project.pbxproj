@@ -764,7 +764,7 @@
 		DBCA37EC225E892400CD4137 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1020;
+				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Hyperwallet Systems";
 				TargetAttributes = {
