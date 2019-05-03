@@ -28,7 +28,6 @@ public class ThemeManager {
         applyToSpinnerView()
         applyToSelectionWidgetCell()
         applyToIconView()
-        applyToAddTransferMethodTableViewCell()
         applyToListTransferMethodTableViewCell()
         applyToSelectTransferMethodTypeCell()
         registerFonts
@@ -93,7 +92,6 @@ public class ThemeManager {
         proxy.titleLabelColor = Theme.Label.color
         proxy.valueLabelFont = Theme.Label.bodyFont
         proxy.valueLabelColor = Theme.Label.subTitleColor
-        proxy.separatorInset = Theme.Cell.separatorInsetZero
     }
 
     private static func applyToSpinnerView() {
@@ -108,7 +106,6 @@ public class ThemeManager {
         let proxy = SelectionWidgetCell.appearance()
         proxy.textLabelColor = Theme.Label.color
         proxy.textLabelFont = Theme.Label.bodyFont
-        proxy.separatorInset = Theme.Cell.separatorInsetZero
     }
 
     private static func applyToIconView() {
@@ -117,25 +114,18 @@ public class ThemeManager {
         proxy.backgroundColor = Theme.Icon.backgroundColor
     }
 
-    private static func applyToAddTransferMethodTableViewCell() {
-        let proxy = AddTransferMethodTableViewCell.appearance()
-        proxy.separatorInset = Theme.Cell.separatorInsetZero
-    }
-
     private static func applyToListTransferMethodTableViewCell() {
         let proxy = ListTransferMethodTableViewCell.appearance()
         proxy.titleLabelFont = Theme.Label.bodyFontMedium
         proxy.titleLabelColor = Theme.Label.color
         proxy.subTitleLabelFont = Theme.Label.captionOne
         proxy.subTitleLabelColor = Theme.Label.subTitleColor
-        proxy.separatorInset = Theme.Cell.separatorInsetZero
     }
 
     private static func applyToSelectTransferMethodTypeCell() {
         let proxy = SelectTransferMethodTypeCell.appearance()
         proxy.titleLabelFont = Theme.Label.bodyFontMedium
         proxy.titleLabelColor = Theme.Label.color
-        proxy.separatorInset = Theme.Cell.separatorInsetZero
     }
 
     private static let registerFonts: Void = {

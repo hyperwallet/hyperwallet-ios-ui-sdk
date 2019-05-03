@@ -28,11 +28,6 @@ struct SelectTransferMethodTypeConfiguration {
 final class SelectTransferMethodTypeCell: UITableViewCell {
     static let reuseId = "SelectTransferMethodTypeCellIdentifier"
 
-    // MARK: IBOutlets
-    @IBOutlet weak var iconView: IconView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-
     // MARK: Life cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -44,33 +39,33 @@ final class SelectTransferMethodTypeCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        iconView.backgroundColor = Theme.Icon.backgroundColor
+        imageView?.backgroundColor = Theme.Icon.backgroundColor
     }
 
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
-        iconView.backgroundColor = Theme.Icon.backgroundColor
+        imageView?.backgroundColor = Theme.Icon.backgroundColor
     }
 
     // MARK: Theme manager's proxy properties
     @objc dynamic var titleLabelColor: UIColor! {
-        get { return self.titleLabel.textColor }
-        set { self.titleLabel.textColor = newValue }
+        get { return self.textLabel?.textColor }
+        set { self.textLabel?.textColor = newValue }
     }
 
     @objc dynamic var titleLabelFont: UIFont! {
-        get { return self.titleLabel.font }
-        set { self.titleLabel.font = newValue }
+        get { return self.textLabel?.font }
+        set { self.textLabel?.font = newValue }
     }
 
     @objc dynamic var descriptionLabelColor: UIColor! {
-        get { return self.descriptionLabel.textColor }
-        set { self.descriptionLabel.textColor = newValue }
+        get { return self.detailTextLabel?.textColor }
+        set { self.detailTextLabel?.textColor = newValue }
     }
 
     @objc dynamic var descriptionLabelFont: UIFont! {
-        get { return self.descriptionLabel.font }
-        set { self.descriptionLabel.font = newValue }
+        get { return self.detailTextLabel?.font }
+        set { self.detailTextLabel?.font = newValue }
     }
 }
 
@@ -78,13 +73,15 @@ extension SelectTransferMethodTypeCell {
     func configure(configuration: SelectTransferMethodTypeConfiguration) {
         accessibilityIdentifier = configuration.transferMethodType
 
-        titleLabel.text = configuration.transferMethodType.localized()
-        titleLabel.accessibilityIdentifier = "\(configuration.transferMethodType)_title"
+        textLabel?.text = configuration.transferMethodType.localized()
+        detailTextLabel?.attributedText = configuration.feesProcessingTime
+        let iconSize = CGSize(width: Theme.Icon.width, height: Theme.Icon.height)
 
-        descriptionLabel.attributedText = configuration.feesProcessingTime
-        descriptionLabel.accessibilityIdentifier = "\(configuration.transferMethodType)_description"
-
-        iconView.draw(fontName: configuration.transferMethodIconFont)
-        iconView.accessibilityIdentifier = configuration.transferMethodIconFont
+        let icon = UIImage.fontIcon(configuration.transferMethodIconFont,
+                                    iconSize,
+                                    Theme.Icon.color,
+                                    Theme.Icon.backgroundColor)
+        imageView?.image = icon
+        imageView?.layer.cornerRadius = CGFloat(Theme.Icon.width / 2)
     }
 }

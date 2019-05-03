@@ -103,6 +103,10 @@ public struct Theme {
     public struct Icon {
         /// The icon size
         public static let size = 20
+        /// The icon image height
+        public static let height = 40
+        /// The icon image width
+        public static let width = 40
         /// The icon primary color
         public static var color = Theme.themeColor
         /// The icon background color

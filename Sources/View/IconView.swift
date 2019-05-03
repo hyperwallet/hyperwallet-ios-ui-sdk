@@ -33,8 +33,8 @@ final class IconView: UIImageView {
     /// Draw an icon iamge
      ///
      /// - Parameter name: The font name of the icon
-     func draw(fontName: String) {
-        let icon = UIImage.fontIcon(fontName, tintColor, backgroundColor)
+    func draw(fontName: String) {
+        let icon = UIImage.fontIcon(fontName, CGSize(width: 40, height: 40), tintColor, backgroundColor)
         contentMode = .center
         layer.cornerRadius = frame.size.width / 2
         image = icon

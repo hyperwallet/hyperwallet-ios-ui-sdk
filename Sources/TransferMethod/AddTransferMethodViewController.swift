@@ -136,8 +136,6 @@ public final class AddTransferMethodViewController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Theme.Cell.rowHeight
         tableView.accessibilityIdentifier = "addTransferMethodTable"
-        tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
-
         tableView.register(
             AddTransferMethodTableViewCell.self,
             forCellReuseIdentifier: AddTransferMethodTableViewCell.reuseId

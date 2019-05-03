@@ -11,53 +11,29 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="67" id="ben-ke-K4a" customClass="SelectTransferMethodTypeCell" customModule="HyperwalletExampleApp" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="o0O-vk-8te" detailTextLabel="bGj-FN-GnT" rowHeight="67" style="IBUITableViewCellStyleSubtitle" id="ben-ke-K4a" customClass="SelectTransferMethodTypeCell" customModule="HyperwalletUISDK" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="383" height="88"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ben-ke-K4a" id="ix2-WD-Qew">
                 <rect key="frame" x="0.0" y="0.0" width="383" height="87.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="transferMethodType" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s88-dE-Scx">
-                        <rect key="frame" x="69" y="16" width="299" height="22"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="22" id="srD-Jz-jIE"/>
-                        </constraints>
+                    <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="TransferMethodType" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="o0O-vk-8te">
+                        <rect key="frame" x="16" y="24" width="159.5" height="20.5"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Rg8-a8-e4y" customClass="IconView" customModule="HyperwalletExampleApp" customModuleProvider="target">
-                        <rect key="frame" x="15" y="16" width="40" height="40"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="40" id="oaS-Lg-aIo"/>
-                            <constraint firstAttribute="width" constant="40" id="zRH-3f-lZm"/>
-                        </constraints>
-                    </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="transferMethodType" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UW5-pX-1yx">
-                        <rect key="frame" x="69" y="40" width="299" height="20.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Description" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bGj-FN-GnT">
+                        <rect key="frame" x="16" y="47.5" width="65" height="14.5"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
-                <constraints>
-                    <constraint firstItem="UW5-pX-1yx" firstAttribute="top" secondItem="s88-dE-Scx" secondAttribute="bottom" constant="2" id="Av7-rg-7sm"/>
-                    <constraint firstItem="s88-dE-Scx" firstAttribute="leading" secondItem="Rg8-a8-e4y" secondAttribute="trailing" constant="14" id="CSh-Ir-u5r"/>
-                    <constraint firstAttribute="trailing" secondItem="s88-dE-Scx" secondAttribute="trailing" constant="15" id="F6v-9Y-xWj"/>
-                    <constraint firstAttribute="trailing" secondItem="UW5-pX-1yx" secondAttribute="trailing" constant="15" id="F8c-dM-RIy"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="UW5-pX-1yx" secondAttribute="bottom" constant="16" id="Shu-sB-krq"/>
-                    <constraint firstItem="Rg8-a8-e4y" firstAttribute="leading" secondItem="ix2-WD-Qew" secondAttribute="leading" constant="15" id="SzR-zj-HzR"/>
-                    <constraint firstItem="UW5-pX-1yx" firstAttribute="leading" secondItem="Rg8-a8-e4y" secondAttribute="trailing" constant="14" id="g1E-EB-0dG"/>
-                    <constraint firstItem="s88-dE-Scx" firstAttribute="top" secondItem="ix2-WD-Qew" secondAttribute="top" constant="16" id="n85-GB-MOe"/>
-                    <constraint firstItem="Rg8-a8-e4y" firstAttribute="top" secondItem="ix2-WD-Qew" secondAttribute="top" constant="16" id="w8J-Vt-Wq1"/>
-                </constraints>
             </tableViewCellContentView>
-            <connections>
-                <outlet property="descriptionLabel" destination="UW5-pX-1yx" id="Qeg-WV-f3x"/>
-                <outlet property="iconView" destination="Rg8-a8-e4y" id="q72-24-xOU"/>
-                <outlet property="titleLabel" destination="s88-dE-Scx" id="tBh-1j-66J"/>
-            </connections>
             <point key="canvasLocation" x="326" y="-146"/>
         </tableViewCell>
     </objects>
