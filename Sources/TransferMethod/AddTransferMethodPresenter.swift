@@ -116,8 +116,7 @@ final class AddTransferMethodPresenter {
             hyperwalletTransferMethod.setField(key: "type", value: transferMethodType)
             hyperwalletTransferMethod.setField(key: "profileType", value: profileType)
         }
-        // TODO remvoe this
-        hyperwalletTransferMethod.setField(key: "profileType", value: "INDIVIDUAL")
+
         for field in view.fieldValues() {
             hyperwalletTransferMethod.setField(key: field.name, value: field.value)
         }
