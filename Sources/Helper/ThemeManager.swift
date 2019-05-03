@@ -27,7 +27,6 @@ public class ThemeManager {
         applyToCountryCurrencyCell()
         applyToSpinnerView()
         applyToSelectionWidgetCell()
-        applyToIconView()
         applyToListTransferMethodTableViewCell()
         applyToSelectTransferMethodTypeCell()
         registerFonts
@@ -106,12 +105,6 @@ public class ThemeManager {
         let proxy = SelectionWidgetCell.appearance()
         proxy.textLabelColor = Theme.Label.color
         proxy.textLabelFont = Theme.Label.bodyFont
-    }
-
-    private static func applyToIconView() {
-        let proxy = IconView.appearance()
-        proxy.tintColor = Theme.Icon.color
-        proxy.backgroundColor = Theme.Icon.backgroundColor
     }
 
     private static func applyToListTransferMethodTableViewCell() {
