@@ -25,8 +25,8 @@ protocol SelectTransferMethodTypeView: class {
                               selectItemHandler: @escaping (_ value: CountryCurrencyCellConfiguration) -> Void,
                               markCellHandler: @escaping (_ value: CountryCurrencyCellConfiguration) -> Bool,
                               filterContentHandler: @escaping ((_ items: [CountryCurrencyCellConfiguration],
-                                                                _ searchText: String)
-                                                                -> [CountryCurrencyCellConfiguration]))
+        _ searchText: String)
+        -> [CountryCurrencyCellConfiguration]))
 
     func navigateToAddTransferMethodController(country: String,
                                                currency: String,
@@ -43,14 +43,6 @@ protocol SelectTransferMethodTypeView: class {
 final class SelectTransferMethodTypePresenter {
     // MARK: properties
     private unowned let view: SelectTransferMethodTypeView
-    private var defaultCountry: String? {
-        if let userAccountCountry = user?.country {
-            return  userAccountCountry
-        } else if let country = loadTranferMethodConfigurationCountries().first {
-            return country.value
-        }
-        return nil
-    }
     private var user: HyperwalletUser?
     private var transferMethodConfigurationKeyResult: HyperwalletTransferMethodConfigurationKeyResult?
     private var transferMethodTypes = [TransferMethodTypeDetail]()
@@ -149,6 +141,20 @@ final class SelectTransferMethodTypePresenter {
         return (index == 0 ? selectedCountry.localized() : selectedCurrency )
     }
 
+    private func defaultCountry() -> String? {
+        let countries = loadTranferMethodConfigurationCountries()
+
+        guard countries.isNotEmpty() else {
+            return nil
+        }
+
+        if let userCountry = user?.country, countries.contains(where: { $0.value == userCountry }) {
+            return userCountry
+        }
+
+        return countries.first?.value
+    }
+
     private func transferMethodConfigurationKeyResultHandler()
         -> (HyperwalletTransferMethodConfigurationKeyResult?, HyperwalletErrorType?) -> Void {
             return { [weak self] (result, error) in
@@ -165,7 +171,7 @@ final class SelectTransferMethodTypePresenter {
                     strongSelf.countryCurrencyTitles = ["Country", "Currency"]
                     strongSelf.transferMethodConfigurationKeyResult = result
 
-                    guard let country = strongSelf.defaultCountry else {
+                    guard let country = strongSelf.defaultCountry() else {
                         strongSelf.view.showAlert(message: "no_country_available_error_message".localized())
                         return
                     }
@@ -189,7 +195,7 @@ final class SelectTransferMethodTypePresenter {
             self.view.showAlert(message: "select_a_country_message".localized())
             return
         }
-        view.showGenericTableView(items: self.loadTranferMethodConfigurationCurrencies(countryCode: selectedCountry),
+        view.showGenericTableView(items: self.loadTranferMethodConfigurationCurrencies(for: selectedCountry),
                                   title: "select_transfer_method_currency".localized(),
                                   selectItemHandler: selectCurrencyHandler(),
                                   markCellHandler: currencyMarkCellHandler(),
@@ -214,14 +220,14 @@ final class SelectTransferMethodTypePresenter {
 
     private func filterContentHandler() -> ((_ items: [CountryCurrencyCellConfiguration], _ searchText: String)
         -> [CountryCurrencyCellConfiguration]) {
-        return {(items, searchText) in
-            items.filter {
-                // search by decription
-                $0.title.lowercased().contains(searchText.lowercased()) ||
-                    //or code
-                    $0.value.lowercased().contains(searchText.lowercased())
+            return {(items, searchText) in
+                items.filter {
+                    // search by decription
+                    $0.title.lowercased().contains(searchText.lowercased()) ||
+                        //or code
+                        $0.value.lowercased().contains(searchText.lowercased())
+                }
             }
-        }
     }
 
     private func countryMarkCellHandler() -> ((_ value: CountryCurrencyCellConfiguration) -> Bool) {
@@ -261,7 +267,7 @@ final class SelectTransferMethodTypePresenter {
     }
 
     private func loadCurrency(for country: String) {
-        let currencies = loadTranferMethodConfigurationCurrencies(countryCode: country)
+        let currencies = loadTranferMethodConfigurationCurrencies(for: country)
         guard let firstCurrency = currencies.first else {
             view.showAlert(message: String(format: "no_currency_available_error_message".localized(),
                                            country.localized()))
@@ -281,21 +287,17 @@ final class SelectTransferMethodTypePresenter {
             .sorted { $0.title  < $1.title }
     }
 
-    private func loadTranferMethodConfigurationCurrencies(countryCode: String)
+    private func loadTranferMethodConfigurationCurrencies(for countryCode: String)
         -> [CountryCurrencyCellConfiguration] {
-        var currencies = [CountryCurrencyCellConfiguration]()
+            var currencies = [CountryCurrencyCellConfiguration]()
 
-        if let keyResult = transferMethodConfigurationKeyResult {
-            currencies = keyResult.currencies(from: countryCode)
-                .map { CountryCurrencyCellConfiguration(title: $0.localized(), value: $0) }
-                .sorted { $0.title  < $1.title }
-        }
+            if let keyResult = transferMethodConfigurationKeyResult {
+                currencies = keyResult.currencies(from: countryCode)
+                    .map { CountryCurrencyCellConfiguration(title: $0.localized(), value: $0) }
+                    .sorted { $0.title  < $1.title }
+            }
 
-        if currencies.isEmpty {
-            view.showAlert(message: String(format: "no_currency_available_error_message".localized(),
-                                           countryCode.localized()))
-        }
-
-        return currencies
+            return currencies
     }
 }
+
