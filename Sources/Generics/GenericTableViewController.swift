@@ -88,18 +88,6 @@ UISearchResultsUpdating {
         }
     }
 
-    /// Registers the `GenericCell<ModelType>, ModelType>`
-    ///
-    /// - Parameter hasNib: The GenericCell<ModelType>, ModelType> is a xib file. By default is true
-    func registerGenericCell(hasNib: Bool = true) {
-        if hasNib {
-            tableView.register(UINib(nibName: String(describing: T.self),
-                                     bundle: HyperwalletBundle.bundle), forCellReuseIdentifier: reuseId)
-        } else {
-            tableView.register(T.self, forCellReuseIdentifier: reuseId)
-        }
-    }
-
     // MARK: - UITableViewDataSource
 
     override public func tableView( _ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -224,5 +212,6 @@ private extension GenericTableViewController {
         tableView.tableFooterView = UIView()
         tableView.estimatedRowHeight = Theme.Cell.rowHeight
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.register(T.self, forCellReuseIdentifier: reuseId)
     }
 }

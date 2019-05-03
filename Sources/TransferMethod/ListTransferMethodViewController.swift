@@ -120,8 +120,7 @@ public final class ListTransferMethodViewController: UITableViewController {
     private func setupTransferMethodTableView() {
         tableView = UITableView(frame: .zero, style: .grouped)
         tableView.tableFooterView = UIView()
-        tableView.register(UINib(nibName: String(describing: ListTransferMethodTableViewCell.self),
-                                 bundle: HyperwalletBundle.bundle),
+        tableView.register(ListTransferMethodTableViewCell.self,
                            forCellReuseIdentifier: listTransferMethodCellIdentifier)
     }
 

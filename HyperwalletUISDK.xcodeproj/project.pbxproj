@@ -868,7 +868,7 @@
                 DBCA387C225E8BAA00CD4137 /* Localizable.strings in Resources */,
                 98541F152273D72C007D4238 /* CHANGELOG.md in Resources */,
                 DBCA385E225E8BAA00CD4137 /* CountryCurrencyCell.xib in Resources */,
-				DBFB61592261E84D00C4A8AA /* BankCardInvalidCvvResponse.json in Resources */,
+                DBFB61592261E84D00C4A8AA /* BankCardInvalidCvvResponse.json in Resources */,
                 DBCA386D225E8BAA00CD4137 /* ListTransferMethodTableViewCell.xib in Resources */,
             );
             runOnlyForDeploymentPostprocessing = 0;

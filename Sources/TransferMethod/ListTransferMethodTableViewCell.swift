@@ -26,6 +26,15 @@ struct ListTransferMethodCellConfiguration {
 }
 
 final class ListTransferMethodTableViewCell: UITableViewCell {
+    // MARK: Life cycle
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         imageView?.backgroundColor = Theme.Icon.backgroundColor
@@ -64,6 +73,8 @@ extension ListTransferMethodTableViewCell {
         textLabel?.text = configuration.transferMethodType
         detailTextLabel?.attributedText = formatSubtitle(transferMethodCountry: configuration.transferMethodCountry,
                                                          expiryDate: configuration.transferMethodExpiryDate)
+        detailTextLabel?.numberOfLines = 0
+        detailTextLabel?.lineBreakMode = .byWordWrapping
         let iconSize = CGSize(width: Theme.Icon.width, height: Theme.Icon.height)
 
         let icon = UIImage.fontIcon(configuration.transferMethodIconFont,
@@ -76,10 +87,7 @@ extension ListTransferMethodTableViewCell {
 
     func formatSubtitle(transferMethodCountry: String, expiryDate: String) -> NSAttributedString {
         let attributedText = NSMutableAttributedString()
-        // Fees
         formatSubLabel(attributedText, value: String(format: "%@\n", transferMethodCountry))
-
-        // Processing Time
         formatSubLabel(attributedText, value: expiryDate)
 
         return attributedText
