@@ -70,14 +70,13 @@
 		DBCA3861225E8BAA00CD4137 /* AddTransferMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3820225E8BA900CD4137 /* AddTransferMethodViewController.swift */; };
 		DBCA3862225E8BAA00CD4137 /* ListTransferMethodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3821225E8BA900CD4137 /* ListTransferMethodTableViewCell.swift */; };
 		DBCA3863225E8BAA00CD4137 /* AddTransferMethodPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3822225E8BA900CD4137 /* AddTransferMethodPresenter.swift */; };
-		DBCA3865225E8BAA00CD4137 /* AddTransferMethodFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBCA3824225E8BA900CD4137 /* AddTransferMethodFooter.xib */; };
 		DBCA3866225E8BAA00CD4137 /* SelectTransferMethodTypePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3825225E8BA900CD4137 /* SelectTransferMethodTypePresenter.swift */; };
 		DBCA3868225E8BAA00CD4137 /* ListTransferMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3827225E8BA900CD4137 /* ListTransferMethodViewController.swift */; };
 		DBCA3869225E8BAA00CD4137 /* AddTransferMethodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3828225E8BA900CD4137 /* AddTransferMethodTableViewCell.swift */; };
 		DBCA386A225E8BAA00CD4137 /* SelectTransferMethodTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3829225E8BA900CD4137 /* SelectTransferMethodTypeCell.swift */; };
 		DBCA386B225E8BAA00CD4137 /* TransferMethodTypeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA382A225E8BA900CD4137 /* TransferMethodTypeDetail.swift */; };
 		DBCA386C225E8BAA00CD4137 /* ListTransferMethodPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA382B225E8BA900CD4137 /* ListTransferMethodPresenter.swift */; };
-		DBCA386E225E8BAA00CD4137 /* AddTransferMethodFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA382D225E8BA900CD4137 /* AddTransferMethodFooter.swift */; };
+		DBCA386E225E8BAA00CD4137 /* AddTransferMethodSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA382D225E8BA900CD4137 /* AddTransferMethodSectionData.swift */; };
 		DBCA386F225E8BAA00CD4137 /* TransferMethodConfigurationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA382F225E8BA900CD4137 /* TransferMethodConfigurationResult.swift */; };
 		DBCA3870225E8BAA00CD4137 /* UIAlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3830225E8BA900CD4137 /* UIAlertAction.swift */; };
 		DBCA3871225E8BAA00CD4137 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3831225E8BA900CD4137 /* UIView.swift */; };
@@ -99,7 +98,6 @@
 		DBCA3883225E8BAA00CD4137 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3848225E8BAA00CD4137 /* Theme.swift */; };
 		DBCA3884225E8BAA00CD4137 /* ProcessingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBCA384B225E8BAA00CD4137 /* ProcessingView.xib */; };
 		DBCA3885225E8BAA00CD4137 /* ProcessingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA384C225E8BAA00CD4137 /* ProcessingView.swift */; };
-		DBCA3886225E8BAA00CD4137 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA384D225E8BAA00CD4137 /* IconView.swift */; };
 		DBCA3887225E8BAA00CD4137 /* SelectionWidgetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA384F225E8BAA00CD4137 /* SelectionWidgetCell.swift */; };
 		DBCA3888225E8BAA00CD4137 /* NumberWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3850225E8BAA00CD4137 /* NumberWidget.swift */; };
 		DBCA3889225E8BAA00CD4137 /* ExpiryDateWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3851225E8BAA00CD4137 /* ExpiryDateWidget.swift */; };
@@ -222,14 +220,13 @@
 		DBCA3820225E8BA900CD4137 /* AddTransferMethodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodViewController.swift; sourceTree = "<group>"; };
 		DBCA3821225E8BA900CD4137 /* ListTransferMethodTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTransferMethodTableViewCell.swift; sourceTree = "<group>"; };
 		DBCA3822225E8BA900CD4137 /* AddTransferMethodPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodPresenter.swift; sourceTree = "<group>"; };
-		DBCA3824225E8BA900CD4137 /* AddTransferMethodFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddTransferMethodFooter.xib; sourceTree = "<group>"; };
 		DBCA3825225E8BA900CD4137 /* SelectTransferMethodTypePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectTransferMethodTypePresenter.swift; sourceTree = "<group>"; };
 		DBCA3827225E8BA900CD4137 /* ListTransferMethodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTransferMethodViewController.swift; sourceTree = "<group>"; };
 		DBCA3828225E8BA900CD4137 /* AddTransferMethodTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodTableViewCell.swift; sourceTree = "<group>"; };
 		DBCA3829225E8BA900CD4137 /* SelectTransferMethodTypeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectTransferMethodTypeCell.swift; sourceTree = "<group>"; };
 		DBCA382A225E8BA900CD4137 /* TransferMethodTypeDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferMethodTypeDetail.swift; sourceTree = "<group>"; };
 		DBCA382B225E8BA900CD4137 /* ListTransferMethodPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTransferMethodPresenter.swift; sourceTree = "<group>"; };
-		DBCA382D225E8BA900CD4137 /* AddTransferMethodFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodFooter.swift; sourceTree = "<group>"; };
+		DBCA382D225E8BA900CD4137 /* AddTransferMethodSectionData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodSectionData.swift; sourceTree = "<group>"; };
 		DBCA382F225E8BA900CD4137 /* TransferMethodConfigurationResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferMethodConfigurationResult.swift; sourceTree = "<group>"; };
 		DBCA3830225E8BA900CD4137 /* UIAlertAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertAction.swift; sourceTree = "<group>"; };
 		DBCA3831225E8BA900CD4137 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
@@ -251,7 +248,6 @@
 		DBCA3848225E8BAA00CD4137 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		DBCA384B225E8BAA00CD4137 /* ProcessingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProcessingView.xib; sourceTree = "<group>"; };
 		DBCA384C225E8BAA00CD4137 /* ProcessingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessingView.swift; sourceTree = "<group>"; };
-		DBCA384D225E8BAA00CD4137 /* IconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
 		DBCA384F225E8BAA00CD4137 /* SelectionWidgetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionWidgetCell.swift; sourceTree = "<group>"; };
 		DBCA3850225E8BAA00CD4137 /* NumberWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberWidget.swift; sourceTree = "<group>"; };
 		DBCA3851225E8BAA00CD4137 /* ExpiryDateWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpiryDateWidget.swift; sourceTree = "<group>"; };
@@ -518,8 +514,7 @@
 		DBCA381B225E8BA900CD4137 /* TransferMethod */ = {
 			isa = PBXGroup;
 			children = (
-				DBCA382D225E8BA900CD4137 /* AddTransferMethodFooter.swift */,
-				DBCA3824225E8BA900CD4137 /* AddTransferMethodFooter.xib */,
+				DBCA382D225E8BA900CD4137 /* AddTransferMethodSectionData.swift */,
 				DBCA3822225E8BA900CD4137 /* AddTransferMethodPresenter.swift */,
 				DBCA3828225E8BA900CD4137 /* AddTransferMethodTableViewCell.swift */,
 				DBCA3820225E8BA900CD4137 /* AddTransferMethodViewController.swift */,
@@ -592,7 +587,6 @@
 				DBCA3858225E8BAA00CD4137 /* Picker */,
 				DBCA384A225E8BAA00CD4137 /* ProcessingView */,
 				DBCA384E225E8BAA00CD4137 /* Widget */,
-				DBCA384D225E8BAA00CD4137 /* IconView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -844,7 +838,6 @@
 				DBFB61542261E84D00C4A8AA /* BankCardInvalidDateOfExpiry.json in Resources */,
 				DBFB61462261E44C00C4A8AA /* Assets.xcassets in Resources */,
 				DBFB61582261E84D00C4A8AA /* ListTransferMethodResponse.json in Resources */,
-				DBCA3865225E8BAA00CD4137 /* AddTransferMethodFooter.xib in Resources */,
 				DB2EB67022617AB100FBEB3D /* icomoon.ttf in Resources */,
 				DBCA3884225E8BAA00CD4137 /* ProcessingView.xib in Resources */,
 				98220B8C2265793700055E18 /* README.md in Resources */,
@@ -951,7 +944,7 @@
 				DBCA3873225E8BAA00CD4137 /* UIColor.swift in Sources */,
 				DBCA3870225E8BAA00CD4137 /* UIAlertAction.swift in Sources */,
 				DBCA388B225E8BAA00CD4137 /* WidgetFactory.swift in Sources */,
-				DBCA386E225E8BAA00CD4137 /* AddTransferMethodFooter.swift in Sources */,
+				DBCA386E225E8BAA00CD4137 /* AddTransferMethodSectionData.swift in Sources */,
 				DBCA3868225E8BAA00CD4137 /* ListTransferMethodViewController.swift in Sources */,
 				DBCA386B225E8BAA00CD4137 /* TransferMethodTypeDetail.swift in Sources */,
 				DBCA3871225E8BAA00CD4137 /* UIView.swift in Sources */,
@@ -971,7 +964,6 @@
 				DBCA3883225E8BAA00CD4137 /* Theme.swift in Sources */,
 				DBCA385D225E8BAA00CD4137 /* SelectTransferMethodTypeViewController.swift in Sources */,
 				DBCA3890225E8BAA00CD4137 /* MonthYearPicker.swift in Sources */,
-				DBCA3886225E8BAA00CD4137 /* IconView.swift in Sources */,
 				DBCA3879225E8BAA00CD4137 /* UIImage.swift in Sources */,
 				DBCA3872225E8BAA00CD4137 /* UIBarButtonItem.swift in Sources */,
 				DBCA388A225E8BAA00CD4137 /* SelectionWidget.swift in Sources */,
