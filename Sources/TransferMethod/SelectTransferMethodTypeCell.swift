@@ -30,7 +30,7 @@ final class SelectTransferMethodTypeCell: UITableViewCell {
 
     // MARK: Life cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -74,6 +74,8 @@ extension SelectTransferMethodTypeCell {
         accessibilityIdentifier = configuration.transferMethodType
 
         textLabel?.text = configuration.transferMethodType.localized()
+        detailTextLabel?.numberOfLines = 0
+        detailTextLabel?.lineBreakMode = .byWordWrapping
         detailTextLabel?.attributedText = configuration.feesProcessingTime
         let iconSize = CGSize(width: Theme.Icon.width, height: Theme.Icon.height)
 

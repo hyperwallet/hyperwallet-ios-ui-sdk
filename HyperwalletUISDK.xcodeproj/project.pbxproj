@@ -66,12 +66,10 @@
 		DBB2B7272261C142006C48D3 /* AddTransferMethodBankAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB2B70F2261C141006C48D3 /* AddTransferMethodBankAccountTests.swift */; };
 		DBCA3806225E892400CD4137 /* HyperwalletUISDK.h in Headers */ = {isa = PBXBuildFile; fileRef = DBCA37F8225E892400CD4137 /* HyperwalletUISDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DBCA385D225E8BAA00CD4137 /* SelectTransferMethodTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA381C225E8BA900CD4137 /* SelectTransferMethodTypeViewController.swift */; };
-		DBCA385E225E8BAA00CD4137 /* CountryCurrencyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBCA381D225E8BA900CD4137 /* CountryCurrencyCell.xib */; };
 		DBCA385F225E8BAA00CD4137 /* CountryCurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA381E225E8BA900CD4137 /* CountryCurrencyCell.swift */; };
 		DBCA3861225E8BAA00CD4137 /* AddTransferMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3820225E8BA900CD4137 /* AddTransferMethodViewController.swift */; };
 		DBCA3862225E8BAA00CD4137 /* ListTransferMethodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3821225E8BA900CD4137 /* ListTransferMethodTableViewCell.swift */; };
 		DBCA3863225E8BAA00CD4137 /* AddTransferMethodPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3822225E8BA900CD4137 /* AddTransferMethodPresenter.swift */; };
-		DBCA3864225E8BAA00CD4137 /* SelectTransferMethodTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBCA3823225E8BA900CD4137 /* SelectTransferMethodTypeCell.xib */; };
 		DBCA3865225E8BAA00CD4137 /* AddTransferMethodFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBCA3824225E8BA900CD4137 /* AddTransferMethodFooter.xib */; };
 		DBCA3866225E8BAA00CD4137 /* SelectTransferMethodTypePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3825225E8BA900CD4137 /* SelectTransferMethodTypePresenter.swift */; };
 		DBCA3868225E8BAA00CD4137 /* ListTransferMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3827225E8BA900CD4137 /* ListTransferMethodViewController.swift */; };
@@ -79,7 +77,6 @@
 		DBCA386A225E8BAA00CD4137 /* SelectTransferMethodTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3829225E8BA900CD4137 /* SelectTransferMethodTypeCell.swift */; };
 		DBCA386B225E8BAA00CD4137 /* TransferMethodTypeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA382A225E8BA900CD4137 /* TransferMethodTypeDetail.swift */; };
 		DBCA386C225E8BAA00CD4137 /* ListTransferMethodPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA382B225E8BA900CD4137 /* ListTransferMethodPresenter.swift */; };
-		DBCA386D225E8BAA00CD4137 /* ListTransferMethodTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBCA382C225E8BA900CD4137 /* ListTransferMethodTableViewCell.xib */; };
 		DBCA386E225E8BAA00CD4137 /* AddTransferMethodFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA382D225E8BA900CD4137 /* AddTransferMethodFooter.swift */; };
 		DBCA386F225E8BAA00CD4137 /* TransferMethodConfigurationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA382F225E8BA900CD4137 /* TransferMethodConfigurationResult.swift */; };
 		DBCA3870225E8BAA00CD4137 /* UIAlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3830225E8BA900CD4137 /* UIAlertAction.swift */; };
@@ -221,12 +218,10 @@
 		DBCA37F8225E892400CD4137 /* HyperwalletUISDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HyperwalletUISDK.h; sourceTree = "<group>"; };
 		DBCA37F9225E892400CD4137 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DBCA381C225E8BA900CD4137 /* SelectTransferMethodTypeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectTransferMethodTypeViewController.swift; sourceTree = "<group>"; };
-		DBCA381D225E8BA900CD4137 /* CountryCurrencyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CountryCurrencyCell.xib; sourceTree = "<group>"; };
 		DBCA381E225E8BA900CD4137 /* CountryCurrencyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCurrencyCell.swift; sourceTree = "<group>"; };
 		DBCA3820225E8BA900CD4137 /* AddTransferMethodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodViewController.swift; sourceTree = "<group>"; };
 		DBCA3821225E8BA900CD4137 /* ListTransferMethodTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTransferMethodTableViewCell.swift; sourceTree = "<group>"; };
 		DBCA3822225E8BA900CD4137 /* AddTransferMethodPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodPresenter.swift; sourceTree = "<group>"; };
-		DBCA3823225E8BA900CD4137 /* SelectTransferMethodTypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectTransferMethodTypeCell.xib; sourceTree = "<group>"; };
 		DBCA3824225E8BA900CD4137 /* AddTransferMethodFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddTransferMethodFooter.xib; sourceTree = "<group>"; };
 		DBCA3825225E8BA900CD4137 /* SelectTransferMethodTypePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectTransferMethodTypePresenter.swift; sourceTree = "<group>"; };
 		DBCA3827225E8BA900CD4137 /* ListTransferMethodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTransferMethodViewController.swift; sourceTree = "<group>"; };
@@ -234,7 +229,6 @@
 		DBCA3829225E8BA900CD4137 /* SelectTransferMethodTypeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectTransferMethodTypeCell.swift; sourceTree = "<group>"; };
 		DBCA382A225E8BA900CD4137 /* TransferMethodTypeDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferMethodTypeDetail.swift; sourceTree = "<group>"; };
 		DBCA382B225E8BA900CD4137 /* ListTransferMethodPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTransferMethodPresenter.swift; sourceTree = "<group>"; };
-		DBCA382C225E8BA900CD4137 /* ListTransferMethodTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListTransferMethodTableViewCell.xib; sourceTree = "<group>"; };
 		DBCA382D225E8BA900CD4137 /* AddTransferMethodFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodFooter.swift; sourceTree = "<group>"; };
 		DBCA382F225E8BA900CD4137 /* TransferMethodConfigurationResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferMethodConfigurationResult.swift; sourceTree = "<group>"; };
 		DBCA3830225E8BA900CD4137 /* UIAlertAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertAction.swift; sourceTree = "<group>"; };
@@ -530,13 +524,10 @@
 				DBCA3828225E8BA900CD4137 /* AddTransferMethodTableViewCell.swift */,
 				DBCA3820225E8BA900CD4137 /* AddTransferMethodViewController.swift */,
 				DBCA381E225E8BA900CD4137 /* CountryCurrencyCell.swift */,
-				DBCA381D225E8BA900CD4137 /* CountryCurrencyCell.xib */,
 				DBCA382B225E8BA900CD4137 /* ListTransferMethodPresenter.swift */,
 				DBCA3821225E8BA900CD4137 /* ListTransferMethodTableViewCell.swift */,
-				DBCA382C225E8BA900CD4137 /* ListTransferMethodTableViewCell.xib */,
 				DBCA3827225E8BA900CD4137 /* ListTransferMethodViewController.swift */,
 				DBCA3829225E8BA900CD4137 /* SelectTransferMethodTypeCell.swift */,
-				DBCA3823225E8BA900CD4137 /* SelectTransferMethodTypeCell.xib */,
 				DBCA3825225E8BA900CD4137 /* SelectTransferMethodTypePresenter.swift */,
 				DBCA381C225E8BA900CD4137 /* SelectTransferMethodTypeViewController.swift */,
 				DBCA382A225E8BA900CD4137 /* TransferMethodTypeDetail.swift */,
@@ -851,7 +842,6 @@
 				DBFB615C2261E84D00C4A8AA /* ListTransferMethodResponseWithoutDebitCard.json in Resources */,
 				DBFB615E2261E84D00C4A8AA /* TransferMethodConfigurationBankAccountResponse.json in Resources */,
 				DBFB61542261E84D00C4A8AA /* BankCardInvalidDateOfExpiry.json in Resources */,
-				DBCA3864225E8BAA00CD4137 /* SelectTransferMethodTypeCell.xib in Resources */,
 				DBFB61462261E44C00C4A8AA /* Assets.xcassets in Resources */,
 				DBFB61582261E84D00C4A8AA /* ListTransferMethodResponse.json in Resources */,
 				DBCA3865225E8BAA00CD4137 /* AddTransferMethodFooter.xib in Resources */,
@@ -865,9 +855,7 @@
 				DBCA387C225E8BAA00CD4137 /* Localizable.strings in Resources */,
 				DBFB615A2261E84D00C4A8AA /* RemovedTransferMethodResponse.json in Resources */,
 				98541F152273D72C007D4238 /* CHANGELOG.md in Resources */,
-				DBCA385E225E8BAA00CD4137 /* CountryCurrencyCell.xib in Resources */,
 				DBFB61592261E84D00C4A8AA /* BankCardInvalidCvvResponse.json in Resources */,
-				DBCA386D225E8BAA00CD4137 /* ListTransferMethodTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

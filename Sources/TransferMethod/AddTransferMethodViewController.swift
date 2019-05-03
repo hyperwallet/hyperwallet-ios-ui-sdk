@@ -81,7 +81,7 @@ public final class AddTransferMethodViewController: UITableViewController {
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(
             top: CGFloat(8.0),
-            left: CGFloat(16.0),
+            left: CGFloat(0.0),
             bottom: CGFloat(8.0),
             right: CGFloat(16.0)
         )
@@ -136,6 +136,9 @@ public final class AddTransferMethodViewController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Theme.Cell.rowHeight
         tableView.accessibilityIdentifier = "addTransferMethodTable"
+        // ?????
+        //tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+
         tableView.register(
             AddTransferMethodTableViewCell.self,
             forCellReuseIdentifier: AddTransferMethodTableViewCell.reuseId
@@ -246,7 +249,9 @@ extension AddTransferMethodViewController {
             widget.viewController = self
         }
 
-        let leftAnchor = widget.leftAnchor.constraint(equalTo: cell.contentView.leftAnchor)
+        //childView.safeAreaLeadingAnchor.constraint(equalTo: margins.leadingAnchor),
+//        let leftAnchor = widget.leftAnchor.constraint(equalTo: cell.contentView.leadingAnchor)
+        let leftAnchor = widget.safeAreaLeadingAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.leadingAnchor)
         leftAnchor.priority = UILayoutPriority(999)
 
         let topAnchor = widget.topAnchor.constraint(equalTo: cell.contentView.topAnchor)

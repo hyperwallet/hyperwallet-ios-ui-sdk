@@ -53,16 +53,14 @@ public final class SelectTransferMethodTypeViewController: UITableViewController
         tableView = UITableView(frame: .zero, style: .grouped)
         tableView.accessibilityIdentifier = "transferMethodTableView"
         tableView.tableFooterView = UIView()
-        tableView.register(UINib(nibName: String(describing: SelectTransferMethodTypeCell.self),
-                                 bundle: HyperwalletBundle.bundle),
+        tableView.register(SelectTransferMethodTypeCell.self,
                            forCellReuseIdentifier: SelectTransferMethodTypeCell.reuseId)
     }
 
     func setupCountryCurrencyTableView() {
         countryCurrencyTableView = UITableView(frame: .zero, style: .grouped)
         countryCurrencyView = CountryCurrencyTableView(presenter)
-        countryCurrencyTableView.register(UINib(nibName: String(describing: CountryCurrencyCell.self),
-                                                bundle: HyperwalletBundle.bundle),
+        countryCurrencyTableView.register(CountryCurrencyCell.self,
                                           forCellReuseIdentifier: CountryCurrencyCell.reuseId)
         countryCurrencyTableView.backgroundColor = Theme.ViewController.backgroundColor
         countryCurrencyTableView.dataSource = countryCurrencyView
@@ -164,7 +162,6 @@ extension SelectTransferMethodTypeViewController: SelectTransferMethodTypeView {
         let genericTableView = GenericTableViewController<CountryCurrencyCell, CountryCurrencyCellConfiguration>()
         genericTableView.title = title
         genericTableView.items = items
-        genericTableView.registerGenericCell()
         genericTableView.selectedHandler = selectItemHandler
         genericTableView.shouldMarkCellAction = markCellHandler
         genericTableView.filterContentForSearchTextAction = filterContentHandler
