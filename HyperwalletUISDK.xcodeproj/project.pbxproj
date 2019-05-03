@@ -118,6 +118,7 @@
 		DBCA388F225E8BAA00CD4137 /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3859225E8BAA00CD4137 /* PickerView.swift */; };
 		DBCA3890225E8BAA00CD4137 /* MonthYearPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA385A225E8BAA00CD4137 /* MonthYearPicker.swift */; };
 		DBCA3891225E8BAA00CD4137 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA385C225E8BAA00CD4137 /* ErrorView.swift */; };
+		DBF89CB8227C072400AF4344 /* UserIndividualCountryCanadaResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBF89CB7227C072400AF4344 /* UserIndividualCountryCanadaResponse.json */; };
 		DBFB61462261E44C00C4A8AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBFB61452261E44C00C4A8AA /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -277,6 +278,7 @@
 		DBD266812261A611002973C3 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		DBD266822261A611002973C3 /* HyperwalletUISDK.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HyperwalletUISDK.podspec; sourceTree = "<group>"; };
 		DBD266832261A611002973C3 /* Cartfile.private */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.private; sourceTree = "<group>"; };
+		DBF89CB7227C072400AF4344 /* UserIndividualCountryCanadaResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UserIndividualCountryCanadaResponse.json; sourceTree = "<group>"; };
 		DBFB61452261E44C00C4A8AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DBFB61472261E84C00C4A8AA /* BankAccountInvalidRoutingResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BankAccountInvalidRoutingResponse.json; sourceTree = "<group>"; };
 		DBFB61482261E84C00C4A8AA /* BankCardInvalidDateOfExpiry.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BankCardInvalidDateOfExpiry.json; sourceTree = "<group>"; };
@@ -379,13 +381,12 @@
 		C358A9A9227267C000E5AE47 /* TransferMethod */ = {
 			isa = PBXGroup;
 			children = (
-				DBB2B7032261C141006C48D3 /* BankAccountResponse.json */,
-				DBB2B70E2261C141006C48D3 /* BankCardResponse.json */,
 				DBFB61472261E84C00C4A8AA /* BankAccountInvalidRoutingResponse.json */,
+				DBB2B7032261C141006C48D3 /* BankAccountResponse.json */,
 				DBFB614A2261E84C00C4A8AA /* BankCardDuplicateResponse.json */,
 				DBFB614D2261E84C00C4A8AA /* BankCardInvalidCvvResponse.json */,
-				DBA9FA5C227918B500C1301A /* UserIndividualResponse.json */,
 				DBFB61482261E84C00C4A8AA /* BankCardInvalidDateOfExpiry.json */,
+				DBB2B70E2261C141006C48D3 /* BankCardResponse.json */,
 				DBFB614C2261E84C00C4A8AA /* ListTransferMethodResponse.json */,
 				DBFB61502261E84C00C4A8AA /* ListTransferMethodResponseWithoutDebitCard.json */,
 				DBFB614B2261E84C00C4A8AA /* ListTransferMethodResponseWithoutFirstElement.json */,
@@ -393,6 +394,8 @@
 				DBFB61522261E84D00C4A8AA /* TransferMethodConfigurationBankAccountResponse.json */,
 				DBFB614F2261E84C00C4A8AA /* TransferMethodConfigurationBankCardResponse.json */,
 				DBB2B7082261C141006C48D3 /* TransferMethodConfigurationKeysResponse.json */,
+				DBF89CB7227C072400AF4344 /* UserIndividualCountryCanadaResponse.json */,
+				DBA9FA5C227918B500C1301A /* UserIndividualResponse.json */,
 			);
 			path = TransferMethod;
 			sourceTree = "<group>";
@@ -832,6 +835,7 @@
 				9807B764226442C60028A280 /* BankCardDuplicateResponse.json in Resources */,
 				9807B765226442C60028A280 /* BankCardInvalidCvvResponse.json in Resources */,
 				9807B766226442C60028A280 /* BankCardInvalidDateOfExpiry.json in Resources */,
+				DBF89CB8227C072400AF4344 /* UserIndividualCountryCanadaResponse.json in Resources */,
 				9807B767226442C60028A280 /* ListTransferMethodResponse.json in Resources */,
 				9807B768226442C60028A280 /* ListTransferMethodResponseWithoutDebitCard.json in Resources */,
 				9807B769226442C60028A280 /* ListTransferMethodResponseWithoutFirstElement.json in Resources */,

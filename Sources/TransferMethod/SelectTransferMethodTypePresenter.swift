@@ -300,4 +300,3 @@ final class SelectTransferMethodTypePresenter {
             return currencies
     }
 }
-

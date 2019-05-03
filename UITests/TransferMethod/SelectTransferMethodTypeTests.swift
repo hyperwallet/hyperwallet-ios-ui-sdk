@@ -22,6 +22,12 @@ class SelectTransferMethodTypeTests: BaseTests {
         waitForNonExistence(spinner)
     }
 
+    override func stubGetUserDetails() {
+        mockServer.setupStub(url: "/rest/v3/users/usr-token",
+                             filename: "UserIndividualCountryCanadaResponse",
+                             method: HTTPMethod.get)
+    }
+
     private func validateSelectTransferMethodScreen() {
         var bankAccountDescription: String
         if #available(iOS 12.0, *) {
