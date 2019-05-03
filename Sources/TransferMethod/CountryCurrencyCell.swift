@@ -45,19 +45,15 @@ final class CountryCurrencyCell: GenericCell<CountryCurrencyCellConfiguration> {
                 value = ""
             }
 
-            titleLabel.text = configuration.title
-            titleLabel.accessibilityLabel = configuration.title
-            titleLabel.accessibilityIdentifier = configuration.title
+            textLabel?.text = configuration.title
+            textLabel?.accessibilityLabel = configuration.title
+            textLabel?.accessibilityIdentifier = configuration.title
 
-            valueLabel.text = value
-            valueLabel.accessibilityLabel = configuration.value
-            valueLabel.accessibilityIdentifier = configuration.value
+            detailTextLabel?.text = value
+            detailTextLabel?.accessibilityLabel = configuration.value
+            detailTextLabel?.accessibilityIdentifier = configuration.value
         }
     }
-
-    // MARK: IBOutlets
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var valueLabel: UILabel!
 
     // MARK: Life cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -75,22 +71,22 @@ final class CountryCurrencyCell: GenericCell<CountryCurrencyCellConfiguration> {
     }
 
     @objc dynamic var titleLabelColor: UIColor! {
-        get { return self.titleLabel.textColor }
-        set { self.titleLabel.textColor = newValue }
+        get { return self.textLabel?.textColor }
+        set { self.textLabel?.textColor = newValue }
     }
 
     @objc dynamic var titleLabelFont: UIFont! {
-        get { return self.titleLabel.font }
-        set { self.titleLabel.font = newValue }
+        get { return self.textLabel?.font }
+        set { self.textLabel?.font = newValue }
     }
 
     @objc dynamic var valueLabelColor: UIColor! {
-        get { return self.valueLabel.textColor }
-        set { self.valueLabel.textColor = newValue }
+        get { return self.detailTextLabel?.textColor }
+        set { self.detailTextLabel?.textColor = newValue }
     }
 
     @objc dynamic var valueLabelFont: UIFont! {
-        get { return self.valueLabel.font }
-        set { self.valueLabel.font = newValue }
+        get { return self.detailTextLabel?.font }
+        set { self.detailTextLabel?.font = newValue }
     }
 }

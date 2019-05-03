@@ -19,7 +19,8 @@
 import UIKit
 
 /// Generic TableView Controller
-class GenericTableViewController<T: GenericCell<ModelType>, ModelType>: UITableViewController, UISearchResultsUpdating {
+class GenericTableViewController<T: GenericCell<ModelType>, ModelType>: UITableViewController,
+UISearchResultsUpdating {
     private let reuseId = "cellId"
     private let headerReuseId = "headerReuseId"
     /// Enable the search controller
@@ -60,18 +61,30 @@ class GenericTableViewController<T: GenericCell<ModelType>, ModelType>: UITableV
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.titleDisplayMode(.never)
-        self.extendedLayoutIncludesOpaqueBars = true
+
+        view.backgroundColor = .white
+        titleDisplayMode(.never)
+        extendedLayoutIncludesOpaqueBars = true
         setupTable()
-        setViewBackgroundColor()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         tableView.reloadData()
         if let index = initialSelectedItemIndex, index < items.count {
             tableView.scrollToRow(at: IndexPath(row: index, section: 0), at: .top, animated: true)
+        }
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        guard #available(iOS 11.0, *) else {
+            DispatchQueue.main.async {
+                self.searchController.searchBar.sizeToFit()
+            }
+
+            return
         }
     }
 
@@ -87,32 +100,13 @@ class GenericTableViewController<T: GenericCell<ModelType>, ModelType>: UITableV
         }
     }
 
-    // MARK: - Setup
-    /// Setup the Search Controller
-    private func setupUISearchController() {
-        searchController.searchResultsUpdater = self
-        definesPresentationContext = true
-        searchController.dimsBackgroundDuringPresentation = false
-        searchController.searchBar.sizeToFit()
-    }
-
-    // MARK: - Private instance methods
-    /// Checks the search bar is empty
-    private func searchBarIsEmpty() -> Bool {
-        return searchController.searchBar.text?.isEmpty ?? true
-    }
-
-    /// Checks the search bar is active
-    private func isFiltering() -> Bool {
-        return searchController.isActive && !searchBarIsEmpty()
-    }
-
     // MARK: - UITableViewDataSource
-    override func tableView( _ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+    override public func tableView( _ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return retrieveItems().count
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseId, for: indexPath)
 
         cell.accessoryType = .none
@@ -128,7 +122,9 @@ class GenericTableViewController<T: GenericCell<ModelType>, ModelType>: UITableV
         return cell
     }
 
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    // MARK: - UITableViewDelegate
+
+    override public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard #available(iOS 11.0, *) else {
             if shouldDisplaySearchBar {
                 let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerReuseId)
@@ -144,23 +140,15 @@ class GenericTableViewController<T: GenericCell<ModelType>, ModelType>: UITableV
         return nil
     }
 
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         guard #available(iOS 11.0, *) else {
-            return shouldDisplaySearchBar ? searchController.searchBar.frame.size.height : 0.0
+            return shouldDisplaySearchBar ? searchController.searchBar.frame.size.height : CGFloat.leastNormalMagnitude
         }
 
-        return 0.0
-    }
-    // MARK: - UITableViewDelegate
-    private func retrieveItems() -> [ModelType] {
-        if isFiltering() {
-            return filteredItems
-        } else {
-            return items
-        }
+        return CGFloat.leastNormalMagnitude
     }
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Retrieve the item selected
         if let performItemSelected = selectedHandler {
             let item = retrieveItems()[indexPath.row]
@@ -170,7 +158,7 @@ class GenericTableViewController<T: GenericCell<ModelType>, ModelType>: UITableV
     }
 
     // MARK: - UISearchResultsUpdating
-    func updateSearchResults(for searchController: UISearchController) {
+    public func updateSearchResults(for searchController: UISearchController) {
         guard let performFilter = filterContentForSearchTextAction,
             let searchText = searchController.searchBar.text else {
                 return
@@ -179,8 +167,38 @@ class GenericTableViewController<T: GenericCell<ModelType>, ModelType>: UITableV
         filteredItems = performFilter(items, searchText)
         tableView.reloadData()
     }
+}
 
-    private func setupSeachBar() {
+private extension GenericTableViewController {
+    // MARK: - Setup
+    /// Setup the Search Controller
+    func setupUISearchController() {
+        searchController.searchResultsUpdater = self
+        definesPresentationContext = true
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.sizeToFit()
+    }
+
+    // MARK: - Private instance methods
+    /// Checks the search bar is empty
+    func searchBarIsEmpty() -> Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+
+    /// Checks the search bar is active
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
+    }
+
+    func retrieveItems() -> [ModelType] {
+        if isFiltering() {
+            return filteredItems
+        } else {
+            return items
+        }
+    }
+
+    func setupSeachBar() {
         setupUISearchController()
         searchController.hidesNavigationBarDuringPresentation = false
         if #available(iOS 11.0, *) {
@@ -190,33 +208,21 @@ class GenericTableViewController<T: GenericCell<ModelType>, ModelType>: UITableV
         ThemeManager.applyTo(searchBar: searchController.searchBar)
     }
 
-    private func setupWithoutSearchBar() {
+    func setupWithoutSearchBar() {
         definesPresentationContext = false
         if #available(iOS 11.0, *) {
             navigationItem.searchController = nil
         }
     }
 
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-
-        guard #available(iOS 11.0, *) else {
-            DispatchQueue.main.async {
-                self.searchController.searchBar.sizeToFit()
-            }
-
-            return
-        }
-    }
-}
-
-private extension GenericTableViewController {
     func setupTable() {
+        tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.backgroundColor = .white
+        tableView.register(UITableViewHeaderFooterView.self,
+                           forHeaderFooterViewReuseIdentifier: headerReuseId)
+
         tableView.tableFooterView = UIView()
         tableView.estimatedRowHeight = Theme.Cell.rowHeight
         tableView.rowHeight = UITableView.automaticDimension
-
-        tableView.register(UITableViewHeaderFooterView.self,
-                           forHeaderFooterViewReuseIdentifier: headerReuseId)
     }
 }
