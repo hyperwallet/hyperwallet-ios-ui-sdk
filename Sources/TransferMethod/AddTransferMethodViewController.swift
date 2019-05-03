@@ -136,16 +136,10 @@ public final class AddTransferMethodViewController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Theme.Cell.rowHeight
         tableView.accessibilityIdentifier = "addTransferMethodTable"
-        // ?????
-        //tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
-
         tableView.register(
             AddTransferMethodTableViewCell.self,
             forCellReuseIdentifier: AddTransferMethodTableViewCell.reuseId
         )
-
-//        let nib = UINib(nibName: String(describing: AddTransferMethodFooter.self), bundle: HyperwalletBundle.bundle)
-//        tableView.register(nib, forHeaderFooterViewReuseIdentifier: AddTransferMethodFooter.reuseIdentifier)
     }
 
     @objc
@@ -179,17 +173,6 @@ extension AddTransferMethodViewController {
         headerView.textLabel?.textColor = Theme.Label.textColor
     }
 
-//    override public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        guard let footerView = tableView.dequeueReusableHeaderFooterView(
-//            withIdentifier: AddTransferMethodFooter.reuseIdentifier) as? AddTransferMethodFooter
-//            else {
-//                fatalError("can't dequeue footer view")
-//        }
-//        footerView.error = presenter.sections[section].errorMessage
-//        footerView.info = presenter.sections[section].footer
-//        return footerView
-//    }
-
     override public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         var footerText = ""
         if let errorMessage = presenter.sections[section].errorMessage {
@@ -200,21 +183,6 @@ extension AddTransferMethodViewController {
 
         return footerText
     }
-//
-//    override public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        if presenter.sections[section].footer == nil && presenter.sections[section].errorMessage == nil {
-//            return emptyFooterHeight
-//        }
-//        return UITableView.automaticDimension
-//    }
-//
-//    override public func tableView(_ tableView: UITableView,
-//                                   estimatedHeightForFooterInSection section: Int) -> CGFloat {
-//        if presenter.sections[section].footer == nil && presenter.sections[section].errorMessage == nil {
-//            return emptyFooterHeight
-//        }
-//        return defaultFooterHeight
-//    }
 
     override public func tableView(_ tableView: UITableView,
                                    willDisplayFooterView view: UIView,
@@ -265,9 +233,8 @@ extension AddTransferMethodViewController {
             widget.viewController = self
         }
 
-        //childView.safeAreaLeadingAnchor.constraint(equalTo: margins.leadingAnchor),
-//        let leftAnchor = widget.leftAnchor.constraint(equalTo: cell.contentView.leadingAnchor)
-        let leftAnchor = widget.safeAreaLeadingAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.leadingAnchor)
+        let leftAnchor = widget.safeAreaLeadingAnchor
+            .constraint(equalTo: cell.contentView.layoutMarginsGuide.leadingAnchor)
         leftAnchor.priority = UILayoutPriority(999)
 
         let topAnchor = widget.topAnchor.constraint(equalTo: cell.contentView.topAnchor)
