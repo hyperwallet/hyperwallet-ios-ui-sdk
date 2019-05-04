@@ -366,6 +366,7 @@ extension AddTransferMethodViewController: AddTransferMethodView {
             UIView.setAnimationsEnabled(false)
             self.tableView.beginUpdates()
             footerView.textLabel?.attributedText = attributedText
+            footerView.sizeToFit()
             self.tableView.endUpdates()
             UIView.setAnimationsEnabled(true)
         }
