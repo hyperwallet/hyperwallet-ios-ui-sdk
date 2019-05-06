@@ -53,6 +53,14 @@ extension NSMutableAttributedString {
                                 .foregroundColor: color
                                ]))
     }
+
+    func append(value: String, color: UIColor) {
+        append(
+            NSAttributedString(string: value,
+                               attributes: [
+                                .foregroundColor: color
+                               ]))
+    }
 }
 
 extension Array {

@@ -27,6 +27,8 @@ public final class AddTransferMethodViewController: UITableViewController {
     private let footerViewCellId = "footerViewCellId"
     private let footerTag = 654312
 
+    private let emptyFooterHeight = CGFloat(2.0)
+    private let defaultFooterHeight = CGFloat(38.0)
     private let lineSpacing = CGFloat(8.0)
     private var defaultHeaderHeight = CGFloat(38.0)
 
@@ -178,6 +180,7 @@ extension AddTransferMethodViewController {
         }
 
         footerText = String(format: "%@%@", footerText, presenter.sections[section].footer ?? "")
+
         return footerText
     }
 
@@ -187,6 +190,15 @@ extension AddTransferMethodViewController {
         if let footerView = view as? UITableViewHeaderFooterView {
             updateFooterView(footerView, for: section)
         }
+    }
+
+    private func formatSubLabel(_ attributedText: NSMutableAttributedString, value: String, color: UIColor) {
+        attributedText.append(
+            NSAttributedString(string: value,
+                               attributes: [
+                                .font: Theme.Label.footnoteFont,
+                                .foregroundColor: color
+                               ]))
     }
 
     override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -353,10 +365,10 @@ extension AddTransferMethodViewController: AddTransferMethodView {
         let attributedText = createFooterText(for: presenter.sections[section])
         if footerView.textLabel?.attributedText != attributedText {
             UIView.setAnimationsEnabled(false)
-            tableView.beginUpdates()
+            self.tableView.beginUpdates()
             footerView.textLabel?.attributedText = attributedText
-            footerView.textLabel?.sizeToFit()
-            tableView.endUpdates()
+            footerView.sizeToFit()
+            self.tableView.endUpdates()
             UIView.setAnimationsEnabled(true)
         }
     }
@@ -364,12 +376,10 @@ extension AddTransferMethodViewController: AddTransferMethodView {
     private func createFooterText(for section: AddTransferMethodSectionData) -> NSAttributedString {
         let attributedText = NSMutableAttributedString()
         if let errorMessage = section.errorMessage {
-            attributedText.append(value: String(format: "%@\n", errorMessage),
-                                  font: Theme.Label.footnoteFont,
-                                  color: Theme.Label.errorColor)
+            attributedText.append(value: String(format: "%@\n", errorMessage), color: Theme.Label.errorColor)
         }
+        attributedText.append(value: section.footer ?? "", color: Theme.Label.textColor)
 
-        attributedText.append(value: section.footer ?? "", font: Theme.Label.footnoteFont, color: Theme.Label.textColor)
         return attributedText
     }
 
