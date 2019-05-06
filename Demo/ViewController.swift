@@ -77,7 +77,7 @@ class ViewController: UITableViewController {
         removeTransferMethodObserver()
 
         // Setup
-        HyperwalletUI.setup(IntegratorAuthenticationProvider(baseUrl, userToken))
+        HyperwalletUI.setup(IntegratorAuthenticationProvider(IntegratorAuthenticationProvider.baseUrl, IntegratorAuthenticationProvider.userToken))
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
