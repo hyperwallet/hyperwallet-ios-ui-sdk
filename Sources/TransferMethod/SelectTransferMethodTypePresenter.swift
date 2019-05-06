@@ -47,20 +47,8 @@ final class SelectTransferMethodTypePresenter {
     private var transferMethodConfigurationKeyResult: HyperwalletTransferMethodConfigurationKeyResult?
     private var transferMethodTypes = [TransferMethodTypeDetail]()
     private var countryCurrencyTitles = [String]()
-    private (set) var selectedCountry: String = "" {
-        didSet {
-            view.countryCurrencyTableViewReloadData()
-            loadCurrency(for: selectedCountry)
-        }
-    }
-    private (set) var selectedCurrency: String = "" {
-        didSet {
-            view.countryCurrencyTableViewReloadData()
-
-            loadTransferMethodTypes(country: selectedCountry,
-                                    currency: selectedCurrency)
-        }
-    }
+    private (set) var selectedCountry = ""
+    private (set) var selectedCurrency = ""
     /// Returns the amount of items in `countryCurrencyTitles`
     var countryCurrencyCount: Int {
         return countryCurrencyTitles.count
@@ -176,6 +164,8 @@ final class SelectTransferMethodTypePresenter {
                         return
                     }
                     strongSelf.selectedCountry = country
+                    strongSelf.loadCurrency(for: strongSelf.selectedCountry)
+                    strongSelf.loadTransferMethodTypes(country: country, currency: strongSelf.selectedCurrency)
                 }
             }
     }
@@ -207,14 +197,23 @@ final class SelectTransferMethodTypePresenter {
     /// Eventually the transfer methods should be shown correspondingly
     private func selectCountryHandler() -> (_ value: CountryCurrencyCellConfiguration) -> Void {
         return { [weak self] (country) in
-            self?.selectedCountry = country.value
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.selectedCountry = country.value
+            strongSelf.loadCurrency(for: country.value)
+            strongSelf.loadTransferMethodTypes(country: strongSelf.selectedCountry, currency: strongSelf.selectedCurrency)
         }
     }
 
     /// Handles the selection currency event at GenericTableView
     private func selectCurrencyHandler() -> (_ value: CountryCurrencyCellConfiguration) -> Void {
         return { [weak self]  (currency) in
-            self?.selectedCurrency = currency.value
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.selectedCurrency = currency.value
+            strongSelf.loadTransferMethodTypes(country: strongSelf.selectedCountry, currency: strongSelf.selectedCurrency)
         }
     }
 
@@ -275,6 +274,7 @@ final class SelectTransferMethodTypePresenter {
             return
         }
         selectedCurrency = firstCurrency.value
+        view.countryCurrencyTableViewReloadData()
     }
 
     private func loadTranferMethodConfigurationCountries() -> [CountryCurrencyCellConfiguration] {
