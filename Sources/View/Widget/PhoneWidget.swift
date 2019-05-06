@@ -17,25 +17,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import HyperwalletSDK
-import UIKit
 
-/// Factories of widget
-final class WidgetFactory {
-    /// Defines a dictionary of the widget
-    static let widgetDefinition: Dictionary = [
-        HyperwalletDataType.text.rawValue: TextWidget.self,
-        HyperwalletDataType.number.rawValue: NumberWidget.self,
-        HyperwalletDataType.selection.rawValue: SelectionWidget.self,
-        HyperwalletDataType.expiryDate.rawValue: ExpiryDateWidget.self,
-        HyperwalletDataType.phone.rawValue: PhoneWidget.self,
-        HyperwalletDataType.date.rawValue: DateWidget.self
-    ]
+/// Represents the phone number input widget.
+final class PhoneWidget: TextWidget {
+    required init(field: HyperwalletField) {
+        super.init(field: field)
+        setupLayout(field: field)
+        textField.keyboardType = UIKeyboardType.phonePad
+    }
 
-    /// Creates a new instance of a `Widget` based on the `HyperwalletField.type`
-    static func newWidget(field: HyperwalletField) -> AbstractWidget {
-        guard let widget = widgetDefinition[field.dataType ?? HyperwalletDataType.text.rawValue] else {
-            return TextWidget(field: field)
-        }
-        return widget.init(field: field)
+    required init(coder: NSCoder) {
+        super.init(coder: coder)
     }
 }
