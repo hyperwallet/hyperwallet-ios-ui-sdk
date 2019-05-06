@@ -27,8 +27,6 @@ public final class AddTransferMethodViewController: UITableViewController {
     private let footerViewCellId = "footerViewCellId"
     private let footerTag = 654312
 
-    private let emptyFooterHeight = CGFloat(2.0)
-    private let defaultFooterHeight = CGFloat(38.0)
     private let lineSpacing = CGFloat(8.0)
     private var defaultHeaderHeight = CGFloat(38.0)
 
@@ -180,7 +178,6 @@ extension AddTransferMethodViewController {
         }
 
         footerText = String(format: "%@%@", footerText, presenter.sections[section].footer ?? "")
-
         return footerText
     }
 
@@ -263,7 +260,7 @@ extension AddTransferMethodViewController: AddTransferMethodView {
             if isCellVisibile(indexPath: indexPath) {
                 presenter.focusField(in: section)
             } else {
-                tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                tableView.scrollToRow(at: indexPath, at: .top, animated: true)
             }
         }
     }
@@ -356,10 +353,10 @@ extension AddTransferMethodViewController: AddTransferMethodView {
         let attributedText = createFooterText(for: presenter.sections[section])
         if footerView.textLabel?.attributedText != attributedText {
             UIView.setAnimationsEnabled(false)
-            self.tableView.beginUpdates()
+            tableView.beginUpdates()
             footerView.textLabel?.attributedText = attributedText
-            footerView.sizeToFit()
-            self.tableView.endUpdates()
+            footerView.textLabel?.sizeToFit()
+            tableView.endUpdates()
             UIView.setAnimationsEnabled(true)
         }
     }
