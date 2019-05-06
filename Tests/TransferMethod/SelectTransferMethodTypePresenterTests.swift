@@ -7,7 +7,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
     private var presenter: SelectTransferMethodTypePresenter!
     private let mockView = MockSelectTransferMethodTypeView()
     private lazy var mockResponseData = HyperwalletTestHelper.getDataFromJson("TransferMethodConfigurationKeysResponse")
-
+    private lazy var userMockResponseData = HyperwalletTestHelper.getDataFromJson("UserIndividualResponse")
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
         presenter = SelectTransferMethodTypePresenter(view: mockView)
@@ -22,6 +22,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
 
     func testLoadTransferMethodKeys_success() {
         // Given
+        setUpGetIndividualHyperwalletUser()
         HyperwalletTestHelper.setUpMockServer(request: setUpTransferMethodConfigurationKeys())
 
         let expectation = self.expectation(description: "load transfer methods keys")
@@ -47,6 +48,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
 
     func testLoadTransferMethodKeys_failureWithError() {
         // Given
+        setUpGetIndividualHyperwalletUser()
         HyperwalletTestHelper.setUpMockServer(request:
             setUpTransferMethodConfigurationKeys(NSError(domain: "", code: -1009, userInfo: nil)))
 
@@ -66,8 +68,29 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
                        "The transferMethodTypeTableViewReloadData should not be performed")
     }
 
+    func testLoadTransferMethodKeys_getUserRequestFail() {
+        // Given
+        setUpGetIndividualHyperwalletUser(NSError(domain: "", code: -1009, userInfo: nil))
+
+        let expectation = self.expectation(description: "load transfer methods")
+        mockView.expectation = expectation
+
+        // When
+        presenter.loadTransferMethodKeys()
+        wait(for: [expectation], timeout: 1)
+
+        // Then
+        XCTAssertTrue(mockView.isShowLoadingPerformed, "The showLoading should be performed")
+        XCTAssertTrue(mockView.isShowErrorPerformed, "The showError should be performed")
+        XCTAssertFalse(mockView.isCountryCurrencyTableViewReloadDataPerformed,
+                       "The countryCurrencyTableViewReloadData should not be performed")
+        XCTAssertFalse(mockView.isTransferMethodTypeTableViewReloadDataPerformed,
+                       "The transferMethodTypeTableViewReloadData should not be performed")
+    }
+
     func testNavigateToAddTransferMethod_success() {
         // Given
+        setUpGetBusinessHyperwalletUser()
         HyperwalletTestHelper.setUpMockServer(request: setUpTransferMethodConfigurationKeys())
 
         let countryIndex = 0
@@ -92,7 +115,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
                       "The navigateToAddTransferMethodControllerPerformed should be performed")
 
         XCTAssertEqual(presenter.countryCurrencyCount, 2, "The countryCurrencyCount should be 2")
-        XCTAssertEqual(presenter.transferMethodTypesCount, 3, "The transferMethodTypesCount should be 3")
+        XCTAssertEqual(presenter.transferMethodTypesCount, 1, "The transferMethodTypesCount should be 1")
         XCTAssertNotNil(presenter.getCellConfiguration(for: 0), "The getCellConfiguration should not be nil")
         XCTAssertNotNil(presenter.getCountryCurrencyCellConfiguration(for: 0),
                         "The getCellConfiguration should not be nil")
@@ -111,6 +134,18 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
     private func setUpTransferMethodConfigurationKeys(_ error: NSError? = nil) -> StubRequest {
         let response = HyperwalletTestHelper.setUpMockedResponse(payload: mockResponseData, error: error)
         return HyperwalletTestHelper.buildPostResquest(baseUrl: HyperwalletTestHelper.graphQlURL, response)
+    }
+
+    private func setUpGetIndividualHyperwalletUser(_ error: NSError? = nil) {
+        let response = HyperwalletTestHelper.setUpMockedResponse(payload: userMockResponseData, error: error)
+        let request = HyperwalletTestHelper.buildGetRequest(baseUrl: HyperwalletTestHelper.userRestURL, response)
+        Hippolyte.shared.add(stubbedRequest: request)
+    }
+
+    private func setUpGetBusinessHyperwalletUser() {
+        let response = HyperwalletTestHelper.okHTTPResponse(for: "UserBusinessResponse")
+        let request = HyperwalletTestHelper.buildGetRequest(baseUrl: HyperwalletTestHelper.userRestURL, response)
+        Hippolyte.shared.add(stubbedRequest: request)
     }
 }
 
