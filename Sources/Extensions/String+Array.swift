@@ -44,6 +44,17 @@ extension String {
     }
 }
 
+extension NSMutableAttributedString {
+    func append(value: String, font: UIFont, color: UIColor) {
+        append(
+            NSAttributedString(string: value,
+                               attributes: [
+                                .font: font,
+                                .foregroundColor: color
+                               ]))
+    }
+}
+
 extension Array {
     func isNotEmpty() -> Bool {
         return !self.isEmpty

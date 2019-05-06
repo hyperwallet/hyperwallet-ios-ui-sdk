@@ -282,40 +282,4 @@ final class SelectTransferMethodTypePresenter {
 
         return currencies
     }
-
-    private func formatFeesProcessingTime(detail: TransferMethodTypeDetail) -> NSAttributedString {
-        let attributedText = NSMutableAttributedString()
-        // Fees
-        if let fees = detail.fees {
-            let feeLabel = String(format: "%@ ", "add_transfer_method_fee_label".localized())
-            formatSubLabel(attributedText, label: feeLabel, value: HyperwalletFee.format(fees: fees))
-        }
-
-        // Processing Time
-        if let processingTime = detail.processingTime, !processingTime.isEmpty {
-            var processingTimeLabel = ""
-
-            if attributedText.length > 0 {
-                processingTimeLabel = "\n"
-            }
-            processingTimeLabel = String(format: "%@%@ ",
-                                         processingTimeLabel,
-                                         "add_transfer_method_processing_time_label".localized())
-
-            formatSubLabel(attributedText, label: processingTimeLabel, value: processingTime)
-        }
-
-        return attributedText
-    }
-
-    private func formatSubLabel(_ attributedText: NSMutableAttributedString, label: String, value: String) {
-        let color = Theme.Label.subTitleColor
-        attributedText.append(
-            NSAttributedString(string: label,
-                               attributes: [.font: Theme.Label.captionOne, .foregroundColor: color]))
-
-        attributedText.append(
-            NSAttributedString(string: value,
-                               attributes: [.font: Theme.Label.captionOneMedium, .foregroundColor: color]))
-    }
 }

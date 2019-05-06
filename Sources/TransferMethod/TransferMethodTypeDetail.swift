@@ -27,11 +27,15 @@ struct TransferMethodTypeDetail {
 
     func formatFeesProcessingTime() -> NSAttributedString {
         let attributedText = NSMutableAttributedString()
+        let color = Theme.Label.subTitleColor
         // Fees
         if let fees = self.fees {
-            formatSubLabel(attributedText,
-                           label: "add_transfer_method_fee_label".localized(),
-                           value: HyperwalletFee.format(fees: fees))
+            let feeLabel = String(format: "%@ ", "add_transfer_method_fee_label".localized())
+
+            attributedText.append(value: feeLabel, font: Theme.Label.captionOne, color: color)
+            attributedText.append(value: HyperwalletFee.format(fees: fees),
+                                  font: Theme.Label.captionOneMedium,
+                                  color: Theme.Label.subTitleColor)
         }
 
         // Processing Time
@@ -41,31 +45,14 @@ struct TransferMethodTypeDetail {
             if attributedText.length > 0 {
                 processingTimeLabel = "\n"
             }
-            processingTimeLabel = String(format: "%@%@",
+            processingTimeLabel = String(format: "%@%@ ",
                                          processingTimeLabel,
                                          "add_transfer_method_processing_time_label".localized())
-            formatSubLabel(attributedText,
-                           label: processingTimeLabel,
-                           value: processingTime)
+
+            attributedText.append(value: processingTimeLabel, font: Theme.Label.captionOne, color: color)
+            attributedText.append(value: processingTime, font: Theme.Label.captionOneMedium, color: color)
         }
 
         return attributedText
-    }
-
-    private func formatSubLabel(_ attributedText: NSMutableAttributedString, label: String, value: String) {
-        let color = Theme.Label.subTitleColor
-        attributedText.append(
-            NSAttributedString(string: label,
-                               attributes: [
-                                .font: Theme.Label.captionOne,
-                                .foregroundColor: color
-                               ]))
-
-        attributedText.append(
-            NSAttributedString(string: value,
-                               attributes: [
-                                .font: Theme.Label.captionOneMedium,
-                                .foregroundColor: color
-                               ]))
     }
 }
