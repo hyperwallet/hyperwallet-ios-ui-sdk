@@ -202,7 +202,8 @@ final class SelectTransferMethodTypePresenter {
             }
             strongSelf.selectedCountry = country.value
             strongSelf.loadCurrency(for: country.value)
-            strongSelf.loadTransferMethodTypes(country: strongSelf.selectedCountry, currency: strongSelf.selectedCurrency)
+            strongSelf.loadTransferMethodTypes(country: strongSelf.selectedCountry,
+                                               currency: strongSelf.selectedCurrency)
         }
     }
 
@@ -213,7 +214,8 @@ final class SelectTransferMethodTypePresenter {
                 return
             }
             strongSelf.selectedCurrency = currency.value
-            strongSelf.loadTransferMethodTypes(country: strongSelf.selectedCountry, currency: strongSelf.selectedCurrency)
+            strongSelf.loadTransferMethodTypes(country: strongSelf.selectedCountry,
+                                               currency: strongSelf.selectedCurrency)
         }
     }
 
@@ -271,6 +273,7 @@ final class SelectTransferMethodTypePresenter {
             view.showAlert(message: String(format: "no_currency_available_error_message".localized(),
                                            country.localized()))
             selectedCurrency = ""
+            view.countryCurrencyTableViewReloadData()
             return
         }
         selectedCurrency = firstCurrency.value
