@@ -24,7 +24,7 @@ class SelectTransferMethodTypeTests: BaseTests {
 
     private func validateSelectTransferMethodScreen() {
         var bankAccountDescription: String
-        if #available(iOS 12.0, *) {
+        if #available(iOS 11.4, *) {
             bankAccountDescription = "Transaction Fees: CAD 2.20\nProcessing Time: 1-3 Business days"
         } else {
             bankAccountDescription = "Transaction Fees: CAD 2.20 Processing Time: 1-3 Business days"
