@@ -17,13 +17,13 @@ class ListTransferMethodTests: BaseTests {
 
     var removeBankCardURL: String {
         let bankCardEndpoint = "rest/v3/users/usr-token/bank-cards/"
-        let removeDebitCardEndpoint = "trm-5c380689-4074-46c4-8827-0574d88b509b/status-transitions"
+        let removeDebitCardEndpoint = "trm-00000000-0000-0000-0000-111111111111/status-transitions"
         return bankCardEndpoint + removeDebitCardEndpoint
     }
 
     var removeBankAccountURL: String {
         let bankAccountEndpoint = "rest/v3/users/usr-token/bank-accounts/"
-        let removeBankAccountCardEndpoint = "trm-6dab5471-65d1-4d48-aacb-fdd590f943d6/status-transitions"
+        let removeBankAccountCardEndpoint = "trm-11111111-1111-1111-1111-000000000000/status-transitions"
         return bankAccountEndpoint + removeBankAccountCardEndpoint
     }
 
@@ -243,67 +243,64 @@ class ListTransferMethodTests: BaseTests {
         waitForNonExistence(spinner)
     }
 
-    func testListTransferMethods_verifyAfterRelaunch() {
+    func testListTransferMethod_verifyAfterRelaunch() {
         setUpStandardListTransferMethod()
-        validatetestListTransferMethodsScreen()
+        validatetestListTransferMethodScreen()
         XCUIDevice.shared.clickHomeAndRelaunch(app: app)
         setUpStandardListTransferMethod()
-        validatetestListTransferMethodsScreen()
+        validatetestListTransferMethodScreen()
     }
 
-    func testListTransferMethods_verifyRotateScreen() {
+    func testListTransferMethod_verifyRotateScreen() {
         setUpStandardListTransferMethod()
         XCUIDevice.shared.rotateScreen(times: 3)
-        validatetestListTransferMethodsScreen()
+        validatetestListTransferMethodScreen()
     }
 
-    func testListTransferMethods_verifyWakeFromSleep() {
+    func testListTransferMethod_verifyWakeFromSleep() {
         setUpStandardListTransferMethod()
         XCUIDevice.shared.wakeFromSleep(app: app)
         waitForNonExistence(addTransferMethod.navigationBar)
-        validatetestListTransferMethodsScreen()
+        validatetestListTransferMethodScreen()
     }
 
-    func testListTransferMethods_verifyResumeFromRecents() {
+    func testListTransferMethod_verifyResumeFromRecents() {
         setUpStandardListTransferMethod()
         XCUIDevice.shared.resumeFromRecents(app: app)
         waitForNonExistence(addTransferMethod.navigationBar)
-        validatetestListTransferMethodsScreen()
+        validatetestListTransferMethodScreen()
     }
 
-    func testListTransferMethods_verifyAppToBackground() {
+    func testListTransferMethod_verifyAppToBackground() {
         setUpStandardListTransferMethod()
         XCUIDevice.shared.sendToBackground(app: app)
-        validatetestListTransferMethodsScreen()
+        validatetestListTransferMethodScreen()
     }
 
-    func testListTransferMethods_verifyPressBackButton() {
+    func testListTransferMethod_verifyPressBackButton() {
         setUpStandardListTransferMethod()
         listTransferMethod.clickBackButton()
         XCTAssertTrue(app.navigationBars["Account Settings"].exists)
     }
 
-    func validatetestListTransferMethodsScreen() {
+    private func validatetestListTransferMethodScreen() {
         let expectedCellsCount = 4
-        let isValid = listTransferMethod.navigationBar.exists &&
-            (app.tables.element(boundBy: 0).cells.count == expectedCellsCount) &&
-            app.cells.element(boundBy: 0).staticTexts[expectedFirstBankAccountLabel].exists &&
-            app.cells.element(boundBy: 1).staticTexts[expectedSecondBankAccountLabel].exists &&
-            app.cells.element(boundBy: 2).staticTexts[expectedThirdBankAccountLabel].exists &&
-            app.cells.element(boundBy: 3).staticTexts[expectedDebitCardCellLabel].exists &&
-            app.cells.element(boundBy: 0).staticTexts[bankAccountTitle].exists &&
-            app.cells.element(boundBy: 1).staticTexts[bankAccountTitle].exists &&
-            app.cells.element(boundBy: 2).staticTexts[bankAccountTitle].exists &&
-            app.cells.element(boundBy: 3).staticTexts[debitCardTitle].exists
+        XCTAssertTrue(listTransferMethod.navigationBar.exists)
+        XCTAssertTrue(app.tables.element(boundBy: 0).cells.count == expectedCellsCount)
+        XCTAssertTrue(app.cells.element(boundBy: 0).staticTexts[expectedFirstBankAccountLabel].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 1).staticTexts[expectedSecondBankAccountLabel].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 2).staticTexts[expectedThirdBankAccountLabel].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 3).staticTexts[expectedDebitCardCellLabel].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 0).staticTexts[bankAccountTitle].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 1).staticTexts[bankAccountTitle].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 2).staticTexts[bankAccountTitle].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 3).staticTexts[debitCardTitle].exists)
 
         if #available(iOS 11.0, *) {
-            XCTAssertTrue(isValid)
             XCTAssertTrue(app.cells.element(boundBy: 0).images.element.exists)
             XCTAssertTrue(app.cells.element(boundBy: 1).images.element.exists)
             XCTAssertTrue(app.cells.element(boundBy: 2).images.element.exists)
             XCTAssertTrue(app.cells.element(boundBy: 3).images.element.exists)
-        } else {
-            XCTAssertTrue(isValid)
         }
     }
 

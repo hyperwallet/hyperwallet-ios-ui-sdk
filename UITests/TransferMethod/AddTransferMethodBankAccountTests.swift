@@ -78,37 +78,37 @@ class AddTransferMethodTests: BaseTests {
 
     func testAddTransferMethod_verifyAfterRelaunch() {
         setUpScreenWithInvalidRoutingError()
-        valideteAddTransferMethodBankAccountScreen()
+        validateAddTransferMethodBankAccountScreen()
         XCUIDevice.shared.clickHomeAndRelaunch(app: app)
         setUpBankAccountScreen()
         setUpScreenWithInvalidRoutingError()
-        valideteAddTransferMethodBankAccountScreen()
+        validateAddTransferMethodBankAccountScreen()
     }
 
     func testAddTransferMethod_verifyRotateScreen() {
         setUpScreenWithInvalidRoutingError()
         XCUIDevice.shared.rotateScreen(times: 3)
-        valideteAddTransferMethodBankAccountScreen()
+        validateAddTransferMethodBankAccountScreen()
     }
 
     func testAddTransferMethod_verifyWakeFromSleep() {
         setUpScreenWithInvalidRoutingError()
         XCUIDevice.shared.wakeFromSleep(app: app)
         waitForNonExistence(addTransferMethod.navigationBar)
-        valideteAddTransferMethodBankAccountScreen()
+        validateAddTransferMethodBankAccountScreen()
     }
 
     func testAddTransferMethod_verifyResumeFromRecents() {
         setUpScreenWithInvalidRoutingError()
         XCUIDevice.shared.resumeFromRecents(app: app)
         waitForNonExistence(addTransferMethod.navigationBar)
-        valideteAddTransferMethodBankAccountScreen()
+        validateAddTransferMethodBankAccountScreen()
     }
 
     func testAddTransferMethod_verifyAppToBackground() {
         setUpScreenWithInvalidRoutingError()
         XCUIDevice.shared.sendToBackground(app: app)
-        valideteAddTransferMethodBankAccountScreen()
+        validateAddTransferMethodBankAccountScreen()
     }
 
     func testAddTransferMethod_verifyPressBackButton() {
@@ -116,7 +116,7 @@ class AddTransferMethodTests: BaseTests {
         XCTAssertTrue(selectTransferMethodType.navigationBar.exists)
     }
 
-    func valideteAddTransferMethodBankAccountScreen() {
+    func validateAddTransferMethodBankAccountScreen() {
         XCTAssertTrue(addTransferMethod.navigationBar.exists)
         XCTAssertTrue(app.keyboards.element.exists)
         XCTAssertTrue(addTransferMethod.branchIdInput.exists)
@@ -127,9 +127,6 @@ class AddTransferMethodTests: BaseTests {
     }
 
     private func setUpBankAccountScreen() {
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/authentication-token",
-                             filename: "AuthenticationTokenResponse",
-                             method: HTTPMethod.post)
         mockServer.setupGraphQLStubs()
 
         app = XCUIApplication()
