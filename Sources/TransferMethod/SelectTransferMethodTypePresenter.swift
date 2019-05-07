@@ -84,9 +84,25 @@ final class SelectTransferMethodTypePresenter {
     /// Display all the select Country or Currency based on the index
     func performShowSelectCountryOrCurrencyView(index: Int) {
         if index == 0 {
-            showSelectCountryView()
+            guard let countries = self.loadTranferMethodConfigurationCountries() else {
+                view.showAlert(message: "no_country_available_error_message".localized())
+                return
+            }
+
+            showSelectCountryView(countries)
         } else {
-            showSelectCurrencyView()
+            guard !selectedCountry.isEmpty else {
+                self.view.showAlert(message: "select_a_country_message".localized())
+                return
+            }
+
+            guard let currencies = self.loadTranferMethodConfigurationCurrencies(for: selectedCountry) else {
+                view.showAlert(message: String(format: "no_currency_available_error_message".localized(),
+                                               selectedCountry.localized()))
+                return
+            }
+
+            showSelectCurrencyView(currencies)
         }
     }
 
@@ -129,18 +145,17 @@ final class SelectTransferMethodTypePresenter {
         return (index == 0 ? selectedCountry.localized() : selectedCurrency )
     }
 
-    private func defaultCountry() -> String? {
-        let countries = loadTranferMethodConfigurationCountries()
-
-        guard countries.isNotEmpty() else {
-            return nil
+    private func loadCountry() {
+        guard let countries = loadTranferMethodConfigurationCountries() else {
+            view.showAlert(message: "no_country_available_error_message".localized())
+            return
         }
 
         if let userCountry = user?.country, countries.contains(where: { $0.value == userCountry }) {
-            return userCountry
+            selectedCountry = userCountry
+        } else if let country = countries.first {
+            selectedCountry = country.value
         }
-
-        return countries.first?.value
     }
 
     private func transferMethodConfigurationKeyResultHandler()
@@ -158,21 +173,17 @@ final class SelectTransferMethodTypePresenter {
                     }
                     strongSelf.countryCurrencyTitles = ["Country", "Currency"]
                     strongSelf.transferMethodConfigurationKeyResult = result
-
-                    guard let country = strongSelf.defaultCountry() else {
-                        strongSelf.view.showAlert(message: "no_country_available_error_message".localized())
-                        return
-                    }
-                    strongSelf.selectedCountry = country
+                    strongSelf.loadCountry()
                     strongSelf.loadCurrency(for: strongSelf.selectedCountry)
-                    strongSelf.loadTransferMethodTypes(country: country, currency: strongSelf.selectedCurrency)
+                    strongSelf.loadTransferMethodTypes(country: strongSelf.selectedCountry,
+                                                       currency: strongSelf.selectedCurrency)
                 }
             }
     }
 
     /// Shows the Select Country View
-    private func showSelectCountryView() {
-        view.showGenericTableView(items: self.loadTranferMethodConfigurationCountries(),
+    private func showSelectCountryView(_ countries: [CountryCurrencyCellConfiguration]) {
+        view.showGenericTableView(items: countries,
                                   title: "select_transfer_method_country".localized(),
                                   selectItemHandler: selectCountryHandler(),
                                   markCellHandler: countryMarkCellHandler(),
@@ -180,12 +191,8 @@ final class SelectTransferMethodTypePresenter {
     }
 
     /// Shows the Select Currency View
-    private func showSelectCurrencyView() {
-        if selectedCountry.isEmpty {
-            self.view.showAlert(message: "select_a_country_message".localized())
-            return
-        }
-        view.showGenericTableView(items: self.loadTranferMethodConfigurationCurrencies(for: selectedCountry),
+    private func showSelectCurrencyView(_ currencies: [CountryCurrencyCellConfiguration]) {
+        view.showGenericTableView(items: currencies,
                                   title: "select_transfer_method_currency".localized(),
                                   selectItemHandler: selectCurrencyHandler(),
                                   markCellHandler: currencyMarkCellHandler(),
@@ -268,38 +275,28 @@ final class SelectTransferMethodTypePresenter {
     }
 
     private func loadCurrency(for country: String) {
-        let currencies = loadTranferMethodConfigurationCurrencies(for: country)
-        guard let firstCurrency = currencies.first else {
+        guard let firstCurrency = transferMethodConfigurationKeyResult?
+            .currencies(from: country).min(by: { $0.localized() < $1.localized() }) else {
             view.showAlert(message: String(format: "no_currency_available_error_message".localized(),
                                            country.localized()))
             selectedCurrency = ""
             view.countryCurrencyTableViewReloadData()
             return
         }
-        selectedCurrency = firstCurrency.value
+        selectedCurrency = firstCurrency
         view.countryCurrencyTableViewReloadData()
     }
 
-    private func loadTranferMethodConfigurationCountries() -> [CountryCurrencyCellConfiguration] {
-        guard let keyResult = transferMethodConfigurationKeyResult else {
-            return [CountryCurrencyCellConfiguration]()
-        }
-
-        return keyResult.countries()
+    private func loadTranferMethodConfigurationCountries() -> [CountryCurrencyCellConfiguration]? {
+        return transferMethodConfigurationKeyResult?.countries()
             .map { CountryCurrencyCellConfiguration(title: $0.localized(), value: $0) }
             .sorted { $0.title  < $1.title }
     }
 
     private func loadTranferMethodConfigurationCurrencies(for countryCode: String)
-        -> [CountryCurrencyCellConfiguration] {
-            var currencies = [CountryCurrencyCellConfiguration]()
-
-            if let keyResult = transferMethodConfigurationKeyResult {
-                currencies = keyResult.currencies(from: countryCode)
-                    .map { CountryCurrencyCellConfiguration(title: $0.localized(), value: $0) }
-                    .sorted { $0.title  < $1.title }
-            }
-
-            return currencies
+        -> [CountryCurrencyCellConfiguration]? {
+        return transferMethodConfigurationKeyResult?.currencies(from: countryCode)
+            .map { CountryCurrencyCellConfiguration(title: $0.localized(), value: $0) }
+            .sorted { $0.title  < $1.title }
     }
 }
