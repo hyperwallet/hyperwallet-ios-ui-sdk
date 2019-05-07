@@ -385,6 +385,7 @@
 				DBB2B7032261C141006C48D3 /* BankAccountResponse.json */,
 				DBFB614A2261E84C00C4A8AA /* BankCardDuplicateResponse.json */,
 				DBFB614D2261E84C00C4A8AA /* BankCardInvalidCvvResponse.json */,
+				DBA9FA5C227918B500C1301A /* UserIndividualResponse.json */,
 				DBFB61482261E84C00C4A8AA /* BankCardInvalidDateOfExpiry.json */,
 				DBB2B70E2261C141006C48D3 /* BankCardResponse.json */,
 				DBFB614C2261E84C00C4A8AA /* ListTransferMethodResponse.json */,
