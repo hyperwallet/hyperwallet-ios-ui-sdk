@@ -100,13 +100,13 @@ final class AddTransferMethodPresenter {
         case "BANK_ACCOUNT":
             hyperwalletTransferMethod = HyperwalletBankAccount.Builder(transferMethodCountry: country,
                                                                        transferMethodCurrency: currency,
-                                                                       transferMethodProfileType: "INDIVIDUAL")
+                                                                       transferMethodProfileType: profileType)
                 .build()
 
         case "BANK_CARD":
             hyperwalletTransferMethod = HyperwalletBankCard.Builder(transferMethodCountry: country,
                                                                     transferMethodCurrency: currency,
-                                                                    transferMethodProfileType: "INDIVIDUAL")
+                                                                    transferMethodProfileType: profileType)
                 .build()
 
         default:
@@ -114,6 +114,7 @@ final class AddTransferMethodPresenter {
             hyperwalletTransferMethod.setField(key: "transferMethodCountry", value: country)
             hyperwalletTransferMethod.setField(key: "transferMethodCurrency", value: currency)
             hyperwalletTransferMethod.setField(key: "type", value: transferMethodType)
+            hyperwalletTransferMethod.setField(key: "profileType", value: profileType)
         }
         for field in view.fieldValues() {
             hyperwalletTransferMethod.setField(key: field.name, value: field.value)
