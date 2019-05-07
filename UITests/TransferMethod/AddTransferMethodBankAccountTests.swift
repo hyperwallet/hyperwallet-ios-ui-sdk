@@ -77,6 +77,7 @@ class AddTransferMethodTests: BaseTests {
     }
 
     func testAddTransferMethod_verifyAfterRelaunch() {
+        setUpScreenWithInvalidRoutingError()
         valideteAddTransferMethodBankAccountScreen()
         XCUIDevice.shared.clickHomeAndRelaunch(app: app)
         setUpBankAccountScreen()
