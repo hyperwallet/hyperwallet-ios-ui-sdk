@@ -18,7 +18,7 @@
 
 import UIKit
 
-class MonthYearPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSource {
+class ExpiryDatePickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSource {
     var month = Calendar.current.component(.month, from: Date())
     var year = Calendar.current.component(.year, from: Date())
 

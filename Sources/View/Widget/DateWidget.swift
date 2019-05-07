@@ -19,8 +19,8 @@
 import HyperwalletSDK
 
 /// Represents the date input widget.
-final class DateWidget: TextWidget, ToolbarPickerView {
-    var toolbar: UIToolbar!
+final class DateWidget: TextWidget {
+    var toolbar = UIToolbar()
     private var datePicker: UIDatePicker!
 
     private static var dateFormatter: DateFormatter = {
@@ -41,7 +41,7 @@ final class DateWidget: TextWidget, ToolbarPickerView {
     override func setupLayout(field: HyperwalletField) {
         super.setupLayout(field: field)
         setupDatePicker()
-        setupToolBar(action: #selector(self.doneButtonTapped))
+        toolbar.setupToolBar(target: self, action: #selector(self.doneButtonTapped))
         setupTextField()
     }
 
@@ -69,10 +69,10 @@ final class DateWidget: TextWidget, ToolbarPickerView {
         textField.resignFirstResponder()
     }
 
-    override func textFieldDidBeginEditing(_ textField: UITextField) {
-        super.textFieldDidBeginEditing(textField)
-        if let dateFromText = DateWidget.dateFormatter.date(from: value()) {
-            datePicker.date = dateFromText
-        }
-    }
+//    override func textFieldDidBeginEditing(_ textField: UITextField) {
+//        super.textFieldDidBeginEditing(textField)
+//        if let dateFromText = DateWidget.dateFormatter.date(from: value()) {
+//            datePicker.date = dateFromText
+//        }
+//    }
 }

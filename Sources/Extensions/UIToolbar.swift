@@ -16,13 +16,11 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-protocol ToolbarPickerView: class {
-    var toolbar: UIToolbar! { get set }
-}
+import UIKit
 
-extension ToolbarPickerView {
-    func setupToolBar(action: Selector?) {
-        toolbar = UIToolbar()
+extension UIToolbar {
+    func setupToolBar(target: UIView, action: Selector?) {
+        let toolbar = self
         toolbar.barStyle = UIBarStyle.default
         toolbar.isTranslucent = true
         toolbar.tintColor = Theme.themeColor
@@ -30,7 +28,7 @@ extension ToolbarPickerView {
 
         let doneButton = UIBarButtonItem(title: "done_button_label".localized(),
                                          style: .plain,
-                                         target: self,
+                                         target: target,
                                          action: action)
         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
