@@ -363,7 +363,7 @@ extension AddTransferMethodViewController: AddTransferMethodView {
 
     private func updateFooterView(_ footerView: UITableViewHeaderFooterView, for section: Int) {
         let attributedText = createFooterText(for: presenter.sections[section])
-        if footerView.textLabel?.attributedText != attributedText {
+        if footerView.textLabel?.attributedText?.string != attributedText.string {
             UIView.setAnimationsEnabled(false)
             self.tableView.beginUpdates()
             footerView.textLabel?.attributedText = attributedText
