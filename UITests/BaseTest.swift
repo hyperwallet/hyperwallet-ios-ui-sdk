@@ -15,7 +15,9 @@ class BaseTests: XCTestCase {
                              filename: "AuthenticationTokenResponse",
                              method: HTTPMethod.post)
 
-        stubGetUserDetails()
+        mockServer.setupStub(url: "/rest/v3/users/usr-token",
+                             filename: stubGetUserDetailsResponse(),
+                             method: HTTPMethod.get)
 
         mockServer.setupGraphQLStubs()
 
@@ -27,9 +29,7 @@ class BaseTests: XCTestCase {
         mockServer.tearDown()
     }
 
-    func stubGetUserDetails() {
-        mockServer.setupStub(url: "/rest/v3/users/usr-token",
-                             filename: "UserIndividualResponse",
-                             method: HTTPMethod.get)
+    func stubGetUserDetailsResponse() -> String {
+        return "UserIndividualResponse"
     }
 }

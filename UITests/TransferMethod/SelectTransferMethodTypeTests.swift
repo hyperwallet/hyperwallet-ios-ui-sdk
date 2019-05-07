@@ -22,10 +22,8 @@ class SelectTransferMethodTypeTests: BaseTests {
         waitForNonExistence(spinner)
     }
 
-    override func stubGetUserDetails() {
-        mockServer.setupStub(url: "/rest/v3/users/usr-token",
-                             filename: "UserIndividualCountryCanadaResponse",
-                             method: HTTPMethod.get)
+    override func stubGetUserDetailsResponse() -> String {
+        return "UserIndividualCountryCanadaResponse"
     }
 
     private func validateSelectTransferMethodScreen() {
