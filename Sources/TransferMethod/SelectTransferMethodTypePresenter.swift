@@ -17,7 +17,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import HyperwalletSDK
-import UIKit
 
 protocol SelectTransferMethodTypeView: class {
     func showGenericTableView(items: [CountryCurrencyCellConfiguration],
