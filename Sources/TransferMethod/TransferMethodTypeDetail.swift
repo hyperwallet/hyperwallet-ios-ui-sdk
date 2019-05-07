@@ -30,7 +30,7 @@ struct TransferMethodTypeDetail {
         let color = Theme.Label.subTitleColor
         // Fees
         if let fees = self.fees {
-            let feeLabel = String(format: "%@ ", "add_transfer_method_fee_label".localized())
+            let feeLabel = "add_transfer_method_fee_label".localized()
 
             attributedText.append(value: feeLabel, font: Theme.Label.captionOne, color: color)
             attributedText.append(value: HyperwalletFee.format(fees: fees),
@@ -45,7 +45,7 @@ struct TransferMethodTypeDetail {
             if attributedText.length > 0 {
                 processingTimeLabel = "\n"
             }
-            processingTimeLabel = String(format: "%@%@ ",
+            processingTimeLabel = String(format: "%@%@",
                                          processingTimeLabel,
                                          "add_transfer_method_processing_time_label".localized())
 

@@ -11,10 +11,10 @@ class ListTransferMethodTests: XCTestCase {
 
     let debitCard = NSPredicate(format: "label CONTAINS[c] 'Debit Card'")
     let bankAccount = NSPredicate(format: "label CONTAINS[c] 'Bank Account'")
-    let expectedFirstBankAccountLabel = "Ending on 0001"
-    let expectedSecondBankAccountLabel = "Ending on 0002"
-    let expectedThirdBankAccountLabel = "Ending on 0003"
-    let expectedDebitCardCellLabel = "Ending on 0006"
+    let expectedFirstBankAccountLabel = "United States Ending on 0001"
+    let expectedSecondBankAccountLabel = "United States Ending on 0002"
+    let expectedThirdBankAccountLabel = "United States Ending on 0003"
+    let expectedDebitCardCellLabel = "United States Ending on 0006"
 
     var removeBankCardURL: String {
         let bankCardEndpoint = "rest/v3/users/usr-token/bank-cards/"

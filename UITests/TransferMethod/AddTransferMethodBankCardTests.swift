@@ -79,7 +79,9 @@ class AddTransferMethodBankCardTests: BaseTests {
         addTransferMethod.clickCreateTransferMethodButton()
         waitForNonExistence(spinner)
 
-        XCTAssert(app.tables.staticTexts["The card cannot be registered - The CVV entered is invalid."].exists)
+        XCTAssertNotNil(app.tables.otherElements
+            .containing(NSPredicate(format: "label CONTAINS %@",
+                                    "The card cannot be registered - The CVV entered is invalid.")))
     }
 
     func testAddTransferMethod_returnsErrorOnDuplicateBankCard() {
@@ -92,11 +94,13 @@ class AddTransferMethodBankCardTests: BaseTests {
         addTransferMethod.setCvv(cvvNumber: "022")
         addTransferMethod.clickCreateTransferMethodButton()
         waitForNonExistence(spinner)
-
-        XCTAssert(app.tables.staticTexts["The card is already registered."].exists)
+        XCTAssertNotNil(app.tables.otherElements
+            .containing(NSPredicate(format: "label CONTAINS %@", "The card is already registered.")))
     }
 
     func testAddTransferMethod_returnsGraphQLFlatFee() {
-        XCTAssert(app.tables.cells.staticTexts["Transaction Fees: USD 1.75 Processing Time: 30 minutes"].exists)
+        XCTAssert(app.tables["addTransferMethodTable"]
+            .staticTexts["Transaction Fees: USD 1.75 Processing Time: 30 minutes"]
+            .exists)
     }
 }

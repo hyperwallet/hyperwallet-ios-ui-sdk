@@ -84,8 +84,9 @@ class AddTransferMethodTests: XCTestCase {
         addTransferMethod.clickCreateTransferMethodButton()
         waitForNonExistence(spinner)
 
-        XCTAssert(addTransferMethod.addTMTableView.staticTexts["Routing Number [021000022] is not valid. " +
-            "Please modify Routing Number to a valid ACH Routing Number of the branch of your bank."].exists)
+        XCTAssertNotNil(app.tables.otherElements
+            .containing(NSPredicate(format: "label CONTAINS %@", "Routing Number [021000022] is not valid. " +
+                "Please modify Routing Number to a valid ACH Routing Number of the branch of your bank.")))
     }
 
     func testAddTransferMethod_createBankAccountUnexpectedError() {
