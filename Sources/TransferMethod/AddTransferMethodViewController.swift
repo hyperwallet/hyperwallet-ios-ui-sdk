@@ -192,15 +192,6 @@ extension AddTransferMethodViewController {
         }
     }
 
-    private func formatSubLabel(_ attributedText: NSMutableAttributedString, value: String, color: UIColor) {
-        attributedText.append(
-            NSAttributedString(string: value,
-                               attributes: [
-                                .font: Theme.Label.footnoteFont,
-                                .foregroundColor: color
-                               ]))
-    }
-
     override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if let header = presenter.sections[section].header {
             if header.height(withConstrainedWidth: self.view.frame.width,
@@ -362,7 +353,7 @@ extension AddTransferMethodViewController: AddTransferMethodView {
     }
 
     private func updateFooterView(_ footerView: UITableViewHeaderFooterView, for section: Int) {
-        let attributedText = createFooterText(for: presenter.sections[section])
+        let attributedText = updateFooterText(for: presenter.sections[section])
         if footerView.textLabel?.attributedText?.string != attributedText.string {
             UIView.setAnimationsEnabled(false)
             self.tableView.beginUpdates()
@@ -373,7 +364,7 @@ extension AddTransferMethodViewController: AddTransferMethodView {
         }
     }
 
-    private func createFooterText(for section: AddTransferMethodSectionData) -> NSAttributedString {
+    private func updateFooterText(for section: AddTransferMethodSectionData) -> NSAttributedString {
         let attributedText = NSMutableAttributedString()
         if let errorMessage = section.errorMessage {
             attributedText.append(value: String(format: "%@\n", errorMessage), color: Theme.Label.errorColor)
