@@ -42,8 +42,8 @@ protocol SelectTransferMethodTypeView: class {
 
 final class SelectTransferMethodTypePresenter {
     // MARK: properties
-    private static let profileType = "INDIVIDUAL"
     private unowned let view: SelectTransferMethodTypeView
+    private var user: HyperwalletUser?
     private var transferMethodConfigurationKeyResult: HyperwalletTransferMethodConfigurationKeyResult?
     private var transferMethodTypes = [TransferMethodTypeDetail]()
     private var countryCurrencyTitles = [String]()
@@ -68,7 +68,7 @@ final class SelectTransferMethodTypePresenter {
     }
 
     /// Initialize SelectTransferMethodPresenter
-    public init(view: SelectTransferMethodTypeView) {
+    init(view: SelectTransferMethodTypeView) {
         self.view = view
     }
 
@@ -101,16 +101,35 @@ final class SelectTransferMethodTypePresenter {
     /// Loads the transferMethodKeys from core SDK and display the default transfer methods
     func loadTransferMethodKeys() {
         view.showLoading()
-        Hyperwallet.shared.retrieveTransferMethodConfigurationKeys(
-            request: HyperwalletTransferMethodConfigurationKeysQuery(),
-            completion: transferMethodConfigurationKeyResultHandler())
+
+        Hyperwallet.shared.getUser {[weak self] (result, error) in
+            guard let strongSelf = self else {
+                return
+            }
+            if let error = error {
+                DispatchQueue.main.async { [weak self]  in
+                    self?.view.hideLoading()
+                    self?.view.showError(error, { self?.loadTransferMethodKeys() })
+                }
+                return
+            }
+
+            strongSelf.user = result
+
+            Hyperwallet.shared.retrieveTransferMethodConfigurationKeys(
+                request: HyperwalletTransferMethodConfigurationKeysQuery(),
+                completion: strongSelf.transferMethodConfigurationKeyResultHandler())
+        }
     }
 
     /// Navigate to AddTransferMethodController
     func navigateToAddTransferMethod(_ index: Int) {
+        guard let profileType = user?.profileType?.rawValue else {
+            return
+        }
         view.navigateToAddTransferMethodController(country: selectedCountry,
                                                    currency: selectedCurrency,
-                                                   profileType: SelectTransferMethodTypePresenter.profileType,
+                                                   profileType: profileType,
                                                    detail: transferMethodTypes[index])
     }
 
@@ -178,8 +197,7 @@ final class SelectTransferMethodTypePresenter {
             }
             self?.selectedCurrency = currency.value
             self?.loadTransferMethodTypesFrom(country: country,
-                                              currency: currency.value,
-                                              profileType: SelectTransferMethodTypePresenter.profileType)
+                                              currency: currency.value)
         }
     }
 
@@ -207,11 +225,12 @@ final class SelectTransferMethodTypePresenter {
         }
     }
 
-    private func loadTransferMethodTypesFrom(country: String, currency: String, profileType: String) {
+    private func loadTransferMethodTypesFrom(country: String, currency: String) {
         transferMethodTypes = [TransferMethodTypeDetail]()
-        guard let result = transferMethodConfigurationKeyResult?.transferMethodTypes(country: country,
-                                                                                     currency: currency,
-                                                                                     profileType: profileType),
+        guard let profileType = user?.profileType?.rawValue,
+            let result = transferMethodConfigurationKeyResult?.transferMethodTypes(country: country,
+                                                                                   currency: currency,
+                                                                                   profileType: profileType),
             !result.isEmpty else {
                 view.showAlert(message: String(format: "no_transfer_method_available_error_message".localized(),
                                                country.localized(),
@@ -252,8 +271,7 @@ final class SelectTransferMethodTypePresenter {
         selectedCurrency = firstCurrency.value
 
         loadTransferMethodTypesFrom(country: selected,
-                                    currency: selectedCurrency,
-                                    profileType: SelectTransferMethodTypePresenter.profileType)
+                                    currency: selectedCurrency)
     }
 
     private func loadCountries() -> [CountryCurrencyCellConfiguration] {
@@ -281,41 +299,5 @@ final class SelectTransferMethodTypePresenter {
         }
 
         return currencies
-    }
-
-    private func formatFeesProcessingTime(detail: TransferMethodTypeDetail) -> NSAttributedString {
-        let attributedText = NSMutableAttributedString()
-        // Fees
-        if let fees = detail.fees {
-            let feeLabel = String(format: "%@ ", "add_transfer_method_fee_label".localized())
-            formatSubLabel(attributedText, label: feeLabel, value: HyperwalletFee.format(fees: fees))
-        }
-
-        // Processing Time
-        if let processingTime = detail.processingTime, !processingTime.isEmpty {
-            var processingTimeLabel = ""
-
-            if attributedText.length > 0 {
-                processingTimeLabel = "\n"
-            }
-            processingTimeLabel = String(format: "%@%@ ",
-                                         processingTimeLabel,
-                                         "add_transfer_method_processing_time_label".localized())
-
-            formatSubLabel(attributedText, label: processingTimeLabel, value: processingTime)
-        }
-
-        return attributedText
-    }
-
-    private func formatSubLabel(_ attributedText: NSMutableAttributedString, label: String, value: String) {
-        let color = Theme.Label.subTitleColor
-        attributedText.append(
-            NSAttributedString(string: label,
-                               attributes: [.font: Theme.Label.captionOne, .foregroundColor: color]))
-
-        attributedText.append(
-            NSAttributedString(string: value,
-                               attributes: [.font: Theme.Label.captionOneMedium, .foregroundColor: color]))
     }
 }
