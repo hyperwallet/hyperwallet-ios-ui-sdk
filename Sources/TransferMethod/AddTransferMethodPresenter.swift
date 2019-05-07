@@ -99,12 +99,14 @@ final class AddTransferMethodPresenter {
         switch transferMethodType {
         case "BANK_ACCOUNT":
             hyperwalletTransferMethod = HyperwalletBankAccount.Builder(transferMethodCountry: country,
-                                                                       transferMethodCurrency: currency)
+                                                                       transferMethodCurrency: currency,
+                                                                       transferMethodProfileType: "INDIVIDUAL")
                 .build()
 
         case "BANK_CARD":
             hyperwalletTransferMethod = HyperwalletBankCard.Builder(transferMethodCountry: country,
-                                                                    transferMethodCurrency: currency)
+                                                                    transferMethodCurrency: currency,
+                                                                    transferMethodProfileType: "INDIVIDUAL")
                 .build()
 
         default:
