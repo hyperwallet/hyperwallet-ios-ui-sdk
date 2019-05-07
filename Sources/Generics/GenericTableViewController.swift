@@ -205,7 +205,6 @@ private extension GenericTableViewController {
 
     func setupTable() {
         tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.backgroundColor = .white
         tableView.register(UITableViewHeaderFooterView.self,
                            forHeaderFooterViewReuseIdentifier: headerReuseId)
 

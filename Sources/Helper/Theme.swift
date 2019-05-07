@@ -101,7 +101,7 @@ public struct Theme {
 
     /// Representation of all customizable visual style property for the `Hyperwallet`'s icon.
     public struct Icon {
-        /// The icon size
+        /// The icon font size
         public static let size = 20
         /// The icon image height
         public static let height = 40
