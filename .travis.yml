@@ -16,9 +16,9 @@ env:
   - IOS_UI_TESTS_SCHEME="Demo"
 
   matrix:
-    - ios_version='12.1'  ios_device='iPhone XR' scheme="$IOS_FRAMEWORK_SCHEME" platform='iOS Simulator' configuration="DEBUG" code_coverage="YES"
-    - ios_version='12.1'  ios_device='iPhone XR' scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS Simulator' configuration="XCUITest" code_coverage="NO"
-    - ios_version='11.1'  ios_device='iPhone 7'  scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS Simulator' configuration="XCUITest" code_coverage="NO"
+    - ios_version='12.1'  ios_device='iPhone XR' scheme="$IOS_FRAMEWORK_SCHEME" platform='iOS Simulator' configuration="DEBUG" code_coverage="YES" only_active_arch="YES"
+    - ios_version='12.1'  ios_device='iPhone XR' scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS Simulator' configuration="XCUITest" code_coverage="NO" only_active_arch="NO"
+    - ios_version='11.1'  ios_device='iPhone 7'  scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS Simulator' configuration="XCUITest" code_coverage="NO" only_active_arch="NO"
 before_install:
   # Boot the emulator by ID
   - |
@@ -29,6 +29,7 @@ before_install:
   # Update the brew and build dependencies tools
   - brew outdated carthage || brew upgrade carthage
   - Carthage update --use-submodules  --platform iOS
+  - gem i slather --no-ri --no-rdoc
   # Force to update the Swiftlint to the last stable version
   - brew outdated swiftlint || brew upgrade swiftlint
   # Print the booted emulator
@@ -48,7 +49,13 @@ script: |
     -destination "$destination" \
     -derivedDataPath Build/ \
     -enableCodeCoverage "$code_coverage" \
-    -configuration "$configuration" ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+    -configuration "$configuration" ONLY_ACTIVE_ARCH="$only_active_arch" ENABLE_TESTABILITY=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
   # Lint - Add `--strict` to fail for warning and violation
   swiftlint lint --reporter json
+
+after_success:
+
+- if [ $code_coverage == "YES" ]; then
+      slather
+  fi
