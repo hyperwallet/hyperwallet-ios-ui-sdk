@@ -34,15 +34,13 @@ class SelectTransferMethodTypeTests: BaseTests {
             bankAccountDescription = "Transaction Fees: CAD 2.20 Processing Time: 1-3 Business days"
         }
 
-        if #available(iOS 11.0, *) {
-            XCTAssert(app.tables["transferMethodTableView"].images["\u{e000}"].exists)
-        }
-
+        XCTAssertNotNil(app.cells.images)
         XCTAssertTrue(app.navigationBars["Add Account"].exists)
         XCTAssertTrue(app.tables.staticTexts["Canada"].exists)
         XCTAssertTrue(app.tables.staticTexts["CAD"].exists)
-        XCTAssertEqual(app.staticTexts["bank_account_title"].label, "Bank Account")
-        XCTAssertEqual(app.staticTexts["bank_account_description"].label, bankAccountDescription)
+        XCTAssertEqual(app.cells.staticTexts["Bank Account"].label, "Bank Account")
+        XCTAssertEqual(app.cells.staticTexts["Transaction Fees: CAD 2.20 Processing Time: 1-3 Business days"].label,
+                       bankAccountDescription)
 
         XCTAssertTrue(selectTransferMethodType.countrySelect.exists &&
             selectTransferMethodType.navigationBar.exists &&
