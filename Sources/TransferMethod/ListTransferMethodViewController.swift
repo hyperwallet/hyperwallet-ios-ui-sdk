@@ -56,10 +56,7 @@ public final class ListTransferMethodViewController: UITableViewController {
 
     // MARK: - Transfer method list table view dataSource and delegate
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let numberOfCells = presenter.numberOfCells
-        //viewNoResults.isHidden = presenter.isLoading ? true : numberOfCells > 0
-
-        return numberOfCells
+        return presenter.numberOfCells
     }
 
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

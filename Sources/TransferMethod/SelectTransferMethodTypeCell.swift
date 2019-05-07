@@ -81,6 +81,7 @@ extension SelectTransferMethodTypeCell {
 
         let icon = UIImage.fontIcon(configuration.transferMethodIconFont,
                                     iconSize,
+                                    CGFloat(Theme.Icon.size),
                                     Theme.Icon.color,
                                     Theme.Icon.backgroundColor)
         imageView?.image = icon
