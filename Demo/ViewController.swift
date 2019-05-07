@@ -46,7 +46,7 @@ class ViewController: UITableViewController {
         case listTransferMethod
         case addTransferMethod
         case transferFunds
-
+        
         var title: String {
             switch self {
             case .paymentDetails: return "Payment Details"
@@ -55,7 +55,7 @@ class ViewController: UITableViewController {
             case .transferFunds: return  "Transfer Funds"
             }
         }
-
+        
         var detail: String {
             switch self {
             case .paymentDetails: return "Configure how you want to get paid"
@@ -65,21 +65,21 @@ class ViewController: UITableViewController {
             }
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem.back
-
+        
         let baseUrl = Bundle.main.infoDictionary!["BASE_URL"] as! String
         let userToken = Bundle.main.infoDictionary!["USER_TOKEN"] as! String
-
+        
         createTransferMethodObserver()
         removeTransferMethodObserver()
-
+        
         // Setup
-        HyperwalletUI.setup(IntegratorAuthenticationProvider(IntegratorAuthenticationProvider.baseUrl, IntegratorAuthenticationProvider.userToken))
+        HyperwalletUI.setup(IntegratorAuthenticationProvider(baseUrl, userToken))
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.item {
         case 0:
@@ -88,16 +88,16 @@ class ViewController: UITableViewController {
             cell.emailLabel.text = "johndoe@domain.com"
             cell.nameLabel.text = "John Doe"
             cell.phoneLabel.text = "+1 123-122-3213"
-
+            
             cell.nameLabel.textColor = Theme.Label.subTitleColor
             cell.emailLabel.textColor = Theme.Label.subTitleColor
             cell.phoneLabel.textColor = Theme.Label.subTitleColor
             cell.iconLabel.font = UIFont(name: "icomoon", size: 51)
             cell.iconLabel.text = "\u{E023}"
             cell.iconLabel.textColor = Theme.Label.subTitleColor
-
+            
             return cell
-
+            
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
                 as! HeadlineTableViewCell
@@ -107,39 +107,39 @@ class ViewController: UITableViewController {
                 cell.headlineTextLabel?.text = example.title
                 cell.headlineTitleLabel?.text = example.detail
             }
-
+            
             return cell
         }
     }
-
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.item {
         case 0:
             return 120.0
-
+            
         default:
             return 80
         }
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Example.count
     }
-
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let selectionIndexPath = self.tableView.indexPathForSelectedRow {
             self.tableView.deselectRow(at: selectionIndexPath, animated: false)
         }
-
+        
         guard let example = Example(rawValue: indexPath.item) else {
             return
         }
-
+        
         switch example {
         case .listTransferMethod:
             let viewController = HyperwalletUI.shared.listTransferMethodViewController()
             navigationController?.pushViewController(viewController, animated: true)
-
+            
         case .addTransferMethod:
             let viewController = HyperwalletUI.shared.selectTransferMethodTypeViewController()
             viewController.createTransferMethodHandler = {
@@ -147,31 +147,31 @@ class ViewController: UITableViewController {
                 self.didCreateTransferMethod(transferMethod: transferMethod)
             }
             navigationController?.pushViewController(viewController, animated: true)
-
+            
         default:
             let viewController = HyperwalletUI.shared.listTransferMethodViewController()
             navigationController?.pushViewController(viewController, animated: true)
         }
     }
-
+    
     func createTransferMethodObserver() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(methodOfReceivedNotification(notification:)),
                                                name: Notification.Name.transferMethodAdded,
                                                object: nil)
     }
-
+    
     func removeTransferMethodObserver() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(methodOfReceivedNotification(notification:)),
                                                name: Notification.Name.transferMethodDeactivated,
                                                object: nil)
     }
-
+    
     func didCreateTransferMethod(transferMethod: HyperwalletTransferMethod) {
         print("Transfer method has been created successfully")
     }
-
+    
     @objc
     func methodOfReceivedNotification(notification: Notification) {
         print("Transfer method has been deleted successfully")
