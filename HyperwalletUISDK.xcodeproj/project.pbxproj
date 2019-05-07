@@ -117,7 +117,7 @@
 		DBCA388B225E8BAA00CD4137 /* WidgetFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3853225E8BAA00CD4137 /* WidgetFactory.swift */; };
 		DBCA388C225E8BAA00CD4137 /* TextWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3854225E8BAA00CD4137 /* TextWidget.swift */; };
 		DBCA388E225E8BAA00CD4137 /* AbstractWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3857225E8BAA00CD4137 /* AbstractWidget.swift */; };
-		DBCA388F225E8BAA00CD4137 /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3859225E8BAA00CD4137 /* PickerView.swift */; };
+		DBCA388F225E8BAA00CD4137 /* ToolbarPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3859225E8BAA00CD4137 /* ToolbarPickerView.swift */; };
 		DBCA3890225E8BAA00CD4137 /* MonthYearPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA385A225E8BAA00CD4137 /* MonthYearPicker.swift */; };
 		DBCA3891225E8BAA00CD4137 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA385C225E8BAA00CD4137 /* ErrorView.swift */; };
 		DBFB61462261E44C00C4A8AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBFB61452261E44C00C4A8AA /* Assets.xcassets */; };
@@ -274,7 +274,7 @@
 		DBCA3853225E8BAA00CD4137 /* WidgetFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetFactory.swift; sourceTree = "<group>"; };
 		DBCA3854225E8BAA00CD4137 /* TextWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextWidget.swift; sourceTree = "<group>"; };
 		DBCA3857225E8BAA00CD4137 /* AbstractWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractWidget.swift; sourceTree = "<group>"; };
-		DBCA3859225E8BAA00CD4137 /* PickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
+		DBCA3859225E8BAA00CD4137 /* ToolbarPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolbarPickerView.swift; sourceTree = "<group>"; };
 		DBCA385A225E8BAA00CD4137 /* MonthYearPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthYearPicker.swift; sourceTree = "<group>"; };
 		DBCA385C225E8BAA00CD4137 /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		DBD266802261A611002973C3 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -649,7 +649,7 @@
 			isa = PBXGroup;
 			children = (
 				DBCA385A225E8BAA00CD4137 /* MonthYearPicker.swift */,
-				DBCA3859225E8BAA00CD4137 /* PickerView.swift */,
+				DBCA3859225E8BAA00CD4137 /* ToolbarPickerView.swift */,
 			);
 			path = Picker;
 			sourceTree = "<group>";
@@ -966,7 +966,7 @@
 				DB4679C3226113D100E1AF49 /* HyperwalletBundle.swift in Sources */,
 				DBCA3887225E8BAA00CD4137 /* SelectionWidgetCell.swift in Sources */,
 				DBCA3885225E8BAA00CD4137 /* ProcessingView.swift in Sources */,
-				DBCA388F225E8BAA00CD4137 /* PickerView.swift in Sources */,
+				DBCA388F225E8BAA00CD4137 /* ToolbarPickerView.swift in Sources */,
 				DBCA387E225E8BAA00CD4137 /* GenericCell.swift in Sources */,
 				DBCA386A225E8BAA00CD4137 /* SelectTransferMethodTypeCell.swift in Sources */,
 				DBCA388E225E8BAA00CD4137 /* AbstractWidget.swift in Sources */,

@@ -18,16 +18,12 @@
 
 import UIKit
 
-class MonthYearPickerView: PickerView, UIPickerViewDelegate, UIPickerViewDataSource {
-    static let loop = 5
-
+class MonthYearPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSource {
     var month = Calendar.current.component(.month, from: Date())
     var year = Calendar.current.component(.year, from: Date())
 
     var months = [String]()
     var years = [Int]()
-
-    var dateSelectedHandler: ((_ month: Int, _ year: Int) -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -43,22 +39,11 @@ class MonthYearPickerView: PickerView, UIPickerViewDelegate, UIPickerViewDataSou
         setUpMonth()
         setUpYear(add: 10)
 
-        self.tapDoneHandler = setUpTapHandler()
         self.delegate = self
         self.dataSource = self
 
         // pick current month as default month for the picker and place the selected month in the center of picker
-        self.selectRow((MonthYearPickerView.loop / 2) * months.count + month - 1, inComponent: 0, animated: false)
-    }
-
-    private func setUpTapHandler() -> (_ textField: UITextField) -> Void {
-        return {
-            (textField) in
-            let month = self.month
-            let year = String(describing: self.year).suffix(startAt: 2)
-
-            textField.text = String(format: "%02d/%@", month, year) // Sample format 03/21
-        }
+        self.selectRow(month - 1, inComponent: 0, animated: false)
     }
 
     private func setUpMonth() {
@@ -91,7 +76,7 @@ class MonthYearPickerView: PickerView, UIPickerViewDelegate, UIPickerViewDataSou
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch component {
         case 0:
-            return months.count * MonthYearPickerView.loop
+            return months.count
 
         case 1:
             return years.count
@@ -102,7 +87,7 @@ class MonthYearPickerView: PickerView, UIPickerViewDelegate, UIPickerViewDataSou
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        month = selectedRow(inComponent: 0) % months.count + 1
+        month = selectedRow(inComponent: 0) + 1
         year = years[selectedRow(inComponent: 1)]
     }
 }

@@ -19,8 +19,9 @@ import HyperwalletSDK
 import UIKit
 
 /// Represents the expiry date widget.
-class ExpiryDateWidget: TextWidget {
+class ExpiryDateWidget: TextWidget, ToolbarPickerView {
     var pickerView: MonthYearPickerView!
+    var toolbar: UIToolbar!
 
     required init(field: HyperwalletField) {
         super.init(field: field)
@@ -33,18 +34,28 @@ class ExpiryDateWidget: TextWidget {
 
     override func setupLayout(field: HyperwalletField) {
         super.setupLayout(field: field)
-        pickerView = MonthYearPickerView(frame: CGRect(x: 0,
-                                                       y: UIScreen.main.bounds.height - 216,
-                                                       width: UIScreen.main.bounds.width,
-                                                       height: 216))
-        attachPickerView(pickerView: pickerView)
+        setupPickerView()
+        setupToolBar(action: #selector(self.doneButtonTapped))
+        setupTextField()
     }
 
-    private func attachPickerView(pickerView: MonthYearPickerView) {
-        self.pickerView = pickerView
-        pickerView.toolBarDelegate = self
-        textField.inputView = self.pickerView
-        textField.inputAccessoryView = pickerView.toolbar
+    private func setupPickerView() {
+        pickerView = MonthYearPickerView(frame: .zero)
+        pickerView.accessibilityIdentifier = "ExpiryDateWidgetPickerAccessibilityIdentifier"
+    }
+
+    private func setupTextField() {
+        textField.inputView = pickerView
+        textField.inputAccessoryView = toolbar
+    }
+
+    @objc
+    private func doneButtonTapped() {
+        let month = pickerView.month
+        let year = String(describing: pickerView.year).suffix(startAt: 2)
+
+        textField.text = String(format: "%02d/%@", month, year)
+        textField.resignFirstResponder()
     }
 
     /// format the expiryDate to YYYY-MM, which can be accepted by server through REST API call
@@ -56,14 +67,5 @@ class ExpiryDateWidget: TextWidget {
         } else {
             return String(format: "%04d-%02d", pickerView.year, pickerView.month)
         }
-    }
-}
-
-// MARK: - Tap toolbar -
-
-extension ExpiryDateWidget: ToolbarPickerViewDelegate {
-    func didTapDone(_ tapDoneHandler: (_ textField: UITextField) -> Void) {
-        tapDoneHandler(textField)
-        textField.resignFirstResponder()
     }
 }

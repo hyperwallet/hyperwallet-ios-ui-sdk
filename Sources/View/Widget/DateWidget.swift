@@ -19,9 +19,10 @@
 import HyperwalletSDK
 
 /// Represents the date input widget.
-final class DateWidget: TextWidget {
+final class DateWidget: TextWidget, ToolbarPickerView {
+    var toolbar: UIToolbar!
     private var datePicker: UIDatePicker!
-    private var toolbar: UIToolbar!
+
     private static var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -40,7 +41,7 @@ final class DateWidget: TextWidget {
     override func setupLayout(field: HyperwalletField) {
         super.setupLayout(field: field)
         setupDatePicker()
-        setupToolbar()
+        setupToolBar(action: #selector(self.doneButtonTapped))
         setupTextField()
     }
 
@@ -48,28 +49,7 @@ final class DateWidget: TextWidget {
         datePicker = UIDatePicker(frame: .zero)
         datePicker.datePickerMode = .date
         datePicker.addTarget(self, action: #selector(updateTextField), for: .valueChanged)
-
-        datePicker.accessibilityIdentifier = "DateWidgetPicker"
-    }
-
-    private func setupToolbar() {
-        toolbar = UIToolbar()
-        toolbar.barStyle = UIBarStyle.default
-        toolbar.isTranslucent = true
-        toolbar.tintColor = Theme.themeColor
-        toolbar.sizeToFit()
-
-        let doneButton = UIBarButtonItem(title: "done_button_label".localized(),
-                                         style: .plain,
-                                         target: self,
-                                         action: #selector(self.doneButtonTapped))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-
-        toolbar.setItems([spaceButton, doneButton], animated: true)
-        toolbar.isUserInteractionEnabled = true
-
-        doneButton.accessibilityIdentifier = "DateWidgetDoneButton"
-        toolbar.accessibilityIdentifier = "DateWidgetToolbar"
+        datePicker.accessibilityIdentifier = "DateWidgetPickerAccessibilityIdentifier"
     }
 
     private func setupTextField() {
