@@ -13,7 +13,9 @@ class ListTransferMethodPresenterTests: XCTestCase {
     private let transferMethodToken = "trm-123456789"
 
     private lazy var bankAccount: HyperwalletBankAccount = {
-        let bankAccount = HyperwalletBankAccount.Builder(transferMethodCountry: "US", transferMethodCurrency: "USD")
+        let bankAccount = HyperwalletBankAccount.Builder(transferMethodCountry: "US",
+                                                         transferMethodCurrency: "USD",
+                                                         transferMethodProfileType: "INDIVIDUAL")
             .build()
         bankAccount.setField(key: HyperwalletTransferMethod.TransferMethodField.token.rawValue,
                              value: transferMethodToken)
@@ -21,7 +23,9 @@ class ListTransferMethodPresenterTests: XCTestCase {
     }()
 
     private lazy var bankCard: HyperwalletBankCard = {
-        let bankCard = HyperwalletBankCard.Builder(transferMethodCountry: "US", transferMethodCurrency: "USD")
+        let bankCard = HyperwalletBankCard.Builder(transferMethodCountry: "US",
+                                                   transferMethodCurrency: "USD",
+                                                   transferMethodProfileType: "INDIVIDUAL")
             .build()
         bankCard.setField(key: HyperwalletTransferMethod.TransferMethodField.token.rawValue,
                           value: transferMethodToken)
@@ -163,11 +167,16 @@ class ListTransferMethodPresenterTests: XCTestCase {
     }
 
     private func loadMockTransfermethods() {
-        let bankAccount = HyperwalletBankAccount.Builder(transferMethodCountry: "US", transferMethodCurrency: "USD")
+        let bankAccount = HyperwalletBankAccount.Builder(transferMethodCountry: "US",
+                                                         transferMethodCurrency: "USD",
+                                                         transferMethodProfileType: "INDIVIDUAL")
             .build()
         bankAccount.setField(key: "token", value: "trm-123456789")
 
-        let bankCard = HyperwalletBankCard.Builder(transferMethodCountry: "CA", transferMethodCurrency: "CAD").build()
+        let bankCard = HyperwalletBankCard.Builder(transferMethodCountry: "CA",
+                                                   transferMethodCurrency: "CAD",
+                                                   transferMethodProfileType: "INDIVIDUAL")
+            .build()
         bankCard.setField(key: "token", value: "trm-123456789")
         let transferMethods = [bankAccount, bankCard]
         presenter.transferMethods = transferMethods
