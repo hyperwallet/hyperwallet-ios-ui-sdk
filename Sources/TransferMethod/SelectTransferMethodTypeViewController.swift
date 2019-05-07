@@ -37,6 +37,7 @@ public final class SelectTransferMethodTypeViewController: UITableViewController
         super.viewDidLoad()
         title = "add_account_title".localized()
         largeTitle()
+        setViewBackgroundColor()
 
         navigationItem.backBarButtonItem = UIBarButtonItem.back
 

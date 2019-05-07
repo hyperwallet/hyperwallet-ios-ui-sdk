@@ -66,6 +66,7 @@ UISearchResultsUpdating {
         titleDisplayMode(.never)
         extendedLayoutIncludesOpaqueBars = true
         setupTable()
+        setViewBackgroundColor()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -205,9 +206,7 @@ private extension GenericTableViewController {
 
     func setupTable() {
         tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.register(UITableViewHeaderFooterView.self,
-                           forHeaderFooterViewReuseIdentifier: headerReuseId)
-
+        tableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: headerReuseId)
         tableView.tableFooterView = UIView()
         tableView.estimatedRowHeight = Theme.Cell.rowHeight
         tableView.rowHeight = UITableView.automaticDimension

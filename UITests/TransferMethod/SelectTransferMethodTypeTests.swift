@@ -27,20 +27,16 @@ class SelectTransferMethodTypeTests: BaseTests {
     }
 
     private func validateSelectTransferMethodScreen() {
-        var bankAccountDescription: String
-        if #available(iOS 12.0, *) {
-            bankAccountDescription = "Transaction Fees: CAD 2.20\nProcessing Time: 1-3 Business days"
-        } else {
-            bankAccountDescription = "Transaction Fees: CAD 2.20 Processing Time: 1-3 Business days"
-        }
-
         XCTAssertNotNil(app.cells.images)
         XCTAssertTrue(app.navigationBars["Add Account"].exists)
         XCTAssertTrue(app.tables.staticTexts["Canada"].exists)
         XCTAssertTrue(app.tables.staticTexts["CAD"].exists)
         XCTAssertEqual(app.cells.staticTexts["Bank Account"].label, "Bank Account")
-        XCTAssertEqual(app.cells.staticTexts["Transaction Fees: CAD 2.20 Processing Time: 1-3 Business days"].label,
-                       bankAccountDescription)
+        if #available(iOS 12.0, *) {
+            XCTAssert(app.cells.staticTexts["Transaction Fees: CAD 2.20\nProcessing Time: 1-3 Business days"].exists)
+        } else {
+            XCTAssert(app.cells.staticTexts["Transaction Fees: CAD 2.20 Processing Time: 1-3 Business days"].exists)
+        }
 
         XCTAssertTrue(selectTransferMethodType.countrySelect.exists &&
             selectTransferMethodType.navigationBar.exists &&
