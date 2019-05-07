@@ -108,4 +108,17 @@ class AddTransferMethodTests: XCTestCase {
         XCTAssertTrue(app.navigationBars["Add Account"].exists)
         XCTAssertTrue(app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).exists)
     }
+
+    func testAddTransferMethod_displaysElementsOnIndividualProfileTmcResponse() {
+        waitForNonExistence(spinner)
+
+        XCTAssert(addTransferMethod.addTMTableView.staticTexts["Routing Number"].exists)
+        XCTAssert(addTransferMethod.addTMTableView.staticTexts["Account Number"].exists)
+        XCTAssert(addTransferMethod.addTMTableView.staticTexts["Transfer method information"].exists)
+
+        addTransferMethod.accountTypeSelect.tap()
+
+        XCTAssert(app.tables.staticTexts["Checking"].exists)
+        XCTAssert(app.tables.staticTexts["Savings"].exists)
+    }
 }
