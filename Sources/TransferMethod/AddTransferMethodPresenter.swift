@@ -95,7 +95,7 @@ final class AddTransferMethodPresenter {
             else {
                 return
         }
-        var hyperwalletTransferMethod: HyperwalletTransferMethod
+        var hyperwalletTransferMethod = HyperwalletTransferMethod()
         switch transferMethodType {
         case "BANK_ACCOUNT":
             hyperwalletTransferMethod = HyperwalletBankAccount.Builder(transferMethodCountry: country,
@@ -115,11 +115,7 @@ final class AddTransferMethodPresenter {
                 .build()
 
         default:
-            hyperwalletTransferMethod = HyperwalletTransferMethod()
-            hyperwalletTransferMethod.setField(key: "transferMethodCountry", value: country)
-            hyperwalletTransferMethod.setField(key: "transferMethodCurrency", value: currency)
-            hyperwalletTransferMethod.setField(key: "type", value: transferMethodType)
-            hyperwalletTransferMethod.setField(key: "profileType", value: profileType)
+            return
         }
         for field in view.fieldValues() {
             hyperwalletTransferMethod.setField(key: field.name, value: field.value)
