@@ -111,6 +111,31 @@ class AddTransferMethodPresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isNotificationSent, "The notification should be sent")
     }
 
+    func testCreateTransferMethod_createPayPalAccount() {
+        presenter = AddTransferMethodPresenter(mockView, "US", "USD", "INDIVIDUAL", "PAYPAL_ACCOUNT")
+        let url = String(format: "%@/paypal-accounts", HyperwalletTestHelper.userRestURL)
+        let response = HyperwalletTestHelper.okHTTPResponse(for: "PayPalAccountResponse")
+        let request = HyperwalletTestHelper.buildPostResquest(baseUrl: url, response)
+        HyperwalletTestHelper.setUpMockServer(request: request)
+
+        // Add fields to the form
+        mockView.mockFieldValuesReturnResult.append((name: "email", value: "carroll.lynn@byteme.com"))
+        mockView.mockFieldStatusReturnResult.append(true)
+
+        // press the create transfer method button
+        let expectation = self.expectation(description: "Create bank account completed")
+        mockView.expectation = expectation
+
+        presenter.createTransferMethod()
+
+        wait(for: [expectation], timeout: 1)
+
+        // Then
+        XCTAssertFalse(mockView.isShowErrorPerformed, "The showError should not be performed")
+        XCTAssertTrue(mockView.isShowConfirmationPerformed, "The showConfirmation should be performed")
+        XCTAssertTrue(mockView.isNotificationSent, "The notification should be sent")
+    }
+
     func testCreateTransferMethod_failure() {
         // Given
         let url = String(format: "%@/bank-accounts", HyperwalletTestHelper.userRestURL)

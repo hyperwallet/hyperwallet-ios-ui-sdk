@@ -34,6 +34,7 @@
 		9807B76D226442C60028A280 /* UnexpectedErrorResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFB61492261E84C00C4A8AA /* UnexpectedErrorResponse.json */; };
 		98220B8C2265793700055E18 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 98220B8B2265793700055E18 /* README.md */; };
 		98541F152273D72C007D4238 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 98541F142273D72C007D4238 /* CHANGELOG.md */; };
+		98F63E62228255390090101D /* PayPalAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F63E61228255390090101D /* PayPalAccountResponse.json */; };
 		C358A9A52272644000E5AE47 /* AddTransferMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = C358A9A22272644000E5AE47 /* AddTransferMethod.swift */; };
 		C358A9A62272644000E5AE47 /* ListTransferMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = C358A9A32272644000E5AE47 /* ListTransferMethods.swift */; };
 		C358A9A72272644000E5AE47 /* SelectTransferMethodType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C358A9A42272644000E5AE47 /* SelectTransferMethodType.swift */; };
@@ -182,6 +183,7 @@
 		078B45802273A441005B0248 /* HyperwalletUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletUI.swift; sourceTree = "<group>"; };
 		98220B8B2265793700055E18 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		98541F142273D72C007D4238 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		98F63E61228255390090101D /* PayPalAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PayPalAccountResponse.json; sourceTree = "<group>"; };
 		C358A9A22272644000E5AE47 /* AddTransferMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethod.swift; sourceTree = "<group>"; };
 		C358A9A32272644000E5AE47 /* ListTransferMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTransferMethods.swift; sourceTree = "<group>"; };
 		C358A9A42272644000E5AE47 /* SelectTransferMethodType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectTransferMethodType.swift; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 				078B456D2273895C005B0248 /* TransferMethodConfigurationFieldsResponse.json */,
 				078B456E2273895C005B0248 /* TransferMethodConfigurationKeysResponse.json */,
 				078B45682273895C005B0248 /* TransferMethodMockedSuccessResponse.json */,
+				98F63E61228255390090101D /* PayPalAccountResponse.json */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -872,6 +875,7 @@
 				DBCA385E225E8BAA00CD4137 /* CountryCurrencyCell.xib in Resources */,
 				DBCA3867225E8BAA00CD4137 /* ListTransferMethodViewController.xib in Resources */,
 				DBCA386D225E8BAA00CD4137 /* ListTransferMethodTableViewCell.xib in Resources */,
+				98F63E62228255390090101D /* PayPalAccountResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

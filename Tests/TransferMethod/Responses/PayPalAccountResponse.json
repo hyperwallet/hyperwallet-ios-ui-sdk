@@ -1,0 +1,17 @@
+{
+    "token": "trm-123",
+    "type": "PAYPAL_ACCOUNT",
+    "status": "ACTIVATED",
+    "createdOn": "2019-05-08T00:09:06",
+    "transferMethodCountry": "US",
+    "transferMethodCurrency": "USD",
+    "email": "carroll.lynn@byteme.com",
+    "links": [
+        {
+            "params": {
+                "rel": "self"
+            },
+            "href": "https://localhost/rest/v3/users/usr-123/paypal-accounts/trm-123"
+        }
+    ]
+}

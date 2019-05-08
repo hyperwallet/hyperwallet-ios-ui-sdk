@@ -185,12 +185,13 @@ extension AddTransferMethodViewController {
                 fatalError("can't dequeue footer view")
         }
         footerView.error = presenter.sections[section].errorMessage
-        footerView.info = presenter.sections[section].footer
+        //footerView.info = presenter.sections[section].footer
         return footerView
     }
 
     override public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if presenter.sections[section].footer == nil && presenter.sections[section].errorMessage == nil {
+        if //presenter.sections[section].footer == nil &&
+            presenter.sections[section].errorMessage == nil {
             return emptyFooterHeight
         }
         return UITableView.automaticDimension
@@ -198,7 +199,8 @@ extension AddTransferMethodViewController {
 
     override public func tableView(_ tableView: UITableView,
                                    estimatedHeightForFooterInSection section: Int) -> CGFloat {
-        if presenter.sections[section].footer == nil && presenter.sections[section].errorMessage == nil {
+        if //presenter.sections[section].footer == nil &&
+            presenter.sections[section].errorMessage == nil {
             return emptyFooterHeight
         }
         return defaultFooterHeight
@@ -210,7 +212,6 @@ extension AddTransferMethodViewController {
         if let footerView = view as? AddTransferMethodFooter {
             updateFooterView(footerView,
                              for: section,
-                             description: presenter.sections[section].footer ?? "",
                              errorMessage: presenter.sections[section].errorMessage ?? "")
         }
     }
@@ -275,7 +276,6 @@ extension AddTransferMethodViewController: AddTransferMethodView {
                     // section is visible, update footer
                     updateFooterView(footerView,
                                      for: sectionIndex,
-                                     description: presenter.sections[sectionIndex].footer ?? "",
                                      errorMessage: section.errorMessage ?? "")
                 }
             }
@@ -379,7 +379,7 @@ extension AddTransferMethodViewController: AddTransferMethodView {
 
     private func updateFooterView(_ footerView: AddTransferMethodFooter,
                                   for section: Int,
-                                  description: String,
+                                  description: String? = "",
                                   errorMessage: String) {
         if footerView.error != presenter.sections[section].errorMessage {
             UIView.setAnimationsEnabled(false)

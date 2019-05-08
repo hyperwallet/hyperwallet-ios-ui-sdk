@@ -61,7 +61,7 @@
 "paper_check" = "Paper Check";
 "paper_card" = "Paper Card";
 "wire_account" = "Wire Account";
-"paypal_account" = "Paypal Account";
+"paypal_account" = "PayPal";
 
 //Select Transfer Method View
 "select_a_country_message" = "Select a country";
