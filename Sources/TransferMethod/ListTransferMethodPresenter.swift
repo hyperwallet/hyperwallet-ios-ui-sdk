@@ -121,8 +121,8 @@ final class ListTransferMethodPresenter {
 
     private func deactivatePayPalAccount(_ token: String) {
         Hyperwallet.shared.deactivatePayPalAccount(transferMethodToken: token,
-                                              notes: "Deactivating the PayPal Account",
-                                              completion: deactivateTransferMethodHandler())
+                                                   notes: "Deactivating the PayPal Account",
+                                                   completion: deactivateTransferMethodHandler())
     }
 
     private func deactivateTransferMethodHandler()
