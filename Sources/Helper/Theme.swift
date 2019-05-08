@@ -72,6 +72,8 @@ public struct Theme {
     public struct Text {
         /// The text primary color
         public static var color = UIColor.black
+        /// The text disabled color
+        public static var disabledColor = UIColor(rgb: 0x8e8e93)
     }
 
     /// Representation of all customizable visual style property for `UISearchBar`.
