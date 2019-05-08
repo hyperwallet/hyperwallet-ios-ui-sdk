@@ -119,6 +119,8 @@ public class ThemeManager {
         let proxy = SelectTransferMethodTypeCell.appearance()
         proxy.titleLabelFont = Theme.Label.bodyFontMedium
         proxy.titleLabelColor = Theme.Label.color
+        proxy.subTitleLabelFont = Theme.Label.captionOne
+        proxy.subTitleLabelColor = Theme.Label.subTitleColor
     }
 
     private static let registerFonts: Void = {

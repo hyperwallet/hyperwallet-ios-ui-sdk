@@ -58,12 +58,12 @@ final class SelectTransferMethodTypeCell: UITableViewCell {
         set { self.textLabel?.font = newValue }
     }
 
-    @objc dynamic var descriptionLabelColor: UIColor! {
+    @objc dynamic var subTitleLabelColor: UIColor! {
         get { return self.detailTextLabel?.textColor }
         set { self.detailTextLabel?.textColor = newValue }
     }
 
-    @objc dynamic var descriptionLabelFont: UIFont! {
+    @objc dynamic var subTitleLabelFont: UIFont! {
         get { return self.detailTextLabel?.font }
         set { self.detailTextLabel?.font = newValue }
     }
@@ -77,14 +77,12 @@ extension SelectTransferMethodTypeCell {
         detailTextLabel?.numberOfLines = 0
         detailTextLabel?.lineBreakMode = .byWordWrapping
         detailTextLabel?.attributedText = configuration.feesProcessingTime
-        let iconSize = CGSize(width: Theme.Icon.width, height: Theme.Icon.height)
-
         let image = UIImage.fontIcon(configuration.transferMethodIconFont,
-                                     iconSize,
+                                     Theme.Icon.frame,
                                      CGFloat(Theme.Icon.size),
                                      Theme.Icon.color,
                                      Theme.Icon.backgroundColor)
         imageView?.image = image
-        imageView?.layer.cornerRadius = CGFloat(Theme.Icon.width / 2)
+        imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
     }
 }
