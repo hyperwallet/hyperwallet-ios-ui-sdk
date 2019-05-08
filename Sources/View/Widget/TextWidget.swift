@@ -68,6 +68,7 @@ class TextWidget: AbstractWidget {
         textField.placeholder = "\(field.placeholder ?? "")"
         textField.delegate = self
         textField.accessibilityIdentifier = field.name
+        textField.text = field.value
         self.addArrangedSubview(textField)
     }
 }
