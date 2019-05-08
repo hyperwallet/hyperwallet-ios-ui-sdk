@@ -22,6 +22,10 @@ class SelectTransferMethodTypeTests: BaseTests {
         waitForNonExistence(spinner)
     }
 
+    override func stubGetUserDetailsResponse() -> String {
+        return "UserIndividualCountryCanadaResponse"
+    }
+
     private func validateSelectTransferMethodScreen() {
         var bankAccountDescription: String
         if #available(iOS 12.0, *) {
