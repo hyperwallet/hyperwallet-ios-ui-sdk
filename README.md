@@ -163,7 +163,7 @@ The form fields are based on the country, currency, user's profile type, and tra
 let addTransferMethodViewController = HyperwalletUI.shared.addTransferMethodViewController("US",             // The 2 letter ISO 3166-1 country code.
                                                                                            "USD",            // The 3 letter ISO 4217-1 currency code.
                                                                                            "INDIVIDUAL",     // The profile type. Possible values - INDIVIDUAL, BUSINESS.
-                                                                                           "BANK_ACCOUNT")   // The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD.
+                                                                                           "BANK_ACCOUNT")   // The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD, PAYPAL_ACCOUNT
 
 // Optional - The completion handler will be performed after a new transfer method has been created.
 addTransferMethodViewController.createTransferMethodHandler = { transferMethod in
