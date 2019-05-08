@@ -185,13 +185,11 @@ extension AddTransferMethodViewController {
                 fatalError("can't dequeue footer view")
         }
         footerView.error = presenter.sections[section].errorMessage
-        //footerView.info = presenter.sections[section].footer
         return footerView
     }
 
     override public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if //presenter.sections[section].footer == nil &&
-            presenter.sections[section].errorMessage == nil {
+        if presenter.sections[section].errorMessage == nil {
             return emptyFooterHeight
         }
         return UITableView.automaticDimension
@@ -199,8 +197,7 @@ extension AddTransferMethodViewController {
 
     override public func tableView(_ tableView: UITableView,
                                    estimatedHeightForFooterInSection section: Int) -> CGFloat {
-        if //presenter.sections[section].footer == nil &&
-            presenter.sections[section].errorMessage == nil {
+        if presenter.sections[section].errorMessage == nil {
             return emptyFooterHeight
         }
         return defaultFooterHeight
