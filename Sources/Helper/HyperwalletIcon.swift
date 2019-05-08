@@ -29,13 +29,17 @@ final class HyperwalletIcon {
             return .bank
         case "BANK_CARD":
             return .debitCredit
-        case "PAPER_CARD":
+        case "PREPAID_CARD":
             return .prepaidCard
         case "PAPER_CHECK":
             return .check
+        case "PAYPAL_ACCOUNT":
+            return .paypal
+        case "WIRE_ACCOUNT":
+            return .wire
 
         default:
-            return .wire
+            return .westernUnion
         }
     }
 }

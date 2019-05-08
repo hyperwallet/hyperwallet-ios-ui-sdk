@@ -109,6 +109,11 @@ final class AddTransferMethodPresenter {
                                                                     transferMethodProfileType: profileType)
                 .build()
 
+        case "PAYPAL_ACCOUNT":
+            hyperwalletTransferMethod = HyperwalletPayPalAccount.Builder(transferMethodCountry: country,
+                                                                         transferMethodCurrency: currency)
+                .build()
+
         default:
             hyperwalletTransferMethod = HyperwalletTransferMethod()
             hyperwalletTransferMethod.setField(key: "transferMethodCountry", value: country)
@@ -130,6 +135,9 @@ final class AddTransferMethodPresenter {
         } else if let bankCard = transferMethod as? HyperwalletBankCard {
             Hyperwallet.shared.createBankCard(account: bankCard,
                                               completion: createTransferMethodHandler())
+        } else if let payPalAccount = transferMethod as? HyperwalletPayPalAccount {
+            Hyperwallet.shared.createPayPalAccount(account: payPalAccount,
+                                                   completion: createTransferMethodHandler())
         }
     }
 
