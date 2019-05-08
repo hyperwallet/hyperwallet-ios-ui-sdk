@@ -46,20 +46,20 @@ extension String {
 
 extension NSMutableAttributedString {
     func append(value: String, font: UIFont, color: UIColor) {
-        append(
-            NSAttributedString(string: value,
-                               attributes: [
-                                .font: font,
-                                .foregroundColor: color
-                               ]))
+        append(value: value, attributes: [
+            .font: font,
+            .foregroundColor: color
+        ])
     }
 
     func append(value: String, color: UIColor) {
+        append(value: value, attributes: [.foregroundColor: color] )
+    }
+
+    func append(value: String, attributes: [NSAttributedString.Key: Any]?) {
         append(
             NSAttributedString(string: value,
-                               attributes: [
-                                .foregroundColor: color
-                               ]))
+                               attributes: attributes))
     }
 }
 

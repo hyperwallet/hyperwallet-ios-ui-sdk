@@ -76,15 +76,13 @@ extension ListTransferMethodTableViewCell {
                                                             .lastFourDigitAccountNumber)
         detailTextLabel?.numberOfLines = 0
         detailTextLabel?.lineBreakMode = .byWordWrapping
-        let iconSize = CGSize(width: Theme.Icon.width, height: Theme.Icon.height)
-
         let icon = UIImage.fontIcon(configuration.transferMethodIconFont,
-                                    iconSize,
+                                    Theme.Icon.frame,
                                     CGFloat(Theme.Icon.size),
                                     Theme.Icon.color,
                                     Theme.Icon.backgroundColor)
         imageView?.image = icon
-        imageView?.layer.cornerRadius = CGFloat(Theme.Icon.width / 2)
+        imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
     }
 
     func formatSubtitle(transferMethodCountry: String, lastFourDigitAccountNumber: String?) -> NSAttributedString {

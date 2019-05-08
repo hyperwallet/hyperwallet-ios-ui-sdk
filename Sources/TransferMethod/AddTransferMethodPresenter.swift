@@ -240,8 +240,6 @@ final class AddTransferMethodPresenter {
     }
 
     func focusField(in section: AddTransferMethodSectionData) {
-        if section.containsFocusedField {
-            section.fieldToBeFocused?.focus()
-        }
+        section.fieldToBeFocused?.focus()
     }
 }
