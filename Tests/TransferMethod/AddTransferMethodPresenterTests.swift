@@ -164,13 +164,6 @@ class AddTransferMethodPresenterTests: XCTestCase {
 
     func testCreateTransferMethod_inlineFailure() {
         // Given
-        let url = String(format: "%@/bank-accounts", HyperwalletTestHelper.userRestURL)
-        let response = HyperwalletTestHelper
-            .badRequestHTTPResponse(for: "BankAccountErrorResponseWithMissingFieldAndValidationError")
-        let request = HyperwalletTestHelper.buildPostResquest(baseUrl: url, response)
-        HyperwalletTestHelper.setUpMockServer(request: request)
-
-        mockView.mockFieldValuesReturnResult.append((name: "bankId", value: ""))
         mockView.mockFieldStatusReturnResult.append(false)
 
         // When
@@ -178,6 +171,23 @@ class AddTransferMethodPresenterTests: XCTestCase {
 
         // Then
         XCTAssertTrue(mockView.areAllFieldsValidPerformed, "All fields validation should be performed")
+        XCTAssertFalse(mockView.isFieldValuesPerformed, "The FieldValues should not be performed")
+        XCTAssertFalse(mockView.isShowErrorPerformed, "The showError should not be performed")
+        XCTAssertFalse(mockView.isShowConfirmationPerformed, "The showConfirmation should not be performed")
+        XCTAssertFalse(mockView.isNotificationSent, "The notification should not be sent")
+    }
+
+    func testCreateTransferMethod_notSupportedTransferMethodType() {
+        // Given
+        presenter = AddTransferMethodPresenter(mockView, "US", "USD", "INDIVIDUAL", "PREPAID_CARD")
+        mockView.mockFieldStatusReturnResult.append(true)
+
+        // When
+        presenter.createTransferMethod()
+
+        // Then
+        XCTAssertTrue(mockView.areAllFieldsValidPerformed, "All fields validation should be performed")
+        XCTAssertTrue(mockView.isTransferMethodSupported, "Transfer Method is not supported")
         XCTAssertFalse(mockView.isFieldValuesPerformed, "The FieldValues should not be performed")
         XCTAssertFalse(mockView.isShowErrorPerformed, "The showError should not be performed")
         XCTAssertFalse(mockView.isShowConfirmationPerformed, "The showConfirmation should not be performed")
@@ -208,6 +218,7 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
     var isDisplayErrorMessageInFooterPerformed = false
     var isFieldStatusPerformed = false
     var isFieldValuesPerformed = false
+    var isTransferMethodSupported = false
     var areAllFieldsValidPerformed = false
 
     var mockFieldStatusReturnResult = [Bool]()
@@ -231,6 +242,7 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
         isDisplayErrorMessageInFooterPerformed = false
         isFieldStatusPerformed = false
         isFieldValuesPerformed = false
+        isTransferMethodSupported = false
         areAllFieldsValidPerformed = false
 
         mockFieldStatusReturnResult = [Bool]()
@@ -291,6 +303,10 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
         self.transferMethodTypeDetails = transferMethodTypeDetail
         isShowTransferMethodFieldsPerformed = true
         expectation?.fulfill()
+    }
+
+    func showError(title: String, message: String) {
+        isTransferMethodSupported = true
     }
 
     func showError(_ error: HyperwalletErrorType, _ handler: (() -> Void)?) {
