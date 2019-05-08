@@ -69,7 +69,7 @@ class TextWidget: AbstractWidget {
         let isEditable = field.isEditable ?? true
         textField.isUserInteractionEnabled = isEditable
         textField.clearButtonMode = isEditable ? .always : .never
-        textField.textColor = isEditable ? Theme.Text.color : Theme.Label.textColor
+        textField.textColor = isEditable ? Theme.Text.color : Theme.Text.disabledColor
         self.addArrangedSubview(textField)
     }
 }
