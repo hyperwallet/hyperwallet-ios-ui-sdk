@@ -51,11 +51,13 @@ public final class SelectTransferMethodTypeViewController: UITableViewController
 
     // MARK: - Setup Layout
     private func setupTransferMethodTypeTableView() {
-        tableView = UITableView(frame: .zero, style: .grouped)
+        tableView = UITableView(frame: .zero, style: .plain)
         tableView.accessibilityIdentifier = "transferMethodTableView"
-        tableView.tableFooterView = UIView()
         tableView.register(SelectTransferMethodTypeCell.self,
                            forCellReuseIdentifier: SelectTransferMethodTypeCell.reuseId)
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 0.5))
+        footerView.backgroundColor = tableView.separatorColor
+        tableView.tableFooterView = footerView
     }
 
     func setupCountryCurrencyTableView() {
@@ -75,11 +77,21 @@ extension SelectTransferMethodTypeViewController {
         return presenter.transferMethodTypesCount
     }
 
+    override public func numberOfSections(in tableView: UITableView) -> Int {
+        return presenter.transferMethodTypesCount > 0 ? 1:0
+    }
+
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SelectTransferMethodTypeCell.reuseId, for: indexPath)
         if let transferMethodCell = cell as? SelectTransferMethodTypeCell {
             transferMethodCell.configure(configuration: presenter.getCellConfiguration(for: indexPath.row))
         }
+//
+//        if indexPath.row == presenter.transferMethodTypesCount - 1 {
+//            cell.separatorInset = .zero
+//        } else {
+//            cell.separatorInset = .init(top: 0, left: cell.textLabel?.frame.origin.x ?? 0, bottom: 0, right: 0)
+//        }
 
         return cell
     }
