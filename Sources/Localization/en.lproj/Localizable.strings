@@ -79,6 +79,10 @@
 "information_header"="Transfer method information"; 
 "account_information_title" = "Account Information";
 
+// expiry date format - arguments order is %1$-month, %2$-year(two last digits)
+"expiry_date_format" = "%1$02d/%2$02d";
+"date_format" = "yyyy-MM-dd";
+
 // Account types
 "CHECKING" = "Checking";
 "SAVINGS" = "Savings";
