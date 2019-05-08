@@ -79,12 +79,12 @@ extension SelectTransferMethodTypeCell {
         detailTextLabel?.attributedText = configuration.feesProcessingTime
         let iconSize = CGSize(width: Theme.Icon.width, height: Theme.Icon.height)
 
-        let icon = UIImage.fontIcon(configuration.transferMethodIconFont,
-                                    iconSize,
-                                    CGFloat(Theme.Icon.size),
-                                    Theme.Icon.color,
-                                    Theme.Icon.backgroundColor)
-        imageView?.image = icon
+        let image = UIImage.fontIcon(configuration.transferMethodIconFont,
+                                     iconSize,
+                                     CGFloat(Theme.Icon.size),
+                                     Theme.Icon.color,
+                                     Theme.Icon.backgroundColor)
+        imageView?.image = image
         imageView?.layer.cornerRadius = CGFloat(Theme.Icon.width / 2)
     }
 }

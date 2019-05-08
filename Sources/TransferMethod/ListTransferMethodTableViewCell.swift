@@ -21,7 +21,7 @@ import UIKit
 struct ListTransferMethodCellConfiguration {
     let transferMethodType: String
     let transferMethodCountry: String
-    let transferMethodExpiryDate: String
+    let lastFourDigitAccountNumber: String?
     let transferMethodIconFont: String
 }
 
@@ -72,7 +72,8 @@ extension ListTransferMethodTableViewCell {
     func configure(configuration: ListTransferMethodCellConfiguration) {
         textLabel?.text = configuration.transferMethodType
         detailTextLabel?.attributedText = formatSubtitle(transferMethodCountry: configuration.transferMethodCountry,
-                                                         expiryDate: configuration.transferMethodExpiryDate)
+                                                         lastFourDigitAccountNumber: configuration
+                                                            .lastFourDigitAccountNumber)
         detailTextLabel?.numberOfLines = 0
         detailTextLabel?.lineBreakMode = .byWordWrapping
         let iconSize = CGSize(width: Theme.Icon.width, height: Theme.Icon.height)
@@ -86,12 +87,14 @@ extension ListTransferMethodTableViewCell {
         imageView?.layer.cornerRadius = CGFloat(Theme.Icon.width / 2)
     }
 
-    func formatSubtitle(transferMethodCountry: String, expiryDate: String) -> NSAttributedString {
+    func formatSubtitle(transferMethodCountry: String, lastFourDigitAccountNumber: String?) -> NSAttributedString {
         let attributedText = NSMutableAttributedString()
         let font = Theme.Label.captionOne
         let color = Theme.Label.subTitleColor
         attributedText.append(value: String(format: "%@\n", transferMethodCountry), font: font, color: color)
-        attributedText.append(value: expiryDate, font: font, color: color)
+        if let lastFourDigitAccountNumber = lastFourDigitAccountNumber {
+            attributedText.append(value: lastFourDigitAccountNumber, font: font, color: color)
+        }
 
         return attributedText
     }

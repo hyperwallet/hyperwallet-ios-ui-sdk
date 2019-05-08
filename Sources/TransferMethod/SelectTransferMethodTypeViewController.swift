@@ -86,12 +86,6 @@ extension SelectTransferMethodTypeViewController {
         if let transferMethodCell = cell as? SelectTransferMethodTypeCell {
             transferMethodCell.configure(configuration: presenter.getCellConfiguration(for: indexPath.row))
         }
-//
-//        if indexPath.row == presenter.transferMethodTypesCount - 1 {
-//            cell.separatorInset = .zero
-//        } else {
-//            cell.separatorInset = .init(top: 0, left: cell.textLabel?.frame.origin.x ?? 0, bottom: 0, right: 0)
-//        }
 
         return cell
     }
