@@ -25,18 +25,9 @@ final class DateWidget: TextWidget {
 
     private static var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateFormat = "date_format".localized()
         return formatter
     }()
-
-    required init(field: HyperwalletField) {
-        super.init(field: field)
-        setupLayout(field: field)
-    }
-
-    required init(coder: NSCoder) {
-        super.init(coder: coder)
-    }
 
     override func setupLayout(field: HyperwalletField) {
         super.setupLayout(field: field)
@@ -48,7 +39,6 @@ final class DateWidget: TextWidget {
     private func setupDatePicker() {
         datePicker = UIDatePicker(frame: .zero)
         datePicker.datePickerMode = .date
-        datePicker.addTarget(self, action: #selector(updateTextField), for: .valueChanged)
         datePicker.accessibilityIdentifier = "DateWidgetPickerAccessibilityIdentifier"
     }
 
@@ -69,10 +59,12 @@ final class DateWidget: TextWidget {
         textField.resignFirstResponder()
     }
 
-//    override func textFieldDidBeginEditing(_ textField: UITextField) {
-//        super.textFieldDidBeginEditing(textField)
-//        if let dateFromText = DateWidget.dateFormatter.date(from: value()) {
-//            datePicker.date = dateFromText
-//        }
-//    }
+    override func textFieldDidBeginEditing(_ textField: UITextField) {
+        super.textFieldDidBeginEditing(textField)
+        if let dateFromText = DateWidget.dateFormatter.date(from: value()) {
+            datePicker.date = dateFromText
+        } else {
+            datePicker.date = Date()
+        }
+    }
 }

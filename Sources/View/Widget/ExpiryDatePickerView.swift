@@ -18,26 +18,31 @@
 
 import UIKit
 
-class ExpiryDatePickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSource {
-    var month = Calendar.current.component(.month, from: Date())
-    var year = Calendar.current.component(.year, from: Date())
+final class ExpiryDatePickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSource {
+    var month: Int!
+    var year: Int!
 
-    var months = [String]()
-    var years = [Int]()
+    private var months = [String]()
+    private var years = [Int]()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.setUp()
+        self.setup()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.setUp()
+        self.setup()
     }
 
-    func setUp() {
-        setUpMonth()
-        setUpYear(add: 10)
+    private func setup() {
+        let currentDate = Date()
+        let currentCalendar = Calendar.current
+        month = currentCalendar.component(.month, from: currentDate)
+        year = currentCalendar.component(.year, from: currentDate)
+
+        setupMonths()
+        setupYears(add: 10)
 
         self.delegate = self
         self.dataSource = self
@@ -46,11 +51,11 @@ class ExpiryDatePickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewData
         self.selectRow(month - 1, inComponent: 0, animated: false)
     }
 
-    private func setUpMonth() {
+    private func setupMonths() {
         months = DateFormatter().monthSymbols.map({ $0.capitalized })
     }
 
-    private func setUpYear(add: Int) {
+    private func setupYears(add: Int) {
         years = Array(year...year + add)
     }
 

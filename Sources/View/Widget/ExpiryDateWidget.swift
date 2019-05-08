@@ -19,18 +19,9 @@ import HyperwalletSDK
 import UIKit
 
 /// Represents the expiry date widget.
-class ExpiryDateWidget: TextWidget {
+final class ExpiryDateWidget: TextWidget {
     var pickerView: ExpiryDatePickerView!
     var toolbar = UIToolbar()
-
-    required init(field: HyperwalletField) {
-        super.init(field: field)
-        setupLayout(field: field)
-    }
-
-    required init(coder: NSCoder) {
-        super.init(coder: coder)
-    }
 
     override func setupLayout(field: HyperwalletField) {
         super.setupLayout(field: field)
@@ -51,10 +42,11 @@ class ExpiryDateWidget: TextWidget {
 
     @objc
     private func doneButtonTapped() {
-        let month = pickerView.month
-        let year = String(describing: pickerView.year).suffix(startAt: 2)
-
-        textField.text = String(format: "%02d/%@", month, year)
+        guard let month = pickerView.month, let year = pickerView.year
+            else {
+                return
+        }
+        textField.text = String(format: "expiry_date_format".localized(), month, year % 100)
         textField.resignFirstResponder()
     }
 
