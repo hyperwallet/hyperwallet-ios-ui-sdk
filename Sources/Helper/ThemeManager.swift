@@ -49,7 +49,7 @@ public class ThemeManager {
         searchBar.searchBarStyle = UISearchBar.Style.minimal
         searchBar.barStyle = .black
         searchBar.backgroundColor = Theme.themeColor
-
+        searchBar.tintColor = Theme.tintColor
         let backgroundImage = UIImage.createBackgroundPattern(
             color: Theme.SearchBar.textFieldBackgroundColor,
             size: CGSize(width: 36, height: 36),

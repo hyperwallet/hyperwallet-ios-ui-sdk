@@ -26,7 +26,6 @@ extension UIImage {
     ///   - name: The preferred `HyperwalletIconContent`.
     ///   - iconSize: The image size
     ///   - fontSize: The font size of the icon
-    ///   - size: The image size.
     ///   - textColor: The text color (optional).
     ///   - backgroundColor: The background color (optional).
     /// - returns: A string that will appear as icon
