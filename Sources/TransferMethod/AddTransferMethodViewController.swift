@@ -354,6 +354,10 @@ extension AddTransferMethodViewController: AddTransferMethodView {
         self.tableView.reloadData()
     }
 
+    func showError( title: String, message: String) {
+        HyperwalletUtilViews.showAlert(self, title: title, message: message, actions: UIAlertAction.close(self))
+    }
+
     func showError(_ error: HyperwalletErrorType, _ handler: (() -> Void)?) {
         let errorView = ErrorView(viewController: self, error: error)
         errorView.show(handler)

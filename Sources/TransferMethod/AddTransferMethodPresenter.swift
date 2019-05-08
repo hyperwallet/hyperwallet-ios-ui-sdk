@@ -26,6 +26,7 @@ protocol AddTransferMethodView: class {
     func areAllFieldsValid() -> Bool
     func notifyTransferMethodAdded(_ transferMethod: HyperwalletTransferMethod)
     func showConfirmation(handler: @escaping () -> Void)
+    func showError( title: String, message: String)
     func showError(_ error: HyperwalletErrorType, _ handler: (() -> Void)?)
     func showBusinessError(_ error: HyperwalletErrorType, _ handler: @escaping () -> Void)
     func showLoading()
@@ -115,8 +116,10 @@ final class AddTransferMethodPresenter {
                 .build()
 
         default:
+            view.showError(title: "error".localized(), message: "transfer_method_not_supported_message".localized())
             return
         }
+
         for field in view.fieldValues() {
             hyperwalletTransferMethod.setField(key: field.name, value: field.value)
         }
