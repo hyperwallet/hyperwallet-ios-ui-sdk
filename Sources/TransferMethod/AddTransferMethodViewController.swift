@@ -295,17 +295,6 @@ extension AddTransferMethodViewController: AddTransferMethodView {
         return isFormValid
     }
 
-    func getIndexPathFor(fieldNeedToBeFocused: AbstractWidget) -> IndexPath? {
-        if let sectionContainingInvalidField = presenter
-                                               .sections
-                                               .first(where: { fieldNeedToBeFocused.field.category == $0.category }),
-            let sectionIndex = presenter.getSectionIndex(by: sectionContainingInvalidField.category),
-            let cellIndex = sectionContainingInvalidField.cells.firstIndex(of: fieldNeedToBeFocused) {
-            return IndexPath(row: cellIndex, section: sectionIndex)
-        }
-        return nil
-    }
-
     func showLoading() {
         if let view = self.navigationController?.view {
             spinnerView = HyperwalletUtilViews.showSpinner(view: view)
@@ -364,7 +353,7 @@ extension AddTransferMethodViewController: AddTransferMethodView {
     }
 
     private func focusOnInvalidField(_ widget: AbstractWidget) {
-        if let indexPath = getIndexPathFor(fieldNeedToBeFocused: widget) {
+        if let indexPath = getIndexPathFor(fieldToBeFocused: widget) {
             if isCellVisibile(indexPath) {
                 widget.focus()
             } else {
@@ -374,6 +363,17 @@ extension AddTransferMethodViewController: AddTransferMethodView {
                 tableView.scrollToRow(at: indexPath, at: .top, animated: true)
             }
         }
+    }
+
+    private func getIndexPathFor(fieldToBeFocused: AbstractWidget) -> IndexPath? {
+        if let sectionContainingInvalidField = presenter
+            .sections
+            .first(where: { fieldToBeFocused.field.category == $0.category }),
+            let sectionIndex = presenter.getSectionIndex(by: sectionContainingInvalidField.category),
+            let cellIndex = sectionContainingInvalidField.cells.firstIndex(of: fieldToBeFocused) {
+            return IndexPath(row: cellIndex, section: sectionIndex)
+        }
+        return nil
     }
 
     private func updateFooterView(_ footerView: UITableViewHeaderFooterView, for section: Int) {

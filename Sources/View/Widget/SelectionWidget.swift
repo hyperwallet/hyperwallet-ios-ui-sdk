@@ -31,6 +31,12 @@ final class SelectionWidget: AbstractWidget {
 
     private var selectedValue: String?
 
+    private var rowField: UIView = {
+        let view = UIView()
+        view.setConstraint(value: 22, attribute: .height)
+        return view
+    }()
+
     required init(field: HyperwalletField) {
         super.init(field: field)
         setupLayout(field: field)
@@ -48,8 +54,24 @@ final class SelectionWidget: AbstractWidget {
 
     override func setupLayout(field: HyperwalletField) {
         super.setupLayout(field: field)
-        self.addArrangedSubview(labelField)
-        setupUITapGestureRecognizer(view: labelField, action: #selector(handleTap))
+        setupRowField()
+        self.addArrangedSubview(rowField)
+    }
+
+    private func setupRowField() {
+        rowField.addSubview(labelField)
+        setupLabelField()
+        setupUITapGestureRecognizer(view: rowField, action: #selector(handleTap))
+    }
+
+    private func setupLabelField() {
+        labelField.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            labelField.topAnchor.constraint(equalTo: rowField.topAnchor),
+            labelField.leadingAnchor.constraint(equalTo: rowField.leadingAnchor),
+            labelField.trailingAnchor.constraint(equalTo: rowField.trailingAnchor),
+            labelField.bottomAnchor.constraint(equalTo: rowField.bottomAnchor)
+        ])
     }
 
     private func setupUITapGestureRecognizer(view: UIView, action: Selector ) {
