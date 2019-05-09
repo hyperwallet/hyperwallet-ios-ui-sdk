@@ -17,7 +17,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import HyperwalletSDK
-import UIKit
 
 protocol AddTransferMethodView: class {
     func fieldValues() -> [(name: String, value: String)]
@@ -116,6 +115,7 @@ final class AddTransferMethodPresenter {
             hyperwalletTransferMethod.setField(key: "type", value: transferMethodType)
             hyperwalletTransferMethod.setField(key: "profileType", value: profileType)
         }
+
         for field in view.fieldValues() {
             hyperwalletTransferMethod.setField(key: field.name, value: field.value)
         }
@@ -240,8 +240,6 @@ final class AddTransferMethodPresenter {
     }
 
     func focusField(in section: AddTransferMethodSectionData) {
-        if section.containsFocusedField {
-            section.fieldToBeFocused?.focus()
-        }
+        section.fieldToBeFocused?.focus()
     }
 }

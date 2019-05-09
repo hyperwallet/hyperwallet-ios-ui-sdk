@@ -24,16 +24,19 @@ extension UIImage {
     ///
     /// - Parameters:
     ///   - name: The preferred `HyperwalletIconContent`.
+    ///   - iconSize: The image size
     ///   - fontSize: The font size of the icon
-    ///   - size: The image size.
     ///   - textColor: The text color (optional).
     ///   - backgroundColor: The background color (optional).
     /// - returns: A string that will appear as icon
-    static func fontIcon(_ name: String, _ textColor: UIColor, _ backgroundColor: UIColor?) -> UIImage {
+    static func fontIcon(_ name: String,
+                         _ iconSize: CGSize,
+                         _ fontSize: CGFloat,
+                         _ textColor: UIColor,
+                         _ backgroundColor: UIColor?) -> UIImage {
         let paragraph = NSMutableParagraphStyle()
         paragraph.alignment = NSTextAlignment.center
-        let iconSize = CGSize(width: Theme.Icon.size, height: Theme.Icon.size)
-        let fontSize = CGFloat(Theme.Icon.size)
+        let fontSize = fontSize
         let attributedString = NSAttributedString(string: name, attributes: [
             NSAttributedString.Key.font: UIFont(name: "icomoon", size: fontSize)!,
             NSAttributedString.Key.foregroundColor: textColor,
