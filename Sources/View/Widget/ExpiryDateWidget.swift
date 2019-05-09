@@ -25,13 +25,13 @@ final class ExpiryDateWidget: TextWidget {
 
     override func setupLayout(field: HyperwalletField) {
         super.setupLayout(field: field)
-        setupPickerView()
+        setupPickerView(field: field)
         toolbar.setupToolBar(target: self, action: #selector(self.doneButtonTapped))
         setupTextField()
     }
 
-    private func setupPickerView() {
-        pickerView = ExpiryDatePickerView(frame: .zero)
+    private func setupPickerView(field: HyperwalletField) {
+        pickerView = ExpiryDatePickerView(value: field.value)
         pickerView.accessibilityIdentifier = "ExpiryDateWidgetPickerAccessibilityIdentifier"
     }
 

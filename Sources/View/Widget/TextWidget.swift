@@ -38,15 +38,6 @@ class TextWidget: AbstractWidget {
         return textField
     }()
 
-    required init(field: HyperwalletField) {
-        super.init(field: field)
-        setupLayout(field: field)
-    }
-
-    required init(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-
     override func value() -> String {
         return textField.text ?? ""
     }

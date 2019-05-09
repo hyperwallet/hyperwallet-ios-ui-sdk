@@ -22,7 +22,6 @@ import UIKit
 class NumberWidget: TextWidget {
     required init(field: HyperwalletField) {
         super.init(field: field)
-        setupLayout(field: field)
         textField.keyboardType = UIKeyboardType.numberPad
     }
 

@@ -25,30 +25,34 @@ final class ExpiryDatePickerView: UIPickerView, UIPickerViewDelegate, UIPickerVi
     private var months = [String]()
     private var years = [Int]()
 
-    override init(frame: CGRect) {
+    init(value: String?, frame: CGRect = .zero) {
         super.init(frame: frame)
-        self.setup()
-    }
 
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        self.setup()
-    }
-
-    private func setup() {
-        let currentDate = Date()
-        let currentCalendar = Calendar.current
-        month = currentCalendar.component(.month, from: currentDate)
-        year = currentCalendar.component(.year, from: currentDate)
+        if let values = value?.components(separatedBy: "-"),
+            values.count == 2,
+            let defaultMonth = Int(values[1]),
+            let defaultYear = Int(values[0]) {
+            month = defaultMonth
+            year = defaultYear
+        } else {
+            let currentDate = Date()
+            let currentCalendar = Calendar.current
+            month = currentCalendar.component(.month, from: currentDate)
+            year = currentCalendar.component(.year, from: currentDate)
+        }
 
         setupMonths()
         setupYears(add: 10)
 
-        self.delegate = self
-        self.dataSource = self
+        delegate = self
+        dataSource = self
 
         // pick current month as default month for the picker and place the selected month in the center of picker
-        self.selectRow(month - 1, inComponent: 0, animated: false)
+        selectRow(month - 1, inComponent: 0, animated: false)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
 
     private func setupMonths() {

@@ -37,15 +37,6 @@ final class SelectionWidget: AbstractWidget {
         return view
     }()
 
-    required init(field: HyperwalletField) {
-        super.init(field: field)
-        setupLayout(field: field)
-    }
-
-    required init(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-
     override func value() -> String {
         return selectedValue ?? ""
     }
@@ -54,14 +45,20 @@ final class SelectionWidget: AbstractWidget {
 
     override func setupLayout(field: HyperwalletField) {
         super.setupLayout(field: field)
-        setupRowField()
+        setupRowField(value: field.value)
         self.addArrangedSubview(rowField)
     }
 
-    private func setupRowField() {
+    private func setupRowField(value: String?) {
         rowField.addSubview(labelField)
         setupLabelField()
         setupUITapGestureRecognizer(view: rowField, action: #selector(handleTap))
+
+        if let defaultValue = value,
+            let option = field.fieldSelectionOptions?.first(where: { $0.value == defaultValue }) {
+            labelField.text = option.label.localized()
+            selectedValue = option.value
+        }
     }
 
     private func setupLabelField() {
