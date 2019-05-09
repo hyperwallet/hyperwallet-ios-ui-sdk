@@ -66,7 +66,6 @@ class TextWidget: AbstractWidget {
         textField.placeholder = "\(field.placeholder ?? "")"
         textField.delegate = self
         textField.accessibilityIdentifier = field.name
-        let isEditable = field.isEditable ?? true
         textField.isUserInteractionEnabled = isEditable
         textField.clearButtonMode = isEditable ? .always : .never
         textField.textColor = isEditable ? Theme.Text.color : Theme.Text.disabledColor

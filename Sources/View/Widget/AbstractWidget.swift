@@ -23,6 +23,10 @@ import UIKit
 class AbstractWidget: UIStackView, UITextFieldDelegate {
     var field: HyperwalletField!
 
+    var isEditable: Bool {
+        return field.isEditable ?? true
+    }
+
     var label: UILabel = {
         let label = UILabel()
         label.textColor = Theme.Label.textColor
