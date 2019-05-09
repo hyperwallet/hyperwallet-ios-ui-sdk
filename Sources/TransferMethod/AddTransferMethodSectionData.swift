@@ -27,7 +27,6 @@ final class AddTransferMethodSectionData {
     var containsFocusedField: Bool = false
     var fieldToBeFocused: AbstractWidget?
     var rowShouldBeScrolledTo: Int?
-    var isScrolling: Bool = false
 
     lazy var header: String? = {
         switch category {
@@ -77,5 +76,11 @@ final class AddTransferMethodSectionData {
 
     subscript(index: Int) -> UIView {
         return cells[index]
+    }
+
+    func reset() {
+        containsFocusedField = false
+        fieldToBeFocused = nil
+        rowShouldBeScrolledTo = nil
     }
 }
