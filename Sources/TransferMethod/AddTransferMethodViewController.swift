@@ -218,7 +218,7 @@ extension AddTransferMethodViewController {
         }
         let widget = presenter.sections[indexPath.section][indexPath.row]
         cell.contentView.addSubview(widget)
-        if let widget = widget as? SelectionWidget {
+        if let widget = widget as? SelectionWidget, widget.isEditable {
             cell.accessoryType = .disclosureIndicator
             widget.viewController = self
         }
