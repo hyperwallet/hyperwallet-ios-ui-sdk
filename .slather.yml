@@ -13,4 +13,5 @@ ignore:
   - Sources/View/*
   - Sources/TransferMethod/*Controller.swift
   - Sources/TransferMethod/*Cell.swift
+  - Sources/TransferMethod/AddTransferMethodSectionData.swift
   - Sources/HyperwalletUI.swift
