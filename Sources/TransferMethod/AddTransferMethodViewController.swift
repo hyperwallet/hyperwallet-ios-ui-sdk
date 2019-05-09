@@ -81,7 +81,7 @@ public final class AddTransferMethodViewController: UITableViewController {
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(
             top: CGFloat(8.0),
-            left: CGFloat(16.0),
+            left: CGFloat(0.0),
             bottom: CGFloat(8.0),
             right: CGFloat(16.0)
         )
@@ -136,15 +136,10 @@ public final class AddTransferMethodViewController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Theme.Cell.rowHeight
         tableView.accessibilityIdentifier = "addTransferMethodTable"
-        tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
-
         tableView.register(
             AddTransferMethodTableViewCell.self,
             forCellReuseIdentifier: AddTransferMethodTableViewCell.reuseId
         )
-
-        let nib = UINib(nibName: String(describing: AddTransferMethodFooter.self), bundle: HyperwalletBundle.bundle)
-        tableView.register(nib, forHeaderFooterViewReuseIdentifier: AddTransferMethodFooter.reuseIdentifier)
     }
 
     @objc
@@ -178,40 +173,22 @@ extension AddTransferMethodViewController {
         headerView.textLabel?.textColor = Theme.Label.textColor
     }
 
-    override public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        guard let footerView = tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: AddTransferMethodFooter.reuseIdentifier) as? AddTransferMethodFooter
-            else {
-                fatalError("can't dequeue footer view")
+    override public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        var footerText = ""
+        if let errorMessage = presenter.sections[section].errorMessage {
+            footerText = String(format: "%@\n", errorMessage)
         }
-        footerView.error = presenter.sections[section].errorMessage
-        footerView.info = presenter.sections[section].footer
-        return footerView
-    }
 
-    override public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if presenter.sections[section].footer == nil && presenter.sections[section].errorMessage == nil {
-            return emptyFooterHeight
-        }
-        return UITableView.automaticDimension
-    }
+        footerText = String(format: "%@%@", footerText, presenter.sections[section].footer ?? "")
 
-    override public func tableView(_ tableView: UITableView,
-                                   estimatedHeightForFooterInSection section: Int) -> CGFloat {
-        if presenter.sections[section].footer == nil && presenter.sections[section].errorMessage == nil {
-            return emptyFooterHeight
-        }
-        return defaultFooterHeight
+        return footerText
     }
 
     override public func tableView(_ tableView: UITableView,
                                    willDisplayFooterView view: UIView,
                                    forSection section: Int) {
-        if let footerView = view as? AddTransferMethodFooter {
-            updateFooterView(footerView,
-                             for: section,
-                             description: presenter.sections[section].footer ?? "",
-                             errorMessage: presenter.sections[section].errorMessage ?? "")
+        if let footerView = view as? UITableViewHeaderFooterView {
+            updateFooterView(footerView, for: section)
         }
     }
 
@@ -248,7 +225,8 @@ extension AddTransferMethodViewController {
             widget.viewController = self
         }
 
-        let leftAnchor = widget.leftAnchor.constraint(equalTo: cell.contentView.leftAnchor)
+        let leftAnchor = widget.safeAreaLeadingAnchor
+            .constraint(equalTo: cell.contentView.layoutMarginsGuide.leadingAnchor)
         leftAnchor.priority = UILayoutPriority(999)
 
         let topAnchor = widget.topAnchor.constraint(equalTo: cell.contentView.topAnchor)
@@ -271,12 +249,9 @@ extension AddTransferMethodViewController: AddTransferMethodView {
     func showFooterViewWithUpdatedSectionData(for sections: [AddTransferMethodSectionData]) {
         for section in sections {
             if let sectionIndex = presenter.getSectionIndex(by: section.category) {
-                if let footerView = tableView.footerView(forSection: sectionIndex) as? AddTransferMethodFooter {
+                if let footerView = tableView.footerView(forSection: sectionIndex) {
                     // section is visible, update footer
-                    updateFooterView(footerView,
-                                     for: sectionIndex,
-                                     description: presenter.sections[sectionIndex].footer ?? "",
-                                     errorMessage: section.errorMessage ?? "")
+                    updateFooterView(footerView, for: sectionIndex)
                 }
             }
         }
@@ -288,7 +263,7 @@ extension AddTransferMethodViewController: AddTransferMethodView {
             if isCellVisibile(indexPath: indexPath) {
                 presenter.focusField(in: section)
             } else {
-                tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                tableView.scrollToRow(at: indexPath, at: .top, animated: true)
             }
         }
     }
@@ -377,18 +352,26 @@ extension AddTransferMethodViewController: AddTransferMethodView {
         createTransferMethodHandler?(transferMethod)
     }
 
-    private func updateFooterView(_ footerView: AddTransferMethodFooter,
-                                  for section: Int,
-                                  description: String,
-                                  errorMessage: String) {
-        if footerView.error != presenter.sections[section].errorMessage {
+    private func updateFooterView(_ footerView: UITableViewHeaderFooterView, for section: Int) {
+        let attributedText = updateFooterText(for: presenter.sections[section])
+        if footerView.textLabel?.attributedText?.string != attributedText.string {
             UIView.setAnimationsEnabled(false)
             self.tableView.beginUpdates()
-            footerView.error = errorMessage
-            footerView.info = description
+            footerView.textLabel?.attributedText = attributedText
+            footerView.sizeToFit()
             self.tableView.endUpdates()
             UIView.setAnimationsEnabled(true)
         }
+    }
+
+    private func updateFooterText(for section: AddTransferMethodSectionData) -> NSAttributedString {
+        let attributedText = NSMutableAttributedString()
+        if let errorMessage = section.errorMessage {
+            attributedText.append(value: String(format: "%@\n", errorMessage), color: Theme.Label.errorColor)
+        }
+        attributedText.append(value: section.footer ?? "", color: Theme.Label.textColor)
+
+        return attributedText
     }
 
     private func addFieldsSection(_ fields: [HyperwalletField]) {
