@@ -59,6 +59,7 @@
 		DB4679992260386D00E1AF49 /* IntegratorAuthenticationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4679982260386D00E1AF49 /* IntegratorAuthenticationProvider.swift */; };
 		DB4679BF2261083F00E1AF49 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4679BE2261083F00E1AF49 /* UIFont.swift */; };
 		DB4679C3226113D100E1AF49 /* HyperwalletBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4679C2226113D100E1AF49 /* HyperwalletBundle.swift */; };
+		DB6EF85D2283AA2100EE0237 /* HyperwalletUISDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBCA37F5225E892400CD4137 /* HyperwalletUISDK.framework */; };
 		DBA9FA59227912A000C1301A /* UserIndividualResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBA9FA58227912A000C1301A /* UserIndividualResponse.json */; };
 		DBA9FA5B2279143900C1301A /* UserBusinessResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBA9FA5A2279143900C1301A /* UserBusinessResponse.json */; };
 		DBA9FA5E22791B2900C1301A /* UserIndividualResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBA9FA5C227918B500C1301A /* UserIndividualResponse.json */; };
@@ -145,13 +146,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = DBCA37F4225E892400CD4137;
 			remoteInfo = HyperwalletUISDK;
-		};
-		DBA9FA63227A146D00C1301A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DB4679812260380C00E1AF49;
-			remoteInfo = Demo;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -303,6 +297,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB6EF85D2283AA2100EE0237 /* HyperwalletUISDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,7 +384,6 @@
 				DBB2B7032261C141006C48D3 /* BankAccountResponse.json */,
 				DBFB614A2261E84C00C4A8AA /* BankCardDuplicateResponse.json */,
 				DBFB614D2261E84C00C4A8AA /* BankCardInvalidCvvResponse.json */,
-				DBA9FA5C227918B500C1301A /* UserIndividualResponse.json */,
 				DBFB61482261E84C00C4A8AA /* BankCardInvalidDateOfExpiry.json */,
 				DBB2B70E2261C141006C48D3 /* BankCardResponse.json */,
 				DBFB614C2261E84C00C4A8AA /* ListTransferMethodResponse.json */,
@@ -697,7 +691,6 @@
 			);
 			dependencies = (
 				DB18E9F42261BA29004F6AC3 /* PBXTargetDependency */,
-				DBA9FA64227A146D00C1301A /* PBXTargetDependency */,
 			);
 			name = HyperwalletUISDKTests;
 			productName = HyperwalletUISDKTests;
@@ -1017,11 +1010,6 @@
 			isa = PBXTargetDependency;
 			target = DBCA37F4225E892400CD4137 /* HyperwalletUISDK */;
 			targetProxy = DB4FD4392261462600F00959 /* PBXContainerItemProxy */;
-		};
-		DBA9FA64227A146D00C1301A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DB4679812260380C00E1AF49 /* Demo */;
-			targetProxy = DBA9FA63227A146D00C1301A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
