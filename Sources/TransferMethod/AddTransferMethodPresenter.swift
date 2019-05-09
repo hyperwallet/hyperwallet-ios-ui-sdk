@@ -17,6 +17,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import HyperwalletSDK
+import UIKit
 
 protocol AddTransferMethodView: class {
     func fieldValues() -> [(name: String, value: String)]
