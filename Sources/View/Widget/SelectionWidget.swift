@@ -26,12 +26,9 @@ final class SelectionWidget: AbstractWidget {
         let label = UILabel()
         label.textColor = Theme.Text.color
         label.font = Theme.Label.bodyFont
+        label.isUserInteractionEnabled = true
+        label.setConstraint(value: 22, attribute: .height)
         return label
-    }()
-    private let labelFieldView: UIView = {
-        let view = UIView()
-        view.setConstraint(value: 22, attribute: .height)
-        return view
     }()
     private var selectedValue: String?
 
@@ -44,38 +41,21 @@ final class SelectionWidget: AbstractWidget {
 
     override func setupLayout(field: HyperwalletField) {
         super.setupLayout(field: field)
-        setupRowField(value: field.value)
-        self.addArrangedSubview(labelFieldView)
+        addArrangedSubview(labelField)
+        labelField.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+        
+        if let defaultValue = field.value,
+            let option = field.fieldSelectionOptions?.first(where: { $0.value == defaultValue }) {
+            updateLabelFieldValue(option)
+        }
     }
 
     override func value() -> String {
         return selectedValue ?? ""
     }
 
-    private func setupLabelField() {
-        labelField.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            labelField.topAnchor.constraint(equalTo: labelFieldView.topAnchor),
-            labelField.leadingAnchor.constraint(equalTo: labelFieldView.leadingAnchor),
-            labelField.trailingAnchor.constraint(equalTo: labelFieldView.trailingAnchor),
-            labelField.bottomAnchor.constraint(equalTo: labelFieldView.bottomAnchor)
-        ])
-    }
-
-    private func setupRowField(value: String?) {
-        labelFieldView.addSubview(labelField)
-        setupLabelField()
-        setupUITapGestureRecognizer(view: labelFieldView, action: #selector(handleTap))
-
-        if let defaultValue = value,
-            let option = field.fieldSelectionOptions?.first(where: { $0.value == defaultValue }) {
-            self.updateLabelFieldValue(option)
-        }
-    }
-
     private func setupUITapGestureRecognizer(view: UIView, action: Selector ) {
         let tap = UITapGestureRecognizer(target: self, action: action)
-        view.isUserInteractionEnabled = true
         view.addGestureRecognizer(tap)
     }
 
