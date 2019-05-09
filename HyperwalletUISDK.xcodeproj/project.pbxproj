@@ -118,34 +118,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-        DB18E9F32261BA29004F6AC3 /* PBXContainerItemProxy */ = {
-            isa = PBXContainerItemProxy;
-            containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-            proxyType = 1;
-            remoteGlobalIDString = DBCA37F4225E892400CD4137;
-            remoteInfo = HyperwalletUISDK;
-        };
-        DB2588002261BFF100E6236B /* PBXContainerItemProxy */ = {
-            isa = PBXContainerItemProxy;
-            containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-            proxyType = 1;
-            remoteGlobalIDString = DB4679812260380C00E1AF49;
-            remoteInfo = SwiftDemo;
-        };
-        DB4FD4392261462600F00959 /* PBXContainerItemProxy */ = {
-            isa = PBXContainerItemProxy;
-            containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-            proxyType = 1;
-            remoteGlobalIDString = DBCA37F4225E892400CD4137;
-            remoteInfo = HyperwalletUISDK;
-        };
-        DBA9FA63227A146D00C1301A /* PBXContainerItemProxy */ = {
-            isa = PBXContainerItemProxy;
-            containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-            proxyType = 1;
-            remoteGlobalIDString = DB4679812260380C00E1AF49;
-            remoteInfo = Demo;
-        };
+		DB18E9F32261BA29004F6AC3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DBCA37F4225E892400CD4137;
+			remoteInfo = HyperwalletUISDK;
+		};
+		DB2588002261BFF100E6236B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB4679812260380C00E1AF49;
+			remoteInfo = SwiftDemo;
+		};
+		DB4FD4392261462600F00959 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DBCA37F4225E892400CD4137;
+			remoteInfo = HyperwalletUISDK;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -285,34 +278,35 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-        DB18E9EA2261BA29004F6AC3 /* Frameworks */ = {
-            isa = PBXFrameworksBuildPhase;
-            buildActionMask = 2147483647;
-            files = (
-            );
-            runOnlyForDeploymentPostprocessing = 0;
-        };
-        DB2587F82261BFF100E6236B /* Frameworks */ = {
-            isa = PBXFrameworksBuildPhase;
-            buildActionMask = 2147483647;
-            files = (
-            );
-            runOnlyForDeploymentPostprocessing = 0;
-        };
-        DB46797F2260380C00E1AF49 /* Frameworks */ = {
-            isa = PBXFrameworksBuildPhase;
-            buildActionMask = 2147483647;
-            files = (
-            );
-            runOnlyForDeploymentPostprocessing = 0;
-        };
-        DBCA37F2225E892400CD4137 /* Frameworks */ = {
-            isa = PBXFrameworksBuildPhase;
-            buildActionMask = 2147483647;
-            files = (
-            );
-            runOnlyForDeploymentPostprocessing = 0;
-        };
+		DB18E9EA2261BA29004F6AC3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB68FEDE228498E3000EE61D /* HyperwalletUISDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB2587F82261BFF100E6236B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB46797F2260380C00E1AF49 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DBCA37F2225E892400CD4137 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -975,26 +969,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-        DB18E9F42261BA29004F6AC3 /* PBXTargetDependency */ = {
-            isa = PBXTargetDependency;
-            target = DBCA37F4225E892400CD4137 /* HyperwalletUISDK */;
-            targetProxy = DB18E9F32261BA29004F6AC3 /* PBXContainerItemProxy */;
-        };
-        DB2588012261BFF100E6236B /* PBXTargetDependency */ = {
-            isa = PBXTargetDependency;
-            target = DB4679812260380C00E1AF49 /* Demo */;
-            targetProxy = DB2588002261BFF100E6236B /* PBXContainerItemProxy */;
-        };
-        DB4FD43A2261462600F00959 /* PBXTargetDependency */ = {
-            isa = PBXTargetDependency;
-            target = DBCA37F4225E892400CD4137 /* HyperwalletUISDK */;
-            targetProxy = DB4FD4392261462600F00959 /* PBXContainerItemProxy */;
-        };
-        DBA9FA64227A146D00C1301A /* PBXTargetDependency */ = {
-            isa = PBXTargetDependency;
-            target = DB4679812260380C00E1AF49 /* Demo */;
-            targetProxy = DBA9FA63227A146D00C1301A /* PBXContainerItemProxy */;
-        };
+		DB18E9F42261BA29004F6AC3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DBCA37F4225E892400CD4137 /* HyperwalletUISDK */;
+			targetProxy = DB18E9F32261BA29004F6AC3 /* PBXContainerItemProxy */;
+		};
+		DB2588012261BFF100E6236B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB4679812260380C00E1AF49 /* Demo */;
+			targetProxy = DB2588002261BFF100E6236B /* PBXContainerItemProxy */;
+		};
+		DB4FD43A2261462600F00959 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DBCA37F4225E892400CD4137 /* HyperwalletUISDK */;
+			targetProxy = DB4FD4392261462600F00959 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
