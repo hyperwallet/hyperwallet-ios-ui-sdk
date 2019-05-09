@@ -38,13 +38,12 @@
 		98220B8C2265793700055E18 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 98220B8B2265793700055E18 /* README.md */; };
 		9826056822822E8A000CCA2D /* UIToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9826056722822E8A000CCA2D /* UIToolbar.swift */; };
 		98541F152273D72C007D4238 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 98541F142273D72C007D4238 /* CHANGELOG.md */; };
-        98F63E62228255390090101D /* PayPalAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F63E61228255390090101D /* PayPalAccountResponse.json */; };
-        98F63E6322833FA40090101D /* PayPalAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F63E61228255390090101D /* PayPalAccountResponse.json */; };
-        98F63E682284AB170090101D /* PayPalAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F63E662284A2CF0090101D /* PayPalAccountResponse.json */; };
-        98F63E6B2284AC330090101D /* PayPalAccountInvalidEmailResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F63E692284AC2A0090101D /* PayPalAccountInvalidEmailResponse.json */; };
-        98F63E6E2284AD370090101D /* PayPalAccountDuplicateResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F63E6C2284AD330090101D /* PayPalAccountDuplicateResponse.json */; };
-        98F63E6F2284AD9B0090101D /* AddTransferMethodPayPalAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F63E64228485930090101D /* AddTransferMethodPayPalAccountTests.swift */; };
-        98F63E722284B4AF0090101D /* TransferMethodConfigurationPayPalAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F63E712284B4AF0090101D /* TransferMethodConfigurationPayPalAccountResponse.json */; };
+		98F63E682284AB170090101D /* PayPalAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F63E662284A2CF0090101D /* PayPalAccountResponse.json */; };
+		98F63E6B2284AC330090101D /* PayPalAccountInvalidEmailResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F63E692284AC2A0090101D /* PayPalAccountInvalidEmailResponse.json */; };
+		98F63E6E2284AD370090101D /* PayPalAccountDuplicateResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F63E6C2284AD330090101D /* PayPalAccountDuplicateResponse.json */; };
+		98F63E6F2284AD9B0090101D /* AddTransferMethodPayPalAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F63E64228485930090101D /* AddTransferMethodPayPalAccountTests.swift */; };
+		98F63E722284B4AF0090101D /* TransferMethodConfigurationPayPalAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F63E712284B4AF0090101D /* TransferMethodConfigurationPayPalAccountResponse.json */; };
+		98F63E762284EEB20090101D /* PayPalAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F63E732284EE890090101D /* PayPalAccountResponse.json */; };
 		C358A9A52272644000E5AE47 /* AddTransferMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = C358A9A22272644000E5AE47 /* AddTransferMethod.swift */; };
 		C358A9A62272644000E5AE47 /* ListTransferMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = C358A9A32272644000E5AE47 /* ListTransferMethods.swift */; };
 		C358A9A72272644000E5AE47 /* SelectTransferMethodType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C358A9A42272644000E5AE47 /* SelectTransferMethodType.swift */; };
@@ -183,13 +182,13 @@
 		98220B8B2265793700055E18 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		9826056722822E8A000CCA2D /* UIToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIToolbar.swift; sourceTree = "<group>"; };
 		98541F142273D72C007D4238 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
-        98F63E61228255390090101D /* PayPalAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PayPalAccountResponse.json; sourceTree = "<group>"; };
-        98F63E64228485930090101D /* AddTransferMethodPayPalAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransferMethodPayPalAccountTests.swift; sourceTree = "<group>"; };
-        98F63E662284A2CF0090101D /* PayPalAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PayPalAccountResponse.json; sourceTree = "<group>"; };
-        98F63E692284AC2A0090101D /* PayPalAccountInvalidEmailResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PayPalAccountInvalidEmailResponse.json; sourceTree = "<group>"; };
-        98F63E6C2284AD330090101D /* PayPalAccountDuplicateResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PayPalAccountDuplicateResponse.json; sourceTree = "<group>"; };
-        98F63E712284B4AF0090101D /* TransferMethodConfigurationPayPalAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TransferMethodConfigurationPayPalAccountResponse.json; sourceTree = "<group>"; };
-                C358A9A22272644000E5AE47 /* AddTransferMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethod.swift; sourceTree = "<group>"; };
+		98F63E64228485930090101D /* AddTransferMethodPayPalAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransferMethodPayPalAccountTests.swift; sourceTree = "<group>"; };
+		98F63E662284A2CF0090101D /* PayPalAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PayPalAccountResponse.json; sourceTree = "<group>"; };
+		98F63E692284AC2A0090101D /* PayPalAccountInvalidEmailResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PayPalAccountInvalidEmailResponse.json; sourceTree = "<group>"; };
+		98F63E6C2284AD330090101D /* PayPalAccountDuplicateResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PayPalAccountDuplicateResponse.json; sourceTree = "<group>"; };
+		98F63E712284B4AF0090101D /* TransferMethodConfigurationPayPalAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TransferMethodConfigurationPayPalAccountResponse.json; sourceTree = "<group>"; };
+		98F63E732284EE890090101D /* PayPalAccountResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PayPalAccountResponse.json; sourceTree = "<group>"; };
+		C358A9A22272644000E5AE47 /* AddTransferMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethod.swift; sourceTree = "<group>"; };
 		C358A9A32272644000E5AE47 /* ListTransferMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTransferMethods.swift; sourceTree = "<group>"; };
 		C358A9A42272644000E5AE47 /* SelectTransferMethodType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectTransferMethodType.swift; sourceTree = "<group>"; };
 		C38DC07522727CC800B1F00E /* SelectTransferMethodCountryTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTransferMethodCountryTypeTests.swift; sourceTree = "<group>"; };
@@ -345,6 +344,7 @@
 				078B456A2273895C005B0248 /* BankCardErrorResponseWithInvalidCardNumber.json */,
 				078B45702273895C005B0248 /* BankCardResponse.json */,
 				078B456C2273895C005B0248 /* HyperwalletField.json */,
+				98F63E732284EE890090101D /* PayPalAccountResponse.json */,
 				078B45692273895C005B0248 /* StatusTransitionMockedResponseSuccess.json */,
 				078B456D2273895C005B0248 /* TransferMethodConfigurationFieldsResponse.json */,
 				078B456E2273895C005B0248 /* TransferMethodConfigurationKeysResponse.json */,
@@ -358,7 +358,6 @@
 			children = (
 				C358A9A22272644000E5AE47 /* AddTransferMethod.swift */,
 				C358A9A32272644000E5AE47 /* ListTransferMethods.swift */,
-                98F63E61228255390090101D /* PayPalAccountResponse.json */,
 				C358A9A42272644000E5AE47 /* SelectTransferMethodType.swift */,
 				C38DC07822727F9300B1F00E /* SelectTransferMethodCountryType.swift */,
 			);
@@ -370,7 +369,7 @@
 			children = (
 				DBB2B6FE2261C141006C48D3 /* AddTransferMethodBankCardTests.swift */,
 				DBB2B70F2261C141006C48D3 /* AddTransferMethodBankAccountTests.swift */,
-                98F63E64228485930090101D /* AddTransferMethodPayPalAccountTests.swift */,
+				98F63E64228485930090101D /* AddTransferMethodPayPalAccountTests.swift */,
 				DBB2B6FB2261C140006C48D3 /* ListTransferMethodTests.swift */,
 				DBB2B6FC2261C140006C48D3 /* SelectTransferMethodTypeTests.swift */,
 				C38DC07522727CC800B1F00E /* SelectTransferMethodCountryTypeTests.swift */,
@@ -394,12 +393,12 @@
 				DBFB61522261E84D00C4A8AA /* TransferMethodConfigurationBankAccountResponse.json */,
 				DBFB614F2261E84C00C4A8AA /* TransferMethodConfigurationBankCardResponse.json */,
 				DBB2B7082261C141006C48D3 /* TransferMethodConfigurationKeysResponse.json */,
-                98F63E712284B4AF0090101D /* TransferMethodConfigurationPayPalAccountResponse.json */,
-                DBF89CB7227C072400AF4344 /* UserIndividualCountryCanadaResponse.json */,
-                DBA9FA5C227918B500C1301A /* UserIndividualResponse.json */,
-                98F63E662284A2CF0090101D /* PayPalAccountResponse.json */,
-                98F63E692284AC2A0090101D /* PayPalAccountInvalidEmailResponse.json */,
-                98F63E6C2284AD330090101D /* PayPalAccountDuplicateResponse.json */,
+				98F63E712284B4AF0090101D /* TransferMethodConfigurationPayPalAccountResponse.json */,
+				DBF89CB7227C072400AF4344 /* UserIndividualCountryCanadaResponse.json */,
+				DBA9FA5C227918B500C1301A /* UserIndividualResponse.json */,
+				98F63E662284A2CF0090101D /* PayPalAccountResponse.json */,
+				98F63E692284AC2A0090101D /* PayPalAccountInvalidEmailResponse.json */,
+				98F63E6C2284AD330090101D /* PayPalAccountDuplicateResponse.json */,
 			);
 			path = TransferMethod;
 			sourceTree = "<group>";
@@ -802,7 +801,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-                98F63E6322833FA40090101D /* PayPalAccountResponse.json in Resources */,
+				98F63E762284EEB20090101D /* PayPalAccountResponse.json in Resources */,
 				078B45752273895C005B0248 /* StatusTransitionMockedResponseSuccess.json in Resources */,
 				078B457C2273895C005B0248 /* BankCardResponse.json in Resources */,
 				078B45782273895C005B0248 /* HyperwalletField.json in Resources */,
@@ -821,7 +820,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-                98F63E682284AB170090101D /* PayPalAccountResponse.json in Resources */,
+				98F63E682284AB170090101D /* PayPalAccountResponse.json in Resources */,
 				9807B762226442C60028A280 /* AuthenticationTokenResponse.json in Resources */,
 				9807B763226442C60028A280 /* BankAccountInvalidRoutingResponse.json in Resources */,
 				9807B764226442C60028A280 /* BankCardDuplicateResponse.json in Resources */,
@@ -832,16 +831,16 @@
 				9807B768226442C60028A280 /* ListTransferMethodResponseWithoutDebitCard.json in Resources */,
 				9807B769226442C60028A280 /* ListTransferMethodResponseWithoutFirstElement.json in Resources */,
 				9807B76A226442C60028A280 /* RemovedTransferMethodResponse.json in Resources */,
-                98F63E6B2284AC330090101D /* PayPalAccountInvalidEmailResponse.json in Resources */,
+				98F63E6B2284AC330090101D /* PayPalAccountInvalidEmailResponse.json in Resources */,
 				9807B76B226442C60028A280 /* TransferMethodConfigurationBankAccountResponse.json in Resources */,
 				DBA9FA5E22791B2900C1301A /* UserIndividualResponse.json in Resources */,
 				9807B76C226442C60028A280 /* TransferMethodConfigurationBankCardResponse.json in Resources */,
-                98F63E6E2284AD370090101D /* PayPalAccountDuplicateResponse.json in Resources */,
+				98F63E6E2284AD370090101D /* PayPalAccountDuplicateResponse.json in Resources */,
 				9807B76D226442C60028A280 /* UnexpectedErrorResponse.json in Resources */,
 				DBB2B7202261C142006C48D3 /* TransferMethodConfigurationKeysResponse.json in Resources */,
 				DBB2B71B2261C142006C48D3 /* BankAccountResponse.json in Resources */,
 				DBB2B7262261C142006C48D3 /* BankCardResponse.json in Resources */,
-                98F63E722284B4AF0090101D /* TransferMethodConfigurationPayPalAccountResponse.json in Resources */,
+				98F63E722284B4AF0090101D /* TransferMethodConfigurationPayPalAccountResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -865,7 +864,6 @@
 				98220B8C2265793700055E18 /* README.md in Resources */,
 				DBCA387C225E8BAA00CD4137 /* Localizable.strings in Resources */,
 				98541F152273D72C007D4238 /* CHANGELOG.md in Resources */,
-                98F63E62228255390090101D /* PayPalAccountResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -910,7 +908,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-                98F63E6F2284AD9B0090101D /* AddTransferMethodPayPalAccountTests.swift in Sources */,
+				98F63E6F2284AD9B0090101D /* AddTransferMethodPayPalAccountTests.swift in Sources */,
 				C38DC07622727CC800B1F00E /* SelectTransferMethodCountryTypeTests.swift in Sources */,
 				C3E7216E226E61C80067D3A0 /* BaseTest.swift in Sources */,
 				C358A9A62272644000E5AE47 /* ListTransferMethods.swift in Sources */,
