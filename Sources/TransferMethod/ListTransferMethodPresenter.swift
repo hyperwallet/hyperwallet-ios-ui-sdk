@@ -17,7 +17,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import HyperwalletSDK
-import UIKit
 
 protocol ListTransferMethodView: class {
     func showLoading()
@@ -36,7 +35,7 @@ final class ListTransferMethodPresenter {
     private var selectedTransferMethod: HyperwalletTransferMethod?
 
     /// Initialize ListTransferMethodPresenter
-    public init(view: ListTransferMethodView) {
+    init(view: ListTransferMethodView) {
         self.view = view
     }
 
@@ -153,15 +152,17 @@ final class ListTransferMethodPresenter {
     func getCellConfiguration(for transferMethodIndex: Int) -> ListTransferMethodCellConfiguration? {
         if let transferMethod = getTransferMethod(at: transferMethodIndex),
             let country = transferMethod.getField(fieldName: .transferMethodCountry) as? String,
-            let transferMethodType = transferMethod.getField(fieldName: .type) as? String,
-            let lastFourDigitAccountNumber = getLastDigits(transferMethod, number: 4) {
-            let transferMethodExpiryDate = String(format: "%@%@",
-                                                  "transfer_method_list_item_description".localized(),
-                                                  lastFourDigitAccountNumber)
+            let transferMethodType = transferMethod.getField(fieldName: .type) as? String {
+            var lastFourDigitAccountNumber: String?
+            if let lastFourDigit = getLastDigits(transferMethod, number: 4) {
+                lastFourDigitAccountNumber = String(format: "%@%@",
+                                                    "transfer_method_list_item_description".localized(),
+                                                    lastFourDigit)
+            }
             return ListTransferMethodCellConfiguration(
                 transferMethodType: transferMethodType.lowercased().localized(),
                 transferMethodCountry: country.localized(),
-                transferMethodExpiryDate: transferMethodExpiryDate,
+                lastFourDigitAccountNumber: lastFourDigitAccountNumber,
                 transferMethodIconFont: HyperwalletIcon.of(transferMethodType).rawValue)
         }
         return nil

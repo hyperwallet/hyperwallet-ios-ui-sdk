@@ -17,7 +17,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 "title_accounts" = "Accounts";
-"title_transfer_funds" = "Transfer Funds";
 "select_transfer_method_country" = "Select Country";
 "select_transfer_method_currency" = "Select Currency";
 "remove_button_label" = "Remove";
@@ -26,11 +25,8 @@
 "try_again_button_label" = "Try Again";
 "done_button_label" = "Done";
 "search_placeholder_label" = "Search";
-"search_countries_placeholder_label" = "Search Countries";
 "add_transfer_method_fee_label" = "Transaction Fees: ";
 "add_transfer_method_processing_time_label" = "Processing Time: ";
-"transactions_header_label" = "Transactions";
-"transaction_detail_header_formatter" = "%1$@ %2$@ %3$@";
 "unexpected_error_message" = "Oops... Something went wrong, please try again";
 "network_connection_error_title" = "Connectivity Issue";
 "unexpected_title" = "Unexpected Error";
@@ -51,7 +47,6 @@
 "fee_mix_only_min_formatter" = "%1$@ %2$@ + %3$@%% (Min:%1$@ %4$@)";
 "fee_mix_only_max_formatter" = "%1$@ %2$@ + %3$@%% (Max:%1$@ %4$@)";
 "fee_mix_formatter" = "%1$@ %2$@ + %3$@%% (Min:%1$@ %4$@, Max:%1$@ %5$@)";
-"transaction_detail_formatter" = "%1$@ %2$@";
 "transfer_method_not_supported_message" = "This transfer method is currently not supported";
 "error" = "Error";
 
@@ -67,7 +62,6 @@
 "select_a_country_message" = "Select a country";
 
 // Add Transfer Method
-"add_transfer_method_label" = "Add Transfer Method";
 "create_account_label" = "Create Account";
 "enter_your_information_formatter" = "Enter your %@ information";
 "account_header" = "%1$@ - %2$@ (%3$@)";
@@ -75,6 +69,10 @@
 "address_header"="Address";
 "information_header"="Transfer method information"; 
 "account_information_title" = "Account Information";
+
+// expiry date format - arguments order is %1$-month, %2$-year(two last digits)
+"expiry_date_format" = "%1$02d/%2$02d";
+"date_format" = "yyyy-MM-dd";
 
 // Account types
 "CHECKING" = "Checking";

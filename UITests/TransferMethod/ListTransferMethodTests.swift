@@ -11,12 +11,38 @@ class ListTransferMethodTests: XCTestCase {
 
     let debitCard = NSPredicate(format: "label CONTAINS[c] 'Debit Card'")
     let bankAccount = NSPredicate(format: "label CONTAINS[c] 'Bank Account'")
-    let payPalAccount = NSPredicate(format: "label CONTAINS[c] 'PayPal'")
-    let expectedFirstBankAccountLabel = "Ending on 0001"
-    let expectedSecondBankAccountLabel = "Ending on 0002"
-    let expectedThirdBankAccountLabel = "Ending on 0003"
-    let expectedDebitCardCellLabel = "Ending on 0006"
-    let notExpectedPayPalCellLabel = "Ending on"
+
+    var expectedFirstBankAccountLabel: String = {
+        if #available(iOS 12.0, *) {
+            return "United States\nEnding on 0001"
+        } else {
+            return "United States Ending on 0001"
+        }
+    }()
+
+    var expectedSecondBankAccountLabel: String = {
+        if #available(iOS 12.0, *) {
+            return "United States\nEnding on 0002"
+        } else {
+            return "United States Ending on 0002"
+        }
+    }()
+
+    var expectedThirdBankAccountLabel: String = {
+        if #available(iOS 12.0, *) {
+            return "United States\nEnding on 0003"
+        } else {
+            return "United States Ending on 0003"
+        }
+    }()
+
+    var expectedDebitCardCellLabel: String = {
+        if #available(iOS 12.0, *) {
+            return "United States\nEnding on 0006"
+        } else {
+            return "United States Ending on 0006"
+        }
+    }()
 
     var removeBankCardURL: String {
         let bankCardEndpoint = "rest/v3/users/usr-token/bank-cards/"
@@ -74,7 +100,6 @@ class ListTransferMethodTests: XCTestCase {
         XCTAssertTrue(app.cells.element(boundBy: 1).staticTexts[expectedSecondBankAccountLabel].exists)
         XCTAssertTrue(app.cells.element(boundBy: 2).staticTexts[expectedThirdBankAccountLabel].exists)
         XCTAssertTrue(app.cells.element(boundBy: 3).staticTexts[expectedDebitCardCellLabel].exists)
-        XCTAssertFalse(app.cells.element(boundBy: 4).staticTexts[notExpectedPayPalCellLabel].exists)
     }
 
     func testListTransferMethod_addTransferMethodFromEmptyScreen() {

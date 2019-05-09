@@ -26,7 +26,9 @@ final class WidgetFactory {
         HyperwalletDataType.text.rawValue: TextWidget.self,
         HyperwalletDataType.number.rawValue: NumberWidget.self,
         HyperwalletDataType.selection.rawValue: SelectionWidget.self,
-        HyperwalletDataType.expiryDate.rawValue: ExpiryDateWidget.self
+        HyperwalletDataType.expiryDate.rawValue: ExpiryDateWidget.self,
+        HyperwalletDataType.phone.rawValue: PhoneWidget.self,
+        HyperwalletDataType.date.rawValue: DateWidget.self
     ]
 
     /// Creates a new instance of a `Widget` based on the `HyperwalletField.type`

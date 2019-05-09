@@ -18,54 +18,44 @@
 
 import UIKit
 
-class MonthYearPickerView: PickerView, UIPickerViewDelegate, UIPickerViewDataSource {
-    static let loop = 5
+final class ExpiryDatePickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSource {
+    var month: Int!
+    var year: Int!
 
-    var month = Calendar.current.component(.month, from: Date())
-    var year = Calendar.current.component(.year, from: Date())
-
-    var months = [String]()
-    var years = [Int]()
-
-    var dateSelectedHandler: ((_ month: Int, _ year: Int) -> Void)?
+    private var months = [String]()
+    private var years = [Int]()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.setUp()
+        self.setup()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.setUp()
+        self.setup()
     }
 
-    func setUp() {
-        setUpMonth()
-        setUpYear(add: 10)
+    private func setup() {
+        let currentDate = Date()
+        let currentCalendar = Calendar.current
+        month = currentCalendar.component(.month, from: currentDate)
+        year = currentCalendar.component(.year, from: currentDate)
 
-        self.tapDoneHandler = setUpTapHandler()
+        setupMonths()
+        setupYears(add: 10)
+
         self.delegate = self
         self.dataSource = self
 
         // pick current month as default month for the picker and place the selected month in the center of picker
-        self.selectRow((MonthYearPickerView.loop / 2) * months.count + month - 1, inComponent: 0, animated: false)
+        self.selectRow(month - 1, inComponent: 0, animated: false)
     }
 
-    private func setUpTapHandler() -> (_ textField: UITextField) -> Void {
-        return {
-            (textField) in
-            let month = self.month
-            let year = String(describing: self.year).suffix(startAt: 2)
-
-            textField.text = String(format: "%02d/%@", month, year) // Sample format 03/21
-        }
-    }
-
-    private func setUpMonth() {
+    private func setupMonths() {
         months = DateFormatter().monthSymbols.map({ $0.capitalized })
     }
 
-    private func setUpYear(add: Int) {
+    private func setupYears(add: Int) {
         years = Array(year...year + add)
     }
 
@@ -91,7 +81,7 @@ class MonthYearPickerView: PickerView, UIPickerViewDelegate, UIPickerViewDataSou
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch component {
         case 0:
-            return months.count * MonthYearPickerView.loop
+            return months.count
 
         case 1:
             return years.count
@@ -102,7 +92,7 @@ class MonthYearPickerView: PickerView, UIPickerViewDelegate, UIPickerViewDataSou
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        month = selectedRow(inComponent: 0) % months.count + 1
+        month = selectedRow(inComponent: 0) + 1
         year = years[selectedRow(inComponent: 1)]
     }
 }
