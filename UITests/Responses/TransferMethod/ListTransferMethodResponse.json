@@ -1,10 +1,10 @@
 {
-    "count": 4,
+    "count": 5,
     "offset": 0,
     "limit": 50,
     "data": [
         {
-            "token": "trm-6dab5471-65d1-4d48-aacb-fdd590f943d6",
+            "token": "trm-1235345",
             "type": "BANK_ACCOUNT",
             "status": "ACTIVATED",
             "verificationStatus": "NOT_REQUIRED",
@@ -36,12 +36,12 @@
                     "params": {
                         "rel": "self"
                     },
-                    "href": "https://localhost/rest/v3/users/usr-16960a42-c133-4048-b25c-a3c689267d86/transfer-methods/trm-6dab5471-65d1-4d48-aacb-fdd590f943d6"
+                    "href": "https://localhost/rest/v3/users/usr-12345/transfer-methods/trm-1235345"
                 }
             ]
         },
         {
-            "token": "trm-6ffc9828-4885-47cc-bc4b-58077b693a53",
+            "token": "trm-123456",
             "type": "BANK_ACCOUNT",
             "status": "ACTIVATED",
             "verificationStatus": "NOT_REQUIRED",
@@ -73,12 +73,12 @@
                     "params": {
                         "rel": "self"
                     },
-                    "href": "https://localhost/rest/v3/users/usr-16960a42-c133-4048-b25c-a3c689267d86/transfer-methods/trm-6ffc9828-4885-47cc-bc4b-58077b693a53"
+                    "href": "https://localhost/rest/v3/users/usr-12345/transfer-methods/trm-123456"
                 }
             ]
         },
         {
-            "token": "trm-689d215b-40e0-4973-84e0-bb7cb7edaf37",
+            "token": "trm-123",
             "type": "BANK_ACCOUNT",
             "status": "ACTIVATED",
             "verificationStatus": "NOT_REQUIRED",
@@ -110,12 +110,12 @@
                     "params": {
                         "rel": "self"
                     },
-                    "href": "https://localhost/rest/v3/users/usr-16960a42-c133-4048-b25c-a3c689267d86/transfer-methods/trm-689d215b-40e0-4973-84e0-bb7cb7edaf37"
+                    "href": "https://localhost/rest/v3/users/usr-12345/transfer-methods/trm-123"
                 }
             ]
         },
         {
-            "token" : "trm-5c380689-4074-46c4-8827-0574d88b509b",
+            "token" : "trm-1234",
             "type" : "BANK_CARD",
             "status" : "ACTIVATED",
             "createdOn" : "2019-02-26T21:45:54",
@@ -129,8 +129,25 @@
                 "params" : {
                     "rel" : "self"
                 },
-                "href" : "https://localhost:8181/rest/v3/users/usr-a51c7522-ccba-4bcf-a6a7-bc59dae8f9b0/bank-accounts/trm-33e6a84f-7ed1-4c96-8c1a-d4d456478fc7"
+                "href" : "https://localhost:8181/rest/v3/users/usr-12345/bank-accounts/trm-1234"
             } ]
+        },
+        {
+            "token": "trm-12345",
+            "type": "PAYPAL_ACCOUNT",
+            "status": "ACTIVATED",
+            "createdOn": "2019-05-07T23:37:43",
+            "transferMethodCountry": "US",
+            "transferMethodCurrency": "USD",
+            "email": "Carroll.lynn@byteme.com",
+            "links": [
+                {
+                    "params": {
+                        "rel": "self"
+                    },
+                    "href": "https://localhost/rest/v3/users/usr-12345/transfer-methods/trm-12345"
+                }
+            ]
         }
     ],
     "links": [
@@ -138,19 +155,25 @@
             "params": {
                 "rel": "self"
             },
-            "href": "https://localhost/rest/v3/users/usr-16960a42-c133-4048-b25c-a3c689267d86/transfer-methods?offset=0&limit=100&status=ACTIVATED"
+            "href": "https://localhost/rest/v3/users/usr-12345/transfer-methods?offset=0&limit=100&status=ACTIVATED"
         },
         {
             "params": {
                 "rel": "next"
             },
-            "href": "https://localhost/rest/v3/users/usr-16960a42-c133-4048-b25c-a3c689267d86/transfer-methods?offset=100&limit=100&status=ACTIVATED"
+            "href": "https://localhost/rest/v3/users/usr-12345/transfer-methods?offset=100&limit=100&status=ACTIVATED"
+        },
+        {
+            "params": {
+                "rel": "next"
+            },
+            "href": "https://localhost/rest/v3/users/usr-12345/transfer-methods?offset=100&limit=100&status=ACTIVATED"
         },
         {
             "params": {
                 "rel": "last"
             },
-            "href": "https://localhost/rest/v3/users/usr-16960a42-c133-4048-b25c-a3c689267d86/transfer-methods?offset=41&limit=100&status=ACTIVATED"
+            "href": "https://localhost/rest/v3/users/usr-12345/transfer-methods?offset=41&limit=100&status=ACTIVATED"
         }
     ]
 }
