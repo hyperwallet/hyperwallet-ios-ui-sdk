@@ -21,7 +21,7 @@ import UIKit
 /// Represents the expiry date widget.
 final class ExpiryDateWidget: TextWidget {
     private var pickerView: ExpiryDatePickerView!
-    private var toolbar = UIToolbar()
+    private let toolbar = UIToolbar()
 
     override func setupLayout(field: HyperwalletField) {
         super.setupLayout(field: field)
