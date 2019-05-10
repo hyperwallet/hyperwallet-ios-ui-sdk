@@ -1,19 +1,18 @@
 import XCTest
 
-class ListTransferMethodTests: XCTestCase {
-    var app: XCUIApplication!
+class ListTransferMethodTests: BaseTests {
     var listTransferMethod: ListTransferMethod!
     var selectTransferMethodType: SelectTransferMethodType!
     var addTransferMethod: AddTransferMethod!
-    var mockServer: HyperwalletMockWebServer!
-    var spinner: XCUIElement!
     var loadingSpinner: XCUIElement!
 
     let debitCard = NSPredicate(format: "label CONTAINS[c] 'Debit Card'")
     let bankAccount = NSPredicate(format: "label CONTAINS[c] 'Bank Account'")
+    let bankAccountTitle = "Bank Account"
+    let debitCardTitle = "Debit Card"
 
     var expectedFirstBankAccountLabel: String = {
-        if #available(iOS 12.0, *) {
+        if #available(iOS 11.2, *) {
             return "United States\nEnding on 0001"
         } else {
             return "United States Ending on 0001"
@@ -21,7 +20,7 @@ class ListTransferMethodTests: XCTestCase {
     }()
 
     var expectedSecondBankAccountLabel: String = {
-        if #available(iOS 12.0, *) {
+        if #available(iOS 11.2, *) {
             return "United States\nEnding on 0002"
         } else {
             return "United States Ending on 0002"
@@ -29,7 +28,7 @@ class ListTransferMethodTests: XCTestCase {
     }()
 
     var expectedThirdBankAccountLabel: String = {
-        if #available(iOS 12.0, *) {
+        if #available(iOS 11.2, *) {
             return "United States\nEnding on 0003"
         } else {
             return "United States Ending on 0003"
@@ -37,7 +36,7 @@ class ListTransferMethodTests: XCTestCase {
     }()
 
     var expectedDebitCardCellLabel: String = {
-        if #available(iOS 12.0, *) {
+        if #available(iOS 11.2, *) {
             return "United States\nEnding on 0006"
         } else {
             return "United States Ending on 0006"
@@ -46,28 +45,18 @@ class ListTransferMethodTests: XCTestCase {
 
     var removeBankCardURL: String {
         let bankCardEndpoint = "rest/v3/users/usr-token/bank-cards/"
-        let removeDebitCardEndpoint = "trm-5c380689-4074-46c4-8827-0574d88b509b/status-transitions"
+        let removeDebitCardEndpoint = "trm-00000000-0000-0000-0000-111111111111/status-transitions"
         return bankCardEndpoint + removeDebitCardEndpoint
     }
 
     var removeBankAccountURL: String {
         let bankAccountEndpoint = "rest/v3/users/usr-token/bank-accounts/"
-        let removeBankAccountCardEndpoint = "trm-6dab5471-65d1-4d48-aacb-fdd590f943d6/status-transitions"
+        let removeBankAccountCardEndpoint = "trm-11111111-1111-1111-1111-000000000000/status-transitions"
         return bankAccountEndpoint + removeBankAccountCardEndpoint
     }
 
     override func setUp() {
-        continueAfterFailure = false
-
-        mockServer = HyperwalletMockWebServer()
-        mockServer.setUp()
-
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/authentication-token",
-                             filename: "AuthenticationTokenResponse",
-                             method: HTTPMethod.post)
-
-        app = XCUIApplication()
-        app.launch()
+        super.setUp()
 
         listTransferMethod = ListTransferMethod(app: app)
         selectTransferMethodType = SelectTransferMethodType(app: app)
@@ -280,5 +269,73 @@ class ListTransferMethodTests: XCTestCase {
         spinner = app.activityIndicators["activityIndicator"]
         loadingSpinner = app.activityIndicators["In progress"]
         waitForNonExistence(spinner)
+    }
+
+    func testListTransferMethod_verifyAfterRelaunch() {
+        setUpStandardListTransferMethod()
+        validatetestListTransferMethodScreen()
+        XCUIDevice.shared.clickHomeAndRelaunch(app: app)
+        setUpStandardListTransferMethod()
+        validatetestListTransferMethodScreen()
+    }
+
+    func testListTransferMethod_verifyRotateScreen() {
+        setUpStandardListTransferMethod()
+        XCUIDevice.shared.rotateScreen(times: 3)
+        validatetestListTransferMethodScreen()
+    }
+
+    func testListTransferMethod_verifyWakeFromSleep() {
+        setUpStandardListTransferMethod()
+        XCUIDevice.shared.wakeFromSleep(app: app)
+        waitForNonExistence(addTransferMethod.navigationBar)
+        validatetestListTransferMethodScreen()
+    }
+
+    func testListTransferMethod_verifyResumeFromRecents() {
+        setUpStandardListTransferMethod()
+        XCUIDevice.shared.resumeFromRecents(app: app)
+        waitForNonExistence(addTransferMethod.navigationBar)
+        validatetestListTransferMethodScreen()
+    }
+
+    func testListTransferMethod_verifyAppToBackground() {
+        setUpStandardListTransferMethod()
+        XCUIDevice.shared.sendToBackground(app: app)
+        validatetestListTransferMethodScreen()
+    }
+
+    func testListTransferMethod_verifyPressBackButton() {
+        setUpStandardListTransferMethod()
+        listTransferMethod.clickBackButton()
+        XCTAssertTrue(app.navigationBars["Account Settings"].exists)
+    }
+
+    private func validatetestListTransferMethodScreen() {
+        let expectedCellsCount = 4
+        XCTAssertTrue(listTransferMethod.navigationBar.exists)
+        XCTAssertTrue(app.tables.element(boundBy: 0).cells.count == expectedCellsCount)
+        XCTAssertTrue(app.cells.element(boundBy: 0).staticTexts[expectedFirstBankAccountLabel].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 1).staticTexts[expectedSecondBankAccountLabel].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 2).staticTexts[expectedThirdBankAccountLabel].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 3).staticTexts[expectedDebitCardCellLabel].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 0).staticTexts[bankAccountTitle].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 1).staticTexts[bankAccountTitle].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 2).staticTexts[bankAccountTitle].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 3).staticTexts[debitCardTitle].exists)
+
+        if #available(iOS 11.0, *) {
+            XCTAssertTrue(app.cells.element(boundBy: 0).images.element.exists)
+            XCTAssertTrue(app.cells.element(boundBy: 1).images.element.exists)
+            XCTAssertTrue(app.cells.element(boundBy: 2).images.element.exists)
+            XCTAssertTrue(app.cells.element(boundBy: 3).images.element.exists)
+        }
+    }
+
+    private func setUpStandardListTransferMethod() {
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+                             filename: "ListTransferMethodResponse",
+                             method: HTTPMethod.get)
+        openTransferMethodsList()
     }
 }
