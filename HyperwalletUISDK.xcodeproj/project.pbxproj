@@ -21,6 +21,7 @@
 		078B457E2273895C005B0248 /* SelectTransferMethodTypePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078B45722273895C005B0248 /* SelectTransferMethodTypePresenterTests.swift */; };
 		078B457F2273895C005B0248 /* AddTransferMethodPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078B45732273895C005B0248 /* AddTransferMethodPresenterTests.swift */; };
 		078B45812273A441005B0248 /* HyperwalletUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078B45802273A441005B0248 /* HyperwalletUI.swift */; };
+		09B50AEA2285B2C000B03626 /* BankAccountConfigurationWithNotEditableFieldsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 09B50AE5228595DE00B03626 /* BankAccountConfigurationWithNotEditableFieldsResponse.json */; };
 		433A08082285E5BB007A9FFC /* BankAccountConfigurationPresetValues.json in Resources */ = {isa = PBXBuildFile; fileRef = 433A08072285E5BB007A9FFC /* BankAccountConfigurationPresetValues.json */; };
 		4A12653C2280B02900C0F59E /* DateWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12653B2280B02900C0F59E /* DateWidget.swift */; };
 		4A12653E2280B12F00C0F59E /* PhoneWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12653D2280B12F00C0F59E /* PhoneWidget.swift */; };
@@ -178,6 +179,7 @@
 		078B45722273895C005B0248 /* SelectTransferMethodTypePresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectTransferMethodTypePresenterTests.swift; sourceTree = "<group>"; };
 		078B45732273895C005B0248 /* AddTransferMethodPresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodPresenterTests.swift; sourceTree = "<group>"; };
 		078B45802273A441005B0248 /* HyperwalletUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletUI.swift; sourceTree = "<group>"; };
+		09B50AE5228595DE00B03626 /* BankAccountConfigurationWithNotEditableFieldsResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BankAccountConfigurationWithNotEditableFieldsResponse.json; sourceTree = "<group>"; };
 		433A08072285E5BB007A9FFC /* BankAccountConfigurationPresetValues.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BankAccountConfigurationPresetValues.json; sourceTree = "<group>"; };
 		4A12653B2280B02900C0F59E /* DateWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateWidget.swift; sourceTree = "<group>"; };
 		4A12653D2280B12F00C0F59E /* PhoneWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneWidget.swift; sourceTree = "<group>"; };
@@ -401,6 +403,7 @@
 				98F63E662284A2CF0090101D /* PayPalAccountResponse.json */,
 				98F63E692284AC2A0090101D /* PayPalAccountInvalidEmailResponse.json */,
 				98F63E6C2284AD330090101D /* PayPalAccountDuplicateResponse.json */,
+				09B50AE5228595DE00B03626 /* BankAccountConfigurationWithNotEditableFieldsResponse.json */,
 				433A08072285E5BB007A9FFC /* BankAccountConfigurationPresetValues.json */,
 			);
 			path = TransferMethod;
@@ -823,6 +826,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09B50AEA2285B2C000B03626 /* BankAccountConfigurationWithNotEditableFieldsResponse.json in Resources */,
 				98F63E682284AB170090101D /* PayPalAccountResponse.json in Resources */,
 				9807B762226442C60028A280 /* AuthenticationTokenResponse.json in Resources */,
 				9807B763226442C60028A280 /* BankAccountInvalidRoutingResponse.json in Resources */,

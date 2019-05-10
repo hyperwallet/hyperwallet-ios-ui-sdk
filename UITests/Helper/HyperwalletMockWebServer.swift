@@ -127,14 +127,47 @@ class HyperwalletMockWebServer {
 
         server.GET[url] = response
     }
+    
+    func setUpGraphQLBankAccountWithNotEditableField() {
+        let filePathKeys = testBundle.path(forResource: "TransferMethodConfigurationKeysResponse", ofType: "json")
+        let filePathBankField = testBundle.path(forResource: "BankAccountConfigurationWithNotEditableFieldsResponse",
+                                                ofType: "json")
+        
+        let fileUrlKeys = URL(fileURLWithPath: filePathKeys!)
+        let fileUrlBankField = URL(fileURLWithPath: filePathBankField!)
+        
+        do {
+            let dataKeys = try Data(contentsOf: fileUrlKeys, options: .uncached)
+            let dataBankField = try Data(contentsOf: fileUrlBankField, options: .uncached)
+            
+            let jsonKeys = dataToJSON(data: dataKeys)
+            let jsonBankField = dataToJSON(data: dataBankField)
+            
+            server.POST["/graphql"] = { request in
+                let requestBody = String(bytes: request.body, encoding: .utf8)!
+                if requestBody.contains("fields") {
+                    return HttpResponse.ok(.json(jsonBankField as AnyObject))
+                } else {
+                    return HttpResponse.ok(.json(jsonKeys as AnyObject))
+                }
+            }
+        } catch {
+            print("Error info: \(error)")
+        }
+    }
 
     func setUpGraphQLBankAccountWithPreSetValues() {
         let filePathBankField = testBundle.path(forResource: "BankAccountConfigurationPresetValues",
                                                 ofType: "json")
+
+        let fileUrlKeys = URL(fileURLWithPath: filePathKeys!)
         let fileUrlBankField = URL(fileURLWithPath: filePathBankField!)
 
         do {
+            let dataKeys = try Data(contentsOf: fileUrlKeys, options: .uncached)
             let dataBankField = try Data(contentsOf: fileUrlBankField, options: .uncached)
+
+            let jsonKeys = dataToJSON(data: dataKeys)
             let jsonBankField = dataToJSON(data: dataBankField)
 
             server.POST["/graphql"] = { request in

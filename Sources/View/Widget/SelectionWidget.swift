@@ -24,14 +24,13 @@ final class SelectionWidget: AbstractWidget {
 
     private let labelField: UILabel = {
         let label = UILabel()
-        label.textColor = Theme.Text.color
         label.font = Theme.Label.bodyFont
-        label.isUserInteractionEnabled = true
         label.setConstraint(value: 22, attribute: .height)
         return label
     }()
     private var selectedValue: String?
 
+    override func focus() {}
     override func focus() {}
 
     override func handleTap(sender: UITapGestureRecognizer? = nil) {
@@ -42,16 +41,22 @@ final class SelectionWidget: AbstractWidget {
     override func setupLayout(field: HyperwalletField) {
         super.setupLayout(field: field)
         addArrangedSubview(labelField)
-        labelField.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+
+        if field.isEditable ?? true  {
+            labelField.textColor = Theme.Text.color : Theme.Text.disabledColor
+            labelField.isUserInteractionEnabled = true
+            labelField.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+        } else {
+            labelField.textColor = Theme.Text.disabledColor
+        }
 
         if let defaultValue = field.value,
             let option = field.fieldSelectionOptions?.first(where: { $0.value == defaultValue }) {
-            updateLabelFieldValue(option)
-        }
-    }
-
-    override func value() -> String {
-        return selectedValue ?? ""
+            labelField.topAnchor.constraint(equalTo: rowField.topAnchor),
+            labelField.leadingAnchor.constraint(equalTo: rowField.leadingAnchor),
+            labelField.trailingAnchor.constraint(equalTo: rowField.trailingAnchor),
+            labelField.bottomAnchor.constraint(equalTo: rowField.bottomAnchor)
+        ])
     }
 
     private func setupUITapGestureRecognizer(view: UIView, action: Selector ) {
