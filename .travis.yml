@@ -17,8 +17,7 @@ env:
 
   matrix:
     - ios_version='12.1'  ios_device='iPhone XR' scheme="$IOS_FRAMEWORK_SCHEME" platform='iOS Simulator' configuration="DEBUG" code_coverage="YES" only_active_arch="YES"
-    - ios_version='12.1'  ios_device='iPhone XR' scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS Simulator' configuration="XCUITest" code_coverage="NO" only_active_arch="NO"
-    - ios_version='11.1'  ios_device='iPhone 7'  scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS Simulator' configuration="XCUITest" code_coverage="NO" only_active_arch="NO"
+
 before_install:
   # Boot the emulator by ID
   - |
@@ -44,7 +43,7 @@ script: |
   destination="platform=$platform,OS=$ios_version,name=$ios_device"
 
   # Build and test Framework in Debug
-  xcodebuild -enableCodeCoverage "$code_coverage" clean build test -project "$PROJECT" \
+  xcodebuild -enableCodeCoverage YES clean build test -project "$PROJECT" \
     -scheme "$scheme" \
     -destination "$destination" \
     -derivedDataPath Build/ \
