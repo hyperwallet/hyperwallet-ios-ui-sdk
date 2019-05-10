@@ -109,4 +109,24 @@ class AddTransferMethodTests: XCTestCase {
         XCTAssertTrue(app.navigationBars["Add Account"].exists)
         XCTAssertTrue(app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).exists)
     }
+
+    func testAddTransferMethod_verifyRoutingNumberIsNotEditable() {
+        mockServer.setUpGraphQLBankAccountWithNotEditableField()
+        addTransferMethod.clickBackButton()
+        app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).tap()
+        addTransferMethod.branchIdInput.tap()
+        
+        XCTAssertFalse(app.keyboards.element.exists)
+    }
+    
+    func testAddTransferMethod_verifyAccountTypeIsNotEditable() {
+        mockServer.setUpGraphQLBankAccountWithNotEditableField()
+        addTransferMethod.clickBackButton()
+        app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).tap()
+        addTransferMethod.accountTypeSelect.tap()
+        
+        XCTAssertTrue(addTransferMethod.navigationBar.exists)
+        XCTAssertFalse(app.tables["transferMethodTableView"].buttons["More Info"].exists)
+    }
+    
 }
