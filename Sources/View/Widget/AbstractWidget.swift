@@ -44,7 +44,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
         self.alignment = .center
         self.spacing = 5
         self.isLayoutMarginsRelativeArrangement = true
-        self.layoutMargins = UIEdgeInsets(top: 11.0, left: 16.0, bottom: 11.0, right: 16.0)
+        self.layoutMargins = UIEdgeInsets(top: 11.0, left: 0, bottom: 11.0, right: 16.0)
         self.field = field
         setupLayout(field: field)
         label.accessibilityIdentifier = String(format: "label_%@", field.name ?? "")

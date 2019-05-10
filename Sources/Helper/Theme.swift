@@ -93,18 +93,14 @@ public struct Theme {
         public static let rowHeight = CGFloat(44)
         /// The Select transfer method type items header height.
         public static let headerHeight = CGFloat(16)
-        /// The separator inset with edge insets struct whose top, left, bottom, and right fields are all set to 0.
-        public static var separatorInsetZero = UIEdgeInsets.zero
-        /// The separator inset with the left edge set to 16.
-        public static var separatorInset16 = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
-        /// The separator inset with the left edge set to 70.
-        public static var separatorInset70 = UIEdgeInsets(top: 0, left: 70, bottom: 0, right: 0)
     }
 
     /// Representation of all customizable visual style property for the `Hyperwallet`'s icon.
     public struct Icon {
-        /// The icon size
+        /// The icon font size
         public static let size = 20
+        /// The icon frame
+        public static let frame = CGSize(width: 40, height: 40)
         /// The icon primary color
         public static var color = Theme.themeColor
         /// The icon background color

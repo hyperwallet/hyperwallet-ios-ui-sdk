@@ -85,7 +85,6 @@ final class SelectionWidget: AbstractWidget {
         tableView.title = field.label ?? ""
 
         tableView.items = field.fieldSelectionOptions ?? [HyperwalletFieldSelectionOption]()
-        tableView.registerGenericCell(hasNib: false)
         tableView.selectedHandler = { option in
             self.labelField.text = option.label.localized()
             self.selectedValue = option.value

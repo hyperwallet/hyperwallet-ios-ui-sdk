@@ -28,7 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
 
         window?.tintColor = Theme.Button.color
-
         ThemeManager.applyTheme()
         return true
     }

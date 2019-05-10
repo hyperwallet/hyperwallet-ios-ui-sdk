@@ -3,6 +3,7 @@ import XCTest
 enum AccountType: String {
     case bankAccount = "Bank Account"
     case debitCard = "Debit Card"
+    case payPalAccount = "PayPal"
 }
 
 class AddTransferMethod {
@@ -18,6 +19,7 @@ class AddTransferMethod {
     var cardNumberInput: XCUIElement
     var cvvInput: XCUIElement
     var dateOfExpiryInput: XCUIElement
+    var emailInput: XCUIElement
     var title: XCUIElement
     var navigationBar: XCUIElement
 
@@ -34,6 +36,7 @@ class AddTransferMethod {
         cardNumberInput = addTMTableView.textFields["cardNumber"]
         dateOfExpiryInput = addTMTableView.textFields["dateOfExpiry"]
         cvvInput = addTMTableView.textFields["cvv"]
+        emailInput = addTMTableView.textFields["email"]
         title = addTMTableView.staticTexts["Account Information - United States (USD)"]
         navigationBar = app.navigationBars[accountType.rawValue]
     }
@@ -88,6 +91,12 @@ class AddTransferMethod {
     func setCvv(cvvNumber: String) {
         cvvInput.tap()
         app.typeText(cvvNumber)
+        title.tap()
+    }
+
+    func setEmail(email: String) {
+        emailInput.tap()
+        app.typeText(email)
         title.tap()
     }
 }
