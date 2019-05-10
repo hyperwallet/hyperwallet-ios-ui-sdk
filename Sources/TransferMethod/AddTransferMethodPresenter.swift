@@ -25,6 +25,7 @@ protocol AddTransferMethodView: class {
     func areAllFieldsValid() -> Bool
     func notifyTransferMethodAdded(_ transferMethod: HyperwalletTransferMethod)
     func showConfirmation(handler: @escaping () -> Void)
+    func showError( title: String, message: String)
     func showError(_ error: HyperwalletErrorType, _ handler: (() -> Void)?)
     func showBusinessError(_ error: HyperwalletErrorType, _ handler: @escaping () -> Void)
     func showLoading()
@@ -108,12 +109,14 @@ final class AddTransferMethodPresenter {
                                                                     transferMethodProfileType: profileType)
                 .build()
 
+        case "PAYPAL_ACCOUNT":
+            hyperwalletTransferMethod = HyperwalletPayPalAccount.Builder(transferMethodCountry: country,
+                                                                         transferMethodCurrency: currency)
+                .build()
+
         default:
-            hyperwalletTransferMethod = HyperwalletTransferMethod()
-            hyperwalletTransferMethod.setField(key: "transferMethodCountry", value: country)
-            hyperwalletTransferMethod.setField(key: "transferMethodCurrency", value: currency)
-            hyperwalletTransferMethod.setField(key: "type", value: transferMethodType)
-            hyperwalletTransferMethod.setField(key: "profileType", value: profileType)
+            view.showError(title: "error".localized(), message: "transfer_method_not_supported_message".localized())
+            return
         }
 
         for field in view.fieldValues() {
@@ -137,6 +140,9 @@ final class AddTransferMethodPresenter {
         } else if let bankCard = transferMethod as? HyperwalletBankCard {
             Hyperwallet.shared.createBankCard(account: bankCard,
                                               completion: createTransferMethodHandler())
+        } else if let payPalAccount = transferMethod as? HyperwalletPayPalAccount {
+            Hyperwallet.shared.createPayPalAccount(account: payPalAccount,
+                                                   completion: createTransferMethodHandler())
         }
     }
 
