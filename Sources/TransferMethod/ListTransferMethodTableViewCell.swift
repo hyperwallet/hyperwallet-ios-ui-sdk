@@ -21,18 +21,14 @@ import UIKit
 struct ListTransferMethodCellConfiguration {
     let transferMethodType: String
     let transferMethodCountry: String
-    let transferMethodExpiryDate: String
+    let lastFourDigitAccountNumber: String?
     let transferMethodIconFont: String
 }
 
 final class ListTransferMethodTableViewCell: UITableViewCell {
-    @IBOutlet weak var transferMethodTitle: UILabel!
-    @IBOutlet weak var transferMethodSubTitleOne: UILabel!
-    @IBOutlet weak var transferMethodSubTitleTwo: UILabel!
-    @IBOutlet weak var iconView: IconView!
-
+    // MARK: Life cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -41,43 +37,63 @@ final class ListTransferMethodTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        iconView.backgroundColor = Theme.Icon.backgroundColor
+        imageView?.backgroundColor = Theme.Icon.backgroundColor
     }
 
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
-        iconView.backgroundColor = Theme.Icon.backgroundColor
+        imageView?.backgroundColor = Theme.Icon.backgroundColor
     }
 
     // MARK: Theme manager's proxy properties
     @objc dynamic var titleLabelFont: UIFont! {
-        get { return transferMethodTitle.font }
-        set { transferMethodTitle.font = newValue }
+        get { return textLabel?.font }
+        set { textLabel?.font = newValue }
     }
 
     @objc dynamic var titleLabelColor: UIColor! {
-        get { return transferMethodTitle.textColor }
-        set { transferMethodTitle.textColor = newValue }
+        get { return textLabel?.textColor }
+        set { textLabel?.textColor = newValue }
     }
 
     @objc dynamic var subTitleLabelFont: UIFont! {
-        get { return transferMethodSubTitleOne.font }
-        set { transferMethodSubTitleOne.font = newValue
-            transferMethodSubTitleTwo.font = newValue }
+        get { return detailTextLabel?.font }
+        set { detailTextLabel?.font = newValue
+            detailTextLabel?.font = newValue }
     }
 
     @objc dynamic var subTitleLabelColor: UIColor! {
-        get { return transferMethodSubTitleOne.textColor }
-        set { transferMethodSubTitleOne.textColor = newValue
-            transferMethodSubTitleTwo.textColor = newValue}
+        get { return detailTextLabel?.textColor }
+        set { detailTextLabel?.textColor = newValue }
     }
 }
 
 extension ListTransferMethodTableViewCell {
     func configure(configuration: ListTransferMethodCellConfiguration) {
-        transferMethodTitle.text = configuration.transferMethodType
-        transferMethodSubTitleOne.text = configuration.transferMethodCountry
-        transferMethodSubTitleTwo.text = configuration.transferMethodExpiryDate
-        iconView.draw(fontName: configuration.transferMethodIconFont)
+        textLabel?.text = configuration.transferMethodType
+        detailTextLabel?.attributedText = formatSubtitle(transferMethodCountry: configuration.transferMethodCountry,
+                                                         lastFourDigitAccountNumber: configuration
+                                                            .lastFourDigitAccountNumber)
+        detailTextLabel?.numberOfLines = 0
+        detailTextLabel?.lineBreakMode = .byWordWrapping
+        let icon = UIImage.fontIcon(configuration.transferMethodIconFont,
+                                    Theme.Icon.frame,
+                                    CGFloat(Theme.Icon.size),
+                                    Theme.Icon.color,
+                                    Theme.Icon.backgroundColor)
+        imageView?.image = icon
+        imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
+    }
+
+    func formatSubtitle(transferMethodCountry: String, lastFourDigitAccountNumber: String?) -> NSAttributedString {
+        let attributedText = NSMutableAttributedString()
+        let font = Theme.Label.captionOne
+        let color = Theme.Label.subTitleColor
+        attributedText.append(value: String(format: "%@\n", transferMethodCountry), font: font, color: color)
+        if let lastFourDigitAccountNumber = lastFourDigitAccountNumber {
+            attributedText.append(value: lastFourDigitAccountNumber, font: font, color: color)
+        }
+
+        return attributedText
     }
 }

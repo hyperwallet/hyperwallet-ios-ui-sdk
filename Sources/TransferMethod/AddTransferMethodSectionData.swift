@@ -18,55 +18,6 @@
 
 import UIKit
 
-final class AddTransferMethodFooter: UITableViewHeaderFooterView {
-    static let reuseIdentifier = "AddTransferMethodFooterCell"
-
-    @IBOutlet weak var stackView: UIStackView!
-    @IBOutlet weak var errorLabel: UILabel!
-    @IBOutlet weak var infoLabel: UILabel!
-
-    var error: String? {
-        didSet {
-            errorLabel.text = error
-            setIsStackViewHidden()
-            errorLabel.isAccessibilityElement = true
-        }
-    }
-
-    var info: String? {
-        didSet {
-            infoLabel.text = info
-            setSpacing()
-            setIsStackViewHidden()
-        }
-    }
-
-    private func setSpacing() {
-        stackView.spacing = error == nil
-                ? CGFloat(0.0)
-                : CGFloat(8.0)
-    }
-
-    private func setIsStackViewHidden() {
-        stackView.isHidden = error == nil && info == nil
-    }
-
-    override func didMoveToSuperview() {
-        super.didMoveToSuperview()
-        errorLabel.textColor = Theme.Label.errorColor
-        errorLabel.font = Theme.Label.footnoteFont
-        infoLabel.textColor = Theme.Label.textColor
-        infoLabel.font = Theme.Label.footnoteFont
-    }
-
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        error = nil
-        info = nil
-        stackView.layoutSubviews()
-    }
-}
-
 final class AddTransferMethodSectionData {
     var category: String
     var country: String
@@ -88,18 +39,6 @@ final class AddTransferMethodSectionData {
 
         default:
             return  nil
-        }
-    }()
-
-    lazy var footer: String? = {
-        switch category {
-        case "ACCOUNT":
-            return "\(transferMethodType.lowercased())_footer".localized()
-        case "PROFILE":
-            return "add_profile_footer".localized()
-
-        default:
-            return nil
         }
     }()
 

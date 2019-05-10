@@ -27,22 +27,16 @@ class SelectTransferMethodTypeTests: BaseTests {
     }
 
     private func validateSelectTransferMethodScreen() {
-        var bankAccountDescription: String
-        if #available(iOS 11.4, *) {
-            bankAccountDescription = "Transaction Fees: CAD 2.20\nProcessing Time: 1-3 Business days"
-        } else {
-            bankAccountDescription = "Transaction Fees: CAD 2.20 Processing Time: 1-3 Business days"
-        }
-
-        if #available(iOS 11.0, *) {
-            XCTAssert(app.tables["transferMethodTableView"].images["\u{e000}"].exists)
-        }
-
+        XCTAssertNotNil(app.cells.images)
         XCTAssertTrue(app.navigationBars["Add Account"].exists)
         XCTAssertTrue(app.tables.staticTexts["Canada"].exists)
         XCTAssertTrue(app.tables.staticTexts["CAD"].exists)
-        XCTAssertEqual(app.staticTexts["bank_account_title"].label, "Bank Account")
-        XCTAssertEqual(app.staticTexts["bank_account_description"].label, bankAccountDescription)
+        XCTAssertEqual(app.cells.staticTexts["Bank Account"].label, "Bank Account")
+        if #available(iOS 12.0, *) {
+            XCTAssert(app.cells.staticTexts["Transaction Fees: CAD 2.20\nProcessing Time: 1-3 Business days"].exists)
+        } else {
+            XCTAssert(app.cells.staticTexts["Transaction Fees: CAD 2.20 Processing Time: 1-3 Business days"].exists)
+        }
 
         XCTAssertTrue(selectTransferMethodType.countrySelect.exists &&
             selectTransferMethodType.navigationBar.exists &&
@@ -99,7 +93,7 @@ class SelectTransferMethodTypeTests: BaseTests {
         selectTransferMethodType.selectCountry(country: "United States")
         selectTransferMethodType.selectCurrency(currency: "US Dollar")
 
-        XCTAssertEqual(app.tables["transferMethodTableView"].cells.count, 4)
+        XCTAssertEqual(app.tables["transferMethodTableView"].cells.count, 5)
         XCTAssertTrue(app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).exists)
 
         app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).tap()

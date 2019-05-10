@@ -43,7 +43,7 @@ final class ErrorView {
 
     func businessError(_ handler: ((UIAlertAction) -> Void)? = nil) {
         HyperwalletUtilViews.showAlert(viewController,
-                                       title: "Error".localized(),
+                                       title: "error".localized(),
                                        message: error.getHyperwalletErrors()?.errorList?
                                                 .filter { $0.fieldName == nil }
                                                 .map { $0.message }
