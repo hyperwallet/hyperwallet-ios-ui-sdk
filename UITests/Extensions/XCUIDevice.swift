@@ -32,7 +32,7 @@ extension XCUIDevice {
         //Press button to wake
         self.perform(NSSelectorFromString("pressLockButton"))
 
-        if #available(iOS 12.0, *) {
+        if #available(iOS 11.2, *) {
             app.activate()
         } else {
             self.press(.home)
