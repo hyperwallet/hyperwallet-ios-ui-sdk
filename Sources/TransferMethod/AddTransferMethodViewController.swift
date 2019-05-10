@@ -179,8 +179,6 @@ extension AddTransferMethodViewController {
             footerText = String(format: "%@\n", errorMessage)
         }
 
-        footerText = String(format: "%@%@", footerText, presenter.sections[section].footer ?? "")
-
         return footerText
     }
 
@@ -332,6 +330,10 @@ extension AddTransferMethodViewController: AddTransferMethodView {
         self.tableView.reloadData()
     }
 
+    func showError( title: String, message: String) {
+        HyperwalletUtilViews.showAlert(self, title: title, message: message, actions: UIAlertAction.close(self))
+    }
+
     func showError(_ error: HyperwalletErrorType, _ handler: (() -> Void)?) {
         let errorView = ErrorView(viewController: self, error: error)
         errorView.show(handler)
@@ -369,7 +371,6 @@ extension AddTransferMethodViewController: AddTransferMethodView {
         if let errorMessage = section.errorMessage {
             attributedText.append(value: String(format: "%@\n", errorMessage), color: Theme.Label.errorColor)
         }
-        attributedText.append(value: section.footer ?? "", color: Theme.Label.textColor)
 
         return attributedText
     }

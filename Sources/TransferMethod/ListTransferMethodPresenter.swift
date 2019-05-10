@@ -78,6 +78,8 @@ final class ListTransferMethodPresenter {
                 deactivateBankAccount(token)
             case "BANK_CARD":
                 deactivateBankCard(token)
+            case "PAYPAL_ACCOUNT":
+                deactivatePayPalAccount(token)
 
             default:
                 break
@@ -114,6 +116,12 @@ final class ListTransferMethodPresenter {
         Hyperwallet.shared.deactivateBankCard(transferMethodToken: token,
                                               notes: "Deactivating the Bank Card",
                                               completion: deactivateTransferMethodHandler())
+    }
+
+    private func deactivatePayPalAccount(_ token: String) {
+        Hyperwallet.shared.deactivatePayPalAccount(transferMethodToken: token,
+                                                   notes: "Deactivating the PayPal Account",
+                                                   completion: deactivateTransferMethodHandler())
     }
 
     private func deactivateTransferMethodHandler()
