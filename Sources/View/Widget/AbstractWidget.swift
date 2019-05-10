@@ -57,7 +57,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
 
     func setupLayout(field: HyperwalletField) {
         label.text = field.label ?? ""
-        label.isUserInteractionEnabled = true
+        label.isUserInteractionEnabled = field.isEditable ?? true
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         label.addGestureRecognizer(tap)
         self.addArrangedSubview(label)
