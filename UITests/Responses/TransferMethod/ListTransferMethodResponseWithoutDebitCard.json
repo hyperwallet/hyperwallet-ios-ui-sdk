@@ -4,7 +4,7 @@
     "limit": 50,
     "data": [
         {
-            "token": "trm-6dab5471-65d1-4d48-aacb-fdd590f943d6",
+            "token": "trm-11111111-1111-1111-1111-000000000000",
             "type": "BANK_ACCOUNT",
             "status": "ACTIVATED",
             "verificationStatus": "NOT_REQUIRED",
@@ -36,12 +36,12 @@
                     "params": {
                         "rel": "self"
                     },
-                    "href": "https://localhost/rest/v3/users/usr-16960a42-c133-4048-b25c-a3c689267d86/transfer-methods/trm-6dab5471-65d1-4d48-aacb-fdd590f943d6"
+                    "href": "https://localhost/rest/v3/users/usr-token/transfer-methods/trm-11111111-1111-1111-1111-000000000000"
                 }
             ]
         },
         {
-            "token": "trm-6ffc9828-4885-47cc-bc4b-58077b693a53",
+            "token": "trm-11111111-0000-0000-0000-000000000000",
             "type": "BANK_ACCOUNT",
             "status": "ACTIVATED",
             "verificationStatus": "NOT_REQUIRED",
@@ -73,12 +73,12 @@
                     "params": {
                         "rel": "self"
                     },
-                    "href": "https://localhost/rest/v3/users/usr-16960a42-c133-4048-b25c-a3c689267d86/transfer-methods/trm-6ffc9828-4885-47cc-bc4b-58077b693a53"
+                    "href": "https://localhost/rest/v3/users/usr-token/transfer-methods/trm-11111111-0000-0000-0000-000000000000"
                 }
             ]
         },
         {
-            "token": "trm-689d215b-40e0-4973-84e0-bb7cb7edaf37",
+            "token": "trm-00000000-1111-0000-0000-000000000000",
             "type": "BANK_ACCOUNT",
             "status": "ACTIVATED",
             "verificationStatus": "NOT_REQUIRED",
@@ -110,7 +110,7 @@
                     "params": {
                         "rel": "self"
                     },
-                    "href": "https://localhost/rest/v3/users/usr-16960a42-c133-4048-b25c-a3c689267d86/transfer-methods/trm-689d215b-40e0-4973-84e0-bb7cb7edaf37"
+                    "href": "https://localhost/rest/v3/users/usr-token/transfer-methods/trm-00000000-1111-0000-0000-000000000000"
                 }
             ]
         }
@@ -120,19 +120,19 @@
             "params": {
                 "rel": "self"
             },
-            "href": "https://localhost/rest/v3/users/usr-16960a42-c133-4048-b25c-a3c689267d86/transfer-methods?offset=0&limit=100&status=ACTIVATED"
+            "href": "https://localhost/rest/v3/users/usr-token/transfer-methods?offset=0&limit=100&status=ACTIVATED"
         },
         {
             "params": {
                 "rel": "next"
             },
-            "href": "https://localhost/rest/v3/users/usr-16960a42-c133-4048-b25c-a3c689267d86/transfer-methods?offset=100&limit=100&status=ACTIVATED"
+            "href": "https://localhost/rest/v3/users/usr-token/transfer-methods?offset=100&limit=100&status=ACTIVATED"
         },
         {
             "params": {
                 "rel": "last"
             },
-            "href": "https://localhost/rest/v3/users/usr-16960a42-c133-4048-b25c-a3c689267d86/transfer-methods?offset=41&limit=100&status=ACTIVATED"
+            "href": "https://localhost/rest/v3/users/usr-token/transfer-methods?offset=41&limit=100&status=ACTIVATED"
         }
     ]
 }
