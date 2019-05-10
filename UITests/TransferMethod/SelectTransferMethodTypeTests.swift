@@ -93,7 +93,7 @@ class SelectTransferMethodTypeTests: BaseTests {
         selectTransferMethodType.selectCountry(country: "United States")
         selectTransferMethodType.selectCurrency(currency: "US Dollar")
 
-        XCTAssertEqual(app.tables["transferMethodTableView"].cells.count, 4)
+        XCTAssertEqual(app.tables["transferMethodTableView"].cells.count, 5)
         XCTAssertTrue(app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).exists)
 
         app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).tap()
