@@ -29,8 +29,6 @@ final class PasteOnlyTextField: UITextField {
 class TextWidget: AbstractWidget {
     var textField: PasteOnlyTextField = {
         let textField = PasteOnlyTextField()
-        textField.textColor = Theme.Text.color
-        textField.clearButtonMode = .always
         textField.setContentHuggingPriority(UILayoutPriority.defaultLow, for: NSLayoutConstraint.Axis.horizontal)
         if #available(iOS 11.0, *) {
             textField.textDragInteraction?.isEnabled = false
@@ -68,6 +66,9 @@ class TextWidget: AbstractWidget {
         textField.placeholder = "\(field.placeholder ?? "")"
         textField.delegate = self
         textField.accessibilityIdentifier = field.name
+        textField.isUserInteractionEnabled = field.isEditable ?? true
+        textField.clearButtonMode = field.isEditable ?? true ? .always : .never
+        textField.textColor = field.isEditable ?? true ? Theme.Text.color : Theme.Text.disabledColor
         self.addArrangedSubview(textField)
     }
 }
