@@ -32,7 +32,7 @@ class SelectTransferMethodTypeTests: BaseTests {
         XCTAssertTrue(app.tables.staticTexts["Canada"].exists)
         XCTAssertTrue(app.tables.staticTexts["CAD"].exists)
         XCTAssertEqual(app.cells.staticTexts["Bank Account"].label, "Bank Account")
-        if #available(iOS 12.0, *) {
+        if #available(iOS 11.2, *) {
             XCTAssert(app.cells.staticTexts["Transaction Fees: CAD 2.20\nProcessing Time: 1-3 Business days"].exists)
         } else {
             XCTAssert(app.cells.staticTexts["Transaction Fees: CAD 2.20 Processing Time: 1-3 Business days"].exists)
