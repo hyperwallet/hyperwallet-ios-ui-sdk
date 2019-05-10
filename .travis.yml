@@ -43,7 +43,7 @@ script: |
   destination="platform=$platform,OS=$ios_version,name=$ios_device"
 
   # Build and test Framework in Debug
-  xcodebuild -enableCodeCoverage YES clean build test -project "$PROJECT" \
+  xcodebuild -enableCodeCoverage "$code_coverage" clean build test -project "$PROJECT" \
     -scheme "$scheme" \
     -destination "$destination" \
     -derivedDataPath Build/ \
