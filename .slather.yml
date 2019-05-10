@@ -1,6 +1,7 @@
 coverage_service: coveralls
 xcodeproj: HyperwalletUISDK.xcodeproj
 scheme: HyperwalletUISDK
+configuration: Debug
 ignore:
   - Tests/*
   - UITests/*
