@@ -77,6 +77,24 @@ class AddTransferMethodTests: BaseTests {
         XCTAssertTrue(app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).exists)
     }
 
+    func testAddTransferMethod_varifyPresetValues() {
+        mockServer.setUpGraphQLBankAccountWithPreSetValues()
+        addTransferMethod.clickBackButton()
+        app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).tap()
+
+        guard let routingNumberPreSetValue = addTransferMethod.branchIdInput.value as? String else {
+            XCTFail("preset value is nill")
+            return
+        }
+        guard let accountNumberPreSetValue = addTransferMethod.accountNumberInput.value as? String else {
+            XCTFail("preset value is nill")
+            return
+        }
+
+        XCTAssertEqual(routingNumberPreSetValue, "012345678")
+        XCTAssertEqual(accountNumberPreSetValue, "012345")
+    }
+    
     func testAddTransferMethod_verifyAfterRelaunch() {
         setUpScreenWithInvalidRoutingError()
         validateAddTransferMethodBankAccountScreen()
