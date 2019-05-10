@@ -1,49 +1,16 @@
 import XCTest
 
-class AddTransferMethodTests: XCTestCase {
-    var app: XCUIApplication!
+class AddTransferMethodTests: BaseTests {
     var selectTransferMethodType: SelectTransferMethodType!
     var addTransferMethod: AddTransferMethod!
-    var mockServer: HyperwalletMockWebServer!
-    var spinner: XCUIElement!
 
     let bankAccount = NSPredicate(format: "label CONTAINS[c] 'Bank Account'")
 
     override func setUp() {
-        continueAfterFailure = false
-
-        mockServer = HyperwalletMockWebServer()
-        mockServer.setUp()
+        super.setUp()
 
         // Initialize stubs
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/authentication-token",
-                             filename: "AuthenticationTokenResponse",
-                             method: HTTPMethod.post)
-
-        mockServer.setupStub(url: "/rest/v3/users/usr-token",
-                             filename: "UserIndividualResponse",
-                             method: HTTPMethod.get)
-
-        mockServer.setupGraphQLStubs()
-
-        app = XCUIApplication()
-        app.launch()
-
-        selectTransferMethodType = SelectTransferMethodType(app: app)
-        addTransferMethod = AddTransferMethod(app: app, for: .bankAccount)
-
-        app.tables.cells.containing(.staticText, identifier: "Add Transfer Method").element(boundBy: 0).tap()
-        spinner = app.activityIndicators["activityIndicator"]
-        waitForNonExistence(spinner)
-
-        selectTransferMethodType.selectCountry(country: "United States")
-        selectTransferMethodType.selectCurrency(currency: "US Dollar")
-
-        app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).tap()
-    }
-
-    override func tearDown() {
-        mockServer.tearDown()
+        setUpBankAccountScreen()
     }
 
     func testAddTransferMethod_createBankAccount() {
@@ -108,5 +75,89 @@ class AddTransferMethodTests: XCTestCase {
         XCTAssertFalse(app.alerts["Unexpected Error"].exists)
         XCTAssertTrue(app.navigationBars["Add Account"].exists)
         XCTAssertTrue(app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).exists)
+    }
+
+    func testAddTransferMethod_verifyAfterRelaunch() {
+        setUpScreenWithInvalidRoutingError()
+        validateAddTransferMethodBankAccountScreen()
+        XCUIDevice.shared.clickHomeAndRelaunch(app: app)
+        setUpBankAccountScreen()
+        setUpScreenWithInvalidRoutingError()
+        validateAddTransferMethodBankAccountScreen()
+    }
+
+    func testAddTransferMethod_verifyRotateScreen() {
+        setUpScreenWithInvalidRoutingError()
+        XCUIDevice.shared.rotateScreen(times: 3)
+        validateAddTransferMethodBankAccountScreen()
+    }
+
+    func testAddTransferMethod_verifyWakeFromSleep() {
+        setUpScreenWithInvalidRoutingError()
+        XCUIDevice.shared.wakeFromSleep(app: app)
+        waitForNonExistence(addTransferMethod.navigationBar)
+        validateAddTransferMethodBankAccountScreen()
+    }
+
+    func testAddTransferMethod_verifyResumeFromRecents() {
+        setUpScreenWithInvalidRoutingError()
+        XCUIDevice.shared.resumeFromRecents(app: app)
+        waitForNonExistence(addTransferMethod.navigationBar)
+        validateAddTransferMethodBankAccountScreen()
+    }
+
+    func testAddTransferMethod_verifyAppToBackground() {
+        setUpScreenWithInvalidRoutingError()
+        XCUIDevice.shared.sendToBackground(app: app)
+        validateAddTransferMethodBankAccountScreen()
+    }
+
+    func testAddTransferMethod_verifyPressBackButton() {
+        addTransferMethod.clickBackButton()
+        XCTAssertTrue(selectTransferMethodType.navigationBar.exists)
+    }
+
+    func validateAddTransferMethodBankAccountScreen() {
+        XCTAssertTrue(addTransferMethod.navigationBar.exists)
+        XCTAssertTrue(app.keyboards.element.exists)
+        XCTAssertTrue(addTransferMethod.branchIdInput.exists)
+        XCTAssertTrue(addTransferMethod.accountNumberInput.exists)
+        XCTAssertTrue(addTransferMethod.accountTypeSelect.exists)
+        XCTAssertNotNil(app.tables.otherElements
+            .containing(NSPredicate(format: "label CONTAINS %@", "Routing Number [021000022] is not valid. " +
+                "Please modify Routing Number to a valid ACH Routing Number of the branch of your bank.")))
+    }
+
+    private func setUpBankAccountScreen() {
+        mockServer.setupGraphQLStubs()
+
+        app = XCUIApplication()
+        app.launch()
+
+        selectTransferMethodType = SelectTransferMethodType(app: app)
+        addTransferMethod = AddTransferMethod(app: app, for: .bankAccount)
+
+        app.tables.cells.containing(.staticText, identifier: "Add Transfer Method").element(boundBy: 0).tap()
+        spinner = app.activityIndicators["activityIndicator"]
+        waitForNonExistence(spinner)
+
+        selectTransferMethodType.selectCountry(country: "United States")
+        selectTransferMethodType.selectCurrency(currency: "US Dollar")
+
+        app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).tap()
+    }
+
+    private func setUpScreenWithInvalidRoutingError() {
+        mockServer.setupStubError(url: "/rest/v3/users/usr-token/bank-accounts",
+                                  filename: "BankAccountInvalidRoutingResponse",
+                                  method: HTTPMethod.post)
+
+        waitForNonExistence(spinner)
+
+        addTransferMethod.setBranchId(branchId: "021000022")
+        addTransferMethod.setAccountNumber(accountNumber: "12345")
+        addTransferMethod.selectAccountType(accountType: "Checking")
+        addTransferMethod.clickCreateTransferMethodButton()
+        waitForNonExistence(spinner)
     }
 }
