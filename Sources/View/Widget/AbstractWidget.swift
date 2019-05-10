@@ -23,10 +23,6 @@ import UIKit
 class AbstractWidget: UIStackView, UITextFieldDelegate {
     var field: HyperwalletField!
 
-    var isEditable: Bool {
-        return field.isEditable ?? true
-    }
-
     var label: UILabel = {
         let label = UILabel()
         label.textColor = Theme.Label.textColor
@@ -61,7 +57,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
 
     func setupLayout(field: HyperwalletField) {
         label.text = field.label ?? ""
-        label.isUserInteractionEnabled = true
+        label.isUserInteractionEnabled = field.isEditable ?? true
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         label.addGestureRecognizer(tap)
         self.addArrangedSubview(label)

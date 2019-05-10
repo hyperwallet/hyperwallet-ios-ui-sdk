@@ -49,14 +49,14 @@ final class SelectionWidget: AbstractWidget {
     }
 
     private func setupRowField() {
-        rowField.isUserInteractionEnabled = isEditable
+        rowField.isUserInteractionEnabled = field.isEditable ?? true
         rowField.addSubview(labelField)
         setupLabelField()
         setupUITapGestureRecognizer(view: rowField, action: #selector(handleTap))
     }
 
     private func setupLabelField() {
-        labelField.textColor = isEditable ? Theme.Text.color : Theme.Text.disabledColor
+        labelField.textColor = field.isEditable ?? true ? Theme.Text.color : Theme.Text.disabledColor
         labelField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             labelField.topAnchor.constraint(equalTo: rowField.topAnchor),

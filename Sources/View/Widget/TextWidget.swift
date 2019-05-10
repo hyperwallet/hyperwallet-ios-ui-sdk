@@ -66,9 +66,9 @@ class TextWidget: AbstractWidget {
         textField.placeholder = "\(field.placeholder ?? "")"
         textField.delegate = self
         textField.accessibilityIdentifier = field.name
-        textField.isUserInteractionEnabled = isEditable
-        textField.clearButtonMode = isEditable ? .always : .never
-        textField.textColor = isEditable ? Theme.Text.color : Theme.Text.disabledColor
+        textField.isUserInteractionEnabled = field.isEditable ?? true
+        textField.clearButtonMode = field.isEditable ?? true ? .always : .never
+        textField.textColor = field.isEditable ?? true ? Theme.Text.color : Theme.Text.disabledColor
         self.addArrangedSubview(textField)
     }
 }
