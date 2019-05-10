@@ -67,6 +67,7 @@
 "account_header" = "%1$@ - %2$@ (%3$@)";
 "bank_account_footer" = "On a paper check, the routing number is printed as the first 9 digits on the bottom of the check, followed by 4-17 digits for the account number.";
 "bank_card_footer" = "CVV is a 3 digit number, typically found on the back of the card.";
+"paypal_account_footer" = "PayPal transfer method email address should be same as profile email address.";
 "add_profile_footer" = "Note: we are not able to support adding an account for someone else.";
 "profile_header"="Account Holder";
 "address_header"="Address";
