@@ -12,7 +12,7 @@ class ListTransferMethodTests: BaseTests {
     let debitCardTitle = "Debit Card"
 
     var expectedFirstBankAccountLabel: String = {
-        if #available(iOS 12.0, *) {
+        if #available(iOS 11.2, *) {
             return "United States\nEnding on 0001"
         } else {
             return "United States Ending on 0001"
@@ -20,7 +20,7 @@ class ListTransferMethodTests: BaseTests {
     }()
 
     var expectedSecondBankAccountLabel: String = {
-        if #available(iOS 12.0, *) {
+        if #available(iOS 11.2, *) {
             return "United States\nEnding on 0002"
         } else {
             return "United States Ending on 0002"
@@ -28,7 +28,7 @@ class ListTransferMethodTests: BaseTests {
     }()
 
     var expectedThirdBankAccountLabel: String = {
-        if #available(iOS 12.0, *) {
+        if #available(iOS 11.2, *) {
             return "United States\nEnding on 0003"
         } else {
             return "United States Ending on 0003"
@@ -36,7 +36,7 @@ class ListTransferMethodTests: BaseTests {
     }()
 
     var expectedDebitCardCellLabel: String = {
-        if #available(iOS 12.0, *) {
+        if #available(iOS 11.2, *) {
             return "United States\nEnding on 0006"
         } else {
             return "United States Ending on 0006"
