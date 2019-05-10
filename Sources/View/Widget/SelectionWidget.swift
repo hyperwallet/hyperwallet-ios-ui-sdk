@@ -43,7 +43,7 @@ final class SelectionWidget: AbstractWidget {
         super.setupLayout(field: field)
         addArrangedSubview(labelField)
         labelField.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
-        
+
         if let defaultValue = field.value,
             let option = field.fieldSelectionOptions?.first(where: { $0.value == defaultValue }) {
             updateLabelFieldValue(option)

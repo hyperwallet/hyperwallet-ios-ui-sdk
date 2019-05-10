@@ -20,34 +20,14 @@ import UIKit
 
 /// Represents the expiry date widget.
 final class ExpiryDateWidget: TextWidget {
-    var pickerView: ExpiryDatePickerView!
-    var toolbar = UIToolbar()
+    private var pickerView: ExpiryDatePickerView!
+    private var toolbar = UIToolbar()
 
     override func setupLayout(field: HyperwalletField) {
         super.setupLayout(field: field)
         setupPickerView(field: field)
         toolbar.setupToolBar(target: self, action: #selector(self.doneButtonTapped))
         setupTextField()
-    }
-
-    private func setupPickerView(field: HyperwalletField) {
-        pickerView = ExpiryDatePickerView(value: field.value)
-        pickerView.accessibilityIdentifier = "ExpiryDateWidgetPickerAccessibilityIdentifier"
-    }
-
-    private func setupTextField() {
-        textField.inputView = pickerView
-        textField.inputAccessoryView = toolbar
-    }
-
-    @objc
-    private func doneButtonTapped() {
-        guard let month = pickerView.month, let year = pickerView.year
-            else {
-                return
-        }
-        textField.text = String(format: "expiry_date_format".localized(), month, year % 100)
-        textField.resignFirstResponder()
     }
 
     /// format the expiryDate to YYYY-MM, which can be accepted by server through REST API call
@@ -59,5 +39,24 @@ final class ExpiryDateWidget: TextWidget {
         } else {
             return String(format: "%04d-%02d", pickerView.year, pickerView.month)
         }
+    }
+
+    @objc
+    private func doneButtonTapped() {
+        guard let month = pickerView.month, let year = pickerView.year else {
+            return
+        }
+        textField.text = String(format: "expiry_date_format".localized(), month, year % 100)
+        textField.resignFirstResponder()
+    }
+
+    private func setupPickerView(field: HyperwalletField) {
+        pickerView = ExpiryDatePickerView(value: field.value)
+        pickerView.accessibilityIdentifier = "ExpiryDateWidgetPickerAccessibilityIdentifier"
+    }
+
+    private func setupTextField() {
+        textField.inputView = pickerView
+        textField.inputAccessoryView = toolbar
     }
 }

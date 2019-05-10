@@ -60,6 +60,6 @@ class TextWidget: AbstractWidget {
         textField.delegate = self
         textField.accessibilityIdentifier = field.name
         textField.text = field.value
-        self.addArrangedSubview(textField)
+        addArrangedSubview(textField)
     }
 }

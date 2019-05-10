@@ -25,8 +25,8 @@ final class ExpiryDatePickerView: UIPickerView, UIPickerViewDelegate, UIPickerVi
     private var months = [String]()
     private var years = [Int]()
 
-    init(value: String?, frame: CGRect = .zero) {
-        super.init(frame: frame)
+    convenience init(value: String?, frame: CGRect = .zero) {
+        self.init(frame: frame)
 
         if let values = value?.components(separatedBy: "-"),
             values.count == 2,
@@ -51,35 +51,14 @@ final class ExpiryDatePickerView: UIPickerView, UIPickerViewDelegate, UIPickerVi
         selectRow(month - 1, inComponent: 0, animated: false)
     }
 
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-
-    private func setupMonths() {
-        months = DateFormatter().monthSymbols.map({ $0.capitalized })
-    }
-
-    private func setupYears(add: Int) {
-        years = Array(year...year + add)
-    }
-
     // MARK: UIPicker Delegate / Data Source
-
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
     }
 
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        switch component {
-        case 0:
-            return months[row % months.count]
-
-        case 1:
-            return String(describing: years[row])
-
-        default:
-            return nil
-        }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        month = selectedRow(inComponent: 0) + 1
+        year = years[selectedRow(inComponent: 1)]
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -95,8 +74,24 @@ final class ExpiryDatePickerView: UIPickerView, UIPickerViewDelegate, UIPickerVi
         }
     }
 
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        month = selectedRow(inComponent: 0) + 1
-        year = years[selectedRow(inComponent: 1)]
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        switch component {
+        case 0:
+            return months[row % months.count]
+
+        case 1:
+            return String(describing: years[row])
+
+        default:
+            return nil
+        }
+    }
+
+    private func setupMonths() {
+        months = DateFormatter().monthSymbols.map({ $0.capitalized })
+    }
+
+    private func setupYears(add: Int) {
+        years = Array(year...year + add)
     }
 }
