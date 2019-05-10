@@ -125,6 +125,13 @@ final class AddTransferMethodPresenter {
         createTransferMethod(transferMethod: hyperwalletTransferMethod)
     }
 
+    func prepareSectionForScrolling(_ section: AddTransferMethodSectionData,
+                                    _ row: Int,
+                                    _ focusWidget: AbstractWidget) {
+        section.rowShouldBeScrolledTo = row
+        section.fieldToBeFocused = focusWidget
+    }
+
     private func createTransferMethod(transferMethod: HyperwalletTransferMethod) {
         view.showProcessing()
         if let bankAccount = transferMethod as? HyperwalletBankAccount {
@@ -204,13 +211,14 @@ final class AddTransferMethodPresenter {
                                    _ errorsWithFieldName: [HyperwalletError]) {
         let errorWidgets = widgetsContainError(for: section, errorsWithFieldName)
         if let focusWidget = errorWidgets.first, let row = section.cells.firstIndex(of: focusWidget) {
-            section.rowShouldBeScrolledTo = row
-            section.fieldToBeFocused = focusWidget
-            section.errorMessage = prepareErrorMessage(errors: errorsWithFieldName, errorWidgets: errorWidgets)
+            prepareSectionForScrolling(section, row, focusWidget)
+            prepareErrorMessage(section, errorsWithFieldName, errorWidgets)
         }
     }
 
-    private func prepareErrorMessage(errors: [HyperwalletError], errorWidgets: [AbstractWidget]) -> String {
+    private func prepareErrorMessage(_ section: AddTransferMethodSectionData,
+                                     _ errors: [HyperwalletError],
+                                     _ errorWidgets: [AbstractWidget]) {
         var errorMessages = [String]()
         for widget in errorWidgets {
             // get the errorMessage by widget name and update widget UI
@@ -219,7 +227,7 @@ final class AddTransferMethodPresenter {
                 errorMessages.append(error.message)
             }
         }
-        return errorMessages.joined(separator: "\n")
+        section.errorMessage = errorMessages.joined(separator: "\n")
     }
 
     private func widgetsContainError(for section: AddTransferMethodSectionData,
@@ -247,5 +255,6 @@ final class AddTransferMethodPresenter {
 
     func focusField(in section: AddTransferMethodSectionData) {
         section.fieldToBeFocused?.focus()
+        section.reset()
     }
 }
