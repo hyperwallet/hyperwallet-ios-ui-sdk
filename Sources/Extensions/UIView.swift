@@ -54,64 +54,6 @@ extension UIView {
         }
     }
 
-    /// Left Anchor
-    var safeAreaLeftAnchor: NSLayoutXAxisAnchor {
-        if #available(iOS 11.0, *) {
-            return self.safeAreaLayoutGuide.leftAnchor
-        } else {
-            return self.leftAnchor
-        }
-    }
-
-    /// Right Anchor
-    var safeAreaRightAnchor: NSLayoutXAxisAnchor {
-        if #available(iOS 11.0, *) {
-            return self.safeAreaLayoutGuide.rightAnchor
-        } else {
-            return self.rightAnchor
-        }
-    }
-
-    /// Height Anchor
-    var safeAreaHeightAnchor: NSLayoutDimension {
-        if #available(iOS 11.0, *) {
-            return self.safeAreaLayoutGuide.heightAnchor
-        } else {
-            return self.heightAnchor
-        }
-    }
-
-    /// Width Anchor
-    var safeAreaWidthAnchor: NSLayoutDimension {
-        if #available(iOS 11.0, *) {
-            return self.safeAreaLayoutGuide.widthAnchor
-        } else {
-            return self.widthAnchor
-        }
-    }
-
-    /// Defines constraint for Button to the bottom, leading, trailing and height
-    public func buttonConstraints(margin: UIView, bottom: UIView) {
-        // Layout for iPhone X model
-        if #available(iOS 11.0, *),
-            let topPadding = UIApplication.shared.keyWindow?.safeAreaInsets.top, topPadding > 24 {
-            NSLayoutConstraint.activate([
-                self.bottomAnchor.constraint(equalTo: bottom.bottomAnchor),
-                self.leadingAnchor.constraint(equalTo: margin.layoutMarginsGuide.leadingAnchor),
-                self.trailingAnchor.constraint(equalTo: margin.layoutMarginsGuide.trailingAnchor)
-            ])
-            self.layer.masksToBounds = true
-            self.layer.cornerRadius = 6
-        } else {
-            NSLayoutConstraint.activate([
-                self.bottomAnchor.constraint(equalTo: bottom.bottomAnchor),
-                self.leadingAnchor.constraint(equalTo: margin.leadingAnchor),
-                self.trailingAnchor.constraint(equalTo: margin.trailingAnchor)
-            ])
-        }
-        self.setConstraint(value: 55, attribute: .height)
-    }
-
     /// Add constraint based in Visual Format
     ///
     /// - parameter: format - The value should follow the visual format language
@@ -146,21 +88,5 @@ extension UIView {
                                             multiplier: 1 ,
                                             constant: value)
         addConstraint(constraint)
-    }
-
-    /// Helper method to add safe area margin
-    public func addSubview(childView: UIView) {
-        addSubview(childView)
-        /// Below line tells the view to not use AutoResizing
-        childView.translatesAutoresizingMaskIntoConstraints = false
-
-        /// Create the leading and trailing margin constraints
-        let margins = layoutMarginsGuide
-        NSLayoutConstraint.activate([
-            childView.safeAreaLeadingAnchor.constraint(equalTo: margins.leadingAnchor),
-            childView.safeAreaTrailingAnchor.constraint(equalTo: margins.trailingAnchor),
-            childView.safeAreaTopAnchor.constraint(equalTo: margins.topAnchor),
-            childView.safeAreaBottomAnchor.constraint(equalTo: margins.bottomAnchor)
-        ])
     }
 }
