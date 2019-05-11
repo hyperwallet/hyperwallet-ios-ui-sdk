@@ -179,8 +179,6 @@ extension AddTransferMethodViewController {
             footerText = String(format: "%@\n", errorMessage)
         }
 
-        footerText = String(format: "%@%@", footerText, presenter.sections[section].footer ?? "")
-
         return footerText
     }
 
@@ -220,7 +218,7 @@ extension AddTransferMethodViewController {
         }
         let widget = presenter.sections[indexPath.section][indexPath.row]
         cell.contentView.addSubview(widget)
-        if let widget = widget as? SelectionWidget {
+        if let widget = widget as? SelectionWidget, widget.field.isEditable ?? true {
             cell.accessoryType = .disclosureIndicator
             widget.viewController = self
         }
@@ -260,7 +258,7 @@ extension AddTransferMethodViewController: AddTransferMethodView {
         // to be focused is visible. We need to scroll to the field in order to focus.
         if let section = presenter.getSectionContainingFocusedField() {
             let indexPath = getIndexPath(for: section)
-            if isCellVisibile(indexPath: indexPath) {
+            if isCellVisibile(indexPath) {
                 presenter.focusField(in: section)
             } else {
                 tableView.scrollToRow(at: indexPath, at: .top, animated: true)
@@ -271,7 +269,7 @@ extension AddTransferMethodViewController: AddTransferMethodView {
     override public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         // update footer once scroll ends
         if let section = presenter.getSectionContainingFocusedField() {
-            if isCellVisibile(indexPath: getIndexPath(for: section)) {
+            if isCellVisibile(getIndexPath(for: section)) {
                 presenter.focusField(in: section)
             }
         }
@@ -287,10 +285,10 @@ extension AddTransferMethodViewController: AddTransferMethodView {
             if $0.isValid() == false {
                 $0.showError()
                 if isFormValid {
-                    $0.focus()
+                        focusOnInvalidField($0)
+                    }
                     isFormValid = false
                 }
-            }
         }
         return isFormValid
     }
@@ -332,6 +330,10 @@ extension AddTransferMethodViewController: AddTransferMethodView {
         self.tableView.reloadData()
     }
 
+    func showError( title: String, message: String) {
+        HyperwalletUtilViews.showAlert(self, title: title, message: message, actions: UIAlertAction.close(self))
+    }
+
     func showError(_ error: HyperwalletErrorType, _ handler: (() -> Void)?) {
         let errorView = ErrorView(viewController: self, error: error)
         errorView.show(handler)
@@ -352,6 +354,30 @@ extension AddTransferMethodViewController: AddTransferMethodView {
         createTransferMethodHandler?(transferMethod)
     }
 
+    private func focusOnInvalidField(_ widget: AbstractWidget) {
+        if let indexPath = getIndexPathFor(fieldToBeFocused: widget) {
+            if isCellVisibile(indexPath) {
+                widget.focus()
+            } else {
+                let sectionContainingInvalidWidget = presenter.sections[indexPath.section]
+                sectionContainingInvalidWidget.containsFocusedField = true
+                presenter.prepareSectionForScrolling(sectionContainingInvalidWidget, indexPath.row, widget)
+                tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+            }
+        }
+    }
+
+    private func getIndexPathFor(fieldToBeFocused: AbstractWidget) -> IndexPath? {
+        if let sectionContainingInvalidField = presenter
+            .sections
+            .first(where: { fieldToBeFocused.field.category == $0.category }),
+            let sectionIndex = presenter.getSectionIndex(by: sectionContainingInvalidField.category),
+            let cellIndex = sectionContainingInvalidField.cells.firstIndex(of: fieldToBeFocused) {
+            return IndexPath(row: cellIndex, section: sectionIndex)
+        }
+        return nil
+    }
+
     private func updateFooterView(_ footerView: UITableViewHeaderFooterView, for section: Int) {
         let attributedText = updateFooterText(for: presenter.sections[section])
         if footerView.textLabel?.attributedText?.string != attributedText.string {
@@ -369,7 +395,6 @@ extension AddTransferMethodViewController: AddTransferMethodView {
         if let errorMessage = section.errorMessage {
             attributedText.append(value: String(format: "%@\n", errorMessage), color: Theme.Label.errorColor)
         }
-        attributedText.append(value: section.footer ?? "", color: Theme.Label.textColor)
 
         return attributedText
     }
@@ -423,7 +448,7 @@ extension AddTransferMethodViewController: AddTransferMethodView {
         presenter.sections.append(buttonSection)
     }
 
-    private func isCellVisibile(indexPath: IndexPath) -> Bool {
+    private func isCellVisibile(_ indexPath: IndexPath) -> Bool {
         let cellRect = tableView.rectForRow(at: indexPath)
         return tableView.bounds.contains(cellRect)
     }

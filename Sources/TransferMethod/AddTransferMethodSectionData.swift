@@ -27,7 +27,6 @@ final class AddTransferMethodSectionData {
     var containsFocusedField: Bool = false
     var fieldToBeFocused: AbstractWidget?
     var rowShouldBeScrolledTo: Int?
-    var isScrolling: Bool = false
 
     lazy var header: String? = {
         switch category {
@@ -39,18 +38,6 @@ final class AddTransferMethodSectionData {
 
         default:
             return  nil
-        }
-    }()
-
-    lazy var footer: String? = {
-        switch category {
-        case "ACCOUNT":
-            return "\(transferMethodType.lowercased())_footer".localized()
-        case "PROFILE":
-            return "add_profile_footer".localized()
-
-        default:
-            return nil
         }
     }()
 
@@ -77,5 +64,11 @@ final class AddTransferMethodSectionData {
 
     subscript(index: Int) -> UIView {
         return cells[index]
+    }
+
+    func reset() {
+        containsFocusedField = false
+        fieldToBeFocused = nil
+        rowShouldBeScrolledTo = nil
     }
 }
