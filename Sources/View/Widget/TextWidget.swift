@@ -57,10 +57,11 @@ class TextWidget: AbstractWidget {
         textField.placeholder = "\(field.placeholder ?? "")"
         textField.delegate = self
         textField.accessibilityIdentifier = field.name
-        extField.text = field.value
+        textField.text = field.value
+
         if field.isEditable ?? true {
             textField.isUserInteractionEnabled = true
-            textField.clearButtonMode = .always : .never
+            textField.clearButtonMode = .always
             textField.textColor = Theme.Text.color
         } else {
             textField.clearButtonMode = .never

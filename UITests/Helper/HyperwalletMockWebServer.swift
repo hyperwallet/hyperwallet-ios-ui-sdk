@@ -159,15 +159,10 @@ class HyperwalletMockWebServer {
     func setUpGraphQLBankAccountWithPreSetValues() {
         let filePathBankField = testBundle.path(forResource: "BankAccountConfigurationPresetValues",
                                                 ofType: "json")
-
-        let fileUrlKeys = URL(fileURLWithPath: filePathKeys!)
         let fileUrlBankField = URL(fileURLWithPath: filePathBankField!)
 
         do {
-            let dataKeys = try Data(contentsOf: fileUrlKeys, options: .uncached)
             let dataBankField = try Data(contentsOf: fileUrlBankField, options: .uncached)
-
-            let jsonKeys = dataToJSON(data: dataKeys)
             let jsonBankField = dataToJSON(data: dataBankField)
 
             server.POST["/graphql"] = { request in

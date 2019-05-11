@@ -31,7 +31,6 @@ final class SelectionWidget: AbstractWidget {
     private var selectedValue: String?
 
     override func focus() {}
-    override func focus() {}
 
     override func handleTap(sender: UITapGestureRecognizer? = nil) {
         viewController?.view.endEditing(true)
@@ -42,8 +41,8 @@ final class SelectionWidget: AbstractWidget {
         super.setupLayout(field: field)
         addArrangedSubview(labelField)
 
-        if field.isEditable ?? true  {
-            labelField.textColor = Theme.Text.color : Theme.Text.disabledColor
+        if field.isEditable ?? true {
+            labelField.textColor = Theme.Text.color
             labelField.isUserInteractionEnabled = true
             labelField.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
         } else {
@@ -52,11 +51,12 @@ final class SelectionWidget: AbstractWidget {
 
         if let defaultValue = field.value,
             let option = field.fieldSelectionOptions?.first(where: { $0.value == defaultValue }) {
-            labelField.topAnchor.constraint(equalTo: rowField.topAnchor),
-            labelField.leadingAnchor.constraint(equalTo: rowField.leadingAnchor),
-            labelField.trailingAnchor.constraint(equalTo: rowField.trailingAnchor),
-            labelField.bottomAnchor.constraint(equalTo: rowField.bottomAnchor)
-        ])
+            updateLabelFieldValue(option)
+        }
+    }
+
+    override func value() -> String {
+        return selectedValue ?? ""
     }
 
     private func setupUITapGestureRecognizer(view: UIView, action: Selector ) {
