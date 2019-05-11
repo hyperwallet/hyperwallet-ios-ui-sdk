@@ -94,7 +94,7 @@ class AddTransferMethodTests: BaseTests {
         XCTAssertEqual(routingNumberPreSetValue, "012345678")
         XCTAssertEqual(accountNumberPreSetValue, "012345")
     }
-    
+
     func testAddTransferMethod_verifyAfterRelaunch() {
         setUpScreenWithInvalidRoutingError()
         validateAddTransferMethodBankAccountScreen()
@@ -184,16 +184,16 @@ class AddTransferMethodTests: BaseTests {
         addTransferMethod.clickBackButton()
         app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).tap()
         addTransferMethod.branchIdInput.tap()
-        
+
         XCTAssertFalse(app.keyboards.element.exists)
     }
-    
+
     func testAddTransferMethod_verifyAccountTypeIsNotEditable() {
         mockServer.setUpGraphQLBankAccountWithNotEditableField()
         addTransferMethod.clickBackButton()
         app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).tap()
         addTransferMethod.accountTypeSelect.tap()
-        
+
         XCTAssertTrue(addTransferMethod.navigationBar.exists)
         XCTAssertFalse(app.tables["transferMethodTableView"].buttons["More Info"].exists)
     }
