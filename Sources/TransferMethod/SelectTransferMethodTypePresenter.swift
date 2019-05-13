@@ -222,6 +222,7 @@ final class SelectTransferMethodTypePresenter {
             strongSelf.selectedCurrency = currency.value
             strongSelf.loadTransferMethodTypes(country: strongSelf.selectedCountry,
                                                currency: strongSelf.selectedCurrency)
+            strongSelf.view.countryCurrencyTableViewReloadData()
         }
     }
 
