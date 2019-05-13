@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
 
         // Set the default tint color
-        window?.tintColor = Theme.tintColor
+        window?.tintColor = Theme.Button.color
         // Avoid to display a black area during the view transaction in the UINavigationBar.
         window?.backgroundColor = Theme.ViewController.backgroundColor
         ThemeManager.applyTheme()
