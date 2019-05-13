@@ -113,7 +113,6 @@ class AddTransferMethodTests: BaseTests {
     func testAddTransferMethod_verifyWakeFromSleep() {
         setUpScreenWithInvalidRoutingError()
         XCUIDevice.shared.wakeFromSleep(app: app)
-        waitForNonExistence(addTransferMethod.navigationBar)
         validateAddTransferMethodBankAccountScreen()
     }
 
