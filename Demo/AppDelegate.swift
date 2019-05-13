@@ -31,6 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.tintColor = Theme.Button.color
         // Avoid to display a black area during the view transaction in the UINavigationBar.
         window?.backgroundColor = Theme.ViewController.backgroundColor
+
+        //ThemeManager.applyWhiteTheme()
+
         ThemeManager.applyTheme()
         return true
     }
