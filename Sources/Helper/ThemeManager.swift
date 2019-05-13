@@ -20,7 +20,7 @@ import UIKit
 
 /// The `ThemeManager` class is responsible for applying the visual styles to the Hyperwallet user interface components.
 public class ThemeManager {
-    /// Applies visual styles to the Hyperwallet user interface components.
+    /// Applies default visual styles to the Hyperwallet user interface components.
     public static func applyTheme() {
         applyToUINavigationBar()
         applyToProcessingView()
@@ -30,6 +30,18 @@ public class ThemeManager {
         applyToListTransferMethodTableViewCell()
         applyToSelectTransferMethodTypeCell()
         registerFonts
+    }
+
+    /// Applies White Theme visual styles to the Hyperwallet user interface components.
+    public static func applyWhiteTheme() {
+        Theme.themeColor = .white
+        Theme.tintColor = UIColor(red: 0, green: 0.48, blue: 1, alpha: 1)
+        Theme.Button.color = Theme.tintColor
+        Theme.Icon.color = Theme.tintColor
+        Theme.SpinnerView.activityIndicatorViewColor = Theme.tintColor
+        Theme.SearchBar.textFieldBackgroundColor = Theme.themeColor.darker(by: 15)
+        Theme.SearchBar.textFieldTintColor = Theme.themeColor.darker(by: 25)
+        ThemeManager.applyTheme()
     }
 
     private static func applyToUINavigationBar() {
