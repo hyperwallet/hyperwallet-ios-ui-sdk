@@ -357,7 +357,7 @@
 			path = Responses;
 			sourceTree = "<group>";
 		};
-		C358A9A12272644000E5AE47 /* TransferMethod  */ = {
+		C358A9A12272644000E5AE47 /* TransferMethod */ = {
 			isa = PBXGroup;
 			children = (
 				C358A9A22272644000E5AE47 /* AddTransferMethod.swift */,
@@ -365,7 +365,7 @@
 				C358A9A42272644000E5AE47 /* SelectTransferMethodType.swift */,
 				C38DC07822727F9300B1F00E /* SelectTransferMethodCountryType.swift */,
 			);
-			path = "TransferMethod ";
+			path = TransferMethod;
 			sourceTree = "<group>";
 		};
 		C358A9A8227265C300E5AE47 /* TransferMethod */ = {
@@ -475,7 +475,7 @@
 		DBB2B6F52261C13F006C48D3 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				C358A9A12272644000E5AE47 /* TransferMethod  */,
+				C358A9A12272644000E5AE47 /* TransferMethod */,
 				DBB2B6FA2261C140006C48D3 /* HyperwalletMockWebServer.swift */,
 			);
 			path = Helper;
