@@ -1,7 +1,7 @@
 {
     "data": {
         "transferMethodConfigurations": {
-            "count": 8,
+            "count": 9,
             "pageInfo": {
                 "limit": 8,
                 "offset": 0
@@ -177,6 +177,27 @@
                                 "currency": "USD",
                                 "feeRateType": "FLAT",
                                 "value": "1.75"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "countries": [
+                        "US"
+                    ],
+                    "currencies": [
+                        "USD"
+                    ],
+                    "transferMethodType": "PAYPAL_ACCOUNT",
+                    "profile": "INDIVIDUAL",
+                    "fees": {
+                        "nodes": [
+                            {
+                                "transferMethodType": "PAYPAL_ACCOUNT",
+                                "country": "US",
+                                "currency": "USD",
+                                "feeRateType": "FLAT",
+                                "value": "5.00"
                             }
                         ]
                     }

@@ -24,7 +24,6 @@ final class SelectionWidget: AbstractWidget {
 
     private let labelField: UILabel = {
         let label = UILabel()
-        label.textColor = Theme.Text.color
         label.font = Theme.Label.bodyFont
         return label
     }()
@@ -36,15 +35,6 @@ final class SelectionWidget: AbstractWidget {
         view.setConstraint(value: 22, attribute: .height)
         return view
     }()
-
-    required init(field: HyperwalletField) {
-        super.init(field: field)
-        setupLayout(field: field)
-    }
-
-    required init(coder: NSCoder) {
-        super.init(coder: coder)
-    }
 
     override func value() -> String {
         return selectedValue ?? ""
@@ -59,12 +49,14 @@ final class SelectionWidget: AbstractWidget {
     }
 
     private func setupRowField() {
+        rowField.isUserInteractionEnabled = field.isEditable ?? true
         rowField.addSubview(labelField)
         setupLabelField()
         setupUITapGestureRecognizer(view: rowField, action: #selector(handleTap))
     }
 
     private func setupLabelField() {
+        labelField.textColor = field.isEditable ?? true ? Theme.Text.color : Theme.Text.disabledColor
         labelField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             labelField.topAnchor.constraint(equalTo: rowField.topAnchor),
@@ -76,7 +68,6 @@ final class SelectionWidget: AbstractWidget {
 
     private func setupUITapGestureRecognizer(view: UIView, action: Selector ) {
         let tap = UITapGestureRecognizer(target: self, action: action)
-        view.isUserInteractionEnabled = true
         view.addGestureRecognizer(tap)
     }
 
@@ -94,7 +85,6 @@ final class SelectionWidget: AbstractWidget {
         tableView.title = field.label ?? ""
 
         tableView.items = field.fieldSelectionOptions ?? [HyperwalletFieldSelectionOption]()
-        tableView.registerGenericCell(hasNib: false)
         tableView.selectedHandler = { option in
             self.labelField.text = option.label.localized()
             self.selectedValue = option.value

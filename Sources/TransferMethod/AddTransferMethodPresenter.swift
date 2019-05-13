@@ -17,7 +17,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import HyperwalletSDK
-import UIKit
 
 protocol AddTransferMethodView: class {
     func fieldValues() -> [(name: String, value: String)]
@@ -26,6 +25,7 @@ protocol AddTransferMethodView: class {
     func areAllFieldsValid() -> Bool
     func notifyTransferMethodAdded(_ transferMethod: HyperwalletTransferMethod)
     func showConfirmation(handler: @escaping () -> Void)
+    func showError( title: String, message: String)
     func showError(_ error: HyperwalletErrorType, _ handler: (() -> Void)?)
     func showBusinessError(_ error: HyperwalletErrorType, _ handler: @escaping () -> Void)
     func showLoading()
@@ -109,17 +109,27 @@ final class AddTransferMethodPresenter {
                                                                     transferMethodProfileType: profileType)
                 .build()
 
+        case "PAYPAL_ACCOUNT":
+            hyperwalletTransferMethod = HyperwalletPayPalAccount.Builder(transferMethodCountry: country,
+                                                                         transferMethodCurrency: currency)
+                .build()
+
         default:
-            hyperwalletTransferMethod = HyperwalletTransferMethod()
-            hyperwalletTransferMethod.setField(key: "transferMethodCountry", value: country)
-            hyperwalletTransferMethod.setField(key: "transferMethodCurrency", value: currency)
-            hyperwalletTransferMethod.setField(key: "type", value: transferMethodType)
-            hyperwalletTransferMethod.setField(key: "profileType", value: profileType)
+            view.showError(title: "error".localized(), message: "transfer_method_not_supported_message".localized())
+            return
         }
+
         for field in view.fieldValues() {
             hyperwalletTransferMethod.setField(key: field.name, value: field.value)
         }
         createTransferMethod(transferMethod: hyperwalletTransferMethod)
+    }
+
+    func prepareSectionForScrolling(_ section: AddTransferMethodSectionData,
+                                    _ row: Int,
+                                    _ focusWidget: AbstractWidget) {
+        section.rowShouldBeScrolledTo = row
+        section.fieldToBeFocused = focusWidget
     }
 
     private func createTransferMethod(transferMethod: HyperwalletTransferMethod) {
@@ -130,6 +140,9 @@ final class AddTransferMethodPresenter {
         } else if let bankCard = transferMethod as? HyperwalletBankCard {
             Hyperwallet.shared.createBankCard(account: bankCard,
                                               completion: createTransferMethodHandler())
+        } else if let payPalAccount = transferMethod as? HyperwalletPayPalAccount {
+            Hyperwallet.shared.createPayPalAccount(account: payPalAccount,
+                                                   completion: createTransferMethodHandler())
         }
     }
 
@@ -198,13 +211,14 @@ final class AddTransferMethodPresenter {
                                    _ errorsWithFieldName: [HyperwalletError]) {
         let errorWidgets = widgetsContainError(for: section, errorsWithFieldName)
         if let focusWidget = errorWidgets.first, let row = section.cells.firstIndex(of: focusWidget) {
-            section.rowShouldBeScrolledTo = row
-            section.fieldToBeFocused = focusWidget
-            section.errorMessage = prepareErrorMessage(errors: errorsWithFieldName, errorWidgets: errorWidgets)
+            prepareSectionForScrolling(section, row, focusWidget)
+            prepareErrorMessage(section, errorsWithFieldName, errorWidgets)
         }
     }
 
-    private func prepareErrorMessage(errors: [HyperwalletError], errorWidgets: [AbstractWidget]) -> String {
+    private func prepareErrorMessage(_ section: AddTransferMethodSectionData,
+                                     _ errors: [HyperwalletError],
+                                     _ errorWidgets: [AbstractWidget]) {
         var errorMessages = [String]()
         for widget in errorWidgets {
             // get the errorMessage by widget name and update widget UI
@@ -213,7 +227,7 @@ final class AddTransferMethodPresenter {
                 errorMessages.append(error.message)
             }
         }
-        return errorMessages.joined(separator: "\n")
+        section.errorMessage = errorMessages.joined(separator: "\n")
     }
 
     private func widgetsContainError(for section: AddTransferMethodSectionData,
@@ -240,8 +254,7 @@ final class AddTransferMethodPresenter {
     }
 
     func focusField(in section: AddTransferMethodSectionData) {
-        if section.containsFocusedField {
-            section.fieldToBeFocused?.focus()
-        }
+        section.fieldToBeFocused?.focus()
+        section.reset()
     }
 }
