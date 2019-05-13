@@ -25,57 +25,40 @@ final class ExpiryDatePickerView: UIPickerView, UIPickerViewDelegate, UIPickerVi
     private var months = [String]()
     private var years = [Int]()
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.setup()
-    }
+    convenience init(value: String?, frame: CGRect = .zero) {
+        self.init(frame: frame)
 
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        self.setup()
-    }
-
-    private func setup() {
-        let currentDate = Date()
-        let currentCalendar = Calendar.current
-        month = currentCalendar.component(.month, from: currentDate)
-        year = currentCalendar.component(.year, from: currentDate)
+        if let values = value?.components(separatedBy: "-"),
+            values.count == 2,
+            let defaultMonth = Int(values[1]),
+            let defaultYear = Int(values[0]) {
+            month = defaultMonth
+            year = defaultYear
+        } else {
+            let currentDate = Date()
+            let currentCalendar = Calendar.current
+            month = currentCalendar.component(.month, from: currentDate)
+            year = currentCalendar.component(.year, from: currentDate)
+        }
 
         setupMonths()
         setupYears(add: 10)
 
-        self.delegate = self
-        self.dataSource = self
+        delegate = self
+        dataSource = self
 
         // pick current month as default month for the picker and place the selected month in the center of picker
-        self.selectRow(month - 1, inComponent: 0, animated: false)
-    }
-
-    private func setupMonths() {
-        months = DateFormatter().monthSymbols.map({ $0.capitalized })
-    }
-
-    private func setupYears(add: Int) {
-        years = Array(year...year + add)
+        selectRow(month - 1, inComponent: 0, animated: false)
     }
 
     // MARK: UIPicker Delegate / Data Source
-
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
     }
 
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        switch component {
-        case 0:
-            return months[row % months.count]
-
-        case 1:
-            return String(describing: years[row])
-
-        default:
-            return nil
-        }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        month = selectedRow(inComponent: 0) + 1
+        year = years[selectedRow(inComponent: 1)]
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -91,8 +74,24 @@ final class ExpiryDatePickerView: UIPickerView, UIPickerViewDelegate, UIPickerVi
         }
     }
 
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        month = selectedRow(inComponent: 0) + 1
-        year = years[selectedRow(inComponent: 1)]
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        switch component {
+        case 0:
+            return months[row % months.count]
+
+        case 1:
+            return String(describing: years[row])
+
+        default:
+            return nil
+        }
+    }
+
+    private func setupMonths() {
+        months = DateFormatter().monthSymbols.map({ $0.capitalized })
+    }
+
+    private func setupYears(add: Int) {
+        years = Array(year...year + add)
     }
 }

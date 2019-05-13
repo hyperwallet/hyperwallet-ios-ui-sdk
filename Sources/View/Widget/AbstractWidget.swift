@@ -23,7 +23,7 @@ import UIKit
 class AbstractWidget: UIStackView, UITextFieldDelegate {
     var field: HyperwalletField!
 
-    var label: UILabel = {
+    let label: UILabel = {
         let label = UILabel()
         label.textColor = Theme.Label.textColor
         label.font = Theme.Label.bodyFont
@@ -35,12 +35,12 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
 
     required init(field: HyperwalletField) {
         super.init(frame: CGRect())
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.axis = .horizontal
-        self.alignment = .center
-        self.spacing = 5
-        self.isLayoutMarginsRelativeArrangement = true
-        self.layoutMargins = UIEdgeInsets(top: 11.0, left: 0, bottom: 11.0, right: 16.0)
+        translatesAutoresizingMaskIntoConstraints = false
+        axis = .horizontal
+        alignment = .center
+        spacing = 5
+        isLayoutMarginsRelativeArrangement = true
+        layoutMargins = UIEdgeInsets(top: 11.0, left: 0, bottom: 11.0, right: 16.0)
         self.field = field
         setupLayout(field: field)
         label.accessibilityIdentifier = String(format: "label_%@", field.name ?? "")
@@ -48,51 +48,6 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
 
     required init(coder: NSCoder) {
         super.init(coder: coder)
-    }
-
-    //swiftlint:disable unavailable_function
-    func focus() {
-        fatalError("not implemented")
-    }
-
-    func setupLayout(field: HyperwalletField) {
-        label.text = field.label ?? ""
-        label.isUserInteractionEnabled = field.isEditable ?? true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        label.addGestureRecognizer(tap)
-        self.addArrangedSubview(label)
-    }
-
-    @objc
-    func handleTap(sender: UITapGestureRecognizer? = nil) {
-        fatalError("not implemented")
-    }
-
-    func name() -> String {
-        return field.name!
-    }
-
-    //swiftlint:disable unavailable_function
-    func value() -> String {
-        fatalError("value() has not been implemented")
-    }
-
-    func isValid() -> Bool {
-        return !isInvalidEmptyValue() && !isInvalidLength() && !isInvalidRegex()
-    }
-
-    func showError() {
-        label.textColor = Theme.Label.errorColor
-        label.accessibilityIdentifier = String(format: "label_%@_error", field.name ?? "")
-    }
-
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.placeholder = nil
-    }
-
-    func hideError() {
-        label.textColor = Theme.Label.textColor
-        label.accessibilityIdentifier = String(format: "label_%@", field.name ?? "")
     }
 
     func errorMessage() -> String? {
@@ -108,12 +63,57 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
         return nil
     }
 
+    //swiftlint:disable unavailable_function
+    func focus() {
+        fatalError("not implemented")
+    }
+
+    @objc
+    func handleTap(sender: UITapGestureRecognizer? = nil) {
+        fatalError("not implemented")
+    }
+
+    func hideError() {
+        label.textColor = Theme.Label.textColor
+        label.accessibilityIdentifier = String(format: "label_%@", field.name ?? "")
+    }
+
+    func isValid() -> Bool {
+        return !isInvalidEmptyValue() && !isInvalidLength() && !isInvalidRegex()
+    }
+
+    func name() -> String {
+        return field.name!
+    }
+
+    func setupLayout(field: HyperwalletField) {
+        label.text = field.label ?? ""
+        label.isUserInteractionEnabled = field.isEditable ?? true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        label.addGestureRecognizer(tap)
+        addArrangedSubview(label)
+    }
+
+    func showError() {
+        label.textColor = Theme.Label.errorColor
+        label.accessibilityIdentifier = String(format: "label_%@_error", field.name ?? "")
+    }
+
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.placeholder = nil
+    }
+
     func textFieldDidEndEditing(_ textField: UITextField) {
         if !isValid() {
             showError()
         } else {
             hideError()
         }
+    }
+
+    //swiftlint:disable unavailable_function
+    func value() -> String {
+        fatalError("value() has not been implemented")
     }
 
     private func isInvalidEmptyValue() -> Bool {
