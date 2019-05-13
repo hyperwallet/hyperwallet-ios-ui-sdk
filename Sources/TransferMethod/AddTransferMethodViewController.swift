@@ -27,9 +27,6 @@ public final class AddTransferMethodViewController: UITableViewController {
     private let footerViewCellId = "footerViewCellId"
     private let footerTag = 654312
 
-    private let emptyFooterHeight = CGFloat(2.0)
-    private let defaultFooterHeight = CGFloat(38.0)
-    private let lineSpacing = CGFloat(8.0)
     private var defaultHeaderHeight = CGFloat(38.0)
 
     private let emptyHeaderHeight: CGFloat = {
@@ -178,6 +175,7 @@ extension AddTransferMethodViewController {
         if let errorMessage = presenter.sections[section].errorMessage {
             footerText = String(format: "%@\n", errorMessage)
         }
+        footerText = String(format: "%@%@", footerText, presenter.sections[section].footer ?? "")
 
         return footerText
     }
@@ -395,6 +393,7 @@ extension AddTransferMethodViewController: AddTransferMethodView {
         if let errorMessage = section.errorMessage {
             attributedText.append(value: String(format: "%@\n", errorMessage), color: Theme.Label.errorColor)
         }
+        attributedText.append(value: section.footer ?? "", color: Theme.Label.textColor)
 
         return attributedText
     }
