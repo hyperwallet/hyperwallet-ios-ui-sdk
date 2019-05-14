@@ -37,11 +37,6 @@
                BlueprintName = "HyperwalletUISDKUITests"
                ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "AddTransferMethodTests/testAddTransferMethod_verifyWakeFromSleep()">
-               </Test>
-            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>
