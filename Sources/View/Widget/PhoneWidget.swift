@@ -16,28 +16,16 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import UIKit
+import HyperwalletSDK
 
-final class IconView: UIImageView {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor = Theme.Icon.backgroundColor
-        tintColor = Theme.Icon.color
+/// Represents the phone number input widget.
+final class PhoneWidget: TextWidget {
+    required init(field: HyperwalletField) {
+        super.init(field: field)
+        textField.keyboardType = UIKeyboardType.phonePad
     }
 
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        backgroundColor = Theme.Icon.backgroundColor
-        tintColor = Theme.Icon.color
-    }
-    /// Draw an icon iamge
-     ///
-     /// - Parameter name: The font name of the icon
-     func draw(fontName: String) {
-        let icon = UIImage.fontIcon(fontName, tintColor, backgroundColor)
-        contentMode = .center
-        layer.cornerRadius = frame.size.width / 2
-        image = icon
-        highlightedImage = nil
+    required init(coder: NSCoder) {
+        super.init(coder: coder)
     }
 }

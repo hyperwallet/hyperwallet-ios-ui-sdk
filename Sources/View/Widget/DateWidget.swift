@@ -15,48 +15,55 @@
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-import HyperwalletSDK
-import UIKit
 
-/// Represents the expiry date widget.
-final class ExpiryDateWidget: TextWidget {
-    private var pickerView: ExpiryDatePickerView!
-    private let toolbar = UIToolbar()
+import HyperwalletSDK
+
+/// Represents the date input widget.
+final class DateWidget: TextWidget {
+    private var datePicker: UIDatePicker!
+    private var toolbar = UIToolbar()
+    private static var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "date_format".localized()
+        return formatter
+    }()
 
     override func setupLayout(field: HyperwalletField) {
         super.setupLayout(field: field)
-        setupPickerView(field: field)
+        setupDatePicker()
         toolbar.setupToolBar(target: self, action: #selector(self.doneButtonTapped))
         setupTextField()
     }
 
-    /// format the expiryDate to YYYY-MM, which can be accepted by server through REST API call
-    ///
-    /// - Returns: formatted expiryDate
-    override func value() -> String {
-        if textField.text?.isEmpty ?? true {
-            return ""
+    override func textFieldDidBeginEditing(_ textField: UITextField) {
+        super.textFieldDidBeginEditing(textField)
+        if let dateFromText = DateWidget.dateFormatter.date(from: value()) {
+            datePicker.date = dateFromText
         } else {
-            return String(format: "%04d-%02d", pickerView.year, pickerView.month)
+            datePicker.date = Date()
         }
     }
 
     @objc
     private func doneButtonTapped() {
-        guard let month = pickerView.month, let year = pickerView.year else {
-            return
-        }
-        textField.text = String(format: "expiry_date_format".localized(), month, year % 100)
+        updateTextField()
         textField.resignFirstResponder()
     }
 
-    private func setupPickerView(field: HyperwalletField) {
-        pickerView = ExpiryDatePickerView(value: field.value)
-        pickerView.accessibilityIdentifier = "ExpiryDateWidgetPickerAccessibilityIdentifier"
+    private func setupDatePicker() {
+        datePicker = UIDatePicker(frame: .zero)
+        datePicker.datePickerMode = .date
+        datePicker.accessibilityIdentifier = "DateWidgetPickerAccessibilityIdentifier"
     }
 
     private func setupTextField() {
-        textField.inputView = pickerView
+        textField.inputView = datePicker
         textField.inputAccessoryView = toolbar
+        textField.delegate = self
+    }
+
+    @objc
+    private func updateTextField() {
+        textField.text = DateWidget.dateFormatter.string(from: datePicker.date)
     }
 }

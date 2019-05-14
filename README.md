@@ -1,5 +1,12 @@
 # Hyperwallet UI SDK
 
+[![Platforms](https://img.shields.io/cocoapods/p/HyperwalletUISDK.svg?)](https://cocoapods.org/pods/HyperwalletUISDK)
+[![Build Status](https://travis-ci.org/hyperwallet/hyperwallet-ios-ui-sdk.svg?branch=master)](https://travis-ci.org/hyperwallet/hyperwallet-ios-ui-sdk)
+
+[![CocoaPods](https://img.shields.io/cocoapods/v/HyperwalletUISDK.svg?color=blue)](https://cocoapods.org/pods/HyperwalletUISDK)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+
+
 Welcome to Hyperwallet's iOS UI SDK. This out-of-the-box library will help you create transfer methods in your iOS app, such as bank account, PayPal account, etc.
 
 Note that this SDK is geared towards those who need both backend data and UI features. Please refer to [Hyperwallet iOS Core SDK](https://github.com/hyperwallet/hyperwallet-ios-sdk) if you decide to build your own UI.
@@ -13,20 +20,20 @@ Note that this SDK is geared towards those who need both backend data and UI fea
 
 ## Dependencies
 
-- [HyperwalletSDK 1.0.0-beta01](https://github.com/hyperwallet/hyperwallet-ios-sdk)
+- [HyperwalletSDK 1.0.0-beta02](https://github.com/hyperwallet/hyperwallet-ios-sdk)
 
 ## Installation
 Use [Carthage](https://github.com/Carthage/Carthage) or [CocoaPods](https://cocoapods.org/) to integrate to HyperwalletSDK.
 ### Carthage
 Specify it in your Cartfile:
 ```ogdl
-github "hyperwallet/hyperwallet-ios-ui-sdk" "1.0.0-beta01"
+github "hyperwallet/hyperwallet-ios-ui-sdk" "1.0.0-beta02"
 ```
 
 ### CocoaPods
 Specify it in your Podfile:
 ```ruby
-pod 'HyperwalletUISDK', '~> 1.0.0-beta01'
+pod 'HyperwalletUISDK', '~> 1.0.0-beta02'
 ```
 
 ## Initialization
@@ -156,7 +163,7 @@ The form fields are based on the country, currency, user's profile type, and tra
 let addTransferMethodViewController = HyperwalletUI.shared.addTransferMethodViewController("US",             // The 2 letter ISO 3166-1 country code.
                                                                                            "USD",            // The 3 letter ISO 4217-1 currency code.
                                                                                            "INDIVIDUAL",     // The profile type. Possible values - INDIVIDUAL, BUSINESS.
-                                                                                           "BANK_ACCOUNT")   // The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD.
+                                                                                           "BANK_ACCOUNT")   // The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD, PAYPAL_ACCOUNT
 
 // Optional - The completion handler will be performed after a new transfer method has been created.
 addTransferMethodViewController.createTransferMethodHandler = { transferMethod in

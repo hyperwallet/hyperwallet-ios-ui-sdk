@@ -24,65 +24,44 @@ final class SelectionWidget: AbstractWidget {
 
     private let labelField: UILabel = {
         let label = UILabel()
-        label.textColor = Theme.Text.color
         label.font = Theme.Label.bodyFont
+        label.setConstraint(value: 22, attribute: .height)
         return label
     }()
-
     private var selectedValue: String?
 
-    private var rowField: UIView = {
-        let view = UIView()
-        view.setConstraint(value: 22, attribute: .height)
-        return view
-    }()
+    override func focus() {}
 
-    required init(field: HyperwalletField) {
-        super.init(field: field)
-        setupLayout(field: field)
+    override func handleTap(sender: UITapGestureRecognizer? = nil) {
+        viewController?.view.endEditing(true)
+        showGenericTableView()
     }
 
-    required init(coder: NSCoder) {
-        super.init(coder: coder)
+    override func setupLayout(field: HyperwalletField) {
+        super.setupLayout(field: field)
+        addArrangedSubview(labelField)
+
+        if field.isEditable ?? true {
+            labelField.textColor = Theme.Text.color
+            labelField.isUserInteractionEnabled = true
+            labelField.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+        } else {
+            labelField.textColor = Theme.Text.disabledColor
+        }
+
+        if let defaultValue = field.value,
+            let option = field.fieldSelectionOptions?.first(where: { $0.value == defaultValue }) {
+            updateLabelFieldValue(option)
+        }
     }
 
     override func value() -> String {
         return selectedValue ?? ""
     }
 
-    override func focus() {}
-
-    override func setupLayout(field: HyperwalletField) {
-        super.setupLayout(field: field)
-        setupRowField()
-        self.addArrangedSubview(rowField)
-    }
-
-    private func setupRowField() {
-        rowField.addSubview(labelField)
-        setupLabelField()
-        setupUITapGestureRecognizer(view: rowField, action: #selector(handleTap))
-    }
-
-    private func setupLabelField() {
-        labelField.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            labelField.topAnchor.constraint(equalTo: rowField.topAnchor),
-            labelField.leadingAnchor.constraint(equalTo: rowField.leadingAnchor),
-            labelField.trailingAnchor.constraint(equalTo: rowField.trailingAnchor),
-            labelField.bottomAnchor.constraint(equalTo: rowField.bottomAnchor)
-        ])
-    }
-
     private func setupUITapGestureRecognizer(view: UIView, action: Selector ) {
         let tap = UITapGestureRecognizer(target: self, action: action)
-        view.isUserInteractionEnabled = true
         view.addGestureRecognizer(tap)
-    }
-
-    override func handleTap(sender: UITapGestureRecognizer? = nil) {
-        viewController?.view.endEditing(true)
-        showGenericTableView()
     }
 
     private func showGenericTableView() {
@@ -94,10 +73,8 @@ final class SelectionWidget: AbstractWidget {
         tableView.title = field.label ?? ""
 
         tableView.items = field.fieldSelectionOptions ?? [HyperwalletFieldSelectionOption]()
-        tableView.registerGenericCell(hasNib: false)
         tableView.selectedHandler = { option in
-            self.labelField.text = option.label.localized()
-            self.selectedValue = option.value
+            self.updateLabelFieldValue(option)
             if self.isValid() {
                 self.hideError()
             } else {
@@ -106,12 +83,7 @@ final class SelectionWidget: AbstractWidget {
         }
 
         tableView.initialSelectedItemIndex = tableView.items.firstIndex { $0.value == value() }
-
-        tableView.shouldMarkCellAction = { option in
-            self.labelField.text == option.label.localized()
-        }
-
-        /// setup search bar
+        tableView.shouldMarkCellAction = { self.selectedValue == $0.value }
         tableView.filterContentForSearchTextAction = {(items, searchText) in
             items.filter {
                 $0.label.lowercased().contains(searchText.lowercased())
@@ -119,5 +91,10 @@ final class SelectionWidget: AbstractWidget {
         }
 
         viewController.show(tableView, sender: viewController)
+    }
+
+    private func updateLabelFieldValue(_ option: HyperwalletFieldSelectionOption) {
+        labelField.text = option.label.localized()
+        selectedValue = option.value
     }
 }

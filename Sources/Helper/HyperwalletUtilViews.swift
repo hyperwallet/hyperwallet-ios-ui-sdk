@@ -127,15 +127,6 @@ final class SpinnerView: UIView {
         return activity
     }()
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setupLayout()
-    }
-
     convenience init(showInView view: UIView) {
         self.init(frame: view.frame)
         setupLayout()
