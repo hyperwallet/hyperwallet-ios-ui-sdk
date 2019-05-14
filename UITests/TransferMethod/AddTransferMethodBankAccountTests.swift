@@ -136,7 +136,6 @@ class AddTransferMethodTests: BaseTests {
 
     func validateAddTransferMethodBankAccountScreen() {
         XCTAssertTrue(addTransferMethod.navigationBar.exists)
-        XCTAssertTrue(app.keyboards.element.exists)
         XCTAssertTrue(addTransferMethod.branchIdInput.exists)
         XCTAssertTrue(addTransferMethod.accountNumberInput.exists)
         XCTAssertTrue(addTransferMethod.accountTypeSelect.exists)
@@ -174,6 +173,7 @@ class AddTransferMethodTests: BaseTests {
         addTransferMethod.setBranchId(branchId: "021000022")
         addTransferMethod.setAccountNumber(accountNumber: "12345")
         addTransferMethod.selectAccountType(accountType: "Checking")
+        app.scrollToElement(element: addTransferMethod.createTransferMethodButton)
         addTransferMethod.clickCreateTransferMethodButton()
         waitForNonExistence(spinner)
     }
