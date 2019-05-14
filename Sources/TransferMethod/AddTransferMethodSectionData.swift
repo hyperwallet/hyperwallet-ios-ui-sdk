@@ -42,15 +42,7 @@ final class AddTransferMethodSectionData {
     }()
 
     lazy var footer: String? = {
-        switch category {
-        case "ACCOUNT":
-            return "\(transferMethodType.lowercased())_footer".localized()
-        case "PROFILE":
-            return "add_profile_footer".localized()
-
-        default:
-            return nil
-        }
+        ""
     }()
 
     var errorMessage: String?

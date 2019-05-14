@@ -173,19 +173,9 @@ extension AddTransferMethodViewController {
     override public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         var footerText = ""
         if let errorMessage = presenter.sections[section].errorMessage {
-            footerText = String(format: "%@\n", errorMessage)
+            footerText = String(format: "%@", errorMessage)
         }
-        footerText = String(format: "%@%@", footerText, presenter.sections[section].footer ?? "")
-
         return footerText
-    }
-
-    override public func tableView(_ tableView: UITableView,
-                                   willDisplayFooterView view: UIView,
-                                   forSection section: Int) {
-        if let footerView = view as? UITableViewHeaderFooterView {
-            updateFooterView(footerView, for: section)
-        }
     }
 
     override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -377,25 +367,18 @@ extension AddTransferMethodViewController: AddTransferMethodView {
     }
 
     private func updateFooterView(_ footerView: UITableViewHeaderFooterView, for section: Int) {
-        let attributedText = updateFooterText(for: presenter.sections[section])
-        if footerView.textLabel?.attributedText?.string != attributedText.string {
-            UIView.setAnimationsEnabled(false)
-            self.tableView.beginUpdates()
-            footerView.textLabel?.attributedText = attributedText
-            footerView.sizeToFit()
-            self.tableView.endUpdates()
-            UIView.setAnimationsEnabled(true)
-        }
+        UIView.setAnimationsEnabled(false)
+        self.tableView.beginUpdates()
+        footerView.textLabel?.text = presenter.sections[section].errorMessage
+        footerView.sizeToFit()
+        self.tableView.endUpdates()
+        UIView.setAnimationsEnabled(true)
     }
 
-    private func updateFooterText(for section: AddTransferMethodSectionData) -> NSAttributedString {
-        let attributedText = NSMutableAttributedString()
-        if let errorMessage = section.errorMessage {
-            attributedText.append(value: String(format: "%@\n", errorMessage), color: Theme.Label.errorColor)
+    override public func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        if let footerView = view as? UITableViewHeaderFooterView {
+            footerView.textLabel?.textColor = Theme.Label.errorColor
         }
-        attributedText.append(value: section.footer ?? "", color: Theme.Label.textColor)
-
-        return attributedText
     }
 
     private func addFieldsSection(_ fields: [HyperwalletField]) {
