@@ -30,6 +30,7 @@ extension UIToolbar {
                                          style: .plain,
                                          target: target,
                                          action: action)
+        doneButton.tintColor = Theme.Button.color
         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
         toolbar.setItems([spaceButton, doneButton], animated: true)

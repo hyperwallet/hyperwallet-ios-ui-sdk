@@ -60,6 +60,8 @@ public struct Theme {
         public static var barStyle = UIBarStyle.black
         /// Sets the opaque background color
         public static var isTranslucent = false
+        /// The color of NavigationBar shadow
+        public static var shadowColor = UIColor.clear
     }
 
     /// Representation of all customizable visual style property for `UIButton`.
