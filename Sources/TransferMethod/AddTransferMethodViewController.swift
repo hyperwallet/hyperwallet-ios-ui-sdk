@@ -24,9 +24,6 @@ import UIKit
 /// to this Controller to create new Transfer Method for those values.
 public final class AddTransferMethodViewController: UITableViewController {
     typealias ButtonHandler = () -> Void
-    private let footerViewCellId = "footerViewCellId"
-    private let footerTag = 654312
-
     private var defaultHeaderHeight = CGFloat(38.0)
 
     private let emptyHeaderHeight: CGFloat = {
@@ -129,7 +126,6 @@ public final class AddTransferMethodViewController: UITableViewController {
     private func setupTableView() {
         tableView = UITableView(frame: view.frame, style: .grouped)
         tableView.allowsSelection = false
-
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Theme.Cell.rowHeight
         tableView.accessibilityIdentifier = "addTransferMethodTable"
@@ -375,7 +371,9 @@ extension AddTransferMethodViewController: AddTransferMethodView {
         UIView.setAnimationsEnabled(true)
     }
 
-    override public func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+    override public func tableView(_ tableView: UITableView,
+                                   willDisplayFooterView view: UIView,
+                                   forSection section: Int) {
         if let footerView = view as? UITableViewHeaderFooterView {
             footerView.textLabel?.textColor = Theme.Label.errorColor
         }

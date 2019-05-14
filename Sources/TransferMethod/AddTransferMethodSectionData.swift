@@ -41,10 +41,6 @@ final class AddTransferMethodSectionData {
         }
     }()
 
-    lazy var footer: String? = {
-        ""
-    }()
-
     var errorMessage: String?
 
     var cells: [UIView] = []
