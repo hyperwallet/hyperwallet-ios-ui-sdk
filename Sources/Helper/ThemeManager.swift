@@ -39,8 +39,9 @@ public class ThemeManager {
         Theme.Button.color = Theme.tintColor
         Theme.Icon.color = Theme.tintColor
         Theme.SpinnerView.activityIndicatorViewColor = Theme.tintColor
-        Theme.SearchBar.textFieldBackgroundColor = Theme.themeColor.darker(by: 15)
-        Theme.SearchBar.textFieldTintColor = Theme.themeColor.darker(by: 25)
+        Theme.SearchBar.textFieldBackgroundColor = UIColor(rgb: 0xdcdcdc)
+        Theme.SearchBar.textFieldTintColor = UIColor(rgb: 0xdcdcdc)
+        Theme.NavigationBar.shadowColor = UIColor(rgb: 0xe3e3e5)
         ThemeManager.applyTheme()
     }
 
@@ -55,6 +56,10 @@ public class ThemeManager {
         proxy.backItem?.backBarButtonItem?.tintColor = Theme.tintColor
         proxy.barStyle = Theme.NavigationBar.barStyle
         proxy.isTranslucent = Theme.NavigationBar.isTranslucent
+        proxy.shadowImage = UIImage.imageWithColor(
+            color: Theme.NavigationBar.shadowColor,
+            size: CGSize(width: 1, height: 1)
+        )
     }
 
     static func applyTo(searchBar: UISearchBar) {
