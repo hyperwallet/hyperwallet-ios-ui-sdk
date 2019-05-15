@@ -29,7 +29,7 @@ protocol SelectTransferMethodTypeView: class {
 
     func navigateToAddTransferMethodController(country: String,
                                                currency: String,
-                                               profileType: String,
+                                               profileType: HyperwalletBankAccount.ProfileType,
                                                detail: TransferMethodTypeDetail)
     func showAlert(message: String?)
     func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?)
@@ -131,9 +131,20 @@ final class SelectTransferMethodTypePresenter {
 
     /// Navigate to AddTransferMethodController
     func navigateToAddTransferMethod(_ index: Int) {
-        guard let profileType = user?.profileType?.rawValue else {
+        guard let userProfileType = user?.profileType else {
             return
         }
+
+        let profileType: HyperwalletBankAccount.ProfileType
+
+        switch userProfileType {
+        case .business:
+            profileType = .business
+
+        case .individual:
+            profileType = .individual
+        }
+
         view.navigateToAddTransferMethodController(country: selectedCountry,
                                                    currency: selectedCurrency,
                                                    profileType: profileType,

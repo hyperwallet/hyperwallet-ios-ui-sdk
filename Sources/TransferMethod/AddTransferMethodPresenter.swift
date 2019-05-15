@@ -38,14 +38,14 @@ final class AddTransferMethodPresenter {
     private unowned var view: AddTransferMethodView
     private let country: String
     private let currency: String
-    private let profileType: String
+    private let profileType: HyperwalletBankAccount.ProfileType
     private let transferMethodType: String
     var sections: [AddTransferMethodSectionData] = []
 
     init(_ view: AddTransferMethodView,
          _ country: String,
          _ currency: String,
-         _ profileType: String,
+         _ profileType: HyperwalletBankAccount.ProfileType,
          _ transferMethodType: String) {
         self.view = view
         self.country = country
@@ -59,7 +59,7 @@ final class AddTransferMethodPresenter {
             country: country,
             currency: currency,
             transferMethodType: transferMethodType,
-            profile: profileType
+            profile: profileType.rawValue
         )
         view.showLoading()
         Hyperwallet.shared.retrieveTransferMethodConfigurationFields(
@@ -83,7 +83,7 @@ final class AddTransferMethodPresenter {
                     let transferTypeDetail = result.populateTransferMethodTypeDetail(
                         country: strongSelf.country,
                         currency: strongSelf.currency,
-                        profileType: strongSelf.profileType,
+                        profileType: strongSelf.profileType.rawValue,
                         transferMethodType: strongSelf.transferMethodType)
                     strongSelf.view.showTransferMethodFields(result.fields(), transferTypeDetail)
                 }
@@ -106,7 +106,7 @@ final class AddTransferMethodPresenter {
         case "BANK_CARD":
             hyperwalletTransferMethod = HyperwalletBankCard.Builder(transferMethodCountry: country,
                                                                     transferMethodCurrency: currency,
-                                                                    transferMethodProfileType: profileType)
+                                                                    transferMethodProfileType: profileType.rawValue)
                 .build()
 
         case "PAYPAL_ACCOUNT":

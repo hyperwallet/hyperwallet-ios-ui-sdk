@@ -122,7 +122,7 @@ extension SelectTransferMethodTypeViewController: SelectTransferMethodTypeView {
 
     func navigateToAddTransferMethodController(country: String,
                                                currency: String,
-                                               profileType: String,
+                                               profileType: HyperwalletBankAccount.ProfileType,
                                                detail: TransferMethodTypeDetail) {
         let addTransferMethodController = AddTransferMethodViewController(country,
                                                                           currency,

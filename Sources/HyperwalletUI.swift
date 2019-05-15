@@ -70,7 +70,7 @@ public final class HyperwalletUI {
     /// - Returns: An instance of `AddTransferMethodViewController`
     public func addTransferMethodViewController(_ country: String,
                                                 _ currency: String,
-                                                _ profileType: String,
+                                                _ profileType: HyperwalletBankAccount.ProfileType,
                                                 _ transferMethodType: String) -> AddTransferMethodViewController {
         return AddTransferMethodViewController(country, currency, profileType, transferMethodType)
     }

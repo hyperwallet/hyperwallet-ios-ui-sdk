@@ -11,7 +11,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
 
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
-        presenter = AddTransferMethodPresenter(mockView, "US", "USD", "INDIVIDUAL", "BANK_ACCOUNT")
+        presenter = AddTransferMethodPresenter(mockView, "US", "USD", .individual, "BANK_ACCOUNT")
     }
 
     override func tearDown() {
@@ -57,7 +57,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
     }
 
     func testCreateTransferMethod_createBankAccount() {
-        presenter = AddTransferMethodPresenter(mockView, "US", "USD", "INDIVIDUAL", "BANK_ACCOUNT")
+        presenter = AddTransferMethodPresenter(mockView, "US", "USD", .individual, "BANK_ACCOUNT")
         let url = String(format: "%@/bank-accounts", HyperwalletTestHelper.userRestURL)
         let response = HyperwalletTestHelper.okHTTPResponse(for: "BankAccountResponse")
         let request = HyperwalletTestHelper.buildPostResquest(baseUrl: url, response)
@@ -83,7 +83,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
     }
 
     func testCreateTransferMethod_createBankCard() {
-        presenter = AddTransferMethodPresenter(mockView, "US", "USD", "INDIVIDUAL", "BANK_CARD")
+        presenter = AddTransferMethodPresenter(mockView, "US", "USD", .individual, "BANK_CARD")
 
         let url = String(format: "%@/bank-cards", HyperwalletTestHelper.userRestURL)
         let response = HyperwalletTestHelper.okHTTPResponse(for: "BankCardResponse")
@@ -112,7 +112,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
     }
 
     func testCreateTransferMethod_createPayPalAccount() {
-        presenter = AddTransferMethodPresenter(mockView, "US", "USD", "INDIVIDUAL", "PAYPAL_ACCOUNT")
+        presenter = AddTransferMethodPresenter(mockView, "US", "USD", .individual, "PAYPAL_ACCOUNT")
         let url = String(format: "%@/paypal-accounts", HyperwalletTestHelper.userRestURL)
         let response = HyperwalletTestHelper.okHTTPResponse(for: "PayPalAccountResponse")
         let request = HyperwalletTestHelper.buildPostResquest(baseUrl: url, response)
@@ -179,7 +179,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
 
     func testCreateTransferMethod_notSupportedTransferMethodType() {
         // Given
-        presenter = AddTransferMethodPresenter(mockView, "US", "USD", "INDIVIDUAL", "PREPAID_CARD")
+        presenter = AddTransferMethodPresenter(mockView, "US", "USD", .individual, "PREPAID_CARD")
         mockView.mockFieldStatusReturnResult.append(true)
 
         // When

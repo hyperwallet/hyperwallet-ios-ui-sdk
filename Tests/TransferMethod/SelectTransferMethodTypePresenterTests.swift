@@ -200,7 +200,7 @@ class MockSelectTransferMethodTypeView: SelectTransferMethodTypeView {
 
     func navigateToAddTransferMethodController(country: String,
                                                currency: String,
-                                               profileType: String,
+                                               profileType: HyperwalletBankAccount.ProfileType,
                                                detail: TransferMethodTypeDetail) {
         isNavigateToAddTransferMethodControllerPerformed = true
     }

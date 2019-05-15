@@ -42,7 +42,7 @@ public final class AddTransferMethodViewController: UITableViewController {
     public var createTransferMethodHandler: ((HyperwalletTransferMethod) -> Void)?
     private var country: String
     private var currency: String
-    private var profileType: String
+    private var profileType: HyperwalletBankAccount.ProfileType
     private var transferMethodType: String
     private var processingView: ProcessingView?
     private var spinnerView: SpinnerView?
@@ -95,7 +95,7 @@ public final class AddTransferMethodViewController: UITableViewController {
     ///   - transferMethodType: The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD.
     public init(_ country: String,
                 _ currency: String,
-                _ profileType: String,
+                _ profileType: HyperwalletBankAccount.ProfileType,
                 _ transferMethodType: String) {
         self.country = country
         self.currency = currency

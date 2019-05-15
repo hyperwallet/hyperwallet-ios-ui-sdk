@@ -15,7 +15,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
     private lazy var bankAccount: HyperwalletBankAccount = {
         let bankAccount = HyperwalletBankAccount.Builder(transferMethodCountry: "US",
                                                          transferMethodCurrency: "USD",
-                                                         transferMethodProfileType: "INDIVIDUAL")
+                                                         transferMethodProfileType: .individual)
             .build()
         bankAccount.setField(key: HyperwalletTransferMethod.TransferMethodField.token.rawValue,
                              value: transferMethodToken)
@@ -187,7 +187,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
     private func loadMockTransfermethods() {
         let bankAccount = HyperwalletBankAccount.Builder(transferMethodCountry: "US",
                                                          transferMethodCurrency: "USD",
-                                                         transferMethodProfileType: "INDIVIDUAL")
+                                                         transferMethodProfileType: .individual)
             .build()
         bankAccount.setField(key: "token", value: "trm-123456789")
 
