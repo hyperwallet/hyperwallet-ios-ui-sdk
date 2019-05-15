@@ -19,7 +19,7 @@
 import UIKit
 
 final class AddTransferMethodSectionData {
-    var category: String
+    var fieldGroup: String
     var country: String
     var currency: String
     var transferMethodType: String
@@ -29,15 +29,15 @@ final class AddTransferMethodSectionData {
     var rowShouldBeScrolledTo: Int?
 
     lazy var header: String? = {
-        switch category {
-        case "ACCOUNT":
-            let format = "\(category)_header".lowercased().localized()
+        switch fieldGroup {
+        case "ACCOUNT_INFORMATION":
+            let format = "\(fieldGroup)_header".lowercased().localized()
             return String(format: format, "account_information_title".localized(), country.localized(), currency)
-        case "PROFILE", "ADDRESS", "INFORMATION":
-            return "\(category)_header".lowercased().localized()
+        case "CREATE_BUTTON":
+            return nil
 
         default:
-            return  nil
+            return "\(fieldGroup)_header".lowercased().localized()
         }
     }()
 
@@ -49,13 +49,13 @@ final class AddTransferMethodSectionData {
         return cells.count
     }
 
-    init(category: String,
+    init(fieldGroup: String,
          country: String,
          currency: String,
          transferMethodType: String,
          cells: [UIView]
         ) {
-        self.category = category
+        self.fieldGroup = fieldGroup
         self.country = country
         self.currency = currency
         self.transferMethodType = transferMethodType

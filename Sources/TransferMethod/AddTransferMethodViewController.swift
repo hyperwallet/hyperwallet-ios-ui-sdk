@@ -230,7 +230,7 @@ extension AddTransferMethodViewController {
 extension AddTransferMethodViewController: AddTransferMethodView {
     func showFooterViewWithUpdatedSectionData(for sections: [AddTransferMethodSectionData]) {
         for section in sections {
-            if let sectionIndex = presenter.getSectionIndex(by: section.category) {
+            if let sectionIndex = presenter.getSectionIndex(by: section.fieldGroup) {
                 if let footerView = tableView.footerView(forSection: sectionIndex) {
                     // section is visible, update footer
                     updateFooterView(footerView, for: sectionIndex)
@@ -307,9 +307,10 @@ extension AddTransferMethodViewController: AddTransferMethodView {
         }
     }
 
-    func showTransferMethodFields(_ fields: [HyperwalletField], _ transferMethodTypeDetail: TransferMethodTypeDetail) {
-        addFieldsSection(fields)
-        addInfoSection(transferMethodTypeDetail)
+    func showTransferMethodFields(_ fieldGroups: [HyperwalletFieldGroup],
+                                  _ transferMethodType: HyperwalletTransferMethodType) {
+        addFieldsSection(fieldGroups)
+        addInfoSection(transferMethodType)
         addCreateButtonSection()
         self.tableView.reloadData()
     }
@@ -354,8 +355,8 @@ extension AddTransferMethodViewController: AddTransferMethodView {
     private func getIndexPathFor(fieldToBeFocused: AbstractWidget) -> IndexPath? {
         if let sectionContainingInvalidField = presenter
             .sections
-            .first(where: { fieldToBeFocused.field.category == $0.category }),
-            let sectionIndex = presenter.getSectionIndex(by: sectionContainingInvalidField.category),
+            .first(where: { $0.cells.contains(fieldToBeFocused) }),
+            let sectionIndex = presenter.getSectionIndex(by: sectionContainingInvalidField.fieldGroup),
             let cellIndex = sectionContainingInvalidField.cells.firstIndex(of: fieldToBeFocused) {
             return IndexPath(row: cellIndex, section: sectionIndex)
         }
@@ -379,40 +380,37 @@ extension AddTransferMethodViewController: AddTransferMethodView {
         }
     }
 
-    private func addFieldsSection(_ fields: [HyperwalletField]) {
-        for field in fields {
-            let widgetView = WidgetFactory.newWidget(field: field)
-            guard let category = field.category else {
-                continue
+    private func addFieldsSection(_ fieldGroups: [HyperwalletFieldGroup]) {
+        for fieldGroup in fieldGroups {
+            guard let fields = fieldGroup.fields, let fieldGroup = fieldGroup.group
+                else {
+                    continue
             }
-            if let section = presenter.sections.first(where: { $0.category == category }) {
-                section.cells.append(widgetView)
-            } else {
-                let section = AddTransferMethodSectionData(
-                    category: category,
-                    country: country,
-                    currency: currency,
-                    transferMethodType: transferMethodType,
-                    cells: [widgetView]
-                )
-                presenter.sections.append(section)
-            }
-            widgets.append(widgetView)
+            let newWidgets = fields.map(WidgetFactory.newWidget)
+            let section = AddTransferMethodSectionData(
+                fieldGroup: fieldGroup,
+                country: country,
+                currency: currency,
+                transferMethodType: transferMethodType,
+                cells: newWidgets
+            )
+            presenter.sections.append(section)
+            widgets.append(contentsOf: newWidgets)
         }
     }
 
-    private func addInfoSection(_ transferMethodTypeDetail: TransferMethodTypeDetail) {
-        guard transferMethodTypeDetail.fees != nil || transferMethodTypeDetail.processingTime != nil else {
+    private func addInfoSection(_ transferMethodType: HyperwalletTransferMethodType) {
+        guard transferMethodType.fees != nil || transferMethodType.processingTime != nil else {
             return
         }
 
         if let infoLabel = infoView.arrangedSubviews[0] as? UILabel {
-            infoLabel.attributedText = transferMethodTypeDetail.formatFeesProcessingTime()
+            infoLabel.attributedText = transferMethodType.formatFeesProcessingTime()
             let infoSection = AddTransferMethodSectionData(
-                category: "INFORMATION",
+                fieldGroup: "INFORMATION",
                 country: country,
                 currency: currency,
-                transferMethodType: transferMethodType,
+                transferMethodType: self.transferMethodType,
                 cells: [infoView])
             presenter.sections.append(infoSection)
         }
@@ -420,7 +418,7 @@ extension AddTransferMethodViewController: AddTransferMethodView {
 
     private func addCreateButtonSection() {
         let buttonSection = AddTransferMethodSectionData(
-            category: "CREATE_BUTTON",
+            fieldGroup: "CREATE_BUTTON",
             country: country,
             currency: currency,
             transferMethodType: transferMethodType,
@@ -434,7 +432,7 @@ extension AddTransferMethodViewController: AddTransferMethodView {
     }
 
     private func getIndexPath(for section: AddTransferMethodSectionData) -> IndexPath {
-        let sectionIndex = presenter.getSectionIndex(by: section.category)!
+        let sectionIndex = presenter.getSectionIndex(by: section.fieldGroup)!
         return IndexPath(row: section.rowShouldBeScrolledTo!, section: sectionIndex)
     }
 }
