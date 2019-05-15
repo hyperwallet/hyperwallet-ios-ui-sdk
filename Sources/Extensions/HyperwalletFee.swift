@@ -24,17 +24,17 @@ extension HyperwalletFee {
     private static let flat = "FLAT"
 
     /// Formats the Fees to be displayed
-    static func format(fees: [HyperwalletFee]) -> String {
+    static func format(fees: [HyperwalletFee], currency: String) -> String {
         var description = ""
         let percentFee = fees.first(where: { (fee) in fee.feeRateType == percent })
         let flatFee = fees.first(where: { (fee) in fee.feeRateType == flat })
 
         if let percentFee = percentFee, let flatFee = flatFee {
-            description = FeeTypes.mixed(percentFee, flatFee).feeDescription()
+            description = FeeTypes.mixed(percentFee, flatFee).feeDescription(for: currency)
         } else if let flatFee = flatFee {
-            description = FeeTypes.flat(flatFee).feeDescription()
+            description = FeeTypes.flat(flatFee).feeDescription(for: currency)
         } else if let percentFee = percentFee {
-            description = FeeTypes.percent(percentFee).feeDescription()
+            description = FeeTypes.percent(percentFee).feeDescription(for: currency)
         }
         return description
     }
@@ -44,29 +44,28 @@ extension HyperwalletFee {
         case percent(_ percentFee: HyperwalletFee)
         case mixed(_ percentFee: HyperwalletFee, _ flatFee: HyperwalletFee)
 
-        func feeDescription() -> String {
+        func feeDescription(for currency: String) -> String {
             switch self {
             case .flat(let flatFee):
-                return flatFeeDescription(flatFee)
+                return flatFeeDescription(flatFee, currency)
 
             case .percent(let percentFee):
-                return percentFeeDescription(percentFee)
+                return percentFeeDescription(percentFee, currency)
 
             case let .mixed(percentFee, flatFee):
-                return mixedFeeDescription(percentFee, flatFee)
+                return mixedFeeDescription(percentFee, flatFee, currency)
             }
         }
 
-        private func flatFeeDescription(_ flatFee: HyperwalletFee) -> String {
+        private func flatFeeDescription(_ flatFee: HyperwalletFee, _ currency: String) -> String {
             let feeFormat = "fee_flat_formatter".localized()
-            return String(format: feeFormat.localized(), flatFee.currency, flatFee.value)
+            return String(format: feeFormat.localized(), currency, flatFee.value)
         }
 
-        private func percentFeeDescription(_ percentFee: HyperwalletFee) -> String {
+        private func percentFeeDescription(_ percentFee: HyperwalletFee, _ currency: String) -> String {
             var description = ""
             var feeFormat = ""
             let value = percentFee.value
-            let currency = percentFee.currency
             let min = percentFee.minimum
             let max = percentFee.maximum
 
@@ -83,12 +82,13 @@ extension HyperwalletFee {
             return description
         }
 
-        private func mixedFeeDescription(_ percentFee: HyperwalletFee, _ flatFee: HyperwalletFee) -> String {
+        private func mixedFeeDescription(_ percentFee: HyperwalletFee,
+                                         _ flatFee: HyperwalletFee,
+                                         _ currency: String) -> String {
             var description = ""
             var feeFormat = ""
             let flatValue = flatFee.value
             let percentValue = percentFee.value
-            let currency = flatFee.currency
             let min = percentFee.minimum
             let max = percentFee.maximum
 

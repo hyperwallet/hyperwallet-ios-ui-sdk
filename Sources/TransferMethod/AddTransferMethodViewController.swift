@@ -321,7 +321,8 @@ extension AddTransferMethodViewController: AddTransferMethodView {
         }
     }
 
-    func showTransferMethodFields(_ fields: [HyperwalletField], _ transferMethodTypeDetail: TransferMethodTypeDetail) {
+    func showTransferMethodFields(_ fields: [HyperwalletFieldGroup],
+                                  _ transferMethodTypeDetail: TransferMethodTypeDetail) {
         addFieldsSection(fields)
         addInfoSection(transferMethodTypeDetail)
         addCreateButtonSection()
@@ -368,7 +369,7 @@ extension AddTransferMethodViewController: AddTransferMethodView {
     private func getIndexPathFor(fieldToBeFocused: AbstractWidget) -> IndexPath? {
         if let sectionContainingInvalidField = presenter
             .sections
-            .first(where: { fieldToBeFocused.field.category == $0.category }),
+            .first, //TODO: (where: { fieldToBeFocused.field.category == $0.category }),
             let sectionIndex = presenter.getSectionIndex(by: sectionContainingInvalidField.category),
             let cellIndex = sectionContainingInvalidField.cells.firstIndex(of: fieldToBeFocused) {
             return IndexPath(row: cellIndex, section: sectionIndex)
@@ -398,25 +399,22 @@ extension AddTransferMethodViewController: AddTransferMethodView {
         return attributedText
     }
 
-    private func addFieldsSection(_ fields: [HyperwalletField]) {
-        for field in fields {
-            let widgetView = WidgetFactory.newWidget(field: field)
-            guard let category = field.category else {
-                continue
+    private func addFieldsSection(_ groups: [HyperwalletFieldGroup]) {
+        for group in groups {
+            guard let fields = group.fields, let category = group.group
+                else {
+                    continue
             }
-            if let section = presenter.sections.first(where: { $0.category == category }) {
-                section.cells.append(widgetView)
-            } else {
-                let section = AddTransferMethodSectionData(
-                    category: category,
-                    country: country,
-                    currency: currency,
-                    transferMethodType: transferMethodType,
-                    cells: [widgetView]
-                )
-                presenter.sections.append(section)
-            }
-            widgets.append(widgetView)
+            let newWidgets = fields.map(WidgetFactory.newWidget)
+            let section = AddTransferMethodSectionData(
+                category: category,
+                country: country,
+                currency: currency,
+                transferMethodType: transferMethodType,
+                cells: newWidgets
+            )
+            presenter.sections.append(section)
+            widgets.append(contentsOf: newWidgets)
         }
     }
 

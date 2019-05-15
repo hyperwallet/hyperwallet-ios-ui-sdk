@@ -24,6 +24,14 @@ struct TransferMethodTypeDetail {
     let transferMethodType: String
     var fees: [HyperwalletFee]?
     var processingTime: String?
+    var currency: String
+
+    init(_ currency: String, _ transferMethodType: HyperwalletTransferMethodType) {
+        self.transferMethodType = transferMethodType.code!
+        fees = transferMethodType.fees?.nodes
+        processingTime = transferMethodType.processingTime
+        self.currency = currency
+    }
 
     func formatFeesProcessingTime() -> NSAttributedString {
         let attributedText = NSMutableAttributedString()
@@ -33,7 +41,7 @@ struct TransferMethodTypeDetail {
             let feeLabel = "add_transfer_method_fee_label".localized()
 
             attributedText.append(value: feeLabel, font: Theme.Label.captionOne, color: color)
-            attributedText.append(value: HyperwalletFee.format(fees: fees),
+            attributedText.append(value: HyperwalletFee.format(fees: fees, currency: currency),
                                   font: Theme.Label.captionOneMedium,
                                   color: Theme.Label.subTitleColor)
         }
