@@ -22,7 +22,6 @@ import HyperwalletSDK
 final class PhoneWidget: TextWidget {
     required init(field: HyperwalletField) {
         super.init(field: field)
-        setupLayout(field: field)
         textField.keyboardType = UIKeyboardType.phonePad
     }
 

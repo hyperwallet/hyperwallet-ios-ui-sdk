@@ -36,15 +36,6 @@ class TextWidget: AbstractWidget {
         return textField
     }()
 
-    required init(field: HyperwalletField) {
-        super.init(field: field)
-        setupLayout(field: field)
-    }
-
-    required init(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-
     override func value() -> String {
         return textField.text ?? ""
     }
@@ -66,9 +57,19 @@ class TextWidget: AbstractWidget {
         textField.placeholder = "\(field.placeholder ?? "")"
         textField.delegate = self
         textField.accessibilityIdentifier = field.name
+        textField.text = field.value
+
+        if field.isEditable ?? true {
+            textField.isUserInteractionEnabled = true
+            textField.clearButtonMode = .always
+            textField.textColor = Theme.Text.color
+        } else {
+            textField.clearButtonMode = .never
+            textField.textColor = Theme.Text.disabledColor
+        }
         textField.isUserInteractionEnabled = field.isEditable ?? true
         textField.clearButtonMode = field.isEditable ?? true ? .always : .never
         textField.textColor = field.isEditable ?? true ? Theme.Text.color : Theme.Text.disabledColor
-        self.addArrangedSubview(textField)
+        addArrangedSubview(textField)
     }
 }
