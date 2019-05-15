@@ -33,7 +33,7 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
                              filename: "PayPalAccountResponse",
                              method: HTTPMethod.post)
 
-        addTransferMethod.setEmail(email: "abc@test.com")
+        addTransferMethod.setEmail("abc@test.com")
 
         XCTAssertEqual(app.textFields["email"].value as? String, "abc@test.com")
 
@@ -43,12 +43,12 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidPattern() {
-        addTransferMethod.setEmail(email: "abc@testcom")
+        addTransferMethod.setEmail("abc@testcom")
         XCTAssert(app.tables["addTransferMethodTable"].staticTexts["label_email_error"].exists)
     }
 
     func testAddTransferMethod_returnsErrorEmptyRequiredFields() {
-        addTransferMethod.setEmail(email: "")
+        addTransferMethod.setEmail("")
         XCTAssert(app.tables["addTransferMethodTable"].staticTexts["label_email_error"].exists)
 
         addTransferMethod.clickCreateTransferMethodButton()
@@ -59,7 +59,7 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
                                   filename: "PayPalAccountInvalidEmailResponse",
                                   method: HTTPMethod.post)
 
-        addTransferMethod.setEmail(email: "abc@test.com")
+        addTransferMethod.setEmail("abc@test.com")
         addTransferMethod.clickCreateTransferMethodButton()
         waitForNonExistence(spinner)
 
@@ -75,7 +75,7 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
                                   filename: "PayPalAccountDuplicateResponse",
                                   method: HTTPMethod.post)
 
-        addTransferMethod.setEmail(email: "abc@test.com")
+        addTransferMethod.setEmail("abc@test.com")
         addTransferMethod.clickCreateTransferMethodButton()
         waitForNonExistence(spinner)
         XCTAssert(app.alerts["Error"].exists)
