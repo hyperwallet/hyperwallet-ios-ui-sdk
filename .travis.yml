@@ -14,6 +14,8 @@ env:
   - PROJECT=HyperwalletUISDK.xcodeproj
   - IOS_FRAMEWORK_SCHEME="HyperwalletUISDK"
   - IOS_UI_TESTS_SCHEME="Demo"
+  - BUILD_DIR="build"
+
 
   matrix:
     - ios_version='12.1'  ios_device='iPhone XR' scheme="$IOS_FRAMEWORK_SCHEME" platform='iOS Simulator' configuration="DEBUG" code_coverage="YES" only_active_arch="YES"
@@ -46,7 +48,6 @@ script: |
   xcodebuild -enableCodeCoverage "$code_coverage" clean build test -project "$PROJECT" \
     -scheme "$scheme" \
     -destination "$destination" \
-    -build-directory "build" \
     -configuration "$configuration" ONLY_ACTIVE_ARCH="$only_active_arch" ENABLE_TESTABILITY=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
   # Lint - Add `--strict` to fail for warning and violation
