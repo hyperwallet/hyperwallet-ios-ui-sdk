@@ -45,6 +45,7 @@ class ViewController: UITableViewController {
         case paymentDetails
         case listTransferMethod
         case addTransferMethod
+        case transactions
         case transferFunds
 
         var title: String {
@@ -52,6 +53,7 @@ class ViewController: UITableViewController {
             case .paymentDetails: return "Payment Details"
             case .listTransferMethod: return "List Transfer Methods"
             case .addTransferMethod: return "Add Transfer Method"
+            case .transactions: return "List Transactions"
             case .transferFunds: return  "Transfer Funds"
             }
         }
@@ -61,6 +63,7 @@ class ViewController: UITableViewController {
             case .paymentDetails: return "Configure how you want to get paid"
             case .listTransferMethod: return "List all the Transfer Methods"
             case .addTransferMethod: return "Add Transfer Methods"
+            case .transactions: return "List Transactions"
             case .transferFunds: return  "Transfer Funds"
             }
         }
@@ -146,6 +149,10 @@ class ViewController: UITableViewController {
                 (transferMethod: HyperwalletTransferMethod) -> Void in
                 self.didCreateTransferMethod(transferMethod: transferMethod)
             }
+            navigationController?.pushViewController(viewController, animated: true)
+
+        case .transactions:
+            let viewController = HyperwalletUI.shared.listTransactionViewController()
             navigationController?.pushViewController(viewController, animated: true)
 
         default:

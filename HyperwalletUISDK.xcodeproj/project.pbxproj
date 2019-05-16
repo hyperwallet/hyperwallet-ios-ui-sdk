@@ -37,6 +37,9 @@
 		9807B76B226442C60028A280 /* TransferMethodConfigurationBankAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFB61522261E84D00C4A8AA /* TransferMethodConfigurationBankAccountResponse.json */; };
 		9807B76C226442C60028A280 /* TransferMethodConfigurationBankCardResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFB614F2261E84C00C4A8AA /* TransferMethodConfigurationBankCardResponse.json */; };
 		9807B76D226442C60028A280 /* UnexpectedErrorResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFB61492261E84C00C4A8AA /* UnexpectedErrorResponse.json */; };
+		98175422228B4B840019159A /* ListTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98175421228B4B840019159A /* ListTransactionViewController.swift */; };
+		98175427228DE16F0019159A /* ListTransactionViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98175426228DE16F0019159A /* ListTransactionViewPresenter.swift */; };
+		98175429228DE42E0019159A /* ListTransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98175428228DE42E0019159A /* ListTransactionTableViewCell.swift */; };
 		98220B8C2265793700055E18 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 98220B8B2265793700055E18 /* README.md */; };
 		9826056822822E8A000CCA2D /* UIToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9826056722822E8A000CCA2D /* UIToolbar.swift */; };
 		98541F152273D72C007D4238 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 98541F142273D72C007D4238 /* CHANGELOG.md */; };
@@ -183,6 +186,9 @@
 		433A08072285E5BB007A9FFC /* BankAccountConfigurationPresetValues.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BankAccountConfigurationPresetValues.json; sourceTree = "<group>"; };
 		4A12653B2280B02900C0F59E /* DateWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateWidget.swift; sourceTree = "<group>"; };
 		4A12653D2280B12F00C0F59E /* PhoneWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneWidget.swift; sourceTree = "<group>"; };
+		98175421228B4B840019159A /* ListTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTransactionViewController.swift; sourceTree = "<group>"; };
+		98175426228DE16F0019159A /* ListTransactionViewPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTransactionViewPresenter.swift; sourceTree = "<group>"; };
+		98175428228DE42E0019159A /* ListTransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTransactionTableViewCell.swift; sourceTree = "<group>"; };
 		98220B8B2265793700055E18 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		9826056722822E8A000CCA2D /* UIToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIToolbar.swift; sourceTree = "<group>"; };
 		98541F142273D72C007D4238 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
@@ -355,6 +361,16 @@
 				078B45682273895C005B0248 /* TransferMethodMockedSuccessResponse.json */,
 			);
 			path = Responses;
+			sourceTree = "<group>";
+		};
+		98175425228DE0E30019159A /* Transactions */ = {
+			isa = PBXGroup;
+			children = (
+				98175426228DE16F0019159A /* ListTransactionViewPresenter.swift */,
+				98175421228B4B840019159A /* ListTransactionViewController.swift */,
+				98175428228DE42E0019159A /* ListTransactionTableViewCell.swift */,
+			);
+			path = Transactions;
 			sourceTree = "<group>";
 		};
 		C358A9A12272644000E5AE47 /* TransferMethod */ = {
@@ -532,6 +548,7 @@
 				DBCA383F225E8BAA00CD4137 /* Generics */,
 				DBCA383C225E8BAA00CD4137 /* Localization */,
 				DBCA381B225E8BA900CD4137 /* TransferMethod */,
+				98175425228DE0E30019159A /* Transactions */,
 				DBCA3843225E8BAA00CD4137 /* Helper */,
 				DBCA3849225E8BAA00CD4137 /* View */,
 				078B45802273A441005B0248 /* HyperwalletUI.swift */,
@@ -962,10 +979,12 @@
 				DB4679C3226113D100E1AF49 /* HyperwalletBundle.swift in Sources */,
 				DBCA3887225E8BAA00CD4137 /* SelectionWidgetCell.swift in Sources */,
 				DBCA3885225E8BAA00CD4137 /* ProcessingView.swift in Sources */,
+				98175422228B4B840019159A /* ListTransactionViewController.swift in Sources */,
 				DBCA387E225E8BAA00CD4137 /* GenericCell.swift in Sources */,
 				DBCA386A225E8BAA00CD4137 /* SelectTransferMethodTypeCell.swift in Sources */,
 				DBCA388E225E8BAA00CD4137 /* AbstractWidget.swift in Sources */,
 				DBCA3880225E8BAA00CD4137 /* HyperwalletIcon.swift in Sources */,
+				98175429228DE42E0019159A /* ListTransactionTableViewCell.swift in Sources */,
 				DBCA3873225E8BAA00CD4137 /* UIColor.swift in Sources */,
 				DBCA3870225E8BAA00CD4137 /* UIAlertAction.swift in Sources */,
 				DBCA388B225E8BAA00CD4137 /* WidgetFactory.swift in Sources */,
@@ -976,6 +995,7 @@
 				DBCA3881225E8BAA00CD4137 /* ThemeManager.swift in Sources */,
 				DBCA3891225E8BAA00CD4137 /* ErrorView.swift in Sources */,
 				DBCA387F225E8BAA00CD4137 /* HyperwalletIconContent.swift in Sources */,
+				98175427228DE16F0019159A /* ListTransactionViewPresenter.swift in Sources */,
 				DBCA3882225E8BAA00CD4137 /* HyperwalletUtilViews.swift in Sources */,
 				DBCA3875225E8BAA00CD4137 /* Notification.swift in Sources */,
 				DBCA387A225E8BAA00CD4137 /* UIViewController.swift in Sources */,
