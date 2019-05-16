@@ -1,9 +1,13 @@
 coverage_service: coveralls
 xcodeproj: HyperwalletUISDK.xcodeproj
 scheme: HyperwalletUISDK
-build_directory: /Users/travis/Library/Developer/Xcode/DerivedData/HyperwalletUISDK-cfsslzuyjqnvsygegrzknunznqya/Build/Products
-source_directory: HyperwalletUISDK
+#build_directory: /Users/travis/Library/Developer/Xcode/DerivedData/HyperwalletUISDK-cfsslzuyjqnvsygegrzknunznqya/Build/Products
 #binary_file: /Users/travis/Library/Developer/Xcode/DerivedData/HyperwalletUISDK-cfsslzuyjqnvsygegrzknunznqya/Build/Products/Release-iphonesimulator/HyperwalletUISDK.framework/HyperwalletUISDK
+
+build_directory: ../Build/Products
+binary_file: ../Build/Products/Release-iphonesimulator/HyperwalletUISDK.framework/HyperwalletUISDK
+
+source_directory: HyperwalletUISDK
 configuration: Debug
 ignore:
   - Tests/*
