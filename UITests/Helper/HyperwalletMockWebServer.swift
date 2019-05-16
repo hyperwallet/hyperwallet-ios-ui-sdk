@@ -156,6 +156,23 @@ class HyperwalletMockWebServer {
         }
     }
 
+    func setUpGraphQLBankAccountWithPreSetValues() {
+        let filePathBankField = testBundle.path(forResource: "BankAccountConfigurationPresetValues",
+                                                ofType: "json")
+        let fileUrlBankField = URL(fileURLWithPath: filePathBankField!)
+
+        do {
+            let dataBankField = try Data(contentsOf: fileUrlBankField, options: .uncached)
+            let jsonBankField = dataToJSON(data: dataBankField)
+
+            server.POST["/graphql"] = { request in
+                HttpResponse.ok(.json(jsonBankField as AnyObject))
+            }
+        } catch {
+            print("Error info: \(error)")
+        }
+    }
+
     func dataToJSON(data: Data) -> Any? {
         do {
             return try JSONSerialization.jsonObject(with: data, options: .mutableContainers)

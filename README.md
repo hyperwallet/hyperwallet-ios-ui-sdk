@@ -20,20 +20,20 @@ Note that this SDK is geared towards those who need both backend data and UI fea
 
 ## Dependencies
 
-- [HyperwalletSDK 1.0.0-beta01](https://github.com/hyperwallet/hyperwallet-ios-sdk)
+- [HyperwalletSDK 1.0.0-beta02](https://github.com/hyperwallet/hyperwallet-ios-sdk)
 
 ## Installation
 Use [Carthage](https://github.com/Carthage/Carthage) or [CocoaPods](https://cocoapods.org/) to integrate to HyperwalletSDK.
 ### Carthage
 Specify it in your Cartfile:
 ```ogdl
-github "hyperwallet/hyperwallet-ios-ui-sdk" "1.0.0-beta01"
+github "hyperwallet/hyperwallet-ios-ui-sdk" "1.0.0-beta02"
 ```
 
 ### CocoaPods
 Specify it in your Podfile:
 ```ruby
-pod 'HyperwalletUISDK', '~> 1.0.0-beta01'
+pod 'HyperwalletUISDK', '~> 1.0.0-beta02'
 ```
 
 ## Initialization

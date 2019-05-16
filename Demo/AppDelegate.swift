@@ -27,8 +27,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 
-        window?.tintColor = Theme.Button.color
+        //ThemeManager.applyWhiteTheme()
         ThemeManager.applyTheme()
+
+        // Avoid to display a black area during the view transaction in the UINavigationBar.
+        window?.backgroundColor = Theme.ViewController.backgroundColor
+        // Set the default tint color
+        window?.tintColor = Theme.Button.color
+
         return true
     }
 }

@@ -77,6 +77,24 @@ class AddTransferMethodTests: BaseTests {
         XCTAssertTrue(app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).exists)
     }
 
+    func testAddTransferMethod_varifyPresetValues() {
+        mockServer.setUpGraphQLBankAccountWithPreSetValues()
+        addTransferMethod.clickBackButton()
+        app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).tap()
+
+        guard let routingNumberPreSetValue = addTransferMethod.branchIdInput.value as? String else {
+            XCTFail("preset value is nill")
+            return
+        }
+        guard let accountNumberPreSetValue = addTransferMethod.accountNumberInput.value as? String else {
+            XCTFail("preset value is nill")
+            return
+        }
+
+        XCTAssertEqual(routingNumberPreSetValue, "012345678")
+        XCTAssertEqual(accountNumberPreSetValue, "012345")
+    }
+
     func testAddTransferMethod_verifyAfterRelaunch() {
         setUpScreenWithInvalidRoutingError()
         validateAddTransferMethodBankAccountScreen()
@@ -95,7 +113,6 @@ class AddTransferMethodTests: BaseTests {
     func testAddTransferMethod_verifyWakeFromSleep() {
         setUpScreenWithInvalidRoutingError()
         XCUIDevice.shared.wakeFromSleep(app: app)
-        waitForNonExistence(addTransferMethod.navigationBar)
         validateAddTransferMethodBankAccountScreen()
     }
 
@@ -119,7 +136,6 @@ class AddTransferMethodTests: BaseTests {
 
     func validateAddTransferMethodBankAccountScreen() {
         XCTAssertTrue(addTransferMethod.navigationBar.exists)
-        XCTAssertTrue(app.keyboards.element.exists)
         XCTAssertTrue(addTransferMethod.branchIdInput.exists)
         XCTAssertTrue(addTransferMethod.accountNumberInput.exists)
         XCTAssertTrue(addTransferMethod.accountTypeSelect.exists)
@@ -157,6 +173,7 @@ class AddTransferMethodTests: BaseTests {
         addTransferMethod.setBranchId(branchId: "021000022")
         addTransferMethod.setAccountNumber(accountNumber: "12345")
         addTransferMethod.selectAccountType(accountType: "Checking")
+        app.scrollToElement(element: addTransferMethod.createTransferMethodButton)
         addTransferMethod.clickCreateTransferMethodButton()
         waitForNonExistence(spinner)
     }
@@ -166,16 +183,16 @@ class AddTransferMethodTests: BaseTests {
         addTransferMethod.clickBackButton()
         app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).tap()
         addTransferMethod.branchIdInput.tap()
-        
+
         XCTAssertFalse(app.keyboards.element.exists)
     }
-    
+
     func testAddTransferMethod_verifyAccountTypeIsNotEditable() {
         mockServer.setUpGraphQLBankAccountWithNotEditableField()
         addTransferMethod.clickBackButton()
         app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).tap()
         addTransferMethod.accountTypeSelect.tap()
-        
+
         XCTAssertTrue(addTransferMethod.navigationBar.exists)
         XCTAssertFalse(app.tables["transferMethodTableView"].buttons["More Info"].exists)
     }
