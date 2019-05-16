@@ -27,7 +27,9 @@ class AddTransferMethodBankCardTests: BaseTests {
         addTransferMethod.setCvv("022")
         addTransferMethod.clickCreateTransferMethodButton()
 
-        //Todo - check process indicator 
+        waitForNonExistence(spinner)
+
+        XCTAssert(app.navigationBars.staticTexts["Account Settings"].exists)
     }
 
     func testAddTransferMethod_createBankCardBusiness() {
@@ -43,7 +45,10 @@ class AddTransferMethodBankCardTests: BaseTests {
         addTransferMethod.setCvv("022")
         addTransferMethod.clickCreateTransferMethodButton()
         
-        //Todo - check process indicator
+
+        waitForNonExistence(spinner)
+
+        XCTAssert(app.navigationBars.staticTexts["Account Settings"].exists)
     }
     
     func testAddTransferMethod_returnsErrorOnInvalidPattern() {

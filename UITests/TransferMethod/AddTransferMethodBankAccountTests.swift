@@ -21,7 +21,7 @@ class AddTransferMethodTests: BaseTests {
         waitForNonExistence(spinner)
 
         addTransferMethod.setBranchId("021000021")
-        addTransferMethod.setAccountNumber("12345")
+        addTransferMethod.setAccountNumber("12346")
         addTransferMethod.selectAccountType("Checking")
         addTransferMethod.selectRelationship("Self")
         addTransferMethod.setNameFirst("John")
@@ -40,7 +40,9 @@ class AddTransferMethodTests: BaseTests {
 
         addTransferMethod.clickCreateTransferMethodButton()
 
-        //Todo - check processing indicator
+        waitForNonExistence(spinner)
+
+        XCTAssert(app.navigationBars.staticTexts["Account Settings"].exists)
     }
 
     func testAddTransferMethod_createBankAccountBusiness() {
@@ -51,7 +53,7 @@ class AddTransferMethodTests: BaseTests {
         waitForNonExistence(spinner)
 
         addTransferMethod.setBranchId("021000021")
-        addTransferMethod.setAccountNumber("12345")
+        addTransferMethod.setAccountNumber("123480")
         addTransferMethod.selectAccountType("Checking")
         addTransferMethod.selectRelationship("Own company")
         addTransferMethod.setNameBusiness("Smith & Co")
@@ -66,6 +68,10 @@ class AddTransferMethodTests: BaseTests {
         app.scrollToElement(element: addTransferMethod.createTransferMethodButton)
 
         addTransferMethod.clickCreateTransferMethodButton()
+
+        waitForNonExistence(spinner)
+
+        XCTAssert(app.navigationBars.staticTexts["Account Settings"].exists)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidPattern() {
