@@ -20,9 +20,8 @@ import HyperwalletSDK
 
 /// Represents the date input widget.
 final class DateWidget: TextWidget {
-    var toolbar = UIToolbar()
     private var datePicker: UIDatePicker!
-
+    private var toolbar = UIToolbar()
     private static var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "date_format".localized()
@@ -34,6 +33,21 @@ final class DateWidget: TextWidget {
         setupDatePicker()
         toolbar.setupToolBar(target: self, action: #selector(self.doneButtonTapped))
         setupTextField()
+    }
+
+    override func textFieldDidBeginEditing(_ textField: UITextField) {
+        super.textFieldDidBeginEditing(textField)
+        if let dateFromText = DateWidget.dateFormatter.date(from: value()) {
+            datePicker.date = dateFromText
+        } else {
+            datePicker.date = Date()
+        }
+    }
+
+    @objc
+    private func doneButtonTapped() {
+        updateTextField()
+        textField.resignFirstResponder()
     }
 
     private func setupDatePicker() {
@@ -51,20 +65,5 @@ final class DateWidget: TextWidget {
     @objc
     private func updateTextField() {
         textField.text = DateWidget.dateFormatter.string(from: datePicker.date)
-    }
-
-    @objc
-    private func doneButtonTapped() {
-        updateTextField()
-        textField.resignFirstResponder()
-    }
-
-    override func textFieldDidBeginEditing(_ textField: UITextField) {
-        super.textFieldDidBeginEditing(textField)
-        if let dateFromText = DateWidget.dateFormatter.date(from: value()) {
-            datePicker.date = dateFromText
-        } else {
-            datePicker.date = Date()
-        }
     }
 }
