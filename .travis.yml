@@ -52,5 +52,5 @@ script: |
   swiftlint lint --reporter json
 after_success:
   - if [ $code_coverage == "YES" ]; then
-      after_success: slather
+     slather
   fi
