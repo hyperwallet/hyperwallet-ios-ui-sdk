@@ -29,6 +29,7 @@ before_install:
   - brew outdated carthage || brew upgrade carthage
   - Carthage update --platform iOS  --cache-builds
   - gem i slather --no-ri --no-rdoc
+  - bundle show slather
   # Force to update the Swiftlint to the last stable version
   - brew outdated swiftlint || brew upgrade swiftlint
   # Print the booted emulator
@@ -43,14 +44,15 @@ script: |
   destination="platform=$platform,OS=$ios_version,name=$ios_device"
 
   # Build and test Framework in Debug
-    xcodebuild -enableCodeCoverage "$code_coverage" clean build test -project "$PROJECT" \
+  xcodebuild -enableCodeCoverage "$code_coverage" clean build test -project "$PROJECT" \
     -scheme "$scheme" \
     -destination "$destination" \
-    -configuration Debug ONLY_ACTIVE_ARCH=YES ENABLE_TESTABILITY=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+    -derivedDataPath Build/ \
+    -configuration "$configuration" ONLY_ACTIVE_ARCH=YES ENABLE_TESTABILITY=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
   # Lint - Add `--strict` to fail for warning and violation
   swiftlint lint --reporter json
 after_success:
-  - if [ $code_coverage == "YES" ]; then
-     slather
-  fi
+ if [[ $code_coverage == "YES" ]]; then
+         slather;
+ fi
