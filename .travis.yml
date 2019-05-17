@@ -45,14 +45,21 @@ script: |
   destination="platform=$platform,OS=$ios_version,name=$ios_device"
 
   # Build and test Framework in Debug
-  xcodebuild -enableCodeCoverage "$code_coverage" clean build test -project "$PROJECT" \
-    -scheme "$scheme" \
-    -destination "$destination" \
-    -configuration "$configuration" ONLY_ACTIVE_ARCH=YES ENABLE_TESTABILITY=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+  if [[ $code_coverage == "YES" ]]; then
+          xcodebuild -enableCodeCoverage YES clean build test -project "$PROJECT" \
+            -scheme "$scheme" \
+            -destination "$destination" \
+            -configuration "$configuration" ONLY_ACTIVE_ARCH=YES ENABLE_TESTABILITY=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+      else
+      xcodebuild -enableCodeCoverage NO clean build test -project "$PROJECT" \
+        -scheme "$scheme" \
+        -destination "$destination" \
+        -configuration "$configuration"
+  fi
 
   # Lint - Add `--strict` to fail for warning and violation
   swiftlint lint --reporter json
 after_success:
  if [[ $code_coverage == "YES" ]]; then
-         slather;
+      slather;
  fi
