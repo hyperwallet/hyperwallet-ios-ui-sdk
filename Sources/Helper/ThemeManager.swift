@@ -20,7 +20,7 @@ import UIKit
 
 /// The `ThemeManager` class is responsible for applying the visual styles to the Hyperwallet user interface components.
 public class ThemeManager {
-    /// Applies visual styles to the Hyperwallet user interface components.
+    /// Applies default visual styles to the Hyperwallet user interface components.
     public static func applyTheme() {
         applyToUINavigationBar()
         applyToProcessingView()
@@ -30,6 +30,19 @@ public class ThemeManager {
         applyToListTransferMethodTableViewCell()
         applyToSelectTransferMethodTypeCell()
         registerFonts
+    }
+
+    /// Applies White Theme visual styles to the Hyperwallet user interface components.
+    public static func applyWhiteTheme() {
+        Theme.themeColor = .white
+        Theme.tintColor = UIColor(red: 0, green: 0.48, blue: 1, alpha: 1)
+        Theme.Button.color = Theme.tintColor
+        Theme.Icon.color = Theme.tintColor
+        Theme.SpinnerView.activityIndicatorViewColor = Theme.tintColor
+        Theme.SearchBar.textFieldBackgroundColor = UIColor(rgb: 0xdcdcdc)
+        Theme.SearchBar.textFieldTintColor = UIColor(rgb: 0xdcdcdc)
+        Theme.NavigationBar.shadowColor = UIColor(rgb: 0xe3e3e5)
+        ThemeManager.applyTheme()
     }
 
     private static func applyToUINavigationBar() {
@@ -43,6 +56,10 @@ public class ThemeManager {
         proxy.backItem?.backBarButtonItem?.tintColor = Theme.tintColor
         proxy.barStyle = Theme.NavigationBar.barStyle
         proxy.isTranslucent = Theme.NavigationBar.isTranslucent
+        proxy.shadowImage = UIImage.imageWithColor(
+            color: Theme.NavigationBar.shadowColor,
+            size: CGSize(width: 1, height: 1)
+        )
     }
 
     static func applyTo(searchBar: UISearchBar) {
