@@ -49,12 +49,12 @@ script: |
           xcodebuild -enableCodeCoverage YES clean build test -project "$PROJECT" \
             -scheme "$scheme" \
             -destination "$destination" \
-            -configuration "$configuration" ONLY_ACTIVE_ARCH=YES ENABLE_TESTABILITY=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+            -configuration "DEBUG" ONLY_ACTIVE_ARCH=YES ENABLE_TESTABILITY=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
       else
       xcodebuild -enableCodeCoverage NO clean build test -project "$PROJECT" \
         -scheme "$scheme" \
         -destination "$destination" \
-        -configuration "$configuration"
+        -configuration "XCUITest" ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
   fi
 
   # Lint - Add `--strict` to fail for warning and violation
