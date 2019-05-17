@@ -16,7 +16,7 @@ env:
   - IOS_UI_TESTS_SCHEME="Demo"
 
   matrix:
-    - ios_version='12.1'  ios_device='iPhone XR' scheme="$IOS_FRAMEWORK_SCHEME" platform='iOS Simulator' configuration="DEBUG" code_coverage="YES"
+    - ios_version='12.1'  ios_device='iPhone XR' scheme="$IOS_FRAMEWORK_SCHEME" platform='iOS Simulator' configuration="Debug" code_coverage="YES"
     #- ios_version='12.1'  ios_device='iPhone XR' scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS Simulator' configuration="XCUITest" code_coverage="NO"
     #- ios_version='11.1'  ios_device='iPhone 7'  scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS Simulator' configuration="XCUITest" code_coverage="NO"
 
@@ -49,7 +49,8 @@ script: |
           xcodebuild -enableCodeCoverage YES clean build test -project "$PROJECT" \
             -scheme "$scheme" \
             -destination "$destination" \
-            -configuration DEBUG ONLY_ACTIVE_ARCH=YES ENABLE_TESTABILITY=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+            -configuration Debug ONLY_ACTIVE_ARCH=YES ENABLE_TESTABILITY=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+
       else
       xcodebuild -enableCodeCoverage NO clean build test -project "$PROJECT" \
         -scheme "$scheme" \
