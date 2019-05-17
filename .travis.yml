@@ -40,15 +40,12 @@ before_install:
 script: |
   set -o pipefail
   set -e
-  echo $configuration
-  echo $code_coverage
-  echo $scheme
 
   # Define the destination emulator
   destination="platform=$platform,OS=$ios_version,name=$ios_device"
 
   # Build and test Framework in Debug
-  if [[ $code_coverage == "YES" ]]; then
+  if [ "$code_coverage" == "YES" ]; then
           xcodebuild -enableCodeCoverage YES clean build test -project "$PROJECT" \
             -scheme "$scheme" \
             -destination "$destination" \
@@ -63,6 +60,6 @@ script: |
   # Lint - Add `--strict` to fail for warning and violation
   swiftlint lint --reporter json
 after_success:
- if [[ $code_coverage == "YES" ]]; then
+ if [ "$code_coverage" == "YES" ]; then
       slather;
  fi
