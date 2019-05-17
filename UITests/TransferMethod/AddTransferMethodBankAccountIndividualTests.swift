@@ -1,6 +1,6 @@
 import XCTest
 
-class AddTransferMethodTests: BaseTests {
+class AddTransferMethodBankAccountIndividualTests: BaseTests {
     var selectTransferMethodType: SelectTransferMethodType!
     var addTransferMethod: AddTransferMethod!
 
@@ -30,35 +30,6 @@ class AddTransferMethodTests: BaseTests {
         addTransferMethod.setPhoneNumber("+16045555555")
         addTransferMethod.setMobileNumber("+16046666666")
         addTransferMethod.setDateOfBirth(yearOfBirth: "1981", monthOfBirth: "December", dayOfBirth: "25")
-        addTransferMethod.selectCountry("United States")
-        addTransferMethod.setStateProvince("Maine")
-        addTransferMethod.setStreet("632 Broadway")
-        addTransferMethod.setCity("Bangor")
-        addTransferMethod.setPostalCode("04401")
-
-        app.scrollToElement(element: addTransferMethod.createTransferMethodButton)
-
-        addTransferMethod.clickCreateTransferMethodButton()
-
-        waitForNonExistence(spinner)
-
-        XCTAssert(app.navigationBars.staticTexts["Account Settings"].exists)
-    }
-
-    func testAddTransferMethod_createBankAccountBusiness() {
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/bank-accounts",
-                             filename: "BankAccountResponse",
-                             method: HTTPMethod.post)
-
-        waitForNonExistence(spinner)
-
-        addTransferMethod.setBranchId("021000021")
-        addTransferMethod.setAccountNumber("123480")
-        addTransferMethod.selectAccountType("Checking")
-        addTransferMethod.selectRelationship("Own company")
-        addTransferMethod.setNameBusiness("Smith & Co")
-        addTransferMethod.setPhoneNumber("+16045555555")
-        addTransferMethod.setMobileNumber("+16046666666")
         addTransferMethod.selectCountry("United States")
         addTransferMethod.setStateProvince("Maine")
         addTransferMethod.setStreet("632 Broadway")
@@ -129,26 +100,7 @@ class AddTransferMethodTests: BaseTests {
         XCTAssert(app.navigationBars.staticTexts["Bank Account"].exists)
 
         verifyAccountInformationSection()
-        verifyIndividualRelationshipTypeSelection()
         verifyIndividualAccountHolderSection()
-        verifyAddressSection()
-
-        addTransferMethod.addTMTableView.scrollToElement(element: addTransferMethod.addTMTableView.otherElements["TRANSFER METHOD INFORMATION"])
-
-        XCTAssert(addTransferMethod.addTMTableView.otherElements["TRANSFER METHOD INFORMATION"].exists)
-
-        addTransferMethod.addTMTableView.scrollToElement(element: addTransferMethod.createTransferMethodButton)
-        XCTAssert(addTransferMethod.createTransferMethodButton.exists)
-    }
-
-    func testAddTransferMethod_displaysElementsOnBusinessProfileTmcResponse() {
-        waitForNonExistence(spinner)
-
-        XCTAssert(app.navigationBars.staticTexts["Bank Account"].exists)
-
-        verifyAccountInformationSection()
-        verifyBusinessRelationshipTypeSelection()
-        verifyBusinessAccountHolderSection()
         verifyAddressSection()
 
         addTransferMethod.addTMTableView.scrollToElement(element: addTransferMethod.addTMTableView.otherElements["TRANSFER METHOD INFORMATION"])
@@ -236,7 +188,7 @@ class AddTransferMethodTests: BaseTests {
     }
 }
 
-private extension AddTransferMethodTests {
+private extension AddTransferMethodBankAccountIndividualTests {
     func validateAddTransferMethodBankAccountScreen() {
         XCTAssertTrue(addTransferMethod.navigationBar.exists)
         XCTAssertTrue(addTransferMethod.branchIdInput.exists)
@@ -249,9 +201,6 @@ private extension AddTransferMethodTests {
 
     func setUpBankAccountScreen() {
         mockServer.setupGraphQLStubs()
-
-        app = XCUIApplication()
-        app.launch()
 
         selectTransferMethodType = SelectTransferMethodType(app: app)
         addTransferMethod = AddTransferMethod(app: app, for: .bankAccount)
@@ -311,36 +260,6 @@ private extension AddTransferMethodTests {
         addTransferMethod.clickGenericBackButton()
     }
 
-    func verifyIndividualRelationshipTypeSelection() {
-        XCTAssert(addTransferMethod.selectRelationshipType.exists)
-
-        addTransferMethod.selectRelationshipType.tap()
-
-        XCTAssert(app.navigationBars["Relationship"].exists)
-
-        let table = app.tables.firstMatch
-
-        XCTAssert(table.exists)
-        XCTAssert(table.staticTexts["Self"].exists)
-
-        addTransferMethod.clickGenericBackButton()
-    }
-
-    func verifyBusinessRelationshipTypeSelection() {
-        XCTAssert(addTransferMethod.selectRelationshipType.exists)
-
-        addTransferMethod.selectRelationshipType.tap()
-
-        XCTAssert(app.navigationBars["Relationship"].exists)
-
-        let table = app.tables.firstMatch
-
-        XCTAssert(table.exists)
-        XCTAssert(table.staticTexts["Own company"].exists)
-
-        addTransferMethod.clickGenericBackButton()
-    }
-
     func verifyIndividualAccountHolderSection() {
         addTransferMethod.addTMTableView.scrollToElement(element: addTransferMethod.addTMTableView.otherElements["ACCOUNT HOLDER"])
 
@@ -363,24 +282,6 @@ private extension AddTransferMethodTests {
 
         XCTAssert(addTransferMethod.addTMTableView.staticTexts["Date of Birth"].exists)
         XCTAssert(addTransferMethod.inputDateOfBirth.exists)
-
-        XCTAssertNotNil(app.tables.otherElements
-            .containing(NSPredicate(format: "label CONTAINS %@", "Note: we are not able to support adding an account for someone else.")))
-    }
-
-    func verifyBusinessAccountHolderSection() {
-        addTransferMethod.addTMTableView.scrollToElement(element: addTransferMethod.addTMTableView.otherElements["ACCOUNT HOLDER"])
-
-        XCTAssert(addTransferMethod.addTMTableView.otherElements["ACCOUNT HOLDER"].exists )
-
-        XCTAssert(addTransferMethod.addTMTableView.staticTexts["Business Name"].exists)
-        XCTAssert(addTransferMethod.inputNameBusiness.exists)
-
-        XCTAssert(addTransferMethod.addTMTableView.staticTexts["Phone Number"].exists)
-        XCTAssert(addTransferMethod.inputPhoneNumber.exists)
-
-        XCTAssert(addTransferMethod.addTMTableView.staticTexts["Mobile Number"].exists)
-        XCTAssert(addTransferMethod.inputMobileNumber.exists)
 
         XCTAssertNotNil(app.tables.otherElements
             .containing(NSPredicate(format: "label CONTAINS %@", "Note: we are not able to support adding an account for someone else.")))
