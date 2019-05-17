@@ -40,9 +40,9 @@ before_install:
 script: |
   set -o pipefail
   set -e
-  - echo $configuration
-  - echo $code_coverage
-  - echo $scheme
+  echo $configuration
+  echo $code_coverage
+  echo $scheme
 
   # Define the destination emulator
   destination="platform=$platform,OS=$ios_version,name=$ios_device"
