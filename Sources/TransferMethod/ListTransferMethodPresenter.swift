@@ -31,6 +31,7 @@ protocol ListTransferMethodView: class {
 
 final class ListTransferMethodPresenter {
     private unowned let view: ListTransferMethodView
+    private var user: HyperwalletUser?
     var transferMethods: [HyperwalletTransferMethod]?
     private var selectedTransferMethod: HyperwalletTransferMethod?
 
@@ -46,6 +47,19 @@ final class ListTransferMethodPresenter {
     /// Get the list of all Activated transfer methods from core SDK
     func listTransferMethod() {
         view.showLoading()
+        Hyperwallet.shared.getUser {[weak self] (result, error) in
+            guard let strongSelf = self else {
+                return
+            }
+            if let error = error {
+                DispatchQueue.main.async { [weak self]  in
+                    self?.view.hideLoading()
+                    self?.view.showError(error, { self?.listTransferMethod() })
+                }
+                return
+            }
+            strongSelf.user = result
+        }
         let pagination = HyperwalletTransferMethodPagination()
         pagination.limit = 100
         pagination.status = .activated
@@ -153,16 +167,21 @@ final class ListTransferMethodPresenter {
         if let transferMethod = getTransferMethod(at: transferMethodIndex),
             let country = transferMethod.getField(fieldName: .transferMethodCountry) as? String,
             let transferMethodType = transferMethod.getField(fieldName: .type) as? String {
-            var lastFourDigitAccountNumber: String?
-            if let lastFourDigit = getLastDigits(transferMethod, number: 4) {
-                lastFourDigitAccountNumber = String(format: "%@%@",
-                                                    "transfer_method_list_item_description".localized(),
-                                                    lastFourDigit)
+            var additionalInfo: String?
+            if transferMethodType == "PAYPAL_ACCOUNT" {
+                additionalInfo = user?.email
+            } else {
+                if let lastFourDigit = getLastDigits(transferMethod, number: 4) {
+                    additionalInfo = String(format: "%@%@",
+                                            "transfer_method_list_item_description".localized(),
+                                            lastFourDigit)
+                }
             }
             return ListTransferMethodCellConfiguration(
                 transferMethodType: transferMethodType.lowercased().localized(),
                 transferMethodCountry: country.localized(),
-                lastFourDigitAccountNumber: lastFourDigitAccountNumber,
+
+                additionalInfo: additionalInfo,
                 transferMethodIconFont: HyperwalletIcon.of(transferMethodType).rawValue)
         }
         return nil

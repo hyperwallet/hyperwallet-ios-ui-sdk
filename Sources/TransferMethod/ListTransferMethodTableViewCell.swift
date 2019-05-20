@@ -21,7 +21,7 @@ import UIKit
 struct ListTransferMethodCellConfiguration {
     let transferMethodType: String
     let transferMethodCountry: String
-    let lastFourDigitAccountNumber: String?
+    let additionalInfo: String?
     let transferMethodIconFont: String
 }
 
@@ -72,8 +72,7 @@ extension ListTransferMethodTableViewCell {
     func configure(configuration: ListTransferMethodCellConfiguration) {
         textLabel?.text = configuration.transferMethodType
         detailTextLabel?.attributedText = formatSubtitle(transferMethodCountry: configuration.transferMethodCountry,
-                                                         lastFourDigitAccountNumber: configuration
-                                                            .lastFourDigitAccountNumber)
+                                                         lastFourDigitAccountNumber: configuration.additionalInfo)
         detailTextLabel?.numberOfLines = 0
         detailTextLabel?.lineBreakMode = .byWordWrapping
         let icon = UIImage.fontIcon(configuration.transferMethodIconFont,
