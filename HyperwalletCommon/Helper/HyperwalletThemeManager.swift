@@ -19,16 +19,13 @@
 import UIKit
 
 /// The `ThemeManager` class is responsible for applying the visual styles to the Hyperwallet user interface components.
-public class ThemeManager {
+public class HyperwalletThemeManager {
     /// Applies default visual styles to the Hyperwallet user interface components.
     public static func applyTheme() {
         applyToUINavigationBar()
         applyToProcessingView()
-        applyToCountryCurrencyCell()
         applyToSpinnerView()
         applyToSelectionWidgetCell()
-        applyToListTransferMethodTableViewCell()
-        applyToSelectTransferMethodTypeCell()
         registerFonts
     }
 
@@ -42,7 +39,7 @@ public class ThemeManager {
         Theme.SearchBar.textFieldBackgroundColor = UIColor(rgb: 0xdcdcdc)
         Theme.SearchBar.textFieldTintColor = UIColor(rgb: 0xdcdcdc)
         Theme.NavigationBar.shadowColor = UIColor(rgb: 0xe3e3e5)
-        ThemeManager.applyTheme()
+        HyperwalletThemeManager.applyTheme()
     }
 
     private static func applyToUINavigationBar() {
@@ -102,14 +99,6 @@ public class ThemeManager {
         proxy.stateLabelColor = Theme.ProcessingView.stateLabelColor
     }
 
-    private static func applyToCountryCurrencyCell() {
-        let proxy = CountryCurrencyCell.appearance()
-        proxy.titleLabelFont = Theme.Label.bodyFont
-        proxy.titleLabelColor = Theme.Label.color
-        proxy.valueLabelFont = Theme.Label.bodyFont
-        proxy.valueLabelColor = Theme.Label.subTitleColor
-    }
-
     private static func applyToSpinnerView() {
         let proxy = SpinnerView.appearance()
         proxy.activityIndicatorStyle = Theme.SpinnerView.activityIndicatorViewStyle
@@ -122,22 +111,6 @@ public class ThemeManager {
         let proxy = SelectionWidgetCell.appearance()
         proxy.textLabelColor = Theme.Label.color
         proxy.textLabelFont = Theme.Label.bodyFont
-    }
-
-    private static func applyToListTransferMethodTableViewCell() {
-        let proxy = ListTransferMethodTableViewCell.appearance()
-        proxy.titleLabelFont = Theme.Label.bodyFontMedium
-        proxy.titleLabelColor = Theme.Label.color
-        proxy.subTitleLabelFont = Theme.Label.captionOne
-        proxy.subTitleLabelColor = Theme.Label.subTitleColor
-    }
-
-    private static func applyToSelectTransferMethodTypeCell() {
-        let proxy = SelectTransferMethodTypeCell.appearance()
-        proxy.titleLabelFont = Theme.Label.bodyFontMedium
-        proxy.titleLabelColor = Theme.Label.color
-        proxy.subTitleLabelFont = Theme.Label.captionOne
-        proxy.subTitleLabelColor = Theme.Label.subTitleColor
     }
 
     private static let registerFonts: Void = {

@@ -21,11 +21,11 @@ import HyperwalletSDK
 
 /// Class responsible for initializing the Hyperwallet UI SDK. It contains methods to interact with the controllers
 /// used to interact with the Hyperwallet platform
-public final class HyperwalletUI {
-    private static var instance: HyperwalletUI?
+public final class HyperwalletTransferMethodUI {
+    private static var instance: HyperwalletTransferMethodUI?
 
     /// Returns the previously initialized instance of the Hyperwallet UI SDK interface object
-    public static var shared: HyperwalletUI {
+    public static var shared: HyperwalletTransferMethodUI {
         guard let instance = instance else {
             fatalError("Call HyperwalletUI.setup(_:) before accessing HyperwalletUI.shared")
         }
@@ -37,7 +37,7 @@ public final class HyperwalletUI {
     ///
     /// - Parameter provider: a provider of Hyperwallet authentication tokens.
     public class func setup(_ provider: HyperwalletAuthenticationTokenProvider) {
-        instance = HyperwalletUI(provider)
+        instance = HyperwalletTransferMethodUI(provider)
     }
 
     /// Lists the user's transfer methods (bank account, bank card, PayPal account, prepaid card, paper check).

@@ -194,7 +194,7 @@ private extension GenericTableViewController {
             navigationItem.searchController = self.searchController
             navigationItem.hidesSearchBarWhenScrolling = false
         }
-        ThemeManager.applyTo(searchBar: searchController.searchBar)
+        HyperwalletThemeManager.applyTo(searchBar: searchController.searchBar)
     }
 
     func setupWithoutSearchBar() {
