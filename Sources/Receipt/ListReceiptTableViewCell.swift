@@ -18,14 +18,14 @@
 
 import UIKit
 
-struct ListTransactionCellConfiguration {
+struct ListReceiptCellConfiguration {
     let transferMethodType: String
     let transferMethodCountry: String
     let lastFourDigitAccountNumber: String?
     let transferMethodIconFont: String
 }
 
-final class ListTransactionTableViewCell: UITableViewCell {
+final class ListReceiptTableViewCell: UITableViewCell {
     // MARK: Life cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
@@ -68,8 +68,8 @@ final class ListTransactionTableViewCell: UITableViewCell {
     }
 }
 
-extension ListTransactionTableViewCell {
-    func configure(configuration: ListTransactionCellConfiguration?) {
+extension ListReceiptTableViewCell {
+    func configure(configuration: ListReceiptCellConfiguration?) {
         if let configuration = configuration {
             textLabel?.text = configuration.transferMethodType
             detailTextLabel?.attributedText = formatSubtitle(transferMethodCountry: configuration.transferMethodCountry,

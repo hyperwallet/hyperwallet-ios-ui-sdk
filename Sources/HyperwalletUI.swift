@@ -52,9 +52,9 @@ public final class HyperwalletUI {
     /// Lists the user's transactions.
     ///
     ///
-    /// - Returns: An instance of `ListTransactionViewController`
-    public func listTransactionViewController() -> ListTransactionViewController {
-        return ListTransactionViewController()
+    /// - Returns: An instance of `ListReceiptViewController`
+    public func listReceiptViewController() -> ListReceiptViewController {
+        return ListReceiptViewController()
     }
 
     /// Lists all transfer method types available based on the country, currency and profile type to create a new
