@@ -71,8 +71,8 @@ final class ListTransferMethodTableViewCell: UITableViewCell {
 extension ListTransferMethodTableViewCell {
     func configure(configuration: ListTransferMethodCellConfiguration) {
         textLabel?.text = configuration.transferMethodType
-        detailTextLabel?.attributedText = formatSubtitle(transferMethodCountry: configuration.transferMethodCountry,
-                                                         additionalInfo: configuration.additionalInfo)
+        detailTextLabel?.attributedText = formatDetails(transferMethodCountry: configuration.transferMethodCountry,
+                                                        additionalInfo: configuration.additionalInfo)
         detailTextLabel?.numberOfLines = 0
         detailTextLabel?.lineBreakMode = .byWordWrapping
         let icon = UIImage.fontIcon(configuration.transferMethodIconFont,
@@ -84,13 +84,13 @@ extension ListTransferMethodTableViewCell {
         imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
     }
 
-    func formatSubtitle(transferMethodCountry: String, additionalInfo: String?) -> NSAttributedString {
+    func formatDetails(transferMethodCountry: String, additionalInfo: String?) -> NSAttributedString {
         let attributedText = NSMutableAttributedString()
         let font = Theme.Label.captionOne
         let color = Theme.Label.subTitleColor
         attributedText.append(value: String(format: "%@\n", transferMethodCountry), font: font, color: color)
-        if let lastFourDigitAccountNumber = additionalInfo {
-            attributedText.append(value: lastFourDigitAccountNumber, font: font, color: color)
+        if let additionalInfo = additionalInfo {
+            attributedText.append(value: additionalInfo, font: font, color: color)
         }
 
         return attributedText
