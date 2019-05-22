@@ -8,10 +8,9 @@ Pod::Spec.new do |s|
     s.platform              = :ios
     s.ios.deployment_target = '10.0'
     s.source                = { :git => 'https://github.com/hyperwallet/hyperwallet-ios-ui-sdk.git', :tag => "#{s.version}"}
-    s.source_files          = 'Sources/**/*.{swift,h,strings,xib}'
     s.requires_arc          = true
     s.swift_version         = '4.2'
-    s.resources             = ['Sources/**/*.xcassets', 'Sources/**/*.ttf']
+    s.resources             = ['HyperwalletCommon/**/*.xcassets', 'HyperwalletCommon/**/*.ttf']
     s.dependency 'HyperwalletSDK', '1.0.0-beta02'
 
     s.default_subspecs = %w[Common TransferMethod]
@@ -22,7 +21,7 @@ Pod::Spec.new do |s|
       end
 
     s.subspec "TransferMethod" do |s|
-        s.source_files = "TransferMethod/**/*.{swift,h,strings,xib}"
+        s.source_files = "HyperwalletTransferMethod/**/*.{swift,h,strings,xib}"
         s.frameworks = "UIKit"
         s.dependency "HyperwalletUISDK/Common"
     end
