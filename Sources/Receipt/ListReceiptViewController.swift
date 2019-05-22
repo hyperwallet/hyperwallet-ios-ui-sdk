@@ -18,25 +18,6 @@
 import HyperwalletSDK
 import UIKit
 
-struct ListReceiptSectionData: Comparable {
-    var sectionItem: Date
-    var rowItems: [HyperwalletTransferMethod]
-
-    static func < (lhs: ListReceiptSectionData, rhs: ListReceiptSectionData) -> Bool {
-        return rhs.sectionItem < lhs.sectionItem
-    }
-
-    static func == (lhs: ListReceiptSectionData, rhs: ListReceiptSectionData) -> Bool {
-        return rhs.sectionItem == lhs.sectionItem
-    }
-
-    static func group(rowItems: [HyperwalletTransferMethod], by criteria: (HyperwalletTransferMethod) -> Date )
-        -> [ListReceiptSectionData] {
-            let groups = Dictionary(grouping: rowItems, by: criteria)
-            return groups.map(ListReceiptSectionData.init(sectionItem:rowItems:)).sorted()
-    }
-}
-
 /// Lists the user's transfer methods (bank account, bank card, PayPal account, prepaid card, paper check).
 ///
 /// The user can deactivate and add a new transfer method.
@@ -71,7 +52,8 @@ public final class ListReceiptViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: listReceiptCellIdentifier, for: indexPath)
 
         if let listTransferMethodCell = cell as? ListReceiptTableViewCell {
-            listTransferMethodCell.configure(configuration: presenter.getCellConfiguration(for: indexPath.row))
+            listTransferMethodCell.configure(configuration: presenter.getCellConfiguration(for: indexPath.row,
+                                                                                           in: indexPath.section))
         }
         return cell
     }

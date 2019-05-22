@@ -19,10 +19,10 @@
 import HyperwalletSDK
 
 protocol ListReceiptView: class {
-    func showLoading()
     func hideLoading()
-    func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?)
     func loadReceipts()
+    func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?)
+    func showLoading()
 }
 
 final class ListReceiptViewPresenter {
@@ -56,8 +56,8 @@ final class ListReceiptViewPresenter {
         Hyperwallet.shared.listTransferMethods(pagination: pagination, completion: listTransferMethodHandler())
     }
 
-    private func getTransferMethod(at index: Int) -> HyperwalletTransferMethod? {
-        return transferMethods[index]
+    private func getTransferMethod(at index: Int, in section: Int) -> HyperwalletTransferMethod? {
+        return sections[section].rowItems[index]
     }
 
     private func listTransferMethodHandler()
@@ -76,14 +76,14 @@ final class ListReceiptViewPresenter {
                     strongSelf.nextLink = result?.links.first(where: { $0.params.rel == "next" })?.href
                     strongSelf.currentPage = Int(strongSelf.nextLink?.valueOf("offset") ?? "\(strongSelf.currentPage)")
                         ?? strongSelf.currentPage
-                    strongSelf.groupedTransactionsByMonth(result?.data ?? [])
+                    strongSelf.groupTransactionsByMonth(result?.data ?? [])
                     strongSelf.view.loadReceipts()
                 }
             }
     }
 
     //swiftlint:disable force_cast
-    private func groupedTransactionsByMonth(_ transferMethods: [HyperwalletTransferMethod]) {
+    private func groupTransactionsByMonth(_ transferMethods: [HyperwalletTransferMethod]) {
         if sections.isEmpty {
             self.transferMethods = transferMethods
         } else {
@@ -91,24 +91,21 @@ final class ListReceiptViewPresenter {
         }
 
         sections = ListReceiptSectionData.group(rowItems: self.transferMethods, by: { (transferMethod) in
-            firstDayOfMonth(date: parseDate(transferMethod.getField(fieldName: .createdOn) as! String))
+            firstDayOfMonth(stringDate: transferMethod.getField(fieldName: .createdOn) as! String)
         })
     }
 
-    private func parseDate(_ str: String) -> Date {
+    private func firstDayOfMonth(stringDate: String) -> Date {
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "yyyy-MM-dd'T'H:mm:ss"
-        return dateFormat.date(from: str)!
-    }
-
-    private func firstDayOfMonth(date: Date) -> Date {
+        let date = dateFormat.date(from: stringDate)!
         let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month], from: date)
         return calendar.date(from: components)!
     }
 
-    func getCellConfiguration(for transferMethodIndex: Int) -> ListReceiptCellConfiguration? {
-        if let transferMethod = getTransferMethod(at: transferMethodIndex),
+    func getCellConfiguration(for transferMethodIndex: Int, in section: Int) -> ListReceiptCellConfiguration? {
+        if let transferMethod = getTransferMethod(at: transferMethodIndex, in: section),
             let country = transferMethod.getField(fieldName: .transferMethodCountry) as? String,
             let transferMethodType = transferMethod.getField(fieldName: .type) as? String {
             var lastFourDigitAccountNumber: String?
