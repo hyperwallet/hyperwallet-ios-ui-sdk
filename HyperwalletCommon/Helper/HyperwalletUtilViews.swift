@@ -40,10 +40,10 @@ public struct HyperwalletUtilViews {
     /// - parameters: style - The style of the alert controller.
     /// - parameters: actions - The list of option `UIAlertAction` the use can choose.
     public static func showAlert(_ viewController: UIViewController,
-                          title: String? = nil,
-                          message: String?,
-                          style: UIAlertController.Style = .alert,
-                          actions: UIAlertAction...) {
+                                 title: String? = nil,
+                                 message: String?,
+                                 style: UIAlertController.Style = .alert,
+                                 actions: UIAlertAction...) {
         let titleLocalized = title?.localized()
         let messageLocalized = message?.localized()
 
@@ -64,9 +64,9 @@ public struct HyperwalletUtilViews {
     ///   - message: description shown in the dialog
     ///   - retry: an action needs to be retried
     public static func showAlertWithRetry(_ viewController: UIViewController,
-                                   title: String?,
-                                   message: String?,
-                                   _ retry: @escaping (UIAlertAction) -> Void) {
+                                          title: String?,
+                                          message: String?,
+                                          _ retry: @escaping (UIAlertAction) -> Void) {
         HyperwalletUtilViews.showAlert(viewController,
                                        title: title,
                                        message: message,

@@ -1,6 +1,6 @@
 import Hippolyte
 import HyperwalletSDK
-@testable import HyperwalletUISDK
+@testable import HyperwalletTransferMethod
 import XCTest
 
 class AddTransferMethodPresenterTests: XCTestCase {

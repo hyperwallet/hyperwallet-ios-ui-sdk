@@ -41,7 +41,7 @@ extension XCUIDevice {
 
     func sendToBackground(app: XCUIApplication) {
         self.press(.home)
-        app.wait(for: .unknown, timeout: 3)
+        _ = app.wait(for: .unknown, timeout: 3)
         app.activate()
     }
 }

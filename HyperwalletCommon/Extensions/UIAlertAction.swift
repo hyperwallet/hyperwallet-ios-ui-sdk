@@ -67,7 +67,7 @@ extension UIAlertAction {
     ///   - title: a string value of the alert action
     /// - Returns: a remove alert action
     public static func remove(_ handler: @escaping (UIAlertAction) -> Void,
-                       _ title: String = UIAlertAction.remove) -> UIAlertAction {
+                              _ title: String = UIAlertAction.remove) -> UIAlertAction {
         return UIAlertAction(title: title, style: .destructive, handler: handler)
     }
 

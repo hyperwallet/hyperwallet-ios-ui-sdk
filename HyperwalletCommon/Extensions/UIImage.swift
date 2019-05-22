@@ -30,10 +30,10 @@ extension UIImage {
     ///   - backgroundColor: The background color (optional).
     /// - returns: A string that will appear as icon
     public static func fontIcon(_ name: String,
-                         _ iconSize: CGSize,
-                         _ fontSize: CGFloat,
-                         _ textColor: UIColor,
-                         _ backgroundColor: UIColor?) -> UIImage {
+                                _ iconSize: CGSize,
+                                _ fontSize: CGFloat,
+                                _ textColor: UIColor,
+                                _ backgroundColor: UIColor?) -> UIImage {
         let paragraph = NSMutableParagraphStyle()
         paragraph.alignment = NSTextAlignment.center
         let fontSize = fontSize

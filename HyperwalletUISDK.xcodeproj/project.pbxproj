@@ -24,6 +24,7 @@
 		070AD7882294D07C00BB2B26 /* ProcessingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA384C225E8BAA00CD4137 /* ProcessingView.swift */; };
 		070AD7892294D37800BB2B26 /* GenericCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3842225E8BAA00CD4137 /* GenericCell.swift */; };
 		070AD78A2294D37A00BB2B26 /* GenericTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3841225E8BAA00CD4137 /* GenericTableViewController.swift */; };
+		070AD78B2295C6EE00BB2B26 /* HyperwalletTransferMethod.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07B583DF22949E59009CAF80 /* HyperwalletTransferMethod.framework */; };
 		078B45742273895C005B0248 /* TransferMethodMockedSuccessResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 078B45682273895C005B0248 /* TransferMethodMockedSuccessResponse.json */; };
 		078B45752273895C005B0248 /* StatusTransitionMockedResponseSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = 078B45692273895C005B0248 /* StatusTransitionMockedResponseSuccess.json */; };
 		078B45762273895C005B0248 /* BankCardErrorResponseWithInvalidCardNumber.json in Resources */ = {isa = PBXBuildFile; fileRef = 078B456A2273895C005B0248 /* BankCardErrorResponseWithInvalidCardNumber.json */; };
@@ -133,6 +134,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		070AD78C2295C6F300BB2B26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 07B583DE22949E59009CAF80;
+			remoteInfo = HyperwalletTransferMethod;
+		};
 		07B583E422949E59009CAF80 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
@@ -333,6 +341,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				070AD78B2295C6EE00BB2B26 /* HyperwalletTransferMethod.framework in Frameworks */,
 				DB68FEE02284D82D000EE61D /* HyperwalletCommon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -407,12 +416,13 @@
 				07B583FB2294A33D009CAF80 /* Extensions */,
 				07B584002294A8D7009CAF80 /* Helper */,
 				070AD77A2294CA2D00BB2B26 /* View */,
-				07B583FE2294A6FC009CAF80 /* HyperwalletTransferMethodUI.swift */,
 				072A53F622838F6B00BC11D0 /* AddTransferMethodSectionData.swift */,
 				DBCA3822225E8BA900CD4137 /* AddTransferMethodPresenter.swift */,
 				DBCA3828225E8BA900CD4137 /* AddTransferMethodTableViewCell.swift */,
 				DBCA3820225E8BA900CD4137 /* AddTransferMethodViewController.swift */,
 				DBCA381E225E8BA900CD4137 /* CountryCurrencyCell.swift */,
+				07B583FE2294A6FC009CAF80 /* HyperwalletTransferMethodUI.swift */,
+				07B583E122949E59009CAF80 /* HyperwalletTransferMethod.h */,
 				DBCA382B225E8BA900CD4137 /* ListTransferMethodPresenter.swift */,
 				DBCA3821225E8BA900CD4137 /* ListTransferMethodTableViewCell.swift */,
 				DBCA3827225E8BA900CD4137 /* ListTransferMethodViewController.swift */,
@@ -420,7 +430,6 @@
 				DBCA3825225E8BA900CD4137 /* SelectTransferMethodTypePresenter.swift */,
 				DBCA381C225E8BA900CD4137 /* SelectTransferMethodTypeViewController.swift */,
 				DBCA382A225E8BA900CD4137 /* TransferMethodTypeDetail.swift */,
-				07B583E122949E59009CAF80 /* HyperwalletTransferMethod.h */,
 				07B583E222949E59009CAF80 /* Info.plist */,
 			);
 			path = HyperwalletTransferMethod;
@@ -429,11 +438,11 @@
 		07B583FB2294A33D009CAF80 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				DBCA3834225E8BA900CD4137 /* HyperwalletFee.swift */,
 				DBCA3835225E8BA900CD4137 /* Notification.swift */,
 				DBCA3836225E8BA900CD4137 /* NSRegularExpression.swift */,
-				DBCA383B225E8BA900CD4137 /* UINavigationController.swift */,
-				DBCA3834225E8BA900CD4137 /* HyperwalletFee.swift */,
 				DBCA382F225E8BA900CD4137 /* TransferMethodConfigurationResult.swift */,
+				DBCA383B225E8BA900CD4137 /* UINavigationController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -544,12 +553,12 @@
 			isa = PBXGroup;
 			children = (
 				DB4679842260380C00E1AF49 /* AppDelegate.swift */,
+				DB4679982260386D00E1AF49 /* IntegratorAuthenticationProvider.swift */,
 				DB4679862260380C00E1AF49 /* ViewController.swift */,
 				DB4679882260380C00E1AF49 /* Main.storyboard */,
 				DB46798B2260380D00E1AF49 /* Assets.xcassets */,
 				DB46798D2260380D00E1AF49 /* LaunchScreen.storyboard */,
 				DB4679902260380D00E1AF49 /* Info.plist */,
-				DB4679982260386D00E1AF49 /* IntegratorAuthenticationProvider.swift */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -784,6 +793,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				070AD78D2295C6F300BB2B26 /* PBXTargetDependency */,
 				DB18E9F42261BA29004F6AC3 /* PBXTargetDependency */,
 			);
 			name = HyperwalletUISDKTests;
@@ -1112,6 +1122,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		070AD78D2295C6F300BB2B26 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 07B583DE22949E59009CAF80 /* HyperwalletTransferMethod */;
+			targetProxy = 070AD78C2295C6F300BB2B26 /* PBXContainerItemProxy */;
+		};
 		07B583E522949E59009CAF80 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 07B583DE22949E59009CAF80 /* HyperwalletTransferMethod */;
