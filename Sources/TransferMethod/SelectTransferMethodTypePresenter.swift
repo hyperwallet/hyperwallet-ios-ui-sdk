@@ -66,14 +66,12 @@ final class SelectTransferMethodTypePresenter {
     /// Return the `TransferMethodTypeDetail` based on the index
     func getCellConfiguration(for index: Int) -> SelectTransferMethodTypeConfiguration {
         let transferMethodType = transferMethodTypes[index]
-        let feesProcessingTime = transferMethodType.code == "PAYPAL_ACCOUNT"
-            ? user?.formatUserEmail()
-            : transferMethodType.formatFeesProcessingTime()
+        let feesProcessingTime = transferMethodType.formatFeesProcessingTime()
         let transferMethodIcon = HyperwalletIcon.of(transferMethodType.code!).rawValue
 
         return SelectTransferMethodTypeConfiguration(
             transferMethodType: transferMethodType.code!.lowercased(),
-            additionalInfo: feesProcessingTime,
+            feesProcessingTime: feesProcessingTime,
             transferMethodIconFont: transferMethodIcon)
     }
 

@@ -31,7 +31,6 @@ protocol ListTransferMethodView: class {
 
 final class ListTransferMethodPresenter {
     private unowned let view: ListTransferMethodView
-    private var user: HyperwalletUser?
     var transferMethods: [HyperwalletTransferMethod]?
     private var selectedTransferMethod: HyperwalletTransferMethod?
 
@@ -47,19 +46,6 @@ final class ListTransferMethodPresenter {
     /// Get the list of all Activated transfer methods from core SDK
     func listTransferMethod() {
         view.showLoading()
-        Hyperwallet.shared.getUser {[weak self] (result, error) in
-            guard let strongSelf = self else {
-                return
-            }
-            if let error = error {
-                DispatchQueue.main.async { [weak self]  in
-                    self?.view.hideLoading()
-                    self?.view.showError(error, { self?.listTransferMethod() })
-                }
-                return
-            }
-            strongSelf.user = result
-        }
         let pagination = HyperwalletTransferMethodPagination()
         pagination.limit = 100
         pagination.status = .activated
@@ -169,7 +155,7 @@ final class ListTransferMethodPresenter {
             let transferMethodType = transferMethod.getField(fieldName: .type) as? String {
             var additionalInfo: String?
             if transferMethodType == "PAYPAL_ACCOUNT" {
-                additionalInfo = user?.email
+                additionalInfo = transferMethod.getField(fieldName: .email) as? String
             } else {
                 if let lastFourDigit = getLastDigits(transferMethod, number: 4) {
                     additionalInfo = String(format: "%@%@",

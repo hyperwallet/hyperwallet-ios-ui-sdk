@@ -44,16 +44,8 @@ class ListTransferMethodPresenterTests: XCTestCase {
         mockView.resetStates()
     }
 
-    private func setUpGetHyperwalletUser(_ error: NSError? = nil) {
-        let userMockResponseData = HyperwalletTestHelper.getDataFromJson("UserIndividualResponse")
-        let response = HyperwalletTestHelper.setUpMockedResponse(payload: userMockResponseData, error: error)
-        let request = HyperwalletTestHelper.buildGetRequest(baseUrl: HyperwalletTestHelper.userRestURL, response)
-        Hippolyte.shared.add(stubbedRequest: request)
-    }
-
     func testListTransferMethod_success() {
         // Given
-        setUpGetHyperwalletUser()
         HyperwalletTestHelper.setUpMockServer(request: setUpListTransferMethodRequest())
 
         let expectation = self.expectation(description: "load transfer methods")

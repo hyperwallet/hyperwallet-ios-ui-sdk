@@ -18,10 +18,10 @@
 
 import UIKit
 
-/// Represents the country and currency data to be displyed on the CountryCurrencyCell
+/// Represents the country and currency data to be displayed on the CountryCurrencyCell
 struct SelectTransferMethodTypeConfiguration {
     let transferMethodType: String
-    let additionalInfo: NSAttributedString?
+    let feesProcessingTime: NSAttributedString
     let transferMethodIconFont: String
 }
 
@@ -76,7 +76,7 @@ extension SelectTransferMethodTypeCell {
         textLabel?.text = configuration.transferMethodType.localized()
         detailTextLabel?.numberOfLines = 0
         detailTextLabel?.lineBreakMode = .byWordWrapping
-        detailTextLabel?.attributedText = configuration.additionalInfo
+        detailTextLabel?.attributedText = configuration.feesProcessingTime
         let image = UIImage.fontIcon(configuration.transferMethodIconFont,
                                      Theme.Icon.frame,
                                      CGFloat(Theme.Icon.size),
