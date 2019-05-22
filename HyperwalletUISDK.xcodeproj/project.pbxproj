@@ -603,12 +603,12 @@
 			isa = PBXGroup;
 			children = (
 				DBD2667F2261A601002973C3 /* Deployment */,
+				DBCA37F7225E892400CD4137 /* HyperwalletCommon */,
+				07B583E022949E59009CAF80 /* HyperwalletTransferMethod */,
 				DB18E9EE2261BA29004F6AC3 /* Tests */,
 				DB2587FC2261BFF100E6236B /* UITests */,
 				DBAE17C0225F136A00C5CC60 /* Frameworks */,
 				DBCA37F6225E892400CD4137 /* Products */,
-				DBCA37F7225E892400CD4137 /* HyperwalletCommon */,
-				07B583E022949E59009CAF80 /* HyperwalletTransferMethod */,
 				DB4679832260380C00E1AF49 /* Demo */,
 			);
 			sourceTree = "<group>";
@@ -1207,7 +1207,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = hyperwallet.HyperwalletTransferMethod;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1237,7 +1237,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = hyperwallet.HyperwalletTransferMethod;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = XCUITest;
@@ -1267,7 +1267,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = hyperwallet.HyperwalletTransferMethod;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
