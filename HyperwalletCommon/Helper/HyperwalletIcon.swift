@@ -18,7 +18,7 @@
 
 import Foundation
 
-final class HyperwalletIcon {
+public final class HyperwalletIcon {
     /// Make transfer method type icon by transfer method type
     ///
     /// - Parameter transferMethodType: a type of transfer method in String

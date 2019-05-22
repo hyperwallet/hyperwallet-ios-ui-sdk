@@ -19,7 +19,7 @@
 import UIKit
 
 extension UIToolbar {
-    func setupToolBar(target: UIView, action: Selector?) {
+    public func setupToolBar(target: UIView, action: Selector?) {
         let toolbar = self
         toolbar.barStyle = UIBarStyle.default
         toolbar.isTranslucent = true

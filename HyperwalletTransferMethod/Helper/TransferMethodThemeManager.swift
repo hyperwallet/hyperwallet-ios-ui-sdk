@@ -17,14 +17,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import Foundation
+import HyperwalletCommon
 
-public class HyperwalletThemeManager {
+public class TransferMethodThemeManager {
     /// Applies default visual styles to the Hyperwallet user interface components.
     public static func applyTheme() {
         HyperwalletThemeManager.applyTheme()
         applyToCountryCurrencyCell()
         applyToListTransferMethodTableViewCell()
         applyToSelectTransferMethodTypeCell()
+        applyToSelectionWidgetCell()
     }
 
     private static func applyToCountryCurrencyCell() {
@@ -49,5 +51,11 @@ public class HyperwalletThemeManager {
         proxy.titleLabelColor = Theme.Label.color
         proxy.subTitleLabelFont = Theme.Label.captionOne
         proxy.subTitleLabelColor = Theme.Label.subTitleColor
+    }
+
+    private static func applyToSelectionWidgetCell() {
+        let proxy = SelectionWidgetCell.appearance()
+        proxy.textLabelColor = Theme.Label.color
+        proxy.textLabelFont = Theme.Label.bodyFont
     }
 }

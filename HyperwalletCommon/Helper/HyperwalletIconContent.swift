@@ -19,7 +19,7 @@
 import Foundation
 
 /// Represents the Hyperwallet Icon type
-enum HyperwalletIconContent: String {
+public enum HyperwalletIconContent: String {
     case gift = "\u{e900}"
     case bank = "\u{e000}"
     case cashPayment = "\u{e001}"

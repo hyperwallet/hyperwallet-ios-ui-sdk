@@ -16,7 +16,8 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import HyperwalletUISDK
+import HyperwalletCommon
+import HyperwalletTransferMethod
 import UIKit
 
 @UIApplicationMain
@@ -28,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
 
         //ThemeManager.applyWhiteTheme()
-        ThemeManager.applyTheme()
+        TransferMethodThemeManager.applyTheme()
 
         // Avoid to display a black area during the view transaction in the UINavigationBar.
         window?.backgroundColor = Theme.ViewController.backgroundColor

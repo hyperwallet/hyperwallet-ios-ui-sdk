@@ -25,7 +25,6 @@ public class HyperwalletThemeManager {
         applyToUINavigationBar()
         applyToProcessingView()
         applyToSpinnerView()
-        applyToSelectionWidgetCell()
         registerFonts
     }
 
@@ -59,7 +58,7 @@ public class HyperwalletThemeManager {
         )
     }
 
-    static func applyTo(searchBar: UISearchBar) {
+    public static func applyTo(searchBar: UISearchBar) {
         searchBar.searchBarStyle = UISearchBar.Style.minimal
         searchBar.barStyle = .black
         searchBar.backgroundColor = Theme.themeColor
@@ -105,12 +104,6 @@ public class HyperwalletThemeManager {
         proxy.activityIndicatorColor = Theme.SpinnerView.activityIndicatorViewColor
         proxy.activityIndicatorBackgroundColor = Theme.SpinnerView.backgroundColor
         proxy.viewBackgroundColor = Theme.SpinnerView.backgroundColor
-    }
-
-    private static func applyToSelectionWidgetCell() {
-        let proxy = SelectionWidgetCell.appearance()
-        proxy.textLabelColor = Theme.Label.color
-        proxy.textLabelFont = Theme.Label.bodyFont
     }
 
     private static let registerFonts: Void = {

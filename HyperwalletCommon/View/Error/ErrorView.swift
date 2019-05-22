@@ -19,16 +19,16 @@
 import HyperwalletSDK
 import UIKit
 
-final class ErrorView {
+public final class ErrorView {
     weak var viewController: UIViewController!
     var error: HyperwalletErrorType
 
-    init(viewController: UIViewController, error: HyperwalletErrorType) {
+    public init(viewController: UIViewController, error: HyperwalletErrorType) {
         self.viewController = viewController
         self.error = error
     }
 
-    func show(_ handler: (() -> Void)?) {
+    public func show(_ handler: (() -> Void)?) {
         switch error.group {
         case .business:
             businessError()
@@ -41,7 +41,7 @@ final class ErrorView {
         }
     }
 
-    func businessError(_ handler: ((UIAlertAction) -> Void)? = nil) {
+    public func businessError(_ handler: ((UIAlertAction) -> Void)? = nil) {
         HyperwalletUtilViews.showAlert(viewController,
                                        title: "error".localized(),
                                        message: error.getHyperwalletErrors()?.errorList?

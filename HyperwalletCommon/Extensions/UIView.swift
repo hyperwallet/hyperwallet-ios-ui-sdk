@@ -20,7 +20,7 @@ import UIKit
 
 extension UIView {
     /// Top Anchor
-    var safeAreaTopAnchor: NSLayoutYAxisAnchor {
+    public var safeAreaTopAnchor: NSLayoutYAxisAnchor {
         if #available(iOS 11.0, *) {
             return self.safeAreaLayoutGuide.topAnchor
         } else {
@@ -29,7 +29,7 @@ extension UIView {
     }
 
     /// Bottom Anchor
-    var safeAreaBottomAnchor: NSLayoutYAxisAnchor {
+    public var safeAreaBottomAnchor: NSLayoutYAxisAnchor {
         if #available(iOS 11.0, *) {
             return self.safeAreaLayoutGuide.bottomAnchor
         } else {
@@ -37,7 +37,7 @@ extension UIView {
         }
     }
     /// Leading Anchor
-    var safeAreaLeadingAnchor: NSLayoutXAxisAnchor {
+    public var safeAreaLeadingAnchor: NSLayoutXAxisAnchor {
         if #available(iOS 11.0, *) {
             return self.safeAreaLayoutGuide.leadingAnchor
         } else {
@@ -46,7 +46,7 @@ extension UIView {
     }
 
     /// Trailing Anchor
-    var safeAreaTrailingAnchor: NSLayoutXAxisAnchor {
+    public var safeAreaTrailingAnchor: NSLayoutXAxisAnchor {
         if #available(iOS 11.0, *) {
             return self.safeAreaLayoutGuide.trailingAnchor
         } else {

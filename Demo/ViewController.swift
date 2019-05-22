@@ -16,8 +16,9 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+import HyperwalletCommon
 import HyperwalletSDK
-import HyperwalletUISDK
+import HyperwalletTransferMethod
 import os.log
 import UIKit
 
@@ -77,7 +78,7 @@ class ViewController: UITableViewController {
         removeTransferMethodObserver()
 
         // Setup
-        HyperwalletUI.setup(IntegratorAuthenticationProvider(baseUrl, userToken))
+        HyperwalletTransferMethodUI.setup(IntegratorAuthenticationProvider(baseUrl, userToken))
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -137,11 +138,11 @@ class ViewController: UITableViewController {
 
         switch example {
         case .listTransferMethod:
-            let viewController = HyperwalletUI.shared.listTransferMethodViewController()
+            let viewController = HyperwalletTransferMethodUI.shared.listTransferMethodViewController()
             navigationController?.pushViewController(viewController, animated: true)
 
         case .addTransferMethod:
-            let viewController = HyperwalletUI.shared.selectTransferMethodTypeViewController()
+            let viewController = HyperwalletTransferMethodUI.shared.selectTransferMethodTypeViewController()
             viewController.createTransferMethodHandler = {
                 (transferMethod: HyperwalletTransferMethod) -> Void in
                 self.didCreateTransferMethod(transferMethod: transferMethod)
@@ -149,7 +150,7 @@ class ViewController: UITableViewController {
             navigationController?.pushViewController(viewController, animated: true)
 
         default:
-            let viewController = HyperwalletUI.shared.listTransferMethodViewController()
+            let viewController = HyperwalletTransferMethodUI.shared.listTransferMethodViewController()
             navigationController?.pushViewController(viewController, animated: true)
         }
     }

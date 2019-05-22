@@ -16,10 +16,11 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+import HyperwalletCommon
 import UIKit
 
 /// Generic TableView Controller
-class GenericTableViewController<T: GenericCell<ModelType>, ModelType>: UITableViewController,
+public class GenericTableViewController<T: GenericCell<ModelType>, ModelType>: UITableViewController,
 UISearchResultsUpdating {
     private let reuseId = "cellId"
     private let headerReuseId = "headerReuseId"
@@ -27,21 +28,21 @@ UISearchResultsUpdating {
     private var shouldDisplaySearchBar = false
     /// The amount of items to enable the search bar to the Generic TableView
     let amountOfItemsToEnableSearchBar = 20
-    var items = [ModelType]() {
+    public var items = [ModelType]() {
         didSet {
             shouldDisplaySearchBar = items.count >= amountOfItemsToEnableSearchBar
         }
     }
-    var filteredItems = [ModelType]()
+    public var filteredItems = [ModelType]()
     /// Event handler to indicate if the item cell should be marked
-    var shouldMarkCellAction: ((_ value: ModelType) -> Bool)?
+    public var shouldMarkCellAction: ((_ value: ModelType) -> Bool)?
 
     /// Index  of the initial selected item
-    var initialSelectedItemIndex: Int?
+    public var initialSelectedItemIndex: Int?
     /// Delegate to customise the filter content.
     ///
     /// - parameters: searchText - The text should be used to filter the items list and returned the filtered list.
-    var filterContentForSearchTextAction: ((_ items: [ModelType], _ searchText: String) -> [ModelType])? {
+    public var filterContentForSearchTextAction: ((_ items: [ModelType], _ searchText: String) -> [ModelType])? {
         didSet {
             if shouldDisplaySearchBar {
                 setupSeachBar()
@@ -50,16 +51,16 @@ UISearchResultsUpdating {
             }
         }
     }
-    typealias SelectedHandler = (_ value: ModelType) -> Void
+    public typealias SelectedHandler = (_ value: ModelType) -> Void
     /// Event handler to return the item selected
-    var selectedHandler: SelectedHandler?
+    public var selectedHandler: SelectedHandler?
 
     /// MARK: - Private properties
     private let searchController: UISearchController = {
         UISearchController(searchResultsController: nil)
     }()
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .white
@@ -69,7 +70,7 @@ UISearchResultsUpdating {
         setViewBackgroundColor()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
+    override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
         if let index = initialSelectedItemIndex, index < items.count {
@@ -77,7 +78,7 @@ UISearchResultsUpdating {
         }
     }
 
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    override public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
 
         guard #available(iOS 11.0, *) else {
@@ -158,7 +159,7 @@ UISearchResultsUpdating {
     }
 }
 
-private extension GenericTableViewController {
+public extension GenericTableViewController {
     // MARK: - Setup
     /// Setup the Search Controller
     func setupUISearchController() {

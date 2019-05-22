@@ -18,7 +18,6 @@
 
 import Foundation
 import HyperwalletSDK
-
 /// Class responsible for initializing the Hyperwallet UI SDK. It contains methods to interact with the controllers
 /// used to interact with the Hyperwallet platform
 public final class HyperwalletTransferMethodUI {

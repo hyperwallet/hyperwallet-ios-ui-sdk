@@ -19,7 +19,7 @@
 import UIKit
 
 extension String {
-    func localized(withComment: String? = nil) -> String {
+    public func localized(withComment: String? = nil) -> String {
         return NSLocalizedString(self,
                                  tableName: nil,
                                  bundle: HyperwalletBundle.bundle,
@@ -27,11 +27,11 @@ extension String {
                                  comment: withComment ?? "")
     }
 
-    func suffix(startAt: Int) -> String {
+    public func suffix(startAt: Int) -> String {
         return String(self.suffix(startAt))
     }
 
-    func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
+    public func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
         let constraintRect = CGSize(width: width,
                                     height: .greatestFiniteMagnitude)
 
@@ -45,18 +45,18 @@ extension String {
 }
 
 extension NSMutableAttributedString {
-    func append(value: String, font: UIFont, color: UIColor) {
+    public func append(value: String, font: UIFont, color: UIColor) {
         append(value: value, attributes: [
             .font: font,
             .foregroundColor: color
         ])
     }
 
-    func append(value: String, color: UIColor) {
+    public func append(value: String, color: UIColor) {
         append(value: value, attributes: [.foregroundColor: color] )
     }
 
-    func append(value: String, attributes: [NSAttributedString.Key: Any]?) {
+    public func append(value: String, attributes: [NSAttributedString.Key: Any]?) {
         append(
             NSAttributedString(string: value,
                                attributes: attributes))
@@ -64,7 +64,7 @@ extension NSMutableAttributedString {
 }
 
 extension Array {
-    func isNotEmpty() -> Bool {
+    public func isNotEmpty() -> Bool {
         return !self.isEmpty
     }
 }

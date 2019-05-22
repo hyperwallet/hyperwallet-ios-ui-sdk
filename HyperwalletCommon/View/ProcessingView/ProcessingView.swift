@@ -18,11 +18,11 @@
 
 import UIKit
 
-enum ProcessingState: CustomStringConvertible {
+public enum ProcessingState: CustomStringConvertible {
     case processing
     case complete
 
-    var description: String {
+    public var description: String {
         switch self {
         case .processing:
             return "processing_view_label".localized()
@@ -33,7 +33,7 @@ enum ProcessingState: CustomStringConvertible {
     }
 }
 
-final class ProcessingView: UIView {
+public final class ProcessingView: UIView {
     @IBOutlet private weak var stateLabel: UILabel!
     @IBOutlet private weak var checkImageView: UIImageView!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
@@ -89,7 +89,7 @@ final class ProcessingView: UIView {
         state = .processing
     }
 
-    override func didMoveToSuperview() {
+    override public func didMoveToSuperview() {
         if self.superview == nil {
             return
         }
@@ -122,7 +122,7 @@ final class ProcessingView: UIView {
         stateLabel.text = state?.description
     }
 
-    func hide(with state: ProcessingState? = nil) {
+    public func hide(with state: ProcessingState? = nil) {
         CATransaction.begin()
         if let state = state {
             self.state = state

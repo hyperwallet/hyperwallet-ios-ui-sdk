@@ -19,30 +19,30 @@
 import UIKit
 
 extension UIViewController {
-    func largeTitle() {
+    public func largeTitle() {
         if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.prefersLargeTitles = true
         }
     }
 
-    func titleDisplayMode(_ mode: UINavigationItem.LargeTitleDisplayMode) {
+    public func titleDisplayMode(_ mode: UINavigationItem.LargeTitleDisplayMode) {
         if #available(iOS 11.0, *) {
             self.navigationItem.largeTitleDisplayMode = mode
         }
     }
 
-    func setViewBackgroundColor() {
+    public func setViewBackgroundColor() {
         view.backgroundColor = Theme.ViewController.backgroundColor
     }
 
-    func hideKeyboardWhenTappedAround() {
+    public func hideKeyboardWhenTappedAround() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
 
     @objc
-    func dismissKeyboard() {
+    public func dismissKeyboard() {
         view.endEditing(true)
     }
 }

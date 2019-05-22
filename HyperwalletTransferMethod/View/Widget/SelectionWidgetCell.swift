@@ -16,16 +16,27 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+import HyperwalletCommon
+import HyperwalletSDK
 import UIKit
 
-class GenericCell<ModelType>: UITableViewCell {
-    var item: ModelType!
-
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+/// Represents the select widget cell, to display `HyperwalletFieldSelectionOption`.
+final class SelectionWidgetCell: GenericCell<HyperwalletFieldSelectionOption> {
+    override var item: HyperwalletFieldSelectionOption! {
+        didSet {
+            if let option = item {
+                textLabel?.text = option.label.localized()
+            }
+        }
     }
 
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    @objc dynamic var textLabelColor: UIColor! {
+        get { return self.textLabel?.textColor }
+        set { self.textLabel?.textColor = newValue }
+    }
+
+    @objc dynamic var textLabelFont: UIFont! {
+        get { return self.textLabel?.font }
+        set { self.textLabel?.font = newValue }
     }
 }

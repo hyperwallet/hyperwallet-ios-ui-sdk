@@ -19,16 +19,16 @@
 import UIKit
 
 extension UIAlertAction {
-    private static let cancel = "cancel_button_label".localized()
-    private static let retry = "try_again_button_label".localized()
-    private static let close = "ok_button_label".localized()
-    private static let remove = "remove_button_label".localized()
+    public static let cancel = "cancel_button_label".localized()
+    public static let retry = "try_again_button_label".localized()
+    public static let close = "ok_button_label".localized()
+    public static let remove = "remove_button_label".localized()
 
     /// Initialize a cancel alert action
     ///
     /// - Parameter handler: if provided, will be invoked after the cancel button is clicked
     /// - Returns: a cancel alert action
-    static func cancel(_ handler: ((UIAlertAction) -> Void)? = nil) -> UIAlertAction {
+    public static func cancel(_ handler: ((UIAlertAction) -> Void)? = nil) -> UIAlertAction {
         return UIAlertAction(title: UIAlertAction.cancel, style: .cancel, handler: handler)
     }
 
@@ -36,7 +36,7 @@ extension UIAlertAction {
     ///
     /// - Parameter viewController: a view needs to show the alert dialog
     /// - Returns: a cancel alert action with a pop back handler
-    static func cancel(_ viewController: UIViewController) -> UIAlertAction {
+    public static func cancel(_ viewController: UIViewController) -> UIAlertAction {
         let handler = { (alertAction: UIAlertAction) -> Void in
             viewController.navigationController?.popViewController(animated: true) }
         return cancel(handler)
@@ -46,7 +46,7 @@ extension UIAlertAction {
     ///
     /// - Parameter handler: if provided, will be invoked after the close button is clicked
     /// - Returns: a close alert action
-    static func close(_ handler: ((UIAlertAction) -> Void)? = nil) -> UIAlertAction {
+    public static func close(_ handler: ((UIAlertAction) -> Void)? = nil) -> UIAlertAction {
         return UIAlertAction(title: UIAlertAction.close, style: .default, handler: handler)
     }
 
@@ -54,7 +54,7 @@ extension UIAlertAction {
     ///
     /// - Parameter viewController: a view needs to show the alert dialog
     /// - Returns: a close alert action with a pop back handler
-    static func close(_ viewController: UIViewController) -> UIAlertAction {
+    public static func close(_ viewController: UIViewController) -> UIAlertAction {
         let handler = { (alertAction: UIAlertAction) -> Void in
             viewController.navigationController?.popViewController(animated: true) }
         return close(handler)
@@ -66,7 +66,7 @@ extension UIAlertAction {
     ///   - handler: will be invoked after the remove button is clicked
     ///   - title: a string value of the alert action
     /// - Returns: a remove alert action
-    static func remove(_ handler: @escaping (UIAlertAction) -> Void,
+    public static func remove(_ handler: @escaping (UIAlertAction) -> Void,
                        _ title: String = UIAlertAction.remove) -> UIAlertAction {
         return UIAlertAction(title: title, style: .destructive, handler: handler)
     }
@@ -75,7 +75,7 @@ extension UIAlertAction {
     ///
     /// - Parameter handler: if provided, will be invoked after the retry button is clicked
     /// - Returns: a confirm retry action
-    static func retry(_ handler: ((UIAlertAction) -> Void)? = nil) -> UIAlertAction {
+    public static func retry(_ handler: ((UIAlertAction) -> Void)? = nil) -> UIAlertAction {
         return UIAlertAction(title: UIAlertAction.retry, style: .default, handler: handler)
     }
 
@@ -84,7 +84,7 @@ extension UIAlertAction {
     /// - Parameters:
     ///   - imageName: The image name
     /// - Returns: An alert action with an icon
-    func addIcon(imageName: String) -> UIAlertAction {
+    public func addIcon(imageName: String) -> UIAlertAction {
         let iconImage = UIImage(named: imageName,
                                 in: HyperwalletBundle.bundle,
                                 compatibleWith: nil)?.withRenderingMode(.alwaysOriginal)

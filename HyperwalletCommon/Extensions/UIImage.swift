@@ -29,7 +29,7 @@ extension UIImage {
     ///   - textColor: The text color (optional).
     ///   - backgroundColor: The background color (optional).
     /// - returns: A string that will appear as icon
-    static func fontIcon(_ name: String,
+    public static func fontIcon(_ name: String,
                          _ iconSize: CGSize,
                          _ fontSize: CGFloat,
                          _ textColor: UIColor,
@@ -54,7 +54,7 @@ extension UIImage {
         return image!
     }
 
-    static func imageWithColor(color: UIColor, size: CGSize) -> UIImage {
+    public static func imageWithColor(color: UIColor, size: CGSize) -> UIImage {
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
         color.setFill()
@@ -67,7 +67,7 @@ extension UIImage {
         return image
     }
 
-    static func roundedImage(image: UIImage, cornerRadius: Int) -> UIImage {
+    public static func roundedImage(image: UIImage, cornerRadius: Int) -> UIImage {
         let rect = CGRect(origin: CGPoint(x: 0, y: 0), size: image.size)
         UIGraphicsBeginImageContextWithOptions(image.size, false, 1)
         UIBezierPath(
@@ -78,7 +78,7 @@ extension UIImage {
         return UIGraphicsGetImageFromCurrentImageContext()!
     }
 
-    static func createBackgroundPattern(color: UIColor, size: CGSize, cornerRadius: Int) -> UIImage {
+    public static func createBackgroundPattern(color: UIColor, size: CGSize, cornerRadius: Int) -> UIImage {
         let image = imageWithColor(color: color, size: size)
         return roundedImage(image: image, cornerRadius: cornerRadius)
     }

@@ -7,6 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		070AD7762294CA0B00BB2B26 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3835225E8BA900CD4137 /* Notification.swift */; };
+		070AD7772294CA0B00BB2B26 /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA383B225E8BA900CD4137 /* UINavigationController.swift */; };
+		070AD7782294CA0B00BB2B26 /* NSRegularExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3836225E8BA900CD4137 /* NSRegularExpression.swift */; };
+		070AD77B2294CAB400BB2B26 /* UIToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9826056722822E8A000CCA2D /* UIToolbar.swift */; };
+		070AD77C2294CB7700BB2B26 /* AbstractWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3857225E8BAA00CD4137 /* AbstractWidget.swift */; };
+		070AD77D2294CB8700BB2B26 /* DateWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12653B2280B02900C0F59E /* DateWidget.swift */; };
+		070AD77E2294CB8A00BB2B26 /* ExpiryDateWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3851225E8BAA00CD4137 /* ExpiryDateWidget.swift */; };
+		070AD77F2294CB8D00BB2B26 /* ExpiryDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA385A225E8BAA00CD4137 /* ExpiryDatePickerView.swift */; };
+		070AD7802294CB9000BB2B26 /* NumberWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3850225E8BAA00CD4137 /* NumberWidget.swift */; };
+		070AD7812294CB9200BB2B26 /* PhoneWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12653D2280B12F00C0F59E /* PhoneWidget.swift */; };
+		070AD7822294CB9500BB2B26 /* SelectionWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3852225E8BAA00CD4137 /* SelectionWidget.swift */; };
+		070AD7832294CB9700BB2B26 /* SelectionWidgetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA384F225E8BAA00CD4137 /* SelectionWidgetCell.swift */; };
+		070AD7842294CB9A00BB2B26 /* TextWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3854225E8BAA00CD4137 /* TextWidget.swift */; };
+		070AD7862294CB9D00BB2B26 /* WidgetFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3853225E8BAA00CD4137 /* WidgetFactory.swift */; };
+		070AD7882294D07C00BB2B26 /* ProcessingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA384C225E8BAA00CD4137 /* ProcessingView.swift */; };
+		070AD7892294D37800BB2B26 /* GenericCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3842225E8BAA00CD4137 /* GenericCell.swift */; };
+		070AD78A2294D37A00BB2B26 /* GenericTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3841225E8BAA00CD4137 /* GenericTableViewController.swift */; };
 		078B45742273895C005B0248 /* TransferMethodMockedSuccessResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 078B45682273895C005B0248 /* TransferMethodMockedSuccessResponse.json */; };
 		078B45752273895C005B0248 /* StatusTransitionMockedResponseSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = 078B45692273895C005B0248 /* StatusTransitionMockedResponseSuccess.json */; };
 		078B45762273895C005B0248 /* BankCardErrorResponseWithInvalidCardNumber.json in Resources */ = {isa = PBXBuildFile; fileRef = 078B456A2273895C005B0248 /* BankCardErrorResponseWithInvalidCardNumber.json */; };
@@ -38,11 +55,9 @@
 		07B583FC2294A465009CAF80 /* HyperwalletFee.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3834225E8BA900CD4137 /* HyperwalletFee.swift */; };
 		07B583FD2294A46B009CAF80 /* TransferMethodConfigurationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA382F225E8BA900CD4137 /* TransferMethodConfigurationResult.swift */; };
 		07B583FF2294A6FD009CAF80 /* HyperwalletTransferMethodUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B583FE2294A6FC009CAF80 /* HyperwalletTransferMethodUI.swift */; };
-		07B584022294A909009CAF80 /* HyperwalletTransferMethodThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B584012294A909009CAF80 /* HyperwalletTransferMethodThemeManager.swift */; };
+		07B584022294A909009CAF80 /* TransferMethodThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B584012294A909009CAF80 /* TransferMethodThemeManager.swift */; };
 		09B50AEA2285B2C000B03626 /* BankAccountConfigurationWithNotEditableFieldsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 09B50AE5228595DE00B03626 /* BankAccountConfigurationWithNotEditableFieldsResponse.json */; };
 		433A08082285E5BB007A9FFC /* BankAccountConfigurationPresetValues.json in Resources */ = {isa = PBXBuildFile; fileRef = 433A08072285E5BB007A9FFC /* BankAccountConfigurationPresetValues.json */; };
-		4A12653C2280B02900C0F59E /* DateWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12653B2280B02900C0F59E /* DateWidget.swift */; };
-		4A12653E2280B12F00C0F59E /* PhoneWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12653D2280B12F00C0F59E /* PhoneWidget.swift */; };
 		9807B762226442C60028A280 /* AuthenticationTokenResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFB61512261E84C00C4A8AA /* AuthenticationTokenResponse.json */; };
 		9807B763226442C60028A280 /* BankAccountInvalidRoutingResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFB61472261E84C00C4A8AA /* BankAccountInvalidRoutingResponse.json */; };
 		9807B764226442C60028A280 /* BankCardDuplicateResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFB614A2261E84C00C4A8AA /* BankCardDuplicateResponse.json */; };
@@ -56,7 +71,6 @@
 		9807B76C226442C60028A280 /* TransferMethodConfigurationBankCardResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFB614F2261E84C00C4A8AA /* TransferMethodConfigurationBankCardResponse.json */; };
 		9807B76D226442C60028A280 /* UnexpectedErrorResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFB61492261E84C00C4A8AA /* UnexpectedErrorResponse.json */; };
 		98220B8C2265793700055E18 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 98220B8B2265793700055E18 /* README.md */; };
-		9826056822822E8A000CCA2D /* UIToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9826056722822E8A000CCA2D /* UIToolbar.swift */; };
 		98541F152273D72C007D4238 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 98541F142273D72C007D4238 /* CHANGELOG.md */; };
 		98F63E682284AB170090101D /* PayPalAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F63E662284A2CF0090101D /* PayPalAccountResponse.json */; };
 		98F63E6B2284AC330090101D /* PayPalAccountInvalidEmailResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F63E692284AC2A0090101D /* PayPalAccountInvalidEmailResponse.json */; };
@@ -104,29 +118,15 @@
 		DBCA3871225E8BAA00CD4137 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3831225E8BA900CD4137 /* UIView.swift */; };
 		DBCA3872225E8BAA00CD4137 /* UIBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3832225E8BA900CD4137 /* UIBarButtonItem.swift */; };
 		DBCA3873225E8BAA00CD4137 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3833225E8BA900CD4137 /* UIColor.swift */; };
-		DBCA3875225E8BAA00CD4137 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3835225E8BA900CD4137 /* Notification.swift */; };
-		DBCA3876225E8BAA00CD4137 /* NSRegularExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3836225E8BA900CD4137 /* NSRegularExpression.swift */; };
 		DBCA3879225E8BAA00CD4137 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3839225E8BA900CD4137 /* UIImage.swift */; };
 		DBCA387A225E8BAA00CD4137 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA383A225E8BA900CD4137 /* UIViewController.swift */; };
-		DBCA387B225E8BAA00CD4137 /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA383B225E8BA900CD4137 /* UINavigationController.swift */; };
 		DBCA387C225E8BAA00CD4137 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DBCA383D225E8BAA00CD4137 /* Localizable.strings */; };
-		DBCA387D225E8BAA00CD4137 /* GenericTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3841225E8BAA00CD4137 /* GenericTableViewController.swift */; };
-		DBCA387E225E8BAA00CD4137 /* GenericCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3842225E8BAA00CD4137 /* GenericCell.swift */; };
 		DBCA387F225E8BAA00CD4137 /* HyperwalletIconContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3844225E8BAA00CD4137 /* HyperwalletIconContent.swift */; };
 		DBCA3880225E8BAA00CD4137 /* HyperwalletIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3845225E8BAA00CD4137 /* HyperwalletIcon.swift */; };
 		DBCA3881225E8BAA00CD4137 /* HyperwalletThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3846225E8BAA00CD4137 /* HyperwalletThemeManager.swift */; };
 		DBCA3882225E8BAA00CD4137 /* HyperwalletUtilViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3847225E8BAA00CD4137 /* HyperwalletUtilViews.swift */; };
 		DBCA3883225E8BAA00CD4137 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3848225E8BAA00CD4137 /* Theme.swift */; };
 		DBCA3884225E8BAA00CD4137 /* ProcessingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBCA384B225E8BAA00CD4137 /* ProcessingView.xib */; };
-		DBCA3885225E8BAA00CD4137 /* ProcessingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA384C225E8BAA00CD4137 /* ProcessingView.swift */; };
-		DBCA3887225E8BAA00CD4137 /* SelectionWidgetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA384F225E8BAA00CD4137 /* SelectionWidgetCell.swift */; };
-		DBCA3888225E8BAA00CD4137 /* NumberWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3850225E8BAA00CD4137 /* NumberWidget.swift */; };
-		DBCA3889225E8BAA00CD4137 /* ExpiryDateWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3851225E8BAA00CD4137 /* ExpiryDateWidget.swift */; };
-		DBCA388A225E8BAA00CD4137 /* SelectionWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3852225E8BAA00CD4137 /* SelectionWidget.swift */; };
-		DBCA388B225E8BAA00CD4137 /* WidgetFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3853225E8BAA00CD4137 /* WidgetFactory.swift */; };
-		DBCA388C225E8BAA00CD4137 /* TextWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3854225E8BAA00CD4137 /* TextWidget.swift */; };
-		DBCA388E225E8BAA00CD4137 /* AbstractWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3857225E8BAA00CD4137 /* AbstractWidget.swift */; };
-		DBCA3890225E8BAA00CD4137 /* ExpiryDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA385A225E8BAA00CD4137 /* ExpiryDatePickerView.swift */; };
 		DBCA3891225E8BAA00CD4137 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA385C225E8BAA00CD4137 /* ErrorView.swift */; };
 		DBF89CB8227C072400AF4344 /* UserIndividualCountryCanadaResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBF89CB7227C072400AF4344 /* UserIndividualCountryCanadaResponse.json */; };
 		DBFB61462261E44C00C4A8AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBFB61452261E44C00C4A8AA /* Assets.xcassets */; };
@@ -203,7 +203,7 @@
 		07B583E122949E59009CAF80 /* HyperwalletTransferMethod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HyperwalletTransferMethod.h; sourceTree = "<group>"; };
 		07B583E222949E59009CAF80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		07B583FE2294A6FC009CAF80 /* HyperwalletTransferMethodUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyperwalletTransferMethodUI.swift; sourceTree = "<group>"; };
-		07B584012294A909009CAF80 /* HyperwalletTransferMethodThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletTransferMethodThemeManager.swift; sourceTree = "<group>"; };
+		07B584012294A909009CAF80 /* TransferMethodThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodThemeManager.swift; sourceTree = "<group>"; };
 		09B50AE5228595DE00B03626 /* BankAccountConfigurationWithNotEditableFieldsResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BankAccountConfigurationWithNotEditableFieldsResponse.json; sourceTree = "<group>"; };
 		433A08072285E5BB007A9FFC /* BankAccountConfigurationPresetValues.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BankAccountConfigurationPresetValues.json; sourceTree = "<group>"; };
 		4A12653B2280B02900C0F59E /* DateWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateWidget.swift; sourceTree = "<group>"; };
@@ -362,6 +362,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		070AD77A2294CA2D00BB2B26 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DBCA383F225E8BAA00CD4137 /* Generics */,
+				DBCA384E225E8BAA00CD4137 /* Widget */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		078B45662273895C005B0248 /* TransferMethod */ = {
 			isa = PBXGroup;
 			children = (
@@ -395,9 +404,10 @@
 		07B583E022949E59009CAF80 /* HyperwalletTransferMethod */ = {
 			isa = PBXGroup;
 			children = (
-				07B584002294A8D7009CAF80 /* Helper */,
-				07B583FE2294A6FC009CAF80 /* HyperwalletTransferMethodUI.swift */,
 				07B583FB2294A33D009CAF80 /* Extensions */,
+				07B584002294A8D7009CAF80 /* Helper */,
+				070AD77A2294CA2D00BB2B26 /* View */,
+				07B583FE2294A6FC009CAF80 /* HyperwalletTransferMethodUI.swift */,
 				072A53F622838F6B00BC11D0 /* AddTransferMethodSectionData.swift */,
 				DBCA3822225E8BA900CD4137 /* AddTransferMethodPresenter.swift */,
 				DBCA3828225E8BA900CD4137 /* AddTransferMethodTableViewCell.swift */,
@@ -419,6 +429,9 @@
 		07B583FB2294A33D009CAF80 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				DBCA3835225E8BA900CD4137 /* Notification.swift */,
+				DBCA3836225E8BA900CD4137 /* NSRegularExpression.swift */,
+				DBCA383B225E8BA900CD4137 /* UINavigationController.swift */,
 				DBCA3834225E8BA900CD4137 /* HyperwalletFee.swift */,
 				DBCA382F225E8BA900CD4137 /* TransferMethodConfigurationResult.swift */,
 			);
@@ -428,7 +441,7 @@
 		07B584002294A8D7009CAF80 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				07B584012294A909009CAF80 /* HyperwalletTransferMethodThemeManager.swift */,
+				07B584012294A909009CAF80 /* TransferMethodThemeManager.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -608,7 +621,6 @@
 			children = (
 				DB2EB66E22617AB100FBEB3D /* Resources */,
 				DBCA382E225E8BA900CD4137 /* Extensions */,
-				DBCA383F225E8BAA00CD4137 /* Generics */,
 				DBCA383C225E8BAA00CD4137 /* Localization */,
 				DBCA3843225E8BAA00CD4137 /* Helper */,
 				DBCA3849225E8BAA00CD4137 /* View */,
@@ -621,18 +633,15 @@
 		DBCA382E225E8BA900CD4137 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				DBCA3835225E8BA900CD4137 /* Notification.swift */,
-				DBCA3836225E8BA900CD4137 /* NSRegularExpression.swift */,
 				DB2EB66C22617A8500FBEB3D /* String+Array.swift */,
 				DBCA3830225E8BA900CD4137 /* UIAlertAction.swift */,
 				DBCA3832225E8BA900CD4137 /* UIBarButtonItem.swift */,
 				DBCA3833225E8BA900CD4137 /* UIColor.swift */,
 				DB4679BE2261083F00E1AF49 /* UIFont.swift */,
+				9826056722822E8A000CCA2D /* UIToolbar.swift */,
 				DBCA3839225E8BA900CD4137 /* UIImage.swift */,
-				DBCA383B225E8BA900CD4137 /* UINavigationController.swift */,
 				DBCA3831225E8BA900CD4137 /* UIView.swift */,
 				DBCA383A225E8BA900CD4137 /* UIViewController.swift */,
-				9826056722822E8A000CCA2D /* UIToolbar.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -670,9 +679,8 @@
 		DBCA3849225E8BAA00CD4137 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				DBCA385B225E8BAA00CD4137 /* Error */,
 				DBCA384A225E8BAA00CD4137 /* ProcessingView */,
-				DBCA384E225E8BAA00CD4137 /* Widget */,
+				DBCA385B225E8BAA00CD4137 /* Error */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -847,7 +855,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Hyperwallet Systems";
 				TargetAttributes = {
 					07B583DE22949E59009CAF80 = {
@@ -1000,20 +1008,35 @@
 			files = (
 				07B583F822949EB7009CAF80 /* SelectTransferMethodTypeViewController.swift in Sources */,
 				07B583F422949EB7009CAF80 /* ListTransferMethodViewController.swift in Sources */,
+				070AD77D2294CB8700BB2B26 /* DateWidget.swift in Sources */,
 				07B583FC2294A465009CAF80 /* HyperwalletFee.swift in Sources */,
+				070AD78A2294D37A00BB2B26 /* GenericTableViewController.swift in Sources */,
+				070AD77C2294CB7700BB2B26 /* AbstractWidget.swift in Sources */,
 				07B583F622949EB7009CAF80 /* AddTransferMethodTableViewCell.swift in Sources */,
 				07B583F022949EB7009CAF80 /* ListTransferMethodPresenter.swift in Sources */,
+				070AD7892294D37800BB2B26 /* GenericCell.swift in Sources */,
+				070AD7812294CB9200BB2B26 /* PhoneWidget.swift in Sources */,
 				07B583F322949EB7009CAF80 /* TransferMethodTypeDetail.swift in Sources */,
+				070AD77E2294CB8A00BB2B26 /* ExpiryDateWidget.swift in Sources */,
+				070AD7862294CB9D00BB2B26 /* WidgetFactory.swift in Sources */,
 				07B583F722949EB7009CAF80 /* SelectTransferMethodTypeCell.swift in Sources */,
 				07B583EF22949EB7009CAF80 /* SelectTransferMethodTypePresenter.swift in Sources */,
 				07B583F222949EB7009CAF80 /* AddTransferMethodViewController.swift in Sources */,
 				07B583F922949EB7009CAF80 /* ListTransferMethodTableViewCell.swift in Sources */,
 				07B583F122949EB7009CAF80 /* AddTransferMethodPresenter.swift in Sources */,
-				07B584022294A909009CAF80 /* HyperwalletTransferMethodThemeManager.swift in Sources */,
+				07B584022294A909009CAF80 /* TransferMethodThemeManager.swift in Sources */,
+				070AD77F2294CB8D00BB2B26 /* ExpiryDatePickerView.swift in Sources */,
 				07B583FF2294A6FD009CAF80 /* HyperwalletTransferMethodUI.swift in Sources */,
 				07B583F522949EB7009CAF80 /* CountryCurrencyCell.swift in Sources */,
+				070AD7802294CB9000BB2B26 /* NumberWidget.swift in Sources */,
+				070AD7832294CB9700BB2B26 /* SelectionWidgetCell.swift in Sources */,
 				07B583FA22949EB7009CAF80 /* AddTransferMethodSectionData.swift in Sources */,
+				070AD7772294CA0B00BB2B26 /* UINavigationController.swift in Sources */,
 				07B583FD2294A46B009CAF80 /* TransferMethodConfigurationResult.swift in Sources */,
+				070AD7842294CB9A00BB2B26 /* TextWidget.swift in Sources */,
+				070AD7762294CA0B00BB2B26 /* Notification.swift in Sources */,
+				070AD7822294CB9500BB2B26 /* SelectionWidget.swift in Sources */,
+				070AD7782294CA0B00BB2B26 /* NSRegularExpression.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1066,38 +1089,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				070AD7882294D07C00BB2B26 /* ProcessingView.swift in Sources */,
 				DB4679BF2261083F00E1AF49 /* UIFont.swift in Sources */,
-				DBCA387B225E8BAA00CD4137 /* UINavigationController.swift in Sources */,
 				DB2EB66D22617A8500FBEB3D /* String+Array.swift in Sources */,
-				DBCA3876225E8BAA00CD4137 /* NSRegularExpression.swift in Sources */,
-				DBCA3888225E8BAA00CD4137 /* NumberWidget.swift in Sources */,
-				4A12653E2280B12F00C0F59E /* PhoneWidget.swift in Sources */,
 				DB4679C3226113D100E1AF49 /* HyperwalletBundle.swift in Sources */,
-				DBCA3887225E8BAA00CD4137 /* SelectionWidgetCell.swift in Sources */,
-				DBCA3885225E8BAA00CD4137 /* ProcessingView.swift in Sources */,
-				DBCA387E225E8BAA00CD4137 /* GenericCell.swift in Sources */,
-				DBCA388E225E8BAA00CD4137 /* AbstractWidget.swift in Sources */,
 				DBCA3880225E8BAA00CD4137 /* HyperwalletIcon.swift in Sources */,
 				DBCA3873225E8BAA00CD4137 /* UIColor.swift in Sources */,
 				DBCA3870225E8BAA00CD4137 /* UIAlertAction.swift in Sources */,
-				DBCA388B225E8BAA00CD4137 /* WidgetFactory.swift in Sources */,
 				DBCA3871225E8BAA00CD4137 /* UIView.swift in Sources */,
-				DBCA387D225E8BAA00CD4137 /* GenericTableViewController.swift in Sources */,
 				DBCA3881225E8BAA00CD4137 /* HyperwalletThemeManager.swift in Sources */,
 				DBCA3891225E8BAA00CD4137 /* ErrorView.swift in Sources */,
 				DBCA387F225E8BAA00CD4137 /* HyperwalletIconContent.swift in Sources */,
 				DBCA3882225E8BAA00CD4137 /* HyperwalletUtilViews.swift in Sources */,
-				DBCA3875225E8BAA00CD4137 /* Notification.swift in Sources */,
 				DBCA387A225E8BAA00CD4137 /* UIViewController.swift in Sources */,
-				DBCA388C225E8BAA00CD4137 /* TextWidget.swift in Sources */,
-				DBCA3889225E8BAA00CD4137 /* ExpiryDateWidget.swift in Sources */,
+				070AD77B2294CAB400BB2B26 /* UIToolbar.swift in Sources */,
 				DBCA3883225E8BAA00CD4137 /* Theme.swift in Sources */,
-				4A12653C2280B02900C0F59E /* DateWidget.swift in Sources */,
-				DBCA3890225E8BAA00CD4137 /* ExpiryDatePickerView.swift in Sources */,
-				9826056822822E8A000CCA2D /* UIToolbar.swift in Sources */,
 				DBCA3879225E8BAA00CD4137 /* UIImage.swift in Sources */,
 				DBCA3872225E8BAA00CD4137 /* UIBarButtonItem.swift in Sources */,
-				DBCA388A225E8BAA00CD4137 /* SelectionWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1162,7 +1170,7 @@
 		07B583E922949E59009CAF80 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -1175,7 +1183,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/HyperwalletCommon/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1192,7 +1200,7 @@
 		07B583EA22949E59009CAF80 /* XCUITest */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -1205,7 +1213,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/HyperwalletCommon/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1222,7 +1230,7 @@
 		07B583EB22949E59009CAF80 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -1235,7 +1243,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/HyperwalletCommon/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1479,7 +1487,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/HyperwalletCommon/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1707,7 +1718,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/HyperwalletCommon/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1735,7 +1749,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/HyperwalletCommon/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
