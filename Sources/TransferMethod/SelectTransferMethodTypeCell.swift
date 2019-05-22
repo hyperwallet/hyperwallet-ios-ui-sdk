@@ -16,11 +16,12 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+import HyperwalletSDK
 import UIKit
 
 /// Represents the country and currency data to be displyed on the CountryCurrencyCell
 struct SelectTransferMethodTypeConfiguration {
-    let transferMethodType: String
+    let transferMethodType: HyperwalletTransferMethodType
     let feesProcessingTime: NSAttributedString
     let transferMethodIconFont: String
 }
@@ -71,9 +72,9 @@ final class SelectTransferMethodTypeCell: UITableViewCell {
 
 extension SelectTransferMethodTypeCell {
     func configure(configuration: SelectTransferMethodTypeConfiguration) {
-        accessibilityIdentifier = configuration.transferMethodType
+        accessibilityIdentifier = configuration.transferMethodType.code
 
-        textLabel?.text = configuration.transferMethodType.localized()
+        textLabel?.text = configuration.transferMethodType.name
         detailTextLabel?.numberOfLines = 0
         detailTextLabel?.lineBreakMode = .byWordWrapping
         detailTextLabel?.attributedText = configuration.feesProcessingTime

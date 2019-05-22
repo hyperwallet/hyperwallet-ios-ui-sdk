@@ -40,7 +40,7 @@ public final class AddTransferMethodViewController: UITableViewController {
     private var country: String
     private var currency: String
     private var profileType: String
-    private var transferMethodType: String
+    private var transferMethodType: HyperwalletTransferMethodType
     private var processingView: ProcessingView?
     private var spinnerView: SpinnerView?
     private var presenter: AddTransferMethodPresenter!
@@ -93,7 +93,7 @@ public final class AddTransferMethodViewController: UITableViewController {
     public init(_ country: String,
                 _ currency: String,
                 _ profileType: String,
-                _ transferMethodType: String) {
+                _ transferMethodType: HyperwalletTransferMethodType) {
         self.country = country
         self.currency = currency
         self.profileType = profileType
@@ -108,7 +108,7 @@ public final class AddTransferMethodViewController: UITableViewController {
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        title = transferMethodType.lowercased().localized()
+        title = transferMethodType.name
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         view.addGestureRecognizer(tap)
         initializePresenter()
@@ -145,7 +145,7 @@ public final class AddTransferMethodViewController: UITableViewController {
                                                country,
                                                currency,
                                                profileType,
-                                               transferMethodType)
+                                               transferMethodType.code)
         presenter.loadTransferMethodConfigurationFields()
     }
 }
@@ -269,10 +269,10 @@ extension AddTransferMethodViewController: AddTransferMethodView {
             if $0.isValid() == false {
                 $0.showError()
                 if isFormValid {
-                        focusOnInvalidField($0)
-                    }
-                    isFormValid = false
+                    focusOnInvalidField($0)
                 }
+                isFormValid = false
+            }
         }
         return isFormValid
     }
@@ -307,10 +307,9 @@ extension AddTransferMethodViewController: AddTransferMethodView {
         }
     }
 
-    func showTransferMethodFields(_ fieldGroups: [HyperwalletFieldGroup],
-                                  _ transferMethodType: HyperwalletTransferMethodType) {
+    func showTransferMethodFields(_ fieldGroups: [HyperwalletFieldGroup]) {
         addFieldsSection(fieldGroups)
-        addInfoSection(transferMethodType)
+        addInfoSection()
         addCreateButtonSection()
         self.tableView.reloadData()
     }
@@ -391,7 +390,6 @@ extension AddTransferMethodViewController: AddTransferMethodView {
                 fieldGroup: fieldGroup,
                 country: country,
                 currency: currency,
-                transferMethodType: transferMethodType,
                 cells: newWidgets
             )
             presenter.sections.append(section)
@@ -399,7 +397,7 @@ extension AddTransferMethodViewController: AddTransferMethodView {
         }
     }
 
-    private func addInfoSection(_ transferMethodType: HyperwalletTransferMethodType) {
+    private func addInfoSection() {
         guard transferMethodType.fees != nil || transferMethodType.processingTime != nil else {
             return
         }
@@ -410,7 +408,6 @@ extension AddTransferMethodViewController: AddTransferMethodView {
                 fieldGroup: "INFORMATION",
                 country: country,
                 currency: currency,
-                transferMethodType: self.transferMethodType,
                 cells: [infoView])
             presenter.sections.append(infoSection)
         }
@@ -421,7 +418,6 @@ extension AddTransferMethodViewController: AddTransferMethodView {
             fieldGroup: "CREATE_BUTTON",
             country: country,
             currency: currency,
-            transferMethodType: transferMethodType,
             cells: [button])
         presenter.sections.append(buttonSection)
     }

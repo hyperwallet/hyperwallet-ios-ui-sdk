@@ -68,10 +68,11 @@ public final class HyperwalletUI {
     ///   - profileType: The profile type. Possible values - INDIVIDUAL, BUSINESS.
     ///   - transferMethodType: The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD.
     /// - Returns: An instance of `AddTransferMethodViewController`
-    public func addTransferMethodViewController(_ country: String,
-                                                _ currency: String,
-                                                _ profileType: String,
-                                                _ transferMethodType: String) -> AddTransferMethodViewController {
+    public func addTransferMethodViewController(
+        _ country: String,
+        _ currency: String,
+        _ profileType: String,
+        _ transferMethodType: HyperwalletTransferMethodType) -> AddTransferMethodViewController {
         return AddTransferMethodViewController(country, currency, profileType, transferMethodType)
     }
 
