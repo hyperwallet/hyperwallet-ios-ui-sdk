@@ -1,6 +1,6 @@
 import XCTest
 
-class SelectTransferMethodCountryTypeTests: BaseTests {
+class SelectTransferMethodCountryTypeTests: BaseIndividualTests {
     var selectTransferMethodType: SelectTransferMethodType!
     var selectTransferMethodCountryType: SelectTransferMethodCountryType!
 

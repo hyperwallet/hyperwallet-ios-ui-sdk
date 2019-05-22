@@ -1,6 +1,6 @@
 import XCTest
 
-class AddTransferMethodPayPalAccountTests: BaseTests {
+class AddTransferMethodPayPalAccountTests: BaseIndividualTests {
     var selectTransferMethodType: SelectTransferMethodType!
     var addTransferMethod: AddTransferMethod!
     let payPalAccount = NSPredicate(format: "label CONTAINS[c] 'PayPal'")

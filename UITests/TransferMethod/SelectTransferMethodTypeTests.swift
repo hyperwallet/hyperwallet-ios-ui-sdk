@@ -1,6 +1,6 @@
 import XCTest
 
-class SelectTransferMethodTypeTests: BaseTests {
+class SelectTransferMethodTypeTests: BaseIndividualTests {
     var selectTransferMethodType: SelectTransferMethodType!
     let bankAccount = NSPredicate(format: "label CONTAINS[c] 'Bank Account'")
 

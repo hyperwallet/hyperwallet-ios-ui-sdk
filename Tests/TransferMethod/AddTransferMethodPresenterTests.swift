@@ -59,7 +59,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
     func testCreateTransferMethod_createBankAccount() {
         presenter = AddTransferMethodPresenter(mockView, "US", "USD", "INDIVIDUAL", "BANK_ACCOUNT")
         let url = String(format: "%@/bank-accounts", HyperwalletTestHelper.userRestURL)
-        let response = HyperwalletTestHelper.okHTTPResponse(for: "BankAccountResponse")
+        let response = HyperwalletTestHelper.okHTTPResponse(for: "BankAccountIndividualResponse")
         let request = HyperwalletTestHelper.buildPostResquest(baseUrl: url, response)
         HyperwalletTestHelper.setUpMockServer(request: request)
 

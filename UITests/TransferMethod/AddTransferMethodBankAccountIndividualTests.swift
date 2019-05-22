@@ -1,6 +1,6 @@
 import XCTest
 
-class AddTransferMethodBankAccountIndividualTests: BaseTests {
+class AddTransferMethodBankAccountIndividualTests: BaseIndividualTests {
     var selectTransferMethodType: SelectTransferMethodType!
     var addTransferMethod: AddTransferMethod!
 
@@ -15,7 +15,7 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
 
     func testAddTransferMethod_createBankAccount() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/bank-accounts",
-                             filename: "BankAccountResponse",
+                             filename: "BankAccountIndividualResponse",
                              method: HTTPMethod.post)
 
         waitForNonExistence(spinner)
@@ -200,8 +200,6 @@ private extension AddTransferMethodBankAccountIndividualTests {
     }
 
     func setUpBankAccountScreen() {
-        mockServer.setupGraphQLStubs()
-
         selectTransferMethodType = SelectTransferMethodType(app: app)
         addTransferMethod = AddTransferMethod(app: app, for: .bankAccount)
 

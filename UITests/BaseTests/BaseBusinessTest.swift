@@ -1,6 +1,6 @@
 import XCTest
 
-class BaseTests: XCTestCase {
+class BaseBusinessTests: XCTestCase {
     var app: XCUIApplication!
     var mockServer: HyperwalletMockWebServer!
     var spinner: XCUIElement!
@@ -12,14 +12,14 @@ class BaseTests: XCTestCase {
         mockServer.setUp()
 
         mockServer.setupStub(url: "/rest/v3/users/usr-token/authentication-token",
-                             filename: "AuthenticationTokenResponse",
+                             filename: "AuthenticationTokenBusinessResponse",
                              method: HTTPMethod.post)
 
         mockServer.setupStub(url: "/rest/v3/users/usr-token",
                              filename: stubGetUserDetailsResponse(),
                              method: HTTPMethod.get)
 
-        mockServer.setupGraphQLStubs()
+        mockServer.setupGraphQLBusinessStubs()
 
         app = XCUIApplication()
         app.launch()
@@ -30,6 +30,6 @@ class BaseTests: XCTestCase {
     }
 
     func stubGetUserDetailsResponse() -> String {
-        return "UserIndividualResponse"
+        return "AuthenticationTokenBusinessResponse"
     }
 }
