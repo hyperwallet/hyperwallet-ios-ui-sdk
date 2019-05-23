@@ -22,6 +22,7 @@ class AddTransferMethod {
     var emailInput: XCUIElement
     var title: XCUIElement
     var navigationBar: XCUIElement
+    var relationshipSelect: XCUIElement
 
     init(app: XCUIApplication, for accountType: AccountType) {
         self.app = app
@@ -39,6 +40,7 @@ class AddTransferMethod {
         emailInput = addTMTableView.textFields["email"]
         title = addTMTableView.staticTexts["Account Information - United States (USD)"]
         navigationBar = app.navigationBars[accountType.rawValue]
+        relationshipSelect = addTMTableView.cells.staticTexts["Relationship"]
     }
 
     func setBranchId(branchId: String) {
@@ -59,7 +61,16 @@ class AddTransferMethod {
         app.tables.staticTexts[accountType].tap()
     }
 
+    func selectRelationship(type: String) {
+        relationshipSelect.tap()
+        app.tables.staticTexts[type].tap()
+    }
+
     func clickCreateTransferMethodButton() {
+        if !createTransferMethodButton.exists {
+            addTMTableView.scrollToElement(element: createTransferMethodButton)
+        }
+
         createTransferMethodButton.tap()
     }
 

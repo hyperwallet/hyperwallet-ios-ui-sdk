@@ -22,7 +22,8 @@ class AddTransferMethodTests: BaseTests {
 
         addTransferMethod.setBranchId(branchId: "021000021")
         addTransferMethod.setAccountNumber(accountNumber: "12345")
-        addTransferMethod.selectAccountType(accountType: "Checking")
+        addTransferMethod.selectAccountType(accountType: "CHECKING")
+        addTransferMethod.selectRelationship(type: "Self")
         addTransferMethod.clickCreateTransferMethodButton()
 
         //Todo - check processing indicator
@@ -47,7 +48,8 @@ class AddTransferMethodTests: BaseTests {
 
         addTransferMethod.setBranchId(branchId: "021000022")
         addTransferMethod.setAccountNumber(accountNumber: "12345")
-        addTransferMethod.selectAccountType(accountType: "Checking")
+        addTransferMethod.selectAccountType(accountType: "CHECKING")
+        addTransferMethod.selectRelationship(type: "Self")
         addTransferMethod.clickCreateTransferMethodButton()
         waitForNonExistence(spinner)
 
@@ -65,7 +67,8 @@ class AddTransferMethodTests: BaseTests {
 
         addTransferMethod.setBranchId(branchId: "021000022")
         addTransferMethod.setAccountNumber(accountNumber: "12345")
-        addTransferMethod.selectAccountType(accountType: "Checking")
+        addTransferMethod.selectAccountType(accountType: "CHECKING")
+        addTransferMethod.selectRelationship(type: "Self")
         addTransferMethod.clickCreateTransferMethodButton()
         waitForNonExistence(spinner)
 
@@ -78,7 +81,9 @@ class AddTransferMethodTests: BaseTests {
     }
 
     func testAddTransferMethod_varifyPresetValues() {
-        mockServer.setUpGraphQLBankAccountWithPreSetValues()
+        mockServer.setupStubError(url: "/rest/v3/users/usr-token/bank-accounts",
+                                  filename: "UnexpectedErrorResponse",
+                                  method: HTTPMethod.post)
         addTransferMethod.clickBackButton()
         app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).tap()
 
@@ -172,7 +177,8 @@ class AddTransferMethodTests: BaseTests {
 
         addTransferMethod.setBranchId(branchId: "021000022")
         addTransferMethod.setAccountNumber(accountNumber: "12345")
-        addTransferMethod.selectAccountType(accountType: "Checking")
+        addTransferMethod.selectAccountType(accountType: "CHECKING")
+        addTransferMethod.selectRelationship(type: "Self")
         app.scrollToElement(element: addTransferMethod.createTransferMethodButton)
         addTransferMethod.clickCreateTransferMethodButton()
         waitForNonExistence(spinner)
