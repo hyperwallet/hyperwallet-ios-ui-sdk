@@ -21,7 +21,8 @@ import UIKit
 
 /// Represents the country and currency data to be displyed on the CountryCurrencyCell
 struct SelectTransferMethodTypeConfiguration {
-    let transferMethodType: HyperwalletTransferMethodType
+    let transferMethodTypeCode: String!
+    let transferMethodTypeName: String!
     let feesProcessingTime: NSAttributedString
     let transferMethodIconFont: String
 }
@@ -72,9 +73,9 @@ final class SelectTransferMethodTypeCell: UITableViewCell {
 
 extension SelectTransferMethodTypeCell {
     func configure(configuration: SelectTransferMethodTypeConfiguration) {
-        accessibilityIdentifier = configuration.transferMethodType.code
+        accessibilityIdentifier = configuration.transferMethodTypeName
 
-        textLabel?.text = configuration.transferMethodType.name
+        textLabel?.text = configuration.transferMethodTypeName
         detailTextLabel?.numberOfLines = 0
         detailTextLabel?.lineBreakMode = .byWordWrapping
         detailTextLabel?.attributedText = configuration.feesProcessingTime

@@ -293,7 +293,8 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
         fieldFocusField = fieldName
     }
 
-    func showTransferMethodFields(_ fieldGroups: [HyperwalletFieldGroup]) {
+    func showTransferMethodFields(_ fieldGroups: [HyperwalletFieldGroup],
+                                  _ transferMethodType: HyperwalletTransferMethodType) {
         self.fieldGroups = fieldGroups
         isShowTransferMethodFieldsPerformed = true
         expectation?.fulfill()

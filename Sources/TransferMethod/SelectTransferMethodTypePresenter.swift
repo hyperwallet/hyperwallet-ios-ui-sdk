@@ -30,7 +30,7 @@ protocol SelectTransferMethodTypeView: class {
     func navigateToAddTransferMethodController(country: String,
                                                currency: String,
                                                profileType: String,
-                                               transferMethodType: HyperwalletTransferMethodType)
+                                               transferMethodTypeCode: String)
     func showAlert(message: String?)
     func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?)
     func showLoading()
@@ -63,14 +63,15 @@ final class SelectTransferMethodTypePresenter {
         self.view = view
     }
 
-    /// Return the `TransferMethodTypeDetail` based on the index
+    /// Return the `SelectTransferMethodTypeConfiguration` based on the index
     func getCellConfiguration(for index: Int) -> SelectTransferMethodTypeConfiguration {
         let transferMethodType = transferMethodTypes[index]
         let feesProcessingTime = transferMethodType.formatFeesProcessingTime()
         let transferMethodIcon = HyperwalletIcon.of(transferMethodType.code!).rawValue
 
         return SelectTransferMethodTypeConfiguration(
-            transferMethodType: transferMethodType,
+            transferMethodTypeCode: transferMethodType.code,
+            transferMethodTypeName: transferMethodType.name,
             feesProcessingTime: feesProcessingTime,
             transferMethodIconFont: transferMethodIcon)
     }
@@ -138,7 +139,7 @@ final class SelectTransferMethodTypePresenter {
         view.navigateToAddTransferMethodController(country: selectedCountry,
                                                    currency: selectedCurrency,
                                                    profileType: profileType,
-                                                   transferMethodType: transferMethodTypes[index])
+                                                   transferMethodTypeCode: transferMethodTypes[index].code!)
     }
 
     private func countryCurrencyValues(at index: Int) -> String {

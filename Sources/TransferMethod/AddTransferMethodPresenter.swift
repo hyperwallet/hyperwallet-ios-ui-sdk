@@ -30,7 +30,8 @@ protocol AddTransferMethodView: class {
     func showBusinessError(_ error: HyperwalletErrorType, _ handler: @escaping () -> Void)
     func showLoading()
     func showProcessing()
-    func showTransferMethodFields(_ fieldGroups: [HyperwalletFieldGroup])
+    func showTransferMethodFields(_ fieldGroups: [HyperwalletFieldGroup],
+                                  _ transferMethodType: HyperwalletTransferMethodType)
     func showFooterViewWithUpdatedSectionData(for sections: [AddTransferMethodSectionData])
 }
 
@@ -39,14 +40,14 @@ final class AddTransferMethodPresenter {
     private let country: String
     private let currency: String
     private let profileType: String
-    private let transferMethodTypeCode: String!
+    private let transferMethodTypeCode: String
     var sections: [AddTransferMethodSectionData] = []
 
     init(_ view: AddTransferMethodView,
          _ country: String,
          _ currency: String,
          _ profileType: String,
-         _ transferMethodTypeCode: String?) {
+         _ transferMethodTypeCode: String) {
         self.view = view
         self.country = country
         self.currency = currency
@@ -78,11 +79,12 @@ final class AddTransferMethodPresenter {
                     }
                     guard
                         let result = result,
-                        let fields = result.fieldGroups()
+                        let fieldGroups = result.fieldGroups(),
+                        let transferMethodType = result.transferMethodType()
                         else {
                             return
                     }
-                    strongSelf.view.showTransferMethodFields(fields)
+                    strongSelf.view.showTransferMethodFields(fieldGroups, transferMethodType)
                 }
             })
     }
