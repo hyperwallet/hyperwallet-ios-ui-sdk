@@ -17,28 +17,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import Foundation
-import HyperwalletSDK
-/// Class responsible for initializing the Hyperwallet UI SDK. It contains methods to interact with the controllers
-/// used to interact with the Hyperwallet platform
-public final class HyperwalletTransferMethodUI {
-    private static var instance: HyperwalletTransferMethodUI?
 
-    /// Returns the previously initialized instance of the Hyperwallet UI SDK interface object
-    public static var shared: HyperwalletTransferMethodUI {
-        guard let instance = instance else {
-            fatalError("Call HyperwalletUI.setup(_:) before accessing HyperwalletUI.shared")
-        }
-        return instance
-    }
-
-    /// Creates a new instance of the Hyperwallet UI SDK interface object. If a previously created instance exists,
-    /// it will be replaced.
-    ///
-    /// - Parameter provider: a provider of Hyperwallet authentication tokens.
-    public class func setup(_ provider: HyperwalletAuthenticationTokenProvider) {
-        instance = HyperwalletTransferMethodUI(provider)
-    }
-
+extension HyperwalletUI {
+    
     /// Lists the user's transfer methods (bank account, bank card, PayPal account, prepaid card, paper check).
     ///
     /// The user can deactivate and add a new transfer method.
@@ -47,7 +28,7 @@ public final class HyperwalletTransferMethodUI {
     public func listTransferMethodViewController() -> ListTransferMethodViewController {
         return ListTransferMethodViewController()
     }
-
+    
     /// Lists all transfer method types available based on the country, currency and profile type to create a new
     /// transfer method (bank account, bank card, PayPal account, prepaid card, paper check).
     ///
@@ -55,7 +36,7 @@ public final class HyperwalletTransferMethodUI {
     public func selectTransferMethodTypeViewController() -> SelectTransferMethodTypeViewController {
         return SelectTransferMethodTypeViewController()
     }
-
+    
     /// Controller to create a new transfer method.
     ///
     /// The form fields are based on the country, currency, user's profile type and transfer method type should be
@@ -72,9 +53,5 @@ public final class HyperwalletTransferMethodUI {
                                                 _ profileType: String,
                                                 _ transferMethodType: String) -> AddTransferMethodViewController {
         return AddTransferMethodViewController(country, currency, profileType, transferMethodType)
-    }
-
-    private init(_ provider: HyperwalletAuthenticationTokenProvider) {
-        Hyperwallet.setup(provider)
     }
 }

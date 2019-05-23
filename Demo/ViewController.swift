@@ -16,7 +16,6 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import HyperwalletCommon
 import HyperwalletSDK
 import HyperwalletTransferMethod
 import os.log
@@ -78,7 +77,7 @@ class ViewController: UITableViewController {
         removeTransferMethodObserver()
 
         // Setup
-        HyperwalletTransferMethodUI.setup(IntegratorAuthenticationProvider(baseUrl, userToken))
+        HyperwalletUI.setup(IntegratorAuthenticationProvider(baseUrl, userToken))
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -138,11 +137,11 @@ class ViewController: UITableViewController {
 
         switch example {
         case .listTransferMethod:
-            let viewController = HyperwalletTransferMethodUI.shared.listTransferMethodViewController()
+            let viewController = HyperwalletUI.shared.listTransferMethodViewController()
             navigationController?.pushViewController(viewController, animated: true)
 
         case .addTransferMethod:
-            let viewController = HyperwalletTransferMethodUI.shared.selectTransferMethodTypeViewController()
+            let viewController = HyperwalletUI.shared.selectTransferMethodTypeViewController()
             viewController.createTransferMethodHandler = {
                 (transferMethod: HyperwalletTransferMethod) -> Void in
                 self.didCreateTransferMethod(transferMethod: transferMethod)
@@ -150,7 +149,7 @@ class ViewController: UITableViewController {
             navigationController?.pushViewController(viewController, animated: true)
 
         default:
-            let viewController = HyperwalletTransferMethodUI.shared.listTransferMethodViewController()
+            let viewController = HyperwalletUI.shared.listTransferMethodViewController()
             navigationController?.pushViewController(viewController, animated: true)
         }
     }

@@ -17,7 +17,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import Foundation
-import HyperwalletCommon
 
 public class TransferMethodThemeManager {
     /// Applies default visual styles to the Hyperwallet user interface components.

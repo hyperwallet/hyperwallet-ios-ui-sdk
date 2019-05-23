@@ -16,14 +16,29 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
+import Foundation
+import HyperwalletSDK
 
-//! Project version number for HyperwalletUISDK.
-FOUNDATION_EXPORT double HyperwalletUISDKVersionNumber;
-
-//! Project version string for HyperwalletUISDK.
-FOUNDATION_EXPORT const unsigned char HyperwalletUISDKVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <HyperwalletUISDK/PublicHeader.h>
-
-
+public final class HyperwalletUI {
+    private static var instance: HyperwalletUI?
+    
+    /// Returns the previously initialized instance of the Hyperwallet UI SDK interface object
+    public static var shared: HyperwalletUI {
+        guard let instance = instance else {
+            fatalError("Call HyperwalletUI.setup(_:) before accessing HyperwalletUI.shared")
+        }
+        return instance
+    }
+    
+    /// Creates a new instance of the Hyperwallet UI SDK interface object. If a previously created instance exists,
+    /// it will be replaced.
+    ///
+    /// - Parameter provider: a provider of Hyperwallet authentication tokens.
+    public class func setup(_ provider: HyperwalletAuthenticationTokenProvider) {
+        instance = HyperwalletUI(provider)
+    }
+    
+    private init(_ provider: HyperwalletAuthenticationTokenProvider) {
+        Hyperwallet.setup(provider)
+    }
+}
