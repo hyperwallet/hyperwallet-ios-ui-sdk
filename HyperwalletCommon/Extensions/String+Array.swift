@@ -19,7 +19,7 @@
 import UIKit
 
 extension String {
-    public func localized(withComment: String? = nil) -> String {
+    func localized(withComment: String? = nil) -> String {
         return NSLocalizedString(self,
                                  tableName: nil,
                                  bundle: HyperwalletBundle.bundle,
@@ -27,11 +27,11 @@ extension String {
                                  comment: withComment ?? "")
     }
 
-    public func suffix(startAt: Int) -> String {
+    func suffix(startAt: Int) -> String {
         return String(self.suffix(startAt))
     }
 
-    public func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
+    func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
         let constraintRect = CGSize(width: width,
                                     height: .greatestFiniteMagnitude)
 
@@ -45,7 +45,7 @@ extension String {
 }
 
 extension NSMutableAttributedString {
-    public func append(value: String, font: UIFont, color: UIColor) {
+    func append(value: String, font: UIFont, color: UIColor) {
         append(value: value, attributes: [
             .font: font,
             .foregroundColor: color

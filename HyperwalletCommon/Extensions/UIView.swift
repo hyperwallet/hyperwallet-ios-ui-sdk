@@ -20,7 +20,7 @@ import UIKit
 
 extension UIView {
     /// Top Anchor
-    public var safeAreaTopAnchor: NSLayoutYAxisAnchor {
+    var safeAreaTopAnchor: NSLayoutYAxisAnchor {
         if #available(iOS 11.0, *) {
             return self.safeAreaLayoutGuide.topAnchor
         } else {
@@ -29,7 +29,7 @@ extension UIView {
     }
 
     /// Bottom Anchor
-    public var safeAreaBottomAnchor: NSLayoutYAxisAnchor {
+    var safeAreaBottomAnchor: NSLayoutYAxisAnchor {
         if #available(iOS 11.0, *) {
             return self.safeAreaLayoutGuide.bottomAnchor
         } else {
@@ -37,7 +37,7 @@ extension UIView {
         }
     }
     /// Leading Anchor
-    public var safeAreaLeadingAnchor: NSLayoutXAxisAnchor {
+    var safeAreaLeadingAnchor: NSLayoutXAxisAnchor {
         if #available(iOS 11.0, *) {
             return self.safeAreaLayoutGuide.leadingAnchor
         } else {
@@ -46,7 +46,7 @@ extension UIView {
     }
 
     /// Trailing Anchor
-    public var safeAreaTrailingAnchor: NSLayoutXAxisAnchor {
+    var safeAreaTrailingAnchor: NSLayoutXAxisAnchor {
         if #available(iOS 11.0, *) {
             return self.safeAreaLayoutGuide.trailingAnchor
         } else {
@@ -58,7 +58,7 @@ extension UIView {
     ///
     /// - parameter: format - The value should follow the visual format language
     /// - views
-    public func addConstraintsWithFormat(format: String, views: UIView...) {
+    func addConstraintsWithFormat(format: String, views: UIView...) {
         var viewsDict = [String: UIView]()
 
         for (index, view) in views.enumerated() {
@@ -73,13 +73,13 @@ extension UIView {
     }
 
     /// Fill entire view to the super view
-    public func addConstraintsFillEntireView(view: UIView) {
+    func addConstraintsFillEntireView(view: UIView) {
         addConstraintsWithFormat(format: "H:|[v0]|", views: view)
         addConstraintsWithFormat(format: "V:|[v0]|", views: view)
     }
 
     /// Defines fixed constraint validation to the attribute
-    public func setConstraint(value: CGFloat, attribute: NSLayoutConstraint.Attribute) {
+    func setConstraint(value: CGFloat, attribute: NSLayoutConstraint.Attribute) {
         let constraint = NSLayoutConstraint(item: self,
                                             attribute: attribute,
                                             relatedBy: .equal,

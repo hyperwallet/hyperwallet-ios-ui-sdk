@@ -18,12 +18,12 @@
 
 import Foundation
 
-public final class HyperwalletIcon {
+final class HyperwalletIcon {
     /// Make transfer method type icon by transfer method type
     ///
     /// - Parameter transferMethodType: a type of transfer method in String
     /// - Returns: a `HyperwalletIconContent` object
-    public static func of(_ transferMethodType: String) -> HyperwalletIconContent {
+    static func of(_ transferMethodType: String) -> HyperwalletIconContent {
         switch transferMethodType {
         case "BANK_ACCOUNT":
             return .bank

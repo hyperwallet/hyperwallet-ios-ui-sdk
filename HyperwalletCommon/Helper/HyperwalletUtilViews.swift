@@ -19,7 +19,7 @@
 import UIKit
 
 /// Displays the common UI Views - Alerts and Spinners
-public struct HyperwalletUtilViews {
+struct HyperwalletUtilViews {
     // MARK: - SelectTransferMethodView
 
     /// show an alert dialog
@@ -28,7 +28,7 @@ public struct HyperwalletUtilViews {
     ///   - viewController: current view
     ///   - title: title shown in the dialog
     ///   - message: description shown in the dialog
-    public static func showAlert(_ viewController: UIViewController, title: String?, message: String?) {
+    static func showAlert(_ viewController: UIViewController, title: String?, message: String?) {
         HyperwalletUtilViews.showAlert(viewController, title: title, message: message, actions: UIAlertAction.close())
     }
 
@@ -39,7 +39,7 @@ public struct HyperwalletUtilViews {
     /// - parameters: message - The message will be displayed in the body of Alert View
     /// - parameters: style - The style of the alert controller.
     /// - parameters: actions - The list of option `UIAlertAction` the use can choose.
-    public static func showAlert(_ viewController: UIViewController,
+    static func showAlert(_ viewController: UIViewController,
                                  title: String? = nil,
                                  message: String?,
                                  style: UIAlertController.Style = .alert,
@@ -63,7 +63,7 @@ public struct HyperwalletUtilViews {
     ///   - title: title shown in the dialog
     ///   - message: description shown in the dialog
     ///   - retry: an action needs to be retried
-    public static func showAlertWithRetry(_ viewController: UIViewController,
+    static func showAlertWithRetry(_ viewController: UIViewController,
                                           title: String?,
                                           message: String?,
                                           _ retry: @escaping (UIAlertAction) -> Void) {
@@ -85,12 +85,12 @@ public struct HyperwalletUtilViews {
     ///    DispatchQueue.main.asyncAfter(deadline: .now() + 2) { // represent a callback
     ///        HyperwalletUtilViews.removeSpinner(spinnerView)
     ///    }
-    public static func showSpinner(view: UIView) -> SpinnerView {
+    static func showSpinner(view: UIView) -> SpinnerView {
         return SpinnerView(showInView: view)
     }
 
     /// Remove the `SpinnerView` with animation
-    public static func removeSpinner(_ spinnerView: SpinnerView) {
+    static func removeSpinner(_ spinnerView: SpinnerView) {
        spinnerView.hide()
     }
 
@@ -107,7 +107,7 @@ public struct HyperwalletUtilViews {
     ///
     ///     To dismiss ProcessView with the same state:
     ///     processingView.hide()
-    public static func showProcessing() -> ProcessingView {
+    static func showProcessing() -> ProcessingView {
         return ProcessingView()
     }
 }
@@ -115,7 +115,7 @@ public struct HyperwalletUtilViews {
 // MARK: - SpinnerView
 
 /// Represents Spinner view to be embedded on a view
-public final class SpinnerView: UIView {
+final class SpinnerView: UIView {
     private let propertyOpacity = "opacity"
 
     let activityIndicator: UIActivityIndicatorView = {
