@@ -91,14 +91,20 @@ final class ListReceiptViewPresenter {
         }
 
         sections = ListReceiptSectionData.group(rowItems: self.transferMethods, by: { (transferMethod) in
-            firstDayOfMonth(stringDate: transferMethod.getField(fieldName: .createdOn) as! String)
+            firstDayOfMonth(date: parseDate(transferMethod.getField(fieldName: .createdOn) as! String))
         })
     }
 
-    private func firstDayOfMonth(stringDate: String) -> Date {
-        let dateFormat = DateFormatter()
-        dateFormat.dateFormat = "yyyy-MM-dd'T'H:mm:ss"
-        let date = dateFormat.date(from: stringDate)!
+    private func parseDate(_ stringDate: String) -> Date {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .iso8601)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateFormat = "yyyy-MM-dd'T'H:mm:ss"
+        return formatter.date(from: stringDate)!
+    }
+
+    private func firstDayOfMonth(date: Date) -> Date {
         let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month], from: date)
         return calendar.date(from: components)!
@@ -107,17 +113,12 @@ final class ListReceiptViewPresenter {
     func getCellConfiguration(for transferMethodIndex: Int, in section: Int) -> ListReceiptCellConfiguration? {
         if let transferMethod = getTransferMethod(at: transferMethodIndex, in: section),
             let country = transferMethod.getField(fieldName: .transferMethodCountry) as? String,
-            let transferMethodType = transferMethod.getField(fieldName: .type) as? String {
-            var lastFourDigitAccountNumber: String?
-            if let lastFourDigit = getLastDigits(transferMethod, number: 4) {
-                lastFourDigitAccountNumber = String(format: "%@%@",
-                                                    "transfer_method_list_item_description".localized(),
-                                                    lastFourDigit)
-            }
+            let transferMethodType = transferMethod.getField(fieldName: .type) as? String,
+            let createdOn = transferMethod.getField(fieldName: .createdOn) as? String {
             return ListReceiptCellConfiguration(
                 transferMethodType: transferMethodType.lowercased().localized(),
                 transferMethodCountry: country.localized(),
-                lastFourDigitAccountNumber: lastFourDigitAccountNumber,
+                createdOn: parseDate(createdOn),
                 transferMethodIconFont: HyperwalletIcon.of(transferMethodType).rawValue)
         }
         return nil

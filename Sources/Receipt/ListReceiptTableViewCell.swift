@@ -21,7 +21,7 @@ import UIKit
 struct ListReceiptCellConfiguration {
     let transferMethodType: String
     let transferMethodCountry: String
-    let lastFourDigitAccountNumber: String?
+    let createdOn: Date
     let transferMethodIconFont: String
 }
 
@@ -73,8 +73,7 @@ extension ListReceiptTableViewCell {
         if let configuration = configuration {
             textLabel?.text = configuration.transferMethodType
             detailTextLabel?.attributedText = formatSubtitle(transferMethodCountry: configuration.transferMethodCountry,
-                                                             lastFourDigitAccountNumber: configuration
-                                                                .lastFourDigitAccountNumber)
+                                                             createdOn: configuration.createdOn)
             detailTextLabel?.numberOfLines = 0
             detailTextLabel?.lineBreakMode = .byWordWrapping
             let icon = UIImage.fontIcon(configuration.transferMethodIconFont,
@@ -87,15 +86,12 @@ extension ListReceiptTableViewCell {
         }
     }
 
-    func formatSubtitle(transferMethodCountry: String, lastFourDigitAccountNumber: String?) -> NSAttributedString {
+    private func formatSubtitle(transferMethodCountry: String, createdOn: Date) -> NSAttributedString {
         let attributedText = NSMutableAttributedString()
         let font = Theme.Label.captionOne
         let color = Theme.Label.subTitleColor
         attributedText.append(value: String(format: "%@\n", transferMethodCountry), font: font, color: color)
-        if let lastFourDigitAccountNumber = lastFourDigitAccountNumber {
-            attributedText.append(value: lastFourDigitAccountNumber, font: font, color: color)
-        }
-
+        attributedText.append(value: createdOn.formatDateToString(), font: font, color: color)
         return attributedText
     }
 }
