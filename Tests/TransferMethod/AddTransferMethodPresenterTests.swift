@@ -35,9 +35,6 @@ class AddTransferMethodPresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isShowLoadingPerformed, "The showLoading should be performed")
         XCTAssertTrue(mockView.isHideLoadingPerformed, "The hideLoading should be performed")
         XCTAssertEqual(mockView.fieldGroups.count, 2, "The `response.getFields()` should be 2")
-        XCTAssertNotNil(mockView.transferMethodType, "The `transferMethodType` should not be nil")
-        XCTAssertNotNil(mockView.transferMethodType?.fees, "Fee` should not be nil")
-        XCTAssertNotNil(mockView.transferMethodType?.processingTime, "ProcessingTime should not be nil")
     }
 
     public func testLoadTransferMethodConfigurationFields_failure() {
@@ -212,7 +209,6 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
     var fieldFocusField = ""
     var isShowTransferMethodFieldsPerformed = false
     var fieldGroups = [HyperwalletFieldGroup]()
-    var transferMethodType: HyperwalletTransferMethodType?
     var isShowErrorPerformed = false
     var isNotificationSent = false
     var isDisplayErrorMessageInFooterPerformed = false
@@ -253,7 +249,6 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
 
     func fieldStatus() -> [Bool] {
         isFieldStatusPerformed = true
-
         return mockFieldStatusReturnResult
     }
 
@@ -301,7 +296,6 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
     func showTransferMethodFields(_ fieldGroups: [HyperwalletFieldGroup],
                                   _ transferMethodType: HyperwalletTransferMethodType) {
         self.fieldGroups = fieldGroups
-        self.transferMethodType = transferMethodType
         isShowTransferMethodFieldsPerformed = true
         expectation?.fulfill()
     }

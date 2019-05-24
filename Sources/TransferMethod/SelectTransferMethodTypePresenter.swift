@@ -30,7 +30,7 @@ protocol SelectTransferMethodTypeView: class {
     func navigateToAddTransferMethodController(country: String,
                                                currency: String,
                                                profileType: String,
-                                               transferMethodType: String)
+                                               transferMethodTypeCode: String)
     func showAlert(message: String?)
     func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?)
     func showLoading()
@@ -43,7 +43,7 @@ final class SelectTransferMethodTypePresenter {
     // MARK: properties
     private unowned let view: SelectTransferMethodTypeView
     private var user: HyperwalletUser?
-    private var transferMethodConfigurationKeyResult: HyperwalletTransferMethodConfigurationKey?
+    private var transferMethodConfigurationKey: HyperwalletTransferMethodConfigurationKey?
     private var transferMethodTypes = [HyperwalletTransferMethodType]()
     private var countryCurrencyTitles = [String]()
     private (set) var selectedCountry = ""
@@ -63,14 +63,15 @@ final class SelectTransferMethodTypePresenter {
         self.view = view
     }
 
-    /// Return the `TransferMethodTypeDetail` based on the index
+    /// Return the `SelectTransferMethodTypeConfiguration` based on the index
     func getCellConfiguration(for index: Int) -> SelectTransferMethodTypeConfiguration {
         let transferMethodType = transferMethodTypes[index]
         let feesProcessingTime = transferMethodType.formatFeesProcessingTime()
         let transferMethodIcon = HyperwalletIcon.of(transferMethodType.code!).rawValue
 
         return SelectTransferMethodTypeConfiguration(
-            transferMethodType: transferMethodType.code!.lowercased(),
+            transferMethodTypeCode: transferMethodType.code,
+            transferMethodTypeName: transferMethodType.name,
             feesProcessingTime: feesProcessingTime,
             transferMethodIconFont: transferMethodIcon)
     }
@@ -138,7 +139,7 @@ final class SelectTransferMethodTypePresenter {
         view.navigateToAddTransferMethodController(country: selectedCountry,
                                                    currency: selectedCurrency,
                                                    profileType: profileType,
-                                                   transferMethodType: transferMethodTypes[index].code!)
+                                                   transferMethodTypeCode: transferMethodTypes[index].code!)
     }
 
     private func countryCurrencyValues(at index: Int) -> String {
@@ -172,7 +173,7 @@ final class SelectTransferMethodTypePresenter {
                         return
                     }
                     strongSelf.countryCurrencyTitles = ["Country", "Currency"]
-                    strongSelf.transferMethodConfigurationKeyResult = result
+                    strongSelf.transferMethodConfigurationKey = result
                     strongSelf.loadCountry()
                     strongSelf.loadCurrency(for: strongSelf.selectedCountry)
                     strongSelf.loadTransferMethodTypes(country: strongSelf.selectedCountry,
@@ -253,8 +254,8 @@ final class SelectTransferMethodTypePresenter {
 
     private func loadTransferMethodTypes(country: String, currency: String) {
         transferMethodTypes.removeAll()
-        guard let result = transferMethodConfigurationKeyResult?.transferMethodTypes(countryCode: country,
-                                                                                     currencyCode: currency),
+        guard let result = transferMethodConfigurationKey?.transferMethodTypes(countryCode: country,
+                                                                               currencyCode: currency),
             !result.isEmpty else {
                 view.showAlert(message: String(format: "no_transfer_method_available_error_message".localized(),
                                                country.localized(),
@@ -266,7 +267,7 @@ final class SelectTransferMethodTypePresenter {
     }
 
     private func loadCurrency(for country: String) {
-        guard let firstCurrency = transferMethodConfigurationKeyResult?
+        guard let firstCurrency = transferMethodConfigurationKey?
             .currencies(from: country)?.min(by: { $0.name < $1.name })
             else {
                 view.showAlert(message: String(format: "no_currency_available_error_message".localized(),
@@ -280,14 +281,14 @@ final class SelectTransferMethodTypePresenter {
     }
 
     private func loadTranferMethodConfigurationCountries() -> [CountryCurrencyCellConfiguration]? {
-        return transferMethodConfigurationKeyResult?.countries()?
+        return transferMethodConfigurationKey?.countries()?
             .map { CountryCurrencyCellConfiguration(title: $0.name, value: $0.code) }
             .sorted { $0.title  < $1.title }
     }
 
     private func loadTranferMethodConfigurationCurrencies(for countryCode: String)
         -> [CountryCurrencyCellConfiguration]? {
-            return transferMethodConfigurationKeyResult?.currencies(from: countryCode)?
+            return transferMethodConfigurationKey?.currencies(from: countryCode)?
                 .map { CountryCurrencyCellConfiguration(title: $0.name, value: $0.code) }
                 .sorted { $0.title  < $1.title }
     }

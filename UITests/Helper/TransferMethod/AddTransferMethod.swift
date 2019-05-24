@@ -22,6 +22,19 @@ class AddTransferMethod {
     var emailInput: XCUIElement
     var title: XCUIElement
     var navigationBar: XCUIElement
+    var relationshipSelect: XCUIElement
+    var firstNameInput: XCUIElement
+    var middleNameInput: XCUIElement
+    var lastNameInput: XCUIElement
+    var dateOfBirthInput: XCUIElement
+    var phoneNumberInput: XCUIElement
+    var mobileNumberInput: XCUIElement
+
+    var countryInput: XCUIElement
+    var stateProvinceInput: XCUIElement
+    var addressLineInput: XCUIElement
+    var cityInput: XCUIElement
+    var postalCodeInput: XCUIElement
 
     init(app: XCUIApplication, for accountType: AccountType) {
         self.app = app
@@ -39,6 +52,18 @@ class AddTransferMethod {
         emailInput = addTMTableView.textFields["email"]
         title = addTMTableView.staticTexts["Account Information - United States (USD)"]
         navigationBar = app.navigationBars[accountType.rawValue]
+        relationshipSelect = addTMTableView.cells.staticTexts["Relationship"]
+        firstNameInput = addTMTableView.textFields["firstName"]
+        middleNameInput = addTMTableView.textFields["middleName"]
+        lastNameInput = addTMTableView.textFields["lastName"]
+        dateOfBirthInput = addTMTableView.textFields["dateOfBirth"]
+        phoneNumberInput = addTMTableView.textFields["phoneNumber"]
+        mobileNumberInput = addTMTableView.textFields["mobileNumber"]
+        countryInput = addTMTableView.staticTexts["Country"]
+        stateProvinceInput = addTMTableView.textFields["stateProvince"]
+        addressLineInput = addTMTableView.textFields["addressLine1"]
+        cityInput = addTMTableView.textFields["city"]
+        postalCodeInput = addTMTableView.textFields["postalCode"]
     }
 
     func setBranchId(branchId: String) {
@@ -59,7 +84,16 @@ class AddTransferMethod {
         app.tables.staticTexts[accountType].tap()
     }
 
+    func selectRelationship(type: String) {
+        relationshipSelect.tap()
+        app.tables.staticTexts[type].tap()
+    }
+
     func clickCreateTransferMethodButton() {
+        if !createTransferMethodButton.exists {
+            addTMTableView.scrollToElement(element: createTransferMethodButton)
+        }
+
         createTransferMethodButton.tap()
     }
 

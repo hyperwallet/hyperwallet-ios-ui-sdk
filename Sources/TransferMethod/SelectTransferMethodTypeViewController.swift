@@ -123,11 +123,11 @@ extension SelectTransferMethodTypeViewController: SelectTransferMethodTypeView {
     func navigateToAddTransferMethodController(country: String,
                                                currency: String,
                                                profileType: String,
-                                               transferMethodType: String) {
+                                               transferMethodTypeCode: String) {
         let addTransferMethodController = AddTransferMethodViewController(country,
                                                                           currency,
                                                                           profileType,
-                                                                          transferMethodType)
+                                                                          transferMethodTypeCode)
 
         addTransferMethodController.createTransferMethodHandler = {
             (transferMethod: HyperwalletTransferMethod) -> Void in

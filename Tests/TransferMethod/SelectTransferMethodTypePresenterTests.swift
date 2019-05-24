@@ -201,7 +201,7 @@ class MockSelectTransferMethodTypeView: SelectTransferMethodTypeView {
     func navigateToAddTransferMethodController(country: String,
                                                currency: String,
                                                profileType: String,
-                                               transferMethodType: String) {
+                                               transferMethodTypeCode: String) {
         isNavigateToAddTransferMethodControllerPerformed = true
     }
 

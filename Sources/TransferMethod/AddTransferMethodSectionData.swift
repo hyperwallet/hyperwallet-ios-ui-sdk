@@ -16,13 +16,13 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+import HyperwalletSDK
 import UIKit
 
 final class AddTransferMethodSectionData {
     var fieldGroup: String
     var country: String
     var currency: String
-    var transferMethodType: String
 
     var containsFocusedField: Bool = false
     var fieldToBeFocused: AbstractWidget?
@@ -52,13 +52,11 @@ final class AddTransferMethodSectionData {
     init(fieldGroup: String,
          country: String,
          currency: String,
-         transferMethodType: String,
          cells: [UIView]
         ) {
         self.fieldGroup = fieldGroup
         self.country = country
         self.currency = currency
-        self.transferMethodType = transferMethodType
         self.cells = cells
     }
 

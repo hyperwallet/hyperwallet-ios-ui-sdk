@@ -40,7 +40,7 @@ public final class AddTransferMethodViewController: UITableViewController {
     private var country: String
     private var currency: String
     private var profileType: String
-    private var transferMethodType: String
+    private var transferMethodTypeCode: String
     private var processingView: ProcessingView?
     private var spinnerView: SpinnerView?
     private var presenter: AddTransferMethodPresenter!
@@ -89,15 +89,15 @@ public final class AddTransferMethodViewController: UITableViewController {
     ///   - country: The 2 letter ISO 3166-1 country code.
     ///   - currency: The 3 letter ISO 4217-1 currency code.
     ///   - profileType: The profile type. Possible values - INDIVIDUAL, BUSINESS.
-    ///   - transferMethodType: The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD.
+    ///   - transferMethodTypeCode: The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD.
     public init(_ country: String,
                 _ currency: String,
                 _ profileType: String,
-                _ transferMethodType: String) {
+                _ transferMethodTypeCode: String) {
         self.country = country
         self.currency = currency
         self.profileType = profileType
-        self.transferMethodType = transferMethodType
+        self.transferMethodTypeCode = transferMethodTypeCode
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -108,7 +108,7 @@ public final class AddTransferMethodViewController: UITableViewController {
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        title = transferMethodType.lowercased().localized()
+        title = transferMethodTypeCode.lowercased().localized()
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         view.addGestureRecognizer(tap)
         initializePresenter()
@@ -145,7 +145,7 @@ public final class AddTransferMethodViewController: UITableViewController {
                                                country,
                                                currency,
                                                profileType,
-                                               transferMethodType)
+                                               transferMethodTypeCode)
         presenter.loadTransferMethodConfigurationFields()
     }
 }
@@ -269,10 +269,10 @@ extension AddTransferMethodViewController: AddTransferMethodView {
             if $0.isValid() == false {
                 $0.showError()
                 if isFormValid {
-                        focusOnInvalidField($0)
-                    }
-                    isFormValid = false
+                    focusOnInvalidField($0)
                 }
+                isFormValid = false
+            }
         }
         return isFormValid
     }
@@ -391,7 +391,6 @@ extension AddTransferMethodViewController: AddTransferMethodView {
                 fieldGroup: fieldGroup,
                 country: country,
                 currency: currency,
-                transferMethodType: transferMethodType,
                 cells: newWidgets
             )
             presenter.sections.append(section)
@@ -410,7 +409,6 @@ extension AddTransferMethodViewController: AddTransferMethodView {
                 fieldGroup: "INFORMATION",
                 country: country,
                 currency: currency,
-                transferMethodType: self.transferMethodType,
                 cells: [infoView])
             presenter.sections.append(infoSection)
         }
@@ -421,7 +419,6 @@ extension AddTransferMethodViewController: AddTransferMethodView {
             fieldGroup: "CREATE_BUTTON",
             country: country,
             currency: currency,
-            transferMethodType: transferMethodType,
             cells: [button])
         presenter.sections.append(buttonSection)
     }
