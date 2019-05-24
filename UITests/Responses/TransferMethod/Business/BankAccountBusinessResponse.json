@@ -43,7 +43,7 @@
     "params": {
     "rel": "self"
     },
-    "href": "https://qamaster-hyperwallet.aws.paylution.net/rest/v3/users/usr-1297a088-230c-4487-a5b6-48eb9a1cd1b9/bank-accounts/trm-04dc145a-463d-4bd5-88ac-00386d41d1cf"
+    "href": "https://localhost/rest/v3/users/usr-1297a088-230c-4487-a5b6-48eb9a1cd1b9/bank-accounts/trm-04dc145a-463d-4bd5-88ac-00386d41d1cf"
     }
     ]
 }

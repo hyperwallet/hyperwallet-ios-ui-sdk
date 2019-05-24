@@ -12,11 +12,11 @@ class BaseBusinessTests: XCTestCase {
         mockServer.setUp()
 
         mockServer.setupStub(url: "/rest/v3/users/usr-token/authentication-token",
-                             filename: "AuthenticationTokenBusinessResponse",
+                             filename: "AuthenticationTokenResponse",
                              method: HTTPMethod.post)
 
         mockServer.setupStub(url: "/rest/v3/users/usr-token",
-                             filename: "UserBusinessResponse",
+                             filename: stubGetUserDetailsResponse(),
                              method: HTTPMethod.get)
 
         mockServer.setupGraphQLBusinessStubs()
@@ -27,5 +27,9 @@ class BaseBusinessTests: XCTestCase {
 
     override func tearDown() {
         mockServer.tearDown()
+    }
+
+    func stubGetUserDetailsResponse() -> String {
+        return "UserBusinessResponse"
     }
 }

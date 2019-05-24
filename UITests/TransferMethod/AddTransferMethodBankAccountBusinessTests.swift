@@ -61,6 +61,8 @@ class AddTransferMethodBankAccountBusinessTests: BaseBusinessTests {
 
 private extension AddTransferMethodBankAccountBusinessTests {
     func setUpBankAccountScreen() {
+        mockServer.setupGraphQLBusinessStubs()
+
         selectTransferMethodType = SelectTransferMethodType(app: app)
         addTransferMethod = AddTransferMethod(app: app, for: .bankAccount)
 

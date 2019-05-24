@@ -21,7 +21,7 @@ class AddTransferMethodBankAccountIndividualTests: BaseIndividualTests {
         waitForNonExistence(spinner)
 
         addTransferMethod.setBranchId("021000021")
-        addTransferMethod.setAccountNumber("12346")
+        addTransferMethod.setAccountNumber("12345")
         addTransferMethod.selectAccountType("Checking")
         addTransferMethod.selectRelationship("Self")
         addTransferMethod.setNameFirst("John")
@@ -31,9 +31,9 @@ class AddTransferMethodBankAccountIndividualTests: BaseIndividualTests {
         addTransferMethod.setMobileNumber("+16046666666")
         addTransferMethod.setDateOfBirth(yearOfBirth: "1981", monthOfBirth: "December", dayOfBirth: "25")
         addTransferMethod.selectCountry("United States")
-        addTransferMethod.setStateProvince("Maine")
+        addTransferMethod.setStateProvince("CA")
         addTransferMethod.setStreet("632 Broadway")
-        addTransferMethod.setCity("Bangor")
+        addTransferMethod.setCity("San Francisco")
         addTransferMethod.setPostalCode("04401")
 
         app.scrollToElement(element: addTransferMethod.createTransferMethodButton)
@@ -65,6 +65,9 @@ class AddTransferMethodBankAccountIndividualTests: BaseIndividualTests {
         addTransferMethod.setBranchId("021000022")
         addTransferMethod.setAccountNumber("12345")
         addTransferMethod.selectAccountType("Checking")
+
+        app.scrollToElement(element: addTransferMethod.createTransferMethodButton)
+
         addTransferMethod.clickCreateTransferMethodButton()
         waitForNonExistence(spinner)
 
@@ -83,6 +86,10 @@ class AddTransferMethodBankAccountIndividualTests: BaseIndividualTests {
         addTransferMethod.setBranchId("021000022")
         addTransferMethod.setAccountNumber("12345")
         addTransferMethod.selectAccountType("Checking")
+        addTransferMethod.selectRelationship("Self")
+
+        app.scrollToElement(element: addTransferMethod.createTransferMethodButton)
+
         addTransferMethod.clickCreateTransferMethodButton()
         waitForNonExistence(spinner)
 
@@ -200,6 +207,8 @@ private extension AddTransferMethodBankAccountIndividualTests {
     }
 
     func setUpBankAccountScreen() {
+        mockServer.setupGraphQLIndividualStubs()
+
         selectTransferMethodType = SelectTransferMethodType(app: app)
         addTransferMethod = AddTransferMethod(app: app, for: .bankAccount)
 

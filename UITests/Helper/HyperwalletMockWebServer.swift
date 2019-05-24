@@ -118,12 +118,12 @@ class HyperwalletMockWebServer {
     }
 
     func setupGraphQLBusinessStubs() {
-        let filePathKeys = testBundle.path(forResource: "TransferMethodConfigurationKeysResponse", ofType: "json")
-        let filePathBankField = testBundle.path(forResource: "TransferMethodConfigurationBankAccountResponse",
+        let filePathKeys = testBundle.path(forResource: "TransferMethodConfigurationKeysBusinessResponse", ofType: "json")
+        let filePathBankField = testBundle.path(forResource: "TransferMethodConfigurationBankAccountBusinessResponse",
                                                 ofType: "json")
-        let filePathCardField = testBundle.path(forResource: "TransferMethodConfigurationBankCardResponse",
+        let filePathCardField = testBundle.path(forResource: "TransferMethodConfigurationBankCardBusinessResponse",
                                                 ofType: "json")
-        let filePathPayPalField = testBundle.path(forResource: "TransferMethodConfigurationPayPalAccountResponse",
+        let filePathPayPalField = testBundle.path(forResource: "TransferMethodConfigurationPayPalAccountBusinessResponse",
                                                   ofType: "json")
 
         let fileUrlKeys = URL(fileURLWithPath: filePathKeys!)

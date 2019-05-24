@@ -12,7 +12,7 @@ class BaseIndividualTests: XCTestCase {
         mockServer.setUp()
 
         mockServer.setupStub(url: "/rest/v3/users/usr-token/authentication-token",
-                             filename: "AuthenticationTokenIndividualResponse",
+                             filename: "AuthenticationTokenResponse",
                              method: HTTPMethod.post)
 
         mockServer.setupStub(url: "/rest/v3/users/usr-token",
