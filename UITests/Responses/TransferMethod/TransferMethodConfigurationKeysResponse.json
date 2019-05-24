@@ -58,6 +58,7 @@
                                         {
                                             "code": "BANK_ACCOUNT",
                                             "name": "Bank Account",
+                                            "processingTime" : "1-2 Business days",
                                             "fees": {
                                                 "nodes": [
                                                     {
@@ -100,6 +101,7 @@
                                         {
                                             "code": "BANK_ACCOUNT",
                                             "name": "Bank Account",
+                                            "processingTime" : "1-2 Business days",
                                             "fees": {
                                                 "nodes": [
                                                     {
@@ -120,7 +122,8 @@
                                     "nodes": [
                                         {
                                             "code": "BANK_ACCOUNT",
-                                            "name": "Bank Account"
+                                            "name": "Bank Account",
+                                            "processingTime" : "1-2 Business days"
                                         }
                                     ]
                                 }
@@ -141,6 +144,7 @@
                                         {
                                             "code": "PAYPAL_ACCOUNT",
                                             "name": "PayPal Account",
+                                            "processingTime" : "1-2 Business days",
                                             "fees": {
                                                 "nodes": [
                                                     {
@@ -162,6 +166,7 @@
                                         {
                                             "code": "BANK_ACCOUNT",
                                             "name": "Bank Account",
+                                            "processingTime" : "1-2 Business days",
                                             "fees": {
                                                 "nodes": [
                                                     {

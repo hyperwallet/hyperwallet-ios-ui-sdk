@@ -102,7 +102,7 @@ class AddTransferMethodBankCardTests: BaseTests {
 
     func testAddTransferMethod_returnsGraphQLFlatFee() {
         XCTAssert(app.tables["addTransferMethodTable"]
-            .staticTexts["Transaction Fees: USD 1.75 Processing Time: 30 minutes"]
+            .staticTexts["Transaction Fees: USD 1.75 Processing Time: 1-2 Business days"]
             .exists)
     }
 }

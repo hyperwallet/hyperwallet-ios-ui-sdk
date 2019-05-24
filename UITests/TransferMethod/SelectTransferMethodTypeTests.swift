@@ -33,9 +33,9 @@ class SelectTransferMethodTypeTests: BaseTests {
         XCTAssertTrue(app.tables.staticTexts["CAD"].exists)
         XCTAssertEqual(app.cells.staticTexts["PayPal Account"].label, "PayPal Account")
         if #available(iOS 11.2, *) {
-            XCTAssert(app.cells.staticTexts["Transaction Fees: CAD 0.25"].exists)
+            XCTAssert(app.cells.staticTexts["Transaction Fees: CAD 0.25\nProcessing Time: 1-2 Business days"].exists)
         } else {
-            XCTAssert(app.cells.staticTexts["Transaction Fees: CAD 0.25"].exists)
+            XCTAssert(app.cells.staticTexts["Transaction Fees: CAD 0.25 Processing Time: 1-2 Business days"].exists)
         }
 
         XCTAssertTrue(selectTransferMethodType.countrySelect.exists &&

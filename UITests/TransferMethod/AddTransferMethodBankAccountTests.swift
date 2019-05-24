@@ -84,20 +84,54 @@ class AddTransferMethodTests: BaseTests {
         mockServer.setupStubError(url: "/rest/v3/users/usr-token/bank-accounts",
                                   filename: "UnexpectedErrorResponse",
                                   method: HTTPMethod.post)
-        addTransferMethod.clickBackButton()
-        app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).tap()
 
-        guard let routingNumberPreSetValue = addTransferMethod.branchIdInput.value as? String else {
+        guard let firstNamePreSetValue = addTransferMethod.firstNameInput.value as? String else {
             XCTFail("preset value is nill")
             return
         }
-        guard let accountNumberPreSetValue = addTransferMethod.accountNumberInput.value as? String else {
+        guard let lastNamePreSetValue = addTransferMethod.lastNameInput.value as? String else {
+            XCTFail("preset value is nill")
+            return
+        }
+        guard let dateOfBirthPreSetValue = addTransferMethod.dateOfBirthInput.value as? String else {
+            XCTFail("preset value is nill")
+            return
+        }
+        guard let phoneNumberPreSetValue = addTransferMethod.phoneNumberInput.value as? String else {
+            XCTFail("preset value is nill")
+            return
+        }
+        guard let mobileNumberPreSetValue = addTransferMethod.mobileNumberInput.value as? String else {
+            XCTFail("preset value is nill")
+            return
+        }
+        guard let stateProvincePreSetValue = addTransferMethod.stateProvinceInput.value as? String else {
+            XCTFail("preset value is nill")
+            return
+        }
+        guard let addressPreSetValue = addTransferMethod.addressLineInput.value as? String else {
+            XCTFail("preset value is nill")
+            return
+        }
+        guard let cityPreSetValue = addTransferMethod.cityInput.value as? String else {
+            XCTFail("preset value is nill")
+            return
+        }
+        guard let postalCodePreSetValue = addTransferMethod.postalCodeInput.value as? String else {
             XCTFail("preset value is nill")
             return
         }
 
-        XCTAssertEqual(routingNumberPreSetValue, "012345678")
-        XCTAssertEqual(accountNumberPreSetValue, "012345")
+        XCTAssertEqual(firstNamePreSetValue, "Neil")
+        XCTAssertEqual(lastNamePreSetValue, "Louis")
+        XCTAssertEqual(dateOfBirthPreSetValue, "1980-01-01")
+        XCTAssertEqual(phoneNumberPreSetValue, "+1 604 6666666")
+        XCTAssertEqual(mobileNumberPreSetValue, "604 666 6666")
+        XCTAssertTrue(app.staticTexts["Canada"].exists)
+        XCTAssertEqual(stateProvincePreSetValue, "BC")
+        XCTAssertEqual(addressPreSetValue, "950 Granville Street")
+        XCTAssertEqual(cityPreSetValue, "Vancouver")
+        XCTAssertEqual(postalCodePreSetValue, "V6Z1L2")
     }
 
     func testAddTransferMethod_verifyAfterRelaunch() {
@@ -184,22 +218,15 @@ class AddTransferMethodTests: BaseTests {
         waitForNonExistence(spinner)
     }
 
-    func testAddTransferMethod_verifyRoutingNumberIsNotEditable() {
-        mockServer.setUpGraphQLBankAccountWithNotEditableField()
+    func testAddTransferMethod_verifyNotEditableFields() {
         addTransferMethod.clickBackButton()
         app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).tap()
-        addTransferMethod.branchIdInput.tap()
+        addTransferMethod.firstNameInput.tap()
 
         XCTAssertFalse(app.keyboards.element.exists)
-    }
 
-    func testAddTransferMethod_verifyAccountTypeIsNotEditable() {
-        mockServer.setUpGraphQLBankAccountWithNotEditableField()
-        addTransferMethod.clickBackButton()
-        app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).tap()
-        addTransferMethod.accountTypeSelect.tap()
+        addTransferMethod.lastNameInput.tap()
 
-        XCTAssertTrue(addTransferMethod.navigationBar.exists)
-        XCTAssertFalse(app.tables["transferMethodTableView"].buttons["More Info"].exists)
+        XCTAssertFalse(app.keyboards.element.exists)
     }
 }

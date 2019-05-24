@@ -99,7 +99,7 @@
                                     {
                                         "dataType": "TEXT",
                                         "isRequired": true,
-                                        "isEditable": true,
+                                        "isEditable": false,
                                         "name": "firstName",
                                         "label": "First Name",
                                         "placeholder": "",
@@ -128,7 +128,7 @@
                                     {
                                         "dataType": "TEXT",
                                         "isRequired": true,
-                                        "isEditable": true,
+                                        "isEditable": false,
                                         "name": "lastName",
                                         "label": "Last Name",
                                         "placeholder": "",
@@ -1225,6 +1225,7 @@
                                         {
                                             "code": "BANK_ACCOUNT",
                                             "name": "Bank Account",
+                                            "processingTime" : "1-2 Business days",
                                             "fees": {
                                                 "nodes": [
                                                     {

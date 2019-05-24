@@ -51,6 +51,7 @@
                                         {
                                             "code": "PAYPAL_ACCOUNT",
                                             "name": "PayPal Account",
+                                            "processingTime" : "1-2 Business days",
                                             "fees": {
                                                 "nodes": [
                                                     {
