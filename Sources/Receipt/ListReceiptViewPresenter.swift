@@ -29,7 +29,7 @@ final class ListReceiptViewPresenter {
     private unowned let view: ListReceiptView
     private var transferMethods = [HyperwalletTransferMethod]()
     var sectionData: [Date: [HyperwalletTransferMethod]] = [:]
-    var sections = [ListReceiptSectionData]()
+//    var sections = [ListReceiptSectionData]()
     var nextLink: URL?
     private var currentPage = 0
     private var limit = 10
@@ -57,7 +57,9 @@ final class ListReceiptViewPresenter {
     }
 
     private func getTransferMethod(at index: Int, in section: Int) -> HyperwalletTransferMethod? {
-        return sections[section].rowItems[index]
+        let rowItems = Array(sectionData)[section].value
+        return rowItems[index]
+//        return sections[section].rowItems[index]
     }
 
     private func listTransferMethodHandler()
@@ -72,27 +74,44 @@ final class ListReceiptViewPresenter {
                     if let error = error {
                         strongSelf.view.showError(error, { strongSelf.listTransferMethod() })
                         return
+                    } else if let result = result {
+                        strongSelf.currentPage += strongSelf.limit
+                        strongSelf.groupTransactionsByMonth(result.data)
+                        strongSelf.view.loadReceipts()
                     }
-                    strongSelf.nextLink = result?.links.first(where: { $0.params.rel == "next" })?.href
-                    strongSelf.currentPage = Int(strongSelf.nextLink?.valueOf("offset") ?? "\(strongSelf.currentPage)")
-                        ?? strongSelf.currentPage
-                    strongSelf.groupTransactionsByMonth(result?.data ?? [])
-                    strongSelf.view.loadReceipts()
                 }
             }
     }
 
     //swiftlint:disable force_cast
     private func groupTransactionsByMonth(_ transferMethods: [HyperwalletTransferMethod]) {
-        if sections.isEmpty {
-            self.transferMethods = transferMethods
-        } else {
-            self.transferMethods.append(contentsOf: transferMethods)
-        }
-
-        sections = ListReceiptSectionData.group(rowItems: self.transferMethods, by: { (transferMethod) in
+        //self.transferMethods.append(contentsOf: transferMethods)
+        let currentSectionData = Dictionary(grouping: transferMethods, by: { (transferMethod) in
             firstDayOfMonth(date: parseDate(transferMethod.getField(fieldName: .createdOn) as! String))
         })
+
+        for (date, transferMethods) in currentSectionData {
+            if sectionData.keys.contains(date) {
+                sectionData[date]?.append(contentsOf: transferMethods)
+            } else {
+                sectionData[date] = transferMethods
+            }
+        }
+//        sectionData = [Date: [HyperwalletTransferMethod]](uniqueKeysWithValues: sectionData.reversed())
+//        sectionData = [Date: [HyperwalletTransferMethod]](uniqueKeysWithValues: sectionData.sorted {
+//            $0.key.compare($1.key) == .orderedDescending
+//        })
+
+        dump("SectionData: \(sectionData)")
+//        sections = ListReceiptSectionData.group(rowItems: self.transferMethods, by: { (transferMethod) in
+//            firstDayOfMonth(date: parseDate(transferMethod.getField(fieldName: .createdOn) as! String))
+//        })
+
+//        if sectionData.isEmpty {
+//            sectionData = [sections.first?.sectionItem: sections.first?.rowItems] as! [Date: [HyperwalletTransferMethod]]
+//        } else {
+//
+//        }
     }
 
     private func parseDate(_ stringDate: String) -> Date {

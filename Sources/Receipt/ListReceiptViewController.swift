@@ -24,7 +24,6 @@ import UIKit
 public final class ListReceiptViewController: UITableViewController {
     private var spinnerView: SpinnerView?
     private var presenter: ListReceiptViewPresenter!
-    private var didFetchNextRows = false
     private let listReceiptCellIdentifier = "ListReceiptCellIdentifier"
     private var defaultHeaderHeight = CGFloat(38.0)
 
@@ -43,9 +42,11 @@ public final class ListReceiptViewController: UITableViewController {
 
     // MARK: - Transfer method list table view dataSource and delegate
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let section = presenter.sections[section]
-        print("numberOfRowsInSection: \(section.rowItems.count) in section: \(section.sectionItem)")
-        return section.rowItems.count
+//        let section = presenter.sections[section]
+//        print("numberOfRowsInSection: \(section.rowItems.count) in section: \(section.sectionItem)")
+//        return section.rowItems.count
+
+        return Array(presenter.sectionData)[section].value.count
     }
 
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -59,12 +60,14 @@ public final class ListReceiptViewController: UITableViewController {
     }
 
     override public func numberOfSections(in tableView: UITableView) -> Int {
-        return presenter.sections.count
+        return presenter.sectionData.count
     }
 
     override public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let section = presenter.sections[section]
-        let date = section.sectionItem
+//        let section = presenter.sections[section]
+//        let date = section.sectionItem
+
+        let date = Array(presenter.sectionData)[section].key
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMMM yyyy"
@@ -115,10 +118,8 @@ extension ListReceiptViewController {
         let height = scrollView.frame.size.height
         let contentYoffset = scrollView.contentOffset.y
         let distanceFromBottom = scrollView.contentSize.height - contentYoffset
-        if distanceFromBottom < height &&
-            presenter.nextLink != nil {
+        if distanceFromBottom < height {
             presenter.listTransferMethod()
-            didFetchNextRows.toggle()
         }
     }
 }
