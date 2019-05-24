@@ -199,12 +199,12 @@ final class AddTransferMethodPresenter {
             section.containsFocusedField = true
         }
 
-        for section in sections.reversed() {
+        for section in sections {
             if errorsWithFieldName.isNotEmpty() {
                 updateSectionData(for: section, errorsWithFieldName)
             }
         }
-        view.showFooterViewWithUpdatedSectionData(for: sections)
+        view.showFooterViewWithUpdatedSectionData(for: sections.reversed())
     }
 
     private func updateSectionData(for section: AddTransferMethodSectionData,
