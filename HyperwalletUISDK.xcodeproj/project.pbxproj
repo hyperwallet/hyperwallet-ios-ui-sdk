@@ -40,6 +40,7 @@
 		98220B8C2265793700055E18 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 98220B8B2265793700055E18 /* README.md */; };
 		9826056822822E8A000CCA2D /* UIToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9826056722822E8A000CCA2D /* UIToolbar.swift */; };
 		98541F152273D72C007D4238 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 98541F142273D72C007D4238 /* CHANGELOG.md */; };
+		988547D422983721007B312C /* ListTransferMethodResponseWithoutPayPalAccount.json in Resources */ = {isa = PBXBuildFile; fileRef = 988547D322983721007B312C /* ListTransferMethodResponseWithoutPayPalAccount.json */; };
 		98F63E682284AB170090101D /* PayPalAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F63E662284A2CF0090101D /* PayPalAccountResponse.json */; };
 		98F63E6B2284AC330090101D /* PayPalAccountInvalidEmailResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F63E692284AC2A0090101D /* PayPalAccountInvalidEmailResponse.json */; };
 		98F63E6E2284AD370090101D /* PayPalAccountDuplicateResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F63E6C2284AD330090101D /* PayPalAccountDuplicateResponse.json */; };
@@ -187,6 +188,7 @@
 		98220B8B2265793700055E18 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		9826056722822E8A000CCA2D /* UIToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIToolbar.swift; sourceTree = "<group>"; };
 		98541F142273D72C007D4238 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		988547D322983721007B312C /* ListTransferMethodResponseWithoutPayPalAccount.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ListTransferMethodResponseWithoutPayPalAccount.json; sourceTree = "<group>"; };
 		98F63E64228485930090101D /* AddTransferMethodPayPalAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransferMethodPayPalAccountTests.swift; sourceTree = "<group>"; };
 		98F63E662284A2CF0090101D /* PayPalAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PayPalAccountResponse.json; sourceTree = "<group>"; };
 		98F63E692284AC2A0090101D /* PayPalAccountInvalidEmailResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PayPalAccountInvalidEmailResponse.json; sourceTree = "<group>"; };
@@ -407,6 +409,7 @@
 				98F63E6C2284AD330090101D /* PayPalAccountDuplicateResponse.json */,
 				09B50AE5228595DE00B03626 /* BankAccountConfigurationWithNotEditableFieldsResponse.json */,
 				433A08072285E5BB007A9FFC /* BankAccountConfigurationPresetValues.json */,
+				988547D322983721007B312C /* ListTransferMethodResponseWithoutPayPalAccount.json */,
 			);
 			path = TransferMethod;
 			sourceTree = "<group>";
@@ -833,6 +836,7 @@
 				98F63E682284AB170090101D /* PayPalAccountResponse.json in Resources */,
 				9807B762226442C60028A280 /* AuthenticationTokenResponse.json in Resources */,
 				9807B763226442C60028A280 /* BankAccountInvalidRoutingResponse.json in Resources */,
+				988547D422983721007B312C /* ListTransferMethodResponseWithoutPayPalAccount.json in Resources */,
 				9807B764226442C60028A280 /* BankCardDuplicateResponse.json in Resources */,
 				9807B765226442C60028A280 /* BankCardInvalidCvvResponse.json in Resources */,
 				9807B766226442C60028A280 /* BankCardInvalidDateOfExpiry.json in Resources */,
