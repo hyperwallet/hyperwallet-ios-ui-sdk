@@ -94,7 +94,7 @@ final class SelectionWidget: AbstractWidget {
     }
 
     private func updateLabelFieldValue(_ option: HyperwalletFieldSelectionOption) {
-        labelField.text = option.label.localized()
+        labelField.text = option.label
         selectedValue = option.value
     }
 }

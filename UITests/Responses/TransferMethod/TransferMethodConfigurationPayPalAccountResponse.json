@@ -1,45 +1,72 @@
 {
     "data": {
-        "transferMethodConfigurations": {
+        "transferMethodUIConfigurations": {
             "nodes": [
                 {
-                    "countries": [
-                        "US"
-                    ],
-                    "currencies": [
-                        "USD"
-                    ],
+                    "country": "US",
+                    "currency": "USD",
                     "transferMethodType": "PAYPAL_ACCOUNT",
                     "profile": "INDIVIDUAL",
-                    "fees": {
+                    "fieldGroups": {
                         "nodes": [
                             {
-                                "transferMethodType": "PAYPAL_ACCOUNT",
-                                "country": "US",
-                                "currency": "USD",
-                                "feeRateType": "FLAT",
-                                "value": "0.25"
+                                "group": "ACCOUNT_INFORMATION",
+                                "fields": [
+                                    {
+                                        "dataType": "TEXT",
+                                        "isRequired": true,
+                                        "isEditable": true,
+                                        "name": "email",
+                                        "label": "Email",
+                                        "placeholder": "",
+                                        "maxLength": 200,
+                                        "minLength": 3,
+                                        "regularExpression": "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",
+                                        "validationMessage": {
+                                            "length": "",
+                                            "pattern": "email is invalid",
+                                            "empty": "You must provide a value for this field"
+                                        }
+                                    }
+                                ]
                             }
                         ]
-                    },
-                    "processingTime": "IMMEDIATE",
-                    "fields": [
-                        {
-                            "category": "ACCOUNT",
-                            "dataType": "TEXT",
-                            "isRequired": true,
-                            "isEditable": true,
-                            "label": "Email",
-                            "name": "email",
-                            "placeholder": "",
-                            "regularExpression": "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",
-                            "validationMessage": {
-                                "length": "",
-                                "pattern": "accountNumber is invalid",
-                                "empty": "You must provide a value for this field"
+                    }
+                }
+            ]
+        },
+        "countries": {
+            "nodes": [
+                {
+                    "code": "US",
+                    "name": "UNITED STATES",
+                    "iso3": "USA",
+                    "currencies": {
+                        "nodes": [
+                            {
+                                "code": "USD",
+                                "name": "USD",
+                                "transferMethodTypes": {
+                                    "nodes": [
+                                        {
+                                            "code": "PAYPAL_ACCOUNT",
+                                            "name": "PayPal Account",
+                                            "processingTime" : "1-2 Business days",
+                                            "fees": {
+                                                "nodes": [
+                                                    {
+                                                        "currency": "USD",
+                                                        "feeRateType": "FLAT",
+                                                        "value": "0.25"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
                             }
-                        }
-                    ]
+                        ]
+                    }
                 }
             ]
         }

@@ -30,7 +30,8 @@ protocol AddTransferMethodView: class {
     func showBusinessError(_ error: HyperwalletErrorType, _ handler: @escaping () -> Void)
     func showLoading()
     func showProcessing()
-    func showTransferMethodFields(_ fields: [HyperwalletField], _ transferMethodTypeDetail: TransferMethodTypeDetail)
+    func showTransferMethodFields(_ fieldGroups: [HyperwalletFieldGroup],
+                                  _ transferMethodType: HyperwalletTransferMethodType)
     func showFooterViewWithUpdatedSectionData(for sections: [AddTransferMethodSectionData])
 }
 
@@ -39,26 +40,26 @@ final class AddTransferMethodPresenter {
     private let country: String
     private let currency: String
     private let profileType: String
-    private let transferMethodType: String
+    private let transferMethodTypeCode: String
     var sections: [AddTransferMethodSectionData] = []
 
     init(_ view: AddTransferMethodView,
          _ country: String,
          _ currency: String,
          _ profileType: String,
-         _ transferMethodType: String) {
+         _ transferMethodTypeCode: String) {
         self.view = view
         self.country = country
         self.currency = currency
         self.profileType = profileType
-        self.transferMethodType = transferMethodType
+        self.transferMethodTypeCode = transferMethodTypeCode
     }
 
     func loadTransferMethodConfigurationFields() {
         let fieldsQuery = HyperwalletTransferMethodConfigurationFieldQuery(
             country: country,
             currency: currency,
-            transferMethodType: transferMethodType,
+            transferMethodType: transferMethodTypeCode,
             profile: profileType
         )
         view.showLoading()
@@ -76,16 +77,14 @@ final class AddTransferMethodPresenter {
                             strongSelf.loadTransferMethodConfigurationFields() })
                         return
                     }
-
-                    guard let result = result else {
-                        return
+                    guard
+                        let result = result,
+                        let fieldGroups = result.fieldGroups(),
+                        let transferMethodType = result.transferMethodType()
+                        else {
+                            return
                     }
-                    let transferTypeDetail = result.populateTransferMethodTypeDetail(
-                        country: strongSelf.country,
-                        currency: strongSelf.currency,
-                        profileType: strongSelf.profileType,
-                        transferMethodType: strongSelf.transferMethodType)
-                    strongSelf.view.showTransferMethodFields(result.fields(), transferTypeDetail)
+                    strongSelf.view.showTransferMethodFields(fieldGroups, transferMethodType)
                 }
             })
     }
@@ -96,7 +95,7 @@ final class AddTransferMethodPresenter {
                 return
         }
         var hyperwalletTransferMethod: HyperwalletTransferMethod
-        switch transferMethodType {
+        switch transferMethodTypeCode {
         case "BANK_ACCOUNT":
             hyperwalletTransferMethod = HyperwalletBankAccount.Builder(transferMethodCountry: country,
                                                                        transferMethodCurrency: currency,
@@ -249,8 +248,8 @@ final class AddTransferMethodPresenter {
         return sections.first(where: { $0.containsFocusedField == true })
     }
 
-    func getSectionIndex(by category: String) -> Int? {
-        return sections.firstIndex(where: { $0.category == category })
+    func getSectionIndex(by fieldGroup: String) -> Int? {
+        return sections.firstIndex(where: { $0.fieldGroup == fieldGroup })
     }
 
     func focusField(in section: AddTransferMethodSectionData) {
