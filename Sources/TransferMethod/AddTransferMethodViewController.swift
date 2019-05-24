@@ -228,9 +228,22 @@ extension AddTransferMethodViewController {
 
 // MARK: - Presenter - AddTransferMethodView -
 extension AddTransferMethodViewController: AddTransferMethodView {
+    private func getSectionContainingFocusedField() -> AddTransferMethodSectionData? {
+        return presenter.sections.first(where: { $0.containsFocusedField == true })
+    }
+
+    private func getSectionIndex(by fieldGroup: String) -> Int? {
+        return presenter.sections.firstIndex(where: { $0.fieldGroup == fieldGroup })
+    }
+
+    private func focusField(in section: AddTransferMethodSectionData) {
+        section.fieldToBeFocused?.focus()
+        section.reset()
+    }
+
     func showFooterViewWithUpdatedSectionData(for sections: [AddTransferMethodSectionData]) {
         for section in sections {
-            if let sectionIndex = presenter.getSectionIndex(by: section.fieldGroup) {
+            if let sectionIndex = getSectionIndex(by: section.fieldGroup) {
                 if let footerView = tableView.footerView(forSection: sectionIndex) {
                     // section is visible, update footer
                     updateFooterView(footerView, for: sectionIndex)
@@ -240,10 +253,10 @@ extension AddTransferMethodViewController: AddTransferMethodView {
 
         //even though the footer is visible, the cell might not be visible. So we need to check if the field that needs
         // to be focused is visible. We need to scroll to the field in order to focus.
-        if let section = presenter.getSectionContainingFocusedField() {
+        if let section = getSectionContainingFocusedField() {
             let indexPath = getIndexPath(for: section)
             if isCellVisibile(indexPath) {
-                presenter.focusField(in: section)
+                focusField(in: section)
             } else {
                 tableView.scrollToRow(at: indexPath, at: .top, animated: true)
             }
@@ -252,9 +265,9 @@ extension AddTransferMethodViewController: AddTransferMethodView {
 
     override public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         // update footer once scroll ends
-        if let section = presenter.getSectionContainingFocusedField() {
+        if let section = getSectionContainingFocusedField() {
             if isCellVisibile(getIndexPath(for: section)) {
-                presenter.focusField(in: section)
+                focusField(in: section)
             }
         }
     }
@@ -356,7 +369,7 @@ extension AddTransferMethodViewController: AddTransferMethodView {
         if let sectionContainingInvalidField = presenter
             .sections
             .first(where: { $0.cells.contains(fieldToBeFocused) }),
-            let sectionIndex = presenter.getSectionIndex(by: sectionContainingInvalidField.fieldGroup),
+            let sectionIndex = getSectionIndex(by: sectionContainingInvalidField.fieldGroup),
             let cellIndex = sectionContainingInvalidField.cells.firstIndex(of: fieldToBeFocused) {
             return IndexPath(row: cellIndex, section: sectionIndex)
         }
@@ -429,7 +442,7 @@ extension AddTransferMethodViewController: AddTransferMethodView {
     }
 
     private func getIndexPath(for section: AddTransferMethodSectionData) -> IndexPath {
-        let sectionIndex = presenter.getSectionIndex(by: section.fieldGroup)!
+        let sectionIndex = getSectionIndex(by: section.fieldGroup)!
         return IndexPath(row: section.rowShouldBeScrolledTo!, section: sectionIndex)
     }
 }

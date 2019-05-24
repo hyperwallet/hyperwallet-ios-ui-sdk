@@ -243,17 +243,4 @@ final class AddTransferMethodPresenter {
     private func resetErrorMessages() {
         sections.forEach { $0.errorMessage = nil }
     }
-
-    func getSectionContainingFocusedField() -> AddTransferMethodSectionData? {
-        return sections.first(where: { $0.containsFocusedField == true })
-    }
-
-    func getSectionIndex(by fieldGroup: String) -> Int? {
-        return sections.firstIndex(where: { $0.fieldGroup == fieldGroup })
-    }
-
-    func focusField(in section: AddTransferMethodSectionData) {
-        section.fieldToBeFocused?.focus()
-        section.reset()
-    }
 }
