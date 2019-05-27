@@ -19,10 +19,11 @@
 import Foundation
 
 extension Date {
-    func formatDateToString() -> String {
+    func formatDateToString(dateStyle: DateFormatter.Style = DateFormatter.Style.medium,
+                            timeStyle: DateFormatter.Style = DateFormatter.Style.medium) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.timeStyle = DateFormatter.Style.medium
-        dateFormatter.dateStyle = DateFormatter.Style.medium
+        dateFormatter.dateStyle = dateStyle
+        dateFormatter.timeStyle = timeStyle
         return dateFormatter.string(from: self)
     }
 }

@@ -131,14 +131,16 @@ final class ListReceiptViewPresenter {
 
     func getCellConfiguration(for receiptIndex: Int, in section: Int) -> ListReceiptCellConfiguration? {
         if let receipt = getReceipt(at: receiptIndex, in: section),
-            let country = receipt.currency,
-            let transactionType = receipt.type?.rawValue,
+            let currency = receipt.currency,
+            let type = receipt.type?.rawValue,
+            let entry = receipt.entry?.rawValue,
             let createdOn = receipt.createdOn {
             return ListReceiptCellConfiguration(
-                transferMethodType: transactionType.lowercased().localized(),
-                transferMethodCountry: country.localized(),
+                type: type.lowercased().localized(),
+                entry: entry,
+                currency: currency.localized(),
                 createdOn: parseDate(createdOn),
-                transferMethodIconFont: HyperwalletIcon.of(receipt.entry?.rawValue ?? "").rawValue)
+                iconFont: HyperwalletIcon.of(receipt.entry?.rawValue ?? "").rawValue)
         }
         return nil
     }

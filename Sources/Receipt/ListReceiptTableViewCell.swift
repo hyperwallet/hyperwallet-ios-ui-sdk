@@ -19,13 +19,16 @@
 import UIKit
 
 struct ListReceiptCellConfiguration {
-    let transferMethodType: String
-    let transferMethodCountry: String
+    let type: String
+    let entry: String
+    let currency: String
     let createdOn: Date
-    let transferMethodIconFont: String
+    let iconFont: String
 }
 
 final class ListReceiptTableViewCell: UITableViewCell {
+    var iconColor: UIColor!
+    var iconBackgroundColor: UIColor!
     // MARK: Life cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
@@ -33,16 +36,6 @@ final class ListReceiptTableViewCell: UITableViewCell {
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        imageView?.backgroundColor = Theme.Icon.backgroundColor
-    }
-
-    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        super.setHighlighted(highlighted, animated: animated)
-        imageView?.backgroundColor = Theme.Icon.backgroundColor
     }
 
     // MARK: Theme manager's proxy properties
@@ -71,27 +64,41 @@ final class ListReceiptTableViewCell: UITableViewCell {
 extension ListReceiptTableViewCell {
     func configure(configuration: ListReceiptCellConfiguration?) {
         if let configuration = configuration {
-            textLabel?.text = configuration.transferMethodType
-            detailTextLabel?.attributedText = formatSubtitle(transferMethodCountry: configuration.transferMethodCountry,
+            textLabel?.text = configuration.type
+            detailTextLabel?.attributedText = formatSubtitle(currency: configuration.currency,
                                                              createdOn: configuration.createdOn)
             detailTextLabel?.numberOfLines = 0
             detailTextLabel?.lineBreakMode = .byWordWrapping
-            let icon = UIImage.fontIcon(configuration.transferMethodIconFont,
+            iconColor = configuration.entry == "CREDIT" ? Theme.Icon.secondaryColor : Theme.Icon.thirdColor
+            iconBackgroundColor = configuration.entry == "CREDIT" ? Theme.Icon.secondaryBackgroundColor : Theme.Icon.thirdBackgroundColor
+
+            let icon = UIImage.fontIcon(configuration.iconFont,
                                         Theme.Icon.frame,
                                         CGFloat(Theme.Icon.size),
-                                        Theme.Icon.color,
-                                        Theme.Icon.backgroundColor)
+                                        iconColor)
             imageView?.image = icon
             imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
         }
     }
 
-    private func formatSubtitle(transferMethodCountry: String, createdOn: Date) -> NSAttributedString {
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        imageView?.backgroundColor = iconBackgroundColor
+    }
+
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        imageView?.backgroundColor = iconBackgroundColor
+    }
+
+    private func formatSubtitle(currency: String, createdOn: Date) -> NSAttributedString {
         let attributedText = NSMutableAttributedString()
         let font = Theme.Label.captionOne
         let color = Theme.Label.subTitleColor
-        attributedText.append(value: String(format: "%@\n", transferMethodCountry), font: font, color: color)
-        attributedText.append(value: createdOn.formatDateToString(), font: font, color: color)
+        attributedText.append(value: String(format: "%@\n", currency), font: font, color: color)
+        attributedText.append(value: createdOn.formatDateToString(timeStyle: DateFormatter.Style.none),
+                              font: font,
+                              color: color)
         return attributedText
     }
 }

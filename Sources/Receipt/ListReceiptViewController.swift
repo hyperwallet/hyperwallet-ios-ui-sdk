@@ -49,6 +49,10 @@ public final class ListReceiptViewController: UITableViewController {
         return Array(presenter.sectionData)[section].value.count
     }
 
+    override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // TODO will navigate to the recepit detail page
+    }
+
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: listReceiptCellIdentifier, for: indexPath)
 

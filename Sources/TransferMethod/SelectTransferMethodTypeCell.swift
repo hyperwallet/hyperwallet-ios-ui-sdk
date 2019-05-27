@@ -39,12 +39,12 @@ final class SelectTransferMethodTypeCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        imageView?.backgroundColor = Theme.Icon.backgroundColor
+        imageView?.backgroundColor = Theme.Icon.primaryBackgroundColor
     }
 
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
-        imageView?.backgroundColor = Theme.Icon.backgroundColor
+        imageView?.backgroundColor = Theme.Icon.primaryBackgroundColor
     }
 
     // MARK: Theme manager's proxy properties
@@ -80,8 +80,7 @@ extension SelectTransferMethodTypeCell {
         let image = UIImage.fontIcon(configuration.transferMethodIconFont,
                                      Theme.Icon.frame,
                                      CGFloat(Theme.Icon.size),
-                                     Theme.Icon.color,
-                                     Theme.Icon.backgroundColor)
+                                     Theme.Icon.primaryColor)
         imageView?.image = image
         imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
     }

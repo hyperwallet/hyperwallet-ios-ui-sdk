@@ -104,9 +104,17 @@ public struct Theme {
         /// The icon frame
         public static let frame = CGSize(width: 40, height: 40)
         /// The icon primary color
-        public static var color = Theme.themeColor
-        /// The icon background color
-        public static var backgroundColor = UIColor(rgb: 0xE5F7FA)
+        public static var primaryColor = Theme.themeColor
+        /// The icon primary background color
+        public static var primaryBackgroundColor = UIColor(rgb: 0xE5F7FA)
+        /// The icon secondary color
+        public static var secondaryColor = UIColor(rgb: 0x5FBF00)
+        /// The icon secondary background color
+        public static var secondaryBackgroundColor = UIColor(rgb: 0xF1FAE8)
+        /// The icon third color
+        public static var thirdColor = UIColor(rgb: 0xDB4437)
+        /// The icon third background color
+        public static var thirdBackgroundColor = UIColor(rgb: 0xFEF7F7)
     }
 
     /// Representation of all customizable visual style property for `UIViewController`.
