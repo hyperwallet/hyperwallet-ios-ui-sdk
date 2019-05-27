@@ -28,7 +28,7 @@ protocol ListReceiptView: class {
 final class ListReceiptViewPresenter {
     private unowned let view: ListReceiptView
     private var transferMethods = [HyperwalletTransferMethod]()
-    var sectionData: [Date: [HyperwalletTransferMethod]] = [:]
+    var sectionData: [Date: [HyperwalletReceipt]] = [:]
 //    var sections = [ListReceiptSectionData]()
     var nextLink: URL?
     private var currentPage = 0
@@ -40,7 +40,7 @@ final class ListReceiptViewPresenter {
         self.view = view
     }
 
-    func listTransferMethod() {
+    func listTransactionReceipt() {
         // 1
         guard !isFetchInProgress else {
             return
@@ -49,21 +49,21 @@ final class ListReceiptViewPresenter {
         // 2
         isFetchInProgress = true
         view.showLoading()
-        let pagination = HyperwalletTransferMethodPagination()
+        let pagination = HyperwalletReceiptQueryParam()
         pagination.offset = currentPage
         pagination.limit = limit
         pagination.sortBy = .descendantCreatedOn
-        Hyperwallet.shared.listTransferMethods(pagination: pagination, completion: listTransferMethodHandler())
+        Hyperwallet.shared.listTransactionReceipts(pagination: pagination, completion: listTransactionReceiptHandler())
     }
 
-    private func getTransferMethod(at index: Int, in section: Int) -> HyperwalletTransferMethod? {
+    private func getReceipt(at index: Int, in section: Int) -> HyperwalletReceipt? {
         let rowItems = Array(sectionData)[section].value
         return rowItems[index]
 //        return sections[section].rowItems[index]
     }
 
-    private func listTransferMethodHandler()
-        -> (HyperwalletPageList<HyperwalletTransferMethod>?, HyperwalletErrorType?) -> Void {
+    private func listTransactionReceiptHandler()
+        -> (HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType?) -> Void {
             return { [weak self] (result, error) in
                 guard let strongSelf = self else {
                     return
@@ -72,7 +72,7 @@ final class ListReceiptViewPresenter {
                     strongSelf.isFetchInProgress = false
                     strongSelf.view.hideLoading()
                     if let error = error {
-                        strongSelf.view.showError(error, { strongSelf.listTransferMethod() })
+                        strongSelf.view.showError(error, { strongSelf.listTransactionReceipt() })
                         return
                     } else if let result = result {
                         strongSelf.currentPage += strongSelf.limit
@@ -84,17 +84,17 @@ final class ListReceiptViewPresenter {
     }
 
     //swiftlint:disable force_cast
-    private func groupTransactionsByMonth(_ transferMethods: [HyperwalletTransferMethod]) {
+    private func groupTransactionsByMonth(_ receipts: [HyperwalletReceipt]) {
         //self.transferMethods.append(contentsOf: transferMethods)
-        let currentSectionData = Dictionary(grouping: transferMethods, by: { (transferMethod) in
-            firstDayOfMonth(date: parseDate(transferMethod.getField(fieldName: .createdOn) as! String))
+        let currentSectionData = Dictionary(grouping: receipts, by: { (receipt) in
+            firstDayOfMonth(date: parseDate(receipt.createdOn as! String))
         })
 
-        for (date, transferMethods) in currentSectionData {
+        for (date, receipts) in currentSectionData {
             if sectionData.keys.contains(date) {
-                sectionData[date]?.append(contentsOf: transferMethods)
+                sectionData[date]?.append(contentsOf: receipts)
             } else {
-                sectionData[date] = transferMethods
+                sectionData[date] = receipts
             }
         }
 //        sectionData = [Date: [HyperwalletTransferMethod]](uniqueKeysWithValues: sectionData.reversed())
@@ -129,16 +129,16 @@ final class ListReceiptViewPresenter {
         return calendar.date(from: components)!
     }
 
-    func getCellConfiguration(for transferMethodIndex: Int, in section: Int) -> ListReceiptCellConfiguration? {
-        if let transferMethod = getTransferMethod(at: transferMethodIndex, in: section),
-            let country = transferMethod.getField(fieldName: .transferMethodCountry) as? String,
-            let transferMethodType = transferMethod.getField(fieldName: .type) as? String,
-            let createdOn = transferMethod.getField(fieldName: .createdOn) as? String {
+    func getCellConfiguration(for receiptIndex: Int, in section: Int) -> ListReceiptCellConfiguration? {
+        if let receipt = getReceipt(at: receiptIndex, in: section),
+            let country = receipt.currency,
+            let transactionType = receipt.type?.rawValue,
+            let createdOn = receipt.createdOn {
             return ListReceiptCellConfiguration(
-                transferMethodType: transferMethodType.lowercased().localized(),
+                transferMethodType: transactionType.lowercased().localized(),
                 transferMethodCountry: country.localized(),
                 createdOn: parseDate(createdOn),
-                transferMethodIconFont: HyperwalletIcon.of(transferMethodType).rawValue)
+                transferMethodIconFont: HyperwalletIcon.of(receipt.entry?.rawValue ?? "").rawValue)
         }
         return nil
     }

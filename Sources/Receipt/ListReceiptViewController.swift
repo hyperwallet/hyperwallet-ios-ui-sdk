@@ -37,7 +37,7 @@ public final class ListReceiptViewController: UITableViewController {
         // setup table view
         presenter = ListReceiptViewPresenter(view: self)
         setupTransactionTableView()
-        presenter.listTransferMethod()
+        presenter.listTransactionReceipt()
     }
 
     // MARK: - Transfer method list table view dataSource and delegate
@@ -119,7 +119,7 @@ extension ListReceiptViewController {
         let contentYoffset = scrollView.contentOffset.y
         let distanceFromBottom = scrollView.contentSize.height - contentYoffset
         if distanceFromBottom < height {
-            presenter.listTransferMethod()
+            presenter.listTransactionReceipt()
         }
     }
 }
