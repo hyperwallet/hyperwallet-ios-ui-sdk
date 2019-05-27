@@ -5,7 +5,7 @@ ignore:
   - Tests/*
   - UITests/*
   - Demo/*
-  - HyperwalletCommon/*
+  - Common/*
   - HyperwalletTransferMethod/Extensions/*
   - HyperwalletTransferMethod/Helper/*
   - HyperwalletTransferMethod/View/*
