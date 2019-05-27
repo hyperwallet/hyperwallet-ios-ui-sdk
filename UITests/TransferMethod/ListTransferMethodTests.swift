@@ -46,11 +46,9 @@ class ListTransferMethodTests: BaseTests {
 
     var expectedPayPalAccountCellLabel: String = {
         if #available(iOS 11.2, *) {
-            return "United States\n" //TODO remove this and un comment below after HW-52654 is merged
-//            return "United States\ncarroll.lynn@byteme.com"
+            return "United States\ncarroll.lynn@byteme.com"
         } else {
-            return "United States " //TODO remove this and un comment below after HW-52654 is merged
-//            return "United States carroll.lynn@byteme.com" 
+            return "United States carroll.lynn@byteme.com"
         }
     }()
 
