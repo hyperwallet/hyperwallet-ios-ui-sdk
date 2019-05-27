@@ -34,10 +34,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
         XCTAssertFalse(mockView.isShowErrorPerformed, "The showError should not be performed")
         XCTAssertTrue(mockView.isShowLoadingPerformed, "The showLoading should be performed")
         XCTAssertTrue(mockView.isHideLoadingPerformed, "The hideLoading should be performed")
-        XCTAssertEqual(mockView.fields.count, 3, "The `response.getFields()` should be 3")
-        XCTAssertNotNil(mockView.transferMethodTypeDetails, "The `transferMethodTypeDetails` should not be nil")
-        XCTAssertNotNil(mockView.transferMethodTypeDetails?.fees, "Fee` should not be nil")
-        XCTAssertNotNil(mockView.transferMethodTypeDetails?.processingTime, "ProcessingTime should not be nil")
+        XCTAssertEqual(mockView.fieldGroups.count, 2, "The `response.getFields()` should be 2")
     }
 
     public func testLoadTransferMethodConfigurationFields_failure() {
@@ -211,8 +208,7 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
     var isFieldFocusPerformad = false
     var fieldFocusField = ""
     var isShowTransferMethodFieldsPerformed = false
-    var fields = [HyperwalletField]()
-    var transferMethodTypeDetails: TransferMethodTypeDetail?
+    var fieldGroups = [HyperwalletFieldGroup]()
     var isShowErrorPerformed = false
     var isNotificationSent = false
     var isDisplayErrorMessageInFooterPerformed = false
@@ -236,7 +232,7 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
         isFieldFocusPerformad = false
         fieldFocusField = ""
         isShowTransferMethodFieldsPerformed = false
-        fields = [HyperwalletField]()
+        fieldGroups = [HyperwalletFieldGroup]()
         isShowErrorPerformed = false
         isNotificationSent = false
         isDisplayErrorMessageInFooterPerformed = false
@@ -253,7 +249,6 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
 
     func fieldStatus() -> [Bool] {
         isFieldStatusPerformed = true
-
         return mockFieldStatusReturnResult
     }
 
@@ -298,9 +293,9 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
         fieldFocusField = fieldName
     }
 
-    func showTransferMethodFields(_ fields: [HyperwalletField], _ transferMethodTypeDetail: TransferMethodTypeDetail) {
-        self.fields = fields
-        self.transferMethodTypeDetails = transferMethodTypeDetail
+    func showTransferMethodFields(_ fieldGroups: [HyperwalletFieldGroup],
+                                  _ transferMethodType: HyperwalletTransferMethodType) {
+        self.fieldGroups = fieldGroups
         isShowTransferMethodFieldsPerformed = true
         expectation?.fulfill()
     }

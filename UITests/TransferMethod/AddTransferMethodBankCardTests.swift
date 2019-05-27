@@ -21,8 +21,8 @@ class AddTransferMethodBankCardTests: BaseTests {
         app.tables.cells.containing(.staticText, identifier: "Add Transfer Method").element(boundBy: 0).tap()
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
-        selectTransferMethodType.selectCountry(country: "United States")
-        selectTransferMethodType.selectCurrency(currency: "US Dollar")
+        selectTransferMethodType.selectCountry(country: "UNITED STATES")
+        selectTransferMethodType.selectCurrency(currency: "USD")
 
         app.tables["transferMethodTableView"].staticTexts.element(matching: debitCard).tap()
         waitForNonExistence(spinner)
@@ -39,6 +39,8 @@ class AddTransferMethodBankCardTests: BaseTests {
         XCTAssertEqual(app.textFields["dateOfExpiry"].value as? String, "03/20")
 
         addTransferMethod.setCvv(cvvNumber: "022")
+        addTransferMethod.selectRelationship(type: "Self")
+
         addTransferMethod.clickCreateTransferMethodButton()
 
         //Todo - check process indicator 
@@ -100,7 +102,7 @@ class AddTransferMethodBankCardTests: BaseTests {
 
     func testAddTransferMethod_returnsGraphQLFlatFee() {
         XCTAssert(app.tables["addTransferMethodTable"]
-            .staticTexts["Transaction Fees: USD 1.75 Processing Time: 30 minutes"]
+            .staticTexts["Transaction Fees: USD 1.75 Processing Time: 1-2 Business days"]
             .exists)
     }
 }
