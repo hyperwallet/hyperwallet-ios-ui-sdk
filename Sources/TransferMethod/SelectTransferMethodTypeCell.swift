@@ -19,7 +19,7 @@
 import HyperwalletSDK
 import UIKit
 
-/// Represents the country and currency data to be displyed on the CountryCurrencyCell
+/// Represents the country and currency data to be displayed on the CountryCurrencyCell
 struct SelectTransferMethodTypeConfiguration {
     let transferMethodTypeCode: String!
     let transferMethodTypeName: String!
