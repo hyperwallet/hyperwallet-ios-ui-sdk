@@ -13,16 +13,13 @@ Pod::Spec.new do |s|
     s.resources             = ['HyperwalletCommon/**/*.xcassets', 'HyperwalletCommon/**/*.ttf']
     s.dependency 'HyperwalletSDK', '1.0.0-beta02'
 
-    s.default_subspecs = %w[Common TransferMethod]
-
     s.subspec "Common" do |s|
-        s.source_files  = "HyperwalletCommon/**/*.{swift,h,strings,xib}"
-        s.frameworks = "UIKit"
-      end
+        s.resources = ['Common/**/*.xcassets', 'Common/**/*.ttf', 'Common/**/*.xib', 'Common/**/*.strings']
+        s.source_files  = "Common/**/*.{swift,h}"
+    end
 
     s.subspec "TransferMethod" do |s|
-        s.source_files = "HyperwalletTransferMethod/**/*.{swift,h,strings,xib}"
-        s.frameworks = "UIKit"
+        s.source_files = "HyperwalletTransferMethod/**/*.{swift,h,xib}"
         s.dependency "HyperwalletUISDK/Common"
     end
 

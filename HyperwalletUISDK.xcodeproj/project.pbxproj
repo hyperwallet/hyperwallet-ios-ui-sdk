@@ -334,7 +334,6 @@
 		070AD77A2294CA2D00BB2B26 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				DBCA383F225E8BAA00CD4137 /* Generics */,
 				DBCA384E225E8BAA00CD4137 /* Widget */,
 			);
 			path = View;
@@ -374,6 +373,7 @@
 			isa = PBXGroup;
 			children = (
 				07B583FB2294A33D009CAF80 /* Extensions */,
+				DBCA383F225E8BAA00CD4137 /* Generics */,
 				07B584002294A8D7009CAF80 /* Helper */,
 				070AD77A2294CA2D00BB2B26 /* View */,
 				072A53F622838F6B00BC11D0 /* AddTransferMethodSectionData.swift */,
@@ -398,7 +398,6 @@
 			children = (
 				DBCA3834225E8BA900CD4137 /* HyperwalletFee.swift */,
 				079E2B4622975DDA004C19F7 /* HyperwalletTransferMethodUI.swift */,
-				DBCA3835225E8BA900CD4137 /* Notification.swift */,
 				DBCA3836225E8BA900CD4137 /* NSRegularExpression.swift */,
 				DBCA382F225E8BA900CD4137 /* TransferMethodConfigurationResult.swift */,
 				DBCA383B225E8BA900CD4137 /* UINavigationController.swift */,
@@ -562,7 +561,7 @@
 			isa = PBXGroup;
 			children = (
 				DBD2667F2261A601002973C3 /* Deployment */,
-				DBCA37F7225E892400CD4137 /* HyperwalletCommon */,
+				DBCA37F7225E892400CD4137 /* Common */,
 				07B583E022949E59009CAF80 /* HyperwalletTransferMethod */,
 				DB18E9EE2261BA29004F6AC3 /* Tests */,
 				DB2587FC2261BFF100E6236B /* UITests */,
@@ -583,7 +582,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DBCA37F7225E892400CD4137 /* HyperwalletCommon */ = {
+		DBCA37F7225E892400CD4137 /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				DB2EB66E22617AB100FBEB3D /* Resources */,
@@ -592,12 +591,13 @@
 				DBCA383C225E8BAA00CD4137 /* Localization */,
 				DBCA3849225E8BAA00CD4137 /* View */,
 			);
-			path = HyperwalletCommon;
+			path = Common;
 			sourceTree = "<group>";
 		};
 		DBCA382E225E8BA900CD4137 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				DBCA3835225E8BA900CD4137 /* Notification.swift */,
 				DB2EB66C22617A8500FBEB3D /* String+Array.swift */,
 				DBCA3830225E8BA900CD4137 /* UIAlertAction.swift */,
 				DBCA3832225E8BA900CD4137 /* UIBarButtonItem.swift */,
