@@ -25,11 +25,12 @@ class AddTransferMethodBankCardTests: BaseIndividualTests {
         XCTAssertEqual(app.textFields["dateOfExpiry"].value as? String, "03/20")
 
         addTransferMethod.setCvv("022")
+        addTransferMethod.selectRelationship("Self")
         addTransferMethod.clickCreateTransferMethodButton()
 
         waitForNonExistence(spinner)
 
-        XCTAssert(app.navigationBars.staticTexts["Account Settings"].exists)
+        XCTAssert(app.navigationBars["Account Settings"].exists)
     }
 
     func testAddTransferMethod_createBankCardBusiness() {
@@ -43,11 +44,12 @@ class AddTransferMethodBankCardTests: BaseIndividualTests {
         XCTAssertEqual(app.textFields["dateOfExpiry"].value as? String, "03/20")
 
         addTransferMethod.setCvv("022")
+        addTransferMethod.selectRelationship("Self")
         addTransferMethod.clickCreateTransferMethodButton()
 
         waitForNonExistence(spinner)
 
-        XCTAssert(app.navigationBars.staticTexts["Account Settings"].exists)
+        XCTAssert(app.navigationBars["Account Settings"].exists)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidPattern() {
@@ -106,7 +108,7 @@ class AddTransferMethodBankCardTests: BaseIndividualTests {
 
     func testAddTransferMethod_returnsGraphQLFlatFee() {
         XCTAssert(app.tables["addTransferMethodTable"]
-            .staticTexts["Transaction Fees: USD 1.75 Processing Time: 30 minutes"]
+            .staticTexts["Transaction Fees: USD 1.75 Processing Time: 1-2 Business days"]
             .exists)
     }
 
@@ -117,10 +119,10 @@ class AddTransferMethodBankCardTests: BaseIndividualTests {
 
         let infoSection = addTransferMethod.addTMTableView.otherElements["TRANSFER METHOD INFORMATION"]
 
-        addTransferMethod.addTMTableView.scrollToElement(element: infoSection)
+        addTransferMethod.addTMTableView.scroll(to: infoSection)
         XCTAssert(infoSection.exists)
 
-        addTransferMethod.addTMTableView.scrollToElement(element: addTransferMethod.createTransferMethodButton)
+        addTransferMethod.addTMTableView.scroll(to: addTransferMethod.createTransferMethodButton)
         XCTAssert(addTransferMethod.createTransferMethodButton.exists)
     }
 
@@ -131,10 +133,10 @@ class AddTransferMethodBankCardTests: BaseIndividualTests {
 
         let infoSection = addTransferMethod.addTMTableView.otherElements["TRANSFER METHOD INFORMATION"]
 
-        addTransferMethod.addTMTableView.scrollToElement(element: infoSection)
+        addTransferMethod.addTMTableView.scroll(to: infoSection)
         XCTAssert(infoSection.exists)
 
-        addTransferMethod.addTMTableView.scrollToElement(element: addTransferMethod.createTransferMethodButton)
+        addTransferMethod.addTMTableView.scroll(to: addTransferMethod.createTransferMethodButton)
         XCTAssert(addTransferMethod.createTransferMethodButton.exists)
     }
 }
@@ -147,8 +149,8 @@ private extension AddTransferMethodBankCardTests {
         app.tables.cells.containing(.staticText, identifier: "Add Transfer Method").element(boundBy: 0).tap()
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
-        selectTransferMethodType.selectCountry(country: "United States")
-        selectTransferMethodType.selectCurrency(currency: "US Dollar")
+        selectTransferMethodType.selectCountry(country: "UNITED STATES")
+        selectTransferMethodType.selectCurrency(currency: "USD")
 
         app.tables["transferMethodTableView"].staticTexts.element(matching: debitCard).tap()
         waitForNonExistence(spinner)
@@ -165,7 +167,5 @@ private extension AddTransferMethodBankCardTests {
 
         XCTAssert(addTransferMethod.addTMTableView.staticTexts["CVV (Card Security Code)"].exists)
         XCTAssert(addTransferMethod.cvvInput.exists)
-
-        XCTAssert(addTransferMethod.addTMTableView.staticTexts["CVV is a 3 digit number, typically found on the back of the card."].exists)
     }
 }

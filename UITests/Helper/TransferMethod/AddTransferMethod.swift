@@ -22,6 +22,7 @@ class AddTransferMethod {
     var emailInput: XCUIElement
     var title: XCUIElement
     var navigationBar: XCUIElement
+
     var selectRelationshipType: XCUIElement
     var inputNameFirst: XCUIElement
     var inputNameLast: XCUIElement
@@ -86,6 +87,10 @@ class AddTransferMethod {
     }
 
     func clickCreateTransferMethodButton() {
+        if !createTransferMethodButton.exists {
+            addTMTableView.scroll(to: createTransferMethodButton)
+        }
+
         createTransferMethodButton.tap()
     }
 

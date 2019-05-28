@@ -22,22 +22,9 @@ class AddTransferMethodBankAccountIndividualTests: BaseIndividualTests {
 
         addTransferMethod.setBranchId("021000021")
         addTransferMethod.setAccountNumber("12345")
-        addTransferMethod.selectAccountType("Checking")
+        addTransferMethod.selectAccountType("CHECKING")
         addTransferMethod.selectRelationship("Self")
-        addTransferMethod.setNameFirst("John")
-        addTransferMethod.setNameLast("Smith")
         addTransferMethod.setNameMiddle("Adam")
-        addTransferMethod.setPhoneNumber("+16045555555")
-        addTransferMethod.setMobileNumber("+16046666666")
-        addTransferMethod.setDateOfBirth(yearOfBirth: "1981", monthOfBirth: "December", dayOfBirth: "25")
-        addTransferMethod.selectCountry("United States")
-        addTransferMethod.setStateProvince("CA")
-        addTransferMethod.setStreet("632 Broadway")
-        addTransferMethod.setCity("San Francisco")
-        addTransferMethod.setPostalCode("04401")
-
-        app.scrollToElement(element: addTransferMethod.createTransferMethodButton)
-
         addTransferMethod.clickCreateTransferMethodButton()
 
         waitForNonExistence(spinner)
@@ -64,9 +51,7 @@ class AddTransferMethodBankAccountIndividualTests: BaseIndividualTests {
 
         addTransferMethod.setBranchId("021000022")
         addTransferMethod.setAccountNumber("12345")
-        addTransferMethod.selectAccountType("Checking")
-
-        app.scrollToElement(element: addTransferMethod.createTransferMethodButton)
+        addTransferMethod.selectAccountType("CHECKING")
 
         addTransferMethod.clickCreateTransferMethodButton()
         waitForNonExistence(spinner)
@@ -85,10 +70,8 @@ class AddTransferMethodBankAccountIndividualTests: BaseIndividualTests {
 
         addTransferMethod.setBranchId("021000022")
         addTransferMethod.setAccountNumber("12345")
-        addTransferMethod.selectAccountType("Checking")
+        addTransferMethod.selectAccountType("CHECKING")
         addTransferMethod.selectRelationship("Self")
-
-        app.scrollToElement(element: addTransferMethod.createTransferMethodButton)
 
         addTransferMethod.clickCreateTransferMethodButton()
         waitForNonExistence(spinner)
@@ -110,30 +93,26 @@ class AddTransferMethodBankAccountIndividualTests: BaseIndividualTests {
         verifyIndividualAccountHolderSection()
         verifyAddressSection()
 
-        addTransferMethod.addTMTableView.scrollToElement(element: addTransferMethod.addTMTableView.otherElements["TRANSFER METHOD INFORMATION"])
+        addTransferMethod.addTMTableView.scroll(to: addTransferMethod.addTMTableView.otherElements["TRANSFER METHOD INFORMATION"])
 
         XCTAssert(addTransferMethod.addTMTableView.otherElements["TRANSFER METHOD INFORMATION"].exists)
 
-        addTransferMethod.addTMTableView.scrollToElement(element: addTransferMethod.createTransferMethodButton)
+        addTransferMethod.addTMTableView.scroll(to: addTransferMethod.createTransferMethodButton)
         XCTAssert(addTransferMethod.createTransferMethodButton.exists)
     }
 
     func testAddTransferMethod_varifyPresetValues() {
-        mockServer.setUpGraphQLBankAccountWithPreSetValues()
-        addTransferMethod.clickBackButton()
-        app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).tap()
+        waitForNonExistence(spinner)
 
-        guard let routingNumberPreSetValue = addTransferMethod.branchIdInput.value as? String else {
-            XCTFail("preset value is nill")
-            return
-        }
-        guard let accountNumberPreSetValue = addTransferMethod.accountNumberInput.value as? String else {
-            XCTFail("preset value is nill")
-            return
-        }
-
-        XCTAssertEqual(routingNumberPreSetValue, "012345678")
-        XCTAssertEqual(accountNumberPreSetValue, "012345")
+        verifyPresetValue(for: addTransferMethod.inputNameFirst, with: "Neil")
+        verifyPresetValue(for: addTransferMethod.inputNameLast, with: "Louis")
+        verifyPresetValue(for: addTransferMethod.inputDateOfBirth, with: "1980-01-01")
+        verifyPresetValue(for: addTransferMethod.inputPhoneNumber, with: "+1 604 6666666")
+        verifyPresetValue(for: addTransferMethod.inputMobileNumber, with: "604 666 6666")
+        verifyPresetValue(for: addTransferMethod.inputStateProvince, with: "BC")
+        verifyPresetValue(for: addTransferMethod.inputStreet, with: "950 Granville Street")
+        verifyPresetValue(for: addTransferMethod.inputCity, with: "Vancouver")
+        verifyPresetValue(for: addTransferMethod.inputZip, with: "V6Z1L2")
     }
 
     func testAddTransferMethod_verifyAfterRelaunch() {
@@ -174,25 +153,6 @@ class AddTransferMethodBankAccountIndividualTests: BaseIndividualTests {
         addTransferMethod.clickBackButton()
         XCTAssertTrue(selectTransferMethodType.navigationBar.exists)
     }
-
-    func testAddTransferMethod_verifyRoutingNumberIsNotEditable() {
-        mockServer.setUpGraphQLBankAccountWithNotEditableField()
-        addTransferMethod.clickBackButton()
-        app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).tap()
-        addTransferMethod.branchIdInput.tap()
-
-        XCTAssertFalse(app.keyboards.element.exists)
-    }
-
-    func testAddTransferMethod_verifyAccountTypeIsNotEditable() {
-        mockServer.setUpGraphQLBankAccountWithNotEditableField()
-        addTransferMethod.clickBackButton()
-        app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).tap()
-        addTransferMethod.accountTypeSelect.tap()
-
-        XCTAssertTrue(addTransferMethod.navigationBar.exists)
-        XCTAssertFalse(app.tables["transferMethodTableView"].buttons["More Info"].exists)
-    }
 }
 
 private extension AddTransferMethodBankAccountIndividualTests {
@@ -216,8 +176,8 @@ private extension AddTransferMethodBankAccountIndividualTests {
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
 
-        selectTransferMethodType.selectCountry(country: "United States")
-        selectTransferMethodType.selectCurrency(currency: "US Dollar")
+        selectTransferMethodType.selectCountry(country: "UNITED STATES")
+        selectTransferMethodType.selectCurrency(currency: "USD")
 
         app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).tap()
     }
@@ -231,8 +191,7 @@ private extension AddTransferMethodBankAccountIndividualTests {
 
         addTransferMethod.setBranchId("021000022")
         addTransferMethod.setAccountNumber("12345")
-        addTransferMethod.selectAccountType("Checking")
-        app.scrollToElement(element: addTransferMethod.createTransferMethodButton)
+        addTransferMethod.selectAccountType("CHECKING")
         addTransferMethod.clickCreateTransferMethodButton()
         waitForNonExistence(spinner)
     }
@@ -259,16 +218,14 @@ private extension AddTransferMethodBankAccountIndividualTests {
 
         XCTAssert(table.exists)
 
-        table.scrollToElement(element: table.staticTexts["Checking"])
-
-        XCTAssert(app.tables.firstMatch.staticTexts["Checking"].exists)
-        XCTAssert(app.tables.firstMatch.staticTexts["Savings"].exists)
+        XCTAssert(app.tables.firstMatch.staticTexts["CHECKING"].exists)
+        XCTAssert(app.tables.firstMatch.staticTexts["SAVINGS"].exists)
 
         addTransferMethod.clickGenericBackButton()
     }
 
     func verifyIndividualAccountHolderSection() {
-        addTransferMethod.addTMTableView.scrollToElement(element: addTransferMethod.addTMTableView.otherElements["ACCOUNT HOLDER"])
+        addTransferMethod.addTMTableView.scroll(to: addTransferMethod.addTMTableView.otherElements["ACCOUNT HOLDER"])
 
         XCTAssert(addTransferMethod.addTMTableView.otherElements["ACCOUNT HOLDER"].exists )
 
@@ -291,11 +248,13 @@ private extension AddTransferMethodBankAccountIndividualTests {
         XCTAssert(addTransferMethod.inputDateOfBirth.exists)
 
         XCTAssertNotNil(app.tables.otherElements
-            .containing(NSPredicate(format: "label CONTAINS %@", "Note: we are not able to support adding an account for someone else.")))
+            .containing(NSPredicate(format: "label CONTAINS %@",
+                                    "Note: we are not able to support adding an account for someone else.")))
     }
 
     func verifyAddressSection() {
-        addTransferMethod.addTMTableView.scrollToElement(element: addTransferMethod.addTMTableView.staticTexts["Address"])
+        let title = addTransferMethod.addTMTableView.staticTexts["Transfer method information"]
+        addTransferMethod.addTMTableView.scroll(to: title)
 
         XCTAssert(addTransferMethod.addTMTableView.staticTexts["Address"].exists)
 
@@ -312,5 +271,26 @@ private extension AddTransferMethodBankAccountIndividualTests {
 
         XCTAssert(addTransferMethod.addTMTableView.staticTexts["Zip/Postal Code"].exists)
         XCTAssert(addTransferMethod.inputZip.exists)
+
+        func testAddTransferMethod_verifyNotEditableFields() {
+            addTransferMethod.clickBackButton()
+            app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).tap()
+            addTransferMethod.inputNameFirst.tap()
+
+            XCTAssertFalse(app.keyboards.element.exists)
+
+            addTransferMethod.inputNameLast.tap()
+
+            XCTAssertFalse(app.keyboards.element.exists)
+        }
+    }
+
+    func verifyPresetValue(for uiElement: XCUIElement, with text: String) {
+        guard let element = uiElement.value as? String else {
+            XCTFail("preset value is nill")
+            return
+        }
+
+        XCTAssertEqual(element, text)
     }
 }

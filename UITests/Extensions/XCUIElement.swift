@@ -1,7 +1,7 @@
 import XCTest
 
 extension XCUIElement {
-    func scrollToElement(element: XCUIElement) {
+    func scroll(to element: XCUIElement) {
         while !element.isVisible {
             swipeUp()
         }

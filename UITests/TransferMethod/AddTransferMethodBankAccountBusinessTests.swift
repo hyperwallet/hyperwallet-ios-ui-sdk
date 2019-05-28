@@ -21,11 +21,11 @@ class AddTransferMethodBankAccountBusinessTests: BaseBusinessTests {
         verifyBusinessAccountHolderSection()
         verifyAddressSection()
 
-        addTransferMethod.addTMTableView.scrollToElement(element: addTransferMethod.addTMTableView.otherElements["TRANSFER METHOD INFORMATION"])
+        addTransferMethod.addTMTableView.scroll(to: addTransferMethod.addTMTableView.otherElements["TRANSFER METHOD INFORMATION"])
 
         XCTAssert(addTransferMethod.addTMTableView.otherElements["TRANSFER METHOD INFORMATION"].exists)
 
-        addTransferMethod.addTMTableView.scrollToElement(element: addTransferMethod.createTransferMethodButton)
+        addTransferMethod.addTMTableView.scroll(to: addTransferMethod.createTransferMethodButton)
         XCTAssert(addTransferMethod.createTransferMethodButton.exists)
     }
 
@@ -49,8 +49,6 @@ class AddTransferMethodBankAccountBusinessTests: BaseBusinessTests {
         addTransferMethod.setCity("Bangor")
         addTransferMethod.setPostalCode("04401")
 
-        app.scrollToElement(element: addTransferMethod.createTransferMethodButton)
-
         addTransferMethod.clickCreateTransferMethodButton()
 
         waitForNonExistence(spinner)
@@ -70,8 +68,8 @@ private extension AddTransferMethodBankAccountBusinessTests {
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
 
-        selectTransferMethodType.selectCountry(country: "United States")
-        selectTransferMethodType.selectCurrency(currency: "US Dollar")
+        selectTransferMethodType.selectCountry(country: "UNITED STATES")
+        selectTransferMethodType.selectCurrency(currency: "USD")
 
         app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).tap()
     }
@@ -98,16 +96,16 @@ private extension AddTransferMethodBankAccountBusinessTests {
 
         XCTAssert(table.exists)
 
-        table.scrollToElement(element: table.staticTexts["Checking"])
+        table.scroll(to: table.staticTexts["CHECKING"])
 
-        XCTAssert(app.tables.firstMatch.staticTexts["Checking"].exists)
-        XCTAssert(app.tables.firstMatch.staticTexts["Savings"].exists)
+        XCTAssert(app.tables.firstMatch.staticTexts["CHECKING"].exists)
+        XCTAssert(app.tables.firstMatch.staticTexts["SAVING"].exists)
 
         addTransferMethod.clickGenericBackButton()
     }
 
     func verifyBusinessAccountHolderSection() {
-        addTransferMethod.addTMTableView.scrollToElement(element: addTransferMethod.addTMTableView.otherElements["ACCOUNT HOLDER"])
+        addTransferMethod.addTMTableView.scroll(to: addTransferMethod.addTMTableView.otherElements["ACCOUNT HOLDER"])
 
         XCTAssert(addTransferMethod.addTMTableView.otherElements["ACCOUNT HOLDER"].exists )
 
@@ -121,11 +119,12 @@ private extension AddTransferMethodBankAccountBusinessTests {
         XCTAssert(addTransferMethod.inputMobileNumber.exists)
 
         XCTAssertNotNil(app.tables.otherElements
-            .containing(NSPredicate(format: "label CONTAINS %@", "Note: we are not able to support adding an account for someone else.")))
+            .containing(NSPredicate(format: "label CONTAINS %@",
+                                    "Note: we are not able to support adding an account for someone else.")))
     }
 
     func verifyAddressSection() {
-        addTransferMethod.addTMTableView.scrollToElement(element: addTransferMethod.addTMTableView.staticTexts["Address"])
+        addTransferMethod.addTMTableView.scroll(to: addTransferMethod.addTMTableView.staticTexts["Address"])
 
         XCTAssert(addTransferMethod.addTMTableView.staticTexts["Address"].exists)
 

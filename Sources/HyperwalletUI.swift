@@ -66,13 +66,14 @@ public final class HyperwalletUI {
     ///   - country: The 2 letter ISO 3166-1 country code.
     ///   - currency: The 3 letter ISO 4217-1 currency code.
     ///   - profileType: The profile type. Possible values - INDIVIDUAL, BUSINESS.
-    ///   - transferMethodType: The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD.
+    ///   - transferMethodTypeCode: The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD.
     /// - Returns: An instance of `AddTransferMethodViewController`
-    public func addTransferMethodViewController(_ country: String,
-                                                _ currency: String,
-                                                _ profileType: String,
-                                                _ transferMethodType: String) -> AddTransferMethodViewController {
-        return AddTransferMethodViewController(country, currency, profileType, transferMethodType)
+    public func addTransferMethodViewController(
+        _ country: String,
+        _ currency: String,
+        _ profileType: String,
+        _ transferMethodTypeCode: String) -> AddTransferMethodViewController {
+        return AddTransferMethodViewController(country, currency, profileType, transferMethodTypeCode)
     }
 
     private init(_ provider: HyperwalletAuthenticationTokenProvider) {
