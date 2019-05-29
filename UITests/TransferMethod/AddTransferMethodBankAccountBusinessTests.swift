@@ -38,7 +38,7 @@ class AddTransferMethodBankAccountBusinessTests: BaseBusinessTests {
 
         addTransferMethod.setBranchId("021000021")
         addTransferMethod.setAccountNumber("7861012347")
-        addTransferMethod.selectAccountType("Checking")
+        addTransferMethod.selectAccountType("CHECKING")
         addTransferMethod.selectRelationship("Own company")
         addTransferMethod.setNameBusiness("Smith & Co")
         addTransferMethod.setPhoneNumber("+16045555555")
@@ -99,7 +99,7 @@ private extension AddTransferMethodBankAccountBusinessTests {
         table.scroll(to: table.staticTexts["CHECKING"])
 
         XCTAssert(app.tables.firstMatch.staticTexts["CHECKING"].exists)
-        XCTAssert(app.tables.firstMatch.staticTexts["SAVING"].exists)
+        XCTAssert(app.tables.firstMatch.staticTexts["SAVINGS"].exists)
 
         addTransferMethod.clickGenericBackButton()
     }
