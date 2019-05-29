@@ -1,0 +1,179 @@
+{
+    "count": 11,
+    "offset": 0,
+    "limit": 10,
+    "data": [
+        {
+            "journalId": "55047035",
+            "type": "PAYMENT",
+            "createdOn": "2019-05-24T17:35:20",
+            "entry": "CREDIT",
+            "sourceToken": "act-68adaba2-42f4-4f0f-8670-81c09f319a12",
+            "destinationToken": "usr-c5b9ea29-2f6a-4699-b731-76f5af0820e9",
+            "amount": "5.00",
+            "fee": "0.00",
+            "currency": "USD",
+            "details": {
+                "clientPaymentId": "DyClk0VG",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55047040",
+            "type": "PAYMENT",
+            "createdOn": "2019-05-24T17:39:19",
+            "entry": "CREDIT",
+            "sourceToken": "act-68adaba2-42f4-4f0f-8670-81c09f319a12",
+            "destinationToken": "usr-c5b9ea29-2f6a-4699-b731-76f5af0820e9",
+            "amount": "6.00",
+            "fee": "0.00",
+            "currency": "USD",
+            "details": {
+                "clientPaymentId": "DyClk0VGa",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55047041",
+            "type": "TRANSFER_TO_BANK_ACCOUNT",
+            "createdOn": "2019-05-24T17:46:28",
+            "entry": "DEBIT",
+            "sourceToken": "usr-c5b9ea29-2f6a-4699-b731-76f5af0820e9",
+            "destinationToken": "trm-0afed1c8-1f7c-4fe4-b620-7d1aab4e57bf",
+            "amount": "5.00",
+            "fee": "2.00",
+            "currency": "USD",
+            "details": {
+                "payeeName": "Shaoyun Yang",
+                "branchId": "026009593",
+                "bankAccountId": "*****5209",
+                "bankAccountPurpose": "CHECKING"
+            }
+        },
+        {
+            "journalId": "55176986",
+            "type": "PAYMENT",
+            "createdOn": "2019-05-28T18:16:04",
+            "entry": "CREDIT",
+            "sourceToken": "act-68adaba2-42f4-4f0f-8670-81c09f319a12",
+            "destinationToken": "usr-c5b9ea29-2f6a-4699-b731-76f5af0820e9",
+            "amount": "6.00",
+            "fee": "0.00",
+            "currency": "USD",
+            "details": {
+                "clientPaymentId": "DyClk0VG2a",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55176987",
+            "type": "PAYMENT",
+            "createdOn": "2019-05-28T18:16:08",
+            "entry": "CREDIT",
+            "sourceToken": "act-68adaba2-42f4-4f0f-8670-81c09f319a12",
+            "destinationToken": "usr-c5b9ea29-2f6a-4699-b731-76f5af0820e9",
+            "amount": "6.00",
+            "fee": "0.00",
+            "currency": "USD",
+            "details": {
+                "clientPaymentId": "DyClk0VG3a",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55176988",
+            "type": "PAYMENT",
+            "createdOn": "2019-05-28T18:16:10",
+            "entry": "CREDIT",
+            "sourceToken": "act-68adaba2-42f4-4f0f-8670-81c09f319a12",
+            "destinationToken": "usr-c5b9ea29-2f6a-4699-b731-76f5af0820e9",
+            "amount": "6.00",
+            "fee": "0.00",
+            "currency": "USD",
+            "details": {
+                "clientPaymentId": "DyClk0VG4a",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55176989",
+            "type": "PAYMENT",
+            "createdOn": "2019-05-28T18:16:12",
+            "entry": "CREDIT",
+            "sourceToken": "act-68adaba2-42f4-4f0f-8670-81c09f319a12",
+            "destinationToken": "usr-c5b9ea29-2f6a-4699-b731-76f5af0820e9",
+            "amount": "6.00",
+            "fee": "0.00",
+            "currency": "USD",
+            "details": {
+                "clientPaymentId": "DyClk0VG5a",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55176990",
+            "type": "PAYMENT",
+            "createdOn": "2019-05-28T18:16:14",
+            "entry": "CREDIT",
+            "sourceToken": "act-68adaba2-42f4-4f0f-8670-81c09f319a12",
+            "destinationToken": "usr-c5b9ea29-2f6a-4699-b731-76f5af0820e9",
+            "amount": "6.00",
+            "fee": "0.00",
+            "currency": "USD",
+            "details": {
+                "clientPaymentId": "DyClk0VG6a",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55176991",
+            "type": "PAYMENT",
+            "createdOn": "2019-05-28T18:16:17",
+            "entry": "CREDIT",
+            "sourceToken": "act-68adaba2-42f4-4f0f-8670-81c09f319a12",
+            "destinationToken": "usr-c5b9ea29-2f6a-4699-b731-76f5af0820e9",
+            "amount": "6.00",
+            "fee": "0.00",
+            "currency": "USD",
+            "details": {
+                "clientPaymentId": "DyClk0VG7a",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55176992",
+            "type": "PAYMENT",
+            "createdOn": "2019-05-28T18:16:19",
+            "entry": "CREDIT",
+            "sourceToken": "act-68adaba2-42f4-4f0f-8670-81c09f319a12",
+            "destinationToken": "usr-c5b9ea29-2f6a-4699-b731-76f5af0820e9",
+            "amount": "6.00",
+            "fee": "0.00",
+            "currency": "USD",
+            "details": {
+                "clientPaymentId": "DyClk0VG9a",
+                "payeeName": "Shaoyun Yang"
+            }
+        }
+    ],
+    "links": [
+        {
+            "params": {
+                "rel": "self"
+            },
+            "href": "https://qamaster-hyperwallet.aws.paylution.net/rest/v3/users/usr-c5b9ea29-2f6a-4699-b731-76f5af0820e9/receipts?offset=0&limit=10"
+        },
+        {
+            "params": {
+                "rel": "next"
+            },
+            "href": "https://qamaster-hyperwallet.aws.paylution.net/rest/v3/users/usr-c5b9ea29-2f6a-4699-b731-76f5af0820e9/receipts?offset=10&limit=10"
+        },
+        {
+            "params": {
+                "rel": "last"
+            },
+            "href": "https://qamaster-hyperwallet.aws.paylution.net/rest/v3/users/usr-c5b9ea29-2f6a-4699-b731-76f5af0820e9/receipts?offset=1&limit=10"
+        }
+    ]
+}

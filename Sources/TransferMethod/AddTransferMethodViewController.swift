@@ -50,7 +50,7 @@ public final class AddTransferMethodViewController: UITableViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(
-            greaterThanOrEqualToConstant: Theme.Cell.rowHeight).isActive = true
+            greaterThanOrEqualToConstant: Theme.Cell.smallHeight).isActive = true
 
         button.accessibilityLabel = "create_account_label".localized()
         button.accessibilityIdentifier = "createAccount"
@@ -127,7 +127,7 @@ public final class AddTransferMethodViewController: UITableViewController {
         tableView = UITableView(frame: view.frame, style: .grouped)
         tableView.allowsSelection = false
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = Theme.Cell.rowHeight
+        tableView.estimatedRowHeight = Theme.Cell.smallHeight
         tableView.accessibilityIdentifier = "addTransferMethodTable"
         tableView.register(
             AddTransferMethodTableViewCell.self,

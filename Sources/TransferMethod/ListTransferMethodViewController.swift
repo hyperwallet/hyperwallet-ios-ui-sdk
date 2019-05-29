@@ -100,7 +100,7 @@ public final class ListTransferMethodViewController: UITableViewController {
     }
 
     override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return Theme.Cell.height
+        return Theme.Cell.largeHeight
     }
 
     private func addTransferMethod() {

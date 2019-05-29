@@ -21,7 +21,7 @@ import HyperwalletSDK
 
 struct ListReceiptSectionData: Comparable {
     var sectionItem: Date
-    var rowItems = [HyperwalletTransferMethod]()
+    var rowItems = [HyperwalletReceipt]()
 
     static func < (lhs: ListReceiptSectionData, rhs: ListReceiptSectionData) -> Bool {
         return rhs.sectionItem < lhs.sectionItem
@@ -31,7 +31,7 @@ struct ListReceiptSectionData: Comparable {
         return rhs.sectionItem == lhs.sectionItem
     }
 
-    static func group(rowItems: [HyperwalletTransferMethod], by criteria: (HyperwalletTransferMethod) -> Date )
+    static func group(rowItems: [HyperwalletReceipt], by criteria: (HyperwalletReceipt) -> Date )
         -> [ListReceiptSectionData] {
             let groups = Dictionary(grouping: rowItems, by: criteria)
             return groups.map(ListReceiptSectionData.init(sectionItem:rowItems:)).sorted()

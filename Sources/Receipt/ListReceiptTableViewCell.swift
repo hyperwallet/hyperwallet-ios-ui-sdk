@@ -21,6 +21,7 @@ import UIKit
 struct ListReceiptCellConfiguration {
     let type: String
     let entry: String
+    let amount: String
     let currency: String
     let createdOn: Date
     let iconFont: String
@@ -31,7 +32,7 @@ final class ListReceiptTableViewCell: UITableViewCell {
     var iconBackgroundColor: UIColor!
     // MARK: Life cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+        super.init(style: .value1, reuseIdentifier: reuseIdentifier)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -64,13 +65,19 @@ final class ListReceiptTableViewCell: UITableViewCell {
 extension ListReceiptTableViewCell {
     func configure(configuration: ListReceiptCellConfiguration?) {
         if let configuration = configuration {
-            textLabel?.text = configuration.type
-            detailTextLabel?.attributedText = formatSubtitle(currency: configuration.currency,
-                                                             createdOn: configuration.createdOn)
+            textLabel?.attributedText = formatTextLabel(type: configuration.type,
+                                                        createdOn: configuration.createdOn)
+            detailTextLabel?.attributedText = formatDetailTextLabel(amount: configuration.amount,
+                                                                    currency: configuration.currency,
+                                                                    entry: configuration.entry)
+            textLabel?.numberOfLines = 0
+            textLabel?.lineBreakMode = .byWordWrapping
             detailTextLabel?.numberOfLines = 0
             detailTextLabel?.lineBreakMode = .byWordWrapping
+
             iconColor = configuration.entry == "CREDIT" ? Theme.Icon.secondaryColor : Theme.Icon.thirdColor
-            iconBackgroundColor = configuration.entry == "CREDIT" ? Theme.Icon.secondaryBackgroundColor : Theme.Icon.thirdBackgroundColor
+            iconBackgroundColor = configuration.entry == "CREDIT" ? Theme.Icon.secondaryBackgroundColor
+                : Theme.Icon.thirdBackgroundColor
 
             let icon = UIImage.fontIcon(configuration.iconFont,
                                         Theme.Icon.frame,
@@ -91,14 +98,29 @@ extension ListReceiptTableViewCell {
         imageView?.backgroundColor = iconBackgroundColor
     }
 
-    private func formatSubtitle(currency: String, createdOn: Date) -> NSAttributedString {
+    private func formatTextLabel(type: String, createdOn: Date) -> NSAttributedString {
         let attributedText = NSMutableAttributedString()
-        let font = Theme.Label.captionOne
-        let color = Theme.Label.subTitleColor
-        attributedText.append(value: String(format: "%@\n", currency), font: font, color: color)
+
+        attributedText.append(value: String(format: "%@\n", type), font: titleLabelFont, color: titleLabelColor)
         attributedText.append(value: createdOn.formatDateToString(timeStyle: DateFormatter.Style.none),
-                              font: font,
-                              color: color)
+                              font: Theme.Label.captionOne,
+                              color: Theme.Label.subTitleColor)
+        return attributedText
+    }
+
+    private func formatDetailTextLabel(amount: String, currency: String, entry: String) -> NSAttributedString {
+        let attributedText = NSMutableAttributedString()
+        if entry == "CREDIT" {
+          attributedText.append(value: String(format: "+%@\n", amount),
+                                font: titleLabelFont,
+                                color: Theme.Number.positiveColor)
+        } else {
+            attributedText.append(value: String(format: "-%@\n", amount),
+                                  font: titleLabelFont,
+                                  color: Theme.Number.negativeColor)
+        }
+
+        attributedText.append(value: currency, font: Theme.Label.captionOne, color: Theme.Label.subTitleColor )
         return attributedText
     }
 }

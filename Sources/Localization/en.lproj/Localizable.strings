@@ -82,6 +82,11 @@
 "CHECKING" = "Checking";
 "SAVINGS" = "Savings";
 
+// Receipt
+"title_receipts" = "Transactions";
+"transfer_to_bank_account" = "Transfer to Bank Account";
+"payment" = "Payment";
+
 // Processing View
 "processing_view_label" = "Processing";
 "complete_view_label" = "Complete";

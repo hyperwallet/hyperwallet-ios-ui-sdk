@@ -88,11 +88,13 @@ public struct Theme {
 
    /// Representation of all customizable visual style property for `UITableViewViewCell`
     public struct Cell {
+        /// The common `UITableViewViewCell` height.
+        public static let smallHeight = CGFloat(44)
+        /// The `UITableViewViewCell` height for the receipt items
+        public static let mediumHeight = CGFloat(63)
         /// The `UITableViewViewCell` height for the List transfer method items and
         /// the Select transfer method type items.
-        public static let height = CGFloat(88)
-        /// The common `UITableViewViewCell` height.
-        public static let rowHeight = CGFloat(44)
+        public static let largeHeight = CGFloat(88)
         /// The Select transfer method type items header height.
         public static let headerHeight = CGFloat(16)
     }
@@ -108,13 +110,18 @@ public struct Theme {
         /// The icon primary background color
         public static var primaryBackgroundColor = UIColor(rgb: 0xE5F7FA)
         /// The icon secondary color
-        public static var secondaryColor = UIColor(rgb: 0x5FBF00)
+        public static var secondaryColor = Number.positiveColor
         /// The icon secondary background color
         public static var secondaryBackgroundColor = UIColor(rgb: 0xF1FAE8)
         /// The icon third color
-        public static var thirdColor = UIColor(rgb: 0xDB4437)
+        public static var thirdColor = Number.negativeColor
         /// The icon third background color
         public static var thirdBackgroundColor = UIColor(rgb: 0xFEF7F7)
+    }
+
+    public struct Number {
+        public static var positiveColor = UIColor(rgb: 0x5FBF00)
+        public static var negativeColor = UIColor(rgb: 0xDB4437)
     }
 
     /// Representation of all customizable visual style property for `UIViewController`.

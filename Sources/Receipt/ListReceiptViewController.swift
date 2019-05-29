@@ -29,7 +29,7 @@ public final class ListReceiptViewController: UITableViewController {
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        title = "title_accounts".localized()
+        title = "title_receipts".localized()
         largeTitle()
         setViewBackgroundColor()
 
@@ -46,7 +46,7 @@ public final class ListReceiptViewController: UITableViewController {
 //        print("numberOfRowsInSection: \(section.rowItems.count) in section: \(section.sectionItem)")
 //        return section.rowItems.count
 
-        return Array(presenter.sectionData)[section].value.count
+        return presenter.sectionArray[section].value.count
     }
 
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -63,15 +63,24 @@ public final class ListReceiptViewController: UITableViewController {
         return cell
     }
 
+    override public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let lastSectionIndex = presenter.sectionArray.count - 1
+        if indexPath.section == lastSectionIndex
+            && indexPath.row == presenter.sectionArray[lastSectionIndex].value.count - 1
+            && presenter.loadMore {
+            presenter.listTransactionReceipt()
+        }
+    }
+
     override public func numberOfSections(in tableView: UITableView) -> Int {
-        return presenter.sectionData.count
+        return presenter.sectionArray.count
     }
 
     override public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 //        let section = presenter.sections[section]
 //        let date = section.sectionItem
 
-        let date = Array(presenter.sectionData)[section].key
+        let date = presenter.sectionArray[section].key
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMMM yyyy"
@@ -83,7 +92,7 @@ public final class ListReceiptViewController: UITableViewController {
     }
 
     override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return Theme.Cell.height
+        return Theme.Cell.mediumHeight
     }
 
     private func setupTransactionTableView() {
@@ -114,16 +123,5 @@ extension ListReceiptViewController: ListReceiptView {
     func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
         let errorView = ErrorView(viewController: self, error: error)
         errorView.show(retry)
-    }
-}
-
-extension ListReceiptViewController {
-    override public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let height = scrollView.frame.size.height
-        let contentYoffset = scrollView.contentOffset.y
-        let distanceFromBottom = scrollView.contentSize.height - contentYoffset
-        if distanceFromBottom < height {
-            presenter.listTransactionReceipt()
-        }
     }
 }

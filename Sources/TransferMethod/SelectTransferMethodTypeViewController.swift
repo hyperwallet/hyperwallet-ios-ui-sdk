@@ -97,7 +97,7 @@ extension SelectTransferMethodTypeViewController {
     }
 
     override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return Theme.Cell.rowHeight * CGFloat(presenter.countryCurrencyCount) + Theme.Cell.headerHeight
+        return Theme.Cell.smallHeight * CGFloat(presenter.countryCurrencyCount) + Theme.Cell.headerHeight
     }
 
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -106,7 +106,7 @@ extension SelectTransferMethodTypeViewController {
     }
 
     override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return Theme.Cell.height
+        return Theme.Cell.largeHeight
     }
 }
 
@@ -206,7 +206,7 @@ extension CountryCurrencyTableView: UITableViewDataSource {
 
 extension CountryCurrencyTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return Theme.Cell.rowHeight
+        return Theme.Cell.smallHeight
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
