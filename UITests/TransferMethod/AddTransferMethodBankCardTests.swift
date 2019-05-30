@@ -1,11 +1,12 @@
 import XCTest
 
-class AddTransferMethodBankCardTests: BaseIndividualTests {
+class AddTransferMethodBankCardTests: BaseTests {
     var selectTransferMethodType: SelectTransferMethodType!
     var addTransferMethod: AddTransferMethod!
     let debitCard = NSPredicate(format: "label CONTAINS[c] 'Debit Card'")
 
     override func setUp() {
+        profileType = .individual
         super.setUp()
         setUpAddTransferMethodBankCardScreen()
     }
@@ -117,12 +118,12 @@ class AddTransferMethodBankCardTests: BaseIndividualTests {
 
         verifyAccountInformationSection()
 
-        let infoSection = addTransferMethod.addTMTableView.otherElements["TRANSFER METHOD INFORMATION"]
+        let infoSection = addTransferMethod.addTransferMethodTableView.otherElements["TRANSFER METHOD INFORMATION"]
 
-        addTransferMethod.addTMTableView.scroll(to: infoSection)
+        addTransferMethod.addTransferMethodTableView.scroll(to: infoSection)
         XCTAssert(infoSection.exists)
 
-        addTransferMethod.addTMTableView.scroll(to: addTransferMethod.createTransferMethodButton)
+        addTransferMethod.addTransferMethodTableView.scroll(to: addTransferMethod.createTransferMethodButton)
         XCTAssert(addTransferMethod.createTransferMethodButton.exists)
     }
 
@@ -131,12 +132,12 @@ class AddTransferMethodBankCardTests: BaseIndividualTests {
 
         verifyAccountInformationSection()
 
-        let infoSection = addTransferMethod.addTMTableView.otherElements["TRANSFER METHOD INFORMATION"]
+        let infoSection = addTransferMethod.addTransferMethodTableView.otherElements["TRANSFER METHOD INFORMATION"]
 
-        addTransferMethod.addTMTableView.scroll(to: infoSection)
+        addTransferMethod.addTransferMethodTableView.scroll(to: infoSection)
         XCTAssert(infoSection.exists)
 
-        addTransferMethod.addTMTableView.scroll(to: addTransferMethod.createTransferMethodButton)
+        addTransferMethod.addTransferMethodTableView.scroll(to: addTransferMethod.createTransferMethodButton)
         XCTAssert(addTransferMethod.createTransferMethodButton.exists)
     }
 }
@@ -149,8 +150,8 @@ private extension AddTransferMethodBankCardTests {
         app.tables.cells.containing(.staticText, identifier: "Add Transfer Method").element(boundBy: 0).tap()
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
-        selectTransferMethodType.selectCountry(country: "UNITED STATES")
-        selectTransferMethodType.selectCurrency(currency: "USD")
+        selectTransferMethodType.selectCountry(country: "United States")
+        selectTransferMethodType.selectCurrency(currency: "United States Dollar")
 
         app.tables["transferMethodTableView"].staticTexts.element(matching: debitCard).tap()
         waitForNonExistence(spinner)
@@ -159,13 +160,13 @@ private extension AddTransferMethodBankCardTests {
     func verifyAccountInformationSection() {
         XCTAssert(addTransferMethod.title.exists)
 
-        XCTAssert(addTransferMethod.addTMTableView.cells.staticTexts["Card Number"].exists)
+        XCTAssert(addTransferMethod.addTransferMethodTableView.cells.staticTexts["Card Number"].exists)
         XCTAssert(addTransferMethod.cardNumberInput.exists)
 
-        XCTAssert(addTransferMethod.addTMTableView.staticTexts["Expiry Date"].exists)
+        XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["Expiry Date"].exists)
         XCTAssert(addTransferMethod.dateOfExpiryInput.exists)
 
-        XCTAssert(addTransferMethod.addTMTableView.staticTexts["CVV (Card Security Code)"].exists)
+        XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["CVV (Card Security Code)"].exists)
         XCTAssert(addTransferMethod.cvvInput.exists)
     }
 }

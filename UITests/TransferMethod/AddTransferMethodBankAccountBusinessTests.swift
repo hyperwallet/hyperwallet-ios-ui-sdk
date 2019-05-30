@@ -1,12 +1,13 @@
 import XCTest
 
-class AddTransferMethodBankAccountBusinessTests: BaseBusinessTests {
+class AddTransferMethodBankAccountBusinessTests: BaseTests {
     var selectTransferMethodType: SelectTransferMethodType!
     var addTransferMethod: AddTransferMethod!
 
     let bankAccount = NSPredicate(format: "label CONTAINS[c] 'Bank Account'")
 
     override func setUp() {
+        profileType = .business
         super.setUp()
 
         setUpBankAccountScreen()
@@ -21,11 +22,11 @@ class AddTransferMethodBankAccountBusinessTests: BaseBusinessTests {
         verifyBusinessAccountHolderSection()
         verifyAddressSection()
 
-        addTransferMethod.addTMTableView.scroll(to: addTransferMethod.addTMTableView.otherElements["TRANSFER METHOD INFORMATION"])
+        addTransferMethod.addTransferMethodTableView.scroll(to: addTransferMethod.addTransferMethodTableView.otherElements["TRANSFER METHOD INFORMATION"])
 
-        XCTAssert(addTransferMethod.addTMTableView.otherElements["TRANSFER METHOD INFORMATION"].exists)
+        XCTAssert(addTransferMethod.addTransferMethodTableView.otherElements["TRANSFER METHOD INFORMATION"].exists)
 
-        addTransferMethod.addTMTableView.scroll(to: addTransferMethod.createTransferMethodButton)
+        addTransferMethod.addTransferMethodTableView.scroll(to: addTransferMethod.createTransferMethodButton)
         XCTAssert(addTransferMethod.createTransferMethodButton.exists)
     }
 
@@ -59,7 +60,7 @@ class AddTransferMethodBankAccountBusinessTests: BaseBusinessTests {
 
 private extension AddTransferMethodBankAccountBusinessTests {
     func setUpBankAccountScreen() {
-        mockServer.setupGraphQLBusinessStubs()
+        mockServer.setupGraphQLStubs(for: profileType)
 
         selectTransferMethodType = SelectTransferMethodType(app: app)
         addTransferMethod = AddTransferMethod(app: app, for: .bankAccount)
@@ -75,11 +76,11 @@ private extension AddTransferMethodBankAccountBusinessTests {
     }
 
     func verifyAccountInformationSection() {
-        XCTAssert(addTransferMethod.addTMTableView.otherElements["ACCOUNT INFORMATION - UNITED STATES (USD)"].exists)
-        XCTAssert(addTransferMethod.addTMTableView.cells.staticTexts["Routing Number"].exists)
+        XCTAssert(addTransferMethod.addTransferMethodTableView.otherElements["ACCOUNT INFORMATION - UNITED STATES (USD)"].exists)
+        XCTAssert(addTransferMethod.addTransferMethodTableView.cells.staticTexts["Routing Number"].exists)
         XCTAssert(addTransferMethod.branchIdInput.exists)
 
-        XCTAssert(addTransferMethod.addTMTableView.staticTexts["Account Number"].exists)
+        XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["Account Number"].exists)
         XCTAssert(addTransferMethod.accountNumberInput.exists)
 
         verifyAccountTypeSelection()
@@ -105,18 +106,18 @@ private extension AddTransferMethodBankAccountBusinessTests {
     }
 
     func verifyBusinessAccountHolderSection() {
-        addTransferMethod.addTMTableView.scroll(to: addTransferMethod.addTMTableView.otherElements["ACCOUNT HOLDER"])
+        addTransferMethod.addTransferMethodTableView.scroll(to: addTransferMethod.addTransferMethodTableView.otherElements["ACCOUNT HOLDER"])
 
-        XCTAssert(addTransferMethod.addTMTableView.otherElements["ACCOUNT HOLDER"].exists )
+        XCTAssert(addTransferMethod.addTransferMethodTableView.otherElements["ACCOUNT HOLDER"].exists )
 
-        XCTAssert(addTransferMethod.addTMTableView.staticTexts["Business Name"].exists)
-        XCTAssert(addTransferMethod.inputNameBusiness.exists)
+        XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["Business Name"].exists)
+        XCTAssert(addTransferMethod.businessNameInput.exists)
 
-        XCTAssert(addTransferMethod.addTMTableView.staticTexts["Phone Number"].exists)
-        XCTAssert(addTransferMethod.inputPhoneNumber.exists)
+        XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["Phone Number"].exists)
+        XCTAssert(addTransferMethod.phoneNumberInput.exists)
 
-        XCTAssert(addTransferMethod.addTMTableView.staticTexts["Mobile Number"].exists)
-        XCTAssert(addTransferMethod.inputMobileNumber.exists)
+        XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["Mobile Number"].exists)
+        XCTAssert(addTransferMethod.mobileNumberInput.exists)
 
         XCTAssertNotNil(app.tables.otherElements
             .containing(NSPredicate(format: "label CONTAINS %@",
@@ -124,22 +125,22 @@ private extension AddTransferMethodBankAccountBusinessTests {
     }
 
     func verifyAddressSection() {
-        addTransferMethod.addTMTableView.scroll(to: addTransferMethod.addTMTableView.staticTexts["Address"])
+        addTransferMethod.addTransferMethodTableView.scroll(to: addTransferMethod.addTransferMethodTableView.staticTexts["Address"])
 
-        XCTAssert(addTransferMethod.addTMTableView.staticTexts["Address"].exists)
+        XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["Address"].exists)
 
         XCTAssert(addTransferMethod.selectCountry.exists)
 
-        XCTAssert(addTransferMethod.addTMTableView.staticTexts["State/Province"].exists)
-        XCTAssert(addTransferMethod.inputStateProvince.exists)
+        XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["State/Province"].exists)
+        XCTAssert(addTransferMethod.stateProvinceInput.exists)
 
-        XCTAssert(addTransferMethod.addTMTableView.staticTexts["Street"].exists)
-        XCTAssert(addTransferMethod.inputStreet.exists)
+        XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["Street"].exists)
+        XCTAssert(addTransferMethod.streetInput.exists)
 
-        XCTAssert(addTransferMethod.addTMTableView.staticTexts["City"].exists)
-        XCTAssert(addTransferMethod.inputCity.exists)
+        XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["City"].exists)
+        XCTAssert(addTransferMethod.cityInput.exists)
 
-        XCTAssert(addTransferMethod.addTMTableView.staticTexts["Zip/Postal Code"].exists)
-        XCTAssert(addTransferMethod.inputZip.exists)
+        XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["Zip/Postal Code"].exists)
+        XCTAssert(addTransferMethod.zipInput.exists)
     }
 }

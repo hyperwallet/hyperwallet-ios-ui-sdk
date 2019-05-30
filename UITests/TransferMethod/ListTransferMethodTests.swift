@@ -1,6 +1,6 @@
 import XCTest
 
-class ListTransferMethodTests: BaseIndividualTests {
+class ListTransferMethodTests: BaseTests {
     var listTransferMethod: ListTransferMethod!
     var selectTransferMethodType: SelectTransferMethodType!
     var addTransferMethod: AddTransferMethod!
@@ -71,6 +71,7 @@ class ListTransferMethodTests: BaseIndividualTests {
     }
 
     override func setUp() {
+        profileType = .individual
         super.setUp()
 
         listTransferMethod = ListTransferMethod(app: app)

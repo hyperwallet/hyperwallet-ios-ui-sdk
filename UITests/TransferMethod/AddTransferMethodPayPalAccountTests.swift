@@ -1,11 +1,12 @@
 import XCTest
 
-class AddTransferMethodPayPalAccountTests: BaseIndividualTests {
+class AddTransferMethodPayPalAccountTests: BaseTests {
     var selectTransferMethodType: SelectTransferMethodType!
     var addTransferMethod: AddTransferMethod!
     let payPalAccount = NSPredicate(format: "label CONTAINS[c] 'PayPal'")
 
     override func setUp() {
+        profileType = .individual
         super.setUp()
         setUpAddTransferMethodPayPalAccountScreen()
     }
@@ -21,8 +22,8 @@ class AddTransferMethodPayPalAccountTests: BaseIndividualTests {
         app.tables.cells.containing(.staticText, identifier: "Add Transfer Method").element(boundBy: 0).tap()
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
-        selectTransferMethodType.selectCountry(country: "UNITED STATES")
-        selectTransferMethodType.selectCurrency(currency: "USD")
+        selectTransferMethodType.selectCountry(country: "United States")
+        selectTransferMethodType.selectCurrency(currency: "United States Dollar")
 
         app.tables["transferMethodTableView"].staticTexts.element(matching: payPalAccount).tap()
         waitForNonExistence(spinner)

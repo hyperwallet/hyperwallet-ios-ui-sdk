@@ -1,10 +1,11 @@
 import XCTest
 
-class SelectTransferMethodCountryTypeTests: BaseIndividualTests {
+class SelectTransferMethodCountryTypeTests: BaseTests {
     var selectTransferMethodType: SelectTransferMethodType!
     var selectTransferMethodCountryType: SelectTransferMethodCountryType!
 
     override func setUp() {
+        profileType = .individual
         super.setUp()
         setUpSelectTransferMethodCountryTypeScreen()
         validateSelectionWidgetScreen()
@@ -26,9 +27,9 @@ class SelectTransferMethodCountryTypeTests: BaseIndividualTests {
 
     private func validateSelectionWidgetScreen() {
         XCTAssertTrue(app.navigationBars["Select Country"].exists)
-        XCTAssertTrue(app.tables.staticTexts["UNITED STATES"].exists)
-        XCTAssertTrue(app.tables.staticTexts["CANADA"].exists)
-        XCTAssertEqual(app.tables.cells.count, 3)
+        XCTAssertTrue(app.tables.staticTexts["United States"].exists)
+        XCTAssertTrue(app.tables.staticTexts["Canada"].exists)
+        XCTAssertEqual(app.tables.cells.count, 5)
         XCTAssertTrue(selectTransferMethodCountryType.countryTable.exists)
     }
 

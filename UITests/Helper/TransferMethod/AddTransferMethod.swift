@@ -11,7 +11,7 @@ class AddTransferMethod {
 
     var app: XCUIApplication
 
-    var addTMTableView: XCUIElement
+    var addTransferMethodTableView: XCUIElement
     var branchIdInput: XCUIElement
     var accountNumberInput: XCUIElement
     var accountTypeSelect: XCUIElement
@@ -24,48 +24,48 @@ class AddTransferMethod {
     var navigationBar: XCUIElement
 
     var selectRelationshipType: XCUIElement
-    var inputNameFirst: XCUIElement
-    var inputNameLast: XCUIElement
-    var inputNameMiddle: XCUIElement
-    var inputPhoneNumber: XCUIElement
-    var inputMobileNumber: XCUIElement
-    var inputDateOfBirth: XCUIElement
+    var firstNameInput: XCUIElement
+    var lastNameInput: XCUIElement
+    var middleNameInput: XCUIElement
+    var phoneNumberInput: XCUIElement
+    var mobileNumberInput: XCUIElement
+    var dateOfBirthInput: XCUIElement
     var selectCountry: XCUIElement
-    var inputStateProvince: XCUIElement
-    var inputStreet: XCUIElement
-    var inputCity: XCUIElement
-    var inputZip: XCUIElement
-    var inputNameBusiness: XCUIElement
+    var stateProvinceInput: XCUIElement
+    var streetInput: XCUIElement
+    var cityInput: XCUIElement
+    var zipInput: XCUIElement
+    var businessNameInput: XCUIElement
 
     init(app: XCUIApplication, for accountType: AccountType) {
         self.app = app
 
-        addTMTableView = app.tables["addTransferMethodTable"]
-        branchIdInput = addTMTableView.textFields["branchId"]
-        accountNumberInput = addTMTableView.textFields["bankAccountId"]
-        accountTypeSelect = addTMTableView.cells.staticTexts["Account Type"]
-        createTransferMethodButton = addTMTableView.cells.containing(.button,
+        addTransferMethodTableView = app.tables["addTransferMethodTable"]
+        branchIdInput = addTransferMethodTableView.textFields["branchId"]
+        accountNumberInput = addTransferMethodTableView.textFields["bankAccountId"]
+        accountTypeSelect = addTransferMethodTableView.cells.staticTexts["Account Type"]
+        createTransferMethodButton = addTransferMethodTableView.cells.containing(.button,
                                                                      identifier: "createAccountBtn")
             .buttons["createAccountBtn"]
-        cardNumberInput = addTMTableView.textFields["cardNumber"]
-        dateOfExpiryInput = addTMTableView.textFields["dateOfExpiry"]
-        cvvInput = addTMTableView.textFields["cvv"]
-        emailInput = addTMTableView.textFields["email"]
-        title = addTMTableView.staticTexts["Account Information - United States (USD)"]
+        cardNumberInput = addTransferMethodTableView.textFields["cardNumber"]
+        dateOfExpiryInput = addTransferMethodTableView.textFields["dateOfExpiry"]
+        cvvInput = addTransferMethodTableView.textFields["cvv"]
+        emailInput = addTransferMethodTableView.textFields["email"]
+        title = addTransferMethodTableView.staticTexts["Account Information - United States (USD)"]
         navigationBar = app.navigationBars[accountType.rawValue]
-        selectRelationshipType = addTMTableView.cells.staticTexts["Relationship"]
-        inputNameFirst = addTMTableView.textFields["firstName"]
-        inputNameLast = addTMTableView.textFields["lastName"]
-        inputNameMiddle = addTMTableView.textFields["middleName"]
-        inputPhoneNumber = addTMTableView.textFields["phoneNumber"]
-        inputMobileNumber = addTMTableView.textFields["mobileNumber"]
-        inputDateOfBirth = addTMTableView.textFields["dateOfBirth"]
-        selectCountry = addTMTableView.cells.staticTexts["Country"]
-        inputStateProvince = addTMTableView.textFields["stateProvince"]
-        inputStreet = addTMTableView.textFields["addressLine1"]
-        inputCity = addTMTableView.textFields["city"]
-        inputZip = addTMTableView.textFields["postalCode"]
-        inputNameBusiness = addTMTableView.textFields["businessName"]
+        selectRelationshipType = addTransferMethodTableView.cells.staticTexts["Relationship"]
+        firstNameInput = addTransferMethodTableView.textFields["firstName"]
+        lastNameInput = addTransferMethodTableView.textFields["lastName"]
+        middleNameInput = addTransferMethodTableView.textFields["middleName"]
+        phoneNumberInput = addTransferMethodTableView.textFields["phoneNumber"]
+        mobileNumberInput = addTransferMethodTableView.textFields["mobileNumber"]
+        dateOfBirthInput = addTransferMethodTableView.textFields["dateOfBirth"]
+        selectCountry = addTransferMethodTableView.cells.staticTexts["Country"]
+        stateProvinceInput = addTransferMethodTableView.textFields["stateProvince"]
+        streetInput = addTransferMethodTableView.textFields["addressLine1"]
+        cityInput = addTransferMethodTableView.textFields["city"]
+        zipInput = addTransferMethodTableView.textFields["postalCode"]
+        businessNameInput = addTransferMethodTableView.textFields["businessName"]
     }
 
     func setBranchId(_ branchId: String) {
@@ -88,7 +88,7 @@ class AddTransferMethod {
 
     func clickCreateTransferMethodButton() {
         if !createTransferMethodButton.exists {
-            addTMTableView.scroll(to: createTransferMethodButton)
+            addTransferMethodTableView.scroll(to: createTransferMethodButton)
         }
 
         createTransferMethodButton.tap()
@@ -141,32 +141,32 @@ class AddTransferMethod {
     }
 
     func setNameFirst(_ nameFirst: String) {
-        inputNameFirst.clearAndEnterText(text: nameFirst)
+        firstNameInput.clearAndEnterText(text: nameFirst)
         title.tap()
     }
 
     func setNameLast(_ nameLast: String) {
-        inputNameLast.clearAndEnterText(text: nameLast)
+        lastNameInput.clearAndEnterText(text: nameLast)
         title.tap()
     }
 
     func setNameMiddle(_ nameMiddle: String) {
-        inputNameMiddle.clearAndEnterText(text: nameMiddle)
+        middleNameInput.clearAndEnterText(text: nameMiddle)
         title.tap()
     }
 
     func setPhoneNumber(_ phoneNumber: String) {
-        inputPhoneNumber.clearAndEnterText(text: phoneNumber)
+        phoneNumberInput.clearAndEnterText(text: phoneNumber)
         title.tap()
     }
 
     func setMobileNumber(_ mobileNumber: String) {
-        inputMobileNumber.clearAndEnterText(text: mobileNumber)
+        mobileNumberInput.clearAndEnterText(text: mobileNumber)
         title.tap()
     }
 
     func setDateOfBirth(yearOfBirth: String, monthOfBirth: String, dayOfBirth: String) {
-        inputDateOfBirth.tap()
+        dateOfBirthInput.tap()
 
         app.pickerWheels.element(boundBy: 0).adjust(toPickerWheelValue: monthOfBirth)
         app.pickerWheels.element(boundBy: 1).adjust(toPickerWheelValue: dayOfBirth)
@@ -181,27 +181,27 @@ class AddTransferMethod {
     }
 
     func setStateProvince(_ stateProvince: String) {
-        inputStateProvince.clearAndEnterText(text: stateProvince)
+        stateProvinceInput.clearAndEnterText(text: stateProvince)
         title.tap()
     }
 
     func setStreet(_ street: String) {
-        inputStreet.clearAndEnterText(text: street)
+        streetInput.clearAndEnterText(text: street)
         title.tap()
     }
 
     func setCity(_ city: String) {
-        inputCity.clearAndEnterText(text: city)
+        cityInput.clearAndEnterText(text: city)
         title.tap()
     }
 
     func setPostalCode(_ postalCode: String) {
-        inputZip.clearAndEnterText(text: postalCode)
+        zipInput.clearAndEnterText(text: postalCode)
         title.tap()
     }
 
     func setNameBusiness(_ nameBusiness: String) {
-        inputNameBusiness.clearAndEnterText(text: nameBusiness)
+        businessNameInput.clearAndEnterText(text: nameBusiness)
         title.tap()
     }
 }
