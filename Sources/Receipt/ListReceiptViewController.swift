@@ -49,8 +49,8 @@ public final class ListReceiptViewController: UITableViewController {
 
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: listReceiptCellIdentifier, for: indexPath)
-        if let listTransferMethodCell = cell as? ListReceiptTableViewCell {
-            listTransferMethodCell.configure(configuration: presenter.getCellConfiguration(for: indexPath.row,
+        if let listReceiptCell = cell as? ListReceiptTableViewCell {
+            listReceiptCell.configure(configuration: presenter.getCellConfiguration(for: indexPath.row,
                                                                                            in: indexPath.section))
         }
         return cell

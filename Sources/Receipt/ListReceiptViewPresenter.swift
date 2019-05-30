@@ -48,25 +48,23 @@ final class ListReceiptViewPresenter {
 
         isFetchInProgress = true
         view.showLoading()
-        Hyperwallet.shared.listTransactionReceipts(pagination: setUpQueryParam(), completion: listReceiptHandler())
+        Hyperwallet.shared.listUserReceipts(queryParam: setUpQueryParam(), completion: listReceiptHandler())
     }
 
     func getCellConfiguration(for receiptIndex: Int, in section: Int) -> ListReceiptCellConfiguration? {
         let receipt = groupedSectionArray[section].value[receiptIndex]
-        if let currency = receipt.currency,
-            let type = receipt.type?.rawValue,
-            let entry = receipt.entry?.rawValue,
-            let createdOn = receipt.createdOn {
-            return ListReceiptCellConfiguration(
-                type: type.lowercased().localized(),
-                entry: entry,
-                amount: receipt.amount ?? "",
-                currency: currency,
-                createdOn: createdOn.toDate(withFormat: dateFormat)
-                    .formatDateToString(timeStyle: DateFormatter.Style.none),
-                iconFont: HyperwalletIcon.of(receipt.entry?.rawValue ?? "").rawValue)
-        }
-        return nil
+        let currency = receipt.currency
+        let type = receipt.type.rawValue
+        let entry = receipt.entry.rawValue
+        let createdOn = receipt.createdOn
+        return ListReceiptCellConfiguration(
+            type: type.lowercased().localized(),
+            entry: entry,
+            amount: receipt.amount,
+            currency: currency,
+            createdOn: createdOn.toDate(withFormat: dateFormat)
+                .formatDateToString(timeStyle: DateFormatter.Style.none),
+            iconFont: HyperwalletIcon.of(receipt.entry.rawValue).rawValue)
     }
 
     private func setUpQueryParam() -> HyperwalletReceiptQueryParam {
@@ -100,7 +98,7 @@ final class ListReceiptViewPresenter {
     }
 
     private func groupReceiptsByMonth(_ receipts: [HyperwalletReceipt]) {
-        let groupedSections = Dictionary(grouping: receipts, by: {$0.createdOn!
+        let groupedSections = Dictionary(grouping: receipts, by: {$0.createdOn
                                                                     .toDate(withFormat: dateFormat)
                                                                     .firstDayOfMonth()})
 
