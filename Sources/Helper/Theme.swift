@@ -119,8 +119,11 @@ public struct Theme {
         public static var thirdBackgroundColor = UIColor(rgb: 0xFEF7F7)
     }
 
+    /// Representation of all customized visual style property for numbers
     public struct Number {
+        /// The positive number color
         public static var positiveColor = UIColor(rgb: 0x5FBF00)
+        /// The negative number color
         public static var negativeColor = UIColor(rgb: 0xDB4437)
     }
 

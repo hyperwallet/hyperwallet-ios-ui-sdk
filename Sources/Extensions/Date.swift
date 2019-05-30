@@ -26,4 +26,16 @@ extension Date {
         dateFormatter.timeStyle = timeStyle
         return dateFormatter.string(from: self)
     }
+
+    func formatDateToStringWith(format: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.string(from: self)
+    }
+
+    func firstDayOfMonth() -> Date {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month], from: self)
+        return calendar.date(from: components)!
+    }
 }

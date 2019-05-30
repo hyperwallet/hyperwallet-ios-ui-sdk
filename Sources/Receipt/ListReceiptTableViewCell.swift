@@ -23,7 +23,7 @@ struct ListReceiptCellConfiguration {
     let entry: String
     let amount: String
     let currency: String
-    let createdOn: Date
+    let createdOn: String
     let iconFont: String
 }
 
@@ -98,11 +98,11 @@ extension ListReceiptTableViewCell {
         imageView?.backgroundColor = iconBackgroundColor
     }
 
-    private func formatTextLabel(type: String, createdOn: Date) -> NSAttributedString {
+    private func formatTextLabel(type: String, createdOn: String) -> NSAttributedString {
         let attributedText = NSMutableAttributedString()
 
         attributedText.append(value: String(format: "%@\n", type), font: titleLabelFont, color: titleLabelColor)
-        attributedText.append(value: createdOn.formatDateToString(timeStyle: DateFormatter.Style.none),
+        attributedText.append(value: createdOn,
                               font: Theme.Label.captionOne,
                               color: Theme.Label.subTitleColor)
         return attributedText
@@ -111,9 +111,9 @@ extension ListReceiptTableViewCell {
     private func formatDetailTextLabel(amount: String, currency: String, entry: String) -> NSAttributedString {
         let attributedText = NSMutableAttributedString()
         if entry == "CREDIT" {
-          attributedText.append(value: String(format: "+%@\n", amount),
-                                font: titleLabelFont,
-                                color: Theme.Number.positiveColor)
+            attributedText.append(value: String(format: "+%@\n", amount),
+                                  font: titleLabelFont,
+                                  color: Theme.Number.positiveColor)
         } else {
             attributedText.append(value: String(format: "-%@\n", amount),
                                   font: titleLabelFont,

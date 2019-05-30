@@ -18,14 +18,16 @@
 import HyperwalletSDK
 import UIKit
 
-/// Lists the user's transfer methods (bank account, bank card, PayPal account, prepaid card, paper check).
+/// Lists the user's transaction hisotrys
 ///
-/// The user can deactivate and add a new transfer method.
+/// The user can click a receipt in the list for more information
 public final class ListReceiptViewController: UITableViewController {
     private var spinnerView: SpinnerView?
     private var presenter: ListReceiptViewPresenter!
     private let listReceiptCellIdentifier = "ListReceiptCellIdentifier"
     private var defaultHeaderHeight = CGFloat(38.0)
+    private let sectionTitleDateFormat = "MMMM yyyy"
+    private var fetchMoreData: Bool = false
 
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -36,26 +38,17 @@ public final class ListReceiptViewController: UITableViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem.back
         // setup table view
         presenter = ListReceiptViewPresenter(view: self)
-        setupTransactionTableView()
-        presenter.listTransactionReceipt()
+        setupListReceiptTableView()
+        presenter.listReceipt()
     }
 
-    // MARK: - Transfer method list table view dataSource and delegate
+    // MARK: list receipt table view data source
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        let section = presenter.sections[section]
-//        print("numberOfRowsInSection: \(section.rowItems.count) in section: \(section.sectionItem)")
-//        return section.rowItems.count
-
-        return presenter.sectionArray[section].value.count
-    }
-
-    override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO will navigate to the recepit detail page
+        return presenter.groupedSectionArray[section].value.count
     }
 
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: listReceiptCellIdentifier, for: indexPath)
-
         if let listTransferMethodCell = cell as? ListReceiptTableViewCell {
             listTransferMethodCell.configure(configuration: presenter.getCellConfiguration(for: indexPath.row,
                                                                                            in: indexPath.section))
@@ -63,28 +56,29 @@ public final class ListReceiptViewController: UITableViewController {
         return cell
     }
 
-    override public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let lastSectionIndex = presenter.sectionArray.count - 1
-        if indexPath.section == lastSectionIndex
-            && indexPath.row == presenter.sectionArray[lastSectionIndex].value.count - 1
-            && presenter.loadMore {
-            presenter.listTransactionReceipt()
-        }
-    }
-
     override public func numberOfSections(in tableView: UITableView) -> Int {
-        return presenter.sectionArray.count
+        return presenter.groupedSectionArray.count
     }
 
     override public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        let section = presenter.sections[section]
-//        let date = section.sectionItem
+        let date = presenter.groupedSectionArray[section].key
+        return date.formatDateToStringWith(format: sectionTitleDateFormat)
+    }
 
-        let date = presenter.sectionArray[section].key
+    // MARK: list receipt table view delegate
+    override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // TODO will navigate to the recepit detail page
+    }
 
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMMM yyyy"
-        return dateFormatter.string(from: date)
+    override public func tableView(_ tableView: UITableView,
+                                   willDisplay cell: UITableViewCell,
+                                   forRowAt indexPath: IndexPath) {
+        let lastSectionIndex = presenter.groupedSectionArray.count - 1
+        if indexPath.section == lastSectionIndex
+            && indexPath.row == presenter.groupedSectionArray[lastSectionIndex].value.count - 1
+            && !presenter.isFetchCompleted {
+            fetchMoreData = true
+        }
     }
 
     override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -95,14 +89,23 @@ public final class ListReceiptViewController: UITableViewController {
         return Theme.Cell.mediumHeight
     }
 
-    private func setupTransactionTableView() {
+    // MARK: set up list receipt table view
+    private func setupListReceiptTableView() {
         tableView = UITableView(frame: .zero, style: .grouped)
         tableView.tableFooterView = UIView()
         tableView.register(ListReceiptTableViewCell.self,
                            forCellReuseIdentifier: listReceiptCellIdentifier)
     }
+
+    override public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if fetchMoreData {
+            presenter.listReceipt()
+            fetchMoreData = false
+        }
+    }
 }
 
+// MARK: `ListReceiptView` delegate
 extension ListReceiptViewController: ListReceiptView {
     func loadReceipts() {
         tableView.reloadData()
