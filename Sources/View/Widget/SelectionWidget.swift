@@ -39,6 +39,7 @@ final class SelectionWidget: AbstractWidget {
 
     override func setupLayout(field: HyperwalletField) {
         super.setupLayout(field: field)
+        labelField.accessibilityIdentifier = field.name
         addArrangedSubview(labelField)
 
         if field.isEditable ?? true {
@@ -94,7 +95,7 @@ final class SelectionWidget: AbstractWidget {
     }
 
     private func updateLabelFieldValue(_ option: HyperwalletFieldSelectionOption) {
-        labelField.text = option.label.localized()
+        labelField.text = option.label
         selectedValue = option.value
     }
 }

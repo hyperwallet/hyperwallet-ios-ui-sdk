@@ -26,9 +26,9 @@ class SelectTransferMethodCountryTypeTests: BaseTests {
 
     private func validateSelectionWidgetScreen() {
         XCTAssertTrue(app.navigationBars["Select Country"].exists)
-        XCTAssertTrue(app.tables.staticTexts["United States"].exists)
-        XCTAssertTrue(app.tables.staticTexts["Canada"].exists)
-        XCTAssertEqual(app.tables.cells.count, 2)
+        XCTAssertTrue(app.tables.staticTexts["UNITED STATES"].exists)
+        XCTAssertTrue(app.tables.staticTexts["CANADA"].exists)
+        XCTAssertEqual(app.tables.cells.count, 3)
         XCTAssertTrue(selectTransferMethodCountryType.countryTable.exists)
     }
 

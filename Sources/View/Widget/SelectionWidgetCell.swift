@@ -24,7 +24,7 @@ final class SelectionWidgetCell: GenericCell<HyperwalletFieldSelectionOption> {
     override var item: HyperwalletFieldSelectionOption! {
         didSet {
             if let option = item {
-                textLabel?.text = option.label.localized()
+                textLabel?.text = option.label
             }
         }
     }

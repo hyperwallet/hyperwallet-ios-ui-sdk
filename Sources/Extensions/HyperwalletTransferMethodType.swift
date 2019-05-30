@@ -16,20 +16,15 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+import Foundation
 import HyperwalletSDK
-import UIKit
 
-/// Represents the Transfer Method Detail, fee required for that transfer method and processing time required for it.
-struct TransferMethodTypeDetail {
-    let transferMethodType: String
-    var fees: [HyperwalletFee]?
-    var processingTime: String?
-
+extension HyperwalletTransferMethodType {
     func formatFeesProcessingTime() -> NSAttributedString {
         let attributedText = NSMutableAttributedString()
         let color = Theme.Label.subTitleColor
         // Fees
-        if let fees = self.fees {
+        if let fees = self.fees?.nodes {
             let feeLabel = "add_transfer_method_fee_label".localized()
 
             attributedText.append(value: feeLabel, font: Theme.Label.captionOne, color: color)
