@@ -28,8 +28,8 @@ struct ListReceiptCellConfiguration {
 }
 
 final class ListReceiptTableViewCell: UITableViewCell {
-    var iconColor: UIColor!
-    var iconBackgroundColor: UIColor!
+    private var iconColor: UIColor!
+    private var iconBackgroundColor: UIColor!
     // MARK: Life cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
