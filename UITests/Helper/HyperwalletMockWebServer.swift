@@ -72,13 +72,13 @@ class HyperwalletMockWebServer {
         }
     }
 
-    func setupGraphQLStubs() {
-        let filePathKeys = testBundle.path(forResource: "TransferMethodConfigurationKeysResponse", ofType: "json")
-        let filePathBankField = testBundle.path(forResource: "TransferMethodConfigurationBankAccountResponse",
+    func setupGraphQLStubs(for profileType: ProfileType) {
+        let filePathKeys = testBundle.path(forResource: profileType.configurationKeyResponse, ofType: "json")
+        let filePathBankField = testBundle.path(forResource: profileType.configurationBankAccountResponse,
                                                 ofType: "json")
-        let filePathCardField = testBundle.path(forResource: "TransferMethodConfigurationBankCardResponse",
+        let filePathCardField = testBundle.path(forResource: profileType.configurationBankCardResponse,
                                                 ofType: "json")
-        let filePathPayPalField = testBundle.path(forResource: "TransferMethodConfigurationPayPalAccountResponse",
+        let filePathPayPalField = testBundle.path(forResource: profileType.configurationPayPalResponse,
                                                   ofType: "json")
 
         let fileUrlKeys = URL(fileURLWithPath: filePathKeys!)
@@ -126,23 +126,6 @@ class HyperwalletMockWebServer {
         }
 
         server.GET[url] = response
-    }
-
-    func setUpGraphQLBankAccountWithPreSetValues() {
-        let filePathBankField = testBundle.path(forResource: "BankAccountConfigurationPresetValues",
-                                                ofType: "json")
-        let fileUrlBankField = URL(fileURLWithPath: filePathBankField!)
-
-        do {
-            let dataBankField = try Data(contentsOf: fileUrlBankField, options: .uncached)
-            let jsonBankField = dataToJSON(data: dataBankField)
-
-            server.POST["/graphql"] = { request in
-                HttpResponse.ok(.json(jsonBankField as AnyObject))
-            }
-        } catch {
-            print("Error info: \(error)")
-        }
     }
 
     func dataToJSON(data: Data) -> Any? {

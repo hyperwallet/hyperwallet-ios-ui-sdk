@@ -71,6 +71,7 @@ class ListTransferMethodTests: BaseTests {
     }
 
     override func setUp() {
+        profileType = .individual
         super.setUp()
 
         listTransferMethod = ListTransferMethod(app: app)
@@ -109,7 +110,6 @@ class ListTransferMethodTests: BaseTests {
 
     func testListTransferMethod_addTransferMethodFromEmptyScreen() {
         mockServer.setUpEmptyResponse(url: "/rest/v3/users/usr-token/transfer-methods")
-        mockServer.setupGraphQLStubs()
 
         openTransferMethodsList()
         listTransferMethod.tapAddTransferMethodEmptyScreenButton()
@@ -121,7 +121,6 @@ class ListTransferMethodTests: BaseTests {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListTransferMethodResponse",
                              method: HTTPMethod.get)
-        mockServer.setupGraphQLStubs()
 
         openTransferMethodsList()
         listTransferMethod.tapAddTransferMethodButton()

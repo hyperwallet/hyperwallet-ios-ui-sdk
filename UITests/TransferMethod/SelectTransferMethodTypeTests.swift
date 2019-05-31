@@ -5,6 +5,7 @@ class SelectTransferMethodTypeTests: BaseTests {
     let bankAccount = NSPredicate(format: "label CONTAINS[c] 'Bank Account'")
 
     override func setUp() {
+        profileType = .individual
         super.setUp()
         setUpSelectTransferMethodTypeScreen()
         validateSelectTransferMethodScreen()
@@ -22,20 +23,20 @@ class SelectTransferMethodTypeTests: BaseTests {
         waitForNonExistence(spinner)
     }
 
-    override func stubGetUserDetailsResponse() -> String {
+    override var userResponseFileName: String {
         return "UserIndividualCountryCanadaResponse"
     }
 
     private func validateSelectTransferMethodScreen() {
         XCTAssertNotNil(app.cells.images)
         XCTAssertTrue(app.navigationBars["Add Account"].exists)
-        XCTAssertTrue(app.tables.staticTexts["United States"].exists)
+        XCTAssertTrue(app.tables.staticTexts["Canada"].exists)
         XCTAssertTrue(app.tables.staticTexts["CAD"].exists)
         XCTAssertEqual(app.cells.staticTexts["PayPal Account"].label, "PayPal Account")
         if #available(iOS 11.2, *) {
-            XCTAssert(app.cells.staticTexts["Transaction Fees: CAD 0.25\nProcessing Time: 1-2 Business days"].exists)
+            XCTAssert(app.cells.staticTexts["Transaction Fees: CAD 2.20\nProcessing Time: 1-2 Business days"].exists)
         } else {
-            XCTAssert(app.cells.staticTexts["Transaction Fees: CAD 0.25 Processing Time: 1-2 Business days"].exists)
+            XCTAssert(app.cells.staticTexts["Transaction Fees: CAD 2.20 Processing Time: 1-2 Business days"].exists)
         }
 
         XCTAssertTrue(selectTransferMethodType.countrySelect.exists &&
@@ -77,23 +78,23 @@ class SelectTransferMethodTypeTests: BaseTests {
     func testSelectTransferMethodType_verifyCountrySelection() {
         selectTransferMethodType.tapCountry()
 
-        XCTAssert(app.tables.staticTexts["UNITED STATES"].exists)
-        XCTAssertEqual(app.tables.cells.count, 3)
+        XCTAssert(app.tables.staticTexts["United States"].exists)
+        XCTAssertEqual(app.tables.cells.count, 5)
     }
 
     func testSelectTransferMethodType_verifyCurrencySelection() {
-        selectTransferMethodType.selectCountry(country: "UNITED STATES")
+        selectTransferMethodType.selectCountry(country: "United States")
         selectTransferMethodType.tapCurrency()
 
-        XCTAssertEqual(app.tables.cells.count, 2)
-        XCTAssert(app.tables.staticTexts["USD"].exists)
+        XCTAssertEqual(app.tables.cells.count, 1)
+        XCTAssert(app.tables.staticTexts["United States Dollar"].exists)
     }
 
     func testSelectTransferMethodType_verifyTransferMethodSelection() {
-        selectTransferMethodType.selectCountry(country: "UNITED STATES")
-        selectTransferMethodType.selectCurrency(currency: "USD")
+        selectTransferMethodType.selectCountry(country: "United States")
+        selectTransferMethodType.selectCurrency(currency: "United States Dollar")
 
-        XCTAssertEqual(app.tables["transferMethodTableView"].cells.count, 5)
+        XCTAssertEqual(app.tables["transferMethodTableView"].cells.count, 6)
         XCTAssertTrue(app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).exists)
 
         app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).tap()
