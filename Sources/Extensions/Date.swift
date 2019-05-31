@@ -20,8 +20,8 @@ import Foundation
 
 extension Date {
     enum DateFormatMode {
-        case listView
-        case detailView
+        case date
+        case dateTime
     }
 
     private static let dateFormatterForListView: DateFormatter = {
@@ -60,10 +60,10 @@ extension Date {
 
     func format(for formatMode: DateFormatMode) -> String {
         switch formatMode {
-        case .listView:
+        case .date:
             return Date.dateFormatterForListView.string(from: self)
 
-        case .detailView:
+        case .dateTime:
             return Date.dateFormatterForDetailView.string(from: self)
         }
     }

@@ -58,7 +58,7 @@ final class ListReceiptViewPresenter {
         let createdOn = ISO8601DateFormatter
             .ignoreTimeZone
             .date(from: receipt.createdOn)!
-            .format(for: .listView)
+            .format(for: .date)
         return ListReceiptCellConfiguration(
             type: type.lowercased().localized(),
             entry: entry,
