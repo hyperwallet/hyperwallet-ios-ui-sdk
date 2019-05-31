@@ -140,6 +140,13 @@ public class ThemeManager {
         proxy.subTitleLabelColor = Theme.Label.subTitleColor
     }
 
+    private static func applyToListReceiptTableViewCell() {
+        let proxy = ListReceiptTableViewCell.appearance()
+        proxy.titleLabelFont = Theme.Label.bodyFontMedium
+        proxy.titleLabelColor = Theme.Label.color
+        proxy.subTitleLabelFont = Theme.Label.bodyFontMedium
+    }
+
     private static let registerFonts: Void = {
         UIFont.register("icomoon", type: "ttf")
     }()

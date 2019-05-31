@@ -16,6 +16,7 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+import HyperwalletSDK
 import UIKit
 
 struct ListReceiptCellConfiguration {
@@ -30,6 +31,7 @@ struct ListReceiptCellConfiguration {
 final class ListReceiptTableViewCell: UITableViewCell {
     private var iconColor: UIColor!
     private var iconBackgroundColor: UIColor!
+    private let credit = HyperwalletReceipt.HyperwalletEntryType.credit.rawValue
     // MARK: Life cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
@@ -55,11 +57,6 @@ final class ListReceiptTableViewCell: UITableViewCell {
         set { detailTextLabel?.font = newValue
             detailTextLabel?.font = newValue }
     }
-
-    @objc dynamic var subTitleLabelColor: UIColor! {
-        get { return detailTextLabel?.textColor }
-        set { detailTextLabel?.textColor = newValue }
-    }
 }
 
 extension ListReceiptTableViewCell {
@@ -75,9 +72,9 @@ extension ListReceiptTableViewCell {
             detailTextLabel?.numberOfLines = 0
             detailTextLabel?.lineBreakMode = .byWordWrapping
 
-            iconColor = configuration.entry == "CREDIT" ? Theme.Icon.secondaryColor : Theme.Icon.thirdColor
-            iconBackgroundColor = configuration.entry == "CREDIT" ? Theme.Icon.secondaryBackgroundColor
-                : Theme.Icon.thirdBackgroundColor
+            iconColor = configuration.entry == credit ? Theme.Icon.creditColor : Theme.Icon.debitColor
+            iconBackgroundColor = configuration.entry == credit ? Theme.Icon.creditBackgroundColor
+                : Theme.Icon.debitBackgroundColor
 
             let icon = UIImage.fontIcon(configuration.iconFont,
                                         Theme.Icon.frame,
@@ -110,17 +107,17 @@ extension ListReceiptTableViewCell {
 
     private func formatDetailTextLabel(amount: String, currency: String, entry: String) -> NSAttributedString {
         let attributedText = NSMutableAttributedString()
-        if entry == "CREDIT" {
+        if entry == credit {
             attributedText.append(value: String(format: "+%@\n", amount),
-                                  font: titleLabelFont,
-                                  color: Theme.Number.positiveColor)
+                                  font: subTitleLabelFont,
+                                  color: Theme.Amount.creditColor)
         } else {
             attributedText.append(value: String(format: "-%@\n", amount),
-                                  font: titleLabelFont,
-                                  color: Theme.Number.negativeColor)
+                                  font: subTitleLabelFont,
+                                  color: Theme.Amount.debitColor)
         }
 
-        attributedText.append(value: currency, font: Theme.Label.captionOne, color: Theme.Label.subTitleColor )
+        attributedText.append(value: currency, font: Theme.Label.captionOne, color: Theme.Label.subTitleColor)
         return attributedText
     }
 }

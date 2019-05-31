@@ -109,22 +109,22 @@ public struct Theme {
         public static var primaryColor = Theme.themeColor
         /// The icon primary background color
         public static var primaryBackgroundColor = UIColor(rgb: 0xE5F7FA)
-        /// The icon secondary color
-        public static var secondaryColor = Number.positiveColor
-        /// The icon secondary background color
-        public static var secondaryBackgroundColor = UIColor(rgb: 0xF1FAE8)
-        /// The icon third color
-        public static var thirdColor = Number.negativeColor
-        /// The icon third background color
-        public static var thirdBackgroundColor = UIColor(rgb: 0xFEF7F7)
+        /// The icon credit color
+        public static var creditColor = Amount.creditColor
+        /// The icon credit background color
+        public static var creditBackgroundColor = UIColor(rgb: 0xF1FAE8)
+        /// The icon debit color
+        public static var debitColor = Amount.debitColor
+        /// The icon debit background color
+        public static var debitBackgroundColor = UIColor(rgb: 0xFEF7F7)
     }
 
     /// Representation of all customized visual style property for numbers
-    public struct Number {
-        /// The positive number color
-        public static var positiveColor = UIColor(rgb: 0x5FBF00)
-        /// The negative number color
-        public static var negativeColor = UIColor(rgb: 0xDB4437)
+    public struct Amount {
+        /// The credit color
+        public static var creditColor = UIColor(rgb: 0x5FBF00)
+        /// The debit color
+        public static var debitColor = UIColor(rgb: 0xDB4437)
     }
 
     /// Representation of all customizable visual style property for `UIViewController`.
