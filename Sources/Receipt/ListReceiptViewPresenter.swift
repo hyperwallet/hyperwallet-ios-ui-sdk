@@ -73,6 +73,7 @@ final class ListReceiptViewPresenter {
         queryParam.offset = offset
         queryParam.limit = limit
         queryParam.sortBy = .descendantCreatedOn
+        queryParam.createdAfter = Calendar.current.date(byAdding: .year, value: -1, to: Date())
         return queryParam
     }
 
@@ -109,7 +110,7 @@ final class ListReceiptViewPresenter {
 
         for section in groupedSections {
             if let sectionIndex = groupedSectionArray.firstIndex(where: { $0.key == section.key }) {
-                groupedSectionArray[sectionIndex].value.append(contentsOf: receipts)
+                groupedSectionArray[sectionIndex].value.append(contentsOf: section.value)
             } else {
                 groupedSectionArray.append(section)
             }

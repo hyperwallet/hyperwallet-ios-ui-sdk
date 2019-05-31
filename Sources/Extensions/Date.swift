@@ -24,14 +24,14 @@ extension Date {
         case dateTime
     }
 
-    private static let dateFormatterForListView: DateFormatter = {
+    private static let dateFormatterOnlyDate: DateFormatter = {
         let formatter = DateFormatter()
         formatter.setLocalizedDateFormatFromTemplate("yMMMd")
         formatter.formattingContext = .beginningOfSentence
         return formatter
     }()
 
-    private static let dateFormatterForDetailView: DateFormatter = {
+    private static let dateFormatterDateAndTime: DateFormatter = {
         let formatter = DateFormatter()
         formatter.setLocalizedDateFormatFromTemplate("yMMMEdjm")
         formatter.formattingContext = .beginningOfSentence
@@ -61,10 +61,10 @@ extension Date {
     func format(for formatMode: DateFormatMode) -> String {
         switch formatMode {
         case .date:
-            return Date.dateFormatterForListView.string(from: self)
+            return Date.dateFormatterOnlyDate.string(from: self)
 
         case .dateTime:
-            return Date.dateFormatterForDetailView.string(from: self)
+            return Date.dateFormatterDateAndTime.string(from: self)
         }
     }
 }
