@@ -85,11 +85,11 @@ extension ListTransferMethodTableViewCell {
 
     func formatDetails(transferMethodCountry: String, additionalInfo: String?) -> NSAttributedString {
         let attributedText = NSMutableAttributedString()
-        let font = Theme.Label.captionOne
-        let color = Theme.Label.subTitleColor
-        attributedText.append(value: String(format: "%@\n", transferMethodCountry), font: font, color: color)
+        let font = subTitleLabelFont
+        let color = subTitleLabelColor
+        attributedText.append(value: String(format: "%@\n", transferMethodCountry), font: font!, color: color!)
         if let additionalInfo = additionalInfo {
-            attributedText.append(value: additionalInfo, font: font, color: color)
+            attributedText.append(value: additionalInfo, font: font!, color: color!)
         }
 
         return attributedText
