@@ -29,8 +29,11 @@ public final class ListTransferMethodViewController: UITableViewController {
     /// The completion handler will be performed after a new transfer method has been created.
     public var createTransferMethodHandler: ((HyperwalletTransferMethod) -> Void)?
     private let listTransferMethodCellIdentifier = "ListTransferMethodCellIdentifier"
-    private lazy var addAccountButton: UIButton = setUpAddAccountButton()
-    private lazy var emptyListLabel: UILabel = setUpEmptyListLabel()
+
+    private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "empty_list_transfer_method_message"
+                                                                              .localized())
+    private lazy var addAccountButton: UIButton = view.setUpEmptyListButton(text: "add_account_title".localized(),
+                                                                            firstItem: emptyListLabel)
 
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -176,6 +179,7 @@ extension ListTransferMethodViewController: ListTransferMethodView {
         if presenter.numberOfCells > 0 {
             toggleEmptyListView()
         } else {
+            addAccountButton.addTarget(self, action: #selector(didTapAddButton), for: .touchUpInside)
             toggleEmptyListView(hideLabel: false, hideButton: false)
         }
 
@@ -188,69 +192,6 @@ extension ListTransferMethodViewController: ListTransferMethodView {
                                             object: self,
                                             userInfo: [UserInfo.statusTransition: hyperwalletStatusTransition])
         }
-    }
-
-    private func setUpEmptyListLabel() -> UILabel {
-        let emptyListLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 268, height: 20.5))
-        emptyListLabel.text = "empty_list_transfer_method_message".localized()
-        emptyListLabel.numberOfLines = 0
-        emptyListLabel.lineBreakMode = .byWordWrapping
-        emptyListLabel.textAlignment = .center
-        view.addSubview(emptyListLabel)
-
-        emptyListLabel.translatesAutoresizingMaskIntoConstraints = false
-
-        let labelCenterXConstraint = NSLayoutConstraint(item: emptyListLabel,
-                                                        attribute: .centerX,
-                                                        relatedBy: .equal,
-                                                        toItem: view,
-                                                        attribute: .centerX,
-                                                        multiplier: 1.0,
-                                                        constant: 0.0)
-        let labelCenterYConstraint = NSLayoutConstraint(item: emptyListLabel,
-                                                        attribute: .centerY,
-                                                        relatedBy: .equal,
-                                                        toItem: view,
-                                                        attribute: .centerY,
-                                                        multiplier: 1.0,
-                                                        constant: 0.0)
-
-        let labelWidthConstraint = NSLayoutConstraint(item: emptyListLabel,
-                                                      attribute: .width,
-                                                      relatedBy: .equal,
-                                                      toItem: nil,
-                                                      attribute: .notAnAttribute,
-                                                      multiplier: 1,
-                                                      constant: 268)
-        NSLayoutConstraint.activate([labelCenterXConstraint, labelCenterYConstraint, labelWidthConstraint])
-        return emptyListLabel
-    }
-
-    private func setUpAddAccountButton() -> UIButton {
-        let addAccountButton = UIButton(type: .system)
-        addAccountButton.setTitle("add_account_title".localized(), for: .normal)
-        addAccountButton.addTarget(self, action: #selector(didTapAddButton), for: .touchUpInside)
-        addAccountButton.frame.size = CGSize(width: 90, height: 30)
-        view.addSubview(addAccountButton)
-
-        addAccountButton.translatesAutoresizingMaskIntoConstraints = false
-
-        let buttonCenterXConstraint = NSLayoutConstraint(item: addAccountButton,
-                                                         attribute: .centerX,
-                                                         relatedBy: .equal,
-                                                         toItem: view,
-                                                         attribute: .centerX,
-                                                         multiplier: 1.0,
-                                                         constant: 0.0)
-        let verticalConstraint = NSLayoutConstraint(item: emptyListLabel,
-                                                    attribute: .bottom,
-                                                    relatedBy: .equal,
-                                                    toItem: addAccountButton,
-                                                    attribute: .top,
-                                                    multiplier: 1,
-                                                    constant: -8)
-        NSLayoutConstraint.activate([buttonCenterXConstraint, verticalConstraint])
-        return addAccountButton
     }
 
     private func toggleEmptyListView(hideLabel: Bool = true, hideButton: Bool = true) {

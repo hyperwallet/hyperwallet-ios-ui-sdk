@@ -89,4 +89,66 @@ extension UIView {
                                             constant: value)
         addConstraint(constraint)
     }
+
+    func setUpEmptyListLabel(text: String) -> UILabel {
+        let emptyListLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 268, height: 20.5))
+        emptyListLabel.text = text
+        emptyListLabel.numberOfLines = 0
+        emptyListLabel.lineBreakMode = .byWordWrapping
+        emptyListLabel.textAlignment = .center
+        self.addSubview(emptyListLabel)
+
+        emptyListLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        let labelCenterXConstraint = NSLayoutConstraint(item: emptyListLabel,
+                                                        attribute: .centerX,
+                                                        relatedBy: .equal,
+                                                        toItem: self,
+                                                        attribute: .centerX,
+                                                        multiplier: 1.0,
+                                                        constant: 0.0)
+        let labelCenterYConstraint = NSLayoutConstraint(item: emptyListLabel,
+                                                        attribute: .centerY,
+                                                        relatedBy: .equal,
+                                                        toItem: self,
+                                                        attribute: .centerY,
+                                                        multiplier: 1.0,
+                                                        constant: 0.0)
+
+        let labelWidthConstraint = NSLayoutConstraint(item: emptyListLabel,
+                                                      attribute: .width,
+                                                      relatedBy: .equal,
+                                                      toItem: nil,
+                                                      attribute: .notAnAttribute,
+                                                      multiplier: 1,
+                                                      constant: 268)
+        NSLayoutConstraint.activate([labelCenterXConstraint, labelCenterYConstraint, labelWidthConstraint])
+        return emptyListLabel
+    }
+
+    func setUpEmptyListButton(text: String, firstItem: UIView) -> UIButton {
+        let emptyListButton = UIButton(type: .system)
+        emptyListButton.setTitle(text, for: .normal)
+        emptyListButton.frame.size = CGSize(width: 90, height: 30)
+        self.addSubview(emptyListButton)
+
+        emptyListButton.translatesAutoresizingMaskIntoConstraints = false
+
+        let buttonCenterXConstraint = NSLayoutConstraint(item: emptyListButton,
+                                                         attribute: .centerX,
+                                                         relatedBy: .equal,
+                                                         toItem: self,
+                                                         attribute: .centerX,
+                                                         multiplier: 1.0,
+                                                         constant: 0.0)
+        let verticalConstraint = NSLayoutConstraint(item: firstItem,
+                                                    attribute: .bottom,
+                                                    relatedBy: .equal,
+                                                    toItem: emptyListButton,
+                                                    attribute: .top,
+                                                    multiplier: 1,
+                                                    constant: -8)
+        NSLayoutConstraint.activate([buttonCenterXConstraint, verticalConstraint])
+        return emptyListButton
+    }
 }

@@ -92,8 +92,8 @@ final class ListReceiptViewPresenter {
                         strongSelf.groupReceiptsByMonth(result.data)
                         strongSelf.isFetchCompleted = result.data.count < strongSelf.limit ? true : false
                         strongSelf.offset += result.data.count
-                        strongSelf.view.loadReceipts()
                     }
+                    strongSelf.view.loadReceipts()
                 }
             }
     }
