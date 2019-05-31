@@ -113,7 +113,7 @@ final class ListReceiptViewPresenter {
             } else {
                 groupedSectionArray.append(section)
             }
-            groupedSectionArray = groupedSectionArray.sorted(by: { $0.key > $1.key })
         }
+        groupedSectionArray = groupedSectionArray.sorted(by: { $0.key > $1.key })
     }
 }

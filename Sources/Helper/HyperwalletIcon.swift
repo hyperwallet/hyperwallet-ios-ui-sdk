@@ -23,8 +23,8 @@ final class HyperwalletIcon {
     ///
     /// - Parameter transferMethodType: a type of transfer method in String
     /// - Returns: a `HyperwalletIconContent` object
-    public static func of(_ transferMethodType: String) -> HyperwalletIconContent {
-        switch transferMethodType {
+    public static func of(_ fontType: String) -> HyperwalletIconContent {
+        switch fontType {
         case "BANK_ACCOUNT":
             return .bank
         case "BANK_CARD":
@@ -37,6 +37,10 @@ final class HyperwalletIcon {
             return .paypal
         case "WIRE_ACCOUNT":
             return .wire
+        case "CREDIT":
+            return .credit
+        case "DEBIT":
+            return.debit
 
         default:
             return .westernUnion
