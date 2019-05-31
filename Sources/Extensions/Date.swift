@@ -19,6 +19,25 @@
 import Foundation
 
 extension Date {
+    enum DateFormatMode {
+        case listView
+        case detailView
+    }
+
+    private static let dateFormatterForListView: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.setLocalizedDateFormatFromTemplate("yMMMd")
+        formatter.formattingContext = .beginningOfSentence
+        return formatter
+    }()
+
+    private static let dateFormatterForDetailView: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.setLocalizedDateFormatFromTemplate("yMMMEdjm")
+        formatter.formattingContext = .beginningOfSentence
+        return formatter
+    }()
+
     func formatDateToString(dateStyle: DateFormatter.Style = DateFormatter.Style.medium,
                             timeStyle: DateFormatter.Style = DateFormatter.Style.medium) -> String {
         let dateFormatter = DateFormatter()
@@ -37,5 +56,15 @@ extension Date {
         let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month], from: self)
         return calendar.date(from: components)!
+    }
+
+    func format(for formatMode: DateFormatMode) -> String {
+        switch formatMode {
+        case .listView:
+            return Date.dateFormatterForListView.string(from: self)
+
+        case .detailView:
+            return Date.dateFormatterForDetailView.string(from: self)
+        }
     }
 }

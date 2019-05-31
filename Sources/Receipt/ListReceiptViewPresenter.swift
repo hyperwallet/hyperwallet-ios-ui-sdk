@@ -30,7 +30,6 @@ final class ListReceiptViewPresenter {
 
     private var offset = 0
     private let limit = 20
-    private let dateFormat = "yyyy-MM-dd'T'H:mm:ss"
 
     private var isFetchInProgress = false
     private(set) var isFetchCompleted = true
@@ -56,14 +55,16 @@ final class ListReceiptViewPresenter {
         let currency = receipt.currency
         let type = receipt.type.rawValue
         let entry = receipt.entry.rawValue
-        let createdOn = receipt.createdOn
+        let createdOn = ISO8601DateFormatter
+            .ignoreTimeZone
+            .date(from: receipt.createdOn)!
+            .format(for: .listView)
         return ListReceiptCellConfiguration(
             type: type.lowercased().localized(),
             entry: entry,
             amount: receipt.amount,
             currency: currency,
-            createdOn: createdOn.toDate(withFormat: dateFormat)
-                .formatDateToString(timeStyle: DateFormatter.Style.none),
+            createdOn: createdOn,
             iconFont: HyperwalletIcon.of(receipt.entry.rawValue).rawValue)
     }
 
@@ -98,9 +99,13 @@ final class ListReceiptViewPresenter {
     }
 
     private func groupReceiptsByMonth(_ receipts: [HyperwalletReceipt]) {
-        let groupedSections = Dictionary(grouping: receipts, by: {$0.createdOn
-                                                                    .toDate(withFormat: dateFormat)
-                                                                    .firstDayOfMonth()})
+        let groupedSections = Dictionary(grouping: receipts,
+                                         by: {
+                                            ISO8601DateFormatter
+                                                .ignoreTimeZone
+                                                .date(from: $0.createdOn)!
+                                                .firstDayOfMonth()
+        })
 
         for section in groupedSections {
             if let sectionIndex = groupedSectionArray.firstIndex(where: { $0.key == section.key }) {
