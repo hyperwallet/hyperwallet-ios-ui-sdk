@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		072A53F722838F6B00BC11D0 /* AddTransferMethodSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072A53F622838F6B00BC11D0 /* AddTransferMethodSectionData.swift */; };
+		0743EF9C22A5987100C089EE /* ListReceiptPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0743EF9B22A5987100C089EE /* ListReceiptPresenterTests.swift */; };
+		0743EF9D22A59AC500C089EE /* UserReceiptResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 07BE415E229DE181002DECAF /* UserReceiptResponse.json */; };
+		0743EFA222A5A18200C089EE /* UserReceiptNextPageResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 0743EFA022A59EE100C089EE /* UserReceiptNextPageResponse.json */; };
 		078B45742273895C005B0248 /* TransferMethodMockedSuccessResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 078B45682273895C005B0248 /* TransferMethodMockedSuccessResponse.json */; };
 		078B45752273895C005B0248 /* StatusTransitionMockedResponseSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = 078B45692273895C005B0248 /* StatusTransitionMockedResponseSuccess.json */; };
 		078B45762273895C005B0248 /* BankCardErrorResponseWithInvalidCardNumber.json in Resources */ = {isa = PBXBuildFile; fileRef = 078B456A2273895C005B0248 /* BankCardErrorResponseWithInvalidCardNumber.json */; };
@@ -20,7 +23,6 @@
 		078B457E2273895C005B0248 /* SelectTransferMethodTypePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078B45722273895C005B0248 /* SelectTransferMethodTypePresenterTests.swift */; };
 		078B457F2273895C005B0248 /* AddTransferMethodPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078B45732273895C005B0248 /* AddTransferMethodPresenterTests.swift */; };
 		078B45812273A441005B0248 /* HyperwalletUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078B45802273A441005B0248 /* HyperwalletUI.swift */; };
-		07BE415F229DE181002DECAF /* UserReceiptResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 07BE415E229DE181002DECAF /* UserReceiptResponse.json */; };
 		09B50AEA2285B2C000B03626 /* BankAccountConfigurationWithNotEditableFieldsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 09B50AE5228595DE00B03626 /* BankAccountConfigurationWithNotEditableFieldsResponse.json */; };
 		433A08082285E5BB007A9FFC /* BankAccountConfigurationPresetValues.json in Resources */ = {isa = PBXBuildFile; fileRef = 433A08072285E5BB007A9FFC /* BankAccountConfigurationPresetValues.json */; };
 		4A12653C2280B02900C0F59E /* DateWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12653B2280B02900C0F59E /* DateWidget.swift */; };
@@ -171,6 +173,8 @@
 
 /* Begin PBXFileReference section */
 		072A53F622838F6B00BC11D0 /* AddTransferMethodSectionData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodSectionData.swift; sourceTree = "<group>"; };
+		0743EF9B22A5987100C089EE /* ListReceiptPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListReceiptPresenterTests.swift; sourceTree = "<group>"; };
+		0743EFA022A59EE100C089EE /* UserReceiptNextPageResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserReceiptNextPageResponse.json; sourceTree = "<group>"; };
 		078B45682273895C005B0248 /* TransferMethodMockedSuccessResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TransferMethodMockedSuccessResponse.json; sourceTree = "<group>"; };
 		078B45692273895C005B0248 /* StatusTransitionMockedResponseSuccess.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = StatusTransitionMockedResponseSuccess.json; sourceTree = "<group>"; };
 		078B456A2273895C005B0248 /* BankCardErrorResponseWithInvalidCardNumber.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BankCardErrorResponseWithInvalidCardNumber.json; sourceTree = "<group>"; };
@@ -337,6 +341,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0743EFA322A5AC6900C089EE /* Receipt */ = {
+			isa = PBXGroup;
+			children = (
+				0743EFA422A5AC7200C089EE /* Responses */,
+				0743EF9B22A5987100C089EE /* ListReceiptPresenterTests.swift */,
+			);
+			path = Receipt;
+			sourceTree = "<group>";
+		};
+		0743EFA422A5AC7200C089EE /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				07BE415E229DE181002DECAF /* UserReceiptResponse.json */,
+				0743EFA022A59EE100C089EE /* UserReceiptNextPageResponse.json */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
 		078B45662273895C005B0248 /* TransferMethod */ = {
 			isa = PBXGroup;
 			children = (
@@ -362,7 +384,6 @@
 				078B456D2273895C005B0248 /* TransferMethodConfigurationFieldsResponse.json */,
 				078B456E2273895C005B0248 /* TransferMethodConfigurationKeysResponse.json */,
 				078B45682273895C005B0248 /* TransferMethodMockedSuccessResponse.json */,
-				07BE415E229DE181002DECAF /* UserReceiptResponse.json */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -433,6 +454,7 @@
 		DB18E9EE2261BA29004F6AC3 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				0743EFA322A5AC6900C089EE /* Receipt */,
 				078B45662273895C005B0248 /* TransferMethod */,
 				DB18E9F92261BA4C004F6AC3 /* Helper */,
 				DB18E9F12261BA29004F6AC3 /* Info.plist */,
@@ -833,6 +855,8 @@
 			files = (
 				98F63E762284EEB20090101D /* PayPalAccountResponse.json in Resources */,
 				078B45752273895C005B0248 /* StatusTransitionMockedResponseSuccess.json in Resources */,
+				0743EFA222A5A18200C089EE /* UserReceiptNextPageResponse.json in Resources */,
+				0743EF9D22A59AC500C089EE /* UserReceiptResponse.json in Resources */,
 				078B457C2273895C005B0248 /* BankCardResponse.json in Resources */,
 				078B45762273895C005B0248 /* BankCardErrorResponseWithInvalidCardNumber.json in Resources */,
 				078B45792273895C005B0248 /* TransferMethodConfigurationFieldsResponse.json in Resources */,
@@ -893,7 +917,6 @@
 				DBFB61462261E44C00C4A8AA /* Assets.xcassets in Resources */,
 				DB2EB67022617AB100FBEB3D /* icomoon.ttf in Resources */,
 				DBCA3884225E8BAA00CD4137 /* ProcessingView.xib in Resources */,
-				07BE415F229DE181002DECAF /* UserReceiptResponse.json in Resources */,
 				98220B8C2265793700055E18 /* README.md in Resources */,
 				DBCA387C225E8BAA00CD4137 /* Localizable.strings in Resources */,
 				98541F152273D72C007D4238 /* CHANGELOG.md in Resources */,
@@ -950,6 +973,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				078B457D2273895C005B0248 /* ListTransferMethodPresenterTests.swift in Sources */,
+				0743EF9C22A5987100C089EE /* ListReceiptPresenterTests.swift in Sources */,
 				DB18EA142261BA4C004F6AC3 /* HyperwalletTestHelper.swift in Sources */,
 				078B457F2273895C005B0248 /* AddTransferMethodPresenterTests.swift in Sources */,
 				078B457E2273895C005B0248 /* SelectTransferMethodTypePresenterTests.swift in Sources */,
