@@ -33,7 +33,7 @@ final class ListReceiptViewPresenter {
 
     private var isFetchInProgress = false
     private(set) var isFetchCompleted = true
-    private(set) var groupedSectionArray: [(key: Date, value: [HyperwalletReceipt])] = []
+    private(set) var groupedSectionArray = [(key: Date, value: [HyperwalletReceipt])]()
 
     /// Initialize ListTransferMethodPresenter
     init(view: ListReceiptView) {
