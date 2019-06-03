@@ -88,6 +88,10 @@ class AddTransferMethod {
         navigationBar.children(matching: .button).matching(identifier: "Back").element(boundBy: 0).tap()
     }
 
+    func clickGenericBackButton() {
+        app.navigationBars.firstMatch.children(matching: .button).matching(identifier: "Back").element(boundBy: 0).tap()
+    }
+
     func setCvv(cvvNumber: String) {
         cvvInput.tap()
         app.typeText(cvvNumber)
