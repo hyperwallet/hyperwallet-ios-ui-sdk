@@ -40,7 +40,7 @@ final class HyperwalletIcon {
         case "CREDIT":
             return .credit
         case "DEBIT":
-            return.debit
+            return .debit
 
         default:
             return .westernUnion

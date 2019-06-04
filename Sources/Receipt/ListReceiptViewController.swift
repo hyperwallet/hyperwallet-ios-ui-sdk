@@ -18,7 +18,7 @@
 import HyperwalletSDK
 import UIKit
 
-/// Lists the user's transaction historys
+/// Lists the user's transaction history
 ///
 /// The user can click a receipt in the list for more information
 public final class ListReceiptViewController: UITableViewController {

@@ -50,7 +50,7 @@ final class ListReceiptViewPresenter {
         Hyperwallet.shared.listUserReceipts(queryParam: setUpQueryParam(), completion: listReceiptHandler())
     }
 
-    func getCellConfiguration(for receiptIndex: Int, in section: Int) -> ListReceiptCellConfiguration? {
+    func getCellConfiguration(for receiptIndex: Int, in section: Int) -> ListReceiptCellConfiguration {
         let receipt = groupedSectionArray[section].value[receiptIndex]
         let currency = receipt.currency
         let type = receipt.type.rawValue

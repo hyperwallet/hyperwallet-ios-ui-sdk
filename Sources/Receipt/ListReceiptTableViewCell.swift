@@ -54,8 +54,12 @@ final class ListReceiptTableViewCell: UITableViewCell {
 
     @objc dynamic var subTitleLabelFont: UIFont! {
         get { return detailTextLabel?.font }
-        set { detailTextLabel?.font = newValue
-            detailTextLabel?.font = newValue }
+        set { detailTextLabel?.font = newValue }
+    }
+
+    @objc dynamic var subTitleLabelColor: UIColor! {
+        get { return detailTextLabel?.textColor }
+        set { detailTextLabel?.textColor = newValue }
     }
 }
 
@@ -69,8 +73,10 @@ extension ListReceiptTableViewCell {
                                                                     entry: configuration.entry)
             textLabel?.numberOfLines = 0
             textLabel?.lineBreakMode = .byWordWrapping
+            textLabel?.accessibilityIdentifier = "ListReceiptTableViewCellTextLabel"
             detailTextLabel?.numberOfLines = 0
             detailTextLabel?.lineBreakMode = .byWordWrapping
+            detailTextLabel?.accessibilityIdentifier = "ListReceiptTableViewCellDetailTextLabel"
 
             iconColor = configuration.entry == credit ? Theme.Icon.creditColor : Theme.Icon.debitColor
             iconBackgroundColor = configuration.entry == credit ? Theme.Icon.creditBackgroundColor
@@ -101,7 +107,7 @@ extension ListReceiptTableViewCell {
         attributedText.append(value: String(format: "%@\n", type), font: titleLabelFont, color: titleLabelColor)
         attributedText.append(value: createdOn,
                               font: Theme.Label.captionOne,
-                              color: Theme.Label.subTitleColor)
+                              color: subTitleLabelColor)
         return attributedText
     }
 
@@ -117,7 +123,7 @@ extension ListReceiptTableViewCell {
                                   color: Theme.Amount.debitColor)
         }
 
-        attributedText.append(value: currency, font: Theme.Label.captionOne, color: Theme.Label.subTitleColor)
+        attributedText.append(value: currency, font: Theme.Label.captionOne, color: subTitleLabelColor)
         return attributedText
     }
 }
