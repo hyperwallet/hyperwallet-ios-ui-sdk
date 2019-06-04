@@ -96,6 +96,8 @@ extension UIView {
         emptyListLabel.numberOfLines = 0
         emptyListLabel.lineBreakMode = .byWordWrapping
         emptyListLabel.textAlignment = .center
+        emptyListLabel.accessibilityIdentifier = "EmptyListLabelAccessibilityIdentifier"
+
         self.addSubview(emptyListLabel)
 
         emptyListLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -130,6 +132,8 @@ extension UIView {
         let emptyListButton = UIButton(type: .system)
         emptyListButton.setTitle(text, for: .normal)
         emptyListButton.frame.size = CGSize(width: 90, height: 30)
+        emptyListButton.accessibilityIdentifier = "EmptyListButtonAccessibilityIdentifier"
+
         self.addSubview(emptyListButton)
 
         emptyListButton.translatesAutoresizingMaskIntoConstraints = false
