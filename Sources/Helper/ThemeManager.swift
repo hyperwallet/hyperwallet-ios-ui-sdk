@@ -29,7 +29,6 @@ public class ThemeManager {
         applyToSelectionWidgetCell()
         applyToListTransferMethodTableViewCell()
         applyToSelectTransferMethodTypeCell()
-        applyToListReceiptTableViewCell()
         registerFonts
     }
 
@@ -138,14 +137,6 @@ public class ThemeManager {
         proxy.titleLabelFont = Theme.Label.bodyFontMedium
         proxy.titleLabelColor = Theme.Label.color
         proxy.subTitleLabelFont = Theme.Label.captionOne
-        proxy.subTitleLabelColor = Theme.Label.subTitleColor
-    }
-
-    private static func applyToListReceiptTableViewCell() {
-        let proxy = ListReceiptTableViewCell.appearance()
-        proxy.titleLabelFont = Theme.Label.bodyFontMedium
-        proxy.titleLabelColor = Theme.Label.color
-        proxy.subTitleLabelFont = Theme.Label.bodyFontMedium
         proxy.subTitleLabelColor = Theme.Label.subTitleColor
     }
 
