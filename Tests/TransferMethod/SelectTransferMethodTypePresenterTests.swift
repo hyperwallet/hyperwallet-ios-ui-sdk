@@ -114,11 +114,12 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isNavigateToAddTransferMethodControllerPerformed,
                       "The navigateToAddTransferMethodControllerPerformed should be performed")
 
-        XCTAssertEqual(presenter.countryCurrencyCount, 2, "The countryCurrencyCount should be 2")
-        XCTAssertEqual(presenter.transferMethodTypesCount, 3, "The transferMethodTypesCount should be 3")
-        XCTAssertNotNil(presenter.getCellConfiguration(for: 0), "The getCellConfiguration should not be nil")
-        XCTAssertNotNil(presenter.getCountryCurrencyCellConfiguration(for: 0),
-                        "The getCellConfiguration should not be nil")
+        XCTAssertEqual(presenter.countryCurrencySectionData.count, 2, "The countryCurrencyCount should be 2")
+        XCTAssertEqual(presenter.sectionData.count, 3, "The transferMethodTypesCount should be 3")
+        XCTAssertNotNil(presenter.cellForRowAt(indexPath: IndexPath(row: 0, section: 0)),
+                        "The cell configuration should not be nil")
+        XCTAssertNotNil(presenter.countryCurrencyCellForRowAt(indexPath: IndexPath(row: 0, section: 0)),
+                        "The country currency cell configuration should not be nil")
     }
 
     private func loadTransferMethodKeys() {

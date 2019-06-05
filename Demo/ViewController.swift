@@ -144,7 +144,7 @@ class ViewController: UITableViewController {
             navigationController?.pushViewController(viewController, animated: true)
 
         case .addTransferMethod:
-            let viewController = HyperwalletUI.shared.selectTransferMethodTypeViewController()
+            let viewController = HyperwalletUI.shared.SelectTransferMethodTypeTableViewController()
             viewController.createTransferMethodHandler = {
                 (transferMethod: HyperwalletTransferMethod) -> Void in
                 self.didCreateTransferMethod(transferMethod: transferMethod)

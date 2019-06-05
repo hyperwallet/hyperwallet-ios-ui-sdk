@@ -31,16 +31,12 @@ protocol ListTransferMethodView: class {
 
 final class ListTransferMethodPresenter {
     private unowned let view: ListTransferMethodView
-    var transferMethods: [HyperwalletTransferMethod]?
+    private (set) var sectionData = [HyperwalletTransferMethod]()
     private var selectedTransferMethod: HyperwalletTransferMethod?
 
     /// Initialize ListTransferMethodPresenter
     init(view: ListTransferMethodView) {
         self.view = view
-    }
-
-    var numberOfCells: Int {
-        return transferMethods?.count ?? 0
     }
 
     /// Get the list of all Activated transfer methods from core SDK
@@ -53,18 +49,13 @@ final class ListTransferMethodPresenter {
     }
 
     func transferMethodExists(at index: Int) -> Bool {
-        return getTransferMethod(at: index) != nil
-    }
-
-    func getTransferMethod(at index: Int) -> HyperwalletTransferMethod? {
-        return transferMethods?[index]
+        return sectionData[safe: index] != nil
     }
 
     func deactivateTransferMethod(at index: Int) {
-        guard let transferMethod = getTransferMethod(at: index) else {
-            return
+        if transferMethodExists(at: index) {
+            deactivateTransferMethod(sectionData[index])
         }
-        deactivateTransferMethod(transferMethod)
     }
 
     /// Deactivate the selected Transfer Method
@@ -99,8 +90,10 @@ final class ListTransferMethodPresenter {
                         strongSelf.view.showError(error, { strongSelf.listTransferMethod() })
                         return
                     }
+                    if let data = result?.data {
+                        strongSelf.sectionData = data
+                    }
 
-                    strongSelf.transferMethods = result?.data
                     strongSelf.view.showTransferMethods()
                 }
             }
@@ -149,8 +142,8 @@ final class ListTransferMethodPresenter {
             }
     }
 
-    func getCellConfiguration(for transferMethodIndex: Int) -> ListTransferMethodCellConfiguration? {
-        if let transferMethod = getTransferMethod(at: transferMethodIndex),
+    func cellForRowAt(indexPath: IndexPath) -> ListTransferMethodCellConfiguration? {
+        if let transferMethod = sectionData[safe: indexPath.row],
             let country = transferMethod.getField(fieldName: .transferMethodCountry) as? String,
             let transferMethodType = transferMethod.getField(fieldName: .type) as? String {
             return ListTransferMethodCellConfiguration(

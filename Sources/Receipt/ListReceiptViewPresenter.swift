@@ -33,7 +33,7 @@ final class ListReceiptViewPresenter {
 
     private var isLoadInProgress = false
     private(set) var areAllReceiptsLoaded = true
-    private(set) var groupedSectionArray = [(key: Date, value: [HyperwalletReceipt])]()
+    private(set) var sectionData = [(key: Date, value: [HyperwalletReceipt])]()
 
     /// Initialize ListReceiptPresenter
     init(view: ListReceiptView) {
@@ -50,8 +50,10 @@ final class ListReceiptViewPresenter {
         Hyperwallet.shared.listUserReceipts(queryParam: setUpQueryParam(), completion: listReceiptHandler())
     }
 
-    func getCellConfiguration(for receiptIndex: Int, in section: Int) -> ListReceiptCellConfiguration {
-        let receipt = groupedSectionArray[section].value[receiptIndex]
+    func cellForRowAt(indexPath: IndexPath) -> ListReceiptCellConfiguration? {
+        guard let receipt = sectionData[safe: indexPath.section]?.value[safe:indexPath.row] else {
+            return nil
+        }
         let currency = receipt.currency
         let type = receipt.type.rawValue
         let entry = receipt.entry.rawValue
@@ -109,12 +111,12 @@ final class ListReceiptViewPresenter {
         })
 
         for section in groupedSections {
-            if let sectionIndex = groupedSectionArray.firstIndex(where: { $0.key == section.key }) {
-                groupedSectionArray[sectionIndex].value.append(contentsOf: section.value)
+            if let sectionIndex = sectionData.firstIndex(where: { $0.key == section.key }) {
+                sectionData[sectionIndex].value.append(contentsOf: section.value)
             } else {
-                groupedSectionArray.append(section)
+                sectionData.append(section)
             }
         }
-        groupedSectionArray = groupedSectionArray.sorted(by: { $0.key > $1.key })
+        sectionData = sectionData.sorted(by: { $0.key > $1.key })
     }
 }

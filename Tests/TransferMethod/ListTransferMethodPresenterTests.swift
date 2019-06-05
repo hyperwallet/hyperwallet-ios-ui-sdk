@@ -62,8 +62,9 @@ class ListTransferMethodPresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isShowTransferMethodsPerformed, "The showTransferMethods should be performed")
 
         XCTAssertTrue(presenter.transferMethodExists(at: 0), "The transferMethodExists should return true")
-        XCTAssertGreaterThan(presenter.numberOfCells, 0, "The numberOfCells should be greater than 0")
-        XCTAssertNotNil(presenter.getCellConfiguration(for: 0), "The getCellConfiguration should not be nil")
+        XCTAssertTrue(presenter.sectionData.isNotEmpty(), "The sectionData should not be empty")
+        XCTAssertNotNil(presenter.cellForRowAt(indexPath: IndexPath(row: 0, section: 0)),
+                        "The cell configuration should not be nil")
     }
 
     func testListTransferMethod_failureWithError() {
@@ -84,13 +85,16 @@ class ListTransferMethodPresenterTests: XCTestCase {
         XCTAssertFalse(mockView.isShowTransferMethodsPerformed, "The showTransferMethods should not be performed")
 
         XCTAssertFalse(presenter.transferMethodExists(at: 0), "The transferMethodExists should return false")
-        XCTAssertEqual(presenter.numberOfCells, 0, "The numberOfCells should be equals 0")
-        XCTAssertNil(presenter.getCellConfiguration(for: 0), "The getCellConfiguration should be nil")
+        XCTAssertTrue(presenter.sectionData.isEmpty, "The sectionData should be empty")
+        XCTAssertNil(presenter.cellForRowAt(indexPath: IndexPath(row: 0, section: 0)),
+                     "The cell configuration should be nil")
     }
 
     func testDeactivateBankAccount_success() {
         // Given
         loadMockTransfermethods()
+        XCTAssertTrue(presenter.sectionData.isNotEmpty(), "sectionData should not be empty")
+
         HyperwalletTestHelper.setUpMockServer(request: setUpDeactivateTransferMethodRequest("/bank-accounts/"))
 
         let expectation = self.expectation(description: "deactivate a bank account")
@@ -109,6 +113,8 @@ class ListTransferMethodPresenterTests: XCTestCase {
     func testDeactivateBankAccount_failureWithError() {
         // Given
         loadMockTransfermethods()
+        XCTAssertTrue(presenter.sectionData.isNotEmpty(), "sectionData should not be empty")
+
         HyperwalletTestHelper.setUpMockServer(request:
             setUpDeactivateTransferMethodRequest("/bank-accounts/",
                                                  NSError(domain: "", code: -1009, userInfo: nil)))
@@ -147,6 +153,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
     func testDeactivatePayPalAccount_success() {
         // Given
         loadMockTransfermethods()
+        XCTAssertTrue(presenter.sectionData.isNotEmpty(), "sectionData should not be empty")
         HyperwalletTestHelper.setUpMockServer(request: setUpDeactivateTransferMethodRequest("/paypal-accounts/"))
 
         let expectation = self.expectation(description: "deactivate a PayPal account")
@@ -165,6 +172,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
     func testDeactivateBankCard_failureWithError() {
         // Given
         loadMockTransfermethods()
+        XCTAssertTrue(presenter.sectionData.isNotEmpty(), "sectionData should not be empty")
         HyperwalletTestHelper.setUpMockServer(request:
             setUpDeactivateTransferMethodRequest("/bank-cards/", NSError(domain: "", code: -1009, userInfo: nil)))
 
@@ -185,25 +193,15 @@ class ListTransferMethodPresenterTests: XCTestCase {
     }
 
     private func loadMockTransfermethods() {
-        let bankAccount = HyperwalletBankAccount.Builder(transferMethodCountry: "US",
-                                                         transferMethodCurrency: "USD",
-                                                         transferMethodProfileType: "INDIVIDUAL")
-            .build()
-        bankAccount.setField(key: "token", value: "trm-123456789")
+        // Given
+        HyperwalletTestHelper.setUpMockServer(request: setUpListTransferMethodRequest())
 
-        let bankCard = HyperwalletBankCard.Builder(transferMethodCountry: "CA",
-                                                   transferMethodCurrency: "CAD",
-                                                   transferMethodProfileType: "INDIVIDUAL")
-            .build()
-        bankCard.setField(key: "token", value: "trm-123456789")
+        let expectationLoadTransferMethods = self.expectation(description: "load transfer methods")
+        mockView.expectation = expectationLoadTransferMethods
 
-        let payPalAccount = HyperwalletPayPalAccount.Builder(transferMethodCountry: "US",
-                                                             transferMethodCurrency: "USD")
-            .build()
-        payPalAccount.setField(key: "token", value: "trm-123456789")
-
-        let transferMethods = [bankAccount, bankCard, payPalAccount]
-        presenter.transferMethods = transferMethods
+        // When
+        presenter.listTransferMethod()
+        wait(for: [expectationLoadTransferMethods], timeout: 1)
     }
 
     private func setUpListTransferMethodRequest(_ error: NSError? = nil) -> StubRequest {

@@ -132,7 +132,7 @@ extension UIView {
         let emptyListButton = UIButton(type: .system)
         emptyListButton.setTitle(text, for: .normal)
         emptyListButton.frame.size = CGSize(width: 90, height: 30)
-        emptyListButton.accessibilityIdentifier = "EmptyListButtonAccessibilityIdentifier"
+        emptyListButton.accessibilityIdentifier = "emptyListButton"
 
         self.addSubview(emptyListButton)
 

@@ -22,7 +22,7 @@ import UIKit
 ///
 /// The form fields are based on the country, currency, user's profile type and transfer method type should be passed
 /// to this Controller to create new Transfer Method for those values.
-public final class AddTransferMethodViewController: UITableViewController {
+public final class AddTransferMethodTableViewController: UITableViewController {
     typealias ButtonHandler = () -> Void
     private var defaultHeaderHeight = CGFloat(38.0)
 
@@ -53,11 +53,10 @@ public final class AddTransferMethodViewController: UITableViewController {
             greaterThanOrEqualToConstant: Theme.Cell.smallHeight).isActive = true
 
         button.accessibilityLabel = "create_account_label".localized()
-        button.accessibilityIdentifier = "createAccount"
+        button.accessibilityIdentifier = "createAccountButton"
         button.setTitle("create_account_label".localized(), for: .normal)
         button.setTitleColor(Theme.Button.color, for: UIControl.State.normal)
         button.addTarget(self, action: #selector(onTapped), for: .touchUpInside)
-        button.accessibilityIdentifier = "createAccountBtn"
         return button
     }()
 
@@ -90,10 +89,10 @@ public final class AddTransferMethodViewController: UITableViewController {
     ///   - currency: The 3 letter ISO 4217-1 currency code.
     ///   - profileType: The profile type. Possible values - INDIVIDUAL, BUSINESS.
     ///   - transferMethodTypeCode: The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD.
-    public init(_ country: String,
-                _ currency: String,
-                _ profileType: String,
-                _ transferMethodTypeCode: String) {
+    init(_ country: String,
+         _ currency: String,
+         _ profileType: String,
+         _ transferMethodTypeCode: String) {
         self.country = country
         self.currency = currency
         self.profileType = profileType
@@ -131,7 +130,7 @@ public final class AddTransferMethodViewController: UITableViewController {
         tableView.accessibilityIdentifier = "addTransferMethodTable"
         tableView.register(
             AddTransferMethodTableViewCell.self,
-            forCellReuseIdentifier: AddTransferMethodTableViewCell.reuseId
+            forCellReuseIdentifier: AddTransferMethodTableViewCell.reuseIdentifier
         )
     }
 
@@ -151,9 +150,9 @@ public final class AddTransferMethodViewController: UITableViewController {
 }
 
 // MARK: - TableViewController Data source and delegate
-extension AddTransferMethodViewController {
+extension AddTransferMethodTableViewController {
     override public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return presenter.sections[section].header
+        return presenter.sectionData[section].header
     }
 
     override public func tableView(_ tableView: UITableView,
@@ -168,14 +167,14 @@ extension AddTransferMethodViewController {
 
     override public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         var footerText = ""
-        if let errorMessage = presenter.sections[section].errorMessage {
+        if let errorMessage = presenter.sectionData[section].errorMessage {
             footerText = String(format: "%@", errorMessage)
         }
         return footerText
     }
 
     override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if let header = presenter.sections[section].header {
+        if let header = presenter.sectionData[section].header {
             if header.height(withConstrainedWidth: self.view.frame.width,
                              font: UIFont.preferredFont(forTextStyle: .body)) > defaultHeaderHeight {
                 return UITableView.automaticDimension
@@ -188,19 +187,19 @@ extension AddTransferMethodViewController {
     }
 
     override public func numberOfSections(in tableView: UITableView) -> Int {
-        return presenter.sections.count
+        return presenter.sectionData.count
     }
 
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.sections[section].count
+        return presenter.sectionData[section].count
     }
 
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: AddTransferMethodTableViewCell.reuseId)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: AddTransferMethodTableViewCell.reuseIdentifier)
             else {
                 fatalError("Can't dequeue the cell")
         }
-        let widget = presenter.sections[indexPath.section][indexPath.row]
+        let widget = presenter.sectionData[indexPath.section][indexPath.row]
         cell.contentView.addSubview(widget)
         if let widget = widget as? SelectionWidget, widget.field.isEditable ?? true {
             cell.accessoryType = .disclosureIndicator
@@ -227,13 +226,13 @@ extension AddTransferMethodViewController {
 }
 
 // MARK: - Presenter - AddTransferMethodView -
-extension AddTransferMethodViewController: AddTransferMethodView {
+extension AddTransferMethodTableViewController: AddTransferMethodView {
     private func getSectionContainingFocusedField() -> AddTransferMethodSectionData? {
-        return presenter.sections.first(where: { $0.containsFocusedField == true })
+        return presenter.sectionData.first(where: { $0.containsFocusedField == true })
     }
 
     private func getSectionIndex(by fieldGroup: String) -> Int? {
-        return presenter.sections.firstIndex(where: { $0.fieldGroup == fieldGroup })
+        return presenter.sectionData.firstIndex(where: { $0.fieldGroup == fieldGroup })
     }
 
     private func focusField(in section: AddTransferMethodSectionData) {
@@ -348,7 +347,8 @@ extension AddTransferMethodViewController: AddTransferMethodView {
                                             object: self,
                                             userInfo: [UserInfo.transferMethod: transferMethod])
         }
-        navigationController?.skipPreviousViewControllerIfPresent(skip: SelectTransferMethodTypeViewController.self)
+        navigationController?
+            .skipPreviousViewControllerIfPresent(skip: SelectTransferMethodTypeTableViewController.self)
         createTransferMethodHandler?(transferMethod)
     }
 
@@ -357,7 +357,7 @@ extension AddTransferMethodViewController: AddTransferMethodView {
             if isCellVisibile(indexPath) {
                 widget.focus()
             } else {
-                let sectionContainingInvalidWidget = presenter.sections[indexPath.section]
+                let sectionContainingInvalidWidget = presenter.sectionData[indexPath.section]
                 sectionContainingInvalidWidget.containsFocusedField = true
                 presenter.prepareSectionForScrolling(sectionContainingInvalidWidget, indexPath.row, widget)
                 tableView.scrollToRow(at: indexPath, at: .top, animated: true)
@@ -367,7 +367,7 @@ extension AddTransferMethodViewController: AddTransferMethodView {
 
     private func getIndexPathFor(fieldToBeFocused: AbstractWidget) -> IndexPath? {
         if let sectionContainingInvalidField = presenter
-            .sections
+            .sectionData
             .first(where: { $0.cells.contains(fieldToBeFocused) }),
             let sectionIndex = getSectionIndex(by: sectionContainingInvalidField.fieldGroup),
             let cellIndex = sectionContainingInvalidField.cells.firstIndex(of: fieldToBeFocused) {
@@ -379,7 +379,7 @@ extension AddTransferMethodViewController: AddTransferMethodView {
     private func updateFooterView(_ footerView: UITableViewHeaderFooterView, for section: Int) {
         UIView.setAnimationsEnabled(false)
         self.tableView.beginUpdates()
-        footerView.textLabel?.text = presenter.sections[section].errorMessage
+        footerView.textLabel?.text = presenter.sectionData[section].errorMessage
         footerView.sizeToFit()
         self.tableView.endUpdates()
         UIView.setAnimationsEnabled(true)
@@ -406,7 +406,7 @@ extension AddTransferMethodViewController: AddTransferMethodView {
                 currency: currency,
                 cells: newWidgets
             )
-            presenter.sections.append(section)
+            presenter.sectionData.append(section)
             widgets.append(contentsOf: newWidgets)
         }
     }
@@ -423,7 +423,7 @@ extension AddTransferMethodViewController: AddTransferMethodView {
                 country: country,
                 currency: currency,
                 cells: [infoView])
-            presenter.sections.append(infoSection)
+            presenter.sectionData.append(infoSection)
         }
     }
 
@@ -433,7 +433,7 @@ extension AddTransferMethodViewController: AddTransferMethodView {
             country: country,
             currency: currency,
             cells: [button])
-        presenter.sections.append(buttonSection)
+        presenter.sectionData.append(buttonSection)
     }
 
     private func isCellVisibile(_ indexPath: IndexPath) -> Bool {

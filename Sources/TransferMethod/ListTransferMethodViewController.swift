@@ -21,14 +21,13 @@ import UIKit
 /// Lists the user's transfer methods (bank account, bank card, PayPal account, prepaid card, paper check).
 ///
 /// The user can deactivate and add a new transfer method.
-public final class ListTransferMethodViewController: UITableViewController {
+public final class ListTransferMethodTableViewController: UITableViewController {
     private var spinnerView: SpinnerView?
     private var processingView: ProcessingView?
     private var presenter: ListTransferMethodPresenter!
 
     /// The completion handler will be performed after a new transfer method has been created.
     public var createTransferMethodHandler: ((HyperwalletTransferMethod) -> Void)?
-    private let listTransferMethodCellIdentifier = "ListTransferMethodCellIdentifier"
 
     private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "empty_list_transfer_method_message"
                                                                               .localized())
@@ -59,13 +58,14 @@ public final class ListTransferMethodViewController: UITableViewController {
 
     // MARK: - Transfer method list table view dataSource and delegate
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.numberOfCells
+        return presenter.sectionData.count
     }
 
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: listTransferMethodCellIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: ListTransferMethodTableViewCell.reuseIdentifier,
+                                                 for: indexPath)
         if let listTransferMethodCell = cell as? ListTransferMethodTableViewCell,
-            let cellConfiguration = presenter.getCellConfiguration(for: indexPath.row) {
+            let cellConfiguration = presenter.cellForRowAt(indexPath: indexPath) {
             listTransferMethodCell.configure(configuration: cellConfiguration)
         }
         return cell
@@ -106,7 +106,7 @@ public final class ListTransferMethodViewController: UITableViewController {
     }
 
     private func addTransferMethod() {
-        let controller = SelectTransferMethodTypeViewController()
+        let controller = SelectTransferMethodTypeTableViewController()
         controller.createTransferMethodHandler = {
             [weak self] (transferMethod: HyperwalletTransferMethod) -> Void in
             // refresh transfer method list
@@ -120,7 +120,7 @@ public final class ListTransferMethodViewController: UITableViewController {
         tableView = UITableView(frame: .zero, style: .grouped)
         tableView.tableFooterView = UIView()
         tableView.register(ListTransferMethodTableViewCell.self,
-                           forCellReuseIdentifier: listTransferMethodCellIdentifier)
+                           forCellReuseIdentifier: ListTransferMethodTableViewCell.reuseIdentifier)
     }
 
     private func showConfirmationAlert(title: String?, message: String, transferMethodIndex: Int) {
@@ -139,7 +139,7 @@ public final class ListTransferMethodViewController: UITableViewController {
     }
 }
 
-extension ListTransferMethodViewController: ListTransferMethodView {
+extension ListTransferMethodTableViewController: ListTransferMethodView {
     func showLoading() {
         if let view = self.navigationController?.view {
             spinnerView = HyperwalletUtilViews.showSpinner(view: view)
@@ -176,7 +176,7 @@ extension ListTransferMethodViewController: ListTransferMethodView {
     }
 
     func showTransferMethods() {
-        if presenter.numberOfCells > 0 {
+        if presenter.sectionData.isNotEmpty() {
             toggleEmptyListView()
         } else {
             addAccountButton.addTarget(self, action: #selector(didTapAddButton), for: .touchUpInside)

@@ -147,14 +147,14 @@ navigationController?.pushViewController(listTransferMethodViewController, anima
 ### Select a transfer method type available by country and currency
 ```swift
 
-let selectTransferMethodTypeViewController = HyperwalletUI.shared.selectTransferMethodTypeViewController()
+let SelectTransferMethodTypeTableViewController = HyperwalletUI.shared.SelectTransferMethodTypeTableViewController()
 
 // Optional - The completion handler will be performed after a new transfer method has been created.
-selectTransferMethodTypeViewController.createTransferMethodHandler = { transferMethod in
+SelectTransferMethodTypeTableViewController.createTransferMethodHandler = { transferMethod in
     // A new transfer method has been created
 }
 
-navigationController?.pushViewController(selectTransferMethodTypeViewController, animated: true)
+navigationController?.pushViewController(SelectTransferMethodTypeTableViewController, animated: true)
 ```
 
 ### Create a transfer method
