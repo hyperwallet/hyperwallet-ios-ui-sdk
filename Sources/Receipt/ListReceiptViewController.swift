@@ -24,7 +24,6 @@ import UIKit
 public final class ListReceiptViewController: UITableViewController {
     private var spinnerView: SpinnerView?
     private var presenter: ListReceiptViewPresenter!
-    private let listReceiptCellIdentifier = "ListReceiptCellIdentifier"
     private var defaultHeaderHeight = CGFloat(38.0)
     private let sectionTitleDateFormat = "MMMM yyyy"
     private var fetchMoreData: Bool = false
@@ -49,8 +48,9 @@ public final class ListReceiptViewController: UITableViewController {
     }
 
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: listReceiptCellIdentifier, for: indexPath)
-        if let listReceiptCell = cell as? ListReceiptTableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: ReceiptTransactionTableViewCell.reuseIdentifier,
+                                                 for: indexPath)
+        if let listReceiptCell = cell as? ReceiptTransactionTableViewCell {
             listReceiptCell.configure(configuration: presenter.getCellConfiguration(for: indexPath.row,
                                                                                     in: indexPath.section))
         }
@@ -68,7 +68,9 @@ public final class ListReceiptViewController: UITableViewController {
 
     // MARK: list receipt table view delegate
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO will navigate to the recepit detail page
+        let hyperwalletReceipt = presenter.getHyperwalletReceiptAt(indexPath)
+        let receiptDetailViewController = ReceiptDetailTableViewController(with: hyperwalletReceipt)
+        navigationController?.pushViewController(receiptDetailViewController, animated: true)
     }
 
     override public func tableView(_ tableView: UITableView,
@@ -94,8 +96,8 @@ public final class ListReceiptViewController: UITableViewController {
     private func setupListReceiptTableView() {
         tableView = UITableView(frame: .zero, style: .grouped)
         tableView.tableFooterView = UIView()
-        tableView.register(ListReceiptTableViewCell.self,
-                           forCellReuseIdentifier: listReceiptCellIdentifier)
+        tableView.register(ReceiptTransactionTableViewCell.self,
+                           forCellReuseIdentifier: ReceiptTransactionTableViewCell.reuseIdentifier)
     }
 
     override public func scrollViewDidScroll(_ scrollView: UIScrollView) {

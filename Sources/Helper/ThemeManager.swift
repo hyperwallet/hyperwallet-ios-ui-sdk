@@ -29,7 +29,10 @@ public class ThemeManager {
         applyToSelectionWidgetCell()
         applyToListTransferMethodTableViewCell()
         applyToSelectTransferMethodTypeCell()
-        applyToListReceiptTableViewCell()
+        applyToReceiptTransactionTableViewCell()
+        applyToReceiptDetailTableViewCell()
+        applyToReceiptFeeTableViewCell()
+        applyToReceiptNotesTableViewCell()
         registerFonts
     }
 
@@ -141,12 +144,34 @@ public class ThemeManager {
         proxy.subTitleLabelColor = Theme.Label.subTitleColor
     }
 
-    private static func applyToListReceiptTableViewCell() {
-        let proxy = ListReceiptTableViewCell.appearance()
+    private static func applyToReceiptTransactionTableViewCell() {
+        let proxy = ReceiptTransactionTableViewCell.appearance()
         proxy.titleLabelFont = Theme.Label.bodyFontMedium
         proxy.titleLabelColor = Theme.Label.color
         proxy.subTitleLabelFont = Theme.Label.bodyFontMedium
         proxy.subTitleLabelColor = Theme.Label.subTitleColor
+    }
+
+    private static func applyToReceiptDetailTableViewCell() {
+        let proxy = ReceiptDetailTableViewCell.appearance()
+        proxy.titleLabelFont = Theme.Label.footnoteFont
+        proxy.titleLabelColor = Theme.Label.subTitleColor
+        proxy.subTitleLabelFont = Theme.Label.footnoteFont
+        proxy.subTitleLabelColor = Theme.Label.subTitleColor
+    }
+
+    private static func applyToReceiptFeeTableViewCell() {
+        let proxy = ReceiptFeeTableViewCell.appearance()
+        proxy.titleLabelFont = Theme.Label.footnoteFont
+        proxy.titleLabelColor = Theme.Label.subTitleColor
+        proxy.subTitleLabelFont = Theme.Label.footnoteFont
+        proxy.subTitleLabelColor = Theme.Label.subTitleColor
+    }
+
+    private static func applyToReceiptNotesTableViewCell() {
+        let proxy = ReceiptNotesTableViewCell.appearance()
+        proxy.titleLabelFont = Theme.Label.footnoteFont
+        proxy.titleLabelColor = Theme.Label.subTitleColor
     }
 
     private static let registerFonts: Void = {

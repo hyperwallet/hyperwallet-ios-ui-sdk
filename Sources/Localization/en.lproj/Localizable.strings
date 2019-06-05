@@ -92,6 +92,11 @@
 
 // Receipt
 "title_receipts" = "Transactions";
+"title_transaction_details" = "Transaction Details";
+"receipt_section_header_transaction" = "Transaction";
+"receipt_section_header_detail" = "Details";
+"receipt_section_header_fee" = "Fee Specification";
+"receipt_section_header_notes" = "Notes";
 "empty_list_receipt_message" = "Seems like, you don’t have any Transactions, yet.";
 "add_transaction_title" = "Add Transaction";
 "account_closure_fee" = "Account Closure Fee";
@@ -141,7 +146,7 @@
 "prepaid_card_dispute_deposit" = "Disputed Card Deposit";
 "prepaid_card_disputed_charge_refund" = "Disputed Charge Refund";
 "prepaid_card_domestic_cash_withdrawal_fee" = "ATM Withdrawal";
-"prepaid_card_exchange_rate_difference";
+"prepaid_card_exchange_rate_difference" = "Exchange Rate Difference";
 "prepaid_card_manual_unload" = "Card Unload";
 "prepaid_card_overseas_cash_withdrawal_fee" = "ATM Withdrawal";
 "prepaid_card_pin_change_fee" = "PIN Change Fee";
@@ -170,6 +175,16 @@
 "wire_transfer_fee" = "Wire Transfer Fee";
 "wire_transfer_return" = "Wire Transfer Return";
 "wubs_wire_transfer_return" = "Wire Transfer Return";
+
+"receipt_details_charity_name" = "Charity:";
+"receipt_details_check_number" = "Check Number:";
+"receipt_details_client_payment_id" = "Client ID:";
+"receipt_details_website" = "Web:";
+"receipt_details_transaction" = "Transaction:";
+"receipt_details_amount" = "Amount:";
+"receipt_details_fee" = "Fee:";
+"receipt_details_receipt_id" = "Receipt ID:";
+"receipt_details_date" = "Date:";
 
 // List of countries
 // Source: https://datahub.io/core/country-list#data

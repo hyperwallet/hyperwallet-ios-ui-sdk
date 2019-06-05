@@ -19,7 +19,7 @@
 import HyperwalletSDK
 import UIKit
 
-struct ListReceiptCellConfiguration {
+struct ReceiptTransactionCellConfiguration {
     let type: String
     let entry: String
     let amount: String
@@ -28,7 +28,8 @@ struct ListReceiptCellConfiguration {
     let iconFont: String
 }
 
-final class ListReceiptTableViewCell: UITableViewCell {
+final class ReceiptTransactionTableViewCell: UITableViewCell {
+    static let reuseIdentifier = "ReceiptTransactionTableViewCellReuseIdentifier"
     private var iconColor: UIColor!
     private var iconBackgroundColor: UIColor!
     private let credit = HyperwalletReceipt.HyperwalletEntryType.credit.rawValue
@@ -63,8 +64,8 @@ final class ListReceiptTableViewCell: UITableViewCell {
     }
 }
 
-extension ListReceiptTableViewCell {
-    func configure(configuration: ListReceiptCellConfiguration?) {
+extension ReceiptTransactionTableViewCell {
+    func configure(configuration: ReceiptTransactionCellConfiguration?) {
         if let configuration = configuration {
             textLabel?.attributedText = formatTextLabel(type: configuration.type,
                                                         createdOn: configuration.createdOn)

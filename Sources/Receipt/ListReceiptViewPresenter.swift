@@ -50,7 +50,13 @@ final class ListReceiptViewPresenter {
         Hyperwallet.shared.listUserReceipts(queryParam: setUpQueryParam(), completion: listReceiptHandler())
     }
 
-    func getCellConfiguration(for receiptIndex: Int, in section: Int) -> ListReceiptCellConfiguration {
+    func getHyperwalletReceiptAt(_ indexPath: IndexPath) -> HyperwalletReceipt {
+        let section = indexPath.section
+        let row = indexPath.row
+        return groupedSectionArray[section].value[row]
+    }
+
+    func getCellConfiguration(for receiptIndex: Int, in section: Int) -> ReceiptTransactionCellConfiguration {
         let receipt = groupedSectionArray[section].value[receiptIndex]
         let currency = receipt.currency
         let type = receipt.type.rawValue
@@ -59,7 +65,7 @@ final class ListReceiptViewPresenter {
             .ignoreTimeZone
             .date(from: receipt.createdOn)!
             .format(for: .date)
-        return ListReceiptCellConfiguration(
+        return ReceiptTransactionCellConfiguration(
             type: type.lowercased().localized(),
             entry: entry,
             amount: receipt.amount,
