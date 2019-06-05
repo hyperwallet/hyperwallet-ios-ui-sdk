@@ -31,21 +31,21 @@ final class ListReceiptViewPresenter {
     private var offset = 0
     private let limit = 20
 
-    private var isFetchInProgress = false
-    private(set) var isFetchCompleted = true
+    private var isLoadInProgress = false
+    private(set) var areAllReceiptsLoaded = true
     private(set) var groupedSectionArray = [(key: Date, value: [HyperwalletReceipt])]()
 
-    /// Initialize ListTransferMethodPresenter
+    /// Initialize ListReceiptPresenter
     init(view: ListReceiptView) {
         self.view = view
     }
 
     func listReceipt() {
-        guard !isFetchInProgress else {
+        guard !isLoadInProgress else {
             return
         }
 
-        isFetchInProgress = true
+        isLoadInProgress = true
         view.showLoading()
         Hyperwallet.shared.listUserReceipts(queryParam: setUpQueryParam(), completion: listReceiptHandler())
     }
@@ -90,14 +90,14 @@ final class ListReceiptViewPresenter {
                     return
                 }
                 DispatchQueue.main.async {
-                    strongSelf.isFetchInProgress = false
+                    strongSelf.isLoadInProgress = false
                     strongSelf.view.hideLoading()
                     if let error = error {
                         strongSelf.view.showError(error, { strongSelf.listReceipt() })
                         return
                     } else if let result = result {
                         strongSelf.groupReceiptsByMonth(result.data)
-                        strongSelf.isFetchCompleted = result.data.count < strongSelf.limit ? true : false
+                        strongSelf.areAllReceiptsLoaded = result.data.count < strongSelf.limit ? true : false
                         strongSelf.offset += result.data.count
                     }
                     strongSelf.view.loadReceipts()

@@ -38,17 +38,9 @@ extension Date {
         return formatter
     }()
 
-    func formatDateToString(dateStyle: DateFormatter.Style = DateFormatter.Style.medium,
-                            timeStyle: DateFormatter.Style = DateFormatter.Style.medium) -> String {
+    func formatDateToString(dateFormat: String) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = dateStyle
-        dateFormatter.timeStyle = timeStyle
-        return dateFormatter.string(from: self)
-    }
-
-    func formatDateToStringWith(format: String) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
+        dateFormatter.dateFormat = dateFormat
         return dateFormatter.string(from: self)
     }
 
