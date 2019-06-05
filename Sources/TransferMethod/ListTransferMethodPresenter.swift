@@ -46,10 +46,10 @@ final class ListTransferMethodPresenter {
     /// Get the list of all Activated transfer methods from core SDK
     func listTransferMethod() {
         view.showLoading()
-        let pagination = HyperwalletTransferMethodPagination()
-        pagination.limit = 100
-        pagination.status = .activated
-        Hyperwallet.shared.listTransferMethods(pagination: pagination, completion: listTransferMethodHandler())
+        let queryParam = HyperwalletTransferMethodQueryParam()
+        queryParam.limit = 100
+        queryParam.status = .activated
+        Hyperwallet.shared.listTransferMethods(queryParam: queryParam, completion: listTransferMethodHandler())
     }
 
     func transferMethodExists(at index: Int) -> Bool {
