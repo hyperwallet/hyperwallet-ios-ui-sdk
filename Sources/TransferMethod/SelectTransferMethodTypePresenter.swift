@@ -25,7 +25,8 @@ protocol SelectTransferMethodTypeView: class {
                               markCellHandler: @escaping (_ value: CountryCurrencyCellConfiguration) -> Bool,
                               filterContentHandler: @escaping ((_ items: [CountryCurrencyCellConfiguration],
         _ searchText: String)
-        -> [CountryCurrencyCellConfiguration]))
+        -> [CountryCurrencyCellConfiguration]),
+                              selectedItem: String)
 
     func navigateToAddTransferMethodController(country: String,
                                                currency: String,
@@ -188,7 +189,8 @@ final class SelectTransferMethodTypePresenter {
                                   title: "select_transfer_method_country".localized(),
                                   selectItemHandler: selectCountryHandler(),
                                   markCellHandler: countryMarkCellHandler(),
-                                  filterContentHandler: filterContentHandler())
+                                  filterContentHandler: filterContentHandler(),
+                                  selectedItem: selectedCountry)
     }
 
     /// Shows the Select Currency View
@@ -197,7 +199,8 @@ final class SelectTransferMethodTypePresenter {
                                   title: "select_transfer_method_currency".localized(),
                                   selectItemHandler: selectCurrencyHandler(),
                                   markCellHandler: currencyMarkCellHandler(),
-                                  filterContentHandler: filterContentHandler())
+                                  filterContentHandler: filterContentHandler(),
+                                  selectedItem: selectedCurrency)
     }
 
     /// Handles the selection country event at GenericTableView

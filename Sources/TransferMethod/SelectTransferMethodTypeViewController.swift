@@ -164,7 +164,8 @@ extension SelectTransferMethodTypeViewController: SelectTransferMethodTypeView {
                               markCellHandler: @escaping (_ value: CountryCurrencyCellConfiguration) -> Bool,
                               filterContentHandler: @escaping ((_ items: [CountryCurrencyCellConfiguration],
         _ searchText: String)
-        -> [CountryCurrencyCellConfiguration])
+        -> [CountryCurrencyCellConfiguration]),
+                              selectedItem: String
         ) {
         let genericTableView = GenericTableViewController<CountryCurrencyCell, CountryCurrencyCellConfiguration>()
         genericTableView.title = title
@@ -172,6 +173,9 @@ extension SelectTransferMethodTypeViewController: SelectTransferMethodTypeView {
         genericTableView.selectedHandler = selectItemHandler
         genericTableView.shouldMarkCellAction = markCellHandler
         genericTableView.filterContentForSearchTextAction = filterContentHandler
+        genericTableView.initialSelectedItemIndex = items.firstIndex(where: { configuration in
+            configuration.value == selectedItem
+        })
         show(genericTableView, sender: self)
     }
 }
