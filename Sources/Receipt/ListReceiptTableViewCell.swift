@@ -40,27 +40,6 @@ final class ListReceiptTableViewCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
-    // MARK: Theme manager's proxy properties
-    @objc dynamic var titleLabelFont: UIFont! {
-        get { return textLabel?.font }
-        set { textLabel?.font = newValue }
-    }
-
-    @objc dynamic var titleLabelColor: UIColor! {
-        get { return textLabel?.textColor }
-        set { textLabel?.textColor = newValue }
-    }
-
-    @objc dynamic var subTitleLabelFont: UIFont! {
-        get { return detailTextLabel?.font }
-        set { detailTextLabel?.font = newValue }
-    }
-
-    @objc dynamic var subTitleLabelColor: UIColor! {
-        get { return detailTextLabel?.textColor }
-        set { detailTextLabel?.textColor = newValue }
-    }
 }
 
 extension ListReceiptTableViewCell {
@@ -104,10 +83,12 @@ extension ListReceiptTableViewCell {
     private func formatTextLabel(type: String, createdOn: String) -> NSAttributedString {
         let attributedText = NSMutableAttributedString()
 
-        attributedText.append(value: String(format: "%@\n", type), font: titleLabelFont, color: titleLabelColor)
+        attributedText.append(value: String(format: "%@\n", type),
+                              font: Theme.Label.bodyFontMedium,
+                              color: Theme.Label.color)
         attributedText.append(value: createdOn,
                               font: Theme.Label.captionOne,
-                              color: subTitleLabelColor)
+                              color: Theme.Label.subTitleColor)
         return attributedText
     }
 
@@ -115,15 +96,15 @@ extension ListReceiptTableViewCell {
         let attributedText = NSMutableAttributedString()
         if entry == credit {
             attributedText.append(value: String(format: "+%@\n", amount),
-                                  font: subTitleLabelFont,
+                                  font: Theme.Label.bodyFontMedium,
                                   color: Theme.Amount.creditColor)
         } else {
             attributedText.append(value: String(format: "-%@\n", amount),
-                                  font: subTitleLabelFont,
+                                  font: Theme.Label.bodyFontMedium,
                                   color: Theme.Amount.debitColor)
         }
 
-        attributedText.append(value: currency, font: Theme.Label.captionOne, color: subTitleLabelColor)
+        attributedText.append(value: currency, font: Theme.Label.captionOne, color: Theme.Label.subTitleColor)
         return attributedText
     }
 }

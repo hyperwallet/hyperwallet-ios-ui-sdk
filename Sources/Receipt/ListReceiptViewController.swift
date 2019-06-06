@@ -27,7 +27,7 @@ public final class ListReceiptViewController: UITableViewController {
     private let listReceiptCellIdentifier = "ListReceiptCellIdentifier"
     private var defaultHeaderHeight = CGFloat(38.0)
     private let sectionTitleDateFormat = "MMMM yyyy"
-    private var fetchMoreData: Bool = false
+    private var loadMoreReceipts = false
 
     private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "empty_list_receipt_message".localized())
 
@@ -63,7 +63,7 @@ public final class ListReceiptViewController: UITableViewController {
 
     override public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let date = presenter.groupedSectionArray[section].key
-        return date.formatDateToStringWith(format: sectionTitleDateFormat)
+        return date.formatDateToString(dateFormat: sectionTitleDateFormat)
     }
 
     // MARK: list receipt table view delegate
@@ -77,8 +77,8 @@ public final class ListReceiptViewController: UITableViewController {
         let lastSectionIndex = presenter.groupedSectionArray.count - 1
         if indexPath.section == lastSectionIndex
             && indexPath.row == presenter.groupedSectionArray[lastSectionIndex].value.count - 1
-            && !presenter.isFetchCompleted {
-            fetchMoreData = true
+            && !presenter.areAllReceiptsLoaded {
+            loadMoreReceipts = true
         }
     }
 
@@ -99,14 +99,10 @@ public final class ListReceiptViewController: UITableViewController {
     }
 
     override public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if fetchMoreData {
+        if loadMoreReceipts {
             presenter.listReceipt()
-            fetchMoreData = false
+            loadMoreReceipts = false
         }
-    }
-
-    private func toggleEmptyListView(hideLabel: Bool = true) {
-        emptyListLabel.isHidden = hideLabel
     }
 }
 
@@ -114,7 +110,7 @@ public final class ListReceiptViewController: UITableViewController {
 extension ListReceiptViewController: ListReceiptView {
     func loadReceipts() {
         if presenter.groupedSectionArray.isNotEmpty() {
-            toggleEmptyListView()
+            toggleEmptyListView(hideLabel: true)
         } else {
             toggleEmptyListView(hideLabel: false)
         }
@@ -137,5 +133,9 @@ extension ListReceiptViewController: ListReceiptView {
     func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
         let errorView = ErrorView(viewController: self, error: error)
         errorView.show(retry)
+    }
+
+    private func toggleEmptyListView(hideLabel: Bool) {
+        emptyListLabel.isHidden = hideLabel
     }
 }

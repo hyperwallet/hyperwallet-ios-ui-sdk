@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -857,6 +857,7 @@
 				DB46797F2260380C00E1AF49 /* Frameworks */,
 				DB4679802260380C00E1AF49 /* Resources */,
 				DB4FD43B2261462600F00959 /* Embed Frameworks */,
+				98175448228E0BE50019159A /* Carthage Copy frameworks */,
 			);
 			buildRules = (
 			);
@@ -1018,6 +1019,27 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		98175448228E0BE50019159A /* Carthage Copy frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"$(SRCROOT)",
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/HyperwalletSDK.framework",
+			);
+			name = "Carthage Copy frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/HyperwalletSDK.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
 		9821890522667E2F00657C21 /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
