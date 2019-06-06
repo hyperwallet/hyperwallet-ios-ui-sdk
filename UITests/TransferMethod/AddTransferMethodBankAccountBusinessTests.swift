@@ -74,7 +74,7 @@ private extension AddTransferMethodBankAccountBusinessTests {
         selectTransferMethodType.selectCountry(country: "UNITED STATES")
         selectTransferMethodType.selectCurrency(currency: "USD")
 
-        app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).tap()
+        app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: bankAccount).tap()
     }
 
     func verifyAccountInformationSection() {

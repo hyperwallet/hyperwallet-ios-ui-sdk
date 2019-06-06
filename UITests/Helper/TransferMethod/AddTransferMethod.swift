@@ -46,8 +46,8 @@ class AddTransferMethod {
         accountTypeSelect = addTransferMethodTableView.cells.staticTexts["Account Type"]
         createTransferMethodButton = addTransferMethodTableView
             .cells
-            .containing(.button, identifier: "createAccountBtn")
-            .buttons["createAccountBtn"]
+            .containing(.button, identifier: "createAccountButton")
+            .buttons["createAccountButton"]
         cardNumberInput = addTransferMethodTableView.textFields["cardNumber"]
         dateOfExpiryInput = addTransferMethodTableView.textFields["dateOfExpiry"]
         cvvInput = addTransferMethodTableView.textFields["cvv"]

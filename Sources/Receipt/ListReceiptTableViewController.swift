@@ -21,7 +21,7 @@ import UIKit
 /// Lists the user's transaction history
 ///
 /// The user can click a receipt in the list for more information
-public final class ListReceiptViewController: UITableViewController {
+public final class ListReceiptTableViewController: UITableViewController {
     private var spinnerView: SpinnerView?
     private var presenter: ListReceiptViewPresenter!
     private let listReceiptCellIdentifier = "ListReceiptCellIdentifier"
@@ -106,7 +106,7 @@ public final class ListReceiptViewController: UITableViewController {
 }
 
 // MARK: `ListReceiptView` delegate
-extension ListReceiptViewController: ListReceiptView {
+extension ListReceiptTableViewController: ListReceiptView {
     func loadReceipts() {
         if presenter.sectionData.isNotEmpty() {
             toggleEmptyListView(hideLabel: true)
