@@ -37,7 +37,7 @@ public class ThemeManager {
         Theme.themeColor = .white
         Theme.tintColor = UIColor(red: 0, green: 0.48, blue: 1, alpha: 1)
         Theme.Button.color = Theme.tintColor
-        Theme.Icon.color = Theme.tintColor
+        Theme.Icon.primaryColor = Theme.tintColor
         Theme.SpinnerView.activityIndicatorViewColor = Theme.tintColor
         Theme.SearchBar.textFieldBackgroundColor = UIColor(rgb: 0xdcdcdc)
         Theme.SearchBar.textFieldTintColor = UIColor(rgb: 0xdcdcdc)

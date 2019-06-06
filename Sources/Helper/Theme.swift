@@ -88,11 +88,13 @@ public struct Theme {
 
    /// Representation of all customizable visual style property for `UITableViewViewCell`
     public struct Cell {
+        /// The common `UITableViewViewCell` height.
+        public static let smallHeight = CGFloat(44)
+        /// The `UITableViewViewCell` height for the receipt items
+        public static let mediumHeight = CGFloat(63)
         /// The `UITableViewViewCell` height for the List transfer method items and
         /// the Select transfer method type items.
-        public static let height = CGFloat(88)
-        /// The common `UITableViewViewCell` height.
-        public static let rowHeight = CGFloat(44)
+        public static let largeHeight = CGFloat(88)
         /// The Select transfer method type items header height.
         public static let headerHeight = CGFloat(16)
     }
@@ -104,9 +106,25 @@ public struct Theme {
         /// The icon frame
         public static let frame = CGSize(width: 40, height: 40)
         /// The icon primary color
-        public static var color = Theme.themeColor
-        /// The icon background color
-        public static var backgroundColor = UIColor(rgb: 0xE5F7FA)
+        public static var primaryColor = Theme.themeColor
+        /// The icon primary background color
+        public static var primaryBackgroundColor = UIColor(rgb: 0xE5F7FA)
+        /// The icon credit color
+        public static var creditColor = Amount.creditColor
+        /// The icon credit background color
+        public static var creditBackgroundColor = UIColor(rgb: 0xF1FAE8)
+        /// The icon debit color
+        public static var debitColor = Amount.debitColor
+        /// The icon debit background color
+        public static var debitBackgroundColor = UIColor(rgb: 0xFEF7F7)
+    }
+
+    /// Representation of all customized visual style property for numbers
+    public struct Amount {
+        /// The credit color
+        public static var creditColor = UIColor(rgb: 0x5FBF00)
+        /// The debit color
+        public static var debitColor = UIColor(rgb: 0xDB4437)
     }
 
     /// Representation of all customizable visual style property for `UIViewController`.

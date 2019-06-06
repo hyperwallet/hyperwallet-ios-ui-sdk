@@ -208,7 +208,7 @@ private extension GenericTableViewController {
         tableView = UITableView(frame: .zero, style: .grouped)
         tableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: headerReuseId)
         tableView.tableFooterView = UIView()
-        tableView.estimatedRowHeight = Theme.Cell.rowHeight
+        tableView.estimatedRowHeight = Theme.Cell.smallHeight
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(T.self, forCellReuseIdentifier: reuseId)
     }

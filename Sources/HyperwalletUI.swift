@@ -49,6 +49,14 @@ public final class HyperwalletUI {
         return ListTransferMethodViewController()
     }
 
+    /// Lists the user's transactions.
+    ///
+    ///
+    /// - Returns: An instance of `ListReceiptViewController`
+    public func listReceiptViewController() -> ListReceiptViewController {
+        return ListReceiptViewController()
+    }
+
     /// Lists all transfer method types available based on the country, currency and profile type to create a new
     /// transfer method (bank account, bank card, PayPal account, prepaid card, paper check).
     ///
