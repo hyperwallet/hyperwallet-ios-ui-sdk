@@ -52,7 +52,7 @@ class ListReceiptPresenterTests: XCTestCase {
                        2,
                        "The receipt number of the last group should be 2")
         let indexPath = IndexPath(row: 0, section: 0)
-        let firstCellConfiguration = presenter.cellForRowAt(indexPath: indexPath)
+        let firstCellConfiguration = presenter.getCellConfiguration(indexPath: indexPath)
         XCTAssertNotNil(firstCellConfiguration, "firstCellConfiguration should not be nil")
         XCTAssertEqual(firstCellConfiguration?.amount, "5.00", "The amount should be 5.00")
         XCTAssertEqual(firstCellConfiguration?.type, "Payment", "The type should be Payment")

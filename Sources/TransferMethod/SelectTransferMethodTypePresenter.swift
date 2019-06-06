@@ -55,7 +55,7 @@ final class SelectTransferMethodTypePresenter {
     }
 
     /// Return the `SelectTransferMethodTypeConfiguration` based on the index
-    func cellForRowAt(indexPath: IndexPath) -> SelectTransferMethodTypeConfiguration? {
+    func getCellConfiguration(indexPath: IndexPath) -> SelectTransferMethodTypeConfiguration? {
         guard let transferMethodType = sectionData[safe: indexPath.row] else {
             return nil
         }
@@ -71,7 +71,7 @@ final class SelectTransferMethodTypePresenter {
     }
 
     /// Return the countryCurrency item composed by the tuple (title and value)
-    func countryCurrencyCellForRowAt(indexPath: IndexPath) -> CountryCurrencyCellConfiguration? {
+    func getCountryCurrencyConfiguration(indexPath: IndexPath) -> CountryCurrencyCellConfiguration? {
         guard let title = countryCurrencySectionData[safe: indexPath.row] else {
             return nil
         }

@@ -116,9 +116,9 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
 
         XCTAssertEqual(presenter.countryCurrencySectionData.count, 2, "The countryCurrencyCount should be 2")
         XCTAssertEqual(presenter.sectionData.count, 3, "The transferMethodTypesCount should be 3")
-        XCTAssertNotNil(presenter.cellForRowAt(indexPath: IndexPath(row: 0, section: 0)),
+        XCTAssertNotNil(presenter.getCellConfiguration(indexPath: IndexPath(row: 0, section: 0)),
                         "The cell configuration should not be nil")
-        XCTAssertNotNil(presenter.countryCurrencyCellForRowAt(indexPath: IndexPath(row: 0, section: 0)),
+        XCTAssertNotNil(presenter.getCountryCurrencyConfiguration(indexPath: IndexPath(row: 0, section: 0)),
                         "The country currency cell configuration should not be nil")
     }
 

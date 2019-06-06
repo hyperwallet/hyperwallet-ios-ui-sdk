@@ -41,7 +41,7 @@ final class AddTransferMethodPresenter {
     private let currency: String
     private let profileType: String
     private let transferMethodTypeCode: String
-    var sectionData: [AddTransferMethodSectionData] = []
+    var sectionData = [AddTransferMethodSectionData]()
 
     init(_ view: AddTransferMethodView,
          _ country: String,

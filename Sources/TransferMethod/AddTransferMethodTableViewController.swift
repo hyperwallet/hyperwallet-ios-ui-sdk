@@ -46,7 +46,7 @@ public final class AddTransferMethodTableViewController: UITableViewController {
     private var presenter: AddTransferMethodPresenter!
     private var widgets = [AbstractWidget]()
     // MARK: - Button -
-    private lazy var button: UIButton = {
+    private lazy var createAccountButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(
@@ -432,7 +432,7 @@ extension AddTransferMethodTableViewController: AddTransferMethodView {
             fieldGroup: "CREATE_BUTTON",
             country: country,
             currency: currency,
-            cells: [button])
+            cells: [createAccountButton])
         presenter.sectionData.append(buttonSection)
     }
 

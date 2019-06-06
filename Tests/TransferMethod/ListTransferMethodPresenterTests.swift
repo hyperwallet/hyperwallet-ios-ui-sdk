@@ -63,7 +63,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
 
         XCTAssertTrue(presenter.transferMethodExists(at: 0), "The transferMethodExists should return true")
         XCTAssertTrue(presenter.sectionData.isNotEmpty(), "The sectionData should not be empty")
-        XCTAssertNotNil(presenter.cellForRowAt(indexPath: IndexPath(row: 0, section: 0)),
+        XCTAssertNotNil(presenter.getCellConfiguration(indexPath: IndexPath(row: 0, section: 0)),
                         "The cell configuration should not be nil")
     }
 
@@ -86,7 +86,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
 
         XCTAssertFalse(presenter.transferMethodExists(at: 0), "The transferMethodExists should return false")
         XCTAssertTrue(presenter.sectionData.isEmpty, "The sectionData should be empty")
-        XCTAssertNil(presenter.cellForRowAt(indexPath: IndexPath(row: 0, section: 0)),
+        XCTAssertNil(presenter.getCellConfiguration(indexPath: IndexPath(row: 0, section: 0)),
                      "The cell configuration should be nil")
     }
 

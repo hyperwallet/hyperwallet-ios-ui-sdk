@@ -65,7 +65,7 @@ public final class ListTransferMethodTableViewController: UITableViewController 
         let cell = tableView.dequeueReusableCell(withIdentifier: ListTransferMethodTableViewCell.reuseIdentifier,
                                                  for: indexPath)
         if let listTransferMethodCell = cell as? ListTransferMethodTableViewCell,
-            let cellConfiguration = presenter.cellForRowAt(indexPath: indexPath) {
+            let cellConfiguration = presenter.getCellConfiguration(indexPath: indexPath) {
             listTransferMethodCell.configure(configuration: cellConfiguration)
         }
         return cell

@@ -85,7 +85,7 @@ extension SelectTransferMethodTypeTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: SelectTransferMethodTypeCell.reuseIdentifier,
                                                  for: indexPath)
         if let transferMethodCell = cell as? SelectTransferMethodTypeCell {
-            transferMethodCell.configure(configuration: presenter.cellForRowAt(indexPath: indexPath))
+            transferMethodCell.configure(configuration: presenter.getCellConfiguration(indexPath: indexPath))
         }
 
         return cell
@@ -198,7 +198,7 @@ extension CountryCurrencyTableView: UITableViewDataSource {
         cell.accessoryType = .disclosureIndicator
 
         if let countryCurrencyCell = cell as? CountryCurrencyCell {
-            countryCurrencyCell.item = presenter.countryCurrencyCellForRowAt(indexPath: indexPath)
+            countryCurrencyCell.item = presenter.getCountryCurrencyConfiguration(indexPath: indexPath)
         }
 
         return cell

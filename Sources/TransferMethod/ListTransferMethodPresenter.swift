@@ -142,7 +142,7 @@ final class ListTransferMethodPresenter {
             }
     }
 
-    func cellForRowAt(indexPath: IndexPath) -> ListTransferMethodCellConfiguration? {
+    func getCellConfiguration(indexPath: IndexPath) -> ListTransferMethodCellConfiguration? {
         if let transferMethod = sectionData[safe: indexPath.row],
             let country = transferMethod.getField(fieldName: .transferMethodCountry) as? String,
             let transferMethodType = transferMethod.getField(fieldName: .type) as? String {
