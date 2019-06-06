@@ -94,7 +94,8 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
         verifyIndividualAccountHolderSection()
         verifyAddressSection()
 
-        addTransferMethod.addTransferMethodTableView.scroll(to: addTransferMethod.addTransferMethodTableView.otherElements["TRANSFER METHOD INFORMATION"])
+        addTransferMethod.addTransferMethodTableView
+            .scroll(to: addTransferMethod.addTransferMethodTableView.otherElements["TRANSFER METHOD INFORMATION"])
 
         XCTAssert(addTransferMethod.addTransferMethodTableView.otherElements["TRANSFER METHOD INFORMATION"].exists)
 
