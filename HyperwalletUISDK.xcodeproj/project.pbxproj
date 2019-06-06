@@ -639,7 +639,6 @@
 		DBCA381B225E8BA900CD4137 /* TransferMethod */ = {
 			isa = PBXGroup;
 			children = (
-				073BA5D422A88612002C58BD /* ListTransferMethodTableViewController.swift */,
 				073BA5D222A885E6002C58BD /* AddTransferMethodTableViewController.swift */,
 				072A53F622838F6B00BC11D0 /* AddTransferMethodSectionData.swift */,
 				DBCA3822225E8BA900CD4137 /* AddTransferMethodPresenter.swift */,
@@ -647,6 +646,7 @@
 				DBCA381E225E8BA900CD4137 /* CountryCurrencyCell.swift */,
 				DBCA382B225E8BA900CD4137 /* ListTransferMethodPresenter.swift */,
 				DBCA3821225E8BA900CD4137 /* ListTransferMethodTableViewCell.swift */,
+				073BA5D422A88612002C58BD /* ListTransferMethodTableViewController.swift */,
 				DBCA3829225E8BA900CD4137 /* SelectTransferMethodTypeCell.swift */,
 				DBCA3825225E8BA900CD4137 /* SelectTransferMethodTypePresenter.swift */,
 				DBCA381C225E8BA900CD4137 /* SelectTransferMethodTypeTableViewController.swift */,
