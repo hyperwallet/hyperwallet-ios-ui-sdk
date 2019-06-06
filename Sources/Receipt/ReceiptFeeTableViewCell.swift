@@ -17,11 +17,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 final class ReceiptFeeTableViewCell: UITableViewCell {
-    static let reuseIdentifier = "ReceiptFeeTableViewCellReuseIdentifier"
+    static let reuseIdentifier = "receiptFeeTableViewCellReuseIdentifier"
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
-        self.heightAnchor.constraint(equalToConstant: Theme.Cell.detailsHeight).isActive = true
+        self.heightAnchor.constraint(equalToConstant: Theme.Cell.extraSmallHeight).isActive = true
     }
 
     required init?(coder aDecoder: NSCoder) {

@@ -29,7 +29,6 @@ public class ThemeManager {
         applyToSelectionWidgetCell()
         applyToListTransferMethodTableViewCell()
         applyToSelectTransferMethodTypeCell()
-        applyToReceiptTransactionTableViewCell()
         applyToReceiptDetailTableViewCell()
         applyToReceiptFeeTableViewCell()
         applyToReceiptNotesTableViewCell()
@@ -141,14 +140,6 @@ public class ThemeManager {
         proxy.titleLabelFont = Theme.Label.bodyFontMedium
         proxy.titleLabelColor = Theme.Label.color
         proxy.subTitleLabelFont = Theme.Label.captionOne
-        proxy.subTitleLabelColor = Theme.Label.subTitleColor
-    }
-
-    private static func applyToReceiptTransactionTableViewCell() {
-        let proxy = ReceiptTransactionTableViewCell.appearance()
-        proxy.titleLabelFont = Theme.Label.bodyFontMedium
-        proxy.titleLabelColor = Theme.Label.color
-        proxy.subTitleLabelFont = Theme.Label.bodyFontMedium
         proxy.subTitleLabelColor = Theme.Label.subTitleColor
     }
 

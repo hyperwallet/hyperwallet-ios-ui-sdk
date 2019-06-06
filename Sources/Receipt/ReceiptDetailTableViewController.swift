@@ -40,8 +40,8 @@ public final class ReceiptDetailTableViewController: UITableViewController {
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        title = "title_transaction_details".localized()
-        titleDisplayMode(UINavigationItem.LargeTitleDisplayMode.never)
+        title = "title_receipts_details".localized()
+        titleDisplayMode(.never)
         setViewBackgroundColor()
         setupReceiptDetailTableView()
     }
@@ -51,31 +51,65 @@ public final class ReceiptDetailTableViewController: UITableViewController {
         tableView.allowsSelection = false
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = UITableView.automaticDimension
-        tableView.accessibilityIdentifier = "ReceiptDetailTableView"
+        tableView.accessibilityIdentifier = "receiptDetailTableView"
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)
         }
+    }
+
+    private func cellForRowAt(_ indexPath: IndexPath) -> UITableViewCell {
+        let cellIdentifier = presenter.sectionData[indexPath.section].cellIdentifier
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
+        let section = presenter.sectionData[indexPath.section]
+        switch section.receiptDetailSectionHeader {
+        case .transaction:
+            if let tableViewCell = cell as? ReceiptTransactionTableViewCell,
+                let transactionSection = section as? ReceiptDetailSectionTransactionData {
+                tableViewCell.configure(configuration: transactionSection.tableViewCellConfiguration)
+            }
+
+        case .details:
+            if let tableViewCell = cell as? ReceiptDetailTableViewCell,
+                let detailSection = section as? ReceiptDetailSectionDetailData {
+                let row = detailSection.rows[indexPath.row]
+                tableViewCell.textLabel?.text = row.title
+                tableViewCell.detailTextLabel?.text = row.value
+            }
+
+        case .fee:
+            if let tableViewCell = cell as? ReceiptFeeTableViewCell,
+                let feeSection = section as? ReceiptDetailSectionFeeData {
+                let row = feeSection.rows[indexPath.row]
+                tableViewCell.textLabel?.text = row.title
+                tableViewCell.detailTextLabel?.text = row.value
+            }
+
+        case .notes:
+            if let tableViewCell = cell as? ReceiptNotesTableViewCell,
+                let feeSection = section as? ReceiptDetailSectionNotesData {
+                tableViewCell.textLabel?.text = feeSection.notes!
+            }
+        }
+        return cell
     }
 }
 
 extension ReceiptDetailTableViewController {
     override public func numberOfSections(in tableView: UITableView) -> Int {
-        return presenter.numberOfSections()
+        return presenter.sectionData.count
     }
 
     override public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return presenter.titleForHeaderInSection(section)
+        return presenter.sectionData[section].title
     }
 
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.numberOfRowsInSection(section)
+        return presenter.sectionData[section].rowCount
     }
 
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellIdentifier = presenter.cellIdentifierForRowInSection(indexPath.section)
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        presenter.configureCell(cell, for: indexPath)
-        return cell
+        return cellForRowAt(indexPath)
     }
 
     override public func tableView(_ tableView: UITableView,

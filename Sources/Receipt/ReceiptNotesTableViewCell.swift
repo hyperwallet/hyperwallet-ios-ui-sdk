@@ -17,7 +17,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 final class ReceiptNotesTableViewCell: UITableViewCell {
-    static let reuseIdentifier = "ReceiptNotesTableViewCellReuseIdentifier"
+    static let reuseIdentifier = "receiptNotesTableViewCellReuseIdentifier"
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)

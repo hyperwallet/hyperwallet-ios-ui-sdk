@@ -98,7 +98,7 @@ public struct Theme {
         /// The Select transfer method type items header height.
         public static let headerHeight = CGFloat(16)
         /// The detail UITableViewViewCell height.
-        public static let detailsHeight = CGFloat(28)
+        public static let extraSmallHeight = CGFloat(28)
     }
 
     /// Representation of all customizable visual style property for the `Hyperwallet`'s icon.

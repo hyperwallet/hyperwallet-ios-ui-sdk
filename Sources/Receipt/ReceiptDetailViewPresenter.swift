@@ -19,73 +19,23 @@
 import HyperwalletSDK
 
 final class ReceiptDetailViewPresenter {
-    private var sections: [ReceiptSection] = []
+    private(set) var sectionData: [ReceiptDetailSectionData] = []
 
     init(with receipt: HyperwalletReceipt) {
         initializeSections(with: receipt)
     }
 
     private func initializeSections(with receipt: HyperwalletReceipt) {
-        let receiptTransactionSection = ReceiptTransactionSection(from: receipt)
-        sections.append(receiptTransactionSection)
+        let receiptTransactionSection = ReceiptDetailSectionTransactionData(from: receipt)
+        sectionData.append(receiptTransactionSection)
 
-        let receiptDetailSection = ReceiptDetailSection(from: receipt)
-        sections.append(receiptDetailSection)
+        let receiptDetailSection = ReceiptDetailSectionDetailData(from: receipt)
+        sectionData.append(receiptDetailSection)
 
-        if let receiptNotesSection = ReceiptNotesSection(from: receipt) {
-            sections.append(receiptNotesSection)
-        }
-        let receiptFeeSection = ReceiptFeeSection(from: receipt)
-        sections.append(receiptFeeSection)
-    }
+        let receiptNotesSection = ReceiptDetailSectionNotesData(from: receipt)
+            sectionData.append(receiptNotesSection)
 
-    func numberOfSections() -> Int {
-        return sections.count
-    }
-
-    func titleForHeaderInSection(_ index: Int) -> String {
-        return sections[index].title
-    }
-
-    func numberOfRowsInSection(_ index: Int) -> Int {
-        return sections[index].rowCount
-    }
-
-    func cellIdentifierForRowInSection(_ section: Int) -> String {
-        return sections[section].cellIdentifier
-    }
-
-    func configureCell(_ cell: UITableViewCell, for indexPath: IndexPath) {
-        cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
-        let section = sections[indexPath.section]
-        switch section.sectionType {
-        case .transaction:
-            if let tableViewCell = cell as? ReceiptTransactionTableViewCell,
-                let transactionSection = section as? ReceiptTransactionSection {
-                 tableViewCell.configure(configuration: transactionSection.tableViewCellConfiguration)
-            }
-
-        case .detail:
-            if let tableViewCell = cell as? ReceiptDetailTableViewCell,
-                let detailSection = section as? ReceiptDetailSection {
-                let row = detailSection.rows[indexPath.row]
-                tableViewCell.textLabel?.text = row.title
-                tableViewCell.detailTextLabel?.text = row.value
-            }
-
-        case .fee:
-            if let tableViewCell = cell as? ReceiptFeeTableViewCell,
-                let feeSection = section as? ReceiptFeeSection {
-                let row = feeSection.rows[indexPath.row]
-                tableViewCell.textLabel?.text = row.title
-                tableViewCell.detailTextLabel?.text = row.value
-            }
-
-        case .notes:
-            if let tableViewCell = cell as? ReceiptNotesTableViewCell,
-                let feeSection = section as? ReceiptNotesSection {
-                tableViewCell.textLabel?.text = feeSection.notes!
-            }
-        }
+        let receiptFeeSection = ReceiptDetailSectionFeeData(from: receipt)
+        sectionData.append(receiptFeeSection)
     }
 }

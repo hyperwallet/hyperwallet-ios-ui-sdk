@@ -29,7 +29,7 @@ struct ReceiptTransactionCellConfiguration {
 }
 
 final class ReceiptTransactionTableViewCell: UITableViewCell {
-    static let reuseIdentifier = "ReceiptTransactionTableViewCellReuseIdentifier"
+    static let reuseIdentifier = "receiptTransactionTableViewCellReuseIdentifier"
     private var iconColor: UIColor!
     private var iconBackgroundColor: UIColor!
     private let credit = HyperwalletReceipt.HyperwalletEntryType.credit.rawValue

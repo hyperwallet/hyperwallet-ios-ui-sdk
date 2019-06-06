@@ -18,26 +18,24 @@
 
 import HyperwalletSDK
 
-typealias TitleValueRow = (title: String, value: String)
-
-enum ReceiptSectionType: String {
-    case transaction, detail, fee, notes
+enum ReceiptDetailSectionHeader: String {
+    case transaction, details, fee, notes
 }
 
-protocol ReceiptSection {
-    var sectionType: ReceiptSectionType { get }
+protocol ReceiptDetailSectionData {
+    var receiptDetailSectionHeader: ReceiptDetailSectionHeader { get }
     var rowCount: Int { get }
     var title: String { get }
     var cellIdentifier: String { get }
 }
 
-extension ReceiptSection {
+extension ReceiptDetailSectionData {
     var rowCount: Int { return 1 }
-    var title: String { return "receipt_section_header_\(sectionType.rawValue)".localized() }
+    var title: String { return "receipt_details_section_header_\(receiptDetailSectionHeader.rawValue)".localized() }
 }
 
-struct ReceiptTransactionSection: ReceiptSection {
-    var sectionType: ReceiptSectionType { return .transaction }
+struct ReceiptDetailSectionTransactionData: ReceiptDetailSectionData {
+    var receiptDetailSectionHeader: ReceiptDetailSectionHeader { return .transaction }
     var cellIdentifier: String { return ReceiptTransactionTableViewCell.reuseIdentifier }
     let tableViewCellConfiguration: ReceiptTransactionCellConfiguration
 
@@ -55,9 +53,9 @@ struct ReceiptTransactionSection: ReceiptSection {
     }
 }
 
-struct ReceiptDetailSection: ReceiptSection {
-    var rows: [TitleValueRow] = []
-    var sectionType: ReceiptSectionType { return .detail }
+struct ReceiptDetailSectionDetailData: ReceiptDetailSectionData {
+    var rows: [(title: String, value: String)] = []
+    var receiptDetailSectionHeader: ReceiptDetailSectionHeader { return .details }
     var rowCount: Int { return rows.count }
     var cellIdentifier: String { return ReceiptDetailTableViewCell.reuseIdentifier }
 
@@ -83,32 +81,35 @@ struct ReceiptDetailSection: ReceiptSection {
     }
 }
 
-struct ReceiptFeeSection: ReceiptSection {
-    var rows: [TitleValueRow] = []
-    var sectionType: ReceiptSectionType { return .fee }
+struct ReceiptDetailSectionFeeData: ReceiptDetailSectionData {
+    var rows: [(title: String, value: String)] = []
+    var receiptDetailSectionHeader: ReceiptDetailSectionHeader { return .fee }
     var rowCount: Int { return rows.count }
     var cellIdentifier: String { return ReceiptFeeTableViewCell.reuseIdentifier }
 
     init(from receipt: HyperwalletReceipt) {
-        rows.append((title: "receipt_details_amount".localized(), value: receipt.amount))
-        if let fee = receipt.fee {
-            rows.append((title: "receipt_details_fee".localized(), value: fee))
+        let amountFormat = receipt.entry == HyperwalletReceipt.HyperwalletEntryType.credit ? "+%@" : "-%@"
+        rows.append(
+            (title: "receipt_details_amount".localized(),
+             value: String(format: amountFormat, receipt.amount)))
+        var fee: Float = 0.0
+        if let strFee = receipt.fee {
+            rows.append((title: "receipt_details_fee".localized(), value: strFee))
+            fee = Float(strFee) ?? 0.0
         }
-        ///TODO
-        rows.append((title: "receipt_details_transaction".localized(), value: "???"))
+        if let amount = Float(receipt.amount) {
+            let transaction = String(format: "%.2f", amount - fee)
+            rows.append((title: "receipt_details_transaction".localized(), value: transaction))
+        }
     }
 }
 
-struct ReceiptNotesSection: ReceiptSection {
+struct ReceiptDetailSectionNotesData: ReceiptDetailSectionData {
     let notes: String?
-    var sectionType: ReceiptSectionType { return .notes }
+    var receiptDetailSectionHeader: ReceiptDetailSectionHeader { return .notes }
     var cellIdentifier: String { return ReceiptNotesTableViewCell.reuseIdentifier }
 
-    init?(from receipt: HyperwalletReceipt) {
-        if let notes = receipt.details?.notes {
-            self.notes = notes
-        } else {
-            return nil
-        }
+    init(from receipt: HyperwalletReceipt) {
+        self.notes = receipt.details?.notes
     }
 }
