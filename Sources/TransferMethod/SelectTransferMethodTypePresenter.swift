@@ -19,14 +19,16 @@
 import HyperwalletSDK
 
 protocol SelectTransferMethodTypeView: class {
+    typealias SelectItemHandler = (_ value: CountryCurrencyCellConfiguration) -> Void
+    typealias MarkCellHandler = (_ value: CountryCurrencyCellConfiguration) -> Bool
+    typealias FilterContentHandler = ((_ items: [CountryCurrencyCellConfiguration],
+        _ searchText: String) -> [CountryCurrencyCellConfiguration])
+
     func showGenericTableView(items: [CountryCurrencyCellConfiguration],
                               title: String,
-                              selectItemHandler: @escaping (_ value: CountryCurrencyCellConfiguration) -> Void,
-                              markCellHandler: @escaping (_ value: CountryCurrencyCellConfiguration) -> Bool,
-                              filterContentHandler: @escaping ((_ items: [CountryCurrencyCellConfiguration],
-        _ searchText: String)
-        -> [CountryCurrencyCellConfiguration]),
-                              selectedItem: String)
+                              selectItemHandler: @escaping SelectItemHandler,
+                              markCellHandler: @escaping MarkCellHandler,
+                              filterContentHandler: @escaping FilterContentHandler)
 
     func navigateToAddTransferMethodController(country: String,
                                                currency: String,
@@ -189,8 +191,7 @@ final class SelectTransferMethodTypePresenter {
                                   title: "select_transfer_method_country".localized(),
                                   selectItemHandler: selectCountryHandler(),
                                   markCellHandler: countryMarkCellHandler(),
-                                  filterContentHandler: filterContentHandler(),
-                                  selectedItem: selectedCountry)
+                                  filterContentHandler: filterContentHandler())
     }
 
     /// Shows the Select Currency View
@@ -199,14 +200,13 @@ final class SelectTransferMethodTypePresenter {
                                   title: "select_transfer_method_currency".localized(),
                                   selectItemHandler: selectCurrencyHandler(),
                                   markCellHandler: currencyMarkCellHandler(),
-                                  filterContentHandler: filterContentHandler(),
-                                  selectedItem: selectedCurrency)
+                                  filterContentHandler: filterContentHandler())
     }
 
     /// Handles the selection country event at GenericTableView
     /// when selecting a country, a default currency should be selected automatically as well.
     /// Eventually the transfer methods should be shown correspondingly
-    private func selectCountryHandler() -> (_ value: CountryCurrencyCellConfiguration) -> Void {
+    private func selectCountryHandler() -> SelectTransferMethodTypeView.SelectItemHandler {
         return { [weak self] (country) in
             guard let strongSelf = self else {
                 return
@@ -219,7 +219,7 @@ final class SelectTransferMethodTypePresenter {
     }
 
     /// Handles the selection currency event at GenericTableView
-    private func selectCurrencyHandler() -> (_ value: CountryCurrencyCellConfiguration) -> Void {
+    private func selectCurrencyHandler() -> SelectTransferMethodTypeView.SelectItemHandler {
         return { [weak self]  (currency) in
             guard let strongSelf = self else {
                 return
@@ -231,8 +231,7 @@ final class SelectTransferMethodTypePresenter {
         }
     }
 
-    private func filterContentHandler() -> ((_ items: [CountryCurrencyCellConfiguration], _ searchText: String)
-        -> [CountryCurrencyCellConfiguration]) {
+    private func filterContentHandler() -> SelectTransferMethodTypeView.FilterContentHandler {
             return {(items, searchText) in
                 items.filter {
                     // search by decription
@@ -243,13 +242,13 @@ final class SelectTransferMethodTypePresenter {
             }
     }
 
-    private func countryMarkCellHandler() -> ((_ value: CountryCurrencyCellConfiguration) -> Bool) {
+    private func countryMarkCellHandler() -> SelectTransferMethodTypeView.MarkCellHandler {
         return { [weak self] item in
             self?.selectedCountry == item.value
         }
     }
 
-    private func currencyMarkCellHandler() -> ((_ value: CountryCurrencyCellConfiguration) -> Bool) {
+    private func currencyMarkCellHandler() -> SelectTransferMethodTypeView.MarkCellHandler {
         return { [weak self] item in
             self?.selectedCurrency == item.value
         }
