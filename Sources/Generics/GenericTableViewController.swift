@@ -201,7 +201,7 @@ private extension GenericTableViewController {
     }
 
     func setupTable() {
-        tableView = UITableView(frame: .zero, style: .grouped)
+        tableView = UITableView(frame: .zero, style: .plain)
         tableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: headerReuseId)
         tableView.tableFooterView = UIView()
         tableView.estimatedRowHeight = Theme.Cell.rowHeight
