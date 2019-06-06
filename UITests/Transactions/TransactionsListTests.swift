@@ -54,6 +54,18 @@ class TransactionsListTests: BaseTests {
         XCTAssertFalse(app.tables.cells.containing(.staticText, identifier: "May 2019").element.exists)
     }
 
+    func testTransactionsList_verifyEmptyScreen() {
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/receipts",
+                             filename: "TransactionsEmptyList",
+                             method: HTTPMethod.get)
+        transactionsList.clickBackButton()
+        app.tables.cells.containing(.staticText, identifier: "List Receipts").element(boundBy: 0).tap()
+        waitForNonExistence(spinner)
+
+        XCTAssertTrue(app.staticTexts["Seems like, you don’t have any Transactions, yet."].exists)
+        XCTAssertEqual(app.tables.cells.count, 0)
+    }
+
     func testTransactionsList_verifyAfterRelaunch() {
         validatetestTransactionsListScreen()
         XCUIDevice.shared.clickHomeAndRelaunch(app: app)
