@@ -173,6 +173,11 @@ addTransferMethodViewController.createTransferMethodHandler = { transferMethod i
 navigationController?.pushViewController(addTransferMethodViewController, animated: true)
 ```
 
+### Lists the user's receipts
+```swift
+let listReceiptTableViewController = HyperwalletUI.shared.listReceiptTableViewController()
+```
+
 ## NotificationCenter Events
 
 | Notification name | Description |
