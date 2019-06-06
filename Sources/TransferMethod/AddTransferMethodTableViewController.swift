@@ -82,7 +82,7 @@ public final class AddTransferMethodTableViewController: UITableViewController {
     }()
 
     // MARK: - View Lifecycle -
-    /// Creates a new instance of the `AddTransferMethodViewController`
+    /// Creates a new instance of the `AddTransferMethodTableViewController`
     ///
     /// - Parameters:
     ///   - country: The 2 letter ISO 3166-1 country code.

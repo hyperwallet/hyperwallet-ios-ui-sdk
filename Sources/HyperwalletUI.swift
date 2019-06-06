@@ -44,7 +44,7 @@ public final class HyperwalletUI {
     ///
     /// The user can deactivate and add a new transfer method.
     ///
-    /// - Returns: An instance of `ListTransferMethodViewController`
+    /// - Returns: An instance of `listTransferMethodTableViewController`
     public func listTransferMethodTableViewController() -> ListTransferMethodTableViewController {
         return ListTransferMethodTableViewController()
     }
@@ -52,7 +52,7 @@ public final class HyperwalletUI {
     /// Lists the user's transactions.
     ///
     ///
-    /// - Returns: An instance of `ListReceiptViewController`
+    /// - Returns: An instance of `ListReceiptTableViewController`
     public func listReceiptTableViewController() -> ListReceiptTableViewController {
         return ListReceiptTableViewController()
     }
@@ -75,7 +75,7 @@ public final class HyperwalletUI {
     ///   - currency: The 3 letter ISO 4217-1 currency code.
     ///   - profileType: The profile type. Possible values - INDIVIDUAL, BUSINESS.
     ///   - transferMethodTypeCode: The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD.
-    /// - Returns: An instance of `AddTransferMethodViewController`
+    /// - Returns: An instance of `AddTransferMethodTableViewController`
     public func addTransferMethodTableViewController(
         _ country: String,
         _ currency: String,
