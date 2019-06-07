@@ -50,7 +50,7 @@ final class ListReceiptViewPresenter {
         Hyperwallet.shared.listUserReceipts(queryParam: setUpQueryParam(), completion: listReceiptHandler())
     }
 
-    func getCellConfiguration(indexPath: IndexPath) -> ListReceiptCellConfiguration? {
+    func getCellConfiguration(indexPath: IndexPath) -> ReceiptTransactionCellConfiguration? {
         guard let receipt = sectionData[safe: indexPath.section]?.value[safe:indexPath.row] else {
             return nil
         }
@@ -61,7 +61,7 @@ final class ListReceiptViewPresenter {
             .ignoreTimeZone
             .date(from: receipt.createdOn)!
             .format(for: .date)
-        return ListReceiptCellConfiguration(
+        return ReceiptTransactionCellConfiguration(
             type: type.lowercased().localized(),
             entry: entry,
             amount: receipt.amount,
