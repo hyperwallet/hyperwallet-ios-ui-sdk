@@ -44,25 +44,25 @@ public final class HyperwalletUI {
     ///
     /// The user can deactivate and add a new transfer method.
     ///
-    /// - Returns: An instance of `ListTransferMethodViewController`
-    public func listTransferMethodViewController() -> ListTransferMethodViewController {
-        return ListTransferMethodViewController()
+    /// - Returns: An instance of `listTransferMethodTableViewController`
+    public func listTransferMethodTableViewController() -> ListTransferMethodTableViewController {
+        return ListTransferMethodTableViewController()
     }
 
     /// Lists the user's transactions.
     ///
     ///
-    /// - Returns: An instance of `ListReceiptViewController`
-    public func listReceiptViewController() -> ListReceiptViewController {
-        return ListReceiptViewController()
+    /// - Returns: An instance of `ListReceiptTableViewController`
+    public func listReceiptTableViewController() -> ListReceiptTableViewController {
+        return ListReceiptTableViewController()
     }
 
     /// Lists all transfer method types available based on the country, currency and profile type to create a new
     /// transfer method (bank account, bank card, PayPal account, prepaid card, paper check).
     ///
-    /// - Returns: An instance of `SelectTransferMethodTypeViewController`
-    public func selectTransferMethodTypeViewController() -> SelectTransferMethodTypeViewController {
-        return SelectTransferMethodTypeViewController()
+    /// - Returns: An instance of `SelectTransferMethodTypeTableViewController`
+    public func selectTransferMethodTypeTableViewController() -> SelectTransferMethodTypeTableViewController {
+        return SelectTransferMethodTypeTableViewController()
     }
 
     /// Controller to create a new transfer method.
@@ -75,13 +75,13 @@ public final class HyperwalletUI {
     ///   - currency: The 3 letter ISO 4217-1 currency code.
     ///   - profileType: The profile type. Possible values - INDIVIDUAL, BUSINESS.
     ///   - transferMethodTypeCode: The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD.
-    /// - Returns: An instance of `AddTransferMethodViewController`
-    public func addTransferMethodViewController(
+    /// - Returns: An instance of `AddTransferMethodTableViewController`
+    public func addTransferMethodTableViewController(
         _ country: String,
         _ currency: String,
         _ profileType: String,
-        _ transferMethodTypeCode: String) -> AddTransferMethodViewController {
-        return AddTransferMethodViewController(country, currency, profileType, transferMethodTypeCode)
+        _ transferMethodTypeCode: String) -> AddTransferMethodTableViewController {
+        return AddTransferMethodTableViewController(country, currency, profileType, transferMethodTypeCode)
     }
 
     private init(_ provider: HyperwalletAuthenticationTokenProvider) {

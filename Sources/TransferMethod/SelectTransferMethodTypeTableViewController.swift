@@ -21,7 +21,7 @@ import UIKit
 
 /// Lists all transfer method types available based on the country, currency and profile type to create a new transfer
 /// method (bank account, bank card, PayPal account, prepaid card, paper check).
-public final class SelectTransferMethodTypeViewController: UITableViewController {
+public final class SelectTransferMethodTypeTableViewController: UITableViewController {
     // MARK: - Outlets
     private var countryCurrencyTableView: UITableView!
 
@@ -52,9 +52,9 @@ public final class SelectTransferMethodTypeViewController: UITableViewController
     // MARK: - Setup Layout
     private func setupTransferMethodTypeTableView() {
         tableView = UITableView(frame: .zero, style: .plain)
-        tableView.accessibilityIdentifier = "transferMethodTableView"
+        tableView.accessibilityIdentifier = "selectTransferMethodTypeTable"
         tableView.register(SelectTransferMethodTypeCell.self,
-                           forCellReuseIdentifier: SelectTransferMethodTypeCell.reuseId)
+                           forCellReuseIdentifier: SelectTransferMethodTypeCell.reuseIdentifier)
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 0.5))
         footerView.backgroundColor = tableView.separatorColor
         tableView.tableFooterView = footerView
@@ -64,7 +64,7 @@ public final class SelectTransferMethodTypeViewController: UITableViewController
         countryCurrencyTableView = UITableView(frame: .zero, style: .grouped)
         countryCurrencyView = CountryCurrencyTableView(presenter)
         countryCurrencyTableView.register(CountryCurrencyCell.self,
-                                          forCellReuseIdentifier: CountryCurrencyCell.reuseId)
+                                          forCellReuseIdentifier: CountryCurrencyCell.reuseIdentifier)
         countryCurrencyTableView.backgroundColor = Theme.ViewController.backgroundColor
         countryCurrencyTableView.dataSource = countryCurrencyView
         countryCurrencyTableView.delegate = countryCurrencyView
@@ -72,32 +72,33 @@ public final class SelectTransferMethodTypeViewController: UITableViewController
     }
 }
 
-extension SelectTransferMethodTypeViewController {
+extension SelectTransferMethodTypeTableViewController {
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.transferMethodTypesCount
+        return presenter.sectionData.count
     }
 
     override public func numberOfSections(in tableView: UITableView) -> Int {
-        return presenter.transferMethodTypesCount > 0 ? 1:0
+        return presenter.sectionData.isNotEmpty() ? 1:0
     }
 
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SelectTransferMethodTypeCell.reuseId, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: SelectTransferMethodTypeCell.reuseIdentifier,
+                                                 for: indexPath)
         if let transferMethodCell = cell as? SelectTransferMethodTypeCell {
-            transferMethodCell.configure(configuration: presenter.getCellConfiguration(for: indexPath.row))
+            transferMethodCell.configure(configuration: presenter.getCellConfiguration(indexPath: indexPath))
         }
 
         return cell
     }
 }
 
-extension SelectTransferMethodTypeViewController {
+extension SelectTransferMethodTypeTableViewController {
     override public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return countryCurrencyTableView
     }
 
     override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return Theme.Cell.smallHeight * CGFloat(presenter.countryCurrencyCount) + Theme.Cell.headerHeight
+        return Theme.Cell.smallHeight * CGFloat(presenter.sectionData.count) + Theme.Cell.headerHeight
     }
 
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -111,7 +112,7 @@ extension SelectTransferMethodTypeViewController {
 }
 
 // MARK: - SelectTransferMethodView
-extension SelectTransferMethodTypeViewController: SelectTransferMethodTypeView {
+extension SelectTransferMethodTypeTableViewController: SelectTransferMethodTypeView {
     func transferMethodTypeTableViewReloadData() {
         tableView.reloadData()
     }
@@ -124,10 +125,10 @@ extension SelectTransferMethodTypeViewController: SelectTransferMethodTypeView {
                                                currency: String,
                                                profileType: String,
                                                transferMethodTypeCode: String) {
-        let addTransferMethodController = AddTransferMethodViewController(country,
-                                                                          currency,
-                                                                          profileType,
-                                                                          transferMethodTypeCode)
+        let addTransferMethodController = AddTransferMethodTableViewController(country,
+                                                                               currency,
+                                                                               profileType,
+                                                                               transferMethodTypeCode)
 
         addTransferMethodController.createTransferMethodHandler = {
             (transferMethod: HyperwalletTransferMethod) -> Void in
@@ -188,16 +189,16 @@ final class CountryCurrencyTableView: NSObject {
 
 extension CountryCurrencyTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.countryCurrencyCount
+        return presenter.countryCurrencySectionData.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CountryCurrencyCell.reuseId, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CountryCurrencyCell.reuseIdentifier, for: indexPath)
 
         cell.accessoryType = .disclosureIndicator
 
         if let countryCurrencyCell = cell as? CountryCurrencyCell {
-            countryCurrencyCell.item = presenter.getCountryCurrencyCellConfiguration(for: indexPath.row)
+            countryCurrencyCell.item = presenter.getCountryCurrencyConfiguration(indexPath: indexPath)
         }
 
         return cell

@@ -26,6 +26,8 @@ struct ListTransferMethodCellConfiguration {
 }
 
 final class ListTransferMethodTableViewCell: UITableViewCell {
+    static let reuseIdentifier = "listTransferMethodCellIdentifier"
+
     // MARK: Life cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)

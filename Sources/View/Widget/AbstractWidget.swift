@@ -43,7 +43,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
         layoutMargins = UIEdgeInsets(top: 11.0, left: 0, bottom: 11.0, right: 16.0)
         self.field = field
         setupLayout(field: field)
-        label.accessibilityIdentifier = String(format: "label_%@", field.name ?? "")
+        label.accessibilityIdentifier = String(format: "%@", field.name ?? "")
     }
 
     required init(coder: NSCoder) {
@@ -75,7 +75,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
 
     func hideError() {
         label.textColor = Theme.Label.textColor
-        label.accessibilityIdentifier = String(format: "label_%@", field.name ?? "")
+        label.accessibilityIdentifier = String(format: "%@", field.name ?? "")
     }
 
     func isValid() -> Bool {
@@ -96,7 +96,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
 
     func showError() {
         label.textColor = Theme.Label.errorColor
-        label.accessibilityIdentifier = String(format: "label_%@_error", field.name ?? "")
+        label.accessibilityIdentifier = String(format: "%@_error", field.name ?? "")
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
