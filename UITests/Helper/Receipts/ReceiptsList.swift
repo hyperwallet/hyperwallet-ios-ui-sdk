@@ -1,6 +1,6 @@
 import XCTest
 
-class TransactionsList {
+class ReceiptsList {
     let defaultTimeout = 5.0
 
     var app: XCUIApplication

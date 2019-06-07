@@ -126,6 +126,38 @@
                 "clientPaymentId": "DyClk0VG9a",
                 "payeeName": "Shaoyun Yang"
             }
+        },
+        {
+            "journalId": "55176993",
+            "type": "TRANSFER_TO_BANK_ACCOUNT",
+            "createdOn": "2019-05-26T18:16:17",
+            "entry": "DEBIT",
+            "sourceToken": "usr-token",
+            "destinationToken": "trm-00000000-0000-0000-0000-0000000000",
+            "amount": "5.00",
+            "fee": "2.00",
+            "currency": "USD",
+            "details": {
+                "payeeName": "Shaoyun Yang",
+                "branchId": "026009593",
+                "bankAccountId": "*****5209",
+                "bankAccountPurpose": "CHECKING"
+            }
+        },
+        {
+            "journalId": "55176994",
+            "type": "PAYMENT",
+            "createdOn": "2019-05-27T18:16:19",
+            "entry": "CREDIT",
+            "sourceToken": "act-00000000-0000-0000-0000-0000000000",
+            "destinationToken": "usr-00000000-0000-0000-0000-0000000000",
+            "amount": "6.00",
+            "fee": "0.00",
+            "currency": "USD",
+            "details": {
+                "clientPaymentId": "DyClk0VG9a",
+                "payeeName": "Shaoyun Yang"
+            }
         }
     ],
     "links": [
@@ -133,19 +165,19 @@
             "params": {
                 "rel": "self"
             },
-            "href": "https://qamaster-hyperwallet.aws.paylution.net/rest/v3/users/usr-token/receipts?offset=0&limit=10"
+            "href": "https://localhost/rest/v3/users/usr-token/receipts?offset=0&limit=10"
         },
         {
             "params": {
                 "rel": "next"
             },
-            "href": "https://qamaster-hyperwallet.aws.paylution.net/rest/v3/users/usr-token/receipts?offset=10&limit=10"
+            "href": "https://localhost/rest/v3/users/usr-token/receipts?offset=10&limit=10"
         },
         {
             "params": {
                 "rel": "last"
             },
-            "href": "https://qamaster-hyperwallet.aws.paylution.net/rest/v3/users/usr-token/receipts?offset=11&limit=10"
+            "href": "https://localhost/rest/v3/users/usr-token/receipts?offset=11&limit=10"
         }
     ]
 }

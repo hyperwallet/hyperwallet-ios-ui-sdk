@@ -38,7 +38,7 @@
         {
             "journalId": "55176992",
             "type": "PAYMENT",
-            "createdOn": "2019-05-08T18:16:19",
+            "createdOn": "2019-05-T18:16:19",
             "entry": "CREDIT",
             "sourceToken": "act-00000000-0000-0000-0000-0000000000",
             "destinationToken": "usr-00000000-0000-0000-0000-0000000000",
@@ -73,19 +73,19 @@
             "params": {
                 "rel": "self"
             },
-            "href": "https://qamaster-hyperwallet.aws.paylution.net/rest/v3/users/usr-token/receipts?offset=0&limit=10"
+            "href": "https://localhost/rest/v3/users/usr-token/receipts?offset=0&limit=10"
         },
         {
             "params": {
                 "rel": "next"
             },
-            "href": "https://qamaster-hyperwallet.aws.paylution.net/rest/v3/users/usr-token/receipts?offset=10&limit=10"
+            "href": "https://localhost/rest/v3/users/usr-token/receipts?offset=10&limit=10"
         },
         {
             "params": {
                 "rel": "last"
             },
-            "href": "https://qamaster-hyperwallet.aws.paylution.net/rest/v3/users/usr-token/receipts?offset=11&limit=10"
+            "href": "https://localhost/rest/v3/users/usr-token/receipts?offset=11&limit=10"
         }
     ]
 }
