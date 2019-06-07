@@ -51,16 +51,19 @@ public final class ReceiptDetailTableViewController: UITableViewController {
         tableView.allowsSelection = false
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = UITableView.automaticDimension
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
+        if #available(iOS 11.0, *) {
+            tableView.separatorInsetReference = .fromAutomaticInsets
+        }
         tableView.accessibilityIdentifier = "receiptDetailTableView"
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)
         }
     }
 
-    private func cellForRowAt(_ indexPath: IndexPath) -> UITableViewCell {
+    private func getCellConfiguration(_ indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = presenter.sectionData[indexPath.section].cellIdentifier
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
         let section = presenter.sectionData[indexPath.section]
         switch section.receiptDetailSectionHeader {
         case .transaction:
@@ -87,8 +90,8 @@ public final class ReceiptDetailTableViewController: UITableViewController {
 
         case .notes:
             if let tableViewCell = cell as? ReceiptNotesTableViewCell,
-                let feeSection = section as? ReceiptDetailSectionNotesData {
-                tableViewCell.textLabel?.text = feeSection.notes!
+                let notesSection = section as? ReceiptDetailSectionNotesData {
+                tableViewCell.textLabel?.text = notesSection.notes
             }
         }
         return cell
@@ -109,7 +112,7 @@ extension ReceiptDetailTableViewController {
     }
 
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return cellForRowAt(indexPath)
+        return getCellConfiguration(indexPath)
     }
 
     override public func tableView(_ tableView: UITableView,

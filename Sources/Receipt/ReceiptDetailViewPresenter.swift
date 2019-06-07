@@ -19,7 +19,7 @@
 import HyperwalletSDK
 
 final class ReceiptDetailViewPresenter {
-    private(set) var sectionData: [ReceiptDetailSectionData] = []
+    private(set) var sectionData = [ReceiptDetailSectionData]()
 
     init(with receipt: HyperwalletReceipt) {
         initializeSections(with: receipt)
@@ -32,8 +32,9 @@ final class ReceiptDetailViewPresenter {
         let receiptDetailSection = ReceiptDetailSectionDetailData(from: receipt)
         sectionData.append(receiptDetailSection)
 
-        let receiptNotesSection = ReceiptDetailSectionNotesData(from: receipt)
+        if let receiptNotesSection = ReceiptDetailSectionNotesData(from: receipt) {
             sectionData.append(receiptNotesSection)
+        }
 
         let receiptFeeSection = ReceiptDetailSectionFeeData(from: receipt)
         sectionData.append(receiptFeeSection)

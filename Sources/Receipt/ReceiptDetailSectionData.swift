@@ -54,7 +54,7 @@ struct ReceiptDetailSectionTransactionData: ReceiptDetailSectionData {
 }
 
 struct ReceiptDetailSectionDetailData: ReceiptDetailSectionData {
-    var rows: [(title: String, value: String)] = []
+    var rows = [(title: String, value: String)] ()
     var receiptDetailSectionHeader: ReceiptDetailSectionHeader { return .details }
     var rowCount: Int { return rows.count }
     var cellIdentifier: String { return ReceiptDetailTableViewCell.reuseIdentifier }
@@ -82,24 +82,27 @@ struct ReceiptDetailSectionDetailData: ReceiptDetailSectionData {
 }
 
 struct ReceiptDetailSectionFeeData: ReceiptDetailSectionData {
-    var rows: [(title: String, value: String)] = []
+    var rows = [(title: String, value: String)]()
     var receiptDetailSectionHeader: ReceiptDetailSectionHeader { return .fee }
     var rowCount: Int { return rows.count }
     var cellIdentifier: String { return ReceiptFeeTableViewCell.reuseIdentifier }
 
     init(from receipt: HyperwalletReceipt) {
-        let amountFormat = receipt.entry == HyperwalletReceipt.HyperwalletEntryType.credit ? "+%@" : "-%@"
+        let amountFormat = receipt.entry == HyperwalletReceipt.HyperwalletEntryType.credit ? "+%@ %@" : "-%@ %@"
+        let valueCurrencyFormat = "%@ %@"
         rows.append(
             (title: "receipt_details_amount".localized(),
-             value: String(format: amountFormat, receipt.amount)))
+             value: String(format: amountFormat, receipt.amount, receipt.currency)))
         var fee: Float = 0.0
         if let strFee = receipt.fee {
-            rows.append((title: "receipt_details_fee".localized(), value: strFee))
+            rows.append((title: "receipt_details_fee".localized(),
+                         value: String(format: valueCurrencyFormat, strFee, receipt.currency)))
             fee = Float(strFee) ?? 0.0
         }
         if let amount = Float(receipt.amount) {
             let transaction = String(format: "%.2f", amount - fee)
-            rows.append((title: "receipt_details_transaction".localized(), value: transaction))
+            rows.append((title: "receipt_details_transaction".localized(),
+                         value: String(format: valueCurrencyFormat, transaction, receipt.currency)))
         }
     }
 }
@@ -109,7 +112,10 @@ struct ReceiptDetailSectionNotesData: ReceiptDetailSectionData {
     var receiptDetailSectionHeader: ReceiptDetailSectionHeader { return .notes }
     var cellIdentifier: String { return ReceiptNotesTableViewCell.reuseIdentifier }
 
-    init(from receipt: HyperwalletReceipt) {
-        self.notes = receipt.details?.notes
+    init?(from receipt: HyperwalletReceipt) {
+        guard let notes = receipt.details?.notes else {
+            return nil
+        }
+        self.notes = notes
     }
 }
