@@ -93,16 +93,21 @@ struct ReceiptDetailSectionFeeData: ReceiptDetailSectionData {
         rows.append(
             (title: "receipt_details_amount".localized(),
              value: String(format: amountFormat, receipt.amount, receipt.currency)))
-        var fee: Float = 0.0
+        var fee: Double = 0.0
         if let strFee = receipt.fee {
             rows.append((title: "receipt_details_fee".localized(),
                          value: String(format: valueCurrencyFormat, strFee, receipt.currency)))
-            fee = Float(strFee) ?? 0.0
+            fee = Double(strFee) ?? 0.0
         }
-        if let amount = Float(receipt.amount) {
-            let transaction = String(format: "%.2f", amount - fee)
+        if let amount = Double(receipt.amount) {
+            let transaction: Double = receipt.entry == .debit
+                ? 0 - amount - fee
+                : amount - fee
             rows.append((title: "receipt_details_transaction".localized(),
-                         value: String(format: valueCurrencyFormat, transaction, receipt.currency)))
+                         value: String(format: valueCurrencyFormat,
+                                       String(format: "%.2f", transaction ),
+                                       receipt.currency)
+            ))
         }
     }
 }

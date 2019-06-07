@@ -67,7 +67,9 @@ public final class ListReceiptTableViewController: UITableViewController {
 
     // MARK: list receipt table view delegate
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO will navigate to the recepit detail page
+        let hyperwalletReceipt = presenter.sectionData[indexPath.section].value[indexPath.row]
+        let receiptDetailViewController = ReceiptDetailTableViewController(with: hyperwalletReceipt)
+        navigationController?.pushViewController(receiptDetailViewController, animated: true)
     }
 
     override public func tableView(_ tableView: UITableView,
