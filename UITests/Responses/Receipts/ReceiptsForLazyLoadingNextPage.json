@@ -56,19 +56,19 @@
             "params": {
                 "rel": "self"
             },
-            "href": "https://localhost/rest/v3/users/usr-123456789/receipts?offset=0&limit=10"
+            "href": "https://localhost/rest/v3/users/usr-123456789/receipts?offset=0&limit=20"
         },
         {
             "params": {
                 "rel": "next"
             },
-            "href": "https://localhost/rest/v3/users/usr-123456789/receipts?offset=10&limit=10"
+            "href": "https://localhost/rest/v3/users/usr-123456789/receipts?offset=10&limit=20"
         },
         {
             "params": {
                 "rel": "last"
             },
-            "href": "https://localhost/rest/v3/users/usr-123456789/receipts?offset=1&limit=10"
+            "href": "https://localhost/rest/v3/users/usr-123456789/receipts?offset=1&limit=20"
         }
     ]
 }

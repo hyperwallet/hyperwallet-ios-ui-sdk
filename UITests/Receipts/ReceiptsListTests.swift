@@ -3,7 +3,6 @@ import XCTest
 class ReceiptsListTests: BaseTests {
     var selectTransferMethodType: SelectTransferMethodType!
     var receiptsList: ReceiptsList!
-    let debitCard = NSPredicate(format: "label CONTAINS[c] 'Debit Card'")
 
     override func setUp() {
         profileType = .individual
