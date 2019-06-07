@@ -1,20 +1,37 @@
 {
-    "count": 21,
+    "count": 4,
     "offset": 0,
     "limit": 10,
     "data": [
         {
-            "journalId": "55176990",
+            "journalId": "55176994",
+            "type": "TRANSFER_TO_BANK_ACCOUNT",
+            "createdOn": "2019-05-10T18:16:17",
+            "entry": "DEBIT",
+            "sourceToken": "usr-token",
+            "destinationToken": "trm-00000000-0000-0000-0000-0000000000",
+            "amount": "5.00",
+            "fee": "2.00",
+            "currency": "USD",
+            "details": {
+                "payeeName": "Shaoyun Yang",
+                "branchId": "026009593",
+                "bankAccountId": "*****5209",
+                "bankAccountPurpose": "CHECKING"
+            }
+        },
+        {
+            "journalId": "55176992",
             "type": "PAYMENT",
-            "createdOn": "2019-05-04T18:16:14",
+            "createdOn": "2019-05-08T18:16:19",
             "entry": "CREDIT",
             "sourceToken": "act-00000000-0000-0000-0000-0000000000",
-            "destinationToken": "usr-token",
+            "destinationToken": "usr-00000000-0000-0000-0000-0000000000",
             "amount": "6.00",
             "fee": "0.00",
             "currency": "USD",
             "details": {
-                "clientPaymentId": "DyClk0VG6a",
+                "clientPaymentId": "DyClk0VG9a",
                 "payeeName": "Shaoyun Yang"
             }
         },
@@ -36,35 +53,18 @@
             }
         },
         {
-            "journalId": "55176992",
+            "journalId": "55176990",
             "type": "PAYMENT",
-            "createdOn": "2019-05-T18:16:19",
+            "createdOn": "2019-05-04T18:16:14",
             "entry": "CREDIT",
             "sourceToken": "act-00000000-0000-0000-0000-0000000000",
-            "destinationToken": "usr-00000000-0000-0000-0000-0000000000",
+            "destinationToken": "usr-token",
             "amount": "6.00",
             "fee": "0.00",
             "currency": "USD",
             "details": {
-                "clientPaymentId": "DyClk0VG9a",
+                "clientPaymentId": "DyClk0VG6a",
                 "payeeName": "Shaoyun Yang"
-            }
-        },
-        {
-            "journalId": "55176994",
-            "type": "TRANSFER_TO_BANK_ACCOUNT",
-            "createdOn": "2019-05-10T18:16:17",
-            "entry": "DEBIT",
-            "sourceToken": "usr-token",
-            "destinationToken": "trm-00000000-0000-0000-0000-0000000000",
-            "amount": "5.00",
-            "fee": "2.00",
-            "currency": "USD",
-            "details": {
-                "payeeName": "Shaoyun Yang",
-                "branchId": "026009593",
-                "bankAccountId": "*****5209",
-                "bankAccountPurpose": "CHECKING"
             }
         }
     ],
