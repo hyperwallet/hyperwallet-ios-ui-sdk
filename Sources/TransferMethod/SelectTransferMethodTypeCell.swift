@@ -28,7 +28,7 @@ struct SelectTransferMethodTypeConfiguration {
 }
 
 final class SelectTransferMethodTypeCell: UITableViewCell {
-    static let reuseId = "SelectTransferMethodTypeCellIdentifier"
+    static let reuseIdentifier = "selectTransferMethodTypeCellIdentifier"
 
     // MARK: Life cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -72,18 +72,20 @@ final class SelectTransferMethodTypeCell: UITableViewCell {
 }
 
 extension SelectTransferMethodTypeCell {
-    func configure(configuration: SelectTransferMethodTypeConfiguration) {
-        accessibilityIdentifier = configuration.transferMethodTypeName
+    func configure(configuration: SelectTransferMethodTypeConfiguration?) {
+        if let configuration = configuration {
+            accessibilityIdentifier = configuration.transferMethodTypeName
 
-        textLabel?.text = configuration.transferMethodTypeName
-        detailTextLabel?.numberOfLines = 0
-        detailTextLabel?.lineBreakMode = .byWordWrapping
-        detailTextLabel?.attributedText = configuration.feesProcessingTime
-        let image = UIImage.fontIcon(configuration.transferMethodIconFont,
-                                     Theme.Icon.frame,
-                                     CGFloat(Theme.Icon.size),
-                                     Theme.Icon.primaryColor)
-        imageView?.image = image
-        imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
+            textLabel?.text = configuration.transferMethodTypeName
+            detailTextLabel?.numberOfLines = 0
+            detailTextLabel?.lineBreakMode = .byWordWrapping
+            detailTextLabel?.attributedText = configuration.feesProcessingTime
+            let image = UIImage.fontIcon(configuration.transferMethodIconFont,
+                                         Theme.Icon.frame,
+                                         CGFloat(Theme.Icon.size),
+                                         Theme.Icon.primaryColor)
+            imageView?.image = image
+            imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
+        }
     }
 }

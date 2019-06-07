@@ -36,7 +36,7 @@ extension UIToolbar {
         toolbar.setItems([spaceButton, doneButton], animated: true)
         toolbar.isUserInteractionEnabled = true
 
-        doneButton.accessibilityIdentifier = "DoneButtonAccessibilityIdentifier"
-        toolbar.accessibilityIdentifier = "ToolbarAccessibilityIdentifier"
+        doneButton.accessibilityIdentifier = "doneButton"
+        toolbar.accessibilityIdentifier = "toolbar"
     }
 }

@@ -40,26 +40,27 @@ class ListReceiptPresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isHideLoadingPerformed, "The hideLoading should be performed")
         XCTAssertTrue(mockView.isLoadReceiptPerformed, "The loadReceipt should be performed")
 
-        XCTAssertEqual(presenter.groupedSectionArray.count, 3, "The count of groupedSectionArray should be 3")
-        XCTAssertEqual(presenter.groupedSectionArray.first?.value.count,
+        XCTAssertEqual(presenter.sectionData.count, 3, "The count of groupedSectionArray should be 3")
+        XCTAssertEqual(presenter.sectionData.first?.value.count,
                        9,
                        "The receipt number of the first group should be 9")
-        XCTAssertEqual(presenter.groupedSectionArray[1].value.count,
+        XCTAssertEqual(presenter.sectionData[1].value.count,
                        9,
                        "The receipt number of the second group should be 9")
 
-        XCTAssertEqual(presenter.groupedSectionArray.last?.value.count,
+        XCTAssertEqual(presenter.sectionData.last?.value.count,
                        2,
                        "The receipt number of the last group should be 2")
-        let firstCellConfiguration = presenter.getCellConfiguration(for: 0, in: 0)
+        let indexPath = IndexPath(row: 0, section: 0)
+        let firstCellConfiguration = presenter.getCellConfiguration(indexPath: indexPath)
         XCTAssertNotNil(firstCellConfiguration, "firstCellConfiguration should not be nil")
-        XCTAssertEqual(firstCellConfiguration.amount, "5.00", "The amount should be 5.00")
-        XCTAssertEqual(firstCellConfiguration.type, "Payment", "The type should be Payment")
-        XCTAssertEqual(firstCellConfiguration.createdOn,
+        XCTAssertEqual(firstCellConfiguration?.amount, "5.00", "The amount should be 5.00")
+        XCTAssertEqual(firstCellConfiguration?.type, "Payment", "The type should be Payment")
+        XCTAssertEqual(firstCellConfiguration?.createdOn,
                        "May 24, 2019",
                        "The created on should be May 24, 2019")
-        XCTAssertEqual(firstCellConfiguration.currency, "USD", "The currency should be USD")
-        XCTAssertEqual(firstCellConfiguration.entry, "CREDIT", "The entry should be CREDIT")
+        XCTAssertEqual(firstCellConfiguration?.currency, "USD", "The currency should be USD")
+        XCTAssertEqual(firstCellConfiguration?.entry, "CREDIT", "The entry should be CREDIT")
 
         // Load more receipts
         // Given
@@ -73,20 +74,20 @@ class ListReceiptPresenterTests: XCTestCase {
         wait(for: [expectationLoadMore], timeout: 1)
 
         // Then
-        XCTAssertEqual(presenter.groupedSectionArray.count, 5, "The count of groupedSectionArray should be 5 ")
-        XCTAssertEqual(presenter.groupedSectionArray.first?.value.count,
+        XCTAssertEqual(presenter.sectionData.count, 5, "The count of groupedSectionArray should be 5 ")
+        XCTAssertEqual(presenter.sectionData.first?.value.count,
                        9,
                        "The receipt number of the first group should be 9")
-        XCTAssertEqual(presenter.groupedSectionArray[1].value.count,
+        XCTAssertEqual(presenter.sectionData[1].value.count,
                        9,
                        "The receipt number of the second group should be 9")
-        XCTAssertEqual(presenter.groupedSectionArray[2].value.count,
+        XCTAssertEqual(presenter.sectionData[2].value.count,
                        5,
                        "The receipt number of the third group should be 5")
-        XCTAssertEqual(presenter.groupedSectionArray[3].value.count,
+        XCTAssertEqual(presenter.sectionData[3].value.count,
                        3,
                        "The receipt number of the fourth group should be 3")
-        XCTAssertEqual(presenter.groupedSectionArray.last?.value.count,
+        XCTAssertEqual(presenter.sectionData.last?.value.count,
                        3,
                        "The receipt number of the last group should be 3")
     }
@@ -108,7 +109,7 @@ class ListReceiptPresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isShowErrorPerformed, "The showError should be performed")
         XCTAssertFalse(mockView.isLoadReceiptPerformed, "The loadReceipt should not be performed")
 
-        XCTAssertEqual(presenter.groupedSectionArray.count, 0, "The count of groupedSectionArray should be 0")
+        XCTAssertEqual(presenter.sectionData.count, 0, "The count of groupedSectionArray should be 0")
     }
 
     private func setUpReceiptRequest(_ payload: Data, _ error: NSError? = nil) -> StubRequest {

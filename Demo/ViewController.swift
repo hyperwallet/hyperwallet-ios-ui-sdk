@@ -140,11 +140,11 @@ class ViewController: UITableViewController {
 
         switch example {
         case .listTransferMethod:
-            let viewController = HyperwalletUI.shared.listTransferMethodViewController()
+            let viewController = HyperwalletUI.shared.listTransferMethodTableViewController()
             navigationController?.pushViewController(viewController, animated: true)
 
         case .addTransferMethod:
-            let viewController = HyperwalletUI.shared.selectTransferMethodTypeViewController()
+            let viewController = HyperwalletUI.shared.selectTransferMethodTypeTableViewController()
             viewController.createTransferMethodHandler = {
                 (transferMethod: HyperwalletTransferMethod) -> Void in
                 self.didCreateTransferMethod(transferMethod: transferMethod)
@@ -152,11 +152,11 @@ class ViewController: UITableViewController {
             navigationController?.pushViewController(viewController, animated: true)
 
         case .receipts:
-            let viewController = HyperwalletUI.shared.listReceiptViewController()
+            let viewController = HyperwalletUI.shared.listReceiptTableViewController()
             navigationController?.pushViewController(viewController, animated: true)
 
         default:
-            let viewController = HyperwalletUI.shared.listTransferMethodViewController()
+            let viewController = HyperwalletUI.shared.listTransferMethodTableViewController()
             navigationController?.pushViewController(viewController, animated: true)
         }
     }

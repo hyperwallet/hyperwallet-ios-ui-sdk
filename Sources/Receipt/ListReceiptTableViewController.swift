@@ -21,7 +21,7 @@ import UIKit
 /// Lists the user's transaction history
 ///
 /// The user can click a receipt in the list for more information
-public final class ListReceiptViewController: UITableViewController {
+public final class ListReceiptTableViewController: UITableViewController {
     private var spinnerView: SpinnerView?
     private var presenter: ListReceiptViewPresenter!
     private let listReceiptCellIdentifier = "ListReceiptCellIdentifier"
@@ -45,24 +45,23 @@ public final class ListReceiptViewController: UITableViewController {
 
     // MARK: list receipt table view data source
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.groupedSectionArray[section].value.count
+        return presenter.sectionData[section].value.count
     }
 
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: listReceiptCellIdentifier, for: indexPath)
         if let listReceiptCell = cell as? ListReceiptTableViewCell {
-            listReceiptCell.configure(configuration: presenter.getCellConfiguration(for: indexPath.row,
-                                                                                    in: indexPath.section))
+            listReceiptCell.configure(configuration: presenter.getCellConfiguration(indexPath: indexPath))
         }
         return cell
     }
 
     override public func numberOfSections(in tableView: UITableView) -> Int {
-        return presenter.groupedSectionArray.count
+        return presenter.sectionData.count
     }
 
     override public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let date = presenter.groupedSectionArray[section].key
+        let date = presenter.sectionData[section].key
         return date.formatDateToString(dateFormat: sectionTitleDateFormat)
     }
 
@@ -74,9 +73,9 @@ public final class ListReceiptViewController: UITableViewController {
     override public func tableView(_ tableView: UITableView,
                                    willDisplay cell: UITableViewCell,
                                    forRowAt indexPath: IndexPath) {
-        let lastSectionIndex = presenter.groupedSectionArray.count - 1
+        let lastSectionIndex = presenter.sectionData.count - 1
         if indexPath.section == lastSectionIndex
-            && indexPath.row == presenter.groupedSectionArray[lastSectionIndex].value.count - 1
+            && indexPath.row == presenter.sectionData[lastSectionIndex].value.count - 1
             && !presenter.areAllReceiptsLoaded {
             loadMoreReceipts = true
         }
@@ -107,9 +106,9 @@ public final class ListReceiptViewController: UITableViewController {
 }
 
 // MARK: `ListReceiptView` delegate
-extension ListReceiptViewController: ListReceiptView {
+extension ListReceiptTableViewController: ListReceiptView {
     func loadReceipts() {
-        if presenter.groupedSectionArray.isNotEmpty() {
+        if presenter.sectionData.isNotEmpty() {
             toggleEmptyListView(hideLabel: true)
         } else {
             toggleEmptyListView(hideLabel: false)
