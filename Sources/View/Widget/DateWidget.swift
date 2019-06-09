@@ -30,7 +30,7 @@ final class DateWidget: TextWidget {
 
     private static var localizedDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.setLocalizedDateFormatFromTemplate("yMMMd")
+        formatter.setLocalizedDateFormatFromTemplate("yMMMMd")
         formatter.formattingContext = .beginningOfSentence
         return formatter
     }()
