@@ -28,6 +28,25 @@ final class DateWidget: TextWidget {
         return formatter
     }()
 
+    private static var localizedDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.setLocalizedDateFormatFromTemplate("yMMMd")
+        formatter.formattingContext = .beginningOfSentence
+        return formatter
+    }()
+
+    required init(field: HyperwalletField) {
+        super.init(field: field)
+        if let value = field.value,
+            let date = DateWidget.dateFormatter.date(from: value) {
+            textField.text = DateWidget.localizedDateFormatter.string(from: date)
+        }
+    }
+
+    required init(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+
     override func setupLayout(field: HyperwalletField) {
         super.setupLayout(field: field)
         setupDatePicker()
@@ -37,11 +56,17 @@ final class DateWidget: TextWidget {
 
     override func textFieldDidBeginEditing(_ textField: UITextField) {
         super.textFieldDidBeginEditing(textField)
-        if let dateFromText = DateWidget.dateFormatter.date(from: value()) {
+        if let dateFromText = DateWidget.localizedDateFormatter.date(from: textField.text ?? "") {
             datePicker.date = dateFromText
         } else {
             datePicker.date = Date()
         }
+    }
+
+    override func value() -> String {
+        guard let date = DateWidget.localizedDateFormatter.date(from: textField.text ?? "")
+            else { return "" }
+        return DateWidget.dateFormatter.string(from: date)
     }
 
     @objc
@@ -64,6 +89,6 @@ final class DateWidget: TextWidget {
 
     @objc
     private func updateTextField() {
-        textField.text = DateWidget.dateFormatter.string(from: datePicker.date)
+        textField.text = DateWidget.localizedDateFormatter.string(from: datePicker.date)
     }
 }
