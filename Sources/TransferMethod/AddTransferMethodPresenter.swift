@@ -110,7 +110,8 @@ final class AddTransferMethodPresenter {
 
         case "PAYPAL_ACCOUNT":
             hyperwalletTransferMethod = HyperwalletPayPalAccount.Builder(transferMethodCountry: country,
-                                                                         transferMethodCurrency: currency)
+                                                                         transferMethodCurrency: currency,
+                                                                         transferMethodProfileType: profileType)
                 .build()
 
         default:
