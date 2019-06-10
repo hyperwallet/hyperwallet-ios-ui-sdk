@@ -29,6 +29,9 @@ public class ThemeManager {
         applyToSelectionWidgetCell()
         applyToListTransferMethodTableViewCell()
         applyToSelectTransferMethodTypeCell()
+        applyToReceiptDetailTableViewCell()
+        applyToReceiptFeeTableViewCell()
+        applyToReceiptNotesTableViewCell()
         registerFonts
     }
 
@@ -138,6 +141,28 @@ public class ThemeManager {
         proxy.titleLabelColor = Theme.Label.color
         proxy.subTitleLabelFont = Theme.Label.captionOne
         proxy.subTitleLabelColor = Theme.Label.subTitleColor
+    }
+
+    private static func applyToReceiptDetailTableViewCell() {
+        let proxy = ReceiptDetailTableViewCell.appearance()
+        proxy.titleLabelFont = Theme.Label.footnoteFont
+        proxy.titleLabelColor = Theme.Label.subTitleColor
+        proxy.subTitleLabelFont = Theme.Label.footnoteFont
+        proxy.subTitleLabelColor = Theme.Label.subTitleColor
+    }
+
+    private static func applyToReceiptFeeTableViewCell() {
+        let proxy = ReceiptFeeTableViewCell.appearance()
+        proxy.titleLabelFont = Theme.Label.footnoteFont
+        proxy.titleLabelColor = Theme.Label.subTitleColor
+        proxy.subTitleLabelFont = Theme.Label.footnoteFont
+        proxy.subTitleLabelColor = Theme.Label.subTitleColor
+    }
+
+    private static func applyToReceiptNotesTableViewCell() {
+        let proxy = ReceiptNotesTableViewCell.appearance()
+        proxy.titleLabelFont = Theme.Label.footnoteFont
+        proxy.titleLabelColor = Theme.Label.subTitleColor
     }
 
     private static let registerFonts: Void = {

@@ -16,27 +16,27 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import UIKit
+final class ReceiptNotesTableViewCell: UITableViewCell {
+    static let reuseIdentifier = "receiptNotesTableViewCellReuseIdentifier"
 
-extension UIToolbar {
-    func setupToolBar(target: UIView, action: Selector?) {
-        let toolbar = self
-        toolbar.barStyle = UIBarStyle.default
-        toolbar.isTranslucent = true
-        toolbar.tintColor = Theme.themeColor
-        toolbar.sizeToFit()
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        textLabel?.numberOfLines = 0
+        textLabel?.lineBreakMode = .byWordWrapping
+    }
 
-        let doneButton = UIBarButtonItem(title: "done_button_label".localized(),
-                                         style: .plain,
-                                         target: target,
-                                         action: action)
-        doneButton.tintColor = Theme.Button.color
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
 
-        toolbar.setItems([spaceButton, doneButton], animated: true)
-        toolbar.isUserInteractionEnabled = true
+    // MARK: Theme manager's proxy properties
+    @objc dynamic var titleLabelFont: UIFont! {
+        get { return textLabel?.font }
+        set { textLabel?.font = newValue }
+    }
 
-        doneButton.accessibilityIdentifier = "doneButton"
-        toolbar.accessibilityIdentifier = "toolbar"
+    @objc dynamic var titleLabelColor: UIColor! {
+        get { return textLabel?.textColor }
+        set { textLabel?.textColor = newValue }
     }
 }

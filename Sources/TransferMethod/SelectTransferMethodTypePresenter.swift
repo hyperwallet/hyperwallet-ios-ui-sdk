@@ -44,19 +44,10 @@ final class SelectTransferMethodTypePresenter {
     private unowned let view: SelectTransferMethodTypeView
     private var user: HyperwalletUser?
     private var transferMethodConfigurationKey: HyperwalletTransferMethodConfigurationKey?
-    private var transferMethodTypes = [HyperwalletTransferMethodType]()
-    private var countryCurrencyTitles = [String]()
+    private (set) var sectionData = [HyperwalletTransferMethodType]()
+    private (set) var countryCurrencySectionData = [String]()
     private (set) var selectedCountry = ""
     private (set) var selectedCurrency = ""
-    /// Returns the amount of items in `countryCurrencyTitles`
-    var countryCurrencyCount: Int {
-        return countryCurrencyTitles.count
-    }
-
-    /// Returns the amount of items in `transferMethodTypes`
-    var transferMethodTypesCount: Int {
-        return transferMethodTypes.count
-    }
 
     /// Initialize SelectTransferMethodPresenter
     init(view: SelectTransferMethodTypeView) {
@@ -64,8 +55,11 @@ final class SelectTransferMethodTypePresenter {
     }
 
     /// Return the `SelectTransferMethodTypeConfiguration` based on the index
-    func getCellConfiguration(for index: Int) -> SelectTransferMethodTypeConfiguration {
-        let transferMethodType = transferMethodTypes[index]
+    func getCellConfiguration(indexPath: IndexPath) -> SelectTransferMethodTypeConfiguration? {
+        guard let transferMethodType = sectionData[safe: indexPath.row] else {
+            return nil
+        }
+
         let feesProcessingTime = transferMethodType.formatFeesProcessingTime()
         let transferMethodIcon = HyperwalletIcon.of(transferMethodType.code!).rawValue
 
@@ -77,9 +71,12 @@ final class SelectTransferMethodTypePresenter {
     }
 
     /// Return the countryCurrency item composed by the tuple (title and value)
-    func getCountryCurrencyCellConfiguration(for index: Int) -> CountryCurrencyCellConfiguration {
-        return CountryCurrencyCellConfiguration(title: countryCurrencyTitles[index].localized(),
-                                                value: countryCurrencyValues(at: index))
+    func getCountryCurrencyConfiguration(indexPath: IndexPath) -> CountryCurrencyCellConfiguration? {
+        guard let title = countryCurrencySectionData[safe: indexPath.row] else {
+            return nil
+        }
+        return CountryCurrencyCellConfiguration(title: title.localized(),
+                                                value: countryCurrencyValues(at: indexPath.row))
     }
 
     /// Display all the select Country or Currency based on the index
@@ -139,11 +136,11 @@ final class SelectTransferMethodTypePresenter {
         view.navigateToAddTransferMethodController(country: selectedCountry,
                                                    currency: selectedCurrency,
                                                    profileType: profileType,
-                                                   transferMethodTypeCode: transferMethodTypes[index].code!)
+                                                   transferMethodTypeCode: sectionData[index].code!)
     }
 
     private func countryCurrencyValues(at index: Int) -> String {
-        return (index == 0 ? selectedCountry.localized() : selectedCurrency )
+        return (index == 0 ? selectedCountry.localized() : selectedCurrency)
     }
 
     private func loadCountry() {
@@ -172,7 +169,7 @@ final class SelectTransferMethodTypePresenter {
                         strongSelf.view.showError(error, { strongSelf.loadTransferMethodKeys() })
                         return
                     }
-                    strongSelf.countryCurrencyTitles = ["Country", "Currency"]
+                    strongSelf.countryCurrencySectionData = ["Country", "Currency"]
                     strongSelf.transferMethodConfigurationKey = result
                     strongSelf.loadCountry()
                     strongSelf.loadCurrency(for: strongSelf.selectedCountry)
@@ -253,7 +250,7 @@ final class SelectTransferMethodTypePresenter {
     }
 
     private func loadTransferMethodTypes(country: String, currency: String) {
-        transferMethodTypes.removeAll()
+        sectionData.removeAll()
         guard let result = transferMethodConfigurationKey?.transferMethodTypes(countryCode: country,
                                                                                currencyCode: currency),
             !result.isEmpty else {
@@ -262,7 +259,7 @@ final class SelectTransferMethodTypePresenter {
                                                currency))
                 return
         }
-        transferMethodTypes = result
+        sectionData = result
         view.transferMethodTypeTableViewReloadData()
     }
 

@@ -94,10 +94,10 @@ class SelectTransferMethodTypeTests: BaseTests {
         selectTransferMethodType.selectCountry(country: "United States")
         selectTransferMethodType.selectCurrency(currency: "United States Dollar")
 
-        XCTAssertEqual(app.tables["transferMethodTableView"].cells.count, 6)
-        XCTAssertTrue(app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).exists)
+        XCTAssertEqual(app.tables["selectTransferMethodTypeTable"].cells.count, 6)
+        XCTAssertTrue(app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: bankAccount).exists)
 
-        app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).tap()
+        app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: bankAccount).tap()
         XCTAssertTrue(app.navigationBars["Bank Account"].exists)
         XCTAssertTrue(app.tables["addTransferMethodTable"].exists)
         XCTAssertTrue(app.tables.staticTexts["Account Information - United States (USD)"].exists)

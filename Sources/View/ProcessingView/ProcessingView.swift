@@ -191,10 +191,10 @@ extension ProcessingView {
 // MARK: Accessibility Identifiers
 extension ProcessingView {
     private func populateByAccessibilityIds() {
-        self.accessibilityIdentifier = "a12IdProcessingView"
-        contentView.accessibilityIdentifier = "a12IdContentView"
-        checkImageView.accessibilityIdentifier = "a12IdCheckImageView"
-        activityIndicator.accessibilityIdentifier = "a12IdActivityIndicator"
-        stateLabel.accessibilityIdentifier = "a12IdStateLabel"
+        self.accessibilityIdentifier = "processingView"
+        contentView.accessibilityIdentifier = "contentView"
+        checkImageView.accessibilityIdentifier = "checkImageView"
+        activityIndicator.accessibilityIdentifier = "activityIndicator"
+        stateLabel.accessibilityIdentifier = "stateLabel"
     }
 }

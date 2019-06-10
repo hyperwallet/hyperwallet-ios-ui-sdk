@@ -21,8 +21,8 @@ import UIKit
 /// Generic TableView Controller
 class GenericTableViewController<T: GenericCell<ModelType>, ModelType>: UITableViewController,
 UISearchResultsUpdating {
-    private let reuseId = "cellId"
-    private let headerReuseId = "headerReuseId"
+    private let reuseIdentifier = "genericCellIdentifier"
+    private let reuseHeaderIdentifier = "headerCellIentifier"
     /// Enable the search controller
     private var shouldDisplaySearchBar = false
     /// The amount of items to enable the search bar to the Generic TableView
@@ -96,7 +96,7 @@ UISearchResultsUpdating {
     }
 
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseId, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
 
         cell.accessoryType = .none
 
@@ -116,7 +116,7 @@ UISearchResultsUpdating {
     override public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard #available(iOS 11.0, *) else {
             if shouldDisplaySearchBar {
-                let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerReuseId)
+                let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: reuseHeaderIdentifier)
 
                 headerView?.addSubview(searchController.searchBar)
 
@@ -206,10 +206,10 @@ private extension GenericTableViewController {
 
     func setupTable() {
         tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: headerReuseId)
+        tableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: reuseHeaderIdentifier)
         tableView.tableFooterView = UIView()
         tableView.estimatedRowHeight = Theme.Cell.smallHeight
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.register(T.self, forCellReuseIdentifier: reuseId)
+        tableView.register(T.self, forCellReuseIdentifier: reuseIdentifier)
     }
 }

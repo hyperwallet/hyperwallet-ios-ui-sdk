@@ -55,23 +55,23 @@ class AddTransferMethodBankCardTests: BaseTests {
 
     func testAddTransferMethod_returnsErrorOnInvalidPattern() {
         addTransferMethod.setCardNumber("1234567890@#$")
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["label_cardNumber_error"].exists)
+        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["cardNumber_error"].exists)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidLength() {
         addTransferMethod.setCardNumber("10100101010")
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["label_cardNumber_error"].exists)
+        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["cardNumber_error"].exists)
 
         addTransferMethod.setCardNumber("101001010102221234323")
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["label_cardNumber_error"].exists)
+        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["cardNumber_error"].exists)
     }
 
     func testAddTransferMethod_returnsErrorEmptyRequiredFields() {
         addTransferMethod.setCardNumber("")
         addTransferMethod.setCvv("")
 
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["label_cardNumber_error"].exists)
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["label_cvv_error"].exists)
+        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["cardNumber_error"].exists)
+        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["cvv_error"].exists)
 
         addTransferMethod.clickCreateTransferMethodButton()
     }
@@ -152,7 +152,7 @@ private extension AddTransferMethodBankCardTests {
         selectTransferMethodType.selectCountry(country: "United States")
         selectTransferMethodType.selectCurrency(currency: "United States Dollar")
 
-        app.tables["transferMethodTableView"].staticTexts.element(matching: debitCard).tap()
+        app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: debitCard).tap()
         waitForNonExistence(spinner)
     }
 

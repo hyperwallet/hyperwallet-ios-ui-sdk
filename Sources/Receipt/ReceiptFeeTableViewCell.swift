@@ -16,27 +16,36 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import UIKit
+final class ReceiptFeeTableViewCell: UITableViewCell {
+    static let reuseIdentifier = "receiptFeeTableViewCellReuseIdentifier"
 
-extension UIToolbar {
-    func setupToolBar(target: UIView, action: Selector?) {
-        let toolbar = self
-        toolbar.barStyle = UIBarStyle.default
-        toolbar.isTranslucent = true
-        toolbar.tintColor = Theme.themeColor
-        toolbar.sizeToFit()
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .value1, reuseIdentifier: reuseIdentifier)
+        self.heightAnchor.constraint(equalToConstant: Theme.Cell.extraSmallHeight).isActive = true
+    }
 
-        let doneButton = UIBarButtonItem(title: "done_button_label".localized(),
-                                         style: .plain,
-                                         target: target,
-                                         action: action)
-        doneButton.tintColor = Theme.Button.color
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
 
-        toolbar.setItems([spaceButton, doneButton], animated: true)
-        toolbar.isUserInteractionEnabled = true
+    // MARK: Theme manager's proxy properties
+    @objc dynamic var titleLabelFont: UIFont! {
+        get { return textLabel?.font }
+        set { textLabel?.font = newValue }
+    }
 
-        doneButton.accessibilityIdentifier = "doneButton"
-        toolbar.accessibilityIdentifier = "toolbar"
+    @objc dynamic var titleLabelColor: UIColor! {
+        get { return textLabel?.textColor }
+        set { textLabel?.textColor = newValue }
+    }
+
+    @objc dynamic var subTitleLabelFont: UIFont! {
+        get { return detailTextLabel?.font }
+        set { detailTextLabel?.font = newValue }
+    }
+
+    @objc dynamic var subTitleLabelColor: UIColor! {
+        get { return detailTextLabel?.textColor }
+        set { detailTextLabel?.textColor = newValue }
     }
 }

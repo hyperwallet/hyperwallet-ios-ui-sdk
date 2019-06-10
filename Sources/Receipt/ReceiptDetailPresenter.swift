@@ -16,27 +16,27 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import UIKit
+import HyperwalletSDK
 
-extension UIToolbar {
-    func setupToolBar(target: UIView, action: Selector?) {
-        let toolbar = self
-        toolbar.barStyle = UIBarStyle.default
-        toolbar.isTranslucent = true
-        toolbar.tintColor = Theme.themeColor
-        toolbar.sizeToFit()
+final class ReceiptDetailViewPresenter {
+    private(set) var sectionData = [ReceiptDetailSectionData]()
 
-        let doneButton = UIBarButtonItem(title: "done_button_label".localized(),
-                                         style: .plain,
-                                         target: target,
-                                         action: action)
-        doneButton.tintColor = Theme.Button.color
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+    init(with receipt: HyperwalletReceipt) {
+        initializeSections(with: receipt)
+    }
 
-        toolbar.setItems([spaceButton, doneButton], animated: true)
-        toolbar.isUserInteractionEnabled = true
+    private func initializeSections(with receipt: HyperwalletReceipt) {
+        let receiptTransactionSection = ReceiptDetailSectionTransactionData(from: receipt)
+        sectionData.append(receiptTransactionSection)
 
-        doneButton.accessibilityIdentifier = "doneButton"
-        toolbar.accessibilityIdentifier = "toolbar"
+        let receiptDetailSection = ReceiptDetailSectionDetailData(from: receipt)
+        sectionData.append(receiptDetailSection)
+
+        if let receiptNotesSection = ReceiptDetailSectionNotesData(from: receipt) {
+            sectionData.append(receiptNotesSection)
+        }
+
+        let receiptFeeSection = ReceiptDetailSectionFeeData(from: receipt)
+        sectionData.append(receiptFeeSection)
     }
 }
