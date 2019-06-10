@@ -20,7 +20,7 @@ import UIKit
 
 /// Generic TableView Controller
 class GenericTableViewController<T: GenericCell<ModelType>, ModelType>: UITableViewController,
-UISearchResultsUpdating {
+UISearchResultsUpdating, UISearchControllerDelegate {
     private let reuseIdentifier = "reuseIdentifier"
     private let reuseHeaderIdentifier = "reuseHeaderIdentifier"
     /// Enable the search controller
@@ -78,13 +78,20 @@ UISearchResultsUpdating {
 
         guard #available(iOS 11.0, *) else {
             DispatchQueue.main.async {
-                self.searchController.searchBar.sizeToFit()
+                self.setupSearchBarSize()
             }
 
             return
         }
     }
 
+    func didDismissSearchController(_ searchController: UISearchController) {
+        setupSearchBarSize()
+    }
+
+    private func setupSearchBarSize() {
+       searchController.searchBar.sizeToFit()
+    }
     // MARK: - UITableViewDataSource
 
     override public func tableView( _ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -113,9 +120,7 @@ UISearchResultsUpdating {
         guard #available(iOS 11.0, *) else {
             if shouldDisplaySearchBar {
                 let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: reuseHeaderIdentifier)
-
                 headerView?.addSubview(searchController.searchBar)
-
                 return headerView
             }
 
@@ -161,7 +166,9 @@ private extension GenericTableViewController {
         searchController.searchResultsUpdater = self
         definesPresentationContext = true
         searchController.dimsBackgroundDuringPresentation = false
-        searchController.searchBar.sizeToFit()
+        setupSearchBarSize()
+        searchController.delegate = self
+        searchController.hidesNavigationBarDuringPresentation = false
     }
 
     // MARK: - Private instance methods
@@ -185,7 +192,7 @@ private extension GenericTableViewController {
 
     func setupSeachBar() {
         setupUISearchController()
-        searchController.hidesNavigationBarDuringPresentation = false
+
         if #available(iOS 11.0, *) {
             navigationItem.searchController = self.searchController
             navigationItem.hidesSearchBarWhenScrolling = false
