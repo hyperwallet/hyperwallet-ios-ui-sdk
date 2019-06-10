@@ -83,7 +83,6 @@ final class SelectionWidget: AbstractWidget {
             }
         }
 
-        tableView.initialSelectedItemIndex = tableView.items.firstIndex { $0.value == value() }
         tableView.shouldMarkCellAction = { self.selectedValue == $0.value }
         tableView.filterContentForSearchTextAction = {(items, searchText) in
             items.filter {
