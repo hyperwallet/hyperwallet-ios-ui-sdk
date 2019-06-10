@@ -161,12 +161,9 @@ extension SelectTransferMethodTypeTableViewController: SelectTransferMethodTypeV
 
     func showGenericTableView(items: [CountryCurrencyCellConfiguration],
                               title: String,
-                              selectItemHandler: @escaping (_ value: CountryCurrencyCellConfiguration) -> Void,
-                              markCellHandler: @escaping (_ value: CountryCurrencyCellConfiguration) -> Bool,
-                              filterContentHandler: @escaping ((_ items: [CountryCurrencyCellConfiguration],
-        _ searchText: String)
-        -> [CountryCurrencyCellConfiguration])
-        ) {
+                              selectItemHandler: @escaping SelectItemHandler,
+                              markCellHandler: @escaping MarkCellHandler,
+                              filterContentHandler: @escaping FilterContentHandler) {
         let genericTableView = GenericTableViewController<CountryCurrencyCell, CountryCurrencyCellConfiguration>()
         genericTableView.title = title
         genericTableView.items = items
