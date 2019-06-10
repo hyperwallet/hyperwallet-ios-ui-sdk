@@ -220,6 +220,7 @@ private extension AddTransferMethodBankAccountIndividualTests {
         let table = app.tables.firstMatch
 
         XCTAssert(table.exists)
+        waitForNonExistence(spinner)
 
         XCTAssert(app.tables.firstMatch.staticTexts["CHECKING"].exists)
         XCTAssert(app.tables.firstMatch.staticTexts["SAVINGS"].exists)
