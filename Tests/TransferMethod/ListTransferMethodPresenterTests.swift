@@ -198,7 +198,8 @@ class ListTransferMethodPresenterTests: XCTestCase {
         bankCard.setField(key: "token", value: "trm-123456789")
 
         let payPalAccount = HyperwalletPayPalAccount.Builder(transferMethodCountry: "US",
-                                                             transferMethodCurrency: "USD")
+                                                             transferMethodCurrency: "USD",
+                                                             transferMethodProfileType: "INDIVIDUAL")
             .build()
         payPalAccount.setField(key: "token", value: "trm-123456789")
 
