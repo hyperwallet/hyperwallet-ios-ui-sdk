@@ -32,6 +32,7 @@ final class DateWidget: TextWidget {
         let formatter = DateFormatter()
         formatter.setLocalizedDateFormatFromTemplate("yMMMMd")
         formatter.formattingContext = .beginningOfSentence
+        formatter.dateStyle = .long
         formatter.locale = Locale(identifier: Locale.preferredLanguages[0])
         return formatter
     }()
