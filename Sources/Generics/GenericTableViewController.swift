@@ -224,7 +224,7 @@ private extension GenericTableViewController {
         }
 
         DispatchQueue.main.async {
-            self.tableView.scrollToRow(at: IndexPath(row: indexToScrollTo, section: 0), at: .middle, animated: true)
+            self.tableView.scrollToRow(at: IndexPath(row: indexToScrollTo, section: 0), at: .middle, animated: false)
         }
     }
 }
