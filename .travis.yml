@@ -29,7 +29,7 @@ before_install:
   - xcrun simctl list
   # Update the brew and build dependencies tools
   - brew outdated carthage || brew upgrade carthage
-  - Carthage update --platform iOS  --cache-builds
+  - Carthage update --platform iOS  --cache-builds --no-use-binaries
   - gem i slather --no-ri --no-rdoc
   # Force to update the Swiftlint to the last stable version
   - brew outdated swiftlint || brew upgrade swiftlint
