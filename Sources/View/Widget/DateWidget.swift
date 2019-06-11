@@ -32,6 +32,7 @@ final class DateWidget: TextWidget {
         let formatter = DateFormatter()
         formatter.setLocalizedDateFormatFromTemplate("yMMMMd")
         formatter.formattingContext = .beginningOfSentence
+        formatter.locale = Locale(identifier: Locale.preferredLanguages[0])
         return formatter
     }()
 
@@ -78,6 +79,7 @@ final class DateWidget: TextWidget {
     private func setupDatePicker() {
         datePicker = UIDatePicker(frame: .zero)
         datePicker.datePickerMode = .date
+        datePicker.locale = DateWidget.localizedDateFormatter.locale
         datePicker.accessibilityIdentifier = "DateWidgetPickerAccessibilityIdentifier"
     }
 
