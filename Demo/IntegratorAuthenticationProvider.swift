@@ -21,8 +21,8 @@ import HyperwalletSDK
 
 public struct IntegratorAuthenticationProvider: HyperwalletAuthenticationTokenProvider {
     private var url: String
-    private let user: String = "selrestuser@1861681"//"userName"
-    private let password: String = "Password1!"//"password"
+    private let user: String = "userName"
+    private let password: String = "password"
     private let session: URLSession
 
     init(_ baseUrl: String, _ userToken: String) {

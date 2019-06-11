@@ -1206,7 +1206,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BASE_URL = "https://qamaster-hyperwallet.aws.paylution.net";
+				BASE_URL = "http://localhost:8080";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1224,7 +1224,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_TOKEN = "usr-8d0a4ecc-e844-4783-850b-fd055b4770ea";
+				USER_TOKEN = "usr-your-user-token";
 			};
 			name = Debug;
 		};
@@ -1233,7 +1233,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BASE_URL = "https://qamaster-hyperwallet.aws.paylution.net";
+				BASE_URL = "http://localhost:8080";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1251,7 +1251,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_TOKEN = "usr-8d0a4ecc-e844-4783-850b-fd055b4770ea";
+				USER_TOKEN = "usr-your-user-token";
 			};
 			name = Release;
 		};
@@ -1404,7 +1404,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BASE_URL = "https://qamaster-hyperwallet.aws.paylution.net";
+				BASE_URL = "http://localhost:8080";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1422,7 +1422,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_TOKEN = "usr-8d0a4ecc-e844-4783-850b-fd055b4770ea";
+				USER_TOKEN = "usr-your-user-token";
 			};
 			name = XCUITest;
 		};
