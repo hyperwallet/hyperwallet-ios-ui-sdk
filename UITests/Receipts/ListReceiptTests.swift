@@ -1,6 +1,6 @@
 import XCTest
 
-class ReceiptsListTests: BaseTests {
+class ListReceiptTests: BaseTests {
     var receiptsList: ReceiptsList!
 
     override func setUp() {
@@ -54,9 +54,7 @@ class ReceiptsListTests: BaseTests {
     }
 
     func testReceiptsList_verifyEmptyScreen() {
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/receipts",
-                             filename: "ReceiptsEmptyList",
-                             method: HTTPMethod.get)
+        mockServer.setUpEmptyResponse(url: "/rest/v3/users/usr-token/receipts")
         openReceiptsListScreen()
 
         XCTAssertTrue(app.staticTexts["Seems like, you don’t have any Transactions, yet."].exists)
