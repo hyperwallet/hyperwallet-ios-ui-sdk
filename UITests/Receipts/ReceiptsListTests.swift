@@ -1,7 +1,6 @@
 import XCTest
 
 class ReceiptsListTests: BaseTests {
-    var selectTransferMethodType: SelectTransferMethodType!
     var receiptsList: ReceiptsList!
 
     override func setUp() {
