@@ -76,7 +76,7 @@ final class ListTransferMethodPresenter {
             switch transferMethodType {
             case "BANK_ACCOUNT":
                 deactivateBankAccount(token)
-            case "BANK_CARD":
+            case "BANK_CARD", "WIRE_ACCOUNT":
                 deactivateBankCard(token)
             case "PAYPAL_ACCOUNT":
                 deactivatePayPalAccount(token)
@@ -165,7 +165,7 @@ final class ListTransferMethodPresenter {
     private func getAdditionalInfo(_ transferMethod: HyperwalletTransferMethod) -> String? {
         var additionlInfo: String?
         switch transferMethod.getField(fieldName: .type) as? String {
-        case "BANK_ACCOUNT", "WIRE_ACCOUNT":
+        case "BANK_ACCOUNT":
             additionlInfo = transferMethod.getField(fieldName: .bankAccountId) as? String
             additionlInfo = String(format: "%@%@",
                                    "transfer_method_list_item_description".localized(),
@@ -177,7 +177,11 @@ final class ListTransferMethodPresenter {
                                    additionlInfo?.suffix(startAt: 4) ?? "")
         case "PAYPAL_ACCOUNT":
             additionlInfo = transferMethod.getField(fieldName: .email) as? String
-
+        case "WIRE_ACCOUNT":
+            additionlInfo = transferMethod.getField(fieldName: .intermediaryBankAccountId) as? String
+            additionlInfo = String(format: "%@%@",
+                                   "transfer_method_list_item_description".localized(),
+                                   additionlInfo?.suffix(startAt: 4) ?? "")
         default:
             break
         }
