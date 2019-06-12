@@ -34,6 +34,7 @@
 		641324F222958B5000512816 /* TransferMethodConfigurationKeysBusinessResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 641324EE22958B5000512816 /* TransferMethodConfigurationKeysBusinessResponse.json */; };
 		641324F322958B5000512816 /* TransferMethodConfigurationPayPalAccountBusinessResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 641324EF22958B5000512816 /* TransferMethodConfigurationPayPalAccountBusinessResponse.json */; };
 		641EBE92228EE35A00D718F4 /* AddTransferMethodBankAccountBusinessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641EBE90228EE19E00D718F4 /* AddTransferMethodBankAccountBusinessTests.swift */; };
+		644A69C522B127080058E77E /* WireAccountIndividualResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 644A69C422B127080058E77E /* WireAccountIndividualResponse.json */; };
 		9807B763226442C60028A280 /* BankAccountInvalidRoutingResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFB61472261E84C00C4A8AA /* BankAccountInvalidRoutingResponse.json */; };
 		9807B764226442C60028A280 /* BankCardDuplicateResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFB614A2261E84C00C4A8AA /* BankCardDuplicateResponse.json */; };
 		9807B765226442C60028A280 /* BankCardInvalidCvvResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFB614D2261E84C00C4A8AA /* BankCardInvalidCvvResponse.json */; };
@@ -198,6 +199,7 @@
 		641324EE22958B5000512816 /* TransferMethodConfigurationKeysBusinessResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TransferMethodConfigurationKeysBusinessResponse.json; sourceTree = "<group>"; };
 		641324EF22958B5000512816 /* TransferMethodConfigurationPayPalAccountBusinessResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TransferMethodConfigurationPayPalAccountBusinessResponse.json; sourceTree = "<group>"; };
 		641EBE90228EE19E00D718F4 /* AddTransferMethodBankAccountBusinessTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransferMethodBankAccountBusinessTests.swift; sourceTree = "<group>"; };
+		644A69C422B127080058E77E /* WireAccountIndividualResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WireAccountIndividualResponse.json; sourceTree = "<group>"; };
 		98220B8B2265793700055E18 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		9826056722822E8A000CCA2D /* UIToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIToolbar.swift; sourceTree = "<group>"; };
 		98541F142273D72C007D4238 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
@@ -353,9 +355,8 @@
 		078B45672273895C005B0248 /* Responses */ = {
 			isa = PBXGroup;
 			children = (
-				DBA9FA58227912A000C1301A /* UserIndividualResponse.json */,
-				DBA9FA5A2279143900C1301A /* UserBusinessResponse.json */,
 				078B456F2273895C005B0248 /* BankAccountErrorResponseWithMissingFieldAndValidationError.json */,
+				09795B7A229E7EB700EF407F /* BankAccountIndividualResponse.json */,
 				078B456B2273895C005B0248 /* BankAccountResponse.json */,
 				078B456A2273895C005B0248 /* BankCardErrorResponseWithInvalidCardNumber.json */,
 				078B45702273895C005B0248 /* BankCardResponse.json */,
@@ -364,7 +365,9 @@
 				078B456D2273895C005B0248 /* TransferMethodConfigurationFieldsResponse.json */,
 				078B456E2273895C005B0248 /* TransferMethodConfigurationKeysResponse.json */,
 				078B45682273895C005B0248 /* TransferMethodMockedSuccessResponse.json */,
-				09795B7A229E7EB700EF407F /* BankAccountIndividualResponse.json */,
+				DBA9FA5A2279143900C1301A /* UserBusinessResponse.json */,
+				DBA9FA58227912A000C1301A /* UserIndividualResponse.json */,
+				644A69C422B127080058E77E /* WireAccountIndividualResponse.json */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -863,6 +866,7 @@
 				09795B7B229E7EB700EF407F /* BankAccountIndividualResponse.json in Resources */,
 				078B45762273895C005B0248 /* BankCardErrorResponseWithInvalidCardNumber.json in Resources */,
 				078B45792273895C005B0248 /* TransferMethodConfigurationFieldsResponse.json in Resources */,
+				644A69C522B127080058E77E /* WireAccountIndividualResponse.json in Resources */,
 				DBA9FA5B2279143900C1301A /* UserBusinessResponse.json in Resources */,
 				078B45742273895C005B0248 /* TransferMethodMockedSuccessResponse.json in Resources */,
 				078B45772273895C005B0248 /* BankAccountResponse.json in Resources */,

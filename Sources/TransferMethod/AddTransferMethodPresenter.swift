@@ -113,6 +113,13 @@ final class AddTransferMethodPresenter {
                                                                          transferMethodCurrency: currency)
                 .build()
 
+        case "WIRE_ACCOUNT":
+            hyperwalletTransferMethod = HyperwalletBankAccount.Builder(transferMethodCountry: country,
+                                                                       transferMethodCurrency: currency,
+                                                                       transferMethodProfileType: profileType)
+                .type("WIRE_ACCOUNT")
+                .build()
+
         default:
             view.showError(title: "error".localized(), message: "transfer_method_not_supported_message".localized())
             return
