@@ -36,8 +36,6 @@ UISearchResultsUpdating {
     /// Event handler to indicate if the item cell should be marked
     var shouldMarkCellAction: ((_ value: ModelType) -> Bool)?
 
-    /// Index  of the initial selected item
-    var initialSelectedItemIndex: Int?
     /// Delegate to customise the filter content.
     ///
     /// - parameters: searchText - The text should be used to filter the items list and returned the filtered list.
@@ -72,9 +70,7 @@ UISearchResultsUpdating {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
-        if let index = initialSelectedItemIndex, index < items.count {
-            tableView.scrollToRow(at: IndexPath(row: index, section: 0), at: .top, animated: true)
-        }
+        scrollToSelectedRow()
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -211,5 +207,22 @@ private extension GenericTableViewController {
         tableView.estimatedRowHeight = Theme.Cell.rowHeight
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(T.self, forCellReuseIdentifier: reuseId)
+    }
+
+    func scrollToSelectedRow() {
+        var selectedItemIndex: Int?
+
+        for index in items.indices {
+            if shouldMarkCellAction?(retrieveItems()[index]) ?? false {
+                selectedItemIndex = index
+                break
+            }
+        }
+
+        guard let indexToScrollTo = selectedItemIndex, indexToScrollTo < items.count else {
+            return
+        }
+
+        tableView.scrollToRow(at: IndexPath(row: indexToScrollTo, section: 0), at: .middle, animated: true)
     }
 }
