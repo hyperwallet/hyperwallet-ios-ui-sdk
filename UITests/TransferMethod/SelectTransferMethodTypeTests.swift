@@ -3,6 +3,9 @@ import XCTest
 class SelectTransferMethodTypeTests: BaseTests {
     var selectTransferMethodType: SelectTransferMethodType!
     let bankAccount = NSPredicate(format: "label CONTAINS[c] 'Bank Account'")
+    let debitCard = NSPredicate(format: "label CONTAINS[c] 'Debit Card'")
+    let processingTime = NSPredicate(format: "label CONTAINS[c] 'Processing Time'")
+    let transactionFee = NSPredicate(format: "label CONTAINS[c] 'Transaction Fees'")
 
     override func setUp() {
         profileType = .individual
@@ -101,5 +104,36 @@ class SelectTransferMethodTypeTests: BaseTests {
         XCTAssertTrue(app.navigationBars["Bank Account"].exists)
         XCTAssertTrue(app.tables["addTransferMethodTable"].exists)
         XCTAssertTrue(app.tables.staticTexts["Account Information - United States (USD)"].exists)
+    }
+
+    func testSelectTransferMethodType_verifyCountrySelectionSearch() {
+        selectTransferMethodType.tapCountry()
+
+        selectTransferMethodType.typeSearch(input: "Canada")
+        XCTAssertEqual(app.tables.cells.count, 1)
+    }
+
+    func testSelectTransferMethod_clickBankAccountOpensAddTransferMethodUi () {
+        selectTransferMethodType.selectCountry(country: "United States")
+
+        app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).tap()
+    }
+
+    func testSelectTransferMethod_clickBankCardOpensAddTransferMethodUi () {
+        selectTransferMethodType.selectCountry(country: "United States")
+
+        app.tables["transferMethodTableView"].staticTexts.element(matching: debitCard).tap()
+    }
+
+    func testSelectTransferMethod_verifyTransferMethodsListEmptyFee () {
+        selectTransferMethodType.selectCountry(country: "United Kingdom")
+
+        XCTAssertFalse(app.tables["transferMethodTableView"].staticTexts.element(matching: transactionFee).exists)
+    }
+
+    func testSelectTransferMethod_verifyTransferMethodsListEmptyProcessing () {
+        selectTransferMethodType.selectCountry(country: "United Kingdom")
+
+        XCTAssertFalse(app.tables["transferMethodTableView"].staticTexts.element(matching: processingTime).exists)
     }
 }
