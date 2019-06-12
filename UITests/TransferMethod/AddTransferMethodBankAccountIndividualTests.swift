@@ -109,7 +109,7 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
 
         verifyPresetValue(for: addTransferMethod.firstNameInput, with: "Neil")
         verifyPresetValue(for: addTransferMethod.lastNameInput, with: "Louis")
-        verifyPresetValue(for: addTransferMethod.dateOfBirthInput, with: "1980-01-01")
+        verifyPresetValue(for: addTransferMethod.dateOfBirthInput, with: "January 1, 1980")
         verifyPresetValue(for: addTransferMethod.phoneNumberInput, with: "+1 604 6666666")
         verifyPresetValue(for: addTransferMethod.mobileNumberInput, with: "604 666 6666")
         verifyPresetValue(for: addTransferMethod.stateProvinceInput, with: "BC")
