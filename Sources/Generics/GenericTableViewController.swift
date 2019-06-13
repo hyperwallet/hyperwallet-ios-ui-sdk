@@ -219,7 +219,7 @@ private extension GenericTableViewController {
             tableView.tableFooterView = footerView
         }
         tableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: reuseHeaderIdentifier)
-        tableView.estimatedRowHeight = Theme.Cell.rowHeight
+        tableView.estimatedRowHeight = Theme.Cell.smallHeight
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(T.self, forCellReuseIdentifier: reuseIdentifier)
     }
