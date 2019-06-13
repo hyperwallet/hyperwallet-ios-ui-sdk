@@ -3,6 +3,9 @@ import XCTest
 class SelectTransferMethodTypeTests: BaseTests {
     var selectTransferMethodType: SelectTransferMethodType!
     let bankAccount = NSPredicate(format: "label CONTAINS[c] 'Bank Account'")
+    let debitCard = NSPredicate(format: "label CONTAINS[c] 'Debit Card'")
+    let processingTime = NSPredicate(format: "label CONTAINS[c] 'Processing Time'")
+    let transactionFee = NSPredicate(format: "label CONTAINS[c] 'Transaction Fees'")
 
     override func setUp() {
         profileType = .individual
@@ -42,6 +45,10 @@ class SelectTransferMethodTypeTests: BaseTests {
         XCTAssertTrue(selectTransferMethodType.countrySelect.exists &&
             selectTransferMethodType.navigationBar.exists &&
             selectTransferMethodType.currencySelect.exists)
+    }
+
+    private func validateBankAccountCell () {
+        XCTAssertTrue(app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).exists)
     }
 
     func testAppClickHomeAndRelaunch() {
@@ -101,5 +108,42 @@ class SelectTransferMethodTypeTests: BaseTests {
         XCTAssertTrue(app.navigationBars["Bank Account"].exists)
         XCTAssertTrue(app.tables["addTransferMethodTable"].exists)
         XCTAssertTrue(app.tables.staticTexts["Account Information - United States (USD)"].exists)
+    }
+
+    func testSelectTransferMethodType_verifyCountrySelectionSearch() {
+        selectTransferMethodType.tapCountry()
+
+        selectTransferMethodType.typeSearch(input: "Mexico")
+        XCTAssertEqual(app.tables.cells.count, 1)
+        app.tables.staticTexts["Mexico"].tap()
+        XCTAssert(app.tables.staticTexts["Mexico"].exists)
+    }
+
+    func testSelectTransferMethod_clickBankAccountOpensAddTransferMethodUi () {
+        selectTransferMethodType.selectCountry(country: "United States")
+
+        app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).tap()
+        XCTAssert(app.navigationBars.staticTexts["Bank Account"].exists)
+    }
+
+    func testSelectTransferMethod_clickBankCardOpensAddTransferMethodUi () {
+        selectTransferMethodType.selectCountry(country: "United States")
+
+        app.tables["transferMethodTableView"].staticTexts.element(matching: debitCard).tap()
+        XCTAssert(app.navigationBars.staticTexts["Debit Card"].exists)
+    }
+
+    func testSelectTransferMethod_verifyTransferMethodsListEmptyFee () {
+        selectTransferMethodType.selectCountry(country: "United Kingdom")
+
+        validateBankAccountCell()
+        XCTAssertFalse(app.tables["transferMethodTableView"].staticTexts.element(matching: transactionFee).exists)
+    }
+
+    func testSelectTransferMethod_verifyTransferMethodsListEmptyProcessing () {
+        selectTransferMethodType.selectCountry(country: "United Kingdom")
+
+        validateBankAccountCell()
+        XCTAssertFalse(app.tables["transferMethodTableView"].staticTexts.element(matching: processingTime).exists)
     }
 }
