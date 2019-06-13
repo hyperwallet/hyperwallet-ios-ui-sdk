@@ -22,7 +22,8 @@ class AddTransferMethodBankAccountBusinessTests: BaseTests {
         verifyBusinessAccountHolderSection()
         verifyAddressSection()
 
-        addTransferMethod.addTransferMethodTableView
+        addTransferMethod
+            .addTransferMethodTableView
             .scroll(to: addTransferMethod.addTransferMethodTableView.otherElements["TRANSFER METHOD INFORMATION"])
 
         XCTAssert(addTransferMethod.addTransferMethodTableView.otherElements["TRANSFER METHOD INFORMATION"].exists)
@@ -73,13 +74,12 @@ private extension AddTransferMethodBankAccountBusinessTests {
         selectTransferMethodType.selectCountry(country: "UNITED STATES")
         selectTransferMethodType.selectCurrency(currency: "USD")
 
-        app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).tap()
+        app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: bankAccount).tap()
     }
 
     func verifyAccountInformationSection() {
-        let sectionHeader = "ACCOUNT INFORMATION - UNITED STATES (USD)"
-
-        XCTAssert(addTransferMethod.addTransferMethodTableView.otherElements[sectionHeader].exists)
+        XCTAssert(addTransferMethod.addTransferMethodTableView
+            .otherElements["ACCOUNT INFORMATION - UNITED STATES (USD)"].exists)
         XCTAssert(addTransferMethod.addTransferMethodTableView.cells.staticTexts["Routing Number"].exists)
         XCTAssert(addTransferMethod.branchIdInput.exists)
 
@@ -89,7 +89,8 @@ private extension AddTransferMethodBankAccountBusinessTests {
     }
 
     func verifyBusinessAccountHolderSection() {
-        addTransferMethod.addTransferMethodTableView
+        addTransferMethod
+            .addTransferMethodTableView
             .scroll(to: addTransferMethod.addTransferMethodTableView.otherElements["ACCOUNT HOLDER"])
 
         XCTAssert(addTransferMethod.addTransferMethodTableView.otherElements["ACCOUNT HOLDER"].exists )
@@ -109,7 +110,8 @@ private extension AddTransferMethodBankAccountBusinessTests {
     }
 
     func verifyAddressSection() {
-        addTransferMethod.addTransferMethodTableView
+        addTransferMethod
+            .addTransferMethodTableView
             .scroll(to: addTransferMethod.addTransferMethodTableView.staticTexts["Address"])
 
         XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["Address"].exists)

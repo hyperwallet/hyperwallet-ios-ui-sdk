@@ -134,43 +134,48 @@ import HyperwalletUISDK
 ### Lists the user's transfer methods
 The user can deactivate and add a new transfer method.
 ```swift
-let listTransferMethodViewController = HyperwalletUI.shared.listTransferMethodViewController()
+let listTransferMethodTableViewController = HyperwalletUI.shared.listTransferMethodTableViewController()
 
 // Optional - The completion handler will be performed after a new transfer method has been created.
-listTransferMethodViewController.createTransferMethodHandler = { transferMethod in
+listTransferMethodTableViewController.createTransferMethodHandler = { transferMethod in
     // A new transfer method has been created
 }
 
-navigationController?.pushViewController(listTransferMethodViewController, animated: true)
+navigationController?.pushViewController(listTransferMethodTableViewController, animated: true)
 ```
 
 ### Select a transfer method type available by country and currency
 ```swift
 
-let selectTransferMethodTypeViewController = HyperwalletUI.shared.selectTransferMethodTypeViewController()
+let SelectTransferMethodTypeTableViewController = HyperwalletUI.shared.SelectTransferMethodTypeTableViewController()
 
 // Optional - The completion handler will be performed after a new transfer method has been created.
-selectTransferMethodTypeViewController.createTransferMethodHandler = { transferMethod in
+SelectTransferMethodTypeTableViewController.createTransferMethodHandler = { transferMethod in
     // A new transfer method has been created
 }
 
-navigationController?.pushViewController(selectTransferMethodTypeViewController, animated: true)
+navigationController?.pushViewController(SelectTransferMethodTypeTableViewController, animated: true)
 ```
 
 ### Create a transfer method
 The form fields are based on the country, currency, user's profile type, and transfer method type should be passed to this Controller to create a new Transfer Method for those values.
 ```swift
-let addTransferMethodViewController = HyperwalletUI.shared.addTransferMethodViewController("US",             // The 2 letter ISO 3166-1 country code.
+let addTransferMethodTableViewController = HyperwalletUI.shared.addTransferMethodTableViewController("US",             // The 2 letter ISO 3166-1 country code.
                                                                                            "USD",            // The 3 letter ISO 4217-1 currency code.
                                                                                            "INDIVIDUAL",     // The profile type. Possible values - INDIVIDUAL, BUSINESS.
                                                                                            "BANK_ACCOUNT")   // The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD, PAYPAL_ACCOUNT
 
 // Optional - The completion handler will be performed after a new transfer method has been created.
-addTransferMethodViewController.createTransferMethodHandler = { transferMethod in
+addTransferMethodTableViewController.createTransferMethodHandler = { transferMethod in
     // A new transfer method has been created
 }
 
-navigationController?.pushViewController(addTransferMethodViewController, animated: true)
+navigationController?.pushViewController(addTransferMethodTableViewController, animated: true)
+```
+
+### Lists the user's receipts
+```swift
+let listReceiptTableViewController = HyperwalletUI.shared.listReceiptTableViewController()
 ```
 
 ## NotificationCenter Events

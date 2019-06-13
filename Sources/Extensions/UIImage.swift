@@ -32,15 +32,13 @@ extension UIImage {
     static func fontIcon(_ name: String,
                          _ iconSize: CGSize,
                          _ fontSize: CGFloat,
-                         _ textColor: UIColor,
-                         _ backgroundColor: UIColor?) -> UIImage {
+                         _ textColor: UIColor) -> UIImage {
         let paragraph = NSMutableParagraphStyle()
         paragraph.alignment = NSTextAlignment.center
         let fontSize = fontSize
         let attributedString = NSAttributedString(string: name, attributes: [
             NSAttributedString.Key.font: UIFont(name: "icomoon", size: fontSize)!,
             NSAttributedString.Key.foregroundColor: textColor,
-            NSAttributedString.Key.backgroundColor: backgroundColor ?? .white,
             NSAttributedString.Key.paragraphStyle: paragraph
         ])
 
