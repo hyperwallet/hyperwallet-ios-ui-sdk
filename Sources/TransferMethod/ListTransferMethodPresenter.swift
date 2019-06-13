@@ -155,7 +155,7 @@ final class ListTransferMethodPresenter {
         return nil
     }
 
-    private func getAdditionalInfo(_ transferMethod: HyperwalletTransferMethod) -> String? {
+    func getAdditionalInfo(_ transferMethod: HyperwalletTransferMethod) -> String? {
         var additionlInfo: String?
         switch transferMethod.getField(fieldName: .type) as? String {
         case "BANK_ACCOUNT", "WIRE_ACCOUNT":

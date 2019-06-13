@@ -187,6 +187,13 @@
 "receipt_details_receipt_id" = "Receipt ID:";
 "receipt_details_date" = "Date:";
 
+// Transfer Funds
+"transfer_funds" = "Transfer Funds";
+"add_transfer_section_header_destination" = "Destination Account";
+"add_transfer_section_header_amount" = "Amount and Description";
+"transfer_amount" = "Amount";
+"transfer_description" = "Transfer Description";
+"add_transfer_next_button" = "Next";
 // List of countries
 // Source: https://datahub.io/core/country-list#data
 "AF"="Afghanistan";

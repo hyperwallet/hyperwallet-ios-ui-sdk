@@ -32,6 +32,8 @@ public class ThemeManager {
         applyToReceiptDetailTableViewCell()
         applyToReceiptFeeTableViewCell()
         applyToReceiptNotesTableViewCell()
+        applyToAddTransferUserInputTableViewCell()
+        applyToAddTransferNextButtonTableViewCell()
         registerFonts
     }
 
@@ -163,6 +165,20 @@ public class ThemeManager {
         let proxy = ReceiptNotesTableViewCell.appearance()
         proxy.titleLabelFont = Theme.Label.footnoteFont
         proxy.titleLabelColor = Theme.Label.subTitleColor
+    }
+
+    private static func applyToAddTransferUserInputTableViewCell() {
+        let proxy = AddTransferUserInputCell.appearance()
+        proxy.titleLabelFont = Theme.Label.footnoteFont
+        proxy.titleLabelColor = Theme.Label.subTitleColor
+        proxy.subTitleLabelFont = Theme.Label.footnoteFont
+        proxy.subTitleLabelColor = Theme.Label.subTitleColor
+    }
+
+    private static func applyToAddTransferNextButtonTableViewCell() {
+        let proxy = AddTransferNextCell.appearance()
+        proxy.titleLabelFont = Theme.Label.bodyFontMedium
+        proxy.titleLabelColor = Theme.Button.color
     }
 
     private static let registerFonts: Void = {
