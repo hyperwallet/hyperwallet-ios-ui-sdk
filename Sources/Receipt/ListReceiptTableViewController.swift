@@ -26,9 +26,23 @@ public final class ListReceiptTableViewController: UITableViewController {
     private var presenter: ListReceiptViewPresenter!
     private var defaultHeaderHeight = CGFloat(38.0)
     private let sectionTitleDateFormat = "MMMM yyyy"
-    private var loadMoreReceipts = false
 
     private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "empty_list_receipt_message".localized())
+
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        presenter = ListReceiptViewPresenter(view: self)
+    }
+
+    init(prepaidCardToken: String) {
+        super.init(nibName: nil, bundle: nil)
+        presenter = ListReceiptViewPresenter(view: self, prepaidCardToken: prepaidCardToken)
+    }
+
+    // swiftlint:disable unavailable_function
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("NSCoding not supported")
+    }
 
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +53,7 @@ public final class ListReceiptTableViewController: UITableViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem.back
         presenter = ListReceiptViewPresenter(view: self)
         setupListReceiptTableView()
-        presenter.listReceipt()
+        presenter.listReceipts()
     }
 
     // MARK: list receipt table view data source
@@ -79,7 +93,7 @@ public final class ListReceiptTableViewController: UITableViewController {
         if indexPath.section == lastSectionIndex
             && indexPath.row == presenter.sectionData[lastSectionIndex].value.count - 1
             && !presenter.areAllReceiptsLoaded {
-            loadMoreReceipts = true
+            presenter.listReceipts()
         }
     }
 
@@ -97,13 +111,6 @@ public final class ListReceiptTableViewController: UITableViewController {
         tableView.tableFooterView = UIView()
         tableView.register(ReceiptTransactionTableViewCell.self,
                            forCellReuseIdentifier: ReceiptTransactionTableViewCell.reuseIdentifier)
-    }
-
-    override public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if loadMoreReceipts {
-            presenter.listReceipt()
-            loadMoreReceipts = false
-        }
     }
 }
 

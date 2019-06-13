@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0702673922B307570057D62B /* HyperwalletReceipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0702673822B307570057D62B /* HyperwalletReceipt.swift */; };
 		072A53F722838F6B00BC11D0 /* AddTransferMethodSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072A53F622838F6B00BC11D0 /* AddTransferMethodSectionData.swift */; };
 		073BA5D322A885E6002C58BD /* AddTransferMethodTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BA5D222A885E6002C58BD /* AddTransferMethodTableViewController.swift */; };
 		073BA5D522A88612002C58BD /* ListTransferMethodTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BA5D422A88612002C58BD /* ListTransferMethodTableViewController.swift */; };
@@ -192,6 +193,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0702673822B307570057D62B /* HyperwalletReceipt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletReceipt.swift; sourceTree = "<group>"; };
 		072A53F622838F6B00BC11D0 /* AddTransferMethodSectionData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodSectionData.swift; sourceTree = "<group>"; };
 		073BA5D222A885E6002C58BD /* AddTransferMethodTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodTableViewController.swift; sourceTree = "<group>"; };
 		073BA5D422A88612002C58BD /* ListTransferMethodTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTransferMethodTableViewController.swift; sourceTree = "<group>"; };
@@ -738,6 +740,7 @@
 				DBCA383A225E8BA900CD4137 /* UIViewController.swift */,
 				9826056722822E8A000CCA2D /* UIToolbar.swift */,
 				988547CF22970FA1007B312C /* Date.swift */,
+				0702673822B307570057D62B /* HyperwalletReceipt.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1154,6 +1157,7 @@
 				DBCA3866225E8BAA00CD4137 /* SelectTransferMethodTypePresenter.swift in Sources */,
 				DB4679BF2261083F00E1AF49 /* UIFont.swift in Sources */,
 				4A22F1EA22A67FE400D58883 /* ReceiptNotesTableViewCell.swift in Sources */,
+				0702673922B307570057D62B /* HyperwalletReceipt.swift in Sources */,
 				DBCA387B225E8BAA00CD4137 /* UINavigationController.swift in Sources */,
 				DB2EB66D22617A8500FBEB3D /* String+Array.swift in Sources */,
 				4A22F1E422A6723200D58883 /* ReceiptDetailTableViewController.swift in Sources */,

@@ -31,7 +31,7 @@ class ListReceiptPresenterTests: XCTestCase {
         mockView.expectation = expectation
 
         // When
-        presenter.listReceipt()
+        presenter.listReceipts()
         wait(for: [expectation], timeout: 1)
 
         // Then
@@ -70,7 +70,7 @@ class ListReceiptPresenterTests: XCTestCase {
         mockView.expectation = expectationLoadMore
 
         // When
-        presenter.listReceipt()
+        presenter.listReceipts()
         wait(for: [expectationLoadMore], timeout: 1)
 
         // Then
@@ -101,7 +101,7 @@ class ListReceiptPresenterTests: XCTestCase {
         mockView.expectation = expectation
 
         // When
-        presenter.listReceipt()
+        presenter.listReceipts()
         wait(for: [expectation], timeout: 1)
 
         // Then
