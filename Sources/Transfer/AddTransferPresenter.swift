@@ -24,7 +24,7 @@ protocol AddTransferView: class {
     func showProcessing()
     func dismissProcessing(handler: @escaping () -> Void)
     func showConfirmation(handler: @escaping (() -> Void))
-    func showAddTransfer()
+    func showAddTransfer(with transferMethod: HyperwalletTransferMethod)
     func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?)
 }
 
@@ -38,7 +38,8 @@ final class AddTransferPresenter {
         self.view = view
     }
 
-    private func initializeSections(with transferMethod: HyperwalletTransferMethod) {
+    func initializeSections(with transferMethod: HyperwalletTransferMethod) {
+        sectionData.removeAll()
         let addTransferDestinationSection = AddTransferDestinationData(transferMethod: transferMethod)
         sectionData.append(addTransferDestinationSection)
 
@@ -71,12 +72,10 @@ final class AddTransferPresenter {
                         strongSelf.view.showError(error, { strongSelf.loadTransferMethods() })
                         return
                     }
-                    if let data = result?.data {
+                    if let data = result?.data, data.isNotEmpty() {
                         strongSelf.transferMethods = data
+                        strongSelf.view.showAddTransfer(with: strongSelf.transferMethods.first!)
                     }
-
-                    strongSelf.initializeSections(with: strongSelf.transferMethods.first!)
-                    strongSelf.view.showAddTransfer()
                 }
             }
     }

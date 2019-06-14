@@ -150,7 +150,8 @@ final class ListTransferMethodPresenter {
                 transferMethodType: transferMethodType.lowercased().localized(),
                 transferMethodCountry: country.localized(),
                 additionalInfo: getAdditionalInfo(transferMethod),
-                transferMethodIconFont: HyperwalletIcon.of(transferMethodType).rawValue)
+                transferMethodIconFont: HyperwalletIcon.of(transferMethodType).rawValue,
+                transferMethodToken: transferMethod.getField(fieldName: .token) as? String ?? "")
         }
         return nil
     }

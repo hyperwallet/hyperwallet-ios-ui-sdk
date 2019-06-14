@@ -77,11 +77,11 @@ public final class AddTransferTableViewController: UITableViewController {
                 let row = userInputData.rows[indexPath.row]
                 tableViewCell.textLabel?.text = row.title
                 tableViewCell.detailTextLabel?.text = row.value
+                tableViewCell.selectionStyle = UITableViewCell.SelectionStyle.none
             }
 
         case .button:
-            if let tableViewCell = cell as? AddTransferNextCell,
-               let _ = section as? AddTransferButtonData {
+            if let tableViewCell = cell as? AddTransferNextCell, section is AddTransferButtonData {
                 tableViewCell.textLabel?.text = "add_transfer_next_button".localized()
                 tableViewCell.textLabel?.textAlignment = .center
                 let tap = UITapGestureRecognizer(target: self, action: #selector(clickNext))
@@ -98,8 +98,14 @@ public final class AddTransferTableViewController: UITableViewController {
     }
 
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if presenter.sectionData[indexPath.section].addTransferSectionHeader == AddTransferSectionHeader.destination {
+        if presenter.sectionData[indexPath.section].addTransferSectionHeader == AddTransferSectionHeader.destination,
+            let addTransferDestinationData = presenter.sectionData[indexPath.section] as? AddTransferDestinationData {
             let viewController = SelectTransferMethodTableViewController(transferMethods: presenter.transferMethods)
+            viewController.shouldMarkCellAction = { transferMethodToken in
+                addTransferDestinationData.configuration?.transferMethodToken == transferMethodToken }
+            viewController.selectedHandler = { transferMethod in
+                self.showAddTransfer(with: transferMethod)
+            }
             navigationController?.pushViewController(viewController, animated: true)
 
             tableView.deselectRow(at: indexPath, animated: true)
@@ -157,7 +163,8 @@ extension AddTransferTableViewController: AddTransferView {
     func showConfirmation(handler: @escaping (() -> Void)) {
     }
 
-    func showAddTransfer() {
+    func showAddTransfer(with transferMethod: HyperwalletTransferMethod) {
+        presenter.initializeSections(with: transferMethod)
         tableView.reloadData()
     }
 

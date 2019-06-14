@@ -23,6 +23,7 @@ struct ListTransferMethodCellConfiguration {
     let transferMethodCountry: String
     let additionalInfo: String?
     let transferMethodIconFont: String
+    let transferMethodToken: String
 }
 
 final class ListTransferMethodTableViewCell: UITableViewCell {

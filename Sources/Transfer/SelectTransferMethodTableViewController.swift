@@ -23,6 +23,12 @@ import UIKit
 /// The user can deactivate and add a new transfer method.
 public final class SelectTransferMethodTableViewController: UITableViewController {
     private var transferMethods: [HyperwalletTransferMethod]
+    /// Event handler to indicate if the item cell should be marked
+    var shouldMarkCellAction: ((_ value: String) -> Bool)?
+
+    typealias SelectedHandler = (_ value: HyperwalletTransferMethod) -> Void
+    /// Event handler to return the item selected
+    var selectedHandler: SelectedHandler?
 
     init(transferMethods: [HyperwalletTransferMethod]) {
         self.transferMethods = transferMethods
@@ -48,6 +54,7 @@ public final class SelectTransferMethodTableViewController: UITableViewControlle
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+        scrollToSelectedRow()
     }
 
     // MARK: - Transfer method list table view dataSource and delegate
@@ -58,16 +65,25 @@ public final class SelectTransferMethodTableViewController: UITableViewControlle
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ListTransferMethodTableViewCell.reuseIdentifier,
                                                  for: indexPath)
+        cell.accessoryType = .none
         if let listTransferMethodCell = cell as? ListTransferMethodTableViewCell,
             let cellConfiguration = getCellConfiguration(indexPath: indexPath) {
             listTransferMethodCell.configure(configuration: cellConfiguration)
+            if shouldMarkCellAction?(cellConfiguration.transferMethodToken) ?? false {
+                cell.accessoryType = .checkmark
+            }
         }
+
         return cell
     }
 
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO select transfer method
-        tableView.deselectRow(at: indexPath, animated: true)
+        // Retrieve the item selected
+        if let performTransferMethodSelected = selectedHandler {
+            let transferMethod = transferMethods[indexPath.row]
+            performTransferMethodSelected(transferMethod)
+        }
+        navigationController?.popViewController(animated: true)
     }
 
     override public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -97,7 +113,8 @@ public final class SelectTransferMethodTableViewController: UITableViewControlle
                 transferMethodType: transferMethodType.lowercased().localized(),
                 transferMethodCountry: country.localized(),
                 additionalInfo: getAdditionalInfo(transferMethod),
-                transferMethodIconFont: HyperwalletIcon.of(transferMethodType).rawValue)
+                transferMethodIconFont: HyperwalletIcon.of(transferMethodType).rawValue,
+                transferMethodToken: transferMethod.getField(fieldName: .token) as? String ?? "")
         }
         return nil
     }
@@ -122,5 +139,22 @@ public final class SelectTransferMethodTableViewController: UITableViewControlle
             break
         }
         return additionlInfo
+    }
+
+    func scrollToSelectedRow() {
+        //TODO scrolling is not working properly, need to be fixed
+        var selectedTransferMethod: Int?
+
+        for index in transferMethods.indices {
+            if shouldMarkCellAction?(transferMethods[index].getField(fieldName: .token) as? String ?? "") ?? false {
+                selectedTransferMethod = index
+                break
+            }
+        }
+
+        guard let indexToScrollTo = selectedTransferMethod, indexToScrollTo < transferMethods.count else {
+            return
+        }
+        self.tableView.scrollToRow(at: IndexPath(row: indexToScrollTo, section: 0), at: .middle, animated: false)
     }
 }

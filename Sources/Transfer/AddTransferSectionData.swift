@@ -38,8 +38,10 @@ struct AddTransferDestinationData: AddTransferSectionData {
     var addTransferSectionHeader: AddTransferSectionHeader { return .destination }
     var cellIdentifier: String { return ListTransferMethodTableViewCell.reuseIdentifier }
     var configuration: ListTransferMethodCellConfiguration?
+    var transferMethod: HyperwalletTransferMethod
 
     init(transferMethod: HyperwalletTransferMethod) {
+        self.transferMethod = transferMethod
         setUpCellConfiguration(transferMethod: transferMethod)
     }
 
@@ -50,7 +52,8 @@ struct AddTransferDestinationData: AddTransferSectionData {
                 transferMethodType: transferMethodType.lowercased().localized(),
                 transferMethodCountry: country.localized(),
                 additionalInfo: getAdditionalInfo(transferMethod),
-                transferMethodIconFont: HyperwalletIcon.of(transferMethodType).rawValue)
+                transferMethodIconFont: HyperwalletIcon.of(transferMethodType).rawValue,
+                transferMethodToken: transferMethod.getField(fieldName: .token) as? String ?? "")
         }
     }
 
