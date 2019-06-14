@@ -33,6 +33,7 @@
 		09795B7B229E7EB700EF407F /* BankAccountIndividualResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 09795B7A229E7EB700EF407F /* BankAccountIndividualResponse.json */; };
 		09E7165022A697C400FA9B96 /* ReceiptsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7164F22A697C400FA9B96 /* ReceiptsList.swift */; };
 		09E7165622A6983400FA9B96 /* ListReceiptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7165522A6983400FA9B96 /* ListReceiptTests.swift */; };
+		412F722722B4497500837F8F /* ReceiptDetailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F722622B4497500837F8F /* ReceiptDetailTests.swift */; };
 		4A12653C2280B02900C0F59E /* DateWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12653B2280B02900C0F59E /* DateWidget.swift */; };
 		4A12653E2280B12F00C0F59E /* PhoneWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12653D2280B12F00C0F59E /* PhoneWidget.swift */; };
 		4A22F1E422A6723200D58883 /* ReceiptDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22F1E322A6723200D58883 /* ReceiptDetailTableViewController.swift */; };
@@ -218,6 +219,7 @@
 		09795B7A229E7EB700EF407F /* BankAccountIndividualResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BankAccountIndividualResponse.json; sourceTree = "<group>"; };
 		09E7164F22A697C400FA9B96 /* ReceiptsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptsList.swift; sourceTree = "<group>"; };
 		09E7165522A6983400FA9B96 /* ListReceiptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListReceiptTests.swift; sourceTree = "<group>"; };
+		412F722622B4497500837F8F /* ReceiptDetailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptDetailTests.swift; sourceTree = "<group>"; };
 		4A12653B2280B02900C0F59E /* DateWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateWidget.swift; sourceTree = "<group>"; };
 		4A12653D2280B12F00C0F59E /* PhoneWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneWidget.swift; sourceTree = "<group>"; };
 		4A22F1E322A6723200D58883 /* ReceiptDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptDetailTableViewController.swift; sourceTree = "<group>"; };
@@ -454,6 +456,7 @@
 			isa = PBXGroup;
 			children = (
 				09E7165522A6983400FA9B96 /* ListReceiptTests.swift */,
+				412F722622B4497500837F8F /* ReceiptDetailTests.swift */,
 			);
 			path = Receipts;
 			sourceTree = "<group>";
@@ -1105,6 +1108,7 @@
 				0743EF9C22A5987100C089EE /* ListReceiptPresenterTests.swift in Sources */,
 				4AEBF0FD22AA86DA00C664D3 /* ReceiptDetailPresenterTests.swift in Sources */,
 				DB18EA142261BA4C004F6AC3 /* HyperwalletTestHelper.swift in Sources */,
+				412F722722B4497500837F8F /* ReceiptDetailTests.swift in Sources */,
 				078B457F2273895C005B0248 /* AddTransferMethodPresenterTests.swift in Sources */,
 				078B457E2273895C005B0248 /* SelectTransferMethodTypePresenterTests.swift in Sources */,
 				DB18EA172261BA4D004F6AC3 /* AuthenticationProviderMock.swift in Sources */,
@@ -1363,7 +1367,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BASE_URL = "http://localhost:8080";
+				BASE_URL = "https://qamaster-hyperwallet.aws.paylution.net";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1381,7 +1385,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_TOKEN = "usr-your-user-token";
+				USER_TOKEN = "usr-02d381d3-bf7e-43fe-9d00-02e26b28df57";
 			};
 			name = Debug;
 		};
@@ -1390,7 +1394,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BASE_URL = "http://localhost:8080";
+				BASE_URL = "https://qamaster-hyperwallet.aws.paylution.net";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
