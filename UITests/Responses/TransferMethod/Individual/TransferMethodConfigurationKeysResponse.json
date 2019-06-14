@@ -199,17 +199,9 @@
                                         {
                                             "code": "BANK_ACCOUNT",
                                             "name": "Bank Account",
-                                            "processingTime": "1-2 Business days",
+                                            "processingTime": "",
                                             "fees": {
-                                                "nodes": [
-                                                    {
-                                                        "country": "GB",
-                                                        "currency": "GBP",
-                                                        "transferMethodType": "BANK_ACCOUNT",
-                                                        "value": "1.20",
-                                                        "feeRateType": "FLAT"
-                                                    }
-                                                ]
+                                                
                                             }
                                         }
                                     ]

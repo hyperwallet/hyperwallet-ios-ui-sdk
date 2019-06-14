@@ -26,7 +26,7 @@ UISearchResultsUpdating {
     /// Enable the search controller
     private var shouldDisplaySearchBar = false
     /// The amount of items to enable the search bar to the Generic TableView
-    let amountOfItemsToEnableSearchBar = 20
+    let amountOfItemsToEnableSearchBar = 4
     var items = [ModelType]() {
         didSet {
             shouldDisplaySearchBar = items.count >= amountOfItemsToEnableSearchBar
