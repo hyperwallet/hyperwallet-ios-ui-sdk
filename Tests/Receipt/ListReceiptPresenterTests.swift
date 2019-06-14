@@ -10,6 +10,10 @@ class ListReceiptPresenterTests: XCTestCase {
         .getDataFromJson("UserReceiptResponse")
     private lazy var listReceiptNextPagePayload = HyperwalletTestHelper
         .getDataFromJson("UserReceiptNextPageResponse")
+    private lazy var listPrepaidCardReceiptPayload = HyperwalletTestHelper
+        .getDataFromJson("PrepaidCardReceiptResponse")
+    private lazy var listPrepaidCardReceiptNextPagePayload = HyperwalletTestHelper
+        .getDataFromJson("PrepaidCardReceiptNextPageResponse")
 
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
@@ -110,6 +114,41 @@ class ListReceiptPresenterTests: XCTestCase {
         XCTAssertFalse(mockView.isLoadReceiptPerformed, "The loadReceipt should not be performed")
 
         XCTAssertEqual(presenter.sectionData.count, 0, "The count of groupedSectionArray should be 0")
+    }
+
+    //swiftlint:disable function_body_length
+    func testListPrepaidCardReceipt_success() {
+        // Given
+        HyperwalletTestHelper.setUpMockServer(request: setUpReceiptRequest(listPrepaidCardReceiptPayload))
+
+        let expectation = self.expectation(description: "load receipts")
+        mockView.expectation = expectation
+
+        // When
+        presenter.listReceipts()
+        wait(for: [expectation], timeout: 1)
+
+        // Then
+        XCTAssertEqual(presenter.sectionData.count, 5)
+
+        // Load more receipts
+        // Given
+        HyperwalletTestHelper.setUpMockServer(request: setUpReceiptRequest(listPrepaidCardReceiptNextPagePayload))
+
+        let expectationLoadMore = self.expectation(description: "load more receipts")
+        mockView.expectation = expectationLoadMore
+
+        // When
+        presenter.listReceipts()
+        wait(for: [expectationLoadMore], timeout: 1)
+
+        // Then
+        XCTAssertEqual(presenter.sectionData.count,
+                       8,
+                       "The receipt number of the third group should be 5")
+        XCTAssertEqual(presenter.sectionData[4].value.count,
+                       3,
+                       "The receipt number of the fourth group should be 3")
     }
 
     private func setUpReceiptRequest(_ payload: Data, _ error: NSError? = nil) -> StubRequest {
