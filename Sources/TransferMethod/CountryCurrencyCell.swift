@@ -32,6 +32,18 @@ struct CountryCurrencyCellConfiguration {
 final class CountryCurrencyCell: GenericCell<CountryCurrencyCellConfiguration> {
     static let reuseIdentifier = "countryCurrencyCellIdentifier"
 
+    lazy var titleLabel: UILabel = {
+        UILabel(frame: .zero)
+    }()
+
+    lazy var valueLabel: UILabel = {
+        UILabel(frame: .zero)
+    }()
+
+    lazy var leftRightInset: CGFloat = {
+        (contentView.superview as? UITableViewCell)?.separatorInset.left ?? 0
+    }()
+
     // MARK: Property
     override var item: CountryCurrencyCellConfiguration? {
         didSet {
@@ -40,28 +52,54 @@ final class CountryCurrencyCell: GenericCell<CountryCurrencyCellConfiguration> {
             }
             accessibilityIdentifier = configuration.identifier
 
-            var value = configuration.value
-            if accessoryType == .checkmark {
-                value = ""
-            }
+            titleLabel.text = configuration.title
+            titleLabel.accessibilityLabel = configuration.title
+            titleLabel.accessibilityIdentifier = configuration.title
 
-            textLabel?.text = configuration.title
-            textLabel?.accessibilityLabel = configuration.title
-            textLabel?.accessibilityIdentifier = configuration.title
+            valueLabel.text = accessoryType == .checkmark ? "" : configuration.value
+            valueLabel.accessibilityLabel = configuration.value
+            valueLabel.accessibilityIdentifier = configuration.value
 
-            detailTextLabel?.text = value
-            detailTextLabel?.accessibilityLabel = configuration.value
-            detailTextLabel?.accessibilityIdentifier = configuration.value
+            contentView.constraints.first(where: { $0.firstAttribute == .right })?.constant = accessoryType == .none
+                ? -leftRightInset : 0
         }
     }
 
+    private func setConstraits() {
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        valueLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        titleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor,
+                                         constant: leftRightInset).isActive = true
+        titleLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 100).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: valueLabel.leadingAnchor,
+                                             constant: -5).isActive = true
+        titleLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+
+        valueLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        valueLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor,
+                                          constant: -leftRightInset).isActive = true
+        valueLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        valueLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+    }
+
     // MARK: Life cycle
+    private func defaultInit() {
+        self.contentView.addSubview(titleLabel)
+        self.contentView.addSubview(valueLabel)
+        setConstraits()
+    }
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .value1, reuseIdentifier: reuseIdentifier)
+        super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        defaultInit()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        defaultInit()
     }
 
     // MARK: Theme manager's proxy properties
@@ -71,22 +109,22 @@ final class CountryCurrencyCell: GenericCell<CountryCurrencyCellConfiguration> {
     }
 
     @objc dynamic var titleLabelColor: UIColor! {
-        get { return self.textLabel?.textColor }
-        set { self.textLabel?.textColor = newValue }
+        get { return self.titleLabel.textColor }
+        set { self.titleLabel.textColor = newValue }
     }
 
     @objc dynamic var titleLabelFont: UIFont! {
-        get { return self.textLabel?.font }
-        set { self.textLabel?.font = newValue }
+        get { return self.titleLabel.font }
+        set { self.titleLabel.font = newValue }
     }
 
     @objc dynamic var valueLabelColor: UIColor! {
-        get { return self.detailTextLabel?.textColor }
-        set { self.detailTextLabel?.textColor = newValue }
+        get { return self.valueLabel.textColor }
+        set { self.valueLabel.textColor = newValue }
     }
 
     @objc dynamic var valueLabelFont: UIFont! {
-        get { return self.detailTextLabel?.font }
-        set { self.detailTextLabel?.font = newValue }
+        get { return self.valueLabel.font }
+        set { self.valueLabel.font = newValue }
     }
 }
