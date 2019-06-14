@@ -98,8 +98,12 @@ public final class AddTransferTableViewController: UITableViewController {
     }
 
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       // TODO change destination
-        tableView.deselectRow(at: indexPath, animated: true)
+        if presenter.sectionData[indexPath.section].addTransferSectionHeader == AddTransferSectionHeader.destination {
+            let viewController = SelectTransferMethodTableViewController(transferMethods: presenter.transferMethods)
+            navigationController?.pushViewController(viewController, animated: true)
+
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
 
     override public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -118,7 +122,6 @@ public final class AddTransferTableViewController: UITableViewController {
 
     private func setUpAddTransferTableView() {
         tableView = UITableView(frame: view.frame, style: .grouped)
-        tableView.allowsSelection = false
         tableView.accessibilityIdentifier = "addTransferTableView"
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)

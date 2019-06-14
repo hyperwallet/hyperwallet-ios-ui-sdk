@@ -31,7 +31,7 @@ protocol AddTransferView: class {
 final class AddTransferPresenter {
     private unowned let view: AddTransferView
     private(set) var sectionData = [AddTransferSectionData]()
-    private var transferMethods = [HyperwalletTransferMethod]()
+    private(set) var transferMethods = [HyperwalletTransferMethod]()
 
     /// Initialize AddTransferPresenter
     init(view: AddTransferView) {

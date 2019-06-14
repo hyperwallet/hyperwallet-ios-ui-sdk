@@ -15,5 +15,112 @@
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+import HyperwalletSDK
+import UIKit
 
-import Foundation
+/// Lists the user's transfer methods (bank account, bank card, PayPal account, prepaid card, paper check).
+///
+/// The user can deactivate and add a new transfer method.
+public final class SelectTransferMethodTableViewController: UITableViewController {
+    private var transferMethods: [HyperwalletTransferMethod]
+
+    init(transferMethods: [HyperwalletTransferMethod]) {
+        self.transferMethods = transferMethods
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    // swiftlint:disable unavailable_function
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("NSCoding not supported")
+    }
+
+    override public func viewDidLoad() {
+        super.viewDidLoad()
+        title = "title_accounts".localized()
+        largeTitle()
+        setViewBackgroundColor()
+
+        navigationItem.backBarButtonItem = UIBarButtonItem.back
+
+        setupTransferMethodTableView()
+    }
+
+    override public func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+
+    // MARK: - Transfer method list table view dataSource and delegate
+    override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return transferMethods.count
+    }
+
+    override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: ListTransferMethodTableViewCell.reuseIdentifier,
+                                                 for: indexPath)
+        if let listTransferMethodCell = cell as? ListTransferMethodTableViewCell,
+            let cellConfiguration = getCellConfiguration(indexPath: indexPath) {
+            listTransferMethodCell.configure(configuration: cellConfiguration)
+        }
+        return cell
+    }
+
+    override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // TODO select transfer method
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    override public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return nil
+    }
+
+    override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat.leastNormalMagnitude
+    }
+
+    override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return Theme.Cell.largeHeight
+    }
+
+    private func setupTransferMethodTableView() {
+        tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.tableFooterView = UIView()
+        tableView.register(ListTransferMethodTableViewCell.self,
+                           forCellReuseIdentifier: ListTransferMethodTableViewCell.reuseIdentifier)
+    }
+
+    func getCellConfiguration(indexPath: IndexPath) -> ListTransferMethodCellConfiguration? {
+        if let transferMethod = transferMethods[safe: indexPath.row],
+            let country = transferMethod.getField(fieldName: .transferMethodCountry) as? String,
+            let transferMethodType = transferMethod.getField(fieldName: .type) as? String {
+            return ListTransferMethodCellConfiguration(
+                transferMethodType: transferMethodType.lowercased().localized(),
+                transferMethodCountry: country.localized(),
+                additionalInfo: getAdditionalInfo(transferMethod),
+                transferMethodIconFont: HyperwalletIcon.of(transferMethodType).rawValue)
+        }
+        return nil
+    }
+
+    func getAdditionalInfo(_ transferMethod: HyperwalletTransferMethod) -> String? {
+        var additionlInfo: String?
+        switch transferMethod.getField(fieldName: .type) as? String {
+        case "BANK_ACCOUNT", "WIRE_ACCOUNT":
+            additionlInfo = transferMethod.getField(fieldName: .bankAccountId) as? String
+            additionlInfo = String(format: "%@%@",
+                                   "transfer_method_list_item_description".localized(),
+                                   additionlInfo?.suffix(startAt: 4) ?? "")
+        case "BANK_CARD":
+            additionlInfo = transferMethod.getField(fieldName: .cardNumber) as? String
+            additionlInfo = String(format: "%@%@",
+                                   "transfer_method_list_item_description".localized(),
+                                   additionlInfo?.suffix(startAt: 4) ?? "")
+        case "PAYPAL_ACCOUNT":
+            additionlInfo = transferMethod.getField(fieldName: .email) as? String
+
+        default:
+            break
+        }
+        return additionlInfo
+    }
+}
