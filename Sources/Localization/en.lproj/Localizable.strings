@@ -194,6 +194,12 @@
 "transfer_amount" = "Amount";
 "transfer_description" = "Transfer Description";
 "add_transfer_next_button" = "Next";
+"confirm_transfer_section_header_destination" = "DESITINATION";
+"confirm_transfer_section_header_foreignExchange" = "FOREIGN EXCHANGE";
+"confirm_transfer_section_header_summary" = "SUMMARY";
+"confirm_transfer_section_header_notes" = "NOTES";
+"confirm_transfer_button" = "Transfer Funds";
+
 // List of countries
 // Source: https://datahub.io/core/country-list#data
 "AF"="Afghanistan";

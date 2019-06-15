@@ -23,6 +23,7 @@ import UIKit
 /// The user can deactivate and add a new transfer method.
 public final class AddTransferTableViewController: UITableViewController, UITextFieldDelegate {
     private var presenter: AddTransferPresenter!
+    private var selectedTransferMethod: HyperwalletTransferMethod!
 
     private let registeredCells: [(type: AnyClass, id: String)] = [
         (ListTransferMethodTableViewCell.self, ListTransferMethodTableViewCell.reuseIdentifier),
@@ -108,7 +109,26 @@ public final class AddTransferTableViewController: UITableViewController, UIText
 
     @objc
     private func clickNext(sender: UITapGestureRecognizer) {
-        print("Next Step!")
+        // TODO we should implement a callback to navigate to the next page once the response is returned from server,
+        // we just mock it for now since the core is not ready yet.
+        let foreignExchangeOne = HyperwalletForeignExchange(sourceAmount: "100.00",
+                                                            sourceCurrency: "CAD",
+                                                            destinationAmount: "70.00",
+                                                            destinationCurrency: "USD",
+                                                            rate: "0.7")
+        let foreignExchangeTwo = HyperwalletForeignExchange(sourceAmount: "120.00",
+                                                            sourceCurrency: "CAD",
+                                                            destinationAmount: "110.00",
+                                                            destinationCurrency: "USD",
+                                                            rate: "0.86")
+
+        let transefer = HyperwalletTransfer(amount: "100.00",
+                                            fee: "2.00",
+                                            destinationCurrency: "USD",
+                                            foreignExchanges: [foreignExchangeOne, foreignExchangeTwo])
+        let confirmTransferController = ConfirmTransferTableViewController(transferMethod: selectedTransferMethod,
+                                                                           transfer: transefer)
+        navigationController?.pushViewController(confirmTransferController, animated: true)
     }
 
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -198,6 +218,7 @@ extension AddTransferTableViewController: AddTransferView {
     }
 
     func showAddTransfer(with transferMethod: HyperwalletTransferMethod) {
+        selectedTransferMethod = transferMethod
         presenter.initializeSections(with: transferMethod)
         tableView.reloadData()
     }

@@ -22,4 +22,13 @@ struct HyperwalletTransfer {
     var amount: String?
     var fee: String?
     var destinationCurrency: String?
+    var foreignExchanges: [HyperwalletForeignExchange]?
+}
+
+struct HyperwalletForeignExchange {
+    var sourceAmount: String?
+    var sourceCurrency: String?
+    var destinationAmount: String?
+    var destinationCurrency: String?
+    var rate: String?
 }
