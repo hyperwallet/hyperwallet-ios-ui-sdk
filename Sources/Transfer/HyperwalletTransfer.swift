@@ -18,5 +18,8 @@
 
 import Foundation
 
-final class SelectTransferMethodPresenter {
+struct HyperwalletTransfer {
+    var amount: String?
+    var fee: String?
+    var destinationCurrency: String?
 }

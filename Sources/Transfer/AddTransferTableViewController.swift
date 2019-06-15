@@ -21,7 +21,7 @@ import UIKit
 /// Lists the user's transfer methods (bank account, bank card, PayPal account, prepaid card, paper check).
 ///
 /// The user can deactivate and add a new transfer method.
-public final class AddTransferTableViewController: UITableViewController {
+public final class AddTransferTableViewController: UITableViewController, UITextFieldDelegate {
     private var presenter: AddTransferPresenter!
 
     private let registeredCells: [(type: AnyClass, id: String)] = [
@@ -35,7 +35,6 @@ public final class AddTransferTableViewController: UITableViewController {
         title = "transfer_funds".localized()
         largeTitle()
         setViewBackgroundColor()
-
         navigationItem.backBarButtonItem = UIBarButtonItem.back
 
         // setup table view
@@ -43,6 +42,10 @@ public final class AddTransferTableViewController: UITableViewController {
 
         presenter = AddTransferPresenter(view: self)
         presenter.loadTransferMethods()
+    }
+
+    override public func viewWillAppear(_ animated: Bool) {
+        hideKeyboardWhenTappedAround()
     }
 
     // MARK: - Transfer method list table view dataSource and delegate
@@ -75,9 +78,20 @@ public final class AddTransferTableViewController: UITableViewController {
             if let tableViewCell = cell as? AddTransferUserInputCell,
                 let userInputData = section as? AddTransferUserInputData {
                 let row = userInputData.rows[indexPath.row]
-                tableViewCell.textLabel?.text = row.title
-                tableViewCell.detailTextLabel?.text = row.value
+
                 tableViewCell.selectionStyle = UITableViewCell.SelectionStyle.none
+                if indexPath.row == 0 {
+                    if let textField = tableViewCell.subviews.first(where: { $0 is UITextField }) as? UITextField {
+                        textField.text = ""
+                    } else {
+                        let amountTextField = createAmountTextField(tableViewCell)
+                        tableViewCell.addSubview(amountTextField)
+                    }
+
+                    tableViewCell.detailTextLabel?.text = row.value
+                } else {
+                    tableViewCell.textLabel?.text = row.title
+                }
             }
 
         case .button:
@@ -93,7 +107,7 @@ public final class AddTransferTableViewController: UITableViewController {
     }
 
     @objc
-    func clickNext(sender: UITapGestureRecognizer) {
+    private func clickNext(sender: UITapGestureRecognizer) {
         print("Next Step!")
     }
 
@@ -131,6 +145,26 @@ public final class AddTransferTableViewController: UITableViewController {
         tableView.accessibilityIdentifier = "addTransferTableView"
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)
+        }
+    }
+
+    private func createAmountTextField(_ tableViewCell: AddTransferUserInputCell) -> UITextField {
+        //TODO text field alignment is not working for landscape mode, consider using customized cell instead of .value1
+        let amountTextField = UITextField(frame: CGRect(x: tableViewCell.separatorInset.left,
+                                                        y: 0,
+                                                        width: tableViewCell.bounds.width / 2,
+                                                        height: tableViewCell.bounds.height))
+        amountTextField.font = tableViewCell.textLabel?.font
+        amountTextField.keyboardType = UIKeyboardType.numberPad
+        amountTextField.placeholder = "transfer_amount".localized()
+        amountTextField.addTarget(self, action: #selector(amountTextFieldDidChange), for: .editingChanged)
+        return amountTextField
+    }
+
+    @objc
+    private func amountTextFieldDidChange(_ textField: UITextField) {
+        if let amountString = textField.text?.currencyInputFormatting() {
+            textField.text = amountString
         }
     }
 }

@@ -10,7 +10,7 @@
 		0702672022B1A8590057D62B /* AddTransferTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0702671F22B1A8590057D62B /* AddTransferTableViewController.swift */; };
 		0702672222B1A8630057D62B /* AddTransferPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0702672122B1A8630057D62B /* AddTransferPresenter.swift */; };
 		0702672422B1A8760057D62B /* SelectTransferMethodTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0702672322B1A8760057D62B /* SelectTransferMethodTableViewController.swift */; };
-		0702672622B1AC570057D62B /* SelectTransferMethodPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0702672522B1AC570057D62B /* SelectTransferMethodPresenter.swift */; };
+		0702672622B1AC570057D62B /* ConfirmTransferPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0702672522B1AC570057D62B /* ConfirmTransferPresenter.swift */; };
 		0702672822B1BCDA0057D62B /* AddTransferSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0702672722B1BCDA0057D62B /* AddTransferSectionData.swift */; };
 		0702672A22B1BFDE0057D62B /* AddTransferUserInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0702672922B1BFDE0057D62B /* AddTransferUserInputCell.swift */; };
 		0702672C22B212FA0057D62B /* AddTranserNextButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0702672B22B212FA0057D62B /* AddTranserNextButtonCell.swift */; };
@@ -32,6 +32,10 @@
 		078B457E2273895C005B0248 /* SelectTransferMethodTypePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078B45722273895C005B0248 /* SelectTransferMethodTypePresenterTests.swift */; };
 		078B457F2273895C005B0248 /* AddTransferMethodPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078B45732273895C005B0248 /* AddTransferMethodPresenterTests.swift */; };
 		078B45812273A441005B0248 /* HyperwalletUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078B45802273A441005B0248 /* HyperwalletUI.swift */; };
+		07D4E00822B4504E004E031A /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D4E00722B4504E004E031A /* String.swift */; };
+		07D4E00C22B46952004E031A /* ConfirmTransferTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D4E00B22B46952004E031A /* ConfirmTransferTableViewController.swift */; };
+		07D4E00E22B46978004E031A /* ConfirmTransferSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D4E00D22B46978004E031A /* ConfirmTransferSectionData.swift */; };
+		07D4E01022B469D3004E031A /* HyperwalletTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D4E00F22B469D3004E031A /* HyperwalletTransfer.swift */; };
 		0961D62D22AA858E007F0B44 /* ReceiptsForFewMonths.json in Resources */ = {isa = PBXBuildFile; fileRef = 0961D62C22AA858E007F0B44 /* ReceiptsForFewMonths.json */; };
 		0961D62F22AA861A007F0B44 /* ReceiptsForOneMonth.json in Resources */ = {isa = PBXBuildFile; fileRef = 0961D62E22AA861A007F0B44 /* ReceiptsForOneMonth.json */; };
 		0961D63322AA8817007F0B44 /* ReceiptsForLazyLoading.json in Resources */ = {isa = PBXBuildFile; fileRef = 0961D63222AA8817007F0B44 /* ReceiptsForLazyLoading.json */; };
@@ -202,7 +206,7 @@
 		0702671F22B1A8590057D62B /* AddTransferTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransferTableViewController.swift; sourceTree = "<group>"; };
 		0702672122B1A8630057D62B /* AddTransferPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransferPresenter.swift; sourceTree = "<group>"; };
 		0702672322B1A8760057D62B /* SelectTransferMethodTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTransferMethodTableViewController.swift; sourceTree = "<group>"; };
-		0702672522B1AC570057D62B /* SelectTransferMethodPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTransferMethodPresenter.swift; sourceTree = "<group>"; };
+		0702672522B1AC570057D62B /* ConfirmTransferPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmTransferPresenter.swift; sourceTree = "<group>"; };
 		0702672722B1BCDA0057D62B /* AddTransferSectionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransferSectionData.swift; sourceTree = "<group>"; };
 		0702672922B1BFDE0057D62B /* AddTransferUserInputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransferUserInputCell.swift; sourceTree = "<group>"; };
 		0702672B22B212FA0057D62B /* AddTranserNextButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTranserNextButtonCell.swift; sourceTree = "<group>"; };
@@ -224,6 +228,10 @@
 		078B45732273895C005B0248 /* AddTransferMethodPresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodPresenterTests.swift; sourceTree = "<group>"; };
 		078B45802273A441005B0248 /* HyperwalletUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletUI.swift; sourceTree = "<group>"; };
 		07BE415E229DE181002DECAF /* UserReceiptResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserReceiptResponse.json; sourceTree = "<group>"; };
+		07D4E00722B4504E004E031A /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		07D4E00B22B46952004E031A /* ConfirmTransferTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmTransferTableViewController.swift; sourceTree = "<group>"; };
+		07D4E00D22B46978004E031A /* ConfirmTransferSectionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmTransferSectionData.swift; sourceTree = "<group>"; };
+		07D4E00F22B469D3004E031A /* HyperwalletTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletTransfer.swift; sourceTree = "<group>"; };
 		0961D62C22AA858E007F0B44 /* ReceiptsForFewMonths.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ReceiptsForFewMonths.json; sourceTree = "<group>"; };
 		0961D62E22AA861A007F0B44 /* ReceiptsForOneMonth.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ReceiptsForOneMonth.json; sourceTree = "<group>"; };
 		0961D63222AA8817007F0B44 /* ReceiptsForLazyLoading.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ReceiptsForLazyLoading.json; sourceTree = "<group>"; };
@@ -401,10 +409,13 @@
 				0702671F22B1A8590057D62B /* AddTransferTableViewController.swift */,
 				0702672122B1A8630057D62B /* AddTransferPresenter.swift */,
 				0702672322B1A8760057D62B /* SelectTransferMethodTableViewController.swift */,
-				0702672522B1AC570057D62B /* SelectTransferMethodPresenter.swift */,
+				07D4E00B22B46952004E031A /* ConfirmTransferTableViewController.swift */,
+				0702672522B1AC570057D62B /* ConfirmTransferPresenter.swift */,
+				07D4E00D22B46978004E031A /* ConfirmTransferSectionData.swift */,
 				0702672722B1BCDA0057D62B /* AddTransferSectionData.swift */,
 				0702672922B1BFDE0057D62B /* AddTransferUserInputCell.swift */,
 				0702672B22B212FA0057D62B /* AddTranserNextButtonCell.swift */,
+				07D4E00F22B469D3004E031A /* HyperwalletTransfer.swift */,
 			);
 			path = Transfer;
 			sourceTree = "<group>";
@@ -767,6 +778,7 @@
 				DBCA383A225E8BA900CD4137 /* UIViewController.swift */,
 				9826056722822E8A000CCA2D /* UIToolbar.swift */,
 				988547CF22970FA1007B312C /* Date.swift */,
+				07D4E00722B4504E004E031A /* String.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1199,6 +1211,7 @@
 				DBCA3887225E8BAA00CD4137 /* SelectionWidgetCell.swift in Sources */,
 				DBCA3885225E8BAA00CD4137 /* ProcessingView.swift in Sources */,
 				988547CA2294B829007B312C /* ListReceiptTableViewController.swift in Sources */,
+				07D4E00C22B46952004E031A /* ConfirmTransferTableViewController.swift in Sources */,
 				DBCA387E225E8BAA00CD4137 /* GenericCell.swift in Sources */,
 				DBCA386A225E8BAA00CD4137 /* SelectTransferMethodTypeCell.swift in Sources */,
 				DBCA388E225E8BAA00CD4137 /* AbstractWidget.swift in Sources */,
@@ -1206,10 +1219,12 @@
 				DBCA3880225E8BAA00CD4137 /* HyperwalletIcon.swift in Sources */,
 				98175429228DE42E0019159A /* ReceiptTransactionTableViewCell.swift in Sources */,
 				DBCA3873225E8BAA00CD4137 /* UIColor.swift in Sources */,
+				07D4E01022B469D3004E031A /* HyperwalletTransfer.swift in Sources */,
 				DBCA3870225E8BAA00CD4137 /* UIAlertAction.swift in Sources */,
 				DBCA388B225E8BAA00CD4137 /* WidgetFactory.swift in Sources */,
 				DBCA3871225E8BAA00CD4137 /* UIView.swift in Sources */,
 				DBCA387D225E8BAA00CD4137 /* GenericTableViewController.swift in Sources */,
+				07D4E00822B4504E004E031A /* String.swift in Sources */,
 				4A6D7704228D805C008355C8 /* HyperwalletTransferMethodType.swift in Sources */,
 				DBCA3881225E8BAA00CD4137 /* ThemeManager.swift in Sources */,
 				0702672222B1A8630057D62B /* AddTransferPresenter.swift in Sources */,
@@ -1238,8 +1253,9 @@
 				073BA5D322A885E6002C58BD /* AddTransferMethodTableViewController.swift in Sources */,
 				073BA5D522A88612002C58BD /* ListTransferMethodTableViewController.swift in Sources */,
 				DBCA3879225E8BAA00CD4137 /* UIImage.swift in Sources */,
+				07D4E00E22B46978004E031A /* ConfirmTransferSectionData.swift in Sources */,
 				DBCA3872225E8BAA00CD4137 /* UIBarButtonItem.swift in Sources */,
-				0702672622B1AC570057D62B /* SelectTransferMethodPresenter.swift in Sources */,
+				0702672622B1AC570057D62B /* ConfirmTransferPresenter.swift in Sources */,
 				988547D022970FA1007B312C /* Date.swift in Sources */,
 				DBCA388A225E8BAA00CD4137 /* SelectionWidget.swift in Sources */,
 				DBCA385F225E8BAA00CD4137 /* CountryCurrencyCell.swift in Sources */,

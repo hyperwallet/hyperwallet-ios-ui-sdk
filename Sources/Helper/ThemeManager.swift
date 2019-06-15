@@ -169,9 +169,9 @@ public class ThemeManager {
 
     private static func applyToAddTransferUserInputTableViewCell() {
         let proxy = AddTransferUserInputCell.appearance()
-        proxy.titleLabelFont = Theme.Label.footnoteFont
+        proxy.titleLabelFont = Theme.Label.bodyFontMedium
         proxy.titleLabelColor = Theme.Label.subTitleColor
-        proxy.subTitleLabelFont = Theme.Label.footnoteFont
+        proxy.subTitleLabelFont = Theme.Label.bodyFontMedium
         proxy.subTitleLabelColor = Theme.Label.subTitleColor
     }
 
