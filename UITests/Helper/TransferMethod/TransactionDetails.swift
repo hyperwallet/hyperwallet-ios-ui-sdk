@@ -19,6 +19,7 @@ class TransactionDetails {
     var amountLabel: XCUIElement
     var feeLabel: XCUIElement
     var transactionLabel: XCUIElement
+    // Back button
     var backButton: XCUIElement
 
     var app: XCUIApplication
@@ -34,8 +35,8 @@ class TransactionDetails {
         feeSection  = receiptdetailtableviewTable.staticTexts["Fee Specification"]
         transactionSection  = receiptdetailtableviewTable.staticTexts["Transaction"]
         receiptIdLabel = receiptdetailtableviewTable.staticTexts["Receipt ID:"]
-        dateLabel = receiptdetailtableviewTable.staticTexts["Receipt ID:"]
-        clientTransactionIdLabel = receiptdetailtableviewTable.staticTexts["Receipt ID:"]
+        dateLabel = receiptdetailtableviewTable.staticTexts["Date:"]
+        clientTransactionIdLabel = receiptdetailtableviewTable.staticTexts["Client Transaction ID:"]
         amountLabel = receiptdetailtableviewTable.staticTexts["Amount:"]
         feeLabel = receiptdetailtableviewTable.staticTexts["Fee:"]
         transactionLabel = receiptdetailtableviewTable.staticTexts["Transaction:"]
