@@ -33,7 +33,8 @@
 		09795B7B229E7EB700EF407F /* BankAccountIndividualResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 09795B7A229E7EB700EF407F /* BankAccountIndividualResponse.json */; };
 		09E7165022A697C400FA9B96 /* ReceiptsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7164F22A697C400FA9B96 /* ReceiptsList.swift */; };
 		09E7165622A6983400FA9B96 /* ListReceiptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7165522A6983400FA9B96 /* ListReceiptTests.swift */; };
-		412F722722B4497500837F8F /* ReceiptDetailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F722622B4497500837F8F /* ReceiptDetailTests.swift */; };
+		412F723722B45DB100837F8F /* TransactionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F723222B458C700837F8F /* TransactionDetails.swift */; };
+		412F723922B46B1000837F8F /* TransactionDetailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F723822B46B1000837F8F /* TransactionDetailTests.swift */; };
 		4A12653C2280B02900C0F59E /* DateWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12653B2280B02900C0F59E /* DateWidget.swift */; };
 		4A12653E2280B12F00C0F59E /* PhoneWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12653D2280B12F00C0F59E /* PhoneWidget.swift */; };
 		4A22F1E422A6723200D58883 /* ReceiptDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22F1E322A6723200D58883 /* ReceiptDetailTableViewController.swift */; };
@@ -219,7 +220,8 @@
 		09795B7A229E7EB700EF407F /* BankAccountIndividualResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BankAccountIndividualResponse.json; sourceTree = "<group>"; };
 		09E7164F22A697C400FA9B96 /* ReceiptsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptsList.swift; sourceTree = "<group>"; };
 		09E7165522A6983400FA9B96 /* ListReceiptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListReceiptTests.swift; sourceTree = "<group>"; };
-		412F722622B4497500837F8F /* ReceiptDetailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptDetailTests.swift; sourceTree = "<group>"; };
+		412F723222B458C700837F8F /* TransactionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetails.swift; sourceTree = "<group>"; };
+		412F723822B46B1000837F8F /* TransactionDetailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailTests.swift; sourceTree = "<group>"; };
 		4A12653B2280B02900C0F59E /* DateWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateWidget.swift; sourceTree = "<group>"; };
 		4A12653D2280B12F00C0F59E /* PhoneWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneWidget.swift; sourceTree = "<group>"; };
 		4A22F1E322A6723200D58883 /* ReceiptDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptDetailTableViewController.swift; sourceTree = "<group>"; };
@@ -456,7 +458,7 @@
 			isa = PBXGroup;
 			children = (
 				09E7165522A6983400FA9B96 /* ListReceiptTests.swift */,
-				412F722622B4497500837F8F /* ReceiptDetailTests.swift */,
+				412F723822B46B1000837F8F /* TransactionDetailTests.swift */,
 			);
 			path = Receipts;
 			sourceTree = "<group>";
@@ -540,6 +542,7 @@
 				C358A9A32272644000E5AE47 /* ListTransferMethods.swift */,
 				C358A9A42272644000E5AE47 /* SelectTransferMethodType.swift */,
 				C38DC07822727F9300B1F00E /* SelectTransferMethodCountryType.swift */,
+				412F723222B458C700837F8F /* TransactionDetails.swift */,
 			);
 			path = TransferMethod;
 			sourceTree = "<group>";
@@ -1108,7 +1111,6 @@
 				0743EF9C22A5987100C089EE /* ListReceiptPresenterTests.swift in Sources */,
 				4AEBF0FD22AA86DA00C664D3 /* ReceiptDetailPresenterTests.swift in Sources */,
 				DB18EA142261BA4C004F6AC3 /* HyperwalletTestHelper.swift in Sources */,
-				412F722722B4497500837F8F /* ReceiptDetailTests.swift in Sources */,
 				078B457F2273895C005B0248 /* AddTransferMethodPresenterTests.swift in Sources */,
 				078B457E2273895C005B0248 /* SelectTransferMethodTypePresenterTests.swift in Sources */,
 				DB18EA172261BA4D004F6AC3 /* AuthenticationProviderMock.swift in Sources */,
@@ -1129,7 +1131,9 @@
 				DBB2B7172261C142006C48D3 /* AddTransferMethodBankCardTests.swift in Sources */,
 				C345BFC22289E6EC0049E67B /* XCUIElement.swift in Sources */,
 				C3E7217A226F93860067D3A0 /* XCUIDevice.swift in Sources */,
+				412F723722B45DB100837F8F /* TransactionDetails.swift in Sources */,
 				641324E1229575EC00512816 /* BaseTest.swift in Sources */,
+				412F723922B46B1000837F8F /* TransactionDetailTests.swift in Sources */,
 				C38DC07922727F9300B1F00E /* SelectTransferMethodCountryType.swift in Sources */,
 				DBB2B7132261C142006C48D3 /* HyperwalletMockWebServer.swift in Sources */,
 				DBB2B7142261C142006C48D3 /* ListTransferMethodTests.swift in Sources */,
