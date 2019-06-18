@@ -96,10 +96,11 @@ final class AddTransferMethodPresenter {
         }
         var hyperwalletTransferMethod: HyperwalletTransferMethod
         switch transferMethodTypeCode {
-        case "BANK_ACCOUNT":
+        case "BANK_ACCOUNT", "WIRE_ACCOUNT":
             hyperwalletTransferMethod = HyperwalletBankAccount.Builder(transferMethodCountry: country,
                                                                        transferMethodCurrency: currency,
-                                                                       transferMethodProfileType: profileType)
+                                                                       transferMethodProfileType: profileType,
+                                                                       transferMethodType: transferMethodTypeCode)
                 .build()
 
         case "BANK_CARD":
@@ -112,13 +113,6 @@ final class AddTransferMethodPresenter {
             hyperwalletTransferMethod = HyperwalletPayPalAccount.Builder(transferMethodCountry: country,
                                                                          transferMethodCurrency: currency,
                                                                          transferMethodProfileType: profileType)
-                .build()
-
-        case "WIRE_ACCOUNT":
-            hyperwalletTransferMethod = HyperwalletBankAccount.Builder(transferMethodCountry: country,
-                                                                       transferMethodCurrency: currency,
-                                                                       transferMethodProfileType: profileType)
-                .type("WIRE_ACCOUNT")
                 .build()
 
         default:

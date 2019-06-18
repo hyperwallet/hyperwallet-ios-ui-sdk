@@ -75,7 +75,7 @@ private extension AddTransferMethodWireAccountBusinessTests {
         selectTransferMethodType.selectCountry(country: "UNITED STATES")
         selectTransferMethodType.selectCurrency(currency: "USD")
 
-        app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).tap()
+        app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: bankAccount).tap()
     }
 
     func verifyAccountInformationSection() {
@@ -113,7 +113,7 @@ private extension AddTransferMethodWireAccountBusinessTests {
         XCTAssert(addTransferMethod.addTransferMethodTableView.otherElements["INTERMEDIARY ACCOUNT"].exists)
         XCTAssert(addTransferMethod.selectRelationshipType.exists)
     }
-    
+
     func verifyBusinessAccountHolderSection() {
         addTransferMethod.addTransferMethodTableView
             .scroll(to: addTransferMethod.addTransferMethodTableView.otherElements["ACCOUNT HOLDER"])
@@ -123,11 +123,11 @@ private extension AddTransferMethodWireAccountBusinessTests {
         XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["Business Name"].exists)
         XCTAssert(addTransferMethod.businessNameInput.exists)
     }
-    
+
     func verifyContactInformationSection() {
         addTransferMethod.addTransferMethodTableView
             .scroll(to: addTransferMethod.addTransferMethodTableView.otherElements["CONTACT INFORMATION"])
-        
+
         XCTAssert(addTransferMethod.addTransferMethodTableView.otherElements["CONTACT INFORMATION"].exists )
 
         XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["Phone Number"].exists)
@@ -139,7 +139,7 @@ private extension AddTransferMethodWireAccountBusinessTests {
 
     func verifyAddressSection() {
         addTransferMethod.addTransferMethodTableView
-            .scroll(to: addTransferMethod.addTransferMethodTableView.staticTexts["ADDRESS"])
+            .scroll(to: addTransferMethod.addTransferMethodTableView.staticTexts["Address"])
 
         XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["Address"].exists)
 
