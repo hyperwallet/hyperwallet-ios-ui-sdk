@@ -31,7 +31,7 @@ class ListReceiptTests: BaseTests {
     }
 
     func testReceiptsList_verifyReceiptsListForOneMonth() {
-        let expectedNumberOfCells = 4
+        let expectedNumberOfCells = 5
         mockServer.setupStub(url: "/rest/v3/users/usr-token/receipts",
                              filename: "ReceiptsForOneMonth",
                              method: HTTPMethod.get)
@@ -42,11 +42,13 @@ class ListReceiptTests: BaseTests {
             verifyCellExists(with: "Payment\nMay 8, 2019", moneyTitle: "+6.00\nUSD", by: 1)
             verifyCellExists(with: "Bank Account\nMay 6, 2019", moneyTitle: "-5.00\nUSD", by: 2)
             verifyCellExists(with: "Payment\nMay 4, 2019", moneyTitle: "+6.00\nUSD", by: 3)
+            verifyCellExists(with: "Payment\nMay 3, 2019", moneyTitle: "+6.00\nUSD", by: 4)
         } else {
             verifyCellExists(with: "Bank Account May 10, 2019", moneyTitle: "-5.00\nUSD", by: 0)
             verifyCellExists(with: "Payment May 8, 2019", moneyTitle: "+6.00\nUSD", by: 1)
             verifyCellExists(with: "Bank Account May 6, 2019", moneyTitle: "-5.00\nUSD", by: 2)
             verifyCellExists(with: "Payment May 4, 2019", moneyTitle: "+6.00\nUSD", by: 3)
+            verifyCellExists(with: "Payment May 3, 2019", moneyTitle: "+20.00\nUSD", by: 4)
         }
         XCTAssertEqual(app.tables.cells.count, expectedNumberOfCells)
         XCTAssertTrue(app.tables.staticTexts["May 2019"].exists)
@@ -192,4 +194,5 @@ class ListReceiptTests: BaseTests {
         app.tables.cells.containing(.staticText, identifier: "List Receipts").element(boundBy: 0).tap()
         waitForNonExistence(spinner)
     }
+
 }
