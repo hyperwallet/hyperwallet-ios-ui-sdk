@@ -110,7 +110,6 @@ final class SelectTransferMethodTypePresenter {
     /// Loads the transferMethodKeys from core SDK and display the default transfer methods
     func loadTransferMethodKeys() {
         view.showLoading()
-
         Hyperwallet.shared.getUser {[weak self] (result, error) in
             guard let strongSelf = self else {
                 return
