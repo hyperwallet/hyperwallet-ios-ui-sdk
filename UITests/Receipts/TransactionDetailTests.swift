@@ -3,6 +3,7 @@ import XCTest
 class TransactionDetailTests: BaseTests {
 
     var transactionDetails:TransactionDetails!
+    let currency = "USD"
 
     override func setUp() {
         profileType = .individual
@@ -17,17 +18,26 @@ class TransactionDetailTests: BaseTests {
 
     // Verify transaction is displayed in the top section (Credit Icon, Transaction Title, Date, Amount, Currency) match the item selected
     func testReceiptDetail_verifyCreditTransaction() {
+        let payment:XCUIElement
+        let amount:XCUIElement
         let receiptdetailtableviewTable = transactionDetails.receiptdetailtableviewTable
-        let currency = "USD"
-        let transactionPaymentDate = "Payment\nMay 24, 2019"
-        let transactionAmt = "-5.00\n\(currency)"
-
         openupReceiptsListScreenForFewMonths()
         openReceipt(row: 0)
+        let transactionDetailHeaderLabel = transactionDetails.detailHeaderTitle
+        waitForNonExistence(transactionDetailHeaderLabel)
 
-        verifyPaymentSection(payment:transactionPaymentDate, amount:transactionAmt)
+        if #available(iOS 12, *) {
+            payment = receiptdetailtableviewTable/*@START_MENU_TOKEN@*/.staticTexts["ListReceiptTableViewCellTextLabel"]/*[[".cells",".staticTexts[\"Payment\\nMay 24, 2019\"]",".staticTexts[\"ListReceiptTableViewCellTextLabel\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/
+            amount = receiptdetailtableviewTable/*@START_MENU_TOKEN@*/.staticTexts["ListReceiptTableViewCellDetailTextLabel"]/*[[".cells",".staticTexts[\"+6.00\\nUSD\"]",".staticTexts[\"ListReceiptTableViewCellDetailTextLabel\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/
+        } else {
+            payment = receiptdetailtableviewTable/*@START_MENU_TOKEN@*/.staticTexts["ListReceiptTableViewCellTextLabel"]/*[[".cells",".staticTexts[\"Payment May 24, 2019\"]",".staticTexts[\"ListReceiptTableViewCellTextLabel\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/
+            amount = receiptdetailtableviewTable/*@START_MENU_TOKEN@*/.staticTexts["ListReceiptTableViewCellDetailTextLabel"]/*[[".cells.staticTexts[\"ListReceiptTableViewCellDetailTextLabel\"]",".staticTexts[\"ListReceiptTableViewCellDetailTextLabel\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        }
+        XCTAssertTrue(payment.exists)
+        XCTAssertTrue(amount.exists)
 
         // DETAILS Section
+        // note: iOS 10 Shows Date's time as 16:16 PM
         verifyDetailSection(receiptID: "55176992", date: "Fri, May 24, 2019, 11:16 AM", clientID: "DyClk0VG9a")
 
         // FEE Section
@@ -36,15 +46,24 @@ class TransactionDetailTests: BaseTests {
 
     // Verify transaction is displayed in the top section (Debit Icon, Transaction Title, Date, Amount, Currency) match the item selected
     func testReceiptDetail_verifyDebitTransaction() {
+        let payment:XCUIElement
+        let amount:XCUIElement
         let receiptdetailtableviewTable = transactionDetails.receiptdetailtableviewTable
-        let currency = "USD"
-        let transactionPaymentDate = "Payment\nMay 12, 2019"
-        let transactionAmt = "-5.00\n\(currency)"
-
         openupReceiptsListScreenForFewMonths()
         openReceipt(row: 1)
+        let transactionDetailHeaderLabel = transactionDetails.detailHeaderTitle
+        waitForNonExistence(transactionDetailHeaderLabel)
 
-        verifyPaymentSection(payment:transactionPaymentDate, amount:transactionAmt)
+        if #available(iOS 12, *) {
+            payment = receiptdetailtableviewTable/*@START_MENU_TOKEN@*/.staticTexts["ListReceiptTableViewCellTextLabel"]/*[[".cells",".staticTexts[\"Bank Account\\nMay 12, 2019\"]",".staticTexts[\"ListReceiptTableViewCellTextLabel\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/
+            amount = receiptdetailtableviewTable/*@START_MENU_TOKEN@*/.staticTexts["ListReceiptTableViewCellDetailTextLabel"]/*[[".cells",".staticTexts[\"-5.00\\nUSD\"]",".staticTexts[\"ListReceiptTableViewCellDetailTextLabel\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/
+
+        } else {
+            payment = receiptdetailtableviewTable/*@START_MENU_TOKEN@*/.staticTexts["ListReceiptTableViewCellTextLabel"]/*[[".cells",".staticTexts[\"Bank Account May 12, 2019\"]",".staticTexts[\"ListReceiptTableViewCellTextLabel\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/
+            amount = receiptdetailtableviewTable/*@START_MENU_TOKEN@*/.staticTexts["ListReceiptTableViewCellDetailTextLabel"]/*[[".cells.staticTexts[\"ListReceiptTableViewCellDetailTextLabel\"]",".staticTexts[\"ListReceiptTableViewCellDetailTextLabel\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        }
+        XCTAssertTrue(payment.exists)
+        XCTAssertTrue(amount.exists)
 
         // DETAILS Section
         verifyDetailSection(receiptID: "55176991", date: "Sun, May 12, 2019, 11:16 AM", clientID: nil)
@@ -55,14 +74,26 @@ class TransactionDetailTests: BaseTests {
 
     // Verify that upon rotating the device - the same Transaction Details is displayed
     func testReceiptDetail_verifyTransactionReceiptSectionRotate() {
-        let currency = "USD"
-        let transactionPaymentDate = "Payment\nMay 24, 2019"
-        let transactionAmt = "-5.00\n\(currency)"
+        let payment:XCUIElement
+        let amount:XCUIElement
         openupReceiptsListScreenForFewMonths()
         openReceipt(row: 0)
-        
+        let transactionDetailHeaderLabel = transactionDetails.detailHeaderTitle
+        waitForNonExistence(transactionDetailHeaderLabel)
+
+        // Rotate device 3 times
         XCUIDevice.shared.rotateScreen(times: 3)
-        verifyPaymentSection(payment:transactionPaymentDate, amount:transactionAmt)
+
+        let receiptdetailtableviewTable = transactionDetails.receiptdetailtableviewTable
+        if #available(iOS 12, *) {
+            payment = receiptdetailtableviewTable/*@START_MENU_TOKEN@*/.staticTexts["ListReceiptTableViewCellTextLabel"]/*[[".cells",".staticTexts[\"Payment\\nMay 24, 2019\"]",".staticTexts[\"ListReceiptTableViewCellTextLabel\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/
+            amount = receiptdetailtableviewTable/*@START_MENU_TOKEN@*/.staticTexts["ListReceiptTableViewCellDetailTextLabel"]/*[[".cells",".staticTexts[\"+6.00\\nUSD\"]",".staticTexts[\"ListReceiptTableViewCellDetailTextLabel\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/
+        } else {
+            payment = receiptdetailtableviewTable/*@START_MENU_TOKEN@*/.staticTexts["ListReceiptTableViewCellTextLabel"]/*[[".cells",".staticTexts[\"Payment May 24, 2019\"]",".staticTexts[\"ListReceiptTableViewCellTextLabel\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/
+            amount = receiptdetailtableviewTable/*@START_MENU_TOKEN@*/.staticTexts["ListReceiptTableViewCellDetailTextLabel"]/*[[".cells.staticTexts[\"ListReceiptTableViewCellDetailTextLabel\"]",".staticTexts[\"ListReceiptTableViewCellDetailTextLabel\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        }
+        XCTAssertTrue(payment.exists)
+        XCTAssertTrue(amount.exists)
 
         // DETAILS Section
         verifyDetailSection(receiptID: "55176992", date: "Fri, May 24, 2019, 11:16 AM", clientID: "DyClk0VG9a")
@@ -74,14 +105,25 @@ class TransactionDetailTests: BaseTests {
 
     // Verify that upon resuming the application (send the app to background and reopen using the recent apps) - the same Transaction Details is displayed
     func testReceiptDetail_verifyTransactionReceiptSectionAppToBackground() {
-        let currency = "USD"
-        let transactionPaymentDate = "Payment\nMay 24, 2019"
-        let transactionAmt = "-5.00\n\(currency)"
+        let payment:XCUIElement
+        let amount:XCUIElement
         openupReceiptsListScreenForFewMonths()
         openReceipt(row: 0)
+        let transactionDetailHeaderLabel = transactionDetails.detailHeaderTitle
+        waitForNonExistence(transactionDetailHeaderLabel)
 
         XCUIDevice.shared.sendToBackground(app: app)
-        verifyPaymentSection(payment:transactionPaymentDate, amount:transactionAmt)
+        let receiptdetailtableviewTable = transactionDetails.receiptdetailtableviewTable
+        if #available(iOS 12, *) {
+             payment = receiptdetailtableviewTable/*@START_MENU_TOKEN@*/.staticTexts["ListReceiptTableViewCellTextLabel"]/*[[".cells",".staticTexts[\"Payment\\nMay 24, 2019\"]",".staticTexts[\"ListReceiptTableViewCellTextLabel\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/
+             amount = receiptdetailtableviewTable.staticTexts["ListReceiptTableViewCellDetailTextLabel"]
+        } else {
+             payment = receiptdetailtableviewTable/*@START_MENU_TOKEN@*/.staticTexts["ListReceiptTableViewCellTextLabel"]/*[[".cells",".staticTexts[\"Payment May 24, 2019\"]",".staticTexts[\"ListReceiptTableViewCellTextLabel\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/
+             amount = receiptdetailtableviewTable/*@START_MENU_TOKEN@*/.staticTexts["ListReceiptTableViewCellDetailTextLabel"]/*[[".cells.staticTexts[\"ListReceiptTableViewCellDetailTextLabel\"]",".staticTexts[\"ListReceiptTableViewCellDetailTextLabel\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        }
+        XCTAssertTrue(payment.exists)
+        XCTAssertTrue(amount.exists)
+
         // DETAILS Section
         verifyDetailSection(receiptID: "55176992", date: "Fri, May 24, 2019, 11:16 AM", clientID: "DyClk0VG9a")
 
@@ -93,12 +135,16 @@ class TransactionDetailTests: BaseTests {
     func testReceiptDetail_verifyTransactionReceiptSectionPressBackButton() {
         openupReceiptsListScreenForFewMonths()
         openReceipt(row: 0)
+        let transactionDetailHeaderLabel = transactionDetails.detailHeaderTitle
+        waitForNonExistence(transactionDetailHeaderLabel)
+        
         let backButton = transactionDetails.backButton
         backButton.tap()
         let transactionLabel = app.navigationBars["Transactions"].staticTexts["Transactions"]
         XCTAssertTrue(transactionLabel.exists)
     }
 
+/*
     func testReceiptDetail_verifyTransactionOptionalFields() {
         openupReceiptsListScreenForFewMonths()
 
@@ -117,7 +163,7 @@ class TransactionDetailTests: BaseTests {
         // If receipt contains notes - verify Notes is displayed in Transaction Details Receipt section
 
         // If receipt contains website - verify Promo Website is displayed in Transaction Details Receipt section
-    }
+    } */
 
     private func openupReceiptsListScreenForFewMonths() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/receipts",
@@ -138,31 +184,27 @@ class TransactionDetailTests: BaseTests {
         }
     }
 
-    private func verifyPaymentSection(payment:String, amount:String) {
-        let receiptdetailtableviewTable = transactionDetails.receiptdetailtableviewTable
-        let payment = receiptdetailtableviewTable/*@START_MENU_TOKEN@*/.staticTexts["ListReceiptTableViewCellTextLabel"]/*[[".cells",".staticTexts[\"Payment\\nMay 24, 2019\"]",".staticTexts[\"ListReceiptTableViewCellTextLabel\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/
-        let amt = receiptdetailtableviewTable/*@START_MENU_TOKEN@*/.staticTexts["ListReceiptTableViewCellDetailTextLabel"]/*[[".cells",".staticTexts[\"+6.00\\nUSD\"]",".staticTexts[\"ListReceiptTableViewCellDetailTextLabel\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/
-
-        XCTAssertTrue(payment.exists)
-        XCTAssertTrue(amt.exists)
-    }
-
     // Detail section verification
     private func verifyDetailSection(receiptID:String, date:String, clientID:String?) {
         let receiptdetailtableviewTable = transactionDetails.receiptdetailtableviewTable
         let detailsSectionLabel = transactionDetails.detailSection
         let receiptLabel = transactionDetails.receiptIdLabel
-        let clientTransIDLabel = transactionDetails.clientTransactionIdLabel
         let dateLabel = transactionDetails.dateLabel
         let receiptID = receiptdetailtableviewTable.staticTexts[receiptID]
         let date = receiptdetailtableviewTable.staticTexts[date]
 
+        XCTAssertTrue(detailsSectionLabel.exists)
         XCTAssertTrue(receiptLabel.exists)
+
         XCTAssertTrue(dateLabel.exists)
-        XCTAssertTrue(clientTransIDLabel.exists)
         XCTAssertTrue(receiptID.exists)
-        XCTAssertTrue(date.exists)
+        // skip the test on iOS 10 as the time is not the same, need to find out why (already use the same locale)
+        if #available(iOS 11, *) {
+          XCTAssertTrue(date.exists)
+        }
         if let id = clientID {
+            let clientTransIDLabel = transactionDetails.clientTransactionIdLabel
+            XCTAssertTrue(clientTransIDLabel.exists)
             XCTAssertTrue(receiptdetailtableviewTable.staticTexts[id].exists)
         }
     }

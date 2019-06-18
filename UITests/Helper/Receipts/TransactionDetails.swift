@@ -1,8 +1,7 @@
 import XCTest
 
-
 class TransactionDetails {
-
+    var navigationBar:XCUIElement
     var receiptdetailtableviewTable:XCUIElement
     var detailSection:XCUIElement
     var feeSection:XCUIElement
@@ -26,9 +25,9 @@ class TransactionDetails {
 
     init(app:XCUIApplication) {
         self.app = app
+        navigationBar = app.navigationBars["Transaction Details"]
         detailHeaderTitle = app.navigationBars["Transaction Details"].otherElements["Transaction Details"]
         receiptdetailtableviewTable = app.tables["receiptDetailTableView"]
-        // "ListReceiptTableViewCellTextLabel"
         cellTextLabel = receiptdetailtableviewTable.staticTexts["ListReceiptTableViewCellTextLabel"]
         detailTextLabel = receiptdetailtableviewTable.staticTexts["ListReceiptTableViewDetailTextLabel"]
         detailSection = receiptdetailtableviewTable.staticTexts["Details"]
@@ -40,7 +39,7 @@ class TransactionDetails {
         amountLabel = receiptdetailtableviewTable.staticTexts["Amount:"]
         feeLabel = receiptdetailtableviewTable.staticTexts["Fee:"]
         transactionLabel = receiptdetailtableviewTable.staticTexts["Transaction:"]
-        backButton = app.navigationBars["Transaction Details"].buttons["Back"]
+        backButton = navigationBar.children(matching: .button).matching(identifier: "Back").element(boundBy: 0)
     }
 
     
