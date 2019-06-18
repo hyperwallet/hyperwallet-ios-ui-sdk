@@ -19,7 +19,7 @@
 import UIKit
 
 class AddTransferMethodTableViewCell: UITableViewCell {
-    static let reuseId = "AddTransferMethodTableViewCellReuseIdentifier"
+    static let reuseIdentifier = "addTransferMethodCellIdentifier"
 
     override func prepareForReuse() {
         super.prepareForReuse()

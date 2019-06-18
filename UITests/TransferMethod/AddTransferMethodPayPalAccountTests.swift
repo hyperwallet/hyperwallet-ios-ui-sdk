@@ -25,7 +25,7 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
         selectTransferMethodType.selectCountry(country: "United States")
         selectTransferMethodType.selectCurrency(currency: "United States Dollar")
 
-        app.tables["transferMethodTableView"].staticTexts.element(matching: payPalAccount).tap()
+        app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: payPalAccount).tap()
         waitForNonExistence(spinner)
     }
 
@@ -45,12 +45,12 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
 
     func testAddTransferMethod_returnsErrorOnInvalidPattern() {
         addTransferMethod.setEmail("abc@testcom")
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["label_email_error"].exists)
+        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["email_error"].exists)
     }
 
     func testAddTransferMethod_returnsErrorEmptyRequiredFields() {
         addTransferMethod.setEmail("")
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["label_email_error"].exists)
+        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["email_error"].exists)
 
         addTransferMethod.clickCreateTransferMethodButton()
     }

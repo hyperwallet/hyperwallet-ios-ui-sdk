@@ -21,8 +21,8 @@ import UIKit
 /// Generic TableView Controller
 class GenericTableViewController<T: GenericCell<ModelType>, ModelType>: UITableViewController,
 UISearchResultsUpdating, UISearchControllerDelegate {
-    private let reuseIdentifier = "reuseIdentifier"
-    private let reuseHeaderIdentifier = "reuseHeaderIdentifier"
+    private let reuseIdentifier = "genericCellIdentifier"
+    private let reuseHeaderIdentifier = "headerCellIentifier"
     /// Enable the search controller
     private var shouldDisplaySearchBar = false
     /// The amount of items to enable the search bar to the Generic TableView
@@ -120,6 +120,7 @@ UISearchResultsUpdating, UISearchControllerDelegate {
         guard #available(iOS 11.0, *) else {
             if shouldDisplaySearchBar {
                 let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: reuseHeaderIdentifier)
+
                 headerView?.addSubview(searchController.searchBar)
                 return headerView
             }
@@ -218,7 +219,7 @@ private extension GenericTableViewController {
             tableView.tableFooterView = footerView
         }
         tableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: reuseHeaderIdentifier)
-        tableView.estimatedRowHeight = Theme.Cell.rowHeight
+        tableView.estimatedRowHeight = Theme.Cell.smallHeight
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(T.self, forCellReuseIdentifier: reuseIdentifier)
     }

@@ -21,16 +21,18 @@ import UIKit
 /// Lists the user's transfer methods (bank account, bank card, PayPal account, prepaid card, paper check).
 ///
 /// The user can deactivate and add a new transfer method.
-public final class ListTransferMethodViewController: UITableViewController {
+public final class ListTransferMethodTableViewController: UITableViewController {
     private var spinnerView: SpinnerView?
     private var processingView: ProcessingView?
     private var presenter: ListTransferMethodPresenter!
 
     /// The completion handler will be performed after a new transfer method has been created.
     public var createTransferMethodHandler: ((HyperwalletTransferMethod) -> Void)?
-    private let listTransferMethodCellIdentifier = "ListTransferMethodCellIdentifier"
-    private lazy var addAccountButton: UIButton = setUpAddAccountButton()
-    private lazy var emptyListLabel: UILabel = setUpEmptyListLabel()
+
+    private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "empty_list_transfer_method_message"
+                                                                              .localized())
+    private lazy var addAccountButton: UIButton = view.setUpEmptyListButton(text: "add_account_title".localized(),
+                                                                            firstItem: emptyListLabel)
 
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -56,14 +58,14 @@ public final class ListTransferMethodViewController: UITableViewController {
 
     // MARK: - Transfer method list table view dataSource and delegate
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.numberOfCells
+        return presenter.sectionData.count
     }
 
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: listTransferMethodCellIdentifier, for: indexPath)
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: ListTransferMethodTableViewCell.reuseIdentifier,
+                                                 for: indexPath)
         if let listTransferMethodCell = cell as? ListTransferMethodTableViewCell,
-            let cellConfiguration = presenter.getCellConfiguration(for: indexPath.row) {
+            let cellConfiguration = presenter.getCellConfiguration(indexPath: indexPath) {
             listTransferMethodCell.configure(configuration: cellConfiguration)
         }
         return cell
@@ -100,11 +102,11 @@ public final class ListTransferMethodViewController: UITableViewController {
     }
 
     override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return Theme.Cell.height
+        return Theme.Cell.largeHeight
     }
 
     private func addTransferMethod() {
-        let controller = SelectTransferMethodTypeViewController()
+        let controller = SelectTransferMethodTypeTableViewController()
         controller.createTransferMethodHandler = {
             [weak self] (transferMethod: HyperwalletTransferMethod) -> Void in
             // refresh transfer method list
@@ -118,7 +120,7 @@ public final class ListTransferMethodViewController: UITableViewController {
         tableView = UITableView(frame: .zero, style: .grouped)
         tableView.tableFooterView = UIView()
         tableView.register(ListTransferMethodTableViewCell.self,
-                           forCellReuseIdentifier: listTransferMethodCellIdentifier)
+                           forCellReuseIdentifier: ListTransferMethodTableViewCell.reuseIdentifier)
     }
 
     private func showConfirmationAlert(title: String?, message: String, transferMethodIndex: Int) {
@@ -137,7 +139,7 @@ public final class ListTransferMethodViewController: UITableViewController {
     }
 }
 
-extension ListTransferMethodViewController: ListTransferMethodView {
+extension ListTransferMethodTableViewController: ListTransferMethodView {
     func showLoading() {
         if let view = self.navigationController?.view {
             spinnerView = HyperwalletUtilViews.showSpinner(view: view)
@@ -174,9 +176,10 @@ extension ListTransferMethodViewController: ListTransferMethodView {
     }
 
     func showTransferMethods() {
-        if presenter.numberOfCells > 0 {
+        if presenter.sectionData.isNotEmpty() {
             toggleEmptyListView()
         } else {
+            addAccountButton.addTarget(self, action: #selector(didTapAddButton), for: .touchUpInside)
             toggleEmptyListView(hideLabel: false, hideButton: false)
         }
 
@@ -189,69 +192,6 @@ extension ListTransferMethodViewController: ListTransferMethodView {
                                             object: self,
                                             userInfo: [UserInfo.statusTransition: hyperwalletStatusTransition])
         }
-    }
-
-    private func setUpEmptyListLabel() -> UILabel {
-        let emptyListLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 268, height: 20.5))
-        emptyListLabel.text = "empty_list_transfer_method_message".localized()
-        emptyListLabel.numberOfLines = 0
-        emptyListLabel.lineBreakMode = .byWordWrapping
-        emptyListLabel.textAlignment = .center
-        view.addSubview(emptyListLabel)
-
-        emptyListLabel.translatesAutoresizingMaskIntoConstraints = false
-
-        let labelCenterXConstraint = NSLayoutConstraint(item: emptyListLabel,
-                                                        attribute: .centerX,
-                                                        relatedBy: .equal,
-                                                        toItem: view,
-                                                        attribute: .centerX,
-                                                        multiplier: 1.0,
-                                                        constant: 0.0)
-        let labelCenterYConstraint = NSLayoutConstraint(item: emptyListLabel,
-                                                        attribute: .centerY,
-                                                        relatedBy: .equal,
-                                                        toItem: view,
-                                                        attribute: .centerY,
-                                                        multiplier: 1.0,
-                                                        constant: 0.0)
-
-        let labelWidthConstraint = NSLayoutConstraint(item: emptyListLabel,
-                                                      attribute: .width,
-                                                      relatedBy: .equal,
-                                                      toItem: nil,
-                                                      attribute: .notAnAttribute,
-                                                      multiplier: 1,
-                                                      constant: 268)
-        NSLayoutConstraint.activate([labelCenterXConstraint, labelCenterYConstraint, labelWidthConstraint])
-        return emptyListLabel
-    }
-
-    private func setUpAddAccountButton() -> UIButton {
-        let addAccountButton = UIButton(type: .system)
-        addAccountButton.setTitle("add_account_title".localized(), for: .normal)
-        addAccountButton.addTarget(self, action: #selector(didTapAddButton), for: .touchUpInside)
-        addAccountButton.frame.size = CGSize(width: 90, height: 30)
-        view.addSubview(addAccountButton)
-
-        addAccountButton.translatesAutoresizingMaskIntoConstraints = false
-
-        let buttonCenterXConstraint = NSLayoutConstraint(item: addAccountButton,
-                                                         attribute: .centerX,
-                                                         relatedBy: .equal,
-                                                         toItem: view,
-                                                         attribute: .centerX,
-                                                         multiplier: 1.0,
-                                                         constant: 0.0)
-        let verticalConstraint = NSLayoutConstraint(item: emptyListLabel,
-                                                    attribute: .bottom,
-                                                    relatedBy: .equal,
-                                                    toItem: addAccountButton,
-                                                    attribute: .top,
-                                                    multiplier: 1,
-                                                    constant: -8)
-        NSLayoutConstraint.activate([buttonCenterXConstraint, verticalConstraint])
-        return addAccountButton
     }
 
     private func toggleEmptyListView(hideLabel: Bool = true, hideButton: Bool = true) {
