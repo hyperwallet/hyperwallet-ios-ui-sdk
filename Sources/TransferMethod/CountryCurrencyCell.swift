@@ -31,6 +31,7 @@ struct CountryCurrencyCellConfiguration {
 /// Represents the Country and Currency cell
 final class CountryCurrencyCell: GenericCell<CountryCurrencyCellConfiguration> {
     static let reuseIdentifier = "countryCurrencyCellIdentifier"
+    private let trailingConstraintIdentifier = "trailingConstraintIdentifier"
 
     lazy var titleLabel: UILabel = {
         UILabel(frame: .zero)
@@ -60,8 +61,10 @@ final class CountryCurrencyCell: GenericCell<CountryCurrencyCellConfiguration> {
             valueLabel.accessibilityLabel = configuration.value
             valueLabel.accessibilityIdentifier = configuration.value
 
-            contentView.constraints.first(where: { $0.firstAttribute == .right })?.constant = accessoryType == .none
-                ? -leftRightInset : 0
+            contentView.constraints.first(where: { $0.identifier == trailingConstraintIdentifier })?
+                .constant = accessoryType == .none
+                ? -leftRightInset
+                : 0
         }
     }
 
@@ -69,20 +72,31 @@ final class CountryCurrencyCell: GenericCell<CountryCurrencyCellConfiguration> {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         valueLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        titleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor,
-                                         constant: leftRightInset).isActive = true
-        titleLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 100).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: valueLabel.leadingAnchor,
-                                             constant: -5).isActive = true
         titleLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
         titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-
-        valueLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        valueLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor,
-                                          constant: -leftRightInset).isActive = true
         valueLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         valueLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+        let trailingConstraint = valueLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
+                                                                      constant: -leftRightInset)
+        trailingConstraint.identifier = trailingConstraintIdentifier
+
+        NSLayoutConstraint.activate([
+            trailingConstraint,
+            valueLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLeadingAnchor, constant: leftRightInset),
+            titleLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 100),
+            titleLabel.trailingAnchor.constraint(equalTo: valueLabel.leadingAnchor, constant: -5)
+        ])
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if #available(iOS 11.0, *) {
+            separatorInset.left = safeAreaLayoutGuide.layoutFrame.origin.x + leftRightInset
+        } else {
+            separatorInset.left = leftRightInset
+        }
     }
 
     // MARK: Life cycle
