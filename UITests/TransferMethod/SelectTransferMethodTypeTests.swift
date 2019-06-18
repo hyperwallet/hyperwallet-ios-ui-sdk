@@ -6,6 +6,7 @@ class SelectTransferMethodTypeTests: BaseTests {
     let debitCard = NSPredicate(format: "label CONTAINS[c] 'Debit Card'")
     let processingTime = NSPredicate(format: "label CONTAINS[c] 'Processing Time'")
     let transactionFee = NSPredicate(format: "label CONTAINS[c] 'Transaction Fees'")
+    let wiretransfer = NSPredicate(format: "label CONTAINS[c] 'Wire Transfer'")
 
     override func setUp() {
         profileType = .individual
@@ -47,10 +48,6 @@ class SelectTransferMethodTypeTests: BaseTests {
             selectTransferMethodType.currencySelect.exists)
     }
 
-    private func validateBankAccountCell () {
-        XCTAssertTrue(app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).exists)
-    }
-
     func testAppClickHomeAndRelaunch() {
         XCUIDevice.shared.clickHomeAndRelaunch(app: app)
         setUpSelectTransferMethodTypeScreen()
@@ -86,7 +83,7 @@ class SelectTransferMethodTypeTests: BaseTests {
         selectTransferMethodType.tapCountry()
 
         XCTAssert(app.tables.staticTexts["United States"].exists)
-        XCTAssertEqual(app.tables.cells.count, 5)
+        XCTAssertEqual(app.tables.cells.count, 30)
     }
 
     func testSelectTransferMethodType_verifyCurrencySelection() {
@@ -134,16 +131,17 @@ class SelectTransferMethodTypeTests: BaseTests {
     }
 
     func testSelectTransferMethod_verifyTransferMethodsListEmptyFee () {
-        selectTransferMethodType.selectCountry(country: "United Kingdom")
+        selectTransferMethodType.selectCountry(country: "THAILAND")
 
-        validateBankAccountCell()
+        XCTAssertTrue(app.tables["transferMethodTableView"].staticTexts.element(matching: wiretransfer).exists)
         XCTAssertFalse(app.tables["transferMethodTableView"].staticTexts.element(matching: transactionFee).exists)
     }
 
     func testSelectTransferMethod_verifyTransferMethodsListEmptyProcessing () {
-        selectTransferMethodType.selectCountry(country: "United Kingdom")
+        selectTransferMethodType.selectCountry(country: "SPAIN")
 
-        validateBankAccountCell()
+        XCTAssertTrue(app.tables["transferMethodTableView"].staticTexts.element(matching: wiretransfer).exists)
         XCTAssertFalse(app.tables["transferMethodTableView"].staticTexts.element(matching: processingTime).exists)
+        XCTAssertTrue(app.tables["transferMethodTableView"].staticTexts.element(matching: transactionFee).exists)
     }
 }
