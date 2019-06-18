@@ -45,6 +45,7 @@ class ViewController: UITableViewController {
         case paymentDetails
         case listTransferMethod
         case addTransferMethod
+        case receipts
         case transferFunds
 
         var title: String {
@@ -52,6 +53,7 @@ class ViewController: UITableViewController {
             case .paymentDetails: return "Payment Details"
             case .listTransferMethod: return "List Transfer Methods"
             case .addTransferMethod: return "Add Transfer Method"
+            case .receipts: return "List Receipts"
             case .transferFunds: return  "Transfer Funds"
             }
         }
@@ -61,6 +63,7 @@ class ViewController: UITableViewController {
             case .paymentDetails: return "Configure how you want to get paid"
             case .listTransferMethod: return "List all the Transfer Methods"
             case .addTransferMethod: return "Add Transfer Methods"
+            case .receipts: return "List Receipts"
             case .transferFunds: return  "Transfer Funds"
             }
         }
@@ -137,19 +140,23 @@ class ViewController: UITableViewController {
 
         switch example {
         case .listTransferMethod:
-            let viewController = HyperwalletUI.shared.listTransferMethodViewController()
+            let viewController = HyperwalletUI.shared.listTransferMethodTableViewController()
             navigationController?.pushViewController(viewController, animated: true)
 
         case .addTransferMethod:
-            let viewController = HyperwalletUI.shared.selectTransferMethodTypeViewController()
+            let viewController = HyperwalletUI.shared.selectTransferMethodTypeTableViewController()
             viewController.createTransferMethodHandler = {
                 (transferMethod: HyperwalletTransferMethod) -> Void in
                 self.didCreateTransferMethod(transferMethod: transferMethod)
             }
             navigationController?.pushViewController(viewController, animated: true)
 
+        case .receipts:
+            let viewController = HyperwalletUI.shared.listReceiptTableViewController()
+            navigationController?.pushViewController(viewController, animated: true)
+
         default:
-            let viewController = HyperwalletUI.shared.listTransferMethodViewController()
+            let viewController = HyperwalletUI.shared.listTransferMethodTableViewController()
             navigationController?.pushViewController(viewController, animated: true)
         }
     }

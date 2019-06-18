@@ -41,7 +41,7 @@ final class AddTransferMethodPresenter {
     private let currency: String
     private let profileType: String
     private let transferMethodTypeCode: String
-    var sections: [AddTransferMethodSectionData] = []
+    var sectionData = [AddTransferMethodSectionData]()
 
     init(_ view: AddTransferMethodView,
          _ country: String,
@@ -110,7 +110,8 @@ final class AddTransferMethodPresenter {
 
         case "PAYPAL_ACCOUNT":
             hyperwalletTransferMethod = HyperwalletPayPalAccount.Builder(transferMethodCountry: country,
-                                                                         transferMethodCurrency: currency)
+                                                                         transferMethodCurrency: currency,
+                                                                         transferMethodProfileType: profileType)
                 .build()
 
         case "WIRE_ACCOUNT":
@@ -160,7 +161,7 @@ final class AddTransferMethodPresenter {
             DispatchQueue.main.async {
                 if let error = error {
                     let errorHandler = {
-                        strongSelf.handle(for: error)
+                        strongSelf.errorHandler(for: error)
                     }
                     strongSelf.view.dismissProcessing(handler: errorHandler)
                 } else {
@@ -175,7 +176,7 @@ final class AddTransferMethodPresenter {
         }
     }
 
-    private func handle(for error: HyperwalletErrorType) {
+    private func errorHandler(for error: HyperwalletErrorType) {
         switch error.group {
         case .business:
             //reset all the error messages for all the sections
@@ -201,16 +202,17 @@ final class AddTransferMethodPresenter {
         let errorsWithFieldName = errors.filter({ $0.fieldName != nil })
 
         if errorsWithFieldName.isNotEmpty(),
-            let section = sections.first(where: { section in widgetsContainError(for: section, errors).isNotEmpty() }) {
+            let section = sectionData.first(where: { section in widgetsContainError(for: section, errors)
+                .isNotEmpty() }) {
             section.containsFocusedField = true
         }
 
-        for section in sections {
+        for section in sectionData {
             if errorsWithFieldName.isNotEmpty() {
                 updateSectionData(for: section, errorsWithFieldName)
             }
         }
-        view.showFooterViewWithUpdatedSectionData(for: sections.reversed())
+        view.showFooterViewWithUpdatedSectionData(for: sectionData.reversed())
     }
 
     private func updateSectionData(for section: AddTransferMethodSectionData,
@@ -248,6 +250,6 @@ final class AddTransferMethodPresenter {
     }
 
     private func resetErrorMessages() {
-        sections.forEach { $0.errorMessage = nil }
+        sectionData.forEach { $0.errorMessage = nil }
     }
 }

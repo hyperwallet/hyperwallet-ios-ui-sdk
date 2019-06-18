@@ -30,7 +30,7 @@ struct CountryCurrencyCellConfiguration {
 
 /// Represents the Country and Currency cell
 final class CountryCurrencyCell: GenericCell<CountryCurrencyCellConfiguration> {
-    static let reuseId = "CountryCurrencyCellId"
+    static let reuseIdentifier = "countryCurrencyCellIdentifier"
 
     // MARK: Property
     override var item: CountryCurrencyCellConfiguration? {
