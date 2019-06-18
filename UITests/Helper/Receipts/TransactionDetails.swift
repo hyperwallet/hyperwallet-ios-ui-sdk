@@ -9,15 +9,19 @@ class TransactionDetails {
     var cellTextLabel: XCUIElement
     var detailTextLabel: XCUIElement
     var detailHeaderTitle:XCUIElement
-
     // Detail
     var receiptIdLabel:XCUIElement
     var dateLabel:XCUIElement
     var clientTransactionIdLabel:XCUIElement
+    var charityNameLabel:XCUIElement
+    var checkNumLabel:XCUIElement
+    var promoWebSiteLabel:XCUIElement
     // Fee
     var amountLabel: XCUIElement
     var feeLabel: XCUIElement
     var transactionLabel: XCUIElement
+    // Note
+    var noteSectionLabel: XCUIElement
     // Back button
     var backButton: XCUIElement
 
@@ -36,10 +40,15 @@ class TransactionDetails {
         receiptIdLabel = receiptdetailtableviewTable.staticTexts["Receipt ID:"]
         dateLabel = receiptdetailtableviewTable.staticTexts["Date:"]
         clientTransactionIdLabel = receiptdetailtableviewTable.staticTexts["Client Transaction ID:"]
+        charityNameLabel = receiptdetailtableviewTable.staticTexts["Charity Name:"]
+        checkNumLabel = receiptdetailtableviewTable.staticTexts["Check Number:"]
+        promoWebSiteLabel = receiptdetailtableviewTable.staticTexts["Promo Website:"]
+        noteSectionLabel = receiptdetailtableviewTable.staticTexts["Notes"]
         amountLabel = receiptdetailtableviewTable.staticTexts["Amount:"]
         feeLabel = receiptdetailtableviewTable.staticTexts["Fee:"]
         transactionLabel = receiptdetailtableviewTable.staticTexts["Transaction:"]
         backButton = navigationBar.children(matching: .button).matching(identifier: "Back").element(boundBy: 0)
+
     }
 
     
