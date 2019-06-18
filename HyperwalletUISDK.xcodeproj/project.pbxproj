@@ -438,6 +438,7 @@
 		09E7164E22A697A400FA9B96 /* Receipts */ = {
 			isa = PBXGroup;
 			children = (
+				412F723222B458C700837F8F /* TransactionDetails.swift */,
 				09E7164F22A697C400FA9B96 /* ReceiptsList.swift */,
 			);
 			path = Receipts;
@@ -542,7 +543,6 @@
 				C358A9A32272644000E5AE47 /* ListTransferMethods.swift */,
 				C358A9A42272644000E5AE47 /* SelectTransferMethodType.swift */,
 				C38DC07822727F9300B1F00E /* SelectTransferMethodCountryType.swift */,
-				412F723222B458C700837F8F /* TransactionDetails.swift */,
 			);
 			path = TransferMethod;
 			sourceTree = "<group>";
