@@ -18,43 +18,44 @@
 
 import HyperwalletSDK
 
-enum AddTransferSectionHeader: String {
+enum CreateTransferSectionHeader: String {
     case destination, amount, button
 }
 
-protocol AddTransferSectionData {
-    var addTransferSectionHeader: AddTransferSectionHeader { get }
+protocol CreateTransferSectionData {
+    var createTransferSectionHeader: CreateTransferSectionHeader { get }
     var rowCount: Int { get }
     var title: String? { get }
     var cellIdentifier: String { get }
 }
 
-extension AddTransferSectionData {
+extension CreateTransferSectionData {
     var rowCount: Int { return 1 }
-    var title: String? { return addTransferSectionHeader != AddTransferSectionHeader.button ? "add_transfer_section_header_\(addTransferSectionHeader.rawValue)".localized() : nil }
+    var title: String? { return createTransferSectionHeader !=
+        CreateTransferSectionHeader.button ?
+            "add_transfer_section_header_\(createTransferSectionHeader.rawValue)".localized() : nil }
 }
 
-struct AddTransferDestinationData: AddTransferSectionData {
-    var addTransferSectionHeader: AddTransferSectionHeader { return .destination }
+struct CreateTransferDestinationData: CreateTransferSectionData {
+    var createTransferSectionHeader: CreateTransferSectionHeader { return .destination }
     var cellIdentifier: String { return ListTransferMethodTableViewCell.reuseIdentifier }
     var configuration: ListTransferMethodCellConfiguration?
-    var transferMethod: HyperwalletTransferMethod
 
     init(transferMethod: HyperwalletTransferMethod) {
-        self.transferMethod = transferMethod
-        setUpCellConfiguration(transferMethod: transferMethod)
+        configuration = setUpCellConfiguration(transferMethod: transferMethod)
     }
 
-    mutating func setUpCellConfiguration(transferMethod: HyperwalletTransferMethod) {
+    private func setUpCellConfiguration(transferMethod: HyperwalletTransferMethod) -> ListTransferMethodCellConfiguration? {
            if let country = transferMethod.getField(fieldName: .transferMethodCountry) as? String,
            let transferMethodType = transferMethod.getField(fieldName: .type) as? String {
-             configuration = ListTransferMethodCellConfiguration(
+             return ListTransferMethodCellConfiguration(
                 transferMethodType: transferMethodType.lowercased().localized(),
                 transferMethodCountry: country.localized(),
                 additionalInfo: getAdditionalInfo(transferMethod),
                 transferMethodIconFont: HyperwalletIcon.of(transferMethodType).rawValue,
                 transferMethodToken: transferMethod.getField(fieldName: .token) as? String ?? "")
         }
+        return nil
     }
 
     private func getAdditionalInfo(_ transferMethod: HyperwalletTransferMethod) -> String? {
@@ -80,23 +81,20 @@ struct AddTransferDestinationData: AddTransferSectionData {
     }
 }
 
-struct AddTransferUserInputData: AddTransferSectionData {
-    var rows = [(title: String, value: String)]()
-    var addTransferSectionHeader: AddTransferSectionHeader { return .amount }
+struct CreateTransferUserInputData: CreateTransferSectionData {
+    var rows = [(title: String?, value: String?)]()
+    var createTransferSectionHeader: CreateTransferSectionHeader { return .amount }
     var rowCount: Int { return 2 }
-    var cellIdentifier: String { return AddTransferUserInputCell.reuseIdentifier }
-    let trasferAllText = "transfer_all"
-    let amountText = "transfer_amount"
-    let description = "transfer_description"
-    var configuration: AddTransferUserInputCellConfiguration!
+    var cellIdentifier: String { return CreateTransferUserInputCell.reuseIdentifier }
+    var configuration: CreateTransferUserInputCellConfiguration!
 
     init(destinationCurrency: String) {
-        rows.append((title: amountText.localized(), value: destinationCurrency))
-        rows.append((title: description.localized(), value: ""))
+        rows.append((title: nil, value: destinationCurrency))
+        rows.append((title: nil, value: nil))
     }
 }
 
-struct AddTransferButtonData: AddTransferSectionData {
-    var addTransferSectionHeader: AddTransferSectionHeader { return .button }
-    var cellIdentifier: String { return AddTransferNextCell.reuseIdentifier }
+struct CreateTransferButtonData: CreateTransferSectionData {
+    var createTransferSectionHeader: CreateTransferSectionHeader { return .button }
+    var cellIdentifier: String { return CreateTransferButtonCell.reuseIdentifier }
 }

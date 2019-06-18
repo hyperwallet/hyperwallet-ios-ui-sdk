@@ -84,8 +84,9 @@ public final class HyperwalletUI {
         return AddTransferMethodTableViewController(country, currency, profileType, transferMethodTypeCode)
     }
 
-    public func addTransferTableViewController() -> AddTransferTableViewController {
-        return AddTransferTableViewController()
+    public func addTransferTableViewController(sourceToken: String,
+                                               clientTransferId: String) -> CreateTransferTableViewController {
+        return CreateTransferTableViewController(sourceToken: sourceToken, clientTransferId: clientTransferId)
     }
 
     private init(_ provider: HyperwalletAuthenticationTokenProvider) {

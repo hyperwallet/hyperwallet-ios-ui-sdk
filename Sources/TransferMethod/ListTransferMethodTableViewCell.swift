@@ -88,7 +88,7 @@ extension ListTransferMethodTableViewCell {
         imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
     }
 
-    func formatDetails(transferMethodCountry: String, additionalInfo: String?) -> NSAttributedString {
+    private func formatDetails(transferMethodCountry: String, additionalInfo: String?) -> NSAttributedString {
         let attributedText = NSMutableAttributedString()
         attributedText.append(value: String(format: "%@\n", transferMethodCountry),
                               font: subTitleLabelFont,

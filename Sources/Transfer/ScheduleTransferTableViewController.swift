@@ -21,15 +21,17 @@ import UIKit
 /// Lists the user's transfer methods (bank account, bank card, PayPal account, prepaid card, paper check).
 ///
 /// The user can deactivate and add a new transfer method.
-public final class ConfirmTransferTableViewController: UITableViewController, UITextFieldDelegate {
-    private var presenter: ConfirmTransferPresenter!
+public final class ScheduleTransferTableViewController: UITableViewController, UITextFieldDelegate {
+    private var presenter: ScheduleTransferPresenter!
     private var transferMethod: HyperwalletTransferMethod
     private var transfer: HyperwalletTransfer
 
     private let registeredCells: [(type: AnyClass, id: String)] = [
         (ListTransferMethodTableViewCell.self, ListTransferMethodTableViewCell.reuseIdentifier),
-        (ConfirmTransferForeignExchangeCell.self, ConfirmTransferForeignExchangeCell.reuseIdentifier),
-        (ConfirmTransferButtonCell.self, ConfirmTransferButtonCell.reuseIdentifier)
+        (ScheduleTransferForeignExchangeCell.self, ScheduleTransferForeignExchangeCell.reuseIdentifier),
+        (ScheduleTransferSummaryCell.self, ScheduleTransferSummaryCell.reuseIdentifier),
+        (ScheduleTransferNotesCell.self, ScheduleTransferNotesCell.reuseIdentifier),
+        (ScheduleTransferButtonCell.self, ScheduleTransferButtonCell.reuseIdentifier)
     ]
 
     init(transferMethod: HyperwalletTransferMethod, transfer: HyperwalletTransfer) {
@@ -51,17 +53,27 @@ public final class ConfirmTransferTableViewController: UITableViewController, UI
         navigationItem.backBarButtonItem = UIBarButtonItem.back
 
         // setup table view
-        setUpAddTransferTableView()
-
-        presenter = ConfirmTransferPresenter(view: self)
-        presenter.initializeSections(transferMethod: transferMethod, transfer: transfer)
+        setUpScheduleTransferTableView()
+        presenter = ScheduleTransferPresenter(view: self, transferMethod: transferMethod, transfer: transfer)
+        presenter.initializeSections()
     }
 
-    override public func viewWillAppear(_ animated: Bool) {
-        hideKeyboardWhenTappedAround()
+    private func setUpScheduleTransferTableView() {
+        tableView = UITableView(frame: view.frame, style: .grouped)
+        tableView.accessibilityIdentifier = "scheduleTransferTableView"
+        tableView.allowsSelection = false
+        registeredCells.forEach {
+            tableView.register($0.type, forCellReuseIdentifier: $0.id)
+        }
+    }
+}
+
+// MARK: - Schedule transfer table data source
+extension ScheduleTransferTableViewController {
+    override public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return presenter.sectionData[section].title
     }
 
-    // MARK: - Transfer method list table view dataSource and delegate
     override public func numberOfSections(in tableView: UITableView) -> Int {
         return presenter.sectionData.count
     }
@@ -78,48 +90,54 @@ public final class ConfirmTransferTableViewController: UITableViewController, UI
         let cellIdentifier = presenter.sectionData[indexPath.section].cellIdentifier
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         let section = presenter.sectionData[indexPath.section]
-        switch section.confirmTransferSectionHeader {
+        switch section.scheduleTransferSectionHeader {
         case .destination:
             if let tableViewCell = cell as? ListTransferMethodTableViewCell,
-                let destinationData = section as? ConfirmTransferDestinationData,
+                let destinationData = section as? ScheduleTransferDestinationData,
                 let configuration = destinationData.configuration {
                 tableViewCell.configure(configuration: configuration)
             }
 
         case .foreignExchange:
-            if let tableViewCell = cell as? ConfirmTransferForeignExchangeCell,
-                let foreignExchangeData = section as? ConfirmTransferForeignExchangeData {
+            if let tableViewCell = cell as? ScheduleTransferForeignExchangeCell,
+                let foreignExchangeData = section as? ScheduleTransferForeignExchangeData {
                 tableViewCell.textLabel?.text = foreignExchangeData.rows[indexPath.row].title
                 tableViewCell.detailTextLabel?.text = foreignExchangeData.rows[indexPath.row].value
             }
 
         case .summary:
-            print("summary")
+            if let tableViewCell = cell as? ScheduleTransferSummaryCell,
+                let summaryData = section as? ScheduleTransferSummaryData {
+                tableViewCell.textLabel?.text = summaryData.rows[indexPath.row].title
+                tableViewCell.detailTextLabel?.text = summaryData.rows[indexPath.row].value
+            }
 
         case .notes:
-            print("notes")
+            if let tableViewCell = cell as? ScheduleTransferNotesCell,
+                let notesSection = section as? ScheduleTransferNotesData {
+                tableViewCell.textLabel?.text = notesSection.notes
+            }
 
         case .button:
-            if let tableViewCell = cell as? ConfirmTransferButtonCell, section is ConfirmTransferButtonData {
-                tableViewCell.textLabel?.text = "confirm_transfer_button".localized()
+            if let tableViewCell = cell as? ScheduleTransferButtonCell, section is ScheduleTransferButtonData {
+                tableViewCell.textLabel?.text = "schedule_transfer_button".localized()
                 tableViewCell.textLabel?.textAlignment = .center
-                let tap = UITapGestureRecognizer(target: self, action: #selector(clickTransferFunds))
+                let tap = UITapGestureRecognizer(target: self, action: #selector(tapScheduleTransfer))
                 tableViewCell.textLabel?.isUserInteractionEnabled = true
                 tableViewCell.textLabel?.addGestureRecognizer(tap)
             }
         }
-            return cell
+        return cell
     }
 
     @objc
-    private func clickTransferFunds(sender: UITapGestureRecognizer) {
-        print("Transer Fund!")
+    private func tapScheduleTransfer(sender: UITapGestureRecognizer) {
+        print("Schedule Transer Fund!")
     }
+}
 
-    override public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return presenter.sectionData[section].title
-    }
-
+// MARK: - Schedule transfer table delegate
+extension ScheduleTransferTableViewController {
     override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
@@ -130,35 +148,22 @@ public final class ConfirmTransferTableViewController: UITableViewController, UI
         }
     }
 
-    private func setUpAddTransferTableView() {
-        tableView = UITableView(frame: view.frame, style: .grouped)
-        tableView.accessibilityIdentifier = "confirmTransferTableView"
-        tableView.allowsSelection = false
-        registeredCells.forEach {
-            tableView.register($0.type, forCellReuseIdentifier: $0.id)
-        }
-    }
-
-    private func createAmountTextField(_ tableViewCell: AddTransferUserInputCell) -> UITextField {
-        //TODO text field alignment is not working for landscape mode, consider using customized cell instead of .value1
-        let amountTextField = UITextField(frame: CGRect(x: tableViewCell.separatorInset.left,
-                                                        y: 0,
-                                                        width: tableViewCell.bounds.width / 2,
-                                                        height: tableViewCell.bounds.height))
-        amountTextField.font = tableViewCell.textLabel?.font
-        amountTextField.keyboardType = UIKeyboardType.numberPad
-        amountTextField.placeholder = "transfer_amount".localized()
-        amountTextField.addTarget(self, action: #selector(amountTextFieldDidChange), for: .editingChanged)
-        return amountTextField
-    }
-
-    @objc
-    private func amountTextFieldDidChange(_ textField: UITextField) {
-        if let amountString = textField.text?.currencyInputFormatting() {
-            textField.text = amountString
-        }
+    override public func tableView(_ tableView: UITableView,
+                                   estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat(Theme.Cell.headerHeight)
     }
 }
 
-extension ConfirmTransferTableViewController: ConfirmTransferView {
+extension ScheduleTransferTableViewController: ScheduleTransferView {
+    func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
+        // TODO show error
+    }
+
+    func notifyTransferScheduled(_ transfer: HyperwalletTransfer) {
+        DispatchQueue.global(qos: .background).async {
+            NotificationCenter.default.post(name: .transferScheduled,
+                                            object: self,
+                                            userInfo: [UserInfo.transferScheduled: transfer])
+        }
+    }
 }

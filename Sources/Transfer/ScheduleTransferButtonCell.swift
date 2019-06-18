@@ -16,33 +16,28 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import HyperwalletSDK
+final class ScheduleTransferButtonCell: UITableViewCell {
+    static let reuseIdentifier = "scheduleTransferButtonCellReuseIdentifier"
 
-protocol ConfirmTransferView: class {
-   //TODO add contracts
-}
-
-final class ConfirmTransferPresenter {
-    private unowned let view: ConfirmTransferView
-    private(set) var sectionData = [ConfirmTransferSectionData]()
-
-    /// Initialize ConfirmTransferPresenter
-    init(view: ConfirmTransferView) {
-        self.view = view
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        self.heightAnchor.constraint(equalToConstant: Theme.Cell.smallHeight).isActive = true
     }
 
-    func initializeSections(transferMethod: HyperwalletTransferMethod, transfer: HyperwalletTransfer) {
-        sectionData.removeAll()
-        let confirmTransferDestinationSection = ConfirmTransferDestinationData(transferMethod: transferMethod)
-        sectionData.append(confirmTransferDestinationSection)
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}
 
-        if let foreignExchanges = transfer.foreignExchanges {
-            let confirmTransferForeignExchangesSection =
-                ConfirmTransferForeignExchangeData(foreignExchanges: foreignExchanges)
-            sectionData.append(confirmTransferForeignExchangesSection)
-        }
+extension ScheduleTransferButtonCell {
+    // MARK: Theme manager's proxy properties
+    @objc dynamic var titleLabelFont: UIFont! {
+        get { return textLabel?.font }
+        set { textLabel?.font = newValue }
+    }
 
-        let confirmTransferButtonData = ConfirmTransferButtonData()
-        sectionData.append(confirmTransferButtonData)
+    @objc dynamic var titleLabelColor: UIColor! {
+        get { return textLabel?.textColor }
+        set { textLabel?.textColor = newValue }
     }
 }

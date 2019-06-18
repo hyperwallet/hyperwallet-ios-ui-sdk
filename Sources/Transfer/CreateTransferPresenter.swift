@@ -18,37 +18,38 @@
 
 import HyperwalletSDK
 
-protocol AddTransferView: class {
+protocol CreateTransferView: class {
     func showLoading()
     func hideLoading()
-    func showProcessing()
-    func dismissProcessing(handler: @escaping () -> Void)
-    func showConfirmation(handler: @escaping (() -> Void))
-    func showAddTransfer(with transferMethod: HyperwalletTransferMethod)
+    func showCreateTransfer(with transferMethod: HyperwalletTransferMethod)
     func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?)
+    func showBusinessError(_ error: HyperwalletErrorType, _ handler: @escaping () -> Void)
+    func showScheduleTransfer(_ transfer: HyperwalletTransfer)
+    func notifyTransferCreated(_ transfer: HyperwalletTransfer)
 }
 
-final class AddTransferPresenter {
-    private unowned let view: AddTransferView
-    private(set) var sectionData = [AddTransferSectionData]()
+final class CreateTransferPresenter {
+    private unowned let view: CreateTransferView
+    private(set) var sectionData = [CreateTransferSectionData]()
     private(set) var transferMethods = [HyperwalletTransferMethod]()
+    private var transfer: HyperwalletTransfer?
 
-    /// Initialize AddTransferPresenter
-    init(view: AddTransferView) {
+    /// Initialize CreateTransferPresenter
+    init(view: CreateTransferView) {
         self.view = view
     }
 
     func initializeSections(with transferMethod: HyperwalletTransferMethod) {
         sectionData.removeAll()
-        let addTransferDestinationSection = AddTransferDestinationData(transferMethod: transferMethod)
+        let addTransferDestinationSection = CreateTransferDestinationData(transferMethod: transferMethod)
         sectionData.append(addTransferDestinationSection)
 
         if let currency = transferMethod.getField(fieldName: .transferMethodCurrency) as? String {
-            let addTransferUserInputSection = AddTransferUserInputData(destinationCurrency: currency)
+            let addTransferUserInputSection = CreateTransferUserInputData(destinationCurrency: currency)
             sectionData.append(addTransferUserInputSection)
         }
 
-        let addTransferButtonData = AddTransferButtonData()
+        let addTransferButtonData = CreateTransferButtonData()
         sectionData.append(addTransferButtonData)
     }
 
@@ -57,7 +58,52 @@ final class AddTransferPresenter {
         let queryParam = HyperwalletTransferMethodQueryParam()
         queryParam.limit = 100
         queryParam.status = .activated
+        view.showLoading()
         Hyperwallet.shared.listTransferMethods(queryParam: queryParam, completion: loadTransferMethodHandler())
+    }
+
+    func createTransfer(_ transfer: HyperwalletTransfer) {
+        self.transfer = transfer
+//        Hyperwallet.shared.createTransfer(transfer: transfer,
+//                                             completion: createTransferHandler())
+        // TODO remove this once create transfer is added to core sdk
+        view.showScheduleTransfer(transfer)
+    }
+
+    private func createTransferHandler() -> (HyperwalletTransfer?, HyperwalletErrorType?) -> Void {
+        return { [weak self] (result, error) in
+            guard let strongSelf = self else {
+                return
+            }
+            DispatchQueue.main.async {
+                strongSelf.view.hideLoading()
+                if let error = error {
+                    strongSelf.errorHandler(for: error)
+                } else {
+                    if let transfer = result {
+                        strongSelf.view.notifyTransferCreated(transfer)
+                        strongSelf.view.showScheduleTransfer(transfer)
+                    }
+                }
+            }
+        }
+    }
+
+    private func errorHandler(for error: HyperwalletErrorType) {
+        switch error.group {
+        case .business:
+            guard let errors = error.getHyperwalletErrors()?.errorList, errors.isNotEmpty() else {
+                return
+            }
+            // TODO add error handling logic, refer to AddTransferMethodPresenter
+
+        default:
+            let handler = { [weak self] () -> Void in
+                if let transfer = self?.transfer {
+                    self?.createTransfer(transfer)
+                }}
+            view.showError(error, handler)
+        }
     }
 
     private func loadTransferMethodHandler()
@@ -74,7 +120,7 @@ final class AddTransferPresenter {
                     }
                     if let data = result?.data, data.isNotEmpty() {
                         strongSelf.transferMethods = data
-                        strongSelf.view.showAddTransfer(with: strongSelf.transferMethods.first!)
+                        strongSelf.view.showCreateTransfer(with: strongSelf.transferMethods.first!)
                     }
                 }
             }

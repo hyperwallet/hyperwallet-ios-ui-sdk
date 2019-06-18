@@ -16,15 +16,15 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-struct AddTransferUserInputCellConfiguration {
+struct CreateTransferUserInputCellConfiguration {
     let transferAllText: String
     let amountText: String
     let currency: String
     let description: String
 }
 
-final class AddTransferUserInputCell: UITableViewCell {
-    static let reuseIdentifier = "addTransferUserInputCellReuseIdentifier"
+final class CreateTransferUserInputCell: UITableViewCell {
+    static let reuseIdentifier = "createTransferUserInputCellReuseIdentifier"
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
@@ -36,7 +36,7 @@ final class AddTransferUserInputCell: UITableViewCell {
     }
 }
 
-extension AddTransferUserInputCell {
+extension CreateTransferUserInputCell {
     // MARK: Theme manager's proxy properties
     @objc dynamic var titleLabelFont: UIFont! {
         get { return textLabel?.font }

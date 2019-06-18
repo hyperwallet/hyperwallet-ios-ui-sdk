@@ -16,20 +16,19 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-final class ConfirmTransferForeignExchangeCell: UITableViewCell {
-    static let reuseIdentifier = "confirmTransferForeignExchangeCellReuseIdentifier"
+final class ScheduleTransferNotesCell: UITableViewCell {
+    static let reuseIdentifier = "ScheduleTransferTableViewCellReuseIdentifier"
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .value1, reuseIdentifier: reuseIdentifier)
-        self.heightAnchor.constraint(equalToConstant: Theme.Cell.smallHeight).isActive = true
+        super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        textLabel?.numberOfLines = 0
+        textLabel?.lineBreakMode = .byWordWrapping
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-}
 
-extension ConfirmTransferForeignExchangeCell {
     // MARK: Theme manager's proxy properties
     @objc dynamic var titleLabelFont: UIFont! {
         get { return textLabel?.font }
@@ -39,15 +38,5 @@ extension ConfirmTransferForeignExchangeCell {
     @objc dynamic var titleLabelColor: UIColor! {
         get { return textLabel?.textColor }
         set { textLabel?.textColor = newValue }
-    }
-
-    @objc dynamic var subTitleLabelFont: UIFont! {
-        get { return detailTextLabel?.font }
-        set { detailTextLabel?.font = newValue }
-    }
-
-    @objc dynamic var subTitleLabelColor: UIColor! {
-        get { return detailTextLabel?.textColor }
-        set { detailTextLabel?.textColor = newValue }
     }
 }

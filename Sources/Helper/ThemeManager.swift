@@ -32,8 +32,12 @@ public class ThemeManager {
         applyToReceiptDetailTableViewCell()
         applyToReceiptFeeTableViewCell()
         applyToReceiptNotesTableViewCell()
-        applyToAddTransferUserInputTableViewCell()
-        applyToAddTransferNextButtonTableViewCell()
+        applyToCreateTransferUserInputTableViewCell()
+        applyToCreateTransferButtonTableViewCell()
+        applyToCreateTransferNotesTableViewCell()
+        applyToScheduleTransferForeignExchangeTableViewCell()
+        applyToScheduleTransferSummaryTableViewCell()
+        applyToScheduleTransferButtonTableViewCell()
         registerFonts
     }
 
@@ -167,16 +171,44 @@ public class ThemeManager {
         proxy.titleLabelColor = Theme.Label.subTitleColor
     }
 
-    private static func applyToAddTransferUserInputTableViewCell() {
-        let proxy = AddTransferUserInputCell.appearance()
+    private static func applyToCreateTransferUserInputTableViewCell() {
+        let proxy = CreateTransferUserInputCell.appearance()
         proxy.titleLabelFont = Theme.Label.bodyFontMedium
         proxy.titleLabelColor = Theme.Label.subTitleColor
         proxy.subTitleLabelFont = Theme.Label.bodyFontMedium
         proxy.subTitleLabelColor = Theme.Label.subTitleColor
     }
 
-    private static func applyToAddTransferNextButtonTableViewCell() {
-        let proxy = AddTransferNextCell.appearance()
+    private static func applyToCreateTransferButtonTableViewCell() {
+        let proxy = CreateTransferButtonCell.appearance()
+        proxy.titleLabelFont = Theme.Label.bodyFontMedium
+        proxy.titleLabelColor = Theme.Button.color
+    }
+
+    private static func applyToCreateTransferNotesTableViewCell() {
+        let proxy = ScheduleTransferNotesCell.appearance()
+        proxy.titleLabelFont = Theme.Label.footnoteFont
+        proxy.titleLabelColor = Theme.Label.subTitleColor
+    }
+
+    private static func applyToScheduleTransferForeignExchangeTableViewCell() {
+        let proxy = ScheduleTransferForeignExchangeCell.appearance()
+        proxy.titleLabelFont = Theme.Label.bodyFontMedium
+        proxy.titleLabelColor = Theme.Label.subTitleColor
+        proxy.subTitleLabelFont = Theme.Label.bodyFontMedium
+        proxy.subTitleLabelColor = Theme.Label.subTitleColor
+    }
+
+    private static func applyToScheduleTransferSummaryTableViewCell() {
+        let proxy = ScheduleTransferSummaryCell.appearance()
+        proxy.titleLabelFont = Theme.Label.bodyFontMedium
+        proxy.titleLabelColor = Theme.Label.subTitleColor
+        proxy.subTitleLabelFont = Theme.Label.bodyFontMedium
+        proxy.subTitleLabelColor = Theme.Label.subTitleColor
+    }
+
+    private static func applyToScheduleTransferButtonTableViewCell() {
+        let proxy = ScheduleTransferButtonCell.appearance()
         proxy.titleLabelFont = Theme.Label.bodyFontMedium
         proxy.titleLabelColor = Theme.Button.color
     }

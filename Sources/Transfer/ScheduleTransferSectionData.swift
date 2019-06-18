@@ -18,24 +18,24 @@
 
 import HyperwalletSDK
 
-enum ConfirmTransferSectionHeader: String {
+enum ScheduleTransferSectionHeader: String {
     case destination, foreignExchange, summary, notes, button
 }
 
-protocol ConfirmTransferSectionData {
-    var confirmTransferSectionHeader: ConfirmTransferSectionHeader { get }
+protocol ScheduleTransferSectionData {
+    var scheduleTransferSectionHeader: ScheduleTransferSectionHeader { get }
     var rowCount: Int { get }
     var title: String? { get }
     var cellIdentifier: String { get }
 }
 
-extension ConfirmTransferSectionData {
+extension ScheduleTransferSectionData {
     var rowCount: Int { return 1 }
-    var title: String? { return confirmTransferSectionHeader != ConfirmTransferSectionHeader.button ? "confirm_transfer_section_header_\(confirmTransferSectionHeader.rawValue)".localized() : nil }
+    var title: String? { return scheduleTransferSectionHeader != ScheduleTransferSectionHeader.button ? "schedule_transfer_section_header_\(scheduleTransferSectionHeader.rawValue)".localized() : nil }
 }
 
-struct ConfirmTransferDestinationData: ConfirmTransferSectionData {
-    var confirmTransferSectionHeader: ConfirmTransferSectionHeader { return .destination }
+struct ScheduleTransferDestinationData: ScheduleTransferSectionData {
+    var scheduleTransferSectionHeader: ScheduleTransferSectionHeader { return .destination }
     var cellIdentifier: String { return ListTransferMethodTableViewCell.reuseIdentifier }
     var configuration: ListTransferMethodCellConfiguration?
     var transferMethod: HyperwalletTransferMethod
@@ -80,11 +80,11 @@ struct ConfirmTransferDestinationData: ConfirmTransferSectionData {
     }
 }
 
-struct ConfirmTransferForeignExchangeData: ConfirmTransferSectionData {
+struct ScheduleTransferForeignExchangeData: ScheduleTransferSectionData {
     var rows = [(title: String, value: String)]()
-    var confirmTransferSectionHeader: ConfirmTransferSectionHeader { return .foreignExchange }
+    var scheduleTransferSectionHeader: ScheduleTransferSectionHeader { return .foreignExchange }
     var rowCount: Int { return rows.count }
-    var cellIdentifier: String { return ConfirmTransferForeignExchangeCell.reuseIdentifier }
+    var cellIdentifier: String { return ScheduleTransferForeignExchangeCell.reuseIdentifier }
     var foreignExchanges: [HyperwalletForeignExchange]
 
     init(foreignExchanges: [HyperwalletForeignExchange]) {
@@ -109,23 +109,36 @@ struct ConfirmTransferForeignExchangeData: ConfirmTransferSectionData {
     }
 }
 
-struct ConfirmTransferSummaryData: ConfirmTransferSectionData {
+struct ScheduleTransferSummaryData: ScheduleTransferSectionData {
     var rows = [(title: String, value: String)]()
-    var confirmTransferSectionHeader: ConfirmTransferSectionHeader { return .foreignExchange }
+    var scheduleTransferSectionHeader: ScheduleTransferSectionHeader { return .summary }
     var rowCount: Int { return 3 }
-    var cellIdentifier: String { return ConfirmTransferButtonCell.reuseIdentifier }
-    var foreignExchanges: [HyperwalletForeignExchange]
+    var cellIdentifier: String { return ScheduleTransferSummaryCell.reuseIdentifier }
 
-    init(foreignExchanges: [HyperwalletForeignExchange]) {
-        self.foreignExchanges = foreignExchanges
-        for foreignExchange in foreignExchanges {
-            rows.append((title: "You sell:", value: foreignExchange.sourceAmount! + foreignExchange.sourceCurrency!))
-            rows.append((title: "You buy:", value: foreignExchange.destinationAmount! + foreignExchange.destinationCurrency!))
-        }
+    init(transfer: HyperwalletTransfer) {
+        let transferAmount = String(format: "%@ %@", transfer.sourceAmount!, transfer.destinationCurrency!)
+        let fee = String(format: "%@ %@", transfer.destinationFeeAmount!, transfer.destinationCurrency!)
+        let amoutReceived = String(format: "%@ %@", transfer.destinationAmount!, transfer.destinationCurrency!)
+        rows.append((title: "Amount:", value: transferAmount))
+        rows.append((title: "Fee:", value: fee))
+        rows.append((title: "You will receive:", value: amoutReceived))
     }
 }
 
-struct ConfirmTransferButtonData: ConfirmTransferSectionData {
-    var confirmTransferSectionHeader: ConfirmTransferSectionHeader { return .button }
-    var cellIdentifier: String { return ConfirmTransferButtonCell.reuseIdentifier }
+struct ScheduleTransferNotesData: ScheduleTransferSectionData {
+    let notes: String?
+    var scheduleTransferSectionHeader: ScheduleTransferSectionHeader { return .notes }
+    var cellIdentifier: String { return ScheduleTransferNotesCell.reuseIdentifier }
+
+    init?(transfer: HyperwalletTransfer) {
+        guard let notes = transfer.notes else {
+            return nil
+        }
+        self.notes = notes
+    }
+}
+
+struct ScheduleTransferButtonData: ScheduleTransferSectionData {
+    var scheduleTransferSectionHeader: ScheduleTransferSectionHeader { return .button }
+    var cellIdentifier: String { return ScheduleTransferButtonCell.reuseIdentifier }
 }

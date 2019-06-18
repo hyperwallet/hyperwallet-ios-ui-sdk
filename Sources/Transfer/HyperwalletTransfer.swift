@@ -18,11 +18,40 @@
 
 import Foundation
 
+// TODO remvoe this mocked model
 struct HyperwalletTransfer {
-    var amount: String?
-    var fee: String?
+    var sourceToken: String?
+    var destinationToken: String?
+    var clientTransferId: String?
+    var sourceAmount: String?
+    var destinationAmount: String?
+    var destinationFeeAmount: String?
+    var notes: String?
     var destinationCurrency: String?
     var foreignExchanges: [HyperwalletForeignExchange]?
+    var token: String?
+
+    init(sourceToken: String?,
+         destinationToken: String?,
+         clientTransferId: String?,
+         sourceAmount: String?,
+         destinationAmount: String?,
+         destinationFeeAmount: String?,
+         notes: String?,
+         destinationCurrency: String?,
+         foreignExchanges: [HyperwalletForeignExchange]?,
+         token: String? = nil) {
+        self.sourceToken = sourceToken
+        self.destinationToken = destinationToken
+        self.clientTransferId = clientTransferId
+        self.sourceAmount = sourceAmount
+        self.destinationAmount = destinationAmount
+        self.destinationFeeAmount = destinationFeeAmount
+        self.notes = notes
+        self.destinationCurrency = destinationCurrency
+        self.foreignExchanges = foreignExchanges
+        self.token = token
+    }
 }
 
 struct HyperwalletForeignExchange {

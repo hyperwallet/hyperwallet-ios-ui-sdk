@@ -16,11 +16,11 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-final class AddTransferNextCell: UITableViewCell {
-    static let reuseIdentifier = "addTransferNextButtonCellReuseIdentifier"
+final class ScheduleTransferForeignExchangeCell: UITableViewCell {
+    static let reuseIdentifier = "scheduleTransferForeignExchangeCellReuseIdentifier"
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        super.init(style: .value1, reuseIdentifier: reuseIdentifier)
         self.heightAnchor.constraint(equalToConstant: Theme.Cell.smallHeight).isActive = true
     }
 
@@ -29,7 +29,7 @@ final class AddTransferNextCell: UITableViewCell {
     }
 }
 
-extension AddTransferNextCell {
+extension ScheduleTransferForeignExchangeCell {
     // MARK: Theme manager's proxy properties
     @objc dynamic var titleLabelFont: UIFont! {
         get { return textLabel?.font }
@@ -39,5 +39,15 @@ extension AddTransferNextCell {
     @objc dynamic var titleLabelColor: UIColor! {
         get { return textLabel?.textColor }
         set { textLabel?.textColor = newValue }
+    }
+
+    @objc dynamic var subTitleLabelFont: UIFont! {
+        get { return detailTextLabel?.font }
+        set { detailTextLabel?.font = newValue }
+    }
+
+    @objc dynamic var subTitleLabelColor: UIColor! {
+        get { return detailTextLabel?.textColor }
+        set { detailTextLabel?.textColor = newValue }
     }
 }

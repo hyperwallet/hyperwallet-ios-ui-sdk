@@ -16,8 +16,8 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-final class ConfirmTransferButtonCell: UITableViewCell {
-    static let reuseIdentifier = "confirmTransferButtonCellReuseIdentifier"
+final class CreateTransferButtonCell: UITableViewCell {
+    static let reuseIdentifier = "addTransferNextButtonCellReuseIdentifier"
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
@@ -29,7 +29,7 @@ final class ConfirmTransferButtonCell: UITableViewCell {
     }
 }
 
-extension ConfirmTransferButtonCell {
+extension CreateTransferButtonCell {
     // MARK: Theme manager's proxy properties
     @objc dynamic var titleLabelFont: UIFont! {
         get { return textLabel?.font }
