@@ -4,6 +4,7 @@ enum AccountType: String {
     case bankAccount = "Bank Account"
     case debitCard = "Debit Card"
     case payPalAccount = "PayPal"
+    case wireAccount = "Wire Account"
 }
 
 class AddTransferMethod {

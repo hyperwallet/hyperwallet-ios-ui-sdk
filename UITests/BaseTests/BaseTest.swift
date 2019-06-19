@@ -39,6 +39,15 @@ enum ProfileType {
             return "TransferMethodConfigurationPayPalAccountResponse"
         }
     }
+
+    var configurationWireAccountResponse: String {
+        switch self {
+        case .business:
+            return "TransferMethodConfigurationWireAccountBusinessResponse"
+        case .individual:
+            return "TransferMethodConfigurationWireAccountResponse"
+        }
+    }
 }
 
 class BaseTests: XCTestCase {

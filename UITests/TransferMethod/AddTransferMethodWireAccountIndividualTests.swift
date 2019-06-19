@@ -4,7 +4,7 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
     var selectTransferMethodType: SelectTransferMethodType!
     var addTransferMethod: AddTransferMethod!
 
-    let bankAccount = NSPredicate(format: "label CONTAINS[c] 'Bank Account'")
+    let wireAccount = NSPredicate(format: "label CONTAINS[c] 'Wire Account'")
 
     override func setUp() {
         profileType = .individual
@@ -82,7 +82,7 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
         app.alerts["Unexpected Error"].buttons["OK"].tap()
         XCTAssertFalse(app.alerts["Unexpected Error"].exists)
         XCTAssertTrue(app.navigationBars["Add Account"].exists)
-        XCTAssertTrue(app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: bankAccount).exists)
+        XCTAssertTrue(app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: wireAccount).exists)
     }
 
     func testAddTransferMethod_displaysElementsOnIndividualProfileTmcResponse() {
@@ -155,6 +155,18 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
         addTransferMethod.clickBackButton()
         XCTAssertTrue(selectTransferMethodType.navigationBar.exists)
     }
+
+    func testAddTransferMethod_verifyNotEditableFields() {
+        addTransferMethod.clickBackButton()
+        app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: wireAccount).tap()
+        addTransferMethod.firstNameInput.tap()
+
+        XCTAssertFalse(app.keyboards.element.exists)
+
+        addTransferMethod.lastNameInput.tap()
+
+        XCTAssertFalse(app.keyboards.element.exists)
+    }
 }
 
 private extension AddTransferMethodWireAccountIndividualTests {
@@ -172,7 +184,7 @@ private extension AddTransferMethodWireAccountIndividualTests {
         mockServer.setupGraphQLStubs(for: profileType)
 
         selectTransferMethodType = SelectTransferMethodType(app: app)
-        addTransferMethod = AddTransferMethod(app: app, for: .bankAccount)
+        addTransferMethod = AddTransferMethod(app: app, for: .wireAccount)
 
         app.tables.cells.containing(.staticText, identifier: "Add Transfer Method").element(boundBy: 0).tap()
         spinner = app.activityIndicators["activityIndicator"]
@@ -181,7 +193,7 @@ private extension AddTransferMethodWireAccountIndividualTests {
         selectTransferMethodType.selectCountry(country: "United States")
         selectTransferMethodType.selectCurrency(currency: "United States Dollar")
 
-        app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: bankAccount).tap()
+        app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: wireAccount).tap()
     }
 
     func setUpScreenWithInvalidRoutingError() {
@@ -275,18 +287,6 @@ private extension AddTransferMethodWireAccountIndividualTests {
 
         XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["Zip/Postal Code"].exists)
         XCTAssert(addTransferMethod.zipInput.exists)
-
-        func testAddTransferMethod_verifyNotEditableFields() {
-            addTransferMethod.clickBackButton()
-            app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: bankAccount).tap()
-            addTransferMethod.firstNameInput.tap()
-
-            XCTAssertFalse(app.keyboards.element.exists)
-
-            addTransferMethod.lastNameInput.tap()
-
-            XCTAssertFalse(app.keyboards.element.exists)
-        }
     }
 
     func verifyPresetValue(for uiElement: XCUIElement, with text: String) {

@@ -65,9 +65,9 @@ final class ListTransferMethodPresenter {
             let token = transferMethod.getField(fieldName: .token) as? String {
             selectedTransferMethod = transferMethod
             switch transferMethodType {
-            case "BANK_ACCOUNT":
+            case "BANK_ACCOUNT", "WIRE_ACCOUNT":
                 deactivateBankAccount(token)
-            case "BANK_CARD", "WIRE_ACCOUNT":
+            case "BANK_CARD":
                 deactivateBankCard(token)
             case "PAYPAL_ACCOUNT":
                 deactivatePayPalAccount(token)

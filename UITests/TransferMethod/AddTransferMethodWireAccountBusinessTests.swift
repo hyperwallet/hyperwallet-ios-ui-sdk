@@ -4,7 +4,7 @@ class AddTransferMethodWireAccountBusinessTests: BaseTests {
     var selectTransferMethodType: SelectTransferMethodType!
     var addTransferMethod: AddTransferMethod!
 
-    let bankAccount = NSPredicate(format: "label CONTAINS[c] 'Bank Account'")
+    let wireAccount = NSPredicate(format: "label CONTAINS[c] 'Wire Account'")
 
     override func setUp() {
         profileType = .business
@@ -16,7 +16,7 @@ class AddTransferMethodWireAccountBusinessTests: BaseTests {
     func testAddTransferMethodBankAccountBusiness_displaysElementsOnBusinessProfileTmcResponse() {
         waitForNonExistence(spinner)
 
-        XCTAssert(app.navigationBars.staticTexts["Bank Account"].exists)
+        XCTAssert(app.navigationBars.staticTexts["Wire Account"].exists)
 
         verifyAccountInformationSection()
         verifyIntermediaryAccountSection()
@@ -35,7 +35,7 @@ class AddTransferMethodWireAccountBusinessTests: BaseTests {
 
     func testAddTransferMethodBankAccountBusiness_createBankAccountBusiness() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/bank-accounts",
-                             filename: "BankAccountBusinessResponse",
+                             filename: "WireAccountBusinessResponse",
                              method: HTTPMethod.post)
 
         waitForNonExistence(spinner)
@@ -75,7 +75,7 @@ private extension AddTransferMethodWireAccountBusinessTests {
         selectTransferMethodType.selectCountry(country: "UNITED STATES")
         selectTransferMethodType.selectCurrency(currency: "USD")
 
-        app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: bankAccount).tap()
+        app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: wireAccount).tap()
     }
 
     func verifyAccountInformationSection() {
