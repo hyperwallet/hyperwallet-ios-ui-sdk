@@ -43,14 +43,7 @@
             "sourceToken": "usr-token",
             "destinationToken": "trm-00000000-0000-0000-0000-0000000000",
             "amount": "5.00",
-            "fee": "2.00",
-            "currency": "USD",
-            "details": {
-                "payeeName": "Shaoyun Yang",
-                "branchId": "026009593",
-                "bankAccountId": "*****5209",
-                "bankAccountPurpose": "CHECKING"
-            }
+            "currency": "USD"
         },
         {
             "journalId": "55176990",
