@@ -74,7 +74,7 @@ final class ListReceiptViewPresenter {
         let queryParam = HyperwalletReceiptQueryParam()
         queryParam.offset = offset
         queryParam.limit = limit
-        queryParam.sortBy = .descendantCreatedOn
+        queryParam.sortBy = HyperwalletReceiptQueryParam.QuerySortable.descendantCreatedOn.rawValue
         queryParam.createdAfter = Calendar.current.date(byAdding: .year, value: -1, to: Date())
         return queryParam
     }
