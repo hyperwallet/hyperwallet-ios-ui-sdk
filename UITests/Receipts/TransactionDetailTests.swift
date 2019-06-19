@@ -71,11 +71,11 @@ class TransactionDetailTests: BaseTests {
         let transactionDetailHeaderLabel = transactDetails.detailHeaderTitle
         waitForNonExistence(transactionDetailHeaderLabel)
 
-         // Assert No Note and Fee sections
-         let noteSection = transactDetails.noteSectionLabel
-         let feeLabel = transactDetails.feeLabel
-         XCTAssertTrue(!noteSection.exists)
-         XCTAssertTrue(!feeLabel.exists)
+        // Assert No Note and Fee sections
+        let noteSection = transactDetails.noteSectionLabel
+        let feeLabel = transactDetails.feeLabel
+        XCTAssertTrue(!noteSection.exists)
+        XCTAssertTrue(!feeLabel.exists)
     }
 
     // MARK: Helper methods
