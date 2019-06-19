@@ -78,7 +78,7 @@ extension SelectTransferMethodTypeTableViewController {
     }
 
     override public func numberOfSections(in tableView: UITableView) -> Int {
-        return presenter.sectionData.isNotEmpty() ? 1:0
+        return presenter.countryCurrencySectionData.isNotEmpty() ? 1:0
     }
 
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -98,7 +98,7 @@ extension SelectTransferMethodTypeTableViewController {
     }
 
     override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return Theme.Cell.smallHeight * CGFloat(presenter.sectionData.count) + Theme.Cell.headerHeight
+        return Theme.Cell.smallHeight * CGFloat(presenter.countryCurrencySectionData.count) + Theme.Cell.headerHeight
     }
 
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
