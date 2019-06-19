@@ -68,7 +68,7 @@ final class CountryCurrencyCell: GenericCell<CountryCurrencyCellConfiguration> {
         }
     }
 
-    private func setConstraits() {
+    private func setConstraints() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         valueLabel.translatesAutoresizingMaskIntoConstraints = false
 
@@ -103,7 +103,7 @@ final class CountryCurrencyCell: GenericCell<CountryCurrencyCellConfiguration> {
     private func defaultInit() {
         self.contentView.addSubview(titleLabel)
         self.contentView.addSubview(valueLabel)
-        setConstraits()
+        setConstraints()
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
