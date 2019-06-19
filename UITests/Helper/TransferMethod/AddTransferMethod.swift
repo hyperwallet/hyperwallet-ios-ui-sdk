@@ -13,6 +13,7 @@ class AddTransferMethod {
     var app: XCUIApplication
 
     var addTransferMethodTableView: XCUIElement
+    var bankIdInput: XCUIElement
     var branchIdInput: XCUIElement
     var accountNumberInput: XCUIElement
     var accountTypeSelect: XCUIElement
@@ -24,7 +25,10 @@ class AddTransferMethod {
     var title: XCUIElement
     var navigationBar: XCUIElement
 
+    var wireInstructionsInput: XCUIElement
     var selectRelationshipType: XCUIElement
+    var intermediaryBankIdInput: XCUIElement
+    var intermediaryBankAccountIdInput: XCUIElement
     var firstNameInput: XCUIElement
     var lastNameInput: XCUIElement
     var middleNameInput: XCUIElement
@@ -37,11 +41,13 @@ class AddTransferMethod {
     var cityInput: XCUIElement
     var zipInput: XCUIElement
     var businessNameInput: XCUIElement
+    var businessRegistrationIdInput: XCUIElement
 
     init(app: XCUIApplication, for accountType: AccountType) {
         self.app = app
 
         addTransferMethodTableView = app.tables["addTransferMethodTable"]
+        bankIdInput = addTransferMethodTableView.textFields["bankId"]
         branchIdInput = addTransferMethodTableView.textFields["branchId"]
         accountNumberInput = addTransferMethodTableView.textFields["bankAccountId"]
         accountTypeSelect = addTransferMethodTableView.cells.staticTexts["Account Type"]
@@ -55,7 +61,10 @@ class AddTransferMethod {
         emailInput = addTransferMethodTableView.textFields["email"]
         title = addTransferMethodTableView.staticTexts["Account Information - United States (USD)"]
         navigationBar = app.navigationBars[accountType.rawValue]
+        wireInstructionsInput = addTransferMethodTableView.textFields["wireInstructions"]
         selectRelationshipType = addTransferMethodTableView.cells.staticTexts["Relationship"]
+        intermediaryBankIdInput = addTransferMethodTableView.textFields["intermediaryBankId"]
+        intermediaryBankAccountIdInput = addTransferMethodTableView.textFields["intermediaryBankAccountId"]
         firstNameInput = addTransferMethodTableView.textFields["firstName"]
         lastNameInput = addTransferMethodTableView.textFields["lastName"]
         middleNameInput = addTransferMethodTableView.textFields["middleName"]
@@ -68,18 +77,21 @@ class AddTransferMethod {
         cityInput = addTransferMethodTableView.textFields["city"]
         zipInput = addTransferMethodTableView.textFields["postalCode"]
         businessNameInput = addTransferMethodTableView.textFields["businessName"]
+        businessRegistrationIdInput = addTransferMethodTableView.textFields["businessRegistrationId"]
+    }
+
+    func setBankId(_ bankId: String) {
+        bankIdInput.clearAndEnterText(text: bankId)
+        title.tap()
     }
 
     func setBranchId(_ branchId: String) {
-        branchIdInput.tap()
-        app.typeText(branchId)
-
+        branchIdInput.clearAndEnterText(text: branchId)
         title.tap()
     }
 
     func setAccountNumber(_ accountNumber: String) {
-        accountNumberInput.tap()
-        app.typeText(accountNumber)
+        accountNumberInput.clearAndEnterText(text: accountNumber)
         title.tap()
     }
 
@@ -97,8 +109,7 @@ class AddTransferMethod {
     }
 
     func setCardNumber(_ cardNumber: String) {
-        cardNumberInput.tap()
-        app.typeText(cardNumber)
+        cardNumberInput.clearAndEnterText(text: cardNumber)
         title.tap()
     }
 
@@ -131,14 +142,12 @@ class AddTransferMethod {
     }
 
     func setCvv(_ cvvNumber: String) {
-        cvvInput.tap()
-        app.typeText(cvvNumber)
+        cvvInput.clearAndEnterText(text: cvvNumber)
         title.tap()
     }
 
     func setEmail(_ email: String) {
-        emailInput.tap()
-        app.typeText(email)
+        emailInput.clearAndEnterText(text: email)
         title.tap()
     }
 
@@ -204,6 +213,26 @@ class AddTransferMethod {
 
     func setNameBusiness(_ nameBusiness: String) {
         businessNameInput.clearAndEnterText(text: nameBusiness)
+        title.tap()
+    }
+
+    func setAdditionalWireInstructions(_ additionalWireInstructions: String) {
+        wireInstructionsInput.clearAndEnterText(text: additionalWireInstructions)
+        title.tap()
+    }
+
+    func setIntermediaryBankId(_ bankId: String) {
+        intermediaryBankIdInput.clearAndEnterText(text: bankId)
+        title.tap()
+    }
+
+    func setIntermediaryBankAccountId(_ accountId: String) {
+        intermediaryBankAccountIdInput.clearAndEnterText(text: accountId)
+        title.tap()
+    }
+
+    func setBusinessRegistrationId(_ registrationId: String) {
+        businessRegistrationIdInput.clearAndEnterText(text: registrationId)
         title.tap()
     }
 }
