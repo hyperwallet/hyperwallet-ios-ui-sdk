@@ -207,11 +207,6 @@ private extension AddTransferMethodBankAccountIndividualTests {
 
         XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["Account Number"].exists)
         XCTAssert(addTransferMethod.accountNumberInput.exists)
-
-        verifyAccountTypeSelection()
-    }
-
-    func verifyAccountTypeSelection() {
         XCTAssert(addTransferMethod.accountTypeSelect.exists)
 
         addTransferMethod.accountTypeSelect.tap()

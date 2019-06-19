@@ -32,6 +32,7 @@ public struct IntegratorAuthenticationProvider: HyperwalletAuthenticationTokenPr
         url = "\(self.baseUrl)/rest/v3/users/\(self.userToken)/authentication-token"
         self.session = IntegratorAuthenticationProvider.createUrlSession(username: user, password: password)
     }
+
     public func retrieveAuthenticationToken(completionHandler: @escaping
         HyperwalletAuthenticationTokenProvider.CompletionHandler) {
         var request = URLRequest(url: URL(string: url)!)

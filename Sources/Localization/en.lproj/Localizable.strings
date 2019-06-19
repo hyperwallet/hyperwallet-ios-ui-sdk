@@ -170,6 +170,7 @@
 "wire_transfer_fee" = "Wire Transfer Fee";
 "wire_transfer_return" = "Wire Transfer Return";
 "wubs_wire_transfer_return" = "Wire Transfer Return";
+"unknown_receipt_type" = "Unknown Transaction Type";
 
 // Receipt Detail
 "title_receipts_details" = "Transaction Details";
