@@ -15,7 +15,8 @@ class ListTransferMethodPresenterTests: XCTestCase {
     private lazy var bankAccount: HyperwalletBankAccount = {
         let bankAccount = HyperwalletBankAccount.Builder(transferMethodCountry: "US",
                                                          transferMethodCurrency: "USD",
-                                                         transferMethodProfileType: "INDIVIDUAL")
+                                                         transferMethodProfileType: "INDIVIDUAL",
+                                                         transferMethodType: "BANK_ACCOUNT")
             .build()
         bankAccount.setField(key: HyperwalletTransferMethod.TransferMethodField.token.rawValue,
                              value: transferMethodToken)
