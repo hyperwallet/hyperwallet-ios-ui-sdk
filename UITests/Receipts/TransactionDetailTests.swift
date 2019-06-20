@@ -1,8 +1,8 @@
 import XCTest
 
 class TransactionDetailTests: BaseTests {
-    var transactDetails: TransactionDetails!
-    let currency = "USD"
+    private var transactDetails: TransactionDetails!
+    private let currency = "USD"
 
     override func setUp() {
         profileType = .individual
@@ -28,11 +28,10 @@ class TransactionDetailTests: BaseTests {
         }
 
         // DETAILS Section
-        // note: iOS 10 Shows Date's time as 16:16 PM
         verifyDetailSection(receiptID: "55176992", date: "Fri, May 24, 2019, 11:16 AM", clientID: "DyClk0VG9a")
 
         // FEE Section
-        verifyFeeSection(amount: "+6.00 USD", fee: "0.00 USD", trans: "6.00 USD")
+        verifyFeeSection(amount: "+6.00 USD", fee: "0.00 USD", transaction: "6.00 USD")
     }
 
     // Debit Transaction
@@ -52,7 +51,7 @@ class TransactionDetailTests: BaseTests {
         verifyDetailSection(receiptID: "55176991", date: "Sun, May 12, 2019, 11:16 AM", clientID: nil)
 
         // FEE Section
-        verifyFeeSection(amount: "-5.00 USD", fee: "2.00 USD", trans: "-7.00 USD")
+        verifyFeeSection(amount: "-5.00 USD", fee: "2.00 USD", transaction: "-7.00 USD")
     }
 
     func testReceiptDetail_verifyTransactionOptionalFields() {
@@ -74,8 +73,8 @@ class TransactionDetailTests: BaseTests {
         // Assert No Note and Fee sections
         let noteSection = transactDetails.noteSectionLabel
         let feeLabel = transactDetails.feeLabel
-        XCTAssertTrue(!noteSection.exists)
-        XCTAssertTrue(!feeLabel.exists)
+        XCTAssertFalse(noteSection.exists)
+        XCTAssertFalse(feeLabel.exists)
     }
 
     // MARK: Helper methods
@@ -98,22 +97,21 @@ class TransactionDetailTests: BaseTests {
     }
 
     private func verifyPayment(payment: String, amount: String) {
-        let receiptdetailtableviewTable = transactDetails.receiptdetailtableviewTable
-        let paymentlabel = receiptdetailtableviewTable.staticTexts["ListReceiptTableViewCellTextLabel"].label
-        let amountlabel = receiptdetailtableviewTable.staticTexts["ListReceiptTableViewCellDetailTextLabel"].label
-
-        XCTAssertTrue(paymentlabel == payment)
-        XCTAssertTrue(amountlabel == amount)
+        let receiptDetailTableviewTable = transactDetails.receiptDetailTableviewTable
+        let paymentlabel = receiptDetailTableviewTable.staticTexts["ListReceiptTableViewCellTextLabel"].label
+        let amountlabel = receiptDetailTableviewTable.staticTexts["ListReceiptTableViewCellDetailTextLabel"].label
+        XCTAssertEqual(paymentlabel, payment)
+        XCTAssertEqual(amountlabel, amount)
     }
 
     // Detail section verification
     private func verifyDetailSection(receiptID: String, date: String, clientID: String?) {
-        let receiptdetailtableviewTable = transactDetails.receiptdetailtableviewTable
+        let receiptDetailTableviewTable = transactDetails.receiptDetailTableviewTable
         let detailsSectionLabel = transactDetails.detailSection
         let receiptLabel = transactDetails.receiptIdLabel
         let dateLabel = transactDetails.dateLabel
-        let receiptID = receiptdetailtableviewTable.staticTexts[receiptID]
-        let date = receiptdetailtableviewTable.staticTexts[date]
+        let receiptID = receiptDetailTableviewTable.staticTexts[receiptID]
+        let date = receiptDetailTableviewTable.staticTexts[date]
 
         XCTAssertTrue(detailsSectionLabel.exists)
         XCTAssertTrue(receiptLabel.exists)
@@ -127,7 +125,7 @@ class TransactionDetailTests: BaseTests {
         if let clientID = clientID {
             let clientTransIDLabel = transactDetails.clientTransactionIdLabel
             XCTAssertTrue(clientTransIDLabel.exists)
-            XCTAssertTrue(receiptdetailtableviewTable.staticTexts[clientID].exists)
+            XCTAssertTrue(receiptDetailTableviewTable.staticTexts[clientID].exists)
         }
     }
 
@@ -141,7 +139,7 @@ class TransactionDetailTests: BaseTests {
         let websiteVal = "https://api.sandbox.hyperwallet.com"
         let notesVal = "Sample payment for the period of June 15th, 2019 to July 23, 2019"
 
-        let receiptdetailtableviewTable = transactDetails.receiptdetailtableviewTable
+        let receiptDetailTableviewTable = transactDetails.receiptDetailTableviewTable
         let detailsSectionLabel = transactDetails.detailSection
         let receiptLabel = transactDetails.receiptIdLabel
         let dateLabel = transactDetails.dateLabel
@@ -149,13 +147,13 @@ class TransactionDetailTests: BaseTests {
         let checkNumLabel = transactDetails.checkNumLabel
         let websiteLabel = transactDetails.promoWebSiteLabel
         let noteSection = transactDetails.noteSectionLabel
-        let receiptId = receiptdetailtableviewTable.staticTexts[receiptVal]
-        let date = receiptdetailtableviewTable.staticTexts[dateVal]
-        let transactionId = receiptdetailtableviewTable.staticTexts[transactionVal]
-        let charityName = receiptdetailtableviewTable.staticTexts[charityNameVal]
-        let checkNum = receiptdetailtableviewTable.staticTexts[checkNumVal]
-        let website = receiptdetailtableviewTable.staticTexts[websiteVal]
-        let notes = receiptdetailtableviewTable.staticTexts[notesVal]
+        let receiptId = receiptDetailTableviewTable.staticTexts[receiptVal]
+        let date = receiptDetailTableviewTable.staticTexts[dateVal]
+        let transactionId = receiptDetailTableviewTable.staticTexts[transactionVal]
+        let charityName = receiptDetailTableviewTable.staticTexts[charityNameVal]
+        let checkNum = receiptDetailTableviewTable.staticTexts[checkNumVal]
+        let website = receiptDetailTableviewTable.staticTexts[websiteVal]
+        let notes = receiptDetailTableviewTable.staticTexts[notesVal]
 
         XCTAssertTrue(detailsSectionLabel.exists)
         XCTAssertTrue(receiptLabel.exists)
@@ -180,15 +178,15 @@ class TransactionDetailTests: BaseTests {
     }
 
     // FEE section verification
-    private func verifyFeeSection(amount: String, fee: String, trans: String) {
-        let receiptdetailtableviewTable = transactDetails.receiptdetailtableviewTable
+    private func verifyFeeSection(amount: String, fee: String, transaction: String) {
+        let receiptDetailTableviewTable = transactDetails.receiptDetailTableviewTable
         let feeSectionLabel = transactDetails.feeSection
         let amountLabel = transactDetails.amountLabel
         let feeLabel = transactDetails.feeLabel
         let transactionLabel = transactDetails.transactionLabel
-        let amount = receiptdetailtableviewTable.staticTexts[amount]
-        let fee = receiptdetailtableviewTable.staticTexts[fee]
-        let transaction = receiptdetailtableviewTable.staticTexts[trans]
+        let amount = receiptDetailTableviewTable.staticTexts[amount]
+        let fee = receiptDetailTableviewTable.staticTexts[fee]
+        let transaction = receiptDetailTableviewTable.staticTexts[transaction]
 
         XCTAssertTrue(feeSectionLabel.exists)
         XCTAssertTrue(amountLabel.exists)
