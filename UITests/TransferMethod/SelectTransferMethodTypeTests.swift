@@ -119,29 +119,29 @@ class SelectTransferMethodTypeTests: BaseTests {
     func testSelectTransferMethod_clickBankAccountOpensAddTransferMethodUi () {
         selectTransferMethodType.selectCountry(country: "United States")
 
-        app.tables["transferMethodTableView"].staticTexts.element(matching: bankAccount).tap()
+        app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: bankAccount).tap()
         XCTAssert(app.navigationBars.staticTexts["Bank Account"].exists)
     }
 
     func testSelectTransferMethod_clickBankCardOpensAddTransferMethodUi () {
         selectTransferMethodType.selectCountry(country: "United States")
 
-        app.tables["transferMethodTableView"].staticTexts.element(matching: debitCard).tap()
+        app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: debitCard).tap()
         XCTAssert(app.navigationBars.staticTexts["Debit Card"].exists)
     }
 
     func testSelectTransferMethod_verifyTransferMethodsListEmptyFee () {
         selectTransferMethodType.selectCountry(country: "THAILAND")
 
-        XCTAssertTrue(app.tables["transferMethodTableView"].staticTexts.element(matching: wiretransfer).exists)
-        XCTAssertFalse(app.tables["transferMethodTableView"].staticTexts.element(matching: transactionFee).exists)
+        XCTAssertTrue(app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: wiretransfer).exists)
+        XCTAssertFalse(app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: transactionFee).exists)
     }
 
     func testSelectTransferMethod_verifyTransferMethodsListEmptyProcessing () {
         selectTransferMethodType.selectCountry(country: "SPAIN")
 
-        XCTAssertTrue(app.tables["transferMethodTableView"].staticTexts.element(matching: wiretransfer).exists)
-        XCTAssertFalse(app.tables["transferMethodTableView"].staticTexts.element(matching: processingTime).exists)
-        XCTAssertTrue(app.tables["transferMethodTableView"].staticTexts.element(matching: transactionFee).exists)
+        XCTAssertTrue(app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: wiretransfer).exists)
+        XCTAssertFalse(app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: processingTime).exists)
+        XCTAssertTrue(app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: transactionFee).exists)
     }
 }
