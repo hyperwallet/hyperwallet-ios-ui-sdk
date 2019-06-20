@@ -29,7 +29,7 @@ class SelectTransferMethodCountryTypeTests: BaseTests {
         XCTAssertTrue(app.navigationBars["Select Country"].exists)
         XCTAssertTrue(app.tables.staticTexts["United States"].exists)
         XCTAssertTrue(app.tables.staticTexts["Canada"].exists)
-        XCTAssertEqual(app.tables.cells.count, 5)
+        XCTAssertEqual(app.tables.cells.count, 30)
         XCTAssertTrue(selectTransferMethodCountryType.countryTable.exists)
     }
 
