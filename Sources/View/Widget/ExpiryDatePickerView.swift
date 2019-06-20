@@ -86,9 +86,13 @@ final class ExpiryDatePickerView: UIPickerView, UIPickerViewDelegate, UIPickerVi
     func numberOfComponents(in pickerView: UIPickerView) -> Int { return 2 }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedDateComponents.setValue(
-            component == 0 ? row + 1 : row + firstYear,
-            for: component == 0 ? .month : .year)
+        let value = component == 0
+            ? row + 1
+            : row + firstYear
+        let component: Calendar.Component = component == 0
+            ? .month
+            : .year
+        selectedDateComponents.setValue(value, for: component)
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
