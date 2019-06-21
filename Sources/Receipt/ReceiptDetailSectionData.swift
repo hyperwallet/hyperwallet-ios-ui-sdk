@@ -103,12 +103,22 @@ struct ReceiptDetailSectionFeeData: ReceiptDetailSectionData {
             let transaction: Double = receipt.entry == .debit
                 ? 0 - amount - fee
                 : amount - fee
+            let transactionFormat = getTransactionFormat(basedOn: receipt.amount)
             rows.append((title: "receipt_details_transaction".localized(),
                          value: String(format: valueCurrencyFormat,
-                                       String(format: "%.2f", transaction ),
+                                       String(format: transactionFormat, transaction),
                                        receipt.currency)
             ))
         }
+    }
+
+    private func getTransactionFormat(basedOn value: String) -> String {
+        let locale = Locale(identifier: Locale.preferredLanguages[0])
+        let localizedDecimalSeparator: Character = locale.decimalSeparator?.first ?? "."
+        let components = value.split(separator: localizedDecimalSeparator)
+        return components.count == 1
+            ? "%.0f"
+            : "%.\(components[1].count)f"
     }
 }
 
