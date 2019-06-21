@@ -96,7 +96,7 @@ final class AddTransferMethodPresenter {
         }
         var hyperwalletTransferMethod: HyperwalletTransferMethod
         switch transferMethodTypeCode {
-        case "BANK_ACCOUNT":
+        case "BANK_ACCOUNT", "WIRE_ACCOUNT":
             hyperwalletTransferMethod = HyperwalletBankAccount.Builder(transferMethodCountry: country,
                                                                        transferMethodCurrency: currency,
                                                                        transferMethodProfileType: profileType,
