@@ -80,6 +80,7 @@ final class DateWidget: TextWidget {
     private func setupDatePicker() {
         datePicker = UIDatePicker(frame: .zero)
         datePicker.datePickerMode = .date
+        datePicker.locale = DateWidget.localizedDateFormatter.locale
         datePicker.accessibilityIdentifier = "dateWidgetPicker"
     }
 
