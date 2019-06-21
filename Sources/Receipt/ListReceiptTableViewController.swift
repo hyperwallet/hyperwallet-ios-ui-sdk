@@ -51,7 +51,6 @@ public final class ListReceiptTableViewController: UITableViewController {
         setViewBackgroundColor()
 
         navigationItem.backBarButtonItem = UIBarButtonItem.back
-        presenter = ListReceiptViewPresenter(view: self)
         setupListReceiptTableView()
         presenter.listReceipts()
     }

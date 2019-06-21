@@ -61,7 +61,8 @@ public final class HyperwalletUI {
     ///
     /// - Parameter prepaidCardToken: prepaid card token for which transactions are requested
     /// - Returns: An instance of `ListReceiptTableViewController`
-    public func listPrepaidCardReceiptTableViewController(_ prepaidCardToken: String) -> ListReceiptTableViewController {
+    public func listPrepaidCardReceiptTableViewController(_ prepaidCardToken: String)
+        -> ListReceiptTableViewController {
         return ListReceiptTableViewController(prepaidCardToken: prepaidCardToken)
     }
     /// Lists all transfer method types available based on the country, currency and profile type to create a new

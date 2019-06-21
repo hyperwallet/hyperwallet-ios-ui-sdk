@@ -42,6 +42,17 @@ extension String {
 
         return ceil(boundingBox.height)
     }
+
+    func currencyFormatter(by currencyCode: String) -> String {
+        if let amountInDouble = Double(self) {
+            let currencyFormatter = NumberFormatter()
+            currencyFormatter.numberStyle = .currency
+            currencyFormatter.currencyCode = currencyCode
+            return currencyFormatter.string(for: amountInDouble) ?? ""
+        } else {
+            return ""
+        }
+    }
 }
 
 extension NSMutableAttributedString {
