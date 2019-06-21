@@ -28,7 +28,7 @@ class TransactionDetailTests: BaseTests {
         }
 
         // DETAILS Section
-        verifyDetailSection(receiptID: "55176992", date: "Fri, May 24, 2019, 11:16 AM", clientID: "DyClk0VG9a")
+        verifyDetailSection(receiptID: "55176992", dateVal: "Fri, May 24, 2019, 11:16 AM", clientID: "DyClk0VG9a")
 
         // FEE Section
         verifyFeeSection(amount: "+6.00 USD", fee: "0.00 USD", transaction: "6.00 USD")
@@ -48,7 +48,7 @@ class TransactionDetailTests: BaseTests {
         }
 
         // DETAILS Section
-        verifyDetailSection(receiptID: "55176991", date: "Sun, May 12, 2019, 11:16 AM", clientID: nil)
+        verifyDetailSection(receiptID: "55176991", dateVal: "Sun, May 12, 2019, 11:16 AM", clientID: nil)
 
         // FEE Section
         verifyFeeSection(amount: "-5.00 USD", fee: "2.00 USD", transaction: "-7.00 USD")
@@ -105,13 +105,13 @@ class TransactionDetailTests: BaseTests {
     }
 
     // Detail section verification
-    private func verifyDetailSection(receiptID: String, date: String, clientID: String?) {
+    private func verifyDetailSection(receiptID: String, dateVal: String, clientID: String?) {
         let receiptDetailTableviewTable = transactDetails.receiptDetailTableviewTable
         let detailsSectionLabel = transactDetails.detailSection
         let receiptLabel = transactDetails.receiptIdLabel
         let dateLabel = transactDetails.dateLabel
         let receiptID = receiptDetailTableviewTable.staticTexts[receiptID]
-        let date = receiptDetailTableviewTable.staticTexts[date]
+        let date = receiptDetailTableviewTable.staticTexts[dateVal]
 
         XCTAssertTrue(detailsSectionLabel.exists)
         XCTAssertTrue(receiptLabel.exists)
@@ -121,6 +121,7 @@ class TransactionDetailTests: BaseTests {
         // skip the test on iOS 10 as simulator time is not correct - possible XCode's bug
         if #available(iOS 11, *) {
             XCTAssertTrue(date.exists)
+            XCTAssertEqual(date.label, dateVal)
         }
         if let clientID = clientID {
             let clientTransIDLabel = transactDetails.clientTransactionIdLabel
@@ -174,6 +175,7 @@ class TransactionDetailTests: BaseTests {
         if #available(iOS 11, *) {
             XCTAssertTrue(dateLabel.exists)
             XCTAssertTrue(date.exists)
+            XCTAssertEqual(date.label, dateVal)
         }
     }
 
