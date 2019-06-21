@@ -136,7 +136,7 @@ class TransactionDetailTests: BaseTests {
         let dateVal = "Fri, May 3, 2019, 10:08 AM"
         let charityNameVal = "Sample Charity"
         let checkNumVal = "Sample Check Number"
-        let websiteVal = "https://api.sandbox.hyperwallet.com"
+        let websiteVal = "https://localhost"
         let notesVal = "Sample payment for the period of June 15th, 2019 to July 23, 2019"
 
         let receiptDetailTableviewTable = transactDetails.receiptDetailTableviewTable
