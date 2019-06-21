@@ -297,6 +297,599 @@
                             }
                         ]
                     }
+                },
+                {
+                    "code" : "GS",
+                    "name" : "SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS",
+                    "currencies" : {
+                        "nodes" : [ {
+                            "code" : "USD",
+                            "name" : "USD",
+                            "transferMethodTypes" : {
+                                "nodes" : [ {
+                                    "code" : "WIRE_ACCOUNT",
+                                    "name" : "Wire Transfer",
+                                    "fees" : {
+                                        "nodes" : [ {
+                                            "country" : "GS",
+                                            "currency" : "USD",
+                                            "transferMethodType" : "WIRE_ACCOUNT",
+                                            "value" : "20.00",
+                                            "feeRateType" : "FLAT"
+                                        } ]
+                                    }
+                                } ]
+                            }
+                        } ]
+                    }
+                }, {
+                    "code" : "ES",
+                    "name" : "SPAIN",
+                    "currencies" : {
+                        "nodes" : [ {
+                            "code" : "USD",
+                            "name" : "USD",
+                            "transferMethodTypes" : {
+                                "nodes" : [ {
+                                    "code" : "WIRE_ACCOUNT",
+                                    "name" : "Wire Transfer",
+                                    "fees" : {
+                                        "nodes" : [ {
+                                            "country" : "ES",
+                                            "currency" : "USD",
+                                            "transferMethodType" : "WIRE_ACCOUNT",
+                                            "value" : "20.00",
+                                            "feeRateType" : "FLAT"
+                                        } ]
+                                    }
+                                } ]
+                            }
+                        } ]
+                    }
+                }, {
+                    "code" : "LK",
+                    "name" : "SRI LANKA",
+                    "currencies" : {
+                        "nodes" : [ {
+                            "code" : "USD",
+                            "name" : "USD",
+                            "transferMethodTypes" : {
+                                "nodes" : [ {
+                                    "code" : "WIRE_ACCOUNT",
+                                    "name" : "Wire Transfer",
+                                    "fees" : {
+                                        "nodes" : [ {
+                                            "country" : "LK",
+                                            "currency" : "USD",
+                                            "transferMethodType" : "WIRE_ACCOUNT",
+                                            "value" : "20.00",
+                                            "feeRateType" : "FLAT"
+                                        } ]
+                                    }
+                                } ]
+                            }
+                        } ]
+                    }
+                }, {
+                    "code" : "SH",
+                    "name" : "ST. HELENA",
+                    "currencies" : {
+                        "nodes" : [ {
+                            "code" : "USD",
+                            "name" : "USD",
+                            "transferMethodTypes" : {
+                                "nodes" : [ {
+                                    "code" : "WIRE_ACCOUNT",
+                                    "name" : "Wire Transfer",
+                                    "fees" : {
+                                        "nodes" : [ {
+                                            "country" : "SH",
+                                            "currency" : "USD",
+                                            "transferMethodType" : "WIRE_ACCOUNT",
+                                            "value" : "20.00",
+                                            "feeRateType" : "FLAT"
+                                        } ]
+                                    }
+                                } ]
+                            }
+                        } ]
+                    }
+                }, {
+                    "code" : "PM",
+                    "name" : "ST. PIERRE AND MIQUELON",
+                    "currencies" : {
+                        "nodes" : [ {
+                            "code" : "USD",
+                            "name" : "USD",
+                            "transferMethodTypes" : {
+                                "nodes" : [ {
+                                    "code" : "WIRE_ACCOUNT",
+                                    "name" : "Wire Transfer",
+                                    "fees" : {
+                                        "nodes" : [ {
+                                            "country" : "PM",
+                                            "currency" : "USD",
+                                            "transferMethodType" : "WIRE_ACCOUNT",
+                                            "value" : "20.00",
+                                            "feeRateType" : "FLAT"
+                                        } ]
+                                    }
+                                } ]
+                            }
+                        } ]
+                    }
+                }, {
+                    "code" : "SR",
+                    "name" : "SURINAME",
+                    "currencies" : {
+                        "nodes" : [ {
+                            "code" : "USD",
+                            "name" : "USD",
+                            "transferMethodTypes" : {
+                                "nodes" : [ {
+                                    "code" : "WIRE_ACCOUNT",
+                                    "name" : "Wire Transfer",
+                                    "fees" : {
+                                        "nodes" : [ {
+                                            "country" : "SR",
+                                            "currency" : "USD",
+                                            "transferMethodType" : "WIRE_ACCOUNT",
+                                            "value" : "20.00",
+                                            "feeRateType" : "FLAT"
+                                        } ]
+                                    }
+                                } ]
+                            }
+                        } ]
+                    }
+                }, {
+                    "code" : "SJ",
+                    "name" : "SVALBARD AND JAN MAYEN ISLANDS",
+                    "currencies" : {
+                        "nodes" : [ {
+                            "code" : "USD",
+                            "name" : "USD",
+                            "transferMethodTypes" : {
+                                "nodes" : [ {
+                                    "code" : "WIRE_ACCOUNT",
+                                    "name" : "Wire Transfer",
+                                    "fees" : {
+                                        "nodes" : [ {
+                                            "country" : "SJ",
+                                            "currency" : "USD",
+                                            "transferMethodType" : "WIRE_ACCOUNT",
+                                            "value" : "20.00",
+                                            "feeRateType" : "FLAT"
+                                        } ]
+                                    }
+                                } ]
+                            }
+                        } ]
+                    }
+                }, {
+                    "code" : "SZ",
+                    "name" : "SWAZILAND",
+                    "currencies" : {
+                        "nodes" : [ {
+                            "code" : "USD",
+                            "name" : "USD",
+                            "transferMethodTypes" : {
+                                "nodes" : [ {
+                                    "code" : "WIRE_ACCOUNT",
+                                    "name" : "Wire Transfer",
+                                    "fees" : {
+                                        "nodes" : [ {
+                                            "country" : "SZ",
+                                            "currency" : "USD",
+                                            "transferMethodType" : "WIRE_ACCOUNT",
+                                            "value" : "20.00",
+                                            "feeRateType" : "FLAT"
+                                        } ]
+                                    }
+                                } ]
+                            }
+                        } ]
+                    }
+                }, {
+                    "code" : "SE",
+                    "name" : "SWEDEN",
+                    "currencies" : {
+                        "nodes" : [ {
+                            "code" : "USD",
+                            "name" : "USD",
+                            "transferMethodTypes" : {
+                                "nodes" : [ {
+                                    "code" : "WIRE_ACCOUNT",
+                                    "name" : "Wire Transfer",
+                                    "fees" : {
+                                        "nodes" : [ {
+                                            "country" : "SE",
+                                            "currency" : "USD",
+                                            "transferMethodType" : "WIRE_ACCOUNT",
+                                            "value" : "20.00",
+                                            "feeRateType" : "FLAT"
+                                        } ]
+                                    }
+                                } ]
+                            }
+                        } ]
+                    }
+                }, {
+                    "code" : "CH",
+                    "name" : "SWITZERLAND",
+                    "currencies" : {
+                        "nodes" : [ {
+                            "code" : "USD",
+                            "name" : "USD",
+                            "transferMethodTypes" : {
+                                "nodes" : [ {
+                                    "code" : "WIRE_ACCOUNT",
+                                    "name" : "Wire Transfer",
+                                    "fees" : {
+                                        "nodes" : [ {
+                                            "country" : "CH",
+                                            "currency" : "USD",
+                                            "transferMethodType" : "WIRE_ACCOUNT",
+                                            "value" : "20.00",
+                                            "feeRateType" : "FLAT"
+                                        } ]
+                                    }
+                                } ]
+                            }
+                        } ]
+                    }
+                }, {
+                    "code" : "SX",
+                    "name" : "Sint Maarten",
+                    "currencies" : {
+                        "nodes" : [ {
+                            "code" : "USD",
+                            "name" : "USD",
+                            "transferMethodTypes" : {
+                                "nodes" : [ {
+                                    "code" : "WIRE_ACCOUNT",
+                                    "name" : "Wire Transfer",
+                                    "fees" : {
+                                        "nodes" : [ {
+                                            "country" : "SX",
+                                            "currency" : "USD",
+                                            "transferMethodType" : "WIRE_ACCOUNT",
+                                            "value" : "20.00",
+                                            "feeRateType" : "FLAT"
+                                        } ]
+                                    }
+                                } ]
+                            }
+                        } ]
+                    }
+                }, {
+                    "code" : "TW",
+                    "name" : "TAIWAN",
+                    "currencies" : {
+                        "nodes" : [ {
+                            "code" : "USD",
+                            "name" : "USD",
+                            "transferMethodTypes" : {
+                                "nodes" : [ {
+                                    "code" : "WIRE_ACCOUNT",
+                                    "name" : "Wire Transfer",
+                                    "fees" : {
+                                        "nodes" : [ {
+                                            "country" : "TW",
+                                            "currency" : "USD",
+                                            "transferMethodType" : "WIRE_ACCOUNT",
+                                            "value" : "20.00",
+                                            "feeRateType" : "FLAT"
+                                        } ]
+                                    }
+                                } ]
+                            }
+                        } ]
+                    }
+                }, {
+                    "code" : "TJ",
+                    "name" : "TAJIKISTAN",
+                    "currencies" : {
+                        "nodes" : [ {
+                            "code" : "USD",
+                            "name" : "USD",
+                            "transferMethodTypes" : {
+                                "nodes" : [ {
+                                    "code" : "WIRE_ACCOUNT",
+                                    "name" : "Wire Transfer",
+                                    "fees" : {
+                                        "nodes" : [ {
+                                            "country" : "TJ",
+                                            "currency" : "USD",
+                                            "transferMethodType" : "WIRE_ACCOUNT",
+                                            "value" : "20.00",
+                                            "feeRateType" : "FLAT"
+                                        } ]
+                                    }
+                                } ]
+                            }
+                        } ]
+                    }
+                }, {
+                    "code" : "TZ",
+                    "name" : "TANZANIA, UNITED REPUBLIC OF",
+                    "currencies" : {
+                        "nodes" : [ {
+                            "code" : "USD",
+                            "name" : "USD",
+                            "transferMethodTypes" : {
+                                "nodes" : [ {
+                                    "code" : "WIRE_ACCOUNT",
+                                    "name" : "Wire Transfer",
+                                    "fees" : {
+                                        "nodes" : [ {
+                                            "country" : "TZ",
+                                            "currency" : "USD",
+                                            "transferMethodType" : "WIRE_ACCOUNT",
+                                            "value" : "20.00",
+                                            "feeRateType" : "FLAT"
+                                        } ]
+                                    }
+                                } ]
+                            }
+                        } ]
+                    }
+                }, {
+                    "code" : "TH",
+                    "name" : "THAILAND",
+                    "currencies" : {
+                        "nodes" : [ {
+                            "code" : "USD",
+                            "name" : "USD",
+                            "transferMethodTypes" : {
+                                "nodes" : [ {
+                                    "code" : "WIRE_ACCOUNT",
+                                    "name" : "Wire Transfer",
+                                    
+                                } ]
+                            }
+                        } ]
+                    }
+                }, {
+                    "code" : "TG",
+                    "name" : "TOGO",
+                    "currencies" : {
+                        "nodes" : [ {
+                            "code" : "USD",
+                            "name" : "USD",
+                            "transferMethodTypes" : {
+                                "nodes" : [ {
+                                    "code" : "WIRE_ACCOUNT",
+                                    "name" : "Wire Transfer",
+                                    "fees" : {
+                                        "nodes" : [ {
+                                            "country" : "TG",
+                                            "currency" : "USD",
+                                            "transferMethodType" : "WIRE_ACCOUNT",
+                                            "value" : "20.00",
+                                            "feeRateType" : "FLAT"
+                                        } ]
+                                    }
+                                } ]
+                            }
+                        } ]
+                    }
+                }, {
+                    "code" : "TK",
+                    "name" : "TOKELAU",
+                    "currencies" : {
+                        "nodes" : [ {
+                            "code" : "USD",
+                            "name" : "USD",
+                            "transferMethodTypes" : {
+                                "nodes" : [ {
+                                    "code" : "WIRE_ACCOUNT",
+                                    "name" : "Wire Transfer",
+                                    "fees" : {
+                                        "nodes" : [ {
+                                            "country" : "TK",
+                                            "currency" : "USD",
+                                            "transferMethodType" : "WIRE_ACCOUNT",
+                                            "value" : "20.00",
+                                            "feeRateType" : "FLAT"
+                                        } ]
+                                    }
+                                } ]
+                            }
+                        } ]
+                    }
+                }, {
+                    "code" : "TO",
+                    "name" : "TONGA",
+                    "currencies" : {
+                        "nodes" : [ {
+                            "code" : "USD",
+                            "name" : "USD",
+                            "transferMethodTypes" : {
+                                "nodes" : [ {
+                                    "code" : "WIRE_ACCOUNT",
+                                    "name" : "Wire Transfer",
+                                    "fees" : {
+                                        "nodes" : [ {
+                                            "country" : "TO",
+                                            "currency" : "USD",
+                                            "transferMethodType" : "WIRE_ACCOUNT",
+                                            "value" : "20.00",
+                                            "feeRateType" : "FLAT"
+                                        } ]
+                                    }
+                                } ]
+                            }
+                        } ]
+                    }
+                }, {
+                    "code" : "TT",
+                    "name" : "TRINIDAD AND TOBAGO",
+                    "currencies" : {
+                        "nodes" : [ {
+                            "code" : "USD",
+                            "name" : "USD",
+                            "transferMethodTypes" : {
+                                "nodes" : [ {
+                                    "code" : "WIRE_ACCOUNT",
+                                    "name" : "Wire Transfer",
+                                    "fees" : {
+                                        "nodes" : [ {
+                                            "country" : "TT",
+                                            "currency" : "USD",
+                                            "transferMethodType" : "WIRE_ACCOUNT",
+                                            "value" : "20.00",
+                                            "feeRateType" : "FLAT"
+                                        } ]
+                                    }
+                                } ]
+                            }
+                        } ]
+                    }
+                }, {
+                    "code" : "TR",
+                    "name" : "TURKEY",
+                    "currencies" : {
+                        "nodes" : [ {
+                            "code" : "USD",
+                            "name" : "USD",
+                            "transferMethodTypes" : {
+                                "nodes" : [ {
+                                    "code" : "WIRE_ACCOUNT",
+                                    "name" : "Wire Transfer",
+                                    "fees" : {
+                                        "nodes" : [ {
+                                            "country" : "TR",
+                                            "currency" : "USD",
+                                            "transferMethodType" : "WIRE_ACCOUNT",
+                                            "value" : "20.00",
+                                            "feeRateType" : "FLAT"
+                                        } ]
+                                    }
+                                } ]
+                            }
+                        } ]
+                    }
+                }, {
+                    "code" : "TM",
+                    "name" : "TURKMENISTAN",
+                    "currencies" : {
+                        "nodes" : [ {
+                            "code" : "USD",
+                            "name" : "USD",
+                            "transferMethodTypes" : {
+                                "nodes" : [ {
+                                    "code" : "WIRE_ACCOUNT",
+                                    "name" : "Wire Transfer",
+                                    "fees" : {
+                                        "nodes" : [ {
+                                            "country" : "TM",
+                                            "currency" : "USD",
+                                            "transferMethodType" : "WIRE_ACCOUNT",
+                                            "value" : "20.00",
+                                            "feeRateType" : "FLAT"
+                                        } ]
+                                    }
+                                } ]
+                            }
+                        } ]
+                    }
+                }, {
+                    "code" : "TC",
+                    "name" : "TURKS AND CAICOS ISLANDS",
+                    "currencies" : {
+                        "nodes" : [ {
+                            "code" : "USD",
+                            "name" : "USD",
+                            "transferMethodTypes" : {
+                                "nodes" : [ {
+                                    "code" : "WIRE_ACCOUNT",
+                                    "name" : "Wire Transfer",
+                                    "fees" : {
+                                        "nodes" : [ {
+                                            "country" : "TC",
+                                            "currency" : "USD",
+                                            "transferMethodType" : "WIRE_ACCOUNT",
+                                            "value" : "20.00",
+                                            "feeRateType" : "FLAT"
+                                        } ]
+                                    }
+                                } ]
+                            }
+                        } ]
+                    }
+                }, {
+                    "code" : "TV",
+                    "name" : "TUVALU",
+                    "currencies" : {
+                        "nodes" : [ {
+                            "code" : "USD",
+                            "name" : "USD",
+                            "transferMethodTypes" : {
+                                "nodes" : [ {
+                                    "code" : "WIRE_ACCOUNT",
+                                    "name" : "Wire Transfer",
+                                    "fees" : {
+                                        "nodes" : [ {
+                                            "country" : "TV",
+                                            "currency" : "USD",
+                                            "transferMethodType" : "WIRE_ACCOUNT",
+                                            "value" : "20.00",
+                                            "feeRateType" : "FLAT"
+                                        } ]
+                                    }
+                                } ]
+                            }
+                        } ]
+                    }
+                }, {
+                    "code" : "UG",
+                    "name" : "UGANDA",
+                    "currencies" : {
+                        "nodes" : [ {
+                            "code" : "USD",
+                            "name" : "USD",
+                            "transferMethodTypes" : {
+                                "nodes" : [ {
+                                    "code" : "WIRE_ACCOUNT",
+                                    "name" : "Wire Transfer",
+                                    "fees" : {
+                                        "nodes" : [ {
+                                            "country" : "UG",
+                                            "currency" : "USD",
+                                            "transferMethodType" : "WIRE_ACCOUNT",
+                                            "value" : "20.00",
+                                            "feeRateType" : "FLAT"
+                                        } ]
+                                    }
+                                } ]
+                            }
+                        } ]
+                    }
+                }, {
+                    "code" : "UA",
+                    "name" : "UKRAINE",
+                    "currencies" : {
+                        "nodes" : [ {
+                            "code" : "USD",
+                            "name" : "USD",
+                            "transferMethodTypes" : {
+                                "nodes" : [ {
+                                    "code" : "WIRE_ACCOUNT",
+                                    "name" : "Wire Transfer",
+                                    "fees" : {
+                                        "nodes" : [ {
+                                            "country" : "UA",
+                                            "currency" : "USD",
+                                            "transferMethodType" : "WIRE_ACCOUNT",
+                                            "value" : "20.00",
+                                            "feeRateType" : "FLAT"
+                                        } ]
+                                    }
+                                } ]
+                            }
+                        } ]
+                    }
                 }
             ]
         }

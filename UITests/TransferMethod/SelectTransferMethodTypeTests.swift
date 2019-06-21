@@ -3,6 +3,10 @@ import XCTest
 class SelectTransferMethodTypeTests: BaseTests {
     var selectTransferMethodType: SelectTransferMethodType!
     let bankAccount = NSPredicate(format: "label CONTAINS[c] 'Bank Account'")
+    let debitCard = NSPredicate(format: "label CONTAINS[c] 'Debit Card'")
+    let processingTime = NSPredicate(format: "label CONTAINS[c] 'Processing Time'")
+    let transactionFee = NSPredicate(format: "label CONTAINS[c] 'Transaction Fees'")
+    let wiretransfer = NSPredicate(format: "label CONTAINS[c] 'Wire Transfer'")
 
     override func setUp() {
         profileType = .individual
@@ -79,7 +83,7 @@ class SelectTransferMethodTypeTests: BaseTests {
         selectTransferMethodType.tapCountry()
 
         XCTAssert(app.tables.staticTexts["United States"].exists)
-        XCTAssertEqual(app.tables.cells.count, 5)
+        XCTAssertEqual(app.tables.cells.count, 30)
     }
 
     func testSelectTransferMethodType_verifyCurrencySelection() {
@@ -101,5 +105,43 @@ class SelectTransferMethodTypeTests: BaseTests {
         XCTAssertTrue(app.navigationBars["Bank Account"].exists)
         XCTAssertTrue(app.tables["addTransferMethodTable"].exists)
         XCTAssertTrue(app.tables.staticTexts["Account Information - United States (USD)"].exists)
+    }
+
+    func testSelectTransferMethodType_verifyCountrySelectionSearch() {
+        selectTransferMethodType.tapCountry()
+
+        selectTransferMethodType.typeSearch(input: "Mexico")
+        XCTAssertEqual(app.tables.cells.count, 1)
+        app.tables.staticTexts["Mexico"].tap()
+        XCTAssert(app.tables.staticTexts["Mexico"].exists)
+    }
+
+    func testSelectTransferMethod_clickBankAccountOpensAddTransferMethodUi () {
+        selectTransferMethodType.selectCountry(country: "United States")
+
+        app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: bankAccount).tap()
+        XCTAssert(app.navigationBars.staticTexts["Bank Account"].exists)
+    }
+
+    func testSelectTransferMethod_clickBankCardOpensAddTransferMethodUi () {
+        selectTransferMethodType.selectCountry(country: "United States")
+
+        app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: debitCard).tap()
+        XCTAssert(app.navigationBars.staticTexts["Debit Card"].exists)
+    }
+
+    func testSelectTransferMethod_verifyTransferMethodsListEmptyFee () {
+        selectTransferMethodType.selectCountry(country: "THAILAND")
+
+        XCTAssertTrue(app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: wiretransfer).exists)
+        XCTAssertFalse(app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: transactionFee).exists)
+    }
+
+    func testSelectTransferMethod_verifyTransferMethodsListEmptyProcessing () {
+        selectTransferMethodType.selectCountry(country: "SPAIN")
+
+        XCTAssertTrue(app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: wiretransfer).exists)
+        XCTAssertFalse(app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: processingTime).exists)
+        XCTAssertTrue(app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: transactionFee).exists)
     }
 }
