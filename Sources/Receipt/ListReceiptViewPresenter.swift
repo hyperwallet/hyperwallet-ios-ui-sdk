@@ -31,7 +31,7 @@ final class ListReceiptViewPresenter {
     private var offset = 0
     private let userReceiptLimit = 20
     private var prepaidCardToken: String?
-    private let prepaidCardReceiptLimit = 10
+    private let prepaidCardReceiptLimit = 20
     private var prepaidCardReceiptCreatedAfter = Calendar.current.date(byAdding: .year, value: -1, to: Date())
 
     private var isLoadInProgress = false
