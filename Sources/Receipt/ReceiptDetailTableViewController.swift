@@ -51,11 +51,7 @@ public final class ReceiptDetailTableViewController: UITableViewController {
         tableView.allowsSelection = false
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Theme.Cell.extraSmallHeight
-        tableView.separatorInset = UIEdgeInsets(
-            top: 0,
-            left: tableView.separatorInset.left,
-            bottom: 0,
-            right: .greatestFiniteMagnitude)
+        tableView.separatorStyle = .none
         tableView.accessibilityIdentifier = "receiptDetailTableView"
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)
