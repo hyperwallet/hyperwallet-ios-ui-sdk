@@ -19,79 +19,95 @@
 import UIKit
 
 final class ExpiryDatePickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSource {
-    var month: Int!
-    var year: Int!
+    private let currentDate = Date()
 
-    private var months = [String]()
-    private var years = [Int]()
+    var month: Int! {
+        return selectedDateComponents.value(for: .month)
+    }
+
+    var year: Int! {
+        return selectedDateComponents.value(for: .year)
+    }
+
+    private lazy var firstYear: Int = {
+        calendar.component(.year, from: currentDate)
+    }()
+
+    private lazy var locale: Locale = {
+        Locale(identifier: Locale.preferredLanguages[0])
+    }()
+
+    private lazy var calendar: Calendar = {
+        var calendar = Calendar.current
+        calendar.locale = locale
+        return calendar
+    }()
+
+    private lazy var localizedYearDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = locale
+        formatter.setLocalizedDateFormatFromTemplate("y")
+        return formatter
+    }()
+
+    private lazy var expiryDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "expiry_date_picker_format".localized()
+        return formatter
+    }()
+
+    private var selectedDateComponents = DateComponents()
+    private var localizedMonths = [String]()
+    private var localizedYears = [String]()
 
     convenience init(value: String?, frame: CGRect = .zero) {
         self.init(frame: frame)
-
-        if let values = value?.components(separatedBy: "-"),
-            values.count == 2,
-            let defaultMonth = Int(values[1]),
-            let defaultYear = Int(values[0]) {
-            month = defaultMonth
-            year = defaultYear
-        } else {
-            let currentDate = Date()
-            let currentCalendar = Calendar.current
-            month = currentCalendar.component(.month, from: currentDate)
-            year = currentCalendar.component(.year, from: currentDate)
+        setSelectedDateComponents(for: currentDate)
+        if let value = value, let date = expiryDateFormatter.date(from: value) {
+            setSelectedDateComponents(for: date)
         }
-
-        setupMonths()
-        setupYears(add: 10)
+        setupMonthsYears()
 
         delegate = self
         dataSource = self
 
-        // pick current month as default month for the picker and place the selected month in the center of picker
         selectRow(month - 1, inComponent: 0, animated: false)
+        selectRow(year % firstYear, inComponent: 1, animated: false)
+    }
+
+    func setSelectedDateComponents(for date: Date) {
+        selectedDateComponents.calendar = calendar
+        selectedDateComponents.setValue(1, for: .day)
+        selectedDateComponents.setValue(calendar.component(.month, from: date), for: .month)
+        selectedDateComponents.setValue(calendar.component(.year, from: date), for: .year)
     }
 
     // MARK: UIPicker Delegate / Data Source
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 2
-    }
+    func numberOfComponents(in pickerView: UIPickerView) -> Int { return 2 }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        month = selectedRow(inComponent: 0) + 1
-        year = years[selectedRow(inComponent: 1)]
+        let value = component == 0
+            ? row + 1
+            : row + firstYear
+        let component: Calendar.Component = component == 0
+            ? .month
+            : .year
+        selectedDateComponents.setValue(value, for: component)
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        switch component {
-        case 0:
-            return months.count
-
-        case 1:
-            return years.count
-
-        default:
-            return 0
-        }
+        return component == 0 ? localizedMonths.count : localizedYears.count
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        switch component {
-        case 0:
-            return months[row % months.count]
-
-        case 1:
-            return String(describing: years[row])
-
-        default:
-            return nil
-        }
+        return component == 0 ? localizedMonths[row] : localizedYears[row]
     }
 
-    private func setupMonths() {
-        months = DateFormatter().monthSymbols.map({ $0.capitalized })
-    }
-
-    private func setupYears(add: Int) {
-        years = Array(year...year + add)
+    private func setupMonthsYears(yearsRange: Int = 10) {
+        localizedMonths = localizedYearDateFormatter.standaloneMonthSymbols.map({ $0.capitalized })
+        localizedYears = (firstYear...firstYear + yearsRange).map({
+            let date = calendar.date(bySetting: .year, value: $0, of: currentDate)!
+            return localizedYearDateFormatter.string(from: date)
+        })
     }
 }
