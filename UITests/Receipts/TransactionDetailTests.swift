@@ -37,7 +37,7 @@ class TransactionDetailTests: BaseTests {
 
     // Debit Transaction
     func testReceiptDetail_verifyDebitTransaction() {
-        let expectedDateValue = "Fri, May 12, 2019, 6:16 PM"
+        let expectedDateValue = "Sun, May 12, 2019, 6:16 PM" // Sun, May 12, 2019, 6:16 PM
         openupReceiptsListScreenForFewMonths(isOneMonth: false)
         transactDetails.openReceipt(row: 1)
         let transactionDetailHeaderLabel = transactDetails.detailHeaderTitle
@@ -136,7 +136,7 @@ class TransactionDetailTests: BaseTests {
     private func verifyDetailSectionOptional() {
         let transactionVal = "8OxXefx5"
         let receiptVal = "3051579"
-        let dateVal = "Fri, May 3, 2019, 10:08 AM"
+        let dateVal = "Fri, May 3, 2019, 5:08 AM" // Fri, May 3, 2019, 5:08 PM in test environment
         let charityNameVal = "Sample Charity"
         let checkNumVal = "Sample Check Number"
         let websiteVal = "https://localhost"
