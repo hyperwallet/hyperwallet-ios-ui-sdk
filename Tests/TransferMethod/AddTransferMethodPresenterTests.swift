@@ -79,6 +79,33 @@ class AddTransferMethodPresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isNotificationSent, "The notification should be sent")
     }
 
+    func testCreateTransferMethod_createWireAccount() {
+        presenter = AddTransferMethodPresenter(mockView, "US", "USD", "INDIVIDUAL", "WIRE_ACCOUNT")
+        let url = String(format: "%@/bank-accounts", HyperwalletTestHelper.userRestURL)
+        let response = HyperwalletTestHelper.okHTTPResponse(for: "WireAccountIndividualResponse")
+        let request = HyperwalletTestHelper.buildPostResquest(baseUrl: url, response)
+        HyperwalletTestHelper.setUpMockServer(request: request)
+
+        // Add fields to the form
+        mockView.mockFieldValuesReturnResult.append((name: "bankAccountId", value: "675825207"))
+        mockView.mockFieldValuesReturnResult.append((name: "bankAccountPurpose", value: "CHECKING"))
+        mockView.mockFieldValuesReturnResult.append((name: "branchId", value: "026009593"))
+        mockView.mockFieldStatusReturnResult.append(true)
+
+        // press the create transfer method button
+        let expectation = self.expectation(description: "Create wire account completed")
+        mockView.expectation = expectation
+
+        presenter.createTransferMethod()
+
+        wait(for: [expectation], timeout: 1)
+
+        // Then
+        XCTAssertFalse(mockView.isShowErrorPerformed, "The showError should not be performed")
+        XCTAssertTrue(mockView.isShowConfirmationPerformed, "The showConfirmation should be performed")
+        XCTAssertTrue(mockView.isNotificationSent, "The notification should be sent")
+    }
+
     func testCreateTransferMethod_createBankCard() {
         presenter = AddTransferMethodPresenter(mockView, "US", "USD", "INDIVIDUAL", "BANK_CARD")
 

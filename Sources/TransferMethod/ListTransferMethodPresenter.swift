@@ -65,7 +65,7 @@ final class ListTransferMethodPresenter {
             let token = transferMethod.getField(fieldName: .token) as? String {
             selectedTransferMethod = transferMethod
             switch transferMethodType {
-            case "BANK_ACCOUNT":
+            case "BANK_ACCOUNT", "WIRE_ACCOUNT":
                 deactivateBankAccount(token)
             case "BANK_CARD":
                 deactivateBankCard(token)
@@ -156,24 +156,29 @@ final class ListTransferMethodPresenter {
     }
 
     private func getAdditionalInfo(_ transferMethod: HyperwalletTransferMethod) -> String? {
-        var additionlInfo: String?
+        var additionalInfo: String?
         switch transferMethod.getField(fieldName: .type) as? String {
-        case "BANK_ACCOUNT", "WIRE_ACCOUNT":
-            additionlInfo = transferMethod.getField(fieldName: .bankAccountId) as? String
-            additionlInfo = String(format: "%@%@",
-                                   "transfer_method_list_item_description".localized(),
-                                   additionlInfo?.suffix(startAt: 4) ?? "")
+        case "BANK_ACCOUNT":
+            additionalInfo = transferMethod.getField(fieldName: .bankAccountId) as? String
+            additionalInfo = String(format: "%@%@",
+                                    "transfer_method_list_item_description".localized(),
+                                    additionalInfo?.suffix(startAt: 4) ?? "")
         case "BANK_CARD":
-            additionlInfo = transferMethod.getField(fieldName: .cardNumber) as? String
-            additionlInfo = String(format: "%@%@",
-                                   "transfer_method_list_item_description".localized(),
-                                   additionlInfo?.suffix(startAt: 4) ?? "")
+            additionalInfo = transferMethod.getField(fieldName: .cardNumber) as? String
+            additionalInfo = String(format: "%@%@",
+                                    "transfer_method_list_item_description".localized(),
+                                    additionalInfo?.suffix(startAt: 4) ?? "")
         case "PAYPAL_ACCOUNT":
-            additionlInfo = transferMethod.getField(fieldName: .email) as? String
+            additionalInfo = transferMethod.getField(fieldName: .email) as? String
+        case "WIRE_ACCOUNT":
+            additionalInfo = transferMethod.getField(fieldName: .intermediaryBankAccountId) as? String
+            additionalInfo = String(format: "%@%@",
+                                    "transfer_method_list_item_description".localized(),
+                                    additionalInfo?.suffix(startAt: 4) ?? "")
 
         default:
             break
         }
-        return additionlInfo
+        return additionalInfo
     }
 }
