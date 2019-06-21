@@ -28,10 +28,10 @@ class TransactionDetailTests: BaseTests {
         }
 
         // DETAILS Section
-        verifyDetailSection(receiptID: "55176992", dateVal: "Fri, May 24, 2019, 11:16 AM", clientID: "DyClk0VG9a")
+        verifyDetailSection(receiptIdVal: "55176992", dateVal: "Fri, May 24, 2019, 11:16 AM", clientIdVal: "DyClk0VG9a")
 
         // FEE Section
-        verifyFeeSection(amount: "+6.00 USD", fee: "0.00 USD", transaction: "6.00 USD")
+        verifyFeeSection(amountVal: "+6.00 USD", feeVal: "0.00 USD", transactionVal: "6.00 USD")
     }
 
     // Debit Transaction
@@ -48,10 +48,10 @@ class TransactionDetailTests: BaseTests {
         }
 
         // DETAILS Section
-        verifyDetailSection(receiptID: "55176991", dateVal: "Sun, May 12, 2019, 11:16 AM", clientID: nil)
+        verifyDetailSection(receiptIdVal: "55176991", dateVal: "Sun, May 12, 2019, 11:16 AM", clientIdVal: nil)
 
         // FEE Section
-        verifyFeeSection(amount: "-5.00 USD", fee: "2.00 USD", transaction: "-7.00 USD")
+        verifyFeeSection(amountVal: "-5.00 USD", feeVal: "2.00 USD", transactionVal: "-7.00 USD")
     }
 
     func testReceiptDetail_verifyTransactionOptionalFields() {
@@ -105,28 +105,31 @@ class TransactionDetailTests: BaseTests {
     }
 
     // Detail section verification
-    private func verifyDetailSection(receiptID: String, dateVal: String, clientID: String?) {
+    private func verifyDetailSection(receiptIdVal: String, dateVal: String, clientIdVal: String?) {
         let receiptDetailTableviewTable = transactDetails.receiptDetailTableviewTable
         let detailsSectionLabel = transactDetails.detailSection
         let receiptLabel = transactDetails.receiptIdLabel
         let dateLabel = transactDetails.dateLabel
-        let receiptID = receiptDetailTableviewTable.staticTexts[receiptID]
+        let receiptID = receiptDetailTableviewTable.staticTexts[receiptIdVal]
         let date = receiptDetailTableviewTable.staticTexts[dateVal]
 
         XCTAssertTrue(detailsSectionLabel.exists)
         XCTAssertTrue(receiptLabel.exists)
-
         XCTAssertTrue(dateLabel.exists)
         XCTAssertTrue(receiptID.exists)
+        XCTAssertEqual(receiptID.label, receiptIdVal)
+
         // skip the test on iOS 10 as simulator time is not correct - possible XCode's bug
         if #available(iOS 11, *) {
             XCTAssertTrue(date.exists)
             XCTAssertEqual(date.label, dateVal)
         }
-        if let clientID = clientID {
+        if let clientIdVal = clientIdVal {
             let clientTransIDLabel = transactDetails.clientTransactionIdLabel
             XCTAssertTrue(clientTransIDLabel.exists)
-            XCTAssertTrue(receiptDetailTableviewTable.staticTexts[clientID].exists)
+            let clientID = receiptDetailTableviewTable.staticTexts[clientIdVal]
+            XCTAssertTrue(clientID.exists)
+            XCTAssertEqual(clientID.label, clientIdVal)
         }
     }
 
@@ -180,15 +183,15 @@ class TransactionDetailTests: BaseTests {
     }
 
     // FEE section verification
-    private func verifyFeeSection(amount: String, fee: String, transaction: String) {
+    private func verifyFeeSection(amountVal: String, feeVal: String, transactionVal: String) {
         let receiptDetailTableviewTable = transactDetails.receiptDetailTableviewTable
         let feeSectionLabel = transactDetails.feeSection
         let amountLabel = transactDetails.amountLabel
         let feeLabel = transactDetails.feeLabel
         let transactionLabel = transactDetails.transactionLabel
-        let amount = receiptDetailTableviewTable.staticTexts[amount]
-        let fee = receiptDetailTableviewTable.staticTexts[fee]
-        let transaction = receiptDetailTableviewTable.staticTexts[transaction]
+        let amount = receiptDetailTableviewTable.staticTexts[amountVal]
+        let fee = receiptDetailTableviewTable.staticTexts[feeVal]
+        let transaction = receiptDetailTableviewTable.staticTexts[transactionVal]
 
         XCTAssertTrue(feeSectionLabel.exists)
         XCTAssertTrue(amountLabel.exists)
@@ -197,5 +200,8 @@ class TransactionDetailTests: BaseTests {
         XCTAssertTrue(amount.exists)
         XCTAssertTrue(fee.exists)
         XCTAssertTrue(transaction.exists)
+        XCTAssertEqual(amount.label, amountVal)
+        XCTAssertEqual(fee.label, feeVal)
+        XCTAssertEqual(transaction.label, transactionVal)
     }
 }
