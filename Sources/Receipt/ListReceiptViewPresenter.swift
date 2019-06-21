@@ -122,7 +122,6 @@ final class ListReceiptViewPresenter {
                         strongSelf.view.showError(error, { strongSelf.listUserReceipts() })
                         return
                     } else if let result = result {
-                        print("For User receipts: \(result.data.count)")
                         strongSelf.groupReceiptsByMonth(result.data)
                         strongSelf.areAllReceiptsLoaded =
                             result.data.count < strongSelf.userReceiptLimit ? true : false

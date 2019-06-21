@@ -89,7 +89,6 @@ public final class ListReceiptTableViewController: UITableViewController {
     override public func tableView(_ tableView: UITableView,
                                    willDisplay cell: UITableViewCell,
                                    forRowAt indexPath: IndexPath) {
-        print("Displaying Setion: \(indexPath.section), cell: \(indexPath.row)")
         let lastSectionIndex = presenter.sectionData.count - 1
         if indexPath.section == lastSectionIndex
             && indexPath.row == presenter.sectionData[lastSectionIndex].value.count - 1
