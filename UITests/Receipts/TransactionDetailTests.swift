@@ -121,7 +121,6 @@ class TransactionDetailTests: BaseTests {
 
         // skip the test on iOS 10 as simulator time is not correct - possible XCode's bug
         if #available(iOS 11, *) {
-            XCTAssertTrue(date.exists)
             XCTAssertEqual(date.label, dateVal)
         }
         if let clientIdVal = clientIdVal {
@@ -176,8 +175,6 @@ class TransactionDetailTests: BaseTests {
 
         // skip the test on iOS 10 as simulator time is not correct - possible XCode's bug
         if #available(iOS 11, *) {
-            XCTAssertTrue(dateLabel.exists)
-            XCTAssertTrue(date.exists)
             XCTAssertEqual(date.label, dateVal)
         }
     }
