@@ -26,6 +26,7 @@ public final class ListReceiptTableViewController: UITableViewController {
     private var presenter: ListReceiptViewPresenter!
     private var defaultHeaderHeight = CGFloat(38.0)
     private let sectionTitleDateFormat = "MMMM yyyy"
+    private var loadMoreReceipts = false
 
     private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "empty_list_receipt_message".localized())
 
@@ -88,11 +89,12 @@ public final class ListReceiptTableViewController: UITableViewController {
     override public func tableView(_ tableView: UITableView,
                                    willDisplay cell: UITableViewCell,
                                    forRowAt indexPath: IndexPath) {
+        print("Displaying Setion: \(indexPath.section), cell: \(indexPath.row)")
         let lastSectionIndex = presenter.sectionData.count - 1
         if indexPath.section == lastSectionIndex
             && indexPath.row == presenter.sectionData[lastSectionIndex].value.count - 1
             && !presenter.areAllReceiptsLoaded {
-            presenter.listReceipts()
+            loadMoreReceipts = true
         }
     }
 
@@ -102,6 +104,13 @@ public final class ListReceiptTableViewController: UITableViewController {
 
     override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return Theme.Cell.mediumHeight
+    }
+
+    override public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if loadMoreReceipts {
+            presenter.listReceipts()
+            loadMoreReceipts = false
+        }
     }
 
     // MARK: set up list receipt table view
