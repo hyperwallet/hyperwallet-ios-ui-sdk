@@ -49068,6 +49068,23 @@
                                                     }
                                                 ]
                                             }
+                                        },
+                                        {
+                                            "code": "WIRE_ACCOUNT",
+                                            "name": "Wire Transfer",
+                                            "processingTime": "1-3 Business days",
+                                            "fees": {
+                                                "nodes": [
+                                                    {
+                                                        "country": "US",
+                                                        "currency": "USD",
+                                                        "processingTime": "1-3 Business days",
+                                                        "transferMethodType": "WIRE_ACCOUNT",
+                                                        "value": "20.00",
+                                                        "feeRateType": "FLAT"
+                                                    }
+                                                ]
+                                            }
                                         }
                                     ]
                                 }

@@ -156,6 +156,18 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
         addTransferMethod.clickBackButton()
         XCTAssertTrue(selectTransferMethodType.navigationBar.exists)
     }
+
+    func testAddTransferMethod_verifyNotEditableFields() {
+        addTransferMethod.clickBackButton()
+        app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: bankAccount).tap()
+        addTransferMethod.firstNameInput.tap()
+
+        XCTAssertFalse(app.keyboards.element.exists)
+
+        addTransferMethod.lastNameInput.tap()
+
+        XCTAssertFalse(app.keyboards.element.exists)
+    }
 }
 
 private extension AddTransferMethodBankAccountIndividualTests {
@@ -272,18 +284,6 @@ private extension AddTransferMethodBankAccountIndividualTests {
 
         XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["Zip/Postal Code"].exists)
         XCTAssert(addTransferMethod.zipInput.exists)
-
-        func testAddTransferMethod_verifyNotEditableFields() {
-            addTransferMethod.clickBackButton()
-            app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: bankAccount).tap()
-            addTransferMethod.firstNameInput.tap()
-
-            XCTAssertFalse(app.keyboards.element.exists)
-
-            addTransferMethod.lastNameInput.tap()
-
-            XCTAssertFalse(app.keyboards.element.exists)
-        }
     }
 
     func verifyPresetValue(for uiElement: XCUIElement, with text: String) {
