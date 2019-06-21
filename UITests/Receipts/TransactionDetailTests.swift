@@ -17,6 +17,7 @@ class TransactionDetailTests: BaseTests {
 
     // Credit Transaction
     func testReceiptDetail_verifyCreditTransaction() {
+        let expectedDateValue = "Fri, May 24, 2019, 6:16 PM"
         openupReceiptsListScreenForFewMonths(isOneMonth: false)
         transactDetails.openReceipt(row: 0)
         let transactionDetailHeaderLabel = transactDetails.detailHeaderTitle
@@ -28,7 +29,7 @@ class TransactionDetailTests: BaseTests {
         }
 
         // DETAILS Section
-        verifyDetailSection(receiptIdVal: "55176992", dateVal: "Fri, May 24, 2019, 11:16 AM", clientIdVal: "DyClk0VG9a")
+        verifyDetailSection(receiptIdVal: "55176992", dateVal: expectedDateValue, clientIdVal: "DyClk0VG9a")
 
         // FEE Section
         verifyFeeSection(amountVal: "+6.00 USD", feeVal: "0.00 USD", transactionVal: "6.00 USD")
@@ -36,6 +37,7 @@ class TransactionDetailTests: BaseTests {
 
     // Debit Transaction
     func testReceiptDetail_verifyDebitTransaction() {
+        let expectedDateValue = "Fri, May 12, 2019, 6:16 PM"
         openupReceiptsListScreenForFewMonths(isOneMonth: false)
         transactDetails.openReceipt(row: 1)
         let transactionDetailHeaderLabel = transactDetails.detailHeaderTitle
@@ -48,7 +50,7 @@ class TransactionDetailTests: BaseTests {
         }
 
         // DETAILS Section
-        verifyDetailSection(receiptIdVal: "55176991", dateVal: "Sun, May 12, 2019, 11:16 AM", clientIdVal: nil)
+        verifyDetailSection(receiptIdVal: "55176991", dateVal: expectedDateValue, clientIdVal: nil)
 
         // FEE Section
         verifyFeeSection(amountVal: "-5.00 USD", feeVal: "2.00 USD", transactionVal: "-7.00 USD")
@@ -119,10 +121,8 @@ class TransactionDetailTests: BaseTests {
         XCTAssertTrue(receiptID.exists)
         XCTAssertEqual(receiptID.label, receiptIdVal)
 
-        // skip the test on iOS 10 as simulator time is not correct - possible XCode's bug
-        if #available(iOS 11, *) {
-            XCTAssertEqual(date.label, dateVal)
-        }
+        XCTAssertEqual(date.label, dateVal)
+
         if let clientIdVal = clientIdVal {
             let clientTransIDLabel = transactDetails.clientTransactionIdLabel
             XCTAssertTrue(clientTransIDLabel.exists)
@@ -173,10 +173,7 @@ class TransactionDetailTests: BaseTests {
         XCTAssertTrue(website.exists)
         XCTAssertTrue(notes.exists)
 
-        // skip the test on iOS 10 as simulator time is not correct - possible XCode's bug
-        if #available(iOS 11, *) {
-            XCTAssertEqual(date.label, dateVal)
-        }
+        XCTAssertEqual(date.label, dateVal)
     }
 
     // FEE section verification
@@ -197,8 +194,5 @@ class TransactionDetailTests: BaseTests {
         XCTAssertTrue(amount.exists)
         XCTAssertTrue(fee.exists)
         XCTAssertTrue(transaction.exists)
-        XCTAssertEqual(amount.label, amountVal)
-        XCTAssertEqual(fee.label, feeVal)
-        XCTAssertEqual(transaction.label, transactionVal)
     }
 }
