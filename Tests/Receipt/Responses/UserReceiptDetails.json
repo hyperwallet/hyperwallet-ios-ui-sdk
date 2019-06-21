@@ -32,5 +32,20 @@
             "checkNumber": "Check Number 123",
             "website": "https://test.tt"
         }
+    },
+    {
+        "journalId": "55176990",
+        "type": "PAYMENT",
+        "createdOn": "2019-04-29T18:09:09",
+        "entry": "DEBIT",
+        "sourceToken": "act-123456789",
+        "destinationToken": "usr-123456789",
+        "amount": "100500",
+        "fee": "500",
+        "currency": "KRW",
+        "details": {
+            "clientPaymentId": "DqqCjwk0tt52a",
+            "payeeName": "Shaoyun Yang"
+        }
     }
 ]

@@ -6,6 +6,7 @@ class ReceiptDetailPresenterTests: XCTestCase {
     let receiptsData = HyperwalletTestHelper.getDataFromJson("UserReceiptDetails")
     var presenterNoNotes: ReceiptDetailViewPresenter!
     var presenterWithNotes: ReceiptDetailViewPresenter!
+    var presenterWithIntegerAmount: ReceiptDetailViewPresenter!
 
     override func setUp() {
         guard let receipts = try? JSONDecoder().decode([HyperwalletReceipt].self, from: receiptsData) else {
@@ -14,6 +15,7 @@ class ReceiptDetailPresenterTests: XCTestCase {
         }
         presenterNoNotes = ReceiptDetailViewPresenter(with: receipts[0])
         presenterWithNotes = ReceiptDetailViewPresenter(with: receipts[1])
+        presenterWithIntegerAmount = ReceiptDetailViewPresenter(with: receipts[2])
     }
 
     func testSectionDataShouldNotBeEmpty() {
@@ -81,6 +83,20 @@ class ReceiptDetailPresenterTests: XCTestCase {
         XCTAssertTrue(rowEqual(section.rows[0], ("Amount:", "-9.87 USD")))
         XCTAssertTrue(rowEqual(section.rows[1], ("Fee:", "0.11 USD")))
         XCTAssertTrue(rowEqual(section.rows[2], ("Transaction:", "-9.98 USD")))
+    }
+
+    func testSectionFeeDataWithIntegerAmountShouldNotBeEmpty() {
+        guard let section = presenterWithIntegerAmount.sectionData[2] as? ReceiptDetailSectionFeeData else {
+            XCTFail("Section Fee Data shouldn't be empty")
+            return
+        }
+        XCTAssertEqual(section.receiptDetailSectionHeader, .fee)
+        XCTAssertEqual(section.cellIdentifier, ReceiptFeeTableViewCell.reuseIdentifier)
+        XCTAssertEqual(section.rowCount, 3)
+
+        XCTAssertTrue(rowEqual(section.rows[0], ("Amount:", "-100500 KRW")))
+        XCTAssertTrue(rowEqual(section.rows[1], ("Fee:", "500 KRW")))
+        XCTAssertTrue(rowEqual(section.rows[2], ("Transaction:", "-101000 KRW")))
     }
 
     func testSectionNotesDataShouldNotBeEmpty() {
