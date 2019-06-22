@@ -136,7 +136,7 @@ class TransactionDetailTests: BaseTests {
     private func verifyDetailSectionOptional() {
         let transactionVal = "8OxXefx5"
         let receiptVal = "3051579"
-        let dateVal = "Fri, May 3, 2019, 5:08 AM" // Fri, May 3, 2019, 5:08 PM in test environment
+        let dateVal = "Fri, May 3, 2019, 5:08 PM" // Fri, May 3, 2019, 5:08 PM in test environment
         let charityNameVal = "Sample Charity"
         let checkNumVal = "Sample Check Number"
         let websiteVal = "https://localhost"
