@@ -229,7 +229,7 @@
 		078B45722273895C005B0248 /* SelectTransferMethodTypePresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectTransferMethodTypePresenterTests.swift; sourceTree = "<group>"; };
 		078B45732273895C005B0248 /* AddTransferMethodPresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodPresenterTests.swift; sourceTree = "<group>"; };
 		078B45802273A441005B0248 /* HyperwalletUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletUI.swift; sourceTree = "<group>"; };
-		07B1FE5922B8133800F461D0 /* CreateTransferTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateTransferTableViewController.swift; path = ../../../../../.Trash/CreateTransferTableViewController.swift; sourceTree = "<group>"; };
+		07B1FE5922B8133800F461D0 /* CreateTransferTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTransferTableViewController.swift; sourceTree = "<group>"; };
 		07B1FE5B22B8746A00F461D0 /* ScheduleTransferSummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTransferSummaryCell.swift; sourceTree = "<group>"; };
 		07B1FE5D22B8A72D00F461D0 /* ScheduleTransferNotesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTransferNotesCell.swift; sourceTree = "<group>"; };
 		07BE415E229DE181002DECAF /* UserReceiptResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserReceiptResponse.json; sourceTree = "<group>"; };
