@@ -149,8 +149,8 @@ final class ListReceiptViewPresenter {
                         strongSelf.areAllReceiptsLoaded =
                             result.data.count < strongSelf.prepaidCardReceiptLimit ? true : false
 
-                        if let receiptsWithoutDuplicate = strongSelf.loadedReceiptWithoutDuplicate(from: result) {
-                            strongSelf.groupReceiptsByMonth(receiptsWithoutDuplicate)
+                        strongSelf.groupReceiptsByMonth(result.data)
+                        if let receiptsWithoutDuplicate = strongSelf.loadedReceiptWithoutDuplicate() {
                             strongSelf.setCreatedAfter(from: receiptsWithoutDuplicate)
                         }
                     }
@@ -180,15 +180,13 @@ final class ListReceiptViewPresenter {
         }
     }
 
-    private func loadedReceiptWithoutDuplicate(from result: HyperwalletPageList<HyperwalletReceipt>)
-        -> [HyperwalletReceipt]? {
-            let receipts = result.data
+    private func loadedReceiptWithoutDuplicate() -> [HyperwalletReceipt]? {
             var loadedReceipts = [HyperwalletReceipt]()
 
             sectionData.forEach { loadedReceipts.append(contentsOf: $0.value) }
 
             if loadedReceipts.isNotEmpty() {
-                return  receipts.filter { !loadedReceipts.contains($0) }
+                return  sectionData.last?.value.filter { !loadedReceipts.contains($0) }
             } else {
                 return nil
             }

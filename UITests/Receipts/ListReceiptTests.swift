@@ -194,5 +194,4 @@ class ListReceiptTests: BaseTests {
         app.tables.cells.containing(.staticText, identifier: "List User Receipts").element(boundBy: 0).tap()
         waitForNonExistence(spinner)
     }
-
 }
