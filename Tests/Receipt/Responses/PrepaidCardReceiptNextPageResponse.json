@@ -4,7 +4,7 @@
     "limit": 20,
     "data": [
         {
-            "journalId": "55176989",
+            "journalId": "55176990",
             "type": "PAYMENT",
             "createdOn": "2019-05-28T18:16:12",
             "entry": "CREDIT",

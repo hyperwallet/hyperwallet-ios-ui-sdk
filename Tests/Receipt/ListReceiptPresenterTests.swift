@@ -27,11 +27,11 @@ class ListReceiptPresenterTests: XCTestCase {
         mockView.resetStates()
     }
     //swiftlint:disable function_body_length
-    func testListReceipt_success() {
+    func testListUserReceipt_success() {
         // Given
         HyperwalletTestHelper.setUpMockServer(request: setUpReceiptRequest(listReceiptPayload))
 
-        let expectation = self.expectation(description: "load receipts")
+        let expectation = self.expectation(description: "load user receipts")
         mockView.expectation = expectation
 
         // When
@@ -70,7 +70,7 @@ class ListReceiptPresenterTests: XCTestCase {
         // Given
         HyperwalletTestHelper.setUpMockServer(request: setUpReceiptRequest(listReceiptNextPagePayload))
 
-        let expectationLoadMore = self.expectation(description: "load more receipts")
+        let expectationLoadMore = self.expectation(description: "load more user receipts")
         mockView.expectation = expectationLoadMore
 
         // When
@@ -96,12 +96,12 @@ class ListReceiptPresenterTests: XCTestCase {
                        "The receipt number of the last group should be 3")
     }
 
-    func testListReceipt_failureWithError() {
+    func testListUserReceipt_failureWithError() {
         // Given
         HyperwalletTestHelper.setUpMockServer(request:
             setUpReceiptRequest(listReceiptPayload, (NSError(domain: "", code: -1009, userInfo: nil))))
 
-        let expectation = self.expectation(description: "load receipt")
+        let expectation = self.expectation(description: "load user receipt")
         mockView.expectation = expectation
 
         // When
@@ -116,7 +116,6 @@ class ListReceiptPresenterTests: XCTestCase {
         XCTAssertEqual(presenter.sectionData.count, 0, "The count of sections should be 0")
     }
 
-    //swiftlint:disable function_body_length
     func testListPrepaidCardReceipt_success() {
         presenter = ListReceiptViewPresenter(view: mockView, prepaidCardToken: "trm-123456789")
 
@@ -125,12 +124,12 @@ class ListReceiptPresenterTests: XCTestCase {
                                                                            nil,
                                                                            "trm-123456789"))
 
-        let expectation = self.expectation(description: "load receipts")
+        let expectation = self.expectation(description: "load prepaid card receipts")
         mockView.expectation = expectation
 
         // When
         presenter.listReceipts()
-        wait(for: [expectation], timeout: 100)
+        wait(for: [expectation], timeout: 1)
 
         // Then
 
@@ -157,20 +156,42 @@ class ListReceiptPresenterTests: XCTestCase {
                                                                            nil,
                                                                            "trm-123456789"))
 
-        let expectationLoadMore = self.expectation(description: "load more receipts")
+        let expectationLoadMore = self.expectation(description: "load more prepaid card receipts")
         mockView.expectation = expectationLoadMore
 
         // When
         presenter.listReceipts()
-        wait(for: [expectationLoadMore], timeout: 100)
+        wait(for: [expectationLoadMore], timeout: 1)
 
         // Then
         XCTAssertEqual(presenter.sectionData.count,
                        8,
                        "The count of sections should be 8")
         XCTAssertEqual(presenter.sectionData[4].value.count,
-                       4,
-                       "The receipt number of the fifth section should be 4")
+                       3,
+                       "The receipt number of the fifth section should be 3")
+    }
+
+    func testListPrepaidCardReceipt_failureWithError() {
+        // Given
+        presenter = ListReceiptViewPresenter(view: mockView, prepaidCardToken: "trm-123456789")
+
+        HyperwalletTestHelper.setUpMockServer(request:
+            setUpReceiptRequest(listReceiptPayload, (NSError(domain: "", code: -1009, userInfo: nil)), "trm-123456789"))
+
+        let expectation = self.expectation(description: "load prepaid card receipt")
+        mockView.expectation = expectation
+
+        // When
+        presenter.listReceipts()
+        wait(for: [expectation], timeout: 1)
+
+        // Then
+        XCTAssertTrue(mockView.isShowLoadingPerformed, "The showLoading should be performed")
+        XCTAssertTrue(mockView.isShowErrorPerformed, "The showError should be performed")
+        XCTAssertFalse(mockView.isLoadReceiptPerformed, "The loadReceipt should not be performed")
+
+        XCTAssertEqual(presenter.sectionData.count, 0, "The count of sections should be 0")
     }
 
     private func setUpReceiptRequest(_ payload: Data,
