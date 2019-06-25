@@ -22,12 +22,12 @@ import UIKit
 ///
 /// The user can deactivate and add a new transfer method.
 public final class ScheduleTransferTableViewController: UITableViewController, UITextFieldDelegate {
-    private var presenter: ScheduleTransferPresenter!
+    private var presenter: ScheduleTransferViewPresenter!
     private var transferMethod: HyperwalletTransferMethod
     private var transfer: HyperwalletTransfer
 
     private let registeredCells: [(type: AnyClass, id: String)] = [
-        (ListTransferMethodTableViewCell.self, ListTransferMethodTableViewCell.reuseIdentifier),
+        (SelectDestinationTableViewCell.self, SelectDestinationTableViewCell.reuseIdentifier),
         (ScheduleTransferForeignExchangeCell.self, ScheduleTransferForeignExchangeCell.reuseIdentifier),
         (ScheduleTransferSummaryCell.self, ScheduleTransferSummaryCell.reuseIdentifier),
         (ScheduleTransferNotesCell.self, ScheduleTransferNotesCell.reuseIdentifier),
@@ -54,7 +54,7 @@ public final class ScheduleTransferTableViewController: UITableViewController, U
 
         // setup table view
         setUpScheduleTransferTableView()
-        presenter = ScheduleTransferPresenter(view: self, transferMethod: transferMethod, transfer: transfer)
+        presenter = ScheduleTransferViewPresenter(view: self, transferMethod: transferMethod, transfer: transfer)
         presenter.initializeSections()
     }
 
@@ -92,7 +92,7 @@ extension ScheduleTransferTableViewController {
         let section = presenter.sectionData[indexPath.section]
         switch section.scheduleTransferSectionHeader {
         case .destination:
-            if let tableViewCell = cell as? ListTransferMethodTableViewCell,
+            if let tableViewCell = cell as? SelectDestinationTableViewCell,
                 let destinationData = section as? ScheduleTransferDestinationData,
                 let configuration = destinationData.configuration {
                 tableViewCell.configure(configuration: configuration)

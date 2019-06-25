@@ -36,8 +36,8 @@ extension ScheduleTransferSectionData {
 
 struct ScheduleTransferDestinationData: ScheduleTransferSectionData {
     var scheduleTransferSectionHeader: ScheduleTransferSectionHeader { return .destination }
-    var cellIdentifier: String { return ListTransferMethodTableViewCell.reuseIdentifier }
-    var configuration: ListTransferMethodCellConfiguration?
+    var cellIdentifier: String { return SelectDestinationTableViewCell.reuseIdentifier }
+    var configuration: SelectDestinationCellConfiguration?
     var transferMethod: HyperwalletTransferMethod
 
     init(transferMethod: HyperwalletTransferMethod) {
@@ -48,7 +48,7 @@ struct ScheduleTransferDestinationData: ScheduleTransferSectionData {
     mutating func setUpCellConfiguration(transferMethod: HyperwalletTransferMethod) {
         if let country = transferMethod.getField(fieldName: .transferMethodCountry) as? String,
             let transferMethodType = transferMethod.getField(fieldName: .type) as? String {
-            configuration = ListTransferMethodCellConfiguration(
+            configuration = SelectDestinationCellConfiguration(
                 transferMethodType: transferMethodType.lowercased().localized(),
                 transferMethodCountry: country.localized(),
                 additionalInfo: getAdditionalInfo(transferMethod),
@@ -112,16 +112,18 @@ struct ScheduleTransferForeignExchangeData: ScheduleTransferSectionData {
 struct ScheduleTransferSummaryData: ScheduleTransferSectionData {
     var rows = [(title: String, value: String)]()
     var scheduleTransferSectionHeader: ScheduleTransferSectionHeader { return .summary }
-    var rowCount: Int { return 3 }
+    var rowCount: Int { return rows.count }
     var cellIdentifier: String { return ScheduleTransferSummaryCell.reuseIdentifier }
 
     init(transfer: HyperwalletTransfer) {
         let transferAmount = String(format: "%@ %@", transfer.sourceAmount!, transfer.destinationCurrency!)
-        let fee = String(format: "%@ %@", transfer.destinationFeeAmount!, transfer.destinationCurrency!)
-        let amoutReceived = String(format: "%@ %@", transfer.destinationAmount!, transfer.destinationCurrency!)
         rows.append((title: "Amount:", value: transferAmount))
-        rows.append((title: "Fee:", value: fee))
-        rows.append((title: "You will receive:", value: amoutReceived))
+        if let destinationFeeAmount = transfer.destinationFeeAmount {
+            let fee = String(format: "%@ %@", destinationFeeAmount, transfer.destinationCurrency!)
+            let amoutReceived = String(format: "%@ %@", transfer.destinationAmount!, transfer.destinationCurrency!)
+            rows.append((title: "Fee:", value: fee))
+            rows.append((title: "You will receive:", value: amoutReceived))
+        }
     }
 }
 

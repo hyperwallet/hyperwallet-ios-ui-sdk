@@ -38,17 +38,17 @@ extension CreateTransferSectionData {
 
 struct CreateTransferDestinationData: CreateTransferSectionData {
     var createTransferSectionHeader: CreateTransferSectionHeader { return .destination }
-    var cellIdentifier: String { return ListTransferMethodTableViewCell.reuseIdentifier }
-    var configuration: ListTransferMethodCellConfiguration?
+    var cellIdentifier: String { return SelectDestinationTableViewCell.reuseIdentifier }
+    var configuration: SelectDestinationCellConfiguration?
 
     init(transferMethod: HyperwalletTransferMethod) {
         configuration = setUpCellConfiguration(transferMethod: transferMethod)
     }
 
-    private func setUpCellConfiguration(transferMethod: HyperwalletTransferMethod) -> ListTransferMethodCellConfiguration? {
+    private func setUpCellConfiguration(transferMethod: HyperwalletTransferMethod) -> SelectDestinationCellConfiguration? {
            if let country = transferMethod.getField(fieldName: .transferMethodCountry) as? String,
            let transferMethodType = transferMethod.getField(fieldName: .type) as? String {
-             return ListTransferMethodCellConfiguration(
+             return SelectDestinationCellConfiguration(
                 transferMethodType: transferMethodType.lowercased().localized(),
                 transferMethodCountry: country.localized(),
                 additionalInfo: getAdditionalInfo(transferMethod),
@@ -84,7 +84,7 @@ struct CreateTransferDestinationData: CreateTransferSectionData {
 struct CreateTransferUserInputData: CreateTransferSectionData {
     var rows = [(title: String?, value: String?)]()
     var createTransferSectionHeader: CreateTransferSectionHeader { return .amount }
-    var rowCount: Int { return 2 }
+    var rowCount: Int { return rows.count }
     var cellIdentifier: String { return CreateTransferUserInputCell.reuseIdentifier }
     var configuration: CreateTransferUserInputCellConfiguration!
 

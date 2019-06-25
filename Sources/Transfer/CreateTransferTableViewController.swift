@@ -22,8 +22,9 @@ import UIKit
 ///
 /// The user can deactivate and add a new transfer method.
 public final class CreateTransferTableViewController: UITableViewController {
-    private var presenter: CreateTransferPresenter!
-    private var selectedTransferMethod: HyperwalletTransferMethod!
+    typealias SelectItemHandler = (_ value: SelectDestinationCellConfiguration) -> Void
+    typealias MarkCellHandler = (_ value: SelectDestinationCellConfiguration) -> Bool
+    private var presenter: CreateTransferViewPresenter!
     private var spinnerView: SpinnerView?
     private var sourceToken: String
     private var clientTransferId: String
@@ -31,7 +32,7 @@ public final class CreateTransferTableViewController: UITableViewController {
     private var transferDescription: String?
 
     private let registeredCells: [(type: AnyClass, id: String)] = [
-        (ListTransferMethodTableViewCell.self, ListTransferMethodTableViewCell.reuseIdentifier),
+        (SelectDestinationTableViewCell.self, SelectDestinationTableViewCell.reuseIdentifier),
         (CreateTransferUserInputCell.self, CreateTransferUserInputCell.reuseIdentifier),
         (CreateTransferButtonCell.self, CreateTransferButtonCell.reuseIdentifier)
     ]
@@ -58,13 +59,13 @@ public final class CreateTransferTableViewController: UITableViewController {
         setUpCreateTransferTableView()
         hideKeyboardWhenTappedAround()
 
-        presenter = CreateTransferPresenter(view: self)
+        presenter = CreateTransferViewPresenter(view: self)
         presenter.loadTransferMethods()
     }
 
     private func setUpCreateTransferTableView() {
         tableView = UITableView(frame: view.frame, style: .grouped)
-        tableView.accessibilityIdentifier = "addTransferTableView"
+        tableView.accessibilityIdentifier = "createTransferTableView"
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)
         }
@@ -95,7 +96,7 @@ extension CreateTransferTableViewController {
         let section = presenter.sectionData[indexPath.section]
         switch section.createTransferSectionHeader {
         case .destination:
-            if let tableViewCell = cell as? ListTransferMethodTableViewCell,
+            if let tableViewCell = cell as? SelectDestinationTableViewCell,
                 let destinationData = section as? CreateTransferDestinationData,
                 let configuration = destinationData.configuration {
                 tableViewCell.accessoryType = .disclosureIndicator
@@ -195,7 +196,7 @@ extension CreateTransferTableViewController {
     private func tapTransferAll(sender: UITapGestureRecognizer) {
         // TODO remove the mocked response
         let transefer = HyperwalletTransfer(sourceToken: sourceToken,
-                                            destinationToken: selectedTransferMethod
+                                            destinationToken: presenter.selectedTransferMethod
                                                 .getField(fieldName: .token) as? String,
                                             clientTransferId: clientTransferId,
                                             sourceAmount: nil,
@@ -212,28 +213,29 @@ extension CreateTransferTableViewController {
     @objc
     private func tapNext(sender: UITapGestureRecognizer) {
         // TODO remove the mocked response
-        let foreignExchangeOne = HyperwalletForeignExchange(sourceAmount: "100.00",
-                                                            sourceCurrency: "CAD",
-                                                            destinationAmount: "70.00",
-                                                            destinationCurrency: "USD",
-                                                            rate: "0.7")
-        let foreignExchangeTwo = HyperwalletForeignExchange(sourceAmount: "120.00",
-                                                            sourceCurrency: "CAD",
-                                                            destinationAmount: "110.00",
-                                                            destinationCurrency: "USD",
-                                                            rate: "0.86")
+//        let foreignExchangeOne = HyperwalletForeignExchange(sourceAmount: "100.00",
+//                                                            sourceCurrency: "CAD",
+//                                                            destinationAmount: "70.00",
+//                                                            destinationCurrency: "USD",
+//                                                            rate: "0.7")
+//        let foreignExchangeTwo = HyperwalletForeignExchange(sourceAmount: "120.00",
+//                                                            sourceCurrency: "CAD",
+//                                                            destinationAmount: "110.00",
+//                                                            destinationCurrency: "USD",
+//                                                            rate: "0.86")
 
         let transefer = HyperwalletTransfer(sourceToken: sourceToken,
-                                            destinationToken: selectedTransferMethod
+                                            destinationToken: presenter.selectedTransferMethod
                                                              .getField(fieldName: .token) as? String,
                                             clientTransferId: clientTransferId,
                                             sourceAmount: transferAmount,
                                             destinationAmount: "20.00",
-                                            destinationFeeAmount: "1.00",
+                                            destinationFeeAmount: nil,
                                             notes: transferDescription,
-                                            destinationCurrency: selectedTransferMethod
+                                            destinationCurrency: presenter.selectedTransferMethod
                                                 .getField(fieldName: .transferMethodCurrency) as? String,
-                                            foreignExchanges: [foreignExchangeOne, foreignExchangeTwo],
+                                            foreignExchanges: nil,
+//                                            [foreignExchangeOne, foreignExchangeTwo],
                                             token: "trf-12345")
 
         presenter.createTransfer(transefer)
@@ -265,14 +267,14 @@ extension CreateTransferTableViewController {
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if presenter.sectionData[indexPath.section].createTransferSectionHeader == CreateTransferSectionHeader.destination,
             let addTransferDestinationData = presenter.sectionData[indexPath.section] as? CreateTransferDestinationData {
-            let viewController = SelectTransferMethodTableViewController(transferMethods: presenter.transferMethods)
-            viewController.shouldMarkCellAction = { transferMethodToken in
-                addTransferDestinationData.configuration?.transferMethodToken == transferMethodToken }
-            viewController.selectedHandler = { transferMethod in
-                self.showCreateTransfer(with: transferMethod)
-            }
-            navigationController?.pushViewController(viewController, animated: true)
-
+//            let viewController = SelectTransferMethodTableViewController(transferMethods: presenter.transferMethods)
+//            viewController.shouldMarkCellAction = { transferMethodToken in
+//                addTransferDestinationData.configuration?.transferMethodToken == transferMethodToken }
+//            viewController.selectedHandler = { transferMethod in
+//                self.showCreateTransfer(with: transferMethod)
+//            }
+//            navigationController?.pushViewController(viewController, animated: true)
+            presenter.performShowDestinationAccountView()
             tableView.deselectRow(at: indexPath, animated: true)
         }
     }
@@ -302,13 +304,25 @@ extension CreateTransferTableViewController: CreateTransferView {
     }
 
     func showCreateTransfer(with transferMethod: HyperwalletTransferMethod) {
-        selectedTransferMethod = transferMethod
-        presenter.initializeSections(with: transferMethod)
+//        selectedTransferMethod = transferMethod
+        presenter.initializeSections()
         tableView.reloadData()
     }
 
+    func showGenericTableView(items: [SelectDestinationCellConfiguration],
+                              title: String,
+                              selectItemHandler: @escaping SelectItemHandler,
+                              markCellHandler: @escaping MarkCellHandler) {
+        let genericTableView = GenericTableViewController<SelectDestinationTableViewCell, SelectDestinationCellConfiguration>()
+        genericTableView.title = title
+        genericTableView.items = items
+        genericTableView.selectedHandler = selectItemHandler
+        genericTableView.shouldMarkCellAction = markCellHandler
+        show(genericTableView, sender: self)
+    }
+
     func showScheduleTransfer(_ transfer: HyperwalletTransfer) {
-        let scheduleTransferController = ScheduleTransferTableViewController(transferMethod: selectedTransferMethod,
+        let scheduleTransferController = ScheduleTransferTableViewController(transferMethod: presenter.selectedTransferMethod,
                                                                              transfer: transfer)
         navigationController?.pushViewController(scheduleTransferController, animated: true)
     }

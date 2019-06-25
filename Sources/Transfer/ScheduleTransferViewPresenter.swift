@@ -23,7 +23,7 @@ protocol ScheduleTransferView: class {
     func notifyTransferScheduled(_ transfer: HyperwalletTransfer)
 }
 
-final class ScheduleTransferPresenter {
+final class ScheduleTransferViewPresenter {
     private unowned let view: ScheduleTransferView
     private(set) var sectionData = [ScheduleTransferSectionData]()
     private var transferMethod: HyperwalletTransferMethod

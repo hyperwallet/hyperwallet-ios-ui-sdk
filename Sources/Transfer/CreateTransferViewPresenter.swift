@@ -19,19 +19,27 @@
 import HyperwalletSDK
 
 protocol CreateTransferView: class {
+    typealias SelectItemHandler = (_ value: SelectDestinationCellConfiguration) -> Void
+    typealias MarkCellHandler = (_ value: SelectDestinationCellConfiguration) -> Bool
     func showLoading()
     func hideLoading()
     func showCreateTransfer(with transferMethod: HyperwalletTransferMethod)
     func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?)
     func showBusinessError(_ error: HyperwalletErrorType, _ handler: @escaping () -> Void)
+    func showGenericTableView(items: [SelectDestinationCellConfiguration],
+                              title: String,
+                              selectItemHandler: @escaping SelectItemHandler,
+                              markCellHandler: @escaping MarkCellHandler)
     func showScheduleTransfer(_ transfer: HyperwalletTransfer)
     func notifyTransferCreated(_ transfer: HyperwalletTransfer)
 }
 
-final class CreateTransferPresenter {
+//swiftlint:disable force_cast
+final class CreateTransferViewPresenter {
     private unowned let view: CreateTransferView
     private(set) var sectionData = [CreateTransferSectionData]()
     private(set) var transferMethods = [HyperwalletTransferMethod]()
+    private(set) var selectedTransferMethod: HyperwalletTransferMethod!
     private var transfer: HyperwalletTransfer?
 
     /// Initialize CreateTransferPresenter
@@ -39,12 +47,84 @@ final class CreateTransferPresenter {
         self.view = view
     }
 
-    func initializeSections(with transferMethod: HyperwalletTransferMethod) {
+    /// Display all the select Country or Currency based on the index
+    func performShowDestinationAccountView() {
+        view.showGenericTableView(items: getSelectDestinationCellConfiguration(),
+                                  title: "select_transfer_method_country".localized(),
+                                  selectItemHandler: selectCountryHandler(),
+                                  markCellHandler: countryMarkCellHandler())
+    }
+
+    private func selectCountryHandler() -> CreateTransferView.SelectItemHandler {
+        return { [weak self] (configuration) in
+            guard let strongSelf = self else {
+                return
+            }
+            for transferMethod in strongSelf.transferMethods
+                where transferMethod.getField(fieldName: .token) as! String == configuration.transferMethodToken {
+                strongSelf.selectedTransferMethod = transferMethod
+                strongSelf.view.showCreateTransfer(with: transferMethod)
+            }
+        }
+    }
+
+    private func countryMarkCellHandler() -> CreateTransferView.MarkCellHandler {
+        return { [weak self] item in
+            self?.selectedTransferMethod.getField(fieldName: .token) as! String == item.transferMethodToken
+        }
+    }
+
+    private func getSelectDestinationCellConfiguration() -> [SelectDestinationCellConfiguration] {
+        var list = [SelectDestinationCellConfiguration]()
+        for transferMethod in transferMethods {
+            if let configuration = getCellConfiguration(for: transferMethod) {
+                list.append(configuration)
+            }
+        }
+        return list
+    }
+
+    private func getAdditionalInfo(_ transferMethod: HyperwalletTransferMethod) -> String? {
+        var additionlInfo: String?
+        switch transferMethod.getField(fieldName: .type) as? String {
+        case "BANK_ACCOUNT", "WIRE_ACCOUNT":
+            additionlInfo = transferMethod.getField(fieldName: .bankAccountId) as? String
+            additionlInfo = String(format: "%@%@",
+                                   "transfer_method_list_item_description".localized(),
+                                   additionlInfo?.suffix(startAt: 4) ?? "")
+        case "BANK_CARD":
+            additionlInfo = transferMethod.getField(fieldName: .cardNumber) as? String
+            additionlInfo = String(format: "%@%@",
+                                   "transfer_method_list_item_description".localized(),
+                                   additionlInfo?.suffix(startAt: 4) ?? "")
+        case "PAYPAL_ACCOUNT":
+            additionlInfo = transferMethod.getField(fieldName: .email) as? String
+
+        default:
+            break
+        }
+        return additionlInfo
+    }
+
+    private func getCellConfiguration(for transferMethod: HyperwalletTransferMethod) -> SelectDestinationCellConfiguration? {
+        if let country = transferMethod.getField(fieldName: .transferMethodCountry) as? String,
+            let transferMethodType = transferMethod.getField(fieldName: .type) as? String {
+            return SelectDestinationCellConfiguration(
+                transferMethodType: transferMethodType.lowercased().localized(),
+                transferMethodCountry: country.localized(),
+                additionalInfo: getAdditionalInfo(transferMethod),
+                transferMethodIconFont: HyperwalletIcon.of(transferMethodType).rawValue,
+                transferMethodToken: transferMethod.getField(fieldName: .token) as? String ?? "")
+        }
+        return nil
+    }
+
+    func initializeSections() {
         sectionData.removeAll()
-        let addTransferDestinationSection = CreateTransferDestinationData(transferMethod: transferMethod)
+        let addTransferDestinationSection = CreateTransferDestinationData(transferMethod: selectedTransferMethod)
         sectionData.append(addTransferDestinationSection)
 
-        if let currency = transferMethod.getField(fieldName: .transferMethodCurrency) as? String {
+        if let currency = selectedTransferMethod.getField(fieldName: .transferMethodCurrency) as? String {
             let addTransferUserInputSection = CreateTransferUserInputData(destinationCurrency: currency)
             sectionData.append(addTransferUserInputSection)
         }
@@ -120,6 +200,7 @@ final class CreateTransferPresenter {
                     }
                     if let data = result?.data, data.isNotEmpty() {
                         strongSelf.transferMethods = data
+                        strongSelf.selectedTransferMethod = strongSelf.transferMethods.first!
                         strongSelf.view.showCreateTransfer(with: strongSelf.transferMethods.first!)
                     }
                 }
