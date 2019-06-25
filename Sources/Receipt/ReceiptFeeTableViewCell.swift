@@ -32,7 +32,7 @@ final class ReceiptFeeTableViewCell: UITableViewCell {
         textLabel?.text = configuration.title
         textLabel?.accessibilityIdentifier = configuration.title
         detailTextLabel?.text = configuration.value
-        detailTextLabel?.accessibilityIdentifier = configuration.title
+        detailTextLabel?.accessibilityIdentifier = configuration.value
     }
 
     // MARK: Theme manager's proxy properties
