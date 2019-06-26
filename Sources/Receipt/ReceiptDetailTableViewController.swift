@@ -53,6 +53,7 @@ public final class ReceiptDetailTableViewController: UITableViewController {
         tableView.estimatedRowHeight = Theme.Cell.extraSmallHeight
         tableView.separatorStyle = .none
         tableView.accessibilityIdentifier = "receiptDetailTableView"
+        tableView.cellLayoutMarginsFollowReadableWidth = false
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)
         }
