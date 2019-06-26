@@ -168,8 +168,8 @@ class ListReceiptPresenterTests: XCTestCase {
                        8,
                        "The count of sections should be 8")
         XCTAssertEqual(presenter.sectionData[4].value.count,
-                       3,
-                       "The receipt number of the fifth section should be 3")
+                       4,
+                       "The receipt number of the fifth section should be 4")
     }
 
     func testListPrepaidCardReceipt_failureWithError() {

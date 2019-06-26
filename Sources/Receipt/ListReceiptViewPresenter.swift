@@ -146,16 +146,8 @@ final class ListReceiptViewPresenter {
                         strongSelf.view.showError(error, { strongSelf.listPrepaidCardReceipts(prepaidCardToken) })
                         return
                     } else if let result = result {
-                        // TODO  always load all the prepaid card receipts for now
-                        // because server side does not provide pagination yet. Need to uncomment the code in future
                         strongSelf.areAllReceiptsLoaded = true
-//                        strongSelf.areAllReceiptsLoaded =
-//                            result.data.count < strongSelf.prepaidCardReceiptLimit ? true : false
-                        if let receiptsWithoutDuplicate = strongSelf
-                            .filterDuplicatedReceipts(receipts: result.data) {
-                            strongSelf.groupReceiptsByMonth(receiptsWithoutDuplicate)
-                            strongSelf.setCreatedAfter(from: receiptsWithoutDuplicate)
-                        }
+                        strongSelf.groupReceiptsByMonth(result.data)
                     }
                     strongSelf.view.loadReceipts()
                 }
@@ -180,21 +172,6 @@ final class ListReceiptViewPresenter {
             } else {
                 sectionData.append(section)
             }
-        }
-    }
-
-    private func filterDuplicatedReceipts(receipts: [HyperwalletReceipt]) -> [HyperwalletReceipt]? {
-        if let lastSectionData = sectionData.last?.value {
-            return receipts.filter { !lastSectionData.contains($0) }
-        } else {
-            return  receipts
-        }
-    }
-
-    private func setCreatedAfter(from receipts: [HyperwalletReceipt]) {
-        if let createdOn = receipts.last?.createdOn,
-            let date = ISO8601DateFormatter.ignoreTimeZone.date(from: createdOn) {
-            prepaidCardReceiptCreatedAfter = date
         }
     }
 }
