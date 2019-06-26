@@ -23,9 +23,9 @@ class TransactionDetailTests: BaseTests {
         let transactionDetailHeaderLabel = transactDetails.detailHeaderTitle
         waitForNonExistence(transactionDetailHeaderLabel)
         if #available(iOS 12, *) {
-            verifyPayment(payment: "Payment\nMay 24, 2019", amount: "+$6.00\n\(currency)")
+            verifyPayment(payment: "Payment\nMay 24, 2019", amount: "+6.00\n\(currency)")
         } else {
-            verifyPayment(payment: "Payment May 24, 2019", amount: "+$6.00 \(currency)")
+            verifyPayment(payment: "Payment May 24, 2019", amount: "+6.00 \(currency)")
         }
 
         // DETAILS Section
@@ -44,9 +44,9 @@ class TransactionDetailTests: BaseTests {
         waitForNonExistence(transactionDetailHeaderLabel)
 
         if #available(iOS 12, *) {
-            verifyPayment(payment: "Bank Account\nMay 12, 2019", amount: "-$5.00\n\(currency)")
+            verifyPayment(payment: "Bank Account\nMay 12, 2019", amount: "-5.00\n\(currency)")
         } else {
-            verifyPayment(payment: "Bank Account May 12, 2019", amount: "-$5.00 \(currency)")
+            verifyPayment(payment: "Bank Account May 12, 2019", amount: "-5.00 \(currency)")
         }
 
         // DETAILS Section
