@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0702673922B307570057D62B /* HyperwalletReceipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0702673822B307570057D62B /* HyperwalletReceipt.swift */; };
 		0702673B22B308B60057D62B /* PrepaidCardReceiptResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 0702673A22B308B60057D62B /* PrepaidCardReceiptResponse.json */; };
 		0702673D22B308CF0057D62B /* PrepaidCardReceiptNextPageResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 0702673C22B308CF0057D62B /* PrepaidCardReceiptNextPageResponse.json */; };
 		072A53F722838F6B00BC11D0 /* AddTransferMethodSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072A53F622838F6B00BC11D0 /* AddTransferMethodSectionData.swift */; };
@@ -204,7 +203,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0702673822B307570057D62B /* HyperwalletReceipt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletReceipt.swift; sourceTree = "<group>"; };
 		0702673A22B308B60057D62B /* PrepaidCardReceiptResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardReceiptResponse.json; sourceTree = "<group>"; };
 		0702673C22B308CF0057D62B /* PrepaidCardReceiptNextPageResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardReceiptNextPageResponse.json; sourceTree = "<group>"; };
 		072A53F622838F6B00BC11D0 /* AddTransferMethodSectionData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodSectionData.swift; sourceTree = "<group>"; };
@@ -773,7 +771,6 @@
 				DBCA383A225E8BA900CD4137 /* UIViewController.swift */,
 				9826056722822E8A000CCA2D /* UIToolbar.swift */,
 				988547CF22970FA1007B312C /* Date.swift */,
-				0702673822B307570057D62B /* HyperwalletReceipt.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1201,7 +1198,6 @@
 				DBCA3866225E8BAA00CD4137 /* SelectTransferMethodTypePresenter.swift in Sources */,
 				DB4679BF2261083F00E1AF49 /* UIFont.swift in Sources */,
 				4A22F1EA22A67FE400D58883 /* ReceiptNotesTableViewCell.swift in Sources */,
-				0702673922B307570057D62B /* HyperwalletReceipt.swift in Sources */,
 				DBCA387B225E8BAA00CD4137 /* UINavigationController.swift in Sources */,
 				DB2EB66D22617A8500FBEB3D /* String+Array.swift in Sources */,
 				4A22F1E422A6723200D58883 /* ReceiptDetailTableViewController.swift in Sources */,

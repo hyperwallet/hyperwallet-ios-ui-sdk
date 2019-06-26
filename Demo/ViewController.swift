@@ -40,8 +40,7 @@ enum HyperwalletConstants {
 
 //swiftlint:disable force_cast
 class ViewController: UITableViewController {
-    enum Example: Int {
-        static let count = 5
+    enum Example: Int, CaseIterable {
         case paymentDetails
         case listTransferMethod
         case addTransferMethod
@@ -129,7 +128,7 @@ class ViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Example.count
+        return Example.allCases.count
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

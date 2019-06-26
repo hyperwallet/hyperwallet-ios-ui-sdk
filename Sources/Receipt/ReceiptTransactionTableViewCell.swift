@@ -96,11 +96,11 @@ extension ReceiptTransactionTableViewCell {
     private func formatDetailTextLabel(amount: String, currency: String, entry: String) -> NSAttributedString {
         let attributedText = NSMutableAttributedString()
         if entry == credit {
-            attributedText.append(value: String(format: "+%@\n", amount.currencyFormatter(by: currency)),
+            attributedText.append(value: String(format: "+%@\n", amount),
                                   font: Theme.Label.bodyFontMedium,
                                   color: Theme.Amount.creditColor)
         } else {
-            attributedText.append(value: String(format: "-%@\n", amount.currencyFormatter(by: currency)),
+            attributedText.append(value: String(format: "-%@\n", amount),
                                   font: Theme.Label.bodyFontMedium,
                                   color: Theme.Amount.debitColor)
         }
