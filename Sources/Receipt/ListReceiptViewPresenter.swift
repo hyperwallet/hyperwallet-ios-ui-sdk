@@ -146,8 +146,11 @@ final class ListReceiptViewPresenter {
                         strongSelf.view.showError(error, { strongSelf.listPrepaidCardReceipts(prepaidCardToken) })
                         return
                     } else if let result = result {
-                        strongSelf.areAllReceiptsLoaded =
-                            result.data.count < strongSelf.prepaidCardReceiptLimit ? true : false
+                        // TODO  always load all the prepaid card receipts for now
+                        // because server side does not provide pagination yet. Need to uncomment the code in future
+                        strongSelf.areAllReceiptsLoaded = true
+//                        strongSelf.areAllReceiptsLoaded =
+//                            result.data.count < strongSelf.prepaidCardReceiptLimit ? true : false
                         if let receiptsWithoutDuplicate = strongSelf
                             .filterDuplicatedReceipts(receipts: result.data) {
                             strongSelf.groupReceiptsByMonth(receiptsWithoutDuplicate)
