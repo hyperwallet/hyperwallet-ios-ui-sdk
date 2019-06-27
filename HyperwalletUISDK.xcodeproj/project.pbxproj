@@ -35,7 +35,6 @@
 		09E7165022A697C400FA9B96 /* ReceiptsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7164F22A697C400FA9B96 /* ReceiptsList.swift */; };
 		09E7165622A6983400FA9B96 /* ListReceiptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7165522A6983400FA9B96 /* ListReceiptTests.swift */; };
 		412F723722B45DB100837F8F /* TransactionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F723222B458C700837F8F /* TransactionDetails.swift */; };
-		412F723922B46B1000837F8F /* TransactionDetailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F723822B46B1000837F8F /* TransactionDetailTests.swift */; };
 		4A12653C2280B02900C0F59E /* DateWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12653B2280B02900C0F59E /* DateWidget.swift */; };
 		4A12653E2280B12F00C0F59E /* PhoneWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12653D2280B12F00C0F59E /* PhoneWidget.swift */; };
 		4A22F1E422A6723200D58883 /* ReceiptDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22F1E322A6723200D58883 /* ReceiptDetailTableViewController.swift */; };
@@ -230,7 +229,6 @@
 		09E7164F22A697C400FA9B96 /* ReceiptsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptsList.swift; sourceTree = "<group>"; };
 		09E7165522A6983400FA9B96 /* ListReceiptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListReceiptTests.swift; sourceTree = "<group>"; };
 		412F723222B458C700837F8F /* TransactionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetails.swift; sourceTree = "<group>"; };
-		412F723822B46B1000837F8F /* TransactionDetailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailTests.swift; sourceTree = "<group>"; };
 		4A12653B2280B02900C0F59E /* DateWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateWidget.swift; sourceTree = "<group>"; };
 		4A12653D2280B12F00C0F59E /* PhoneWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneWidget.swift; sourceTree = "<group>"; };
 		4A22F1E322A6723200D58883 /* ReceiptDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptDetailTableViewController.swift; sourceTree = "<group>"; };
@@ -477,7 +475,6 @@
 			isa = PBXGroup;
 			children = (
 				09E7165522A6983400FA9B96 /* ListReceiptTests.swift */,
-				412F723822B46B1000837F8F /* TransactionDetailTests.swift */,
 			);
 			path = Receipts;
 			sourceTree = "<group>";
@@ -1165,7 +1162,6 @@
 				C3E7217A226F93860067D3A0 /* XCUIDevice.swift in Sources */,
 				412F723722B45DB100837F8F /* TransactionDetails.swift in Sources */,
 				641324E1229575EC00512816 /* BaseTest.swift in Sources */,
-				412F723922B46B1000837F8F /* TransactionDetailTests.swift in Sources */,
 				C38DC07922727F9300B1F00E /* SelectTransferMethodCountryType.swift in Sources */,
 				DBB2B7132261C142006C48D3 /* HyperwalletMockWebServer.swift in Sources */,
 				DBB2B7142261C142006C48D3 /* ListTransferMethodTests.swift in Sources */,

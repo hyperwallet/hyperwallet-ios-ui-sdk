@@ -99,21 +99,19 @@ class TransactionDetailTests: BaseTests {
     }
 
     private func verifyPayment(payment: String, amount: String) {
-        let receiptDetailTableviewTable = transactDetails.receiptDetailTableviewTable
-        let paymentlabel = receiptDetailTableviewTable.staticTexts["ListReceiptTableViewCellTextLabel"].label
-        let amountlabel = receiptDetailTableviewTable.staticTexts["ListReceiptTableViewCellDetailTextLabel"].label
+        let paymentlabel = app.tables["receiptDetailTableView"].staticTexts["ListReceiptTableViewCellTextLabel"].label
+        let amountlabel = app.tables["receiptDetailTableView"].staticTexts["ListReceiptTableViewCellDetailTextLabel"].label
         XCTAssertEqual(paymentlabel, payment)
         XCTAssertEqual(amountlabel, amount)
     }
 
     // Detail section verification
     private func verifyDetailSection(receiptIdVal: String, dateVal: String, clientIdVal: String?) {
-        let receiptDetailTableviewTable = transactDetails.receiptDetailTableviewTable
         let detailsSectionLabel = transactDetails.detailSection
         let receiptLabel = transactDetails.receiptIdLabel
         let dateLabel = transactDetails.dateLabel
-        let receiptID = receiptDetailTableviewTable.staticTexts[receiptIdVal]
-        let date = receiptDetailTableviewTable.staticTexts[dateVal]
+        let receiptID = transactDetails.receiptIdValue
+        let date = transactDetails.dateValue
 
         XCTAssertTrue(detailsSectionLabel.exists)
         XCTAssertTrue(receiptLabel.exists)
@@ -126,7 +124,7 @@ class TransactionDetailTests: BaseTests {
         if let clientIdVal = clientIdVal {
             let clientTransIDLabel = transactDetails.clientTransactionIdLabel
             XCTAssertTrue(clientTransIDLabel.exists)
-            let clientID = receiptDetailTableviewTable.staticTexts[clientIdVal]
+            let clientID = app.tables["receiptDetailTableView"].staticTexts[clientIdVal]
             XCTAssertTrue(clientID.exists)
             XCTAssertEqual(clientID.label, clientIdVal)
         }
