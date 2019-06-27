@@ -47,15 +47,15 @@ final class CreateTransferViewPresenter {
         self.view = view
     }
 
-    /// Display all the select Country or Currency based on the index
+    /// Display all the destination accounts
     func performShowDestinationAccountView() {
         view.showGenericTableView(items: getSelectDestinationCellConfiguration(),
-                                  title: "select_transfer_method_country".localized(),
-                                  selectItemHandler: selectCountryHandler(),
-                                  markCellHandler: countryMarkCellHandler())
+                                  title: "select_destination".localized(),
+                                  selectItemHandler: selectDestinationAccountHandler(),
+                                  markCellHandler: destinationAccountMarkCellHandler())
     }
 
-    private func selectCountryHandler() -> CreateTransferView.SelectItemHandler {
+    private func selectDestinationAccountHandler() -> CreateTransferView.SelectItemHandler {
         return { [weak self] (configuration) in
             guard let strongSelf = self else {
                 return
@@ -68,7 +68,7 @@ final class CreateTransferViewPresenter {
         }
     }
 
-    private func countryMarkCellHandler() -> CreateTransferView.MarkCellHandler {
+    private func destinationAccountMarkCellHandler() -> CreateTransferView.MarkCellHandler {
         return { [weak self] item in
             self?.selectedTransferMethod.getField(fieldName: .token) as! String == item.transferMethodToken
         }

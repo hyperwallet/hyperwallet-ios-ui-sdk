@@ -314,6 +314,11 @@ extension CreateTransferTableViewController: CreateTransferView {
                               selectItemHandler: @escaping SelectItemHandler,
                               markCellHandler: @escaping MarkCellHandler) {
         let genericTableView = GenericTableViewController<SelectDestinationTableViewCell, SelectDestinationCellConfiguration>()
+
+        genericTableView.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
+                                                            target: self,
+                                                            action: nil)
+
         genericTableView.title = title
         genericTableView.items = items
         genericTableView.selectedHandler = selectItemHandler
