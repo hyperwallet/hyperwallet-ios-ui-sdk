@@ -149,27 +149,6 @@ class ListReceiptPresenterTests: XCTestCase {
         XCTAssertEqual(presenter.sectionData[4].value.count,
                        2,
                        "The receipt number of the fifth section should be 2")
-
-        // Load more receipts
-        // Given
-        HyperwalletTestHelper.setUpMockServer(request: setUpReceiptRequest(listPrepaidCardReceiptNextPagePayload,
-                                                                           nil,
-                                                                           "trm-123456789"))
-
-        let expectationLoadMore = self.expectation(description: "load more prepaid card receipts")
-        mockView.expectation = expectationLoadMore
-
-        // When
-        presenter.listReceipts()
-        wait(for: [expectationLoadMore], timeout: 1)
-
-        // Then
-        XCTAssertEqual(presenter.sectionData.count,
-                       8,
-                       "The count of sections should be 8")
-        XCTAssertEqual(presenter.sectionData[4].value.count,
-                       4,
-                       "The receipt number of the fifth section should be 4")
     }
 
     func testListPrepaidCardReceipt_failureWithError() {
