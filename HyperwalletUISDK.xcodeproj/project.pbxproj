@@ -37,6 +37,9 @@
 		09E7165622A6983400FA9B96 /* ListReceiptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7165522A6983400FA9B96 /* ListReceiptTests.swift */; };
 		412F723722B45DB100837F8F /* TransactionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F723222B458C700837F8F /* TransactionDetails.swift */; };
 		412F723922B46B1000837F8F /* TransactionDetailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F723822B46B1000837F8F /* TransactionDetailTests.swift */; };
+		4157135D22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json in Resources */ = {isa = PBXBuildFile; fileRef = 4157135C22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json */; };
+		4157135F22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json in Resources */ = {isa = PBXBuildFile; fileRef = 4157135E22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json */; };
+		4157136122C43660005D6DB1 /* PrepaidCardReceiptsMoreThan20.json in Resources */ = {isa = PBXBuildFile; fileRef = 4157136022C43660005D6DB1 /* PrepaidCardReceiptsMoreThan20.json */; };
 		4A12653C2280B02900C0F59E /* DateWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12653B2280B02900C0F59E /* DateWidget.swift */; };
 		4A12653E2280B12F00C0F59E /* PhoneWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12653D2280B12F00C0F59E /* PhoneWidget.swift */; };
 		4A22F1E422A6723200D58883 /* ReceiptDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22F1E322A6723200D58883 /* ReceiptDetailTableViewController.swift */; };
@@ -233,6 +236,9 @@
 		09E7165522A6983400FA9B96 /* ListReceiptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListReceiptTests.swift; sourceTree = "<group>"; };
 		412F723222B458C700837F8F /* TransactionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetails.swift; sourceTree = "<group>"; };
 		412F723822B46B1000837F8F /* TransactionDetailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailTests.swift; sourceTree = "<group>"; };
+		4157135C22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardReceiptsForOneMonth.json; sourceTree = "<group>"; };
+		4157135E22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardReceiptsForFewMonths.json; sourceTree = "<group>"; };
+		4157136022C43660005D6DB1 /* PrepaidCardReceiptsMoreThan20.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardReceiptsMoreThan20.json; sourceTree = "<group>"; };
 		4A12653B2280B02900C0F59E /* DateWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateWidget.swift; sourceTree = "<group>"; };
 		4A12653D2280B12F00C0F59E /* PhoneWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneWidget.swift; sourceTree = "<group>"; };
 		4A22F1E322A6723200D58883 /* ReceiptDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptDetailTableViewController.swift; sourceTree = "<group>"; };
@@ -472,6 +478,9 @@
 				0961D62C22AA858E007F0B44 /* ReceiptsForFewMonths.json */,
 				0961D63222AA8817007F0B44 /* ReceiptsForLazyLoading.json */,
 				0961D63C22AA954B007F0B44 /* ReceiptsForLazyLoadingNextPage.json */,
+				4157135C22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json */,
+				4157135E22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json */,
+				4157136022C43660005D6DB1 /* PrepaidCardReceiptsMoreThan20.json */,
 			);
 			path = Receipts;
 			sourceTree = "<group>";
@@ -1055,11 +1064,14 @@
 				98F63E6B2284AC330090101D /* PayPalAccountInvalidEmailResponse.json in Resources */,
 				9807B76B226442C60028A280 /* TransferMethodConfigurationBankAccountResponse.json in Resources */,
 				640030C52297E8CC0087DDB2 /* UserBusinessResponse.json in Resources */,
+				4157135D22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json in Resources */,
 				DBA9FA5E22791B2900C1301A /* UserIndividualResponse.json in Resources */,
 				641324E62295764500512816 /* AuthenticationTokenResponse.json in Resources */,
 				9807B76C226442C60028A280 /* TransferMethodConfigurationBankCardResponse.json in Resources */,
 				98F63E6E2284AD370090101D /* PayPalAccountDuplicateResponse.json in Resources */,
+				4157135F22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json in Resources */,
 				9807B76D226442C60028A280 /* UnexpectedErrorResponse.json in Resources */,
+				4157136122C43660005D6DB1 /* PrepaidCardReceiptsMoreThan20.json in Resources */,
 				DBB2B7202261C142006C48D3 /* TransferMethodConfigurationKeysResponse.json in Resources */,
 				DBB2B71B2261C142006C48D3 /* BankAccountIndividualResponse.json in Resources */,
 				DBB2B7262261C142006C48D3 /* BankCardResponse.json in Resources */,
