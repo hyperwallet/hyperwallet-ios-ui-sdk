@@ -191,7 +191,7 @@ class ListReceiptTests: BaseTests {
     }
 
     private func openReceiptsListScreen() {
-        app.tables.cells.containing(.staticText, identifier: "List Receipts").element(boundBy: 0).tap()
+        app.tables.cells.containing(.staticText, identifier: "List User Receipts").element(boundBy: 0).tap()
         waitForNonExistence(spinner)
     }
 }
