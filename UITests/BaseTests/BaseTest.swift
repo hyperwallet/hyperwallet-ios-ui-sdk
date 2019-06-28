@@ -65,15 +65,6 @@ class BaseTests: XCTestCase {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/authentication-token",
                              filename: "AuthenticationTokenResponse",
                              method: HTTPMethod.post)
-
-        mockServer.setupStub(url: "/rest/v3/users/usr-token",
-                             filename: userResponseFileName,
-                             method: HTTPMethod.get)
-
-        mockServer.setupGraphQLStubs(for: profileType)
-
-        app = XCUIApplication()
-        app.launch()
     }
 
     override func tearDown() {

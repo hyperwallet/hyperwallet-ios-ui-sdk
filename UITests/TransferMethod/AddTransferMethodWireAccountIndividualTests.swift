@@ -46,7 +46,6 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
         addTransferMethod.setAccountNumber("675825208")
 
         addTransferMethod.setAdditionalWireInstructions("This is instruction")
-        addTransferMethod.selectRelationship("Self")
         addTransferMethod.setIntermediaryBankId("ELREUS44")
         addTransferMethod.setIntermediaryBankAccountId("246810")
 
@@ -110,7 +109,7 @@ private extension AddTransferMethodWireAccountIndividualTests {
         XCTAssert(addTransferMethod.branchIdInput.exists)
 
         XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["Account Number OR IBAN"].exists)
-        XCTAssert(addTransferMethod.accountNumberInput.exists)
+        XCTAssert(addTransferMethod.bankAccountIdInput.exists)
     }
 
     func verifyIntermediaryAccountSection() {
@@ -119,8 +118,6 @@ private extension AddTransferMethodWireAccountIndividualTests {
         XCTAssert(addTransferMethod.addTransferMethodTableView.cells
             .staticTexts["Additional Wire Instructions"].exists)
         XCTAssert(addTransferMethod.wireInstructionsInput.exists)
-
-        XCTAssert(addTransferMethod.selectRelationshipType.exists)
 
         XCTAssert(addTransferMethod.addTransferMethodTableView.cells
             .staticTexts["Intermediary BIC / SWIFT Code"].exists)
@@ -169,25 +166,25 @@ private extension AddTransferMethodWireAccountIndividualTests {
 
         XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["Address"].exists)
 
-        XCTAssert(addTransferMethod.selectCountry.exists)
+        XCTAssert(addTransferMethod.countrySelect.exists)
 
         XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["State/Province"].exists)
         XCTAssert(addTransferMethod.stateProvinceInput.exists)
 
         XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["Street"].exists)
-        XCTAssert(addTransferMethod.streetInput.exists)
+        XCTAssert(addTransferMethod.addressLineInput.exists)
 
         XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["City"].exists)
         XCTAssert(addTransferMethod.cityInput.exists)
 
         XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["Zip/Postal Code"].exists)
-        XCTAssert(addTransferMethod.zipInput.exists)
+        XCTAssert(addTransferMethod.postalCodeInput.exists)
     }
 
     func verifyDefaultValues() {
         XCTAssertEqual(addTransferMethod.bankIdInput.value as? String, "")
         XCTAssertEqual(addTransferMethod.branchIdInput.value as? String, "")
-        XCTAssertEqual(addTransferMethod.accountNumberInput.value as? String, "")
+        XCTAssertEqual(addTransferMethod.bankAccountIdInput.value as? String, "")
 
         XCTAssertEqual(addTransferMethod.wireInstructionsInput.value as? String, "")
         XCTAssertEqual(addTransferMethod.intermediaryBankIdInput.value as? String, "")
@@ -203,9 +200,9 @@ private extension AddTransferMethodWireAccountIndividualTests {
 
         XCTAssert(addTransferMethod.addTransferMethodTableView.cells.staticTexts["Canada"].exists)
         XCTAssertEqual(addTransferMethod.stateProvinceInput.value as? String, "BC")
-        XCTAssertEqual(addTransferMethod.streetInput.value as? String, "950 Granville Street")
+        XCTAssertEqual(addTransferMethod.addressLineInput.value as? String, "950 Granville Street")
         XCTAssertEqual(addTransferMethod.cityInput.value as? String, "Vancouver")
-        XCTAssertEqual(addTransferMethod.zipInput.value as? String, "V6Z1L2")
+        XCTAssertEqual(addTransferMethod.postalCodeInput.value as? String, "V6Z1L2")
     }
 
     func verifyPresetValue(for uiElement: XCUIElement, with text: String) {

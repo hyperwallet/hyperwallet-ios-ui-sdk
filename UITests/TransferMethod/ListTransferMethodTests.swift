@@ -325,46 +325,6 @@ class ListTransferMethodTests: BaseTests {
         waitForNonExistence(spinner)
     }
 
-    func testListTransferMethod_verifyAfterRelaunch() {
-        setUpStandardListTransferMethod()
-        validatetestListTransferMethodScreen()
-        XCUIDevice.shared.clickHomeAndRelaunch(app: app)
-        setUpStandardListTransferMethod()
-        validatetestListTransferMethodScreen()
-    }
-
-    func testListTransferMethod_verifyRotateScreen() {
-        setUpStandardListTransferMethod()
-        XCUIDevice.shared.rotateScreen(times: 3)
-        validatetestListTransferMethodScreen()
-    }
-
-    func testListTransferMethod_verifyWakeFromSleep() {
-        setUpStandardListTransferMethod()
-        XCUIDevice.shared.wakeFromSleep(app: app)
-        waitForNonExistence(addTransferMethod.navigationBar)
-        validatetestListTransferMethodScreen()
-    }
-
-    func testListTransferMethod_verifyResumeFromRecents() {
-        setUpStandardListTransferMethod()
-        XCUIDevice.shared.resumeFromRecents(app: app)
-        waitForNonExistence(addTransferMethod.navigationBar)
-        validatetestListTransferMethodScreen()
-    }
-
-    func testListTransferMethod_verifyAppToBackground() {
-        setUpStandardListTransferMethod()
-        XCUIDevice.shared.sendToBackground(app: app)
-        validatetestListTransferMethodScreen()
-    }
-
-    func testListTransferMethod_verifyPressBackButton() {
-        setUpStandardListTransferMethod()
-        listTransferMethod.clickBackButton()
-        XCTAssertTrue(app.navigationBars["Account Settings"].exists)
-    }
-
     private func validatetestListTransferMethodScreen() {
         let expectedCellsCount = 5
         XCTAssertTrue(listTransferMethod.navigationBar.exists)

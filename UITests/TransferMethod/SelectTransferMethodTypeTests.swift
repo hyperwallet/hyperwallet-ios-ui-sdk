@@ -48,37 +48,6 @@ class SelectTransferMethodTypeTests: BaseTests {
             selectTransferMethodType.currencySelect.exists)
     }
 
-    func testAppClickHomeAndRelaunch() {
-        XCUIDevice.shared.clickHomeAndRelaunch(app: app)
-        setUpSelectTransferMethodTypeScreen()
-        validateSelectTransferMethodScreen()
-    }
-
-    func testAppResumeFromRecents() {
-        XCUIDevice.shared.resumeFromRecents(app: app)
-        validateSelectTransferMethodScreen()
-    }
-
-    func testAppClickBackButton() {
-        selectTransferMethodType.clickBackButton()
-        XCTAssertTrue(app.navigationBars["Account Settings"].exists)
-    }
-
-    func testAppRotateScreen() {
-        XCUIDevice.shared.rotateScreen(times: 3)
-        validateSelectTransferMethodScreen()
-    }
-
-    func testAppSendToBackground() {
-        XCUIDevice.shared.sendToBackground(app: app)
-        validateSelectTransferMethodScreen()
-    }
-
-    func testAppWakeFromSleep() {
-        XCUIDevice.shared.wakeFromSleep(app: app)
-        validateSelectTransferMethodScreen()
-    }
-
     func testSelectTransferMethodType_verifyCountrySelection() {
         selectTransferMethodType.tapCountry()
 

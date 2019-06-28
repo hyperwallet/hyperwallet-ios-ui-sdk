@@ -6,13 +6,25 @@ class AddTransferMethodBankCardTests: BaseTests {
     let debitCard = NSPredicate(format: "label CONTAINS[c] 'Debit Card'")
 
     override func setUp() {
-        profileType = .individual
         super.setUp()
-        setUpAddTransferMethodBankCardScreen()
-    }
 
-    override func tearDown() {
-        mockServer.tearDown()
+        app = XCUIApplication()
+        app.launchEnvironment = [
+            "COUNTRY": "US",
+            "CURRENCY": "USD",
+            "ACCOUNT_TYPE": "BANK_CARD",
+            "PROFILE_TYPE": "INDIVIDUAL"
+        ]
+        app.launch()
+
+        mockServer.setupStub(url: "/graphql",
+                             filename: "TransferMethodConfigurationBankAccountResponse",
+                             method: HTTPMethod.post)
+
+        app.tables.cells.staticTexts["Add Transfer Method"].tap()
+        spinner = app.activityIndicators["activityIndicator"]
+        waitForNonExistence(spinner)
+        addTransferMethod = AddTransferMethod(app: app, for: .bankAccount)
     }
 
     func testAddTransferMethod_createBankCard() {
@@ -26,7 +38,6 @@ class AddTransferMethodBankCardTests: BaseTests {
         XCTAssertEqual(app.textFields["dateOfExpiry"].value as? String, "03/20")
 
         addTransferMethod.setCvv("022")
-        addTransferMethod.selectRelationship("Self")
         addTransferMethod.clickCreateTransferMethodButton()
 
         waitForNonExistence(spinner)
@@ -45,7 +56,6 @@ class AddTransferMethodBankCardTests: BaseTests {
         XCTAssertEqual(app.textFields["dateOfExpiry"].value as? String, "03/20")
 
         addTransferMethod.setCvv("022")
-        addTransferMethod.selectRelationship("Self")
         addTransferMethod.clickCreateTransferMethodButton()
 
         waitForNonExistence(spinner)
@@ -157,8 +167,6 @@ private extension AddTransferMethodBankCardTests {
     }
 
     func verifyAccountInformationSection() {
-        XCTAssert(addTransferMethod.title.exists)
-
         XCTAssert(addTransferMethod.addTransferMethodTableView.cells.staticTexts["Card Number"].exists)
         XCTAssert(addTransferMethod.cardNumberInput.exists)
 

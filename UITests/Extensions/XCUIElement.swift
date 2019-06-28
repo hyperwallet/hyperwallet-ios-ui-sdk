@@ -2,16 +2,34 @@ import XCTest
 
 extension XCUIElement {
     func scroll(to element: XCUIElement) {
-        while !element.isVisible {
-            swipeUp()
+        var count = 0
+
+        while !elementIsWithinWindow(element: element) && (count < 5) {
+            swipeUpSlow()
+            count += 1
+        }
+
+        if count == 5 {
+            XCTFail("Could not find Element")
         }
     }
 
-    var isVisible: Bool {
-        guard self.exists && !self.frame.isEmpty else {
+    func elementIsWithinWindow(element: XCUIElement) -> Bool {
+        guard element.exists && element.isHittable else {
             return false
         }
-        return XCUIApplication().windows.element(boundBy: 0).frame.contains(self.frame)
+
+        return true
+    }
+
+    func swipeUpSlow() {
+        let half: CGFloat = 0.5
+        let pressDuration: TimeInterval = 0.02
+
+        let centre = self.coordinate(withNormalizedOffset: CGVector(dx: half, dy: half))
+        let top = self.coordinate(withNormalizedOffset: CGVector(dx: half, dy: 0.25))
+
+        centre.press(forDuration: pressDuration, thenDragTo: top)
     }
 
     /**
@@ -25,10 +43,10 @@ extension XCUIElement {
         }
 
         self.tap()
-        for _ in 0..<stringValue.count {
-            self.typeText(XCUIKeyboardKey.delete.rawValue)
-        }
 
+        let deleteString = String(repeating: XCUIKeyboardKey.delete.rawValue, count: stringValue.count)
+
+        self.typeText(deleteString)
         self.typeText(text)
     }
 }
