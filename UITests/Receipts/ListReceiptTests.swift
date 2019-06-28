@@ -297,9 +297,7 @@ class ListReceiptTests: BaseTests {
 
     // MARK: Helper methods
     private func openupReceiptsListScreenForOneMonth() {
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/receipts",
-                             filename: "ReceiptsForOneMonth",
-                              method: HTTPMethod.get)
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/receipts", filename: "ReceiptsForOneMonth", method: HTTPMethod.get)
 
         openReceiptsListScreen()
     }
