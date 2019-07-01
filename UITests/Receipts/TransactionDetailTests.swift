@@ -17,27 +17,27 @@ class TransactionDetailTests: BaseTests {
 
     // Credit Transaction
     func testReceiptDetail_verifyCreditTransaction() {
-        let expectedDateValue = "Fri, May 24, 2019, 6:16 PM"
+        let expectedDateValue = "Fri, May 24, 2019, 9:16 PM"
         openupReceiptsListScreenForFewMonths(isOneMonth: false)
         transactDetails.openReceipt(row: 0)
         let transactionDetailHeaderLabel = transactDetails.detailHeaderTitle
         waitForNonExistence(transactionDetailHeaderLabel)
         if #available(iOS 12, *) {
-            verifyPayment(payment: "Payment\nMay 24, 2019", amount: "+6.00\n\(currency)")
+            verifyPayment(payment: "Payment\nMay 24, 2019", amount: "6.00\n\(currency)")
         } else {
-            verifyPayment(payment: "Payment May 24, 2019", amount: "+6.00 \(currency)")
+            verifyPayment(payment: "Payment May 24, 2019", amount: "6.00 \(currency)")
         }
 
         // DETAILS Section
         verifyDetailSection(receiptIdVal: "55176992", dateVal: expectedDateValue, clientIdVal: "DyClk0VG9a")
 
         // FEE Section
-        verifyFeeSection(amountVal: "+6.00 USD", feeVal: "0.00 USD", transactionVal: "6.00 USD")
+        verifyFeeSection(amountVal: "6.00 USD", feeVal: "0.00 USD", transactionVal: "6.00 USD")
     }
 
     // Debit Transaction
     func testReceiptDetail_verifyDebitTransaction() {
-        let expectedDateValue = "Sun, May 12, 2019, 6:16 PM" // Sun, May 12, 2019, 6:16 PM
+        let expectedDateValue = "Sun, May 12, 2019, 9:16 PM" // Sun, May 12, 2019, 6:16 PM
         openupReceiptsListScreenForFewMonths(isOneMonth: false)
         transactDetails.openReceipt(row: 1)
         let transactionDetailHeaderLabel = transactDetails.detailHeaderTitle
@@ -136,7 +136,7 @@ class TransactionDetailTests: BaseTests {
     private func verifyDetailSectionOptional() {
         let transactionVal = "8OxXefx5"
         let receiptVal = "3051579"
-        let dateVal = "Fri, May 3, 2019, 5:08 PM" // Fri, May 3, 2019, 5:08 PM in test environment
+        let dateVal = "Fri, May 3, 2019, 8:08 PM" // Fri, May 3, 2019, 5:08 PM in test environment
         let charityNameVal = "Sample Charity"
         let checkNumVal = "Sample Check Number"
         let websiteVal = "https://localhost"
