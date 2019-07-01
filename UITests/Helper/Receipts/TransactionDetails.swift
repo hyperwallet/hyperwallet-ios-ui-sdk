@@ -11,7 +11,9 @@ class TransactionDetails {
     var detailHeaderTitle: XCUIElement
     // Detail
     var receiptIdLabel: XCUIElement
+    var receiptIdValue: XCUIElement
     var dateLabel: XCUIElement
+    var dateValue: XCUIElement
     var clientTransactionIdLabel: XCUIElement
     var charityNameLabel: XCUIElement
     var checkNumLabel: XCUIElement
@@ -38,7 +40,9 @@ class TransactionDetails {
         feeSection = receiptDetailTableviewTable.staticTexts["Fee Specification"]
         transactionSection = receiptDetailTableviewTable.staticTexts["Transaction"]
         receiptIdLabel = receiptDetailTableviewTable.staticTexts["Receipt ID:"]
+        receiptIdValue = receiptDetailTableviewTable.staticTexts["Receipt ID:_value"]
         dateLabel = receiptDetailTableviewTable.staticTexts["Date:"]
+        dateValue = receiptDetailTableviewTable.staticTexts["Date:_value"]
         clientTransactionIdLabel = receiptDetailTableviewTable.staticTexts["Client Transaction ID:"]
         charityNameLabel = receiptDetailTableviewTable.staticTexts["Charity Name:"]
         checkNumLabel = receiptDetailTableviewTable.staticTexts["Check Number:"]

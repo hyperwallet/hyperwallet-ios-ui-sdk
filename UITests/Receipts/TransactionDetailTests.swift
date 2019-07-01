@@ -22,11 +22,7 @@ class TransactionDetailTests: BaseTests {
         transactDetails.openReceipt(row: 0)
         let transactionDetailHeaderLabel = transactDetails.detailHeaderTitle
         waitForNonExistence(transactionDetailHeaderLabel)
-        if #available(iOS 12, *) {
-            verifyPayment(payment: "Payment\nMay 24, 2019", amount: "+6.00\n\(currency)")
-        } else {
-            verifyPayment(payment: "Payment May 24, 2019", amount: "+6.00 \(currency)")
-        }
+        verifyPayment(payment: "Payment\nMay 24, 2019", amount: "+6.00\n\(currency)")
 
         // DETAILS Section
         verifyDetailSection(receiptIdVal: "55176992", dateVal: expectedDateValue, clientIdVal: "DyClk0VG9a")
@@ -43,11 +39,7 @@ class TransactionDetailTests: BaseTests {
         let transactionDetailHeaderLabel = transactDetails.detailHeaderTitle
         waitForNonExistence(transactionDetailHeaderLabel)
 
-        if #available(iOS 12, *) {
-            verifyPayment(payment: "Bank Account\nMay 12, 2019", amount: "-5.00\n\(currency)")
-        } else {
-            verifyPayment(payment: "Bank Account May 12, 2019", amount: "-5.00 \(currency)")
-        }
+        verifyPayment(payment: "Bank Account\nMay 12, 2019", amount: "-5.00\n\(currency)")
 
         // DETAILS Section
         verifyDetailSection(receiptIdVal: "55176991", dateVal: expectedDateValue, clientIdVal: nil)
@@ -102,8 +94,13 @@ class TransactionDetailTests: BaseTests {
         let receiptDetailTableviewTable = transactDetails.receiptDetailTableviewTable
         let paymentlabel = receiptDetailTableviewTable.staticTexts[payment].label
         let amountlabel = receiptDetailTableviewTable.staticTexts["\(payment)_value"].label
-        XCTAssertEqual(paymentlabel, payment)
-        XCTAssertEqual(amountlabel, amount)
+        if #available(iOS 12, *) {
+            XCTAssertEqual(paymentlabel, payment)
+            XCTAssertEqual(amountlabel, amount)
+        } else {
+            XCTAssertEqual(paymentlabel, payment.replacingOccurrences(of: "\n", with: " "))
+            XCTAssertEqual(amountlabel, amount.replacingOccurrences(of: "\n", with: " "))
+        }
     }
 
     // Detail section verification
@@ -112,8 +109,8 @@ class TransactionDetailTests: BaseTests {
         let detailsSectionLabel = transactDetails.detailSection
         let receiptLabel = transactDetails.receiptIdLabel
         let dateLabel = transactDetails.dateLabel
-        let receiptID = receiptDetailTableviewTable.staticTexts[receiptIdVal]
-        let date = receiptDetailTableviewTable.staticTexts[dateVal]
+        let receiptID = transactDetails.receiptIdValue
+        let date = transactDetails.dateValue
 
         XCTAssertTrue(detailsSectionLabel.exists)
         XCTAssertTrue(receiptLabel.exists)
