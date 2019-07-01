@@ -100,8 +100,8 @@ class TransactionDetailTests: BaseTests {
 
     private func verifyPayment(payment: String, amount: String) {
         let receiptDetailTableviewTable = transactDetails.receiptDetailTableviewTable
-        let paymentlabel = receiptDetailTableviewTable.staticTexts["ListReceiptTableViewCellTextLabel"].label
-        let amountlabel = receiptDetailTableviewTable.staticTexts["ListReceiptTableViewCellDetailTextLabel"].label
+        let paymentlabel = receiptDetailTableviewTable.staticTexts[payment].label
+        let amountlabel = receiptDetailTableviewTable.staticTexts["\(payment)_value"].label
         XCTAssertEqual(paymentlabel, payment)
         XCTAssertEqual(amountlabel, amount)
     }

@@ -23,7 +23,7 @@ class AddTransferMethodBankCardTests: BaseTests {
         addTransferMethod.setCardNumber("4895142232120006")
         addTransferMethod.setDateOfExpiry(expiryMonth: "March", expiryYear: "2020")
 
-        XCTAssertEqual(app.textFields["dateOfExpiry"].value as? String, "03/20")
+        XCTAssertEqual(addTransferMethod.dateOfExpiryInput.value as? String, "03/20")
 
         addTransferMethod.setCvv("022")
         addTransferMethod.selectRelationship("Self")
@@ -42,7 +42,7 @@ class AddTransferMethodBankCardTests: BaseTests {
         addTransferMethod.setCardNumber("4895142232120006")
         addTransferMethod.setDateOfExpiry(expiryMonth: "March", expiryYear: "2020")
 
-        XCTAssertEqual(app.textFields["dateOfExpiry"].value as? String, "03/20")
+        XCTAssertEqual(addTransferMethod.dateOfExpiryInput.value as? String, "03/20")
 
         addTransferMethod.setCvv("022")
         addTransferMethod.selectRelationship("Self")
@@ -70,8 +70,8 @@ class AddTransferMethodBankCardTests: BaseTests {
         addTransferMethod.setCardNumber("")
         addTransferMethod.setCvv("")
 
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["cardNumber_error"].exists)
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["cvv_error"].exists)
+        XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["cardNumber_error"].exists)
+        XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["cvv_error"].exists)
 
         addTransferMethod.clickCreateTransferMethodButton()
     }

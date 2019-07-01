@@ -53,10 +53,10 @@ extension ReceiptTransactionTableViewCell {
                                                                     entry: configuration.entry)
             textLabel?.numberOfLines = 0
             textLabel?.lineBreakMode = .byWordWrapping
-            textLabel?.accessibilityIdentifier = "ListReceiptTableViewCellTextLabel"
+            textLabel?.accessibilityIdentifier = textLabel?.attributedText?.string
             detailTextLabel?.numberOfLines = 0
             detailTextLabel?.lineBreakMode = .byWordWrapping
-            detailTextLabel?.accessibilityIdentifier = "ListReceiptTableViewCellDetailTextLabel"
+            detailTextLabel?.accessibilityIdentifier = "\(textLabel?.attributedText?.string ?? "")_value"
 
             iconColor = configuration.entry == credit ? Theme.Icon.creditColor : Theme.Icon.debitColor
             iconBackgroundColor = configuration.entry == credit ? Theme.Icon.creditBackgroundColor

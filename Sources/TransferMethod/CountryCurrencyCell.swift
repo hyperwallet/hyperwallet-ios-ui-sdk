@@ -59,7 +59,7 @@ final class CountryCurrencyCell: GenericCell<CountryCurrencyCellConfiguration> {
 
             valueLabel.text = accessoryType == .checkmark ? "" : configuration.value
             valueLabel.accessibilityLabel = configuration.value
-            valueLabel.accessibilityIdentifier = configuration.value
+            valueLabel.accessibilityIdentifier = "\(configuration.title)_value"
 
             contentView.constraints.first(where: { $0.identifier == trailingConstraintIdentifier })?
                 .constant = accessoryType == .none

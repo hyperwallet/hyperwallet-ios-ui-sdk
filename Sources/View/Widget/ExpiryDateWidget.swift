@@ -52,7 +52,7 @@ final class ExpiryDateWidget: TextWidget {
 
     private func setupPickerView(field: HyperwalletField) {
         pickerView = ExpiryDatePickerView(value: field.value)
-        pickerView.accessibilityIdentifier = "ExpiryDateWidgetPickerAccessibilityIdentifier"
+        pickerView.accessibilityIdentifier = "ExpiryDateWidgetPicker"
     }
 
     private func setupTextField() {

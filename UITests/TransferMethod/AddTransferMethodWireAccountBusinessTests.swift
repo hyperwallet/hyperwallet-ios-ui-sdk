@@ -86,7 +86,7 @@ private extension AddTransferMethodWireAccountBusinessTests {
         mockServer.setupGraphQLStubs(for: profileType)
 
         selectTransferMethodType = SelectTransferMethodType(app: app)
-        addTransferMethod = AddTransferMethod(app: app, for: .bankAccount)
+        addTransferMethod = AddTransferMethod(app: app, for: .wireAccount)
 
         app.tables.cells.containing(.staticText, identifier: "Add Transfer Method").element(boundBy: 0).tap()
         spinner = app.activityIndicators["activityIndicator"]
