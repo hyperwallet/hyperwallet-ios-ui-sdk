@@ -40,12 +40,12 @@ enum HyperwalletConstants {
 
 //swiftlint:disable force_cast
 class ViewController: UITableViewController {
-    enum Example: Int {
-        static let count = 5
+    enum Example: Int, CaseIterable {
         case paymentDetails
         case listTransferMethod
         case addTransferMethod
-        case receipts
+        case userReceipts
+        case prepaidCardReceipts
         case transferFunds
 
         var title: String {
@@ -53,7 +53,8 @@ class ViewController: UITableViewController {
             case .paymentDetails: return "Payment Details"
             case .listTransferMethod: return "List Transfer Methods"
             case .addTransferMethod: return "Add Transfer Method"
-            case .receipts: return "List Receipts"
+            case .userReceipts: return "List User Receipts"
+            case .prepaidCardReceipts: return "List Prepaid Card Receipts"
             case .transferFunds: return  "Transfer Funds"
             }
         }
@@ -63,7 +64,8 @@ class ViewController: UITableViewController {
             case .paymentDetails: return "Configure how you want to get paid"
             case .listTransferMethod: return "List all the Transfer Methods"
             case .addTransferMethod: return "Add Transfer Methods"
-            case .receipts: return "List Receipts"
+            case .userReceipts: return "List User Receipts"
+            case .prepaidCardReceipts: return "List Prepaid Card Receipts"
             case .transferFunds: return  "Transfer Funds"
             }
         }
@@ -126,7 +128,7 @@ class ViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Example.count
+        return Example.allCases.count
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -151,8 +153,13 @@ class ViewController: UITableViewController {
             }
             navigationController?.pushViewController(viewController, animated: true)
 
-        case .receipts:
-            let viewController = HyperwalletUI.shared.listReceiptTableViewController()
+        case .userReceipts:
+            let viewController = HyperwalletUI.shared.listUserReceiptTableViewController()
+            navigationController?.pushViewController(viewController, animated: true)
+
+        case .prepaidCardReceipts:
+            let viewController = HyperwalletUI.shared.listPrepaidCardReceiptTableViewController(
+                "act-68adaba2-42f4-4f0f-8670-81c09f319a12")
             navigationController?.pushViewController(viewController, animated: true)
 
         default:
