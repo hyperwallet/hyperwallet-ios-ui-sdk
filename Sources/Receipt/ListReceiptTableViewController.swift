@@ -115,6 +115,7 @@ public final class ListReceiptTableViewController: UITableViewController {
     // MARK: set up list receipt table view
     private func setupListReceiptTableView() {
         tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.sectionFooterHeight = CGFloat.leastNormalMagnitude
         tableView.tableFooterView = UIView()
         tableView.register(ReceiptTransactionTableViewCell.self,
                            forCellReuseIdentifier: ReceiptTransactionTableViewCell.reuseIdentifier)
