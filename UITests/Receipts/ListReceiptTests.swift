@@ -3,13 +3,13 @@ import XCTest
 class ListReceiptTests: BaseTests {
     private let currency = "USD"
     var receiptsList: ReceiptsList!
-    private var transactDetails: TransactionDetails!
+    private var transactionDetails: TransactionDetails!
 
     override func setUp() {
         profileType = .individual
         super.setUp()
         receiptsList = ReceiptsList(app: app)
-        transactDetails = TransactionDetails(app: app)
+        transactionDetails = TransactionDetails(app: app)
         spinner = app.activityIndicators["activityIndicator"]
     }
 
@@ -204,9 +204,9 @@ class ListReceiptTests: BaseTests {
     func testReceiptDetail_verifyCreditTransaction() {
         let expectedDateValue = "Fri, May 24, 2019, 6:16 PM"
         openupReceiptsListScreenForFewMonths()
-        transactDetails.openReceipt(row: 0)
-        let transactionDetailHeaderLabel = transactDetails.detailHeaderTitle
-        waitForNonExistence(transactionDetailHeaderLabel)
+        transactionDetails.openReceipt(row: 0)
+        waitForExistence(transactionDetails.detailHeaderTitle)
+
         if #available(iOS 12, *) {
             verifyPayment(payment: "Payment\nMay 24, 2019", amount: "+6.00\n\(currency)")
         } else {
@@ -224,9 +224,8 @@ class ListReceiptTests: BaseTests {
     func testReceiptDetail_verifyDebitTransaction() {
         let expectedDateValue = "Sun, May 12, 2019, 6:16 PM" // Sun, May 12, 2019, 6:16 PM
         openupReceiptsListScreenForFewMonths()
-        transactDetails.openReceipt(row: 1)
-        let transactionDetailHeaderLabel = transactDetails.detailHeaderTitle
-        waitForNonExistence(transactionDetailHeaderLabel)
+        transactionDetails.openReceipt(row: 1)
+        waitForExistence(transactionDetails.detailHeaderTitle)
 
         if #available(iOS 12, *) {
             verifyPayment(payment: "Bank Account\nMay 12, 2019", amount: "-5.00\n\(currency)")
@@ -243,54 +242,36 @@ class ListReceiptTests: BaseTests {
 
     func testReceiptDetail_verifyTransactionOptionalFields() {
         openupReceiptsListScreenForOneMonth()
-        transactDetails.openReceipt(row: 4)
-        let transactionDetailHeaderLabel = transactDetails.detailHeaderTitle
-        waitForNonExistence(transactionDetailHeaderLabel)
+        transactionDetails.openReceipt(row: 4)
+        waitForExistence(transactionDetails.detailHeaderTitle)
 
-        let clienTransactionLabel = transactDetails.clientTransactionIdLabel
-        let detailsSectionLabel = transactDetails.detailSection
-        let receiptLabel = transactDetails.receiptIdLabel
-        let dateLabel = transactDetails.dateLabel
-        let charityLabel = transactDetails.charityNameLabel
-        let checkNumLabel = transactDetails.checkNumLabel
-        let websiteLabel = transactDetails.promoWebSiteLabel
-        let noteSection = transactDetails.noteSectionLabel
-        let receiptId = transactDetails.receiptIdValue
-        let date = transactDetails.dateValue
-        let transactionId = transactDetails.clientTransactionIdValue
-        let charityName = transactDetails.charityNameValue
-        let checkNum = transactDetails.checkNumValue
-        let website = transactDetails.websiteValue
-        let notes = transactDetails.notesValue
+        XCTAssertEqual(transactionDetails.clientTransactionIdLabel.label, "Client Transaction ID:")
+        XCTAssertEqual(transactionDetails.detailSection.label, "Details")
+        XCTAssertEqual(transactionDetails.receiptIdLabel.label, "Receipt ID:")
+        XCTAssertEqual(transactionDetails.dateLabel.label, "Date:")
+        XCTAssertEqual(transactionDetails.charityNameLabel.label, "Charity Name:")
+        XCTAssertEqual(transactionDetails.promoWebSiteLabel.label, "Promo Website:")
+        XCTAssertEqual(transactionDetails.noteSectionLabel.label, "Notes")
 
-        XCTAssertTrue(clienTransactionLabel.exists)
-        XCTAssertTrue(detailsSectionLabel.exists)
-        XCTAssertTrue(receiptLabel.exists)
-        XCTAssertTrue(dateLabel.exists)
-        XCTAssertTrue(charityLabel.exists)
-        XCTAssertTrue(checkNumLabel.exists)
-        XCTAssertTrue(websiteLabel.exists)
-        XCTAssertTrue(noteSection.exists)
-        XCTAssertEqual(receiptId.label, "3051579")
-        XCTAssertEqual(transactionId.label, "8OxXefx5")
-        XCTAssertEqual(charityName.label, "Sample Charity")
-        XCTAssertEqual(checkNum.label, "Sample Check Number")
-        XCTAssertEqual(website.label, "https://localhost")
-        XCTAssertEqual(notes.label, "Sample payment for the period of June 15th, 2019 to July 23, 2019")
-
-        XCTAssertEqual(date.label, "Fri, May 3, 2019, 5:08 PM") // // Fri, May 3, 2019, 5:08 PM in test environment
+        XCTAssertEqual(transactionDetails.receiptIdValue.label, "3051579")
+        XCTAssertEqual(transactionDetails.clientTransactionIdValue.label, "8OxXefx5")
+        XCTAssertEqual(transactionDetails.charityNameValue.label, "Sample Charity")
+        XCTAssertEqual(transactionDetails.checkNumValue.label, "Sample Check Number")
+        XCTAssertEqual(transactionDetails.websiteValue.label, "https://localhost")
+        XCTAssertEqual(transactionDetails.notesValue.label, "Sample payment notes")
+        XCTAssertEqual(transactionDetails.dateValue.label, "Fri, May 3, 2019, 5:08 PM")
     }
 
     // Verify when no Notes and Fee sections
     func testReceiptDetail_verifyTransactionReceiptNoNoteSectionAndFeeLabel() {
        openupReceiptsListScreenForOneMonth()
-        transactDetails.openReceipt(row: 2)
-        let transactionDetailHeaderLabel = transactDetails.detailHeaderTitle
+        transactionDetails.openReceipt(row: 2)
+        let transactionDetailHeaderLabel = transactionDetails.detailHeaderTitle
         waitForNonExistence(transactionDetailHeaderLabel)
 
         // Assert No Note and Fee sections
-        let noteSection = transactDetails.noteSectionLabel
-        let feeLabel = transactDetails.feeLabel
+        let noteSection = transactionDetails.noteSectionLabel
+        let feeLabel = transactionDetails.feeLabel
         XCTAssertFalse(noteSection.exists)
         XCTAssertFalse(feeLabel.exists)
     }
@@ -311,24 +292,17 @@ class ListReceiptTests: BaseTests {
 
     // Detail section verification
     private func verifyDetailSection(receiptIdVal: String, dateVal: String, clientIdVal: String?) {
-        let detailsSectionLabel = transactDetails.detailSection
-        let receiptLabel = transactDetails.receiptIdLabel
-        let dateLabel = transactDetails.dateLabel
-        let receiptID = transactDetails.receiptIdValue
-        let date = transactDetails.dateValue
-
-        XCTAssertTrue(detailsSectionLabel.exists)
-        XCTAssertTrue(receiptLabel.exists)
-        XCTAssertTrue(dateLabel.exists)
-        XCTAssertTrue(receiptID.exists)
-        XCTAssertEqual(receiptID.label, receiptIdVal)
-
-        XCTAssertEqual(date.label, dateVal)
+        XCTAssertEqual(transactionDetails.detailSection.label, "Details")
+        XCTAssertEqual(transactionDetails.receiptIdLabel.label, "Receipt ID:")
+        XCTAssertEqual(transactionDetails.dateLabel.label, "Date:")
+        XCTAssertEqual(transactionDetails.receiptIdValue.label, receiptIdVal)
+        XCTAssertEqual(transactionDetails.receiptIdValue.label, receiptIdVal)
+        XCTAssertEqual(transactionDetails.dateValue.label, dateVal)
 
         if let clientIdVal = clientIdVal {
-            let clientTransIDLabel = transactDetails.clientTransactionIdLabel
+            let clientTransIDLabel = transactionDetails.clientTransactionIdLabel
             XCTAssertTrue(clientTransIDLabel.exists)
-            let clientID = transactDetails.clientTransactionIdValue
+            let clientID = transactionDetails.clientTransactionIdValue
             XCTAssertTrue(clientID.exists)
             XCTAssertEqual(clientID.label, clientIdVal)
         }
@@ -336,24 +310,13 @@ class ListReceiptTests: BaseTests {
 
     // FEE section verification
     private func verifyFeeSection(amountVal: String, feeVal: String, transactionVal: String) {
-        let feeSectionLabel = transactDetails.feeSection
-        let amountLabel = transactDetails.amountLabel
-        let feeLabel = transactDetails.feeLabel
-        let transactionLabel = transactDetails.transactionLabel
-        let amount = transactDetails.amountValue
-        let fee = transactDetails.feeValue
-        let transaction = transactDetails.transactionValue
+        XCTAssertEqual(transactionDetails.feeSection.label, "Fee Specification")
+        XCTAssertEqual(transactionDetails.amountLabel.label, "Amount:")
+        XCTAssertEqual(transactionDetails.feeLabel.label, "Fee:")
+        XCTAssertEqual(transactionDetails.transactionLabel.label, "Transaction:")
 
-        XCTAssertTrue(feeSectionLabel.exists)
-        XCTAssertTrue(amountLabel.exists)
-        XCTAssertTrue(feeLabel.exists)
-        XCTAssertTrue(transactionLabel.exists)
-        XCTAssertTrue(amount.exists)
-        XCTAssertTrue(fee.exists)
-        XCTAssertTrue(transaction.exists)
-
-        XCTAssertEqual(amount.label, amountVal)
-        XCTAssertEqual(fee.label, feeVal)
-        XCTAssertEqual(transaction.label, transactionVal)
+        XCTAssertEqual(transactionDetails.amountValue.label, amountVal)
+        XCTAssertEqual(transactionDetails.feeValue.label, feeVal)
+        XCTAssertEqual(transactionDetails.transactionValue.label, transactionVal)
     }
 }
