@@ -91,9 +91,8 @@ class TransactionDetailTests: BaseTests {
     }
 
     private func verifyPayment(payment: String, amount: String) {
-        let receiptDetailTableviewTable = transactDetails.receiptDetailTableviewTable
-        let paymentlabel = receiptDetailTableviewTable.staticTexts[payment].label
-        let amountlabel = receiptDetailTableviewTable.staticTexts["\(payment)_value"].label
+        let paymentlabel = transactDetails.cellTextLabel.label
+        let amountlabel = transactDetails.detailTextLabel.label
         if #available(iOS 12, *) {
             XCTAssertEqual(paymentlabel, payment)
             XCTAssertEqual(amountlabel, amount)

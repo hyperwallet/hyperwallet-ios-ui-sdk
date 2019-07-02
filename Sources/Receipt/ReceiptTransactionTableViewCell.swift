@@ -44,7 +44,7 @@ final class ReceiptTransactionTableViewCell: UITableViewCell {
 }
 
 extension ReceiptTransactionTableViewCell {
-    func configure(configuration: ReceiptTransactionCellConfiguration?) {
+    func configure(by configuration: ReceiptTransactionCellConfiguration?) {
         if let configuration = configuration {
             textLabel?.attributedText = formatTextLabel(type: configuration.type,
                                                         createdOn: configuration.createdOn)
@@ -53,10 +53,10 @@ extension ReceiptTransactionTableViewCell {
                                                                     entry: configuration.entry)
             textLabel?.numberOfLines = 0
             textLabel?.lineBreakMode = .byWordWrapping
-            textLabel?.accessibilityIdentifier = textLabel?.attributedText?.string
+            textLabel?.accessibilityIdentifier = "ListReceiptTableViewCellTextLabel"
             detailTextLabel?.numberOfLines = 0
             detailTextLabel?.lineBreakMode = .byWordWrapping
-            detailTextLabel?.accessibilityIdentifier = "\(textLabel?.attributedText?.string ?? "")_value"
+            detailTextLabel?.accessibilityIdentifier = "ListReceiptTableViewCellDetailTextLabel"
 
             iconColor = configuration.entry == credit ? Theme.Icon.creditColor : Theme.Icon.debitColor
             iconBackgroundColor = configuration.entry == credit ? Theme.Icon.creditBackgroundColor
