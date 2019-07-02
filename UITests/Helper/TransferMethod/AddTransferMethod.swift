@@ -47,41 +47,37 @@ class AddTransferMethod {
         self.app = app
 
         addTransferMethodTableView = app.tables["addTransferMethodTable"]
-        bankIdInput = addTransferMethodTableView.textFields["BIC/SWIFT_value"]
-        branchIdInput = addTransferMethodTableView.textFields["Routing Number_value"]
-        accountNumberInput = addTransferMethodTableView.textFields[
-            accountType == .wireAccount
-                ? "Account Number OR IBAN_value"
-                : "Account Number_value"
-        ]
+        bankIdInput = addTransferMethodTableView.textFields["bankId_value"]
+        branchIdInput = addTransferMethodTableView.textFields["branchId_value"]
+        accountNumberInput = addTransferMethodTableView.textFields["bankAccountId_value"]
         accountTypeSelect = addTransferMethodTableView.cells.staticTexts["Account Type"]
         createTransferMethodButton = addTransferMethodTableView
             .cells
             .containing(.button, identifier: "createAccountButton")
             .buttons["createAccountButton"]
-        cardNumberInput = addTransferMethodTableView.textFields["Card Number_value"]
-        dateOfExpiryInput = addTransferMethodTableView.textFields["Expiry Date_value"]
-        cvvInput = addTransferMethodTableView.textFields["CVV (Card Security Code)_value"]
-        emailInput = addTransferMethodTableView.textFields["Email_value"]
+        cardNumberInput = addTransferMethodTableView.textFields["cardNumber_value"]
+        dateOfExpiryInput = addTransferMethodTableView.textFields["dateOfExpiry_value"]
+        cvvInput = addTransferMethodTableView.textFields["cvv_value"]
+        emailInput = addTransferMethodTableView.textFields["email_value"]
         title = addTransferMethodTableView.staticTexts["Account Information - United States (USD)"]
         navigationBar = app.navigationBars[accountType.rawValue]
-        wireInstructionsInput = addTransferMethodTableView.textFields["Additional Wire Instructions_value"]
+        wireInstructionsInput = addTransferMethodTableView.textFields["wireInstructions_value"]
         selectRelationshipType = addTransferMethodTableView.cells.staticTexts["Relationship"]
-        intermediaryBankIdInput = addTransferMethodTableView.textFields["Intermediary BIC / SWIFT Code_value"]
-        intermediaryBankAccountIdInput = addTransferMethodTableView.textFields["Intermediary Account Number_value"]
-        firstNameInput = addTransferMethodTableView.textFields["First Name_value"]
-        lastNameInput = addTransferMethodTableView.textFields["Last Name_value"]
-        middleNameInput = addTransferMethodTableView.textFields["Middle Name_value"]
-        phoneNumberInput = addTransferMethodTableView.textFields["Phone Number_value"]
-        mobileNumberInput = addTransferMethodTableView.textFields["Mobile Number_value"]
-        dateOfBirthInput = addTransferMethodTableView.textFields["Date of Birth_value"]
+        intermediaryBankIdInput = addTransferMethodTableView.textFields["intermediaryBankId_value"]
+        intermediaryBankAccountIdInput = addTransferMethodTableView.textFields["intermediaryBankAccountId_value"]
+        firstNameInput = addTransferMethodTableView.textFields["firstName_value"]
+        lastNameInput = addTransferMethodTableView.textFields["lastName_value"]
+        middleNameInput = addTransferMethodTableView.textFields["middleName_value"]
+        phoneNumberInput = addTransferMethodTableView.textFields["phoneNumber_value"]
+        mobileNumberInput = addTransferMethodTableView.textFields["mobileNumber_value"]
+        dateOfBirthInput = addTransferMethodTableView.textFields["dateOfBirth_value"]
         selectCountry = addTransferMethodTableView.cells.staticTexts["Country"]
-        stateProvinceInput = addTransferMethodTableView.textFields["State/Province_value"]
-        streetInput = addTransferMethodTableView.textFields["Street_value"]
-        cityInput = addTransferMethodTableView.textFields["City_value"]
-        zipInput = addTransferMethodTableView.textFields["Zip/Postal Code_value"]
-        businessNameInput = addTransferMethodTableView.textFields["Business Name_value"]
-        businessRegistrationIdInput = addTransferMethodTableView.textFields["Business Reg Number_value"]
+        stateProvinceInput = addTransferMethodTableView.textFields["stateProvince_value"]
+        streetInput = addTransferMethodTableView.textFields["addressLine1_value"]
+        cityInput = addTransferMethodTableView.textFields["city_value"]
+        zipInput = addTransferMethodTableView.textFields["postalCode_value"]
+        businessNameInput = addTransferMethodTableView.textFields["businessName_value"]
+        businessRegistrationIdInput = addTransferMethodTableView.textFields["businessRegistrationId_value"]
     }
 
     func setBankId(_ bankId: String) {

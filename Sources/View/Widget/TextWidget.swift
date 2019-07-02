@@ -56,7 +56,7 @@ class TextWidget: AbstractWidget {
     private func setUpTextField(for field: HyperwalletField) {
         textField.placeholder = "\(field.placeholder ?? "")"
         textField.delegate = self
-        textField.accessibilityIdentifier = "\(label.text ?? "")_value"
+        textField.accessibilityIdentifier = "\(field.name ?? "")_value"
         textField.text = field.value
 
         if field.isEditable ?? true {
