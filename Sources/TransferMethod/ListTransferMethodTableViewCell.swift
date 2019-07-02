@@ -73,10 +73,10 @@ final class ListTransferMethodTableViewCell: UITableViewCell {
 extension ListTransferMethodTableViewCell {
     func configure(configuration: ListTransferMethodCellConfiguration) {
         textLabel?.text = configuration.transferMethodType
-        textLabel?.accessibilityIdentifier = configuration.transferMethodType
+        textLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellTextLabel"
         detailTextLabel?.attributedText = formatDetails(transferMethodCountry: configuration.transferMethodCountry,
                                                         additionalInfo: configuration.additionalInfo)
-        detailTextLabel?.accessibilityIdentifier = "\(configuration.transferMethodType)_value"
+        detailTextLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellDetailTextLabel"
         detailTextLabel?.numberOfLines = 0
         detailTextLabel?.lineBreakMode = .byWordWrapping
         let icon = UIImage.fontIcon(configuration.transferMethodIconFont,
