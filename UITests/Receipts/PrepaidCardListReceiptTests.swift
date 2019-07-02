@@ -1,6 +1,5 @@
 import XCTest
 class PrepaidCardListReceiptTests: BaseTests {
-    //let prepaidCardMenu = "List Prepaid Card Receipts"
     var prepaidCardReceiptMenu: XCUIElement!
 
     override func setUp() {
