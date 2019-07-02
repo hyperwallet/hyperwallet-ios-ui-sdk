@@ -81,8 +81,6 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
         XCTAssert(app.alerts["Unexpected Error"].staticTexts["Oops... Something went wrong, please try again"].exists)
         app.alerts["Unexpected Error"].buttons["OK"].tap()
         XCTAssertFalse(app.alerts["Unexpected Error"].exists)
-        XCTAssertTrue(app.navigationBars["Add Account"].exists)
-        XCTAssertTrue(app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: bankAccount).exists)
     }
 
     func testAddTransferMethod_displaysElementsOnIndividualProfileTmcResponse() {
