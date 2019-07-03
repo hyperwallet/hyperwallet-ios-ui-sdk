@@ -54,11 +54,13 @@ public final class TransferMethodConfigurationRepository: TransferMethodConfigur
     public func getKeys(completion: @escaping (HyperwalletTransferMethodConfigurationKey?,
         HyperwalletErrorType?) -> Void) {
         guard let transferMethodConfigurationKeys = transferMethodConfigurationKeys else {
+            print("getKeys from Endpoint")
             Hyperwallet.shared
                 .retrieveTransferMethodConfigurationKeys(request: HyperwalletTransferMethodConfigurationKeysQuery(),
                                                          completion: getKeysHandler(completion))
             return
         }
+        print("getKeys from cache")
         completion(transferMethodConfigurationKeys, nil)
     }
 
@@ -80,13 +82,14 @@ public final class TransferMethodConfigurationRepository: TransferMethodConfigur
                 transferMethodType: transferMethodType,
                 profile: transferMethodProfileType
             )
-
+            print("getFields from Endpoint")
             Hyperwallet.shared
                 .retrieveTransferMethodConfigurationFields(request: fieldsQuery,
                                                            completion: getFieldsHandler(fielMapKey, completion))
             return
         }
 
+        print("getFields from cache")
         completion(transferMethodConfigurationFields, nil)
     }
 

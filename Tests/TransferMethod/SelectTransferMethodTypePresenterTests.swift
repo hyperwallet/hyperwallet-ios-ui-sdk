@@ -176,20 +176,20 @@ class MockSelectTransferMethodTypeView: SelectTransferMethodTypeView {
         expectation = nil
     }
 
-    func showGenericTableView(items: [CountryCurrencyCellConfiguration],
+    func showGenericTableView(items: [CountryCurrencyCellConfigurationProtocol],
                               title: String,
                               selectItemHandler: @escaping SelectItemHandler,
                               markCellHandler: @escaping MarkCellHandler,
                               filterContentHandler: @escaping FilterContentHandler) {
         if title == "Select Country" {
-            let country = CountryCurrencyCellConfiguration(title: "United States", value: "US")
+            let country = CountryCurrencyCellConfigurationProtocol(title: "United States", value: "US")
             selectItemHandler(country)
             _ = markCellHandler(country)
             _ = filterContentHandler(items, "")
         }
 
         if title == "Select Currency" {
-            let currency = CountryCurrencyCellConfiguration(title: "US Dollar", value: "USD")
+            let currency = CountryCurrencyCellConfigurationProtocol(title: "US Dollar", value: "USD")
             selectItemHandler(currency)
             _ = markCellHandler(currency)
             _ = filterContentHandler(items, "")

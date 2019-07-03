@@ -159,12 +159,12 @@ extension SelectTransferMethodTypeTableViewController: SelectTransferMethodTypeV
         HyperwalletUtilViews.showAlert(self, message: message, actions: UIAlertAction.close(self))
     }
 
-    func showGenericTableView(items: [CountryCurrencyCellConfiguration],
+    func showGenericTableView(items: [CountryCurrencyCellConfigurationProtocol],
                               title: String,
                               selectItemHandler: @escaping SelectItemHandler,
                               markCellHandler: @escaping MarkCellHandler,
                               filterContentHandler: @escaping FilterContentHandler) {
-        let genericTableView = GenericTableViewController<CountryCurrencyCell, CountryCurrencyCellConfiguration>()
+        let genericTableView = GenericTableViewController<CountryCurrencyCell, CountryCurrencyCellConfigurationProtocol>()
         genericTableView.title = title
         genericTableView.items = items
         genericTableView.selectedHandler = selectItemHandler
