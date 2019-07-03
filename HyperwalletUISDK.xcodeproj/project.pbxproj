@@ -112,6 +112,7 @@
 		DB68FEE02284D82D000EE61D /* HyperwalletUISDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBCA37F5225E892400CD4137 /* HyperwalletUISDK.framework */; };
 		DB80BF9C22CD14D700BA5EED /* TransferMethodConfigurationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB80BF9B22CD14D700BA5EED /* TransferMethodConfigurationRepository.swift */; };
 		DB80BF9E22CD14F300BA5EED /* RepositoryFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB80BF9D22CD14F300BA5EED /* RepositoryFactory.swift */; };
+		DB80BFA422CD15C700BA5EED /* TransferMethodConfigurationRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB80BFA222CD15B100BA5EED /* TransferMethodConfigurationRepositoryTests.swift */; };
 		DBA9FA59227912A000C1301A /* UserIndividualResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBA9FA58227912A000C1301A /* UserIndividualResponse.json */; };
 		DBA9FA5B2279143900C1301A /* UserBusinessResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBA9FA5A2279143900C1301A /* UserBusinessResponse.json */; };
 		DBA9FA5E22791B2900C1301A /* UserIndividualResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBA9FA5C227918B500C1301A /* UserIndividualResponse.json */; };
@@ -302,6 +303,7 @@
 		DB4679C2226113D100E1AF49 /* HyperwalletBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletBundle.swift; sourceTree = "<group>"; };
 		DB80BF9B22CD14D700BA5EED /* TransferMethodConfigurationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodConfigurationRepository.swift; sourceTree = "<group>"; };
 		DB80BF9D22CD14F300BA5EED /* RepositoryFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryFactory.swift; sourceTree = "<group>"; };
+		DB80BFA222CD15B100BA5EED /* TransferMethodConfigurationRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodConfigurationRepositoryTests.swift; sourceTree = "<group>"; };
 		DBA9FA58227912A000C1301A /* UserIndividualResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UserIndividualResponse.json; sourceTree = "<group>"; };
 		DBA9FA5A2279143900C1301A /* UserBusinessResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UserBusinessResponse.json; sourceTree = "<group>"; };
 		DBA9FA5C227918B500C1301A /* UserIndividualResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UserIndividualResponse.json; sourceTree = "<group>"; };
@@ -685,6 +687,7 @@
 		DB80BFA122CD151700BA5EED /* TransferMethod */ = {
 			isa = PBXGroup;
 			children = (
+				DB80BFA222CD15B100BA5EED /* TransferMethodConfigurationRepositoryTests.swift */,
 			);
 			path = TransferMethod;
 			sourceTree = "<group>";
@@ -1177,6 +1180,7 @@
 			files = (
 				078B457D2273895C005B0248 /* ListTransferMethodPresenterTests.swift in Sources */,
 				0743EF9C22A5987100C089EE /* ListReceiptPresenterTests.swift in Sources */,
+				DB80BFA422CD15C700BA5EED /* TransferMethodConfigurationRepositoryTests.swift in Sources */,
 				4AEBF0FD22AA86DA00C664D3 /* ReceiptDetailPresenterTests.swift in Sources */,
 				DB18EA142261BA4C004F6AC3 /* HyperwalletTestHelper.swift in Sources */,
 				078B457F2273895C005B0248 /* AddTransferMethodPresenterTests.swift in Sources */,
