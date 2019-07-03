@@ -39,16 +39,16 @@ class ListReceiptTests: BaseTests {
 
         if #available(iOS 12, *) {
             verifyCellExists(with: "Bank Account\nMay 10, 2019", moneyTitle: "-5.00\nUSD", by: 0)
-            verifyCellExists(with: "Payment\nMay 8, 2019", moneyTitle: "+6.00\nUSD", by: 1)
+            verifyCellExists(with: "Payment\nMay 8, 2019", moneyTitle: "6.00\nUSD", by: 1)
             verifyCellExists(with: "Bank Account\nMay 6, 2019", moneyTitle: "-5.00\nUSD", by: 2)
-            verifyCellExists(with: "Payment\nMay 4, 2019", moneyTitle: "+6.00\nUSD", by: 3)
-            verifyCellExists(with: "Payment\nMay 3, 2019", moneyTitle: "+6.00\nUSD", by: 4)
+            verifyCellExists(with: "Payment\nMay 4, 2019", moneyTitle: "6.00\nUSD", by: 3)
+            verifyCellExists(with: "Payment\nMay 3, 2019", moneyTitle: "6.00\nUSD", by: 4)
         } else {
             verifyCellExists(with: "Bank Account May 10, 2019", moneyTitle: "-5.00\nUSD", by: 0)
-            verifyCellExists(with: "Payment May 8, 2019", moneyTitle: "+6.00\nUSD", by: 1)
+            verifyCellExists(with: "Payment May 8, 2019", moneyTitle: "6.00\nUSD", by: 1)
             verifyCellExists(with: "Bank Account May 6, 2019", moneyTitle: "-5.00\nUSD", by: 2)
-            verifyCellExists(with: "Payment May 4, 2019", moneyTitle: "+6.00\nUSD", by: 3)
-            verifyCellExists(with: "Payment May 3, 2019", moneyTitle: "+20.00\nUSD", by: 4)
+            verifyCellExists(with: "Payment May 4, 2019", moneyTitle: "6.00\nUSD", by: 3)
+            verifyCellExists(with: "Payment May 3, 2019", moneyTitle: "20.00\nUSD", by: 4)
         }
         XCTAssertEqual(app.tables.cells.count, expectedNumberOfCells)
         XCTAssertTrue(app.tables.staticTexts["May 2019"].exists)
@@ -73,12 +73,12 @@ class ListReceiptTests: BaseTests {
                              method: HTTPMethod.get)
 
         if #available(iOS 12, *) {
-            verifyCellDoesNotExist(with: "Payment\nMar 24, 2019", moneyTitle: "+5.00\nUSD", by: 20)
-            verifyCellDoesNotExist(with: "Payment\nMar 24, 2019", moneyTitle: "+6.00\nUSD", by: 21)
+            verifyCellDoesNotExist(with: "Payment\nMar 24, 2019", moneyTitle: "5.00\nUSD", by: 20)
+            verifyCellDoesNotExist(with: "Payment\nMar 24, 2019", moneyTitle: "6.00\nUSD", by: 21)
             verifyCellDoesNotExist(with: "Bank Account\nMar 24, 2019", moneyTitle: "-5.00\nUSD", by: 22)
         } else {
-            verifyCellDoesNotExist(with: "Payment Mar 24, 2019", moneyTitle: "+5.00 USD", by: 20)
-            verifyCellDoesNotExist(with: "Payment Mar 24, 2019", moneyTitle: "+6.00 USD", by: 21)
+            verifyCellDoesNotExist(with: "Payment Mar 24, 2019", moneyTitle: "5.00 USD", by: 20)
+            verifyCellDoesNotExist(with: "Payment Mar 24, 2019", moneyTitle: "6.00 USD", by: 21)
             verifyCellDoesNotExist(with: "Bank Account Mar 24, 2019", moneyTitle: "-5.00 USD", by: 22)
         }
 
@@ -87,12 +87,12 @@ class ListReceiptTests: BaseTests {
         waitForNonExistence(spinner)
 
         if #available(iOS 12, *) {
-            verifyCellExists(with: "Payment\nMar 24, 2019", moneyTitle: "+5.00\nUSD", by: 20)
-            verifyCellExists(with: "Payment\nMar 24, 2019", moneyTitle: "+6.00\nUSD", by: 21)
+            verifyCellExists(with: "Payment\nMar 24, 2019", moneyTitle: "5.00\nUSD", by: 20)
+            verifyCellExists(with: "Payment\nMar 24, 2019", moneyTitle: "6.00\nUSD", by: 21)
             verifyCellExists(with: "Bank Account\nMar 24, 2019", moneyTitle: "-5.00\nUSD", by: 22)
         } else {
-            verifyCellExists(with: "Payment Mar 24, 2019", moneyTitle: "+5.00 USD", by: 20)
-            verifyCellExists(with: "Payment Mar 24, 2019", moneyTitle: "+6.00 USD", by: 21)
+            verifyCellExists(with: "Payment Mar 24, 2019", moneyTitle: "5.00 USD", by: 20)
+            verifyCellExists(with: "Payment Mar 24, 2019", moneyTitle: "6.00 USD", by: 21)
             verifyCellExists(with: "Bank Account Mar 24, 2019", moneyTitle: "-5.00 USD", by: 22)
         }
     }
@@ -147,23 +147,23 @@ class ListReceiptTests: BaseTests {
 
     private func validateListOrder() {
         if #available(iOS 12, *) {
-            verifyCellExists(with: "Payment\nMay 24, 2019", moneyTitle: "+6.00\nUSD", by: 0)
+            verifyCellExists(with: "Payment\nMay 24, 2019", moneyTitle: "6.00\nUSD", by: 0)
             verifyCellExists(with: "Bank Account\nMay 12, 2019", moneyTitle: "-5.00\nUSD", by: 1)
-            verifyCellExists(with: "Payment\nMay 4, 2019", moneyTitle: "+6.00\nUSD", by: 2)
-            verifyCellExists(with: "Payment\nApr 27, 2019", moneyTitle: "+6.00\nUSD", by: 3)
-            verifyCellExists(with: "Payment\nApr 19, 2019", moneyTitle: "+6.00\nUSD", by: 4)
+            verifyCellExists(with: "Payment\nMay 4, 2019", moneyTitle: "6.00\nUSD", by: 2)
+            verifyCellExists(with: "Payment\nApr 27, 2019", moneyTitle: "6.00\nUSD", by: 3)
+            verifyCellExists(with: "Payment\nApr 19, 2019", moneyTitle: "6.00\nUSD", by: 4)
             verifyCellExists(with: "Bank Account\nApr 14, 2019", moneyTitle: "-7.50\nUSD", by: 5)
-            verifyCellExists(with: "Payment\nMar 25, 2019", moneyTitle: "+6.00\nUSD", by: 6)
-            verifyCellExists(with: "Payment\nMar 18, 2019", moneyTitle: "+6.00\nUSD", by: 7)
+            verifyCellExists(with: "Payment\nMar 25, 2019", moneyTitle: "6.00\nUSD", by: 6)
+            verifyCellExists(with: "Payment\nMar 18, 2019", moneyTitle: "6.00\nUSD", by: 7)
         } else {
-            verifyCellExists(with: "Payment May 24, 2019", moneyTitle: "+6.00 USD", by: 0)
+            verifyCellExists(with: "Payment May 24, 2019", moneyTitle: "6.00 USD", by: 0)
             verifyCellExists(with: "Bank Account May 12, 2019", moneyTitle: "-5.00 USD", by: 1)
-            verifyCellExists(with: "Payment May 4, 2019", moneyTitle: "+6.00 USD", by: 2)
-            verifyCellExists(with: "Payment Apr 27, 2019", moneyTitle: "+6.00 USD", by: 3)
-            verifyCellExists(with: "Payment Apr 19, 2019", moneyTitle: "+6.00 USD", by: 4)
+            verifyCellExists(with: "Payment May 4, 2019", moneyTitle: "6.00 USD", by: 2)
+            verifyCellExists(with: "Payment Apr 27, 2019", moneyTitle: "6.00 USD", by: 3)
+            verifyCellExists(with: "Payment Apr 19, 2019", moneyTitle: "6.00 USD", by: 4)
             verifyCellExists(with: "Bank Account Apr 14, 2019", moneyTitle: "-7.50 USD", by: 5)
-            verifyCellExists(with: "Payment Mar 25, 2019", moneyTitle: "+6.00 USD", by: 6)
-            verifyCellExists(with: "Payment Mar 18, 2019", moneyTitle: "+6.00 USD", by: 7)
+            verifyCellExists(with: "Payment Mar 25, 2019", moneyTitle: "6.00 USD", by: 6)
+            verifyCellExists(with: "Payment Mar 18, 2019", moneyTitle: "6.00 USD", by: 7)
         }
     }
 
