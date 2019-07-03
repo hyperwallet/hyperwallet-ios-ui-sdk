@@ -45,6 +45,7 @@ final class ReceiptTransactionTableViewCell: UITableViewCell {
     lazy var amountLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.font = Theme.Label.bodyFontMedium
+        label.textAlignment = .right
         label.accessibilityIdentifier = "ReceiptTransactionAmountLabel"
         return label
     }()
@@ -61,6 +62,7 @@ final class ReceiptTransactionTableViewCell: UITableViewCell {
         let label = UILabel(frame: .zero)
         label.font = Theme.Label.captionOne
         label.textColor = Theme.Label.subTitleColor
+        label.textAlignment = .right
         label.accessibilityIdentifier = "ReceiptTransactionCurrencyLabel"
         return label
     }()
@@ -92,8 +94,14 @@ final class ReceiptTransactionTableViewCell: UITableViewCell {
         stackView.addArrangedSubview(line2StackView)
 
         contentView.addSubview(stackView)
-        contentView.layer.backgroundColor = UIColor.gray.cgColor
-        contentView.addConstraintsFillEntireView(view: stackView)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: imageView!.trailingAnchor, constant: 15),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
+            stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 0),
+            stackView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 10),
+            stackView.bottomAnchor.constraint(greaterThanOrEqualTo: contentView.bottomAnchor, constant: -10)
+        ])
     }
 
     private func setup(_ stackView: UIStackView, with leftLabel: UILabel, and rightLabel: UILabel) {
@@ -112,7 +120,7 @@ final class ReceiptTransactionTableViewCell: UITableViewCell {
         leftLabel.translatesAutoresizingMaskIntoConstraints = false
         rightLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        leftLabel.widthAnchor.constraint(greaterThanOrEqualTo: rightLabel.widthAnchor).isActive = true
+        leftLabel.widthAnchor.constraint(equalTo: rightLabel.widthAnchor).isActive = true
 
         leftLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
         leftLabel.setContentHuggingPriority(.required, for: .vertical)
