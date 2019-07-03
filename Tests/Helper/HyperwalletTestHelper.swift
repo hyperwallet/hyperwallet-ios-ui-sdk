@@ -13,7 +13,7 @@ class HyperwalletTestHelper {
     static let userRestURL = "\(restURL)\(userPath)"
 
     // MARK: Build Requests
-    static func buildPostResquest(baseUrl: String, _ response: StubResponse) -> StubRequest {
+    static func buildPostRequest(baseUrl: String, _ response: StubResponse) -> StubRequest {
         return StubRequest.Builder()
             .stubRequest(withMethod: .POST, url: URL(string: baseUrl)!)
             .addHeader(withKey: contentType, value: applicationJson)
@@ -48,7 +48,7 @@ class HyperwalletTestHelper {
 
     // MARK: - StubResponses
 
-    /// Builts the stub HTTP 200 - OK
+    /// Builds the stub HTTP 200 - OK
     ///
     /// - Parameter for: The response file name will be loaded by `getDataFromJson(responseFileName)`
     /// - Returns: the StubResponse
@@ -57,14 +57,14 @@ class HyperwalletTestHelper {
         return setUpMockedResponse(payload: data, httpCode: 200)
     }
 
-    /// Builts the stub HTTP 204 - No Content
+    /// Builds the stub HTTP 204 - No Content
     ///
     /// - Returns: the StubResponse
     static func noContentHTTPResponse() -> StubResponse {
         return setUpMockedResponse(payload: Data(), httpCode: 204)
     }
 
-    /// Builts the stub HTTP 400 - Bad Request
+    /// Builds the stub HTTP 400 - Bad Request
     ///
     /// - Parameter for: The response file name will be loaded by `getDataFromJson(responseFileName)`
     /// - Returns: the StubResponse
