@@ -23,16 +23,16 @@ class TransactionDetailTests: BaseTests {
         let transactionDetailHeaderLabel = transactDetails.detailHeaderTitle
         waitForNonExistence(transactionDetailHeaderLabel)
         if #available(iOS 12, *) {
-            verifyPayment(payment: "Payment\nMay 24, 2019", amount: "+6.00\n\(currency)")
+            verifyPayment(payment: "Payment\nMay 24, 2019", amount: "6.00\n\(currency)")
         } else {
-            verifyPayment(payment: "Payment May 24, 2019", amount: "+6.00 \(currency)")
+            verifyPayment(payment: "Payment May 24, 2019", amount: "6.00 \(currency)")
         }
 
         // DETAILS Section
         verifyDetailSection(receiptIdVal: "55176992", dateVal: expectedDateValue, clientIdVal: "DyClk0VG9a")
 
         // FEE Section
-        verifyFeeSection(amountVal: "+6.00 USD", feeVal: "0.00 USD", transactionVal: "6.00 USD")
+        verifyFeeSection(amountVal: "6.00 USD", feeVal: "0.00 USD", transactionVal: "6.00 USD")
     }
 
     // Debit Transaction
