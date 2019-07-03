@@ -19,24 +19,23 @@
 import UIKit
 
 /// Represents the country and currency data to be displyed on the CountryCurrencyCell
-// TODO: Review this protocol name
-protocol CountryCurrencyCellConfigurationProtocol {
+protocol CountryCurrencyCellConfiguration {
     var title: String { get }
     var value: String { get }
 }
-extension CountryCurrencyCellConfigurationProtocol {
+extension CountryCurrencyCellConfiguration {
     var identifier: String {
         return "cell\(title)"
     }
 }
 
-struct CountryCurrencyCellConfiguration: CountryCurrencyCellConfigurationProtocol {
+struct CountryCurrencyCellConfigurationData: CountryCurrencyCellConfiguration {
     var title: String
     var value: String
 }
 
 /// Represents the Country and Currency cell
-final class CountryCurrencyCell: GenericCell<CountryCurrencyCellConfigurationProtocol> {
+final class CountryCurrencyCell: GenericCell<CountryCurrencyCellConfiguration> {
     static let reuseIdentifier = "countryCurrencyCellIdentifier"
     private let trailingConstraintIdentifier = "trailingConstraintIdentifier"
 
@@ -53,7 +52,7 @@ final class CountryCurrencyCell: GenericCell<CountryCurrencyCellConfigurationPro
     }()
 
     // MARK: Property
-    override var item: CountryCurrencyCellConfigurationProtocol? {
+    override var item: CountryCurrencyCellConfiguration? {
         didSet {
             guard let configuration = item  else {
                 return

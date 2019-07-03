@@ -59,6 +59,8 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
         XCTAssertNil(error, "The error should be nil")
         XCTAssertNotNil(result, "The result should not be nil")
         XCTAssertGreaterThan(result!.countries()!.count, 0)
+        XCTAssertGreaterThan(repository.countriesFromCache()!.count, 0)
+        XCTAssertGreaterThan(repository.currenciesFromCache(from: country)!.count, 0)
     }
 
     func testGetKeys_failureWithError() {
@@ -78,11 +80,14 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
 
         XCTAssertNotNil(error, "The error should not be nil")
         XCTAssertNil(result, "The result should be nil")
+        XCTAssertNil(repository.countriesFromCache())
+        XCTAssertNil(repository.currenciesFromCache(from: country))
     }
 
     func testGetKeys_successWithKeyResultFromCacheWhenNotNil() {
         setupTransferMethodConfigurationMockServer(keyResponseData)
         let repository = TransferMethodConfigurationRepository()
+
         // Get data from the server
         let expectation = self.expectation(description: "Get transfer methods keys")
         repository.getKeys { (_, _) in expectation.fulfill() }
@@ -115,7 +120,6 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
                              transferMethodProfileType: profileType,
                              completion: { (transferMethodConfigurationField, hyperwalletError) in
                                 result = transferMethodConfigurationField
-                                dump(result)
                                 error = hyperwalletError
                                 expectation.fulfill()
         })
@@ -149,7 +153,6 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
                              transferMethodProfileType: profileType,
                              completion: { (transferMethodConfigurationField, hyperwalletError) in
                                 result = transferMethodConfigurationField
-                                dump(result)
                                 error = hyperwalletError
         })
 
@@ -175,7 +178,6 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
                              transferMethodProfileType: profileType,
                              completion: { (transferMethodConfigurationField, hyperwalletError) in
                                 result = transferMethodConfigurationField
-                                dump(result)
                                 error = hyperwalletError
                                 expectation.fulfill()
         })
@@ -183,6 +185,24 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
 
         XCTAssertNotNil(error, "The error should not be nil")
         XCTAssertNil(result, "The result should be nil")
+    }
+
+    func testRefreshKeys_cleanRepositoryCache() {
+        setupTransferMethodConfigurationMockServer(keyResponseData)
+        let repository = TransferMethodConfigurationRepository()
+
+        // Get data from the server
+        let expectation = self.expectation(description: "Get transfer methods keys")
+        repository.getKeys { (_, _) in expectation.fulfill() }
+        wait(for: [expectation], timeout: 1)
+        XCTAssertGreaterThan(repository.countriesFromCache()!.count, 0)
+        XCTAssertGreaterThan(repository.currenciesFromCache(from: country)!.count, 0)
+
+        // When
+        repository.refreshKeys()
+
+        XCTAssertNil(repository.countriesFromCache())
+        XCTAssertNil(repository.currenciesFromCache(from: country))
     }
 
     private func setupTransferMethodConfigurationMockServer(_ data: Data, _ error: NSError? = nil) {

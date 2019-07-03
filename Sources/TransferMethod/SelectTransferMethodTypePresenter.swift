@@ -19,12 +19,12 @@
 import HyperwalletSDK
 
 protocol SelectTransferMethodTypeView: class {
-    typealias SelectItemHandler = (_ value: CountryCurrencyCellConfigurationProtocol) -> Void
-    typealias MarkCellHandler = (_ value: CountryCurrencyCellConfigurationProtocol) -> Bool
-    typealias FilterContentHandler = ((_ items: [CountryCurrencyCellConfigurationProtocol],
-        _ searchText: String) -> [CountryCurrencyCellConfigurationProtocol])
+    typealias SelectItemHandler = (_ value: CountryCurrencyCellConfiguration) -> Void
+    typealias MarkCellHandler = (_ value: CountryCurrencyCellConfiguration) -> Bool
+    typealias FilterContentHandler = ((_ items: [CountryCurrencyCellConfiguration],
+        _ searchText: String) -> [CountryCurrencyCellConfiguration])
 
-    func showGenericTableView(items: [CountryCurrencyCellConfigurationProtocol],
+    func showGenericTableView(items: [CountryCurrencyCellConfiguration],
                               title: String,
                               selectItemHandler: @escaping SelectItemHandler,
                               markCellHandler: @escaping MarkCellHandler,
@@ -46,22 +46,25 @@ final class SelectTransferMethodTypePresenter {
     // MARK: properties
     private unowned let view: SelectTransferMethodTypeView
     private var user: HyperwalletUser?
-
-    // TODO: Remove
-    private (set) var sectionData = [HyperwalletTransferMethodType]()
-
     private (set) var countryCurrencySectionData = [String]()
     private (set) var selectedCountry = ""
     private (set) var selectedCurrency = ""
+    private var transferMethodConfigurationRepository: TransferMethodConfigurationRepositoryProtocol!
 
-    // TODO: Check if we can receive an instance from the contructor
-    private var transferMethodConfigurationRepository: TransferMethodConfigurationRepositoryProtocol {
-        return RepositoryFactory.shared.transferMethodConfigurationRepository
+    private var currencyFromSelectedCountry: [HyperwalletCurrency]? {
+        return transferMethodConfigurationRepository.currenciesFromCache(from: selectedCountry)
+    }
+
+    var sectionData: [HyperwalletTransferMethodType] {
+        return transferMethodConfigurationRepository.transferMethodTypesFromCache(selectedCountry, selectedCurrency) ??
+            [HyperwalletTransferMethodType]()
     }
 
     /// Initialize SelectTransferMethodPresenter
-    init(view: SelectTransferMethodTypeView) {
+    init(_ view: SelectTransferMethodTypeView,
+         _ transferMethodConfigurationRepository: TransferMethodConfigurationRepositoryProtocol) {
         self.view = view
+        self.transferMethodConfigurationRepository = transferMethodConfigurationRepository
     }
 
     /// Return the `SelectTransferMethodTypeConfiguration` based on the index
@@ -81,12 +84,12 @@ final class SelectTransferMethodTypePresenter {
     }
 
     /// Return the countryCurrency item composed by the tuple (title and value)
-    func getCountryCurrencyConfiguration(indexPath: IndexPath) -> CountryCurrencyCellConfigurationProtocol? {
+    func getCountryCurrencyConfiguration(indexPath: IndexPath) -> CountryCurrencyCellConfiguration? {
         guard let title = countryCurrencySectionData[safe: indexPath.row] else {
             return nil
         }
-        return CountryCurrencyCellConfiguration(title: title.localized(),
-                                                value: countryCurrencyValues(at: indexPath.row))
+        return CountryCurrencyCellConfigurationData(title: title.localized(),
+                                                    value: countryCurrencyValues(at: indexPath.row))
     }
 
     /// Display all the select Country or Currency based on the index
@@ -124,7 +127,7 @@ final class SelectTransferMethodTypePresenter {
             }
 
             strongSelf.user = result
-            //TODO Review the DispatchQueue before implement the UserRepository
+            //TODO Review the DispatchQueue after to implement the UserRepository
             DispatchQueue.main.async {
                 strongSelf.transferMethodConfigurationRepository.getKeys(completion: strongSelf.getKeysHandler())
             }
@@ -159,14 +162,13 @@ final class SelectTransferMethodTypePresenter {
             }
             strongSelf.countryCurrencySectionData = ["Country", "Currency"]
             strongSelf.setSelectedCountry(countries: result?.countries())
-            strongSelf.setSelectedCurrency(result?.currencies(from: strongSelf.selectedCountry))
-            strongSelf.setTransferMethodTypes(result?.transferMethodTypes(countryCode: strongSelf.selectedCountry,
-                                                                          currencyCode: strongSelf.selectedCurrency))
+            strongSelf.loadSelectedCurrencyValue()
+            strongSelf.reloadTransferMethodTypesIfNeeded()
         }
     }
 
     /// Shows the Select Country View
-    private func showSelectCountryView(_ countries: [CountryCurrencyCellConfigurationProtocol]?) {
+    private func showSelectCountryView(_ countries: [CountryCurrencyCellConfiguration]?) {
         guard let countries = countries else {
             view.showAlert(message: "no_country_available_error_message".localized())
             return
@@ -180,7 +182,7 @@ final class SelectTransferMethodTypePresenter {
     }
 
     /// Shows the Select Currency View
-    private func showSelectCurrencyView(_ currencies: [CountryCurrencyCellConfigurationProtocol]?) {
+    private func showSelectCurrencyView(_ currencies: [CountryCurrencyCellConfiguration]?) {
         guard let currencies = currencies  else {
             view.showAlert(message: String(format: "no_currency_available_error_message".localized(),
                                            selectedCountry.localized()))
@@ -200,8 +202,8 @@ final class SelectTransferMethodTypePresenter {
                 return
             }
             strongSelf.selectedCountry = country.value
-            strongSelf.loadCurrency(for: country.value)
-            strongSelf.loadTransferMethodTypes()
+            strongSelf.loadSelectedCurrencyValue()
+            strongSelf.reloadTransferMethodTypesIfNeeded()
         }
     }
 
@@ -211,20 +213,20 @@ final class SelectTransferMethodTypePresenter {
                 return
             }
             strongSelf.selectedCurrency = currency.value
-            strongSelf.loadTransferMethodTypes()
+            strongSelf.reloadTransferMethodTypesIfNeeded()
             strongSelf.view.countryCurrencyTableViewReloadData()
         }
     }
 
     private func filterContentHandler() -> SelectTransferMethodTypeView.FilterContentHandler {
-            return {(items, searchText) in
-                items.filter {
-                    // search by decription
-                    $0.title.lowercased().contains(searchText.lowercased()) ||
-                        //or code
-                        $0.value.lowercased().contains(searchText.lowercased())
-                }
+        return {(items, searchText) in
+            items.filter {
+                // search by decription
+                $0.title.lowercased().contains(searchText.lowercased()) ||
+                    //or code
+                    $0.value.lowercased().contains(searchText.lowercased())
             }
+        }
     }
 
     private func countryMarkCellHandler() -> SelectTransferMethodTypeView.MarkCellHandler {
@@ -236,19 +238,6 @@ final class SelectTransferMethodTypePresenter {
     private func currencyMarkCellHandler() -> SelectTransferMethodTypeView.MarkCellHandler {
         return { [weak self] item in
             self?.selectedCurrency == item.value
-        }
-    }
-
-    private func loadTransferMethodTypes() {
-        transferMethodConfigurationRepository.getKeys {(result, _) in
-            self.setTransferMethodTypes(result?.transferMethodTypes(countryCode: self.selectedCountry,
-                                                                    currencyCode: self.selectedCurrency))
-        }
-    }
-
-    private func loadCurrency(for country: String) {
-        transferMethodConfigurationRepository.getKeys {(result, _) in
-            self.setSelectedCurrency(result?.currencies(from: country))
         }
     }
 
@@ -265,34 +254,32 @@ final class SelectTransferMethodTypePresenter {
         }
     }
 
-    private func setSelectedCurrency(_ currencies: [HyperwalletCurrency]?) {
-        guard let firstCurrency = currencies?.min(by: { $0.name < $1.name })
-            else {
-                view.showAlert(message: String(format: "no_currency_available_error_message".localized(),
-                                               selectedCountry.localized()))
-                selectedCurrency = ""
-                view.countryCurrencyTableViewReloadData()
-                return
+    private func loadSelectedCurrencyValue() {
+        //TODO: Check if do we need this .min(by: { $0.name < $1.name })
+        guard let firstCurrency = currencyFromSelectedCountry?.min(by: { $0.name < $1.name }) else {
+            view.showAlert(message: String(format: "no_currency_available_error_message".localized(),
+                                           selectedCountry.localized()))
+            selectedCurrency = ""
+            view.countryCurrencyTableViewReloadData()
+            return
         }
         selectedCurrency = firstCurrency.code
         view.countryCurrencyTableViewReloadData()
     }
 
-    private func setTransferMethodTypes(_ transfeMethodTypes: [HyperwalletTransferMethodType]? ) {
-        sectionData.removeAll()
-        guard let result = transfeMethodTypes, !result.isEmpty else {
+    private func reloadTransferMethodTypesIfNeeded() {
+        guard !sectionData.isEmpty else {
             view.showAlert(message: String(format: "no_transfer_method_available_error_message".localized(),
                                            selectedCountry,
                                            selectedCurrency))
             return
         }
-        sectionData = result
         view.transferMethodTypeTableViewReloadData()
     }
 }
 
 // MARK: - HyperwalletCountry
-extension HyperwalletCountry: CountryCurrencyCellConfigurationProtocol {
+extension HyperwalletCountry: CountryCurrencyCellConfiguration {
     var title: String {
         return name
     }
@@ -303,7 +290,7 @@ extension HyperwalletCountry: CountryCurrencyCellConfigurationProtocol {
 }
 
 // MARK: - HyperwalletCountry
-extension HyperwalletCurrency: CountryCurrencyCellConfigurationProtocol {
+extension HyperwalletCurrency: CountryCurrencyCellConfiguration {
     var title: String {
         return name
     }

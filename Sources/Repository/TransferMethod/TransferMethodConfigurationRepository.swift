@@ -20,6 +20,26 @@ import HyperwalletSDK
 
 /// Transfer method configuration repository protocol
 public protocol TransferMethodConfigurationRepositoryProtocol {
+    /// Gets the list of countries from repository cache
+    ///
+    /// - Returns: a list of HyperwalletCountry object
+    func countriesFromCache() -> [HyperwalletSDK.HyperwalletCountry]?
+
+    /// Gets the list of currencies from repository cache
+    ///
+    /// - Parameter countryCode: the 2 letter ISO 3166-1 country code
+    /// - Returns: a list of HyperwalletCurrency object
+    func currenciesFromCache(from countryCode: String) -> [HyperwalletSDK.HyperwalletCurrency]?
+
+    /// Gets the list of transfer method types from repository cache
+    ///
+    /// - Parameters:
+    ///   - countryCode: the 2 letter ISO 3166-1 country code
+    ///   - currencyCode: the 3 letter ISO 4217-1 currency code
+    /// - Returns: a list of HyperwalletTransferMethodTypes
+    func transferMethodTypesFromCache(_ countryCode: String,
+                                      _ currencyCode: String) -> [HyperwalletTransferMethodType]?
+
     /// Gets the transfer method configuration keys
     ///
     /// - Parameter completion: the callback handler of responses from the Hyperwallet platform
@@ -48,8 +68,16 @@ public protocol TransferMethodConfigurationRepositoryProtocol {
 
 // MARK: - TransferMethodConfigurationRepository
 public final class TransferMethodConfigurationRepository: TransferMethodConfigurationRepositoryProtocol {
-    private var transferMethodConfigurationKeys: HyperwalletTransferMethodConfigurationKey?
     private var transferMethodConfigurationFieldsCache = [FieldMapKey: HyperwalletTransferMethodConfigurationField]()
+    private var transferMethodConfigurationKeys: HyperwalletTransferMethodConfigurationKey?
+
+    public func countriesFromCache() -> [HyperwalletCountry]? {
+        return transferMethodConfigurationKeys?.countries()
+    }
+
+    public func currenciesFromCache(from countryCode: String) -> [HyperwalletCurrency]? {
+        return transferMethodConfigurationKeys?.currencies(from: countryCode)
+    }
 
     public func getKeys(completion: @escaping (HyperwalletTransferMethodConfigurationKey?,
         HyperwalletErrorType?) -> Void) {
@@ -62,6 +90,12 @@ public final class TransferMethodConfigurationRepository: TransferMethodConfigur
         }
         print("getKeys from cache")
         completion(transferMethodConfigurationKeys, nil)
+    }
+
+    public func transferMethodTypesFromCache(_ countryCode: String,
+                                             _ currencyCode: String) -> [HyperwalletTransferMethodType]? {
+        return transferMethodConfigurationKeys?.transferMethodTypes(countryCode: countryCode,
+                                                                    currencyCode: currencyCode)
     }
 
     public func getFields(country: String,

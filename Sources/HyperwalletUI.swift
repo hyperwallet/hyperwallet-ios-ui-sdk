@@ -70,7 +70,8 @@ public final class HyperwalletUI {
     ///
     /// - Returns: An instance of `SelectTransferMethodTypeTableViewController`
     public func selectTransferMethodTypeTableViewController() -> SelectTransferMethodTypeTableViewController {
-        return SelectTransferMethodTypeTableViewController()
+        return SelectTransferMethodTypeTableViewController(
+            transferMethodConfigurationRepository: RepositoryFactory.shared.transferMethodConfigurationRepository)
     }
 
     /// Controller to create a new transfer method.

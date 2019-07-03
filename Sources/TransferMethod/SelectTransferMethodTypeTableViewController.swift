@@ -32,6 +32,11 @@ public final class SelectTransferMethodTypeTableViewController: UITableViewContr
     private var presenter: SelectTransferMethodTypePresenter!
     private var countryCurrencyView: CountryCurrencyTableView!
 
+    convenience init(transferMethodConfigurationRepository: TransferMethodConfigurationRepositoryProtocol) {
+        self.init()
+        presenter = SelectTransferMethodTypePresenter(self, transferMethodConfigurationRepository)
+    }
+
     // MARK: - Lifecycle
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -40,8 +45,6 @@ public final class SelectTransferMethodTypeTableViewController: UITableViewContr
         setViewBackgroundColor()
 
         navigationItem.backBarButtonItem = UIBarButtonItem.back
-
-        presenter = SelectTransferMethodTypePresenter(view: self)
 
         setupCountryCurrencyTableView()
         setupTransferMethodTypeTableView()
@@ -159,12 +162,13 @@ extension SelectTransferMethodTypeTableViewController: SelectTransferMethodTypeV
         HyperwalletUtilViews.showAlert(self, message: message, actions: UIAlertAction.close(self))
     }
 
-    func showGenericTableView(items: [CountryCurrencyCellConfigurationProtocol],
+    func showGenericTableView(items: [CountryCurrencyCellConfiguration],
                               title: String,
                               selectItemHandler: @escaping SelectItemHandler,
                               markCellHandler: @escaping MarkCellHandler,
                               filterContentHandler: @escaping FilterContentHandler) {
-        let genericTableView = GenericTableViewController<CountryCurrencyCell, CountryCurrencyCellConfigurationProtocol>()
+        let genericTableView = GenericTableViewController < CountryCurrencyCell,
+            CountryCurrencyCellConfiguration> ()
         genericTableView.title = title
         genericTableView.items = items
         genericTableView.selectedHandler = selectItemHandler
