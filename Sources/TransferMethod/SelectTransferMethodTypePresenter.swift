@@ -54,7 +54,7 @@ final class SelectTransferMethodTypePresenter {
     }
 
     private var currencyFromSelectedCountry: [HyperwalletCurrency]? {
-        return transferMethodConfigurationDataManager.currencies(from: selectedCountry)
+        return transferMethodConfigurationDataManager.currencies(selectedCountry)
     }
 
     var sectionData: [HyperwalletTransferMethodType] {
@@ -106,6 +106,8 @@ final class SelectTransferMethodTypePresenter {
     }
 
     /// Loads the transferMethodKeys from core SDK and display the default transfer methods
+    ///
+    /// - Parameter forceUpdate: Forces to refresh the data manager
     func loadTransferMethodKeys(_ forceUpdate: Bool = false) {
         view.showLoading()
 

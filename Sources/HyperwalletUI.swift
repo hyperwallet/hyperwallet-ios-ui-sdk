@@ -68,6 +68,7 @@ public final class HyperwalletUI {
     /// Lists all transfer method types available based on the country, currency and profile type to create a new
     /// transfer method (bank account, bank card, PayPal account, prepaid card, paper check).
     ///
+    /// - Parameter forceRepositoryUpdate: Forces to refresh the data manager
     /// - Returns: An instance of `SelectTransferMethodTypeTableViewController`
     public func selectTransferMethodTypeTableViewController(forceRepositoryUpdate: Bool = false)
         -> SelectTransferMethodTypeTableViewController {
@@ -89,8 +90,9 @@ public final class HyperwalletUI {
         _ country: String,
         _ currency: String,
         _ profileType: String,
-        _ transferMethodTypeCode: String) -> AddTransferMethodTableViewController {
-        return AddTransferMethodTableViewController(country, currency, profileType, transferMethodTypeCode)
+        _ transferMethodTypeCode: String,
+        _ forceRepositoryUpdate: Bool = false) -> AddTransferMethodTableViewController {
+        return AddTransferMethodTableViewController(country, currency, profileType, transferMethodTypeCode, forceRepositoryUpdate)
     }
 
     private init(_ provider: HyperwalletAuthenticationTokenProvider) {

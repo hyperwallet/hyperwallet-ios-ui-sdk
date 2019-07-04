@@ -53,27 +53,19 @@ public final class SelectTransferMethodTypeTableViewController: UITableViewContr
         navigationItem.backBarButtonItem = UIBarButtonItem.back
         presenter = SelectTransferMethodTypePresenter(self)
         setupCountryCurrencyTableView()
-//        setupTransferMethodTypeTableView()
+        setupTransferMethodTypeTableView()
 
         presenter.loadTransferMethodKeys(forceUpdate)
     }
 
-    override public func loadView() { // *
-        view = UITableView(frame: .zero, style: .plain)
-        tableView.delegate = self
-        tableView.dataSource = self
-        
+    // MARK: - Setup Layout
+    private func setupTransferMethodTypeTableView() {
         tableView.accessibilityIdentifier = "selectTransferMethodTypeTable"
         tableView.register(SelectTransferMethodTypeCell.self,
                            forCellReuseIdentifier: SelectTransferMethodTypeCell.reuseIdentifier)
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 0.5))
         footerView.backgroundColor = tableView.separatorColor
         tableView.tableFooterView = footerView
-    }
-
-    // MARK: - Setup Layout
-    private func setupTransferMethodTypeTableView() {
-
     }
 
     func setupCountryCurrencyTableView() {
@@ -141,13 +133,10 @@ extension SelectTransferMethodTypeTableViewController: SelectTransferMethodTypeV
                                                currency: String,
                                                profileType: String,
                                                transferMethodTypeCode: String) {
-        let addTransferMethodController = AddTransferMethodTableViewController(country,
-                                                                               currency,
-                                                                               profileType,
-                                                                               transferMethodTypeCode)
+        let addTransferMethodController = HyperwalletUI.shared
+            .addTransferMethodTableViewController(country, currency, profileType, transferMethodTypeCode, forceUpdate)
 
-        addTransferMethodController.createTransferMethodHandler = {
-            (transferMethod: HyperwalletTransferMethod) -> Void in
+        addTransferMethodController.createTransferMethodHandler = { (transferMethod) -> Void in
             self.createTransferMethodHandler?(transferMethod)
         }
 

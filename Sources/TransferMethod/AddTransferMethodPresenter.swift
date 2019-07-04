@@ -55,38 +55,34 @@ final class AddTransferMethodPresenter {
         self.transferMethodTypeCode = transferMethodTypeCode
     }
 
-    func loadTransferMethodConfigurationFields() {
-        let fieldsQuery = HyperwalletTransferMethodConfigurationFieldQuery(
-            country: country,
-            currency: currency,
-            transferMethodType: transferMethodTypeCode,
-            profile: profileType
-        )
+    func loadTransferMethodConfigurationFields(_ forceUpdate: Bool = false) {
         view.showLoading()
-        Hyperwallet.shared.retrieveTransferMethodConfigurationFields(
-            request: fieldsQuery,
-            completion: { [weak self] (result, error) in
+
+        if forceUpdate {
+            TransferMethodConfigurationDataManager.shared.refreshFields()
+        }
+
+        TransferMethodConfigurationDataManager.shared
+            .getFields(country, currency, transferMethodTypeCode, profileType) { [weak self] (result, error) in
                 guard let strongSelf = self else {
                     return
                 }
 
-                DispatchQueue.main.async {
-                    strongSelf.view.hideLoading()
-                    if let error = error {
-                        strongSelf.view.showError(error, { () -> Void in
-                            strongSelf.loadTransferMethodConfigurationFields() })
-                        return
-                    }
-                    guard
-                        let result = result,
-                        let fieldGroups = result.fieldGroups(),
-                        let transferMethodType = result.transferMethodType()
-                        else {
-                            return
-                    }
-                    strongSelf.view.showTransferMethodFields(fieldGroups, transferMethodType)
+                strongSelf.view.hideLoading()
+                if let error = error {
+                    strongSelf.view.showError(error, { () -> Void in
+                        strongSelf.loadTransferMethodConfigurationFields() })
+                    return
                 }
-            })
+                guard
+                    let result = result,
+                    let fieldGroups = result.fieldGroups(),
+                    let transferMethodType = result.transferMethodType()
+                    else {
+                        return
+                }
+                strongSelf.view.showTransferMethodFields(fieldGroups, transferMethodType)
+            }
     }
 
     func createTransferMethod() {

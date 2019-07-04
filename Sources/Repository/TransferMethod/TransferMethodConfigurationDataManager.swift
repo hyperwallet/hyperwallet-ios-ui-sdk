@@ -30,7 +30,7 @@ public protocol TransferMethodConfigurationDataManagerProtocol {
     ///
     /// - Parameter countryCode: the 2 letter ISO 3166-1 country code
     /// - Returns: a list of HyperwalletCurrency object
-    func currencies(from countryCode: String) -> [HyperwalletCurrency]?
+    func currencies(_ countryCode: String) -> [HyperwalletCurrency]?
 
     /// Gets the list of transfer method types
     ///
@@ -53,10 +53,10 @@ public protocol TransferMethodConfigurationDataManagerProtocol {
     ///   - transferMethodType: the `TransferMethodType`
     ///   - transferMethodProfileType:`INDIVIDUAL` or `BUSINESS`
     ///   - completion:
-    func getFields(country: String,
-                   currency: String,
-                   transferMethodType: String,
-                   transferMethodProfileType: String,
+    func getFields(_ country: String,
+                   _ currency: String,
+                   _ transferMethodType: String,
+                   _ transferMethodProfileType: String,
                    completion: @escaping (HyperwalletTransferMethodConfigurationField?, HyperwalletErrorType?) -> Void)
 
     /// Refreshes the transfer method keys
@@ -96,7 +96,7 @@ public final class TransferMethodConfigurationDataManager: TransferMethodConfigu
         return transferMethodConfigurationKeys?.countries()
     }
 
-    public func currencies(from countryCode: String) -> [HyperwalletCurrency]? {
+    public func currencies(_ countryCode: String) -> [HyperwalletCurrency]? {
          return transferMethodConfigurationKeys?.currencies(from: countryCode)
     }
 
@@ -116,10 +116,10 @@ public final class TransferMethodConfigurationDataManager: TransferMethodConfigu
         completion(transferMethodConfigurationKeys, nil)
     }
 
-    public func getFields(country: String,
-                          currency: String,
-                          transferMethodType: String,
-                          transferMethodProfileType: String,
+    public func getFields(_ country: String,
+                          _ currency: String,
+                          _ transferMethodType: String,
+                          _ transferMethodProfileType: String,
                           completion: @escaping (HyperwalletTransferMethodConfigurationField?,
                                                  HyperwalletErrorType?) -> Void) {
         let fielMapKey = FieldMapKey(country: country,
@@ -135,7 +135,7 @@ public final class TransferMethodConfigurationDataManager: TransferMethodConfigu
                 profile: transferMethodProfileType
             )
             print("getFields from Endpoint")
-            transferMethodConfigurationRepository.getFields(fieldQuery: fieldsQuery,
+            transferMethodConfigurationRepository.getFields(request: fieldsQuery,
                                                             completion: getFieldsHandler(fielMapKey, completion))
             return
         }

@@ -28,12 +28,10 @@ public protocol TransferMethodConfigurationRepository {
     ///  Gets the transfer method fields based on the parameters
     ///
     /// - Parameters:
-    ///   - country: the 2 letter ISO 3166-1 country code
-    ///   - currency: the 3 letter ISO 4217-1 currency code
-    ///   - transferMethodType: the `TransferMethodType`
-    ///   - transferMethodProfileType:`INDIVIDUAL` or `BUSINESS`
+    ///   - request: containing a transfer method configuration key tuple of country, currency,
+    ///              transfer method type and profile
     ///   - completion:
-    func getFields(fieldQuery: HyperwalletTransferMethodConfigurationFieldQuery,
+    func getFields(request: HyperwalletTransferMethodConfigurationFieldQuery,
                    completion: @escaping (HyperwalletTransferMethodConfigurationField?, HyperwalletErrorType?) -> Void)
 }
 
@@ -46,9 +44,9 @@ public final class RemoteTransferMethodConfigurationRepository: TransferMethodCo
                                                          completion: completion)
     }
 
-    public func getFields(fieldQuery: HyperwalletTransferMethodConfigurationFieldQuery,
+    public func getFields(request: HyperwalletTransferMethodConfigurationFieldQuery,
                           completion: @escaping (HyperwalletTransferMethodConfigurationField?,
         HyperwalletErrorType?) -> Void) {
-        Hyperwallet.shared.retrieveTransferMethodConfigurationFields(request: fieldQuery, completion: completion)
+        Hyperwallet.shared.retrieveTransferMethodConfigurationFields(request: request, completion: completion)
     }
 }
