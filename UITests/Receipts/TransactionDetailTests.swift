@@ -17,27 +17,27 @@ class TransactionDetailTests: BaseTests {
 
     // Credit Transaction
     func testReceiptDetail_verifyCreditTransaction() {
-        let expectedDateValue = "Fri, May 24, 2019, 11:16 AM"
+        let expectedDateValue = "Fri, May 24, 2019, 6:16 PM"
         openupReceiptsListScreenForFewMonths(isOneMonth: false)
         transactDetails.openReceipt(row: 0)
         let transactionDetailHeaderLabel = transactDetails.detailHeaderTitle
         waitForNonExistence(transactionDetailHeaderLabel)
         if #available(iOS 12, *) {
-            verifyPayment(payment: "Payment\nMay 24, 2019", amount: "+6.00\n\(currency)")
+            verifyPayment(payment: "Payment\nMay 24, 2019", amount: "6.00\n\(currency)")
         } else {
-            verifyPayment(payment: "Payment May 24, 2019", amount: "+6.00 \(currency)")
+            verifyPayment(payment: "Payment May 24, 2019", amount: "6.00 \(currency)")
         }
 
         // DETAILS Section
         verifyDetailSection(receiptIdVal: "55176992", dateVal: expectedDateValue, clientIdVal: "DyClk0VG9a")
 
         // FEE Section
-        verifyFeeSection(amountVal: "+6.00 USD", feeVal: "0.00 USD", transactionVal: "6.00 USD")
+        verifyFeeSection(amountVal: "6.00 USD", feeVal: "0.00 USD", transactionVal: "6.00 USD")
     }
 
     // Debit Transaction
     func testReceiptDetail_verifyDebitTransaction() {
-        let expectedDateValue = "Sun, May 12, 2019, 11:16 AM" // Sun, May 12, 2019, 6:16 PM
+        let expectedDateValue = "Sun, May 12, 2019, 6:16 PM" // Sun, May 12, 2019, 6:16 PM
         openupReceiptsListScreenForFewMonths(isOneMonth: false)
         transactDetails.openReceipt(row: 1)
         let transactionDetailHeaderLabel = transactDetails.detailHeaderTitle
@@ -112,8 +112,8 @@ class TransactionDetailTests: BaseTests {
         let detailsSectionLabel = transactDetails.detailSection
         let receiptLabel = transactDetails.receiptIdLabel
         let dateLabel = transactDetails.dateLabel
-        let receiptID = receiptDetailTableviewTable.staticTexts["Receipt ID:_value"]
-        let date = receiptDetailTableviewTable.staticTexts["Date:_value"]
+        let receiptID = receiptDetailTableviewTable.staticTexts[receiptIdVal]
+        let date = receiptDetailTableviewTable.staticTexts[dateVal]
 
         XCTAssertTrue(detailsSectionLabel.exists)
         XCTAssertTrue(receiptLabel.exists)
@@ -134,7 +134,13 @@ class TransactionDetailTests: BaseTests {
 
     // Detail section verification
     private func verifyDetailSectionOptional() {
-        let dateVal = "Fri, May 3, 2019, 10:08 AM" // Fri, May 3, 2019, 5:08 PM in test environment
+        let transactionVal = "8OxXefx5"
+        let receiptVal = "3051579"
+        let dateVal = "Fri, May 3, 2019, 5:08 PM" // Fri, May 3, 2019, 5:08 PM in test environment
+        let charityNameVal = "Sample Charity"
+        let checkNumVal = "Sample Check Number"
+        let websiteVal = "https://localhost"
+        let notesVal = "Sample payment for the period of June 15th, 2019 to July 23, 2019"
 
         let receiptDetailTableviewTable = transactDetails.receiptDetailTableviewTable
         let detailsSectionLabel = transactDetails.detailSection
@@ -144,13 +150,13 @@ class TransactionDetailTests: BaseTests {
         let checkNumLabel = transactDetails.checkNumLabel
         let websiteLabel = transactDetails.promoWebSiteLabel
         let noteSection = transactDetails.noteSectionLabel
-        let receiptId = receiptDetailTableviewTable.staticTexts["Receipt ID:_value"]
-        let date = receiptDetailTableviewTable.staticTexts["Date:_value"]
-        let transactionId = receiptDetailTableviewTable.staticTexts["Client Transaction ID:_value"]
-        let charityName = receiptDetailTableviewTable.staticTexts["Charity Name:_value"]
-        let checkNum = receiptDetailTableviewTable.staticTexts["Check Number:_value"]
-        let website = receiptDetailTableviewTable.staticTexts["Promo Website:_value"]
-        let notes = receiptDetailTableviewTable.staticTexts["ReceiptDetailSectionNotesTextLabel"]
+        let receiptId = receiptDetailTableviewTable.staticTexts[receiptVal]
+        let date = receiptDetailTableviewTable.staticTexts[dateVal]
+        let transactionId = receiptDetailTableviewTable.staticTexts[transactionVal]
+        let charityName = receiptDetailTableviewTable.staticTexts[charityNameVal]
+        let checkNum = receiptDetailTableviewTable.staticTexts[checkNumVal]
+        let website = receiptDetailTableviewTable.staticTexts[websiteVal]
+        let notes = receiptDetailTableviewTable.staticTexts[notesVal]
 
         XCTAssertTrue(detailsSectionLabel.exists)
         XCTAssertTrue(receiptLabel.exists)
