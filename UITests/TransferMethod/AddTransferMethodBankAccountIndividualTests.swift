@@ -90,7 +90,7 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
 
         XCTAssert(app.tables["addTransferMethodTable"].staticTexts["branchId_error"].exists)
         XCTAssert(app.tables["addTransferMethodTable"].staticTexts["bankAccountId_error"].exists)
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["accountType_error"].exists)
+        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["bankAccountPurpose_error"].exists)
     }
 
     func testAddTransferMethod_createBankAccountInvalidRouting() {
