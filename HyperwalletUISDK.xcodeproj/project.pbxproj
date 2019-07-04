@@ -92,7 +92,6 @@
 		C358A9A72272644000E5AE47 /* SelectTransferMethodType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C358A9A42272644000E5AE47 /* SelectTransferMethodType.swift */; };
 		C38DC07922727F9300B1F00E /* SelectTransferMethodCountryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38DC07822727F9300B1F00E /* SelectTransferMethodCountryType.swift */; };
 		C3E72174226E76A80067D3A0 /* XCTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E72173226E76A80067D3A0 /* XCTestCase.swift */; };
-		C3E7217A226F93860067D3A0 /* XCUIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E72179226F93860067D3A0 /* XCUIDevice.swift */; };
 		DB18EA142261BA4C004F6AC3 /* HyperwalletTestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB18E9FA2261BA4C004F6AC3 /* HyperwalletTestHelper.swift */; };
 		DB18EA152261BA4C004F6AC3 /* AuthenticationTokenGeneratorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB18E9FB2261BA4C004F6AC3 /* AuthenticationTokenGeneratorMock.swift */; };
 		DB18EA172261BA4D004F6AC3 /* AuthenticationProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB18E9FD2261BA4C004F6AC3 /* AuthenticationProviderMock.swift */; };
@@ -274,7 +273,6 @@
 		C358A9A42272644000E5AE47 /* SelectTransferMethodType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectTransferMethodType.swift; sourceTree = "<group>"; };
 		C38DC07822727F9300B1F00E /* SelectTransferMethodCountryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTransferMethodCountryType.swift; sourceTree = "<group>"; };
 		C3E72173226E76A80067D3A0 /* XCTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestCase.swift; sourceTree = "<group>"; };
-		C3E72179226F93860067D3A0 /* XCUIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCUIDevice.swift; sourceTree = "<group>"; };
 		DB18E9ED2261BA29004F6AC3 /* HyperwalletUISDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HyperwalletUISDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB18E9F12261BA29004F6AC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB18E9FA2261BA4C004F6AC3 /* HyperwalletTestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyperwalletTestHelper.swift; sourceTree = "<group>"; };
@@ -667,7 +665,6 @@
 			isa = PBXGroup;
 			children = (
 				C3E72173226E76A80067D3A0 /* XCTestCase.swift */,
-				C3E72179226F93860067D3A0 /* XCUIDevice.swift */,
 				C345BFC02289E6EC0049E67B /* XCUIElement.swift */,
 			);
 			path = Extensions;
@@ -1154,7 +1151,6 @@
 				DBB2B7172261C142006C48D3 /* AddTransferMethodBankCardTests.swift in Sources */,
 				644A69C822B14F4A0058E77E /* AddTransferMethodWireAccountIndividualTests.swift in Sources */,
 				C345BFC22289E6EC0049E67B /* XCUIElement.swift in Sources */,
-				C3E7217A226F93860067D3A0 /* XCUIDevice.swift in Sources */,
 				412F723722B45DB100837F8F /* TransactionDetails.swift in Sources */,
 				641324E1229575EC00512816 /* BaseTest.swift in Sources */,
 				412F723922B46B1000837F8F /* TransactionDetailTests.swift in Sources */,

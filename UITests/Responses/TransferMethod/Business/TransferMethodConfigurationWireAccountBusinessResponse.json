@@ -88,6 +88,7 @@
                                         "name": "bankAccountRelationship",
                                         "label": "Relationship",
                                         "placeholder": "",
+                                        "value": "OWN_COMPANY",
                                         "fieldSelectionOptions": [
                                             {
                                                 "label": "Own company",

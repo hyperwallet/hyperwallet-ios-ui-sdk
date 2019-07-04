@@ -88,6 +88,7 @@
                                         "name": "bankAccountRelationship",
                                         "label": "Relationship",
                                         "placeholder": "",
+                                        "value": "SELF",
                                         "fieldSelectionOptions": [
                                             {
                                                 "label": "Self",

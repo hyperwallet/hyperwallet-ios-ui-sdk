@@ -7,17 +7,31 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
     let wireAccount = NSPredicate(format: "label CONTAINS[c] 'Wire Transfer'")
 
     override func setUp() {
-        profileType = .individual
         super.setUp()
 
-        // Initialize stubs
-        setUpBankAccountScreen()
+        app = XCUIApplication()
+        app.launchEnvironment = [
+            "COUNTRY": "US",
+            "CURRENCY": "USD",
+            "ACCOUNT_TYPE": "WIRE_ACCOUNT",
+            "PROFILE_TYPE": "INDIVIDUAL"
+        ]
+        app.launch()
+
+        mockServer.setupStub(url: "/graphql",
+                             filename: "TransferMethodConfigurationWireAccountResponse",
+                             method: HTTPMethod.post)
+
+        app.tables.cells.staticTexts["Add Transfer Method"].tap()
+        spinner = app.activityIndicators["activityIndicator"]
+        waitForNonExistence(spinner)
+        addTransferMethod = AddTransferMethod(app: app, for: .wireAccount)
     }
 
     func testAddTransferMethod_displaysElementsOnIndividualProfileTmcResponse() {
         waitForNonExistence(spinner)
 
-        XCTAssert(app.navigationBars.staticTexts["Wire Account"].exists)
+        XCTAssert(app.navigationBars["Wire Account"].exists)
 
         verifyAccountInformationSection()
         verifyIntermediaryAccountSection()
@@ -25,12 +39,9 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
         verifyAddressSection()
         verifyDefaultValues()
 
-        addTransferMethod.addTransferMethodTableView
-            .scroll(to: addTransferMethod.addTransferMethodTableView.otherElements["TRANSFER METHOD INFORMATION"])
+        addTransferMethod.addTransferMethodTableView.scroll(to: addTransferMethod.createTransferMethodButton)
 
         XCTAssert(addTransferMethod.addTransferMethodTableView.otherElements["TRANSFER METHOD INFORMATION"].exists)
-
-        addTransferMethod.addTransferMethodTableView.scroll(to: addTransferMethod.createTransferMethodButton)
         XCTAssert(addTransferMethod.createTransferMethodButton.exists)
     }
 
@@ -67,7 +78,7 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
 
         waitForNonExistence(spinner)
 
-        XCTAssert(app.navigationBars.staticTexts["Account Settings"].exists)
+        XCTAssert(app.navigationBars["Account Settings"].exists)
     }
 
     func testAddTransferMethodBankAccountBusiness_displaysFeeAndProcessingElementsOnTmcResponse() {
@@ -82,22 +93,6 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
 }
 
 private extension AddTransferMethodWireAccountIndividualTests {
-    func setUpBankAccountScreen() {
-        mockServer.setupGraphQLStubs(for: profileType)
-
-        selectTransferMethodType = SelectTransferMethodType(app: app)
-        addTransferMethod = AddTransferMethod(app: app, for: .wireAccount)
-
-        app.tables.cells.containing(.staticText, identifier: "Add Transfer Method").element(boundBy: 0).tap()
-        spinner = app.activityIndicators["activityIndicator"]
-        waitForNonExistence(spinner)
-
-        selectTransferMethodType.selectCountry(country: "United States")
-        selectTransferMethodType.selectCurrency(currency: "United States Dollar")
-
-        app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: wireAccount).tap()
-    }
-
     func verifyAccountInformationSection() {
         let sectionHeader = "ACCOUNT INFORMATION - UNITED STATES (USD)"
         XCTAssert(addTransferMethod.addTransferMethodTableView.otherElements[sectionHeader].exists)
@@ -129,9 +124,6 @@ private extension AddTransferMethodWireAccountIndividualTests {
     }
 
     func verifyIndividualAccountHolderSection() {
-        let accountHolderTitle = addTransferMethod.addTransferMethodTableView.otherElements["ACCOUNT HOLDER"]
-        addTransferMethod.addTransferMethodTableView.scroll(to: accountHolderTitle)
-
         XCTAssert(addTransferMethod.addTransferMethodTableView.otherElements["ACCOUNT HOLDER"].exists )
 
         XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["First Name"].exists)
@@ -148,9 +140,6 @@ private extension AddTransferMethodWireAccountIndividualTests {
     }
 
     func verifyContactInformationSection() {
-        addTransferMethod.addTransferMethodTableView
-            .scroll(to: addTransferMethod.addTransferMethodTableView.otherElements["CONTACT INFORMATION"])
-
         XCTAssert(addTransferMethod.addTransferMethodTableView.otherElements["CONTACT INFORMATION"].exists )
 
         XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["Phone Number"].exists)
@@ -161,9 +150,6 @@ private extension AddTransferMethodWireAccountIndividualTests {
     }
 
     func verifyAddressSection() {
-        let title = addTransferMethod.addTransferMethodTableView.staticTexts["Transfer method information"]
-        addTransferMethod.addTransferMethodTableView.scroll(to: title)
-
         XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["Address"].exists)
 
         XCTAssert(addTransferMethod.countrySelect.exists)

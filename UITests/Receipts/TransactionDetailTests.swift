@@ -5,14 +5,13 @@ class TransactionDetailTests: BaseTests {
     private let currency = "USD"
 
     override func setUp() {
-        profileType = .individual
         super.setUp()
+
+        app = XCUIApplication()
+        app.launch()
+
         transactDetails = TransactionDetails(app: app)
         spinner = app.activityIndicators["activityIndicator"]
-    }
-
-    override func tearDown() {
-        mockServer.tearDown()
     }
 
     // Credit Transaction

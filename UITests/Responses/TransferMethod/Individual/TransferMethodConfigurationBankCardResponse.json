@@ -71,6 +71,7 @@
                                         "isEditable": true,
                                         "name": "bankAccountRelationship",
                                         "label": "Relationship",
+                                        "value": "SELF",
                                         "placeholder": "",
                                         "fieldSelectionOptions": [
                                             {

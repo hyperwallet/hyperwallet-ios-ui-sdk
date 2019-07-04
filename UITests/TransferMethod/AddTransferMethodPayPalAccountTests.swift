@@ -6,27 +6,25 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
     let payPalAccount = NSPredicate(format: "label CONTAINS[c] 'PayPal'")
 
     override func setUp() {
-        profileType = .individual
         super.setUp()
-        setUpAddTransferMethodPayPalAccountScreen()
-    }
 
-    override func tearDown() {
-        mockServer.tearDown()
-    }
+        app = XCUIApplication()
+        app.launchEnvironment = [
+            "COUNTRY": "US",
+            "CURRENCY": "USD",
+            "ACCOUNT_TYPE": "PAYPAL_ACCOUNT",
+            "PROFILE_TYPE": "INDIVIDUAL"
+        ]
+        app.launch()
 
-    private func setUpAddTransferMethodPayPalAccountScreen() {
-        selectTransferMethodType = SelectTransferMethodType(app: app)
-        addTransferMethod = AddTransferMethod(app: app, for: .payPalAccount)
+        mockServer.setupStub(url: "/graphql",
+                             filename: "TransferMethodConfigurationPayPalAccountResponse",
+                             method: HTTPMethod.post)
 
-        app.tables.cells.containing(.staticText, identifier: "Add Transfer Method").element(boundBy: 0).tap()
+        app.tables.cells.staticTexts["Add Transfer Method"].tap()
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
-        selectTransferMethodType.selectCountry(country: "United States")
-        selectTransferMethodType.selectCurrency(currency: "United States Dollar")
-
-        app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: payPalAccount).tap()
-        waitForNonExistence(spinner)
+        addTransferMethod = AddTransferMethod(app: app, for: .payPalAccount)
     }
 
     func testAddTransferMethod_createPayPalAccount() {
@@ -45,14 +43,16 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
 
     func testAddTransferMethod_returnsErrorOnInvalidPattern() {
         addTransferMethod.setEmail("abc@testcom")
+        addTransferMethod.clickCreateTransferMethodButton()
+
         XCTAssert(app.tables["addTransferMethodTable"].staticTexts["email_error"].exists)
     }
 
     func testAddTransferMethod_returnsErrorEmptyRequiredFields() {
         addTransferMethod.setEmail("")
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["email_error"].exists)
-
         addTransferMethod.clickCreateTransferMethodButton()
+
+        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["email_error"].exists)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidEmailId() {

@@ -73,6 +73,7 @@ class AddTransferMethod {
     var addressHeader: XCUIElement
     var transferMethodInformationHeader: XCUIElement
 
+    // swiftlint:disable function_body_length
     init(app: XCUIApplication, for accountType: AccountType) {
         self.app = app
 

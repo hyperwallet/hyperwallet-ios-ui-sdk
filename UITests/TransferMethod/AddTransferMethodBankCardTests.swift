@@ -18,13 +18,13 @@ class AddTransferMethodBankCardTests: BaseTests {
         app.launch()
 
         mockServer.setupStub(url: "/graphql",
-                             filename: "TransferMethodConfigurationBankAccountResponse",
+                             filename: "TransferMethodConfigurationBankCardResponse",
                              method: HTTPMethod.post)
 
         app.tables.cells.staticTexts["Add Transfer Method"].tap()
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
-        addTransferMethod = AddTransferMethod(app: app, for: .bankAccount)
+        addTransferMethod = AddTransferMethod(app: app, for: .debitCard)
     }
 
     func testAddTransferMethod_createBankCard() {
@@ -45,45 +45,31 @@ class AddTransferMethodBankCardTests: BaseTests {
         XCTAssert(app.navigationBars["Account Settings"].exists)
     }
 
-    func testAddTransferMethod_createBankCardBusiness() {
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/bank-cards",
-                             filename: "BankCardResponse",
-                             method: HTTPMethod.post)
-
-        addTransferMethod.setCardNumber("4895142232120006")
-        addTransferMethod.setDateOfExpiry(expiryMonth: "March", expiryYear: "2020")
-
-        XCTAssertEqual(app.textFields["dateOfExpiry"].value as? String, "03/20")
-
-        addTransferMethod.setCvv("022")
-        addTransferMethod.clickCreateTransferMethodButton()
-
-        waitForNonExistence(spinner)
-
-        XCTAssert(app.navigationBars["Account Settings"].exists)
-    }
-
     func testAddTransferMethod_returnsErrorOnInvalidPattern() {
         addTransferMethod.setCardNumber("1234567890@#$")
+        addTransferMethod.setCvv("99-a11")
+        addTransferMethod.clickCreateTransferMethodButton()
+
         XCTAssert(app.tables["addTransferMethodTable"].staticTexts["cardNumber_error"].exists)
+        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["cvv_error"].exists)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidLength() {
-        addTransferMethod.setCardNumber("10100101010")
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["cardNumber_error"].exists)
+        addTransferMethod.setCardNumber("10112919191919111111")
+        addTransferMethod.setCvv("990011")
+        addTransferMethod.clickCreateTransferMethodButton()
 
-        addTransferMethod.setCardNumber("101001010102221234323")
         XCTAssert(app.tables["addTransferMethodTable"].staticTexts["cardNumber_error"].exists)
+        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["cvv_error"].exists)
     }
 
     func testAddTransferMethod_returnsErrorEmptyRequiredFields() {
         addTransferMethod.setCardNumber("")
         addTransferMethod.setCvv("")
+        addTransferMethod.clickCreateTransferMethodButton()
 
         XCTAssert(app.tables["addTransferMethodTable"].staticTexts["cardNumber_error"].exists)
         XCTAssert(app.tables["addTransferMethodTable"].staticTexts["cvv_error"].exists)
-
-        addTransferMethod.clickCreateTransferMethodButton()
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidCardCVV() {
@@ -123,50 +109,7 @@ class AddTransferMethodBankCardTests: BaseTests {
     }
 
     func testAddTransferMethod_displaysElementsOnIndividualProfileTmcResponse() {
-        XCTAssert(app.navigationBars.staticTexts["Debit Card"].exists)
-
-        verifyAccountInformationSection()
-
-        let infoSection = addTransferMethod.addTransferMethodTableView.otherElements["TRANSFER METHOD INFORMATION"]
-
-        addTransferMethod.addTransferMethodTableView.scroll(to: infoSection)
-        XCTAssert(infoSection.exists)
-
-        addTransferMethod.addTransferMethodTableView.scroll(to: addTransferMethod.createTransferMethodButton)
-        XCTAssert(addTransferMethod.createTransferMethodButton.exists)
-    }
-
-    func testAddTransferMethod_displaysElementsOnBusinessProfileTmcResponse() {
-        XCTAssert(app.navigationBars.staticTexts["Debit Card"].exists)
-
-        verifyAccountInformationSection()
-
-        let infoSection = addTransferMethod.addTransferMethodTableView.otherElements["TRANSFER METHOD INFORMATION"]
-
-        addTransferMethod.addTransferMethodTableView.scroll(to: infoSection)
-        XCTAssert(infoSection.exists)
-
-        addTransferMethod.addTransferMethodTableView.scroll(to: addTransferMethod.createTransferMethodButton)
-        XCTAssert(addTransferMethod.createTransferMethodButton.exists)
-    }
-}
-
-private extension AddTransferMethodBankCardTests {
-    func setUpAddTransferMethodBankCardScreen() {
-        selectTransferMethodType = SelectTransferMethodType(app: app)
-        addTransferMethod = AddTransferMethod(app: app, for: .debitCard)
-
-        app.tables.cells.containing(.staticText, identifier: "Add Transfer Method").element(boundBy: 0).tap()
-        spinner = app.activityIndicators["activityIndicator"]
-        waitForNonExistence(spinner)
-        selectTransferMethodType.selectCountry(country: "United States")
-        selectTransferMethodType.selectCurrency(currency: "United States Dollar")
-
-        app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: debitCard).tap()
-        waitForNonExistence(spinner)
-    }
-
-    func verifyAccountInformationSection() {
+        XCTAssert(app.navigationBars["Debit Card"].exists)
         XCTAssert(addTransferMethod.addTransferMethodTableView.cells.staticTexts["Card Number"].exists)
         XCTAssert(addTransferMethod.cardNumberInput.exists)
 
@@ -175,5 +118,10 @@ private extension AddTransferMethodBankCardTests {
 
         XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["CVV (Card Security Code)"].exists)
         XCTAssert(addTransferMethod.cvvInput.exists)
+
+        addTransferMethod.addTransferMethodTableView.scroll(to: addTransferMethod.createTransferMethodButton)
+        XCTAssert(addTransferMethod.createTransferMethodButton.exists)
+
+        XCTAssert(addTransferMethod.addTransferMethodTableView.otherElements["TRANSFER METHOD INFORMATION"].exists)
     }
 }

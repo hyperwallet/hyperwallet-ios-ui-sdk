@@ -71,16 +71,21 @@ class ListTransferMethodTests: BaseTests {
     }
 
     override func setUp() {
-        profileType = .individual
         super.setUp()
+
+        app = XCUIApplication()
+        app.launch()
+
+        mockServer.setupStub(url: "/graphql",
+                             filename: "TransferMethodConfigurationKeysResponse",
+                             method: HTTPMethod.post)
+        mockServer.setupStub(url: "/rest/v3/users/usr-token",
+                             filename: "UserIndividualResponse",
+                             method: HTTPMethod.get)
 
         listTransferMethod = ListTransferMethod(app: app)
         selectTransferMethodType = SelectTransferMethodType(app: app)
         addTransferMethod = AddTransferMethod(app: app, for: .bankAccount)
-    }
-
-    override func tearDown() {
-        mockServer.tearDown()
     }
 
     func testListTransferMethod_emptyTransferMethodsList() {
@@ -113,6 +118,7 @@ class ListTransferMethodTests: BaseTests {
 
         openTransferMethodsList()
         listTransferMethod.tapAddTransferMethodEmptyScreenButton()
+
 
         XCTAssertTrue(app.navigationBars["Add Account"].exists)
     }
