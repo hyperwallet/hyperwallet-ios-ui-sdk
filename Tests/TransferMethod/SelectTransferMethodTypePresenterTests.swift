@@ -10,7 +10,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
     private lazy var userMockResponseData = HyperwalletTestHelper.getDataFromJson("UserIndividualResponse")
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
-        presenter = SelectTransferMethodTypePresenter(mockView, TransferMethodConfigurationRepository())
+        presenter = SelectTransferMethodTypePresenter(mockView)
     }
 
     override func tearDown() {
@@ -176,20 +176,20 @@ class MockSelectTransferMethodTypeView: SelectTransferMethodTypeView {
         expectation = nil
     }
 
-    func showGenericTableView(items: [CountryCurrencyCellConfiguration],
+    func showGenericTableView(items: [GenericCellConfiguration],
                               title: String,
                               selectItemHandler: @escaping SelectItemHandler,
                               markCellHandler: @escaping MarkCellHandler,
                               filterContentHandler: @escaping FilterContentHandler) {
         if title == "Select Country" {
-            let country = CountryCurrencyCellConfigurationData(title: "United States", value: "US")
+            let country = SelectedContryCurrencyCellConfiguration(title: "United States", value: "US")
             selectItemHandler(country)
             _ = markCellHandler(country)
             _ = filterContentHandler(items, "")
         }
 
         if title == "Select Currency" {
-            let currency = CountryCurrencyCellConfigurationData(title: "US Dollar", value: "USD")
+            let currency = SelectedContryCurrencyCellConfiguration(title: "US Dollar", value: "USD")
             selectItemHandler(currency)
             _ = markCellHandler(currency)
             _ = filterContentHandler(items, "")

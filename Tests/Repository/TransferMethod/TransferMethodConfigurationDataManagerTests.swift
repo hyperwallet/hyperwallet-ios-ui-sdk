@@ -21,7 +21,7 @@ import HyperwalletSDK
 @testable import HyperwalletUISDK
 import XCTest
 
-class TransferMethodConfigurationRepositoryTests: XCTestCase {
+class TransferMethodConfigurationDataManagerTests: XCTestCase {
     private let country = "US"
     private let currency = "USD"
     private let transferMethodType = "BANK_ACCOUNT"
@@ -36,6 +36,9 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
     }
 
     override func tearDown() {
+        TransferMethodConfigurationDataManager.shared.refreshFields()
+        TransferMethodConfigurationDataManager.shared.refreshKeys()
+
         if Hippolyte.shared.isStarted {
             Hippolyte.shared.stop()
         }
@@ -46,10 +49,10 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
         let expectation = self.expectation(description: "Get transfer methods keys")
         var result: HyperwalletTransferMethodConfigurationKey?
         var error: HyperwalletErrorType?
-        let repository = TransferMethodConfigurationRepository()
+        let dataManager = TransferMethodConfigurationDataManager.shared
 
         // When
-        repository.getKeys { (transferMethodConfigurationKey, hyperwalletError) in
+        dataManager.getKeys { (transferMethodConfigurationKey, hyperwalletError) in
             result = transferMethodConfigurationKey
             error = hyperwalletError
             expectation.fulfill()
@@ -59,8 +62,8 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
         XCTAssertNil(error, "The error should be nil")
         XCTAssertNotNil(result, "The result should not be nil")
         XCTAssertGreaterThan(result!.countries()!.count, 0)
-        XCTAssertGreaterThan(repository.countriesFromCache()!.count, 0)
-        XCTAssertGreaterThan(repository.currenciesFromCache(from: country)!.count, 0)
+        XCTAssertGreaterThan(dataManager.countries()!.count, 0)
+        XCTAssertGreaterThan(dataManager.currencies(from: country)!.count, 0)
     }
 
     func testGetKeys_failureWithError() {
@@ -68,10 +71,10 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
         let expectation = self.expectation(description: "Get transfer methods keys")
         var result: HyperwalletTransferMethodConfigurationKey?
         var error: HyperwalletErrorType?
-        let repository = TransferMethodConfigurationRepository()
+        let dataManager = TransferMethodConfigurationDataManager.shared
 
         // When
-        repository.getKeys { (transferMethodConfigurationKey, hyperwalletError) in
+        dataManager.getKeys { (transferMethodConfigurationKey, hyperwalletError) in
             result = transferMethodConfigurationKey
             error = hyperwalletError
             expectation.fulfill()
@@ -80,23 +83,23 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
 
         XCTAssertNotNil(error, "The error should not be nil")
         XCTAssertNil(result, "The result should be nil")
-        XCTAssertNil(repository.countriesFromCache())
-        XCTAssertNil(repository.currenciesFromCache(from: country))
+        XCTAssertNil(dataManager.countries())
+        XCTAssertNil(dataManager.currencies(from: country))
     }
 
-    func testGetKeys_successWithKeyResultFromCacheWhenNotNil() {
+    func testGetKeys_successWithKeyResultWhenNotNil() {
         setupTransferMethodConfigurationMockServer(keyResponseData)
-        let repository = TransferMethodConfigurationRepository()
+        let dataManager = TransferMethodConfigurationDataManager.shared
 
         // Get data from the server
         let expectation = self.expectation(description: "Get transfer methods keys")
-        repository.getKeys { (_, _) in expectation.fulfill() }
+        dataManager.getKeys { (_, _) in expectation.fulfill() }
         wait(for: [expectation], timeout: 1)
         var result: HyperwalletTransferMethodConfigurationKey?
         var error: HyperwalletErrorType?
 
         // When - Get from cache
-        repository.getKeys { (transferMethodConfigurationKey, hyperwalletError) in
+        dataManager.getKeys { (transferMethodConfigurationKey, hyperwalletError) in
             result = transferMethodConfigurationKey
             error = hyperwalletError
         }
@@ -111,14 +114,14 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
         let expectation = self.expectation(description: "Get transfer methods fields")
         var result: HyperwalletTransferMethodConfigurationField?
         var error: HyperwalletErrorType?
-        let repository = TransferMethodConfigurationRepository()
+        let dataManager = TransferMethodConfigurationDataManager.shared
 
         // When
-        repository.getFields(country: country,
-                             currency: currency,
-                             transferMethodType: transferMethodType,
-                             transferMethodProfileType: profileType,
-                             completion: { (transferMethodConfigurationField, hyperwalletError) in
+        dataManager.getFields(country: country,
+                              currency: currency,
+                              transferMethodType: transferMethodType,
+                              transferMethodProfileType: profileType,
+                              completion: { (transferMethodConfigurationField, hyperwalletError) in
                                 result = transferMethodConfigurationField
                                 error = hyperwalletError
                                 expectation.fulfill()
@@ -138,20 +141,20 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
         let expectation = self.expectation(description: "Get transfer methods fields")
         var result: HyperwalletTransferMethodConfigurationField?
         var error: HyperwalletErrorType?
-        let repository = TransferMethodConfigurationRepository()
-        repository.getFields(country: country,
-                             currency: currency,
-                             transferMethodType: transferMethodType,
-                             transferMethodProfileType: profileType,
-                             completion: { (_, _) in expectation.fulfill() })
+        let dataManager = TransferMethodConfigurationDataManager.shared
+        dataManager.getFields(country: country,
+                              currency: currency,
+                              transferMethodType: transferMethodType,
+                              transferMethodProfileType: profileType,
+                              completion: { (_, _) in expectation.fulfill() })
         wait(for: [expectation], timeout: 1)
 
         // When
-        repository.getFields(country: country,
-                             currency: currency,
-                             transferMethodType: transferMethodType,
-                             transferMethodProfileType: profileType,
-                             completion: { (transferMethodConfigurationField, hyperwalletError) in
+        dataManager.getFields(country: country,
+                              currency: currency,
+                              transferMethodType: transferMethodType,
+                              transferMethodProfileType: profileType,
+                              completion: { (transferMethodConfigurationField, hyperwalletError) in
                                 result = transferMethodConfigurationField
                                 error = hyperwalletError
         })
@@ -169,14 +172,14 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
         let expectation = self.expectation(description: "Get transfer methods fields")
         var result: HyperwalletTransferMethodConfigurationField?
         var error: HyperwalletErrorType?
-        let repository = TransferMethodConfigurationRepository()
+        let dataManager = TransferMethodConfigurationDataManager.shared
 
         // When
-        repository.getFields(country: country,
-                             currency: currency,
-                             transferMethodType: transferMethodType,
-                             transferMethodProfileType: profileType,
-                             completion: { (transferMethodConfigurationField, hyperwalletError) in
+        dataManager.getFields(country: country,
+                              currency: currency,
+                              transferMethodType: transferMethodType,
+                              transferMethodProfileType: profileType,
+                              completion: { (transferMethodConfigurationField, hyperwalletError) in
                                 result = transferMethodConfigurationField
                                 error = hyperwalletError
                                 expectation.fulfill()
@@ -189,20 +192,20 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
 
     func testRefreshKeys_cleanRepositoryCache() {
         setupTransferMethodConfigurationMockServer(keyResponseData)
-        let repository = TransferMethodConfigurationRepository()
+        let dataManager = TransferMethodConfigurationDataManager.shared
 
         // Get data from the server
         let expectation = self.expectation(description: "Get transfer methods keys")
-        repository.getKeys { (_, _) in expectation.fulfill() }
+        dataManager.getKeys { (_, _) in expectation.fulfill() }
         wait(for: [expectation], timeout: 1)
-        XCTAssertGreaterThan(repository.countriesFromCache()!.count, 0)
-        XCTAssertGreaterThan(repository.currenciesFromCache(from: country)!.count, 0)
+        XCTAssertGreaterThan(dataManager.countries()!.count, 0)
+        XCTAssertGreaterThan(dataManager.currencies(from: country)!.count, 0)
 
         // When
-        repository.refreshKeys()
+        dataManager.refreshKeys()
 
-        XCTAssertNil(repository.countriesFromCache())
-        XCTAssertNil(repository.currenciesFromCache(from: country))
+        XCTAssertNil(dataManager.countries())
+        XCTAssertNil(dataManager.currencies(from: country))
     }
 
     private func setupTransferMethodConfigurationMockServer(_ data: Data, _ error: NSError? = nil) {
