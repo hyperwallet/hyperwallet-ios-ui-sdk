@@ -85,7 +85,7 @@ class ListTransferMethodTests: BaseTests {
 
         listTransferMethod = ListTransferMethod(app: app)
         selectTransferMethodType = SelectTransferMethodType(app: app)
-        addTransferMethod = AddTransferMethod(app: app, for: .bankAccount)
+        addTransferMethod = AddTransferMethod(app: app)
     }
 
     func testListTransferMethod_emptyTransferMethodsList() {
@@ -118,7 +118,6 @@ class ListTransferMethodTests: BaseTests {
 
         openTransferMethodsList()
         listTransferMethod.tapAddTransferMethodEmptyScreenButton()
-
 
         XCTAssertTrue(app.navigationBars["Add Account"].exists)
     }
@@ -353,12 +352,5 @@ class ListTransferMethodTests: BaseTests {
             XCTAssertTrue(app.cells.element(boundBy: 3).images.element.exists)
             XCTAssertTrue(app.cells.element(boundBy: 4).images.element.exists)
         }
-    }
-
-    private func setUpStandardListTransferMethod() {
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
-                             filename: "ListTransferMethodResponse",
-                             method: HTTPMethod.get)
-        openTransferMethodsList()
     }
 }

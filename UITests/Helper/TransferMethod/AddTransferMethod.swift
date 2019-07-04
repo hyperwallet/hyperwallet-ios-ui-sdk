@@ -1,12 +1,5 @@
 import XCTest
 
-enum AccountType: String {
-    case bankAccount = "Bank Account"
-    case debitCard = "Debit Card"
-    case payPalAccount = "PayPal"
-    case wireAccount = "Wire Account"
-}
-
 class AddTransferMethod {
     let defaultTimeout = 5.0
 
@@ -22,7 +15,6 @@ class AddTransferMethod {
     var cvvInput: XCUIElement
     var dateOfExpiryInput: XCUIElement
     var emailInput: XCUIElement
-    var navigationBar: XCUIElement
 
     var wireInstructionsInput: XCUIElement
     var intermediaryBankIdInput: XCUIElement
@@ -68,24 +60,25 @@ class AddTransferMethod {
     var businessNameLabel: XCUIElement
     var businessRegistrationIdLabel: XCUIElement
 
+    var intermediaryAccountHeader: XCUIElement
     var accountHolderHeader: XCUIElement
     var contactInformationHeader: XCUIElement
     var addressHeader: XCUIElement
     var transferMethodInformationHeader: XCUIElement
 
     // swiftlint:disable function_body_length
-    init(app: XCUIApplication, for accountType: AccountType) {
+    init(app: XCUIApplication) {
         self.app = app
 
         addTransferMethodTableView = app.tables["addTransferMethodTable"]
-        navigationBar = app.navigationBars[accountType.rawValue]
         createTransferMethodButton = addTransferMethodTableView.buttons["createAccountButton"]
 
         // Section Headers
-        accountHolderHeader = addTransferMethodTableView.otherElements["ACCOUNT HOLDER"]
-        contactInformationHeader = addTransferMethodTableView.otherElements["CONTACT INFORMATION"]
-        addressHeader = addTransferMethodTableView.otherElements["ADDRESS"]
-        transferMethodInformationHeader = addTransferMethodTableView.otherElements["TRANSFER METHOD INFORMATION"]
+        intermediaryAccountHeader = addTransferMethodTableView.staticTexts["Intermediary Account"]
+        accountHolderHeader = addTransferMethodTableView.staticTexts["Account Holder"]
+        contactInformationHeader = addTransferMethodTableView.staticTexts["Contact Information"]
+        addressHeader = addTransferMethodTableView.staticTexts["Address"]
+        transferMethodInformationHeader = addTransferMethodTableView.staticTexts["Transfer method information"]
 
         // Inputs
         bankIdInput = addTransferMethodTableView.textFields["bankId"]
@@ -157,8 +150,8 @@ class AddTransferMethod {
         branchIdInput.clearAndEnterText(text: branchId)
     }
 
-    func setAccountNumber(_ accountNumber: String) {
-        bankAccountIdInput.clearAndEnterText(text: accountNumber)
+    func setBankAccountId(_ bankAccountId: String) {
+        bankAccountIdInput.clearAndEnterText(text: bankAccountId)
     }
 
     func selectAccountType(_ accountType: String) {
@@ -202,15 +195,15 @@ class AddTransferMethod {
         emailInput.clearAndEnterText(text: email)
     }
 
-    func setNameFirst(_ nameFirst: String) {
+    func setFirstName(_ nameFirst: String) {
         firstNameInput.clearAndEnterText(text: nameFirst)
     }
 
-    func setNameLast(_ nameLast: String) {
+    func setLastName(_ nameLast: String) {
         lastNameInput.clearAndEnterText(text: nameLast)
     }
 
-    func setNameMiddle(_ nameMiddle: String) {
+    func setMiddleName(_ nameMiddle: String) {
         middleNameInput.clearAndEnterText(text: nameMiddle)
     }
 
@@ -253,7 +246,7 @@ class AddTransferMethod {
         postalCodeInput.clearAndEnterText(text: postalCode)
     }
 
-    func setNameBusiness(_ nameBusiness: String) {
+    func setBusinessName(_ nameBusiness: String) {
         businessNameInput.clearAndEnterText(text: nameBusiness)
     }
 

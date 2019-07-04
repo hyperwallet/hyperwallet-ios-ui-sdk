@@ -69,7 +69,7 @@ class SelectTransferMethodTypeTests: BaseTests {
             XCTAssert(app.tables["selectTransferMethodTypeTable"].cells.element(boundBy: 0).staticTexts[
                 "Transaction Fees: CAD 2.20 Processing Time: 1-2 Business days"].exists)
             XCTAssert(app.tables["selectTransferMethodTypeTable"].cells.element(boundBy: 1).staticTexts[
-                "Transaction Fees: CAD 0.25\nProcessing Time: IMMEDIATE"].exists)
+                "Transaction Fees: CAD 0.25 Processing Time: IMMEDIATE"].exists)
         }
     }
 

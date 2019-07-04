@@ -25,7 +25,7 @@ class AddTransferMethodBankAccountBusinessTests: BaseTests {
         app.tables.cells.staticTexts["Add Transfer Method"].tap()
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
-        addTransferMethod = AddTransferMethod(app: app, for: .bankAccount)
+        addTransferMethod = AddTransferMethod(app: app)
     }
 
     func testAddTransferMethodBankAccountBusiness_displaysElementsOnBusinessProfileTmcResponse() {
@@ -59,10 +59,10 @@ class AddTransferMethodBankAccountBusinessTests: BaseTests {
         XCTAssertEqual(addTransferMethod.postalCodeLabel.label, "Zip/Postal Code")
         XCTAssert(addTransferMethod.postalCodeInput.exists)
 
-        app.scroll(to: addTransferMethod.createTransferMethodButton)
-
-        XCTAssert(addTransferMethod.addTransferMethodTableView.otherElements["TRANSFER METHOD INFORMATION"].exists)
+        XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["Transfer method information"].exists)
         XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["Transaction Fees: USD 2.00"].exists)
+
+        app.scroll(to: addTransferMethod.createTransferMethodButton)
         XCTAssert(addTransferMethod.createTransferMethodButton.exists)
     }
 
@@ -74,9 +74,9 @@ class AddTransferMethodBankAccountBusinessTests: BaseTests {
         waitForNonExistence(spinner)
 
         addTransferMethod.setBranchId("021000021")
-        addTransferMethod.setAccountNumber("7861012347")
+        addTransferMethod.setBankAccountId("7861012347")
         addTransferMethod.selectAccountType("CHECKING")
-        addTransferMethod.setNameBusiness("Smith & Co")
+        addTransferMethod.setBusinessName("Smith & Co")
         addTransferMethod.setPhoneNumber("+16045555555")
         addTransferMethod.setMobileNumber("+16046666666")
         addTransferMethod.selectCountry("United States")

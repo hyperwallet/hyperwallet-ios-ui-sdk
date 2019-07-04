@@ -25,7 +25,7 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
         app.tables.cells.staticTexts["Add Transfer Method"].tap()
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
-        addTransferMethod = AddTransferMethod(app: app, for: .bankAccount)
+        addTransferMethod = AddTransferMethod(app: app)
     }
 
     func testAddTransferMethod_displaysElementsOnTmcResponse() {
@@ -35,11 +35,11 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
         verifyIndividualAccountHolderSection()
         verifyAddressSection()
 
-        app.scroll(to: addTransferMethod.createTransferMethodButton)
-
-        XCTAssert(addTransferMethod.addTransferMethodTableView.otherElements["TRANSFER METHOD INFORMATION"].exists)
+        XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
         XCTAssert(addTransferMethod.addTransferMethodTableView
             .staticTexts["Transaction Fees: USD 2.00 Processing Time: 1-2 Business days"].exists)
+
+        app.scroll(to: addTransferMethod.createTransferMethodButton)
         XCTAssert(addTransferMethod.createTransferMethodButton.exists)
     }
 
@@ -62,30 +62,35 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
         XCTAssertFalse(app.keyboards.element.exists)
     }
 
-    func testAddTransferMethod_createBankAccount() {
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/bank-accounts",
-                             filename: "BankAccountIndividualResponse",
-                             method: HTTPMethod.post)
-
-        addTransferMethod.setBranchId("021000021")
-        addTransferMethod.setAccountNumber("12345")
-        addTransferMethod.selectAccountType("CHECKING")
-        addTransferMethod.setNameMiddle("Adam")
-        addTransferMethod.clickCreateTransferMethodButton()
-
-        waitForNonExistence(spinner)
-
-        XCTAssert(app.navigationBars["Account Settings"].exists)
-    }
-
     func testAddTransferMethod_returnsErrorOnInvalidPattern() {
         addTransferMethod.setBranchId("abc123abc")
-        addTransferMethod.setAccountNumber("1a31a")
+        addTransferMethod.setBankAccountId("1a31a")
 
         addTransferMethod.clickCreateTransferMethodButton()
 
         XCTAssert(app.tables["addTransferMethodTable"].staticTexts["branchId_error"].exists)
         XCTAssert(app.tables["addTransferMethodTable"].staticTexts["bankAccountId_error"].exists)
+    }
+
+    func testAddTransferMethod_returnsErrorOnInvalidLength() {
+        addTransferMethod.setBranchId("91")
+        addTransferMethod.setBankAccountId("19")
+
+        addTransferMethod.clickCreateTransferMethodButton()
+
+        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["branchId_error"].exists)
+        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["bankAccountId_error"].exists)
+    }
+
+    func testAddTransferMethod_returnsErrorOnInvalidPresence() {
+        addTransferMethod.setBranchId("")
+        addTransferMethod.setBankAccountId("")
+
+        addTransferMethod.clickCreateTransferMethodButton()
+
+        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["branchId_error"].exists)
+        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["bankAccountId_error"].exists)
+        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["accountType_error"].exists)
     }
 
     func testAddTransferMethod_createBankAccountInvalidRouting() {
@@ -94,7 +99,7 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
                                   method: HTTPMethod.post)
 
         addTransferMethod.setBranchId("021000022")
-        addTransferMethod.setAccountNumber("12345")
+        addTransferMethod.setBankAccountId("12345")
         addTransferMethod.selectAccountType("CHECKING")
 
         addTransferMethod.clickCreateTransferMethodButton()
@@ -105,13 +110,28 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
                 "Please modify Routing Number to a valid ACH Routing Number of the branch of your bank.")))
     }
 
+    func testAddTransferMethod_createBankAccountValidResponse() {
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/bank-accounts",
+                             filename: "BankAccountIndividualResponse",
+                             method: HTTPMethod.post)
+
+        addTransferMethod.setBranchId("021000021")
+        addTransferMethod.setBankAccountId("12345")
+        addTransferMethod.selectAccountType("CHECKING")
+        addTransferMethod.setMiddleName("Adam")
+        addTransferMethod.clickCreateTransferMethodButton()
+        waitForNonExistence(spinner)
+
+        XCTAssert(app.navigationBars["Account Settings"].exists)
+    }
+
     func testAddTransferMethod_createBankAccountUnexpectedError() {
         mockServer.setupStubError(url: "/rest/v3/users/usr-token/bank-accounts",
                                   filename: "UnexpectedErrorResponse",
                                   method: HTTPMethod.post)
 
         addTransferMethod.setBranchId("021000022")
-        addTransferMethod.setAccountNumber("12345")
+        addTransferMethod.setBankAccountId("12345")
         addTransferMethod.selectAccountType("CHECKING")
 
         addTransferMethod.clickCreateTransferMethodButton()
@@ -128,7 +148,7 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
 private extension AddTransferMethodBankAccountIndividualTests {
     func verifyAccountInformationSection() {
         XCTAssert(addTransferMethod.addTransferMethodTableView
-            .otherElements["ACCOUNT INFORMATION - UNITED STATES (USD)"].exists)
+            .staticTexts["Account Information - United States (USD)"].exists)
         XCTAssertEqual(addTransferMethod.branchIdLabel.label, "Routing Number")
         XCTAssert(addTransferMethod.branchIdInput.exists)
         XCTAssertEqual(addTransferMethod.bankAccountIdLabel.label, "Account Number")
@@ -150,7 +170,7 @@ private extension AddTransferMethodBankAccountIndividualTests {
     }
 
     func verifyIndividualAccountHolderSection() {
-        XCTAssert(addTransferMethod.addTransferMethodTableView.otherElements["ACCOUNT HOLDER"].exists )
+        XCTAssert(addTransferMethod.accountHolderHeader.exists)
         XCTAssertEqual(addTransferMethod.firstNameLabel.label, "First Name")
         XCTAssert(addTransferMethod.firstNameInput.exists)
         XCTAssertEqual(addTransferMethod.middleNameLabel.label, "Middle Name")
@@ -169,7 +189,7 @@ private extension AddTransferMethodBankAccountIndividualTests {
     }
 
     func verifyAddressSection() {
-        XCTAssert(addTransferMethod.addTransferMethodTableView.otherElements["ADDRESS"].exists)
+        XCTAssert(addTransferMethod.addressHeader.exists)
         XCTAssertEqual(addTransferMethod.countryLabel.label, "Country")
         XCTAssert(addTransferMethod.countrySelect.exists)
         XCTAssertEqual(addTransferMethod.stateProvinceLabel.label, "State/Province")
