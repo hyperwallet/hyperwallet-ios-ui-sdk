@@ -66,7 +66,7 @@ class ReceiptDetailPresenterTests: XCTestCase {
         XCTAssertEqual(section.title, "Fee Specification")
         XCTAssertEqual(section.rowCount, 3)
 
-        XCTAssertTrue(rowEqual(section.rows[0], ("Amount:", "+6.00 USD")))
+        XCTAssertTrue(rowEqual(section.rows[0], ("Amount:", "6.00 USD")))
         XCTAssertTrue(rowEqual(section.rows[1], ("Fee:", "1.11 USD")))
         XCTAssertTrue(rowEqual(section.rows[2], ("Transaction:", "4.89 USD")))
     }
