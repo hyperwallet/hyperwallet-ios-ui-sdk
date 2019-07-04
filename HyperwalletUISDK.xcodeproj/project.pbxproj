@@ -663,7 +663,6 @@
 			isa = PBXGroup;
 			children = (
 				DB80BF9A22CD14C200BA5EED /* TransferMethod */,
-				DB80BF9D22CD14F300BA5EED /* TransferMethodConfigurationDataManager.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -671,6 +670,7 @@
 		DB80BF9A22CD14C200BA5EED /* TransferMethod */ = {
 			isa = PBXGroup;
 			children = (
+				DB80BF9D22CD14F300BA5EED /* TransferMethodConfigurationDataManager.swift */,
 				DB80BF9B22CD14D700BA5EED /* TransferMethodConfigurationRepository.swift */,
 			);
 			path = TransferMethod;

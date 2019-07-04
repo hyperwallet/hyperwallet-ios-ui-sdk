@@ -69,8 +69,9 @@ public final class HyperwalletUI {
     /// transfer method (bank account, bank card, PayPal account, prepaid card, paper check).
     ///
     /// - Returns: An instance of `SelectTransferMethodTypeTableViewController`
-    public func selectTransferMethodTypeTableViewController() -> SelectTransferMethodTypeTableViewController {
-        return SelectTransferMethodTypeTableViewController()
+    public func selectTransferMethodTypeTableViewController(forceRepositoryUpdate: Bool = false)
+        -> SelectTransferMethodTypeTableViewController {
+        return SelectTransferMethodTypeTableViewController(forceUpdate: forceRepositoryUpdate)
     }
 
     /// Controller to create a new transfer method.

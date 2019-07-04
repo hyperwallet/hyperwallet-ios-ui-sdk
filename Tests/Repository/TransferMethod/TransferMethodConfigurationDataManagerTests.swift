@@ -114,6 +114,7 @@ class TransferMethodConfigurationDataManagerTests: XCTestCase {
         let expectation = self.expectation(description: "Get transfer methods fields")
         var result: HyperwalletTransferMethodConfigurationField?
         var error: HyperwalletErrorType?
+        TransferMethodConfigurationDataManager.clearInstance()
         let dataManager = TransferMethodConfigurationDataManager.shared
 
         // When

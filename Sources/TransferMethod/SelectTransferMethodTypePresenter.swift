@@ -94,25 +94,24 @@ final class SelectTransferMethodTypePresenter {
 
     /// Display all the select Country or Currency based on the index
     func performShowSelectCountryOrCurrencyView(index: Int) {
-        transferMethodConfigurationDataManager.getKeys { [weak self] (result, _) in
-            guard let strongSelf = self else {
+        if index == 0 {
+            showSelectCountryView(transferMethodConfigurationDataManager.countries())
+        } else {
+            guard !selectedCountry.isEmpty else {
+                view.showAlert(message: "select_a_country_message".localized())
                 return
             }
-            if index == 0 {
-                strongSelf.showSelectCountryView(result?.countries())
-            } else {
-                guard !strongSelf.selectedCountry.isEmpty else {
-                    strongSelf.view.showAlert(message: "select_a_country_message".localized())
-                    return
-                }
-                strongSelf.showSelectCurrencyView(result?.currencies(from: strongSelf.selectedCountry))
-            }
+            showSelectCurrencyView(currencyFromSelectedCountry)
         }
     }
 
     /// Loads the transferMethodKeys from core SDK and display the default transfer methods
-    func loadTransferMethodKeys() {
+    func loadTransferMethodKeys(_ forceUpdate: Bool = false) {
         view.showLoading()
+
+        if forceUpdate {
+            transferMethodConfigurationDataManager.refreshKeys()
+        }
 
         Hyperwallet.shared.getUser {[weak self] (result, error) in
             guard let strongSelf = self else {
