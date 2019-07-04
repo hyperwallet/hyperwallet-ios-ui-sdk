@@ -53,7 +53,7 @@ class TransactionDetailTests: BaseTests {
         verifyDetailSection(receiptIdVal: "55176991", dateVal: expectedDateValue, clientIdVal: nil)
 
         // FEE Section
-        verifyFeeSection(amountVal: "-5.00 USD", feeVal: "2.00 USD", transactionVal: "-7.00 USD")
+        verifyFeeSection(amountVal: "-5.00 USD", feeVal: "2.00 USD", transactionVal: "-3.00 USD")
     }
 
     func testReceiptDetail_verifyTransactionOptionalFields() {

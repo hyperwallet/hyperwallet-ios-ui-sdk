@@ -138,7 +138,9 @@ class ListReceiptTests: BaseTests {
     }
 
     private func verifyCellExists(with text: String, moneyTitle: String, by index: Int) {
-        XCTAssertTrue(app.cells.element(boundBy: index).staticTexts[text].exists)
+        let cell = app.cells.element(boundBy: index)
+        app.scroll(to: cell)
+        XCTAssertTrue(cell.staticTexts[text].exists)
     }
 
     private func verifyCellDoesNotExist(with text: String, moneyTitle: String, by index: Int) {
