@@ -28,6 +28,13 @@ final class ReceiptFeeTableViewCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
 
+    func configure(configuration: (title: String, value: String)) {
+        textLabel?.text = configuration.title
+        textLabel?.accessibilityIdentifier = configuration.title
+        detailTextLabel?.text = configuration.value
+        detailTextLabel?.accessibilityIdentifier = "\(configuration.title)_value"
+    }
+
     // MARK: Theme manager's proxy properties
     @objc dynamic var titleLabelFont: UIFont! {
         get { return textLabel?.font }

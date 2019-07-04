@@ -175,8 +175,14 @@ navigationController?.pushViewController(addTransferMethodTableViewController, a
 
 ### Lists the user's receipts
 ```swift
-let listReceiptTableViewController = HyperwalletUI.shared.listReceiptTableViewController()
+let listUserReceiptTableViewController = HyperwalletUI.shared.listReceiptTableViewController()
 ```
+
+### Lists the prepaid card's receipts
+```swift
+let listPrepaidCardReceiptTableViewController = HyperwalletUI.shared.listPrepaidCardReceiptTableViewController("your-prepaid-card-token")
+```
+
 
 ## NotificationCenter Events
 

@@ -53,6 +53,7 @@ public final class ReceiptDetailTableViewController: UITableViewController {
         tableView.estimatedRowHeight = Theme.Cell.extraSmallHeight
         tableView.separatorStyle = .none
         tableView.accessibilityIdentifier = "receiptDetailTableView"
+        tableView.cellLayoutMarginsFollowReadableWidth = false
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)
         }
@@ -73,17 +74,15 @@ public final class ReceiptDetailTableViewController: UITableViewController {
             if let tableViewCell = cell as? ReceiptDetailTableViewCell,
                 let detailSection = section as? ReceiptDetailSectionDetailData {
                 let row = detailSection.rows[indexPath.row]
-                tableViewCell.textLabel?.text = row.title
-                tableViewCell.detailTextLabel?.text = row.value
+                tableViewCell.configure(configuration: (row.title, row.value))
             }
 
         case .fee:
             if let tableViewCell = cell as? ReceiptFeeTableViewCell,
                 let feeSection = section as? ReceiptDetailSectionFeeData {
                 let row = feeSection.rows[indexPath.row]
-                tableViewCell.textLabel?.text = row.title
-                tableViewCell.detailTextLabel?.text = row.value
-            }
+                tableViewCell.configure(configuration: (row.title, row.value))
+           }
 
         case .notes:
             if let tableViewCell = cell as? ReceiptNotesTableViewCell,

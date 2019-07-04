@@ -23,6 +23,7 @@ final class ReceiptNotesTableViewCell: UITableViewCell {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         textLabel?.numberOfLines = 0
         textLabel?.lineBreakMode = .byWordWrapping
+        textLabel?.accessibilityIdentifier = "ReceiptDetailSectionNotesTextLabel"
     }
 
     required init?(coder aDecoder: NSCoder) {
