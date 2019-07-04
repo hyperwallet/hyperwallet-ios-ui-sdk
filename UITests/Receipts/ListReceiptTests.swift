@@ -1,12 +1,15 @@
 import XCTest
 
 class ListReceiptTests: BaseTests {
+    private let currency = "USD"
     var receiptsList: ReceiptsList!
+    private var transactionDetails: TransactionDetails!
 
     override func setUp() {
         profileType = .individual
         super.setUp()
         receiptsList = ReceiptsList(app: app)
+        transactionDetails = TransactionDetails(app: app)
         spinner = app.activityIndicators["activityIndicator"]
     }
 
@@ -193,5 +196,127 @@ class ListReceiptTests: BaseTests {
     private func openReceiptsListScreen() {
         app.tables.cells.containing(.staticText, identifier: "List User Receipts").element(boundBy: 0).tap()
         waitForNonExistence(spinner)
+    }
+
+    // MARK: Detail Page Testcases
+
+    // Credit Transaction
+    func testReceiptDetail_verifyCreditTransaction() {
+        let expectedDateValue = "Fri, May 24, 2019, 6:16 PM"
+        openupReceiptsListScreenForFewMonths()
+        transactionDetails.openReceipt(row: 0)
+        waitForExistence(transactionDetails.detailHeaderTitle)
+
+        if #available(iOS 12, *) {
+            verifyPayment(payment: "Payment\nMay 24, 2019", amount: "6.00\n\(currency)")
+        } else {
+            verifyPayment(payment: "Payment May 24, 2019", amount: "6.00 \(currency)")
+        }
+
+        // DETAILS Section
+        verifyDetailSection(receiptIdVal: "55176992", dateVal: expectedDateValue, clientIdVal: "DyClk0VG9a")
+
+        // FEE Section
+        verifyFeeSection(amountVal: "6.00 USD", feeVal: "0.00 USD", transactionVal: "6.00 USD")
+    }
+
+    // Debit Transaction
+    func testReceiptDetail_verifyDebitTransaction() {
+        let expectedDateValue = "Sun, May 12, 2019, 6:16 PM" // Sun, May 12, 2019, 6:16 PM
+        openupReceiptsListScreenForFewMonths()
+        transactionDetails.openReceipt(row: 1)
+        waitForExistence(transactionDetails.detailHeaderTitle)
+
+        if #available(iOS 12, *) {
+            verifyPayment(payment: "Bank Account\nMay 12, 2019", amount: "-5.00\n\(currency)")
+        } else {
+            verifyPayment(payment: "Bank Account May 12, 2019", amount: "-5.00 \(currency)")
+        }
+
+        // DETAILS Section
+        verifyDetailSection(receiptIdVal: "55176991", dateVal: expectedDateValue, clientIdVal: nil)
+
+        // FEE Section
+        verifyFeeSection(amountVal: "-5.00 USD", feeVal: "2.00 USD", transactionVal: "-7.00 USD")
+    }
+
+    func testReceiptDetail_verifyTransactionOptionalFields() {
+        openupReceiptsListScreenForOneMonth()
+        transactionDetails.openReceipt(row: 4)
+        waitForExistence(transactionDetails.detailHeaderTitle)
+
+        XCTAssertEqual(transactionDetails.clientTransactionIdLabel.label, "Client Transaction ID:")
+        XCTAssertEqual(transactionDetails.detailSection.label, "Details")
+        XCTAssertEqual(transactionDetails.receiptIdLabel.label, "Receipt ID:")
+        XCTAssertEqual(transactionDetails.dateLabel.label, "Date:")
+        XCTAssertEqual(transactionDetails.charityNameLabel.label, "Charity Name:")
+        XCTAssertEqual(transactionDetails.promoWebSiteLabel.label, "Promo Website:")
+        XCTAssertEqual(transactionDetails.noteSectionLabel.label, "Notes")
+
+        XCTAssertEqual(transactionDetails.receiptIdValue.label, "3051579")
+        XCTAssertEqual(transactionDetails.clientTransactionIdValue.label, "8OxXefx5")
+        XCTAssertEqual(transactionDetails.charityNameValue.label, "Sample Charity")
+        XCTAssertEqual(transactionDetails.checkNumValue.label, "Sample Check Number")
+        XCTAssertEqual(transactionDetails.websiteValue.label, "https://localhost")
+        XCTAssertEqual(transactionDetails.notesValue.label, "Sample payment notes")
+        XCTAssertEqual(transactionDetails.dateValue.label, "Fri, May 3, 2019, 5:08 PM")
+    }
+
+    // Verify when no Notes and Fee sections
+    func testReceiptDetail_verifyTransactionReceiptNoNoteSectionAndFeeLabel() {
+       openupReceiptsListScreenForOneMonth()
+        transactionDetails.openReceipt(row: 2)
+        let transactionDetailHeaderLabel = transactionDetails.detailHeaderTitle
+        waitForNonExistence(transactionDetailHeaderLabel)
+
+        // Assert No Note and Fee sections
+        let noteSection = transactionDetails.noteSectionLabel
+        let feeLabel = transactionDetails.feeLabel
+        XCTAssertFalse(noteSection.exists)
+        XCTAssertFalse(feeLabel.exists)
+    }
+
+    // MARK: Helper methods
+    private func openupReceiptsListScreenForOneMonth() {
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/receipts", filename: "ReceiptsForOneMonth", method: HTTPMethod.get)
+
+        openReceiptsListScreen()
+    }
+
+    private func verifyPayment(payment: String, amount: String) {
+        let paymentlabel = app.tables["receiptDetailTableView"].staticTexts["ListReceiptTableViewCellTextLabel"].label
+        let amountlabel = app.tables["receiptDetailTableView"].staticTexts["ListReceiptTableViewCellDetailTextLabel"].label
+        XCTAssertEqual(paymentlabel, payment)
+        XCTAssertEqual(amountlabel, amount)
+    }
+
+    // Detail section verification
+    private func verifyDetailSection(receiptIdVal: String, dateVal: String, clientIdVal: String?) {
+        XCTAssertEqual(transactionDetails.detailSection.label, "Details")
+        XCTAssertEqual(transactionDetails.receiptIdLabel.label, "Receipt ID:")
+        XCTAssertEqual(transactionDetails.dateLabel.label, "Date:")
+        XCTAssertEqual(transactionDetails.receiptIdValue.label, receiptIdVal)
+        XCTAssertEqual(transactionDetails.receiptIdValue.label, receiptIdVal)
+        XCTAssertEqual(transactionDetails.dateValue.label, dateVal)
+
+        if let clientIdVal = clientIdVal {
+            let clientTransIDLabel = transactionDetails.clientTransactionIdLabel
+            XCTAssertTrue(clientTransIDLabel.exists)
+            let clientID = transactionDetails.clientTransactionIdValue
+            XCTAssertTrue(clientID.exists)
+            XCTAssertEqual(clientID.label, clientIdVal)
+        }
+    }
+
+    // FEE section verification
+    private func verifyFeeSection(amountVal: String, feeVal: String, transactionVal: String) {
+        XCTAssertEqual(transactionDetails.feeSection.label, "Fee Specification")
+        XCTAssertEqual(transactionDetails.amountLabel.label, "Amount:")
+        XCTAssertEqual(transactionDetails.feeLabel.label, "Fee:")
+        XCTAssertEqual(transactionDetails.transactionLabel.label, "Transaction:")
+
+        XCTAssertEqual(transactionDetails.amountValue.label, amountVal)
+        XCTAssertEqual(transactionDetails.feeValue.label, feeVal)
+        XCTAssertEqual(transactionDetails.transactionValue.label, transactionVal)
     }
 }

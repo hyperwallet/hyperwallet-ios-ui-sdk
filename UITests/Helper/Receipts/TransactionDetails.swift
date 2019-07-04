@@ -2,10 +2,11 @@ import XCTest
 
 class TransactionDetails {
     var navigationBar: XCUIElement
-    var receiptDetailTableviewTable: XCUIElement
+    // Sections
     var detailSection: XCUIElement
     var feeSection: XCUIElement
     var transactionSection: XCUIElement
+    // Payment
     var cellTextLabel: XCUIElement
     var detailTextLabel: XCUIElement
     var detailHeaderTitle: XCUIElement
@@ -25,29 +26,51 @@ class TransactionDetails {
     // Back button
     var backButton: XCUIElement
 
+    // Values label
+    var receiptIdValue: XCUIElement
+    var dateValue: XCUIElement
+    var clientTransactionIdValue: XCUIElement
+    var charityNameValue: XCUIElement
+    var checkNumValue: XCUIElement
+    var websiteValue: XCUIElement
+    var notesValue: XCUIElement
+    var amountValue: XCUIElement
+    var feeValue: XCUIElement
+    var transactionValue: XCUIElement
+
     var app: XCUIApplication
 
     init(app: XCUIApplication) {
         self.app = app
         navigationBar = app.navigationBars["Transaction Details"]
         detailHeaderTitle = app.navigationBars["Transaction Details"].otherElements["Transaction Details"]
-        receiptDetailTableviewTable = app.tables["receiptDetailTableView"]
-        cellTextLabel = receiptDetailTableviewTable.staticTexts["ListReceiptTableViewCellTextLabel"]
-        detailTextLabel = receiptDetailTableviewTable.staticTexts["ListReceiptTableViewDetailTextLabel"]
-        detailSection = receiptDetailTableviewTable.staticTexts["Details"]
-        feeSection = receiptDetailTableviewTable.staticTexts["Fee Specification"]
-        transactionSection = receiptDetailTableviewTable.staticTexts["Transaction"]
-        receiptIdLabel = receiptDetailTableviewTable.staticTexts["Receipt ID:"]
-        dateLabel = receiptDetailTableviewTable.staticTexts["Date:"]
-        clientTransactionIdLabel = receiptDetailTableviewTable.staticTexts["Client Transaction ID:"]
-        charityNameLabel = receiptDetailTableviewTable.staticTexts["Charity Name:"]
-        checkNumLabel = receiptDetailTableviewTable.staticTexts["Check Number:"]
-        promoWebSiteLabel = receiptDetailTableviewTable.staticTexts["Promo Website:"]
-        noteSectionLabel = receiptDetailTableviewTable.staticTexts["Notes"]
-        amountLabel = receiptDetailTableviewTable.staticTexts["Amount:"]
-        feeLabel = receiptDetailTableviewTable.staticTexts["Fee:"]
-        transactionLabel = receiptDetailTableviewTable.staticTexts["Transaction:"]
+        cellTextLabel = app.tables["receiptDetailTableView"].staticTexts["ListReceiptTableViewCellTextLabel"]
+        detailTextLabel = app.tables["receiptDetailTableView"].staticTexts["ListReceiptTableViewDetailTextLabel"]
+        detailSection = app.tables["receiptDetailTableView"].staticTexts["Details"]
+        feeSection = app.tables["receiptDetailTableView"].staticTexts["Fee Specification"]
+        transactionSection = app.tables["receiptDetailTableView"].staticTexts["Transaction"]
+        receiptIdLabel = app.tables["receiptDetailTableView"].staticTexts["Receipt ID:"]
+        dateLabel = app.tables["receiptDetailTableView"].staticTexts["Date:"]
+        clientTransactionIdLabel = app.tables["receiptDetailTableView"].staticTexts["Client Transaction ID:"]
+        charityNameLabel = app.tables["receiptDetailTableView"].staticTexts["Charity Name:"]
+        checkNumLabel = app.tables["receiptDetailTableView"].staticTexts["Check Number:"]
+        promoWebSiteLabel = app.tables["receiptDetailTableView"].staticTexts["Promo Website:"]
+        noteSectionLabel = app.tables["receiptDetailTableView"].staticTexts["Notes"]
+        amountLabel = app.tables["receiptDetailTableView"].staticTexts["Amount:"]
+        feeLabel = app.tables["receiptDetailTableView"].staticTexts["Fee:"]
+        transactionLabel = app.tables["receiptDetailTableView"].staticTexts["Transaction:"]
         backButton = navigationBar.children(matching: .button).matching(identifier: "Back").element(boundBy: 0)
+
+        receiptIdValue = app.tables["receiptDetailTableView"].staticTexts["Receipt ID:_value"]
+        dateValue = app.tables["receiptDetailTableView"].staticTexts["Date:_value"]
+        clientTransactionIdValue = app.tables["receiptDetailTableView"].staticTexts["Client Transaction ID:_value"]
+        charityNameValue = app.tables["receiptDetailTableView"].staticTexts["Charity Name:_value"]
+        checkNumValue = app.tables["receiptDetailTableView"].staticTexts["Check Number:_value"]
+        websiteValue = app.tables["receiptDetailTableView"].staticTexts["Promo Website:_value"]
+        notesValue = app.tables["receiptDetailTableView"].staticTexts["ReceiptDetailSectionNotesTextLabel"]
+        amountValue = app.tables["receiptDetailTableView"].staticTexts["Amount:_value"]
+        feeValue = app.tables["receiptDetailTableView"].staticTexts["Fee:_value"]
+        transactionValue = app.tables["receiptDetailTableView"].staticTexts["Transaction:_value"]
     }
 
     func openReceipt(row: Int) {
