@@ -29,7 +29,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
         mockView.expectation = expectation
 
         // When
-        presenter.loadTransferMethodKeys()
+        presenter.loadTransferMethodKeys(true)
         wait(for: [expectation], timeout: 1)
 
         // Then
@@ -56,7 +56,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
         mockView.expectation = expectation
 
         // When
-        presenter.loadTransferMethodKeys()
+        presenter.loadTransferMethodKeys(true)
         wait(for: [expectation], timeout: 1)
 
         // Then
@@ -76,7 +76,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
         mockView.expectation = expectation
 
         // When
-        presenter.loadTransferMethodKeys()
+        presenter.loadTransferMethodKeys(true)
         wait(for: [expectation], timeout: 1)
 
         // Then
@@ -98,7 +98,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
         let expectation = self.expectation(description: "load transfer methods keys")
         mockView.expectation = expectation
 
-        presenter.loadTransferMethodKeys()
+        presenter.loadTransferMethodKeys(true)
         wait(for: [expectation], timeout: 1)
 
         presenter.performShowSelectCountryOrCurrencyView(index: countryIndex)

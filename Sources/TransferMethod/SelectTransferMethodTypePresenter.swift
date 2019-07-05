@@ -49,16 +49,13 @@ final class SelectTransferMethodTypePresenter {
     private (set) var countryCurrencySectionData = [String]()
     private (set) var selectedCountry = ""
     private (set) var selectedCurrency = ""
-    private var transferMethodConfigurationDataManager: TransferMethodConfigurationDataManagerProtocol {
-        return TransferMethodConfigurationDataManager.shared
-    }
 
     private var currencyFromSelectedCountry: [HyperwalletCurrency]? {
-        return transferMethodConfigurationDataManager.currencies(selectedCountry)
+        return TransferMethodConfigurationDataManager.shared.currencies(selectedCountry)
     }
 
     var sectionData: [HyperwalletTransferMethodType] {
-        return transferMethodConfigurationDataManager.transferMethodTypes(selectedCountry, selectedCurrency) ??
+        return TransferMethodConfigurationDataManager.shared.transferMethodTypes(selectedCountry, selectedCurrency) ??
             [HyperwalletTransferMethodType]()
     }
 
@@ -95,7 +92,7 @@ final class SelectTransferMethodTypePresenter {
     /// Display all the select Country or Currency based on the index
     func performShowSelectCountryOrCurrencyView(index: Int) {
         if index == 0 {
-            showSelectCountryView(transferMethodConfigurationDataManager.countries())
+            showSelectCountryView(TransferMethodConfigurationDataManager.shared.countries())
         } else {
             guard !selectedCountry.isEmpty else {
                 view.showAlert(message: "select_a_country_message".localized())
@@ -112,7 +109,7 @@ final class SelectTransferMethodTypePresenter {
         view.showLoading()
 
         if forceUpdate {
-            transferMethodConfigurationDataManager.refreshKeys()
+            TransferMethodConfigurationDataManager.shared.refreshKeys()
         }
 
         Hyperwallet.shared.getUser {[weak self] (result, error) in
@@ -130,7 +127,7 @@ final class SelectTransferMethodTypePresenter {
             strongSelf.user = result
             //TODO Review the DispatchQueue after to implement the UserRepository
             DispatchQueue.main.async {
-                strongSelf.transferMethodConfigurationDataManager.getKeys(completion: strongSelf.getKeysHandler())
+                TransferMethodConfigurationDataManager.shared.getKeys(completion: strongSelf.getKeysHandler())
             }
         }
     }

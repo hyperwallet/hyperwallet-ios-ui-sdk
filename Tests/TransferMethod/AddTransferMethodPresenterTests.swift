@@ -27,7 +27,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
         let expectation = self.expectation(description: "Load transfer method configuration fields")
         mockView.expectation = expectation
 
-        presenter.loadTransferMethodConfigurationFields()
+        presenter.loadTransferMethodConfigurationFields(true)
 
         wait(for: [expectation], timeout: 1)
 
@@ -46,7 +46,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
         mockView.expectation = expectation
 
         // When
-        presenter.loadTransferMethodConfigurationFields()
+        presenter.loadTransferMethodConfigurationFields(true)
         wait(for: [expectation], timeout: 1)
 
         XCTAssertTrue(mockView.isShowErrorPerformed, "The showError should be performed")
