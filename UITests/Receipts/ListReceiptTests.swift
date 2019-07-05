@@ -104,7 +104,9 @@ class ListReceiptTests: BaseTests {
     }
 
     private func verifyCellExists(with text: String, moneyTitle: String, by index: Int) {
-        XCTAssertTrue(app.cells.element(boundBy: index).staticTexts[text].exists)
+        let cell = app.cells.element(boundBy: index)
+        app.scroll(to: cell)
+        XCTAssertTrue(cell.staticTexts[text].exists)
     }
 
     private func verifyCellDoesNotExist(with text: String, moneyTitle: String, by index: Int) {
@@ -200,7 +202,7 @@ class ListReceiptTests: BaseTests {
         verifyDetailSection(receiptIdVal: "55176991", dateVal: expectedDateValue, clientIdVal: nil)
 
         // FEE Section
-        verifyFeeSection(amountVal: "-5.00 USD", feeVal: "2.00 USD", transactionVal: "-7.00 USD")
+        verifyFeeSection(amountVal: "-5.00 USD", feeVal: "2.00 USD", transactionVal: "3.00 USD")
     }
 
     func testReceiptDetail_verifyTransactionOptionalFields() {
@@ -251,6 +253,7 @@ class ListReceiptTests: BaseTests {
     private func verifyPayment(payment: String, amount: String) {
         let paymentlabel = app.tables["receiptDetailTableView"]
             .staticTexts["listReceiptTableViewCellTextLabel"].label
+
         let amountlabel = app.tables["receiptDetailTableView"]
             .staticTexts["listReceiptTableViewCellDetailTextLabel"].label
         XCTAssertEqual(paymentlabel, payment)

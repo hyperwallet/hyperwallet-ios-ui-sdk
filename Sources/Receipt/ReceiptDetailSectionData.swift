@@ -119,9 +119,7 @@ struct ReceiptDetailSectionFeeData: ReceiptDetailSectionData {
             fee = Double(strFee) ?? 0.0
         }
         if let amount = Double(receipt.amount) {
-            let transaction: Double = receipt.entry == .debit
-                ? 0 - amount - fee
-                : amount - fee
+            let transaction: Double = amount - fee
             let transactionFormat = getTransactionFormat(basedOn: receipt.amount)
             rows.append(ReceiptDetailRow(title: "receipt_details_transaction".localized(),
                                          value: String(format: valueCurrencyFormat,
