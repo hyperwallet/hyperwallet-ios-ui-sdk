@@ -74,16 +74,7 @@ class TransactionDetails {
         transactionValue = app.tables["receiptDetailTableView"].staticTexts["transactionValue"]
         backButton = navigationBar.children(matching: .button).matching(identifier: "Back").element(boundBy: 0)
 
-        receiptIdValue = app.tables["receiptDetailTableView"].staticTexts["Receipt ID:_value"]
-        dateValue = app.tables["receiptDetailTableView"].staticTexts["Date:_value"]
-        clientTransactionIdValue = app.tables["receiptDetailTableView"].staticTexts["Client Transaction ID:_value"]
-        charityNameValue = app.tables["receiptDetailTableView"].staticTexts["Charity Name:_value"]
-        checkNumValue = app.tables["receiptDetailTableView"].staticTexts["Check Number:_value"]
-        websiteValue = app.tables["receiptDetailTableView"].staticTexts["Promo Website:_value"]
         notesValue = app.tables["receiptDetailTableView"].staticTexts["ReceiptDetailSectionNotesTextLabel"]
-        amountValue = app.tables["receiptDetailTableView"].staticTexts["Amount:_value"]
-        feeValue = app.tables["receiptDetailTableView"].staticTexts["Fee:_value"]
-        transactionValue = app.tables["receiptDetailTableView"].staticTexts["Transaction:_value"]
     }
 
     func openReceipt(row: Int) {
