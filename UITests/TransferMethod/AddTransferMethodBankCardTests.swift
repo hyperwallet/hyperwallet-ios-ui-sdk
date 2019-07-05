@@ -6,77 +6,91 @@ class AddTransferMethodBankCardTests: BaseTests {
     let debitCard = NSPredicate(format: "label CONTAINS[c] 'Debit Card'")
 
     override func setUp() {
-        profileType = .individual
         super.setUp()
-        setUpAddTransferMethodBankCardScreen()
-    }
 
-    override func tearDown() {
-        mockServer.tearDown()
-    }
+        app = XCUIApplication()
+        app.launchEnvironment = [
+            "COUNTRY": "US",
+            "CURRENCY": "USD",
+            "ACCOUNT_TYPE": "BANK_CARD",
+            "PROFILE_TYPE": "INDIVIDUAL"
+        ]
+        app.launch()
 
-    func testAddTransferMethod_createBankCard() {
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/bank-cards",
-                             filename: "BankCardResponse",
+        mockServer.setupStub(url: "/graphql",
+                             filename: "TransferMethodConfigurationBankCardResponse",
                              method: HTTPMethod.post)
 
-        addTransferMethod.setCardNumber("4895142232120006")
-        addTransferMethod.setDateOfExpiry(expiryMonth: "March", expiryYear: "2020")
-
-        XCTAssertEqual(addTransferMethod.dateOfExpiryInput.value as? String, "03/20")
-
-        addTransferMethod.setCvv("022")
-        addTransferMethod.selectRelationship("Self")
-        addTransferMethod.clickCreateTransferMethodButton()
-
+        app.tables.cells.staticTexts["Add Transfer Method"].tap()
+        spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
-
-        XCTAssert(app.navigationBars["Account Settings"].exists)
+        addTransferMethod = AddTransferMethod(app: app)
     }
 
-    func testAddTransferMethod_createBankCardBusiness() {
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/bank-cards",
-                             filename: "BankCardResponse",
-                             method: HTTPMethod.post)
+    func testAddTransferMethod_displaysElementsOnTmcResponse() {
+        XCTAssert(app.navigationBars["Debit Card"].exists)
 
-        addTransferMethod.setCardNumber("4895142232120006")
-        addTransferMethod.setDateOfExpiry(expiryMonth: "March", expiryYear: "2020")
+        XCTAssert(addTransferMethod.addTransferMethodTableView
+            .staticTexts["Account Information - United States (USD)"].exists)
+        XCTAssertEqual(addTransferMethod.cardNumberLabel.label, "Card Number")
+        XCTAssert(addTransferMethod.cardNumberInput.exists)
+        XCTAssertEqual(addTransferMethod.dateOfExpiryLabel.label, "Expiry Date")
+        XCTAssert(addTransferMethod.dateOfExpiryInput.exists)
+        XCTAssertEqual(addTransferMethod.cvvLabel.label, "CVV (Card Security Code)")
+        XCTAssert(addTransferMethod.cvvInput.exists)
 
-        XCTAssertEqual(addTransferMethod.dateOfExpiryInput.value as? String, "03/20")
+        XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
+        XCTAssert(app.staticTexts["Transaction Fees: USD 1.75 Processing Time: 1-2 Business days"].exists)
 
-        addTransferMethod.setCvv("022")
-        addTransferMethod.selectRelationship("Self")
-        addTransferMethod.clickCreateTransferMethodButton()
-
-        waitForNonExistence(spinner)
-
-        XCTAssert(app.navigationBars["Account Settings"].exists)
+        addTransferMethod.addTransferMethodTableView.scroll(to: addTransferMethod.createTransferMethodButton)
+        XCTAssert(addTransferMethod.createTransferMethodButton.exists)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidPattern() {
         addTransferMethod.setCardNumber("1234567890@#$")
+        addTransferMethod.setCvv("99-a11")
+        addTransferMethod.clickCreateTransferMethodButton()
+
         XCTAssert(app.tables["addTransferMethodTable"].staticTexts["cardNumber_error"].exists)
+        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["cvv_error"].exists)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidLength() {
-        addTransferMethod.setCardNumber("10100101010")
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["cardNumber_error"].exists)
+        addTransferMethod.setCardNumber("10112919191919111111")
+        addTransferMethod.setCvv("990011")
+        addTransferMethod.clickCreateTransferMethodButton()
 
-        addTransferMethod.setCardNumber("101001010102221234323")
         XCTAssert(app.tables["addTransferMethodTable"].staticTexts["cardNumber_error"].exists)
+        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["cvv_error"].exists)
     }
 
-    func testAddTransferMethod_returnsErrorEmptyRequiredFields() {
+    func testAddTransferMethod_returnsErrorOnInvalidPresence() {
         addTransferMethod.setCardNumber("")
         addTransferMethod.setCvv("")
-
-        XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["cardNumber_error"].exists)
-        XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["cvv_error"].exists)
-
         addTransferMethod.clickCreateTransferMethodButton()
+
+        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["cardNumber_error"].exists)
+        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["cvv_error"].exists)
     }
 
-    func testAddTransferMethod_returnsErrorOnInvalidCardCVV() {
+    func testAddTransferMethod_createBankCardValidResponse() {
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/bank-cards",
+                             filename: "BankCardResponse",
+                             method: HTTPMethod.post)
+
+        addTransferMethod.setCardNumber("4895142232120006")
+        addTransferMethod.setDateOfExpiry(expiryMonth: "March", expiryYear: "2020")
+
+        XCTAssertEqual(app.textFields["dateOfExpiry"].value as? String, "03/20")
+
+        addTransferMethod.setCvv("022")
+        addTransferMethod.clickCreateTransferMethodButton()
+        waitForNonExistence(spinner)
+
+        XCTAssert(app.navigationBars["Account Settings"].exists)
+    }
+
+    func testAddTransferMethod_createBankCardInvalidCardCVV() {
         mockServer.setupStubError(url: "/rest/v3/users/usr-token/bank-cards",
                                   filename: "BankCardInvalidCvvResponse",
                                   method: HTTPMethod.post)
@@ -93,7 +107,7 @@ class AddTransferMethodBankCardTests: BaseTests {
                                     "The card cannot be registered - The CVV entered is invalid.")))
     }
 
-    func testAddTransferMethod_returnsErrorOnDuplicateBankCard() {
+    func testAddTransferMethod_createBankCardDuplicateBankCard() {
         mockServer.setupStubError(url: "/rest/v3/users/usr-token/bank-cards",
                                   filename: "BankCardDuplicateResponse",
                                   method: HTTPMethod.post)
@@ -105,67 +119,5 @@ class AddTransferMethodBankCardTests: BaseTests {
         waitForNonExistence(spinner)
         XCTAssertNotNil(app.tables.otherElements
             .containing(NSPredicate(format: "label CONTAINS %@", "The card is already registered.")))
-    }
-
-    func testAddTransferMethod_returnsGraphQLFlatFee() {
-        let staticTexts = app.tables["addTransferMethodTable"].staticTexts
-        XCTAssert(staticTexts["Transaction Fees: USD 1.75 Processing Time: 1-2 Business days"].exists)
-    }
-
-    func testAddTransferMethod_displaysElementsOnIndividualProfileTmcResponse() {
-        XCTAssert(app.navigationBars.staticTexts["Debit Card"].exists)
-
-        verifyAccountInformationSection()
-
-        let infoSection = addTransferMethod.addTransferMethodTableView.otherElements["TRANSFER METHOD INFORMATION"]
-
-        addTransferMethod.addTransferMethodTableView.scroll(to: infoSection)
-        XCTAssert(infoSection.exists)
-
-        addTransferMethod.addTransferMethodTableView.scroll(to: addTransferMethod.createTransferMethodButton)
-        XCTAssert(addTransferMethod.createTransferMethodButton.exists)
-    }
-
-    func testAddTransferMethod_displaysElementsOnBusinessProfileTmcResponse() {
-        XCTAssert(app.navigationBars.staticTexts["Debit Card"].exists)
-
-        verifyAccountInformationSection()
-
-        let infoSection = addTransferMethod.addTransferMethodTableView.otherElements["TRANSFER METHOD INFORMATION"]
-
-        addTransferMethod.addTransferMethodTableView.scroll(to: infoSection)
-        XCTAssert(infoSection.exists)
-
-        addTransferMethod.addTransferMethodTableView.scroll(to: addTransferMethod.createTransferMethodButton)
-        XCTAssert(addTransferMethod.createTransferMethodButton.exists)
-    }
-}
-
-private extension AddTransferMethodBankCardTests {
-    func setUpAddTransferMethodBankCardScreen() {
-        selectTransferMethodType = SelectTransferMethodType(app: app)
-        addTransferMethod = AddTransferMethod(app: app, for: .debitCard)
-
-        app.tables.cells.containing(.staticText, identifier: "Add Transfer Method").element(boundBy: 0).tap()
-        spinner = app.activityIndicators["activityIndicator"]
-        waitForNonExistence(spinner)
-        selectTransferMethodType.selectCountry(country: "United States")
-        selectTransferMethodType.selectCurrency(currency: "United States Dollar")
-
-        app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: debitCard).tap()
-        waitForNonExistence(spinner)
-    }
-
-    func verifyAccountInformationSection() {
-        XCTAssert(addTransferMethod.title.exists)
-
-        XCTAssert(addTransferMethod.addTransferMethodTableView.cells.staticTexts["Card Number"].exists)
-        XCTAssert(addTransferMethod.cardNumberInput.exists)
-
-        XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["Expiry Date"].exists)
-        XCTAssert(addTransferMethod.dateOfExpiryInput.exists)
-
-        XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["CVV (Card Security Code)"].exists)
-        XCTAssert(addTransferMethod.cvvInput.exists)
     }
 }

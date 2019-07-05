@@ -106,7 +106,7 @@ struct ReceiptDetailSectionFeeData: ReceiptDetailSectionData {
     var cellIdentifier: String { return ReceiptFeeTableViewCell.reuseIdentifier }
 
     init(from receipt: HyperwalletReceipt) {
-        let amountFormat = receipt.entry == HyperwalletReceipt.HyperwalletEntryType.credit ? "+%@ %@" : "-%@ %@"
+        let amountFormat = receipt.entry == HyperwalletReceipt.HyperwalletEntryType.credit ? "%@ %@" : "-%@ %@"
         let valueCurrencyFormat = "%@ %@"
         rows.append(ReceiptDetailRow(title: "receipt_details_amount".localized(),
                                      value: String(format: amountFormat, receipt.amount, receipt.currency),

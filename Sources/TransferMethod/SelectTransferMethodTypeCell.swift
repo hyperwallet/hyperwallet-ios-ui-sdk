@@ -86,7 +86,6 @@ extension SelectTransferMethodTypeCell {
                                          Theme.Icon.primaryColor)
             imageView?.image = image
             imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
-            //detailTextLabel?.accessibilityIdentifier = configuration.transferMethodTypeName
         }
     }
 }
