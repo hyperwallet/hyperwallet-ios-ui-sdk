@@ -28,11 +28,11 @@ final class ReceiptDetailTableViewCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
 
-    func configure(configuration: (title: String, value: String)) {
-        textLabel?.text = configuration.title
-        textLabel?.accessibilityIdentifier = configuration.title
-        detailTextLabel?.text = configuration.value
-        detailTextLabel?.accessibilityIdentifier = "\(configuration.title)_value"
+    func configure(_ row: ReceiptDetailRow) {
+        textLabel?.text = row.title
+        textLabel?.accessibilityIdentifier = "\(row.field)Label"
+        detailTextLabel?.text = row.value
+        detailTextLabel?.accessibilityIdentifier = "\(row.field)Value"
     }
 
     // MARK: Theme manager's proxy properties

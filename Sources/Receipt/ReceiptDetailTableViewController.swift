@@ -67,21 +67,21 @@ public final class ReceiptDetailTableViewController: UITableViewController {
         case .transaction:
             if let tableViewCell = cell as? ReceiptTransactionTableViewCell,
                 let transactionSection = section as? ReceiptDetailSectionTransactionData {
-                tableViewCell.configure(configuration: transactionSection.tableViewCellConfiguration)
+                tableViewCell.configure(transactionSection.tableViewCellConfiguration)
             }
 
         case .details:
             if let tableViewCell = cell as? ReceiptDetailTableViewCell,
                 let detailSection = section as? ReceiptDetailSectionDetailData {
                 let row = detailSection.rows[indexPath.row]
-                tableViewCell.configure(configuration: (row.title, row.value))
+                tableViewCell.configure(row)
             }
 
         case .fee:
             if let tableViewCell = cell as? ReceiptFeeTableViewCell,
                 let feeSection = section as? ReceiptDetailSectionFeeData {
                 let row = feeSection.rows[indexPath.row]
-                tableViewCell.configure(configuration: (row.title, row.value))
+                tableViewCell.configure(row)
            }
 
         case .notes:

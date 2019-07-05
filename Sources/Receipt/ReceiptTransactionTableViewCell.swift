@@ -135,7 +135,7 @@ final class ReceiptTransactionTableViewCell: UITableViewCell {
 }
 
 extension ReceiptTransactionTableViewCell {
-    func configure(configuration: ReceiptTransactionCellConfiguration?) {
+    func configure(_ configuration: ReceiptTransactionCellConfiguration?) {
         if let configuration = configuration {
             receiptTypeLabel.text = configuration.type
             amountLabel.text = configuration.entry == credit

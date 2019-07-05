@@ -201,7 +201,7 @@ class ListReceiptTests: BaseTests {
         XCTAssertEqual(transactionDetails.clientTransactionIdValue.label, "8OxXefx5")
         XCTAssertEqual(transactionDetails.charityNameValue.label, "Sample Charity")
         XCTAssertEqual(transactionDetails.checkNumValue.label, "Sample Check Number")
-        XCTAssertEqual(transactionDetails.websiteValue.label, "https://localhost")
+        XCTAssertEqual(transactionDetails.promoWebSiteValue.label, "https://localhost")
         XCTAssertEqual(transactionDetails.notesValue.label, "Sample payment notes")
         XCTAssertEqual(transactionDetails.dateValue.label, "Fri, May 3, 2019, 5:08 PM")
     }

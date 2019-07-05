@@ -43,7 +43,6 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
         layoutMargins = UIEdgeInsets(top: 11.0, left: 0, bottom: 11.0, right: 16.0)
         self.field = field
         setupLayout(field: field)
-        label.accessibilityIdentifier = String(format: "%@", field.name ?? "")
     }
 
     required init(coder: NSCoder) {
@@ -87,6 +86,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
     }
 
     func setupLayout(field: HyperwalletField) {
+        label.accessibilityIdentifier = field.name ?? ""
         label.text = field.label ?? ""
         label.isUserInteractionEnabled = field.isEditable ?? true
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
