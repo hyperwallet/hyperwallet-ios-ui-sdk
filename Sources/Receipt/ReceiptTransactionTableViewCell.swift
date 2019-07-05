@@ -78,11 +78,11 @@ final class ReceiptTransactionTableViewCell: UITableViewCell {
     }
 
     private func defaultInit() {
-        let line1StackView = UIStackView(frame: .zero)
-        setup(line1StackView, with: receiptTypeLabel, and: amountLabel)
+        let titleStackView = UIStackView(frame: .zero)
+        setup(titleStackView, with: receiptTypeLabel, and: amountLabel)
 
-        let line2StackView = UIStackView(frame: .zero)
-        setup(line2StackView, with: createdOnLabel, and: currencyLabel)
+        let subTitleStackView = UIStackView(frame: .zero)
+        setup(subTitleStackView, with: createdOnLabel, and: currencyLabel)
 
         let stackView = UIStackView(frame: .zero)
         stackView.axis = .vertical
@@ -90,8 +90,8 @@ final class ReceiptTransactionTableViewCell: UITableViewCell {
         stackView.distribution = .fill
         stackView.spacing = 2
 
-        stackView.addArrangedSubview(line1StackView)
-        stackView.addArrangedSubview(line2StackView)
+        stackView.addArrangedSubview(titleStackView)
+        stackView.addArrangedSubview(subTitleStackView)
 
         contentView.addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
