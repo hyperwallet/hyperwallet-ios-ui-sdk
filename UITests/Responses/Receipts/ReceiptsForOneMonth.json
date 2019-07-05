@@ -74,7 +74,7 @@
                 "clientPaymentId": "8OxXefx5",
                 "payeeName": "A Person",
                 "website": "https://localhost",
-                "notes": "Sample payment for the period of June 15th, 2019 to July 23, 2019",
+                "notes": "Sample payment notes",
                 "charityName": "Sample Charity",
                 "checkNumber": "Sample Check Number"
             }

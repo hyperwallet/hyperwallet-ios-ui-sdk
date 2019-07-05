@@ -71,16 +71,21 @@ class ListTransferMethodTests: BaseTests {
     }
 
     override func setUp() {
-        profileType = .individual
         super.setUp()
+
+        app = XCUIApplication()
+        app.launch()
+
+        mockServer.setupStub(url: "/graphql",
+                             filename: "TransferMethodConfigurationKeysResponse",
+                             method: HTTPMethod.post)
+        mockServer.setupStub(url: "/rest/v3/users/usr-token",
+                             filename: "UserIndividualResponse",
+                             method: HTTPMethod.get)
 
         listTransferMethod = ListTransferMethod(app: app)
         selectTransferMethodType = SelectTransferMethodType(app: app)
-        addTransferMethod = AddTransferMethod(app: app, for: .bankAccount)
-    }
-
-    override func tearDown() {
-        mockServer.tearDown()
+        addTransferMethod = AddTransferMethod(app: app)
     }
 
     func testListTransferMethod_emptyTransferMethodsList() {
@@ -325,46 +330,6 @@ class ListTransferMethodTests: BaseTests {
         waitForNonExistence(spinner)
     }
 
-    func testListTransferMethod_verifyAfterRelaunch() {
-        setUpStandardListTransferMethod()
-        validatetestListTransferMethodScreen()
-        XCUIDevice.shared.clickHomeAndRelaunch(app: app)
-        setUpStandardListTransferMethod()
-        validatetestListTransferMethodScreen()
-    }
-
-    func testListTransferMethod_verifyRotateScreen() {
-        setUpStandardListTransferMethod()
-        XCUIDevice.shared.rotateScreen(times: 3)
-        validatetestListTransferMethodScreen()
-    }
-
-    func testListTransferMethod_verifyWakeFromSleep() {
-        setUpStandardListTransferMethod()
-        XCUIDevice.shared.wakeFromSleep(app: app)
-        waitForNonExistence(addTransferMethod.navigationBar)
-        validatetestListTransferMethodScreen()
-    }
-
-    func testListTransferMethod_verifyResumeFromRecents() {
-        setUpStandardListTransferMethod()
-        XCUIDevice.shared.resumeFromRecents(app: app)
-        waitForNonExistence(addTransferMethod.navigationBar)
-        validatetestListTransferMethodScreen()
-    }
-
-    func testListTransferMethod_verifyAppToBackground() {
-        setUpStandardListTransferMethod()
-        XCUIDevice.shared.sendToBackground(app: app)
-        validatetestListTransferMethodScreen()
-    }
-
-    func testListTransferMethod_verifyPressBackButton() {
-        setUpStandardListTransferMethod()
-        listTransferMethod.clickBackButton()
-        XCTAssertTrue(app.navigationBars["Account Settings"].exists)
-    }
-
     private func validatetestListTransferMethodScreen() {
         let expectedCellsCount = 5
         XCTAssertTrue(listTransferMethod.navigationBar.exists)
@@ -387,12 +352,5 @@ class ListTransferMethodTests: BaseTests {
             XCTAssertTrue(app.cells.element(boundBy: 3).images.element.exists)
             XCTAssertTrue(app.cells.element(boundBy: 4).images.element.exists)
         }
-    }
-
-    private func setUpStandardListTransferMethod() {
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
-                             filename: "ListTransferMethodResponse",
-                             method: HTTPMethod.get)
-        openTransferMethodsList()
     }
 }

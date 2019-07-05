@@ -66,7 +66,7 @@ class ReceiptDetailPresenterTests: XCTestCase {
         XCTAssertEqual(section.title, "Fee Specification")
         XCTAssertEqual(section.rowCount, 3)
 
-        XCTAssertTrue(rowEqual(section.rows[0], ("Amount:", "+6.00 USD")))
+        XCTAssertTrue(rowEqual(section.rows[0], ("Amount:", "6.00 USD")))
         XCTAssertTrue(rowEqual(section.rows[1], ("Fee:", "1.11 USD")))
         XCTAssertTrue(rowEqual(section.rows[2], ("Transaction:", "4.89 USD")))
     }
@@ -82,7 +82,7 @@ class ReceiptDetailPresenterTests: XCTestCase {
 
         XCTAssertTrue(rowEqual(section.rows[0], ("Amount:", "-9.87 USD")))
         XCTAssertTrue(rowEqual(section.rows[1], ("Fee:", "0.11 USD")))
-        XCTAssertTrue(rowEqual(section.rows[2], ("Transaction:", "-9.98 USD")))
+        XCTAssertTrue(rowEqual(section.rows[2], ("Transaction:", "9.76 USD")))
     }
 
     func testSectionFeeDataWithIntegerAmountShouldNotBeEmpty() {
@@ -96,7 +96,7 @@ class ReceiptDetailPresenterTests: XCTestCase {
 
         XCTAssertTrue(rowEqual(section.rows[0], ("Amount:", "-100500 KRW")))
         XCTAssertTrue(rowEqual(section.rows[1], ("Fee:", "500 KRW")))
-        XCTAssertTrue(rowEqual(section.rows[2], ("Transaction:", "-101000 KRW")))
+        XCTAssertTrue(rowEqual(section.rows[2], ("Transaction:", "100000 KRW")))
     }
 
     func testSectionNotesDataShouldNotBeEmpty() {
