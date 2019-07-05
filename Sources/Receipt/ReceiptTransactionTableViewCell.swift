@@ -33,30 +33,119 @@ final class ReceiptTransactionTableViewCell: UITableViewCell {
     private var iconColor: UIColor!
     private var iconBackgroundColor: UIColor!
     private let credit = HyperwalletReceipt.HyperwalletEntryType.credit.rawValue
-    // MARK: Life cycle
+
+    lazy var receiptTypeLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.font = Theme.Label.bodyFontMedium
+        label.textColor = Theme.Label.color
+        label.accessibilityIdentifier = "receiptTransactionTypeLabel"
+        return label
+    }()
+
+    lazy var amountLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.font = Theme.Label.bodyFontMedium
+        label.textAlignment = .right
+        label.accessibilityIdentifier = "receiptTransactionAmountLabel"
+        return label
+    }()
+
+    lazy var createdOnLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.font = Theme.Label.captionOne
+        label.textColor = Theme.Label.subTitleColor
+        label.accessibilityIdentifier = "receiptTransactionCreatedOnLabel"
+        return label
+    }()
+
+    lazy var currencyLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.font = Theme.Label.captionOne
+        label.textColor = Theme.Label.subTitleColor
+        label.textAlignment = .right
+        label.accessibilityIdentifier = "receiptTransactionCurrencyLabel"
+        return label
+    }()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .value1, reuseIdentifier: reuseIdentifier)
+        super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        defaultInit()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        defaultInit()
+    }
+
+    private func defaultInit() {
+        let titleStackView = UIStackView(frame: .zero)
+        setup(titleStackView, with: receiptTypeLabel, and: amountLabel)
+
+        let subTitleStackView = UIStackView(frame: .zero)
+        setup(subTitleStackView, with: createdOnLabel, and: currencyLabel)
+
+        let stackView = UIStackView(frame: .zero)
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 2
+
+        stackView.addArrangedSubview(titleStackView)
+        stackView.addArrangedSubview(subTitleStackView)
+
+        contentView.addSubview(stackView)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: imageView!.trailingAnchor, constant: 15),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
+            stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 0),
+            stackView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 10),
+            stackView.bottomAnchor.constraint(greaterThanOrEqualTo: contentView.bottomAnchor, constant: -10)
+        ])
+    }
+
+    private func setup(_ stackView: UIStackView, with leftLabel: UILabel, and rightLabel: UILabel) {
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        stackView.spacing = 8
+
+        stackView.addArrangedSubview(leftLabel)
+        stackView.addArrangedSubview(rightLabel)
+
+        setHuggingResistancePriorities(for: leftLabel, and: rightLabel)
+    }
+
+    private func setHuggingResistancePriorities(for leftLabel: UILabel, and rightLabel: UILabel) {
+        leftLabel.translatesAutoresizingMaskIntoConstraints = false
+        rightLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        leftLabel.widthAnchor.constraint(equalTo: rightLabel.widthAnchor).isActive = true
+
+        leftLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        leftLabel.setContentHuggingPriority(.required, for: .vertical)
+        leftLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        leftLabel.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+
+        rightLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        rightLabel.setContentHuggingPriority(.required, for: .vertical)
+        rightLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        rightLabel.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
     }
 }
 
 extension ReceiptTransactionTableViewCell {
     func configure(_ configuration: ReceiptTransactionCellConfiguration?) {
         if let configuration = configuration {
-            textLabel?.attributedText = formatTextLabel(type: configuration.type,
-                                                        createdOn: configuration.createdOn)
-            detailTextLabel?.attributedText = formatDetailTextLabel(amount: configuration.amount,
-                                                                    currency: configuration.currency,
-                                                                    entry: configuration.entry)
-            textLabel?.numberOfLines = 0
-            textLabel?.lineBreakMode = .byWordWrapping
-            textLabel?.accessibilityIdentifier = "listReceiptTableViewCellTextLabel"
-            detailTextLabel?.numberOfLines = 0
-            detailTextLabel?.lineBreakMode = .byWordWrapping
-            detailTextLabel?.accessibilityIdentifier = "listReceiptTableViewCellDetailTextLabel"
+            receiptTypeLabel.text = configuration.type
+            amountLabel.text = configuration.entry == credit
+                ? configuration.amount
+                : String(format: "-%@", configuration.amount)
+            amountLabel.textColor = configuration.entry == credit
+                ? Theme.Amount.creditColor
+                : Theme.Amount.debitColor
+            createdOnLabel.text = configuration.createdOn
+            currencyLabel.text = configuration.currency
 
             iconColor = configuration.entry == credit ? Theme.Icon.creditColor : Theme.Icon.debitColor
             iconBackgroundColor = configuration.entry == credit ? Theme.Icon.creditBackgroundColor
@@ -79,33 +168,5 @@ extension ReceiptTransactionTableViewCell {
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
         imageView?.backgroundColor = iconBackgroundColor
-    }
-
-    private func formatTextLabel(type: String, createdOn: String) -> NSAttributedString {
-        let attributedText = NSMutableAttributedString()
-
-        attributedText.append(value: String(format: "%@\n", type),
-                              font: Theme.Label.bodyFontMedium,
-                              color: Theme.Label.color)
-        attributedText.append(value: createdOn,
-                              font: Theme.Label.captionOne,
-                              color: Theme.Label.subTitleColor)
-        return attributedText
-    }
-
-    private func formatDetailTextLabel(amount: String, currency: String, entry: String) -> NSAttributedString {
-        let attributedText = NSMutableAttributedString()
-        if entry == credit {
-            attributedText.append(value: String(format: "%@\n", amount),
-                                  font: Theme.Label.bodyFontMedium,
-                                  color: Theme.Amount.creditColor)
-        } else {
-            attributedText.append(value: String(format: "-%@\n", amount),
-                                  font: Theme.Label.bodyFontMedium,
-                                  color: Theme.Amount.debitColor)
-        }
-
-        attributedText.append(value: currency, font: Theme.Label.captionOne, color: Theme.Label.subTitleColor)
-        return attributedText
     }
 }
