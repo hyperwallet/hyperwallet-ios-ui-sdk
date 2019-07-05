@@ -47,6 +47,25 @@
             "details": {
                 "cardNumber": "************6198"
             }
+        },
+        {
+            "journalId": "FISVL_5240220",
+            "type": "PREPAID_CARD_SALE",
+            "createdOn": "2019-06-25T22:48:41",
+            "entry": "DEBIT",
+            "destinationToken": "trm-token",
+            "amount": "10.00",
+            "fee": "3.00",
+            "currency": "USD",
+            "details": {
+                "cardNumber": "************0673",
+                "clientPaymentId": "AOxXefx9",
+                "payeeName": "A Person",
+                "website": "https://localhost.com",
+                "notes": "Sample prepaid card payment",
+                "charityName": "Sample Charity",
+                "checkNumber": "Sample Check Number"
+            }
         }
     ],
     "links": [
