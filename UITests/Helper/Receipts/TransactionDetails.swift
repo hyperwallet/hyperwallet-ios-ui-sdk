@@ -22,7 +22,6 @@ class TransactionDetails {
     var amountLabel: XCUIElement
     var feeLabel: XCUIElement
     var transactionLabel: XCUIElement
-
     // Note
     var noteSectionLabel: XCUIElement
     // Back button
