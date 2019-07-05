@@ -239,7 +239,7 @@ class ListReceiptTests: BaseTests {
         verifyDetailSection(receiptIdVal: "55176991", dateVal: expectedDateValue, clientIdVal: nil)
 
         // FEE Section
-        verifyFeeSection(amountVal: "-5.00 USD", feeVal: "2.00 USD", transactionVal: "-7.00 USD")
+        verifyFeeSection(amountVal: "-5.00 USD", feeVal: "2.00 USD", transactionVal: "3.00 USD")
     }
 
     func testReceiptDetail_verifyTransactionOptionalFields() {
@@ -280,14 +280,17 @@ class ListReceiptTests: BaseTests {
 
     // MARK: Helper methods
     private func openupReceiptsListScreenForOneMonth() {
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/receipts", filename: "ReceiptsForOneMonth", method: HTTPMethod.get)
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/receipts",
+                             filename: "ReceiptsForOneMonth",
+                             method: HTTPMethod.get)
 
         openReceiptsListScreen()
     }
 
     private func verifyPayment(payment: String, amount: String) {
         let paymentlabel = app.tables["receiptDetailTableView"].staticTexts["ListReceiptTableViewCellTextLabel"].label
-        let amountlabel = app.tables["receiptDetailTableView"].staticTexts["ListReceiptTableViewCellDetailTextLabel"].label
+        let amountlabel = app.tables["receiptDetailTableView"]
+            .staticTexts["ListReceiptTableViewCellDetailTextLabel"].label
         XCTAssertEqual(paymentlabel, payment)
         XCTAssertEqual(amountlabel, amount)
     }
