@@ -17,7 +17,6 @@ class TransactionDetails {
     var charityNameLabel: XCUIElement
     var checkNumLabel: XCUIElement
     var promoWebSiteLabel: XCUIElement
-    var promoWebSiteValue: XCUIElement
     // Fee
     var amountLabel: XCUIElement
     var feeLabel: XCUIElement
@@ -33,11 +32,11 @@ class TransactionDetails {
     var clientTransactionIdValue: XCUIElement
     var charityNameValue: XCUIElement
     var checkNumValue: XCUIElement
-    var websiteValue: XCUIElement
     var notesValue: XCUIElement
     var amountValue: XCUIElement
     var feeValue: XCUIElement
     var transactionValue: XCUIElement
+    var promoWebSiteValue: XCUIElement
 
     var app: XCUIApplication
 
