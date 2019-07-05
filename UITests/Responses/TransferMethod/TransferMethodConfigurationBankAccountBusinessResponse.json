@@ -5,8 +5,8 @@
                 {
                     "country": "US",
                     "currency": "USD",
-                    "transferMethodType": "BANK_CARD",
-                    "profile": "INDIVIDUAL",
+                    "transferMethodType": "BANK_ACCOUNT",
+                    "profile": "BUSINESS",
                     "fieldGroups": {
                         "nodes": [
                             {
@@ -16,30 +16,14 @@
                                         "dataType": "NUMBER",
                                         "isRequired": true,
                                         "isEditable": true,
-                                        "name": "cardNumber",
-                                        "label": "Card Number",
+                                        "name": "branchId",
+                                        "label": "Routing Number",
                                         "placeholder": "",
-                                        "maxLength": 19,
-                                        "minLength": 13,
-                                        "regularExpression": "^[0-9]{13,19}$",
+                                        "maxLength": 9,
+                                        "minLength": 9,
+                                        "regularExpression": "^[0-9]{9}$",
                                         "validationMessage": {
-                                            "length": "The minimum length of this field is 13 and maximum length is 19.",
-                                            "pattern": "is invalid length or format.",
-                                            "empty": "You must provide a value for this field"
-                                        }
-                                    },
-                                    {
-                                        "dataType": "EXPIRY_DATE",
-                                        "isRequired": true,
-                                        "isEditable": true,
-                                        "name": "dateOfExpiry",
-                                        "label": "Expiry Date",
-                                        "placeholder": "",
-                                        "maxLength": 7,
-                                        "minLength": 7,
-                                        "regularExpression": "^[0-9]{4}-(1[0-2]|0[1-9])$",
-                                        "validationMessage": {
-                                            "length": "The exact length of this field is 7.",
+                                            "length": "The exact length of this field is 9.",
                                             "pattern": "is invalid length or format.",
                                             "empty": "You must provide a value for this field"
                                         }
@@ -48,14 +32,37 @@
                                         "dataType": "NUMBER",
                                         "isRequired": true,
                                         "isEditable": true,
-                                        "name": "cvv",
-                                        "label": "CVV (Card Security Code)",
+                                        "name": "bankAccountId",
+                                        "label": "Account Number",
                                         "placeholder": "",
-                                        "maxLength": 4,
-                                        "minLength": 3,
-                                        "regularExpression": "^[0-9]{3,4}$",
+                                        "maxLength": 17,
+                                        "minLength": 4,
+                                        "regularExpression": "^(?![0-]+$)[0-9-]{4,17}$",
                                         "validationMessage": {
-                                            "length": "The minimum length of this field is 3 and maximum length is 4.",
+                                            "length": "The minimum length of this field is 4 and maximum length is 17.",
+                                            "pattern": "is invalid length or format.",
+                                            "empty": "You must provide a value for this field"
+                                        }
+                                    },
+                                    {
+                                        "dataType": "SELECTION",
+                                        "isRequired": true,
+                                        "isEditable": true,
+                                        "name": "bankAccountPurpose",
+                                        "label": "Account Type",
+                                        "placeholder": "",
+                                        "fieldSelectionOptions": [
+                                            {
+                                                "label": "CHECKING",
+                                                "value": "CHECKING"
+                                            },
+                                            {
+                                                "label": "SAVINGS",
+                                                "value": "SAVINGS"
+                                            }
+                                        ],
+                                        "validationMessage": {
+                                            "length": "",
                                             "pattern": "is invalid length or format.",
                                             "empty": "You must provide a value for this field"
                                         }
@@ -72,12 +79,68 @@
                                         "name": "bankAccountRelationship",
                                         "label": "Relationship",
                                         "placeholder": "",
+                                        "value": "OWN_COMPANY",
                                         "fieldSelectionOptions": [
                                             {
-                                                "label": "Self",
-                                                "value": "SELF"
+                                                "label": "Own company",
+                                                "value": "OWN_COMPANY"
                                             }
                                         ],
+                                        "validationMessage": {
+                                            "length": "",
+                                            "pattern": "is invalid length or format.",
+                                            "empty": "You must provide a value for this field"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "group": "ACCOUNT_HOLDER",
+                                "fields": [
+                                    {
+                                        "dataType": "TEXT",
+                                        "isRequired": true,
+                                        "isEditable": true,
+                                        "name": "businessName",
+                                        "label": "Business Name",
+                                        "placeholder": "",
+                                        "value": "aA1-.,'&+/:;!ÀĀƀ",
+                                        "regularExpression": "^[\\sa-zA-Z0-9\\-.,'&+/:;!\\u00C0-\\u00FF\\u0100-\\u017F\\u0180-\\u024F]{1,90}$",
+                                        "validationMessage": {
+                                            "length": "",
+                                            "pattern": "is invalid length or format.",
+                                            "empty": "You must provide a value for this field"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "group": "CONTACT_INFORMATION",
+                                "fields": [
+                                    {
+                                        "dataType": "PHONE",
+                                        "isRequired": false,
+                                        "isEditable": true,
+                                        "name": "phoneNumber",
+                                        "label": "Phone Number",
+                                        "placeholder": "",
+                                        "value": "604-345-1777",
+                                        "regularExpression": "^(?=.{7,17}$)[\\+]{0,1}[0-9\\(\\)\\ \\.\\-]{1,}$",
+                                        "validationMessage": {
+                                            "length": "",
+                                            "pattern": "is invalid length or format.",
+                                            "empty": "You must provide a value for this field"
+                                        }
+                                    },
+                                    {
+                                        "dataType": "PHONE",
+                                        "isRequired": false,
+                                        "isEditable": true,
+                                        "name": "mobileNumber",
+                                        "label": "Mobile Number",
+                                        "placeholder": "",
+                                        "value": "604-345-1888",
+                                        "regularExpression": "^(?=.{7,17}$)[\\+]{0,1}[0-9\\(\\)\\ \\.\\-]{1,}$",
                                         "validationMessage": {
                                             "length": "",
                                             "pattern": "is invalid length or format.",
@@ -96,7 +159,7 @@
                                         "name": "country",
                                         "label": "Country",
                                         "placeholder": "",
-                                        "value": "CA",
+                                        "value": "US",
                                         "fieldSelectionOptions": [
                                             {
                                                 "label": "Afghanistan",
@@ -1044,7 +1107,8 @@
                                         "name": "stateProvince",
                                         "label": "State/Province",
                                         "placeholder": "",
-                                        "value": "BC",
+                                        "value": "WA",
+                                        "regularExpression": "^[\\sa-zA-Z0-9\\-().,'\\u00C0-\\u00FF\\u0100-\\u017F\\u0180-\\u024F]{2,50}$",
                                         "validationMessage": {
                                             "length": "",
                                             "pattern": "is invalid length or format.",
@@ -1058,7 +1122,8 @@
                                         "name": "addressLine1",
                                         "label": "Street",
                                         "placeholder": "",
-                                        "value": "950 Granville Street",
+                                        "value": "0t6Rpkg8eG&",
+                                        "regularExpression": "^[\\sa-zA-Z0-9\\/\\-:().,#;'°&\\u00C0-\\u00FF\\u0100-\\u017F\\u0180-\\u024F]{2,100}$",
                                         "validationMessage": {
                                             "length": "",
                                             "pattern": "is invalid length or format.",
@@ -1072,7 +1137,8 @@
                                         "name": "city",
                                         "label": "City",
                                         "placeholder": "",
-                                        "value": "Vancouver",
+                                        "value": "Test City",
+                                        "regularExpression": "^[\\sa-zA-Z0-9\\-().,'\\u00C0-\\u00FF\\u0100-\\u017F\\u0180-\\u024F]{2,50}$",
                                         "validationMessage": {
                                             "length": "",
                                             "pattern": "is invalid length or format.",
@@ -1086,7 +1152,8 @@
                                         "name": "postalCode",
                                         "label": "Zip/Postal Code",
                                         "placeholder": "",
-                                        "value": "V6Z1L2",
+                                        "value": "12345",
+                                        "regularExpression": "^(?![\\-]+$)[\\sa-zA-Z0-9\\-]{2,16}$",
                                         "validationMessage": {
                                             "length": "",
                                             "pattern": "is invalid length or format.",
@@ -1114,15 +1181,14 @@
                                 "transferMethodTypes": {
                                     "nodes": [
                                         {
-                                            "code": "BANK_CARD",
-                                            "name": "Debit Card",
-                                            "processingTime" : "1-2 Business days",
+                                            "code": "BANK_ACCOUNT",
+                                            "name": "Bank Account",
                                             "fees": {
                                                 "nodes": [
                                                     {
                                                         "currency": "USD",
                                                         "feeRateType": "FLAT",
-                                                        "value": "1.75"
+                                                        "value": "2.00"
                                                     }
                                                 ]
                                             }

@@ -6,8 +6,11 @@ class ListReceiptTests: BaseTests {
     private var transactionDetails: TransactionDetails!
 
     override func setUp() {
-        profileType = .individual
         super.setUp()
+
+        app = XCUIApplication()
+        app.launch()
+
         receiptsList = ReceiptsList(app: app)
         transactionDetails = TransactionDetails(app: app)
         spinner = app.activityIndicators["activityIndicator"]
@@ -40,19 +43,12 @@ class ListReceiptTests: BaseTests {
                              method: HTTPMethod.get)
         openReceiptsListScreen()
 
-        if #available(iOS 12, *) {
-            verifyCellExists(with: "Bank Account\nMay 10, 2019", moneyTitle: "-5.00\nUSD", by: 0)
-            verifyCellExists(with: "Payment\nMay 8, 2019", moneyTitle: "6.00\nUSD", by: 1)
-            verifyCellExists(with: "Bank Account\nMay 6, 2019", moneyTitle: "-5.00\nUSD", by: 2)
-            verifyCellExists(with: "Payment\nMay 4, 2019", moneyTitle: "6.00\nUSD", by: 3)
-            verifyCellExists(with: "Payment\nMay 3, 2019", moneyTitle: "6.00\nUSD", by: 4)
-        } else {
-            verifyCellExists(with: "Bank Account May 10, 2019", moneyTitle: "-5.00\nUSD", by: 0)
-            verifyCellExists(with: "Payment May 8, 2019", moneyTitle: "6.00\nUSD", by: 1)
-            verifyCellExists(with: "Bank Account May 6, 2019", moneyTitle: "-5.00\nUSD", by: 2)
-            verifyCellExists(with: "Payment May 4, 2019", moneyTitle: "6.00\nUSD", by: 3)
-            verifyCellExists(with: "Payment May 3, 2019", moneyTitle: "20.00\nUSD", by: 4)
-        }
+        verifyCellExists("Bank Account", "May 10, 2019", "-5.00", "USD", at: 0)
+        verifyCellExists("Payment", "May 8, 2019", "6.00", "USD", at: 1)
+        verifyCellExists("Bank Account", "May 6, 2019", "-5.00", "USD", at: 2)
+        verifyCellExists("Payment", "May 4, 2019", "6.00", "USD", at: 3)
+        verifyCellExists("Payment", "May 3, 2019", "20.00", "USD", at: 4)
+
         XCTAssertEqual(app.tables.cells.count, expectedNumberOfCells)
         XCTAssertTrue(app.tables.staticTexts["May 2019"].exists)
         XCTAssertFalse(app.tables.cells.containing(.staticText, identifier: "May 2019").element.exists)
@@ -75,100 +71,56 @@ class ListReceiptTests: BaseTests {
                              filename: "ReceiptsForLazyLoadingNextPage",
                              method: HTTPMethod.get)
 
-        if #available(iOS 12, *) {
-            verifyCellDoesNotExist(with: "Payment\nMar 24, 2019", moneyTitle: "5.00\nUSD", by: 20)
-            verifyCellDoesNotExist(with: "Payment\nMar 24, 2019", moneyTitle: "6.00\nUSD", by: 21)
-            verifyCellDoesNotExist(with: "Bank Account\nMar 24, 2019", moneyTitle: "-5.00\nUSD", by: 22)
-        } else {
-            verifyCellDoesNotExist(with: "Payment Mar 24, 2019", moneyTitle: "5.00 USD", by: 20)
-            verifyCellDoesNotExist(with: "Payment Mar 24, 2019", moneyTitle: "6.00 USD", by: 21)
-            verifyCellDoesNotExist(with: "Bank Account Mar 24, 2019", moneyTitle: "-5.00 USD", by: 22)
-        }
+        verifyCellDoesNotExist("Payment", "Mar 24, 2019", "5.00", "USD", at: 20)
+        verifyCellDoesNotExist("Payment", "Mar 24, 2019", "6.00", "USD", at: 21)
+        verifyCellDoesNotExist("Bank Account", "Mar 24, 2019", "-5.00", "USD", at: 22)
 
         app.swipeUp()
         app.swipeUp()
         waitForNonExistence(spinner)
 
-        if #available(iOS 12, *) {
-            verifyCellExists(with: "Payment\nMar 24, 2019", moneyTitle: "5.00\nUSD", by: 20)
-            verifyCellExists(with: "Payment\nMar 24, 2019", moneyTitle: "6.00\nUSD", by: 21)
-            verifyCellExists(with: "Bank Account\nMar 24, 2019", moneyTitle: "-5.00\nUSD", by: 22)
-        } else {
-            verifyCellExists(with: "Payment Mar 24, 2019", moneyTitle: "5.00 USD", by: 20)
-            verifyCellExists(with: "Payment Mar 24, 2019", moneyTitle: "6.00 USD", by: 21)
-            verifyCellExists(with: "Bank Account Mar 24, 2019", moneyTitle: "-5.00 USD", by: 22)
-        }
+        verifyCellExists("Payment", "Mar 24, 2019", "5.00", "USD", at: 20)
+        verifyCellExists("Payment", "Mar 24, 2019", "6.00", "USD", at: 21)
+        verifyCellExists("Bank Account", "Mar 24, 2019", "-5.00", "USD", at: 22)
     }
 
-    func testReceiptsList_verifyAfterRelaunch() {
-        openupReceiptsListScreenForFewMonths()
-        validatetestReceiptsListScreen()
-        XCUIDevice.shared.clickHomeAndRelaunch(app: app)
-        openupReceiptsListScreenForFewMonths()
-        validatetestReceiptsListScreen()
+    private func verifyCellExists(_ type: String,
+                                  _ createdOn: String,
+                                  _ amount: String,
+
+                                  _ currency: String,
+                                  at index: Int) {
+        let cell = app.cells.element(boundBy: index)
+        app.scroll(to: cell)
+        XCTAssertTrue(cell.staticTexts["receiptTransactionTypeLabel"].exists)
+        XCTAssertTrue(cell.staticTexts["receiptTransactionAmountLabel"].exists)
+        XCTAssertTrue(cell.staticTexts["receiptTransactionCreatedOnLabel"].exists)
+        XCTAssertTrue(cell.staticTexts["receiptTransactionCurrencyLabel"].exists)
     }
 
-    func testReceiptsList_verifyRotateScreen() {
-        openupReceiptsListScreenForFewMonths()
-        XCUIDevice.shared.rotateScreen(times: 3)
-        validatetestReceiptsListScreen()
-    }
+    private func verifyCellDoesNotExist(_ type: String,
+                                        _ createdOn: String,
+                                        _ amount: String,
 
-    func testReceiptsList_verifyWakeFromSleep() {
-        openupReceiptsListScreenForFewMonths()
-        XCUIDevice.shared.wakeFromSleep(app: app)
-        waitForNonExistence(receiptsList.navigationBar)
-        validatetestReceiptsListScreen()
-    }
+                                        _ currency: String,
+                                        at index: Int) {
+        let cell = app.cells.element(boundBy: index)
+        XCTAssertFalse(cell.staticTexts["receiptTransactionTypeLabel"].exists)
+        XCTAssertFalse(cell.staticTexts["receiptTransactionAmountLabel"].exists)
+        XCTAssertFalse(cell.staticTexts["receiptTransactionCreatedOnLabel"].exists)
+        XCTAssertFalse(cell.staticTexts["receiptTransactionCurrencyLabel"].exists)
 
-    func testReceiptsList_verifyResumeFromRecents() {
-        openupReceiptsListScreenForFewMonths()
-        XCUIDevice.shared.resumeFromRecents(app: app)
-        waitForNonExistence(receiptsList.navigationBar)
-        validatetestReceiptsListScreen()
-    }
-
-    func testReceiptsList_verifyAppToBackground() {
-        openupReceiptsListScreenForFewMonths()
-        XCUIDevice.shared.sendToBackground(app: app)
-        validatetestReceiptsListScreen()
-    }
-
-    func testReceiptsList_verifyPressBackButton() {
-        openupReceiptsListScreenForFewMonths()
-        receiptsList.clickBackButton()
-        XCTAssertTrue(app.navigationBars["Account Settings"].exists)
-    }
-
-    // MARK: helper functions
-    private func verifyCellExists(with text: String, moneyTitle: String, by index: Int) {
-        XCTAssertTrue(app.cells.element(boundBy: index).staticTexts[text].exists)
-    }
-
-    private func verifyCellDoesNotExist(with text: String, moneyTitle: String, by index: Int) {
-        XCTAssertFalse(app.cells.element(boundBy: index).staticTexts[text].exists)
     }
 
     private func validateListOrder() {
-        if #available(iOS 12, *) {
-            verifyCellExists(with: "Payment\nMay 24, 2019", moneyTitle: "6.00\nUSD", by: 0)
-            verifyCellExists(with: "Bank Account\nMay 12, 2019", moneyTitle: "-5.00\nUSD", by: 1)
-            verifyCellExists(with: "Payment\nMay 4, 2019", moneyTitle: "6.00\nUSD", by: 2)
-            verifyCellExists(with: "Payment\nApr 27, 2019", moneyTitle: "6.00\nUSD", by: 3)
-            verifyCellExists(with: "Payment\nApr 19, 2019", moneyTitle: "6.00\nUSD", by: 4)
-            verifyCellExists(with: "Bank Account\nApr 14, 2019", moneyTitle: "-7.50\nUSD", by: 5)
-            verifyCellExists(with: "Payment\nMar 25, 2019", moneyTitle: "6.00\nUSD", by: 6)
-            verifyCellExists(with: "Payment\nMar 18, 2019", moneyTitle: "6.00\nUSD", by: 7)
-        } else {
-            verifyCellExists(with: "Payment May 24, 2019", moneyTitle: "6.00 USD", by: 0)
-            verifyCellExists(with: "Bank Account May 12, 2019", moneyTitle: "-5.00 USD", by: 1)
-            verifyCellExists(with: "Payment May 4, 2019", moneyTitle: "6.00 USD", by: 2)
-            verifyCellExists(with: "Payment Apr 27, 2019", moneyTitle: "6.00 USD", by: 3)
-            verifyCellExists(with: "Payment Apr 19, 2019", moneyTitle: "6.00 USD", by: 4)
-            verifyCellExists(with: "Bank Account Apr 14, 2019", moneyTitle: "-7.50 USD", by: 5)
-            verifyCellExists(with: "Payment Mar 25, 2019", moneyTitle: "6.00 USD", by: 6)
-            verifyCellExists(with: "Payment Mar 18, 2019", moneyTitle: "6.00 USD", by: 7)
-        }
+        verifyCellExists("Bank Account", "May 10, 2019", "-5.00", "USD", at: 0)
+        verifyCellExists("Payment", "May 8, 2019", "6.00", "USD", at: 1)
+        verifyCellExists("Bank Account", "May 6, 2019", "-5.00", "USD", at: 2)
+        verifyCellExists("Payment", "May 4, 2019", "6.00", "USD", at: 3)
+        verifyCellExists("Payment", "May 3, 2019", "20.00", "USD", at: 4)
+        verifyCellExists("Bank Account", "Apr 14, 2019", "-7.50", "USD", at: 5)
+        verifyCellExists("Payment", "May 25, 2019", "6.00", "USD", at: 6)
+        verifyCellExists("Payment", "May 18, 2019", "6.00", "USD", at: 7)
     }
 
     private func validateSectionsHeaders() {
@@ -208,11 +160,7 @@ class ListReceiptTests: BaseTests {
         transactionDetails.openReceipt(row: 0)
         waitForExistence(transactionDetails.detailHeaderTitle)
 
-        if #available(iOS 12, *) {
-            verifyPayment(payment: "Payment\nMay 24, 2019", amount: "6.00\n\(currency)")
-        } else {
-            verifyPayment(payment: "Payment May 24, 2019", amount: "6.00 \(currency)")
-        }
+        verifyPayment("Payment", "May 24, 2019", "6.00", "\(currency)")
 
         // DETAILS Section
         verifyDetailSection(receiptIdVal: "55176992", dateVal: expectedDateValue, clientIdVal: "DyClk0VG9a")
@@ -228,17 +176,13 @@ class ListReceiptTests: BaseTests {
         transactionDetails.openReceipt(row: 1)
         waitForExistence(transactionDetails.detailHeaderTitle)
 
-        if #available(iOS 12, *) {
-            verifyPayment(payment: "Bank Account\nMay 12, 2019", amount: "-5.00\n\(currency)")
-        } else {
-            verifyPayment(payment: "Bank Account May 12, 2019", amount: "-5.00 \(currency)")
-        }
+        verifyPayment("Bank Account", "May 12, 2019", "-5.00", "\(currency)")
 
         // DETAILS Section
         verifyDetailSection(receiptIdVal: "55176991", dateVal: expectedDateValue, clientIdVal: nil)
 
         // FEE Section
-        verifyFeeSection(amountVal: "-5.00 USD", feeVal: "2.00 USD", transactionVal: "-7.00 USD")
+        verifyFeeSection(amountVal: "-5.00 USD", feeVal: "2.00 USD", transactionVal: "3.00 USD")
     }
 
     func testReceiptDetail_verifyTransactionOptionalFields() {
@@ -258,14 +202,14 @@ class ListReceiptTests: BaseTests {
         XCTAssertEqual(transactionDetails.clientTransactionIdValue.label, "8OxXefx5")
         XCTAssertEqual(transactionDetails.charityNameValue.label, "Sample Charity")
         XCTAssertEqual(transactionDetails.checkNumValue.label, "Sample Check Number")
-        XCTAssertEqual(transactionDetails.websiteValue.label, "https://localhost")
+        XCTAssertEqual(transactionDetails.promoWebSiteValue.label, "https://localhost")
         XCTAssertEqual(transactionDetails.notesValue.label, "Sample payment notes")
         XCTAssertEqual(transactionDetails.dateValue.label, "Fri, May 3, 2019, 5:08 PM")
     }
 
     // Verify when no Notes and Fee sections
     func testReceiptDetail_verifyTransactionReceiptNoNoteSectionAndFeeLabel() {
-       openupReceiptsListScreenForOneMonth()
+        openupReceiptsListScreenForOneMonth()
         transactionDetails.openReceipt(row: 2)
         let transactionDetailHeaderLabel = transactionDetails.detailHeaderTitle
         waitForNonExistence(transactionDetailHeaderLabel)
@@ -279,16 +223,23 @@ class ListReceiptTests: BaseTests {
 
     // MARK: Helper methods
     private func openupReceiptsListScreenForOneMonth() {
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/receipts", filename: "ReceiptsForOneMonth", method: HTTPMethod.get)
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/receipts",
+                             filename: "ReceiptsForOneMonth",
+                             method: HTTPMethod.get)
 
         openReceiptsListScreen()
     }
 
-    private func verifyPayment(payment: String, amount: String) {
-        let paymentlabel = app.tables["receiptDetailTableView"].staticTexts["ListReceiptTableViewCellTextLabel"].label
-        let amountlabel = app.tables["receiptDetailTableView"].staticTexts["ListReceiptTableViewCellDetailTextLabel"].label
-        XCTAssertEqual(paymentlabel, payment)
-        XCTAssertEqual(amountlabel, amount)
+    private func verifyPayment(_ type: String, _ createdOn: String, _ amount: String, _ currency: String) {
+        let typeLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionTypeLabel"].label
+        let amountLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionAmountLabel"].label
+        let createdOnLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionCreatedOnLabel"].label
+        let currencyLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionCurrencyLabel"].label
+
+        XCTAssertEqual(typeLabel, type)
+        XCTAssertEqual(amountLabel, amount)
+        XCTAssertEqual(createdOnLabel, createdOn)
+        XCTAssertEqual(currencyLabel, currency)
     }
 
     // Detail section verification

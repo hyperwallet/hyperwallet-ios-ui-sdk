@@ -32,11 +32,11 @@ class TransactionDetails {
     var clientTransactionIdValue: XCUIElement
     var charityNameValue: XCUIElement
     var checkNumValue: XCUIElement
-    var websiteValue: XCUIElement
     var notesValue: XCUIElement
     var amountValue: XCUIElement
     var feeValue: XCUIElement
     var transactionValue: XCUIElement
+    var promoWebSiteValue: XCUIElement
 
     var app: XCUIApplication
 
@@ -49,28 +49,31 @@ class TransactionDetails {
         detailSection = app.tables["receiptDetailTableView"].staticTexts["Details"]
         feeSection = app.tables["receiptDetailTableView"].staticTexts["Fee Specification"]
         transactionSection = app.tables["receiptDetailTableView"].staticTexts["Transaction"]
-        receiptIdLabel = app.tables["receiptDetailTableView"].staticTexts["Receipt ID:"]
-        dateLabel = app.tables["receiptDetailTableView"].staticTexts["Date:"]
-        clientTransactionIdLabel = app.tables["receiptDetailTableView"].staticTexts["Client Transaction ID:"]
-        charityNameLabel = app.tables["receiptDetailTableView"].staticTexts["Charity Name:"]
-        checkNumLabel = app.tables["receiptDetailTableView"].staticTexts["Check Number:"]
-        promoWebSiteLabel = app.tables["receiptDetailTableView"].staticTexts["Promo Website:"]
+        receiptIdLabel = app.tables["receiptDetailTableView"].staticTexts["journalIdLabel"]
+        receiptIdValue = app.tables["receiptDetailTableView"].staticTexts["journalIdValue"]
+        dateLabel = app.tables["receiptDetailTableView"].staticTexts["createdOnLabel"]
+        dateValue = app.tables["receiptDetailTableView"].staticTexts["createdOnValue"]
+        clientTransactionIdLabel = app.tables["receiptDetailTableView"].staticTexts["clientPaymentIdLabel"]
+        clientTransactionIdValue = app.tables["receiptDetailTableView"].staticTexts["clientPaymentIdValue"]
+
+        charityNameLabel = app.tables["receiptDetailTableView"].staticTexts["charityNameLabel"]
+        charityNameValue = app.tables["receiptDetailTableView"].staticTexts["charityNameValue"]
+        checkNumLabel = app.tables["receiptDetailTableView"].staticTexts["checkNumberLabel"]
+        checkNumValue = app.tables["receiptDetailTableView"].staticTexts["checkNumberValue"]
+        promoWebSiteLabel = app.tables["receiptDetailTableView"].staticTexts["websiteLabel"]
+        promoWebSiteValue = app.tables["receiptDetailTableView"].staticTexts["websiteValue"]
+
         noteSectionLabel = app.tables["receiptDetailTableView"].staticTexts["Notes"]
-        amountLabel = app.tables["receiptDetailTableView"].staticTexts["Amount:"]
-        feeLabel = app.tables["receiptDetailTableView"].staticTexts["Fee:"]
-        transactionLabel = app.tables["receiptDetailTableView"].staticTexts["Transaction:"]
+
+        amountLabel = app.tables["receiptDetailTableView"].staticTexts["amountLabel"]
+        amountValue = app.tables["receiptDetailTableView"].staticTexts["amountValue"]
+        feeLabel = app.tables["receiptDetailTableView"].staticTexts["feeLabel"]
+        feeValue = app.tables["receiptDetailTableView"].staticTexts["feeValue"]
+        transactionLabel = app.tables["receiptDetailTableView"].staticTexts["transactionLabel"]
+        transactionValue = app.tables["receiptDetailTableView"].staticTexts["transactionValue"]
         backButton = navigationBar.children(matching: .button).matching(identifier: "Back").element(boundBy: 0)
 
-        receiptIdValue = app.tables["receiptDetailTableView"].staticTexts["Receipt ID:_value"]
-        dateValue = app.tables["receiptDetailTableView"].staticTexts["Date:_value"]
-        clientTransactionIdValue = app.tables["receiptDetailTableView"].staticTexts["Client Transaction ID:_value"]
-        charityNameValue = app.tables["receiptDetailTableView"].staticTexts["Charity Name:_value"]
-        checkNumValue = app.tables["receiptDetailTableView"].staticTexts["Check Number:_value"]
-        websiteValue = app.tables["receiptDetailTableView"].staticTexts["Promo Website:_value"]
         notesValue = app.tables["receiptDetailTableView"].staticTexts["ReceiptDetailSectionNotesTextLabel"]
-        amountValue = app.tables["receiptDetailTableView"].staticTexts["Amount:_value"]
-        feeValue = app.tables["receiptDetailTableView"].staticTexts["Fee:_value"]
-        transactionValue = app.tables["receiptDetailTableView"].staticTexts["Transaction:_value"]
     }
 
     func openReceipt(row: Int) {
