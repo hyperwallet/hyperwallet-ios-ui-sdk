@@ -141,6 +141,8 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
         XCTAssert(app.alerts["Unexpected Error"].staticTexts["Oops... Something went wrong, please try again"].exists)
         app.alerts["Unexpected Error"].buttons["OK"].tap()
         XCTAssertFalse(app.alerts["Unexpected Error"].exists)
+
+        waitForExistence(app.navigationBars["Account Settings"])
         XCTAssertTrue(app.navigationBars["Account Settings"].exists)
     }
 }
