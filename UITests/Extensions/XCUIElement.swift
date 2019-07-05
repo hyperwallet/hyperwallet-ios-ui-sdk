@@ -4,18 +4,18 @@ extension XCUIElement {
     func scroll(to element: XCUIElement) {
         var count = 0
 
-        while !elementIsWithinWindow(element: element) && (count < 5) {
+        while !elementIsWithinWindow(element: element) && (count < 10) {
             swipeUpSlow()
             count += 1
         }
 
-        if count == 5 {
+        if count == 10 {
             XCTFail("Could not find Element")
         }
     }
 
     func elementIsWithinWindow(element: XCUIElement) -> Bool {
-        guard element.exists && element.isHittable else {
+        if !element.exists || !element.isHittable || element.frame.isEmpty {
             return false
         }
 
@@ -24,10 +24,10 @@ extension XCUIElement {
 
     func swipeUpSlow() {
         let half: CGFloat = 0.5
-        let pressDuration: TimeInterval = 0.02
+        let pressDuration: TimeInterval = 0.01
 
         let centre = self.coordinate(withNormalizedOffset: CGVector(dx: half, dy: half))
-        let top = self.coordinate(withNormalizedOffset: CGVector(dx: half, dy: 0.25))
+        let top = centre.withOffset(CGVector(dx: 0.0, dy: -262))
 
         centre.press(forDuration: pressDuration, thenDragTo: top)
     }
