@@ -69,32 +69,32 @@ struct ReceiptDetailSectionDetailData: ReceiptDetailSectionData {
         let receiptId = receipt.journalId
         rows.append(ReceiptDetailRow(title: "receipt_details_receipt_id".localized(),
                                      value: receiptId,
-                                     field: "JournalId"))
+                                     field: "journalId"))
 
         let dateTime = ISO8601DateFormatter.ignoreTimeZone.date(from: receipt.createdOn)!.format(for: .dateTime)
         rows.append(ReceiptDetailRow(title: "receipt_details_date".localized(),
                                      value: dateTime,
-                                     field: "CreatedOn"))
+                                     field: "createdOn"))
 
         if let charityName = receipt.details?.charityName {
             rows.append(ReceiptDetailRow(title: "receipt_details_charity_name".localized(),
                                          value: charityName,
-                                         field: "CharityName"))
+                                         field: "charityName"))
         }
         if let checkNumber = receipt.details?.checkNumber {
             rows.append(ReceiptDetailRow(title: "receipt_details_check_number".localized(),
                                          value: checkNumber,
-                                         field: "CheckNumber"))
+                                         field: "checkNumber"))
         }
         if let clientPaymentId = receipt.details?.clientPaymentId {
             rows.append(ReceiptDetailRow(title: "receipt_details_client_payment_id".localized(),
                                          value: clientPaymentId,
-                                         field: "ClientPaymentId"))
+                                         field: "clientPaymentId"))
         }
         if let website = receipt.details?.website {
             rows.append(ReceiptDetailRow(title: "receipt_details_website".localized(),
                                          value: website,
-                                         field: "Website"))
+                                         field: "website"))
         }
     }
 }
@@ -110,12 +110,12 @@ struct ReceiptDetailSectionFeeData: ReceiptDetailSectionData {
         let valueCurrencyFormat = "%@ %@"
         rows.append(ReceiptDetailRow(title: "receipt_details_amount".localized(),
                                      value: String(format: amountFormat, receipt.amount, receipt.currency),
-                                     field: "Amount"))
+                                     field: "amount"))
         var fee: Double = 0.0
         if let strFee = receipt.fee {
             rows.append(ReceiptDetailRow(title: "receipt_details_fee".localized(),
                                          value: String(format: valueCurrencyFormat, strFee, receipt.currency),
-                                         field: "Fee"))
+                                         field: "fee"))
             fee = Double(strFee) ?? 0.0
         }
         if let amount = Double(receipt.amount) {
@@ -127,7 +127,7 @@ struct ReceiptDetailSectionFeeData: ReceiptDetailSectionData {
                                          value: String(format: valueCurrencyFormat,
                                                        String(format: transactionFormat, transaction),
                                                        receipt.currency),
-                                         field: "Transaction"))
+                                         field: "transaction"))
         }
     }
 
