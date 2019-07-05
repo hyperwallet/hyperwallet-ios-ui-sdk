@@ -38,7 +38,7 @@ final class ReceiptTransactionTableViewCell: UITableViewCell {
         let label = UILabel(frame: .zero)
         label.font = Theme.Label.bodyFontMedium
         label.textColor = Theme.Label.color
-        label.accessibilityIdentifier = "ReceiptTransactionTypeLabel"
+        label.accessibilityIdentifier = "receiptTransactionTypeLabel"
         return label
     }()
 
@@ -46,7 +46,7 @@ final class ReceiptTransactionTableViewCell: UITableViewCell {
         let label = UILabel(frame: .zero)
         label.font = Theme.Label.bodyFontMedium
         label.textAlignment = .right
-        label.accessibilityIdentifier = "ReceiptTransactionAmountLabel"
+        label.accessibilityIdentifier = "receiptTransactionAmountLabel"
         return label
     }()
 
@@ -54,7 +54,7 @@ final class ReceiptTransactionTableViewCell: UITableViewCell {
         let label = UILabel(frame: .zero)
         label.font = Theme.Label.captionOne
         label.textColor = Theme.Label.subTitleColor
-        label.accessibilityIdentifier = "ReceiptTransactionCreatedOnLabel"
+        label.accessibilityIdentifier = "receiptTransactionCreatedOnLabel"
         return label
     }()
 
@@ -63,7 +63,7 @@ final class ReceiptTransactionTableViewCell: UITableViewCell {
         label.font = Theme.Label.captionOne
         label.textColor = Theme.Label.subTitleColor
         label.textAlignment = .right
-        label.accessibilityIdentifier = "ReceiptTransactionCurrencyLabel"
+        label.accessibilityIdentifier = "receiptTransactionCurrencyLabel"
         return label
     }()
 

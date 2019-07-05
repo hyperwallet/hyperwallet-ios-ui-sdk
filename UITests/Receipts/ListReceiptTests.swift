@@ -172,11 +172,7 @@ class ListReceiptTests: BaseTests {
         transactionDetails.openReceipt(row: 0)
         waitForExistence(transactionDetails.detailHeaderTitle)
 
-        if #available(iOS 12, *) {
-            verifyPayment(payment: "Payment\nMay 24, 2019", amount: "6.00\n\(currency)")
-        } else {
-            verifyPayment(payment: "Payment May 24, 2019", amount: "6.00 \(currency)")
-        }
+        verifyPayment("Payment", "6.00", "May 24, 2019", "\(currency)")
 
         // DETAILS Section
         verifyDetailSection(receiptIdVal: "55176992", dateVal: expectedDateValue, clientIdVal: "DyClk0VG9a")
@@ -192,11 +188,7 @@ class ListReceiptTests: BaseTests {
         transactionDetails.openReceipt(row: 1)
         waitForExistence(transactionDetails.detailHeaderTitle)
 
-        if #available(iOS 12, *) {
-            verifyPayment(payment: "Bank Account\nMay 12, 2019", amount: "-5.00\n\(currency)")
-        } else {
-            verifyPayment(payment: "Bank Account May 12, 2019", amount: "-5.00 \(currency)")
-        }
+        verifyPayment("Bank Account", "-5.00", "May 12, 2019", "\(currency)")
 
         // DETAILS Section
         verifyDetailSection(receiptIdVal: "55176991", dateVal: expectedDateValue, clientIdVal: nil)
@@ -250,12 +242,16 @@ class ListReceiptTests: BaseTests {
         openReceiptsListScreen()
     }
 
-    private func verifyPayment(payment: String, amount: String) {
-        let paymentlabel = app.tables["receiptDetailTableView"].staticTexts["ListReceiptTableViewCellTextLabel"].label
-        let amountlabel = app.tables["receiptDetailTableView"]
-            .staticTexts["ListReceiptTableViewCellDetailTextLabel"].label
-        XCTAssertEqual(paymentlabel, payment)
-        XCTAssertEqual(amountlabel, amount)
+    private func verifyPayment(_ type: String, _ amount: String, _ createdOn: String, _ currency: String) {
+        let typeLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionTypeLabel"].label
+        let amountLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionAmountLabel"].label
+        let createdOnLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionCreatedOnLabel"].label
+        let currencyLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionCurrencyLabel"].label
+
+        XCTAssertEqual(typeLabel, type)
+        XCTAssertEqual(amountLabel, amount)
+        XCTAssertEqual(createdOnLabel, createdOn)
+        XCTAssertEqual(currencyLabel, currency)
     }
 
     // Detail section verification
