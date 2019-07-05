@@ -198,17 +198,3 @@ public final class TransferMethodConfigurationDataManager: TransferMethodConfigu
         return repositoryOriginalValue
     }
 }
-
-private struct FieldMapKey: Hashable {
-    let country: String
-    let currency: String
-    let transferMethodType: String
-    let transferMethodProfileType: String
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(country)
-        hasher.combine(currency)
-        hasher.combine(transferMethodType)
-        hasher.combine(transferMethodProfileType)
-    }
-}

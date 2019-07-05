@@ -37,6 +37,7 @@ public protocol TransferMethodConfigurationRepository {
 
 // MARK: - TransferMethodConfigurationRepository
 public final class RemoteTransferMethodConfigurationRepository: TransferMethodConfigurationRepository {
+    /*
     public func getKeys(completion: @escaping (HyperwalletTransferMethodConfigurationKey?,
         HyperwalletErrorType?) -> Void) {
         Hyperwallet.shared
@@ -48,5 +49,129 @@ public final class RemoteTransferMethodConfigurationRepository: TransferMethodCo
                           completion: @escaping (HyperwalletTransferMethodConfigurationField?,
         HyperwalletErrorType?) -> Void) {
         Hyperwallet.shared.retrieveTransferMethodConfigurationFields(request: request, completion: completion)
+    }
+    */
+    private var transferMethodConfigurationFieldsCache = [FieldMapKey: HyperwalletTransferMethodConfigurationField]()
+    private var transferMethodConfigurationKeys: HyperwalletTransferMethodConfigurationKey?
+
+    public func countries() -> [HyperwalletCountry]? {
+        return transferMethodConfigurationKeys?.countries()
+    }
+
+    public func currencies(_ countryCode: String) -> [HyperwalletCurrency]? {
+        return transferMethodConfigurationKeys?.currencies(from: countryCode)
+    }
+
+    public func transferMethodTypes(_ countryCode: String, _ currencyCode: String) -> [HyperwalletTransferMethodType]? {
+        return transferMethodConfigurationKeys?.transferMethodTypes(countryCode: countryCode,
+                                                                    currencyCode: currencyCode)
+    }
+
+    public func getKeys(completion: @escaping (HyperwalletTransferMethodConfigurationKey?,
+        HyperwalletErrorType?) -> Void) {
+        guard let transferMethodConfigurationKeys = transferMethodConfigurationKeys else {
+            print("getKeys from Endpoint")
+            transferMethodConfigurationRepository.getKeys(completion: getKeysHandler(completion))
+            return
+        }
+        print("getKeys from cache")
+        completion(transferMethodConfigurationKeys, nil)
+    }
+
+    public func getFields(_ country: String,
+                          _ currency: String,
+                          _ transferMethodType: String,
+                          _ transferMethodProfileType: String,
+                          completion: @escaping (HyperwalletTransferMethodConfigurationField?,
+        HyperwalletErrorType?) -> Void) {
+        let fielMapKey = FieldMapKey(country: country,
+                                     currency: currency,
+                                     transferMethodType: transferMethodType,
+                                     transferMethodProfileType: transferMethodProfileType)
+
+        guard let transferMethodConfigurationFields = transferMethodConfigurationFieldsCache[fielMapKey] else {
+            let fieldsQuery = HyperwalletTransferMethodConfigurationFieldQuery(
+                country: country,
+                currency: currency,
+                transferMethodType: transferMethodType,
+                profile: transferMethodProfileType
+            )
+            print("getFields from Endpoint")
+            transferMethodConfigurationRepository.getFields(request: fieldsQuery,
+                                                            completion: getFieldsHandler(fielMapKey, completion))
+            return
+        }
+
+        print("getFields from cache")
+        completion(transferMethodConfigurationFields, nil)
+    }
+
+    public func refreshKeys() {
+        transferMethodConfigurationKeys = nil
+    }
+
+    public func refreshFields() {
+        transferMethodConfigurationFieldsCache = [FieldMapKey: HyperwalletTransferMethodConfigurationField]()
+    }
+
+    private func getKeysHandler(_ completion: @escaping (HyperwalletTransferMethodConfigurationKey?,
+        HyperwalletErrorType?) -> Void) -> (HyperwalletTransferMethodConfigurationKey?, HyperwalletErrorType?) -> Void {
+        return { [weak self] (result, error) in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.transferMethodConfigurationKeys = strongSelf
+                .performCompletion(error, result, completion, strongSelf.transferMethodConfigurationKeys)
+        }
+    }
+
+    private func getFieldsHandler(_ fieldMapKey: FieldMapKey,
+                                  _ completion: @escaping (HyperwalletTransferMethodConfigurationField?,
+        HyperwalletErrorType?) -> Void)
+        -> (HyperwalletTransferMethodConfigurationField?, HyperwalletErrorType?) -> Void {
+            return { [weak self] (result, error) in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                strongSelf.transferMethodConfigurationFieldsCache[fieldMapKey] = strongSelf
+                    .performCompletion(error,
+                                       result,
+                                       completion,
+                                       strongSelf.transferMethodConfigurationFieldsCache[fieldMapKey])
+            }
+    }
+
+    private func performCompletion<T>(_ error: HyperwalletErrorType?,
+                                      _ result: T?,
+                                      _ completionHandler: @escaping (T?, HyperwalletErrorType?) -> Void,
+                                      _ repositoryOriginalValue: T?) -> T? {
+        if let error = error {
+            DispatchQueue.main.async {
+                completionHandler(nil, error)
+            }
+        } else if let result = result {
+            DispatchQueue.main.async {
+                completionHandler(result, nil)
+            }
+            return result
+        }
+
+        return repositoryOriginalValue
+    }
+}
+
+//TODO: replace this struct to HyperwalletTransferMethodConfigurationFieldQuery
+private struct FieldMapKey: Hashable {
+    let country: String
+    let currency: String
+    let transferMethodType: String
+    let transferMethodProfileType: String
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(country)
+        hasher.combine(currency)
+        hasher.combine(transferMethodType)
+        hasher.combine(transferMethodProfileType)
     }
 }
