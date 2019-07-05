@@ -6,8 +6,11 @@ class ListReceiptTests: BaseTests {
     private var transactionDetails: TransactionDetails!
 
     override func setUp() {
-        profileType = .individual
         super.setUp()
+
+        app = XCUIApplication()
+        app.launch()
+
         receiptsList = ReceiptsList(app: app)
         transactionDetails = TransactionDetails(app: app)
         spinner = app.activityIndicators["activityIndicator"]
@@ -98,46 +101,6 @@ class ListReceiptTests: BaseTests {
             verifyCellExists(with: "Payment Mar 24, 2019", moneyTitle: "6.00 USD", by: 21)
             verifyCellExists(with: "Bank Account Mar 24, 2019", moneyTitle: "-5.00 USD", by: 22)
         }
-    }
-
-    func testReceiptsList_verifyAfterRelaunch() {
-        openupReceiptsListScreenForFewMonths()
-        validatetestReceiptsListScreen()
-        XCUIDevice.shared.clickHomeAndRelaunch(app: app)
-        openupReceiptsListScreenForFewMonths()
-        validatetestReceiptsListScreen()
-    }
-
-    func testReceiptsList_verifyRotateScreen() {
-        openupReceiptsListScreenForFewMonths()
-        XCUIDevice.shared.rotateScreen(times: 3)
-        validatetestReceiptsListScreen()
-    }
-
-    func testReceiptsList_verifyWakeFromSleep() {
-        openupReceiptsListScreenForFewMonths()
-        XCUIDevice.shared.wakeFromSleep(app: app)
-        waitForNonExistence(receiptsList.navigationBar)
-        validatetestReceiptsListScreen()
-    }
-
-    func testReceiptsList_verifyResumeFromRecents() {
-        openupReceiptsListScreenForFewMonths()
-        XCUIDevice.shared.resumeFromRecents(app: app)
-        waitForNonExistence(receiptsList.navigationBar)
-        validatetestReceiptsListScreen()
-    }
-
-    func testReceiptsList_verifyAppToBackground() {
-        openupReceiptsListScreenForFewMonths()
-        XCUIDevice.shared.sendToBackground(app: app)
-        validatetestReceiptsListScreen()
-    }
-
-    func testReceiptsList_verifyPressBackButton() {
-        openupReceiptsListScreenForFewMonths()
-        receiptsList.clickBackButton()
-        XCTAssertTrue(app.navigationBars["Account Settings"].exists)
     }
 
     private func verifyCellExists(with text: String, moneyTitle: String, by index: Int) {
@@ -264,7 +227,7 @@ class ListReceiptTests: BaseTests {
 
     // Verify when no Notes and Fee sections
     func testReceiptDetail_verifyTransactionReceiptNoNoteSectionAndFeeLabel() {
-       openupReceiptsListScreenForOneMonth()
+        openupReceiptsListScreenForOneMonth()
         transactionDetails.openReceipt(row: 2)
         let transactionDetailHeaderLabel = transactionDetails.detailHeaderTitle
         waitForNonExistence(transactionDetailHeaderLabel)
@@ -278,14 +241,18 @@ class ListReceiptTests: BaseTests {
 
     // MARK: Helper methods
     private func openupReceiptsListScreenForOneMonth() {
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/receipts", filename: "ReceiptsForOneMonth", method: HTTPMethod.get)
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/receipts",
+                             filename: "ReceiptsForOneMonth",
+                             method: HTTPMethod.get)
 
         openReceiptsListScreen()
     }
 
     private func verifyPayment(payment: String, amount: String) {
-        let paymentlabel = app.tables["receiptDetailTableView"].staticTexts["ListReceiptTableViewCellTextLabel"].label
-        let amountlabel = app.tables["receiptDetailTableView"].staticTexts["ListReceiptTableViewCellDetailTextLabel"].label
+        let paymentlabel = app.tables["receiptDetailTableView"]
+            .staticTexts["ListReceiptTableViewCellTextLabel"].label
+        let amountlabel = app.tables["receiptDetailTableView"]
+            .staticTexts["ListReceiptTableViewCellDetailTextLabel"].label
         XCTAssertEqual(paymentlabel, payment)
         XCTAssertEqual(amountlabel, amount)
     }
