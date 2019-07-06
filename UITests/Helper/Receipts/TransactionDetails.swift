@@ -7,8 +7,10 @@ class TransactionDetails {
     var feeSection: XCUIElement
     var transactionSection: XCUIElement
     // Payment
-    var paymentLabel: XCUIElement
+    var typeLabel: XCUIElement
     var paymentAmountLabel: XCUIElement
+    var createdOnLabel: XCUIElement
+    var currencyLabel: XCUIElement
     var detailHeaderTitle: XCUIElement
     // Detail
     var receiptIdLabel: XCUIElement
@@ -44,8 +46,11 @@ class TransactionDetails {
         self.app = app
         navigationBar = app.navigationBars["Transaction Details"]
         detailHeaderTitle = app.navigationBars["Transaction Details"].otherElements["Transaction Details"]
-        paymentLabel = app.tables["receiptDetailTableView"].staticTexts["ListReceiptTableViewCellTextLabel"]
-        paymentAmountLabel = app.tables["receiptDetailTableView"].staticTexts["ListReceiptTableViewCellDetailTextLabel"]
+        typeLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionTypeLabel"]
+        paymentAmountLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionAmountLabel"]
+        createdOnLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionCreatedOnLabel"]
+        currencyLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionCurrencyLabel"]
+
         detailSection = app.tables["receiptDetailTableView"].staticTexts["Details"]
         feeSection = app.tables["receiptDetailTableView"].staticTexts["Fee Specification"]
         transactionSection = app.tables["receiptDetailTableView"].staticTexts["Transaction"]
