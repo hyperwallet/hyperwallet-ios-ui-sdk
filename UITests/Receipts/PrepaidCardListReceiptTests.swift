@@ -168,7 +168,7 @@ class PrepaidCardListReceiptTests: BaseTests {
         XCTAssertEqual(transactionDetails.amountLabel.label, "Amount:")
         XCTAssertEqual(transactionDetails.transactionLabel.label, "Transaction:")
         XCTAssertEqual(transactionDetails.amountValue.label, "-7.00 USD")
-        XCTAssertEqual(transactionDetails.transactionValue.label, "-7.00 USD")
+        XCTAssertEqual(transactionDetails.transactionValue.label, "7.00 USD")
     }
 
     // MARK: Detail View Testcases
@@ -184,7 +184,7 @@ class PrepaidCardListReceiptTests: BaseTests {
 
         // Transaction
         XCTAssertEqual(transactionDetails.transactionSection.label, "Transaction")
-        XCTAssertEqual(transactionDetails.typeLabel.label, "Transaction")
+        XCTAssertEqual(transactionDetails.typeLabel.label, "Balance Adjustment")
         XCTAssertEqual(transactionDetails.paymentAmountLabel.label, "-10.00")
         XCTAssertEqual(transactionDetails.createdOnLabel.label, "Jun 25, 2019")
         XCTAssertEqual(transactionDetails.currencyLabel.label, "USD")
@@ -214,7 +214,7 @@ class PrepaidCardListReceiptTests: BaseTests {
         XCTAssertEqual(transactionDetails.transactionLabel.label, "Transaction:")
         XCTAssertEqual(transactionDetails.amountValue.label, "-10.00 USD")
         XCTAssertEqual(transactionDetails.feeValue.label, "3.00 USD")
-        XCTAssertEqual(transactionDetails.transactionValue.label, "-13.00 USD")
+        XCTAssertEqual(transactionDetails.transactionValue.label, "7.00 USD")
     }
 
     // MARK: helper functions

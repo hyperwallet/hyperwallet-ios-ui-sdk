@@ -50,7 +50,7 @@
         },
         {
             "journalId": "FISVL_5240220",
-            "type": "PREPAID_CARD_SALE",
+            "type": "ADJUSTMENT",
             "createdOn": "2019-06-25T22:48:41",
             "entry": "DEBIT",
             "destinationToken": "trm-token",
