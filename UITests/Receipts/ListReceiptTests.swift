@@ -229,14 +229,6 @@ class ListReceiptTests: BaseTests {
         openReceiptsListScreen()
     }
 
-<<<<<<< HEAD
-    private func verifyPayment(payment: String, amount: String) {
-        let paymentlabel = app.tables["receiptDetailTableView"].staticTexts["ListReceiptTableViewCellTextLabel"].label
-        let amountlabel = app.tables["receiptDetailTableView"]
-            .staticTexts["ListReceiptTableViewCellDetailTextLabel"].label
-        XCTAssertEqual(paymentlabel, payment)
-        XCTAssertEqual(amountlabel, amount)
-=======
     private func verifyPayment(_ type: String, _ createdOn: String, _ amount: String, _ currency: String) {
         let typeLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionTypeLabel"].label
         let amountLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionAmountLabel"].label
@@ -247,7 +239,6 @@ class ListReceiptTests: BaseTests {
         XCTAssertEqual(amountLabel, amount)
         XCTAssertEqual(createdOnLabel, createdOn)
         XCTAssertEqual(currencyLabel, currency)
->>>>>>> development
     }
 
     // Detail section verification
