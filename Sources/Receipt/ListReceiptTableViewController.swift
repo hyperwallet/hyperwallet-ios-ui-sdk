@@ -30,6 +30,21 @@ public final class ListReceiptTableViewController: UITableViewController {
 
     private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "empty_list_receipt_message".localized())
 
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        presenter = ListReceiptViewPresenter(view: self)
+    }
+
+    init(prepaidCardToken: String) {
+        super.init(nibName: nil, bundle: nil)
+        presenter = ListReceiptViewPresenter(view: self, prepaidCardToken: prepaidCardToken)
+    }
+
+    // swiftlint:disable unavailable_function
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("NSCoding not supported")
+    }
+
     override public func viewDidLoad() {
         super.viewDidLoad()
         title = "title_receipts".localized()
@@ -37,9 +52,8 @@ public final class ListReceiptTableViewController: UITableViewController {
         setViewBackgroundColor()
 
         navigationItem.backBarButtonItem = UIBarButtonItem.back
-        presenter = ListReceiptViewPresenter(view: self)
         setupListReceiptTableView()
-        presenter.listReceipt()
+        presenter.listReceipts()
     }
 
     // MARK: list receipt table view data source
@@ -51,7 +65,7 @@ public final class ListReceiptTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: ReceiptTransactionTableViewCell.reuseIdentifier,
                                                  for: indexPath)
         if let listReceiptCell = cell as? ReceiptTransactionTableViewCell {
-            listReceiptCell.configure(configuration: presenter.getCellConfiguration(indexPath: indexPath))
+            listReceiptCell.configure(presenter.getCellConfiguration(indexPath: indexPath))
         }
         return cell
     }
@@ -91,19 +105,20 @@ public final class ListReceiptTableViewController: UITableViewController {
         return Theme.Cell.mediumHeight
     }
 
+    override public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if loadMoreReceipts {
+            presenter.listReceipts()
+            loadMoreReceipts = false
+        }
+    }
+
     // MARK: set up list receipt table view
     private func setupListReceiptTableView() {
         tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.sectionFooterHeight = CGFloat.leastNormalMagnitude
         tableView.tableFooterView = UIView()
         tableView.register(ReceiptTransactionTableViewCell.self,
                            forCellReuseIdentifier: ReceiptTransactionTableViewCell.reuseIdentifier)
-    }
-
-    override public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if loadMoreReceipts {
-            presenter.listReceipt()
-            loadMoreReceipts = false
-        }
     }
 }
 

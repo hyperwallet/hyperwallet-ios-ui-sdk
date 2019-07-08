@@ -6,7 +6,7 @@
                     "country": "US",
                     "currency": "USD",
                     "transferMethodType": "BANK_CARD",
-                    "profile": "BUSINESS",
+                    "profile": "INDIVIDUAL",
                     "fieldGroups": {
                         "nodes": [
                             {
@@ -33,7 +33,7 @@
                                         "isRequired": true,
                                         "isEditable": true,
                                         "name": "dateOfExpiry",
-                                        "label": "Expiration Date",
+                                        "label": "Expiry Date",
                                         "placeholder": "",
                                         "maxLength": 7,
                                         "minLength": 7,
@@ -71,11 +71,12 @@
                                         "isEditable": true,
                                         "name": "bankAccountRelationship",
                                         "label": "Relationship",
+                                        "value": "SELF",
                                         "placeholder": "",
                                         "fieldSelectionOptions": [
                                             {
-                                                "label": "Own company",
-                                                "value": "OWN_COMPANY"
+                                                "label": "Self",
+                                                "value": "SELF"
                                             }
                                         ],
                                         "validationMessage": {
@@ -96,6 +97,7 @@
                                         "name": "country",
                                         "label": "Country",
                                         "placeholder": "",
+                                        "value": "CA",
                                         "fieldSelectionOptions": [
                                             {
                                                 "label": "Afghanistan",
@@ -202,6 +204,10 @@
                                                 "value": "BO"
                                             },
                                             {
+                                                "label": "Caribbean Netherlands",
+                                                "value": "BQ"
+                                            },
+                                            {
                                                 "label": "Bosnia and Herzegovina",
                                                 "value": "BA"
                                             },
@@ -220,10 +226,6 @@
                                             {
                                                 "label": "British Indian Ocean Territory",
                                                 "value": "IO"
-                                            },
-                                            {
-                                                "label": "British Virgin Islands",
-                                                "value": "VG"
                                             },
                                             {
                                                 "label": "Brunei",
@@ -256,10 +258,6 @@
                                             {
                                                 "label": "Cape Verde",
                                                 "value": "CV"
-                                            },
-                                            {
-                                                "label": "Caribbean Netherlands",
-                                                "value": "BQ"
                                             },
                                             {
                                                 "label": "Cayman Islands",
@@ -340,6 +338,10 @@
                                             {
                                                 "label": "Dominican Republic",
                                                 "value": "DO"
+                                            },
+                                            {
+                                                "label": "Timor-Leste",
+                                                "value": "TL"
                                             },
                                             {
                                                 "label": "Ecuador",
@@ -532,6 +534,10 @@
                                             {
                                                 "label": "Kiribati",
                                                 "value": "KI"
+                                            },
+                                            {
+                                                "label": "South Korea",
+                                                "value": "KR"
                                             },
                                             {
                                                 "label": "Kosovo",
@@ -786,14 +792,6 @@
                                                 "value": "RW"
                                             },
                                             {
-                                                "label": "Saint Barthélemy",
-                                                "value": "BL"
-                                            },
-                                            {
-                                                "label": "Saint Helena",
-                                                "value": "SH"
-                                            },
-                                            {
                                                 "label": "Saint Kitts and Nevis",
                                                 "value": "KN"
                                             },
@@ -804,10 +802,6 @@
                                             {
                                                 "label": "Saint Martin",
                                                 "value": "MF"
-                                            },
-                                            {
-                                                "label": "Saint Pierre and Miquelon",
-                                                "value": "PM"
                                             },
                                             {
                                                 "label": "Saint Vincent and the Grenadines",
@@ -874,10 +868,6 @@
                                                 "value": "GS"
                                             },
                                             {
-                                                "label": "South Korea",
-                                                "value": "KR"
-                                            },
-                                            {
                                                 "label": "South Sudan",
                                                 "value": "SS"
                                             },
@@ -888,6 +878,18 @@
                                             {
                                                 "label": "Sri Lanka",
                                                 "value": "LK"
+                                            },
+                                            {
+                                                "label": "Saint Barthélemy",
+                                                "value": "BL"
+                                            },
+                                            {
+                                                "label": "Saint Helena",
+                                                "value": "SH"
+                                            },
+                                            {
+                                                "label": "Saint Pierre and Miquelon",
+                                                "value": "PM"
                                             },
                                             {
                                                 "label": "Suriname",
@@ -926,10 +928,6 @@
                                                 "value": "TH"
                                             },
                                             {
-                                                "label": "Timor-Leste",
-                                                "value": "TL"
-                                            },
-                                            {
                                                 "label": "Togo",
                                                 "value": "TG"
                                             },
@@ -966,14 +964,6 @@
                                                 "value": "TV"
                                             },
                                             {
-                                                "label": "U.S. Outlying Islands",
-                                                "value": "UM"
-                                            },
-                                            {
-                                                "label": "U.S. Virgin Islands",
-                                                "value": "VI"
-                                            },
-                                            {
                                                 "label": "Uganda",
                                                 "value": "UG"
                                             },
@@ -992,6 +982,10 @@
                                             {
                                                 "label": "United States",
                                                 "value": "US"
+                                            },
+                                            {
+                                                "label": "U.S. Outlying Islands",
+                                                "value": "UM"
                                             },
                                             {
                                                 "label": "Uruguay",
@@ -1016,6 +1010,14 @@
                                             {
                                                 "label": "Vietnam",
                                                 "value": "VN"
+                                            },
+                                            {
+                                                "label": "British Virgin Islands",
+                                                "value": "VG"
+                                            },
+                                            {
+                                                "label": "U.S. Virgin Islands",
+                                                "value": "VI"
                                             },
                                             {
                                                 "label": "Wallis and Futuna",
@@ -1043,6 +1045,7 @@
                                         "name": "stateProvince",
                                         "label": "State/Province",
                                         "placeholder": "",
+                                        "value": "BC",
                                         "validationMessage": {
                                             "length": "",
                                             "pattern": "is invalid length or format.",
@@ -1056,6 +1059,7 @@
                                         "name": "addressLine1",
                                         "label": "Street",
                                         "placeholder": "",
+                                        "value": "950 Granville Street",
                                         "validationMessage": {
                                             "length": "",
                                             "pattern": "is invalid length or format.",
@@ -1069,6 +1073,7 @@
                                         "name": "city",
                                         "label": "City",
                                         "placeholder": "",
+                                        "value": "Vancouver",
                                         "validationMessage": {
                                             "length": "",
                                             "pattern": "is invalid length or format.",
@@ -1082,6 +1087,7 @@
                                         "name": "postalCode",
                                         "label": "Zip/Postal Code",
                                         "placeholder": "",
+                                        "value": "V6Z1L2",
                                         "validationMessage": {
                                             "length": "",
                                             "pattern": "is invalid length or format.",
@@ -1105,7 +1111,25 @@
                         "nodes": [
                             {
                                 "code": "USD",
-                                "name": "USD"
+                                "name": "USD",
+                                "transferMethodTypes": {
+                                    "nodes": [
+                                        {
+                                            "code": "BANK_CARD",
+                                            "name": "Debit Card",
+                                            "processingTime" : "1-2 Business days",
+                                            "fees": {
+                                                "nodes": [
+                                                    {
+                                                        "currency": "USD",
+                                                        "feeRateType": "FLAT",
+                                                        "value": "1.75"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
                             }
                         ]
                     }

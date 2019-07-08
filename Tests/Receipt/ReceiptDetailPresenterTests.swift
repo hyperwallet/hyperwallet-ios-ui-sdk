@@ -6,6 +6,7 @@ class ReceiptDetailPresenterTests: XCTestCase {
     let receiptsData = HyperwalletTestHelper.getDataFromJson("UserReceiptDetails")
     var presenterNoNotes: ReceiptDetailViewPresenter!
     var presenterWithNotes: ReceiptDetailViewPresenter!
+    var presenterWithIntegerAmount: ReceiptDetailViewPresenter!
 
     override func setUp() {
         guard let receipts = try? JSONDecoder().decode([HyperwalletReceipt].self, from: receiptsData) else {
@@ -14,6 +15,7 @@ class ReceiptDetailPresenterTests: XCTestCase {
         }
         presenterNoNotes = ReceiptDetailViewPresenter(with: receipts[0])
         presenterWithNotes = ReceiptDetailViewPresenter(with: receipts[1])
+        presenterWithIntegerAmount = ReceiptDetailViewPresenter(with: receipts[2])
     }
 
     func testSectionDataShouldNotBeEmpty() {
@@ -49,9 +51,9 @@ class ReceiptDetailPresenterTests: XCTestCase {
         XCTAssertEqual(section.title, "Details")
         XCTAssertEqual(section.rowCount, 3)
 
-        XCTAssertTrue(rowEqual(section.rows[0], ("Receipt ID:", "55176986")))
+        XCTAssertTrue(rowEqual(section.rows[0], "Receipt ID:", "55176986", "journalId"))
         //XCTAssertTrue(rowEqual(section.rows[1], ("Date:", "Sun, Apr 28, 2019, 9:16 PM")))
-        XCTAssertTrue(rowEqual(section.rows[2], ("Client Transaction ID:", "DyClk0VG2a")))
+        XCTAssertTrue(rowEqual(section.rows[2], "Client Transaction ID:", "DyClk0VG2a", "clientPaymentId"))
     }
 
     func testSectionCreditFeeDataShouldNotBeEmpty() {
@@ -64,9 +66,9 @@ class ReceiptDetailPresenterTests: XCTestCase {
         XCTAssertEqual(section.title, "Fee Specification")
         XCTAssertEqual(section.rowCount, 3)
 
-        XCTAssertTrue(rowEqual(section.rows[0], ("Amount:", "+6.00 USD")))
-        XCTAssertTrue(rowEqual(section.rows[1], ("Fee:", "1.11 USD")))
-        XCTAssertTrue(rowEqual(section.rows[2], ("Transaction:", "4.89 USD")))
+        XCTAssertTrue(rowEqual(section.rows[0], "Amount:", "6.00 USD", "amount"))
+        XCTAssertTrue(rowEqual(section.rows[1], "Fee:", "1.11 USD", "fee"))
+        XCTAssertTrue(rowEqual(section.rows[2], "Transaction:", "4.89 USD", "transaction"))
     }
 
     func testSectionDebitFeeDataShouldNotBeEmpty() {
@@ -78,9 +80,23 @@ class ReceiptDetailPresenterTests: XCTestCase {
         XCTAssertEqual(section.cellIdentifier, ReceiptFeeTableViewCell.reuseIdentifier)
         XCTAssertEqual(section.rowCount, 3)
 
-        XCTAssertTrue(rowEqual(section.rows[0], ("Amount:", "-9.87 USD")))
-        XCTAssertTrue(rowEqual(section.rows[1], ("Fee:", "0.11 USD")))
-        XCTAssertTrue(rowEqual(section.rows[2], ("Transaction:", "-9.98 USD")))
+        XCTAssertTrue(rowEqual(section.rows[0], "Amount:", "-9.87 USD", "amount"))
+        XCTAssertTrue(rowEqual(section.rows[1], "Fee:", "0.11 USD", "fee"))
+        XCTAssertTrue(rowEqual(section.rows[2], "Transaction:", "9.76 USD", "transaction"))
+    }
+
+    func testSectionFeeDataWithIntegerAmountShouldNotBeEmpty() {
+        guard let section = presenterWithIntegerAmount.sectionData[2] as? ReceiptDetailSectionFeeData else {
+            XCTFail("Section Fee Data shouldn't be empty")
+            return
+        }
+        XCTAssertEqual(section.receiptDetailSectionHeader, .fee)
+        XCTAssertEqual(section.cellIdentifier, ReceiptFeeTableViewCell.reuseIdentifier)
+        XCTAssertEqual(section.rowCount, 3)
+
+        XCTAssertTrue(rowEqual(section.rows[0], "Amount:", "-100500 KRW", "amount"))
+        XCTAssertTrue(rowEqual(section.rows[1], "Fee:", "500 KRW", "fee"))
+        XCTAssertTrue(rowEqual(section.rows[2], "Transaction:", "100000 KRW", "transaction"))
     }
 
     func testSectionNotesDataShouldNotBeEmpty() {
@@ -97,7 +113,7 @@ class ReceiptDetailPresenterTests: XCTestCase {
         XCTAssertFalse(section.notes!.isEmpty)
     }
 
-    private func rowEqual<T: Equatable> (_ tuple1: (T, T), _ tuple2: (T, T)) -> Bool {
-        return (tuple1.0 == tuple2.0) && (tuple1.1 == tuple2.1)
+    private func rowEqual(_ row: ReceiptDetailRow, _ title: String, _ value: String, _ field: String) -> Bool {
+        return row.title == title && row.value == value && row.field == field
     }
 }

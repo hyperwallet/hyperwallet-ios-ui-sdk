@@ -51,12 +51,9 @@ public final class ReceiptDetailTableViewController: UITableViewController {
         tableView.allowsSelection = false
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Theme.Cell.extraSmallHeight
-        tableView.separatorInset = UIEdgeInsets(
-            top: 0,
-            left: tableView.separatorInset.left,
-            bottom: 0,
-            right: .greatestFiniteMagnitude)
+        tableView.separatorStyle = .none
         tableView.accessibilityIdentifier = "receiptDetailTableView"
+        tableView.cellLayoutMarginsFollowReadableWidth = false
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)
         }
@@ -70,24 +67,22 @@ public final class ReceiptDetailTableViewController: UITableViewController {
         case .transaction:
             if let tableViewCell = cell as? ReceiptTransactionTableViewCell,
                 let transactionSection = section as? ReceiptDetailSectionTransactionData {
-                tableViewCell.configure(configuration: transactionSection.tableViewCellConfiguration)
+                tableViewCell.configure(transactionSection.tableViewCellConfiguration)
             }
 
         case .details:
             if let tableViewCell = cell as? ReceiptDetailTableViewCell,
                 let detailSection = section as? ReceiptDetailSectionDetailData {
                 let row = detailSection.rows[indexPath.row]
-                tableViewCell.textLabel?.text = row.title
-                tableViewCell.detailTextLabel?.text = row.value
+                tableViewCell.configure(row)
             }
 
         case .fee:
             if let tableViewCell = cell as? ReceiptFeeTableViewCell,
                 let feeSection = section as? ReceiptDetailSectionFeeData {
                 let row = feeSection.rows[indexPath.row]
-                tableViewCell.textLabel?.text = row.title
-                tableViewCell.detailTextLabel?.text = row.value
-            }
+                tableViewCell.configure(row)
+           }
 
         case .notes:
             if let tableViewCell = cell as? ReceiptNotesTableViewCell,

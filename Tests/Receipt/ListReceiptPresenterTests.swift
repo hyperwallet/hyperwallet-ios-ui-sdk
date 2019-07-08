@@ -10,6 +10,10 @@ class ListReceiptPresenterTests: XCTestCase {
         .getDataFromJson("UserReceiptResponse")
     private lazy var listReceiptNextPagePayload = HyperwalletTestHelper
         .getDataFromJson("UserReceiptNextPageResponse")
+    private lazy var listPrepaidCardReceiptPayload = HyperwalletTestHelper
+        .getDataFromJson("PrepaidCardReceiptResponse")
+    private lazy var listPrepaidCardReceiptNextPagePayload = HyperwalletTestHelper
+        .getDataFromJson("PrepaidCardReceiptNextPageResponse")
 
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
@@ -23,15 +27,15 @@ class ListReceiptPresenterTests: XCTestCase {
         mockView.resetStates()
     }
     //swiftlint:disable function_body_length
-    func testListReceipt_success() {
+    func testListUserReceipt_success() {
         // Given
         HyperwalletTestHelper.setUpMockServer(request: setUpReceiptRequest(listReceiptPayload))
 
-        let expectation = self.expectation(description: "load receipts")
+        let expectation = self.expectation(description: "load user receipts")
         mockView.expectation = expectation
 
         // When
-        presenter.listReceipt()
+        presenter.listReceipts()
         wait(for: [expectation], timeout: 1)
 
         // Then
@@ -66,11 +70,11 @@ class ListReceiptPresenterTests: XCTestCase {
         // Given
         HyperwalletTestHelper.setUpMockServer(request: setUpReceiptRequest(listReceiptNextPagePayload))
 
-        let expectationLoadMore = self.expectation(description: "load more receipts")
+        let expectationLoadMore = self.expectation(description: "load more user receipts")
         mockView.expectation = expectationLoadMore
 
         // When
-        presenter.listReceipt()
+        presenter.listReceipts()
         wait(for: [expectationLoadMore], timeout: 1)
 
         // Then
@@ -92,16 +96,16 @@ class ListReceiptPresenterTests: XCTestCase {
                        "The receipt number of the last group should be 3")
     }
 
-    func testListReceipt_failureWithError() {
+    func testListUserReceipt_failureWithError() {
         // Given
         HyperwalletTestHelper.setUpMockServer(request:
             setUpReceiptRequest(listReceiptPayload, (NSError(domain: "", code: -1009, userInfo: nil))))
 
-        let expectation = self.expectation(description: "load receipt")
+        let expectation = self.expectation(description: "load user receipt")
         mockView.expectation = expectation
 
         // When
-        presenter.listReceipt()
+        presenter.listReceipts()
         wait(for: [expectation], timeout: 1)
 
         // Then
@@ -109,12 +113,72 @@ class ListReceiptPresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isShowErrorPerformed, "The showError should be performed")
         XCTAssertFalse(mockView.isLoadReceiptPerformed, "The loadReceipt should not be performed")
 
-        XCTAssertEqual(presenter.sectionData.count, 0, "The count of groupedSectionArray should be 0")
+        XCTAssertEqual(presenter.sectionData.count, 0, "The count of sections should be 0")
     }
 
-    private func setUpReceiptRequest(_ payload: Data, _ error: NSError? = nil) -> StubRequest {
+    func testListPrepaidCardReceipt_success() {
+        presenter = ListReceiptViewPresenter(view: mockView, prepaidCardToken: "trm-123456789")
+
+        // Given
+        HyperwalletTestHelper.setUpMockServer(request: setUpReceiptRequest(listPrepaidCardReceiptPayload,
+                                                                           nil,
+                                                                           "trm-123456789"))
+
+        let expectation = self.expectation(description: "load prepaid card receipts")
+        mockView.expectation = expectation
+
+        // When
+        presenter.listReceipts()
+        wait(for: [expectation], timeout: 1)
+
+        // Then
+
+        XCTAssertFalse(mockView.isShowErrorPerformed, "The showError should not be performed")
+        XCTAssertTrue(mockView.isShowLoadingPerformed, "The showLoading should be performed")
+        XCTAssertTrue(mockView.isHideLoadingPerformed, "The hideLoading should be performed")
+        XCTAssertTrue(mockView.isLoadReceiptPerformed, "The loadReceipt should be performed")
+
+        XCTAssertEqual(presenter.sectionData.count, 5, "The count of sections should be 5")
+        XCTAssertEqual(presenter.sectionData.first?.value.count,
+                       3,
+                       "The receipt number of the first section should be 3")
+        XCTAssertEqual(presenter.sectionData[1].value.count,
+                       3,
+                       "The receipt number of the second section should be 3")
+
+        XCTAssertEqual(presenter.sectionData[4].value.count,
+                       2,
+                       "The receipt number of the fifth section should be 2")
+    }
+
+    func testListPrepaidCardReceipt_failureWithError() {
+        // Given
+        presenter = ListReceiptViewPresenter(view: mockView, prepaidCardToken: "trm-123456789")
+
+        HyperwalletTestHelper.setUpMockServer(request:
+            setUpReceiptRequest(listReceiptPayload, (NSError(domain: "", code: -1009, userInfo: nil)), "trm-123456789"))
+
+        let expectation = self.expectation(description: "load prepaid card receipt")
+        mockView.expectation = expectation
+
+        // When
+        presenter.listReceipts()
+        wait(for: [expectation], timeout: 1)
+
+        // Then
+        XCTAssertTrue(mockView.isShowLoadingPerformed, "The showLoading should be performed")
+        XCTAssertTrue(mockView.isShowErrorPerformed, "The showError should be performed")
+        XCTAssertFalse(mockView.isLoadReceiptPerformed, "The loadReceipt should not be performed")
+
+        XCTAssertEqual(presenter.sectionData.count, 0, "The count of sections should be 0")
+    }
+
+    private func setUpReceiptRequest(_ payload: Data,
+                                     _ error: NSError? = nil,
+                                     _ prepaidCardToken: String? = nil) -> StubRequest {
         let response = HyperwalletTestHelper.setUpMockedResponse(payload: payload, error: error)
-        let url = String(format: "%@%@", HyperwalletTestHelper.userRestURL, "/receipts?")
+        let receiptUrl = prepaidCardToken == nil ? "/receipts?":"/prepaid-cards/\(prepaidCardToken!)/receipts?"
+        let url = String(format: "%@%@", HyperwalletTestHelper.userRestURL, receiptUrl)
         return HyperwalletTestHelper.buildGetRequestRegexMatcher(pattern: url, response)
     }
 }

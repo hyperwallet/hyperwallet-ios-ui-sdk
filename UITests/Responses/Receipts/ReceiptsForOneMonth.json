@@ -43,14 +43,7 @@
             "sourceToken": "usr-token",
             "destinationToken": "trm-00000000-0000-0000-0000-0000000000",
             "amount": "5.00",
-            "fee": "2.00",
-            "currency": "USD",
-            "details": {
-                "payeeName": "Shaoyun Yang",
-                "branchId": "026009593",
-                "bankAccountId": "*****5209",
-                "bankAccountPurpose": "CHECKING"
-            }
+            "currency": "USD"
         },
         {
             "journalId": "55176990",
@@ -65,6 +58,25 @@
             "details": {
                 "clientPaymentId": "DyClk0VG6a",
                 "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "3051579",
+            "type": "PAYMENT",
+            "createdOn": "2019-05-03T17:08:58",
+            "entry": "CREDIT",
+            "sourceToken": "act-12345",
+            "destinationToken": "usr-token",
+            "amount": "20.00",
+            "fee": "2.25",
+            "currency": "USD",
+            "details": {
+                "clientPaymentId": "8OxXefx5",
+                "payeeName": "A Person",
+                "website": "https://localhost",
+                "notes": "Sample payment notes",
+                "charityName": "Sample Charity",
+                "checkNumber": "Sample Check Number"
             }
         }
     ],
