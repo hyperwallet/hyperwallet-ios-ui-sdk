@@ -10,7 +10,7 @@ Pod::Spec.new do |spec|
     spec.source                = { :git => 'https://github.com/hyperwallet/hyperwallet-ios-ui-sdk.git', :tag => "#{spec.version}"}
     spec.source_files          = 'Sources/**/*.{swift,h,strings,xib}'
     spec.requires_arc          = true
-    spec.swift_version         = '4.2'
+    spec.swift_version         = '5.0'
     spec.resources             = ['Sources/**/*.xcassets', 'Sources/**/*.ttf']
 
     spec.dependency 'HyperwalletSDK', '1.0.0-beta02'
