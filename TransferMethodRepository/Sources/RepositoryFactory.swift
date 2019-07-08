@@ -28,8 +28,8 @@ public extension RepositoryFactory {
     ///
     /// - Returns: The TransferMethodConfigurationRepository
     func transferMethodConfigurationRepository() -> TransferMethodConfigurationRepository {
-        if let remote = loadObject(RemoteTransferMethodConfigurationRepository.self) {
-            return remote
+        if let instance = loadObject(RemoteTransferMethodConfigurationRepository.self) {
+            return instance
         }
         return registerObject(RemoteTransferMethodConfigurationRepository())
     }
