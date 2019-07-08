@@ -30,7 +30,7 @@ before_install:
   # Update the brew and build dependencies tools
   - brew outdated carthage || brew upgrade carthage
   - Carthage update --platform iOS  --cache-builds
-  - gem i slather --no-ri --no-rdoc
+  - gem i slather
   # Force to update the Swiftlint to the last stable version
   - brew outdated swiftlint || brew upgrade swiftlint
   # Print the booted emulator
