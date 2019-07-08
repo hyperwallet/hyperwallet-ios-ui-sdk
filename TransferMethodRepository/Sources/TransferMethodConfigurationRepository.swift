@@ -16,6 +16,9 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+#if !COCOAPODS
+import Common
+#endif
 import HyperwalletSDK
 
 /// Transfer method configuration repository protocol
@@ -63,16 +66,6 @@ public protocol TransferMethodConfigurationRepository {
     ///   - currencyCode: the 3 letter ISO 4217-1 currency code
     /// - Returns: a list of HyperwalletTransferMethodTypes
     func transferMethodTypes(_ countryCode: String, _ currencyCode: String) -> [HyperwalletTransferMethodType]?
-}
-// MARK: - Result
-//swiftlint:disable missing_docs
-/// The Result enum represents the completionHandler
-///
-/// - success(_ :Success): The success with (Success) object
-/// - failure(_ :HyperwalletErrorType): The failure error with HyperwalletErrorType.
-public enum Result<Success> {
-    case success(Success)
-    case failure(HyperwalletErrorType)
 }
 
 // MARK: - RemoteTransferMethodConfigurationRepository

@@ -129,6 +129,7 @@
 		DBB2B7202261C142006C48D3 /* TransferMethodConfigurationKeysResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBB2B7082261C141006C48D3 /* TransferMethodConfigurationKeysResponse.json */; };
 		DBB2B7262261C142006C48D3 /* BankCardResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBB2B70E2261C141006C48D3 /* BankCardResponse.json */; };
 		DBB2B7272261C142006C48D3 /* AddTransferMethodBankAccountIndividualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB2B70F2261C141006C48D3 /* AddTransferMethodBankAccountIndividualTests.swift */; };
+		DBB7D5B622D3100B00E0B05E /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB7D5B522D3100B00E0B05E /* Result.swift */; };
 		DBCA3806225E892400CD4137 /* HyperwalletUISDK.h in Headers */ = {isa = PBXBuildFile; fileRef = DBCA37F8225E892400CD4137 /* HyperwalletUISDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DBCA385D225E8BAA00CD4137 /* SelectTransferMethodTypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA381C225E8BA900CD4137 /* SelectTransferMethodTypeTableViewController.swift */; };
 		DBCA385F225E8BAA00CD4137 /* CountryCurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA381E225E8BA900CD4137 /* CountryCurrencyCell.swift */; };
@@ -379,6 +380,7 @@
 		DBB2B7082261C141006C48D3 /* TransferMethodConfigurationKeysResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = TransferMethodConfigurationKeysResponse.json; path = Individual/TransferMethodConfigurationKeysResponse.json; sourceTree = "<group>"; };
 		DBB2B70E2261C141006C48D3 /* BankCardResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BankCardResponse.json; sourceTree = "<group>"; };
 		DBB2B70F2261C141006C48D3 /* AddTransferMethodBankAccountIndividualTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodBankAccountIndividualTests.swift; sourceTree = "<group>"; };
+		DBB7D5B522D3100B00E0B05E /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		DBCA37F5225E892400CD4137 /* HyperwalletUISDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HyperwalletUISDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBCA37F8225E892400CD4137 /* HyperwalletUISDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HyperwalletUISDK.h; sourceTree = "<group>"; };
 		DBCA37F9225E892400CD4137 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -776,9 +778,10 @@
 		DBAF92D522D277B9004F197A /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				DBB7D5B422D30FFE00E0B05E /* Model */,
+				DBB7D5B322D30FF500E0B05E /* Repository */,
 				DBAF92D622D277B9004F197A /* Common.h */,
 				DBAF92D722D277B9004F197A /* Info.plist */,
-				DBAF92F422D279FE004F197A /* RepositoryFactory.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -828,6 +831,22 @@
 				DBFB61492261E84C00C4A8AA /* UnexpectedErrorResponse.json */,
 			);
 			path = Responses;
+			sourceTree = "<group>";
+		};
+		DBB7D5B322D30FF500E0B05E /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				DBAF92F422D279FE004F197A /* RepositoryFactory.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		DBB7D5B422D30FFE00E0B05E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DBB7D5B522D3100B00E0B05E /* Result.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		DBCA37EB225E892400CD4137 = {
@@ -1509,6 +1528,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBB7D5B622D3100B00E0B05E /* Result.swift in Sources */,
 				DBAF92F522D279FE004F197A /* RepositoryFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2166,6 +2186,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
 				INFOPLIST_FILE = Common/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -2173,6 +2194,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ios.Common;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -2194,6 +2216,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
 				INFOPLIST_FILE = Common/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -2201,6 +2224,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ios.Common;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -2222,6 +2246,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
 				INFOPLIST_FILE = Common/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -2229,6 +2254,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ios.Common;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -2244,12 +2270,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
 				INFOPLIST_FILE = Common/Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ios.CommonTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2265,12 +2293,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
 				INFOPLIST_FILE = Common/Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ios.CommonTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2286,12 +2316,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
 				INFOPLIST_FILE = Common/Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ios.CommonTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
