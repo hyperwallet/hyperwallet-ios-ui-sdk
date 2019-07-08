@@ -65,7 +65,7 @@ public final class ListReceiptTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: ReceiptTransactionTableViewCell.reuseIdentifier,
                                                  for: indexPath)
         if let listReceiptCell = cell as? ReceiptTransactionTableViewCell {
-            listReceiptCell.configure(configuration: presenter.getCellConfiguration(indexPath: indexPath))
+            listReceiptCell.configure(presenter.getCellConfiguration(indexPath: indexPath))
         }
         return cell
     }
@@ -115,6 +115,7 @@ public final class ListReceiptTableViewController: UITableViewController {
     // MARK: set up list receipt table view
     private func setupListReceiptTableView() {
         tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.sectionFooterHeight = CGFloat.leastNormalMagnitude
         tableView.tableFooterView = UIView()
         tableView.register(ReceiptTransactionTableViewCell.self,
                            forCellReuseIdentifier: ReceiptTransactionTableViewCell.reuseIdentifier)

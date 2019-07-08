@@ -72,58 +72,6 @@ class HyperwalletMockWebServer {
         }
     }
 
-    func setupGraphQLStubs(for profileType: ProfileType) {
-        let filePathKeys = testBundle.path(forResource: profileType.configurationKeyResponse, ofType: "json")
-        let filePathBankField = testBundle.path(forResource: profileType.configurationBankAccountResponse,
-                                                ofType: "json")
-        let filePathCardField = testBundle.path(forResource: profileType.configurationBankCardResponse,
-                                                ofType: "json")
-        let filePathPayPalField = testBundle.path(forResource: profileType.configurationPayPalResponse,
-                                                  ofType: "json")
-        let filePathWireField = testBundle.path(forResource: profileType.configurationWireAccountResponse,
-                                                ofType: "json")
-
-        let fileUrlKeys = URL(fileURLWithPath: filePathKeys!)
-        let fileUrlBankField = URL(fileURLWithPath: filePathBankField!)
-        let fileUrlCardField = URL(fileURLWithPath: filePathCardField!)
-        let fileUrlPayPalField = URL(fileURLWithPath: filePathPayPalField!)
-        let fileUrlWireField = URL(fileURLWithPath: filePathWireField!)
-
-        do {
-            let dataKeys = try Data(contentsOf: fileUrlKeys, options: .uncached)
-            let dataBankField = try Data(contentsOf: fileUrlBankField, options: .uncached)
-            let dataCardField = try Data(contentsOf: fileUrlCardField, options: .uncached)
-            let dataPayPalField = try Data(contentsOf: fileUrlPayPalField, options: .uncached)
-            let dataWireField = try Data(contentsOf: fileUrlWireField, options: .uncached)
-
-            let jsonKeys = dataToJSON(data: dataKeys)
-            let jsonBankField = dataToJSON(data: dataBankField)
-            let jsonCardField = dataToJSON(data: dataCardField)
-            let jsonPayPalField = dataToJSON(data: dataPayPalField)
-            let jsonWireField = dataToJSON(data: dataWireField)
-
-            server.POST["/graphql"] = { request in
-                let requestBody = String(bytes: request.body, encoding: .utf8)!
-                if requestBody.contains("fields") {
-                    if requestBody.contains("BANK_CARD") {
-                        // Update this when correct details are there
-                        return HttpResponse.ok(.json(jsonCardField as AnyObject))
-                    } else if requestBody.contains("PAYPAL_ACCOUNT") {
-                        return HttpResponse.ok(.json(jsonPayPalField as AnyObject))
-                    } else if requestBody.contains("WIRE_ACCOUNT") {
-                        return HttpResponse.ok(.json(jsonWireField as AnyObject))
-                    } else {
-                        return HttpResponse.ok(.json(jsonBankField as AnyObject))
-                    }
-                } else {
-                    return HttpResponse.ok(.json(jsonKeys as AnyObject))
-                }
-            }
-        } catch {
-            print("Error info: \(error)")
-        }
-    }
-
     func setUpEmptyResponse(url: String) {
         let statusCode = 204
         let headers = ["Content-Type": "application/json"]
