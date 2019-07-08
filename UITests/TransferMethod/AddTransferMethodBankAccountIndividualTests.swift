@@ -26,6 +26,7 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
         addTransferMethod = AddTransferMethod(app: app)
+
     }
 
     func testAddTransferMethod_displaysElementsOnTmcResponse() {
