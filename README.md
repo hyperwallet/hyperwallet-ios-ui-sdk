@@ -16,7 +16,7 @@ Note that this SDK is geared towards those who need both backend data and UI fea
 * Set Up your server to manage the user's authentication process on the Hyperwallet platform. See the  [Authentication](#Authentication) section for more information.
 * iOS 10.0+
 * Xcode 10.2+
-* Swift 4.2
+* Swift 5.0
 
 ## Dependencies
 
