@@ -52,5 +52,7 @@
 	</array>
 	<key>USER_TOKEN</key>
 	<string>$(USER_TOKEN)</string>
+	<key>PREPAID_CARD_TOKEN</key>
+	<string>$(PREPAID_CARD_TOKEN)</string>
 </dict>
 </plist>

@@ -175,8 +175,10 @@ class ViewController: UITableViewController {
             navigationController?.pushViewController(viewController, animated: true)
 
         case .prepaidCardReceipts:
+            let prepaidCardToken = Bundle.main.infoDictionary!["PREPAID_CARD_TOKEN"] as! String
             let viewController = HyperwalletUI.shared.listPrepaidCardReceiptTableViewController(
-                "act-68adaba2-42f4-4f0f-8670-81c09f319a12")
+                prepaidCardToken)
+
             navigationController?.pushViewController(viewController, animated: true)
 
         default:
