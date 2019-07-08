@@ -138,7 +138,7 @@ class PrepaidCardListReceiptTests: BaseTests {
         // XCTAssertEqual(transactionDetails.transactionValue.label, "10.00 USD")
     }
 
-    func testPrepadReceiptDetail_verifyDebit() {
+    func testPrepaidReceiptDetail_verifyDebit() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/prepaid-cards/trm-token/receipts",
                              filename: "PrepaidCardReceiptsForOneMonth",
                              method: HTTPMethod.get)
