@@ -78,7 +78,7 @@ class HyperwalletTestHelper {
     /// - Parameter fileName: File Name
     /// - Returns: Data
     static func getDataFromJson(_ fileName: String) -> Data {
-       let path = Bundle(for: self).path(forResource: fileName, ofType: "json")!
+        let path = Bundle(for: self).path(forResource: fileName, ofType: "json")!
         return NSData(contentsOfFile: path)! as Data
     }
 
