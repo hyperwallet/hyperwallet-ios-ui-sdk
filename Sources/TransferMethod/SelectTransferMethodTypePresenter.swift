@@ -19,7 +19,6 @@
 import HyperwalletSDK
 
 #if !COCOAPODS
-import Common
 import TransferMethodRepository
 #endif
 
@@ -56,17 +55,10 @@ final class SelectTransferMethodTypePresenter {
     private (set) var selectedCurrency = ""
 
     private var transferMethodConfigurationRepository: TransferMethodConfigurationRepository {
-        return RepositoryFactory.shared.transferMethodConfigurationRepository()
+        return TransferMethodRepositoryFactory.shared.transferMethodConfigurationRepository()
     }
 
-    private var currencyFromSelectedCountry: [HyperwalletCurrency]? {
-        return transferMethodConfigurationRepository.currencies(selectedCountry)
-    }
-
-    var sectionData: [HyperwalletTransferMethodType] {
-        return transferMethodConfigurationRepository.transferMethodTypes(selectedCountry, selectedCurrency) ??
-            [HyperwalletTransferMethodType]()
-    }
+    var sectionData = [HyperwalletTransferMethodType]()
 
     /// Initialize SelectTransferMethodPresenter
     init(_ view: SelectTransferMethodTypeView) {
@@ -100,15 +92,17 @@ final class SelectTransferMethodTypePresenter {
 
     /// Display all the select Country or Currency based on the index
     func performShowSelectCountryOrCurrencyView(index: Int) {
-        if index == 0 {
-            showSelectCountryView(transferMethodConfigurationRepository.countries())
-        } else {
-            guard !selectedCountry.isEmpty else {
-                view.showAlert(message: "select_a_country_message".localized())
-                return
+        transferMethodConfigurationRepository.getKeys(completion: self.getKeysHandler({ (result) in
+            if index == 0 {
+                self.showSelectCountryView(result.countries())
+            } else {
+                guard !self.selectedCountry.isEmpty else {
+                    self.view.showAlert(message: "select_a_country_message".localized())
+                    return
+                }
+                self.showSelectCurrencyView(result.currencies(from: self.selectedCountry))
             }
-            showSelectCurrencyView(currencyFromSelectedCountry)
-        }
+        }))
     }
 
     /// Loads the transferMethodKeys from core SDK and display the default transfer methods
@@ -134,9 +128,17 @@ final class SelectTransferMethodTypePresenter {
             }
 
             strongSelf.user = result
-            //TODO Review the DispatchQueue after to implement the UserRepository
+
             DispatchQueue.main.async {
-                strongSelf.transferMethodConfigurationRepository.getKeys(completion: strongSelf.getKeysHandler())
+                strongSelf.transferMethodConfigurationRepository
+                    .getKeys(completion: strongSelf.getKeysHandler({ (result) in
+                        strongSelf.countryCurrencySectionData = ["Country", "Currency"]
+                        strongSelf.loadSelectedCountry(result.countries())
+                        strongSelf.loadSelectedCurrency(result.currencies(from: strongSelf.selectedCountry))
+                        strongSelf.loadTransferMethodTypes(
+                            result.transferMethodTypes(countryCode: strongSelf.selectedCountry,
+                                                       currencyCode: strongSelf.selectedCurrency))
+                    }))
             }
         }
     }
@@ -156,7 +158,8 @@ final class SelectTransferMethodTypePresenter {
         return (index == 0 ? selectedCountry.localized() : selectedCurrency)
     }
 
-    private func getKeysHandler() -> (Result<HyperwalletTransferMethodConfigurationKey>) -> Void {
+    private func getKeysHandler(_ completion: @escaping (HyperwalletTransferMethodConfigurationKey) -> Void)
+        -> (Result<HyperwalletTransferMethodConfigurationKey>) -> Void {
         return { [weak self] (result) in
             guard let strongSelf = self else {
                 return
@@ -169,10 +172,7 @@ final class SelectTransferMethodTypePresenter {
                 strongSelf.view.showError(error, { strongSelf.loadTransferMethodKeys() })
 
             case .success(let keyResult):
-                strongSelf.countryCurrencySectionData = ["Country", "Currency"]
-                strongSelf.setSelectedCountry(countries: keyResult.countries())
-                strongSelf.loadSelectedCurrencyValue()
-                strongSelf.reloadTransferMethodTypesIfNeeded()
+                completion(keyResult)
             }
         }
     }
@@ -212,8 +212,14 @@ final class SelectTransferMethodTypePresenter {
                 return
             }
             strongSelf.selectedCountry = country.value
-            strongSelf.loadSelectedCurrencyValue()
-            strongSelf.reloadTransferMethodTypesIfNeeded()
+
+            strongSelf.transferMethodConfigurationRepository
+                .getKeys(completion: strongSelf.getKeysHandler({ (result) in
+                    strongSelf.loadSelectedCurrency(result.currencies(from: strongSelf.selectedCountry))
+                    strongSelf.loadTransferMethodTypes(
+                        result.transferMethodTypes(countryCode: strongSelf.selectedCountry,
+                                                   currencyCode: strongSelf.selectedCurrency))
+            }))
         }
     }
 
@@ -223,8 +229,13 @@ final class SelectTransferMethodTypePresenter {
                 return
             }
             strongSelf.selectedCurrency = currency.value
-            strongSelf.reloadTransferMethodTypesIfNeeded()
-            strongSelf.view.countryCurrencyTableViewReloadData()
+            strongSelf.transferMethodConfigurationRepository
+                .getKeys(completion: strongSelf.getKeysHandler({ (result) in
+                    strongSelf.loadTransferMethodTypes(
+                        result.transferMethodTypes(countryCode: strongSelf.selectedCountry,
+                                                   currencyCode: strongSelf.selectedCurrency))
+                    strongSelf.view.countryCurrencyTableViewReloadData()
+            }))
         }
     }
 
@@ -251,7 +262,7 @@ final class SelectTransferMethodTypePresenter {
         }
     }
 
-    private func setSelectedCountry(countries: [HyperwalletCountry]? ) {
+    private func loadSelectedCountry(_ countries: [HyperwalletCountry]? ) {
         guard let countries = countries else {
             view.showAlert(message: "no_country_available_error_message".localized())
             return
@@ -264,8 +275,8 @@ final class SelectTransferMethodTypePresenter {
         }
     }
 
-    private func loadSelectedCurrencyValue() {
-        guard let firstCurrency = currencyFromSelectedCountry?.min(by: { $0.name < $1.name }) else {
+    private func loadSelectedCurrency(_ currencies: [HyperwalletCurrency]?) {
+        guard let firstCurrency = currencies?.min(by: { $0.name < $1.name }) else {
             view.showAlert(message: String(format: "no_currency_available_error_message".localized(),
                                            selectedCountry.localized()))
             selectedCurrency = ""
@@ -276,13 +287,16 @@ final class SelectTransferMethodTypePresenter {
         view.countryCurrencyTableViewReloadData()
     }
 
-    private func reloadTransferMethodTypesIfNeeded() {
-        guard !sectionData.isEmpty else {
-            view.showAlert(message: String(format: "no_transfer_method_available_error_message".localized(),
-                                           selectedCountry,
-                                           selectedCurrency))
-            return
+    private func loadTransferMethodTypes(_ transferMethodTypes: [HyperwalletTransferMethodType]?) {
+        guard let transferMethodTypes = transferMethodTypes, transferMethodTypes.isNotEmpty()  else {
+                sectionData = [HyperwalletTransferMethodType]()
+                view.showAlert(message: String(format: "no_transfer_method_available_error_message".localized(),
+                                               selectedCountry,
+                                               selectedCurrency))
+                return
         }
+
+        sectionData = transferMethodTypes
         view.transferMethodTypeTableViewReloadData()
     }
 }

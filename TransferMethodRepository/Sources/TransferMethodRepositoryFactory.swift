@@ -16,17 +16,17 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+import HyperwalletSDK
 
-/// The RepositoryFactory is singleton object to access the common repositories
-public final class RepositoryFactory {
-    private static var instance: RepositoryFactory?
-    private var objectPool = [String: Any]()
+/// The extension of RepositoryFactory with the TransferMethodConfigurationRepository feature
+public final class TransferMethodRepositoryFactory {
+    private static var instance: TransferMethodRepositoryFactory?
+    private let remoteTransferMethodConfigurationRepository: TransferMethodConfigurationRepository
 
     /// Returns the previously initialized instance of the RepositoryFactory object
-    public static var shared: RepositoryFactory {
+    public static var shared: TransferMethodRepositoryFactory {
         guard let instance = instance else {
-            self.instance = RepositoryFactory()
+            self.instance = TransferMethodRepositoryFactory()
             return self.instance!
         }
         return instance
@@ -37,22 +37,14 @@ public final class RepositoryFactory {
         instance = nil
     }
 
-    private init() { }
-
-    /// Registers the repository instance in cache
-    ///
-    /// - Parameter object: The object will be cached
-    public func registerObject<T>(_ object: T) -> T {
-        objectPool[String(describing: T.self)] = object
-        return object
+    private init() {
+        remoteTransferMethodConfigurationRepository = RemoteTransferMethodConfigurationRepository()
     }
 
-    /// Loads the repository from cache
+    /// Gets an instance of transfer method configuration repository.
     ///
-    /// - Parameter object:
-    /// - Returns: the object
-    public func loadObject<T>(_ classType: T.Type) -> T? {
-        let className = String(describing: T.self)
-        return objectPool[className] as? T
+    /// - Returns: The TransferMethodConfigurationRepository
+    public func transferMethodConfigurationRepository() -> TransferMethodConfigurationRepository {
+        return remoteTransferMethodConfigurationRepository
     }
 }

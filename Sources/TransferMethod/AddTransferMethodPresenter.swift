@@ -18,7 +18,6 @@
 
 import HyperwalletSDK
 #if !COCOAPODS
-import Common
 import TransferMethodRepository
 #endif
 
@@ -48,7 +47,7 @@ final class AddTransferMethodPresenter {
     var sectionData = [AddTransferMethodSectionData]()
 
     var transferMethodConfigurationRepository: TransferMethodConfigurationRepository {
-        return RepositoryFactory.shared.transferMethodConfigurationRepository()
+        return TransferMethodRepositoryFactory.shared.transferMethodConfigurationRepository()
     }
 
     init(_ view: AddTransferMethodView,

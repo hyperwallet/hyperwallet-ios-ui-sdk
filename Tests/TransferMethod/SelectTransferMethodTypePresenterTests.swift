@@ -101,6 +101,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
         presenter.loadTransferMethodKeys(true)
         wait(for: [expectation], timeout: 1)
 
+        mockView.ignoreXCTestExpectation = true
         presenter.performShowSelectCountryOrCurrencyView(index: countryIndex)
 
         presenter.performShowSelectCountryOrCurrencyView(index: currencyIndex)
@@ -160,6 +161,7 @@ class MockSelectTransferMethodTypeView: SelectTransferMethodTypeView {
     var isShowErrorPerformed = false
     var isTransferMethodTypeTableViewReloadDataPerformed = false
     var isCountryCurrencyTableViewReloadDataPerformed = false
+    var ignoreXCTestExpectation = false
 
     var expectation: XCTestExpectation?
 
@@ -172,6 +174,7 @@ class MockSelectTransferMethodTypeView: SelectTransferMethodTypeView {
         isShowErrorPerformed = false
         isTransferMethodTypeTableViewReloadDataPerformed = false
         isCountryCurrencyTableViewReloadDataPerformed = false
+        ignoreXCTestExpectation = false
 
         expectation = nil
     }
@@ -220,7 +223,10 @@ class MockSelectTransferMethodTypeView: SelectTransferMethodTypeView {
 
     func hideLoading() {
         isHideLoadingPerformed = true
-        expectation?.fulfill()
+
+        if !ignoreXCTestExpectation {
+            expectation?.fulfill()
+        }
     }
 
     func transferMethodTypeTableViewReloadData() {

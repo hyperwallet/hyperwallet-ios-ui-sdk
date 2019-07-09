@@ -16,24 +16,10 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#if !COCOAPODS
-import Common
-#endif
 import HyperwalletSDK
 
 /// Transfer method configuration repository protocol
 public protocol TransferMethodConfigurationRepository {
-    /// Gets the list of countries
-    ///
-    /// - Returns: a list of HyperwalletCountry object
-    func countries() -> [HyperwalletCountry]?
-
-    /// Gets the list of currencies
-    ///
-    /// - Parameter countryCode: the 2 letter ISO 3166-1 country code
-    /// - Returns: a list of HyperwalletCurrency object
-    func currencies(_ countryCode: String) -> [HyperwalletCurrency]?
-
     ///  Gets the transfer method fields based on the parameters
     ///
     /// - Parameters:
@@ -58,14 +44,6 @@ public protocol TransferMethodConfigurationRepository {
 
     /// Refreshes the transfer method keys
     func refreshKeys()
-
-    /// Gets the list of transfer method types
-    ///
-    /// - Parameters:
-    ///   - countryCode: the 2 letter ISO 3166-1 country code
-    ///   - currencyCode: the 3 letter ISO 4217-1 currency code
-    /// - Returns: a list of HyperwalletTransferMethodTypes
-    func transferMethodTypes(_ countryCode: String, _ currencyCode: String) -> [HyperwalletTransferMethodType]?
 }
 
 // MARK: - RemoteTransferMethodConfigurationRepository
@@ -73,14 +51,6 @@ public final class RemoteTransferMethodConfigurationRepository: TransferMethodCo
     private var transferMethodConfigurationFieldsCache =
         [HyperwalletTransferMethodConfigurationFieldQuery: HyperwalletTransferMethodConfigurationField]()
     private var transferMethodConfigurationKeys: HyperwalletTransferMethodConfigurationKey?
-
-    public func countries() -> [HyperwalletCountry]? {
-        return transferMethodConfigurationKeys?.countries()
-    }
-
-    public func currencies(_ countryCode: String) -> [HyperwalletCurrency]? {
-        return transferMethodConfigurationKeys?.currencies(from: countryCode)
-    }
 
     public func getFields(_ country: String,
                           _ currency: String,
@@ -94,26 +64,21 @@ public final class RemoteTransferMethodConfigurationRepository: TransferMethodCo
             profile: transferMethodProfileType
         )
         guard let transferMethodConfigurationFields = transferMethodConfigurationFieldsCache[fieldsQuery] else {
-            print("getFields from Endpoint")
             Hyperwallet.shared
                 .retrieveTransferMethodConfigurationFields(request: fieldsQuery,
                                                            completion: getFieldsHandler(fieldsQuery, completion))
             return
         }
-
-        print("getFields from cache")
         completion(.success(transferMethodConfigurationFields))
     }
 
     public func getKeys(completion: @escaping (Result<HyperwalletTransferMethodConfigurationKey>) -> Void) {
         guard let transferMethodConfigurationKeys = transferMethodConfigurationKeys else {
-            print("getKeys from Endpoint")
             Hyperwallet.shared
                 .retrieveTransferMethodConfigurationKeys(request: HyperwalletTransferMethodConfigurationKeysQuery(),
                                                          completion: getKeysHandler(completion))
             return
         }
-        print("getKeys from cache")
         completion(.success(transferMethodConfigurationKeys))
     }
 
@@ -124,11 +89,6 @@ public final class RemoteTransferMethodConfigurationRepository: TransferMethodCo
 
     public func refreshKeys() {
         transferMethodConfigurationKeys = nil
-    }
-
-    public func transferMethodTypes(_ countryCode: String, _ currencyCode: String) -> [HyperwalletTransferMethodType]? {
-        return transferMethodConfigurationKeys?.transferMethodTypes(countryCode: countryCode,
-                                                                    currencyCode: currencyCode)
     }
 
     private func getKeysHandler(
