@@ -132,6 +132,8 @@
 		DBB2B7202261C142006C48D3 /* TransferMethodConfigurationKeysResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBB2B7082261C141006C48D3 /* TransferMethodConfigurationKeysResponse.json */; };
 		DBB2B7262261C142006C48D3 /* BankCardResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBB2B70E2261C141006C48D3 /* BankCardResponse.json */; };
 		DBB2B7272261C142006C48D3 /* AddTransferMethodBankAccountIndividualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB2B70F2261C141006C48D3 /* AddTransferMethodBankAccountIndividualTests.swift */; };
+		DBC8404422D463CA00178B64 /* HyperwalletCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC8404322D463CA00178B64 /* HyperwalletCountry.swift */; };
+		DBC8404622D4655C00178B64 /* HyperwalletCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC8404522D4655C00178B64 /* HyperwalletCurrency.swift */; };
 		DBCA3806225E892400CD4137 /* HyperwalletUISDK.h in Headers */ = {isa = PBXBuildFile; fileRef = DBCA37F8225E892400CD4137 /* HyperwalletUISDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DBCA385D225E8BAA00CD4137 /* SelectTransferMethodTypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA381C225E8BA900CD4137 /* SelectTransferMethodTypeTableViewController.swift */; };
 		DBCA385F225E8BAA00CD4137 /* CountryCurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA381E225E8BA900CD4137 /* CountryCurrencyCell.swift */; };
@@ -348,6 +350,8 @@
 		DBB2B70E2261C141006C48D3 /* BankCardResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BankCardResponse.json; sourceTree = "<group>"; };
 		DBB2B70F2261C141006C48D3 /* AddTransferMethodBankAccountIndividualTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodBankAccountIndividualTests.swift; sourceTree = "<group>"; };
 		DBB7D5B522D3100B00E0B05E /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		DBC8404322D463CA00178B64 /* HyperwalletCountry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletCountry.swift; sourceTree = "<group>"; };
+		DBC8404522D4655C00178B64 /* HyperwalletCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletCurrency.swift; sourceTree = "<group>"; };
 		DBCA37F5225E892400CD4137 /* HyperwalletUISDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HyperwalletUISDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBCA37F8225E892400CD4137 /* HyperwalletUISDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HyperwalletUISDK.h; sourceTree = "<group>"; };
 		DBCA37F9225E892400CD4137 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -853,6 +857,8 @@
 				DBCA383A225E8BA900CD4137 /* UIViewController.swift */,
 				9826056722822E8A000CCA2D /* UIToolbar.swift */,
 				988547CF22970FA1007B312C /* Date.swift */,
+				DBC8404322D463CA00178B64 /* HyperwalletCountry.swift */,
+				DBC8404522D4655C00178B64 /* HyperwalletCurrency.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1384,6 +1390,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBC8404422D463CA00178B64 /* HyperwalletCountry.swift in Sources */,
 				DBCA3866225E8BAA00CD4137 /* SelectTransferMethodTypePresenter.swift in Sources */,
 				DB4679BF2261083F00E1AF49 /* UIFont.swift in Sources */,
 				4A22F1EA22A67FE400D58883 /* ReceiptNotesTableViewCell.swift in Sources */,
@@ -1417,6 +1424,7 @@
 				DBCA387F225E8BAA00CD4137 /* HyperwalletIconContent.swift in Sources */,
 				DBCA3882225E8BAA00CD4137 /* HyperwalletUtilViews.swift in Sources */,
 				DBCA3875225E8BAA00CD4137 /* Notification.swift in Sources */,
+				DBC8404622D4655C00178B64 /* HyperwalletCurrency.swift in Sources */,
 				DBCA387A225E8BAA00CD4137 /* UIViewController.swift in Sources */,
 				DBCA3874225E8BAA00CD4137 /* HyperwalletFee.swift in Sources */,
 				DBCA3862225E8BAA00CD4137 /* ListTransferMethodTableViewCell.swift in Sources */,

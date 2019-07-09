@@ -242,7 +242,7 @@ final class SelectTransferMethodTypePresenter {
     private func filterContentHandler() -> SelectTransferMethodTypeView.FilterContentHandler {
         return {(items, searchText) in
             items.filter {
-                // search by decription
+                // search by description
                 $0.title.lowercased().contains(searchText.lowercased()) ||
                     //or code
                     $0.value.lowercased().contains(searchText.lowercased())
@@ -298,27 +298,5 @@ final class SelectTransferMethodTypePresenter {
 
         sectionData = transferMethodTypes
         view.transferMethodTypeTableViewReloadData()
-    }
-}
-
-// MARK: - HyperwalletCountry
-extension HyperwalletCountry: GenericCellConfiguration {
-    var title: String {
-        return name
-    }
-
-    var value: String {
-        return code
-    }
-}
-
-// MARK: - HyperwalletCountry
-extension HyperwalletCurrency: GenericCellConfiguration {
-    var title: String {
-        return name
-    }
-
-    var value: String {
-        return code
     }
 }

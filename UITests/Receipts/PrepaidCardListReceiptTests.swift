@@ -35,7 +35,11 @@ class PrepaidCardListReceiptTests: BaseTests {
         verifyCellLabels(with: "Funds Deposit", createdOn: "Jun 20, 2019", amount: "10.00", currency: "USD", by: 0)
         verifyCellLabels(with: "Funds Deposit", createdOn: "Jun 21, 2019", amount: "20.00", currency: "USD", by: 1)
         verifyCellLabels(with: "Balance Adjustment", createdOn: "Jun 23, 2019", amount: "-7.00", currency: "USD", by: 2)
-        verifyCellLabels(with: "Balance Adjustment", createdOn: "Jun 24, 2019", amount: "-500.99", currency: "USD", by: 3)
+        verifyCellLabels(with: "Balance Adjustment",
+                         createdOn: "Jun 24, 2019",
+                         amount: "-500.99",
+                         currency: "USD",
+                         by: 3)
     }
 
     func testReceiptsList_verifyPrepaidCardReceiptsSectionHeaders() {
@@ -218,7 +222,11 @@ class PrepaidCardListReceiptTests: BaseTests {
     }
 
     // MARK: helper functions
-    private func verifyCellLabels(with type: String, createdOn: String, amount: String, currency: String, by index: Int) {
+    private func verifyCellLabels(with type: String,
+                                  createdOn: String,
+                                  amount: String,
+                                  currency: String,
+                                  by index: Int) {
         let row = app.tables.element.children(matching: .cell).element(boundBy: index)
         XCTAssertEqual(type, row.staticTexts["receiptTransactionTypeLabel"].label)
         XCTAssertEqual(createdOn, row.staticTexts["receiptTransactionCreatedOnLabel"].label)
