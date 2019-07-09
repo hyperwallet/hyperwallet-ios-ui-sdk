@@ -739,8 +739,8 @@
 			isa = PBXGroup;
 			children = (
 				DB4BDFCE22D3F46F00761710 /* Responses */,
-				DBAF922B22CDBF79004F197A /* RemoteTransferMethodConfigurationRepositoryTests.swift */,
 				DBAF92AC22CFCBC7004F197A /* Info.plist */,
+				DBAF922B22CDBF79004F197A /* RemoteTransferMethodConfigurationRepositoryTests.swift */,
 				DB4BDFDE22D40B2B00761710 /* TransferMethodRepositoryFactoryTests.swift */,
 			);
 			path = Tests;
@@ -842,6 +842,9 @@
 		DBCA382E225E8BA900CD4137 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				988547CF22970FA1007B312C /* Date.swift */,
+				DBC8404322D463CA00178B64 /* HyperwalletCountry.swift */,
+				DBC8404522D4655C00178B64 /* HyperwalletCurrency.swift */,
 				DBCA3834225E8BA900CD4137 /* HyperwalletFee.swift */,
 				4A6D7703228D805C008355C8 /* HyperwalletTransferMethodType.swift */,
 				DBCA3835225E8BA900CD4137 /* Notification.swift */,
@@ -853,12 +856,9 @@
 				DB4679BE2261083F00E1AF49 /* UIFont.swift */,
 				DBCA3839225E8BA900CD4137 /* UIImage.swift */,
 				DBCA383B225E8BA900CD4137 /* UINavigationController.swift */,
+				9826056722822E8A000CCA2D /* UIToolbar.swift */,
 				DBCA3831225E8BA900CD4137 /* UIView.swift */,
 				DBCA383A225E8BA900CD4137 /* UIViewController.swift */,
-				9826056722822E8A000CCA2D /* UIToolbar.swift */,
-				988547CF22970FA1007B312C /* Date.swift */,
-				DBC8404322D463CA00178B64 /* HyperwalletCountry.swift */,
-				DBC8404522D4655C00178B64 /* HyperwalletCurrency.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
