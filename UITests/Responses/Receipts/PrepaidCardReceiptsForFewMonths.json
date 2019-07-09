@@ -1,0 +1,61 @@
+
+{
+    "data": [
+        {
+            "journalId": "FISVL_5269000",
+            "type": "DEPOSIT",
+            "createdOn": "2019-04-20T21:23:51",
+            "entry": "CREDIT",
+            "destinationToken": "trm-abc123",
+            "amount": "10.00",
+            "currency": "USD",
+            "details": {
+                "cardNumber": "************6198"
+            }
+        },
+        {
+            "journalId": "FISVL_5269003",
+            "type": "DEPOSIT",
+            "createdOn": "2019-04-25T21:24:02",
+            "entry": "CREDIT",
+            "destinationToken": "trm-abc456",
+            "amount": "20.00",
+            "currency": "USD",
+            "details": {
+                "cardNumber": "************6198"
+            }
+        },
+        {
+            "journalId": "FISA_5269017",
+            "type": "ADJUSTMENT",
+            "createdOn": "2019-05-23T21:25:09",
+            "entry": "DEBIT",
+            "sourceToken": "trm-def567",
+            "amount": "7.00",
+            "currency": "USD",
+            "details": {
+                "cardNumber": "************6198"
+            }
+        },
+        {
+            "journalId": "FISA_5269024",
+            "type": "ADJUSTMENT",
+            "createdOn": "2019-06-24T21:25:23",
+            "entry": "DEBIT",
+            "sourceToken": "trm-ghj234",
+            "amount": "500.99",
+            "currency": "USD",
+            "details": {
+                "cardNumber": "************6198"
+            }
+        }
+    ],
+    "links": [
+        {
+            "params": {
+                "rel": "self"
+            },
+            "href": "https://localhost/rest/v3/users/usr-token/prepaid-cards/trm-token/receipts"
+        }
+    ]
+}
