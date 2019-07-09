@@ -165,7 +165,7 @@ class ListReceiptTests: BaseTests {
         verifyDetailSection(receiptIdVal: "55176992", dateVal: expectedDateValue, clientIdVal: "DyClk0VG9a")
 
         // FEE Section
-        verifyFeeSection(amountVal: "6.00 USD", feeVal: "0.00 USD", transactionVal: "6.00 USD")
+        verifyFeeSection(amountVal: "6.00 USD", feeVal: nil, transactionVal: "6.00 USD")
     }
 
     // Debit Transaction
@@ -260,14 +260,17 @@ class ListReceiptTests: BaseTests {
     }
 
     // FEE section verification
-    private func verifyFeeSection(amountVal: String, feeVal: String, transactionVal: String) {
+    private func verifyFeeSection(amountVal: String, feeVal: String?, transactionVal: String) {
         XCTAssertEqual(transactionDetails.feeSection.label, "Fee Specification")
         XCTAssertEqual(transactionDetails.amountLabel.label, "Amount:")
-        XCTAssertEqual(transactionDetails.feeLabel.label, "Fee:")
         XCTAssertEqual(transactionDetails.transactionLabel.label, "Transaction:")
 
         XCTAssertEqual(transactionDetails.amountValue.label, amountVal)
-        XCTAssertEqual(transactionDetails.feeValue.label, feeVal)
         XCTAssertEqual(transactionDetails.transactionValue.label, transactionVal)
+
+        if let feeVal = feeVal {
+            XCTAssertEqual(transactionDetails.feeLabel.label, "Fee:")
+            XCTAssertEqual(transactionDetails.feeValue.label, feeVal)
+        }
     }
 }

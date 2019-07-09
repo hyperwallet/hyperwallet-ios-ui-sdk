@@ -113,10 +113,13 @@ struct ReceiptDetailSectionFeeData: ReceiptDetailSectionData {
                                      field: "amount"))
         var fee: Double = 0.0
         if let strFee = receipt.fee {
-            rows.append(ReceiptDetailRow(title: "receipt_details_fee".localized(),
-                                         value: String(format: valueCurrencyFormat, strFee, receipt.currency),
-                                         field: "fee"))
             fee = Double(strFee) ?? 0.0
+
+            if fee != 0.0 {
+                rows.append(ReceiptDetailRow(title: "receipt_details_fee".localized(),
+                                             value: String(format: valueCurrencyFormat, strFee, receipt.currency),
+                                             field: "fee"))
+            }
         }
         if let amount = Double(receipt.amount) {
             let transaction: Double = amount - fee
