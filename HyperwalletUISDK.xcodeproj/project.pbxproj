@@ -103,7 +103,6 @@
 		DB4679992260386D00E1AF49 /* IntegratorAuthenticationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4679982260386D00E1AF49 /* IntegratorAuthenticationProvider.swift */; };
 		DB4679BF2261083F00E1AF49 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4679BE2261083F00E1AF49 /* UIFont.swift */; };
 		DB4679C3226113D100E1AF49 /* HyperwalletBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4679C2226113D100E1AF49 /* HyperwalletBundle.swift */; };
-		DB4BDFCC22D3E43D00761710 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB7D5B522D3100B00E0B05E /* Result.swift */; };
 		DB4BDFD622D3FE3000761710 /* TransferMethodConfigurationFieldsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 078B456D2273895C005B0248 /* TransferMethodConfigurationFieldsResponse.json */; };
 		DB4BDFD822D3FE4E00761710 /* TransferMethodConfigurationKeysOnlyPaypalAccountUsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DB4BDFD722D3FE4E00761710 /* TransferMethodConfigurationKeysOnlyPaypalAccountUsResponse.json */; };
 		DB4BDFDB22D4044400761710 /* TransferMethodConfigurationFieldsOnlyPaypalAccountUsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DB4BDFD922D4026600761710 /* TransferMethodConfigurationFieldsOnlyPaypalAccountUsResponse.json */; };
@@ -349,7 +348,6 @@
 		DBB2B7082261C141006C48D3 /* TransferMethodConfigurationKeysResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = TransferMethodConfigurationKeysResponse.json; path = Individual/TransferMethodConfigurationKeysResponse.json; sourceTree = "<group>"; };
 		DBB2B70E2261C141006C48D3 /* BankCardResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BankCardResponse.json; sourceTree = "<group>"; };
 		DBB2B70F2261C141006C48D3 /* AddTransferMethodBankAccountIndividualTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodBankAccountIndividualTests.swift; sourceTree = "<group>"; };
-		DBB7D5B522D3100B00E0B05E /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		DBC8404322D463CA00178B64 /* HyperwalletCountry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletCountry.swift; sourceTree = "<group>"; };
 		DBC8404522D4655C00178B64 /* HyperwalletCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletCurrency.swift; sourceTree = "<group>"; };
 		DBCA37F5225E892400CD4137 /* HyperwalletUISDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HyperwalletUISDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -690,14 +688,6 @@
 			path = Demo;
 			sourceTree = "<group>";
 		};
-		DB4BDFCD22D3E44700761710 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				DBB7D5B522D3100B00E0B05E /* Result.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		DB4BDFCE22D3F46F00761710 /* Responses */ = {
 			isa = PBXGroup;
 			children = (
@@ -726,7 +716,6 @@
 		DBAF929E22CFCBC7004F197A /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				DB4BDFCD22D3E44700761710 /* Model */,
 				DB80BF9D22CD14F300BA5EED /* TransferMethodRepositoryFactory.swift */,
 				DB80BF9B22CD14D700BA5EED /* TransferMethodConfigurationRepository.swift */,
 				DBAF929F22CFCBC7004F197A /* TransferMethodRepository.h */,
@@ -779,14 +768,14 @@
 		DBCA37EB225E892400CD4137 = {
 			isa = PBXGroup;
 			children = (
-				DBAF929722CFCB87004F197A /* TransferMethodRepository */,
+				DB4679832260380C00E1AF49 /* Demo */,
 				DBD2667F2261A601002973C3 /* Deployment */,
-				DB18E9EE2261BA29004F6AC3 /* Tests */,
-				DB2587FC2261BFF100E6236B /* UITests */,
 				DBAE17C0225F136A00C5CC60 /* Frameworks */,
 				DBCA37F6225E892400CD4137 /* Products */,
 				DBCA37F7225E892400CD4137 /* Sources */,
-				DB4679832260380C00E1AF49 /* Demo */,
+				DB18E9EE2261BA29004F6AC3 /* Tests */,
+				DBAF929722CFCB87004F197A /* TransferMethodRepository */,
+				DB2587FC2261BFF100E6236B /* UITests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1369,7 +1358,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB4BDFCC22D3E43D00761710 /* Result.swift in Sources */,
 				DBAF92B822CFCE48004F197A /* TransferMethodRepositoryFactory.swift in Sources */,
 				DBAF92B622CFCE3C004F197A /* TransferMethodConfigurationRepository.swift in Sources */,
 			);
@@ -1872,7 +1860,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ios.TransferMethodRepository;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1902,7 +1890,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ios.TransferMethodRepository;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = XCUITest;
@@ -1932,7 +1920,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ios.TransferMethodRepository;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -1954,7 +1942,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ios.TransferMethodRepositoryTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1976,7 +1964,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ios.TransferMethodRepositoryTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = XCUITest;
@@ -1998,7 +1986,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ios.TransferMethodRepositoryTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

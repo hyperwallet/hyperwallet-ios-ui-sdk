@@ -27,17 +27,19 @@ public protocol TransferMethodConfigurationRepository {
     ///   - currency: the 3 letter ISO 4217-1 currency code
     ///   - transferMethodType: the `TransferMethodType`
     ///   - transferMethodProfileType:`INDIVIDUAL` or `BUSINESS`
-    ///   - completion:
-    func getFields(_ country: String,
-                   _ currency: String,
-                   _ transferMethodType: String,
-                   _ transferMethodProfileType: String,
-                   completion: @escaping (Result<HyperwalletTransferMethodConfigurationField>) -> Void)
+    ///   - completion: the callback handler of responses from the Hyperwallet platform
+    func getFields(
+        _ country: String,
+        _ currency: String,
+        _ transferMethodType: String,
+        _ transferMethodProfileType: String,
+        completion: @escaping (Result<HyperwalletTransferMethodConfigurationField?, HyperwalletErrorType>) -> Void)
 
     /// Gets the transfer method configuration keys
     ///
     /// - Parameter completion: the callback handler of responses from the Hyperwallet platform
-    func getKeys(completion: @escaping (Result<HyperwalletTransferMethodConfigurationKey>) -> Void)
+    func getKeys(
+        completion: @escaping (Result<HyperwalletTransferMethodConfigurationKey?, HyperwalletErrorType>) -> Void)
 
     /// Refreshes the transfer method fields
     func refreshFields()
@@ -52,11 +54,12 @@ public final class RemoteTransferMethodConfigurationRepository: TransferMethodCo
         [HyperwalletTransferMethodConfigurationFieldQuery: HyperwalletTransferMethodConfigurationField]()
     private var transferMethodConfigurationKeys: HyperwalletTransferMethodConfigurationKey?
 
-    public func getFields(_ country: String,
-                          _ currency: String,
-                          _ transferMethodType: String,
-                          _ transferMethodProfileType: String,
-                          completion: @escaping (Result<HyperwalletTransferMethodConfigurationField>) -> Void) {
+    public func getFields(
+        _ country: String,
+        _ currency: String,
+        _ transferMethodType: String,
+        _ transferMethodProfileType: String,
+        completion: @escaping (Result<HyperwalletTransferMethodConfigurationField?, HyperwalletErrorType>) -> Void) {
         let fieldsQuery = HyperwalletTransferMethodConfigurationFieldQuery(
             country: country,
             currency: currency,
@@ -72,7 +75,8 @@ public final class RemoteTransferMethodConfigurationRepository: TransferMethodCo
         completion(.success(transferMethodConfigurationFields))
     }
 
-    public func getKeys(completion: @escaping (Result<HyperwalletTransferMethodConfigurationKey>) -> Void) {
+    public func getKeys(
+        completion: @escaping (Result<HyperwalletTransferMethodConfigurationKey?, HyperwalletErrorType>) -> Void) {
         guard let transferMethodConfigurationKeys = transferMethodConfigurationKeys else {
             Hyperwallet.shared
                 .retrieveTransferMethodConfigurationKeys(request: HyperwalletTransferMethodConfigurationKeysQuery(),
@@ -92,7 +96,7 @@ public final class RemoteTransferMethodConfigurationRepository: TransferMethodCo
     }
 
     private func getKeysHandler(
-        _ completion: @escaping (Result<HyperwalletTransferMethodConfigurationKey>) -> Void)
+        _ completion: @escaping (Result<HyperwalletTransferMethodConfigurationKey?, HyperwalletErrorType>) -> Void)
         -> (HyperwalletTransferMethodConfigurationKey?, HyperwalletErrorType?) -> Void {
         return { [weak self] (result, error) in
             guard let strongSelf = self else {
@@ -103,31 +107,31 @@ public final class RemoteTransferMethodConfigurationRepository: TransferMethodCo
         }
     }
 
-    private func getFieldsHandler(_ fieldQuery: HyperwalletTransferMethodConfigurationFieldQuery,
-                                  _ completion: @escaping (Result<HyperwalletTransferMethodConfigurationField>) -> Void)
+    private func getFieldsHandler(
+        _ fieldQuery: HyperwalletTransferMethodConfigurationFieldQuery,
+        _ completion: @escaping (Result<HyperwalletTransferMethodConfigurationField?, HyperwalletErrorType>) -> Void)
         -> (HyperwalletTransferMethodConfigurationField?, HyperwalletErrorType?) -> Void {
-            return { [weak self] (result, error) in
-                guard let strongSelf = self else {
-                    return
-                }
-
-                strongSelf.transferMethodConfigurationFieldsCache[fieldQuery] = strongSelf
-                    .performCompletion(error,
-                                       result,
-                                       completion,
-                                       strongSelf.transferMethodConfigurationFieldsCache[fieldQuery])
+        return { [weak self] (result, error) in
+            guard let strongSelf = self else {
+                return
             }
+            strongSelf.transferMethodConfigurationFieldsCache[fieldQuery] = strongSelf
+                .performCompletion(error,
+                                   result,
+                                   completion,
+                                   strongSelf.transferMethodConfigurationFieldsCache[fieldQuery])
+        }
     }
 
     private func performCompletion<T>(_ error: HyperwalletErrorType?,
                                       _ result: T?,
-                                      _ completionHandler: @escaping (Result<T>) -> Void,
+                                      _ completionHandler: @escaping (Result<T?, HyperwalletErrorType>) -> Void,
                                       _ repositoryOriginalValue: T?) -> T? {
         if let error = error {
             DispatchQueue.main.async {
                 completionHandler(.failure(error))
             }
-        } else if let result = result {
+        } else {
             DispatchQueue.main.async {
                 completionHandler(.success(result))
             }

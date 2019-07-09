@@ -94,13 +94,13 @@ final class SelectTransferMethodTypePresenter {
     func performShowSelectCountryOrCurrencyView(index: Int) {
         transferMethodConfigurationRepository.getKeys(completion: self.getKeysHandler({ (result) in
             if index == 0 {
-                self.showSelectCountryView(result.countries())
+                self.showSelectCountryView(result?.countries())
             } else {
                 guard !self.selectedCountry.isEmpty else {
                     self.view.showAlert(message: "select_a_country_message".localized())
                     return
                 }
-                self.showSelectCurrencyView(result.currencies(from: self.selectedCountry))
+                self.showSelectCurrencyView(result?.currencies(from: self.selectedCountry))
             }
         }))
     }
@@ -133,12 +133,12 @@ final class SelectTransferMethodTypePresenter {
                 strongSelf.transferMethodConfigurationRepository
                     .getKeys(completion: strongSelf.getKeysHandler({ (result) in
                         strongSelf.countryCurrencySectionData = ["Country", "Currency"]
-                        strongSelf.loadSelectedCountry(result.countries())
-                        strongSelf.loadSelectedCurrency(result.currencies(from: strongSelf.selectedCountry))
+                        strongSelf.loadSelectedCountry(result?.countries())
+                        strongSelf.loadSelectedCurrency(result?.currencies(from: strongSelf.selectedCountry))
                         strongSelf.loadTransferMethodTypes(
-                            result.transferMethodTypes(countryCode: strongSelf.selectedCountry,
-                                                       currencyCode: strongSelf.selectedCurrency))
-                    }))
+                            result?.transferMethodTypes(countryCode: strongSelf.selectedCountry,
+                                                        currencyCode: strongSelf.selectedCurrency))
+                    }, { strongSelf.loadTransferMethodKeys() }))
             }
         }
     }
@@ -158,8 +158,10 @@ final class SelectTransferMethodTypePresenter {
         return (index == 0 ? selectedCountry.localized() : selectedCurrency)
     }
 
-    private func getKeysHandler(_ completion: @escaping (HyperwalletTransferMethodConfigurationKey) -> Void)
-        -> (Result<HyperwalletTransferMethodConfigurationKey>) -> Void {
+    private func getKeysHandler(
+        _ successHandler: @escaping ((HyperwalletTransferMethodConfigurationKey?) -> Void),
+        _ failureHandler: (() -> Void)? = nil)
+        -> (Result<HyperwalletTransferMethodConfigurationKey?, HyperwalletErrorType>) -> Void {
         return { [weak self] (result) in
             guard let strongSelf = self else {
                 return
@@ -169,10 +171,10 @@ final class SelectTransferMethodTypePresenter {
 
             switch result {
             case .failure(let error):
-                strongSelf.view.showError(error, { strongSelf.loadTransferMethodKeys() })
+                strongSelf.view.showError(error, failureHandler)
 
             case .success(let keyResult):
-                completion(keyResult)
+                successHandler(keyResult)
             }
         }
     }
@@ -215,10 +217,10 @@ final class SelectTransferMethodTypePresenter {
 
             strongSelf.transferMethodConfigurationRepository
                 .getKeys(completion: strongSelf.getKeysHandler({ (result) in
-                    strongSelf.loadSelectedCurrency(result.currencies(from: strongSelf.selectedCountry))
+                    strongSelf.loadSelectedCurrency(result?.currencies(from: strongSelf.selectedCountry))
                     strongSelf.loadTransferMethodTypes(
-                        result.transferMethodTypes(countryCode: strongSelf.selectedCountry,
-                                                   currencyCode: strongSelf.selectedCurrency))
+                        result?.transferMethodTypes(countryCode: strongSelf.selectedCountry,
+                                                    currencyCode: strongSelf.selectedCurrency))
             }))
         }
     }
@@ -232,8 +234,8 @@ final class SelectTransferMethodTypePresenter {
             strongSelf.transferMethodConfigurationRepository
                 .getKeys(completion: strongSelf.getKeysHandler({ (result) in
                     strongSelf.loadTransferMethodTypes(
-                        result.transferMethodTypes(countryCode: strongSelf.selectedCountry,
-                                                   currencyCode: strongSelf.selectedCurrency))
+                        result?.transferMethodTypes(countryCode: strongSelf.selectedCountry,
+                                                    currencyCode: strongSelf.selectedCurrency))
                     strongSelf.view.countryCurrencyTableViewReloadData()
             }))
         }

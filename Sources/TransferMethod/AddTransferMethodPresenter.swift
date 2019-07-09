@@ -87,8 +87,8 @@ final class AddTransferMethodPresenter {
 
                 case .success(let fieldResult):
                     guard
-                        let fieldGroups = fieldResult.fieldGroups(),
-                        let transferMethodType = fieldResult.transferMethodType()
+                        let fieldGroups = fieldResult?.fieldGroups(),
+                        let transferMethodType = fieldResult?.transferMethodType()
                         else {
                             return
                     }
