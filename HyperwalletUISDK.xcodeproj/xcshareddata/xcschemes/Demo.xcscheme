@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1020"
+   LastUpgradeVersion = "1010"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -35,16 +35,6 @@
                BlueprintIdentifier = "DB2587FA2261BFF100E6236B"
                BuildableName = "HyperwalletUISDKUITests.xctest"
                BlueprintName = "HyperwalletUISDKUITests"
-               ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DBAF92DB22D277BA004F197A"
-               BuildableName = "CommonTests.xctest"
-               BlueprintName = "CommonTests"
                ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
             </BuildableReference>
          </TestableReference>
