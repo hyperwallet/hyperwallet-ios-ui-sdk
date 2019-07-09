@@ -123,10 +123,11 @@ public final class RemoteTransferMethodConfigurationRepository: TransferMethodCo
         }
     }
 
+    @discardableResult
     private func performCompletion<T>(_ error: HyperwalletErrorType?,
                                       _ result: T?,
                                       _ completionHandler: @escaping (Result<T?, HyperwalletErrorType>) -> Void,
-                                      _ repositoryOriginalValue: T?) -> T? {
+                                      _ repositoryOriginalValue: T? = nil) -> T? {
         if let error = error {
             DispatchQueue.main.async {
                 completionHandler(.failure(error))
