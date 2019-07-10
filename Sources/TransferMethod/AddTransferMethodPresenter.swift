@@ -50,6 +50,10 @@ final class AddTransferMethodPresenter {
         return TransferMethodRepositoryFactory.shared.transferMethodConfigurationRepository()
     }
 
+    private var transferMethodRepository: TransferMethodRepository {
+        return TransferMethodRepositoryFactory.shared.transferMethodRepository()
+    }
+
     init(_ view: AddTransferMethodView,
          _ country: String,
          _ currency: String,
@@ -109,8 +113,7 @@ final class AddTransferMethodPresenter {
         view.fieldValues().forEach { hyperwalletTransferMethod.setField(key: $0.name, value: $0.value) }
 
         view.showProcessing()
-        TransferMethodRepositoryFactory.shared.transferMethodRepository()
-            .create(hyperwalletTransferMethod) { [weak self] (result) in
+        transferMethodRepository.create(hyperwalletTransferMethod) { [weak self] (result) in
                 guard let strongSelf = self else {
                     return
                 }
@@ -127,7 +130,7 @@ final class AddTransferMethodPresenter {
                         }
                     })
                 }
-            }
+        }
     }
 
     func prepareSectionForScrolling(_ section: AddTransferMethodSectionData,
@@ -183,17 +186,17 @@ final class AddTransferMethodPresenter {
     private func updateFooterContent(_ errors: [HyperwalletError]) {
         let errorsWithFieldName = errors.filter({ $0.fieldName != nil })
 
-        if errorsWithFieldName.isNotEmpty(),
-            let section = sectionData.first(where: { section in widgetsContainError(for: section, errors)
-                .isNotEmpty() }) {
-            section.containsFocusedField = true
-        }
+        if errorsWithFieldName.isNotEmpty() {
+            if let section = sectionData
+                .first(where: { section in widgetsContainError(for: section, errors).isNotEmpty() }) {
+                section.containsFocusedField = true
+            }
 
-        for section in sectionData {
-            if errorsWithFieldName.isNotEmpty() {
+            for section in sectionData {
                 updateSectionData(for: section, errorsWithFieldName)
             }
         }
+
         view.showFooterViewWithUpdatedSectionData(for: sectionData.reversed())
     }
 

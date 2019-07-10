@@ -173,6 +173,7 @@
 		DBCA388E225E8BAA00CD4137 /* AbstractWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3857225E8BAA00CD4137 /* AbstractWidget.swift */; };
 		DBCA3890225E8BAA00CD4137 /* ExpiryDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA385A225E8BAA00CD4137 /* ExpiryDatePickerView.swift */; };
 		DBCA3891225E8BAA00CD4137 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA385C225E8BAA00CD4137 /* ErrorView.swift */; };
+		DBDE15DD22D6562900BD646F /* TransferMethodRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDE15DB22D655F000BD646F /* TransferMethodRepositoryTests.swift */; };
 		DBF89CB8227C072400AF4344 /* UserIndividualCountryCanadaResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBF89CB7227C072400AF4344 /* UserIndividualCountryCanadaResponse.json */; };
 		DBFB61462261E44C00C4A8AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBFB61452261E44C00C4A8AA /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -398,6 +399,7 @@
 		DBD266812261A611002973C3 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		DBD266822261A611002973C3 /* HyperwalletUISDK.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HyperwalletUISDK.podspec; sourceTree = "<group>"; };
 		DBD266832261A611002973C3 /* Cartfile.private */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.private; sourceTree = "<group>"; };
+		DBDE15DB22D655F000BD646F /* TransferMethodRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodRepositoryTests.swift; sourceTree = "<group>"; };
 		DBF89CB7227C072400AF4344 /* UserIndividualCountryCanadaResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UserIndividualCountryCanadaResponse.json; sourceTree = "<group>"; };
 		DBFB61452261E44C00C4A8AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DBFB61472261E84C00C4A8AA /* BankAccountInvalidRoutingResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BankAccountInvalidRoutingResponse.json; sourceTree = "<group>"; };
@@ -737,6 +739,7 @@
 				DBAF92AC22CFCBC7004F197A /* Info.plist */,
 				DBAF922B22CDBF79004F197A /* RemoteTransferMethodConfigurationRepositoryTests.swift */,
 				DB4BDFDE22D40B2B00761710 /* TransferMethodRepositoryFactoryTests.swift */,
+				DBDE15DB22D655F000BD646F /* TransferMethodRepositoryTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1384,6 +1387,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBAF92C022D019A8004F197A /* AuthenticationProviderMock.swift in Sources */,
+				DBDE15DD22D6562900BD646F /* TransferMethodRepositoryTests.swift in Sources */,
 				DBAF92C122D019A8004F197A /* AuthenticationTokenGeneratorMock.swift in Sources */,
 				DB4BDFDF22D40B2B00761710 /* TransferMethodRepositoryFactoryTests.swift in Sources */,
 				DBAF92BC22D01959004F197A /* RemoteTransferMethodConfigurationRepositoryTests.swift in Sources */,

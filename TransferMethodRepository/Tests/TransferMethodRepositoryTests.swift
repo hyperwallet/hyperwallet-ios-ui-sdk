@@ -16,12 +16,11 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
-import os.log
+import Hippolyte
+import HyperwalletSDK
+@testable import TransferMethodRepository
+import XCTest
 
-extension OSLog {
-    private static var subsystem = "com.hyperwallet.ios.TransferMethodRepository"
-
-    static let notSupported = OSLog(subsystem: subsystem, category: "notSupported")
-    static let nullableProperty = OSLog(subsystem: subsystem, category: "nullableProperty")
+class TransferMethodRepositoryTests: XCTestCase {
+//    func
 }

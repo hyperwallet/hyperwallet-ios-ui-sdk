@@ -36,23 +36,13 @@ final class ListTransferMethodPresenter {
     private unowned let view: ListTransferMethodView
     private (set) var sectionData = [HyperwalletTransferMethod]()
 
+    let transferMethodRepository: TransferMethodRepository = {
+        TransferMethodRepositoryFactory.shared.transferMethodRepository()
+    }()
+
     /// Initialize ListTransferMethodPresenter
     init(view: ListTransferMethodView) {
         self.view = view
-    }
-
-    /// Get the list of all Activated transfer methods from core SDK
-    func listTransferMethod() {
-        view.showLoading()
-        let queryParam = HyperwalletTransferMethodQueryParam()
-        queryParam.limit = 100
-        queryParam.status = .activated
-        TransferMethodRepositoryFactory.shared.transferMethodRepository()
-            .listTransferMethods(queryParam, listTransferMethodHandler())
-    }
-
-    func transferMethodExists(at index: Int) -> Bool {
-        return sectionData[safe: index] != nil
     }
 
     func deactivateTransferMethod(at index: Int) {
@@ -76,61 +66,60 @@ final class ListTransferMethodPresenter {
 
     /// Deactivate the selected Transfer Method
     private func deactivateTransferMethod(_ transferMethod: HyperwalletTransferMethod) {
-        guard let transferMethodType = transferMethod.type, let token = transferMethod.token else {
-            return
-        }
         view.showProcessing()
 
-        TransferMethodRepositoryFactory.shared.transferMethodRepository()
-            .deactivate(token, transferMethodType, deactivateTransferMethodHandler(transferMethod))
-    }
+        transferMethodRepository.deactivate(transferMethod) { [weak self] (result) in
+            guard let strongSelf = self else {
+                return
+            }
 
-    private func listTransferMethodHandler()
-        -> (Result<HyperwalletPageList<HyperwalletTransferMethod>?, HyperwalletErrorType>) -> Void {
-            return { [weak self] (result) in
-                guard let strongSelf = self else {
+            switch result {
+            case .failure(let error):
+                strongSelf.view.dismissProcessing(handler: {
+                    strongSelf.view.showError(error, {
+                        strongSelf.deactivateTransferMethod(transferMethod) })
+                })
+
+            case .success(let resultStatusTransition):
+                guard let statusTransition = resultStatusTransition else {
                     return
                 }
-                strongSelf.view.hideLoading()
-
-                switch result {
-                case .failure(let error):
-                    strongSelf.view.showError(error, { strongSelf.listTransferMethod() })
-
-                case .success(let resultPageList):
-                    if let data = resultPageList?.data {
-                        strongSelf.sectionData = data
-                    }
-
-                    strongSelf.view.showTransferMethods()
-                }
+                strongSelf.view.showConfirmation(handler: { () -> Void in
+                    strongSelf.listTransferMethod()
+                    strongSelf.view.notifyTransferMethodDeactivated(statusTransition)
+                })
             }
+        }
     }
 
-    private func deactivateTransferMethodHandler(_ selectedTransferMethod: HyperwalletTransferMethod)
-        -> (Result<HyperwalletStatusTransition?, HyperwalletErrorType>) -> Void {
-            return { [selectedTransferMethod, weak self] (result) in
-                guard let strongSelf = self else {
-                    return
-                }
-
-                switch result {
-                case .failure(let error):
-                    strongSelf.view.dismissProcessing(handler: {
-                        strongSelf.view.showError(error, {
-                            strongSelf.deactivateTransferMethod(selectedTransferMethod) })
-                    })
-
-                case .success(let resultStatusTransition):
-                    guard let statusTransition = resultStatusTransition else {
-                        return
-                    }
-                    strongSelf.view.showConfirmation(handler: { () -> Void in
-                        strongSelf.listTransferMethod()
-                        strongSelf.view.notifyTransferMethodDeactivated(statusTransition)
-                    })
-                }
+    /// Get the list of all Activated transfer methods from core SDK
+    func listTransferMethod() {
+        view.showLoading()
+        let queryParam = HyperwalletTransferMethodQueryParam()
+        queryParam.limit = 100
+        queryParam.status = .activated
+        transferMethodRepository.list(queryParam) { [weak self] (result) in
+            guard let strongSelf = self else {
+                return
             }
+            strongSelf.view.hideLoading()
+
+            switch result {
+            case .failure(let error):
+                strongSelf.view.showError(error, { strongSelf.listTransferMethod() })
+
+            case .success(let resultPageList):
+                if let data = resultPageList?.data {
+                    strongSelf.sectionData = data
+                }
+
+                strongSelf.view.showTransferMethods()
+            }
+        }
+    }
+
+    func transferMethodExists(at index: Int) -> Bool {
+        return sectionData[safe: index] != nil
     }
 
     private func getAdditionalInfo(_ transferMethod: HyperwalletTransferMethod) -> String? {

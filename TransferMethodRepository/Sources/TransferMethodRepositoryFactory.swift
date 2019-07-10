@@ -22,6 +22,7 @@ import HyperwalletSDK
 public final class TransferMethodRepositoryFactory {
     private static var instance: TransferMethodRepositoryFactory?
     private let remoteTransferMethodConfigurationRepository: TransferMethodConfigurationRepository
+    private let remoteTransferMethodRepository: TransferMethodRepository
 
     /// Returns the previously initialized instance of the RepositoryFactory object
     public static var shared: TransferMethodRepositoryFactory {
@@ -32,13 +33,14 @@ public final class TransferMethodRepositoryFactory {
         return instance
     }
 
-    /// Clears the RepositoryFactory singleton instance.
+    /// Clears the TransferMethodRepositoryFactory singleton instance.
     public static func clearInstance() {
         instance = nil
     }
 
     private init() {
         remoteTransferMethodConfigurationRepository = RemoteTransferMethodConfigurationRepository()
+        remoteTransferMethodRepository = RemoteTransferMethodRepository()
     }
 
     /// Gets the `TransferMethodConfigurationRepository` instance.
@@ -52,6 +54,6 @@ public final class TransferMethodRepositoryFactory {
     ///
     /// - Returns: The TransferMethodRepository
     public func transferMethodRepository() -> TransferMethodRepository {
-        return RemoteTransferMethodRepository()
+        return remoteTransferMethodRepository
     }
 }
