@@ -37,7 +37,7 @@ class TransferMethodRepositoryFactoryTests: XCTestCase {
 
     func testShared_verifyRepositoriesCleared() {
         RemoteTransferMethodConfigurationRepositoryTests
-            .setupTransferMethodConfigurationMockServer(keyResponseData)
+            .setupResponseMockServer(keyResponseData)
         let expectation = self.expectation(description: "Get transfer method keys")
         var transferMethodConfigurationKey: HyperwalletTransferMethodConfigurationKey?
         var error: HyperwalletErrorType?

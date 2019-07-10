@@ -170,7 +170,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
         HyperwalletTestHelper.setUpMockServer(request: request)
         let expectation = self.expectation(description: "Load transfer methods")
         mockView.expectation = expectation
-        mockView.populateSectionDataHandler = { fieldGroups in
+        mockView.showTransferMethodFieldsHandler = { fieldGroups in
             for fieldGroup in fieldGroups {
                 guard let fields = fieldGroup.fields, let fieldGroup = fieldGroup.group
                     else {
@@ -266,7 +266,7 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
     var mockFieldStatusReturnResult = [Bool]()
     var mockFieldValuesReturnResult = [(name: String, value: String)]()
 
-    var populateSectionDataHandler: (([HyperwalletFieldGroup]) -> Void)?
+    var showTransferMethodFieldsHandler: (([HyperwalletFieldGroup]) -> Void)?
 
     var expectation: XCTestExpectation?
 
@@ -291,7 +291,7 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
 
         mockFieldStatusReturnResult = [Bool]()
         mockFieldValuesReturnResult = [(name: String, value: String)]()
-        populateSectionDataHandler = nil
+        showTransferMethodFieldsHandler = nil
         expectation = nil
     }
 
@@ -345,7 +345,7 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
                                   _ transferMethodType: HyperwalletTransferMethodType) {
         self.fieldGroups = fieldGroups
         isShowTransferMethodFieldsPerformed = true
-        populateSectionDataHandler?(fieldGroups)
+        showTransferMethodFieldsHandler?(fieldGroups)
         expectation?.fulfill()
     }
 
