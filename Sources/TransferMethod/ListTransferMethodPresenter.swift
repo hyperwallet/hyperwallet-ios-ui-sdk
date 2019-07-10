@@ -111,6 +111,8 @@ final class ListTransferMethodPresenter {
             case .success(let resultPageList):
                 if let data = resultPageList?.data {
                     strongSelf.sectionData = data
+                } else {
+                    strongSelf.sectionData = []
                 }
 
                 strongSelf.view.showTransferMethods()

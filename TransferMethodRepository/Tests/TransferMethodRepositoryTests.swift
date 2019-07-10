@@ -203,15 +203,141 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
     }
 
     func testDeactivate_bankAccount() {
+        let expectation = self.expectation(description: "Deactivate bank account completed")
+        let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
+        var statusTransitionResult: HyperwalletStatusTransition?
+        var statusTransitionError: HyperwalletErrorType?
+
+        setupOkResponseMockServer(endpoint: "/bank-accounts/trm-123456789/status-transitions",
+                                  responseDataFile: "StatusTransitionMockedResponseSuccess")
+
+        let bankAccount = HyperwalletBankAccount
+            .Builder(transferMethodCountry: "US",
+                     transferMethodCurrency: "USD",
+                     transferMethodProfileType: "INDIVIDUAL",
+                     transferMethodType: "BANK_ACCOUNT")
+            .build()
+        bankAccount.setField(key: "token", value: "trm-123456789")
+
+        transferMethodRepository.deactivate(bankAccount) { result in
+            switch result {
+            case .failure(let error):
+                statusTransitionError = error
+
+            case .success(let deactivateResult):
+                statusTransitionResult = deactivateResult
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+
+        XCTAssertNil(statusTransitionError)
+        XCTAssertNotNil(statusTransitionResult)
+        XCTAssertEqual(statusTransitionResult?.fromStatus, HyperwalletStatusTransition.Status.activated)
+        XCTAssertEqual(statusTransitionResult?.toStatus, HyperwalletStatusTransition.Status.deactivated)
     }
 
     func testDeactivate_bankCard() {
+        let expectation = self.expectation(description: "Deactivate bank card completed")
+        let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
+        var statusTransitionResult: HyperwalletStatusTransition?
+        var statusTransitionError: HyperwalletErrorType?
+
+        setupOkResponseMockServer(endpoint: "/bank-cards/trm-123456789/status-transitions",
+                                  responseDataFile: "StatusTransitionMockedResponseSuccess")
+
+        let bankCard = HyperwalletBankCard
+            .Builder(transferMethodCountry: "US",
+                     transferMethodCurrency: "USD",
+                     transferMethodProfileType: "INDIVIDUAL")
+            .build()
+        bankCard.setField(key: "token", value: "trm-123456789")
+
+        transferMethodRepository.deactivate(bankCard) { result in
+            switch result {
+            case .failure(let error):
+                statusTransitionError = error
+
+            case .success(let deactivateResult):
+                statusTransitionResult = deactivateResult
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+
+        XCTAssertNil(statusTransitionError)
+        XCTAssertNotNil(statusTransitionResult)
+        XCTAssertEqual(statusTransitionResult?.fromStatus, HyperwalletStatusTransition.Status.activated)
+        XCTAssertEqual(statusTransitionResult?.toStatus, HyperwalletStatusTransition.Status.deactivated)
     }
 
-    func testDeactivate_bankCardWithError() {
+    func testDeactivate_wireAcount() {
+        let expectation = self.expectation(description: "Deactivate wire account completed")
+        let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
+        var statusTransitionResult: HyperwalletStatusTransition?
+        var statusTransitionError: HyperwalletErrorType?
+
+        setupOkResponseMockServer(endpoint: "/bank-accounts/trm-123456789/status-transitions",
+                                  responseDataFile: "StatusTransitionMockedResponseSuccess")
+
+        let wireAccount = HyperwalletBankAccount
+            .Builder(transferMethodCountry: "US",
+                     transferMethodCurrency: "USD",
+                     transferMethodProfileType: "INDIVIDUAL",
+                     transferMethodType: "WIRE_ACCOUNT")
+            .build()
+        wireAccount.setField(key: "token", value: "trm-123456789")
+
+        transferMethodRepository.deactivate(wireAccount) { result in
+            switch result {
+            case .failure(let error):
+                statusTransitionError = error
+
+            case .success(let deactivateResult):
+                statusTransitionResult = deactivateResult
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+
+        XCTAssertNil(statusTransitionError)
+        XCTAssertNotNil(statusTransitionResult)
+        XCTAssertEqual(statusTransitionResult?.fromStatus, HyperwalletStatusTransition.Status.activated)
+        XCTAssertEqual(statusTransitionResult?.toStatus, HyperwalletStatusTransition.Status.deactivated)
     }
 
     func testDeactivate_payPalAccount() {
+        let expectation = self.expectation(description: "Deactivate bank card completed")
+        let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
+        var statusTransitionResult: HyperwalletStatusTransition?
+        var statusTransitionError: HyperwalletErrorType?
+
+        setupOkResponseMockServer(endpoint: "/paypal-accounts/trm-123456789/status-transitions",
+                                  responseDataFile: "StatusTransitionMockedResponseSuccess")
+
+        let paypalAccount = HyperwalletPayPalAccount
+            .Builder(transferMethodCountry: "US",
+                     transferMethodCurrency: "USD",
+                     transferMethodProfileType: "INDIVIDUAL")
+            .build()
+        paypalAccount.setField(key: "token", value: "trm-123456789")
+
+        transferMethodRepository.deactivate(paypalAccount) { result in
+            switch result {
+            case .failure(let error):
+                statusTransitionError = error
+
+            case .success(let deactivateResult):
+                statusTransitionResult = deactivateResult
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+
+        XCTAssertNil(statusTransitionError)
+        XCTAssertNotNil(statusTransitionResult)
+        XCTAssertEqual(statusTransitionResult?.fromStatus, HyperwalletStatusTransition.Status.activated)
+        XCTAssertEqual(statusTransitionResult?.toStatus, HyperwalletStatusTransition.Status.deactivated)
     }
 
     func testDeactivate_failure() {

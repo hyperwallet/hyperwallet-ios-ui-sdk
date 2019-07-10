@@ -56,6 +56,8 @@ public protocol TransferMethodRepository {
 }
 
 final class RemoteTransferMethodRepository: TransferMethodRepository {
+    private static let deactivateNote = "Deactivating Account"
+
     func create(_ transferMethod: HyperwalletTransferMethod,
                 _ completion: @escaping (Result<HyperwalletTransferMethod?, HyperwalletErrorType>) -> Void) {
         if let bankAccount = transferMethod as? HyperwalletBankAccount {
@@ -79,15 +81,15 @@ final class RemoteTransferMethodRepository: TransferMethodRepository {
         switch transferMethodType {
         case "BANK_ACCOUNT", "WIRE_ACCOUNT":
             Hyperwallet.shared.deactivateBankAccount(transferMethodToken: token,
-                                                     notes: "Deactivating the Bank Account",
+                                                     notes: RemoteTransferMethodRepository.deactivateNote,
                                                      completion: deactivateHandler(completion))
         case "BANK_CARD":
             Hyperwallet.shared.deactivateBankCard(transferMethodToken: token,
-                                                  notes: "Deactivating the Bank Card",
+                                                  notes: RemoteTransferMethodRepository.deactivateNote,
                                                   completion: deactivateHandler(completion))
         case "PAYPAL_ACCOUNT":
             Hyperwallet.shared.deactivatePayPalAccount(transferMethodToken: token,
-                                                       notes: "Deactivating the PayPal Account",
+                                                       notes: RemoteTransferMethodRepository.deactivateNote,
                                                        completion: deactivateHandler(completion))
 
         default:

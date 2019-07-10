@@ -161,33 +161,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
     }
 
     func testCreateTransferMethod_failure() {
-        // Given // bankAccountId
-        let url = String(format: "%@/bank-accounts", HyperwalletTestHelper.userRestURL)
-        let response = HyperwalletTestHelper
-            .badRequestHTTPResponse(for: "BankAccountErrorResponseWithMissingFieldAndValidationError")
-        let request = HyperwalletTestHelper.buildPostRequest(baseUrl: url, response)
-        Hippolyte.shared.add(stubbedRequest: setupTransferMethodConfigurationFields())
-        HyperwalletTestHelper.setUpMockServer(request: request)
-        let expectation = self.expectation(description: "Load transfer methods")
-        mockView.expectation = expectation
-        mockView.showTransferMethodFieldsHandler = { fieldGroups in
-            for fieldGroup in fieldGroups {
-                guard let fields = fieldGroup.fields, let fieldGroup = fieldGroup.group
-                    else {
-                        continue
-                }
-                let newWidgets = fields.map(WidgetFactory.newWidget)
-                let section = AddTransferMethodSectionData(
-                    fieldGroup: fieldGroup,
-                    country: "US",
-                    currency: "USD",
-                    cells: newWidgets
-                )
-                self.presenter.sectionData.append(section)
-            }
-        }
-        presenter.loadTransferMethodConfigurationFields(true)
-        wait(for: [expectation], timeout: 1)
+        loadMockTransfermethods()
         mockView.mockFieldValuesReturnResult.append((name: "bankAccountId", value: "000"))
         mockView.mockFieldStatusReturnResult.append(true)
         let expectationCreateBank = self.expectation(description: "Create bank account completed")
@@ -241,6 +215,35 @@ class AddTransferMethodPresenterTests: XCTestCase {
         let response = HyperwalletTestHelper.setUpMockedResponse(payload: transferMethodConfigurationFieldsResponse,
                                                                  error: error)
         return HyperwalletTestHelper.buildPostRequest(baseUrl: HyperwalletTestHelper.graphQlURL, response)
+    }
+
+    private func loadMockTransfermethods() {
+        let url = String(format: "%@/bank-accounts", HyperwalletTestHelper.userRestURL)
+        let response = HyperwalletTestHelper
+            .badRequestHTTPResponse(for: "BankAccountErrorResponseWithMissingFieldAndValidationError")
+        let request = HyperwalletTestHelper.buildPostRequest(baseUrl: url, response)
+        Hippolyte.shared.add(stubbedRequest: setupTransferMethodConfigurationFields())
+        HyperwalletTestHelper.setUpMockServer(request: request)
+        let expectation = self.expectation(description: "Load transfer methods")
+        mockView.expectation = expectation
+        mockView.showTransferMethodFieldsHandler = { fieldGroups in
+            for fieldGroup in fieldGroups {
+                guard let fields = fieldGroup.fields, let fieldGroup = fieldGroup.group
+                    else {
+                        continue
+                }
+                let newWidgets = fields.map(WidgetFactory.newWidget)
+                let section = AddTransferMethodSectionData(
+                    fieldGroup: fieldGroup,
+                    country: "US",
+                    currency: "USD",
+                    cells: newWidgets
+                )
+                self.presenter.sectionData.append(section)
+            }
+        }
+        presenter.loadTransferMethodConfigurationFields(true)
+        wait(for: [expectation], timeout: 1)
     }
 }
 

@@ -180,6 +180,7 @@
 		DBDE15E122D69D2200BD646F /* PayPalAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F63E732284EE890090101D /* PayPalAccountResponse.json */; };
 		DBDE15E222D69DC200BD646F /* WireAccountIndividualResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 644A69C422B127080058E77E /* WireAccountIndividualResponse.json */; };
 		DBDE15E522D69E4100BD646F /* TransferMethodRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDE15DB22D655F000BD646F /* TransferMethodRepositoryTests.swift */; };
+		DBDE15E622D6A7E300BD646F /* StatusTransitionMockedResponseSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = 078B45692273895C005B0248 /* StatusTransitionMockedResponseSuccess.json */; };
 		DBF89CB8227C072400AF4344 /* UserIndividualCountryCanadaResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBF89CB7227C072400AF4344 /* UserIndividualCountryCanadaResponse.json */; };
 		DBFB61462261E44C00C4A8AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBFB61452261E44C00C4A8AA /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -1243,6 +1244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBDE15E222D69DC200BD646F /* WireAccountIndividualResponse.json in Resources */,
+				DBDE15E622D6A7E300BD646F /* StatusTransitionMockedResponseSuccess.json in Resources */,
 				DB4BDFD622D3FE3000761710 /* TransferMethodConfigurationFieldsResponse.json in Resources */,
 				DBDE15DF22D696D100BD646F /* BankAccountErrorResponseWithMissingFieldAndValidationError.json in Resources */,
 				DBDE15E022D6999000BD646F /* BankCardResponse.json in Resources */,
