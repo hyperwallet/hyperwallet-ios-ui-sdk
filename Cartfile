@@ -1,1 +1,1 @@
-github "hyperwallet/hyperwallet-ios-sdk" "task/HW-53971-swift-upgrade-to-version-5"
+github "hyperwallet/hyperwallet-ios-sdk" "task/HW-54157-add-getField-in-transferMethod-and-user"
