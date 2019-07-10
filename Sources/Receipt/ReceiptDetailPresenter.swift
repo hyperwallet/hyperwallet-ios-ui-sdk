@@ -36,7 +36,8 @@ final class ReceiptDetailViewPresenter {
             sectionData.append(receiptNotesSection)
         }
 
-        let receiptFeeSection = ReceiptDetailSectionFeeData(from: receipt)
-        sectionData.append(receiptFeeSection)
+        if let receiptFeeSection = ReceiptDetailSectionFeeData(from: receipt) {
+            sectionData.append(receiptFeeSection)
+        }
     }
 }

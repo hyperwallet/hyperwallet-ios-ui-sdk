@@ -163,9 +163,6 @@ class ListReceiptTests: BaseTests {
 
         // DETAILS Section
         verifyDetailSection(receiptIdVal: "55176992", dateVal: expectedDateValue, clientIdVal: "DyClk0VG9a")
-
-        // FEE Section
-        verifyFeeSection(amountVal: "6.00 USD", feeVal: nil, transactionVal: "6.00 USD")
     }
 
     // Debit Transaction
