@@ -32,10 +32,11 @@ class PrepaidCardListReceiptTests: BaseTests {
 
         XCTAssertEqual(app.tables.cells.count, expectedNumberOfCells)
 
-        verifyCellLabels(with: "Funds Deposit", createdOn: "Jun 20, 2019", amount: "10.00", currency: "USD", by: 0)
-        verifyCellLabels(with: "Funds Deposit", createdOn: "Jun 21, 2019", amount: "20.00", currency: "USD", by: 1)
-        verifyCellLabels(with: "Balance Adjustment", createdOn: "Jun 23, 2019", amount: "-7.00", currency: "USD", by: 2)
-        verifyCellLabels(with: "Balance Adjustment", createdOn: "Jun 24, 2019", amount: "-500.99", currency: "USD", by: 3)
+        verifyCellLabels(with: "Funds Deposit", createdOn: "2019-06-20T21:23:51", amount: "10.00", currency: "USD", by: 0)
+        verifyCellLabels(with: "Funds Deposit", createdOn: "2019-06-21T21:24:02", amount: "20.00", currency: "USD", by: 1)
+        verifyCellLabels(with: "Balance Adjustment", createdOn: "2019-06-23T21:25:09", amount: "-7.00", currency: "USD", by: 2)
+        verifyCellLabels(with: "Balance Adjustment", createdOn: "2019-06-24T21:25:23", amount: "-500.99", currency: "USD", by: 3)
+        verifyCellLabels(with: "Balance Adjustment", createdOn: "2019-06-25T22:48:41", amount: "-10.00", currency: "USD", by: 4)
     }
 
     func testReceiptsList_verifyPrepaidCardReceiptsSectionHeaders() {
@@ -80,7 +81,7 @@ class PrepaidCardListReceiptTests: BaseTests {
         prepaidCardReceiptMenu.tap()
         waitForNonExistence(spinner)
 
-        verifyCellLabels(with: "Funds Deposit", createdOn: "Jun 20, 2019", amount: "10.00", currency: "USD", by: 0)
+        verifyCellLabels(with: "Funds Deposit", createdOn: "2019-06-20T21:23:51", amount: "10.00", currency: "USD", by: 0)
     }
 
     func testPrepaidCardReceiptsList_verifyDebitTransaction() {
@@ -91,7 +92,7 @@ class PrepaidCardListReceiptTests: BaseTests {
         XCTAssertTrue(prepaidCardReceiptMenu.exists)
         prepaidCardReceiptMenu.tap()
         waitForNonExistence(spinner)
-        verifyCellLabels(with: "Balance Adjustment", createdOn: "Jun 23, 2019", amount: "-7.00", currency: "USD", by: 2)
+        verifyCellLabels(with: "Balance Adjustment", createdOn: "2019-06-23T21:25:09", amount: "-7.00", currency: "USD", by: 2)
     }
 
     func testPrepaidCardReceiptsList_userHasNoTransactions() {
@@ -119,7 +120,8 @@ class PrepaidCardListReceiptTests: BaseTests {
 
         XCTAssertEqual(transactionDetails.typeLabel.label, "Funds Deposit")
         XCTAssertEqual(transactionDetails.paymentAmountLabel.label, "10.00")
-        XCTAssertEqual(transactionDetails.createdOnLabel.label, "Jun 20, 2019")
+       // XCTAssertEqual(transactionDetails.createdOnLabel.label, "Jun 20, 2019")
+        XCTAssertEqual(transactionDetails.createdOnLabel.label, transactionDetails.getExpectedDate(date: "2019-06-20T21:23:51"))
         XCTAssertEqual(transactionDetails.currencyLabel.label, "USD")
 
         // Details
@@ -127,15 +129,13 @@ class PrepaidCardListReceiptTests: BaseTests {
         XCTAssertEqual(transactionDetails.receiptIdLabel.label, "Receipt ID:")
         XCTAssertEqual(transactionDetails.dateLabel.label, "Date:")
         XCTAssertEqual(transactionDetails.receiptIdValue.label, "FISVL_5269000")
-        // Will comment out for now
-        //XCTAssertEqual(transactionDetails.dateValue.label, "Thu, Jun 20, 2019, 9:23 PM")
+        XCTAssertEqual(transactionDetails.dateValue.label, transactionDetails.getExpectedDateTimeFormat(datetime: "2019-06-20T21:23:51"))
 
         // Fee
         XCTAssertEqual(transactionDetails.feeSection.label, "Fee Specification")
         XCTAssertEqual(transactionDetails.amountLabel.label, "Amount:")
         XCTAssertEqual(transactionDetails.transactionLabel.label, "Transaction:")
         XCTAssertEqual(transactionDetails.amountValue.label, "10.00 USD")
-        // XCTAssertEqual(transactionDetails.transactionValue.label, "10.00 USD")
     }
 
     func testPrepaidReceiptDetail_verifyDebit() {
@@ -152,7 +152,9 @@ class PrepaidCardListReceiptTests: BaseTests {
         XCTAssertEqual(transactionDetails.transactionSection.label, "Transaction")
         XCTAssertEqual(transactionDetails.typeLabel.label, "Balance Adjustment")
         XCTAssertEqual(transactionDetails.paymentAmountLabel.label, "-7.00")
-        XCTAssertEqual(transactionDetails.createdOnLabel.label, "Jun 23, 2019")
+        //XCTAssertEqual(transactionDetails.createdOnLabel.label, "Jun 23, 2019")
+        XCTAssertEqual(transactionDetails.createdOnLabel.label, transactionDetails.getExpectedDate(date: "2019-06-23T21:25:09"))
+
         XCTAssertEqual(transactionDetails.currencyLabel.label, "USD")
 
         // Details
@@ -160,8 +162,7 @@ class PrepaidCardListReceiptTests: BaseTests {
         XCTAssertEqual(transactionDetails.receiptIdLabel.label, "Receipt ID:")
         XCTAssertEqual(transactionDetails.dateLabel.label, "Date:")
         XCTAssertEqual(transactionDetails.receiptIdValue.label, "FISA_5269017")
-        // comment out for now
-        //XCTAssertEqual(transactionDetails.dateValue.label, "Sun, Jun 23, 2019, 9:25 PM")
+        XCTAssertEqual(transactionDetails.dateValue.label, transactionDetails.getExpectedDateTimeFormat(datetime: "2019-06-23T21:25:09"))
 
         // Fee
         XCTAssertEqual(transactionDetails.feeSection.label, "Fee Specification")
@@ -186,7 +187,9 @@ class PrepaidCardListReceiptTests: BaseTests {
         XCTAssertEqual(transactionDetails.transactionSection.label, "Transaction")
         XCTAssertEqual(transactionDetails.typeLabel.label, "Balance Adjustment")
         XCTAssertEqual(transactionDetails.paymentAmountLabel.label, "-10.00")
-        XCTAssertEqual(transactionDetails.createdOnLabel.label, "Jun 25, 2019")
+        //XCTAssertEqual(transactionDetails.createdOnLabel.label, "Jun 25, 2019")
+        XCTAssertEqual(transactionDetails.createdOnLabel.label, transactionDetails.getExpectedDate(date: "2019-06-25T22:48:41"))
+//        XCTAssertEqual(transactionDetails.dateValue.label, transactionDetails.getExpectedDate(date: "2019-06-25"))
         XCTAssertEqual(transactionDetails.currencyLabel.label, "USD")
 
         // Details
@@ -201,8 +204,7 @@ class PrepaidCardListReceiptTests: BaseTests {
         XCTAssertEqual(transactionDetails.checkNumValue.label, "Sample Check Number")
         XCTAssertEqual(transactionDetails.clientTransactionIdValue.label, "AOxXefx9")
         XCTAssertEqual(transactionDetails.promoWebSiteValue.label, "https://localhost.com")
-        // Comment out for now
-        // XCTAssertEqual(transactionDetails.dateValue.label, "Tue, Jun 25, 2019, 10:48 PM")
+        XCTAssertEqual(transactionDetails.dateValue.label, transactionDetails.getExpectedDateTimeFormat(datetime: "2019-06-25T22:48:41"))
         // Notes
         XCTAssertEqual(transactionDetails.noteSectionLabel.label, "Notes")
         XCTAssertEqual(transactionDetails.notesValue.label, "Sample prepaid card payment")
@@ -221,7 +223,7 @@ class PrepaidCardListReceiptTests: BaseTests {
     private func verifyCellLabels(with type: String, createdOn: String, amount: String, currency: String, by index: Int) {
         let row = app.tables.element.children(matching: .cell).element(boundBy: index)
         XCTAssertEqual(type, row.staticTexts["receiptTransactionTypeLabel"].label)
-        XCTAssertEqual(createdOn, row.staticTexts["receiptTransactionCreatedOnLabel"].label)
+        XCTAssertEqual( transactionDetails.getExpectedDate(date: createdOn), row.staticTexts["receiptTransactionCreatedOnLabel"].label)
         XCTAssertEqual(amount, row.staticTexts["receiptTransactionAmountLabel"].label)
         XCTAssertEqual(currency, row.staticTexts["receiptTransactionCurrencyLabel"].label)
     }
