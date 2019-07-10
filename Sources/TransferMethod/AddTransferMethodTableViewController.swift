@@ -89,7 +89,7 @@ public final class AddTransferMethodTableViewController: UITableViewController {
     ///   - country: The 2 letter ISO 3166-1 country code.
     ///   - currency: The 3 letter ISO 4217-1 currency code.
     ///   - profileType: The profile type. Possible values - INDIVIDUAL, BUSINESS.
-    ///   - transferMethodTypeCode: The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD.
+    ///   - transferMethodTypeCode: The transfer method type.
     init(_ country: String,
          _ currency: String,
          _ profileType: String,

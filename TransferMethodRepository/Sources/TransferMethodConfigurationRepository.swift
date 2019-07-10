@@ -102,7 +102,7 @@ public final class RemoteTransferMethodConfigurationRepository: TransferMethodCo
             guard let strongSelf = self else {
                 return
             }
-            strongSelf.transferMethodConfigurationKeys = strongSelf
+            strongSelf.transferMethodConfigurationKeys = RemoteTransferMethodConfigurationRepository
                 .performCompletion(error, result, completion, strongSelf.transferMethodConfigurationKeys)
         }
     }
@@ -115,7 +115,7 @@ public final class RemoteTransferMethodConfigurationRepository: TransferMethodCo
             guard let strongSelf = self else {
                 return
             }
-            strongSelf.transferMethodConfigurationFieldsCache[fieldQuery] = strongSelf
+            strongSelf.transferMethodConfigurationFieldsCache[fieldQuery] = RemoteTransferMethodConfigurationRepository
                 .performCompletion(error,
                                    result,
                                    completion,
@@ -124,10 +124,10 @@ public final class RemoteTransferMethodConfigurationRepository: TransferMethodCo
     }
 
     @discardableResult
-    private func performCompletion<T>(_ error: HyperwalletErrorType?,
-                                      _ result: T?,
-                                      _ completionHandler: @escaping (Result<T?, HyperwalletErrorType>) -> Void,
-                                      _ repositoryOriginalValue: T? = nil) -> T? {
+    static func performCompletion<T>(_ error: HyperwalletErrorType?,
+                                     _ result: T?,
+                                     _ completionHandler: @escaping (Result<T?, HyperwalletErrorType>) -> Void,
+                                     _ repositoryOriginalValue: T? = nil) -> T? {
         if let error = error {
             DispatchQueue.main.async {
                 completionHandler(.failure(error))
