@@ -257,17 +257,13 @@ class ListReceiptTests: BaseTests {
     }
 
     // FEE section verification
-    private func verifyFeeSection(amountVal: String, feeVal: String?, transactionVal: String) {
+    private func verifyFeeSection(amountVal: String, feeVal: String, transactionVal: String) {
         XCTAssertEqual(transactionDetails.feeSection.label, "Fee Specification")
         XCTAssertEqual(transactionDetails.amountLabel.label, "Amount:")
-        XCTAssertEqual(transactionDetails.transactionLabel.label, "Transaction:")
-
         XCTAssertEqual(transactionDetails.amountValue.label, amountVal)
+        XCTAssertEqual(transactionDetails.transactionLabel.label, "Transaction:")
         XCTAssertEqual(transactionDetails.transactionValue.label, transactionVal)
-
-        if let feeVal = feeVal {
-            XCTAssertEqual(transactionDetails.feeLabel.label, "Fee:")
-            XCTAssertEqual(transactionDetails.feeValue.label, feeVal)
-        }
+        XCTAssertEqual(transactionDetails.feeLabel.label, "Fee:")
+        XCTAssertEqual(transactionDetails.feeValue.label, feeVal)
     }
 }
