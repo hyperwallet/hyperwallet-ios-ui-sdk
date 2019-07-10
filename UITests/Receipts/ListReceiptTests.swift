@@ -161,8 +161,6 @@ class ListReceiptTests: BaseTests {
         openupReceiptsListScreenForFewMonths()
         transactionDetails.openReceipt(row: 0)
         waitForExistence(transactionDetails.detailHeaderTitle)
-
-        //verifyPayment("Payment", "May 24, 2019", "6.00", "\(currency)")
         verifyPayment("Payment", "2019-05-24T18:16:19", "6.00", "\(currency)")
 
         // DETAILS Section
@@ -207,7 +205,10 @@ class ListReceiptTests: BaseTests {
         XCTAssertEqual(transactionDetails.checkNumValue.label, "Sample Check Number")
         XCTAssertEqual(transactionDetails.promoWebSiteValue.label, "https://localhost")
         XCTAssertEqual(transactionDetails.notesValue.label, "Sample payment notes")
-        XCTAssertEqual(transactionDetails.dateValue.label, transactionDetails.getExpectedDateTimeFormat(datetime: "2019-05-03T17:08:58"))
+        XCTAssertEqual(
+            transactionDetails.dateValue.label,
+                       transactionDetails
+            .getExpectedDateTimeFormat(datetime: "2019-05-03T17:08:58"))
     }
 
     // Verify when no Notes and Fee sections
