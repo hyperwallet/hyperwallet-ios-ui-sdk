@@ -18,11 +18,16 @@
 
 import HyperwalletSDK
 
-protocol UserReceiptRepository {
+public protocol UserReceiptRepository {
     func listUserReceipts(queryParam: HyperwalletReceiptQueryParam,
                           completion: @escaping (HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType?)
         -> Void)
 }
 
 public final class RemoteUserReceiptRepository: UserReceiptRepository {
+    public func listUserReceipts(queryParam: HyperwalletReceiptQueryParam,
+                                 completion: @escaping (HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType?)
+        -> Void) {
+        //
+    }
 }

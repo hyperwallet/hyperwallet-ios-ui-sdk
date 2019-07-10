@@ -21,15 +21,20 @@ import Foundation
 public final class ReceiptRepositoryFactory {
     private static var instance: ReceiptRepositoryFactory?
     private let remoteUserReceiptRepository: RemoteUserReceiptRepository
-    private let remotePrepaidCardReceiptRepository: RemotePre
+    private let remotePrepaidCardReceiptRepository: RemotePrepaidCardReceiptRepository
 
     /// Returns the previously initialized instance of the RepositoryFactory object
-    public static var shared: TransferMethodRepositoryFactory {
+    public static var shared: ReceiptRepositoryFactory {
         guard let instance = instance else {
-            self.instance = TransferMethodRepositoryFactory()
+            self.instance = ReceiptRepositoryFactory()
             return self.instance!
         }
         return instance
+    }
+
+    private init() {
+        remoteUserReceiptRepository = RemoteUserReceiptRepository()
+        remotePrepaidCardReceiptRepository = RemotePrepaidCardReceiptRepository()
     }
 
     /// Clears the RepositoryFactory singleton instance.
@@ -37,21 +42,17 @@ public final class ReceiptRepositoryFactory {
         instance = nil
     }
 
-    private init() {
-        remoteTransferMethodConfigurationRepository = RemoteTransferMethodConfigurationRepository()
+    /// Gets the `UserReceiptRepository` instance.
+    ///
+    /// - Returns: The UserReceiptRepository
+    public func userReceiptRepository() -> UserReceiptRepository {
+        return remoteUserReceiptRepository
     }
 
-    /// Gets the `TransferMethodConfigurationRepository` instance.
+    /// Gets the `PrepaidCardReceiptRepository` instance.
     ///
-    /// - Returns: The TransferMethodConfigurationRepository
-    public func transferMethodConfigurationRepository() -> TransferMethodConfigurationRepository {
-        return remoteTransferMethodConfigurationRepository
-    }
-
-    /// Gets the `TransferMethodRepository` instance.
-    ///
-    /// - Returns: The TransferMethodRepository
-    public func transferMethodRepository() -> TransferMethodRepository {
-        return RemoteTransferMethodRepository()
+    /// - Returns: The PrepaidCardReceiptRepository
+    public func prepaidCardReceiptRepository() -> PrepaidCardReceiptRepository {
+        return remotePrepaidCardReceiptRepository
     }
 }

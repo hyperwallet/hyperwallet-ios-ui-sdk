@@ -18,12 +18,19 @@
 
 import HyperwalletSDK
 
-protocol PrepaidCardReceiptRepository {
+public protocol PrepaidCardReceiptRepository {
     func listPrepaidCardReceipts(prepaidCardToken: String,
                                  queryParam: HyperwalletReceiptQueryParam?,
-                                 completion: @escaping (HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType?) -> Void)
+                                 completion: @escaping (HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType?)
+        -> Void)
 }
 
 public final class RemotePrepaidCardReceiptRepository: PrepaidCardReceiptRepository {
-
+    public func listPrepaidCardReceipts(
+        prepaidCardToken: String,
+        queryParam: HyperwalletReceiptQueryParam?,
+        completion: @escaping (HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType?)
+        -> Void) {
+        //
+    }
 }
