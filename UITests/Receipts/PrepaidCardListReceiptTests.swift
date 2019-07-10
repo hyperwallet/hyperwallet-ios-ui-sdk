@@ -145,13 +145,6 @@ class PrepaidCardListReceiptTests: BaseTests {
         XCTAssertEqual(transactionDetails.receiptIdValue.label, "FISVL_5269000")
         // Will comment out for now
         //XCTAssertEqual(transactionDetails.dateValue.label, "Thu, Jun 20, 2019, 9:23 PM")
-
-        // Fee
-        XCTAssertEqual(transactionDetails.feeSection.label, "Fee Specification")
-        XCTAssertEqual(transactionDetails.amountLabel.label, "Amount:")
-        XCTAssertEqual(transactionDetails.transactionLabel.label, "Transaction:")
-        XCTAssertEqual(transactionDetails.amountValue.label, "10.00 USD")
-        // XCTAssertEqual(transactionDetails.transactionValue.label, "10.00 USD")
     }
 
     func testPrepaidReceiptDetail_verifyDebit() {
@@ -178,13 +171,6 @@ class PrepaidCardListReceiptTests: BaseTests {
         XCTAssertEqual(transactionDetails.receiptIdValue.label, "FISA_5269017")
         // comment out for now
         //XCTAssertEqual(transactionDetails.dateValue.label, "Sun, Jun 23, 2019, 9:25 PM")
-
-        // Fee
-        XCTAssertEqual(transactionDetails.feeSection.label, "Fee Specification")
-        XCTAssertEqual(transactionDetails.amountLabel.label, "Amount:")
-        XCTAssertEqual(transactionDetails.transactionLabel.label, "Transaction:")
-        XCTAssertEqual(transactionDetails.amountValue.label, "-7.00 USD")
-        XCTAssertEqual(transactionDetails.transactionValue.label, "7.00 USD")
     }
 
     // MARK: Detail View Testcases
