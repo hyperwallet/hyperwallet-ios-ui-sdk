@@ -2,6 +2,7 @@
 
 [![Platforms](https://img.shields.io/cocoapods/p/HyperwalletUISDK.svg?)](https://cocoapods.org/pods/HyperwalletUISDK)
 [![Build Status](https://travis-ci.org/hyperwallet/hyperwallet-ios-ui-sdk.svg?branch=master)](https://travis-ci.org/hyperwallet/hyperwallet-ios-ui-sdk)
+[![Coverage Status](https://coveralls.io/repos/github/hyperwallet/hyperwallet-ios-ui-sdk/badge.svg?branch=master)](https://coveralls.io/github/hyperwallet/hyperwallet-ios-ui-sdk?branch=master)
 
 [![CocoaPods](https://img.shields.io/cocoapods/v/HyperwalletUISDK.svg?color=blue)](https://cocoapods.org/pods/HyperwalletUISDK)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
@@ -16,24 +17,24 @@ Note that this SDK is geared towards those who need both backend data and UI fea
 * Set Up your server to manage the user's authentication process on the Hyperwallet platform. See the  [Authentication](#Authentication) section for more information.
 * iOS 10.0+
 * Xcode 10.2+
-* Swift 4.2
+* Swift 5.0
 
 ## Dependencies
 
-- [HyperwalletSDK 1.0.0-beta02](https://github.com/hyperwallet/hyperwallet-ios-sdk)
+- [HyperwalletSDK 1.0.0-beta03](https://github.com/hyperwallet/hyperwallet-ios-sdk)
 
 ## Installation
 Use [Carthage](https://github.com/Carthage/Carthage) or [CocoaPods](https://cocoapods.org/) to integrate to HyperwalletSDK.
 ### Carthage
 Specify it in your Cartfile:
 ```ogdl
-github "hyperwallet/hyperwallet-ios-ui-sdk" "1.0.0-beta02"
+github "hyperwallet/hyperwallet-ios-ui-sdk" "1.0.0-beta03"
 ```
 
 ### CocoaPods
 Specify it in your Podfile:
 ```ruby
-pod 'HyperwalletUISDK', '~> 1.0.0-beta02'
+pod 'HyperwalletUISDK', '~> 1.0.0-beta03'
 ```
 
 ## Initialization

@@ -159,26 +159,19 @@ final class ListTransferMethodPresenter {
     private func getAdditionalInfo(_ transferMethod: HyperwalletTransferMethod) -> String? {
         var additionalInfo: String?
         switch transferMethod.getField(fieldName: .type) as? String {
-        case "BANK_ACCOUNT":
-            additionalInfo = transferMethod.getField(fieldName: .bankAccountId) as? String
-            additionalInfo = String(format: "%@%@",
-                                    "transfer_method_list_item_description".localized(),
-                                    additionalInfo?.suffix(startAt: 4) ?? "")
-        case "BANK_CARD":
+        case "BANK_CARD", "PREPAID_CARD":
             additionalInfo = transferMethod.getField(fieldName: .cardNumber) as? String
             additionalInfo = String(format: "%@%@",
                                     "transfer_method_list_item_description".localized(),
                                     additionalInfo?.suffix(startAt: 4) ?? "")
         case "PAYPAL_ACCOUNT":
             additionalInfo = transferMethod.getField(fieldName: .email) as? String
-        case "WIRE_ACCOUNT":
-            additionalInfo = transferMethod.getField(fieldName: .intermediaryBankAccountId) as? String
+
+        default:
+            additionalInfo = transferMethod.getField(fieldName: .bankAccountId) as? String
             additionalInfo = String(format: "%@%@",
                                     "transfer_method_list_item_description".localized(),
                                     additionalInfo?.suffix(startAt: 4) ?? "")
-
-        default:
-            break
         }
         return additionalInfo
     }

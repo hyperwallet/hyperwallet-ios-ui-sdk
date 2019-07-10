@@ -1,3 +1,3 @@
 github "JanGorman/Hippolyte" "0.6.0"
 github "httpswift/swifter" "1.4.6"
-github "hyperwallet/hyperwallet-ios-sdk" "0c4f55df223d9a3b42ca1752b8e403ba4a75eb40"
+github "hyperwallet/hyperwallet-ios-sdk" "1.0.0-beta03"
