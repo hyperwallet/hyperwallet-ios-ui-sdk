@@ -20,8 +20,9 @@ import Foundation
 
 public final class ReceiptRepositoryFactory {
     private static var instance: ReceiptRepositoryFactory?
-    private let remoteUserReceiptRepository: RemoteUserReceiptRepository
-    private let remotePrepaidCardReceiptRepository: RemotePrepaidCardReceiptRepository
+
+    private(set) var userReceiptRepository: UserReceiptRepository
+    private(set) var prepaidCardReceiptRepository: PrepaidCardReceiptRepository
 
     /// Returns the previously initialized instance of the RepositoryFactory object
     public static var shared: ReceiptRepositoryFactory {
@@ -33,26 +34,12 @@ public final class ReceiptRepositoryFactory {
     }
 
     private init() {
-        remoteUserReceiptRepository = RemoteUserReceiptRepository()
-        remotePrepaidCardReceiptRepository = RemotePrepaidCardReceiptRepository()
+        userReceiptRepository = RemoteUserReceiptRepository()
+        prepaidCardReceiptRepository = RemotePrepaidCardReceiptRepository()
     }
 
     /// Clears the RepositoryFactory singleton instance.
     public static func clearInstance() {
         instance = nil
-    }
-
-    /// Gets the `UserReceiptRepository` instance.
-    ///
-    /// - Returns: The UserReceiptRepository
-    public func userReceiptRepository() -> UserReceiptRepository {
-        return remoteUserReceiptRepository
-    }
-
-    /// Gets the `PrepaidCardReceiptRepository` instance.
-    ///
-    /// - Returns: The PrepaidCardReceiptRepository
-    public func prepaidCardReceiptRepository() -> PrepaidCardReceiptRepository {
-        return remotePrepaidCardReceiptRepository
     }
 }
