@@ -209,7 +209,7 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
         var statusTransitionError: HyperwalletErrorType?
 
         setupOkResponseMockServer(endpoint: "/bank-accounts/trm-123456789/status-transitions",
-                                  responseDataFile: "StatusTransitionMockedResponseSuccess")
+                                  responseDataFile: "StatusTransitionResponseSuccess")
 
         let bankAccount = HyperwalletBankAccount
             .Builder(transferMethodCountry: "US",
@@ -244,7 +244,7 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
         var statusTransitionError: HyperwalletErrorType?
 
         setupOkResponseMockServer(endpoint: "/bank-cards/trm-123456789/status-transitions",
-                                  responseDataFile: "StatusTransitionMockedResponseSuccess")
+                                  responseDataFile: "StatusTransitionResponseSuccess")
 
         let bankCard = HyperwalletBankCard
             .Builder(transferMethodCountry: "US",
@@ -278,7 +278,7 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
         var statusTransitionError: HyperwalletErrorType?
 
         setupOkResponseMockServer(endpoint: "/bank-accounts/trm-123456789/status-transitions",
-                                  responseDataFile: "StatusTransitionMockedResponseSuccess")
+                                  responseDataFile: "StatusTransitionResponseSuccess")
 
         let wireAccount = HyperwalletBankAccount
             .Builder(transferMethodCountry: "US",
@@ -313,7 +313,7 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
         var statusTransitionError: HyperwalletErrorType?
 
         setupOkResponseMockServer(endpoint: "/paypal-accounts/trm-123456789/status-transitions",
-                                  responseDataFile: "StatusTransitionMockedResponseSuccess")
+                                  responseDataFile: "StatusTransitionResponseSuccess")
 
         let paypalAccount = HyperwalletPayPalAccount
             .Builder(transferMethodCountry: "US",

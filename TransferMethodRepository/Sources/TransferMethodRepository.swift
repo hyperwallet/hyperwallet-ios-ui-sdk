@@ -109,7 +109,7 @@ final class RemoteTransferMethodRepository: TransferMethodRepository {
         _ completion: @escaping (Result<HyperwalletTransferMethod?, HyperwalletErrorType>) -> Void)
     -> (HyperwalletTransferMethod?, HyperwalletErrorType?) -> Void {
         return {(result, error) in
-            RemoteTransferMethodConfigurationRepository.performCompletion(error, result, completion)
+            CompletionHelper.performCompletion(error, result, completion)
         }
     }
 
@@ -117,7 +117,7 @@ final class RemoteTransferMethodRepository: TransferMethodRepository {
         _ completion: @escaping (Result<HyperwalletStatusTransition?, HyperwalletErrorType>) -> Void)
         -> (HyperwalletStatusTransition?, HyperwalletErrorType?) -> Void {
         return {(result, error) in
-            RemoteTransferMethodConfigurationRepository.performCompletion(error, result, completion)
+            CompletionHelper.performCompletion(error, result, completion)
         }
     }
 
@@ -125,7 +125,7 @@ final class RemoteTransferMethodRepository: TransferMethodRepository {
         _ completion: @escaping (Result<HyperwalletPageList<HyperwalletTransferMethod>?, HyperwalletErrorType>) -> Void)
         -> (HyperwalletPageList<HyperwalletTransferMethod>?, HyperwalletErrorType?) -> Void {
         return {(result, error) in
-            RemoteTransferMethodConfigurationRepository.performCompletion(error, result, completion)
+            CompletionHelper.performCompletion(error, result, completion)
         }
     }
 
