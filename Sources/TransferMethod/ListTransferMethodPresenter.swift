@@ -160,20 +160,17 @@ final class ListTransferMethodPresenter {
     private func getAdditionalInfo(_ transferMethod: HyperwalletTransferMethod) -> String? {
         var additionalInfo: String?
 
-        if let bankAccount = transferMethod as? HyperwalletBankAccount {
-            additionalInfo = bankAccount.bankAccountId
+        switch transferMethod.type {
+        case "BANK_CARD", "PREPAID_CARD":
+            additionalInfo = transferMethod.getField(HyperwalletTransferMethod.TransferMethodField.cardNumber.rawValue)
             additionalInfo = String(format: "%@%@",
                                     "transfer_method_list_item_description".localized(),
                                     additionalInfo?.suffix(startAt: 4) ?? "")
-        } else if let bankCard = transferMethod as? HyperwalletBankCard {
-            additionalInfo = bankCard.cardNumber
-            additionalInfo = String(format: "%@%@",
-                                    "transfer_method_list_item_description".localized(),
-                                    additionalInfo?.suffix(startAt: 4) ?? "")
-        } else if let payPalAccount = transferMethod as? HyperwalletPayPalAccount {
-            additionalInfo = payPalAccount.email
-        } else if let prepaidCard = transferMethod as? HyperwalletPrepaidCard {
-            additionalInfo = prepaidCard.cardNumber
+        case "PAYPAL_ACCOUNT":
+            additionalInfo = transferMethod.getField(HyperwalletTransferMethod.TransferMethodField.email.rawValue)
+
+        default:
+            additionalInfo = transferMethod.getField(HyperwalletTransferMethod.TransferMethodField.bankAccountId.rawValue)
             additionalInfo = String(format: "%@%@",
                                     "transfer_method_list_item_description".localized(),
                                     additionalInfo?.suffix(startAt: 4) ?? "")
