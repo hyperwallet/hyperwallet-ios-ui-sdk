@@ -92,6 +92,8 @@ final class ListTransferMethodPresenter {
                     }
                     if let data = result?.data {
                         strongSelf.sectionData = data
+                    } else {
+                        strongSelf.sectionData = []
                     }
 
                     strongSelf.view.showTransferMethods()
@@ -101,7 +103,7 @@ final class ListTransferMethodPresenter {
 
     private func deactivateBankAccount(_ token: String) {
         Hyperwallet.shared.deactivateBankAccount(transferMethodToken: token,
-                                                 notes: "Deactivating the Bank Account",
+                                                 notes: "Deactivating Account",
                                                  completion: deactivateTransferMethodHandler())
     }
 
