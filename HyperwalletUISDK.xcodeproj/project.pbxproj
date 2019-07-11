@@ -60,6 +60,8 @@
 		6440CD6022D7269D00072903 /* UserRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = 6440CD5022D7269D00072903 /* UserRepository.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6440CD6322D7269D00072903 /* UserRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6440CD4E22D7269D00072903 /* UserRepository.framework */; };
 		6440CD6422D7269D00072903 /* UserRepository.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6440CD4E22D7269D00072903 /* UserRepository.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6440CD7222D727EA00072903 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6440CD7122D727EA00072903 /* UserRepository.swift */; };
+		6440CD7722D76A1800072903 /* UserRepositoryFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6440CD7622D76A1800072903 /* UserRepositoryFactory.swift */; };
 		644A69C522B127080058E77E /* WireAccountIndividualResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 644A69C422B127080058E77E /* WireAccountIndividualResponse.json */; };
 		644A69C822B14F4A0058E77E /* AddTransferMethodWireAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644A69C622B14F4A0058E77E /* AddTransferMethodWireAccountTests.swift */; };
 		64F45BD022BA27DA00515AE1 /* WireAccountIndividualResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 64F45BCD22BA27CB00515AE1 /* WireAccountIndividualResponse.json */; };
@@ -202,6 +204,13 @@
 			remoteGlobalIDString = 6440CD4D22D7269D00072903;
 			remoteInfo = UserRepository;
 		};
+		6440CD7422D7289B00072903 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6440CD4D22D7269D00072903;
+			remoteInfo = UserRepository;
+		};
 		DB18E9F32261BA29004F6AC3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
@@ -317,6 +326,8 @@
 		6440CD5622D7269D00072903 /* UserRepositoryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UserRepositoryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6440CD5D22D7269D00072903 /* UserRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryTests.swift; sourceTree = "<group>"; };
 		6440CD5F22D7269D00072903 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6440CD7122D727EA00072903 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		6440CD7622D76A1800072903 /* UserRepositoryFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryFactory.swift; sourceTree = "<group>"; };
 		644A69C422B127080058E77E /* WireAccountIndividualResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WireAccountIndividualResponse.json; sourceTree = "<group>"; };
 		644A69C622B14F4A0058E77E /* AddTransferMethodWireAccountTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodWireAccountTests.swift; sourceTree = "<group>"; };
 		64F45BCD22BA27CB00515AE1 /* WireAccountIndividualResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WireAccountIndividualResponse.json; sourceTree = "<group>"; };
@@ -621,6 +632,8 @@
 			children = (
 				6440CD5122D7269D00072903 /* Info.plist */,
 				6440CD5022D7269D00072903 /* UserRepository.h */,
+				6440CD7122D727EA00072903 /* UserRepository.swift */,
+				6440CD7622D76A1800072903 /* UserRepositoryFactory.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -1056,6 +1069,7 @@
 				6440CD4A22D7269D00072903 /* Sources */,
 				6440CD4B22D7269D00072903 /* Frameworks */,
 				6440CD4C22D7269D00072903 /* Resources */,
+				6440CD7322D7282C00072903 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -1193,6 +1207,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				6440CD7522D7289B00072903 /* PBXTargetDependency */,
 				DBAF92CE22D276D0004F197A /* PBXTargetDependency */,
 			);
 			name = HyperwalletUISDK;
@@ -1212,10 +1227,10 @@
 				TargetAttributes = {
 					6440CD4D22D7269D00072903 = {
 						CreatedOnToolsVersion = 10.2.1;
+						LastSwiftMigration = 1020;
 					};
 					6440CD5522D7269D00072903 = {
 						CreatedOnToolsVersion = 10.2.1;
-						TestTargetID = DB4679812260380C00E1AF49;
 					};
 					DB18E9EC2261BA29004F6AC3 = {
 						CreatedOnToolsVersion = 10.1;
@@ -1391,6 +1406,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		6440CD7322D7282C00072903 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\nset -x\n\nif ! which swiftlint > /dev/null; then\necho \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\nelse\nswiftlint autocorrect\nswiftlint\nfi\n";
+		};
 		98175448228E0BE50019159A /* Carthage Copy frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1455,6 +1488,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6440CD7222D727EA00072903 /* UserRepository.swift in Sources */,
+				6440CD7722D76A1800072903 /* UserRepositoryFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1621,6 +1656,11 @@
 			target = 6440CD4D22D7269D00072903 /* UserRepository */;
 			targetProxy = 6440CD6122D7269D00072903 /* PBXContainerItemProxy */;
 		};
+		6440CD7522D7289B00072903 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6440CD4D22D7269D00072903 /* UserRepository */;
+			targetProxy = 6440CD7422D7289B00072903 /* PBXContainerItemProxy */;
+		};
 		DB18E9F42261BA29004F6AC3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DBCA37F4225E892400CD4137 /* HyperwalletUISDK */;
@@ -1684,6 +1724,7 @@
 		6440CD6522D7269D00072903 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -1691,7 +1732,8 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = UserRepository/Info.plist;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
+				INFOPLIST_FILE = "$(SRCROOT)/UserRepository/Sources/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1702,6 +1744,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ios.UserRepository;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1710,6 +1753,7 @@
 		6440CD6622D7269D00072903 /* XCUITest */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -1717,7 +1761,8 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = UserRepository/Info.plist;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
+				INFOPLIST_FILE = "$(SRCROOT)/UserRepository/Sources/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1728,6 +1773,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ios.UserRepository;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1736,6 +1782,7 @@
 		6440CD6722D7269D00072903 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -1743,7 +1790,8 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = UserRepository/Info.plist;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
+				INFOPLIST_FILE = "$(SRCROOT)/UserRepository/Sources/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1765,7 +1813,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = UserRepositoryTests/Info.plist;
+				INFOPLIST_FILE = UserRepository/Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1776,7 +1824,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Demo.app/Demo";
 			};
 			name = Debug;
 		};
@@ -1786,7 +1833,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = UserRepositoryTests/Info.plist;
+				INFOPLIST_FILE = UserRepository/Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1797,7 +1844,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Demo.app/Demo";
 			};
 			name = XCUITest;
 		};
@@ -1807,7 +1853,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = UserRepositoryTests/Info.plist;
+				INFOPLIST_FILE = UserRepository/Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1818,7 +1864,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Demo.app/Demo";
 			};
 			name = Release;
 		};

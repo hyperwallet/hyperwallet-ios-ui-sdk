@@ -20,6 +20,7 @@ import HyperwalletSDK
 
 #if !COCOAPODS
 import TransferMethodRepository
+import UserRepository
 #endif
 
 protocol SelectTransferMethodTypeView: class {
@@ -49,13 +50,16 @@ protocol SelectTransferMethodTypeView: class {
 final class SelectTransferMethodTypePresenter {
     // MARK: properties
     private unowned let view: SelectTransferMethodTypeView
-    private var user: HyperwalletUser?
     private (set) var countryCurrencySectionData = [String]()
     private (set) var selectedCountry = ""
     private (set) var selectedCurrency = ""
 
     private var transferMethodConfigurationRepository: TransferMethodConfigurationRepository {
         return TransferMethodRepositoryFactory.shared.transferMethodConfigurationRepository()
+    }
+
+    private var userRepository: RemoteUserRepository {
+        return UserRepositoryFactory.shared.userRepository()
     }
 
     var sectionData = [HyperwalletTransferMethodType]()
@@ -112,28 +116,27 @@ final class SelectTransferMethodTypePresenter {
         view.showLoading()
 
         if forceUpdate {
+            userRepository.refreshUser()
             transferMethodConfigurationRepository.refreshKeys()
         }
 
-        Hyperwallet.shared.getUser {[weak self] (result, error) in
+        userRepository.getUser { [weak self] getUserResult in
             guard let strongSelf = self else {
                 return
             }
-            if let error = error {
-                DispatchQueue.main.async { [weak self]  in
-                    self?.view.hideLoading()
-                    self?.view.showError(error, { self?.loadTransferMethodKeys() })
-                }
-                return
-            }
 
-            strongSelf.user = result
+            switch getUserResult {
+            case .failure(let error):
+                strongSelf.view.hideLoading()
+                strongSelf.view.showError(error, { () -> Void in
+                    strongSelf.loadTransferMethodKeys()
+                })
 
-            DispatchQueue.main.async {
+            case .success(let user):
                 strongSelf.transferMethodConfigurationRepository
                     .getKeys(completion: strongSelf.getKeysHandler({ (result) in
                         strongSelf.countryCurrencySectionData = ["Country", "Currency"]
-                        strongSelf.loadSelectedCountry(result?.countries())
+                        strongSelf.loadSelectedCountry(result?.countries(), with: user?.country)
                         strongSelf.loadSelectedCurrency(result?.currencies(from: strongSelf.selectedCountry))
                         strongSelf.loadTransferMethodTypes(
                             result?.transferMethodTypes(countryCode: strongSelf.selectedCountry,
@@ -145,13 +148,20 @@ final class SelectTransferMethodTypePresenter {
 
     /// Navigate to AddTransferMethodController
     func navigateToAddTransferMethod(_ index: Int) {
-        guard let profileType = user?.profileType?.rawValue else {
-            return
+        userRepository.getUser {[weak self] (getUserResult) in
+            guard let strongSelf = self else {
+                return
+            }
+
+            if case let .success(user) = getUserResult,
+                let profileType = user?.profileType?.rawValue {
+                let code = strongSelf.sectionData[index].code!
+                strongSelf.view.navigateToAddTransferMethodController(country: strongSelf.selectedCountry,
+                                                                      currency: strongSelf.selectedCurrency,
+                                                                      profileType: profileType,
+                                                                      transferMethodTypeCode: code)
+            }
         }
-        view.navigateToAddTransferMethodController(country: selectedCountry,
-                                                   currency: selectedCurrency,
-                                                   profileType: profileType,
-                                                   transferMethodTypeCode: sectionData[index].code!)
     }
 
     private func countryCurrencyValues(at index: Int) -> String {
@@ -264,13 +274,14 @@ final class SelectTransferMethodTypePresenter {
         }
     }
 
-    private func loadSelectedCountry(_ countries: [HyperwalletCountry]? ) {
+    private func loadSelectedCountry(_ countries: [HyperwalletCountry]?,
+                                     with userCountry: String?) {
         guard let countries = countries else {
             view.showAlert(message: "no_country_available_error_message".localized())
             return
         }
 
-        if let userCountry = user?.country, countries.contains(where: { $0.value == userCountry }) {
+        if let userCountry = userCountry, countries.contains(where: { $0.value == userCountry }) {
             selectedCountry = userCountry
         } else if let country = countries.first {
             selectedCountry = country.value

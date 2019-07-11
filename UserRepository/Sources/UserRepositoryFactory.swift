@@ -16,27 +16,35 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import UserRepository
-import XCTest
+import Foundation
 
-class UserRepositoryTests: XCTestCase {
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
+/// The extension of RepositoryFactory with the UserRepository feature
+public final class UserRepositoryFactory {
+    private static var instance: UserRepositoryFactory?
+    private let remoteUserRerpository: RemoteUserRepository
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    /// Returns the previously initialized instance of the RepositoryFactory object
+    public static var shared: UserRepositoryFactory {
+        guard let instance = instance else {
+            self.instance = UserRepositoryFactory()
+            return self.instance!
         }
+        return instance
+    }
+
+    /// Clears the RepositoryFactory singleton instance.
+    public static func clearInstance() {
+        instance = nil
+    }
+
+    private init() {
+        remoteUserRerpository = RemoteUserRepository()
+    }
+
+    /// Gets an instance of transfer method configuration repository.
+    ///
+    /// - Returns: The RemoteUserRepository
+    public func userRepository() -> RemoteUserRepository {
+        return remoteUserRerpository
     }
 }
