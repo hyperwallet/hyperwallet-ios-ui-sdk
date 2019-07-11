@@ -51,6 +51,92 @@ final class ListTransferMethodPresenter {
         }
     }
 
+    /// Deactivate the selected Transfer Method
+    private func deactivateTransferMethod(_ transferMethod: HyperwalletTransferMethod) {
+        self.view.showProcessing()
+        if let transferMethodType = transferMethod.getField(fieldName: .type)  as? String,
+            let token = transferMethod.getField(fieldName: .token) as? String {
+            selectedTransferMethod = transferMethod
+            switch transferMethodType {
+            case "BANK_ACCOUNT", "WIRE_ACCOUNT":
+                deactivateBankAccount(token)
+            case "BANK_CARD":
+                deactivateBankCard(token)
+            case "PAYPAL_ACCOUNT":
+                deactivatePayPalAccount(token)
+
+            default:
+                break
+            }
+        }
+    }
+
+    private func listTransferMethodHandler()
+        -> (HyperwalletPageList<HyperwalletTransferMethod>?, HyperwalletErrorType?) -> Void {
+            return { [weak self] (result, error) in
+                guard let strongSelf = self else {
+                    return
+                }
+                DispatchQueue.main.async {
+                    strongSelf.view.hideLoading()
+                    if let error = error {
+                        strongSelf.view.showError(error, { strongSelf.listTransferMethod() })
+                        return
+                    }
+                    if let data = result?.data {
+                        strongSelf.sectionData = data
+                    } else {
+                        strongSelf.sectionData = []
+                    }
+
+                    strongSelf.view.showTransferMethods()
+                }
+            }
+    }
+
+    private func deactivateBankAccount(_ token: String) {
+        Hyperwallet.shared.deactivateBankAccount(transferMethodToken: token,
+                                                 notes: "Deactivating Account",
+                                                 completion: deactivateTransferMethodHandler())
+    }
+
+    private func deactivateBankCard(_ token: String) {
+        Hyperwallet.shared.deactivateBankCard(transferMethodToken: token,
+                                              notes: "Deactivating the Bank Card",
+                                              completion: deactivateTransferMethodHandler())
+    }
+
+    private func deactivatePayPalAccount(_ token: String) {
+        Hyperwallet.shared.deactivatePayPalAccount(transferMethodToken: token,
+                                                   notes: "Deactivating the PayPal Account",
+                                                   completion: deactivateTransferMethodHandler())
+    }
+
+    private func deactivateTransferMethodHandler()
+        -> (HyperwalletStatusTransition?, HyperwalletErrorType?) -> Void {
+            return { [weak self] (result, error) in
+                guard let strongSelf = self else {
+                    return
+                }
+                DispatchQueue.main.async {
+                    if let error = error {
+                        let errorHandler = {
+                            strongSelf.view.showError(error, {
+                                strongSelf.deactivateTransferMethod(strongSelf.selectedTransferMethod!) })
+                        }
+
+                        strongSelf.view.dismissProcessing(handler: errorHandler)
+                    } else if let statusTransition = result {
+                        let processingHandler = {
+                            () -> Void in strongSelf.listTransferMethod()
+                            strongSelf.view.notifyTransferMethodDeactivated(statusTransition)
+                        }
+                        strongSelf.view.showConfirmation(handler: processingHandler)
+                    }
+                }
+            }
+    }
+
     func getCellConfiguration(indexPath: IndexPath) -> ListTransferMethodCellConfiguration? {
         if let transferMethod = sectionData[safe: indexPath.row],
             let country = transferMethod.getField(fieldName: .transferMethodCountry) as? String,
@@ -127,26 +213,19 @@ final class ListTransferMethodPresenter {
     private func getAdditionalInfo(_ transferMethod: HyperwalletTransferMethod) -> String? {
         var additionalInfo: String?
         switch transferMethod.getField(fieldName: .type) as? String {
-        case "BANK_ACCOUNT":
-            additionalInfo = transferMethod.getField(fieldName: .bankAccountId) as? String
-            additionalInfo = String(format: "%@%@",
-                                    "transfer_method_list_item_description".localized(),
-                                    additionalInfo?.suffix(startAt: 4) ?? "")
-        case "BANK_CARD":
+        case "BANK_CARD", "PREPAID_CARD":
             additionalInfo = transferMethod.getField(fieldName: .cardNumber) as? String
             additionalInfo = String(format: "%@%@",
                                     "transfer_method_list_item_description".localized(),
                                     additionalInfo?.suffix(startAt: 4) ?? "")
         case "PAYPAL_ACCOUNT":
             additionalInfo = transferMethod.getField(fieldName: .email) as? String
-        case "WIRE_ACCOUNT":
-            additionalInfo = transferMethod.getField(fieldName: .intermediaryBankAccountId) as? String
+
+        default:
+            additionalInfo = transferMethod.getField(fieldName: .bankAccountId) as? String
             additionalInfo = String(format: "%@%@",
                                     "transfer_method_list_item_description".localized(),
                                     additionalInfo?.suffix(startAt: 4) ?? "")
-
-        default:
-            break
         }
         return additionalInfo
     }

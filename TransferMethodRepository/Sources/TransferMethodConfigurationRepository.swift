@@ -98,12 +98,9 @@ public final class RemoteTransferMethodConfigurationRepository: TransferMethodCo
     private func getKeysHandler(
         _ completion: @escaping (Result<HyperwalletTransferMethodConfigurationKey?, HyperwalletErrorType>) -> Void)
         -> (HyperwalletTransferMethodConfigurationKey?, HyperwalletErrorType?) -> Void {
-        return { [weak self] (result, error) in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.transferMethodConfigurationKeys = RemoteTransferMethodConfigurationRepository
-                .performCompletion(error, result, completion, strongSelf.transferMethodConfigurationKeys)
+        return { (result, error) in
+            self.transferMethodConfigurationKeys = CompletionHelper
+                .performCompletion(error, result, completion, self.transferMethodConfigurationKeys)
         }
     }
 
@@ -111,34 +108,12 @@ public final class RemoteTransferMethodConfigurationRepository: TransferMethodCo
         _ fieldQuery: HyperwalletTransferMethodConfigurationFieldQuery,
         _ completion: @escaping (Result<HyperwalletTransferMethodConfigurationField?, HyperwalletErrorType>) -> Void)
         -> (HyperwalletTransferMethodConfigurationField?, HyperwalletErrorType?) -> Void {
-        return { [weak self] (result, error) in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.transferMethodConfigurationFieldsCache[fieldQuery] = RemoteTransferMethodConfigurationRepository
+        return { (result, error) in
+            self.transferMethodConfigurationFieldsCache[fieldQuery] = CompletionHelper
                 .performCompletion(error,
                                    result,
                                    completion,
-                                   strongSelf.transferMethodConfigurationFieldsCache[fieldQuery])
+                                   self.transferMethodConfigurationFieldsCache[fieldQuery])
         }
-    }
-
-    @discardableResult
-    static func performCompletion<T>(_ error: HyperwalletErrorType?,
-                                     _ result: T?,
-                                     _ completionHandler: @escaping (Result<T?, HyperwalletErrorType>) -> Void,
-                                     _ repositoryOriginalValue: T? = nil) -> T? {
-        if let error = error {
-            DispatchQueue.main.async {
-                completionHandler(.failure(error))
-            }
-        } else {
-            DispatchQueue.main.async {
-                completionHandler(.success(result))
-            }
-            return result
-        }
-
-        return repositoryOriginalValue
     }
 }

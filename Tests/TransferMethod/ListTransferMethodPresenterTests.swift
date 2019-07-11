@@ -9,7 +9,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
     private lazy var listTransferMethodPayload = HyperwalletTestHelper
         .getDataFromJson("ListTransferMethodSuccessResponse")
     private lazy var deactivateTransferMethodPayload = HyperwalletTestHelper
-        .getDataFromJson("StatusTransitionMockedResponseSuccess")
+        .getDataFromJson("StatusTransitionResponseSuccess")
     private let transferMethodToken = "trm-123456789"
 
     private lazy var bankAccount: HyperwalletBankAccount = {
@@ -66,6 +66,32 @@ class ListTransferMethodPresenterTests: XCTestCase {
         XCTAssertTrue(presenter.sectionData.isNotEmpty(), "The sectionData should not be empty")
         XCTAssertNotNil(presenter.getCellConfiguration(indexPath: IndexPath(row: 0, section: 0)),
                         "The cell configuration should not be nil")
+    }
+
+    func testListTransferMethod_emptyResult() {
+        // Given
+        let response = HyperwalletTestHelper.noContentHTTPResponse()
+        let url = String(format: "%@%@", HyperwalletTestHelper.userRestURL, "/transfer-methods?")
+        HyperwalletTestHelper.setUpMockServer(request:
+            HyperwalletTestHelper.buildGetRequestRegexMatcher(pattern: url, response))
+
+        let expectation = self.expectation(description: "load transfer methods")
+        mockView.expectation = expectation
+
+        // When
+        presenter.listTransferMethod()
+        wait(for: [expectation], timeout: 1)
+
+        // Then
+        XCTAssertFalse(mockView.isShowErrorPerformed, "The showError should not be performed")
+        XCTAssertTrue(mockView.isShowLoadingPerformed, "The showLoading should be performed")
+        XCTAssertTrue(mockView.isHideLoadingPerformed, "The hideLoading should be performed")
+        XCTAssertTrue(mockView.isShowTransferMethodsPerformed, "The showTransferMethods should be performed")
+
+        XCTAssertFalse(presenter.transferMethodExists(at: 0), "The transferMethodExists should return false")
+        XCTAssertTrue(presenter.sectionData.isEmpty, "The sectionData should be empty")
+        XCTAssertNil(presenter.getCellConfiguration(indexPath: IndexPath(row: 0, section: 0)),
+                     "The cell configuration should be nil")
     }
 
     func testListTransferMethod_failureWithError() {
