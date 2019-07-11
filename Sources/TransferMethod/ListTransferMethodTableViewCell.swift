@@ -21,11 +21,13 @@ import UIKit
 struct ListTransferMethodCellConfiguration {
     let transferMethodType: String
     let transferMethodCountry: String
-    let lastFourDigitAccountNumber: String?
+    let additionalInfo: String?
     let transferMethodIconFont: String
 }
 
 final class ListTransferMethodTableViewCell: UITableViewCell {
+    static let reuseIdentifier = "listTransferMethodCellIdentifier"
+
     // MARK: Life cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
@@ -37,12 +39,12 @@ final class ListTransferMethodTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        imageView?.backgroundColor = Theme.Icon.backgroundColor
+        imageView?.backgroundColor = Theme.Icon.primaryBackgroundColor
     }
 
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
-        imageView?.backgroundColor = Theme.Icon.backgroundColor
+        imageView?.backgroundColor = Theme.Icon.primaryBackgroundColor
     }
 
     // MARK: Theme manager's proxy properties
@@ -71,27 +73,27 @@ final class ListTransferMethodTableViewCell: UITableViewCell {
 extension ListTransferMethodTableViewCell {
     func configure(configuration: ListTransferMethodCellConfiguration) {
         textLabel?.text = configuration.transferMethodType
-        detailTextLabel?.attributedText = formatSubtitle(transferMethodCountry: configuration.transferMethodCountry,
-                                                         lastFourDigitAccountNumber: configuration
-                                                            .lastFourDigitAccountNumber)
+        textLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellTextLabel"
+        detailTextLabel?.attributedText = formatDetails(transferMethodCountry: configuration.transferMethodCountry,
+                                                        additionalInfo: configuration.additionalInfo)
+        detailTextLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellDetailTextLabel"
         detailTextLabel?.numberOfLines = 0
         detailTextLabel?.lineBreakMode = .byWordWrapping
         let icon = UIImage.fontIcon(configuration.transferMethodIconFont,
                                     Theme.Icon.frame,
                                     CGFloat(Theme.Icon.size),
-                                    Theme.Icon.color,
-                                    Theme.Icon.backgroundColor)
+                                    Theme.Icon.primaryColor)
         imageView?.image = icon
         imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
     }
 
-    func formatSubtitle(transferMethodCountry: String, lastFourDigitAccountNumber: String?) -> NSAttributedString {
+    func formatDetails(transferMethodCountry: String, additionalInfo: String?) -> NSAttributedString {
         let attributedText = NSMutableAttributedString()
-        let font = Theme.Label.captionOne
-        let color = Theme.Label.subTitleColor
-        attributedText.append(value: String(format: "%@\n", transferMethodCountry), font: font, color: color)
-        if let lastFourDigitAccountNumber = lastFourDigitAccountNumber {
-            attributedText.append(value: lastFourDigitAccountNumber, font: font, color: color)
+        attributedText.append(value: String(format: "%@\n", transferMethodCountry),
+                              font: subTitleLabelFont,
+                              color: subTitleLabelColor)
+        if let additionalInfo = additionalInfo {
+            attributedText.append(value: additionalInfo, font: subTitleLabelFont, color: subTitleLabelColor)
         }
 
         return attributedText

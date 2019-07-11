@@ -72,51 +72,6 @@ class HyperwalletMockWebServer {
         }
     }
 
-    func setupGraphQLStubs() {
-        let filePathKeys = testBundle.path(forResource: "TransferMethodConfigurationKeysResponse", ofType: "json")
-        let filePathBankField = testBundle.path(forResource: "TransferMethodConfigurationBankAccountResponse",
-                                                ofType: "json")
-        let filePathCardField = testBundle.path(forResource: "TransferMethodConfigurationBankCardResponse",
-                                                ofType: "json")
-        let filePathPayPalField = testBundle.path(forResource: "TransferMethodConfigurationPayPalAccountResponse",
-                                                  ofType: "json")
-
-        let fileUrlKeys = URL(fileURLWithPath: filePathKeys!)
-        let fileUrlBankField = URL(fileURLWithPath: filePathBankField!)
-        let fileUrlCardField = URL(fileURLWithPath: filePathCardField!)
-        let fileUrlPayPalField = URL(fileURLWithPath: filePathPayPalField!)
-
-        do {
-            let dataKeys = try Data(contentsOf: fileUrlKeys, options: .uncached)
-            let dataBankField = try Data(contentsOf: fileUrlBankField, options: .uncached)
-            let dataCardField = try Data(contentsOf: fileUrlCardField, options: .uncached)
-            let dataPayPalField = try Data(contentsOf: fileUrlPayPalField, options: .uncached)
-
-            let jsonKeys = dataToJSON(data: dataKeys)
-            let jsonBankField = dataToJSON(data: dataBankField)
-            let jsonCardField = dataToJSON(data: dataCardField)
-            let jsonPayPalField = dataToJSON(data: dataPayPalField)
-
-            server.POST["/graphql"] = { request in
-                let requestBody = String(bytes: request.body, encoding: .utf8)!
-                if requestBody.contains("fields") {
-                    if requestBody.contains("BANK_CARD") {
-                        // Update this when correct details are there
-                        return HttpResponse.ok(.json(jsonCardField as AnyObject))
-                    } else if requestBody.contains("PAYPAL_ACCOUNT") {
-                        return HttpResponse.ok(.json(jsonPayPalField as AnyObject))
-                    } else {
-                        return HttpResponse.ok(.json(jsonBankField as AnyObject))
-                    }
-                } else {
-                    return HttpResponse.ok(.json(jsonKeys as AnyObject))
-                }
-            }
-        } catch {
-            print("Error info: \(error)")
-        }
-    }
-
     func setUpEmptyResponse(url: String) {
         let statusCode = 204
         let headers = ["Content-Type": "application/json"]
@@ -126,51 +81,6 @@ class HyperwalletMockWebServer {
         }
 
         server.GET[url] = response
-    }
-
-    func setUpGraphQLBankAccountWithNotEditableField() {
-        let filePathKeys = testBundle.path(forResource: "TransferMethodConfigurationKeysResponse", ofType: "json")
-        let filePathBankField = testBundle.path(forResource: "BankAccountConfigurationWithNotEditableFieldsResponse",
-                                                ofType: "json")
-
-        let fileUrlKeys = URL(fileURLWithPath: filePathKeys!)
-        let fileUrlBankField = URL(fileURLWithPath: filePathBankField!)
-
-        do {
-            let dataKeys = try Data(contentsOf: fileUrlKeys, options: .uncached)
-            let dataBankField = try Data(contentsOf: fileUrlBankField, options: .uncached)
-
-            let jsonKeys = dataToJSON(data: dataKeys)
-            let jsonBankField = dataToJSON(data: dataBankField)
-
-            server.POST["/graphql"] = { request in
-                let requestBody = String(bytes: request.body, encoding: .utf8)!
-                if requestBody.contains("fields") {
-                    return HttpResponse.ok(.json(jsonBankField as AnyObject))
-                } else {
-                    return HttpResponse.ok(.json(jsonKeys as AnyObject))
-                }
-            }
-        } catch {
-            print("Error info: \(error)")
-        }
-    }
-
-    func setUpGraphQLBankAccountWithPreSetValues() {
-        let filePathBankField = testBundle.path(forResource: "BankAccountConfigurationPresetValues",
-                                                ofType: "json")
-        let fileUrlBankField = URL(fileURLWithPath: filePathBankField!)
-
-        do {
-            let dataBankField = try Data(contentsOf: fileUrlBankField, options: .uncached)
-            let jsonBankField = dataToJSON(data: dataBankField)
-
-            server.POST["/graphql"] = { request in
-                HttpResponse.ok(.json(jsonBankField as AnyObject))
-            }
-        } catch {
-            print("Error info: \(error)")
-        }
     }
 
     func dataToJSON(data: Data) -> Any? {

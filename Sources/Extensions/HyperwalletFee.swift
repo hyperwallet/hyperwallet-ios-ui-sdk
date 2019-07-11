@@ -59,16 +59,17 @@ extension HyperwalletFee {
 
         private func flatFeeDescription(_ flatFee: HyperwalletFee) -> String {
             let feeFormat = "fee_flat_formatter".localized()
-            return String(format: feeFormat.localized(), flatFee.currency, flatFee.value)
+            let currency = flatFee.currency ?? ""
+            return String(format: feeFormat.localized(), currency, flatFee.value)
         }
 
         private func percentFeeDescription(_ percentFee: HyperwalletFee) -> String {
             var description = ""
             var feeFormat = ""
             let value = percentFee.value
-            let currency = percentFee.currency
             let min = percentFee.minimum
             let max = percentFee.maximum
+            let currency = percentFee.currency ?? ""
 
             if let min = min, let max = max {
                 feeFormat = "fee_percent_formatter".localized()
@@ -79,6 +80,9 @@ extension HyperwalletFee {
             } else if min == nil, let max = max {
                 feeFormat = "fee_percent_only_max_formatter".localized()
                 description = String(format: feeFormat, value, currency, max)
+            } else {
+                feeFormat = "fee_percent_no_min_and_max_formatter".localized()
+                description = String(format: feeFormat, value)
             }
             return description
         }
@@ -88,9 +92,9 @@ extension HyperwalletFee {
             var feeFormat = ""
             let flatValue = flatFee.value
             let percentValue = percentFee.value
-            let currency = flatFee.currency
             let min = percentFee.minimum
             let max = percentFee.maximum
+            let currency = flatFee.currency ?? ""
 
             if let min = min, let max = max {
                 feeFormat = "fee_mix_formatter".localized()

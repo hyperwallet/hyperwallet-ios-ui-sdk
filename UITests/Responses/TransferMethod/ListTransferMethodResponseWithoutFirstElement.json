@@ -1,7 +1,7 @@
 {
-    "count": 3,
+    "count": 4,
     "offset": 0,
-    "limit": 50,
+    "limit": 100,
     "data": [
         {
             "token": "trm-11111111-0000-0000-0000-000000000000",
@@ -94,6 +94,23 @@
                 },
                 "href" : "https://localhost:8181/rest/v3/users/usr-token/bank-accounts/trm-00000000-0000-0000-0000-111111111111"
             } ]
+        },
+        {
+            "token": "trm-00000000-0000-0000-0000-111111111111",
+            "type": "PAYPAL_ACCOUNT",
+            "status": "ACTIVATED",
+            "createdOn": "2019-05-08T00:09:06",
+            "transferMethodCountry": "US",
+            "transferMethodCurrency": "USD",
+            "email": "carroll.lynn@byteme.com",
+            "links": [
+                {
+                    "params": {
+                        "rel": "self"
+                    },
+                    "href": "https://localhost/rest/v3/users/usr-1234/transfer-methods/trm-00000000-0000-0000-0000-111111111111"
+                }
+            ]
         }
     ],
     "links": [

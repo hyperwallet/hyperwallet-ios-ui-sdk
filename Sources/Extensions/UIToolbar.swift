@@ -30,12 +30,13 @@ extension UIToolbar {
                                          style: .plain,
                                          target: target,
                                          action: action)
+        doneButton.tintColor = Theme.Button.color
         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
         toolbar.setItems([spaceButton, doneButton], animated: true)
         toolbar.isUserInteractionEnabled = true
 
-        doneButton.accessibilityIdentifier = "DoneButtonAccessibilityIdentifier"
-        toolbar.accessibilityIdentifier = "ToolbarAccessibilityIdentifier"
+        doneButton.accessibilityIdentifier = "doneButton"
+        toolbar.accessibilityIdentifier = "toolbar"
     }
 }

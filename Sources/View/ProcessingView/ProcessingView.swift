@@ -172,15 +172,16 @@ extension ProcessingView {
 
 // MARK: Constraints
 extension ProcessingView {
-    private func getConstraint(item: Any, toItem: Any, attribute: NSLayoutConstraint.Attribute) -> NSLayoutConstraint {
-        return NSLayoutConstraint(item: item,
-                                  attribute: attribute,
-                                  relatedBy: .equal,
-                                  toItem: toItem,
-                                  attribute: attribute,
-                                  multiplier: 1.0,
-                                  constant: 0.0
-        )
+    private func getConstraint(item: UIView, toItem: UIView, attribute: NSLayoutConstraint.Attribute)
+        -> NSLayoutConstraint {
+            return NSLayoutConstraint(item: item,
+                                      attribute: attribute,
+                                      relatedBy: .equal,
+                                      toItem: toItem,
+                                      attribute: attribute,
+                                      multiplier: 1.0,
+                                      constant: 0.0
+            )
     }
 
     private func getConstraintEqualToContainer(attribute: NSLayoutConstraint.Attribute) -> NSLayoutConstraint {
@@ -191,10 +192,10 @@ extension ProcessingView {
 // MARK: Accessibility Identifiers
 extension ProcessingView {
     private func populateByAccessibilityIds() {
-        self.accessibilityIdentifier = "a12IdProcessingView"
-        contentView.accessibilityIdentifier = "a12IdContentView"
-        checkImageView.accessibilityIdentifier = "a12IdCheckImageView"
-        activityIndicator.accessibilityIdentifier = "a12IdActivityIndicator"
-        stateLabel.accessibilityIdentifier = "a12IdStateLabel"
+        self.accessibilityIdentifier = "processingView"
+        contentView.accessibilityIdentifier = "contentView"
+        checkImageView.accessibilityIdentifier = "checkImageView"
+        activityIndicator.accessibilityIdentifier = "activityIndicator"
+        stateLabel.accessibilityIdentifier = "stateLabel"
     }
 }

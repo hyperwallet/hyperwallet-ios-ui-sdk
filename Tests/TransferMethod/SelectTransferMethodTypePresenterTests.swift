@@ -114,11 +114,12 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isNavigateToAddTransferMethodControllerPerformed,
                       "The navigateToAddTransferMethodControllerPerformed should be performed")
 
-        XCTAssertEqual(presenter.countryCurrencyCount, 2, "The countryCurrencyCount should be 2")
-        XCTAssertEqual(presenter.transferMethodTypesCount, 1, "The transferMethodTypesCount should be 1")
-        XCTAssertNotNil(presenter.getCellConfiguration(for: 0), "The getCellConfiguration should not be nil")
-        XCTAssertNotNil(presenter.getCountryCurrencyCellConfiguration(for: 0),
-                        "The getCellConfiguration should not be nil")
+        XCTAssertEqual(presenter.countryCurrencySectionData.count, 2, "The countryCurrencyCount should be 2")
+        XCTAssertEqual(presenter.sectionData.count, 3, "The transferMethodTypesCount should be 3")
+        XCTAssertNotNil(presenter.getCellConfiguration(indexPath: IndexPath(row: 0, section: 0)),
+                        "The cell configuration should not be nil")
+        XCTAssertNotNil(presenter.getCountryCurrencyConfiguration(indexPath: IndexPath(row: 0, section: 0)),
+                        "The country currency cell configuration should not be nil")
     }
 
     private func loadTransferMethodKeys() {
@@ -177,10 +178,9 @@ class MockSelectTransferMethodTypeView: SelectTransferMethodTypeView {
 
     func showGenericTableView(items: [CountryCurrencyCellConfiguration],
                               title: String,
-                              selectItemHandler: @escaping (CountryCurrencyCellConfiguration) -> Void,
-                              markCellHandler: @escaping (CountryCurrencyCellConfiguration) -> Bool,
-                              filterContentHandler: @escaping (([CountryCurrencyCellConfiguration], String)
-                                                                -> [CountryCurrencyCellConfiguration])) {
+                              selectItemHandler: @escaping SelectItemHandler,
+                              markCellHandler: @escaping MarkCellHandler,
+                              filterContentHandler: @escaping FilterContentHandler) {
         if title == "Select Country" {
             let country = CountryCurrencyCellConfiguration(title: "United States", value: "US")
             selectItemHandler(country)
@@ -201,7 +201,7 @@ class MockSelectTransferMethodTypeView: SelectTransferMethodTypeView {
     func navigateToAddTransferMethodController(country: String,
                                                currency: String,
                                                profileType: String,
-                                               detail: TransferMethodTypeDetail) {
+                                               transferMethodTypeCode: String) {
         isNavigateToAddTransferMethodControllerPerformed = true
     }
 

@@ -39,6 +39,7 @@ final class SelectionWidget: AbstractWidget {
 
     override func setupLayout(field: HyperwalletField) {
         super.setupLayout(field: field)
+        labelField.accessibilityIdentifier = field.name
         addArrangedSubview(labelField)
 
         if field.isEditable ?? true {
@@ -82,7 +83,6 @@ final class SelectionWidget: AbstractWidget {
             }
         }
 
-        tableView.initialSelectedItemIndex = tableView.items.firstIndex { $0.value == value() }
         tableView.shouldMarkCellAction = { self.selectedValue == $0.value }
         tableView.filterContentForSearchTextAction = {(items, searchText) in
             items.filter {
@@ -94,7 +94,7 @@ final class SelectionWidget: AbstractWidget {
     }
 
     private func updateLabelFieldValue(_ option: HyperwalletFieldSelectionOption) {
-        labelField.text = option.label.localized()
+        labelField.text = option.label
         selectedValue = option.value
     }
 }

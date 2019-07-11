@@ -16,17 +16,19 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+import HyperwalletSDK
 import UIKit
 
-/// Represents the country and currency data to be displyed on the CountryCurrencyCell
+/// Represents the country and currency data to be displayed on the CountryCurrencyCell
 struct SelectTransferMethodTypeConfiguration {
-    let transferMethodType: String
+    let transferMethodTypeCode: String!
+    let transferMethodTypeName: String!
     let feesProcessingTime: NSAttributedString
     let transferMethodIconFont: String
 }
 
 final class SelectTransferMethodTypeCell: UITableViewCell {
-    static let reuseId = "SelectTransferMethodTypeCellIdentifier"
+    static let reuseIdentifier = "selectTransferMethodTypeCellIdentifier"
 
     // MARK: Life cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -39,12 +41,12 @@ final class SelectTransferMethodTypeCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        imageView?.backgroundColor = Theme.Icon.backgroundColor
+        imageView?.backgroundColor = Theme.Icon.primaryBackgroundColor
     }
 
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
-        imageView?.backgroundColor = Theme.Icon.backgroundColor
+        imageView?.backgroundColor = Theme.Icon.primaryBackgroundColor
     }
 
     // MARK: Theme manager's proxy properties
@@ -70,19 +72,20 @@ final class SelectTransferMethodTypeCell: UITableViewCell {
 }
 
 extension SelectTransferMethodTypeCell {
-    func configure(configuration: SelectTransferMethodTypeConfiguration) {
-        accessibilityIdentifier = configuration.transferMethodType
+    func configure(configuration: SelectTransferMethodTypeConfiguration?) {
+        if let configuration = configuration {
+            accessibilityIdentifier = configuration.transferMethodTypeName
 
-        textLabel?.text = configuration.transferMethodType.localized()
-        detailTextLabel?.numberOfLines = 0
-        detailTextLabel?.lineBreakMode = .byWordWrapping
-        detailTextLabel?.attributedText = configuration.feesProcessingTime
-        let image = UIImage.fontIcon(configuration.transferMethodIconFont,
-                                     Theme.Icon.frame,
-                                     CGFloat(Theme.Icon.size),
-                                     Theme.Icon.color,
-                                     Theme.Icon.backgroundColor)
-        imageView?.image = image
-        imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
+            textLabel?.text = configuration.transferMethodTypeName
+            detailTextLabel?.numberOfLines = 0
+            detailTextLabel?.lineBreakMode = .byWordWrapping
+            detailTextLabel?.attributedText = configuration.feesProcessingTime
+            let image = UIImage.fontIcon(configuration.transferMethodIconFont,
+                                         Theme.Icon.frame,
+                                         CGFloat(Theme.Icon.size),
+                                         Theme.Icon.primaryColor)
+            imageView?.image = image
+            imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
+        }
     }
 }

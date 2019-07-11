@@ -1,0 +1,144 @@
+{
+    "data": [
+        {
+            "journalId": "FISVL_5269000",
+            "type": "DEPOSIT",
+            "createdOn": "2019-04-01T21:23:51",
+            "entry": "CREDIT",
+            "destinationToken": "trm-token",
+            "amount": "10.00",
+            "currency": "USD",
+            "details": {
+                "cardNumber": "************6198"
+            }
+        },
+        {
+            "journalId": "FISVL_5269036",
+            "type": "DEPOSIT",
+            "createdOn": "2019-05-27T01:26:05",
+            "entry": "CREDIT",
+            "destinationToken": "trm-token",
+            "amount": "15.00",
+            "currency": "USD",
+            "details": {
+                "cardNumber": "************6198"
+            }
+        },
+        {
+            "journalId": "FISVL_5269137",
+            "type": "DEPOSIT",
+            "createdOn": "2019-05-28T02:27:05",
+            "entry": "CREDIT",
+            "destinationToken": "trm-token",
+            "amount": "25.10",
+            "currency": "USD",
+            "details": {
+                "cardNumber": "************6198"
+            }
+        },
+        {
+            "journalId": "FISVL_5269138",
+            "type": "DEPOSIT",
+            "createdOn": "2019-05-29T02:27:05",
+            "entry": "CREDIT",
+            "destinationToken": "trm-token",
+            "amount": "30.10",
+            "currency": "USD",
+            "details": {
+                "cardNumber": "************6198"
+            }
+        },
+        {
+            "journalId": "FISVL_5269039",
+            "type": "DEPOSIT",
+            "createdOn": "2019-06-01T21:26:15",
+            "entry": "CREDIT",
+            "destinationToken": "trm-token",
+            "amount": "20.00",
+            "currency": "USD",
+            "details": {
+                "cardNumber": "************6198"
+            }
+        },
+        {
+            "journalId": "FISVL_5269123",
+            "type": "DEPOSIT",
+            "createdOn": "2019-06-02T21:26:15",
+            "entry": "CREDIT",
+            "destinationToken": "trm-token",
+            "amount": "20.00",
+            "currency": "USD",
+            "details": {
+                "cardNumber": "************6198"
+            }
+        },
+        {
+            "journalId": "FISVL_5269124",
+            "type": "DEPOSIT",
+            "createdOn": "2019-06-02T22:26:15",
+            "entry": "CREDIT",
+            "destinationToken": "trm-token",
+            "amount": "25.00",
+            "currency": "USD",
+            "details": {
+                "cardNumber": "************6198"
+            }
+        },
+        {
+            "journalId": "FISVL_5269125",
+            "type": "DEPOSIT",
+            "createdOn": "2019-06-05T23:26:15",
+            "entry": "CREDIT",
+            "destinationToken": "trm-token",
+            "amount": "30.00",
+            "currency": "USD",
+            "details": {
+                "cardNumber": "************6198"
+            }
+        },
+        {
+            "journalId": "FISVL_5269124",
+            "type": "DEPOSIT",
+            "createdOn": "2019-06-06T10:26:15",
+            "entry": "CREDIT",
+            "destinationToken": "trm-token",
+            "amount": "35.00",
+            "currency": "USD",
+            "details": {
+                "cardNumber": "************6198"
+            }
+        },
+        {
+            "journalId": "FISVL_5269125",
+            "type": "DEPOSIT",
+            "createdOn": "2019-06-07T10:26:15",
+            "entry": "CREDIT",
+            "destinationToken": "trm-token",
+            "amount": "40.00",
+            "currency": "USD",
+            "details": {
+                "cardNumber": "************6198"
+            }
+        },
+        {
+            "journalId": "FISVL_5269126",
+            "type": "DEPOSIT",
+            "createdOn": "2019-06-08T10:26:15",
+            "entry": "CREDIT",
+            "destinationToken": "trm-token",
+            "amount": "45.00",
+            "currency": "USD",
+            "details": {
+                "cardNumber": "************6198"
+            }
+        }
+    ],
+    "links": [
+        {
+            "params": {
+                "rel": "self"
+            },
+            "href": "https://localhost/rest/v3/users/usr-token/prepaid-cards/trm-token/receipts"
+        }
+    ]
+}

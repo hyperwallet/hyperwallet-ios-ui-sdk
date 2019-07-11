@@ -15,24 +15,29 @@
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-import Foundation
-import HyperwalletSDK
 
-extension HyperwalletTransferMethodConfigurationTransactionResult {
-    func populateTransferMethodTypeDetail(country: String,
-                                          currency: String,
-                                          profileType: String,
-                                          transferMethodType: String) -> TransferMethodTypeDetail {
-        let fees = self.fees(country: country,
-                             currency: currency,
-                             profileType: profileType,
-                             transferMethodType: transferMethodType)
-        let processingTime = self.processingTime(country: country,
-                                                 currency: currency,
-                                                 profileType: profileType,
-                                                 transferMethodType: transferMethodType)
-        return TransferMethodTypeDetail(transferMethodType: transferMethodType,
-                                        fees: fees,
-                                        processingTime: processingTime)
+final class ReceiptNotesTableViewCell: UITableViewCell {
+    static let reuseIdentifier = "receiptNotesTableViewCellReuseIdentifier"
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        textLabel?.numberOfLines = 0
+        textLabel?.lineBreakMode = .byWordWrapping
+        textLabel?.accessibilityIdentifier = "ReceiptDetailSectionNotesTextLabel"
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
+    // MARK: Theme manager's proxy properties
+    @objc dynamic var titleLabelFont: UIFont! {
+        get { return textLabel?.font }
+        set { textLabel?.font = newValue }
+    }
+
+    @objc dynamic var titleLabelColor: UIColor! {
+        get { return textLabel?.textColor }
+        set { textLabel?.textColor = newValue }
     }
 }
