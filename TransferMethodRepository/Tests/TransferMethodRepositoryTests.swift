@@ -341,23 +341,116 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
     }
 
     func testDeactivate_failure() {
+        let url = String(format: "%@%@",
+                         HyperwalletTestHelper.userRestURL,
+                         "/paypal-accounts/trm-123456789/status-transitions")
+        let response = StubResponse.Builder()
+            .defaultResponse()
+            .stubResponse(withError: NSError(domain: "", code: -1009, userInfo: nil))
+            .build()
+        let request = HyperwalletTestHelper.buildPostRequest(baseUrl: url, response)
+        HyperwalletTestHelper.setUpMockServer(request: request)
+        let expectation = self.expectation(description: "deactivate a bank card")
+        let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
+        var statusTransitionResult: HyperwalletStatusTransition?
+        var statusTransitionError: HyperwalletErrorType?
+
+        let paypalAccount = HyperwalletPayPalAccount
+            .Builder(transferMethodCountry: "US",
+                     transferMethodCurrency: "USD",
+                     transferMethodProfileType: "INDIVIDUAL")
+            .build()
+        paypalAccount.setField(key: "token", value: "trm-123456789")
+
+        transferMethodRepository.deactivate(paypalAccount) { result in
+            switch result {
+            case .failure(let error):
+                statusTransitionError = error
+
+            case .success(let deactivateResult):
+                statusTransitionResult = deactivateResult
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+
+        XCTAssertNil(statusTransitionResult)
+        XCTAssertNotNil(statusTransitionError)
+        XCTAssertGreaterThan(statusTransitionError!.getHyperwalletErrors()!.errorList!.count, 0)
     }
 
     func testList_returnsBankAccount() {
+        let expectation = self.expectation(description: "List transfer methods completed")
+        let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
+        var listTransactionResult: HyperwalletPageList<HyperwalletTransferMethod>?
+        var listTransactionError: HyperwalletErrorType?
+
+        let listTransferMethodData = HyperwalletTestHelper.getDataFromJson("ListTransferMethodSuccessResponse")
+        let response = HyperwalletTestHelper.setUpMockedResponse(payload: listTransferMethodData)
+        let url = String(format: "%@%@", HyperwalletTestHelper.userRestURL, "/transfer-methods?")
+        let request = HyperwalletTestHelper.buildGetRequestRegexMatcher(pattern: url, response)
+        HyperwalletTestHelper.setUpMockServer(request: request)
+
+        let queryParam = HyperwalletTransferMethodQueryParam()
+        queryParam.limit = 100
+        queryParam.status = .activated
+        transferMethodRepository.list(queryParam) { (result) in
+            switch result {
+            case .failure(let error):
+                listTransactionError = error
+
+            case .success(let listResult):
+                listTransactionResult = listResult
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+
+        XCTAssertNil(listTransactionError)
+        XCTAssertNotNil(listTransactionResult)
+        XCTAssertGreaterThan(listTransactionResult!.data.count, 0)
     }
 
     func testList_returnsNoAccounts() {
+        let expectation = self.expectation(description: "List transfer methods completed")
+        let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
+        var listTransactionResult: HyperwalletPageList<HyperwalletTransferMethod>?
+        var listTransactionError: HyperwalletErrorType?
+
+        //ListTransferMethodSuccessResponse
+        let response = HyperwalletTestHelper.noContentHTTPResponse()
+        let url = String(format: "%@%@", HyperwalletTestHelper.userRestURL, "/transfer-methods?")
+        let request = HyperwalletTestHelper.buildGetRequestRegexMatcher(pattern: url, response)
+        HyperwalletTestHelper.setUpMockServer(request: request)
+
+        let queryParam = HyperwalletTransferMethodQueryParam()
+        queryParam.limit = 100
+        queryParam.status = .activated
+        transferMethodRepository.list(queryParam) { (result) in
+            switch result {
+            case .failure(let error):
+                listTransactionError = error
+
+            case .success(let listResult):
+                listTransactionResult = listResult
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+
+        XCTAssertNil(listTransactionError)
+        XCTAssertNil(listTransactionResult)
     }
 
     private func setupOkResponseMockServer(endpoint: String, responseDataFile: String ) {
-        let url = String(format: "%@%@", HyperwalletTestHelper.userRestURL, endpoint) //
+        let url = String(format: "%@%@", HyperwalletTestHelper.userRestURL, endpoint)
         let response = HyperwalletTestHelper.okHTTPResponse(for: responseDataFile)
         let request = HyperwalletTestHelper.buildPostRequest(baseUrl: url, response)
         HyperwalletTestHelper.setUpMockServer(request: request)
     }
 
     private func setupBadResponseMockServer(endpoint: String, responseDataFile: String ) {
-        let url = String(format: "%@%@", HyperwalletTestHelper.userRestURL, endpoint) //
+        let url = String(format: "%@%@", HyperwalletTestHelper.userRestURL, endpoint)
         let response = HyperwalletTestHelper.badRequestHTTPResponse(for: responseDataFile)
         let request = HyperwalletTestHelper.buildPostRequest(baseUrl: url, response)
         HyperwalletTestHelper.setUpMockServer(request: request)

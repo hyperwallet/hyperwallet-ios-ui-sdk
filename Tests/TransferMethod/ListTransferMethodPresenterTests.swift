@@ -7,7 +7,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
     private var presenter: ListTransferMethodPresenter!
     private let mockView = MockListTransferMethodView()
     private lazy var listTransferMethodPayload = HyperwalletTestHelper
-        .getDataFromJson("TransferMethodMockedSuccessResponse")
+        .getDataFromJson("ListTransferMethodSuccessResponse")
     private lazy var deactivateTransferMethodPayload = HyperwalletTestHelper
         .getDataFromJson("StatusTransitionMockedResponseSuccess")
     private let transferMethodToken = "trm-123456789"
