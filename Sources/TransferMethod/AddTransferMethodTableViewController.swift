@@ -259,7 +259,7 @@ extension AddTransferMethodTableViewController: AddTransferMethodView {
                 focusField(in: section)
             } else {
                 isCalledByScrollToRow = true
-                tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                tableView.scrollToRow(at: indexPath, at: .top, animated: true)
             }
         }
     }
