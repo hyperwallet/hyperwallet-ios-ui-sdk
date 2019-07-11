@@ -123,12 +123,6 @@ final class AddTransferMethodPresenter {
         for field in view.fieldValues() {
             hyperwalletTransferMethod.setField(key: field.name, value: field.value)
         }
-        if transferMethodTypeCode == "WIRE_ACCOUNT" {
-            hyperwalletTransferMethod.setField(key: HyperwalletTransferMethod.TransferMethodField.intermediaryBankAccountId.rawValue, value: "GB29NWBK60161331926819")
-            hyperwalletTransferMethod.setField(key: HyperwalletTransferMethod.TransferMethodField.bankId.rawValue, value: "BKCHGB2U")
-            hyperwalletTransferMethod.setField(key: HyperwalletTransferMethod.TransferMethodField.bankAccountId.rawValue, value:
-                "1234")
-        }
         createTransferMethod(transferMethod: hyperwalletTransferMethod)
     }
 
