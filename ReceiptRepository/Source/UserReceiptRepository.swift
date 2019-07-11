@@ -20,16 +20,30 @@ import HyperwalletSDK
 
 /// User receipt repository protocol
 public protocol UserReceiptRepository {
-    func listUserReceipts(queryParam: HyperwalletReceiptQueryParam,
-                          completion: @escaping (HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType?)
-        -> Void)
+    /// Returns the list of receipts for the User associated with the authentication token.
+    ///
+    /// - Parameters:
+    ///   - queryParam: the ordering and filtering criteria
+    ///   - completion: the callback handler of responses from the Hyperwallet platform
+    func listUserReceipts(
+        queryParam: HyperwalletReceiptQueryParam,
+        completion: @escaping (Result<HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType>) -> Void)
 }
 
 /// User receipt repository
 public final class RemoteUserReceiptRepository: UserReceiptRepository {
-    public func listUserReceipts(queryParam: HyperwalletReceiptQueryParam,
-                                 completion: @escaping (HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType?)
-        -> Void) {
-        //
+    public func listUserReceipts(
+        queryParam: HyperwalletReceiptQueryParam,
+        completion: @escaping (Result<HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType>) -> Void) {
+        Hyperwallet.shared.listUserReceipts(queryParam: queryParam,
+                                            completion: listUserReceiptsHandler(completion))
+    }
+
+    private func listUserReceiptsHandler(
+        _ completion: @escaping (Result<HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType>) -> Void)
+        -> (HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType?) -> Void {
+            return {(result, error) in
+                CompletionHelper.performCompletion(error, result, completion)
+            }
     }
 }

@@ -17,6 +17,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import HyperwalletSDK
+#if !COCOAPODS
+import ReceiptRepository
+#endif
 
 protocol ListReceiptView: class {
     func hideLoading()
@@ -58,7 +61,8 @@ final class ListReceiptViewPresenter {
 
         isLoadInProgress = true
         view.showLoading()
-        Hyperwallet.shared.listUserReceipts(queryParam: setUpUserQueryParam(), completion: listUserReceiptHandler())
+        ReceiptRepositoryFactory.shared.userReceiptRepository().listUserReceipts(queryParam: setUpUserQueryParam(),
+                                                                                 completion: listUserReceiptHandler())
     }
 
     private func listPrepaidCardReceipts(_ prepaidCardToken: String) {
@@ -68,9 +72,10 @@ final class ListReceiptViewPresenter {
 
         isLoadInProgress = true
         view.showLoading()
-        Hyperwallet.shared.listPrepaidCardReceipts(prepaidCardToken: prepaidCardToken,
-                                                   queryParam: setUpPrepaidCardQueryParam(),
-                                                   completion: listPrepaidCardReceiptHandler())
+        ReceiptRepositoryFactory.shared.prepaidCardReceiptRepository().listPrepaidCardReceipts(
+            prepaidCardToken: prepaidCardToken,
+            queryParam: setUpPrepaidCardQueryParam(),
+            completion: listPrepaidCardReceiptHandler())
     }
 
     func getCellConfiguration(indexPath: IndexPath) -> ReceiptTransactionCellConfiguration? {
@@ -109,47 +114,47 @@ final class ListReceiptViewPresenter {
     }
 
     private func listUserReceiptHandler()
-        -> (HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType?) -> Void {
-            return { [weak self] (result, error) in
+        -> (Result<HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType>) -> Void {
+            return { [weak self] (result) in
                 guard let strongSelf = self else {
                     return
                 }
-                DispatchQueue.main.async {
-                    strongSelf.isLoadInProgress = false
-                    strongSelf.view.hideLoading()
-                    if let error = error {
-                        strongSelf.view.showError(error, { strongSelf.listUserReceipts() })
-                        return
-                    } else if let result = result {
-                        strongSelf.groupReceiptsByMonth(result.data)
-                        strongSelf.areAllReceiptsLoaded =
-                            result.data.count < strongSelf.userReceiptLimit ? true : false
-                        strongSelf.offset += result.data.count
-                    }
-                    strongSelf.view.loadReceipts()
+                strongSelf.isLoadInProgress = false
+                strongSelf.view.hideLoading()
+                switch result {
+                case .success(let receiptList):
+                    guard let receiptList = receiptList else { break }
+                    strongSelf.groupReceiptsByMonth(receiptList.data)
+                    strongSelf.areAllReceiptsLoaded =
+                        receiptList.data.count < strongSelf.userReceiptLimit ? true : false
+                    strongSelf.offset += receiptList.data.count
+
+                case .failure(let error):
+                    strongSelf.view.showError(error, { strongSelf.listUserReceipts() })
                 }
+                strongSelf.view.loadReceipts()
             }
     }
 
     private func listPrepaidCardReceiptHandler()
-        -> (HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType?) -> Void {
-            return { [weak self] (result, error) in
+        -> (Result<HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType>) -> Void {
+            return { [weak self] (result) in
                 guard let strongSelf = self else {
                     return
                 }
-                DispatchQueue.main.async {
-                    strongSelf.isLoadInProgress = false
-                    strongSelf.view.hideLoading()
-                    if let error = error,
-                        let prepaidCardToken = strongSelf.prepaidCardToken {
-                        strongSelf.view.showError(error, { strongSelf.listPrepaidCardReceipts(prepaidCardToken) })
-                        return
-                    } else if let result = result {
-                        strongSelf.areAllReceiptsLoaded = true
-                        strongSelf.groupReceiptsByMonth(result.data)
-                    }
-                    strongSelf.view.loadReceipts()
+                strongSelf.isLoadInProgress = false
+                strongSelf.view.hideLoading()
+                switch result {
+                case .success(let receiptList):
+                    guard let receiptList = receiptList else { break }
+                    strongSelf.areAllReceiptsLoaded = true
+                    strongSelf.groupReceiptsByMonth(receiptList.data)
+
+                case .failure(let error):
+                    guard let prepaidCardToken = strongSelf.prepaidCardToken else { break }
+                    strongSelf.view.showError(error, { strongSelf.listPrepaidCardReceipts(prepaidCardToken) })
                 }
+                strongSelf.view.loadReceipts()
             }
     }
 

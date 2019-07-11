@@ -46,6 +46,7 @@
 		4A22F1E822A67FAA00D58883 /* ReceiptDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22F1E722A67FAA00D58883 /* ReceiptDetailTableViewCell.swift */; };
 		4A22F1EA22A67FE400D58883 /* ReceiptNotesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22F1E922A67FE400D58883 /* ReceiptNotesTableViewCell.swift */; };
 		4A22F1EC22A6800F00D58883 /* ReceiptFeeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22F1EB22A6800F00D58883 /* ReceiptFeeTableViewCell.swift */; };
+		4A31BDB522D7356D0027DACA /* CompletionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A31BDB422D7356D0027DACA /* CompletionHelper.swift */; };
 		4A6D7704228D805C008355C8 /* HyperwalletTransferMethodType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6D7703228D805C008355C8 /* HyperwalletTransferMethodType.swift */; };
 		4AB1099722A7B04C00CCA7C6 /* ReceiptDetailSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB1099622A7B04C00CCA7C6 /* ReceiptDetailSectionData.swift */; };
 		4AE6B6C922D605B20009DEFE /* ReceiptRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE6B6C022D605B20009DEFE /* ReceiptRepository.framework */; };
@@ -248,6 +249,7 @@
 		4A22F1E722A67FAA00D58883 /* ReceiptDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptDetailTableViewCell.swift; sourceTree = "<group>"; };
 		4A22F1E922A67FE400D58883 /* ReceiptNotesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptNotesTableViewCell.swift; sourceTree = "<group>"; };
 		4A22F1EB22A6800F00D58883 /* ReceiptFeeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptFeeTableViewCell.swift; sourceTree = "<group>"; };
+		4A31BDB422D7356D0027DACA /* CompletionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionHelper.swift; sourceTree = "<group>"; };
 		4A6D7703228D805C008355C8 /* HyperwalletTransferMethodType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletTransferMethodType.swift; sourceTree = "<group>"; };
 		4AB1099622A7B04C00CCA7C6 /* ReceiptDetailSectionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptDetailSectionData.swift; sourceTree = "<group>"; };
 		4AE6B6C022D605B20009DEFE /* ReceiptRepository.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReceiptRepository.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -510,6 +512,14 @@
 			path = Receipts;
 			sourceTree = "<group>";
 		};
+		4A31BDB322D735410027DACA /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				4A31BDB422D7356D0027DACA /* CompletionHelper.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		4AE6B6C122D605B20009DEFE /* ReceiptRepository */ = {
 			isa = PBXGroup;
 			children = (
@@ -531,6 +541,7 @@
 		4AE6B6D922D605CC0009DEFE /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				4A31BDB322D735410027DACA /* Helper */,
 				4AE6B6C222D605B20009DEFE /* ReceiptRepository.h */,
 				4AE6B6C322D605B20009DEFE /* Info.plist */,
 				4AE6B6DC22D622D90009DEFE /* PrepaidCardReceiptRepository.swift */,
@@ -1260,6 +1271,7 @@
 				4AE6B6DF22D6238B0009DEFE /* ReceiptRepositoryFactory.swift in Sources */,
 				4AE6B6DD22D622D90009DEFE /* PrepaidCardReceiptRepository.swift in Sources */,
 				4AE6B6DB22D620390009DEFE /* UserReceiptRepository.swift in Sources */,
+				4A31BDB522D7356D0027DACA /* CompletionHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

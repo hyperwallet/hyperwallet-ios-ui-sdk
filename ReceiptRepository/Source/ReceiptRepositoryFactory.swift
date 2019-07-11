@@ -18,13 +18,14 @@
 
 import Foundation
 
+/// Receipt Repository Factory
 public final class ReceiptRepositoryFactory {
     private static var instance: ReceiptRepositoryFactory?
 
     private let remoteUserReceiptRepository: UserReceiptRepository
     private let remotePrepaidCardReceiptRepository: PrepaidCardReceiptRepository
 
-    /// Returns the previously initialized instance of the RepositoryFactory object
+    /// Returns the previously initialized instance of the ReceiptRepositoryFactory object
     public static var shared: ReceiptRepositoryFactory {
         guard let instance = instance else {
             self.instance = ReceiptRepositoryFactory()
