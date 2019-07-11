@@ -19,24 +19,24 @@
 @testable import ReceiptRepository
 import XCTest
 
-class ReceiptRepositoryTests: XCTestCase {
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+class ReceiptRepositoryFactoryTests: XCTestCase {
+    func testReceiptRepositoriesCreated() {
+        let factory = ReceiptRepositoryFactory.shared
+
+        XCTAssertNotNil(factory, "ReceiptRepositoryFactory instance should not be nil")
+        XCTAssertNoThrow(factory.userReceiptRepository(), "UserReceiptRepository should exists")
+        XCTAssertNoThrow(factory.prepaidCardReceiptRepository(), "PrepaidCardReceiptRepository should exists")
     }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+    func testReceiptRepositoriesCleanedAndRecreated() {
+        let factory = ReceiptRepositoryFactory.shared
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+        ReceiptRepositoryFactory.clearInstance()
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+        let recreatedFactory = ReceiptRepositoryFactory.shared
+
+        XCTAssertNotNil(factory, "Previously created ReceiptRepositoryFactory instance should not be nil")
+        XCTAssertNotNil(recreatedFactory, "Recreated ReceiptRepositoryFactory instance should not be nil")
+        XCTAssertFalse(factory === recreatedFactory, "Factory instances should not be the same")
+   }
 }
