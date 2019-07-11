@@ -35,6 +35,12 @@ final class ListReceiptViewPresenter {
     private let userReceiptLimit = 20
     private var prepaidCardToken: String?
     private let prepaidCardReceiptCreatedAfter = Calendar.current.date(byAdding: .year, value: -1, to: Date())
+    private lazy var userReceiptRepository = {
+        ReceiptRepositoryFactory.shared.userReceiptRepository()
+    }()
+    private lazy var prepaidCardReceiptRepository = {
+        ReceiptRepositoryFactory.shared.prepaidCardReceiptRepository()
+    }()
 
     private var isLoadInProgress = false
     private(set) var areAllReceiptsLoaded = true
@@ -61,8 +67,8 @@ final class ListReceiptViewPresenter {
 
         isLoadInProgress = true
         view.showLoading()
-        ReceiptRepositoryFactory.shared.userReceiptRepository().listUserReceipts(queryParam: setUpUserQueryParam(),
-                                                                                 completion: listUserReceiptHandler())
+        userReceiptRepository.listUserReceipts(queryParam: setUpUserQueryParam(),
+                                               completion: listUserReceiptHandler())
     }
 
     private func listPrepaidCardReceipts(_ prepaidCardToken: String) {
@@ -72,7 +78,7 @@ final class ListReceiptViewPresenter {
 
         isLoadInProgress = true
         view.showLoading()
-        ReceiptRepositoryFactory.shared.prepaidCardReceiptRepository().listPrepaidCardReceipts(
+        prepaidCardReceiptRepository.listPrepaidCardReceipts(
             prepaidCardToken: prepaidCardToken,
             queryParam: setUpPrepaidCardQueryParam(),
             completion: listPrepaidCardReceiptHandler())
@@ -131,6 +137,7 @@ final class ListReceiptViewPresenter {
 
                 case .failure(let error):
                     strongSelf.view.showError(error, { strongSelf.listUserReceipts() })
+                    return
                 }
                 strongSelf.view.loadReceipts()
             }
@@ -153,6 +160,7 @@ final class ListReceiptViewPresenter {
                 case .failure(let error):
                     guard let prepaidCardToken = strongSelf.prepaidCardToken else { break }
                     strongSelf.view.showError(error, { strongSelf.listPrepaidCardReceipts(prepaidCardToken) })
+                    return
                 }
                 strongSelf.view.loadReceipts()
             }
