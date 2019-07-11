@@ -45,6 +45,7 @@ public final class AddTransferMethodTableViewController: UITableViewController {
     private var spinnerView: SpinnerView?
     private var presenter: AddTransferMethodPresenter!
     private var widgets = [AbstractWidget]()
+    private var isCalledByScrollToRow = false
     // MARK: - Button -
     private lazy var createAccountButton: UIButton = {
         let button = UIButton()
@@ -257,7 +258,8 @@ extension AddTransferMethodTableViewController: AddTransferMethodView {
             if isCellVisibile(indexPath) {
                 focusField(in: section)
             } else {
-                tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+                isCalledByScrollToRow = true
+                tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
             }
         }
     }
@@ -265,8 +267,9 @@ extension AddTransferMethodTableViewController: AddTransferMethodView {
     override public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         // update footer once scroll ends
         if let section = getSectionContainingFocusedField() {
-            if isCellVisibile(getIndexPath(for: section)) {
+            if isCellVisibile(getIndexPath(for: section)) && isCalledByScrollToRow {
                 focusField(in: section)
+                isCalledByScrollToRow = false
             }
         }
     }
@@ -378,10 +381,10 @@ extension AddTransferMethodTableViewController: AddTransferMethodView {
 
     private func updateFooterView(_ footerView: UITableViewHeaderFooterView, for section: Int) {
         UIView.setAnimationsEnabled(false)
-        self.tableView.beginUpdates()
+        tableView.beginUpdates()
         footerView.textLabel?.text = presenter.sectionData[section].errorMessage
         footerView.sizeToFit()
-        self.tableView.endUpdates()
+        tableView.endUpdates()
         UIView.setAnimationsEnabled(true)
     }
 
