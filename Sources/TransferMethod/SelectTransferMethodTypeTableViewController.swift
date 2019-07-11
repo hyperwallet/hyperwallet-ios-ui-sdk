@@ -31,16 +31,15 @@ public final class SelectTransferMethodTypeTableViewController: UITableViewContr
     private var spinnerView: SpinnerView?
     private var presenter: SelectTransferMethodTypePresenter!
     private var countryCurrencyView: CountryCurrencyTableView!
-    private var forceUpdate: Bool
+    private var forceUpdate: Bool = false
 
     init(forceUpdate: Bool) {
         self.forceUpdate = forceUpdate
         super.init(style: .plain)
     }
 
-    //swiftlint:disable unavailable_function
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
     }
 
     // MARK: - Lifecycle

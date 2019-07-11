@@ -68,11 +68,11 @@ public final class HyperwalletUI {
     /// Lists all transfer method types available based on the country, currency and profile type to create a new
     /// transfer method (bank account, bank card, PayPal account, prepaid card, paper check).
     ///
-    /// - Parameter forceUpdateDataManager: Forces to refresh the data manager
+    /// - Parameter forceUpdateData: Forces to refresh the data manager
     /// - Returns: An instance of `SelectTransferMethodTypeTableViewController`
-    public func selectTransferMethodTypeTableViewController(forceUpdateDataManager: Bool = false)
+    public func selectTransferMethodTypeTableViewController(forceUpdateData: Bool = false)
         -> SelectTransferMethodTypeTableViewController {
-        return SelectTransferMethodTypeTableViewController(forceUpdate: forceUpdateDataManager)
+        return SelectTransferMethodTypeTableViewController(forceUpdate: forceUpdateData)
     }
 
     /// Controller to create a new transfer method.
@@ -85,19 +85,19 @@ public final class HyperwalletUI {
     ///   - currency: The 3 letter ISO 4217-1 currency code.
     ///   - profileType: The profile type. Possible values - INDIVIDUAL, BUSINESS.
     ///   - transferMethodTypeCode: The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD.
-    ///   - forceUpdateDataManager: Forces to refresh the data manager.
+    ///   - forceUpdateData: Forces to refresh the data.
     /// - Returns: An instance of `AddTransferMethodTableViewController`
     public func addTransferMethodTableViewController(
         _ country: String,
         _ currency: String,
         _ profileType: String,
         _ transferMethodTypeCode: String,
-        _ forceUpdateDataManager: Bool = false) -> AddTransferMethodTableViewController {
+        _ forceUpdateData: Bool = false) -> AddTransferMethodTableViewController {
         return AddTransferMethodTableViewController(country,
                                                     currency,
                                                     profileType,
                                                     transferMethodTypeCode,
-                                                    forceUpdateDataManager)
+                                                    forceUpdateData)
     }
 
     private init(_ provider: HyperwalletAuthenticationTokenProvider) {
