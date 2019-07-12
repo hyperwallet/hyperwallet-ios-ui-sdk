@@ -17,17 +17,64 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import Hippolyte
+import HyperwalletSDK
 @testable import ReceiptRepository
 import XCTest
 
 class UserReceiptRepositoryTests: XCTestCase {
+    private lazy var listReceiptPayload = HyperwalletTestHelper.getDataFromJson("UserReceiptResponse")
+    private var factory: ReceiptRepositoryFactory!
+    private var userReceiptRepository: UserReceiptRepository!
+    private var receiptExpectation: XCTestExpectation!
+
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
+        factory = ReceiptRepositoryFactory.shared
+        userReceiptRepository = factory.userReceiptRepository()
+        receiptExpectation = self.expectation(description: "load user receipts")
     }
 
     override func tearDown() {
+        ReceiptRepositoryFactory.clearInstance()
         if Hippolyte.shared.isStarted {
             Hippolyte.shared.stop()
         }
+    }
+
+    func testListUserReceiptSuccess() {
+        var userReceiptList = [HyperwalletReceipt]()
+        HyperwalletTestHelper.setUpMockServer(request: ReceiptRequestHelper.setUpRequest(listReceiptPayload))
+        userReceiptRepository.listUserReceipts(offset: 0, limit: 20) { [weak receiptExpectation] result in
+            switch result {
+            case .success(let receiptPageList):
+                guard let receiptPageList = receiptPageList else {
+                    XCTFail("The User's receipt list should not be empty")
+                    return
+                }
+                receiptExpectation?.fulfill()
+                userReceiptList = receiptPageList.data
+
+            case .failure:
+                XCTFail("Unexpected error")
+            }
+        }
+        wait(for: [receiptExpectation], timeout: 1)
+        XCTAssertFalse(userReceiptList.isEmpty, "The User's receipt list should not be empty")
+    }
+
+    func testListUserReceiptWhenErrorReceived() {
+        HyperwalletTestHelper.setUpMockServer(
+            request: ReceiptRequestHelper.setUpRequest(listReceiptPayload,
+                                                       NSError(domain: NSURLErrorDomain, code: 501, userInfo: nil)))
+        userReceiptRepository.listUserReceipts(offset: 0, limit: 20) { [weak receiptExpectation] result in
+            switch result {
+            case .success:
+                XCTFail("The listUserReceipts method should return Error")
+
+            case .failure:
+                receiptExpectation?.fulfill()
+            }
+        }
+        wait(for: [receiptExpectation], timeout: 1)
     }
 }

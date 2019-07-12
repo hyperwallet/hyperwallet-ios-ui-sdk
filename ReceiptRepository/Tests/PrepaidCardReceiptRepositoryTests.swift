@@ -16,27 +16,73 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+import Hippolyte
+import HyperwalletSDK
 @testable import ReceiptRepository
 import XCTest
 
 class PrepaidCardReceiptRepositoryTests: XCTestCase {
+    private lazy var listPrepaidCardReceiptPayload = HyperwalletTestHelper.getDataFromJson("PrepaidCardReceiptResponse")
+    private var factory: ReceiptRepositoryFactory!
+    private var prepaidCardReceiptRepository: PrepaidCardReceiptRepository!
+    private var receiptExpectation: XCTestExpectation!
+
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
+        factory = ReceiptRepositoryFactory.shared
+        prepaidCardReceiptRepository = factory.prepaidCardReceiptRepository()
+        receiptExpectation = self.expectation(description: "load prepaid card receipts")
     }
 
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+        ReceiptRepositoryFactory.clearInstance()
+        if Hippolyte.shared.isStarted {
+            Hippolyte.shared.stop()
         }
+    }
+
+    func testListUserReceiptSuccess() {
+        var prepaidCardReceiptList = [HyperwalletReceipt]()
+        HyperwalletTestHelper.setUpMockServer(
+            request: ReceiptRequestHelper.setUpRequest(listPrepaidCardReceiptPayload,
+                                                       nil,
+                                                       "trm-123456789"))
+        prepaidCardReceiptRepository.listPrepaidCardReceipts(
+            prepaidCardToken: "trm-123456789"
+        ) { [weak receiptExpectation ] result in
+            switch result {
+            case .success(let receiptPageList):
+                guard let receiptPageList = receiptPageList else {
+                    XCTFail("The User's receipt list should not be empty")
+                    return
+                }
+                receiptExpectation?.fulfill()
+                prepaidCardReceiptList = receiptPageList.data
+
+            case .failure:
+                XCTFail("Unexpected error")
+            }
+        }
+        wait(for: [receiptExpectation], timeout: 1)
+        XCTAssertFalse(prepaidCardReceiptList.isEmpty, "The Prepaid Card receipt list should not be empty")
+    }
+
+    func testListUserReceiptWhenErrorReceived() {
+        HyperwalletTestHelper.setUpMockServer(
+            request: ReceiptRequestHelper.setUpRequest(listPrepaidCardReceiptPayload,
+                                                       NSError(domain: NSURLErrorDomain, code: 501, userInfo: nil),
+                                                       "trm-123456789"))
+        prepaidCardReceiptRepository.listPrepaidCardReceipts(
+            prepaidCardToken: "trm-123456789"
+        ) { [weak receiptExpectation ] result in
+            switch result {
+            case .success:
+                XCTFail("The listUserReceipts method should return Error")
+
+            case .failure:
+                receiptExpectation?.fulfill()
+            }
+        }
+        wait(for: [receiptExpectation], timeout: 1)
     }
 }
