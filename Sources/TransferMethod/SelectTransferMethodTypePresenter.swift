@@ -54,9 +54,9 @@ final class SelectTransferMethodTypePresenter {
     private (set) var selectedCountry = ""
     private (set) var selectedCurrency = ""
 
-    private var transferMethodConfigurationRepository: TransferMethodConfigurationRepository {
-        return TransferMethodRepositoryFactory.shared.transferMethodConfigurationRepository()
-    }
+    private lazy var transferMethodConfigurationRepository = {
+        TransferMethodRepositoryFactory.shared.transferMethodConfigurationRepository()
+    }()
 
     private (set) var sectionData = [HyperwalletTransferMethodType]()
 
