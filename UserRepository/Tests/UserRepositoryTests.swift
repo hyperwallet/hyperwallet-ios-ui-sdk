@@ -16,16 +16,21 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+import Hippolyte
+import HyperwalletSDK
 @testable import UserRepository
 import XCTest
 
 class UserRepositoryTests: XCTestCase {
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
     }
 
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        if Hippolyte.shared.isStarted {
+            Hippolyte.shared.stop()
+        }
+        super.tearDown()
     }
 
     func testExample() {

@@ -195,13 +195,6 @@
 			remoteGlobalIDString = 6440CD4D22D7269D00072903;
 			remoteInfo = UserRepository;
 		};
-		6440CD5A22D7269D00072903 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DB4679812260380C00E1AF49;
-			remoteInfo = Demo;
-		};
 		6440CD6122D7269D00072903 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
@@ -1115,7 +1108,6 @@
 			);
 			dependencies = (
 				6440CD5922D7269D00072903 /* PBXTargetDependency */,
-				6440CD5B22D7269D00072903 /* PBXTargetDependency */,
 			);
 			name = UserRepositoryTests;
 			productName = UserRepositoryTests;
@@ -1674,11 +1666,6 @@
 			target = 6440CD4D22D7269D00072903 /* UserRepository */;
 			targetProxy = 6440CD5822D7269D00072903 /* PBXContainerItemProxy */;
 		};
-		6440CD5B22D7269D00072903 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DB4679812260380C00E1AF49 /* Demo */;
-			targetProxy = 6440CD5A22D7269D00072903 /* PBXContainerItemProxy */;
-		};
 		6440CD6222D7269D00072903 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6440CD4D22D7269D00072903 /* UserRepository */;
@@ -1841,12 +1828,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
 				INFOPLIST_FILE = UserRepository/Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ios.UserRepositoryTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1861,12 +1850,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
 				INFOPLIST_FILE = UserRepository/Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ios.UserRepositoryTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1881,12 +1872,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
 				INFOPLIST_FILE = UserRepository/Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ios.UserRepositoryTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
