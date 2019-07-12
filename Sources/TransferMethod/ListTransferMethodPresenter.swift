@@ -170,7 +170,10 @@ final class ListTransferMethodPresenter {
             additionalInfo = transferMethod.getField(HyperwalletTransferMethod.TransferMethodField.email.rawValue)
 
         default:
-            additionalInfo = transferMethod.getField(HyperwalletTransferMethod.TransferMethodField.bankAccountId.rawValue)
+            additionalInfo = transferMethod.getField(HyperwalletTransferMethod
+                .TransferMethodField
+                .bankAccountId
+                .rawValue)
             additionalInfo = String(format: "%@%@",
                                     "transfer_method_list_item_description".localized(),
                                     additionalInfo?.suffix(startAt: 4) ?? "")
