@@ -18,7 +18,7 @@
 
 import HyperwalletSDK
 
-/// The extension of RepositoryFactory with the TransferMethodConfigurationRepository feature
+/// Class contains methods to get an instance of transfer method repository
 public final class TransferMethodRepositoryFactory {
     private static var instance: TransferMethodRepositoryFactory?
     private let remoteTransferMethodConfigurationRepository: TransferMethodConfigurationRepository
@@ -41,7 +41,7 @@ public final class TransferMethodRepositoryFactory {
         remoteTransferMethodConfigurationRepository = RemoteTransferMethodConfigurationRepository()
     }
 
-    /// Gets an instance of transfer method configuration repository.
+    /// Gets the `TransferMethodConfigurationRepository` instance.
     ///
     /// - Returns: The TransferMethodConfigurationRepository
     public func transferMethodConfigurationRepository() -> TransferMethodConfigurationRepository {
