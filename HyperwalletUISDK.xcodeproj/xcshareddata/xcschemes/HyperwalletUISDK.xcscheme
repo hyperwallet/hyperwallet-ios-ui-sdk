@@ -37,6 +37,13 @@
             BlueprintName = "HyperwalletUISDK"
             ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
          </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "DBAF929C22CFCBC7004F197A"
+            BuildableName = "TransferMethodRepository.framework"
+            BlueprintName = "TransferMethodRepository"
+            ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
+         </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
          <TestableReference
