@@ -38,7 +38,7 @@ final class ListTransferMethodPresenter {
 
     private lazy var transferMethodRepository = {
         TransferMethodRepositoryFactory.shared.transferMethodRepository()
-    }
+    }()
 
     /// Initialize ListTransferMethodPresenter
     init(view: ListTransferMethodView) {

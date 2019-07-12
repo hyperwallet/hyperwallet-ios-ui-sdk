@@ -48,11 +48,11 @@ final class AddTransferMethodPresenter {
 
     private lazy var transferMethodConfigurationRepository = {
         TransferMethodRepositoryFactory.shared.transferMethodConfigurationRepository()
-    }
+    }()
 
     private lazy var transferMethodRepository = {
         TransferMethodRepositoryFactory.shared.transferMethodRepository()
-    }
+    }()
 
     init(_ view: AddTransferMethodView,
          _ country: String,
