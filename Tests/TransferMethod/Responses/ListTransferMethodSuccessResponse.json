@@ -1,5 +1,5 @@
 {
-    "count":2,
+    "count":3,
     "offset":0,
     "limit":10,
     "data":[
@@ -85,18 +85,6 @@
                 "rel":"self"
             },
             "href":"https://localhost/rest/v3/users/usr-123456789/transfer-methods?offset=0&limit=10&createdBefore=2018-12-18T00%3A30%3A11.000Z&sortBy=+createdOn&createdAfter=2018-12-15T00%3A30%3A11.000Z"
-        },
-        {
-            "params":{
-                "rel":"next"
-            },
-            "href":"https://localhost/rest/v3/users/usr-123456789/transfer-methods?offset=10&limit=10&createdBefore=2018-12-18T00%3A30%3A11.000Z&sortBy=+createdOn&createdAfter=2018-12-15T00%3A30%3A11.000Z"
-        },
-        {
-            "params":{
-                "rel":"last"
-            },
-            "href":"https://localhost/rest/v3/users/usr-123456789/transfer-methods?offset=299&limit=10&createdBefore=2018-12-18T00%3A30%3A11.000Z&sortBy=+createdOn&createdAfter=2018-12-15T00%3A30%3A11.000Z"
         }
     ]
 }
