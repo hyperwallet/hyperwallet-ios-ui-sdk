@@ -38,16 +38,6 @@
                ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6440CD5522D7269D00072903"
-               BuildableName = "UserRepositoryTests.xctest"
-               BlueprintName = "UserRepositoryTests"
-               ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

@@ -58,9 +58,9 @@ final class SelectTransferMethodTypePresenter {
         return TransferMethodRepositoryFactory.shared.transferMethodConfigurationRepository()
     }
 
-    private var userRepository: RemoteUserRepository {
-        return UserRepositoryFactory.shared.userRepository()
-    }
+    private lazy var userRepository: UserRepository = {
+        UserRepositoryFactory.shared.userRepository()
+    }()
 
     var sectionData = [HyperwalletTransferMethodType]()
 
@@ -155,11 +155,11 @@ final class SelectTransferMethodTypePresenter {
 
             if case let .success(user) = getUserResult,
                 let profileType = user?.profileType?.rawValue {
-                let code = strongSelf.sectionData[index].code!
+                let transferMethodTypeCode = strongSelf.sectionData[index].code!
                 strongSelf.view.navigateToAddTransferMethodController(country: strongSelf.selectedCountry,
                                                                       currency: strongSelf.selectedCurrency,
                                                                       profileType: profileType,
-                                                                      transferMethodTypeCode: code)
+                                                                      transferMethodTypeCode: transferMethodTypeCode)
             }
         }
     }

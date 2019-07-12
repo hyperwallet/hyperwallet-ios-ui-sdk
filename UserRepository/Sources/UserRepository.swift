@@ -52,15 +52,11 @@ private extension RemoteUserRepository {
     func getUserHandler(
         _ completion: @escaping (Result<HyperwalletUser?, HyperwalletErrorType>) -> Void)
         -> (HyperwalletUser?, HyperwalletErrorType?) -> Void {
-            return {[weak self] (result, error) in
-                guard let strongSelf = self else {
-                    return
-                }
-
-                strongSelf.cachedUser = strongSelf.performCompletion(error,
-                                                                     result,
-                                                                     completion,
-                                                                     strongSelf.cachedUser)
+            return {(result, error) in
+                self.cachedUser = self.performCompletion(error,
+                                                         result,
+                                                         completion,
+                                                         self.cachedUser)
             }
     }
 

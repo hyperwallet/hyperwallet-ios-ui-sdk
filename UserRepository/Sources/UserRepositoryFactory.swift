@@ -21,7 +21,7 @@ import Foundation
 /// The extension of RepositoryFactory with the UserRepository feature
 public final class UserRepositoryFactory {
     private static var instance: UserRepositoryFactory?
-    private let remoteUserRerpository: RemoteUserRepository
+    private let remoteUserRepository: UserRepository
 
     /// Returns the previously initialized instance of the RepositoryFactory object
     public static var shared: UserRepositoryFactory {
@@ -38,13 +38,13 @@ public final class UserRepositoryFactory {
     }
 
     private init() {
-        remoteUserRerpository = RemoteUserRepository()
+        remoteUserRepository = RemoteUserRepository()
     }
 
     /// Gets an instance of transfer method configuration repository.
     ///
-    /// - Returns: The RemoteUserRepository
-    public func userRepository() -> RemoteUserRepository {
-        return remoteUserRerpository
+    /// - Returns: The UserRepository
+    public func userRepository() -> UserRepository {
+        return remoteUserRepository
     }
 }
