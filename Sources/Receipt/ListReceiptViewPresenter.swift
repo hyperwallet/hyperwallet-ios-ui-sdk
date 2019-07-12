@@ -34,7 +34,6 @@ final class ListReceiptViewPresenter {
     private var offset = 0
     private let userReceiptLimit = 20
     private var prepaidCardToken: String?
-    private let prepaidCardReceiptCreatedAfter = Calendar.current.date(byAdding: .year, value: -1, to: Date())
     private lazy var userReceiptRepository = {
         ReceiptRepositoryFactory.shared.userReceiptRepository()
     }()
@@ -67,7 +66,8 @@ final class ListReceiptViewPresenter {
 
         isLoadInProgress = true
         view.showLoading()
-        userReceiptRepository.listUserReceipts(queryParam: setUpUserQueryParam(),
+        userReceiptRepository.listUserReceipts(offset: offset,
+                                               limit: userReceiptLimit,
                                                completion: listUserReceiptHandler())
     }
 
@@ -80,7 +80,6 @@ final class ListReceiptViewPresenter {
         view.showLoading()
         prepaidCardReceiptRepository.listPrepaidCardReceipts(
             prepaidCardToken: prepaidCardToken,
-            queryParam: setUpPrepaidCardQueryParam(),
             completion: listPrepaidCardReceiptHandler())
     }
 
@@ -104,22 +103,7 @@ final class ListReceiptViewPresenter {
             iconFont: HyperwalletIcon.of(receipt.entry.rawValue).rawValue)
     }
 
-    private func setUpUserQueryParam() -> HyperwalletReceiptQueryParam {
-        let queryParam = HyperwalletReceiptQueryParam()
-        queryParam.offset = offset
-        queryParam.limit = userReceiptLimit
-        queryParam.sortBy = HyperwalletReceiptQueryParam.QuerySortable.descendantCreatedOn.rawValue
-        queryParam.createdAfter = Calendar.current.date(byAdding: .year, value: -1, to: Date())
-        return queryParam
-    }
-
-    private func setUpPrepaidCardQueryParam() -> HyperwalletReceiptQueryParam {
-        let queryParam = HyperwalletReceiptQueryParam()
-        queryParam.createdAfter = prepaidCardReceiptCreatedAfter
-        return queryParam
-    }
-
-    private func listUserReceiptHandler()
+   private func listUserReceiptHandler()
         -> (Result<HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType>) -> Void {
             return { [weak self] (result) in
                 guard let strongSelf = self else {

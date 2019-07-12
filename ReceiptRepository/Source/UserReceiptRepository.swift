@@ -23,19 +23,26 @@ public protocol UserReceiptRepository {
     /// Returns the list of receipts for the User associated with the authentication token.
     ///
     /// - Parameters:
-    ///   - queryParam: the ordering and filtering criteria
-    ///   - completion: the callback handler of responses from the Hyperwallet platform
+    ///   - offset: The number of records to skip. If no filters are applied, records will be skipped from the
+    ///             beginning (based on default sort criteria). Range is from 0 to {n-1} where
+    ///             n = number of matching records for the query.
+    ///   - limit: The maximum number of records that will be returned per page.
+    ///   - completion: The callback handler of responses from the Hyperwallet platform.
     func listUserReceipts(
-        queryParam: HyperwalletReceiptQueryParam,
+        offset: Int,
+        limit: Int,
         completion: @escaping (Result<HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType>) -> Void)
 }
 
 /// User receipt repository
 public final class RemoteUserReceiptRepository: UserReceiptRepository {
+    private let yearAgoFromNow = Date.yearAgoFromNow
+
     public func listUserReceipts(
-        queryParam: HyperwalletReceiptQueryParam,
+        offset: Int,
+        limit: Int,
         completion: @escaping (Result<HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType>) -> Void) {
-        Hyperwallet.shared.listUserReceipts(queryParam: queryParam,
+        Hyperwallet.shared.listUserReceipts(queryParam: setUpUserQueryParam(offset, limit),
                                             completion: listUserReceiptsHandler(completion))
     }
 
@@ -43,7 +50,16 @@ public final class RemoteUserReceiptRepository: UserReceiptRepository {
         _ completion: @escaping (Result<HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType>) -> Void)
         -> (HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType?) -> Void {
             return {(result, error) in
-                CompletionHelper.performCompletion(error, result, completion)
+                Completion.perform(error, result, completion)
             }
+    }
+
+    private func setUpUserQueryParam(_ offset: Int, _ limit: Int) -> HyperwalletReceiptQueryParam {
+        let queryParam = HyperwalletReceiptQueryParam()
+        queryParam.offset = offset
+        queryParam.limit = limit
+        queryParam.sortBy = HyperwalletReceiptQueryParam.QuerySortable.descendantCreatedOn.rawValue
+        queryParam.createdAfter = yearAgoFromNow
+        return queryParam
     }
 }

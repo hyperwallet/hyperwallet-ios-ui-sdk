@@ -16,24 +16,10 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import HyperwalletSDK
+import Foundation
 
-class CompletionHelper {
-    @discardableResult
-    static func performCompletion<T>(_ error: HyperwalletErrorType?,
-                                     _ result: T?,
-                                     _ completionHandler: @escaping (Result<T?, HyperwalletErrorType>) -> Void,
-                                     _ repositoryOriginalValue: T? = nil) -> T? {
-        if let error = error {
-            DispatchQueue.main.async {
-                completionHandler(.failure(error))
-            }
-        } else {
-            DispatchQueue.main.async {
-                completionHandler(.success(result))
-            }
-            return result
-        }
-        return repositoryOriginalValue
+extension Date {
+    static var yearAgoFromNow: Date? {
+        return Calendar.current.date(byAdding: .year, value: -1, to: Date())
     }
 }

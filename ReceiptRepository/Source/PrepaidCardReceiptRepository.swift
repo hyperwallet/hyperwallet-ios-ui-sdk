@@ -24,23 +24,22 @@ public protocol PrepaidCardReceiptRepository {
     ///
     /// - Parameters:
     ///   - prepaidCardToken: the prepaid card token
-    ///   - queryParam: the ordering and filtering criteria
     ///   - completion: the callback handler of responses from the Hyperwallet platform
     func listPrepaidCardReceipts(
         prepaidCardToken: String,
-        queryParam: HyperwalletReceiptQueryParam?,
         completion: @escaping (Result<HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType>)
         -> Void)
 }
 
 /// Prepaid card receipt repository
 public final class RemotePrepaidCardReceiptRepository: PrepaidCardReceiptRepository {
+    private let yearAgoFromNow = Date.yearAgoFromNow
+
     public func listPrepaidCardReceipts(
         prepaidCardToken: String,
-        queryParam: HyperwalletReceiptQueryParam?,
         completion: @escaping (Result<HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType>) -> Void) {
         Hyperwallet.shared.listPrepaidCardReceipts(prepaidCardToken: prepaidCardToken,
-                                                   queryParam: queryParam,
+                                                   queryParam: setUpPrepaidCardQueryParam(),
                                                    completion: listPrepaidCardReceiptsHandler(completion))
     }
 
@@ -48,7 +47,13 @@ public final class RemotePrepaidCardReceiptRepository: PrepaidCardReceiptReposit
         _ completion: @escaping (Result<HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType>) -> Void)
         -> (HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType?) -> Void {
             return {(result, error) in
-                CompletionHelper.performCompletion(error, result, completion)
+                Completion.perform(error, result, completion)
             }
+    }
+
+    private func setUpPrepaidCardQueryParam() -> HyperwalletReceiptQueryParam {
+        let queryParam = HyperwalletReceiptQueryParam()
+        queryParam.createdAfter = yearAgoFromNow
+        return queryParam
     }
 }
