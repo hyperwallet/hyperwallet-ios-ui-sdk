@@ -18,7 +18,7 @@
 
 import HyperwalletSDK
 
-class Completion {
+class CompletionHelper {
     @discardableResult
     static func perform<T>(_ error: HyperwalletErrorType?,
                            _ result: T?,

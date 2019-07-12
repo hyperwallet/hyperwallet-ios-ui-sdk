@@ -47,7 +47,7 @@ public final class RemotePrepaidCardReceiptRepository: PrepaidCardReceiptReposit
         _ completion: @escaping (Result<HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType>) -> Void)
         -> (HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType?) -> Void {
             return {(result, error) in
-                Completion.perform(error, result, completion)
+                CompletionHelper.perform(error, result, completion)
             }
     }
 
