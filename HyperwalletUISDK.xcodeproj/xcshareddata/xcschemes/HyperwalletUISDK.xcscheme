@@ -37,6 +37,13 @@
             BlueprintName = "HyperwalletUISDK"
             ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
          </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "4AE6B6BF22D605B20009DEFE"
+            BuildableName = "ReceiptRepository.framework"
+            BlueprintName = "ReceiptRepository"
+            ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
+         </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
          <TestableReference
