@@ -16,7 +16,6 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
 import HyperwalletSDK
 import os.log
 
@@ -61,11 +60,14 @@ final class RemoteTransferMethodRepository: TransferMethodRepository {
     func create(_ transferMethod: HyperwalletTransferMethod,
                 _ completion: @escaping (Result<HyperwalletTransferMethod?, HyperwalletErrorType>) -> Void) {
         if let bankAccount = transferMethod as? HyperwalletBankAccount {
-            Hyperwallet.shared.createBankAccount(account: bankAccount, completion: createHandler(completion))
+            Hyperwallet.shared.createBankAccount(account: bankAccount,
+                                                 completion: CompletionHelper.perform(completion))
         } else if let bankCard = transferMethod as? HyperwalletBankCard {
-            Hyperwallet.shared.createBankCard(account: bankCard, completion: createHandler(completion))
+            Hyperwallet.shared.createBankCard(account: bankCard,
+                                              completion: CompletionHelper.perform(completion))
         } else if let payPalAccount = transferMethod as? HyperwalletPayPalAccount {
-            Hyperwallet.shared.createPayPalAccount(account: payPalAccount, completion: createHandler(completion))
+            Hyperwallet.shared.createPayPalAccount(account: payPalAccount,
+                                                   completion: CompletionHelper.perform(completion))
         } else {
             logTransferMethodTypeNotSupported(transferMethod.type ?? "")
         }
@@ -82,15 +84,15 @@ final class RemoteTransferMethodRepository: TransferMethodRepository {
         case "BANK_ACCOUNT", "WIRE_ACCOUNT":
             Hyperwallet.shared.deactivateBankAccount(transferMethodToken: token,
                                                      notes: RemoteTransferMethodRepository.deactivateNote,
-                                                     completion: deactivateHandler(completion))
+                                                     completion: CompletionHelper.perform(completion))
         case "BANK_CARD":
             Hyperwallet.shared.deactivateBankCard(transferMethodToken: token,
                                                   notes: RemoteTransferMethodRepository.deactivateNote,
-                                                  completion: deactivateHandler(completion))
+                                                  completion: CompletionHelper.perform(completion))
         case "PAYPAL_ACCOUNT":
             Hyperwallet.shared.deactivatePayPalAccount(transferMethodToken: token,
                                                        notes: RemoteTransferMethodRepository.deactivateNote,
-                                                       completion: deactivateHandler(completion))
+                                                       completion: CompletionHelper.perform(completion))
 
         default:
             logTransferMethodTypeNotSupported(transferMethodType)
@@ -102,31 +104,7 @@ final class RemoteTransferMethodRepository: TransferMethodRepository {
         _ completion: @escaping (Result<HyperwalletPageList<HyperwalletTransferMethod>?,
                                         HyperwalletErrorType>) -> Void) {
         Hyperwallet.shared.listTransferMethods(queryParam: queryParam,
-                                               completion: listTransferMethodHandler(completion))
-    }
-
-    private func createHandler(
-        _ completion: @escaping (Result<HyperwalletTransferMethod?, HyperwalletErrorType>) -> Void)
-    -> (HyperwalletTransferMethod?, HyperwalletErrorType?) -> Void {
-        return {(result, error) in
-            CompletionHelper.performCompletion(error, result, completion)
-        }
-    }
-
-    private func deactivateHandler(
-        _ completion: @escaping (Result<HyperwalletStatusTransition?, HyperwalletErrorType>) -> Void)
-        -> (HyperwalletStatusTransition?, HyperwalletErrorType?) -> Void {
-        return {(result, error) in
-            CompletionHelper.performCompletion(error, result, completion)
-        }
-    }
-
-    private func listTransferMethodHandler(
-        _ completion: @escaping (Result<HyperwalletPageList<HyperwalletTransferMethod>?, HyperwalletErrorType>) -> Void)
-        -> (HyperwalletPageList<HyperwalletTransferMethod>?, HyperwalletErrorType?) -> Void {
-        return {(result, error) in
-            CompletionHelper.performCompletion(error, result, completion)
-        }
+                                               completion: CompletionHelper.perform(completion))
     }
 
     private func logTransferMethodTypeNotSupported(_ transferMethodType: String, _ method: String = #function) {
