@@ -23,6 +23,16 @@ class ReceiptDetailPresenterTests: XCTestCase {
         XCTAssertEqual(presenterWithNotes.sectionData.count, 4)
     }
 
+    func testSectionFeeIsNilIfNoOrZeroFee() {
+        guard let receipts = try? JSONDecoder().decode([HyperwalletReceipt].self, from: receiptsData) else {
+            XCTFail("Can't decode user receipts from test data")
+            return
+        }
+
+        XCTAssertNil(ReceiptDetailSectionFeeData(from: receipts[3]))
+        XCTAssertNil(ReceiptDetailSectionFeeData(from: receipts[4]))
+    }
+
     func testSectionTransactionDataShouldNotBeEmpty() {
         guard let section = presenterNoNotes.sectionData[0] as? ReceiptDetailSectionTransactionData else {
             XCTFail("Section Transaction Data shouldn't be empty")
