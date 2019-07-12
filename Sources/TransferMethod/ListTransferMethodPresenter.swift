@@ -36,9 +36,9 @@ final class ListTransferMethodPresenter {
     private unowned let view: ListTransferMethodView
     private (set) var sectionData = [HyperwalletTransferMethod]()
 
-    let transferMethodRepository: TransferMethodRepository = {
+    private lazy var transferMethodRepository = {
         TransferMethodRepositoryFactory.shared.transferMethodRepository()
-    }()
+    }
 
     /// Initialize ListTransferMethodPresenter
     init(view: ListTransferMethodView) {

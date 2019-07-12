@@ -46,12 +46,12 @@ final class AddTransferMethodPresenter {
     private let transferMethodTypeCode: String
     var sectionData = [AddTransferMethodSectionData]()
 
-    private var transferMethodConfigurationRepository: TransferMethodConfigurationRepository {
-        return TransferMethodRepositoryFactory.shared.transferMethodConfigurationRepository()
+    private lazy var transferMethodConfigurationRepository = {
+        TransferMethodRepositoryFactory.shared.transferMethodConfigurationRepository()
     }
 
-    private var transferMethodRepository: TransferMethodRepository {
-        return TransferMethodRepositoryFactory.shared.transferMethodRepository()
+    private lazy var transferMethodRepository = {
+        TransferMethodRepositoryFactory.shared.transferMethodRepository()
     }
 
     init(_ view: AddTransferMethodView,
