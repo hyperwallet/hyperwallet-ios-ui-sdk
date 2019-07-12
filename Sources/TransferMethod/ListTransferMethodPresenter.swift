@@ -143,37 +143,4 @@ final class ListTransferMethodPresenter {
                 }
             }
     }
-
-    func getCellConfiguration(indexPath: IndexPath) -> ListTransferMethodCellConfiguration? {
-        if let transferMethod = sectionData[safe: indexPath.row],
-            let country = transferMethod.getField(fieldName: .transferMethodCountry) as? String,
-            let transferMethodType = transferMethod.getField(fieldName: .type) as? String {
-            return ListTransferMethodCellConfiguration(
-                transferMethodType: transferMethodType.lowercased().localized(),
-                transferMethodCountry: country.localized(),
-                additionalInfo: getAdditionalInfo(transferMethod),
-                transferMethodIconFont: HyperwalletIcon.of(transferMethodType).rawValue)
-        }
-        return nil
-    }
-
-    private func getAdditionalInfo(_ transferMethod: HyperwalletTransferMethod) -> String? {
-        var additionalInfo: String?
-        switch transferMethod.getField(fieldName: .type) as? String {
-        case "BANK_CARD", "PREPAID_CARD":
-            additionalInfo = transferMethod.getField(fieldName: .cardNumber) as? String
-            additionalInfo = String(format: "%@%@",
-                                    "transfer_method_list_item_description".localized(),
-                                    additionalInfo?.suffix(startAt: 4) ?? "")
-        case "PAYPAL_ACCOUNT":
-            additionalInfo = transferMethod.getField(fieldName: .email) as? String
-
-        default:
-            additionalInfo = transferMethod.getField(fieldName: .bankAccountId) as? String
-            additionalInfo = String(format: "%@%@",
-                                    "transfer_method_list_item_description".localized(),
-                                    additionalInfo?.suffix(startAt: 4) ?? "")
-        }
-        return additionalInfo
-    }
 }

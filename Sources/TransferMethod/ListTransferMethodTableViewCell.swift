@@ -16,14 +16,8 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+import HyperwalletSDK
 import UIKit
-
-struct ListTransferMethodCellConfiguration {
-    let transferMethodType: String
-    let transferMethodCountry: String
-    let additionalInfo: String?
-    let transferMethodIconFont: String
-}
 
 final class ListTransferMethodTableViewCell: UITableViewCell {
     static let reuseIdentifier = "listTransferMethodCellIdentifier"
@@ -71,15 +65,15 @@ final class ListTransferMethodTableViewCell: UITableViewCell {
 }
 
 extension ListTransferMethodTableViewCell {
-    func configure(configuration: ListTransferMethodCellConfiguration) {
-        textLabel?.text = configuration.transferMethodType
+    func configure(transferMethod: HyperwalletTransferMethod) {
+        textLabel?.text = transferMethod.type?.lowercased().localized()
         textLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellTextLabel"
-        detailTextLabel?.attributedText = formatDetails(transferMethodCountry: configuration.transferMethodCountry,
-                                                        additionalInfo: configuration.additionalInfo)
+        detailTextLabel?.attributedText = formatDetails(transferMethodCountry: country(transferMethod),
+                                                        additionalInfo: transferMethod.additionalInfo)
         detailTextLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellDetailTextLabel"
         detailTextLabel?.numberOfLines = 0
         detailTextLabel?.lineBreakMode = .byWordWrapping
-        let icon = UIImage.fontIcon(configuration.transferMethodIconFont,
+        let icon = UIImage.fontIcon(HyperwalletIcon.of(transferMethod.type ?? "").rawValue,
                                     Theme.Icon.frame,
                                     CGFloat(Theme.Icon.size),
                                     Theme.Icon.primaryColor)
@@ -97,5 +91,12 @@ extension ListTransferMethodTableViewCell {
         }
 
         return attributedText
+    }
+
+    private func country(_ transferMethod: HyperwalletTransferMethod) -> String {
+        if let country = transferMethod.getField(fieldName: .transferMethodCountry) as? String {
+            return country.localized()
+        }
+        return ""
     }
 }
