@@ -20,6 +20,20 @@
                ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4AE6B6BF22D605B20009DEFE"
+               BuildableName = "ReceiptRepository.framework"
+               BlueprintName = "ReceiptRepository"
+               ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -53,6 +67,16 @@
                BlueprintIdentifier = "DB18E9EC2261BA29004F6AC3"
                BuildableName = "HyperwalletUISDKTests.xctest"
                BlueprintName = "HyperwalletUISDKTests"
+               ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4AE6B6C722D605B20009DEFE"
+               BuildableName = "ReceiptRepositoryTests.xctest"
+               BlueprintName = "ReceiptRepositoryTests"
                ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
             </BuildableReference>
          </TestableReference>
