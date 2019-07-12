@@ -546,7 +546,7 @@
 		4AE6B6C122D605B20009DEFE /* ReceiptRepository */ = {
 			isa = PBXGroup;
 			children = (
-				4AE6B6D922D605CC0009DEFE /* Source */,
+				4AE6B6D922D605CC0009DEFE /* Sources */,
 				4AE6B6CC22D605B20009DEFE /* Tests */,
 			);
 			path = ReceiptRepository;
@@ -563,7 +563,7 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
-		4AE6B6D922D605CC0009DEFE /* Source */ = {
+		4AE6B6D922D605CC0009DEFE /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				4ADC4F2C22D890FF004F3F8D /* Extensions */,
@@ -574,7 +574,7 @@
 				4AE6B6DA22D620390009DEFE /* UserReceiptRepository.swift */,
 				4AE6B6DE22D6238B0009DEFE /* ReceiptRepositoryFactory.swift */,
 			);
-			path = Source;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		641324DF229575CE00512816 /* BaseTests */ = {
