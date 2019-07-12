@@ -20,26 +20,20 @@ import HyperwalletSDK
 
 extension HyperwalletTransferMethod {
     var additionalInfo: String? {
-        switch getField(fieldName: .type) as? String {
+        switch type {
         case "BANK_CARD", "PREPAID_CARD":
             return String(format: "%@%@",
                           "transfer_method_list_item_description".localized(),
-                          suffix(for: .cardNumber, startAt: 4) )
+                          getField(TransferMethodField.cardNumber.rawValue)?
+                            .suffix(startAt: 4) ?? "" )
         case "PAYPAL_ACCOUNT":
-            return toString(from: .email)
+            return getField(TransferMethodField.email.rawValue)
 
         default:
             return String(format: "%@%@",
                           "transfer_method_list_item_description".localized(),
-                          suffix(for: .bankAccountId, startAt: 4))
+                          getField(TransferMethodField.bankAccountId.rawValue)?
+                            .suffix(startAt: 4) ?? "")
         }
-    }
-
-    private func toString(from fieldName: HyperwalletTransferMethod.TransferMethodField) -> String? {
-        return getField(fieldName: fieldName) as? String
-    }
-
-    private func suffix(for fieldName: HyperwalletTransferMethod.TransferMethodField, startAt: Int) -> String {
-        return toString(from: fieldName)?.suffix(startAt: startAt) ?? ""
     }
 }

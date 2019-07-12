@@ -68,8 +68,10 @@ extension ListTransferMethodTableViewCell {
     func configure(transferMethod: HyperwalletTransferMethod) {
         textLabel?.text = transferMethod.type?.lowercased().localized()
         textLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellTextLabel"
-        detailTextLabel?.attributedText = formatDetails(transferMethodCountry: country(transferMethod),
-                                                        additionalInfo: transferMethod.additionalInfo)
+        detailTextLabel?.attributedText = formatDetails(
+            transferMethodCountry: transferMethod.transferMethodCountry?.localized() ?? "",
+            additionalInfo: transferMethod.additionalInfo)
+
         detailTextLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellDetailTextLabel"
         detailTextLabel?.numberOfLines = 0
         detailTextLabel?.lineBreakMode = .byWordWrapping
@@ -91,12 +93,5 @@ extension ListTransferMethodTableViewCell {
         }
 
         return attributedText
-    }
-
-    private func country(_ transferMethod: HyperwalletTransferMethod) -> String {
-        if let country = transferMethod.getField(fieldName: .transferMethodCountry) as? String {
-            return country.localized()
-        }
-        return ""
     }
 }
