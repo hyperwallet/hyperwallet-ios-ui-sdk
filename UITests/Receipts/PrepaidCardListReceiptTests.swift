@@ -32,9 +32,21 @@ class PrepaidCardListReceiptTests: BaseTests {
 
         XCTAssertEqual(app.tables.cells.count, expectedNumberOfCells)
 
-        verifyCellLabels(with: "Funds Deposit", createdOn: "Jun 20, 2019", amount: "10.00", currency: "USD", by: 0)
-        verifyCellLabels(with: "Funds Deposit", createdOn: "Jun 21, 2019", amount: "20.00", currency: "USD", by: 1)
-        verifyCellLabels(with: "Balance Adjustment", createdOn: "Jun 23, 2019", amount: "-7.00", currency: "USD", by: 2)
+        verifyCellLabels(with: "Funds Deposit",
+                         createdOn: "Jun 20, 2019",
+                         amount: "10.00",
+                         currency: "USD",
+                         by: 0)
+        verifyCellLabels(with: "Funds Deposit",
+                         createdOn: "Jun 21, 2019",
+                         amount: "20.00",
+                         currency: "USD",
+                         by: 1)
+        verifyCellLabels(with: "Balance Adjustment",
+                         createdOn: "Jun 23, 2019",
+                         amount: "-7.00",
+                         currency: "USD",
+                         by: 2)
         verifyCellLabels(with: "Balance Adjustment",
                          createdOn: "Jun 24, 2019",
                          amount: "-500.99",
