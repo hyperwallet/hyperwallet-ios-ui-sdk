@@ -41,7 +41,7 @@ class UserReceiptRepositoryTests: XCTestCase {
         }
     }
 
-    func testListUserReceiptSuccess() {
+    func testListUserReceipt_success() {
         var userReceiptList = [HyperwalletReceipt]()
         HyperwalletTestHelper.setUpMockServer(request: ReceiptRequestHelper.setUpRequest(listReceiptPayload))
         userReceiptRepository.listUserReceipts(offset: 0, limit: 20) { [weak receiptExpectation] result in
@@ -62,7 +62,7 @@ class UserReceiptRepositoryTests: XCTestCase {
         XCTAssertFalse(userReceiptList.isEmpty, "The User's receipt list should not be empty")
     }
 
-    func testListUserReceiptWhenErrorReceived() {
+    func testListUserReceipt_failure() {
         HyperwalletTestHelper.setUpMockServer(
             request: ReceiptRequestHelper.setUpRequest(listReceiptPayload,
                                                        NSError(domain: NSURLErrorDomain, code: 501, userInfo: nil)))

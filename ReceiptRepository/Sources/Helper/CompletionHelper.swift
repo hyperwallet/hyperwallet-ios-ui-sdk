@@ -20,10 +20,10 @@ import HyperwalletSDK
 
 class CompletionHelper {
     @discardableResult
-    static func perform<T>(_ error: HyperwalletErrorType?,
-                           _ result: T?,
-                           _ handler: @escaping (Result<T?, HyperwalletErrorType>) -> Void,
-                           _ cachedResult: T? = nil) -> T? {
+    static func performHandler<T>(_ error: HyperwalletErrorType?,
+                                  _ result: T?,
+                                  _ handler: @escaping (Result<T?, HyperwalletErrorType>) -> Void,
+                                  _ cachedResult: T? = nil) -> T? {
         if let error = error {
             DispatchQueue.main.async {
                 handler(.failure(error))

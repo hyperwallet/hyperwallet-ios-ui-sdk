@@ -41,7 +41,7 @@ class PrepaidCardReceiptRepositoryTests: XCTestCase {
         }
     }
 
-    func testListUserReceiptSuccess() {
+    func testListPrepaidCardReceipt_success() {
         var prepaidCardReceiptList = [HyperwalletReceipt]()
         HyperwalletTestHelper.setUpMockServer(
             request: ReceiptRequestHelper.setUpRequest(listPrepaidCardReceiptPayload,
@@ -67,7 +67,7 @@ class PrepaidCardReceiptRepositoryTests: XCTestCase {
         XCTAssertFalse(prepaidCardReceiptList.isEmpty, "The Prepaid Card receipt list should not be empty")
     }
 
-    func testListUserReceiptWhenErrorReceived() {
+    func testListPrepaidCardReceipt_failure() {
         HyperwalletTestHelper.setUpMockServer(
             request: ReceiptRequestHelper.setUpRequest(listPrepaidCardReceiptPayload,
                                                        NSError(domain: NSURLErrorDomain, code: 501, userInfo: nil),
