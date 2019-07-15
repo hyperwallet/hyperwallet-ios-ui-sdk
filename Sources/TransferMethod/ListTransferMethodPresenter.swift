@@ -103,7 +103,7 @@ final class ListTransferMethodPresenter {
 
     private func deactivateBankAccount(_ token: String) {
         Hyperwallet.shared.deactivateBankAccount(transferMethodToken: token,
-                                                 notes: "Deactivating the Bank Account",
+                                                 notes: "Deactivating Account",
                                                  completion: deactivateTransferMethodHandler())
     }
 
@@ -160,6 +160,7 @@ final class ListTransferMethodPresenter {
 
     private func getAdditionalInfo(_ transferMethod: HyperwalletTransferMethod) -> String? {
         var additionalInfo: String?
+
         switch transferMethod.type {
         case "BANK_CARD", "PREPAID_CARD":
             additionalInfo = transferMethod.getField(HyperwalletTransferMethod.TransferMethodField.cardNumber.rawValue)
@@ -170,7 +171,10 @@ final class ListTransferMethodPresenter {
             additionalInfo = transferMethod.getField(HyperwalletTransferMethod.TransferMethodField.email.rawValue)
 
         default:
-            additionalInfo = transferMethod.getField(HyperwalletTransferMethod.TransferMethodField.bankAccountId.rawValue)
+            additionalInfo = transferMethod.getField(HyperwalletTransferMethod
+                .TransferMethodField
+                .bankAccountId
+                .rawValue)
             additionalInfo = String(format: "%@%@",
                                     "transfer_method_list_item_description".localized(),
                                     additionalInfo?.suffix(startAt: 4) ?? "")
