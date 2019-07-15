@@ -134,7 +134,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
 
     private func setUpTransferMethodConfigurationKeys(_ error: NSError? = nil) -> StubRequest {
         let response = HyperwalletTestHelper.setUpMockedResponse(payload: mockResponseData, error: error)
-        return HyperwalletTestHelper.buildPostResquest(baseUrl: HyperwalletTestHelper.graphQlURL, response)
+        return HyperwalletTestHelper.buildPostRequest(baseUrl: HyperwalletTestHelper.graphQlURL, response)
     }
 
     private func setUpGetIndividualHyperwalletUser(_ error: NSError? = nil) {
