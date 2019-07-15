@@ -1,0 +1,55 @@
+{
+    "errors": [
+        {
+            "message": "Could not find associated fees.",
+            "locations": [
+                {
+                    "line": 15,
+                    "column": 33
+                }
+            ],
+            "path": [
+                "countries",
+                "nodes",
+                2,
+                "currencies",
+                "nodes",
+                1,
+                "transferMethodTypes",
+                "nodes",
+                0,
+                "fees"
+            ],
+            "extensions": {
+                "errorType": "DataFetchingException",
+                "timestamp": "2019-05-14 07:22:32"
+            }
+        }
+    ],
+    "data": {
+        "countries": {
+            "nodes": [
+                {
+                    "code": "HR",
+                    "name": "CROATIA (local name: Hrvatska)",
+                    "currencies": {
+                        "nodes": [
+                            {
+                                "code": "HRK",
+                                "name": "HRK",
+                                "transferMethodTypes": {
+                                    "nodes": [
+                                        {
+                                            "code": "BANK_ACCOUNT",
+                                            "name": "Bank Account"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+}

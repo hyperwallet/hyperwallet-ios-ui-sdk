@@ -1,0 +1,16 @@
+{
+    "token": "sts-0000",
+    "createdOn": "2017-10-30T18:50:20",
+    "transition": "DE_ACTIVATED",
+    "fromStatus": "ACTIVATED",
+    "toStatus": "DE_ACTIVATED",
+    "notes": "Closing this account.",
+    "links": [
+        {
+            "params": {
+                "rel": "self"
+            },
+            "href": "https://localhost/rest/v3/users/usr-0000/bank-accounts/trm-0000/status-transitions/sts-0000"
+        }
+    ]
+}
