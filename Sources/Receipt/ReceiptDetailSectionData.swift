@@ -43,19 +43,10 @@ extension ReceiptDetailSectionData {
 struct ReceiptDetailSectionTransactionData: ReceiptDetailSectionData {
     var receiptDetailSectionHeader: ReceiptDetailSectionHeader { return .transaction }
     var cellIdentifier: String { return ReceiptTransactionTableViewCell.reuseIdentifier }
-    let tableViewCellConfiguration: ReceiptTransactionCellConfiguration
+    let receipt: HyperwalletReceipt
 
     init(from receipt: HyperwalletReceipt) {
-        tableViewCellConfiguration = ReceiptTransactionCellConfiguration(
-            type: receipt.type.rawValue.lowercased().localized(),
-            entry: receipt.entry.rawValue,
-            amount: receipt.amount,
-            currency: receipt.currency,
-            createdOn: ISO8601DateFormatter
-                .ignoreTimeZone
-                .date(from: receipt.createdOn)!
-                .format(for: .date),
-            iconFont: HyperwalletIcon.of(receipt.entry.rawValue).rawValue)
+        self.receipt = receipt
     }
 }
 
