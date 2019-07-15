@@ -45,7 +45,7 @@ class RemoteTransferRepositoryTests: XCTestCase {
                                                    sourceToken: "usr-123",
                                                    destinationToken: "trm-123")
         .build()
-        
+
         // When
         transferRepository.create(transfer) { (result) in
             switch result {
@@ -79,7 +79,7 @@ class RemoteTransferRepositoryTests: XCTestCase {
                                                    sourceToken: "usr-123",
                                                    destinationToken: "trm-123")
             .build()
-        
+
         // When
         transferRepository.create(transfer) { (result) in
             switch result {

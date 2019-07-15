@@ -460,10 +460,8 @@
 		07198CAC22DCFD5600EB9364 /* TransferRepository */ = {
 			isa = PBXGroup;
 			children = (
-				07198CFC22DD2C4F00EB9364 /* Tests */,
 				07198CCD22DD004000EB9364 /* Sources */,
-				07198CAD22DCFD5600EB9364 /* TransferRepository.h */,
-				07198CAE22DCFD5600EB9364 /* Info.plist */,
+				07198CFC22DD2C4F00EB9364 /* Tests */,
 			);
 			path = TransferRepository;
 			sourceTree = "<group>";
@@ -472,6 +470,8 @@
 			isa = PBXGroup;
 			children = (
 				07198CCE22DD005300EB9364 /* Helper */,
+				07198CAD22DCFD5600EB9364 /* TransferRepository.h */,
+				07198CAE22DCFD5600EB9364 /* Info.plist */,
 				07198CCB22DCFE6F00EB9364 /* TransferRepository.swift */,
 				07198CD122DD02D400EB9364 /* TransferRepositoryFactory.swift */,
 			);
@@ -1526,7 +1526,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = TransferRepository/Info.plist;
+				INFOPLIST_FILE = TransferRepository/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1558,7 +1558,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = TransferRepository/Info.plist;
+				INFOPLIST_FILE = TransferRepository/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1590,7 +1590,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = TransferRepository/Info.plist;
+				INFOPLIST_FILE = TransferRepository/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
