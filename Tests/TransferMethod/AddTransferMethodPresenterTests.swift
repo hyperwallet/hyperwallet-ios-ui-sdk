@@ -269,6 +269,7 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
 
     var mockFieldStatusReturnResult = [Bool]()
     var mockFieldValuesReturnResult = [(name: String, value: String)]()
+    var showTransferMethodFieldsHandler: (([HyperwalletFieldGroup]) -> Void)?
 
     var expectation: XCTestExpectation?
 
@@ -293,7 +294,7 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
 
         mockFieldStatusReturnResult = [Bool]()
         mockFieldValuesReturnResult = [(name: String, value: String)]()
-
+        showTransferMethodFieldsHandler = nil
         expectation = nil
     }
 
@@ -347,6 +348,7 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
                                   _ transferMethodType: HyperwalletTransferMethodType) {
         self.fieldGroups = fieldGroups
         isShowTransferMethodFieldsPerformed = true
+        showTransferMethodFieldsHandler?(fieldGroups)
         expectation?.fulfill()
     }
 
