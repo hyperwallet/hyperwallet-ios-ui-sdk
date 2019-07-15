@@ -18,7 +18,9 @@
 
 import HyperwalletSDK
 
-extension HyperwalletTransferMethod {
+/// The HyperwalletTransferMethod extension
+public extension HyperwalletTransferMethod {
+    /// Additional information about the transfer method
     var additionalInfo: String? {
         switch type {
         case "BANK_CARD", "PREPAID_CARD":
@@ -26,6 +28,7 @@ extension HyperwalletTransferMethod {
                           "transfer_method_list_item_description".localized(),
                           getField(TransferMethodField.cardNumber.rawValue)?
                             .suffix(startAt: 4) ?? "" )
+
         case "PAYPAL_ACCOUNT":
             return getField(TransferMethodField.email.rawValue)
 
