@@ -37,7 +37,6 @@
 		07B1FE5E22B8A72D00F461D0 /* ScheduleTransferNotesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B1FE5D22B8A72D00F461D0 /* ScheduleTransferNotesCell.swift */; };
 		07D4E00C22B46952004E031A /* ScheduleTransferTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D4E00B22B46952004E031A /* ScheduleTransferTableViewController.swift */; };
 		07D4E00E22B46978004E031A /* ScheduleTransferSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D4E00D22B46978004E031A /* ScheduleTransferSectionData.swift */; };
-		07D4E01022B469D3004E031A /* HyperwalletTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D4E00F22B469D3004E031A /* HyperwalletTransfer.swift */; };
 		07D4E01222B46FBC004E031A /* ScheduleTransferButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D4E01122B46FBC004E031A /* ScheduleTransferButtonCell.swift */; };
 		07D4E01422B47257004E031A /* ScheduleTransferForeignExchangeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D4E01322B47257004E031A /* ScheduleTransferForeignExchangeCell.swift */; };
 		0961D62D22AA858E007F0B44 /* ReceiptsForFewMonths.json in Resources */ = {isa = PBXBuildFile; fileRef = 0961D62C22AA858E007F0B44 /* ReceiptsForFewMonths.json */; };
@@ -241,7 +240,6 @@
 		07BE415E229DE181002DECAF /* UserReceiptResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserReceiptResponse.json; sourceTree = "<group>"; };
 		07D4E00B22B46952004E031A /* ScheduleTransferTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTransferTableViewController.swift; sourceTree = "<group>"; };
 		07D4E00D22B46978004E031A /* ScheduleTransferSectionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTransferSectionData.swift; sourceTree = "<group>"; };
-		07D4E00F22B469D3004E031A /* HyperwalletTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletTransfer.swift; sourceTree = "<group>"; };
 		07D4E01122B46FBC004E031A /* ScheduleTransferButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTransferButtonCell.swift; sourceTree = "<group>"; };
 		07D4E01322B47257004E031A /* ScheduleTransferForeignExchangeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTransferForeignExchangeCell.swift; sourceTree = "<group>"; };
 		0961D62C22AA858E007F0B44 /* ReceiptsForFewMonths.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ReceiptsForFewMonths.json; sourceTree = "<group>"; };
@@ -1239,7 +1237,6 @@
 				DBCA3880225E8BAA00CD4137 /* HyperwalletIcon.swift in Sources */,
 				98175429228DE42E0019159A /* ReceiptTransactionTableViewCell.swift in Sources */,
 				DBCA3873225E8BAA00CD4137 /* UIColor.swift in Sources */,
-				07D4E01022B469D3004E031A /* HyperwalletTransfer.swift in Sources */,
 				DBCA3870225E8BAA00CD4137 /* UIAlertAction.swift in Sources */,
 				DBCA388B225E8BAA00CD4137 /* WidgetFactory.swift in Sources */,
 				DBCA3871225E8BAA00CD4137 /* UIView.swift in Sources */,
