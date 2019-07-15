@@ -68,7 +68,7 @@ public final class HyperwalletUI {
     /// Lists all transfer method types available based on the country, currency and profile type to create a new
     /// transfer method (bank account, bank card, PayPal account, prepaid card, paper check).
     ///
-    /// - Parameter forceUpdateData: Forces to refresh the data manager
+    /// - Parameter forceUpdateData: Forces to refresh the data
     /// - Returns: An instance of `SelectTransferMethodTypeTableViewController`
     public func selectTransferMethodTypeTableViewController(forceUpdateData: Bool = false)
         -> SelectTransferMethodTypeTableViewController {
