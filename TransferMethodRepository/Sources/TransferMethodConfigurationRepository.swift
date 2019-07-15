@@ -111,9 +111,9 @@ public final class RemoteTransferMethodConfigurationRepository: TransferMethodCo
         return { (result, error) in
             self.transferMethodConfigurationFieldsDic[fieldQuery] = CompletionHelper
                 .performHandler(error,
-                                   result,
-                                   completion,
-                                   self.transferMethodConfigurationFieldsDic[fieldQuery])
+                                result,
+                                completion,
+                                self.transferMethodConfigurationFieldsDic[fieldQuery])
         }
     }
 }
