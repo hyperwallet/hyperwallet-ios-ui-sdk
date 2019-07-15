@@ -20,3 +20,5 @@ ignore:
   - TransferMethodRepository/Tests/*
   - TransferMethodRepository/Sources/Extensions/*
   - TransferMethodRepository/Sources/Helper/*
+  - UserRepository/Tests/*
+  - UserRepository/Sources/Helper/*

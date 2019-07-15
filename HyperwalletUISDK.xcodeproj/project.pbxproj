@@ -56,6 +56,12 @@
 		641324F122958B5000512816 /* TransferMethodConfigurationBankAccountBusinessResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 641324ED22958B5000512816 /* TransferMethodConfigurationBankAccountBusinessResponse.json */; };
 		641EBE92228EE35A00D718F4 /* AddTransferMethodBankAccountBusinessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641EBE90228EE19E00D718F4 /* AddTransferMethodBankAccountBusinessTests.swift */; };
 		6439123922DC7AE400036609 /* CompletionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB50B3722D7B8F70029B74B /* CompletionHelper.swift */; };
+		6439123F22DCA26200036609 /* HyperwalletTestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB18E9FA2261BA4C004F6AC3 /* HyperwalletTestHelper.swift */; };
+		6439124522DCA7AB00036609 /* UserRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6439124222DCA6FD00036609 /* UserRequestHelper.swift */; };
+		6439124622DCB54600036609 /* AuthenticationTokenGeneratorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB18E9FB2261BA4C004F6AC3 /* AuthenticationTokenGeneratorMock.swift */; };
+		6439124722DCB55900036609 /* AuthenticationProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB18E9FD2261BA4C004F6AC3 /* AuthenticationProviderMock.swift */; };
+		6439124822DCB57300036609 /* UserBusinessResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 6439123B22DC9EF400036609 /* UserBusinessResponse.json */; };
+		6439124922DCB57300036609 /* UserIndividualResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 6439123C22DC9EF400036609 /* UserIndividualResponse.json */; };
 		6440CD5722D7269D00072903 /* UserRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6440CD4E22D7269D00072903 /* UserRepository.framework */; };
 		6440CD5E22D7269D00072903 /* UserRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6440CD5D22D7269D00072903 /* UserRepositoryTests.swift */; };
 		6440CD6022D7269D00072903 /* UserRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = 6440CD5022D7269D00072903 /* UserRepository.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -319,6 +325,9 @@
 		641324E42295764500512816 /* AuthenticationTokenResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AuthenticationTokenResponse.json; sourceTree = "<group>"; };
 		641324ED22958B5000512816 /* TransferMethodConfigurationBankAccountBusinessResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TransferMethodConfigurationBankAccountBusinessResponse.json; sourceTree = "<group>"; };
 		641EBE90228EE19E00D718F4 /* AddTransferMethodBankAccountBusinessTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransferMethodBankAccountBusinessTests.swift; sourceTree = "<group>"; };
+		6439123B22DC9EF400036609 /* UserBusinessResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UserBusinessResponse.json; sourceTree = "<group>"; };
+		6439123C22DC9EF400036609 /* UserIndividualResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UserIndividualResponse.json; sourceTree = "<group>"; };
+		6439124222DCA6FD00036609 /* UserRequestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRequestHelper.swift; sourceTree = "<group>"; };
 		6440CD4E22D7269D00072903 /* UserRepository.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UserRepository.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6440CD5022D7269D00072903 /* UserRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserRepository.h; sourceTree = "<group>"; };
 		6440CD5122D7269D00072903 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -626,6 +635,23 @@
 			path = AuthenticationTokens;
 			sourceTree = "<group>";
 		};
+		6439123A22DC9EF400036609 /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				6439123B22DC9EF400036609 /* UserBusinessResponse.json */,
+				6439123C22DC9EF400036609 /* UserIndividualResponse.json */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
+		6439124422DCA76E00036609 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				6439124222DCA6FD00036609 /* UserRequestHelper.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		6440CD4F22D7269D00072903 /* UserRepository */ = {
 			isa = PBXGroup;
 			children = (
@@ -649,6 +675,8 @@
 		6440CD7022D7270600072903 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				6439124422DCA76E00036609 /* Helper */,
+				6439123A22DC9EF400036609 /* Responses */,
 				6440CD5D22D7269D00072903 /* UserRepositoryTests.swift */,
 				6440CD5F22D7269D00072903 /* Info.plist */,
 			);
@@ -1310,6 +1338,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6439124922DCB57300036609 /* UserIndividualResponse.json in Resources */,
+				6439124822DCB57300036609 /* UserBusinessResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1519,6 +1549,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				6440CD5E22D7269D00072903 /* UserRepositoryTests.swift in Sources */,
+				6439123F22DCA26200036609 /* HyperwalletTestHelper.swift in Sources */,
+				6439124722DCB55900036609 /* AuthenticationProviderMock.swift in Sources */,
+				6439124522DCA7AB00036609 /* UserRequestHelper.swift in Sources */,
+				6439124622DCB54600036609 /* AuthenticationTokenGeneratorMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
