@@ -1,0 +1,11 @@
+framework module Hippolyte {
+  umbrella header "Hippolyte.h"
+
+  export *
+  module * { export * }
+}
+
+module Hippolyte.Swift {
+    header "Hippolyte-Swift.h"
+    requires objc
+}
