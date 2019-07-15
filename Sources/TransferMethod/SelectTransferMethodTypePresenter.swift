@@ -134,7 +134,8 @@ final class SelectTransferMethodTypePresenter {
                             }
                             strongSelf.countryCurrencySectionData = ["Country", "Currency"]
                             strongSelf.loadSelectedCountry(countries, with: user?.country)
-                            strongSelf.loadCurrencyAndTransferMethodTypes(result)
+                            strongSelf.loadCurrency(result)
+                            strongSelf.loadTransferMethodTypes(result)
                         },
                         failure: { strongSelf.loadTransferMethodKeys() }))
             }
@@ -211,7 +212,8 @@ final class SelectTransferMethodTypePresenter {
             self.selectedCountry = country.value
             self.transferMethodConfigurationRepository
                 .getKeys(completion: self.getKeysHandler(success: { (result) in
-                    self.loadCurrencyAndTransferMethodTypes(result)
+                    self.loadCurrency(result)
+                    self.loadTransferMethodTypes(result)
                 }))
         }
     }
@@ -221,8 +223,7 @@ final class SelectTransferMethodTypePresenter {
             self.selectedCurrency = currency.value
             self.transferMethodConfigurationRepository.getKeys(completion: self.getKeysHandler(
                 success: { (result) in
-                    self.loadTransferMethodTypes(result?.transferMethodTypes(countryCode: self.selectedCountry,
-                                                                             currencyCode: self.selectedCurrency))
+                    self.loadTransferMethodTypes(result)
                     self.view.countryCurrencyTableViewReloadData()
                 }))
         }
@@ -249,13 +250,8 @@ final class SelectTransferMethodTypePresenter {
         }
     }
 
-    private func loadSelectedCountry(_ countries: [HyperwalletCountry]?,
+    private func loadSelectedCountry(_ countries: [HyperwalletCountry],
                                      with userCountry: String?) {
-        guard let countries = countries else {
-            view.showAlert(message: "no_country_available_error_message".localized())
-            return
-        }
-
         if let userCountry = userCountry, countries.contains(where: { $0.value == userCountry }) {
             selectedCountry = userCountry
         } else if let country = countries.first {
@@ -263,22 +259,20 @@ final class SelectTransferMethodTypePresenter {
         }
     }
 
-    private func loadCurrencyAndTransferMethodTypes(_ keys: HyperwalletTransferMethodConfigurationKey?) {
-        guard let firstCurrency = keys?.currencies(from: selectedCountry)?
-            .min(by: { $0.name < $1.name }) else {
+    private func loadCurrency(_ keys: HyperwalletTransferMethodConfigurationKey?) {
+        guard let firstCurrency = keys?.currencies(from: selectedCountry)?.first else {
             view.showAlert(message: String(format: "no_currency_available_error_message".localized(),
                                            selectedCountry.localized()))
             return
         }
         selectedCurrency = firstCurrency.code
         view.countryCurrencyTableViewReloadData()
-
-        loadTransferMethodTypes(keys?.transferMethodTypes(countryCode: selectedCountry,
-                                                          currencyCode: selectedCurrency))
     }
 
-    private func loadTransferMethodTypes(_ transferMethodTypes: [HyperwalletTransferMethodType]?) {
-        guard let transferMethodTypes = transferMethodTypes, transferMethodTypes.isNotEmpty()  else {
+    private func loadTransferMethodTypes(_ keys: HyperwalletTransferMethodConfigurationKey?) {
+        guard let transferMethodTypes = keys?.transferMethodTypes(countryCode: selectedCountry,
+                                                                  currencyCode: selectedCurrency),
+            transferMethodTypes.isNotEmpty()  else {
             view.showAlert(message: String(format: "no_transfer_method_available_error_message".localized(),
                                            selectedCountry,
                                            selectedCurrency))

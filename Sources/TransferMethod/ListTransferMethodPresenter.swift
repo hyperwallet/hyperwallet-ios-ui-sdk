@@ -61,8 +61,9 @@ final class ListTransferMethodPresenter {
     /// Deactivate the selected Transfer Method
     private func deactivateTransferMethod(_ transferMethod: HyperwalletTransferMethod) {
         self.view.showProcessing()
-        if let transferMethodType = transferMethod.getField(fieldName: .type)  as? String,
-            let token = transferMethod.getField(fieldName: .token) as? String {
+        if let transferMethodType = transferMethod
+            .getField(HyperwalletTransferMethod.TransferMethodField.type.rawValue),
+            let token = transferMethod.getField(HyperwalletTransferMethod.TransferMethodField.token.rawValue) {
             selectedTransferMethod = transferMethod
             switch transferMethodType {
             case "BANK_ACCOUNT", "WIRE_ACCOUNT":
@@ -146,8 +147,8 @@ final class ListTransferMethodPresenter {
 
     func getCellConfiguration(indexPath: IndexPath) -> ListTransferMethodCellConfiguration? {
         if let transferMethod = sectionData[safe: indexPath.row],
-            let country = transferMethod.getField(fieldName: .transferMethodCountry) as? String,
-            let transferMethodType = transferMethod.getField(fieldName: .type) as? String {
+            let country = transferMethod.transferMethodCountry,
+            let transferMethodType = transferMethod.type {
             return ListTransferMethodCellConfiguration(
                 transferMethodType: transferMethodType.lowercased().localized(),
                 transferMethodCountry: country.localized(),
@@ -159,17 +160,20 @@ final class ListTransferMethodPresenter {
 
     private func getAdditionalInfo(_ transferMethod: HyperwalletTransferMethod) -> String? {
         var additionalInfo: String?
-        switch transferMethod.getField(fieldName: .type) as? String {
+        switch transferMethod.type {
         case "BANK_CARD", "PREPAID_CARD":
-            additionalInfo = transferMethod.getField(fieldName: .cardNumber) as? String
+            additionalInfo = transferMethod.getField(HyperwalletTransferMethod
+                .TransferMethodField.cardNumber.rawValue)
             additionalInfo = String(format: "%@%@",
                                     "transfer_method_list_item_description".localized(),
                                     additionalInfo?.suffix(startAt: 4) ?? "")
         case "PAYPAL_ACCOUNT":
-            additionalInfo = transferMethod.getField(fieldName: .email) as? String
+            additionalInfo = transferMethod.getField(HyperwalletTransferMethod
+                .TransferMethodField.email.rawValue)
 
         default:
-            additionalInfo = transferMethod.getField(fieldName: .bankAccountId) as? String
+            additionalInfo = transferMethod.getField(HyperwalletTransferMethod
+                .TransferMethodField.bankAccountId.rawValue)
             additionalInfo = String(format: "%@%@",
                                     "transfer_method_list_item_description".localized(),
                                     additionalInfo?.suffix(startAt: 4) ?? "")
