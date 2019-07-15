@@ -21,7 +21,6 @@ import HyperwalletSDK
 @testable import TransferMethodRepository
 import XCTest
 
-//swiftlint:disable force_cast
 class RemoteTransferMethodRepositoryTests: XCTestCase {
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
@@ -64,8 +63,10 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
 
         XCTAssertNil(bankAccountError)
         XCTAssertNotNil(bankAccountResult)
-        XCTAssertEqual(bankAccountResult?.getField(fieldName: .bankName)! as! String, "US BANK NA")
-        XCTAssertEqual(bankAccountResult?.getField(fieldName: .bankAccountId)! as! String, "7861012347")
+        XCTAssertEqual(bankAccountResult?
+            .getField(HyperwalletTransferMethod.TransferMethodField.bankName.rawValue)!, "US BANK NA")
+        XCTAssertEqual(bankAccountResult?
+            .getField(HyperwalletTransferMethod.TransferMethodField.bankAccountId.rawValue)!, "7861012347")
     }
 
     func testCreate_bankCard() {
@@ -98,8 +99,10 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
 
         XCTAssertNil(bankCardError)
         XCTAssertNotNil(bankCardResult)
-        XCTAssertEqual(bankCardResult?.getField(fieldName: .cardNumber)! as! String, "************0114")
-        XCTAssertEqual(bankCardResult?.getField(fieldName: .dateOfExpiry)! as! String, "2022-12")
+        XCTAssertEqual(bankCardResult?
+            .getField(HyperwalletTransferMethod.TransferMethodField.cardNumber.rawValue)!, "************0114")
+        XCTAssertEqual(bankCardResult?
+            .getField(HyperwalletTransferMethod.TransferMethodField.dateOfExpiry.rawValue)!, "2022-12")
     }
 
     func testCreate_payPalAccount() {
@@ -131,7 +134,8 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
 
         XCTAssertNil(payPalAccountError)
         XCTAssertNotNil(payPalAccountResult)
-        XCTAssertEqual(payPalAccountResult?.getField(fieldName: .email)! as! String, "carroll.lynn@byteme.com")
+        XCTAssertEqual(payPalAccountResult?
+            .getField(HyperwalletTransferMethod.TransferMethodField.email.rawValue)!, "carroll.lynn@byteme.com")
     }
 
     func testCreate_wireAccount() {
@@ -165,8 +169,10 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
 
         XCTAssertNil(wireAccountError)
         XCTAssertNotNil(wireAccountResult)
-        XCTAssertEqual(wireAccountResult?.getField(fieldName: .intermediaryBankAccountId)! as! String, "246810")
-        XCTAssertEqual(wireAccountResult?.getField(fieldName: .intermediaryBankId)! as! String, "12345678901")
+        XCTAssertEqual(wireAccountResult?
+            .getField(HyperwalletTransferMethod.TransferMethodField.intermediaryBankAccountId.rawValue), "246810")
+        XCTAssertEqual(wireAccountResult?
+            .getField(HyperwalletTransferMethod.TransferMethodField.intermediaryBankId.rawValue)!, "12345678901")
     }
 
     func testCreate_failure() {

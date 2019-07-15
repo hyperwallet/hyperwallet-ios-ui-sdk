@@ -22,15 +22,16 @@ final class CompletionHelper {
     static func performHandler<T>(
         _ completion: @escaping (Result<T?, HyperwalletErrorType>) -> Void) -> (T?, HyperwalletErrorType?) -> Void {
             return {(result, error) in
-                CompletionHelper.perform(error, result, completion)
+                CompletionHelper.performHandler(error, result, completion)
             }
     }
 
     @discardableResult
-    static func performHandler<T>(_ error: HyperwalletErrorType?,
-                           _ result: T?,
-                           _ completionHandler: @escaping (Result<T?, HyperwalletErrorType>) -> Void,
-                           _ cachedResult: T? = nil) -> T? {
+    static func performHandler<T>(
+        _ error: HyperwalletErrorType?,
+        _ result: T?,
+        _ completionHandler: @escaping (Result<T?, HyperwalletErrorType>) -> Void,
+        _ cachedResult: T? = nil) -> T? {
         if let error = error {
             DispatchQueue.main.async {
                 completionHandler(.failure(error))
