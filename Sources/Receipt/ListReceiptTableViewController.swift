@@ -65,7 +65,7 @@ public final class ListReceiptTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: ReceiptTransactionTableViewCell.reuseIdentifier,
                                                  for: indexPath)
         if let listReceiptCell = cell as? ReceiptTransactionTableViewCell {
-            listReceiptCell.configure(presenter.getCellConfiguration(indexPath: indexPath))
+            listReceiptCell.configure(presenter.sectionData[indexPath.section].value[indexPath.row])
         }
         return cell
     }
