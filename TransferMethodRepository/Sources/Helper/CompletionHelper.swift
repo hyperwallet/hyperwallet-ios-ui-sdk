@@ -20,7 +20,7 @@ import HyperwalletSDK
 
 class CompletionHelper {
     @discardableResult
-    static func performCompletion<T>(_ error: HyperwalletErrorType?,
+    static func performHandler<T>(_ error: HyperwalletErrorType?,
                                      _ result: T?,
                                      _ completionHandler: @escaping (Result<T?, HyperwalletErrorType>) -> Void,
                                      _ cachedResult: T? = nil) -> T? {
