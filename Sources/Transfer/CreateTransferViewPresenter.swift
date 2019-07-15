@@ -19,31 +19,34 @@
 import HyperwalletSDK
 
 protocol CreateTransferView: class {
-    typealias SelectItemHandler = (_ value: SelectDestinationCellConfiguration) -> Void
-    typealias MarkCellHandler = (_ value: SelectDestinationCellConfiguration) -> Bool
+    typealias SelectItemHandler = (_ value: ListTransferMethodCellConfiguration) -> Void
+    typealias MarkCellHandler = (_ value: ListTransferMethodCellConfiguration) -> Bool
     func showLoading()
     func hideLoading()
-    func showCreateTransfer(with transferMethod: HyperwalletTransferMethod)
+    func showCreateTransfer()
     func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?)
     func showBusinessError(_ error: HyperwalletErrorType, _ handler: @escaping () -> Void)
-    func showGenericTableView(items: [SelectDestinationCellConfiguration],
+    func showGenericTableView(items: [ListTransferMethodCellConfiguration],
                               title: String,
                               selectItemHandler: @escaping SelectItemHandler,
                               markCellHandler: @escaping MarkCellHandler)
     func showScheduleTransfer(_ transfer: HyperwalletTransfer)
-    func notifyTransferCreated(_ transfer: HyperwalletTransfer)
 }
 
-//swiftlint:disable force_cast
 final class CreateTransferViewPresenter {
     private unowned let view: CreateTransferView
+    private (set) var clientTransferId: String
     private(set) var sectionData = [CreateTransferSectionData]()
     private(set) var transferMethods = [HyperwalletTransferMethod]()
-    private(set) var selectedTransferMethod: HyperwalletTransferMethod!
-    private var transfer: HyperwalletTransfer?
+//    private var transfer: HyperwalletTransfer?
+    private var sourceToken: String?
+    private(set) var availableBalance: String?
+    var selectedTransferMethod: HyperwalletTransferMethod!
 
     /// Initialize CreateTransferPresenter
-    init(view: CreateTransferView) {
+    init(_ clientTransferId: String, _ sourceToken: String?, view: CreateTransferView) {
+        self.clientTransferId = clientTransferId
+        self.sourceToken = sourceToken
         self.view = view
     }
 
@@ -61,21 +64,21 @@ final class CreateTransferViewPresenter {
                 return
             }
             for transferMethod in strongSelf.transferMethods
-                where transferMethod.getField(fieldName: .token) as! String == configuration.transferMethodToken {
+                where transferMethod.token == configuration.transferMethodToken {
                 strongSelf.selectedTransferMethod = transferMethod
-                strongSelf.view.showCreateTransfer(with: transferMethod)
+                strongSelf.createInitialTransfer()
             }
         }
     }
 
     private func destinationAccountMarkCellHandler() -> CreateTransferView.MarkCellHandler {
         return { [weak self] item in
-            self?.selectedTransferMethod.getField(fieldName: .token) as! String == item.transferMethodToken
+            self?.selectedTransferMethod.token == item.transferMethodToken
         }
     }
 
-    private func getSelectDestinationCellConfiguration() -> [SelectDestinationCellConfiguration] {
-        var list = [SelectDestinationCellConfiguration]()
+    private func getSelectDestinationCellConfiguration() -> [ListTransferMethodCellConfiguration] {
+        var list = [ListTransferMethodCellConfiguration]()
         for transferMethod in transferMethods {
             if let configuration = getCellConfiguration(for: transferMethod) {
                 list.append(configuration)
@@ -85,69 +88,120 @@ final class CreateTransferViewPresenter {
     }
 
     private func getAdditionalInfo(_ transferMethod: HyperwalletTransferMethod) -> String? {
-        var additionlInfo: String?
-        switch transferMethod.getField(fieldName: .type) as? String {
-        case "BANK_ACCOUNT", "WIRE_ACCOUNT":
-            additionlInfo = transferMethod.getField(fieldName: .bankAccountId) as? String
-            additionlInfo = String(format: "%@%@",
-                                   "transfer_method_list_item_description".localized(),
-                                   additionlInfo?.suffix(startAt: 4) ?? "")
-        case "BANK_CARD":
-            additionlInfo = transferMethod.getField(fieldName: .cardNumber) as? String
-            additionlInfo = String(format: "%@%@",
-                                   "transfer_method_list_item_description".localized(),
-                                   additionlInfo?.suffix(startAt: 4) ?? "")
+        var additionalInfo: String?
+        switch transferMethod.type {
+        case "BANK_CARD", "PREPAID_CARD":
+            additionalInfo = transferMethod.getField(HyperwalletTransferMethod.TransferMethodField.cardNumber.rawValue)
+            additionalInfo = String(format: "%@%@",
+                                    "transfer_method_list_item_description".localized(),
+                                    additionalInfo?.suffix(startAt: 4) ?? "")
         case "PAYPAL_ACCOUNT":
-            additionlInfo = transferMethod.getField(fieldName: .email) as? String
+            additionalInfo = transferMethod.getField(HyperwalletTransferMethod.TransferMethodField.email.rawValue)
 
         default:
-            break
+            additionalInfo = transferMethod.getField(HyperwalletTransferMethod.TransferMethodField.bankAccountId.rawValue)
+            additionalInfo = String(format: "%@%@",
+                                    "transfer_method_list_item_description".localized(),
+                                    additionalInfo?.suffix(startAt: 4) ?? "")
         }
-        return additionlInfo
+        return additionalInfo
     }
-
-    private func getCellConfiguration(for transferMethod: HyperwalletTransferMethod) -> SelectDestinationCellConfiguration? {
-        if let country = transferMethod.getField(fieldName: .transferMethodCountry) as? String,
-            let transferMethodType = transferMethod.getField(fieldName: .type) as? String {
-            return SelectDestinationCellConfiguration(
+    private func getCellConfiguration(for transferMethod: HyperwalletTransferMethod) -> ListTransferMethodCellConfiguration? {
+        if let country = transferMethod.transferMethodCountry,
+            let transferMethodType = transferMethod.type {
+            return ListTransferMethodCellConfiguration(
                 transferMethodType: transferMethodType.lowercased().localized(),
                 transferMethodCountry: country.localized(),
                 additionalInfo: getAdditionalInfo(transferMethod),
                 transferMethodIconFont: HyperwalletIcon.of(transferMethodType).rawValue,
-                transferMethodToken: transferMethod.getField(fieldName: .token) as? String ?? "")
+                transferMethodToken: transferMethod.token ?? "")
         }
         return nil
     }
 
     func initializeSections() {
         sectionData.removeAll()
-        let addTransferDestinationSection = CreateTransferDestinationData(transferMethod: selectedTransferMethod)
-        sectionData.append(addTransferDestinationSection)
+        let createTransferDestinationSection = CreateTransferSectionDestinationData(transferMethod: selectedTransferMethod)
+        sectionData.append(createTransferDestinationSection)
 
-        if let currency = selectedTransferMethod.getField(fieldName: .transferMethodCurrency) as? String {
-            let addTransferUserInputSection = CreateTransferUserInputData(destinationCurrency: currency)
-            sectionData.append(addTransferUserInputSection)
+        if let currency = selectedTransferMethod.transferMethodCurrency {
+            let createTransferUserInputSection = CreateTransferSectionTransferData(destinationCurrency: currency,
+                                                                                   availableBalance: availableBalance ?? "0.00")
+            sectionData.append(createTransferUserInputSection)
         }
 
-        let addTransferButtonData = CreateTransferButtonData()
-        sectionData.append(addTransferButtonData)
+        let createTransferNotesSection = CreateTransferSectionNotesData()
+        sectionData.append(createTransferNotesSection)
+
+        let createTransferButtonData = CreateTransferSectionButtonData()
+        sectionData.append(createTransferButtonData)
+    }
+
+    func loadCreateTransfer() {
+        // TODO GetUser from UserRepository
+        view.showLoading()
+        if let _ = sourceToken {
+            loadTransferMethods()
+        } else {
+            Hyperwallet.shared.getUser {[weak self] (result, error) in
+                guard let strongSelf = self else {
+                    return
+                }
+                DispatchQueue.main.async {
+                    if let error = error {
+                            self?.view.hideLoading()
+                            self?.view.showError(error, { self?.loadCreateTransfer() })
+                         return
+                    }
+                    strongSelf.sourceToken = result?.token
+                    strongSelf.loadTransferMethods()
+                }
+            }
+        }
     }
 
     /// Get the list of all Activated transfer methods from core SDK
-    func loadTransferMethods() {
+    private func loadTransferMethods() {
+//        TODO Use TransferMethodRepository to call listTransferMethods
         let queryParam = HyperwalletTransferMethodQueryParam()
         queryParam.limit = 100
         queryParam.status = .activated
-        view.showLoading()
+//        view.showLoading()
         Hyperwallet.shared.listTransferMethods(queryParam: queryParam, completion: loadTransferMethodHandler())
     }
 
-    func createTransfer(_ transfer: HyperwalletTransfer) {
-        self.transfer = transfer
-//        Hyperwallet.shared.createTransfer(transfer: transfer,
-//                                             completion: createTransferHandler())
-        // TODO remove this once create transfer is added to core sdk
-        view.showScheduleTransfer(transfer)
+    private func loadTransferMethodHandler()
+        -> (HyperwalletPageList<HyperwalletTransferMethod>?, HyperwalletErrorType?) -> Void {
+            return { [weak self] (result, error) in
+                guard let strongSelf = self else {
+                    return
+                }
+                DispatchQueue.main.async {
+                    //strongSelf.view.hideLoading()
+                    if let error = error {
+                        strongSelf.view.hideLoading()
+                        strongSelf.view.showError(error, { strongSelf.loadTransferMethods() })
+                        return
+                    }
+                    if let data = result?.data, data.isNotEmpty() {
+                        strongSelf.transferMethods = data
+                        if strongSelf.selectedTransferMethod == nil {
+                            strongSelf.selectedTransferMethod = strongSelf.transferMethods.first!
+                        }
+                        strongSelf.createInitialTransfer()
+                    }
+                }
+            }
+    }
+
+    private func createInitialTransfer() {
+       let transfer = HyperwalletTransfer.Builder(clientTransferId: clientTransferId,
+                                                  sourceToken: sourceToken ?? "",
+                                                  destinationToken: selectedTransferMethod.token ?? "")
+        .destinationCurrency(selectedTransferMethod.transferMethodCurrency)
+        .build()
+        Hyperwallet.shared.createTransfer(transfer: transfer,
+                                          completion: createTransferHandler())
     }
 
     private func createTransferHandler() -> (HyperwalletTransfer?, HyperwalletErrorType?) -> Void {
@@ -161,12 +215,43 @@ final class CreateTransferViewPresenter {
                     strongSelf.errorHandler(for: error)
                 } else {
                     if let transfer = result {
-                        strongSelf.view.notifyTransferCreated(transfer)
-                        strongSelf.view.showScheduleTransfer(transfer)
+                        strongSelf.availableBalance = transfer.destinationAmount
+                        strongSelf.view.showCreateTransfer()
                     }
                 }
             }
         }
+    }
+
+    private func populateTransferObject(_ amount: String?, _ notes: String?) -> HyperwalletTransfer {
+        return HyperwalletTransfer.Builder(clientTransferId: "123543567",
+                                           sourceToken: sourceToken ?? "",
+                                           destinationToken: selectedTransferMethod.token ?? "")
+            .destinationAmount(amount)
+            .notes(notes)
+            .destinationCurrency(selectedTransferMethod.transferMethodCurrency)
+            .build()
+    }
+
+    func createTransfer(amount: String?, notes: String?) {
+        let transfer = populateTransferObject(amount, notes)
+        Hyperwallet.shared.createTransfer(transfer: transfer,
+                                          completion: { [weak self] (result, error) in
+                                            guard let strongSelf = self else {
+                                                return
+                                            }
+                                            if let error = error {
+                                                strongSelf.view.showError(error, { self?.createTransfer(amount: amount,
+                                                                                                 notes: notes) })
+                                                return
+                                            }
+                                            DispatchQueue.main.async {
+                                                strongSelf.view.hideLoading()
+                                                if let result = result {
+                                                    strongSelf.view.showScheduleTransfer(result)
+                                                }
+                                            }
+        })
     }
 
     private func errorHandler(for error: HyperwalletErrorType) {
@@ -179,31 +264,9 @@ final class CreateTransferViewPresenter {
 
         default:
             let handler = { [weak self] () -> Void in
-                if let transfer = self?.transfer {
-                    self?.createTransfer(transfer)
-                }}
+                self?.loadCreateTransfer()
+            }
             view.showError(error, handler)
         }
-    }
-
-    private func loadTransferMethodHandler()
-        -> (HyperwalletPageList<HyperwalletTransferMethod>?, HyperwalletErrorType?) -> Void {
-            return { [weak self] (result, error) in
-                guard let strongSelf = self else {
-                    return
-                }
-                DispatchQueue.main.async {
-                    strongSelf.view.hideLoading()
-                    if let error = error {
-                        strongSelf.view.showError(error, { strongSelf.loadTransferMethods() })
-                        return
-                    }
-                    if let data = result?.data, data.isNotEmpty() {
-                        strongSelf.transferMethods = data
-                        strongSelf.selectedTransferMethod = strongSelf.transferMethods.first!
-                        strongSelf.view.showCreateTransfer(with: strongSelf.transferMethods.first!)
-                    }
-                }
-            }
     }
 }

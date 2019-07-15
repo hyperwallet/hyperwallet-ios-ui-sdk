@@ -19,7 +19,10 @@
 import HyperwalletSDK
 
 protocol ScheduleTransferView: class {
+    func hideLoading()
     func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?)
+    func showLoading()
+    func showScheduleTransfer()
     func notifyTransferScheduled(_ transfer: HyperwalletTransfer)
 }
 
@@ -36,7 +39,13 @@ final class ScheduleTransferViewPresenter {
         self.transfer = transfer
     }
 
-    func initializeSections() {
+    func loadScheduleTransfer() {
+        view.showLoading()
+        initializeSections()
+        view.hideLoading()
+    }
+
+    private func initializeSections() {
         sectionData.removeAll()
         let confirmTransferDestinationSection = ScheduleTransferDestinationData(transferMethod: transferMethod)
         sectionData.append(confirmTransferDestinationSection)

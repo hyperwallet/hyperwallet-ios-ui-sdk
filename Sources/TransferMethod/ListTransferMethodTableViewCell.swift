@@ -23,11 +23,20 @@ struct ListTransferMethodCellConfiguration {
     let transferMethodCountry: String
     let additionalInfo: String?
     let transferMethodIconFont: String
-    let transferMethodToken: String
+    let transferMethodToken: String?
 }
 
-final class ListTransferMethodTableViewCell: UITableViewCell {
+final class ListTransferMethodTableViewCell: GenericCell<ListTransferMethodCellConfiguration> {
     static let reuseIdentifier = "listTransferMethodCellIdentifier"
+
+    override var item: ListTransferMethodCellConfiguration? {
+        didSet {
+            guard let configuration = item  else {
+                return
+            }
+            configure(configuration: configuration)
+        }
+    }
 
     // MARK: Life cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

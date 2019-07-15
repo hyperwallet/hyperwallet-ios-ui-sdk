@@ -16,31 +16,42 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-final class CreateTransferButtonCell: UITableViewCell {
-    static let reuseIdentifier = "addTransferNextButtonCellReuseIdentifier"
+final class CreateTransferNotesTableViewCell: UITableViewCell, UITextFieldDelegate {
+    static let reuseIdentifier = "createTransferNotesTableViewCellReuseIdentifier"
 
-    private lazy var nextButtonLabel: UILabel = {
-        let label = UILabel()
-        label.text = "add_transfer_next_button".localized()
-        return label
+    var enteredNote: ((_ value: String) -> Void)?
+
+    lazy var notesTextField: UITextField = {
+        let textField = UITextField(frame: CGRect(x: separatorInset.left,
+                                                  y: 0,
+                                                  width: bounds.width,
+                                                  height: bounds.height))
+        textField.font = titleLabelFont
+        textField.placeholder = "transfer_description".localized()
+        textField.delegate = self
+        return textField
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
-        textLabel?.textAlignment = .center
-        self.heightAnchor.constraint(equalToConstant: Theme.Cell.smallHeight).isActive = true
+        textLabel?.numberOfLines = 0
+        textLabel?.lineBreakMode = .byWordWrapping
+        textLabel?.accessibilityIdentifier = "createTransferSectionNotesTextLabel"
+        selectionStyle = .none
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
-    func configure() {
-        textLabel?.text = nextButtonLabel.text
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        enteredNote?(notesTextField.text ?? "")
     }
-}
 
-extension CreateTransferButtonCell {
+    func configure() {
+        contentView.addSubview(notesTextField)
+    }
+
     // MARK: Theme manager's proxy properties
     @objc dynamic var titleLabelFont: UIFont! {
         get { return textLabel?.font }

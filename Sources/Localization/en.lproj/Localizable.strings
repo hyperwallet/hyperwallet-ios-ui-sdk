@@ -191,10 +191,13 @@
 
 // Transfer Funds
 "transfer_funds" = "Transfer Funds";
-"add_transfer_section_header_destination" = "Destination Account";
-"add_transfer_section_header_amount" = "Amount and Description";
+"add_transfer_section_header_destination" = "DESTINATION";
+"add_transfer_section_header_transfer" = "TRANSFER";
+"add_transfer_section_header_notes" = "NOTES";
 "transfer_amount" = "Amount";
-"transfer_description" = "Transfer Description";
+"transfer_all_funds" = "Transfer all funds";
+"available_balance_footer" = "Available for transfer: %1$@";
+"transfer_description" = "Description";
 "add_transfer_next_button" = "Next";
 "schedule_transfer_section_header_destination" = "DESITINATION";
 "schedule_transfer_section_header_foreignExchange" = "FOREIGN EXCHANGE";

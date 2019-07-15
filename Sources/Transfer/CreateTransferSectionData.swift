@@ -19,7 +19,7 @@
 import HyperwalletSDK
 
 enum CreateTransferSectionHeader: String {
-    case destination, amount, button
+    case button, destination, notes, transfer
 }
 
 protocol CreateTransferSectionData {
@@ -36,43 +36,48 @@ extension CreateTransferSectionData {
             "add_transfer_section_header_\(createTransferSectionHeader.rawValue)".localized() : nil }
 }
 
-struct CreateTransferDestinationData: CreateTransferSectionData {
+struct CreateTransferSectionAddDestinationAccountData: CreateTransferSectionData {
     var createTransferSectionHeader: CreateTransferSectionHeader { return .destination }
-    var cellIdentifier: String { return SelectDestinationTableViewCell.reuseIdentifier }
-    var configuration: SelectDestinationCellConfiguration?
+    var cellIdentifier: String { return "addTransferMethodSectionDataLabel" }
+}
+
+struct CreateTransferSectionDestinationData: CreateTransferSectionData {
+    var createTransferSectionHeader: CreateTransferSectionHeader { return .destination }
+    var cellIdentifier: String { return ListTransferMethodTableViewCell.reuseIdentifier }
+    var configuration: ListTransferMethodCellConfiguration?
 
     init(transferMethod: HyperwalletTransferMethod) {
         configuration = setUpCellConfiguration(transferMethod: transferMethod)
     }
 
-    private func setUpCellConfiguration(transferMethod: HyperwalletTransferMethod) -> SelectDestinationCellConfiguration? {
-           if let country = transferMethod.getField(fieldName: .transferMethodCountry) as? String,
-           let transferMethodType = transferMethod.getField(fieldName: .type) as? String {
-             return SelectDestinationCellConfiguration(
+    private func setUpCellConfiguration(transferMethod: HyperwalletTransferMethod) -> ListTransferMethodCellConfiguration? {
+           if let country = transferMethod.transferMethodCountry,
+           let transferMethodType = transferMethod.type {
+             return ListTransferMethodCellConfiguration(
                 transferMethodType: transferMethodType.lowercased().localized(),
                 transferMethodCountry: country.localized(),
                 additionalInfo: getAdditionalInfo(transferMethod),
                 transferMethodIconFont: HyperwalletIcon.of(transferMethodType).rawValue,
-                transferMethodToken: transferMethod.getField(fieldName: .token) as? String ?? "")
+                transferMethodToken: transferMethod.token ?? "")
         }
         return nil
     }
 
     private func getAdditionalInfo(_ transferMethod: HyperwalletTransferMethod) -> String? {
         var additionlInfo: String?
-        switch transferMethod.getField(fieldName: .type) as? String {
+        switch transferMethod.type {
         case "BANK_ACCOUNT", "WIRE_ACCOUNT":
-            additionlInfo = transferMethod.getField(fieldName: .bankAccountId) as? String
+            additionlInfo = transferMethod.getField(HyperwalletTransferMethod.TransferMethodField.bankAccountId.rawValue)
             additionlInfo = String(format: "%@%@",
                                    "transfer_method_list_item_description".localized(),
                                    additionlInfo?.suffix(startAt: 4) ?? "")
         case "BANK_CARD":
-            additionlInfo = transferMethod.getField(fieldName: .cardNumber) as? String
+            additionlInfo = transferMethod.getField(HyperwalletTransferMethod.TransferMethodField.cardNumber.rawValue)
             additionlInfo = String(format: "%@%@",
                                    "transfer_method_list_item_description".localized(),
                                    additionlInfo?.suffix(startAt: 4) ?? "")
         case "PAYPAL_ACCOUNT":
-            additionlInfo = transferMethod.getField(fieldName: .email) as? String
+            additionlInfo = transferMethod.getField(HyperwalletTransferMethod.TransferMethodField.email.rawValue)
 
         default:
             break
@@ -81,20 +86,30 @@ struct CreateTransferDestinationData: CreateTransferSectionData {
     }
 }
 
-struct CreateTransferUserInputData: CreateTransferSectionData {
+struct CreateTransferSectionTransferData: CreateTransferSectionData {
     var rows = [(title: String?, value: String?)]()
-    var createTransferSectionHeader: CreateTransferSectionHeader { return .amount }
+    var createTransferSectionHeader: CreateTransferSectionHeader { return .transfer }
     var rowCount: Int { return rows.count }
     var cellIdentifier: String { return CreateTransferUserInputCell.reuseIdentifier }
     var configuration: CreateTransferUserInputCellConfiguration!
+    var footer: UIView
 
-    init(destinationCurrency: String) {
-        rows.append((title: nil, value: destinationCurrency))
-        rows.append((title: nil, value: nil))
+    init(destinationCurrency: String, availableBalance: String) {
+        rows.append((title: "amount", value: destinationCurrency))
+        rows.append((title: "transferAll", value: "transferAllSwitch"))
+        let availableFunds = UILabel()
+        availableFunds.text = String(format: "available_balance_footer".localized(),
+                                     availableBalance)
+        footer = availableFunds
     }
 }
 
-struct CreateTransferButtonData: CreateTransferSectionData {
+struct CreateTransferSectionButtonData: CreateTransferSectionData {
     var createTransferSectionHeader: CreateTransferSectionHeader { return .button }
     var cellIdentifier: String { return CreateTransferButtonCell.reuseIdentifier }
+}
+
+struct CreateTransferSectionNotesData: CreateTransferSectionData {
+    var createTransferSectionHeader: CreateTransferSectionHeader { return .notes }
+    var cellIdentifier: String { return CreateTransferNotesTableViewCell.reuseIdentifier }
 }

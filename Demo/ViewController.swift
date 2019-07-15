@@ -182,10 +182,9 @@ class ViewController: UITableViewController {
             navigationController?.pushViewController(viewController, animated: true)
 
         case .transferFunds:
-            let userToken = Bundle.main.infoDictionary!["USER_TOKEN"] as! String
 
-            let viewController = HyperwalletUI.shared.addTransferTableViewController(sourceToken: userToken,
-                                                                                     clientTransferId: "randomNumber")
+            let viewController = HyperwalletUI.shared
+                .createTransferFromUserTableViewController(clientTransferId: "randomNumber")
             navigationController?.pushViewController(viewController, animated: true)
 
         default:

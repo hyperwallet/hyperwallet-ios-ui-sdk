@@ -36,8 +36,8 @@ extension ScheduleTransferSectionData {
 
 struct ScheduleTransferDestinationData: ScheduleTransferSectionData {
     var scheduleTransferSectionHeader: ScheduleTransferSectionHeader { return .destination }
-    var cellIdentifier: String { return SelectDestinationTableViewCell.reuseIdentifier }
-    var configuration: SelectDestinationCellConfiguration?
+    var cellIdentifier: String { return ListTransferMethodTableViewCell.reuseIdentifier }
+    var configuration: ListTransferMethodCellConfiguration?
     var transferMethod: HyperwalletTransferMethod
 
     init(transferMethod: HyperwalletTransferMethod) {
@@ -46,37 +46,35 @@ struct ScheduleTransferDestinationData: ScheduleTransferSectionData {
     }
 
     mutating func setUpCellConfiguration(transferMethod: HyperwalletTransferMethod) {
-        if let country = transferMethod.getField(fieldName: .transferMethodCountry) as? String,
-            let transferMethodType = transferMethod.getField(fieldName: .type) as? String {
-            configuration = SelectDestinationCellConfiguration(
+        if let country = transferMethod.transferMethodCountry,
+            let transferMethodType = transferMethod.type {
+            configuration = ListTransferMethodCellConfiguration(
                 transferMethodType: transferMethodType.lowercased().localized(),
                 transferMethodCountry: country.localized(),
                 additionalInfo: getAdditionalInfo(transferMethod),
                 transferMethodIconFont: HyperwalletIcon.of(transferMethodType).rawValue,
-                transferMethodToken: transferMethod.getField(fieldName: .token) as? String ?? "")
+                transferMethodToken: transferMethod.token ?? "")
         }
     }
 
     private func getAdditionalInfo(_ transferMethod: HyperwalletTransferMethod) -> String? {
-        var additionlInfo: String?
-        switch transferMethod.getField(fieldName: .type) as? String {
-        case "BANK_ACCOUNT", "WIRE_ACCOUNT":
-            additionlInfo = transferMethod.getField(fieldName: .bankAccountId) as? String
-            additionlInfo = String(format: "%@%@",
-                                   "transfer_method_list_item_description".localized(),
-                                   additionlInfo?.suffix(startAt: 4) ?? "")
-        case "BANK_CARD":
-            additionlInfo = transferMethod.getField(fieldName: .cardNumber) as? String
-            additionlInfo = String(format: "%@%@",
-                                   "transfer_method_list_item_description".localized(),
-                                   additionlInfo?.suffix(startAt: 4) ?? "")
+        var additionalInfo: String?
+        switch transferMethod.type {
+        case "BANK_CARD", "PREPAID_CARD":
+            additionalInfo = transferMethod.getField(HyperwalletTransferMethod.TransferMethodField.cardNumber.rawValue)
+            additionalInfo = String(format: "%@%@",
+                                    "transfer_method_list_item_description".localized(),
+                                    additionalInfo?.suffix(startAt: 4) ?? "")
         case "PAYPAL_ACCOUNT":
-            additionlInfo = transferMethod.getField(fieldName: .email) as? String
+            additionalInfo = transferMethod.getField(HyperwalletTransferMethod.TransferMethodField.email.rawValue)
 
         default:
-            break
+            additionalInfo = transferMethod.getField(HyperwalletTransferMethod.TransferMethodField.bankAccountId.rawValue)
+            additionalInfo = String(format: "%@%@",
+                                    "transfer_method_list_item_description".localized(),
+                                    additionalInfo?.suffix(startAt: 4) ?? "")
         }
-        return additionlInfo
+        return additionalInfo
     }
 }
 

@@ -22,22 +22,23 @@ import UIKit
 ///
 /// The user can deactivate and add a new transfer method.
 public final class CreateTransferTableViewController: UITableViewController {
-    typealias SelectItemHandler = (_ value: SelectDestinationCellConfiguration) -> Void
-    typealias MarkCellHandler = (_ value: SelectDestinationCellConfiguration) -> Bool
+    typealias SelectItemHandler = (_ value: ListTransferMethodCellConfiguration) -> Void
+    typealias MarkCellHandler = (_ value: ListTransferMethodCellConfiguration) -> Bool
     private var presenter: CreateTransferViewPresenter!
     private var spinnerView: SpinnerView?
-    private var sourceToken: String
+    private var sourceToken: String?
     private var clientTransferId: String
     private var transferAmount: String?
     private var transferDescription: String?
 
     private let registeredCells: [(type: AnyClass, id: String)] = [
-        (SelectDestinationTableViewCell.self, SelectDestinationTableViewCell.reuseIdentifier),
+        (ListTransferMethodTableViewCell.self, ListTransferMethodTableViewCell.reuseIdentifier),
         (CreateTransferUserInputCell.self, CreateTransferUserInputCell.reuseIdentifier),
-        (CreateTransferButtonCell.self, CreateTransferButtonCell.reuseIdentifier)
+        (CreateTransferButtonCell.self, CreateTransferButtonCell.reuseIdentifier),
+        (CreateTransferNotesTableViewCell.self, CreateTransferNotesTableViewCell.reuseIdentifier)
     ]
 
-    public init(sourceToken: String, clientTransferId: String) {
+    init(clientTransferId: String, sourceToken: String? = nil) {
         self.sourceToken = sourceToken
         self.clientTransferId = clientTransferId
         super.init(nibName: nil, bundle: nil)
@@ -45,7 +46,7 @@ public final class CreateTransferTableViewController: UITableViewController {
 
     // swiftlint:disable unavailable_function
     required init?(coder aDecoder: NSCoder) {
-        fatalError("NSCoding not supported")
+        fatalError("init(coder:) has not been implemented")
     }
 
     override public func viewDidLoad() {
@@ -59,8 +60,8 @@ public final class CreateTransferTableViewController: UITableViewController {
         setUpCreateTransferTableView()
         hideKeyboardWhenTappedAround()
 
-        presenter = CreateTransferViewPresenter(view: self)
-        presenter.loadTransferMethods()
+        presenter = CreateTransferViewPresenter(clientTransferId, sourceToken, view: self)
+        presenter.loadCreateTransfer()
     }
 
     private func setUpCreateTransferTableView() {
@@ -90,155 +91,85 @@ extension CreateTransferTableViewController {
         return presenter.sectionData[section].title
     }
 
+    override public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if let transferSection = presenter.sectionData[section] as? CreateTransferSectionTransferData {
+            return transferSection.footer
+        }
+
+        return nil
+    }
+
     private func getCellConfiguration(_ indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = presenter.sectionData[indexPath.section].cellIdentifier
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         let section = presenter.sectionData[indexPath.section]
         switch section.createTransferSectionHeader {
         case .destination:
-            if let tableViewCell = cell as? SelectDestinationTableViewCell,
-                let destinationData = section as? CreateTransferDestinationData,
-                let configuration = destinationData.configuration {
-                tableViewCell.accessoryType = .disclosureIndicator
-                tableViewCell.configure(configuration: configuration)
-            }
+            getDestinationSectionCellConfiguration(cell, indexPath)
 
-        case .amount:
-            if let tableViewCell = cell as? CreateTransferUserInputCell,
-                let userInputData = section as? CreateTransferUserInputData {
-                let row = userInputData.rows[indexPath.row]
+        case .transfer:
+            getTransferSectionCellConfiguration(cell, indexPath)
 
-                tableViewCell.selectionStyle = UITableViewCell.SelectionStyle.none
-                if indexPath.row == 0 {
-                    if let textField = tableViewCell.subviews.first(where: { $0 is UITextField }) as? UITextField {
-                        textField.text = ""
-                    } else {
-                        addAmountTextFieldTo(tableViewCell)
-                    }
-
-                    tableViewCell.detailTextLabel?.attributedText = formatDetailTextLabel(currency: row.value!)
-                    let tap = UITapGestureRecognizer(target: self, action: #selector(tapTransferAll))
-                    tableViewCell.detailTextLabel?.isUserInteractionEnabled = true
-                    tableViewCell.detailTextLabel?.addGestureRecognizer(tap)
-                } else {
-                    if let textField = tableViewCell.subviews.first(where: { $0 is UITextField }) as? UITextField {
-                        textField.text = ""
-                    } else {
-                        addDescriptionTextFieldTo(tableViewCell)
-                    }
-                }
-            }
+        case .notes:
+            getNotesSectionCellConfiguration(cell)
 
         case .button:
-            if let tableViewCell = cell as? CreateTransferButtonCell, section is CreateTransferButtonData {
-                tableViewCell.textLabel?.text = "add_transfer_next_button".localized()
-                tableViewCell.textLabel?.textAlignment = .center
-                let tap = UITapGestureRecognizer(target: self, action: #selector(tapNext))
-                tableViewCell.textLabel?.isUserInteractionEnabled = true
-                tableViewCell.textLabel?.addGestureRecognizer(tap)
-            }
+            getButtonSectionCellConfiguration(cell, indexPath)
         }
         return cell
     }
 
-    private func addAmountTextFieldTo(_ tableViewCell: CreateTransferUserInputCell) {
-        //TODO text field alignment is not working for landscape mode, consider using customized cell instead of .value1
-        let amountTextField = UITextField(frame: CGRect(x: tableViewCell.separatorInset.left,
-                                                        y: 0,
-                                                        width: tableViewCell.bounds.width / 2,
-                                                        height: tableViewCell.bounds.height))
-        amountTextField.font = tableViewCell.textLabel?.font
-        amountTextField.keyboardType = UIKeyboardType.numberPad
-        amountTextField.placeholder = "transfer_amount".localized()
-        amountTextField.addTarget(self, action: #selector(amountDidChange), for: .editingChanged)
-        tableViewCell.addSubview(amountTextField)
+    private func getDestinationSectionCellConfiguration(_ cell: UITableViewCell, _ indexPath: IndexPath) {
+        let section = presenter.sectionData[indexPath.section]
+        if let tableViewCell = cell as? ListTransferMethodTableViewCell,
+            let destinationData = section as? CreateTransferSectionDestinationData,
+            let configuration = destinationData.configuration {
+            tableViewCell.accessoryType = .disclosureIndicator
+            tableViewCell.configure(configuration: configuration)
+        }
     }
 
-    private func addDescriptionTextFieldTo(_ tableViewCell: CreateTransferUserInputCell) {
-        //TODO text field alignment is not working for landscape mode, consider using customized cell instead of .value1
-        let descriptionTextField = UITextField(frame: CGRect(x: tableViewCell.separatorInset.left,
-                                                        y: 0,
-                                                        width: tableViewCell.bounds.width,
-                                                        height: tableViewCell.bounds.height))
-        descriptionTextField.font = tableViewCell.textLabel?.font
-        descriptionTextField.placeholder = "transfer_description".localized()
-        descriptionTextField.addTarget(self, action: #selector(descriptionDidChange), for: .editingChanged)
-        tableViewCell.addSubview(descriptionTextField)
+    private func getTransferSectionCellConfiguration(_ cell: UITableViewCell, _ indexPath: IndexPath) {
+        let section = presenter.sectionData[indexPath.section]
+        var transferAllFundSwitchOn = false
+        if let tableViewCell = cell as? CreateTransferUserInputCell,
+            let userInputData = section as? CreateTransferSectionTransferData {
+            let row = userInputData.rows[indexPath.row]
+            tableViewCell.selectionStyle = UITableViewCell.SelectionStyle.none
+            tableViewCell.configure(amount: nil, currency: row.value!, at: indexPath.row)
+            tableViewCell.transferAllSwitchOn = { transferAllSwitch in
+                transferAllFundSwitchOn = transferAllSwitch
+            }
+            tableViewCell.enteredAmount = { amount in
+                if !transferAllFundSwitchOn {
+                    self.transferAmount = amount
+                }
+            }
+        }
     }
 
-    @objc
-    private func amountDidChange(_ textField: UITextField) {
-        if let amountString = textField.text?.currencyInputFormatting() {
-            textField.text = amountString
-            transferAmount = amountString
+    private func getNotesSectionCellConfiguration(_ cell: UITableViewCell) {
+        if let tableViewCell = cell as? CreateTransferNotesTableViewCell {
+            tableViewCell.configure()
+            tableViewCell.enteredNote = { note in
+                self.transferDescription = note
+            }
+        }
+    }
+
+    private func getButtonSectionCellConfiguration(_ cell: UITableViewCell, _ indexPath: IndexPath) {
+        let section = presenter.sectionData[indexPath.section]
+        if let tableViewCell = cell as? CreateTransferButtonCell, section is CreateTransferSectionButtonData {
+            tableViewCell.configure()
+            let tap = UITapGestureRecognizer(target: self, action: #selector(didTapNext(sender:)))
+            tableViewCell.addGestureRecognizer(tap)
         }
     }
 
     @objc
-    private func descriptionDidChange(_ textField: UITextField) {
-        transferDescription = textField.text
-    }
-
-    private func formatDetailTextLabel(currency: String) -> NSAttributedString {
-        let attributedText = NSMutableAttributedString()
-        attributedText.append(value: currency,
-                              font: Theme.Label.bodyFontMedium,
-                              color: Theme.Label.subTitleColor)
-
-        attributedText.append(value: "\tTransfer All",
-                              font: Theme.Label.bodyFontMedium,
-                              color: Theme.Label.subTitleColor)
-
-        return attributedText
-    }
-
-    @objc
-    private func tapTransferAll(sender: UITapGestureRecognizer) {
-        // TODO remove the mocked response
-        let transefer = HyperwalletTransfer(sourceToken: sourceToken,
-                                            destinationToken: presenter.selectedTransferMethod
-                                                .getField(fieldName: .token) as? String,
-                                            clientTransferId: clientTransferId,
-                                            sourceAmount: nil,
-                                            destinationAmount: nil,
-                                            destinationFeeAmount: nil,
-                                            notes: nil,
-                                            destinationCurrency: nil,
-                                            foreignExchanges: nil,
-                                            token: "trf-12345")
-
-        presenter.createTransfer(transefer)
-    }
-
-    @objc
-    private func tapNext(sender: UITapGestureRecognizer) {
-        // TODO remove the mocked response
-//        let foreignExchangeOne = HyperwalletForeignExchange(sourceAmount: "100.00",
-//                                                            sourceCurrency: "CAD",
-//                                                            destinationAmount: "70.00",
-//                                                            destinationCurrency: "USD",
-//                                                            rate: "0.7")
-//        let foreignExchangeTwo = HyperwalletForeignExchange(sourceAmount: "120.00",
-//                                                            sourceCurrency: "CAD",
-//                                                            destinationAmount: "110.00",
-//                                                            destinationCurrency: "USD",
-//                                                            rate: "0.86")
-
-        let transefer = HyperwalletTransfer(sourceToken: sourceToken,
-                                            destinationToken: presenter.selectedTransferMethod
-                                                             .getField(fieldName: .token) as? String,
-                                            clientTransferId: clientTransferId,
-                                            sourceAmount: transferAmount,
-                                            destinationAmount: "20.00",
-                                            destinationFeeAmount: nil,
-                                            notes: transferDescription,
-                                            destinationCurrency: presenter.selectedTransferMethod
-                                                .getField(fieldName: .transferMethodCurrency) as? String,
-                                            foreignExchanges: nil,
-//                                            [foreignExchangeOne, foreignExchangeTwo],
-                                            token: "trf-12345")
-
-        presenter.createTransfer(transefer)
+    private func didTapNext(sender: UITapGestureRecognizer) {
+        print("Next Tapped")
+        presenter.createTransfer(amount: transferAmount, notes: transferDescription)
     }
 }
 
@@ -265,15 +196,9 @@ extension CreateTransferTableViewController {
     }
 
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if presenter.sectionData[indexPath.section].createTransferSectionHeader == CreateTransferSectionHeader.destination,
-            let addTransferDestinationData = presenter.sectionData[indexPath.section] as? CreateTransferDestinationData {
-//            let viewController = SelectTransferMethodTableViewController(transferMethods: presenter.transferMethods)
-//            viewController.shouldMarkCellAction = { transferMethodToken in
-//                addTransferDestinationData.configuration?.transferMethodToken == transferMethodToken }
-//            viewController.selectedHandler = { transferMethod in
-//                self.showCreateTransfer(with: transferMethod)
-//            }
-//            navigationController?.pushViewController(viewController, animated: true)
+        if presenter.sectionData[indexPath.section].createTransferSectionHeader
+            == CreateTransferSectionHeader.destination,
+        let _ = presenter.sectionData[indexPath.section] as? CreateTransferSectionDestinationData {
             presenter.performShowDestinationAccountView()
             tableView.deselectRow(at: indexPath, animated: true)
         }
@@ -303,21 +228,21 @@ extension CreateTransferTableViewController: CreateTransferView {
         // TODO show business error in footer 
     }
 
-    func showCreateTransfer(with transferMethod: HyperwalletTransferMethod) {
-//        selectedTransferMethod = transferMethod
+    func showCreateTransfer() {
         presenter.initializeSections()
         tableView.reloadData()
     }
 
-    func showGenericTableView(items: [SelectDestinationCellConfiguration],
+    func showGenericTableView(items: [ListTransferMethodCellConfiguration],
                               title: String,
                               selectItemHandler: @escaping SelectItemHandler,
                               markCellHandler: @escaping MarkCellHandler) {
-        let genericTableView = GenericTableViewController<SelectDestinationTableViewCell, SelectDestinationCellConfiguration>()
+        let genericTableView = GenericTableViewController < ListTransferMethodTableViewCell,
+            ListTransferMethodCellConfiguration > ()
 
         genericTableView.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
-                                                            target: self,
-                                                            action: nil)
+                                                                             target: self,
+                                                                             action: #selector(didTapAddButton))
 
         genericTableView.title = title
         genericTableView.items = items
@@ -326,17 +251,27 @@ extension CreateTransferTableViewController: CreateTransferView {
         show(genericTableView, sender: self)
     }
 
+    @objc
+    private func didTapAddButton(sender: AnyObject) {
+        addTransferMethod()
+    }
+
+    private func addTransferMethod() {
+        let controller = SelectTransferMethodTypeTableViewController()
+        controller.largeTitle()
+        controller.createTransferMethodHandler = {
+            [weak self] (transferMethod: HyperwalletTransferMethod) -> Void in
+            // refresh transfer method list
+            self?.navigationController?.popViewController(animated: true)
+            self?.presenter.selectedTransferMethod = transferMethod
+            self?.presenter.loadCreateTransfer()
+        }
+        navigationController?.pushViewController(controller, animated: true)
+    }
+
     func showScheduleTransfer(_ transfer: HyperwalletTransfer) {
         let scheduleTransferController = ScheduleTransferTableViewController(transferMethod: presenter.selectedTransferMethod,
                                                                              transfer: transfer)
         navigationController?.pushViewController(scheduleTransferController, animated: true)
-    }
-
-    func notifyTransferCreated(_ transfer: HyperwalletTransfer) {
-        DispatchQueue.global(qos: .background).async {
-            NotificationCenter.default.post(name: .transferCreated,
-                                            object: self,
-                                            userInfo: [UserInfo.transferCreated: transfer])
-        }
     }
 }

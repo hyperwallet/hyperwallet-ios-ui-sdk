@@ -23,8 +23,58 @@ struct CreateTransferUserInputCellConfiguration {
     let description: String
 }
 
-final class CreateTransferUserInputCell: UITableViewCell {
+final class CreateTransferUserInputCell: UITableViewCell, UITextFieldDelegate {
     static let reuseIdentifier = "createTransferUserInputCellReuseIdentifier"
+
+    var enteredAmount: ((_ value: String) -> Void)?
+    var transferAllSwitchOn: ((_ value: Bool) -> Void)?
+
+    lazy var amountTextField: UITextField = {
+        let textField = UITextField(frame: CGRect(x: separatorInset.left,
+                                                  y: 0,
+                                                  width: bounds.width / 2,
+                                                  height: bounds.height))
+        textField.font = titleLabelFont
+        textField.keyboardType = UIKeyboardType.numberPad
+        textField.placeholder = "transfer_amount".localized()
+        textField.delegate = self
+        return textField
+    }()
+
+    lazy var currencyLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+
+    private var transferAllFundsLabel: UILabel = {
+        let label = UILabel()
+        label.text = "transfer_all_funds".localized()
+        return label
+    }()
+
+    private var transferAllFundsSwitch: UISwitch = {
+        let `switch` = UISwitch(frame: .zero)
+        `switch`.setOn(false, animated: false)
+        return `switch`
+    }()
+
+    func configure(amount: String?, currency: String, at index: Int) {
+        if index == 0 {
+            amountTextField.text = amount
+            currencyLabel.text = currency
+            textLabel?.text = amountTextField.text
+
+            detailTextLabel?.text = currencyLabel.text
+        } else {
+            textLabel?.text = transferAllFundsLabel.text
+            transferAllFundsSwitch.addTarget(self, action: #selector(switchStateDidChange(_:)), for: .valueChanged)
+            accessoryView = transferAllFundsSwitch
+        }
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        enteredAmount?(amountTextField.text ?? "")
+    }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
@@ -56,5 +106,20 @@ extension CreateTransferUserInputCell {
     @objc dynamic var subTitleLabelColor: UIColor! {
         get { return detailTextLabel?.textColor }
         set { detailTextLabel?.textColor = newValue }
+    }
+
+    @objc
+    func switchStateDidChange(_ sender: UISwitch) {
+        if sender.isOn == true {
+            print("isON")
+            amountTextField.text = "200.00"
+            transferAllSwitchOn?(true)
+            enteredAmount?(amountTextField.text ?? "")
+        } else {
+            print("isOFF")
+            amountTextField.text = ""
+            transferAllSwitchOn?(false)
+            enteredAmount?(amountTextField.text ?? "")
+        }
     }
 }
