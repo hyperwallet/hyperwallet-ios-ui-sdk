@@ -32,10 +32,10 @@ public protocol UserRepository {
 
 // MARK: - RemoteUserRepository
 public final class RemoteUserRepository: UserRepository {
-    private var cachedUser: HyperwalletUser?
+    private var user: HyperwalletUser?
 
     public func getUser(completion: @escaping (Result<HyperwalletUser?, HyperwalletErrorType>) -> Void) {
-        guard let user = cachedUser else {
+        guard let user = user else {
             Hyperwallet.shared.getUser(completion: getUserHandler(completion))
             return
         }
@@ -44,7 +44,7 @@ public final class RemoteUserRepository: UserRepository {
     }
 
     public func refreshUser() {
-        cachedUser = nil
+        user = nil
     }
 }
 
@@ -53,28 +53,8 @@ private extension RemoteUserRepository {
         _ completion: @escaping (Result<HyperwalletUser?, HyperwalletErrorType>) -> Void)
         -> (HyperwalletUser?, HyperwalletErrorType?) -> Void {
             return {(result, error) in
-                self.cachedUser = self.performCompletion(error,
-                                                         result,
-                                                         completion,
-                                                         self.cachedUser)
+                self.user = CompletionHelper
+                    .performCompletion(error, result, completion, self.user)
             }
-    }
-
-    private func performCompletion<T>(_ error: HyperwalletErrorType?,
-                                      _ result: T?,
-                                      _ completionHandler: @escaping (Result<T?, HyperwalletErrorType>) -> Void,
-                                      _ repositoryOriginalValue: T?) -> T? {
-        if let error = error {
-            DispatchQueue.main.async {
-                completionHandler(.failure(error))
-            }
-        } else {
-            DispatchQueue.main.async {
-                completionHandler(.success(result))
-            }
-            return result
-        }
-
-        return repositoryOriginalValue
     }
 }
