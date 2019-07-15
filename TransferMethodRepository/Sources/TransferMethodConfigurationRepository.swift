@@ -50,7 +50,7 @@ public protocol TransferMethodConfigurationRepository {
 
 // MARK: - RemoteTransferMethodConfigurationRepository
 public final class RemoteTransferMethodConfigurationRepository: TransferMethodConfigurationRepository {
-    private var transferMethodConfigurationFieldsDic =
+    private var transferMethodConfigurationFieldsDictionary =
         [HyperwalletTransferMethodConfigurationFieldQuery: HyperwalletTransferMethodConfigurationField]()
     private var transferMethodConfigurationKeys: HyperwalletTransferMethodConfigurationKey?
 
@@ -66,7 +66,7 @@ public final class RemoteTransferMethodConfigurationRepository: TransferMethodCo
             transferMethodType: transferMethodType,
             profile: transferMethodProfileType
         )
-        guard let transferMethodConfigurationFields = transferMethodConfigurationFieldsDic[fieldsQuery] else {
+        guard let transferMethodConfigurationFields = transferMethodConfigurationFieldsDictionary[fieldsQuery] else {
             Hyperwallet.shared
                 .retrieveTransferMethodConfigurationFields(request: fieldsQuery,
                                                            completion: getFieldsHandler(fieldsQuery, completion))
@@ -87,7 +87,7 @@ public final class RemoteTransferMethodConfigurationRepository: TransferMethodCo
     }
 
     public func refreshFields() {
-        transferMethodConfigurationFieldsDic =
+        transferMethodConfigurationFieldsDictionary =
             [HyperwalletTransferMethodConfigurationFieldQuery: HyperwalletTransferMethodConfigurationField]()
     }
 
@@ -108,7 +108,7 @@ public final class RemoteTransferMethodConfigurationRepository: TransferMethodCo
         _ completion: @escaping (Result<HyperwalletTransferMethodConfigurationField?, HyperwalletErrorType>) -> Void)
         -> (HyperwalletTransferMethodConfigurationField?, HyperwalletErrorType?) -> Void {
         return { (result, error) in
-            self.transferMethodConfigurationFieldsDic[fieldQuery] = CompletionHelper
+            self.transferMethodConfigurationFieldsDictionary[fieldQuery] = CompletionHelper
                 .performHandler(error, result, completion)
         }
     }
