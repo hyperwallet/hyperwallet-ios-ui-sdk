@@ -25,27 +25,28 @@ public protocol TransferRepository {
     /// - Parameters:
     ///   - transfer: the `HyperwalletTransfer` being created
     ///   - completion: the callback handler of responses from the Hyperwallet platform
-    func create(_ transfer: HyperwalletTransfer,
-                _ completion: @escaping (Result<HyperwalletTransfer?, HyperwalletErrorType>) -> Void)
+    func createTransfer(_ transfer: HyperwalletTransfer,
+                        _ completion: @escaping (Result<HyperwalletTransfer?, HyperwalletErrorType>) -> Void)
 
     /// Schedule a transfer
     ///
     /// - Parameters:
     ///   - transferToken: the token of a transfer that was previously created
     ///   - completion: the callback handler of responses from the Hyperwallet platform
-    func schedule(_ transferToken: String,
-                  _ completion: @escaping (Result<HyperwalletStatusTransition?, HyperwalletErrorType>) -> Void)
+    func scheduleTransfer(_ transferToken: String,
+                          _ completion: @escaping (Result<HyperwalletStatusTransition?, HyperwalletErrorType>) -> Void)
 }
 
 final class RemoteTransferRepository: TransferRepository {
-    func create(_ transfer: HyperwalletTransfer,
-                _ completion: @escaping (Result<HyperwalletTransfer?, HyperwalletErrorType>) -> Void) {
-        Hyperwallet.shared.createTransfer(transfer: transfer, completion: CompletionHelper.perform(completion))
+    func createTransfer(_ transfer: HyperwalletTransfer,
+                        _ completion: @escaping (Result<HyperwalletTransfer?, HyperwalletErrorType>) -> Void) {
+        Hyperwallet.shared.createTransfer(transfer: transfer, completion: CompletionHelper.performHandler(completion))
     }
 
-    func schedule(_ transferToken: String,
-                  _ completion: @escaping (Result<HyperwalletStatusTransition?, HyperwalletErrorType>) -> Void) {
+    func scheduleTransfer(_ transferToken: String,
+                          _ completion: @escaping (Result < HyperwalletStatusTransition?,
+                                                          HyperwalletErrorType>) -> Void) {
         Hyperwallet.shared.scheduleTransfer(transferToken: transferToken,
-                                            completion: CompletionHelper.perform(completion))
+                                            completion: CompletionHelper.performHandler(completion))
     }
 }

@@ -47,7 +47,7 @@ class RemoteTransferRepositoryTests: XCTestCase {
         .build()
 
         // When
-        transferRepository.create(transfer) { (result) in
+        transferRepository.createTransfer(transfer) { (result) in
             switch result {
             case .success(let successResult):
                 createdTransfer = successResult
@@ -81,7 +81,7 @@ class RemoteTransferRepositoryTests: XCTestCase {
             .build()
 
         // When
-        transferRepository.create(transfer) { (result) in
+        transferRepository.createTransfer(transfer) { (result) in
             switch result {
             case .success(let successResult):
                 createdTransfer = successResult
@@ -112,7 +112,7 @@ class RemoteTransferRepositoryTests: XCTestCase {
         let transferRepository = RemoteTransferRepository()
 
         // When
-        transferRepository.schedule("trf-123456") { (result) in
+        transferRepository.scheduleTransfer("trf-123456") { (result) in
             switch result {
             case .success(let successResult):
                 statusTransition = successResult
@@ -142,7 +142,7 @@ class RemoteTransferRepositoryTests: XCTestCase {
         let transferRepository = RemoteTransferRepository()
 
         // When
-        transferRepository.schedule("trf-123456") { (result) in
+        transferRepository.scheduleTransfer("trf-123456") { (result) in
             switch result {
             case .success(let successResult):
                 statusTransition = successResult
