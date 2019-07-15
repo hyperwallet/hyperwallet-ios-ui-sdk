@@ -95,6 +95,25 @@ class UserRepositoryTests: XCTestCase {
         // Then
         verifyBusinessResponse(user)
     }
+
+    func testGetUser_failure() {
+        // Given
+        let expectation = self.expectation(description: "Get HyperwalletUser completed")
+        let error = NSError(domain: NSURLErrorDomain, code: 501, userInfo: nil)
+        HyperwalletTestHelper.setUpMockServer(request: UserRequestHelper.setUpRequest(individualUserResponse,
+                                                                                      error))
+        // When
+        userRepository.getUser { result in
+            switch result {
+            case .success:
+                XCTFail("The request should return error!")
+
+            case .failure:
+                expectation.fulfill()
+            }
+        }
+        wait(for: [expectation], timeout: 1)
+    }
 }
 
 private extension UserRepositoryTests {
