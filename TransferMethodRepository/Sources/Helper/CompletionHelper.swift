@@ -30,8 +30,7 @@ final class CompletionHelper {
     static func performHandler<T>(
         _ error: HyperwalletErrorType?,
         _ result: T?,
-        _ completionHandler: @escaping (Result<T?, HyperwalletErrorType>) -> Void,
-        _ cachedResult: T? = nil) -> T? {
+        _ completionHandler: @escaping (Result<T?, HyperwalletErrorType>) -> Void) -> T? {
         if let error = error {
             DispatchQueue.main.async {
                 completionHandler(.failure(error))
@@ -42,6 +41,6 @@ final class CompletionHelper {
             }
             return result
         }
-        return cachedResult
+        return nil
     }
 }

@@ -49,7 +49,7 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
             .bankAccountId("7861012347")
             .build()
 
-        transferMethodRepository.create(bankAccount) { result in
+        transferMethodRepository.createTransferMethod(bankAccount) { result in
             switch result {
             case .failure(let error):
                 bankAccountError = error
@@ -61,12 +61,16 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 1)
 
-        XCTAssertNil(bankAccountError)
-        XCTAssertNotNil(bankAccountResult)
+        XCTAssertNil(bankAccountError, "The bankAccountError should be nil")
+        XCTAssertNotNil(bankAccountResult, "The bankAccountResult should not be nil")
         XCTAssertEqual(bankAccountResult?
-            .getField(HyperwalletTransferMethod.TransferMethodField.bankName.rawValue)!, "US BANK NA")
+            .getField(HyperwalletTransferMethod.TransferMethodField.bankName.rawValue)!,
+                       "US BANK NA",
+                       "The bankName should be US BANK NA")
         XCTAssertEqual(bankAccountResult?
-            .getField(HyperwalletTransferMethod.TransferMethodField.bankAccountId.rawValue)!, "7861012347")
+            .getField(HyperwalletTransferMethod.TransferMethodField.bankAccountId.rawValue)!,
+                       "7861012347",
+                       "The bankAccountId should be 7861012347")
     }
 
     func testCreate_bankCard() {
@@ -85,7 +89,7 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
             .dateOfExpiry("2022-12")
             .build()
 
-        transferMethodRepository.create(bankCard) { result in
+        transferMethodRepository.createTransferMethod(bankCard) { result in
             switch result {
             case .failure(let error):
                 bankCardError = error
@@ -97,12 +101,16 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 1000)
 
-        XCTAssertNil(bankCardError)
-        XCTAssertNotNil(bankCardResult)
+        XCTAssertNil(bankCardError, "The bankCardError should be nil")
+        XCTAssertNotNil(bankCardResult, "The bankCardResult should not be nil")
         XCTAssertEqual(bankCardResult?
-            .getField(HyperwalletTransferMethod.TransferMethodField.cardNumber.rawValue)!, "************0114")
+            .getField(HyperwalletTransferMethod.TransferMethodField.cardNumber.rawValue)!,
+                       "************0114",
+                       "The cardNumber should be ************0114")
         XCTAssertEqual(bankCardResult?
-            .getField(HyperwalletTransferMethod.TransferMethodField.dateOfExpiry.rawValue)!, "2022-12")
+            .getField(HyperwalletTransferMethod.TransferMethodField.dateOfExpiry.rawValue)!,
+                       "2022-12",
+                       "The dateOfExpiry should be 2022-12")
     }
 
     func testCreate_payPalAccount() {
@@ -120,7 +128,7 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
             .email("carroll.lynn@byteme.com")
             .build()
 
-        transferMethodRepository.create(payPalAccount) { result in
+        transferMethodRepository.createTransferMethod(payPalAccount) { result in
             switch result {
             case .failure(let error):
                 payPalAccountError = error
@@ -132,10 +140,12 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 1000)
 
-        XCTAssertNil(payPalAccountError)
-        XCTAssertNotNil(payPalAccountResult)
+        XCTAssertNil(payPalAccountError, "The payPalAccountError should be nil")
+        XCTAssertNotNil(payPalAccountResult, "The payPalAccountError should not be nil")
         XCTAssertEqual(payPalAccountResult?
-            .getField(HyperwalletTransferMethod.TransferMethodField.email.rawValue)!, "carroll.lynn@byteme.com")
+            .getField(HyperwalletTransferMethod.TransferMethodField.email.rawValue)!,
+                       "carroll.lynn@byteme.com",
+                       "The email should be carroll.lynn@byteme.com")
     }
 
     func testCreate_wireAccount() {
@@ -155,7 +165,7 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
             .intermediaryBankId("12345678901")
             .build()
 
-        transferMethodRepository.create(wireAccount) { result in
+        transferMethodRepository.createTransferMethod(wireAccount) { result in
             switch result {
             case .failure(let error):
                 wireAccountError = error
@@ -167,12 +177,16 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 1)
 
-        XCTAssertNil(wireAccountError)
-        XCTAssertNotNil(wireAccountResult)
+        XCTAssertNil(wireAccountError, "The wireAccountError should be nil")
+        XCTAssertNotNil(wireAccountResult, "The wireAccountResult should not be nil")
         XCTAssertEqual(wireAccountResult?
-            .getField(HyperwalletTransferMethod.TransferMethodField.intermediaryBankAccountId.rawValue), "246810")
+            .getField(HyperwalletTransferMethod.TransferMethodField.intermediaryBankAccountId.rawValue),
+                       "246810",
+                       "The intermediaryBankAccountId should be 246810")
         XCTAssertEqual(wireAccountResult?
-            .getField(HyperwalletTransferMethod.TransferMethodField.intermediaryBankId.rawValue)!, "12345678901")
+            .getField(HyperwalletTransferMethod.TransferMethodField.intermediaryBankId.rawValue)!,
+                       "12345678901",
+                       "The intermediaryBankId should be 12345678901")
     }
 
     func testCreate_failure() {
@@ -191,7 +205,7 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
                      transferMethodType: "BANK_ACCOUNT")
             .build()
 
-        transferMethodRepository.create(bankAccount) { result in
+        transferMethodRepository.createTransferMethod(bankAccount) { result in
             switch result {
             case .failure(let error):
                 bankAccountError = error
@@ -203,9 +217,11 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 1)
 
-        XCTAssertNil(bankAccountResult)
-        XCTAssertNotNil(bankAccountError)
-        XCTAssertGreaterThan(bankAccountError!.getHyperwalletErrors()!.errorList!.count, 0)
+        XCTAssertNil(bankAccountResult, "The bankAccountResult should be nil")
+        XCTAssertNotNil(bankAccountError, "The bankAccountResult should not be nil")
+        XCTAssertGreaterThan(bankAccountError!.getHyperwalletErrors()!.errorList!.count,
+                             0,
+                             "The bankAccountError!.getHyperwalletErrors()!.errorList!.count should be greater than 0")
     }
 
     func testDeactivate_bankAccount() {
@@ -225,7 +241,7 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
             .build()
         bankAccount.setField(key: "token", value: "trm-123456789")
 
-        transferMethodRepository.deactivate(bankAccount) { result in
+        transferMethodRepository.deactivateTransferMethod(bankAccount) { result in
             switch result {
             case .failure(let error):
                 statusTransitionError = error
@@ -237,10 +253,14 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 1)
 
-        XCTAssertNil(statusTransitionError)
-        XCTAssertNotNil(statusTransitionResult)
-        XCTAssertEqual(statusTransitionResult?.fromStatus, HyperwalletStatusTransition.Status.activated)
-        XCTAssertEqual(statusTransitionResult?.toStatus, HyperwalletStatusTransition.Status.deactivated)
+        XCTAssertNil(statusTransitionError, "The statusTransitionError should be nil")
+        XCTAssertNotNil(statusTransitionResult, "The statusTransitionResult should not be nil")
+        XCTAssertEqual(statusTransitionResult?.fromStatus,
+                       HyperwalletStatusTransition.Status.activated,
+                       "The statusTransitionResult?.fromStatus should be activated")
+        XCTAssertEqual(statusTransitionResult?.toStatus,
+                       HyperwalletStatusTransition.Status.deactivated,
+                       "The statusTransitionResult?.toStatus should be deactivated")
     }
 
     func testDeactivate_bankCard() {
@@ -259,7 +279,7 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
             .build()
         bankCard.setField(key: "token", value: "trm-123456789")
 
-        transferMethodRepository.deactivate(bankCard) { result in
+        transferMethodRepository.deactivateTransferMethod(bankCard) { result in
             switch result {
             case .failure(let error):
                 statusTransitionError = error
@@ -271,10 +291,14 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 1)
 
-        XCTAssertNil(statusTransitionError)
-        XCTAssertNotNil(statusTransitionResult)
-        XCTAssertEqual(statusTransitionResult?.fromStatus, HyperwalletStatusTransition.Status.activated)
-        XCTAssertEqual(statusTransitionResult?.toStatus, HyperwalletStatusTransition.Status.deactivated)
+        XCTAssertNil(statusTransitionError, "The statusTransitionError should be nil")
+        XCTAssertNotNil(statusTransitionResult, "The statusTransitionResult should not be nil")
+        XCTAssertEqual(statusTransitionResult?.fromStatus,
+                       HyperwalletStatusTransition.Status.activated,
+                       "The statusTransitionResult?.fromStatus should be activated")
+        XCTAssertEqual(statusTransitionResult?.toStatus,
+                       HyperwalletStatusTransition.Status.deactivated,
+                       "The statusTransitionResult?.toStatus should be deactivated")
     }
 
     func testDeactivate_wireAcount() {
@@ -294,7 +318,7 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
             .build()
         wireAccount.setField(key: "token", value: "trm-123456789")
 
-        transferMethodRepository.deactivate(wireAccount) { result in
+        transferMethodRepository.deactivateTransferMethod(wireAccount) { result in
             switch result {
             case .failure(let error):
                 statusTransitionError = error
@@ -306,10 +330,14 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 1)
 
-        XCTAssertNil(statusTransitionError)
-        XCTAssertNotNil(statusTransitionResult)
-        XCTAssertEqual(statusTransitionResult?.fromStatus, HyperwalletStatusTransition.Status.activated)
-        XCTAssertEqual(statusTransitionResult?.toStatus, HyperwalletStatusTransition.Status.deactivated)
+        XCTAssertNil(statusTransitionError, "The statusTransitionError should be nil")
+        XCTAssertNotNil(statusTransitionResult, "The statusTransitionResult should not be nil")
+        XCTAssertEqual(statusTransitionResult?.fromStatus,
+                       HyperwalletStatusTransition.Status.activated,
+                       "The statusTransitionResult?.fromStatus should be activated")
+        XCTAssertEqual(statusTransitionResult?.toStatus,
+                       HyperwalletStatusTransition.Status.deactivated,
+                       "The statusTransitionResult?.toStatus should be deactivated")
     }
 
     func testDeactivate_payPalAccount() {
@@ -328,7 +356,7 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
             .build()
         paypalAccount.setField(key: "token", value: "trm-123456789")
 
-        transferMethodRepository.deactivate(paypalAccount) { result in
+        transferMethodRepository.deactivateTransferMethod(paypalAccount) { result in
             switch result {
             case .failure(let error):
                 statusTransitionError = error
@@ -340,10 +368,14 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 1)
 
-        XCTAssertNil(statusTransitionError)
-        XCTAssertNotNil(statusTransitionResult)
-        XCTAssertEqual(statusTransitionResult?.fromStatus, HyperwalletStatusTransition.Status.activated)
-        XCTAssertEqual(statusTransitionResult?.toStatus, HyperwalletStatusTransition.Status.deactivated)
+        XCTAssertNil(statusTransitionError, "The statusTransitionError should be nil")
+        XCTAssertNotNil(statusTransitionResult, "The statusTransitionResult should not be nil")
+        XCTAssertEqual(statusTransitionResult?.fromStatus,
+                       HyperwalletStatusTransition.Status.activated,
+                       "The statusTransitionResult?.fromStatus should be activated")
+        XCTAssertEqual(statusTransitionResult?.toStatus,
+                       HyperwalletStatusTransition.Status.deactivated,
+                       "The statusTransitionResult?.toStatus should be deactivated")
     }
 
     func testDeactivate_failure() {
@@ -368,7 +400,7 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
             .build()
         paypalAccount.setField(key: "token", value: "trm-123456789")
 
-        transferMethodRepository.deactivate(paypalAccount) { result in
+        transferMethodRepository.deactivateTransferMethod(paypalAccount) { result in
             switch result {
             case .failure(let error):
                 statusTransitionError = error
@@ -380,9 +412,12 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 1)
 
-        XCTAssertNil(statusTransitionResult)
-        XCTAssertNotNil(statusTransitionError)
-        XCTAssertGreaterThan(statusTransitionError!.getHyperwalletErrors()!.errorList!.count, 0)
+        XCTAssertNil(statusTransitionResult, "The statusTransitionResult should be nil")
+        XCTAssertNotNil(statusTransitionError, "The statusTransitionError should not be nil")
+        XCTAssertGreaterThan(
+            statusTransitionError!.getHyperwalletErrors()!.errorList!.count,
+            0,
+            "The statusTransitionError!.getHyperwalletErrors()!.errorList!.count should be greater than 0")
     }
 
     func testList_returnsBankAccount() {
@@ -397,10 +432,7 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
         let request = HyperwalletTestHelper.buildGetRequestRegexMatcher(pattern: url, response)
         HyperwalletTestHelper.setUpMockServer(request: request)
 
-        let queryParam = HyperwalletTransferMethodQueryParam()
-        queryParam.limit = 100
-        queryParam.status = .activated
-        transferMethodRepository.list(queryParam) { (result) in
+        transferMethodRepository.listTransferMethod { (result) in
             switch result {
             case .failure(let error):
                 listTransactionError = error
@@ -412,9 +444,11 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 1)
 
-        XCTAssertNil(listTransactionError)
-        XCTAssertNotNil(listTransactionResult)
-        XCTAssertGreaterThan(listTransactionResult!.data.count, 0)
+        XCTAssertNil(listTransactionError, "The listTransactionError should be nil")
+        XCTAssertNotNil(listTransactionResult, "The listTransactionResult should not be nil")
+        XCTAssertGreaterThan(listTransactionResult!.data.count,
+                             0,
+                             "The listTransactionResult!.data.count should be greater than 0")
     }
 
     func testList_returnsNoAccounts() {
@@ -429,10 +463,7 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
         let request = HyperwalletTestHelper.buildGetRequestRegexMatcher(pattern: url, response)
         HyperwalletTestHelper.setUpMockServer(request: request)
 
-        let queryParam = HyperwalletTransferMethodQueryParam()
-        queryParam.limit = 100
-        queryParam.status = .activated
-        transferMethodRepository.list(queryParam) { (result) in
+        transferMethodRepository.listTransferMethod { (result) in
             switch result {
             case .failure(let error):
                 listTransactionError = error
@@ -444,8 +475,8 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 1)
 
-        XCTAssertNil(listTransactionError)
-        XCTAssertNil(listTransactionResult)
+        XCTAssertNil(listTransactionError, "The listTransactionError should be nil")
+        XCTAssertNil(listTransactionResult, "The listTransactionResult should not be nil")
     }
 
     private func setupOkResponseMockServer(endpoint: String, responseDataFile: String ) {

@@ -113,7 +113,7 @@ final class AddTransferMethodPresenter {
         view.fieldValues().forEach { hyperwalletTransferMethod.setField(key: $0.name, value: $0.value) }
 
         view.showProcessing()
-        transferMethodRepository.create(hyperwalletTransferMethod) { [weak self] (result) in
+        transferMethodRepository.createTransferMethod(hyperwalletTransferMethod) { [weak self] (result) in
                 guard let strongSelf = self else {
                     return
                 }

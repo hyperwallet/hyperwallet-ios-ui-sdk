@@ -68,7 +68,7 @@ final class ListTransferMethodPresenter {
     private func deactivateTransferMethod(_ transferMethod: HyperwalletTransferMethod) {
         view.showProcessing()
 
-        transferMethodRepository.deactivate(transferMethod) { [weak self] (result) in
+        transferMethodRepository.deactivateTransferMethod(transferMethod) { [weak self] (result) in
             guard let strongSelf = self else {
                 return
             }
@@ -96,11 +96,7 @@ final class ListTransferMethodPresenter {
     func listTransferMethod() {
         view.showLoading()
 
-        let queryParam = HyperwalletTransferMethodQueryParam()
-        queryParam.limit = 100
-        queryParam.status = .activated
-
-        transferMethodRepository.list(queryParam) { [weak self] (result) in
+        transferMethodRepository.listTransferMethod { [weak self] (result) in
             guard let strongSelf = self else {
                 return
             }

@@ -44,7 +44,7 @@ class RemoteTransferMethodConfigurationRepositoryTests: XCTestCase {
     func testGetKeys_success() {
         RemoteTransferMethodConfigurationRepositoryTests
             .setupResponseMockServer(keyResponseData)
-        let expectation = self.expectation(description: "Get transfer methods keys")
+        let expectation = self.expectation(description: "Get transfer method configuration keys")
         var transferMethodConfigurationKey: HyperwalletTransferMethodConfigurationKey?
         var error: HyperwalletErrorType?
         let repository = RemoteTransferMethodConfigurationRepository()
@@ -71,7 +71,7 @@ class RemoteTransferMethodConfigurationRepositoryTests: XCTestCase {
     func testGetKeys_failureWithError() {
         RemoteTransferMethodConfigurationRepositoryTests
             .setupResponseMockServer(keyResponseData, NSError(domain: "", code: -1009, userInfo: nil))
-        let expectation = self.expectation(description: "Get transfer methods keys")
+        let expectation = self.expectation(description: "Get transfer method configuration keys")
         var transferMethodConfigurationKey: HyperwalletTransferMethodConfigurationKey?
         var error: HyperwalletErrorType?
         let repository = RemoteTransferMethodConfigurationRepository()
@@ -93,13 +93,13 @@ class RemoteTransferMethodConfigurationRepositoryTests: XCTestCase {
         XCTAssertNil(transferMethodConfigurationKey, "The result should be nil")
     }
 
-    func testGetKeys_successWithKeyResultWhenNotNil() {
+    func testGetKeys_successWithKeyResultFromCache() {
         RemoteTransferMethodConfigurationRepositoryTests
             .setupResponseMockServer(keyResponseData)
         let repository = RemoteTransferMethodConfigurationRepository()
 
         // Get data from the server
-        let expectation = self.expectation(description: "Get transfer method keys")
+        let expectation = self.expectation(description: "Get transfer method configuration keys")
         repository.getKeys { (_) in expectation.fulfill() }
         wait(for: [expectation], timeout: 1)
         var transferMethodConfigurationKey: HyperwalletTransferMethodConfigurationKey?
@@ -118,13 +118,15 @@ class RemoteTransferMethodConfigurationRepositoryTests: XCTestCase {
 
         XCTAssertNil(error, "The error should be nil")
         XCTAssertNotNil(transferMethodConfigurationKey, "The result should not be nil")
-        XCTAssertGreaterThan(transferMethodConfigurationKey!.countries()!.count, 0)
+        XCTAssertGreaterThan(transferMethodConfigurationKey!.countries()!.count,
+                             0,
+                             "The transferMethodConfigurationKey!.countries()!.count should be greater than 0")
     }
 
     func testGetFields_success() {
         RemoteTransferMethodConfigurationRepositoryTests
             .setupResponseMockServer(fieldsResponseData)
-        let expectation = self.expectation(description: "Get transfer method fields")
+        let expectation = self.expectation(description: "Get transfer method configuration fields")
         let repository = RemoteTransferMethodConfigurationRepository()
         var transferMethodConfigurationField: HyperwalletTransferMethodConfigurationField?
         var error: HyperwalletErrorType?
@@ -148,13 +150,13 @@ class RemoteTransferMethodConfigurationRepositoryTests: XCTestCase {
         XCTAssertEqual(transferMethodConfigurationField!.fieldGroups()!.count, 2, "`fieldGroups()` should be 2")
         XCTAssertEqual(transferMethodConfigurationField!.transferMethodType()!.name,
                        "Bank Account",
-                       "transferMethodType()!.name` should be Bank Account")
+                       "The transferMethodType()!.name` should be Bank Account")
     }
 
-    func testGetFields_successWithFieldResultFromCacheWhenNotNil() {
+    func testGetFields_successWithFieldResultFromCache() {
         RemoteTransferMethodConfigurationRepositoryTests
             .setupResponseMockServer(fieldsResponseData)
-        let expectation = self.expectation(description: "Get transfer method fields")
+        let expectation = self.expectation(description: "Get transfer method configuration fields")
         let repository = RemoteTransferMethodConfigurationRepository()
         var transferMethodConfigurationField: HyperwalletTransferMethodConfigurationField?
         var error: HyperwalletErrorType?
@@ -174,16 +176,16 @@ class RemoteTransferMethodConfigurationRepositoryTests: XCTestCase {
 
         XCTAssertNil(error, "The error should be nil")
         XCTAssertNotNil(transferMethodConfigurationField, "The result should not be nil")
-        XCTAssertEqual(transferMethodConfigurationField!.fieldGroups()!.count, 2, "`fieldGroups()` should be 2")
+        XCTAssertEqual(transferMethodConfigurationField!.fieldGroups()!.count, 2, "The `fieldGroups()` should be 2")
         XCTAssertEqual(transferMethodConfigurationField!.transferMethodType()!.name,
                        "Bank Account",
-                       "transferMethodType()!.name` should be Bank Account")
+                       "The transferMethodType()!.name` should be Bank Account")
     }
 
     func testGetFields_failureWithError() {
         RemoteTransferMethodConfigurationRepositoryTests
             .setupResponseMockServer(fieldsResponseData, NSError(domain: "", code: -1009, userInfo: nil))
-        let expectation = self.expectation(description: "Get transfer method fields")
+        let expectation = self.expectation(description: "Get transfer method configuration fields")
         let repository = RemoteTransferMethodConfigurationRepository()
         var transferMethodConfigurationField: HyperwalletTransferMethodConfigurationField?
         var error: HyperwalletErrorType?
@@ -203,9 +205,9 @@ class RemoteTransferMethodConfigurationRepositoryTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
 
         XCTAssertNotNil(error, "The error should not be nil")
-        XCTAssertNil(transferMethodConfigurationField, "The result should be nil")
+        XCTAssertNil(transferMethodConfigurationField, "The transferMethodConfigurationField should be nil")
     }
-
+    //swiftlint:disable function_body_length
     func testRefreshKeys_refreshKeysData() {
         RemoteTransferMethodConfigurationRepositoryTests
             .setupResponseMockServer(keyResponseData)
@@ -247,13 +249,19 @@ class RemoteTransferMethodConfigurationRepositoryTests: XCTestCase {
         wait(for: [expectationReflesh], timeout: 1)
         XCTAssertNil(error, "The error should be nil")
         XCTAssertNotNil(transferMethodConfigurationKey, "The result should not be nil")
-        XCTAssertEqual(transferMethodConfigurationKey!.countries()!.count, 4)
-        XCTAssertEqual(transferMethodConfigurationKey!.currencies(from: country)!.count, 2)
+        XCTAssertEqual(transferMethodConfigurationKey!.countries()!.count,
+                       4,
+                       "The transferMethodConfigurationKey!.countries()!.count should be 4")
+        XCTAssertEqual(transferMethodConfigurationKey!.currencies(from: country)!.count,
+                       2,
+                       "The transferMethodConfigurationKey!.currencies(from: country)!.count should be 2")
         XCTAssertEqual(transferMethodConfigurationKey!.currencies(from: country)!.first!.code, "CAD")
 
         XCTAssertNil(refreshError, "The error should be nil")
         XCTAssertNotNil(refreshTransferMethodConfigurationKey, "The result should not be nil")
-        XCTAssertEqual(refreshTransferMethodConfigurationKey!.countries()!.count, 1)
+        XCTAssertEqual(refreshTransferMethodConfigurationKey!.countries()!.count,
+                       1,
+                       "The refreshTransferMethodConfigurationKey!.countries()!.count should be 1")
         XCTAssertEqual(refreshTransferMethodConfigurationKey!.currencies(from: country)!.count, 1)
         XCTAssertEqual(refreshTransferMethodConfigurationKey!.currencies(from: country)!.first!.code, "USD")
     }
@@ -261,7 +269,7 @@ class RemoteTransferMethodConfigurationRepositoryTests: XCTestCase {
     func testRefreshFields_refreshFieldsData() {
         RemoteTransferMethodConfigurationRepositoryTests
             .setupResponseMockServer(fieldsResponseData)
-        let expectation = self.expectation(description: "Get transfer method fields")
+        let expectation = self.expectation(description: "Get transfer method configuration fields")
         let repository = RemoteTransferMethodConfigurationRepository()
         var transferMethodConfigurationField: HyperwalletTransferMethodConfigurationField?
         var error: HyperwalletErrorType?
@@ -286,7 +294,7 @@ class RemoteTransferMethodConfigurationRepositoryTests: XCTestCase {
         // When
         repository.refreshFields()
 
-        let expectationReflesh = self.expectation(description: "Get transfer method fields")
+        let expectationReflesh = self.expectation(description: "Get transfer method configuration fields")
         repository.getFields(country, currency, transferMethodType, profileType, completion: { (result) in
             switch result {
             case .success(let resultField):

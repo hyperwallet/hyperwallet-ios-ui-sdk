@@ -99,8 +99,7 @@ public final class RemoteTransferMethodConfigurationRepository: TransferMethodCo
         _ completion: @escaping (Result<HyperwalletTransferMethodConfigurationKey?, HyperwalletErrorType>) -> Void)
         -> (HyperwalletTransferMethodConfigurationKey?, HyperwalletErrorType?) -> Void {
         return { (result, error) in
-            self.transferMethodConfigurationKeys = CompletionHelper
-                .performHandler(error, result, completion, self.transferMethodConfigurationKeys)
+            self.transferMethodConfigurationKeys = CompletionHelper.performHandler(error, result, completion)
         }
     }
 
@@ -110,7 +109,7 @@ public final class RemoteTransferMethodConfigurationRepository: TransferMethodCo
         -> (HyperwalletTransferMethodConfigurationField?, HyperwalletErrorType?) -> Void {
         return { (result, error) in
             self.transferMethodConfigurationFieldsDic[fieldQuery] = CompletionHelper
-                .performHandler(error, result, completion, self.transferMethodConfigurationFieldsDic[fieldQuery])
+                .performHandler(error, result, completion)
         }
     }
 }
