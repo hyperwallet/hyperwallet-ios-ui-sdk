@@ -51,7 +51,7 @@ public final class ReceiptDetailTableViewController: UITableViewController {
         tableView.allowsSelection = false
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Theme.Cell.extraSmallHeight
-        tableView.separatorStyle = .none
+        tableView.separatorStyle = .singleLine
         tableView.accessibilityIdentifier = "receiptDetailTableView"
         tableView.cellLayoutMarginsFollowReadableWidth = false
         registeredCells.forEach {
@@ -67,7 +67,7 @@ public final class ReceiptDetailTableViewController: UITableViewController {
         case .transaction:
             if let tableViewCell = cell as? ReceiptTransactionTableViewCell,
                 let transactionSection = section as? ReceiptDetailSectionTransactionData {
-                tableViewCell.configure(transactionSection.tableViewCellConfiguration)
+                tableViewCell.configure(transactionSection.receipt)
             }
 
         case .details:
