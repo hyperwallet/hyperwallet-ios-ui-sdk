@@ -21,6 +21,9 @@
 		07198CF522DD25CB00EB9364 /* ScheduleTransferResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 07198CF422DD25CB00EB9364 /* ScheduleTransferResponse.json */; };
 		07198CF722DD25F900EB9364 /* CreateTransferBadRequestResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 07198CF622DD25F900EB9364 /* CreateTransferBadRequestResponse.json */; };
 		07198CF822DD262C00EB9364 /* HyperwalletTestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB18E9FA2261BA4C004F6AC3 /* HyperwalletTestHelper.swift */; };
+		07198CFD22DD2D1400EB9364 /* AuthenticationProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB18E9FD2261BA4C004F6AC3 /* AuthenticationProviderMock.swift */; };
+		07198CFE22DD2D2E00EB9364 /* AuthenticationTokenGeneratorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB18E9FB2261BA4C004F6AC3 /* AuthenticationTokenGeneratorMock.swift */; };
+		07198D0022DD355A00EB9364 /* ScheduleTransferBadRequestResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 07198CFF22DD355A00EB9364 /* ScheduleTransferBadRequestResponse.json */; };
 		072A53F722838F6B00BC11D0 /* AddTransferMethodSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072A53F622838F6B00BC11D0 /* AddTransferMethodSectionData.swift */; };
 		073BA5D322A885E6002C58BD /* AddTransferMethodTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BA5D222A885E6002C58BD /* AddTransferMethodTableViewController.swift */; };
 		073BA5D522A88612002C58BD /* ListTransferMethodTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BA5D422A88612002C58BD /* ListTransferMethodTableViewController.swift */; };
@@ -245,6 +248,7 @@
 		07198CF222DD25B800EB9364 /* CreateTransferResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CreateTransferResponse.json; sourceTree = "<group>"; };
 		07198CF422DD25CB00EB9364 /* ScheduleTransferResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ScheduleTransferResponse.json; sourceTree = "<group>"; };
 		07198CF622DD25F900EB9364 /* CreateTransferBadRequestResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CreateTransferBadRequestResponse.json; sourceTree = "<group>"; };
+		07198CFF22DD355A00EB9364 /* ScheduleTransferBadRequestResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ScheduleTransferBadRequestResponse.json; sourceTree = "<group>"; };
 		072A53F622838F6B00BC11D0 /* AddTransferMethodSectionData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodSectionData.swift; sourceTree = "<group>"; };
 		073BA5D222A885E6002C58BD /* AddTransferMethodTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodTableViewController.swift; sourceTree = "<group>"; };
 		073BA5D422A88612002C58BD /* ListTransferMethodTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTransferMethodTableViewController.swift; sourceTree = "<group>"; };
@@ -456,21 +460,12 @@
 		07198CAC22DCFD5600EB9364 /* TransferRepository */ = {
 			isa = PBXGroup;
 			children = (
+				07198CFC22DD2C4F00EB9364 /* Tests */,
 				07198CCD22DD004000EB9364 /* Sources */,
 				07198CAD22DCFD5600EB9364 /* TransferRepository.h */,
 				07198CAE22DCFD5600EB9364 /* Info.plist */,
 			);
 			path = TransferRepository;
-			sourceTree = "<group>";
-		};
-		07198CB922DCFD5700EB9364 /* TransferRepositoryTests */ = {
-			isa = PBXGroup;
-			children = (
-				07198CEF22DD257B00EB9364 /* Responses */,
-				07198CBA22DCFD5700EB9364 /* RemoteTransferRepositoryTests.swift */,
-				07198CBC22DCFD5700EB9364 /* Info.plist */,
-			);
-			path = TransferRepositoryTests;
 			sourceTree = "<group>";
 		};
 		07198CCD22DD004000EB9364 /* Sources */ = {
@@ -495,10 +490,21 @@
 			isa = PBXGroup;
 			children = (
 				07198CF222DD25B800EB9364 /* CreateTransferResponse.json */,
-				07198CF422DD25CB00EB9364 /* ScheduleTransferResponse.json */,
 				07198CF622DD25F900EB9364 /* CreateTransferBadRequestResponse.json */,
+				07198CF422DD25CB00EB9364 /* ScheduleTransferResponse.json */,
+				07198CFF22DD355A00EB9364 /* ScheduleTransferBadRequestResponse.json */,
 			);
 			path = Responses;
+			sourceTree = "<group>";
+		};
+		07198CFC22DD2C4F00EB9364 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				07198CEF22DD257B00EB9364 /* Responses */,
+				07198CBA22DCFD5700EB9364 /* RemoteTransferRepositoryTests.swift */,
+				07198CBC22DCFD5700EB9364 /* Info.plist */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		0743EFA322A5AC6900C089EE /* Receipt */ = {
@@ -776,7 +782,6 @@
 				DB18E9EE2261BA29004F6AC3 /* Tests */,
 				DB2587FC2261BFF100E6236B /* UITests */,
 				07198CAC22DCFD5600EB9364 /* TransferRepository */,
-				07198CB922DCFD5700EB9364 /* TransferRepositoryTests */,
 				DBAE17C0225F136A00C5CC60 /* Frameworks */,
 				DBCA37F6225E892400CD4137 /* Products */,
 				DBCA37F7225E892400CD4137 /* Sources */,
@@ -1150,6 +1155,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07198D0022DD355A00EB9364 /* ScheduleTransferBadRequestResponse.json in Resources */,
 				07198CF722DD25F900EB9364 /* CreateTransferBadRequestResponse.json in Resources */,
 				07198CF522DD25CB00EB9364 /* ScheduleTransferResponse.json in Resources */,
 				07198CF322DD25B800EB9364 /* CreateTransferResponse.json in Resources */,
@@ -1323,6 +1329,8 @@
 			files = (
 				07198CBB22DCFD5700EB9364 /* RemoteTransferRepositoryTests.swift in Sources */,
 				07198CF822DD262C00EB9364 /* HyperwalletTestHelper.swift in Sources */,
+				07198CFD22DD2D1400EB9364 /* AuthenticationProviderMock.swift in Sources */,
+				07198CFE22DD2D2E00EB9364 /* AuthenticationTokenGeneratorMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1606,7 +1614,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 86FDS64Z83;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
-				INFOPLIST_FILE = TransferRepositoryTests/Info.plist;
+				INFOPLIST_FILE = TransferRepository/Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1629,7 +1637,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 86FDS64Z83;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
-				INFOPLIST_FILE = TransferRepositoryTests/Info.plist;
+				INFOPLIST_FILE = TransferRepository/Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1652,7 +1660,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 86FDS64Z83;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
-				INFOPLIST_FILE = TransferRepositoryTests/Info.plist;
+				INFOPLIST_FILE = TransferRepository/Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
