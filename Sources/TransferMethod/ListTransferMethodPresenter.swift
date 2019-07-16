@@ -61,9 +61,8 @@ final class ListTransferMethodPresenter {
     /// Deactivate the selected Transfer Method
     private func deactivateTransferMethod(_ transferMethod: HyperwalletTransferMethod) {
         self.view.showProcessing()
-        if let transferMethodType = transferMethod
-            .getField(HyperwalletTransferMethod.TransferMethodField.type.rawValue),
-            let token = transferMethod.getField(HyperwalletTransferMethod.TransferMethodField.token.rawValue) {
+        if let transferMethodType = transferMethod.type,
+            let token = transferMethod.token {
             selectedTransferMethod = transferMethod
             switch transferMethodType {
             case "BANK_ACCOUNT", "WIRE_ACCOUNT":
