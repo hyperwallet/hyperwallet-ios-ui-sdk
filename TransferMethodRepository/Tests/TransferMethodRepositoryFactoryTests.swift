@@ -23,7 +23,6 @@ import XCTest
 
 class TransferMethodRepositoryFactoryTests: XCTestCase {
     private lazy var keyResponseData = HyperwalletTestHelper.getDataFromJson("TransferMethodConfigurationKeysResponse")
-    private static var userResponseData = HyperwalletTestHelper.getDataFromJson("UserIndividualResponse")
     private let country = "US"
     private let currency = "USD"
 

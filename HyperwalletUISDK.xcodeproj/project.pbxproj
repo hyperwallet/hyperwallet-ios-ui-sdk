@@ -365,7 +365,6 @@
 		DBB2B70E2261C141006C48D3 /* BankCardResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BankCardResponse.json; sourceTree = "<group>"; };
 		DBB2B70F2261C141006C48D3 /* AddTransferMethodBankAccountIndividualTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodBankAccountIndividualTests.swift; sourceTree = "<group>"; };
 		DBB4265322D530DD00D721C4 /* TransferMethodRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodRepository.swift; sourceTree = "<group>"; };
-		DBB50B3722D7B8F70029B74B /* CompletionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionHelper.swift; sourceTree = "<group>"; };
 		DBB50B3A22D7C3740029B74B /* TransferMethodConfigurationKeysEmptyTransferMethodTypesResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TransferMethodConfigurationKeysEmptyTransferMethodTypesResponse.json; sourceTree = "<group>"; };
 		DBB50B3B22D7C3740029B74B /* TransferMethodConfigurationKeysEmptyCurrenciesResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TransferMethodConfigurationKeysEmptyCurrenciesResponse.json; sourceTree = "<group>"; };
 		DBB50B3C22D7C3750029B74B /* TransferMethodConfigurationKeysEmptyCountriesResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TransferMethodConfigurationKeysEmptyCountriesResponse.json; sourceTree = "<group>"; };
@@ -798,14 +797,6 @@
 			path = Responses;
 			sourceTree = "<group>";
 		};
-		DBB50B4B22D7EC810029B74B /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				DBB50B3722D7B8F70029B74B /* CompletionHelper.swift */,
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
 		DBB50B4C22D7ECC40029B74B /* Extentions */ = {
 			isa = PBXGroup;
 			children = (
@@ -833,7 +824,6 @@
 				DB18E9EE2261BA29004F6AC3 /* Tests */,
 				DBAF929722CFCB87004F197A /* TransferMethodRepository */,
 				DB2587FC2261BFF100E6236B /* UITests */,
-				DBB50B4B22D7EC810029B74B /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
