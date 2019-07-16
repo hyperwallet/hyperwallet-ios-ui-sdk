@@ -32,31 +32,12 @@ class PrepaidCardListReceiptTests: BaseTests {
 
         XCTAssertEqual(app.tables.cells.count, expectedNumberOfCells)
 
-        verifyCellLabels(with: "Funds Deposit",
-        createdOn: "2019-06-20T21:23:51",
-        amount: "10.00",
-        currency: "USD",
-        by: 0)
-        verifyCellLabels(with: "Funds Deposit",
-        createdOn: "2019-06-21T21:24:02",
-        amount: "20.00",
-        currency: "USD",
-        by: 1)
-        verifyCellLabels(with: "Balance Adjustment",
-        createdOn: "2019-06-23T21:25:09",
-        amount: "-7.00",
-        currency: "USD",
-        by: 2)
-        verifyCellLabels(with: "Balance Adjustment",
-        createdOn: "2019-06-24T21:25:23",
-        amount: "-500.99",
-        currency: "USD",
-        by: 3)
-        verifyCellLabels(with: "Balance Adjustment",
-        createdOn: "2019-06-25T22:48:41",
-        amount: "-10.00",
-        currency: "USD",
-        by: 4)
+        verifyCellLabels(with: "Funds Deposit", createdOn: "2019-06-20T21:23:51", amount: "10.00", currency: "USD", by: 0)
+        verifyCellLabels(with: "Funds Deposit", createdOn: "2019-06-21T21:24:02", amount: "20.00", currency: "USD", by: 1)
+        verifyCellLabels(with: "Balance Adjustment", createdOn: "2019-06-23T21:25:09", amount: "-7.00", currency: "USD", by: 2)
+        verifyCellLabels(with: "Balance Adjustment", createdOn: "2019-06-24T21:25:23", amount: "-500.99", currency: "USD", by: 3)
+        verifyCellLabels(with: "Balance Adjustment", createdOn: "2019-06-25T22:48:41", amount: "-10.00", currency: "USD", by: 4)
+
     }
 
     func testReceiptsList_verifyPrepaidCardReceiptsSectionHeaders() {
@@ -130,10 +111,12 @@ class PrepaidCardListReceiptTests: BaseTests {
         XCTAssertEqual(transactionDetails.dateLabel.label, "Date:")
         XCTAssertEqual(transactionDetails.receiptIdValue.label, "FISVL_5269000")
 
+
         XCTAssertEqual(transactionDetails.dateValue.label, transactionDetails.getExpectedDateTimeFormat(datetime: "2019-06-20T21:23:51"))
 
         // Fee
         XCTAssertFalse(transactionDetails.feeSection.exists)
+
     }
 
     func testPrepaidReceiptDetail_verifyDebit() {
@@ -182,6 +165,7 @@ class PrepaidCardListReceiptTests: BaseTests {
         XCTAssertEqual(transactionDetails.typeLabel.label, "Balance Adjustment")
         XCTAssertEqual(transactionDetails.paymentAmountLabel.label, "-10.00")
         XCTAssertEqual(transactionDetails.createdOnLabel.label, transactionDetails.getExpectedDate(date: "2019-06-25T22:48:41"))
+
         XCTAssertEqual(transactionDetails.currencyLabel.label, "USD")
 
         // Details
