@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0702672222B1A8630057D62B /* CreateTransferViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0702672122B1A8630057D62B /* CreateTransferViewPresenter.swift */; };
+		0702672222B1A8630057D62B /* CreateTransferPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0702672122B1A8630057D62B /* CreateTransferPresenter.swift */; };
 		0702672622B1AC570057D62B /* ScheduleTransferViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0702672522B1AC570057D62B /* ScheduleTransferViewPresenter.swift */; };
 		0702672822B1BCDA0057D62B /* CreateTransferSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0702672722B1BCDA0057D62B /* CreateTransferSectionData.swift */; };
 		0702672A22B1BFDE0057D62B /* CreateTransferUserInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0702672922B1BFDE0057D62B /* CreateTransferUserInputCell.swift */; };
@@ -210,7 +210,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0702672122B1A8630057D62B /* CreateTransferViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransferViewPresenter.swift; sourceTree = "<group>"; };
+		0702672122B1A8630057D62B /* CreateTransferPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransferPresenter.swift; sourceTree = "<group>"; };
 		0702672522B1AC570057D62B /* ScheduleTransferViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTransferViewPresenter.swift; sourceTree = "<group>"; };
 		0702672722B1BCDA0057D62B /* CreateTransferSectionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransferSectionData.swift; sourceTree = "<group>"; };
 		0702672922B1BFDE0057D62B /* CreateTransferUserInputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransferUserInputCell.swift; sourceTree = "<group>"; };
@@ -422,15 +422,12 @@
 			children = (
 				0702672B22B212FA0057D62B /* CreateTransferButtonCell.swift */,
 				98DE0ADB22D68744002080A3 /* CreateTransferNotesTableViewCell.swift */,
-				0702672722B1BCDA0057D62B /* CreateTransferSectionData.swift */,
 				07B1FE5922B8133800F461D0 /* CreateTransferTableViewController.swift */,
-				0702672122B1A8630057D62B /* CreateTransferViewPresenter.swift */,
 				0702672722B1BCDA0057D62B /* CreateTransferSectionData.swift */,
 				0702672922B1BFDE0057D62B /* CreateTransferUserInputCell.swift */,
-				0702672122B1A8630057D62B /* CreateTransferViewPresenter.swift */,
+				0702672122B1A8630057D62B /* CreateTransferPresenter.swift */,
 				07D4E01122B46FBC004E031A /* ScheduleTransferButtonCell.swift */,
 				07D4E01322B47257004E031A /* ScheduleTransferForeignExchangeCell.swift */,
-				07B1FE5B22B8746A00F461D0 /* ScheduleTransferSummaryCell.swift */,
 				07B1FE5D22B8A72D00F461D0 /* ScheduleTransferNotesCell.swift */,
 				07D4E00D22B46978004E031A /* ScheduleTransferSectionData.swift */,
 				07B1FE5B22B8746A00F461D0 /* ScheduleTransferSummaryCell.swift */,
@@ -1233,7 +1230,6 @@
 				DBCA386A225E8BAA00CD4137 /* SelectTransferMethodTypeCell.swift in Sources */,
 				DBCA388E225E8BAA00CD4137 /* AbstractWidget.swift in Sources */,
 				0702672A22B1BFDE0057D62B /* CreateTransferUserInputCell.swift in Sources */,
-				98EA861922C2AFEE0079947F /* SelectDestinationTableViewCell.swift in Sources */,
 				DBCA3880225E8BAA00CD4137 /* HyperwalletIcon.swift in Sources */,
 				98175429228DE42E0019159A /* ReceiptTransactionTableViewCell.swift in Sources */,
 				DBCA3873225E8BAA00CD4137 /* UIColor.swift in Sources */,
@@ -1243,7 +1239,7 @@
 				DBCA387D225E8BAA00CD4137 /* GenericTableViewController.swift in Sources */,
 				4A6D7704228D805C008355C8 /* HyperwalletTransferMethodType.swift in Sources */,
 				DBCA3881225E8BAA00CD4137 /* ThemeManager.swift in Sources */,
-				0702672222B1A8630057D62B /* CreateTransferViewPresenter.swift in Sources */,
+				0702672222B1A8630057D62B /* CreateTransferPresenter.swift in Sources */,
 				DBCA3891225E8BAA00CD4137 /* ErrorView.swift in Sources */,
 				DBCA387F225E8BAA00CD4137 /* HyperwalletIconContent.swift in Sources */,
 				DBCA3882225E8BAA00CD4137 /* HyperwalletUtilViews.swift in Sources */,

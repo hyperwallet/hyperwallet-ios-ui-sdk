@@ -24,7 +24,7 @@ import UIKit
 public final class CreateTransferTableViewController: UITableViewController {
     typealias SelectItemHandler = (_ value: ListTransferMethodCellConfiguration) -> Void
     typealias MarkCellHandler = (_ value: ListTransferMethodCellConfiguration) -> Bool
-    private var presenter: CreateTransferViewPresenter!
+    private var presenter: CreateTransferPresenter!
     private var spinnerView: SpinnerView?
     private var sourceToken: String?
     private var clientTransferId: String
@@ -60,7 +60,7 @@ public final class CreateTransferTableViewController: UITableViewController {
         setUpCreateTransferTableView()
         hideKeyboardWhenTappedAround()
 
-        presenter = CreateTransferViewPresenter(clientTransferId, sourceToken, view: self)
+        presenter = CreateTransferPresenter(clientTransferId, sourceToken, view: self)
         presenter.loadCreateTransfer()
     }
 
@@ -168,7 +168,6 @@ extension CreateTransferTableViewController {
 
     @objc
     private func didTapNext(sender: UITapGestureRecognizer) {
-        print("Next Tapped")
         presenter.createTransfer(amount: transferAmount, notes: transferDescription)
     }
 }
@@ -199,7 +198,7 @@ extension CreateTransferTableViewController {
         if presenter.sectionData[indexPath.section].createTransferSectionHeader
             == CreateTransferSectionHeader.destination,
         let _ = presenter.sectionData[indexPath.section] as? CreateTransferSectionDestinationData {
-            presenter.performShowDestinationAccountView()
+            presenter.showSelectDestinationAccountView()
             tableView.deselectRow(at: indexPath, animated: true)
         }
     }
