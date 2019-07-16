@@ -17,6 +17,9 @@ ignore:
   - Sources/Receipt/*Controller.swift
   - Sources/Receipt/*Cell.swift
   - Sources/HyperwalletUI.swift
+  - ReceiptRepository/Tests/*
+  - ReceiptRepository/Sources/Extensions/*
+  - ReceiptRepository/Sources/Helper/*
   - TransferMethodRepository/Tests/*
   - TransferMethodRepository/Sources/Extensions/*
   - TransferMethodRepository/Sources/Helper/*
