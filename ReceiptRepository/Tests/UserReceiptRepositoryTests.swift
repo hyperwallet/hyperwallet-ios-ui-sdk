@@ -51,8 +51,8 @@ class UserReceiptRepositoryTests: XCTestCase {
                     XCTFail("The User's receipt list should not be empty")
                     return
                 }
-                receiptExpectation?.fulfill()
                 userReceiptList = receiptPageList.data
+                receiptExpectation?.fulfill()
 
             case .failure:
                 XCTFail("Unexpected error")
@@ -65,13 +65,15 @@ class UserReceiptRepositoryTests: XCTestCase {
     func testListUserReceipt_failure() {
         HyperwalletTestHelper.setUpMockServer(
             request: ReceiptRequestHelper.setUpRequest(listReceiptPayload,
-                                                       NSError(domain: NSURLErrorDomain, code: 501, userInfo: nil)))
+                                                       NSError(domain: NSURLErrorDomain, code: 500, userInfo: nil)))
         userReceiptRepository.listUserReceipts(offset: 0, limit: 20) { [weak receiptExpectation] result in
             switch result {
             case .success:
                 XCTFail("The listUserReceipts method should return Error")
 
-            case .failure:
+            case .failure(let error):
+                let originalError = ErrorHelper.parseOriginalError(error)
+                XCTAssertEqual(originalError?.code, 500, "The original error code must be 500")
                 receiptExpectation?.fulfill()
             }
         }

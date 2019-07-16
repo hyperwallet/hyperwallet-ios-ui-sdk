@@ -53,11 +53,11 @@ class PrepaidCardReceiptRepositoryTests: XCTestCase {
             switch result {
             case .success(let receiptPageList):
                 guard let receiptPageList = receiptPageList else {
-                    XCTFail("The User's receipt list should not be empty")
+                    XCTFail("The Prepaid Card receipt list should not be empty")
                     return
                 }
-                receiptExpectation?.fulfill()
                 prepaidCardReceiptList = receiptPageList.data
+                receiptExpectation?.fulfill()
 
             case .failure:
                 XCTFail("Unexpected error")
@@ -70,16 +70,18 @@ class PrepaidCardReceiptRepositoryTests: XCTestCase {
     func testListPrepaidCardReceipt_failure() {
         HyperwalletTestHelper.setUpMockServer(
             request: ReceiptRequestHelper.setUpRequest(listPrepaidCardReceiptPayload,
-                                                       NSError(domain: NSURLErrorDomain, code: 501, userInfo: nil),
+                                                       NSError(domain: NSURLErrorDomain, code: 500, userInfo: nil),
                                                        "trm-123456789"))
         prepaidCardReceiptRepository.listPrepaidCardReceipts(
             prepaidCardToken: "trm-123456789"
         ) { [weak receiptExpectation ] result in
             switch result {
             case .success:
-                XCTFail("The listUserReceipts method should return Error")
+                XCTFail("The listPrepaidCardReceipts method should return Error")
 
-            case .failure:
+            case .failure(let error):
+                let originalError = ErrorHelper.parseOriginalError(error)
+                XCTAssertEqual(originalError?.code, 500, "The original error code must be 500")
                 receiptExpectation?.fulfill()
             }
         }
