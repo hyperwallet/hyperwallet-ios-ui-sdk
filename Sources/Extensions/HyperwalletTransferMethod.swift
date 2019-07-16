@@ -18,26 +18,25 @@
 
 import HyperwalletSDK
 
-final class ReceiptDetailViewPresenter {
-    private(set) var sectionData = [ReceiptDetailSectionData]()
+/// The HyperwalletTransferMethod extension
+public extension HyperwalletTransferMethod {
+    /// Additional information about the transfer method
+    var additionalInfo: String? {
+        switch type {
+        case "BANK_CARD", "PREPAID_CARD":
+            return String(format: "%@%@",
+                          "transfer_method_list_item_description".localized(),
+                          getField(TransferMethodField.cardNumber.rawValue)?
+                            .suffix(startAt: 4) ?? "" )
 
-    init(with receipt: HyperwalletReceipt) {
-        initializeSections(with: receipt)
-    }
+        case "PAYPAL_ACCOUNT":
+            return getField(TransferMethodField.email.rawValue)
 
-    private func initializeSections(with receipt: HyperwalletReceipt) {
-        let receiptTransactionSection = ReceiptDetailSectionTransactionData(from: receipt)
-        sectionData.append(receiptTransactionSection)
-
-        let receiptDetailSection = ReceiptDetailSectionDetailData(from: receipt)
-        sectionData.append(receiptDetailSection)
-
-        if let receiptNotesSection = ReceiptDetailSectionNotesData(from: receipt) {
-            sectionData.append(receiptNotesSection)
-        }
-
-        if let receiptFeeSection = ReceiptDetailSectionFeeData(from: receipt) {
-            sectionData.append(receiptFeeSection)
+        default:
+            return String(format: "%@%@",
+                          "transfer_method_list_item_description".localized(),
+                          getField(TransferMethodField.bankAccountId.rawValue)?
+                            .suffix(startAt: 4) ?? "")
         }
     }
 }

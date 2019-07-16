@@ -23,6 +23,16 @@ class ReceiptDetailPresenterTests: XCTestCase {
         XCTAssertEqual(presenterWithNotes.sectionData.count, 4)
     }
 
+    func testSectionFeeIsNil() {
+        guard let receipts = try? JSONDecoder().decode([HyperwalletReceipt].self, from: receiptsData) else {
+            XCTFail("Can't decode user receipts from test data")
+            return
+        }
+
+        XCTAssertNil(ReceiptDetailSectionFeeData(from: receipts[3]))
+        XCTAssertNil(ReceiptDetailSectionFeeData(from: receipts[4]))
+    }
+
     func testSectionTransactionDataShouldNotBeEmpty() {
         guard let section = presenterNoNotes.sectionData[0] as? ReceiptDetailSectionTransactionData else {
             XCTFail("Section Transaction Data shouldn't be empty")
@@ -33,11 +43,11 @@ class ReceiptDetailPresenterTests: XCTestCase {
         XCTAssertEqual(section.title, "Transaction")
         XCTAssertEqual(section.rowCount, 1)
 
-        let cellConfig = section.tableViewCellConfiguration
-        XCTAssertEqual(cellConfig.type, "Payment")
-        XCTAssertEqual(cellConfig.entry, "CREDIT")
-        XCTAssertEqual(cellConfig.amount, "6.00")
-        XCTAssertEqual(cellConfig.currency, "USD")
+        let receipt = section.receipt
+        XCTAssertEqual(receipt.type.rawValue.lowercased().localized(), "Payment")
+        XCTAssertEqual(receipt.entry.rawValue, "CREDIT")
+        XCTAssertEqual(receipt.amount, "6.00")
+        XCTAssertEqual(receipt.currency, "USD")
         //XCTAssertEqual(cellConfig.createdOn, "Apr 28, 2019")
     }
 

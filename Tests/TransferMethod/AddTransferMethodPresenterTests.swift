@@ -160,12 +160,37 @@ class AddTransferMethodPresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isNotificationSent, "The notification should be sent")
     }
 
-    func testCreateTransferMethod_failure() {
+    func testCreateTransferMethod_failure_businessError() {
+        // Given
         loadMockTransfermethods()
         mockView.mockFieldValuesReturnResult.append((name: "bankAccountId", value: "000"))
         mockView.mockFieldStatusReturnResult.append(true)
-        let expectationCreateBank = self.expectation(description: "Create bank account completed")
-        mockView.expectation = expectationCreateBank
+
+        let expectation = self.expectation(description: "Create bank account failed")
+        mockView.expectation = expectation
+
+        // When
+        presenter.createTransferMethod()
+        wait(for: [expectation], timeout: 1)
+
+        // Then
+        XCTAssertTrue(mockView.isFieldValuesPerformed, "The FieldValues should be performed")
+        XCTAssertTrue(mockView.areAllFieldsValidPerformed, "All fields validation should be performed")
+        XCTAssertTrue(mockView.isShowErrorPerformed, "The showError should be performed")
+        XCTAssertFalse(mockView.isShowConfirmationPerformed, "The showConfirmation should not be performed")
+        XCTAssertFalse(mockView.isNotificationSent, "The notification should not be sent")
+    }
+
+    func testCreateTransferMethod_failure_unexpectedError() {
+        // Given
+        let url = String(format: "%@/bank-accounts", HyperwalletTestHelper.userRestURL)
+        let response = HyperwalletTestHelper
+            .unexpectedErrorHTTPResponse(for: "UnexpectedErrorResponse")
+        let request = HyperwalletTestHelper.buildPostResquest(baseUrl: url, response)
+        HyperwalletTestHelper.setUpMockServer(request: request)
+
+        let expectation = self.expectation(description: "Create bank account failed")
+        mockView.expectation = expectation
 
         // When
         presenter.createTransferMethod()
@@ -245,6 +270,35 @@ class AddTransferMethodPresenterTests: XCTestCase {
         presenter.loadTransferMethodConfigurationFields(true)
         wait(for: [expectation], timeout: 1)
     }
+
+    private func loadMockTransfermethods() {
+        let url = String(format: "%@/bank-accounts", HyperwalletTestHelper.userRestURL)
+        let response = HyperwalletTestHelper
+            .badRequestHTTPResponse(for: "BankAccountErrorResponseWithMissingFieldAndValidationError")
+        let request = HyperwalletTestHelper.buildPostResquest(baseUrl: url, response)
+        Hippolyte.shared.add(stubbedRequest: setupTransferMethodConfigurationFields())
+        HyperwalletTestHelper.setUpMockServer(request: request)
+        let expectation = self.expectation(description: "Load transfer methods")
+        mockView.expectation = expectation
+        mockView.showTransferMethodFieldsHandler = { fieldGroups in
+            for fieldGroup in fieldGroups {
+                guard let fields = fieldGroup.fields, let fieldGroup = fieldGroup.group
+                    else {
+                        continue
+                }
+                let newWidgets = fields.map(WidgetFactory.newWidget)
+                let section = AddTransferMethodSectionData(
+                    fieldGroup: fieldGroup,
+                    country: "US",
+                    currency: "USD",
+                    cells: newWidgets
+                )
+                self.presenter.sectionData.append(section)
+            }
+        }
+        presenter.loadTransferMethodConfigurationFields()
+        wait(for: [expectation], timeout: 1)
+    }
 }
 
 class MockAddTransferMethodViewTests: AddTransferMethodView {
@@ -268,6 +322,7 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
 
     var mockFieldStatusReturnResult = [Bool]()
     var mockFieldValuesReturnResult = [(name: String, value: String)]()
+    var showTransferMethodFieldsHandler: (([HyperwalletFieldGroup]) -> Void)?
 
     var showTransferMethodFieldsHandler: (([HyperwalletFieldGroup]) -> Void)?
 
