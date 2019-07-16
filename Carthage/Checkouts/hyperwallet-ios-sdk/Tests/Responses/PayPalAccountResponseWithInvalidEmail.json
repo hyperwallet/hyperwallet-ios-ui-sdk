@@ -1,9 +1,0 @@
-{
-    "errors": [
-        {
-            "message": "Email is invalid",
-            "fieldName": "email",
-            "code": "INVALID_EMAIL_ADDRESS"
-        }
-    ]
-}
