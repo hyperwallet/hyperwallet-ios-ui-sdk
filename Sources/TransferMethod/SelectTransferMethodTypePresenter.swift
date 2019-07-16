@@ -129,7 +129,7 @@ final class SelectTransferMethodTypePresenter {
                                 strongSelf.view.showAlert(message: "no_country_available_error_message".localized())
                                 return
                             }
-                            strongSelf.countryCurrencySectionData = ["Country", "ListTransferMethodPresenter.swift"]
+                            strongSelf.countryCurrencySectionData = ["Country", "Currency"]
                             strongSelf.loadCountry(countries)
                             strongSelf.loadCurrency(result)
                             strongSelf.loadTransferMethodTypes(result)
