@@ -98,7 +98,7 @@ class UserRepositoryTests: XCTestCase {
 
     func testGetUser_failure() {
         // Given
-        let expectation = self.expectation(description: "Get HyperwalletUser completed")
+        let expectation = self.expectation(description: "Get HyperwalletUser failed")
         let error = NSError(domain: NSURLErrorDomain, code: 501, userInfo: nil)
         HyperwalletTestHelper.setUpMockServer(request: UserRequestHelper.setUpRequest(individualUserResponse,
                                                                                       error))
@@ -108,7 +108,14 @@ class UserRepositoryTests: XCTestCase {
             case .success:
                 XCTFail("The request should return error!")
 
-            case .failure:
+            case .failure(let error):
+                XCTAssertNotNil(error, "The error should not be nil!")
+                XCTAssertEqual(error.getHyperwalletErrors()?.originalError?._domain,
+                               NSURLErrorDomain,
+                               "The error.domain should be NSURLErrorDomain!")
+                XCTAssertEqual(error.getHyperwalletErrors()?.originalError?._code,
+                               501,
+                               "The code should be 501!")
                 expectation.fulfill()
             }
         }
