@@ -246,7 +246,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
         let url = String(format: "%@/bank-accounts", HyperwalletTestHelper.userRestURL)
         let response = HyperwalletTestHelper
             .badRequestHTTPResponse(for: "BankAccountErrorResponseWithMissingFieldAndValidationError")
-        let request = HyperwalletTestHelper.buildPostResquest(baseUrl: url, response)
+        let request = HyperwalletTestHelper.buildPostRequest(baseUrl: url, response)
         Hippolyte.shared.add(stubbedRequest: setupTransferMethodConfigurationFields())
         HyperwalletTestHelper.setUpMockServer(request: request)
         let expectation = self.expectation(description: "Load transfer methods")
