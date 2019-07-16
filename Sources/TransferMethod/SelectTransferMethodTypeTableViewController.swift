@@ -31,6 +31,16 @@ public final class SelectTransferMethodTypeTableViewController: UITableViewContr
     private var spinnerView: SpinnerView?
     private var presenter: SelectTransferMethodTypePresenter!
     private var countryCurrencyView: CountryCurrencyTableView!
+    private var forceUpdate: Bool = false
+
+    init(forceUpdate: Bool) {
+        self.forceUpdate = forceUpdate
+        super.init(style: .plain)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
 
     // MARK: - Lifecycle
     override public func viewDidLoad() {
@@ -40,18 +50,15 @@ public final class SelectTransferMethodTypeTableViewController: UITableViewContr
         setViewBackgroundColor()
 
         navigationItem.backBarButtonItem = UIBarButtonItem.back
-
-        presenter = SelectTransferMethodTypePresenter(view: self)
-
+        presenter = SelectTransferMethodTypePresenter(self)
         setupCountryCurrencyTableView()
         setupTransferMethodTypeTableView()
 
-        presenter.loadTransferMethodKeys()
+        presenter.loadTransferMethodKeys(forceUpdate)
     }
 
     // MARK: - Setup Layout
     private func setupTransferMethodTypeTableView() {
-        tableView = UITableView(frame: .zero, style: .plain)
         tableView.accessibilityIdentifier = "selectTransferMethodTypeTable"
         tableView.register(SelectTransferMethodTypeCell.self,
                            forCellReuseIdentifier: SelectTransferMethodTypeCell.reuseIdentifier)
@@ -125,13 +132,10 @@ extension SelectTransferMethodTypeTableViewController: SelectTransferMethodTypeV
                                                currency: String,
                                                profileType: String,
                                                transferMethodTypeCode: String) {
-        let addTransferMethodController = AddTransferMethodTableViewController(country,
-                                                                               currency,
-                                                                               profileType,
-                                                                               transferMethodTypeCode)
+        let addTransferMethodController = HyperwalletUI.shared
+            .addTransferMethodTableViewController(country, currency, profileType, transferMethodTypeCode, forceUpdate)
 
-        addTransferMethodController.createTransferMethodHandler = {
-            (transferMethod: HyperwalletTransferMethod) -> Void in
+        addTransferMethodController.createTransferMethodHandler = { (transferMethod) -> Void in
             self.createTransferMethodHandler?(transferMethod)
         }
 
@@ -159,12 +163,13 @@ extension SelectTransferMethodTypeTableViewController: SelectTransferMethodTypeV
         HyperwalletUtilViews.showAlert(self, message: message, actions: UIAlertAction.close(self))
     }
 
-    func showGenericTableView(items: [CountryCurrencyCellConfiguration],
+    func showGenericTableView(items: [GenericCellConfiguration],
                               title: String,
                               selectItemHandler: @escaping SelectItemHandler,
                               markCellHandler: @escaping MarkCellHandler,
                               filterContentHandler: @escaping FilterContentHandler) {
-        let genericTableView = GenericTableViewController<CountryCurrencyCell, CountryCurrencyCellConfiguration>()
+        let genericTableView = GenericTableViewController < CountryCurrencyCell,
+            GenericCellConfiguration> ()
         genericTableView.title = title
         genericTableView.items = items
         genericTableView.selectedHandler = selectItemHandler

@@ -39,6 +39,7 @@ public final class AddTransferMethodTableViewController: UITableViewController {
     public var createTransferMethodHandler: ((HyperwalletTransferMethod) -> Void)?
     private var country: String
     private var currency: String
+    private var forceUpdate: Bool
     private var profileType: String
     private var transferMethodTypeCode: String
     private var processingView: ProcessingView?
@@ -92,11 +93,13 @@ public final class AddTransferMethodTableViewController: UITableViewController {
     init(_ country: String,
          _ currency: String,
          _ profileType: String,
-         _ transferMethodTypeCode: String) {
+         _ transferMethodTypeCode: String,
+         _ forceUpdate: Bool) {
         self.country = country
         self.currency = currency
         self.profileType = profileType
         self.transferMethodTypeCode = transferMethodTypeCode
+        self.forceUpdate = forceUpdate
         super.init(nibName: nil, bundle: nil)
     }
 

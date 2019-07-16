@@ -16,27 +16,14 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import UIKit
+#import <UIKit/UIKit.h>
 
-/// Represents the country and currency data to be displyed on the CountryCurrencyCell
-protocol GenericCellConfiguration {
-    var title: String { get }
-    var value: String { get }
-}
-extension GenericCellConfiguration {
-    var identifier: String {
-        return "cell\(title)"
-    }
-}
+//! Project version number for TransferMethodRepository.
+FOUNDATION_EXPORT double TransferMethodRepositoryVersionNumber;
 
-class GenericCell<ModelType>: UITableViewCell {
-    var item: ModelType!
+//! Project version string for TransferMethodRepository.
+FOUNDATION_EXPORT const unsigned char TransferMethodRepositoryVersionString[];
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-    }
+// In this header, you should import all the public headers of your framework using statements like #import <TransferMethodRepository/PublicHeader.h>
 
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-}
+

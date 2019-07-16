@@ -16,27 +16,24 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import UIKit
+import HyperwalletSDK
 
-/// Represents the country and currency data to be displyed on the CountryCurrencyCell
-protocol GenericCellConfiguration {
-    var title: String { get }
-    var value: String { get }
-}
-extension GenericCellConfiguration {
-    var identifier: String {
-        return "cell\(title)"
-    }
-}
-
-class GenericCell<ModelType>: UITableViewCell {
-    var item: ModelType!
-
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+class CompletionHelper {
+    @discardableResult
+    static func performHandler<T>(
+        _ error: HyperwalletErrorType?,
+        _ result: T?,
+        _ completionHandler: @escaping (Result<T?, HyperwalletErrorType>) -> Void) -> T? {
+        if let error = error {
+            DispatchQueue.main.async {
+                completionHandler(.failure(error))
+            }
+        } else {
+            DispatchQueue.main.async {
+                completionHandler(.success(result))
+            }
+            return result
+        }
+        return nil
     }
 }

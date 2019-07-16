@@ -20,3 +20,6 @@ ignore:
   - ReceiptRepository/Tests/*
   - ReceiptRepository/Sources/Extensions/*
   - ReceiptRepository/Sources/Helper/*
+  - TransferMethodRepository/Tests/*
+  - TransferMethodRepository/Sources/Extensions/*
+  - TransferMethodRepository/Sources/Helper/*

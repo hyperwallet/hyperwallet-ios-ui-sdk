@@ -244,7 +244,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
                          path,
                          transferMethodToken,
                          "/status-transitions")
-        return HyperwalletTestHelper.buildPostResquest(baseUrl: url, response)
+        return HyperwalletTestHelper.buildPostRequest(baseUrl: url, response)
     }
 }
 
