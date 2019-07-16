@@ -97,7 +97,8 @@ class ListReceiptTests: BaseTests {
         XCTAssertTrue(cell.staticTexts["receiptTransactionCurrencyLabel"].exists)
 
         XCTAssertEqual(type, cell.staticTexts["receiptTransactionTypeLabel"].label)
-        XCTAssertEqual( transactionDetails.getExpectedDate(date: createdOn), cell.staticTexts["receiptTransactionCreatedOnLabel"].label)
+        XCTAssertEqual(transactionDetails.getExpectedDate(date: createdOn), cell.staticTexts["receiptTransactionCreatedOnLabel"]
+            .label)
         XCTAssertEqual(amount, cell.staticTexts["receiptTransactionAmountLabel"].label)
         XCTAssertEqual(currency, cell.staticTexts["receiptTransactionCurrencyLabel"].label)
     }
@@ -167,8 +168,7 @@ class ListReceiptTests: BaseTests {
         verifyDetailSection(receiptIdVal: "55176992", dateVal: "2019-05-24T18:16:19", clientIdVal: "DyClk0VG9a")
 
         // FEE Section
-         XCTAssertFalse(transactionDetails.feeSection.exists)
-        //verifyFeeSection(amountVal: "6.00 USD", feeVal: "0.00 USD", transactionVal: "6.00 USD")
+        XCTAssertFalse(transactionDetails.feeSection.exists)
     }
 
     // Debit Transaction
