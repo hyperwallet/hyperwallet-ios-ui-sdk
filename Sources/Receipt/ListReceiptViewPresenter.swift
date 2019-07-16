@@ -83,22 +83,7 @@ final class ListReceiptViewPresenter {
             completion: listPrepaidCardReceiptHandler())
     }
 
-    private func setUpUserQueryParam() -> HyperwalletReceiptQueryParam {
-        let queryParam = HyperwalletReceiptQueryParam()
-        queryParam.offset = offset
-        queryParam.limit = userReceiptLimit
-        queryParam.sortBy = HyperwalletReceiptQueryParam.QuerySortable.descendantCreatedOn.rawValue
-        queryParam.createdAfter = Calendar.current.date(byAdding: .year, value: -1, to: Date())
-        return queryParam
-    }
-
-//    private func setUpPrepaidCardQueryParam() -> HyperwalletReceiptQueryParam {
-//        let queryParam = HyperwalletReceiptQueryParam()
-//        queryParam.createdAfter = prepaidCardReceiptCreatedAfter
-//        return queryParam
-//    }
-
-   private func listUserReceiptHandler()
+    private func listUserReceiptHandler()
         -> (Result<HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType>) -> Void {
             return { [weak self] (result) in
                 guard let strongSelf = self else {
