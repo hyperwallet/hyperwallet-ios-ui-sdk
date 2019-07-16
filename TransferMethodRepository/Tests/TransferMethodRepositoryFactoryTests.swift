@@ -60,19 +60,19 @@ class TransferMethodRepositoryFactoryTests: XCTestCase {
         // When
         TransferMethodRepositoryFactory.clearInstance()
 
-        let expectationReflesh = self.expectation(description: "Get transfer method configuration keys")
+        let expectationRefresh = self.expectation(description: "Get transfer method configuration keys")
         TransferMethodRepositoryFactory.shared
             .transferMethodConfigurationRepository().getKeys { (result) in
-            switch result {
-            case .success(let resultKey):
-                refreshTransferMethodConfigurationKey = resultKey
+                switch result {
+                case .success(let resultKey):
+                    refreshTransferMethodConfigurationKey = resultKey
 
-            case .failure(let resultError):
-                refreshError = resultError
+                case .failure(let resultError):
+                    refreshError = resultError
+                }
+                expectationRefresh.fulfill()
             }
-            expectationReflesh.fulfill()
-            }
-        wait(for: [expectationReflesh], timeout: 1)
+        wait(for: [expectationRefresh], timeout: 1)
         XCTAssertNil(error, "The error should be nil")
         XCTAssertNotNil(transferMethodConfigurationKey, "The result should not be nil")
         XCTAssertEqual(transferMethodConfigurationKey!.countries()!.count,
