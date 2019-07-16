@@ -127,69 +127,89 @@ private extension UserRepositoryTests {
     func verifyIndividualResponse(_ user: HyperwalletUser?) {
         XCTAssertNotNil(user)
 
-        XCTAssertEqual(user!.clientUserId, "myAppUserId01")
-        XCTAssertEqual(user!.token, "YourUserToken")
-        XCTAssertEqual(user!.status, HyperwalletUser.Status.activated)
-        XCTAssertEqual(user!.verificationStatus, HyperwalletUser.VerificationStatus.notRequired)
-        XCTAssertEqual(user!.profileType, HyperwalletUser.ProfileType.individual)
-        XCTAssertEqual(user!.gender, HyperwalletUser.Gender.male)
-        XCTAssertEqual(user!.employerId, "001")
-        XCTAssertNil(user!.countryOfNationality)
+        XCTAssertEqual(user!.clientUserId, "myAppUserId01", "The clientUserId should be myAppUserId01!")
+        XCTAssertEqual(user!.token, "YourUserToken", "The token should be YourUserToken!")
+        XCTAssertEqual(user!.status, HyperwalletUser.Status.activated, "The status should be `activated`!")
+        XCTAssertEqual(user!.verificationStatus,
+                       HyperwalletUser.VerificationStatus.notRequired,
+                       "The verificationStatus should be `notRequired`!")
+        XCTAssertEqual(user!.profileType,
+                       HyperwalletUser.ProfileType.individual,
+                       "The profileType should be `individual`!")
+        XCTAssertEqual(user!.gender, HyperwalletUser.Gender.male, "The gender should be `male`!")
+        XCTAssertEqual(user!.employerId, "001", "The employerId should be 001!")
+        XCTAssertNil(user!.countryOfNationality, "The countryOfNationality should be nil!")
 
-        XCTAssertEqual(user!.firstName, "Stan")
-        XCTAssertEqual(user!.middleName, "Albert")
-        XCTAssertEqual(user!.lastName, "Fung")
-        XCTAssertEqual(user!.dateOfBirth, "1980-01-01")
-        XCTAssertEqual(user!.countryOfBirth, "US")
-        XCTAssertEqual(user!.driversLicenseId, "000123")
-        XCTAssertEqual(user!.governmentIdType, "PASSPORT")
-        XCTAssertEqual(user!.passportId, "00000")
+        XCTAssertEqual(user!.firstName, "Stan", "The firstName should be Stan!")
+        XCTAssertEqual(user!.middleName, "Albert", "The middleName should be Albert!")
+        XCTAssertEqual(user!.lastName, "Fung", "The lastName should be Fung!")
+        XCTAssertEqual(user!.dateOfBirth, "1980-01-01", "The dateOfBirth should be 1980-01-01!")
+        XCTAssertEqual(user!.countryOfBirth, "US", "The countryOfBirth should be US!")
+        XCTAssertEqual(user!.driversLicenseId, "000123", "The driversLicenseId should be 000123!")
+        XCTAssertEqual(user!.governmentIdType, "PASSPORT", "The governmentIdType should be PASSPORT!")
+        XCTAssertEqual(user!.passportId, "00000", "The passportId should be 00000!")
 
-        XCTAssertEqual(user!.createdOn, "2019-04-30T00:01:53")
-        XCTAssertEqual(user!.phoneNumber, "000-000000")
-        XCTAssertEqual(user!.mobileNumber, "000-000-0000")
-        XCTAssertEqual(user!.email, "user01@myApp.com")
-        XCTAssertEqual(user!.governmentId, "0000000000")
+        XCTAssertEqual(user!.createdOn, "2019-04-30T00:01:53", "The createdOn should be 2019-04-30T00:01:53!")
+        XCTAssertEqual(user!.phoneNumber, "000-000000", "The phoneNumber should be 000-000000!")
+        XCTAssertEqual(user!.mobileNumber, "000-000-0000", "The mobileNumber should be 000-000-0000!")
+        XCTAssertEqual(user!.email, "user01@myApp.com", "The email should be user01@myApp.com!")
+        XCTAssertEqual(user!.governmentId, "0000000000", "The governmentId should be 0000000000!")
 
-        XCTAssertEqual(user!.addressLine1, "abc")
-        XCTAssertEqual(user!.addressLine2, "def")
-        XCTAssertEqual(user!.city, "Phoenix")
-        XCTAssertEqual(user!.stateProvince, "AZ")
+        XCTAssertEqual(user!.addressLine1, "abc", "The addressLine1 should be abc!")
+        XCTAssertEqual(user!.addressLine2, "def", "The addressLine2 should be def!")
+        XCTAssertEqual(user!.city, "Phoenix", "The city should be Phoenix!")
+        XCTAssertEqual(user!.stateProvince, "AZ", "The stateProvince should be AZ!")
 
-        XCTAssertEqual(user!.country, "US")
-        XCTAssertEqual(user!.postalCode, "12345")
-        XCTAssertEqual(user!.language, "en")
-        XCTAssertEqual(user!.timeZone, "PST")
-        XCTAssertEqual(user!.programToken, "prg-00000000-0000-0000-0000-000000000000")
+        XCTAssertEqual(user!.country, "US", "The country should be US!")
+        XCTAssertEqual(user!.postalCode, "12345", "The postalCode should be 12345!")
+        XCTAssertEqual(user!.language, "en", "The language should be en!")
+        XCTAssertEqual(user!.timeZone, "PST", "The timeZone should be PST!")
+        XCTAssertEqual(user!.programToken,
+                       "prg-00000000-0000-0000-0000-000000000000",
+                       "The programToken should be prg-00000000-0000-0000-0000-000000000000!")
     }
 
     func verifyBusinessResponse(_ user: HyperwalletUser?) {
         XCTAssertNotNil(user)
 
-        XCTAssertEqual(user!.clientUserId, "myBusinessIdd01")
-        XCTAssertEqual(user!.token, "YourUserToken")
-        XCTAssertEqual(user!.status, HyperwalletUser.Status.preActivated)
-        XCTAssertEqual(user!.verificationStatus, HyperwalletUser.VerificationStatus.notRequired)
-        XCTAssertEqual(user!.profileType, HyperwalletUser.ProfileType.business)
-        XCTAssertEqual(user!.gender, HyperwalletUser.Gender.male)
+        XCTAssertEqual(user!.clientUserId, "myBusinessIdd01", "The clientUserId should be myBusinessIdd01!")
+        XCTAssertEqual(user!.token, "YourUserToken", "The token should be YourUserToken!")
+        XCTAssertEqual(user!.status, HyperwalletUser.Status.preActivated, "The status should be `preActivated`!")
+        XCTAssertEqual(user!.verificationStatus,
+                       HyperwalletUser.VerificationStatus.notRequired,
+                       "The verificationStatus should be `notRequired`!")
+        XCTAssertEqual(user!.profileType, HyperwalletUser.ProfileType.business, "The profileType should be `business`!")
+        XCTAssertEqual(user!.gender, HyperwalletUser.Gender.male, "The gender should be `male`!")
 
-        XCTAssertEqual(user!.businessType, HyperwalletUser.BusinessType.corporation)
+        XCTAssertEqual(user!.businessType,
+                       HyperwalletUser.BusinessType.corporation,
+                       "The businessType should be `corporation`!")
 
-        XCTAssertEqual(user!.businessRegistrationId, "ABC0000")
-        XCTAssertEqual(user!.businessName, "Your Business LTD")
-        XCTAssertEqual(user!.businessOperatingName, "My Business LTD")
-        XCTAssertEqual(user!.businessRegistrationStateProvince, "BCA")
-        XCTAssertEqual(user!.businessRegistrationCountry, "US")
-        XCTAssertEqual(user!.businessContactRole, HyperwalletUser.BusinessContactRole.director)
-        XCTAssertEqual(user!.businessContactCountry, "US")
-        XCTAssertEqual(user!.email, "director@mybusiness.net")
-        XCTAssertEqual(user!.governmentId, "000000000")
+        XCTAssertEqual(user!.businessRegistrationId, "ABC0000", "The businessRegistrationId should be ABC0000!")
+        XCTAssertEqual(user!.businessName, "Your Business LTD", "The businessName should be Your Business LTD!")
+        XCTAssertEqual(user!.businessOperatingName,
+                       "My Business LTD",
+                       "The businessOperatingName should be My Business LTD!")
+        XCTAssertEqual(user!.businessRegistrationStateProvince,
+                       "BCA",
+                       "The businessRegistrationStateProvince should be BCA!")
+        XCTAssertEqual(user!.businessRegistrationCountry, "US", "The businessRegistrationCountry should be US!")
+        XCTAssertEqual(user!.businessContactRole,
+                       HyperwalletUser.BusinessContactRole.director,
+                       "The businessContactRole should be `director`!")
+        XCTAssertEqual(user!.businessContactCountry, "US", "The businessContactCountry should be US!")
+        XCTAssertEqual(user!.email, "director@mybusiness.net", "The email should be director@mybusiness.net!")
+        XCTAssertEqual(user!.governmentId, "000000000", "The governmentId should be 000000000!")
 
-        XCTAssertEqual(user!.businessContactAddressLine1, "Business-Address")
-        XCTAssertEqual(user!.businessContactAddressLine2, "Business-Address 2")
-        XCTAssertEqual(user!.businessContactCity, "Flagstaff")
-        XCTAssertEqual(user!.businessContactPostalCode, "0000")
-        XCTAssertEqual(user!.businessContactStateProvince, "AZ")
-        XCTAssertEqual(user!.countryOfNationality, "US")
+        XCTAssertEqual(user!.businessContactAddressLine1,
+                       "Business-Address",
+                       "The businessContactAddressLine1 should be Business-Address!")
+        XCTAssertEqual(user!.businessContactAddressLine2,
+                       "Business-Address 2",
+                       "The businessContactAddressLine2 should be Business-Address 2!")
+        XCTAssertEqual(user!.businessContactCity, "Flagstaff", "The businessContactCity should be Flagstaff!")
+        XCTAssertEqual(user!.businessContactPostalCode, "0000", "The businessContactPostalCode should be 0000!")
+        XCTAssertEqual(user!.businessContactStateProvince, "AZ", "The businessContactStateProvince should be AZ!")
+        XCTAssertEqual(user!.countryOfNationality, "US", "The countryOfNationality should be US!")
     }
 }
