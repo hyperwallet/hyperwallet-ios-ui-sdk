@@ -64,9 +64,8 @@ public final class ListTransferMethodTableViewController: UITableViewController 
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ListTransferMethodTableViewCell.reuseIdentifier,
                                                  for: indexPath)
-        if let listTransferMethodCell = cell as? ListTransferMethodTableViewCell,
-            let cellConfiguration = presenter.getCellConfiguration(indexPath: indexPath) {
-            listTransferMethodCell.configure(configuration: cellConfiguration)
+        if let listTransferMethodCell = cell as? ListTransferMethodTableViewCell {
+            listTransferMethodCell.configure(configuration: presenter.sectionData[0])
         }
         return cell
     }
