@@ -92,31 +92,11 @@ final class ListReceiptViewPresenter {
         return queryParam
     }
 
-    private func setUpPrepaidCardQueryParam() -> HyperwalletReceiptQueryParam {
-        let queryParam = HyperwalletReceiptQueryParam()
-        queryParam.createdAfter = prepaidCardReceiptCreatedAfter
-        return queryParam
-    }
-    
-    func getCellConfiguration(indexPath: IndexPath) -> ReceiptTransactionCellConfiguration? {
-        guard let receipt = sectionData[safe: indexPath.section]?.value[safe:indexPath.row] else {
-            return nil
-        }
-        let currency = receipt.currency
-        let type = receipt.type.rawValue
-        let entry = receipt.entry.rawValue
-        let createdOn = ISO8601DateFormatter
-            .ignoreTimeZone
-            .date(from: receipt.createdOn)!
-            .format(for: .date)
-        return ReceiptTransactionCellConfiguration(
-            type: type.lowercased().localized(),
-            entry: entry,
-            amount: receipt.amount,
-            currency: currency,
-            createdOn: createdOn,
-            iconFont: HyperwalletIcon.of(receipt.entry.rawValue).rawValue)
-    }
+//    private func setUpPrepaidCardQueryParam() -> HyperwalletReceiptQueryParam {
+//        let queryParam = HyperwalletReceiptQueryParam()
+//        queryParam.createdAfter = prepaidCardReceiptCreatedAfter
+//        return queryParam
+//    }
 
    private func listUserReceiptHandler()
         -> (Result<HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType>) -> Void {

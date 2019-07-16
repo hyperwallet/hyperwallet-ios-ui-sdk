@@ -7,16 +7,13 @@
       buildImplicitDependencies = "YES">
       <BuildActionEntries>
          <BuildActionEntry
-            buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
+            buildForTesting = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DBAF929C22CFCBC7004F197A"
-               BuildableName = "TransferMethodRepository.framework"
-               BlueprintName = "TransferMethodRepository"
+               BlueprintIdentifier = "DBAF92A422CFCBC7004F197A"
+               BuildableName = "TransferMethodRepositoryTests.xctest"
+               BlueprintName = "TransferMethodRepositoryTests"
                ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -26,18 +23,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      codeCoverageEnabled = "YES"
-      onlyGenerateCoverageForSpecifiedTargets = "YES"
       shouldUseLaunchSchemeArgsEnv = "YES">
-      <CodeCoverageTargets>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DBAF929C22CFCBC7004F197A"
-            BuildableName = "TransferMethodRepository.framework"
-            BlueprintName = "TransferMethodRepository"
-            ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
-         </BuildableReference>
-      </CodeCoverageTargets>
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -50,15 +36,6 @@
             </BuildableReference>
          </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DBAF929C22CFCBC7004F197A"
-            BuildableName = "TransferMethodRepository.framework"
-            BlueprintName = "TransferMethodRepository"
-            ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -72,15 +49,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DBAF929C22CFCBC7004F197A"
-            BuildableName = "TransferMethodRepository.framework"
-            BlueprintName = "TransferMethodRepository"
-            ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -90,15 +58,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DBAF929C22CFCBC7004F197A"
-            BuildableName = "TransferMethodRepository.framework"
-            BlueprintName = "TransferMethodRepository"
-            ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

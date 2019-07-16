@@ -186,7 +186,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
         let url = String(format: "%@/bank-accounts", HyperwalletTestHelper.userRestURL)
         let response = HyperwalletTestHelper
             .unexpectedErrorHTTPResponse(for: "UnexpectedErrorResponse")
-        let request = HyperwalletTestHelper.buildPostResquest(baseUrl: url, response)
+        let request = HyperwalletTestHelper.buildPostRequest(baseUrl: url, response)
         HyperwalletTestHelper.setUpMockServer(request: request)
 
         let expectation = self.expectation(description: "Create bank account failed")
@@ -194,7 +194,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
 
         // When
         presenter.createTransferMethod()
-        wait(for: [expectationCreateBank], timeout: 1)
+        wait(for: [expectation], timeout: 1)
 
         // Then
         XCTAssertTrue(mockView.isFieldValuesPerformed, "The FieldValues should be performed")
@@ -270,35 +270,6 @@ class AddTransferMethodPresenterTests: XCTestCase {
         presenter.loadTransferMethodConfigurationFields(true)
         wait(for: [expectation], timeout: 1)
     }
-
-    private func loadMockTransfermethods() {
-        let url = String(format: "%@/bank-accounts", HyperwalletTestHelper.userRestURL)
-        let response = HyperwalletTestHelper
-            .badRequestHTTPResponse(for: "BankAccountErrorResponseWithMissingFieldAndValidationError")
-        let request = HyperwalletTestHelper.buildPostResquest(baseUrl: url, response)
-        Hippolyte.shared.add(stubbedRequest: setupTransferMethodConfigurationFields())
-        HyperwalletTestHelper.setUpMockServer(request: request)
-        let expectation = self.expectation(description: "Load transfer methods")
-        mockView.expectation = expectation
-        mockView.showTransferMethodFieldsHandler = { fieldGroups in
-            for fieldGroup in fieldGroups {
-                guard let fields = fieldGroup.fields, let fieldGroup = fieldGroup.group
-                    else {
-                        continue
-                }
-                let newWidgets = fields.map(WidgetFactory.newWidget)
-                let section = AddTransferMethodSectionData(
-                    fieldGroup: fieldGroup,
-                    country: "US",
-                    currency: "USD",
-                    cells: newWidgets
-                )
-                self.presenter.sectionData.append(section)
-            }
-        }
-        presenter.loadTransferMethodConfigurationFields()
-        wait(for: [expectation], timeout: 1)
-    }
 }
 
 class MockAddTransferMethodViewTests: AddTransferMethodView {
@@ -322,8 +293,6 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
 
     var mockFieldStatusReturnResult = [Bool]()
     var mockFieldValuesReturnResult = [(name: String, value: String)]()
-    var showTransferMethodFieldsHandler: (([HyperwalletFieldGroup]) -> Void)?
-
     var showTransferMethodFieldsHandler: (([HyperwalletFieldGroup]) -> Void)?
 
     var expectation: XCTestExpectation?
