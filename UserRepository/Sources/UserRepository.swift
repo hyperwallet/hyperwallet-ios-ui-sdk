@@ -54,7 +54,7 @@ private extension RemoteUserRepository {
         -> (HyperwalletUser?, HyperwalletErrorType?) -> Void {
             return {(result, error) in
                 self.user = CompletionHelper
-                    .performCompletion(error, result, completion, self.user)
+                    .performHandler(error, result, completion)
             }
     }
 }
