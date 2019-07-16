@@ -145,7 +145,7 @@ class PrepaidCardListReceiptTests: BaseTests {
         XCTAssertEqual(transactionDetails.receiptIdValue.label, "FISVL_5269000")
         // Will comment out for now
         //XCTAssertEqual(transactionDetails.dateValue.label, "Thu, Jun 20, 2019, 9:23 PM")
-        XCTAssertTrue(!transactionDetails.feeSection.exists)
+        XCTAssertFalse(transactionDetails.feeSection.exists)
     }
 
     func testPrepaidReceiptDetail_verifyDebit() {
