@@ -68,15 +68,9 @@ final class AddTransferMethodPresenter {
 
     func loadTransferMethodConfigurationFields(_ forceUpdate: Bool = false) {
         view.showLoading()
-
-        if forceUpdate {
-            transferMethodConfigurationRepository.refreshFields()
-        }
-
-        transferMethodConfigurationRepository.getFields(country,
-                                                        currency,
-                                                        transferMethodTypeCode,
-                                                        profileType) { [weak self] (result) in
+        Hyperwallet.shared.retrieveTransferMethodConfigurationFields(
+            request: fieldsQuery,
+            completion: { [weak self] (result, error) in
                 guard let strongSelf = self else {
                     return
                 }

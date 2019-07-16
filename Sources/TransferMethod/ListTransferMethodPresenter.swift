@@ -51,19 +51,6 @@ final class ListTransferMethodPresenter {
         }
     }
 
-    func getCellConfiguration(indexPath: IndexPath) -> ListTransferMethodCellConfiguration? {
-        if let transferMethod = sectionData[safe: indexPath.row],
-            let country = transferMethod.transferMethodCountry,
-            let transferMethodType = transferMethod.type {
-            return ListTransferMethodCellConfiguration(
-                transferMethodType: transferMethodType.lowercased().localized(),
-                transferMethodCountry: country.localized(),
-                additionalInfo: getAdditionalInfo(transferMethod),
-                transferMethodIconFont: HyperwalletIcon.of(transferMethodType).rawValue)
-        }
-        return nil
-    }
-
     /// Deactivate the selected Transfer Method
     private func deactivateTransferMethod(_ transferMethod: HyperwalletTransferMethod) {
         view.showProcessing()
