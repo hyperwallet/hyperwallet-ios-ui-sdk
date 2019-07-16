@@ -16,27 +16,14 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import UIKit
+import HyperwalletSDK
 
-/// Represents the country and currency data to be displyed on the CountryCurrencyCell
-protocol GenericCellConfiguration {
-    var title: String { get }
-    var value: String { get }
-}
-extension GenericCellConfiguration {
-    var identifier: String {
-        return "cell\(title)"
-    }
-}
-
-class GenericCell<ModelType>: UITableViewCell {
-    var item: ModelType!
-
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+extension HyperwalletCurrency: GenericCellConfiguration {
+    var title: String {
+        return name
     }
 
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    var value: String {
+        return code
     }
 }

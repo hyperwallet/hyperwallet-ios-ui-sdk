@@ -17,6 +17,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import HyperwalletSDK
+#if !COCOAPODS
+import TransferMethodRepository
+#endif
 
 protocol AddTransferMethodView: class {
     func fieldValues() -> [(name: String, value: String)]
@@ -43,6 +46,10 @@ final class AddTransferMethodPresenter {
     private let transferMethodTypeCode: String
     var sectionData = [AddTransferMethodSectionData]()
 
+    private lazy var transferMethodConfigurationRepository = {
+        TransferMethodRepositoryFactory.shared.transferMethodConfigurationRepository()
+    }()
+
     init(_ view: AddTransferMethodView,
          _ country: String,
          _ currency: String,
@@ -55,38 +62,39 @@ final class AddTransferMethodPresenter {
         self.transferMethodTypeCode = transferMethodTypeCode
     }
 
-    func loadTransferMethodConfigurationFields() {
-        let fieldsQuery = HyperwalletTransferMethodConfigurationFieldQuery(
-            country: country,
-            currency: currency,
-            transferMethodType: transferMethodTypeCode,
-            profile: profileType
-        )
+    func loadTransferMethodConfigurationFields(_ forceUpdate: Bool = false) {
         view.showLoading()
-        Hyperwallet.shared.retrieveTransferMethodConfigurationFields(
-            request: fieldsQuery,
-            completion: { [weak self] (result, error) in
+
+        if forceUpdate {
+            transferMethodConfigurationRepository.refreshFields()
+        }
+
+        transferMethodConfigurationRepository.getFields(country,
+                                                        currency,
+                                                        transferMethodTypeCode,
+                                                        profileType) { [weak self] (result) in
                 guard let strongSelf = self else {
                     return
                 }
 
-                DispatchQueue.main.async {
-                    strongSelf.view.hideLoading()
-                    if let error = error {
-                        strongSelf.view.showError(error, { () -> Void in
-                            strongSelf.loadTransferMethodConfigurationFields() })
-                        return
-                    }
+                strongSelf.view.hideLoading()
+
+                switch result {
+                case .failure(let error):
+                    strongSelf.view.showError(error, { () -> Void in
+                        strongSelf.loadTransferMethodConfigurationFields()
+                    })
+
+                case .success(let fieldResult):
                     guard
-                        let result = result,
-                        let fieldGroups = result.fieldGroups(),
-                        let transferMethodType = result.transferMethodType()
+                        let fieldGroups = fieldResult?.fieldGroups(),
+                        let transferMethodType = fieldResult?.transferMethodType()
                         else {
                             return
                     }
                     strongSelf.view.showTransferMethodFields(fieldGroups, transferMethodType)
                 }
-            })
+        }
     }
 
     func createTransferMethod() {
