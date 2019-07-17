@@ -66,6 +66,7 @@ public final class ScheduleTransferTableViewController: UITableViewController, U
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)
         }
+        tableView.register(DividerCell.self, forCellReuseIdentifier: DividerCell.reuseIdentifier)
     }
 }
 
@@ -102,8 +103,17 @@ extension ScheduleTransferTableViewController {
         case .foreignExchange:
             if let tableViewCell = cell as? ScheduleTransferForeignExchangeCell,
                 let foreignExchangeData = section as? ScheduleTransferForeignExchangeData {
-                tableViewCell.textLabel?.text = foreignExchangeData.rows[indexPath.row].title
-                tableViewCell.detailTextLabel?.text = foreignExchangeData.rows[indexPath.row].value
+                // Insert a divider row when the title is an empty string
+                if foreignExchangeData.rows[indexPath.row].title.isEmpty {
+                    return tableView.dequeueReusableCell(withIdentifier: DividerCell.reuseIdentifier, for: indexPath)
+                } else {
+                    tableViewCell.textLabel?.text = foreignExchangeData.rows[indexPath.row].title
+                    tableViewCell.detailTextLabel?.text = foreignExchangeData.rows[indexPath.row].value
+                    // modify separatorInset length when there is another foreign exanchange after this row
+                    if let nextRow = foreignExchangeData.rows[safe: indexPath.row + 1], nextRow.title.isEmpty {
+                        cell.separatorInset = UIEdgeInsets.zero
+                    }
+                }
             }
 
         case .summary:
@@ -139,16 +149,6 @@ extension ScheduleTransferTableViewController {
 
 // MARK: - Schedule transfer table delegate
 extension ScheduleTransferTableViewController {
-    override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.section {
-        case 0:
-            return Theme.Cell.largeHeight
-
-        default:
-            return Theme.Cell.smallHeight
-        }
-    }
-
     override public func tableView(_ tableView: UITableView,
                                    estimatedHeightForHeaderInSection section: Int) -> CGFloat {
         return CGFloat(Theme.Cell.headerHeight)
@@ -172,7 +172,7 @@ extension ScheduleTransferTableViewController: ScheduleTransferView {
     }
 
     func showScheduleTransfer() {
-//        presenter.initializeSections()
+        //        presenter.initializeSections()
         tableView.reloadData()
     }
 

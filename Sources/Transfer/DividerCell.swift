@@ -16,28 +16,21 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-final class ScheduleTransferNotesCell: UITableViewCell {
-    static let reuseIdentifier = "ScheduleTransferTableViewCellReuseIdentifier"
+import HyperwalletSDK
+import UIKit
 
+final class DividerCell: UITableViewCell {
+    static let reuseIdentifier = "dividerCellReuseIdentifier"
+
+    // MARK: Life cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
-        textLabel?.numberOfLines = 0
-        textLabel?.lineBreakMode = .byWordWrapping
-        self.heightAnchor.constraint(equalToConstant: Theme.Cell.mediumHeight).isActive = true
+        self.heightAnchor.constraint(equalToConstant: Theme.Cell.dividerHeight).isActive = true
+        backgroundColor = Theme.ViewController.backgroundColor
+        separatorInset = UIEdgeInsets.zero
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-    }
-
-    // MARK: Theme manager's proxy properties
-    @objc dynamic var titleLabelFont: UIFont! {
-        get { return textLabel?.font }
-        set { textLabel?.font = newValue }
-    }
-
-    @objc dynamic var titleLabelColor: UIColor! {
-        get { return textLabel?.textColor }
-        set { textLabel?.textColor = newValue }
     }
 }

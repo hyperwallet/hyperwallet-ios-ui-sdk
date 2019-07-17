@@ -104,6 +104,10 @@ extension Array {
     func isNotEmpty() -> Bool {
         return !self.isEmpty
     }
+
+    func isLast(index: Int) -> Bool {
+        return index == endIndex - 1
+    }
 }
 
 extension Collection {

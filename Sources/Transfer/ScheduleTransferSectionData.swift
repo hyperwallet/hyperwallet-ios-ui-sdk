@@ -88,7 +88,7 @@ struct ScheduleTransferForeignExchangeData: ScheduleTransferSectionData {
     init(foreignExchanges: [HyperwalletForeignExchange]) {
         self.foreignExchanges = foreignExchanges
 
-        for foreignExchange in foreignExchanges {
+        for (index, foreignExchange) in foreignExchanges.enumerated() {
             let souceAmount = String(format: "%@ %@",
                                      foreignExchange.sourceAmount!,
                                      foreignExchange.sourceCurrency!)
@@ -103,6 +103,9 @@ struct ScheduleTransferForeignExchangeData: ScheduleTransferSectionData {
             rows.append((title: "You sell:", value:souceAmount))
             rows.append((title: "You buy:", value: destinationAmount))
             rows.append((title: "Exchange Rate:", value: rate))
+            if !foreignExchanges.isLast(index: index) {
+                rows.append((title: "", value: ""))
+            }
         }
     }
 }

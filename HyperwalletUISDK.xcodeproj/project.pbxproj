@@ -32,6 +32,7 @@
 		078B457E2273895C005B0248 /* SelectTransferMethodTypePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078B45722273895C005B0248 /* SelectTransferMethodTypePresenterTests.swift */; };
 		078B457F2273895C005B0248 /* AddTransferMethodPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078B45732273895C005B0248 /* AddTransferMethodPresenterTests.swift */; };
 		078B45812273A441005B0248 /* HyperwalletUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078B45802273A441005B0248 /* HyperwalletUI.swift */; };
+		07AEB50422DFCC1F0020130D /* DividerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AEB50322DFCC1F0020130D /* DividerCell.swift */; };
 		07B1FE5A22B8133800F461D0 /* CreateTransferTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B1FE5922B8133800F461D0 /* CreateTransferTableViewController.swift */; };
 		07B1FE5C22B8746A00F461D0 /* ScheduleTransferSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B1FE5B22B8746A00F461D0 /* ScheduleTransferSummaryCell.swift */; };
 		07B1FE5E22B8A72D00F461D0 /* ScheduleTransferNotesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B1FE5D22B8A72D00F461D0 /* ScheduleTransferNotesCell.swift */; };
@@ -234,6 +235,7 @@
 		078B45722273895C005B0248 /* SelectTransferMethodTypePresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectTransferMethodTypePresenterTests.swift; sourceTree = "<group>"; };
 		078B45732273895C005B0248 /* AddTransferMethodPresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodPresenterTests.swift; sourceTree = "<group>"; };
 		078B45802273A441005B0248 /* HyperwalletUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletUI.swift; sourceTree = "<group>"; };
+		07AEB50322DFCC1F0020130D /* DividerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerCell.swift; sourceTree = "<group>"; };
 		07B1FE5922B8133800F461D0 /* CreateTransferTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTransferTableViewController.swift; sourceTree = "<group>"; };
 		07B1FE5B22B8746A00F461D0 /* ScheduleTransferSummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTransferSummaryCell.swift; sourceTree = "<group>"; };
 		07B1FE5D22B8A72D00F461D0 /* ScheduleTransferNotesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTransferNotesCell.swift; sourceTree = "<group>"; };
@@ -433,6 +435,7 @@
 				07B1FE5B22B8746A00F461D0 /* ScheduleTransferSummaryCell.swift */,
 				07D4E00B22B46952004E031A /* ScheduleTransferTableViewController.swift */,
 				0702672522B1AC570057D62B /* ScheduleTransferViewPresenter.swift */,
+				07AEB50322DFCC1F0020130D /* DividerCell.swift */,
 			);
 			path = Transfer;
 			sourceTree = "<group>";
@@ -1262,6 +1265,7 @@
 				4AB1099722A7B04C00CCA7C6 /* ReceiptDetailSectionData.swift in Sources */,
 				9826056822822E8A000CCA2D /* UIToolbar.swift in Sources */,
 				073BA5D322A885E6002C58BD /* AddTransferMethodTableViewController.swift in Sources */,
+				07AEB50422DFCC1F0020130D /* DividerCell.swift in Sources */,
 				073BA5D522A88612002C58BD /* ListTransferMethodTableViewController.swift in Sources */,
 				DBCA3879225E8BAA00CD4137 /* UIImage.swift in Sources */,
 				07D4E00E22B46978004E031A /* ScheduleTransferSectionData.swift in Sources */,

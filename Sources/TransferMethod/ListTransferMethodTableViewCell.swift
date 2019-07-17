@@ -41,6 +41,7 @@ final class ListTransferMethodTableViewCell: GenericCell<ListTransferMethodCellC
     // MARK: Life cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+        self.heightAnchor.constraint(equalToConstant: Theme.Cell.largeHeight).isActive = true
     }
 
     required init?(coder aDecoder: NSCoder) {
