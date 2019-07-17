@@ -83,7 +83,7 @@ final class ListReceiptViewPresenter {
             completion: listPrepaidCardReceiptHandler())
     }
 
-   private func listUserReceiptHandler()
+    private func listUserReceiptHandler()
         -> (Result<HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType>) -> Void {
             return { [weak self] (result) in
                 guard let strongSelf = self else {

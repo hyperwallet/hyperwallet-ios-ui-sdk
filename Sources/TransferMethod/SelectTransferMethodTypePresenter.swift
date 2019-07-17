@@ -137,7 +137,8 @@ final class SelectTransferMethodTypePresenter {
                             strongSelf.loadCurrency(result)
                             strongSelf.loadTransferMethodTypes(result)
                         },
-                        failure: { strongSelf.loadTransferMethodKeys() }))
+                        failure: { strongSelf.loadTransferMethodKeys() })
+                )
             }
         }
     }

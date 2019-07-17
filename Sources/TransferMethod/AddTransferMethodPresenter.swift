@@ -50,6 +50,10 @@ final class AddTransferMethodPresenter {
         TransferMethodRepositoryFactory.shared.transferMethodConfigurationRepository()
     }()
 
+    private lazy var transferMethodRepository = {
+        TransferMethodRepositoryFactory.shared.transferMethodRepository()
+    }()
+
     init(_ view: AddTransferMethodView,
          _ country: String,
          _ currency: String,
@@ -98,40 +102,35 @@ final class AddTransferMethodPresenter {
     }
 
     func createTransferMethod() {
-        guard view.areAllFieldsValid()
-            else {
-                return
-        }
-        var hyperwalletTransferMethod: HyperwalletTransferMethod
-        switch transferMethodTypeCode {
-        case "BANK_ACCOUNT", "WIRE_ACCOUNT":
-            hyperwalletTransferMethod = HyperwalletBankAccount.Builder(transferMethodCountry: country,
-                                                                       transferMethodCurrency: currency,
-                                                                       transferMethodProfileType: profileType,
-                                                                       transferMethodType: transferMethodTypeCode)
-                .build()
-
-        case "BANK_CARD":
-            hyperwalletTransferMethod = HyperwalletBankCard.Builder(transferMethodCountry: country,
-                                                                    transferMethodCurrency: currency,
-                                                                    transferMethodProfileType: profileType)
-                .build()
-
-        case "PAYPAL_ACCOUNT":
-            hyperwalletTransferMethod = HyperwalletPayPalAccount.Builder(transferMethodCountry: country,
-                                                                         transferMethodCurrency: currency,
-                                                                         transferMethodProfileType: profileType)
-                .build()
-
-        default:
-            view.showError(title: "error".localized(), message: "transfer_method_not_supported_message".localized())
+        guard view.areAllFieldsValid() else {
             return
         }
 
-        for field in view.fieldValues() {
-            hyperwalletTransferMethod.setField(key: field.name, value: field.value)
+        guard let hyperwalletTransferMethod = buildHyperwalletTransferMethod() else {
+            view.showError(title: "error".localized(), message: "transfer_method_not_supported_message".localized())
+            return
         }
-        createTransferMethod(transferMethod: hyperwalletTransferMethod)
+        view.fieldValues().forEach { hyperwalletTransferMethod.setField(key: $0.name, value: $0.value) }
+
+        view.showProcessing()
+        transferMethodRepository.createTransferMethod(hyperwalletTransferMethod) { [weak self] (result) in
+                guard let strongSelf = self else {
+                    return
+                }
+                switch result {
+                case .failure(let error):
+                    strongSelf.view.dismissProcessing(handler: {
+                        strongSelf.errorHandler(for: error)
+                    })
+
+                case .success(let transferMethodResult):
+                    strongSelf.view.showConfirmation(handler: {
+                        if let transferMethod = transferMethodResult {
+                            strongSelf.view.notifyTransferMethodAdded(transferMethod)
+                        }
+                    })
+                }
+        }
     }
 
     func prepareSectionForScrolling(_ section: AddTransferMethodSectionData,
@@ -141,79 +140,63 @@ final class AddTransferMethodPresenter {
         section.fieldToBeFocused = focusWidget
     }
 
-    private func createTransferMethod(transferMethod: HyperwalletTransferMethod) {
-        view.showProcessing()
-        if let bankAccount = transferMethod as? HyperwalletBankAccount {
-            Hyperwallet.shared.createBankAccount(account: bankAccount,
-                                                 completion: createTransferMethodHandler())
-        } else if let bankCard = transferMethod as? HyperwalletBankCard {
-            Hyperwallet.shared.createBankCard(account: bankCard,
-                                              completion: createTransferMethodHandler())
-        } else if let payPalAccount = transferMethod as? HyperwalletPayPalAccount {
-            Hyperwallet.shared.createPayPalAccount(account: payPalAccount,
-                                                   completion: createTransferMethodHandler())
-        }
-    }
-
-    private func createTransferMethodHandler() -> (HyperwalletTransferMethod?, HyperwalletErrorType?) -> Void {
-        return { [weak self] (result, error) in
-            guard let strongSelf = self else {
-                return
-            }
-            DispatchQueue.main.async {
-                if let error = error {
-                    let errorHandler = {
-                        strongSelf.errorHandler(for: error)
-                    }
-                    strongSelf.view.dismissProcessing(handler: errorHandler)
-                } else {
-                    let processingHandler = {
-                        if let transferMethod = result {
-                            strongSelf.view.notifyTransferMethodAdded(transferMethod)
-                        }
-                    }
-                    strongSelf.view.showConfirmation(handler: processingHandler)
-                }
-            }
-        }
-    }
-
     private func errorHandler(for error: HyperwalletErrorType) {
         switch error.group {
         case .business:
-            //reset all the error messages for all the sections
-            resetErrorMessages()
+            resetErrorMessagesForAllSections()
             guard let errors = error.getHyperwalletErrors()?.errorList, errors.isNotEmpty() else {
                 return
             }
 
-            // show alert dialog if there is any error that does not contain `fieldName`
             if errors.contains(where: { $0.fieldName == nil }) {
                 view.showBusinessError(error, { [weak self] () -> Void in self?.updateFooterContent(errors) })
-            } else { // update footer content when all the errors contain `fieldName`
+            } else {
                 updateFooterContent(errors)
             }
 
         default:
-            let handler = { [weak self] () -> Void in self?.createTransferMethod() }
-            view.showError(error, handler)
+            view.showError(error, { [weak self] () -> Void in self?.createTransferMethod() })
+        }
+    }
+
+    private func buildHyperwalletTransferMethod() -> HyperwalletTransferMethod? {
+        switch transferMethodTypeCode {
+        case "BANK_ACCOUNT", "WIRE_ACCOUNT" :
+            return HyperwalletBankAccount.Builder(transferMethodCountry: country,
+                                                  transferMethodCurrency: currency,
+                                                  transferMethodProfileType: profileType,
+                                                  transferMethodType: transferMethodTypeCode)
+                .build()
+        case "BANK_CARD" :
+            return HyperwalletBankCard.Builder(transferMethodCountry: country,
+                                               transferMethodCurrency: currency,
+                                               transferMethodProfileType: profileType)
+                .build()
+        case "PAYPAL_ACCOUNT":
+            return HyperwalletPayPalAccount.Builder(transferMethodCountry: country,
+                                                    transferMethodCurrency: currency,
+                                                    transferMethodProfileType: profileType)
+                .build()
+
+        default:
+            return nil
         }
     }
 
     private func updateFooterContent(_ errors: [HyperwalletError]) {
         let errorsWithFieldName = errors.filter({ $0.fieldName != nil })
 
-        if errorsWithFieldName.isNotEmpty(),
-            let section = sectionData.first(where: { section in widgetsContainError(for: section, errors)
-                .isNotEmpty() }) {
-            section.containsFocusedField = true
-        }
+        if errorsWithFieldName.isNotEmpty() {
+            if let section = sectionData
+                .first(where: { section in widgetsContainError(for: section, errors).isNotEmpty() }) {
+                section.containsFocusedField = true
+            }
 
-        for section in sectionData {
-            if errorsWithFieldName.isNotEmpty() {
+            for section in sectionData {
                 updateSectionData(for: section, errorsWithFieldName)
             }
         }
+
         view.showFooterViewWithUpdatedSectionData(for: sectionData.reversed())
     }
 
@@ -251,7 +234,7 @@ final class AddTransferMethodPresenter {
         return section.cells.compactMap { $0 as? AbstractWidget }
     }
 
-    private func resetErrorMessages() {
+    private func resetErrorMessagesForAllSections() {
         sectionData.forEach { $0.errorMessage = nil }
     }
 }

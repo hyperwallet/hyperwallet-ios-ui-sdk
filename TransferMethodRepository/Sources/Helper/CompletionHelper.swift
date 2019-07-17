@@ -18,7 +18,14 @@
 
 import HyperwalletSDK
 
-class CompletionHelper {
+final class CompletionHelper {
+    static func performHandler<T>(
+        _ completion: @escaping (Result<T?, HyperwalletErrorType>) -> Void) -> (T?, HyperwalletErrorType?) -> Void {
+            return {(result, error) in
+                CompletionHelper.performHandler(error, result, completion)
+            }
+    }
+
     @discardableResult
     static func performHandler<T>(
         _ error: HyperwalletErrorType?,
