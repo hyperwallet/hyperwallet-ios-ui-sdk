@@ -1,4 +1,4 @@
-# coverage_service: coveralls
+coverage_service: coveralls
 xcodeproj: HyperwalletUISDK.xcodeproj
 scheme: HyperwalletUISDK
 ignore:
@@ -15,8 +15,6 @@ ignore:
   - Sources/*/*Cell.swift
   - Sources/TransferMethod/AddTransferMethodSectionData.swift
   - Sources/HyperwalletUI.swift
-  - ReceiptRepository/Tests/*
-  - ReceiptRepository/Sources/Extensions/*
-  - ReceiptRepository/Sources/Helper/*
-  - TransferMethodRepository/Tests/*
-  - TransferMethodRepository/Sources/Helper/*
+  - "*/Sources/Extensions/*"
+  - "*/Tests/*"
+  - "*/Sources/Helper/*"
