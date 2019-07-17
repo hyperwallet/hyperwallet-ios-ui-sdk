@@ -17,7 +17,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import HyperwalletSDK
-import os.log
 
 /// Transfer method repository protocol
 public protocol TransferMethodRepository {
@@ -68,8 +67,6 @@ final class RemoteTransferMethodRepository: TransferMethodRepository {
         } else if let payPalAccount = transferMethod as? HyperwalletPayPalAccount {
             Hyperwallet.shared.createPayPalAccount(account: payPalAccount,
                                                    completion: CompletionHelper.performHandler(completion))
-        } else {
-            logTransferMethodTypeNotSupported(transferMethod.type ?? "")
         }
     }
 
@@ -96,7 +93,7 @@ final class RemoteTransferMethodRepository: TransferMethodRepository {
                                                        completion: CompletionHelper.performHandler(completion))
 
         default:
-            logTransferMethodTypeNotSupported(transferMethodType)
+            break
         }
     }
 
@@ -109,13 +106,5 @@ final class RemoteTransferMethodRepository: TransferMethodRepository {
 
         Hyperwallet.shared.listTransferMethods(queryParam: queryParam,
                                                completion: CompletionHelper.performHandler(completion))
-    }
-
-    private func logTransferMethodTypeNotSupported(_ transferMethodType: String, _ method: String = #function) {
-        os_log("%s%s%s",
-               log: OSLog.notSupported,
-               type: .error,
-               "The transfer method type : [\(transferMethodType)] is not supported.",
-               method)
     }
 }

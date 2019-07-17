@@ -11,15 +11,10 @@ ignore:
   - Sources/Localization/*
   - Sources/Helper/*
   - Sources/View/*
-  - Sources/TransferMethod/*Controller.swift
-  - Sources/TransferMethod/*Cell.swift
+  - Sources/*/*Controller.swift
+  - Sources/*/*Cell.swift
   - Sources/TransferMethod/AddTransferMethodSectionData.swift
-  - Sources/Receipt/*Controller.swift
-  - Sources/Receipt/*Cell.swift
   - Sources/HyperwalletUI.swift
-  - ReceiptRepository/Tests/*
-  - ReceiptRepository/Sources/Extensions/*
-  - ReceiptRepository/Sources/Helper/*
-  - TransferMethodRepository/Tests/*
-  - TransferMethodRepository/Sources/Extensions/*
-  - TransferMethodRepository/Sources/Helper/*
+  - */Sources/Extensions/*
+  - */Tests/*
+  - */Sources/Helper/*
