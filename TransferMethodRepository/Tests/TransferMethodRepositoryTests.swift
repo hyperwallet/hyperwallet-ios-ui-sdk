@@ -196,7 +196,7 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
         var bankAccountError: HyperwalletErrorType?
 
         setupBadResponseMockServer(endpoint: "/bank-accounts",
-                                   responseDataFile: "BankAccountErrorResponseWithMissingFieldAndValidationError")
+                                   responseDataFile: "BankAccountErrorResponseWithValidationError")
 
         let bankAccount = HyperwalletBankAccount
             .Builder(transferMethodCountry: "US",
