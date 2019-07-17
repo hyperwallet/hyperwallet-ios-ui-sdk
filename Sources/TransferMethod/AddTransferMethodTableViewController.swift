@@ -415,7 +415,7 @@ extension AddTransferMethodTableViewController: AddTransferMethodView {
     }
 
     private func addInfoSection(_ transferMethodType: HyperwalletTransferMethodType) {
-        guard transferMethodType.fees != nil || transferMethodType.processingTime != nil else {
+        guard transferMethodType.fees != nil || transferMethodType.processingTimes?.nodes?.first != nil else {
             return
         }
 
