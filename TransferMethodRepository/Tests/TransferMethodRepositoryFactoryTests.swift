@@ -23,7 +23,6 @@ import XCTest
 
 class TransferMethodRepositoryFactoryTests: XCTestCase {
     private lazy var keyResponseData = HyperwalletTestHelper.getDataFromJson("TransferMethodConfigurationKeysResponse")
-    private static var userResponseData = HyperwalletTestHelper.getDataFromJson("UserIndividualResponse")
     private let country = "US"
     private let currency = "USD"
 
@@ -34,16 +33,15 @@ class TransferMethodRepositoryFactoryTests: XCTestCase {
         XCTAssertNotNil(repositoryFactory.transferMethodConfigurationRepository(),
                         "The transferMethodConfigurationRepository should not be nil")
     }
-
+    // swiftlint:disable function_body_length
     func testShared_verifyRepositoriesCleared() {
         RemoteTransferMethodConfigurationRepositoryTests
-            .setupTransferMethodConfigurationMockServer(keyResponseData)
-        let expectation = self.expectation(description: "Get transfer method keys")
+            .setupResponseMockServer(keyResponseData)
+        let expectation = self.expectation(description: "Get transfer method configuration keys")
         var transferMethodConfigurationKey: HyperwalletTransferMethodConfigurationKey?
         var error: HyperwalletErrorType?
         var refreshTransferMethodConfigurationKey: HyperwalletTransferMethodConfigurationKey?
         var refreshError: HyperwalletErrorType?
-
         TransferMethodRepositoryFactory.shared
             .transferMethodConfigurationRepository().getKeys { (result) in
             switch result {
@@ -62,29 +60,41 @@ class TransferMethodRepositoryFactoryTests: XCTestCase {
         // When
         TransferMethodRepositoryFactory.clearInstance()
 
-        let expectationReflesh = self.expectation(description: "Get transfer method keys")
+        let expectationRefresh = self.expectation(description: "Get transfer method configuration keys")
         TransferMethodRepositoryFactory.shared
             .transferMethodConfigurationRepository().getKeys { (result) in
-            switch result {
-            case .success(let resultKey):
-                refreshTransferMethodConfigurationKey = resultKey
+                switch result {
+                case .success(let resultKey):
+                    refreshTransferMethodConfigurationKey = resultKey
 
-            case .failure(let resultError):
-                refreshError = resultError
+                case .failure(let resultError):
+                    refreshError = resultError
+                }
+                expectationRefresh.fulfill()
             }
-            expectationReflesh.fulfill()
-            }
-        wait(for: [expectationReflesh], timeout: 1)
+        wait(for: [expectationRefresh], timeout: 1)
         XCTAssertNil(error, "The error should be nil")
         XCTAssertNotNil(transferMethodConfigurationKey, "The result should not be nil")
-        XCTAssertEqual(transferMethodConfigurationKey!.countries()!.count, 4)
-        XCTAssertEqual(transferMethodConfigurationKey!.currencies(from: country)!.count, 2)
-        XCTAssertEqual(transferMethodConfigurationKey!.currencies(from: country)!.first!.code, "CAD")
-
+        XCTAssertEqual(transferMethodConfigurationKey!.countries()!.count,
+                       4,
+                       "The transferMethodConfigurationKey!.countries() should be 4")
+        XCTAssertEqual(transferMethodConfigurationKey!.currencies(from: country)!.count,
+                       2,
+                       "The transferMethodConfigurationKey!.currencies(from: country)!.count should be 2")
+        XCTAssertEqual(transferMethodConfigurationKey!.currencies(from: country)!.first!.code,
+                       "CAD",
+                       "The transferMethodConfigurationKey!.currencies(from: country)!.first!.code should be CAD")
         XCTAssertNil(refreshError, "The error should be nil")
         XCTAssertNotNil(refreshTransferMethodConfigurationKey, "The result should not be nil")
-        XCTAssertEqual(refreshTransferMethodConfigurationKey!.countries()!.count, 1)
-        XCTAssertEqual(refreshTransferMethodConfigurationKey!.currencies(from: country)!.count, 1)
-        XCTAssertEqual(refreshTransferMethodConfigurationKey!.currencies(from: country)!.first!.code, "USD")
+        XCTAssertEqual(refreshTransferMethodConfigurationKey!.countries()!.count,
+                       1,
+                       "The refreshTransferMethodConfigurationKey!.countries()!.count should be 1")
+        XCTAssertEqual(refreshTransferMethodConfigurationKey!.currencies(from: country)!.count,
+                       1,
+                       "The refreshTransferMethodConfigurationKey!.currencies(from: country)!.count should be 1")
+        XCTAssertEqual(refreshTransferMethodConfigurationKey!.currencies(from: country)!.first!.code,
+                       "USD",
+                       "The refreshTransferMethodConfigurationKey!.currencies(from: country)!.first!.code should be USD"
+                       )
     }
 }

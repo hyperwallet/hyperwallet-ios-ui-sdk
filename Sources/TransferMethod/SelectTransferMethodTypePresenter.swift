@@ -118,9 +118,7 @@ final class SelectTransferMethodTypePresenter {
                 }
                 return
             }
-
             strongSelf.user = result
-
             DispatchQueue.main.async {
                 strongSelf.transferMethodConfigurationRepository
                     .getKeys(completion: strongSelf.getKeysHandler(
@@ -134,7 +132,8 @@ final class SelectTransferMethodTypePresenter {
                             strongSelf.loadCurrency(result)
                             strongSelf.loadTransferMethodTypes(result)
                         },
-                        failure: { strongSelf.loadTransferMethodKeys() }))
+                        failure: { strongSelf.loadTransferMethodKeys() })
+                )
             }
         }
     }
