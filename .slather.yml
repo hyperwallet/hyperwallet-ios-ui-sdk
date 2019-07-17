@@ -15,6 +15,6 @@ ignore:
   - Sources/*/*Cell.swift
   - Sources/TransferMethod/AddTransferMethodSectionData.swift
   - Sources/HyperwalletUI.swift
-  - /*/Sources/Extensions/*
-  - /*/Tests/*
-  - /*/Sources/Helper/*
+  - "*/Sources/Extensions/*"
+  - "*/Tests/*"
+  - "*/Sources/Helper/*"
