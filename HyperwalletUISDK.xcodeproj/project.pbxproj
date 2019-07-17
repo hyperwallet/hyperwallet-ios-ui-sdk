@@ -81,15 +81,14 @@
 		6439130022DF411F00036609 /* UserIndividualResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 643912F222DF40F200036609 /* UserIndividualResponse.json */; };
 		6439130122DF411F00036609 /* UserRepositoryFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643912F322DF40F200036609 /* UserRepositoryFactoryTests.swift */; };
 		6439130222DF411F00036609 /* UserRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643912EF22DF40F200036609 /* UserRepositoryTests.swift */; };
-		6439130522DF41ED00036609 /* CompletionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB50B3722D7B8F70029B74B /* CompletionHelper.swift */; };
-		6439130622DF41EF00036609 /* CompletionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB50B3722D7B8F70029B74B /* CompletionHelper.swift */; };
+		6439130522DF41ED00036609 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		6439130622DF41EF00036609 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		6439130722DF422200036609 /* AuthenticationProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB18E9FD2261BA4C004F6AC3 /* AuthenticationProviderMock.swift */; };
 		6439130822DF422200036609 /* AuthenticationTokenGeneratorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB18E9FB2261BA4C004F6AC3 /* AuthenticationTokenGeneratorMock.swift */; };
 		6439130922DF422200036609 /* HyperwalletTestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB18E9FA2261BA4C004F6AC3 /* HyperwalletTestHelper.swift */; };
 		6439130A22DF423B00036609 /* UserRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643912F522DF40F200036609 /* UserRequestHelper.swift */; };
 		644A69C522B127080058E77E /* WireAccountIndividualResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 644A69C422B127080058E77E /* WireAccountIndividualResponse.json */; };
 		644A69C822B14F4A0058E77E /* AddTransferMethodWireAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644A69C622B14F4A0058E77E /* AddTransferMethodWireAccountTests.swift */; };
-		64DC0BED22DF43E4005BC61F /* CompletionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A31BDB422D7356D0027DACA /* CompletionHelper.swift */; };
 		64F45BD022BA27DA00515AE1 /* WireAccountIndividualResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 64F45BCD22BA27CB00515AE1 /* WireAccountIndividualResponse.json */; };
 		64F45BD422BA313E00515AE1 /* TransferMethodConfigurationWireAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 64F45BD322BA313E00515AE1 /* TransferMethodConfigurationWireAccountResponse.json */; };
 		9807B763226442C60028A280 /* BankAccountInvalidRoutingResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFB61472261E84C00C4A8AA /* BankAccountInvalidRoutingResponse.json */; };
@@ -146,6 +145,9 @@
 		DB6523AC22DF91EB00F52EA7 /* BankAccountErrorResponseWithValidationError.json in Resources */ = {isa = PBXBuildFile; fileRef = DB6523A822DF916C00F52EA7 /* BankAccountErrorResponseWithValidationError.json */; };
 		DB6523AD22DF921C00F52EA7 /* BankAccountErrorResponseWithMissingField.json in Resources */ = {isa = PBXBuildFile; fileRef = DB6523A722DF916C00F52EA7 /* BankAccountErrorResponseWithMissingField.json */; };
 		DB6523AE22DF921F00F52EA7 /* BankAccountErrorResponseWithValidationError.json in Resources */ = {isa = PBXBuildFile; fileRef = DB6523A822DF916C00F52EA7 /* BankAccountErrorResponseWithValidationError.json */; };
+		DB6523B522DFD92900F52EA7 /* CompletionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A31BDB422D7356D0027DACA /* CompletionHelper.swift */; };
+		DB6523B922DFDAA400F52EA7 /* CompletionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6523B822DFDAA400F52EA7 /* CompletionHelper.swift */; };
+		DB6523BB22DFDAAD00F52EA7 /* CompletionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6523BA22DFDAAC00F52EA7 /* CompletionHelper.swift */; };
 		DB68FEE02284D82D000EE61D /* HyperwalletUISDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBCA37F5225E892400CD4137 /* HyperwalletUISDK.framework */; };
 		DB7D129122D303830063BBFA /* TransferMethodRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBAF929D22CFCBC7004F197A /* TransferMethodRepository.framework */; };
 		DB7D129222D303830063BBFA /* TransferMethodRepository.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DBAF929D22CFCBC7004F197A /* TransferMethodRepository.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -179,7 +181,6 @@
 		DBB50B4522D7C3B40029B74B /* TransferMethodConfigurationKeysEmptyTransferMethodTypesResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBB50B3A22D7C3740029B74B /* TransferMethodConfigurationKeysEmptyTransferMethodTypesResponse.json */; };
 		DBB50B4822D7CB000029B74B /* UserIndividualResponseWithoutCountry.json in Resources */ = {isa = PBXBuildFile; fileRef = DBB50B4622D7CADB0029B74B /* UserIndividualResponseWithoutCountry.json */; };
 		DBB50B5222D7ED6C0029B74B /* TransferMethodRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB4265322D530DD00D721C4 /* TransferMethodRepository.swift */; };
-		DBB50B5422D7ED9A0029B74B /* CompletionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB50B5322D7ED9A0029B74B /* CompletionHelper.swift */; };
 		DBB50B5522D7EE200029B74B /* TransferMethodConfigurationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB80BF9B22CD14D700BA5EED /* TransferMethodConfigurationRepository.swift */; };
 		DBC8404422D463CA00178B64 /* HyperwalletCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC8404322D463CA00178B64 /* HyperwalletCountry.swift */; };
 		DBC8404622D4655C00178B64 /* HyperwalletCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC8404522D4655C00178B64 /* HyperwalletCurrency.swift */; };
@@ -446,6 +447,8 @@
 		DB4BDFDE22D40B2B00761710 /* TransferMethodRepositoryFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodRepositoryFactoryTests.swift; sourceTree = "<group>"; };
 		DB6523A722DF916C00F52EA7 /* BankAccountErrorResponseWithMissingField.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BankAccountErrorResponseWithMissingField.json; sourceTree = "<group>"; };
 		DB6523A822DF916C00F52EA7 /* BankAccountErrorResponseWithValidationError.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BankAccountErrorResponseWithValidationError.json; sourceTree = "<group>"; };
+		DB6523B822DFDAA400F52EA7 /* CompletionHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompletionHelper.swift; sourceTree = "<group>"; };
+		DB6523BA22DFDAAC00F52EA7 /* CompletionHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompletionHelper.swift; sourceTree = "<group>"; };
 		DB80BF9B22CD14D700BA5EED /* TransferMethodConfigurationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodConfigurationRepository.swift; sourceTree = "<group>"; };
 		DB80BF9D22CD14F300BA5EED /* TransferMethodRepositoryFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodRepositoryFactory.swift; sourceTree = "<group>"; };
 		DB8FEE1D22DE89390041A777 /* TransferMethodConfigurationKeysResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TransferMethodConfigurationKeysResponse.json; sourceTree = "<group>"; };
@@ -475,7 +478,6 @@
 		DBB50B3B22D7C3740029B74B /* TransferMethodConfigurationKeysEmptyCurrenciesResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TransferMethodConfigurationKeysEmptyCurrenciesResponse.json; sourceTree = "<group>"; };
 		DBB50B3C22D7C3750029B74B /* TransferMethodConfigurationKeysEmptyCountriesResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TransferMethodConfigurationKeysEmptyCountriesResponse.json; sourceTree = "<group>"; };
 		DBB50B4622D7CADB0029B74B /* UserIndividualResponseWithoutCountry.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UserIndividualResponseWithoutCountry.json; sourceTree = "<group>"; };
-		DBB50B5322D7ED9A0029B74B /* CompletionHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompletionHelper.swift; sourceTree = "<group>"; };
 		DBC8404322D463CA00178B64 /* HyperwalletCountry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletCountry.swift; sourceTree = "<group>"; };
 		DBC8404522D4655C00178B64 /* HyperwalletCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletCurrency.swift; sourceTree = "<group>"; };
 		DBCA37F5225E892400CD4137 /* HyperwalletUISDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HyperwalletUISDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -823,6 +825,7 @@
 		643912F722DF40F200036609 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				DB6523B222DFD82700F52EA7 /* Helper */,
 				643912FB22DF40F200036609 /* Info.plist */,
 				643912F922DF40F200036609 /* UserRepository.h */,
 				643912F822DF40F200036609 /* UserRepository.swift */,
@@ -984,6 +987,14 @@
 			path = Responses;
 			sourceTree = "<group>";
 		};
+		DB6523B222DFD82700F52EA7 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				DB6523BA22DFDAAC00F52EA7 /* CompletionHelper.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		DBAE17C0225F136A00C5CC60 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1058,7 +1069,7 @@
 		DBB50B4F22D7ECF90029B74B /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				DBB50B5322D7ED9A0029B74B /* CompletionHelper.swift */,
+				DB6523B822DFDAA400F52EA7 /* CompletionHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -1791,7 +1802,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AE6B6DF22D6238B0009DEFE /* ReceiptRepositoryFactory.swift in Sources */,
-				6439130622DF41EF00036609 /* CompletionHelper.swift in Sources */,
+				DB6523B522DFD92900F52EA7 /* CompletionHelper.swift in Sources */,
+				6439130622DF41EF00036609 /* (null) in Sources */,
 				4ADC4F2E22D891EA004F3F8D /* Date.swift in Sources */,
 				4AE6B6DD22D622D90009DEFE /* PrepaidCardReceiptRepository.swift in Sources */,
 				4AE6B6DB22D620390009DEFE /* UserReceiptRepository.swift in Sources */,
@@ -1817,8 +1829,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				643912FD22DF411700036609 /* UserRepository.swift in Sources */,
-				6439130522DF41ED00036609 /* CompletionHelper.swift in Sources */,
+				6439130522DF41ED00036609 /* (null) in Sources */,
 				643912FE22DF411700036609 /* UserRepositoryFactory.swift in Sources */,
+				DB6523BB22DFDAAD00F52EA7 /* CompletionHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1895,7 +1908,7 @@
 				DBB50B5522D7EE200029B74B /* TransferMethodConfigurationRepository.swift in Sources */,
 				DBAF92B822CFCE48004F197A /* TransferMethodRepositoryFactory.swift in Sources */,
 				DBB50B5222D7ED6C0029B74B /* TransferMethodRepository.swift in Sources */,
-				DBB50B5422D7ED9A0029B74B /* CompletionHelper.swift in Sources */,
+				DB6523B922DFDAA400F52EA7 /* CompletionHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1935,7 +1948,6 @@
 				DBCA3887225E8BAA00CD4137 /* SelectionWidgetCell.swift in Sources */,
 				DBCA3885225E8BAA00CD4137 /* ProcessingView.swift in Sources */,
 				988547CA2294B829007B312C /* ListReceiptTableViewController.swift in Sources */,
-				64DC0BED22DF43E4005BC61F /* CompletionHelper.swift in Sources */,
 				DBCA387E225E8BAA00CD4137 /* GenericCell.swift in Sources */,
 				DBCA386A225E8BAA00CD4137 /* SelectTransferMethodTypeCell.swift in Sources */,
 				DBCA388E225E8BAA00CD4137 /* AbstractWidget.swift in Sources */,
