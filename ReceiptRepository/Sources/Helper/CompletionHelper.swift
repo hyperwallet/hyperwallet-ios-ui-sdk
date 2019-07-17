@@ -18,26 +18,21 @@
 
 import HyperwalletSDK
 
-final class ReceiptDetailViewPresenter {
-    private(set) var sectionData = [ReceiptDetailSectionData]()
-
-    init(with receipt: HyperwalletReceipt) {
-        initializeSections(with: receipt)
-    }
-
-    private func initializeSections(with receipt: HyperwalletReceipt) {
-        let receiptTransactionSection = ReceiptDetailSectionTransactionData(from: receipt)
-        sectionData.append(receiptTransactionSection)
-
-        let receiptDetailSection = ReceiptDetailSectionDetailData(from: receipt)
-        sectionData.append(receiptDetailSection)
-
-        if let receiptNotesSection = ReceiptDetailSectionNotesData(from: receipt) {
-            sectionData.append(receiptNotesSection)
+class CompletionHelper {
+    @discardableResult
+    static func performHandler<T>(_ error: HyperwalletErrorType?,
+                                  _ result: T?,
+                                  _ handler: @escaping (Result<T?, HyperwalletErrorType>) -> Void) -> T? {
+        if let error = error {
+            DispatchQueue.main.async {
+                handler(.failure(error))
+            }
+        } else {
+            DispatchQueue.main.async {
+                handler(.success(result))
+            }
+            return result
         }
-
-        if let receiptFeeSection = ReceiptDetailSectionFeeData(from: receipt) {
-            sectionData.append(receiptFeeSection)
-        }
+        return nil
     }
 }

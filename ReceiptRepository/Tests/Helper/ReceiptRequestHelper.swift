@@ -16,28 +16,17 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+import Hippolyte
 import HyperwalletSDK
+import XCTest
 
-final class ReceiptDetailViewPresenter {
-    private(set) var sectionData = [ReceiptDetailSectionData]()
-
-    init(with receipt: HyperwalletReceipt) {
-        initializeSections(with: receipt)
-    }
-
-    private func initializeSections(with receipt: HyperwalletReceipt) {
-        let receiptTransactionSection = ReceiptDetailSectionTransactionData(from: receipt)
-        sectionData.append(receiptTransactionSection)
-
-        let receiptDetailSection = ReceiptDetailSectionDetailData(from: receipt)
-        sectionData.append(receiptDetailSection)
-
-        if let receiptNotesSection = ReceiptDetailSectionNotesData(from: receipt) {
-            sectionData.append(receiptNotesSection)
-        }
-
-        if let receiptFeeSection = ReceiptDetailSectionFeeData(from: receipt) {
-            sectionData.append(receiptFeeSection)
-        }
+class ReceiptRequestHelper {
+    static func setUpRequest(_ payload: Data,
+                             _ error: NSError? = nil,
+                             _ prepaidCardToken: String? = nil) -> StubRequest {
+        let response = HyperwalletTestHelper.setUpMockedResponse(payload: payload, error: error)
+        let receiptUrl = prepaidCardToken == nil ? "/receipts?":"/prepaid-cards/\(prepaidCardToken!)/receipts?"
+        let url = String(format: "%@%@", HyperwalletTestHelper.userRestURL, receiptUrl)
+        return HyperwalletTestHelper.buildGetRequestRegexMatcher(pattern: url, response)
     }
 }

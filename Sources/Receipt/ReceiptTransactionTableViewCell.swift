@@ -19,15 +19,6 @@
 import HyperwalletSDK
 import UIKit
 
-struct ReceiptTransactionCellConfiguration {
-    let type: String
-    let entry: String
-    let amount: String
-    let currency: String
-    let createdOn: String
-    let iconFont: String
-}
-
 final class ReceiptTransactionTableViewCell: UITableViewCell {
     static let reuseIdentifier = "receiptTransactionTableViewCellReuseIdentifier"
     private var iconColor: UIColor!
@@ -135,29 +126,39 @@ final class ReceiptTransactionTableViewCell: UITableViewCell {
 }
 
 extension ReceiptTransactionTableViewCell {
-    func configure(_ configuration: ReceiptTransactionCellConfiguration?) {
-        if let configuration = configuration {
-            receiptTypeLabel.text = configuration.type
-            amountLabel.text = configuration.entry == credit
-                ? configuration.amount
-                : String(format: "-%@", configuration.amount)
-            amountLabel.textColor = configuration.entry == credit
-                ? Theme.Amount.creditColor
-                : Theme.Amount.debitColor
-            createdOnLabel.text = configuration.createdOn
-            currencyLabel.text = configuration.currency
-
-            iconColor = configuration.entry == credit ? Theme.Icon.creditColor : Theme.Icon.debitColor
-            iconBackgroundColor = configuration.entry == credit ? Theme.Icon.creditBackgroundColor
-                : Theme.Icon.debitBackgroundColor
-
-            let icon = UIImage.fontIcon(configuration.iconFont,
-                                        Theme.Icon.frame,
-                                        CGFloat(Theme.Icon.size),
-                                        iconColor)
-            imageView?.image = icon
-            imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
+    func configure(_ receipt: HyperwalletReceipt?) {
+        guard let receipt = receipt else {
+            return
         }
+        let entry = receipt.entry.rawValue
+        let createdOn = ISO8601DateFormatter.ignoreTimeZone
+            .date(from: receipt.createdOn)!
+            .format(for: .date)
+
+        let iconFont = HyperwalletIcon.of(receipt.entry.rawValue).rawValue
+
+        receiptTypeLabel.text = receipt.type.rawValue.lowercased().localized()
+
+        amountLabel.text = entry == credit
+            ? receipt.amount
+            : String(format: "-%@", receipt.amount)
+
+        amountLabel.textColor = entry == credit
+            ? Theme.Amount.creditColor
+            : Theme.Amount.debitColor
+
+        createdOnLabel.text = createdOn
+        currencyLabel.text = receipt.currency
+
+        iconColor = entry == credit ? Theme.Icon.creditColor : Theme.Icon.debitColor
+        iconBackgroundColor = entry == credit ? Theme.Icon.creditBackgroundColor
+            : Theme.Icon.debitBackgroundColor
+
+        imageView?.image = UIImage.fontIcon(iconFont,
+                                            Theme.Icon.frame,
+                                            CGFloat(Theme.Icon.size),
+                                            iconColor)
+        imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

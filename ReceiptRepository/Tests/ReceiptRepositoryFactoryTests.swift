@@ -16,28 +16,27 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import HyperwalletSDK
+@testable import ReceiptRepository
+import XCTest
 
-final class ReceiptDetailViewPresenter {
-    private(set) var sectionData = [ReceiptDetailSectionData]()
+class ReceiptRepositoryFactoryTests: XCTestCase {
+    func testReceiptRepositoriesCreated() {
+        let factory = ReceiptRepositoryFactory.shared
 
-    init(with receipt: HyperwalletReceipt) {
-        initializeSections(with: receipt)
+        XCTAssertNotNil(factory, "ReceiptRepositoryFactory instance should not be nil")
+        XCTAssertNoThrow(factory.userReceiptRepository(), "UserReceiptRepository should exists")
+        XCTAssertNoThrow(factory.prepaidCardReceiptRepository(), "PrepaidCardReceiptRepository should exists")
     }
 
-    private func initializeSections(with receipt: HyperwalletReceipt) {
-        let receiptTransactionSection = ReceiptDetailSectionTransactionData(from: receipt)
-        sectionData.append(receiptTransactionSection)
+    func testReceiptRepositoriesCleanedAndRecreated() {
+        let factory = ReceiptRepositoryFactory.shared
 
-        let receiptDetailSection = ReceiptDetailSectionDetailData(from: receipt)
-        sectionData.append(receiptDetailSection)
+        ReceiptRepositoryFactory.clearInstance()
 
-        if let receiptNotesSection = ReceiptDetailSectionNotesData(from: receipt) {
-            sectionData.append(receiptNotesSection)
-        }
+        let recreatedFactory = ReceiptRepositoryFactory.shared
 
-        if let receiptFeeSection = ReceiptDetailSectionFeeData(from: receipt) {
-            sectionData.append(receiptFeeSection)
-        }
-    }
+        XCTAssertNotNil(factory, "Previously created ReceiptRepositoryFactory instance should not be nil")
+        XCTAssertNotNil(recreatedFactory, "Recreated ReceiptRepositoryFactory instance should not be nil")
+        XCTAssertFalse(factory === recreatedFactory, "Factory instances should not be the same")
+   }
 }

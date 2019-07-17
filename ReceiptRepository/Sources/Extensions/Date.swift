@@ -16,28 +16,10 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import HyperwalletSDK
+import Foundation
 
-final class ReceiptDetailViewPresenter {
-    private(set) var sectionData = [ReceiptDetailSectionData]()
-
-    init(with receipt: HyperwalletReceipt) {
-        initializeSections(with: receipt)
-    }
-
-    private func initializeSections(with receipt: HyperwalletReceipt) {
-        let receiptTransactionSection = ReceiptDetailSectionTransactionData(from: receipt)
-        sectionData.append(receiptTransactionSection)
-
-        let receiptDetailSection = ReceiptDetailSectionDetailData(from: receipt)
-        sectionData.append(receiptDetailSection)
-
-        if let receiptNotesSection = ReceiptDetailSectionNotesData(from: receipt) {
-            sectionData.append(receiptNotesSection)
-        }
-
-        if let receiptFeeSection = ReceiptDetailSectionFeeData(from: receipt) {
-            sectionData.append(receiptFeeSection)
-        }
+extension Date {
+    static var yearAgoFromNow: Date? {
+        return Calendar.current.date(byAdding: .year, value: -1, to: Date())
     }
 }

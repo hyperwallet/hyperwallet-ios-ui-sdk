@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6440CD4D22D7269D00072903"
+               BlueprintIdentifier = "643912D322DF40CB00036609"
                BuildableName = "UserRepository.framework"
                BlueprintName = "UserRepository"
                ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
@@ -28,7 +28,7 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6440CD5522D7269D00072903"
+               BlueprintIdentifier = "643912DB22DF40CB00036609"
                BuildableName = "UserRepositoryTests.xctest"
                BlueprintName = "UserRepositoryTests"
                ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
@@ -46,7 +46,7 @@
       <CodeCoverageTargets>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6440CD4D22D7269D00072903"
+            BlueprintIdentifier = "643912D322DF40CB00036609"
             BuildableName = "UserRepository.framework"
             BlueprintName = "UserRepository"
             ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
@@ -57,7 +57,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6440CD5522D7269D00072903"
+               BlueprintIdentifier = "643912DB22DF40CB00036609"
                BuildableName = "UserRepositoryTests.xctest"
                BlueprintName = "UserRepositoryTests"
                ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
@@ -67,7 +67,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6440CD4D22D7269D00072903"
+            BlueprintIdentifier = "643912D322DF40CB00036609"
             BuildableName = "UserRepository.framework"
             BlueprintName = "UserRepository"
             ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
@@ -89,7 +89,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6440CD4D22D7269D00072903"
+            BlueprintIdentifier = "643912D322DF40CB00036609"
             BuildableName = "UserRepository.framework"
             BlueprintName = "UserRepository"
             ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
@@ -107,7 +107,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6440CD4D22D7269D00072903"
+            BlueprintIdentifier = "643912D322DF40CB00036609"
             BuildableName = "UserRepository.framework"
             BlueprintName = "UserRepository"
             ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">

@@ -16,28 +16,14 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import HyperwalletSDK
+#import <UIKit/UIKit.h>
 
-final class ReceiptDetailViewPresenter {
-    private(set) var sectionData = [ReceiptDetailSectionData]()
+//! Project version number for ReceiptRepository.
+FOUNDATION_EXPORT double ReceiptRepositoryVersionNumber;
 
-    init(with receipt: HyperwalletReceipt) {
-        initializeSections(with: receipt)
-    }
+//! Project version string for ReceiptRepository.
+FOUNDATION_EXPORT const unsigned char ReceiptRepositoryVersionString[];
 
-    private func initializeSections(with receipt: HyperwalletReceipt) {
-        let receiptTransactionSection = ReceiptDetailSectionTransactionData(from: receipt)
-        sectionData.append(receiptTransactionSection)
+// In this header, you should import all the public headers of your framework using statements like #import <ReceiptRepository/PublicHeader.h>
 
-        let receiptDetailSection = ReceiptDetailSectionDetailData(from: receipt)
-        sectionData.append(receiptDetailSection)
 
-        if let receiptNotesSection = ReceiptDetailSectionNotesData(from: receipt) {
-            sectionData.append(receiptNotesSection)
-        }
-
-        if let receiptFeeSection = ReceiptDetailSectionFeeData(from: receipt) {
-            sectionData.append(receiptFeeSection)
-        }
-    }
-}
