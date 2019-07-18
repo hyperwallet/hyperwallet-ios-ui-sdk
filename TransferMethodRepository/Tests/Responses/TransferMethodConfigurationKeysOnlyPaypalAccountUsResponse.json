@@ -1,0 +1,37 @@
+{
+    "data": {
+        "countries": {
+            "nodes": [
+                {
+                    "code": "US",
+                    "name": "UNITED STATES",
+                    "currencies": {
+                        "nodes": [
+                            {
+                                "code": "USD",
+                                "name": "USD",
+                                "transferMethodTypes": {
+                                    "nodes": [
+                                        {
+                                            "code": "PAYPAL_ACCOUNT",
+                                            "name": "PayPal Account",
+                                            "fees": {
+                                                "nodes": [
+                                                    {
+                                                        "value": "0.25",
+                                                        "feeRateType": "FLAT",
+                                                        "currency": "USD"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+}

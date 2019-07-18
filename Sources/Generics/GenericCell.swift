@@ -18,6 +18,17 @@
 
 import UIKit
 
+/// Represents the country and currency data to be displyed on the CountryCurrencyCell
+protocol GenericCellConfiguration {
+    var title: String { get }
+    var value: String { get }
+}
+extension GenericCellConfiguration {
+    var identifier: String {
+        return "cell\(title)"
+    }
+}
+
 class GenericCell<ModelType>: UITableViewCell {
     var item: ModelType!
 
