@@ -188,7 +188,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
         let currencyIndex = 1
         let sectionDataCount = 3
         let firstIndexPath = IndexPath(row: 0, section: 0)
-        let invalidIndexPath = IndexPath(row: sectionDataCount + 1, section: 0)
+        let secondIndexPath = IndexPath(row: 1, section: 0)
         let expectation = self.expectation(description: "load transfer methods keys")
         mockView.expectation = expectation
 
@@ -214,12 +214,12 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
         XCTAssertEqual(presenter.sectionData.count, sectionDataCount, "The transferMethodTypesCount should be 3")
         XCTAssertNotNil(presenter.getCellConfiguration(indexPath: firstIndexPath),
                         "The cell configuration should not be nil")
-        XCTAssertNil(presenter.getCellConfiguration(indexPath: invalidIndexPath),
-                     "Out of bounds cell configuration should be nil")
+        XCTAssertNotNil(presenter.getCellConfiguration(indexPath: secondIndexPath),
+                        "The cell configuration should not be nil")
         XCTAssertNotNil(presenter.getCountryCurrencyConfiguration(indexPath: firstIndexPath),
                         "The country currency cell configuration should not be nil")
-        XCTAssertNil(presenter.getCountryCurrencyConfiguration(indexPath: invalidIndexPath),
-                     "Out of bounds country currency configuration should be nil")
+        XCTAssertNotNil(presenter.getCountryCurrencyConfiguration(indexPath: secondIndexPath),
+                        "Out of bounds country currency configuration should not be nil")
     }
 
     private func loadTransferMethodKeys() {
