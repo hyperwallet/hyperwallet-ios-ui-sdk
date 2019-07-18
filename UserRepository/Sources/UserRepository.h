@@ -16,31 +16,14 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import HyperwalletSDK
+#import <UIKit/UIKit.h>
 
-final class CompletionHelper {
-    static func performHandler<T>(
-        _ completion: @escaping (Result<T?, HyperwalletErrorType>) -> Void) -> (T?, HyperwalletErrorType?) -> Void {
-        return {(result, error) in
-            CompletionHelper.performHandler(error, result, completion)
-        }
-    }
+//! Project version number for UserRepository.
+FOUNDATION_EXPORT double UserRepositoryVersionNumber;
 
-    @discardableResult
-    static func performHandler<T>(
-        _ error: HyperwalletErrorType?,
-        _ result: T?,
-        _ completionHandler: @escaping (Result<T?, HyperwalletErrorType>) -> Void) -> T? {
-        if let error = error {
-            DispatchQueue.main.async {
-                completionHandler(.failure(error))
-            }
-        } else {
-            DispatchQueue.main.async {
-                completionHandler(.success(result))
-            }
-            return result
-        }
-        return nil
-    }
-}
+//! Project version string for UserRepository.
+FOUNDATION_EXPORT const unsigned char UserRepositoryVersionString[];
+
+// In this header, you should import all the public headers of your framework using statements like #import <UserRepository/PublicHeader.h>
+
+

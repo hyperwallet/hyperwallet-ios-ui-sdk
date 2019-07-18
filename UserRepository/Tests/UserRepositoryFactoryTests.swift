@@ -16,31 +16,26 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import HyperwalletSDK
+@testable import UserRepository
+import XCTest
 
-final class CompletionHelper {
-    static func performHandler<T>(
-        _ completion: @escaping (Result<T?, HyperwalletErrorType>) -> Void) -> (T?, HyperwalletErrorType?) -> Void {
-        return {(result, error) in
-            CompletionHelper.performHandler(error, result, completion)
-        }
+class UserRepositoryFactoryTests: XCTestCase {
+    func testUserRepositoryCreated() {
+        let factory = UserRepositoryFactory.shared
+
+        XCTAssertNotNil(factory, "UserRepositoryFactory instance should not be nil")
+        XCTAssertNoThrow(factory.userRepository, "UserRepository should exists")
     }
 
-    @discardableResult
-    static func performHandler<T>(
-        _ error: HyperwalletErrorType?,
-        _ result: T?,
-        _ completionHandler: @escaping (Result<T?, HyperwalletErrorType>) -> Void) -> T? {
-        if let error = error {
-            DispatchQueue.main.async {
-                completionHandler(.failure(error))
-            }
-        } else {
-            DispatchQueue.main.async {
-                completionHandler(.success(result))
-            }
-            return result
-        }
-        return nil
+    func testUserRepositoryCleanedAndRecreated() {
+        let factory = UserRepositoryFactory.shared
+
+        UserRepositoryFactory.clearInstance()
+
+        let recreatedFactory = UserRepositoryFactory.shared
+
+        XCTAssertNotNil(factory, "Previously created UserRepositoryFactory instance should not be nil")
+        XCTAssertNotNil(recreatedFactory, "Recreated UserRepositoryFactory instance should not be nil")
+        XCTAssertFalse(factory === recreatedFactory, "Factory instances should not be the same")
     }
 }

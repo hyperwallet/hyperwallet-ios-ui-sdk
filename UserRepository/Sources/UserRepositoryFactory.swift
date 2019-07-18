@@ -16,31 +16,35 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import HyperwalletSDK
+import Foundation
 
-final class CompletionHelper {
-    static func performHandler<T>(
-        _ completion: @escaping (Result<T?, HyperwalletErrorType>) -> Void) -> (T?, HyperwalletErrorType?) -> Void {
-        return {(result, error) in
-            CompletionHelper.performHandler(error, result, completion)
+/// Class contains methods to get an instance of user repository
+public final class UserRepositoryFactory {
+    private static var instance: UserRepositoryFactory?
+    private let remoteUserRepository: UserRepository
+
+    /// Returns the previously initialized instance of the RepositoryFactory object
+    public static var shared: UserRepositoryFactory {
+        guard let instance = instance else {
+            self.instance = UserRepositoryFactory()
+            return self.instance!
         }
+        return instance
     }
 
-    @discardableResult
-    static func performHandler<T>(
-        _ error: HyperwalletErrorType?,
-        _ result: T?,
-        _ completionHandler: @escaping (Result<T?, HyperwalletErrorType>) -> Void) -> T? {
-        if let error = error {
-            DispatchQueue.main.async {
-                completionHandler(.failure(error))
-            }
-        } else {
-            DispatchQueue.main.async {
-                completionHandler(.success(result))
-            }
-            return result
-        }
-        return nil
+    /// Clears the UserRepositoryFactory singleton instance.
+    public static func clearInstance() {
+        instance = nil
+    }
+
+    private init() {
+        remoteUserRepository = RemoteUserRepository()
+    }
+
+    /// Gets an instance of user repository.
+    ///
+    /// - Returns: The UserRepository
+    public func userRepository() -> UserRepository {
+        return remoteUserRepository
     }
 }

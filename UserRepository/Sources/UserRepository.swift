@@ -18,29 +18,39 @@
 
 import HyperwalletSDK
 
-final class CompletionHelper {
-    static func performHandler<T>(
-        _ completion: @escaping (Result<T?, HyperwalletErrorType>) -> Void) -> (T?, HyperwalletErrorType?) -> Void {
-        return {(result, error) in
-            CompletionHelper.performHandler(error, result, completion)
+/// User repository protocol
+public protocol UserRepository {
+    /// Gets the user
+    ///
+    /// - Parameter:
+    /// - completion: the callback handler of responses from the Hyperwallet platform
+    func getUser(completion: @escaping (Result<HyperwalletUser?, HyperwalletErrorType>) -> Void)
+
+    /// Refreshes user
+    func refreshUser()
+}
+
+// MARK: - RemoteUserRepository
+public final class RemoteUserRepository: UserRepository {
+    private var user: HyperwalletUser?
+
+    public func getUser(completion: @escaping (Result<HyperwalletUser?, HyperwalletErrorType>) -> Void) {
+        guard let user = user else {
+            Hyperwallet.shared.getUser(completion: getUserHandler(completion))
+            return
         }
+
+        completion(.success(user))
     }
 
-    @discardableResult
-    static func performHandler<T>(
-        _ error: HyperwalletErrorType?,
-        _ result: T?,
-        _ completionHandler: @escaping (Result<T?, HyperwalletErrorType>) -> Void) -> T? {
-        if let error = error {
-            DispatchQueue.main.async {
-                completionHandler(.failure(error))
-            }
-        } else {
-            DispatchQueue.main.async {
-                completionHandler(.success(result))
-            }
-            return result
+    public func refreshUser() {
+        user = nil
+    }
+
+    private func getUserHandler( _ completion: @escaping (Result<HyperwalletUser?, HyperwalletErrorType>) -> Void)
+        -> (HyperwalletUser?, HyperwalletErrorType?) -> Void {
+        return {(result, error) in
+            self.user = CompletionHelper.performHandler(error, result, completion)
         }
-        return nil
     }
 }
