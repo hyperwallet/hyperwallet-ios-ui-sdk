@@ -43,19 +43,10 @@ extension ReceiptDetailSectionData {
 struct ReceiptDetailSectionTransactionData: ReceiptDetailSectionData {
     var receiptDetailSectionHeader: ReceiptDetailSectionHeader { return .transaction }
     var cellIdentifier: String { return ReceiptTransactionTableViewCell.reuseIdentifier }
-    let tableViewCellConfiguration: ReceiptTransactionCellConfiguration
+    let receipt: HyperwalletReceipt
 
     init(from receipt: HyperwalletReceipt) {
-        tableViewCellConfiguration = ReceiptTransactionCellConfiguration(
-            type: receipt.type.rawValue.lowercased().localized(),
-            entry: receipt.entry.rawValue,
-            amount: receipt.amount,
-            currency: receipt.currency,
-            createdOn: ISO8601DateFormatter
-                .ignoreTimeZone
-                .date(from: receipt.createdOn)!
-                .format(for: .date),
-            iconFont: HyperwalletIcon.of(receipt.entry.rawValue).rawValue)
+        self.receipt = receipt
     }
 }
 
@@ -105,28 +96,33 @@ struct ReceiptDetailSectionFeeData: ReceiptDetailSectionData {
     var rowCount: Int { return rows.count }
     var cellIdentifier: String { return ReceiptFeeTableViewCell.reuseIdentifier }
 
-    init(from receipt: HyperwalletReceipt) {
+    init?(from receipt: HyperwalletReceipt) {
+        guard
+            let stringFee = receipt.fee,
+            let fee = Double(stringFee),
+            fee != 0.0,
+            let amount = Double(receipt.amount) else {
+                return nil
+        }
+
         let amountFormat = receipt.entry == HyperwalletReceipt.HyperwalletEntryType.credit ? "%@ %@" : "-%@ %@"
         let valueCurrencyFormat = "%@ %@"
+
         rows.append(ReceiptDetailRow(title: "receipt_details_amount".localized(),
                                      value: String(format: amountFormat, receipt.amount, receipt.currency),
                                      field: "amount"))
-        var fee: Double = 0.0
-        if let strFee = receipt.fee {
-            rows.append(ReceiptDetailRow(title: "receipt_details_fee".localized(),
-                                         value: String(format: valueCurrencyFormat, strFee, receipt.currency),
-                                         field: "fee"))
-            fee = Double(strFee) ?? 0.0
-        }
-        if let amount = Double(receipt.amount) {
-            let transaction: Double = amount - fee
-            let transactionFormat = getTransactionFormat(basedOn: receipt.amount)
-            rows.append(ReceiptDetailRow(title: "receipt_details_transaction".localized(),
-                                         value: String(format: valueCurrencyFormat,
-                                                       String(format: transactionFormat, transaction),
-                                                       receipt.currency),
-                                         field: "transaction"))
-        }
+
+        rows.append(ReceiptDetailRow(title: "receipt_details_fee".localized(),
+                                     value: String(format: valueCurrencyFormat, stringFee, receipt.currency),
+                                     field: "fee"))
+
+        let transaction: Double = amount - fee
+        let transactionFormat = getTransactionFormat(basedOn: receipt.amount)
+        rows.append(ReceiptDetailRow(title: "receipt_details_transaction".localized(),
+                                     value: String(format: valueCurrencyFormat,
+                                                   String(format: transactionFormat, transaction),
+                                                   receipt.currency),
+                                     field: "transaction"))
     }
 
     private func getTransactionFormat(basedOn value: String) -> String {

@@ -22,7 +22,7 @@ import HyperwalletSDK
 public protocol UserRepository {
     /// Gets the user
     ///
-    /// - Parameters:
+    /// - Parameter:
     /// - completion: the callback handler of responses from the Hyperwallet platform
     func getUser(completion: @escaping (Result<HyperwalletUser?, HyperwalletErrorType>) -> Void)
 
@@ -32,10 +32,10 @@ public protocol UserRepository {
 
 // MARK: - RemoteUserRepository
 public final class RemoteUserRepository: UserRepository {
-    private var cachedUser: HyperwalletUser?
+    private var user: HyperwalletUser?
 
     public func getUser(completion: @escaping (Result<HyperwalletUser?, HyperwalletErrorType>) -> Void) {
-        guard let user = cachedUser else {
+        guard let user = user else {
             Hyperwallet.shared.getUser(completion: getUserHandler(completion))
             return
         }
@@ -44,37 +44,13 @@ public final class RemoteUserRepository: UserRepository {
     }
 
     public func refreshUser() {
-        cachedUser = nil
+        user = nil
     }
-}
 
-private extension RemoteUserRepository {
-    func getUserHandler(
-        _ completion: @escaping (Result<HyperwalletUser?, HyperwalletErrorType>) -> Void)
+    private func getUserHandler( _ completion: @escaping (Result<HyperwalletUser?, HyperwalletErrorType>) -> Void)
         -> (HyperwalletUser?, HyperwalletErrorType?) -> Void {
-            return {(result, error) in
-                self.cachedUser = self.performCompletion(error,
-                                                         result,
-                                                         completion,
-                                                         self.cachedUser)
-            }
-    }
-
-    private func performCompletion<T>(_ error: HyperwalletErrorType?,
-                                      _ result: T?,
-                                      _ completionHandler: @escaping (Result<T?, HyperwalletErrorType>) -> Void,
-                                      _ repositoryOriginalValue: T?) -> T? {
-        if let error = error {
-            DispatchQueue.main.async {
-                completionHandler(.failure(error))
-            }
-        } else {
-            DispatchQueue.main.async {
-                completionHandler(.success(result))
-            }
-            return result
+        return {(result, error) in
+            self.user = CompletionHelper.performHandler(error, result, completion)
         }
-
-        return repositoryOriginalValue
     }
 }

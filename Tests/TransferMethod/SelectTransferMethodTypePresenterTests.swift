@@ -90,7 +90,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isHideLoadingPerformed, "The hideLoading should be performed")
         XCTAssertTrue(mockView.isShowAlertPerformed, "The showAlert should not be performed")
 
-        XCTAssertEqual(mockView.alertMessage!, "There is no country available")
+        XCTAssertEqual(mockView.alertMessages[0], "There is no country available")
     }
 
     func testLoadTransferMethodKeys_returnsNoCurrencies() {
@@ -112,7 +112,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isHideLoadingPerformed, "The hideLoading should be performed")
         XCTAssertTrue(mockView.isShowAlertPerformed, "The showAlert should not be performed")
 
-        XCTAssertEqual(mockView.alertMessage!, "There is no currency available for country United States")
+        XCTAssertEqual(mockView.alertMessages[0], "There is no currency available for country United States")
     }
 
     func testLoadTransferMethodKeys_returnsNoTransferMethodTypes() {
@@ -134,7 +134,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isHideLoadingPerformed, "The hideLoading should be performed")
         XCTAssertTrue(mockView.isShowAlertPerformed, "The showAlert should not be performed")
 
-        XCTAssertEqual(mockView.alertMessage!, "There is no transfer method available for US and USD")
+        XCTAssertEqual(mockView.alertMessages[0], "There is no transfer method available for US and USD")
     }
 
     func testLoadTransferMethodKeys_failureWithError() {
@@ -186,6 +186,9 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
 
         let countryIndex = 0
         let currencyIndex = 1
+        let sectionDataCount = 3
+        let firstIndexPath = IndexPath(row: 0, section: 0)
+        let secondIndexPath = IndexPath(row: 0, section: 0)
         let expectation = self.expectation(description: "load transfer methods keys")
         mockView.expectation = expectation
 
@@ -208,13 +211,13 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
 
         XCTAssertEqual(mockView.profileType!, "BUSINESS", "The profileType should be BUSINESS")
         XCTAssertEqual(presenter.countryCurrencySectionData.count, 2, "The countryCurrencyCount should be 2")
-        XCTAssertEqual(presenter.sectionData.count, 3, "The transferMethodTypesCount should be 3")
-        XCTAssertNotNil(presenter.getCellConfiguration(indexPath: IndexPath(row: 0, section: 0)),
+        XCTAssertEqual(presenter.sectionData.count, sectionDataCount, "The transferMethodTypesCount should be 3")
+        XCTAssertNotNil(presenter.getCellConfiguration(indexPath: firstIndexPath),
                         "The cell configuration should not be nil")
-        XCTAssertNotNil(presenter.getCountryCurrencyConfiguration(indexPath: IndexPath(row: 0, section: 0)),
-                        "The country cell configuration should not be nil")
-        XCTAssertNotNil(presenter.getCountryCurrencyConfiguration(indexPath: IndexPath(row: 1, section: 0)),
+        XCTAssertNotNil(presenter.getCountryCurrencyConfiguration(indexPath: secondIndexPath),
                         "The currency cell configuration should not be nil")
+        XCTAssertNotNil(presenter.getCountryCurrencyConfiguration(indexPath: firstIndexPath),
+                        "The country currency cell configuration should not be nil")
     }
 
     private func loadTransferMethodKeys() {
@@ -265,7 +268,7 @@ class MockSelectTransferMethodTypeView: SelectTransferMethodTypeView {
     var isTransferMethodTypeTableViewReloadDataPerformed = false
     var isCountryCurrencyTableViewReloadDataPerformed = false
     var ignoreXCTestExpectation = false
-    var alertMessage: String?
+    var alertMessages = [String]()
     var profileType: String?
 
     var expectation: XCTestExpectation?
@@ -280,7 +283,7 @@ class MockSelectTransferMethodTypeView: SelectTransferMethodTypeView {
         isTransferMethodTypeTableViewReloadDataPerformed = false
         isCountryCurrencyTableViewReloadDataPerformed = false
         ignoreXCTestExpectation = false
-        alertMessage = nil
+        alertMessages = [String]()
         profileType = nil
 
         expectation = nil
@@ -318,7 +321,9 @@ class MockSelectTransferMethodTypeView: SelectTransferMethodTypeView {
 
     func showAlert(message: String?) {
         isShowAlertPerformed = true
-        alertMessage = message
+        if let alertMessage = message {
+            alertMessages.append(alertMessage)
+        }
     }
 
     func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {

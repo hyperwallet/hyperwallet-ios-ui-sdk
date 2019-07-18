@@ -46,6 +46,7 @@ public final class AddTransferMethodTableViewController: UITableViewController {
     private var spinnerView: SpinnerView?
     private var presenter: AddTransferMethodPresenter!
     private var widgets = [AbstractWidget]()
+    private var isCalledByScrollToRow = false
     // MARK: - Button -
     private lazy var createAccountButton: UIButton = {
         let button = UIButton()
@@ -89,7 +90,7 @@ public final class AddTransferMethodTableViewController: UITableViewController {
     ///   - country: The 2 letter ISO 3166-1 country code.
     ///   - currency: The 3 letter ISO 4217-1 currency code.
     ///   - profileType: The profile type. Possible values - INDIVIDUAL, BUSINESS.
-    ///   - transferMethodTypeCode: The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD.
+    ///   - transferMethodTypeCode: The transfer method type.
     init(_ country: String,
          _ currency: String,
          _ profileType: String,
@@ -260,6 +261,7 @@ extension AddTransferMethodTableViewController: AddTransferMethodView {
             if isCellVisibile(indexPath) {
                 focusField(in: section)
             } else {
+                isCalledByScrollToRow = true
                 tableView.scrollToRow(at: indexPath, at: .top, animated: true)
             }
         }
@@ -268,8 +270,9 @@ extension AddTransferMethodTableViewController: AddTransferMethodView {
     override public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         // update footer once scroll ends
         if let section = getSectionContainingFocusedField() {
-            if isCellVisibile(getIndexPath(for: section)) {
+            if isCellVisibile(getIndexPath(for: section)) && isCalledByScrollToRow {
                 focusField(in: section)
+                isCalledByScrollToRow = false
             }
         }
     }
@@ -381,10 +384,10 @@ extension AddTransferMethodTableViewController: AddTransferMethodView {
 
     private func updateFooterView(_ footerView: UITableViewHeaderFooterView, for section: Int) {
         UIView.setAnimationsEnabled(false)
-        self.tableView.beginUpdates()
+        tableView.beginUpdates()
         footerView.textLabel?.text = presenter.sectionData[section].errorMessage
         footerView.sizeToFit()
-        self.tableView.endUpdates()
+        tableView.endUpdates()
         UIView.setAnimationsEnabled(true)
     }
 
@@ -415,7 +418,7 @@ extension AddTransferMethodTableViewController: AddTransferMethodView {
     }
 
     private func addInfoSection(_ transferMethodType: HyperwalletTransferMethodType) {
-        guard transferMethodType.fees != nil || transferMethodType.processingTime != nil else {
+        guard transferMethodType.fees != nil || transferMethodType.processingTimes?.nodes?.first != nil else {
             return
         }
 

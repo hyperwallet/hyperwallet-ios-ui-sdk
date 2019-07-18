@@ -55,16 +55,16 @@ class ListReceiptPresenterTests: XCTestCase {
         XCTAssertEqual(presenter.sectionData.last?.value.count,
                        2,
                        "The receipt number of the last group should be 2")
-        let indexPath = IndexPath(row: 0, section: 0)
-        let firstCellConfiguration = presenter.getCellConfiguration(indexPath: indexPath)
-        XCTAssertNotNil(firstCellConfiguration, "firstCellConfiguration should not be nil")
-        XCTAssertEqual(firstCellConfiguration?.amount, "5.00", "The amount should be 5.00")
-        XCTAssertEqual(firstCellConfiguration?.type, "Payment", "The type should be Payment")
-        XCTAssertEqual(firstCellConfiguration?.createdOn,
-                       "May 24, 2019",
-                       "The created on should be May 24, 2019")
-        XCTAssertEqual(firstCellConfiguration?.currency, "USD", "The currency should be USD")
-        XCTAssertEqual(firstCellConfiguration?.entry, "CREDIT", "The entry should be CREDIT")
+//        let indexPath = IndexPath(row: 0, section: 0)
+        let firstReceipt = presenter.sectionData[0].value[0]
+        XCTAssertNotNil(firstReceipt, "firstCellConfiguration should not be nil")
+        XCTAssertEqual(firstReceipt.amount, "5.00", "The amount should be 5.00")
+        XCTAssertEqual(firstReceipt.type.rawValue.lowercased().localized(), "Payment", "The type should be Payment")
+        XCTAssertEqual(firstReceipt.createdOn,
+                       "2019-05-24T17:35:20",
+                       "The created on should be 2019-05-24T17:35:20")
+        XCTAssertEqual(firstReceipt.currency, "USD", "The currency should be USD")
+        XCTAssertEqual(firstReceipt.entry.rawValue, "CREDIT", "The entry should be CREDIT")
 
         // Load more receipts
         // Given

@@ -50,7 +50,7 @@ public protocol TransferMethodConfigurationRepository {
 
 // MARK: - RemoteTransferMethodConfigurationRepository
 public final class RemoteTransferMethodConfigurationRepository: TransferMethodConfigurationRepository {
-    private var transferMethodConfigurationFieldsCache =
+    private var transferMethodConfigurationFieldsDictionary =
         [HyperwalletTransferMethodConfigurationFieldQuery: HyperwalletTransferMethodConfigurationField]()
     private var transferMethodConfigurationKeys: HyperwalletTransferMethodConfigurationKey?
 
@@ -66,7 +66,7 @@ public final class RemoteTransferMethodConfigurationRepository: TransferMethodCo
             transferMethodType: transferMethodType,
             profile: transferMethodProfileType
         )
-        guard let transferMethodConfigurationFields = transferMethodConfigurationFieldsCache[fieldsQuery] else {
+        guard let transferMethodConfigurationFields = transferMethodConfigurationFieldsDictionary[fieldsQuery] else {
             Hyperwallet.shared
                 .retrieveTransferMethodConfigurationFields(request: fieldsQuery,
                                                            completion: getFieldsHandler(fieldsQuery, completion))
@@ -87,7 +87,7 @@ public final class RemoteTransferMethodConfigurationRepository: TransferMethodCo
     }
 
     public func refreshFields() {
-        transferMethodConfigurationFieldsCache =
+        transferMethodConfigurationFieldsDictionary =
             [HyperwalletTransferMethodConfigurationFieldQuery: HyperwalletTransferMethodConfigurationField]()
     }
 
@@ -99,8 +99,7 @@ public final class RemoteTransferMethodConfigurationRepository: TransferMethodCo
         _ completion: @escaping (Result<HyperwalletTransferMethodConfigurationKey?, HyperwalletErrorType>) -> Void)
         -> (HyperwalletTransferMethodConfigurationKey?, HyperwalletErrorType?) -> Void {
         return { (result, error) in
-            self.transferMethodConfigurationKeys = CompletionHelper
-                .performCompletion(error, result, completion, self.transferMethodConfigurationKeys)
+            self.transferMethodConfigurationKeys = CompletionHelper.performHandler(error, result, completion)
         }
     }
 
@@ -109,11 +108,8 @@ public final class RemoteTransferMethodConfigurationRepository: TransferMethodCo
         _ completion: @escaping (Result<HyperwalletTransferMethodConfigurationField?, HyperwalletErrorType>) -> Void)
         -> (HyperwalletTransferMethodConfigurationField?, HyperwalletErrorType?) -> Void {
         return { (result, error) in
-            self.transferMethodConfigurationFieldsCache[fieldQuery] = CompletionHelper
-                .performCompletion(error,
-                                   result,
-                                   completion,
-                                   self.transferMethodConfigurationFieldsCache[fieldQuery])
+            self.transferMethodConfigurationFieldsDictionary[fieldQuery] = CompletionHelper
+                .performHandler(error, result, completion)
         }
     }
 }

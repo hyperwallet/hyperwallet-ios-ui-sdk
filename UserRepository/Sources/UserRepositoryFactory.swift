@@ -18,7 +18,7 @@
 
 import Foundation
 
-/// The extension of RepositoryFactory with the UserRepository feature
+/// Class contains methods to get an instance of user repository
 public final class UserRepositoryFactory {
     private static var instance: UserRepositoryFactory?
     private let remoteUserRepository: UserRepository
@@ -32,7 +32,7 @@ public final class UserRepositoryFactory {
         return instance
     }
 
-    /// Clears the RepositoryFactory singleton instance.
+    /// Clears the UserRepositoryFactory singleton instance.
     public static func clearInstance() {
         instance = nil
     }
@@ -41,7 +41,7 @@ public final class UserRepositoryFactory {
         remoteUserRepository = RemoteUserRepository()
     }
 
-    /// Gets an instance of transfer method configuration repository.
+    /// Gets an instance of user repository.
     ///
     /// - Returns: The UserRepository
     public func userRepository() -> UserRepository {
