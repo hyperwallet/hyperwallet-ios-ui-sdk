@@ -186,6 +186,9 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
 
         let countryIndex = 0
         let currencyIndex = 1
+        let sectionDataCount = 3
+        let firstIndexPath = IndexPath(row: 0, section: 0)
+        let secondIndexPath = IndexPath(row: 0, section: 0)
         let expectation = self.expectation(description: "load transfer methods keys")
         mockView.expectation = expectation
 
@@ -208,13 +211,13 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
 
         XCTAssertEqual(mockView.profileType!, "BUSINESS", "The profileType should be BUSINESS")
         XCTAssertEqual(presenter.countryCurrencySectionData.count, 2, "The countryCurrencyCount should be 2")
-        XCTAssertEqual(presenter.sectionData.count, 3, "The transferMethodTypesCount should be 3")
-        XCTAssertNotNil(presenter.getCellConfiguration(indexPath: IndexPath(row: 0, section: 0)),
+        XCTAssertEqual(presenter.sectionData.count, sectionDataCount, "The transferMethodTypesCount should be 3")
+        XCTAssertNotNil(presenter.getCellConfiguration(indexPath: firstIndexPath),
                         "The cell configuration should not be nil")
-        XCTAssertNotNil(presenter.getCountryCurrencyConfiguration(indexPath: IndexPath(row: 0, section: 0)),
-                        "The country cell configuration should not be nil")
-        XCTAssertNotNil(presenter.getCountryCurrencyConfiguration(indexPath: IndexPath(row: 1, section: 0)),
+        XCTAssertNotNil(presenter.getCountryCurrencyConfiguration(indexPath: secondIndexPath),
                         "The currency cell configuration should not be nil")
+        XCTAssertNotNil(presenter.getCountryCurrencyConfiguration(indexPath: firstIndexPath),
+                        "The country currency cell configuration should not be nil")
     }
 
     private func loadTransferMethodKeys() {

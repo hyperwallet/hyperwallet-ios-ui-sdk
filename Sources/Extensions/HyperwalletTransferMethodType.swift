@@ -34,7 +34,7 @@ extension HyperwalletTransferMethodType {
         }
 
         // Processing Time
-        if let processingTime = self.processingTime, !processingTime.isEmpty {
+        if let processingTimeValue = self.processingTimes?.nodes?.first?.value, !processingTimeValue.isEmpty {
             var processingTimeLabel = ""
 
             if attributedText.length > 0 {
@@ -45,7 +45,7 @@ extension HyperwalletTransferMethodType {
                                          "add_transfer_method_processing_time_label".localized())
 
             attributedText.append(value: processingTimeLabel, font: Theme.Label.captionOne, color: color)
-            attributedText.append(value: processingTime, font: Theme.Label.captionOneMedium, color: color)
+            attributedText.append(value: processingTimeValue, font: Theme.Label.captionOneMedium, color: color)
         }
 
         return attributedText

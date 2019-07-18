@@ -2329,9 +2329,13 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				INFOPLIST_FILE = UserRepository/Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2350,9 +2354,13 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				INFOPLIST_FILE = UserRepository/Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2371,9 +2379,13 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				INFOPLIST_FILE = UserRepository/Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
