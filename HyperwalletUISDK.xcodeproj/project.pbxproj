@@ -2321,6 +2321,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ios.UserRepositoryTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2342,6 +2343,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ios.UserRepositoryTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2363,6 +2365,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ios.UserRepositoryTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
