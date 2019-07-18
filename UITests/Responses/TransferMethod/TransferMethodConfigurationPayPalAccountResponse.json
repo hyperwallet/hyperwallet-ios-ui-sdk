@@ -51,7 +51,16 @@
                                         {
                                             "code": "PAYPAL_ACCOUNT",
                                             "name": "PayPal Account",
-                                            "processingTime" : "1-2 Business days",
+                                            "processingTimes": {
+                                                "nodes": [
+                                                    {
+                                                        "value": "1-2 Business days",
+                                                        "country": "US",
+                                                        "currency": "USD",
+                                                        "transferMethodType": "PAYPAL_ACCOUNT"
+                                                    }
+                                                ]
+                                            },
                                             "fees": {
                                                 "nodes": [
                                                     {
