@@ -19,7 +19,8 @@
 import UIKit
 
 /// The `ThemeManager` class is responsible for applying the visual styles to the Hyperwallet user interface components.
-@objcMembers public class ThemeManager: NSObject {
+@objcMembers
+public class ThemeManager: NSObject {
     /// Applies default visual styles to the Hyperwallet user interface components.
     public static func applyTheme() {
         applyToUINavigationBar()
