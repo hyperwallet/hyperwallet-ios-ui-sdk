@@ -135,11 +135,8 @@ extension SelectTransferMethodTypeTableViewController: SelectTransferMethodTypeV
                                                currency: String,
                                                profileType: String,
                                                transferMethodTypeCode: String) {
-        // TODO: Review
-        let addTransferMethodController = AddTransferMethodTableViewController(country, currency, profileType, transferMethodTypeCode, forceUpdate)
-
-//            HyperwalletUI.shared
-//            .addTransferMethodTableViewController(country, currency, profileType, transferMethodTypeCode, forceUpdate)
+        let addTransferMethodController = HyperwalletUI.shared
+            .addTransferMethodTableViewController(country, currency, profileType, transferMethodTypeCode, forceUpdate)
 
         addTransferMethodController.createTransferMethodHandler = { (transferMethod) -> Void in
             self.createTransferMethodHandler?(transferMethod)

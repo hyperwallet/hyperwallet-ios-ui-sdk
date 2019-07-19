@@ -25,14 +25,6 @@ public class ThemeManager {
         applyToUINavigationBar()
         applyToProcessingView()
         applyToSpinnerView()
-        //TODO: move the methods to the new modules
-//        applyToCountryCurrencyCell()
-//        applyToSelectionWidgetCell()
-//        applyToListTransferMethodTableViewCell()
-//        applyToSelectTransferMethodTypeCell()
-//        applyToReceiptDetailTableViewCell()
-//        applyToReceiptFeeTableViewCell()
-//        applyToReceiptNotesTableViewCell()
         registerFonts
     }
 
@@ -113,59 +105,7 @@ public class ThemeManager {
         proxy.activityIndicatorBackgroundColor = Theme.SpinnerView.backgroundColor
         proxy.viewBackgroundColor = Theme.SpinnerView.backgroundColor
     }
-/*
-    private static func applyToCountryCurrencyCell() {
-        let proxy = CountryCurrencyCell.appearance()
-        proxy.titleLabelFont = Theme.Label.bodyFont
-        proxy.titleLabelColor = Theme.Label.color
-        proxy.valueLabelFont = Theme.Label.bodyFont
-        proxy.valueLabelColor = Theme.Label.subTitleColor
-    }
 
-    private static func applyToSelectionWidgetCell() {
-        let proxy = SelectionWidgetCell.appearance()
-        proxy.textLabelColor = Theme.Label.color
-        proxy.textLabelFont = Theme.Label.bodyFont
-    }
-
-    private static func applyToListTransferMethodTableViewCell() {
-        let proxy = ListTransferMethodTableViewCell.appearance()
-        proxy.titleLabelFont = Theme.Label.bodyFontMedium
-        proxy.titleLabelColor = Theme.Label.color
-        proxy.subTitleLabelFont = Theme.Label.captionOne
-        proxy.subTitleLabelColor = Theme.Label.subTitleColor
-    }
-
-    private static func applyToSelectTransferMethodTypeCell() {
-        let proxy = SelectTransferMethodTypeCell.appearance()
-        proxy.titleLabelFont = Theme.Label.bodyFontMedium
-        proxy.titleLabelColor = Theme.Label.color
-        proxy.subTitleLabelFont = Theme.Label.captionOne
-        proxy.subTitleLabelColor = Theme.Label.subTitleColor
-    }
-
-    private static func applyToReceiptDetailTableViewCell() {
-        let proxy = ReceiptDetailTableViewCell.appearance()
-        proxy.titleLabelFont = Theme.Label.footnoteFont
-        proxy.titleLabelColor = Theme.Label.subTitleColor
-        proxy.subTitleLabelFont = Theme.Label.footnoteFont
-        proxy.subTitleLabelColor = Theme.Label.subTitleColor
-    }
-
-    private static func applyToReceiptFeeTableViewCell() {
-        let proxy = ReceiptFeeTableViewCell.appearance()
-        proxy.titleLabelFont = Theme.Label.footnoteFont
-        proxy.titleLabelColor = Theme.Label.subTitleColor
-        proxy.subTitleLabelFont = Theme.Label.footnoteFont
-        proxy.subTitleLabelColor = Theme.Label.subTitleColor
-    }
-
-    private static func applyToReceiptNotesTableViewCell() {
-        let proxy = ReceiptNotesTableViewCell.appearance()
-        proxy.titleLabelFont = Theme.Label.footnoteFont
-        proxy.titleLabelColor = Theme.Label.subTitleColor
-    }
-*/
     private static let registerFonts: Void = {
         UIFont.register("icomoon", type: "ttf")
     }()

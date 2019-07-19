@@ -109,9 +109,7 @@ public final class ListTransferMethodTableViewController: UITableViewController 
     }
 
     private func addTransferMethod() {
-        //TODO: Review
-        let controller = SelectTransferMethodTypeTableViewController(forceUpdate: false)
-             // HyperwalletUI.shared.selectTransferMethodTypeTableViewController()
+        let controller = HyperwalletUI.shared.selectTransferMethodTypeTableViewController()
         controller.createTransferMethodHandler = {
             [weak self] (transferMethod: HyperwalletTransferMethod) -> Void in
             // refresh transfer method list
