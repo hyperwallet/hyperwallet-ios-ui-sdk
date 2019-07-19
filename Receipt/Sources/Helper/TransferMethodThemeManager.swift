@@ -20,10 +20,9 @@
 import Common
 #endif
 
-public class TransferMethodThemeManager {
+extension ThemeManager {
     /// Applies default visual styles to the Hyperwallet user interface components.
-    public static func applyTheme() {
-        ThemeManager.applyTheme()
+    public static func applyTransferMethodTheme() {
         applyToCountryCurrencyCell()
         applyToSelectionWidgetCell()
         applyToListTransferMethodTableViewCell()
