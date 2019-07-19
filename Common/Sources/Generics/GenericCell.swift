@@ -26,6 +26,7 @@ public protocol GenericCellConfiguration {
     var value: String { get }
 }
 extension GenericCellConfiguration {
+    /// The cell identifier
     public var identifier: String {
         return "cell\(title)"
     }

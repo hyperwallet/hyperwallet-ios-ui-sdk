@@ -18,9 +18,10 @@
 
 import UIKit
 
+/// The UIBarButtonItem extension
 public extension UIBarButtonItem {
     /// Override the text of back button  
-    public static var back: UIBarButtonItem = {
+    static var back: UIBarButtonItem = {
         UIBarButtonItem(title: "Back".localized(), style: .plain, target: self, action: nil)
     }()
 }

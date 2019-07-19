@@ -18,10 +18,15 @@
 
 import UIKit
 
+/// The UIAlertAction extension
 public extension UIAlertAction {
+    /// The default cancel button label
     static let cancel = "cancel_button_label".localized()
+    /// The default retry button label
     static let retry = "try_again_button_label".localized()
+    /// The default close button label
     static let close = "ok_button_label".localized()
+    /// The default remove button label
     static let remove = "remove_button_label".localized()
 
     /// Initialize a cancel alert action

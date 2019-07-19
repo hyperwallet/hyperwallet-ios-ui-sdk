@@ -18,6 +18,7 @@
 
 import UIKit
 
+/// The UIView extension
 public extension UIView {
     /// Top Anchor
     var safeAreaTopAnchor: NSLayoutYAxisAnchor {
@@ -58,7 +59,7 @@ public extension UIView {
     ///
     /// - parameter: format - The value should follow the visual format language
     /// - views
-    public func addConstraintsWithFormat(format: String, views: UIView...) {
+    func addConstraintsWithFormat(format: String, views: UIView...) {
         var viewsDict = [String: UIView]()
 
         for (index, view) in views.enumerated() {
@@ -73,13 +74,13 @@ public extension UIView {
     }
 
     /// Fill entire view to the super view
-    public func addConstraintsFillEntireView(view: UIView) {
+    func addConstraintsFillEntireView(view: UIView) {
         addConstraintsWithFormat(format: "H:|[v0]|", views: view)
         addConstraintsWithFormat(format: "V:|[v0]|", views: view)
     }
 
     /// Defines fixed constraint validation to the attribute
-    public func setConstraint(value: CGFloat, attribute: NSLayoutConstraint.Attribute) {
+    func setConstraint(value: CGFloat, attribute: NSLayoutConstraint.Attribute) {
         let constraint = NSLayoutConstraint(item: self,
                                             attribute: attribute,
                                             relatedBy: .equal,
@@ -90,6 +91,10 @@ public extension UIView {
         addConstraint(constraint)
     }
 
+    /// Setups the empty list with message
+    ///
+    /// - Parameter text: the string description
+    /// - Returns: the UILabel instance
     func setUpEmptyListLabel(text: String) -> UILabel {
         let emptyListLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 268, height: 20.5))
         emptyListLabel.text = text
@@ -128,6 +133,12 @@ public extension UIView {
         return emptyListLabel
     }
 
+    /// Setups the empty list with button
+    ///
+    /// - Parameters:
+    ///   - text: the button text
+    ///   - firstItem: the UIVIew to anchor the button
+    /// - Returns: the UIButton instance
     func setUpEmptyListButton(text: String, firstItem: UIView) -> UIButton {
         let emptyListButton = UIButton(type: .system)
         emptyListButton.setTitle(text, for: .normal)

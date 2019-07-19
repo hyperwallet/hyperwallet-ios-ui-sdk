@@ -16,41 +16,12 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import UIKit
+import Foundation
 
-/// The UIColor extension
-public extension UIColor {
-    /// Inits based on the RBG values
-    ///
-    /// - Parameters:
-    ///   - red: the red value
-    ///   - green: the green value
-    ///   - blue: the blue value
-    ///   - alpha: the alpha value
-    convenience init(red: Int, green: Int, blue: Int, alpha: CGFloat = 1.0) {
-        assert((0...255).contains(red), "Invalid red component")
-        assert((0...255).contains(green), "Invalid green component")
-        assert((0...255).contains(blue), "Invalid blue component")
-
-        self.init(
-            red: CGFloat(red) / 255.0,
-            green: CGFloat(green) / 255.0,
-            blue: CGFloat(blue) / 255.0,
-            alpha: alpha
-        )
-    }
-
-    /// Inits based on the RBG values
-    ///
-    /// - Parameters:
-    ///   - rgb: the RGB int value
-    ///   - alpha: the alpha value
-    convenience init(rgb: Int, alpha: CGFloat = 1.0) {
-        self.init(
-            red: (rgb >> 16) & 0xFF,
-            green: (rgb >> 8) & 0xFF,
-            blue: rgb & 0xFF,
-            alpha: alpha
-        )
+/// The Array extension
+public extension Array {
+    /// A Boolean value indicating whether the collection is not empty.
+    var isNotEmpty: Bool {
+        return !self.isEmpty
     }
 }

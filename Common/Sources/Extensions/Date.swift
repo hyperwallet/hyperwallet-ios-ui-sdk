@@ -18,7 +18,13 @@
 
 import Foundation
 
+/// The Date extension
 public extension Date {
+    /// The Date type format
+    ///
+    /// - date: The yMMMd format
+    /// - dateTime: The yMMMEdjm format
+    // swiftlint:disable missing_docs
     enum DateFormatMode {
         case date
         case dateTime

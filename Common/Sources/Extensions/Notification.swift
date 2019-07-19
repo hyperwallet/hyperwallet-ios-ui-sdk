@@ -18,16 +18,17 @@
 
 import Foundation
 
+/// The Notification extension
 public extension Notification.Name {
     /// Posted when a new transfer method (bank account, bank card, PayPal account, prepaid card, paper check)
     /// has been created.
-    public static var transferMethodAdded: Notification.Name {
+    static var transferMethodAdded: Notification.Name {
         return .init(rawValue: "transferMethodAdded")
     }
 
     /// Posted when a transfer method (bank account, bank card, PayPal account, prepaid card, paper check)
     /// has been deactivated.
-    public static var transferMethodDeactivated: Notification.Name {
+    static var transferMethodDeactivated: Notification.Name {
         return .init(rawValue: "transferMethodDeactivated")
     }
 }

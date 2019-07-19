@@ -129,7 +129,7 @@ final class SelectTransferMethodTypePresenter {
                 strongSelf.transferMethodConfigurationRepository
                     .getKeys(completion: strongSelf.getKeysHandler(
                         success: { (result) in
-                            guard let countries = result?.countries(), countries.isNotEmpty()  else {
+                            guard let countries = result?.countries(), countries.isNotEmpty  else {
                                 strongSelf.view.showAlert(message: "no_country_available_error_message".localized())
                                 return
                             }
@@ -274,7 +274,7 @@ final class SelectTransferMethodTypePresenter {
     private func loadTransferMethodTypes(_ keys: HyperwalletTransferMethodConfigurationKey?) {
         guard let transferMethodTypes = keys?.transferMethodTypes(countryCode: selectedCountry,
                                                                   currencyCode: selectedCurrency),
-            transferMethodTypes.isNotEmpty()  else {
+            transferMethodTypes.isNotEmpty  else {
             view.showAlert(message: String(format: "no_transfer_method_available_error_message".localized(),
                                            selectedCountry,
                                            selectedCurrency))

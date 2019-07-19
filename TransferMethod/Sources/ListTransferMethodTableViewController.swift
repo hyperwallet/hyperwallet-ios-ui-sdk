@@ -179,7 +179,7 @@ extension ListTransferMethodTableViewController: ListTransferMethodView {
     }
 
     func showTransferMethods() {
-        if presenter.sectionData.isNotEmpty() {
+        if presenter.sectionData.isNotEmpty {
             toggleEmptyListView()
         } else {
             addAccountButton.addTarget(self, action: #selector(didTapAddButton), for: .touchUpInside)

@@ -128,8 +128,9 @@ public final class ListReceiptTableViewController: UITableViewController {
 
 // MARK: `ListReceiptView` delegate
 extension ListReceiptTableViewController: ListReceiptView {
+    /// Loads the receipts
     func loadReceipts() {
-        if presenter.sectionData.isNotEmpty() {
+        if presenter.sectionData.isNotEmpty {
             toggleEmptyListView(hideLabel: true)
         } else {
             toggleEmptyListView(hideLabel: false)

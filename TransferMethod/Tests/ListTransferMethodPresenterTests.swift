@@ -66,7 +66,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isShowTransferMethodsPerformed, "The showTransferMethods should be performed")
 
         XCTAssertTrue(presenter.transferMethodExists(at: 0), "The transferMethodExists should return true")
-        XCTAssertTrue(presenter.sectionData.isNotEmpty(), "The sectionData should not be empty")
+        XCTAssertTrue(presenter.sectionData.isNotEmpty, "The sectionData should not be empty")
         XCTAssertNotNil(presenter.sectionData[0],
                         "The cell configuration should not be nil")
     }
@@ -119,7 +119,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
     func testDeactivateBankAccount_success() {
         // Given
         loadMockTransfermethods()
-        XCTAssertTrue(presenter.sectionData.isNotEmpty(), "sectionData should not be empty")
+        XCTAssertTrue(presenter.sectionData.isNotEmpty, "sectionData should not be empty")
 
         HyperwalletTestHelper.setUpMockServer(request: setUpDeactivateTransferMethodRequest("/bank-accounts/"))
 
@@ -139,7 +139,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
     func testDeactivateBankAccount_failureWithError() {
         // Given
         loadMockTransfermethods()
-        XCTAssertTrue(presenter.sectionData.isNotEmpty(), "sectionData should not be empty")
+        XCTAssertTrue(presenter.sectionData.isNotEmpty, "sectionData should not be empty")
 
         HyperwalletTestHelper.setUpMockServer(request:
             setUpDeactivateTransferMethodRequest("/bank-accounts/",
@@ -179,7 +179,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
     func testDeactivatePayPalAccount_success() {
         // Given
         loadMockTransfermethods()
-        XCTAssertTrue(presenter.sectionData.isNotEmpty(), "sectionData should not be empty")
+        XCTAssertTrue(presenter.sectionData.isNotEmpty, "sectionData should not be empty")
         HyperwalletTestHelper.setUpMockServer(request: setUpDeactivateTransferMethodRequest("/paypal-accounts/"))
 
         let expectation = self.expectation(description: "deactivate a PayPal account")
@@ -198,7 +198,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
     func testDeactivateBankCard_failureWithError() {
         // Given
         loadMockTransfermethods()
-        XCTAssertTrue(presenter.sectionData.isNotEmpty(), "sectionData should not be empty")
+        XCTAssertTrue(presenter.sectionData.isNotEmpty, "sectionData should not be empty")
         HyperwalletTestHelper.setUpMockServer(request:
             setUpDeactivateTransferMethodRequest("/bank-cards/", NSError(domain: "", code: -1009, userInfo: nil)))
 

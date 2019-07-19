@@ -20,7 +20,7 @@ import UIKit
 
 public extension UINavigationController {
     /// Pop number of ViewControllers
-    public func popToViewController(_ number: Int) {
+    func popToViewController(_ number: Int) {
         let viewControllers: [UIViewController] = self.viewControllers
         guard viewControllers.count < number else {
             self.popToViewController(viewControllers[viewControllers.count - number], animated: true)
@@ -29,7 +29,7 @@ public extension UINavigationController {
     }
 
     /// Pop currently and the preview view controller 
-    public func skipPreviousViewControllerIfPresent(skip: UIViewController.Type? = nil) {
+    func skipPreviousViewControllerIfPresent(skip: UIViewController.Type? = nil) {
         var viewControllerToSkipPresent = false
         let viewControllers: [UIViewController] = self.viewControllers
         if let skip = skip, viewControllers.count >= 3 {

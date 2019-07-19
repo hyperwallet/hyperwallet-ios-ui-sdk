@@ -18,6 +18,7 @@
 
 import Foundation
 
+/// The String extension
 public extension String {
     func localized(withComment: String? = nil) -> String {
         return NSLocalizedString(self,
@@ -27,10 +28,21 @@ public extension String {
                                  comment: withComment ?? "")
     }
 
+    /// Returns a string, up to the given maximum length, containing the
+    /// final elements of the collection.
+    ///
+    /// - Parameter startAt: The start character of elements to get the suffix string.
+    /// - Returns: Returns a substring
     func suffix(startAt: Int) -> String {
         return String(self.suffix(startAt))
     }
 
+    /// Calculates the string height based on UIFont
+    ///
+    /// - Parameters:
+    ///   - width: the UIView width
+    ///   - font: the UIFont
+    /// - Returns: the String height
     func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
         let constraintRect = CGSize(width: width,
                                     height: .greatestFiniteMagnitude)
@@ -44,7 +56,14 @@ public extension String {
     }
 }
 
+/// The NSMutableAttributedString extension
 public extension NSMutableAttributedString {
+    /// Creates and appends a NSAttributedString
+    ///
+    /// - Parameters:
+    ///   - value: the string value
+    ///   - font: the UIFont
+    ///   - color: the UIColor
     func append(value: String, font: UIFont, color: UIColor) {
         append(value: value, attributes: [
             .font: font,
@@ -52,25 +71,13 @@ public extension NSMutableAttributedString {
         ])
     }
 
-    func append(value: String, color: UIColor) {
+    private func append(value: String, color: UIColor) {
         append(value: value, attributes: [.foregroundColor: color] )
     }
 
-    func append(value: String, attributes: [NSAttributedString.Key: Any]?) {
+    private func append(value: String, attributes: [NSAttributedString.Key: Any]?) {
         append(
             NSAttributedString(string: value,
                                attributes: attributes))
-    }
-}
-
-public extension Array {
-    func isNotEmpty() -> Bool {
-        return !self.isEmpty
-    }
-}
-
-public extension Collection {
-    subscript(safe index: Index) -> Element? {
-        return indices.contains(index) ? self[index] : nil
     }
 }

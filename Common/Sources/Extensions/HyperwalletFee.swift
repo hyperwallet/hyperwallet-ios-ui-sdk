@@ -19,6 +19,7 @@
 import Foundation
 import HyperwalletSDK
 
+/// The HyperwalletFee extenstion
 public extension HyperwalletFee {
     private static let percent = "PERCENT"
     private static let flat = "FLAT"
@@ -39,6 +40,12 @@ public extension HyperwalletFee {
         return description
     }
 
+    /// Represents the fee types
+    ///
+    /// - flat: the flat format
+    /// - percent: the percent format
+    /// - mixed: the flat and percent format
+    // swiftlint:disable missing_docs
     enum FeeTypes {
         case flat(_ flatFee: HyperwalletFee)
         case percent(_ percentFee: HyperwalletFee)

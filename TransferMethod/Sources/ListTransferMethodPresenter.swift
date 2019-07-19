@@ -106,6 +106,6 @@ final class ListTransferMethodPresenter {
     }
 
     func transferMethodExists(at index: Int) -> Bool {
-        return sectionData[safe: index] != nil
+        return sectionData.indices.contains(index)
     }
 }

@@ -144,7 +144,7 @@ final class AddTransferMethodPresenter {
         switch error.group {
         case .business:
             resetErrorMessagesForAllSections()
-            guard let errors = error.getHyperwalletErrors()?.errorList, errors.isNotEmpty() else {
+            guard let errors = error.getHyperwalletErrors()?.errorList, errors.isNotEmpty else {
                 return
             }
 
@@ -186,9 +186,9 @@ final class AddTransferMethodPresenter {
     private func updateFooterContent(_ errors: [HyperwalletError]) {
         let errorsWithFieldName = errors.filter({ $0.fieldName != nil })
 
-        if errorsWithFieldName.isNotEmpty() {
+        if errorsWithFieldName.isNotEmpty {
             if let section = sectionData
-                .first(where: { section in widgetsContainError(for: section, errors).isNotEmpty() }) {
+                .first(where: { section in widgetsContainError(for: section, errors).isNotEmpty }) {
                 section.containsFocusedField = true
             }
 
