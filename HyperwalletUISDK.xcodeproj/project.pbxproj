@@ -906,13 +906,6 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
-		4ADC4F2C22D890FF004F3F8D /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		4ADC4F3E22D8CE1A004F3F8D /* Helper */ = {
 			isa = PBXGroup;
 			children = (
@@ -950,7 +943,6 @@
 		4AE6B6D922D605CC0009DEFE /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				4ADC4F2C22D890FF004F3F8D /* Extensions */,
 				4A31BDB322D735410027DACA /* Helper */,
 				4AE6B6C222D605B20009DEFE /* ReceiptRepository.h */,
 				4AE6B6C322D605B20009DEFE /* Info.plist */,
