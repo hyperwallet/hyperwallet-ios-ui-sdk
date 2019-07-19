@@ -18,7 +18,13 @@
 
 import UIKit
 
+/// The UIToolbar extension
 public extension UIToolbar {
+    /// Setup toolbar
+    ///
+    /// - Parameters:
+    ///   - target: UIView
+    ///   - action: action to be performed on toolbar
     func setupToolBar(target: UIView, action: Selector?) {
         let toolbar = self
         toolbar.barStyle = UIBarStyle.default

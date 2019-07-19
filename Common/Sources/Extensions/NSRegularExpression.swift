@@ -18,7 +18,11 @@
 
 import Foundation
 
+/// The NSRegularExpression extension
 public extension NSRegularExpression {
+    /// Initializer to initialize regular expression with some pattern
+    ///
+    /// - Parameter pattern: regular expression pattern
     convenience init(_ pattern: String) {
         do {
             try self.init(pattern: pattern)
@@ -27,6 +31,10 @@ public extension NSRegularExpression {
         }
     }
 
+    /// checks if the String matches the regular expression or not
+    ///
+    /// - Parameter string: String to be matched
+    /// - Returns: true if String matches the pattern else returns false
     func matches(_ string: String) -> Bool {
         let range = NSRange(location: 0, length: string.utf16.count)
         return firstMatch(in: string, options: [], range: range) != nil

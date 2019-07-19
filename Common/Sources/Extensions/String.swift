@@ -20,6 +20,10 @@ import Foundation
 
 /// The String extension
 public extension String {
+    /// Returns a localized string
+    ///
+    /// - Parameter withComment: Comment for localization.
+    /// - Returns: Returns a substring
     func localized(withComment: String? = nil) -> String {
         return NSLocalizedString(self,
                                  tableName: nil,

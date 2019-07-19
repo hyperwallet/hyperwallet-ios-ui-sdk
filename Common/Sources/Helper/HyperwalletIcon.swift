@@ -18,6 +18,7 @@
 
 import Foundation
 
+/// The HyperwalletIcon class
 public final class HyperwalletIcon {
     /// Make transfer method type icon by transfer method type
     ///

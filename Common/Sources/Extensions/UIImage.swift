@@ -52,6 +52,12 @@ public extension UIImage {
         return image!
     }
 
+    /// Get an image with specified colors
+    ///
+    /// - Parameters:
+    ///   - color: color of the image
+    ///   - size: size for the image
+    /// - Returns: image
     static func imageWithColor(color: UIColor, size: CGSize) -> UIImage {
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
@@ -65,6 +71,12 @@ public extension UIImage {
         return image
     }
 
+    /// Get the image with rounded corners
+    ///
+    /// - Parameters:
+    ///   - image: image to be formatted
+    ///   - cornerRadius: cornerRadius
+    /// - Returns: image with rounded corners
     static func roundedImage(image: UIImage, cornerRadius: Int) -> UIImage {
         let rect = CGRect(origin: CGPoint(x: 0, y: 0), size: image.size)
         UIGraphicsBeginImageContextWithOptions(image.size, false, 1)
@@ -76,6 +88,13 @@ public extension UIImage {
         return UIGraphicsGetImageFromCurrentImageContext()!
     }
 
+    /// Create Background Pattern
+    ///
+    /// - Parameters:
+    ///   - color: UIColor
+    ///   - size: CGSize
+    ///   - cornerRadius: Int
+    /// - Returns: UIImage
     static func createBackgroundPattern(color: UIColor, size: CGSize, cornerRadius: Int) -> UIImage {
         let image = imageWithColor(color: color, size: size)
         return roundedImage(image: image, cornerRadius: cornerRadius)

@@ -18,6 +18,7 @@
 
 import UIKit
 
+/// The UINavigationController extension
 public extension UINavigationController {
     /// Pop number of ViewControllers
     func popToViewController(_ number: Int) {
