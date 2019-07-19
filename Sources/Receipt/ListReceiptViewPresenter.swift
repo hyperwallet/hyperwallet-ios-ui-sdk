@@ -94,10 +94,10 @@ final class ListReceiptViewPresenter {
                 switch result {
                 case .success(let receiptList):
                     guard let receiptList = receiptList else { break }
-                    strongSelf.groupReceiptsByMonth(receiptList.data)
+                    strongSelf.groupReceiptsByMonth(receiptList.data ?? [])
                     strongSelf.areAllReceiptsLoaded =
-                        receiptList.data.count < strongSelf.userReceiptLimit ? true : false
-                    strongSelf.offset += receiptList.data.count
+                        receiptList.data?.count ?? 0 < strongSelf.userReceiptLimit ? true : false
+                    strongSelf.offset += receiptList.data?.count ?? 0
 
                 case .failure(let error):
                     strongSelf.view.showError(error, { strongSelf.listUserReceipts() })
@@ -119,7 +119,7 @@ final class ListReceiptViewPresenter {
                 case .success(let receiptList):
                     guard let receiptList = receiptList else { break }
                     strongSelf.areAllReceiptsLoaded = true
-                    strongSelf.groupReceiptsByMonth(receiptList.data)
+                    strongSelf.groupReceiptsByMonth(receiptList.data ?? [])
 
                 case .failure(let error):
                     guard let prepaidCardToken = strongSelf.prepaidCardToken else { break }
@@ -135,7 +135,7 @@ final class ListReceiptViewPresenter {
                                          by: {
                                             ISO8601DateFormatter
                                                 .ignoreTimeZone
-                                                .date(from: $0.createdOn)!
+                                                .date(from: $0.createdOn ?? "")!
                                                 .firstDayOfMonth()
         })
 

@@ -57,12 +57,12 @@ struct ReceiptDetailSectionDetailData: ReceiptDetailSectionData {
     var cellIdentifier: String { return ReceiptDetailTableViewCell.reuseIdentifier }
 
     init(from receipt: HyperwalletReceipt) {
-        let receiptId = receipt.journalId
+        let receiptId = receipt.journalId ?? ""
         rows.append(ReceiptDetailRow(title: "receipt_details_receipt_id".localized(),
                                      value: receiptId,
                                      field: "journalId"))
 
-        let dateTime = ISO8601DateFormatter.ignoreTimeZone.date(from: receipt.createdOn)!.format(for: .dateTime)
+        let dateTime = ISO8601DateFormatter.ignoreTimeZone.date(from: receipt.createdOn ?? "")!.format(for: .dateTime)
         rows.append(ReceiptDetailRow(title: "receipt_details_date".localized(),
                                      value: dateTime,
                                      field: "createdOn"))
@@ -101,7 +101,7 @@ struct ReceiptDetailSectionFeeData: ReceiptDetailSectionData {
             let stringFee = receipt.fee,
             let fee = Double(stringFee),
             fee != 0.0,
-            let amount = Double(receipt.amount) else {
+            let amount = Double(receipt.amount!) else {
                 return nil
         }
 
@@ -109,19 +109,19 @@ struct ReceiptDetailSectionFeeData: ReceiptDetailSectionData {
         let valueCurrencyFormat = "%@ %@"
 
         rows.append(ReceiptDetailRow(title: "receipt_details_amount".localized(),
-                                     value: String(format: amountFormat, receipt.amount, receipt.currency),
+                                     value: String(format: amountFormat, receipt.amount ?? "", receipt.currency ?? ""),
                                      field: "amount"))
 
         rows.append(ReceiptDetailRow(title: "receipt_details_fee".localized(),
-                                     value: String(format: valueCurrencyFormat, stringFee, receipt.currency),
+                                     value: String(format: valueCurrencyFormat, stringFee, receipt.currency ?? ""),
                                      field: "fee"))
 
         let transaction: Double = amount - fee
-        let transactionFormat = getTransactionFormat(basedOn: receipt.amount)
+        let transactionFormat = getTransactionFormat(basedOn: receipt.amount ?? "")
         rows.append(ReceiptDetailRow(title: "receipt_details_transaction".localized(),
                                      value: String(format: valueCurrencyFormat,
                                                    String(format: transactionFormat, transaction),
-                                                   receipt.currency),
+                                                   receipt.currency ?? ""),
                                      field: "transaction"))
     }
 

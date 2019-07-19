@@ -266,7 +266,7 @@ final class SelectTransferMethodTypePresenter {
                                            selectedCountry.localized()))
             return
         }
-        selectedCurrency = firstCurrency.code
+        selectedCurrency = firstCurrency.code ?? ""
         view.countryCurrencyTableViewReloadData()
     }
 

@@ -44,8 +44,8 @@ class ReceiptDetailPresenterTests: XCTestCase {
         XCTAssertEqual(section.rowCount, 1)
 
         let receipt = section.receipt
-        XCTAssertEqual(receipt.type.rawValue.lowercased().localized(), "Payment")
-        XCTAssertEqual(receipt.entry.rawValue, "CREDIT")
+        XCTAssertEqual(receipt.type?.rawValue.lowercased().localized(), "Payment")
+        XCTAssertEqual(receipt.entry?.rawValue, "CREDIT")
         XCTAssertEqual(receipt.amount, "6.00")
         XCTAssertEqual(receipt.currency, "USD")
         //XCTAssertEqual(cellConfig.createdOn, "Apr 28, 2019")

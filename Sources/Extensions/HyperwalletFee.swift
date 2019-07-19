@@ -60,7 +60,7 @@ extension HyperwalletFee {
         private func flatFeeDescription(_ flatFee: HyperwalletFee) -> String {
             let feeFormat = "fee_flat_formatter".localized()
             let currency = flatFee.currency ?? ""
-            return String(format: feeFormat.localized(), currency, flatFee.value)
+            return String(format: feeFormat.localized(), currency, flatFee.value ?? "")
         }
 
         private func percentFeeDescription(_ percentFee: HyperwalletFee) -> String {
@@ -73,16 +73,16 @@ extension HyperwalletFee {
 
             if let min = min, let max = max {
                 feeFormat = "fee_percent_formatter".localized()
-                description = String(format: feeFormat, value, currency, min, max)
+                description = String(format: feeFormat, value ?? "", currency, min, max)
             } else if let min = min, max == nil {
                 feeFormat = "fee_percent_only_min_formatter".localized()
-                description = String(format: feeFormat, value, currency, min)
+                description = String(format: feeFormat, value ?? "", currency, min)
             } else if min == nil, let max = max {
                 feeFormat = "fee_percent_only_max_formatter".localized()
-                description = String(format: feeFormat, value, currency, max)
+                description = String(format: feeFormat, value ?? "", currency, max)
             } else {
                 feeFormat = "fee_percent_no_min_and_max_formatter".localized()
-                description = String(format: feeFormat, value)
+                description = String(format: feeFormat, value ?? "")
             }
             return description
         }
@@ -99,19 +99,19 @@ extension HyperwalletFee {
             if let min = min, let max = max {
                 feeFormat = "fee_mix_formatter".localized()
                 description = String(
-                    format: feeFormat, currency, flatValue, percentValue, min, max)
+                    format: feeFormat, currency, flatValue ?? "", percentValue ?? "", min, max)
             } else if let min = min, max == nil {
                 feeFormat = "fee_mix_only_min_formatter".localized()
                 description = String(
-                    format: feeFormat, currency, flatValue, percentValue, min)
+                    format: feeFormat, currency, flatValue ?? "", percentValue ?? "", min)
             } else if min == nil, let max = max {
                 feeFormat = "fee_mix_only_max_formatter".localized()
                 description = String(
-                    format: feeFormat, currency, flatValue, percentValue, max)
+                    format: feeFormat, currency, flatValue ?? "", percentValue ?? "", max)
             } else {
                 feeFormat = "fee_mix_no_min_and_max_formatter".localized()
                 description = String(
-                    format: feeFormat, currency, flatValue, percentValue)
+                    format: feeFormat, currency, flatValue ?? "", percentValue ?? "")
             }
             return description
         }

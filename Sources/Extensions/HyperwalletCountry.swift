@@ -20,10 +20,10 @@ import HyperwalletSDK
 
 extension HyperwalletCountry: GenericCellConfiguration {
     var title: String {
-        return name
+        return name ?? ""
     }
 
     var value: String {
-        return code
+        return code ?? ""
     }
 }

@@ -446,7 +446,7 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
 
         XCTAssertNil(listTransactionError, "The listTransactionError should be nil")
         XCTAssertNotNil(listTransactionResult, "The listTransactionResult should not be nil")
-        XCTAssertGreaterThan(listTransactionResult!.data.count,
+        XCTAssertGreaterThan(listTransactionResult!.data!.count,
                              0,
                              "The listTransactionResult!.data.count should be greater than 0")
     }

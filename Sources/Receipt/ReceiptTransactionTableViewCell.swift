@@ -130,18 +130,18 @@ extension ReceiptTransactionTableViewCell {
         guard let receipt = receipt else {
             return
         }
-        let entry = receipt.entry.rawValue
+        let entry = receipt.entry?.rawValue
         let createdOn = ISO8601DateFormatter.ignoreTimeZone
-            .date(from: receipt.createdOn)!
+            .date(from: receipt.createdOn ?? "")!
             .format(for: .date)
 
-        let iconFont = HyperwalletIcon.of(receipt.entry.rawValue).rawValue
+        let iconFont = HyperwalletIcon.of(receipt.entry?.rawValue ?? "").rawValue
 
-        receiptTypeLabel.text = receipt.type.rawValue.lowercased().localized()
+        receiptTypeLabel.text = receipt.type?.rawValue.lowercased().localized()
 
         amountLabel.text = entry == credit
             ? receipt.amount
-            : String(format: "-%@", receipt.amount)
+            : String(format: "-%@", receipt.amount ?? "")
 
         amountLabel.textColor = entry == credit
             ? Theme.Amount.creditColor

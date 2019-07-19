@@ -51,7 +51,7 @@ class UserReceiptRepositoryTests: XCTestCase {
                     XCTFail("The User's receipt list should not be empty")
                     return
                 }
-                userReceiptList = receiptPageList.data
+                userReceiptList = receiptPageList.data!
                 receiptExpectation?.fulfill()
 
             case .failure:
