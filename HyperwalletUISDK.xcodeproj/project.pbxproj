@@ -138,7 +138,6 @@
 		DB551F9A22E1380E00DD65C2 /* HyperwalletUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078B45802273A441005B0248 /* HyperwalletUI.swift */; };
 		DB551FA022E13ED000DD65C2 /* Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB551F4922E1316400DD65C2 /* Common.framework */; };
 		DB551FB022E1409700DD65C2 /* TransferMethod.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB551FA722E1409700DD65C2 /* TransferMethod.framework */; };
-		DB551FB522E1409700DD65C2 /* TransferMethodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB551FB422E1409700DD65C2 /* TransferMethodTests.swift */; };
 		DB551FB722E1409700DD65C2 /* TransferMethod.h in Headers */ = {isa = PBXBuildFile; fileRef = DB551FA922E1409700DD65C2 /* TransferMethod.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DB551FC422E141CE00DD65C2 /* HyperwalletTransferMethodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB45190622DCE7CB0022BD1F /* HyperwalletTransferMethodTests.swift */; };
 		DB551FC622E141D800DD65C2 /* HyperwalletTransferMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB16A63C22D8E98300F1B04F /* HyperwalletTransferMethod.swift */; };
@@ -573,7 +572,6 @@
 		DB551FA922E1409700DD65C2 /* TransferMethod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransferMethod.h; sourceTree = "<group>"; };
 		DB551FAA22E1409700DD65C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB551FAF22E1409700DD65C2 /* TransferMethodTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TransferMethodTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DB551FB422E1409700DD65C2 /* TransferMethodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodTests.swift; sourceTree = "<group>"; };
 		DB551FB622E1409700DD65C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB551FE422E1447B00DD65C2 /* HyperwalletTestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyperwalletTestHelper.swift; sourceTree = "<group>"; };
 		DB551FE522E1447B00DD65C2 /* AuthenticationTokenGeneratorMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationTokenGeneratorMock.swift; sourceTree = "<group>"; };
@@ -1230,7 +1228,6 @@
 				078B45712273895C005B0248 /* ListTransferMethodPresenterTests.swift */,
 				078B45722273895C005B0248 /* SelectTransferMethodTypePresenterTests.swift */,
 				DB45190522DCE7B90022BD1F /* Extensions */,
-				DB551FB422E1409700DD65C2 /* TransferMethodTests.swift */,
 				DB551FB622E1409700DD65C2 /* Info.plist */,
 			);
 			path = Tests;
@@ -2504,7 +2501,6 @@
 				DB551FDE22E1432C00DD65C2 /* ListTransferMethodPresenterTests.swift in Sources */,
 				DB551FEB22E1448C00DD65C2 /* AuthenticationTokenGeneratorMock.swift in Sources */,
 				DB551FEA22E1448C00DD65C2 /* HyperwalletTestHelper.swift in Sources */,
-				DB551FB522E1409700DD65C2 /* TransferMethodTests.swift in Sources */,
 				DB551FDF22E1432C00DD65C2 /* AddTransferMethodPresenterTests.swift in Sources */,
 				DB551FE022E1432C00DD65C2 /* SelectTransferMethodTypePresenterTests.swift in Sources */,
 				DB551FC422E141CE00DD65C2 /* HyperwalletTransferMethodTests.swift in Sources */,
