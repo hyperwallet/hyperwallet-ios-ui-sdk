@@ -1117,7 +1117,16 @@
                                         {
                                             "code": "BANK_CARD",
                                             "name": "Debit Card",
-                                            "processingTime" : "1-2 Business days",
+                                            "processingTimes": {
+                                                "nodes": [
+                                                    {
+                                                        "value": "1-2 Business days",
+                                                        "country": "US",
+                                                        "currency": "USD",
+                                                        "transferMethodType": "BANK_CARD"
+                                                    }
+                                                ]
+                                            },
                                             "fees": {
                                                 "nodes": [
                                                     {
