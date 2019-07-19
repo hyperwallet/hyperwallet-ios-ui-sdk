@@ -78,6 +78,26 @@
                 "charityName": "Sample Charity",
                 "checkNumber": "Sample Check Number"
             }
+        },
+        {
+            "journalId": "55176995",
+            "type": "TRANSFER_TO_PAYPAL_ACCOUNT",
+            "createdOn": "2019-05-02T18:16:17",
+            "entry": "CREDIT",
+            "sourceToken": "usr-token",
+            "destinationToken": "trm-00000000-0000-0000-0000-0000000000",
+            "amount": "5.00",
+            "currency": "USD"
+        },
+        {
+            "journalId": "55176996",
+            "type": "TRANSFER_TO_DEBIT_CARD",
+            "createdOn": "2019-05-02T18:16:17",
+            "entry": "CREDIT",
+            "sourceToken": "usr-token",
+            "destinationToken": "trm-00000000-0000-0000-0000-0000000000",
+            "amount": "5.00",
+            "currency": "USD"
         }
     ],
     "links": [
