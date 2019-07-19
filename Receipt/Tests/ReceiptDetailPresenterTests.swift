@@ -4,18 +4,18 @@ import XCTest
 
 class ReceiptDetailPresenterTests: XCTestCase {
     let receiptsData = HyperwalletTestHelper.getDataFromJson("UserReceiptDetails")
-    var presenterNoNotes: ReceiptDetailViewPresenter!
-    var presenterWithNotes: ReceiptDetailViewPresenter!
-    var presenterWithIntegerAmount: ReceiptDetailViewPresenter!
+    var presenterNoNotes: ReceiptDetailPresenter!
+    var presenterWithNotes: ReceiptDetailPresenter!
+    var presenterWithIntegerAmount: ReceiptDetailPresenter!
 
     override func setUp() {
         guard let receipts = try? JSONDecoder().decode([HyperwalletReceipt].self, from: receiptsData) else {
             XCTFail("Can't decode user receipts from test data")
             return
         }
-        presenterNoNotes = ReceiptDetailViewPresenter(with: receipts[0])
-        presenterWithNotes = ReceiptDetailViewPresenter(with: receipts[1])
-        presenterWithIntegerAmount = ReceiptDetailViewPresenter(with: receipts[2])
+        presenterNoNotes = ReceiptDetailPresenter(with: receipts[0])
+        presenterWithNotes = ReceiptDetailPresenter(with: receipts[1])
+        presenterWithIntegerAmount = ReceiptDetailPresenter(with: receipts[2])
     }
 
     func testSectionDataShouldNotBeEmpty() {
@@ -39,7 +39,7 @@ class ReceiptDetailPresenterTests: XCTestCase {
             return
         }
         XCTAssertEqual(section.receiptDetailSectionHeader, .transaction)
-        XCTAssertEqual(section.cellIdentifier, ReceiptTransactionTableViewCell.reuseIdentifier)
+        XCTAssertEqual(section.cellIdentifier, ReceiptTransactionCell.reuseIdentifier)
         XCTAssertEqual(section.title, "Transaction")
         XCTAssertEqual(section.rowCount, 1)
 
@@ -57,7 +57,7 @@ class ReceiptDetailPresenterTests: XCTestCase {
             return
         }
         XCTAssertEqual(section.receiptDetailSectionHeader, .details)
-        XCTAssertEqual(section.cellIdentifier, ReceiptDetailTableViewCell.reuseIdentifier)
+        XCTAssertEqual(section.cellIdentifier, ReceiptDetailCell.reuseIdentifier)
         XCTAssertEqual(section.title, "Details")
         XCTAssertEqual(section.rowCount, 3)
 
@@ -74,7 +74,7 @@ class ReceiptDetailPresenterTests: XCTestCase {
             return
         }
         XCTAssertEqual(section.receiptDetailSectionHeader, .fee)
-        XCTAssertEqual(section.cellIdentifier, ReceiptFeeTableViewCell.reuseIdentifier)
+        XCTAssertEqual(section.cellIdentifier, ReceiptFeeTableCell.reuseIdentifier)
         XCTAssertEqual(section.title, "Fee Specification")
         XCTAssertEqual(section.rowCount, 3)
 
@@ -89,7 +89,7 @@ class ReceiptDetailPresenterTests: XCTestCase {
             return
         }
         XCTAssertEqual(section.receiptDetailSectionHeader, .fee)
-        XCTAssertEqual(section.cellIdentifier, ReceiptFeeTableViewCell.reuseIdentifier)
+        XCTAssertEqual(section.cellIdentifier, ReceiptFeeTableCell.reuseIdentifier)
         XCTAssertEqual(section.rowCount, 3)
 
         XCTAssertTrue(rowEqual(section.rows[0], "Amount:", "-9.87 USD", "amount"))
@@ -103,7 +103,7 @@ class ReceiptDetailPresenterTests: XCTestCase {
             return
         }
         XCTAssertEqual(section.receiptDetailSectionHeader, .fee)
-        XCTAssertEqual(section.cellIdentifier, ReceiptFeeTableViewCell.reuseIdentifier)
+        XCTAssertEqual(section.cellIdentifier, ReceiptFeeTableCell.reuseIdentifier)
         XCTAssertEqual(section.rowCount, 3)
 
         XCTAssertTrue(rowEqual(section.rows[0], "Amount:", "-100500 KRW", "amount"))
@@ -117,7 +117,7 @@ class ReceiptDetailPresenterTests: XCTestCase {
             return
         }
         XCTAssertEqual(section.receiptDetailSectionHeader, .notes)
-        XCTAssertEqual(section.cellIdentifier, ReceiptNotesTableViewCell.reuseIdentifier)
+        XCTAssertEqual(section.cellIdentifier, ReceiptNotesTableCell.reuseIdentifier)
         XCTAssertEqual(section.title, "Notes")
         XCTAssertEqual(section.rowCount, 1)
 

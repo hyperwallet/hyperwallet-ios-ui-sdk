@@ -16,13 +16,13 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import HyperwalletSDK
-import UIKit
 #if !COCOAPODS
 import Common
 #endif
+import HyperwalletSDK
+import UIKit
 
-final class ReceiptTransactionTableViewCell: UITableViewCell {
+final class ReceiptTransactionCell: UITableViewCell {
     static let reuseIdentifier = "receiptTransactionTableViewCellReuseIdentifier"
     private var iconColor: UIColor!
     private var iconBackgroundColor: UIColor!
@@ -128,7 +128,7 @@ final class ReceiptTransactionTableViewCell: UITableViewCell {
     }
 }
 
-extension ReceiptTransactionTableViewCell {
+extension ReceiptTransactionCell {
     func configure(_ receipt: HyperwalletReceipt?) {
         guard let receipt = receipt else {
             return

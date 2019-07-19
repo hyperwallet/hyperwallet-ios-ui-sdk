@@ -25,7 +25,7 @@ import UIKit
 ///
 /// The form fields are based on the country, currency, user's profile type and transfer method type should be passed
 /// to this Controller to create new Transfer Method for those values.
-public final class AddTransferMethodTableViewController: UITableViewController {
+public final class AddTransferMethodController: UITableViewController {
     typealias ButtonHandler = () -> Void
     private var defaultHeaderHeight = CGFloat(38.0)
 
@@ -136,8 +136,8 @@ public final class AddTransferMethodTableViewController: UITableViewController {
         tableView.estimatedRowHeight = Theme.Cell.smallHeight
         tableView.accessibilityIdentifier = "addTransferMethodTable"
         tableView.register(
-            AddTransferMethodTableViewCell.self,
-            forCellReuseIdentifier: AddTransferMethodTableViewCell.reuseIdentifier
+            AddTransferMethodCell.self,
+            forCellReuseIdentifier: AddTransferMethodCell.reuseIdentifier
         )
     }
 
@@ -157,7 +157,7 @@ public final class AddTransferMethodTableViewController: UITableViewController {
 }
 
 // MARK: - TableViewController Data source and delegate
-extension AddTransferMethodTableViewController {
+extension AddTransferMethodController {
     override public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return presenter.sectionData[section].header
     }
@@ -202,7 +202,7 @@ extension AddTransferMethodTableViewController {
     }
 
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: AddTransferMethodTableViewCell.reuseIdentifier)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: AddTransferMethodCell.reuseIdentifier)
             else {
                 fatalError("Can't dequeue the cell")
         }
@@ -233,7 +233,7 @@ extension AddTransferMethodTableViewController {
 }
 
 // MARK: - Presenter - AddTransferMethodView -
-extension AddTransferMethodTableViewController: AddTransferMethodView {
+extension AddTransferMethodController: AddTransferMethodView {
     private func getSectionContainingFocusedField() -> AddTransferMethodSectionData? {
         return presenter.sectionData.first(where: { $0.containsFocusedField == true })
     }
@@ -357,7 +357,7 @@ extension AddTransferMethodTableViewController: AddTransferMethodView {
                                             userInfo: [UserInfo.transferMethod: transferMethod])
         }
         navigationController?
-            .skipPreviousViewControllerIfPresent(skip: SelectTransferMethodTypeTableViewController.self)
+            .skipPreviousViewControllerIfPresent(skip: SelectTransferMethodTypeController.self)
         createTransferMethodHandler?(transferMethod)
     }
 

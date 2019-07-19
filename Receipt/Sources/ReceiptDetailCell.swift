@@ -20,8 +20,8 @@
 import Common
 #endif
 
-final class ReceiptFeeTableViewCell: UITableViewCell {
-    static let reuseIdentifier = "receiptFeeTableViewCellReuseIdentifier"
+final class ReceiptDetailCell: UITableViewCell {
+    static let reuseIdentifier = "receiptDetailTableViewCellReuseIdentifier"
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)

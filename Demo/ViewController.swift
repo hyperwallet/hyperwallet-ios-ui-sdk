@@ -26,21 +26,17 @@ import os.log
 
 import UIKit
 
-class HeadlineTableViewCell: UITableViewCell {
+class HeadlineCell: UITableViewCell {
     @IBOutlet var headlineTitleLabel: UILabel!
     @IBOutlet var headlineTextLabel: UILabel!
 }
 
-class TopTableViewCell: UITableViewCell {
+class TopCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet var imageView2: UIImageView!
     @IBOutlet var iconLabel: UILabel!
-}
-
-enum HyperwalletConstants {
-    static let limit = 50
 }
 
 //swiftlint:disable force_cast
@@ -97,7 +93,7 @@ class ViewController: UITableViewController {
         switch indexPath.item {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "TopCell", for: indexPath)
-                as! TopTableViewCell
+                as! TopCell
             cell.emailLabel.text = "johndoe@domain.com"
             cell.nameLabel.text = "John Doe"
             cell.phoneLabel.text = "+1 123-122-3213"
@@ -113,7 +109,7 @@ class ViewController: UITableViewController {
 
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
-                as! HeadlineTableViewCell
+                as! HeadlineCell
             cell.headlineTextLabel.textColor = Theme.Label.subTitleColor
             cell.headlineTitleLabel.textColor = Theme.Label.subTitleColor
             if let example = Example(rawValue: indexPath.item) {
@@ -150,11 +146,11 @@ class ViewController: UITableViewController {
 
         switch example {
         case .listTransferMethod:
-            let viewController = HyperwalletUI.shared.listTransferMethodTableViewController()
+            let viewController = HyperwalletUI.shared.listTransferMethodController()
             navigationController?.pushViewController(viewController, animated: true)
 
         case .selectTransferMethod:
-            let viewController = HyperwalletUI.shared.selectTransferMethodTypeTableViewController()
+            let viewController = HyperwalletUI.shared.selectTransferMethodTypeController()
             viewController.createTransferMethodHandler = {
                 (transferMethod: HyperwalletTransferMethod) -> Void in
                 self.didCreateTransferMethod(transferMethod: transferMethod)
@@ -166,28 +162,28 @@ class ViewController: UITableViewController {
                 let currency = ProcessInfo.processInfo.environment["CURRENCY"],
                 let accountType = ProcessInfo.processInfo.environment["ACCOUNT_TYPE"],
                 let profileType = ProcessInfo.processInfo.environment["PROFILE_TYPE"] {
-                let viewController = HyperwalletUI.shared.addTransferMethodTableViewController(
+                let viewController = HyperwalletUI.shared.addTransferMethodController(
                     country, currency, profileType, accountType)
                 navigationController?.pushViewController(viewController, animated: true)
             } else {
-                let viewController = HyperwalletUI.shared.addTransferMethodTableViewController(
+                let viewController = HyperwalletUI.shared.addTransferMethodController(
                     "US", "USD", "INDIVIDUAL", "BANK_ACCOUNT")
                 navigationController?.pushViewController(viewController, animated: true)
             }
 
         case .userReceipts:
-            let viewController = HyperwalletUI.shared.listUserReceiptTableViewController()
+            let viewController = HyperwalletUI.shared.listUserReceiptController()
             navigationController?.pushViewController(viewController, animated: true)
 
         case .prepaidCardReceipts:
             let prepaidCardToken = Bundle.main.infoDictionary!["PREPAID_CARD_TOKEN"] as! String
-            let viewController = HyperwalletUI.shared.listPrepaidCardReceiptTableViewController(
+            let viewController = HyperwalletUI.shared.listPrepaidCardReceiptController(
                 prepaidCardToken)
 
             navigationController?.pushViewController(viewController, animated: true)
 
         default:
-            let viewController = HyperwalletUI.shared.listTransferMethodTableViewController()
+            let viewController = HyperwalletUI.shared.listTransferMethodController()
             navigationController?.pushViewController(viewController, animated: true)
         }
     }

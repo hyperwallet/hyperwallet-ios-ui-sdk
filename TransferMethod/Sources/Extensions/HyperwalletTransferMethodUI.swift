@@ -25,19 +25,19 @@ extension HyperwalletUI {
     ///
     /// The user can deactivate and add a new transfer method.
     ///
-    /// - Returns: An instance of `listTransferMethodTableViewController`
-    public func listTransferMethodTableViewController() -> ListTransferMethodTableViewController {
-        return ListTransferMethodTableViewController()
+    /// - Returns: An instance of `listTransferMethodController`
+    public func listTransferMethodController() -> ListTransferMethodController {
+        return ListTransferMethodController()
     }
 
     /// Lists all transfer method types available based on the country, currency and profile type to create a new
     /// transfer method (bank account, bank card, PayPal account, prepaid card, paper check).
     ///
     /// - Parameter forceUpdateData: Forces to refresh the cached data.
-    /// - Returns: An instance of `SelectTransferMethodTypeTableViewController`
-    public func selectTransferMethodTypeTableViewController(forceUpdateData: Bool = false)
-        -> SelectTransferMethodTypeTableViewController {
-            return SelectTransferMethodTypeTableViewController(forceUpdate: forceUpdateData)
+    /// - Returns: An instance of `SelectTransferMethodTypeController`
+    public func selectTransferMethodTypeController(forceUpdateData: Bool = false)
+        -> SelectTransferMethodTypeController {
+            return SelectTransferMethodTypeController(forceUpdate: forceUpdateData)
     }
 
     /// Controller to create a new transfer method.
@@ -51,17 +51,17 @@ extension HyperwalletUI {
     ///   - profileType: The profile type. Possible values - INDIVIDUAL, BUSINESS.
     ///   - transferMethodTypeCode: The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD.
     ///   - forceUpdateData: Forces to refresh the cached data.
-    /// - Returns: An instance of `AddTransferMethodTableViewController`
-    public func addTransferMethodTableViewController(
+    /// - Returns: An instance of `AddTransferMethodController`
+    public func addTransferMethodController(
         _ country: String,
         _ currency: String,
         _ profileType: String,
         _ transferMethodTypeCode: String,
-        _ forceUpdateData: Bool = false) -> AddTransferMethodTableViewController {
-        return AddTransferMethodTableViewController(country,
-                                                    currency,
-                                                    profileType,
-                                                    transferMethodTypeCode,
-                                                    forceUpdateData)
+        _ forceUpdateData: Bool = false) -> AddTransferMethodController {
+        return AddTransferMethodController(country,
+                                           currency,
+                                           profileType,
+                                           transferMethodTypeCode,
+                                           forceUpdateData)
     }
 }

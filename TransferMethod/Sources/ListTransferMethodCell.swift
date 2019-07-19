@@ -22,7 +22,7 @@ import Common
 import HyperwalletSDK
 import UIKit
 
-final class ListTransferMethodTableViewCell: UITableViewCell {
+final class ListTransferMethodCell: UITableViewCell {
     static let reuseIdentifier = "listTransferMethodCellIdentifier"
 
     // MARK: Life cycle
@@ -67,7 +67,7 @@ final class ListTransferMethodTableViewCell: UITableViewCell {
     }
 }
 
-extension ListTransferMethodTableViewCell {
+extension ListTransferMethodCell {
     func configure(transferMethod: HyperwalletTransferMethod) {
         textLabel?.text = transferMethod.type?.lowercased().localized()
         textLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellTextLabel"

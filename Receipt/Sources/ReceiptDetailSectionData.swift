@@ -42,7 +42,7 @@ extension ReceiptDetailSectionData {
 
 struct ReceiptDetailSectionTransactionData: ReceiptDetailSectionData {
     var receiptDetailSectionHeader: ReceiptDetailSectionHeader { return .transaction }
-    var cellIdentifier: String { return ReceiptTransactionTableViewCell.reuseIdentifier }
+    var cellIdentifier: String { return ReceiptTransactionCell.reuseIdentifier }
     let receipt: HyperwalletReceipt
 
     init(from receipt: HyperwalletReceipt) {
@@ -54,7 +54,7 @@ struct ReceiptDetailSectionDetailData: ReceiptDetailSectionData {
     var rows = [ReceiptDetailRow] ()
     var receiptDetailSectionHeader: ReceiptDetailSectionHeader { return .details }
     var rowCount: Int { return rows.count }
-    var cellIdentifier: String { return ReceiptDetailTableViewCell.reuseIdentifier }
+    var cellIdentifier: String { return ReceiptDetailCell.reuseIdentifier }
 
     init(from receipt: HyperwalletReceipt) {
         let receiptId = receipt.journalId
@@ -94,7 +94,7 @@ struct ReceiptDetailSectionFeeData: ReceiptDetailSectionData {
     var rows = [ReceiptDetailRow]()
     var receiptDetailSectionHeader: ReceiptDetailSectionHeader { return .fee }
     var rowCount: Int { return rows.count }
-    var cellIdentifier: String { return ReceiptFeeTableViewCell.reuseIdentifier }
+    var cellIdentifier: String { return ReceiptFeeTableCell.reuseIdentifier }
 
     init?(from receipt: HyperwalletReceipt) {
         guard
@@ -138,7 +138,7 @@ struct ReceiptDetailSectionFeeData: ReceiptDetailSectionData {
 struct ReceiptDetailSectionNotesData: ReceiptDetailSectionData {
     let notes: String?
     var receiptDetailSectionHeader: ReceiptDetailSectionHeader { return .notes }
-    var cellIdentifier: String { return ReceiptNotesTableViewCell.reuseIdentifier }
+    var cellIdentifier: String { return ReceiptNotesTableCell.reuseIdentifier }
 
     init?(from receipt: HyperwalletReceipt) {
         guard let notes = receipt.details?.notes else {

@@ -21,19 +21,19 @@ import Common
 #endif
 import HyperwalletSDK
 
-public final class ReceiptDetailTableViewController: UITableViewController {
+public final class ReceiptDetailController: UITableViewController {
     private let registeredCells: [(type: AnyClass, id: String)] = [
-        (ReceiptTransactionTableViewCell.self, ReceiptTransactionTableViewCell.reuseIdentifier),
-        (ReceiptFeeTableViewCell.self, ReceiptFeeTableViewCell.reuseIdentifier),
-        (ReceiptDetailTableViewCell.self, ReceiptDetailTableViewCell.reuseIdentifier),
-        (ReceiptNotesTableViewCell.self, ReceiptNotesTableViewCell.reuseIdentifier)
+        (ReceiptTransactionCell.self, ReceiptTransactionCell.reuseIdentifier),
+        (ReceiptFeeTableCell.self, ReceiptFeeTableCell.reuseIdentifier),
+        (ReceiptDetailCell.self, ReceiptDetailCell.reuseIdentifier),
+        (ReceiptNotesTableCell.self, ReceiptNotesTableCell.reuseIdentifier)
     ]
 
-    private var presenter: ReceiptDetailViewPresenter!
+    private var presenter: ReceiptDetailPresenter!
 
     public init(with hyperwalletReceipt: HyperwalletReceipt) {
         super.init(nibName: nil, bundle: nil)
-        presenter = ReceiptDetailViewPresenter(with: hyperwalletReceipt)
+        presenter = ReceiptDetailPresenter(with: hyperwalletReceipt)
     }
 
     // swiftlint:disable unavailable_function
@@ -68,27 +68,27 @@ public final class ReceiptDetailTableViewController: UITableViewController {
         let section = presenter.sectionData[indexPath.section]
         switch section.receiptDetailSectionHeader {
         case .transaction:
-            if let tableViewCell = cell as? ReceiptTransactionTableViewCell,
+            if let tableViewCell = cell as? ReceiptTransactionCell,
                 let transactionSection = section as? ReceiptDetailSectionTransactionData {
                 tableViewCell.configure(transactionSection.receipt)
             }
 
         case .details:
-            if let tableViewCell = cell as? ReceiptDetailTableViewCell,
+            if let tableViewCell = cell as? ReceiptDetailCell,
                 let detailSection = section as? ReceiptDetailSectionDetailData {
                 let row = detailSection.rows[indexPath.row]
                 tableViewCell.configure(row)
             }
 
         case .fee:
-            if let tableViewCell = cell as? ReceiptFeeTableViewCell,
+            if let tableViewCell = cell as? ReceiptFeeTableCell,
                 let feeSection = section as? ReceiptDetailSectionFeeData {
                 let row = feeSection.rows[indexPath.row]
                 tableViewCell.configure(row)
            }
 
         case .notes:
-            if let tableViewCell = cell as? ReceiptNotesTableViewCell,
+            if let tableViewCell = cell as? ReceiptNotesTableCell,
                 let notesSection = section as? ReceiptDetailSectionNotesData {
                 tableViewCell.textLabel?.text = notesSection.notes
             }
@@ -97,7 +97,7 @@ public final class ReceiptDetailTableViewController: UITableViewController {
     }
 }
 
-extension ReceiptDetailTableViewController {
+extension ReceiptDetailController {
     override public func numberOfSections(in tableView: UITableView) -> Int {
         return presenter.sectionData.count
     }

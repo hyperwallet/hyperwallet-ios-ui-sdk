@@ -28,7 +28,7 @@ protocol ListReceiptView: class {
     func showLoading()
 }
 
-final class ListReceiptViewPresenter {
+final class ListReceiptPresenter {
     private unowned let view: ListReceiptView
 
     private var offset = 0

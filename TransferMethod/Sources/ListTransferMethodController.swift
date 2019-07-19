@@ -25,7 +25,7 @@ import UIKit
 /// Lists the user's transfer methods (bank account, bank card, PayPal account, prepaid card, paper check).
 ///
 /// The user can deactivate and add a new transfer method.
-public final class ListTransferMethodTableViewController: UITableViewController {
+public final class ListTransferMethodController: UITableViewController {
     private var spinnerView: SpinnerView?
     private var processingView: ProcessingView?
     private var presenter: ListTransferMethodPresenter!
@@ -66,9 +66,9 @@ public final class ListTransferMethodTableViewController: UITableViewController 
     }
 
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ListTransferMethodTableViewCell.reuseIdentifier,
+        let cell = tableView.dequeueReusableCell(withIdentifier: ListTransferMethodCell.reuseIdentifier,
                                                  for: indexPath)
-        if let listTransferMethodCell = cell as? ListTransferMethodTableViewCell {
+        if let listTransferMethodCell = cell as? ListTransferMethodCell {
             listTransferMethodCell.configure(transferMethod: presenter.sectionData[indexPath.row])
         }
         return cell
@@ -109,7 +109,7 @@ public final class ListTransferMethodTableViewController: UITableViewController 
     }
 
     private func addTransferMethod() {
-        let controller = HyperwalletUI.shared.selectTransferMethodTypeTableViewController()
+        let controller = HyperwalletUI.shared.selectTransferMethodTypeController()
         controller.createTransferMethodHandler = {
             [weak self] (transferMethod: HyperwalletTransferMethod) -> Void in
             // refresh transfer method list
@@ -122,8 +122,8 @@ public final class ListTransferMethodTableViewController: UITableViewController 
     private func setupTransferMethodTableView() {
         tableView = UITableView(frame: .zero, style: .grouped)
         tableView.tableFooterView = UIView()
-        tableView.register(ListTransferMethodTableViewCell.self,
-                           forCellReuseIdentifier: ListTransferMethodTableViewCell.reuseIdentifier)
+        tableView.register(ListTransferMethodCell.self,
+                           forCellReuseIdentifier: ListTransferMethodCell.reuseIdentifier)
     }
 
     private func showConfirmationAlert(title: String?, message: String, transferMethodIndex: Int) {
@@ -142,7 +142,7 @@ public final class ListTransferMethodTableViewController: UITableViewController 
     }
 }
 
-extension ListTransferMethodTableViewController: ListTransferMethodView {
+extension ListTransferMethodController: ListTransferMethodView {
     func showLoading() {
         if let view = self.navigationController?.view {
             spinnerView = HyperwalletUtilViews.showSpinner(view: view)

@@ -24,7 +24,7 @@ import UIKit
 
 /// Lists all transfer method types available based on the country, currency and profile type to create a new transfer
 /// method (bank account, bank card, PayPal account, prepaid card, paper check).
-public final class SelectTransferMethodTypeTableViewController: UITableViewController {
+public final class SelectTransferMethodTypeController: UITableViewController {
     // MARK: - Outlets
     private var countryCurrencyTableView: UITableView!
 
@@ -82,7 +82,7 @@ public final class SelectTransferMethodTypeTableViewController: UITableViewContr
     }
 }
 
-extension SelectTransferMethodTypeTableViewController {
+extension SelectTransferMethodTypeController {
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.sectionData.count
     }
@@ -102,7 +102,7 @@ extension SelectTransferMethodTypeTableViewController {
     }
 }
 
-extension SelectTransferMethodTypeTableViewController {
+extension SelectTransferMethodTypeController {
     override public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return countryCurrencyTableView
     }
@@ -122,7 +122,7 @@ extension SelectTransferMethodTypeTableViewController {
 }
 
 // MARK: - SelectTransferMethodView
-extension SelectTransferMethodTypeTableViewController: SelectTransferMethodTypeView {
+extension SelectTransferMethodTypeController: SelectTransferMethodTypeView {
     func transferMethodTypeTableViewReloadData() {
         tableView.reloadData()
     }
@@ -136,7 +136,7 @@ extension SelectTransferMethodTypeTableViewController: SelectTransferMethodTypeV
                                                profileType: String,
                                                transferMethodTypeCode: String) {
         let addTransferMethodController = HyperwalletUI.shared
-            .addTransferMethodTableViewController(country, currency, profileType, transferMethodTypeCode, forceUpdate)
+            .addTransferMethodController(country, currency, profileType, transferMethodTypeCode, forceUpdate)
 
         addTransferMethodController.createTransferMethodHandler = { (transferMethod) -> Void in
             self.createTransferMethodHandler?(transferMethod)

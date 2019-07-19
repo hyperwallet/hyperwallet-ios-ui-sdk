@@ -44,7 +44,7 @@ extension ThemeManager {
     }
 
     private static func applyToListTransferMethodTableViewCell() {
-        let proxy = ListTransferMethodTableViewCell.appearance()
+        let proxy = ListTransferMethodCell.appearance()
         proxy.titleLabelFont = Theme.Label.bodyFontMedium
         proxy.titleLabelColor = Theme.Label.color
         proxy.subTitleLabelFont = Theme.Label.captionOne

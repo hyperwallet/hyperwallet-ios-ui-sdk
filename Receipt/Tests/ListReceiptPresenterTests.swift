@@ -4,7 +4,7 @@ import HyperwalletSDK
 import XCTest
 
 class ListReceiptPresenterTests: XCTestCase {
-    private var presenter: ListReceiptViewPresenter!
+    private var presenter: ListReceiptPresenter!
     private let mockView = MockListReceiptView()
     private lazy var listReceiptPayload = HyperwalletTestHelper
         .getDataFromJson("UserReceiptResponse")
@@ -17,7 +17,7 @@ class ListReceiptPresenterTests: XCTestCase {
 
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
-        presenter = ListReceiptViewPresenter(view: mockView)
+        presenter = ListReceiptPresenter(view: mockView)
     }
 
     override func tearDown() {
@@ -117,7 +117,7 @@ class ListReceiptPresenterTests: XCTestCase {
     }
 
     func testListPrepaidCardReceipt_success() {
-        presenter = ListReceiptViewPresenter(view: mockView, prepaidCardToken: "trm-123456789")
+        presenter = ListReceiptPresenter(view: mockView, prepaidCardToken: "trm-123456789")
 
         // Given
         HyperwalletTestHelper.setUpMockServer(request: setUpReceiptRequest(listPrepaidCardReceiptPayload,
@@ -153,7 +153,7 @@ class ListReceiptPresenterTests: XCTestCase {
 
     func testListPrepaidCardReceipt_failureWithError() {
         // Given
-        presenter = ListReceiptViewPresenter(view: mockView, prepaidCardToken: "trm-123456789")
+        presenter = ListReceiptPresenter(view: mockView, prepaidCardToken: "trm-123456789")
 
         HyperwalletTestHelper.setUpMockServer(request:
             setUpReceiptRequest(listReceiptPayload, (NSError(domain: "", code: -1009, userInfo: nil)), "trm-123456789"))

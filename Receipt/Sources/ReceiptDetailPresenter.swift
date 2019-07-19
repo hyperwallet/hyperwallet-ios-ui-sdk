@@ -18,7 +18,7 @@
 
 import HyperwalletSDK
 
-final class ReceiptDetailViewPresenter {
+final class ReceiptDetailPresenter {
     private(set) var sectionData = [ReceiptDetailSectionData]()
 
     init(with receipt: HyperwalletReceipt) {

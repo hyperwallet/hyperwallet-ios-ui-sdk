@@ -24,17 +24,17 @@ extension HyperwalletUI {
     /// Lists the user's transactions.
     ///
     ///
-    /// - Returns: An instance of `ListReceiptTableViewController`
-    public func listUserReceiptTableViewController() -> ListReceiptTableViewController {
-        return ListReceiptTableViewController()
+    /// - Returns: An instance of `ListReceiptController`
+    public func listUserReceiptController() -> ListReceiptController {
+        return ListReceiptController()
     }
 
     /// Lists the user's prepaid card transactions.
     ///
     /// - Parameter prepaidCardToken: prepaid card token for which transactions are requested
-    /// - Returns: An instance of `ListReceiptTableViewController`
-    public func listPrepaidCardReceiptTableViewController(_ prepaidCardToken: String)
-        -> ListReceiptTableViewController {
-            return ListReceiptTableViewController(prepaidCardToken: prepaidCardToken)
+    /// - Returns: An instance of `ListReceiptController`
+    public func listPrepaidCardReceiptController(_ prepaidCardToken: String)
+        -> ListReceiptController {
+            return ListReceiptController(prepaidCardToken: prepaidCardToken)
     }
 }
