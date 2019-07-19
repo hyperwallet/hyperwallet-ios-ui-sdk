@@ -1,0 +1,8 @@
+{
+    "errors": [
+        {
+            "message": "BankId: The value you provided for this field is already registered with another user ",
+            "code": "VALIDATION_ERROR"
+        }
+    ]
+}

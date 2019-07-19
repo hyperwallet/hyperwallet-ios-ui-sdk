@@ -16,8 +16,8 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import Common
 import HyperwalletSDK
+@testable import TransferMethod
 import XCTest
 
 class HyperwalletTransferMethodTests: XCTestCase {

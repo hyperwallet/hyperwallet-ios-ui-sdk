@@ -1,7 +1,7 @@
 import Common
 import Hippolyte
 import HyperwalletSDK
-@testable import HyperwalletUISDK
+@testable import TransferMethod
 import XCTest
 
 class SelectTransferMethodTypePresenterTests: XCTestCase {

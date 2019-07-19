@@ -104,6 +104,34 @@
                ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "DB551FA622E1409700DD65C2"
+               BuildableName = "TransferMethod.framework"
+               BlueprintName = "TransferMethod"
+               ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "DB551FAE22E1409700DD65C2"
+               BuildableName = "TransferMethodTests.xctest"
+               BlueprintName = "TransferMethodTests"
+               ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -147,6 +175,13 @@
             BlueprintIdentifier = "DB551F4822E1316400DD65C2"
             BuildableName = "Common.framework"
             BlueprintName = "Common"
+            ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "DB551FA622E1409700DD65C2"
+            BuildableName = "TransferMethod.framework"
+            BlueprintName = "TransferMethod"
             ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
          </BuildableReference>
       </CodeCoverageTargets>
@@ -198,6 +233,16 @@
                BlueprintIdentifier = "DB551F5022E1316400DD65C2"
                BuildableName = "CommonTests.xctest"
                BlueprintName = "CommonTests"
+               ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "DB551FAE22E1409700DD65C2"
+               BuildableName = "TransferMethodTests.xctest"
+               BlueprintName = "TransferMethodTests"
                ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
             </BuildableReference>
          </TestableReference>
