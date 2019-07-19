@@ -1,5 +1,5 @@
 import HyperwalletSDK
-@testable import HyperwalletUISDK
+@testable import Receipt
 import XCTest
 
 class ReceiptDetailPresenterTests: XCTestCase {
