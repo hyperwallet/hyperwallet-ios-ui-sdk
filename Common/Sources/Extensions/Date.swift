@@ -24,10 +24,44 @@ public extension Date {
     ///
     /// - date: The yMMMd format
     /// - dateTime: The yMMMEdjm format
-    // swiftlint:disable missing_docs
     enum DateFormatMode {
+        /// - date: The yMMMd format
         case date
+        /// - dateTime: The yMMMEdjm format
         case dateTime
+    }
+
+    /// Formats date to string
+    ///
+    /// - Parameter dateFormat: format of the date
+    /// - Returns: formatted date in string
+    func formatDateToString(dateFormat: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        return dateFormatter.string(from: self)
+    }
+
+    /// Returns 1st day of the month
+    ///
+    /// - Returns: 1st day of the month
+    func firstDayOfMonth() -> Date {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month], from: self)
+        return calendar.date(from: components)!
+    }
+
+    /// Format date
+    ///
+    /// - Parameter formatMode: format date/datetime
+    /// - Returns: formatted date
+    func format(for formatMode: DateFormatMode) -> String {
+        switch formatMode {
+        case .date:
+            return Date.dateFormatterOnlyDate.string(from: self)
+
+        case .dateTime:
+            return Date.dateFormatterDateAndTime.string(from: self)
+        }
     }
 
     private static let dateFormatterOnlyDate: DateFormatter = {
@@ -43,26 +77,4 @@ public extension Date {
         formatter.formattingContext = .beginningOfSentence
         return formatter
     }()
-
-    func formatDateToString(dateFormat: String) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = dateFormat
-        return dateFormatter.string(from: self)
-    }
-
-    func firstDayOfMonth() -> Date {
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.year, .month], from: self)
-        return calendar.date(from: components)!
-    }
-
-    func format(for formatMode: DateFormatMode) -> String {
-        switch formatMode {
-        case .date:
-            return Date.dateFormatterOnlyDate.string(from: self)
-
-        case .dateTime:
-            return Date.dateFormatterDateAndTime.string(from: self)
-        }
-    }
 }

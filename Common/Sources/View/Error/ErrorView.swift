@@ -19,15 +19,24 @@
 import HyperwalletSDK
 import UIKit
 
+/// The class to handle UI errors
 public final class ErrorView {
     weak var viewController: UIViewController!
     var error: HyperwalletErrorType
 
+    /// Initializer to initialize the class with errors to be displayed and the viewcontroller responsible
+    /// to display the errors
+    /// - Parameters:
+    ///   - viewController: view controller that contains errors
+    ///   - error: hyperwallet error
     public init(viewController: UIViewController, error: HyperwalletErrorType) {
         self.viewController = viewController
         self.error = error
     }
 
+    /// To show error messages
+    ///
+    /// - Parameter handler: handler to either remain on same UI page or go back to previous
     public func show(_ handler: (() -> Void)?) {
         switch error.group {
         case .business:
@@ -41,6 +50,9 @@ public final class ErrorView {
         }
     }
 
+    /// To handle business errors
+    ///
+    /// - Parameter handler: to handle business error
     public func businessError(_ handler: ((UIAlertAction) -> Void)? = nil) {
         HyperwalletUtilViews.showAlert(viewController,
                                        title: "error".localized(),

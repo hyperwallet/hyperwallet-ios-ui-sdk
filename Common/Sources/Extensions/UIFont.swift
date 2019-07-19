@@ -18,7 +18,13 @@
 
 import UIKit
 
+/// The UIFont extension
 public extension UIFont {
+    /// To register UIFont
+    ///
+    /// - Parameters:
+    ///   - fileName: String
+    ///   - type: String
     static func register(_ fileName: String, type: String) {
         guard let resourceBundleURL = HyperwalletBundle.bundle.path(forResource: fileName, ofType: type) else {
             print("Font path not found")
