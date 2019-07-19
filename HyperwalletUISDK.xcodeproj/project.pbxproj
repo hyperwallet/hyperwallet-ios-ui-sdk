@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		07AEB50722E0F98D0020130D /* UserRepository.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 643912D422DF40CB00036609 /* UserRepository.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0961D62D22AA858E007F0B44 /* ReceiptsForFewMonths.json in Resources */ = {isa = PBXBuildFile; fileRef = 0961D62C22AA858E007F0B44 /* ReceiptsForFewMonths.json */; };
 		0961D62F22AA861A007F0B44 /* ReceiptsForOneMonth.json in Resources */ = {isa = PBXBuildFile; fileRef = 0961D62E22AA861A007F0B44 /* ReceiptsForOneMonth.json */; };
 		0961D63322AA8817007F0B44 /* ReceiptsForLazyLoading.json in Resources */ = {isa = PBXBuildFile; fileRef = 0961D63222AA8817007F0B44 /* ReceiptsForLazyLoading.json */; };
@@ -22,7 +21,6 @@
 		4157136422C56B53005D6DB1 /* PrepaidCardListReceiptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4157136222C56B4B005D6DB1 /* PrepaidCardListReceiptTests.swift */; };
 		4A31BDB722D762AE0027DACA /* PrepaidCardReceiptRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A31BDB622D762AE0027DACA /* PrepaidCardReceiptRepositoryTests.swift */; };
 		4A31BDB922D762CE0027DACA /* ReceiptRepositoryFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A31BDB822D762CE0027DACA /* ReceiptRepositoryFactoryTests.swift */; };
-		4A343DA622D7A0E600B1DA3E /* ReceiptRepository.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE6B6C022D605B20009DEFE /* ReceiptRepository.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4ADC4F2E22D891EA004F3F8D /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADC4F2D22D891EA004F3F8D /* Date.swift */; };
 		4AE6B6C922D605B20009DEFE /* ReceiptRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE6B6C022D605B20009DEFE /* ReceiptRepository.framework */; };
 		4AE6B6CE22D605B20009DEFE /* UserReceiptRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE6B6CD22D605B20009DEFE /* UserReceiptRepositoryTests.swift */; };
@@ -72,8 +70,6 @@
 		C358A9A72272644000E5AE47 /* SelectTransferMethodType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C358A9A42272644000E5AE47 /* SelectTransferMethodType.swift */; };
 		C38DC07922727F9300B1F00E /* SelectTransferMethodCountryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38DC07822727F9300B1F00E /* SelectTransferMethodCountryType.swift */; };
 		C3E72174226E76A80067D3A0 /* XCTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E72173226E76A80067D3A0 /* XCTestCase.swift */; };
-		DB2EB67022617AB100FBEB3D /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB2EB66F22617AB100FBEB3D /* icomoon.ttf */; };
-		DB2EB67122617C0F00FBEB3D /* HyperwalletUISDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DBCA37F5225E892400CD4137 /* HyperwalletUISDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DB4679852260380C00E1AF49 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4679842260380C00E1AF49 /* AppDelegate.swift */; };
 		DB4679872260380C00E1AF49 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4679862260380C00E1AF49 /* ViewController.swift */; };
 		DB46798A2260380C00E1AF49 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB4679882260380C00E1AF49 /* Main.storyboard */; };
@@ -92,6 +88,22 @@
 		DB5295E722E22F1400657F50 /* HyperwalletTestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB18E9FA2261BA4C004F6AC3 /* HyperwalletTestHelper.swift */; };
 		DB5295EA22E22FCE00657F50 /* UserReceiptResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DB5295E822E22FCE00657F50 /* UserReceiptResponse.json */; };
 		DB5295EB22E22FCE00657F50 /* PrepaidCardReceiptResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DB5295E922E22FCE00657F50 /* PrepaidCardReceiptResponse.json */; };
+		DB5295EC22E231C500657F50 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB2EB66F22617AB100FBEB3D /* icomoon.ttf */; };
+		DB5295ED22E231C500657F50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBFB61452261E44C00C4A8AA /* Assets.xcassets */; };
+		DB5295FC22E233AB00657F50 /* HyperwalletUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5295FB22E233AB00657F50 /* HyperwalletUI.swift */; };
+		DB5295FF22E2344B00657F50 /* HyperwalletUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5295FE22E2344B00657F50 /* HyperwalletUI.swift */; };
+		DB52960822E235EF00657F50 /* Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB551F4922E1316400DD65C2 /* Common.framework */; };
+		DB52960922E235EF00657F50 /* Common.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DB551F4922E1316400DD65C2 /* Common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DB52960C22E235EF00657F50 /* TransferMethod.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB551FA722E1409700DD65C2 /* TransferMethod.framework */; };
+		DB52960D22E235EF00657F50 /* TransferMethod.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DB551FA722E1409700DD65C2 /* TransferMethod.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DB52961022E235EF00657F50 /* Receipt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB99C2C822E220C200E45185 /* Receipt.framework */; };
+		DB52961122E235EF00657F50 /* Receipt.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DB99C2C822E220C200E45185 /* Receipt.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DB52961522E2361600657F50 /* ReceiptRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE6B6C022D605B20009DEFE /* ReceiptRepository.framework */; };
+		DB52961622E2361600657F50 /* ReceiptRepository.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE6B6C022D605B20009DEFE /* ReceiptRepository.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DB52961922E2361600657F50 /* TransferMethodRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBAF929D22CFCBC7004F197A /* TransferMethodRepository.framework */; };
+		DB52961A22E2361600657F50 /* TransferMethodRepository.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DBAF929D22CFCBC7004F197A /* TransferMethodRepository.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DB52961D22E2361600657F50 /* UserRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 643912D422DF40CB00036609 /* UserRepository.framework */; };
+		DB52961E22E2361600657F50 /* UserRepository.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 643912D422DF40CB00036609 /* UserRepository.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DB551F5922E1316400DD65C2 /* Common.h in Headers */ = {isa = PBXBuildFile; fileRef = DB551F4B22E1316400DD65C2 /* Common.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DB551F6522E133AF00DD65C2 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988547CF22970FA1007B312C /* Date.swift */; };
 		DB551F6622E133AF00DD65C2 /* HyperwalletCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC8404322D463CA00178B64 /* HyperwalletCountry.swift */; };
@@ -193,7 +205,6 @@
 		DB6523B922DFDAA400F52EA7 /* CompletionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6523B822DFDAA400F52EA7 /* CompletionHelper.swift */; };
 		DB6523BB22DFDAAD00F52EA7 /* CompletionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6523BA22DFDAAC00F52EA7 /* CompletionHelper.swift */; };
 		DB68FEE02284D82D000EE61D /* HyperwalletUISDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBCA37F5225E892400CD4137 /* HyperwalletUISDK.framework */; };
-		DB7D129222D303830063BBFA /* TransferMethodRepository.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DBAF929D22CFCBC7004F197A /* TransferMethodRepository.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DB8FEE2122DE89390041A777 /* TransferMethodConfigurationKeysResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DB8FEE1D22DE89390041A777 /* TransferMethodConfigurationKeysResponse.json */; };
 		DB8FEE2222DE89390041A777 /* BankAccountConfigurationPresetValues.json in Resources */ = {isa = PBXBuildFile; fileRef = DB8FEE1E22DE89390041A777 /* BankAccountConfigurationPresetValues.json */; };
 		DB8FEE2322DE89390041A777 /* ListTransferMethodResponseWithoutPayPalAccount.json in Resources */ = {isa = PBXBuildFile; fileRef = DB8FEE1F22DE89390041A777 /* ListTransferMethodResponseWithoutPayPalAccount.json */; };
@@ -238,17 +249,9 @@
 		DBCA3806225E892400CD4137 /* HyperwalletUISDK.h in Headers */ = {isa = PBXBuildFile; fileRef = DBCA37F8225E892400CD4137 /* HyperwalletUISDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DBDE15DD22D6562900BD646F /* TransferMethodRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDE15DB22D655F000BD646F /* TransferMethodRepositoryTests.swift */; };
 		DBF89CB8227C072400AF4344 /* UserIndividualCountryCanadaResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBF89CB7227C072400AF4344 /* UserIndividualCountryCanadaResponse.json */; };
-		DBFB61462261E44C00C4A8AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBFB61452261E44C00C4A8AA /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4A343DA222D7A07E00B1DA3E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4AE6B6BF22D605B20009DEFE;
-			remoteInfo = ReceiptRepository;
-		};
 		4AE6B6CA22D605B20009DEFE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
@@ -257,13 +260,6 @@
 			remoteInfo = ReceiptRepository;
 		};
 		643912DE22DF40CB00036609 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 643912D322DF40CB00036609;
-			remoteInfo = UserRepository;
-		};
-		6439130322DF41CF00036609 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
 			proxyType = 1;
@@ -284,12 +280,89 @@
 			remoteGlobalIDString = DB4679812260380C00E1AF49;
 			remoteInfo = SwiftDemo;
 		};
-		DB4FD4392261462600F00959 /* PBXContainerItemProxy */ = {
+		DB5295EE22E2323900657F50 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = DBCA37F4225E892400CD4137;
-			remoteInfo = HyperwalletUISDK;
+			remoteGlobalIDString = 4AE6B6BF22D605B20009DEFE;
+			remoteInfo = ReceiptRepository;
+		};
+		DB5295F022E2323900657F50 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DBAF929C22CFCBC7004F197A;
+			remoteInfo = TransferMethodRepository;
+		};
+		DB5295F222E2323900657F50 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 643912D322DF40CB00036609;
+			remoteInfo = UserRepository;
+		};
+		DB5295F422E2323900657F50 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB551FA622E1409700DD65C2;
+			remoteInfo = TransferMethod;
+		};
+		DB5295F622E2323900657F50 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB99C2C722E220C200E45185;
+			remoteInfo = Receipt;
+		};
+		DB5295F822E2327300657F50 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB551F4822E1316400DD65C2;
+			remoteInfo = Common;
+		};
+		DB52960A22E235EF00657F50 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB551F4822E1316400DD65C2;
+			remoteInfo = Common;
+		};
+		DB52960E22E235EF00657F50 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB551FA622E1409700DD65C2;
+			remoteInfo = TransferMethod;
+		};
+		DB52961222E235EF00657F50 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB99C2C722E220C200E45185;
+			remoteInfo = Receipt;
+		};
+		DB52961722E2361600657F50 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4AE6B6BF22D605B20009DEFE;
+			remoteInfo = ReceiptRepository;
+		};
+		DB52961B22E2361600657F50 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DBAF929C22CFCBC7004F197A;
+			remoteInfo = TransferMethodRepository;
+		};
+		DB52961F22E2361600657F50 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 643912D322DF40CB00036609;
+			remoteInfo = UserRepository;
 		};
 		DB551F5322E1316400DD65C2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -333,26 +406,21 @@
 			remoteGlobalIDString = DBAF929C22CFCBC7004F197A;
 			remoteInfo = TransferMethodRepository;
 		};
-		DBAF92CD22D276D0004F197A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DBAF929C22CFCBC7004F197A;
-			remoteInfo = TransferMethodRepository;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		DB4FD43B2261462600F00959 /* Embed Frameworks */ = {
+		DB52961422E235EF00657F50 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 12;
+			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				07AEB50722E0F98D0020130D /* UserRepository.framework in Embed Frameworks */,
-				4A343DA622D7A0E600B1DA3E /* ReceiptRepository.framework in Embed Frameworks */,
-				DB7D129222D303830063BBFA /* TransferMethodRepository.framework in Embed Frameworks */,
-				DB2EB67122617C0F00FBEB3D /* HyperwalletUISDK.framework in Embed Frameworks */,
+				DB52960D22E235EF00657F50 /* TransferMethod.framework in Embed Frameworks */,
+				DB52960922E235EF00657F50 /* Common.framework in Embed Frameworks */,
+				DB52961A22E2361600657F50 /* TransferMethodRepository.framework in Embed Frameworks */,
+				DB52961122E235EF00657F50 /* Receipt.framework in Embed Frameworks */,
+				DB52961622E2361600657F50 /* ReceiptRepository.framework in Embed Frameworks */,
+				DB52961E22E2361600657F50 /* UserRepository.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -481,6 +549,8 @@
 		DB4BDFDE22D40B2B00761710 /* TransferMethodRepositoryFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodRepositoryFactoryTests.swift; sourceTree = "<group>"; };
 		DB5295E822E22FCE00657F50 /* UserReceiptResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = UserReceiptResponse.json; path = Responses/UserReceiptResponse.json; sourceTree = "<group>"; };
 		DB5295E922E22FCE00657F50 /* PrepaidCardReceiptResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = PrepaidCardReceiptResponse.json; path = Responses/PrepaidCardReceiptResponse.json; sourceTree = "<group>"; };
+		DB5295FB22E233AB00657F50 /* HyperwalletUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletUI.swift; sourceTree = "<group>"; };
+		DB5295FE22E2344B00657F50 /* HyperwalletUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletUI.swift; sourceTree = "<group>"; };
 		DB551F4922E1316400DD65C2 /* Common.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Common.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB551F4B22E1316400DD65C2 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		DB551F4C22E1316400DD65C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -667,6 +737,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB52960C22E235EF00657F50 /* TransferMethod.framework in Frameworks */,
+				DB52960822E235EF00657F50 /* Common.framework in Frameworks */,
+				DB52961922E2361600657F50 /* TransferMethodRepository.framework in Frameworks */,
+				DB52961022E235EF00657F50 /* Receipt.framework in Frameworks */,
+				DB52961522E2361600657F50 /* ReceiptRepository.framework in Frameworks */,
+				DB52961D22E2361600657F50 /* UserRepository.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1085,9 +1161,18 @@
 			path = Responses;
 			sourceTree = "<group>";
 		};
+		DB5295FA22E2336700657F50 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DB5295FB22E233AB00657F50 /* HyperwalletUI.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		DB551F4A22E1316400DD65C2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				DB2EB66E22617AB100FBEB3D /* Resources */,
 				DB551F4B22E1316400DD65C2 /* Common.h */,
 				DBCA382E225E8BA900CD4137 /* Extensions */,
 				DBCA383F225E8BAA00CD4137 /* Generics */,
@@ -1168,6 +1253,7 @@
 			isa = PBXGroup;
 			children = (
 				DB16A63C22D8E98300F1B04F /* HyperwalletTransferMethod.swift */,
+				DB5295FE22E2344B00657F50 /* HyperwalletUI.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1227,6 +1313,7 @@
 		DB99C2C922E220C200E45185 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				DB5295FA22E2336700657F50 /* Extensions */,
 				DB8FEE2522DE898C0041A777 /* ListReceiptTableViewCell.swift */,
 				988547C92294B829007B312C /* ListReceiptTableViewController.swift */,
 				988547CB2294B879007B312C /* ListReceiptViewPresenter.swift */,
@@ -1380,7 +1467,6 @@
 		DBCA37F7225E892400CD4137 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				DB2EB66E22617AB100FBEB3D /* Resources */,
 				DBCA37F8225E892400CD4137 /* HyperwalletUISDK.h */,
 				DBCA37F9225E892400CD4137 /* Info.plist */,
 			);
@@ -1676,13 +1762,18 @@
 				DB46797E2260380C00E1AF49 /* Sources */,
 				DB46797F2260380C00E1AF49 /* Frameworks */,
 				DB4679802260380C00E1AF49 /* Resources */,
-				DB4FD43B2261462600F00959 /* Embed Frameworks */,
 				98175448228E0BE50019159A /* Carthage Copy frameworks */,
+				DB52961422E235EF00657F50 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				DB4FD43A2261462600F00959 /* PBXTargetDependency */,
+				DB52960B22E235EF00657F50 /* PBXTargetDependency */,
+				DB52960F22E235EF00657F50 /* PBXTargetDependency */,
+				DB52961322E235EF00657F50 /* PBXTargetDependency */,
+				DB52961822E2361600657F50 /* PBXTargetDependency */,
+				DB52961C22E2361600657F50 /* PBXTargetDependency */,
+				DB52962022E2361600657F50 /* PBXTargetDependency */,
 			);
 			name = Demo;
 			productName = Demo;
@@ -1775,6 +1866,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				DB5295F922E2327300657F50 /* PBXTargetDependency */,
 			);
 			name = Receipt;
 			productName = Receipt;
@@ -1849,10 +1941,12 @@
 			buildRules = (
 			);
 			dependencies = (
+				DB5295EF22E2323900657F50 /* PBXTargetDependency */,
+				DB5295F122E2323900657F50 /* PBXTargetDependency */,
+				DB5295F322E2323900657F50 /* PBXTargetDependency */,
+				DB5295F522E2323900657F50 /* PBXTargetDependency */,
+				DB5295F722E2323900657F50 /* PBXTargetDependency */,
 				DB551F7A22E1356000DD65C2 /* PBXTargetDependency */,
-				6439130422DF41CF00036609 /* PBXTargetDependency */,
-				4A343DA322D7A07E00B1DA3E /* PBXTargetDependency */,
-				DBAF92CE22D276D0004F197A /* PBXTargetDependency */,
 			);
 			name = HyperwalletUISDK;
 			productName = HyperwalletUISDK;
@@ -2053,7 +2147,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB5295EC22E231C500657F50 /* icomoon.ttf in Resources */,
 				DB551F8122E137B600DD65C2 /* Localizable.strings in Resources */,
+				DB5295ED22E231C500657F50 /* Assets.xcassets in Resources */,
 				DB551F8C22E137D800DD65C2 /* ProcessingView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2147,8 +2243,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBFB61462261E44C00C4A8AA /* Assets.xcassets in Resources */,
-				DB2EB67022617AB100FBEB3D /* icomoon.ttf in Resources */,
 				98220B8C2265793700055E18 /* README.md in Resources */,
 				DB8FEE2322DE89390041A777 /* ListTransferMethodResponseWithoutPayPalAccount.json in Resources */,
 				DB8FEE2222DE89390041A777 /* BankAccountConfigurationPresetValues.json in Resources */,
@@ -2426,6 +2520,7 @@
 				DB551FCB22E1421E00DD65C2 /* ExpiryDateWidget.swift in Sources */,
 				DB551FD922E1424200DD65C2 /* AddTransferMethodTableViewCell.swift in Sources */,
 				DB551FC622E141D800DD65C2 /* HyperwalletTransferMethod.swift in Sources */,
+				DB5295FF22E2344B00657F50 /* HyperwalletUI.swift in Sources */,
 				DB551FCE22E1421E00DD65C2 /* PhoneWidget.swift in Sources */,
 				DB551FD622E1424200DD65C2 /* CountryCurrencyCell.swift in Sources */,
 				DB551FD522E1424200DD65C2 /* AddTransferMethodPresenter.swift in Sources */,
@@ -2459,6 +2554,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB99C2E122E22ADF00E45185 /* ListReceiptTableViewCell.swift in Sources */,
+				DB5295FC22E233AB00657F50 /* HyperwalletUI.swift in Sources */,
 				DB99C2E422E22ADF00E45185 /* ReceiptTransactionTableViewCell.swift in Sources */,
 				DB99C2EA22E22ADF00E45185 /* ReceiptNotesTableViewCell.swift in Sources */,
 				DB99C2E822E22ADF00E45185 /* ReceiptDetailTableViewCell.swift in Sources */,
@@ -2517,11 +2613,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		4A343DA322D7A07E00B1DA3E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4AE6B6BF22D605B20009DEFE /* ReceiptRepository */;
-			targetProxy = 4A343DA222D7A07E00B1DA3E /* PBXContainerItemProxy */;
-		};
 		4AE6B6CB22D605B20009DEFE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 4AE6B6BF22D605B20009DEFE /* ReceiptRepository */;
@@ -2531,11 +2622,6 @@
 			isa = PBXTargetDependency;
 			target = 643912D322DF40CB00036609 /* UserRepository */;
 			targetProxy = 643912DE22DF40CB00036609 /* PBXContainerItemProxy */;
-		};
-		6439130422DF41CF00036609 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 643912D322DF40CB00036609 /* UserRepository */;
-			targetProxy = 6439130322DF41CF00036609 /* PBXContainerItemProxy */;
 		};
 		DB18E9F42261BA29004F6AC3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2547,10 +2633,65 @@
 			target = DB4679812260380C00E1AF49 /* Demo */;
 			targetProxy = DB2588002261BFF100E6236B /* PBXContainerItemProxy */;
 		};
-		DB4FD43A2261462600F00959 /* PBXTargetDependency */ = {
+		DB5295EF22E2323900657F50 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = DBCA37F4225E892400CD4137 /* HyperwalletUISDK */;
-			targetProxy = DB4FD4392261462600F00959 /* PBXContainerItemProxy */;
+			target = 4AE6B6BF22D605B20009DEFE /* ReceiptRepository */;
+			targetProxy = DB5295EE22E2323900657F50 /* PBXContainerItemProxy */;
+		};
+		DB5295F122E2323900657F50 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DBAF929C22CFCBC7004F197A /* TransferMethodRepository */;
+			targetProxy = DB5295F022E2323900657F50 /* PBXContainerItemProxy */;
+		};
+		DB5295F322E2323900657F50 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 643912D322DF40CB00036609 /* UserRepository */;
+			targetProxy = DB5295F222E2323900657F50 /* PBXContainerItemProxy */;
+		};
+		DB5295F522E2323900657F50 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB551FA622E1409700DD65C2 /* TransferMethod */;
+			targetProxy = DB5295F422E2323900657F50 /* PBXContainerItemProxy */;
+		};
+		DB5295F722E2323900657F50 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB99C2C722E220C200E45185 /* Receipt */;
+			targetProxy = DB5295F622E2323900657F50 /* PBXContainerItemProxy */;
+		};
+		DB5295F922E2327300657F50 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB551F4822E1316400DD65C2 /* Common */;
+			targetProxy = DB5295F822E2327300657F50 /* PBXContainerItemProxy */;
+		};
+		DB52960B22E235EF00657F50 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB551F4822E1316400DD65C2 /* Common */;
+			targetProxy = DB52960A22E235EF00657F50 /* PBXContainerItemProxy */;
+		};
+		DB52960F22E235EF00657F50 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB551FA622E1409700DD65C2 /* TransferMethod */;
+			targetProxy = DB52960E22E235EF00657F50 /* PBXContainerItemProxy */;
+		};
+		DB52961322E235EF00657F50 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB99C2C722E220C200E45185 /* Receipt */;
+			targetProxy = DB52961222E235EF00657F50 /* PBXContainerItemProxy */;
+		};
+		DB52961822E2361600657F50 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4AE6B6BF22D605B20009DEFE /* ReceiptRepository */;
+			targetProxy = DB52961722E2361600657F50 /* PBXContainerItemProxy */;
+		};
+		DB52961C22E2361600657F50 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DBAF929C22CFCBC7004F197A /* TransferMethodRepository */;
+			targetProxy = DB52961B22E2361600657F50 /* PBXContainerItemProxy */;
+		};
+		DB52962022E2361600657F50 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 643912D322DF40CB00036609 /* UserRepository */;
+			targetProxy = DB52961F22E2361600657F50 /* PBXContainerItemProxy */;
 		};
 		DB551F5422E1316400DD65C2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2581,11 +2722,6 @@
 			isa = PBXTargetDependency;
 			target = DBAF929C22CFCBC7004F197A /* TransferMethodRepository */;
 			targetProxy = DBAF92A722CFCBC7004F197A /* PBXContainerItemProxy */;
-		};
-		DBAF92CE22D276D0004F197A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DBAF929C22CFCBC7004F197A /* TransferMethodRepository */;
-			targetProxy = DBAF92CD22D276D0004F197A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2621,9 +2757,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -2652,9 +2789,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -2683,9 +2821,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -2793,6 +2932,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -2819,6 +2959,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -2845,6 +2986,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -3095,6 +3237,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -3121,6 +3264,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -3147,6 +3291,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -3239,6 +3384,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -3265,6 +3411,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -3291,6 +3438,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -3557,6 +3705,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -3584,6 +3733,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -3611,6 +3761,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -3701,7 +3852,7 @@
 		DBAF92AF22CFCBC7004F197A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -3731,7 +3882,7 @@
 		DBAF92B022CFCBC7004F197A /* XCUITest */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -3761,7 +3912,7 @@
 		DBAF92B122CFCBC7004F197A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";

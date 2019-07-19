@@ -39,67 +39,7 @@ public final class HyperwalletUI {
     public class func setup(_ provider: HyperwalletAuthenticationTokenProvider) {
         instance = HyperwalletUI(provider)
     }
-/*
-    /// Lists the user's transfer methods (bank account, bank card, PayPal account, prepaid card, paper check).
-    ///
-    /// The user can deactivate and add a new transfer method.
-    ///
-    /// - Returns: An instance of `listTransferMethodTableViewController`
-    public func listTransferMethodTableViewController() -> ListTransferMethodTableViewController {
-        return ListTransferMethodTableViewController()
-    }
 
-    /// Lists the user's transactions.
-    ///
-    ///
-    /// - Returns: An instance of `ListReceiptTableViewController`
-    public func listUserReceiptTableViewController() -> ListReceiptTableViewController {
-        return ListReceiptTableViewController()
-    }
-
-    /// Lists the user's prepaid card transactions.
-    ///
-    /// - Parameter prepaidCardToken: prepaid card token for which transactions are requested
-    /// - Returns: An instance of `ListReceiptTableViewController`
-    public func listPrepaidCardReceiptTableViewController(_ prepaidCardToken: String)
-        -> ListReceiptTableViewController {
-        return ListReceiptTableViewController(prepaidCardToken: prepaidCardToken)
-    }
-    /// Lists all transfer method types available based on the country, currency and profile type to create a new
-    /// transfer method (bank account, bank card, PayPal account, prepaid card, paper check).
-    ///
-    /// - Parameter forceUpdateData: Forces to refresh the cached data.
-    /// - Returns: An instance of `SelectTransferMethodTypeTableViewController`
-    public func selectTransferMethodTypeTableViewController(forceUpdateData: Bool = false)
-        -> SelectTransferMethodTypeTableViewController {
-        return SelectTransferMethodTypeTableViewController(forceUpdate: forceUpdateData)
-    }
-
-    /// Controller to create a new transfer method.
-    ///
-    /// The form fields are based on the country, currency, user's profile type and transfer method type should be
-    /// passed to this Controller to create new Transfer Method for those values.
-    ///
-    /// - Parameters:
-    ///   - country: The 2 letter ISO 3166-1 country code.
-    ///   - currency: The 3 letter ISO 4217-1 currency code.
-    ///   - profileType: The profile type. Possible values - INDIVIDUAL, BUSINESS.
-    ///   - transferMethodTypeCode: The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD.
-    ///   - forceUpdateData: Forces to refresh the cached data.
-    /// - Returns: An instance of `AddTransferMethodTableViewController`
-    public func addTransferMethodTableViewController(
-        _ country: String,
-        _ currency: String,
-        _ profileType: String,
-        _ transferMethodTypeCode: String,
-        _ forceUpdateData: Bool = false) -> AddTransferMethodTableViewController {
-        return AddTransferMethodTableViewController(country,
-                                                    currency,
-                                                    profileType,
-                                                    transferMethodTypeCode,
-                                                    forceUpdateData)
-    }
-*/
     private init(_ provider: HyperwalletAuthenticationTokenProvider) {
         Hyperwallet.setup(provider)
     }

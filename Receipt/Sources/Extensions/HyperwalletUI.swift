@@ -17,24 +17,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import Common
-import UIKit
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-    var window: UIWindow?
+extension HyperwalletUI {
+    /// Lists the user's transactions.
+    ///
+    ///
+    /// - Returns: An instance of `ListReceiptTableViewController`
+    public func listUserReceiptTableViewController() -> ListReceiptTableViewController {
+        return ListReceiptTableViewController()
+    }
 
-    func application(_ application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-
-        //ThemeManager.applyWhiteTheme()
-        ThemeManager.applyTheme()
-
-        // Avoid to display a black area during the view transaction in the UINavigationBar.
-        window?.backgroundColor = Theme.ViewController.backgroundColor
-        // Set the default tint color
-        window?.tintColor = Theme.Button.color
-
-        return true
+    /// Lists the user's prepaid card transactions.
+    ///
+    /// - Parameter prepaidCardToken: prepaid card token for which transactions are requested
+    /// - Returns: An instance of `ListReceiptTableViewController`
+    public func listPrepaidCardReceiptTableViewController(_ prepaidCardToken: String)
+        -> ListReceiptTableViewController {
+            return ListReceiptTableViewController(prepaidCardToken: prepaidCardToken)
     }
 }
