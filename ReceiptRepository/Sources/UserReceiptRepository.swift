@@ -36,7 +36,7 @@ public protocol UserReceiptRepository {
 
 /// User receipt repository
 public final class RemoteUserReceiptRepository: UserReceiptRepository {
-    private let yearAgoFromNow = Date.yearAgoFromNow
+    private let yearAgoFromNow = Calendar.current.date(byAdding: .year, value: -1, to: Date())
 
     public func listUserReceipts(
         offset: Int,

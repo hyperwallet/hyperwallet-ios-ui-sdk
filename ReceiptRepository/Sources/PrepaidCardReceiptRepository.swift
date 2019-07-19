@@ -33,7 +33,7 @@ public protocol PrepaidCardReceiptRepository {
 
 /// Prepaid card receipt repository
 public final class RemotePrepaidCardReceiptRepository: PrepaidCardReceiptRepository {
-    private let yearAgoFromNow = Date.yearAgoFromNow
+    private let yearAgoFromNow = Calendar.current.date(byAdding: .year, value: -1, to: Date())
 
     public func listPrepaidCardReceipts(
         prepaidCardToken: String,
