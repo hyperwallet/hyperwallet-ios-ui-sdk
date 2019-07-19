@@ -1,4 +1,6 @@
+#if !COCOAPODS
 import Common
+#endif
 import Hippolyte
 import HyperwalletSDK
 @testable import TransferMethod
