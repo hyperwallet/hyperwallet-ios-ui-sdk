@@ -20,10 +20,9 @@
 import Common
 #endif
 
-public class ReceiptThemeManager {
+extension ThemeManager {
     /// Applies default visual styles to the Hyperwallet user interface components.
-    public static func applyTheme() {
-        ThemeManager.applyTheme()
+    public static func applyReceiptTheme() {
         applyToReceiptDetailTableViewCell()
         applyToReceiptFeeTableViewCell()
         applyToReceiptNotesTableViewCell()
