@@ -38,9 +38,10 @@ public final class RemotePrepaidCardReceiptRepository: PrepaidCardReceiptReposit
     public func listPrepaidCardReceipts(
         prepaidCardToken: String,
         completion: @escaping (Result<HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType>) -> Void) {
-        Hyperwallet.shared.listPrepaidCardReceipts(prepaidCardToken: prepaidCardToken,
-                                                   queryParam: setUpPrepaidCardQueryParam(),
-                                                   completion: ReceiptRepositoryCompletionHelper.performHandler(completion))
+        Hyperwallet.shared.listPrepaidCardReceipts(
+            prepaidCardToken: prepaidCardToken,
+            queryParam: setUpPrepaidCardQueryParam(),
+            completion: ReceiptRepositoryCompletionHelper.performHandler(completion))
     }
 
     private func setUpPrepaidCardQueryParam() -> HyperwalletReceiptQueryParam {

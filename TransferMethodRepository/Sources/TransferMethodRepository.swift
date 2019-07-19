@@ -59,14 +59,17 @@ final class RemoteTransferMethodRepository: TransferMethodRepository {
         _ transferMethod: HyperwalletTransferMethod,
         _ completion: @escaping (Result<HyperwalletTransferMethod?, HyperwalletErrorType>) -> Void) {
         if let bankAccount = transferMethod as? HyperwalletBankAccount {
-            Hyperwallet.shared.createBankAccount(account: bankAccount,
-                                                 completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
+            Hyperwallet.shared.createBankAccount(
+                account: bankAccount,
+                completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
         } else if let bankCard = transferMethod as? HyperwalletBankCard {
-            Hyperwallet.shared.createBankCard(account: bankCard,
-                                              completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
+            Hyperwallet.shared.createBankCard(
+                account: bankCard,
+                completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
         } else if let payPalAccount = transferMethod as? HyperwalletPayPalAccount {
-            Hyperwallet.shared.createPayPalAccount(account: payPalAccount,
-                                                   completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
+            Hyperwallet.shared.createPayPalAccount(
+                account: payPalAccount,
+                completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
         }
     }
 
@@ -80,17 +83,20 @@ final class RemoteTransferMethodRepository: TransferMethodRepository {
 
         switch transferMethodType {
         case "BANK_ACCOUNT", "WIRE_ACCOUNT":
-            Hyperwallet.shared.deactivateBankAccount(transferMethodToken: token,
-                                                     notes: RemoteTransferMethodRepository.deactivateNote,
-                                                     completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
+            Hyperwallet.shared.deactivateBankAccount(
+                transferMethodToken: token,
+                notes: RemoteTransferMethodRepository.deactivateNote,
+                completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
         case "BANK_CARD":
-            Hyperwallet.shared.deactivateBankCard(transferMethodToken: token,
-                                                  notes: RemoteTransferMethodRepository.deactivateNote,
-                                                  completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
+            Hyperwallet.shared.deactivateBankCard(
+                transferMethodToken: token,
+                notes: RemoteTransferMethodRepository.deactivateNote,
+                completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
         case "PAYPAL_ACCOUNT":
-            Hyperwallet.shared.deactivatePayPalAccount(transferMethodToken: token,
-                                                       notes: RemoteTransferMethodRepository.deactivateNote,
-                                                       completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
+            Hyperwallet.shared.deactivatePayPalAccount(
+                transferMethodToken: token,
+                notes: RemoteTransferMethodRepository.deactivateNote,
+                completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
 
         default:
             break
@@ -104,7 +110,8 @@ final class RemoteTransferMethodRepository: TransferMethodRepository {
         queryParam.limit = 100
         queryParam.status = .activated
 
-        Hyperwallet.shared.listTransferMethods(queryParam: queryParam,
-                                               completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
+        Hyperwallet.shared.listTransferMethods(
+            queryParam: queryParam,
+            completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
     }
 }
