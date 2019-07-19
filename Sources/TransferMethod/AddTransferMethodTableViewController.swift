@@ -39,6 +39,7 @@ public final class AddTransferMethodTableViewController: UITableViewController {
     public var createTransferMethodHandler: ((HyperwalletTransferMethod) -> Void)?
     private var country: String
     private var currency: String
+    private var forceUpdate: Bool
     private var profileType: String
     private var transferMethodTypeCode: String
     private var processingView: ProcessingView?
@@ -89,15 +90,17 @@ public final class AddTransferMethodTableViewController: UITableViewController {
     ///   - country: The 2 letter ISO 3166-1 country code.
     ///   - currency: The 3 letter ISO 4217-1 currency code.
     ///   - profileType: The profile type. Possible values - INDIVIDUAL, BUSINESS.
-    ///   - transferMethodTypeCode: The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD.
+    ///   - transferMethodTypeCode: The transfer method type.
     init(_ country: String,
          _ currency: String,
          _ profileType: String,
-         _ transferMethodTypeCode: String) {
+         _ transferMethodTypeCode: String,
+         _ forceUpdate: Bool) {
         self.country = country
         self.currency = currency
         self.profileType = profileType
         self.transferMethodTypeCode = transferMethodTypeCode
+        self.forceUpdate = forceUpdate
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -415,7 +418,7 @@ extension AddTransferMethodTableViewController: AddTransferMethodView {
     }
 
     private func addInfoSection(_ transferMethodType: HyperwalletTransferMethodType) {
-        guard transferMethodType.fees != nil || transferMethodType.processingTime != nil else {
+        guard transferMethodType.fees != nil || transferMethodType.processingTimes?.nodes?.first != nil else {
             return
         }
 
