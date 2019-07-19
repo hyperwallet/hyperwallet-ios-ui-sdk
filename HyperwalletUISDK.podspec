@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-    s.name                  = 'HyperwalletUISDK1'
+    s.name                  = 'HyperwalletUISDK'
     s.version               = '1.0.0-beta03'
     s.summary               = 'Hyperwallet UI SDK for iOS to integrate with Hyperwallet Platform'
     s.homepage              = 'https://github.com/hyperwallet/hyperwallet-ios-ui-sdk'
@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
     s.ios.deployment_target = '10.0'
     s.source                = { :git => 'https://github.com/hyperwallet/hyperwallet-ios-ui-sdk.git', :branch => "task/HW-52892-Modularization-for-hyperwalletUISDK"}
     s.requires_arc          = true
-    s.swift_version         = '4.2'
+    s.swift_version         = '5.0'
     s.dependency 'HyperwalletSDK', '1.0.0-beta02'
 
     s.default_subspec = 'TransferMethod', 'Receipt'
@@ -33,20 +33,20 @@ Pod::Spec.new do |s|
 
     s.subspec "TransferMethod" do |transferMethod|
         transferMethod.source_files = "TransferMethod/Sources/**/*.{swift,h}"
-        transferMethod.dependency "Common"
-        transferMethod.dependency "UserRepository"
-        transferMethod.dependency "TransferMethodRepository"
+        transferMethod.dependency "HyperwalletUISDK/Common"
+        transferMethod.dependency "HyperwalletUISDK/UserRepository"
+        transferMethod.dependency "HyperwalletUISDK/TransferMethodRepository"
     end
 
     s.subspec "Receipt" do |receipt|
         receipt.source_files = "Receipt/Sources/**/*.{swift,h}"
-        receipt.dependency 'Common'
-        receipt.dependency 'ReceiptRepository'
+        receipt.dependency 'HyperwalletUISDK/Common'
+        receipt.dependency 'HyperwalletUISDK/ReceiptRepository'
     end
 
     s.test_spec 'Tests' do |ts|
-        ts.source_files = '/*/Tests/**/*.swift'
-        ts.resources = '/*/Tests/**/*.json'
+        ts.source_files = '**/Tests/**/*.swift'
+        ts.resources = '**/Tests/**/*.json'
         ts.dependency 'Hippolyte', '0.6.0'
     end
 
