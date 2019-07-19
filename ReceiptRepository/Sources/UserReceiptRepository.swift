@@ -50,7 +50,7 @@ public final class RemoteUserReceiptRepository: UserReceiptRepository {
         _ completion: @escaping (Result<HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType>) -> Void)
         -> (HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType?) -> Void {
             return {(result, error) in
-                CompletionHelper.performHandler(error, result, completion)
+                ReceiptRepositoryCompletionHelper.performHandler(error, result, completion)
             }
     }
 

@@ -18,11 +18,11 @@
 
 import HyperwalletSDK
 
-final class CompletionHelper {
+final class ReceiptRepositoryCompletionHelper {
     static func performHandler<T>(
         _ completion: @escaping (Result<T?, HyperwalletErrorType>) -> Void) -> (T?, HyperwalletErrorType?) -> Void {
         return {(result, error) in
-            CompletionHelper.performHandler(error, result, completion)
+            ReceiptRepositoryCompletionHelper.performHandler(error, result, completion)
         }
     }
 
