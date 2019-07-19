@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		071584D222E26E17002FBE59 /* ReceiptThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071584D122E26E17002FBE59 /* ReceiptThemeManager.swift */; };
-		071584D422E26E88002FBE59 /* TransferMethodThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071584D322E26E88002FBE59 /* TransferMethodThemeManager.swift */; };
+		077F609F22E28F7F00C91E59 /* ReceiptThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077F609D22E28F3500C91E59 /* ReceiptThemeManager.swift */; };
+		077F60A122E28F8F00C91E59 /* TransferMethodThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077F60A022E28F8F00C91E59 /* TransferMethodThemeManager.swift */; };
 		0961D62D22AA858E007F0B44 /* ReceiptsForFewMonths.json in Resources */ = {isa = PBXBuildFile; fileRef = 0961D62C22AA858E007F0B44 /* ReceiptsForFewMonths.json */; };
 		0961D62F22AA861A007F0B44 /* ReceiptsForOneMonth.json in Resources */ = {isa = PBXBuildFile; fileRef = 0961D62E22AA861A007F0B44 /* ReceiptsForOneMonth.json */; };
 		0961D63322AA8817007F0B44 /* ReceiptsForLazyLoading.json in Resources */ = {isa = PBXBuildFile; fileRef = 0961D63222AA8817007F0B44 /* ReceiptsForLazyLoading.json */; };
@@ -444,13 +444,13 @@
 /* Begin PBXFileReference section */
 		0702673A22B308B60057D62B /* PrepaidCardReceiptResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardReceiptResponse.json; sourceTree = "<group>"; };
 		070769E322D7E1FB00F3C7CF /* UnexpectedErrorResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UnexpectedErrorResponse.json; sourceTree = "<group>"; };
-		071584D122E26E17002FBE59 /* ReceiptThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptThemeManager.swift; sourceTree = "<group>"; };
-		071584D322E26E88002FBE59 /* TransferMethodThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TransferMethodThemeManager.swift; path = Receipt/Sources/Helper/TransferMethodThemeManager.swift; sourceTree = SOURCE_ROOT; };
 		072A53F622838F6B00BC11D0 /* AddTransferMethodSectionData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodSectionData.swift; sourceTree = "<group>"; };
 		073BA5D222A885E6002C58BD /* AddTransferMethodTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodTableViewController.swift; sourceTree = "<group>"; };
 		073BA5D422A88612002C58BD /* ListTransferMethodTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTransferMethodTableViewController.swift; sourceTree = "<group>"; };
 		0743EF9B22A5987100C089EE /* ListReceiptPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListReceiptPresenterTests.swift; sourceTree = "<group>"; };
 		0743EFA022A59EE100C089EE /* UserReceiptNextPageResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserReceiptNextPageResponse.json; sourceTree = "<group>"; };
+		077F609D22E28F3500C91E59 /* ReceiptThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptThemeManager.swift; sourceTree = "<group>"; };
+		077F60A022E28F8F00C91E59 /* TransferMethodThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodThemeManager.swift; sourceTree = "<group>"; };
 		078B45682273895C005B0248 /* ListTransferMethodSuccessResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ListTransferMethodSuccessResponse.json; sourceTree = "<group>"; };
 		078B45692273895C005B0248 /* StatusTransitionResponseSuccess.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = StatusTransitionResponseSuccess.json; sourceTree = "<group>"; };
 		078B456A2273895C005B0248 /* BankCardErrorResponseWithInvalidCardNumber.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BankCardErrorResponseWithInvalidCardNumber.json; sourceTree = "<group>"; };
@@ -824,7 +824,6 @@
 		071584D022E26E08002FBE59 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				071584D122E26E17002FBE59 /* ReceiptThemeManager.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -1153,6 +1152,7 @@
 			isa = PBXGroup;
 			children = (
 				DB5295FB22E233AB00657F50 /* HyperwalletReceiptUI.swift */,
+				077F609D22E28F3500C91E59 /* ReceiptThemeManager.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1240,6 +1240,7 @@
 			isa = PBXGroup;
 			children = (
 				DB5295FE22E2344B00657F50 /* HyperwalletTransferMethodUI.swift */,
+				077F60A022E28F8F00C91E59 /* TransferMethodThemeManager.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1247,7 +1248,6 @@
 		DB551FC222E1419400DD65C2 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				071584D322E26E88002FBE59 /* TransferMethodThemeManager.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -2485,7 +2485,7 @@
 				DB551FD922E1424200DD65C2 /* AddTransferMethodTableViewCell.swift in Sources */,
 				DB5295FF22E2344B00657F50 /* HyperwalletTransferMethodUI.swift in Sources */,
 				DB551FCE22E1421E00DD65C2 /* PhoneWidget.swift in Sources */,
-				071584D422E26E88002FBE59 /* TransferMethodThemeManager.swift in Sources */,
+				077F60A122E28F8F00C91E59 /* TransferMethodThemeManager.swift in Sources */,
 				DB551FD622E1424200DD65C2 /* CountryCurrencyCell.swift in Sources */,
 				DB551FD522E1424200DD65C2 /* AddTransferMethodPresenter.swift in Sources */,
 				DB551FD222E1421E00DD65C2 /* WidgetFactory.swift in Sources */,
@@ -2515,9 +2515,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				077F609F22E28F7F00C91E59 /* ReceiptThemeManager.swift in Sources */,
 				DB99C2E122E22ADF00E45185 /* ListReceiptTableViewCell.swift in Sources */,
 				DB5295FC22E233AB00657F50 /* HyperwalletReceiptUI.swift in Sources */,
-				071584D222E26E17002FBE59 /* ReceiptThemeManager.swift in Sources */,
 				DB99C2E422E22ADF00E45185 /* ReceiptTransactionTableViewCell.swift in Sources */,
 				DB99C2EA22E22ADF00E45185 /* ReceiptNotesTableViewCell.swift in Sources */,
 				DB99C2E822E22ADF00E45185 /* ReceiptDetailTableViewCell.swift in Sources */,
