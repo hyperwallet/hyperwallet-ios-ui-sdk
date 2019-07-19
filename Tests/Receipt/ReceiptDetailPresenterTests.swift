@@ -48,7 +48,7 @@ class ReceiptDetailPresenterTests: XCTestCase {
         XCTAssertEqual(receipt.entry.rawValue, "CREDIT")
         XCTAssertEqual(receipt.amount, "6.00")
         XCTAssertEqual(receipt.currency, "USD")
-        //XCTAssertEqual(cellConfig.createdOn, "Apr 28, 2019")
+        XCTAssertEqual(receipt.createdOn, "2019-04-28T18:16:04")
     }
 
     func testSectionDetailDataShouldNotBeEmpty() {
@@ -62,7 +62,8 @@ class ReceiptDetailPresenterTests: XCTestCase {
         XCTAssertEqual(section.rowCount, 3)
 
         XCTAssertTrue(rowEqual(section.rows[0], "Receipt ID:", "55176986", "journalId"))
-        //XCTAssertTrue(rowEqual(section.rows[1], ("Date:", "Sun, Apr 28, 2019, 9:16 PM")))
+        let expectedDateTime = ISO8601DateFormatter.ignoreTimeZone.date(from: "2019-04-28T18:16:04")!.format(for: .dateTime)
+        XCTAssertTrue(rowEqual(section.rows[1], "Date:", expectedDateTime, "createdOn"))
         XCTAssertTrue(rowEqual(section.rows[2], "Client Transaction ID:", "DyClk0VG2a", "clientPaymentId"))
     }
 
