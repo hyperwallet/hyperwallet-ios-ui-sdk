@@ -16,29 +16,28 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#if !COCOAPODS
-import Common
-#endif
-import HyperwalletSDK
 import UIKit
 
-/// Represents the select widget cell, to display `HyperwalletFieldSelectionOption`.
-final class SelectionWidgetCell: GenericCell<HyperwalletFieldSelectionOption> {
-    override var item: HyperwalletFieldSelectionOption! {
-        didSet {
-            if let option = item {
-                textLabel?.text = option.label
-            }
-        }
+public extension UIColor {
+    convenience init(red: Int, green: Int, blue: Int, alpha: CGFloat = 1.0) {
+        assert((0...255).contains(red), "Invalid red component")
+        assert((0...255).contains(green), "Invalid green component")
+        assert((0...255).contains(blue), "Invalid blue component")
+
+        self.init(
+            red: CGFloat(red) / 255.0,
+            green: CGFloat(green) / 255.0,
+            blue: CGFloat(blue) / 255.0,
+            alpha: alpha
+        )
     }
 
-    @objc dynamic var textLabelColor: UIColor! {
-        get { return self.textLabel?.textColor }
-        set { self.textLabel?.textColor = newValue }
-    }
-
-    @objc dynamic var textLabelFont: UIFont! {
-        get { return self.textLabel?.font }
-        set { self.textLabel?.font = newValue }
+    convenience init(rgb: Int, alpha: CGFloat = 1.0) {
+        self.init(
+            red: (rgb >> 16) & 0xFF,
+            green: (rgb >> 8) & 0xFF,
+            blue: rgb & 0xFF,
+            alpha: alpha
+        )
     }
 }

@@ -16,29 +16,34 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#if !COCOAPODS
-import Common
-#endif
-import HyperwalletSDK
-import UIKit
+import Foundation
 
-/// Represents the select widget cell, to display `HyperwalletFieldSelectionOption`.
-final class SelectionWidgetCell: GenericCell<HyperwalletFieldSelectionOption> {
-    override var item: HyperwalletFieldSelectionOption! {
-        didSet {
-            if let option = item {
-                textLabel?.text = option.label
-            }
+public final class HyperwalletIcon {
+    /// Make transfer method type icon by transfer method type
+    ///
+    /// - Parameter transferMethodType: a type of transfer method in String
+    /// - Returns: a `HyperwalletIconContent` object
+    public static func of(_ fontType: String) -> HyperwalletIconContent {
+        switch fontType {
+        case "BANK_ACCOUNT":
+            return .bank
+        case "BANK_CARD":
+            return .debitCredit
+        case "PREPAID_CARD":
+            return .prepaidCard
+        case "PAPER_CHECK":
+            return .check
+        case "PAYPAL_ACCOUNT":
+            return .paypal
+        case "WIRE_ACCOUNT":
+            return .wire
+        case "CREDIT":
+            return .credit
+        case "DEBIT":
+            return .debit
+
+        default:
+            return .westernUnion
         }
-    }
-
-    @objc dynamic var textLabelColor: UIColor! {
-        get { return self.textLabel?.textColor }
-        set { self.textLabel?.textColor = newValue }
-    }
-
-    @objc dynamic var textLabelFont: UIFont! {
-        get { return self.textLabel?.font }
-        set { self.textLabel?.font = newValue }
     }
 }

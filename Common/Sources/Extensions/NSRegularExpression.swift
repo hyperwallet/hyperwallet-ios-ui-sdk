@@ -16,29 +16,19 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#if !COCOAPODS
-import Common
-#endif
-import HyperwalletSDK
-import UIKit
+import Foundation
 
-/// Represents the select widget cell, to display `HyperwalletFieldSelectionOption`.
-final class SelectionWidgetCell: GenericCell<HyperwalletFieldSelectionOption> {
-    override var item: HyperwalletFieldSelectionOption! {
-        didSet {
-            if let option = item {
-                textLabel?.text = option.label
-            }
+public extension NSRegularExpression {
+    convenience init(_ pattern: String) {
+        do {
+            try self.init(pattern: pattern)
+        } catch {
+            preconditionFailure("Illegal regular expression: \(pattern).")
         }
     }
 
-    @objc dynamic var textLabelColor: UIColor! {
-        get { return self.textLabel?.textColor }
-        set { self.textLabel?.textColor = newValue }
-    }
-
-    @objc dynamic var textLabelFont: UIFont! {
-        get { return self.textLabel?.font }
-        set { self.textLabel?.font = newValue }
+    func matches(_ string: String) -> Bool {
+        let range = NSRange(location: 0, length: string.utf16.count)
+        return firstMatch(in: string, options: [], range: range) != nil
     }
 }

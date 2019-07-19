@@ -16,29 +16,27 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#if !COCOAPODS
-import Common
-#endif
-import HyperwalletSDK
 import UIKit
 
-/// Represents the select widget cell, to display `HyperwalletFieldSelectionOption`.
-final class SelectionWidgetCell: GenericCell<HyperwalletFieldSelectionOption> {
-    override var item: HyperwalletFieldSelectionOption! {
-        didSet {
-            if let option = item {
-                textLabel?.text = option.label
-            }
+public extension UIFont {
+    static func register(_ fileName: String, type: String) {
+        guard let resourceBundleURL = HyperwalletBundle.bundle.path(forResource: fileName, ofType: type) else {
+            print("Font path not found")
+            return
         }
-    }
-
-    @objc dynamic var textLabelColor: UIColor! {
-        get { return self.textLabel?.textColor }
-        set { self.textLabel?.textColor = newValue }
-    }
-
-    @objc dynamic var textLabelFont: UIFont! {
-        get { return self.textLabel?.font }
-        set { self.textLabel?.font = newValue }
+        guard let fontData = NSData(contentsOfFile: resourceBundleURL),
+            let dataProvider = CGDataProvider(data: fontData) else {
+            print("Invalid font file")
+            return
+        }
+        guard let fontRef = CGFont(dataProvider) else {
+            print("Init font error")
+            return
+        }
+        var errorRef: Unmanaged<CFError>?
+        guard CTFontManagerRegisterGraphicsFont(fontRef, &errorRef) else {
+            print("Register failed")
+            return
+        }
     }
 }

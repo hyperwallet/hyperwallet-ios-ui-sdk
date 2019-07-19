@@ -18,6 +18,9 @@
 
 import HyperwalletSDK
 import UIKit
+#if !COCOAPODS
+import Common
+#endif
 
 final class ReceiptTransactionTableViewCell: UITableViewCell {
     static let reuseIdentifier = "receiptTransactionTableViewCellReuseIdentifier"

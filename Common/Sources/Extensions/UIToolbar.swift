@@ -16,29 +16,27 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#if !COCOAPODS
-import Common
-#endif
-import HyperwalletSDK
 import UIKit
 
-/// Represents the select widget cell, to display `HyperwalletFieldSelectionOption`.
-final class SelectionWidgetCell: GenericCell<HyperwalletFieldSelectionOption> {
-    override var item: HyperwalletFieldSelectionOption! {
-        didSet {
-            if let option = item {
-                textLabel?.text = option.label
-            }
-        }
-    }
+public extension UIToolbar {
+    func setupToolBar(target: UIView, action: Selector?) {
+        let toolbar = self
+        toolbar.barStyle = UIBarStyle.default
+        toolbar.isTranslucent = true
+        toolbar.tintColor = Theme.themeColor
+        toolbar.sizeToFit()
 
-    @objc dynamic var textLabelColor: UIColor! {
-        get { return self.textLabel?.textColor }
-        set { self.textLabel?.textColor = newValue }
-    }
+        let doneButton = UIBarButtonItem(title: "done_button_label".localized(),
+                                         style: .plain,
+                                         target: target,
+                                         action: action)
+        doneButton.tintColor = Theme.Button.color
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
-    @objc dynamic var textLabelFont: UIFont! {
-        get { return self.textLabel?.font }
-        set { self.textLabel?.font = newValue }
+        toolbar.setItems([spaceButton, doneButton], animated: true)
+        toolbar.isUserInteractionEnabled = true
+
+        doneButton.accessibilityIdentifier = "doneButton"
+        toolbar.accessibilityIdentifier = "toolbar"
     }
 }

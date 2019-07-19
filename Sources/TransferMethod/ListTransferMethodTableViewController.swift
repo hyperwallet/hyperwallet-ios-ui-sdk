@@ -15,6 +15,10 @@
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#if !COCOAPODS
+import Common
+#endif
 import HyperwalletSDK
 import UIKit
 
@@ -105,7 +109,9 @@ public final class ListTransferMethodTableViewController: UITableViewController 
     }
 
     private func addTransferMethod() {
-        let controller = HyperwalletUI.shared.selectTransferMethodTypeTableViewController()
+        //TODO: Review
+        let controller = SelectTransferMethodTypeTableViewController(forceUpdate: false)
+             // HyperwalletUI.shared.selectTransferMethodTypeTableViewController()
         controller.createTransferMethodHandler = {
             [weak self] (transferMethod: HyperwalletTransferMethod) -> Void in
             // refresh transfer method list

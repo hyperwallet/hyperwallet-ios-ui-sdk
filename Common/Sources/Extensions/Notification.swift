@@ -16,29 +16,27 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#if !COCOAPODS
-import Common
-#endif
-import HyperwalletSDK
-import UIKit
+import Foundation
 
-/// Represents the select widget cell, to display `HyperwalletFieldSelectionOption`.
-final class SelectionWidgetCell: GenericCell<HyperwalletFieldSelectionOption> {
-    override var item: HyperwalletFieldSelectionOption! {
-        didSet {
-            if let option = item {
-                textLabel?.text = option.label
-            }
-        }
+public extension Notification.Name {
+    /// Posted when a new transfer method (bank account, bank card, PayPal account, prepaid card, paper check)
+    /// has been created.
+    public static var transferMethodAdded: Notification.Name {
+        return .init(rawValue: "transferMethodAdded")
     }
 
-    @objc dynamic var textLabelColor: UIColor! {
-        get { return self.textLabel?.textColor }
-        set { self.textLabel?.textColor = newValue }
+    /// Posted when a transfer method (bank account, bank card, PayPal account, prepaid card, paper check)
+    /// has been deactivated.
+    public static var transferMethodDeactivated: Notification.Name {
+        return .init(rawValue: "transferMethodDeactivated")
     }
+}
 
-    @objc dynamic var textLabelFont: UIFont! {
-        get { return self.textLabel?.font }
-        set { self.textLabel?.font = newValue }
-    }
+/// The Hyperwallet's `NotificationCenter` key to access the information.
+///
+/// - transferMethod: A new transfer method has been created.
+/// - statusTransition: A transfer method has been deactivated.
+public enum UserInfo: String {
+    case transferMethod
+    case statusTransition
 }

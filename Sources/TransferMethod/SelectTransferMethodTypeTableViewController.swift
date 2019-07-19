@@ -16,6 +16,9 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+#if !COCOAPODS
+import Common
+#endif
 import HyperwalletSDK
 import UIKit
 
@@ -132,8 +135,11 @@ extension SelectTransferMethodTypeTableViewController: SelectTransferMethodTypeV
                                                currency: String,
                                                profileType: String,
                                                transferMethodTypeCode: String) {
-        let addTransferMethodController = HyperwalletUI.shared
-            .addTransferMethodTableViewController(country, currency, profileType, transferMethodTypeCode, forceUpdate)
+        // TODO: Review
+        let addTransferMethodController = AddTransferMethodTableViewController(country, currency, profileType, transferMethodTypeCode, forceUpdate)
+
+//            HyperwalletUI.shared
+//            .addTransferMethodTableViewController(country, currency, profileType, transferMethodTypeCode, forceUpdate)
 
         addTransferMethodController.createTransferMethodHandler = { (transferMethod) -> Void in
             self.createTransferMethodHandler?(transferMethod)
@@ -168,7 +174,7 @@ extension SelectTransferMethodTypeTableViewController: SelectTransferMethodTypeV
                               selectItemHandler: @escaping SelectItemHandler,
                               markCellHandler: @escaping MarkCellHandler,
                               filterContentHandler: @escaping FilterContentHandler) {
-        let genericTableView = GenericTableViewController < CountryCurrencyCell,
+        let genericTableView = GenericController < CountryCurrencyCell,
             GenericCellConfiguration> ()
         genericTableView.title = title
         genericTableView.items = items
