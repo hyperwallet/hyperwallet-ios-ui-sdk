@@ -377,13 +377,6 @@
 			remoteGlobalIDString = 643912D322DF40CB00036609;
 			remoteInfo = UserRepository;
 		};
-		DB551F5322E1316400DD65C2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DB551F4822E1316400DD65C2;
-			remoteInfo = Common;
-		};
 		DB551F7922E1356000DD65C2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
@@ -418,6 +411,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = DBAF929C22CFCBC7004F197A;
 			remoteInfo = TransferMethodRepository;
+		};
+		DBC199D722E298E2004447DD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB551F4822E1316400DD65C2;
+			remoteInfo = Common;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -1769,7 +1769,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				DB551F5422E1316400DD65C2 /* PBXTargetDependency */,
+				DBC199D822E298E2004447DD /* PBXTargetDependency */,
 			);
 			name = CommonTests;
 			productName = CommonTests;
@@ -2646,11 +2646,6 @@
 			target = 643912D322DF40CB00036609 /* UserRepository */;
 			targetProxy = DB52962922E2392300657F50 /* PBXContainerItemProxy */;
 		};
-		DB551F5422E1316400DD65C2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DB551F4822E1316400DD65C2 /* Common */;
-			targetProxy = DB551F5322E1316400DD65C2 /* PBXContainerItemProxy */;
-		};
 		DB551F7A22E1356000DD65C2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DB551F4822E1316400DD65C2 /* Common */;
@@ -2675,6 +2670,11 @@
 			isa = PBXTargetDependency;
 			target = DBAF929C22CFCBC7004F197A /* TransferMethodRepository */;
 			targetProxy = DBAF92A722CFCBC7004F197A /* PBXContainerItemProxy */;
+		};
+		DBC199D822E298E2004447DD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB551F4822E1316400DD65C2 /* Common */;
+			targetProxy = DBC199D722E298E2004447DD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
