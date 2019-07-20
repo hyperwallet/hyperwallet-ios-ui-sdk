@@ -20,13 +20,14 @@
 import Common
 #endif
 
-extension HyperwalletUI {
+/// The HyperwalletUI extension
+public extension HyperwalletUI {
     /// Lists the user's transfer methods (bank account, bank card, PayPal account, prepaid card, paper check).
     ///
     /// The user can deactivate and add a new transfer method.
     ///
     /// - Returns: An instance of `listTransferMethodController`
-    public func listTransferMethodController() -> ListTransferMethodController {
+    func listTransferMethodController() -> ListTransferMethodController {
         return ListTransferMethodController()
     }
 
@@ -35,7 +36,7 @@ extension HyperwalletUI {
     ///
     /// - Parameter forceUpdateData: Forces to refresh the cached data.
     /// - Returns: An instance of `SelectTransferMethodTypeController`
-    public func selectTransferMethodTypeController(forceUpdateData: Bool = false)
+    func selectTransferMethodTypeController(forceUpdateData: Bool = false)
         -> SelectTransferMethodTypeController {
             return SelectTransferMethodTypeController(forceUpdate: forceUpdateData)
     }
@@ -52,7 +53,7 @@ extension HyperwalletUI {
     ///   - transferMethodTypeCode: The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD.
     ///   - forceUpdateData: Forces to refresh the cached data.
     /// - Returns: An instance of `AddTransferMethodController`
-    public func addTransferMethodController(
+    func addTransferMethodController(
         _ country: String,
         _ currency: String,
         _ profileType: String,

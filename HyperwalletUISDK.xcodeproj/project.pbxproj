@@ -208,15 +208,15 @@
 		DB8FEE2422DE89390041A777 /* TransferMethodConfigurationBankAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DB8FEE2022DE89390041A777 /* TransferMethodConfigurationBankAccountResponse.json */; };
 		DB99C2D122E220C200E45185 /* Receipt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB99C2C822E220C200E45185 /* Receipt.framework */; };
 		DB99C2D822E220C200E45185 /* Receipt.h in Headers */ = {isa = PBXBuildFile; fileRef = DB99C2CA22E220C200E45185 /* Receipt.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DB99C2E222E22ADF00E45185 /* ReceiptFeeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22F1EB22A6800F00D58883 /* ReceiptFeeTableCell.swift */; };
+		DB99C2E222E22ADF00E45185 /* ReceiptFeeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22F1EB22A6800F00D58883 /* ReceiptFeeCell.swift */; };
 		DB99C2E322E22ADF00E45185 /* ReceiptDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22F1E522A6724800D58883 /* ReceiptDetailPresenter.swift */; };
 		DB99C2E422E22ADF00E45185 /* ReceiptTransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98175428228DE42E0019159A /* ReceiptTransactionCell.swift */; };
 		DB99C2E522E22ADF00E45185 /* ReceiptDetailSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB1099622A7B04C00CCA7C6 /* ReceiptDetailSectionData.swift */; };
 		DB99C2E622E22ADF00E45185 /* ReceiptDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22F1E322A6723200D58883 /* ReceiptDetailController.swift */; };
-		DB99C2E722E22ADF00E45185 /* ListReceiptViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988547CB2294B879007B312C /* ListReceiptViewPresenter.swift */; };
+		DB99C2E722E22ADF00E45185 /* ListReceiptPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988547CB2294B879007B312C /* ListReceiptPresenter.swift */; };
 		DB99C2E822E22ADF00E45185 /* ReceiptDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22F1E722A67FAA00D58883 /* ReceiptDetailCell.swift */; };
 		DB99C2E922E22ADF00E45185 /* ListReceiptController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988547C92294B829007B312C /* ListReceiptController.swift */; };
-		DB99C2EA22E22ADF00E45185 /* ReceiptNotesTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22F1E922A67FE400D58883 /* ReceiptNotesTableCell.swift */; };
+		DB99C2EA22E22ADF00E45185 /* ReceiptNotesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22F1E922A67FE400D58883 /* ReceiptNotesCell.swift */; };
 		DB99C2F422E22BCF00E45185 /* AuthenticationTokenGeneratorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB99C2F122E22BCF00E45185 /* AuthenticationTokenGeneratorMock.swift */; };
 		DB99C2F522E22BCF00E45185 /* HyperwalletTestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB99C2F222E22BCF00E45185 /* HyperwalletTestHelper.swift */; };
 		DB99C2F622E22BCF00E45185 /* AuthenticationProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB99C2F322E22BCF00E45185 /* AuthenticationProviderMock.swift */; };
@@ -480,8 +480,8 @@
 		4A22F1E322A6723200D58883 /* ReceiptDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptDetailController.swift; sourceTree = "<group>"; };
 		4A22F1E522A6724800D58883 /* ReceiptDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptDetailPresenter.swift; sourceTree = "<group>"; };
 		4A22F1E722A67FAA00D58883 /* ReceiptDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptDetailCell.swift; sourceTree = "<group>"; };
-		4A22F1E922A67FE400D58883 /* ReceiptNotesTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptNotesTableCell.swift; sourceTree = "<group>"; };
-		4A22F1EB22A6800F00D58883 /* ReceiptFeeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptFeeTableCell.swift; sourceTree = "<group>"; };
+		4A22F1E922A67FE400D58883 /* ReceiptNotesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptNotesCell.swift; sourceTree = "<group>"; };
+		4A22F1EB22A6800F00D58883 /* ReceiptFeeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptFeeCell.swift; sourceTree = "<group>"; };
 		4A31BDB422D7356D0027DACA /* ReceiptRepositoryCompletionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptRepositoryCompletionHelper.swift; sourceTree = "<group>"; };
 		4A31BDB622D762AE0027DACA /* PrepaidCardReceiptRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepaidCardReceiptRepositoryTests.swift; sourceTree = "<group>"; };
 		4A31BDB822D762CE0027DACA /* ReceiptRepositoryFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptRepositoryFactoryTests.swift; sourceTree = "<group>"; };
@@ -525,7 +525,7 @@
 		9826056722822E8A000CCA2D /* UIToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIToolbar.swift; sourceTree = "<group>"; };
 		98541F142273D72C007D4238 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		988547C92294B829007B312C /* ListReceiptController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListReceiptController.swift; sourceTree = "<group>"; };
-		988547CB2294B879007B312C /* ListReceiptViewPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListReceiptViewPresenter.swift; sourceTree = "<group>"; };
+		988547CB2294B879007B312C /* ListReceiptPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListReceiptPresenter.swift; sourceTree = "<group>"; };
 		988547CF22970FA1007B312C /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		98F63E64228485930090101D /* AddTransferMethodPayPalAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransferMethodPayPalAccountTests.swift; sourceTree = "<group>"; };
 		98F63E662284A2CF0090101D /* PayPalAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PayPalAccountResponse.json; sourceTree = "<group>"; };
@@ -1301,13 +1301,13 @@
 				DB5295FA22E2336700657F50 /* Extensions */,
 				071584D022E26E08002FBE59 /* Helper */,
 				988547C92294B829007B312C /* ListReceiptController.swift */,
-				988547CB2294B879007B312C /* ListReceiptViewPresenter.swift */,
+				988547CB2294B879007B312C /* ListReceiptPresenter.swift */,
 				4A22F1E522A6724800D58883 /* ReceiptDetailPresenter.swift */,
 				4AB1099622A7B04C00CCA7C6 /* ReceiptDetailSectionData.swift */,
 				4A22F1E722A67FAA00D58883 /* ReceiptDetailCell.swift */,
 				4A22F1E322A6723200D58883 /* ReceiptDetailController.swift */,
-				4A22F1EB22A6800F00D58883 /* ReceiptFeeTableCell.swift */,
-				4A22F1E922A67FE400D58883 /* ReceiptNotesTableCell.swift */,
+				4A22F1EB22A6800F00D58883 /* ReceiptFeeCell.swift */,
+				4A22F1E922A67FE400D58883 /* ReceiptNotesCell.swift */,
 				98175428228DE42E0019159A /* ReceiptTransactionCell.swift */,
 				DB99C2CB22E220C200E45185 /* Info.plist */,
 				DB99C2CA22E220C200E45185 /* Receipt.h */,
@@ -2513,13 +2513,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				077F609F22E28F7F00C91E59 /* ReceiptThemeManager.swift in Sources */,
-				DB99C2E122E22ADF00E45185 /* ListReceiptTableViewCell.swift in Sources */,
 				DB5295FC22E233AB00657F50 /* HyperwalletReceiptUI.swift in Sources */,
 				DB99C2E422E22ADF00E45185 /* ReceiptTransactionCell.swift in Sources */,
-				DB99C2EA22E22ADF00E45185 /* ReceiptNotesTableCell.swift in Sources */,
+				DB99C2EA22E22ADF00E45185 /* ReceiptNotesCell.swift in Sources */,
 				DB99C2E822E22ADF00E45185 /* ReceiptDetailCell.swift in Sources */,
-				DB99C2E222E22ADF00E45185 /* ReceiptFeeTableCell.swift in Sources */,
-				DB99C2E722E22ADF00E45185 /* ListReceiptViewPresenter.swift in Sources */,
+				DB99C2E222E22ADF00E45185 /* ReceiptFeeCell.swift in Sources */,
+				DB99C2E722E22ADF00E45185 /* ListReceiptPresenter.swift in Sources */,
 				DB99C2E622E22ADF00E45185 /* ReceiptDetailController.swift in Sources */,
 				DB99C2E522E22ADF00E45185 /* ReceiptDetailSectionData.swift in Sources */,
 				DB99C2E322E22ADF00E45185 /* ReceiptDetailPresenter.swift in Sources */,

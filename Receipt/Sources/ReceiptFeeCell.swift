@@ -20,7 +20,7 @@
 import Common
 #endif
 
-final class ReceiptFeeTableCell: UITableViewCell {
+final class ReceiptFeeCell: UITableViewCell {
     static let reuseIdentifier = "receiptFeeTableViewCellReuseIdentifier"
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

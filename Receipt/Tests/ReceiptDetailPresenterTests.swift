@@ -74,7 +74,7 @@ class ReceiptDetailPresenterTests: XCTestCase {
             return
         }
         XCTAssertEqual(section.receiptDetailSectionHeader, .fee)
-        XCTAssertEqual(section.cellIdentifier, ReceiptFeeTableCell.reuseIdentifier)
+        XCTAssertEqual(section.cellIdentifier, ReceiptFeeCell.reuseIdentifier)
         XCTAssertEqual(section.title, "Fee Specification")
         XCTAssertEqual(section.rowCount, 3)
 
@@ -89,7 +89,7 @@ class ReceiptDetailPresenterTests: XCTestCase {
             return
         }
         XCTAssertEqual(section.receiptDetailSectionHeader, .fee)
-        XCTAssertEqual(section.cellIdentifier, ReceiptFeeTableCell.reuseIdentifier)
+        XCTAssertEqual(section.cellIdentifier, ReceiptFeeCell.reuseIdentifier)
         XCTAssertEqual(section.rowCount, 3)
 
         XCTAssertTrue(rowEqual(section.rows[0], "Amount:", "-9.87 USD", "amount"))
@@ -103,7 +103,7 @@ class ReceiptDetailPresenterTests: XCTestCase {
             return
         }
         XCTAssertEqual(section.receiptDetailSectionHeader, .fee)
-        XCTAssertEqual(section.cellIdentifier, ReceiptFeeTableCell.reuseIdentifier)
+        XCTAssertEqual(section.cellIdentifier, ReceiptFeeCell.reuseIdentifier)
         XCTAssertEqual(section.rowCount, 3)
 
         XCTAssertTrue(rowEqual(section.rows[0], "Amount:", "-100500 KRW", "amount"))
@@ -117,7 +117,7 @@ class ReceiptDetailPresenterTests: XCTestCase {
             return
         }
         XCTAssertEqual(section.receiptDetailSectionHeader, .notes)
-        XCTAssertEqual(section.cellIdentifier, ReceiptNotesTableCell.reuseIdentifier)
+        XCTAssertEqual(section.cellIdentifier, ReceiptNotesCell.reuseIdentifier)
         XCTAssertEqual(section.title, "Notes")
         XCTAssertEqual(section.rowCount, 1)
 

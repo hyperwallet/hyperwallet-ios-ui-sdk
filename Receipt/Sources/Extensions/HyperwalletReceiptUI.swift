@@ -20,12 +20,13 @@
 import Common
 #endif
 
-extension HyperwalletUI {
+/// The HyperwalletUI extension
+public extension HyperwalletUI {
     /// Lists the user's transactions.
     ///
     ///
     /// - Returns: An instance of `ListReceiptController`
-    public func listUserReceiptController() -> ListReceiptController {
+    func listUserReceiptController() -> ListReceiptController {
         return ListReceiptController()
     }
 
@@ -33,7 +34,7 @@ extension HyperwalletUI {
     ///
     /// - Parameter prepaidCardToken: prepaid card token for which transactions are requested
     /// - Returns: An instance of `ListReceiptController`
-    public func listPrepaidCardReceiptController(_ prepaidCardToken: String)
+    func listPrepaidCardReceiptController(_ prepaidCardToken: String)
         -> ListReceiptController {
             return ListReceiptController(prepaidCardToken: prepaidCardToken)
     }

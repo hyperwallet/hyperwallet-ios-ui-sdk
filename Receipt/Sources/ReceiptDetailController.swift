@@ -24,9 +24,9 @@ import HyperwalletSDK
 public final class ReceiptDetailController: UITableViewController {
     private let registeredCells: [(type: AnyClass, id: String)] = [
         (ReceiptTransactionCell.self, ReceiptTransactionCell.reuseIdentifier),
-        (ReceiptFeeTableCell.self, ReceiptFeeTableCell.reuseIdentifier),
+        (ReceiptFeeCell.self, ReceiptFeeCell.reuseIdentifier),
         (ReceiptDetailCell.self, ReceiptDetailCell.reuseIdentifier),
-        (ReceiptNotesTableCell.self, ReceiptNotesTableCell.reuseIdentifier)
+        (ReceiptNotesCell.self, ReceiptNotesCell.reuseIdentifier)
     ]
 
     private var presenter: ReceiptDetailPresenter!
@@ -81,14 +81,14 @@ public final class ReceiptDetailController: UITableViewController {
             }
 
         case .fee:
-            if let tableViewCell = cell as? ReceiptFeeTableCell,
+            if let tableViewCell = cell as? ReceiptFeeCell,
                 let feeSection = section as? ReceiptDetailSectionFeeData {
                 let row = feeSection.rows[indexPath.row]
                 tableViewCell.configure(row)
            }
 
         case .notes:
-            if let tableViewCell = cell as? ReceiptNotesTableCell,
+            if let tableViewCell = cell as? ReceiptNotesCell,
                 let notesSection = section as? ReceiptDetailSectionNotesData {
                 tableViewCell.textLabel?.text = notesSection.notes
             }

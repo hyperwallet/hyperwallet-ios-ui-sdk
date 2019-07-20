@@ -20,9 +20,10 @@
 import Common
 #endif
 
-extension ThemeManager {
+/// The ThemeManager extension
+public extension ThemeManager {
     /// Applies default visual styles to the Hyperwallet user interface components.
-    public static func applyTransferMethodTheme() {
+    static func applyTransferMethodTheme() {
         applyToCountryCurrencyCell()
         applyToSelectionWidgetCell()
         applyToListTransferMethodTableViewCell()
@@ -44,7 +45,7 @@ extension ThemeManager {
     }
 
     private static func applyToListTransferMethodTableViewCell() {
-        let proxy = ListTransferMethodTableViewCell.appearance()
+        let proxy = ListTransferMethodCell.appearance()
         proxy.titleLabelFont = Theme.Label.bodyFontMedium
         proxy.titleLabelColor = Theme.Label.color
         proxy.subTitleLabelFont = Theme.Label.captionOne

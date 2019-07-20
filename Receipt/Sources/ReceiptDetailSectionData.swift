@@ -94,7 +94,7 @@ struct ReceiptDetailSectionFeeData: ReceiptDetailSectionData {
     var rows = [ReceiptDetailRow]()
     var receiptDetailSectionHeader: ReceiptDetailSectionHeader { return .fee }
     var rowCount: Int { return rows.count }
-    var cellIdentifier: String { return ReceiptFeeTableCell.reuseIdentifier }
+    var cellIdentifier: String { return ReceiptFeeCell.reuseIdentifier }
 
     init?(from receipt: HyperwalletReceipt) {
         guard
@@ -138,7 +138,7 @@ struct ReceiptDetailSectionFeeData: ReceiptDetailSectionData {
 struct ReceiptDetailSectionNotesData: ReceiptDetailSectionData {
     let notes: String?
     var receiptDetailSectionHeader: ReceiptDetailSectionHeader { return .notes }
-    var cellIdentifier: String { return ReceiptNotesTableCell.reuseIdentifier }
+    var cellIdentifier: String { return ReceiptNotesCell.reuseIdentifier }
 
     init?(from receipt: HyperwalletReceipt) {
         guard let notes = receipt.details?.notes else {

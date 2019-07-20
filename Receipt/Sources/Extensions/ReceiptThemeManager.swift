@@ -20,32 +20,33 @@
 import Common
 #endif
 
-extension ThemeManager {
+/// The ThemeManager extension
+public extension ThemeManager {
     /// Applies default visual styles to the Hyperwallet user interface components.
-    public static func applyReceiptTheme() {
-        applyToReceiptDetailTableViewCell()
-        applyToReceiptFeeTableViewCell()
-        applyToReceiptNotesTableViewCell()
+    static func applyReceiptTheme() {
+        applyToReceiptDetailCell()
+        applyToReceiptFeeCell()
+        applyToReceiptNotesCell()
     }
 
-    private static func applyToReceiptDetailTableViewCell() {
-        let proxy = ReceiptDetailTableViewCell.appearance()
+    private static func applyToReceiptDetailCell() {
+        let proxy = ReceiptDetailCell.appearance()
         proxy.titleLabelFont = Theme.Label.footnoteFont
         proxy.titleLabelColor = Theme.Label.subTitleColor
         proxy.subTitleLabelFont = Theme.Label.footnoteFont
         proxy.subTitleLabelColor = Theme.Label.subTitleColor
     }
 
-    private static func applyToReceiptFeeTableViewCell() {
-        let proxy = ReceiptFeeTableViewCell.appearance()
+    private static func applyToReceiptFeeCell() {
+        let proxy = ReceiptFeeCell.appearance()
         proxy.titleLabelFont = Theme.Label.footnoteFont
         proxy.titleLabelColor = Theme.Label.subTitleColor
         proxy.subTitleLabelFont = Theme.Label.footnoteFont
         proxy.subTitleLabelColor = Theme.Label.subTitleColor
     }
 
-    private static func applyToReceiptNotesTableViewCell() {
-        let proxy = ReceiptNotesTableViewCell.appearance()
+    private static func applyToReceiptNotesCell() {
+        let proxy = ReceiptNotesCell.appearance()
         proxy.titleLabelFont = Theme.Label.footnoteFont
         proxy.titleLabelColor = Theme.Label.subTitleColor
     }
