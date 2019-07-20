@@ -4,13 +4,14 @@ scheme: HyperwalletUISDK
 ignore:
   - UITests/*
   - Demo/*
+  - TransferMethod/Sources/AddTransferMethodSectionData.swift
   - "*/Sources/Resources/*"
-  - "*/Sources/Extensions/*"
   - "*/Sources/Localization/*"
   - "*/Sources/Helper/*"
   - "*/Sources/View/*"
-  - "*/Sources/*/*Controller.swift"
-  - "*/Sources/*/*Cell.swift"
-  - "*/Sources/TransferMethod/AddTransferMethodSectionData.swift"
-  - "*/Sources/HyperwalletUI.swift"
+  - "*/Sources/*Controller.swift"
+  - "*/Sources/*Cell.swift"
+  - "*/Sources/*HyperwalletUI.swift"
+  - "*/Sources/Extensions/*"
   - "*/Tests/*"
+  - "*/Sources/Helper/*"
