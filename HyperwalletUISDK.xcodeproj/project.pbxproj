@@ -1784,6 +1784,7 @@
 				DB551FA322E1409700DD65C2 /* Sources */,
 				DB551FA422E1409700DD65C2 /* Frameworks */,
 				DB551FA522E1409700DD65C2 /* Resources */,
+				DBC199FD22E29D4E004447DD /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -1823,6 +1824,7 @@
 				DB99C2C422E220C200E45185 /* Sources */,
 				DB99C2C522E220C200E45185 /* Frameworks */,
 				DB99C2C622E220C200E45185 /* Resources */,
+				DBC199FC22E29D3E004447DD /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -2299,6 +2301,42 @@
 			shellScript = "set -e\nset -x\n\nif ! which swiftlint > /dev/null; then\necho \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\nelse\nswiftlint autocorrect\nswiftlint\nfi\n";
 		};
 		DBAF92B922CFCEF2004F197A /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\nset -x\n\nif ! which swiftlint > /dev/null; then\necho \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\nelse\nswiftlint autocorrect\nswiftlint\nfi\n";
+		};
+		DBC199FC22E29D3E004447DD /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\nset -x\n\nif ! which swiftlint > /dev/null; then\necho \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\nelse\nswiftlint autocorrect\nswiftlint\nfi\n";
+		};
+		DBC199FD22E29D4E004447DD /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
