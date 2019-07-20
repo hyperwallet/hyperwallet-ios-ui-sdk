@@ -107,7 +107,6 @@
 		DB52961E22E2361600657F50 /* UserRepository.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 643912D422DF40CB00036609 /* UserRepository.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DB551F5922E1316400DD65C2 /* Common.h in Headers */ = {isa = PBXBuildFile; fileRef = DB551F4B22E1316400DD65C2 /* Common.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DB551F6522E133AF00DD65C2 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988547CF22970FA1007B312C /* Date.swift */; };
-		DB551F6622E133AF00DD65C2 /* HyperwalletCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC8404322D463CA00178B64 /* HyperwalletCountry.swift */; };
 		DB551F6722E133AF00DD65C2 /* HyperwalletCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC8404522D4655C00178B64 /* HyperwalletCurrency.swift */; };
 		DB551F6822E133AF00DD65C2 /* HyperwalletFee.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3834225E8BA900CD4137 /* HyperwalletFee.swift */; };
 		DB551F6A22E133AF00DD65C2 /* HyperwalletTransferMethodType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6D7703228D805C008355C8 /* HyperwalletTransferMethodType.swift */; };
@@ -244,7 +243,8 @@
 		DBB2B7272261C142006C48D3 /* AddTransferMethodBankAccountIndividualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB2B70F2261C141006C48D3 /* AddTransferMethodBankAccountIndividualTests.swift */; };
 		DBB50B5222D7ED6C0029B74B /* TransferMethodRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB4265322D530DD00D721C4 /* TransferMethodRepository.swift */; };
 		DBB50B5522D7EE200029B74B /* TransferMethodConfigurationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB80BF9B22CD14D700BA5EED /* TransferMethodConfigurationRepository.swift */; };
-		DBC199DA22E29A3D004447DD /* HyperwalletTransferMethodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC199D922E29A3D004447DD /* HyperwalletTransferMethodTests.swift */; };
+		DBC199DB22E29A85004447DD /* HyperwalletTransferMethodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC199D922E29A3D004447DD /* HyperwalletTransferMethodTests.swift */; };
+		DBC199DD22E29AE8004447DD /* HyperwalletCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC8404322D463CA00178B64 /* HyperwalletCountry.swift */; };
 		DBCA3806225E892400CD4137 /* HyperwalletUISDK.h in Headers */ = {isa = PBXBuildFile; fileRef = DBCA37F8225E892400CD4137 /* HyperwalletUISDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DBDE15DD22D6562900BD646F /* TransferMethodRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDE15DB22D655F000BD646F /* TransferMethodRepositoryTests.swift */; };
 		DBF89CB8227C072400AF4344 /* UserIndividualCountryCanadaResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBF89CB7227C072400AF4344 /* UserIndividualCountryCanadaResponse.json */; };
@@ -1167,7 +1167,7 @@
 		DB551F5522E1316400DD65C2 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				DBC199D922E29A3D004447DD /* HyperwalletTransferMethodTests.swift */,
+				DBC199DC22E29A9D004447DD /* Extensions */,
 				DB551F5822E1316400DD65C2 /* Info.plist */,
 			);
 			path = Tests;
@@ -1389,6 +1389,14 @@
 				DB6523B822DFDAA400F52EA7 /* TransferMethodRepositoryCompletionHelper.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		DBC199DC22E29A9D004447DD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DBC199D922E29A3D004447DD /* HyperwalletTransferMethodTests.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		DBCA37EB225E892400CD4137 = {
@@ -2400,6 +2408,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBC199DD22E29AE8004447DD /* HyperwalletCountry.swift in Sources */,
 				DB551F6822E133AF00DD65C2 /* HyperwalletFee.swift in Sources */,
 				DB551F7022E133AF00DD65C2 /* UIColor.swift in Sources */,
 				DB551F7622E133AF00DD65C2 /* UIViewController.swift in Sources */,
@@ -2412,8 +2421,6 @@
 				DB551F6B22E133AF00DD65C2 /* Notification.swift in Sources */,
 				DB551F7322E133AF00DD65C2 /* UINavigationController.swift in Sources */,
 				DB551F7D22E1370D00DD65C2 /* HyperwalletIconContent.swift in Sources */,
-				DBC199DA22E29A3D004447DD /* HyperwalletTransferMethodTests.swift in Sources */,
-				DB551F6622E133AF00DD65C2 /* HyperwalletCountry.swift in Sources */,
 				DB551F7F22E1370D00DD65C2 /* Theme.swift in Sources */,
 				DB551F7B22E1370D00DD65C2 /* HyperwalletBundle.swift in Sources */,
 				DB551F6522E133AF00DD65C2 /* Date.swift in Sources */,
@@ -2438,6 +2445,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBC199DB22E29A85004447DD /* HyperwalletTransferMethodTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
