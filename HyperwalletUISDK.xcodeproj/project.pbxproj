@@ -819,13 +819,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		071584D022E26E08002FBE59 /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helper;
-			sourceTree = "<group>";
-		};
 		0743EFA422A5AC7200C089EE /* Responses */ = {
 			isa = PBXGroup;
 			children = (
@@ -1193,7 +1186,6 @@
 			isa = PBXGroup;
 			children = (
 				DB551FC122E1418B00DD65C2 /* Extensions */,
-				DB551FC222E1419400DD65C2 /* Helper */,
 				DB551FC322E1419A00DD65C2 /* View */,
 				DBCA3822225E8BA900CD4137 /* AddTransferMethodPresenter.swift */,
 				072A53F622838F6B00BC11D0 /* AddTransferMethodSectionData.swift */,
@@ -1241,13 +1233,6 @@
 				077F60A022E28F8F00C91E59 /* TransferMethodThemeManager.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		DB551FC222E1419400DD65C2 /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helper;
 			sourceTree = "<group>";
 		};
 		DB551FC322E1419A00DD65C2 /* View */ = {
@@ -1299,7 +1284,6 @@
 			isa = PBXGroup;
 			children = (
 				DB5295FA22E2336700657F50 /* Extensions */,
-				071584D022E26E08002FBE59 /* Helper */,
 				988547C92294B829007B312C /* ListReceiptController.swift */,
 				988547CB2294B879007B312C /* ListReceiptPresenter.swift */,
 				4A22F1E522A6724800D58883 /* ReceiptDetailPresenter.swift */,
