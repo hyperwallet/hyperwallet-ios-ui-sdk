@@ -23,17 +23,20 @@ import XCTest
 class TransferRepositoryRequestHelper {
     static func setupSucessRequest(_ responseFileName: String, _ requestUrl: String) {
         let dataResponse = HyperwalletTestHelper.okHTTPResponse(for: responseFileName)
-        let dataRequest = HyperwalletTestHelper.buildPostRequest(baseUrl: requestUrl, dataResponse)
-        HyperwalletTestHelper.setUpMockServer(request: dataRequest)
+        TransferRepositoryRequestHelper.setUpMockServer(dataResponse, requestUrl)
     }
 
     static func setupFailureRequest(_ responseFileName: String, _ requestUrl: String) {
-        let dataResponse = HyperwalletTestHelper.badRequestHTTPResponse(for: responseFileName)
-        let dataRequest = HyperwalletTestHelper.buildPostRequest(baseUrl: requestUrl, dataResponse)
-        HyperwalletTestHelper.setUpMockServer(request: dataRequest)
+        let errorResponse = HyperwalletTestHelper.badRequestHTTPResponse(for: responseFileName)
+        TransferRepositoryRequestHelper.setUpMockServer(errorResponse, requestUrl)
     }
 
     static func getResponseError(_ error: HyperwalletErrorType) -> HyperwalletError {
         return (error.getHyperwalletErrors()?.errorList?.first)!
+    }
+
+    private static func setUpMockServer(_ dataResponse: StubResponse, _ requestUrl: String) {
+        let dataRequest = HyperwalletTestHelper.buildPostRequest(baseUrl: requestUrl, dataResponse)
+        HyperwalletTestHelper.setUpMockServer(request: dataRequest)
     }
 }
