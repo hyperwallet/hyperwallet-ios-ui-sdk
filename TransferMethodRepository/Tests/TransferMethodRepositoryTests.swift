@@ -21,7 +21,7 @@ import HyperwalletSDK
 @testable import TransferMethodRepository
 import XCTest
 
-class RemoteTransferMethodRepositoryTests: XCTestCase {
+class TransferMethodRepositoryTests: XCTestCase {
     private var factory: TransferMethodRepositoryFactory!
     private var transferMethodRepository: TransferMethodRepository!
 
