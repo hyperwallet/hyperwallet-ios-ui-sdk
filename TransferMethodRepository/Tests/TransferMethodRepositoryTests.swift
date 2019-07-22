@@ -22,11 +22,17 @@ import HyperwalletSDK
 import XCTest
 
 class RemoteTransferMethodRepositoryTests: XCTestCase {
+    private var factory: TransferMethodRepositoryFactory!
+    private var transferMethodRepository: TransferMethodRepository!
+
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
+        factory = TransferMethodRepositoryFactory.shared
+        transferMethodRepository = factory.transferMethodRepository()
     }
 
     override func tearDown() {
+        transferMethodRepository.refreshTransferMethods()
         if Hippolyte.shared.isStarted {
             Hippolyte.shared.stop()
         }
@@ -462,7 +468,6 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
         let url = String(format: "%@%@", HyperwalletTestHelper.userRestURL, "/transfer-methods?")
         let request = HyperwalletTestHelper.buildGetRequestRegexMatcher(pattern: url, response)
         HyperwalletTestHelper.setUpMockServer(request: request)
-
         transferMethodRepository.listTransferMethod { (result) in
             switch result {
             case .failure(let error):

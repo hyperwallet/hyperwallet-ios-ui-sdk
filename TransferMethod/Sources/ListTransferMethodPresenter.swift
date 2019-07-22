@@ -72,7 +72,7 @@ final class ListTransferMethodPresenter {
                     return
                 }
                 strongSelf.view.showConfirmation(handler: { () -> Void in
-                    strongSelf.listTransferMethod()
+                    strongSelf.listTransferMethod(true)
                     strongSelf.view.notifyTransferMethodDeactivated(statusTransition)
                 })
             }
@@ -80,8 +80,12 @@ final class ListTransferMethodPresenter {
     }
 
     /// Get the list of all Activated transfer methods from core SDK
-    func listTransferMethod() {
+    /// - Parameter forceUpdate: Forces to refresh the data manager
+    func listTransferMethod(_ forceUpdate: Bool = false) {
         view.showLoading()
+        if forceUpdate {
+            transferMethodRepository.refreshTransferMethods()
+        }
 
         transferMethodRepository.listTransferMethod { [weak self] (result) in
             guard let strongSelf = self else {

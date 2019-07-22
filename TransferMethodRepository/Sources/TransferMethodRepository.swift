@@ -50,10 +50,14 @@ public protocol TransferMethodRepository {
     ///   - completion: the callback handler of responses from the Hyperwallet platform
     func listTransferMethod(
         _ completion: @escaping (Result<HyperwalletPageList<HyperwalletTransferMethod>?, HyperwalletErrorType>) -> Void)
+
+    /// Refreshes transfer methods
+    func refreshTransferMethods()
 }
 
 final class RemoteTransferMethodRepository: TransferMethodRepository {
     private static let deactivateNote = "Deactivating Account"
+    private var transferMethods: HyperwalletPageList<HyperwalletTransferMethod>?
 
     func createTransferMethod(
         _ transferMethod: HyperwalletTransferMethod,
@@ -106,12 +110,28 @@ final class RemoteTransferMethodRepository: TransferMethodRepository {
     func listTransferMethod(
         _ completion: @escaping (Result<HyperwalletPageList<HyperwalletTransferMethod>?,
                                         HyperwalletErrorType>) -> Void) {
-        let queryParam = HyperwalletTransferMethodQueryParam()
-        queryParam.limit = 100
-        queryParam.status = .activated
+        if let transferMethods = transferMethods {
+            completion(.success(transferMethods))
+        } else {
+            let queryParam = HyperwalletTransferMethodQueryParam()
+            queryParam.limit = 100
+            queryParam.status = .activated
+            Hyperwallet.shared.listTransferMethods(
+                queryParam: queryParam,
+                completion: getTransferMethodsHandler(completion))
+        }
+    }
 
-        Hyperwallet.shared.listTransferMethods(
-            queryParam: queryParam,
-            completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
+    func refreshTransferMethods() {
+        transferMethods = nil
+    }
+
+    private func getTransferMethodsHandler(
+        _ completion: @escaping (Result<HyperwalletPageList<HyperwalletTransferMethod>?,
+                                        HyperwalletErrorType>) -> Void)
+        -> (HyperwalletPageList<HyperwalletTransferMethod>?, HyperwalletErrorType?) -> Void {
+        return {(result, error) in
+            self.transferMethods = TransferMethodRepositoryCompletionHelper.performHandler(error, result, completion)
+        }
     }
 }

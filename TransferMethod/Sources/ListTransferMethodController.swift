@@ -113,7 +113,7 @@ public final class ListTransferMethodController: UITableViewController {
         controller.createTransferMethodHandler = {
             [weak self] (transferMethod: HyperwalletTransferMethod) -> Void in
             // refresh transfer method list
-            self?.presenter.listTransferMethod()
+            self?.presenter.listTransferMethod(true)
             self?.createTransferMethodHandler?(transferMethod)
         }
         navigationController?.pushViewController(controller, animated: true)
