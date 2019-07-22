@@ -97,8 +97,8 @@ class ListReceiptTests: BaseTests {
         XCTAssertTrue(cell.staticTexts["receiptTransactionCurrencyLabel"].exists)
 
         XCTAssertEqual(type, cell.staticTexts["receiptTransactionTypeLabel"].label)
-        XCTAssertEqual(transactionDetails.getExpectedDate(date: createdOn), cell.staticTexts["receiptTransactionCreatedOnLabel"]
-            .label)
+        XCTAssertEqual(transactionDetails.getExpectedDate(date: createdOn),
+                       cell.staticTexts["receiptTransactionCreatedOnLabel"].label)
         XCTAssertEqual(amount, cell.staticTexts["receiptTransactionAmountLabel"].label)
         XCTAssertEqual(currency, cell.staticTexts["receiptTransactionCurrencyLabel"].label)
     }
@@ -205,10 +205,8 @@ class ListReceiptTests: BaseTests {
         XCTAssertEqual(transactionDetails.checkNumValue.label, "Sample Check Number")
         XCTAssertEqual(transactionDetails.promoWebSiteValue.label, "https://localhost")
         XCTAssertEqual(transactionDetails.notesValue.label, "Sample payment notes")
-        XCTAssertEqual(
-            transactionDetails.dateValue.label,
-                       transactionDetails
-            .getExpectedDateTimeFormat(datetime: "2019-05-03T17:08:58"))
+        XCTAssertEqual(transactionDetails.dateValue.label,
+                       transactionDetails.getExpectedDateTimeFormat(datetime: "2019-05-03T17:08:58"))
     }
 
     // Verify when no Notes and Fee sections
@@ -253,7 +251,8 @@ class ListReceiptTests: BaseTests {
         XCTAssertEqual(transactionDetails.dateLabel.label, "Date:")
         XCTAssertEqual(transactionDetails.receiptIdValue.label, receiptIdVal)
         XCTAssertEqual(transactionDetails.receiptIdValue.label, receiptIdVal)
-        XCTAssertEqual(transactionDetails.dateValue.label, transactionDetails.getExpectedDateTimeFormat(datetime: dateVal))
+        XCTAssertEqual(transactionDetails.dateValue.label,
+                       transactionDetails.getExpectedDateTimeFormat(datetime: dateVal))
 
         if let clientIdVal = clientIdVal {
             let clientTransIDLabel = transactionDetails.clientTransactionIdLabel
