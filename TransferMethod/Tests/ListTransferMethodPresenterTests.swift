@@ -56,7 +56,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
         mockView.expectation = expectation
 
         // When
-        presenter.listTransferMethod()
+        presenter.listTransferMethod(true)
         wait(for: [expectation], timeout: 1)
 
         // Then
@@ -82,7 +82,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
         mockView.expectation = expectation
 
         // When
-        presenter.listTransferMethod()
+        presenter.listTransferMethod(true)
         wait(for: [expectation], timeout: 1)
 
         // Then
@@ -104,7 +104,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
         mockView.expectation = expectation
 
         // When
-        presenter.listTransferMethod()
+        presenter.listTransferMethod(true)
         wait(for: [expectation], timeout: 1)
 
         // Then
@@ -215,9 +215,6 @@ class ListTransferMethodPresenterTests: XCTestCase {
         XCTAssertFalse(mockView.isShowConfirmationPerformed, "The showConfirmation should not be performed")
     }
 
-    private func setUpPresenter() {
-    }
-
     private func loadMockTransfermethods() {
         // Given
         HyperwalletTestHelper.setUpMockServer(request: setUpListTransferMethodRequest())
@@ -226,7 +223,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
         mockView.expectation = expectationLoadTransferMethods
 
         // When
-        presenter.listTransferMethod()
+        presenter.listTransferMethod(true)
         wait(for: [expectationLoadTransferMethods], timeout: 1)
     }
 
