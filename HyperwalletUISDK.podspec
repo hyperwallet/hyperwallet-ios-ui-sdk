@@ -7,10 +7,10 @@ Pod::Spec.new do |s|
     s.author                = { 'Hyperwallet Systems Inc' => 'devsupport@hyperwallet.com' }
     s.platform              = :ios
     s.ios.deployment_target = '10.0'
-    s.source                = { :git => 'https://github.com/hyperwallet/hyperwallet-ios-ui-sdk.git', :branch => "task/HW-52892-Modularization-for-hyperwalletUISDK"}
+    s.source                = { :git => 'https://github.com/hyperwallet/hyperwallet-ios-ui-sdk.git', :tag => "#{spec.version}"}
     s.requires_arc          = true
     s.swift_version         = '5.0'
-    s.dependency 'HyperwalletSDK', '1.0.0-beta02'
+    s.dependency 'HyperwalletSDK', '1.0.0-beta03'
 
     s.default_subspec = 'TransferMethod', 'Receipt'
 
