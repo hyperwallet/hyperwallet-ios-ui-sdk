@@ -21,7 +21,7 @@ import HyperwalletSDK
 @testable import TransferMethodRepository
 import XCTest
 
-class RemoteTransferMethodConfigurationRepositoryTests: XCTestCase {
+class TransferMethodConfigurationRepositoryTests: XCTestCase {
     private let country = "US"
     private let currency = "USD"
     private let transferMethodType = "BANK_ACCOUNT"
@@ -42,7 +42,7 @@ class RemoteTransferMethodConfigurationRepositoryTests: XCTestCase {
     }
 
     func testGetKeys_success() {
-        RemoteTransferMethodConfigurationRepositoryTests
+        TransferMethodConfigurationRepositoryTests
             .setupResponseMockServer(keyResponseData)
         let expectation = self.expectation(description: "Get transfer method configuration keys")
         var transferMethodConfigurationKey: HyperwalletTransferMethodConfigurationKey?
@@ -69,7 +69,7 @@ class RemoteTransferMethodConfigurationRepositoryTests: XCTestCase {
     }
 
     func testGetKeys_failureWithError() {
-        RemoteTransferMethodConfigurationRepositoryTests
+        TransferMethodConfigurationRepositoryTests
             .setupResponseMockServer(keyResponseData, NSError(domain: "", code: -1009, userInfo: nil))
         let expectation = self.expectation(description: "Get transfer method configuration keys")
         var transferMethodConfigurationKey: HyperwalletTransferMethodConfigurationKey?
@@ -94,7 +94,7 @@ class RemoteTransferMethodConfigurationRepositoryTests: XCTestCase {
     }
 
     func testGetKeys_successWithKeyResultFromCache() {
-        RemoteTransferMethodConfigurationRepositoryTests
+        TransferMethodConfigurationRepositoryTests
             .setupResponseMockServer(keyResponseData)
         let repository = RemoteTransferMethodConfigurationRepository()
 
@@ -124,7 +124,7 @@ class RemoteTransferMethodConfigurationRepositoryTests: XCTestCase {
     }
 
     func testGetFields_success() {
-        RemoteTransferMethodConfigurationRepositoryTests
+        TransferMethodConfigurationRepositoryTests
             .setupResponseMockServer(fieldsResponseData)
         let expectation = self.expectation(description: "Get transfer method configuration fields")
         let repository = RemoteTransferMethodConfigurationRepository()
@@ -154,7 +154,7 @@ class RemoteTransferMethodConfigurationRepositoryTests: XCTestCase {
     }
 
     func testGetFields_successWithFieldResultFromCache() {
-        RemoteTransferMethodConfigurationRepositoryTests
+        TransferMethodConfigurationRepositoryTests
             .setupResponseMockServer(fieldsResponseData)
         let expectation = self.expectation(description: "Get transfer method configuration fields")
         let repository = RemoteTransferMethodConfigurationRepository()
@@ -183,7 +183,7 @@ class RemoteTransferMethodConfigurationRepositoryTests: XCTestCase {
     }
 
     func testGetFields_failureWithError() {
-        RemoteTransferMethodConfigurationRepositoryTests
+        TransferMethodConfigurationRepositoryTests
             .setupResponseMockServer(fieldsResponseData, NSError(domain: "", code: -1009, userInfo: nil))
         let expectation = self.expectation(description: "Get transfer method configuration fields")
         let repository = RemoteTransferMethodConfigurationRepository()
@@ -209,7 +209,7 @@ class RemoteTransferMethodConfigurationRepositoryTests: XCTestCase {
     }
     //swiftlint:disable function_body_length
     func testRefreshKeys_refreshKeysData() {
-        RemoteTransferMethodConfigurationRepositoryTests
+        TransferMethodConfigurationRepositoryTests
             .setupResponseMockServer(keyResponseData)
         let expectation = self.expectation(description: "Get transfer method keys")
         let repository = RemoteTransferMethodConfigurationRepository()
@@ -229,7 +229,7 @@ class RemoteTransferMethodConfigurationRepositoryTests: XCTestCase {
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 1)
-        RemoteTransferMethodConfigurationRepositoryTests
+        TransferMethodConfigurationRepositoryTests
             .refreshHippolyteResponse("TransferMethodConfigurationKeysOnlyPaypalAccountUsResponse")
 
         // When
@@ -267,7 +267,7 @@ class RemoteTransferMethodConfigurationRepositoryTests: XCTestCase {
     }
 
     func testRefreshFields_refreshFieldsData() {
-        RemoteTransferMethodConfigurationRepositoryTests
+        TransferMethodConfigurationRepositoryTests
             .setupResponseMockServer(fieldsResponseData)
         let expectation = self.expectation(description: "Get transfer method configuration fields")
         let repository = RemoteTransferMethodConfigurationRepository()
@@ -288,7 +288,7 @@ class RemoteTransferMethodConfigurationRepositoryTests: XCTestCase {
             expectation.fulfill()
         })
         wait(for: [expectation], timeout: 1)
-        RemoteTransferMethodConfigurationRepositoryTests
+        TransferMethodConfigurationRepositoryTests
             .refreshHippolyteResponse("TransferMethodConfigurationFieldsOnlyPaypalAccountUsResponse")
 
         // When
