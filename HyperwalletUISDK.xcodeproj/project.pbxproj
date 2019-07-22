@@ -23,7 +23,6 @@
 		073BB9BA22E643880053C24E /* TransferRepositoryRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BB9B622E643880053C24E /* TransferRepositoryRequestHelper.swift */; };
 		077F609F22E28F7F00C91E59 /* ReceiptThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077F609D22E28F3500C91E59 /* ReceiptThemeManager.swift */; };
 		077F60A122E28F8F00C91E59 /* TransferMethodThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077F60A022E28F8F00C91E59 /* TransferMethodThemeManager.swift */; };
-		07A899A622E646200048AE05 /* TransferRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 073BB98222E63DB50053C24E /* TransferRepository.framework */; };
 		0961D62D22AA858E007F0B44 /* ReceiptsForFewMonths.json in Resources */ = {isa = PBXBuildFile; fileRef = 0961D62C22AA858E007F0B44 /* ReceiptsForFewMonths.json */; };
 		0961D62F22AA861A007F0B44 /* ReceiptsForOneMonth.json in Resources */ = {isa = PBXBuildFile; fileRef = 0961D62E22AA861A007F0B44 /* ReceiptsForOneMonth.json */; };
 		0961D63322AA8817007F0B44 /* ReceiptsForLazyLoading.json in Resources */ = {isa = PBXBuildFile; fileRef = 0961D63222AA8817007F0B44 /* ReceiptsForLazyLoading.json */; };
@@ -273,13 +272,6 @@
 			remoteGlobalIDString = 073BB98122E63DB50053C24E;
 			remoteInfo = TransferRepository;
 		};
-		07A899A422E646140048AE05 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 073BB98122E63DB50053C24E;
-			remoteInfo = TransferRepository;
-		};
 		4AE6B6CA22D605B20009DEFE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
@@ -453,7 +445,7 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		DB52961422E235EF00657F50 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
@@ -801,7 +793,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				07A899A622E646200048AE05 /* TransferRepository.framework in Frameworks */,
 				DB52960C22E235EF00657F50 /* TransferMethod.framework in Frameworks */,
 				DB52960822E235EF00657F50 /* Common.framework in Frameworks */,
 				DB52961922E2361600657F50 /* TransferMethodRepository.framework in Frameworks */,
@@ -1899,7 +1890,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				07A899A522E646140048AE05 /* PBXTargetDependency */,
 				DB52960B22E235EF00657F50 /* PBXTargetDependency */,
 				DB52960F22E235EF00657F50 /* PBXTargetDependency */,
 				DB52961322E235EF00657F50 /* PBXTargetDependency */,
@@ -2838,11 +2828,6 @@
 			target = 073BB98122E63DB50053C24E /* TransferRepository */;
 			targetProxy = 073BB98C22E63DB50053C24E /* PBXContainerItemProxy */;
 		};
-		07A899A522E646140048AE05 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 073BB98122E63DB50053C24E /* TransferRepository */;
-			targetProxy = 07A899A422E646140048AE05 /* PBXContainerItemProxy */;
-		};
 		4AE6B6CB22D605B20009DEFE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 4AE6B6BF22D605B20009DEFE /* ReceiptRepository */;
@@ -3013,7 +2998,7 @@
 					"@loader_path/Frameworks",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = hyperwallet.TransferRepository;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ios.TransferRepository;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -3041,7 +3026,7 @@
 					"@loader_path/Frameworks",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = hyperwallet.TransferRepository;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ios.TransferRepository;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -3069,7 +3054,7 @@
 					"@loader_path/Frameworks",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = hyperwallet.TransferRepository;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ios.TransferRepository;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
