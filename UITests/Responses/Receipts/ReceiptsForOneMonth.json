@@ -92,7 +92,7 @@
         {
             "journalId": "55176996",
             "type": "TRANSFER_TO_DEBIT_CARD",
-            "createdOn": "2019-05-02T18:16:17",
+            "createdOn": "2019-05-01T18:16:17",
             "entry": "CREDIT",
             "sourceToken": "usr-token",
             "destinationToken": "trm-00000000-0000-0000-0000-0000000000",
