@@ -101,7 +101,7 @@ struct ReceiptDetailSectionFeeData: ReceiptDetailSectionData {
             let stringFee = receipt.fee,
             let fee = Double(stringFee),
             fee != 0.0,
-            let amount = Double(receipt.amount!) else {
+            let amountValue = receipt.amount, let amount = Double(amountValue) else {
                 return nil
         }
 

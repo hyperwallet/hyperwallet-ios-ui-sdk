@@ -210,7 +210,7 @@ final class SelectTransferMethodTypePresenter {
 
     private func selectCountryHandler() -> SelectTransferMethodTypeView.SelectItemHandler {
         return { (country) in
-            self.selectedCountry = country.value
+            self.selectedCountry = country.value ?? ""
             self.transferMethodConfigurationRepository
                 .getKeys(completion: self.getKeysHandler(success: { (result) in
                     self.loadCurrency(result)
@@ -221,7 +221,7 @@ final class SelectTransferMethodTypePresenter {
 
     private func selectCurrencyHandler() -> SelectTransferMethodTypeView.SelectItemHandler {
         return { (currency) in
-            self.selectedCurrency = currency.value
+            self.selectedCurrency = currency.value ?? ""
             self.transferMethodConfigurationRepository.getKeys(completion: self.getKeysHandler(
                 success: { (result) in
                     self.loadTransferMethodTypes(result)
@@ -233,8 +233,8 @@ final class SelectTransferMethodTypePresenter {
     private func filterContentHandler() -> SelectTransferMethodTypeView.FilterContentHandler {
         return {(items, searchText) in
             items.filter {
-                $0.title.lowercased().contains(searchText.lowercased()) ||
-                    $0.value.lowercased().contains(searchText.lowercased())
+                $0.title?.lowercased().contains(searchText.lowercased()) ?? false ||
+                    $0.value?.lowercased().contains(searchText.lowercased()) ?? false
             }
         }
     }
@@ -256,7 +256,7 @@ final class SelectTransferMethodTypePresenter {
         if let userCountry = userCountry, countries.contains(where: { $0.value == userCountry }) {
             selectedCountry = userCountry
         } else if let country = countries.first {
-            selectedCountry = country.value
+            selectedCountry = country.value ?? ""
         }
     }
 

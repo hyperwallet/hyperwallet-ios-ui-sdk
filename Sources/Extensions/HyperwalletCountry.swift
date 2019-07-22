@@ -19,11 +19,11 @@
 import HyperwalletSDK
 
 extension HyperwalletCountry: GenericCellConfiguration {
-    var title: String {
-        return name ?? ""
+    var title: String? {
+        return name
     }
 
-    var value: String {
-        return code ?? ""
+    var value: String? {
+        return code
     }
 }

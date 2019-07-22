@@ -19,8 +19,8 @@
 import UIKit
 
 struct SelectedContryCurrencyCellConfiguration: GenericCellConfiguration {
-    var title: String
-    var value: String
+    var title: String?
+    var value: String?
 }
 
 /// Represents the Country and Currency cell
