@@ -22,13 +22,11 @@ import HyperwalletSDK
 import XCTest
 
 class TransferMethodRepositoryTests: XCTestCase {
-    private var factory: TransferMethodRepositoryFactory!
     private var transferMethodRepository: TransferMethodRepository!
 
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
-        factory = TransferMethodRepositoryFactory.shared
-        transferMethodRepository = factory.transferMethodRepository()
+        transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
     }
 
     override func tearDown() {
@@ -38,9 +36,8 @@ class TransferMethodRepositoryTests: XCTestCase {
         }
     }
 
-    func testCreate_bankAccount() {
+    func testCreateTransferMethod_bankAccount() {
         let expectation = self.expectation(description: "Create bank account completed")
-        let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
         var bankAccountResult: HyperwalletTransferMethod?
         var bankAccountError: HyperwalletErrorType?
 
@@ -79,7 +76,7 @@ class TransferMethodRepositoryTests: XCTestCase {
                        "The bankAccountId should be 7861012347")
     }
 
-    func testCreate_bankCard() {
+    func testCreateTransferMethod_bankCard() {
         let expectation = self.expectation(description: "Create bank card completed")
         let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
         var bankCardResult: HyperwalletTransferMethod?
@@ -119,7 +116,7 @@ class TransferMethodRepositoryTests: XCTestCase {
                        "The dateOfExpiry should be 2022-12")
     }
 
-    func testCreate_payPalAccount() {
+    func testCreateTransferMethod_payPalAccount() {
         let expectation = self.expectation(description: "Create PayPal account completed")
         let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
         var payPalAccountResult: HyperwalletTransferMethod?
@@ -154,7 +151,7 @@ class TransferMethodRepositoryTests: XCTestCase {
                        "The email should be carroll.lynn@byteme.com")
     }
 
-    func testCreate_wireAccount() {
+    func testCreateTransferMethod_wireAccount() {
         let expectation = self.expectation(description: "Create wire account completed")
         let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
         var wireAccountResult: HyperwalletTransferMethod?
@@ -195,7 +192,7 @@ class TransferMethodRepositoryTests: XCTestCase {
                        "The intermediaryBankId should be 12345678901")
     }
 
-    func testCreate_failure() {
+    func testCreateTransferMethod_failure() {
         let expectation = self.expectation(description: "Create bank account failed")
         let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
         var bankAccountResult: HyperwalletTransferMethod?
@@ -230,7 +227,7 @@ class TransferMethodRepositoryTests: XCTestCase {
                              "The bankAccountError!.getHyperwalletErrors()!.errorList!.count should be greater than 0")
     }
 
-    func testDeactivate_bankAccount() {
+    func testDeactivateTransferMethod_bankAccount() {
         let expectation = self.expectation(description: "Deactivate bank account completed")
         let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
         var statusTransitionResult: HyperwalletStatusTransition?
@@ -269,7 +266,7 @@ class TransferMethodRepositoryTests: XCTestCase {
                        "The statusTransitionResult?.toStatus should be deactivated")
     }
 
-    func testDeactivate_bankCard() {
+    func testDeactivateTransferMethod_bankCard() {
         let expectation = self.expectation(description: "Deactivate bank card completed")
         let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
         var statusTransitionResult: HyperwalletStatusTransition?
@@ -307,7 +304,7 @@ class TransferMethodRepositoryTests: XCTestCase {
                        "The statusTransitionResult?.toStatus should be deactivated")
     }
 
-    func testDeactivate_wireAcount() {
+    func testDeactivateTransferMethod_wireAcount() {
         let expectation = self.expectation(description: "Deactivate wire account completed")
         let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
         var statusTransitionResult: HyperwalletStatusTransition?
@@ -346,7 +343,7 @@ class TransferMethodRepositoryTests: XCTestCase {
                        "The statusTransitionResult?.toStatus should be deactivated")
     }
 
-    func testDeactivate_payPalAccount() {
+    func testDeactivateTransferMethod_payPalAccount() {
         let expectation = self.expectation(description: "Deactivate PayPal Account completed")
         let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
         var statusTransitionResult: HyperwalletStatusTransition?
@@ -384,7 +381,7 @@ class TransferMethodRepositoryTests: XCTestCase {
                        "The statusTransitionResult?.toStatus should be deactivated")
     }
 
-    func testDeactivate_failure() {
+    func testDeactivateTransferMethod_failure() {
         let url = String(format: "%@%@",
                          HyperwalletTestHelper.userRestURL,
                          "/paypal-accounts/trm-123456789/status-transitions")
@@ -426,11 +423,11 @@ class TransferMethodRepositoryTests: XCTestCase {
             "The statusTransitionError!.getHyperwalletErrors()!.errorList!.count should be greater than 0")
     }
 
-    func testList_returnsBankAccount() {
+    func testListTransferMethods_returnsBankAccount() {
         let expectation = self.expectation(description: "List transfer methods completed")
         let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
-        var listTransferMethodResult: HyperwalletPageList<HyperwalletTransferMethod>?
-        var listTransferMethodError: HyperwalletErrorType?
+        var listTransferMethodsResult: HyperwalletPageList<HyperwalletTransferMethod>?
+        var listTransferMethodsError: HyperwalletErrorType?
 
         let listTransferMethodData = HyperwalletTestHelper.getDataFromJson("ListTransferMethodSuccessResponse")
         let response = HyperwalletTestHelper.setUpMockedResponse(payload: listTransferMethodData)
@@ -438,60 +435,60 @@ class TransferMethodRepositoryTests: XCTestCase {
         let request = HyperwalletTestHelper.buildGetRequestRegexMatcher(pattern: url, response)
         HyperwalletTestHelper.setUpMockServer(request: request)
 
-        transferMethodRepository.listTransferMethod { (result) in
+        transferMethodRepository.listTransferMethods { (result) in
             switch result {
             case .failure(let error):
-                listTransferMethodError = error
+                listTransferMethodsError = error
 
             case .success(let listResult):
-                listTransferMethodResult = listResult
+                listTransferMethodsResult = listResult
             }
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 1)
 
-        XCTAssertNil(listTransferMethodError, "The listTransferMethodError should be nil")
-        XCTAssertNotNil(listTransferMethodResult, "The listTransferMethodResult should not be nil")
-        XCTAssertGreaterThan(listTransferMethodResult!.data.count,
+        XCTAssertNil(listTransferMethodsError, "The listTransferMethodsError should be nil")
+        XCTAssertNotNil(listTransferMethodsResult, "The listTransferMethodsResult should not be nil")
+        XCTAssertGreaterThan(listTransferMethodsResult!.data.count,
                              0,
-                             "The listTransferMethodResult!.data.count should be greater than 0")
+                             "The listTransferMethodsResult!.data.count should be greater than 0")
 
         let expectationListSecondTime = self.expectation(description: "List transfer methods again completed")
-        listTransferMethodResult = nil
-        transferMethodRepository.listTransferMethod { (result) in
-            listTransferMethodResult = try? result.get()
+        listTransferMethodsResult = nil
+        transferMethodRepository.listTransferMethods { (result) in
+            listTransferMethodsResult = try? result.get()
             expectationListSecondTime.fulfill()
         }
 
         wait(for: [expectationListSecondTime], timeout: 1)
-        XCTAssertNotNil(listTransferMethodResult)
+        XCTAssertNotNil(listTransferMethodsResult)
     }
 
-    func testList_returnsNoAccounts() {
+    func testListTransferMethods_returnsNoAccounts() {
         let expectation = self.expectation(description: "List transfer methods completed")
         let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
-        var listTransferMethodResult: HyperwalletPageList<HyperwalletTransferMethod>?
-        var listTransferMethodError: HyperwalletErrorType?
+        var listTransferMethodsResult: HyperwalletPageList<HyperwalletTransferMethod>?
+        var listTransferMethodsError: HyperwalletErrorType?
 
         //ListTransferMethodSuccessResponse
         let response = HyperwalletTestHelper.noContentHTTPResponse()
         let url = String(format: "%@%@", HyperwalletTestHelper.userRestURL, "/transfer-methods?")
         let request = HyperwalletTestHelper.buildGetRequestRegexMatcher(pattern: url, response)
         HyperwalletTestHelper.setUpMockServer(request: request)
-        transferMethodRepository.listTransferMethod { (result) in
+        transferMethodRepository.listTransferMethods { (result) in
             switch result {
             case .failure(let error):
-                listTransferMethodError = error
+                listTransferMethodsError = error
 
             case .success(let listResult):
-                listTransferMethodResult = listResult
+                listTransferMethodsResult = listResult
             }
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 1)
 
-        XCTAssertNil(listTransferMethodError, "The listTransferMethodError should be nil")
-        XCTAssertNil(listTransferMethodResult, "The listTransferMethodResult should be nil")
+        XCTAssertNil(listTransferMethodsError, "The listTransferMethodsError should be nil")
+        XCTAssertNil(listTransferMethodsResult, "The listTransferMethodsResult should be nil")
     }
 
     private func setupOkResponseMockServer(endpoint: String, responseDataFile: String ) {

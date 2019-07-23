@@ -104,7 +104,7 @@ final class SelectTransferMethodTypePresenter {
 
     /// Loads the transferMethodKeys from core SDK and display the default transfer methods
     ///
-    /// - Parameter forceUpdate: Forces to refresh the data manager
+    /// - Parameter forceUpdate: Forces to refresh the data
     func loadTransferMethodKeys(_ forceUpdate: Bool = false) {
         view.showLoading()
 

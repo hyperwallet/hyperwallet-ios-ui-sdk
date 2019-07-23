@@ -10,7 +10,7 @@
             "params": {
                 "rel": "self"
             },
-            "href": "https://hyperwallet/rest/v3/transfers/trf-123456/status-transitions/sts-123456"
+            "href": "https://localhost/rest/v3/transfers/trf-123456/status-transitions/sts-123456"
         }
     ]
 }

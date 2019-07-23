@@ -56,7 +56,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
         mockView.expectation = expectation
 
         // When
-        presenter.listTransferMethod(true)
+        presenter.listTransferMethods(true)
         wait(for: [expectation], timeout: 1)
 
         // Then
@@ -82,7 +82,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
         mockView.expectation = expectation
 
         // When
-        presenter.listTransferMethod(true)
+        presenter.listTransferMethods(true)
         wait(for: [expectation], timeout: 1)
 
         // Then
@@ -104,7 +104,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
         mockView.expectation = expectation
 
         // When
-        presenter.listTransferMethod(true)
+        presenter.listTransferMethods(true)
         wait(for: [expectation], timeout: 1)
 
         // Then
@@ -223,7 +223,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
         mockView.expectation = expectationLoadTransferMethods
 
         // When
-        presenter.listTransferMethod(true)
+        presenter.listTransferMethods(true)
         wait(for: [expectationLoadTransferMethods], timeout: 1)
     }
 

@@ -48,7 +48,7 @@ public protocol TransferMethodRepository {
     /// - Parameters:
     ///   - queryParam: the ordering and filtering criteria
     ///   - completion: the callback handler of responses from the Hyperwallet platform
-    func listTransferMethod(
+    func listTransferMethods(
         _ completion: @escaping (Result<HyperwalletPageList<HyperwalletTransferMethod>?, HyperwalletErrorType>) -> Void)
 
     /// Refreshes transfer methods
@@ -56,7 +56,6 @@ public protocol TransferMethodRepository {
 }
 
 final class RemoteTransferMethodRepository: TransferMethodRepository {
-    private static let deactivateNote = "Deactivating Account"
     private var transferMethods: HyperwalletPageList<HyperwalletTransferMethod>?
 
     func createTransferMethod(
@@ -89,17 +88,14 @@ final class RemoteTransferMethodRepository: TransferMethodRepository {
         case "BANK_ACCOUNT", "WIRE_ACCOUNT":
             Hyperwallet.shared.deactivateBankAccount(
                 transferMethodToken: token,
-                notes: RemoteTransferMethodRepository.deactivateNote,
                 completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
         case "BANK_CARD":
             Hyperwallet.shared.deactivateBankCard(
                 transferMethodToken: token,
-                notes: RemoteTransferMethodRepository.deactivateNote,
                 completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
         case "PAYPAL_ACCOUNT":
             Hyperwallet.shared.deactivatePayPalAccount(
                 transferMethodToken: token,
-                notes: RemoteTransferMethodRepository.deactivateNote,
                 completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
 
         default:
@@ -107,19 +103,20 @@ final class RemoteTransferMethodRepository: TransferMethodRepository {
         }
     }
 
-    func listTransferMethod(
+    func listTransferMethods(
         _ completion: @escaping (Result<HyperwalletPageList<HyperwalletTransferMethod>?,
                                         HyperwalletErrorType>) -> Void) {
-        if let transferMethods = transferMethods {
-            completion(.success(transferMethods))
-        } else {
+        guard let transferMethods = transferMethods else {
             let queryParam = HyperwalletTransferMethodQueryParam()
             queryParam.limit = 100
             queryParam.status = .activated
             Hyperwallet.shared.listTransferMethods(
                 queryParam: queryParam,
                 completion: getTransferMethodsHandler(completion))
+            return
         }
+
+        completion(.success(transferMethods))
     }
 
     func refreshTransferMethods() {
