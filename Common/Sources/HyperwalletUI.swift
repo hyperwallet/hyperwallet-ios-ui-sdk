@@ -21,6 +21,7 @@ import HyperwalletSDK
 
 /// Class responsible for initializing the Hyperwallet UI SDK. It contains methods to interact with the controllers
 /// used to interact with the Hyperwallet platform
+@objcMembers
 public final class HyperwalletUI {
     private static var instance: HyperwalletUI?
 
