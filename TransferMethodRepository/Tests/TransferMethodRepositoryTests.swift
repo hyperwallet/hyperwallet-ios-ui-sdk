@@ -78,7 +78,6 @@ class TransferMethodRepositoryTests: XCTestCase {
 
     func testCreateTransferMethod_bankCard() {
         let expectation = self.expectation(description: "Create bank card completed")
-        let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
         var bankCardResult: HyperwalletTransferMethod?
         var bankCardError: HyperwalletErrorType?
 
@@ -118,7 +117,6 @@ class TransferMethodRepositoryTests: XCTestCase {
 
     func testCreateTransferMethod_payPalAccount() {
         let expectation = self.expectation(description: "Create PayPal account completed")
-        let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
         var payPalAccountResult: HyperwalletTransferMethod?
         var payPalAccountError: HyperwalletErrorType?
 
@@ -153,7 +151,6 @@ class TransferMethodRepositoryTests: XCTestCase {
 
     func testCreateTransferMethod_wireAccount() {
         let expectation = self.expectation(description: "Create wire account completed")
-        let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
         var wireAccountResult: HyperwalletTransferMethod?
         var wireAccountError: HyperwalletErrorType?
 
@@ -194,7 +191,6 @@ class TransferMethodRepositoryTests: XCTestCase {
 
     func testCreateTransferMethod_failure() {
         let expectation = self.expectation(description: "Create bank account failed")
-        let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
         var bankAccountResult: HyperwalletTransferMethod?
         var bankAccountError: HyperwalletErrorType?
 
@@ -229,7 +225,6 @@ class TransferMethodRepositoryTests: XCTestCase {
 
     func testDeactivateTransferMethod_bankAccount() {
         let expectation = self.expectation(description: "Deactivate bank account completed")
-        let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
         var statusTransitionResult: HyperwalletStatusTransition?
         var statusTransitionError: HyperwalletErrorType?
 
@@ -268,7 +263,6 @@ class TransferMethodRepositoryTests: XCTestCase {
 
     func testDeactivateTransferMethod_bankCard() {
         let expectation = self.expectation(description: "Deactivate bank card completed")
-        let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
         var statusTransitionResult: HyperwalletStatusTransition?
         var statusTransitionError: HyperwalletErrorType?
 
@@ -306,7 +300,6 @@ class TransferMethodRepositoryTests: XCTestCase {
 
     func testDeactivateTransferMethod_wireAcount() {
         let expectation = self.expectation(description: "Deactivate wire account completed")
-        let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
         var statusTransitionResult: HyperwalletStatusTransition?
         var statusTransitionError: HyperwalletErrorType?
 
@@ -345,7 +338,6 @@ class TransferMethodRepositoryTests: XCTestCase {
 
     func testDeactivateTransferMethod_payPalAccount() {
         let expectation = self.expectation(description: "Deactivate PayPal Account completed")
-        let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
         var statusTransitionResult: HyperwalletStatusTransition?
         var statusTransitionError: HyperwalletErrorType?
 
@@ -423,9 +415,49 @@ class TransferMethodRepositoryTests: XCTestCase {
             "The statusTransitionError!.getHyperwalletErrors()!.errorList!.count should be greater than 0")
     }
 
+    func testDeactivateTransferMethod_tokenNotPresented() {
+        let expectation = self.expectation(description: "Deactivate wire account completed")
+        // expectation should not be fulfilled
+        expectation.isInverted = true
+        let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
+
+        let bankAccount = HyperwalletBankAccount
+            .Builder(transferMethodCountry: "US",
+                     transferMethodCurrency: "USD",
+                     transferMethodProfileType: "INDIVIDUAL",
+                     transferMethodType: "WIRE_ACCOUNT")
+            .build()
+
+        transferMethodRepository.deactivateTransferMethod(bankAccount) { _ in
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 1)
+    }
+
+    func testDeactivateTransferMethod_unknownTransferMethodType() {
+        let expectation = self.expectation(description: "Deactivate wire account completed")
+        // expectation should not be fulfilled
+        expectation.isInverted = true
+        let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
+
+        let bankAccount = HyperwalletBankAccount
+            .Builder(transferMethodCountry: "US",
+                     transferMethodCurrency: "USD",
+                     transferMethodProfileType: "INDIVIDUAL",
+                     transferMethodType: "UNKNOWN")
+            .build()
+        bankAccount.setField(key: "token", value: "trm-123456789")
+
+        transferMethodRepository.deactivateTransferMethod(bankAccount) { _ in
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 1)
+    }
+
     func testListTransferMethods_returnsBankAccount() {
         let expectation = self.expectation(description: "List transfer methods completed")
-        let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
         var listTransferMethodsResult: HyperwalletPageList<HyperwalletTransferMethod>?
         var listTransferMethodsError: HyperwalletErrorType?
 
@@ -466,7 +498,6 @@ class TransferMethodRepositoryTests: XCTestCase {
 
     func testListTransferMethods_returnsNoAccounts() {
         let expectation = self.expectation(description: "List transfer methods completed")
-        let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
         var listTransferMethodsResult: HyperwalletPageList<HyperwalletTransferMethod>?
         var listTransferMethodsError: HyperwalletErrorType?
 
