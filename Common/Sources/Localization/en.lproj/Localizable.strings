@@ -155,8 +155,10 @@
 "standard_shipping_fee" = "Standard Shipping Fee";
 "transfer_fee" = "Transfer Fee";
 "transfer_to_bank_account" = "Bank Account";
+"transfer_to_debit_card" = "Debit Card";
 "transfer_to_moneygram" = "MoneyGram";
 "transfer_to_paper_check" = "Paper Check";
+"transfer_to_paypal_account" = "PayPal";
 "transfer_to_prepaid_card" = "Card Load";
 "transfer_to_program_account" = "Transfer to Program";
 "transfer_to_user" = "Transfer to User";
