@@ -429,8 +429,8 @@ class TransferMethodRepositoryTests: XCTestCase {
     func testList_returnsBankAccount() {
         let expectation = self.expectation(description: "List transfer methods completed")
         let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
-        var listTransactionResult: HyperwalletPageList<HyperwalletTransferMethod>?
-        var listTransactionError: HyperwalletErrorType?
+        var listTransferMethodResult: HyperwalletPageList<HyperwalletTransferMethod>?
+        var listTransferMethodError: HyperwalletErrorType?
 
         let listTransferMethodData = HyperwalletTestHelper.getDataFromJson("ListTransferMethodSuccessResponse")
         let response = HyperwalletTestHelper.setUpMockedResponse(payload: listTransferMethodData)
@@ -441,27 +441,37 @@ class TransferMethodRepositoryTests: XCTestCase {
         transferMethodRepository.listTransferMethod { (result) in
             switch result {
             case .failure(let error):
-                listTransactionError = error
+                listTransferMethodError = error
 
             case .success(let listResult):
-                listTransactionResult = listResult
+                listTransferMethodResult = listResult
             }
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 1)
 
-        XCTAssertNil(listTransactionError, "The listTransactionError should be nil")
-        XCTAssertNotNil(listTransactionResult, "The listTransactionResult should not be nil")
-        XCTAssertGreaterThan(listTransactionResult!.data.count,
+        XCTAssertNil(listTransferMethodError, "The listTransferMethodError should be nil")
+        XCTAssertNotNil(listTransferMethodResult, "The listTransferMethodResult should not be nil")
+        XCTAssertGreaterThan(listTransferMethodResult!.data.count,
                              0,
-                             "The listTransactionResult!.data.count should be greater than 0")
+                             "The listTransferMethodResult!.data.count should be greater than 0")
+
+        let expectationListSecondTime = self.expectation(description: "List transfer methods again completed")
+        listTransferMethodResult = nil
+        transferMethodRepository.listTransferMethod { (result) in
+            listTransferMethodResult = try? result.get()
+            expectationListSecondTime.fulfill()
+        }
+
+        wait(for: [expectationListSecondTime], timeout: 1)
+        XCTAssertNotNil(listTransferMethodResult)
     }
 
     func testList_returnsNoAccounts() {
         let expectation = self.expectation(description: "List transfer methods completed")
         let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
-        var listTransactionResult: HyperwalletPageList<HyperwalletTransferMethod>?
-        var listTransactionError: HyperwalletErrorType?
+        var listTransferMethodResult: HyperwalletPageList<HyperwalletTransferMethod>?
+        var listTransferMethodError: HyperwalletErrorType?
 
         //ListTransferMethodSuccessResponse
         let response = HyperwalletTestHelper.noContentHTTPResponse()
@@ -471,17 +481,17 @@ class TransferMethodRepositoryTests: XCTestCase {
         transferMethodRepository.listTransferMethod { (result) in
             switch result {
             case .failure(let error):
-                listTransactionError = error
+                listTransferMethodError = error
 
             case .success(let listResult):
-                listTransactionResult = listResult
+                listTransferMethodResult = listResult
             }
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 1)
 
-        XCTAssertNil(listTransactionError, "The listTransactionError should be nil")
-        XCTAssertNil(listTransactionResult, "The listTransactionResult should be nil")
+        XCTAssertNil(listTransferMethodError, "The listTransferMethodError should be nil")
+        XCTAssertNil(listTransferMethodResult, "The listTransferMethodResult should be nil")
     }
 
     private func setupOkResponseMockServer(endpoint: String, responseDataFile: String ) {
