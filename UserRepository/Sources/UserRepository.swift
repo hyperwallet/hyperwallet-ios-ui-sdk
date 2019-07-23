@@ -50,7 +50,7 @@ public final class RemoteUserRepository: UserRepository {
     private func getUserHandler( _ completion: @escaping (Result<HyperwalletUser?, HyperwalletErrorType>) -> Void)
         -> (HyperwalletUser?, HyperwalletErrorType?) -> Void {
         return {(result, error) in
-            self.user = CompletionHelper.performHandler(error, result, completion)
+            self.user = UserRepositoryCompletionHelper.performHandler(error, result, completion)
         }
     }
 }

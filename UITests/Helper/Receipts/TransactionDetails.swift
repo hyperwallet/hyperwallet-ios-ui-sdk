@@ -1,3 +1,4 @@
+import HyperwalletSDK
 import XCTest
 
 class TransactionDetails {
@@ -41,6 +42,24 @@ class TransactionDetails {
     var promoWebSiteValue: XCUIElement
 
     var app: XCUIApplication
+
+    let dateFormatterDateAndTime: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.setLocalizedDateFormatFromTemplate("yMMMEdjm")
+        formatter.formattingContext = .beginningOfSentence
+        // try to add this
+        formatter.locale = Locale(identifier: Locale.preferredLanguages[0])
+        return formatter
+    }()
+
+    let localizedDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.setLocalizedDateFormatFromTemplate("yMMMMd")
+        formatter.formattingContext = .beginningOfSentence
+        formatter.dateStyle = .medium
+        formatter.locale = Locale(identifier: Locale.preferredLanguages[0])
+        return formatter
+    }()
 
     init(app: XCUIApplication) {
         self.app = app
@@ -86,5 +105,16 @@ class TransactionDetails {
         if row.exists {
             row.tap()
         }
+    }
+
+    func getExpectedDateTimeFormat(datetime: String) -> String {
+        let dateUTC = ISO8601DateFormatter.ignoreTimeZone.date(from: datetime)
+        return dateFormatterDateAndTime.string(from: dateUTC!)
+    }
+
+    func getExpectedDate(date: String) -> String {
+        let dateUTC = ISO8601DateFormatter.ignoreTimeZone.date(from: date)
+        print(localizedDateFormatter.string(from: dateUTC!))
+        return localizedDateFormatter.string(from: dateUTC!)
     }
 }
