@@ -33,14 +33,15 @@ public protocol PrepaidCardReceiptRepository {
 
 /// Prepaid card receipt repository
 public final class RemotePrepaidCardReceiptRepository: PrepaidCardReceiptRepository {
-    private let yearAgoFromNow = Date.yearAgoFromNow
+    private let yearAgoFromNow = Calendar.current.date(byAdding: .year, value: -1, to: Date())
 
     public func listPrepaidCardReceipts(
         prepaidCardToken: String,
         completion: @escaping (Result<HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType>) -> Void) {
-        Hyperwallet.shared.listPrepaidCardReceipts(prepaidCardToken: prepaidCardToken,
-                                                   queryParam: setUpPrepaidCardQueryParam(),
-                                                   completion: CompletionHelper.performHandler(completion))
+        Hyperwallet.shared.listPrepaidCardReceipts(
+            prepaidCardToken: prepaidCardToken,
+            queryParam: setUpPrepaidCardQueryParam(),
+            completion: ReceiptRepositoryCompletionHelper.performHandler(completion))
     }
 
     private func setUpPrepaidCardQueryParam() -> HyperwalletReceiptQueryParam {

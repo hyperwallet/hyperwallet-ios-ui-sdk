@@ -2,19 +2,16 @@ coverage_service: coveralls
 xcodeproj: HyperwalletUISDK.xcodeproj
 scheme: HyperwalletUISDK
 ignore:
-  - Tests/*
   - UITests/*
   - Demo/*
-  - Sources/Resources/*
-  - Sources/Extensions/*
-  - Sources/Generics/*
-  - Sources/Localization/*
-  - Sources/Helper/*
-  - Sources/View/*
-  - Sources/*/*Controller.swift
-  - Sources/*/*Cell.swift
-  - Sources/TransferMethod/AddTransferMethodSectionData.swift
-  - Sources/HyperwalletUI.swift
+  - TransferMethod/Sources/AddTransferMethodSectionData.swift
+  - "*/Sources/Resources/*"
+  - "*/Sources/Localization/*"
+  - "*/Sources/Helper/*"
+  - "*/Sources/View/*"
+  - "*/Sources/*Controller.swift"
+  - "*/Sources/*Cell.swift"
+  - "*/Sources/*HyperwalletUI.swift"
   - "*/Sources/Extensions/*"
   - "*/Tests/*"
   - "*/Sources/Helper/*"
