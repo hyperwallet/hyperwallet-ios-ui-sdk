@@ -1,0 +1,318 @@
+{
+    "data": [
+        {
+            "journalId": "55047035",
+            "type": "PAYMENT",
+            "createdOn": "2019-01-24T17:35:20",
+            "entry": "CREDIT",
+            "sourceToken": "act-123456789",
+            "destinationToken": "usr-123456789",
+            "amount": "5.00",
+            "fee": "0.00",
+            "currency": "USD",
+            "details": {
+                "clientPaymentId": "DyClk0VG",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55047040",
+            "type": "PAYMENT",
+            "createdOn": "2019-01-24T17:39:19",
+            "entry": "CREDIT",
+            "sourceToken": "act-123456789",
+            "destinationToken": "usr-123456789",
+            "amount": "6.00",
+            "fee": "0.00",
+            "currency": "USD",
+            "details": {
+                "clientPaymentId": "DyClk0VGa",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55047041",
+            "type": "TRANSFER_TO_BANK_ACCOUNT",
+            "createdOn": "2019-01-24T17:46:28",
+            "entry": "DEBIT",
+            "sourceToken": "usr-123456789",
+            "destinationToken": "trm-123456789",
+            "amount": "5.00",
+            "fee": "2.00",
+            "currency": "USD",
+            "details": {
+                "payeeName": "Shaoyun Yang",
+                "branchId": "026009593",
+                "bankAccountId": "*****5209",
+                "bankAccountPurpose": "CHECKING"
+            }
+        },
+        {
+            "journalId": "55047035",
+            "type": "PAYMENT",
+            "createdOn": "2019-02-24T17:35:20",
+            "entry": "CREDIT",
+            "sourceToken": "act-123456789",
+            "destinationToken": "usr-123456789",
+            "amount": "5.00",
+            "fee": "0.00",
+            "currency": "USD",
+            "details": {
+                "clientPaymentId": "DyClk0VG",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55047035",
+            "type": "PAYMENT",
+            "createdOn": "2019-02-24T17:35:20",
+            "entry": "CREDIT",
+            "sourceToken": "act-123456789",
+            "destinationToken": "usr-123456789",
+            "amount": "5.00",
+            "fee": "0.00",
+            "currency": "USD",
+            "details": {
+                "clientPaymentId": "DyClk0VG",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55047040",
+            "type": "PAYMENT",
+            "createdOn": "2019-02-24T17:39:19",
+            "entry": "CREDIT",
+            "sourceToken": "act-123456789",
+            "destinationToken": "usr-123456789",
+            "amount": "6.00",
+            "fee": "0.00",
+            "currency": "USD",
+            "details": {
+                "clientPaymentId": "DyClk0VGa",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55047041",
+            "type": "TRANSFER_TO_BANK_ACCOUNT",
+            "createdOn": "2019-03-24T17:46:28",
+            "entry": "DEBIT",
+            "sourceToken": "usr-123456789",
+            "destinationToken": "trm-123456789",
+            "amount": "5.00",
+            "fee": "2.00",
+            "currency": "USD",
+            "details": {
+                "payeeName": "Shaoyun Yang",
+                "branchId": "026009593",
+                "bankAccountId": "*****5209",
+                "bankAccountPurpose": "CHECKING"
+            }
+        },
+        {
+            "journalId": "55047040",
+            "type": "PAYMENT",
+            "createdOn": "2019-03-24T17:39:19",
+            "entry": "CREDIT",
+            "sourceToken": "act-123456789",
+            "destinationToken": "usr-123456789",
+            "amount": "6.00",
+            "fee": "0.00",
+            "currency": "USD",
+            "details": {
+                "clientPaymentId": "DyClk0VGa",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55047041",
+            "type": "TRANSFER_TO_BANK_ACCOUNT",
+            "createdOn": "2019-03-24T17:46:28",
+            "entry": "DEBIT",
+            "sourceToken": "usr-123456789",
+            "destinationToken": "trm-123456789",
+            "amount": "5.00",
+            "fee": "2.00",
+            "currency": "USD",
+            "details": {
+                "payeeName": "Shaoyun Yang",
+                "branchId": "026009593",
+                "bankAccountId": "*****5209",
+                "bankAccountPurpose": "CHECKING"
+            }
+        },
+        {
+            "journalId": "55176986",
+            "type": "PAYMENT",
+            "createdOn": "2019-04-28T18:16:04",
+            "entry": "CREDIT",
+            "sourceToken": "act-123456789",
+            "destinationToken": "usr-123456789",
+            "amount": "6.00",
+            "fee": "0.00",
+            "currency": "USD",
+            "details": {
+                "clientPaymentId": "DyClk0VG2a",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55176987",
+            "type": "PAYMENT",
+            "createdOn": "2019-04-28T18:16:08",
+            "entry": "CREDIT",
+            "sourceToken": "act-123456789",
+            "destinationToken": "usr-123456789",
+            "amount": "6.00",
+            "fee": "0.00",
+            "currency": "USD",
+            "details": {
+                "clientPaymentId": "DyClk0VG3a",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55176988",
+            "type": "PAYMENT",
+            "createdOn": "2019-04-28T18:16:10",
+            "entry": "CREDIT",
+            "sourceToken": "act-123456789",
+            "destinationToken": "usr-123456789",
+            "amount": "6.00",
+            "fee": "0.00",
+            "currency": "USD",
+            "details": {
+                "clientPaymentId": "DyClk0VG4a",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55176986",
+            "type": "PAYMENT",
+            "createdOn": "2019-04-28T18:16:04",
+            "entry": "CREDIT",
+            "sourceToken": "act-123456789",
+            "destinationToken": "usr-123456789",
+            "amount": "6.00",
+            "fee": "0.00",
+            "currency": "USD",
+            "details": {
+                "clientPaymentId": "DyClk0VG2a",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55176987",
+            "type": "PAYMENT",
+            "createdOn": "2019-04-28T18:16:08",
+            "entry": "CREDIT",
+            "sourceToken": "act-123456789",
+            "destinationToken": "usr-123456789",
+            "amount": "6.00",
+            "fee": "0.00",
+            "currency": "USD",
+            "details": {
+                "clientPaymentId": "DyClk0VG3a",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55176988",
+            "type": "PAYMENT",
+            "createdOn": "2019-04-28T18:16:10",
+            "entry": "CREDIT",
+            "sourceToken": "act-123456789",
+            "destinationToken": "usr-123456789",
+            "amount": "6.00",
+            "fee": "0.00",
+            "currency": "USD",
+            "details": {
+                "clientPaymentId": "DyClk0VG4a",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55176988",
+            "type": "PAYMENT",
+            "createdOn": "2019-04-28T18:16:10",
+            "entry": "CREDIT",
+            "sourceToken": "act-123456789",
+            "destinationToken": "usr-123456789",
+            "amount": "6.00",
+            "fee": "0.00",
+            "currency": "USD",
+            "details": {
+                "clientPaymentId": "DyClk0VG4a",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55176988",
+            "type": "PAYMENT",
+            "createdOn": "2019-04-28T18:16:10",
+            "entry": "CREDIT",
+            "sourceToken": "act-123456789",
+            "destinationToken": "usr-123456789",
+            "amount": "6.00",
+            "fee": "0.00",
+            "currency": "USD",
+            "details": {
+                "clientPaymentId": "DyClk0VG4a",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55176988",
+            "type": "PAYMENT",
+            "createdOn": "2019-04-28T18:16:10",
+            "entry": "CREDIT",
+            "sourceToken": "act-123456789",
+            "destinationToken": "usr-123456789",
+            "amount": "6.00",
+            "fee": "0.00",
+            "currency": "USD",
+            "details": {
+                "clientPaymentId": "DyClk0VG4a",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55176989",
+            "type": "PAYMENT",
+            "createdOn": "2019-05-28T18:16:12",
+            "entry": "CREDIT",
+            "sourceToken": "act-123456789",
+            "destinationToken": "usr-123456789",
+            "amount": "6.00",
+            "fee": "0.00",
+            "currency": "USD",
+            "details": {
+                "clientPaymentId": "DyClk0VG5a",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55176990",
+            "type": "PAYMENT",
+            "createdOn": "2019-05-28T18:16:12",
+            "entry": "CREDIT",
+            "sourceToken": "act-123456789",
+            "destinationToken": "usr-123456789",
+            "amount": "6.00",
+            "fee": "0.00",
+            "currency": "USD",
+            "details": {
+                "clientPaymentId": "DyClk0VG5a",
+                "payeeName": "Shaoyun Yang"
+            }
+        }
+    ],
+    "links": [
+        {
+            "params": {
+                "rel": "self"
+            },
+            "href": "https://localhost/rest/v3/users/usr-123456789/prepaid-cards/trm-12346/receipts"
+        }
+    ]
+}

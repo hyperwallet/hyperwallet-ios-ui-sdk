@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wCK-zt-ysg">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wCK-zt-ysg">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.70"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -18,20 +14,20 @@
         <scene sceneID="90C-vr-vjd">
             <objects>
                 <tableViewController id="h5h-EX-xDl" customClass="ViewController" customModule="HyperwalletExampleApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Krd-9H-To6">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Krd-9H-To6">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TopCell" rowHeight="120" id="mqC-LT-GSO" customClass="TopTableViewCell" customModule="HyperwalletExampleApp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="120"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TopCell" rowHeight="120" id="mqC-LT-GSO" customClass="TopCell" customModule="HyperwalletExampleApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="600" height="120"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mqC-LT-GSO" id="obu-O4-ovs">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="119.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="119.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="svg-8N-6bE">
-                                            <rect key="frame" x="133" y="29" width="215" height="21"/>
+                                            <rect key="frame" x="137" y="29" width="432" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="NX4-BJ-HlD"/>
                                             </constraints>
@@ -40,7 +36,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3tB-Dy-Uuo">
-                                            <rect key="frame" x="133" y="48" width="215" height="21"/>
+                                            <rect key="frame" x="137" y="48" width="432" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="IMf-Ps-lhQ"/>
                                             </constraints>
@@ -49,7 +45,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nuD-M0-zEI">
-                                            <rect key="frame" x="133" y="67" width="215" height="21"/>
+                                            <rect key="frame" x="137" y="67" width="432" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="LF0-kB-nFq"/>
                                             </constraints>
@@ -58,7 +54,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="\" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FPZ-k7-MhG">
-                                            <rect key="frame" x="29" y="20" width="74" height="66"/>
+                                            <rect key="frame" x="33" y="20" width="74" height="66"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="74" id="lJf-e9-laX"/>
                                                 <constraint firstAttribute="height" constant="66" id="ruo-BD-Lz8"/>
@@ -89,15 +85,15 @@
                                     <outlet property="phoneLabel" destination="3tB-Dy-Uuo" id="eHe-ve-mBq"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LabelCell" rowHeight="80" id="gTh-zb-JIg" customClass="HeadlineTableViewCell" customModule="HyperwalletExampleApp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="148" width="375" height="80"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LabelCell" rowHeight="80" id="gTh-zb-JIg" customClass="HeadlineCell" customModule="HyperwalletExampleApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="148" width="600" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gTh-zb-JIg" id="zy6-Dy-o7Q">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="79.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uFo-O2-ca8">
-                                            <rect key="frame" x="16" y="45" width="343" height="17"/>
+                                            <rect key="frame" x="20" y="45" width="560" height="17"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="17" id="3i0-r0-gDm"/>
                                             </constraints>
@@ -106,7 +102,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YKf-MB-uhb">
-                                            <rect key="frame" x="16" y="13" width="343" height="20.5"/>
+                                            <rect key="frame" x="20" y="13" width="560" height="20.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20.5" id="vvk-O7-uBH"/>
                                             </constraints>
