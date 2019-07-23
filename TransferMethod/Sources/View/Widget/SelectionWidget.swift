@@ -28,7 +28,6 @@ final class SelectionWidget: AbstractWidget {
     private let labelField: UILabel = {
         let label = UILabel()
         label.font = Theme.Label.bodyFont
-        label.setConstraint(value: 22, attribute: .height)
         return label
     }()
     private var selectedValue: String?

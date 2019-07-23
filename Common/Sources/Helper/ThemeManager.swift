@@ -25,6 +25,8 @@ public class ThemeManager {
         applyToUINavigationBar()
         applyToProcessingView()
         applyToSpinnerView()
+        applyToUITextField()
+        applyToUILabel()
         registerFonts
     }
 
@@ -104,6 +106,17 @@ public class ThemeManager {
         proxy.activityIndicatorColor = Theme.SpinnerView.activityIndicatorViewColor
         proxy.activityIndicatorBackgroundColor = Theme.SpinnerView.backgroundColor
         proxy.viewBackgroundColor = Theme.SpinnerView.backgroundColor
+    }
+
+    private static func applyToUITextField() {
+        let proxy = UITextField.appearance()
+        proxy.font = Theme.Label.bodyFont
+        proxy.adjustsFontForContentSizeCategory = true
+    }
+
+    private static func applyToUILabel() {
+        let proxy = UILabel.appearance()
+        proxy.adjustsFontForContentSizeCategory = true
     }
 
     private static let registerFonts: Void = {
