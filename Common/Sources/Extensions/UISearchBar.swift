@@ -18,35 +18,38 @@
 
 import UIKit
 
-extension UISearchBar {
+/// The UISearchBar extension
+public extension UISearchBar {
+    /// Setup text alignment to the left
     func setLeftAligment() {
+        guard let textField = self.value(forKey: "searchField") as? UITextField else {
+            return
+        }
+        textField.accessibilityIdentifier = "search"
         guard #available(iOS 11.0, *) else {
-            if let textField = self.value(forKey: "searchField") as? UITextField {
-                textField.accessibilityIdentifier = "Search"
-                let spaceChar = " "
-                let placeholderText = "search_placeholder_label".localized()
-                let attributes = textField.attributedPlaceholder?.attributes(at: 0, effectiveRange: nil)
-                let leftViewWidth = textField.leftView?.bounds.width ?? 0
-                let leftInnerRightMargins = CGFloat(40)
-                let maxSize = CGSize(width: self.bounds.size.width - leftViewWidth - leftInnerRightMargins,
-                                     height: 40)
-                let widthText = placeholderText.boundingRect(with: maxSize,
-                                                             options: .usesLineFragmentOrigin,
-                                                             attributes: attributes,
-                                                             context: nil).size.width
+            let spaceCharacter = " "
+            let placeholderText = "search_placeholder_label".localized()
+            let attributes = textField.attributedPlaceholder?.attributes(at: 0, effectiveRange: nil)
+            let leftViewWidth = textField.leftView?.bounds.width ?? 0
+            let leftInnerRightMargins = CGFloat(40)
+            let maxSize = CGSize(width: self.bounds.size.width - leftViewWidth - leftInnerRightMargins,
+                                 height: 40)
+            let widthText = placeholderText.boundingRect(with: maxSize,
+                                                         options: .usesLineFragmentOrigin,
+                                                         attributes: attributes,
+                                                         context: nil).size.width
 
-                let widthSpace = spaceChar.boundingRect(with: maxSize,
-                                                        options: .usesLineFragmentOrigin,
-                                                        attributes: attributes,
-                                                        context: nil).size.width
+            let widthSpace = spaceCharacter.boundingRect(with: maxSize,
+                                                         options: .usesLineFragmentOrigin,
+                                                         attributes: attributes,
+                                                         context: nil).size.width
 
-                let spacesCount = Int((maxSize.width - widthText) / widthSpace) - 1
-                guard spacesCount > 0  else {
-                    return
-                }
-                let newText = placeholderText + String(repeating: spaceChar, count: spacesCount)
-                textField.attributedPlaceholder = NSAttributedString(string: newText, attributes: attributes)
+            let spacesCount = Int((maxSize.width - widthText) / widthSpace) - 1
+            guard spacesCount > 0  else {
+                return
             }
+            let newText = placeholderText + String(repeating: spaceCharacter, count: spacesCount)
+            textField.attributedPlaceholder = NSAttributedString(string: newText, attributes: attributes)
             return
         }
     }
