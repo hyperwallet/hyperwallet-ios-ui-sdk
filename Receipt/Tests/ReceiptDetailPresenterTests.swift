@@ -62,7 +62,8 @@ class ReceiptDetailPresenterTests: XCTestCase {
         XCTAssertEqual(section.rowCount, 3)
 
         XCTAssertTrue(rowEqual(section.rows[0], "Receipt ID:", "55176986", "journalId"))
-        let expectedDateTime = ISO8601DateFormatter.ignoreTimeZone.date(from: "2019-04-28T18:16:04")!
+        let expectedDateTime = ISO8601DateFormatter.ignoreTimeZone
+            .date(from: "2019-04-28T18:16:04")!
             .format(for: .dateTime)
         XCTAssertTrue(rowEqual(section.rows[1], "Date:", expectedDateTime, "createdOn"))
         XCTAssertTrue(rowEqual(section.rows[2], "Client Transaction ID:", "DyClk0VG2a", "clientPaymentId"))
