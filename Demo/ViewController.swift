@@ -19,6 +19,7 @@
 #if !COCOAPODS
 import Common
 import Receipt
+import Transfer
 import TransferMethod
 #endif
 import HyperwalletSDK
