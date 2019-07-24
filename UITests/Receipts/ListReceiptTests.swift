@@ -37,16 +37,19 @@ class ListReceiptTests: BaseTests {
     }
 
     func testReceiptsList_verifyReceiptsListForOneMonth() {
-        let expectedNumberOfCells = 5
+        let expectedNumberOfCells = 7
         mockServer.setupStub(url: "/rest/v3/users/usr-token/receipts",
                              filename: "ReceiptsForOneMonth",
                              method: HTTPMethod.get)
         openReceiptsListScreen()
+
         verifyCellExists("Bank Account", "2019-05-10T18:16:17", "-5.00", "USD", at: 0)
         verifyCellExists("Payment", "2019-05-08T18:16:19", "6.00", "USD", at: 1)
         verifyCellExists("Bank Account", "2019-05-06T18:16:17", "-5.00", "USD", at: 2)
         verifyCellExists("Payment", "2019-05-04T18:16:14", "6.00", "USD", at: 3)
         verifyCellExists("Payment", "2019-05-03T17:08:58", "20.00", "USD", at: 4)
+        verifyCellExists("PayPal", "2019-05-02T18:16:17", "5.00", "USD", at: 5)
+        verifyCellExists("Debit Card", "2019-05-01T18:16:17", "5.00", "USD", at: 6)
 
         XCTAssertEqual(app.tables.cells.count, expectedNumberOfCells)
         XCTAssertTrue(app.tables.staticTexts["May 2019"].exists)
@@ -97,8 +100,8 @@ class ListReceiptTests: BaseTests {
         XCTAssertTrue(cell.staticTexts["receiptTransactionCurrencyLabel"].exists)
 
         XCTAssertEqual(type, cell.staticTexts["receiptTransactionTypeLabel"].label)
-        XCTAssertEqual(transactionDetails.getExpectedDate(date: createdOn), cell.staticTexts["receiptTransactionCreatedOnLabel"]
-            .label)
+        XCTAssertEqual(transactionDetails.getExpectedDate(date: createdOn),
+                       cell.staticTexts["receiptTransactionCreatedOnLabel"].label)
         XCTAssertEqual(amount, cell.staticTexts["receiptTransactionAmountLabel"].label)
         XCTAssertEqual(currency, cell.staticTexts["receiptTransactionCurrencyLabel"].label)
     }
@@ -205,10 +208,8 @@ class ListReceiptTests: BaseTests {
         XCTAssertEqual(transactionDetails.checkNumValue.label, "Sample Check Number")
         XCTAssertEqual(transactionDetails.promoWebSiteValue.label, "https://localhost")
         XCTAssertEqual(transactionDetails.notesValue.label, "Sample payment notes")
-        XCTAssertEqual(
-            transactionDetails.dateValue.label,
-                       transactionDetails
-            .getExpectedDateTimeFormat(datetime: "2019-05-03T17:08:58"))
+        XCTAssertEqual(transactionDetails.dateValue.label,
+                       transactionDetails.getExpectedDateTimeFormat(datetime: "2019-05-03T17:08:58"))
     }
 
     // Verify when no Notes and Fee sections
@@ -253,7 +254,8 @@ class ListReceiptTests: BaseTests {
         XCTAssertEqual(transactionDetails.dateLabel.label, "Date:")
         XCTAssertEqual(transactionDetails.receiptIdValue.label, receiptIdVal)
         XCTAssertEqual(transactionDetails.receiptIdValue.label, receiptIdVal)
-        XCTAssertEqual(transactionDetails.dateValue.label, transactionDetails.getExpectedDateTimeFormat(datetime: dateVal))
+        XCTAssertEqual(transactionDetails.dateValue.label,
+                       transactionDetails.getExpectedDateTimeFormat(datetime: dateVal))
 
         if let clientIdVal = clientIdVal {
             let clientTransIDLabel = transactionDetails.clientTransactionIdLabel
