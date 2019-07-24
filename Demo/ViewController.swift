@@ -182,6 +182,13 @@ class ViewController: UITableViewController {
 
             navigationController?.pushViewController(viewController, animated: true)
 
+        case .transferFunds:
+            let viewController = HyperwalletUI.shared.createTransferController(
+                clientTransferId: "1",
+                sourceToken: "2")
+
+            navigationController?.pushViewController(viewController, animated: true)
+
         default:
             let viewController = HyperwalletUI.shared.listTransferMethodController()
             navigationController?.pushViewController(viewController, animated: true)
