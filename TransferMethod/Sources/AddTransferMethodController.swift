@@ -62,6 +62,7 @@ public final class AddTransferMethodController: UITableViewController {
         button.setTitle("create_account_label".localized(), for: .normal)
         button.setTitleColor(Theme.Button.color, for: UIControl.State.normal)
         button.addTarget(self, action: #selector(onTapped), for: .touchUpInside)
+        button.titleLabel?.font = Theme.Label.bodyFont
         return button
     }()
 
