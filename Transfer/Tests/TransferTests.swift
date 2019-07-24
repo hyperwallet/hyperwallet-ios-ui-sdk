@@ -24,13 +24,13 @@ import XCTest
 class TransferTests: XCTestCase {
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
-        presenter = ListReceiptPresenter(view: mockView)
+        //presenter = CreateTransferPresenter()
     }
 
     override func tearDown() {
         if Hippolyte.shared.isStarted {
             Hippolyte.shared.stop()
         }
-        mockView.resetStates()
+        //mockView.resetStates()
     }
 }

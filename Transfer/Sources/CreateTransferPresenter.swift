@@ -18,9 +18,7 @@
 
 #if !COCOAPODS
 import Common
-import UserRepository
 #endif
-
 import HyperwalletSDK
 
 protocol CreateTransferView: class {
