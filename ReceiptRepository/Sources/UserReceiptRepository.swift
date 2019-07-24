@@ -36,7 +36,7 @@ public protocol UserReceiptRepository {
 
 /// User receipt repository
 public final class RemoteUserReceiptRepository: UserReceiptRepository {
-    private let yearAgoFromNow = Date.yearAgoFromNow
+    private let yearAgoFromNow = Calendar.current.date(byAdding: .year, value: -1, to: Date())
 
     public func listUserReceipts(
         offset: Int,
@@ -50,7 +50,7 @@ public final class RemoteUserReceiptRepository: UserReceiptRepository {
         _ completion: @escaping (Result<HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType>) -> Void)
         -> (HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType?) -> Void {
             return {(result, error) in
-                CompletionHelper.performHandler(error, result, completion)
+                ReceiptRepositoryCompletionHelper.performHandler(error, result, completion)
             }
     }
 
