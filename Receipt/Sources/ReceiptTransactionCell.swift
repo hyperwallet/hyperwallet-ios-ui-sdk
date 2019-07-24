@@ -130,7 +130,7 @@ final class ReceiptTransactionCell: UITableViewCell {
 
 extension ReceiptTransactionCell {
     func configure(_ receipt: HyperwalletReceipt?) {
-        guard let receipt = receipt, let entry = receipt.entry?.rawValue, let createOn = receipt.createdOn else {
+        guard let receipt = receipt, let entry = receipt.entry?.rawValue, let createOn = receipt.createdOn, let amount = receipt.amount else {
             return
         }
         let createdOn = ISO8601DateFormatter.ignoreTimeZone
@@ -143,7 +143,7 @@ extension ReceiptTransactionCell {
 
         amountLabel.text = entry == credit
             ? receipt.amount
-            : String(format: "-%@", receipt.amount ?? "")
+            : String(format: "-%@", amount)
 
         amountLabel.textColor = entry == credit
             ? Theme.Amount.creditColor

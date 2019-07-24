@@ -211,7 +211,7 @@ final class SelectTransferMethodTypePresenter {
 
     private func selectCountryHandler() -> SelectTransferMethodTypeView.SelectItemHandler {
         return { (country) in
-            self.selectedCountry = country.value ?? ""
+            if let country = country.value { self.selectedCountry = country }
             self.transferMethodConfigurationRepository
                 .getKeys(completion: self.getKeysHandler(success: { (result) in
                     self.loadCurrency(result)
@@ -222,7 +222,7 @@ final class SelectTransferMethodTypePresenter {
 
     private func selectCurrencyHandler() -> SelectTransferMethodTypeView.SelectItemHandler {
         return { (currency) in
-            self.selectedCurrency = currency.value ?? ""
+            if let currency = currency.value { self.selectedCurrency = currency }
             self.transferMethodConfigurationRepository.getKeys(completion: self.getKeysHandler(
                 success: { (result) in
                     self.loadTransferMethodTypes(result)
@@ -256,18 +256,18 @@ final class SelectTransferMethodTypePresenter {
                                      with userCountry: String?) {
         if let userCountry = userCountry, countries.contains(where: { $0.value == userCountry }) {
             selectedCountry = userCountry
-        } else if let country = countries.first {
-            selectedCountry = country.value ?? ""
+        } else if let country = countries.first, let countryValue = country.value {
+            selectedCountry = countryValue
         }
     }
 
     private func loadCurrency(_ keys: HyperwalletTransferMethodConfigurationKey?) {
-        guard let firstCurrency = keys?.currencies(from: selectedCountry)?.first else {
+        guard let firstCurrency = keys?.currencies(from: selectedCountry)?.first, let currencyCode = firstCurrency.code else {
             view.showAlert(message: String(format: "no_currency_available_error_message".localized(),
                                            selectedCountry.localized()))
             return
         }
-        selectedCurrency = firstCurrency.code ?? ""
+        selectedCurrency = currencyCode
         view.countryCurrencyTableViewReloadData()
     }
 
