@@ -16,24 +16,24 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+#if !COCOAPODS
+import Common
+#endif
+import HyperwalletSDK
+import UIKit
 
-/// The Array extension
-public extension Array {
-    /// A Boolean value indicating whether the collection is not empty.
-    var isNotEmpty: Bool {
-        return !self.isEmpty
+final class DividerCell: UITableViewCell {
+    static let reuseIdentifier = "dividerCellReuseIdentifier"
+
+    // MARK: Life cycle
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        self.heightAnchor.constraint(equalToConstant: Theme.Cell.dividerHeight).isActive = true
+        backgroundColor = Theme.ViewController.backgroundColor
+        separatorInset = UIEdgeInsets.zero
     }
 
-    /// Check if the current index is the last element in this array
-    func isLast(index: Int) -> Bool {
-        return index == endIndex - 1
-    }
-
-    /// A safe way to check if element exists in this array
-    ///
-    /// - Parameter index: the index of an element
-    subscript(safe index: Index) -> Element? {
-        return indices.contains(index) ? self[index] : nil
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
 }

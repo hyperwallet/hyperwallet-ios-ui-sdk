@@ -50,6 +50,7 @@ class ViewController: UITableViewController {
         case userReceipts
         case prepaidCardReceipts
         case transferFunds
+        case scheduleTransfer
 
         var title: String {
             switch self {
@@ -60,6 +61,7 @@ class ViewController: UITableViewController {
             case .userReceipts: return "List User Receipts"
             case .prepaidCardReceipts: return "List Prepaid Card Receipts"
             case .transferFunds: return  "Transfer Funds"
+            case .scheduleTransfer: return "Schedule a Transfer"
             }
         }
 
@@ -72,6 +74,7 @@ class ViewController: UITableViewController {
             case .userReceipts: return "List User Receipts"
             case .prepaidCardReceipts: return "List Prepaid Card Receipts"
             case .transferFunds: return  "Transfer Funds"
+            case .scheduleTransfer: return "Schedule a Transfer"
             }
         }
     }
@@ -190,6 +193,16 @@ class ViewController: UITableViewController {
 
             navigationController?.pushViewController(viewController, animated: true)
 
+        case .scheduleTransfer:
+            let transferMethod = HyperwalletBankAccount.Builder(transferMethodCountry: "US",
+                                                                transferMethodCurrency: "USD",
+                                                                transferMethodProfileType: "INDIVIDUAL",
+                                                                transferMethodType: "BANK_ACCOUNT")
+                .build()
+            let viewController = ScheduleTransferController(transferMethod: transferMethod,
+                                                            transfer: setUpMockedTransferResult())
+            navigationController?.pushViewController(viewController, animated: true)
+
         default:
             let viewController = HyperwalletUI.shared.listTransferMethodController()
             navigationController?.pushViewController(viewController, animated: true)
@@ -217,5 +230,61 @@ class ViewController: UITableViewController {
     @objc
     func methodOfReceivedNotification(notification: Notification) {
         print("Transfer method has been deleted successfully")
+    }
+
+    //swiftlint:disable force_try
+    func setUpMockedTransferResult() -> HyperwalletTransfer {
+        let transferJsonString = """
+        {
+        "token": "trf-aa308d58-75b4-432b-dec1-eb6b9e341111",
+        "status": "QUOTED",
+        "createdOn": "2016-05-01T00:00:00",
+        "clientTransferId": "6712348070812",
+        "sourceToken": "usr-ac5727ac-8fe7-42fb-b69d-977ebdd7b48b",
+        "sourceAmount": "80",
+        "sourceCurrency": "CAD",
+        "destinationToken": "trm-e3af62b4-24d5-100f-a4eb-ada857b8fc30",
+        "destinationAmount": "62.29",
+        "destinationFeeAmount": "1.20",
+        "destinationCurrency": "USD",
+        "foreignExchanges": [
+        {
+        "sourceAmount": "100.00",
+        "sourceCurrency": "CAD",
+        "destinationAmount": "63.49",
+        "destinationCurrency": "USD",
+        "rate": "0.79"
+        },
+        {
+        "sourceAmount": "120.00",
+        "sourceCurrency": "CAD",
+        "destinationAmount": "63.49",
+        "destinationCurrency": "USD",
+        "rate": "0.39"
+        },
+        {
+        "sourceAmount": "110.00",
+        "sourceCurrency": "CAD",
+        "destinationAmount": "63.49",
+        "destinationCurrency": "USD",
+        "rate": "0.88"
+        }
+        ],
+        "notes": "Partial-Balance Transfer",
+        "memo": "TransferClientId56387",
+        "expiresOn": "2016-05-01T00:02:00",
+        "links": [
+        {
+        "params": {
+        "rel": "self"
+        },
+        "href": "https://api.sandbox.hyperwallet.com/rest/v3/transfers/trf-aa308d58-75b4-432b-dec1-eb6b9e341111"
+        }
+        ]
+        }
+        """
+        let jsonData = Data(transferJsonString.utf8)
+        let decoder = JSONDecoder()
+        return try! decoder.decode(HyperwalletTransfer.self, from: jsonData)
     }
 }

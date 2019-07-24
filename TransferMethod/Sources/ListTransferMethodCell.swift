@@ -68,7 +68,7 @@ public final class ListTransferMethodCell: UITableViewCell {
 }
 
 extension ListTransferMethodCell {
-    func configure(transferMethod: HyperwalletTransferMethod) {
+    public func configure(transferMethod: HyperwalletTransferMethod) {
         textLabel?.text = transferMethod.type?.lowercased().localized()
         textLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellTextLabel"
         detailTextLabel?.attributedText = formatDetails(

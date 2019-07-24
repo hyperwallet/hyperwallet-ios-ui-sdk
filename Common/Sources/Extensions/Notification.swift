@@ -31,13 +31,21 @@ public extension Notification.Name {
     static var transferMethodDeactivated: Notification.Name {
         return .init(rawValue: "transferMethodDeactivated")
     }
+
+    /// Posted when a transfer method (bank account, bank card, PayPal account, prepaid card, paper check)
+    /// has been deactivated.
+    static var transferScheduled: Notification.Name {
+        return .init(rawValue: "transferScheduled")
+    }
 }
 
 /// The Hyperwallet's `NotificationCenter` key to access the information.
 ///
 /// - transferMethod: A new transfer method has been created.
 /// - statusTransition: A transfer method has been deactivated.
+/// - transferScheduled: A transfer has been scheduled.
 public enum UserInfo: String {
     case transferMethod
     case statusTransition
+    case transferScheduled
 }
