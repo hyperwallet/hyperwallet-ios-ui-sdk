@@ -28,10 +28,10 @@ enum CreateTransferSectionHeader: String {
 }
 
 protocol CreateTransferSectionData {
+    var cellIdentifier: String { get }
     var createTransferSectionHeader: CreateTransferSectionHeader { get }
     var rowCount: Int { get }
     var title: String? { get }
-    var cellIdentifier: String { get }
 }
 
 extension CreateTransferSectionData {
@@ -46,49 +46,15 @@ struct CreateTransferSectionAddDestinationAccountData: CreateTransferSectionData
     var cellIdentifier: String { return "addTransferMethodSectionDataLabel" }
 }
 
+// first section !!!!!!
 struct CreateTransferSectionDestinationData: CreateTransferSectionData {
     var createTransferSectionHeader: CreateTransferSectionHeader { return .destination }
-    var cellIdentifier: String { return ListTransferMethodCell.reuseIdentifier }
-    var configuration: HyperwalletTransferMethod?
+    var cellIdentifier: String { return CreateTransferAddSelectDestinationCell.reuseIdentifier }
+    var isTransferMethodAvailable: Bool = true
 
-    init(transferMethod: HyperwalletTransferMethod) {
-        configuration = transferMethod
+    init(isTransferMethodAvailable: Bool) {
+        self.isTransferMethodAvailable = isTransferMethodAvailable
     }
-
-//    private func setUpCellConfiguration(transferMethod: HyperwalletTransferMethod) -> ListTransferMethodCellConfiguration? {
-//           if let country = transferMethod.transferMethodCountry,
-//           let transferMethodType = transferMethod.type {
-//             return ListTransferMethodCellConfiguration(
-//                transferMethodType: transferMethodType.lowercased().localized(),
-//                transferMethodCountry: country.localized(),
-//                additionalInfo: getAdditionalInfo(transferMethod),
-//                transferMethodIconFont: HyperwalletIcon.of(transferMethodType).rawValue,
-//                transferMethodToken: transferMethod.token ?? "")
-//        }
-//        return nil
-//    }
-//
-//    private func getAdditionalInfo(_ transferMethod: HyperwalletTransferMethod) -> String? {
-//        var additionlInfo: String?
-//        switch transferMethod.type {
-//        case "BANK_ACCOUNT", "WIRE_ACCOUNT":
-//            additionlInfo = transferMethod.getField(HyperwalletTransferMethod.TransferMethodField.bankAccountId.rawValue)
-//            additionlInfo = String(format: "%@%@",
-//                                   "transfer_method_list_item_description".localized(),
-//                                   additionlInfo?.suffix(startAt: 4) ?? "")
-//        case "BANK_CARD":
-//            additionlInfo = transferMethod.getField(HyperwalletTransferMethod.TransferMethodField.cardNumber.rawValue)
-//            additionlInfo = String(format: "%@%@",
-//                                   "transfer_method_list_item_description".localized(),
-//                                   additionlInfo?.suffix(startAt: 4) ?? "")
-//        case "PAYPAL_ACCOUNT":
-//            additionlInfo = transferMethod.getField(HyperwalletTransferMethod.TransferMethodField.email.rawValue)
-//
-//        default:
-//            break
-//        }
-//        return additionlInfo
-//    }
 }
 
 struct CreateTransferSectionTransferData: CreateTransferSectionData {
@@ -97,15 +63,13 @@ struct CreateTransferSectionTransferData: CreateTransferSectionData {
     var rowCount: Int { return rows.count }
     var cellIdentifier: String { return CreateTransferUserInputCell.reuseIdentifier }
     var configuration: CreateTransferUserInputCellConfiguration!
-    var footer: UIView
+    var footer: String?
 
     init(destinationCurrency: String, availableBalance: String) {
         rows.append((title: "amount", value: destinationCurrency))
         rows.append((title: "transferAll", value: "transferAllSwitch"))
-        let availableFunds = UILabel()
-        availableFunds.text = String(format: "available_balance_footer".localized(),
-                                     availableBalance)
-        footer = availableFunds
+        footer = String(format: "available_balance_footer".localized(),
+                        availableBalance)
     }
 }
 

@@ -22,25 +22,23 @@ import Common
 import HyperwalletSDK
 import UIKit
 
-final class ListTransferMethodCell: UITableViewCell {
-    static let reuseIdentifier = "listTransferMethodCellIdentifier"
+final class CreateTransferAddSelectDestinationCell: UITableViewCell {
+    public static let reuseIdentifier = "createTransferAddSelectDestinationCell"
 
-    // MARK: Life cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
-        self.heightAnchor.constraint(equalToConstant: Theme.Cell.largeHeight).isActive = true
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
+    override public func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         imageView?.backgroundColor = Theme.Icon.primaryBackgroundColor
     }
 
-    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+    override public func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
         imageView?.backgroundColor = Theme.Icon.primaryBackgroundColor
     }
@@ -68,18 +66,15 @@ final class ListTransferMethodCell: UITableViewCell {
     }
 }
 
-extension ListTransferMethodCell {
-    /// Fill `ListTransferMethodCell` related fields
-    ///
-    /// - Parameter transferMethod: a transfer method which contains the info needs to be filled to the cell.
-    public func configure(transferMethod: HyperwalletTransferMethod) {
+extension CreateTransferAddSelectDestinationCell {
+    func configure(transferMethod: HyperwalletTransferMethod) {
         textLabel?.text = transferMethod.type?.lowercased().localized()
-        textLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellTextLabel"
+        textLabel?.accessibilityIdentifier = "createTransferAddSelectDestinationCellTextLabel"
         detailTextLabel?.attributedText = formatDetails(
-            transferMethodCountry: transferMethod.transferMethodCountry?.localized() ?? "",
+            subtitle: transferMethod.transferMethodCountry?.localized() ?? "",
             additionalInfo: transferMethod.additionalInfo)
 
-        detailTextLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellDetailTextLabel"
+        detailTextLabel?.accessibilityIdentifier = "createTransferAddSelectDestinationCellDetailTextLabel"
         detailTextLabel?.numberOfLines = 0
         detailTextLabel?.lineBreakMode = .byWordWrapping
         let icon = UIImage.fontIcon(HyperwalletIcon.of(transferMethod.type ?? "").rawValue,
@@ -90,9 +85,26 @@ extension ListTransferMethodCell {
         imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
     }
 
-    func formatDetails(transferMethodCountry: String, additionalInfo: String?) -> NSAttributedString {
+    func configure(_ title: String, _ subtitle: String, _ hyperwalletIcon: HyperwalletIconContent) {
+        textLabel?.text = title
+        textLabel?.accessibilityIdentifier = "createTransferAddSelectDestinationCellTextLabel"
+
+        detailTextLabel?.attributedText = formatDetails(subtitle: subtitle)
+        detailTextLabel?.accessibilityIdentifier = "createTransferAddSelectDestinationCellDetailTextLabel"
+        detailTextLabel?.numberOfLines = 0
+        detailTextLabel?.lineBreakMode = .byWordWrapping
+        let icon = UIImage.fontIcon(hyperwalletIcon.rawValue,
+                                    Theme.Icon.frame,
+                                    CGFloat(Theme.Icon.size),
+                                    Theme.Icon.primaryColor)
+        imageView?.image = icon
+        imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
+    }
+
+    private func formatDetails(subtitle: String, additionalInfo: String? = nil) -> NSAttributedString {
         let attributedText = NSMutableAttributedString()
-        attributedText.append(value: String(format: "%@\n", transferMethodCountry),
+        let stringFromat = additionalInfo != nil ? "%@\n" : "%@"
+        attributedText.append(value: String(format: stringFromat, subtitle),
                               font: subTitleLabelFont,
                               color: subTitleLabelColor)
         if let additionalInfo = additionalInfo {

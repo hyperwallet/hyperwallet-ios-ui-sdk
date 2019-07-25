@@ -200,13 +200,15 @@
 "transfer_amount_confirmation" = "Amount:";
 "transfer_fee_confirmation" = "Fee:";
 "transfer_net_amount_confirmation" = "You will receive:";
-"transfer_all_funds_confirmation" = "Transfer all funds";
+"transfer_all_funds" = "Transfer all funds";
 "transfer_fx_sell_confirmation" = "You sell:";
 "transfer_fx_buy_confirmation" = "You buy:";
 "transfer_fx_rate_confirmation" = "Exchange Rate:";
 "available_balance_footer" = "Available for transfer: %1$@";
 "transfer_description" = "Description";
 "add_transfer_next_button" = "Next";
+"add_transfer_add_account_title" = "Add Account";
+"add_transfer_add_account_subtitle" = "An account hasn't been set up yet, please add an account first.";
 "schedule_transfer_section_header_destination" = "DESITINATION";
 "schedule_transfer_section_header_foreignExchange" = "FOREIGN EXCHANGE";
 "schedule_transfer_section_header_summary" = "SUMMARY";
