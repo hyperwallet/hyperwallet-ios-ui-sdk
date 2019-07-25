@@ -446,9 +446,9 @@ class RemoteTransferMethodRepositoryTests: XCTestCase {
 
         XCTAssertNil(listTransactionError, "The listTransactionError should be nil")
         XCTAssertNotNil(listTransactionResult, "The listTransactionResult should not be nil")
-        XCTAssertGreaterThan(listTransactionResult!.data.count,
-                             0,
-                             "The listTransactionResult!.data.count should be greater than 0")
+        if let listResultCount = listTransactionResult!.data?.count {
+            XCTAssertGreaterThan(listResultCount, 0, "The listTransactionResult!.data.count should be greater than 0")
+        }
     }
 
     func testList_returnsNoAccounts() {
