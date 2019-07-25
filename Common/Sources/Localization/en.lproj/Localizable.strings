@@ -201,6 +201,8 @@
 "available_balance_footer" = "Available for transfer: %1$@";
 "transfer_description" = "Description";
 "add_transfer_next_button" = "Next";
+"add_transfer_add_account_title" = "Add Account";
+"add_transfer_add_account_subtitle" = "An account hasn't been set up yet, please add an account first.";
 
 // List of countries
 // Source: https://datahub.io/core/country-list#data

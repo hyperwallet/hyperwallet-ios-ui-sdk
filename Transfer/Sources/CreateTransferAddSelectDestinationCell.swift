@@ -22,10 +22,9 @@ import Common
 import HyperwalletSDK
 import UIKit
 
-final class ListTransferMethodCell: UITableViewCell {
-    static let reuseIdentifier = "listTransferMethodCellIdentifier"
+final class CreateTransferAddSelectDestinationCell: UITableViewCell {
+    public static let reuseIdentifier = "createTransferAddSelectDestinationCell"
 
-    // MARK: Life cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
     }
@@ -67,15 +66,15 @@ final class ListTransferMethodCell: UITableViewCell {
     }
 }
 
-extension ListTransferMethodCell {
+extension CreateTransferAddSelectDestinationCell {
     func configure(transferMethod: HyperwalletTransferMethod) {
         textLabel?.text = transferMethod.type?.lowercased().localized()
-        textLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellTextLabel"
+        textLabel?.accessibilityIdentifier = "createTransferAddSelectDestinationCellTextLabel"
         detailTextLabel?.attributedText = formatDetails(
-            transferMethodCountry: transferMethod.transferMethodCountry?.localized() ?? "",
+            subtitle: transferMethod.transferMethodCountry?.localized() ?? "",
             additionalInfo: transferMethod.additionalInfo)
 
-        detailTextLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellDetailTextLabel"
+        detailTextLabel?.accessibilityIdentifier = "createTransferAddSelectDestinationCellDetailTextLabel"
         detailTextLabel?.numberOfLines = 0
         detailTextLabel?.lineBreakMode = .byWordWrapping
         let icon = UIImage.fontIcon(HyperwalletIcon.of(transferMethod.type ?? "").rawValue,
@@ -86,9 +85,25 @@ extension ListTransferMethodCell {
         imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
     }
 
-    func formatDetails(transferMethodCountry: String, additionalInfo: String?) -> NSAttributedString {
+    func configure(_ title: String, _ subtitle: String, _ hyperwalletIcon: HyperwalletIconContent) {
+        textLabel?.text = title
+        textLabel?.accessibilityIdentifier = "createTransferAddSelectDestinationCellTextLabel"
+
+        detailTextLabel?.attributedText = formatDetails(subtitle: subtitle)
+        detailTextLabel?.accessibilityIdentifier = "createTransferAddSelectDestinationCellDetailTextLabel"
+        detailTextLabel?.numberOfLines = 0
+        detailTextLabel?.lineBreakMode = .byWordWrapping
+        let icon = UIImage.fontIcon(hyperwalletIcon.rawValue,
+                                    Theme.Icon.frame,
+                                    CGFloat(Theme.Icon.size),
+                                    Theme.Icon.primaryColor)
+        imageView?.image = icon
+        imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
+    }
+
+    private func formatDetails(subtitle: String, additionalInfo: String? = nil) -> NSAttributedString {
         let attributedText = NSMutableAttributedString()
-        attributedText.append(value: String(format: "%@\n", transferMethodCountry),
+        attributedText.append(value: String(format: "%@\n", subtitle),
                               font: subTitleLabelFont,
                               color: subTitleLabelColor)
         if let additionalInfo = additionalInfo {

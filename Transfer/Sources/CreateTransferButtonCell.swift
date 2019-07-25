@@ -23,16 +23,23 @@ import Common
 final class CreateTransferButtonCell: UITableViewCell {
     static let reuseIdentifier = "addTransferNextButtonCellReuseIdentifier"
 
-    private lazy var nextButtonLabel: UILabel = {
-        let label = UILabel()
-        label.text = "add_transfer_next_button".localized()
-        return label
+    private(set) lazy var nextButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("add_transfer_next_button".localized(), for: .normal)
+        // TODO: remove next line after ThemeManager has been implemented
+        button.setTitleColor(Theme.Button.color, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        //button.addTarget(self, action: #selector(onTapped), for: .touchUpInside)
+        button.accessibilityLabel = "add_transfer_next_button".localized()
+        button.accessibilityIdentifier = "addTransferNextButton"
+        return button
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
-        textLabel?.textAlignment = .center
-        self.heightAnchor.constraint(equalToConstant: Theme.Cell.smallHeight).isActive = true
+        heightAnchor.constraint(equalToConstant: Theme.Cell.smallHeight).isActive = true
+        contentView.addSubview(nextButton)
+        contentView.addConstraintsFillEntireView(view: nextButton)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -40,19 +47,18 @@ final class CreateTransferButtonCell: UITableViewCell {
     }
 
     func configure() {
-        textLabel?.text = nextButtonLabel.text
     }
 }
 
 extension CreateTransferButtonCell {
     // MARK: Theme manager's proxy properties
     @objc dynamic var titleLabelFont: UIFont! {
-        get { return textLabel?.font }
-        set { textLabel?.font = newValue }
+        get { return nextButton.titleLabel?.font }
+        set { nextButton.titleLabel?.font = newValue }
     }
 
     @objc dynamic var titleLabelColor: UIColor! {
-        get { return textLabel?.textColor }
-        set { textLabel?.textColor = newValue }
+        get { return nextButton.titleLabel?.textColor }
+        set { nextButton.setTitleColor(newValue, for: .normal) }
     }
 }

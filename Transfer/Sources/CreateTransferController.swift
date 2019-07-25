@@ -28,23 +28,22 @@ import UIKit
 ///
 /// The user can deactivate and add a new transfer method.
 public final class CreateTransferController: UITableViewController {
-    private var presenter: CreateTransferPresenter!
     private var spinnerView: SpinnerView?
+    private var presenter: CreateTransferPresenter!
     private var sourceToken: String?
     private var clientTransferId: String!
     private var transferAmount: String?
     private var transferDescription: String?
-    var createTransferMethodHandler: ((HyperwalletTransferMethod) -> Void)?
-    var createTransferHandler: ((HyperwalletTransfer) -> Void)?
-
     private let registeredCells: [(type: AnyClass, id: String)] = [
-        (ListTransferMethodCell.self, ListTransferMethodCell.reuseIdentifier),
+        (CreateTransferAddSelectDestinationCell.self, CreateTransferAddSelectDestinationCell.reuseIdentifier),
         (CreateTransferUserInputCell.self, CreateTransferUserInputCell.reuseIdentifier),
         (CreateTransferButtonCell.self, CreateTransferButtonCell.reuseIdentifier),
         (CreateTransferNotesCell.self, CreateTransferNotesCell.reuseIdentifier)
     ]
+    var createTransferMethodHandler: ((HyperwalletTransferMethod) -> Void)?
+    var createTransferHandler: ((HyperwalletTransfer) -> Void)?
 
-    public init(clientTransferId: String, sourceToken: String? = nil) {
+    public init(clientTransferId: String, sourceToken: String?) {
         self.sourceToken = sourceToken
         self.clientTransferId = clientTransferId
         super.init(nibName: nil, bundle: nil)
@@ -57,16 +56,14 @@ public final class CreateTransferController: UITableViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         title = "transfer_funds".localized()
+        navigationItem.backBarButtonItem = UIBarButtonItem.back
         largeTitle()
         setViewBackgroundColor()
-        navigationItem.backBarButtonItem = UIBarButtonItem.back
-
-        // setup table view
-        setUpCreateTransferTableView()
-        hideKeyboardWhenTappedAround()
-
         presenter = CreateTransferPresenter(clientTransferId, sourceToken, view: self)
         presenter.loadCreateTransfer()
+
+        setUpCreateTransferTableView()
+        hideKeyboardWhenTappedAround()
     }
 
     private func setUpCreateTransferTableView() {
@@ -96,7 +93,7 @@ extension CreateTransferController {
         return presenter.sectionData[section].title
     }
 
-    override public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    override public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         if let transferSection = presenter.sectionData[section] as? CreateTransferSectionTransferData {
             return transferSection.footer
         }
@@ -124,12 +121,17 @@ extension CreateTransferController {
     }
 
     private func getDestinationSectionCellConfiguration(_ cell: UITableViewCell, _ indexPath: IndexPath) {
-        let section = presenter.sectionData[indexPath.section]
-        if let tableViewCell = cell as? ListTransferMethodCell,
-            let destinationData = section as? CreateTransferSectionDestinationData,
-            let configuration = destinationData.configuration {
-            tableViewCell.accessoryType = .disclosureIndicator
-            //tableViewCell.configure(configuration: configuration)
+        guard let sectionData = presenter.sectionData[indexPath.section] as? CreateTransferSectionDestinationData,
+            let tableViewCell = cell as? CreateTransferAddSelectDestinationCell else {
+                return
+        }
+        tableViewCell.accessoryType = .disclosureIndicator
+        if !sectionData.isTransferMethodAvailable {
+            tableViewCell.configure(transferMethod: presenter.selectedTransferMethod)
+        } else {
+            let title = "add_transfer_add_account_title".localized()
+            let subtitle = "add_transfer_add_account_subtitle".localized()
+            tableViewCell.configure(title, subtitle, HyperwalletIconContent.circle)
         }
     }
 
@@ -178,15 +180,14 @@ extension CreateTransferController {
 
 // MARK: - Create transfer table view delegate
 extension CreateTransferController {
-    override public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        // TODO error will display here
-        return nil
-    }
+    //    override public func tableView(_ tableView: UITableView,
+    //                                   estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+    //        return CGFloat(Theme.Cell.headerHeight)
+    //    }
 
-    override public func tableView(_ tableView: UITableView,
-                                   estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-        return CGFloat(Theme.Cell.headerHeight)
-    }
+    //    override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    //        //return CGFloat(-1.0) //CGFloat.leastNormalMagnitude  //TODO use theme manager constant
+    //    }
 
     override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
@@ -199,9 +200,9 @@ extension CreateTransferController {
     }
 
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if presenter.sectionData[indexPath.section].createTransferSectionHeader
-            == CreateTransferSectionHeader.destination,
-            let _ = presenter.sectionData[indexPath.section] as? CreateTransferSectionDestinationData {
+        let sectionData = presenter.sectionData[indexPath.section]
+        if sectionData.createTransferSectionHeader == CreateTransferSectionHeader.destination,
+            presenter.sectionData[indexPath.section] is CreateTransferSectionDestinationData {
             presenter.showSelectDestinationAccountView()
             tableView.deselectRow(at: indexPath, animated: true)
         }
@@ -211,7 +212,7 @@ extension CreateTransferController {
 // MARK: - CreateTransferView implementation
 extension CreateTransferController: CreateTransferView {
     func notifyTransferCreated(_ transfer: HyperwalletTransfer) {
-        //TODO implement notofication
+        //TODO implement notification
     }
 
     func showLoading() {
@@ -231,9 +232,9 @@ extension CreateTransferController: CreateTransferView {
         errorView.show(retry)
     }
 
-    func showBusinessError(_ error: HyperwalletErrorType, _ handler: @escaping () -> Void) {
-        // TODO show business error in footer 
-    }
+    //    func showBusinessError(_ error: HyperwalletErrorType, _ handler: @escaping () -> Void) {
+    //        // TODO show business error in footer
+    //    }
 
     func showCreateTransfer() {
         presenter.initializeSections()
@@ -244,35 +245,31 @@ extension CreateTransferController: CreateTransferView {
                               title: String,
                               selectItemHandler: @escaping SelectItemHandler,
                               markCellHandler: @escaping MarkCellHandler) {
-//        let genericTableView = GenericController<ListTransferMethodCell, HyperwalletTransferMethod>()
-//
-//        genericTableView.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
-//                                                                             target: self,
-//                                                                             action: #selector(didTapAddButton))
-//
-//        genericTableView.title = title
-//        genericTableView.items = items
-//        genericTableView.selectedHandler = selectItemHandler
-//        genericTableView.shouldMarkCellAction = markCellHandler
-//        show(genericTableView, sender: self)
+        //        let genericTableView = GenericController<ListTransferMethodCell, HyperwalletTransferMethod>()
+        //
+        //        genericTableView.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
+        //                                                                             target: self,
+        //                                                                             action: #selector(didTapAddButton))
+        //
+        //        genericTableView.title = title
+        //        genericTableView.items = items
+        //        genericTableView.selectedHandler = selectItemHandler
+        //        genericTableView.shouldMarkCellAction = markCellHandler
+        //        show(genericTableView, sender: self)
     }
 
     @objc
     private func didTapAddButton(sender: AnyObject) {
-        addTransferMethod()
-    }
-
-    private func addTransferMethod() {
-//        let controller = SelectTransferMethodTypeController(forceUpdate: false) ///TODO true or false
-//        controller.largeTitle()
-//        controller.createTransferMethodHandler = {
-//            [weak self] (transferMethod: HyperwalletTransferMethod) -> Void in
-//            // refresh transfer method list
-//            self?.navigationController?.popViewController(animated: true)
-//            self?.presenter.selectedTransferMethod = transferMethod
-//            self?.presenter.loadCreateTransfer()
-//        }
-//        navigationController?.pushViewController(controller, animated: true)
+        //        let controller = SelectTransferMethodTypeController(forceUpdate: false) ///TODO true or false
+        //        controller.largeTitle()
+        //        controller.createTransferMethodHandler = {
+        //            [weak self] (transferMethod: HyperwalletTransferMethod) -> Void in
+        //            // refresh transfer method list
+        //            self?.navigationController?.popViewController(animated: true)
+        //            self?.presenter.selectedTransferMethod = transferMethod
+        //            self?.presenter.loadCreateTransfer()
+        //        }
+        //        navigationController?.pushViewController(controller, animated: true)
     }
 
     func showScheduleTransfer(_ transfer: HyperwalletTransfer) {

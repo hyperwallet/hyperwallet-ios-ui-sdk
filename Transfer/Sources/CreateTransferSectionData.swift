@@ -28,10 +28,10 @@ enum CreateTransferSectionHeader: String {
 }
 
 protocol CreateTransferSectionData {
+    var cellIdentifier: String { get }
     var createTransferSectionHeader: CreateTransferSectionHeader { get }
     var rowCount: Int { get }
     var title: String? { get }
-    var cellIdentifier: String { get }
 }
 
 extension CreateTransferSectionData {
@@ -46,13 +46,14 @@ struct CreateTransferSectionAddDestinationAccountData: CreateTransferSectionData
     var cellIdentifier: String { return "addTransferMethodSectionDataLabel" }
 }
 
+// first section !!!!!!
 struct CreateTransferSectionDestinationData: CreateTransferSectionData {
     var createTransferSectionHeader: CreateTransferSectionHeader { return .destination }
-    var cellIdentifier: String { return ListTransferMethodCell.reuseIdentifier }
-    var configuration: HyperwalletTransferMethod?
+    var cellIdentifier: String { return CreateTransferAddSelectDestinationCell.reuseIdentifier }
+    var isTransferMethodAvailable: Bool = true
 
-    init(transferMethod: HyperwalletTransferMethod) {
-        configuration = transferMethod
+    init(isTransferMethodAvailable: Bool) {
+        self.isTransferMethodAvailable = isTransferMethodAvailable
     }
 
 //    private func setUpCellConfiguration(transferMethod: HyperwalletTransferMethod) -> ListTransferMethodCellConfiguration? {
@@ -97,15 +98,13 @@ struct CreateTransferSectionTransferData: CreateTransferSectionData {
     var rowCount: Int { return rows.count }
     var cellIdentifier: String { return CreateTransferUserInputCell.reuseIdentifier }
     var configuration: CreateTransferUserInputCellConfiguration!
-    var footer: UIView
+    var footer: String?
 
     init(destinationCurrency: String, availableBalance: String) {
         rows.append((title: "amount", value: destinationCurrency))
         rows.append((title: "transferAll", value: "transferAllSwitch"))
-        let availableFunds = UILabel()
-        availableFunds.text = String(format: "available_balance_footer".localized(),
-                                     availableBalance)
-        footer = availableFunds
+        footer = String(format: "available_balance_footer".localized(),
+                        availableBalance)
     }
 }
 
