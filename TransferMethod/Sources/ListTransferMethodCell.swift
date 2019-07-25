@@ -34,12 +34,12 @@ final class ListTransferMethodCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
 
-    override public func setSelected(_ selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         imageView?.backgroundColor = Theme.Icon.primaryBackgroundColor
     }
 
-    override public func setHighlighted(_ highlighted: Bool, animated: Bool) {
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
         imageView?.backgroundColor = Theme.Icon.primaryBackgroundColor
     }
