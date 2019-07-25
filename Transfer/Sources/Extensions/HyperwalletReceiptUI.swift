@@ -26,7 +26,8 @@ public extension HyperwalletUI {
     ///
     ///
     /// - Returns: An instance of `CreateTransferController`
-    func createTransferController(clientTransferId: String, sourceToken: String?) -> CreateTransferController {
+    func createTransferController(sourceToken: String?) -> CreateTransferController {
+        let clientTransferId = UUID().uuidString.lowercased()
         return CreateTransferController(clientTransferId: clientTransferId, sourceToken: sourceToken)
     }
 }

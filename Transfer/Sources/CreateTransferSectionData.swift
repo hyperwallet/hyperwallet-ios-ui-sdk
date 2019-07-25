@@ -55,41 +55,6 @@ struct CreateTransferSectionDestinationData: CreateTransferSectionData {
     init(isTransferMethodAvailable: Bool) {
         self.isTransferMethodAvailable = isTransferMethodAvailable
     }
-
-//    private func setUpCellConfiguration(transferMethod: HyperwalletTransferMethod) -> ListTransferMethodCellConfiguration? {
-//           if let country = transferMethod.transferMethodCountry,
-//           let transferMethodType = transferMethod.type {
-//             return ListTransferMethodCellConfiguration(
-//                transferMethodType: transferMethodType.lowercased().localized(),
-//                transferMethodCountry: country.localized(),
-//                additionalInfo: getAdditionalInfo(transferMethod),
-//                transferMethodIconFont: HyperwalletIcon.of(transferMethodType).rawValue,
-//                transferMethodToken: transferMethod.token ?? "")
-//        }
-//        return nil
-//    }
-//
-//    private func getAdditionalInfo(_ transferMethod: HyperwalletTransferMethod) -> String? {
-//        var additionlInfo: String?
-//        switch transferMethod.type {
-//        case "BANK_ACCOUNT", "WIRE_ACCOUNT":
-//            additionlInfo = transferMethod.getField(HyperwalletTransferMethod.TransferMethodField.bankAccountId.rawValue)
-//            additionlInfo = String(format: "%@%@",
-//                                   "transfer_method_list_item_description".localized(),
-//                                   additionlInfo?.suffix(startAt: 4) ?? "")
-//        case "BANK_CARD":
-//            additionlInfo = transferMethod.getField(HyperwalletTransferMethod.TransferMethodField.cardNumber.rawValue)
-//            additionlInfo = String(format: "%@%@",
-//                                   "transfer_method_list_item_description".localized(),
-//                                   additionlInfo?.suffix(startAt: 4) ?? "")
-//        case "PAYPAL_ACCOUNT":
-//            additionlInfo = transferMethod.getField(HyperwalletTransferMethod.TransferMethodField.email.rawValue)
-//
-//        default:
-//            break
-//        }
-//        return additionlInfo
-//    }
 }
 
 struct CreateTransferSectionTransferData: CreateTransferSectionData {

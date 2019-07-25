@@ -140,11 +140,9 @@ class ViewController: UITableViewController {
         if let selectionIndexPath = self.tableView.indexPathForSelectedRow {
             self.tableView.deselectRow(at: selectionIndexPath, animated: false)
         }
-
         guard let example = Example(rawValue: indexPath.item) else {
             return
         }
-
         switch example {
         case .listTransferMethod:
             let viewController = HyperwalletUI.shared.listTransferMethodController()
@@ -184,10 +182,7 @@ class ViewController: UITableViewController {
             navigationController?.pushViewController(viewController, animated: true)
 
         case .transferFunds:
-            let viewController = HyperwalletUI.shared.createTransferController(
-                clientTransferId: "1",
-                sourceToken: "2")
-
+            let viewController = HyperwalletUI.shared.createTransferController(sourceToken: nil)
             navigationController?.pushViewController(viewController, animated: true)
 
         default:
