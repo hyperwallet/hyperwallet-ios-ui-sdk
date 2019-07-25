@@ -65,9 +65,13 @@ public extension HyperwalletFee {
         }
 
         private func flatFeeDescription(_ flatFee: HyperwalletFee) -> String {
+            var description = ""
             let feeFormat = "fee_flat_formatter".localized()
-            let currency = flatFee.currency ?? ""
-            return String(format: feeFormat.localized(), currency, flatFee.value)
+
+            if let currency = flatFee.currency, let flatValue = flatFee.value {
+                description = String(format: feeFormat.localized(), currency, flatValue)
+            }
+            return description
         }
 
         private func percentFeeDescription(_ percentFee: HyperwalletFee) -> String {
@@ -76,20 +80,22 @@ public extension HyperwalletFee {
             let value = percentFee.value
             let min = percentFee.minimum
             let max = percentFee.maximum
-            let currency = percentFee.currency ?? ""
+            let currency = percentFee.currency
 
-            if let min = min, let max = max {
+            if let min = min, let max = max, let value = value, let currency = currency {
                 feeFormat = "fee_percent_formatter".localized()
                 description = String(format: feeFormat, value, currency, min, max)
-            } else if let min = min, max == nil {
+            } else if let min = min, max == nil, let value = value, let currency = currency {
                 feeFormat = "fee_percent_only_min_formatter".localized()
                 description = String(format: feeFormat, value, currency, min)
-            } else if min == nil, let max = max {
+            } else if min == nil, let max = max, let value = value, let currency = currency {
                 feeFormat = "fee_percent_only_max_formatter".localized()
                 description = String(format: feeFormat, value, currency, max)
             } else {
-                feeFormat = "fee_percent_no_min_and_max_formatter".localized()
-                description = String(format: feeFormat, value)
+                if let value = value {
+                    feeFormat = "fee_percent_no_min_and_max_formatter".localized()
+                    description = String(format: feeFormat, value)
+                }
             }
             return description
         }
@@ -101,24 +107,26 @@ public extension HyperwalletFee {
             let percentValue = percentFee.value
             let min = percentFee.minimum
             let max = percentFee.maximum
-            let currency = flatFee.currency ?? ""
+            let currency = flatFee.currency
 
-            if let min = min, let max = max {
+            if let min = min, let max = max, let flatValue = flatValue, let percentValue = percentValue, let currency = currency {
                 feeFormat = "fee_mix_formatter".localized()
                 description = String(
                     format: feeFormat, currency, flatValue, percentValue, min, max)
-            } else if let min = min, max == nil {
+            } else if let min = min, max == nil, let flatValue = flatValue, let percentValue = percentValue, let currency = currency {
                 feeFormat = "fee_mix_only_min_formatter".localized()
                 description = String(
                     format: feeFormat, currency, flatValue, percentValue, min)
-            } else if min == nil, let max = max {
+            } else if min == nil, let max = max, let flatValue = flatValue, let percentValue = percentValue, let currency = currency {
                 feeFormat = "fee_mix_only_max_formatter".localized()
                 description = String(
                     format: feeFormat, currency, flatValue, percentValue, max)
             } else {
-                feeFormat = "fee_mix_no_min_and_max_formatter".localized()
-                description = String(
-                    format: feeFormat, currency, flatValue, percentValue)
+                if let flatValue = flatValue, let percentValue = percentValue, let currency = currency {
+                    feeFormat = "fee_mix_no_min_and_max_formatter".localized()
+                    description = String(
+                        format: feeFormat, currency, flatValue, percentValue)
+                }
             }
             return description
         }

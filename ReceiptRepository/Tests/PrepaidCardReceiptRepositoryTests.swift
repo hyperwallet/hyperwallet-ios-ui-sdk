@@ -56,7 +56,7 @@ class PrepaidCardReceiptRepositoryTests: XCTestCase {
                     XCTFail("The Prepaid Card receipt list should not be empty")
                     return
                 }
-                prepaidCardReceiptList = receiptPageList.data
+                prepaidCardReceiptList = receiptPageList.data!
                 receiptExpectation?.fulfill()
 
             case .failure:
