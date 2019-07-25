@@ -88,7 +88,7 @@ final class SelectionWidget: AbstractWidget {
         tableView.shouldMarkCellAction = { self.selectedValue == $0.value }
         tableView.filterContentForSearchTextAction = {(items, searchText) in
             items.filter {
-                $0.label.lowercased().contains(searchText.lowercased())
+                $0.label?.lowercased().contains(searchText.lowercased()) ?? false
             }
         }
 

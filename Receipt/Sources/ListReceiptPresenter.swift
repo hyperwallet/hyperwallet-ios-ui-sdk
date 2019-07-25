@@ -93,11 +93,11 @@ final class ListReceiptPresenter {
                 strongSelf.view.hideLoading()
                 switch result {
                 case .success(let receiptList):
-                    guard let receiptList = receiptList else { break }
-                    strongSelf.groupReceiptsByMonth(receiptList.data)
+                    guard let receiptList = receiptList, let receipts = receiptList.data else { break }
+                    strongSelf.groupReceiptsByMonth(receipts)
                     strongSelf.areAllReceiptsLoaded =
-                        receiptList.data.count < strongSelf.userReceiptLimit ? true : false
-                    strongSelf.offset += receiptList.data.count
+                        receipts.count < strongSelf.userReceiptLimit ? true : false
+                    strongSelf.offset += receipts.count
 
                 case .failure(let error):
                     strongSelf.view.showError(error, { strongSelf.listUserReceipts() })
@@ -117,9 +117,9 @@ final class ListReceiptPresenter {
                 strongSelf.view.hideLoading()
                 switch result {
                 case .success(let receiptList):
-                    guard let receiptList = receiptList else { break }
+                    guard let receiptList = receiptList, let receipts = receiptList.data else { break }
                     strongSelf.areAllReceiptsLoaded = true
-                    strongSelf.groupReceiptsByMonth(receiptList.data)
+                    strongSelf.groupReceiptsByMonth(receipts)
 
                 case .failure(let error):
                     guard let prepaidCardToken = strongSelf.prepaidCardToken else { break }
@@ -135,7 +135,7 @@ final class ListReceiptPresenter {
                                          by: {
                                             ISO8601DateFormatter
                                                 .ignoreTimeZone
-                                                .date(from: $0.createdOn)!
+                                                .date(from: $0.createdOn ?? "")!
                                                 .firstDayOfMonth()
         })
 
