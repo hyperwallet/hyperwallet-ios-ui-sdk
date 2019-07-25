@@ -11,7 +11,6 @@
 		0727F12D22E647ED0048E02C /* TransferRepositoryCompletionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BB99E22E63F590053C24E /* TransferRepositoryCompletionHelper.swift */; };
 		073BB98B22E63DB50053C24E /* TransferRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 073BB98222E63DB50053C24E /* TransferRepository.framework */; };
 		073BB99222E63DB50053C24E /* TransferRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = 073BB98422E63DB50053C24E /* TransferRepository.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		073BB9A322E63FF40053C24E /* TransferRepositoryFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BB9A222E63FF40053C24E /* TransferRepositoryFactory.swift */; };
 		073BB9A822E641050053C24E /* CreateTransferResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 073BB9A722E641050053C24E /* CreateTransferResponse.json */; };
 		073BB9AA22E641310053C24E /* CreateTransferBadRequestResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 073BB9A922E641310053C24E /* CreateTransferBadRequestResponse.json */; };
 		073BB9AC22E6415F0053C24E /* ScheduleTransferResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 073BB9AB22E6415F0053C24E /* ScheduleTransferResponse.json */; };
@@ -30,6 +29,7 @@
 		077C337B22E8CCB0000314CD /* ScheduleTransferButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C337322E8CCB0000314CD /* ScheduleTransferButtonCell.swift */; };
 		077F609F22E28F7F00C91E59 /* ReceiptThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077F609D22E28F3500C91E59 /* ReceiptThemeManager.swift */; };
 		077F60A122E28F8F00C91E59 /* TransferMethodThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077F60A022E28F8F00C91E59 /* TransferMethodThemeManager.swift */; };
+		078461DE22EA3F24007BF2CB /* TransferRepositoryFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BB9A222E63FF40053C24E /* TransferRepositoryFactory.swift */; };
 		07C91E9F22E8CF4000167B05 /* ScheduleTransferController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C91E9E22E8CF4000167B05 /* ScheduleTransferController.swift */; };
 		0961D62D22AA858E007F0B44 /* ReceiptsForFewMonths.json in Resources */ = {isa = PBXBuildFile; fileRef = 0961D62C22AA858E007F0B44 /* ReceiptsForFewMonths.json */; };
 		0961D62F22AA861A007F0B44 /* ReceiptsForOneMonth.json in Resources */ = {isa = PBXBuildFile; fileRef = 0961D62E22AA861A007F0B44 /* ReceiptsForOneMonth.json */; };
@@ -2842,6 +2842,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0727F12D22E647ED0048E02C /* TransferRepositoryCompletionHelper.swift in Sources */,
+				078461DE22EA3F24007BF2CB /* TransferRepositoryFactory.swift in Sources */,
 				0727F12C22E647500048E02C /* TransferRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3122,7 +3123,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				073BB9A322E63FF40053C24E /* TransferRepositoryFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

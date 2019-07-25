@@ -100,7 +100,7 @@ public struct Theme {
         /// The detail UITableViewViewCell height.
         public static let extraSmallHeight = CGFloat(28)
         /// The divider UITableViewViewCell height.
-        public static let dividerHeight = CGFloat(10)
+        public static let dividerHeight = CGFloat(8)
     }
 
     /// Representation of all customizable visual style property for the `Hyperwallet`'s icon.

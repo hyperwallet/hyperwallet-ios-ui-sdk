@@ -28,6 +28,7 @@ public final class ListTransferMethodCell: UITableViewCell {
     // MARK: Life cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+        self.heightAnchor.constraint(equalToConstant: Theme.Cell.largeHeight).isActive = true
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -68,6 +69,9 @@ public final class ListTransferMethodCell: UITableViewCell {
 }
 
 extension ListTransferMethodCell {
+    /// Fill `ListTransferMethodCell` related fields
+    ///
+    /// - Parameter transferMethod: a transfer method which contains the info needs to be filled to the cell.
     public func configure(transferMethod: HyperwalletTransferMethod) {
         textLabel?.text = transferMethod.type?.lowercased().localized()
         textLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellTextLabel"

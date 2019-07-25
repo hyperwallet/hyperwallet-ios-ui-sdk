@@ -19,7 +19,6 @@
 #if !COCOAPODS
 import Common
 import TransferMethod
-import TransferRepository
 #endif
 import HyperwalletSDK
 import UIKit
@@ -29,6 +28,7 @@ import UIKit
 /// The user can deactivate and add a new transfer method.
 public final class ScheduleTransferController: UITableViewController, UITextFieldDelegate {
     private var spinnerView: SpinnerView?
+    private var processingView: ProcessingView?
     private var presenter: ScheduleTransferPresenter!
     private var transferMethod: HyperwalletTransferMethod
     private var transfer: HyperwalletTransfer
@@ -69,6 +69,8 @@ public final class ScheduleTransferController: UITableViewController, UITextFiel
         tableView = UITableView(frame: view.frame, style: .grouped)
         tableView.accessibilityIdentifier = "scheduleTransferTableView"
         tableView.allowsSelection = false
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = Theme.Cell.extraSmallHeight
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)
         }
@@ -125,11 +127,8 @@ extension ScheduleTransferController {
 
         case .button:
             if let tableViewCell = cell as? ScheduleTransferButtonCell, section is ScheduleTransferButtonData {
-                tableViewCell.textLabel?.text = "schedule_transfer_button".localized()
-                tableViewCell.textLabel?.textAlignment = .center
-                let tap = UITapGestureRecognizer(target: self, action: #selector(tapScheduleTransfer))
-                tableViewCell.textLabel?.isUserInteractionEnabled = true
-                tableViewCell.textLabel?.addGestureRecognizer(tap)
+                let tapConfirmation = UITapGestureRecognizer(target: self, action: #selector(tapScheduleTransfer))
+                tableViewCell.configure(action: tapConfirmation)
             }
         }
         return cell
@@ -137,7 +136,7 @@ extension ScheduleTransferController {
 
     @objc
     private func tapScheduleTransfer(sender: UITapGestureRecognizer) {
-        print("Schedule Transer Fund!")
+        presenter.scheduleTransfer()
     }
 }
 
@@ -150,26 +149,35 @@ extension ScheduleTransferController {
 }
 
 extension ScheduleTransferController: ScheduleTransferView {
-    func showLoading() {
-        if let view = self.navigationController?.view {
-            spinnerView = HyperwalletUtilViews.showSpinner(view: view)
+    func showProcessing() {
+        processingView = HyperwalletUtilViews.showProcessing()
+    }
+
+    func dismissProcessing(handler: @escaping () -> Void) {
+        processingView?.hide()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            handler()
         }
     }
 
-    func hideLoading() {
-        if let spinnerView = self.spinnerView {
-            HyperwalletUtilViews.removeSpinner(spinnerView)
+    func showConfirmation(handler: @escaping (() -> Void)) {
+        processingView?.hide(with: .complete)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            handler()
         }
     }
-    func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
-        // TODO show error
+
+    func showError(title: String, message: String) {
+        HyperwalletUtilViews.showAlert(self, title: title, message: message, actions: UIAlertAction.close())
     }
 
-    func notifyTransferScheduled(_ transfer: HyperwalletTransfer) {
+    func notifyTransferScheduled(_ hyperwalletStatusTransition: HyperwalletStatusTransition) {
         DispatchQueue.global(qos: .background).async {
             NotificationCenter.default.post(name: .transferScheduled,
                                             object: self,
-                                            userInfo: [UserInfo.transferScheduled: transfer])
+                                            userInfo: [UserInfo.transferScheduled: hyperwalletStatusTransition])
         }
+        navigationController?
+            .skipPreviousViewControllerIfPresent(skip: CreateTransferController.self)
     }
 }

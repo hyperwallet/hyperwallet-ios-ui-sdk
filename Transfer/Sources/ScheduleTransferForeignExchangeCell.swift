@@ -25,7 +25,7 @@ final class ScheduleTransferForeignExchangeCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
-        self.heightAnchor.constraint(equalToConstant: Theme.Cell.smallHeight).isActive = true
+        self.heightAnchor.constraint(equalToConstant: Theme.Cell.extraSmallHeight).isActive = true
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -66,7 +66,8 @@ extension ScheduleTransferForeignExchangeCell {
             detailTextLabel?.text = sectionData.rows[rowIndex].value
             // modify separatorInset length when there is another foreign exanchange after this row
             if let nextRow = sectionData.rows[safe: rowIndex + 1], nextRow.title.isEmpty {
-                separatorInset = UIEdgeInsets.zero
+//                layoutMargins = UIEdgeInsets.zero
+//                separatorInset = UIEdgeInsets.zero
             }
             return self
         }

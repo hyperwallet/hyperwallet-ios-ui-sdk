@@ -44,4 +44,12 @@ extension ScheduleTransferButtonCell {
         get { return textLabel?.textColor }
         set { textLabel?.textColor = newValue }
     }
+
+    func configure(action: UIGestureRecognizer) {
+        textLabel?.text = "schedule_transfer_button".localized()
+        textLabel?.textAlignment = .center
+        textLabel?.isUserInteractionEnabled = true
+        textLabel?.addGestureRecognizer(action)
+        textLabel?.textColor = Theme.Button.color
+    }
 }

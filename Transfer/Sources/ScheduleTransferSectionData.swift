@@ -73,9 +73,9 @@ struct ScheduleTransferForeignExchangeData: ScheduleTransferSectionData {
                               foreignExchange.rate!,
                               foreignExchange.destinationCurrency!)
 
-            rows.append((title: "You sell:", value:souceAmount))
-            rows.append((title: "You buy:", value: destinationAmount))
-            rows.append((title: "Exchange Rate:", value: rate))
+            rows.append((title: "transfer_fx_sell_confirmation".localized(), value:souceAmount))
+            rows.append((title: "transfer_fx_buy_confirmation".localized(), value: destinationAmount))
+            rows.append((title: "transfer_fx_rate_confirmation".localized(), value: rate))
             if !foreignExchanges.isLast(index: index) {
                 rows.append((title: "", value: ""))
             }
@@ -91,12 +91,12 @@ struct ScheduleTransferSummaryData: ScheduleTransferSectionData {
 
     init(transfer: HyperwalletTransfer) {
         let transferAmount = String(format: "%@ %@", transfer.sourceAmount!, transfer.destinationCurrency!)
-        rows.append((title: "Amount:", value: transferAmount))
+        rows.append((title: "transfer_amount_confirmation".localized(), value: transferAmount))
         if let destinationFeeAmount = transfer.destinationFeeAmount {
             let fee = String(format: "%@ %@", destinationFeeAmount, transfer.destinationCurrency!)
             let amoutReceived = String(format: "%@ %@", transfer.destinationAmount!, transfer.destinationCurrency!)
-            rows.append((title: "Fee:", value: fee))
-            rows.append((title: "You will receive:", value: amoutReceived))
+            rows.append((title: "transfer_fee_confirmation".localized(), value: fee))
+            rows.append((title: "transfer_net_amount_confirmation".localized(), value: amoutReceived))
         }
     }
 }

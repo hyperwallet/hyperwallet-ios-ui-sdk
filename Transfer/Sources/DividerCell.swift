@@ -30,7 +30,7 @@ final class DividerCell: UITableViewCell {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         self.heightAnchor.constraint(equalToConstant: Theme.Cell.dividerHeight).isActive = true
         backgroundColor = Theme.ViewController.backgroundColor
-        separatorInset = UIEdgeInsets.zero
+        separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
     }
 
     required init?(coder aDecoder: NSCoder) {

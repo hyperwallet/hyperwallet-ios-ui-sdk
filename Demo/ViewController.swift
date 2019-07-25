@@ -236,7 +236,7 @@ class ViewController: UITableViewController {
     func setUpMockedTransferResult() -> HyperwalletTransfer {
         let transferJsonString = """
         {
-        "token": "trf-aa308d58-75b4-432b-dec1-eb6b9e341111",
+        "token": "trf-543ece17-ea7e-439a-8851-e91681edda97",
         "status": "QUOTED",
         "createdOn": "2016-05-01T00:00:00",
         "clientTransferId": "6712348070812",

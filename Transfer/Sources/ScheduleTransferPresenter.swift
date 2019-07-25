@@ -18,14 +18,16 @@
 
 #if !COCOAPODS
 import Common
+import TransferRepository
 #endif
 import HyperwalletSDK
 
 protocol ScheduleTransferView: class {
-    func hideLoading()
-    func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?)
-    func showLoading()
-    func notifyTransferScheduled(_ transfer: HyperwalletTransfer)
+    func showProcessing()
+    func dismissProcessing(handler: @escaping () -> Void)
+    func showConfirmation(handler: @escaping (() -> Void))
+    func showError(title: String, message: String)
+    func notifyTransferScheduled(_ hyperwalletStatusTransition: HyperwalletStatusTransition)
 }
 
 final class ScheduleTransferPresenter {
@@ -34,17 +36,19 @@ final class ScheduleTransferPresenter {
     private var transferMethod: HyperwalletTransferMethod
     private var transfer: HyperwalletTransfer
 
-    /// Initialize ConfirmTransferPresenter
+    /// Initialize ScheduleTransferPresenter
     init(view: ScheduleTransferView, transferMethod: HyperwalletTransferMethod, transfer: HyperwalletTransfer) {
         self.view = view
         self.transferMethod = transferMethod
         self.transfer = transfer
     }
 
+    private lazy var transferRepository = {
+        TransferRepositoryFactory.shared.transferRepository()
+    }()
+
     func loadScheduleTransfer() {
-        view.showLoading()
         initializeSections()
-        view.hideLoading()
     }
 
     private func initializeSections() {
@@ -70,24 +74,26 @@ final class ScheduleTransferPresenter {
     }
 
     func scheduleTransfer() {
-//        Hyperwallet.shared.scheduleTransfer(transferToken: transfer.token,
-//                                            notes: "schedule a transfer",
-//                                            completion: scheduleTransferHandler())
-    }
-
-    private func scheduleTransferHandler() -> (HyperwalletTransfer?, HyperwalletErrorType?) -> Void {
-        return { [weak self] (result, error) in
+        view.showProcessing()
+        transferRepository.scheduleTransfer(transfer.token!) { [weak self] (result) in
             guard let strongSelf = self else {
                 return
             }
-            DispatchQueue.main.async {
-                if let error = error {
-                    strongSelf.view.showError(error, { strongSelf.scheduleTransfer() })
-                } else {
-                    if let transfer = result {
-                        strongSelf.view.notifyTransferScheduled(transfer)
-                    }
+
+            switch result {
+            case .failure(let error):
+                strongSelf.view.dismissProcessing(handler: {
+                    strongSelf.view.showError(title: "error".localized(), message: error
+                        .getHyperwalletErrors()?.errorList?.first?.message ?? "")
+                })
+
+            case .success(let resultStatusTransition):
+                guard let statusTransition = resultStatusTransition else {
+                    return
                 }
+                strongSelf.view.showConfirmation(handler: { () -> Void in
+                    strongSelf.view.notifyTransferScheduled(statusTransition)
+                })
             }
         }
     }
