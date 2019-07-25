@@ -126,7 +126,7 @@ extension CreateTransferController {
                 return
         }
         tableViewCell.accessoryType = .disclosureIndicator
-        if !sectionData.isTransferMethodAvailable {
+        if sectionData.isTransferMethodAvailable {
             tableViewCell.configure(transferMethod: presenter.selectedTransferMethod)
         } else {
             let title = "add_transfer_add_account_title".localized()

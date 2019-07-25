@@ -103,7 +103,8 @@ extension CreateTransferAddSelectDestinationCell {
 
     private func formatDetails(subtitle: String, additionalInfo: String? = nil) -> NSAttributedString {
         let attributedText = NSMutableAttributedString()
-        attributedText.append(value: String(format: "%@\n", subtitle),
+        let stringFromat = additionalInfo != nil ? "%@\n" : "%@"
+        attributedText.append(value: String(format: stringFromat, subtitle),
                               font: subTitleLabelFont,
                               color: subTitleLabelColor)
         if let additionalInfo = additionalInfo {
