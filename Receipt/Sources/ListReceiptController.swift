@@ -25,7 +25,9 @@ import UIKit
 /// Lists the user's transaction history
 ///
 /// The user can click a receipt in the list for more information
-public final class ListReceiptController: UITableViewController {
+public final class ListReceiptController: UITableViewController, ContentSizeCategoryAdjustable {
+    public var subscriptionToken: Any?
+
     private var spinnerView: SpinnerView?
     private var presenter: ListReceiptPresenter!
     private var defaultHeaderHeight = CGFloat(38.0)
@@ -60,6 +62,20 @@ public final class ListReceiptController: UITableViewController {
         presenter.listReceipts()
     }
 
+    override public func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        subscriptionToken = setupWith(tableView: tableView, and: Theme.Cell.mediumHeight)
+    }
+
+    override public func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        if let subscriptionToken = subscriptionToken {
+            NotificationCenter.default.removeObserver(subscriptionToken)
+        }
+    }
+
     // MARK: list receipt table view data source
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.sectionData[section].value.count
@@ -79,8 +95,7 @@ public final class ListReceiptController: UITableViewController {
     }
 
     override public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let date = presenter.sectionData[section].key
-        return date.formatDateToString(dateFormat: sectionTitleDateFormat)
+        return titleForHeaderIn(section: section)
     }
 
     // MARK: list receipt table view delegate
@@ -102,11 +117,13 @@ public final class ListReceiptController: UITableViewController {
     }
 
     override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return defaultHeaderHeight
-    }
+        guard let header = titleForHeaderIn(section: section),
+            header.height(withConstrainedWidth: self.view.frame.width,
+                          font: UIFont.preferredFont(forTextStyle: .body)) > defaultHeaderHeight else {
+                            return defaultHeaderHeight
+        }
 
-    override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return Theme.Cell.mediumHeight
+        return UITableView.automaticDimension
     }
 
     override public func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -123,6 +140,11 @@ public final class ListReceiptController: UITableViewController {
         tableView.tableFooterView = UIView()
         tableView.register(ReceiptTransactionCell.self,
                            forCellReuseIdentifier: ReceiptTransactionCell.reuseIdentifier)
+    }
+
+    private func titleForHeaderIn(section: Int) -> String? {
+        let date = presenter.sectionData[section].key
+        return date.formatDateToString(dateFormat: sectionTitleDateFormat)
     }
 }
 

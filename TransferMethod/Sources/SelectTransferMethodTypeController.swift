@@ -24,13 +24,16 @@ import UIKit
 
 /// Lists all transfer method types available based on the country, currency and profile type to create a new transfer
 /// method (bank account, bank card, PayPal account, prepaid card, paper check).
-public final class SelectTransferMethodTypeController: UITableViewController {
+public final class SelectTransferMethodTypeController: UITableViewController, ContentSizeCategoryAdjustable {
     // MARK: - Outlets
     private var countryCurrencyTableView: UITableView!
 
     // MARK: - Properties
     /// The completion handler will be performed after a new transfer method has been created.
     public var createTransferMethodHandler: ((HyperwalletTransferMethod) -> Void)?
+
+    public var subscriptionToken: Any?
+
     private var spinnerView: SpinnerView?
     private var presenter: SelectTransferMethodTypePresenter!
     private var countryCurrencyView: CountryCurrencyTableView!
@@ -58,6 +61,20 @@ public final class SelectTransferMethodTypeController: UITableViewController {
         setupTransferMethodTypeTableView()
 
         presenter.loadTransferMethodKeys(forceUpdate)
+    }
+
+    override public func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        subscriptionToken = setupWith(tableView: tableView, and: Theme.Cell.largeHeight)
+    }
+
+    override public func viewDidDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        if let subscriptionToken = subscriptionToken {
+            NotificationCenter.default.removeObserver(subscriptionToken)
+        }
     }
 
     // MARK: - Setup Layout
@@ -114,10 +131,6 @@ extension SelectTransferMethodTypeController {
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.navigateToAddTransferMethod(indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-
-    override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return Theme.Cell.largeHeight
     }
 }
 
