@@ -1164,16 +1164,16 @@
 		DB551F4A22E1316400DD65C2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				DB551F4B22E1316400DD65C2 /* Common.h */,
 				DBCA382E225E8BA900CD4137 /* Extensions */,
 				DBCA383F225E8BAA00CD4137 /* Generics */,
 				DBCA3843225E8BAA00CD4137 /* Helper */,
-				078B45802273A441005B0248 /* HyperwalletUI.swift */,
-				DB551F4C22E1316400DD65C2 /* Info.plist */,
 				DBCA383C225E8BAA00CD4137 /* Localization */,
 				64334EB222E9DA5D009569A8 /* Protocols */,
 				DB2EB66E22617AB100FBEB3D /* Resources */,
 				DBCA3849225E8BAA00CD4137 /* View */,
+				DB551F4B22E1316400DD65C2 /* Common.h */,
+				078B45802273A441005B0248 /* HyperwalletUI.swift */,
+				DB551F4C22E1316400DD65C2 /* Info.plist */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
