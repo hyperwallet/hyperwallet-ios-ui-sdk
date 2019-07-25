@@ -162,7 +162,6 @@ class PrepaidCardListReceiptTests: BaseTests {
         XCTAssertEqual(transactionDetails.paymentAmountLabel.label, "-7.00")
         XCTAssertEqual(transactionDetails.createdOnLabel.label,
                        transactionDetails.getExpectedDate(date: "2019-06-23T21:25:09"))
-
         XCTAssertEqual(transactionDetails.currencyLabel.label, "USD")
 
         // Details
@@ -195,7 +194,6 @@ class PrepaidCardListReceiptTests: BaseTests {
         XCTAssertEqual(transactionDetails.paymentAmountLabel.label, "-10.00")
         XCTAssertEqual(transactionDetails.createdOnLabel.label,
                        transactionDetails.getExpectedDate(date: "2019-06-25T22:48:41"))
-
         XCTAssertEqual(transactionDetails.currencyLabel.label, "USD")
 
         // Details
