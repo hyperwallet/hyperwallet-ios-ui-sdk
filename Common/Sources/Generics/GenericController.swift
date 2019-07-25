@@ -71,6 +71,7 @@ UISearchResultsUpdating, UISearchControllerDelegate {
         super.viewWillAppear(animated)
         tableView.reloadData()
         scrollToSelectedRow()
+        setupUISearchController()
     }
 
     override public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -79,8 +80,8 @@ UISearchResultsUpdating, UISearchControllerDelegate {
         guard #available(iOS 11.0, *) else {
             DispatchQueue.main.async {
                 self.setupSearchBarSize()
+                self.searchController.searchBar.setLeftAligment()
             }
-
             return
         }
     }
@@ -168,6 +169,7 @@ private extension GenericController {
         definesPresentationContext = true
         searchController.dimsBackgroundDuringPresentation = false
         setupSearchBarSize()
+        searchController.searchBar.setLeftAligment()
         searchController.delegate = self
         searchController.hidesNavigationBarDuringPresentation = false
     }
