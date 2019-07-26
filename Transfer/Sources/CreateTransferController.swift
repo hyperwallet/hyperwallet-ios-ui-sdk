@@ -30,13 +30,10 @@ import UIKit
 public final class CreateTransferController: UITableViewController {
     private var spinnerView: SpinnerView?
     private var presenter: CreateTransferPresenter!
-    private var sourceToken: String?
-    private var clientTransferId: String!
-    private var transferAmount: String?
-    private var transferDescription: String?
     private let registeredCells: [(type: AnyClass, id: String)] = [
         (CreateTransferAddSelectDestinationCell.self, CreateTransferAddSelectDestinationCell.reuseIdentifier),
-        (CreateTransferUserInputCell.self, CreateTransferUserInputCell.reuseIdentifier),
+        (CreateTransferAllFundsCell.self, CreateTransferAllFundsCell.reuseIdentifier),
+        (CreateTransferAmountCell.self, CreateTransferAmountCell.reuseIdentifier),
         (CreateTransferButtonCell.self, CreateTransferButtonCell.reuseIdentifier),
         (CreateTransferNotesCell.self, CreateTransferNotesCell.reuseIdentifier)
     ]
@@ -44,9 +41,8 @@ public final class CreateTransferController: UITableViewController {
     var createTransferHandler: ((HyperwalletTransfer) -> Void)?
 
     public init(clientTransferId: String, sourceToken: String?) {
-        self.sourceToken = sourceToken
-        self.clientTransferId = clientTransferId
         super.init(nibName: nil, bundle: nil)
+        presenter = CreateTransferPresenter(clientTransferId, sourceToken, view: self)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -59,7 +55,7 @@ public final class CreateTransferController: UITableViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem.back
         largeTitle()
         setViewBackgroundColor()
-        presenter = CreateTransferPresenter(clientTransferId, sourceToken, view: self)
+
         presenter.loadCreateTransfer()
 
         setUpCreateTransferTableView()
@@ -69,6 +65,7 @@ public final class CreateTransferController: UITableViewController {
     private func setUpCreateTransferTableView() {
         tableView = UITableView(frame: view.frame, style: .grouped)
         tableView.accessibilityIdentifier = "createTransferTableView"
+        tableView.estimatedRowHeight = Theme.Cell.smallHeight
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)
         }
@@ -101,10 +98,10 @@ extension CreateTransferController {
     }
 
     private func getCellConfiguration(_ indexPath: IndexPath) -> UITableViewCell {
-        let cellIdentifier = presenter.sectionData[indexPath.section].cellIdentifier
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        let section = presenter.sectionData[indexPath.section]
-        switch section.createTransferSectionHeader {
+        let cellIdentifiers = presenter.sectionData[indexPath.section].cellIdentifiers
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifiers[indexPath.row], for: indexPath)
+        let section = presenter.sectionData[indexPath.section].createTransferSectionHeader
+        switch section {
         case .destination:
             getDestinationSectionCellConfiguration(cell, indexPath)
 
@@ -136,29 +133,27 @@ extension CreateTransferController {
     }
 
     private func getTransferSectionCellConfiguration(_ cell: UITableViewCell, _ indexPath: IndexPath) {
-        let section = presenter.sectionData[indexPath.section]
-        var transferAllFundSwitchOn = false
-        if let tableViewCell = cell as? CreateTransferUserInputCell,
-            let userInputData = section as? CreateTransferSectionTransferData {
-            let row = userInputData.rows[indexPath.row]
-            tableViewCell.selectionStyle = UITableViewCell.SelectionStyle.none
-            tableViewCell.configure(amount: nil, currency: row.value!, at: indexPath.row)
-            tableViewCell.transferAllSwitchOn = { transferAllSwitch in
-                transferAllFundSwitchOn = transferAllSwitch
+        if let tableViewCell = cell as? CreateTransferAllFundsCell {
+            tableViewCell.configure(setOn: presenter.transferAllFundsIsOn
+            ) { [weak presenter] transferAllFundsIsOn in
+                presenter?.transferAllFundsIsOn = transferAllFundsIsOn
             }
-            tableViewCell.enteredAmount = { amount in
-                if !transferAllFundSwitchOn {
-                    self.transferAmount = amount
-                }
+            return
+        }
+        if let tableViewCell = cell as? CreateTransferAmountCell {
+            tableViewCell.configure(amount: presenter.amount,
+                                    currency: presenter.destinationCurrency
+            ) { [weak presenter] amount in
+                presenter?.amount = amount
             }
+            return
         }
     }
 
     private func getNotesSectionCellConfiguration(_ cell: UITableViewCell) {
         if let tableViewCell = cell as? CreateTransferNotesCell {
-            tableViewCell.configure()
-            tableViewCell.enteredNote = { note in
-                self.transferDescription = note
+            tableViewCell.configure(notes: presenter.notes) { [weak presenter] notes in
+                presenter?.notes = notes
             }
         }
     }
@@ -174,7 +169,7 @@ extension CreateTransferController {
 
     @objc
     private func didTapNext(sender: UITapGestureRecognizer) {
-        presenter.createTransfer(amount: transferAmount, notes: transferDescription)
+        //presenter.createTransfer(amount: transferAmount, notes: transferDescription)
     }
 }
 
@@ -193,6 +188,9 @@ extension CreateTransferController {
         switch indexPath.section {
         case 0:
             return Theme.Cell.largeHeight
+
+        case 2:
+            return UITableView.automaticDimension
 
         default:
             return Theme.Cell.smallHeight
@@ -232,10 +230,6 @@ extension CreateTransferController: CreateTransferView {
         errorView.show(retry)
     }
 
-    //    func showBusinessError(_ error: HyperwalletErrorType, _ handler: @escaping () -> Void) {
-    //        // TODO show business error in footer
-    //    }
-
     func showCreateTransfer() {
         presenter.initializeSections()
         tableView.reloadData()
@@ -260,7 +254,7 @@ extension CreateTransferController: CreateTransferView {
 
     @objc
     private func didTapAddButton(sender: AnyObject) {
-        //        let controller = SelectTransferMethodTypeController(forceUpdate: false) ///TODO true or false
+        //        let controller = SelectTransferMethodTypeController(forceUpdate: false) ///TO DO true or false
         //        controller.largeTitle()
         //        controller.createTransferMethodHandler = {
         //            [weak self] (transferMethod: HyperwalletTransferMethod) -> Void in
@@ -273,8 +267,6 @@ extension CreateTransferController: CreateTransferView {
     }
 
     func showScheduleTransfer(_ transfer: HyperwalletTransfer) {
-        //        let scheduleTransferController = ScheduleTransferTableViewController(transferMethod: presenter.selectedTransferMethod,
-        //                                                                             transfer: transfer)
-        //        navigationController?.pushViewController(scheduleTransferController, animated: true)
+        // TO DO navigate to schedule
     }
 }

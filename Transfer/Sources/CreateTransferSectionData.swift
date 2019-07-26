@@ -28,7 +28,7 @@ enum CreateTransferSectionHeader: String {
 }
 
 protocol CreateTransferSectionData {
-    var cellIdentifier: String { get }
+    var cellIdentifiers: [String] { get }
     var createTransferSectionHeader: CreateTransferSectionHeader { get }
     var rowCount: Int { get }
     var title: String? { get }
@@ -43,13 +43,12 @@ extension CreateTransferSectionData {
 
 struct CreateTransferSectionAddDestinationAccountData: CreateTransferSectionData {
     var createTransferSectionHeader: CreateTransferSectionHeader { return .destination }
-    var cellIdentifier: String { return "addTransferMethodSectionDataLabel" }
+    var cellIdentifiers: [String] { return ["addTransferMethodSectionDataLabel"] }
 }
 
-// first section !!!!!!
 struct CreateTransferSectionDestinationData: CreateTransferSectionData {
     var createTransferSectionHeader: CreateTransferSectionHeader { return .destination }
-    var cellIdentifier: String { return CreateTransferAddSelectDestinationCell.reuseIdentifier }
+    var cellIdentifiers: [String] { return [CreateTransferAddSelectDestinationCell.reuseIdentifier] }
     var isTransferMethodAvailable: Bool = true
 
     init(isTransferMethodAvailable: Bool) {
@@ -58,27 +57,25 @@ struct CreateTransferSectionDestinationData: CreateTransferSectionData {
 }
 
 struct CreateTransferSectionTransferData: CreateTransferSectionData {
-    var rows = [(title: String?, value: String?)]()
     var createTransferSectionHeader: CreateTransferSectionHeader { return .transfer }
-    var rowCount: Int { return rows.count }
-    var cellIdentifier: String { return CreateTransferUserInputCell.reuseIdentifier }
-    var configuration: CreateTransferUserInputCellConfiguration!
+    var rowCount: Int { return 2 }
+    var cellIdentifiers: [String] { return [
+        CreateTransferAmountCell.reuseIdentifier,
+        CreateTransferAllFundsCell.reuseIdentifier
+    ]}
     var footer: String?
 
     init(destinationCurrency: String, availableBalance: String) {
-        rows.append((title: "amount", value: destinationCurrency))
-        rows.append((title: "transferAll", value: "transferAllSwitch"))
-        footer = String(format: "available_balance_footer".localized(),
-                        availableBalance)
+        footer = String(format: "available_balance_footer".localized(), availableBalance)
     }
 }
 
 struct CreateTransferSectionButtonData: CreateTransferSectionData {
     var createTransferSectionHeader: CreateTransferSectionHeader { return .button }
-    var cellIdentifier: String { return CreateTransferButtonCell.reuseIdentifier }
+    var cellIdentifiers: [String] { return [CreateTransferButtonCell.reuseIdentifier] }
 }
 
 struct CreateTransferSectionNotesData: CreateTransferSectionData {
     var createTransferSectionHeader: CreateTransferSectionHeader { return .notes }
-    var cellIdentifier: String { return CreateTransferNotesCell.reuseIdentifier }
+    var cellIdentifiers: [String] { return [CreateTransferNotesCell.reuseIdentifier] }
 }
