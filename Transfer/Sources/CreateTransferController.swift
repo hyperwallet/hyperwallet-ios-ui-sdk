@@ -66,6 +66,7 @@ public final class CreateTransferController: UITableViewController {
         tableView = UITableView(frame: view.frame, style: .grouped)
         tableView.accessibilityIdentifier = "createTransferTableView"
         tableView.estimatedRowHeight = Theme.Cell.smallHeight
+        tableView.cellLayoutMarginsFollowReadableWidth = false
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)
         }
