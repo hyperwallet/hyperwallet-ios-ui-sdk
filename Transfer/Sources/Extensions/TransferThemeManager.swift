@@ -27,7 +27,8 @@ public extension ThemeManager {
         applyToCreateTransferAddSelectDestinationCell()
         applyToCreateTransferButtonCell()
         applyToCreateTransferNotesCell()
-        applyToCreateTransferUserInputCell()
+        applyToCreateTransferAllFundsCell()
+        applyToCreateTransferAmountCell()
     }
 
     private static func applyToCreateTransferAddSelectDestinationCell() {
@@ -50,11 +51,17 @@ public extension ThemeManager {
         proxy.titleLabelFont = Theme.Label.bodyFont
     }
 
-    private static func applyToCreateTransferUserInputCell() {
-        let proxy = CreateTransferUserInputCell.appearance()
+    private static func applyToCreateTransferAllFundsCell() {
+        let proxy = CreateTransferAllFundsCell.appearance()
         proxy.titleLabelFont = Theme.Label.bodyFontMedium
         proxy.titleLabelColor = Theme.Label.color
-        proxy.subTitleLabelFont = Theme.Label.captionOne
-        proxy.subTitleLabelColor = Theme.Label.subTitleColor
+    }
+
+    private static func applyToCreateTransferAmountCell() {
+        let proxy = CreateTransferAmountCell.appearance()
+        proxy.titleLabelFont = Theme.Label.bodyFontMedium
+        proxy.titleLabelColor = Theme.Label.color
+        proxy.currencyLabelFont = Theme.Label.bodyFontMedium
+        proxy.currencyLabelColor = Theme.Label.color
     }
 }

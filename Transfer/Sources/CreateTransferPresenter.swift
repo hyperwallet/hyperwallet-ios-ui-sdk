@@ -42,12 +42,32 @@ protocol CreateTransferView: class {
 
 final class CreateTransferPresenter {
     private unowned let view: CreateTransferView
+
+    private lazy var userRepository: UserRepository = { UserRepositoryFactory.shared.userRepository() }()
+
     private(set) var clientTransferId: String
     private(set) var sectionData = [CreateTransferSectionData]()
     private var sourceToken: String?
     private(set) var availableBalance: String?
-    private lazy var userRepository: UserRepository = { UserRepositoryFactory.shared.userRepository() }()
     var selectedTransferMethod: HyperwalletTransferMethod!
+    var transferAllFundsIsOn: Bool = false {
+        didSet {
+            debugPrint(transferAllFundsIsOn)
+        }
+    }
+    var destinationCurrency: String {
+        return selectedTransferMethod.transferMethodCurrency ?? ""
+    }
+    var amount: String = "" {
+        didSet {
+            debugPrint(amount)
+        }
+    }
+    var notes: String = "" {
+        didSet {
+            debugPrint(notes)
+        }
+    }
 
     init(_ clientTransferId: String, _ sourceToken: String?, view: CreateTransferView) {
         self.clientTransferId = clientTransferId
@@ -123,11 +143,11 @@ final class CreateTransferPresenter {
     }
 
     func showSelectDestinationAccountView() {
-// TODO Display all the destination accounts
-//        view.showGenericTableView(items: getSelectDestinationCellConfiguration(),
-//                                  title: "select_destination".localized(),
-//                                  selectItemHandler: selectDestinationAccountHandler(),
-//                                  markCellHandler: destinationAccountMarkCellHandler())
+        // TODO Display all the destination accounts
+        //        view.showGenericTableView(items: getSelectDestinationCellConfiguration(),
+        //                                  title: "select_destination".localized(),
+        //                                  selectItemHandler: selectDestinationAccountHandler(),
+        //                                  markCellHandler: destinationAccountMarkCellHandler())
     }
 
     private func createInitialTransfer() {
