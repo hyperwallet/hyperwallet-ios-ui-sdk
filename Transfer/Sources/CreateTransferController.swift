@@ -137,15 +137,13 @@ extension CreateTransferController {
         guard let tableViewCell = cell as? CreateTransferAmountCell else {
             return
         }
-        switch indexPath.row {
-        case 0:
+        if indexPath.row == 0 {
             tableViewCell.configure(amount: presenter.amount,
                                     currency: presenter.destinationCurrency
             ) { [weak presenter] amount in
                 presenter?.amount = amount
             }
-
-        default:
+        } else {
             tableViewCell.configure(setOn: presenter.transferAllFundsIsOn) { [weak presenter] transferAllFundsIsOn in
                 presenter?.transferAllFundsIsOn = transferAllFundsIsOn
                 if transferAllFundsIsOn, let availableBalance = presenter?.availableBalance {
@@ -156,7 +154,6 @@ extension CreateTransferController {
                     self.tableView.reloadSections(IndexSet(integersIn: 1...1), with: UITableView.RowAnimation.automatic)
                 }
             }
-            return
         }
     }
 

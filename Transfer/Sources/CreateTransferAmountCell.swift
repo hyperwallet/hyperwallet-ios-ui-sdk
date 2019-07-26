@@ -80,10 +80,6 @@ final class CreateTransferAmountCell: UITableViewCell {
         enteredAmountHandler = handler
     }
 
-    func updateAmount(amount: String) {
-        amountTextField.text = amount
-    }
-
     private func setUpSwitch() {
         textLabel?.text = "transfer_all_funds".localized()
     }
