@@ -23,7 +23,7 @@ import Common
 import HyperwalletSDK
 
 enum ScheduleTransferSectionHeader: String {
-    case destination, foreignExchange, summary, notes, button
+    case button, destination, foreignExchange, notes, summary
 }
 
 protocol ScheduleTransferSectionData {
@@ -61,22 +61,25 @@ struct ScheduleTransferForeignExchangeData: ScheduleTransferSectionData {
         self.foreignExchanges = foreignExchanges
 
         for (index, foreignExchange) in foreignExchanges.enumerated() {
-            let souceAmount = String(format: "%@ %@",
-                                     foreignExchange.sourceAmount!,
-                                     foreignExchange.sourceCurrency!)
-            let destinationAmount = String(format: "%@ %@",
-                                           foreignExchange.destinationAmount!,
-                                           foreignExchange.destinationCurrency!)
-            let rate = String(format: "1 %@ = %@ %@",
-                              foreignExchange.sourceCurrency!,
-                              foreignExchange.rate!,
-                              foreignExchange.destinationCurrency!)
+            if let sourceAmount = foreignExchange.sourceAmount,
+                let sourceCurrency = foreignExchange.sourceCurrency,
+                let destinationAmount = foreignExchange.destinationAmount,
+                let destinationCurrency = foreignExchange.destinationCurrency,
+                let  rate = foreignExchange.rate {
+                let sourceAmountFormatted = sourceAmount.currencyFormatterWithCurrencyCode(by: sourceCurrency)
+                let destinationAmountFormatted = destinationAmount
+                    .currencyFormatterWithCurrencyCode(by: destinationCurrency)
 
-            rows.append((title: "transfer_fx_sell_confirmation".localized(), value:souceAmount))
-            rows.append((title: "transfer_fx_buy_confirmation".localized(), value: destinationAmount))
-            rows.append((title: "transfer_fx_rate_confirmation".localized(), value: rate))
-            if !foreignExchanges.isLast(index: index) {
-                rows.append((title: "", value: ""))
+                let rateFormatted = String(format: "%@ = %@",
+                                           "1".currencyFormatterWithCurrencyCode(by: sourceCurrency),
+                                           rate.currencyFormatterWithCurrencyCode(by: destinationCurrency))
+
+                rows.append((title: "transfer_fx_sell_confirmation".localized(), value:sourceAmountFormatted))
+                rows.append((title: "transfer_fx_buy_confirmation".localized(), value: destinationAmountFormatted))
+                rows.append((title: "transfer_fx_rate_confirmation".localized(), value: rateFormatted))
+                if !foreignExchanges.isLast(index: index) {
+                    rows.append((title: "", value: ""))
+                }
             }
         }
     }
@@ -89,13 +92,23 @@ struct ScheduleTransferSummaryData: ScheduleTransferSectionData {
     var cellIdentifier: String { return ScheduleTransferSummaryCell.reuseIdentifier }
 
     init(transfer: HyperwalletTransfer) {
-        let transferAmount = String(format: "%@ %@", transfer.sourceAmount!, transfer.destinationCurrency!)
-        rows.append((title: "transfer_amount_confirmation".localized(), value: transferAmount))
-        if let destinationFeeAmount = transfer.destinationFeeAmount {
-            let fee = String(format: "%@ %@", destinationFeeAmount, transfer.destinationCurrency!)
-            let amoutReceived = String(format: "%@ %@", transfer.destinationAmount!, transfer.destinationCurrency!)
-            rows.append((title: "transfer_fee_confirmation".localized(), value: fee))
-            rows.append((title: "transfer_net_amount_confirmation".localized(), value: amoutReceived))
+        if let destinationAmount = transfer.destinationAmount,
+            let destinationCurrency = transfer.destinationCurrency {
+            let transferAmountFormatted = destinationAmount
+                .currencyFormatterWithCurrencyCode(by: destinationCurrency)
+            guard let feeAmount = transfer.destinationFeeAmount else {
+                rows.append((title: "transfer_amount_confirmation".localized(), value: transferAmountFormatted))
+                rows.append((title: "transfer_net_amount_confirmation".localized(), value: transferAmountFormatted))
+                return
+            }
+
+            let grossTransferAmount = Double(destinationAmount)! + Double(feeAmount)!
+            let grossTransferAmountFormatted = String(grossTransferAmount)
+                .currencyFormatterWithCurrencyCode(by: destinationCurrency)
+            let feeAmountFormatted = feeAmount.currencyFormatterWithCurrencyCode(by: destinationCurrency)
+            rows.append((title: "transfer_amount_confirmation".localized(), value: grossTransferAmountFormatted))
+            rows.append((title: "transfer_fee_confirmation".localized(), value: feeAmountFormatted))
+            rows.append((title: "transfer_net_amount_confirmation".localized(), value: transferAmountFormatted))
         }
     }
 }

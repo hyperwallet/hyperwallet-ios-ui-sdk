@@ -29,7 +29,6 @@ public extension ThemeManager {
         applyToCreateTransferNotesCell()
         applyToCreateTransferAllFundsCell()
         applyToCreateTransferAmountCell()
-        applyToCreateTransferUserInputCell()
         applyToScheduleTransferSummaryCell()
         applyToScheduleForeignExchangeCell()
     }
