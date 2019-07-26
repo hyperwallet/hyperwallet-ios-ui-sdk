@@ -22,6 +22,7 @@ import Common
 
 final class ScheduleTransferForeignExchangeCell: UITableViewCell {
     static let reuseIdentifier = "scheduleTransferForeignExchangeCellReuseIdentifier"
+    private var shouldHideSeparator: Bool = false
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
@@ -66,10 +67,21 @@ extension ScheduleTransferForeignExchangeCell {
             detailTextLabel?.text = sectionData.rows[rowIndex].value
             // modify separatorInset length when there is another foreign exanchange after this row
             if let nextRow = sectionData.rows[safe: rowIndex + 1], nextRow.title.isEmpty {
-//                layoutMargins = UIEdgeInsets.zero
-//                separatorInset = UIEdgeInsets.zero
+               shouldHideSeparator = true
             }
             return self
+        }
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if shouldHideSeparator {
+            subviews.forEach { (view) in
+                if type(of: view).description() == "_UITableViewCellSeparatorView" {
+                    view.isHidden = true
+                }
+            }
+            shouldHideSeparator = false
         }
     }
 }

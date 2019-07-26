@@ -22,8 +22,8 @@ import Common
 import HyperwalletSDK
 import UIKit
 
-public final class ListTransferMethodCell: UITableViewCell {
-    public static let reuseIdentifier = "listTransferMethodCellIdentifier"
+final class ListTransferMethodCell: UITableViewCell {
+    static let reuseIdentifier = "listTransferMethodCellIdentifier"
 
     // MARK: Life cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

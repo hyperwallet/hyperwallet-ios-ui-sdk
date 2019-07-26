@@ -18,7 +18,6 @@
 
 #if !COCOAPODS
 import Common
-import TransferMethod
 #endif
 
 import HyperwalletSDK
@@ -43,7 +42,7 @@ extension ScheduleTransferSectionData {
 
 struct ScheduleTransferDestinationData: ScheduleTransferSectionData {
     var scheduleTransferSectionHeader: ScheduleTransferSectionHeader { return .destination }
-    var cellIdentifier: String { return ListTransferMethodCell.reuseIdentifier }
+    var cellIdentifier: String { return CreateTransferAddSelectDestinationCell.reuseIdentifier }
     var transferMethod: HyperwalletTransferMethod
 
     init(transferMethod: HyperwalletTransferMethod) {
