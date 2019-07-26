@@ -47,8 +47,8 @@ public extension ThemeManager {
 
     private static func applyToCreateTransferNotesCell() {
         let proxy = CreateTransferNotesCell.appearance()
-        proxy.titleLabelColor = Theme.Label.color
-        proxy.titleLabelFont = Theme.Label.bodyFont
+        proxy.notesTextFieldColor = Theme.Label.color
+        proxy.notesTextFieldFont = Theme.Label.bodyFont
     }
 
     private static func applyToCreateTransferAllFundsCell() {

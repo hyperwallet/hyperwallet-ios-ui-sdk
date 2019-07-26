@@ -20,50 +20,60 @@
 import Common
 #endif
 
-final class CreateTransferNotesCell: UITableViewCell, UITextFieldDelegate {
+final class CreateTransferNotesCell: UITableViewCell {
     static let reuseIdentifier = "createTransferNotesCellReuseIdentifier"
+    typealias EnteredNoteHandler = (_ value: String) -> Void
 
-    var enteredNote: ((_ value: String) -> Void)?
+    private var enteredNoteHandler: EnteredNoteHandler?
 
-    lazy var notesTextField: UITextField = {
-        let textField = UITextField(frame: CGRect(x: separatorInset.left,
-                                                  y: 0,
-                                                  width: bounds.width,
-                                                  height: bounds.height))
-        textField.font = titleLabelFont
+    private lazy var notesTextField: UITextField = {
+        let textField = UITextField(frame: .zero)
         textField.placeholder = "transfer_description".localized()
         textField.delegate = self
+        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
-        textLabel?.numberOfLines = 0
-        textLabel?.lineBreakMode = .byWordWrapping
-        textLabel?.accessibilityIdentifier = "createTransferSectionNotesTextLabel"
         selectionStyle = .none
+        setupNotesTextField()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        enteredNote?(notesTextField.text ?? "")
-    }
-
-    func configure() {
+    private func setupNotesTextField() {
         contentView.addSubview(notesTextField)
+
+        notesTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15).isActive = true
+        notesTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15).isActive = true
+        notesTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true
+        notesTextField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5).isActive = true
     }
 
+    func configure(notes: String, _ handler: @escaping EnteredNoteHandler) {
+        notesTextField.text = notes
+        enteredNoteHandler = handler
+    }
+}
+
+extension CreateTransferNotesCell: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        enteredNoteHandler?(notesTextField.text ?? "")
+    }
+}
+
+extension CreateTransferNotesCell {
     // MARK: Theme manager's proxy properties
-    @objc dynamic var titleLabelFont: UIFont! {
-        get { return textLabel?.font }
-        set { textLabel?.font = newValue }
+    @objc dynamic var notesTextFieldFont: UIFont! {
+        get { return notesTextField.font }
+        set { notesTextField.font = newValue }
     }
 
-    @objc dynamic var titleLabelColor: UIColor! {
-        get { return textLabel?.textColor }
-        set { textLabel?.textColor = newValue }
+    @objc dynamic var notesTextFieldColor: UIColor! {
+        get { return notesTextField.textColor }
+        set { notesTextField.textColor = newValue }
     }
 }

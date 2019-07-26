@@ -20,19 +20,18 @@
 import Common
 #endif
 
-final class CreateTransferAmountCell: UITableViewCell, UITextFieldDelegate {
+final class CreateTransferAmountCell: UITableViewCell {
     static let reuseIdentifier = "createTransferAmountCellReuseIdentifier"
     typealias EnteredAmountHandler = (_ value: String) -> Void
 
     var enteredAmountHandler: EnteredAmountHandler?
 
-    lazy var amountTextField: UITextField = {
-        let textField = UITextField(frame: .zero)
-        textField.font = titleLabelFont
+    lazy var amountTextField: PasteOnlyTextField = {
+        let textField = PasteOnlyTextField(frame: .zero)
+        textField.textAlignment = .right
         textField.keyboardType = UIKeyboardType.numberPad
-        //textField.placeholder = "transfer_amount".localized()
         textField.delegate = self
-        textField.layer.backgroundColor = UIColor.yellow.cgColor
+        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
 
@@ -40,7 +39,16 @@ final class CreateTransferAmountCell: UITableViewCell, UITextFieldDelegate {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
         self.heightAnchor.constraint(equalToConstant: Theme.Cell.smallHeight).isActive = true
         self.selectionStyle = .none
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapCell))
+        self.addGestureRecognizer(tap)
+
         setUpTitleLabel()
+        setupAmountTextField()
+    }
+
+    @objc
+    private func didTapCell() {
+        amountTextField.becomeFirstResponder()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -51,12 +59,23 @@ final class CreateTransferAmountCell: UITableViewCell, UITextFieldDelegate {
         textLabel?.text = "transfer_amount".localized()
     }
 
+    private func setupAmountTextField() {
+        contentView.addSubview(amountTextField)
+        amountTextField.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        amountTextField.leadingAnchor.constraint(equalTo: textLabel!.trailingAnchor,
+                                                 constant: 10).isActive = true
+        amountTextField.trailingAnchor.constraint(equalTo: detailTextLabel!.leadingAnchor,
+                                                  constant: -10).isActive = true
+    }
+
     func configure(amount: String?, currency: String, _ handler: @escaping EnteredAmountHandler) {
         amountTextField.text = amount
         detailTextLabel?.text = currency
         enteredAmountHandler = handler
     }
+}
 
+extension CreateTransferAmountCell: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         enteredAmountHandler?(amountTextField.text ?? "")
     }

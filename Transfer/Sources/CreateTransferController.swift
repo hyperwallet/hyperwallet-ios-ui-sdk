@@ -65,6 +65,7 @@ public final class CreateTransferController: UITableViewController {
     private func setUpCreateTransferTableView() {
         tableView = UITableView(frame: view.frame, style: .grouped)
         tableView.accessibilityIdentifier = "createTransferTableView"
+        tableView.estimatedRowHeight = Theme.Cell.smallHeight
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)
         }
@@ -132,21 +133,18 @@ extension CreateTransferController {
     }
 
     private func getTransferSectionCellConfiguration(_ cell: UITableViewCell, _ indexPath: IndexPath) {
-        guard let sectionData = presenter.sectionData[indexPath.section] as? CreateTransferSectionTransferData else {
-            return
-        }
-
         if let tableViewCell = cell as? CreateTransferAllFundsCell {
-            tableViewCell.configure(setOn: presenter.transferAllFundsIsOn) { [weak presenter] transferAllFundsIsOn in
+            tableViewCell.configure(setOn: presenter.transferAllFundsIsOn
+            ) { [weak presenter] transferAllFundsIsOn in
                 presenter?.transferAllFundsIsOn = transferAllFundsIsOn
             }
             return
         }
-
         if let tableViewCell = cell as? CreateTransferAmountCell {
             tableViewCell.configure(amount: presenter.amount,
-                                    currency: presenter.destinationCurrency) { [weak presenter] amount in
-                                        presenter?.amount = amount
+                                    currency: presenter.destinationCurrency
+            ) { [weak presenter] amount in
+                presenter?.amount = amount
             }
             return
         }
@@ -154,9 +152,8 @@ extension CreateTransferController {
 
     private func getNotesSectionCellConfiguration(_ cell: UITableViewCell) {
         if let tableViewCell = cell as? CreateTransferNotesCell {
-            tableViewCell.configure()
-            tableViewCell.enteredNote = { note in
-                //self.transferDescription = note
+            tableViewCell.configure(notes: presenter.notes) { [weak presenter] notes in
+                presenter?.notes = notes
             }
         }
     }
@@ -191,6 +188,9 @@ extension CreateTransferController {
         switch indexPath.section {
         case 0:
             return Theme.Cell.largeHeight
+
+        case 2:
+            return UITableView.automaticDimension
 
         default:
             return Theme.Cell.smallHeight

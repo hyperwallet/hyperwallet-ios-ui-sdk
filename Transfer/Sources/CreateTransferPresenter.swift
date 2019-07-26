@@ -98,6 +98,7 @@ final class CreateTransferPresenter {
 
     func initializeSections() {
         sectionData.removeAll()
+
         let createTransferDestinationSection = CreateTransferSectionDestinationData(
             isTransferMethodAvailable: selectedTransferMethod != nil
         )
