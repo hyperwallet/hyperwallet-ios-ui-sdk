@@ -46,11 +46,12 @@ final class CreateTransferNotesCell: UITableViewCell {
 
     private func setupNotesTextField() {
         contentView.addSubview(notesTextField)
-
-        notesTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15).isActive = true
-        notesTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15).isActive = true
-        notesTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true
-        notesTextField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5).isActive = true
+        notesTextField.safeAreaCenterYAnchor
+            .constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor).isActive = true
+        notesTextField.safeAreaLeadingAnchor
+            .constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor).isActive = true
+        notesTextField.safeAreaTrailingAnchor
+            .constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor).isActive = true
     }
 
     func configure(notes: String, _ handler: @escaping EnteredNoteHandler) {

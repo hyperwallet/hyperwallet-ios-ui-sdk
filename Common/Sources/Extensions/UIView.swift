@@ -29,6 +29,15 @@ public extension UIView {
         }
     }
 
+    /// Top Anchor
+    var safeAreaCenterYAnchor: NSLayoutYAxisAnchor {
+        if #available(iOS 11.0, *) {
+            return self.safeAreaLayoutGuide.centerYAnchor
+        } else {
+            return self.centerYAnchor
+        }
+    }
+
     /// Bottom Anchor
     var safeAreaBottomAnchor: NSLayoutYAxisAnchor {
         if #available(iOS 11.0, *) {

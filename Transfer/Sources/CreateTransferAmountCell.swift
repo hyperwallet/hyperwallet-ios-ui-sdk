@@ -37,7 +37,6 @@ final class CreateTransferAmountCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
-        self.heightAnchor.constraint(equalToConstant: Theme.Cell.smallHeight).isActive = true
         self.selectionStyle = .none
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapCell))
         self.addGestureRecognizer(tap)
@@ -61,11 +60,10 @@ final class CreateTransferAmountCell: UITableViewCell {
 
     private func setupAmountTextField() {
         contentView.addSubview(amountTextField)
-        amountTextField.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        amountTextField.leadingAnchor.constraint(equalTo: textLabel!.trailingAnchor,
-                                                 constant: 10).isActive = true
-        amountTextField.trailingAnchor.constraint(equalTo: detailTextLabel!.leadingAnchor,
-                                                  constant: -10).isActive = true
+        amountTextField.safeAreaCenterYAnchor
+            .constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor).isActive = true
+        amountTextField.safeAreaTrailingAnchor
+            .constraint(equalTo: detailTextLabel!.layoutMarginsGuide.leadingAnchor, constant: -10).isActive = true
     }
 
     func configure(amount: String?, currency: String, _ handler: @escaping EnteredAmountHandler) {

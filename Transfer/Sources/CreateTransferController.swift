@@ -184,18 +184,6 @@ extension CreateTransferController {
     //        //return CGFloat(-1.0) //CGFloat.leastNormalMagnitude  //TODO use theme manager constant
     //    }
 
-    override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.section {
-        case 0:
-            return Theme.Cell.largeHeight
-
-        case 2:
-            return UITableView.automaticDimension
-
-        default:
-            return Theme.Cell.smallHeight
-        }
-    }
 
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sectionData = presenter.sectionData[indexPath.section]
