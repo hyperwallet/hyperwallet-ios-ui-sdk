@@ -75,11 +75,8 @@ extension ScheduleTransferForeignExchangeCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         if shouldHideSeparator {
-            subviews.forEach { (view) in
-                if type(of: view).description() == "_UITableViewCellSeparatorView" {
-                    view.isHidden = true
-                }
-            }
+            let separatorView = subviews.first(where: { $0.isSeparatorView() })
+            separatorView?.isHidden = true
             shouldHideSeparator = false
         }
     }

@@ -63,7 +63,7 @@ public extension String {
     ///
     /// - Parameter currencyCode: the currency code
     /// - Returns: a formatted amount with currency code
-    func currencyFormatterWithCurrencyCode(by currencyCode: String) -> String {
+    func format(with currencyCode: String) -> String {
         if let amountInDouble = Double(self) {
             let currencyFormatter = NumberFormatter()
             currencyFormatter.numberStyle = .currency

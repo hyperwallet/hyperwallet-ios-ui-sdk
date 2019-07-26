@@ -37,7 +37,7 @@ public final class ScheduleTransferController: UITableViewController, UITextFiel
         (CreateTransferAddSelectDestinationCell.self, CreateTransferAddSelectDestinationCell.reuseIdentifier),
         (ScheduleTransferForeignExchangeCell.self, ScheduleTransferForeignExchangeCell.reuseIdentifier),
         (ScheduleTransferSummaryCell.self, ScheduleTransferSummaryCell.reuseIdentifier),
-        (ScheduleTransferNotesCell.self, ScheduleTransferNotesCell.reuseIdentifier),
+        (CreateTransferNotesCell.self, CreateTransferNotesCell.reuseIdentifier),
         (ScheduleTransferButtonCell.self, ScheduleTransferButtonCell.reuseIdentifier)
     ]
 
@@ -120,9 +120,9 @@ extension ScheduleTransferController {
             }
 
         case .notes:
-            if let tableViewCell = cell as? ScheduleTransferNotesCell,
+            if let tableViewCell = cell as? CreateTransferNotesCell,
                 let notesSection = section as? ScheduleTransferNotesData {
-                tableViewCell.configure(notesSection.notes)
+                tableViewCell.configure(notes: notesSection.notes, isEditable: false, { _ in })
             }
 
         case .button:

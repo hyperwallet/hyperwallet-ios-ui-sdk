@@ -24,7 +24,6 @@
 		077C337522E8CCB0000314CD /* ScheduleTransferSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C336D22E8CCAF000314CD /* ScheduleTransferSummaryCell.swift */; };
 		077C337722E8CCB0000314CD /* ScheduleTransferSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C336F22E8CCAF000314CD /* ScheduleTransferSectionData.swift */; };
 		077C337822E8CCB0000314CD /* ScheduleTransferPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C337022E8CCB0000314CD /* ScheduleTransferPresenter.swift */; };
-		077C337922E8CCB0000314CD /* ScheduleTransferNotesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C337122E8CCB0000314CD /* ScheduleTransferNotesCell.swift */; };
 		077C337A22E8CCB0000314CD /* ScheduleTransferForeignExchangeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C337222E8CCB0000314CD /* ScheduleTransferForeignExchangeCell.swift */; };
 		077C337B22E8CCB0000314CD /* ScheduleTransferButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C337322E8CCB0000314CD /* ScheduleTransferButtonCell.swift */; };
 		077F609F22E28F7F00C91E59 /* ReceiptThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077F609D22E28F3500C91E59 /* ReceiptThemeManager.swift */; };
@@ -570,7 +569,6 @@
 		077C336D22E8CCAF000314CD /* ScheduleTransferSummaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleTransferSummaryCell.swift; sourceTree = "<group>"; };
 		077C336F22E8CCAF000314CD /* ScheduleTransferSectionData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleTransferSectionData.swift; sourceTree = "<group>"; };
 		077C337022E8CCB0000314CD /* ScheduleTransferPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleTransferPresenter.swift; sourceTree = "<group>"; };
-		077C337122E8CCB0000314CD /* ScheduleTransferNotesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleTransferNotesCell.swift; sourceTree = "<group>"; };
 		077C337222E8CCB0000314CD /* ScheduleTransferForeignExchangeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleTransferForeignExchangeCell.swift; sourceTree = "<group>"; };
 		077C337322E8CCB0000314CD /* ScheduleTransferButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleTransferButtonCell.swift; sourceTree = "<group>"; };
 		077F609D22E28F3500C91E59 /* ReceiptThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptThemeManager.swift; sourceTree = "<group>"; };
@@ -1161,17 +1159,15 @@
 				4A9A7C0E22E87E500022E573 /* Extensions */,
 				4ADBEC7122E9F16A00D43A48 /* CreateTransferAddSelectDestinationCell.swift */,
 				4AB37CFB22EAF087005C1078 /* CreateTransferAllFundsCell.swift */,
-				4A9A7C0322E86F580022E573 /* CreateTransferAmountCell.swift */,
 				4A9A7BFF22E86F580022E573 /* CreateTransferButtonCell.swift */,
 				4A9A7C0222E86F580022E573 /* CreateTransferController.swift */,
 				4A9A7C0022E86F580022E573 /* CreateTransferNotesCell.swift */,
 				4A9A7C0122E86F580022E573 /* CreateTransferPresenter.swift */,
 				4A9A7BFE22E86F580022E573 /* CreateTransferSectionData.swift */,
-				4A9A7C0322E86F580022E573 /* CreateTransferUserInputCell.swift */,
+				4A9A7C0322E86F580022E573 /* CreateTransferAmountCell.swift */,
 				077C336C22E8CCAF000314CD /* DividerCell.swift */,
 				077C337322E8CCB0000314CD /* ScheduleTransferButtonCell.swift */,
 				077C337222E8CCB0000314CD /* ScheduleTransferForeignExchangeCell.swift */,
-				077C337122E8CCB0000314CD /* ScheduleTransferNotesCell.swift */,
 				077C336F22E8CCAF000314CD /* ScheduleTransferSectionData.swift */,
 				077C336D22E8CCAF000314CD /* ScheduleTransferSummaryCell.swift */,
 				07C91E9E22E8CF4000167B05 /* ScheduleTransferController.swift */,
@@ -2887,11 +2883,10 @@
 				4A9A7C0422E86F580022E573 /* CreateTransferSectionData.swift in Sources */,
 				4ADBEC7422E9F92800D43A48 /* TransferThemeManager.swift in Sources */,
 				4AB37CFC22EAF087005C1078 /* CreateTransferAllFundsCell.swift in Sources */,
-				077C337922E8CCB0000314CD /* ScheduleTransferNotesCell.swift in Sources */,
 				077C337A22E8CCB0000314CD /* ScheduleTransferForeignExchangeCell.swift in Sources */,
 				4A9A7C0822E86F580022E573 /* CreateTransferController.swift in Sources */,
 				4A9A7C0922E86F580022E573 /* CreateTransferAmountCell.swift in Sources */,
-				4A9A7C0922E86F580022E573 /* CreateTransferUserInputCell.swift in Sources */,
+				4A9A7C0922E86F580022E573 /* CreateTransferAmountCell.swift in Sources */,
 				07C91E9F22E8CF4000167B05 /* ScheduleTransferController.swift in Sources */,
 				4A9A7C0622E86F580022E573 /* CreateTransferNotesCell.swift in Sources */,
 				077C337822E8CCB0000314CD /* ScheduleTransferPresenter.swift in Sources */,

@@ -175,4 +175,9 @@ public extension UIView {
         NSLayoutConstraint.activate([buttonCenterXConstraint, verticalConstraint])
         return emptyListButton
     }
+
+    /// Check if current view is `UITableViewCellSeparatorView`
+    func isSeparatorView() -> Bool {
+        return type(of: self).description() == "_UITableViewCellSeparatorView"
+    }
 }
