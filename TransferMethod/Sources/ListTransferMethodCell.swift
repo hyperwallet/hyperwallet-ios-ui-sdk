@@ -22,8 +22,8 @@ import Common
 import HyperwalletSDK
 import UIKit
 
-final class ListTransferMethodCell: UITableViewCell {
-    static let reuseIdentifier = "listTransferMethodCellIdentifier"
+public final class ListTransferMethodCell: UITableViewCell {
+    public static let reuseIdentifier = "listTransferMethodCellIdentifier"
 
     // MARK: Life cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -35,12 +35,12 @@ final class ListTransferMethodCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
+    override public func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         imageView?.backgroundColor = Theme.Icon.primaryBackgroundColor
     }
 
-    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+    override public func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
         imageView?.backgroundColor = Theme.Icon.primaryBackgroundColor
     }
