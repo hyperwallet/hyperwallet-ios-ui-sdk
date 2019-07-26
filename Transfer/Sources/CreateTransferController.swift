@@ -32,7 +32,7 @@ public final class CreateTransferController: UITableViewController {
     private var presenter: CreateTransferPresenter!
     private let registeredCells: [(type: AnyClass, id: String)] = [
         (CreateTransferAddSelectDestinationCell.self, CreateTransferAddSelectDestinationCell.reuseIdentifier),
-        (CreateTransferAllFundsCell.self, CreateTransferAllFundsCell.reuseIdentifier),
+//        (CreateTransferAllFundsCell.self, CreateTransferAllFundsCell.reuseIdentifier),
         (CreateTransferAmountCell.self, CreateTransferAmountCell.reuseIdentifier),
         (CreateTransferButtonCell.self, CreateTransferButtonCell.reuseIdentifier),
         (CreateTransferNotesCell.self, CreateTransferNotesCell.reuseIdentifier)
@@ -65,7 +65,8 @@ public final class CreateTransferController: UITableViewController {
     private func setUpCreateTransferTableView() {
         tableView = UITableView(frame: view.frame, style: .grouped)
         tableView.accessibilityIdentifier = "createTransferTableView"
-        tableView.estimatedRowHeight = Theme.Cell.smallHeight
+//        tableView.estimatedRowHeight = Theme.Cell.smallHeight
+        tableView.cellLayoutMarginsFollowReadableWidth = false
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)
         }
@@ -133,20 +134,26 @@ extension CreateTransferController {
     }
 
     private func getTransferSectionCellConfiguration(_ cell: UITableViewCell, _ indexPath: IndexPath) {
-        if let tableViewCell = cell as? CreateTransferAllFundsCell {
-            tableViewCell.configure(setOn: presenter.transferAllFundsIsOn
-            ) { [weak presenter] transferAllFundsIsOn in
-                presenter?.transferAllFundsIsOn = transferAllFundsIsOn
-            }
+        guard let tableViewCell = cell as? CreateTransferAmountCell else {
             return
         }
-        if let tableViewCell = cell as? CreateTransferAmountCell {
+        if indexPath.row == 0 {
             tableViewCell.configure(amount: presenter.amount,
                                     currency: presenter.destinationCurrency
             ) { [weak presenter] amount in
                 presenter?.amount = amount
             }
-            return
+        } else {
+            tableViewCell.configure(setOn: presenter.transferAllFundsIsOn) { [weak presenter] transferAllFundsIsOn in
+                presenter?.transferAllFundsIsOn = transferAllFundsIsOn
+                if transferAllFundsIsOn, let availableBalance = presenter?.availableBalance {
+                    presenter?.amount = availableBalance
+                    self.tableView.reloadSections(IndexSet(integersIn: 1...1), with: UITableView.RowAnimation.automatic)
+                } else if !transferAllFundsIsOn {
+                    presenter?.amount = nil
+                    self.tableView.reloadSections(IndexSet(integersIn: 1...1), with: UITableView.RowAnimation.automatic)
+                }
+            }
         }
     }
 
@@ -183,19 +190,6 @@ extension CreateTransferController {
     //    override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     //        //return CGFloat(-1.0) //CGFloat.leastNormalMagnitude  //TODO use theme manager constant
     //    }
-
-    override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.section {
-        case 0:
-            return Theme.Cell.largeHeight
-
-        case 2:
-            return UITableView.automaticDimension
-
-        default:
-            return Theme.Cell.smallHeight
-        }
-    }
 
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sectionData = presenter.sectionData[indexPath.section]

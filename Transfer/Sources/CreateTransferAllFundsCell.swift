@@ -34,7 +34,6 @@ final class CreateTransferAllFundsCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
-        self.heightAnchor.constraint(equalToConstant: Theme.Cell.smallHeight).isActive = true
         self.selectionStyle = .none
         setUpSwitch()
         setUpTitleLabel()

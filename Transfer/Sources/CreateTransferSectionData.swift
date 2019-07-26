@@ -61,7 +61,7 @@ struct CreateTransferSectionTransferData: CreateTransferSectionData {
     var rowCount: Int { return 2 }
     var cellIdentifiers: [String] { return [
         CreateTransferAmountCell.reuseIdentifier,
-        CreateTransferAllFundsCell.reuseIdentifier
+        CreateTransferAmountCell.reuseIdentifier
     ]}
     var footer: String?
 

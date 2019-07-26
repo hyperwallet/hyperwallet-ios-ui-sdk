@@ -55,15 +55,15 @@ final class CreateTransferPresenter {
             debugPrint(transferAllFundsIsOn)
         }
     }
-    var destinationCurrency: String {
-        return selectedTransferMethod.transferMethodCurrency ?? ""
+    var destinationCurrency: String? {
+        return selectedTransferMethod.transferMethodCurrency
     }
-    var amount: String = "" {
+    var amount: String? {
         didSet {
             debugPrint(amount)
         }
     }
-    var notes: String = "" {
+    var notes: String? {
         didSet {
             debugPrint(notes)
         }

@@ -21,6 +21,7 @@ import Common
 #endif
 
 final class CreateTransferAmountCell: UITableViewCell {
+    typealias TransferAllFundsSwitchHandler = (_ value: Bool) -> Void
     static let reuseIdentifier = "createTransferAmountCellReuseIdentifier"
     typealias EnteredAmountHandler = (_ value: String) -> Void
 
@@ -35,15 +36,22 @@ final class CreateTransferAmountCell: UITableViewCell {
         return textField
     }()
 
+    private var transferAllFundsSwitchHandler: TransferAllFundsSwitchHandler?
+
+    private var transferAllFundsSwitch: UISwitch = {
+        let transferAllSwitch = UISwitch(frame: .zero)
+        transferAllSwitch.setOn(false, animated: false)
+        return transferAllSwitch
+    }()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
-        self.heightAnchor.constraint(equalToConstant: Theme.Cell.smallHeight).isActive = true
         self.selectionStyle = .none
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapCell))
         self.addGestureRecognizer(tap)
 
-        setUpTitleLabel()
         setupAmountTextField()
+        setUpSwitch()
     }
 
     @objc
@@ -55,23 +63,37 @@ final class CreateTransferAmountCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
 
-    private func setUpTitleLabel() {
-        textLabel?.text = "transfer_amount".localized()
-    }
-
     private func setupAmountTextField() {
         contentView.addSubview(amountTextField)
-        amountTextField.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        amountTextField.leadingAnchor.constraint(equalTo: textLabel!.trailingAnchor,
-                                                 constant: 10).isActive = true
-        amountTextField.trailingAnchor.constraint(equalTo: detailTextLabel!.leadingAnchor,
-                                                  constant: -10).isActive = true
+        amountTextField.safeAreaCenterYAnchor
+            .constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor).isActive = true
+        amountTextField.safeAreaTrailingAnchor
+            .constraint(equalTo: detailTextLabel!.layoutMarginsGuide.leadingAnchor, constant: -10).isActive = true
     }
 
-    func configure(amount: String?, currency: String, _ handler: @escaping EnteredAmountHandler) {
+    func configure(amount: String?, currency: String?, _ handler: @escaping EnteredAmountHandler) {
+        textLabel?.text = "transfer_amount".localized()
         amountTextField.text = amount
-        detailTextLabel?.text = currency
+        if let currency = currency {
+            detailTextLabel?.text = currency
+        }
         enteredAmountHandler = handler
+    }
+
+    private func setUpSwitch() {
+        textLabel?.text = "transfer_all_funds".localized()
+    }
+
+    @objc
+    private func switchStateDidChange() {
+        transferAllFundsSwitchHandler?(transferAllFundsSwitch.isOn)
+    }
+
+    func configure(setOn: Bool, _ handler: @escaping TransferAllFundsSwitchHandler) {
+        transferAllFundsSwitch.addTarget(self, action: #selector(switchStateDidChange), for: .valueChanged)
+        accessoryView = transferAllFundsSwitch
+        transferAllFundsSwitch.setOn(setOn, animated: false)
+        transferAllFundsSwitchHandler = handler
     }
 }
 

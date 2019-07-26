@@ -37,9 +37,13 @@ final class CreateTransferButtonCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
-        heightAnchor.constraint(equalToConstant: Theme.Cell.smallHeight).isActive = true
         contentView.addSubview(nextButton)
-        contentView.addConstraintsFillEntireView(view: nextButton)
+        nextButton.safeAreaLeadingAnchor
+            .constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor).isActive = true
+        nextButton.safeAreaCenterYAnchor
+            .constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor).isActive = true
+        nextButton.safeAreaTrailingAnchor
+            .constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor).isActive = true
     }
 
     required init?(coder aDecoder: NSCoder) {
