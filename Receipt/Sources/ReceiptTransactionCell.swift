@@ -130,27 +130,26 @@ final class ReceiptTransactionCell: UITableViewCell {
 
 extension ReceiptTransactionCell {
     func configure(_ receipt: HyperwalletReceipt?) {
-        guard let receipt = receipt else {
+        guard let receipt = receipt, let entry = receipt.entry?.rawValue, let createdOn = receipt.createdOn, let amount = receipt.amount else {
             return
         }
-        let entry = receipt.entry.rawValue
-        let createdOn = ISO8601DateFormatter.ignoreTimeZone
-            .date(from: receipt.createdOn)!
+        let formattedCreatedOn = ISO8601DateFormatter.ignoreTimeZone
+            .date(from: createdOn)!
             .format(for: .date)
 
-        let iconFont = HyperwalletIcon.of(receipt.entry.rawValue).rawValue
+        let iconFont = HyperwalletIcon.of(entry).rawValue
 
-        receiptTypeLabel.text = receipt.type.rawValue.lowercased().localized()
+        receiptTypeLabel.text = receipt.type?.rawValue.lowercased().localized()
 
         amountLabel.text = entry == credit
             ? receipt.amount
-            : String(format: "-%@", receipt.amount)
+            : String(format: "-%@", amount)
 
         amountLabel.textColor = entry == credit
             ? Theme.Amount.creditColor
             : Theme.Amount.debitColor
 
-        createdOnLabel.text = createdOn
+        createdOnLabel.text = formattedCreatedOn
         currencyLabel.text = receipt.currency
 
         iconColor = entry == credit ? Theme.Icon.creditColor : Theme.Icon.debitColor

@@ -59,12 +59,12 @@ class ListReceiptPresenterTests: XCTestCase {
         let firstReceipt = presenter.sectionData[0].value[0]
         XCTAssertNotNil(firstReceipt, "firstCellConfiguration should not be nil")
         XCTAssertEqual(firstReceipt.amount, "5.00", "The amount should be 5.00")
-        XCTAssertEqual(firstReceipt.type.rawValue.lowercased().localized(), "Payment", "The type should be Payment")
+        XCTAssertEqual(firstReceipt.type?.rawValue.lowercased().localized(), "Payment", "The type should be Payment")
         XCTAssertEqual(firstReceipt.createdOn,
                        "2019-05-24T17:35:20",
                        "The created on should be 2019-05-24T17:35:20")
         XCTAssertEqual(firstReceipt.currency, "USD", "The currency should be USD")
-        XCTAssertEqual(firstReceipt.entry.rawValue, "CREDIT", "The entry should be CREDIT")
+        XCTAssertEqual(firstReceipt.entry?.rawValue, "CREDIT", "The entry should be CREDIT")
 
         // Load more receipts
         // Given

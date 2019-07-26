@@ -19,16 +19,17 @@
 import UIKit
 
 /// Represents the country and currency data to be displyed on the CountryCurrencyCell
+
 public protocol GenericCellConfiguration {
     /// The title
-    var title: String { get }
+    var title: String? { get }
     /// The value
-    var value: String { get }
+    var value: String? { get }
 }
 extension GenericCellConfiguration {
     /// The cell identifier
     public var identifier: String {
-        return "cell\(title)"
+        return "cell\(title ?? "")"
     }
 }
 
