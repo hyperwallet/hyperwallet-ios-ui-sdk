@@ -54,8 +54,10 @@ final class CreateTransferNotesCell: UITableViewCell {
             .constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor).isActive = true
     }
 
-    func configure(notes: String, _ handler: @escaping EnteredNoteHandler) {
-        notesTextField.text = notes
+    func configure(notes: String?, _ handler: @escaping EnteredNoteHandler) {
+        if let notes = notes {
+            notesTextField.text = notes
+        }
         enteredNoteHandler = handler
     }
 }
