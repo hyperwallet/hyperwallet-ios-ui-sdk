@@ -31,8 +31,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
         label.textColor = Theme.Label.textColor
         label.font = Theme.Label.bodyFont
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.widthAnchor.constraint(equalToConstant: 144.0).isActive = true
-        label.setContentHuggingPriority(UILayoutPriority.required, for: NSLayoutConstraint.Axis.horizontal)
+        label.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: NSLayoutConstraint.Axis.horizontal)
         return label
     }()
 
@@ -40,8 +39,8 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
         super.init(frame: CGRect())
         translatesAutoresizingMaskIntoConstraints = false
         axis = .horizontal
-        alignment = .center
         spacing = 5
+        distribution = .fillEqually
         isLayoutMarginsRelativeArrangement = true
         layoutMargins = UIEdgeInsets(top: 11.0, left: 0, bottom: 11.0, right: 16.0)
         self.field = field
