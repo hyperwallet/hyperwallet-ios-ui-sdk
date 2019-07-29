@@ -30,7 +30,6 @@ final class TransferAllFundsCell: UITableViewCell {
         let transferAllSwitch = UISwitch(frame: .zero)
         transferAllSwitch.setOn(false, animated: false)
         transferAllSwitch.accessibilityIdentifier = "transferAllFundsSwitch"
-        transferAllSwitch.addTarget(self, action: #selector(switchStateDidChange), for: .valueChanged)
         return transferAllSwitch
     }()
 
@@ -38,6 +37,7 @@ final class TransferAllFundsCell: UITableViewCell {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
         accessoryView = transferAllFundsSwitch
+        transferAllFundsSwitch.addTarget(self, action: #selector(switchStateDidChange), for: .valueChanged)
         setUpTitleLabel()
     }
 

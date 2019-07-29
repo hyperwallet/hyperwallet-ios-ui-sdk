@@ -165,8 +165,7 @@ extension CreateTransferController {
     }
 
     private func getButtonSectionCellConfiguration(_ cell: UITableViewCell, _ indexPath: IndexPath) {
-        let section = presenter.sectionData[indexPath.section]
-        if let tableViewCell = cell as? TransferButtonCell, section is CreateTransferSectionButtonData {
+        if let tableViewCell = cell as? TransferButtonCell {
             tableViewCell.configure(title: "transfer_next_button".localized())
             guard let gestures = tableViewCell.gestureRecognizers, gestures.contains(didTapNextRecognizer) else {
                 tableViewCell.addGestureRecognizer(didTapNextRecognizer)
@@ -177,6 +176,7 @@ extension CreateTransferController {
 
     @objc
     private func didTapNext() {
+        print("cell tapped")
         presenter.createTransfer()
     }
 }
