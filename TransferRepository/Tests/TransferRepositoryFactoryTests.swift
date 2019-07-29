@@ -20,7 +20,7 @@
 import XCTest
 
 class TransferRepositoryFactoryTests: XCTestCase {
-    func testTransferRepositoriesCreated() {
+    func testTransferRepositoryCreated() {
         let factory = TransferRepositoryFactory.shared
 
         XCTAssertNotNil(factory, "TransferRepositoryFactory instance should not be nil")

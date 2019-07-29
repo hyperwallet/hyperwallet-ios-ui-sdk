@@ -27,7 +27,7 @@ final class TransferButtonCell: UITableViewCell {
         let button = UIButton()
         button.setTitleColor(Theme.Button.color, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.accessibilityLabel = "create_transfer_next_button".localized()
+        button.accessibilityLabel = "transfer_next_button".localized()
         button.accessibilityIdentifier = "addTransferNextButton"
         return button
     }()
@@ -48,7 +48,7 @@ final class TransferButtonCell: UITableViewCell {
     }
 
     func configure(title: String) {
-        nextButton.setTitle("create_transfer_next_button".localized(), for: .normal)
+        nextButton.setTitle(title, for: .normal)
     }
 }
 

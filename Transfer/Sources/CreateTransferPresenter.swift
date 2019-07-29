@@ -93,11 +93,11 @@ final class CreateTransferPresenter {
         sectionData.append(createTransferDestinationSection)
 
         if let currency = selectedTransferMethod?.transferMethodCurrency {
-            let createTransferUserInputSection = CreateTransferSectionTransferData(
+            let createTransferSectionTransferData = CreateTransferSectionTransferData(
                 destinationCurrency: currency,
                 availableBalance: availableBalance
             )
-            sectionData.append(createTransferUserInputSection)
+            sectionData.append(createTransferSectionTransferData)
         }
 
         let createTransferNotesSection = CreateTransferSectionNotesData()
@@ -185,6 +185,9 @@ final class CreateTransferPresenter {
 
     // MARK: - Create Transfer Button Tapped
     func createTransfer() {
+        guard let amount = amount else {
+            return
+        }
         let transfer = HyperwalletTransfer.Builder(clientTransferId: clientTransferId,
                                                    sourceToken: sourceToken ?? "",
                                                    destinationToken: selectedTransferMethod.token ?? "")
