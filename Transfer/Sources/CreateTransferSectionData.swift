@@ -18,7 +18,6 @@
 
 #if !COCOAPODS
 import Common
-import TransferMethod
 #endif
 
 import HyperwalletSDK
@@ -38,17 +37,17 @@ extension CreateTransferSectionData {
     var rowCount: Int { return 1 }
     var title: String? { return createTransferSectionHeader !=
         CreateTransferSectionHeader.button ?
-            "add_transfer_section_header_\(createTransferSectionHeader.rawValue)".localized() : nil }
+            "transfer_section_header_\(createTransferSectionHeader.rawValue)".localized() : nil }
 }
 
 struct CreateTransferSectionAddDestinationAccountData: CreateTransferSectionData {
     var createTransferSectionHeader: CreateTransferSectionHeader { return .destination }
-    var cellIdentifiers: [String] { return ["addTransferMethodSectionDataLabel"] }
+    var cellIdentifiers: [String] { return ["createTransferMethodSectionDataLabel"] }
 }
 
 struct CreateTransferSectionDestinationData: CreateTransferSectionData {
     var createTransferSectionHeader: CreateTransferSectionHeader { return .destination }
-    var cellIdentifiers: [String] { return [CreateTransferAddSelectDestinationCell.reuseIdentifier] }
+    var cellIdentifiers: [String] { return [TransferDestinationCell.reuseIdentifier] }
     var isTransferMethodAvailable: Bool = true
 
     init(isTransferMethodAvailable: Bool) {
@@ -60,22 +59,26 @@ struct CreateTransferSectionTransferData: CreateTransferSectionData {
     var createTransferSectionHeader: CreateTransferSectionHeader { return .transfer }
     var rowCount: Int { return 2 }
     var cellIdentifiers: [String] { return [
-        CreateTransferAmountCell.reuseIdentifier,
-        CreateTransferAmountCell.reuseIdentifier
+        TransferAmountCell.reuseIdentifier,
+        TransferAllFundsCell.reuseIdentifier
     ]}
     var footer: String?
 
-    init(destinationCurrency: String, availableBalance: String) {
+    init(destinationCurrency: String, availableBalance: String?) {
+        guard let availableBalance = availableBalance else {
+            footer = nil
+            return
+        }
         footer = String(format: "available_balance_footer".localized(), availableBalance)
     }
 }
 
 struct CreateTransferSectionButtonData: CreateTransferSectionData {
     var createTransferSectionHeader: CreateTransferSectionHeader { return .button }
-    var cellIdentifiers: [String] { return [CreateTransferButtonCell.reuseIdentifier] }
+    var cellIdentifiers: [String] { return [TransferButtonCell.reuseIdentifier] }
 }
 
 struct CreateTransferSectionNotesData: CreateTransferSectionData {
     var createTransferSectionHeader: CreateTransferSectionHeader { return .notes }
-    var cellIdentifiers: [String] { return [CreateTransferNotesCell.reuseIdentifier] }
+    var cellIdentifiers: [String] { return [TransferNotesCell.reuseIdentifier] }
 }

@@ -23,44 +23,44 @@ import Common
 /// The ThemeManager extension
 public extension ThemeManager {
     /// Applies default visual styles to the Hyperwallet user interface components.
-    static func applyCreateTransferTheme() {
-        applyToCreateTransferAddSelectDestinationCell()
-        applyToCreateTransferButtonCell()
-        applyToCreateTransferNotesCell()
-        applyToCreateTransferAllFundsCell()
-        applyToCreateTransferAmountCell()
+    static func applyTransferTheme() {
+        applyToTransferDestinationCell()
+        applyToTransferButtonCell()
+        applyToTransferNotesCell()
+        applyToTransferAllFundsCell()
+        applyToTransferAmountCell()
         applyToScheduleTransferSummaryCell()
         applyToScheduleForeignExchangeCell()
     }
 
-    private static func applyToCreateTransferAddSelectDestinationCell() {
-        let proxy = CreateTransferAddSelectDestinationCell.appearance()
+    private static func applyToTransferDestinationCell() {
+        let proxy = TransferDestinationCell.appearance()
         proxy.titleLabelFont = Theme.Label.bodyFontMedium
         proxy.titleLabelColor = Theme.Label.color
         proxy.subTitleLabelFont = Theme.Label.captionOne
         proxy.subTitleLabelColor = Theme.Label.subTitleColor
     }
 
-    private static func applyToCreateTransferButtonCell() {
-        let proxy = CreateTransferButtonCell.appearance()
+    private static func applyToTransferButtonCell() {
+        let proxy = TransferButtonCell.appearance()
         proxy.titleLabelColor = Theme.Label.color
         proxy.titleLabelFont = Theme.Label.bodyFont
     }
 
-    private static func applyToCreateTransferNotesCell() {
-        let proxy = CreateTransferNotesCell.appearance()
+    private static func applyToTransferNotesCell() {
+        let proxy = TransferNotesCell.appearance()
         proxy.notesTextFieldColor = Theme.Label.color
         proxy.notesTextFieldFont = Theme.Label.bodyFont
     }
 
-    private static func applyToCreateTransferAllFundsCell() {
-        let proxy = CreateTransferAllFundsCell.appearance()
+    private static func applyToTransferAllFundsCell() {
+        let proxy = TransferAllFundsCell.appearance()
         proxy.titleLabelFont = Theme.Label.bodyFontMedium
         proxy.titleLabelColor = Theme.Label.color
     }
 
-    private static func applyToCreateTransferAmountCell() {
-        let proxy = CreateTransferAmountCell.appearance()
+    private static func applyToTransferAmountCell() {
+        let proxy = TransferAmountCell.appearance()
         proxy.titleLabelFont = Theme.Label.bodyFontMedium
         proxy.titleLabelColor = Theme.Label.color
         proxy.currencyLabelFont = Theme.Label.bodyFontMedium
