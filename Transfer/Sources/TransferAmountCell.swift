@@ -20,9 +20,8 @@
 import Common
 #endif
 
-final class CreateTransferAmountCell: UITableViewCell {
-    typealias TransferAllFundsSwitchHandler = (_ value: Bool) -> Void
-    static let reuseIdentifier = "createTransferAmountCellReuseIdentifier"
+final class TransferAmountCell: UITableViewCell {
+    static let reuseIdentifier = "transferAmountCellIdentifier"
     typealias EnteredAmountHandler = (_ value: String) -> Void
 
     var enteredAmountHandler: EnteredAmountHandler?
@@ -36,14 +35,6 @@ final class CreateTransferAmountCell: UITableViewCell {
         return textField
     }()
 
-    private var transferAllFundsSwitchHandler: TransferAllFundsSwitchHandler?
-
-    private var transferAllFundsSwitch: UISwitch = {
-        let transferAllSwitch = UISwitch(frame: .zero)
-        transferAllSwitch.setOn(false, animated: false)
-        return transferAllSwitch
-    }()
-
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
@@ -51,7 +42,6 @@ final class CreateTransferAmountCell: UITableViewCell {
         self.addGestureRecognizer(tap)
 
         setupAmountTextField()
-        setUpSwitch()
     }
 
     @objc
@@ -68,42 +58,29 @@ final class CreateTransferAmountCell: UITableViewCell {
         amountTextField.safeAreaCenterYAnchor
             .constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor).isActive = true
         amountTextField.safeAreaTrailingAnchor
-            .constraint(equalTo: detailTextLabel!.layoutMarginsGuide.leadingAnchor, constant: -10).isActive = true
+            .constraint(equalTo: detailTextLabel!.layoutMarginsGuide.leadingAnchor, constant: -15).isActive = true
+        let amountTextFieldLeadingConstraint = amountTextField.safeAreaLeadingAnchor
+            .constraint(equalTo: textLabel!.layoutMarginsGuide.trailingAnchor, constant: 15)
+        amountTextFieldLeadingConstraint.priority = UILayoutPriority(999)
+        amountTextFieldLeadingConstraint.isActive = true
     }
 
-    func configure(amount: String?, currency: String?, _ handler: @escaping EnteredAmountHandler) {
+    func configure(amount: String?, currency: String?, isEnabled: Bool, _ handler: @escaping EnteredAmountHandler) {
         textLabel?.text = "transfer_amount".localized()
         amountTextField.text = amount
-        if let currency = currency {
-            detailTextLabel?.text = currency
-        }
+        amountTextField.isEnabled = isEnabled
+        detailTextLabel?.text = currency
         enteredAmountHandler = handler
-    }
-
-    private func setUpSwitch() {
-        textLabel?.text = "transfer_all_funds".localized()
-    }
-
-    @objc
-    private func switchStateDidChange() {
-        transferAllFundsSwitchHandler?(transferAllFundsSwitch.isOn)
-    }
-
-    func configure(setOn: Bool, _ handler: @escaping TransferAllFundsSwitchHandler) {
-        transferAllFundsSwitch.addTarget(self, action: #selector(switchStateDidChange), for: .valueChanged)
-        accessoryView = transferAllFundsSwitch
-        transferAllFundsSwitch.setOn(setOn, animated: false)
-        transferAllFundsSwitchHandler = handler
     }
 }
 
-extension CreateTransferAmountCell: UITextFieldDelegate {
+extension TransferAmountCell: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         enteredAmountHandler?(amountTextField.text ?? "")
     }
 }
 
-extension CreateTransferAmountCell {
+extension TransferAmountCell {
     // MARK: Theme manager's proxy properties
     @objc dynamic var titleLabelFont: UIFont! {
         get { return textLabel?.font }

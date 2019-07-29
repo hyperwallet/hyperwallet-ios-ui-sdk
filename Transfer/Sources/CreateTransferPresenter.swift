@@ -19,6 +19,7 @@
 #if !COCOAPODS
 import Common
 import TransferMethodRepository
+import TransferRepository
 import UserRepository
 #endif
 import HyperwalletSDK
@@ -29,7 +30,6 @@ protocol CreateTransferView: class {
 
     func hideLoading()
     func notifyTransferCreated(_ transfer: HyperwalletTransfer)
-    //func showBusinessError(_ error: HyperwalletErrorType, _ handler: @escaping () -> Void)
     func showCreateTransfer()
     func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?)
     func showGenericTableView(items: [HyperwalletTransferMethod],
@@ -38,62 +38,50 @@ protocol CreateTransferView: class {
                               markCellHandler: @escaping MarkCellHandler)
     func showLoading()
     func showScheduleTransfer(_ transfer: HyperwalletTransfer)
+    func updateTransferSection()
 }
 
 final class CreateTransferPresenter {
     private unowned let view: CreateTransferView
 
-    private lazy var userRepository: UserRepository = { UserRepositoryFactory.shared.userRepository() }()
+    private lazy var userRepository: UserRepository = {
+        UserRepositoryFactory.shared.userRepository()
+    }()
+
+    private lazy var transferRepository: TransferRepository = {
+        TransferRepositoryFactory.shared.transferRepository()
+    }()
+
+    private lazy var transferMethodRepository: TransferMethodRepository = {
+        TransferMethodRepositoryFactory.shared.transferMethodRepository()
+    }()
 
     private(set) var clientTransferId: String
     private(set) var sectionData = [CreateTransferSectionData]()
-    private var sourceToken: String?
     private(set) var availableBalance: String?
+
+    private var sourceToken: String?
+
     var selectedTransferMethod: HyperwalletTransferMethod!
+    var amount: String?
+    var notes: String?
     var transferAllFundsIsOn: Bool = false {
         didSet {
-            debugPrint(transferAllFundsIsOn)
+            guard let availableBalance = availableBalance else {
+                return
+            }
+            amount = transferAllFundsIsOn ? availableBalance : nil
+            view.updateTransferSection()
         }
     }
     var destinationCurrency: String? {
         return selectedTransferMethod.transferMethodCurrency
-    }
-    var amount: String? {
-        didSet {
-            debugPrint(amount)
-        }
-    }
-    var notes: String? {
-        didSet {
-            debugPrint(notes)
-        }
     }
 
     init(_ clientTransferId: String, _ sourceToken: String?, view: CreateTransferView) {
         self.clientTransferId = clientTransferId
         self.sourceToken = sourceToken
         self.view = view
-    }
-
-    func createTransfer(amount: String?, notes: String?) {
-        let transfer = populateTransferObject(amount, notes)
-        Hyperwallet.shared.createTransfer(transfer: transfer, completion: { [weak self] (result, error) in
-            guard let strongSelf = self else {
-                return
-            }
-            if let error = error {
-                strongSelf.view.showError(error, {
-                    self?.createTransfer(amount: amount, notes: notes)
-                })
-                return
-            }
-            DispatchQueue.main.async {
-                strongSelf.view.hideLoading()
-                if result != nil {
-                    // TODO strongSelf.view.showScheduleTransfer()
-                }
-            }
-        })
     }
 
     func initializeSections() {
@@ -107,7 +95,7 @@ final class CreateTransferPresenter {
         if let currency = selectedTransferMethod?.transferMethodCurrency {
             let createTransferUserInputSection = CreateTransferSectionTransferData(
                 destinationCurrency: currency,
-                availableBalance: availableBalance ?? "0.00"
+                availableBalance: availableBalance
             )
             sectionData.append(createTransferUserInputSection)
         }
@@ -143,12 +131,31 @@ final class CreateTransferPresenter {
         }
     }
 
-    func showSelectDestinationAccountView() {
-        // TODO Display all the destination accounts
-        //        view.showGenericTableView(items: getSelectDestinationCellConfiguration(),
-        //                                  title: "select_destination".localized(),
-        //                                  selectItemHandler: selectDestinationAccountHandler(),
-        //                                  markCellHandler: destinationAccountMarkCellHandler())
+    private func loadTransferMethods() {
+        transferMethodRepository.listTransferMethods { [weak self] result in
+            guard let strongSelf = self else {
+                return
+            }
+            switch result {
+            case .failure(let error):
+                strongSelf.view.hideLoading()
+                strongSelf.view.showError(error, { () -> Void in
+                    strongSelf.loadCreateTransfer()
+                })
+
+            case .success(let result):
+                guard let firstActivatedTransferMetod = result?.data.first
+                    else {
+                        strongSelf.selectedTransferMethod = nil
+                        strongSelf.view.hideLoading()
+                        return
+                }
+                if strongSelf.selectedTransferMethod == nil {
+                    strongSelf.selectedTransferMethod = firstActivatedTransferMetod
+                }
+                strongSelf.createInitialTransfer()
+            }
+        }
     }
 
     private func createInitialTransfer() {
@@ -157,87 +164,61 @@ final class CreateTransferPresenter {
                                                    destinationToken: selectedTransferMethod.token ?? "")
             .destinationCurrency(selectedTransferMethod.transferMethodCurrency)
             .build()
-        Hyperwallet.shared.createTransfer(transfer: transfer,
-                                          completion: createInitialTransferHandler())
-    }
 
-    private func createInitialTransferHandler() -> (HyperwalletTransfer?, HyperwalletErrorType?) -> Void {
-        return { [weak self] (result, error) in
+        transferRepository.createTransfer(transfer) { [weak self] result in
             guard let strongSelf = self else {
                 return
             }
-            DispatchQueue.main.async {
-                strongSelf.view.hideLoading()
-                if let error = error {
-                    strongSelf.errorHandler(for: error)
-                } else {
-                    if let transfer = result {
-                        strongSelf.availableBalance = transfer.destinationAmount
-                        strongSelf.view.showCreateTransfer()
-                    }
-                }
+            strongSelf.view.hideLoading()
+            switch result {
+            case .failure(let error):
+                strongSelf.view.showError(error, { () -> Void in
+                    strongSelf.loadCreateTransfer()
+                })
+
+            case .success(let transfer):
+                strongSelf.availableBalance = transfer?.destinationAmount
+                strongSelf.view.showCreateTransfer()
             }
         }
     }
 
-    private func errorHandler(for error: HyperwalletErrorType) {
-        switch error.group {
-        case .business:
-            guard let errors = error.getHyperwalletErrors()?.errorList, errors.isNotEmpty else {
-                return
-            }
-            // TODO add error handling logic, refer to AddTransferMethodPresenter
-
-        default:
-            let handler = { [weak self] () -> Void in
-                self?.loadCreateTransfer()
-            }
-            view.showError(error, handler)
-        }
-    }
-
-    /// Get the list of all Activated transfer methods from core SDK
-    private func loadTransferMethods() {
-        //        TODO Use TransferMethodRepository to call listTransferMethods
-        let queryParam = HyperwalletTransferMethodQueryParam()
-        queryParam.limit = 100
-        queryParam.status = .activated
-        //        view.showLoading()
-        Hyperwallet.shared.listTransferMethods(queryParam: queryParam, completion: loadTransferMethodsHandler())
-    }
-
-    private func loadTransferMethodsHandler()
-        -> (HyperwalletPageList<HyperwalletTransferMethod>?, HyperwalletErrorType?) -> Void {
-            return { [weak self] (result, error) in
-                guard let strongSelf = self else {
-                    return
-                }
-                DispatchQueue.main.async {
-                    strongSelf.view.hideLoading()
-                    if let error = error {
-                        strongSelf.view.hideLoading()
-                        strongSelf.view.showError(error, { strongSelf.loadTransferMethods() })
-                        return
-                    }
-                    if let data = result?.data, data.isNotEmpty {
-                        // TODO we must check if selected method is in new loaded list of methods
-                        if strongSelf.selectedTransferMethod == nil {
-                            strongSelf.selectedTransferMethod = data.first!
-                        }
-                        strongSelf.createInitialTransfer()
-                    }
-                }
-            }
-    }
-
-    private func populateTransferObject(_ amount: String?, _ notes: String?) -> HyperwalletTransfer {
-        return HyperwalletTransfer.Builder(clientTransferId: clientTransferId,
-                                           sourceToken: sourceToken ?? "",
-                                           destinationToken: selectedTransferMethod.token ?? "")
+    // MARK: - Create Transfer Button Tapped
+    func createTransfer() {
+        let transfer = HyperwalletTransfer.Builder(clientTransferId: clientTransferId,
+                                                   sourceToken: sourceToken ?? "",
+                                                   destinationToken: selectedTransferMethod.token ?? "")
             .destinationAmount(amount)
             .notes(notes)
             .destinationCurrency(selectedTransferMethod.transferMethodCurrency)
             .build()
+
+        transferRepository.createTransfer(transfer) { [weak self] result in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.view.hideLoading()
+            switch result {
+            case .failure(let error):
+                strongSelf.view.showError(error, { () -> Void in
+                    strongSelf.createTransfer()
+                })
+
+            case .success(let transfer):
+                if transfer != nil {
+                    // TODO strongSelf.view.showScheduleTransfer()
+                }
+            }
+        }
+    }
+
+    // MARK: - Destionation view
+    func showSelectDestinationAccountView() {
+        // TODO Display all the destination accounts
+        //        view.showGenericTableView(items: getSelectDestinationCellConfiguration(),
+        //                                  title: "select_destination".localized(),
+        //                                  selectItemHandler: selectDestinationAccountHandler(),
+        //                                  markCellHandler: destinationAccountMarkCellHandler())
     }
 
     private func destinationAccountMarkCellHandler() -> CreateTransferView.MarkCellHandler {

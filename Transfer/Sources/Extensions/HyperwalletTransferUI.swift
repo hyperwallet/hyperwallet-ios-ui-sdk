@@ -24,10 +24,16 @@ import Common
 public extension HyperwalletUI {
     /// Create transfer funds
     ///
+    /// - Returns: An instance of `CreateTransferController`
+    func createTransferFromUserController(clientTransferId: String) -> CreateTransferController {
+        return CreateTransferController(clientTransferId: clientTransferId, sourceToken: nil)
+    }
+
+    /// Create transfer funds
     ///
     /// - Returns: An instance of `CreateTransferController`
-    func createTransferController(sourceToken: String?) -> CreateTransferController {
-        let clientTransferId = UUID().uuidString.lowercased()
-        return CreateTransferController(clientTransferId: clientTransferId, sourceToken: sourceToken)
+    func createTransferFromPrepaidCardController(clientTransferId: String, prepaidCardToken: String)
+        -> CreateTransferController {
+            return CreateTransferController(clientTransferId: clientTransferId, sourceToken: prepaidCardToken)
     }
 }

@@ -193,16 +193,16 @@
 
 // Transfer Funds
 "transfer_funds" = "Transfer Funds";
-"add_transfer_section_header_destination" = "DESTINATION";
-"add_transfer_section_header_transfer" = "TRANSFER";
-"add_transfer_section_header_notes" = "NOTES";
+"transfer_section_header_destination" = "DESTINATION";
+"transfer_section_header_transfer" = "TRANSFER";
+"transfer_section_header_notes" = "NOTES";
 "transfer_amount" = "Amount";
 "transfer_all_funds" = "Transfer all funds";
 "available_balance_footer" = "Available for transfer: %1$@";
 "transfer_description" = "Description";
-"add_transfer_next_button" = "Next";
-"add_transfer_add_account_title" = "Add Account";
-"add_transfer_add_account_subtitle" = "An account hasn't been set up yet, please add an account first.";
+"create_transfer_next_button" = "Next";
+"transfer_add_account_title" = "Add Account";
+"transfer_add_account_subtitle" = "An account hasn't been set up yet, please add an account first.";
 
 // List of countries
 // Source: https://datahub.io/core/country-list#data

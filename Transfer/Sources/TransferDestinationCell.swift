@@ -22,8 +22,8 @@ import Common
 import HyperwalletSDK
 import UIKit
 
-final class CreateTransferAddSelectDestinationCell: UITableViewCell {
-    public static let reuseIdentifier = "createTransferAddSelectDestinationCell"
+final class TransferDestinationCell: UITableViewCell {
+    public static let reuseIdentifier = "transferDestinationCellIdentifier"
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
@@ -66,7 +66,7 @@ final class CreateTransferAddSelectDestinationCell: UITableViewCell {
     }
 }
 
-extension CreateTransferAddSelectDestinationCell {
+extension TransferDestinationCell {
     func configure(transferMethod: HyperwalletTransferMethod) {
         textLabel?.text = transferMethod.type?.lowercased().localized()
         textLabel?.accessibilityIdentifier = "createTransferAddSelectDestinationCellTextLabel"

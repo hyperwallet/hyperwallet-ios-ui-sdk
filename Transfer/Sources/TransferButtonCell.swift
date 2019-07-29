@@ -20,17 +20,16 @@
 import Common
 #endif
 
-final class CreateTransferButtonCell: UITableViewCell {
-    static let reuseIdentifier = "addTransferNextButtonCellReuseIdentifier"
+final class TransferButtonCell: UITableViewCell {
+    static let reuseIdentifier = "transferButtonCellIdentifier"
 
     private(set) lazy var nextButton: UIButton = {
         let button = UIButton()
-        button.setTitle("add_transfer_next_button".localized(), for: .normal)
+
         // TODO: remove next line after ThemeManager has been implemented
         button.setTitleColor(Theme.Button.color, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        //button.addTarget(self, action: #selector(onTapped), for: .touchUpInside)
-        button.accessibilityLabel = "add_transfer_next_button".localized()
+        button.accessibilityLabel = "create_transfer_next_button".localized()
         button.accessibilityIdentifier = "addTransferNextButton"
         return button
     }()
@@ -50,11 +49,12 @@ final class CreateTransferButtonCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
 
-    func configure() {
+    func configure(title: String) {
+        nextButton.setTitle("create_transfer_next_button".localized(), for: .normal)
     }
 }
 
-extension CreateTransferButtonCell {
+extension TransferButtonCell {
     // MARK: Theme manager's proxy properties
     @objc dynamic var titleLabelFont: UIFont! {
         get { return nextButton.titleLabel?.font }

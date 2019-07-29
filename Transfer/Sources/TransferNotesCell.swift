@@ -20,8 +20,8 @@
 import Common
 #endif
 
-final class CreateTransferNotesCell: UITableViewCell {
-    static let reuseIdentifier = "createTransferNotesCellReuseIdentifier"
+final class TransferNotesCell: UITableViewCell {
+    static let reuseIdentifier = "transferNotesCellIdentifier"
     typealias EnteredNoteHandler = (_ value: String) -> Void
 
     private var enteredNoteHandler: EnteredNoteHandler?
@@ -62,13 +62,13 @@ final class CreateTransferNotesCell: UITableViewCell {
     }
 }
 
-extension CreateTransferNotesCell: UITextFieldDelegate {
+extension TransferNotesCell: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         enteredNoteHandler?(notesTextField.text ?? "")
     }
 }
 
-extension CreateTransferNotesCell {
+extension TransferNotesCell {
     // MARK: Theme manager's proxy properties
     @objc dynamic var notesTextFieldFont: UIFont! {
         get { return notesTextField.font }

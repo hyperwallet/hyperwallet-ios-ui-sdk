@@ -20,9 +20,9 @@
 import Common
 #endif
 
-final class CreateTransferAllFundsCell: UITableViewCell {
+final class TransferAllFundsCell: UITableViewCell {
     typealias TransferAllFundsSwitchHandler = (_ value: Bool) -> Void
-    static let reuseIdentifier = "\(type(of: self))ReuseIdentifier"
+    static let reuseIdentifier = "transferAllFundsCellIdentifier"
 
     private var transferAllFundsSwitchHandler: TransferAllFundsSwitchHandler?
 
@@ -63,7 +63,7 @@ final class CreateTransferAllFundsCell: UITableViewCell {
     }
 }
 
-extension CreateTransferAllFundsCell {
+extension TransferAllFundsCell {
     // MARK: Theme manager's proxy properties
     @objc dynamic var titleLabelFont: UIFont! {
         get { return textLabel?.font }
