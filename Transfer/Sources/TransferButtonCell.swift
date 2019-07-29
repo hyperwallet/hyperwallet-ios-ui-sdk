@@ -25,8 +25,6 @@ final class TransferButtonCell: UITableViewCell {
 
     private(set) lazy var nextButton: UIButton = {
         let button = UIButton()
-
-        // TODO: remove next line after ThemeManager has been implemented
         button.setTitleColor(Theme.Button.color, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.accessibilityLabel = "create_transfer_next_button".localized()

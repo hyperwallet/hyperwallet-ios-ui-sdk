@@ -233,7 +233,7 @@ extension CreateTransferController: CreateTransferView {
         //
         //        genericTableView.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
         //                                                                             target: self,
-        //                                                                             action: #selector(didTapAddButton))
+        //                                                                     action: #selector(didTapAddButton))
         //
         //        genericTableView.title = title
         //        genericTableView.items = items

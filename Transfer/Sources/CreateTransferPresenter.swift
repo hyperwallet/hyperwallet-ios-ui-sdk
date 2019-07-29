@@ -144,7 +144,7 @@ final class CreateTransferPresenter {
                 })
 
             case .success(let result):
-                guard let firstActivatedTransferMetod = result?.data.first
+                guard let firstActivatedTransferMetod = result?.data?.first
                     else {
                         strongSelf.selectedTransferMethod = nil
                         strongSelf.view.hideLoading()
