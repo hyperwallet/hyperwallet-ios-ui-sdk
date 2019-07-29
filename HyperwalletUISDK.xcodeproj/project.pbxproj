@@ -306,6 +306,13 @@
 			remoteGlobalIDString = 073BB98122E63DB50053C24E;
 			remoteInfo = TransferRepository;
 		};
+		07559EB022EFA05B0055AEA9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 643912D322DF40CB00036609;
+			remoteInfo = UserRepository;
+		};
 		4A9A7BE922E859E60022E573 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
@@ -2174,6 +2181,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				07559EB122EFA05B0055AEA9 /* PBXTargetDependency */,
 			);
 			name = Common;
 			productName = Common;
@@ -3169,6 +3177,11 @@
 			isa = PBXTargetDependency;
 			target = 073BB98122E63DB50053C24E /* TransferRepository */;
 			targetProxy = 073BB98C22E63DB50053C24E /* PBXContainerItemProxy */;
+		};
+		07559EB122EFA05B0055AEA9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 643912D322DF40CB00036609 /* UserRepository */;
+			targetProxy = 07559EB022EFA05B0055AEA9 /* PBXContainerItemProxy */;
 		};
 		4A9A7BEA22E859E60022E573 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
