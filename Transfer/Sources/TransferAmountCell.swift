@@ -32,6 +32,7 @@ final class TransferAmountCell: UITableViewCell {
         textField.keyboardType = UIKeyboardType.numberPad
         textField.delegate = self
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.accessibilityIdentifier = "transferAmountTextField"
         return textField
     }()
 
@@ -54,6 +55,8 @@ final class TransferAmountCell: UITableViewCell {
     }
 
     private func setupAmountTextField() {
+        textLabel?.accessibilityIdentifier = "transferAmountTitleLabel"
+        detailTextLabel?.accessibilityIdentifier = "transferAmountCurrencyLabel"
         contentView.addSubview(amountTextField)
         amountTextField.safeAreaCenterYAnchor
             .constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor).isActive = true

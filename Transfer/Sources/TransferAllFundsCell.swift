@@ -29,13 +29,15 @@ final class TransferAllFundsCell: UITableViewCell {
     private var transferAllFundsSwitch: UISwitch = {
         let transferAllSwitch = UISwitch(frame: .zero)
         transferAllSwitch.setOn(false, animated: false)
+        transferAllSwitch.accessibilityIdentifier = "transferAllFundsSwitch"
+        transferAllSwitch.addTarget(self, action: #selector(switchStateDidChange), for: .valueChanged)
         return transferAllSwitch
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
-        self.selectionStyle = .none
-        setUpSwitch()
+        selectionStyle = .none
+        accessoryView = transferAllFundsSwitch
         setUpTitleLabel()
     }
 
@@ -43,13 +45,10 @@ final class TransferAllFundsCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
 
-    private func setUpSwitch() {
-        textLabel?.text = "transfer_all_funds".localized()
-    }
-
     private func setUpTitleLabel() {
-        transferAllFundsSwitch.addTarget(self, action: #selector(switchStateDidChange), for: .valueChanged)
-        accessoryView = transferAllFundsSwitch
+        textLabel?.text = "transfer_all_funds".localized()
+        textLabel?.accessibilityLabel = "transfer_all_funds".localized()
+        textLabel?.accessibilityIdentifier = "transferAllFundsTitleLabel"
     }
 
     @objc
