@@ -19,11 +19,11 @@
 import HyperwalletSDK
 
 extension HyperwalletCurrency: GenericCellConfiguration {
-    public var title: String {
+    public var title: String? {
         return name
     }
 
-    public var value: String {
+    public var value: String? {
         return code
     }
 }
