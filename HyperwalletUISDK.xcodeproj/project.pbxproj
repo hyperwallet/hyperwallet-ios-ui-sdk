@@ -2874,7 +2874,8 @@
 		4A9A7BDB22E859E60022E573 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
-				4A9A7C1022E87EA70022E573 /* HyperwalletReceiptUI.swift in Sources */,
+			files = (
+								4A9A7C1022E87EA70022E573 /* HyperwalletReceiptUI.swift in Sources */,
                 4ADBEC7422E9F92800D43A48 /* TransferThemeManager.swift in Sources */,
                 4A9A7C0422E86F580022E573 /* CreateTransferSectionData.swift in Sources */,
                 4A9A7C0722E86F580022E573 /* CreateTransferPresenter.swift in Sources */,
@@ -2889,11 +2890,10 @@
                 077C337822E8CCB0000314CD /* ScheduleTransferPresenter.swift in Sources */,
                 07C91E9F22E8CF4000167B05 /* ScheduleTransferController.swift in Sources */,
 
-                ScheduleTransferButtonCell.swift in Sources */,
-				077C337B22E8CCB0000314CD /* ScheduleTransferButtonCell.swift in Sources */,
-				077C337522E8CCB0000314CD /* ScheduleTransferSummaryCell.swift in Sources */,
-				077C337422E8CCB0000314CD /* DividerCell.swift in Sources */,
-				077C337A22E8CCB0000314CD /* ScheduleTransferForeignExchangeCell.swift in Sources */,
+								077C337B22E8CCB0000314CD /* ScheduleTransferButtonCell.swift in Sources */,
+								077C337522E8CCB0000314CD /* ScheduleTransferSummaryCell.swift in Sources */,
+								077C337422E8CCB0000314CD /* DividerCell.swift in Sources */,
+								077C337A22E8CCB0000314CD /* ScheduleTransferForeignExchangeCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

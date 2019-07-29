@@ -42,7 +42,7 @@ extension ScheduleTransferSectionData {
 
 struct ScheduleTransferDestinationData: ScheduleTransferSectionData {
     var scheduleTransferSectionHeader: ScheduleTransferSectionHeader { return .destination }
-    var cellIdentifier: String { return CreateTransferAddSelectDestinationCell.reuseIdentifier }
+    var cellIdentifier: String { return TransferDestinationCell.reuseIdentifier }
     var transferMethod: HyperwalletTransferMethod
 
     init(transferMethod: HyperwalletTransferMethod) {
@@ -113,7 +113,7 @@ struct ScheduleTransferSummaryData: ScheduleTransferSectionData {
 struct ScheduleTransferNotesData: ScheduleTransferSectionData {
     let notes: String
     var scheduleTransferSectionHeader: ScheduleTransferSectionHeader { return .notes }
-    var cellIdentifier: String { return CreateTransferNotesCell.reuseIdentifier }
+    var cellIdentifier: String { return TransferNotesCell.reuseIdentifier }
 
     init?(transfer: HyperwalletTransfer) {
         guard let notes = transfer.notes else {

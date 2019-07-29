@@ -34,10 +34,10 @@ public final class ScheduleTransferController: UITableViewController, UITextFiel
     private var transfer: HyperwalletTransfer
 
     private let registeredCells: [(type: AnyClass, id: String)] = [
-        (CreateTransferAddSelectDestinationCell.self, CreateTransferAddSelectDestinationCell.reuseIdentifier),
+        (TransferDestinationCell.self, TransferDestinationCell.reuseIdentifier),
         (ScheduleTransferForeignExchangeCell.self, ScheduleTransferForeignExchangeCell.reuseIdentifier),
         (ScheduleTransferSummaryCell.self, ScheduleTransferSummaryCell.reuseIdentifier),
-        (CreateTransferNotesCell.self, CreateTransferNotesCell.reuseIdentifier),
+        (TransferNotesCell.self, TransferNotesCell.reuseIdentifier),
         (ScheduleTransferButtonCell.self, ScheduleTransferButtonCell.reuseIdentifier)
     ]
 
@@ -102,7 +102,7 @@ extension ScheduleTransferController {
         let section = presenter.sectionData[indexPath.section]
         switch section.scheduleTransferSectionHeader {
         case .destination:
-            if let tableViewCell = cell as? CreateTransferAddSelectDestinationCell,
+            if let tableViewCell = cell as? TransferDestinationCell,
                 let destinationData = section as? ScheduleTransferDestinationData {
                 tableViewCell.configure(transferMethod: destinationData.transferMethod)
             }
@@ -120,7 +120,7 @@ extension ScheduleTransferController {
             }
 
         case .notes:
-            if let tableViewCell = cell as? CreateTransferNotesCell,
+            if let tableViewCell = cell as? TransferNotesCell,
                 let notesSection = section as? ScheduleTransferNotesData {
                 tableViewCell.configure(notes: notesSection.notes, isEditable: false, { _ in })
             }

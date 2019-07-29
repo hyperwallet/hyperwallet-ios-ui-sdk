@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         //ThemeManager.applyWhiteTheme()
         ThemeManager.applyTheme()
-        ThemeManager.applyCreateTransferTheme()
+        ThemeManager.applyTransferTheme()
 
         // Avoid to display a black area during the view transaction in the UINavigationBar.
         window?.backgroundColor = Theme.ViewController.backgroundColor
