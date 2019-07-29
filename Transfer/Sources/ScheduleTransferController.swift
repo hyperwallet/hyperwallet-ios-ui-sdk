@@ -62,7 +62,6 @@ public final class ScheduleTransferController: UITableViewController, UITextFiel
         // setup table view
         setUpScheduleTransferTableView()
         presenter = ScheduleTransferPresenter(view: self, transferMethod: transferMethod, transfer: transfer)
-        presenter.loadScheduleTransfer()
     }
 
     private func setUpScheduleTransferTableView() {

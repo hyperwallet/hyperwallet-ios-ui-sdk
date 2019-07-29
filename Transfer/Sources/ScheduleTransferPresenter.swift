@@ -41,15 +41,12 @@ final class ScheduleTransferPresenter {
         self.view = view
         self.transferMethod = transferMethod
         self.transfer = transfer
+        initializeSections()
     }
 
     private lazy var transferRepository = {
         TransferRepositoryFactory.shared.transferRepository()
     }()
-
-    func loadScheduleTransfer() {
-        initializeSections()
-    }
 
     private func initializeSections() {
         sectionData.removeAll()
