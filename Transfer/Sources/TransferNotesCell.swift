@@ -22,7 +22,7 @@ import Common
 
 final class TransferNotesCell: UITableViewCell {
     static let reuseIdentifier = "transferNotesCellIdentifier"
-    typealias EnteredNoteHandler = (_ value: String) -> Void
+    typealias EnteredNoteHandler = (_ value: String?) -> Void
 
     private var enteredNoteHandler: EnteredNoteHandler?
 
@@ -64,7 +64,7 @@ final class TransferNotesCell: UITableViewCell {
 
 extension TransferNotesCell: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        enteredNoteHandler?(notesTextField.text ?? "")
+        enteredNoteHandler?(notesTextField.text)
     }
 }
 
