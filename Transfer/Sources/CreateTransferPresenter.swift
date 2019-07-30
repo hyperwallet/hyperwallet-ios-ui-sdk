@@ -92,9 +92,8 @@ final class CreateTransferPresenter {
         )
         sectionData.append(createTransferDestinationSection)
 
-        if let currency = selectedTransferMethod?.transferMethodCurrency {
+        if selectedTransferMethod != nil {
             let createTransferSectionTransferData = CreateTransferSectionTransferData(
-                destinationCurrency: currency,
                 availableBalance: availableBalance
             )
             sectionData.append(createTransferSectionTransferData)
