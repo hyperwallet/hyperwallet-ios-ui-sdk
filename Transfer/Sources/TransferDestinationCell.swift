@@ -22,7 +22,7 @@ import Common
 import HyperwalletSDK
 import UIKit
 
-final class TransferDestinationCell: UITableViewCell {
+final class TransferDestinationCell: GenericCell<HyperwalletTransferMethod> {
     public static let reuseIdentifier = "transferDestinationCellIdentifier"
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -66,14 +66,23 @@ final class TransferDestinationCell: UITableViewCell {
         get { return detailTextLabel?.textColor }
         set { detailTextLabel?.textColor = newValue }
     }
+
+    override var item: HyperwalletTransferMethod? {
+        didSet {
+            guard let configuration = item  else {
+                return
+            }
+            configure(transferMethod: configuration)
+        }
+    }
 }
 
 extension TransferDestinationCell {
     func configure(transferMethod: HyperwalletTransferMethod) {
-        textLabel?.text = transferMethod.type?.lowercased().localized()
+        textLabel?.text = transferMethod.title
         detailTextLabel?.attributedText = formatDetails(
             subtitle: transferMethod.transferMethodCountry?.localized() ?? "",
-            additionalInfo: transferMethod.additionalInfo)
+            additionalInfo: transferMethod.value)
 
         detailTextLabel?.numberOfLines = 0
         detailTextLabel?.lineBreakMode = .byWordWrapping

@@ -63,6 +63,7 @@ final class CreateTransferPresenter {
     private var sourceToken: String?
 
     var selectedTransferMethod: HyperwalletTransferMethod!
+    var availableTransferMethods = [HyperwalletTransferMethod]()
     var amount: String?
     var notes: String?
     var transferAllFundsIsOn: Bool = false {
@@ -144,12 +145,14 @@ final class CreateTransferPresenter {
                 })
 
             case .success(let result):
-                guard let firstActivatedTransferMetod = result?.data?.first
+                guard let availableTransferMethods = result?.data,
+                    let firstActivatedTransferMetod = availableTransferMethods.first
                     else {
                         strongSelf.selectedTransferMethod = nil
                         strongSelf.view.hideLoading()
                         return
                 }
+                strongSelf.availableTransferMethods = availableTransferMethods
                 if strongSelf.selectedTransferMethod == nil {
                     strongSelf.selectedTransferMethod = firstActivatedTransferMetod
                 }
@@ -218,11 +221,10 @@ final class CreateTransferPresenter {
 
     // MARK: - Destionation view
     func showSelectDestinationAccountView() {
-        // TODO Display all the destination accounts
-        //        view.showGenericTableView(items: getSelectDestinationCellConfiguration(),
-        //                                  title: "select_destination".localized(),
-        //                                  selectItemHandler: selectDestinationAccountHandler(),
-        //                                  markCellHandler: destinationAccountMarkCellHandler())
+        view.showGenericTableView(items: availableTransferMethods,
+                                  title: "select_destination".localized(),
+                                  selectItemHandler: selectDestinationAccountHandler(),
+                                  markCellHandler: destinationAccountMarkCellHandler())
     }
 
     private func destinationAccountMarkCellHandler() -> CreateTransferView.MarkCellHandler {

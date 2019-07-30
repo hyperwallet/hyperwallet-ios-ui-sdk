@@ -19,9 +19,17 @@
 import HyperwalletSDK
 
 /// The HyperwalletTransferMethod extension
-public extension HyperwalletTransferMethod {
+extension HyperwalletTransferMethod: GenericCellConfiguration {
+    public var title: String? {
+        return type?.lowercased().localized()
+    }
+
+    public var value: String? {
+        return additionalInfo
+    }
+
     /// Additional information about the transfer method
-    var additionalInfo: String? {
+    private var additionalInfo: String? {
         switch type {
         case "BANK_CARD", "PREPAID_CARD":
             return String(format: "%@%@",

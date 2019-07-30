@@ -218,17 +218,17 @@ extension CreateTransferController: CreateTransferView {
                               title: String,
                               selectItemHandler: @escaping SelectItemHandler,
                               markCellHandler: @escaping MarkCellHandler) {
-        //        let genericTableView = GenericController<ListTransferMethodCell, HyperwalletTransferMethod>()
-        //
-        //        genericTableView.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
-        //                                                                             target: self,
-        //                                                                     action: #selector(didTapAddButton))
-        //
-        //        genericTableView.title = title
-        //        genericTableView.items = items
-        //        genericTableView.selectedHandler = selectItemHandler
-        //        genericTableView.shouldMarkCellAction = markCellHandler
-        //        show(genericTableView, sender: self)
+        let genericTableView = GenericController<TransferDestinationCell, HyperwalletTransferMethod>()
+
+        genericTableView.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
+                                                                             target: self,
+                                                                             action: #selector(didTapAddButton))
+
+        genericTableView.title = title
+        genericTableView.items = items
+        genericTableView.selectedHandler = selectItemHandler
+        genericTableView.shouldMarkCellAction = markCellHandler
+        show(genericTableView, sender: self)
     }
 
     @objc
