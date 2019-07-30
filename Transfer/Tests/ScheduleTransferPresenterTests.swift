@@ -42,6 +42,7 @@ class ScheduleTransferPresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isShowConfirmationPerformed, "The isShowConfirmationPerformed should be performed")
         XCTAssertTrue(mockView.isShowProcessingPerformed, "The isShowProcessingPerformed should be performed")
         XCTAssertTrue(mockView.isNotificationSent, "The notification should be sent")
+        assertDestinationSectionResult(destinationSection: presenter.sectionData.first!)
     }
 
     public func testScheduleTransfer_failure() {
@@ -66,6 +67,15 @@ class ScheduleTransferPresenterTests: XCTestCase {
     private func getTransfer(from jsonData: Data) -> HyperwalletTransfer? {
         let decoder = JSONDecoder()
         return try? decoder.decode(HyperwalletTransfer.self, from: jsonData)
+    }
+
+    private func assertDestinationSectionResult(destinationSection: ScheduleTransferSectionData) {
+        XCTAssertEqual(destinationSection.rowCount, 1, "Destination section should have 1 row")
+        XCTAssertNotNil(destinationSection.title, "The title of Destination section should not be nil")
+        XCTAssertNotNil(destinationSection.scheduleTransferSectionHeader,
+                        "The header of Destination section should not be nil")
+        XCTAssertNotNil(destinationSection.cellIdentifier,
+                        "The cellIdentifier of Destination section should not be nil")
     }
 }
 
