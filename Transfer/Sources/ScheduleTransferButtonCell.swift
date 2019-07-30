@@ -25,6 +25,7 @@ final class ScheduleTransferButtonCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        textLabel?.accessibilityIdentifier = "scheduleTransferButtonTextLabel"
     }
 
     required init?(coder aDecoder: NSCoder) {
