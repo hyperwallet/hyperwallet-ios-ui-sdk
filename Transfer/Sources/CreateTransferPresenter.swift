@@ -147,6 +147,7 @@ final class CreateTransferPresenter {
                     else {
                         strongSelf.selectedTransferMethod = nil
                         strongSelf.view.hideLoading()
+                        strongSelf.view.showCreateTransfer()
                         return
                 }
                 if strongSelf.selectedTransferMethod == nil {
