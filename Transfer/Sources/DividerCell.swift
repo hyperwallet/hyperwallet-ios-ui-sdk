@@ -23,7 +23,7 @@ import HyperwalletSDK
 import UIKit
 
 final class DividerCell: UITableViewCell {
-    static let reuseIdentifier = "dividerCellReuseIdentifier"
+    static let reuseIdentifier = "dividerCellIdentifier"
 
     // MARK: Life cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

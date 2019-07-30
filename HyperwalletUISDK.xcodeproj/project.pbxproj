@@ -21,11 +21,10 @@
 		073BB9B922E643880053C24E /* HyperwalletTestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BB9B522E643880053C24E /* HyperwalletTestHelper.swift */; };
 		073BB9BA22E643880053C24E /* TransferRepositoryRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BB9B622E643880053C24E /* TransferRepositoryRequestHelper.swift */; };
 		077C337422E8CCB0000314CD /* DividerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C336C22E8CCAF000314CD /* DividerCell.swift */; };
-		077C337522E8CCB0000314CD /* ScheduleTransferSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C336D22E8CCAF000314CD /* ScheduleTransferSummaryCell.swift */; };
+		077C337522E8CCB0000314CD /* TransferSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C336D22E8CCAF000314CD /* TransferSummaryCell.swift */; };
 		077C337722E8CCB0000314CD /* ScheduleTransferSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C336F22E8CCAF000314CD /* ScheduleTransferSectionData.swift */; };
 		077C337822E8CCB0000314CD /* ScheduleTransferPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C337022E8CCB0000314CD /* ScheduleTransferPresenter.swift */; };
-		077C337A22E8CCB0000314CD /* ScheduleTransferForeignExchangeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C337222E8CCB0000314CD /* ScheduleTransferForeignExchangeCell.swift */; };
-		077C337B22E8CCB0000314CD /* ScheduleTransferButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C337322E8CCB0000314CD /* ScheduleTransferButtonCell.swift */; };
+		077C337A22E8CCB0000314CD /* TransferForeignExchangeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C337222E8CCB0000314CD /* TransferForeignExchangeCell.swift */; };
 		077F609F22E28F7F00C91E59 /* ReceiptThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077F609D22E28F3500C91E59 /* ReceiptThemeManager.swift */; };
 		077F60A122E28F8F00C91E59 /* TransferMethodThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077F60A022E28F8F00C91E59 /* TransferMethodThemeManager.swift */; };
 		078461DE22EA3F24007BF2CB /* TransferRepositoryFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BB9A222E63FF40053C24E /* TransferRepositoryFactory.swift */; };
@@ -34,7 +33,7 @@
 		078C6F0022EF81A900CF81EE /* TransferRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078C6EFF22EF81A900CF81EE /* TransferRequestHelper.swift */; };
 		078C6F0522EF840E00CF81EE /* CreateTransferResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 078C6F0422EF840E00CF81EE /* CreateTransferResponse.json */; };
 		078C6F0622EF840E00CF81EE /* CreateTransferResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 078C6F0422EF840E00CF81EE /* CreateTransferResponse.json */; };
-		078C6F0822EF967400CF81EE /* ScheduleTransferBadRequestResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 078C6F0722EF967400CF81EE /* ScheduleTransferBadRequestResponse.json */; };
+		078C6F0822EF967400CF81EE /* ScheduleTransferExpiredTransferResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 078C6F0722EF967400CF81EE /* ScheduleTransferExpiredTransferResponse.json */; };
 		07C91E9F22E8CF4000167B05 /* ScheduleTransferController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C91E9E22E8CF4000167B05 /* ScheduleTransferController.swift */; };
 		0961D62D22AA858E007F0B44 /* ReceiptsForFewMonths.json in Resources */ = {isa = PBXBuildFile; fileRef = 0961D62C22AA858E007F0B44 /* ReceiptsForFewMonths.json */; };
 		0961D62F22AA861A007F0B44 /* ReceiptsForOneMonth.json in Resources */ = {isa = PBXBuildFile; fileRef = 0961D62E22AA861A007F0B44 /* ReceiptsForOneMonth.json */; };
@@ -307,48 +306,48 @@
 			remoteGlobalIDString = 073BB98122E63DB50053C24E;
 			remoteInfo = TransferRepository;
 		};
-        07559EB022EFA05B0055AEA9 /* PBXContainerItemProxy */ = {
-            isa = PBXContainerItemProxy;
-            containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-            proxyType = 1;
-            remoteGlobalIDString = 643912D322DF40CB00036609;
-            remoteInfo = UserRepository;
-        };
-        2BF9E5EB22EF7DE400BB7DA5 /* PBXContainerItemProxy */ = {
-            isa = PBXContainerItemProxy;
-            containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-            proxyType = 1;
-            remoteGlobalIDString = 4A9A7BDE22E859E60022E573;
-            remoteInfo = Transfer;
-        };
-        2BF9E5ED22EF7DE800BB7DA5 /* PBXContainerItemProxy */ = {
-            isa = PBXContainerItemProxy;
-            containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-            proxyType = 1;
-            remoteGlobalIDString = 073BB98122E63DB50053C24E;
-            remoteInfo = TransferRepository;
-        };
-        2BF9E5EF22EF7F1B00BB7DA5 /* PBXContainerItemProxy */ = {
-            isa = PBXContainerItemProxy;
-            containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-            proxyType = 1;
-            remoteGlobalIDString = DB551F4822E1316400DD65C2;
-            remoteInfo = Common;
-        };
-        2BF9E5F122EF7F2700BB7DA5 /* PBXContainerItemProxy */ = {
-            isa = PBXContainerItemProxy;
-            containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-            proxyType = 1;
-            remoteGlobalIDString = DB551F4822E1316400DD65C2;
-            remoteInfo = Common;
-        };
-        2BF9E5F322EF7F3300BB7DA5 /* PBXContainerItemProxy */ = {
-            isa = PBXContainerItemProxy;
-            containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-            proxyType = 1;
-            remoteGlobalIDString = DB551F4822E1316400DD65C2;
-            remoteInfo = Common;
-        };
+		07559EB022EFA05B0055AEA9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 643912D322DF40CB00036609;
+			remoteInfo = UserRepository;
+		};
+		2BF9E5EB22EF7DE400BB7DA5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4A9A7BDE22E859E60022E573;
+			remoteInfo = Transfer;
+		};
+		2BF9E5ED22EF7DE800BB7DA5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 073BB98122E63DB50053C24E;
+			remoteInfo = TransferRepository;
+		};
+		2BF9E5EF22EF7F1B00BB7DA5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB551F4822E1316400DD65C2;
+			remoteInfo = Common;
+		};
+		2BF9E5F122EF7F2700BB7DA5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB551F4822E1316400DD65C2;
+			remoteInfo = Common;
+		};
+		2BF9E5F322EF7F3300BB7DA5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB551F4822E1316400DD65C2;
+			remoteInfo = Common;
+		};
 		4A9A7BE922E859E60022E573 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
@@ -552,11 +551,10 @@
 		0743EF9B22A5987100C089EE /* ListReceiptPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListReceiptPresenterTests.swift; sourceTree = "<group>"; };
 		0743EFA022A59EE100C089EE /* UserReceiptNextPageResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserReceiptNextPageResponse.json; sourceTree = "<group>"; };
 		077C336C22E8CCAF000314CD /* DividerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DividerCell.swift; sourceTree = "<group>"; };
-		077C336D22E8CCAF000314CD /* ScheduleTransferSummaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleTransferSummaryCell.swift; sourceTree = "<group>"; };
+		077C336D22E8CCAF000314CD /* TransferSummaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferSummaryCell.swift; sourceTree = "<group>"; };
 		077C336F22E8CCAF000314CD /* ScheduleTransferSectionData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleTransferSectionData.swift; sourceTree = "<group>"; };
 		077C337022E8CCB0000314CD /* ScheduleTransferPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleTransferPresenter.swift; sourceTree = "<group>"; };
-		077C337222E8CCB0000314CD /* ScheduleTransferForeignExchangeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleTransferForeignExchangeCell.swift; sourceTree = "<group>"; };
-		077C337322E8CCB0000314CD /* ScheduleTransferButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleTransferButtonCell.swift; sourceTree = "<group>"; };
+		077C337222E8CCB0000314CD /* TransferForeignExchangeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferForeignExchangeCell.swift; sourceTree = "<group>"; };
 		077F609D22E28F3500C91E59 /* ReceiptThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptThemeManager.swift; sourceTree = "<group>"; };
 		077F60A022E28F8F00C91E59 /* TransferMethodThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodThemeManager.swift; sourceTree = "<group>"; };
 		078B45682273895C005B0248 /* ListTransferMethodSuccessResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ListTransferMethodSuccessResponse.json; sourceTree = "<group>"; };
@@ -574,7 +572,7 @@
 		078C6EFD22EF815900CF81EE /* ScheduleTransferResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ScheduleTransferResponse.json; sourceTree = "<group>"; };
 		078C6EFF22EF81A900CF81EE /* TransferRequestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferRequestHelper.swift; sourceTree = "<group>"; };
 		078C6F0422EF840E00CF81EE /* CreateTransferResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CreateTransferResponse.json; sourceTree = "<group>"; };
-		078C6F0722EF967400CF81EE /* ScheduleTransferBadRequestResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ScheduleTransferBadRequestResponse.json; sourceTree = "<group>"; };
+		078C6F0722EF967400CF81EE /* ScheduleTransferExpiredTransferResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ScheduleTransferExpiredTransferResponse.json; sourceTree = "<group>"; };
 		07BE415E229DE181002DECAF /* UserReceiptResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserReceiptResponse.json; sourceTree = "<group>"; };
 		07C91E9E22E8CF4000167B05 /* ScheduleTransferController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleTransferController.swift; sourceTree = "<group>"; };
 		0961D62C22AA858E007F0B44 /* ReceiptsForFewMonths.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ReceiptsForFewMonths.json; sourceTree = "<group>"; };
@@ -1145,7 +1143,7 @@
 				4A9A7BEE22E859E60022E573 /* Info.plist */,
 				078C6EFB22EF7E0500CF81EE /* ScheduleTransferPresenterTests.swift */,
 				078C6EFD22EF815900CF81EE /* ScheduleTransferResponse.json */,
-				078C6F0722EF967400CF81EE /* ScheduleTransferBadRequestResponse.json */,
+				078C6F0722EF967400CF81EE /* ScheduleTransferExpiredTransferResponse.json */,
 				078C6F0422EF840E00CF81EE /* CreateTransferResponse.json */,
 			);
 			path = Tests;
@@ -1164,10 +1162,9 @@
 				4ADBEC7122E9F16A00D43A48 /* TransferDestinationCell.swift */,
 				4A9A7C0022E86F580022E573 /* TransferNotesCell.swift */,
 				077C336C22E8CCAF000314CD /* DividerCell.swift */,
-				077C337322E8CCB0000314CD /* ScheduleTransferButtonCell.swift */,
-				077C337222E8CCB0000314CD /* ScheduleTransferForeignExchangeCell.swift */,
+				077C337222E8CCB0000314CD /* TransferForeignExchangeCell.swift */,
 				077C336F22E8CCAF000314CD /* ScheduleTransferSectionData.swift */,
-				077C336D22E8CCAF000314CD /* ScheduleTransferSummaryCell.swift */,
+				077C336D22E8CCAF000314CD /* TransferSummaryCell.swift */,
 				07C91E9E22E8CF4000167B05 /* ScheduleTransferController.swift */,
 				077C337022E8CCB0000314CD /* ScheduleTransferPresenter.swift */,
 				4A9A7BE222E859E60022E573 /* Info.plist */,
@@ -2461,7 +2458,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				078C6EFE22EF815900CF81EE /* ScheduleTransferResponse.json in Resources */,
-				078C6F0822EF967400CF81EE /* ScheduleTransferBadRequestResponse.json in Resources */,
+				078C6F0822EF967400CF81EE /* ScheduleTransferExpiredTransferResponse.json in Resources */,
 				078C6F0622EF840E00CF81EE /* CreateTransferResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2887,10 +2884,9 @@
 				077C337722E8CCB0000314CD /* ScheduleTransferSectionData.swift in Sources */,
 				077C337822E8CCB0000314CD /* ScheduleTransferPresenter.swift in Sources */,
 				07C91E9F22E8CF4000167B05 /* ScheduleTransferController.swift in Sources */,
-				077C337B22E8CCB0000314CD /* ScheduleTransferButtonCell.swift in Sources */,
-				077C337522E8CCB0000314CD /* ScheduleTransferSummaryCell.swift in Sources */,
+				077C337522E8CCB0000314CD /* TransferSummaryCell.swift in Sources */,
 				077C337422E8CCB0000314CD /* DividerCell.swift in Sources */,
-				077C337A22E8CCB0000314CD /* ScheduleTransferForeignExchangeCell.swift in Sources */,
+				077C337A22E8CCB0000314CD /* TransferForeignExchangeCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3155,32 +3151,31 @@
 			target = 643912D322DF40CB00036609 /* UserRepository */;
 			targetProxy = 07559EB022EFA05B0055AEA9 /* PBXContainerItemProxy */;
 		};
-        2BF9E5EC22EF7DE400BB7DA5 /* PBXTargetDependency */ = {
-        isa = PBXTargetDependency;
-        target = 4A9A7BDE22E859E60022E573 /* Transfer */;
-        targetProxy = 2BF9E5EB22EF7DE400BB7DA5 /* PBXContainerItemProxy */;
-        };
-        2BF9E5EE22EF7DE800BB7DA5 /* PBXTargetDependency */ = {
-        isa = PBXTargetDependency;
-        target = 073BB98122E63DB50053C24E /* TransferRepository */;
-        targetProxy = 2BF9E5ED22EF7DE800BB7DA5 /* PBXContainerItemProxy */;
-        };
-        2BF9E5F022EF7F1B00BB7DA5 /* PBXTargetDependency */ = {
-        isa = PBXTargetDependency;
-        target = DB551F4822E1316400DD65C2 /* Common */;
-        targetProxy = 2BF9E5EF22EF7F1B00BB7DA5 /* PBXContainerItemProxy */;
-        };
-        2BF9E5F222EF7F2700BB7DA5 /* PBXTargetDependency */ = {
-        isa = PBXTargetDependency;
-        target = DB551F4822E1316400DD65C2 /* Common */;
-        targetProxy = 2BF9E5F122EF7F2700BB7DA5 /* PBXContainerItemProxy */;
-        };
-        2BF9E5F422EF7F3300BB7DA5 /* PBXTargetDependency */ = {
-        isa = PBXTargetDependency;
-        target = DB551F4822E1316400DD65C2 /* Common */;
-        targetProxy = 2BF9E5F322EF7F3300BB7DA5 /* PBXContainerItemProxy */;
-        };
-
+		2BF9E5EC22EF7DE400BB7DA5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4A9A7BDE22E859E60022E573 /* Transfer */;
+			targetProxy = 2BF9E5EB22EF7DE400BB7DA5 /* PBXContainerItemProxy */;
+		};
+		2BF9E5EE22EF7DE800BB7DA5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 073BB98122E63DB50053C24E /* TransferRepository */;
+			targetProxy = 2BF9E5ED22EF7DE800BB7DA5 /* PBXContainerItemProxy */;
+		};
+		2BF9E5F022EF7F1B00BB7DA5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB551F4822E1316400DD65C2 /* Common */;
+			targetProxy = 2BF9E5EF22EF7F1B00BB7DA5 /* PBXContainerItemProxy */;
+		};
+		2BF9E5F222EF7F2700BB7DA5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB551F4822E1316400DD65C2 /* Common */;
+			targetProxy = 2BF9E5F122EF7F2700BB7DA5 /* PBXContainerItemProxy */;
+		};
+		2BF9E5F422EF7F3300BB7DA5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB551F4822E1316400DD65C2 /* Common */;
+			targetProxy = 2BF9E5F322EF7F3300BB7DA5 /* PBXContainerItemProxy */;
+		};
 		4A9A7BEA22E859E60022E573 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 4A9A7BDE22E859E60022E573 /* Transfer */;

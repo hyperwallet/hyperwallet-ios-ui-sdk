@@ -22,28 +22,23 @@ import Common
 import HyperwalletSDK
 import UIKit
 
-/// Lists the user's transfer methods (bank account, bank card, PayPal account, prepaid card, paper check).
-///
-/// The user can deactivate and add a new transfer method.
+/// Schedule a transfer that was previously created
 public final class ScheduleTransferController: UITableViewController, UITextFieldDelegate {
     private var spinnerView: SpinnerView?
     private var processingView: ProcessingView?
     private var presenter: ScheduleTransferPresenter!
-    private var transferMethod: HyperwalletTransferMethod
-    private var transfer: HyperwalletTransfer
 
     private let registeredCells: [(type: AnyClass, id: String)] = [
         (TransferDestinationCell.self, TransferDestinationCell.reuseIdentifier),
-        (ScheduleTransferForeignExchangeCell.self, ScheduleTransferForeignExchangeCell.reuseIdentifier),
-        (ScheduleTransferSummaryCell.self, ScheduleTransferSummaryCell.reuseIdentifier),
+        (TransferForeignExchangeCell.self, TransferForeignExchangeCell.reuseIdentifier),
+        (TransferSummaryCell.self, TransferSummaryCell.reuseIdentifier),
         (TransferNotesCell.self, TransferNotesCell.reuseIdentifier),
-        (ScheduleTransferButtonCell.self, ScheduleTransferButtonCell.reuseIdentifier)
+        (TransferButtonCell.self, TransferButtonCell.reuseIdentifier)
     ]
 
     public init(transferMethod: HyperwalletTransferMethod, transfer: HyperwalletTransfer) {
-        self.transferMethod = transferMethod
-        self.transfer = transfer
         super.init(nibName: nil, bundle: nil)
+        presenter = ScheduleTransferPresenter(view: self, transferMethod: transferMethod, transfer: transfer)
     }
 
     // swiftlint:disable unavailable_function
@@ -60,7 +55,6 @@ public final class ScheduleTransferController: UITableViewController, UITextFiel
 
         // setup table view
         setUpScheduleTransferTableView()
-        presenter = ScheduleTransferPresenter(view: self, transferMethod: transferMethod, transfer: transfer)
     }
 
     private func setUpScheduleTransferTableView() {
@@ -106,13 +100,13 @@ extension ScheduleTransferController {
             }
 
         case .foreignExchange:
-            if let tableViewCell = cell as? ScheduleTransferForeignExchangeCell,
+            if let tableViewCell = cell as? TransferForeignExchangeCell,
                 let foreignExchangeData = section as? ScheduleTransferForeignExchangeData {
                 return tableViewCell.configure(foreignExchangeData, indexPath, tableView)
             }
 
         case .summary:
-            if let tableViewCell = cell as? ScheduleTransferSummaryCell,
+            if let tableViewCell = cell as? TransferSummaryCell,
                 let summaryData = section as? ScheduleTransferSummaryData {
                 tableViewCell.configure(summaryData.rows[indexPath.row].title, summaryData.rows[indexPath.row].value)
             }
@@ -124,9 +118,9 @@ extension ScheduleTransferController {
             }
 
         case .button:
-            if let tableViewCell = cell as? ScheduleTransferButtonCell, section is ScheduleTransferButtonData {
+            if let tableViewCell = cell as? TransferButtonCell, section is ScheduleTransferButtonData {
                 let tapConfirmation = UITapGestureRecognizer(target: self, action: #selector(tapScheduleTransfer))
-                tableViewCell.configure(action: tapConfirmation)
+                tableViewCell.configure(title: "schedule_transfer_button".localized(), action: tapConfirmation)
             }
         }
         return cell
@@ -165,8 +159,9 @@ extension ScheduleTransferController: ScheduleTransferView {
         }
     }
 
-    func showError(title: String, message: String) {
-        HyperwalletUtilViews.showAlert(self, title: title, message: message, actions: UIAlertAction.close())
+    func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
+        let errorView = ErrorView(viewController: self, error: error)
+        errorView.show(retry)
     }
 
     func notifyTransferScheduled(_ hyperwalletStatusTransition: HyperwalletStatusTransition) {

@@ -20,18 +20,22 @@
 import Common
 #endif
 
-final class ScheduleTransferSummaryCell: UITableViewCell {
-    static let reuseIdentifier = "scheduleTransferSummaryCellReuseIdentifier"
+final class TransferForeignExchangeCell: UITableViewCell {
+    static let reuseIdentifier = "scheduleTransferForeignExchangeCellIdentifier"
+    private var shouldHideSeparator = false
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
-        textLabel?.accessibilityIdentifier = "scheduleTransferSummaryTextLabel"
+        textLabel?.accessibilityIdentifier = "scheduleTransferForeignExchangeTextLabel"
+        detailTextLabel?.accessibilityIdentifier = "scheduleTransferForeignExchangeTextValue"
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+}
 
+extension TransferForeignExchangeCell {
     // MARK: Theme manager's proxy properties
     @objc dynamic var titleLabelFont: UIFont! {
         get { return textLabel?.font }
@@ -53,8 +57,29 @@ final class ScheduleTransferSummaryCell: UITableViewCell {
         set { detailTextLabel?.textColor = newValue }
     }
 
-    func configure(_ title: String, _ value: String) {
-        textLabel?.text = title
-        detailTextLabel?.text = value
+    func configure(_ sectionData: ScheduleTransferForeignExchangeData,
+                   _ indexPath: IndexPath,
+                   _ tableView: UITableView) -> UITableViewCell {
+        let rowIndex = indexPath.row
+        if sectionData.rows[rowIndex].title == nil {
+            return tableView.dequeueReusableCell(withIdentifier: DividerCell.reuseIdentifier, for: indexPath)
+        } else {
+            textLabel?.text = sectionData.rows[rowIndex].title
+            detailTextLabel?.text = sectionData.rows[rowIndex].value
+            // modify separatorInset length when there is another foreign exanchange after this row
+            if let nextRow = sectionData.rows[safe: rowIndex + 1], nextRow.title == nil {
+               shouldHideSeparator = true
+            }
+            return self
+        }
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if shouldHideSeparator {
+            let separatorView = subviews.first(where: { $0.isSeparatorView() })
+            separatorView?.isHidden = true
+            shouldHideSeparator = false
+        }
     }
 }

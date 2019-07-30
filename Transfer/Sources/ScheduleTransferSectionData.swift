@@ -51,10 +51,10 @@ struct ScheduleTransferDestinationData: ScheduleTransferSectionData {
 }
 
 struct ScheduleTransferForeignExchangeData: ScheduleTransferSectionData {
-    var rows = [(title: String, value: String)]()
+    var rows = [(title: String?, value: String?)]()
     var scheduleTransferSectionHeader: ScheduleTransferSectionHeader { return .foreignExchange }
     var rowCount: Int { return rows.count }
-    var cellIdentifier: String { return ScheduleTransferForeignExchangeCell.reuseIdentifier }
+    var cellIdentifier: String { return TransferForeignExchangeCell.reuseIdentifier }
     var foreignExchanges: [HyperwalletForeignExchange]
 
     init(foreignExchanges: [HyperwalletForeignExchange]) {
@@ -65,7 +65,7 @@ struct ScheduleTransferForeignExchangeData: ScheduleTransferSectionData {
                 let sourceCurrency = foreignExchange.sourceCurrency,
                 let destinationAmount = foreignExchange.destinationAmount,
                 let destinationCurrency = foreignExchange.destinationCurrency,
-                let  rate = foreignExchange.rate {
+                let rate = foreignExchange.rate {
                 let sourceAmountFormatted = sourceAmount.format(with: sourceCurrency)
                 let destinationAmountFormatted = destinationAmount.format(with: destinationCurrency)
 
@@ -77,7 +77,7 @@ struct ScheduleTransferForeignExchangeData: ScheduleTransferSectionData {
                 rows.append((title: "transfer_fx_buy_confirmation".localized(), value: destinationAmountFormatted))
                 rows.append((title: "transfer_fx_rate_confirmation".localized(), value: rateFormatted))
                 if !foreignExchanges.isLast(index: index) {
-                    rows.append((title: "", value: ""))
+                    rows.append((title: nil, value: nil))
                 }
             }
         }
@@ -88,7 +88,7 @@ struct ScheduleTransferSummaryData: ScheduleTransferSectionData {
     var rows = [(title: String, value: String)]()
     var scheduleTransferSectionHeader: ScheduleTransferSectionHeader { return .summary }
     var rowCount: Int { return rows.count }
-    var cellIdentifier: String { return ScheduleTransferSummaryCell.reuseIdentifier }
+    var cellIdentifier: String { return TransferSummaryCell.reuseIdentifier }
 
     init(transfer: HyperwalletTransfer) {
         if let destinationAmount = transfer.destinationAmount,
@@ -125,5 +125,5 @@ struct ScheduleTransferNotesData: ScheduleTransferSectionData {
 
 struct ScheduleTransferButtonData: ScheduleTransferSectionData {
     var scheduleTransferSectionHeader: ScheduleTransferSectionHeader { return .button }
-    var cellIdentifier: String { return ScheduleTransferButtonCell.reuseIdentifier }
+    var cellIdentifier: String { return TransferButtonCell.reuseIdentifier }
 }

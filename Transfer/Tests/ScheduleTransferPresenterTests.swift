@@ -6,9 +6,6 @@ import XCTest
 class ScheduleTransferPresenterTests: XCTestCase {
     private var presenter: ScheduleTransferPresenter!
     private let mockView = MockScheduleTransferViewTests()
-
-    private lazy var transferMethodConfigurationFieldsResponse = HyperwalletTestHelper
-        .getDataFromJson("TransferMethodConfigurationFieldsResponse")
     private let transferMethod = HyperwalletBankAccount.Builder(transferMethodCountry: "US",
                                                                 transferMethodCurrency: "USD",
                                                                 transferMethodProfileType: "INDIVIDUAL",
@@ -50,7 +47,7 @@ class ScheduleTransferPresenterTests: XCTestCase {
     public func testScheduleTransfer_failure() {
         // Given
         let requestUrl = String(format: "%@transfers/trf-123456/status-transitions", HyperwalletTestHelper.restURL)
-        TransferRequestHelper.setupFailureRequest("ScheduleTransferBadRequestResponse", requestUrl)
+        TransferRequestHelper.setupFailureRequest("ScheduleTransferExpiredTransferResponse", requestUrl)
         let expectation = self.expectation(description: "Schedule a transfer")
         mockView.expectation = expectation
 
@@ -103,8 +100,9 @@ class MockScheduleTransferViewTests: ScheduleTransferView {
         handler()
     }
 
-    func showError(title: String, message: String) {
+    func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
         isShowErrorPerformed = true
+        retry!()
         expectation?.fulfill()
     }
 

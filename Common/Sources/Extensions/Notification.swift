@@ -32,8 +32,7 @@ public extension Notification.Name {
         return .init(rawValue: "transferMethodDeactivated")
     }
 
-    /// Posted when a transfer method (bank account, bank card, PayPal account, prepaid card, paper check)
-    /// has been deactivated.
+    /// Posted when a transfer has been scheduled
     static var transferScheduled: Notification.Name {
         return .init(rawValue: "transferScheduled")
     }

@@ -26,7 +26,7 @@ protocol ScheduleTransferView: class {
     func showProcessing()
     func dismissProcessing(handler: @escaping () -> Void)
     func showConfirmation(handler: @escaping (() -> Void))
-    func showError(title: String, message: String)
+    func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?)
     func notifyTransferScheduled(_ hyperwalletStatusTransition: HyperwalletStatusTransition)
 }
 
@@ -80,8 +80,8 @@ final class ScheduleTransferPresenter {
             switch result {
             case .failure(let error):
                 strongSelf.view.dismissProcessing(handler: {
-                    strongSelf.view.showError(title: "error".localized(), message: error
-                        .getHyperwalletErrors()?.errorList?.first?.message ?? "")
+                    strongSelf.view.showError(error, {
+                        strongSelf.scheduleTransfer()})
                 })
 
             case .success(let resultStatusTransition):

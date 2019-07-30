@@ -68,18 +68,18 @@ public extension ThemeManager {
     }
 
     private static func applyToScheduleTransferSummaryCell() {
-        let proxy = ScheduleTransferSummaryCell.appearance()
-        proxy.titleLabelColor = Theme.Label.subTitleColor
-        proxy.titleLabelFont = Theme.Label.footnoteFont
-        proxy.subTitleLabelFont = Theme.Label.footnoteFont
-        proxy.subTitleLabelColor = Theme.Label.color
+        let proxy = TransferSummaryCell.appearance()
+        proxy.titleLabelFont = Theme.Label.bodyFontMedium
+        proxy.titleLabelColor = Theme.Label.color
+        proxy.subTitleLabelFont = Theme.Label.captionOne
+        proxy.subTitleLabelColor = Theme.Label.subTitleColor
     }
 
     private static func applyToScheduleForeignExchangeCell() {
-        let proxy = ScheduleTransferForeignExchangeCell.appearance()
-        proxy.titleLabelColor = Theme.Label.subTitleColor
-        proxy.titleLabelFont = Theme.Label.footnoteFont
-        proxy.subTitleLabelFont = Theme.Label.footnoteFont
-        proxy.subTitleLabelColor = Theme.Label.color
+        let proxy = TransferForeignExchangeCell.appearance()
+        proxy.titleLabelFont = Theme.Label.bodyFontMedium
+        proxy.titleLabelColor = Theme.Label.color
+        proxy.subTitleLabelFont = Theme.Label.captionOne
+        proxy.subTitleLabelColor = Theme.Label.subTitleColor
     }
 }
