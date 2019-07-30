@@ -63,7 +63,7 @@ public final class ListTransferMethodController: UITableViewController {
         subscriptionToken = setupWith(tableView: tableView)
     }
 
-    override public func viewDidDisappear(_ animated: Bool) {
+    override public func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
         if let subscriptionToken = subscriptionToken {
