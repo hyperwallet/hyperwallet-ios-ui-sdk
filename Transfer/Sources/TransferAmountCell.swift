@@ -100,8 +100,13 @@ extension TransferAmountCell: UITextFieldDelegate {
         setCursorPositionToTheEnd(of: textField)
 
         var currentText = textField.text ?? ""
-        if currentText.isEmpty && string.count > 1 {
-            // TODO Paste
+        if string.count > 1 {
+            // Paste
+            guard let numberPastedAmount = TransferAmountCell.amountFormatter.number(from: string),
+                currentText.isEmpty else {
+                    return false
+            }
+            textField.text = TransferAmountCell.amountFormatter.string(from: numberPastedAmount)
             return false
         }
         let digitsOnly = currentText.replacingOccurrences( of: "[^0-9]", with: "", options: .regularExpression)
