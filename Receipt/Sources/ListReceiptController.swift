@@ -25,7 +25,7 @@ import UIKit
 /// Lists the user's transaction history
 ///
 /// The user can click a receipt in the list for more information
-public final class ListReceiptController: UITableViewController, ContentSizeCategoryAdjustable {
+public final class ListReceiptController: UITableViewController {
     public var subscriptionToken: Any?
 
     private var spinnerView: SpinnerView?
@@ -65,7 +65,7 @@ public final class ListReceiptController: UITableViewController, ContentSizeCate
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        subscriptionToken = setupWith(tableView: tableView, and: Theme.Cell.mediumHeight)
+        subscriptionToken = setupWith(tableView: tableView)
     }
 
     override public func viewWillDisappear(_ animated: Bool) {
@@ -126,6 +126,10 @@ public final class ListReceiptController: UITableViewController, ContentSizeCate
         return UITableView.automaticDimension
     }
 
+    override public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return rowHeightConsideringSizeCategory(for: indexPath)
+    }
+
     override public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if loadMoreReceipts {
             presenter.listReceipts()
@@ -180,5 +184,15 @@ extension ListReceiptController: ListReceiptView {
 
     private func toggleEmptyListView(hideLabel: Bool) {
         emptyListLabel.isHidden = hideLabel
+    }
+}
+
+extension ListReceiptController: ContentSizeCategoryAdjustable {
+    public func rowHeightConsideringSizeCategory(for indexPath: IndexPath) -> CGFloat {
+        if isLargeSizeCategory {
+            return UITableView.automaticDimension
+        } else {
+            return Theme.Cell.mediumHeight
+        }
     }
 }

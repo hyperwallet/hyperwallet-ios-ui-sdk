@@ -22,6 +22,8 @@ import Common
 import HyperwalletSDK
 
 public final class ReceiptDetailController: UITableViewController {
+    public var subscriptionToken: Any?
+
     private let registeredCells: [(type: AnyClass, id: String)] = [
         (ReceiptTransactionCell.self, ReceiptTransactionCell.reuseIdentifier),
         (ReceiptFeeCell.self, ReceiptFeeCell.reuseIdentifier),
@@ -49,11 +51,23 @@ public final class ReceiptDetailController: UITableViewController {
         setupReceiptDetailTableView()
     }
 
+    override public func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        subscriptionToken = setupWith(tableView: tableView)
+    }
+
+    override public func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        if let subscriptionToken = subscriptionToken {
+            NotificationCenter.default.removeObserver(subscriptionToken)
+        }
+    }
+
     private func setupReceiptDetailTableView() {
         tableView = UITableView(frame: view.frame, style: .grouped)
         tableView.allowsSelection = false
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = Theme.Cell.extraSmallHeight
         tableView.separatorStyle = .singleLine
         tableView.accessibilityIdentifier = "receiptDetailTableView"
         tableView.cellLayoutMarginsFollowReadableWidth = false
@@ -117,5 +131,26 @@ extension ReceiptDetailController {
     override public func tableView(_ tableView: UITableView,
                                    estimatedHeightForHeaderInSection section: Int) -> CGFloat {
         return CGFloat(Theme.Cell.headerHeight)
+    }
+
+    override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return rowHeightConsideringSizeCategory(for: indexPath)
+    }
+}
+
+extension ReceiptDetailController: ContentSizeCategoryAdjustable {
+    public func rowHeightConsideringSizeCategory(for indexPath: IndexPath) -> CGFloat {
+        if isLargeSizeCategory {
+            return UITableView.automaticDimension
+        } else {
+            let section = presenter.sectionData[indexPath.section]
+            switch section.receiptDetailSectionHeader {
+            case .transaction:
+                return Theme.Cell.mediumHeight
+
+            default:
+                return Theme.Cell.extraSmallHeight
+            }
+        }
     }
 }

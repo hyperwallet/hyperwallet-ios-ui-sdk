@@ -24,7 +24,7 @@ import UIKit
 
 /// Lists all transfer method types available based on the country, currency and profile type to create a new transfer
 /// method (bank account, bank card, PayPal account, prepaid card, paper check).
-public final class SelectTransferMethodTypeController: UITableViewController, ContentSizeCategoryAdjustable {
+public final class SelectTransferMethodTypeController: UITableViewController {
     // MARK: - Outlets
     private var countryCurrencyTableView: UITableView!
 
@@ -66,10 +66,10 @@ public final class SelectTransferMethodTypeController: UITableViewController, Co
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        subscriptionToken = setupWith(tableView: tableView, and: Theme.Cell.largeHeight)
+        subscriptionToken = setupWith(tableView: tableView)
     }
 
-    override public func viewDidDisappear(_ animated: Bool) {
+    override public func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
         if let subscriptionToken = subscriptionToken {
@@ -131,6 +131,20 @@ extension SelectTransferMethodTypeController {
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.navigateToAddTransferMethod(indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return rowHeightConsideringSizeCategory(for: indexPath)
+    }
+}
+
+extension SelectTransferMethodTypeController: ContentSizeCategoryAdjustable {
+    public func rowHeightConsideringSizeCategory(for indexPath: IndexPath) -> CGFloat {
+        if isLargeSizeCategory {
+            return UITableView.automaticDimension
+        } else {
+            return Theme.Cell.largeHeight
+        }
     }
 }
 

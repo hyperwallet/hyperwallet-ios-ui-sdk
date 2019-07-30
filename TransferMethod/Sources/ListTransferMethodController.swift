@@ -25,7 +25,7 @@ import UIKit
 /// Lists the user's transfer methods (bank account, bank card, PayPal account, prepaid card, paper check).
 ///
 /// The user can deactivate and add a new transfer method.
-public final class ListTransferMethodController: UITableViewController, ContentSizeCategoryAdjustable {
+public final class ListTransferMethodController: UITableViewController {
     private var spinnerView: SpinnerView?
     private var processingView: ProcessingView?
     private var presenter: ListTransferMethodPresenter!
@@ -60,7 +60,7 @@ public final class ListTransferMethodController: UITableViewController, ContentS
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        subscriptionToken = setupWith(tableView: tableView, and: Theme.Cell.largeHeight)
+        subscriptionToken = setupWith(tableView: tableView)
     }
 
     override public func viewDidDisappear(_ animated: Bool) {
@@ -118,6 +118,10 @@ public final class ListTransferMethodController: UITableViewController, ContentS
 
     override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return CGFloat.leastNormalMagnitude
+    }
+
+    override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return rowHeightConsideringSizeCategory(for: indexPath)
     }
 
     private func addTransferMethod() {
@@ -212,5 +216,15 @@ extension ListTransferMethodController: ListTransferMethodView {
     private func toggleEmptyListView(hideLabel: Bool = true, hideButton: Bool = true) {
         emptyListLabel.isHidden = hideLabel
         addAccountButton.isHidden = hideButton
+    }
+}
+
+extension ListTransferMethodController: ContentSizeCategoryAdjustable {
+    public func rowHeightConsideringSizeCategory(for indexPath: IndexPath) -> CGFloat {
+        if isLargeSizeCategory {
+            return UITableView.automaticDimension
+        } else {
+            return Theme.Cell.largeHeight
+        }
     }
 }

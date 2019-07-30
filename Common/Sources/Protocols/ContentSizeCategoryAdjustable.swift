@@ -20,8 +20,10 @@ import UIKit
 
 public protocol ContentSizeCategoryAdjustable: class {
     var subscriptionToken: Any? { get set }
+    var isLargeSizeCategory: Bool { get }
 
-    func setupWith(tableView: UITableView, and regularHeight: CGFloat) -> Any?
+    func setupWith(tableView: UITableView) -> Any?
+    func rowHeightConsideringSizeCategory(for indexPath: IndexPath) -> CGFloat
 }
 
 /// Default implementation for ContentSizeCategoryAdjustable protocol
@@ -31,23 +33,21 @@ public extension ContentSizeCategoryAdjustable {
     ///
     /// - Parameters:
     ///   - tableView: UITableView to update
-    ///   - regularHeight: default row height
     /// - Returns: token of subscription observer
-    func setupWith(tableView: UITableView, and regularHeight: CGFloat) -> Any? {
-        updateRowHeightOfTableView(tableView, with: regularHeight)
-
-        let callback: ((Notification) -> Void) = { [weak self, weak tableView] _ in
-            guard let strongSelf = self, let strongTableView = tableView else {
-                return
-            }
-
-            strongSelf.updateRowHeightOfTableView(strongTableView, with: regularHeight)
-        }
+    func setupWith(tableView: UITableView) -> Any? {
+        tableView.reloadData()
 
         return NotificationCenter.default.addObserver(forName: UIContentSizeCategory.didChangeNotification,
                                                       object: nil,
                                                       queue: nil,
-                                                      using: callback)
+                                                      using: { [weak tableView] _ in
+                                                        tableView?.reloadData()
+        })
+    }
+
+    /// Indicates if current preferred content size category belongs to large or not
+    var isLargeSizeCategory: Bool {
+        return Self.largeSizes.contains(UIApplication.shared.preferredContentSizeCategory)
     }
 
     private static var largeSizes: [UIContentSizeCategory] {
@@ -61,11 +61,5 @@ public extension ContentSizeCategoryAdjustable {
             .extraExtraLarge,
             .extraLarge
         ]
-    }
-
-    private func updateRowHeightOfTableView(_ tableView: UITableView, with regularHeight: CGFloat) {
-        let isLargeContentSizeCategory = Self.largeSizes.contains(UIApplication.shared.preferredContentSizeCategory)
-        let rowHeight = isLargeContentSizeCategory ? UITableView.automaticDimension : regularHeight
-        tableView.rowHeight = rowHeight
     }
 }
