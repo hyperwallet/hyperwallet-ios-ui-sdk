@@ -39,10 +39,6 @@ public final class CreateTransferController: UITableViewController {
     var createTransferMethodHandler: ((HyperwalletTransferMethod) -> Void)?
     var createTransferHandler: ((HyperwalletTransfer) -> Void)?
 
-    private lazy var didTapNextRecognizer: UITapGestureRecognizer = {
-        UITapGestureRecognizer(target: self, action: #selector(didTapNext))
-    }()
-
     public init(clientTransferId: String, sourceToken: String?) {
         super.init(nibName: nil, bundle: nil)
         presenter = CreateTransferPresenter(clientTransferId, sourceToken, view: self)
@@ -165,30 +161,23 @@ extension CreateTransferController {
     }
 
     private func getButtonSectionCellConfiguration(_ cell: UITableViewCell, _ indexPath: IndexPath) {
-        let section = presenter.sectionData[indexPath.section]
-        if let tableViewCell = cell as? TransferButtonCell, section is CreateTransferSectionButtonData {
-            tableViewCell.configure(title: "create_transfer_next_button".localized())
-            guard let gestures = tableViewCell.gestureRecognizers, gestures.contains(didTapNextRecognizer) else {
-                tableViewCell.addGestureRecognizer(didTapNextRecognizer)
-                return
-            }
+        if let tableViewCell = cell as? TransferButtonCell {
+            tableViewCell.configure(title: "transfer_next_button".localized())
         }
-    }
-
-    @objc
-    private func didTapNext() {
-        presenter.createTransfer()
     }
 }
 
 // MARK: - Create transfer table view delegate
 extension CreateTransferController {
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let sectionData = presenter.sectionData[indexPath.section]
-        if sectionData.createTransferSectionHeader == CreateTransferSectionHeader.destination,
+        if sectionData.createTransferSectionHeader == .destination,
             presenter.sectionData[indexPath.section] is CreateTransferSectionDestinationData {
             presenter.showSelectDestinationAccountView()
-            tableView.deselectRow(at: indexPath, animated: true)
+        }
+        if sectionData.createTransferSectionHeader == .button {
+            presenter.createTransfer()
         }
     }
 }
@@ -233,7 +222,7 @@ extension CreateTransferController: CreateTransferView {
         //
         //        genericTableView.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
         //                                                                             target: self,
-        //                                                                             action: #selector(didTapAddButton))
+        //                                                                     action: #selector(didTapAddButton))
         //
         //        genericTableView.title = title
         //        genericTableView.items = items

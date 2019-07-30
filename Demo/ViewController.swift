@@ -139,6 +139,7 @@ class ViewController: UITableViewController {
         return Example.allCases.count
     }
 
+    //swiftlint:disable function_body_length
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let selectionIndexPath = self.tableView.indexPathForSelectedRow {
             self.tableView.deselectRow(at: selectionIndexPath, animated: false)

@@ -27,6 +27,8 @@ final class TransferDestinationCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+        textLabel?.accessibilityIdentifier = "transferDestinationTitleLabel"
+        detailTextLabel?.accessibilityIdentifier = "transferDestinationSubtitleLabel"
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -69,12 +71,10 @@ final class TransferDestinationCell: UITableViewCell {
 extension TransferDestinationCell {
     func configure(transferMethod: HyperwalletTransferMethod) {
         textLabel?.text = transferMethod.type?.lowercased().localized()
-        textLabel?.accessibilityIdentifier = "createTransferAddSelectDestinationCellTextLabel"
         detailTextLabel?.attributedText = formatDetails(
             subtitle: transferMethod.transferMethodCountry?.localized() ?? "",
             additionalInfo: transferMethod.additionalInfo)
 
-        detailTextLabel?.accessibilityIdentifier = "createTransferAddSelectDestinationCellDetailTextLabel"
         detailTextLabel?.numberOfLines = 0
         detailTextLabel?.lineBreakMode = .byWordWrapping
         let icon = UIImage.fontIcon(HyperwalletIcon.of(transferMethod.type ?? "").rawValue,
@@ -87,10 +87,8 @@ extension TransferDestinationCell {
 
     func configure(_ title: String, _ subtitle: String, _ hyperwalletIcon: HyperwalletIconContent) {
         textLabel?.text = title
-        textLabel?.accessibilityIdentifier = "createTransferAddSelectDestinationCellTextLabel"
 
         detailTextLabel?.attributedText = formatDetails(subtitle: subtitle)
-        detailTextLabel?.accessibilityIdentifier = "createTransferAddSelectDestinationCellDetailTextLabel"
         detailTextLabel?.numberOfLines = 0
         detailTextLabel?.lineBreakMode = .byWordWrapping
         let icon = UIImage.fontIcon(hyperwalletIcon.rawValue,

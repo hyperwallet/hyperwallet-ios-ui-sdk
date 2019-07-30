@@ -43,6 +43,7 @@
 		09795B78229D7FE000EF407F /* ListTransferMethodResponseWithoutPayPalAccount.json in Resources */ = {isa = PBXBuildFile; fileRef = 09795B77229D7FDF00EF407F /* ListTransferMethodResponseWithoutPayPalAccount.json */; };
 		09E7165022A697C400FA9B96 /* ReceiptsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7164F22A697C400FA9B96 /* ReceiptsList.swift */; };
 		09E7165622A6983400FA9B96 /* ListReceiptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7165522A6983400FA9B96 /* ListReceiptTests.swift */; };
+		2BF9E5F822EF8BF200BB7DA5 /* TransferRepositoryFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF9E5F722EF8BF200BB7DA5 /* TransferRepositoryFactoryTests.swift */; };
 		412F723722B45DB100837F8F /* TransactionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F723222B458C700837F8F /* TransactionDetails.swift */; };
 		4157135D22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json in Resources */ = {isa = PBXBuildFile; fileRef = 4157135C22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json */; };
 		4157135F22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json in Resources */ = {isa = PBXBuildFile; fileRef = 4157135E22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json */; };
@@ -306,40 +307,54 @@
 			remoteGlobalIDString = 073BB98122E63DB50053C24E;
 			remoteInfo = TransferRepository;
 		};
-		07559EB022EFA05B0055AEA9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 643912D322DF40CB00036609;
-			remoteInfo = UserRepository;
-		};
+        07559EB022EFA05B0055AEA9 /* PBXContainerItemProxy */ = {
+            isa = PBXContainerItemProxy;
+            containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+            proxyType = 1;
+            remoteGlobalIDString = 643912D322DF40CB00036609;
+            remoteInfo = UserRepository;
+        };
+        2BF9E5EB22EF7DE400BB7DA5 /* PBXContainerItemProxy */ = {
+            isa = PBXContainerItemProxy;
+            containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+            proxyType = 1;
+            remoteGlobalIDString = 4A9A7BDE22E859E60022E573;
+            remoteInfo = Transfer;
+        };
+        2BF9E5ED22EF7DE800BB7DA5 /* PBXContainerItemProxy */ = {
+            isa = PBXContainerItemProxy;
+            containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+            proxyType = 1;
+            remoteGlobalIDString = 073BB98122E63DB50053C24E;
+            remoteInfo = TransferRepository;
+        };
+        2BF9E5EF22EF7F1B00BB7DA5 /* PBXContainerItemProxy */ = {
+            isa = PBXContainerItemProxy;
+            containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+            proxyType = 1;
+            remoteGlobalIDString = DB551F4822E1316400DD65C2;
+            remoteInfo = Common;
+        };
+        2BF9E5F122EF7F2700BB7DA5 /* PBXContainerItemProxy */ = {
+            isa = PBXContainerItemProxy;
+            containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+            proxyType = 1;
+            remoteGlobalIDString = DB551F4822E1316400DD65C2;
+            remoteInfo = Common;
+        };
+        2BF9E5F322EF7F3300BB7DA5 /* PBXContainerItemProxy */ = {
+            isa = PBXContainerItemProxy;
+            containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+            proxyType = 1;
+            remoteGlobalIDString = DB551F4822E1316400DD65C2;
+            remoteInfo = Common;
+        };
 		4A9A7BE922E859E60022E573 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 4A9A7BDE22E859E60022E573;
 			remoteInfo = Transfer;
-		};
-		4A9A7BFA22E85B870022E573 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DB551F4822E1316400DD65C2;
-			remoteInfo = Common;
-		};
-		4A9A7BFC22E85B8C0022E573 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 073BB98122E63DB50053C24E;
-			remoteInfo = TransferRepository;
-		};
-		4A9A7C0C22E87C130022E573 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 643912D322DF40CB00036609;
-			remoteInfo = UserRepository;
 		};
 		4A9A7C1322E880B40022E573 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -354,13 +369,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 073BB98122E63DB50053C24E;
 			remoteInfo = TransferRepository;
-		};
-		4AD6B1CD22EF2264002363C8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DBAF929C22CFCBC7004F197A;
-			remoteInfo = TransferMethodRepository;
 		};
 		4AE6B6CA22D605B20009DEFE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -418,13 +426,6 @@
 			remoteGlobalIDString = DB99C2C722E220C200E45185;
 			remoteInfo = Receipt;
 		};
-		DB5295F822E2327300657F50 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DB551F4822E1316400DD65C2;
-			remoteInfo = Common;
-		};
 		DB52960A22E235EF00657F50 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
@@ -467,27 +468,6 @@
 			remoteGlobalIDString = 643912D322DF40CB00036609;
 			remoteInfo = UserRepository;
 		};
-		DB52962322E238DE00657F50 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4AE6B6BF22D605B20009DEFE;
-			remoteInfo = ReceiptRepository;
-		};
-		DB52962522E2390500657F50 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DBAF929C22CFCBC7004F197A;
-			remoteInfo = TransferMethodRepository;
-		};
-		DB52962922E2392300657F50 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 643912D322DF40CB00036609;
-			remoteInfo = UserRepository;
-		};
 		DB551F7922E1356000DD65C2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
@@ -501,13 +481,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = DB551FA622E1409700DD65C2;
 			remoteInfo = TransferMethod;
-		};
-		DB551FC722E141F000DD65C2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DB551F4822E1316400DD65C2;
-			remoteInfo = Common;
 		};
 		DB99C2D222E220C200E45185 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -612,6 +585,7 @@
 		09795B7A229E7EB700EF407F /* BankAccountIndividualResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BankAccountIndividualResponse.json; sourceTree = "<group>"; };
 		09E7164F22A697C400FA9B96 /* ReceiptsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptsList.swift; sourceTree = "<group>"; };
 		09E7165522A6983400FA9B96 /* ListReceiptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListReceiptTests.swift; sourceTree = "<group>"; };
+		2BF9E5F722EF8BF200BB7DA5 /* TransferRepositoryFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferRepositoryFactoryTests.swift; sourceTree = "<group>"; };
 		412F723222B458C700837F8F /* TransactionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetails.swift; sourceTree = "<group>"; };
 		4157135C22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardReceiptsForOneMonth.json; sourceTree = "<group>"; };
 		4157135E22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardReceiptsForFewMonths.json; sourceTree = "<group>"; };
@@ -1033,6 +1007,7 @@
 				073BB9A422E640C90053C24E /* Responses */,
 				073BB99122E63DB50053C24E /* Info.plist */,
 				073BB9AF22E641BE0053C24E /* TransferRepositoryTests.swift */,
+				2BF9E5F722EF8BF200BB7DA5 /* TransferRepositoryFactoryTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -2021,10 +1996,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				4A9A7BFB22E85B870022E573 /* PBXTargetDependency */,
-				4A9A7BFD22E85B8C0022E573 /* PBXTargetDependency */,
-				4AD6B1CE22EF2264002363C8 /* PBXTargetDependency */,
-				4A9A7C0D22E87C130022E573 /* PBXTargetDependency */,
+				2BF9E5F422EF7F3300BB7DA5 /* PBXTargetDependency */,
 			);
 			name = Transfer;
 			productName = Transfer;
@@ -2219,9 +2191,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				DB52962A22E2392300657F50 /* PBXTargetDependency */,
-				DB52962622E2390500657F50 /* PBXTargetDependency */,
-				DB551FC822E141F000DD65C2 /* PBXTargetDependency */,
+				2BF9E5F022EF7F1B00BB7DA5 /* PBXTargetDependency */,
 			);
 			name = TransferMethod;
 			productName = TransferMethod;
@@ -2259,8 +2229,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				DB52962422E238DE00657F50 /* PBXTargetDependency */,
-				DB5295F922E2327300657F50 /* PBXTargetDependency */,
+				2BF9E5F222EF7F2700BB7DA5 /* PBXTargetDependency */,
 			);
 			name = Receipt;
 			productName = Receipt;
@@ -2335,6 +2304,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				2BF9E5EE22EF7DE800BB7DA5 /* PBXTargetDependency */,
+				2BF9E5EC22EF7DE400BB7DA5 /* PBXTargetDependency */,
 				DB5295EF22E2323900657F50 /* PBXTargetDependency */,
 				DB5295F122E2323900657F50 /* PBXTargetDependency */,
 				DB5295F322E2323900657F50 /* PBXTargetDependency */,
@@ -2895,6 +2866,7 @@
 				073BB9B722E643880053C24E /* AuthenticationTokenGeneratorMock.swift in Sources */,
 				073BB9B822E643880053C24E /* AuthenticationProviderMock.swift in Sources */,
 				073BB9B922E643880053C24E /* HyperwalletTestHelper.swift in Sources */,
+				2BF9E5F822EF8BF200BB7DA5 /* TransferRepositoryFactoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3183,25 +3155,36 @@
 			target = 643912D322DF40CB00036609 /* UserRepository */;
 			targetProxy = 07559EB022EFA05B0055AEA9 /* PBXContainerItemProxy */;
 		};
+        2BF9E5EC22EF7DE400BB7DA5 /* PBXTargetDependency */ = {
+        isa = PBXTargetDependency;
+        target = 4A9A7BDE22E859E60022E573 /* Transfer */;
+        targetProxy = 2BF9E5EB22EF7DE400BB7DA5 /* PBXContainerItemProxy */;
+        };
+        2BF9E5EE22EF7DE800BB7DA5 /* PBXTargetDependency */ = {
+        isa = PBXTargetDependency;
+        target = 073BB98122E63DB50053C24E /* TransferRepository */;
+        targetProxy = 2BF9E5ED22EF7DE800BB7DA5 /* PBXContainerItemProxy */;
+        };
+        2BF9E5F022EF7F1B00BB7DA5 /* PBXTargetDependency */ = {
+        isa = PBXTargetDependency;
+        target = DB551F4822E1316400DD65C2 /* Common */;
+        targetProxy = 2BF9E5EF22EF7F1B00BB7DA5 /* PBXContainerItemProxy */;
+        };
+        2BF9E5F222EF7F2700BB7DA5 /* PBXTargetDependency */ = {
+        isa = PBXTargetDependency;
+        target = DB551F4822E1316400DD65C2 /* Common */;
+        targetProxy = 2BF9E5F122EF7F2700BB7DA5 /* PBXContainerItemProxy */;
+        };
+        2BF9E5F422EF7F3300BB7DA5 /* PBXTargetDependency */ = {
+        isa = PBXTargetDependency;
+        target = DB551F4822E1316400DD65C2 /* Common */;
+        targetProxy = 2BF9E5F322EF7F3300BB7DA5 /* PBXContainerItemProxy */;
+        };
+
 		4A9A7BEA22E859E60022E573 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 4A9A7BDE22E859E60022E573 /* Transfer */;
 			targetProxy = 4A9A7BE922E859E60022E573 /* PBXContainerItemProxy */;
-		};
-		4A9A7BFB22E85B870022E573 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DB551F4822E1316400DD65C2 /* Common */;
-			targetProxy = 4A9A7BFA22E85B870022E573 /* PBXContainerItemProxy */;
-		};
-		4A9A7BFD22E85B8C0022E573 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 073BB98122E63DB50053C24E /* TransferRepository */;
-			targetProxy = 4A9A7BFC22E85B8C0022E573 /* PBXContainerItemProxy */;
-		};
-		4A9A7C0D22E87C130022E573 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 643912D322DF40CB00036609 /* UserRepository */;
-			targetProxy = 4A9A7C0C22E87C130022E573 /* PBXContainerItemProxy */;
 		};
 		4A9A7C1422E880B40022E573 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3212,11 +3195,6 @@
 			isa = PBXTargetDependency;
 			target = 073BB98122E63DB50053C24E /* TransferRepository */;
 			targetProxy = 4A9A7C1522E880CB0022E573 /* PBXContainerItemProxy */;
-		};
-		4AD6B1CE22EF2264002363C8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DBAF929C22CFCBC7004F197A /* TransferMethodRepository */;
-			targetProxy = 4AD6B1CD22EF2264002363C8 /* PBXContainerItemProxy */;
 		};
 		4AE6B6CB22D605B20009DEFE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3258,11 +3236,6 @@
 			target = DB99C2C722E220C200E45185 /* Receipt */;
 			targetProxy = DB5295F622E2323900657F50 /* PBXContainerItemProxy */;
 		};
-		DB5295F922E2327300657F50 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DB551F4822E1316400DD65C2 /* Common */;
-			targetProxy = DB5295F822E2327300657F50 /* PBXContainerItemProxy */;
-		};
 		DB52960B22E235EF00657F50 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DB551F4822E1316400DD65C2 /* Common */;
@@ -3293,21 +3266,6 @@
 			target = 643912D322DF40CB00036609 /* UserRepository */;
 			targetProxy = DB52961F22E2361600657F50 /* PBXContainerItemProxy */;
 		};
-		DB52962422E238DE00657F50 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4AE6B6BF22D605B20009DEFE /* ReceiptRepository */;
-			targetProxy = DB52962322E238DE00657F50 /* PBXContainerItemProxy */;
-		};
-		DB52962622E2390500657F50 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DBAF929C22CFCBC7004F197A /* TransferMethodRepository */;
-			targetProxy = DB52962522E2390500657F50 /* PBXContainerItemProxy */;
-		};
-		DB52962A22E2392300657F50 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 643912D322DF40CB00036609 /* UserRepository */;
-			targetProxy = DB52962922E2392300657F50 /* PBXContainerItemProxy */;
-		};
 		DB551F7A22E1356000DD65C2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DB551F4822E1316400DD65C2 /* Common */;
@@ -3317,11 +3275,6 @@
 			isa = PBXTargetDependency;
 			target = DB551FA622E1409700DD65C2 /* TransferMethod */;
 			targetProxy = DB551FB122E1409700DD65C2 /* PBXContainerItemProxy */;
-		};
-		DB551FC822E141F000DD65C2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DB551F4822E1316400DD65C2 /* Common */;
-			targetProxy = DB551FC722E141F000DD65C2 /* PBXContainerItemProxy */;
 		};
 		DB99C2D322E220C200E45185 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

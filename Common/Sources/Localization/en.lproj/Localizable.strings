@@ -206,7 +206,7 @@
 "transfer_fx_rate_confirmation" = "Exchange Rate:";
 "available_balance_footer" = "Available for transfer: %1$@";
 "transfer_description" = "Description";
-"create_transfer_next_button" = "Next";
+"transfer_next_button" = "Next";
 "transfer_add_account_title" = "Add Account";
 "transfer_add_account_subtitle" = "An account hasn't been set up yet, please add an account first.";
 "schedule_transfer_section_header_destination" = "DESITINATION";
