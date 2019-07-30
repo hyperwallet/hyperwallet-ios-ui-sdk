@@ -188,6 +188,7 @@ final class CreateTransferPresenter {
         guard let amount = amount else {
             return
         }
+        view.showLoading()
         let transfer = HyperwalletTransfer.Builder(clientTransferId: clientTransferId,
                                                    sourceToken: sourceToken ?? "",
                                                    destinationToken: selectedTransferMethod.token ?? "")

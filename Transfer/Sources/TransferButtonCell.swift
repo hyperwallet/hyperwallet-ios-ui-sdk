@@ -23,24 +23,22 @@ import Common
 final class TransferButtonCell: UITableViewCell {
     static let reuseIdentifier = "transferButtonCellIdentifier"
 
-    private(set) lazy var nextButton: UIButton = {
-        let button = UIButton()
-        button.setTitleColor(Theme.Button.color, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.accessibilityLabel = "transfer_next_button".localized()
-        button.accessibilityIdentifier = "addTransferNextButton"
-        return button
+    private(set) lazy var nextLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = Theme.Button.color
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.accessibilityLabel = "transfer_next_button".localized()
+        label.accessibilityIdentifier = "addTransferNextLabel"
+        return label
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(nextButton)
-        nextButton.safeAreaLeadingAnchor
-            .constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor).isActive = true
-        nextButton.safeAreaCenterYAnchor
+        contentView.addSubview(nextLabel)
+        nextLabel.safeAreaCenterYAnchor
             .constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor).isActive = true
-        nextButton.safeAreaTrailingAnchor
-            .constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor).isActive = true
+        nextLabel.safeAreaCenterXAnchor
+            .constraint(equalTo: contentView.layoutMarginsGuide.centerXAnchor).isActive = true
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -48,19 +46,19 @@ final class TransferButtonCell: UITableViewCell {
     }
 
     func configure(title: String) {
-        nextButton.setTitle(title, for: .normal)
+        nextLabel.text = title
     }
 }
 
 extension TransferButtonCell {
     // MARK: Theme manager's proxy properties
     @objc dynamic var titleLabelFont: UIFont! {
-        get { return nextButton.titleLabel?.font }
-        set { nextButton.titleLabel?.font = newValue }
+        get { return nextLabel.font }
+        set { nextLabel.font = newValue }
     }
 
     @objc dynamic var titleLabelColor: UIColor! {
-        get { return nextButton.titleLabel?.textColor }
-        set { nextButton.setTitleColor(newValue, for: .normal) }
+        get { return nextLabel.textColor }
+        set { nextLabel.textColor = newValue }
     }
 }
