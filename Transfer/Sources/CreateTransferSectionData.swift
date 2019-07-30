@@ -64,7 +64,7 @@ struct CreateTransferSectionTransferData: CreateTransferSectionData {
     ]}
     var footer: String?
 
-    init(destinationCurrency: String, availableBalance: String?) {
+    init(availableBalance: String?) {
         guard let availableBalance = availableBalance else {
             footer = nil
             return
