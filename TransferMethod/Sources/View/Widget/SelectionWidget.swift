@@ -42,6 +42,7 @@ final class SelectionWidget: AbstractWidget {
 
     override func setupLayout(field: HyperwalletField) {
         super.setupLayout(field: field)
+        layoutMargins = UIEdgeInsets(top: 11.0, left: 0, bottom: 11.0, right: -24.0)
         labelField.accessibilityIdentifier = field.name
         addArrangedSubview(labelField)
 
