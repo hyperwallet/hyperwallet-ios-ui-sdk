@@ -90,13 +90,17 @@ class CreateTransferTests: XCTestCase {
     func testShowSelectDestinationAccountView_success() {
         initializePresenter(transferMethodResult: .success)
         presenter.showSelectDestinationAccountView()
-        XCTAssertTrue(mockView.isShowGenericTableViewPerformed)
+        XCTAssertTrue(mockView.isShowGenericTableViewPerformed, "isShowGenericTableViewPerformed should be performed")
+        XCTAssertNotNil(presenter.selectedTransferMethod, "selectedTransferMethod should not be nil")
+        XCTAssertTrue(mockView.isShowCreateTransferPerformed, "isShowCreateTransferPerformed should be performed")
     }
 
     func testShowSelectDestinationAccountView_failure() {
         initializePresenter(transferMethodResult: .failure)
         presenter.showSelectDestinationAccountView()
-        XCTAssertFalse(mockView.isShowGenericTableViewPerformed)
+        XCTAssertFalse(mockView.isShowGenericTableViewPerformed,
+                       "isShowGenericTableViewPerformed should not be performed")
+        XCTAssertTrue(mockView.isShowErrorPerformed, "isShowGenericTableViewPerformed should be performed")
     }
 }
 
@@ -136,6 +140,8 @@ class MockCreateTransferView: CreateTransferView {
                               selectItemHandler: @escaping CreateTransferView.SelectItemHandler,
                               markCellHandler: @escaping CreateTransferView.MarkCellHandler) {
         isShowGenericTableViewPerformed = true
+        selectItemHandler(items.first!)
+        _ = markCellHandler(items.first!)
     }
 
     func showLoading() {
