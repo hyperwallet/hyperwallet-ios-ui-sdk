@@ -14,8 +14,8 @@ class ScheduleTransferPresenterTests: XCTestCase {
     private var transfer: HyperwalletTransfer!
 
     override func setUp() {
-        transfer = getTransfer(from: HyperwalletTestHelper.getDataFromJson("CreateTransferResponse"))!
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
+        transfer = getTransfer(from: HyperwalletTestHelper.getDataFromJson("CreateTransferResponse"))!
         presenter = ScheduleTransferPresenter(view: mockView, transferMethod: transferMethod, transfer: transfer)
     }
 

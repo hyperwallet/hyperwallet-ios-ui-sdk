@@ -24,12 +24,24 @@ class CreateTransferTests: XCTestCase {
         mockView.resetStates()
     }
 
-    private func initializePresenter(emptyTransferMethods: Bool) {
-        if emptyTransferMethods {
-            TransferMethodRepositoryRequestHelper.setupSucessRequest()
-        } else {
-            TransferMethodRepositoryRequestHelper.setupNoContentRequest()
+    private enum LoadTransferMethodsResultType {
+        case success, failure, noContent
+        func setUpRequest() {
+            switch self {
+            case .success:
+                TransferMethodRepositoryRequestHelper.setupSucessRequest()
+
+            case .failure:
+                TransferMethodRepositoryRequestHelper.setupFailureRequest()
+
+            case .noContent:
+                TransferMethodRepositoryRequestHelper.setupNoContentRequest()
+            }
         }
+    }
+
+    private func initializePresenter(transferMethodResult: LoadTransferMethodsResultType) {
+        transferMethodResult.setUpRequest()
         UserRepositoryRequestHelper.setupSucessRequest()
         CreateTransferRequestHelper.setupSucessRequest()
 
@@ -56,8 +68,20 @@ class CreateTransferTests: XCTestCase {
     }
 
     func testSectionDataWhenSelectedTransferMethodIsNil() {
-        initializePresenter(emptyTransferMethods: true)
+        initializePresenter(transferMethodResult: .noContent)
         XCTAssertEqual(presenter.sectionData.count, 3, "")
+    }
+
+    func testShowSelectDestinationAccountView_success() {
+        initializePresenter(transferMethodResult: .success)
+        presenter.showSelectDestinationAccountView()
+        XCTAssertTrue(mockView.isShowGenericTableViewPerformed)
+    }
+
+    func testShowSelectDestinationAccountView_failure() {
+        initializePresenter(transferMethodResult: .failure)
+        presenter.showSelectDestinationAccountView()
+        XCTAssertFalse(mockView.isShowGenericTableViewPerformed)
     }
 }
 
@@ -88,6 +112,8 @@ class MockCreateTransferView: CreateTransferView {
 
     func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
         isShowErrorPerformed = true
+        retry!()
+        expectation?.fulfill()
     }
 
     func showGenericTableView(items: [HyperwalletTransferMethod],

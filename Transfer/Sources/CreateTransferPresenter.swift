@@ -235,7 +235,7 @@ final class CreateTransferPresenter {
 
             case .failure(let error):
                 strongSelf.view.showError(error, { () -> Void in
-                    strongSelf.loadCreateTransfer()
+                    strongSelf.loadTransferMethods()
                 })
             }
         }
