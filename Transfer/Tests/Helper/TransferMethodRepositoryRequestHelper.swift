@@ -26,7 +26,7 @@ class TransferMethodRepositoryRequestHelper {
     }
 
     private static func setUpMockServer(_ dataResponse: StubResponse, _ requestUrl: String) {
-        let dataRequest = HyperwalletTestHelper.buildGetRequest(baseUrl: requestUrl, dataResponse)
+        let dataRequest = HyperwalletTestHelper.buildGetRequestRegexMatcher(pattern: requestUrl, dataResponse)
         HyperwalletTestHelper.setUpMockServer(request: dataRequest)
     }
 }
