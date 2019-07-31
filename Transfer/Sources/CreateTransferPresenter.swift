@@ -208,9 +208,9 @@ final class CreateTransferPresenter {
                 })
 
             case .success(let transfer):
-                if transfer != nil {
-                    strongSelf.view.notifyTransferCreated(transfer!)
-                    // TODO strongSelf.view.showScheduleTransfer()
+                if let transfer = transfer {
+                    strongSelf.view.notifyTransferCreated(transfer)
+                    strongSelf.view.showScheduleTransfer(transfer)
                 }
             }
         }
@@ -233,8 +233,10 @@ final class CreateTransferPresenter {
                                                             .destinationAccountMarkCellHandler())
                 }
 
-            case .failure:
-                break
+            case .failure(let error):
+                strongSelf.view.showError(error, { () -> Void in
+                    strongSelf.loadTransferMethods()
+                })
             }
         }
     }

@@ -29,6 +29,8 @@ public extension ThemeManager {
         applyToTransferNotesCell()
         applyToTransferAllFundsCell()
         applyToTransferAmountCell()
+        applyToScheduleTransferSummaryCell()
+        applyToScheduleForeignExchangeCell()
     }
 
     private static func applyToTransferDestinationCell() {
@@ -63,5 +65,21 @@ public extension ThemeManager {
         proxy.titleLabelColor = Theme.Label.color
         proxy.currencyLabelFont = Theme.Label.bodyFontMedium
         proxy.currencyLabelColor = Theme.Label.color
+    }
+
+    private static func applyToScheduleTransferSummaryCell() {
+        let proxy = TransferSummaryCell.appearance()
+        proxy.titleLabelFont = Theme.Label.bodyFontMedium
+        proxy.titleLabelColor = Theme.Label.color
+        proxy.subTitleLabelFont = Theme.Label.captionOne
+        proxy.subTitleLabelColor = Theme.Label.subTitleColor
+    }
+
+    private static func applyToScheduleForeignExchangeCell() {
+        let proxy = TransferForeignExchangeCell.appearance()
+        proxy.titleLabelFont = Theme.Label.bodyFontMedium
+        proxy.titleLabelColor = Theme.Label.color
+        proxy.subTitleLabelFont = Theme.Label.captionOne
+        proxy.subTitleLabelColor = Theme.Label.subTitleColor
     }
 }
