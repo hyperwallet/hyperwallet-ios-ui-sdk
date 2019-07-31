@@ -29,7 +29,7 @@ extension HyperwalletTransferMethod: GenericCellConfiguration {
     }
 
     /// Additional information about the transfer method
-    private var additionalInfo: String? {
+    var additionalInfo: String? {
         switch type {
         case "BANK_CARD", "PREPAID_CARD":
             return String(format: "%@%@",

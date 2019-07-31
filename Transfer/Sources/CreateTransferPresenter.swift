@@ -63,7 +63,6 @@ final class CreateTransferPresenter {
     private var sourceToken: String?
 
     var selectedTransferMethod: HyperwalletTransferMethod!
-    var availableTransferMethods = [HyperwalletTransferMethod]()
     var amount: String?
     var notes: String?
     var transferAllFundsIsOn: Bool = false {
@@ -145,14 +144,11 @@ final class CreateTransferPresenter {
                 })
 
             case .success(let result):
-                guard let availableTransferMethods = result?.data,
-                    let firstActivatedTransferMetod = availableTransferMethods.first
-                    else {
+                guard let firstActivatedTransferMetod = result?.data?.first else {
                         strongSelf.selectedTransferMethod = nil
                         strongSelf.view.hideLoading()
                         return
                 }
-                strongSelf.availableTransferMethods = availableTransferMethods
                 if strongSelf.selectedTransferMethod == nil {
                     strongSelf.selectedTransferMethod = firstActivatedTransferMetod
                 }
@@ -221,10 +217,25 @@ final class CreateTransferPresenter {
 
     // MARK: - Destionation view
     func showSelectDestinationAccountView() {
-        view.showGenericTableView(items: availableTransferMethods,
-                                  title: "select_destination".localized(),
-                                  selectItemHandler: selectDestinationAccountHandler(),
-                                  markCellHandler: destinationAccountMarkCellHandler())
+        transferMethodRepository.listTransferMethods { [weak self] result in
+            guard let strongSelf = self else {
+                return
+            }
+            switch result {
+            case .success(let pageList):
+                if let transferMethods = pageList?.data {
+                    strongSelf.view.showGenericTableView(items: transferMethods,
+                                                         title: "select_destination".localized(),
+                                                         selectItemHandler: strongSelf
+                                                            .selectDestinationAccountHandler(),
+                                                         markCellHandler: strongSelf
+                                                            .destinationAccountMarkCellHandler())
+                }
+
+            case .failure:
+                break
+            }
+        }
     }
 
     private func destinationAccountMarkCellHandler() -> CreateTransferView.MarkCellHandler {
