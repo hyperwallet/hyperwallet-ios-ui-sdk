@@ -233,8 +233,10 @@ final class CreateTransferPresenter {
                                                             .destinationAccountMarkCellHandler())
                 }
 
-            case .failure:
-                break
+            case .failure(let error):
+                strongSelf.view.showError(error, { () -> Void in
+                    strongSelf.loadTransferMethods()
+                })
             }
         }
     }
