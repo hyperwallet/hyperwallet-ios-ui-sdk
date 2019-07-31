@@ -30,10 +30,6 @@ class CreateTransferTests: XCTestCase {
         } else {
             TransferMethodRepositoryRequestHelper.setupSucessRequest()
         }
-    }
-
-    private func initializePresenter(transferMethodResult: LoadTransferMethodsResultType) {
-        transferMethodResult.setUpRequest()
         UserRepositoryRequestHelper.setupSucessRequest()
         CreateTransferRequestHelper.setupSucessRequest()
 
@@ -93,18 +89,6 @@ class CreateTransferTests: XCTestCase {
                        .button,
                        "Section type should be Button")
     }
-
-    func testShowSelectDestinationAccountView_success() {
-        initializePresenter(transferMethodResult: .success)
-        presenter.showSelectDestinationAccountView()
-        XCTAssertTrue(mockView.isShowGenericTableViewPerformed)
-    }
-
-    func testShowSelectDestinationAccountView_failure() {
-        initializePresenter(transferMethodResult: .failure)
-        presenter.showSelectDestinationAccountView()
-        XCTAssertFalse(mockView.isShowGenericTableViewPerformed)
-    }
 }
 
 class MockCreateTransferView: CreateTransferView {
@@ -134,8 +118,6 @@ class MockCreateTransferView: CreateTransferView {
 
     func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
         isShowErrorPerformed = true
-        retry!()
-        expectation?.fulfill()
     }
 
     func showGenericTableView(items: [HyperwalletTransferMethod],
