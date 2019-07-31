@@ -43,12 +43,14 @@ final class TransferButtonCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
 
+    /// This is to configure the next button in create transfer page
     func configure(title: String) {
         buttonLabel.text = title
         buttonLabel.accessibilityLabel = "transfer_next_button".localized()
         buttonLabel.accessibilityIdentifier = "addTransferNextLabel"
     }
 
+    /// This is to configure the confirmation button in schedule transfer page
     func configure(title: String, action: UIGestureRecognizer) {
         buttonLabel.text = title
         buttonLabel.accessibilityLabel = "schedule_transfer_button".localized()
