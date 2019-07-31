@@ -35,6 +35,8 @@
 		4157135F22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json in Resources */ = {isa = PBXBuildFile; fileRef = 4157135E22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json */; };
 		4157136122C43660005D6DB1 /* PrepaidCardReceiptsPaging.json in Resources */ = {isa = PBXBuildFile; fileRef = 4157136022C43660005D6DB1 /* PrepaidCardReceiptsPaging.json */; };
 		4157136422C56B53005D6DB1 /* PrepaidCardListReceiptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4157136222C56B4B005D6DB1 /* PrepaidCardListReceiptTests.swift */; };
+		4A2B949F22F1BE0A000A0F14 /* UserRepositoryRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2B949D22F1BD8E000A0F14 /* UserRepositoryRequestHelper.swift */; };
+		4A2B94A022F1BE32000A0F14 /* TransferRepositoryRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BB9B622E643880053C24E /* TransferRepositoryRequestHelper.swift */; };
 		4A31BDB722D762AE0027DACA /* PrepaidCardReceiptRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A31BDB622D762AE0027DACA /* PrepaidCardReceiptRepositoryTests.swift */; };
 		4A31BDB922D762CE0027DACA /* ReceiptRepositoryFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A31BDB822D762CE0027DACA /* ReceiptRepositoryFactoryTests.swift */; };
 		4A37DB9222E8AFEE0085A329 /* Transfer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A9A7BDF22E859E60022E573 /* Transfer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -608,6 +610,9 @@
 		4A22F1E722A67FAA00D58883 /* ReceiptDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptDetailCell.swift; sourceTree = "<group>"; };
 		4A22F1E922A67FE400D58883 /* ReceiptNotesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptNotesCell.swift; sourceTree = "<group>"; };
 		4A22F1EB22A6800F00D58883 /* ReceiptFeeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptFeeCell.swift; sourceTree = "<group>"; };
+		4A2B949B22F1BBCB000A0F14 /* UserIndividualResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserIndividualResponse.json; sourceTree = "<group>"; };
+		4A2B949C22F1BC00000A0F14 /* ListTransferMethodSuccessResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ListTransferMethodSuccessResponse.json; sourceTree = "<group>"; };
+		4A2B949D22F1BD8E000A0F14 /* UserRepositoryRequestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryRequestHelper.swift; sourceTree = "<group>"; };
 		4A31BDB422D7356D0027DACA /* ReceiptRepositoryCompletionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptRepositoryCompletionHelper.swift; sourceTree = "<group>"; };
 		4A31BDB622D762AE0027DACA /* PrepaidCardReceiptRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepaidCardReceiptRepositoryTests.swift; sourceTree = "<group>"; };
 		4A31BDB822D762CE0027DACA /* ReceiptRepositoryFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptRepositoryFactoryTests.swift; sourceTree = "<group>"; };
@@ -1091,7 +1096,7 @@
 				078B456E2273895C005B0248 /* TransferMethodConfigurationKeysResponse.json */,
 				070769E322D7E1FB00F3C7CF /* UnexpectedErrorResponse.json */,
 				DBA9FA5A2279143900C1301A /* UserBusinessResponse.json */,
-				DBA9FA58227912A000C1301A /* UserIndividualResponse.json */,
+				4A2B949B22F1BBCB000A0F14 /* UserIndividualResponse.json */,
 				DBB50B4622D7CADB0029B74B /* UserIndividualResponseWithoutCountry.json */,
 				644A69C422B127080058E77E /* WireAccountIndividualResponse.json */,
 			);
@@ -1130,6 +1135,15 @@
 			path = Receipts;
 			sourceTree = "<group>";
 		};
+		4A2B949A22F1BB82000A0F14 /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				4A2B949C22F1BC00000A0F14 /* ListTransferMethodSuccessResponse.json */,
+				DBA9FA58227912A000C1301A /* UserIndividualResponse.json */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
 		4A31BDB322D735410027DACA /* Helper */ = {
 			isa = PBXGroup;
 			children = (
@@ -1151,6 +1165,7 @@
 			isa = PBXGroup;
 			children = (
 				4A9A7C1922E89BF10022E573 /* Helper */,
+				4A2B949A22F1BB82000A0F14 /* Responses */,
 				4A9A7BEC22E859E60022E573 /* CreateTransferPresenterTests.swift */,
 				4A9A7BEE22E859E60022E573 /* Info.plist */,
 			);
@@ -1190,6 +1205,8 @@
 				4A9A7C1A22E89C610022E573 /* AuthenticationProviderMock.swift */,
 				4A9A7C1B22E89C620022E573 /* AuthenticationTokenGeneratorMock.swift */,
 				4A9A7C1722E89BEB0022E573 /* HyperwalletTestHelper.swift */,
+				4A2B949D22F1BD8E000A0F14 /* UserRepositoryRequestHelper.swift */,
+				073BB9B622E643880053C24E /* TransferRepositoryRequestHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -2890,9 +2907,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A2B94A022F1BE32000A0F14 /* TransferRepositoryRequestHelper.swift in Sources */,
 				4A9A7C1F22E89C790022E573 /* AuthenticationProviderMock.swift in Sources */,
 				4A9A7BED22E859E60022E573 /* CreateTransferPresenterTests.swift in Sources */,
 				4A9A7C1E22E89C790022E573 /* AuthenticationTokenGeneratorMock.swift in Sources */,
+				4A2B949F22F1BE0A000A0F14 /* UserRepositoryRequestHelper.swift in Sources */,
 				4A9A7C1822E89BEB0022E573 /* HyperwalletTestHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
