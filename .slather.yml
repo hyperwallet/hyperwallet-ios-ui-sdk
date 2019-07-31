@@ -5,6 +5,7 @@ ignore:
   - UITests/*
   - Demo/*
   - TransferMethod/Sources/AddTransferMethodSectionData.swift
+  - Common/Sources/ContentSizeCategoryAdjustable.swift
   - "*/Sources/Resources/*"
   - "*/Sources/Localization/*"
   - "*/Sources/Helper/*"
