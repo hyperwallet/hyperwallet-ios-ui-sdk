@@ -35,6 +35,8 @@ public extension Notification.Name {
     /// Posted when a transfer of funds has been created.
     static var transferCreated: Notification.Name {
         return .init(rawValue: "transferCreated")
+    }
+
     /// Posted when a transfer has been scheduled
     static var transferScheduled: Notification.Name {
         return .init(rawValue: "transferScheduled")

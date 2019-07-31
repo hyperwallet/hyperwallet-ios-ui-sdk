@@ -42,11 +42,6 @@ class ScheduleTransferPresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isShowConfirmationPerformed, "The isShowConfirmationPerformed should be performed")
         XCTAssertTrue(mockView.isShowProcessingPerformed, "The isShowProcessingPerformed should be performed")
         XCTAssertTrue(mockView.isNotificationSent, "The notification should be sent")
-        assertDestinationSectionResult(destinationSection: presenter.sectionData.first!)
-        assertForeignExchangeSectionResult(foreignExchangeSection: presenter.sectionData[1])
-        assertSummarySectionResult(summarySection: presenter.sectionData[2])
-        assertNotesSectionResult(notesSection: presenter.sectionData[3])
-        assertButtonSectionResult(buttonSection: presenter.sectionData.last!)
     }
 
     public func testScheduleTransfer_failure() {
@@ -66,6 +61,26 @@ class ScheduleTransferPresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isShowErrorPerformed, "The showError should be performed")
         XCTAssertFalse(mockView.isShowConfirmationPerformed, "The isShowConfirmationPerformed should not be performed")
         XCTAssertFalse(mockView.isNotificationSent, "The notification should not be sent")
+    }
+
+    public func testScheduleSectionData_allSections() {
+        XCTAssertEqual(presenter.sectionData.count, 5)
+        assertDestinationSectionResult(destinationSection: presenter.sectionData.first!)
+        assertForeignExchangeSectionResult(foreignExchangeSection: presenter.sectionData[1])
+        assertSummarySectionResult(summarySection: presenter.sectionData[2])
+        assertNotesSectionResult(notesSection: presenter.sectionData[3])
+        assertButtonSectionResult(buttonSection: presenter.sectionData.last!)
+    }
+
+    public func testScheduleSectionData_withoutForeignExchangeAndNotesSection() {
+        transfer = getTransfer(from: HyperwalletTestHelper
+            .getDataFromJson("CreateTransferWithoutForeignExchangeResponse"))!
+        presenter = ScheduleTransferPresenter(view: mockView, transferMethod: transferMethod, transfer: transfer)
+
+        XCTAssertEqual(presenter.sectionData.count, 3)
+        assertDestinationSectionResult(destinationSection: presenter.sectionData.first!)
+        assertSummarySectionWithoutFeeResult(summarySection: presenter.sectionData[1])
+        assertButtonSectionResult(buttonSection: presenter.sectionData.last!)
     }
 
     private func getTransfer(from jsonData: Data) -> HyperwalletTransfer? {
@@ -93,6 +108,15 @@ class ScheduleTransferPresenterTests: XCTestCase {
 
     private func assertSummarySectionResult(summarySection: ScheduleTransferSectionData) {
         XCTAssertEqual(summarySection.rowCount, 3, "Summary section should have 3 rows")
+        XCTAssertNotNil(summarySection.title, "The title of summary section should not be nil")
+        XCTAssertNotNil(summarySection.scheduleTransferSectionHeader,
+                        "The header of summary section should not be nil")
+        XCTAssertNotNil(summarySection.cellIdentifier,
+                        "The cellIdentifier of summary section should not be nil")
+    }
+
+    private func assertSummarySectionWithoutFeeResult(summarySection: ScheduleTransferSectionData) {
+        XCTAssertEqual(summarySection.rowCount, 2, "Summary section should have 2 rows")
         XCTAssertNotNil(summarySection.title, "The title of summary section should not be nil")
         XCTAssertNotNil(summarySection.scheduleTransferSectionHeader,
                         "The header of summary section should not be nil")

@@ -250,6 +250,8 @@ extension CreateTransferController: CreateTransferView {
     }
 
     func showScheduleTransfer(_ transfer: HyperwalletTransfer) {
-        // TO DO navigate to schedule
+        let scheduleTransferController = ScheduleTransferController(transferMethod: presenter.selectedTransferMethod,
+                                                                    transfer: transfer)
+         navigationController?.pushViewController(scheduleTransferController, animated: true)
     }
 }
