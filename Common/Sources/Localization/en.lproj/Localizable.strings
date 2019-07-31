@@ -203,6 +203,7 @@
 "transfer_next_button" = "Next";
 "transfer_add_account_title" = "Add Account";
 "transfer_add_account_subtitle" = "An account hasn't been set up yet, please add an account first.";
+"transfer_select_destination" = "Select Destination";
 
 // List of countries
 // Source: https://datahub.io/core/country-list#data

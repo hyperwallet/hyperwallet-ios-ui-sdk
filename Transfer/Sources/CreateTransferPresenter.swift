@@ -143,8 +143,7 @@ final class CreateTransferPresenter {
                 })
 
             case .success(let result):
-                guard let firstActivatedTransferMetod = result?.data?.first
-                    else {
+                guard let firstActivatedTransferMetod = result?.data?.first else {
                         strongSelf.selectedTransferMethod = nil
                         strongSelf.view.hideLoading()
                         strongSelf.view.showCreateTransfer()
@@ -219,11 +218,25 @@ final class CreateTransferPresenter {
 
     // MARK: - Destionation view
     func showSelectDestinationAccountView() {
-        // TODO Display all the destination accounts
-        //        view.showGenericTableView(items: getSelectDestinationCellConfiguration(),
-        //                                  title: "select_destination".localized(),
-        //                                  selectItemHandler: selectDestinationAccountHandler(),
-        //                                  markCellHandler: destinationAccountMarkCellHandler())
+        transferMethodRepository.listTransferMethods { [weak self] result in
+            guard let strongSelf = self else {
+                return
+            }
+            switch result {
+            case .success(let pageList):
+                if let transferMethods = pageList?.data {
+                    strongSelf.view.showGenericTableView(items: transferMethods,
+                                                         title: "select_destination".localized(),
+                                                         selectItemHandler: strongSelf
+                                                            .selectDestinationAccountHandler(),
+                                                         markCellHandler: strongSelf
+                                                            .destinationAccountMarkCellHandler())
+                }
+
+            case .failure:
+                break
+            }
+        }
     }
 
     private func destinationAccountMarkCellHandler() -> CreateTransferView.MarkCellHandler {
