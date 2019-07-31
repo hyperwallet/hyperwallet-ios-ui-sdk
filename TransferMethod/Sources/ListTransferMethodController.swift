@@ -120,10 +120,6 @@ public final class ListTransferMethodController: UITableViewController {
         return CGFloat.leastNormalMagnitude
     }
 
-    override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return rowHeightConsideringSizeCategory(for: indexPath)
-    }
-
     private func addTransferMethod() {
         let controller = HyperwalletUI.shared.selectTransferMethodTypeController()
         controller.createTransferMethodHandler = {
@@ -220,11 +216,7 @@ extension ListTransferMethodController: ListTransferMethodView {
 }
 
 extension ListTransferMethodController: ContentSizeCategoryAdjustable {
-    public func rowHeightConsideringSizeCategory(for indexPath: IndexPath) -> CGFloat {
-        if isLargeSizeCategory {
-            return UITableView.automaticDimension
-        } else {
-            return Theme.Cell.largeHeight
-        }
+    public var defaultCellHeight: CGFloat {
+        return Theme.Cell.largeHeight
     }
 }

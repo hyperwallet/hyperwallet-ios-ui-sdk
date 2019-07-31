@@ -57,6 +57,8 @@ UISearchResultsUpdating, UISearchControllerDelegate {
         UISearchController(searchResultsController: nil)
     }()
 
+    public var subscriptionToken: Any?
+
     override public func viewDidLoad() {
         super.viewDidLoad()
 
@@ -72,6 +74,8 @@ UISearchResultsUpdating, UISearchControllerDelegate {
         tableView.reloadData()
         scrollToSelectedRow()
         setupUISearchController()
+
+        subscriptionToken = setupWith(tableView: tableView)
     }
 
     override public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -83,6 +87,14 @@ UISearchResultsUpdating, UISearchControllerDelegate {
                 self.searchController.searchBar.setLeftAligment()
             }
             return
+        }
+    }
+
+    override public func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        if let subscriptionToken = subscriptionToken {
+            NotificationCenter.default.removeObserver(subscriptionToken)
         }
     }
 
@@ -221,8 +233,6 @@ private extension GenericController {
             tableView.tableFooterView = footerView
         }
         tableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: reuseHeaderIdentifier)
-        tableView.estimatedRowHeight = Theme.Cell.smallHeight
-        tableView.rowHeight = UITableView.automaticDimension
         tableView.register(T.self, forCellReuseIdentifier: reuseIdentifier)
     }
 
@@ -243,5 +253,11 @@ private extension GenericController {
         DispatchQueue.main.async {
             self.tableView.scrollToRow(at: IndexPath(row: indexToScrollTo, section: 0), at: .middle, animated: false)
         }
+    }
+}
+
+extension GenericController: ContentSizeCategoryAdjustable {
+    public var defaultCellHeight: CGFloat {
+        return Theme.Cell.smallHeight
     }
 }

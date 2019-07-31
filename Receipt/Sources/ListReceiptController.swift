@@ -126,10 +126,6 @@ public final class ListReceiptController: UITableViewController {
         return UITableView.automaticDimension
     }
 
-    override public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return rowHeightConsideringSizeCategory(for: indexPath)
-    }
-
     override public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if loadMoreReceipts {
             presenter.listReceipts()
@@ -188,11 +184,7 @@ extension ListReceiptController: ListReceiptView {
 }
 
 extension ListReceiptController: ContentSizeCategoryAdjustable {
-    public func rowHeightConsideringSizeCategory(for indexPath: IndexPath) -> CGFloat {
-        if isLargeSizeCategory {
-            return UITableView.automaticDimension
-        } else {
-            return Theme.Cell.mediumHeight
-        }
+    public var defaultCellHeight: CGFloat {
+        return Theme.Cell.mediumHeight
     }
 }

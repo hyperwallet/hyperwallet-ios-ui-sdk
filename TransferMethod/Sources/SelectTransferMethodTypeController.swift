@@ -132,19 +132,11 @@ extension SelectTransferMethodTypeController {
         presenter.navigateToAddTransferMethod(indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
-    override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return rowHeightConsideringSizeCategory(for: indexPath)
-    }
 }
 
 extension SelectTransferMethodTypeController: ContentSizeCategoryAdjustable {
-    public func rowHeightConsideringSizeCategory(for indexPath: IndexPath) -> CGFloat {
-        if isLargeSizeCategory {
-            return UITableView.automaticDimension
-        } else {
-            return Theme.Cell.largeHeight
-        }
+    public var defaultCellHeight: CGFloat {
+        return Theme.Cell.largeHeight
     }
 }
 

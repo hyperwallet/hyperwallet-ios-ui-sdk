@@ -133,8 +133,6 @@ public final class AddTransferMethodController: UITableViewController {
     private func setupTableView() {
         tableView = UITableView(frame: view.frame, style: .grouped)
         tableView.allowsSelection = false
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = Theme.Cell.smallHeight
         tableView.accessibilityIdentifier = "addTransferMethodTable"
         tableView.register(
             AddTransferMethodCell.self,
