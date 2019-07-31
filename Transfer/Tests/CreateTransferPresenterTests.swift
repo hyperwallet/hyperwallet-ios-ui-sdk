@@ -100,7 +100,7 @@ class CreateTransferTests: XCTestCase {
         presenter.showSelectDestinationAccountView()
         XCTAssertFalse(mockView.isShowGenericTableViewPerformed,
                        "isShowGenericTableViewPerformed should not be performed")
-        XCTAssertTrue(mockView.isShowErrorPerformed, "isShowGenericTableViewPerformed should be performed")
+        XCTAssertTrue(mockView.isShowErrorPerformed, "isShowErrorPerformed should be performed")
     }
 }
 
