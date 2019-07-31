@@ -24,19 +24,11 @@ class CreateTransferTests: XCTestCase {
         mockView.resetStates()
     }
 
-    private enum LoadTransferMethodsResultType {
-        case success, failure, noContent
-        func setUpRequest() {
-            switch self {
-            case .success:
-                TransferMethodRepositoryRequestHelper.setupSucessRequest()
-
-            case .failure:
-                TransferMethodRepositoryRequestHelper.setupFailureRequest()
-
-            case .noContent:
-                TransferMethodRepositoryRequestHelper.setupNoContentRequest()
-            }
+    private func initializePresenter(emptyTransferMethods: Bool) {
+        if emptyTransferMethods {
+            TransferMethodRepositoryRequestHelper.setupNoContentRequest()
+        } else {
+            TransferMethodRepositoryRequestHelper.setupSucessRequest()
         }
     }
 
@@ -68,8 +60,38 @@ class CreateTransferTests: XCTestCase {
     }
 
     func testSectionDataWhenSelectedTransferMethodIsNil() {
-        initializePresenter(transferMethodResult: .noContent)
-        XCTAssertEqual(presenter.sectionData.count, 3, "")
+        initializePresenter(emptyTransferMethods: true)
+
+        XCTAssertEqual(presenter.sectionData.count, 3, "Section data count should be 3")
+
+        XCTAssertEqual(presenter.sectionData[0].createTransferSectionHeader,
+                       .destination,
+                       "Section type should be Destination")
+        XCTAssertEqual(presenter.sectionData[1].createTransferSectionHeader,
+                       .notes,
+                       "Section type should be Notes")
+        XCTAssertEqual(presenter.sectionData[2].createTransferSectionHeader,
+                       .button,
+                       "Section type should be Button")
+    }
+
+    func testSectionDataWhenSelectedTransferMethodIsNotNil() {
+        initializePresenter(emptyTransferMethods: false)
+
+        XCTAssertEqual(presenter.sectionData.count, 4, "Section data count should be 4")
+
+        XCTAssertEqual(presenter.sectionData[0].createTransferSectionHeader,
+                       .destination,
+                       "Section type should be Destination")
+        XCTAssertEqual(presenter.sectionData[1].createTransferSectionHeader,
+                       .transfer,
+                       "Section type should be Transfer")
+        XCTAssertEqual(presenter.sectionData[2].createTransferSectionHeader,
+                       .notes,
+                       "Section type should be Notes")
+        XCTAssertEqual(presenter.sectionData[3].createTransferSectionHeader,
+                       .button,
+                       "Section type should be Button")
     }
 
     func testShowSelectDestinationAccountView_success() {
