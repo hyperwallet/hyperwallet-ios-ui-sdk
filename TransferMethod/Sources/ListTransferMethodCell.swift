@@ -77,7 +77,7 @@ extension ListTransferMethodCell {
         textLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellTextLabel"
         detailTextLabel?.attributedText = formatDetails(
             transferMethodCountry: transferMethod.transferMethodCountry?.localized() ?? "",
-            additionalInfo: transferMethod.additionalInfo)
+            additionalInfo: transferMethod.value)
 
         detailTextLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellDetailTextLabel"
         detailTextLabel?.numberOfLines = 0

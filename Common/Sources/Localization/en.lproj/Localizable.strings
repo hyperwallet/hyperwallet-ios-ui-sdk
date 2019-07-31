@@ -209,6 +209,7 @@
 "transfer_next_button" = "Next";
 "transfer_add_account_title" = "Add Account";
 "transfer_add_account_subtitle" = "An account hasn't been set up yet, please add an account first.";
+"transfer_select_destination" = "Select Destination";
 "schedule_transfer_section_header_destination" = "DESITINATION";
 "schedule_transfer_section_header_foreignExchange" = "FOREIGN EXCHANGE";
 "schedule_transfer_section_header_summary" = "SUMMARY";
