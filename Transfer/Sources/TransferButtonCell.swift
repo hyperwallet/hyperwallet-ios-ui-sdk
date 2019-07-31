@@ -46,14 +46,14 @@ final class TransferButtonCell: UITableViewCell {
     /// This is to configure the next button in create transfer page
     func configure(title: String) {
         buttonLabel.text = title
-        buttonLabel.accessibilityLabel = "transfer_next_button".localized()
+        buttonLabel.accessibilityLabel = title
         buttonLabel.accessibilityIdentifier = "addTransferNextLabel"
     }
 
     /// This is to configure the confirmation button in schedule transfer page
     func configure(title: String, action: UIGestureRecognizer) {
         buttonLabel.text = title
-        buttonLabel.accessibilityLabel = "schedule_transfer_button".localized()
+        buttonLabel.accessibilityLabel = title
         buttonLabel.accessibilityIdentifier = "scheduleTransferLabel"
         buttonLabel.isUserInteractionEnabled = true
         buttonLabel.addGestureRecognizer(action)

@@ -20,14 +20,14 @@
         },
         {
             "sourceAmount": "120.00",
-            "sourceCurrency": "CAD",
+            "sourceCurrency": "JPY",
             "destinationAmount": "63.49",
             "destinationCurrency": "USD",
             "rate": "0.39"
         },
         {
             "sourceAmount": "110.00",
-            "sourceCurrency": "CAD",
+            "sourceCurrency": "AUD",
             "destinationAmount": "63.49",
             "destinationCurrency": "USD",
             "rate": "0.88"

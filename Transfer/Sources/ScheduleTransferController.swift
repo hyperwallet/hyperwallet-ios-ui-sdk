@@ -120,7 +120,7 @@ extension ScheduleTransferController {
         case .button:
             if let tableViewCell = cell as? TransferButtonCell, section is ScheduleTransferButtonData {
                 let tapConfirmation = UITapGestureRecognizer(target: self, action: #selector(tapScheduleTransfer))
-                tableViewCell.configure(title: "schedule_transfer_button".localized(), action: tapConfirmation)
+                tableViewCell.configure(title: "transfer_button_confirm".localized(), action: tapConfirmation)
             }
         }
         return cell
