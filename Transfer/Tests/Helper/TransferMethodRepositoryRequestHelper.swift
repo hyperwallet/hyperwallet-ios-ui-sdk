@@ -4,7 +4,7 @@ import XCTest
 
 class TransferMethodRepositoryRequestHelper {
     private static let fileName = "ListTransferMethodSuccessResponse"
-    private static let requestUrl = "HyperwalletTestHelper."
+    private static let requestUrl = "\(HyperwalletTestHelper.userRestURL)/transfer-methods"
 
     static func setupSucessRequest() {
         let dataResponse = HyperwalletTestHelper.okHTTPResponse(for: fileName)
@@ -26,7 +26,7 @@ class TransferMethodRepositoryRequestHelper {
     }
 
     private static func setUpMockServer(_ dataResponse: StubResponse, _ requestUrl: String) {
-        let dataRequest = HyperwalletTestHelper.buildPostRequest(baseUrl: requestUrl, dataResponse)
+        let dataRequest = HyperwalletTestHelper.buildGetRequest(baseUrl: requestUrl, dataResponse)
         HyperwalletTestHelper.setUpMockServer(request: dataRequest)
     }
 }

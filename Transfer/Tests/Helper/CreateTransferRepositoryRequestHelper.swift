@@ -2,23 +2,23 @@ import Hippolyte
 import HyperwalletSDK
 import XCTest
 
-class TransferRepositoryRequestHelper {
+class CreateTransferRepositoryRequestHelper {
     private static let fileName = "CreateTransferResponse"
-    private static let requestUrl = "HyperwalletTestHelper."
+    private static let requestUrl = "\(HyperwalletTestHelper.restURL)transfers"
 
     static func setupSucessRequest() {
         let dataResponse = HyperwalletTestHelper.okHTTPResponse(for: fileName)
-        TransferRepositoryRequestHelper.setUpMockServer(dataResponse, requestUrl)
+        CreateTransferRepositoryRequestHelper.setUpMockServer(dataResponse, requestUrl)
     }
 
     static func setupNoContentRequest() {
         let dataResponse = HyperwalletTestHelper.noContentHTTPResponse()
-        TransferRepositoryRequestHelper.setUpMockServer(dataResponse, requestUrl)
+        CreateTransferRepositoryRequestHelper.setUpMockServer(dataResponse, requestUrl)
     }
 
     static func setupFailureRequest() {
         let errorResponse = HyperwalletTestHelper.badRequestHTTPResponse(for: fileName)
-        TransferRepositoryRequestHelper.setUpMockServer(errorResponse, requestUrl)
+        CreateTransferRepositoryRequestHelper.setUpMockServer(errorResponse, requestUrl)
     }
 
     static func getResponseError(_ error: HyperwalletErrorType) -> HyperwalletError {

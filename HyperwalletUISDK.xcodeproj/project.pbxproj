@@ -39,7 +39,7 @@
 		4A2B94AE22F1CB2B000A0F14 /* AuthenticationTokenGeneratorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7C1B22E89C620022E573 /* AuthenticationTokenGeneratorMock.swift */; };
 		4A2B94AF22F1CB2B000A0F14 /* HyperwalletTestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7C1722E89BEB0022E573 /* HyperwalletTestHelper.swift */; };
 		4A2B94B022F1CB2B000A0F14 /* TransferMethodRepositoryRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2B94A422F1C7BD000A0F14 /* TransferMethodRepositoryRequestHelper.swift */; };
-		4A2B94B122F1CB2B000A0F14 /* TransferRepositoryRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2B94A822F1C81F000A0F14 /* TransferRepositoryRequestHelper.swift */; };
+		4A2B94B122F1CB2B000A0F14 /* CreateTransferRepositoryRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2B94A822F1C81F000A0F14 /* CreateTransferRepositoryRequestHelper.swift */; };
 		4A2B94B222F1CB2B000A0F14 /* UserRepositoryRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2B949D22F1BD8E000A0F14 /* UserRepositoryRequestHelper.swift */; };
 		4A2B94B322F1CB31000A0F14 /* CreateTransferResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 4A2B94AA22F1C954000A0F14 /* CreateTransferResponse.json */; };
 		4A2B94B422F1CB31000A0F14 /* ListTransferMethodSuccessResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 4A2B949C22F1BC00000A0F14 /* ListTransferMethodSuccessResponse.json */; };
@@ -617,7 +617,7 @@
 		4A2B949C22F1BC00000A0F14 /* ListTransferMethodSuccessResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ListTransferMethodSuccessResponse.json; sourceTree = "<group>"; };
 		4A2B949D22F1BD8E000A0F14 /* UserRepositoryRequestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryRequestHelper.swift; sourceTree = "<group>"; };
 		4A2B94A422F1C7BD000A0F14 /* TransferMethodRepositoryRequestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodRepositoryRequestHelper.swift; sourceTree = "<group>"; };
-		4A2B94A822F1C81F000A0F14 /* TransferRepositoryRequestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferRepositoryRequestHelper.swift; sourceTree = "<group>"; };
+		4A2B94A822F1C81F000A0F14 /* CreateTransferRepositoryRequestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTransferRepositoryRequestHelper.swift; sourceTree = "<group>"; };
 		4A2B94AA22F1C954000A0F14 /* CreateTransferResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CreateTransferResponse.json; sourceTree = "<group>"; };
 		4A31BDB422D7356D0027DACA /* ReceiptRepositoryCompletionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptRepositoryCompletionHelper.swift; sourceTree = "<group>"; };
 		4A31BDB622D762AE0027DACA /* PrepaidCardReceiptRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepaidCardReceiptRepositoryTests.swift; sourceTree = "<group>"; };
@@ -1213,7 +1213,7 @@
 				4A9A7C1B22E89C620022E573 /* AuthenticationTokenGeneratorMock.swift */,
 				4A9A7C1722E89BEB0022E573 /* HyperwalletTestHelper.swift */,
 				4A2B94A422F1C7BD000A0F14 /* TransferMethodRepositoryRequestHelper.swift */,
-				4A2B94A822F1C81F000A0F14 /* TransferRepositoryRequestHelper.swift */,
+				4A2B94A822F1C81F000A0F14 /* CreateTransferRepositoryRequestHelper.swift */,
 				4A2B949D22F1BD8E000A0F14 /* UserRepositoryRequestHelper.swift */,
 			);
 			path = Helper;
@@ -2921,7 +2921,7 @@
 				4A2B94AE22F1CB2B000A0F14 /* AuthenticationTokenGeneratorMock.swift in Sources */,
 				4A2B94AF22F1CB2B000A0F14 /* HyperwalletTestHelper.swift in Sources */,
 				4A2B94B022F1CB2B000A0F14 /* TransferMethodRepositoryRequestHelper.swift in Sources */,
-				4A2B94B122F1CB2B000A0F14 /* TransferRepositoryRequestHelper.swift in Sources */,
+				4A2B94B122F1CB2B000A0F14 /* CreateTransferRepositoryRequestHelper.swift in Sources */,
 				4A2B94B222F1CB2B000A0F14 /* UserRepositoryRequestHelper.swift in Sources */,
 				4A9A7BED22E859E60022E573 /* CreateTransferPresenterTests.swift in Sources */,
 			);
