@@ -30,8 +30,12 @@ class TransferUserFundsTest: BaseTests {
      Then the user will have the ability to create a method
      */
     func testTransferFunds_noTransferMethod() {
+//        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+//                             filename: "ListTransferMethodsNoData",
+//                             method: HTTPMethod.get)
+
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
-                             filename: "ListNoTransferMethod",
+                             filename: "ListDeActivatedTransferMethod",
                              method: HTTPMethod.get)
 
         mockServer.setupStub(url: "/rest/v3/transfers",
@@ -46,7 +50,8 @@ class TransferUserFundsTest: BaseTests {
         // how to we assert the icon
         XCTAssertTrue(transferFunds.transferFundTitle.exists)
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
-        XCTAssertEqual(transferFunds.addSelectDestinationDetailLabel.label, "An account hasn't been set up yet, please add an account first")
+        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Add Account")
+        XCTAssertEqual(transferFunds.addSelectDestinationDetailLabel.label, "An account hasn\'t been set up yet, please add an account first.")
 
         //  TODO: Tab to Add Account (we will not assert at this point)
         XCTAssertFalse(transferFunds.transferCurrency.exists, "Transfer Currency should not exist")
@@ -118,15 +123,14 @@ class TransferUserFundsTest: BaseTests {
         transferFundMenu.tap()
         waitForNonExistence(spinner)
 
-        //  1. Select Destination (USD)
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
-
         // Amount row
         XCTAssertEqual(transferFunds.transferAmountLabel.label, "Amount")
         XCTAssertEqual(transferFunds.transferCurrency.label, "USD")
-        // 2. Select Destination (CAD)
-        // TODO: Switch to another bank account
+        // Select Destination (CAD)
+        let cadBankAccount = app.tables.element.children(matching: .cell).element(boundBy: 1)
+        cadBankAccount.tap()
         XCTAssertEqual(transferFunds.transferCurrency.label, "CAD")
     }
 
@@ -138,31 +142,43 @@ class TransferUserFundsTest: BaseTests {
      */
     func testTransferFunds_createTransferPrepaidCardWithNotes() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
-                             filename: "ListOnePrepaidCardTransferUSD",
+                             filename: "ListPrepaidCardTransferUSD",
                              method: HTTPMethod.get)
 
         mockServer.setupStub(url: "/rest/v3/transfers",
                              filename: "AvailableFundUSD",
                              method: HTTPMethod.post)
 
-        mockServer.setupStub(url: "/rest/v3/transfers",
-                             filename: "createTransferWithoutFX",
-                             method: HTTPMethod.post)
-
-        mockServer.setupStub(url: "/rest/v3/transfers/trf-token/status-transitions",
-                             filename: "transferStatusQuoted",
-                             method: HTTPMethod.post)
-
         XCTAssertTrue(transferFundMenu.exists)
         transferFundMenu.tap()
         waitForNonExistence(spinner)
 
-        // TODO: implement assertion
-        // TODO: Assert Note entry
+        // Add Destination Section
+        XCTAssertTrue(transferFunds.transferFundTitle.exists)
+        XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
+        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Prepaid Card")
+
+        if #available(iOS 11.0, *) {
+            XCTAssertEqual(transferFunds.addSelectDestinationDetailLabel.label, "United States\nEnding on 4281")
+        } else {
+            XCTAssertEqual(transferFunds.addSelectDestinationDetailLabel.label, "United States Ending on 4281")
+        }
+        // Transfer Section
+        XCTAssertTrue(transferFunds.transferSectionLabel.exists)
+        // Amount
+        XCTAssertEqual(transferFunds.transferAmountLabel.label, "Amount")
+        XCTAssertEqual(transferFunds.transferCurrency.label, "USD")
+        // Transfer all funds row
+        XCTAssertEqual(transferFunds.transferAllFundsLabel.label, "Transfer all funds")
+        XCTAssertTrue(transferFunds.transferAllFundsSwitch.exists, "Transfer all funds switch should exist")
+
+        let availableFunds = app.tables["createTransferTableView"].staticTexts["Available for transfer: 452.14"]
+        XCTAssertTrue(availableFunds.exists)
+
         XCTAssertEqual(transferFunds.notesSectionLabel.label, "NOTES")
-        // XCTAssertEqual(transferFunds.notesDescription.label, "Description")
+        XCTAssertEqual(transferFunds.notesDescriptionTextField.placeholderValue, "Description")
         transferFunds.enterNotes(description: "testing")
-        XCTAssertEqual(transferFunds.notesDescriptionTextField.title, "testing")
+        XCTAssertEqual(transferFunds.notesDescriptionTextField.value as? String, "testing")
     }
 
     func testTransferFund_createTransferWithAllFunds() {
@@ -365,6 +381,8 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "94.23")
     }
 
+    // This testcase for next sprint
+    /*
     func testTransferFund_createTransferWhenDestinationAmountNotSet() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListOneBankAccountTransferUSD",
@@ -379,7 +397,10 @@ class TransferUserFundsTest: BaseTests {
 
         // Assert NEXT button is disabled ??
     }
+    */
 
+    // This testcase for next sprint
+    /*
     func testTransferFund_createTransferWhenDestinationNotSet() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListOneBankAccountTransferUSD",
@@ -394,6 +415,7 @@ class TransferUserFundsTest: BaseTests {
 
         // Assert NEXT button is disabled ??
     }
+    */
 
     /* Given that Transfer methods exist
      When user transfers the fund
@@ -440,7 +462,7 @@ class TransferUserFundsTest: BaseTests {
      */
     func testTransferFund_createTransferInsufficientFundsError() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
-                             filename: "ListOneBankAccountTransferUSD",
+                             filename: "ListMoreThanOneTransferMethod",
                              method: HTTPMethod.get)
 
         mockServer.setupStub(url: "/rest/v3/transfers",
@@ -454,7 +476,7 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.transferFundTitle.exists)
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertTrue(transferFunds.transferAmount.exists)
-        transferFunds.enterTransferAmount(amount: "10000")
+        transferFunds.enterTransferAmount(amount: "1000000")
 
         // Next Button
         XCTAssertTrue(transferFunds.nextLabel.exists)
