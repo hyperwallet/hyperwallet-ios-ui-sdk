@@ -1,0 +1,33 @@
+{
+  "token": "trf-e4217683",
+  "status": "QUOTED",
+  "createdOn": "2019-07-19T20:43:35",
+  "clientTransferId": "6712348070813",
+  "sourceToken": "usr-05f2076f",
+  "sourceAmount": "130.32",
+  "sourceCurrency": "USD",
+  "destinationToken": "trm-cfb7ce86",
+  "destinationAmount": "15000",
+  "destinationFeeAmount": "100",
+  "destinationCurrency": "JPY",
+  "foreignExchanges": [
+    {
+      "sourceCurrency": "USD",
+      "sourceAmount": "130.32",
+      "destinationCurrency": "JPY",
+      "destinationAmount": "15100",
+      "rate": "1.291291"
+    }
+  ],
+  "notes": "Partial-Balance Transfer888",
+  "memo": "TransferClientId56387",
+  "expiresOn": "2019-07-18T20:45:35",
+  "links": [
+    {
+      "params": {
+        "rel": "self"
+      },
+      "href": "https://localhost/rest/v3/transfers/trf-e4217683"
+    }
+  ]
+}

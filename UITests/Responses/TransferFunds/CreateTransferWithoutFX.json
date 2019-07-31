@@ -1,0 +1,24 @@
+{
+  "token": "trf-2ddd40ef",
+  "status": "QUOTED",
+  "createdOn": "2019-07-18T20:40:01",
+  "clientTransferId": "6712348070812",
+  "sourceToken": "usr-05f2076f",
+  "sourceAmount": "13.22",
+  "sourceCurrency": "USD",
+  "destinationToken": "trm-343d3b41",
+  "destinationAmount": "11.22",
+  "destinationFeeAmount": "2.00",
+  "destinationCurrency": "USD",
+  "notes": "Partial-Balance Transfer888",
+  "memo": "TransferClientId56387",
+  "expiresOn": "2019-07-18T20:42:01",
+  "links": [
+    {
+      "params": {
+        "rel": "self"
+      },
+      "href": "https://localhost/rest/v3/transfers/trf-2ddd40ef"
+    }
+  ]
+}
