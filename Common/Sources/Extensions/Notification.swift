@@ -36,6 +36,11 @@ public extension Notification.Name {
     static var transferCreated: Notification.Name {
         return .init(rawValue: "transferCreated")
     }
+
+    /// Posted when a transfer has been scheduled
+    static var transferScheduled: Notification.Name {
+        return .init(rawValue: "transferScheduled")
+    }
 }
 
 /// The Hyperwallet's `NotificationCenter` key to access the information.
@@ -43,8 +48,10 @@ public extension Notification.Name {
 /// - transferMethod: A new transfer method has been created.
 /// - statusTransition: A transfer method has been deactivated.
 /// - transferCreated: A transfer of funds has been created.
+/// - transferScheduled: A transfer has been scheduled.
 public enum UserInfo: String {
     case transferMethod
     case statusTransition
     case transferCreated
+    case transferScheduled
 }

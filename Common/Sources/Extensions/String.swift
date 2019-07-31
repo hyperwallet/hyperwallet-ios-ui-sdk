@@ -58,6 +58,22 @@ public extension String {
 
         return ceil(boundingBox.height)
     }
+
+    /// Format an amount to a currency format with currency code
+    ///
+    /// - Parameter currencyCode: the currency code
+    /// - Returns: a formatted amount with currency code
+    func format(with currencyCode: String) -> String {
+        if let amountInDouble = Double(self) {
+            let currencyFormatter = NumberFormatter()
+            currencyFormatter.numberStyle = .currency
+            currencyFormatter.currencyCode = currencyCode
+            currencyFormatter.currencySymbol = ""
+            return String(format: "%@ %@", currencyFormatter.string(for: amountInDouble)!, currencyCode)
+        } else {
+            return ""
+        }
+    }
 }
 
 /// The NSMutableAttributedString extension

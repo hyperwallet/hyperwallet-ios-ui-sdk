@@ -23,21 +23,19 @@ import Common
 final class TransferButtonCell: UITableViewCell {
     static let reuseIdentifier = "transferButtonCellIdentifier"
 
-    private(set) lazy var nextLabel: UILabel = {
+    private(set) lazy var buttonLabel: UILabel = {
         let label = UILabel()
         label.textColor = Theme.Button.color
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.accessibilityLabel = "transfer_next_button".localized()
-        label.accessibilityIdentifier = "addTransferNextLabel"
         return label
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(nextLabel)
-        nextLabel.safeAreaCenterYAnchor
+        contentView.addSubview(buttonLabel)
+        buttonLabel.safeAreaCenterYAnchor
             .constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor).isActive = true
-        nextLabel.safeAreaCenterXAnchor
+        buttonLabel.safeAreaCenterXAnchor
             .constraint(equalTo: contentView.layoutMarginsGuide.centerXAnchor).isActive = true
     }
 
@@ -45,20 +43,32 @@ final class TransferButtonCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
 
+    /// This is to configure the next button in create transfer page
     func configure(title: String) {
-        nextLabel.text = title
+        buttonLabel.text = title
+        buttonLabel.accessibilityLabel = title
+        buttonLabel.accessibilityIdentifier = "addTransferNextLabel"
+    }
+
+    /// This is to configure the confirmation button in schedule transfer page
+    func configure(title: String, action: UIGestureRecognizer) {
+        buttonLabel.text = title
+        buttonLabel.accessibilityLabel = title
+        buttonLabel.accessibilityIdentifier = "scheduleTransferLabel"
+        buttonLabel.isUserInteractionEnabled = true
+        buttonLabel.addGestureRecognizer(action)
     }
 }
 
 extension TransferButtonCell {
     // MARK: Theme manager's proxy properties
     @objc dynamic var titleLabelFont: UIFont! {
-        get { return nextLabel.font }
-        set { nextLabel.font = newValue }
+        get { return buttonLabel.font }
+        set { buttonLabel.font = newValue }
     }
 
     @objc dynamic var titleLabelColor: UIColor! {
-        get { return nextLabel.textColor }
-        set { nextLabel.textColor = newValue }
+        get { return buttonLabel.textColor }
+        set { buttonLabel.textColor = newValue }
     }
 }
