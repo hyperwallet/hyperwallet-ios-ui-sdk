@@ -20,6 +20,7 @@
 		073BB9B822E643880053C24E /* AuthenticationProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BB9B422E643880053C24E /* AuthenticationProviderMock.swift */; };
 		073BB9B922E643880053C24E /* HyperwalletTestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BB9B522E643880053C24E /* HyperwalletTestHelper.swift */; };
 		073BB9BA22E643880053C24E /* TransferRepositoryRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BB9B622E643880053C24E /* TransferRepositoryRequestHelper.swift */; };
+		075FCFEF22F2439800997A7A /* UnexpectedErrorResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 075FCFEE22F2439800997A7A /* UnexpectedErrorResponse.json */; };
 		077F609F22E28F7F00C91E59 /* ReceiptThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077F609D22E28F3500C91E59 /* ReceiptThemeManager.swift */; };
 		077F60A122E28F8F00C91E59 /* TransferMethodThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077F60A022E28F8F00C91E59 /* TransferMethodThemeManager.swift */; };
 		0961D62D22AA858E007F0B44 /* ReceiptsForFewMonths.json in Resources */ = {isa = PBXBuildFile; fileRef = 0961D62C22AA858E007F0B44 /* ReceiptsForFewMonths.json */; };
@@ -578,6 +579,7 @@
 		073BB9B622E643880053C24E /* TransferRepositoryRequestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferRepositoryRequestHelper.swift; sourceTree = "<group>"; };
 		0743EF9B22A5987100C089EE /* ListReceiptPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListReceiptPresenterTests.swift; sourceTree = "<group>"; };
 		0743EFA022A59EE100C089EE /* UserReceiptNextPageResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserReceiptNextPageResponse.json; sourceTree = "<group>"; };
+		075FCFEE22F2439800997A7A /* UnexpectedErrorResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UnexpectedErrorResponse.json; sourceTree = "<group>"; };
 		077F609D22E28F3500C91E59 /* ReceiptThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptThemeManager.swift; sourceTree = "<group>"; };
 		077F60A022E28F8F00C91E59 /* TransferMethodThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodThemeManager.swift; sourceTree = "<group>"; };
 		078B45682273895C005B0248 /* ListTransferMethodSuccessResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ListTransferMethodSuccessResponse.json; sourceTree = "<group>"; };
@@ -1144,6 +1146,7 @@
 		4A2B949A22F1BB82000A0F14 /* Responses */ = {
 			isa = PBXGroup;
 			children = (
+				075FCFEE22F2439800997A7A /* UnexpectedErrorResponse.json */,
 				4A2B94AA22F1C954000A0F14 /* CreateTransferResponse.json */,
 				4A2B949C22F1BC00000A0F14 /* ListTransferMethodSuccessResponse.json */,
 				DBA9FA58227912A000C1301A /* UserIndividualResponse.json */,
@@ -2489,6 +2492,7 @@
 			files = (
 				4A2B94B422F1CB31000A0F14 /* ListTransferMethodSuccessResponse.json in Resources */,
 				4A2B94B522F1CB31000A0F14 /* UserIndividualResponse.json in Resources */,
+				075FCFEF22F2439800997A7A /* UnexpectedErrorResponse.json in Resources */,
 				4A2B94B322F1CB31000A0F14 /* CreateTransferResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
