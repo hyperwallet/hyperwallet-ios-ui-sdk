@@ -85,6 +85,7 @@ class ViewController: UITableViewController {
 
         createTransferMethodObserver()
         removeTransferMethodObserver()
+        createTransferObserver()
 
         // Setup
         HyperwalletUI.setup(IntegratorAuthenticationProvider(baseUrl, userToken))
@@ -147,14 +148,16 @@ class ViewController: UITableViewController {
         switch example {
         case .listTransferMethod:
             let viewController = HyperwalletUI.shared.listTransferMethodController()
+
             navigationController?.pushViewController(viewController, animated: true)
 
         case .selectTransferMethod:
             let viewController = HyperwalletUI.shared.selectTransferMethodTypeController()
             viewController.createTransferMethodHandler = {
                 (transferMethod: HyperwalletTransferMethod) -> Void in
-                self.didCreateTransferMethod(transferMethod: transferMethod)
+                self.createTransferMethodHandler(transferMethod: transferMethod)
             }
+
             navigationController?.pushViewController(viewController, animated: true)
 
         case .addTransferMethod:
@@ -164,15 +167,18 @@ class ViewController: UITableViewController {
                 let profileType = ProcessInfo.processInfo.environment["PROFILE_TYPE"] {
                 let viewController = HyperwalletUI.shared.addTransferMethodController(
                     country, currency, profileType, accountType)
+
                 navigationController?.pushViewController(viewController, animated: true)
             } else {
                 let viewController = HyperwalletUI.shared.addTransferMethodController(
                     "US", "USD", "INDIVIDUAL", "BANK_ACCOUNT")
+
                 navigationController?.pushViewController(viewController, animated: true)
             }
 
         case .userReceipts:
             let viewController = HyperwalletUI.shared.listUserReceiptController()
+
             navigationController?.pushViewController(viewController, animated: true)
 
         case .prepaidCardReceipts:
@@ -186,34 +192,58 @@ class ViewController: UITableViewController {
             let clientTransferId = UUID().uuidString.lowercased()
             let viewController = HyperwalletUI.shared
                 .createTransferFromUserController(clientTransferId: clientTransferId)
-                navigationController?.pushViewController(viewController, animated: true)
+
+            navigationController?.pushViewController(viewController, animated: true)
 
         default:
             let viewController = HyperwalletUI.shared.listTransferMethodController()
+
             navigationController?.pushViewController(viewController, animated: true)
         }
     }
 
+    // MARK: - Handlers
+    func createTransferMethodHandler(transferMethod: HyperwalletTransferMethod) {
+        print("Handler: Transfer method has been created successfully")
+    }
+
+    // MARK: - Notifications
     func createTransferMethodObserver() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(methodOfReceivedNotification(notification:)),
-                                               name: Notification.Name.transferMethodAdded,
-                                               object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(transferMethodAddedNotificationObserverHandler(notification:)),
+            name: Notification.Name.transferMethodAdded,
+            object: nil)
     }
 
     func removeTransferMethodObserver() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(methodOfReceivedNotification(notification:)),
-                                               name: Notification.Name.transferMethodDeactivated,
-                                               object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(transferMethodDeactivatedNotificationObserverHandler(notification:)),
+            name: Notification.Name.transferMethodDeactivated,
+            object: nil)
     }
 
-    func didCreateTransferMethod(transferMethod: HyperwalletTransferMethod) {
-        print("Transfer method has been created successfully")
+    func createTransferObserver() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(transferCreatedNotificationObserverHandler(notification:)),
+            name: Notification.Name.transferCreated,
+            object: nil)
     }
 
     @objc
-    func methodOfReceivedNotification(notification: Notification) {
-        print("Transfer method has been deleted successfully")
+    func transferMethodAddedNotificationObserverHandler(notification: Notification) {
+        print("Notification: Transfer method has been created successfully")
+    }
+
+    @objc
+    func transferMethodDeactivatedNotificationObserverHandler(notification: Notification) {
+        print("Notification: Transfer method has been deleted successfully")
+    }
+
+    @objc
+    func transferCreatedNotificationObserverHandler(notification: Notification) {
+        print("Notification: Transfer of funds has been created successfully")
     }
 }
