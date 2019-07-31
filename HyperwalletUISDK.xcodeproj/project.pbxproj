@@ -26,6 +26,7 @@
 		077C337722E8CCB0000314CD /* ScheduleTransferSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C336F22E8CCAF000314CD /* ScheduleTransferSectionData.swift */; };
 		077C337822E8CCB0000314CD /* ScheduleTransferPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C337022E8CCB0000314CD /* ScheduleTransferPresenter.swift */; };
 		077C337A22E8CCB0000314CD /* TransferForeignExchangeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C337222E8CCB0000314CD /* TransferForeignExchangeCell.swift */; };
+		075FCFEF22F2439800997A7A /* UnexpectedErrorResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 075FCFEE22F2439800997A7A /* UnexpectedErrorResponse.json */; };
 		077F609F22E28F7F00C91E59 /* ReceiptThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077F609D22E28F3500C91E59 /* ReceiptThemeManager.swift */; };
 		077F60A122E28F8F00C91E59 /* TransferMethodThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077F60A022E28F8F00C91E59 /* TransferMethodThemeManager.swift */; };
 		078461DE22EA3F24007BF2CB /* TransferRepositoryFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BB9A222E63FF40053C24E /* TransferRepositoryFactory.swift */; };
@@ -595,6 +596,7 @@
 		077C336F22E8CCAF000314CD /* ScheduleTransferSectionData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleTransferSectionData.swift; sourceTree = "<group>"; };
 		077C337022E8CCB0000314CD /* ScheduleTransferPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleTransferPresenter.swift; sourceTree = "<group>"; };
 		077C337222E8CCB0000314CD /* TransferForeignExchangeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferForeignExchangeCell.swift; sourceTree = "<group>"; };
+		075FCFEE22F2439800997A7A /* UnexpectedErrorResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UnexpectedErrorResponse.json; sourceTree = "<group>"; };
 		077F609D22E28F3500C91E59 /* ReceiptThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptThemeManager.swift; sourceTree = "<group>"; };
 		077F60A022E28F8F00C91E59 /* TransferMethodThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodThemeManager.swift; sourceTree = "<group>"; };
 		078B45682273895C005B0248 /* ListTransferMethodSuccessResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ListTransferMethodSuccessResponse.json; sourceTree = "<group>"; };
@@ -1166,6 +1168,7 @@
 		4A2B949A22F1BB82000A0F14 /* Responses */ = {
 			isa = PBXGroup;
 			children = (
+				075FCFEE22F2439800997A7A /* UnexpectedErrorResponse.json */,
 				4A2B94AA22F1C954000A0F14 /* CreateTransferResponse.json */,
 				075FCFEC22F2154700997A7A /* CreateTransferWithoutForeignExchangeResponse.json */,
 				4A2B949C22F1BC00000A0F14 /* ListTransferMethodSuccessResponse.json */,
@@ -2522,6 +2525,7 @@
 			files = (
 				4A2B94B422F1CB31000A0F14 /* ListTransferMethodSuccessResponse.json in Resources */,
 				4A2B94B522F1CB31000A0F14 /* UserIndividualResponse.json in Resources */,
+				075FCFEF22F2439800997A7A /* UnexpectedErrorResponse.json in Resources */,
 				4A2B94B322F1CB31000A0F14 /* CreateTransferResponse.json in Resources */,
 				078C6EFE22EF815900CF81EE /* ScheduleTransferResponse.json in Resources */,
 				075FCFED22F2154700997A7A /* CreateTransferWithoutForeignExchangeResponse.json in Resources */,
