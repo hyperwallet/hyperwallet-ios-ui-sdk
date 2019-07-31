@@ -44,7 +44,7 @@ final class SelectionWidget: AbstractWidget {
         super.setupLayout(field: field)
         labelField.accessibilityIdentifier = field.name
         addArrangedSubview(labelField)
-
+        spacing = 16
         if field.isEditable ?? true {
             labelField.textColor = Theme.Text.color
             labelField.isUserInteractionEnabled = true
