@@ -41,7 +41,7 @@
 		4A37DB9322E8B0040085A329 /* TransferRepository.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 073BB98222E63DB50053C24E /* TransferRepository.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4A5C576522E73F3400F3359B /* UISearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5C576422E73F3400F3359B /* UISearchBar.swift */; };
 		4A9A7BE822E859E60022E573 /* Transfer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A9A7BDF22E859E60022E573 /* Transfer.framework */; };
-		4A9A7BED22E859E60022E573 /* TransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7BEC22E859E60022E573 /* TransferTests.swift */; };
+		4A9A7BED22E859E60022E573 /* CreateTransferPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7BEC22E859E60022E573 /* CreateTransferPresenterTests.swift */; };
 		4A9A7BEF22E859E60022E573 /* Transfer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A9A7BE122E859E60022E573 /* Transfer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4A9A7C0422E86F580022E573 /* CreateTransferSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7BFE22E86F580022E573 /* CreateTransferSectionData.swift */; };
 		4A9A7C0522E86F580022E573 /* TransferButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7BFF22E86F580022E573 /* TransferButtonCell.swift */; };
@@ -617,7 +617,7 @@
 		4A9A7BE122E859E60022E573 /* Transfer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Transfer.h; sourceTree = "<group>"; };
 		4A9A7BE222E859E60022E573 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A9A7BE722E859E60022E573 /* TransferTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TransferTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4A9A7BEC22E859E60022E573 /* TransferTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferTests.swift; sourceTree = "<group>"; };
+		4A9A7BEC22E859E60022E573 /* CreateTransferPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransferPresenterTests.swift; sourceTree = "<group>"; };
 		4A9A7BEE22E859E60022E573 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A9A7BFE22E86F580022E573 /* CreateTransferSectionData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTransferSectionData.swift; sourceTree = "<group>"; };
 		4A9A7BFF22E86F580022E573 /* TransferButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferButtonCell.swift; sourceTree = "<group>"; };
@@ -1151,7 +1151,7 @@
 			isa = PBXGroup;
 			children = (
 				4A9A7C1922E89BF10022E573 /* Helper */,
-				4A9A7BEC22E859E60022E573 /* TransferTests.swift */,
+				4A9A7BEC22E859E60022E573 /* CreateTransferPresenterTests.swift */,
 				4A9A7BEE22E859E60022E573 /* Info.plist */,
 			);
 			path = Tests;
@@ -2891,7 +2891,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A9A7C1F22E89C790022E573 /* AuthenticationProviderMock.swift in Sources */,
-				4A9A7BED22E859E60022E573 /* TransferTests.swift in Sources */,
+				4A9A7BED22E859E60022E573 /* CreateTransferPresenterTests.swift in Sources */,
 				4A9A7C1E22E89C790022E573 /* AuthenticationTokenGeneratorMock.swift in Sources */,
 				4A9A7C1822E89BEB0022E573 /* HyperwalletTestHelper.swift in Sources */,
 			);

@@ -34,3 +34,57 @@ class TransferTests: XCTestCase {
         //mockView.resetStates()
     }
 }
+
+class MockCreateTransferView: CreateTransferView {
+    func notifyTransferCreated(_ transfer: HyperwalletTransfer) {
+    }
+
+    func showCreateTransfer() {
+    }
+
+    func showGenericTableView(items: [HyperwalletTransferMethod],
+                              title: String,
+                              selectItemHandler: @escaping CreateTransferView.SelectItemHandler,
+                              markCellHandler: @escaping CreateTransferView.MarkCellHandler) {
+    }
+
+    func showScheduleTransfer(_ transfer: HyperwalletTransfer) {
+    }
+
+    func updateTransferSection() {
+    }
+
+    var isHideLoadingPerformed = false
+    var isShowLoadingPerformed = false
+    var isShowErrorPerformed = false
+    var isLoadReceiptPerformed = false
+
+    var expectation: XCTestExpectation?
+
+    func resetStates() {
+        isHideLoadingPerformed = false
+        isShowLoadingPerformed = false
+        isShowErrorPerformed = false
+        isLoadReceiptPerformed = false
+        expectation = nil
+    }
+
+    func hideLoading() {
+        isHideLoadingPerformed = true
+    }
+
+    func loadReceipts() {
+        isLoadReceiptPerformed = true
+        expectation?.fulfill()
+    }
+
+    func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
+        isShowErrorPerformed = true
+        retry!()
+        expectation?.fulfill()
+    }
+
+    func showLoading() {
+        isShowLoadingPerformed = true
+    }
+}

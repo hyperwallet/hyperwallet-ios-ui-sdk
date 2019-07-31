@@ -189,7 +189,11 @@ extension CreateTransferController: CreateTransferView {
     }
 
     func notifyTransferCreated(_ transfer: HyperwalletTransfer) {
-        //TODO implement notification
+        DispatchQueue.global(qos: .background).async {
+            NotificationCenter.default.post(name: .transferCreated,
+                                            object: self,
+                                            userInfo: [UserInfo.transferCreated: transfer])
+        }
     }
 
     func showLoading() {

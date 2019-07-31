@@ -210,6 +210,7 @@ final class CreateTransferPresenter {
 
             case .success(let transfer):
                 if transfer != nil {
+                    strongSelf.view.notifyTransferCreated(transfer!)
                     // TODO strongSelf.view.showScheduleTransfer()
                 }
             }
