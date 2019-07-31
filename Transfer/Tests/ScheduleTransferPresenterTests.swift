@@ -43,6 +43,10 @@ class ScheduleTransferPresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isShowProcessingPerformed, "The isShowProcessingPerformed should be performed")
         XCTAssertTrue(mockView.isNotificationSent, "The notification should be sent")
         assertDestinationSectionResult(destinationSection: presenter.sectionData.first!)
+        assertForeignExchangeSectionResult(foreignExchangeSection: presenter.sectionData[1])
+        assertSummarySectionResult(summarySection: presenter.sectionData[2])
+        assertNotesSectionResult(notesSection: presenter.sectionData[3])
+        assertButtonSectionResult(buttonSection: presenter.sectionData.last!)
     }
 
     public func testScheduleTransfer_failure() {
@@ -76,6 +80,40 @@ class ScheduleTransferPresenterTests: XCTestCase {
                         "The header of Destination section should not be nil")
         XCTAssertNotNil(destinationSection.cellIdentifier,
                         "The cellIdentifier of Destination section should not be nil")
+    }
+
+    private func assertForeignExchangeSectionResult(foreignExchangeSection: ScheduleTransferSectionData) {
+        XCTAssertEqual(foreignExchangeSection.rowCount, 11, "Foreign exchange section should have 11 rows")
+        XCTAssertNotNil(foreignExchangeSection.title, "The title of foreign exchange section should not be nil")
+        XCTAssertNotNil(foreignExchangeSection.scheduleTransferSectionHeader,
+                        "The header of foreign exchange section should not be nil")
+        XCTAssertNotNil(foreignExchangeSection.cellIdentifier,
+                        "The cellIdentifier of foreign exchange section should not be nil")
+    }
+
+    private func assertSummarySectionResult(summarySection: ScheduleTransferSectionData) {
+        XCTAssertEqual(summarySection.rowCount, 3, "Summary section should have 3 rows")
+        XCTAssertNotNil(summarySection.title, "The title of summary section should not be nil")
+        XCTAssertNotNil(summarySection.scheduleTransferSectionHeader,
+                        "The header of summary section should not be nil")
+        XCTAssertNotNil(summarySection.cellIdentifier,
+                        "The cellIdentifier of summary section should not be nil")
+    }
+
+    private func assertNotesSectionResult(notesSection: ScheduleTransferSectionData) {
+        XCTAssertEqual(notesSection.rowCount, 1, "Notes section should have 1 row")
+        XCTAssertNotNil(notesSection.scheduleTransferSectionHeader,
+                        "The header of notes section should not be nil")
+        XCTAssertNotNil(notesSection.cellIdentifier,
+                        "The cellIdentifier of notes section should not be nil")
+    }
+
+    private func assertButtonSectionResult(buttonSection: ScheduleTransferSectionData) {
+        XCTAssertEqual(buttonSection.rowCount, 1, "Button section should have 1 row")
+        XCTAssertNotNil(buttonSection.scheduleTransferSectionHeader,
+                        "The header of button section should not be nil")
+        XCTAssertNotNil(buttonSection.cellIdentifier,
+                        "The cellIdentifier of button section should not be nil")
     }
 }
 
