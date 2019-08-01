@@ -27,10 +27,6 @@ class TransferFunds {
 
     var transferAllFundsSwitch: XCUIElement
 
-    var availableForTransferLabel: XCUIElement
-
-    var availableForAmount: XCUIElement
-
     var notesSectionLabel: XCUIElement
 
     var notesPlaceHolderString: String
@@ -74,10 +70,6 @@ class TransferFunds {
         transferAllFundsLabel = app.tables["createTransferTableView"].staticTexts["transferAllFundsTitleLabel"]
 
         transferAllFundsSwitch = app.tables["createTransferTableView"].switches["transferAllFundsSwitch"]
-
-        availableForTransferLabel = app.tables["createTransferTableView"].staticTexts["receiptTransactionTypeLabel"]
-
-        availableForAmount = app.tables["createTransferTableView"].staticTexts["receiptTransactionTypeLabel"]
 
         notesSectionLabel = app.tables["createTransferTableView"] .staticTexts.containing(.staticText, identifier: "NOTES")
             .element(matching: NSPredicate(format: "label CONTAINS[c] 'NOTES'"))
