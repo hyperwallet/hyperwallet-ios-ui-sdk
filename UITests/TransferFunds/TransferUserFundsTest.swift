@@ -303,9 +303,10 @@ class TransferUserFundsTest: BaseTests {
     /*
      Given thatTransfer methods exist
      AND PrepaidCard Transfer method is selected
-     When Payee enters the amount
+     When Payee enters the amount in JPY
      Then Next button is enabled
      */
+    /*
     func testTransferFunds_createTransferDestinationAmount_JPY() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListOneBankAccountTransferJPY",
@@ -329,7 +330,7 @@ class TransferUserFundsTest: BaseTests {
 
         //let availableFunds = app.tables["createTransferTableView"].staticTexts["Available for transfer: 10000"]
         //XCTAssertTrue(availableFunds.exists)
-    }
+    } */
 
     /* Given that user is on the Transfer fund page and selected a Transfer Destination
      When user enter the digit for the transfer amount
