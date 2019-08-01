@@ -31,9 +31,9 @@ public protocol TransferRepository {
     /// Schedule a transfer
     ///
     /// - Parameters:
-    ///   - transferToken: the token of a transfer that was previously created
+    ///   - transfer: the transfer that was previously created
     ///   - completion: the callback handler of responses from the Hyperwallet platform
-    func scheduleTransfer(_ transferToken: String,
+    func scheduleTransfer(_ transfer: HyperwalletTransfer,
                           _ completion: @escaping (Result<HyperwalletStatusTransition?, HyperwalletErrorType>) -> Void)
 }
 
@@ -52,12 +52,13 @@ final class RemoteTransferRepository: TransferRepository {
     /// Schedule a transfer
     ///
     /// - Parameters:
-    ///   - transferToken: the token of a transfer that previously created
+    ///   - transfer: the transfer that was previously created
     ///   - completion: the callback handler of responses from the Hyperwallet platform
-    public func scheduleTransfer(_ transferToken: String,
+    public func scheduleTransfer(_ transfer: HyperwalletTransfer,
                                  _ completion: @escaping (Result < HyperwalletStatusTransition?,
         HyperwalletErrorType>) -> Void) {
-        Hyperwallet.shared.scheduleTransfer(transferToken: transferToken,
+        Hyperwallet.shared.scheduleTransfer(transferToken: transfer.token!,
+                                            notes: transfer.notes,
                                             completion: TransferRepositoryCompletionHelper.performHandler(completion))
     }
 }

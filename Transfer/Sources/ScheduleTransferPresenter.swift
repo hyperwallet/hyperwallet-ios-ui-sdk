@@ -72,7 +72,7 @@ final class ScheduleTransferPresenter {
 
     func scheduleTransfer() {
         view.showProcessing()
-        transferRepository.scheduleTransfer(transfer.token!) { [weak self] (result) in
+        transferRepository.scheduleTransfer(transfer) { [weak self] (result) in
             guard let strongSelf = self else {
                 return
             }

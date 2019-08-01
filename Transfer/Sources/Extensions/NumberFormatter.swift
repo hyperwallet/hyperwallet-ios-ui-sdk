@@ -25,7 +25,6 @@ extension NumberFormatter {
         formatter.numberStyle = .currency
         formatter.currencyCode = ""
         formatter.currencySymbol = ""
-        formatter.locale = Locale(identifier: Locale.preferredLanguages[0])
         return formatter
     }()
 }

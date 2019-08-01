@@ -103,10 +103,12 @@ extension TransferAmountCell: UITextFieldDelegate {
             // digit
             currentText = digitsOnly + string
         }
-        if ["00", "0"].contains(currentText) {
+
+        if Double(currentText) == 0 {
             textField.text = ""
             return false
         }
+
         currentText = "0" + currentText
         currentText.insert(".", at: currentText.index(currentText.endIndex, offsetBy: -2))
         let numberAmount = NumberFormatter.amountFormatter.number(from: currentText)!

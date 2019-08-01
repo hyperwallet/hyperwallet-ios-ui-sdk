@@ -22,8 +22,11 @@ import HyperwalletSDK
 import XCTest
 
 class TransferRepositoryTests: XCTestCase {
+    private var transfer: HyperwalletTransfer!
+
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
+        transfer = getTransfer(from: HyperwalletTestHelper.getDataFromJson("CreateTransferResponse"))!
     }
 
     override func tearDown() {
@@ -41,10 +44,6 @@ class TransferRepositoryTests: XCTestCase {
         var createdTransfer: HyperwalletTransfer?
         var error: HyperwalletErrorType?
         let transferRepository = RemoteTransferRepository()
-        let transfer = HyperwalletTransfer.Builder(clientTransferId: "123",
-                                                   sourceToken: "usr-123",
-                                                   destinationToken: "trm-123")
-            .build()
 
         // When
         transferRepository.createTransfer(transfer) { (result) in
@@ -75,10 +74,6 @@ class TransferRepositoryTests: XCTestCase {
         var createdTransfer: HyperwalletTransfer?
         var error: HyperwalletErrorType?
         let transferRepository = RemoteTransferRepository()
-        let transfer = HyperwalletTransfer.Builder(clientTransferId: "123",
-                                                   sourceToken: "usr-123",
-                                                   destinationToken: "trm-123")
-            .build()
 
         // When
         transferRepository.createTransfer(transfer) { (result) in
@@ -112,7 +107,7 @@ class TransferRepositoryTests: XCTestCase {
         let transferRepository = RemoteTransferRepository()
 
         // When
-        transferRepository.scheduleTransfer("trf-123456") { (result) in
+        transferRepository.scheduleTransfer(transfer) { (result) in
             switch result {
             case .success(let successResult):
                 statusTransition = successResult
@@ -142,7 +137,7 @@ class TransferRepositoryTests: XCTestCase {
         let transferRepository = RemoteTransferRepository()
 
         // When
-        transferRepository.scheduleTransfer("trf-123456") { (result) in
+        transferRepository.scheduleTransfer(transfer) { (result) in
             switch result {
             case .success(let successResult):
                 statusTransition = successResult
@@ -158,5 +153,10 @@ class TransferRepositoryTests: XCTestCase {
         XCTAssertNotNil(error, "The error should not be nil")
         XCTAssertNil(statusTransition, "The result should be nil")
         XCTAssertEqual(TransferRepositoryRequestHelper.getResponseError(error!).code, "EXPIRED_TRANSFER")
+    }
+
+    private func getTransfer(from jsonData: Data) -> HyperwalletTransfer? {
+        let decoder = JSONDecoder()
+        return try? decoder.decode(HyperwalletTransfer.self, from: jsonData)
     }
 }
