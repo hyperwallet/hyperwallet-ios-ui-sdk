@@ -62,7 +62,7 @@ final class CreateTransferPresenter {
 
     private var sourceToken: String?
 
-    var selectedTransferMethod: HyperwalletTransferMethod!
+    var selectedTransferMethod: HyperwalletTransferMethod?
     var amount: String?
     var notes: String?
     var transferAllFundsIsOn: Bool = false {
@@ -75,7 +75,7 @@ final class CreateTransferPresenter {
         }
     }
     var destinationCurrency: String? {
-        return selectedTransferMethod.transferMethodCurrency
+        return selectedTransferMethod?.transferMethodCurrency
     }
 
     init(_ clientTransferId: String, _ sourceToken: String?, view: CreateTransferView) {
@@ -87,17 +87,11 @@ final class CreateTransferPresenter {
     func initializeSections() {
         sectionData.removeAll()
 
-        let createTransferDestinationSection = CreateTransferSectionDestinationData(
-            isTransferMethodAvailable: selectedTransferMethod != nil
-        )
+        let createTransferDestinationSection = CreateTransferSectionDestinationData()
         sectionData.append(createTransferDestinationSection)
 
-        if selectedTransferMethod != nil {
-            let createTransferSectionTransferData = CreateTransferSectionTransferData(
-                availableBalance: availableBalance
-            )
-            sectionData.append(createTransferSectionTransferData)
-        }
+        let createTransferSectionTransferData = CreateTransferSectionTransferData(availableBalance: availableBalance)
+        sectionData.append(createTransferSectionTransferData)
 
         let createTransferNotesSection = CreateTransferSectionNotesData()
         sectionData.append(createTransferNotesSection)
@@ -139,7 +133,7 @@ final class CreateTransferPresenter {
             case .failure(let error):
                 strongSelf.view.hideLoading()
                 strongSelf.view.showError(error, { () -> Void in
-                    strongSelf.loadCreateTransfer()
+                    strongSelf.loadTransferMethods()
                 })
 
             case .success(let result):
@@ -158,59 +152,64 @@ final class CreateTransferPresenter {
     }
 
     private func createInitialTransfer() {
-        let transfer = HyperwalletTransfer.Builder(clientTransferId: clientTransferId,
-                                                   sourceToken: sourceToken ?? "",
-                                                   destinationToken: selectedTransferMethod.token ?? "")
-            .destinationCurrency(selectedTransferMethod.transferMethodCurrency)
-            .build()
+        if let sourceToken = sourceToken,
+            let destinationToken = selectedTransferMethod?.token,
+            let destinationCurrency = selectedTransferMethod?.transferMethodCurrency {
+            let transfer = HyperwalletTransfer.Builder(clientTransferId: clientTransferId,
+                                                       sourceToken: sourceToken,
+                                                       destinationToken: destinationToken)
+                .destinationCurrency(destinationCurrency)
+                .build()
 
-        transferRepository.createTransfer(transfer) { [weak self] result in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.view.hideLoading()
-            switch result {
-            case .failure(let error):
-                strongSelf.view.showError(error, { () -> Void in
-                    strongSelf.loadCreateTransfer()
-                })
+            transferRepository.createTransfer(transfer) { [weak self] result in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.view.hideLoading()
+                switch result {
+                case .failure(let error):
+                    strongSelf.view.showError(error, { () -> Void in
+                        strongSelf.createInitialTransfer()
+                    })
 
-            case .success(let transfer):
-                strongSelf.availableBalance = transfer?.destinationAmount
-                strongSelf.view.showCreateTransfer()
+                case .success(let transfer):
+                    strongSelf.availableBalance = transfer?.destinationAmount
+                    strongSelf.view.showCreateTransfer()
+                }
             }
         }
     }
 
     // MARK: - Create Transfer Button Tapped
     func createTransfer() {
-        guard let amount = amount else {
-            return
-        }
-        view.showLoading()
-        let transfer = HyperwalletTransfer.Builder(clientTransferId: clientTransferId,
-                                                   sourceToken: sourceToken ?? "",
-                                                   destinationToken: selectedTransferMethod.token ?? "")
-            .destinationAmount(amount)
-            .notes(notes)
-            .destinationCurrency(selectedTransferMethod.transferMethodCurrency)
-            .build()
+        if let sourceToken = sourceToken,
+            let destinationToken = selectedTransferMethod?.token,
+            let destinationCurrency = selectedTransferMethod?.transferMethodCurrency {
+            view.showLoading()
+            let transfer = HyperwalletTransfer.Builder(clientTransferId: clientTransferId,
+                                                       sourceToken: sourceToken,
+                                                       destinationToken: destinationToken)
+                .destinationAmount(!transferAllFundsIsOn ? amount : nil)
+                .notes(notes)
+                .destinationCurrency(destinationCurrency)
+                .build()
 
-        transferRepository.createTransfer(transfer) { [weak self] result in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.view.hideLoading()
-            switch result {
-            case .failure(let error):
-                strongSelf.view.showError(error, { () -> Void in
-                    strongSelf.createTransfer()
-                })
+            transferRepository.createTransfer(transfer) { [weak self] result in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.view.hideLoading()
+                switch result {
+                case .failure(let error):
+                    strongSelf.view.showError(error, { () -> Void in
+                        strongSelf.createTransfer()
+                    })
 
-            case .success(let transfer):
-                if let transfer = transfer {
-                    strongSelf.view.notifyTransferCreated(transfer)
-                    strongSelf.view.showScheduleTransfer(transfer)
+                case .success(let transfer):
+                    if let transfer = transfer {
+                        strongSelf.view.notifyTransferCreated(transfer)
+                        strongSelf.view.showScheduleTransfer(transfer)
+                    }
                 }
             }
         }

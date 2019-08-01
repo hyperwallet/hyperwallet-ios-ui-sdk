@@ -21,6 +21,7 @@
 		073BB9B922E643880053C24E /* HyperwalletTestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BB9B522E643880053C24E /* HyperwalletTestHelper.swift */; };
 		073BB9BA22E643880053C24E /* TransferRepositoryRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BB9B622E643880053C24E /* TransferRepositoryRequestHelper.swift */; };
 		075FCFED22F2154700997A7A /* CreateTransferWithoutForeignExchangeResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 075FCFEC22F2154700997A7A /* CreateTransferWithoutForeignExchangeResponse.json */; };
+		075FCFEF22F2439800997A7A /* UnexpectedErrorResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 075FCFEE22F2439800997A7A /* UnexpectedErrorResponse.json */; };
 		077C337422E8CCB0000314CD /* DividerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C336C22E8CCAF000314CD /* DividerCell.swift */; };
 		077C337522E8CCB0000314CD /* TransferSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C336D22E8CCAF000314CD /* TransferSummaryCell.swift */; };
 		077C337722E8CCB0000314CD /* ScheduleTransferSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C336F22E8CCAF000314CD /* ScheduleTransferSectionData.swift */; };
@@ -59,6 +60,7 @@
 		4A2B94B622F1CC74000A0F14 /* UserIndividualResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 4A2B949B22F1BBCB000A0F14 /* UserIndividualResponse.json */; };
 		4A31BDB722D762AE0027DACA /* PrepaidCardReceiptRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A31BDB622D762AE0027DACA /* PrepaidCardReceiptRepositoryTests.swift */; };
 		4A31BDB922D762CE0027DACA /* ReceiptRepositoryFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A31BDB822D762CE0027DACA /* ReceiptRepositoryFactoryTests.swift */; };
+		4A35339722F337EE00D04BCC /* TransferRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078C6EFF22EF81A900CF81EE /* TransferRequestHelper.swift */; };
 		4A37DB9222E8AFEE0085A329 /* Transfer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A9A7BDF22E859E60022E573 /* Transfer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4A37DB9322E8B0040085A329 /* TransferRepository.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 073BB98222E63DB50053C24E /* TransferRepository.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4A5C576522E73F3400F3359B /* UISearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5C576422E73F3400F3359B /* UISearchBar.swift */; };
@@ -590,6 +592,7 @@
 		0743EF9B22A5987100C089EE /* ListReceiptPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListReceiptPresenterTests.swift; sourceTree = "<group>"; };
 		0743EFA022A59EE100C089EE /* UserReceiptNextPageResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserReceiptNextPageResponse.json; sourceTree = "<group>"; };
 		075FCFEC22F2154700997A7A /* CreateTransferWithoutForeignExchangeResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CreateTransferWithoutForeignExchangeResponse.json; sourceTree = "<group>"; };
+		075FCFEE22F2439800997A7A /* UnexpectedErrorResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UnexpectedErrorResponse.json; sourceTree = "<group>"; };
 		077C336C22E8CCAF000314CD /* DividerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DividerCell.swift; sourceTree = "<group>"; };
 		077C336D22E8CCAF000314CD /* TransferSummaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferSummaryCell.swift; sourceTree = "<group>"; };
 		077C336F22E8CCAF000314CD /* ScheduleTransferSectionData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleTransferSectionData.swift; sourceTree = "<group>"; };
@@ -1171,6 +1174,7 @@
 				4A2B949C22F1BC00000A0F14 /* ListTransferMethodSuccessResponse.json */,
 				078C6F0722EF967400CF81EE /* ScheduleTransferExpiredTransferResponse.json */,
 				078C6EFD22EF815900CF81EE /* ScheduleTransferResponse.json */,
+				075FCFEE22F2439800997A7A /* UnexpectedErrorResponse.json */,
 				DBA9FA58227912A000C1301A /* UserIndividualResponse.json */,
 			);
 			path = Responses;
@@ -1246,6 +1250,7 @@
 				4A2B94A822F1C81F000A0F14 /* CreateTransferRequestHelper.swift */,
 				4A9A7C1722E89BEB0022E573 /* HyperwalletTestHelper.swift */,
 				4A2B94A422F1C7BD000A0F14 /* TransferMethodRepositoryRequestHelper.swift */,
+				078C6EFF22EF81A900CF81EE /* TransferRequestHelper.swift */,
 				4A2B949D22F1BD8E000A0F14 /* UserRepositoryRequestHelper.swift */,
 				078C6EFF22EF81A900CF81EE /* TransferRequestHelper.swift */,
 			);
@@ -2522,6 +2527,7 @@
 			files = (
 				4A2B94B422F1CB31000A0F14 /* ListTransferMethodSuccessResponse.json in Resources */,
 				4A2B94B522F1CB31000A0F14 /* UserIndividualResponse.json in Resources */,
+				075FCFEF22F2439800997A7A /* UnexpectedErrorResponse.json in Resources */,
 				4A2B94B322F1CB31000A0F14 /* CreateTransferResponse.json in Resources */,
 				078C6EFE22EF815900CF81EE /* ScheduleTransferResponse.json in Resources */,
 				075FCFED22F2154700997A7A /* CreateTransferWithoutForeignExchangeResponse.json in Resources */,
@@ -2965,6 +2971,9 @@
 				4A2B94B022F1CB2B000A0F14 /* TransferMethodRepositoryRequestHelper.swift in Sources */,
 				4A2B94B122F1CB2B000A0F14 /* CreateTransferRequestHelper.swift in Sources */,
 				4A2B94B222F1CB2B000A0F14 /* UserRepositoryRequestHelper.swift in Sources */,
+				4A35339722F337EE00D04BCC /* TransferRequestHelper.swift in Sources */,
+				4A9A7BED22E859E60022E573 /* CreateTransferPresenterTests.swift in Sources */,
+				078C6EFC22EF7E0500CF81EE /* ScheduleTransferPresenterTests.swift in Sources */,
 				4A9A7BED22E859E60022E573 /* CreateTransferPresenterTests.swift in Sources */,
 				078C6F0022EF81A900CF81EE /* TransferRequestHelper.swift in Sources */,
 				078C6EFC22EF7E0500CF81EE /* ScheduleTransferPresenterTests.swift in Sources */,

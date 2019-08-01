@@ -4,6 +4,7 @@ import XCTest
 
 class CreateTransferRequestHelper {
     private static let fileName = "CreateTransferResponse"
+    private static let failureResponseFile = "UnexpectedErrorResponse"
     private static let requestUrl = "\(HyperwalletTestHelper.restURL)transfers"
 
     static func setupSucessRequest() {
@@ -17,7 +18,7 @@ class CreateTransferRequestHelper {
     }
 
     static func setupFailureRequest() {
-        let errorResponse = HyperwalletTestHelper.badRequestHTTPResponse(for: fileName)
+        let errorResponse = HyperwalletTestHelper.badRequestHTTPResponse(for: failureResponseFile)
         CreateTransferRequestHelper.setUpMockServer(errorResponse, requestUrl)
     }
 
