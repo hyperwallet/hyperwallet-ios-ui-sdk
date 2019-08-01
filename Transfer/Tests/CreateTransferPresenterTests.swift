@@ -296,9 +296,8 @@ class MockCreateTransferView: CreateTransferView {
     func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
         isShowErrorPerformed = true
         if !stopOnError {
-            //retry!()
+            retry!()
         }
-        expectation?.assertForOverFulfill = false
         expectation?.fulfill()
     }
 
