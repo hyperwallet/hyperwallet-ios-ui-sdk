@@ -58,12 +58,26 @@ class CreateTransferTests: XCTestCase {
         }
     }
 
+    private enum GetUserResultType {
+        case success, failure
+        func setUpRequest() {
+            switch self {
+            case .success:
+                UserRepositoryRequestHelper.setupSucessRequest()
+
+            case .failure:
+                UserRepositoryRequestHelper.setupFailureRequest()
+            }
+        }
+    }
+
     private func initializePresenter(transferMethodResult: LoadTransferMethodsResultType = .success,
                                      createTransferResult: CreateTransferResultType = .success,
+                                     getUserResultType: GetUserResultType = .success,
                                      sourceToken: String? = nil) {
         transferMethodResult.setUpRequest()
         createTransferResult.setUpRequest()
-        UserRepositoryRequestHelper.setupSucessRequest()
+        getUserResultType.setUpRequest()
 
         presenter = CreateTransferPresenter(clientTransferId, sourceToken, view: mockView)
 
@@ -227,6 +241,14 @@ class CreateTransferTests: XCTestCase {
         XCTAssertNotNil(presenter.selectedTransferMethod, "selectedTransferMethod should not be nil")
     }
 
+    func testInitializeFlow_getUserFailure() {
+//        mockView.stopOnError = true
+//        initializePresenter(getUserResultType: .failure)
+//        XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
+//        XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
+//        XCTAssertTrue(mockView.isShowErrorPerformed, "showError should be performed")
+    }
+
     func testShowSelectDestinationAccountView_success() {
         initializePresenter()
         presenter.showSelectDestinationAccountView()
@@ -254,6 +276,8 @@ class MockCreateTransferView: CreateTransferView {
     var isShowScheduleTransferPerformed = false
     var isUpdateTransferSectionPerformed = false
 
+    var stopOnError = false
+
     var expectation: XCTestExpectation?
 
     func hideLoading() {
@@ -271,7 +295,10 @@ class MockCreateTransferView: CreateTransferView {
 
     func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
         isShowErrorPerformed = true
-        retry!()
+        if !stopOnError {
+            //retry!()
+        }
+        expectation?.assertForOverFulfill = false
         expectation?.fulfill()
     }
 
@@ -306,5 +333,6 @@ class MockCreateTransferView: CreateTransferView {
         isShowScheduleTransferPerformed = false
         isUpdateTransferSectionPerformed = false
         expectation = nil
+        stopOnError = false
     }
 }

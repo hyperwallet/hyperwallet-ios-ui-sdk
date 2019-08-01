@@ -59,7 +59,7 @@
 		4A2B94B622F1CC74000A0F14 /* UserIndividualResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 4A2B949B22F1BBCB000A0F14 /* UserIndividualResponse.json */; };
 		4A31BDB722D762AE0027DACA /* PrepaidCardReceiptRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A31BDB622D762AE0027DACA /* PrepaidCardReceiptRepositoryTests.swift */; };
 		4A31BDB922D762CE0027DACA /* ReceiptRepositoryFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A31BDB822D762CE0027DACA /* ReceiptRepositoryFactoryTests.swift */; };
-		4A35339622F3031C00D04BCC /* TransferRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078C6EFF22EF81A900CF81EE /* TransferRequestHelper.swift */; };
+		4A35339722F337EE00D04BCC /* TransferRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078C6EFF22EF81A900CF81EE /* TransferRequestHelper.swift */; };
 		4A37DB9222E8AFEE0085A329 /* Transfer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A9A7BDF22E859E60022E573 /* Transfer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4A37DB9322E8B0040085A329 /* TransferRepository.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 073BB98222E63DB50053C24E /* TransferRepository.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4A5C576522E73F3400F3359B /* UISearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5C576422E73F3400F3359B /* UISearchBar.swift */; };
@@ -1168,12 +1168,12 @@
 		4A2B949A22F1BB82000A0F14 /* Responses */ = {
 			isa = PBXGroup;
 			children = (
-				075FCFEE22F2439800997A7A /* UnexpectedErrorResponse.json */,
 				4A2B94AA22F1C954000A0F14 /* CreateTransferResponse.json */,
 				075FCFEC22F2154700997A7A /* CreateTransferWithoutForeignExchangeResponse.json */,
 				4A2B949C22F1BC00000A0F14 /* ListTransferMethodSuccessResponse.json */,
 				078C6F0722EF967400CF81EE /* ScheduleTransferExpiredTransferResponse.json */,
 				078C6EFD22EF815900CF81EE /* ScheduleTransferResponse.json */,
+				075FCFEE22F2439800997A7A /* UnexpectedErrorResponse.json */,
 				DBA9FA58227912A000C1301A /* UserIndividualResponse.json */,
 			);
 			path = Responses;
@@ -1249,8 +1249,8 @@
 				4A2B94A822F1C81F000A0F14 /* CreateTransferRequestHelper.swift */,
 				4A9A7C1722E89BEB0022E573 /* HyperwalletTestHelper.swift */,
 				4A2B94A422F1C7BD000A0F14 /* TransferMethodRepositoryRequestHelper.swift */,
-				4A2B949D22F1BD8E000A0F14 /* UserRepositoryRequestHelper.swift */,
 				078C6EFF22EF81A900CF81EE /* TransferRequestHelper.swift */,
+				4A2B949D22F1BD8E000A0F14 /* UserRepositoryRequestHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -2969,7 +2969,7 @@
 				4A2B94B022F1CB2B000A0F14 /* TransferMethodRepositoryRequestHelper.swift in Sources */,
 				4A2B94B122F1CB2B000A0F14 /* CreateTransferRequestHelper.swift in Sources */,
 				4A2B94B222F1CB2B000A0F14 /* UserRepositoryRequestHelper.swift in Sources */,
-				4A35339622F3031C00D04BCC /* TransferRequestHelper.swift in Sources */,
+				4A35339722F337EE00D04BCC /* TransferRequestHelper.swift in Sources */,
 				4A9A7BED22E859E60022E573 /* CreateTransferPresenterTests.swift in Sources */,
 				078C6EFC22EF7E0500CF81EE /* ScheduleTransferPresenterTests.swift in Sources */,
 				4A9A7BED22E859E60022E573 /* CreateTransferPresenterTests.swift in Sources */,

@@ -4,6 +4,7 @@ import XCTest
 
 class UserRepositoryRequestHelper {
     private static let userIndividualResponseFileName = "UserIndividualResponse"
+    private static let failureResponseFile = "UnexpectedErrorResponse"
     private static let requestUrl = HyperwalletTestHelper.userRestURL
 
     static func setupSucessRequest() {
@@ -12,7 +13,7 @@ class UserRepositoryRequestHelper {
     }
 
     static func setupFailureRequest() {
-        let errorResponse = HyperwalletTestHelper.badRequestHTTPResponse(for: userIndividualResponseFileName)
+        let errorResponse = HyperwalletTestHelper.badRequestHTTPResponse(for: failureResponseFile)
         UserRepositoryRequestHelper.setUpMockServer(errorResponse, requestUrl)
     }
 
