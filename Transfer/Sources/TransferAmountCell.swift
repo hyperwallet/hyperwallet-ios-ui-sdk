@@ -97,8 +97,6 @@ extension TransferAmountCell: UITextFieldDelegate {
     func textField(_ textField: UITextField,
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
-        setCursorPositionToTheEnd(of: textField)
-
         var currentText = textField.text ?? ""
         if string.count > 1 {
             // Paste
@@ -125,13 +123,7 @@ extension TransferAmountCell: UITextFieldDelegate {
         currentText.insert(".", at: currentText.index(currentText.endIndex, offsetBy: -2))
         let numberAmount = TransferAmountCell.amountFormatter.number(from: currentText)!
         textField.text = TransferAmountCell.amountFormatter.string(from: numberAmount)
-
         return false
-    }
-
-    private func setCursorPositionToTheEnd(of textField: UITextField) {
-        let endPosition = textField.endOfDocument
-        textField.selectedTextRange = textField.textRange(from: endPosition, to: endPosition)
     }
 }
 
