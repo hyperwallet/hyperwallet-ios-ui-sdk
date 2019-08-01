@@ -95,7 +95,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
         label.addGestureRecognizer(tap)
         addArrangedSubview(label)
         if let widthAnchor = label.superview?.widthAnchor {
-        label.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.35).isActive = true
+            label.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.35).isActive = true
         }
     }
 
