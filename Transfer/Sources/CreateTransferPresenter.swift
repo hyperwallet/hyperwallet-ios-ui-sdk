@@ -222,7 +222,7 @@ final class CreateTransferPresenter {
             case .success(let pageList):
                 if let transferMethods = pageList?.data {
                     strongSelf.view.showGenericTableView(items: transferMethods,
-                                                         title: "select_destination".localized(),
+                                                         title: "transfer_select_destination".localized(),
                                                          selectItemHandler: strongSelf
                                                             .selectDestinationAccountHandler(),
                                                          markCellHandler: strongSelf
