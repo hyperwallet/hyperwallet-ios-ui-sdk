@@ -72,7 +72,7 @@ final class TransferAmountCell: UITableViewCell {
         textLabel?.text = "transfer_amount".localized()
         amountTextField.text = amount
         amountTextField.isEnabled = isEnabled
-        detailTextLabel?.text = currency
+        detailTextLabel?.text = currency ?? String(repeating: " ", count: 3)
         enteredAmountHandler = handler
     }
 }
