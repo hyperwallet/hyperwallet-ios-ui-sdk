@@ -13,11 +13,6 @@ class TransferUserFundsTest: BaseTests {
             .containing(.staticText, identifier: "Transfer Funds")
             .element(boundBy: 0)
         transferFunds = TransferFunds(app: app)
-
-        //        mockServer.setupStub(url: "/rest/v3/users/usr-token/authentication-token",
-        //                             filename: "AuthenticationTokenResponse",
-        //                             method: HTTPMethod.post)
-
     }
 
     override func tearDown() {
@@ -30,17 +25,7 @@ class TransferUserFundsTest: BaseTests {
      Then the user will have the ability to create a method
      */
     func testTransferFunds_noTransferMethod() {
-//        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
-//                             filename: "ListTransferMethodsNoData",
-//                             method: HTTPMethod.get)
-
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
-                             filename: "ListDeActivatedTransferMethod",
-                             method: HTTPMethod.get)
-
-        mockServer.setupStub(url: "/rest/v3/transfers",
-                             filename: "AvailableFundUSD",
-                             method: HTTPMethod.post)
+        mockServer.setUpEmptyResponse(url: "/rest/v3/users/usr-token/transfer-methods")
 
         XCTAssertTrue(transferFundMenu.exists)
         transferFundMenu.tap()
@@ -51,9 +36,9 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.transferFundTitle.exists)
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Add Account")
-        XCTAssertEqual(transferFunds.addSelectDestinationDetailLabel.label, "An account hasn\'t been set up yet, please add an account first.")
+        XCTAssertEqual(transferFunds.addSelectDestinationDetailLabel.label,
+                       "An account hasn\'t been set up yet, please add an account first.")
 
-        //  TODO: Tab to Add Account (we will not assert at this point)
         XCTAssertFalse(transferFunds.transferCurrency.exists, "Transfer Currency should not exist")
     }
 
@@ -264,7 +249,6 @@ class TransferUserFundsTest: BaseTests {
         // Next Button
         XCTAssertTrue(transferFunds.nextLabel.exists)
         // transferFunds.nextLabel.tap()
-        // TODO: can assert confirmation page is displayed
     }
 
     func testTransferFund_createTransferWithoutFX() {
@@ -314,8 +298,6 @@ class TransferUserFundsTest: BaseTests {
         // Next Button
         XCTAssertTrue(transferFunds.nextLabel.exists)
         // transferFunds.nextLabel.tap()
-
-        // TODO: can assert confirmation page is displayed
     }
 
     /*
@@ -421,7 +403,7 @@ class TransferUserFundsTest: BaseTests {
      When user transfers the fund
      Then the over limit error occurs and the app should display the error
      (Your attempted transaction has exceeded the approved payout limit)
-     If someone transfers > what is maximally transferable by the account
+     If someone transfers > what is maximally transferable by the account eg, CAD limit is $99,999
      */
     func testTransferFunds_createTransferOverLimitError() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
@@ -439,7 +421,7 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.transferFundTitle.exists)
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertTrue(transferFunds.transferAmount.exists)
-        transferFunds.enterTransferAmount(amount: "10000")
+        transferFunds.enterTransferAmount(amount: "10000000000")
 
         // Next Button
         XCTAssertTrue(transferFunds.nextLabel.exists)
@@ -449,7 +431,6 @@ class TransferUserFundsTest: BaseTests {
                              filename: "TransferErrorLimitExceeded",
                              method: HTTPMethod.post)
 
-        // TODO: implement assertion
         XCTAssert(app.alerts["Error"].exists)
         let predicate = NSPredicate(format:
             "label CONTAINS[c] 'Your attempted transaction has exceeded the approved payout limit; please contact Hyperwallet for further assistance.'")
@@ -483,8 +464,8 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.nextLabel.tap()
 
         mockServer.setupStub(url: "/rest/v3/transfers",
-                             filename: "TransferErrorAmountLessThantFee",
-                             method: HTTPMethod.get)
+                             filename: "TransferErrorOverAvailableFund",
+                             method: HTTPMethod.post)
 
         XCTAssert(app.alerts["Error"].exists)
         let predicate = NSPredicate(format:
@@ -492,9 +473,9 @@ class TransferUserFundsTest: BaseTests {
         XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
     }
 
-    /* Given that Transfer methods exist And insufficient funds to transfer
-     When user transfers the fund
-     Then You do not have enough funds occurs and the app should display the error
+    /* Given that Transfer methods exist And there is NO available fund
+     When user tabs on the Transfer Fund menu
+     Then will see the error
      */
     func testTransferFund_createTransferMinimumAmountError() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
@@ -505,39 +486,24 @@ class TransferUserFundsTest: BaseTests {
                              filename: "AvailableFundZero",
                              method: HTTPMethod.post)
 
-        XCTAssertTrue(transferFunds.transferFundTitle.exists)
-        XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
-        XCTAssertTrue(transferFunds.transferAmount.exists)
-        transferFunds.enterTransferAmount(amount: "10000")
+        mockServer.setupStub(url: "/rest/v3/transfers",
+                             filename: "TransferErrorAmountLessThanFee",
+                             method: HTTPMethod.post)
 
         XCTAssertTrue(transferFundMenu.exists)
         transferFundMenu.tap()
         waitForNonExistence(spinner)
 
-        // Next Button
-        XCTAssertTrue(transferFunds.nextLabel.exists)
-        transferFunds.nextLabel.tap()
-
-        mockServer.setupStub(url: "/rest/v3/transfers",
-                             filename: "TransferErrorOverAvailableFund",
-                             method: HTTPMethod.get)
-
         XCTAssert(app.alerts["Error"].exists)
         let predicate = NSPredicate(format:
-            "label CONTAINS[c] 'You do not have enough funds in any single currency to complete this transfer'")
+            "label CONTAINS[c] 'Amount is less than the fee amount'")
         XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
     }
 
     func testTransferFund_createTransferInvalidSourceError() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
-                             filename: "ListMoreThanOneTransferMethod",
+                             filename: "InvalidSourceError",
                              method: HTTPMethod.get)
-
-        mockServer.setupStub(url: "/rest/v3/transfers",
-                             filename: "AvailableFundUSD",
-                             method: HTTPMethod.post)
-
-        // TODO: ADD the Invalid Source Error mock
 
         XCTAssertTrue(transferFundMenu.exists)
         transferFundMenu.tap()
@@ -545,20 +511,14 @@ class TransferUserFundsTest: BaseTests {
 
         XCTAssert(app.alerts["Error"].exists)
         let predicate = NSPredicate(format:
-            "label CONTAINS[c] ''")
+            "label CONTAINS[c] 'The source token you provided doesn’t exist or is not a valid source.'")
         XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
     }
 
     func testTransferFund_createTransferConnectionError() {
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+        mockServer.setupStubConnectionError(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListMoreThanOneTransferMethod",
                              method: HTTPMethod.get)
-
-        mockServer.setupStub(url: "/rest/v3/transfers",
-                             filename: "UnexpectedErrorResponse",
-                             method: HTTPMethod.post)
-
-        // TODO: ADD the Connection Error mock
 
         XCTAssertTrue(transferFundMenu.exists)
         transferFundMenu.tap()

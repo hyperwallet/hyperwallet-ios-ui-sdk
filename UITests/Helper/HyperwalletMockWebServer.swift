@@ -83,6 +83,34 @@ class HyperwalletMockWebServer {
         server.GET[url] = response
     }
 
+    func setupStubConnectionError(url: String, filename: String, method: HTTPMethod) {
+        let filePath = testBundle.path(forResource: filename, ofType: "json")
+        let fileUrl = URL(fileURLWithPath: filePath!)
+        do {
+            let data = try Data(contentsOf: fileUrl, options: .uncached)
+
+            let statusCode = 408
+            let reasonPhrase = "Request Timeout"
+            let headers = ["Content-Type": "application/json"]
+
+            let response: ((HttpRequest) -> HttpResponse) = { _ in
+                HttpResponse.raw(statusCode, reasonPhrase, headers, { writer in
+                    try writer.write(data)
+                })
+            }
+
+            switch method {
+            case HTTPMethod.get :
+                server.GET[url] = response
+
+            case HTTPMethod.post:
+                server.POST[url] = response
+            }
+        } catch {
+            print("Error info: \(error)")
+        }
+    }
+
     func dataToJSON(data: Data) -> Any? {
         do {
             return try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
