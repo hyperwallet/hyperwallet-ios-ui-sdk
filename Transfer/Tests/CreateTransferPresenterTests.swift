@@ -241,13 +241,13 @@ class CreateTransferTests: XCTestCase {
         XCTAssertNotNil(presenter.selectedTransferMethod, "selectedTransferMethod should not be nil")
     }
 
-    func testInitializeFlow_getUserFailure() {
+//    func testInitializeFlow_getUserFailure() {
 //        mockView.stopOnError = true
 //        initializePresenter(getUserResultType: .failure)
 //        XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
 //        XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
 //        XCTAssertTrue(mockView.isShowErrorPerformed, "showError should be performed")
-    }
+//    }
 
     func testShowSelectDestinationAccountView_success() {
         initializePresenter()
@@ -296,9 +296,8 @@ class MockCreateTransferView: CreateTransferView {
     func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
         isShowErrorPerformed = true
         if !stopOnError {
-            //retry!()
+            retry!()
         }
-        expectation?.assertForOverFulfill = false
         expectation?.fulfill()
     }
 

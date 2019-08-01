@@ -56,7 +56,7 @@ struct CreateTransferSectionTransferData: CreateTransferSectionData {
 
     init(availableBalance: String?) {
         guard let availableBalance = availableBalance,
-            let doubleAvailableBalance = Double(availableBalance),
+            let doubleAvailableBalance = NumberFormatter.amountFormatter.number(from: availableBalance)?.doubleValue,
             doubleAvailableBalance != 0 else {
                 footer = nil
                 return
