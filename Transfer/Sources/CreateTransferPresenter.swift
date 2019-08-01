@@ -67,9 +67,6 @@ final class CreateTransferPresenter {
     var notes: String?
     var transferAllFundsIsOn: Bool = false {
         didSet {
-            guard let availableBalance = availableBalance else {
-                return
-            }
             amount = transferAllFundsIsOn ? availableBalance : nil
             view.updateTransferSection()
         }
