@@ -194,7 +194,7 @@ class CreateTransferTests: XCTestCase {
         XCTAssertNil(presenter.amount, "Amount should be nil")
         XCTAssertNil(presenter.availableBalance, "availableBalance should be Nil")
         presenter.transferAllFundsIsOn = true
-        XCTAssertFalse(mockView.isUpdateTransferSectionPerformed, "updateTransferSection should not be performed")
+        XCTAssertTrue(mockView.isUpdateTransferSectionPerformed, "updateTransferSection should not be performed")
         XCTAssertNil(presenter.amount, "Amount should be nil")
     }
 
