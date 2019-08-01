@@ -72,24 +72,12 @@ final class TransferAmountCell: UITableViewCell {
         textLabel?.text = "transfer_amount".localized()
         amountTextField.text = amount
         amountTextField.isEnabled = isEnabled
-        detailTextLabel?.text = currency
+        detailTextLabel?.text = currency ?? String(repeating: " ", count: 3)
         enteredAmountHandler = handler
     }
 }
 
 extension TransferAmountCell: UITextFieldDelegate {
-    private static var amountFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.maximumFractionDigits = 2
-        formatter.minimumFractionDigits = 2
-        formatter.minimumIntegerDigits = 1
-        formatter.numberStyle = .currency
-        formatter.currencyCode = ""
-        formatter.currencySymbol = ""
-        formatter.locale = Locale(identifier: Locale.preferredLanguages[0])
-        return formatter
-    }()
-
     func textFieldDidEndEditing(_ textField: UITextField) {
         enteredAmountHandler?(amountTextField.text ?? "")
     }
@@ -97,16 +85,14 @@ extension TransferAmountCell: UITextFieldDelegate {
     func textField(_ textField: UITextField,
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
-        setCursorPositionToTheEnd(of: textField)
-
         var currentText = textField.text ?? ""
         if string.count > 1 {
             // Paste
-            guard let numberPastedAmount = TransferAmountCell.amountFormatter.number(from: string),
+            guard let numberPastedAmount = NumberFormatter.amountFormatter.number(from: string),
                 currentText.isEmpty else {
                     return false
             }
-            textField.text = TransferAmountCell.amountFormatter.string(from: numberPastedAmount)
+            textField.text = NumberFormatter.amountFormatter.string(from: numberPastedAmount)
             return false
         }
         let digitsOnly = currentText.replacingOccurrences( of: "[^0-9]", with: "", options: .regularExpression)
@@ -117,21 +103,17 @@ extension TransferAmountCell: UITextFieldDelegate {
             // digit
             currentText = digitsOnly + string
         }
-        if ["00", "0"].contains(currentText) {
+
+        if Double(currentText) == 0 {
             textField.text = ""
             return false
         }
+
         currentText = "0" + currentText
         currentText.insert(".", at: currentText.index(currentText.endIndex, offsetBy: -2))
-        let numberAmount = TransferAmountCell.amountFormatter.number(from: currentText)!
-        textField.text = TransferAmountCell.amountFormatter.string(from: numberAmount)
-
+        let numberAmount = NumberFormatter.amountFormatter.number(from: currentText)!
+        textField.text = NumberFormatter.amountFormatter.string(from: numberAmount)
         return false
-    }
-
-    private func setCursorPositionToTheEnd(of textField: UITextField) {
-        let endPosition = textField.endOfDocument
-        textField.selectedTextRange = textField.textRange(from: endPosition, to: endPosition)
     }
 }
 

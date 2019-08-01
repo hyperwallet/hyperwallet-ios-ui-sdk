@@ -40,19 +40,9 @@ extension CreateTransferSectionData {
             "transfer_section_header_\(createTransferSectionHeader.rawValue)".localized() : nil }
 }
 
-struct CreateTransferSectionAddDestinationAccountData: CreateTransferSectionData {
-    var createTransferSectionHeader: CreateTransferSectionHeader { return .destination }
-    var cellIdentifiers: [String] { return ["createTransferMethodSectionDataLabel"] }
-}
-
 struct CreateTransferSectionDestinationData: CreateTransferSectionData {
     var createTransferSectionHeader: CreateTransferSectionHeader { return .destination }
     var cellIdentifiers: [String] { return [TransferDestinationCell.reuseIdentifier] }
-    var isTransferMethodAvailable: Bool = true
-
-    init(isTransferMethodAvailable: Bool) {
-        self.isTransferMethodAvailable = isTransferMethodAvailable
-    }
 }
 
 struct CreateTransferSectionTransferData: CreateTransferSectionData {
@@ -65,9 +55,11 @@ struct CreateTransferSectionTransferData: CreateTransferSectionData {
     var footer: String?
 
     init(availableBalance: String?) {
-        guard let availableBalance = availableBalance else {
-            footer = nil
-            return
+        guard let availableBalance = availableBalance,
+            let doubleAvailableBalance = NumberFormatter.amountFormatter.number(from: availableBalance)?.doubleValue,
+            doubleAvailableBalance != 0 else {
+                footer = nil
+                return
         }
         footer = String(format: "available_balance_footer".localized(), availableBalance)
     }

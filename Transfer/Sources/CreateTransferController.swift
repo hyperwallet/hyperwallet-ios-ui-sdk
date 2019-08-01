@@ -117,13 +117,12 @@ extension CreateTransferController {
     }
 
     private func getDestinationSectionCellConfiguration(_ cell: UITableViewCell, _ indexPath: IndexPath) {
-        guard let sectionData = presenter.sectionData[indexPath.section] as? CreateTransferSectionDestinationData,
-            let tableViewCell = cell as? TransferDestinationCell else {
-                return
+        guard let tableViewCell = cell as? TransferDestinationCell else {
+            return
         }
         tableViewCell.accessoryType = .disclosureIndicator
-        if sectionData.isTransferMethodAvailable {
-            tableViewCell.configure(transferMethod: presenter.selectedTransferMethod)
+        if let transferMethod = presenter.selectedTransferMethod {
+            tableViewCell.configure(transferMethod: transferMethod)
         } else {
             let title = "transfer_add_account_title".localized()
             let subtitle = "transfer_add_account_subtitle".localized()
@@ -250,8 +249,10 @@ extension CreateTransferController: CreateTransferView {
     }
 
     func showScheduleTransfer(_ transfer: HyperwalletTransfer) {
-        let scheduleTransferController = ScheduleTransferController(transferMethod: presenter.selectedTransferMethod,
-                                                                    transfer: transfer)
-         navigationController?.pushViewController(scheduleTransferController, animated: true)
+        if let selectedTransferMethod = presenter.selectedTransferMethod {
+            let scheduleTransferController = ScheduleTransferController(transferMethod: selectedTransferMethod,
+                                                                        transfer: transfer)
+            navigationController?.pushViewController(scheduleTransferController, animated: true)
+        }
     }
 }

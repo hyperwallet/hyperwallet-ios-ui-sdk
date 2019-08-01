@@ -37,7 +37,7 @@ extension ScheduleTransferSectionData {
     var rowCount: Int { return 1 }
     var title: String? { return scheduleTransferSectionHeader
         != ScheduleTransferSectionHeader.button ?
-            "schedule_transfer_section_header_\(scheduleTransferSectionHeader.rawValue)".localized() : nil }
+            "transfer_section_header_\(scheduleTransferSectionHeader.rawValue)".localized() : nil }
 }
 
 struct ScheduleTransferDestinationData: ScheduleTransferSectionData {
@@ -93,14 +93,15 @@ struct ScheduleTransferSummaryData: ScheduleTransferSectionData {
     init(transfer: HyperwalletTransfer) {
         if let destinationAmount = transfer.destinationAmount,
             let destinationCurrency = transfer.destinationCurrency {
-            let transferAmountFormatted = destinationAmount.format(with: destinationCurrency)
+            let transferAmountFormatted = destinationAmount.replacingOccurrences(of: ",", with: "")
+                .format(with: destinationCurrency)
             guard let feeAmount = transfer.destinationFeeAmount else {
                 rows.append((title: "transfer_amount_confirmation".localized(), value: transferAmountFormatted))
                 rows.append((title: "transfer_net_amount_confirmation".localized(), value: transferAmountFormatted))
                 return
             }
 
-            let grossTransferAmount = Double(destinationAmount)! + Double(feeAmount)!
+            let grossTransferAmount = destinationAmount.toDouble()! + feeAmount.toDouble()!
             let grossTransferAmountFormatted = String(grossTransferAmount).format(with: destinationCurrency)
             let feeAmountFormatted = feeAmount.format(with: destinationCurrency)
             rows.append((title: "transfer_amount_confirmation".localized(), value: grossTransferAmountFormatted))
