@@ -55,10 +55,11 @@ final class TransferNotesCell: UITableViewCell {
             .constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor).isActive = true
     }
 
-    func configure(notes: String?, _ handler: @escaping EnteredNoteHandler) {
+    func configure(notes: String?, isEditable: Bool, _ handler: @escaping EnteredNoteHandler) {
         if let notes = notes {
             notesTextField.text = notes
         }
+        notesTextField.isEnabled = isEditable
         enteredNoteHandler = handler
     }
 }

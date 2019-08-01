@@ -16,24 +16,27 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+import Hippolyte
+import HyperwalletSDK
+import XCTest
 
-/// The Array extension
-public extension Array {
-    /// A Boolean value indicating whether the collection is not empty.
-    var isNotEmpty: Bool {
-        return !self.isEmpty
+class TransferRequestHelper {
+    static func setupSucessRequest(_ responseFileName: String, _ requestUrl: String) {
+        let dataResponse = HyperwalletTestHelper.okHTTPResponse(for: responseFileName)
+        TransferRequestHelper.setUpMockServer(dataResponse, requestUrl)
     }
 
-    /// Check if the current index is the last element in this array
-    func isLast(index: Int) -> Bool {
-        return index == endIndex - 1
+    static func setupFailureRequest(_ responseFileName: String, _ requestUrl: String) {
+        let errorResponse = HyperwalletTestHelper.badRequestHTTPResponse(for: responseFileName)
+        TransferRequestHelper.setUpMockServer(errorResponse, requestUrl)
     }
 
-    /// A safe way to check if element exists in this array
-    ///
-    /// - Parameter index: the index of an element
-    subscript(safe index: Index) -> Element? {
-        return indices.contains(index) ? self[index] : nil
+    static func getResponseError(_ error: HyperwalletErrorType) -> HyperwalletError {
+        return (error.getHyperwalletErrors()?.errorList?.first)!
+    }
+
+    private static func setUpMockServer(_ dataResponse: StubResponse, _ requestUrl: String) {
+        let dataRequest = HyperwalletTestHelper.buildPostRequest(baseUrl: requestUrl, dataResponse)
+        HyperwalletTestHelper.setUpMockServer(request: dataRequest)
     }
 }
