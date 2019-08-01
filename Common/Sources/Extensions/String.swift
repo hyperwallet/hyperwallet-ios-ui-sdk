@@ -74,6 +74,11 @@ public extension String {
             return ""
         }
     }
+
+    /// Convert a string object to a double object, and remove "," in the string object
+    func toDouble() -> Double? {
+       return Double(self.replacingOccurrences(of: ",", with: "", options: .numeric))
+    }
 }
 
 /// The NSMutableAttributedString extension
