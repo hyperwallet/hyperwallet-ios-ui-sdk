@@ -30,9 +30,7 @@
 		077F609F22E28F7F00C91E59 /* ReceiptThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077F609D22E28F3500C91E59 /* ReceiptThemeManager.swift */; };
 		077F60A122E28F8F00C91E59 /* TransferMethodThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077F60A022E28F8F00C91E59 /* TransferMethodThemeManager.swift */; };
 		078461DE22EA3F24007BF2CB /* TransferRepositoryFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BB9A222E63FF40053C24E /* TransferRepositoryFactory.swift */; };
-		078C6EFC22EF7E0500CF81EE /* ScheduleTransferPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078C6EFB22EF7E0500CF81EE /* ScheduleTransferPresenterTests.swift */; };
 		078C6EFE22EF815900CF81EE /* ScheduleTransferResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 078C6EFD22EF815900CF81EE /* ScheduleTransferResponse.json */; };
-		078C6F0022EF81A900CF81EE /* TransferRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078C6EFF22EF81A900CF81EE /* TransferRequestHelper.swift */; };
 		078C6F0822EF967400CF81EE /* ScheduleTransferExpiredTransferResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 078C6F0722EF967400CF81EE /* ScheduleTransferExpiredTransferResponse.json */; };
 		07C91E9F22E8CF4000167B05 /* ScheduleTransferController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C91E9E22E8CF4000167B05 /* ScheduleTransferController.swift */; };
 		0961D62D22AA858E007F0B44 /* ReceiptsForFewMonths.json in Resources */ = {isa = PBXBuildFile; fileRef = 0961D62C22AA858E007F0B44 /* ReceiptsForFewMonths.json */; };
@@ -49,24 +47,16 @@
 		4157135F22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json in Resources */ = {isa = PBXBuildFile; fileRef = 4157135E22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json */; };
 		4157136122C43660005D6DB1 /* PrepaidCardReceiptsPaging.json in Resources */ = {isa = PBXBuildFile; fileRef = 4157136022C43660005D6DB1 /* PrepaidCardReceiptsPaging.json */; };
 		4157136422C56B53005D6DB1 /* PrepaidCardListReceiptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4157136222C56B4B005D6DB1 /* PrepaidCardListReceiptTests.swift */; };
-		4A2B94AD22F1CB2B000A0F14 /* AuthenticationProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7C1A22E89C610022E573 /* AuthenticationProviderMock.swift */; };
-		4A2B94AE22F1CB2B000A0F14 /* AuthenticationTokenGeneratorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7C1B22E89C620022E573 /* AuthenticationTokenGeneratorMock.swift */; };
-		4A2B94AF22F1CB2B000A0F14 /* HyperwalletTestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7C1722E89BEB0022E573 /* HyperwalletTestHelper.swift */; };
-		4A2B94B022F1CB2B000A0F14 /* TransferMethodRepositoryRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2B94A422F1C7BD000A0F14 /* TransferMethodRepositoryRequestHelper.swift */; };
-		4A2B94B122F1CB2B000A0F14 /* CreateTransferRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2B94A822F1C81F000A0F14 /* CreateTransferRequestHelper.swift */; };
-		4A2B94B222F1CB2B000A0F14 /* UserRepositoryRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2B949D22F1BD8E000A0F14 /* UserRepositoryRequestHelper.swift */; };
 		4A2B94B322F1CB31000A0F14 /* CreateTransferResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 4A2B94AA22F1C954000A0F14 /* CreateTransferResponse.json */; };
 		4A2B94B422F1CB31000A0F14 /* ListTransferMethodSuccessResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 4A2B949C22F1BC00000A0F14 /* ListTransferMethodSuccessResponse.json */; };
 		4A2B94B522F1CB31000A0F14 /* UserIndividualResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBA9FA58227912A000C1301A /* UserIndividualResponse.json */; };
 		4A2B94B622F1CC74000A0F14 /* UserIndividualResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 4A2B949B22F1BBCB000A0F14 /* UserIndividualResponse.json */; };
 		4A31BDB722D762AE0027DACA /* PrepaidCardReceiptRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A31BDB622D762AE0027DACA /* PrepaidCardReceiptRepositoryTests.swift */; };
 		4A31BDB922D762CE0027DACA /* ReceiptRepositoryFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A31BDB822D762CE0027DACA /* ReceiptRepositoryFactoryTests.swift */; };
-		4A35339722F337EE00D04BCC /* TransferRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078C6EFF22EF81A900CF81EE /* TransferRequestHelper.swift */; };
 		4A37DB9222E8AFEE0085A329 /* Transfer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A9A7BDF22E859E60022E573 /* Transfer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4A37DB9322E8B0040085A329 /* TransferRepository.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 073BB98222E63DB50053C24E /* TransferRepository.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4A5C576522E73F3400F3359B /* UISearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5C576422E73F3400F3359B /* UISearchBar.swift */; };
 		4A9A7BE822E859E60022E573 /* Transfer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A9A7BDF22E859E60022E573 /* Transfer.framework */; };
-		4A9A7BED22E859E60022E573 /* CreateTransferPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7BEC22E859E60022E573 /* CreateTransferPresenterTests.swift */; };
 		4A9A7BEF22E859E60022E573 /* Transfer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A9A7BE122E859E60022E573 /* Transfer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4A9A7C0422E86F580022E573 /* CreateTransferSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7BFE22E86F580022E573 /* CreateTransferSectionData.swift */; };
 		4A9A7C0522E86F580022E573 /* TransferButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7BFF22E86F580022E573 /* TransferButtonCell.swift */; };
@@ -77,6 +67,15 @@
 		4A9A7C1022E87EA70022E573 /* HyperwalletTransferUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7C0F22E87EA10022E573 /* HyperwalletTransferUI.swift */; };
 		4A9A7C1122E880730022E573 /* Transfer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A9A7BDF22E859E60022E573 /* Transfer.framework */; };
 		4A9A7C1222E880780022E573 /* TransferRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 073BB98222E63DB50053C24E /* TransferRepository.framework */; };
+		4A9E9A0822F4AD3700739150 /* AuthenticationProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7C1A22E89C610022E573 /* AuthenticationProviderMock.swift */; };
+		4A9E9A0922F4AD3700739150 /* AuthenticationTokenGeneratorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7C1B22E89C620022E573 /* AuthenticationTokenGeneratorMock.swift */; };
+		4A9E9A0A22F4AD3700739150 /* CreateTransferRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2B94A822F1C81F000A0F14 /* CreateTransferRequestHelper.swift */; };
+		4A9E9A0B22F4AD3700739150 /* HyperwalletTestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7C1722E89BEB0022E573 /* HyperwalletTestHelper.swift */; };
+		4A9E9A0C22F4AD3700739150 /* TransferMethodRepositoryRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2B94A422F1C7BD000A0F14 /* TransferMethodRepositoryRequestHelper.swift */; };
+		4A9E9A0D22F4AD3700739150 /* TransferRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078C6EFF22EF81A900CF81EE /* TransferRequestHelper.swift */; };
+		4A9E9A0E22F4AD3700739150 /* UserRepositoryRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2B949D22F1BD8E000A0F14 /* UserRepositoryRequestHelper.swift */; };
+		4A9E9A0F22F4AD5700739150 /* CreateTransferPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7BEC22E859E60022E573 /* CreateTransferPresenterTests.swift */; };
+		4A9E9A1022F4AD5700739150 /* ScheduleTransferPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078C6EFB22EF7E0500CF81EE /* ScheduleTransferPresenterTests.swift */; };
 		4AB37CFC22EAF087005C1078 /* TransferAllFundsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB37CFB22EAF087005C1078 /* TransferAllFundsCell.swift */; };
 		4AC7808822EB360B00AB73FD /* PasteOnlyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC7808722EB360B00AB73FD /* PasteOnlyTextField.swift */; };
 		4ADBEC7222E9F16A00D43A48 /* TransferDestinationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBEC7122E9F16A00D43A48 /* TransferDestinationCell.swift */; };
@@ -614,7 +613,7 @@
 		078B45802273A441005B0248 /* HyperwalletUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletUI.swift; sourceTree = "<group>"; };
 		078C6EFB22EF7E0500CF81EE /* ScheduleTransferPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTransferPresenterTests.swift; sourceTree = "<group>"; };
 		078C6EFD22EF815900CF81EE /* ScheduleTransferResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ScheduleTransferResponse.json; sourceTree = "<group>"; };
-		078C6EFF22EF81A900CF81EE /* TransferRequestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferRequestHelper.swift; sourceTree = "<group>"; };
+		078C6EFF22EF81A900CF81EE /* TransferRequestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferRequestHelper.swift; sourceTree = "<group>"; };
 		078C6F0722EF967400CF81EE /* ScheduleTransferExpiredTransferResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ScheduleTransferExpiredTransferResponse.json; sourceTree = "<group>"; };
 		07BE415E229DE181002DECAF /* UserReceiptResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserReceiptResponse.json; sourceTree = "<group>"; };
 		07C91E9E22E8CF4000167B05 /* ScheduleTransferController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleTransferController.swift; sourceTree = "<group>"; };
@@ -1255,7 +1254,6 @@
 				4A2B94A422F1C7BD000A0F14 /* TransferMethodRepositoryRequestHelper.swift */,
 				078C6EFF22EF81A900CF81EE /* TransferRequestHelper.swift */,
 				4A2B949D22F1BD8E000A0F14 /* UserRepositoryRequestHelper.swift */,
-				078C6EFF22EF81A900CF81EE /* TransferRequestHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -2969,19 +2967,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A2B94AD22F1CB2B000A0F14 /* AuthenticationProviderMock.swift in Sources */,
-				4A2B94AE22F1CB2B000A0F14 /* AuthenticationTokenGeneratorMock.swift in Sources */,
-				4A2B94AF22F1CB2B000A0F14 /* HyperwalletTestHelper.swift in Sources */,
-				4A2B94B022F1CB2B000A0F14 /* TransferMethodRepositoryRequestHelper.swift in Sources */,
-				4A2B94B122F1CB2B000A0F14 /* CreateTransferRequestHelper.swift in Sources */,
-				4A2B94B222F1CB2B000A0F14 /* UserRepositoryRequestHelper.swift in Sources */,
-				4A35339722F337EE00D04BCC /* TransferRequestHelper.swift in Sources */,
-				4A9A7BED22E859E60022E573 /* CreateTransferPresenterTests.swift in Sources */,
-				078C6EFC22EF7E0500CF81EE /* ScheduleTransferPresenterTests.swift in Sources */,
-				4A9A7BED22E859E60022E573 /* CreateTransferPresenterTests.swift in Sources */,
-				078C6F0022EF81A900CF81EE /* TransferRequestHelper.swift in Sources */,
-				078C6EFC22EF7E0500CF81EE /* ScheduleTransferPresenterTests.swift in Sources */,
-				4A9A7BED22E859E60022E573 /* CreateTransferPresenterTests.swift in Sources */,
+				4A9E9A0F22F4AD5700739150 /* CreateTransferPresenterTests.swift in Sources */,
+				4A9E9A1022F4AD5700739150 /* ScheduleTransferPresenterTests.swift in Sources */,
+				4A9E9A0822F4AD3700739150 /* AuthenticationProviderMock.swift in Sources */,
+				4A9E9A0922F4AD3700739150 /* AuthenticationTokenGeneratorMock.swift in Sources */,
+				4A9E9A0A22F4AD3700739150 /* CreateTransferRequestHelper.swift in Sources */,
+				4A9E9A0B22F4AD3700739150 /* HyperwalletTestHelper.swift in Sources */,
+				4A9E9A0C22F4AD3700739150 /* TransferMethodRepositoryRequestHelper.swift in Sources */,
+				4A9E9A0D22F4AD3700739150 /* TransferRequestHelper.swift in Sources */,
+				4A9E9A0E22F4AD3700739150 /* UserRepositoryRequestHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
