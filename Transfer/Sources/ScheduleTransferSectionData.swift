@@ -61,14 +61,17 @@ struct ScheduleTransferForeignExchangeData: ScheduleTransferSectionData {
         self.foreignExchanges = foreignExchanges
 
         for (index, foreignExchange) in foreignExchanges.enumerated() {
-            if let sourceAmount = foreignExchange.sourceAmount?.toDouble(),
+            if let sourceAmount = foreignExchange.sourceAmount,
                 let sourceCurrency = foreignExchange.sourceCurrency,
-                let destinationAmount = foreignExchange.destinationAmount?.toDouble(),
+                let destinationAmount = foreignExchange.destinationAmount,
                 let destinationCurrency = foreignExchange.destinationCurrency,
                 let rate = foreignExchange.rate {
-                let sourceAmountFormatted = String(format: "%f", sourceAmount).format(with: sourceCurrency)
-                let destinationAmountFormatted = String(format: "%f", destinationAmount)
-                    .format(with: destinationCurrency)
+                let sourceAmountFormatted = String(format: "%@ %@",
+                                                   sourceAmount.format(with: sourceCurrency),
+                                                   sourceCurrency)
+                let destinationAmountFormatted = String(format: "%@ %@",
+                                                        destinationAmount.format(with: destinationCurrency),
+                                                        destinationCurrency)
                 let rateFormatted = String(format: "%@ = %@",
                                            "1".format(with: sourceCurrency),
                                            rate.format(with: destinationCurrency))
