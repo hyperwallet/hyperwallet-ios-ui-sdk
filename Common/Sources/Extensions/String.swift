@@ -82,8 +82,8 @@ public extension String {
     /// Format an amount to a currency format with currency code
     ///
     /// - Parameter currencyCode: the currency code
-    /// - Returns: a formatted NSNumber amount  with currency code
-    func formatToNumber(with currencyCode: String? = nil) -> NSNumber {
+    /// - Returns: a formatted Double amount  with currency code
+    func formatToDouble(with currencyCode: String? = nil) -> Double {
         if !self.isEmpty {
             let currencyFormatter = NumberFormatter()
             currencyFormatter.maximumFractionDigits = 2
@@ -92,7 +92,7 @@ public extension String {
             currencyFormatter.numberStyle = .currency
             currencyFormatter.currencyCode = currencyCode
             currencyFormatter.currencySymbol = ""
-            return currencyFormatter.number(from: self) ?? 0
+            return currencyFormatter.number(from: self)?.doubleValue ?? 0
         } else {
             return 0
         }
