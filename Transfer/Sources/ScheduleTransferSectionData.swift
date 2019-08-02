@@ -67,7 +67,8 @@ struct ScheduleTransferForeignExchangeData: ScheduleTransferSectionData {
                 let destinationCurrency = foreignExchange.destinationCurrency,
                 let rate = foreignExchange.rate {
                 let sourceAmountFormatted = String(format: "%f", sourceAmount).format(with: sourceCurrency)
-                let destinationAmountFormatted = String(format: "%f", destinationAmount).format(with: destinationCurrency)
+                let destinationAmountFormatted = String(format: "%f", destinationAmount)
+                    .format(with: destinationCurrency)
                 let rateFormatted = String(format: "%@ = %@",
                                            "1".format(with: sourceCurrency),
                                            rate.format(with: destinationCurrency))
@@ -100,12 +101,15 @@ struct ScheduleTransferSummaryData: ScheduleTransferSectionData {
                 return
             }
 
-            let grossTransferAmount = destinationAmount.toDouble()! + feeAmount.toDouble()!
-            let grossTransferAmountFormatted = String(grossTransferAmount).format(with: destinationCurrency)
-            let feeAmountFormatted = feeAmount.format(with: destinationCurrency)
-            rows.append((title: "transfer_amount_confirmation".localized(), value: grossTransferAmountFormatted))
-            rows.append((title: "transfer_fee_confirmation".localized(), value: feeAmountFormatted))
-            rows.append((title: "transfer_net_amount_confirmation".localized(), value: transferAmountFormatted))
+            if let destinationAmountInDouble = destinationAmount.toDouble(),
+                let feeAmountInDouble = feeAmount.toDouble() {
+                let grossTransferAmount = destinationAmountInDouble + feeAmountInDouble
+                let grossTransferAmountFormatted = String(grossTransferAmount).format(with: destinationCurrency)
+                let feeAmountFormatted = feeAmount.format(with: destinationCurrency)
+                rows.append((title: "transfer_amount_confirmation".localized(), value: grossTransferAmountFormatted))
+                rows.append((title: "transfer_fee_confirmation".localized(), value: feeAmountFormatted))
+                rows.append((title: "transfer_net_amount_confirmation".localized(), value: transferAmountFormatted))
+            }
         }
     }
 }

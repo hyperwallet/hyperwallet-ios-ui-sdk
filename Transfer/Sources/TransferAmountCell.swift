@@ -111,7 +111,9 @@ extension TransferAmountCell: UITextFieldDelegate {
 
         currentText = "0" + currentText
         currentText.insert(".", at: currentText.index(currentText.endIndex, offsetBy: -2))
-        let numberAmount = NumberFormatter.amountFormatter.number(from: currentText)!
+        guard let numberAmount = NumberFormatter.amountFormatter.number(from: currentText) else {
+            return false
+        }
         textField.text = NumberFormatter.amountFormatter.string(from: numberAmount)
         return false
     }
