@@ -55,11 +55,9 @@ struct CreateTransferSectionTransferData: CreateTransferSectionData {
     var footer: String?
 
     init(availableBalance: String?) {
-        guard let availableBalance = availableBalance,
-            let doubleAvailableBalance = NumberFormatter.amountFormatter.number(from: availableBalance)?.doubleValue,
-            doubleAvailableBalance != 0 else {
-                footer = nil
-                return
+        guard let availableBalance = availableBalance, availableBalance.formatToDouble() != 0 else {
+            footer = nil
+            return
         }
         footer = String(format: "available_balance_footer".localized(), availableBalance)
     }
