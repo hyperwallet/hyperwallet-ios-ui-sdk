@@ -11,7 +11,6 @@ import XCTest
 class CreateTransferTests: XCTestCase {
     private var presenter: CreateTransferPresenter!
     private var mockView = MockCreateTransferView()
-
     private let clientTransferId = "6712348070812"
     private let clientSourceToken = "trm-123456789"
 
