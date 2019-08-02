@@ -96,22 +96,26 @@ struct ScheduleTransferSummaryData: ScheduleTransferSectionData {
     init(transfer: HyperwalletTransfer) {
         if let destinationAmount = transfer.destinationAmount,
             let destinationCurrency = transfer.destinationCurrency {
-            let transferAmountFormatted = destinationAmount.replacingOccurrences(of: ",", with: "")
-                .format(with: destinationCurrency)
+            let transferAmountFormatted = destinationAmount.formatToNumber(with: destinationCurrency)
             guard let feeAmount = transfer.destinationFeeAmount else {
-                rows.append((title: "transfer_amount_confirmation".localized(), value: transferAmountFormatted))
-                rows.append((title: "transfer_net_amount_confirmation".localized(), value: transferAmountFormatted))
+                rows.append((title: "transfer_amount_confirmation".localized(),
+                             value: String(format: "%@", transferAmountFormatted)))
+                rows.append((title: "transfer_net_amount_confirmation".localized(),
+                             value: String(format: "%@", transferAmountFormatted)))
                 return
             }
 
-            if let destinationAmountInDouble = destinationAmount.toDouble(),
-                let feeAmountInDouble = feeAmount.toDouble() {
-                let grossTransferAmount = destinationAmountInDouble + feeAmountInDouble
+            if transferAmountFormatted.doubleValue > 0 {
+                let feeAmountFormatted = feeAmount.formatToNumber(with: destinationCurrency)
+                let grossTransferAmount = transferAmountFormatted.doubleValue + feeAmountFormatted.doubleValue
                 let grossTransferAmountFormatted = String(grossTransferAmount).format(with: destinationCurrency)
-                let feeAmountFormatted = feeAmount.format(with: destinationCurrency)
-                rows.append((title: "transfer_amount_confirmation".localized(), value: grossTransferAmountFormatted))
-                rows.append((title: "transfer_fee_confirmation".localized(), value: feeAmountFormatted))
-                rows.append((title: "transfer_net_amount_confirmation".localized(), value: transferAmountFormatted))
+
+                rows.append((title: "transfer_amount_confirmation".localized(),
+                             value: grossTransferAmountFormatted))
+                rows.append((title: "transfer_fee_confirmation".localized(),
+                             value: String(format: "%@", feeAmountFormatted)))
+                rows.append((title: "transfer_net_amount_confirmation".localized(),
+                             value: String(format: "%@", transferAmountFormatted)))
             }
         }
     }

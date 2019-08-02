@@ -62,7 +62,7 @@ public extension String {
     /// Format an amount to a currency format with currency code
     ///
     /// - Parameter currencyCode: the currency code
-    /// - Returns: a formatted amount with currency code
+    /// - Returns: a formatted String amount with currency code
     func format(with currencyCode: String?) -> String {
         if !self.isEmpty {
             let currencyFormatter = NumberFormatter()
@@ -79,9 +79,23 @@ public extension String {
         }
     }
 
-    /// Convert a string object to a double object, and remove "," in the string object
-    func toDouble() -> Double? {
-       return Double(self.replacingOccurrences(of: ",", with: "", options: .numeric))
+    /// Format an amount to a currency format with currency code
+    ///
+    /// - Parameter currencyCode: the currency code
+    /// - Returns: a formatted NSNumber amount  with currency code
+    func formatToNumber(with currencyCode: String? = nil) -> NSNumber {
+        if !self.isEmpty {
+            let currencyFormatter = NumberFormatter()
+            currencyFormatter.maximumFractionDigits = 2
+            currencyFormatter.minimumFractionDigits = 2
+            currencyFormatter.minimumIntegerDigits = 1
+            currencyFormatter.numberStyle = .currency
+            currencyFormatter.currencyCode = currencyCode
+            currencyFormatter.currencySymbol = ""
+            return currencyFormatter.number(from: self) ?? 0
+        } else {
+            return 0
+        }
     }
 }
 
