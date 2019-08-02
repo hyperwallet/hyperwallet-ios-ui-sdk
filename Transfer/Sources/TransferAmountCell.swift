@@ -88,11 +88,12 @@ extension TransferAmountCell: UITextFieldDelegate {
         var currentText = textField.text ?? ""
         if string.count > 1 {
             // Paste
-            guard let numberPastedAmount = NumberFormatter.amountFormatter.number(from: string),
+            let stringPastedAmount = string.format(with: detailTextLabel?.text)
+            guard !stringPastedAmount.isEmpty,
                 currentText.isEmpty else {
                     return false
             }
-            textField.text = NumberFormatter.amountFormatter.string(from: numberPastedAmount)
+            textField.text = stringPastedAmount
             return false
         }
         let digitsOnly = currentText.replacingOccurrences( of: "[^0-9]", with: "", options: .regularExpression)
@@ -111,8 +112,7 @@ extension TransferAmountCell: UITextFieldDelegate {
 
         currentText = "0" + currentText
         currentText.insert(".", at: currentText.index(currentText.endIndex, offsetBy: -2))
-        let numberAmount = NumberFormatter.amountFormatter.number(from: currentText)!
-        textField.text = NumberFormatter.amountFormatter.string(from: numberAmount)
+        textField.text = currentText.format(with: detailTextLabel?.text)
         return false
     }
 }

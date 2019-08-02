@@ -68,6 +68,8 @@ public struct Theme {
     public struct Button {
         /// The button primary color
         public static var color = Theme.themeColor
+        /// The button font
+        public static var font = Theme.Label.bodyFont
     }
 
     /// Representation of all customizable visual style property for `UIText`.

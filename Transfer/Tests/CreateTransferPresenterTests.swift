@@ -16,6 +16,7 @@ class CreateTransferTests: XCTestCase {
 
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
+        mockView.resetStates()
     }
 
     override func tearDown() {
@@ -23,7 +24,6 @@ class CreateTransferTests: XCTestCase {
             Hippolyte.shared.stop()
         }
         TransferMethodRepositoryFactory.clearInstance()
-        mockView.resetStates()
     }
 
     private enum LoadTransferMethodsResultType {
@@ -80,12 +80,16 @@ class CreateTransferTests: XCTestCase {
         getUserResultType.setUpRequest()
 
         presenter = CreateTransferPresenter(clientTransferId, sourceToken, view: mockView)
+        var expectations = [XCTestExpectation]()
 
-        let loadCreateTransferExpectation = self.expectation(description: "loadCreateTransferExpectation")
-        mockView.expectation = loadCreateTransferExpectation
+        if mockView.stopOnError {
+            expectations.append(mockView.showErrorExpectation)
+        } else {
+            expectations.append(mockView.loadCreateTransferExpectation)
+        }
 
         presenter.loadCreateTransfer()
-        wait(for: [loadCreateTransferExpectation], timeout: 1)
+        wait(for: expectations, timeout: 1)
         presenter.initializeSections()
     }
 
@@ -241,25 +245,32 @@ class CreateTransferTests: XCTestCase {
         XCTAssertNotNil(presenter.selectedTransferMethod, "selectedTransferMethod should not be nil")
     }
 
-//    func testInitializeFlow_getUserFailure() {
-//        mockView.stopOnError = true
-//        initializePresenter(getUserResultType: .failure)
-//        XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
-//        XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
-//        XCTAssertTrue(mockView.isShowErrorPerformed, "showError should be performed")
-//    }
+    func testCreateTransfer_success() {
+        initializePresenter()
+        mockView.resetStates()
+        presenter.createTransfer()
+        wait(for: [mockView.showScheduleTransferExpectation], timeout: 1)
+        XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
+        XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
+        XCTAssertFalse(mockView.isShowErrorPerformed, "showError should not be performed")
+    }
 
     func testShowSelectDestinationAccountView_success() {
         initializePresenter()
         presenter.showSelectDestinationAccountView()
         XCTAssertTrue(mockView.isShowGenericTableViewPerformed, "isShowGenericTableViewPerformed should be performed")
         XCTAssertNotNil(presenter.selectedTransferMethod, "selectedTransferMethod should not be nil")
+        XCTAssertNil(presenter.amount, "amount should be nil")
         XCTAssertTrue(mockView.isShowCreateTransferPerformed, "isShowCreateTransferPerformed should be performed")
     }
 
     func testShowSelectDestinationAccountView_failure() {
+        mockView.stopOnError = true
         initializePresenter(transferMethodResult: .failure)
+        mockView.resetStates()
+        mockView.stopOnError = true
         presenter.showSelectDestinationAccountView()
+        wait(for: [mockView.showErrorExpectation], timeout: 1)
         XCTAssertFalse(mockView.isShowGenericTableViewPerformed,
                        "isShowGenericTableViewPerformed should not be performed")
         XCTAssertTrue(mockView.isShowErrorPerformed, "isShowErrorPerformed should be performed")
@@ -278,7 +289,9 @@ class MockCreateTransferView: CreateTransferView {
 
     var stopOnError = false
 
-    var expectation: XCTestExpectation?
+    var loadCreateTransferExpectation: XCTestExpectation!
+    var showErrorExpectation: XCTestExpectation!
+    var showScheduleTransferExpectation: XCTestExpectation!
 
     func hideLoading() {
         isHideLoadingPerformed = true
@@ -290,7 +303,7 @@ class MockCreateTransferView: CreateTransferView {
 
     func showCreateTransfer() {
         isShowCreateTransferPerformed = true
-        expectation?.fulfill()
+        loadCreateTransferExpectation?.fulfill()
     }
 
     func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
@@ -298,7 +311,7 @@ class MockCreateTransferView: CreateTransferView {
         if !stopOnError {
             retry!()
         }
-        expectation?.fulfill()
+        showErrorExpectation?.fulfill()
     }
 
     func showGenericTableView(items: [HyperwalletTransferMethod],
@@ -316,6 +329,7 @@ class MockCreateTransferView: CreateTransferView {
 
     func showScheduleTransfer(_ transfer: HyperwalletTransfer) {
         isShowScheduleTransferPerformed = true
+        showScheduleTransferExpectation?.fulfill()
     }
 
     func updateTransferSection() {
@@ -331,7 +345,10 @@ class MockCreateTransferView: CreateTransferView {
         isShowLoadingPerformed = false
         isShowScheduleTransferPerformed = false
         isUpdateTransferSectionPerformed = false
-        expectation = nil
         stopOnError = false
+
+        loadCreateTransferExpectation = XCTestExpectation(description: "loadCreateTransferExpectation")
+        showErrorExpectation = XCTestExpectation(description: "showErrorExpectation")
+        showScheduleTransferExpectation = XCTestExpectation(description: "showScheduleTransferExpectation")
     }
 }

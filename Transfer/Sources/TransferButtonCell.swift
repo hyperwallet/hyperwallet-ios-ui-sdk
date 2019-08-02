@@ -25,7 +25,6 @@ final class TransferButtonCell: UITableViewCell {
 
     private(set) lazy var buttonLabel: UILabel = {
         let label = UILabel()
-        label.textColor = Theme.Button.color
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

@@ -62,22 +62,40 @@ public extension String {
     /// Format an amount to a currency format with currency code
     ///
     /// - Parameter currencyCode: the currency code
-    /// - Returns: a formatted amount with currency code
-    func format(with currencyCode: String) -> String {
-        if let amountInDouble = Double(self) {
+    /// - Returns: a formatted String amount with currency code
+    func format(with currencyCode: String?) -> String {
+        if !self.isEmpty {
             let currencyFormatter = NumberFormatter()
+            currencyFormatter.maximumFractionDigits = 2
+            currencyFormatter.minimumFractionDigits = 2
+            currencyFormatter.minimumIntegerDigits = 1
             currencyFormatter.numberStyle = .currency
             currencyFormatter.currencyCode = currencyCode
             currencyFormatter.currencySymbol = ""
-            return String(format: "%@ %@", currencyFormatter.string(for: amountInDouble)!, currencyCode)
+            let formattedAmountInNumber = currencyFormatter.number(from: self)
+            return currencyFormatter.string(for: formattedAmountInNumber) ?? ""
         } else {
             return ""
         }
     }
 
-    /// Convert a string object to a double object, and remove "," in the string object
-    func toDouble() -> Double? {
-       return Double(self.replacingOccurrences(of: ",", with: "", options: .numeric))
+    /// Format an amount to a currency format with currency code
+    ///
+    /// - Parameter currencyCode: the currency code
+    /// - Returns: a formatted Double amount  with currency code
+    func formatToDouble(with currencyCode: String? = nil) -> Double {
+        if !self.isEmpty {
+            let currencyFormatter = NumberFormatter()
+            currencyFormatter.maximumFractionDigits = 2
+            currencyFormatter.minimumFractionDigits = 2
+            currencyFormatter.minimumIntegerDigits = 1
+            currencyFormatter.numberStyle = .currency
+            currencyFormatter.currencyCode = currencyCode
+            currencyFormatter.currencySymbol = ""
+            return currencyFormatter.number(from: self)?.doubleValue ?? 0
+        } else {
+            return 0
+        }
     }
 }
 
