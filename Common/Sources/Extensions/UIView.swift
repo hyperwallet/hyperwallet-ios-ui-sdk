@@ -29,6 +29,24 @@ public extension UIView {
         }
     }
 
+    /// CenterY Anchor
+    var safeAreaCenterYAnchor: NSLayoutYAxisAnchor {
+        if #available(iOS 11.0, *) {
+            return self.safeAreaLayoutGuide.centerYAnchor
+        } else {
+            return self.centerYAnchor
+        }
+    }
+
+    /// CenterX Anchor
+    var safeAreaCenterXAnchor: NSLayoutXAxisAnchor {
+        if #available(iOS 11.0, *) {
+            return self.safeAreaLayoutGuide.centerXAnchor
+        } else {
+            return self.centerXAnchor
+        }
+    }
+
     /// Bottom Anchor
     var safeAreaBottomAnchor: NSLayoutYAxisAnchor {
         if #available(iOS 11.0, *) {
@@ -165,5 +183,10 @@ public extension UIView {
                                                     constant: -8)
         NSLayoutConstraint.activate([buttonCenterXConstraint, verticalConstraint])
         return emptyListButton
+    }
+
+    /// Check if current view is `UITableViewCellSeparatorView`
+    func isSeparatorView() -> Bool {
+        return type(of: self).description() == "_UITableViewCellSeparatorView"
     }
 }

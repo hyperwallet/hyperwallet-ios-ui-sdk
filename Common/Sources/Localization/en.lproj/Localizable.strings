@@ -191,6 +191,29 @@
 "receipt_details_receipt_id" = "Receipt ID:";
 "receipt_details_date" = "Date:";
 
+// Transfer Funds
+"transfer_funds" = "Transfer Funds";
+"transfer_section_header_destination" = "DESTINATION";
+"transfer_section_header_transfer" = "TRANSFER";
+"transfer_section_header_notes" = "NOTES";
+"transfer_amount" = "Amount";
+"transfer_amount_confirmation" = "Amount:";
+"transfer_fee_confirmation" = "Fee:";
+"transfer_net_amount_confirmation" = "You will receive:";
+"transfer_all_funds" = "Transfer all funds";
+"transfer_fx_sell_confirmation" = "You sell:";
+"transfer_fx_buy_confirmation" = "You buy:";
+"transfer_fx_rate_confirmation" = "Exchange Rate:";
+"available_balance_footer" = "Available for transfer: %1$@";
+"transfer_description" = "Description";
+"transfer_next_button" = "Next";
+"transfer_add_account_title" = "Add Account";
+"transfer_add_account_subtitle" = "An account hasn't been set up yet, please add an account first.";
+"transfer_select_destination" = "Select Destination";
+"transfer_section_header_foreignExchange" = "FOREIGN EXCHANGE";
+"transfer_section_header_summary" = "SUMMARY";
+"transfer_button_confirm" = "Confirm";
+
 // List of countries
 // Source: https://datahub.io/core/country-list#data
 "AF"="Afghanistan";

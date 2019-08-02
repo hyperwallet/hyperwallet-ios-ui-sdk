@@ -481,7 +481,7 @@ class TransferMethodRepositoryTests: XCTestCase {
 
         XCTAssertNil(listTransferMethodsError, "The listTransferMethodsError should be nil")
         XCTAssertNotNil(listTransferMethodsResult, "The listTransferMethodsResult should not be nil")
-        XCTAssertGreaterThan(listTransferMethodsResult!.data.count,
+        XCTAssertGreaterThan(listTransferMethodsResult!.data!.count,
                              0,
                              "The listTransferMethodsResult!.data.count should be greater than 0")
 
