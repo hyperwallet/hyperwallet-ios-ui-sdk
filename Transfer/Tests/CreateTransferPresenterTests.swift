@@ -254,6 +254,7 @@ class CreateTransferTests: XCTestCase {
         presenter.showSelectDestinationAccountView()
         XCTAssertTrue(mockView.isShowGenericTableViewPerformed, "isShowGenericTableViewPerformed should be performed")
         XCTAssertNotNil(presenter.selectedTransferMethod, "selectedTransferMethod should not be nil")
+        XCTAssertNil(presenter.amount, "amount should be nil")
         XCTAssertTrue(mockView.isShowCreateTransferPerformed, "isShowCreateTransferPerformed should be performed")
     }
 

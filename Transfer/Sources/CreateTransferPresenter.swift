@@ -246,6 +246,7 @@ final class CreateTransferPresenter {
     private func selectDestinationAccountHandler() -> CreateTransferView.SelectItemHandler {
         return { [weak self] item in
             self?.selectedTransferMethod = item
+            self?.amount = nil
             self?.createInitialTransfer()
         }
     }
