@@ -11,7 +11,6 @@ import XCTest
 class CreateTransferTests: XCTestCase {
     private var presenter: CreateTransferPresenter!
     private var mockView = MockCreateTransferView()
-
     private let clientTransferId = "6712348070812"
     private let clientSourceToken = "trm-123456789"
 
@@ -297,7 +296,6 @@ class CreateTransferTests: XCTestCase {
         initializePresenter()
         mockView.resetStates()
         CreateTransferRequestHelper.setupFailureRequest()
-        mockView.stopOnError = true
         presenter.createTransfer()
         wait(for: [mockView.showErrorExpectation], timeout: 1)
         XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
@@ -317,7 +315,6 @@ class CreateTransferTests: XCTestCase {
     func testShowSelectDestinationAccountView_failure() {
         presenter = CreateTransferPresenter(clientTransferId, nil, view: mockView)
         TransferMethodRepositoryRequestHelper.setupFailureRequest()
-        mockView.stopOnError = true
         presenter.showSelectDestinationAccountView()
         wait(for: [mockView.showErrorExpectation], timeout: 1)
         XCTAssertFalse(mockView.isShowGenericTableViewPerformed,
@@ -357,9 +354,7 @@ class MockCreateTransferView: CreateTransferView {
 
     func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
         isShowErrorPerformed = true
-        if !stopOnError {
-            retry!()
-        }
+        retry!()
         showErrorExpectation?.fulfill()
     }
 
