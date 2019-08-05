@@ -96,6 +96,23 @@ extension CreateTransferController {
         return nil
     }
 
+    override public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if let footerView = tableView.footerView(forSection: section) {
+            updateFooterView(footerView, for: section)
+            return footerView
+        }
+        return nil
+    }
+
+    private func updateFooterView(_ footerView: UITableViewHeaderFooterView, for section: Int) {
+        UIView.setAnimationsEnabled(false)
+        tableView.beginUpdates()
+        footerView.textLabel?.text = presenter.sectionData[section].errorMessage
+        footerView.sizeToFit()
+        tableView.endUpdates()
+        UIView.setAnimationsEnabled(true)
+    }
+
     private func getCellConfiguration(_ indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifiers = presenter.sectionData[indexPath.section].cellIdentifiers
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifiers[indexPath.row], for: indexPath)
@@ -183,6 +200,18 @@ extension CreateTransferController {
 
 // MARK: - CreateTransferView implementation
 extension CreateTransferController: CreateTransferView {
+    func areAllFieldsValid() -> Bool {
+        return presenter.sectionData.allSatisfy({ $0.errorMessage?.isEmpty ?? true })
+    }
+
+    func showBusinessError(_ error: HyperwalletErrorType, _ handler: @escaping () -> Void) {
+        handler()
+    }
+
+    func updateFooter(for section: Int) {
+        tableView.reloadSections([section], with: .none)
+    }
+
     func updateTransferSection() {
         tableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .none)
     }

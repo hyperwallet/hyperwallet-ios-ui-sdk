@@ -28,8 +28,10 @@ protocol CreateTransferView: class {
     typealias SelectItemHandler = (_ value: HyperwalletTransferMethod) -> Void
     typealias MarkCellHandler = (_ value: HyperwalletTransferMethod) -> Bool
 
+    func areAllFieldsValid() -> Bool
     func hideLoading()
     func notifyTransferCreated(_ transfer: HyperwalletTransfer)
+    func showBusinessError(_ error: HyperwalletErrorType, _ handler: @escaping() -> Void)
     func showCreateTransfer()
     func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?)
     func showGenericTableView(items: [HyperwalletTransferMethod],
@@ -39,6 +41,7 @@ protocol CreateTransferView: class {
     func showLoading()
     func showScheduleTransfer(_ transfer: HyperwalletTransfer)
     func updateTransferSection()
+    func updateFooter(for section: Int)
 }
 
 final class CreateTransferPresenter {
@@ -135,10 +138,10 @@ final class CreateTransferPresenter {
 
             case .success(let result):
                 guard let firstActivatedTransferMetod = result?.data?.first else {
-                        strongSelf.selectedTransferMethod = nil
-                        strongSelf.view.hideLoading()
-                        strongSelf.view.showCreateTransfer()
-                        return
+                    strongSelf.selectedTransferMethod = nil
+                    strongSelf.view.hideLoading()
+                    strongSelf.view.showCreateTransfer()
+                    return
                 }
                 if strongSelf.selectedTransferMethod == nil {
                     strongSelf.selectedTransferMethod = firstActivatedTransferMetod
@@ -198,9 +201,11 @@ final class CreateTransferPresenter {
                 strongSelf.view.hideLoading()
                 switch result {
                 case .failure(let error):
-                    strongSelf.view.showError(error, { () -> Void in
-                        strongSelf.createTransfer()
-                    })
+                    strongSelf.errorHandler(for: error) {
+                        strongSelf.view.showError(error, { () -> Void in
+                            strongSelf.createInitialTransfer()
+                        })
+                    }
 
                 case .success(let transfer):
                     if let transfer = transfer {
@@ -249,6 +254,59 @@ final class CreateTransferPresenter {
             self?.amount = nil
             self?.transferAllFundsIsOn = false
             self?.createInitialTransfer()
+        }
+    }
+
+    private func resetErrorMessagesForAllSections() {
+        sectionData.forEach { $0.errorMessage = nil }
+    }
+
+    private func errorHandler(for error: HyperwalletErrorType, _ nonBusinessErrorHandler: @escaping () -> Void) {
+        switch error.group {
+        case .business:
+            resetErrorMessagesForAllSections()
+            guard let errors = error.getHyperwalletErrors()?.errorList, errors.isNotEmpty else {
+                return
+            }
+            if errors.contains(where: { $0.fieldName == nil }) {
+                view.showError(error) { [weak self] in self?.updateFooterContent(errors) }
+            } else {
+                updateFooterContent(errors)
+            }
+
+        default:
+            nonBusinessErrorHandler()
+        }
+    }
+
+    private func updateFooterContent(_ errors: [HyperwalletError]) {
+        //let errorsWithFieldName = errors.filter({ $0.fieldName != nil })
+
+        //        if errorsWithFieldName.isNotEmpty {
+        //            if let section = sectionData
+        //                .first(where: { section in widgetsContainError(for: section, errors).isNotEmpty }) {
+        //                section.containsFocusedField = true
+        //            }
+        //
+        //            for section in sectionData {
+        //                updateSectionData(for: section, errorsWithFieldName)
+        //            }
+        //        }
+        for businessError in errors where businessError.fieldName != nil {
+            switch businessError.fieldName! {
+            case "amount", "currency":
+                if let sectionDataNotes = sectionData.first(where: { $0.createTransferSectionHeader == .transfer }) {
+                    sectionDataNotes.errorMessage = [sectionDataNotes.errorMessage ?? "", businessError.message]
+                        .joined(separator: "\n")
+                }
+            case "notes":
+                if let sectionDataNotes = sectionData.first(where: { $0.createTransferSectionHeader == .notes }) {
+                    sectionDataNotes.errorMessage = businessError.message
+                }
+
+            default:
+                break
+            }
         }
     }
 }
