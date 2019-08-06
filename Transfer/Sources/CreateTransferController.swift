@@ -27,6 +27,10 @@ import UIKit
 /// Each transfer will be represented by an auto-generated, non-editable token that can be used
 /// to retrieve the transfer resource.
 public final class CreateTransferController: UITableViewController {
+    enum FooterSection: Int {
+        case destination, transfer, notes, button
+    }
+
     private var spinnerView: SpinnerView?
     private var presenter: CreateTransferPresenter!
     private let registeredCells: [(type: AnyClass, id: String)] = [
@@ -68,6 +72,8 @@ public final class CreateTransferController: UITableViewController {
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)
         }
+        tableView.register(TrasferTableViewFooterView.self,
+                           forHeaderFooterViewReuseIdentifier: TrasferTableViewFooterView.reuseIdentifier)
     }
 }
 
@@ -89,28 +95,56 @@ extension CreateTransferController {
         return presenter.sectionData[section].title
     }
 
-    override public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        if let transferSection = presenter.sectionData[section] as? CreateTransferSectionTransferData {
-            return transferSection.footer
-        }
-        return nil
-    }
-
     override public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if let footerView = tableView.footerView(forSection: section) {
-            updateFooterView(footerView, for: section)
-            return footerView
+        let sectionData = presenter.sectionData[section]
+        var attribitedText: NSAttributedString?
+        if  let transferSectionData = sectionData as? CreateTransferSectionTransferData {
+            attribitedText = format(footer: transferSectionData.footer, error: transferSectionData.errorMessage)
+        } else {
+            attribitedText = format(error: sectionData.errorMessage)
         }
-        return nil
+        if attribitedText == nil {
+            return nil
+        }
+        guard let view = tableView.dequeueReusableHeaderFooterView(
+            withIdentifier: TrasferTableViewFooterView.reuseIdentifier) as? TrasferTableViewFooterView else {
+                return nil
+        }
+        view.footerLabel.attributedText = attribitedText
+        return view
     }
 
-    private func updateFooterView(_ footerView: UITableViewHeaderFooterView, for section: Int) {
-        UIView.setAnimationsEnabled(false)
-        tableView.beginUpdates()
-        footerView.textLabel?.text = presenter.sectionData[section].errorMessage
-        footerView.sizeToFit()
-        tableView.endUpdates()
-        UIView.setAnimationsEnabled(true)
+    /// Format footer text and error text to attributed string to show in the UITableView foter
+    ///
+    /// - Parameter footer: footer of TableView section
+    /// - Parameter error: error of TableView section
+    /// - Returns: a formatted string of NSAttributedString type
+    private func format(footer: String? = nil, error: String? = nil) -> NSAttributedString? {
+        var attributedText: NSMutableAttributedString! = nil
+        if let footer = footer {
+            attributedText = NSMutableAttributedString()
+            attributedText.append(value: footer,
+                                  font: Theme.Label.footnoteFont,
+                                  color: Theme.Label.subTitleColor)
+        }
+        if let error = error {
+            if attributedText == nil {
+                attributedText = NSMutableAttributedString()
+            }
+            attributedText.append(value: error,
+                                  font: Theme.Label.footnoteFont,
+                                  color: Theme.Label.errorColor)
+            attributedText.append(value: error,
+                                  font: Theme.Label.footnoteFont,
+                                  color: Theme.Label.errorColor)
+            attributedText.append(value: error,
+                                  font: Theme.Label.footnoteFont,
+                                  color: Theme.Label.errorColor)
+            attributedText.append(value: error,
+                                  font: Theme.Label.footnoteFont,
+                                  color: Theme.Label.errorColor)
+        }
+        return attributedText
     }
 
     private func getCellConfiguration(_ indexPath: IndexPath) -> UITableViewCell {
@@ -208,12 +242,12 @@ extension CreateTransferController: CreateTransferView {
         handler()
     }
 
-    func updateFooter(for section: Int) {
-        tableView.reloadSections([section], with: .none)
+    func updateFooter(for section: FooterSection) {
+        tableView.reloadSections([section.rawValue], with: .none)
     }
 
     func updateTransferSection() {
-        tableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .none)
+        tableView.reloadRows(at: [IndexPath(row: 0, section: FooterSection.transfer.rawValue)], with: .none)
     }
 
     func notifyTransferCreated(_ transfer: HyperwalletTransfer) {

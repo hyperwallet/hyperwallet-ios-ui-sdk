@@ -41,7 +41,7 @@ protocol CreateTransferView: class {
     func showLoading()
     func showScheduleTransfer(_ transfer: HyperwalletTransfer)
     func updateTransferSection()
-    func updateFooter(for section: Int)
+    func updateFooter(for section: CreateTransferController.FooterSection)
 }
 
 final class CreateTransferPresenter {
@@ -182,6 +182,7 @@ final class CreateTransferPresenter {
 
     // MARK: - Create Transfer Button Tapped
     func createTransfer() {
+        resetErrorMessagesForAllSections()
         if let sourceToken = sourceToken,
             let destinationToken = selectedTransferMethod?.token,
             let destinationCurrency = selectedTransferMethod?.transferMethodCurrency {
@@ -280,28 +281,20 @@ final class CreateTransferPresenter {
     }
 
     private func updateFooterContent(_ errors: [HyperwalletError]) {
-        //let errorsWithFieldName = errors.filter({ $0.fieldName != nil })
-
-        //        if errorsWithFieldName.isNotEmpty {
-        //            if let section = sectionData
-        //                .first(where: { section in widgetsContainError(for: section, errors).isNotEmpty }) {
-        //                section.containsFocusedField = true
-        //            }
-        //
-        //            for section in sectionData {
-        //                updateSectionData(for: section, errorsWithFieldName)
-        //            }
-        //        }
-        for businessError in errors where businessError.fieldName != nil {
-            switch businessError.fieldName! {
-            case "amount", "currency":
+        for businessError in errors {
+            guard let fieldName = businessError.fieldName, !fieldName.isEmpty else {
+                continue
+            }
+            switch fieldName {
+            case "amount":
                 if let sectionDataNotes = sectionData.first(where: { $0.createTransferSectionHeader == .transfer }) {
-                    sectionDataNotes.errorMessage = [sectionDataNotes.errorMessage ?? "", businessError.message]
-                        .joined(separator: "\n")
+                    sectionDataNotes.errorMessage = businessError.message
+                    view.updateFooter(for: .transfer)
                 }
             case "notes":
                 if let sectionDataNotes = sectionData.first(where: { $0.createTransferSectionHeader == .notes }) {
                     sectionDataNotes.errorMessage = businessError.message
+                    view.updateFooter(for: .notes)
                 }
 
             default:
