@@ -114,6 +114,27 @@ public extension NSMutableAttributedString {
         ])
     }
 
+    /// Creates and appends a paragraph of NSAttributedString
+    ///
+    /// - Parameters:
+    ///   - value: the string value
+    ///   - font: the UIFont
+    ///   - color: the UIColor
+    func appendParagraph(value: String, font: UIFont, color: UIColor) {
+        let paragraphText = self.string.isEmpty
+            ? value
+            : "\n\(value)"
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .natural
+        paragraphStyle.lineBreakMode = .byWordWrapping
+        paragraphStyle.paragraphSpacing = font.lineHeight
+        append(value: paragraphText, attributes: [
+            .font: font,
+            .foregroundColor: color,
+            .paragraphStyle: paragraphStyle
+        ])
+    }
+
     private func append(value: String, color: UIColor) {
         append(value: value, attributes: [.foregroundColor: color] )
     }

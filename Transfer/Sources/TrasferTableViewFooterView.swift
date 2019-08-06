@@ -23,25 +23,25 @@ final class TrasferTableViewFooterView: UITableViewHeaderFooterView {
 
     lazy var footerLabel: UILabel = {
         let label = UILabel(frame: .zero)
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
         return label
     }()
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         contentView.addSubview(footerLabel)
-        footerLabel.translatesAutoresizingMaskIntoConstraints = false
-        footerLabel.safeAreaCenterXAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerXAnchor)
-            .isActive = true
-        footerLabel.safeAreaCenterYAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor)
-            .isActive = true
-        footerLabel.safeAreaLeadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor)
-            .isActive = true
-        footerLabel.safeAreaTrailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor)
-            .isActive = true
-        footerLabel.safeAreaTopAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor)
-            .isActive = true
-        footerLabel.safeAreaBottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor)
-            .isActive = true
+
+        //        footerLabel.translatesAutoresizingMaskIntoConstraints = false
+        //
+        //        footerLabel.safeAreaLeadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor)
+        //            .isActive = true
+        //        footerLabel.safeAreaTrailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor)
+        //            .isActive = true
+        //        footerLabel.safeAreaTopAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor)
+        //            .isActive = true
+        //        footerLabel.safeAreaBottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor)
+        //            .isActive = true
     }
 
     required init?(coder aDecoder: NSCoder) {

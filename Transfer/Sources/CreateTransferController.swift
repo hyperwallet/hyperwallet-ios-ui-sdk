@@ -123,17 +123,20 @@ extension CreateTransferController {
         var attributedText: NSMutableAttributedString! = nil
         if let footer = footer {
             attributedText = NSMutableAttributedString()
-            attributedText.append(value: footer,
-                                  font: Theme.Label.footnoteFont,
-                                  color: Theme.Label.subTitleColor)
+            attributedText.appendParagraph(value: footer,
+                                           font: Theme.Label.footnoteFont,
+                                           color: Theme.Label.subTitleColor)
         }
         if let error = error {
             if attributedText == nil {
                 attributedText = NSMutableAttributedString()
             }
-            attributedText.append(value: error,
-                                  font: Theme.Label.footnoteFont,
-                                  color: Theme.Label.errorColor)
+            attributedText.appendParagraph(value: error,
+                                           font: Theme.Label.footnoteFont,
+                                           color: Theme.Label.errorColor)
+            attributedText.appendParagraph(value: error,
+                                           font: Theme.Label.footnoteFont,
+                                           color: Theme.Label.errorColor)
         }
         return attributedText
     }
