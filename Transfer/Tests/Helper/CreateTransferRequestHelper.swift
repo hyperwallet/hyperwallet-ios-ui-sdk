@@ -7,7 +7,7 @@ class CreateTransferRequestHelper {
     private static let failureResponseFile = "UnexpectedErrorResponse"
     private static let requestUrl = "\(HyperwalletTestHelper.restURL)transfers"
 
-    static func setupSucessRequest() {
+    static func setupSuccessRequest() {
         let dataResponse = HyperwalletTestHelper.okHTTPResponse(for: fileName)
         CreateTransferRequestHelper.setUpMockServer(dataResponse, requestUrl)
     }
