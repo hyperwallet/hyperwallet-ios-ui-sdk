@@ -48,6 +48,7 @@
 		4157136422C56B53005D6DB1 /* PrepaidCardListReceiptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4157136222C56B4B005D6DB1 /* PrepaidCardListReceiptTests.swift */; };
 		41D835AB22F23F4E003544AB /* ListTransferMethodsNoData.json in Resources */ = {isa = PBXBuildFile; fileRef = 41D835A922F23ED9003544AB /* ListTransferMethodsNoData.json */; };
 		41D835B922F4BC09003544AB /* AvailableFundMultiCurrencies.json in Resources */ = {isa = PBXBuildFile; fileRef = 41D835B722F4BC02003544AB /* AvailableFundMultiCurrencies.json */; };
+		41D835C922FA2542003544AB /* TransferRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D835C822FA2542003544AB /* TransferRequestHelper.swift */; };
 		41EC061922F2242800D6BE1C /* TransferFunds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EC061722F223F200D6BE1C /* TransferFunds.swift */; };
 		41EC061C22F2247300D6BE1C /* TransferUserFundsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EC061B22F2247300D6BE1C /* TransferUserFundsTest.swift */; };
 		41EC064622F224DB00D6BE1C /* AvailableFundInsufficient.json in Resources */ = {isa = PBXBuildFile; fileRef = 41EC062522F224D300D6BE1C /* AvailableFundInsufficient.json */; };
@@ -67,12 +68,6 @@
 		41EC065722F224DB00D6BE1C /* TransferErrorOverAvailableFund.json in Resources */ = {isa = PBXBuildFile; fileRef = 41EC062022F224D300D6BE1C /* TransferErrorOverAvailableFund.json */; };
 		41EC065822F224DB00D6BE1C /* TransferErrorQuoteExpired.json in Resources */ = {isa = PBXBuildFile; fileRef = 41EC062E22F224D400D6BE1C /* TransferErrorQuoteExpired.json */; };
 		41EC065922F224DB00D6BE1C /* TransferStatusQuoted.json in Resources */ = {isa = PBXBuildFile; fileRef = 41EC062322F224D300D6BE1C /* TransferStatusQuoted.json */; };
-		4A2B94AD22F1CB2B000A0F14 /* AuthenticationProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7C1A22E89C610022E573 /* AuthenticationProviderMock.swift */; };
-		4A2B94AE22F1CB2B000A0F14 /* AuthenticationTokenGeneratorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7C1B22E89C620022E573 /* AuthenticationTokenGeneratorMock.swift */; };
-		4A2B94AF22F1CB2B000A0F14 /* HyperwalletTestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7C1722E89BEB0022E573 /* HyperwalletTestHelper.swift */; };
-		4A2B94B022F1CB2B000A0F14 /* TransferMethodRepositoryRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2B94A422F1C7BD000A0F14 /* TransferMethodRepositoryRequestHelper.swift */; };
-		4A2B94B122F1CB2B000A0F14 /* CreateTransferRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2B94A822F1C81F000A0F14 /* CreateTransferRequestHelper.swift */; };
-		4A2B94B222F1CB2B000A0F14 /* UserRepositoryRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2B949D22F1BD8E000A0F14 /* UserRepositoryRequestHelper.swift */; };
 		4A2B94B322F1CB31000A0F14 /* CreateTransferResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 4A2B94AA22F1C954000A0F14 /* CreateTransferResponse.json */; };
 		4A2B94B422F1CB31000A0F14 /* ListTransferMethodSuccessResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 4A2B949C22F1BC00000A0F14 /* ListTransferMethodSuccessResponse.json */; };
 		4A2B94B522F1CB31000A0F14 /* UserIndividualResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBA9FA58227912A000C1301A /* UserIndividualResponse.json */; };
@@ -659,6 +654,7 @@
 		4157136222C56B4B005D6DB1 /* PrepaidCardListReceiptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepaidCardListReceiptTests.swift; sourceTree = "<group>"; };
 		41D835A922F23ED9003544AB /* ListTransferMethodsNoData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ListTransferMethodsNoData.json; sourceTree = "<group>"; };
 		41D835B722F4BC02003544AB /* AvailableFundMultiCurrencies.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AvailableFundMultiCurrencies.json; sourceTree = "<group>"; };
+		41D835C822FA2542003544AB /* TransferRequestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferRequestHelper.swift; sourceTree = "<group>"; };
 		41EC061722F223F200D6BE1C /* TransferFunds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferFunds.swift; sourceTree = "<group>"; };
 		41EC061B22F2247300D6BE1C /* TransferUserFundsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferUserFundsTest.swift; sourceTree = "<group>"; };
 		41EC061E22F224D300D6BE1C /* TransferErrorLimitExceeded.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TransferErrorLimitExceeded.json; sourceTree = "<group>"; };
@@ -1213,6 +1209,14 @@
 			path = Receipts;
 			sourceTree = "<group>";
 		};
+		41D835C722FA22C4003544AB /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				078C6EFF22EF81A900CF81EE /* TransferRequestHelper.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		41EC061622F223D800D6BE1C /* TransferFunds */ = {
 			isa = PBXGroup;
 			children = (
@@ -1334,6 +1338,7 @@
 		4A9A7C1922E89BF10022E573 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				41D835C822FA2542003544AB /* TransferRequestHelper.swift */,
 				4A9A7C1A22E89C610022E573 /* AuthenticationProviderMock.swift */,
 				4A9A7C1B22E89C620022E573 /* AuthenticationTokenGeneratorMock.swift */,
 				4A2B94A822F1C81F000A0F14 /* CreateTransferRequestHelper.swift */,
@@ -1867,6 +1872,7 @@
 				073BB99B22E63DBF0053C24E /* TransferRepository */,
 				DB2587FC2261BFF100E6236B /* UITests */,
 				643912ED22DF40F200036609 /* UserRepository */,
+				41D835C722FA22C4003544AB /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -3059,6 +3065,7 @@
 				4ADBEC7222E9F16A00D43A48 /* TransferDestinationCell.swift in Sources */,
 				4A9A7C0522E86F580022E573 /* TransferButtonCell.swift in Sources */,
 				4A9A7C0922E86F580022E573 /* TransferAmountCell.swift in Sources */,
+				41D835C922FA2542003544AB /* TransferRequestHelper.swift in Sources */,
 				4A9A7C0622E86F580022E573 /* TransferNotesCell.swift in Sources */,
 				4AB37CFC22EAF087005C1078 /* TransferAllFundsCell.swift in Sources */,
 				077C337722E8CCB0000314CD /* ScheduleTransferSectionData.swift in Sources */,
