@@ -25,6 +25,7 @@ final class TrasferTableViewFooterView: UITableViewHeaderFooterView {
         let label = UILabel(frame: .zero)
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
@@ -32,16 +33,15 @@ final class TrasferTableViewFooterView: UITableViewHeaderFooterView {
         super.init(reuseIdentifier: reuseIdentifier)
         contentView.addSubview(footerLabel)
 
-        footerLabel.translatesAutoresizingMaskIntoConstraints = false
-
-        footerLabel.safeAreaLeadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor)
-            .isActive = true
-        footerLabel.safeAreaTrailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor)
-            .isActive = true
-        footerLabel.safeAreaTopAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor)
-            .isActive = true
-        footerLabel.safeAreaBottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor)
-            .isActive = true
+        let margins = contentView.layoutMarginsGuide
+        let constraints = [
+            footerLabel.safeAreaLeadingAnchor.constraint(equalTo: margins.leadingAnchor),
+            footerLabel.safeAreaTrailingAnchor.constraint(equalTo: margins.trailingAnchor),
+            footerLabel.safeAreaTopAnchor.constraint(equalTo: margins.topAnchor),
+            footerLabel.safeAreaBottomAnchor.constraint(equalTo: margins.bottomAnchor)
+        ]
+        constraints.forEach { $0.priority = UILayoutPriority(999) }
+        NSLayoutConstraint.activate(constraints)
     }
 
     required init?(coder aDecoder: NSCoder) {

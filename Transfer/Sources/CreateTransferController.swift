@@ -27,7 +27,7 @@ import UIKit
 /// Each transfer will be represented by an auto-generated, non-editable token that can be used
 /// to retrieve the transfer resource.
 public final class CreateTransferController: UITableViewController {
-    enum FooterSection: Int {
+    enum FooterSection: Int, CaseIterable {
         case destination, transfer, notes, button
     }
 
@@ -114,11 +114,6 @@ extension CreateTransferController {
         return view
     }
 
-    /// Format footer text and error text to attributed string to show in the UITableView foter
-    ///
-    /// - Parameter footer: footer of TableView section
-    /// - Parameter error: error of TableView section
-    /// - Returns: a formatted string of NSAttributedString type
     private func format(footer: String? = nil, error: String? = nil) -> NSAttributedString? {
         var attributedText: NSMutableAttributedString! = nil
         if let footer = footer {
@@ -131,9 +126,6 @@ extension CreateTransferController {
             if attributedText == nil {
                 attributedText = NSMutableAttributedString()
             }
-            attributedText.appendParagraph(value: error,
-                                           font: Theme.Label.footnoteFont,
-                                           color: Theme.Label.errorColor)
             attributedText.appendParagraph(value: error,
                                            font: Theme.Label.footnoteFont,
                                            color: Theme.Label.errorColor)
@@ -232,12 +224,10 @@ extension CreateTransferController: CreateTransferView {
         return presenter.sectionData.allSatisfy({ $0.errorMessage?.isEmpty ?? true })
     }
 
-    func showBusinessError(_ error: HyperwalletErrorType, _ handler: @escaping () -> Void) {
-        handler()
-    }
-
     func updateFooter(for section: FooterSection) {
-        tableView.reloadSections([section.rawValue], with: .none)
+        UIView.setAnimationsEnabled(false)
+        tableView.reloadSections(IndexSet(integer: section.rawValue), with: .none)
+        UIView.setAnimationsEnabled(true)
     }
 
     func updateTransferSection() {

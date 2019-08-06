@@ -31,7 +31,6 @@ protocol CreateTransferView: class {
     func areAllFieldsValid() -> Bool
     func hideLoading()
     func notifyTransferCreated(_ transfer: HyperwalletTransfer)
-    func showBusinessError(_ error: HyperwalletErrorType, _ handler: @escaping() -> Void)
     func showCreateTransfer()
     func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?)
     func showGenericTableView(items: [HyperwalletTransferMethod],
@@ -260,6 +259,7 @@ final class CreateTransferPresenter {
 
     private func resetErrorMessagesForAllSections() {
         sectionData.forEach { $0.errorMessage = nil }
+        CreateTransferController.FooterSection.allCases.forEach({ view.updateFooter(for: $0) })
     }
 
     private func errorHandler(for error: HyperwalletErrorType, _ nonBusinessErrorHandler: @escaping () -> Void) {
