@@ -38,6 +38,10 @@ final class TrasferTableViewFooterView: UITableViewHeaderFooterView {
             .isActive = true
         footerLabel.safeAreaTrailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor)
             .isActive = true
+        footerLabel.safeAreaTopAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor)
+            .isActive = true
+        footerLabel.safeAreaBottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor)
+            .isActive = true
     }
 
     required init?(coder aDecoder: NSCoder) {

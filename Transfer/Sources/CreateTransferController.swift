@@ -134,15 +134,6 @@ extension CreateTransferController {
             attributedText.append(value: error,
                                   font: Theme.Label.footnoteFont,
                                   color: Theme.Label.errorColor)
-            attributedText.append(value: error,
-                                  font: Theme.Label.footnoteFont,
-                                  color: Theme.Label.errorColor)
-            attributedText.append(value: error,
-                                  font: Theme.Label.footnoteFont,
-                                  color: Theme.Label.errorColor)
-            attributedText.append(value: error,
-                                  font: Theme.Label.footnoteFont,
-                                  color: Theme.Label.errorColor)
         }
         return attributedText
     }
