@@ -32,16 +32,16 @@ final class TrasferTableViewFooterView: UITableViewHeaderFooterView {
         super.init(reuseIdentifier: reuseIdentifier)
         contentView.addSubview(footerLabel)
 
-        //        footerLabel.translatesAutoresizingMaskIntoConstraints = false
-        //
-        //        footerLabel.safeAreaLeadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor)
-        //            .isActive = true
-        //        footerLabel.safeAreaTrailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor)
-        //            .isActive = true
-        //        footerLabel.safeAreaTopAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor)
-        //            .isActive = true
-        //        footerLabel.safeAreaBottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor)
-        //            .isActive = true
+        footerLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        footerLabel.safeAreaLeadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor)
+            .isActive = true
+        footerLabel.safeAreaTrailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor)
+            .isActive = true
+        footerLabel.safeAreaTopAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor)
+            .isActive = true
+        footerLabel.safeAreaBottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor)
+            .isActive = true
     }
 
     required init?(coder aDecoder: NSCoder) {
