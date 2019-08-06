@@ -84,9 +84,7 @@ class AddTransferMethod {
         bankIdInput = addTransferMethodTableView.textFields["bankId"]
         branchIdInput = addTransferMethodTableView.textFields["branchId"]
         bankAccountIdInput = addTransferMethodTableView.textFields["bankAccountId"]
-        accountTypeSelect = addTransferMethodTableView.staticTexts
-            .containing(.staticText, identifier: "bankAccountPurpose")
-            .element(matching: NSPredicate(format: "NOT (label CONTAINS[c] 'Account Type')"))
+        accountTypeSelect = addTransferMethodTableView.cells.staticTexts["bankAccountPurposeValue"]
         cardNumberInput = addTransferMethodTableView.textFields["cardNumber"]
         dateOfExpiryInput = addTransferMethodTableView.textFields["dateOfExpiry"]
         cvvInput = addTransferMethodTableView.textFields["cvv"]
@@ -100,9 +98,7 @@ class AddTransferMethod {
         phoneNumberInput = addTransferMethodTableView.textFields["phoneNumber"]
         mobileNumberInput = addTransferMethodTableView.textFields["mobileNumber"]
         dateOfBirthInput = addTransferMethodTableView.textFields["dateOfBirth"]
-        countrySelect = addTransferMethodTableView.staticTexts
-            .containing(.staticText, identifier: "country")
-            .element(matching: NSPredicate(format: "NOT (label CONTAINS[c] 'Country')"))
+        countrySelect = addTransferMethodTableView.cells.staticTexts["countryValue"]
         stateProvinceInput = addTransferMethodTableView.textFields["stateProvince"]
         addressLineInput = addTransferMethodTableView.textFields["addressLine1"]
         cityInput = addTransferMethodTableView.textFields["city"]
@@ -115,9 +111,7 @@ class AddTransferMethod {
         bankAccountIdLabel = addTransferMethodTableView.staticTexts["bankAccountId"]
         buildingSocietyAccountLabel = addTransferMethodTableView.staticTexts["buildingSocietyAccount"]
         branchIdLabel = addTransferMethodTableView.staticTexts["branchId"]
-        accountTypeLabel = addTransferMethodTableView.staticTexts
-            .containing(.staticText, identifier: "bankAccountPurpose")
-            .element(matching: NSPredicate(format: "label CONTAINS[c] 'Account Type'"))
+        accountTypeLabel = addTransferMethodTableView.staticTexts["bankAccountPurpose"]
         cardNumberLabel = addTransferMethodTableView.staticTexts["cardNumber"]
         dateOfExpiryLabel = addTransferMethodTableView.staticTexts["dateOfExpiry"]
         cvvLabel = addTransferMethodTableView.staticTexts["cvv"]
@@ -133,9 +127,7 @@ class AddTransferMethod {
         phoneNumberLabel = addTransferMethodTableView.staticTexts["phoneNumber"]
         mobileNumberLabel = addTransferMethodTableView.staticTexts["mobileNumber"]
         dateOfBirthLabel = addTransferMethodTableView.staticTexts["dateOfBirth"]
-        countryLabel = addTransferMethodTableView.staticTexts
-            .containing(.staticText, identifier: "country")
-            .element(matching: NSPredicate(format: "label CONTAINS[c] 'Country'"))
+        countryLabel = addTransferMethodTableView.cells.staticTexts["country"]
         stateProvinceLabel = addTransferMethodTableView.staticTexts["stateProvince"]
         addressLineLabel = addTransferMethodTableView.staticTexts["addressLine1"]
         cityLabel = addTransferMethodTableView.staticTexts["city"]
