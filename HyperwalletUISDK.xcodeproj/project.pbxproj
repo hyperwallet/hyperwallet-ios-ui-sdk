@@ -47,7 +47,7 @@
 		4157136122C43660005D6DB1 /* PrepaidCardReceiptsPaging.json in Resources */ = {isa = PBXBuildFile; fileRef = 4157136022C43660005D6DB1 /* PrepaidCardReceiptsPaging.json */; };
 		4157136422C56B53005D6DB1 /* PrepaidCardListReceiptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4157136222C56B4B005D6DB1 /* PrepaidCardListReceiptTests.swift */; };
 		41D835B922F4BC09003544AB /* AvailableFundMultiCurrencies.json in Resources */ = {isa = PBXBuildFile; fileRef = 41D835B722F4BC02003544AB /* AvailableFundMultiCurrencies.json */; };
-		41D835C922FA2542003544AB /* TransferRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D835C822FA2542003544AB /* TransferRequestHelper.swift */; };
+		41D835CB22FA3880003544AB /* TransferRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D835C822FA2542003544AB /* TransferRequestHelper.swift */; };
 		41EC061922F2242800D6BE1C /* TransferFunds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EC061722F223F200D6BE1C /* TransferFunds.swift */; };
 		41EC061C22F2247300D6BE1C /* TransferUserFundsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EC061B22F2247300D6BE1C /* TransferUserFundsTest.swift */; };
 		41EC064622F224DB00D6BE1C /* AvailableFundInsufficient.json in Resources */ = {isa = PBXBuildFile; fileRef = 41EC062522F224D300D6BE1C /* AvailableFundInsufficient.json */; };
@@ -3061,7 +3061,6 @@
 				4ADBEC7222E9F16A00D43A48 /* TransferDestinationCell.swift in Sources */,
 				4A9A7C0522E86F580022E573 /* TransferButtonCell.swift in Sources */,
 				4A9A7C0922E86F580022E573 /* TransferAmountCell.swift in Sources */,
-				41D835C922FA2542003544AB /* TransferRequestHelper.swift in Sources */,
 				4A9A7C0622E86F580022E573 /* TransferNotesCell.swift in Sources */,
 				4AB37CFC22EAF087005C1078 /* TransferAllFundsCell.swift in Sources */,
 				077C337722E8CCB0000314CD /* ScheduleTransferSectionData.swift in Sources */,
@@ -3083,6 +3082,7 @@
 				4A9E9A0922F4AD3700739150 /* AuthenticationTokenGeneratorMock.swift in Sources */,
 				4A9E9A0A22F4AD3700739150 /* CreateTransferRequestHelper.swift in Sources */,
 				4A9E9A0B22F4AD3700739150 /* HyperwalletTestHelper.swift in Sources */,
+				41D835CB22FA3880003544AB /* TransferRequestHelper.swift in Sources */,
 				4A9E9A0C22F4AD3700739150 /* TransferMethodRepositoryRequestHelper.swift in Sources */,
 				4A9E9A0D22F4AD3700739150 /* TransferRequestHelper.swift in Sources */,
 				4A9E9A0E22F4AD3700739150 /* UserRepositoryRequestHelper.swift in Sources */,
