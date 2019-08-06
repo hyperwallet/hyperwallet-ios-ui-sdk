@@ -2,6 +2,7 @@ import XCTest
 
 class TransferUserFundsTest: BaseTests {
     var transferFundMenu: XCUIElement!
+    var transferFundPPCMenu: XCUIElement!
     var transferFunds: TransferFunds!
 
     override func setUp() {
@@ -11,6 +12,9 @@ class TransferUserFundsTest: BaseTests {
         spinner = app.activityIndicators["activityIndicator"]
         transferFundMenu = app.tables.cells
             .containing(.staticText, identifier: "Transfer Funds")
+            .element(boundBy: 0)
+        transferFundPPCMenu = app.tables.cells
+            .containing(.staticText, identifier: "Transfer Funds PPC")
             .element(boundBy: 0)
         transferFunds = TransferFunds(app: app)
     }
@@ -136,8 +140,9 @@ class TransferUserFundsTest: BaseTests {
                              filename: "AvailableFundUSD",
                              method: HTTPMethod.post)
 
-        XCTAssertTrue(transferFundMenu.exists)
-        transferFundMenu.tap()
+        XCTAssertTrue(transferFundPPCMenu.exists)
+        //transferFundMenu.tap()
+        transferFundPPCMenu.tap()
         waitForNonExistence(spinner)
 
         // Add Destination Section
