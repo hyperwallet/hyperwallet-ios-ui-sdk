@@ -28,18 +28,19 @@ final class ListTransferMethodCell: UITableViewCell {
     // MARK: Life cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+        self.heightAnchor.constraint(equalToConstant: Theme.Cell.largeHeight).isActive = true
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
+    override public func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         imageView?.backgroundColor = Theme.Icon.primaryBackgroundColor
     }
 
-    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+    override public func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
         imageView?.backgroundColor = Theme.Icon.primaryBackgroundColor
     }
@@ -68,12 +69,15 @@ final class ListTransferMethodCell: UITableViewCell {
 }
 
 extension ListTransferMethodCell {
-    func configure(transferMethod: HyperwalletTransferMethod) {
+    /// Fill `ListTransferMethodCell` related fields
+    ///
+    /// - Parameter transferMethod: a transfer method which contains the info needs to be filled to the cell.
+    public func configure(transferMethod: HyperwalletTransferMethod) {
         textLabel?.text = transferMethod.type?.lowercased().localized()
         textLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellTextLabel"
         detailTextLabel?.attributedText = formatDetails(
             transferMethodCountry: transferMethod.transferMethodCountry?.localized() ?? "",
-            additionalInfo: transferMethod.additionalInfo)
+            additionalInfo: transferMethod.value)
 
         detailTextLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellDetailTextLabel"
         detailTextLabel?.numberOfLines = 0

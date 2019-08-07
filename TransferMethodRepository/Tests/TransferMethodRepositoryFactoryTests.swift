@@ -35,7 +35,7 @@ class TransferMethodRepositoryFactoryTests: XCTestCase {
     }
     // swiftlint:disable function_body_length
     func testShared_verifyRepositoriesCleared() {
-        RemoteTransferMethodConfigurationRepositoryTests
+        TransferMethodConfigurationRepositoryTests
             .setupResponseMockServer(keyResponseData)
         let expectation = self.expectation(description: "Get transfer method configuration keys")
         var transferMethodConfigurationKey: HyperwalletTransferMethodConfigurationKey?
@@ -54,7 +54,7 @@ class TransferMethodRepositoryFactoryTests: XCTestCase {
             expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1)
-        RemoteTransferMethodConfigurationRepositoryTests
+        TransferMethodConfigurationRepositoryTests
             .refreshHippolyteResponse("TransferMethodConfigurationKeysOnlyPaypalAccountUsResponse")
 
         // When
