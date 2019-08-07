@@ -1214,6 +1214,7 @@
 			isa = PBXGroup;
 			children = (
 				4A9A7C0E22E87E500022E573 /* Extensions */,
+				4AF4DA4122FAFFA000484F49 /* View */,
 				4A9A7C0222E86F580022E573 /* CreateTransferController.swift */,
 				4A9A7C0122E86F580022E573 /* CreateTransferPresenter.swift */,
 				4A9A7BFE22E86F580022E573 /* CreateTransferSectionData.swift */,
@@ -1230,7 +1231,6 @@
 				077C337222E8CCB0000314CD /* TransferForeignExchangeCell.swift */,
 				4A9A7C0022E86F580022E573 /* TransferNotesCell.swift */,
 				077C336D22E8CCAF000314CD /* TransferSummaryCell.swift */,
-				4AD300D922F9972A005FD01F /* TrasferTableViewFooterView.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -1303,6 +1303,14 @@
 				4AE6B6C322D605B20009DEFE /* Info.plist */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		4AF4DA4122FAFFA000484F49 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4AD300D922F9972A005FD01F /* TrasferTableViewFooterView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		641324DF229575CE00512816 /* BaseTests */ = {
