@@ -26,6 +26,8 @@ final class TrasferTableViewFooterView: UITableViewHeaderFooterView {
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.accessibilityIdentifier = "TrasferTableViewFooterLabelIdentifier"
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
         return label
     }()
 

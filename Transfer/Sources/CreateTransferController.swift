@@ -96,13 +96,7 @@ extension CreateTransferController {
     }
 
     override public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let sectionData = presenter.sectionData[section]
-        var attribitedText: NSAttributedString?
-        if  let transferSectionData = sectionData as? CreateTransferSectionTransferData {
-            attribitedText = format(footer: transferSectionData.footer, error: transferSectionData.errorMessage)
-        } else {
-            attribitedText = format(error: sectionData.errorMessage)
-        }
+        let attribitedText = getAttributedFooterText(for: section)
         if attribitedText == nil {
             return nil
         }
@@ -112,6 +106,17 @@ extension CreateTransferController {
         }
         view.footerLabel.attributedText = attribitedText
         return view
+    }
+
+    private func getAttributedFooterText(for section: Int) -> NSAttributedString? {
+        let sectionData = presenter.sectionData[section]
+        var attribitedText: NSAttributedString?
+        if  let transferSectionData = sectionData as? CreateTransferSectionTransferData {
+            attribitedText = format(footer: transferSectionData.footer, error: transferSectionData.errorMessage)
+        } else {
+            attribitedText = format(error: sectionData.errorMessage)
+        }
+        return attribitedText
     }
 
     private func format(footer: String? = nil, error: String? = nil) -> NSAttributedString? {
@@ -226,7 +231,13 @@ extension CreateTransferController: CreateTransferView {
 
     func updateFooter(for section: FooterSection) {
         UIView.setAnimationsEnabled(false)
-        tableView.reloadSections(IndexSet(integer: section.rawValue), with: .none)
+        tableView.beginUpdates()
+        if let footerView = tableView.footerView(forSection: section.rawValue) as? TrasferTableViewFooterView {
+            footerView.footerLabel.attributedText = getAttributedFooterText(for: section.rawValue)
+        } else {
+            tableView.reloadSections(IndexSet(integer: section.rawValue), with: .none)
+        }
+        tableView.endUpdates()
         UIView.setAnimationsEnabled(true)
     }
 

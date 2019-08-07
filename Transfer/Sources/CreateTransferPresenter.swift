@@ -182,6 +182,13 @@ final class CreateTransferPresenter {
     // MARK: - Create Transfer Button Tapped
     func createTransfer() {
         resetErrorMessagesForAllSections()
+        if !transferAllFundsIsOn && amount?.isEmpty ?? true {
+            let error = HyperwalletError(message: "transfer_assert_enter_amount_or_transfer_all".localized(),
+                                         code: "EMPTY_AMOUNT",
+                                         fieldName: "amount")
+            updateFooterContent([error])
+            return
+        }
         if let sourceToken = sourceToken,
             let destinationToken = selectedTransferMethod?.token,
             let destinationCurrency = selectedTransferMethod?.transferMethodCurrency {
@@ -281,19 +288,19 @@ final class CreateTransferPresenter {
     }
 
     private func updateFooterContent(_ errors: [HyperwalletError]) {
-        for businessError in errors {
-            guard let fieldName = businessError.fieldName, !fieldName.isEmpty else {
+        for error in errors {
+            guard let fieldName = error.fieldName, !fieldName.isEmpty else {
                 continue
             }
             switch fieldName {
             case "amount":
-                if let sectionDataNotes = sectionData.first(where: { $0.createTransferSectionHeader == .transfer }) {
-                    sectionDataNotes.errorMessage = businessError.message
+                if let sectionData = sectionData.first(where: { $0.createTransferSectionHeader == .transfer }) {
+                    sectionData.errorMessage = error.message
                     view.updateFooter(for: .transfer)
                 }
             case "notes":
-                if let sectionDataNotes = sectionData.first(where: { $0.createTransferSectionHeader == .notes }) {
-                    sectionDataNotes.errorMessage = businessError.message
+                if let sectionData = sectionData.first(where: { $0.createTransferSectionHeader == .notes }) {
+                    sectionData.errorMessage = error.message
                     view.updateFooter(for: .notes)
                 }
 
