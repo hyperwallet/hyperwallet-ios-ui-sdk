@@ -282,9 +282,33 @@ class CreateTransferTests: XCTestCase {
         XCTAssertEqual(presenter.destinationCurrency, "USD", "destinationCurrency should be USD")
     }
 
-    func testCreateTransfer_success() {
+    func testCreateTransfer_emtyAmount_transferAllFundsIsOff_failure() {
         initializePresenter()
         mockView.resetStates()
+        presenter.createTransfer()
+        wait(for: [mockView.updateFooterExpectation], timeout: 1)
+        XCTAssertFalse(mockView.isShowLoadingPerformed, "showLoading should not be performed")
+        XCTAssertFalse(mockView.isHideLoadingPerformed, "hideLoading should not be performed")
+        XCTAssertFalse(mockView.isShowErrorPerformed, "showError should not not be performed")
+        XCTAssertTrue(mockView.isUpdateFooterPerformed, "updateFooter should be performed")
+        XCTAssertNotNil(presenter.sectionData[1].errorMessage, "errorMessage should not be empty")
+    }
+
+    func testCreateTransfer_emtyAmount_transferAllFundsIsOn_success() {
+        initializePresenter()
+        mockView.resetStates()
+        presenter.transferAllFundsIsOn = true
+        presenter.createTransfer()
+        wait(for: [mockView.showScheduleTransferExpectation], timeout: 1)
+        XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
+        XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
+        XCTAssertFalse(mockView.isShowErrorPerformed, "showError should not be performed")
+    }
+
+    func testCreateTransfer_notEmtyAmount_transferAllFundsIsOn_success() {
+        initializePresenter()
+        mockView.resetStates()
+        presenter.amount = "1.00"
         presenter.createTransfer()
         wait(for: [mockView.showScheduleTransferExpectation], timeout: 1)
         XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
@@ -295,6 +319,7 @@ class CreateTransferTests: XCTestCase {
     func testCreateTransfer_failure() {
         initializePresenter()
         mockView.resetStates()
+        presenter.amount = "1.00"
         CreateTransferRequestHelper.setupFailureRequest()
         presenter.createTransfer()
         wait(for: [mockView.showErrorExpectation], timeout: 1)
@@ -332,12 +357,15 @@ class MockCreateTransferView: CreateTransferView {
     var isShowLoadingPerformed = false
     var isShowScheduleTransferPerformed = false
     var isUpdateTransferSectionPerformed = false
+    var isAreAllFieldsValidPerformed = false
+    var isUpdateFooterPerformed = false
 
     var stopOnError = false
 
     var loadCreateTransferExpectation: XCTestExpectation!
     var showErrorExpectation: XCTestExpectation!
     var showScheduleTransferExpectation: XCTestExpectation!
+    var updateFooterExpectation: XCTestExpectation!
 
     func hideLoading() {
         isHideLoadingPerformed = true
@@ -380,6 +408,16 @@ class MockCreateTransferView: CreateTransferView {
         isUpdateTransferSectionPerformed = true
     }
 
+    func areAllFieldsValid() -> Bool {
+        isAreAllFieldsValidPerformed = true
+        return true
+    }
+
+    func updateFooter(for section: CreateTransferController.FooterSection) {
+        isUpdateFooterPerformed = true
+        updateFooterExpectation?.fulfill()
+    }
+
     func resetStates() {
         isHideLoadingPerformed = false
         isNotifyTransferCreatedPerformed = false
@@ -389,10 +427,14 @@ class MockCreateTransferView: CreateTransferView {
         isShowLoadingPerformed = false
         isShowScheduleTransferPerformed = false
         isUpdateTransferSectionPerformed = false
+        isAreAllFieldsValidPerformed = false
+        isUpdateFooterPerformed = false
+
         stopOnError = false
 
         loadCreateTransferExpectation = XCTestExpectation(description: "loadCreateTransferExpectation")
         showErrorExpectation = XCTestExpectation(description: "showErrorExpectation")
         showScheduleTransferExpectation = XCTestExpectation(description: "showScheduleTransferExpectation")
+        updateFooterExpectation = XCTestExpectation(description: "updateFooterExpectation")
     }
 }
