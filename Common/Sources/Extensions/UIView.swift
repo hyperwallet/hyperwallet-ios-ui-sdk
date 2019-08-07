@@ -25,7 +25,25 @@ public extension UIView {
         if #available(iOS 11.0, *) {
             return self.safeAreaLayoutGuide.topAnchor
         } else {
-            return self.topAnchor
+            return self.layoutMarginsGuide.topAnchor
+        }
+    }
+
+    /// CenterY Anchor
+    var safeAreaCenterYAnchor: NSLayoutYAxisAnchor {
+        if #available(iOS 11.0, *) {
+            return self.safeAreaLayoutGuide.centerYAnchor
+        } else {
+            return self.layoutMarginsGuide.centerYAnchor
+        }
+    }
+
+    /// CenterX Anchor
+    var safeAreaCenterXAnchor: NSLayoutXAxisAnchor {
+        if #available(iOS 11.0, *) {
+            return self.safeAreaLayoutGuide.centerXAnchor
+        } else {
+            return self.layoutMarginsGuide.centerXAnchor
         }
     }
 
@@ -34,7 +52,7 @@ public extension UIView {
         if #available(iOS 11.0, *) {
             return self.safeAreaLayoutGuide.bottomAnchor
         } else {
-            return self.bottomAnchor
+            return self.layoutMarginsGuide.bottomAnchor
         }
     }
     /// Leading Anchor
@@ -42,7 +60,7 @@ public extension UIView {
         if #available(iOS 11.0, *) {
             return self.safeAreaLayoutGuide.leadingAnchor
         } else {
-            return self.leadingAnchor
+            return self.layoutMarginsGuide.leadingAnchor
         }
     }
 
@@ -51,7 +69,7 @@ public extension UIView {
         if #available(iOS 11.0, *) {
             return self.safeAreaLayoutGuide.trailingAnchor
         } else {
-            return self.trailingAnchor
+            return self.layoutMarginsGuide.trailingAnchor
         }
     }
 
@@ -165,5 +183,10 @@ public extension UIView {
                                                     constant: -8)
         NSLayoutConstraint.activate([buttonCenterXConstraint, verticalConstraint])
         return emptyListButton
+    }
+
+    /// Check if current view is `UITableViewCellSeparatorView`
+    func isSeparatorView() -> Bool {
+        return type(of: self).description() == "_UITableViewCellSeparatorView"
     }
 }
