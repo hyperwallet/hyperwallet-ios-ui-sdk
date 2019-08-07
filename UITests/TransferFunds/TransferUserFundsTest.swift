@@ -127,7 +127,6 @@ class TransferUserFundsTest: BaseTests {
         // Select Destination (CAD)
         let cadBankAccount = app.tables.element.children(matching: .cell).element(boundBy: 1)
         cadBankAccount.tap()
-//        XCUIApplication().statusBars.children(matching: .other).element.children(matching: .other).element(boundBy: 0).tap()
 
         XCTAssertEqual(transferFunds.transferCurrency.label, "CAD")
     }
