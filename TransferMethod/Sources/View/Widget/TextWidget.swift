@@ -22,12 +22,6 @@ import Common
 import HyperwalletSDK
 import UIKit
 
-final class PasteOnlyTextField: UITextField {
-    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-        return action == #selector(paste(_:))
-    }
-}
-
 /// Represents the text input widget.
 class TextWidget: AbstractWidget {
     var textField: PasteOnlyTextField = {

@@ -45,7 +45,7 @@ final class SelectionWidget: AbstractWidget {
         if let fieldName = field.name {
             labelField.accessibilityIdentifier = "\(fieldName)Value"
         }
-        
+
         addArrangedSubview(labelField)
         spacing = 16
         if field.isEditable ?? true {
