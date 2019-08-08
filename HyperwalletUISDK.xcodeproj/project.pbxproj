@@ -2204,6 +2204,83 @@
 			buildRules = (
 			);
 			dependencies = (
+				073BB98D22E63DB50053C24E /* PBXTargetDependency */,
+			);
+			name = TransferRepositoryTests;
+			productName = TransferRepositoryTests;
+			productReference = 073BB98A22E63DB50053C24E /* TransferRepositoryTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4A9A7BDE22E859E60022E573 /* Transfer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A9A7BF022E859E60022E573 /* Build configuration list for PBXNativeTarget "Transfer" */;
+			buildPhases = (
+				4A9A7BDA22E859E60022E573 /* Headers */,
+				4A9A7BDB22E859E60022E573 /* Sources */,
+				4A9A7BDC22E859E60022E573 /* Frameworks */,
+				4A9A7BDD22E859E60022E573 /* Resources */,
+				4A9A7BF922E85B390022E573 /* SwiftLint */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2BF9E5F422EF7F3300BB7DA5 /* PBXTargetDependency */,
+				4ADFD7E022F0FE2700CD0CB4 /* PBXTargetDependency */,
+				4ADFD7DE22F0FE1800CD0CB4 /* PBXTargetDependency */,
+			);
+			name = Transfer;
+			productName = Transfer;
+			productReference = 4A9A7BDF22E859E60022E573 /* Transfer.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		4A9A7BE622E859E60022E573 /* TransferTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A9A7BF422E859E60022E573 /* Build configuration list for PBXNativeTarget "TransferTests" */;
+			buildPhases = (
+				4A9A7BE322E859E60022E573 /* Sources */,
+				4A9A7BE422E859E60022E573 /* Frameworks */,
+				4A9A7BE522E859E60022E573 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4A9A7BEA22E859E60022E573 /* PBXTargetDependency */,
+			);
+			name = TransferTests;
+			productName = TransferTests;
+			productReference = 4A9A7BE722E859E60022E573 /* TransferTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4AE6B6BF22D605B20009DEFE /* ReceiptRepository */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4AE6B6D122D605B20009DEFE /* Build configuration list for PBXNativeTarget "ReceiptRepository" */;
+			buildPhases = (
+				4AE6B6BB22D605B20009DEFE /* Headers */,
+				4AE6B6BC22D605B20009DEFE /* Sources */,
+				4AE6B6BD22D605B20009DEFE /* Frameworks */,
+				4AE6B6BE22D605B20009DEFE /* Resources */,
+				4A012F5022D62EAA008C1D35 /* Swift Lint */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ReceiptRepository;
+			productName = ReceiptRepository;
+			productReference = 4AE6B6C022D605B20009DEFE /* ReceiptRepository.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		4AE6B6C722D605B20009DEFE /* ReceiptRepositoryTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4AE6B6D522D605B20009DEFE /* Build configuration list for PBXNativeTarget "ReceiptRepositoryTests" */;
+			buildPhases = (
+				4AE6B6C422D605B20009DEFE /* Sources */,
+				4AE6B6C522D605B20009DEFE /* Frameworks */,
+				4AE6B6C622D605B20009DEFE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
 				4AE6B6CB22D605B20009DEFE /* PBXTargetDependency */,
 			);
 			name = ReceiptRepositoryTests;
