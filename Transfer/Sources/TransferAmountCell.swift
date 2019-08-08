@@ -59,7 +59,7 @@ final class TransferAmountCell: UITableViewCell {
         detailTextLabel?.accessibilityIdentifier = "transferAmountCurrencyLabel"
         contentView.addSubview(amountTextField)
 
-        let constraints = [
+      let constraints = [
             amountTextField.safeAreaCenterYAnchor
                 .constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor),
             amountTextField.safeAreaTrailingAnchor
