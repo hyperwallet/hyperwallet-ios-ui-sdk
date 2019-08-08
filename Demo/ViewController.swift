@@ -147,58 +147,46 @@ class ViewController: UITableViewController {
         }
         switch example {
         case .listTransferMethod:
-            let viewController = HyperwalletUI.shared.listTransferMethodController()
-
-            navigationController?.pushViewController(viewController, animated: true)
+            let coordinator = HyperwalletUI.shared.listTransferMethodCoordinator(parentController: self)
+            coordinator.navigate()
 
         case .selectTransferMethod:
-            let viewController = HyperwalletUI.shared.selectTransferMethodTypeController()
-            viewController.createTransferMethodHandler = {
-                (transferMethod: HyperwalletTransferMethod) -> Void in
-                self.createTransferMethodHandler(transferMethod: transferMethod)
-            }
-
-            navigationController?.pushViewController(viewController, animated: true)
+            let coordinator = HyperwalletUI.shared.selectTransferMethodTypeCoordinator(parentController: self)
+            coordinator.navigate()
 
         case .addTransferMethod:
             if let country = ProcessInfo.processInfo.environment["COUNTRY"],
                 let currency = ProcessInfo.processInfo.environment["CURRENCY"],
                 let accountType = ProcessInfo.processInfo.environment["ACCOUNT_TYPE"],
                 let profileType = ProcessInfo.processInfo.environment["PROFILE_TYPE"] {
-                let viewController = HyperwalletUI.shared.addTransferMethodController(
-                    country, currency, profileType, accountType)
-
-                navigationController?.pushViewController(viewController, animated: true)
+                let coordinator = HyperwalletUI.shared
+                    .addTransferMethodCoordinator(country, currency, profileType, accountType, parentController: self)
+                coordinator.navigate()
             } else {
-                let viewController = HyperwalletUI.shared.addTransferMethodController(
-                    "US", "USD", "INDIVIDUAL", "BANK_ACCOUNT")
-
-                navigationController?.pushViewController(viewController, animated: true)
+                let coordinator = HyperwalletUI.shared.addTransferMethodCoordinator(
+                    "US", "USD", "INDIVIDUAL", "BANK_ACCOUNT", parentController: self)
+                coordinator.navigate()
             }
 
         case .userReceipts:
-            let viewController = HyperwalletUI.shared.listUserReceiptController()
-
-            navigationController?.pushViewController(viewController, animated: true)
+            let coordinator = HyperwalletUI.shared.listUserReceiptCoordinator(parentController: self)
+            coordinator.navigate()
 
         case .prepaidCardReceipts:
             let prepaidCardToken = Bundle.main.infoDictionary!["PREPAID_CARD_TOKEN"] as! String
-            let viewController = HyperwalletUI.shared.listPrepaidCardReceiptController(
-                prepaidCardToken)
-
-            navigationController?.pushViewController(viewController, animated: true)
+            let coordinator = HyperwalletUI.shared
+                .listPrepaidCardReceiptCoordinator(parentController: self, prepaidCardToken)
+            coordinator.navigate()
 
         case .transferFunds:
             let clientTransferId = UUID().uuidString.lowercased()
-            let viewController = HyperwalletUI.shared
-                .createTransferFromUserController(clientTransferId: clientTransferId)
-
-            navigationController?.pushViewController(viewController, animated: true)
+            let coordinator = HyperwalletUI.shared
+                .createTransferFromUserCoordinator(clientTransferId: clientTransferId, parentController: self)
+             coordinator.navigate()
 
         default:
-            let viewController = HyperwalletUI.shared.listTransferMethodController()
-
-            navigationController?.pushViewController(viewController, animated: true)
+            let coordinator = HyperwalletUI.shared.listTransferMethodCoordinator(parentController: self)
+            coordinator.navigate()
         }
     }
 

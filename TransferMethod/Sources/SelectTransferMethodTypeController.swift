@@ -28,30 +28,23 @@ public final class SelectTransferMethodTypeController: UITableViewController {
     // MARK: - Outlets
     private var countryCurrencyTableView: UITableView!
 
-    // MARK: - Properties
-    /// The completion handler will be performed after a new transfer method has been created.
-    public var createTransferMethodHandler: ((HyperwalletTransferMethod) -> Void)?
     private var spinnerView: SpinnerView?
     private var presenter: SelectTransferMethodTypePresenter!
     private var countryCurrencyView: CountryCurrencyTableView!
     private var forceUpdate: Bool = false
 
-    init(forceUpdate: Bool) {
-        self.forceUpdate = forceUpdate
-        super.init(style: .plain)
+    private func initializeData() {
+        if let forceUpdate = initializationData?[InitializationDataField.forceUpdateData] as? Bool {
+            self.forceUpdate = forceUpdate
+        }
     }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-
     // MARK: - Lifecycle
     override public func viewDidLoad() {
         super.viewDidLoad()
+        initializeData()
         title = "add_account_title".localized()
         largeTitle()
         setViewBackgroundColor()
-
         navigationItem.backBarButtonItem = UIBarButtonItem.back
         presenter = SelectTransferMethodTypePresenter(self)
         setupCountryCurrencyTableView()
@@ -62,6 +55,7 @@ public final class SelectTransferMethodTypeController: UITableViewController {
 
     // MARK: - Setup Layout
     private func setupTransferMethodTypeTableView() {
+        tableView = UITableView(frame: .zero, style: .plain)
         tableView.accessibilityIdentifier = "selectTransferMethodTypeTable"
         tableView.register(SelectTransferMethodTypeCell.self,
                            forCellReuseIdentifier: SelectTransferMethodTypeCell.reuseIdentifier)
@@ -135,14 +129,13 @@ extension SelectTransferMethodTypeController: SelectTransferMethodTypeView {
                                                currency: String,
                                                profileType: String,
                                                transferMethodTypeCode: String) {
-        let addTransferMethodController = HyperwalletUI.shared
-            .addTransferMethodController(country, currency, profileType, transferMethodTypeCode, forceUpdate)
-
-        addTransferMethodController.createTransferMethodHandler = { (transferMethod) -> Void in
-            self.createTransferMethodHandler?(transferMethod)
-        }
-
-        navigationController?.pushViewController(addTransferMethodController, animated: true)
+        var initializationData = [InitializationDataField: Any]()
+        initializationData[InitializationDataField.country]  = country
+        initializationData[InitializationDataField.currency]  = currency
+        initializationData[InitializationDataField.profileType]  = profileType
+        initializationData[InitializationDataField.transferMethodTypeCode]  = transferMethodTypeCode
+        initializationData[InitializationDataField.forceUpdateData]  = true
+        coordinator?.navigateToNextPage(initializationData: initializationData)
     }
 
     func showLoading() {

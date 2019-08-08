@@ -22,18 +22,34 @@ import Common
 
 /// The HyperwalletUI extension
 public extension HyperwalletUI {
-    /// Create transfer funds
+    /// Lists the user's transfer methods (bank account, bank card, PayPal account, prepaid card, paper check).
     ///
-    /// - Returns: An instance of `CreateTransferController`
-    func createTransferFromUserController(clientTransferId: String) -> CreateTransferController {
-        return CreateTransferController(clientTransferId: clientTransferId, sourceToken: nil)
+    /// The user can deactivate and add a new transfer method.
+    ///
+    /// - Returns: An instance of `CreateTransferCoordinator`
+    func createTransferFromUserCoordinator(clientTransferId: String,
+                                           parentController: UIViewController) -> CreateTransferCoordinator {
+        let coordinator = CreateTransferCoordinator()
+        coordinator.start(initializationData: [InitializationDataField.clientTransferId: clientTransferId],
+                          parentController: parentController)
+        return coordinator
     }
 
-    /// Create transfer funds
+    /// Lists the user's transfer methods (bank account, bank card, PayPal account, prepaid card, paper check).
     ///
-    /// - Returns: An instance of `CreateTransferController`
-    func createTransferFromPrepaidCardController(clientTransferId: String, prepaidCardToken: String)
-        -> CreateTransferController {
-            return CreateTransferController(clientTransferId: clientTransferId, sourceToken: prepaidCardToken)
+    /// The user can deactivate and add a new transfer method.
+    ///
+    /// - Returns: An instance of `CreateTransferCoordinator`
+    func createTransferFromPrepaidCardCoordinator(clientTransferId: String,
+                                                  sourceToken: String,
+                                                  parentController: UIViewController)
+        -> CreateTransferCoordinator {
+            let coordinator = CreateTransferCoordinator()
+            coordinator.start(initializationData: [
+                InitializationDataField.clientTransferId: clientTransferId,
+                InitializationDataField.sourceToken: sourceToken
+            ],
+                              parentController: parentController)
+            return coordinator
     }
 }

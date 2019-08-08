@@ -53,3 +53,38 @@ public extension UIViewController {
         view.endEditing(true)
     }
 }
+
+extension UIViewController: HyperwalletFlowDelegate {
+    @objc
+    open func didFlowComplete(with response: Any) {
+    }
+    struct Holder {
+        static var hyperwalletFlowDelegate: HyperwalletFlowDelegate?
+        static var coordinator: HyperwalletCoordinator?
+        static var initializationData: [InitializationDataField: Any]?
+    }
+    public weak var hyperwalletFlowDelegate: HyperwalletFlowDelegate? {
+        get {
+            return Holder.hyperwalletFlowDelegate
+        }
+        set(newValue) {
+            Holder.hyperwalletFlowDelegate = newValue
+        }
+    }
+    public var coordinator: HyperwalletCoordinator? {
+        get {
+            return Holder.coordinator
+        }
+        set(newValue) {
+            Holder.coordinator = newValue
+        }
+    }
+    public var initializationData: [InitializationDataField: Any]? {
+        get {
+            return Holder.initializationData
+        }
+        set(newValue) {
+            Holder.initializationData = newValue
+        }
+    }
+}

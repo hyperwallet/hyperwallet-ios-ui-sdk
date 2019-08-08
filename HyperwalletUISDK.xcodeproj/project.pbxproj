@@ -121,6 +121,12 @@
 		98F63E6E2284AD370090101D /* PayPalAccountDuplicateResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F63E6C2284AD330090101D /* PayPalAccountDuplicateResponse.json */; };
 		98F63E6F2284AD9B0090101D /* AddTransferMethodPayPalAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F63E64228485930090101D /* AddTransferMethodPayPalAccountTests.swift */; };
 		98F63E722284B4AF0090101D /* TransferMethodConfigurationPayPalAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F63E712284B4AF0090101D /* TransferMethodConfigurationPayPalAccountResponse.json */; };
+		A65312CD22FC037800A83D30 /* HyperwalletCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65312CA22FC037800A83D30 /* HyperwalletCoordinator.swift */; };
+		A65312CE22FC037800A83D30 /* InitializationDataField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65312CB22FC037800A83D30 /* InitializationDataField.swift */; };
+		A65312CF22FC037800A83D30 /* HyperwalletFlowDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65312CC22FC037800A83D30 /* HyperwalletFlowDelegate.swift */; };
+		A65312D222FC046200A83D30 /* ReceiptCoordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65312D122FC046200A83D30 /* ReceiptCoordinators.swift */; };
+		A65312D522FC055300A83D30 /* TransferMethodCoordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65312D422FC055300A83D30 /* TransferMethodCoordinators.swift */; };
+		A65312D822FC293C00A83D30 /* TransferCoordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65312D722FC293C00A83D30 /* TransferCoordinators.swift */; };
 		C345BFC22289E6EC0049E67B /* XCUIElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C345BFC02289E6EC0049E67B /* XCUIElement.swift */; };
 		C358A9A52272644000E5AE47 /* AddTransferMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = C358A9A22272644000E5AE47 /* AddTransferMethod.swift */; };
 		C358A9A62272644000E5AE47 /* ListTransferMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = C358A9A32272644000E5AE47 /* ListTransferMethods.swift */; };
@@ -717,6 +723,12 @@
 		98F63E6C2284AD330090101D /* PayPalAccountDuplicateResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PayPalAccountDuplicateResponse.json; sourceTree = "<group>"; };
 		98F63E712284B4AF0090101D /* TransferMethodConfigurationPayPalAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TransferMethodConfigurationPayPalAccountResponse.json; sourceTree = "<group>"; };
 		98F63E732284EE890090101D /* PayPalAccountResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PayPalAccountResponse.json; sourceTree = "<group>"; };
+		A65312CA22FC037800A83D30 /* HyperwalletCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyperwalletCoordinator.swift; sourceTree = "<group>"; };
+		A65312CB22FC037800A83D30 /* InitializationDataField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitializationDataField.swift; sourceTree = "<group>"; };
+		A65312CC22FC037800A83D30 /* HyperwalletFlowDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyperwalletFlowDelegate.swift; sourceTree = "<group>"; };
+		A65312D122FC046200A83D30 /* ReceiptCoordinators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiptCoordinators.swift; sourceTree = "<group>"; };
+		A65312D422FC055300A83D30 /* TransferMethodCoordinators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferMethodCoordinators.swift; sourceTree = "<group>"; };
+		A65312D722FC293C00A83D30 /* TransferCoordinators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferCoordinators.swift; sourceTree = "<group>"; };
 		C345BFC02289E6EC0049E67B /* XCUIElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCUIElement.swift; sourceTree = "<group>"; };
 		C358A9A22272644000E5AE47 /* AddTransferMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethod.swift; sourceTree = "<group>"; };
 		C358A9A32272644000E5AE47 /* ListTransferMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTransferMethods.swift; sourceTree = "<group>"; };
@@ -1213,6 +1225,7 @@
 		4A9A7BF822E85A090022E573 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				A65312D622FC291600A83D30 /* Coordinators */,
 				4A9A7C0E22E87E500022E573 /* Extensions */,
 				4AF4DA4122FAFFA000484F49 /* View */,
 				4A9A7C0222E86F580022E573 /* CreateTransferController.swift */,
@@ -1382,6 +1395,30 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
+		A65312D022FC044300A83D30 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				A65312D122FC046200A83D30 /* ReceiptCoordinators.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		A65312D322FC053700A83D30 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				A65312D422FC055300A83D30 /* TransferMethodCoordinators.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		A65312D622FC291600A83D30 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				A65312D722FC293C00A83D30 /* TransferCoordinators.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
 		C358A9A12272644000E5AE47 /* TransferMethod */ = {
 			isa = PBXGroup;
 			children = (
@@ -1528,6 +1565,9 @@
 				DB2EB66E22617AB100FBEB3D /* Resources */,
 				DBCA3849225E8BAA00CD4137 /* View */,
 				DB551F4B22E1316400DD65C2 /* Common.h */,
+				A65312CA22FC037800A83D30 /* HyperwalletCoordinator.swift */,
+				A65312CC22FC037800A83D30 /* HyperwalletFlowDelegate.swift */,
+				A65312CB22FC037800A83D30 /* InitializationDataField.swift */,
 				078B45802273A441005B0248 /* HyperwalletUI.swift */,
 				DB551F4C22E1316400DD65C2 /* Info.plist */,
 			);
@@ -1555,6 +1595,7 @@
 		DB551FA822E1409700DD65C2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				A65312D322FC053700A83D30 /* Coordinators */,
 				DB551FC122E1418B00DD65C2 /* Extensions */,
 				DB551FC322E1419A00DD65C2 /* View */,
 				DBCA3822225E8BA900CD4137 /* AddTransferMethodPresenter.swift */,
@@ -1653,6 +1694,7 @@
 		DB99C2C922E220C200E45185 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				A65312D022FC044300A83D30 /* Coordinators */,
 				DB5295FA22E2336700657F50 /* Extensions */,
 				988547C92294B829007B312C /* ListReceiptController.swift */,
 				988547CB2294B879007B312C /* ListReceiptPresenter.swift */,
@@ -2960,6 +3002,7 @@
 				4A9A7C0522E86F580022E573 /* TransferButtonCell.swift in Sources */,
 				4A9A7C0922E86F580022E573 /* TransferAmountCell.swift in Sources */,
 				4A9A7C0622E86F580022E573 /* TransferNotesCell.swift in Sources */,
+				A65312D822FC293C00A83D30 /* TransferCoordinators.swift in Sources */,
 				4AB37CFC22EAF087005C1078 /* TransferAllFundsCell.swift in Sources */,
 				077C337722E8CCB0000314CD /* ScheduleTransferSectionData.swift in Sources */,
 				077C337822E8CCB0000314CD /* ScheduleTransferPresenter.swift in Sources */,
@@ -3087,6 +3130,8 @@
 				DBC199DF22E29CD0004447DD /* Date.swift in Sources */,
 				DBC199E022E29CD0004447DD /* HyperwalletCountry.swift in Sources */,
 				DBC199E122E29CD0004447DD /* HyperwalletCurrency.swift in Sources */,
+				A65312CE22FC037800A83D30 /* InitializationDataField.swift in Sources */,
+				A65312CF22FC037800A83D30 /* HyperwalletFlowDelegate.swift in Sources */,
 				DBC199E222E29CD0004447DD /* HyperwalletFee.swift in Sources */,
 				4AC7808822EB360B00AB73FD /* PasteOnlyTextField.swift in Sources */,
 				DBC199E322E29CD0004447DD /* HyperwalletTransferMethod.swift in Sources */,
@@ -3097,6 +3142,7 @@
 				DBC199E722E29CD0004447DD /* String.swift in Sources */,
 				DBC199E822E29CD0004447DD /* UIAlertAction.swift in Sources */,
 				DBC199E922E29CD0004447DD /* UIBarButtonItem.swift in Sources */,
+				A65312CD22FC037800A83D30 /* HyperwalletCoordinator.swift in Sources */,
 				DBC199EA22E29CD0004447DD /* UIColor.swift in Sources */,
 				DBC199EB22E29CD0004447DD /* UIFont.swift in Sources */,
 				DBC199EC22E29CD0004447DD /* UIImage.swift in Sources */,
@@ -3122,6 +3168,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A65312D522FC055300A83D30 /* TransferMethodCoordinators.swift in Sources */,
 				DB551FCD22E1421E00DD65C2 /* NumberWidget.swift in Sources */,
 				DB551FDD22E1424200DD65C2 /* SelectTransferMethodTypeController.swift in Sources */,
 				DB551FCC22E1421E00DD65C2 /* ExpiryDatePickerView.swift in Sources */,
@@ -3176,6 +3223,7 @@
 				DB99C2E522E22ADF00E45185 /* ReceiptDetailSectionData.swift in Sources */,
 				DB99C2E322E22ADF00E45185 /* ReceiptDetailPresenter.swift in Sources */,
 				DB99C2E922E22ADF00E45185 /* ListReceiptController.swift in Sources */,
+				A65312D222FC046200A83D30 /* ReceiptCoordinators.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
