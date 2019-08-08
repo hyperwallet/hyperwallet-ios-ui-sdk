@@ -1,0 +1,16 @@
+{
+  "token": "sts-9390687a",
+  "createdOn": "2019-07-18T20:44:17",
+  "transition": "SCHEDULED",
+  "fromStatus": "QUOTED",
+  "toStatus": "SCHEDULED",
+  "notes": "to SCHEDULED",
+  "links": [
+    {
+      "params": {
+        "rel": "self"
+      },
+      "href": "https://localhost.com/rest/v3/transfers/trf-e1234/status-transitions/sts-9390687a"
+    }
+  ]
+}
