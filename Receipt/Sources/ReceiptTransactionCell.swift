@@ -130,12 +130,11 @@ final class ReceiptTransactionCell: UITableViewCell {
 
 extension ReceiptTransactionCell {
     func configure(_ receipt: HyperwalletReceipt?) {
-        guard
-            let receipt = receipt,
+        guard let receipt = receipt,
             let entry = receipt.entry?.rawValue,
             let createdOn = receipt.createdOn,
             let amount = receipt.amount else {
-            return
+                return
         }
         let formattedCreatedOn = ISO8601DateFormatter.ignoreTimeZone
             .date(from: createdOn)!

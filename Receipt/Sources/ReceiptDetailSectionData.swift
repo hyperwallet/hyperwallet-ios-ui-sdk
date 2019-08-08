@@ -63,8 +63,7 @@ struct ReceiptDetailSectionDetailData: ReceiptDetailSectionData {
                                          field: "journalId"))
         }
 
-        if
-            let createdOn = receipt.createdOn,
+        if let createdOn = receipt.createdOn,
             let dateTime = ISO8601DateFormatter.ignoreTimeZone.date(from: createdOn)?.format(for: .dateTime) {
             rows.append(ReceiptDetailRow(title: "receipt_details_date".localized(),
                                          value: dateTime,

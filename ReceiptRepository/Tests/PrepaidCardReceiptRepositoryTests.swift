@@ -23,14 +23,12 @@ import XCTest
 
 class PrepaidCardReceiptRepositoryTests: XCTestCase {
     private lazy var listPrepaidCardReceiptPayload = HyperwalletTestHelper.getDataFromJson("PrepaidCardReceiptResponse")
-    private var factory: ReceiptRepositoryFactory!
     private var prepaidCardReceiptRepository: PrepaidCardReceiptRepository!
     private var receiptExpectation: XCTestExpectation!
 
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
-        factory = ReceiptRepositoryFactory.shared
-        prepaidCardReceiptRepository = factory.prepaidCardReceiptRepository()
+        prepaidCardReceiptRepository = ReceiptRepositoryFactory.shared.prepaidCardReceiptRepository()
         receiptExpectation = self.expectation(description: "load prepaid card receipts")
     }
 

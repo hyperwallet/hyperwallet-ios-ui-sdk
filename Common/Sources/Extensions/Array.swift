@@ -24,4 +24,16 @@ public extension Array {
     var isNotEmpty: Bool {
         return !self.isEmpty
     }
+
+    /// Check if the current index is the last element in this array
+    func isLast(index: Int) -> Bool {
+        return index == endIndex - 1
+    }
+
+    /// A safe way to check if element exists in this array
+    ///
+    /// - Parameter index: the index of an element
+    subscript(safe index: Index) -> Element? {
+        return indices.contains(index) ? self[index] : nil
+    }
 }
