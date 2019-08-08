@@ -28,7 +28,6 @@ protocol CreateTransferView: class {
     typealias SelectItemHandler = (_ value: HyperwalletTransferMethod) -> Void
     typealias MarkCellHandler = (_ value: HyperwalletTransferMethod) -> Bool
 
-    func areAllFieldsValid() -> Bool
     func hideLoading()
     func notifyTransferCreated(_ transfer: HyperwalletTransfer)
     func showCreateTransfer()
@@ -176,19 +175,18 @@ final class CreateTransferPresenter {
                     strongSelf.view.showCreateTransfer()
                 }
             }
+        } else {
+            view.hideLoading()
+            view.showCreateTransfer()
         }
     }
 
     // MARK: - Create Transfer Button Tapped
     func createTransfer() {
-        resetErrorMessagesForAllSections()
-        if !transferAllFundsIsOn && amount?.isEmpty ?? true {
-            let error = HyperwalletError(message: "transfer_assert_enter_amount_or_transfer_all".localized(),
-                                         code: "EMPTY_AMOUNT",
-                                         fieldName: "amount")
-            updateFooterContent([error])
+        guard areAllFieldsValid() else {
             return
         }
+
         if let sourceToken = sourceToken,
             let destinationToken = selectedTransferMethod?.token,
             let destinationCurrency = selectedTransferMethod?.transferMethodCurrency {
@@ -269,6 +267,27 @@ final class CreateTransferPresenter {
         CreateTransferController.FooterSection.allCases.forEach({ view.updateFooter(for: $0) })
     }
 
+    private func areAllFieldsValid() -> Bool {
+        resetErrorMessagesForAllSections()
+        var errors = [HyperwalletError]()
+        // verify empty Amount
+        if !transferAllFundsIsOn && amount?.isEmpty ?? true {
+            let error = HyperwalletError(message: "transfer_assert_enter_amount_or_transfer_all".localized(),
+                                         code: "EMPTY_AMOUNT",
+                                         fieldName: "amount")
+            errors.append(error)
+        }
+        // verify selected Transfer Method
+        if selectedTransferMethod == nil {
+            let error = HyperwalletError(message: "transfer_assert_add_a_transfer_method_first".localized(),
+                                         code: "EMPTY_TRANSFER_METHOD",
+                                         fieldName: "destination")
+            errors.append(error)
+        }
+        updateFooterContent(errors)
+        return sectionData.allSatisfy({ $0.errorMessage?.isEmpty ?? true })
+    }
+
     private func errorHandler(for error: HyperwalletErrorType, _ nonBusinessErrorHandler: @escaping () -> Void) {
         switch error.group {
         case .business:
@@ -293,6 +312,11 @@ final class CreateTransferPresenter {
                 continue
             }
             switch fieldName {
+            case "destination":
+                if let sectionData = sectionData.first(where: { $0.createTransferSectionHeader == .destination }) {
+                    sectionData.errorMessage = error.message
+                    view.updateFooter(for: .destination)
+                }
             case "amount":
                 if let sectionData = sectionData.first(where: { $0.createTransferSectionHeader == .transfer }) {
                     sectionData.errorMessage = error.message

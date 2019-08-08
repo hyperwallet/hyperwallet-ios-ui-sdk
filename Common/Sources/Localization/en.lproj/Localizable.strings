@@ -214,6 +214,7 @@
 "transfer_section_header_summary" = "SUMMARY";
 "transfer_button_confirm" = "Confirm";
 "transfer_assert_enter_amount_or_transfer_all" = "Enter amount or select tranfer all funds";
+"transfer_assert_add_a_transfer_method_first" = "Add a transfer method first";
 
 // List of countries
 // Source: https://datahub.io/core/country-list#data

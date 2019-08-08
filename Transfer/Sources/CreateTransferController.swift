@@ -225,10 +225,6 @@ extension CreateTransferController {
 
 // MARK: - CreateTransferView implementation
 extension CreateTransferController: CreateTransferView {
-    func areAllFieldsValid() -> Bool {
-        return presenter.sectionData.allSatisfy({ $0.errorMessage?.isEmpty ?? true })
-    }
-
     func updateFooter(for section: FooterSection) {
         UIView.setAnimationsEnabled(false)
         tableView.beginUpdates()
