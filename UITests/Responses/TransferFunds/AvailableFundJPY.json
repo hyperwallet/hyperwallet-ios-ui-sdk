@@ -1,0 +1,24 @@
+{
+    "token": "trf-token",
+    "status": "QUOTED",
+    "createdOn": "2019-07-24T18:49:41",
+    "clientTransferId": "6712348070814",
+    "sourceToken": "usr-token",
+    "sourceAmount": "15100",
+    "sourceCurrency": "JPY",
+    "destinationToken": "trm-token",
+    "destinationAmount": "15000",
+    "destinationFeeAmount": "100",
+    "destinationCurrency": "JPY",
+    "notes": "Partial-Balance Transfer888",
+    "memo": "TransferClientId56387",
+    "expiresOn": "2019-07-24T18:51:41",
+    "links": [
+        {
+            "params": {
+                "rel": "self"
+            },
+            "href": "https://localhost.com/rest/v3/transfers/trf-token"
+        }
+    ]
+}
