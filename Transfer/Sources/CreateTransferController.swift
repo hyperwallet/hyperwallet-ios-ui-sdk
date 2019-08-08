@@ -27,6 +27,10 @@ import UIKit
 /// Each transfer will be represented by an auto-generated, non-editable token that can be used
 /// to retrieve the transfer resource.
 public final class CreateTransferController: UITableViewController {
+    enum FooterSection: Int, CaseIterable {
+        case destination, transfer, notes, button
+    }
+
     private var spinnerView: SpinnerView?
     private var presenter: CreateTransferPresenter!
     private let registeredCells: [(type: AnyClass, id: String)] = [
@@ -68,6 +72,8 @@ public final class CreateTransferController: UITableViewController {
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)
         }
+        tableView.register(TrasferTableViewFooterView.self,
+                           forHeaderFooterViewReuseIdentifier: TrasferTableViewFooterView.reuseIdentifier)
     }
 }
 
@@ -89,11 +95,47 @@ extension CreateTransferController {
         return presenter.sectionData[section].title
     }
 
-    override public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        if let transferSection = presenter.sectionData[section] as? CreateTransferSectionTransferData {
-            return transferSection.footer
+    override public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let attribitedText = getAttributedFooterText(for: section)
+        if attribitedText == nil {
+            return nil
         }
-        return nil
+        guard let view = tableView.dequeueReusableHeaderFooterView(
+            withIdentifier: TrasferTableViewFooterView.reuseIdentifier) as? TrasferTableViewFooterView else {
+                return nil
+        }
+        view.footerLabel.attributedText = attribitedText
+        return view
+    }
+
+    private func getAttributedFooterText(for section: Int) -> NSAttributedString? {
+        let sectionData = presenter.sectionData[section]
+        var attribitedText: NSAttributedString?
+        if  let transferSectionData = sectionData as? CreateTransferSectionTransferData {
+            attribitedText = format(footer: transferSectionData.footer, error: transferSectionData.errorMessage)
+        } else {
+            attribitedText = format(error: sectionData.errorMessage)
+        }
+        return attribitedText
+    }
+
+    private func format(footer: String? = nil, error: String? = nil) -> NSAttributedString? {
+        var attributedText: NSMutableAttributedString! = nil
+        if let footer = footer {
+            attributedText = NSMutableAttributedString()
+            attributedText.appendParagraph(value: footer,
+                                           font: Theme.Label.footnoteFont,
+                                           color: Theme.Label.subTitleColor)
+        }
+        if let error = error {
+            if attributedText == nil {
+                attributedText = NSMutableAttributedString()
+            }
+            attributedText.appendParagraph(value: error,
+                                           font: Theme.Label.footnoteFont,
+                                           color: Theme.Label.errorColor)
+        }
+        return attributedText
     }
 
     private func getCellConfiguration(_ indexPath: IndexPath) -> UITableViewCell {
@@ -183,8 +225,24 @@ extension CreateTransferController {
 
 // MARK: - CreateTransferView implementation
 extension CreateTransferController: CreateTransferView {
+    func areAllFieldsValid() -> Bool {
+        return presenter.sectionData.allSatisfy({ $0.errorMessage?.isEmpty ?? true })
+    }
+
+    func updateFooter(for section: FooterSection) {
+        UIView.setAnimationsEnabled(false)
+        tableView.beginUpdates()
+        if let footerView = tableView.footerView(forSection: section.rawValue) as? TrasferTableViewFooterView {
+            footerView.footerLabel.attributedText = getAttributedFooterText(for: section.rawValue)
+        } else {
+            tableView.reloadSections(IndexSet(integer: section.rawValue), with: .none)
+        }
+        tableView.endUpdates()
+        UIView.setAnimationsEnabled(true)
+    }
+
     func updateTransferSection() {
-        tableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .none)
+        tableView.reloadRows(at: [IndexPath(row: 0, section: FooterSection.transfer.rawValue)], with: .none)
     }
 
     func notifyTransferCreated(_ transfer: HyperwalletTransfer) {

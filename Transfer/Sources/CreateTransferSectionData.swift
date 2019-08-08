@@ -26,9 +26,10 @@ enum CreateTransferSectionHeader: String {
     case button, destination, notes, transfer
 }
 
-protocol CreateTransferSectionData {
+protocol CreateTransferSectionData: class {
     var cellIdentifiers: [String] { get }
     var createTransferSectionHeader: CreateTransferSectionHeader { get }
+    var errorMessage: String? { get set }
     var rowCount: Int { get }
     var title: String? { get }
 }
@@ -40,12 +41,13 @@ extension CreateTransferSectionData {
             "transfer_section_header_\(createTransferSectionHeader.rawValue)".localized() : nil }
 }
 
-struct CreateTransferSectionDestinationData: CreateTransferSectionData {
+final class CreateTransferSectionDestinationData: CreateTransferSectionData {
     var createTransferSectionHeader: CreateTransferSectionHeader { return .destination }
     var cellIdentifiers: [String] { return [TransferDestinationCell.reuseIdentifier] }
+    var errorMessage: String?
 }
 
-struct CreateTransferSectionTransferData: CreateTransferSectionData {
+final class CreateTransferSectionTransferData: CreateTransferSectionData {
     var createTransferSectionHeader: CreateTransferSectionHeader { return .transfer }
     var rowCount: Int { return 2 }
     var cellIdentifiers: [String] { return [
@@ -53,6 +55,7 @@ struct CreateTransferSectionTransferData: CreateTransferSectionData {
         TransferAllFundsCell.reuseIdentifier
     ]}
     var footer: String?
+    var errorMessage: String?
 
     init(availableBalance: String?) {
         guard let availableBalance = availableBalance, availableBalance.formatToDouble() != 0 else {
@@ -63,12 +66,14 @@ struct CreateTransferSectionTransferData: CreateTransferSectionData {
     }
 }
 
-struct CreateTransferSectionButtonData: CreateTransferSectionData {
+final class CreateTransferSectionButtonData: CreateTransferSectionData {
     var createTransferSectionHeader: CreateTransferSectionHeader { return .button }
     var cellIdentifiers: [String] { return [TransferButtonCell.reuseIdentifier] }
+    var errorMessage: String?
 }
 
-struct CreateTransferSectionNotesData: CreateTransferSectionData {
+final class CreateTransferSectionNotesData: CreateTransferSectionData {
     var createTransferSectionHeader: CreateTransferSectionHeader { return .notes }
     var cellIdentifiers: [String] { return [TransferNotesCell.reuseIdentifier] }
+    var errorMessage: String?
 }
