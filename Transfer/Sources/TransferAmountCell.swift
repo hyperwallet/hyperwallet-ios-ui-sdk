@@ -58,14 +58,17 @@ final class TransferAmountCell: UITableViewCell {
         textLabel?.accessibilityIdentifier = "transferAmountTitleLabel"
         detailTextLabel?.accessibilityIdentifier = "transferAmountCurrencyLabel"
         contentView.addSubview(amountTextField)
-        amountTextField.safeAreaCenterYAnchor
-            .constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor).isActive = true
-        amountTextField.safeAreaTrailingAnchor
-            .constraint(equalTo: detailTextLabel!.layoutMarginsGuide.leadingAnchor, constant: -15).isActive = true
-        let amountTextFieldLeadingConstraint = amountTextField.safeAreaLeadingAnchor
-            .constraint(equalTo: textLabel!.layoutMarginsGuide.trailingAnchor, constant: 15)
-        amountTextFieldLeadingConstraint.priority = UILayoutPriority(999)
-        amountTextFieldLeadingConstraint.isActive = true
+
+        let constraints = [
+            amountTextField.safeAreaCenterYAnchor
+                .constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor),
+            amountTextField.safeAreaTrailingAnchor
+                .constraint(equalTo: detailTextLabel!.layoutMarginsGuide.leadingAnchor, constant: -15),
+            amountTextField.safeAreaLeadingAnchor
+                .constraint(equalTo: textLabel!.layoutMarginsGuide.trailingAnchor, constant: 15)
+        ]
+        constraints.forEach { $0.priority = UILayoutPriority(999) }
+        NSLayoutConstraint.activate(constraints)
     }
 
     func configure(amount: String?, currency: String?, isEnabled: Bool, _ handler: @escaping EnteredAmountHandler) {
