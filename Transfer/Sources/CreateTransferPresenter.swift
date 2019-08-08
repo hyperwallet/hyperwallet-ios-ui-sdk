@@ -271,7 +271,7 @@ final class CreateTransferPresenter {
         resetErrorMessagesForAllSections()
         var errors = [HyperwalletError]()
         // verify empty Amount
-        if !transferAllFundsIsOn && amount?.isEmpty ?? true {
+        if amount?.isEmpty ?? true {
             let error = HyperwalletError(message: "transfer_assert_enter_amount_or_transfer_all".localized(),
                                          code: "EMPTY_AMOUNT",
                                          fieldName: "amount")
