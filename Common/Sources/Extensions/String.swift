@@ -82,6 +82,24 @@ public extension String {
     /// Format an amount to a currency format with currency code
     ///
     /// - Parameter currencyCode: the currency code
+    /// - Returns: a formatted String amount with currency code
+    func formatWithActualDecimal(with currencyCode: String?) -> String {
+        if !self.isEmpty {
+            let currencyFormatter = NumberFormatter()
+            currencyFormatter.minimumIntegerDigits = 1
+            currencyFormatter.numberStyle = .currency
+            currencyFormatter.currencyCode = currencyCode
+            currencyFormatter.currencySymbol = ""
+            let formattedAmountInNumber = currencyFormatter.number(from: self)
+            return "\(String(describing: formattedAmountInNumber ?? 0))"
+        } else {
+            return ""
+        }
+    }
+
+    /// Format an amount to a currency format with currency code
+    ///
+    /// - Parameter currencyCode: the currency code
     /// - Returns: a formatted Double amount  with currency code
     func formatToDouble(with currencyCode: String? = nil) -> Double {
         if !self.isEmpty {
