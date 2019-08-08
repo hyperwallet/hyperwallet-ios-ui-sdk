@@ -38,11 +38,15 @@ class TransferUserFundsPPCTest: BaseTests {
         waitForNonExistence(spinner)
 
         // Add Destination Section
-        XCTAssertTrue(transferFunds.transferFundTitle.exists)
+        if #available(iOS 11.4, *) {
+            XCTAssertTrue(transferFunds.transferFundTitle.exists)
+        } else {
+            XCTAssertTrue(app.navigationBars["Transfer Funds"].exists)
+        }
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Prepaid Card")
 
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.4, *) {
             XCTAssertEqual(transferFunds.addSelectDestinationDetailLabel.label, "United States\nEnding on 4281")
         } else {
             XCTAssertEqual(transferFunds.addSelectDestinationDetailLabel.label, "United States Ending on 4281")
