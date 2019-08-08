@@ -204,7 +204,6 @@ class TransferUserFundsTest: BaseTests {
 
         // Turn the Transfer All Switch On
         transferFunds.toggleTransferAllFundsSwitch()
-        // TODO : Assert the amount field transferFunds.transferAmount.label
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "5,855.17")
 
         // Next Button
@@ -212,6 +211,7 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.nextLabel.tap()
 
         // Assert Confirmation Page
+        waitForExistence(app.tables["scheduleTransferTableView"].staticTexts["Confirm"])
         XCTAssertTrue(app.tables["scheduleTransferTableView"].staticTexts["Confirm"].exists)
     }
 
@@ -254,11 +254,16 @@ class TransferUserFundsTest: BaseTests {
         let availableFunds = app.tables["createTransferTableView"].staticTexts["Available for transfer: 452.14"]
         XCTAssertTrue(availableFunds.exists)
 
+        // Turn the Transfer All Switch On
+        transferFunds.toggleTransferAllFundsSwitch()
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "452.14")
+
         // Next Button
         XCTAssertTrue(transferFunds.nextLabel.exists)
         transferFunds.nextLabel.tap()
 
         // Assert Confirmation Page
+        waitForExistence(app.tables["scheduleTransferTableView"].staticTexts["Confirm"])
         XCTAssertTrue(app.tables["scheduleTransferTableView"].staticTexts["Confirm"].exists)
     }
 
