@@ -86,12 +86,18 @@ public extension String {
     func formatWithActualDecimal(with currencyCode: String?) -> String {
         if !self.isEmpty {
             let currencyFormatter = NumberFormatter()
+            let locale = Locale(identifier: Locale.preferredLanguages[0])
+            let localizedDecimalSeparator: Character = locale.decimalSeparator?.first ?? "."
+            let components = self.split(separator: localizedDecimalSeparator)
+            let fractionDigits = components.count <= 1 ? 2 : components[1].count
+            currencyFormatter.maximumFractionDigits = fractionDigits
+            currencyFormatter.minimumFractionDigits = fractionDigits
             currencyFormatter.minimumIntegerDigits = 1
             currencyFormatter.numberStyle = .currency
             currencyFormatter.currencyCode = currencyCode
             currencyFormatter.currencySymbol = ""
             let formattedAmountInNumber = currencyFormatter.number(from: self)
-            return "\(String(describing: formattedAmountInNumber ?? 0))"
+            return currencyFormatter.string(for: formattedAmountInNumber) ?? ""
         } else {
             return ""
         }

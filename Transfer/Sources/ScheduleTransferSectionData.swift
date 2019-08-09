@@ -70,11 +70,14 @@ struct ScheduleTransferForeignExchangeData: ScheduleTransferSectionData {
                                                    sourceAmount.formatWithActualDecimal(with: sourceCurrency),
                                                    sourceCurrency)
                 let destinationAmountFormatted = String(format: "%@ %@",
-                                                        destinationAmount.formatWithActualDecimal(with: destinationCurrency),
+                                                        destinationAmount
+                                                            .formatWithActualDecimal(with: destinationCurrency),
                                                         destinationCurrency)
-                let rateFormatted = String(format: "%@ = %@",
+                let rateFormatted = String(format: "%@ %@ = %@ %@",
                                            "1".formatWithActualDecimal(with: sourceCurrency),
-                                           rate.formatWithActualDecimal(with: destinationCurrency))
+                                           sourceCurrency,
+                                           rate.formatWithActualDecimal(with: destinationCurrency),
+                                           destinationCurrency)
 
                 rows.append((title: "transfer_fx_sell_confirmation".localized(), value:sourceAmountFormatted))
                 rows.append((title: "transfer_fx_buy_confirmation".localized(), value: destinationAmountFormatted))
@@ -109,11 +112,16 @@ struct ScheduleTransferSummaryData: ScheduleTransferSectionData {
             let grossTransferAmount = transferAmountFormattedDouble + feeAmountFormattedDouble
 
             rows.append((title: "transfer_amount_confirmation".localized(),
-                         value: String(grossTransferAmount).formatWithActualDecimal(with: destinationCurrency)))
+                         value: String(format: "%@ %@",
+                                       String(grossTransferAmount)
+                            .formatWithActualDecimal(with: destinationCurrency), destinationCurrency)))
             rows.append((title: "transfer_fee_confirmation".localized(),
-                         value: feeAmount.formatWithActualDecimal(with: destinationCurrency)))
+                         value: String(format: "%@ %@",
+                                       feeAmount
+                            .formatWithActualDecimal(with: destinationCurrency),
+                                       destinationCurrency)))
             rows.append((title: "transfer_net_amount_confirmation".localized(),
-                         value: destinationAmountFormattedString))
+                         value: String(format: "%@ %@", destinationAmountFormattedString, destinationCurrency)))
         }
     }
 }
