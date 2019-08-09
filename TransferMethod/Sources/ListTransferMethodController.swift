@@ -93,6 +93,7 @@ public final class ListTransferMethodController: UITableViewController {
             optionMenu.addAction(UIAlertAction.cancel())
             optionMenu.popoverPresentationController?.sourceView = tableView
             optionMenu.popoverPresentationController?.sourceRect = cellRect
+            optionMenu.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.up
             navigationController?.present(optionMenu, animated: true, completion: nil)
         }
         tableView.deselectRow(at: indexPath, animated: true)
