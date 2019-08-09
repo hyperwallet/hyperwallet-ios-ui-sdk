@@ -96,4 +96,10 @@ class TransferFunds {
     func enterTransferAmount(amount: String) {
         transferAmount.clearAndEnterText(text: amount)
     }
+
+    func pasteAmountToTransferAmount(amount: String) {
+        UIPasteboard.general.string = amount
+        transferAmount.doubleTap()
+        app.menuItems["Paste"].tap()
+    }
 }

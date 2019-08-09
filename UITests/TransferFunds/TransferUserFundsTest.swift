@@ -332,40 +332,211 @@ class TransferUserFundsTest: BaseTests {
     }
 
     // This testcase for next sprint
+
+    // MARK: UI Error Handling
+
     /*
-     func testTransferFund_createTransferWhenDestinationAmountNotSet() {
-     mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
-     filename: "ListOneBankAccountTransferUSD",
-     method: HTTPMethod.get)
-     mockServer.setupStub(url: "/rest/v3/transfers",
-     filename: "AvailableFundUSD",
-     method: HTTPMethod.post)
-
-     XCTAssertTrue(transferFundMenu.exists)
-     transferFundMenu.tap()
-     waitForNonExistence(spinner)
-
-     // Assert NEXT button is disabled ??
-     }
+     When user's account has available fund but has no Transfer method
+     when user tab "Next"
+     Then "Add a transfer method first" footer shows under "Destination" section
+     Then "Enter amount or select tranfer all funds" footer shows under "Transfer all funds" section
      */
+    func testTransferFunds_createTransferWhenDestinationNotSet() {
+        mockServer.setUpEmptyResponse(url: "/rest/v3/users/usr-token/transfer-methods")
+        mockServer.setupStub(url: "/rest/v3/transfers",
+                             filename: "AvailableFundUSD",
+                             method: HTTPMethod.post)
 
-    // This testcase for next sprint
+        XCTAssertTrue(transferFundMenu.exists)
+        transferFundMenu.tap()
+        waitForNonExistence(spinner)
+
+        if #available(iOS 11.4, *) {
+            XCTAssertTrue(transferFunds.transferFundTitle.exists)
+        } else {
+            XCTAssertTrue(app.navigationBars["Transfer Funds"].exists)
+        }
+        XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
+        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Add Account")
+        XCTAssertEqual(transferFunds.addSelectDestinationDetailLabel.label,
+                       "An account hasn\'t been set up yet, please add an account first.")
+
+        XCTAssertTrue(transferFunds.nextLabel.exists)
+        transferFunds.nextLabel.tap()
+
+        // after Yuri fix merged into the development
+//        let addTransferMethodPredicate = NSPredicate(format:
+//            "label CONTAINS[c] 'Add a transfer method first'")
+//        XCTAssert(app.tables["createTransferTableView"].staticTexts.element(matching: addTransferMethodPredicate).exists)
+
+        let transferAllFundPredicate = NSPredicate(format:
+            "label CONTAINS[c] 'Enter amount or select tranfer all funds'")
+        XCTAssert(app.tables["createTransferTableView"].staticTexts.element(matching: transferAllFundPredicate).exists)
+
+//        let error = app.tables["createTransferTableView"].staticTexts["TrasferTableViewFooterLabelIdentifier"].label
+//        if #available(iOS 11.4, *) {
+//            XCTAssertTrue(error.contains("Available for transfer: 452.14\nEnter amount or select tranfer all funds"))
+//        } else {
+//            XCTAssertTrue(error.contains("Available for transfer: 452.14 Enter amount or select tranfer all funds"))
+//        }
+    }
+
     /*
-     func testTransferFund_createTransferWhenDestinationNotSet() {
-     mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
-     filename: "ListOneBankAccountTransferUSD",
-     method: HTTPMethod.get)
-     mockServer.setupStub(url: "/rest/v3/transfers",
-     filename: "AvailableFundUSD",
-     method: HTTPMethod.post)
-
-     XCTAssertTrue(transferFundMenu.exists)
-     transferFundMenu.tap()
-     waitForNonExistence(spinner)
-
-     // Assert NEXT button is disabled ??
-     }
+     When user's account has available fund AND selected a Transfer method
+     when user tab "Next" without entering Transfer Amount
+     Then "Add a transfer method first" footer shows under "Destination" section
+     Then "Enter amount or select transfer all funds" footer shows under "Transfer all funds"
      */
+    func testTransferFunds_createTransferWhenDestinationAmountNotSet() {
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+                             filename: "ListOneBankAccountTransferUSD",
+                             method: HTTPMethod.get)
+
+        mockServer.setupStub(url: "/rest/v3/transfers",
+                             filename: "AvailableFundUSD",
+                             method: HTTPMethod.post)
+
+        XCTAssertTrue(transferFundMenu.exists)
+        transferFundMenu.tap()
+        waitForNonExistence(spinner)
+
+        if #available(iOS 11.4, *) {
+            XCTAssertTrue(transferFunds.transferFundTitle.exists)
+        } else {
+            XCTAssertTrue(app.navigationBars["Transfer Funds"].exists)
+        }
+
+        XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
+        XCTAssertTrue(transferFunds.transferAmount.exists)
+
+        XCTAssertTrue(transferFunds.nextLabel.exists)
+        transferFunds.nextLabel.tap()
+
+        let error = app.tables["createTransferTableView"].staticTexts["TrasferTableViewFooterLabelIdentifier"].label
+        if #available(iOS 11.4, *) {
+           XCTAssertTrue(error.contains("Available for transfer: 452.14\nEnter amount or select tranfer all funds"))
+         } else {
+           XCTAssertTrue(error.contains("Available for transfer: 452.14 Enter amount or select tranfer all funds"))
+        }
+    }
+
+    /*
+     When user's account has available fund AND selected a Transfer method
+     when user paste content only includes numbers to the Transfer Amount field
+     THEN the value will be shown on the Transfer Amount field
+     */
+    func testTransferFunds_createTransferCopyAndPasteTransferAmountWithChars() {
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+                             filename: "ListOneBankAccountTransferUSD",
+                             method: HTTPMethod.get)
+
+        mockServer.setupStub(url: "/rest/v3/transfers",
+                             filename: "AvailableFundUSD",
+                             method: HTTPMethod.post)
+
+        XCTAssertTrue(transferFundMenu.exists)
+        transferFundMenu.tap()
+        waitForNonExistence(spinner)
+
+        XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
+        XCTAssertTrue(transferFunds.transferAmount.exists)
+
+        let pasteAmountWithCharacters = "1000CAN"
+        transferFunds.pasteAmountToTransferAmount(amount: pasteAmountWithCharacters)
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "")
+    }
+
+    func testTransferFunds_createTransferCopyAndPasteTransferAmountWithDigits() {
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+                             filename: "ListOneBankAccountTransferUSD",
+                             method: HTTPMethod.get)
+
+        mockServer.setupStub(url: "/rest/v3/transfers",
+                             filename: "AvailableFundUSD",
+                             method: HTTPMethod.post)
+
+        XCTAssertTrue(transferFundMenu.exists)
+        transferFundMenu.tap()
+        waitForNonExistence(spinner)
+
+        XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
+        XCTAssertTrue(transferFunds.transferAmount.exists)
+
+        let pastAmountWithNumberNoDigit = "10000"
+        transferFunds.pasteAmountToTransferAmount(amount: pastAmountWithNumberNoDigit)
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "10,000.00")
+    }
+
+    /* When user does not enter minimum amount in Transfer Field
+       And when user tab Next
+       Then shows error dialog
+     */
+     func testTransferFunds_createTransferMinumumAmount() {
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+                             filename: "ListOneBankAccountTransferUSD",
+                             method: HTTPMethod.get)
+
+        mockServer.setupStub(url: "/rest/v3/transfers",
+                             filename: "AvailableFundUSD",
+                             method: HTTPMethod.post)
+
+        XCTAssertTrue(transferFundMenu.exists)
+        transferFundMenu.tap()
+        waitForNonExistence(spinner)
+
+        XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
+        XCTAssertTrue(transferFunds.transferAmount.exists)
+
+        transferFunds.enterTransferAmount(amount: "0.01")
+
+        XCTAssertTrue(transferFunds.nextLabel.exists)
+        transferFunds.nextLabel.tap()
+
+        XCTAssert(app.alerts["Error"].exists)
+        let predicate = NSPredicate(format:
+            "label CONTAINS[c] 'Requested transfer amount $0.01, is below the transaction limit of $1.00.'")
+        XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
+     }
+
+    /* When user enter notes description over the length limit (255) and tab Next
+       Then shows error dialog.
+    */
+    func testTransferFunds_createTransferDescriptionLength() {
+        let over255String = """
+                            1234567890abcdefghij1234567890abcdefghij1234567890abcdefghij
+                            1234567890abcdefghij1234567890abcdefghij1234567890abcdefghij
+                            1234567890abcdefghij1234567890abcdefghij1234567890abcdefghij
+                            1234567890abcdefghij1234567890abcdefghij1234567890abcdefghij
+                            1234567890abcdefghij1234567890abcdefghij1234567890abcdefghij
+                            1234567890abcdefghij1234567890abcdefghij1234567890abcdefghij
+                            1234567890abcdefghij1234567890abcdefghij1234567890abcdefghij
+                            1234567890abcdefgEND
+                            """
+
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+                             filename: "ListOneBankAccountTransferUSD",
+                             method: HTTPMethod.get)
+
+        mockServer.setupStub(url: "/rest/v3/transfers",
+                             filename: "AvailableFundUSD",
+                             method: HTTPMethod.post)
+
+        XCTAssertTrue(transferFundMenu.exists)
+        transferFundMenu.tap()
+        waitForNonExistence(spinner)
+
+        transferFunds.enterTransferAmount(amount: "1000")
+        if #available(iOS 11.0, *) {
+            transferFunds.enterNotes(description: over255String)
+        }
+
+        XCTAssertTrue(transferFunds.nextLabel.exists)
+        transferFunds.nextLabel.tap()
+
+        let predicate = NSPredicate(format:
+            "label CONTAINS[c] 'Notes should be between 1 and 255 characters'")
+        XCTAssert(app.tables["createTransferTableView"].staticTexts.element(matching: predicate).exists)
+    }
 
     /* Given that Transfer methods exist
      When user transfers the fund
@@ -488,7 +659,7 @@ class TransferUserFundsTest: BaseTests {
     }
 
     /*
-     func testTransferFund_createTransferConnectionError() {
+     func testTransferFunds_createTransferConnectionError() {
      mockServer.setupStubConnectionError(url: "/rest/v3/users/usr-token/transfer-methods",
      filename: "ListMoreThanOneTransferMethod",
      method: HTTPMethod.get)
