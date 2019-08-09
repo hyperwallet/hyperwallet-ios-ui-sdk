@@ -26,27 +26,38 @@ final class TransferButtonCell: UITableViewCell {
     private(set) lazy var buttonLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.accessibilityIdentifier = "addTransferNextLabel"
+        label.textAlignment = .center
         return label
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(buttonLabel)
-        buttonLabel.safeAreaCenterYAnchor
-            .constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor).isActive = true
-        buttonLabel.safeAreaCenterXAnchor
-            .constraint(equalTo: contentView.layoutMarginsGuide.centerXAnchor).isActive = true
+        setupCell()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
+    private func setupCell() {
+        contentView.addSubview(buttonLabel)
+
+        let margins = contentView.layoutMarginsGuide
+        let constraints = [
+            buttonLabel.safeAreaLeadingAnchor.constraint(equalTo: margins.leadingAnchor),
+            buttonLabel.safeAreaTrailingAnchor.constraint(equalTo: margins.trailingAnchor),
+            buttonLabel.safeAreaTopAnchor.constraint(equalTo: margins.topAnchor),
+            buttonLabel.safeAreaBottomAnchor.constraint(equalTo: margins.bottomAnchor)
+        ]
+        constraints.forEach { $0.priority = UILayoutPriority(999) }
+        NSLayoutConstraint.activate(constraints)
+    }
+
     /// This is to configure the next button in create transfer page
     func configure(title: String) {
         buttonLabel.text = title
         buttonLabel.accessibilityLabel = title
-        buttonLabel.accessibilityIdentifier = "addTransferNextLabel"
     }
 
     /// This is to configure the confirmation button in schedule transfer page

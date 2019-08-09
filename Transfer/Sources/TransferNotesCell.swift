@@ -38,22 +38,26 @@ final class TransferNotesCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
-        setupNotesTextField()
+        setupCell()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
-    private func setupNotesTextField() {
+    private func setupCell() {
         contentView.addSubview(notesTextField)
-        notesTextField.safeAreaCenterYAnchor
-            .constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor).isActive = true
-        notesTextField.safeAreaLeadingAnchor
-            .constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor).isActive = true
-        notesTextField.safeAreaTrailingAnchor
-            .constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor).isActive = true
-    }
+
+        let margins = contentView.layoutMarginsGuide
+        let constraints = [
+            notesTextField.safeAreaLeadingAnchor.constraint(equalTo: margins.leadingAnchor),
+            notesTextField.safeAreaTrailingAnchor.constraint(equalTo: margins.trailingAnchor),
+            notesTextField.safeAreaTopAnchor.constraint(equalTo: margins.topAnchor),
+            notesTextField.safeAreaBottomAnchor.constraint(equalTo: margins.bottomAnchor)
+        ]
+        constraints.forEach { $0.priority = UILayoutPriority(999) }
+        NSLayoutConstraint.activate(constraints)
+   }
 
     func configure(notes: String?, isEditable: Bool, _ handler: @escaping EnteredNoteHandler) {
         if let notes = notes {

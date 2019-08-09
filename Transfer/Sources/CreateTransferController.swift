@@ -27,6 +27,9 @@ import UIKit
 /// Each transfer will be represented by an auto-generated, non-editable token that can be used
 /// to retrieve the transfer resource.
 public final class CreateTransferController: UITableViewController {
+    let defaultUIKitRowHeight = CGFloat(44.0)
+    let defaultUIKitFooterHeight = CGFloat(33.0)
+
     enum FooterSection: Int, CaseIterable {
         case destination, transfer, notes, button
     }
@@ -69,6 +72,11 @@ public final class CreateTransferController: UITableViewController {
         tableView = UITableView(frame: view.frame, style: .grouped)
         tableView.accessibilityIdentifier = "createTransferTableView"
         tableView.cellLayoutMarginsFollowReadableWidth = false
+        tableView.sectionFooterHeight = UITableView.automaticDimension
+        tableView.estimatedSectionFooterHeight = defaultUIKitFooterHeight
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = defaultUIKitRowHeight
+
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)
         }
