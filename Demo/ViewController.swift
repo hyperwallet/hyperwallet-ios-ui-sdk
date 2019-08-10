@@ -50,6 +50,7 @@ class ViewController: UITableViewController {
         case userReceipts
         case prepaidCardReceipts
         case transferFunds
+        case transferFundsPPC
 
         var title: String {
             switch self {
@@ -60,6 +61,7 @@ class ViewController: UITableViewController {
             case .userReceipts: return "List User Receipts"
             case .prepaidCardReceipts: return "List Prepaid Card Receipts"
             case .transferFunds: return  "Transfer Funds"
+            case .transferFundsPPC: return  "Transfer Funds PPC"
             }
         }
 
@@ -72,6 +74,7 @@ class ViewController: UITableViewController {
             case .userReceipts: return "List User Receipts"
             case .prepaidCardReceipts: return "List Prepaid Card Receipts"
             case .transferFunds: return  "Transfer Funds"
+            case .transferFundsPPC: return  "Transfer Funds PPC"
             }
         }
     }
@@ -183,6 +186,13 @@ class ViewController: UITableViewController {
             let coordinator = HyperwalletUI.shared
                 .createTransferFromUserCoordinator(clientTransferId: clientTransferId, parentController: self)
              coordinator.navigate()
+
+        case .transferFundsPPC:
+            let prepaidCardToken = Bundle.main.infoDictionary!["PREPAID_CARD_TOKEN"] as! String
+            let clientTransferId = UUID().uuidString.lowercased()
+            let viewController = HyperwalletUI.shared
+                .createTransferFromPrepaidCardController(clientTransferId: clientTransferId, prepaidCardToken: prepaidCardToken)
+            navigationController?.pushViewController(viewController, animated: true)
 
         default:
             let coordinator = HyperwalletUI.shared.listTransferMethodCoordinator(parentController: self)

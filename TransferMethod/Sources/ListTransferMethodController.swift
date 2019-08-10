@@ -73,6 +73,7 @@ public final class ListTransferMethodController: UITableViewController {
 
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if presenter.transferMethodExists(at: indexPath.row) {
+            let cellRect = tableView.rectForRow(at: indexPath)
             let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
             let removeHandler = { (alertAction: UIAlertAction) -> Void in
@@ -87,7 +88,9 @@ public final class ListTransferMethodController: UITableViewController {
 
             optionMenu.addAction(removeAction)
             optionMenu.addAction(UIAlertAction.cancel())
-
+            optionMenu.popoverPresentationController?.sourceView = tableView
+            optionMenu.popoverPresentationController?.sourceRect = cellRect
+            optionMenu.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.up
             navigationController?.present(optionMenu, animated: true, completion: nil)
         }
         tableView.deselectRow(at: indexPath, animated: true)
