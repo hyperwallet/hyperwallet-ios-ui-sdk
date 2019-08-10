@@ -1,0 +1,32 @@
+{
+  "token": "trf-e4217683",
+  "status": "QUOTED",
+  "createdOn": "2019-07-18T20:43:35",
+  "clientTransferId": "6712348070813",
+  "sourceToken": "usr-05f2076f",
+  "sourceAmount": "13.32",
+  "sourceCurrency": "USD",
+  "destinationToken": "trm-cfb7ce86",
+  "destinationAmount": "15.00",
+  "destinationCurrency": "CAD",
+  "foreignExchanges": [
+    {
+      "sourceCurrency": "USD",
+      "sourceAmount": "13.32",
+      "destinationCurrency": "CAD",
+      "destinationAmount": "15.00",
+      "rate": "1.291291"
+    }
+  ],
+  "notes": "Partial-Balance Transfer888",
+  "memo": "TransferClientId56387",
+  "expiresOn": "2019-07-18T20:45:35",
+  "links": [
+    {
+      "params": {
+        "rel": "self"
+      },
+      "href": "https://localhost/rest/v3/transfers/trf-e4217683"
+    }
+  ]
+}

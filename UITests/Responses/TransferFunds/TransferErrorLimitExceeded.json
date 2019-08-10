@@ -1,0 +1,8 @@
+{
+    "errors": [
+        {
+            "message": "Your attempted transaction has exceeded the approved payout limit; please contact Hyperwallet for further assistance.",
+            "code": "LIMIT_EXCEEDED"
+        }
+    ]
+}
