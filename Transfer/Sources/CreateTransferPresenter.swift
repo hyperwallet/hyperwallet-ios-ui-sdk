@@ -135,14 +135,14 @@ final class CreateTransferPresenter {
                 })
 
             case .success(let result):
-                guard let firstActivatedTransferMetod = result?.data?.first else {
+                guard let firstActivatedTransferMethod = result?.data?.first else {
                     strongSelf.selectedTransferMethod = nil
                     strongSelf.view.hideLoading()
                     strongSelf.view.showCreateTransfer()
                     return
                 }
                 if strongSelf.selectedTransferMethod == nil {
-                    strongSelf.selectedTransferMethod = firstActivatedTransferMetod
+                    strongSelf.selectedTransferMethod = firstActivatedTransferMethod
                 }
                 strongSelf.createInitialTransfer()
             }
@@ -222,7 +222,7 @@ final class CreateTransferPresenter {
         }
     }
 
-    // MARK: - Destionation view
+    // MARK: - Destination view
     func showSelectDestinationAccountView() {
         transferMethodRepository.listTransferMethods { [weak self] result in
             guard let strongSelf = self else {

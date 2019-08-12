@@ -104,27 +104,27 @@ extension CreateTransferController {
     }
 
     override public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let attribitedText = getAttributedFooterText(for: section)
-        if attribitedText == nil {
+        let attributedText = getAttributedFooterText(for: section)
+        if attributedText == nil {
             return nil
         }
         guard let view = tableView.dequeueReusableHeaderFooterView(
             withIdentifier: TransferTableViewFooterView.reuseIdentifier) as? TransferTableViewFooterView else {
                 return nil
         }
-        view.footerLabel.attributedText = attribitedText
+        view.footerLabel.attributedText = attributedText
         return view
     }
 
     private func getAttributedFooterText(for section: Int) -> NSAttributedString? {
         let sectionData = presenter.sectionData[section]
-        var attribitedText: NSAttributedString?
+        var attributedText: NSAttributedString?
         if  let transferSectionData = sectionData as? CreateTransferSectionTransferData {
-            attribitedText = format(footer: transferSectionData.footer, error: transferSectionData.errorMessage)
+            attributedText = format(footer: transferSectionData.footer, error: transferSectionData.errorMessage)
         } else {
-            attribitedText = format(error: sectionData.errorMessage)
+            attributedText = format(error: sectionData.errorMessage)
         }
-        return attribitedText
+        return attributedText
     }
 
     private func format(footer: String? = nil, error: String? = nil) -> NSAttributedString? {
