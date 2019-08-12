@@ -82,6 +82,7 @@ class TransferFunds {
 
         availableBalance = app.tables["createTransferTableView"].staticTexts["available_balance_footer"]
 
+        // TODO: after Yuri's fix : nextLabel = app.tables["createTransferTableView"].staticTexts["createTransferNextLabel"]
         nextLabel = app.tables["createTransferTableView"].staticTexts["addTransferNextLabel"]
     }
 
