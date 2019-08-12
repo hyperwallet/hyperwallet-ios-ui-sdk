@@ -87,8 +87,8 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertEqual(transferFunds.notesDescriptionTextField.placeholderValue, "Description")
         // TODO: iOS 10.3.1 does work on the following - will investigate
         if #available(iOS 11.0, *) {
-          transferFunds.enterNotes(description: "testing")
-          XCTAssertEqual(transferFunds.notesDescriptionTextField.value as? String, "testing")
+            transferFunds.enterNotes(description: "testing")
+            XCTAssertEqual(transferFunds.notesDescriptionTextField.value as? String, "testing")
         }
 
         let availableFunds = app.tables["createTransferTableView"].staticTexts["Available for transfer: 452.14"]
@@ -365,20 +365,20 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.nextLabel.tap()
 
         // after Yuri fix merged into the development
-//        let addTransferMethodPredicate = NSPredicate(format:
-//            "label CONTAINS[c] 'Add a transfer method first'")
-//        XCTAssert(app.tables["createTransferTableView"].staticTexts.element(matching: addTransferMethodPredicate).exists)
+        //        let addTransferMethodPredicate = NSPredicate(format:
+        //            "label CONTAINS[c] 'Add a transfer method first'")
+        //        XCTAssert(app.tables["createTransferTableView"].staticTexts.element(matching: addTransferMethodPredicate).exists)
 
         let transferAllFundPredicate = NSPredicate(format:
             "label CONTAINS[c] 'Enter amount or select tranfer all funds'")
         XCTAssert(app.tables["createTransferTableView"].staticTexts.element(matching: transferAllFundPredicate).exists)
 
-//        let error = app.tables["createTransferTableView"].staticTexts["TrasferTableViewFooterLabelIdentifier"].label
-//        if #available(iOS 11.4, *) {
-//            XCTAssertTrue(error.contains("Available for transfer: 452.14\nEnter amount or select tranfer all funds"))
-//        } else {
-//            XCTAssertTrue(error.contains("Available for transfer: 452.14 Enter amount or select tranfer all funds"))
-//        }
+        //        let error = app.tables["createTransferTableView"].staticTexts["TrasferTableViewFooterLabelIdentifier"].label
+        //        if #available(iOS 11.4, *) {
+        //            XCTAssertTrue(error.contains("Available for transfer: 452.14\nEnter amount or select tranfer all funds"))
+        //        } else {
+        //            XCTAssertTrue(error.contains("Available for transfer: 452.14 Enter amount or select tranfer all funds"))
+        //        }
     }
 
     /*
@@ -414,9 +414,9 @@ class TransferUserFundsTest: BaseTests {
 
         let error = app.tables["createTransferTableView"].staticTexts["TrasferTableViewFooterLabelIdentifier"].label
         if #available(iOS 11.4, *) {
-           XCTAssertTrue(error.contains("Available for transfer: 452.14\nEnter amount or select tranfer all funds"))
-         } else {
-           XCTAssertTrue(error.contains("Available for transfer: 452.14 Enter amount or select tranfer all funds"))
+            XCTAssertTrue(error.contains("Available for transfer: 452.14\nEnter amount or select tranfer all funds"))
+        } else {
+            XCTAssertTrue(error.contains("Available for transfer: 452.14 Enter amount or select tranfer all funds"))
         }
     }
 
@@ -467,11 +467,11 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "10,000.00")
     }
 
-    /* When user does not enter minimum amount in Transfer Field
-       And when user tab Next
-       Then shows error dialog
+    /* When user enters amount below the transaction limit in transfer amount Field
+     And when user tab Next
+     Then shows error dialog
      */
-     func testTransferFunds_createTransferMinumumAmount() {
+    func testTransferFunds_createTransferBelowTransactionLimit() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListOneBankAccountTransferUSD",
                              method: HTTPMethod.get)
@@ -487,20 +487,26 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertTrue(transferFunds.transferAmount.exists)
 
+        // Enter amount lower than the transaction limit
         transferFunds.enterTransferAmount(amount: "0.01")
+
+        mockServer.setupStubError(url: "/rest/v3/transfers",
+                                  filename: "TransferBelowTransactionLimitError",
+                                  method: HTTPMethod.post)
 
         XCTAssertTrue(transferFunds.nextLabel.exists)
         transferFunds.nextLabel.tap()
 
-        XCTAssert(app.alerts["Error"].exists)
+        waitForExistence(app.alerts["Error"])
+        // XCTAssert(app.alerts["Error"].exists)
         let predicate = NSPredicate(format:
             "label CONTAINS[c] 'Requested transfer amount $0.01, is below the transaction limit of $1.00.'")
         XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
-     }
+    }
 
     /* When user enter notes description over the length limit (255) and tab Next
-       Then shows error dialog.
-    */
+     Then shows error dialog.
+     */
     func testTransferFunds_createTransferDescriptionLength() {
         let over255String = """
                             1234567890abcdefghij1234567890abcdefghij1234567890abcdefghij
@@ -568,6 +574,7 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.nextLabel.exists)
         transferFunds.nextLabel.tap()
 
+        waitForExistence(app.alerts["Error"])
         XCTAssert(app.alerts["Error"].exists)
         let predicate = NSPredicate(format:
             "label CONTAINS[c] 'Your attempted transaction has exceeded the approved payout limit; please contact Hyperwallet for further assistance.'")
@@ -603,9 +610,26 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.nextLabel.exists)
         transferFunds.nextLabel.tap()
 
+        waitForExistence(app.alerts["Error"])
         XCTAssert(app.alerts["Error"].exists)
         let predicate = NSPredicate(format:
             "label CONTAINS[c] 'You do not have enough funds in any single currency to complete this transfer'")
+        XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
+    }
+
+    func testTransferFunds_createTransferInvalidSourceError() {
+        mockServer.setupStubError(url: "/rest/v3/users/usr-token/transfer-methods",
+                                  filename: "InvalidSourceError",
+                                  method: HTTPMethod.get)
+
+        XCTAssertTrue(transferFundMenu.exists)
+        transferFundMenu.tap()
+        waitForNonExistence(spinner)
+
+        waitForExistence(app.alerts["Error"])
+        XCTAssert(app.alerts["Error"].exists)
+        let predicate = NSPredicate(format:
+            "label CONTAINS[c] 'The source token you provided doesn’t exist or is not a valid source.'")
         XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
     }
 
@@ -624,37 +648,16 @@ class TransferUserFundsTest: BaseTests {
 
         XCTAssertTrue(transferFundMenu.exists)
         transferFundMenu.tap()
-        waitForNonExistence(spinner)
-
-        XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
-        XCTAssertTrue(transferFunds.transferAmount.exists)
-        transferFunds.enterTransferAmount(amount: "1000000")
-
-        // Next Button
         mockServer.setupStubError(url: "/rest/v3/transfers",
                                   filename: "TransferErrorAmountLessThanFee",
                                   method: HTTPMethod.post)
-        XCTAssertTrue(transferFunds.nextLabel.exists)
-        transferFunds.nextLabel.tap()
 
+        waitForNonExistence(spinner)
+
+        waitForExistence(app.alerts["Error"])
         XCTAssert(app.alerts["Error"].exists)
         let predicate = NSPredicate(format:
             "label CONTAINS[c] 'Amount is less than the fee amount'")
-        XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
-    }
-
-    func testTransferFunds_createTransferInvalidSourceError() {
-        mockServer.setupStubError(url: "/rest/v3/users/usr-token/transfer-methods",
-                                  filename: "InvalidSourceError",
-                                  method: HTTPMethod.get)
-
-        XCTAssertTrue(transferFundMenu.exists)
-        transferFundMenu.tap()
-        waitForNonExistence(spinner)
-
-        XCTAssert(app.alerts["Error"].exists)
-        let predicate = NSPredicate(format:
-            "label CONTAINS[c] 'The source token you provided doesn’t exist or is not a valid source.'")
         XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
     }
 
