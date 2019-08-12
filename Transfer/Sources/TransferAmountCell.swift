@@ -85,23 +85,33 @@ extension TransferAmountCell: UITextFieldDelegate {
     func textField(_ textField: UITextField,
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
+        let allowedDigitsCount = 14
         var currentText = textField.text ?? ""
         if string.count > 1 {
             // Paste
             let stringPastedAmount = string.format(with: detailTextLabel?.text)
+            let pastedDigitsOnly = stringPastedAmount.replacingOccurrences(of: "[^0-9]",
+                                                                           with: "",
+                                                                           options: .regularExpression)
             guard !stringPastedAmount.isEmpty,
-                currentText.isEmpty else {
+                currentText.isEmpty,
+                pastedDigitsOnly.count <= allowedDigitsCount else {
                     return false
             }
             textField.text = stringPastedAmount
             return false
         }
-        let digitsOnly = currentText.replacingOccurrences( of: "[^0-9]", with: "", options: .regularExpression)
+        let digitsOnly = currentText.replacingOccurrences(of: "[^0-9]",
+                                                          with: "",
+                                                          options: .regularExpression)
         if string.isEmpty {
             // backspace
             currentText = digitsOnly.dropLast().description
         } else {
             // digit
+            guard digitsOnly.count < allowedDigitsCount else {
+                return false
+            }
             currentText = digitsOnly + string
         }
 
