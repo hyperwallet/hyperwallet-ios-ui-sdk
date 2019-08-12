@@ -80,8 +80,8 @@ public final class CreateTransferController: UITableViewController {
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)
         }
-        tableView.register(TrasferTableViewFooterView.self,
-                           forHeaderFooterViewReuseIdentifier: TrasferTableViewFooterView.reuseIdentifier)
+        tableView.register(TransferTableViewFooterView.self,
+                           forHeaderFooterViewReuseIdentifier: TransferTableViewFooterView.reuseIdentifier)
     }
 }
 
@@ -109,7 +109,7 @@ extension CreateTransferController {
             return nil
         }
         guard let view = tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: TrasferTableViewFooterView.reuseIdentifier) as? TrasferTableViewFooterView else {
+            withIdentifier: TransferTableViewFooterView.reuseIdentifier) as? TransferTableViewFooterView else {
                 return nil
         }
         view.footerLabel.attributedText = attribitedText
@@ -236,7 +236,7 @@ extension CreateTransferController: CreateTransferView {
     func updateFooter(for section: FooterSection) {
         UIView.setAnimationsEnabled(false)
         tableView.beginUpdates()
-        if let footerView = tableView.footerView(forSection: section.rawValue) as? TrasferTableViewFooterView {
+        if let footerView = tableView.footerView(forSection: section.rawValue) as? TransferTableViewFooterView {
             footerView.footerLabel.attributedText = getAttributedFooterText(for: section.rawValue)
         } else {
             tableView.reloadSections(IndexSet(integer: section.rawValue), with: .none)
