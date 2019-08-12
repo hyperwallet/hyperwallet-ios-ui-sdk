@@ -25,7 +25,7 @@ final class ReceiptDetailCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
-        self.heightAnchor.constraint(equalToConstant: Theme.Cell.extraSmallHeight).isActive = true
+        self.heightAnchor.constraint(equalToConstant: Theme.Cell.smallHeight).isActive = true
     }
 
     required init?(coder aDecoder: NSCoder) {

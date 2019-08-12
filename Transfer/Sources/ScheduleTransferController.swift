@@ -62,7 +62,7 @@ public final class ScheduleTransferController: UITableViewController, UITextFiel
         tableView.accessibilityIdentifier = "scheduleTransferTableView"
         tableView.allowsSelection = false
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = Theme.Cell.extraSmallHeight
+        tableView.estimatedRowHeight = Theme.Cell.smallHeight
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)
         }
