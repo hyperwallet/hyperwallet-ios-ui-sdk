@@ -68,11 +68,9 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
 
-        if #available(iOS 11.4, *) {
-            XCTAssertEqual(transferFunds.addSelectDestinationDetailLabel.label, "United States\nEnding on 1234")
-        } else {
-            XCTAssertEqual(transferFunds.addSelectDestinationDetailLabel.label, "United States Ending on 1234")
-        }
+        let destinationDetail = transferFunds.addSelectDestinationDetailLabel.label
+        XCTAssertTrue(destinationDetail == "United States\nEnding on 1234" || destinationDetail == "United States Ending on 1234")
+
         // Transfer Section
         XCTAssertTrue(transferFunds.transferSectionLabel.exists)
         // Amount row
@@ -181,11 +179,9 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
 
-        if #available(iOS 11.4, *) {
-            XCTAssertEqual(transferFunds.addSelectDestinationDetailLabel.label, "United States\nEnding on 1234")
-        } else {
-            XCTAssertEqual(transferFunds.addSelectDestinationDetailLabel.label, "United States Ending on 1234")
-        }
+        let destinationDetail = transferFunds.addSelectDestinationDetailLabel.label
+        XCTAssertTrue(destinationDetail == "United States\nEnding on 1234" || destinationDetail == "United States Ending on 1234")
+
         // Transfer Section
         XCTAssertTrue(transferFunds.transferSectionLabel.exists)
         // Amount row
@@ -232,11 +228,9 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
 
-        if #available(iOS 11.4, *) {
-            XCTAssertEqual(transferFunds.addSelectDestinationDetailLabel.label, "United States\nEnding on 6789")
-        } else {
-            XCTAssertEqual(transferFunds.addSelectDestinationDetailLabel.label, "United States Ending on 6789")
-        }
+        let destinationDetail = transferFunds.addSelectDestinationDetailLabel.label
+        XCTAssertTrue(destinationDetail == "United States\nEnding on 6789" || destinationDetail == "United States Ending on 6789")
+
         // Transfer Section
         XCTAssertTrue(transferFunds.transferSectionLabel.exists)
         // Amount row
