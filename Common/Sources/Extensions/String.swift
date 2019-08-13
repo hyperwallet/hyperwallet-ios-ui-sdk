@@ -83,12 +83,10 @@ public extension String {
     ///
     /// - Parameter currencyCode: the currency code
     /// - Returns: a formatted String amount with currency code
-    func formatWithActualDecimal(with currencyCode: String?) -> String {
+    func format(withActualDecimal currencyCode: String?) -> String {
         if !self.isEmpty {
             let currencyFormatter = NumberFormatter()
-            let locale = Locale(identifier: Locale.preferredLanguages[0])
-            let localizedDecimalSeparator: Character = locale.decimalSeparator?.first ?? "."
-            let components = self.split(separator: localizedDecimalSeparator)
+            let components = self.split(separator: ".")
             let fractionDigits = components.count <= 1 ? 2 : components[1].count
             currencyFormatter.maximumFractionDigits = fractionDigits
             currencyFormatter.minimumFractionDigits = fractionDigits
