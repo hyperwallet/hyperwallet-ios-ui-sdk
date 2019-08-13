@@ -21,7 +21,6 @@ import Common
 import Receipt
 import Transfer
 import TransferMethod
-import TransferMethodRepository
 #endif
 import HyperwalletSDK
 import os.log
@@ -245,13 +244,11 @@ class ViewController: UITableViewController {
 
     @objc
     func transferMethodAddedNotificationObserverHandler(notification: Notification) {
-        TransferMethodRepositoryFactory.shared.transferMethodRepository().refreshTransferMethods()
         print("Notification: Transfer method has been created successfully")
     }
 
     @objc
     func transferMethodDeactivatedNotificationObserverHandler(notification: Notification) {
-        TransferMethodRepositoryFactory.shared.transferMethodRepository().refreshTransferMethods()
         print("Notification: Transfer method has been deleted successfully")
     }
 

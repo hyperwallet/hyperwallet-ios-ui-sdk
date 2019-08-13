@@ -124,6 +124,7 @@ final class CreateTransferPresenter {
     }
 
     private func loadTransferMethods() {
+        transferMethodRepository.refreshTransferMethods()
         transferMethodRepository.listTransferMethods { [weak self] result in
             guard let strongSelf = self else {
                 return
