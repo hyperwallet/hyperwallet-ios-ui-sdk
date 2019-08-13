@@ -47,7 +47,8 @@ class TransferUserFundsPPCTest: BaseTests {
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Prepaid Card")
 
         let destinationDetail = transferFunds.addSelectDestinationDetailLabel.label
-        XCTAssertTrue(destinationDetail == "United States\nEnding on 4281" || destinationDetail == "United States Ending on 4281")
+        XCTAssertTrue(destinationDetail == "United States\nEnding on 4281"
+            || destinationDetail == "United States Ending on 4281")
 
         // Transfer Section
         XCTAssertTrue(transferFunds.transferSectionLabel.exists)

@@ -69,7 +69,8 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
 
         let destinationDetail = transferFunds.addSelectDestinationDetailLabel.label
-        XCTAssertTrue(destinationDetail == "United States\nEnding on 1234" || destinationDetail == "United States Ending on 1234")
+        XCTAssertTrue(destinationDetail == "United States\nEnding on 1234"
+            || destinationDetail == "United States Ending on 1234")
 
         // Transfer Section
         XCTAssertTrue(transferFunds.transferSectionLabel.exists)
@@ -180,7 +181,8 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
 
         let destinationDetail = transferFunds.addSelectDestinationDetailLabel.label
-        XCTAssertTrue(destinationDetail == "United States\nEnding on 1234" || destinationDetail == "United States Ending on 1234")
+        XCTAssertTrue(destinationDetail == "United States\nEnding on 1234"
+            || destinationDetail == "United States Ending on 1234")
 
         // Transfer Section
         XCTAssertTrue(transferFunds.transferSectionLabel.exists)
@@ -229,7 +231,9 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
 
         let destinationDetail = transferFunds.addSelectDestinationDetailLabel.label
-        XCTAssertTrue(destinationDetail == "United States\nEnding on 6789" || destinationDetail == "United States Ending on 6789")
+        XCTAssertTrue(destinationDetail == "United States\nEnding on 6789"
+            || destinationDetail == "United States Ending on 6789")
+
         // Transfer Section
         XCTAssertTrue(transferFunds.transferSectionLabel.exists)
         // Amount row
@@ -272,23 +276,23 @@ class TransferUserFundsTest: BaseTests {
      mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
      filename: "ListOneBankAccountTransferJPY",
      method: HTTPMethod.get)
-
+     
      mockServer.setupStub(url: "/rest/v3/transfers",
      filename: "AvailableFundJPY",
      method: HTTPMethod.get)
-
+     
      XCTAssertTrue(transferFundMenu.exists)
      transferFundMenu.tap()
      waitForNonExistence(spinner)
-
+     
      XCTAssertTrue(transferFunds.transferFundTitle.exists)
      XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
      XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
-
+     
      XCTAssertEqual(transferFunds.transferSectionLabel.label, "TRANSER")
      XCTAssertEqual(transferFunds.transferAmountLabel.label, "Amount")
      XCTAssertEqual(transferFunds.transferCurrency.label, "JPY")
-
+     
      //let availableFunds = app.tables["createTransferTableView"].staticTexts["Available for transfer: 10000"]
      //XCTAssertTrue(availableFunds.exists)
      } */
@@ -580,8 +584,10 @@ class TransferUserFundsTest: BaseTests {
 
         waitForExistence(app.alerts["Error"])
         XCTAssert(app.alerts["Error"].exists)
-        let predicate = NSPredicate(format:
-            "label CONTAINS[c] 'Your attempted transaction has exceeded the approved payout limit; please contact Hyperwallet for further assistance.'")
+        let predicate = NSPredicate(format: """
+            label CONTAINS[c] 'Your attempted transaction has exceeded the approved payout limit; \
+            please contact Hyperwallet for further assistance.'
+            """)
         XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
     }
 

@@ -97,7 +97,7 @@
 		4A9E9A1022F4AD5700739150 /* ScheduleTransferPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078C6EFB22EF7E0500CF81EE /* ScheduleTransferPresenterTests.swift */; };
 		4AB37CFC22EAF087005C1078 /* TransferAllFundsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB37CFB22EAF087005C1078 /* TransferAllFundsCell.swift */; };
 		4AC7808822EB360B00AB73FD /* PasteOnlyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC7808722EB360B00AB73FD /* PasteOnlyTextField.swift */; };
-		4AD300DA22F9972A005FD01F /* TrasferTableViewFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD300D922F9972A005FD01F /* TrasferTableViewFooterView.swift */; };
+		4AD300DA22F9972A005FD01F /* TransferTableViewFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD300D922F9972A005FD01F /* TransferTableViewFooterView.swift */; };
 		4ADBEC7222E9F16A00D43A48 /* TransferDestinationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBEC7122E9F16A00D43A48 /* TransferDestinationCell.swift */; };
 		4ADBEC7422E9F92800D43A48 /* TransferThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBEC7322E9F92800D43A48 /* TransferThemeManager.swift */; };
 		4AE6B6C922D605B20009DEFE /* ReceiptRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE6B6C022D605B20009DEFE /* ReceiptRepository.framework */; };
@@ -708,7 +708,7 @@
 		4AB1099622A7B04C00CCA7C6 /* ReceiptDetailSectionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptDetailSectionData.swift; sourceTree = "<group>"; };
 		4AB37CFB22EAF087005C1078 /* TransferAllFundsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferAllFundsCell.swift; sourceTree = "<group>"; };
 		4AC7808722EB360B00AB73FD /* PasteOnlyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteOnlyTextField.swift; sourceTree = "<group>"; };
-		4AD300D922F9972A005FD01F /* TrasferTableViewFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrasferTableViewFooterView.swift; sourceTree = "<group>"; };
+		4AD300D922F9972A005FD01F /* TransferTableViewFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferTableViewFooterView.swift; sourceTree = "<group>"; };
 		4ADBEC7122E9F16A00D43A48 /* TransferDestinationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferDestinationCell.swift; sourceTree = "<group>"; };
 		4ADBEC7322E9F92800D43A48 /* TransferThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferThemeManager.swift; sourceTree = "<group>"; };
 		4ADC4F3F22D8CE31004F3F8D /* ReceiptRequestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptRequestHelper.swift; sourceTree = "<group>"; };
@@ -1389,7 +1389,7 @@
 		4AF4DA4122FAFFA000484F49 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4AD300D922F9972A005FD01F /* TrasferTableViewFooterView.swift */,
+				4AD300D922F9972A005FD01F /* TransferTableViewFooterView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3068,7 +3068,7 @@
 				077C337522E8CCB0000314CD /* TransferSummaryCell.swift in Sources */,
 				077C337422E8CCB0000314CD /* DividerCell.swift in Sources */,
 				077C337A22E8CCB0000314CD /* TransferForeignExchangeCell.swift in Sources */,
-				4AD300DA22F9972A005FD01F /* TrasferTableViewFooterView.swift in Sources */,
+				4AD300DA22F9972A005FD01F /* TransferTableViewFooterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
