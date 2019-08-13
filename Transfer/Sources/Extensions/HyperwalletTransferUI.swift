@@ -22,9 +22,7 @@ import Common
 
 /// The HyperwalletUI extension
 public extension HyperwalletUI {
-    /// Lists the user's transfer methods (bank account, bank card, PayPal account, prepaid card, paper check).
-    ///
-    /// The user can deactivate and add a new transfer method.
+    /// Create transfer funds
     ///
     /// - Returns: An instance of `CreateTransferCoordinator`
     func createTransferFromUserCoordinator(clientTransferId: String,
@@ -35,9 +33,7 @@ public extension HyperwalletUI {
         return coordinator
     }
 
-    /// Lists the user's transfer methods (bank account, bank card, PayPal account, prepaid card, paper check).
-    ///
-    /// The user can deactivate and add a new transfer method.
+    /// Create transfer funds
     ///
     /// - Returns: An instance of `CreateTransferCoordinator`
     func createTransferFromPrepaidCardCoordinator(clientTransferId: String,

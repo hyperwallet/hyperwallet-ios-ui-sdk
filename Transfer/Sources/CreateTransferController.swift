@@ -33,7 +33,6 @@ public final class CreateTransferController: UITableViewController {
 
     private var spinnerView: SpinnerView?
     private var presenter: CreateTransferPresenter!
-    private var forceUpdate: Bool = false
     private let registeredCells: [(type: AnyClass, id: String)] = [
         (TransferDestinationCell.self, TransferDestinationCell.reuseIdentifier),
         (TransferAllFundsCell.self, TransferAllFundsCell.reuseIdentifier),
@@ -42,15 +41,8 @@ public final class CreateTransferController: UITableViewController {
         (TransferNotesCell.self, TransferNotesCell.reuseIdentifier)
     ]
 
-    private func initializeData() {
-        if let forceUpdate = initializationData?[InitializationDataField.forceUpdateData] as? Bool {
-            self.forceUpdate = forceUpdate
-        }
-    }
-
     override public func viewDidLoad() {
         super.viewDidLoad()
-        initializeData()
         title = "transfer_funds".localized()
         navigationItem.backBarButtonItem = UIBarButtonItem.back
         largeTitle()
@@ -58,7 +50,7 @@ public final class CreateTransferController: UITableViewController {
         if let clientTransferId = initializationData?[InitializationDataField.clientTransferId] as? String {
             let sourceToken = initializationData?[InitializationDataField.sourceToken] as? String
             presenter = CreateTransferPresenter(clientTransferId, sourceToken, view: self)
-        } 
+        }
         presenter.loadCreateTransfer()
         setUpCreateTransferTableView()
         hideKeyboardWhenTappedAround()

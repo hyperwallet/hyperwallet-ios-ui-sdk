@@ -26,6 +26,7 @@ public class CreateTransferCoordinator: NSObject, HyperwalletCoordinator  {
     private var parentController: UIViewController?
 
     public func applyTheme() {
+         ThemeManager.applyTransferTheme()
     }
 
     override public init() {
@@ -39,20 +40,28 @@ public class CreateTransferCoordinator: NSObject, HyperwalletCoordinator  {
     }
 
     public func navigate() {
-        controller.hyperwalletFlowDelegate = parentController
-        parentController?.navigationController?.pushViewController(controller, animated: true)
+        controller.flowDelegate = parentController
+        if let navigationController = parentController?.navigationController {
+            navigationController.pushViewController(controller, animated: true)
+        } else {
+            parentController?.present(controller, animated: true, completion: nil)
+        }
     }
 
     public func navigateToNextPage(initializationData: [InitializationDataField: Any]? = nil) {
         let childController = ScheduleTransferController()
         childController.initializationData = initializationData
-        controller.navigationController?.pushViewController(childController, animated: true)
+        if let navigationController = controller.navigationController {
+            navigationController.pushViewController(childController, animated: true)
+        } else {
+            parentController?.present(childController, animated: true, completion: nil)
+        }
     }
 
     public func navigateBackFromNextPage(with response: Any) {
         if let parentController = parentController {
             controller.navigationController?.popToViewController(parentController, animated: true)
-            parentController.hyperwalletFlowDelegate?.didFlowComplete(with: response)
+            parentController.flowDelegate?.didFlowComplete(with: response)
         }
     }
 }

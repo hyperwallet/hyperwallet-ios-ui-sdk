@@ -19,6 +19,5 @@
 import Foundation
 
 public protocol HyperwalletFlowDelegate: class {
-    init()
     func didFlowComplete(with response: Any)
 }

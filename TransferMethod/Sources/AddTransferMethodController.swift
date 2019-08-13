@@ -40,7 +40,6 @@ public final class AddTransferMethodController: UITableViewController {
     // MARK: - Properties -
     private var country: String?
     private var currency: String?
-    private var forceUpdate: Bool?
     private var profileType: String?
     private var transferMethodTypeCode: String?
     private var processingView: ProcessingView?
@@ -417,8 +416,6 @@ extension AddTransferMethodController: AddTransferMethodView {
             infoLabel.attributedText = transferMethodType.formatFeesProcessingTime()
             let infoSection = AddTransferMethodSectionData(
                 fieldGroup: "INFORMATION",
-                country: country,
-                currency: currency,
                 cells: [infoView])
             presenter.sectionData.append(infoSection)
         }
@@ -427,8 +424,6 @@ extension AddTransferMethodController: AddTransferMethodView {
     private func addCreateButtonSection() {
         let buttonSection = AddTransferMethodSectionData(
             fieldGroup: "CREATE_BUTTON",
-            country: country,
-            currency: currency,
             cells: [createAccountButton])
         presenter.sectionData.append(buttonSection)
     }

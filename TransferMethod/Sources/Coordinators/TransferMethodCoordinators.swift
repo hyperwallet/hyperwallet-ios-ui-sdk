@@ -29,10 +29,11 @@ public class SelectTransferMethodTypeCoordinator: NSObject, HyperwalletCoordinat
         controller = SelectTransferMethodTypeController()
     }
     public func applyTheme() {
+        ThemeManager.applyTransferMethodTheme()
     }
 
     public func navigate() {
-        controller.hyperwalletFlowDelegate = parentController
+        controller.flowDelegate = parentController
         if let navigationController = parentController?.navigationController {
             navigationController.pushViewController(controller, animated: true)
         } else {
@@ -43,13 +44,17 @@ public class SelectTransferMethodTypeCoordinator: NSObject, HyperwalletCoordinat
     public func navigateToNextPage(initializationData: [InitializationDataField: Any]?) {
         let childController = AddTransferMethodController()
         childController.initializationData = initializationData
-        controller.navigationController?.pushViewController(childController, animated: true)
+        if let navigationController = controller.navigationController {
+            navigationController.pushViewController(childController, animated: true)
+        } else {
+            parentController?.present(childController, animated: true, completion: nil)
+        }
     }
 
     public func navigateBackFromNextPage(with response: Any) {
         if let parentController = parentController {
             controller.navigationController?.popToViewController(parentController, animated: true)
-            parentController.hyperwalletFlowDelegate?.didFlowComplete(with: response)
+            parentController.flowDelegate?.didFlowComplete(with: response)
         }
     }
 
@@ -68,11 +73,16 @@ public class AddTransferMethodCoordinator: NSObject, HyperwalletCoordinator {
         controller = AddTransferMethodController()
     }
     public func applyTheme() {
+        ThemeManager.applyTransferMethodTheme()
     }
 
     public func navigate() {
-        controller.hyperwalletFlowDelegate = parentController
-        parentController?.navigationController?.pushViewController(controller, animated: true)
+        controller.flowDelegate = parentController
+        if let navigationController = parentController?.navigationController {
+            navigationController.pushViewController(controller, animated: true)
+        } else {
+            parentController?.present(controller, animated: true, completion: nil)
+        }
     }
 
     public func navigateToNextPage(initializationData: [InitializationDataField: Any]?) {
@@ -81,7 +91,7 @@ public class AddTransferMethodCoordinator: NSObject, HyperwalletCoordinator {
     public func navigateBackFromNextPage(with response: Any) {
         if let parentController = parentController {
             controller.navigationController?.popToViewController(parentController, animated: true)
-            parentController.hyperwalletFlowDelegate?.didFlowComplete(with: response)
+            parentController.flowDelegate?.didFlowComplete(with: response)
         }
     }
 
@@ -102,8 +112,12 @@ public class ListTransferMethodsCoordinator: NSObject, HyperwalletCoordinator {
     }
 
     public func navigate() {
-        controller.hyperwalletFlowDelegate = parentController
-        parentController?.navigationController?.pushViewController(controller, animated: true)
+        controller.flowDelegate = parentController
+        if let navigationController = parentController?.navigationController {
+            navigationController.pushViewController(controller, animated: true)
+        } else {
+            parentController?.present(controller, animated: true, completion: nil)
+        }
     }
 
     public func navigateToNextPage(initializationData: [InitializationDataField: Any]?) {
@@ -114,7 +128,7 @@ public class ListTransferMethodsCoordinator: NSObject, HyperwalletCoordinator {
 
     public func navigateBackFromNextPage(with response: Any) {
         controller.navigationController?.popToViewController(controller, animated: true)
-        controller.hyperwalletFlowDelegate?.didFlowComplete(with: response)
+        controller.flowDelegate?.didFlowComplete(with: response)
     }
 
     public func start(initializationData: [InitializationDataField: Any]? = nil, parentController: UIViewController) {

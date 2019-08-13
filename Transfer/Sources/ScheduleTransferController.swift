@@ -27,7 +27,6 @@ public final class ScheduleTransferController: UITableViewController, UITextFiel
     private var spinnerView: SpinnerView?
     private var processingView: ProcessingView?
     private var presenter: ScheduleTransferPresenter!
-    private var forceUpdate: Bool = false
 
     private let registeredCells: [(type: AnyClass, id: String)] = [
         (TransferDestinationCell.self, TransferDestinationCell.reuseIdentifier),
@@ -37,15 +36,8 @@ public final class ScheduleTransferController: UITableViewController, UITextFiel
         (TransferButtonCell.self, TransferButtonCell.reuseIdentifier)
     ]
 
-    private func initializeData() {
-        if let forceUpdate = initializationData?[InitializationDataField.forceUpdateData] as? Bool {
-            self.forceUpdate = forceUpdate
-        }
-    }
-
     override public func viewDidLoad() {
         super.viewDidLoad()
-        initializeData()
         title = "transfer_funds".localized()
         largeTitle()
         setViewBackgroundColor()

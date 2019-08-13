@@ -134,7 +134,6 @@ extension SelectTransferMethodTypeController: SelectTransferMethodTypeView {
         initializationData[InitializationDataField.currency]  = currency
         initializationData[InitializationDataField.profileType]  = profileType
         initializationData[InitializationDataField.transferMethodTypeCode]  = transferMethodTypeCode
-        initializationData[InitializationDataField.forceUpdateData]  = true
         coordinator?.navigateToNextPage(initializationData: initializationData)
     }
 

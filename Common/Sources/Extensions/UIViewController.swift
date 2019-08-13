@@ -59,16 +59,16 @@ extension UIViewController: HyperwalletFlowDelegate {
     open func didFlowComplete(with response: Any) {
     }
     struct Holder {
-        static var hyperwalletFlowDelegate: HyperwalletFlowDelegate?
+        static var flowDelegate: HyperwalletFlowDelegate?
         static var coordinator: HyperwalletCoordinator?
         static var initializationData: [InitializationDataField: Any]?
     }
-    public weak var hyperwalletFlowDelegate: HyperwalletFlowDelegate? {
+    public weak var flowDelegate: HyperwalletFlowDelegate? {
         get {
-            return Holder.hyperwalletFlowDelegate
+            return Holder.flowDelegate
         }
         set(newValue) {
-            Holder.hyperwalletFlowDelegate = newValue
+            Holder.flowDelegate = newValue
         }
     }
     public var coordinator: HyperwalletCoordinator? {

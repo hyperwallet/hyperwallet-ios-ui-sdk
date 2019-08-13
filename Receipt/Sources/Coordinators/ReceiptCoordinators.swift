@@ -29,10 +29,11 @@ public class ListReceiptCoordinator: NSObject, HyperwalletCoordinator {
         controller = ListReceiptController()
     }
     public func applyTheme() {
+        ThemeManager.applyReceiptTheme()
     }
 
     public func navigate() {
-        controller.hyperwalletFlowDelegate = parentController
+        controller.flowDelegate = parentController
         if let navigationController = parentController?.navigationController {
             navigationController.pushViewController(controller, animated: true)
         } else {
@@ -42,14 +43,20 @@ public class ListReceiptCoordinator: NSObject, HyperwalletCoordinator {
 
     public func navigateToNextPage(initializationData: [InitializationDataField: Any]?) {
         let childController = ReceiptDetailController()
-        childController.hyperwalletFlowDelegate = parentController
+        childController.flowDelegate = parentController
         childController.initializationData = initializationData
-        controller.navigationController?.pushViewController(childController, animated: true)
+        if let navigationController = controller.navigationController {
+            navigationController.pushViewController(childController, animated: true)
+        } else {
+            parentController?.present(childController, animated: true, completion: nil)
+        }
     }
 
     public func navigateBackFromNextPage(with response: Any) {
-        controller.navigationController?.popToViewController(controller, animated: true)
-        controller.hyperwalletFlowDelegate?.didFlowComplete(with: response)
+        if let navigationController = controller.navigationController {
+            navigationController.popToViewController(navigationController, animated: true)
+            navigationController.flowDelegate?.didFlowComplete(with: response)
+        }
     }
 
     public func start(initializationData: [InitializationDataField: Any]? = nil, parentController: UIViewController) {

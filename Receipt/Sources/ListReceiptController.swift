@@ -31,18 +31,11 @@ public final class ListReceiptController: UITableViewController {
     private var defaultHeaderHeight = CGFloat(38.0)
     private let sectionTitleDateFormat = "MMMM yyyy"
     private var loadMoreReceipts = false
-    private var forceUpdate: Bool = false
 
     private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "empty_list_receipt_message".localized())
 
-    private func initializeData() {
-        if let forceUpdate = initializationData?[InitializationDataField.forceUpdateData] as? Bool {
-            self.forceUpdate = forceUpdate
-        }
-    }
     override public func viewDidLoad() {
         super.viewDidLoad()
-        initializeData()
         title = "title_receipts".localized()
         largeTitle()
         setViewBackgroundColor()
