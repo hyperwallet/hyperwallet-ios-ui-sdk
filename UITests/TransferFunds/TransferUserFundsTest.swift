@@ -412,6 +412,16 @@ class TransferUserFundsTest: BaseTests {
         } else {
             XCTAssertTrue(error.contains("Available for transfer: 452.14 Enter amount or select tranfer all funds"))
         }
+
+        transferFunds.enterTransferAmount(amount: "0.00")
+        transferFunds.nextLabel.tap()
+
+        if #available(iOS 11.4, *) {
+            XCTAssertTrue(error.contains("Available for transfer: 452.14\nEnter amount or select tranfer all funds"))
+        } else {
+            XCTAssertTrue(error.contains("Available for transfer: 452.14 Enter amount or select tranfer all funds"))
+        }
+
     }
 
     /*
@@ -657,17 +667,21 @@ class TransferUserFundsTest: BaseTests {
 
     /*
      func testTransferFunds_createTransferConnectionError() {
-     mockServer.setupStubConnectionError(url: "/rest/v3/users/usr-token/transfer-methods",
-     filename: "ListMoreThanOneTransferMethod",
-     method: HTTPMethod.get)
+         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+                             filename: "ListMoreThanOneTransferMethod",
+                             method: HTTPMethod.get)
 
-     XCTAssertTrue(transferFundMenu.exists)
-     transferFundMenu.tap()
-     waitForNonExistence(spinner)
+          mockServer.setUpConnectionResponse(url: "/rest/v3/transfer", filename: "AvailableFundUSD", method: HTTPMethod.post)
 
-     let predicate = NSPredicate(format:
-     "label CONTAINS[c] 'We are encountering a problem processing the request. Please check your connectivity'")
+         XCTAssertTrue(transferFundMenu.exists)
+         transferFundMenu.tap()
 
-     XCTAssertTrue(app.alerts["Connectivity Issue"].staticTexts.element(matching: predicate).exists)
-     } */
+         waitForNonExistence(spinner)
+
+         let predicate = NSPredicate(format:
+         "label CONTAINS[c] 'We are encountering a problem processing the request. Please check your connectivity'")
+
+         XCTAssertTrue(app.alerts["Connectivity Issue"].staticTexts.element(matching: predicate).exists)
+     }
+   */
 }
