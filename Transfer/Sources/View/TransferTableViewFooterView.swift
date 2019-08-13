@@ -19,7 +19,7 @@
 import UIKit
 
 final class TransferTableViewFooterView: UITableViewHeaderFooterView {
-    static let reuseIdentifier = "TransferTableViewFooterViewIdentifier"
+    static let reuseIdentifier = "transferTableViewFooterViewIdentifier"
 
     lazy var footerLabel: UILabel = {
         let label = UILabel(frame: .zero)
