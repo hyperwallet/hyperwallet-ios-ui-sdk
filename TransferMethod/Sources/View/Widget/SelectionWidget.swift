@@ -47,7 +47,7 @@ final class SelectionWidget: AbstractWidget {
         }
 
         addArrangedSubview(labelField)
-
+        spacing = 16
         if field.isEditable ?? true {
             labelField.textColor = Theme.Text.color
             labelField.isUserInteractionEnabled = true
