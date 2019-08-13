@@ -357,6 +357,7 @@ class TransferUserFundsTest: BaseTests {
 
         XCTAssertTrue(transferFunds.nextLabel.exists)
         transferFunds.nextLabel.tap()
+        waitForNonExistence(spinner)
 
         let addTransferMethodPredicate = NSPredicate(format:
                     "label CONTAINS[c] 'Add a transfer method first'")
@@ -397,13 +398,11 @@ class TransferUserFundsTest: BaseTests {
 
         XCTAssertTrue(transferFunds.nextLabel.exists)
         transferFunds.nextLabel.tap()
+        waitForNonExistence(spinner)
 
         let error = app.tables["createTransferTableView"].staticTexts["transferFooterLabelIdentifier"].label
-        if #available(iOS 11.4, *) {
-            XCTAssertTrue(error.contains("Available for transfer: 452.14\nEnter amount or select tranfer all funds"))
-        } else {
-            XCTAssertTrue(error.contains("Available for transfer: 452.14 Enter amount or select tranfer all funds"))
-        }
+        XCTAssertTrue(error.contains("Available for transfer: 452.14\nEnter amount or select tranfer all funds")
+                ||  error.contains("Available for transfer: 452.14 Enter amount or select tranfer all funds"))
     }
 
     /*
@@ -523,12 +522,15 @@ class TransferUserFundsTest: BaseTests {
             transferFunds.enterNotes(description: over255String)
         }
 
+        mockServer.setupStubError(url: "/rest/v3/transfers", filename: "NoteDescriptionLengthValidationError", method: HTTPMethod.post)
+
         XCTAssertTrue(transferFunds.nextLabel.exists)
         transferFunds.nextLabel.tap()
+        waitForNonExistence(spinner)
 
-//        let predicate = NSPredicate(format:
-//            "label CONTAINS[c] 'Notes should be between 1 and 255 characters'")
-//        XCTAssert(app.tables["createTransferTableView"].staticTexts.element(matching: predicate).exists)
+        let error = app.tables["createTransferTableView"].staticTexts["transferFooterLabelIdentifier"].label
+        XCTAssertTrue(error == "Available for transfer: 452.14\nNotes should be between 1 and 255 characters"
+          || error == "Available for transfer: 452.14 Notes should be between 1 and 255 characters")
     }
 
     /* Given that Transfer methods exist
