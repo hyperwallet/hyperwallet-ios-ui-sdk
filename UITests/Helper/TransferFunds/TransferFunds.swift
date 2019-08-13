@@ -84,7 +84,7 @@ class TransferFunds {
 
         availableBalance = app.tables["createTransferTableView"].staticTexts["available_balance_footer"]
 
-        nextLabel = app.tables["createTransferTableView"].staticTexts["addTransferNextLabel"]
+        nextLabel = app.tables["createTransferTableView"].staticTexts["createTransferNextLabel"]
     }
 
     func toggleTransferAllFundsSwitch() {
