@@ -55,7 +55,8 @@ class TransferFunds {
 
         addSelectDestinationPlaceholderString = ""
 
-        addSelectDestinationDetailLabel = app.tables["createTransferTableView"].staticTexts["transferDestinationSubtitleLabel"]
+        addSelectDestinationDetailLabel = app.tables["createTransferTableView"]
+            .staticTexts["transferDestinationSubtitleLabel"]
 
         transferSectionLabel = app.tables["createTransferTableView"]
             .staticTexts.containing(.staticText, identifier: "TRANSFER")
@@ -71,7 +72,8 @@ class TransferFunds {
 
         transferAllFundsSwitch = app.tables["createTransferTableView"].switches["transferAllFundsSwitch"]
 
-        notesSectionLabel = app.tables["createTransferTableView"] .staticTexts.containing(.staticText, identifier: "NOTES")
+        notesSectionLabel = app.tables["createTransferTableView"]
+            .staticTexts.containing(.staticText, identifier: "NOTES")
             .element(matching: NSPredicate(format: "label CONTAINS[c] 'NOTES'"))
 
         notesPlaceHolderString = "transfer_description".localized()

@@ -27,9 +27,6 @@ import UIKit
 /// Each transfer will be represented by an auto-generated, non-editable token that can be used
 /// to retrieve the transfer resource.
 public final class CreateTransferController: UITableViewController {
-    let defaultUIKitRowHeight = CGFloat(44.0)
-    let defaultUIKitFooterHeight = CGFloat(33.0)
-
     enum FooterSection: Int, CaseIterable {
         case destination, transfer, notes, button
     }
@@ -73,9 +70,9 @@ public final class CreateTransferController: UITableViewController {
         tableView.accessibilityIdentifier = "createTransferTableView"
         tableView.cellLayoutMarginsFollowReadableWidth = false
         tableView.sectionFooterHeight = UITableView.automaticDimension
-        tableView.estimatedSectionFooterHeight = defaultUIKitFooterHeight
+        tableView.estimatedSectionFooterHeight = Theme.Cell.smallHeight
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = defaultUIKitRowHeight
+        tableView.estimatedRowHeight = Theme.Cell.smallHeight
 
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)
@@ -233,6 +230,29 @@ extension CreateTransferController {
 
 // MARK: - CreateTransferView implementation
 extension CreateTransferController: CreateTransferView {
+    func areAllFieldsValid() -> Bool {
+        presenter.resetErrorMessagesForAllSections()
+        for section in presenter.sectionData {
+            switch section.createTransferSectionHeader {
+            case .destination:
+                if presenter.selectedTransferMethod == nil {
+                    section.errorMessage = "transfer_error_add_a_transfer_method_first".localized()
+                    updateFooter(for: .destination)
+                }
+
+            case .transfer:
+                if presenter.amount == nil || presenter.amount!.isEmpty || Double(presenter.amount!) == 0.00 {
+                    section.errorMessage = "transfer_error_enter_amount_or_transfer_all".localized()
+                    updateFooter(for: .transfer)
+                }
+
+            default:
+                break
+            }
+        }
+        return presenter.sectionData.allSatisfy({ $0.errorMessage?.isEmpty ?? true })
+    }
+
     func updateFooter(for section: FooterSection) {
         UIView.setAnimationsEnabled(false)
         tableView.beginUpdates()

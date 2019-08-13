@@ -40,6 +40,7 @@ protocol CreateTransferView: class {
     func showScheduleTransfer(_ transfer: HyperwalletTransfer)
     func updateTransferSection()
     func updateFooter(for section: CreateTransferController.FooterSection)
+    func areAllFieldsValid() -> Bool
 }
 
 final class CreateTransferPresenter {
@@ -135,14 +136,8 @@ final class CreateTransferPresenter {
                 })
 
             case .success(let result):
-                guard let firstActivatedTransferMethod = result?.data?.first else {
-                    strongSelf.selectedTransferMethod = nil
-                    strongSelf.view.hideLoading()
-                    strongSelf.view.showCreateTransfer()
-                    return
-                }
                 if strongSelf.selectedTransferMethod == nil {
-                    strongSelf.selectedTransferMethod = firstActivatedTransferMethod
+                    strongSelf.selectedTransferMethod = result?.data?.first
                 }
                 strongSelf.createInitialTransfer()
             }
@@ -150,40 +145,40 @@ final class CreateTransferPresenter {
     }
 
     private func createInitialTransfer() {
-        if let sourceToken = sourceToken,
+        guard let sourceToken = sourceToken,
             let destinationToken = selectedTransferMethod?.token,
-            let destinationCurrency = selectedTransferMethod?.transferMethodCurrency {
-            let transfer = HyperwalletTransfer.Builder(clientTransferId: clientTransferId,
-                                                       sourceToken: sourceToken,
-                                                       destinationToken: destinationToken)
-                .destinationCurrency(destinationCurrency)
-                .build()
+            let destinationCurrency = selectedTransferMethod?.transferMethodCurrency else {
+                view.hideLoading()
+                view.showCreateTransfer()
+                return
+        }
+        let transfer = HyperwalletTransfer.Builder(clientTransferId: clientTransferId,
+                                                   sourceToken: sourceToken,
+                                                   destinationToken: destinationToken)
+            .destinationCurrency(destinationCurrency)
+            .build()
 
-            transferRepository.createTransfer(transfer) { [weak self] result in
-                guard let strongSelf = self else {
-                    return
-                }
-                strongSelf.view.hideLoading()
-                switch result {
-                case .failure(let error):
-                    strongSelf.view.showError(error, { () -> Void in
-                        strongSelf.createInitialTransfer()
-                    })
-
-                case .success(let transfer):
-                    strongSelf.availableBalance = transfer?.destinationAmount
-                    strongSelf.view.showCreateTransfer()
-                }
+        transferRepository.createTransfer(transfer) { [weak self] result in
+            guard let strongSelf = self else {
+                return
             }
-        } else {
-            view.hideLoading()
-            view.showCreateTransfer()
+            strongSelf.view.hideLoading()
+            switch result {
+            case .failure(let error):
+                strongSelf.view.showError(error, { () -> Void in
+                    strongSelf.createInitialTransfer()
+                })
+
+            case .success(let transfer):
+                strongSelf.availableBalance = transfer?.destinationAmount
+                strongSelf.view.showCreateTransfer()
+            }
         }
     }
 
     // MARK: - Create Transfer Button Tapped
     func createTransfer() {
-        guard areAllFieldsValid() else {
+        guard view.areAllFieldsValid() else {
             return
         }
 
@@ -262,30 +257,9 @@ final class CreateTransferPresenter {
         }
     }
 
-    private func resetErrorMessagesForAllSections() {
+    func resetErrorMessagesForAllSections() {
         sectionData.forEach { $0.errorMessage = nil }
         CreateTransferController.FooterSection.allCases.forEach({ view.updateFooter(for: $0) })
-    }
-
-    private func areAllFieldsValid() -> Bool {
-        resetErrorMessagesForAllSections()
-        var errors = [HyperwalletError]()
-        // verify empty Amount
-        if amount?.isEmpty ?? true {
-            let error = HyperwalletError(message: "transfer_assert_enter_amount_or_transfer_all".localized(),
-                                         code: "EMPTY_AMOUNT",
-                                         fieldName: "amount")
-            errors.append(error)
-        }
-        // verify selected Transfer Method
-        if selectedTransferMethod == nil {
-            let error = HyperwalletError(message: "transfer_assert_add_a_transfer_method_first".localized(),
-                                         code: "EMPTY_TRANSFER_METHOD",
-                                         fieldName: "destination")
-            errors.append(error)
-        }
-        updateFooterContent(errors)
-        return sectionData.allSatisfy({ $0.errorMessage?.isEmpty ?? true })
     }
 
     private func errorHandler(for error: HyperwalletErrorType, _ nonBusinessErrorHandler: @escaping () -> Void) {
@@ -308,28 +282,9 @@ final class CreateTransferPresenter {
 
     private func updateFooterContent(_ errors: [HyperwalletError]) {
         for error in errors {
-            guard let fieldName = error.fieldName, !fieldName.isEmpty else {
-                continue
-            }
-            switch fieldName {
-            case "destination":
-                if let sectionData = sectionData.first(where: { $0.createTransferSectionHeader == .destination }) {
-                    sectionData.errorMessage = error.message
-                    view.updateFooter(for: .destination)
-                }
-            case "amount":
-                if let sectionData = sectionData.first(where: { $0.createTransferSectionHeader == .transfer }) {
-                    sectionData.errorMessage = error.message
-                    view.updateFooter(for: .transfer)
-                }
-            case "notes":
-                if let sectionData = sectionData.first(where: { $0.createTransferSectionHeader == .notes }) {
-                    sectionData.errorMessage = error.message
-                    view.updateFooter(for: .notes)
-                }
-
-            default:
-                break
+            if let sectionData = sectionData.first(where: { $0.createTransferSectionHeader == .transfer }) {
+                sectionData.errorMessage = error.message
+                view.updateFooter(for: .transfer)
             }
         }
     }
