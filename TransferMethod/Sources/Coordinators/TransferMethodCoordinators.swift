@@ -83,6 +83,14 @@ public class AddTransferMethodCoordinator: NSObject, HyperwalletCoordinator {
     }
 
     public func navigateBackFromNextPage(with response: Any) {
+        if let parentController = parentController {
+            if let navigationController = controller.navigationController {
+                navigationController.popToViewController(parentController, animated: true)
+            } else {
+                controller.dismiss(animated: true, completion: nil)
+            }
+        }
+        controller.flowDelegate?.didFlowComplete(with: response)
     }
 
     public func start(initializationData: [InitializationDataField: Any]? = nil, parentController: UIViewController) {
