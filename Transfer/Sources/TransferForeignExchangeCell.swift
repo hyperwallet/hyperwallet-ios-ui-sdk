@@ -66,7 +66,7 @@ extension TransferForeignExchangeCell {
         } else {
             textLabel?.text = sectionData.rows[rowIndex].title
             detailTextLabel?.text = sectionData.rows[rowIndex].value
-            // modify separatorInset length when there is another foreign exanchange after this row
+            // modify separatorInset length when there is another foreign exchange after this row
             if let nextRow = sectionData.rows[safe: rowIndex + 1], nextRow.title == nil {
                shouldHideSeparator = true
             }

@@ -202,7 +202,8 @@ class ViewController: UITableViewController {
             let prepaidCardToken = Bundle.main.infoDictionary!["PREPAID_CARD_TOKEN"] as! String
             let clientTransferId = UUID().uuidString.lowercased()
             let viewController = HyperwalletUI.shared
-                .createTransferFromPrepaidCardController(clientTransferId: clientTransferId, prepaidCardToken: prepaidCardToken)
+                .createTransferFromPrepaidCardController(clientTransferId: clientTransferId,
+                                                         prepaidCardToken: prepaidCardToken)
             navigationController?.pushViewController(viewController, animated: true)
 
         default:
