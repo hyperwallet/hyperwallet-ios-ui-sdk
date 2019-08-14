@@ -375,7 +375,6 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 2), "United States Ending on 4281")
 
         // Assert first row is checked by default
-        let checkButton = usdBankAccount.buttons["More Info"]
         XCTAssertTrue(usdBankAccount.buttons["More Info"].exists, "By default the first row should be selected")
         XCTAssertFalse(cadBankAccount.buttons["More Info"].exists, "By default the first row should be selected")
         XCTAssertFalse(prepaidCard.buttons["More Info"].exists, "By default the first row should be selected")
@@ -422,7 +421,8 @@ class TransferUserFundsTest: BaseTests {
 
         let addTransferMethodPredicate = NSPredicate(format:
             "label CONTAINS[c] 'Add a transfer method first'")
-        XCTAssert(app.tables["createTransferTableView"].staticTexts.element(matching: addTransferMethodPredicate).exists)
+        XCTAssert(app.tables["createTransferTableView"]
+            .staticTexts.element(matching: addTransferMethodPredicate).exists)
 
         let transferAllFundPredicate = NSPredicate(format:
             "label CONTAINS[c] 'Enter amount or select tranfer all funds'")
@@ -583,7 +583,8 @@ class TransferUserFundsTest: BaseTests {
             transferFunds.enterNotes(description: over255String)
         }
 
-        mockServer.setupStubError(url: "/rest/v3/transfers", filename: "NoteDescriptionLengthValidationError", method: HTTPMethod.post)
+        mockServer.setupStubError(url: "/rest/v3/transfers",
+                                  filename: "NoteDescriptionLengthValidationError", method: HTTPMethod.post)
 
         XCTAssertTrue(transferFunds.nextLabel.exists)
         transferFunds.nextLabel.tap()
