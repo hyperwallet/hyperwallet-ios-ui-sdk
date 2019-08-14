@@ -81,7 +81,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         // TODO: Assert the final landing page
 
     }
-    // ----------------
+    
     func testTransferFundsConfirmation_withFX() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListMoreThanOneTransferMethod",
