@@ -81,7 +81,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         // TODO: Assert the final landing page
 
     }
-
+    // ----------------
     func testTransferFundsConfirmation_withFX() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListMoreThanOneTransferMethod",
@@ -123,7 +123,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertTrue(transferFundsConfirmation.addSelectDestinationLabel.exists)
         XCTAssertTrue(transferFundsConfirmation.addSelectDestinationDetailLabel.exists)
 
-        // 2.  Exchange Rate Section
+        // 2.Exchange Rate Section
         XCTAssertTrue(transferFundsConfirmation.foreignExchangeSectionLabel.label == "FOREIGN EXCHANGE")
         XCTAssertTrue(app.navigationBars["Transfer Funds"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 1).staticTexts["You sell:"].exists)
