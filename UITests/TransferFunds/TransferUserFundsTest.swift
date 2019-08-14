@@ -429,11 +429,6 @@ class TransferUserFundsTest: BaseTests {
         XCTAssert(app.tables["createTransferTableView"].staticTexts.element(matching: transferAllFundPredicate).exists)
     }
 
-    /*
-     When user's account has available fund AND selected a Transfer method
-     when user tab "Next" without entering Transfer Amount
-     Then "Add a transfer method first" footer shows under "Destination" section
-     Then "Enter amount or select transfer all funds" footer shows under "Transfer all funds"
      */
     func testTransferFunds_createTransferWhenDestinationAmountNotSet() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
@@ -551,8 +546,6 @@ class TransferUserFundsTest: BaseTests {
         XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
     }
 
-    /* When user enter notes description over the length limit (255) and tab Next
-     Then shows error dialog.
      */
     func testTransferFunds_createTransferDescriptionLength() {
         let over255String = """
@@ -721,17 +714,15 @@ class TransferUserFundsTest: BaseTests {
      mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
      filename: "ListMoreThanOneTransferMethod",
      method: HTTPMethod.get)
-
      mockServer.setUpConnectionResponse(url: "/rest/v3/transfer", filename: "AvailableFundUSD", method: HTTPMethod.post)
-
      XCTAssertTrue(transferFundMenu.exists)
      transferFundMenu.tap()
      
      waitForNonExistence(spinner)
-
+     
      let predicate = NSPredicate(format:
      "label CONTAINS[c] 'We are encountering a problem processing the request. Please check your connectivity'")
-
+     
      XCTAssertTrue(app.alerts["Connectivity Issue"].staticTexts.element(matching: predicate).exists)
      }
      */
