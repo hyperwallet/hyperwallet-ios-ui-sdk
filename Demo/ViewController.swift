@@ -50,6 +50,7 @@ class ViewController: UITableViewController {
         case prepaidCardReceipts
         case transferFunds
         case transferFundsPPC
+
         var title: String {
             switch self {
             case .paymentDetails: return "Payment Details"
@@ -62,6 +63,7 @@ class ViewController: UITableViewController {
             case .transferFundsPPC: return "Transfer Funds PPC"
             }
         }
+
         var detail: String {
             switch self {
             case .paymentDetails: return "Configure how you want to get paid"
@@ -76,7 +78,7 @@ class ViewController: UITableViewController {
         }
     }
 
-    private var tableViewRowList: [Example: () -> Void]!
+    private var exampleList: [Example: () -> Void]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,19 +93,19 @@ class ViewController: UITableViewController {
         // Setup
         HyperwalletUI.setup(IntegratorAuthenticationProvider(baseUrl, userToken))
 
-        tableViewRowList = [
-            .listTransferMethod: listTransferMethod,
-            .selectTransferMethod: selectTransferMethod,
-            .addTransferMethod: addTransferMethod,
-            .userReceipts: userReceipts,
-            .prepaidCardReceipts: prepaidCardReceipts,
-            .transferFunds: transferFunds,
-            .transferFundsPPC: transferFundsPPC
+        exampleList = [
+            .listTransferMethod: showExampleListTransferMethod,
+            .selectTransferMethod: showExampleSelectTransferMethod,
+            .addTransferMethod: showExampleAddTransferMethod,
+            .userReceipts: showExampleUserReceipts,
+            .prepaidCardReceipts: showExamplePrepaidCardReceipts,
+            .transferFunds: showExampleTransferFunds,
+            .transferFundsPPC: showExampleTransferFundsPPC
         ]
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.row {
+        switch indexPath.item {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "TopCell", for: indexPath)
                 as! TopCell
@@ -148,14 +150,14 @@ class ViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         guard let example = Example(rawValue: indexPath.item),
-              let performExample = tableViewRowList[example] else {
-            return
+            let showExample = exampleList[example] else {
+                return
         }
-        performExample()
+        showExample()
     }
 
     // MARK: - Main menu actions
-    private func transferFundsPPC() {
+    private func showExampleTransferFundsPPC() {
         let prepaidCardToken = Bundle.main.infoDictionary!["PREPAID_CARD_TOKEN"] as! String
         let clientTransferId = UUID().uuidString.lowercased()
         let coordinator = HyperwalletUI.shared
@@ -165,30 +167,30 @@ class ViewController: UITableViewController {
         coordinator.navigate()
     }
 
-    private func transferFunds() {
+    private func showExampleTransferFunds() {
         let clientTransferId = UUID().uuidString.lowercased()
         let coordinator = HyperwalletUI.shared
             .createTransferFromUserCoordinator(clientTransferId: clientTransferId, parentController: self)
         coordinator.navigate()
     }
 
-    private func prepaidCardReceipts() {
+    private func showExamplePrepaidCardReceipts() {
         let prepaidCardToken = Bundle.main.infoDictionary!["PREPAID_CARD_TOKEN"] as! String
         let coordinator = HyperwalletUI.shared
             .listPrepaidCardReceiptCoordinator(parentController: self, prepaidCardToken: prepaidCardToken)
         coordinator.navigate()
     }
 
-    private func userReceipts() {
+    private func showExampleUserReceipts() {
         let coordinator = HyperwalletUI.shared.listUserReceiptCoordinator(parentController: self)
         coordinator.navigate()
     }
 
-    private func addTransferMethod() {
+    private func showExampleAddTransferMethod() {
         if let country = ProcessInfo.processInfo.environment["COUNTRY"],
-           let currency = ProcessInfo.processInfo.environment["CURRENCY"],
-           let accountType = ProcessInfo.processInfo.environment["ACCOUNT_TYPE"],
-           let profileType = ProcessInfo.processInfo.environment["PROFILE_TYPE"] {
+            let currency = ProcessInfo.processInfo.environment["CURRENCY"],
+            let accountType = ProcessInfo.processInfo.environment["ACCOUNT_TYPE"],
+            let profileType = ProcessInfo.processInfo.environment["PROFILE_TYPE"] {
             let coordinator = HyperwalletUI.shared
                 .addTransferMethodCoordinator(country, currency, profileType, accountType, parentController: self)
             coordinator.navigate()
@@ -199,12 +201,12 @@ class ViewController: UITableViewController {
         }
     }
 
-    private func selectTransferMethod() {
+    private func showExampleSelectTransferMethod() {
         let coordinator = HyperwalletUI.shared.selectTransferMethodTypeCoordinator(parentController: self)
         coordinator.navigate()
     }
 
-    private func listTransferMethod() {
+    private func showExampleListTransferMethod() {
         let coordinator = HyperwalletUI.shared.listTransferMethodCoordinator(parentController: self)
         coordinator.navigate()
     }
