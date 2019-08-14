@@ -26,29 +26,60 @@ final class TransferAllFundsCell: UITableViewCell {
 
     private var transferAllFundsSwitchHandler: TransferAllFundsSwitchHandler?
 
-    private var transferAllFundsSwitch: UISwitch = {
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.text = "transfer_all_funds".localized()
+        label.accessibilityLabel = "transfer_all_funds".localized()
+        label.accessibilityIdentifier = "transferAllFundsTitleLabel"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        return label
+    }()
+
+    private lazy var transferAllFundsSwitch: UISwitch = {
         let transferAllSwitch = UISwitch(frame: .zero)
         transferAllSwitch.setOn(false, animated: false)
         transferAllSwitch.accessibilityIdentifier = "transferAllFundsSwitch"
+        transferAllSwitch.translatesAutoresizingMaskIntoConstraints = false
+        transferAllSwitch.setContentHuggingPriority(.required, for: .horizontal)
+        transferAllSwitch.setContentCompressionResistancePriority(.required, for: .horizontal)
         return transferAllSwitch
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .value1, reuseIdentifier: reuseIdentifier)
-        selectionStyle = .none
-        accessoryView = transferAllFundsSwitch
-        transferAllFundsSwitch.addTarget(self, action: #selector(switchStateDidChange), for: .valueChanged)
-        setUpTitleLabel()
+        super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        setupCell()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
-    private func setUpTitleLabel() {
-        textLabel?.text = "transfer_all_funds".localized()
-        textLabel?.accessibilityLabel = "transfer_all_funds".localized()
-        textLabel?.accessibilityIdentifier = "transferAllFundsTitleLabel"
+    private func setupCell() {
+        selectionStyle = .none
+        transferAllFundsSwitch.addTarget(self, action: #selector(switchStateDidChange), for: .valueChanged)
+
+        let stackView = UIStackView(frame: .zero)
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 15
+        stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(transferAllFundsSwitch)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+
+        contentView.addSubview(stackView)
+        let margins = contentView.layoutMarginsGuide
+
+        let constraints = [
+            stackView.safeAreaLeadingAnchor.constraint(equalTo: margins.leadingAnchor),
+            stackView.safeAreaTrailingAnchor.constraint(equalTo: margins.trailingAnchor),
+            stackView.safeAreaTopAnchor.constraint(equalTo: margins.topAnchor),
+            stackView.safeAreaBottomAnchor.constraint(equalTo: margins.bottomAnchor)
+        ]
+        constraints.forEach { $0.priority = UILayoutPriority(999) }
+        NSLayoutConstraint.activate(constraints)
     }
 
     @objc
@@ -65,12 +96,12 @@ final class TransferAllFundsCell: UITableViewCell {
 extension TransferAllFundsCell {
     // MARK: Theme manager's proxy properties
     @objc dynamic var titleLabelFont: UIFont! {
-        get { return textLabel?.font }
-        set { textLabel?.font = newValue }
+        get { return titleLabel.font }
+        set { titleLabel.font = newValue }
     }
 
     @objc dynamic var titleLabelColor: UIColor! {
-        get { return textLabel?.textColor }
-        set { textLabel?.textColor = newValue }
+        get { return titleLabel.textColor }
+        set { titleLabel.textColor = newValue }
     }
 }
