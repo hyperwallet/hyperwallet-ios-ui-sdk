@@ -121,13 +121,19 @@ class TransferUserFundsTest: BaseTests {
         // Amount row
         XCTAssertEqual(transferFunds.transferAmountLabel.label, "Amount")
         XCTAssertEqual(transferFunds.transferCurrency.label, "USD")
+        transferFunds.transferAllFundsSwitch.tap()
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "452.14")
 
         transferFunds.addSelectDestinationLabel.tap()
         // Select Destination (CAD)
+        mockServer.setupStub(url: "/rest/v3/transfers", filename: "AvailableFundCAD", method: HTTPMethod.post)
         let cadBankAccount = app.tables.element.children(matching: .cell).element(boundBy: 1)
         cadBankAccount.tap()
 
         XCTAssertEqual(transferFunds.transferCurrency.label, "CAD")
+        transferFunds.transferAllFundsSwitch.tap()
+        // Assert Destination Amount is automatically insert into the amount field
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "7,301.64")
     }
 
     func testTransferFunds_createTransferWithAllFunds() {

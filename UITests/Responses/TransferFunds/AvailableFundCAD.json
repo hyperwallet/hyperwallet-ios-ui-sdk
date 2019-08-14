@@ -1,0 +1,23 @@
+{
+    "token": "trf-token",
+    "status": "QUOTED",
+    "createdOn": "2019-07-24T18:53:42",
+    "clientTransferId": "6712348070815",
+    "sourceToken": "usr-token",
+    "sourceCurrency": "CAD",
+    "destinationToken": "trm-token",
+    "destinationAmount": "7,301.64",
+    "destinationFeeAmount": "2.20",
+    "destinationCurrency": "CAD",
+    "notes": "Partial-Balance Transfer888",
+    "memo": "TransferClientId56388",
+    "expiresOn": "2019-07-24T18:55:42",
+    "links": [
+        {
+            "params": {
+                "rel": "self"
+            },
+            "href": "https://localhost.com/rest/v3/transfers/trf-token"
+        }
+    ]
+}
