@@ -109,11 +109,7 @@ public final class ListTransferMethodController: UITableViewController {
     }
 
     private func addTransferMethod() {
-        if coordinator is ListTransferMethodsCoordinator {
-            coordinator?.navigateToNextPage(initializationData: nil)
-        } else {
-            coordinator?.navigate()
-        }
+        coordinator?.navigateToNextPage(initializationData: nil)
     }
 
     private func setupTransferMethodTableView() {
@@ -204,7 +200,7 @@ extension ListTransferMethodController {
     override public func didFlowComplete(with response: Any) {
         if response as? HyperwalletTransferMethod != nil {
             // refresh transfer method list
-            presenter.listTransferMethods(true)
+            presenter.listTransferMethods()
         }
     }
 }

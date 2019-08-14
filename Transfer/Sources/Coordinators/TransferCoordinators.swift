@@ -41,27 +41,25 @@ public class CreateTransferCoordinator: NSObject, HyperwalletCoordinator  {
 
     public func navigate() {
         controller.flowDelegate = parentController
-        if let navigationController = parentController?.navigationController {
-            navigationController.pushViewController(controller, animated: true)
-        } else {
-            parentController?.present(controller, animated: true, completion: nil)
-        }
+        parentController?.show(controller, sender: parentController)
     }
 
     public func navigateToNextPage(initializationData: [InitializationDataField: Any]? = nil) {
         let childController = ScheduleTransferController()
+        childController.coordinator = self
         childController.initializationData = initializationData
-        if let navigationController = controller.navigationController {
-            navigationController.pushViewController(childController, animated: true)
-        } else {
-            parentController?.present(childController, animated: true, completion: nil)
-        }
+        childController.flowDelegate = controller
+        controller.show(childController, sender: controller)
     }
 
     public func navigateBackFromNextPage(with response: Any) {
         if let parentController = parentController {
-            controller.navigationController?.popToViewController(parentController, animated: true)
-            parentController.flowDelegate?.didFlowComplete(with: response)
+            if let navigationController = controller.navigationController {
+                navigationController.popToViewController(parentController, animated: true)
+            } else {
+                controller.dismiss(animated: true, completion: nil)
+            }
         }
+        controller.flowDelegate?.didFlowComplete(with: response)
     }
 }

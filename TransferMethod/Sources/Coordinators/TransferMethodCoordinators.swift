@@ -25,7 +25,7 @@ public class SelectTransferMethodTypeCoordinator: NSObject, HyperwalletCoordinat
     private let controller: SelectTransferMethodTypeController
     private var parentController: UIViewController?
 
-    override public init() {
+    override init() {
         controller = SelectTransferMethodTypeController()
     }
     public func applyTheme() {
@@ -34,28 +34,26 @@ public class SelectTransferMethodTypeCoordinator: NSObject, HyperwalletCoordinat
 
     public func navigate() {
         controller.flowDelegate = parentController
-        if let navigationController = parentController?.navigationController {
-            navigationController.pushViewController(controller, animated: true)
-        } else {
-            parentController?.present(controller, animated: true, completion: nil)
-        }
+        parentController?.show(controller, sender: parentController)
     }
 
     public func navigateToNextPage(initializationData: [InitializationDataField: Any]?) {
         let childController = AddTransferMethodController()
         childController.initializationData = initializationData
-        if let navigationController = controller.navigationController {
-            navigationController.pushViewController(childController, animated: true)
-        } else {
-            parentController?.present(childController, animated: true, completion: nil)
-        }
+        childController.coordinator = self
+        childController.flowDelegate = controller
+        controller.show(childController, sender: controller)
     }
 
     public func navigateBackFromNextPage(with response: Any) {
         if let parentController = parentController {
-            controller.navigationController?.popToViewController(parentController, animated: true)
-            parentController.flowDelegate?.didFlowComplete(with: response)
+            if let navigationController = controller.navigationController {
+                navigationController.popToViewController(parentController, animated: true)
+            } else {
+                controller.dismiss(animated: true, completion: nil)
+            }
         }
+        controller.flowDelegate?.didFlowComplete(with: response)
     }
 
     public func start(initializationData: [InitializationDataField: Any]? = nil, parentController: UIViewController) {
@@ -69,7 +67,7 @@ public class AddTransferMethodCoordinator: NSObject, HyperwalletCoordinator {
     private let controller: AddTransferMethodController
     private var parentController: UIViewController?
 
-    override public init() {
+    override init() {
         controller = AddTransferMethodController()
     }
     public func applyTheme() {
@@ -78,21 +76,13 @@ public class AddTransferMethodCoordinator: NSObject, HyperwalletCoordinator {
 
     public func navigate() {
         controller.flowDelegate = parentController
-        if let navigationController = parentController?.navigationController {
-            navigationController.pushViewController(controller, animated: true)
-        } else {
-            parentController?.present(controller, animated: true, completion: nil)
-        }
+        parentController?.show(controller, sender: parentController)
     }
 
     public func navigateToNextPage(initializationData: [InitializationDataField: Any]?) {
     }
 
     public func navigateBackFromNextPage(with response: Any) {
-        if let parentController = parentController {
-            controller.navigationController?.popToViewController(parentController, animated: true)
-            parentController.flowDelegate?.didFlowComplete(with: response)
-        }
     }
 
     public func start(initializationData: [InitializationDataField: Any]? = nil, parentController: UIViewController) {
@@ -102,10 +92,10 @@ public class AddTransferMethodCoordinator: NSObject, HyperwalletCoordinator {
     }
 }
 
-public class ListTransferMethodsCoordinator: NSObject, HyperwalletCoordinator {
+public final class ListTransferMethodsCoordinator: NSObject, HyperwalletCoordinator {
     private let controller: ListTransferMethodController
     private var parentController: UIViewController?
-    override public init() {
+    override init() {
         controller = ListTransferMethodController()
     }
     public func applyTheme() {
@@ -113,21 +103,20 @@ public class ListTransferMethodsCoordinator: NSObject, HyperwalletCoordinator {
 
     public func navigate() {
         controller.flowDelegate = parentController
-        if let navigationController = parentController?.navigationController {
-            navigationController.pushViewController(controller, animated: true)
-        } else {
-            parentController?.present(controller, animated: true, completion: nil)
-        }
+        parentController?.show(controller, sender: parentController)
     }
 
     public func navigateToNextPage(initializationData: [InitializationDataField: Any]?) {
-        let selectCoordinator = SelectTransferMethodTypeCoordinator()
-        selectCoordinator.start(initializationData: initializationData, parentController: controller)
+        let selectCoordinator = HyperwalletUI.shared.selectTransferMethodTypeCoordinator(parentController: controller)
         selectCoordinator.navigate()
     }
 
     public func navigateBackFromNextPage(with response: Any) {
-        controller.navigationController?.popToViewController(controller, animated: true)
+        if let navigationController = controller.navigationController {
+            navigationController.popToViewController(controller, animated: true)
+        } else {
+            controller.dismiss(animated: true, completion: nil)
+        }
         controller.flowDelegate?.didFlowComplete(with: response)
     }
 

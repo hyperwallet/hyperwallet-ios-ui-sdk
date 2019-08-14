@@ -34,29 +34,26 @@ public class ListReceiptCoordinator: NSObject, HyperwalletCoordinator {
 
     public func navigate() {
         controller.flowDelegate = parentController
-        if let navigationController = parentController?.navigationController {
-            navigationController.pushViewController(controller, animated: true)
-        } else {
-            parentController?.present(controller, animated: true, completion: nil)
-        }
+        parentController?.show(controller, sender: parentController)
     }
 
     public func navigateToNextPage(initializationData: [InitializationDataField: Any]?) {
         let childController = ReceiptDetailController()
-        childController.flowDelegate = parentController
+        childController.coordinator = self
+        childController.flowDelegate = controller
         childController.initializationData = initializationData
-        if let navigationController = controller.navigationController {
-            navigationController.pushViewController(childController, animated: true)
-        } else {
-            parentController?.present(childController, animated: true, completion: nil)
-        }
+        controller.show(childController, sender: controller)
     }
 
     public func navigateBackFromNextPage(with response: Any) {
-        if let navigationController = controller.navigationController {
-            navigationController.popToViewController(navigationController, animated: true)
-            navigationController.flowDelegate?.didFlowComplete(with: response)
+        if let parentController = parentController {
+            if let navigationController = controller.navigationController {
+                navigationController.popToViewController(parentController, animated: true)
+            } else {
+                controller.dismiss(animated: true, completion: nil)
+            }
         }
+        controller.flowDelegate?.didFlowComplete(with: response)
     }
 
     public func start(initializationData: [InitializationDataField: Any]? = nil, parentController: UIViewController) {

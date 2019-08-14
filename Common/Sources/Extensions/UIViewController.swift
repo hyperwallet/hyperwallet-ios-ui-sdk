@@ -59,32 +59,38 @@ extension UIViewController: HyperwalletFlowDelegate {
     open func didFlowComplete(with response: Any) {
     }
     struct Holder {
-        static var flowDelegate: HyperwalletFlowDelegate?
-        static var coordinator: HyperwalletCoordinator?
-        static var initializationData: [InitializationDataField: Any]?
+        static var flowDelegate = [String: HyperwalletFlowDelegate]()
+        static var coordinator =  [String: HyperwalletCoordinator]()
+        static var initializationData = [String: [InitializationDataField: Any]]()
     }
     public weak var flowDelegate: HyperwalletFlowDelegate? {
         get {
-            return Holder.flowDelegate
+            let tempAddress = String(format: "%p", unsafeBitCast(self, to: Int.self))
+            return Holder.flowDelegate[tempAddress]
         }
         set(newValue) {
-            Holder.flowDelegate = newValue
+            let tempAddress = String(format: "%p", unsafeBitCast(self, to: Int.self))
+            Holder.flowDelegate[tempAddress] = newValue
         }
     }
     public var coordinator: HyperwalletCoordinator? {
         get {
-            return Holder.coordinator
+            let tempAddress = String(format: "%p", unsafeBitCast(self, to: Int.self))
+            return Holder.coordinator[tempAddress]
         }
         set(newValue) {
-            Holder.coordinator = newValue
+            let tempAddress = String(format: "%p", unsafeBitCast(self, to: Int.self))
+            Holder.coordinator[tempAddress] = newValue
         }
     }
     public var initializationData: [InitializationDataField: Any]? {
         get {
-            return Holder.initializationData
+            let tempAddress = String(format: "%p", unsafeBitCast(self, to: Int.self))
+            return Holder.initializationData[tempAddress]
         }
         set(newValue) {
-            Holder.initializationData = newValue
+            let tempAddress = String(format: "%p", unsafeBitCast(self, to: Int.self))
+            Holder.initializationData[tempAddress] = newValue
         }
     }
 }
