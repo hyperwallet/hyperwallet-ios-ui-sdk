@@ -67,16 +67,16 @@ struct ScheduleTransferForeignExchangeData: ScheduleTransferSectionData {
                 let destinationCurrency = foreignExchange.destinationCurrency,
                 let rate = foreignExchange.rate {
                 let sourceAmountFormatted = String(format: "%@ %@",
-                                                   sourceAmount.format(withActualDecimal: sourceCurrency),
+                                                   sourceAmount.format(with: sourceCurrency),
                                                    sourceCurrency)
                 let destinationAmountFormatted = String(format: "%@ %@",
                                                         destinationAmount
-                                                            .format(withActualDecimal: destinationCurrency),
+                                                        .format(with: destinationCurrency),
                                                         destinationCurrency)
                 let rateFormatted = String(format: "%@ %@ = %@ %@",
-                                           "1".format(withActualDecimal: sourceCurrency),
+                                           "1".format(with: sourceCurrency),
                                            sourceCurrency,
-                                           rate.format(withActualDecimal: destinationCurrency),
+                                           rate.format(with: destinationCurrency),
                                            destinationCurrency)
 
                 rows.append((title: "transfer_fx_sell_confirmation".localized(), value:sourceAmountFormatted))
@@ -99,8 +99,8 @@ struct ScheduleTransferSummaryData: ScheduleTransferSectionData {
     init(transfer: HyperwalletTransfer) {
         if let destinationAmount = transfer.destinationAmount,
             let destinationCurrency = transfer.destinationCurrency {
-            let destinationAmountFormattedString = destinationAmount.format(withActualDecimal: destinationCurrency)
-            guard let feeAmount = transfer.destinationFeeAmount else {
+            let destinationAmountFormattedString = destinationAmount.format(with: destinationCurrency)
+            guard let feeAmount = transfer.destinationFeeAmount, Double(feeAmount) != 0 else {
                 rows.append((title: "transfer_amount_confirmation".localized(),
                              value: destinationAmountFormattedString))
                 rows.append((title: "transfer_net_amount_confirmation".localized(),
@@ -114,16 +114,15 @@ struct ScheduleTransferSummaryData: ScheduleTransferSectionData {
             rows.append((title: "transfer_amount_confirmation".localized(),
                          value: String(format: "%@ %@",
                                        String(grossTransferAmount)
-                            .format(withActualDecimal: destinationCurrency), destinationCurrency)))
-            if feeAmount != "0.00" {
-                rows.append((title: "transfer_fee_confirmation".localized(),
+                            .format(with: destinationCurrency), destinationCurrency)))
+            rows.append((title: "transfer_fee_confirmation".localized(),
                          value: String(format: "%@ %@",
-                                       feeAmount
-                            .format(withActualDecimal: destinationCurrency),
+                                       feeAmount.format(with: destinationCurrency),
                                        destinationCurrency)))
-            }
             rows.append((title: "transfer_net_amount_confirmation".localized(),
-                         value: String(format: "%@ %@", destinationAmountFormattedString, destinationCurrency)))
+                         value: String(format: "%@ %@",
+                                       destinationAmountFormattedString,
+                                       destinationCurrency)))
         }
     }
 }

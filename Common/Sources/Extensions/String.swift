@@ -66,30 +66,6 @@ public extension String {
     func format(with currencyCode: String?) -> String {
         if !self.isEmpty {
             let currencyFormatter = NumberFormatter()
-            currencyFormatter.maximumFractionDigits = 2
-            currencyFormatter.minimumFractionDigits = 2
-            currencyFormatter.minimumIntegerDigits = 1
-            currencyFormatter.numberStyle = .currency
-            currencyFormatter.currencyCode = currencyCode
-            currencyFormatter.currencySymbol = ""
-            let formattedAmountInNumber = currencyFormatter.number(from: self)
-            return currencyFormatter.string(for: formattedAmountInNumber) ?? ""
-        } else {
-            return ""
-        }
-    }
-
-    /// Format an amount to a currency format with currency code
-    ///
-    /// - Parameter currencyCode: the currency code
-    /// - Returns: a formatted String amount with currency code
-    func format(withActualDecimal currencyCode: String?) -> String {
-        if !self.isEmpty {
-            let currencyFormatter = NumberFormatter()
-            let components = self.split(separator: ".")
-            let fractionDigits = components.count <= 1 ? 2 : components[1].count
-            currencyFormatter.maximumFractionDigits = fractionDigits
-            currencyFormatter.minimumFractionDigits = fractionDigits
             currencyFormatter.minimumIntegerDigits = 1
             currencyFormatter.numberStyle = .currency
             currencyFormatter.currencyCode = currencyCode
@@ -108,8 +84,6 @@ public extension String {
     func formatToDouble(with currencyCode: String? = nil) -> Double {
         if !self.isEmpty {
             let currencyFormatter = NumberFormatter()
-            currencyFormatter.maximumFractionDigits = 2
-            currencyFormatter.minimumFractionDigits = 2
             currencyFormatter.minimumIntegerDigits = 1
             currencyFormatter.numberStyle = .currency
             currencyFormatter.currencyCode = currencyCode
