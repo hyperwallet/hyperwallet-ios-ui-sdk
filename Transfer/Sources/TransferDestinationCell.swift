@@ -25,14 +25,47 @@ import UIKit
 final class TransferDestinationCell: GenericCell<HyperwalletTransferMethod> {
     public static let reuseIdentifier = "transferDestinationCellIdentifier"
 
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.accessibilityIdentifier = "transferDestinationTitleLabel"
+        return label
+    }()
+
+    private lazy var subtitleLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.accessibilityIdentifier = "transferDestinationSubtitleLabel"
+        return label
+    }()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
-        textLabel?.accessibilityIdentifier = "transferDestinationTitleLabel"
-        detailTextLabel?.accessibilityIdentifier = "transferDestinationSubtitleLabel"
+        setupCell()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        setupCell()
+    }
+
+    private func setupCell() {
+        let stackView = UIStackView(frame: .zero)
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 2
+        stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(subtitleLabel)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+
+        contentView.addSubview(stackView)
+
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: imageView!.trailingAnchor, constant: 15),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
+            stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 0),
+            stackView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 10),
+            stackView.bottomAnchor.constraint(greaterThanOrEqualTo: contentView.bottomAnchor, constant: -10)
+        ])
     }
 
     override public func setSelected(_ selected: Bool, animated: Bool) {
@@ -47,24 +80,23 @@ final class TransferDestinationCell: GenericCell<HyperwalletTransferMethod> {
 
     // MARK: Theme manager's proxy properties
     @objc dynamic var titleLabelFont: UIFont! {
-        get { return textLabel?.font }
-        set { textLabel?.font = newValue }
+        get { return titleLabel.font }
+        set { titleLabel.font = newValue }
     }
 
     @objc dynamic var titleLabelColor: UIColor! {
-        get { return textLabel?.textColor }
-        set { textLabel?.textColor = newValue }
+        get { return titleLabel.textColor }
+        set { titleLabel.textColor = newValue }
     }
 
     @objc dynamic var subTitleLabelFont: UIFont! {
-        get { return detailTextLabel?.font }
-        set { detailTextLabel?.font = newValue
-            detailTextLabel?.font = newValue }
+        get { return subtitleLabel.font }
+        set { subtitleLabel.font = newValue }
     }
 
     @objc dynamic var subTitleLabelColor: UIColor! {
-        get { return detailTextLabel?.textColor }
-        set { detailTextLabel?.textColor = newValue }
+        get { return subtitleLabel.textColor }
+        set { subtitleLabel.textColor = newValue }
     }
 
     override var item: HyperwalletTransferMethod? {
@@ -79,13 +111,13 @@ final class TransferDestinationCell: GenericCell<HyperwalletTransferMethod> {
 
 extension TransferDestinationCell {
     func configure(transferMethod: HyperwalletTransferMethod) {
-        textLabel?.text = transferMethod.title
-        detailTextLabel?.attributedText = formatDetails(
+        titleLabel.text = transferMethod.title
+        subtitleLabel.attributedText = formatDetails(
             subtitle: transferMethod.transferMethodCountry?.localized() ?? "",
             additionalInfo: transferMethod.value)
 
-        detailTextLabel?.numberOfLines = 0
-        detailTextLabel?.lineBreakMode = .byWordWrapping
+        subtitleLabel.numberOfLines = 0
+        subtitleLabel.lineBreakMode = .byWordWrapping
         let icon = UIImage.fontIcon(HyperwalletIcon.of(transferMethod.type ?? "").rawValue,
                                     Theme.Icon.frame,
                                     CGFloat(Theme.Icon.size),
@@ -95,11 +127,11 @@ extension TransferDestinationCell {
     }
 
     func configure(_ title: String, _ subtitle: String, _ hyperwalletIcon: HyperwalletIconContent) {
-        textLabel?.text = title
+        titleLabel.text = title
 
-        detailTextLabel?.attributedText = formatDetails(subtitle: subtitle)
-        detailTextLabel?.numberOfLines = 0
-        detailTextLabel?.lineBreakMode = .byWordWrapping
+        subtitleLabel.attributedText = formatDetails(subtitle: subtitle)
+        subtitleLabel.numberOfLines = 0
+        subtitleLabel.lineBreakMode = .byWordWrapping
         let icon = UIImage.fontIcon(hyperwalletIcon.rawValue,
                                     Theme.Icon.frame,
                                     CGFloat(Theme.Icon.size),
@@ -110,8 +142,8 @@ extension TransferDestinationCell {
 
     private func formatDetails(subtitle: String, additionalInfo: String? = nil) -> NSAttributedString {
         let attributedText = NSMutableAttributedString()
-        let stringFromat = additionalInfo != nil ? "%@\n" : "%@"
-        attributedText.append(value: String(format: stringFromat, subtitle),
+        let stringFormat = additionalInfo != nil ? "%@\n" : "%@"
+        attributedText.append(value: String(format: stringFormat, subtitle),
                               font: subTitleLabelFont,
                               color: subTitleLabelColor)
         if let additionalInfo = additionalInfo {

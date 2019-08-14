@@ -32,7 +32,7 @@ class CreateTransferTests: XCTestCase {
         func setUpRequest() {
             switch self {
             case .success:
-                TransferMethodRepositoryRequestHelper.setupSucessRequest()
+                TransferMethodRepositoryRequestHelper.setupSuccessRequest()
 
             case .failure:
                 TransferMethodRepositoryRequestHelper.setupFailureRequest()
@@ -64,7 +64,7 @@ class CreateTransferTests: XCTestCase {
         func setUpRequest() {
             switch self {
             case .success:
-                UserRepositoryRequestHelper.setupSucessRequest()
+                UserRepositoryRequestHelper.setupSuccessRequest()
 
             case .failure:
                 UserRepositoryRequestHelper.setupFailureRequest()
@@ -201,7 +201,7 @@ class CreateTransferTests: XCTestCase {
         let section = presenter.sectionData[0]
         XCTAssertEqual(section.title, "DESTINATION", "Section title should be DESTINATION")
         XCTAssertEqual(section.rowCount, 1, "Section rowCount should be 1")
-        XCTAssertEqual(section.createTransferSectionHeader, .destination, "Section type should be .destionation")
+        XCTAssertEqual(section.createTransferSectionHeader, .destination, "Section type should be .destination")
         XCTAssertEqual(section.cellIdentifiers.count, 1, "Section cellIdentifiers.count should be 1")
         XCTAssertEqual(section.cellIdentifiers[0],
                        "transferDestinationCellIdentifier",
@@ -282,19 +282,7 @@ class CreateTransferTests: XCTestCase {
         XCTAssertEqual(presenter.destinationCurrency, "USD", "destinationCurrency should be USD")
     }
 
-    func testCreateTransfer_emtyAmount_transferAllFundsIsOff_failure() {
-        initializePresenter()
-        mockView.resetStates()
-        presenter.createTransfer()
-        wait(for: [mockView.updateFooterExpectation], timeout: 1)
-        XCTAssertFalse(mockView.isShowLoadingPerformed, "showLoading should not be performed")
-        XCTAssertFalse(mockView.isHideLoadingPerformed, "hideLoading should not be performed")
-        XCTAssertFalse(mockView.isShowErrorPerformed, "showError should not not be performed")
-        XCTAssertTrue(mockView.isUpdateFooterPerformed, "updateFooter should be performed")
-        XCTAssertNotNil(presenter.sectionData[1].errorMessage, "errorMessage should not be empty")
-    }
-
-    func testCreateTransfer_emtyAmount_transferAllFundsIsOn_success() {
+    func testCreateTransfer_emptyAmount_transferAllFundsIsOn_success() {
         initializePresenter()
         mockView.resetStates()
         presenter.transferAllFundsIsOn = true
@@ -305,7 +293,7 @@ class CreateTransferTests: XCTestCase {
         XCTAssertFalse(mockView.isShowErrorPerformed, "showError should not be performed")
     }
 
-    func testCreateTransfer_notEmtyAmount_transferAllFundsIsOn_success() {
+    func testCreateTransfer_notEmptyAmount_transferAllFundsIsOn_success() {
         initializePresenter()
         mockView.resetStates()
         presenter.amount = "1.00"
