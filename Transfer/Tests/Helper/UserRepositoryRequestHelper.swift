@@ -7,7 +7,7 @@ class UserRepositoryRequestHelper {
     private static let failureResponseFile = "UnexpectedErrorResponse"
     private static let requestUrl = HyperwalletTestHelper.userRestURL
 
-    static func setupSucessRequest() {
+    static func setupSuccessRequest() {
         let dataResponse = HyperwalletTestHelper.okHTTPResponse(for: userIndividualResponseFileName)
         UserRepositoryRequestHelper.setUpMockServer(dataResponse, requestUrl)
     }

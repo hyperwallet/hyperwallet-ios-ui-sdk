@@ -29,7 +29,7 @@ class ScheduleTransferPresenterTests: XCTestCase {
     public func testScheduleTransfer_success() {
         // Given
         let requestUrl = String(format: "%@transfers/trf-123456/status-transitions", HyperwalletTestHelper.restURL)
-        TransferRequestHelper.setupSucessRequest("ScheduleTransferResponse", requestUrl)
+        TransferRequestHelper.setupSuccessRequest("ScheduleTransferResponse", requestUrl)
         let expectation = self.expectation(description: "Schedule a transfer")
         mockView.expectation = expectation
 
