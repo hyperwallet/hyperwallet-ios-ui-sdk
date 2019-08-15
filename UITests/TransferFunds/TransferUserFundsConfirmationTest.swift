@@ -42,6 +42,9 @@ class TransferUserFundsConfirmationTest: BaseTests {
         // Add Destination Section
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
+        let destinationDetail = transferFundsConfirmation.addSelectDestinationDetailLabel.label
+        XCTAssertTrue(destinationDetail == "United States\nEnding on 1234"
+            || destinationDetail == "United States Ending on 1234")
 
         // Turn on the Transfer All Funds Switch
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "")
@@ -104,6 +107,9 @@ class TransferUserFundsConfirmationTest: BaseTests {
         // Add Destination Section
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
+        let destinationDetail = transferFundsConfirmation.addSelectDestinationDetailLabel.label
+        XCTAssertTrue(destinationDetail == "United States\nEnding on 1234"
+                    || destinationDetail == "United States Ending on 1234")
 
         // Turn on the Transfer All Funds Switch
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "")
@@ -124,7 +130,6 @@ class TransferUserFundsConfirmationTest: BaseTests {
 
         // 2.Exchange Rate Section
         XCTAssertTrue(transferFundsConfirmation.foreignExchangeSectionLabel.label == "FOREIGN EXCHANGE")
-        XCTAssertTrue(app.navigationBars["Transfer Funds"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 1).staticTexts["You sell:"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 1).staticTexts["9,992.50 MYR"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 2).staticTexts["You buy:"].exists)
@@ -157,18 +162,22 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertTrue(transferFundsConfirmation.summaryTitle.label == "SUMMARY")
         XCTAssertEqual(app.cells.element(boundBy: 16)
             .staticTexts["scheduleTransferSummaryTextLabel"].label, "Amount:")
-        XCTAssertEqual(app.cells.element(boundBy: 16).staticTexts["scheduleTransferSummaryTextValue"].label, "5,857.17")
+        XCTAssertEqual(app.cells.element(boundBy: 16)
+            .staticTexts["scheduleTransferSummaryTextValue"].label, "5,857.17")
 
         XCTAssertEqual(app.cells.element(boundBy: 17)
             .staticTexts["scheduleTransferSummaryTextLabel"].label, "Fee:")
-        XCTAssertEqual(app.cells.element(boundBy: 17).staticTexts["scheduleTransferSummaryTextValue"].label, "2.00")
+        XCTAssertEqual(app.cells.element(boundBy: 17)
+            .staticTexts["scheduleTransferSummaryTextValue"].label, "2.00")
 
         XCTAssertEqual(app.cells.element(boundBy: 18)
             .staticTexts["scheduleTransferSummaryTextLabel"].label, "You will receive:")
-        XCTAssertEqual(app.cells.element(boundBy: 18).staticTexts["scheduleTransferSummaryTextValue"].label, "5,855.17")
+        XCTAssertEqual(app.cells.element(boundBy: 18)
+            .staticTexts["scheduleTransferSummaryTextValue"].label, "5,855.17")
 
         XCTAssertTrue(transferFundsConfirmation.noteLabel.exists)
-        XCTAssertEqual(app.cells.element(boundBy: 19).textFields["transferNotesTextField"].value as? String, "Transfer All")
+        XCTAssertEqual(app.cells.element(boundBy: 19)
+            .textFields["transferNotesTextField"].value as? String, "Transfer All")
 
         mockServer.setupStub(url: "/rest/v3/transfers/trf-token/status-transitions",
                              filename: "TransferStatusQuoted",
@@ -229,7 +238,8 @@ class TransferUserFundsConfirmationTest: BaseTests {
         waitForExistence(app.alerts["Error"])
         let predicate = NSPredicate(format:
             "label CONTAINS[c] 'The transfer request has expired on Wed Jul 24 21:38:58 GMT 2019. Please create a new transfer and commit it before 120 seconds.'")
-        XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
+        XCTAssert(app.alerts["Error"]
+            .staticTexts.element(matching: predicate).exists)
     }
 
     func testTransferFundsConfirmation_verifySummaryWithNoFee() {
@@ -281,51 +291,51 @@ class TransferUserFundsConfirmationTest: BaseTests {
 
     /*
      // After the bug fix the test should work
-    func testTransferFundsConfirmation_verifySummaryWithZeroFee() {
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
-                             filename: "ListMoreThanOneTransferMethod",
-                             method: HTTPMethod.get)
+     func testTransferFundsConfirmation_verifySummaryWithZeroFee() {
+     mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+     filename: "ListMoreThanOneTransferMethod",
+     method: HTTPMethod.get)
 
-        mockServer.setupStub(url: "/rest/v3/transfers",
-                             filename: "AvailableFundUSD",
-                             method: HTTPMethod.post)
+     mockServer.setupStub(url: "/rest/v3/transfers",
+     filename: "AvailableFundUSD",
+     method: HTTPMethod.post)
 
-        transferFundMenu.tap()
-        waitForNonExistence(spinner)
+     transferFundMenu.tap()
+     waitForNonExistence(spinner)
 
-        if #available(iOS 11.4, *) {
-            XCTAssertTrue(transferFunds.transferFundTitle.exists)
-        } else {
-            XCTAssertTrue(app.navigationBars["Transfer Funds"].exists)
-        }
+     if #available(iOS 11.4, *) {
+     XCTAssertTrue(transferFunds.transferFundTitle.exists)
+     } else {
+     XCTAssertTrue(app.navigationBars["Transfer Funds"].exists)
+     }
 
-        // Add Destination Section
-        XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
-        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
+     // Add Destination Section
+     XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
+     XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
 
-        // Turn on the Transfer All Funds Switch
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "")
-        transferFunds.transferAllFundsSwitch.tap()
-        // Assert Destination Amount is automatically insert into the amount field
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "452.14")
+     // Turn on the Transfer All Funds Switch
+     XCTAssertEqual(transferFunds.transferAmount.value as? String, "")
+     transferFunds.transferAllFundsSwitch.tap()
+     // Assert Destination Amount is automatically insert into the amount field
+     XCTAssertEqual(transferFunds.transferAmount.value as? String, "452.14")
 
-        mockServer.setupStub(url: "/rest/v3/transfers",
-                             filename: "CreateTransferWithZeroFee",
-                             method: HTTPMethod.post)
-        transferFunds.nextLabel.tap()
+     mockServer.setupStub(url: "/rest/v3/transfers",
+     filename: "CreateTransferWithZeroFee",
+     method: HTTPMethod.post)
+     transferFunds.nextLabel.tap()
 
-        // Assert confirmation page has no FEE section
-        XCTAssertFalse(transferFundsConfirmation.summaryFeeLabel.exists)
+     // Assert confirmation page has no FEE section
+     XCTAssertFalse(transferFundsConfirmation.summaryFeeLabel.exists)
 
-        // Summary Section
-        XCTAssertTrue(transferFundsConfirmation.summaryTitle.label == "SUMMARY")
-        XCTAssertEqual(app.cells.element(boundBy: 8)
-            .staticTexts["scheduleTransferSummaryTextLabel"].label, "Amount:")
-        XCTAssertEqual(app.cells.element(boundBy: 8).staticTexts["scheduleTransferSummaryTextValue"].label, "5,855.17")
+     // Summary Section
+     XCTAssertTrue(transferFundsConfirmation.summaryTitle.label == "SUMMARY")
+     XCTAssertEqual(app.cells.element(boundBy: 8)
+     .staticTexts["scheduleTransferSummaryTextLabel"].label, "Amount:")
+     XCTAssertEqual(app.cells.element(boundBy: 8).staticTexts["scheduleTransferSummaryTextValue"].label, "5,855.17")
 
-        XCTAssertEqual(app.cells.element(boundBy: 9)
-            .staticTexts["scheduleTransferSummaryTextLabel"].label, "You will receive:")
-        XCTAssertEqual(app.cells.element(boundBy: 9).staticTexts["scheduleTransferSummaryTextValue"].label, "5,855.17")
-    }
-    */
+     XCTAssertEqual(app.cells.element(boundBy: 9)
+     .staticTexts["scheduleTransferSummaryTextLabel"].label, "You will receive:")
+     XCTAssertEqual(app.cells.element(boundBy: 9).staticTexts["scheduleTransferSummaryTextValue"].label, "5,855.17")
+     }
+     */
 }

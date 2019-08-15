@@ -20,7 +20,8 @@ class TransferFundsConfirmation {
 
     // Note Section
     var noteLabel: XCUIElement
-    //var noteDescription: XCUIElement // No AccessibilityID
+
+    var noteDescription: XCUIElement
 
     // Exchange Rate Section
     var foreignExchangeSectionLabel: XCUIElement
@@ -40,7 +41,7 @@ class TransferFundsConfirmation {
         addSelectDestinationLabel = app.tables["scheduleTransferTableView"]
             .staticTexts["transferDestinationTitleLabel"]
         addSelectDestinationDetailLabel = app.tables["scheduleTransferTableView"]
-            .staticTexts["transferDestinationTitleLabel"]
+            .staticTexts["transferDestinationSubtitleLabel"]
 
         summaryTitle = app.tables["scheduleTransferTableView"]
             .staticTexts["transfer_section_header_summary".localized()]
@@ -52,6 +53,8 @@ class TransferFundsConfirmation {
             .staticTexts["transfer_net_amount_confirmation".localized()]
 
         noteLabel = app.tables["scheduleTransferTableView"].staticTexts["NOTES"]
+
+        noteDescription = app.cells.textFields["transferNotesTextField"]
 
         foreignExchangeSectionLabel = app.tables["scheduleTransferTableView"].staticTexts["transfer_section_header_foreignExchange".localized()]
         foreignExchangeSell = app.tables["scheduleTransferTableView"].staticTexts["transfer_fx_sell_confirmation".localized()]
