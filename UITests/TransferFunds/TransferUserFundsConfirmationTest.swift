@@ -53,6 +53,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
                              method: HTTPMethod.post)
         transferFunds.nextLabel.tap()
 
+        waitForExistence(transferFundsConfirmation.addSelectDestinationLabel)
         XCTAssertTrue(transferFundsConfirmation.addSelectDestinationLabel.exists)
         XCTAssertTrue(transferFundsConfirmation.addSelectDestinationDetailLabel.exists)
         let destinationDetail = transferFundsConfirmation.addSelectDestinationDetailLabel.label
@@ -119,8 +120,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
 
         transferFunds.nextLabel.tap()
 
-        XCTAssertTrue(app.navigationBars["Transfer Funds"].exists)
-
+        waitForExistence(transferFundsConfirmation.addSelectDestinationLabel)
         // 1.  Add Destination Section
         XCTAssertTrue(transferFundsConfirmation.addSelectDestinationLabel.exists)
         XCTAssertTrue(transferFundsConfirmation.addSelectDestinationDetailLabel.exists)
@@ -223,6 +223,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
 
         transferFunds.nextLabel.tap()
 
+        waitForExistence(transferFundsConfirmation.foreignExchangeSectionLabel)
         XCTAssertEqual(transferFundsConfirmation.foreignExchangeSectionLabel.label, "FOREIGN EXCHANGE")
         XCTAssertEqual(transferFundsConfirmation.summaryTitle.label, "SUMMARY")
         XCTAssertEqual(transferFundsConfirmation.noteLabel.label, "NOTES")
@@ -274,6 +275,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
                              method: HTTPMethod.post)
         transferFunds.nextLabel.tap()
 
+        waitForExistence(transferFundsConfirmation.addSelectDestinationLabel)
         // Assert confirmation page has no FEE section
         XCTAssertFalse(transferFundsConfirmation.summaryFeeLabel.exists)
 
@@ -323,6 +325,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
      method: HTTPMethod.post)
      transferFunds.nextLabel.tap()
 
+     waitForExistence(transferFundsConfirmation.addSelectDestinationLabel)
      // Assert confirmation page has no FEE section
      XCTAssertFalse(transferFundsConfirmation.summaryFeeLabel.exists)
 
