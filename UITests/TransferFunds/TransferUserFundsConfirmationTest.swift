@@ -42,9 +42,6 @@ class TransferUserFundsConfirmationTest: BaseTests {
         // Add Destination Section
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
-        let destinationDetail = transferFundsConfirmation.addSelectDestinationDetailLabel.label
-        XCTAssertTrue(destinationDetail == "United States\nEnding on 1234"
-            || destinationDetail == "United States Ending on 1234")
 
         // Turn on the Transfer All Funds Switch
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "")
@@ -58,6 +55,9 @@ class TransferUserFundsConfirmationTest: BaseTests {
 
         XCTAssertTrue(transferFundsConfirmation.addSelectDestinationLabel.exists)
         XCTAssertTrue(transferFundsConfirmation.addSelectDestinationDetailLabel.exists)
+        let destinationDetail = transferFundsConfirmation.addSelectDestinationDetailLabel.label
+        XCTAssertTrue(destinationDetail == "United States\nEnding on 1234"
+            || destinationDetail == "United States Ending on 1234")
 
         XCTAssertEqual(transferFundsConfirmation.summaryTitle.label, "SUMMARY")
         XCTAssertEqual(transferFundsConfirmation.summaryAmountLabel.label, "Amount:")
@@ -72,7 +72,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertTrue(app.tables["scheduleTransferTableView"].staticTexts["452.14"].exists)
 
         XCTAssertTrue(transferFundsConfirmation.noteLabel.exists)
-        XCTAssertEqual(app.cells.textFields["transferNotesTextField"].value as? String, "Partial-Balance Transfer888")
+        XCTAssertEqual(transferFundsConfirmation.noteDescription.value as? String, "Partial-Balance Transfer888")
 
         mockServer.setupStub(url: "/rest/v3/transfers/trf-token/status-transitions",
                              filename: "TransferStatusQuoted",
@@ -107,9 +107,6 @@ class TransferUserFundsConfirmationTest: BaseTests {
         // Add Destination Section
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
-        let destinationDetail = transferFundsConfirmation.addSelectDestinationDetailLabel.label
-        XCTAssertTrue(destinationDetail == "United States\nEnding on 1234"
-                    || destinationDetail == "United States Ending on 1234")
 
         // Turn on the Transfer All Funds Switch
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "")
@@ -127,6 +124,9 @@ class TransferUserFundsConfirmationTest: BaseTests {
         // 1.  Add Destination Section
         XCTAssertTrue(transferFundsConfirmation.addSelectDestinationLabel.exists)
         XCTAssertTrue(transferFundsConfirmation.addSelectDestinationDetailLabel.exists)
+        let destinationDetail = transferFundsConfirmation.addSelectDestinationDetailLabel.label
+        XCTAssertTrue(destinationDetail == "United States\nEnding on 1234"
+            || destinationDetail == "United States Ending on 1234")
 
         // 2.Exchange Rate Section
         XCTAssertTrue(transferFundsConfirmation.foreignExchangeSectionLabel.label == "FOREIGN EXCHANGE")
@@ -176,8 +176,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
             .staticTexts["scheduleTransferSummaryTextValue"].label, "5,855.17")
 
         XCTAssertTrue(transferFundsConfirmation.noteLabel.exists)
-        XCTAssertEqual(app.cells.element(boundBy: 19)
-            .textFields["transferNotesTextField"].value as? String, "Transfer All")
+        XCTAssertEqual(transferFundsConfirmation.noteDescription.value as? String, "Transfer All")
 
         mockServer.setupStub(url: "/rest/v3/transfers/trf-token/status-transitions",
                              filename: "TransferStatusQuoted",
