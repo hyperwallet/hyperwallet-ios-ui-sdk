@@ -18,15 +18,15 @@
 
 import UIKit
 
-final class TrasferTableViewFooterView: UITableViewHeaderFooterView {
-    static let reuseIdentifier = "TrasferTableViewFooterViewIdentifier"
+final class TransferTableViewFooterView: UITableViewHeaderFooterView {
+    static let reuseIdentifier = "transferTableViewFooterViewIdentifier"
 
     lazy var footerLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.accessibilityIdentifier = "TrasferTableViewFooterLabelIdentifier"
+        label.accessibilityIdentifier = "transferFooterLabelIdentifier"
         label.setContentCompressionResistancePriority(.required, for: .vertical)
         return label
     }()

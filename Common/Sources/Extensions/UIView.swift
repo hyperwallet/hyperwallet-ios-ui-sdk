@@ -25,7 +25,7 @@ public extension UIView {
         if #available(iOS 11.0, *) {
             return self.safeAreaLayoutGuide.topAnchor
         } else {
-            return self.layoutMarginsGuide.topAnchor
+            return self.topAnchor
         }
     }
 
@@ -34,7 +34,7 @@ public extension UIView {
         if #available(iOS 11.0, *) {
             return self.safeAreaLayoutGuide.centerYAnchor
         } else {
-            return self.layoutMarginsGuide.centerYAnchor
+            return self.centerYAnchor
         }
     }
 
@@ -43,7 +43,7 @@ public extension UIView {
         if #available(iOS 11.0, *) {
             return self.safeAreaLayoutGuide.centerXAnchor
         } else {
-            return self.layoutMarginsGuide.centerXAnchor
+            return self.centerXAnchor
         }
     }
 
@@ -52,7 +52,7 @@ public extension UIView {
         if #available(iOS 11.0, *) {
             return self.safeAreaLayoutGuide.bottomAnchor
         } else {
-            return self.layoutMarginsGuide.bottomAnchor
+            return self.bottomAnchor
         }
     }
     /// Leading Anchor
@@ -60,7 +60,7 @@ public extension UIView {
         if #available(iOS 11.0, *) {
             return self.safeAreaLayoutGuide.leadingAnchor
         } else {
-            return self.layoutMarginsGuide.leadingAnchor
+            return self.leadingAnchor
         }
     }
 
@@ -69,7 +69,7 @@ public extension UIView {
         if #available(iOS 11.0, *) {
             return self.safeAreaLayoutGuide.trailingAnchor
         } else {
-            return self.layoutMarginsGuide.trailingAnchor
+            return self.trailingAnchor
         }
     }
 
