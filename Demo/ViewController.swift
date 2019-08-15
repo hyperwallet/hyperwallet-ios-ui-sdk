@@ -189,11 +189,10 @@ class ViewController: UITableViewController {
         case .transferFundsPPC:
             let prepaidCardToken = Bundle.main.infoDictionary!["PREPAID_CARD_TOKEN"] as! String
             let clientTransferId = UUID().uuidString.lowercased()
-            let coordinator = HyperwalletUI.shared
-                .createTransferFromPrepaidCardCoordinator(
-                    clientTransferId: clientTransferId, sourceToken: prepaidCardToken, parentController: self)
-
-            coordinator.navigate()
+            let viewController = HyperwalletUI.shared
+                .createTransferFromPrepaidCardController(clientTransferId: clientTransferId,
+                                                         prepaidCardToken: prepaidCardToken)
+            navigationController?.pushViewController(viewController, animated: true)
 
         default:
             let coordinator = HyperwalletUI.shared.listTransferMethodCoordinator(parentController: self)

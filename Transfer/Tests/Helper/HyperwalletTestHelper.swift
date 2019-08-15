@@ -73,7 +73,7 @@ class HyperwalletTestHelper {
         return setUpMockedResponse(payload: data, httpCode: 400)
     }
 
-    /// Builts the stub HTTP 500 - Unexpected Error
+    /// Builds the stub HTTP 500 - Unexpected Error
     ///
     /// - Parameter for: The response file name will be loaded by `getDataFromJson(responseFileName)`
     /// - Returns: the StubResponse

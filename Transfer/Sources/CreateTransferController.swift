@@ -60,11 +60,16 @@ public final class CreateTransferController: UITableViewController {
         tableView = UITableView(frame: view.frame, style: .grouped)
         tableView.accessibilityIdentifier = "createTransferTableView"
         tableView.cellLayoutMarginsFollowReadableWidth = false
+        tableView.sectionFooterHeight = UITableView.automaticDimension
+        tableView.estimatedSectionFooterHeight = Theme.Cell.smallHeight
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = Theme.Cell.smallHeight
+
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)
         }
-        tableView.register(TrasferTableViewFooterView.self,
-                           forHeaderFooterViewReuseIdentifier: TrasferTableViewFooterView.reuseIdentifier)
+        tableView.register(TransferTableViewFooterView.self,
+                           forHeaderFooterViewReuseIdentifier: TransferTableViewFooterView.reuseIdentifier)
     }
 }
 
@@ -87,27 +92,27 @@ extension CreateTransferController {
     }
 
     override public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let attribitedText = getAttributedFooterText(for: section)
-        if attribitedText == nil {
+        let attributedText = getAttributedFooterText(for: section)
+        if attributedText == nil {
             return nil
         }
         guard let view = tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: TrasferTableViewFooterView.reuseIdentifier) as? TrasferTableViewFooterView else {
+            withIdentifier: TransferTableViewFooterView.reuseIdentifier) as? TransferTableViewFooterView else {
                 return nil
         }
-        view.footerLabel.attributedText = attribitedText
+        view.footerLabel.attributedText = attributedText
         return view
     }
 
     private func getAttributedFooterText(for section: Int) -> NSAttributedString? {
         let sectionData = presenter.sectionData[section]
-        var attribitedText: NSAttributedString?
+        var attributedText: NSAttributedString?
         if  let transferSectionData = sectionData as? CreateTransferSectionTransferData {
-            attribitedText = format(footer: transferSectionData.footer, error: transferSectionData.errorMessage)
+            attributedText = format(footer: transferSectionData.footer, error: transferSectionData.errorMessage)
         } else {
-            attribitedText = format(error: sectionData.errorMessage)
+            attributedText = format(error: sectionData.errorMessage)
         }
-        return attribitedText
+        return attributedText
     }
 
     private func format(footer: String? = nil, error: String? = nil) -> NSAttributedString? {
@@ -217,13 +222,32 @@ extension CreateTransferController {
 // MARK: - CreateTransferView implementation
 extension CreateTransferController: CreateTransferView {
     func areAllFieldsValid() -> Bool {
+        presenter.resetErrorMessagesForAllSections()
+        for section in presenter.sectionData {
+            switch section.createTransferSectionHeader {
+            case .destination:
+                if presenter.selectedTransferMethod == nil {
+                    section.errorMessage = "transfer_error_add_a_transfer_method_first".localized()
+                    updateFooter(for: .destination)
+                }
+
+            case .transfer:
+                if presenter.amount == nil || presenter.amount!.isEmpty || Double(presenter.amount!) == 0.00 {
+                    section.errorMessage = "transfer_error_enter_amount_or_transfer_all".localized()
+                    updateFooter(for: .transfer)
+                }
+
+            default:
+                break
+            }
+        }
         return presenter.sectionData.allSatisfy({ $0.errorMessage?.isEmpty ?? true })
     }
 
     func updateFooter(for section: FooterSection) {
         UIView.setAnimationsEnabled(false)
         tableView.beginUpdates()
-        if let footerView = tableView.footerView(forSection: section.rawValue) as? TrasferTableViewFooterView {
+        if let footerView = tableView.footerView(forSection: section.rawValue) as? TransferTableViewFooterView {
             footerView.footerLabel.attributedText = getAttributedFooterText(for: section.rawValue)
         } else {
             tableView.reloadSections(IndexSet(integer: section.rawValue), with: .none)
