@@ -59,38 +59,32 @@ extension UIViewController: HyperwalletFlowDelegate {
     open func didFlowComplete(with response: Any) {
     }
     struct Holder {
-        static var flowDelegate = [String: HyperwalletFlowDelegate]()
-        static var coordinator =  [String: HyperwalletCoordinator]()
-        static var initializationData = [String: [InitializationDataField: Any]]()
+        static var flowDelegate = [ObjectIdentifier: HyperwalletFlowDelegate]()
+        static var coordinator =  [ObjectIdentifier: HyperwalletCoordinator]()
+        static var initializationData = [ObjectIdentifier: [InitializationDataField: Any]]()
     }
     public weak var flowDelegate: HyperwalletFlowDelegate? {
         get {
-            let tempAddress = String(format: "%p", unsafeBitCast(self, to: Int.self))
-            return Holder.flowDelegate[tempAddress]
+            return Holder.flowDelegate[ObjectIdentifier(self)]
         }
         set(newValue) {
-            let tempAddress = String(format: "%p", unsafeBitCast(self, to: Int.self))
-            Holder.flowDelegate[tempAddress] = newValue
+            Holder.flowDelegate[ObjectIdentifier(self)] = newValue
         }
     }
     public var coordinator: HyperwalletCoordinator? {
         get {
-            let tempAddress = String(format: "%p", unsafeBitCast(self, to: Int.self))
-            return Holder.coordinator[tempAddress]
+            return Holder.coordinator[ObjectIdentifier(self)]
         }
         set(newValue) {
-            let tempAddress = String(format: "%p", unsafeBitCast(self, to: Int.self))
-            Holder.coordinator[tempAddress] = newValue
+            Holder.coordinator[ObjectIdentifier(self)] = newValue
         }
     }
     public var initializationData: [InitializationDataField: Any]? {
         get {
-            let tempAddress = String(format: "%p", unsafeBitCast(self, to: Int.self))
-            return Holder.initializationData[tempAddress]
+            return Holder.initializationData[ObjectIdentifier(self)]
         }
         set(newValue) {
-            let tempAddress = String(format: "%p", unsafeBitCast(self, to: Int.self))
-            Holder.initializationData[tempAddress] = newValue
+            Holder.initializationData[ObjectIdentifier(self)] = newValue
         }
     }
 }
