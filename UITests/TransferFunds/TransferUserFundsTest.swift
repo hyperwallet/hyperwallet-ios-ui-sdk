@@ -272,39 +272,6 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(app.tables["scheduleTransferTableView"].staticTexts["Confirm"].exists)
     }
 
-    // This testcase for next sprint
-    /*
-     Given thatTransfer methods exist
-     AND PrepaidCard Transfer method is selected
-     When Payee enters the amount in non-digit amount currency for eg. JPY or KRW
-     Then Next button is enabled
-     */
-    /*
-     func testTransferFunds_createTransferDestinationAmount_JPY() {
-     mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
-     filename: "ListOneBankAccountTransferJPY",
-     method: HTTPMethod.get)
-     
-     mockServer.setupStub(url: "/rest/v3/transfers",
-     filename: "AvailableFundJPY",
-     method: HTTPMethod.get)
-     
-     XCTAssertTrue(transferFundMenu.exists)
-     transferFundMenu.tap()
-     waitForNonExistence(spinner)
-     
-     XCTAssertTrue(transferFunds.transferFundTitle.exists)
-     XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
-     XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
-     
-     XCTAssertEqual(transferFunds.transferSectionLabel.label, "TRANSER")
-     XCTAssertEqual(transferFunds.transferAmountLabel.label, "Amount")
-     XCTAssertEqual(transferFunds.transferCurrency.label, "JPY")
-     
-     //let availableFunds = app.tables["createTransferTableView"].staticTexts["Available for transfer: 10000"]
-     //XCTAssertTrue(availableFunds.exists)
-     } */
-
     /* Given that user is on the Transfer fund page and selected a Transfer Destination
      When user enter the digit for the transfer amount
      Then amount field will be formatted correctly
@@ -715,6 +682,39 @@ class TransferUserFundsTest: BaseTests {
             XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
         }
     }
+
+    /*
+
+     Given thatTransfer methods exist
+     AND PrepaidCard Transfer method is selected
+     When Payee enters the amount in non-digit amount currency for eg. JPY or KRW
+     Then Next button is enabled
+     */
+    /*
+     func testTransferFunds_createTransferDestinationAmount_JPY() {
+     mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+     filename: "ListOneBankAccountTransferJPY",
+     method: HTTPMethod.get)
+
+     mockServer.setupStub(url: "/rest/v3/transfers",
+     filename: "AvailableFundJPY",
+     method: HTTPMethod.get)
+
+     XCTAssertTrue(transferFundMenu.exists)
+     transferFundMenu.tap()
+     waitForNonExistence(spinner)
+
+     XCTAssertTrue(transferFunds.transferFundTitle.exists)
+     XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
+     XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
+
+     XCTAssertEqual(transferFunds.transferSectionLabel.label, "TRANSER")
+     XCTAssertEqual(transferFunds.transferAmountLabel.label, "Amount")
+     XCTAssertEqual(transferFunds.transferCurrency.label, "JPY")
+
+     //let availableFunds = app.tables["createTransferTableView"].staticTexts["Available for transfer: 10000"]
+     //XCTAssertTrue(availableFunds.exists)
+     } */
 
     /*
      func testTransferFunds_createTransferConnectionError() {
