@@ -396,7 +396,6 @@ class TransferUserFundsTest: BaseTests {
         XCTAssert(app.tables["createTransferTableView"].staticTexts.element(matching: transferAllFundPredicate).exists)
     }
 
-     */
     func testTransferFunds_createTransferWhenDestinationAmountNotSet() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListOneBankAccountTransferUSD",
@@ -513,7 +512,6 @@ class TransferUserFundsTest: BaseTests {
         XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
     }
 
-     */
     func testTransferFunds_createTransferDescriptionLength() {
         let over255String = """
                             1234567890abcdefghij1234567890abcdefghij1234567890abcdefghij
