@@ -15,3 +15,4 @@ ignore:
   - "*/Sources/Extensions/*"
   - "*/Tests/*"
   - "*/Sources/Helper/*"
+  - "*/Sources/Coordinators/*"
