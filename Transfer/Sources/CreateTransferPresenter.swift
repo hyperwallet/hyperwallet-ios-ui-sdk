@@ -203,7 +203,7 @@ final class CreateTransferPresenter {
                 case .failure(let error):
                     strongSelf.errorHandler(for: error) {
                         strongSelf.view.showError(error, { () -> Void in
-                            strongSelf.createInitialTransfer()
+                            strongSelf.createTransfer()
                         })
                     }
 
