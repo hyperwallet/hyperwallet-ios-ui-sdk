@@ -40,17 +40,6 @@ public final class CreateTransferController: UITableViewController {
         (TransferButtonCell.self, TransferButtonCell.reuseIdentifier),
         (TransferNotesCell.self, TransferNotesCell.reuseIdentifier)
     ]
-    var createTransferMethodHandler: ((HyperwalletTransferMethod) -> Void)?
-    var createTransferHandler: ((HyperwalletTransfer) -> Void)?
-
-    public init(clientTransferId: String, sourceToken: String?) {
-        super.init(nibName: nil, bundle: nil)
-        presenter = CreateTransferPresenter(clientTransferId, sourceToken, view: self)
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
 
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -58,9 +47,11 @@ public final class CreateTransferController: UITableViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem.back
         largeTitle()
         setViewBackgroundColor()
-
+        if let clientTransferId = initializationData?[InitializationDataField.clientTransferId] as? String {
+            let sourceToken = initializationData?[InitializationDataField.sourceToken] as? String
+            presenter = CreateTransferPresenter(clientTransferId, sourceToken, view: self)
+        }
         presenter.loadCreateTransfer()
-
         setUpCreateTransferTableView()
         hideKeyboardWhenTappedAround()
     }
@@ -331,10 +322,9 @@ extension CreateTransferController: CreateTransferView {
     }
 
     func showScheduleTransfer(_ transfer: HyperwalletTransfer) {
-        if let selectedTransferMethod = presenter.selectedTransferMethod {
-            let scheduleTransferController = ScheduleTransferController(transferMethod: selectedTransferMethod,
-                                                                        transfer: transfer)
-            navigationController?.pushViewController(scheduleTransferController, animated: true)
+        if let transferMethod = presenter.selectedTransferMethod {
+            coordinator?.navigateToNextPage(initializationData:
+                [InitializationDataField.transfer: transfer, InitializationDataField.transferMethod: transferMethod])
         }
     }
 }
