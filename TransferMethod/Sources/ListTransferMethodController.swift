@@ -30,9 +30,6 @@ public final class ListTransferMethodController: UITableViewController {
     private var processingView: ProcessingView?
     private var presenter: ListTransferMethodPresenter!
 
-    /// The completion handler will be performed after a new transfer method has been created.
-    public var createTransferMethodHandler: ((HyperwalletTransferMethod) -> Void)?
-
     private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "empty_list_transfer_method_message"
                                                                               .localized())
     private lazy var addAccountButton: UIButton = view.setUpEmptyListButton(text: "add_account_title".localized(),
@@ -112,14 +109,7 @@ public final class ListTransferMethodController: UITableViewController {
     }
 
     private func addTransferMethod() {
-        let controller = HyperwalletUI.shared.selectTransferMethodTypeController()
-        controller.createTransferMethodHandler = {
-            [weak self] (transferMethod: HyperwalletTransferMethod) -> Void in
-            // refresh transfer method list
-            self?.presenter.listTransferMethods(true)
-            self?.createTransferMethodHandler?(transferMethod)
-        }
-        navigationController?.pushViewController(controller, animated: true)
+        coordinator?.navigateToNextPage(initializationData: nil)
     }
 
     private func setupTransferMethodTableView() {
@@ -203,5 +193,14 @@ extension ListTransferMethodController: ListTransferMethodView {
     private func toggleEmptyListView(hideLabel: Bool = true, hideButton: Bool = true) {
         emptyListLabel.isHidden = hideLabel
         addAccountButton.isHidden = hideButton
+    }
+}
+
+extension ListTransferMethodController {
+    override public func didFlowComplete(with response: Any) {
+        if response as? HyperwalletTransferMethod != nil {
+            // refresh transfer method list
+            presenter.listTransferMethods()
+        }
     }
 }
