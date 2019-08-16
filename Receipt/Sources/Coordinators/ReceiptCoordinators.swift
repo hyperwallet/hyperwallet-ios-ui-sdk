@@ -25,7 +25,7 @@ public class ListReceiptCoordinator: NSObject, HyperwalletCoordinator {
     private let controller: ListReceiptController
     private var parentController: UIViewController?
 
-    override public init() {
+    override init() {
         controller = ListReceiptController()
     }
     public func applyTheme() {

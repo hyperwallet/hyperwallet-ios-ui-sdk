@@ -47,13 +47,17 @@ public final class CreateTransferController: UITableViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem.back
         largeTitle()
         setViewBackgroundColor()
+        initializePresenter()
+        setUpCreateTransferTableView()
+        hideKeyboardWhenTappedAround()
+    }
+
+    private func initializePresenter() {
         if let clientTransferId = initializationData?[InitializationDataField.clientTransferId] as? String {
             let sourceToken = initializationData?[InitializationDataField.sourceToken] as? String
             presenter = CreateTransferPresenter(clientTransferId, sourceToken, view: self)
         }
         presenter.loadCreateTransfer()
-        setUpCreateTransferTableView()
-        hideKeyboardWhenTappedAround()
     }
 
     private func setUpCreateTransferTableView() {

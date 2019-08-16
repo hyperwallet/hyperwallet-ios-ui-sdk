@@ -29,7 +29,7 @@ public class CreateTransferCoordinator: NSObject, HyperwalletCoordinator  {
          ThemeManager.applyTransferTheme()
     }
 
-    override public init() {
+    override init() {
         controller = CreateTransferController()
     }
 

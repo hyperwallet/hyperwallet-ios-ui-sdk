@@ -42,8 +42,12 @@ public final class ScheduleTransferController: UITableViewController, UITextFiel
         largeTitle()
         setViewBackgroundColor()
         navigationItem.backBarButtonItem = UIBarButtonItem.back
+        initializePresenter()
         // setup table view
         setUpScheduleTransferTableView()
+    }
+
+    private func initializePresenter() {
         if let transferMethod = initializationData?[InitializationDataField.transferMethod]
             as? HyperwalletTransferMethod,
             let transfer = initializationData?[InitializationDataField.transfer] as? HyperwalletTransfer {

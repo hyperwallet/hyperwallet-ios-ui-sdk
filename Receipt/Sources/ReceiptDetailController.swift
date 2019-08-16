@@ -36,9 +36,13 @@ public final class ReceiptDetailController: UITableViewController {
         title = "title_receipts_details".localized()
         titleDisplayMode(.never)
         setViewBackgroundColor()
+        initializePresenter()
+        setupReceiptDetailTableView()
+    }
+
+    private func initializePresenter() {
         if let receipt = initializationData?[InitializationDataField.receipt]
             as? HyperwalletReceipt { presenter = ReceiptDetailPresenter(with: receipt) }
-        setupReceiptDetailTableView()
     }
 
     private func setupReceiptDetailTableView() {
