@@ -203,7 +203,7 @@ final class CreateTransferPresenter {
                 case .failure(let error):
                     strongSelf.errorHandler(for: error) {
                         strongSelf.view.showError(error, { () -> Void in
-                            strongSelf.createInitialTransfer()
+                            strongSelf.createTransfer()
                         })
                     }
 
@@ -266,13 +266,12 @@ final class CreateTransferPresenter {
         switch error.group {
         case .business:
             resetErrorMessagesForAllSections()
-            guard let errors = error.getHyperwalletErrors()?.errorList, errors.isNotEmpty else {
-                return
-            }
-            if errors.contains(where: { $0.fieldName == nil }) {
-                view.showError(error) { [weak self] in self?.updateFooterContent(errors) }
-            } else {
-                updateFooterContent(errors)
+            if let errors = error.getHyperwalletErrors()?.errorList, errors.isNotEmpty {
+                if errors.contains(where: { $0.fieldName == nil }) {
+                    view.showError(error) { [weak self] in self?.updateFooterContent(errors) }
+                } else {
+                    updateFooterContent(errors)
+                }
             }
 
         default:

@@ -1,0 +1,9 @@
+{
+    "errors": [
+        {
+            "message": "Multiple currencies found. Please specify a sourceCurrency",
+            "fieldName": "sourceCurrency",
+            "code": "MISSING_SOURCE_CURRENCY"
+        }
+    ]
+}
