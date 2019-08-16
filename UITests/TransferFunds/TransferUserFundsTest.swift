@@ -68,11 +68,10 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
 
-        if #available(iOS 11.4, *) {
-            XCTAssertEqual(transferFunds.addSelectDestinationDetailLabel.label, "United States\nEnding on 1234")
-        } else {
-            XCTAssertEqual(transferFunds.addSelectDestinationDetailLabel.label, "United States Ending on 1234")
-        }
+        let destinationDetail = transferFunds.addSelectDestinationDetailLabel.label
+        XCTAssertTrue(destinationDetail == "United States\nEnding on 1234"
+            || destinationDetail == "United States Ending on 1234")
+
         // Transfer Section
         XCTAssertTrue(transferFunds.transferSectionLabel.exists)
         // Amount row
@@ -87,8 +86,8 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertEqual(transferFunds.notesDescriptionTextField.placeholderValue, "Description")
         // TODO: iOS 10.3.1 does work on the following - will investigate
         if #available(iOS 11.0, *) {
-          transferFunds.enterNotes(description: "testing")
-          XCTAssertEqual(transferFunds.notesDescriptionTextField.value as? String, "testing")
+            transferFunds.enterNotes(description: "testing")
+            XCTAssertEqual(transferFunds.notesDescriptionTextField.value as? String, "testing")
         }
 
         let availableFunds = app.tables["createTransferTableView"].staticTexts["Available for transfer: 452.14"]
@@ -181,11 +180,10 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
 
-        if #available(iOS 11.4, *) {
-            XCTAssertEqual(transferFunds.addSelectDestinationDetailLabel.label, "United States\nEnding on 1234")
-        } else {
-            XCTAssertEqual(transferFunds.addSelectDestinationDetailLabel.label, "United States Ending on 1234")
-        }
+        let destinationDetail = transferFunds.addSelectDestinationDetailLabel.label
+        XCTAssertTrue(destinationDetail == "United States\nEnding on 1234"
+            || destinationDetail == "United States Ending on 1234")
+
         // Transfer Section
         XCTAssertTrue(transferFunds.transferSectionLabel.exists)
         // Amount row
@@ -232,11 +230,10 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
 
-        if #available(iOS 11.4, *) {
-            XCTAssertEqual(transferFunds.addSelectDestinationDetailLabel.label, "United States\nEnding on 6789")
-        } else {
-            XCTAssertEqual(transferFunds.addSelectDestinationDetailLabel.label, "United States Ending on 6789")
-        }
+        let destinationDetail = transferFunds.addSelectDestinationDetailLabel.label
+        XCTAssertTrue(destinationDetail == "United States\nEnding on 6789"
+            || destinationDetail == "United States Ending on 6789")
+
         // Transfer Section
         XCTAssertTrue(transferFunds.transferSectionLabel.exists)
         // Amount row
@@ -279,23 +276,23 @@ class TransferUserFundsTest: BaseTests {
      mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
      filename: "ListOneBankAccountTransferJPY",
      method: HTTPMethod.get)
-
+     
      mockServer.setupStub(url: "/rest/v3/transfers",
      filename: "AvailableFundJPY",
      method: HTTPMethod.get)
-
+     
      XCTAssertTrue(transferFundMenu.exists)
      transferFundMenu.tap()
      waitForNonExistence(spinner)
-
+     
      XCTAssertTrue(transferFunds.transferFundTitle.exists)
      XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
      XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
-
+     
      XCTAssertEqual(transferFunds.transferSectionLabel.label, "TRANSER")
      XCTAssertEqual(transferFunds.transferAmountLabel.label, "Amount")
      XCTAssertEqual(transferFunds.transferCurrency.label, "JPY")
-
+     
      //let availableFunds = app.tables["createTransferTableView"].staticTexts["Available for transfer: 10000"]
      //XCTAssertTrue(availableFunds.exists)
      } */
@@ -340,11 +337,11 @@ class TransferUserFundsTest: BaseTests {
      mockServer.setupStub(url: "/rest/v3/transfers",
      filename: "AvailableFundUSD",
      method: HTTPMethod.post)
-
+     
      XCTAssertTrue(transferFundMenu.exists)
      transferFundMenu.tap()
      waitForNonExistence(spinner)
-
+     
      // Assert NEXT button is disabled ??
      }
      */
@@ -358,11 +355,11 @@ class TransferUserFundsTest: BaseTests {
      mockServer.setupStub(url: "/rest/v3/transfers",
      filename: "AvailableFundUSD",
      method: HTTPMethod.post)
-
+     
      XCTAssertTrue(transferFundMenu.exists)
      transferFundMenu.tap()
      waitForNonExistence(spinner)
-
+     
      // Assert NEXT button is disabled ??
      }
      */
@@ -398,8 +395,10 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.nextLabel.tap()
 
         XCTAssert(app.alerts["Error"].exists)
-        let predicate = NSPredicate(format:
-            "label CONTAINS[c] 'Your attempted transaction has exceeded the approved payout limit; please contact Hyperwallet for further assistance.'")
+        let predicate = NSPredicate(format: """
+            label CONTAINS[c] 'Your attempted transaction has exceeded the approved payout limit; \
+            please contact Hyperwallet for further assistance.'
+            """)
         XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
     }
 
@@ -492,14 +491,14 @@ class TransferUserFundsTest: BaseTests {
      mockServer.setupStubConnectionError(url: "/rest/v3/users/usr-token/transfer-methods",
      filename: "ListMoreThanOneTransferMethod",
      method: HTTPMethod.get)
-
+     
      XCTAssertTrue(transferFundMenu.exists)
      transferFundMenu.tap()
      waitForNonExistence(spinner)
-
+     
      let predicate = NSPredicate(format:
      "label CONTAINS[c] 'We are encountering a problem processing the request. Please check your connectivity'")
-
+     
      XCTAssertTrue(app.alerts["Connectivity Issue"].staticTexts.element(matching: predicate).exists)
      } */
 }

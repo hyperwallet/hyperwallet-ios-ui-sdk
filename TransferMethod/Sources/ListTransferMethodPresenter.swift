@@ -81,7 +81,7 @@ final class ListTransferMethodPresenter {
 
     /// Get the list of all Activated transfer methods from core SDK
     /// - Parameter forceUpdate: Forces to refresh the data
-    func listTransferMethods(_ forceUpdate: Bool = false) {
+    func listTransferMethods(_ forceUpdate: Bool = true) {
         view.showLoading()
         if forceUpdate {
             transferMethodRepository.refreshTransferMethods()

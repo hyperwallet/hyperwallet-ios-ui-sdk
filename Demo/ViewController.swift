@@ -24,7 +24,6 @@ import TransferMethod
 #endif
 import HyperwalletSDK
 import os.log
-
 import UIKit
 
 class HeadlineCell: UITableViewCell {
@@ -60,8 +59,8 @@ class ViewController: UITableViewController {
             case .addTransferMethod: return "Add Transfer Method"
             case .userReceipts: return "List User Receipts"
             case .prepaidCardReceipts: return "List Prepaid Card Receipts"
-            case .transferFunds: return  "Transfer Funds"
-            case .transferFundsPPC: return  "Transfer Funds PPC"
+            case .transferFunds: return "Transfer Funds"
+            case .transferFundsPPC: return "Transfer Funds PPC"
             }
         }
 
@@ -73,11 +72,13 @@ class ViewController: UITableViewController {
             case .addTransferMethod: return "Add the default Transfer Method"
             case .userReceipts: return "List User Receipts"
             case .prepaidCardReceipts: return "List Prepaid Card Receipts"
-            case .transferFunds: return  "Transfer Funds"
-            case .transferFundsPPC: return  "Transfer Funds PPC"
+            case .transferFunds: return "Transfer Funds"
+            case .transferFundsPPC: return "Transfer Funds PPC"
             }
         }
     }
+
+    private var exampleList: [Example: () -> Void]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,10 +89,19 @@ class ViewController: UITableViewController {
 
         createTransferMethodObserver()
         removeTransferMethodObserver()
-        createTransferObserver()
 
         // Setup
         HyperwalletUI.setup(IntegratorAuthenticationProvider(baseUrl, userToken))
+
+        exampleList = [
+            .listTransferMethod: showExampleListTransferMethod,
+            .selectTransferMethod: showExampleSelectTransferMethod,
+            .addTransferMethod: showExampleAddTransferMethod,
+            .userReceipts: showExampleUserReceipts,
+            .prepaidCardReceipts: showExamplePrepaidCardReceipts,
+            .transferFunds: showExampleTransferFunds,
+            .transferFundsPPC: showExampleTransferFundsPPC
+        ]
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -102,14 +112,12 @@ class ViewController: UITableViewController {
             cell.emailLabel.text = "johndoe@domain.com"
             cell.nameLabel.text = "John Doe"
             cell.phoneLabel.text = "+1 123-122-3213"
-
             cell.nameLabel.textColor = Theme.Label.subTitleColor
             cell.emailLabel.textColor = Theme.Label.subTitleColor
             cell.phoneLabel.textColor = Theme.Label.subTitleColor
             cell.iconLabel.font = UIFont(name: "icomoon", size: 51)
             cell.iconLabel.text = "\u{E023}"
             cell.iconLabel.textColor = Theme.Label.subTitleColor
-
             return cell
 
         default:
@@ -121,7 +129,6 @@ class ViewController: UITableViewController {
                 cell.headlineTextLabel?.text = example.title
                 cell.headlineTitleLabel?.text = example.detail
             }
-
             return cell
         }
     }
@@ -140,120 +147,103 @@ class ViewController: UITableViewController {
         return Example.allCases.count
     }
 
-    //swiftlint:disable function_body_length
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let selectionIndexPath = self.tableView.indexPathForSelectedRow {
-            self.tableView.deselectRow(at: selectionIndexPath, animated: false)
+        tableView.deselectRow(at: indexPath, animated: false)
+        guard let example = Example(rawValue: indexPath.item),
+            let showExample = exampleList[example] else {
+                return
         }
-        guard let example = Example(rawValue: indexPath.item) else {
-            return
-        }
-        switch example {
-        case .listTransferMethod:
-            let viewController = HyperwalletUI.shared.listTransferMethodController()
+        showExample()
+    }
 
-            navigationController?.pushViewController(viewController, animated: true)
+    // MARK: - Main menu actions
+    private func showExampleTransferFundsPPC() {
+        let prepaidCardToken = Bundle.main.infoDictionary!["PREPAID_CARD_TOKEN"] as! String
+        let clientTransferId = UUID().uuidString.lowercased()
+        let coordinator = HyperwalletUI.shared
+            .createTransferFromPrepaidCardCoordinator(clientTransferId: clientTransferId,
+                                                      sourceToken: prepaidCardToken,
+                                                      parentController: self)
+        coordinator.navigate()
+    }
 
-        case .selectTransferMethod:
-            let viewController = HyperwalletUI.shared.selectTransferMethodTypeController()
-            viewController.createTransferMethodHandler = {
-                (transferMethod: HyperwalletTransferMethod) -> Void in
-                self.createTransferMethodHandler(transferMethod: transferMethod)
-            }
+    private func showExampleTransferFunds() {
+        let clientTransferId = UUID().uuidString.lowercased()
+        let coordinator = HyperwalletUI.shared
+            .createTransferFromUserCoordinator(clientTransferId: clientTransferId, parentController: self)
+        coordinator.navigate()
+    }
 
-            navigationController?.pushViewController(viewController, animated: true)
+    private func showExamplePrepaidCardReceipts() {
+        let prepaidCardToken = Bundle.main.infoDictionary!["PREPAID_CARD_TOKEN"] as! String
+        let coordinator = HyperwalletUI.shared
+            .listPrepaidCardReceiptCoordinator(parentController: self, prepaidCardToken: prepaidCardToken)
+        coordinator.navigate()
+    }
 
-        case .addTransferMethod:
-            if let country = ProcessInfo.processInfo.environment["COUNTRY"],
-                let currency = ProcessInfo.processInfo.environment["CURRENCY"],
-                let accountType = ProcessInfo.processInfo.environment["ACCOUNT_TYPE"],
-                let profileType = ProcessInfo.processInfo.environment["PROFILE_TYPE"] {
-                let viewController = HyperwalletUI.shared.addTransferMethodController(
-                    country, currency, profileType, accountType)
+    private func showExampleUserReceipts() {
+        let coordinator = HyperwalletUI.shared.listUserReceiptCoordinator(parentController: self)
+        coordinator.navigate()
+    }
 
-                navigationController?.pushViewController(viewController, animated: true)
-            } else {
-                let viewController = HyperwalletUI.shared.addTransferMethodController(
-                    "US", "USD", "INDIVIDUAL", "BANK_ACCOUNT")
-
-                navigationController?.pushViewController(viewController, animated: true)
-            }
-
-        case .userReceipts:
-            let viewController = HyperwalletUI.shared.listUserReceiptController()
-
-            navigationController?.pushViewController(viewController, animated: true)
-
-        case .prepaidCardReceipts:
-            let prepaidCardToken = Bundle.main.infoDictionary!["PREPAID_CARD_TOKEN"] as! String
-            let viewController = HyperwalletUI.shared.listPrepaidCardReceiptController(
-                prepaidCardToken)
-
-            navigationController?.pushViewController(viewController, animated: true)
-
-        case .transferFunds:
-            let clientTransferId = UUID().uuidString.lowercased()
-            let viewController = HyperwalletUI.shared
-                .createTransferFromUserController(clientTransferId: clientTransferId)
-
-            navigationController?.pushViewController(viewController, animated: true)
-
-        case .transferFundsPPC:
-            let prepaidCardToken = Bundle.main.infoDictionary!["PREPAID_CARD_TOKEN"] as! String
-            let clientTransferId = UUID().uuidString.lowercased()
-            let viewController = HyperwalletUI.shared
-                .createTransferFromPrepaidCardController(clientTransferId: clientTransferId, prepaidCardToken: prepaidCardToken)
-            navigationController?.pushViewController(viewController, animated: true)
-
-        default:
-            let viewController = HyperwalletUI.shared.listTransferMethodController()
-
-            navigationController?.pushViewController(viewController, animated: true)
+    private func showExampleAddTransferMethod() {
+        if let country = ProcessInfo.processInfo.environment["COUNTRY"],
+            let currency = ProcessInfo.processInfo.environment["CURRENCY"],
+            let accountType = ProcessInfo.processInfo.environment["ACCOUNT_TYPE"],
+            let profileType = ProcessInfo.processInfo.environment["PROFILE_TYPE"] {
+            let coordinator = HyperwalletUI.shared
+                .addTransferMethodCoordinator(country, currency, profileType, accountType, parentController: self)
+            coordinator.navigate()
+        } else {
+            let coordinator = HyperwalletUI.shared.addTransferMethodCoordinator(
+                "US", "USD", "INDIVIDUAL", "BANK_ACCOUNT", parentController: self)
+            coordinator.navigate()
         }
     }
 
-    // MARK: - Handlers
-    func createTransferMethodHandler(transferMethod: HyperwalletTransferMethod) {
-        print("Handler: Transfer method has been created successfully")
+    private func showExampleSelectTransferMethod() {
+        let coordinator = HyperwalletUI.shared.selectTransferMethodTypeCoordinator(parentController: self)
+        coordinator.navigate()
+    }
+
+    private func showExampleListTransferMethod() {
+        let coordinator = HyperwalletUI.shared.listTransferMethodCoordinator(parentController: self)
+        coordinator.navigate()
     }
 
     // MARK: - Notifications
     func createTransferMethodObserver() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(transferMethodAddedNotificationObserverHandler(notification:)),
-            name: Notification.Name.transferMethodAdded,
-            object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(methodOfReceivedNotification(notification:)),
+                                               name: Notification.Name.transferMethodAdded,
+                                               object: nil)
     }
 
     func removeTransferMethodObserver() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(transferMethodDeactivatedNotificationObserverHandler(notification:)),
-            name: Notification.Name.transferMethodDeactivated,
-            object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(methodOfReceivedNotification(notification:)),
+                                               name: Notification.Name.transferMethodDeactivated,
+                                               object: nil)
     }
 
-    func createTransferObserver() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(transferCreatedNotificationObserverHandler(notification:)),
-            name: Notification.Name.transferCreated,
-            object: nil)
+    func didCreateTransferMethod(transferMethod: HyperwalletTransferMethod) {
+        print("Transfer method has been created successfully")
     }
 
-    @objc
-    func transferMethodAddedNotificationObserverHandler(notification: Notification) {
-        print("Notification: Transfer method has been created successfully")
+    func didCreateTransfer(transfer: HyperwalletTransfer) {
+        print("Transfer has been created successfully")
     }
 
     @objc
-    func transferMethodDeactivatedNotificationObserverHandler(notification: Notification) {
-        print("Notification: Transfer method has been deleted successfully")
+    func methodOfReceivedNotification(notification: Notification) {
+        print("Transfer method has been deleted successfully")
     }
 
-    @objc
-    func transferCreatedNotificationObserverHandler(notification: Notification) {
-        print("Notification: Transfer of funds has been created successfully")
+    override public func didFlowComplete(with response: Any) {
+        if let transferMethod = response as? HyperwalletTransferMethod {
+            self.didCreateTransferMethod(transferMethod: transferMethod)
+        } else if let transfer = response as? HyperwalletTransfer {
+            didCreateTransfer(transfer: transfer)
+        }
     }
 }

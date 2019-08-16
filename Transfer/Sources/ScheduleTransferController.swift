@@ -36,25 +36,19 @@ public final class ScheduleTransferController: UITableViewController, UITextFiel
         (TransferButtonCell.self, TransferButtonCell.reuseIdentifier)
     ]
 
-    public init(transferMethod: HyperwalletTransferMethod, transfer: HyperwalletTransfer) {
-        super.init(nibName: nil, bundle: nil)
-        presenter = ScheduleTransferPresenter(view: self, transferMethod: transferMethod, transfer: transfer)
-    }
-
-    // swiftlint:disable unavailable_function
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("NSCoding not supported")
-    }
-
     override public func viewDidLoad() {
         super.viewDidLoad()
         title = "transfer_funds".localized()
         largeTitle()
         setViewBackgroundColor()
         navigationItem.backBarButtonItem = UIBarButtonItem.back
-
         // setup table view
         setUpScheduleTransferTableView()
+        if let transferMethod = initializationData?[InitializationDataField.transferMethod]
+            as? HyperwalletTransferMethod,
+            let transfer = initializationData?[InitializationDataField.transfer] as? HyperwalletTransfer {
+            presenter = ScheduleTransferPresenter(view: self, transferMethod: transferMethod, transfer: transfer)
+        }
     }
 
     private func setUpScheduleTransferTableView() {
@@ -170,7 +164,6 @@ extension ScheduleTransferController: ScheduleTransferView {
                                             object: self,
                                             userInfo: [UserInfo.transferScheduled: hyperwalletStatusTransition])
         }
-        navigationController?
-            .skipPreviousViewControllerIfPresent(skip: CreateTransferController.self)
+        coordinator?.navigateBackFromNextPage(with: hyperwalletStatusTransition)
     }
 }
