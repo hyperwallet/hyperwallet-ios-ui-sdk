@@ -541,7 +541,7 @@ class TransferUserFundsTest: BaseTests {
             transferFunds.enterNotes(description: over255String)
         }
 
-        mockServer.setupStubError(url: "/rest/v3/transfers",filename: "NoteDescriptionLengthValidationError",
+        mockServer.setupStubError(url: "/rest/v3/transfers", filename: "NoteDescriptionLengthValidationError",
                                   method: HTTPMethod.post)
 
         XCTAssertTrue(transferFunds.nextLabel.exists)
@@ -571,6 +571,7 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFundMenu.exists)
         transferFundMenu.tap()
         waitForNonExistence(spinner)
+        waitForNonExistence(transferFunds.addSelectDestinationSectionLabel)
 
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertTrue(transferFunds.transferAmount.exists)
