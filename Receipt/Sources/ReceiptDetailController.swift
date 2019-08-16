@@ -36,11 +36,13 @@ public final class ReceiptDetailController: UITableViewController {
         title = "title_receipts_details".localized()
         titleDisplayMode(.never)
         setViewBackgroundColor()
-        if let receipt = initializationData?[InitializationDataField.receipt]
-            as? HyperwalletReceipt { presenter = ReceiptDetailPresenter(with: receipt) }
+        initializePresenter()
         setupReceiptDetailTableView()
     }
-
+    private func initializePresenter() {
+        if let receipt = initializationData?[InitializationDataField.receipt]
+            as? HyperwalletReceipt { presenter = ReceiptDetailPresenter(with: receipt) }
+    }
     private func setupReceiptDetailTableView() {
         tableView = UITableView(frame: view.frame, style: .grouped)
         tableView.allowsSelection = false

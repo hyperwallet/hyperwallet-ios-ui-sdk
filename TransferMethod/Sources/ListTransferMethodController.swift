@@ -47,9 +47,13 @@ public final class ListTransferMethodController: UITableViewController {
                                                             action: #selector(didTapAddButton))
 
         // setup table view
+        initializePresenter()
+        setupTransferMethodTableView()
+    }
+
+    private func initializePresenter() {
         presenter = ListTransferMethodPresenter(view: self)
         presenter.listTransferMethods()
-        setupTransferMethodTableView()
     }
 
     @objc
