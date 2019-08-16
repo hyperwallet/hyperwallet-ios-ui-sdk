@@ -32,6 +32,7 @@ public final class CreateTransferController: UITableViewController {
     }
 
     private var spinnerView: SpinnerView?
+    private var selectTransferMethodCoordinator: HyperwalletCoordinator?
     private var presenter: CreateTransferPresenter!
     private let registeredCells: [(type: AnyClass, id: String)] = [
         (TransferDestinationCell.self, TransferDestinationCell.reuseIdentifier),
@@ -309,22 +310,43 @@ extension CreateTransferController: CreateTransferView {
 
     @objc
     private func didTapAddButton(sender: AnyObject) {
-        //        let controller = SelectTransferMethodTypeController(forceUpdate: false) ///TO DO true or false
-        //        controller.largeTitle()
-        //        controller.createTransferMethodHandler = {
-        //            [weak self] (transferMethod: HyperwalletTransferMethod) -> Void in
-        //            // refresh transfer method list
-        //            self?.navigationController?.popViewController(animated: true)
-        //            self?.presenter.selectedTransferMethod = transferMethod
-        //            self?.presenter.loadCreateTransfer()
-        //        }
-        //        navigationController?.pushViewController(controller, animated: true)
+        navigateToTransferMethodIfInitialized()
+    }
+
+    private func navigateToTransferMethodIfInitialized() {
+        if let transferMethodCoordinator = selectTransferMethodTypeCoordinator() {
+            transferMethodCoordinator.navigate()
+        }
+    }
+
+    private func getSelectTransferMethodCoordinator() {
+    }
+
+    private func selectTransferMethodTypeCoordinator() -> HyperwalletCoordinator? {
+        guard let className = NSClassFromString("HyperwalletUISDK.SelectTransferMethodTypeCoordinator")
+            as? NSObject.Type
+            ?? NSClassFromString("TransferMethod.SelectTransferMethodTypeCoordinator")
+            as? NSObject.Type,
+            let instance = className.init() as? HyperwalletCoordinator else {
+                return nil
+        }
+        instance.start(initializationData: nil, parentController: self)
+        return instance
     }
 
     func showScheduleTransfer(_ transfer: HyperwalletTransfer) {
         if let transferMethod = presenter.selectedTransferMethod {
             coordinator?.navigateToNextPage(initializationData:
                 [InitializationDataField.transfer: transfer, InitializationDataField.transferMethod: transferMethod])
+        }
+    }
+}
+
+extension CreateTransferController {
+    override public func didFlowComplete(with response: Any) {
+        if let transferMethod = response as? HyperwalletTransferMethod {
+            presenter.selectedTransferMethod = transferMethod
+            presenter.loadCreateTransfer()
         }
     }
 }

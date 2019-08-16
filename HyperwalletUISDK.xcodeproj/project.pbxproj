@@ -41,6 +41,7 @@
 		09E7165022A697C400FA9B96 /* ReceiptsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7164F22A697C400FA9B96 /* ReceiptsList.swift */; };
 		09E7165622A6983400FA9B96 /* ListReceiptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7165522A6983400FA9B96 /* ListReceiptTests.swift */; };
 		2BF9E5F822EF8BF200BB7DA5 /* TransferRepositoryFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF9E5F722EF8BF200BB7DA5 /* TransferRepositoryFactoryTests.swift */; };
+		2E8AFE5823062316002B6D24 /* CreateTransferController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7C0222E86F580022E573 /* CreateTransferController.swift */; };
 		412F723722B45DB100837F8F /* TransactionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F723222B458C700837F8F /* TransactionDetails.swift */; };
 		4157135D22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json in Resources */ = {isa = PBXBuildFile; fileRef = 4157135C22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json */; };
 		4157135F22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json in Resources */ = {isa = PBXBuildFile; fileRef = 4157135E22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json */; };
@@ -80,7 +81,6 @@
 		4A9A7C0522E86F580022E573 /* TransferButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7BFF22E86F580022E573 /* TransferButtonCell.swift */; };
 		4A9A7C0622E86F580022E573 /* TransferNotesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7C0022E86F580022E573 /* TransferNotesCell.swift */; };
 		4A9A7C0722E86F580022E573 /* CreateTransferPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7C0122E86F580022E573 /* CreateTransferPresenter.swift */; };
-		4A9A7C0822E86F580022E573 /* CreateTransferController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7C0222E86F580022E573 /* CreateTransferController.swift */; };
 		4A9A7C0922E86F580022E573 /* TransferAmountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7C0322E86F580022E573 /* TransferAmountCell.swift */; };
 		4A9A7C1022E87EA70022E573 /* HyperwalletTransferUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7C0F22E87EA10022E573 /* HyperwalletTransferUI.swift */; };
 		4A9A7C1122E880730022E573 /* Transfer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A9A7BDF22E859E60022E573 /* Transfer.framework */; };
@@ -3094,7 +3094,6 @@
 				4ADBEC7422E9F92800D43A48 /* TransferThemeManager.swift in Sources */,
 				4A9A7C0422E86F580022E573 /* CreateTransferSectionData.swift in Sources */,
 				4A9A7C0722E86F580022E573 /* CreateTransferPresenter.swift in Sources */,
-				4A9A7C0822E86F580022E573 /* CreateTransferController.swift in Sources */,
 				4ADBEC7222E9F16A00D43A48 /* TransferDestinationCell.swift in Sources */,
 				4A9A7C0522E86F580022E573 /* TransferButtonCell.swift in Sources */,
 				4A9A7C0922E86F580022E573 /* TransferAmountCell.swift in Sources */,
@@ -3103,6 +3102,7 @@
 				4AB37CFC22EAF087005C1078 /* TransferAllFundsCell.swift in Sources */,
 				077C337722E8CCB0000314CD /* ScheduleTransferSectionData.swift in Sources */,
 				077C337822E8CCB0000314CD /* ScheduleTransferPresenter.swift in Sources */,
+				2E8AFE5823062316002B6D24 /* CreateTransferController.swift in Sources */,
 				07C91E9F22E8CF4000167B05 /* ScheduleTransferController.swift in Sources */,
 				077C337522E8CCB0000314CD /* TransferSummaryCell.swift in Sources */,
 				077C337422E8CCB0000314CD /* DividerCell.swift in Sources */,
