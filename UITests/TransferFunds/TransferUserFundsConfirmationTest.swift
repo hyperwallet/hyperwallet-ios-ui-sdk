@@ -21,7 +21,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         mockServer.tearDown()
     }
 
-    func testTransferFundsConfirmation_noFX() {
+    func testTransferFundsConfirmation_withoutFX() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListMoreThanOneTransferMethod",
                              method: HTTPMethod.get)
