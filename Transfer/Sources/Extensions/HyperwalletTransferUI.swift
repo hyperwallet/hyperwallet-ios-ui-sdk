@@ -24,16 +24,28 @@ import Common
 public extension HyperwalletUI {
     /// Create transfer funds
     ///
-    /// - Returns: An instance of `CreateTransferController`
-    func createTransferFromUserController(clientTransferId: String) -> CreateTransferController {
-        return CreateTransferController(clientTransferId: clientTransferId, sourceToken: nil)
+    /// - Returns: An instance of `CreateTransferCoordinator`
+    func createTransferFromUserCoordinator(clientTransferId: String,
+                                           parentController: UIViewController) -> CreateTransferCoordinator {
+        let coordinator = CreateTransferCoordinator()
+        coordinator.start(initializationData: [InitializationDataField.clientTransferId: clientTransferId],
+                          parentController: parentController)
+        return coordinator
     }
 
     /// Create transfer funds
     ///
-    /// - Returns: An instance of `CreateTransferController`
-    func createTransferFromPrepaidCardController(clientTransferId: String, prepaidCardToken: String)
-        -> CreateTransferController {
-            return CreateTransferController(clientTransferId: clientTransferId, sourceToken: prepaidCardToken)
+    /// - Returns: An instance of `CreateTransferCoordinator`
+    func createTransferFromPrepaidCardCoordinator(clientTransferId: String,
+                                                  sourceToken: String,
+                                                  parentController: UIViewController)
+        -> CreateTransferCoordinator {
+            let coordinator = CreateTransferCoordinator()
+            coordinator.start(initializationData: [
+                InitializationDataField.clientTransferId: clientTransferId,
+                InitializationDataField.sourceToken: sourceToken
+            ],
+                              parentController: parentController)
+            return coordinator
     }
 }
