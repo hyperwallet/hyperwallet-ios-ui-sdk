@@ -16,31 +16,12 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#if !COCOAPODS
-import Common
-#endif
+import UIKit
 
-/// The HyperwalletUI extension
-public extension HyperwalletUI {
-    /// Lists the user's transactions.
-    ///
-    ///
-    /// - Returns: An instance of `ListReceiptCoordinator`
-    func listUserReceiptCoordinator(parentController: UIViewController) -> ListReceiptCoordinator {
-        let coordinator = ListReceiptCoordinator()
-        coordinator.start(parentController: parentController)
-        return coordinator
-    }
-
-    /// Lists the user's prepaid card transactions.
-    ///
-    /// - Parameter prepaidCardToken: prepaid card token for which transactions are requested
-    /// - Returns: An instance of `ListReceiptCoordinator`
-    func listPrepaidCardReceiptCoordinator(parentController: UIViewController, prepaidCardToken: String)
-        -> ListReceiptCoordinator {
-            let coordinator = ListReceiptCoordinator()
-            coordinator.start(initializationData: [InitializationDataField.prepaidCardToken: prepaidCardToken],
-                              parentController: parentController)
-            return coordinator
-    }
+public protocol HyperwalletCoordinator: NSObject {
+    func applyTheme()
+    func navigate()
+    func navigateToNextPage(initializationData: [InitializationDataField: Any]?)
+    func navigateBackFromNextPage(with response: Any)
+    func start(initializationData: [InitializationDataField: Any]?, parentController: UIViewController)
 }
