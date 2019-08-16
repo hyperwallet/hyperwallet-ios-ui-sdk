@@ -34,21 +34,6 @@ public final class ListReceiptController: UITableViewController {
 
     private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "empty_list_receipt_message".localized())
 
-    init() {
-        super.init(nibName: nil, bundle: nil)
-        presenter = ListReceiptPresenter(view: self)
-    }
-
-    init(prepaidCardToken: String) {
-        super.init(nibName: nil, bundle: nil)
-        presenter = ListReceiptPresenter(view: self, prepaidCardToken: prepaidCardToken)
-    }
-
-    // swiftlint:disable unavailable_function
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("NSCoding not supported")
-    }
-
     override public func viewDidLoad() {
         super.viewDidLoad()
         title = "title_receipts".localized()
@@ -56,6 +41,9 @@ public final class ListReceiptController: UITableViewController {
         setViewBackgroundColor()
 
         navigationItem.backBarButtonItem = UIBarButtonItem.back
+        presenter = ListReceiptPresenter(view: self,
+                                         prepaidCardToken: initializationData?[InitializationDataField.prepaidCardToken]
+                                            as? String)
         setupListReceiptTableView()
         presenter.listReceipts()
     }
@@ -86,8 +74,7 @@ public final class ListReceiptController: UITableViewController {
     // MARK: list receipt table view delegate
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let hyperwalletReceipt = presenter.sectionData[indexPath.section].value[indexPath.row]
-        let receiptDetailViewController = ReceiptDetailController(with: hyperwalletReceipt)
-        navigationController?.pushViewController(receiptDetailViewController, animated: true)
+        coordinator?.navigateToNextPage(initializationData: [InitializationDataField.receipt: hyperwalletReceipt])
     }
 
     override public func tableView(_ tableView: UITableView,
