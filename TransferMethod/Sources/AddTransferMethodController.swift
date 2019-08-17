@@ -104,6 +104,7 @@ public final class AddTransferMethodController: UITableViewController {
         view.addGestureRecognizer(tap)
         initializeData()
         initializePresenter()
+        presenter.loadTransferMethodConfigurationFields(forceUpdate ?? false)
         setupLayout()
         hideKeyboardWhenTappedAround()
         title = transferMethodTypeCode?.lowercased().localized()
@@ -136,7 +137,6 @@ public final class AddTransferMethodController: UITableViewController {
     private func initializePresenter() {
         if let country = country,
             let currency = currency,
-            let forceUpdate = forceUpdate,
             let profileType = profileType,
             let transferMethodTypeCode = transferMethodTypeCode {
             presenter = AddTransferMethodPresenter(self,
@@ -144,7 +144,8 @@ public final class AddTransferMethodController: UITableViewController {
                                                    currency,
                                                    profileType,
                                                    transferMethodTypeCode)
-            presenter.loadTransferMethodConfigurationFields(forceUpdate)
+        } else {
+            fatalError("Required data not provided in initializePresenter")
         }
     }
 }
