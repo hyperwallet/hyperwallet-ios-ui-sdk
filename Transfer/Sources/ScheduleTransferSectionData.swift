@@ -69,9 +69,7 @@ struct ScheduleTransferForeignExchangeData: ScheduleTransferSectionData {
                 let sourceAmountFormatted = String(format: "%@ %@", sourceAmount, sourceCurrency)
                 let destinationAmountFormatted = String(format: "%@ %@", destinationAmount, destinationCurrency)
 
-                let rateFormatted = String(format: "%@ %@ = %@ %@",
-                                           "1".format(with: sourceCurrency),
-                                           sourceCurrency, rate, destinationCurrency)
+                let rateFormatted = String(format: "%@ %@ = %@ %@", "1", sourceCurrency, rate, destinationCurrency)
 
                 rows.append((title: "transfer_fx_sell_confirmation".localized(), value: sourceAmountFormatted))
                 rows.append((title: "transfer_fx_buy_confirmation".localized(), value: destinationAmountFormatted))
@@ -103,9 +101,9 @@ struct ScheduleTransferSummaryData: ScheduleTransferSectionData {
             let grossTransferAmount = transferAmountFormattedDouble + feeAmountFormattedDouble
 
             rows.append((title: "transfer_amount_confirmation".localized(),
-                         value: String(grossTransferAmount).format(with: destinationCurrency)))
+                         value: String(grossTransferAmount)))
             rows.append((title: "transfer_fee_confirmation".localized(),
-                         value: feeAmount.format(with: destinationCurrency)))
+                         value: feeAmount))
             rows.append((title: "transfer_net_amount_confirmation".localized(),
                          value: destinationAmount))
         }
