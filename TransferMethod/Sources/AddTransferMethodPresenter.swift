@@ -77,27 +77,24 @@ final class AddTransferMethodPresenter {
                                                         currency,
                                                         transferMethodTypeCode,
                                                         profileType) { [weak self] (result) in
-                guard let strongSelf = self else {
-                    return
-                }
+            guard let strongSelf = self else {
+                return
+            }
 
-                strongSelf.view.hideLoading()
+            strongSelf.view.hideLoading()
 
-                switch result {
-                case .failure(let error):
-                    strongSelf.view.showError(error, { () -> Void in
-                        strongSelf.loadTransferMethodConfigurationFields()
-                    })
+            switch result {
+            case .failure(let error):
+                strongSelf.view.showError(error, { () -> Void in
+                    strongSelf.loadTransferMethodConfigurationFields()
+                })
 
-                case .success(let fieldResult):
-                    guard
-                        let fieldGroups = fieldResult?.fieldGroups(),
-                        let transferMethodType = fieldResult?.transferMethodType()
-                        else {
-                            return
-                    }
+            case .success(let fieldResult):
+                if let fieldGroups = fieldResult?.fieldGroups(),
+                    let transferMethodType = fieldResult?.transferMethodType() {
                     strongSelf.view.showTransferMethodFields(fieldGroups, transferMethodType)
                 }
+            }
         }
     }
 
@@ -144,14 +141,12 @@ final class AddTransferMethodPresenter {
         switch error.group {
         case .business:
             resetErrorMessagesForAllSections()
-            guard let errors = error.getHyperwalletErrors()?.errorList, errors.isNotEmpty else {
-                return
-            }
-
-            if errors.contains(where: { $0.fieldName == nil }) {
-                view.showBusinessError(error, { [weak self] () -> Void in self?.updateFooterContent(errors) })
-            } else {
-                updateFooterContent(errors)
+            if let errors = error.getHyperwalletErrors()?.errorList, errors.isNotEmpty {
+                if errors.contains(where: { $0.fieldName == nil }) {
+                    view.showBusinessError(error, { [weak self] () -> Void in self?.updateFooterContent(errors) })
+                } else {
+                    updateFooterContent(errors)
+                }
             }
 
         default:
