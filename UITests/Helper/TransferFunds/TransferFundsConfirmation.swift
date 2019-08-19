@@ -56,10 +56,14 @@ class TransferFundsConfirmation {
 
         noteDescription = app.cells.textFields["transferNotesTextField"]
 
-        foreignExchangeSectionLabel = app.tables["scheduleTransferTableView"].staticTexts["transfer_section_header_foreignExchange".localized()]
-        foreignExchangeSell = app.tables["scheduleTransferTableView"].staticTexts["transfer_fx_sell_confirmation".localized()]
-        foreignExchangeBuy = app.tables["scheduleTransferTableView"].staticTexts["transfer_fx_buy_confirmation".localized()]
-        foreignExchangeRate = app.tables["scheduleTransferTableView"].staticTexts["transfer_fx_rate_confirmation".localized()]
+        foreignExchangeSectionLabel = app.tables["scheduleTransferTableView"]
+            .staticTexts["transfer_section_header_foreignExchange".localized()]
+        foreignExchangeSell = app.tables["scheduleTransferTableView"]
+            .staticTexts["transfer_fx_sell_confirmation".localized()]
+        foreignExchangeBuy = app.tables["scheduleTransferTableView"]
+            .staticTexts["transfer_fx_buy_confirmation".localized()]
+        foreignExchangeRate = app.tables["scheduleTransferTableView"]
+            .staticTexts["transfer_fx_rate_confirmation".localized()]
 
         confirmButton = app.tables["scheduleTransferTableView"]
             .staticTexts["transfer_button_confirm".localized()]

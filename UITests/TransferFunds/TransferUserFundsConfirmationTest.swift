@@ -21,6 +21,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         mockServer.tearDown()
     }
 
+    //swiftlint:disable function_body_length
     func testTransferFundsConfirmation_withoutFX() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListMoreThanOneTransferMethod",
@@ -87,6 +88,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertTrue(transferFundMenu.exists)
     }
 
+    //swiftlint:disable function_body_length
     func testTransferFundsConfirmation_withFX() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListMoreThanOneTransferMethod",
@@ -190,6 +192,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertTrue(transferFundMenu.exists)
     }
 
+    //swiftlint:disable line_length
     func testTransferFundsConfirmation_timeOutError() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListMoreThanOneTransferMethod",
@@ -237,7 +240,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         // Assert Transfer Quote Expire error
         waitForExistence(app.alerts["Error"])
         let predicate = NSPredicate(format:
-            "label CONTAINS[c] 'The transfer request has expired on Wed Jul 24 21:38:58 GMT 2019. Please create a new transfer and commit it before 120 seconds.'")
+            "label CONTAINS[c] 'The transfer request has expired on Wed Jul 24 21:38:58 GMT 2019.Please create a new transfer and commit it before 120 seconds.'")
         XCTAssert(app.alerts["Error"]
             .staticTexts.element(matching: predicate).exists)
     }

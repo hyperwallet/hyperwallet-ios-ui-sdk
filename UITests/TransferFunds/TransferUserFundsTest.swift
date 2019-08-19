@@ -84,7 +84,7 @@ class TransferUserFundsTest: BaseTests {
         // Notes
         XCTAssertTrue(transferFunds.notesSectionLabel.exists)
         XCTAssertEqual(transferFunds.notesDescriptionTextField.placeholderValue, "Description")
-        // TODO: iOS 10.3.1 does work on the following - will investigate
+
         if #available(iOS 11.0, *) {
             transferFunds.enterNotes(description: "testing")
             XCTAssertEqual(transferFunds.notesDescriptionTextField.value as? String, "testing")
