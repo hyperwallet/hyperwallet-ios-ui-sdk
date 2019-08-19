@@ -42,6 +42,7 @@
 		09E7165622A6983400FA9B96 /* ListReceiptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7165522A6983400FA9B96 /* ListReceiptTests.swift */; };
 		2BF9E5F822EF8BF200BB7DA5 /* TransferRepositoryFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF9E5F722EF8BF200BB7DA5 /* TransferRepositoryFactoryTests.swift */; };
 		2E8AFE5823062316002B6D24 /* CreateTransferController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7C0222E86F580022E573 /* CreateTransferController.swift */; };
+		2E8AFE5C2307668F002B6D24 /* HyperwalletCoordinatorTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8AFE5B2307668F002B6D24 /* HyperwalletCoordinatorTypes.swift */; };
 		412F723722B45DB100837F8F /* TransactionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F723222B458C700837F8F /* TransactionDetails.swift */; };
 		4157135D22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json in Resources */ = {isa = PBXBuildFile; fileRef = 4157135C22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json */; };
 		4157135F22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json in Resources */ = {isa = PBXBuildFile; fileRef = 4157135E22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json */; };
@@ -651,6 +652,7 @@
 		09E7164F22A697C400FA9B96 /* ReceiptsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptsList.swift; sourceTree = "<group>"; };
 		09E7165522A6983400FA9B96 /* ListReceiptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListReceiptTests.swift; sourceTree = "<group>"; };
 		2BF9E5F722EF8BF200BB7DA5 /* TransferRepositoryFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferRepositoryFactoryTests.swift; sourceTree = "<group>"; };
+		2E8AFE5B2307668F002B6D24 /* HyperwalletCoordinatorTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletCoordinatorTypes.swift; sourceTree = "<group>"; };
 		412F723222B458C700837F8F /* TransactionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetails.swift; sourceTree = "<group>"; };
 		4157135C22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardReceiptsForOneMonth.json; sourceTree = "<group>"; };
 		4157135E22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardReceiptsForFewMonths.json; sourceTree = "<group>"; };
@@ -1649,6 +1651,7 @@
 				A65312CB22FC037800A83D30 /* InitializationDataField.swift */,
 				078B45802273A441005B0248 /* HyperwalletUI.swift */,
 				DB551F4C22E1316400DD65C2 /* Info.plist */,
+				2E8AFE5B2307668F002B6D24 /* HyperwalletCoordinatorTypes.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -3248,6 +3251,7 @@
 				DBC199EC22E29CD0004447DD /* UIImage.swift in Sources */,
 				DBC199ED22E29CD0004447DD /* UINavigationController.swift in Sources */,
 				DBC199EE22E29CD0004447DD /* UIToolbar.swift in Sources */,
+				2E8AFE5C2307668F002B6D24 /* HyperwalletCoordinatorTypes.swift in Sources */,
 				DBC199EF22E29CD0004447DD /* UIView.swift in Sources */,
 				DBC199F022E29CD0004447DD /* UIViewController.swift in Sources */,
 				DBC199F122E29CD0004447DD /* GenericCell.swift in Sources */,
