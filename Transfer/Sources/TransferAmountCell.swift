@@ -109,17 +109,16 @@ final class TransferAmountCell: UITableViewCell {
 
 extension TransferAmountCell: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        let formattedAmountString = textField.text?.format(with: currencyLabel.text)
-        textField.text = formattedAmountString
-        enteredAmountHandler?(formattedAmountString ?? "")
-    }
-
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        let groupSymbol = ","
-        guard let currentText = textField.text else {
+        guard var currentText = textField.text else {
+            enteredAmountHandler?("")
             return
         }
-        textField.text = currentText.replacingOccurrences(of: groupSymbol, with: "")
+        let decimalPointSymbol = "."
+        if currentText.last == Character(decimalPointSymbol) {
+            currentText.removeLast()
+            textField.text = currentText
+        }
+        enteredAmountHandler?(currentText)
     }
 
     func textField(_ textField: UITextField,
@@ -127,8 +126,8 @@ extension TransferAmountCell: UITextFieldDelegate {
                    replacementString string: String) -> Bool {
         let maximumIntegerDigits = 12
         let maximumFractionDigits = 2
-        let maximumAllowedDigits = maximumIntegerDigits + maximumFractionDigits
         let decimalPointSymbol = "."
+        let groupSymbol = ","
         let currentText = textField.text ?? ""
 
         // BackSpace
@@ -141,19 +140,33 @@ extension TransferAmountCell: UITextFieldDelegate {
             let pastedDigitsOnly = stringPastedAmount.replacingOccurrences(of: "[^0-9]",
                                                                            with: "",
                                                                            options: .regularExpression)
+            let pointEntered = stringPastedAmount.contains(decimalPointSymbol)
+            let maximumAllowedDigits = pointEntered
+                ? maximumIntegerDigits + maximumFractionDigits
+                : maximumIntegerDigits
             guard !stringPastedAmount.isEmpty,
                 currentText.isEmpty,
                 pastedDigitsOnly.count <= maximumAllowedDigits else {
                     return false
             }
-            textField.text = stringPastedAmount
+            textField.text = stringPastedAmount.replacingOccurrences(of: groupSymbol, with: "")
             return false
         }
         // Decimal point
         if string == decimalPointSymbol {
+            if currentText.isEmpty {
+                textField.text = "0\(decimalPointSymbol)"
+                return false
+            }
             return !currentText.contains(decimalPointSymbol)
         }
         // Digit
+        if currentText == "0" {
+            if string != "0" {
+                textField.text = string
+            }
+            return false
+        }
         let split = currentText.split(separator: Character(decimalPointSymbol),
                                       omittingEmptySubsequences: false)
         let pointEntered = split.count == 2
