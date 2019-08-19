@@ -38,8 +38,8 @@ public class HyperwalletCoordinatorFactory {
     /// Based on the HyperwalletCoordinatorTypes, determines the coordinator to be returned,
     /// returns nil if teh module has not been imported in the project
     ///
-    /// - Parameter hyperwalletCoordinatorType: <#hyperwalletCoordinatorType description#>
-    /// - Returns: <#return value description#>
+    /// - Parameter hyperwalletCoordinatorType:HyperwalletCoordinatorTypes
+    /// - Returns: The initialized co-ordinator class
     public func getHyperwalletCoordinator(hyperwalletCoordinatorType: HyperwalletCoordinatorTypes)
         -> HyperwalletCoordinator? {
             switch hyperwalletCoordinatorType {
