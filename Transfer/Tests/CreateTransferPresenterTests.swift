@@ -51,7 +51,7 @@ class CreateTransferTests: XCTestCase {
                 CreateTransferRequestHelper.setupSuccessRequest()
 
             case .failure:
-                CreateTransferRequestHelper.setupFailureRequest()
+                CreateTransferRequestHelper.setupFailureRequestWithoutFieldName()
 
             case .noContent:
                 CreateTransferRequestHelper.setupNoContentRequest()
@@ -304,11 +304,35 @@ class CreateTransferTests: XCTestCase {
         XCTAssertFalse(mockView.isShowErrorPerformed, "showError should not be performed")
     }
 
-    func testCreateTransfer_failure() {
+    func testCreateTransfer_failureWithFieldName() {
         initializePresenter()
         mockView.resetStates()
         presenter.amount = "1.00"
-        CreateTransferRequestHelper.setupFailureRequest()
+        CreateTransferRequestHelper.setupFailureRequestWithFieldName()
+        presenter.createTransfer()
+        wait(for: [mockView.updateFooterExpectation], timeout: 1)
+        XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
+        XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
+        XCTAssertNotNil(presenter.sectionData[1].errorMessage, "errorMessage should not be nil")
+    }
+
+    func testCreateTransfer_failureWithoutFieldName() {
+        initializePresenter()
+        mockView.resetStates()
+        presenter.amount = "1.00"
+        CreateTransferRequestHelper.setupFailureRequestWithoutFieldName()
+        presenter.createTransfer()
+        wait(for: [mockView.showErrorExpectation], timeout: 1)
+        XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
+        XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
+        XCTAssertTrue(mockView.isShowErrorPerformed, "showError should be performed")
+    }
+
+    func testCreateTransfer_unexpectedErrorFailure() {
+        initializePresenter()
+        mockView.resetStates()
+        presenter.amount = "1.00"
+        CreateTransferRequestHelper.setupUnexpectedFailureRequest()
         presenter.createTransfer()
         wait(for: [mockView.showErrorExpectation], timeout: 1)
         XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")

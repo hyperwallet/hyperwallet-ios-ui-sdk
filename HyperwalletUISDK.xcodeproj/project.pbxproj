@@ -48,6 +48,10 @@
 		4157135F22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json in Resources */ = {isa = PBXBuildFile; fileRef = 4157135E22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json */; };
 		4157136122C43660005D6DB1 /* PrepaidCardReceiptsPaging.json in Resources */ = {isa = PBXBuildFile; fileRef = 4157136022C43660005D6DB1 /* PrepaidCardReceiptsPaging.json */; };
 		4157136422C56B53005D6DB1 /* PrepaidCardListReceiptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4157136222C56B4B005D6DB1 /* PrepaidCardListReceiptTests.swift */; };
+		417ADD3D23036D2D0023B094 /* TransferUserFundsConfirmationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417ADD3B23036D000023B094 /* TransferUserFundsConfirmationTest.swift */; };
+		417ADD3F230370290023B094 /* TransferFundsConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417ADD3E230370290023B094 /* TransferFundsConfirmation.swift */; };
+		417ADD41230374850023B094 /* CreateTransferWithNoFee.json in Resources */ = {isa = PBXBuildFile; fileRef = 417ADD40230374850023B094 /* CreateTransferWithNoFee.json */; };
+		417ADD4B2304CB640023B094 /* CreateTransferWithZeroFee.json in Resources */ = {isa = PBXBuildFile; fileRef = 417ADD4A2304CB640023B094 /* CreateTransferWithZeroFee.json */; };
 		417ADD342301E2780023B094 /* TransferBelowTransactionLimitError.json in Resources */ = {isa = PBXBuildFile; fileRef = 417ADD322301DEE60023B094 /* TransferBelowTransactionLimitError.json */; };
 		417ADD39230363A70023B094 /* NoteDescriptionLengthValidationError.json in Resources */ = {isa = PBXBuildFile; fileRef = 417ADD38230363A70023B094 /* NoteDescriptionLengthValidationError.json */; };
 		417ADD4323047FD20023B094 /* AvailableFundCAD.json in Resources */ = {isa = PBXBuildFile; fileRef = 417ADD4223047FD20023B094 /* AvailableFundCAD.json */; };
@@ -140,6 +144,8 @@
 		9807B76D226442C60028A280 /* UnexpectedErrorResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFB61492261E84C00C4A8AA /* UnexpectedErrorResponse.json */; };
 		98220B8C2265793700055E18 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 98220B8B2265793700055E18 /* README.md */; };
 		98541F152273D72C007D4238 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 98541F142273D72C007D4238 /* CHANGELOG.md */; };
+		98F3D728230727A100A8195F /* MultipleCurrenciesErrorResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F3D7262307265900A8195F /* MultipleCurrenciesErrorResponse.json */; };
+		98F3D72B230728E700A8195F /* MultipleFXErrorResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F3D729230728C700A8195F /* MultipleFXErrorResponse.json */; };
 		98F63E682284AB170090101D /* PayPalAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F63E662284A2CF0090101D /* PayPalAccountResponse.json */; };
 		98F63E6B2284AC330090101D /* PayPalAccountInvalidEmailResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F63E692284AC2A0090101D /* PayPalAccountInvalidEmailResponse.json */; };
 		98F63E6E2284AD370090101D /* PayPalAccountDuplicateResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F63E6C2284AD330090101D /* PayPalAccountDuplicateResponse.json */; };
@@ -662,6 +668,10 @@
 		4157135E22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardReceiptsForFewMonths.json; sourceTree = "<group>"; };
 		4157136022C43660005D6DB1 /* PrepaidCardReceiptsPaging.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardReceiptsPaging.json; sourceTree = "<group>"; };
 		4157136222C56B4B005D6DB1 /* PrepaidCardListReceiptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepaidCardListReceiptTests.swift; sourceTree = "<group>"; };
+		417ADD3B23036D000023B094 /* TransferUserFundsConfirmationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferUserFundsConfirmationTest.swift; sourceTree = "<group>"; };
+		417ADD3E230370290023B094 /* TransferFundsConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferFundsConfirmation.swift; sourceTree = "<group>"; };
+		417ADD40230374850023B094 /* CreateTransferWithNoFee.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CreateTransferWithNoFee.json; sourceTree = "<group>"; };
+		417ADD4A2304CB640023B094 /* CreateTransferWithZeroFee.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CreateTransferWithZeroFee.json; sourceTree = "<group>"; };
 		417ADD322301DEE60023B094 /* TransferBelowTransactionLimitError.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TransferBelowTransactionLimitError.json; sourceTree = "<group>"; };
 		417ADD38230363A70023B094 /* NoteDescriptionLengthValidationError.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = NoteDescriptionLengthValidationError.json; sourceTree = "<group>"; };
 		417ADD4223047FD20023B094 /* AvailableFundCAD.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AvailableFundCAD.json; sourceTree = "<group>"; };
@@ -765,6 +775,8 @@
 		988547C92294B829007B312C /* ListReceiptController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListReceiptController.swift; sourceTree = "<group>"; };
 		988547CB2294B879007B312C /* ListReceiptPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListReceiptPresenter.swift; sourceTree = "<group>"; };
 		988547CF22970FA1007B312C /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		98F3D7262307265900A8195F /* MultipleCurrenciesErrorResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MultipleCurrenciesErrorResponse.json; sourceTree = "<group>"; };
+		98F3D729230728C700A8195F /* MultipleFXErrorResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MultipleFXErrorResponse.json; sourceTree = "<group>"; };
 		98F63E64228485930090101D /* AddTransferMethodPayPalAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransferMethodPayPalAccountTests.swift; sourceTree = "<group>"; };
 		98F63E662284A2CF0090101D /* PayPalAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PayPalAccountResponse.json; sourceTree = "<group>"; };
 		98F63E692284AC2A0090101D /* PayPalAccountInvalidEmailResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PayPalAccountInvalidEmailResponse.json; sourceTree = "<group>"; };
@@ -1232,6 +1244,7 @@
 			children = (
 				41D8360C22FB420F003544AB /* TransferUserFundsTest.swift */,
 				41D8364422FB4874003544AB /* TransferUserFundsPPCTest.swift */,
+				417ADD3B23036D000023B094 /* TransferUserFundsConfirmationTest.swift */,
 			);
 			path = TransferFunds;
 			sourceTree = "<group>";
@@ -1240,6 +1253,7 @@
 			isa = PBXGroup;
 			children = (
 				41D8360F22FB4255003544AB /* TransferFunds.swift */,
+				417ADD3E230370290023B094 /* TransferFundsConfirmation.swift */,
 				417ADD442304A6DC0023B094 /* TransferFundsSelectDestination.swift */,
 			);
 			path = TransferFunds;
@@ -1265,6 +1279,8 @@
 				41D8362122FB480A003544AB /* TransferStatusQuoted.json */,
 				41D8362222FB480A003544AB /* InvalidSourceError.json */,
 				41D8362322FB480A003544AB /* ListPrepaidCardTransferUSD.json */,
+				417ADD40230374850023B094 /* CreateTransferWithNoFee.json */,
+				417ADD4A2304CB640023B094 /* CreateTransferWithZeroFee.json */,
 				417ADD322301DEE60023B094 /* TransferBelowTransactionLimitError.json */,
 				417ADD38230363A70023B094 /* NoteDescriptionLengthValidationError.json */,
 			);
@@ -1281,6 +1297,8 @@
 				078C6EFD22EF815900CF81EE /* ScheduleTransferResponse.json */,
 				075FCFEE22F2439800997A7A /* UnexpectedErrorResponse.json */,
 				DBA9FA58227912A000C1301A /* UserIndividualResponse.json */,
+				98F3D7262307265900A8195F /* MultipleCurrenciesErrorResponse.json */,
+				98F3D729230728C700A8195F /* MultipleFXErrorResponse.json */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -2672,6 +2690,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98F3D72B230728E700A8195F /* MultipleFXErrorResponse.json in Resources */,
+				98F3D728230727A100A8195F /* MultipleCurrenciesErrorResponse.json in Resources */,
 				4A2B94B422F1CB31000A0F14 /* ListTransferMethodSuccessResponse.json in Resources */,
 				4A2B94B522F1CB31000A0F14 /* UserIndividualResponse.json in Resources */,
 				075FCFEF22F2439800997A7A /* UnexpectedErrorResponse.json in Resources */,
@@ -2764,11 +2784,13 @@
 				41D8363E22FB4814003544AB /* TransferErrorLimitExceeded.json in Resources */,
 				4157136122C43660005D6DB1 /* PrepaidCardReceiptsPaging.json in Resources */,
 				DBB2B7202261C142006C48D3 /* TransferMethodConfigurationKeysResponse.json in Resources */,
+				417ADD41230374850023B094 /* CreateTransferWithNoFee.json in Resources */,
 				DBB2B71B2261C142006C48D3 /* BankAccountIndividualResponse.json in Resources */,
 				417ADD4323047FD20023B094 /* AvailableFundCAD.json in Resources */,
 				DBB2B7262261C142006C48D3 /* BankCardResponse.json in Resources */,
 				09795B78229D7FE000EF407F /* ListTransferMethodResponseWithoutPayPalAccount.json in Resources */,
 				98F63E722284B4AF0090101D /* TransferMethodConfigurationPayPalAccountResponse.json in Resources */,
+				417ADD4B2304CB640023B094 /* CreateTransferWithZeroFee.json in Resources */,
 				0961D63D22AA954B007F0B44 /* ReceiptsForLazyLoadingNextPage.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3197,6 +3219,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				417ADD3D23036D2D0023B094 /* TransferUserFundsConfirmationTest.swift in Sources */,
 				98F63E6F2284AD9B0090101D /* AddTransferMethodPayPalAccountTests.swift in Sources */,
 				641EBE92228EE35A00D718F4 /* AddTransferMethodBankAccountBusinessTests.swift in Sources */,
 				C358A9A62272644000E5AE47 /* ListTransferMethods.swift in Sources */,
@@ -3205,6 +3228,7 @@
 				DBB2B7152261C142006C48D3 /* SelectTransferMethodTypeTests.swift in Sources */,
 				417ADD452304A6DC0023B094 /* TransferFundsSelectDestination.swift in Sources */,
 				DBB2B7172261C142006C48D3 /* AddTransferMethodBankCardTests.swift in Sources */,
+				417ADD3F230370290023B094 /* TransferFundsConfirmation.swift in Sources */,
 				644A69C822B14F4A0058E77E /* AddTransferMethodWireAccountTests.swift in Sources */,
 				C345BFC22289E6EC0049E67B /* XCUIElement.swift in Sources */,
 				412F723722B45DB100837F8F /* TransactionDetails.swift in Sources */,
