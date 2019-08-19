@@ -54,10 +54,10 @@ class TransferUserFundsConfirmationTest: BaseTests {
                              method: HTTPMethod.post)
         transferFunds.nextLabel.tap()
 
-        waitForExistence(transferFundsConfirmation.addSelectDestinationLabel)
-        XCTAssertTrue(transferFundsConfirmation.addSelectDestinationLabel.exists)
-        XCTAssertTrue(transferFundsConfirmation.addSelectDestinationDetailLabel.exists)
-        let destinationDetail = transferFundsConfirmation.addSelectDestinationDetailLabel.label
+        waitForExistence(transferFundsConfirmation.transferDestinationLabel)
+        XCTAssertTrue(transferFundsConfirmation.transferDestinationLabel.exists)
+        XCTAssertTrue(transferFundsConfirmation.transferDestinationDetailLabel.exists)
+        let destinationDetail = transferFundsConfirmation.transferDestinationDetailLabel.label
         XCTAssertTrue(destinationDetail == "United States\nEnding on 1234"
             || destinationDetail == "United States Ending on 1234")
 
@@ -122,11 +122,11 @@ class TransferUserFundsConfirmationTest: BaseTests {
 
         transferFunds.nextLabel.tap()
 
-        waitForExistence(transferFundsConfirmation.addSelectDestinationLabel)
+        waitForExistence(transferFundsConfirmation.transferDestinationLabel)
         // 1.  Add Destination Section
-        XCTAssertTrue(transferFundsConfirmation.addSelectDestinationLabel.exists)
-        XCTAssertTrue(transferFundsConfirmation.addSelectDestinationDetailLabel.exists)
-        let destinationDetail = transferFundsConfirmation.addSelectDestinationDetailLabel.label
+        XCTAssertTrue(transferFundsConfirmation.transferDestinationLabel.exists)
+        XCTAssertTrue(transferFundsConfirmation.transferDestinationDetailLabel.exists)
+        let destinationDetail = transferFundsConfirmation.transferDestinationDetailLabel.label
         XCTAssertTrue(destinationDetail == "United States\nEnding on 1234"
             || destinationDetail == "United States Ending on 1234")
 
@@ -240,7 +240,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         // Assert Transfer Quote Expire error
         waitForExistence(app.alerts["Error"])
         let predicate = NSPredicate(format:
-            "label CONTAINS[c] 'The transfer request has expired on Wed Jul 24 21:38:58 GMT 2019.Please create a new transfer and commit it before 120 seconds.'")
+            "label CONTAINS[c] 'The transfer request has expired on Wed Jul 24 21:38:58 GMT 2019. Please create a new transfer and commit it before 120 seconds.'")
         XCTAssert(app.alerts["Error"]
             .staticTexts.element(matching: predicate).exists)
     }
@@ -278,7 +278,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
                              method: HTTPMethod.post)
         transferFunds.nextLabel.tap()
 
-        waitForExistence(transferFundsConfirmation.addSelectDestinationLabel)
+        waitForExistence(transferFundsConfirmation.transferDestinationLabel)
         // Assert confirmation page has no FEE section
         XCTAssertFalse(transferFundsConfirmation.summaryFeeLabel.exists)
 

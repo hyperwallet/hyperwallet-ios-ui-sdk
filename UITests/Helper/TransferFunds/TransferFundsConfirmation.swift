@@ -5,9 +5,9 @@ class TransferFundsConfirmation {
     var app: XCUIApplication
 
     // Destination Section
-    var addSelectDestinationLabel: XCUIElement
+    var transferDestinationLabel: XCUIElement
 
-    var addSelectDestinationDetailLabel: XCUIElement
+    var transferDestinationDetailLabel: XCUIElement
 
     // Summary Section
     var summaryTitle: XCUIElement
@@ -38,9 +38,9 @@ class TransferFundsConfirmation {
     init(app: XCUIApplication) {
         self.app = app
 
-        addSelectDestinationLabel = app.tables["scheduleTransferTableView"]
+        transferDestinationLabel = app.tables["scheduleTransferTableView"]
             .staticTexts["transferDestinationTitleLabel"]
-        addSelectDestinationDetailLabel = app.tables["scheduleTransferTableView"]
+        transferDestinationDetailLabel = app.tables["scheduleTransferTableView"]
             .staticTexts["transferDestinationSubtitleLabel"]
 
         summaryTitle = app.tables["scheduleTransferTableView"]
