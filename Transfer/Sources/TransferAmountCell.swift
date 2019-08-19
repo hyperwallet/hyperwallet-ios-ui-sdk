@@ -29,7 +29,7 @@ final class TransferAmountCell: UITableViewCell {
     private lazy var amountTextField: PasteOnlyTextField = {
         let textField = PasteOnlyTextField(frame: .zero)
         textField.textAlignment = .right
-        textField.keyboardType = UIKeyboardType.numberPad
+        textField.keyboardType = UIKeyboardType.decimalPad
         textField.delegate = self
         textField.accessibilityIdentifier = "transferAmountTextField"
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -109,41 +109,58 @@ final class TransferAmountCell: UITableViewCell {
 
 extension TransferAmountCell: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        enteredAmountHandler?(amountTextField.text ?? "")
+        let formattedAmountString = textField.text?.format(with: currencyLabel.text)
+        textField.text = formattedAmountString
+        enteredAmountHandler?(formattedAmountString ?? "")
+    }
+
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        let groupSymbol = ","
+        guard let currentText = textField.text else {
+            return
+        }
+        textField.text = currentText.replacingOccurrences(of: groupSymbol, with: "")
     }
 
     func textField(_ textField: UITextField,
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
-        var currentText = textField.text ?? ""
+        let maximumIntegerDigits = 12
+        let maximumFractionDigits = 2
+        let maximumAllowedDigits = maximumIntegerDigits + maximumFractionDigits
+        let decimalPointSymbol = "."
+        let currentText = textField.text ?? ""
+
+        // BackSpace
+        if string.isEmpty {
+            return true
+        }
+        // Paste
         if string.count > 1 {
-            // Paste
             let stringPastedAmount = string.format(with: currencyLabel.text)
+            let pastedDigitsOnly = stringPastedAmount.replacingOccurrences(of: "[^0-9]",
+                                                                           with: "",
+                                                                           options: .regularExpression)
             guard !stringPastedAmount.isEmpty,
-                currentText.isEmpty else {
+                currentText.isEmpty,
+                pastedDigitsOnly.count <= maximumAllowedDigits else {
                     return false
             }
             textField.text = stringPastedAmount
             return false
         }
-        let digitsOnly = currentText.replacingOccurrences( of: "[^0-9]", with: "", options: .regularExpression)
-        if string.isEmpty {
-            // backspace
-            currentText = digitsOnly.dropLast().description
-        } else {
-            // digit
-            currentText = digitsOnly + string
+        // Decimal point
+        if string == decimalPointSymbol {
+            return !currentText.contains(decimalPointSymbol)
         }
+        // Digit
+        let split = currentText.split(separator: Character(decimalPointSymbol),
+                                      omittingEmptySubsequences: false)
+        let pointEntered = split.count == 2
 
-        if Double(currentText) == 0 {
-            textField.text = ""
-            return false
-        }
-
-        currentText = "0" + currentText
-        currentText.insert(".", at: currentText.index(currentText.endIndex, offsetBy: -2))
-        textField.text = currentText.format(with: currencyLabel.text)
-        return false
+        return pointEntered
+            ? split[1].count < maximumFractionDigits
+            : split[0].count < maximumIntegerDigits
     }
 }
 
