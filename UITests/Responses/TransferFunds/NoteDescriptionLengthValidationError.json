@@ -1,0 +1,7 @@
+{
+    "errors" : [ {
+        "message" : "Notes should be between 1 and 255 characters",
+        "fieldName" : "notes",
+        "code" : "CONSTRAINT_VIOLATIONS"
+    } ]
+}
