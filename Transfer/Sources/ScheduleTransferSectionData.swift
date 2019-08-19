@@ -101,7 +101,7 @@ struct ScheduleTransferSummaryData: ScheduleTransferSectionData {
             let grossTransferAmount = transferAmountFormattedDouble + feeAmountFormattedDouble
 
             rows.append((title: "transfer_amount_confirmation".localized(),
-                         value: String(grossTransferAmount)))
+                         value: String(grossTransferAmount).format(with: destinationCurrency)))
             rows.append((title: "transfer_fee_confirmation".localized(),
                          value: feeAmount))
             rows.append((title: "transfer_net_amount_confirmation".localized(),
