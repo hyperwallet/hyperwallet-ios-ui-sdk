@@ -52,7 +52,7 @@ script: |
     -quiet
 
   # Lint - Add `--strict` to fail for warning and violation
-  swiftlint lint --quiet --reporter json --srtict
+  swiftlint lint --strict --quiet --reporter json
 after_success:
  if [ "$code_coverage" == "YES" ]; then
       slather;
