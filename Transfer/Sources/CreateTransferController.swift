@@ -328,7 +328,7 @@ extension CreateTransferController: CreateTransferView {
         } else {
             HyperwalletUtilViews.showAlert(self,
                                            title: "Error",
-                                           message: "no_transfer_method_module_initialized".localized())
+                                           message: "transfer_error_no_transfer_method_module_initialized".localized())
         }
     }
 
