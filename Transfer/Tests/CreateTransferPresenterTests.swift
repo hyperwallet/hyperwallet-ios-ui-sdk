@@ -133,7 +133,7 @@ class CreateTransferTests: XCTestCase {
         XCTAssertEqual(presenter.sectionData.count, 4, "Section data count should be 4")
 
         XCTAssertEqual(presenter.sectionData[0].createTransferSectionHeader,
-                       .notes,
+                       .destination,
                        "Section type should be Destination")
         XCTAssertEqual(presenter.sectionData[1].createTransferSectionHeader,
                        .transfer,
