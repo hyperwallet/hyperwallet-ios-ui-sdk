@@ -45,9 +45,9 @@ pod 'HyperwalletUISDK/TransferMethod', '~> 1.0.0-beta03'
 After you're done installing the SDK, you need to initialize an instance in order to utilize core SDK functions. Also, you need to provide a HyperwalletAuthenticationTokenProvider object to retrieve an authentication token.
 
 ### Setup the UI Style
-HyperwalletUISDK provides default themes for all the modules(e.g. TransferMethod, Receipt). If you import HyperwalletUISDK, in order to 
+HyperwalletUISDK provides default themes for all the modules(e.g. TransferMethod, Receipt). If you import HyperwalletUISDK, in order to
 apply all the default themes, firstly you will have to call ThemeManager.applyTheme which will apply the basic theme. Secondly, you need to apply
-the themes for all the modules in HyperwalletUISDK. 
+the themes for all the modules in HyperwalletUISDK.
 For example:
 ```swift
 ...
