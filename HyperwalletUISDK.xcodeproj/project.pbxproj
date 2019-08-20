@@ -143,6 +143,8 @@
 		98F3D759230C5C1C00A8195F /* CreateTransferWithZeroFee.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F3D74A230C5ADB00A8195F /* CreateTransferWithZeroFee.json */; };
 		98F3D75A230C5C2600A8195F /* NoteDescriptionLengthValidationError.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F3D74D230C5ADC00A8195F /* NoteDescriptionLengthValidationError.json */; };
 		98F3D75B230C5C2A00A8195F /* TransferBelowTransactionLimitError.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F3D74E230C5ADC00A8195F /* TransferBelowTransactionLimitError.json */; };
+		98F3D762230C67B100A8195F /* MultipleFXErrorResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F3D75D230C67A800A8195F /* MultipleFXErrorResponse.json */; };
+		98F3D763230C67B600A8195F /* MultipleCurrenciesErrorResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F3D75C230C67A800A8195F /* MultipleCurrenciesErrorResponse.json */; };
 		98F63E682284AB170090101D /* PayPalAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F63E662284A2CF0090101D /* PayPalAccountResponse.json */; };
 		98F63E6B2284AC330090101D /* PayPalAccountInvalidEmailResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F63E692284AC2A0090101D /* PayPalAccountInvalidEmailResponse.json */; };
 		98F63E6E2284AD370090101D /* PayPalAccountDuplicateResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F63E6C2284AD330090101D /* PayPalAccountDuplicateResponse.json */; };
@@ -771,6 +773,8 @@
 		98F3D74C230C5ADC00A8195F /* CreateTransferWithNoFee.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CreateTransferWithNoFee.json; sourceTree = "<group>"; };
 		98F3D74D230C5ADC00A8195F /* NoteDescriptionLengthValidationError.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = NoteDescriptionLengthValidationError.json; sourceTree = "<group>"; };
 		98F3D74E230C5ADC00A8195F /* TransferBelowTransactionLimitError.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TransferBelowTransactionLimitError.json; sourceTree = "<group>"; };
+		98F3D75C230C67A800A8195F /* MultipleCurrenciesErrorResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MultipleCurrenciesErrorResponse.json; sourceTree = "<group>"; };
+		98F3D75D230C67A800A8195F /* MultipleFXErrorResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MultipleFXErrorResponse.json; sourceTree = "<group>"; };
 		98F63E64228485930090101D /* AddTransferMethodPayPalAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransferMethodPayPalAccountTests.swift; sourceTree = "<group>"; };
 		98F63E662284A2CF0090101D /* PayPalAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PayPalAccountResponse.json; sourceTree = "<group>"; };
 		98F63E692284AC2A0090101D /* PayPalAccountInvalidEmailResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PayPalAccountInvalidEmailResponse.json; sourceTree = "<group>"; };
@@ -1287,6 +1291,8 @@
 				4A2B94AA22F1C954000A0F14 /* CreateTransferResponse.json */,
 				075FCFEC22F2154700997A7A /* CreateTransferWithoutForeignExchangeResponse.json */,
 				4A2B949C22F1BC00000A0F14 /* ListTransferMethodSuccessResponse.json */,
+				98F3D75C230C67A800A8195F /* MultipleCurrenciesErrorResponse.json */,
+				98F3D75D230C67A800A8195F /* MultipleFXErrorResponse.json */,
 				078C6F0722EF967400CF81EE /* ScheduleTransferExpiredTransferResponse.json */,
 				078C6EFD22EF815900CF81EE /* ScheduleTransferResponse.json */,
 				075FCFEE22F2439800997A7A /* UnexpectedErrorResponse.json */,
@@ -2682,12 +2688,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A2B94B422F1CB31000A0F14 /* ListTransferMethodSuccessResponse.json in Resources */,
+				98F3D763230C67B600A8195F /* MultipleCurrenciesErrorResponse.json in Resources */,
 				4A2B94B522F1CB31000A0F14 /* UserIndividualResponse.json in Resources */,
 				075FCFEF22F2439800997A7A /* UnexpectedErrorResponse.json in Resources */,
 				4A2B94B322F1CB31000A0F14 /* CreateTransferResponse.json in Resources */,
 				078C6EFE22EF815900CF81EE /* ScheduleTransferResponse.json in Resources */,
 				075FCFED22F2154700997A7A /* CreateTransferWithoutForeignExchangeResponse.json in Resources */,
 				078C6F0822EF967400CF81EE /* ScheduleTransferExpiredTransferResponse.json in Resources */,
+				98F3D762230C67B100A8195F /* MultipleFXErrorResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
