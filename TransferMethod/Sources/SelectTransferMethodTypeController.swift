@@ -46,11 +46,14 @@ public final class SelectTransferMethodTypeController: UITableViewController {
         largeTitle()
         setViewBackgroundColor()
         navigationItem.backBarButtonItem = UIBarButtonItem.back
-        presenter = SelectTransferMethodTypePresenter(self)
+        initializePresenter()
         setupCountryCurrencyTableView()
         setupTransferMethodTypeTableView()
-
         presenter.loadTransferMethodKeys(forceUpdate)
+    }
+
+    private func initializePresenter() {
+        presenter = SelectTransferMethodTypePresenter(self)
     }
 
     // MARK: - Setup Layout
@@ -134,6 +137,7 @@ extension SelectTransferMethodTypeController: SelectTransferMethodTypeView {
         initializationData[InitializationDataField.currency]  = currency
         initializationData[InitializationDataField.profileType]  = profileType
         initializationData[InitializationDataField.transferMethodTypeCode]  = transferMethodTypeCode
+        initializationData[InitializationDataField.forceUpdateData] = true
         coordinator?.navigateToNextPage(initializationData: initializationData)
     }
 

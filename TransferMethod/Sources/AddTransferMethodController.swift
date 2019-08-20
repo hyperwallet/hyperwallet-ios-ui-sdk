@@ -40,6 +40,7 @@ public final class AddTransferMethodController: UITableViewController {
     // MARK: - Properties -
     private var country: String?
     private var currency: String?
+    private var forceUpdate: Bool?
     private var profileType: String?
     private var transferMethodTypeCode: String?
     private var processingView: ProcessingView?
@@ -85,11 +86,13 @@ public final class AddTransferMethodController: UITableViewController {
     private func initializeData() {
         if let country = initializationData?[InitializationDataField.country] as? String,
             let currency = initializationData?[InitializationDataField.currency] as? String,
+            let forceUpdate = initializationData?[InitializationDataField.forceUpdateData] as? Bool,
             let profileType = initializationData?[InitializationDataField.profileType] as? String,
             let transferMethodTypeCode = initializationData?[InitializationDataField.transferMethodTypeCode]
                 as? String {
             self.country = country
             self.currency = currency
+            self.forceUpdate = forceUpdate
             self.profileType = profileType
             self.transferMethodTypeCode = transferMethodTypeCode
         }
@@ -101,6 +104,7 @@ public final class AddTransferMethodController: UITableViewController {
         view.addGestureRecognizer(tap)
         initializeData()
         initializePresenter()
+        presenter.loadTransferMethodConfigurationFields(forceUpdate ?? false)
         setupLayout()
         hideKeyboardWhenTappedAround()
         title = transferMethodTypeCode?.lowercased().localized()
@@ -140,7 +144,8 @@ public final class AddTransferMethodController: UITableViewController {
                                                    currency,
                                                    profileType,
                                                    transferMethodTypeCode)
-            presenter.loadTransferMethodConfigurationFields()
+        } else {
+            fatalError("Required data not provided in initializePresenter")
         }
     }
 }
