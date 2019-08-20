@@ -141,6 +141,7 @@
 		9807B76B226442C60028A280 /* TransferMethodConfigurationBankAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFB61522261E84D00C4A8AA /* TransferMethodConfigurationBankAccountResponse.json */; };
 		9807B76C226442C60028A280 /* TransferMethodConfigurationBankCardResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFB614F2261E84C00C4A8AA /* TransferMethodConfigurationBankCardResponse.json */; };
 		9807B76D226442C60028A280 /* UnexpectedErrorResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFB61492261E84C00C4A8AA /* UnexpectedErrorResponse.json */; };
+		98175429228DE42E0019159A /* ReceiptTransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98175428228DE42E0019159A /* ReceiptTransactionTableViewCell.swift */; };
 		98220B8C2265793700055E18 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 98220B8B2265793700055E18 /* README.md */; };
 		98541F152273D72C007D4238 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 98541F142273D72C007D4238 /* CHANGELOG.md */; };
 		98F3D728230727A100A8195F /* MultipleCurrenciesErrorResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F3D7262307265900A8195F /* MultipleCurrenciesErrorResponse.json */; };
