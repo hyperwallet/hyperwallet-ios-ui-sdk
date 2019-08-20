@@ -41,9 +41,6 @@ public final class ListReceiptController: UITableViewController {
         setViewBackgroundColor()
         navigationItem.backBarButtonItem = UIBarButtonItem.back
         initializePresenter()
-        guard let presenter = presenter else {
-            fatalError("Required data not provided in initializePresenter")
-        }
         presenter.listReceipts()
         setupListReceiptTableView()
     }
