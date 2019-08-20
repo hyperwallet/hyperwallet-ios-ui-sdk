@@ -2,18 +2,18 @@ language: swift
 osx_image: xcode10.2
 os: osx
 branches:
-  only:
-    - /.*/
+ only:
+  - /.*/
 cache:
   directories:
     - Carthage/Build/
 env:
   global:
-    - LC_CTYPE=en_US.UTF-8
-    - LANG=en_US.UTF-8
-    - PROJECT=HyperwalletUISDK.xcodeproj
-    - IOS_FRAMEWORK_SCHEME="HyperwalletUISDK"
-    - IOS_UI_TESTS_SCHEME="Demo"
+  - LC_CTYPE=en_US.UTF-8
+  - LANG=en_US.UTF-8
+  - PROJECT=HyperwalletUISDK.xcodeproj
+  - IOS_FRAMEWORK_SCHEME="HyperwalletUISDK"
+  - IOS_UI_TESTS_SCHEME="Demo"
 
   matrix:
     - ios_version='12.1'  ios_device='iPhone XR' scheme="$IOS_FRAMEWORK_SCHEME" platform='iOS Simulator' configuration="Debug" code_coverage="YES" only_active_arch="YES"
@@ -23,8 +23,8 @@ env:
 before_install:
   # Boot the emulator by ID
   - |
-  ios_uid=$(xcrun instruments -s devices | grep Simulator | grep "$ios_device ($ios_version)*" | grep -o "[0-9A-F]\{8\}-[0-9A-F]\{4\}-[0-9A-F]\{4\}-[0-9A-F]\{4\}-[0-9A-F]\{12\}")
-  xcrun simctl boot $ios_uid
+     ios_uid=$(xcrun instruments -s devices | grep Simulator | grep "$ios_device ($ios_version)*" | grep -o "[0-9A-F]\{8\}-[0-9A-F]\{4\}-[0-9A-F]\{4\}-[0-9A-F]\{4\}-[0-9A-F]\{12\}")
+     xcrun simctl boot $ios_uid
   # List all emulator available
   - xcrun simctl list
   # Update the brew and build dependencies tools
@@ -32,7 +32,7 @@ before_install:
   - Carthage update --platform iOS  --cache-builds
   - gem i slather
   # Install build output formatting tool
-  - gem i xcpretty
+  - gem install xcpretty
   # Force to update the Swiftlint to the last stable version
   - brew outdated swiftlint || brew upgrade swiftlint
   # Print the booted emulator
@@ -56,6 +56,6 @@ script: |
   # Lint - Add `--strict` to fail for warning and violation
   swiftlint lint --strict --quiet --reporter json
 after_success:
-  if [ "$code_coverage" == "YES" ]; then
+ if [ "$code_coverage" == "YES" ]; then
       slather;
-  fi
+ fi
