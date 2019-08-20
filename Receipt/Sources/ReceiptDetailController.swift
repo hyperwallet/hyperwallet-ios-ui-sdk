@@ -45,7 +45,7 @@ public final class ReceiptDetailController: UITableViewController {
         tableView = UITableView(frame: view.frame, style: .grouped)
         tableView.allowsSelection = false
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = Theme.Cell.extraSmallHeight
+        tableView.estimatedRowHeight = Theme.Cell.smallHeight
         tableView.separatorStyle = .singleLine
         tableView.accessibilityIdentifier = "receiptDetailTableView"
         tableView.cellLayoutMarginsFollowReadableWidth = false
