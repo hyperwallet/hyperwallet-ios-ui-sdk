@@ -47,11 +47,11 @@ script: |
   destination="platform=$platform,OS=$ios_version,name=$ios_device"
 
   # Build and test Framework in Debug
-  - xcodebuild -enableCodeCoverage "$code_coverage" clean build test -project "$PROJECT" \
+  xcodebuild -enableCodeCoverage "$code_coverage" clean build test -project "$PROJECT" \
     -scheme "$scheme" \
     -destination "$destination" \
     -configuration "$configuration" ONLY_ACTIVE_ARCH="$only_active_arch" ENABLE_TESTABILITY=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
-    | xcpretty && exit ${PIPESTATUS[0]}
+    | xcpretty
 
   # Lint - Add `--strict` to fail for warning and violation
   swiftlint lint --strict --quiet --reporter json
