@@ -21,7 +21,7 @@ import Common
 import HyperwalletSDK
 import UIKit
 
-/// Represents the selection input widget. 
+/// Represents the selection input widget.
 final class SelectionWidget: AbstractWidget {
     weak var viewController: UIViewController?
 
