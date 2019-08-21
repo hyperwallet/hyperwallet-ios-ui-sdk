@@ -66,8 +66,6 @@ public extension String {
     func format(with currencyCode: String?) -> String {
         if !self.isEmpty {
             let currencyFormatter = NumberFormatter()
-            currencyFormatter.maximumFractionDigits = 2
-            currencyFormatter.minimumFractionDigits = 2
             currencyFormatter.minimumIntegerDigits = 1
             currencyFormatter.numberStyle = .currency
             currencyFormatter.currencyCode = currencyCode
@@ -86,8 +84,6 @@ public extension String {
     func formatToDouble(with currencyCode: String? = nil) -> Double {
         if !self.isEmpty {
             let currencyFormatter = NumberFormatter()
-            currencyFormatter.maximumFractionDigits = 2
-            currencyFormatter.minimumFractionDigits = 2
             currencyFormatter.minimumIntegerDigits = 1
             currencyFormatter.numberStyle = .currency
             currencyFormatter.currencyCode = currencyCode
