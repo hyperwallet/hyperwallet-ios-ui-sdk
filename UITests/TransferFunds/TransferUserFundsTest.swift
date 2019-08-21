@@ -295,19 +295,15 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.transferAmount.tap()
         transferFunds.transferAmount.typeText(".12345")
 
-        transferFunds.app.tap()
+        transferFunds.transferSectionLabel.tap()
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.12")
 
-        transferFunds.transferAmount.tap()
         transferFunds.transferAmount.clearAndEnterText(text: "12345678901234567890")
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "123456789012")
         transferFunds.transferAmount.typeText(".123456")
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "123456789012.12")
 
-        transferFunds.app.tap()
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "123456789012.12")
-
-        transferFunds.transferAmount.tap()
+        transferFunds.transferSectionLabel.tap()
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "123456789012.12")
     }
 
@@ -479,8 +475,7 @@ class TransferUserFundsTest: BaseTests {
 
         let pastAmountWithNumberNoDigit = "10000"
         transferFunds.pasteAmountToTransferAmount(amount: pastAmountWithNumberNoDigit)
-        transferFunds.transferAmount.tap()
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "10000.00")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "10,000.00")
     }
 
     /* When user enters amount below the transaction limit in transfer amount Field

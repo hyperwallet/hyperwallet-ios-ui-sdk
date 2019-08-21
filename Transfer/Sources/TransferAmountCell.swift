@@ -121,13 +121,19 @@ extension TransferAmountCell: UITextFieldDelegate {
         enteredAmountHandler?(currentText)
     }
 
+    private func setCursorToTheEnd(_ textField: UITextField) {
+        DispatchQueue.main.async {
+            let newPosition = textField.endOfDocument
+            textField.selectedTextRange = textField.textRange(from: newPosition, to: newPosition)
+        }
+    }
+
     func textField(_ textField: UITextField,
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
         let maximumIntegerDigits = 12
         let maximumFractionDigits = 2
         let decimalPointSymbol = "."
-        let groupSymbol = ","
         let currentText = textField.text ?? ""
 
         // BackSpace
@@ -149,7 +155,8 @@ extension TransferAmountCell: UITextFieldDelegate {
                 pastedDigitsOnly.count <= maximumAllowedDigits else {
                     return false
             }
-            textField.text = stringPastedAmount.replacingOccurrences(of: groupSymbol, with: "")
+            textField.text = stringPastedAmount
+            setCursorToTheEnd(textField)
             return false
         }
         // Decimal point
