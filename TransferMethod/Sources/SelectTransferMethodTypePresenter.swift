@@ -104,7 +104,7 @@ final class SelectTransferMethodTypePresenter {
 
     /// Loads the transferMethodKeys from core SDK and display the default transfer methods
     ///
-    /// - Parameter forceUpdate: Forces to refresh the data manager
+    /// - Parameter forceUpdate: Forces to refresh the data
     func loadTransferMethodKeys(_ forceUpdate: Bool = false) {
         view.showLoading()
 
@@ -262,7 +262,8 @@ final class SelectTransferMethodTypePresenter {
     }
 
     private func loadCurrency(_ keys: HyperwalletTransferMethodConfigurationKey?) {
-        guard let firstCurrency = keys?.currencies(from: selectedCountry)?.first, let currencyCode = firstCurrency.code else {
+        guard let firstCurrency = keys?.currencies(from: selectedCountry)?.first,
+            let currencyCode = firstCurrency.code else {
             view.showAlert(message: String(format: "no_currency_available_error_message".localized(),
                                            selectedCountry.localized()))
             return

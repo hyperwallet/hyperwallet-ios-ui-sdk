@@ -58,6 +58,45 @@ public extension String {
 
         return ceil(boundingBox.height)
     }
+
+    /// Format an amount to a currency format with currency code
+    ///
+    /// - Parameter currencyCode: the currency code
+    /// - Returns: a formatted String amount with currency code
+    func format(with currencyCode: String?) -> String {
+        if !self.isEmpty {
+            let currencyFormatter = NumberFormatter()
+            currencyFormatter.maximumFractionDigits = 2
+            currencyFormatter.minimumFractionDigits = 2
+            currencyFormatter.minimumIntegerDigits = 1
+            currencyFormatter.numberStyle = .currency
+            currencyFormatter.currencyCode = currencyCode
+            currencyFormatter.currencySymbol = ""
+            let formattedAmountInNumber = currencyFormatter.number(from: self)
+            return currencyFormatter.string(for: formattedAmountInNumber) ?? ""
+        } else {
+            return ""
+        }
+    }
+
+    /// Format an amount to a currency format with currency code
+    ///
+    /// - Parameter currencyCode: the currency code
+    /// - Returns: a formatted Double amount  with currency code
+    func formatToDouble(with currencyCode: String? = nil) -> Double {
+        if !self.isEmpty {
+            let currencyFormatter = NumberFormatter()
+            currencyFormatter.maximumFractionDigits = 2
+            currencyFormatter.minimumFractionDigits = 2
+            currencyFormatter.minimumIntegerDigits = 1
+            currencyFormatter.numberStyle = .currency
+            currencyFormatter.currencyCode = currencyCode
+            currencyFormatter.currencySymbol = ""
+            return currencyFormatter.number(from: self)?.doubleValue ?? 0
+        } else {
+            return 0
+        }
+    }
 }
 
 /// The NSMutableAttributedString extension
@@ -72,6 +111,27 @@ public extension NSMutableAttributedString {
         append(value: value, attributes: [
             .font: font,
             .foregroundColor: color
+        ])
+    }
+
+    /// Creates and appends a paragraph of NSAttributedString
+    ///
+    /// - Parameters:
+    ///   - value: the string value
+    ///   - font: the UIFont
+    ///   - color: the UIColor
+    func appendParagraph(value: String, font: UIFont, color: UIColor) {
+        let paragraphText = self.string.isEmpty
+            ? value
+            : "\n\(value)"
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .natural
+        paragraphStyle.lineBreakMode = .byWordWrapping
+        paragraphStyle.paragraphSpacing = font.lineHeight
+        append(value: paragraphText, attributes: [
+            .font: font,
+            .foregroundColor: color,
+            .paragraphStyle: paragraphStyle
         ])
     }
 

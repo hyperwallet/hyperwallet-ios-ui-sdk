@@ -38,13 +38,11 @@ public final class AddTransferMethodController: UITableViewController {
     }()
 
     // MARK: - Properties -
-    /// The completion handler will be performed after a new transfer method has been created.
-    public var createTransferMethodHandler: ((HyperwalletTransferMethod) -> Void)?
-    private var country: String
-    private var currency: String
-    private var forceUpdate: Bool
-    private var profileType: String
-    private var transferMethodTypeCode: String
+    private var country: String?
+    private var currency: String?
+    private var forceUpdate: Bool?
+    private var profileType: String?
+    private var transferMethodTypeCode: String?
     private var processingView: ProcessingView?
     private var spinnerView: SpinnerView?
     private var presenter: AddTransferMethodPresenter!
@@ -85,41 +83,31 @@ public final class AddTransferMethodController: UITableViewController {
         )
         return stackView
     }()
-
-    // MARK: - View Lifecycle -
-    /// Creates a new instance of the `AddTransferMethodTableViewController`
-    ///
-    /// - Parameters:
-    ///   - country: The 2 letter ISO 3166-1 country code.
-    ///   - currency: The 3 letter ISO 4217-1 currency code.
-    ///   - profileType: The profile type. Possible values - INDIVIDUAL, BUSINESS.
-    ///   - transferMethodTypeCode: The transfer method type.
-    init(_ country: String,
-         _ currency: String,
-         _ profileType: String,
-         _ transferMethodTypeCode: String,
-         _ forceUpdate: Bool) {
-        self.country = country
-        self.currency = currency
-        self.profileType = profileType
-        self.transferMethodTypeCode = transferMethodTypeCode
-        self.forceUpdate = forceUpdate
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    // swiftlint:disable unavailable_function
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("NSCoding not supported")
+    private func initializeData() {
+        if let country = initializationData?[InitializationDataField.country] as? String,
+            let currency = initializationData?[InitializationDataField.currency] as? String,
+            let forceUpdate = initializationData?[InitializationDataField.forceUpdateData] as? Bool,
+            let profileType = initializationData?[InitializationDataField.profileType] as? String,
+            let transferMethodTypeCode = initializationData?[InitializationDataField.transferMethodTypeCode]
+                as? String {
+            self.country = country
+            self.currency = currency
+            self.forceUpdate = forceUpdate
+            self.profileType = profileType
+            self.transferMethodTypeCode = transferMethodTypeCode
+        }
     }
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        title = transferMethodTypeCode.lowercased().localized()
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         view.addGestureRecognizer(tap)
+        initializeData()
         initializePresenter()
+        presenter.loadTransferMethodConfigurationFields(forceUpdate ?? false)
         setupLayout()
         hideKeyboardWhenTappedAround()
+        title = transferMethodTypeCode?.lowercased().localized()
         navigationItem.backBarButtonItem = UIBarButtonItem.back
     }
 
@@ -147,12 +135,18 @@ public final class AddTransferMethodController: UITableViewController {
     }
 
     private func initializePresenter() {
-        presenter = AddTransferMethodPresenter(self,
-                                               country,
-                                               currency,
-                                               profileType,
-                                               transferMethodTypeCode)
-        presenter.loadTransferMethodConfigurationFields()
+        if let country = country,
+            let currency = currency,
+            let profileType = profileType,
+            let transferMethodTypeCode = transferMethodTypeCode {
+            presenter = AddTransferMethodPresenter(self,
+                                                   country,
+                                                   currency,
+                                                   profileType,
+                                                   transferMethodTypeCode)
+        } else {
+            fatalError("Required data not provided in initializePresenter")
+        }
     }
 }
 
@@ -356,9 +350,7 @@ extension AddTransferMethodController: AddTransferMethodView {
                                             object: self,
                                             userInfo: [UserInfo.transferMethod: transferMethod])
         }
-        navigationController?
-            .skipPreviousViewControllerIfPresent(skip: SelectTransferMethodTypeController.self)
-        createTransferMethodHandler?(transferMethod)
+        coordinator?.navigateBackFromNextPage(with: transferMethod)
     }
 
     private func focusOnInvalidField(_ widget: AbstractWidget) {
@@ -429,8 +421,6 @@ extension AddTransferMethodController: AddTransferMethodView {
             infoLabel.attributedText = transferMethodType.formatFeesProcessingTime()
             let infoSection = AddTransferMethodSectionData(
                 fieldGroup: "INFORMATION",
-                country: country,
-                currency: currency,
                 cells: [infoView])
             presenter.sectionData.append(infoSection)
         }
@@ -439,8 +429,6 @@ extension AddTransferMethodController: AddTransferMethodView {
     private func addCreateButtonSection() {
         let buttonSection = AddTransferMethodSectionData(
             fieldGroup: "CREATE_BUTTON",
-            country: country,
-            currency: currency,
             cells: [createAccountButton])
         presenter.sectionData.append(buttonSection)
     }

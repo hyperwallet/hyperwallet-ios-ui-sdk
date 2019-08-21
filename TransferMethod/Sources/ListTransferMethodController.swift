@@ -30,9 +30,6 @@ public final class ListTransferMethodController: UITableViewController {
     private var processingView: ProcessingView?
     private var presenter: ListTransferMethodPresenter!
 
-    /// The completion handler will be performed after a new transfer method has been created.
-    public var createTransferMethodHandler: ((HyperwalletTransferMethod) -> Void)?
-
     private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "empty_list_transfer_method_message"
                                                                               .localized())
     private lazy var addAccountButton: UIButton = view.setUpEmptyListButton(text: "add_account_title".localized(),
@@ -49,10 +46,14 @@ public final class ListTransferMethodController: UITableViewController {
                                                             target: self,
                                                             action: #selector(didTapAddButton))
 
+        initializePresenter()
+        presenter.listTransferMethods()
         // setup table view
-        presenter = ListTransferMethodPresenter(view: self)
-        presenter.listTransferMethod()
         setupTransferMethodTableView()
+    }
+
+    private func initializePresenter() {
+        presenter = ListTransferMethodPresenter(view: self)
     }
 
     @objc
@@ -76,6 +77,7 @@ public final class ListTransferMethodController: UITableViewController {
 
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if presenter.transferMethodExists(at: indexPath.row) {
+            let cellRect = tableView.rectForRow(at: indexPath)
             let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
             let removeHandler = { (alertAction: UIAlertAction) -> Void in
@@ -90,7 +92,9 @@ public final class ListTransferMethodController: UITableViewController {
 
             optionMenu.addAction(removeAction)
             optionMenu.addAction(UIAlertAction.cancel())
-
+            optionMenu.popoverPresentationController?.sourceView = tableView
+            optionMenu.popoverPresentationController?.sourceRect = cellRect
+            optionMenu.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.up
             navigationController?.present(optionMenu, animated: true, completion: nil)
         }
         tableView.deselectRow(at: indexPath, animated: true)
@@ -109,14 +113,7 @@ public final class ListTransferMethodController: UITableViewController {
     }
 
     private func addTransferMethod() {
-        let controller = HyperwalletUI.shared.selectTransferMethodTypeController()
-        controller.createTransferMethodHandler = {
-            [weak self] (transferMethod: HyperwalletTransferMethod) -> Void in
-            // refresh transfer method list
-            self?.presenter.listTransferMethod()
-            self?.createTransferMethodHandler?(transferMethod)
-        }
-        navigationController?.pushViewController(controller, animated: true)
+        coordinator?.navigateToNextPage(initializationData: nil)
     }
 
     private func setupTransferMethodTableView() {
@@ -200,5 +197,14 @@ extension ListTransferMethodController: ListTransferMethodView {
     private func toggleEmptyListView(hideLabel: Bool = true, hideButton: Bool = true) {
         emptyListLabel.isHidden = hideLabel
         addAccountButton.isHidden = hideButton
+    }
+}
+
+extension ListTransferMethodController {
+    override public func didFlowComplete(with response: Any) {
+        if response as? HyperwalletTransferMethod != nil {
+            // refresh transfer method list
+            presenter.listTransferMethods()
+        }
     }
 }

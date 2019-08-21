@@ -31,29 +31,27 @@ public final class ReceiptDetailController: UITableViewController {
 
     private var presenter: ReceiptDetailPresenter!
 
-    public init(with hyperwalletReceipt: HyperwalletReceipt) {
-        super.init(nibName: nil, bundle: nil)
-        presenter = ReceiptDetailPresenter(with: hyperwalletReceipt)
-    }
-
-    // swiftlint:disable unavailable_function
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("NSCoding not supported")
-    }
-
     override public func viewDidLoad() {
         super.viewDidLoad()
         title = "title_receipts_details".localized()
         titleDisplayMode(.never)
         setViewBackgroundColor()
+        initializePresenter()
         setupReceiptDetailTableView()
+    }
+
+    private func initializePresenter() {
+        if let receipt = initializationData?[InitializationDataField.receipt]
+            as? HyperwalletReceipt { presenter = ReceiptDetailPresenter(with: receipt) } else {
+            fatalError("Required data not provided in initializePresenter")
+        }
     }
 
     private func setupReceiptDetailTableView() {
         tableView = UITableView(frame: view.frame, style: .grouped)
         tableView.allowsSelection = false
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = Theme.Cell.extraSmallHeight
+        tableView.estimatedRowHeight = Theme.Cell.smallHeight
         tableView.separatorStyle = .singleLine
         tableView.accessibilityIdentifier = "receiptDetailTableView"
         tableView.cellLayoutMarginsFollowReadableWidth = false

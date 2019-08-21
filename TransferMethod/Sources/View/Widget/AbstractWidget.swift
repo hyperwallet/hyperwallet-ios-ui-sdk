@@ -31,8 +31,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
         label.textColor = Theme.Label.textColor
         label.font = Theme.Label.bodyFont
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.widthAnchor.constraint(equalToConstant: 144.0).isActive = true
-        label.setContentHuggingPriority(UILayoutPriority.required, for: NSLayoutConstraint.Axis.horizontal)
+        label.setContentHuggingPriority(UILayoutPriority.defaultLow, for: NSLayoutConstraint.Axis.horizontal)
         return label
     }()
 
@@ -40,8 +39,8 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
         super.init(frame: CGRect())
         translatesAutoresizingMaskIntoConstraints = false
         axis = .horizontal
-        alignment = .center
         spacing = 5
+        distribution = .fill
         isLayoutMarginsRelativeArrangement = true
         layoutMargins = UIEdgeInsets(top: 11.0, left: 0, bottom: 11.0, right: 16.0)
         self.field = field
@@ -95,6 +94,9 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         label.addGestureRecognizer(tap)
         addArrangedSubview(label)
+        if let widthAnchor = label.superview?.widthAnchor {
+            label.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.35).isActive = true
+        }
     }
 
     func showError() {

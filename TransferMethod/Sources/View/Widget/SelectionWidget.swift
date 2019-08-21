@@ -21,7 +21,7 @@ import Common
 import HyperwalletSDK
 import UIKit
 
-/// Represents the selection input widget. 
+/// Represents the selection input widget.
 final class SelectionWidget: AbstractWidget {
     weak var viewController: UIViewController?
 
@@ -42,9 +42,12 @@ final class SelectionWidget: AbstractWidget {
 
     override func setupLayout(field: HyperwalletField) {
         super.setupLayout(field: field)
-        labelField.accessibilityIdentifier = field.name
-        addArrangedSubview(labelField)
+        if let fieldName = field.name {
+            labelField.accessibilityIdentifier = "\(fieldName)Value"
+        }
 
+        addArrangedSubview(labelField)
+        spacing = 16
         if field.isEditable ?? true {
             labelField.textColor = Theme.Text.color
             labelField.isUserInteractionEnabled = true

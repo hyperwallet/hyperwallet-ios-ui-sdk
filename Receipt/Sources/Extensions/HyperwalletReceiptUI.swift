@@ -25,17 +25,22 @@ public extension HyperwalletUI {
     /// Lists the user's transactions.
     ///
     ///
-    /// - Returns: An instance of `ListReceiptController`
-    func listUserReceiptController() -> ListReceiptController {
-        return ListReceiptController()
+    /// - Returns: An instance of `ListReceiptCoordinator`
+    func listUserReceiptCoordinator(parentController: UIViewController) -> ListReceiptCoordinator {
+        let coordinator = ListReceiptCoordinator()
+        coordinator.start(parentController: parentController)
+        return coordinator
     }
 
     /// Lists the user's prepaid card transactions.
     ///
     /// - Parameter prepaidCardToken: prepaid card token for which transactions are requested
-    /// - Returns: An instance of `ListReceiptController`
-    func listPrepaidCardReceiptController(_ prepaidCardToken: String)
-        -> ListReceiptController {
-            return ListReceiptController(prepaidCardToken: prepaidCardToken)
+    /// - Returns: An instance of `ListReceiptCoordinator`
+    func listPrepaidCardReceiptCoordinator(parentController: UIViewController, prepaidCardToken: String)
+        -> ListReceiptCoordinator {
+            let coordinator = ListReceiptCoordinator()
+            coordinator.start(initializationData: [InitializationDataField.prepaidCardToken: prepaidCardToken],
+                              parentController: parentController)
+            return coordinator
     }
 }

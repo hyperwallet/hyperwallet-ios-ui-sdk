@@ -109,15 +109,18 @@ public extension HyperwalletFee {
             let max = percentFee.maximum
             let currency = flatFee.currency
 
-            if let min = min, let max = max, let flatValue = flatValue, let percentValue = percentValue, let currency = currency {
+            if let min = min, let max = max, let flatValue = flatValue,
+                let percentValue = percentValue, let currency = currency {
                 feeFormat = "fee_mix_formatter".localized()
                 description = String(
                     format: feeFormat, currency, flatValue, percentValue, min, max)
-            } else if let min = min, max == nil, let flatValue = flatValue, let percentValue = percentValue, let currency = currency {
+            } else if let min = min, max == nil, let flatValue = flatValue,
+                let percentValue = percentValue, let currency = currency {
                 feeFormat = "fee_mix_only_min_formatter".localized()
                 description = String(
                     format: feeFormat, currency, flatValue, percentValue, min)
-            } else if min == nil, let max = max, let flatValue = flatValue, let percentValue = percentValue, let currency = currency {
+            } else if min == nil, let max = max, let flatValue = flatValue,
+                let percentValue = percentValue, let currency = currency {
                 feeFormat = "fee_mix_only_max_formatter".localized()
                 description = String(
                     format: feeFormat, currency, flatValue, percentValue, max)

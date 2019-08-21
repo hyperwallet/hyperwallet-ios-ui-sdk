@@ -14,6 +14,10 @@ class BaseTests: XCTestCase {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/authentication-token",
                              filename: "AuthenticationTokenResponse",
                              method: HTTPMethod.post)
+
+        mockServer.setupStub(url: "/rest/v3/users/usr-token",
+                             filename: "UserIndividualResponse",
+                             method: HTTPMethod.get)
     }
 
     override func tearDown() {

@@ -69,6 +69,8 @@ public class Theme: NSObject {
     public struct Button {
         /// The button primary color
         public static var color = Theme.themeColor
+        /// The button font
+        public static var font = Theme.Label.bodyFont
     }
 
     /// Representation of all customizable visual style property for `UIText`.
@@ -98,8 +100,8 @@ public class Theme: NSObject {
         public static let largeHeight = CGFloat(88)
         /// The Select transfer method type items header height.
         public static let headerHeight = CGFloat(16)
-        /// The detail UITableViewViewCell height.
-        public static let extraSmallHeight = CGFloat(28)
+        /// The divider UITableViewViewCell height.
+        public static let dividerHeight = CGFloat(8)
     }
 
     /// Representation of all customizable visual style property for the `Hyperwallet`'s icon.
