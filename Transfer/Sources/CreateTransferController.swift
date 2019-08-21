@@ -48,13 +48,19 @@ public final class CreateTransferController: UITableViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem.back
         largeTitle()
         setViewBackgroundColor()
-        if let clientTransferId = initializationData?[InitializationDataField.clientTransferId] as? String {
-            let sourceToken = initializationData?[InitializationDataField.sourceToken] as? String
-            presenter = CreateTransferPresenter(clientTransferId, sourceToken, view: self)
-        }
+        initializePresenter()
         presenter.loadCreateTransfer()
         setUpCreateTransferTableView()
         hideKeyboardWhenTappedAround()
+    }
+
+    private func initializePresenter() {
+        if let clientTransferId = initializationData?[InitializationDataField.clientTransferId] as? String {
+            let sourceToken = initializationData?[InitializationDataField.sourceToken] as? String
+            presenter = CreateTransferPresenter(clientTransferId, sourceToken, view: self)
+        } else {
+            fatalError("Required data not provided in initializePresenter")
+        }
     }
 
     private func setUpCreateTransferTableView() {

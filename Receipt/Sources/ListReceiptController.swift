@@ -39,13 +39,16 @@ public final class ListReceiptController: UITableViewController {
         title = "title_receipts".localized()
         largeTitle()
         setViewBackgroundColor()
-
         navigationItem.backBarButtonItem = UIBarButtonItem.back
+        initializePresenter()
+        presenter.listReceipts()
+        setupListReceiptTableView()
+    }
+
+    private func initializePresenter() {
         presenter = ListReceiptPresenter(view: self,
                                          prepaidCardToken: initializationData?[InitializationDataField.prepaidCardToken]
                                             as? String)
-        setupListReceiptTableView()
-        presenter.listReceipts()
     }
 
     // MARK: list receipt table view data source

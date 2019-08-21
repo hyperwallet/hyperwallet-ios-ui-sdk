@@ -99,8 +99,6 @@ public struct Theme {
         public static let largeHeight = CGFloat(88)
         /// The Select transfer method type items header height.
         public static let headerHeight = CGFloat(16)
-        /// The detail UITableViewViewCell height.
-        public static let extraSmallHeight = CGFloat(28)
         /// The divider UITableViewViewCell height.
         public static let dividerHeight = CGFloat(8)
     }
