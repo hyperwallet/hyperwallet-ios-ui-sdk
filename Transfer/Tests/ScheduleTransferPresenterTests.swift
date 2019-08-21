@@ -116,7 +116,7 @@ class ScheduleTransferPresenterTests: XCTestCase {
     }
 
     private func assertSummarySectionWithoutFeeResult(summarySection: ScheduleTransferSectionData) {
-        XCTAssertEqual(summarySection.rowCount, 2, "Summary section should have 2 rows")
+        XCTAssertEqual(summarySection.rowCount, 1, "Summary section should have 1 row")
         XCTAssertNotNil(summarySection.title, "The title of summary section should not be nil")
         XCTAssertNotNil(summarySection.scheduleTransferSectionHeader,
                         "The header of summary section should not be nil")

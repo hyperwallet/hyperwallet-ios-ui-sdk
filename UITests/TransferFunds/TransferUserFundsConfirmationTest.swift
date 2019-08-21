@@ -137,28 +137,28 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertTrue(app.cells.element(boundBy: 2).staticTexts["You buy:"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 2).staticTexts["2,337.93 USD"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 3).staticTexts["Exchange Rate:"].exists)
-        XCTAssertTrue(app.cells.element(boundBy: 3).staticTexts["1.00 = 0.23"].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 3).staticTexts["1 MYR = 0.233968 USD"].exists)
 
         XCTAssertTrue(app.cells.element(boundBy: 5).staticTexts["You sell:"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 5).staticTexts["1,464.53 CAD"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 6).staticTexts["You buy:"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 6).staticTexts["1,134.13 USD"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 7).staticTexts["Exchange Rate:"].exists)
-        XCTAssertTrue(app.cells.element(boundBy: 7).staticTexts["1.00 = 0.77"].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 7).staticTexts["1 CAD = 0.774399 USD"].exists)
 
         XCTAssertTrue(app.cells.element(boundBy: 9).staticTexts["You sell:"].exists)
-        XCTAssertTrue(app.cells.element(boundBy: 9).staticTexts["50,000.00 KRW"].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 9).staticTexts["50,000 KRW"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 10).staticTexts["You buy:"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 10).staticTexts["42.76 USD"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 11).staticTexts["Exchange Rate:"].exists)
-        XCTAssertTrue(app.cells.element(boundBy: 11).staticTexts["1.00 = 0.00"].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 11).staticTexts["1 KRW = 0.000855 USD"].exists)
 
         XCTAssertTrue(app.cells.element(boundBy: 13).staticTexts["You sell:"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 13).staticTexts["1,000.00 EUR"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 14).staticTexts["You buy:"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 14).staticTexts["1,135.96 USD"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 15).staticTexts["Exchange Rate:"].exists)
-        XCTAssertTrue(app.cells.element(boundBy: 15).staticTexts["1.00 = 1.14"].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 15).staticTexts["1 EUR = 1.135960 USD"].exists)
 
         // 3. Summary Section
         XCTAssertTrue(transferFundsConfirmation.summaryTitle.label == "SUMMARY")
@@ -287,10 +287,6 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertEqual(app.cells.element(boundBy: 8)
             .staticTexts["scheduleTransferSummaryTextLabel"].label, "Amount:")
         XCTAssertEqual(app.cells.element(boundBy: 8).staticTexts["scheduleTransferSummaryTextValue"].label, "5,855.17")
-
-        XCTAssertEqual(app.cells.element(boundBy: 9)
-            .staticTexts["scheduleTransferSummaryTextLabel"].label, "You will receive:")
-        XCTAssertEqual(app.cells.element(boundBy: 9).staticTexts["scheduleTransferSummaryTextValue"].label, "5,855.17")
     }
 
     /*
