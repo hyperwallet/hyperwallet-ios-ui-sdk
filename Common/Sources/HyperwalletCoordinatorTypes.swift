@@ -17,7 +17,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import Foundation
-/// Hyperwallet'se num for the types of coordinators
+/// Hyperwallet's enum for the types of coordinators
 public enum HyperwalletCoordinatorTypes {
     /// - selectTransferMethodType: Coordinator for select transfer method type.
     case selectTransferMethodType
@@ -26,6 +26,8 @@ public enum HyperwalletCoordinatorTypes {
 /// Class responsible for deciding the coordinator required
 public class HyperwalletCoordinatorFactory {
     private static var instance: HyperwalletCoordinatorFactory!
+
+    private init() {}
 
     /// Returns the previously initialized instance of the Hyperwallet UI SDK interface object
     public static var shared: HyperwalletCoordinatorFactory {
@@ -39,7 +41,7 @@ public class HyperwalletCoordinatorFactory {
     /// returns nil if teh module has not been imported in the project
     ///
     /// - Parameter hyperwalletCoordinatorType:HyperwalletCoordinatorTypes
-    /// - Returns: The initialized co-ordinator class
+    /// - Returns: The initialized coordinator class
     public func getHyperwalletCoordinator(hyperwalletCoordinatorType: HyperwalletCoordinatorTypes)
         -> HyperwalletCoordinator? {
             switch hyperwalletCoordinatorType {
