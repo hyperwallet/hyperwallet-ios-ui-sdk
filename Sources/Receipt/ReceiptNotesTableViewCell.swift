@@ -16,27 +16,18 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#if !COCOAPODS
-import Common
-#endif
-
-final class ReceiptDetailCell: UITableViewCell {
-    static let reuseIdentifier = "receiptDetailTableViewCellReuseIdentifier"
+final class ReceiptNotesTableViewCell: UITableViewCell {
+    static let reuseIdentifier = "receiptNotesTableViewCellReuseIdentifier"
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .value1, reuseIdentifier: reuseIdentifier)
-        self.heightAnchor.constraint(equalToConstant: Theme.Cell.smallHeight).isActive = true
+        super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        textLabel?.numberOfLines = 0
+        textLabel?.lineBreakMode = .byWordWrapping
+        textLabel?.accessibilityIdentifier = "ReceiptDetailSectionNotesTextLabel"
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-    }
-
-    func configure(_ row: ReceiptDetailRow) {
-        textLabel?.text = row.title
-        textLabel?.accessibilityIdentifier = "\(row.field)Label"
-        detailTextLabel?.text = row.value
-        detailTextLabel?.accessibilityIdentifier = "\(row.field)Value"
     }
 
     // MARK: Theme manager's proxy properties
@@ -48,15 +39,5 @@ final class ReceiptDetailCell: UITableViewCell {
     @objc dynamic var titleLabelColor: UIColor! {
         get { return textLabel?.textColor }
         set { textLabel?.textColor = newValue }
-    }
-
-    @objc dynamic var subTitleLabelFont: UIFont! {
-        get { return detailTextLabel?.font }
-        set { detailTextLabel?.font = newValue }
-    }
-
-    @objc dynamic var subTitleLabelColor: UIColor! {
-        get { return detailTextLabel?.textColor }
-        set { detailTextLabel?.textColor = newValue }
     }
 }

@@ -73,6 +73,7 @@ public extension HyperwalletUI {
         initializationData[InitializationDataField.currency]  = currency
         initializationData[InitializationDataField.profileType]  = profileType
         initializationData[InitializationDataField.transferMethodTypeCode]  = transferMethodTypeCode
+        initializationData[InitializationDataField.forceUpdateData]  = forceUpdateData
 
         let coordinator = AddTransferMethodCoordinator()
         coordinator.start(initializationData: initializationData, parentController: parentController)

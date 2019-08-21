@@ -16,42 +16,41 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#if !COCOAPODS
-import Common
-#endif
 import HyperwalletSDK
 
-public final class ReceiptDetailController: UITableViewController {
+public final class ReceiptDetailTableViewController: UITableViewController {
     private let registeredCells: [(type: AnyClass, id: String)] = [
-        (ReceiptTransactionCell.self, ReceiptTransactionCell.reuseIdentifier),
-        (ReceiptFeeCell.self, ReceiptFeeCell.reuseIdentifier),
-        (ReceiptDetailCell.self, ReceiptDetailCell.reuseIdentifier),
-        (ReceiptNotesCell.self, ReceiptNotesCell.reuseIdentifier)
+        (ReceiptTransactionTableViewCell.self, ReceiptTransactionTableViewCell.reuseIdentifier),
+        (ReceiptFeeTableViewCell.self, ReceiptFeeTableViewCell.reuseIdentifier),
+        (ReceiptDetailTableViewCell.self, ReceiptDetailTableViewCell.reuseIdentifier),
+        (ReceiptNotesTableViewCell.self, ReceiptNotesTableViewCell.reuseIdentifier)
     ]
 
-    private var presenter: ReceiptDetailPresenter!
+    private var presenter: ReceiptDetailViewPresenter!
+
+    public init(with hyperwalletReceipt: HyperwalletReceipt) {
+        super.init(nibName: nil, bundle: nil)
+        presenter = ReceiptDetailViewPresenter(with: hyperwalletReceipt)
+    }
+
+    // swiftlint:disable unavailable_function
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("NSCoding not supported")
+    }
 
     override public func viewDidLoad() {
         super.viewDidLoad()
         title = "title_receipts_details".localized()
         titleDisplayMode(.never)
         setViewBackgroundColor()
-        initializePresenter()
         setupReceiptDetailTableView()
-    }
-
-    private func initializePresenter() {
-        if let receipt = initializationData?[InitializationDataField.receipt]
-            as? HyperwalletReceipt { presenter = ReceiptDetailPresenter(with: receipt) } else {
-            fatalError("Required data not provided in initializePresenter")
-        }
     }
 
     private func setupReceiptDetailTableView() {
         tableView = UITableView(frame: view.frame, style: .grouped)
         tableView.allowsSelection = false
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = Theme.Cell.smallHeight
+        tableView.estimatedRowHeight = Theme.Cell.extraSmallHeight
         tableView.separatorStyle = .singleLine
         tableView.accessibilityIdentifier = "receiptDetailTableView"
         tableView.cellLayoutMarginsFollowReadableWidth = false
@@ -66,27 +65,27 @@ public final class ReceiptDetailController: UITableViewController {
         let section = presenter.sectionData[indexPath.section]
         switch section.receiptDetailSectionHeader {
         case .transaction:
-            if let tableViewCell = cell as? ReceiptTransactionCell,
+            if let tableViewCell = cell as? ReceiptTransactionTableViewCell,
                 let transactionSection = section as? ReceiptDetailSectionTransactionData {
-                tableViewCell.configure(transactionSection.receipt)
+                tableViewCell.configure(transactionSection.tableViewCellConfiguration)
             }
 
         case .details:
-            if let tableViewCell = cell as? ReceiptDetailCell,
+            if let tableViewCell = cell as? ReceiptDetailTableViewCell,
                 let detailSection = section as? ReceiptDetailSectionDetailData {
                 let row = detailSection.rows[indexPath.row]
                 tableViewCell.configure(row)
             }
 
         case .fee:
-            if let tableViewCell = cell as? ReceiptFeeCell,
+            if let tableViewCell = cell as? ReceiptFeeTableViewCell,
                 let feeSection = section as? ReceiptDetailSectionFeeData {
                 let row = feeSection.rows[indexPath.row]
                 tableViewCell.configure(row)
            }
 
         case .notes:
-            if let tableViewCell = cell as? ReceiptNotesCell,
+            if let tableViewCell = cell as? ReceiptNotesTableViewCell,
                 let notesSection = section as? ReceiptDetailSectionNotesData {
                 tableViewCell.textLabel?.text = notesSection.notes
             }
@@ -95,7 +94,7 @@ public final class ReceiptDetailController: UITableViewController {
     }
 }
 
-extension ReceiptDetailController {
+extension ReceiptDetailTableViewController {
     override public func numberOfSections(in tableView: UITableView) -> Int {
         return presenter.sectionData.count
     }

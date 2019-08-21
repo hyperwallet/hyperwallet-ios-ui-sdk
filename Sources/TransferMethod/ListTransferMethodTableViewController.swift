@@ -15,20 +15,19 @@
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-#if !COCOAPODS
-import Common
-#endif
 import HyperwalletSDK
 import UIKit
 
 /// Lists the user's transfer methods (bank account, bank card, PayPal account, prepaid card, paper check).
 ///
 /// The user can deactivate and add a new transfer method.
-public final class ListTransferMethodController: UITableViewController {
+public final class ListTransferMethodTableViewController: UITableViewController {
     private var spinnerView: SpinnerView?
     private var processingView: ProcessingView?
     private var presenter: ListTransferMethodPresenter!
+
+    /// The completion handler will be performed after a new transfer method has been created.
+    public var createTransferMethodHandler: ((HyperwalletTransferMethod) -> Void)?
 
     private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "empty_list_transfer_method_message"
                                                                               .localized())
@@ -46,14 +45,10 @@ public final class ListTransferMethodController: UITableViewController {
                                                             target: self,
                                                             action: #selector(didTapAddButton))
 
-        initializePresenter()
-        presenter.listTransferMethods()
         // setup table view
-        setupTransferMethodTableView()
-    }
-
-    private func initializePresenter() {
         presenter = ListTransferMethodPresenter(view: self)
+        presenter.listTransferMethod()
+        setupTransferMethodTableView()
     }
 
     @objc
@@ -67,17 +62,17 @@ public final class ListTransferMethodController: UITableViewController {
     }
 
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ListTransferMethodCell.reuseIdentifier,
+        let cell = tableView.dequeueReusableCell(withIdentifier: ListTransferMethodTableViewCell.reuseIdentifier,
                                                  for: indexPath)
-        if let listTransferMethodCell = cell as? ListTransferMethodCell {
-            listTransferMethodCell.configure(transferMethod: presenter.sectionData[indexPath.row])
+        if let listTransferMethodCell = cell as? ListTransferMethodTableViewCell,
+            let cellConfiguration = presenter.getCellConfiguration(indexPath: indexPath) {
+            listTransferMethodCell.configure(configuration: cellConfiguration)
         }
         return cell
     }
 
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if presenter.transferMethodExists(at: indexPath.row) {
-            let cellRect = tableView.rectForRow(at: indexPath)
             let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
             let removeHandler = { (alertAction: UIAlertAction) -> Void in
@@ -92,9 +87,7 @@ public final class ListTransferMethodController: UITableViewController {
 
             optionMenu.addAction(removeAction)
             optionMenu.addAction(UIAlertAction.cancel())
-            optionMenu.popoverPresentationController?.sourceView = tableView
-            optionMenu.popoverPresentationController?.sourceRect = cellRect
-            optionMenu.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.up
+
             navigationController?.present(optionMenu, animated: true, completion: nil)
         }
         tableView.deselectRow(at: indexPath, animated: true)
@@ -113,14 +106,21 @@ public final class ListTransferMethodController: UITableViewController {
     }
 
     private func addTransferMethod() {
-        coordinator?.navigateToNextPage(initializationData: nil)
+        let controller = SelectTransferMethodTypeTableViewController()
+        controller.createTransferMethodHandler = {
+            [weak self] (transferMethod: HyperwalletTransferMethod) -> Void in
+            // refresh transfer method list
+            self?.presenter.listTransferMethod()
+            self?.createTransferMethodHandler?(transferMethod)
+        }
+        navigationController?.pushViewController(controller, animated: true)
     }
 
     private func setupTransferMethodTableView() {
         tableView = UITableView(frame: .zero, style: .grouped)
         tableView.tableFooterView = UIView()
-        tableView.register(ListTransferMethodCell.self,
-                           forCellReuseIdentifier: ListTransferMethodCell.reuseIdentifier)
+        tableView.register(ListTransferMethodTableViewCell.self,
+                           forCellReuseIdentifier: ListTransferMethodTableViewCell.reuseIdentifier)
     }
 
     private func showConfirmationAlert(title: String?, message: String, transferMethodIndex: Int) {
@@ -139,7 +139,7 @@ public final class ListTransferMethodController: UITableViewController {
     }
 }
 
-extension ListTransferMethodController: ListTransferMethodView {
+extension ListTransferMethodTableViewController: ListTransferMethodView {
     func showLoading() {
         if let view = self.navigationController?.view {
             spinnerView = HyperwalletUtilViews.showSpinner(view: view)
@@ -176,7 +176,7 @@ extension ListTransferMethodController: ListTransferMethodView {
     }
 
     func showTransferMethods() {
-        if presenter.sectionData.isNotEmpty {
+        if presenter.sectionData.isNotEmpty() {
             toggleEmptyListView()
         } else {
             addAccountButton.addTarget(self, action: #selector(didTapAddButton), for: .touchUpInside)
@@ -197,14 +197,5 @@ extension ListTransferMethodController: ListTransferMethodView {
     private func toggleEmptyListView(hideLabel: Bool = true, hideButton: Bool = true) {
         emptyListLabel.isHidden = hideLabel
         addAccountButton.isHidden = hideButton
-    }
-}
-
-extension ListTransferMethodController {
-    override public func didFlowComplete(with response: Any) {
-        if response as? HyperwalletTransferMethod != nil {
-            // refresh transfer method list
-            presenter.listTransferMethods()
-        }
     }
 }

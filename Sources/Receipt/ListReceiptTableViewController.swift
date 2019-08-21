@@ -15,40 +15,45 @@
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-#if !COCOAPODS
-import Common
-#endif
 import HyperwalletSDK
 import UIKit
 
 /// Lists the user's transaction history
 ///
 /// The user can click a receipt in the list for more information
-public final class ListReceiptController: UITableViewController {
+public final class ListReceiptTableViewController: UITableViewController {
     private var spinnerView: SpinnerView?
-    private var presenter: ListReceiptPresenter!
+    private var presenter: ListReceiptViewPresenter!
     private var defaultHeaderHeight = CGFloat(38.0)
     private let sectionTitleDateFormat = "MMMM yyyy"
     private var loadMoreReceipts = false
 
     private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "empty_list_receipt_message".localized())
 
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        presenter = ListReceiptViewPresenter(view: self)
+    }
+
+    init(prepaidCardToken: String) {
+        super.init(nibName: nil, bundle: nil)
+        presenter = ListReceiptViewPresenter(view: self, prepaidCardToken: prepaidCardToken)
+    }
+
+    // swiftlint:disable unavailable_function
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("NSCoding not supported")
+    }
+
     override public func viewDidLoad() {
         super.viewDidLoad()
         title = "title_receipts".localized()
         largeTitle()
         setViewBackgroundColor()
-        navigationItem.backBarButtonItem = UIBarButtonItem.back
-        initializePresenter()
-        presenter.listReceipts()
-        setupListReceiptTableView()
-    }
 
-    private func initializePresenter() {
-        presenter = ListReceiptPresenter(view: self,
-                                         prepaidCardToken: initializationData?[InitializationDataField.prepaidCardToken]
-                                            as? String)
+        navigationItem.backBarButtonItem = UIBarButtonItem.back
+        setupListReceiptTableView()
+        presenter.listReceipts()
     }
 
     // MARK: list receipt table view data source
@@ -57,10 +62,10 @@ public final class ListReceiptController: UITableViewController {
     }
 
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ReceiptTransactionCell.reuseIdentifier,
+        let cell = tableView.dequeueReusableCell(withIdentifier: ReceiptTransactionTableViewCell.reuseIdentifier,
                                                  for: indexPath)
-        if let listReceiptCell = cell as? ReceiptTransactionCell {
-            listReceiptCell.configure(presenter.sectionData[indexPath.section].value[indexPath.row])
+        if let listReceiptCell = cell as? ReceiptTransactionTableViewCell {
+            listReceiptCell.configure(presenter.getCellConfiguration(indexPath: indexPath))
         }
         return cell
     }
@@ -77,7 +82,8 @@ public final class ListReceiptController: UITableViewController {
     // MARK: list receipt table view delegate
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let hyperwalletReceipt = presenter.sectionData[indexPath.section].value[indexPath.row]
-        coordinator?.navigateToNextPage(initializationData: [InitializationDataField.receipt: hyperwalletReceipt])
+        let receiptDetailViewController = ReceiptDetailTableViewController(with: hyperwalletReceipt)
+        navigationController?.pushViewController(receiptDetailViewController, animated: true)
     }
 
     override public func tableView(_ tableView: UITableView,
@@ -111,16 +117,15 @@ public final class ListReceiptController: UITableViewController {
         tableView = UITableView(frame: .zero, style: .grouped)
         tableView.sectionFooterHeight = CGFloat.leastNormalMagnitude
         tableView.tableFooterView = UIView()
-        tableView.register(ReceiptTransactionCell.self,
-                           forCellReuseIdentifier: ReceiptTransactionCell.reuseIdentifier)
+        tableView.register(ReceiptTransactionTableViewCell.self,
+                           forCellReuseIdentifier: ReceiptTransactionTableViewCell.reuseIdentifier)
     }
 }
 
 // MARK: `ListReceiptView` delegate
-extension ListReceiptController: ListReceiptView {
-    /// Loads the receipts
+extension ListReceiptTableViewController: ListReceiptView {
     func loadReceipts() {
-        if presenter.sectionData.isNotEmpty {
+        if presenter.sectionData.isNotEmpty() {
             toggleEmptyListView(hideLabel: true)
         } else {
             toggleEmptyListView(hideLabel: false)

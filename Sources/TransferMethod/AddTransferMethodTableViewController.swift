@@ -15,9 +15,6 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#if !COCOAPODS
-import Common
-#endif
 import HyperwalletSDK
 import UIKit
 
@@ -25,7 +22,7 @@ import UIKit
 ///
 /// The form fields are based on the country, currency, user's profile type and transfer method type should be passed
 /// to this Controller to create new Transfer Method for those values.
-public final class AddTransferMethodController: UITableViewController {
+public final class AddTransferMethodTableViewController: UITableViewController {
     typealias ButtonHandler = () -> Void
     private var defaultHeaderHeight = CGFloat(38.0)
 
@@ -38,16 +35,16 @@ public final class AddTransferMethodController: UITableViewController {
     }()
 
     // MARK: - Properties -
-    private var country: String?
-    private var currency: String?
-    private var forceUpdate: Bool?
-    private var profileType: String?
-    private var transferMethodTypeCode: String?
+    /// The completion handler will be performed after a new transfer method has been created.
+    public var createTransferMethodHandler: ((HyperwalletTransferMethod) -> Void)?
+    private var country: String
+    private var currency: String
+    private var profileType: String
+    private var transferMethodTypeCode: String
     private var processingView: ProcessingView?
     private var spinnerView: SpinnerView?
     private var presenter: AddTransferMethodPresenter!
     private var widgets = [AbstractWidget]()
-    private var isCalledByScrollToRow = false
     // MARK: - Button -
     private lazy var createAccountButton: UIButton = {
         let button = UIButton()
@@ -83,31 +80,39 @@ public final class AddTransferMethodController: UITableViewController {
         )
         return stackView
     }()
-    private func initializeData() {
-        if let country = initializationData?[InitializationDataField.country] as? String,
-            let currency = initializationData?[InitializationDataField.currency] as? String,
-            let forceUpdate = initializationData?[InitializationDataField.forceUpdateData] as? Bool,
-            let profileType = initializationData?[InitializationDataField.profileType] as? String,
-            let transferMethodTypeCode = initializationData?[InitializationDataField.transferMethodTypeCode]
-                as? String {
-            self.country = country
-            self.currency = currency
-            self.forceUpdate = forceUpdate
-            self.profileType = profileType
-            self.transferMethodTypeCode = transferMethodTypeCode
-        }
+
+    // MARK: - View Lifecycle -
+    /// Creates a new instance of the `AddTransferMethodTableViewController`
+    ///
+    /// - Parameters:
+    ///   - country: The 2 letter ISO 3166-1 country code.
+    ///   - currency: The 3 letter ISO 4217-1 currency code.
+    ///   - profileType: The profile type. Possible values - INDIVIDUAL, BUSINESS.
+    ///   - transferMethodTypeCode: The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD.
+    init(_ country: String,
+         _ currency: String,
+         _ profileType: String,
+         _ transferMethodTypeCode: String) {
+        self.country = country
+        self.currency = currency
+        self.profileType = profileType
+        self.transferMethodTypeCode = transferMethodTypeCode
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    // swiftlint:disable unavailable_function
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("NSCoding not supported")
     }
 
     override public func viewDidLoad() {
         super.viewDidLoad()
+        title = transferMethodTypeCode.lowercased().localized()
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         view.addGestureRecognizer(tap)
-        initializeData()
         initializePresenter()
-        presenter.loadTransferMethodConfigurationFields(forceUpdate ?? false)
         setupLayout()
         hideKeyboardWhenTappedAround()
-        title = transferMethodTypeCode?.lowercased().localized()
         navigationItem.backBarButtonItem = UIBarButtonItem.back
     }
 
@@ -124,8 +129,8 @@ public final class AddTransferMethodController: UITableViewController {
         tableView.estimatedRowHeight = Theme.Cell.smallHeight
         tableView.accessibilityIdentifier = "addTransferMethodTable"
         tableView.register(
-            AddTransferMethodCell.self,
-            forCellReuseIdentifier: AddTransferMethodCell.reuseIdentifier
+            AddTransferMethodTableViewCell.self,
+            forCellReuseIdentifier: AddTransferMethodTableViewCell.reuseIdentifier
         )
     }
 
@@ -135,23 +140,17 @@ public final class AddTransferMethodController: UITableViewController {
     }
 
     private func initializePresenter() {
-        if let country = country,
-            let currency = currency,
-            let profileType = profileType,
-            let transferMethodTypeCode = transferMethodTypeCode {
-            presenter = AddTransferMethodPresenter(self,
-                                                   country,
-                                                   currency,
-                                                   profileType,
-                                                   transferMethodTypeCode)
-        } else {
-            fatalError("Required data not provided in initializePresenter")
-        }
+        presenter = AddTransferMethodPresenter(self,
+                                               country,
+                                               currency,
+                                               profileType,
+                                               transferMethodTypeCode)
+        presenter.loadTransferMethodConfigurationFields()
     }
 }
 
 // MARK: - TableViewController Data source and delegate
-extension AddTransferMethodController {
+extension AddTransferMethodTableViewController {
     override public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return presenter.sectionData[section].header
     }
@@ -196,7 +195,7 @@ extension AddTransferMethodController {
     }
 
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: AddTransferMethodCell.reuseIdentifier)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: AddTransferMethodTableViewCell.reuseIdentifier)
             else {
                 fatalError("Can't dequeue the cell")
         }
@@ -227,7 +226,7 @@ extension AddTransferMethodController {
 }
 
 // MARK: - Presenter - AddTransferMethodView -
-extension AddTransferMethodController: AddTransferMethodView {
+extension AddTransferMethodTableViewController: AddTransferMethodView {
     private func getSectionContainingFocusedField() -> AddTransferMethodSectionData? {
         return presenter.sectionData.first(where: { $0.containsFocusedField == true })
     }
@@ -258,7 +257,6 @@ extension AddTransferMethodController: AddTransferMethodView {
             if isCellVisibile(indexPath) {
                 focusField(in: section)
             } else {
-                isCalledByScrollToRow = true
                 tableView.scrollToRow(at: indexPath, at: .top, animated: true)
             }
         }
@@ -267,9 +265,8 @@ extension AddTransferMethodController: AddTransferMethodView {
     override public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         // update footer once scroll ends
         if let section = getSectionContainingFocusedField() {
-            if isCellVisibile(getIndexPath(for: section)) && isCalledByScrollToRow {
+            if isCellVisibile(getIndexPath(for: section)) {
                 focusField(in: section)
-                isCalledByScrollToRow = false
             }
         }
     }
@@ -350,7 +347,9 @@ extension AddTransferMethodController: AddTransferMethodView {
                                             object: self,
                                             userInfo: [UserInfo.transferMethod: transferMethod])
         }
-        coordinator?.navigateBackFromNextPage(with: transferMethod)
+        navigationController?
+            .skipPreviousViewControllerIfPresent(skip: SelectTransferMethodTypeTableViewController.self)
+        createTransferMethodHandler?(transferMethod)
     }
 
     private func focusOnInvalidField(_ widget: AbstractWidget) {
@@ -379,10 +378,10 @@ extension AddTransferMethodController: AddTransferMethodView {
 
     private func updateFooterView(_ footerView: UITableViewHeaderFooterView, for section: Int) {
         UIView.setAnimationsEnabled(false)
-        tableView.beginUpdates()
+        self.tableView.beginUpdates()
         footerView.textLabel?.text = presenter.sectionData[section].errorMessage
         footerView.sizeToFit()
-        tableView.endUpdates()
+        self.tableView.endUpdates()
         UIView.setAnimationsEnabled(true)
     }
 
@@ -413,7 +412,7 @@ extension AddTransferMethodController: AddTransferMethodView {
     }
 
     private func addInfoSection(_ transferMethodType: HyperwalletTransferMethodType) {
-        guard transferMethodType.fees != nil || transferMethodType.processingTimes?.nodes?.first != nil else {
+        guard transferMethodType.fees != nil || transferMethodType.processingTime != nil else {
             return
         }
 
@@ -421,6 +420,8 @@ extension AddTransferMethodController: AddTransferMethodView {
             infoLabel.attributedText = transferMethodType.formatFeesProcessingTime()
             let infoSection = AddTransferMethodSectionData(
                 fieldGroup: "INFORMATION",
+                country: country,
+                currency: currency,
                 cells: [infoView])
             presenter.sectionData.append(infoSection)
         }
@@ -429,6 +430,8 @@ extension AddTransferMethodController: AddTransferMethodView {
     private func addCreateButtonSection() {
         let buttonSection = AddTransferMethodSectionData(
             fieldGroup: "CREATE_BUTTON",
+            country: country,
+            currency: currency,
             cells: [createAccountButton])
         presenter.sectionData.append(buttonSection)
     }

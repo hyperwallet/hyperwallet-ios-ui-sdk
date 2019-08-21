@@ -16,16 +16,12 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#if !COCOAPODS
-import Common
-#endif
-
-final class ReceiptDetailCell: UITableViewCell {
-    static let reuseIdentifier = "receiptDetailTableViewCellReuseIdentifier"
+final class ReceiptFeeTableViewCell: UITableViewCell {
+    static let reuseIdentifier = "receiptFeeTableViewCellReuseIdentifier"
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
-        self.heightAnchor.constraint(equalToConstant: Theme.Cell.smallHeight).isActive = true
+        self.heightAnchor.constraint(equalToConstant: Theme.Cell.extraSmallHeight).isActive = true
     }
 
     required init?(coder aDecoder: NSCoder) {
