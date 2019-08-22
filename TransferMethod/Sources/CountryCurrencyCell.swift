@@ -52,12 +52,17 @@ final class CountryCurrencyCell: GenericCell<GenericCellConfiguration> {
             accessibilityIdentifier = configuration.identifier
 
             titleLabel.text = configuration.title
+            titleLabel.lineBreakMode = .byWordWrapping
+            titleLabel.numberOfLines = 0
+            titleLabel.adjustsFontForContentSizeCategory = true
             titleLabel.accessibilityLabel = configuration.title
             titleLabel.accessibilityIdentifier = configuration.title
+            titleLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
 
             valueLabel.text = accessoryType == .checkmark ? "" : configuration.value
             valueLabel.accessibilityLabel = configuration.value
             valueLabel.accessibilityIdentifier = configuration.value
+            valueLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
 
             contentView.constraints.first(where: { $0.identifier == trailingConstraintIdentifier })?
                 .constant = accessoryType == .none

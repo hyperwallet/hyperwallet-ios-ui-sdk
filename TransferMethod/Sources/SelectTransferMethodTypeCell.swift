@@ -80,6 +80,8 @@ extension SelectTransferMethodTypeCell {
             accessibilityIdentifier = configuration.transferMethodTypeName
 
             textLabel?.text = configuration.transferMethodTypeName
+            textLabel?.adjustsFontForContentSizeCategory = true
+            detailTextLabel?.adjustsFontForContentSizeCategory = true
             detailTextLabel?.numberOfLines = 0
             detailTextLabel?.lineBreakMode = .byWordWrapping
             detailTextLabel?.attributedText = configuration.feesProcessingTime

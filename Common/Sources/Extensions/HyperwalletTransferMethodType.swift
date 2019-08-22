@@ -31,9 +31,9 @@ public extension HyperwalletTransferMethodType {
         if let fees = self.fees?.nodes {
             let feeLabel = "add_transfer_method_fee_label".localized()
 
-            attributedText.append(value: feeLabel, font: Theme.Label.captionOne, color: color)
+            attributedText.append(value: feeLabel, font: UIFont.preferredFont(forTextStyle: .caption1), color: color)
             attributedText.append(value: HyperwalletFee.format(fees: fees),
-                                  font: Theme.Label.captionOneMedium,
+                                  font: UIFont.preferredFont(forTextStyle: .caption1),
                                   color: Theme.Label.subTitleColor)
         }
 
@@ -48,8 +48,8 @@ public extension HyperwalletTransferMethodType {
                                          processingTimeLabel,
                                          "add_transfer_method_processing_time_label".localized())
 
-            attributedText.append(value: processingTimeLabel, font: Theme.Label.captionOne, color: color)
-            attributedText.append(value: processingTimeValue, font: Theme.Label.captionOneMedium, color: color)
+            attributedText.append(value: processingTimeLabel, font: UIFont.preferredFont(forTextStyle: .caption1), color: color)
+            attributedText.append(value: processingTimeValue, font: UIFont.preferredFont(forTextStyle: .caption1), color: color)
         }
 
         return attributedText
