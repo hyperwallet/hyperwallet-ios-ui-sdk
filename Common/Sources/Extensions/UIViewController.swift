@@ -24,6 +24,7 @@ public extension UIViewController {
     func largeTitle() {
         if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.prefersLargeTitles = true
+            self.navigationItem.largeTitleDisplayMode = .always
         }
     }
 

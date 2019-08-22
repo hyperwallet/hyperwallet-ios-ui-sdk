@@ -32,6 +32,7 @@ public final class CreateTransferController: UITableViewController {
     }
 
     private var spinnerView: SpinnerView?
+    private lazy var selectTransferMethodCoordinator = getSelectTransferMethodCoordinator()
     private var presenter: CreateTransferPresenter!
     private let registeredCells: [(type: AnyClass, id: String)] = [
         (TransferDestinationCell.self, TransferDestinationCell.reuseIdentifier),
@@ -168,6 +169,9 @@ extension CreateTransferController {
         if let transferMethod = presenter.selectedTransferMethod {
             tableViewCell.configure(transferMethod: transferMethod)
         } else {
+            if selectTransferMethodCoordinator == nil {
+                tableViewCell.accessoryType = .none
+            }
             let title = "transfer_add_account_title".localized()
             let subtitle = "transfer_add_account_subtitle".localized()
             tableViewCell.configure(title, subtitle, HyperwalletIconContent.circle)
@@ -217,7 +221,11 @@ extension CreateTransferController {
         let sectionData = presenter.sectionData[indexPath.section]
         if sectionData.createTransferSectionHeader == .destination,
             presenter.sectionData[indexPath.section] is CreateTransferSectionDestinationData {
-            presenter.showSelectDestinationAccountView()
+            if presenter.selectedTransferMethod != nil {
+                presenter.showSelectDestinationAccountView()
+            } else {
+                navigateToTransferMethodIfInitialized()
+            }
         }
         if sectionData.createTransferSectionHeader == .button {
             presenter.createTransfer()
@@ -302,10 +310,11 @@ extension CreateTransferController: CreateTransferView {
                               markCellHandler: @escaping MarkCellHandler) {
         let genericTableView = GenericController<TransferDestinationCell, HyperwalletTransferMethod>()
 
-        genericTableView.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
-                                                                             target: self,
-                                                                             action: #selector(didTapAddButton))
-
+        if selectTransferMethodCoordinator != nil {
+            genericTableView.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
+                                                                                 target: self,
+                                                                                 action: #selector(didTapAddButton))
+        }
         genericTableView.title = title
         genericTableView.items = items
         genericTableView.selectedHandler = selectItemHandler
@@ -315,22 +324,38 @@ extension CreateTransferController: CreateTransferView {
 
     @objc
     private func didTapAddButton(sender: AnyObject) {
-        //        let controller = SelectTransferMethodTypeController(forceUpdate: false) ///TO DO true or false
-        //        controller.largeTitle()
-        //        controller.createTransferMethodHandler = {
-        //            [weak self] (transferMethod: HyperwalletTransferMethod) -> Void in
-        //            // refresh transfer method list
-        //            self?.navigationController?.popViewController(animated: true)
-        //            self?.presenter.selectedTransferMethod = transferMethod
-        //            self?.presenter.loadCreateTransfer()
-        //        }
-        //        navigationController?.pushViewController(controller, animated: true)
+        navigateToTransferMethodIfInitialized()
+    }
+
+    private func navigateToTransferMethodIfInitialized() {
+        if let transferMethodCoordinator = selectTransferMethodCoordinator {
+            transferMethodCoordinator.start(initializationData: nil, parentController: self)
+            transferMethodCoordinator.navigate()
+        } else {
+            HyperwalletUtilViews.showAlert(self,
+                                           title: "error".localized(),
+                                           message: "transfer_error_no_transfer_method_module_initialized".localized())
+        }
+    }
+
+    private func getSelectTransferMethodCoordinator() -> HyperwalletCoordinator? {
+        return HyperwalletCoordinatorFactory.shared.getHyperwalletCoordinator(hyperwalletCoordinatorType:
+            .selectTransferMethodType)
     }
 
     func showScheduleTransfer(_ transfer: HyperwalletTransfer) {
         if let transferMethod = presenter.selectedTransferMethod {
             coordinator?.navigateToNextPage(initializationData:
                 [InitializationDataField.transfer: transfer, InitializationDataField.transferMethod: transferMethod])
+        }
+    }
+}
+
+extension CreateTransferController {
+    override public func didFlowComplete(with response: Any) {
+        if let transferMethod = response as? HyperwalletTransferMethod {
+            presenter.selectedTransferMethod = transferMethod
+            presenter.loadCreateTransfer()
         }
     }
 }
