@@ -100,8 +100,7 @@ public final class AddTransferMethodController: UITableViewController {
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
-        view.addGestureRecognizer(tap)
+        largeTitle()
         initializeData()
         initializePresenter()
         presenter.loadTransferMethodConfigurationFields(forceUpdate ?? false)
@@ -127,11 +126,6 @@ public final class AddTransferMethodController: UITableViewController {
             AddTransferMethodCell.self,
             forCellReuseIdentifier: AddTransferMethodCell.reuseIdentifier
         )
-    }
-
-    @objc
-    func handleTap(sender: UITapGestureRecognizer) {
-        view.endEditing(true)
     }
 
     private func initializePresenter() {
