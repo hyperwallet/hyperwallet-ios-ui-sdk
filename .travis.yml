@@ -34,7 +34,7 @@ before_install:
   # Install build output formatting tool
   - gem install xcpretty
   # Force to update the Swiftlint to the last stable version
-  - brew upgrade swiftlint
+  - brew reinstall swiftlint
   # Print the booted emulator
   - xcrun simctl list | grep "(Booted)"
   # Print the swiftlint version
