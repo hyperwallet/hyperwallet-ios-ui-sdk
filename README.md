@@ -161,12 +161,12 @@ coordinator.navigate()
 ### Create a transfer method
 The form fields are based on the country, currency, user's profile type, and transfer method type should be passed to this Controller to create a new Transfer Method for those values.
 ```swift
-let country = ProcessInfo.processInfo.environment["COUNTRY"] // The 2 letter ISO 3166-1 country code.
-let currency = ProcessInfo.processInfo.environment["CURRENCY"] // The 3 letter ISO 4217-1 currency code.
-let accountType = ProcessInfo.processInfo.environment["ACCOUNT_TYPE"] // The profile type. Possible values - INDIVIDUAL, BUSINESS.
-let profileType = ProcessInfo.processInfo.environment["PROFILE_TYPE"] // The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD, PAYPAL_ACCOUNT
-
-let coordinator = HyperwalletUI.shared.addTransferMethodCoordinator(country, currency, profileType, accountType, parentController: self)
+let coordinator = HyperwalletUI.shared.addTransferMethodCoordinator(
+    "US", // The 2 letter ISO 3166-1 country code.
+    "USD", // The 3 letter ISO 4217-1 currency code.
+    "INDIVIDUAL", // The profile type. Possible values - INDIVIDUAL, BUSINESS.
+    "BANK_ACCOUNT", // The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD, PAYPAL_ACCOUNT
+    parentController: self)
 coordinator.navigate()
 ```
 
@@ -178,8 +178,25 @@ coordinator.navigate()
 
 ### Lists the prepaid card's receipts
 ```swift
-let prepaidCardToken = Bundle.main.infoDictionary!["PREPAID_CARD_TOKEN"] as! String
-let coordinator = HyperwalletUI.shared.listPrepaidCardReceiptCoordinator(parentController: self, prepaidCardToken: prepaidCardToken)
+let coordinator = HyperwalletUI.shared.listPrepaidCardReceiptCoordinator(parentController: self, prepaidCardToken: "your-prepaid-card-token")
+coordinator.navigate()
+```
+
+### Make a new transfer from user's account 
+```swift
+let clientTransferId = UUID().uuidString.lowercased()
+let coordinator = HyperwalletUI.shared
+            .createTransferFromUserCoordinator(clientTransferId: clientTransferId, parentController: self)
+coordinator.navigate()
+```
+
+### Make a new transfer from prepaid card 
+```swift
+let clientTransferId = UUID().uuidString.lowercased()
+let coordinator = HyperwalletUI.shared
+            .createTransferFromPrepaidCardCoordinator(clientTransferId: clientTransferId,
+                                                      sourceToken: "your-prepaid-card-token",
+                                                      parentController: self)
 coordinator.navigate()
 ```
 
