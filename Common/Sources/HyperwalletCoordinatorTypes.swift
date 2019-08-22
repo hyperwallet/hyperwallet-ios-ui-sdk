@@ -38,11 +38,7 @@ public class HyperwalletCoordinatorFactory {
     }
 
     /// Based on the HyperwalletCoordinatorTypes, determines the coordinator to be returned,
-<<<<<<< HEAD
     /// returns nil if the module has not been imported in the project
-=======
-    /// returns nil if teh module has not been imported in the project
->>>>>>> development
     ///
     /// - Parameter hyperwalletCoordinatorType:HyperwalletCoordinatorTypes
     /// - Returns: The initialized coordinator class
