@@ -7,7 +7,7 @@ Pod::Spec.new do |spec|
     spec.author                = { 'Hyperwallet Systems Inc' => 'devsupport@hyperwallet.com' }
     spec.platform              = :ios
     spec.ios.deployment_target = '10.0'
-    spec.source                = { :git => 'https://github.com/hyperwallet/hyperwallet-ios-ui-sdk.git', :branch => "task/HW-53624-create-new-destination-account"}
+    spec.source                = { :git => 'https://github.com/hyperwallet/hyperwallet-ios-ui-sdk.git', :branch => "development"}
     spec.requires_arc          = true
     spec.swift_version         = '5.0'
     spec.dependency 'HyperwalletSDK', '1.0.0-beta04'
