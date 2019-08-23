@@ -333,7 +333,7 @@ extension CreateTransferController: CreateTransferView {
             transferMethodCoordinator.navigate()
         } else {
             HyperwalletUtilViews.showAlert(self,
-                                           title: "Error",
+                                           title: "error".localized(),
                                            message: "transfer_error_no_transfer_method_module_initialized".localized())
         }
     }
