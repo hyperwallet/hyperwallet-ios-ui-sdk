@@ -12,7 +12,7 @@ Pod::Spec.new do |spec|
     spec.swift_version         = '5.0'
     spec.dependency 'HyperwalletSDK', '1.0.0-beta04'
 
-    spec.default_subspec = 'TransferMethod', 'Receipt'
+    spec.default_subspec = 'TransferMethod', 'Receipt', 'Transfer'
 
     spec.subspec "Common" do |common|
         common.resources = ['Common/**/*.xcassets', 'Common/**/*.ttf', 'Common/**/*.xib', 'Common/**/*.strings']
