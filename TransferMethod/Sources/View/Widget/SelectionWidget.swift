@@ -47,6 +47,8 @@ final class SelectionWidget: AbstractWidget {
         }
 
         addArrangedSubview(labelField)
+        labelField.font = Theme.Label.bodyFont
+        labelField.adjustsFontForContentSizeCategory = true
         spacing = 16
         if field.isEditable ?? true {
             labelField.textColor = Theme.Text.color

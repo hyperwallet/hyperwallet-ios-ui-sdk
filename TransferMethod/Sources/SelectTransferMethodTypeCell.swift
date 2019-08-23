@@ -80,11 +80,15 @@ extension SelectTransferMethodTypeCell {
             accessibilityIdentifier = configuration.transferMethodTypeName
 
             textLabel?.text = configuration.transferMethodTypeName
+            textLabel?.numberOfLines = 0
+            textLabel?.lineBreakMode = .byWordWrapping
             textLabel?.adjustsFontForContentSizeCategory = true
-            detailTextLabel?.adjustsFontForContentSizeCategory = true
+
+            detailTextLabel?.attributedText = configuration.feesProcessingTime
             detailTextLabel?.numberOfLines = 0
             detailTextLabel?.lineBreakMode = .byWordWrapping
-            detailTextLabel?.attributedText = configuration.feesProcessingTime
+            detailTextLabel?.adjustsFontForContentSizeCategory = true
+
             let image = UIImage.fontIcon(configuration.transferMethodIconFont,
                                          Theme.Icon.frame,
                                          CGFloat(Theme.Icon.size),

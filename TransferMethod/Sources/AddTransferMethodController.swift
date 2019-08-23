@@ -54,7 +54,6 @@ public final class AddTransferMethodController: UITableViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(
             greaterThanOrEqualToConstant: Theme.Cell.smallHeight).isActive = true
-
         button.accessibilityLabel = "create_account_label".localized()
         button.accessibilityIdentifier = "createAccountButton"
         button.setTitle("create_account_label".localized(), for: .normal)
@@ -71,7 +70,7 @@ public final class AddTransferMethodController: UITableViewController {
     private lazy var infoView: UIStackView = {
         let label = UILabel()
         label.numberOfLines = 0
-
+        label.adjustsFontForContentSizeCategory = true
         let stackView = UIStackView(arrangedSubviews: [label])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.isLayoutMarginsRelativeArrangement = true
@@ -419,6 +418,7 @@ extension AddTransferMethodController: AddTransferMethodView {
 
         if let infoLabel = infoView.arrangedSubviews[0] as? UILabel {
             infoLabel.attributedText = transferMethodType.formatFeesProcessingTime()
+            infoLabel.font = Theme.Label.captionOne
             let infoSection = AddTransferMethodSectionData(
                 fieldGroup: "INFORMATION",
                 cells: [infoView])
