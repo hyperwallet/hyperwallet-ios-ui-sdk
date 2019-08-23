@@ -16,3 +16,4 @@ ignore:
   - "*/Tests/*"
   - "*/Sources/Helper/*"
   - "*/Sources/Coordinators/*"
+  - Common/Sources/HyperwalletCoordinatorTypes.swift
