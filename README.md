@@ -26,24 +26,30 @@ Note that this SDK is geared towards those who need both backend data and UI fea
 ## Installation
 Use [Carthage](https://github.com/Carthage/Carthage) or [CocoaPods](https://cocoapods.org/) to integrate to HyperwalletSDK.
 Currently, the following modules are available: 
-* TransferMethod allows addition of transfer methods
-* Transfer adds functionality to make a transfer
-* Receipt lets user to view receipts
+* TransferMethod - List, add or remove Transfer Methods
+* Transfer - Create a transfer from user account or prepaid card to available accounts for the user
+* Receipt - List user/prepaid card receipts
 Adding one or more of these frameworks allows users to explore the particular function. If every feature is required, all the frameworks should be added
 ### Carthage
 Specify it in your Cartfile:
 ```ogdl
 github "hyperwallet/hyperwallet-ios-ui-sdk" "1.0.0-beta03"
 ```
-You can select one or more modules using the "Linked Frameworks and Libraries" option to make them available in the app
+Add desired modules using the `Linked Frameworks and Libraries` option to make them available in the app.
+Use `import <module-name>` to add the dependency within a file
 
 ### CocoaPods
-- Install a specific framework (install one or frameworks based on your requirement)
+- Install a specific framework (install one or more frameworks based on your requirement)
 ```ruby
 pod "HyperwalletUISDK/TransferMethod", "1.0.0-beta03"
 pod "HyperwalletUISDK/Transfer", "1.0.0-beta03"
 pod "HyperwalletUISDK/Receipt", "1.0.0-beta03"
 ```
+- To install all available modules (TransferMethod, Transfer, Receipt)
+```ruby
+pod 'HyperwalletUISDK', '~> 1.0.0-beta03'
+```
+Use `import HyperwalletUISDK` to add the dependency within a file.
 
 ## Initialization
 After you're done installing the SDK, you need to initialize an instance in order to utilize core SDK functions. Also, you need to provide a HyperwalletAuthenticationTokenProvider object to retrieve an authentication token.
