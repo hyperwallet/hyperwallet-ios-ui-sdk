@@ -52,11 +52,11 @@ public final class AddTransferMethodController: UITableViewController {
     private lazy var createAccountButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.heightAnchor.constraint(
-            greaterThanOrEqualToConstant: Theme.Cell.smallHeight).isActive = true
         button.accessibilityLabel = "create_account_label".localized()
         button.accessibilityIdentifier = "createAccountButton"
         button.setTitle("create_account_label".localized(), for: .normal)
+        button.titleLabel?.adjustsFontForContentSizeCategory = true
+        button.titleLabel?.font = Theme.Label.captionOne
         button.setTitleColor(Theme.Button.color, for: UIControl.State.normal)
         button.addTarget(self, action: #selector(onTapped), for: .touchUpInside)
         return button
@@ -411,7 +411,7 @@ extension AddTransferMethodController: AddTransferMethodView {
         }
 
         if let infoLabel = infoView.arrangedSubviews[0] as? UILabel {
-            infoLabel.attributedText = transferMethodType.formatFeesProcessingTime()
+            infoLabel.attributedText = transferMethodType.formatFeesProcessingTime(font: Theme.Label.captionOne, color: Theme.Label.subTitleColor)
             infoLabel.font = Theme.Label.captionOne
             let infoSection = AddTransferMethodSectionData(
                 fieldGroup: "INFORMATION",

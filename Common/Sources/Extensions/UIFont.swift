@@ -20,10 +20,6 @@ import UIKit
 
 /// The UIFont extension
 public extension UIFont {
-    var bold: UIFont { return withWeight(.bold) }
-    var semibold: UIFont { return withWeight(.semibold) }
-    var medium: UIFont { return withWeight(.medium) }
-
     /// To register UIFont
     ///
     /// - Parameters:
@@ -48,20 +44,5 @@ public extension UIFont {
             print("Register failed")
             return
         }
-    }
-
-    /// To add weight to preferredFont
-    ///
-    /// - Parameters:
-    /// - weight : UIFont.Weight
-    private func withWeight(_ weight: UIFont.Weight) -> UIFont {
-        var attributes = fontDescriptor.fontAttributes
-        var traits = (attributes[.traits] as? [UIFontDescriptor.TraitKey: Any]) ?? [:]
-        traits[.weight] = weight
-        attributes[.name] = fontName
-        attributes[.traits] = traits
-        attributes[.family] = familyName
-        let descriptor = UIFontDescriptor(fontAttributes: attributes)
-        return UIFont(descriptor: descriptor, size: pointSize)
     }
 }

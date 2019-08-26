@@ -118,6 +118,7 @@ public final class ListTransferMethodController: UITableViewController {
         tableView.register(ListTransferMethodCell.self,
                            forCellReuseIdentifier: ListTransferMethodCell.reuseIdentifier)
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = Theme.Cell.smallHeight
     }
 
     private func showConfirmationAlert(title: String?, message: String, transferMethodIndex: Int) {

@@ -73,7 +73,7 @@ final class SelectTransferMethodTypePresenter {
     /// Return the `SelectTransferMethodTypeConfiguration` based on the index
     func getCellConfiguration(indexPath: IndexPath) -> SelectTransferMethodTypeConfiguration {
         let transferMethodType = sectionData[indexPath.row]
-        let feesProcessingTime = transferMethodType.formatFeesProcessingTime()
+        let feesProcessingTime = transferMethodType.formatFeesProcessingTime(font: Theme.Label.captionOne, color: Theme.Label.subTitleColor)
         let transferMethodIcon = HyperwalletIcon.of(transferMethodType.code!).rawValue
 
         return SelectTransferMethodTypeConfiguration(

@@ -93,6 +93,11 @@ extension SelectTransferMethodTypeCell {
                                          Theme.Icon.frame,
                                          CGFloat(Theme.Icon.size),
                                          Theme.Icon.primaryColor)
+            if #available(iOS 11.0, *) {
+                imageView?.adjustsImageSizeForAccessibilityContentSizeCategory = true
+            } else {
+                // Fallback on earlier versions
+            }
             imageView?.image = image
             imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
         }
