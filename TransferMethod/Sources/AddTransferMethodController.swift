@@ -411,7 +411,8 @@ extension AddTransferMethodController: AddTransferMethodView {
         }
 
         if let infoLabel = infoView.arrangedSubviews[0] as? UILabel {
-            infoLabel.attributedText = transferMethodType.formatFeesProcessingTime(font: Theme.Label.captionOne, color: Theme.Label.subTitleColor)
+            infoLabel.attributedText = transferMethodType
+                .formatFeesProcessingTime(font: Theme.Label.captionOne, color: Theme.Label.subTitleColor)
             infoLabel.font = Theme.Label.captionOne
             let infoSection = AddTransferMethodSectionData(
                 fieldGroup: "INFORMATION",
