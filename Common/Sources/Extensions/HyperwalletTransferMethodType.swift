@@ -23,6 +23,9 @@ import HyperwalletSDK
 public extension HyperwalletTransferMethodType {
     /// Formats the fee processing time
     ///
+    /// - Parameters:
+    /// - font: The font type applied to attributed text
+    /// - color: The color applied to attributed text
     /// - Returns: an NSAttributedString
     func formatFeesProcessingTime(font: UIFont, color: UIColor) -> NSAttributedString {
         let attributedText = NSMutableAttributedString()

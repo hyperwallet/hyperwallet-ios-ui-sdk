@@ -22,14 +22,6 @@ import Common
 import HyperwalletSDK
 import UIKit
 
-/// Represents the country and currency data to be displayed on the CountryCurrencyCell
-struct SelectTransferMethodTypeConfiguration {
-    let transferMethodTypeCode: String!
-    let transferMethodTypeName: String!
-    let feesProcessingTime: NSAttributedString
-    let transferMethodIconFont: String
-}
-
 final class SelectTransferMethodTypeCell: UITableViewCell {
     static let reuseIdentifier = "selectTransferMethodTypeCellIdentifier"
 
@@ -75,28 +67,28 @@ final class SelectTransferMethodTypeCell: UITableViewCell {
 }
 
 extension SelectTransferMethodTypeCell {
-    func configure(configuration: SelectTransferMethodTypeConfiguration?) {
+    func configure(configuration: HyperwalletTransferMethodType?) {
         if let configuration = configuration {
-            accessibilityIdentifier = configuration.transferMethodTypeName
+            accessibilityIdentifier = configuration.name
 
-            textLabel?.text = configuration.transferMethodTypeName
+            textLabel?.font = Theme.Label.captionOne
+            textLabel?.text = configuration.name
             textLabel?.numberOfLines = 0
             textLabel?.lineBreakMode = .byWordWrapping
             textLabel?.adjustsFontForContentSizeCategory = true
 
-            detailTextLabel?.attributedText = configuration.feesProcessingTime
+            detailTextLabel?.font = Theme.Label.captionOne
+            detailTextLabel?.attributedText = configuration
+                .formatFeesProcessingTime(font: Theme.Label.captionOne, color: Theme.Label.subTitleColor)
             detailTextLabel?.numberOfLines = 0
             detailTextLabel?.lineBreakMode = .byWordWrapping
             detailTextLabel?.adjustsFontForContentSizeCategory = true
-
-            let image = UIImage.fontIcon(configuration.transferMethodIconFont,
+            let image = UIImage.fontIcon(HyperwalletIcon.of(configuration.code!).rawValue,
                                          Theme.Icon.frame,
                                          CGFloat(Theme.Icon.size),
                                          Theme.Icon.primaryColor)
             if #available(iOS 11.0, *) {
                 imageView?.adjustsImageSizeForAccessibilityContentSizeCategory = true
-            } else {
-                // Fallback on earlier versions
             }
             imageView?.image = image
             imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)

@@ -56,7 +56,7 @@ public final class AddTransferMethodController: UITableViewController {
         button.accessibilityIdentifier = "createAccountButton"
         button.setTitle("create_account_label".localized(), for: .normal)
         button.titleLabel?.adjustsFontForContentSizeCategory = true
-        button.titleLabel?.font = Theme.Label.captionOne
+        button.titleLabel?.font = Theme.Label.bodyFont
         button.setTitleColor(Theme.Button.color, for: UIControl.State.normal)
         button.addTarget(self, action: #selector(onTapped), for: .touchUpInside)
         return button

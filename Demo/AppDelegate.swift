@@ -30,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
 
         //ThemeManager.applyWhiteTheme()
+        ThemeManager.applyTransferMethodTheme()
         ThemeManager.applyTheme()
         ThemeManager.applyTransferTheme()
 

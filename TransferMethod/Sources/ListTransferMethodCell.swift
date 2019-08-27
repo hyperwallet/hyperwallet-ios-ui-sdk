@@ -73,7 +73,6 @@ extension ListTransferMethodCell {
     /// - Parameter transferMethod: a transfer method which contains the info needs to be filled to the cell.
     public func configure(transferMethod: HyperwalletTransferMethod) {
         textLabel?.text = transferMethod.type?.lowercased().localized()
-        textLabel?.font = Theme.Label.captionOne
         textLabel?.adjustsFontForContentSizeCategory = true
         textLabel?.numberOfLines = 0
         textLabel?.lineBreakMode = .byWordWrapping
@@ -81,7 +80,6 @@ extension ListTransferMethodCell {
         detailTextLabel?.attributedText = formatDetails(
             transferMethodCountry: transferMethod.transferMethodCountry?.localized() ?? "",
             additionalInfo: transferMethod.value)
-        detailTextLabel?.font = Theme.Label.captionOne
         detailTextLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellDetailTextLabel"
         detailTextLabel?.adjustsFontForContentSizeCategory = true
         detailTextLabel?.numberOfLines = 0
@@ -92,8 +90,6 @@ extension ListTransferMethodCell {
                                     Theme.Icon.primaryColor)
         if #available(iOS 11.0, *) {
             imageView?.adjustsImageSizeForAccessibilityContentSizeCategory = true
-        } else {
-            // Fallback on earlier versions
         }
         imageView?.image = icon
         imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)

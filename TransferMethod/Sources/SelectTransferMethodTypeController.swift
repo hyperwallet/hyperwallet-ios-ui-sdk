@@ -96,7 +96,7 @@ extension SelectTransferMethodTypeController {
         let cell = tableView.dequeueReusableCell(withIdentifier: SelectTransferMethodTypeCell.reuseIdentifier,
                                                  for: indexPath)
         if let transferMethodCell = cell as? SelectTransferMethodTypeCell {
-            transferMethodCell.configure(configuration: presenter.getCellConfiguration(indexPath: indexPath))
+            transferMethodCell.configure(configuration: presenter.sectionData[indexPath.row])
         }
 
         return cell
