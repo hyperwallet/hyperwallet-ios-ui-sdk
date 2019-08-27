@@ -2933,7 +2933,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\nset -x\n\nif ! which swiftlint > /dev/null; then\necho \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\nelse\nswiftlint autocorrect\nswiftlint\nfi\n";
+			shellScript = "set -e\nset -x\nif [ -z \"$CI\" ]; then\n  if ! which swiftlint > /dev/null; then\n    echo \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\n  else\n    swiftlint autocorrect\n    swiftlint\n  fi\nfi\n";
 		};
 		4A012F5022D62EAA008C1D35 /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2951,7 +2951,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\nset -x\n\nif ! which swiftlint > /dev/null; then\necho \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\nelse\nswiftlint autocorrect\nswiftlint\nfi\n";
+			shellScript = "set -e\nset -x\nif [ -z \"$CI\" ]; then\n  if ! which swiftlint > /dev/null; then\n    echo \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\n  else\n    swiftlint autocorrect\n    swiftlint\n  fi\nfi\n";
 		};
 		4A9A7BF922E85B390022E573 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2969,7 +2969,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\nset -x\n\nif ! which swiftlint > /dev/null; then\necho \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\nelse\nswiftlint autocorrect\nswiftlint\nfi\n";
+			shellScript = "set -e\nset -x\nif [ -z \"$CI\" ]; then\n  if ! which swiftlint > /dev/null; then\n    echo \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\n  else\n    swiftlint autocorrect\n    swiftlint\n  fi\nfi\n";
 		};
 		98175448228E0BE50019159A /* Carthage Copy frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3008,7 +3008,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\nset -x\n\nif ! which swiftlint > /dev/null; then\necho \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\nelse\nswiftlint autocorrect\nswiftlint\nfi\n";
+			shellScript = "set -e\nset -x\nif [ -z \"$CI\" ]; then\n  if ! which swiftlint > /dev/null; then\n  echo \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\n  else\n    swiftlint autocorrect\n    swiftlint\n  fi\nfi\n";
 		};
 		DB551F6322E132C000DD65C2 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3026,7 +3026,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\nset -x\n\nif ! which swiftlint > /dev/null; then\necho \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\nelse\nswiftlint autocorrect\nswiftlint\nfi\n";
+			shellScript = "set -e\nset -x\nif [ -z \"$CI\" ]; then\n  if ! which swiftlint > /dev/null; then\n    echo \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\n  else\n    swiftlint autocorrect\n    swiftlint\n  fi\nfi\n";
 		};
 		DB551F6422E132D900DD65C2 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3044,7 +3044,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\nset -x\n\nif ! which swiftlint > /dev/null; then\necho \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\nelse\nswiftlint autocorrect\nswiftlint\nfi\n";
+			shellScript = "set -e\nset -x\nif [ -z \"$CI\" ]; then\n  if ! which swiftlint > /dev/null; then\n    echo \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\n  else\n    swiftlint autocorrect\n    swiftlint\n  fi\nfi\n";
 		};
 		DBAF92B922CFCEF2004F197A /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3062,7 +3062,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\nset -x\n\nif ! which swiftlint > /dev/null; then\necho \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\nelse\nswiftlint autocorrect\nswiftlint\nfi\n";
+			shellScript = "set -e\nset -x\nif [ -z \"$CI\" ]; then\n  if ! which swiftlint > /dev/null; then\n    echo \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\n  else\n    swiftlint autocorrect\n    swiftlint\n  fi\nfi\n";
 		};
 		DBC199FC22E29D3E004447DD /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3080,7 +3080,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\nset -x\n\nif ! which swiftlint > /dev/null; then\necho \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\nelse\nswiftlint autocorrect\nswiftlint\nfi\n";
+			shellScript = "set -e\nset -x\nif [ -z \"$CI\" ]; then\n  if ! which swiftlint > /dev/null; then\n    echo \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\n  else\n    swiftlint autocorrect\n    swiftlint\n  fi\nfi\n";
 		};
 		DBC199FD22E29D4E004447DD /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3098,7 +3098,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\nset -x\n\nif ! which swiftlint > /dev/null; then\necho \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\nelse\nswiftlint autocorrect\nswiftlint\nfi\n";
+			shellScript = "set -e\nset -x\nif [ -z \"$CI\" ]; then\n  if ! which swiftlint > /dev/null; then\n    echo \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\n  else\n    swiftlint autocorrect\n    swiftlint\n  fi\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
