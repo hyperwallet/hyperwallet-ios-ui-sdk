@@ -290,17 +290,21 @@ class TransferUserFundsTest: BaseTests {
 
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
-
         XCTAssertTrue(transferFunds.transferAmount.exists)
+
         transferFunds.transferAmount.tap()
-        transferFunds.transferAmount.typeText("9")
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.09")
-        transferFunds.transferAmount.typeText("4")
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.94")
-        transferFunds.transferAmount.typeText("2")
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "9.42")
-        transferFunds.transferAmount.typeText("3")
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "94.23")
+        transferFunds.transferAmount.typeText(".12345")
+
+        transferFunds.transferSectionLabel.tap()
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.12")
+
+        transferFunds.transferAmount.clearAndEnterText(text: "12345678901234567890")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "123456789012")
+        transferFunds.transferAmount.typeText(".123456")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "123456789012.12")
+
+        transferFunds.transferSectionLabel.tap()
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "123456789012.12")
     }
 
     // MARK: Select Destination Page
@@ -471,7 +475,6 @@ class TransferUserFundsTest: BaseTests {
 
         let pastAmountWithNumberNoDigit = "10000"
         transferFunds.pasteAmountToTransferAmount(amount: pastAmountWithNumberNoDigit)
-        transferFunds.transferAmount.tap()
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "10,000.00")
     }
 
