@@ -685,7 +685,7 @@ class TransferUserFundsTest: BaseTests {
                              filename: "BankAccountIndividualResponse",
                              method: HTTPMethod.post)
 
-        // Tab on Bank Account
+        // Tap on Bank Account
         app.tables["selectTransferMethodTypeTable"].cells["Bank Account"].tap()
 
         XCTAssert(app.navigationBars["Bank Account"].exists)
@@ -767,7 +767,7 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(app.tables.staticTexts["United States"].exists)
         XCTAssertTrue(app.tables.staticTexts["USD"].exists)
 
-        // Tab on Bank Account - but need that response
+        // Tap on Bank Account
         app.tables["selectTransferMethodTypeTable"].cells["Bank Account"].tap()
 
         XCTAssert(app.navigationBars["Bank Account"].exists)
