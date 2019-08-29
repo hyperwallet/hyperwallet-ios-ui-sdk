@@ -25,21 +25,31 @@ Note that this SDK is geared towards those who need both backend data and UI fea
 
 ## Installation
 Use [Carthage](https://github.com/Carthage/Carthage) or [CocoaPods](https://cocoapods.org/) to integrate to HyperwalletSDK.
+Currently, the following modules are available: 
+* TransferMethod - List, add or remove Transfer Methods
+* Transfer - Create a transfer from user account or prepaid card to available accounts for the user
+* Receipt - List user/prepaid card receipts
+Adding one or more of these frameworks allows users to explore the particular function. If every feature is required, all the frameworks should be added
 ### Carthage
 Specify it in your Cartfile:
 ```ogdl
 github "hyperwallet/hyperwallet-ios-ui-sdk" "1.0.0-beta03"
 ```
+Add desired modules using the `Linked Frameworks and Libraries` option to make them available in the app.
+Use `import <module-name>` to add the dependency within a file
 
 ### CocoaPods
-- Install HyperwalletUISDK framwork as a whole:
+- Install a specific framework (install one or more frameworks based on your requirement)
+```ruby
+pod "HyperwalletUISDK/TransferMethod", "1.0.0-beta03"
+pod "HyperwalletUISDK/Transfer", "1.0.0-beta03"
+pod "HyperwalletUISDK/Receipt", "1.0.0-beta03"
+```
+- To install all available modules (TransferMethod, Transfer, Receipt)
 ```ruby
 pod 'HyperwalletUISDK', '~> 1.0.0-beta03'
 ```
-- Install a specific framework:
-```ruby
-pod 'HyperwalletUISDK/TransferMethod', '~> 1.0.0-beta03'
-```
+Use `import HyperwalletUISDK` to add the dependency within a file.
 
 ## Initialization
 After you're done installing the SDK, you need to initialize an instance in order to utilize core SDK functions. Also, you need to provide a HyperwalletAuthenticationTokenProvider object to retrieve an authentication token.
@@ -77,7 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 ```
-You can also customize the default themes accoding to your needs. Please see customize the visual style for detail.
+You can also customize the default themes according to your needs. Please see [customize the visual style](#Customize the visual style) for detail.
 
 ### Setup the authentication
 Add in the header:
@@ -146,55 +156,59 @@ import HyperwalletUISDK
 ```
 
 ### Lists the user's transfer methods
-The user can deactivate and add a new transfer method.
+The user can deactivate or add a new transfer method.
 ```swift
-let listTransferMethodController = HyperwalletUI.shared.listTransferMethodController()
-
-// Optional - The completion handler will be performed after a new transfer method has been created.
-listTransferMethodController.createTransferMethodHandler = { transferMethod in
-    // A new transfer method has been created
-}
-
-navigationController?.pushViewController(listTransferMethodController, animated: true)
+let coordinator = HyperwalletUI.shared.listTransferMethodCoordinator(parentController: self)
+coordinator.navigate()
 ```
 
 ### Select a transfer method type available by country and currency
 ```swift
-
-let selectTransferMethodTypeController = HyperwalletUI.shared.SelectTransferMethodTypeController()
-
-// Optional - The completion handler will be performed after a new transfer method has been created.
-SelectTransferMethodTypeController.createTransferMethodHandler = { transferMethod in
-    // A new transfer method has been created
-}
-
-navigationController?.pushViewController(SelectTransferMethodTypeController, animated: true)
+let coordinator = HyperwalletUI.shared.selectTransferMethodTypeCoordinator(parentController: self)
+coordinator.navigate()
 ```
 
 ### Create a transfer method
-The form fields are based on the country, currency, user's profile type, and transfer method type should be passed to this Controller to create a new Transfer Method for those values.
+The form fields are based on the country, currency, user's profile type, and transfer method type. These values should be passed to this method to create a new Transfer Method.
 ```swift
-let addTransferMethodController = HyperwalletUI.shared.addTransferMethodController("US",             // The 2 letter ISO 3166-1 country code.
-                                                                                           "USD",            // The 3 letter ISO 4217-1 currency code.
-                                                                                           "INDIVIDUAL",     // The profile type. Possible values - INDIVIDUAL, BUSINESS.
-                                                                                           "BANK_ACCOUNT")   // The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD, PAYPAL_ACCOUNT
-
-// Optional - The completion handler will be performed after a new transfer method has been created.
-addTransferMethodController.createTransferMethodHandler = { transferMethod in
-    // A new transfer method has been created
-}
-
-navigationController?.pushViewController(addTransferMethodController, animated: true)
+let coordinator = HyperwalletUI.shared.addTransferMethodCoordinator(
+    "US", // The 2 letter ISO 3166-1 country code.
+    "USD", // The 3 letter ISO 4217-1 currency code.
+    "INDIVIDUAL", // The profile type. Possible values - INDIVIDUAL, BUSINESS.
+    "BANK_ACCOUNT", // The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD, PAYPAL_ACCOUNT
+    parentController: self)
+coordinator.navigate()
 ```
 
 ### Lists the user's receipts
 ```swift
-let listUserReceiptController = HyperwalletUI.shared.listReceiptController()
+let coordinator = HyperwalletUI.shared.listUserReceiptCoordinator(parentController: self)
+coordinator.navigate()
 ```
 
 ### Lists the prepaid card's receipts
 ```swift
-let listPrepaidCardReceiptController = HyperwalletUI.shared.listPrepaidCardReceiptController("your-prepaid-card-token")
+let coordinator = HyperwalletUI.shared.listPrepaidCardReceiptCoordinator(parentController: self, prepaidCardToken: "your-prepaid-card-token")
+coordinator.navigate()
+```
+
+### Make a new transfer from user's account 
+To add new Transfer Method from Transfer module, TransferMethod module needs to be added as a dependency in the app. If TransferMethod module is not added, users will not be able to add a new Transfer Method inside the Transfer flow.
+```swift
+let clientTransferId = UUID().uuidString.lowercased()
+let coordinator = HyperwalletUI.shared
+            .createTransferFromUserCoordinator(clientTransferId: clientTransferId, parentController: self)
+coordinator.navigate()
+```
+
+### Make a new transfer from prepaid card 
+```swift
+let clientTransferId = UUID().uuidString.lowercased()
+let coordinator = HyperwalletUI.shared
+            .createTransferFromPrepaidCardCoordinator(clientTransferId: clientTransferId,
+                                                      sourceToken: "your-prepaid-card-token",
+                                                      parentController: self)
+coordinator.navigate()
 ```
 
 
@@ -244,7 +258,7 @@ override public func viewDidLoad() {
 
 @objc func didTransferMethodDeactivatedNotification(notification: Notification) {
     if let statusTransition = notification.userInfo![UserInfo.statusTransition] as? HyperwalletStatusTransition {
-        // A transfer method has been deactived.
+        // A transfer method has been deactivated.
         print(statusTransition.fromStatus)
         print(statusTransition.toStatus)
     }
