@@ -100,9 +100,19 @@ final class TransferAmountCell: UITableViewCell {
 
     func configure(amount: String?, currency: String?, isEnabled: Bool, _ handler: @escaping EnteredAmountHandler) {
         titleLabel.text = "transfer_amount".localized()
+        titleLabel.adjustsFontForContentSizeCategory = true
+        titleLabel.numberOfLines = 0
+        titleLabel.font = Theme.Label.captionOne
+        titleLabel.lineBreakMode = .byWordWrapping
         amountTextField.text = amount
         amountTextField.isEnabled = isEnabled
+        amountTextField.font = Theme.Label.captionOne
+        amountTextField.adjustsFontForContentSizeCategory = true
         currencyLabel.text = currency ?? String(repeating: " ", count: 3)
+        currencyLabel.adjustsFontForContentSizeCategory = true
+        currencyLabel.numberOfLines = 0
+        currencyLabel.font = Theme.Label.captionOne
+        currencyLabel.lineBreakMode = .byWordWrapping
         enteredAmountHandler = handler
     }
 }

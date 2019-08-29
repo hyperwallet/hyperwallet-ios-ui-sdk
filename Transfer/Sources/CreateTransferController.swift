@@ -107,6 +107,9 @@ extension CreateTransferController {
             withIdentifier: TransferTableViewFooterView.reuseIdentifier) as? TransferTableViewFooterView else {
                 return nil
         }
+        view.footerLabel.adjustsFontForContentSizeCategory = true
+        view.footerLabel.font = Theme.Label.captionOne
+        view.footerLabel.lineBreakMode = .byWordWrapping
         view.footerLabel.attributedText = attributedText
         return view
     }

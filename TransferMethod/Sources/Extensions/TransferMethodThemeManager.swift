@@ -46,7 +46,7 @@ public extension ThemeManager {
 
     private static func applyToListTransferMethodTableViewCell() {
         let proxy = ListTransferMethodCell.appearance()
-        proxy.titleLabelFont = Theme.Label.bodyFontMedium
+        proxy.titleLabelFont = Theme.Label.bodyFont
         proxy.titleLabelColor = Theme.Label.color
         proxy.subTitleLabelFont = Theme.Label.captionOne
         proxy.subTitleLabelColor = Theme.Label.subTitleColor
@@ -54,7 +54,7 @@ public extension ThemeManager {
 
     private static func applyToSelectTransferMethodTypeCell() {
         let proxy = SelectTransferMethodTypeCell.appearance()
-        proxy.titleLabelFont = Theme.Label.bodyFontMedium
+        proxy.titleLabelFont = Theme.Label.bodyFont
         proxy.titleLabelColor = Theme.Label.color
         proxy.subTitleLabelFont = Theme.Label.captionOne
         proxy.subTitleLabelColor = Theme.Label.subTitleColor

@@ -112,11 +112,15 @@ final class TransferDestinationCell: GenericCell<HyperwalletTransferMethod> {
 extension TransferDestinationCell {
     func configure(transferMethod: HyperwalletTransferMethod) {
         titleLabel.text = transferMethod.title
+        titleLabel.font = Theme.Label.captionOne
+        titleLabel.adjustsFontForContentSizeCategory = true
         subtitleLabel.attributedText = formatDetails(
             subtitle: transferMethod.transferMethodCountry?.localized() ?? "",
             additionalInfo: transferMethod.value)
 
         subtitleLabel.numberOfLines = 0
+        subtitleLabel.font = Theme.Label.captionOne
+        subtitleLabel.adjustsFontForContentSizeCategory = true
         subtitleLabel.lineBreakMode = .byWordWrapping
         let icon = UIImage.fontIcon(HyperwalletIcon.of(transferMethod.type ?? "").rawValue,
                                     Theme.Icon.frame,
@@ -124,6 +128,9 @@ extension TransferDestinationCell {
                                     Theme.Icon.primaryColor)
         imageView?.image = icon
         imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
+        if #available(iOS 11.0, *) {
+            imageView?.adjustsImageSizeForAccessibilityContentSizeCategory = true
+        }
     }
 
     func configure(_ title: String, _ subtitle: String, _ hyperwalletIcon: HyperwalletIconContent) {
@@ -138,6 +145,9 @@ extension TransferDestinationCell {
                                     Theme.Icon.primaryColor)
         imageView?.image = icon
         imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
+        if #available(iOS 11.0, *) {
+            imageView?.adjustsImageSizeForAccessibilityContentSizeCategory = true
+        }
     }
 
     private func formatDetails(subtitle: String, additionalInfo: String? = nil) -> NSAttributedString {

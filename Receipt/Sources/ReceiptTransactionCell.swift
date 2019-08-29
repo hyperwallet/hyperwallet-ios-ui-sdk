@@ -30,7 +30,7 @@ final class ReceiptTransactionCell: UITableViewCell {
 
     lazy var receiptTypeLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = Theme.Label.bodyFontMedium
+        label.font = Theme.Label.captionOne
         label.textColor = Theme.Label.color
         label.accessibilityIdentifier = "receiptTransactionTypeLabel"
         return label
@@ -38,7 +38,7 @@ final class ReceiptTransactionCell: UITableViewCell {
 
     lazy var amountLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = Theme.Label.bodyFontMedium
+        label.font = Theme.Label.captionOne
         label.textAlignment = .right
         label.accessibilityIdentifier = "receiptTransactionAmountLabel"
         return label
@@ -143,7 +143,9 @@ extension ReceiptTransactionCell {
         let iconFont = HyperwalletIcon.of(entry).rawValue
 
         receiptTypeLabel.text = receipt.type?.rawValue.lowercased().localized()
-
+        receiptTypeLabel.adjustsFontForContentSizeCategory = true
+        receiptTypeLabel.numberOfLines = 0
+        receiptTypeLabel.lineBreakMode = .byWordWrapping
         amountLabel.text = entry == credit
             ? receipt.amount
             : String(format: "-%@", amount)
@@ -152,9 +154,18 @@ extension ReceiptTransactionCell {
             ? Theme.Amount.creditColor
             : Theme.Amount.debitColor
 
+        amountLabel.adjustsFontForContentSizeCategory = true
+        amountLabel.numberOfLines = 0
+        amountLabel.lineBreakMode = .byWordWrapping
         createdOnLabel.text = formattedCreatedOn
         currencyLabel.text = receipt.currency
 
+        createdOnLabel.adjustsFontForContentSizeCategory = true
+        createdOnLabel.numberOfLines = 0
+        createdOnLabel.lineBreakMode = .byWordWrapping
+        currencyLabel.adjustsFontForContentSizeCategory = true
+        currencyLabel.numberOfLines = 0
+        currencyLabel.lineBreakMode = .byWordWrapping
         iconColor = entry == credit ? Theme.Icon.creditColor : Theme.Icon.debitColor
         iconBackgroundColor = entry == credit ? Theme.Icon.creditBackgroundColor
             : Theme.Icon.debitBackgroundColor
@@ -164,6 +175,9 @@ extension ReceiptTransactionCell {
                                             CGFloat(Theme.Icon.size),
                                             iconColor)
         imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
+        if #available(iOS 11.0, *) {
+            imageView?.adjustsImageSizeForAccessibilityContentSizeCategory = true
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

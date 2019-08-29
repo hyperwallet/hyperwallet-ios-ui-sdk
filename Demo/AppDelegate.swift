@@ -29,8 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 
-        //ThemeManager.applyWhiteTheme()
+       // ThemeManager.applyWhiteTheme()
         ThemeManager.applyTransferMethodTheme()
+        ThemeManager.applyReceiptTheme()
         ThemeManager.applyTheme()
         ThemeManager.applyTransferTheme()
 

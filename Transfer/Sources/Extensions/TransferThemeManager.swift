@@ -35,7 +35,7 @@ public extension ThemeManager {
 
     private static func applyToTransferDestinationCell() {
         let proxy = TransferDestinationCell.appearance()
-        proxy.titleLabelFont = Theme.Label.bodyFontMedium
+        proxy.titleLabelFont = Theme.Label.bodyFont
         proxy.titleLabelColor = Theme.Label.color
         proxy.subTitleLabelFont = Theme.Label.captionOne
         proxy.subTitleLabelColor = Theme.Label.subTitleColor
@@ -55,21 +55,21 @@ public extension ThemeManager {
 
     private static func applyToTransferAllFundsCell() {
         let proxy = TransferAllFundsCell.appearance()
-        proxy.titleLabelFont = Theme.Label.bodyFontMedium
+        proxy.titleLabelFont = Theme.Label.bodyFont
         proxy.titleLabelColor = Theme.Label.color
     }
 
     private static func applyToTransferAmountCell() {
         let proxy = TransferAmountCell.appearance()
-        proxy.titleLabelFont = Theme.Label.bodyFontMedium
+        proxy.titleLabelFont = Theme.Label.captionOne
         proxy.titleLabelColor = Theme.Label.color
-        proxy.currencyLabelFont = Theme.Label.bodyFontMedium
+        proxy.currencyLabelFont = Theme.Label.captionOne
         proxy.currencyLabelColor = Theme.Label.color
     }
 
     private static func applyToScheduleTransferSummaryCell() {
         let proxy = TransferSummaryCell.appearance()
-        proxy.titleLabelFont = Theme.Label.bodyFontMedium
+        proxy.titleLabelFont = Theme.Label.bodyFont
         proxy.titleLabelColor = Theme.Label.color
         proxy.subTitleLabelFont = Theme.Label.captionOne
         proxy.subTitleLabelColor = Theme.Label.subTitleColor
@@ -77,7 +77,7 @@ public extension ThemeManager {
 
     private static func applyToScheduleForeignExchangeCell() {
         let proxy = TransferForeignExchangeCell.appearance()
-        proxy.titleLabelFont = Theme.Label.bodyFontMedium
+        proxy.titleLabelFont = Theme.Label.bodyFont
         proxy.titleLabelColor = Theme.Label.color
         proxy.subTitleLabelFont = Theme.Label.captionOne
         proxy.subTitleLabelColor = Theme.Label.subTitleColor
