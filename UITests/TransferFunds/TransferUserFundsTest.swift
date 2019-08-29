@@ -650,6 +650,7 @@ class TransferUserFundsTest: BaseTests {
     }
 
     // MARK: Add Transfer Method Tests
+    //swiftlint:disable function_body_length
     func testTransferFunds_addTransferMethodWhenNoTransferMethods() {
         mockServer.setUpEmptyResponse(url: "/rest/v3/users/usr-token/transfer-methods")
         mockServer.setupStub(url: "/rest/v3/transfers",
@@ -684,17 +685,17 @@ class TransferUserFundsTest: BaseTests {
                              filename: "BankAccountIndividualResponse",
                              method: HTTPMethod.post)
 
-        // Tab on Bank Account - but need that response
+        // Tab on Bank Account
         app.tables["selectTransferMethodTypeTable"].cells["Bank Account"].tap()
 
         XCTAssert(app.navigationBars["Bank Account"].exists)
         addTransferMethod.setBranchId("021000021")
         addTransferMethod.setBankAccountId("12345")
         addTransferMethod.selectAccountType("CHECKING")
-        // addTransferMethod.setMiddleName("Adam")
         addTransferMethod.clickCreateTransferMethodButton()
         waitForNonExistence(spinner)
 
+        // Assert navigate to the Transfer Fund again
         if #available(iOS 11.4, *) {
             XCTAssertTrue(transferFunds.transferFundTitle.exists)
         } else {
@@ -719,6 +720,7 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), "United States Ending on 2345")
     }
 
+    //swiftlint:disable function_body_length
     func testTransferFunds_addBankAccountWhenMoreThanOneTransferMethods() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListOneBankAccountTransferUSD",
@@ -751,7 +753,6 @@ class TransferUserFundsTest: BaseTests {
 
         transferFunds.addSelectDestinationLabel.tap()
 
-        // TODO: ASSERT ADD ACCOUNTS flow
         XCTAssertTrue(selectDestination.selectDestinationTitle.exists)
         XCTAssertTrue(selectDestination.addTransferMethodButton.exists)
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 0), "Bank Account")
@@ -773,10 +774,15 @@ class TransferUserFundsTest: BaseTests {
         addTransferMethod.setBranchId("021000021")
         addTransferMethod.setBankAccountId("12345")
         addTransferMethod.selectAccountType("CHECKING")
-        // addTransferMethod.setMiddleName("Adam")
+
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+                             filename: "AddNewTransferMethodsMoreThanOneTransferMethod",
+                             method: HTTPMethod.get)
+
         addTransferMethod.clickCreateTransferMethodButton()
         waitForNonExistence(spinner)
 
+        // Assert navigate to the Transfer Fund again
         if #available(iOS 11.4, *) {
             XCTAssertTrue(transferFunds.transferFundTitle.exists)
         } else {
@@ -789,47 +795,17 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(destinationDetail == "United States\nEnding on 2345"
             || destinationDetail == "United States Ending on 2345")
 
-//
-//        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
-//                             filename: "AddNewTransferMethodsMoreThanOneTransferMethod",
-//                             method: HTTPMethod.get)
-//        transferFunds.addSelectDestinationLabel.tap()
-
-//        XCTAssertTrue(selectDestination.selectDestinationTitle.exists)
-//        XCTAssertTrue(selectDestination.addTransferMethodButton.exists)
-//        XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 0), "Bank Account")
-//        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), "United States Ending on 6789")
-//        XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 1), "Bank Account")
-//        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 1), "United States Ending on 2345")
-    }
-
-    func testTransferFunds_addPayPalAccountWhenMoreThanOneTransferMethods() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
-                             filename: "ListMoreThanOneTransferMethod",
+                             filename: "AddNewTransferMethodsMoreThanOneTransferMethod",
                              method: HTTPMethod.get)
-
-        mockServer.setupStub(url: "/rest/v3/transfers",
-                             filename: "AvailableFundUSD",
-                             method: HTTPMethod.post)
-
-        transferFundMenu.tap()
-        waitForNonExistence(spinner)
-
-        if #available(iOS 11.4, *) {
-            XCTAssertTrue(transferFunds.transferFundTitle.exists)
-        } else {
-            XCTAssertTrue(app.navigationBars["Transfer Funds"].exists)
-        }
-
-        // Add Destination Section
-        XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
-        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
-
-        let destinationDetail = transferFunds.addSelectDestinationDetailLabel.label
-        XCTAssertTrue(destinationDetail == "United States\nEnding on 1234"
-            || destinationDetail == "United States Ending on 1234")
-
         transferFunds.addSelectDestinationLabel.tap()
+
+        XCTAssertTrue(selectDestination.selectDestinationTitle.exists)
+        XCTAssertTrue(selectDestination.addTransferMethodButton.exists)
+        XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 0), "Bank Account")
+        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), "United States Ending on 6789")
+        XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 1), "Bank Account")
+        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 1), "United States Ending on 2345")
     }
 
     // it passed on my local but not remote, so will comment it out for now
