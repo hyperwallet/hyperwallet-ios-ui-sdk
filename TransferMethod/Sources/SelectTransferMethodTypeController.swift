@@ -110,7 +110,8 @@ extension SelectTransferMethodTypeController {
 
     override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         let blankHeaderHeight = countryCurrencyTableView.estimatedRowHeight / 2.5
-        return countryCurrencyTableView.estimatedRowHeight * CGFloat(presenter.countryCurrencySectionData.count) + blankHeaderHeight
+        return countryCurrencyTableView
+            .estimatedRowHeight * CGFloat(presenter.countryCurrencySectionData.count) + blankHeaderHeight
     }
 
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
