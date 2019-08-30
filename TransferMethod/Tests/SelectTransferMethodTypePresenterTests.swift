@@ -215,9 +215,9 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
         XCTAssertEqual(mockView.profileType!, "BUSINESS", "The profileType should be BUSINESS")
         XCTAssertEqual(presenter.countryCurrencySectionData.count, 2, "The countryCurrencyCount should be 2")
         XCTAssertEqual(presenter.sectionData.count, sectionDataCount, "The transferMethodTypesCount should be 3")
-        XCTAssertNotNil(presenter.getCellConfiguration(indexPath: firstIndexPath),
+        XCTAssertNotNil(presenter.sectionData(indexPath: firstIndexPath),
                         "The cell configuration should not be nil")
-        XCTAssertNotNil(presenter.getCellConfiguration(indexPath: secondIndexPath),
+        XCTAssertNotNil(presenter.sectionData(indexPath: secondIndexPath),
                         "The cell configuration should not be nil")
         XCTAssertNotNil(presenter.getCountryCurrencyConfiguration(indexPath: firstIndexPath),
                         "The country currency cell configuration should not be nil")
