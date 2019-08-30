@@ -88,10 +88,6 @@ final class TransferAllFundsCell: UITableViewCell {
     }
 
     func configure(setOn: Bool, _ handler: @escaping TransferAllFundsSwitchHandler) {
-        titleLabel.adjustsFontForContentSizeCategory = true
-        titleLabel.numberOfLines = 0
-        titleLabel.font = Theme.Label.captionOne
-        titleLabel.lineBreakMode = .byWordWrapping
         transferAllFundsSwitch.setOn(setOn, animated: false)
         transferAllFundsSwitchHandler = handler
     }

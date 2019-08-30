@@ -71,15 +71,13 @@ extension SelectTransferMethodTypeCell {
         if let configuration = configuration {
             accessibilityIdentifier = configuration.name
 
-            textLabel?.font = Theme.Label.captionOne
             textLabel?.text = configuration.name
             textLabel?.numberOfLines = 0
             textLabel?.lineBreakMode = .byWordWrapping
             textLabel?.adjustsFontForContentSizeCategory = true
 
-            detailTextLabel?.font = Theme.Label.captionOne
             detailTextLabel?.attributedText = configuration
-                .formatFeesProcessingTime(font: Theme.Label.captionOne, color: Theme.Label.subTitleColor)
+                .formatFeesProcessingTime(font: subTitleLabelFont, color: subTitleLabelColor)
             detailTextLabel?.numberOfLines = 0
             detailTextLabel?.lineBreakMode = .byWordWrapping
             detailTextLabel?.adjustsFontForContentSizeCategory = true

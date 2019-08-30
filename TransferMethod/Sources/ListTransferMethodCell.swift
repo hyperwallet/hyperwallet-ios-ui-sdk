@@ -77,14 +77,12 @@ extension ListTransferMethodCell {
         textLabel?.numberOfLines = 0
         textLabel?.lineBreakMode = .byWordWrapping
         textLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellTextLabel"
-        textLabel?.font = Theme.Label.captionOne
         detailTextLabel?.attributedText = formatDetails(
             transferMethodCountry: transferMethod.transferMethodCountry?.localized() ?? "",
             additionalInfo: transferMethod.value)
         detailTextLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellDetailTextLabel"
         detailTextLabel?.adjustsFontForContentSizeCategory = true
         detailTextLabel?.numberOfLines = 0
-        detailTextLabel?.font = Theme.Label.captionOne
         detailTextLabel?.lineBreakMode = .byWordWrapping
         let icon = UIImage.fontIcon(HyperwalletIcon.of(transferMethod.type ?? "").rawValue,
                                     Theme.Icon.frame,

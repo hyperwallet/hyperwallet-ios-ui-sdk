@@ -30,15 +30,12 @@ final class ReceiptTransactionCell: UITableViewCell {
 
     lazy var receiptTypeLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = Theme.Label.captionOne
-        label.textColor = Theme.Label.color
         label.accessibilityIdentifier = "receiptTransactionTypeLabel"
         return label
     }()
 
     lazy var amountLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = Theme.Label.captionOne
         label.textAlignment = .right
         label.accessibilityIdentifier = "receiptTransactionAmountLabel"
         return label
@@ -46,16 +43,12 @@ final class ReceiptTransactionCell: UITableViewCell {
 
     lazy var createdOnLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = Theme.Label.captionOne
-        label.textColor = Theme.Label.subTitleColor
         label.accessibilityIdentifier = "receiptTransactionCreatedOnLabel"
         return label
     }()
 
     lazy var currencyLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = Theme.Label.captionOne
-        label.textColor = Theme.Label.subTitleColor
         label.textAlignment = .right
         label.accessibilityIdentifier = "receiptTransactionCurrencyLabel"
         return label
@@ -188,5 +181,48 @@ extension ReceiptTransactionCell {
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
         imageView?.backgroundColor = iconBackgroundColor
+    }
+}
+
+extension ReceiptTransactionCell {
+    // MARK: Theme manager's proxy properties
+    @objc dynamic var receiptTypeFont: UIFont! {
+        get { return receiptTypeLabel.font }
+        set { receiptTypeLabel.font = newValue }
+    }
+
+    @objc dynamic var receiptTypeColor: UIColor! {
+        get { return receiptTypeLabel.textColor }
+        set { receiptTypeLabel.textColor = newValue }
+    }
+
+    @objc dynamic var amountFont: UIFont! {
+        get { return amountLabel.font }
+        set { amountLabel.font = newValue }
+    }
+
+    @objc dynamic var amountColor: UIColor! {
+        get { return amountLabel.textColor }
+        set { amountLabel.textColor = newValue }
+    }
+
+    @objc dynamic var createdOnFont: UIFont! {
+        get { return createdOnLabel.font }
+        set { createdOnLabel.font = newValue }
+    }
+
+    @objc dynamic var createdOnColor: UIColor! {
+        get { return createdOnLabel.textColor }
+        set { createdOnLabel.textColor = newValue }
+    }
+
+    @objc dynamic var currencyFont: UIFont! {
+        get { return currencyLabel.font }
+        set { currencyLabel.font = newValue }
+    }
+
+    @objc dynamic var currencyColor: UIColor! {
+        get { return currencyLabel.textColor }
+        set { currencyLabel.textColor = newValue }
     }
 }

@@ -112,14 +112,12 @@ final class TransferDestinationCell: GenericCell<HyperwalletTransferMethod> {
 extension TransferDestinationCell {
     func configure(transferMethod: HyperwalletTransferMethod) {
         titleLabel.text = transferMethod.title
-        titleLabel.font = Theme.Label.captionOne
         titleLabel.adjustsFontForContentSizeCategory = true
         subtitleLabel.attributedText = formatDetails(
             subtitle: transferMethod.transferMethodCountry?.localized() ?? "",
             additionalInfo: transferMethod.value)
 
         subtitleLabel.numberOfLines = 0
-        subtitleLabel.font = Theme.Label.captionOne
         subtitleLabel.adjustsFontForContentSizeCategory = true
         subtitleLabel.lineBreakMode = .byWordWrapping
         let icon = UIImage.fontIcon(HyperwalletIcon.of(transferMethod.type ?? "").rawValue,
@@ -135,9 +133,12 @@ extension TransferDestinationCell {
 
     func configure(_ title: String, _ subtitle: String, _ hyperwalletIcon: HyperwalletIconContent) {
         titleLabel.text = title
-
+        titleLabel.adjustsFontForContentSizeCategory = true
+        titleLabel.numberOfLines = 0
+        titleLabel.lineBreakMode = .byWordWrapping
         subtitleLabel.attributedText = formatDetails(subtitle: subtitle)
         subtitleLabel.numberOfLines = 0
+        subtitleLabel.adjustsFontForContentSizeCategory = true
         subtitleLabel.lineBreakMode = .byWordWrapping
         let icon = UIImage.fontIcon(hyperwalletIcon.rawValue,
                                     Theme.Icon.frame,
