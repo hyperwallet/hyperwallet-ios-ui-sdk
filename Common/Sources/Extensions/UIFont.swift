@@ -45,4 +45,19 @@ public extension UIFont {
             return
         }
     }
+
+    /// Indicates if current preferred content size category belongs to large or not
+    static var isLargeSizeCategory: Bool {
+        return self.largeSizes.contains(UIApplication.shared.preferredContentSizeCategory)
+    }
+
+    static var largeSizes: [UIContentSizeCategory] {
+        return [
+            .accessibilityExtraExtraExtraLarge,
+            .accessibilityExtraExtraLarge,
+            .accessibilityExtraLarge,
+            .accessibilityLarge,
+            .accessibilityMedium
+        ]
+    }
 }

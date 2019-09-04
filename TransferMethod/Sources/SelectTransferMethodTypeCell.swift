@@ -81,15 +81,14 @@ extension SelectTransferMethodTypeCell {
             detailTextLabel?.numberOfLines = 0
             detailTextLabel?.lineBreakMode = .byWordWrapping
             detailTextLabel?.adjustsFontForContentSizeCategory = true
-            let image = UIImage.fontIcon(HyperwalletIcon.of(configuration.code!).rawValue,
-                                         Theme.Icon.frame,
-                                         CGFloat(Theme.Icon.size),
-                                         Theme.Icon.primaryColor)
-            if #available(iOS 11.0, *) {
-                imageView?.adjustsImageSizeForAccessibilityContentSizeCategory = true
+            if !UIFont.isLargeSizeCategory {
+                let icon = UIImage.fontIcon(HyperwalletIcon.of(configuration.code!).rawValue,
+                                            Theme.Icon.frame,
+                                            CGFloat(Theme.Icon.size),
+                                            Theme.Icon.primaryColor)
+                imageView?.image = icon
+                imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
             }
-            imageView?.image = image
-            imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
         }
     }
 }

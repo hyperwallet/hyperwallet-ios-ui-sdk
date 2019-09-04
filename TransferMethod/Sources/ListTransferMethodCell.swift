@@ -84,15 +84,14 @@ extension ListTransferMethodCell {
         detailTextLabel?.adjustsFontForContentSizeCategory = true
         detailTextLabel?.numberOfLines = 0
         detailTextLabel?.lineBreakMode = .byWordWrapping
-        let icon = UIImage.fontIcon(HyperwalletIcon.of(transferMethod.type ?? "").rawValue,
-                                    Theme.Icon.frame,
-                                    CGFloat(Theme.Icon.size),
-                                    Theme.Icon.primaryColor)
-        if #available(iOS 11.0, *) {
-            imageView?.adjustsImageSizeForAccessibilityContentSizeCategory = true
+        if !UIFont.isLargeSizeCategory {
+            let icon = UIImage.fontIcon(HyperwalletIcon.of(transferMethod.type ?? "").rawValue,
+                                        Theme.Icon.frame,
+                                        CGFloat(Theme.Icon.size),
+                                        Theme.Icon.primaryColor)
+            imageView?.image = icon
+            imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
         }
-        imageView?.image = icon
-        imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
     }
 
     func formatDetails(transferMethodCountry: String, additionalInfo: String?) -> NSAttributedString {
