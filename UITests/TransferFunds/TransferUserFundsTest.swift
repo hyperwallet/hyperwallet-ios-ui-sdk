@@ -802,7 +802,7 @@ class TransferUserFundsTest: BaseTests {
                              filename: "AddNewTransferMethodsMoreThanOneTransferMethod",
                              method: HTTPMethod.get)
         transferFunds.addSelectDestinationLabel.tap()
-
+        waitForNonExistence(spinner)
         XCTAssertTrue(selectDestination.selectDestinationTitle.exists)
         XCTAssertTrue(selectDestination.addTransferMethodButton.exists)
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 0), "Bank Account")
