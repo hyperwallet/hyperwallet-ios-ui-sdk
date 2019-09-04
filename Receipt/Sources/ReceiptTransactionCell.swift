@@ -66,6 +66,7 @@ final class ReceiptTransactionCell: UITableViewCell {
 
     private func defaultInit() {
         let titleStackView = UIStackView(frame: .zero)
+        let stackViewLeadingConstraints: NSLayoutConstraint
         setup(titleStackView, with: receiptTypeLabel, and: amountLabel)
 
         let subTitleStackView = UIStackView(frame: .zero)
@@ -82,8 +83,11 @@ final class ReceiptTransactionCell: UITableViewCell {
 
         contentView.addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackViewLeadingConstraints = !UIFont.isLargeSizeCategory ? stackView.leadingAnchor
+            .constraint(equalTo: imageView!.trailingAnchor, constant: 15) : stackView.leadingAnchor
+                .constraint(equalTo: contentView.leadingAnchor, constant: 20)
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: imageView!.trailingAnchor, constant: 15),
+            stackViewLeadingConstraints,
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
             stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 0),
             stackView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 10),
@@ -149,13 +153,13 @@ extension ReceiptTransactionCell {
         iconBackgroundColor = entry == credit ? Theme.Icon.creditBackgroundColor
             : Theme.Icon.debitBackgroundColor
 
-        imageView?.image = UIImage.fontIcon(iconFont,
-                                            Theme.Icon.frame,
-                                            CGFloat(Theme.Icon.size),
-                                            iconColor)
-        imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
-        if #available(iOS 11.0, *) {
-            imageView?.adjustsImageSizeForAccessibilityContentSizeCategory = true
+        if !UIFont.isLargeSizeCategory {
+            let icon = UIImage.fontIcon(iconFont,
+                                        Theme.Icon.frame,
+                                        CGFloat(Theme.Icon.size),
+                                        iconColor)
+            imageView?.image = icon
+            imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
         }
     }
 
