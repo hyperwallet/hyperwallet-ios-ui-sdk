@@ -24,6 +24,7 @@ public extension UIViewController {
     func largeTitle() {
         if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.prefersLargeTitles = true
+            self.navigationItem.largeTitleDisplayMode = .always
         }
     }
 
@@ -63,6 +64,7 @@ extension UIViewController: HyperwalletFlowDelegate {
         static var coordinator =  [ObjectIdentifier: HyperwalletCoordinator]()
         static var initializationData = [ObjectIdentifier: [InitializationDataField: Any]]()
     }
+
     public weak var flowDelegate: HyperwalletFlowDelegate? {
         get {
             return Holder.flowDelegate[ObjectIdentifier(self)]

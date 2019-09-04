@@ -1,5 +1,5 @@
 language: swift
-osx_image: xcode10.2
+osx_image: xcode10.3
 os: osx
 branches:
  only:
@@ -54,7 +54,7 @@ script: |
     | xcpretty
 
   # Lint - Add `--strict` to fail for warning and violation
-  swiftlint lint --strict --quiet --reporter json
+  swiftlint lint --quiet --reporter json
 after_success:
  if [ "$code_coverage" == "YES" ]; then
       slather;
