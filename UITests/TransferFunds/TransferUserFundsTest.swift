@@ -478,6 +478,7 @@ class TransferUserFundsTest: BaseTests {
 
         let pastAmountWithNumberNoDigit = "10000"
         transferFunds.pasteAmountToTransferAmount(amount: pastAmountWithNumberNoDigit)
+        waitForNonExistence(spinner)
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "10,000.00")
     }
 
