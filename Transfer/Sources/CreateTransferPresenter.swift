@@ -29,7 +29,7 @@ protocol CreateTransferView: class {
     typealias MarkCellHandler = (_ value: HyperwalletTransferMethod) -> Bool
 
     func hideLoading()
-    func notifyTransferCreated(_ transfer: HyperwalletTransfer)
+    func notifyTransferCreated(_ transfer: HyperwalletTransfer.Transfer)
     func showCreateTransfer()
     func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?)
     func showGenericTableView(items: [HyperwalletTransferMethod],
@@ -37,7 +37,7 @@ protocol CreateTransferView: class {
                               selectItemHandler: @escaping SelectItemHandler,
                               markCellHandler: @escaping MarkCellHandler)
     func showLoading()
-    func showScheduleTransfer(_ transfer: HyperwalletTransfer)
+    func showScheduleTransfer(_ transfer: HyperwalletTransfer.Transfer)
     func updateTransferSection()
     func updateFooter(for section: CreateTransferController.FooterSection)
     func areAllFieldsValid() -> Bool
@@ -153,7 +153,7 @@ final class CreateTransferPresenter {
                 view.showCreateTransfer()
                 return
         }
-        let transfer = HyperwalletTransfer.Builder(clientTransferId: clientTransferId,
+        let transfer = HyperwalletTransfer.Transfer.Builder(clientTransferId: clientTransferId,
                                                    sourceToken: sourceToken,
                                                    destinationToken: destinationToken)
             .destinationCurrency(destinationCurrency)
@@ -187,7 +187,7 @@ final class CreateTransferPresenter {
             let destinationToken = selectedTransferMethod?.token,
             let destinationCurrency = selectedTransferMethod?.transferMethodCurrency {
             view.showLoading()
-            let transfer = HyperwalletTransfer.Builder(clientTransferId: clientTransferId,
+            let transfer = HyperwalletTransfer.Transfer.Builder(clientTransferId: clientTransferId,
                                                        sourceToken: sourceToken,
                                                        destinationToken: destinationToken)
                 .destinationAmount(amount)
