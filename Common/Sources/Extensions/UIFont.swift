@@ -51,7 +51,7 @@ public extension UIFont {
         return self.largeSizes.contains(UIApplication.shared.preferredContentSizeCategory)
     }
 
-    static var largeSizes: [UIContentSizeCategory] {
+    private static var largeSizes: [UIContentSizeCategory] {
         return [
             .accessibilityExtraExtraExtraLarge,
             .accessibilityExtraExtraLarge,
