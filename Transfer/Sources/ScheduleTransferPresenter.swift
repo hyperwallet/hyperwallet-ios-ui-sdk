@@ -28,6 +28,7 @@ protocol ScheduleTransferView: class {
     func showConfirmation(handler: @escaping (() -> Void))
     func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?)
     func notifyTransferScheduled(_ hyperwalletStatusTransition: HyperwalletStatusTransition)
+    func updateFooter(for section: ScheduleTransferController.FooterSection)
 }
 
 final class ScheduleTransferPresenter {

@@ -61,6 +61,7 @@ final class CreateTransferPresenter {
     private(set) var clientTransferId: String
     private(set) var sectionData = [CreateTransferSectionData]()
     private(set) var availableBalance: String?
+    private(set) var didFXQuoteChange: Bool
 
     private var sourceToken: String?
 
@@ -81,6 +82,7 @@ final class CreateTransferPresenter {
         self.clientTransferId = clientTransferId
         self.sourceToken = sourceToken
         self.view = view
+        self.didFXQuoteChange = false
     }
 
     func initializeSections() {
@@ -210,6 +212,9 @@ final class CreateTransferPresenter {
 
                 case .success(let transfer):
                     if let transfer = transfer {
+                        if transfer.destinationAmount == self?.availableBalance && self!.transferAllFundsIsOn {
+                            strongSelf.didFXQuoteChange = true
+                        }
                         strongSelf.view.notifyTransferCreated(transfer)
                         strongSelf.view.showScheduleTransfer(transfer)
                     }

@@ -24,6 +24,9 @@ import UIKit
 
 /// Schedule a transfer that was previously created
 public final class ScheduleTransferController: UITableViewController, UITextFieldDelegate {
+    enum FooterSection: Int, CaseIterable {
+        case destination, foreignExchange, summary, notes, button
+    }
     private var spinnerView: SpinnerView?
     private var processingView: ProcessingView?
     private var presenter: ScheduleTransferPresenter!
@@ -63,10 +66,14 @@ public final class ScheduleTransferController: UITableViewController, UITextFiel
         tableView.allowsSelection = false
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Theme.Cell.smallHeight
+        tableView.sectionFooterHeight = UITableView.automaticDimension
+        tableView.estimatedSectionFooterHeight = Theme.Cell.smallHeight
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)
         }
         tableView.register(DividerCell.self, forCellReuseIdentifier: DividerCell.reuseIdentifier)
+        tableView.register(TransferTableViewFooterView.self,
+                           forHeaderFooterViewReuseIdentifier: TransferTableViewFooterView.reuseIdentifier)
     }
 }
 
@@ -86,6 +93,39 @@ extension ScheduleTransferController {
 
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return getCellConfiguration(indexPath)
+    }
+
+    override public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let attributedText = getAttributedFooterText(for: section)
+        if attributedText == nil {
+            return nil
+        }
+        guard let view = tableView.dequeueReusableHeaderFooterView(
+            withIdentifier: TransferTableViewFooterView.reuseIdentifier) as? TransferTableViewFooterView else {
+                return nil
+        }
+        view.footerLabel.attributedText = attributedText
+        return view
+    }
+
+    private func getAttributedFooterText(for section: Int) -> NSAttributedString? {
+        let sectionData = presenter.sectionData[section]
+        var attributedText: NSAttributedString?
+        if  let transferSectionData = sectionData as? ScheduleTransferSummaryData {
+            attributedText = format(footer: transferSectionData.footer)
+        }
+        return attributedText
+    }
+
+    private func format(footer: String? = nil) -> NSAttributedString? {
+        var attributedText: NSMutableAttributedString! = nil
+        if let footer = footer {
+            attributedText = NSMutableAttributedString()
+            attributedText.appendParagraph(value: footer,
+                                           font: Theme.Label.footnoteFont,
+                                           color: Theme.Label.subTitleColor)
+        }
+        return attributedText
     }
 
     private func getCellConfiguration(_ indexPath: IndexPath) -> UITableViewCell {
@@ -109,6 +149,7 @@ extension ScheduleTransferController {
             if let tableViewCell = cell as? TransferSummaryCell,
                 let summaryData = section as? ScheduleTransferSummaryData {
                 tableViewCell.configure(summaryData.rows[indexPath.row].title, summaryData.rows[indexPath.row].value)
+                updateFooter(for: .summary)
             }
 
         case .notes:
@@ -129,6 +170,18 @@ extension ScheduleTransferController {
     @objc
     private func tapScheduleTransfer(sender: UITapGestureRecognizer) {
         presenter.scheduleTransfer()
+    }
+
+    func updateFooter(for section: FooterSection) {
+        UIView.setAnimationsEnabled(false)
+        tableView.beginUpdates()
+        if let footerView = tableView.footerView(forSection: section.rawValue) as? TransferTableViewFooterView {
+            footerView.footerLabel.attributedText = getAttributedFooterText(for: section.rawValue)
+        } else {
+            tableView.reloadSections(IndexSet(integer: section.rawValue), with: .none)
+        }
+        tableView.endUpdates()
+        UIView.setAnimationsEnabled(true)
     }
 }
 
