@@ -55,9 +55,9 @@ struct ScheduleTransferForeignExchangeData: ScheduleTransferSectionData {
     var scheduleTransferSectionHeader: ScheduleTransferSectionHeader { return .foreignExchange }
     var rowCount: Int { return rows.count }
     var cellIdentifier: String { return TransferForeignExchangeCell.reuseIdentifier }
-    var foreignExchanges: [HyperwalletForeignExchange.ForeignExchange]
+    var foreignExchanges: [ForeignExchange]
 
-    init(foreignExchanges: [HyperwalletForeignExchange.ForeignExchange]) {
+    init(foreignExchanges: [ForeignExchange]) {
         self.foreignExchanges = foreignExchanges
 
         for (index, foreignExchange) in foreignExchanges.enumerated() {

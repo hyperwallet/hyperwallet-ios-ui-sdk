@@ -153,7 +153,7 @@ final class CreateTransferPresenter {
                 view.showCreateTransfer()
                 return
         }
-        let transfer = HyperwalletTransfer.Transfer.Builder(clientTransferId: clientTransferId,
+        let transfer = HyperwalletTransfer.Builder(clientTransferId: clientTransferId,
                                                    sourceToken: sourceToken,
                                                    destinationToken: destinationToken)
             .destinationCurrency(destinationCurrency)
@@ -187,7 +187,7 @@ final class CreateTransferPresenter {
             let destinationToken = selectedTransferMethod?.token,
             let destinationCurrency = selectedTransferMethod?.transferMethodCurrency {
             view.showLoading()
-            let transfer = HyperwalletTransfer.Transfer.Builder(clientTransferId: clientTransferId,
+            let transfer = HyperwalletTransfer.Builder(clientTransferId: clientTransferId,
                                                        sourceToken: sourceToken,
                                                        destinationToken: destinationToken)
                 .destinationAmount(amount)
