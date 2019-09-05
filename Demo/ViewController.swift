@@ -230,7 +230,7 @@ class ViewController: UITableViewController {
         print("Transfer method has been created successfully")
     }
 
-    func didCreateTransfer(transfer: Transfer.HyperwalletTransfer) {
+    func didCreateTransfer(transfer: HyperwalletTransfer) {
         print("Transfer has been created successfully")
     }
 
@@ -243,7 +243,7 @@ class ViewController: UITableViewController {
     override public func didFlowComplete(with response: Any) {
         if let transferMethod = response as? HyperwalletTransferMethod {
             self.didCreateTransferMethod(transferMethod: transferMethod)
-        } else if let transfer = response as? Transfer.HyperwalletTransfer {
+        } else if let transfer = response as? HyperwalletTransfer {
             didCreateTransfer(transfer: transfer)
         }
     }

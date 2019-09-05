@@ -55,9 +55,9 @@ struct ScheduleTransferForeignExchangeData: ScheduleTransferSectionData {
     var scheduleTransferSectionHeader: ScheduleTransferSectionHeader { return .foreignExchange }
     var rowCount: Int { return rows.count }
     var cellIdentifier: String { return TransferForeignExchangeCell.reuseIdentifier }
-    var foreignExchanges: [ForeignFee.HyperwalletForeignExchange]
+    var foreignExchanges: [HyperwalletForeignExchange]
 
-    init(foreignExchanges: [ForeignFee.HyperwalletForeignExchange]) {
+    init(foreignExchanges: [HyperwalletForeignExchange]) {
         self.foreignExchanges = foreignExchanges
 
         for (index, foreignExchange) in foreignExchanges.enumerated() {
@@ -88,7 +88,7 @@ struct ScheduleTransferSummaryData: ScheduleTransferSectionData {
     var rowCount: Int { return rows.count }
     var cellIdentifier: String { return TransferSummaryCell.reuseIdentifier }
 
-    init(transfer: Transfer.HyperwalletTransfer) {
+    init(transfer: HyperwalletTransfer) {
         if let destinationAmount = transfer.destinationAmount,
             let destinationCurrency = transfer.destinationCurrency {
             guard let feeAmount = transfer.destinationFeeAmount, Double(feeAmount) != 0 else {
@@ -115,7 +115,7 @@ struct ScheduleTransferNotesData: ScheduleTransferSectionData {
     var scheduleTransferSectionHeader: ScheduleTransferSectionHeader { return .notes }
     var cellIdentifier: String { return TransferNotesCell.reuseIdentifier }
 
-    init?(transfer: Transfer.HyperwalletTransfer) {
+    init?(transfer: HyperwalletTransfer) {
         guard let notes = transfer.notes else {
             return nil
         }

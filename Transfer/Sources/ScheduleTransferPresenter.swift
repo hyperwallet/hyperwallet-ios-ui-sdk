@@ -34,10 +34,10 @@ final class ScheduleTransferPresenter {
     private unowned let view: ScheduleTransferView
     private(set) var sectionData = [ScheduleTransferSectionData]()
     private var transferMethod: HyperwalletTransferMethod
-    private var transfer: Transfer.HyperwalletTransfer
+    private var transfer: HyperwalletTransfer
 
     /// Initialize ScheduleTransferPresenter
-    init(view: ScheduleTransferView, transferMethod: HyperwalletTransferMethod, transfer: Transfer.HyperwalletTransfer) {
+    init(view: ScheduleTransferView, transferMethod: HyperwalletTransferMethod, transfer: HyperwalletTransfer) {
         self.view = view
         self.transferMethod = transferMethod
         self.transfer = transfer
