@@ -25,15 +25,15 @@ public protocol TransferRepository {
     /// - Parameters:
     ///   - transfer: the `HyperwalletTransfer` being created
     ///   - completion: the callback handler of responses from the Hyperwallet platform
-    func createTransfer(_ transfer: HyperwalletTransfer,
-                        _ completion: @escaping (Result<HyperwalletTransfer?, HyperwalletErrorType>) -> Void)
+    func createTransfer(_ transfer: Transfer.HyperwalletTransfer,
+                        _ completion: @escaping (Result<Transfer.HyperwalletTransfer?, HyperwalletErrorType>) -> Void)
 
     /// Schedule a transfer
     ///
     /// - Parameters:
     ///   - transfer: the transfer that was previously created
     ///   - completion: the callback handler of responses from the Hyperwallet platform
-    func scheduleTransfer(_ transfer: HyperwalletTransfer,
+    func scheduleTransfer(_ transfer: Transfer.HyperwalletTransfer,
                           _ completion: @escaping (Result<HyperwalletStatusTransition?, HyperwalletErrorType>) -> Void)
 }
 
@@ -43,8 +43,8 @@ final class RemoteTransferRepository: TransferRepository {
     /// - Parameters:
     ///   - transfer: the transfer will be created
     ///   - completion: the callback handler of responses from the Hyperwallet platform
-    public func createTransfer(_ transfer: HyperwalletTransfer,
-                               _ completion: @escaping (Result<HyperwalletTransfer?, HyperwalletErrorType>) -> Void) {
+    public func createTransfer(_ transfer: Transfer.HyperwalletTransfer,
+                               _ completion: @escaping (Result<Transfer.HyperwalletTransfer?, HyperwalletErrorType>) -> Void) {
         Hyperwallet.shared.createTransfer(transfer: transfer,
                                           completion: TransferRepositoryCompletionHelper.performHandler(completion))
     }
@@ -54,7 +54,7 @@ final class RemoteTransferRepository: TransferRepository {
     /// - Parameters:
     ///   - transfer: the transfer that was previously created
     ///   - completion: the callback handler of responses from the Hyperwallet platform
-    public func scheduleTransfer(_ transfer: HyperwalletTransfer,
+    public func scheduleTransfer(_ transfer: Transfer.HyperwalletTransfer,
                                  _ completion: @escaping (Result < HyperwalletStatusTransition?,
         HyperwalletErrorType>) -> Void) {
         Hyperwallet.shared.scheduleTransfer(transferToken: transfer.token!,

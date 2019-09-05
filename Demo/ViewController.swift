@@ -230,19 +230,20 @@ class ViewController: UITableViewController {
         print("Transfer method has been created successfully")
     }
 
-    func didCreateTransfer(transfer: HyperwalletTransfer) {
+    func didCreateTransfer(transfer: Transfer.HyperwalletTransfer) {
         print("Transfer has been created successfully")
     }
 
     @objc
     func methodOfReceivedNotification(notification: Notification) {
+        notification.userInfo?[UserInfo.statusTransition]
         print("Transfer method has been deleted successfully")
     }
 
     override public func didFlowComplete(with response: Any) {
         if let transferMethod = response as? HyperwalletTransferMethod {
             self.didCreateTransferMethod(transferMethod: transferMethod)
-        } else if let transfer = response as? HyperwalletTransfer {
+        } else if let transfer = response as? Transfer.HyperwalletTransfer {
             didCreateTransfer(transfer: transfer)
         }
     }
