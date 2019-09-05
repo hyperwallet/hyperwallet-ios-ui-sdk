@@ -37,7 +37,7 @@ public class ListReceiptCoordinator: NSObject, HyperwalletCoordinator {
         parentController?.show(controller, sender: parentController)
     }
 
-    public func navigateToNextPage(initializationData: [InitializationDataField: Any]?) {
+    public func navigateToNextPage(initializationData: [String: Any]?) {
         let childController = ReceiptDetailController()
         childController.coordinator = self
         childController.flowDelegate = controller
@@ -56,7 +56,8 @@ public class ListReceiptCoordinator: NSObject, HyperwalletCoordinator {
         controller.flowDelegate?.didFlowComplete(with: response)
     }
 
-    public func start(initializationData: [InitializationDataField: Any]? = nil, parentController: UIViewController) {
+    public func start(initializationData: [String: Any]? = nil,
+                      parentController: UIViewController) {
         controller.coordinator = self
         controller.initializationData = initializationData
         self.parentController = parentController

@@ -84,11 +84,11 @@ public final class AddTransferMethodController: UITableViewController {
         return stackView
     }()
     private func initializeData() {
-        if let country = initializationData?[InitializationDataField.country] as? String,
-            let currency = initializationData?[InitializationDataField.currency] as? String,
-            let forceUpdate = initializationData?[InitializationDataField.forceUpdateData] as? Bool,
-            let profileType = initializationData?[InitializationDataField.profileType] as? String,
-            let transferMethodTypeCode = initializationData?[InitializationDataField.transferMethodTypeCode]
+        if let country = initializationData?[InitializationDataField.country.rawValue] as? String,
+            let currency = initializationData?[InitializationDataField.currency.rawValue] as? String,
+            let forceUpdate = initializationData?[InitializationDataField.forceUpdateData.rawValue] as? Bool,
+            let profileType = initializationData?[InitializationDataField.profileType.rawValue] as? String,
+            let transferMethodTypeCode = initializationData?[InitializationDataField.transferMethodTypeCode.rawValue]
                 as? String {
             self.country = country
             self.currency = currency

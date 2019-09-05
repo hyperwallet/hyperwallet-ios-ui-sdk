@@ -47,7 +47,8 @@ public final class ListReceiptController: UITableViewController {
 
     private func initializePresenter() {
         presenter = ListReceiptPresenter(view: self,
-                                         prepaidCardToken: initializationData?[InitializationDataField.prepaidCardToken]
+                                         prepaidCardToken:
+            initializationData?[InitializationDataField.prepaidCardToken.rawValue]
                                             as? String)
     }
 
@@ -77,7 +78,8 @@ public final class ListReceiptController: UITableViewController {
     // MARK: list receipt table view delegate
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let hyperwalletReceipt = presenter.sectionData[indexPath.section].value[indexPath.row]
-        coordinator?.navigateToNextPage(initializationData: [InitializationDataField.receipt: hyperwalletReceipt])
+        coordinator?.navigateToNextPage(initializationData:
+            [InitializationDataField.receipt.rawValue: hyperwalletReceipt])
     }
 
     override public func tableView(_ tableView: UITableView,

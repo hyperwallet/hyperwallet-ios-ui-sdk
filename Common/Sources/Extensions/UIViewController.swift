@@ -62,7 +62,7 @@ extension UIViewController: HyperwalletFlowDelegate {
     struct Holder {
         static var flowDelegate = [ObjectIdentifier: HyperwalletFlowDelegate]()
         static var coordinator =  [ObjectIdentifier: HyperwalletCoordinator]()
-        static var initializationData = [ObjectIdentifier: [InitializationDataField: Any]]()
+        static var initializationData = [ObjectIdentifier: [String: Any]]()
     }
 
     public weak var flowDelegate: HyperwalletFlowDelegate? {
@@ -81,7 +81,7 @@ extension UIViewController: HyperwalletFlowDelegate {
             Holder.coordinator[ObjectIdentifier(self)] = newValue
         }
     }
-    public var initializationData: [InitializationDataField: Any]? {
+    public var initializationData: [String: Any]? {
         get {
             return Holder.initializationData[ObjectIdentifier(self)]
         }

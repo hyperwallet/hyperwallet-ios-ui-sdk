@@ -39,7 +39,7 @@ public extension HyperwalletUI {
     func listPrepaidCardReceiptCoordinator(parentController: UIViewController, prepaidCardToken: String)
         -> ListReceiptCoordinator {
             let coordinator = ListReceiptCoordinator()
-            coordinator.start(initializationData: [InitializationDataField.prepaidCardToken: prepaidCardToken],
+            coordinator.start(initializationData: [InitializationDataField.prepaidCardToken.rawValue: prepaidCardToken],
                               parentController: parentController)
             return coordinator
     }
