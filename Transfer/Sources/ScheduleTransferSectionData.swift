@@ -89,7 +89,7 @@ struct ScheduleTransferSummaryData: ScheduleTransferSectionData {
     var cellIdentifier: String { return TransferSummaryCell.reuseIdentifier }
     var footer: String?
 
-    init(transfer: HyperwalletTransfer) {
+    init(transfer: HyperwalletTransfer, didFXQuoteChange: Bool) {
         if let destinationAmount = transfer.destinationAmount,
             let destinationCurrency = transfer.destinationCurrency {
             guard let feeAmount = transfer.destinationFeeAmount, Double(feeAmount) != 0 else {
@@ -107,8 +107,10 @@ struct ScheduleTransferSummaryData: ScheduleTransferSectionData {
                          value: feeAmount))
             rows.append((title: "transfer_net_amount_confirmation".localized(),
                          value: destinationAmount))
-            footer = String(format: "transfer_fx_rate_changed".localized(),
-                            String(format: "%@ %@", destinationAmount, destinationCurrency))
+            if didFXQuoteChange {
+                footer = String(format: "transfer_fx_rate_changed".localized(),
+                                String(format: "%@ %@", destinationAmount, destinationCurrency))
+            }
         }
     }
 }

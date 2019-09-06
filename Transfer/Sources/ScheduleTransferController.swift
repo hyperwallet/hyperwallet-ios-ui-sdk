@@ -53,8 +53,9 @@ public final class ScheduleTransferController: UITableViewController, UITextFiel
     private func initializePresenter() {
         if let transferMethod = initializationData?[InitializationDataField.transferMethod]
             as? HyperwalletTransferMethod,
-            let transfer = initializationData?[InitializationDataField.transfer] as? HyperwalletTransfer {
-            presenter = ScheduleTransferPresenter(view: self, transferMethod: transferMethod, transfer: transfer)
+            let transfer = initializationData?[InitializationDataField.transfer] as? HyperwalletTransfer,
+            let didFXQuoteChange = initializationData?[InitializationDataField.didFXQuoteChange] as? Bool {
+            presenter = ScheduleTransferPresenter(view: self, transferMethod: transferMethod, transfer: transfer, didFXQuoteChange: didFXQuoteChange)
         } else {
             fatalError("Required data not provided in initializePresenter")
         }
