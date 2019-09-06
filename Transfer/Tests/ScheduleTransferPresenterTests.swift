@@ -11,7 +11,7 @@ class ScheduleTransferPresenterTests: XCTestCase {
                                                                 transferMethodProfileType: "INDIVIDUAL",
                                                                 transferMethodType: "BANK_ACCOUNT")
         .build()
-    private var transfer: HyperwalletTransfer.Transfer!
+    private var transfer: HyperwalletTransfer!
 
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
@@ -83,9 +83,9 @@ class ScheduleTransferPresenterTests: XCTestCase {
         assertButtonSectionResult(buttonSection: presenter.sectionData.last!)
     }
 
-    private func getTransfer(from jsonData: Data) -> HyperwalletTransfer.Transfer? {
+    private func getTransfer(from jsonData: Data) -> HyperwalletTransfer? {
         let decoder = JSONDecoder()
-        return try? decoder.decode(HyperwalletTransfer.Transfer.self, from: jsonData)
+        return try? decoder.decode(HyperwalletTransfer.self, from: jsonData)
     }
 
     private func assertDestinationSectionResult(destinationSection: ScheduleTransferSectionData) {

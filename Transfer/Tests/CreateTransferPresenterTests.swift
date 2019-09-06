@@ -383,7 +383,7 @@ class MockCreateTransferView: CreateTransferView {
         isHideLoadingPerformed = true
     }
 
-    func notifyTransferCreated(_ transfer: HyperwalletTransfer.Transfer) {
+    func notifyTransferCreated(_ transfer: HyperwalletTransfer) {
         isNotifyTransferCreatedPerformed = true
     }
 
@@ -411,7 +411,7 @@ class MockCreateTransferView: CreateTransferView {
         isShowLoadingPerformed = true
     }
 
-    func showScheduleTransfer(_ transfer: HyperwalletTransfer.Transfer) {
+    func showScheduleTransfer(_ transfer: HyperwalletTransfer) {
         isShowScheduleTransferPerformed = true
         showScheduleTransferExpectation?.fulfill()
     }

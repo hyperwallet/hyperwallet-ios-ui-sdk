@@ -274,7 +274,7 @@ extension CreateTransferController: CreateTransferView {
         tableView.reloadRows(at: [IndexPath(row: 0, section: FooterSection.transfer.rawValue)], with: .none)
     }
 
-    func notifyTransferCreated(_ transfer: HyperwalletTransfer.Transfer) {
+    func notifyTransferCreated(_ transfer: HyperwalletTransfer) {
         DispatchQueue.global(qos: .background).async {
             NotificationCenter.default.post(name: .transferCreated,
                                             object: self,
@@ -343,7 +343,7 @@ extension CreateTransferController: CreateTransferView {
             .selectTransferMethodType)
     }
 
-    func showScheduleTransfer(_ transfer: HyperwalletTransfer.Transfer) {
+    func showScheduleTransfer(_ transfer: HyperwalletTransfer) {
         if let transferMethod = presenter.selectedTransferMethod {
             coordinator?.navigateToNextPage(initializationData: [InitializationDataField.transfer.rawValue: transfer,
                  InitializationDataField.transferMethod.rawValue: transferMethod])

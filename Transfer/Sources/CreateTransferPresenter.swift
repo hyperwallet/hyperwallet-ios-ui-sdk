@@ -29,7 +29,7 @@ protocol CreateTransferView: class {
     typealias MarkCellHandler = (_ value: HyperwalletTransferMethod) -> Bool
 
     func hideLoading()
-    func notifyTransferCreated(_ transfer: HyperwalletTransfer.Transfer)
+    func notifyTransferCreated(_ transfer: HyperwalletTransfer)
     func showCreateTransfer()
     func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?)
     func showGenericTableView(items: [HyperwalletTransferMethod],
@@ -37,7 +37,7 @@ protocol CreateTransferView: class {
                               selectItemHandler: @escaping SelectItemHandler,
                               markCellHandler: @escaping MarkCellHandler)
     func showLoading()
-    func showScheduleTransfer(_ transfer: HyperwalletTransfer.Transfer)
+    func showScheduleTransfer(_ transfer: HyperwalletTransfer)
     func updateTransferSection()
     func updateFooter(for section: CreateTransferController.FooterSection)
     func areAllFieldsValid() -> Bool

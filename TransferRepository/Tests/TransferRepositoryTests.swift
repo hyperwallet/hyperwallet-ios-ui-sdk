@@ -22,7 +22,7 @@ import HyperwalletSDK
 import XCTest
 
 class TransferRepositoryTests: XCTestCase {
-    private var transfer: HyperwalletTransfer.Transfer!
+    private var transfer: HyperwalletTransfer!
 
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
@@ -41,7 +41,7 @@ class TransferRepositoryTests: XCTestCase {
         TransferRepositoryRequestHelper.setupSucessRequest("CreateTransferResponse", requestUrl)
         let expectation = self.expectation(description: "create a transfer")
 
-        var createdTransfer: HyperwalletTransfer.Transfer?
+        var createdTransfer: HyperwalletTransfer?
         var error: HyperwalletErrorType?
         let transferRepository = RemoteTransferRepository()
 
@@ -71,7 +71,7 @@ class TransferRepositoryTests: XCTestCase {
         TransferRepositoryRequestHelper.setupFailureRequest("CreateTransferBadRequestResponse", requestUrl)
         let expectation = self.expectation(description: "create a transfer")
 
-        var createdTransfer: HyperwalletTransfer.Transfer?
+        var createdTransfer: HyperwalletTransfer?
         var error: HyperwalletErrorType?
         let transferRepository = RemoteTransferRepository()
 
@@ -155,8 +155,8 @@ class TransferRepositoryTests: XCTestCase {
         XCTAssertEqual(TransferRepositoryRequestHelper.getResponseError(error!).code, "EXPIRED_TRANSFER")
     }
 
-    private func getTransfer(from jsonData: Data) -> HyperwalletTransfer.Transfer? {
+    private func getTransfer(from jsonData: Data) -> HyperwalletTransfer? {
         let decoder = JSONDecoder()
-        return try? decoder.decode(HyperwalletTransfer.Transfer.self, from: jsonData)
+        return try? decoder.decode(HyperwalletTransfer.self, from: jsonData)
     }
 }
