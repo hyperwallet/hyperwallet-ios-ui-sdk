@@ -30,15 +30,12 @@ final class ReceiptTransactionCell: UITableViewCell {
 
     lazy var receiptTypeLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = Theme.Label.bodyFontMedium
-        label.textColor = Theme.Label.color
         label.accessibilityIdentifier = "receiptTransactionTypeLabel"
         return label
     }()
 
     lazy var amountLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = Theme.Label.bodyFontMedium
         label.textAlignment = .right
         label.accessibilityIdentifier = "receiptTransactionAmountLabel"
         return label
@@ -46,16 +43,12 @@ final class ReceiptTransactionCell: UITableViewCell {
 
     lazy var createdOnLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = Theme.Label.captionOne
-        label.textColor = Theme.Label.subTitleColor
         label.accessibilityIdentifier = "receiptTransactionCreatedOnLabel"
         return label
     }()
 
     lazy var currencyLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = Theme.Label.captionOne
-        label.textColor = Theme.Label.subTitleColor
         label.textAlignment = .right
         label.accessibilityIdentifier = "receiptTransactionCurrencyLabel"
         return label
@@ -73,6 +66,7 @@ final class ReceiptTransactionCell: UITableViewCell {
 
     private func defaultInit() {
         let titleStackView = UIStackView(frame: .zero)
+        let stackViewLeadingConstraints: NSLayoutConstraint
         setup(titleStackView, with: receiptTypeLabel, and: amountLabel)
 
         let subTitleStackView = UIStackView(frame: .zero)
@@ -89,8 +83,11 @@ final class ReceiptTransactionCell: UITableViewCell {
 
         contentView.addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackViewLeadingConstraints = !UIFont.isLargeSizeCategory ? stackView.leadingAnchor
+            .constraint(equalTo: imageView!.trailingAnchor, constant: 15) : stackView.leadingAnchor
+                .constraint(equalTo: contentView.leadingAnchor, constant: 20)
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: imageView!.trailingAnchor, constant: 15),
+            stackViewLeadingConstraints,
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
             stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 0),
             stackView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 10),
@@ -143,7 +140,6 @@ extension ReceiptTransactionCell {
         let iconFont = HyperwalletIcon.of(entry).rawValue
 
         receiptTypeLabel.text = receipt.type?.rawValue.lowercased().localized()
-
         amountLabel.text = entry == credit
             ? receipt.amount
             : String(format: "-%@", amount)
@@ -151,19 +147,20 @@ extension ReceiptTransactionCell {
         amountLabel.textColor = entry == credit
             ? Theme.Amount.creditColor
             : Theme.Amount.debitColor
-
         createdOnLabel.text = formattedCreatedOn
         currencyLabel.text = receipt.currency
-
         iconColor = entry == credit ? Theme.Icon.creditColor : Theme.Icon.debitColor
         iconBackgroundColor = entry == credit ? Theme.Icon.creditBackgroundColor
             : Theme.Icon.debitBackgroundColor
 
-        imageView?.image = UIImage.fontIcon(iconFont,
-                                            Theme.Icon.frame,
-                                            CGFloat(Theme.Icon.size),
-                                            iconColor)
-        imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
+        if !UIFont.isLargeSizeCategory {
+            let icon = UIImage.fontIcon(iconFont,
+                                        Theme.Icon.frame,
+                                        CGFloat(Theme.Icon.size),
+                                        iconColor)
+            imageView?.image = icon
+            imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -174,5 +171,48 @@ extension ReceiptTransactionCell {
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
         imageView?.backgroundColor = iconBackgroundColor
+    }
+}
+
+extension ReceiptTransactionCell {
+    // MARK: Theme manager's proxy properties
+    @objc dynamic var receiptTypeFont: UIFont! {
+        get { return receiptTypeLabel.font }
+        set { receiptTypeLabel.font = newValue }
+    }
+
+    @objc dynamic var receiptTypeColor: UIColor! {
+        get { return receiptTypeLabel.textColor }
+        set { receiptTypeLabel.textColor = newValue }
+    }
+
+    @objc dynamic var amountFont: UIFont! {
+        get { return amountLabel.font }
+        set { amountLabel.font = newValue }
+    }
+
+    @objc dynamic var amountColor: UIColor! {
+        get { return amountLabel.textColor }
+        set { amountLabel.textColor = newValue }
+    }
+
+    @objc dynamic var createdOnFont: UIFont! {
+        get { return createdOnLabel.font }
+        set { createdOnLabel.font = newValue }
+    }
+
+    @objc dynamic var createdOnColor: UIColor! {
+        get { return createdOnLabel.textColor }
+        set { createdOnLabel.textColor = newValue }
+    }
+
+    @objc dynamic var currencyFont: UIFont! {
+        get { return currencyLabel.font }
+        set { currencyLabel.font = newValue }
+    }
+
+    @objc dynamic var currencyColor: UIColor! {
+        get { return currencyLabel.textColor }
+        set { currencyLabel.textColor = newValue }
     }
 }

@@ -478,6 +478,7 @@ class TransferUserFundsTest: BaseTests {
 
         let pastAmountWithNumberNoDigit = "10000"
         transferFunds.pasteAmountToTransferAmount(amount: pastAmountWithNumberNoDigit)
+        waitForNonExistence(spinner)
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "10,000.00")
     }
 
@@ -802,7 +803,7 @@ class TransferUserFundsTest: BaseTests {
                              filename: "AddNewTransferMethodsMoreThanOneTransferMethod",
                              method: HTTPMethod.get)
         transferFunds.addSelectDestinationLabel.tap()
-
+        waitForNonExistence(spinner)
         XCTAssertTrue(selectDestination.selectDestinationTitle.exists)
         XCTAssertTrue(selectDestination.addTransferMethodButton.exists)
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 0), "Bank Account")

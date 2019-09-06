@@ -89,6 +89,9 @@ public final class ReceiptDetailController: UITableViewController {
             if let tableViewCell = cell as? ReceiptNotesCell,
                 let notesSection = section as? ReceiptDetailSectionNotesData {
                 tableViewCell.textLabel?.text = notesSection.notes
+                tableViewCell.textLabel?.numberOfLines = 0
+                tableViewCell.textLabel?.lineBreakMode = .byWordWrapping
+                tableViewCell.textLabel?.adjustsFontForContentSizeCategory = true
             }
         }
         return cell

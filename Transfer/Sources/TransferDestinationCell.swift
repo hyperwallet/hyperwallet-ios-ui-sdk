@@ -49,6 +49,7 @@ final class TransferDestinationCell: GenericCell<HyperwalletTransferMethod> {
 
     private func setupCell() {
         let stackView = UIStackView(frame: .zero)
+        let stackViewLeadingConstraints: NSLayoutConstraint
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.distribution = .fill
@@ -58,9 +59,11 @@ final class TransferDestinationCell: GenericCell<HyperwalletTransferMethod> {
         stackView.translatesAutoresizingMaskIntoConstraints = false
 
         contentView.addSubview(stackView)
-
+        stackViewLeadingConstraints = !UIFont.isLargeSizeCategory ? stackView.leadingAnchor
+            .constraint(equalTo: imageView!.trailingAnchor, constant: 15) : stackView.leadingAnchor
+                .constraint(equalTo: contentView.leadingAnchor, constant: 20)
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: imageView!.trailingAnchor, constant: 15),
+            stackViewLeadingConstraints,
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
             stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 0),
             stackView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 10),
@@ -112,32 +115,41 @@ final class TransferDestinationCell: GenericCell<HyperwalletTransferMethod> {
 extension TransferDestinationCell {
     func configure(transferMethod: HyperwalletTransferMethod) {
         titleLabel.text = transferMethod.title
+        titleLabel.adjustsFontForContentSizeCategory = true
         subtitleLabel.attributedText = formatDetails(
             subtitle: transferMethod.transferMethodCountry?.localized() ?? "",
             additionalInfo: transferMethod.value)
 
         subtitleLabel.numberOfLines = 0
+        subtitleLabel.adjustsFontForContentSizeCategory = true
         subtitleLabel.lineBreakMode = .byWordWrapping
-        let icon = UIImage.fontIcon(HyperwalletIcon.of(transferMethod.type ?? "").rawValue,
-                                    Theme.Icon.frame,
-                                    CGFloat(Theme.Icon.size),
-                                    Theme.Icon.primaryColor)
-        imageView?.image = icon
-        imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
+        if !UIFont.isLargeSizeCategory {
+            let icon = UIImage.fontIcon(HyperwalletIcon.of(transferMethod.type ?? "").rawValue,
+                                        Theme.Icon.frame,
+                                        CGFloat(Theme.Icon.size),
+                                        Theme.Icon.primaryColor)
+            imageView?.image = icon
+            imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
+        }
     }
 
     func configure(_ title: String, _ subtitle: String, _ hyperwalletIcon: HyperwalletIconContent) {
         titleLabel.text = title
-
+        titleLabel.adjustsFontForContentSizeCategory = true
+        titleLabel.numberOfLines = 0
+        titleLabel.lineBreakMode = .byWordWrapping
         subtitleLabel.attributedText = formatDetails(subtitle: subtitle)
         subtitleLabel.numberOfLines = 0
+        subtitleLabel.adjustsFontForContentSizeCategory = true
         subtitleLabel.lineBreakMode = .byWordWrapping
-        let icon = UIImage.fontIcon(hyperwalletIcon.rawValue,
-                                    Theme.Icon.frame,
-                                    CGFloat(Theme.Icon.size),
-                                    Theme.Icon.primaryColor)
-        imageView?.image = icon
-        imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
+        if !UIFont.isLargeSizeCategory {
+            let icon = UIImage.fontIcon(hyperwalletIcon.rawValue,
+                                        Theme.Icon.frame,
+                                        CGFloat(Theme.Icon.size),
+                                        Theme.Icon.primaryColor)
+            imageView?.image = icon
+            imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
+        }
     }
 
     private func formatDetails(subtitle: String, additionalInfo: String? = nil) -> NSAttributedString {

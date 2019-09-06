@@ -22,14 +22,6 @@ import Common
 import HyperwalletSDK
 import UIKit
 
-/// Represents the country and currency data to be displayed on the CountryCurrencyCell
-struct SelectTransferMethodTypeConfiguration {
-    let transferMethodTypeCode: String!
-    let transferMethodTypeName: String!
-    let feesProcessingTime: NSAttributedString
-    let transferMethodIconFont: String
-}
-
 final class SelectTransferMethodTypeCell: UITableViewCell {
     static let reuseIdentifier = "selectTransferMethodTypeCellIdentifier"
 
@@ -75,20 +67,28 @@ final class SelectTransferMethodTypeCell: UITableViewCell {
 }
 
 extension SelectTransferMethodTypeCell {
-    func configure(configuration: SelectTransferMethodTypeConfiguration?) {
+    func configure(configuration: HyperwalletTransferMethodType?) {
         if let configuration = configuration {
-            accessibilityIdentifier = configuration.transferMethodTypeName
+            accessibilityIdentifier = configuration.name
 
-            textLabel?.text = configuration.transferMethodTypeName
+            textLabel?.text = configuration.name
+            textLabel?.numberOfLines = 0
+            textLabel?.lineBreakMode = .byWordWrapping
+            textLabel?.adjustsFontForContentSizeCategory = true
+
+            detailTextLabel?.attributedText = configuration
+                .formatFeesProcessingTime(font: subTitleLabelFont, color: subTitleLabelColor)
             detailTextLabel?.numberOfLines = 0
             detailTextLabel?.lineBreakMode = .byWordWrapping
-            detailTextLabel?.attributedText = configuration.feesProcessingTime
-            let image = UIImage.fontIcon(configuration.transferMethodIconFont,
-                                         Theme.Icon.frame,
-                                         CGFloat(Theme.Icon.size),
-                                         Theme.Icon.primaryColor)
-            imageView?.image = image
-            imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
+            detailTextLabel?.adjustsFontForContentSizeCategory = true
+            if !UIFont.isLargeSizeCategory {
+                let icon = UIImage.fontIcon(HyperwalletIcon.of(configuration.code!).rawValue,
+                                            Theme.Icon.frame,
+                                            CGFloat(Theme.Icon.size),
+                                            Theme.Icon.primaryColor)
+                imageView?.image = icon
+                imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
+            }
         }
     }
 }

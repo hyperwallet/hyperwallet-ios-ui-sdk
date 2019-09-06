@@ -26,6 +26,7 @@ final class TransferButtonCell: UITableViewCell {
     private(set) lazy var buttonLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.adjustsFontForContentSizeCategory = true
         label.accessibilityIdentifier = "createTransferNextLabel"
         label.textAlignment = .center
         return label

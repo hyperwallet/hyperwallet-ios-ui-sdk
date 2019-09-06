@@ -70,19 +70,6 @@ final class SelectTransferMethodTypePresenter {
         self.view = view
     }
 
-    /// Return the `SelectTransferMethodTypeConfiguration` based on the index
-    func getCellConfiguration(indexPath: IndexPath) -> SelectTransferMethodTypeConfiguration {
-        let transferMethodType = sectionData[indexPath.row]
-        let feesProcessingTime = transferMethodType.formatFeesProcessingTime()
-        let transferMethodIcon = HyperwalletIcon.of(transferMethodType.code!).rawValue
-
-        return SelectTransferMethodTypeConfiguration(
-            transferMethodTypeCode: transferMethodType.code,
-            transferMethodTypeName: transferMethodType.name,
-            feesProcessingTime: feesProcessingTime,
-            transferMethodIconFont: transferMethodIcon)
-    }
-
     /// Return the countryCurrency item composed by the tuple (title and value)
     func getCountryCurrencyConfiguration(indexPath: IndexPath) -> GenericCellConfiguration {
         let title = countryCurrencySectionData[indexPath.row]

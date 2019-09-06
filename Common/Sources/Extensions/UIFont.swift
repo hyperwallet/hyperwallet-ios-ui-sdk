@@ -32,8 +32,8 @@ public extension UIFont {
         }
         guard let fontData = NSData(contentsOfFile: resourceBundleURL),
             let dataProvider = CGDataProvider(data: fontData) else {
-            print("Invalid font file")
-            return
+                print("Invalid font file")
+                return
         }
         guard let fontRef = CGFont(dataProvider) else {
             print("Init font error")
@@ -44,5 +44,20 @@ public extension UIFont {
             print("Register failed")
             return
         }
+    }
+
+    /// Indicates if current preferred content size category belongs to large or not
+    static var isLargeSizeCategory: Bool {
+        return self.largeSizes.contains(UIApplication.shared.preferredContentSizeCategory)
+    }
+
+    private static var largeSizes: [UIContentSizeCategory] {
+        return [
+            .accessibilityExtraExtraExtraLarge,
+            .accessibilityExtraExtraLarge,
+            .accessibilityExtraLarge,
+            .accessibilityLarge,
+            .accessibilityMedium
+        ]
     }
 }
