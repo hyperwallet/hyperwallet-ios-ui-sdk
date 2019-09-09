@@ -16,7 +16,7 @@ class ScheduleTransferPresenterTests: XCTestCase {
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
         transfer = getTransfer(from: HyperwalletTestHelper.getDataFromJson("CreateTransferResponse"))!
-        presenter = ScheduleTransferPresenter(view: mockView, transferMethod: transferMethod, transfer: transfer)
+        presenter = ScheduleTransferPresenter(view: mockView, transferMethod: transferMethod, transfer: transfer, didFXQuoteChange: false)
     }
 
     override func tearDown() {
@@ -75,7 +75,7 @@ class ScheduleTransferPresenterTests: XCTestCase {
     public func testScheduleSectionData_withoutForeignExchangeAndNotesSection() {
         transfer = getTransfer(from: HyperwalletTestHelper
             .getDataFromJson("CreateTransferWithoutForeignExchangeResponse"))!
-        presenter = ScheduleTransferPresenter(view: mockView, transferMethod: transferMethod, transfer: transfer)
+        presenter = ScheduleTransferPresenter(view: mockView, transferMethod: transferMethod, transfer: transfer, didFXQuoteChange: false)
 
         XCTAssertEqual(presenter.sectionData.count, 3)
         assertDestinationSectionResult(destinationSection: presenter.sectionData.first!)
@@ -113,6 +113,8 @@ class ScheduleTransferPresenterTests: XCTestCase {
                         "The header of summary section should not be nil")
         XCTAssertNotNil(summarySection.cellIdentifier,
                         "The cellIdentifier of summary section should not be nil")
+        XCTAssertNotNil(summarySection.scheduleTransferSectionHeader,
+                        "The header of summary section should not be nil")
     }
 
     private func assertSummarySectionWithoutFeeResult(summarySection: ScheduleTransferSectionData) {
@@ -148,6 +150,7 @@ class MockScheduleTransferViewTests: ScheduleTransferView {
     var isShowErrorPerformed = false
     var isNotificationSent = false
     var expectation: XCTestExpectation?
+    var isUpdateFooterPerformed = false
 
     func resetStates() {
         isShowProcessingPerformed = false
@@ -180,6 +183,11 @@ class MockScheduleTransferViewTests: ScheduleTransferView {
 
     func notifyTransferScheduled(_ hyperwalletStatusTransition: HyperwalletStatusTransition) {
         isNotificationSent = true
+        expectation?.fulfill()
+    }
+
+    func updateFooter(for section: ScheduleTransferController.FooterSection) {
+        isUpdateFooterPerformed = true
         expectation?.fulfill()
     }
 }

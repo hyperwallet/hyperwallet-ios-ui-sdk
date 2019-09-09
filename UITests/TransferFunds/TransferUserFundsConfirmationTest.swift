@@ -289,6 +289,44 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertEqual(app.cells.element(boundBy: 8).staticTexts["scheduleTransferSummaryTextValue"].label, "5,855.17")
     }
 
+    func testTransferFundsConfirmation_FxChanged() {
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+                             filename: "ListMoreThanOneTransferMethod",
+                             method: HTTPMethod.get)
+
+        mockServer.setupStub(url: "/rest/v3/transfers",
+                             filename: "AvailableFundMultiCurrencies",
+                             method: HTTPMethod.post)
+
+        transferFundMenu.tap()
+        waitForNonExistence(spinner)
+
+        if #available(iOS 11.4, *) {
+            XCTAssertTrue(transferFunds.transferFundTitle.exists)
+        } else {
+            XCTAssertTrue(app.navigationBars["Transfer Funds"].exists)
+        }
+
+        // Add Destination Section
+        XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
+        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
+
+        // Turn on the Transfer All Funds Switch
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "")
+        transferFunds.transferAllFundsSwitch.tap()
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "5,855.17")
+
+        mockServer.setupStub(url: "/rest/v3/transfers",
+                             filename: "AvailableFundMultiCurrenciesFxChange",
+                             method: HTTPMethod.post)
+
+        transferFunds.nextLabel.tap()
+
+        waitForExistence(transferFundsConfirmation.foreignExchangeSectionLabel)
+        // Assert the message showing the final amount to be transferred has changed
+        XCTAssertTrue(app.tables["scheduleTransferTableView"].staticTexts["Due to changes in the FX rate, you will now receive: 5,855.66 USD"].exists)
+    }
+
     /*
      // After the bug fix the test should work
      func testTransferFundsConfirmation_verifySummaryWithZeroFee() {

@@ -41,6 +41,7 @@
 		09E7165022A697C400FA9B96 /* ReceiptsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7164F22A697C400FA9B96 /* ReceiptsList.swift */; };
 		09E7165622A6983400FA9B96 /* ListReceiptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7165522A6983400FA9B96 /* ListReceiptTests.swift */; };
 		2BF9E5F822EF8BF200BB7DA5 /* TransferRepositoryFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF9E5F722EF8BF200BB7DA5 /* TransferRepositoryFactoryTests.swift */; };
+		2E6DBB8C2326F2C200863672 /* AvailableFundMultiCurrenciesFxChange.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E6DBB8A2326F0F800863672 /* AvailableFundMultiCurrenciesFxChange.json */; };
 		2E8AFE5823062316002B6D24 /* CreateTransferController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7C0222E86F580022E573 /* CreateTransferController.swift */; };
 		2E8AFE5C2307668F002B6D24 /* HyperwalletCoordinatorTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8AFE5B2307668F002B6D24 /* HyperwalletCoordinatorTypes.swift */; };
 		412F723722B45DB100837F8F /* TransactionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F723222B458C700837F8F /* TransactionDetails.swift */; };
@@ -664,6 +665,7 @@
 		09E7164F22A697C400FA9B96 /* ReceiptsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptsList.swift; sourceTree = "<group>"; };
 		09E7165522A6983400FA9B96 /* ListReceiptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListReceiptTests.swift; sourceTree = "<group>"; };
 		2BF9E5F722EF8BF200BB7DA5 /* TransferRepositoryFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferRepositoryFactoryTests.swift; sourceTree = "<group>"; };
+		2E6DBB8A2326F0F800863672 /* AvailableFundMultiCurrenciesFxChange.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AvailableFundMultiCurrenciesFxChange.json; sourceTree = "<group>"; };
 		2E8AFE5B2307668F002B6D24 /* HyperwalletCoordinatorTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletCoordinatorTypes.swift; sourceTree = "<group>"; };
 		412F723222B458C700837F8F /* TransactionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetails.swift; sourceTree = "<group>"; };
 		4157135C22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardReceiptsForOneMonth.json; sourceTree = "<group>"; };
@@ -1289,6 +1291,7 @@
 				41D8362122FB480A003544AB /* TransferStatusQuoted.json */,
 				41C3CA1B231084DA008A904C /* AddNewTransferMethodsMoreThanOneTransferMethod.json */,
 				41C3CA1D23108677008A904C /* AddNewTransferMethodOneTransferMethod.json */,
+				2E6DBB8A2326F0F800863672 /* AvailableFundMultiCurrenciesFxChange.json */,
 			);
 			path = TransferFunds;
 			sourceTree = "<group>";
@@ -2780,6 +2783,7 @@
 				41D8363422FB4814003544AB /* AvailableFundJPY.json in Resources */,
 				DBA9FA5E22791B2900C1301A /* UserIndividualResponse.json in Resources */,
 				641324E62295764500512816 /* AuthenticationTokenResponse.json in Resources */,
+				2E6DBB8C2326F2C200863672 /* AvailableFundMultiCurrenciesFxChange.json in Resources */,
 				9807B76C226442C60028A280 /* TransferMethodConfigurationBankCardResponse.json in Resources */,
 				98F63E6E2284AD370090101D /* PayPalAccountDuplicateResponse.json in Resources */,
 				98F3D757230C5C1000A8195F /* AvailableFundCAD.json in Resources */,
