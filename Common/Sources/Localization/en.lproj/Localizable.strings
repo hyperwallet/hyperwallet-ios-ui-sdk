@@ -204,7 +204,7 @@
 "transfer_fx_sell_confirmation" = "You sell:";
 "transfer_fx_buy_confirmation" = "You buy:";
 "transfer_fx_rate_confirmation" = "Exchange Rate:";
-"available_balance_footer" = "Available for transfer: %1$@";
+"available_balance_footer" = "Available for transfer: %1$@ %2$@";
 "transfer_description" = "Description";
 "transfer_next_button" = "Next";
 "transfer_add_account_title" = "Add Account";
