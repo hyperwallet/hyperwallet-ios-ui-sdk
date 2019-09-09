@@ -37,7 +37,7 @@ public class ListReceiptCoordinator: NSObject, HyperwalletCoordinator {
         if parentController?.navigationController != nil {
             parentController?.show(controller, sender: parentController)
         } else {
-            let navigationController = UINavigationController(rootViewController: parentController!)
+            let navigationController = UINavigationController(rootViewController: controller)
             navigationController.pushViewController(controller, animated: true)
         }
     }
