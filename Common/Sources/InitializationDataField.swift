@@ -30,5 +30,5 @@ public enum InitializationDataField: String {
     case sourceToken
     case transfer
     case transferMethod
-    case didFXQuoteChange
+    case didFxQuoteChange
 }
