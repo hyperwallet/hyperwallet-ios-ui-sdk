@@ -24,9 +24,6 @@ import UIKit
 
 /// Schedule a transfer that was previously created
 public final class ScheduleTransferController: UITableViewController, UITextFieldDelegate {
-    enum FooterSection: Int, CaseIterable {
-        case destination, foreignExchange, summary, notes, button
-    }
     private var spinnerView: SpinnerView?
     private var processingView: ProcessingView?
     private var presenter: ScheduleTransferPresenter!
@@ -154,7 +151,7 @@ extension ScheduleTransferController {
             if let tableViewCell = cell as? TransferSummaryCell,
                 let summaryData = section as? ScheduleTransferSummaryData {
                 tableViewCell.configure(summaryData.rows[indexPath.row].title, summaryData.rows[indexPath.row].value)
-                updateFooter(for: .summary)
+                updateFooter()
             }
 
         case .notes:
@@ -177,16 +174,12 @@ extension ScheduleTransferController {
         presenter.scheduleTransfer()
     }
 
-    func updateFooter(for section: FooterSection) {
-        UIView.setAnimationsEnabled(false)
-        tableView.beginUpdates()
-        if let footerView = tableView.footerView(forSection: section.rawValue) as? TransferTableViewFooterView {
-            footerView.footerLabel.attributedText = getAttributedFooterText(for: section.rawValue)
-        } else {
-            tableView.reloadSections(IndexSet(integer: section.rawValue), with: .none)
+    func updateFooter() {
+        // Summary - 3rd section
+        let section = 3
+        if let footerView = tableView.footerView(forSection: section) as? TransferTableViewFooterView {
+            footerView.footerLabel.attributedText = getAttributedFooterText(for: section)
         }
-        tableView.endUpdates()
-        UIView.setAnimationsEnabled(true)
     }
 }
 

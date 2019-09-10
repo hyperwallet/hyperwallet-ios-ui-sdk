@@ -28,7 +28,6 @@ protocol ScheduleTransferView: class {
     func showConfirmation(handler: @escaping (() -> Void))
     func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?)
     func notifyTransferScheduled(_ hyperwalletStatusTransition: HyperwalletStatusTransition)
-    func updateFooter(for section: ScheduleTransferController.FooterSection)
 }
 
 final class ScheduleTransferPresenter {
@@ -39,7 +38,11 @@ final class ScheduleTransferPresenter {
     private var didFxQuoteChange: Bool
 
     /// Initialize ScheduleTransferPresenter
-    init(view: ScheduleTransferView, transferMethod: HyperwalletTransferMethod, transfer: HyperwalletTransfer, didFxQuoteChange: Bool) {
+    init(
+        view: ScheduleTransferView,
+        transferMethod: HyperwalletTransferMethod,
+        transfer: HyperwalletTransfer,
+        didFxQuoteChange: Bool) {
         self.view = view
         self.transferMethod = transferMethod
         self.transfer = transfer
