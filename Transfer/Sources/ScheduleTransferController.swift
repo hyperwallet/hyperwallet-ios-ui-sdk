@@ -151,7 +151,7 @@ extension ScheduleTransferController {
             if let tableViewCell = cell as? TransferSummaryCell,
                 let summaryData = section as? ScheduleTransferSummaryData {
                 tableViewCell.configure(summaryData.rows[indexPath.row].title, summaryData.rows[indexPath.row].value)
-                updateFooter()
+                addFooter()
             }
 
         case .notes:
@@ -174,7 +174,7 @@ extension ScheduleTransferController {
         presenter.scheduleTransfer()
     }
 
-    func updateFooter() {
+    func addFooter() {
         // Summary - 3rd section
         let section = 3
         if let footerView = tableView.footerView(forSection: section) as? TransferTableViewFooterView {
