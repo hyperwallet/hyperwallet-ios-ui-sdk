@@ -24,7 +24,7 @@ import UIKit
 
 /// Lists all transfer method types available based on the country, currency and profile type to create a new transfer
 /// method (bank account, bank card, PayPal account, prepaid card, paper check).
-public final class SelectTransferMethodTypeController: UITableViewController {
+final class SelectTransferMethodTypeController: UITableViewController {
     // MARK: - Outlets
     private var countryCurrencyTableView: UITableView!
 

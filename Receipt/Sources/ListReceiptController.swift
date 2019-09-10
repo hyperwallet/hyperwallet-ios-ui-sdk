@@ -25,7 +25,7 @@ import UIKit
 /// Lists the user's transaction history
 ///
 /// The user can click a receipt in the list for more information
-public final class ListReceiptController: UITableViewController {
+final class ListReceiptController: UITableViewController {
     private var spinnerView: SpinnerView?
     private var presenter: ListReceiptPresenter!
     private let sectionTitleDateFormat = "MMMM yyyy"
