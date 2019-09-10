@@ -23,18 +23,20 @@ import HyperwalletSDK
 public extension HyperwalletTransferMethodType {
     /// Formats the fee processing time
     ///
+    /// - Parameters:
+    /// - font: The font type applied to attributed text
+    /// - color: The color applied to attributed text
     /// - Returns: an NSAttributedString
-    func formatFeesProcessingTime() -> NSAttributedString {
+    func formatFeesProcessingTime(font: UIFont, color: UIColor) -> NSAttributedString {
         let attributedText = NSMutableAttributedString()
-        let color = Theme.Label.subTitleColor
         // Fees
         if let fees = self.fees?.nodes {
             let feeLabel = "add_transfer_method_fee_label".localized()
 
-            attributedText.append(value: feeLabel, font: Theme.Label.captionOne, color: color)
+            attributedText.append(value: feeLabel, font: font, color: color)
             attributedText.append(value: HyperwalletFee.format(fees: fees),
-                                  font: Theme.Label.captionOneMedium,
-                                  color: Theme.Label.subTitleColor)
+                                  font: font,
+                                  color: color)
         }
 
         // Processing Time
@@ -48,8 +50,8 @@ public extension HyperwalletTransferMethodType {
                                          processingTimeLabel,
                                          "add_transfer_method_processing_time_label".localized())
 
-            attributedText.append(value: processingTimeLabel, font: Theme.Label.captionOne, color: color)
-            attributedText.append(value: processingTimeValue, font: Theme.Label.captionOneMedium, color: color)
+            attributedText.append(value: processingTimeLabel, font: font, color: color)
+            attributedText.append(value: processingTimeValue, font: font, color: color)
         }
 
         return attributedText

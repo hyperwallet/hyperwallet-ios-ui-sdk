@@ -67,6 +67,8 @@ class TextWidget: AbstractWidget {
         textField.isUserInteractionEnabled = field.isEditable ?? true
         textField.clearButtonMode = field.isEditable ?? true ? .always : .never
         textField.textColor = field.isEditable ?? true ? Theme.Text.color : Theme.Text.disabledColor
+        textField.font = Theme.Label.bodyFont
+        textField.adjustsFontForContentSizeCategory = true
         addArrangedSubview(textField)
     }
 }

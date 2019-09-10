@@ -63,6 +63,8 @@ public final class SelectTransferMethodTypeController: UITableViewController {
         tableView.register(SelectTransferMethodTypeCell.self,
                            forCellReuseIdentifier: SelectTransferMethodTypeCell.reuseIdentifier)
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 0.5))
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = Theme.Cell.smallHeight
         footerView.backgroundColor = tableView.separatorColor
         tableView.tableFooterView = footerView
     }
@@ -73,6 +75,8 @@ public final class SelectTransferMethodTypeController: UITableViewController {
         countryCurrencyTableView.register(CountryCurrencyCell.self,
                                           forCellReuseIdentifier: CountryCurrencyCell.reuseIdentifier)
         countryCurrencyTableView.backgroundColor = Theme.ViewController.backgroundColor
+        countryCurrencyTableView.rowHeight = UITableView.automaticDimension
+        countryCurrencyTableView.estimatedRowHeight = Theme.Cell.smallHeight
         countryCurrencyTableView.dataSource = countryCurrencyView
         countryCurrencyTableView.delegate = countryCurrencyView
         countryCurrencyTableView.isScrollEnabled = false
@@ -92,7 +96,7 @@ extension SelectTransferMethodTypeController {
         let cell = tableView.dequeueReusableCell(withIdentifier: SelectTransferMethodTypeCell.reuseIdentifier,
                                                  for: indexPath)
         if let transferMethodCell = cell as? SelectTransferMethodTypeCell {
-            transferMethodCell.configure(configuration: presenter.getCellConfiguration(indexPath: indexPath))
+            transferMethodCell.configure(configuration: presenter.sectionData[indexPath.row])
         }
 
         return cell
@@ -105,16 +109,14 @@ extension SelectTransferMethodTypeController {
     }
 
     override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return Theme.Cell.smallHeight * CGFloat(presenter.countryCurrencySectionData.count) + Theme.Cell.headerHeight
+        let blankHeaderHeight = countryCurrencyTableView.estimatedRowHeight / 2.5
+        return countryCurrencyTableView
+            .estimatedRowHeight * CGFloat(presenter.countryCurrencySectionData.count) + blankHeaderHeight
     }
 
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.navigateToAddTransferMethod(indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-
-    override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return Theme.Cell.largeHeight
     }
 }
 
@@ -207,10 +209,6 @@ extension CountryCurrencyTableView: UITableViewDataSource {
 }
 
 extension CountryCurrencyTableView: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return Theme.Cell.smallHeight
-    }
-
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.performShowSelectCountryOrCurrencyView(index: indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)

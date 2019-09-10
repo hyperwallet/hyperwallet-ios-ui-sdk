@@ -27,6 +27,7 @@ public extension ThemeManager {
         applyToReceiptDetailCell()
         applyToReceiptFeeCell()
         applyToReceiptNotesCell()
+        applyToReceiptTransactionCell()
     }
 
     private static func applyToReceiptDetailCell() {
@@ -49,5 +50,16 @@ public extension ThemeManager {
         let proxy = ReceiptNotesCell.appearance()
         proxy.titleLabelFont = Theme.Label.footnoteFont
         proxy.titleLabelColor = Theme.Label.subTitleColor
+    }
+
+    private static func applyToReceiptTransactionCell() {
+        let proxy = ReceiptTransactionCell.appearance()
+        proxy.receiptTypeFont = Theme.Label.bodyFont
+        proxy.receiptTypeColor = Theme.Label.color
+        proxy.amountFont = Theme.Label.bodyFont
+        proxy.createdOnFont = Theme.Label.captionOne
+        proxy.createdOnColor = Theme.Label.subTitleColor
+        proxy.currencyFont = Theme.Label.captionOne
+        proxy.currencyColor = Theme.Label.subTitleColor
     }
 }

@@ -25,7 +25,6 @@ final class ReceiptDetailCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
-        self.heightAnchor.constraint(equalToConstant: Theme.Cell.smallHeight).isActive = true
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -34,8 +33,14 @@ final class ReceiptDetailCell: UITableViewCell {
 
     func configure(_ row: ReceiptDetailRow) {
         textLabel?.text = row.title
+        textLabel?.adjustsFontForContentSizeCategory = true
+        textLabel?.numberOfLines = 0
+        textLabel?.lineBreakMode = .byWordWrapping
         textLabel?.accessibilityIdentifier = "\(row.field)Label"
         detailTextLabel?.text = row.value
+        detailTextLabel?.numberOfLines = 0
+        detailTextLabel?.lineBreakMode = .byWordWrapping
+        detailTextLabel?.adjustsFontForContentSizeCategory = true
         detailTextLabel?.accessibilityIdentifier = "\(row.field)Value"
     }
 
