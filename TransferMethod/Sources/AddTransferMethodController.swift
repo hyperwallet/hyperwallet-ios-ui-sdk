@@ -25,7 +25,7 @@ import UIKit
 ///
 /// The form fields are based on the country, currency, user's profile type and transfer method type should be passed
 /// to this Controller to create new Transfer Method for those values.
-public final class AddTransferMethodController: UITableViewController {
+final class AddTransferMethodController: UITableViewController {
     typealias ButtonHandler = () -> Void
     private var defaultHeaderHeight = CGFloat(38.0)
 
@@ -52,12 +52,11 @@ public final class AddTransferMethodController: UITableViewController {
     private lazy var createAccountButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.heightAnchor.constraint(
-            greaterThanOrEqualToConstant: Theme.Cell.smallHeight).isActive = true
-
         button.accessibilityLabel = "create_account_label".localized()
         button.accessibilityIdentifier = "createAccountButton"
         button.setTitle("create_account_label".localized(), for: .normal)
+        button.titleLabel?.adjustsFontForContentSizeCategory = true
+        button.titleLabel?.font = Theme.Label.bodyFont
         button.setTitleColor(Theme.Button.color, for: UIControl.State.normal)
         button.addTarget(self, action: #selector(onTapped), for: .touchUpInside)
         return button
@@ -71,7 +70,7 @@ public final class AddTransferMethodController: UITableViewController {
     private lazy var infoView: UIStackView = {
         let label = UILabel()
         label.numberOfLines = 0
-
+        label.adjustsFontForContentSizeCategory = true
         let stackView = UIStackView(arrangedSubviews: [label])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.isLayoutMarginsRelativeArrangement = true
@@ -412,7 +411,9 @@ extension AddTransferMethodController: AddTransferMethodView {
         }
 
         if let infoLabel = infoView.arrangedSubviews[0] as? UILabel {
-            infoLabel.attributedText = transferMethodType.formatFeesProcessingTime()
+            infoLabel.attributedText = transferMethodType
+                .formatFeesProcessingTime(font: Theme.Label.captionOne, color: Theme.Label.subTitleColor)
+            infoLabel.font = Theme.Label.captionOne
             let infoSection = AddTransferMethodSectionData(
                 fieldGroup: "INFORMATION",
                 cells: [infoView])

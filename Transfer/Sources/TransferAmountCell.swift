@@ -100,9 +100,14 @@ final class TransferAmountCell: UITableViewCell {
 
     func configure(amount: String?, currency: String?, isEnabled: Bool, _ handler: @escaping EnteredAmountHandler) {
         titleLabel.text = "transfer_amount".localized()
+        titleLabel.numberOfLines = 0
+        titleLabel.adjustsFontForContentSizeCategory = true
         amountTextField.text = amount
+        amountTextField.adjustsFontForContentSizeCategory = true
         amountTextField.isEnabled = isEnabled
         currencyLabel.text = currency ?? String(repeating: " ", count: 3)
+        currencyLabel.numberOfLines = 0
+        currencyLabel.adjustsFontForContentSizeCategory = true
         enteredAmountHandler = handler
     }
 }
@@ -188,12 +193,14 @@ extension TransferAmountCell {
     // MARK: Theme manager's proxy properties
     @objc dynamic var titleLabelFont: UIFont! {
         get { return titleLabel.font }
-        set { titleLabel.font = newValue }
+        set { titleLabel.font = newValue
+            amountTextField.font = newValue }
     }
 
     @objc dynamic var titleLabelColor: UIColor! {
         get { return titleLabel.textColor }
-        set { titleLabel.textColor = newValue }
+        set { titleLabel.textColor = newValue
+            amountTextField.textColor = newValue }
     }
 
     @objc dynamic var currencyLabelFont: UIFont! {

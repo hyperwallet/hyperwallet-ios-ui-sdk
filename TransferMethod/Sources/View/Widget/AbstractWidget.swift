@@ -91,6 +91,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
         label.accessibilityIdentifier = field.name ?? ""
         label.text = field.label ?? ""
         label.isUserInteractionEnabled = field.isEditable ?? true
+        label.adjustsFontForContentSizeCategory = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         label.addGestureRecognizer(tap)
         addArrangedSubview(label)

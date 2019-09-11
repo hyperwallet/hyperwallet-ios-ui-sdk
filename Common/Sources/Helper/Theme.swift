@@ -44,12 +44,8 @@ public struct Theme {
         public static var titleFont = UIFont.preferredFont(forTextStyle: .headline)
         /// The body font style
         public static var bodyFont = UIFont.preferredFont(forTextStyle: .body)
-        /// The body font style with medium weight
-        public static var bodyFontMedium = UIFont.systemFont(ofSize: bodyFont.pointSize, weight: .medium)
         /// The caption one font style
         public static var captionOne = UIFont.preferredFont(forTextStyle: .caption1)
-        /// The caption one font style with medium weight
-        public static var captionOneMedium = UIFont.systemFont(ofSize: captionOne.pointSize, weight: .medium)
         /// The footnote font style
         public static var footnoteFont = UIFont.preferredFont(forTextStyle: .footnote)
     }

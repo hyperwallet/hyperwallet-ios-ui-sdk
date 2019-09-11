@@ -26,7 +26,7 @@ import UIKit
 ///
 /// Each transfer will be represented by an auto-generated, non-editable token that can be used
 /// to retrieve the transfer resource.
-public final class CreateTransferController: UITableViewController {
+final class CreateTransferController: UITableViewController {
     enum FooterSection: Int, CaseIterable {
         case destination, transfer, notes, button
     }
@@ -107,6 +107,8 @@ extension CreateTransferController {
             withIdentifier: TransferTableViewFooterView.reuseIdentifier) as? TransferTableViewFooterView else {
                 return nil
         }
+        view.footerLabel.adjustsFontForContentSizeCategory = true
+        view.footerLabel.lineBreakMode = .byWordWrapping
         view.footerLabel.attributedText = attributedText
         return view
     }

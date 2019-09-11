@@ -25,7 +25,7 @@ import UIKit
 /// Lists the user's transfer methods (bank account, bank card, PayPal account, prepaid card, paper check).
 ///
 /// The user can deactivate and add a new transfer method.
-public final class ListTransferMethodController: UITableViewController {
+final class ListTransferMethodController: UITableViewController {
     private var spinnerView: SpinnerView?
     private var processingView: ProcessingView?
     private var presenter: ListTransferMethodPresenter!
@@ -108,10 +108,6 @@ public final class ListTransferMethodController: UITableViewController {
         return CGFloat.leastNormalMagnitude
     }
 
-    override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return Theme.Cell.largeHeight
-    }
-
     private func addTransferMethod() {
         coordinator?.navigateToNextPage(initializationData: nil)
     }
@@ -121,6 +117,8 @@ public final class ListTransferMethodController: UITableViewController {
         tableView.tableFooterView = UIView()
         tableView.register(ListTransferMethodCell.self,
                            forCellReuseIdentifier: ListTransferMethodCell.reuseIdentifier)
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = Theme.Cell.smallHeight
     }
 
     private func showConfirmationAlert(title: String?, message: String, transferMethodIndex: Int) {

@@ -25,10 +25,9 @@ import UIKit
 /// Lists the user's transaction history
 ///
 /// The user can click a receipt in the list for more information
-public final class ListReceiptController: UITableViewController {
+final class ListReceiptController: UITableViewController {
     private var spinnerView: SpinnerView?
     private var presenter: ListReceiptPresenter!
-    private var defaultHeaderHeight = CGFloat(38.0)
     private let sectionTitleDateFormat = "MMMM yyyy"
     private var loadMoreReceipts = false
 
@@ -91,14 +90,6 @@ public final class ListReceiptController: UITableViewController {
         }
     }
 
-    override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return defaultHeaderHeight
-    }
-
-    override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return Theme.Cell.mediumHeight
-    }
-
     override public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if loadMoreReceipts {
             presenter.listReceipts()
@@ -111,6 +102,9 @@ public final class ListReceiptController: UITableViewController {
         tableView = UITableView(frame: .zero, style: .grouped)
         tableView.sectionFooterHeight = CGFloat.leastNormalMagnitude
         tableView.tableFooterView = UIView()
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = Theme.Cell.smallHeight
+        tableView.sectionHeaderHeight = UITableView.automaticDimension
         tableView.register(ReceiptTransactionCell.self,
                            forCellReuseIdentifier: ReceiptTransactionCell.reuseIdentifier)
     }

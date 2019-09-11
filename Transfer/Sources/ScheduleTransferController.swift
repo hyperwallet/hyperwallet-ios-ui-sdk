@@ -23,7 +23,7 @@ import HyperwalletSDK
 import UIKit
 
 /// Schedule a transfer that was previously created
-public final class ScheduleTransferController: UITableViewController, UITextFieldDelegate {
+final class ScheduleTransferController: UITableViewController, UITextFieldDelegate {
     private var spinnerView: SpinnerView?
     private var processingView: ProcessingView?
     private var presenter: ScheduleTransferPresenter!

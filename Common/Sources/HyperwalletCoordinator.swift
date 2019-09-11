@@ -18,10 +18,18 @@
 
 import UIKit
 
+/// Protocol to start/navigate Hyperwallet UI SDK flow
 public protocol HyperwalletCoordinator: NSObject {
+    /// Apply Theme
     func applyTheme()
+    /// Get the current Controller class for the Coordinator
+    func getController() -> UITableViewController
+    /// Navigate to the flow
     func navigate()
+    /// Navigate to next page from the current flow
     func navigateToNextPage(initializationData: [InitializationDataField: Any]?)
+    /// Navigate back from the next page to either current flow or parent flow.
     func navigateBackFromNextPage(with response: Any)
+    /// Start the coordinator
     func start(initializationData: [InitializationDataField: Any]?, parentController: UIViewController)
 }

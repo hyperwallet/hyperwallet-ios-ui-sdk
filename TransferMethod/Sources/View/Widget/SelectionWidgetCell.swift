@@ -28,6 +28,8 @@ final class SelectionWidgetCell: GenericCell<HyperwalletFieldSelectionOption> {
         didSet {
             if let option = item {
                 textLabel?.text = option.label
+                textLabel?.adjustsFontForContentSizeCategory = true
+                textLabel?.font = Theme.Label.bodyFont
             }
         }
     }

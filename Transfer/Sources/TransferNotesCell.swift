@@ -31,6 +31,7 @@ final class TransferNotesCell: UITableViewCell {
         textField.placeholder = "transfer_description".localized()
         textField.delegate = self
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.adjustsFontForContentSizeCategory = true
         textField.accessibilityIdentifier = "transferNotesTextField"
         return textField
     }()
