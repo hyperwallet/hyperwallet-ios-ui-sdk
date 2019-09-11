@@ -38,12 +38,7 @@ public class ListReceiptCoordinator: NSObject, HyperwalletCoordinator {
 
     public func navigate() {
         controller.flowDelegate = parentController
-        if parentController?.navigationController != nil {
-            parentController?.show(controller, sender: parentController)
-        } else {
-            let navigationController = UINavigationController(rootViewController: controller)
-            navigationController.pushViewController(controller, animated: true)
-        }
+        parentController?.show(controller, sender: parentController)
     }
 
     public func navigateToNextPage(initializationData: [InitializationDataField: Any]?) {
