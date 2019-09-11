@@ -25,7 +25,7 @@ import UIKit
 ///
 /// The form fields are based on the country, currency, user's profile type and transfer method type should be passed
 /// to this Controller to create new Transfer Method for those values.
-public final class AddTransferMethodController: UITableViewController {
+final class AddTransferMethodController: UITableViewController {
     typealias ButtonHandler = () -> Void
     private var defaultHeaderHeight = CGFloat(38.0)
 
@@ -83,11 +83,11 @@ public final class AddTransferMethodController: UITableViewController {
         return stackView
     }()
     private func initializeData() {
-        if let country = initializationData?[InitializationDataField.country.rawValue] as? String,
-            let currency = initializationData?[InitializationDataField.currency.rawValue] as? String,
-            let forceUpdate = initializationData?[InitializationDataField.forceUpdateData.rawValue] as? Bool,
-            let profileType = initializationData?[InitializationDataField.profileType.rawValue] as? String,
-            let transferMethodTypeCode = initializationData?[InitializationDataField.transferMethodTypeCode.rawValue]
+        if let country = initializationData?[InitializationDataField.country] as? String,
+            let currency = initializationData?[InitializationDataField.currency] as? String,
+            let forceUpdate = initializationData?[InitializationDataField.forceUpdateData] as? Bool,
+            let profileType = initializationData?[InitializationDataField.profileType] as? String,
+            let transferMethodTypeCode = initializationData?[InitializationDataField.transferMethodTypeCode]
                 as? String {
             self.country = country
             self.currency = currency
@@ -341,7 +341,7 @@ extension AddTransferMethodController: AddTransferMethodView {
         DispatchQueue.global(qos: .background).async {
             NotificationCenter.default.post(name: .transferMethodAdded,
                                             object: self,
-                                            userInfo: [UserInfo.transferMethod.rawValue: transferMethod])
+                                            userInfo: [UserInfo.transferMethod: transferMethod])
         }
         coordinator?.navigateBackFromNextPage(with: transferMethod)
     }

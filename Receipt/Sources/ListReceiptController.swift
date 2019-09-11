@@ -25,7 +25,7 @@ import UIKit
 /// Lists the user's transaction history
 ///
 /// The user can click a receipt in the list for more information
-public final class ListReceiptController: UITableViewController {
+final class ListReceiptController: UITableViewController {
     private var spinnerView: SpinnerView?
     private var presenter: ListReceiptPresenter!
     private let sectionTitleDateFormat = "MMMM yyyy"
@@ -46,8 +46,7 @@ public final class ListReceiptController: UITableViewController {
 
     private func initializePresenter() {
         presenter = ListReceiptPresenter(view: self,
-                                         prepaidCardToken:
-            initializationData?[InitializationDataField.prepaidCardToken.rawValue]
+                                         prepaidCardToken: initializationData?[InitializationDataField.prepaidCardToken]
                                             as? String)
     }
 
@@ -77,8 +76,7 @@ public final class ListReceiptController: UITableViewController {
     // MARK: list receipt table view delegate
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let hyperwalletReceipt = presenter.sectionData[indexPath.section].value[indexPath.row]
-        coordinator?.navigateToNextPage(initializationData:
-            [InitializationDataField.receipt.rawValue: hyperwalletReceipt])
+        coordinator?.navigateToNextPage(initializationData: [InitializationDataField.receipt: hyperwalletReceipt])
     }
 
     override public func tableView(_ tableView: UITableView,

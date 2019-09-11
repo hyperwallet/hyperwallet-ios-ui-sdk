@@ -23,7 +23,7 @@ import HyperwalletSDK
 import UIKit
 
 /// Schedule a transfer that was previously created
-public final class ScheduleTransferController: UITableViewController, UITextFieldDelegate {
+final class ScheduleTransferController: UITableViewController, UITextFieldDelegate {
     private var spinnerView: SpinnerView?
     private var processingView: ProcessingView?
     private var presenter: ScheduleTransferPresenter!
@@ -48,9 +48,9 @@ public final class ScheduleTransferController: UITableViewController, UITextFiel
     }
 
     private func initializePresenter() {
-        if let transferMethod = initializationData?[InitializationDataField.transferMethod.rawValue]
+        if let transferMethod = initializationData?[InitializationDataField.transferMethod]
             as? HyperwalletTransferMethod,
-            let transfer = initializationData?[InitializationDataField.transfer.rawValue] as? HyperwalletTransfer {
+            let transfer = initializationData?[InitializationDataField.transfer] as? HyperwalletTransfer {
             presenter = ScheduleTransferPresenter(view: self, transferMethod: transferMethod, transfer: transfer)
         } else {
             fatalError("Required data not provided in initializePresenter")

@@ -21,7 +21,7 @@ import Common
 #endif
 import HyperwalletSDK
 
-public final class ReceiptDetailController: UITableViewController {
+final class ReceiptDetailController: UITableViewController {
     private let registeredCells: [(type: AnyClass, id: String)] = [
         (ReceiptTransactionCell.self, ReceiptTransactionCell.reuseIdentifier),
         (ReceiptFeeCell.self, ReceiptFeeCell.reuseIdentifier),
@@ -41,7 +41,7 @@ public final class ReceiptDetailController: UITableViewController {
     }
 
     private func initializePresenter() {
-        if let receipt = initializationData?[InitializationDataField.receipt.rawValue]
+        if let receipt = initializationData?[InitializationDataField.receipt]
             as? HyperwalletReceipt { presenter = ReceiptDetailPresenter(with: receipt) } else {
             fatalError("Required data not provided in initializePresenter")
         }

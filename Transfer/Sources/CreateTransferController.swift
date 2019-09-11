@@ -26,7 +26,7 @@ import UIKit
 ///
 /// Each transfer will be represented by an auto-generated, non-editable token that can be used
 /// to retrieve the transfer resource.
-public final class CreateTransferController: UITableViewController {
+final class CreateTransferController: UITableViewController {
     enum FooterSection: Int, CaseIterable {
         case destination, transfer, notes, button
     }
@@ -55,8 +55,8 @@ public final class CreateTransferController: UITableViewController {
     }
 
     private func initializePresenter() {
-        if let clientTransferId = initializationData?[InitializationDataField.clientTransferId.rawValue] as? String {
-            let sourceToken = initializationData?[InitializationDataField.sourceToken.rawValue] as? String
+        if let clientTransferId = initializationData?[InitializationDataField.clientTransferId] as? String {
+            let sourceToken = initializationData?[InitializationDataField.sourceToken] as? String
             presenter = CreateTransferPresenter(clientTransferId, sourceToken, view: self)
         } else {
             fatalError("Required data not provided in initializePresenter")
@@ -347,8 +347,8 @@ extension CreateTransferController: CreateTransferView {
 
     func showScheduleTransfer(_ transfer: HyperwalletTransfer) {
         if let transferMethod = presenter.selectedTransferMethod {
-            coordinator?.navigateToNextPage(initializationData: [InitializationDataField.transfer.rawValue: transfer,
-                 InitializationDataField.transferMethod.rawValue: transferMethod])
+            coordinator?.navigateToNextPage(initializationData:
+                [InitializationDataField.transfer: transfer, InitializationDataField.transferMethod: transferMethod])
         }
     }
 }
