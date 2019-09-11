@@ -65,7 +65,9 @@ final class ScheduleTransferPresenter {
             sectionData.append(scheduleTransferForeignExchangesSection)
         }
 
-        let scheduleTransferSummaryData = ScheduleTransferSummaryData(transfer: transfer, didFxQuoteChange: didFxQuoteChange)
+        let scheduleTransferSummaryData = ScheduleTransferSummaryData(
+            transfer: transfer,
+            didFxQuoteChange: didFxQuoteChange)
         sectionData.append(scheduleTransferSummaryData)
 
         if let scheduleTransferNotesData = ScheduleTransferNotesData(transfer: transfer) {

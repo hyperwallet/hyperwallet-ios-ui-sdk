@@ -323,8 +323,9 @@ class TransferUserFundsConfirmationTest: BaseTests {
         transferFunds.nextLabel.tap()
 
         waitForExistence(transferFundsConfirmation.foreignExchangeSectionLabel)
+        app.scroll(to: transferFundsConfirmation.confirmButton)
         // Assert the message showing the final amount to be transferred has changed
-        XCTAssertTrue(app.tables["scheduleTransferTableView"].staticTexts["Due to changes in the FX rate, you will now receive: 5,855.66 USD"].exists)
+        XCTAssertTrue(app.otherElements["Due to changes in the FX rate, you will now receive: 5,855.66 USD"].exists)
     }
 
     /*
