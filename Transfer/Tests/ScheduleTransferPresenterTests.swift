@@ -158,7 +158,6 @@ class MockScheduleTransferViewTests: ScheduleTransferView {
     var isShowErrorPerformed = false
     var isNotificationSent = false
     var expectation: XCTestExpectation?
-    var isUpdateFooterPerformed = false
 
     func resetStates() {
         isShowProcessingPerformed = false
@@ -191,11 +190,6 @@ class MockScheduleTransferViewTests: ScheduleTransferView {
 
     func notifyTransferScheduled(_ hyperwalletStatusTransition: HyperwalletStatusTransition) {
         isNotificationSent = true
-        expectation?.fulfill()
-    }
-
-    func updateFooter(for section: ScheduleTransferController.FooterSection) {
-        isUpdateFooterPerformed = true
         expectation?.fulfill()
     }
 }
