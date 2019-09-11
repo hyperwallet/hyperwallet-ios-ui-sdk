@@ -236,7 +236,6 @@ class ViewController: UITableViewController {
 
     @objc
     func methodOfReceivedNotification(notification: Notification) {
-        notification.userInfo?[UserInfo.statusTransition]
         print("Transfer method has been deleted successfully")
     }
 
