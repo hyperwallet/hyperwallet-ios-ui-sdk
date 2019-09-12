@@ -43,6 +43,7 @@ public class CreateTransferCoordinator: NSObject, HyperwalletCoordinator  {
         self.parentController = parentController
     }
 
+    @objc
     public func navigate() {
         controller.flowDelegate = parentController
         parentController?.show(controller, sender: parentController)

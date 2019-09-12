@@ -36,6 +36,7 @@ public class SelectTransferMethodTypeCoordinator: NSObject, HyperwalletCoordinat
         return controller
     }
 
+    @objc
     public func navigate() {
         controller.flowDelegate = parentController
         parentController?.show(controller, sender: parentController)
@@ -82,6 +83,7 @@ public class AddTransferMethodCoordinator: NSObject, HyperwalletCoordinator {
         return controller
     }
 
+    @objc
     public func navigate() {
         controller.flowDelegate = parentController
         parentController?.show(controller, sender: parentController)
@@ -121,6 +123,7 @@ public final class ListTransferMethodsCoordinator: NSObject, HyperwalletCoordina
         return controller
     }
 
+    @objc
     public func navigate() {
         controller.flowDelegate = parentController
         parentController?.show(controller, sender: parentController)

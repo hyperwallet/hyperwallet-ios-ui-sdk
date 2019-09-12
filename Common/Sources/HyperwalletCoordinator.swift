@@ -19,7 +19,7 @@
 import UIKit
 
 /// Protocol to start/navigate Hyperwallet UI SDK flow
-@objc public protocol HyperwalletCoordinator {
+public protocol HyperwalletCoordinator {
     /// Apply Theme
     func applyTheme()
     /// Get the current Controller class for the Coordinator
