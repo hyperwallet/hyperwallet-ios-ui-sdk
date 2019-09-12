@@ -29,7 +29,7 @@ public extension HyperwalletUI {
     func createTransferFromUserCoordinator(clientTransferId: String,
                                            parentController: UIViewController) -> CreateTransferCoordinator {
         let coordinator = CreateTransferCoordinator()
-        coordinator.start(initializationData: [InitializationDataField.clientTransferId: clientTransferId],
+        coordinator.start(initializationData: [InitializationDataField.clientTransferId.rawValue: clientTransferId],
                           parentController: parentController)
         return coordinator
     }
@@ -44,8 +44,8 @@ public extension HyperwalletUI {
         -> CreateTransferCoordinator {
             let coordinator = CreateTransferCoordinator()
             coordinator.start(initializationData: [
-                InitializationDataField.clientTransferId: clientTransferId,
-                InitializationDataField.sourceToken: sourceToken
+                InitializationDataField.clientTransferId.rawValue: clientTransferId,
+                InitializationDataField.sourceToken.rawValue: sourceToken
             ],
                               parentController: parentController)
             return coordinator

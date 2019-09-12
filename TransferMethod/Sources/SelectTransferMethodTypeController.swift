@@ -34,7 +34,7 @@ final class SelectTransferMethodTypeController: UITableViewController {
     private var forceUpdate: Bool = false
 
     private func initializeData() {
-        if let forceUpdate = initializationData?[InitializationDataField.forceUpdateData] as? Bool {
+        if let forceUpdate = initializationData?[InitializationDataField.forceUpdateData.rawValue] as? Bool {
             self.forceUpdate = forceUpdate
         }
     }
@@ -134,12 +134,12 @@ extension SelectTransferMethodTypeController: SelectTransferMethodTypeView {
                                                currency: String,
                                                profileType: String,
                                                transferMethodTypeCode: String) {
-        var initializationData = [InitializationDataField: Any]()
-        initializationData[InitializationDataField.country]  = country
-        initializationData[InitializationDataField.currency]  = currency
-        initializationData[InitializationDataField.profileType]  = profileType
-        initializationData[InitializationDataField.transferMethodTypeCode]  = transferMethodTypeCode
-        initializationData[InitializationDataField.forceUpdateData] = true
+        var initializationData = [String: Any]()
+        initializationData[InitializationDataField.country.rawValue]  = country
+        initializationData[InitializationDataField.currency.rawValue]  = currency
+        initializationData[InitializationDataField.profileType.rawValue]  = profileType
+        initializationData[InitializationDataField.transferMethodTypeCode.rawValue]  = transferMethodTypeCode
+        initializationData[InitializationDataField.forceUpdateData.rawValue] = true
         coordinator?.navigateToNextPage(initializationData: initializationData)
     }
 
