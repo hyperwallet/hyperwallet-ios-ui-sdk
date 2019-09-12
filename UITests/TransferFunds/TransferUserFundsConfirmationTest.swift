@@ -189,6 +189,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
 
         // Assert go back to the menu page
         waitForExistence(transferFundMenu)
+        app.scroll(to: transferFundMenu)
         XCTAssertTrue(transferFundMenu.exists)
     }
 
