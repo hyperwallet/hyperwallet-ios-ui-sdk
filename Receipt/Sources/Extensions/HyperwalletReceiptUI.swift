@@ -21,12 +21,12 @@ import Common
 #endif
 
 /// The HyperwalletUI extension
-public extension HyperwalletUI {
+extension HyperwalletUI {
     /// Lists the user's transactions.
     ///
     ///
     /// - Returns: An instance of `ListReceiptCoordinator`
-    func listUserReceiptCoordinator(parentController: UIViewController) -> ListReceiptCoordinator {
+    public func listUserReceiptCoordinator(parentController: UIViewController) -> ListReceiptCoordinator {
         let coordinator = ListReceiptCoordinator()
         coordinator.start(parentController: parentController)
         return coordinator
@@ -36,7 +36,7 @@ public extension HyperwalletUI {
     ///
     /// - Parameter prepaidCardToken: prepaid card token for which transactions are requested
     /// - Returns: An instance of `ListReceiptCoordinator`
-    func listPrepaidCardReceiptCoordinator(parentController: UIViewController, prepaidCardToken: String)
+    public func listPrepaidCardReceiptCoordinator(parentController: UIViewController, prepaidCardToken: String)
         -> ListReceiptCoordinator {
             let coordinator = ListReceiptCoordinator()
             coordinator.start(initializationData: [InitializationDataField.prepaidCardToken: prepaidCardToken],
