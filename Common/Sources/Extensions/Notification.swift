@@ -49,7 +49,7 @@ public extension Notification.Name {
 /// - statusTransition: A transfer method has been deactivated.
 /// - transferCreated: A transfer of funds has been created.
 /// - transferScheduled: A transfer has been scheduled.
-public enum UserInfo: String, RawRepresentable {
+public enum UserInfo: String {
     case transferMethod
     case statusTransition
     case transferCreated
