@@ -188,7 +188,7 @@ extension ListTransferMethodController: ListTransferMethodView {
         DispatchQueue.global(qos: .background).async {
             NotificationCenter.default.post(name: .transferMethodDeactivated,
                                             object: self,
-                                            userInfo: [UserInfo.statusTransition.rawValue: hyperwalletStatusTransition])
+                                            userInfo: [UserInfo.statusTransition: hyperwalletStatusTransition])
         }
     }
 

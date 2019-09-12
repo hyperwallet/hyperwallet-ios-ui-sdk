@@ -280,7 +280,7 @@ extension CreateTransferController: CreateTransferView {
         DispatchQueue.global(qos: .background).async {
             NotificationCenter.default.post(name: .transferCreated,
                                             object: self,
-                                            userInfo: [UserInfo.transferCreated.rawValue: transfer])
+                                            userInfo: [UserInfo.transferCreated: transfer])
         }
     }
 

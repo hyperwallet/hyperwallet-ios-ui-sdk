@@ -168,8 +168,7 @@ extension ScheduleTransferController: ScheduleTransferView {
         DispatchQueue.global(qos: .background).async {
             NotificationCenter.default.post(name: .transferScheduled,
                                             object: self,
-                                            userInfo:
-                [UserInfo.transferScheduled.rawValue: hyperwalletStatusTransition])
+                                            userInfo: [UserInfo.transferScheduled: hyperwalletStatusTransition])
         }
         coordinator?.navigateBackFromNextPage(with: hyperwalletStatusTransition)
     }

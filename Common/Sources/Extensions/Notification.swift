@@ -49,35 +49,9 @@ public extension Notification.Name {
 /// - statusTransition: A transfer method has been deactivated.
 /// - transferCreated: A transfer of funds has been created.
 /// - transferScheduled: A transfer has been scheduled.
-@objc
-public enum UserInfo: Int, RawRepresentable {
+public enum UserInfo: String, RawRepresentable {
     case transferMethod
     case statusTransition
     case transferCreated
     case transferScheduled
-
-    public typealias RawValue = String
-
-    public init?(rawValue: RawValue) {
-        switch rawValue {
-        case "transferMethod": self = .transferMethod
-        case "statusTransition": self = .statusTransition
-        case "transferCreated": self = .transferCreated
-        case "transferScheduled": self = .transferScheduled
-        default: return nil
-        }
-    }
-
-    public var rawValue: String {
-        switch self {
-        case .transferMethod:
-            return "transferMethod"
-        case .statusTransition:
-            return "statusTransition"
-        case .transferCreated:
-            return "transferCreated"
-        case .transferScheduled:
-            return "transferScheduled"
-        }
-    }
 }
