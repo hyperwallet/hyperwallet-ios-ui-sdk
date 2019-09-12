@@ -42,7 +42,7 @@ public class SelectTransferMethodTypeCoordinator: NSObject, HyperwalletCoordinat
         parentController?.show(controller, sender: parentController)
     }
 
-    public func navigateToNextPage(initializationData: [String: Any]?) {
+    public func navigateToNextPage(initializationData: [InitializationDataField: Any]?) {
         let childController = AddTransferMethodController()
         childController.initializationData = initializationData
         childController.coordinator = self
@@ -61,7 +61,7 @@ public class SelectTransferMethodTypeCoordinator: NSObject, HyperwalletCoordinat
         controller.flowDelegate?.didFlowComplete(with: response)
     }
 
-    public func start(initializationData: [String: Any]? = nil, parentController: UIViewController) {
+    public func start(initializationData: [InitializationDataField: Any]? = nil, parentController: UIViewController) {
         controller.coordinator = self
         controller.initializationData = initializationData
         self.parentController = parentController
@@ -89,7 +89,7 @@ public class AddTransferMethodCoordinator: NSObject, HyperwalletCoordinator {
         parentController?.show(controller, sender: parentController)
     }
 
-    public func navigateToNextPage(initializationData: [String: Any]?) {
+    public func navigateToNextPage(initializationData: [InitializationDataField: Any]?) {
     }
 
     public func navigateBackFromNextPage(with response: Any) {
@@ -103,7 +103,7 @@ public class AddTransferMethodCoordinator: NSObject, HyperwalletCoordinator {
         controller.flowDelegate?.didFlowComplete(with: response)
     }
 
-    public func start(initializationData: [String: Any]? = nil, parentController: UIViewController) {
+    public func start(initializationData: [InitializationDataField: Any]? = nil, parentController: UIViewController) {
         controller.coordinator = self
         controller.initializationData = initializationData
         self.parentController = parentController
@@ -129,7 +129,7 @@ public final class ListTransferMethodsCoordinator: NSObject, HyperwalletCoordina
         parentController?.show(controller, sender: parentController)
     }
 
-    public func navigateToNextPage(initializationData: [String: Any]?) {
+    public func navigateToNextPage(initializationData: [InitializationDataField: Any]?) {
         let selectCoordinator = HyperwalletUI.shared.selectTransferMethodTypeCoordinator(parentController: controller)
         selectCoordinator.navigate()
     }
@@ -143,7 +143,7 @@ public final class ListTransferMethodsCoordinator: NSObject, HyperwalletCoordina
         controller.flowDelegate?.didFlowComplete(with: response)
     }
 
-    public func start(initializationData: [String: Any]? = nil, parentController: UIViewController) {
+    public func start(initializationData: [InitializationDataField: Any]? = nil, parentController: UIViewController) {
         controller.coordinator = self
         controller.initializationData = initializationData
         self.parentController = parentController

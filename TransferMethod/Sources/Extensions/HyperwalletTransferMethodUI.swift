@@ -46,7 +46,7 @@ public extension HyperwalletUI {
             let coordinator = SelectTransferMethodTypeCoordinator()
             coordinator
             .start(initializationData:
-                [InitializationDataField.forceUpdateData.rawValue: forceUpdateData],
+                [InitializationDataField.forceUpdateData: forceUpdateData],
                    parentController: parentController)
             return coordinator
     }
@@ -71,12 +71,12 @@ public extension HyperwalletUI {
         _ transferMethodTypeCode: String,
         _ forceUpdateData: Bool = false,
         parentController: UIViewController) -> AddTransferMethodCoordinator {
-        var initializationData = [String: Any]()
-        initializationData[InitializationDataField.country.rawValue]  = country
-        initializationData[InitializationDataField.currency.rawValue]  = currency
-        initializationData[InitializationDataField.profileType.rawValue]  = profileType
-        initializationData[InitializationDataField.transferMethodTypeCode.rawValue]  = transferMethodTypeCode
-        initializationData[InitializationDataField.forceUpdateData.rawValue]  = forceUpdateData
+        var initializationData = [InitializationDataField: Any]()
+        initializationData[InitializationDataField.country]  = country
+        initializationData[InitializationDataField.currency]  = currency
+        initializationData[InitializationDataField.profileType]  = profileType
+        initializationData[InitializationDataField.transferMethodTypeCode]  = transferMethodTypeCode
+        initializationData[InitializationDataField.forceUpdateData]  = forceUpdateData
 
         let coordinator = AddTransferMethodCoordinator()
         coordinator.start(initializationData: initializationData, parentController: parentController)

@@ -37,7 +37,7 @@ public class CreateTransferCoordinator: NSObject, HyperwalletCoordinator  {
         controller = CreateTransferController()
     }
 
-    public func start(initializationData: [String: Any]? = nil, parentController: UIViewController) {
+    public func start(initializationData: [InitializationDataField: Any]? = nil, parentController: UIViewController) {
         controller.coordinator = self
         controller.initializationData = initializationData
         self.parentController = parentController
@@ -49,7 +49,7 @@ public class CreateTransferCoordinator: NSObject, HyperwalletCoordinator  {
         parentController?.show(controller, sender: parentController)
     }
 
-    public func navigateToNextPage(initializationData: [String: Any]? = nil) {
+    public func navigateToNextPage(initializationData: [InitializationDataField: Any]? = nil) {
         let childController = ScheduleTransferController()
         childController.coordinator = self
         childController.initializationData = initializationData

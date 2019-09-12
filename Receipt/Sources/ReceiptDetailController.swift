@@ -41,7 +41,7 @@ final class ReceiptDetailController: UITableViewController {
     }
 
     private func initializePresenter() {
-        if let receipt = initializationData?[InitializationDataField.receipt.rawValue]
+        if let receipt = initializationData?[InitializationDataField.receipt]
             as? HyperwalletReceipt { presenter = ReceiptDetailPresenter(with: receipt) } else {
             fatalError("Required data not provided in initializePresenter")
         }

@@ -27,9 +27,9 @@ public protocol HyperwalletCoordinator {
     /// Navigate to the flow
     func navigate()
     /// Navigate to next page from the current flow
-    func navigateToNextPage(initializationData: [String: Any]?)
+    func navigateToNextPage(initializationData: [InitializationDataField: Any]?)
     /// Navigate back from the next page to either current flow or parent flow.
     func navigateBackFromNextPage(with response: Any)
     /// Start the coordinator
-    func start(initializationData: [String: Any]?, parentController: UIViewController)
+    func start(initializationData: [InitializationDataField: Any]?, parentController: UIViewController)
 }
