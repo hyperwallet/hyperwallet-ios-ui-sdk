@@ -27,6 +27,7 @@ public extension HyperwalletUI {
     /// The user can deactivate and add a new transfer method.
     ///
     /// - Returns: An instance of `ListTransferMethodsCoordinator`
+    @objc
     func listTransferMethodCoordinator(parentController: UIViewController) ->
         ListTransferMethodsCoordinator {
             let coordinator = ListTransferMethodsCoordinator()
@@ -39,6 +40,7 @@ public extension HyperwalletUI {
     ///
     /// - Parameter forceUpdateData: Forces to refresh the cached data.
     /// - Returns: An instance of `SelectTransferMethodTypeCoordinator`
+    @objc
     func selectTransferMethodTypeCoordinator(forceUpdateData: Bool = false, parentController: UIViewController)
         -> SelectTransferMethodTypeCoordinator {
             let coordinator = SelectTransferMethodTypeCoordinator()
@@ -61,6 +63,7 @@ public extension HyperwalletUI {
     ///   - transferMethodTypeCode: The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD.
     ///   - forceUpdateData: Forces to refresh the cached data.
     /// - Returns: An instance of `AddTransferMethodCoordinator`
+    @objc
     func addTransferMethodCoordinator(
         _ country: String,
         _ currency: String,

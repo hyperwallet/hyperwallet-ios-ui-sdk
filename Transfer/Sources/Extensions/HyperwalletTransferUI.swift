@@ -25,6 +25,7 @@ public extension HyperwalletUI {
     /// Create transfer funds
     ///
     /// - Returns: An instance of `CreateTransferCoordinator`
+    @objc
     func createTransferFromUserCoordinator(clientTransferId: String,
                                            parentController: UIViewController) -> CreateTransferCoordinator {
         let coordinator = CreateTransferCoordinator()
@@ -36,6 +37,7 @@ public extension HyperwalletUI {
     /// Create transfer funds
     ///
     /// - Returns: An instance of `CreateTransferCoordinator`
+    @objc
     func createTransferFromPrepaidCardCoordinator(clientTransferId: String,
                                                   sourceToken: String,
                                                   parentController: UIViewController)
