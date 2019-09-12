@@ -26,7 +26,6 @@ public extension HyperwalletUI {
     ///
     ///
     /// - Returns: An instance of `ListReceiptCoordinator`
-    @objc
     func listUserReceiptCoordinator(parentController: UIViewController) -> ListReceiptCoordinator {
         let coordinator = ListReceiptCoordinator()
         coordinator.start(parentController: parentController)
@@ -37,12 +36,12 @@ public extension HyperwalletUI {
     ///
     /// - Parameter prepaidCardToken: prepaid card token for which transactions are requested
     /// - Returns: An instance of `ListReceiptCoordinator`
-    @objc
-    func listPrepaidCardReceiptCoordinator(parentController: UIViewController, prepaidCardToken: String)
-        -> ListReceiptCoordinator {
-            let coordinator = ListReceiptCoordinator()
-            coordinator.start(initializationData: [InitializationDataField.prepaidCardToken: prepaidCardToken],
-                              parentController: parentController)
-            return coordinator
-    }
+//    @objc
+//    func listPrepaidCardReceiptCoordinator(parentController: UIViewController, prepaidCardToken: String)
+//        -> ListReceiptCoordinator {
+//            let coordinator = ListReceiptCoordinator()
+//            coordinator.start(initializationData: [InitializationDataField.prepaidCardToken: prepaidCardToken],
+//                              parentController: parentController)
+//            return coordinator
+//    }
 }
