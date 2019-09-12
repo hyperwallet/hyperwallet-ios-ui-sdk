@@ -175,10 +175,10 @@ class ViewController: UITableViewController {
     }
 
     private func showExamplePrepaidCardReceipts() {
-//        let prepaidCardToken = Bundle.main.infoDictionary!["PREPAID_CARD_TOKEN"] as! String
-//        let coordinator = HyperwalletUI.shared
-//            .listPrepaidCardReceiptCoordinator(parentController: self, prepaidCardToken: prepaidCardToken)
-//        coordinator.navigate()
+        let prepaidCardToken = Bundle.main.infoDictionary!["PREPAID_CARD_TOKEN"] as! String
+        let coordinator = HyperwalletUI.shared
+            .listPrepaidCardReceiptCoordinator(parentController: self, prepaidCardToken: prepaidCardToken)
+        coordinator.navigate()
     }
 
     private func showExampleUserReceipts() {
