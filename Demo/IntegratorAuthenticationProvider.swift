@@ -19,7 +19,7 @@
 import Foundation
 import HyperwalletSDK
 
-public class IntegratorAuthenticationProvider: HyperwalletAuthenticationTokenProvider {
+public struct IntegratorAuthenticationProvider: HyperwalletAuthenticationTokenProvider {
     private var url: String
     private let user: String = "userName"
     private let password: String = "password"
