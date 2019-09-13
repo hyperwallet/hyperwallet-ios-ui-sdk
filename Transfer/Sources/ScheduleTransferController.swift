@@ -27,6 +27,7 @@ final class ScheduleTransferController: UITableViewController, UITextFieldDelega
     private var spinnerView: SpinnerView?
     private var processingView: ProcessingView?
     private var presenter: ScheduleTransferPresenter!
+    private let footerIdentifier = "scheduleTransferFooterViewIdentifier"
 
     private let registeredCells: [(type: AnyClass, id: String)] = [
         (TransferDestinationCell.self, TransferDestinationCell.reuseIdentifier),
@@ -75,7 +76,7 @@ final class ScheduleTransferController: UITableViewController, UITextFieldDelega
         }
         tableView.register(DividerCell.self, forCellReuseIdentifier: DividerCell.reuseIdentifier)
         tableView.register(TransferTableViewFooterView.self,
-                           forHeaderFooterViewReuseIdentifier: TransferTableViewFooterView.reuseIdentifier)
+                           forHeaderFooterViewReuseIdentifier: footerIdentifier)
     }
 }
 
@@ -103,7 +104,7 @@ extension ScheduleTransferController {
             return nil
         }
         guard let view = tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: TransferTableViewFooterView.reuseIdentifier) as? TransferTableViewFooterView else {
+            withIdentifier: footerIdentifier) as? TransferTableViewFooterView else {
                 return nil
         }
         view.footerLabel.attributedText = attributedText
