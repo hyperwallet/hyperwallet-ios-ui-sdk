@@ -21,7 +21,7 @@ import Common
 #endif
 import HyperwalletSDK
 
-public final class ReceiptDetailController: UITableViewController {
+final class ReceiptDetailController: UITableViewController {
     private let registeredCells: [(type: AnyClass, id: String)] = [
         (ReceiptTransactionCell.self, ReceiptTransactionCell.reuseIdentifier),
         (ReceiptFeeCell.self, ReceiptFeeCell.reuseIdentifier),

@@ -29,6 +29,10 @@ public class CreateTransferCoordinator: NSObject, HyperwalletCoordinator  {
          ThemeManager.applyTransferTheme()
     }
 
+    public func getController() -> UITableViewController {
+        return controller
+    }
+
     override init() {
         controller = CreateTransferController()
     }

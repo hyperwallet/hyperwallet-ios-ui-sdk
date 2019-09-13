@@ -25,7 +25,7 @@ import UIKit
 ///
 /// The form fields are based on the country, currency, user's profile type and transfer method type should be passed
 /// to this Controller to create new Transfer Method for those values.
-public final class AddTransferMethodController: UITableViewController {
+final class AddTransferMethodController: UITableViewController {
     typealias ButtonHandler = () -> Void
     private var defaultHeaderHeight = CGFloat(38.0)
 
