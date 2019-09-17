@@ -24,7 +24,8 @@ import UIKit
 /// - Example:
 ///  `Theme.themeColor = UIColor.white`
 ///  `ThemeManager.applyTheme()`
-public struct Theme {
+@objcMembers
+public class Theme: NSObject {
     /// The main color.
     public static var themeColor = UIColor(rgb: 0x00AFD0)
     /// The tint color.

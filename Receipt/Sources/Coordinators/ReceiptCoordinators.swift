@@ -36,6 +36,7 @@ public class ListReceiptCoordinator: NSObject, HyperwalletCoordinator {
         return controller
     }
 
+    @objc
     public func navigate() {
         controller.flowDelegate = parentController
         parentController?.show(controller, sender: parentController)
