@@ -348,10 +348,13 @@ extension CreateTransferController: CreateTransferView {
 
     func showScheduleTransfer(_ transfer: HyperwalletTransfer) {
         if let transferMethod = presenter.selectedTransferMethod {
-            coordinator?.navigateToNextPage(initializationData:
-                [InitializationDataField.transfer: transfer,
-                 InitializationDataField.transferMethod: transferMethod,
-                 InitializationDataField.didFxQuoteChange: presenter.didFxQuoteChange])
+            coordinator?.navigateToNextPage(
+                initializationData: [
+                    InitializationDataField.transfer: transfer,
+                    InitializationDataField.transferMethod: transferMethod,
+                    InitializationDataField.didFxQuoteChange: presenter.didFxQuoteChange
+                ]
+            )
         }
     }
 }
