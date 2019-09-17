@@ -114,7 +114,7 @@ extension ScheduleTransferController {
     private func getAttributedFooterText(for section: Int) -> NSAttributedString? {
         let sectionData = presenter.sectionData[section]
         var attributedText: NSAttributedString?
-        if  let transferSectionData = sectionData as? ScheduleTransferSummaryData {
+        if let transferSectionData = sectionData as? ScheduleTransferSummaryData {
             attributedText = format(footer: transferSectionData.footer)
         }
         return attributedText
@@ -152,7 +152,6 @@ extension ScheduleTransferController {
             if let tableViewCell = cell as? TransferSummaryCell,
                 let summaryData = section as? ScheduleTransferSummaryData {
                 tableViewCell.configure(summaryData.rows[indexPath.row].title, summaryData.rows[indexPath.row].value)
-                addFooter()
             }
 
         case .notes:
@@ -173,14 +172,6 @@ extension ScheduleTransferController {
     @objc
     private func tapScheduleTransfer(sender: UITapGestureRecognizer) {
         presenter.scheduleTransfer()
-    }
-
-    func addFooter() {
-        // Summary - 3rd section
-        let section = 3
-        if let footerView = tableView.footerView(forSection: section) as? TransferTableViewFooterView {
-            footerView.footerLabel.attributedText = getAttributedFooterText(for: section)
-        }
     }
 }
 
