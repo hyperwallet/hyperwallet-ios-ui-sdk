@@ -137,8 +137,6 @@
 		9807B76B226442C60028A280 /* TransferMethodConfigurationBankAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFB61522261E84D00C4A8AA /* TransferMethodConfigurationBankAccountResponse.json */; };
 		9807B76C226442C60028A280 /* TransferMethodConfigurationBankCardResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFB614F2261E84C00C4A8AA /* TransferMethodConfigurationBankCardResponse.json */; };
 		9807B76D226442C60028A280 /* UnexpectedErrorResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFB61492261E84C00C4A8AA /* UnexpectedErrorResponse.json */; };
-		98220B8C2265793700055E18 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 98220B8B2265793700055E18 /* README.md */; };
-		98541F152273D72C007D4238 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 98541F142273D72C007D4238 /* CHANGELOG.md */; };
 		98F3D754230C5BE400A8195F /* TransferFundsConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F3D747230C5ABB00A8195F /* TransferFundsConfirmation.swift */; };
 		98F3D755230C5BEC00A8195F /* TransferFundsSelectDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F3D746230C5ABB00A8195F /* TransferFundsSelectDestination.swift */; };
 		98F3D756230C5BFC00A8195F /* TransferUserFundsConfirmationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F3D744230C5AA800A8195F /* TransferUserFundsConfirmationTest.swift */; };
@@ -267,10 +265,6 @@
 		DB6523B522DFD92900F52EA7 /* ReceiptRepositoryCompletionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A31BDB422D7356D0027DACA /* ReceiptRepositoryCompletionHelper.swift */; };
 		DB6523B922DFDAA400F52EA7 /* TransferMethodRepositoryCompletionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6523B822DFDAA400F52EA7 /* TransferMethodRepositoryCompletionHelper.swift */; };
 		DB6523BB22DFDAAD00F52EA7 /* UserRepositoryCompletionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6523BA22DFDAAC00F52EA7 /* UserRepositoryCompletionHelper.swift */; };
-		DB8FEE2122DE89390041A777 /* TransferMethodConfigurationKeysResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DB8FEE1D22DE89390041A777 /* TransferMethodConfigurationKeysResponse.json */; };
-		DB8FEE2222DE89390041A777 /* BankAccountConfigurationPresetValues.json in Resources */ = {isa = PBXBuildFile; fileRef = DB8FEE1E22DE89390041A777 /* BankAccountConfigurationPresetValues.json */; };
-		DB8FEE2322DE89390041A777 /* ListTransferMethodResponseWithoutPayPalAccount.json in Resources */ = {isa = PBXBuildFile; fileRef = DB8FEE1F22DE89390041A777 /* ListTransferMethodResponseWithoutPayPalAccount.json */; };
-		DB8FEE2422DE89390041A777 /* TransferMethodConfigurationBankAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DB8FEE2022DE89390041A777 /* TransferMethodConfigurationBankAccountResponse.json */; };
 		DB99C2D122E220C200E45185 /* Receipt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB99C2C822E220C200E45185 /* Receipt.framework */; };
 		DB99C2D822E220C200E45185 /* Receipt.h in Headers */ = {isa = PBXBuildFile; fileRef = DB99C2CA22E220C200E45185 /* Receipt.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DB99C2E222E22ADF00E45185 /* ReceiptFeeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22F1EB22A6800F00D58883 /* ReceiptFeeCell.swift */; };
@@ -338,27 +332,12 @@
 		DBC199F922E29CE4004447DD /* ProcessingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA384C225E8BAA00CD4137 /* ProcessingView.swift */; };
 		DBC199FA22E29CE4004447DD /* HyperwalletUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078B45802273A441005B0248 /* HyperwalletUI.swift */; };
 		DBC199FB22E29CF0004447DD /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA385C225E8BAA00CD4137 /* ErrorView.swift */; };
-		DBCA3806225E892400CD4137 /* HyperwalletUISDK.h in Headers */ = {isa = PBXBuildFile; fileRef = DBCA37F8225E892400CD4137 /* HyperwalletUISDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DBDE15DD22D6562900BD646F /* TransferMethodRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDE15DB22D655F000BD646F /* TransferMethodRepositoryTests.swift */; };
 		DBF89CB8227C072400AF4344 /* UserIndividualCountryCanadaResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBF89CB7227C072400AF4344 /* UserIndividualCountryCanadaResponse.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		073BB98C22E63DB50053C24E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 073BB98122E63DB50053C24E;
-			remoteInfo = TransferRepository;
-		};
-		2BF9E5EB22EF7DE400BB7DA5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4A9A7BDE22E859E60022E573;
-			remoteInfo = Transfer;
-		};
-		2BF9E5ED22EF7DE800BB7DA5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
 			proxyType = 1;
@@ -470,41 +449,6 @@
 			remoteGlobalIDString = DB4679812260380C00E1AF49;
 			remoteInfo = SwiftDemo;
 		};
-		DB5295EE22E2323900657F50 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4AE6B6BF22D605B20009DEFE;
-			remoteInfo = ReceiptRepository;
-		};
-		DB5295F022E2323900657F50 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DBAF929C22CFCBC7004F197A;
-			remoteInfo = TransferMethodRepository;
-		};
-		DB5295F222E2323900657F50 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 643912D322DF40CB00036609;
-			remoteInfo = UserRepository;
-		};
-		DB5295F422E2323900657F50 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DB551FA622E1409700DD65C2;
-			remoteInfo = TransferMethod;
-		};
-		DB5295F622E2323900657F50 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DB99C2C722E220C200E45185;
-			remoteInfo = Receipt;
-		};
 		DB52960A22E235EF00657F50 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
@@ -546,13 +490,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 643912D322DF40CB00036609;
 			remoteInfo = UserRepository;
-		};
-		DB551F7922E1356000DD65C2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DB551F4822E1316400DD65C2;
-			remoteInfo = Common;
 		};
 		DB551FB122E1409700DD65C2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -900,7 +837,6 @@
 		DBC199D922E29A3D004447DD /* HyperwalletTransferMethodTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyperwalletTransferMethodTests.swift; sourceTree = "<group>"; };
 		DBC8404322D463CA00178B64 /* HyperwalletCountry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletCountry.swift; sourceTree = "<group>"; };
 		DBC8404522D4655C00178B64 /* HyperwalletCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletCurrency.swift; sourceTree = "<group>"; };
-		DBCA37F5225E892400CD4137 /* HyperwalletUISDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HyperwalletUISDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBCA37F8225E892400CD4137 /* HyperwalletUISDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HyperwalletUISDK.h; sourceTree = "<group>"; };
 		DBCA37F9225E892400CD4137 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DBCA381C225E8BA900CD4137 /* SelectTransferMethodTypeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectTransferMethodTypeController.swift; sourceTree = "<group>"; };
@@ -1100,13 +1036,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBAF92A622CFCBC7004F197A /* TransferMethodRepository.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DBCA37F2225E892400CD4137 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1957,7 +1886,6 @@
 		DBCA37F6225E892400CD4137 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DBCA37F5225E892400CD4137 /* HyperwalletUISDK.framework */,
 				DB4679822260380C00E1AF49 /* Demo.app */,
 				DB2587FB2261BFF100E6236B /* HyperwalletUISDKUITests.xctest */,
 				4AE6B6C022D605B20009DEFE /* ReceiptRepository.framework */,
@@ -2167,14 +2095,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBAF92AD22CFCBC7004F197A /* TransferMethodRepository.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DBCA37F0225E892400CD4137 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DBCA3806225E892400CD4137 /* HyperwalletUISDK.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2531,33 +2451,6 @@
 			productReference = DBAF92A522CFCBC7004F197A /* TransferMethodRepositoryTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		DBCA37F4225E892400CD4137 /* HyperwalletUISDK */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DBCA3809225E892400CD4137 /* Build configuration list for PBXNativeTarget "HyperwalletUISDK" */;
-			buildPhases = (
-				DBCA37F0225E892400CD4137 /* Headers */,
-				DBCA37F1225E892400CD4137 /* Sources */,
-				DBCA37F2225E892400CD4137 /* Frameworks */,
-				DBCA37F3225E892400CD4137 /* Resources */,
-				9821890522667E2F00657C21 /* Swift Lint */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				2BF9E5EE22EF7DE800BB7DA5 /* PBXTargetDependency */,
-				2BF9E5EC22EF7DE400BB7DA5 /* PBXTargetDependency */,
-				DB5295EF22E2323900657F50 /* PBXTargetDependency */,
-				DB5295F122E2323900657F50 /* PBXTargetDependency */,
-				DB5295F322E2323900657F50 /* PBXTargetDependency */,
-				DB5295F522E2323900657F50 /* PBXTargetDependency */,
-				DB5295F722E2323900657F50 /* PBXTargetDependency */,
-				DB551F7A22E1356000DD65C2 /* PBXTargetDependency */,
-			);
-			name = HyperwalletUISDK;
-			productName = HyperwalletUISDK;
-			productReference = DBCA37F5225E892400CD4137 /* HyperwalletUISDK.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2627,10 +2520,6 @@
 					DBAF92A422CFCBC7004F197A = {
 						CreatedOnToolsVersion = 10.2.1;
 					};
-					DBCA37F4225E892400CD4137 = {
-						CreatedOnToolsVersion = 10.1;
-						LastSwiftMigration = 1020;
-					};
 				};
 			};
 			buildConfigurationList = DBCA37EF225E892400CD4137 /* Build configuration list for PBXProject "HyperwalletUISDK" */;
@@ -2647,7 +2536,6 @@
 			projectRoot = "";
 			targets = (
 				DB4679812260380C00E1AF49 /* Demo */,
-				DBCA37F4225E892400CD4137 /* HyperwalletUISDK */,
 				DB2587FA2261BFF100E6236B /* HyperwalletUISDKUITests */,
 				DB551F4822E1316400DD65C2 /* Common */,
 				DB551F5022E1316400DD65C2 /* CommonTests */,
@@ -2913,19 +2801,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DBCA37F3225E892400CD4137 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				98220B8C2265793700055E18 /* README.md in Resources */,
-				DB8FEE2322DE89390041A777 /* ListTransferMethodResponseWithoutPayPalAccount.json in Resources */,
-				DB8FEE2222DE89390041A777 /* BankAccountConfigurationPresetValues.json in Resources */,
-				DB8FEE2422DE89390041A777 /* TransferMethodConfigurationBankAccountResponse.json in Resources */,
-				DB8FEE2122DE89390041A777 /* TransferMethodConfigurationKeysResponse.json in Resources */,
-				98541F152273D72C007D4238 /* CHANGELOG.md in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -3003,24 +2878,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-		9821890522667E2F00657C21 /* Swift Lint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Swift Lint";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\nset -x\nif [ -z \"$CI\" ]; then\n  if ! which swiftlint > /dev/null; then\n  echo \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\n  else\n    swiftlint autocorrect\n    swiftlint\n  fi\nfi\n";
 		};
 		DB551F6322E132C000DD65C2 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3419,13 +3276,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DBCA37F1225E892400CD4137 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -3433,16 +3283,6 @@
 			isa = PBXTargetDependency;
 			target = 073BB98122E63DB50053C24E /* TransferRepository */;
 			targetProxy = 073BB98C22E63DB50053C24E /* PBXContainerItemProxy */;
-		};
-		2BF9E5EC22EF7DE400BB7DA5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4A9A7BDE22E859E60022E573 /* Transfer */;
-			targetProxy = 2BF9E5EB22EF7DE400BB7DA5 /* PBXContainerItemProxy */;
-		};
-		2BF9E5EE22EF7DE800BB7DA5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 073BB98122E63DB50053C24E /* TransferRepository */;
-			targetProxy = 2BF9E5ED22EF7DE800BB7DA5 /* PBXContainerItemProxy */;
 		};
 		2BF9E5F022EF7F1B00BB7DA5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3519,31 +3359,6 @@
 			target = DB4679812260380C00E1AF49 /* Demo */;
 			targetProxy = DB2588002261BFF100E6236B /* PBXContainerItemProxy */;
 		};
-		DB5295EF22E2323900657F50 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4AE6B6BF22D605B20009DEFE /* ReceiptRepository */;
-			targetProxy = DB5295EE22E2323900657F50 /* PBXContainerItemProxy */;
-		};
-		DB5295F122E2323900657F50 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DBAF929C22CFCBC7004F197A /* TransferMethodRepository */;
-			targetProxy = DB5295F022E2323900657F50 /* PBXContainerItemProxy */;
-		};
-		DB5295F322E2323900657F50 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 643912D322DF40CB00036609 /* UserRepository */;
-			targetProxy = DB5295F222E2323900657F50 /* PBXContainerItemProxy */;
-		};
-		DB5295F522E2323900657F50 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DB551FA622E1409700DD65C2 /* TransferMethod */;
-			targetProxy = DB5295F422E2323900657F50 /* PBXContainerItemProxy */;
-		};
-		DB5295F722E2323900657F50 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DB99C2C722E220C200E45185 /* Receipt */;
-			targetProxy = DB5295F622E2323900657F50 /* PBXContainerItemProxy */;
-		};
 		DB52960B22E235EF00657F50 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DB551F4822E1316400DD65C2 /* Common */;
@@ -3573,11 +3388,6 @@
 			isa = PBXTargetDependency;
 			target = 643912D322DF40CB00036609 /* UserRepository */;
 			targetProxy = DB52961F22E2361600657F50 /* PBXContainerItemProxy */;
-		};
-		DB551F7A22E1356000DD65C2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DB551F4822E1316400DD65C2 /* Common */;
-			targetProxy = DB551F7922E1356000DD65C2 /* PBXContainerItemProxy */;
 		};
 		DB551FB222E1409700DD65C2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -4723,38 +4533,6 @@
 			};
 			name = XCUITest;
 		};
-		DB5E93172261C3CC00CD57F6 /* XCUITest */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = Sources/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ios.HyperwalletUISDK;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = XCUITest;
-		};
 		DB5E93192261C3CC00CD57F6 /* XCUITest */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -5240,69 +5018,6 @@
 			};
 			name = Release;
 		};
-		DBCA380A225E892400CD4137 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = Sources/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ios.HyperwalletUISDK;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		DBCA380B225E892400CD4137 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = Sources/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ios.HyperwalletUISDK;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -5492,16 +5207,6 @@
 				DBCA3807225E892400CD4137 /* Debug */,
 				DB5E93162261C3CC00CD57F6 /* XCUITest */,
 				DBCA3808225E892400CD4137 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		DBCA3809225E892400CD4137 /* Build configuration list for PBXNativeTarget "HyperwalletUISDK" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DBCA380A225E892400CD4137 /* Debug */,
-				DB5E93172261C3CC00CD57F6 /* XCUITest */,
-				DBCA380B225E892400CD4137 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
