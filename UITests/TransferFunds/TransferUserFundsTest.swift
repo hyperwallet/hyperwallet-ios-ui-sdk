@@ -95,7 +95,7 @@ class TransferUserFundsTest: BaseTests {
             XCTAssertEqual(transferFunds.notesDescriptionTextField.value as? String, "testing")
         }
 
-        let availableFunds = app.tables["createTransferTableView"].staticTexts["Available for transfer: 452.14"]
+        let availableFunds = app.tables["createTransferTableView"].staticTexts["Available for transfer: 452.14 USD"]
         XCTAssertTrue(availableFunds.exists)
 
         // Next Button
@@ -160,7 +160,7 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertEqual(transferFunds.transferAllFundsLabel.label, "Transfer all funds")
         XCTAssertTrue(transferFunds.transferAllFundsSwitch.exists, "Transfer all funds switch should exist")
         // Assert the full amount
-        let availableFunds = app.tables["createTransferTableView"].staticTexts["Available for transfer: 452.14"]
+        let availableFunds = app.tables["createTransferTableView"].staticTexts["Available for transfer: 452.14 USD"]
         XCTAssertTrue(availableFunds.exists)
         // Turn on the Transfer All Funds Switch
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "")
@@ -208,7 +208,7 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.notesSectionLabel.exists)
         XCTAssertEqual(transferFunds.notesDescriptionTextField.placeholderValue, "Description")
 
-        let availableFunds = app.tables["createTransferTableView"].staticTexts["Available for transfer: 5,855.17"]
+        let availableFunds = app.tables["createTransferTableView"].staticTexts["Available for transfer: 5,855.17 USD"]
         XCTAssertTrue(availableFunds.exists)
 
         // Turn the Transfer All Switch On
@@ -259,7 +259,7 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.notesSectionLabel.exists)
         XCTAssertEqual(transferFunds.notesDescriptionTextField.placeholderValue, "Description")
 
-        let availableFunds = app.tables["createTransferTableView"].staticTexts["Available for transfer: 452.14"]
+        let availableFunds = app.tables["createTransferTableView"].staticTexts["Available for transfer: 452.14 USD"]
         XCTAssertTrue(availableFunds.exists)
 
         // Turn the Transfer All Switch On

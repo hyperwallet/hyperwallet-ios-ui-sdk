@@ -57,12 +57,14 @@ final class CreateTransferSectionTransferData: CreateTransferSectionData {
     var footer: String?
     var errorMessage: String?
 
-    init(availableBalance: String?) {
-        guard let availableBalance = availableBalance, availableBalance.formatToDouble() != 0 else {
-            footer = nil
-            return
+    init(availableBalance: String?, currencyCode: String?) {
+        guard let availableBalance = availableBalance,
+            availableBalance.formatToDouble() != 0,
+            let currencyCode = currencyCode else {
+                footer = nil
+                return
         }
-        footer = String(format: "available_balance_footer".localized(), availableBalance)
+        footer = String(format: "available_balance_footer".localized(), availableBalance, currencyCode)
     }
 }
 

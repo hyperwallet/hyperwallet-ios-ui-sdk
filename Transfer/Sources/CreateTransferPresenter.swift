@@ -90,7 +90,8 @@ final class CreateTransferPresenter {
         let createTransferDestinationSection = CreateTransferSectionDestinationData()
         sectionData.append(createTransferDestinationSection)
 
-        let createTransferSectionTransferData = CreateTransferSectionTransferData(availableBalance: availableBalance)
+        let createTransferSectionTransferData = CreateTransferSectionTransferData(availableBalance: availableBalance,
+                                                                                  currencyCode: destinationCurrency)
         sectionData.append(createTransferSectionTransferData)
 
         let createTransferNotesSection = CreateTransferSectionNotesData()
@@ -149,7 +150,7 @@ final class CreateTransferPresenter {
     private func createInitialTransfer() {
         guard let sourceToken = sourceToken,
             let destinationToken = selectedTransferMethod?.token,
-            let destinationCurrency = selectedTransferMethod?.transferMethodCurrency else {
+            let destinationCurrency = destinationCurrency else {
                 view.hideLoading()
                 view.showCreateTransfer()
                 return
@@ -186,7 +187,7 @@ final class CreateTransferPresenter {
 
         if let sourceToken = sourceToken,
             let destinationToken = selectedTransferMethod?.token,
-            let destinationCurrency = selectedTransferMethod?.transferMethodCurrency {
+            let destinationCurrency = destinationCurrency {
             view.showLoading()
             let transfer = HyperwalletTransfer.Builder(clientTransferId: clientTransferId,
                                                        sourceToken: sourceToken,
