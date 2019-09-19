@@ -59,7 +59,7 @@ class TransferUserFundsPPCTest: BaseTests {
         XCTAssertEqual(transferFunds.transferAllFundsLabel.label, "Transfer all funds")
         XCTAssertTrue(transferFunds.transferAllFundsSwitch.exists, "Transfer all funds switch should exist")
 
-        let availableFunds = app.tables["createTransferTableView"].staticTexts["Available for transfer: 452.14"]
+        let availableFunds = app.tables["createTransferTableView"].staticTexts["Available for transfer: 452.14 USD"]
         XCTAssertTrue(availableFunds.exists)
 
         XCTAssertEqual(transferFunds.notesSectionLabel.label, "NOTES")
