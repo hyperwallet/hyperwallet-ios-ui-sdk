@@ -429,9 +429,11 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.nextLabel.tap()
         waitForNonExistence(spinner)
 
-        let error = app.tables["createTransferTableView"].staticTexts["transferTableViewFooterViewIdentifier"].label
-        XCTAssertTrue(error.contains("Available for transfer: 452.14\nEnter amount or select tranfer all funds")
-            ||  error.contains("Available for transfer: 452.14 Enter amount or select tranfer all funds"))
+        let error = app.tables["createTransferTableView"].staticTexts["transferFooterLabelIdentifier"].label
+        XCTAssertTrue(error
+            .replacingOccurrences(of: "\n", with: " ")
+            .contains("Available for transfer: 452.14 USD Enter amount or select tranfer all funds")
+        )
     }
 
     /*
@@ -556,9 +558,12 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.nextLabel.tap()
         waitForNonExistence(spinner)
 
-        let error = app.tables["createTransferTableView"].staticTexts["transferTableViewFooterViewIdentifier"].label
-        XCTAssertTrue(error == "Available for transfer: 452.14\nNotes should be between 1 and 255 characters"
-            || error == "Available for transfer: 452.14 Notes should be between 1 and 255 characters")
+        let error = app.tables["createTransferTableView"].staticTexts["transferFooterLabelIdentifier"].label
+
+        XCTAssertTrue(error
+            .replacingOccurrences(of: "\n", with: " ")
+            .contains("Available for transfer: 452.14 USD Notes should be between 1 and 255 characters")
+        )
     }
 
     /* Given that Transfer methods exist
