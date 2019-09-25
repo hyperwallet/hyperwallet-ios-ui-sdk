@@ -61,6 +61,7 @@ final class CreateTransferPresenter {
     private(set) var clientTransferId: String
     private(set) var sectionData = [CreateTransferSectionData]()
     private(set) var availableBalance: String?
+    private(set) var didFxQuoteChange: Bool = false
 
     private var sourceToken: String?
 
@@ -191,7 +192,7 @@ final class CreateTransferPresenter {
             let transfer = HyperwalletTransfer.Builder(clientTransferId: clientTransferId,
                                                        sourceToken: sourceToken,
                                                        destinationToken: destinationToken)
-                .destinationAmount(amount)
+                .destinationAmount(transferAllFundsIsOn ? nil : amount)
                 .notes(notes)
                 .destinationCurrency(destinationCurrency)
                 .build()
@@ -211,6 +212,9 @@ final class CreateTransferPresenter {
 
                 case .success(let transfer):
                     if let transfer = transfer {
+                        if self?.transferAllFundsIsOn ?? false && transfer.destinationAmount != self?.availableBalance {
+                            strongSelf.didFxQuoteChange = true
+                        }
                         strongSelf.view.notifyTransferCreated(transfer)
                         strongSelf.view.showScheduleTransfer(transfer)
                     }

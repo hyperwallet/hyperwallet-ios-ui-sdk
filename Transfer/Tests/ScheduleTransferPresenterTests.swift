@@ -16,7 +16,11 @@ class ScheduleTransferPresenterTests: XCTestCase {
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
         transfer = getTransfer(from: HyperwalletTestHelper.getDataFromJson("CreateTransferResponse"))!
-        presenter = ScheduleTransferPresenter(view: mockView, transferMethod: transferMethod, transfer: transfer)
+        presenter = ScheduleTransferPresenter(
+            view: mockView,
+            transferMethod: transferMethod,
+            transfer: transfer,
+            didFxQuoteChange: false)
     }
 
     override func tearDown() {
@@ -75,7 +79,11 @@ class ScheduleTransferPresenterTests: XCTestCase {
     public func testScheduleSectionData_withoutForeignExchangeAndNotesSection() {
         transfer = getTransfer(from: HyperwalletTestHelper
             .getDataFromJson("CreateTransferWithoutForeignExchangeResponse"))!
-        presenter = ScheduleTransferPresenter(view: mockView, transferMethod: transferMethod, transfer: transfer)
+        presenter = ScheduleTransferPresenter(
+            view: mockView,
+            transferMethod: transferMethod,
+            transfer: transfer,
+            didFxQuoteChange: false)
 
         XCTAssertEqual(presenter.sectionData.count, 3)
         assertDestinationSectionResult(destinationSection: presenter.sectionData.first!)
@@ -113,6 +121,8 @@ class ScheduleTransferPresenterTests: XCTestCase {
                         "The header of summary section should not be nil")
         XCTAssertNotNil(summarySection.cellIdentifier,
                         "The cellIdentifier of summary section should not be nil")
+        XCTAssertNotNil(summarySection.scheduleTransferSectionHeader,
+                        "The header of summary section should not be nil")
     }
 
     private func assertSummarySectionWithoutFeeResult(summarySection: ScheduleTransferSectionData) {

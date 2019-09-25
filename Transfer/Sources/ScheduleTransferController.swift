@@ -27,6 +27,7 @@ final class ScheduleTransferController: UITableViewController, UITextFieldDelega
     private var spinnerView: SpinnerView?
     private var processingView: ProcessingView?
     private var presenter: ScheduleTransferPresenter!
+    private let footerIdentifier = "scheduleTransferFooterViewIdentifier"
 
     private let registeredCells: [(type: AnyClass, id: String)] = [
         (TransferDestinationCell.self, TransferDestinationCell.reuseIdentifier),
@@ -50,8 +51,13 @@ final class ScheduleTransferController: UITableViewController, UITextFieldDelega
     private func initializePresenter() {
         if let transferMethod = initializationData?[InitializationDataField.transferMethod]
             as? HyperwalletTransferMethod,
-            let transfer = initializationData?[InitializationDataField.transfer] as? HyperwalletTransfer {
-            presenter = ScheduleTransferPresenter(view: self, transferMethod: transferMethod, transfer: transfer)
+            let transfer = initializationData?[InitializationDataField.transfer] as? HyperwalletTransfer,
+            let didFxQuoteChange = initializationData?[InitializationDataField.didFxQuoteChange] as? Bool {
+            presenter = ScheduleTransferPresenter(
+                view: self,
+                transferMethod: transferMethod,
+                transfer: transfer,
+                didFxQuoteChange: didFxQuoteChange)
         } else {
             fatalError("Required data not provided in initializePresenter")
         }
@@ -63,10 +69,14 @@ final class ScheduleTransferController: UITableViewController, UITextFieldDelega
         tableView.allowsSelection = false
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Theme.Cell.smallHeight
+        tableView.sectionFooterHeight = UITableView.automaticDimension
+        tableView.estimatedSectionFooterHeight = Theme.Cell.smallHeight
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)
         }
         tableView.register(DividerCell.self, forCellReuseIdentifier: DividerCell.reuseIdentifier)
+        tableView.register(TransferTableViewFooterView.self,
+                           forHeaderFooterViewReuseIdentifier: footerIdentifier)
     }
 }
 
@@ -86,6 +96,39 @@ extension ScheduleTransferController {
 
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return getCellConfiguration(indexPath)
+    }
+
+    override public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let attributedText = getAttributedFooterText(for: section)
+        if attributedText == nil {
+            return nil
+        }
+        guard let view = tableView.dequeueReusableHeaderFooterView(
+            withIdentifier: footerIdentifier) as? TransferTableViewFooterView else {
+                return nil
+        }
+        view.footerLabel.attributedText = attributedText
+        return view
+    }
+
+    private func getAttributedFooterText(for section: Int) -> NSAttributedString? {
+        let sectionData = presenter.sectionData[section]
+        var attributedText: NSAttributedString?
+        if let transferSectionData = sectionData as? ScheduleTransferSummaryData {
+            attributedText = format(footer: transferSectionData.footer)
+        }
+        return attributedText
+    }
+
+    private func format(footer: String? = nil) -> NSAttributedString? {
+        var attributedText: NSMutableAttributedString! = nil
+        if let footer = footer {
+            attributedText = NSMutableAttributedString()
+            attributedText.appendParagraph(value: footer,
+                                           font: Theme.Label.footnoteFont,
+                                           color: Theme.Label.subTitleColor)
+        }
+        return attributedText
     }
 
     private func getCellConfiguration(_ indexPath: IndexPath) -> UITableViewCell {

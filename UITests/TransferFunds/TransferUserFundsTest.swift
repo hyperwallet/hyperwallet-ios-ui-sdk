@@ -429,7 +429,7 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.nextLabel.tap()
         waitForNonExistence(spinner)
 
-        let error = app.tables["createTransferTableView"].staticTexts["transferFooterLabelIdentifier"].label
+        let error = app.tables["createTransferTableView"].staticTexts["transferTableViewFooterViewIdentifier"].label
         XCTAssertTrue(error
             .replacingOccurrences(of: "\n", with: " ")
             .contains("Available for transfer: 452.14 USD Enter amount or select tranfer all funds")
@@ -558,7 +558,7 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.nextLabel.tap()
         waitForNonExistence(spinner)
 
-        let error = app.tables["createTransferTableView"].staticTexts["transferFooterLabelIdentifier"].label
+        let error = app.tables["createTransferTableView"].staticTexts["transferTableViewFooterViewIdentifier"].label
 
         XCTAssertTrue(error
             .replacingOccurrences(of: "\n", with: " ")
@@ -809,7 +809,7 @@ class TransferUserFundsTest: BaseTests {
                              method: HTTPMethod.get)
         transferFunds.addSelectDestinationLabel.tap()
         waitForNonExistence(spinner)
-        XCTAssertTrue(selectDestination.selectDestinationTitle.exists)
+                XCTAssertTrue(selectDestination.selectDestinationTitle.exists)
         XCTAssertTrue(selectDestination.addTransferMethodButton.exists)
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 0), "Bank Account")
         XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), "United States Ending on 6789")

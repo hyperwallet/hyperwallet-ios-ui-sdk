@@ -35,12 +35,18 @@ final class ScheduleTransferPresenter {
     private(set) var sectionData = [ScheduleTransferSectionData]()
     private var transferMethod: HyperwalletTransferMethod
     private var transfer: HyperwalletTransfer
+    private var didFxQuoteChange: Bool
 
     /// Initialize ScheduleTransferPresenter
-    init(view: ScheduleTransferView, transferMethod: HyperwalletTransferMethod, transfer: HyperwalletTransfer) {
+    init(
+        view: ScheduleTransferView,
+        transferMethod: HyperwalletTransferMethod,
+        transfer: HyperwalletTransfer,
+        didFxQuoteChange: Bool) {
         self.view = view
         self.transferMethod = transferMethod
         self.transfer = transfer
+        self.didFxQuoteChange = didFxQuoteChange
         initializeSections()
     }
 
@@ -59,7 +65,9 @@ final class ScheduleTransferPresenter {
             sectionData.append(scheduleTransferForeignExchangesSection)
         }
 
-        let scheduleTransferSummaryData = ScheduleTransferSummaryData(transfer: transfer)
+        let scheduleTransferSummaryData = ScheduleTransferSummaryData(
+            transfer: transfer,
+            didFxQuoteChange: didFxQuoteChange)
         sectionData.append(scheduleTransferSummaryData)
 
         if let scheduleTransferNotesData = ScheduleTransferNotesData(transfer: transfer) {

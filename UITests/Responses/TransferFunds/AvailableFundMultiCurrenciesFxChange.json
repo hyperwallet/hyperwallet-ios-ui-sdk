@@ -1,0 +1,52 @@
+{
+    "token": "trf-token",
+    "status": "QUOTED",
+    "createdOn": "2019-08-02T18:43:05",
+    "clientTransferId": "6712348070814",
+    "sourceToken": "usr-token",
+    "destinationToken": "trm-token",
+    "destinationAmount": "5,855.66",
+    "destinationFeeAmount": "2.00",
+    "destinationCurrency": "USD",
+    "foreignExchanges": [
+        {
+            "sourceCurrency": "MYR",
+            "sourceAmount": "9,992.50",
+            "destinationCurrency": "USD",
+            "destinationAmount": "2,337.93",
+            "rate": "0.233968"
+        },
+        {
+            "sourceCurrency": "CAD",
+            "sourceAmount": "1,464.53",
+            "destinationCurrency": "USD",
+            "destinationAmount": "1,134.13",
+            "rate": "0.774399"
+        },
+        {
+            "sourceCurrency": "KRW",
+            "sourceAmount": "50,000",
+            "destinationCurrency": "USD",
+            "destinationAmount": "43.25",
+            "rate": "0.000865"
+        },
+        {
+            "sourceCurrency": "EUR",
+            "sourceAmount": "1,000.00",
+            "destinationCurrency": "USD",
+            "destinationAmount": "1,135.96",
+            "rate": "1.135960"
+        }
+    ],
+    "notes": "Transfer All",
+    "memo": "TransferClientId56387",
+    "expiresOn": "2019-08-02T18:45:05",
+    "links": [
+        {
+            "params": {
+                "rel": "self"
+            },
+            "href": "https://localhost.com/rest/v3/transfers/trf-token"
+        }
+    ]
+}
