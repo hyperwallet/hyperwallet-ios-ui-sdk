@@ -216,7 +216,6 @@
 "transfer_error_enter_amount_or_transfer_all" = "Enter amount or select tranfer all funds";
 "transfer_error_add_a_transfer_method_first" = "Add a transfer method first";
 "transfer_error_no_transfer_method_module_initialized" = "Functionality to add an Account has not been included in this application.";
-"transfer_error_no_transfer_method_module_initialized" = "Please add the transfer module to your project";
 "transfer_fx_rate_changed" = "Due to changes in the FX rate, you will now receive: %1$@";
 
 // List of countries
