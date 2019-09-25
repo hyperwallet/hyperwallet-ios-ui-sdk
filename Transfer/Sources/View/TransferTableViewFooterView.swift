@@ -19,14 +19,11 @@
 import UIKit
 
 final class TransferTableViewFooterView: UITableViewHeaderFooterView {
-    static let reuseIdentifier = "transferTableViewFooterViewIdentifier"
-
     lazy var footerLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.accessibilityIdentifier = "transferFooterLabelIdentifier"
         label.setContentCompressionResistancePriority(.required, for: .vertical)
         return label
     }()
@@ -34,6 +31,7 @@ final class TransferTableViewFooterView: UITableViewHeaderFooterView {
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         contentView.addSubview(footerLabel)
+        footerLabel.accessibilityIdentifier = reuseIdentifier
 
         let margins = contentView.layoutMarginsGuide
         let constraints = [

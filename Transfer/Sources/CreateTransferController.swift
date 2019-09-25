@@ -31,6 +31,7 @@ final class CreateTransferController: UITableViewController {
         case destination, transfer, notes, button
     }
 
+    private let footerIdentifier = "transferTableViewFooterViewIdentifier"
     private var spinnerView: SpinnerView?
     private lazy var selectTransferMethodCoordinator = getSelectTransferMethodCoordinator()
     private var presenter: CreateTransferPresenter!
@@ -76,7 +77,7 @@ final class CreateTransferController: UITableViewController {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)
         }
         tableView.register(TransferTableViewFooterView.self,
-                           forHeaderFooterViewReuseIdentifier: TransferTableViewFooterView.reuseIdentifier)
+                           forHeaderFooterViewReuseIdentifier: footerIdentifier)
     }
 }
 
@@ -104,7 +105,7 @@ extension CreateTransferController {
             return nil
         }
         guard let view = tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: TransferTableViewFooterView.reuseIdentifier) as? TransferTableViewFooterView else {
+            withIdentifier: footerIdentifier) as? TransferTableViewFooterView else {
                 return nil
         }
         view.footerLabel.adjustsFontForContentSizeCategory = true
@@ -347,8 +348,13 @@ extension CreateTransferController: CreateTransferView {
 
     func showScheduleTransfer(_ transfer: HyperwalletTransfer) {
         if let transferMethod = presenter.selectedTransferMethod {
-            coordinator?.navigateToNextPage(initializationData:
-                [InitializationDataField.transfer: transfer, InitializationDataField.transferMethod: transferMethod])
+            coordinator?.navigateToNextPage(
+                initializationData: [
+                    InitializationDataField.transfer: transfer,
+                    InitializationDataField.transferMethod: transferMethod,
+                    InitializationDataField.didFxQuoteChange: presenter.didFxQuoteChange
+                ]
+            )
         }
     }
 }

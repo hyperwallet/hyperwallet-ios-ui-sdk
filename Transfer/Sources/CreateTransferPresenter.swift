@@ -61,6 +61,7 @@ final class CreateTransferPresenter {
     private(set) var clientTransferId: String
     private(set) var sectionData = [CreateTransferSectionData]()
     private(set) var availableBalance: String?
+    private(set) var didFxQuoteChange: Bool = false
 
     private var sourceToken: String?
 
@@ -89,7 +90,8 @@ final class CreateTransferPresenter {
         let createTransferDestinationSection = CreateTransferSectionDestinationData()
         sectionData.append(createTransferDestinationSection)
 
-        let createTransferSectionTransferData = CreateTransferSectionTransferData(availableBalance: availableBalance)
+        let createTransferSectionTransferData = CreateTransferSectionTransferData(availableBalance: availableBalance,
+                                                                                  currencyCode: destinationCurrency)
         sectionData.append(createTransferSectionTransferData)
 
         let createTransferNotesSection = CreateTransferSectionNotesData()
@@ -148,7 +150,7 @@ final class CreateTransferPresenter {
     private func createInitialTransfer() {
         guard let sourceToken = sourceToken,
             let destinationToken = selectedTransferMethod?.token,
-            let destinationCurrency = selectedTransferMethod?.transferMethodCurrency else {
+            let destinationCurrency = destinationCurrency else {
                 view.hideLoading()
                 view.showCreateTransfer()
                 return
@@ -185,12 +187,12 @@ final class CreateTransferPresenter {
 
         if let sourceToken = sourceToken,
             let destinationToken = selectedTransferMethod?.token,
-            let destinationCurrency = selectedTransferMethod?.transferMethodCurrency {
+            let destinationCurrency = destinationCurrency {
             view.showLoading()
             let transfer = HyperwalletTransfer.Builder(clientTransferId: clientTransferId,
                                                        sourceToken: sourceToken,
                                                        destinationToken: destinationToken)
-                .destinationAmount(amount)
+                .destinationAmount(transferAllFundsIsOn ? nil : amount)
                 .notes(notes)
                 .destinationCurrency(destinationCurrency)
                 .build()
@@ -210,6 +212,9 @@ final class CreateTransferPresenter {
 
                 case .success(let transfer):
                     if let transfer = transfer {
+                        if self?.transferAllFundsIsOn ?? false && transfer.destinationAmount != self?.availableBalance {
+                            strongSelf.didFxQuoteChange = true
+                        }
                         strongSelf.view.notifyTransferCreated(transfer)
                         strongSelf.view.showScheduleTransfer(transfer)
                     }

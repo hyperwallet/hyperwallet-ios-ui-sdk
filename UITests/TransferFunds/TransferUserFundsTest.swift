@@ -95,7 +95,7 @@ class TransferUserFundsTest: BaseTests {
             XCTAssertEqual(transferFunds.notesDescriptionTextField.value as? String, "testing")
         }
 
-        let availableFunds = app.tables["createTransferTableView"].staticTexts["Available for transfer: 452.14"]
+        let availableFunds = app.tables["createTransferTableView"].staticTexts["Available for transfer: 452.14 USD"]
         XCTAssertTrue(availableFunds.exists)
 
         // Next Button
@@ -160,7 +160,7 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertEqual(transferFunds.transferAllFundsLabel.label, "Transfer all funds")
         XCTAssertTrue(transferFunds.transferAllFundsSwitch.exists, "Transfer all funds switch should exist")
         // Assert the full amount
-        let availableFunds = app.tables["createTransferTableView"].staticTexts["Available for transfer: 452.14"]
+        let availableFunds = app.tables["createTransferTableView"].staticTexts["Available for transfer: 452.14 USD"]
         XCTAssertTrue(availableFunds.exists)
         // Turn on the Transfer All Funds Switch
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "")
@@ -208,7 +208,7 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.notesSectionLabel.exists)
         XCTAssertEqual(transferFunds.notesDescriptionTextField.placeholderValue, "Description")
 
-        let availableFunds = app.tables["createTransferTableView"].staticTexts["Available for transfer: 5,855.17"]
+        let availableFunds = app.tables["createTransferTableView"].staticTexts["Available for transfer: 5,855.17 USD"]
         XCTAssertTrue(availableFunds.exists)
 
         // Turn the Transfer All Switch On
@@ -259,7 +259,7 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.notesSectionLabel.exists)
         XCTAssertEqual(transferFunds.notesDescriptionTextField.placeholderValue, "Description")
 
-        let availableFunds = app.tables["createTransferTableView"].staticTexts["Available for transfer: 452.14"]
+        let availableFunds = app.tables["createTransferTableView"].staticTexts["Available for transfer: 452.14 USD"]
         XCTAssertTrue(availableFunds.exists)
 
         // Turn the Transfer All Switch On
@@ -429,9 +429,11 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.nextLabel.tap()
         waitForNonExistence(spinner)
 
-        let error = app.tables["createTransferTableView"].staticTexts["transferFooterLabelIdentifier"].label
-        XCTAssertTrue(error.contains("Available for transfer: 452.14\nEnter amount or select tranfer all funds")
-            ||  error.contains("Available for transfer: 452.14 Enter amount or select tranfer all funds"))
+        let error = app.tables["createTransferTableView"].staticTexts["transferTableViewFooterViewIdentifier"].label
+        XCTAssertTrue(error
+            .replacingOccurrences(of: "\n", with: " ")
+            .contains("Available for transfer: 452.14 USD Enter amount or select tranfer all funds")
+        )
     }
 
     /*
@@ -556,9 +558,12 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.nextLabel.tap()
         waitForNonExistence(spinner)
 
-        let error = app.tables["createTransferTableView"].staticTexts["transferFooterLabelIdentifier"].label
-        XCTAssertTrue(error == "Available for transfer: 452.14\nNotes should be between 1 and 255 characters"
-            || error == "Available for transfer: 452.14 Notes should be between 1 and 255 characters")
+        let error = app.tables["createTransferTableView"].staticTexts["transferTableViewFooterViewIdentifier"].label
+
+        XCTAssertTrue(error
+            .replacingOccurrences(of: "\n", with: " ")
+            .contains("Available for transfer: 452.14 USD Notes should be between 1 and 255 characters")
+        )
     }
 
     /* Given that Transfer methods exist
@@ -804,7 +809,7 @@ class TransferUserFundsTest: BaseTests {
                              method: HTTPMethod.get)
         transferFunds.addSelectDestinationLabel.tap()
         waitForNonExistence(spinner)
-        XCTAssertTrue(selectDestination.selectDestinationTitle.exists)
+                XCTAssertTrue(selectDestination.selectDestinationTitle.exists)
         XCTAssertTrue(selectDestination.addTransferMethodButton.exists)
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 0), "Bank Account")
         XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), "United States Ending on 6789")
