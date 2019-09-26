@@ -275,11 +275,11 @@ override public func viewDidLoad() {
     super.viewDidLoad()
     ...
     NotificationCenter.default.addObserver(self,
-                                        selector: #selector(didTransferMethodCreatedNotification(notification:)),
+                                        selector: #selector(didTransferCreatedNotification(notification:)),
                                         name: Notification.Name.transferCreated, object: nil)
 }
 
-@objc func didTransferMethodCreatedNotification(notification: Notification) {
+@objc func didTransferCreatedNotification(notification: Notification) {
     if let transfer = notification.userInfo![UserInfo.transferCreated] as? HyperwalletTransfer {
         // A transfer has been created.
     }
@@ -296,11 +296,11 @@ override public func viewDidLoad() {
     super.viewDidLoad()
     ...
     NotificationCenter.default.addObserver(self,
-                                        selector: #selector(didTransferMethodScheduledNotification(notification:)),
+                                        selector: #selector(didTransferScheduledNotification(notification:)),
                                         name: Notification.Name.transferScheduled, object: nil)
 }
 
-@objc func didTransferMethodScheduledNotification(notification: Notification) {
+@objc func didTransferScheduledNotification(notification: Notification) {
     if let statusTransition = notification.userInfo![UserInfo.transferScheduled] as? HyperwalletStatusTransition {
         // A transfer has been scheduled.
     }
