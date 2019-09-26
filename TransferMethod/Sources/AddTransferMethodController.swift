@@ -341,7 +341,7 @@ extension AddTransferMethodController: AddTransferMethodView {
         DispatchQueue.global(qos: .background).async {
             NotificationCenter.default.post(name: .transferMethodAdded,
                                             object: self,
-                                            userInfo: [UserInfo.transferMethod: transferMethod])
+                                            userInfo: [UserInfo.transferMethodAdded: transferMethod])
         }
         coordinator?.navigateBackFromNextPage(with: transferMethod)
     }
