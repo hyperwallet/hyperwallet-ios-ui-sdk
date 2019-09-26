@@ -218,6 +218,8 @@ coordinator.navigate()
 |:-----------------|:-----------|
 | Notification.Name.transferMethodAdded | Posted when a new transfer method (bank account, bank card, PayPal account, prepaid card, paper check) has been created. |
 | Notification.Name.transferMethodDeactivated | Posted when a transfer method (bank account, bank card, PayPal account, prepaid card, paper check) has been deactivated. |
+| Notification.Name.transferCreated | Posted when a transfer of funds has been created. |
+| Notification.Name.transferScheduled | Posted when a transfer of funds has been scheduled. |
 
 When an object adds itself as an observer, it specifies which notifications it should receive. An object may, therefore, call this method several times in order to register itself as an observer for several different notifications.
 
@@ -236,7 +238,7 @@ override public func viewDidLoad() {
 }
 
 @objc func didCreateNewTransferMethodNotification(notification: Notification) {
-    if let transferMethod = notification.userInfo![UserInfo.transferMethod] as? HyperwalletTransferMethod {
+    if let transferMethod = notification.userInfo![UserInfo.transferMethodAdded] as? HyperwalletTransferMethod {
         // A new transfer method has been created
     }
 }
@@ -257,10 +259,50 @@ override public func viewDidLoad() {
 }
 
 @objc func didTransferMethodDeactivatedNotification(notification: Notification) {
-    if let statusTransition = notification.userInfo![UserInfo.statusTransition] as? HyperwalletStatusTransition {
+    if let statusTransition = notification.userInfo![UserInfo.transferMethodDeactivated] as? HyperwalletStatusTransition {
         // A transfer method has been deactivated.
-        print(statusTransition.fromStatus)
-        print(statusTransition.toStatus)
+    }
+}
+```
+
+### How to use `Notification.Name.transferCreated`
+
+```swift
+import HyperwalletSDK
+import HyperwalletUISDK
+
+override public func viewDidLoad() {
+    super.viewDidLoad()
+    ...
+    NotificationCenter.default.addObserver(self,
+                                        selector: #selector(didTransferMethodCreatedNotification(notification:)),
+                                        name: Notification.Name.transferCreated, object: nil)
+}
+
+@objc func didTransferMethodCreatedNotification(notification: Notification) {
+    if let transfer = notification.userInfo![UserInfo.transferCreated] as? HyperwalletTransfer {
+        // A transfer has been created.
+    }
+}
+```
+
+### How to use `Notification.Name.transferScheduled`
+
+```swift
+import HyperwalletSDK
+import HyperwalletUISDK
+
+override public func viewDidLoad() {
+    super.viewDidLoad()
+    ...
+    NotificationCenter.default.addObserver(self,
+                                        selector: #selector(didTransferMethodScheduledNotification(notification:)),
+                                        name: Notification.Name.transferScheduled, object: nil)
+}
+
+@objc func didTransferMethodScheduledNotification(notification: Notification) {
+    if let statusTransition = notification.userInfo![UserInfo.transferScheduled] as? HyperwalletStatusTransition {
+        // A transfer has been scheduled.
     }
 }
 ```
