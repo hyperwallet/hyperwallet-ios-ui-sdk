@@ -91,6 +91,20 @@ class ScheduleTransferPresenterTests: XCTestCase {
         assertButtonSectionResult(buttonSection: presenter.sectionData.last!)
     }
 
+    public func testScheduleSectionData_FxChanged() {
+        transfer = getTransfer(from: HyperwalletTestHelper
+            .getDataFromJson("CreateTransferResponse"))!
+        presenter = ScheduleTransferPresenter(
+            view: mockView,
+            transferMethod: transferMethod,
+            transfer: transfer,
+            didFxQuoteChange: true)
+
+        XCTAssertEqual(presenter.sectionData.count, 5)
+        assertDestinationSectionResult(destinationSection: presenter.sectionData.first!)
+        assertSummarySectionWithFxChange(summarySection: presenter.sectionData[2])
+    }
+
     private func getTransfer(from jsonData: Data) -> HyperwalletTransfer? {
         let decoder = JSONDecoder()
         return try? decoder.decode(HyperwalletTransfer.self, from: jsonData)
@@ -132,6 +146,16 @@ class ScheduleTransferPresenterTests: XCTestCase {
                         "The header of summary section should not be nil")
         XCTAssertNotNil(summarySection.cellIdentifier,
                         "The cellIdentifier of summary section should not be nil")
+    }
+
+    private func assertSummarySectionWithFxChange(summarySection: ScheduleTransferSectionData) {
+        if let scheduleTransferSectionData = summarySection as? ScheduleTransferSummaryData {
+            XCTAssertNotNil(
+                scheduleTransferSectionData.footer,
+                "The footer of summary data should have the error message for FX")
+        } else {
+            XCTAssert(false, "Wrong section data type")
+        }
     }
 
     private func assertNotesSectionResult(notesSection: ScheduleTransferSectionData) {
