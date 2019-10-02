@@ -1,11 +1,6 @@
 default_platform(:ios)
 platform :ios do
 
-  desc "Release a new version with a beta bump_type"
-  lane :beta do
-    release("beta")
-  end
-
   desc "Release a new version with a patch bump_type"
   lane :patch do
     release("patch")
@@ -18,21 +13,16 @@ platform :ios do
 
   desc "Release a new version with a major bump_type"
   lane :major do
-    version = get_version_number(target: Common)
+    version = get_version_number(target: "Common")
     add_git_tag(tag: "#{version}")
     push_to_git_remote
     pod_push
   end
 
   def release(type)
+    version = prompt(text: "Enter the version to be released: ")
     podspec_name = "HyperwalletUISDK.podspec"
-    #pod_lib_lint(allow_warnings: true, skip_tests: true, sources: ["https://github.com/hyperwallet/hyperwallet-ios-sdk.git","https://github.com/hyperwallet/hyperwallet-ios-sdk-specs.git","https://github.com/JanGorman/Hippolyte.git","https://github.com/CocoaPods/Specs.git"])
-    #pod_lib_lint(allow_warnings: true, skip_tests: true)
-    #version = version_bump_podspec(version_number: "1.0.0-beta04", path: podspec_name,
-    #                               bump_type: type)
-    #increment_version_number(version_number: version)
-    #increment_build_number(build_number: version)
-    version = prompt(text: "Version is: ")
+    pod_lib_lint(allow_warnings: true, skip_tests: true)
     version_bump_podspec(version_number: version, path: podspec_name, bump_type: type)
     increment_version_number(version_number: version)
     get_version_number(target: "Common")
@@ -41,8 +31,6 @@ platform :ios do
     git_add(path: "**/*/Info.plist")
     git_commit(path: [podspec_name, "**/Info.plist", "**/*/Info.plist"],
                message: "#{version} release")
-    #add_git_tag(tag: "#{version}")
     push_to_git_remote
-    #pod_push
   end
 end
