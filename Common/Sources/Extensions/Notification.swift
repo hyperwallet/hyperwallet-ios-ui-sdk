@@ -45,13 +45,13 @@ public extension Notification.Name {
 
 /// The Hyperwallet's `NotificationCenter` key to access the information.
 ///
-/// - transferMethod: A new transfer method has been created.
-/// - statusTransition: A transfer method has been deactivated.
+/// - transferMethodAdded: A new transfer method has been added.
+/// - transferMethodDeactivated: A transfer method has been deactivated.
 /// - transferCreated: A transfer of funds has been created.
 /// - transferScheduled: A transfer has been scheduled.
 public enum UserInfo: String {
-    case transferMethod
-    case statusTransition
+    case transferMethodAdded
+    case transferMethodDeactivated
     case transferCreated
     case transferScheduled
 }
