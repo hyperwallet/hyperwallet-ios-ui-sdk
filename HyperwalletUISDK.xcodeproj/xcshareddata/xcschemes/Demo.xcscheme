@@ -37,6 +37,44 @@
                BlueprintName = "HyperwalletUISDKUITests"
                ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "AddTransferMethodBankAccountBusinessTests">
+               </Test>
+               <Test
+                  Identifier = "AddTransferMethodBankAccountIndividualTests">
+               </Test>
+               <Test
+                  Identifier = "AddTransferMethodBankCardTests">
+               </Test>
+               <Test
+                  Identifier = "AddTransferMethodPayPalAccountTests">
+               </Test>
+               <Test
+                  Identifier = "AddTransferMethodWireAccountIndividualTests">
+               </Test>
+               <Test
+                  Identifier = "BaseTests">
+               </Test>
+               <Test
+                  Identifier = "ListReceiptTests">
+               </Test>
+               <Test
+                  Identifier = "ListTransferMethodTests">
+               </Test>
+               <Test
+                  Identifier = "PrepaidCardListReceiptTests">
+               </Test>
+               <Test
+                  Identifier = "SelectTransferMethodTypeTests">
+               </Test>
+               <Test
+                  Identifier = "TransferUserFundsConfirmationTest">
+               </Test>
+               <Test
+                  Identifier = "TransferUserFundsPPCTest">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>
