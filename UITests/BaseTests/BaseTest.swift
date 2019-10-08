@@ -6,8 +6,6 @@ class BaseTests: XCTestCase {
     var spinner: XCUIElement!
 
     override func setUp() {
-        continueAfterFailure = false
-
         mockServer = HyperwalletMockWebServer()
         mockServer.setUp()
 
