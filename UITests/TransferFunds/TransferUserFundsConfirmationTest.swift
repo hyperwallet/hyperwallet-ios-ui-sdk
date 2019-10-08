@@ -238,7 +238,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         transferFundsConfirmation.confirmButton.tap()
 
         // Assert Transfer Quote Expire error
-        waitForExistence(app.alerts["Error"])
+        XCTAssert(waitForExistenceWithFailure(app.alerts["Error"]), "Unable to show error in time")
         let predicate = NSPredicate(format:
             "label CONTAINS[c] 'The transfer request has expired on Wed Jul 24 21:38:58 GMT 2019. Please create a new transfer and commit it before 120 seconds.'")
         XCTAssert(app.alerts["Error"]
