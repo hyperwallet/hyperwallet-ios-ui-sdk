@@ -10,7 +10,7 @@ Pod::Spec.new do |spec|
     spec.source                = { :git => 'https://github.com/hyperwallet/hyperwallet-ios-ui-sdk.git', :branch => "development"}
     spec.requires_arc          = true
     spec.swift_version         = '5.0'
-    spec.dependency 'HyperwalletSDK', '1.0.0-beta04'
+    spec.dependency 'HyperwalletSDK', '1.0.0-beta05'
 
     spec.default_subspec = 'TransferMethod', 'Receipt', 'Transfer'
 
