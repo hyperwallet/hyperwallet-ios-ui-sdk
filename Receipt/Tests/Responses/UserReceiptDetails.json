@@ -1,0 +1,80 @@
+[
+    {
+        "journalId": "55176986",
+        "type": "PAYMENT",
+        "createdOn": "2019-04-28T18:16:04",
+        "entry": "CREDIT",
+        "sourceToken": "act-123456789",
+        "destinationToken": "usr-123456789",
+        "amount": "6.00",
+        "fee": "1.11",
+        "currency": "USD",
+        "details": {
+            "clientPaymentId": "DyClk0VG2a",
+            "payeeName": "Shaoyun Yang"
+        }
+    },
+    {
+        "journalId": "55176988",
+        "type": "PAYMENT",
+        "createdOn": "2019-04-28T18:17:17",
+        "entry": "DEBIT",
+        "sourceToken": "act-123456789",
+        "destinationToken": "usr-123456789",
+        "amount": "9.87",
+        "fee": "0.11",
+        "currency": "USD",
+        "details": {
+            "clientPaymentId": "DyCjgllk0VG2a",
+            "payeeName": "Shaoyun Yang",
+            "notes": "Notes are basically made to record an event or information.",
+            "charityName": "Charity Name",
+            "checkNumber": "Check Number 123",
+            "website": "https://test.tt"
+        }
+    },
+    {
+        "journalId": "55176990",
+        "type": "PAYMENT",
+        "createdOn": "2019-04-29T18:09:09",
+        "entry": "DEBIT",
+        "sourceToken": "act-123456789",
+        "destinationToken": "usr-123456789",
+        "amount": "100500",
+        "fee": "500",
+        "currency": "KRW",
+        "details": {
+            "clientPaymentId": "DqqCjwk0tt52a",
+            "payeeName": "Shaoyun Yang"
+        }
+    },
+    {
+        "journalId": "55176991",
+        "type": "PAYMENT",
+        "createdOn": "2019-04-29T18:09:09",
+        "entry": "DEBIT",
+        "sourceToken": "act-123456789",
+        "destinationToken": "usr-123456789",
+        "amount": "100500",
+        "fee": "0.0",
+        "currency": "KRW",
+        "details": {
+            "clientPaymentId": "DqqCjwk0tt52a",
+            "payeeName": "Shaoyun Yang"
+        }
+    },
+    {
+        "journalId": "55176991",
+        "type": "PAYMENT",
+        "createdOn": "2019-04-29T18:09:09",
+        "entry": "DEBIT",
+        "sourceToken": "act-123456789",
+        "destinationToken": "usr-123456789",
+        "amount": "100500",
+        "currency": "KRW",
+        "details": {
+            "clientPaymentId": "DqqCjwk0tt52a",
+            "payeeName": "Shaoyun Yang"
+        }
+    }
+]

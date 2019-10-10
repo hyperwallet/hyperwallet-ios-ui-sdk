@@ -19,7 +19,7 @@ class SelectTransferMethodType {
         currencySelect = app.tables.cells["cellCurrency"].staticTexts["Currency"]
         countryTable = app.otherElements.containing(.navigationBar, identifier: "Select Country").element
         currencyTable = app.otherElements.containing(.navigationBar, identifier: "Select Currency").element
-        searchBar = app.searchFields["Search"]
+        searchBar = app.searchFields["search"]
         navigationBar = app.navigationBars["Add Account"]
     }
 

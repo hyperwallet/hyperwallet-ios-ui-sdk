@@ -1,0 +1,8 @@
+{
+    "errors": [
+        {
+            "message": "Amount is less than the fee amount",
+            "code": "AMOUNT_LESS_THAN_FEE"
+        }
+    ]
+}
