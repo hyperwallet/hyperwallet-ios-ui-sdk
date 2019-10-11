@@ -3,6 +3,7 @@ import XCTest
 class TransferUserFundsPPCTest: BaseTests {
     var transferFundPPCMenu: XCUIElement!
     var transferFunds: TransferFunds!
+
     override func setUp() {
         super.setUp()
         app = XCUIApplication()
@@ -12,10 +13,6 @@ class TransferUserFundsPPCTest: BaseTests {
             .containing(.staticText, identifier: "Transfer Funds PPC")
             .element(boundBy: 0)
         transferFunds = TransferFunds(app: app)
-    }
-
-    override func tearDown() {
-       mockServer.tearDown()
     }
 
     /*

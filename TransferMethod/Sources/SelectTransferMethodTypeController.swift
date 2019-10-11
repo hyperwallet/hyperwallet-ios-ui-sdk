@@ -169,8 +169,7 @@ extension SelectTransferMethodTypeController: SelectTransferMethodTypeView {
                               selectItemHandler: @escaping SelectItemHandler,
                               markCellHandler: @escaping MarkCellHandler,
                               filterContentHandler: @escaping FilterContentHandler) {
-        let genericTableView = GenericController < CountryCurrencyCell,
-            GenericCellConfiguration> ()
+        let genericTableView = GenericController<CountryCurrencyCell, GenericCellConfiguration>()
         genericTableView.title = title
         genericTableView.items = items
         genericTableView.selectedHandler = selectItemHandler

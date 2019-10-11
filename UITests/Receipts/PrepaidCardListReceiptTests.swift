@@ -14,10 +14,6 @@ class PrepaidCardListReceiptTests: BaseTests {
         transactionDetails = TransactionDetails(app: app)
     }
 
-    override func tearDown() {
-        mockServer.tearDown()
-    }
-
     // MARK: Prepaid Card List Receipt TestCases
     func testPrepaidCardReceiptsList_verifyReceiptsOrder() {
         let expectedNumberOfCells = 5
