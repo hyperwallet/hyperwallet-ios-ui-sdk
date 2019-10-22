@@ -39,52 +39,36 @@ class TransferFunds {
 
     var nextLabel: XCUIElement
 
+    var createTable: XCUIElement
+
     init(app: XCUIApplication) {
         self.app = app
-
         transferFundTitle = app.navigationBars["Transfer Funds"].staticTexts["Transfer Funds"]
+        createTable = app.tables["createTransferTableView"]
 
         // "DESTINATIONS"
-
-        addSelectDestinationSectionLabel =
-            app.tables["createTransferTableView"]
-                .staticTexts.containing(.staticText, identifier: "DESTINATION")
-                .element(matching: NSPredicate(format: "label CONTAINS[c] 'DESTINATION'"))
-
-        addSelectDestinationLabel = app.tables["createTransferTableView"].staticTexts["transferDestinationTitleLabel"]
-
+        addSelectDestinationSectionLabel = createTable
+            .staticTexts.containing(.staticText, identifier: "DESTINATION")
+            .element(matching: NSPredicate(format: "label CONTAINS[c] 'DESTINATION'"))
+        addSelectDestinationLabel = createTable.staticTexts["transferDestinationTitleLabel"]
         addSelectDestinationPlaceholderString = ""
-
-        addSelectDestinationDetailLabel = app.tables["createTransferTableView"]
-            .staticTexts["transferDestinationSubtitleLabel"]
-
-        transferSectionLabel = app.tables["createTransferTableView"]
+        addSelectDestinationDetailLabel = createTable.staticTexts["transferDestinationSubtitleLabel"]
+        transferSectionLabel = createTable
             .staticTexts.containing(.staticText, identifier: "TRANSFER")
             .element(matching: NSPredicate(format: "label CONTAINS[c] 'TRANSFER'"))
-
-        transferAmountLabel = app.tables["createTransferTableView"].staticTexts["transferAmountTitleLabel"]
-
-        transferAmount = app.tables["createTransferTableView"].textFields["transferAmountTextField"]
-
-        transferCurrency = app.tables["createTransferTableView"].staticTexts["transferAmountCurrencyLabel"]
-
-        transferAllFundsLabel = app.tables["createTransferTableView"].staticTexts["transferAllFundsTitleLabel"]
-
-        transferAllFundsSwitch = app.tables["createTransferTableView"].switches["transferAllFundsSwitch"]
-
-        notesSectionLabel = app.tables["createTransferTableView"]
+        transferAmountLabel = createTable.staticTexts["transferAmountTitleLabel"]
+        transferAmount = createTable.textFields["transferAmountTextField"]
+        transferCurrency = createTable.staticTexts["transferAmountCurrencyLabel"]
+        transferAllFundsLabel = createTable.staticTexts["transferAllFundsTitleLabel"]
+        transferAllFundsSwitch = createTable.switches["transferAllFundsSwitch"]
+        notesSectionLabel = createTable
             .staticTexts.containing(.staticText, identifier: "NOTES")
             .element(matching: NSPredicate(format: "label CONTAINS[c] 'NOTES'"))
-
         notesPlaceHolderString = "transfer_description".localized()
-
-        notesDescriptionTextField = app.tables["createTransferTableView"].textFields["transferNotesTextField"]
-
-        notesDescriptionOptionLabel = app.tables["createTransferTableView"].staticTexts["receiptTransactionTypeLabel"]
-
-        availableBalance = app.tables["createTransferTableView"].staticTexts["available_balance_footer"]
-
-        nextLabel = app.tables["createTransferTableView"].staticTexts["createTransferNextLabel"]
+        notesDescriptionTextField = createTable.textFields["transferNotesTextField"]
+        notesDescriptionOptionLabel = createTable.staticTexts["receiptTransactionTypeLabel"]
+        availableBalance = createTable.staticTexts["available_balance_footer"]
+        nextLabel = createTable.staticTexts["createTransferNextLabel"]
     }
 
     func toggleTransferAllFundsSwitch() {
@@ -103,5 +87,10 @@ class TransferFunds {
         UIPasteboard.general.string = amount
         transferAmount.doubleTap()
         app.menuItems["Paste"].tap()
+    }
+
+    func tapNextButton() {
+        app.scroll(to: nextLabel)
+        nextLabel.tap()
     }
 }

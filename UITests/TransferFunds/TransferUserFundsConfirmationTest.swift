@@ -1,24 +1,20 @@
 import XCTest
 
 class TransferUserFundsConfirmationTest: BaseTests {
-    var transferFundMenu: XCUIElement!
+    var transferFundMenu: XCUIElement! {
+        return app.tables.cells.containing(.staticText, identifier: "Transfer Funds").element(boundBy: 0)
+    }
     var transferFunds: TransferFunds!
     var transferFundsConfirmation: TransferFundsConfirmation!
+
     override func setUp() {
         super.setUp()
         app = XCUIApplication()
         app.launch()
         spinner = app.activityIndicators["activityIndicator"]
-        transferFundMenu = app.tables.cells
-            .containing(.staticText, identifier: "Transfer Funds")
-            .element(boundBy: 0)
 
         transferFunds = TransferFunds(app: app)
         transferFundsConfirmation = TransferFundsConfirmation(app: app)
-    }
-
-    override func tearDown() {
-        mockServer.tearDown()
     }
 
     //swiftlint:disable function_body_length
@@ -52,10 +48,10 @@ class TransferUserFundsConfirmationTest: BaseTests {
         mockServer.setupStub(url: "/rest/v3/transfers",
                              filename: "AvailableFundUSD",
                              method: HTTPMethod.post)
-        transferFunds.nextLabel.tap()
 
+        transferFunds.tapNextButton()
         waitForExistence(transferFundsConfirmation.transferDestinationLabel)
-        XCTAssertTrue(transferFundsConfirmation.transferDestinationLabel.exists)
+
         XCTAssertTrue(transferFundsConfirmation.transferDestinationDetailLabel.exists)
         let destinationDetail = transferFundsConfirmation.transferDestinationDetailLabel.label
         XCTAssertTrue(destinationDetail == "United States\nEnding on 1234"
@@ -80,12 +76,10 @@ class TransferUserFundsConfirmationTest: BaseTests {
                              filename: "TransferStatusQuoted",
                              method: HTTPMethod.post)
 
-        XCTAssertTrue(transferFundsConfirmation.confirmButton.exists)
-        transferFundsConfirmation.confirmButton.tap()
+        transferFundsConfirmation.tapConfirmButton()
 
         // Assert go back to the menu page
         waitForExistence(transferFundMenu)
-        XCTAssertTrue(transferFundMenu.exists)
     }
 
     //swiftlint:disable function_body_length
@@ -96,6 +90,10 @@ class TransferUserFundsConfirmationTest: BaseTests {
 
         mockServer.setupStub(url: "/rest/v3/transfers",
                              filename: "AvailableFundMultiCurrencies",
+                             method: HTTPMethod.post)
+
+        mockServer.setupStub(url: "/rest/v3/transfers/trf-token/status-transitions",
+                             filename: "TransferStatusQuoted",
                              method: HTTPMethod.post)
 
         transferFundMenu.tap()
@@ -113,18 +111,15 @@ class TransferUserFundsConfirmationTest: BaseTests {
 
         // Turn on the Transfer All Funds Switch
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "")
+
         transferFunds.transferAllFundsSwitch.tap()
+
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "5,855.17")
 
-        mockServer.setupStub(url: "/rest/v3/transfers",
-                             filename: "AvailableFundMultiCurrencies",
-                             method: HTTPMethod.post)
-
-        transferFunds.nextLabel.tap()
+        transferFunds.tapNextButton()
 
         waitForExistence(transferFundsConfirmation.transferDestinationLabel)
         // 1.  Add Destination Section
-        XCTAssertTrue(transferFundsConfirmation.transferDestinationLabel.exists)
         XCTAssertTrue(transferFundsConfirmation.transferDestinationDetailLabel.exists)
         let destinationDetail = transferFundsConfirmation.transferDestinationDetailLabel.label
         XCTAssertTrue(destinationDetail == "United States\nEnding on 1234"
@@ -180,16 +175,10 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertTrue(transferFundsConfirmation.noteLabel.exists)
         XCTAssertEqual(transferFundsConfirmation.noteDescription.value as? String, "Transfer All")
 
-        mockServer.setupStub(url: "/rest/v3/transfers/trf-token/status-transitions",
-                             filename: "TransferStatusQuoted",
-                             method: HTTPMethod.post)
-
-        XCTAssertTrue(transferFundsConfirmation.confirmButton.exists)
-        transferFundsConfirmation.confirmButton.tap()
+        transferFundsConfirmation.tapConfirmButton()
 
         // Assert go back to the menu page
         waitForExistence(transferFundMenu)
-        XCTAssertTrue(transferFundMenu.exists)
     }
 
     //swiftlint:disable line_length
@@ -201,6 +190,10 @@ class TransferUserFundsConfirmationTest: BaseTests {
         mockServer.setupStub(url: "/rest/v3/transfers",
                              filename: "AvailableFundMultiCurrencies",
                              method: HTTPMethod.post)
+
+        mockServer.setupStubError(url: "/rest/v3/transfers/trf-token/status-transitions",
+                                  filename: "TransferErrorQuoteExpired",
+                                  method: HTTPMethod.post)
 
         transferFundMenu.tap()
         waitForNonExistence(spinner)
@@ -220,29 +213,20 @@ class TransferUserFundsConfirmationTest: BaseTests {
         transferFunds.transferAllFundsSwitch.tap()
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "5,855.17")
 
-        mockServer.setupStub(url: "/rest/v3/transfers",
-                             filename: "AvailableFundMultiCurrencies",
-                             method: HTTPMethod.post)
-
-        transferFunds.nextLabel.tap()
+        transferFunds.tapNextButton()
 
         waitForExistence(transferFundsConfirmation.foreignExchangeSectionLabel)
         XCTAssertEqual(transferFundsConfirmation.foreignExchangeSectionLabel.label, "FOREIGN EXCHANGE")
         XCTAssertEqual(transferFundsConfirmation.summaryTitle.label, "SUMMARY")
         XCTAssertEqual(transferFundsConfirmation.noteLabel.label, "NOTES")
 
-        mockServer.setupStubError(url: "/rest/v3/transfers/trf-token/status-transitions",
-                                  filename: "TransferErrorQuoteExpired",
-                                  method: HTTPMethod.post)
-
-        transferFundsConfirmation.confirmButton.tap()
+        transferFundsConfirmation.tapConfirmButton()
 
         // Assert Transfer Quote Expire error
         waitForExistence(app.alerts["Error"])
         let predicate = NSPredicate(format:
             "label CONTAINS[c] 'The transfer request has expired on Wed Jul 24 21:38:58 GMT 2019. Please create a new transfer and commit it before 120 seconds.'")
-        XCTAssert(app.alerts["Error"]
-            .staticTexts.element(matching: predicate).exists)
+        XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
     }
 
     func testTransferFundsConfirmation_verifySummaryWithNoFee() {
@@ -276,7 +260,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         mockServer.setupStub(url: "/rest/v3/transfers",
                              filename: "CreateTransferWithNoFee",
                              method: HTTPMethod.post)
-        transferFunds.nextLabel.tap()
+        transferFunds.tapNextButton()
 
         waitForExistence(transferFundsConfirmation.transferDestinationLabel)
         // Assert confirmation page has no FEE section
@@ -320,7 +304,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
                              filename: "AvailableFundMultiCurrenciesFxChange",
                              method: HTTPMethod.post)
 
-        transferFunds.nextLabel.tap()
+        transferFunds.tapNextButton()
 
         waitForExistence(transferFundsConfirmation.foreignExchangeSectionLabel)
         app.scroll(to: transferFundsConfirmation.confirmButton)
@@ -334,45 +318,45 @@ class TransferUserFundsConfirmationTest: BaseTests {
      mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
      filename: "ListMoreThanOneTransferMethod",
      method: HTTPMethod.get)
-
+     
      mockServer.setupStub(url: "/rest/v3/transfers",
      filename: "AvailableFundUSD",
      method: HTTPMethod.post)
-
+     
      transferFundMenu.tap()
      waitForNonExistence(spinner)
-
+     
      if #available(iOS 11.4, *) {
      XCTAssertTrue(transferFunds.transferFundTitle.exists)
      } else {
      XCTAssertTrue(app.navigationBars["Transfer Funds"].exists)
      }
-
+     
      // Add Destination Section
      XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
      XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
-
+     
      // Turn on the Transfer All Funds Switch
      XCTAssertEqual(transferFunds.transferAmount.value as? String, "")
      transferFunds.transferAllFundsSwitch.tap()
      // Assert Destination Amount is automatically insert into the amount field
      XCTAssertEqual(transferFunds.transferAmount.value as? String, "452.14")
-
+     
      mockServer.setupStub(url: "/rest/v3/transfers",
      filename: "CreateTransferWithZeroFee",
      method: HTTPMethod.post)
-     transferFunds.nextLabel.tap()
-
+     transferFunds.tapNextButton()
+     
      waitForExistence(transferFundsConfirmation.addSelectDestinationLabel)
      // Assert confirmation page has no FEE section
      XCTAssertFalse(transferFundsConfirmation.summaryFeeLabel.exists)
-
+     
      // Summary Section
      XCTAssertTrue(transferFundsConfirmation.summaryTitle.label == "SUMMARY")
      XCTAssertEqual(app.cells.element(boundBy: 8)
      .staticTexts["scheduleTransferSummaryTextLabel"].label, "Amount:")
      XCTAssertEqual(app.cells.element(boundBy: 8).staticTexts["scheduleTransferSummaryTextValue"].label, "5,855.17")
-
+     
      XCTAssertEqual(app.cells.element(boundBy: 9)
      .staticTexts["scheduleTransferSummaryTextLabel"].label, "You will receive:")
      XCTAssertEqual(app.cells.element(boundBy: 9).staticTexts["scheduleTransferSummaryTextValue"].label, "5,855.17")
