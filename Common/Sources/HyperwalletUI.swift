@@ -21,6 +21,11 @@ import UserRepository
 #endif
 import HyperwalletSDK
 
+@objc
+public enum HyperwalletUIError: Int, Error {
+    case notInitialized
+}
+
 /// Class responsible for initializing the Hyperwallet UI SDK. It contains methods to interact with the controllers
 /// used to interact with the Hyperwallet platform
 @objcMembers
@@ -39,12 +44,26 @@ public final class HyperwalletUI: NSObject {
     /// it will be replaced.
     ///
     /// - Parameter provider: a provider of Hyperwallet authentication tokens.
-    public class func setup(_ provider: HyperwalletAuthenticationTokenProvider) {
-        instance = HyperwalletUI(provider)
+    public class func setup(_ provider: HyperwalletAuthenticationTokenProvider,
+                            completion: @escaping (HyperwalletUIError?) -> Void) {
+        instance = HyperwalletUI(provider, completion: { _ in
+            HyperwalletUI.clearInstance()
+            completion(HyperwalletUIError.notInitialized)
+        })
     }
 
-    private init(_ provider: HyperwalletAuthenticationTokenProvider) {
-        Hyperwallet.setup(provider)
-        UserRepositoryFactory.shared.userRepository().getUser { _ in }
+    private init(_ provider: HyperwalletAuthenticationTokenProvider,
+                 completion: @escaping (Error?) -> Void) {
+        Hyperwallet.setup(provider) { _, error in
+            if let error = error {
+                completion(error)
+            }
+        }
+        UserRepositoryFactory.shared.userRepository().getUser {  _ in
+        }
+    }
+
+    private static func clearInstance() {
+        instance = nil
     }
 }
