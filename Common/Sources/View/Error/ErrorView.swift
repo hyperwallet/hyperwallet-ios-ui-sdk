@@ -40,7 +40,7 @@ public final class ErrorView {
     public func show(_ handler: (() -> Void)?) {
         switch error.group {
         case .business:
-            businessError()
+            businessError({ (_) in handler?() })
 
         case .connection:
             connectionError({ (_) in handler?() })
@@ -53,7 +53,7 @@ public final class ErrorView {
     /// To handle business errors
     ///
     /// - Parameter handler: to handle business error
-    public func businessError(_ handler: ((UIAlertAction) -> Void)? = nil) {
+    private func businessError(_ handler: ((UIAlertAction) -> Void)? = nil) {
         HyperwalletUtilViews.showAlert(viewController,
                                        title: "error".localized(),
                                        message: error.getHyperwalletErrors()?.errorList?

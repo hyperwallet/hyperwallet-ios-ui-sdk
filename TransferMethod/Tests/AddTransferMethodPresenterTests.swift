@@ -409,11 +409,6 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
         expectation?.fulfill()
     }
 
-    func showBusinessError(_ error: HyperwalletErrorType, _ handler: @escaping () -> Void) {
-        isShowErrorPerformed = true
-        handler()
-    }
-
     func notifyTransferMethodAdded(_ transferMethod: HyperwalletTransferMethod) {
         isNotificationSent = true
         expectation?.fulfill()
