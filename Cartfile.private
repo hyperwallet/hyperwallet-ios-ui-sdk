@@ -1,3 +1,2 @@
 github "JanGorman/Hippolyte" "0.8.0"
 github "httpswift/swifter" "1.4.7"
-github "hyperwallet/hyperwallet-ios-insights-sdk" "task/HW-57213-create-insights-database"
