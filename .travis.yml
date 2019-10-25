@@ -28,6 +28,7 @@ before_install:
   # List all emulator available
   - xcrun simctl list
   # Update the brew and build dependencies tools
+  - git clone --depth=50 --branch=task/HW-57213-create-insights-database https://github.com/hyperwallet/hyperwallet-ios-insights-sdk.git hyperwallet/hyperwallet-ios-insights-sdk
   # - brew outdated carthage || brew upgrade carthage
   - Carthage update --platform iOS  --cache-builds
   - gem i slather
