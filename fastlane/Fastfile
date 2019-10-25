@@ -8,8 +8,9 @@ lane :release do
   commit = last_git_commit
   message = commit[:message]
   add_git_tag(tag: "#{version}", message: "#{message}")
+  set_github_release(tag_name: "#{version}", description: "#{message}")
   push_to_git_remote
-  pod_push
+  pod_push(allow_warnings: true, skip_tests: true)
 end
 
 def updateVersion(type)
