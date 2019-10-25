@@ -2,11 +2,11 @@ language: swift
 osx_image: xcode10.3
 os: osx
 branches:
- only:
-  - /.*/
+  only:
+  - "/.*/"
 cache:
   directories:
-    - Carthage/Build/
+  - Carthage/Build/
 env:
   global:
   - LC_CTYPE=en_US.UTF-8
@@ -14,31 +14,25 @@ env:
   - PROJECT=HyperwalletUISDK.xcodeproj
   - IOS_FRAMEWORK_SCHEME="HyperwalletUISDK"
   - IOS_UI_TESTS_SCHEME="Demo"
-
+  - secure: FfbYW+53ICT75ai97i/2KaZb+nLmAfxB1ITJKDsqm9UyAv1vJzy6KX3FNLDVCSstXOCINqph23n88ft08v5bnKPED+KIfCIJ0kO0vy5PrWiO+AaXU8xFFEB8ZRl+YRVhj5SsuPf04J6QuaT7HYHW3MaWloGq7z6h787TX3gfvgjuWiq/ouNU4UwipiLx3Cwm6N85sovzIb8fLlMW95fcG7A1IFdyVxx5OEbAwmdlkNTGjdARbvgyY9ThCq4iUhpDEBtp+aCxHFyjUiMChQRTrvTIKOlB0cbGGmFCxp6VKT3aM8VndJyWgi3Kiq0v+09AY4kqUbesb++34WXnYQ5NE8cO41hDBUxb9aMLc+rRuYjLjxUuNfMcvGAOtk1gGJTJ0Z/yYBz8TPKIuEXqVkoLA8h/ILYkT8bBBuLgz7NDvDaYJt/B7efAVMC+rtL1l1KJHtGwnrfsJ2Zbn+Sn8H+67bxaMdVHfOeBmLFVqmoop4yH7Oguq6cLwG4rx/uGEba62ZunpPM+3uy73yuG+vSBNHKCMMnkMywEUmOriWYrRk6+kMU5ImIHp17ZgCVaaLF9RmMD+NDqCZwX04q4F7DWf+WNcWnM9+2Jj5nCj0fsND/P1KRdk+knkDutF1TJWdyffUMHA7kfTGv9tKsy+x55yPFOBduebQKSg2x5nsiEqRE=
   matrix:
-    - ios_version='12.1'  ios_device='iPhone XR' scheme="$IOS_FRAMEWORK_SCHEME" platform='iOS Simulator' configuration="Debug" code_coverage="YES" only_active_arch="YES"
-    - ios_version='12.1'  ios_device='iPhone XR' scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS Simulator' configuration="XCUITest" code_coverage="NO" only_active_arch="NO"
-    - ios_version='11.1'  ios_device='iPhone 7'  scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS Simulator' configuration="XCUITest" code_coverage="NO" only_active_arch="NO"
-
+  - ios_version='12.1'  ios_device='iPhone XR' scheme="$IOS_FRAMEWORK_SCHEME" platform='iOS
+    Simulator' configuration="Debug" code_coverage="YES" only_active_arch="YES"
+  - ios_version='12.1'  ios_device='iPhone XR' scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS
+    Simulator' configuration="XCUITest" code_coverage="NO" only_active_arch="NO"
+  - ios_version='11.1'  ios_device='iPhone 7'  scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS
+    Simulator' configuration="XCUITest" code_coverage="NO" only_active_arch="NO"
 before_install:
-  # Boot the emulator by ID
-  - |
-     ios_uid=$(xcrun instruments -s devices | grep Simulator | grep "$ios_device ($ios_version)*" | grep -o "[0-9A-F]\{8\}-[0-9A-F]\{4\}-[0-9A-F]\{4\}-[0-9A-F]\{4\}-[0-9A-F]\{12\}")
-     xcrun simctl boot $ios_uid
-  # List all emulator available
-  - xcrun simctl list
-  # Update the brew and build dependencies tools
-  # - brew outdated carthage || brew upgrade carthage
-  - Carthage update --platform iOS  --cache-builds
-  - gem i slather
-  # Install build output formatting tool
-  - gem install xcpretty
-  # Force to update the Swiftlint to the last stable version
-  - brew outdated swiftlint || brew upgrade swiftlint
-  # Print the booted emulator
-  - xcrun simctl list | grep "(Booted)"
-  # Print the swiftlint version
-  - swiftlint version
+- |
+  ios_uid=$(xcrun instruments -s devices | grep Simulator | grep "$ios_device ($ios_version)*" | grep -o "[0-9A-F]\{8\}-[0-9A-F]\{4\}-[0-9A-F]\{4\}-[0-9A-F]\{4\}-[0-9A-F]\{12\}")
+  xcrun simctl boot $ios_uid
+- xcrun simctl list
+- Carthage update --platform iOS  --cache-builds
+- gem i slather
+- gem install xcpretty
+- brew outdated swiftlint || brew upgrade swiftlint
+- xcrun simctl list | grep "(Booted)"
+- swiftlint version
 script: |
   set -o pipefail
   set -e
@@ -55,7 +49,4 @@ script: |
 
   # Lint - Add `--strict` to fail for warning and violation
   swiftlint lint --quiet --reporter json
-after_success:
- if [ "$code_coverage" == "YES" ]; then
-      slather;
- fi
+after_success: if [ "$code_coverage" == "YES" ]; then slather; fi
