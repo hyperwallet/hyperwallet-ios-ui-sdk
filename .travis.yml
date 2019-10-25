@@ -21,8 +21,6 @@ env:
     - ios_version='11.1'  ios_device='iPhone 7'  scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS Simulator' configuration="XCUITest" code_coverage="NO" only_active_arch="NO"
 
 before_install:
-  # Try cloning the private repo dependency
-  - https://github.com/hyperwallet/hyperwallet-ios-insights-sdk.git hyperwallet-ios-insights-sdk
   # Boot the emulator by ID
   - |
      ios_uid=$(xcrun instruments -s devices | grep Simulator | grep "$ios_device ($ios_version)*" | grep -o "[0-9A-F]\{8\}-[0-9A-F]\{4\}-[0-9A-F]\{4\}-[0-9A-F]\{4\}-[0-9A-F]\{12\}")
