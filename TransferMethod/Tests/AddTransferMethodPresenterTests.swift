@@ -25,11 +25,11 @@ class AddTransferMethodPresenterTests: XCTestCase {
         HyperwalletTestHelper.setUpMockServer(request: setupTransferMethodConfigurationFields())
 
         let expectation = self.expectation(description: "Load transfer method configuration fields")
-        mockView.expectation = expectation
+        mockView.expectations = ["expectation": expectation]
 
         presenter.loadTransferMethodConfigurationFields(true)
 
-        wait(for: [expectation], timeout: 1)
+        wait(for: Array(mockView.expectations!.values), timeout: 1)
 
         XCTAssertFalse(mockView.isShowErrorPerformed, "The showError should not be performed")
         XCTAssertTrue(mockView.isShowLoadingPerformed, "The showLoading should be performed")
@@ -43,11 +43,11 @@ class AddTransferMethodPresenterTests: XCTestCase {
             setupTransferMethodConfigurationFields(NSError(domain: "", code: -1009, userInfo: nil)))
 
         let expectation = self.expectation(description: "load transfer methods")
-        mockView.expectation = expectation
+        mockView.expectations = ["expectation": expectation]
 
         // When
         presenter.loadTransferMethodConfigurationFields(true)
-        wait(for: [expectation], timeout: 1)
+        wait(for: Array(mockView.expectations!.values), timeout: 1)
 
         XCTAssertTrue(mockView.isShowErrorPerformed, "The showError should be performed")
         XCTAssertFalse(mockView.isShowConfirmationPerformed, "The showError should not be performed")
@@ -67,11 +67,11 @@ class AddTransferMethodPresenterTests: XCTestCase {
 
         // press the create transfer method button
         let expectation = self.expectation(description: "Create bank account completed")
-        mockView.expectation = expectation
+        mockView.expectations = ["expectation": expectation]
 
         presenter.createTransferMethod()
 
-        wait(for: [expectation], timeout: 1)
+        wait(for: Array(mockView.expectations!.values), timeout: 1)
 
         // Then
         XCTAssertFalse(mockView.isShowErrorPerformed, "The showError should not be performed")
@@ -94,11 +94,11 @@ class AddTransferMethodPresenterTests: XCTestCase {
 
         // press the create transfer method button
         let expectation = self.expectation(description: "Create wire account completed")
-        mockView.expectation = expectation
+        mockView.expectations = ["expectation": expectation]
 
         presenter.createTransferMethod()
 
-        wait(for: [expectation], timeout: 1)
+        wait(for: Array(mockView.expectations!.values), timeout: 1)
 
         // Then
         XCTAssertFalse(mockView.isShowErrorPerformed, "The showError should not be performed")
@@ -121,11 +121,11 @@ class AddTransferMethodPresenterTests: XCTestCase {
 
         // press the create transfer method button
         let expectation = self.expectation(description: "Create bank card completed")
-        mockView.expectation = expectation
+        mockView.expectations = ["expectation": expectation]
 
         presenter.createTransferMethod()
 
-        wait(for: [expectation], timeout: 1)
+        wait(for: Array(mockView.expectations!.values), timeout: 1)
 
         // Then
         XCTAssertTrue(mockView.isFieldValuesPerformed, "The FieldValues should be performed")
@@ -148,11 +148,11 @@ class AddTransferMethodPresenterTests: XCTestCase {
 
         // press the create transfer method button
         let expectation = self.expectation(description: "Create PayPal account completed")
-        mockView.expectation = expectation
+        mockView.expectations = ["expectation": expectation]
 
         presenter.createTransferMethod()
 
-        wait(for: [expectation], timeout: 1)
+        wait(for: Array(mockView.expectations!.values), timeout: 1)
 
         // Then
         XCTAssertFalse(mockView.isShowErrorPerformed, "The showError should not be performed")
@@ -166,12 +166,14 @@ class AddTransferMethodPresenterTests: XCTestCase {
         mockView.mockFieldValuesReturnResult.append((name: "bankAccountId", value: "000"))
         mockView.mockFieldStatusReturnResult.append(true)
 
-        let expectation = self.expectation(description: "Create bank account failed")
-        mockView.expectation = expectation
+        let showErrorExpectation = self.expectation(description: "Create bank account failed")
+        let updateFooterContentExpectation = self.expectation(description: "Create bank account failed")
+        mockView.expectations = ["expectation": showErrorExpectation,
+                                 "updateFooterContentExpectation": updateFooterContentExpectation]
 
         // When
         presenter.createTransferMethod()
-        wait(for: [expectation], timeout: 1)
+        wait(for: Array(mockView.expectations!.values), timeout: 1)
 
         // Then
         XCTAssertTrue(mockView.isFieldValuesPerformed, "The FieldValues should be performed")
@@ -187,12 +189,12 @@ class AddTransferMethodPresenterTests: XCTestCase {
         mockView.mockFieldValuesReturnResult.append((name: "bankAccountId", value: "000"))
         mockView.mockFieldStatusReturnResult.append(true)
 
-        let expectation = self.expectation(description: "Create bank account failed")
-        mockView.expectation = expectation
+        let updateFooterContentExpectation = self.expectation(description: "Create bank account failed")
+        mockView.expectations = ["updateFooterContentExpectation": updateFooterContentExpectation]
 
         // When
         presenter.createTransferMethod()
-        wait(for: [expectation], timeout: 1)
+        wait(for: Array(mockView.expectations!.values), timeout: 1)
 
         // Then
         XCTAssertTrue(mockView.isFieldValuesPerformed, "The FieldValues should be performed")
@@ -213,11 +215,11 @@ class AddTransferMethodPresenterTests: XCTestCase {
         HyperwalletTestHelper.setUpMockServer(request: request)
 
         let expectation = self.expectation(description: "Create bank account failed")
-        mockView.expectation = expectation
+        mockView.expectations = ["expectation": expectation]
 
         // When
         presenter.createTransferMethod()
-        wait(for: [expectation], timeout: 1)
+        wait(for: Array(mockView.expectations!.values), timeout: 1)
 
         // Then
         XCTAssertTrue(mockView.isFieldValuesPerformed, "The FieldValues should be performed")
@@ -273,7 +275,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
         Hippolyte.shared.add(stubbedRequest: setupTransferMethodConfigurationFields())
         HyperwalletTestHelper.setUpMockServer(request: request)
         let expectation = self.expectation(description: "HTTP bad response")
-        mockView.expectation = expectation
+        mockView.expectations = ["expectation": expectation]
         mockView.showTransferMethodFieldsHandler = { fieldGroups in
             for fieldGroup in fieldGroups {
                 guard let fields = fieldGroup.fields, let fieldGroup = fieldGroup.group
@@ -291,7 +293,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
             }
         }
         presenter.loadTransferMethodConfigurationFields(true)
-        wait(for: [expectation], timeout: 1)
+        wait(for: Array(mockView.expectations!.values), timeout: 1)
     }
 }
 
@@ -318,7 +320,7 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
     var mockFieldValuesReturnResult = [(name: String, value: String)]()
     var showTransferMethodFieldsHandler: (([HyperwalletFieldGroup]) -> Void)?
 
-    var expectation: XCTestExpectation?
+    var expectations: [String: XCTestExpectation]?
 
     func resetStates() {
         isUpdateFooterPerformed = false
@@ -342,7 +344,7 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
         mockFieldStatusReturnResult = [Bool]()
         mockFieldValuesReturnResult = [(name: String, value: String)]()
         showTransferMethodFieldsHandler = nil
-        expectation = nil
+        expectations = nil
     }
 
     func fieldStatus() -> [Bool] {
@@ -396,7 +398,7 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
         self.fieldGroups = fieldGroups
         isShowTransferMethodFieldsPerformed = true
         showTransferMethodFieldsHandler?(fieldGroups)
-        expectation?.fulfill()
+        expectations?["expectation"]?.fulfill()
     }
 
     func showError(title: String, message: String) {
@@ -406,15 +408,16 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
     func showError(_ error: HyperwalletErrorType, _ handler: (() -> Void)?) {
         isShowErrorPerformed = true
         handler?()
-        expectation?.fulfill()
+        expectations?["expectation"]?.fulfill()
     }
 
     func notifyTransferMethodAdded(_ transferMethod: HyperwalletTransferMethod) {
         isNotificationSent = true
-        expectation?.fulfill()
+        expectations?["expectation"]?.fulfill()
     }
+
     func showFooterViewWithUpdatedSectionData(for sections: [AddTransferMethodSectionData]) {
         isDisplayErrorMessageInFooterPerformed = true
-        expectation?.fulfill()
+        expectations?["updateFooterContentExpectation"]?.fulfill()
     }
 }
