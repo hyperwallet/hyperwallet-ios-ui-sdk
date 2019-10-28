@@ -25,7 +25,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
         HyperwalletTestHelper.setUpMockServer(request: setupTransferMethodConfigurationFields())
 
         let expectation = self.expectation(description: "Load transfer method configuration fields")
-        mockView.expectations = ["expectation": expectation]
+        mockView.expectations = [mockView.expectation: expectation]
 
         presenter.loadTransferMethodConfigurationFields(true)
 
@@ -43,7 +43,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
             setupTransferMethodConfigurationFields(NSError(domain: "", code: -1009, userInfo: nil)))
 
         let expectation = self.expectation(description: "load transfer methods")
-        mockView.expectations = ["expectation": expectation]
+        mockView.expectations = [mockView.expectation: expectation]
 
         // When
         presenter.loadTransferMethodConfigurationFields(true)
@@ -67,7 +67,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
 
         // press the create transfer method button
         let expectation = self.expectation(description: "Create bank account completed")
-        mockView.expectations = ["expectation": expectation]
+        mockView.expectations = [mockView.expectation: expectation]
 
         presenter.createTransferMethod()
 
@@ -94,7 +94,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
 
         // press the create transfer method button
         let expectation = self.expectation(description: "Create wire account completed")
-        mockView.expectations = ["expectation": expectation]
+        mockView.expectations = [mockView.expectation: expectation]
 
         presenter.createTransferMethod()
 
@@ -121,7 +121,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
 
         // press the create transfer method button
         let expectation = self.expectation(description: "Create bank card completed")
-        mockView.expectations = ["expectation": expectation]
+        mockView.expectations = [mockView.expectation: expectation]
 
         presenter.createTransferMethod()
 
@@ -148,7 +148,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
 
         // press the create transfer method button
         let expectation = self.expectation(description: "Create PayPal account completed")
-        mockView.expectations = ["expectation": expectation]
+        mockView.expectations = [mockView.expectation: expectation]
 
         presenter.createTransferMethod()
 
@@ -168,8 +168,10 @@ class AddTransferMethodPresenterTests: XCTestCase {
 
         let showErrorExpectation = self.expectation(description: "Create bank account failed")
         let updateFooterContentExpectation = self.expectation(description: "Create bank account failed")
-        mockView.expectations = ["expectation": showErrorExpectation,
-                                 "updateFooterContentExpectation": updateFooterContentExpectation]
+        mockView.expectations = [
+            mockView.expectation: showErrorExpectation,
+            mockView.updateFooterContentExpectation: updateFooterContentExpectation
+        ]
 
         // When
         presenter.createTransferMethod()
@@ -190,7 +192,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
         mockView.mockFieldStatusReturnResult.append(true)
 
         let updateFooterContentExpectation = self.expectation(description: "Create bank account failed")
-        mockView.expectations = ["updateFooterContentExpectation": updateFooterContentExpectation]
+        mockView.expectations = [mockView.updateFooterContentExpectation: updateFooterContentExpectation]
 
         // When
         presenter.createTransferMethod()
@@ -215,7 +217,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
         HyperwalletTestHelper.setUpMockServer(request: request)
 
         let expectation = self.expectation(description: "Create bank account failed")
-        mockView.expectations = ["expectation": expectation]
+        mockView.expectations = [mockView.expectation: expectation]
 
         // When
         presenter.createTransferMethod()
@@ -275,7 +277,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
         Hippolyte.shared.add(stubbedRequest: setupTransferMethodConfigurationFields())
         HyperwalletTestHelper.setUpMockServer(request: request)
         let expectation = self.expectation(description: "HTTP bad response")
-        mockView.expectations = ["expectation": expectation]
+        mockView.expectations = [mockView.expectation: expectation]
         mockView.showTransferMethodFieldsHandler = { fieldGroups in
             for fieldGroup in fieldGroups {
                 guard let fields = fieldGroup.fields, let fieldGroup = fieldGroup.group
@@ -298,6 +300,9 @@ class AddTransferMethodPresenterTests: XCTestCase {
 }
 
 class MockAddTransferMethodViewTests: AddTransferMethodView {
+    let expectation: String = "expectation"
+    let updateFooterContentExpectation: String = "updateFooterContentExpectation"
+
     var isUpdateFooterPerformed = false
     var isHideLoadingPerformed = false
     var isShowLoadingPerformed = false
@@ -398,7 +403,7 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
         self.fieldGroups = fieldGroups
         isShowTransferMethodFieldsPerformed = true
         showTransferMethodFieldsHandler?(fieldGroups)
-        expectations?["expectation"]?.fulfill()
+        expectations?[expectation]?.fulfill()
     }
 
     func showError(title: String, message: String) {
@@ -408,16 +413,16 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
     func showError(_ error: HyperwalletErrorType, _ handler: (() -> Void)?) {
         isShowErrorPerformed = true
         handler?()
-        expectations?["expectation"]?.fulfill()
+        expectations?[expectation]?.fulfill()
     }
 
     func notifyTransferMethodAdded(_ transferMethod: HyperwalletTransferMethod) {
         isNotificationSent = true
-        expectations?["expectation"]?.fulfill()
+        expectations?[expectation]?.fulfill()
     }
 
     func showFooterViewWithUpdatedSectionData(for sections: [AddTransferMethodSectionData]) {
         isDisplayErrorMessageInFooterPerformed = true
-        expectations?["updateFooterContentExpectation"]?.fulfill()
+        expectations?[updateFooterContentExpectation]?.fulfill()
     }
 }
