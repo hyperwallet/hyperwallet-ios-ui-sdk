@@ -21,8 +21,12 @@ env:
     - ios_version='11.1'  ios_device='iPhone 7'  scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS Simulator' configuration="XCUITest" code_coverage="NO" only_active_arch="NO"
 
 before_install:
+  # Add ssh keys for access
+  - openssl aes-256-cbc -K $encrypted_091d4ce2e23b_key -iv $encrypted_091d4ce2e23b_iv -in github_deploy_key.enc -out github_deploy_key -d
+  - chmod 600 github_deploy_key
+  - eval $(ssh-agent -s)
+  - ssh-add github_deploy_key
   # Boot the emulator by ID
-  - echo -e "machine github.com\n  login travis-ci-hyperwallet@paypal.com\n  password $GITHUB_INSIGHTS_TOKEN" > ~/.netrc
   - |
      ios_uid=$(xcrun instruments -s devices | grep Simulator | grep "$ios_device ($ios_version)*" | grep -o "[0-9A-F]\{8\}-[0-9A-F]\{4\}-[0-9A-F]\{4\}-[0-9A-F]\{4\}-[0-9A-F]\{12\}")
      xcrun simctl boot $ios_uid
