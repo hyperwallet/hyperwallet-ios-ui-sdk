@@ -22,10 +22,10 @@ env:
 
 before_install:
   # Add ssh keys for access
-  - openssl aes-256-cbc -K $encrypted_091d4ce2e23b_key -iv $encrypted_091d4ce2e23b_iv -in github_deploy_key.enc -out github_deploy_key -d
-  - chmod 600 github_deploy_key
-  - eval $(ssh-agent -s)
-  - ssh-add github_deploy_key
+  -|
+      $(npm bin)/set-up-ssh --key "$encrypted_091d4ce2e23b_key" \
+                             --iv "$encrypted_091d4ce2e23b_iv" \
+                             --path-encrypted-key "github_deploy_key.enc"
   # Boot the emulator by ID
   - |
      ios_uid=$(xcrun instruments -s devices | grep Simulator | grep "$ios_device ($ios_version)*" | grep -o "[0-9A-F]\{8\}-[0-9A-F]\{4\}-[0-9A-F]\{4\}-[0-9A-F]\{4\}-[0-9A-F]\{12\}")
