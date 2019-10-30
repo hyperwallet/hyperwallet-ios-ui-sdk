@@ -54,7 +54,9 @@ final class SelectTransferMethodTypePresenter {
     private (set) var countryCurrencySectionData = [String]()
     private (set) var selectedCountry = ""
     private (set) var selectedCurrency = ""
-
+    private (set) var selectedTransferMethodType = ""
+    private let pageName = "transfer-method:add:select-transfer-method"
+    private let pageGroup = "transfer-method"
     private lazy var transferMethodConfigurationRepository = {
         TransferMethodRepositoryFactory.shared.transferMethodConfigurationRepository()
     }()
@@ -141,6 +143,8 @@ final class SelectTransferMethodTypePresenter {
             if case let .success(user) = getUserResult,
                 let profileType = user?.profileType?.rawValue {
                 let transferMethodTypeCode = strongSelf.sectionData[index].code!
+                self?.selectedTransferMethodType = transferMethodTypeCode
+                self?.trackTransferMethodClick()
                 strongSelf.view.navigateToAddTransferMethodController(country: strongSelf.selectedCountry,
                                                                       currency: strongSelf.selectedCurrency,
                                                                       profileType: profileType,
@@ -272,4 +276,17 @@ final class SelectTransferMethodTypePresenter {
         sectionData = transferMethodTypes
         view.transferMethodTypeTableViewReloadData()
     }
+
+     func trackTransferMethodClick() {
+        let impressionParams = [
+            InsightsTags.country:
+                self.selectedCountry,
+            InsightsTags.currency:
+                self.selectedCurrency,
+            InsightsTags.transferMethodType:
+                self.selectedTransferMethodType
+        ]
+      HyperwalletInsights
+          .shared.trackImpression(pageName: pageName, pageGroup: pageGroup, params: impressionParams)
+  }
 }
