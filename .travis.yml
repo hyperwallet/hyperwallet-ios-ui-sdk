@@ -21,7 +21,7 @@ env:
     - ios_version='11.1'  ios_device='iPhone 7'  scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS Simulator' configuration="XCUITest" code_coverage="NO" only_active_arch="NO"
 
 before_install:
-  - echo -e "machine github.com\n  login travis-ci-hyperwallet\n  password $CI_USER_PASSWORD" > ~/.netrc
+  - echo -e "machine github.com\n  login $CI_USER_TOKEN" > ~/.netrc
   # Boot the emulator by ID
   - |
      ios_uid=$(xcrun instruments -s devices | grep Simulator | grep "$ios_device ($ios_version)*" | grep -o "[0-9A-F]\{8\}-[0-9A-F]\{4\}-[0-9A-F]\{4\}-[0-9A-F]\{4\}-[0-9A-F]\{12\}")
