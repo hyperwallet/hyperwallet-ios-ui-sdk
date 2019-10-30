@@ -1,3 +1,1 @@
-git "git@github.com:JanGorman/Hippolyte.git" "0.8.0"
-git "git@github.com:httpswift/swifter.git" "1.4.7"
 git "git@github.com:hyperwallet/hyperwallet-ios-insights-sdk.git" "task/HW-57213-create-insights-database"
