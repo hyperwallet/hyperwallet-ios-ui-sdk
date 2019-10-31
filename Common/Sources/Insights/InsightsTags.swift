@@ -18,10 +18,16 @@
 
 import Foundation
 
-struct InsightsTags {
-    static let country = "hyperwallet_ea_country"
-    static let currency = "hyperwallet_ea_currency"
-    static let profileType = "hyperwallet_profile_type"
-    static let transferMethodType = "hyperwallet_ea_type"
-    static let goal = "goal"
+/// Representation of Insights API Tags
+public struct InsightsTags {
+   /// The country tag
+   public static let country = "hyperwallet_ea_country"
+   /// The currency tag
+   public static let currency = "hyperwallet_ea_currency"
+   /// The profile type tag
+   public static let profileType = "hyperwallet_profile_type"
+   /// The transfer method type tag
+   public static let transferMethodType = "hyperwallet_ea_type"
+   /// The goal tag
+   public static let goal = "goal"
 }
