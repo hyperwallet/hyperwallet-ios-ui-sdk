@@ -8,6 +8,8 @@ class AddTransferMethodPresenterTests: XCTestCase {
     private let mockView = MockAddTransferMethodViewTests()
     private lazy var transferMethodConfigurationFieldsResponse = HyperwalletTestHelper
         .getDataFromJson("TransferMethodConfigurationFieldsResponse")
+    private lazy var trackTransferMethodConfigurationFieldsResponse = HyperwalletTestHelper
+    .getDataFromJson("TrackTransfermethodConfigurationFieldsResponse")
 
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
@@ -263,6 +265,13 @@ class AddTransferMethodPresenterTests: XCTestCase {
         let response = HyperwalletTestHelper.setUpMockedResponse(payload: transferMethodConfigurationFieldsResponse,
                                                                  error: error)
         return HyperwalletTestHelper.buildPostRequest(baseUrl: HyperwalletTestHelper.graphQlURL, response)
+    }
+
+    private func setupTrackTransferMethodConfigurationFields(_ error: NSError? = nil) -> StubRequest {
+        let response = HyperwalletTestHelper.setUpMockedResponse(payload:
+            trackTransferMethodConfigurationFieldsResponse,
+                                                                 error: error)
+        return HyperwalletTestHelper.buildPostRequest(baseUrl: HyperwalletTestHelper.insightsUrl, response)
     }
 
     private func setupBadResponseMockServer(for responseFileName: String) {

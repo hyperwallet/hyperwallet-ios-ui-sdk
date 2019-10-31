@@ -18,6 +18,7 @@
 
 import HyperwalletSDK
 #if !COCOAPODS
+import Common
 import TransferMethodRepository
 #endif
 
@@ -44,6 +45,8 @@ final class AddTransferMethodPresenter {
     private let currency: String
     private let profileType: String
     private let transferMethodTypeCode: String
+    private let pageName = "transfer-method:add:collect-transfer-method-information"
+    private let pageGroup = "transfer-method"
     var sectionData = [AddTransferMethodSectionData]()
 
     private lazy var transferMethodConfigurationRepository = {
@@ -92,6 +95,7 @@ final class AddTransferMethodPresenter {
             case .success(let fieldResult):
                 if let fieldGroups = fieldResult?.fieldGroups(),
                     let transferMethodType = fieldResult?.transferMethodType() {
+                    strongSelf.trackUILoadImpression()
                     strongSelf.view.showTransferMethodFields(fieldGroups, transferMethodType)
                 }
             }
@@ -231,5 +235,16 @@ final class AddTransferMethodPresenter {
 
     private func resetErrorMessagesForAllSections() {
         sectionData.forEach { $0.errorMessage = nil }
+    }
+
+    private func trackUILoadImpression () {
+        HyperwalletInsights.shared.trackImpression(pageName: pageName,
+                                                   pageGroup: pageGroup,
+                                                   params:
+            [
+                InsightsTags.country: country, InsightsTags.currency: currency,
+                InsightsTags.transferMethodType: transferMethodTypeCode,
+                InsightsTags.profileType: profileType
+            ])
     }
 }
