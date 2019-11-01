@@ -54,7 +54,7 @@ final class SelectTransferMethodTypePresenter {
     private (set) var countryCurrencySectionData = [String]()
     private (set) var selectedCountry = ""
     private (set) var selectedCurrency = ""
-    private (set) var selectedTransferMethodType = ""
+    private var selectedTransferMethodType = ""
     private let pageName = "transfer-method:add:select-transfer-method"
     private let pageGroup = "transfer-method"
     private lazy var transferMethodConfigurationRepository = {
@@ -135,6 +135,10 @@ final class SelectTransferMethodTypePresenter {
 
     /// Navigate to AddTransferMethodController
     func navigateToAddTransferMethod(_ index: Int) {
+        if let transferMethodTypeCode = self.sectionData[index].code {
+            self.selectedTransferMethodType = transferMethodTypeCode
+            self.trackTransferMethodClick()
+        }
         userRepository.getUser {[weak self] (getUserResult) in
             guard let strongSelf = self else {
                 return
@@ -142,13 +146,13 @@ final class SelectTransferMethodTypePresenter {
 
             if case let .success(user) = getUserResult,
                 let profileType = user?.profileType?.rawValue {
-                let transferMethodTypeCode = strongSelf.sectionData[index].code!
-                self?.selectedTransferMethodType = transferMethodTypeCode
-                self?.trackTransferMethodClick()
-                strongSelf.view.navigateToAddTransferMethodController(country: strongSelf.selectedCountry,
-                                                                      currency: strongSelf.selectedCurrency,
-                                                                      profileType: profileType,
-                                                                      transferMethodTypeCode: transferMethodTypeCode)
+                strongSelf.view
+                    .navigateToAddTransferMethodController(
+                        country: strongSelf.selectedCountry,
+                        currency: strongSelf.selectedCurrency,
+                        profileType: profileType,
+                        transferMethodTypeCode: strongSelf.selectedTransferMethodType
+                )
             }
         }
     }
@@ -277,7 +281,7 @@ final class SelectTransferMethodTypePresenter {
         view.transferMethodTypeTableViewReloadData()
     }
 
-     func trackTransferMethodClick() {
+     private func trackTransferMethodClick() {
         let impressionParams = [
             InsightsTags.country:
                 self.selectedCountry,

@@ -228,10 +228,6 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
                         "Out of bounds country currency configuration should not be nil")
     }
 
-    func testTrackTransferMethodClicked() {
-            presenter.trackTransferMethodClick()
-    }
-
     private func loadTransferMethodKeys() {
         HyperwalletTestHelper.setUpMockServer(request: setUpTransferMethodConfigurationKeys())
 

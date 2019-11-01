@@ -153,13 +153,13 @@
 		98F63E6E2284AD370090101D /* PayPalAccountDuplicateResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F63E6C2284AD330090101D /* PayPalAccountDuplicateResponse.json */; };
 		98F63E6F2284AD9B0090101D /* AddTransferMethodPayPalAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F63E64228485930090101D /* AddTransferMethodPayPalAccountTests.swift */; };
 		98F63E722284B4AF0090101D /* TransferMethodConfigurationPayPalAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F63E712284B4AF0090101D /* TransferMethodConfigurationPayPalAccountResponse.json */; };
-		A60B9FD3236B05D500F34602 /* InsightsTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60B9FCD2369EDCA00F34602 /* InsightsTags.swift */; };
 		A65312CD22FC037800A83D30 /* HyperwalletCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65312CA22FC037800A83D30 /* HyperwalletCoordinator.swift */; };
 		A65312CE22FC037800A83D30 /* InitializationDataField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65312CB22FC037800A83D30 /* InitializationDataField.swift */; };
 		A65312CF22FC037800A83D30 /* HyperwalletFlowDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65312CC22FC037800A83D30 /* HyperwalletFlowDelegate.swift */; };
 		A65312D222FC046200A83D30 /* ReceiptCoordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65312D122FC046200A83D30 /* ReceiptCoordinators.swift */; };
 		A65312D522FC055300A83D30 /* TransferMethodCoordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65312D422FC055300A83D30 /* TransferMethodCoordinators.swift */; };
 		A65312D822FC293C00A83D30 /* TransferCoordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65312D722FC293C00A83D30 /* TransferCoordinators.swift */; };
+		A6AC9AC5236C158B008433AC /* InsightsTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60B9FCD2369EDCA00F34602 /* InsightsTags.swift */; };
 		C345BFC22289E6EC0049E67B /* XCUIElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C345BFC02289E6EC0049E67B /* XCUIElement.swift */; };
 		C358A9A52272644000E5AE47 /* AddTransferMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = C358A9A22272644000E5AE47 /* AddTransferMethod.swift */; };
 		C358A9A62272644000E5AE47 /* ListTransferMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = C358A9A32272644000E5AE47 /* ListTransferMethods.swift */; };
@@ -1182,7 +1182,6 @@
 			isa = PBXGroup;
 			children = (
 				2E4D6CAC23679AB400916CDD /* HyperwalletInsights.swift */,
-				A60B9FCD2369EDCA00F34602 /* InsightsTags.swift */,
 			);
 			path = Insights;
 			sourceTree = "<group>";
@@ -1480,6 +1479,14 @@
 			path = Coordinators;
 			sourceTree = "<group>";
 		};
+		A673E4B0236C114D00AAB4A9 /* Insights */ = {
+			isa = PBXGroup;
+			children = (
+				A60B9FCD2369EDCA00F34602 /* InsightsTags.swift */,
+			);
+			path = Insights;
+			sourceTree = "<group>";
+		};
 		C358A9A12272644000E5AE47 /* TransferMethod */ = {
 			isa = PBXGroup;
 			children = (
@@ -1659,6 +1666,7 @@
 		DB551FA822E1409700DD65C2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				A673E4B0236C114D00AAB4A9 /* Insights */,
 				A65312D322FC053700A83D30 /* Coordinators */,
 				DB551FC122E1418B00DD65C2 /* Extensions */,
 				DB551FC322E1419A00DD65C2 /* View */,
@@ -3179,7 +3187,6 @@
 				DBC199EF22E29CD0004447DD /* UIView.swift in Sources */,
 				DBC199F022E29CD0004447DD /* UIViewController.swift in Sources */,
 				DBC199F122E29CD0004447DD /* GenericCell.swift in Sources */,
-				A60B9FD3236B05D500F34602 /* InsightsTags.swift in Sources */,
 				DBC199F222E29CD0004447DD /* GenericController.swift in Sources */,
 				DBC199F322E29CD0004447DD /* HyperwalletBundle.swift in Sources */,
 			);
@@ -3204,6 +3211,7 @@
 				DB551FD022E1421E00DD65C2 /* SelectionWidgetCell.swift in Sources */,
 				DB551FCF22E1421E00DD65C2 /* SelectionWidget.swift in Sources */,
 				DB551FDA22E1424200DD65C2 /* SelectTransferMethodTypeCell.swift in Sources */,
+				A6AC9AC5236C158B008433AC /* InsightsTags.swift in Sources */,
 				DB551FDB22E1424200DD65C2 /* ListTransferMethodCell.swift in Sources */,
 				DB551FD422E1424200DD65C2 /* AddTransferMethodController.swift in Sources */,
 				DB551FD822E1424200DD65C2 /* ListTransferMethodPresenter.swift in Sources */,
