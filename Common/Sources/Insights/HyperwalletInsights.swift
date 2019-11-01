@@ -16,16 +16,31 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// import Insights
+import Foundation
+import HyperwalletSDK
+import Insights
 
 /// Class responsible for initializing the Insights module.
 /// It contains methods to call Insights for various actions performed by the user
 public class HyperwalletInsights {
     private static var instance: HyperwalletInsights?
+    private var configuration: Configuration?
 
     /// Returns the previously initialized instance of the HyperwalletInsights interface object
     public static var shared: HyperwalletInsights {
         return instance ?? HyperwalletInsights()
+    }
+
+    /// Set up HyperwalletInsights
+    ///
+    /// - Parameter configuration: Retrieved configuration object from SDK
+    public static func setup() {
+        instance = HyperwalletInsights()
+        HyperwalletInsights.shared.loadConfiguration { result in
+            if result {
+                HyperwalletInsights.shared.initializeInsights()
+            }
+        }
     }
 
     /// Track Clicks
@@ -36,6 +51,16 @@ public class HyperwalletInsights {
     ///   - link: The link clicked - example : select-transfer-method
     ///   - params: A list of other information to be tracked - example : country,currency
     public func trackClick(pageName: String, pageGroup: String, link: String, params: [String: String]) {
+        if let insights = Insights.shared {
+            insights.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
+        } else {
+            HyperwalletInsights.shared.loadConfiguration { result in
+                if result {
+                    HyperwalletInsights.shared.initializeInsights()
+                    Insights.shared?.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
+                }
+            }
+        }
     }
 
     /// Track Error
@@ -56,6 +81,39 @@ public class HyperwalletInsights {
     public func trackImpression(pageName: String, pageGroup: String, params: [String: String]) {
     }
 
-    private func initializeInsights(completion: @escaping(Bool) -> Void) {
+    /// Checks if the configurations have already been fetched - returns immediately if true
+    /// Else, try to fetch configuration and return the 
+    ///
+    /// - Parameter completion: boolean completion handler
+    private func loadConfiguration(completion: @escaping(Bool) -> Void) {
+        // Configuration is returned but Insights have not been initialized
+        // Possible if configuration is returned but the optional insights url and environment are empty
+        if configuration != nil {
+            completion(true)
+        } else {
+            // Fetch configuration again
+            Hyperwallet.shared.getConfiguration { configuration, _ in
+                if let configuration = configuration {
+                    self.configuration = configuration
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+            }
+        }
+    }
+
+    /// Initialize the Insights module if the url and environment variables are available
+    private func initializeInsights() {
+        if let environment = configuration?.environment,
+            let insightsUrl = configuration?.insightsUrl,
+            let programToken = configuration?.issuer,
+            let userToken = configuration?.userToken {
+            Insights.setup(environment: environment,
+                           programToken: programToken,
+                           sdkVersion: HyperwalletBundle.currentSDKAppVersion ?? "",
+                           apiUrl: insightsUrl,
+                           userToken: userToken)
+        }
     }
 }
