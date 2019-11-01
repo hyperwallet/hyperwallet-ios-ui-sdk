@@ -30,7 +30,6 @@ protocol AddTransferMethodView: class {
     func showConfirmation(handler: @escaping () -> Void)
     func showError( title: String, message: String)
     func showError(_ error: HyperwalletErrorType, _ handler: (() -> Void)?)
-    func showBusinessError(_ error: HyperwalletErrorType, _ handler: @escaping () -> Void)
     func showLoading()
     func showProcessing()
     func showTransferMethodFields(_ fieldGroups: [HyperwalletFieldGroup],
@@ -143,7 +142,7 @@ final class AddTransferMethodPresenter {
             resetErrorMessagesForAllSections()
             if let errors = error.getHyperwalletErrors()?.errorList, errors.isNotEmpty {
                 if errors.contains(where: { $0.fieldName == nil }) {
-                    view.showBusinessError(error, { [weak self] () -> Void in self?.updateFooterContent(errors) })
+                    view.showError(error, { [weak self] () -> Void in self?.updateFooterContent(errors) })
                 } else {
                     updateFooterContent(errors)
                 }

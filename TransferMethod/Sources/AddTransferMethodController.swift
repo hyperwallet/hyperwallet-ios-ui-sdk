@@ -332,11 +332,6 @@ extension AddTransferMethodController: AddTransferMethodView {
         errorView.show(handler)
     }
 
-    func showBusinessError(_ error: HyperwalletErrorType, _ handler: @escaping (() -> Void)) {
-        let errorView = ErrorView(viewController: self, error: error)
-        errorView.businessError({ (_) in handler() })
-    }
-
     func notifyTransferMethodAdded(_ transferMethod: HyperwalletTransferMethod) {
         DispatchQueue.global(qos: .background).async {
             NotificationCenter.default.post(name: .transferMethodAdded,
