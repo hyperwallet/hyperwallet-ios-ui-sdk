@@ -1,0 +1,11 @@
+framework module Insights {
+  umbrella header "Insights.h"
+
+  export *
+  module * { export * }
+}
+
+module Insights.Swift {
+    header "Insights-Swift.h"
+    requires objc
+}
