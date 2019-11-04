@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/Insights-Swift.h</key>
 		<data>
-		oKHDBRnQsunpAxvqdZqrL75xZc8=
+		RsyjMhwF+E3sRfupUEgn2cgTJLU=
 		</data>
 		<key>Headers/Insights.h</key>
 		<data>
@@ -30,7 +30,7 @@
 		</data>
 		<key>Modules/Insights.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		wTuYXQJiYSOTIPXixgSjf9T4+ZQ=
+		FJU/NRgyyLFnb1/yNcwfKiKLqwQ=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -43,11 +43,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			oKHDBRnQsunpAxvqdZqrL75xZc8=
+			RsyjMhwF+E3sRfupUEgn2cgTJLU=
 			</data>
 			<key>hash2</key>
 			<data>
-			5p9qIAXu94sPPSJeZsnkjgjvwfMJGrcvGzutdllVgYI=
+			KD15XqljqQU0fF5VD8vDFy0VQRczXwHyza//A+OJKfM=
 			</data>
 		</dict>
 		<key>Headers/Insights.h</key>
@@ -98,11 +98,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			wTuYXQJiYSOTIPXixgSjf9T4+ZQ=
+			FJU/NRgyyLFnb1/yNcwfKiKLqwQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			HlKJHv0ZCjDHZUp7/6YwVhzIo8V2MlMlnfmRHfQSnNw=
+			8xlovyER7ua58ndChMlmB2MjRP+NF7SNc1Af4kgCvdk=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
