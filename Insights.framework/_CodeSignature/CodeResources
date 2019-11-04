@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/Insights-Swift.h</key>
 		<data>
-		KjiDaSEAxQNSluH/BQ7oW/i/QFM=
+		iS60iDVDb8ejlsPuvzdrr7cjrvA=
 		</data>
 		<key>Headers/Insights.h</key>
 		<data>
@@ -23,6 +23,14 @@
 		<key>Insights.momd/VersionInfo.plist</key>
 		<data>
 		0q/mcKS76BK38Q63GAU8nqCD+ZY=
+		</data>
+		<key>Modules/Insights.swiftmodule/i386.swiftdoc</key>
+		<data>
+		rl5Dw34dkQZ0EcMvZ5fnhIq94G8=
+		</data>
+		<key>Modules/Insights.swiftmodule/i386.swiftmodule</key>
+		<data>
+		xnWaUZJ7WfqWzXywN+iN9Go2XRE=
 		</data>
 		<key>Modules/Insights.swiftmodule/x86_64.swiftdoc</key>
 		<data>
@@ -43,11 +51,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			KjiDaSEAxQNSluH/BQ7oW/i/QFM=
+			iS60iDVDb8ejlsPuvzdrr7cjrvA=
 			</data>
 			<key>hash2</key>
 			<data>
-			Vq6I7cQaGwY6B7973sP2mP3Lo/Z7rOOQi1kkJ9xyrh8=
+			AerwbFBfkpQJU/lXAtgYQ0Pju5AYUD7I7/FokKTfNGg=
 			</data>
 		</dict>
 		<key>Headers/Insights.h</key>
@@ -81,6 +89,28 @@
 			<key>hash2</key>
 			<data>
 			tT7VQFZxOtRmFmxRKJ3c5yNcR5P5PTMlZ/phByOB1sE=
+			</data>
+		</dict>
+		<key>Modules/Insights.swiftmodule/i386.swiftdoc</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			rl5Dw34dkQZ0EcMvZ5fnhIq94G8=
+			</data>
+			<key>hash2</key>
+			<data>
+			iP4rt9vmhTAESMziaHbl+GBBou+nXnZC0rBFj9w3lyU=
+			</data>
+		</dict>
+		<key>Modules/Insights.swiftmodule/i386.swiftmodule</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			xnWaUZJ7WfqWzXywN+iN9Go2XRE=
+			</data>
+			<key>hash2</key>
+			<data>
+			ZkTgIgg73KIIV5TO/ln377pcWW0fOMjc3r4OuOfGZRI=
 			</data>
 		</dict>
 		<key>Modules/Insights.swiftmodule/x86_64.swiftdoc</key>
