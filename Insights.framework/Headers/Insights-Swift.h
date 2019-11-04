@@ -202,6 +202,9 @@ SWIFT_CLASS_NAMED("Event")
 
 SWIFT_CLASS("_TtC8Insights8Insights")
 @interface Insights : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) Insights * _Nullable shared;)
++ (Insights * _Nullable)shared SWIFT_WARN_UNUSED_RESULT;
++ (void)setupWithEnvironment:(NSString * _Nonnull)environment programToken:(NSString * _Nonnull)programToken sdkVersion:(NSString * _Nonnull)sdkVersion apiUrl:(NSString * _Nonnull)apiUrl userToken:(NSString * _Nonnull)userToken;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
