@@ -45,7 +45,6 @@
 		2E6DBB8C2326F2C200863672 /* AvailableFundMultiCurrenciesFxChange.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E6DBB8A2326F0F800863672 /* AvailableFundMultiCurrenciesFxChange.json */; };
 		2E8AFE5823062316002B6D24 /* CreateTransferController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7C0222E86F580022E573 /* CreateTransferController.swift */; };
 		2E8AFE5C2307668F002B6D24 /* HyperwalletCoordinatorTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8AFE5B2307668F002B6D24 /* HyperwalletCoordinatorTypes.swift */; };
-		2EE04F91236B6D730062EA48 /* Insights.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EE04F90236B6D730062EA48 /* Insights.framework */; };
 		2EE04F92236B6D730062EA48 /* Insights.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EE04F90236B6D730062EA48 /* Insights.framework */; };
 		412F723722B45DB100837F8F /* TransactionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F723222B458C700837F8F /* TransactionDetails.swift */; };
 		4157135D22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json in Resources */ = {isa = PBXBuildFile; fileRef = 4157135C22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json */; };
@@ -140,6 +139,8 @@
 		9807B76B226442C60028A280 /* TransferMethodConfigurationBankAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFB61522261E84D00C4A8AA /* TransferMethodConfigurationBankAccountResponse.json */; };
 		9807B76C226442C60028A280 /* TransferMethodConfigurationBankCardResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFB614F2261E84C00C4A8AA /* TransferMethodConfigurationBankCardResponse.json */; };
 		9807B76D226442C60028A280 /* UnexpectedErrorResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFB61492261E84C00C4A8AA /* UnexpectedErrorResponse.json */; };
+		988E06192370DD9F00550D55 /* Insights.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EE04F90236B6D730062EA48 /* Insights.framework */; };
+		988E061A2370DD9F00550D55 /* Insights.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EE04F90236B6D730062EA48 /* Insights.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		98F3D754230C5BE400A8195F /* TransferFundsConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F3D747230C5ABB00A8195F /* TransferFundsConfirmation.swift */; };
 		98F3D755230C5BEC00A8195F /* TransferFundsSelectDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F3D746230C5ABB00A8195F /* TransferFundsSelectDestination.swift */; };
 		98F3D756230C5BFC00A8195F /* TransferUserFundsConfirmationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F3D744230C5AA800A8195F /* TransferUserFundsConfirmationTest.swift */; };
@@ -533,6 +534,7 @@
 			files = (
 				4A37DB9322E8B0040085A329 /* TransferRepository.framework in Embed Frameworks */,
 				4A37DB9222E8AFEE0085A329 /* Transfer.framework in Embed Frameworks */,
+				988E061A2370DD9F00550D55 /* Insights.framework in Embed Frameworks */,
 				DB52960D22E235EF00657F50 /* TransferMethod.framework in Embed Frameworks */,
 				DB52960922E235EF00657F50 /* Common.framework in Embed Frameworks */,
 				DB52961A22E2361600657F50 /* TransferMethodRepository.framework in Embed Frameworks */,
@@ -975,7 +977,7 @@
 			files = (
 				DB52960822E235EF00657F50 /* Common.framework in Frameworks */,
 				DB52961022E235EF00657F50 /* Receipt.framework in Frameworks */,
-				2EE04F91236B6D730062EA48 /* Insights.framework in Frameworks */,
+				988E06192370DD9F00550D55 /* Insights.framework in Frameworks */,
 				DB52961522E2361600657F50 /* ReceiptRepository.framework in Frameworks */,
 				4A9A7C1122E880730022E573 /* Transfer.framework in Frameworks */,
 				4A9A7C1222E880780022E573 /* TransferRepository.framework in Frameworks */,
