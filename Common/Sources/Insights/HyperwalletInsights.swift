@@ -43,25 +43,25 @@ public class HyperwalletInsights {
         }
     }
 
-    /// Track Clicks
-    ///
-    /// - Parameters:
-    ///   - pageName: Name of the page
-    ///   - pageGroup: Page group name
-    ///   - link: The link clicked - example : select-transfer-method
-    ///   - params: A list of other information to be tracked - example : country,currency
-    public func trackClick(pageName: String, pageGroup: String, link: String, params: [String: String]) {
-        if let insights = Insights.shared {
-            insights.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
-        } else {
-            HyperwalletInsights.shared.loadConfiguration { result in
-                if result {
-                    HyperwalletInsights.shared.initializeInsights()
-                    Insights.shared?.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
-                }
-            }
-        }
-    }
+//    /// Track Clicks
+//    ///
+//    /// - Parameters:
+//    ///   - pageName: Name of the page
+//    ///   - pageGroup: Page group name
+//    ///   - link: The link clicked - example : select-transfer-method
+//    ///   - params: A list of other information to be tracked - example : country,currency
+//    public func trackClick(pageName: String, pageGroup: String, link: String, params: [String: String]) {
+//        if let insights = Insights.shared {
+//            insights.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
+//        } else {
+//            HyperwalletInsights.shared.loadConfiguration { result in
+//                if result {
+//                    HyperwalletInsights.shared.initializeInsights()
+//                    Insights.shared?.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
+//                }
+//            }
+//        }
+//    }
 
     /// Track Error
     ///
@@ -109,7 +109,7 @@ public class HyperwalletInsights {
             let insightsUrl = configuration?.insightsUrl,
             let programToken = configuration?.issuer,
             let userToken = configuration?.userToken {
-            Insights.setup(environment: environment,
+            Insights.setup(withEnvironment: environment,
                            programToken: programToken,
                            sdkVersion: HyperwalletBundle.currentSDKAppVersion ?? "",
                            apiUrl: insightsUrl,

@@ -199,8 +199,7 @@ SWIFT_CLASS_NAMED("Event")
 @property (nonatomic, copy) NSString * _Nonnull payload;
 @end
 
-
-SWIFT_CLASS("_TtC8Insights8Insights")
+__attribute__((objc_runtime_name("_TtC8Insights8Insights"))) __attribute__((objc_subclassing_restricted))
 @interface Insights : NSObject
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) Insights * _Nullable shared;)
 + (Insights * _Nullable)shared SWIFT_WARN_UNUSED_RESULT;
