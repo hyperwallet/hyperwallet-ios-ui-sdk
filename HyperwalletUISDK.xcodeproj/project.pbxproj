@@ -45,7 +45,6 @@
 		2E6DBB8C2326F2C200863672 /* AvailableFundMultiCurrenciesFxChange.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E6DBB8A2326F0F800863672 /* AvailableFundMultiCurrenciesFxChange.json */; };
 		2E8AFE5823062316002B6D24 /* CreateTransferController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7C0222E86F580022E573 /* CreateTransferController.swift */; };
 		2E8AFE5C2307668F002B6D24 /* HyperwalletCoordinatorTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8AFE5B2307668F002B6D24 /* HyperwalletCoordinatorTypes.swift */; };
-		2EE04F92236B6D730062EA48 /* Insights.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EE04F90236B6D730062EA48 /* Insights.framework */; };
 		412F723722B45DB100837F8F /* TransactionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F723222B458C700837F8F /* TransactionDetails.swift */; };
 		4157135D22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json in Resources */ = {isa = PBXBuildFile; fileRef = 4157135C22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json */; };
 		4157135F22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json in Resources */ = {isa = PBXBuildFile; fileRef = 4157135E22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json */; };
@@ -141,6 +140,8 @@
 		9807B76D226442C60028A280 /* UnexpectedErrorResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFB61492261E84C00C4A8AA /* UnexpectedErrorResponse.json */; };
 		988E06192370DD9F00550D55 /* Insights.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EE04F90236B6D730062EA48 /* Insights.framework */; };
 		988E061A2370DD9F00550D55 /* Insights.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EE04F90236B6D730062EA48 /* Insights.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		988E061B2370E46E00550D55 /* Insights.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EE04F90236B6D730062EA48 /* Insights.framework */; };
+		988E061C2370E46E00550D55 /* Insights.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EE04F90236B6D730062EA48 /* Insights.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		98F3D754230C5BE400A8195F /* TransferFundsConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F3D747230C5ABB00A8195F /* TransferFundsConfirmation.swift */; };
 		98F3D755230C5BEC00A8195F /* TransferFundsSelectDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F3D746230C5ABB00A8195F /* TransferFundsSelectDestination.swift */; };
 		98F3D756230C5BFC00A8195F /* TransferUserFundsConfirmationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F3D744230C5AA800A8195F /* TransferUserFundsConfirmationTest.swift */; };
@@ -526,6 +527,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		988E061D2370E46E00550D55 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				988E061C2370E46E00550D55 /* Insights.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DB52961422E235EF00657F50 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
@@ -991,7 +1003,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2EE04F92236B6D730062EA48 /* Insights.framework in Frameworks */,
+				988E061B2370E46E00550D55 /* Insights.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2325,6 +2337,7 @@
 				DB551F4622E1316400DD65C2 /* Frameworks */,
 				DB551F4722E1316400DD65C2 /* Resources */,
 				DB551F6422E132D900DD65C2 /* SwiftLint */,
+				988E061D2370E46E00550D55 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
