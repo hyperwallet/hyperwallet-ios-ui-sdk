@@ -3,12 +3,14 @@ import Foundation
 @testable import Insights
 import XCTest
 
-class InsightsDBHelper: XCTestCase {
-    var mgr: EventManager?
+class InsightsDBTestBase: XCTestCase {
+    var manager: EventManager?
 
     lazy var managedObjectModel: NSManagedObjectModel = {
-        let managedObjectModel = NSManagedObjectModel.mergedModel(from: [Bundle(for: type(of: self))] )!
-        return managedObjectModel
+        let insightsFrameworkBundleIdentifier = "com.hyperwallet.ios.Insights"
+        let insightsBundle = Bundle(identifier: insightsFrameworkBundleIdentifier)!
+        let modelURL = insightsBundle.url(forResource: "Insights", withExtension: "momd")!
+        return NSManagedObjectModel(contentsOf: modelURL)!
     }()
 
     lazy var mockPersistantContainer: NSPersistentContainer = {
@@ -33,7 +35,7 @@ class InsightsDBHelper: XCTestCase {
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         super.setUp()
-        mgr = EventManager(container: mockPersistantContainer)
+        manager = EventManager(container: mockPersistantContainer)
     }
 
     override func tearDown() {

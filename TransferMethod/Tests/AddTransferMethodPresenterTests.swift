@@ -8,8 +8,6 @@ class AddTransferMethodPresenterTests: XCTestCase {
     private let mockView = MockAddTransferMethodViewTests()
     private lazy var transferMethodConfigurationFieldsResponse = HyperwalletTestHelper
         .getDataFromJson("TransferMethodConfigurationFieldsResponse")
-    private lazy var trackTransferMethodConfigurationFieldsResponse = HyperwalletTestHelper
-    .getDataFromJson("TrackTransferMethodConfigurationFieldsResponse")
 
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
