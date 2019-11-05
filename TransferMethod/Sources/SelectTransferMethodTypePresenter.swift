@@ -271,5 +271,15 @@ final class SelectTransferMethodTypePresenter {
 
         sectionData = transferMethodTypes
         view.transferMethodTypeTableViewReloadData()
+        trackImpressionSelectTransfer()
+    }
+
+    private func trackImpressionSelectTransfer() {
+        let pageName = "transfer-method:add:select-transfer-method"
+        let pageGroup = "transfer-method"
+        let countryTag = "hyperwallet_ea_country"
+        let currencyTag = "hyperwallet_ea_currency"
+        let params = [countryTag: selectedCountry, currencyTag: selectedCurrency]
+        HyperwalletInsights.shared.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
     }
 }

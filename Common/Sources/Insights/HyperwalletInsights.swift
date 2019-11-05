@@ -76,9 +76,18 @@ public class HyperwalletInsights {
     /// - Parameters:
     ///   - pageName: Name of the page - example : transfer-method:add:select-transfer-method
     ///   - pageGroup: Page group name - example : transfer-method
-    ///   - link: The link clicked - example : select-transfer-method
     ///   - params: A list of other information to be tracked - example : country,currency
     public func trackImpression(pageName: String, pageGroup: String, params: [String: String]) {
+        if let insights = Insights.shared {
+            insights.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
+        } else {
+            HyperwalletInsights.shared.loadConfiguration { result in
+                if result {
+                    HyperwalletInsights.shared.initializeInsights()
+                    Insights.shared?.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
+                }
+            }
+        }
     }
 
     /// Checks if the configurations have already been fetched - returns immediately if true
