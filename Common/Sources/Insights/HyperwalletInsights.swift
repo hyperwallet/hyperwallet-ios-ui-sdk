@@ -19,12 +19,30 @@
 import Foundation
 import HyperwalletSDK
 import Insights
-
+// Protocol for HyperwalletInsights
 public protocol HyperwalletInsightsProtocol: class {
+    /// Track Clicks
+    ///
+    /// - Parameters:
+    ///   - pageName: Name of the page
+    ///   - pageGroup: Page group name
+    ///   - link: The link clicked - example : select-transfer-method
+    ///   - params: A list of other information to be tracked - example : country,currency
     func trackClick(pageName: String, pageGroup: String, link: String, params: [String: String])
 
+    /// Track Impressions
+    ///
+    /// - Parameters:
+    ///   - pageName: Name of the page - example : transfer-method:add:select-transfer-method
+    ///   - pageGroup: Page group name - example : transfer-method
+    ///   - params: A list of other information to be tracked - example : country,currency
     func trackImpression(pageName: String, pageGroup: String, params: [String: String])
 
+    /// Track Error
+    ///
+    /// - Parameters:
+    ///   - pageName: Name of the page - example : transfer-method:add:select-transfer-method
+    ///   - pageGroup: Page group name - example : transfer-method
     func trackError(pageName: String, pageGroup: String)
 }
 /// Class responsible for initializing the Insights module.
@@ -46,8 +64,6 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
     }
 
     /// Set up HyperwalletInsights
-    ///
-    /// - Parameter configuration: Retrieved configuration object from SDK
     public static func setup() {
         instance = HyperwalletInsights()
     }
@@ -99,8 +115,7 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
         }
     }
 
-    /// Checks if the configurations have already been fetched - returns immediately if true
-    /// Else, try to fetch configuration and return the 
+    /// Fetch configuration
     ///
     /// - Parameter completion: boolean completion handler
     private func loadConfiguration(completion: @escaping(Configuration?) -> Void) {
@@ -117,10 +132,11 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
     /// Initialize the Insights module if the url and environment variables are available
     private func initializeInsights(configuration: Configuration) {
         if let environment = configuration.environment,
-            let insightsUrl = configuration.insightsUrl {
+            let insightsUrl = configuration.insightsUrl,
+            let sdkVersion = HyperwalletBundle.currentSDKAppVersion {
             Insights.setup(environment: environment,
                            programToken: configuration.issuer,
-                           sdkVersion: HyperwalletBundle.currentSDKAppVersion ?? "",
+                           sdkVersion: sdkVersion,
                            apiUrl: insightsUrl,
                            userToken: configuration.userToken)
         }

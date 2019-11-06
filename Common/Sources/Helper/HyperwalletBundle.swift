@@ -18,7 +18,7 @@
 
 import Foundation
 
-/// This is the GREAT Hyperwallet Bundle
+/// Hyperwallet Bundle
 public final class HyperwalletBundle {
     static let bundle: Bundle = {
         Bundle(for: HyperwalletBundle.self)

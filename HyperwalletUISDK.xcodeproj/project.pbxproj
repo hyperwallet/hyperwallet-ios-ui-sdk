@@ -1188,11 +1188,18 @@
 			path = Insights;
 			sourceTree = "<group>";
 		};
+		2E46452C23737EB400191173 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				2E3B047C237241B200BB1FFE /* InsightsTags.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		2E4D6CAB23679A7000916CDD /* Insights */ = {
 			isa = PBXGroup;
 			children = (
 				2E4D6CAC23679AB400916CDD /* HyperwalletInsights.swift */,
-				2E3B047C237241B200BB1FFE /* InsightsTags.swift */,
 			);
 			path = Insights;
 			sourceTree = "<group>";
@@ -1670,6 +1677,7 @@
 		DB551FA822E1409700DD65C2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				2E46452C23737EB400191173 /* Helper */,
 				A65312D322FC053700A83D30 /* Coordinators */,
 				DB551FC122E1418B00DD65C2 /* Extensions */,
 				DB551FC322E1419A00DD65C2 /* View */,

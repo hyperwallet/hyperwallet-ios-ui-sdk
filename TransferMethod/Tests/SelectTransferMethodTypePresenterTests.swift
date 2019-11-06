@@ -3,7 +3,6 @@ import Common
 #endif
 import Hippolyte
 import HyperwalletSDK
-import Insights
 @testable import TransferMethod
 import XCTest
 
@@ -16,7 +15,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
         presenter = SelectTransferMethodTypePresenter(mockView)
-        presenter.setInsights(hyperwalletInsights: mockHyperwalletInsights)
+        presenter.hyperwalletInsights = mockHyperwalletInsights
     }
 
     override func tearDown() {
@@ -47,16 +46,21 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
 
         XCTAssertTrue(!presenter.selectedCountry.isEmpty, "A country should be selected by default")
         XCTAssertTrue(!presenter.selectedCurrency.isEmpty, "A currency should be selected by default")
-        XCTAssertNotNil(HyperwalletInsights.shared, "")
-        XCTAssertNotNil(Insights.shared, "")
         XCTAssertTrue(mockView.isCountryCurrencyTableViewReloadDataPerformed,
                       "The countryCurrencyTableViewReloadData should be performed")
         XCTAssertTrue(mockView.isTransferMethodTypeTableViewReloadDataPerformed,
                       "The transferMethodTypeTableViewReloadData should be performed")
 
-        XCTAssertNotNil(Insights.shared, "Insights was not initialized")
-        XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights was not initialized")
-        XCTAssert(mockHyperwalletInsights.trackImpression, "Track impression was not called")
+        XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
+        XCTAssert(mockHyperwalletInsights.trackImpression, "HyperwalletInsights.trackImpression should be called")
+        XCTAssert(mockHyperwalletInsights.pageName == "transfer-method:add:select-transfer-method",
+                  "Page name should be transfer-method:add:select-transfer-method")
+        XCTAssert(mockHyperwalletInsights.pageGroup == "transfer-method",
+                  "Page group should be transfer-method")
+        XCTAssert((mockHyperwalletInsights.params[InsightsTags.country] != nil),
+                  "Params should have country")
+        XCTAssert((mockHyperwalletInsights.params[InsightsTags.currency] != nil),
+                  "Params should have currency")
     }
 
     func testLoadTransferMethodKeys_getUserWithoutCountry() {
@@ -373,16 +377,29 @@ class MockHyperwalletInsights: HyperwalletInsightsProtocol {
     var trackClick = false
     var trackImpression = false
     var trackError = false
+    var pageName = ""
+    var pageGroup = ""
+    var params = [String: String]()
+    var link = ""
 
     func trackClick(pageName: String, pageGroup: String, link: String, params: [String: String]) {
+        self.pageGroup = pageGroup
+        self.pageName = pageName
+        self.link = link
+        self.params = params
         trackClick = true
     }
 
     func trackImpression(pageName: String, pageGroup: String, params: [String: String]) {
+        self.pageGroup = pageGroup
+        self.pageName = pageName
+        self.params = params
         trackImpression = true
     }
 
     func trackError(pageName: String, pageGroup: String) {
+        self.pageGroup = pageGroup
+        self.pageName = pageName
         trackError = true
     }
 
@@ -390,5 +407,9 @@ class MockHyperwalletInsights: HyperwalletInsightsProtocol {
         trackClick = false
         trackImpression = false
         trackError = false
+        pageName = ""
+        pageGroup = ""
+        params = [String: String]()
+        link = ""
     }
 }
