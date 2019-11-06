@@ -20,6 +20,7 @@ import HyperwalletSDK
 
 #if !COCOAPODS
 import Common
+import Insights
 import TransferMethodRepository
 import UserRepository
 #endif
@@ -57,6 +58,8 @@ final class SelectTransferMethodTypePresenter {
     private var selectedTransferMethodType = ""
     private let pageName = "transfer-method:add:select-transfer-method"
     private let pageGroup = "transfer-method"
+    private let link = "select-transfer-method"
+    var hyperwalletInsights: HyperwalletInsightsProtocol = HyperwalletInsights.shared
     private lazy var transferMethodConfigurationRepository = {
         TransferMethodRepositoryFactory.shared.transferMethodConfigurationRepository()
     }()
@@ -206,7 +209,10 @@ final class SelectTransferMethodTypePresenter {
 
     private func selectCountryHandler() -> SelectTransferMethodTypeView.SelectItemHandler {
         return { (country) in
-            if let country = country.value { self.selectedCountry = country }
+            if let country = country.value {
+                self.selectedCountry = country
+                self.trackCountryClick()
+            }
             self.transferMethodConfigurationRepository
                 .getKeys(completion: self.getKeysHandler(success: { (result) in
                     self.loadCurrency(result)
@@ -217,7 +223,10 @@ final class SelectTransferMethodTypePresenter {
 
     private func selectCurrencyHandler() -> SelectTransferMethodTypeView.SelectItemHandler {
         return { (currency) in
-            if let currency = currency.value { self.selectedCurrency = currency }
+            if let currency = currency.value {
+                self.selectedCurrency = currency
+                self.trackCurrencyClick()
+            }
             self.transferMethodConfigurationRepository.getKeys(completion: self.getKeysHandler(
                 success: { (result) in
                     self.loadTransferMethodTypes(result)
@@ -279,6 +288,20 @@ final class SelectTransferMethodTypePresenter {
 
         sectionData = transferMethodTypes
         view.transferMethodTypeTableViewReloadData()
+        trackImpressionLoadTransferMethodTypes()
+    }
+
+    private func trackImpressionLoadTransferMethodTypes() {
+        let params = [InsightsTags.country: selectedCountry, InsightsTags.currency: selectedCurrency]
+        getInsights().trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
+    }
+
+    private func getInsights() -> HyperwalletInsightsProtocol {
+        return hyperwalletInsights
+    }
+
+    func setInsights(hyperwalletInsights: HyperwalletInsightsProtocol) {
+        self.hyperwalletInsights = hyperwalletInsights
     }
 
      private func trackTransferMethodClick() {
@@ -290,7 +313,20 @@ final class SelectTransferMethodTypePresenter {
             InsightsTags.transferMethodType:
                 self.selectedTransferMethodType
         ]
-      HyperwalletInsights
-          .shared.trackImpression(pageName: pageName, pageGroup: pageGroup, params: impressionParams)
+      getInsights().trackImpression(pageName: pageName, pageGroup: pageGroup, params: impressionParams)
   }
+    private func trackCountryClick() {
+           getInsights()
+               .trackClick(pageName: pageName,
+                           pageGroup: pageGroup,
+                           link: link,
+                           params: [InsightsTags.country: self.selectedCountry])
+       }
+    private func trackCurrencyClick() {
+          getInsights()
+          .trackClick(pageName: pageName,
+                     pageGroup: pageGroup,
+                     link: link,
+                     params: [InsightsTags.currency: self.selectedCurrency])
+    }
 }

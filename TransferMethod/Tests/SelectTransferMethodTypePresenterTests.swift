@@ -3,6 +3,7 @@ import Common
 #endif
 import Hippolyte
 import HyperwalletSDK
+import Insights
 @testable import TransferMethod
 import XCTest
 
@@ -11,9 +12,11 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
     private let mockView = MockSelectTransferMethodTypeView()
     private lazy var mockResponseData = HyperwalletTestHelper.getDataFromJson("TransferMethodConfigurationKeysResponse")
     private lazy var userMockResponseData = HyperwalletTestHelper.getDataFromJson("UserIndividualResponse")
+    private var mockHyperwalletInsights = MockHyperwalletInsights()
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
         presenter = SelectTransferMethodTypePresenter(mockView)
+        presenter.setInsights(hyperwalletInsights: mockHyperwalletInsights)
     }
 
     override func tearDown() {
@@ -21,6 +24,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
             Hippolyte.shared.stop()
         }
         mockView.resetStates()
+        mockHyperwalletInsights.resetStates()
     }
 
     func testLoadTransferMethodKeys_success() {
@@ -43,11 +47,16 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
 
         XCTAssertTrue(!presenter.selectedCountry.isEmpty, "A country should be selected by default")
         XCTAssertTrue(!presenter.selectedCurrency.isEmpty, "A currency should be selected by default")
-
+        XCTAssertNotNil(HyperwalletInsights.shared, "")
+        XCTAssertNotNil(Insights.shared, "")
         XCTAssertTrue(mockView.isCountryCurrencyTableViewReloadDataPerformed,
                       "The countryCurrencyTableViewReloadData should be performed")
         XCTAssertTrue(mockView.isTransferMethodTypeTableViewReloadDataPerformed,
                       "The transferMethodTypeTableViewReloadData should be performed")
+
+        XCTAssertNotNil(Insights.shared, "Insights was not initialized")
+        XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights was not initialized")
+        XCTAssert(mockHyperwalletInsights.trackImpression, "Track impression was not called")
     }
 
     func testLoadTransferMethodKeys_getUserWithoutCountry() {
@@ -226,6 +235,8 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
                         "The country currency cell configuration should not be nil")
         XCTAssertNotNil(presenter.getCountryCurrencyConfiguration(indexPath: secondIndexPath),
                         "Out of bounds country currency configuration should not be nil")
+        XCTAssert(mockHyperwalletInsights.trackImpression, "Track impression was not called")
+        XCTAssert(mockHyperwalletInsights.trackClick, "Track click was not called")
     }
 
     private func loadTransferMethodKeys() {
@@ -357,5 +368,29 @@ class MockSelectTransferMethodTypeView: SelectTransferMethodTypeView {
 
     func countryCurrencyTableViewReloadData() {
         isCountryCurrencyTableViewReloadDataPerformed = true
+    }
+}
+
+class MockHyperwalletInsights: HyperwalletInsightsProtocol {
+    var trackClick = false
+    var trackImpression = false
+    var trackError = false
+
+    func trackClick(pageName: String, pageGroup: String, link: String, params: [String: String]) {
+        trackClick = true
+    }
+
+    func trackImpression(pageName: String, pageGroup: String, params: [String: String]) {
+        trackImpression = true
+    }
+
+    func trackError(pageName: String, pageGroup: String) {
+        trackError = true
+    }
+
+    func resetStates() {
+        trackClick = false
+        trackImpression = false
+        trackError = false
     }
 }
