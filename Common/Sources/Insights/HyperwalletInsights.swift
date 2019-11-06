@@ -24,11 +24,18 @@ import Insights
 /// It contains methods to call Insights for various actions performed by the user
 public class HyperwalletInsights {
     private static var instance: HyperwalletInsights?
-    private var configuration: Configuration?
 
     /// Returns the previously initialized instance of the HyperwalletInsights interface object
     public static var shared: HyperwalletInsights {
         return instance ?? HyperwalletInsights()
+    }
+
+    private init() {
+        loadConfiguration { configuration in
+            if let configuration = configuration {
+                self.initializeInsights(configuration: configuration)
+            }
+        }
     }
 
     /// Set up HyperwalletInsights
@@ -36,11 +43,6 @@ public class HyperwalletInsights {
     /// - Parameter configuration: Retrieved configuration object from SDK
     public static func setup() {
         instance = HyperwalletInsights()
-        HyperwalletInsights.shared.loadConfiguration { result in
-            if result {
-                HyperwalletInsights.shared.initializeInsights()
-            }
-        }
     }
 
     /// Track Clicks
@@ -54,9 +56,9 @@ public class HyperwalletInsights {
         if let insights = Insights.shared {
             insights.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
         } else {
-            HyperwalletInsights.shared.loadConfiguration { result in
-                if result {
-                    HyperwalletInsights.shared.initializeInsights()
+            HyperwalletInsights.shared.loadConfiguration { configuration in
+                if let configuration = configuration {
+                    HyperwalletInsights.shared.initializeInsights(configuration: configuration)
                     Insights.shared?.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
                 }
             }
@@ -81,9 +83,9 @@ public class HyperwalletInsights {
         if let insights = Insights.shared {
             insights.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
         } else {
-            HyperwalletInsights.shared.loadConfiguration { result in
-                if result {
-                    HyperwalletInsights.shared.initializeInsights()
+            HyperwalletInsights.shared.loadConfiguration { configuration in
+                if let configuration = configuration {
+                    HyperwalletInsights.shared.initializeInsights(configuration: configuration)
                     Insights.shared?.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
                 }
             }
@@ -94,35 +96,26 @@ public class HyperwalletInsights {
     /// Else, try to fetch configuration and return the 
     ///
     /// - Parameter completion: boolean completion handler
-    private func loadConfiguration(completion: @escaping(Bool) -> Void) {
-        // Configuration is returned but Insights have not been initialized
-        // Possible if configuration is returned but the optional insights url and environment are empty
-        if configuration != nil {
-            completion(true)
-        } else {
-            // Fetch configuration again
-            Hyperwallet.shared.getConfiguration { configuration, _ in
-                if let configuration = configuration {
-                    self.configuration = configuration
-                    completion(true)
-                } else {
-                    completion(false)
-                }
+    private func loadConfiguration(completion: @escaping(Configuration?) -> Void) {
+        // Fetch configuration again
+        Hyperwallet.shared.getConfiguration { configuration, _ in
+            if let configuration = configuration {
+                completion(configuration)
+            } else {
+                completion(nil)
             }
         }
     }
 
     /// Initialize the Insights module if the url and environment variables are available
-    private func initializeInsights() {
-        if let environment = configuration?.environment,
-            let insightsUrl = configuration?.insightsUrl,
-            let programToken = configuration?.issuer,
-            let userToken = configuration?.userToken {
+    private func initializeInsights(configuration: Configuration) {
+        if let environment = configuration.environment,
+            let insightsUrl = configuration.insightsUrl {
             Insights.setup(environment: environment,
-                           programToken: programToken,
+                           programToken: configuration.issuer,
                            sdkVersion: HyperwalletBundle.currentSDKAppVersion ?? "",
                            apiUrl: insightsUrl,
-                           userToken: userToken)
+                           userToken: configuration.userToken)
         }
     }
 }

@@ -3,6 +3,7 @@ import Common
 #endif
 import Hippolyte
 import HyperwalletSDK
+import Insights
 @testable import TransferMethod
 import XCTest
 
@@ -43,7 +44,8 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
 
         XCTAssertTrue(!presenter.selectedCountry.isEmpty, "A country should be selected by default")
         XCTAssertTrue(!presenter.selectedCurrency.isEmpty, "A currency should be selected by default")
-
+        XCTAssertNotNil(HyperwalletInsights.shared, "")
+        XCTAssertNotNil(Insights.shared, "")
         XCTAssertTrue(mockView.isCountryCurrencyTableViewReloadDataPerformed,
                       "The countryCurrencyTableViewReloadData should be performed")
         XCTAssertTrue(mockView.isTransferMethodTypeTableViewReloadDataPerformed,
