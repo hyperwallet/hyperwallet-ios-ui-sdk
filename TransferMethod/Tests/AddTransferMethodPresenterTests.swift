@@ -1,5 +1,7 @@
+import Common
 import Hippolyte
 import HyperwalletSDK
+import Insights
 @testable import TransferMethod
 import XCTest
 
@@ -8,10 +10,12 @@ class AddTransferMethodPresenterTests: XCTestCase {
     private let mockView = MockAddTransferMethodViewTests()
     private lazy var transferMethodConfigurationFieldsResponse = HyperwalletTestHelper
         .getDataFromJson("TransferMethodConfigurationFieldsResponse")
+    private var mockHyperwalletInsights = MockHyperwalletInsights()
 
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
         presenter = AddTransferMethodPresenter(mockView, "US", "USD", "INDIVIDUAL", "BANK_ACCOUNT")
+        presenter.setInsights(hyperwalletInsights: mockHyperwalletInsights)
     }
 
     override func tearDown() {
@@ -19,6 +23,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
             Hippolyte.shared.stop()
         }
         mockView.resetStates()
+        mockHyperwalletInsights.resetStates()
     }
 
     public func testLoadTransferMethodConfigurationFields_success() {
@@ -35,6 +40,11 @@ class AddTransferMethodPresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isShowLoadingPerformed, "The showLoading should be performed")
         XCTAssertTrue(mockView.isHideLoadingPerformed, "The hideLoading should be performed")
         XCTAssertEqual(mockView.fieldGroups.count, 2, "The `response.getFields()` should be 2")
+        XCTAssertNotNil(HyperwalletInsights.shared, "")
+        XCTAssertNotNil(Insights.shared, "")
+        XCTAssertNotNil(Insights.shared, "Insights was not initialized")
+        XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights was not initialized")
+        XCTAssert(mockHyperwalletInsights.trackImpression, "Track impression was not called")
     }
 
     public func testLoadTransferMethodConfigurationFields_failure() {

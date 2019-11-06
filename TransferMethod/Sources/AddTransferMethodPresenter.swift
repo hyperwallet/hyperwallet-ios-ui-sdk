@@ -19,6 +19,7 @@
 import HyperwalletSDK
 #if !COCOAPODS
 import Common
+import Insights
 import TransferMethodRepository
 #endif
 
@@ -47,6 +48,8 @@ final class AddTransferMethodPresenter {
     private let transferMethodTypeCode: String
     private let pageName = "transfer-method:add:collect-transfer-method-information"
     private let pageGroup = "transfer-method"
+    private let pageLink = "create-transfer-method"
+    private var hyperwalletInsights: HyperwalletInsightsProtocol = HyperwalletInsights.shared
     var sectionData = [AddTransferMethodSectionData]()
 
     private lazy var transferMethodConfigurationRepository = {
@@ -113,6 +116,7 @@ final class AddTransferMethodPresenter {
         }
         view.fieldValues().forEach { hyperwalletTransferMethod.setField(key: $0.name, value: $0.value) }
 
+        trackConfirmClick()
         view.showProcessing()
         transferMethodRepository.createTransferMethod(hyperwalletTransferMethod) { [weak self] (result) in
                 guard let strongSelf = self else {
@@ -127,6 +131,7 @@ final class AddTransferMethodPresenter {
                 case .success(let transferMethodResult):
                     strongSelf.view.showConfirmation(handler: {
                         if let transferMethod = transferMethodResult {
+                            strongSelf.trackTransferMethodCreatedConfirmationImpression()
                             strongSelf.view.notifyTransferMethodAdded(transferMethod)
                         }
                     })
@@ -238,12 +243,35 @@ final class AddTransferMethodPresenter {
     }
 
     private func trackUILoadImpression () {
-        let params = [
+        getInsights().trackImpression(pageName: pageName, pageGroup: pageGroup, params: insightsParam())
+    }
+
+    private func trackConfirmClick() {
+        getInsights().trackClick(
+            pageName: pageName,
+            pageGroup: pageGroup,
+            link: pageLink,
+            params: insightsParam())
+    }
+
+    private func trackTransferMethodCreatedConfirmationImpression() {
+        getInsights().trackImpression(pageName: pageName, pageGroup: pageGroup, params: insightsParam())
+    }
+
+    func insightsParam () -> [String: String] {
+        return [
             InsightsTags.country: country,
             InsightsTags.currency: currency,
             InsightsTags.transferMethodType: transferMethodTypeCode,
             InsightsTags.profileType: profileType
         ]
-        HyperwalletInsights.shared.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
+    }
+
+    private func getInsights() -> HyperwalletInsightsProtocol {
+        return hyperwalletInsights
+    }
+
+    func setInsights(hyperwalletInsights: HyperwalletInsightsProtocol) {
+        self.hyperwalletInsights = hyperwalletInsights
     }
 }

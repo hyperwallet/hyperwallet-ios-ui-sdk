@@ -58,12 +58,12 @@ final class AddTransferMethodController: UITableViewController {
         button.titleLabel?.adjustsFontForContentSizeCategory = true
         button.titleLabel?.font = Theme.Label.bodyFont
         button.setTitleColor(Theme.Button.color, for: UIControl.State.normal)
-        button.addTarget(self, action: #selector(onTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTap), for: .touchUpInside)
         return button
     }()
 
     @objc
-    private func onTapped() {
+    private func didTap() {
         presenter.createTransferMethod()
     }
 
