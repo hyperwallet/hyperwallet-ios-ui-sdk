@@ -16,6 +16,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
         presenter = SelectTransferMethodTypePresenter(mockView)
+        presenter.setInsights(hyperwalletInsights: mockHyperwalletInsights)
     }
 
     override func tearDown() {
@@ -56,6 +57,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
 
         XCTAssertNotNil(Insights.shared, "Insights was not initialized")
         XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights was not initialized")
+        XCTAssert(mockHyperwalletInsights.trackImpression, "Track impression was not called")
     }
 
     func testLoadTransferMethodKeys_getUserWithoutCountry() {

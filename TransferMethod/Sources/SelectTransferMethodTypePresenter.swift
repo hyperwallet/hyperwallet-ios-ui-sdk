@@ -57,6 +57,7 @@ final class SelectTransferMethodTypePresenter {
     private (set) var selectedCurrency = ""
     let pageName = "transfer-method:add:select-transfer-method"
     let pageGroup = "transfer-method"
+    var hyperwalletInsights: HyperwalletInsightsProtocol = HyperwalletInsights.shared
 
     private lazy var transferMethodConfigurationRepository = {
         TransferMethodRepositoryFactory.shared.transferMethodConfigurationRepository()
@@ -279,6 +280,14 @@ final class SelectTransferMethodTypePresenter {
 
     private func trackImpressionLoadTransferMethodTypes() {
         let params = [InsightsTags.country: selectedCountry, InsightsTags.currency: selectedCurrency]
-        HyperwalletInsights.shared.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
+        getInsights().trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
+    }
+
+    private func getInsights() -> HyperwalletInsightsProtocol {
+        return hyperwalletInsights
+    }
+
+    func setInsights(hyperwalletInsights: HyperwalletInsightsProtocol) {
+        self.hyperwalletInsights = hyperwalletInsights
     }
 }
