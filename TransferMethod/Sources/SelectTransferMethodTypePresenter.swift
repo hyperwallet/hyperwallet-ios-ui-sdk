@@ -20,6 +20,7 @@ import HyperwalletSDK
 
 #if !COCOAPODS
 import Common
+import Insights
 import TransferMethodRepository
 import UserRepository
 #endif
@@ -54,6 +55,9 @@ final class SelectTransferMethodTypePresenter {
     private (set) var countryCurrencySectionData = [String]()
     private (set) var selectedCountry = ""
     private (set) var selectedCurrency = ""
+    let pageName = "transfer-method:add:select-transfer-method"
+    let pageGroup = "transfer-method"
+    var hyperwalletInsights: HyperwalletInsightsProtocol = HyperwalletInsights.shared
 
     private lazy var transferMethodConfigurationRepository = {
         TransferMethodRepositoryFactory.shared.transferMethodConfigurationRepository()
@@ -271,5 +275,19 @@ final class SelectTransferMethodTypePresenter {
 
         sectionData = transferMethodTypes
         view.transferMethodTypeTableViewReloadData()
+        trackImpressionLoadTransferMethodTypes()
+    }
+
+    private func trackImpressionLoadTransferMethodTypes() {
+        let params = [InsightsTags.country: selectedCountry, InsightsTags.currency: selectedCurrency]
+        getInsights().trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
+    }
+
+    private func getInsights() -> HyperwalletInsightsProtocol {
+        return hyperwalletInsights
+    }
+
+    func setInsights(hyperwalletInsights: HyperwalletInsightsProtocol) {
+        self.hyperwalletInsights = hyperwalletInsights
     }
 }

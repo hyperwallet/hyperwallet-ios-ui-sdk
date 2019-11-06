@@ -45,6 +45,7 @@ public final class HyperwalletUI: NSObject {
 
     private init(_ provider: HyperwalletAuthenticationTokenProvider) {
         Hyperwallet.setup(provider)
+        HyperwalletInsights.setup()
         UserRepositoryFactory.shared.userRepository().getUser { _ in }
     }
 }
