@@ -27,7 +27,6 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
         mockHyperwalletInsights.resetStates()
     }
 
-    // This is the test!!!!
     func testLoadTransferMethodKeys_success() {
         // Given
         addGetIndividualHyperwalletUserResponse()
@@ -192,7 +191,6 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
                        "The transferMethodTypeTableViewReloadData should not be performed")
     }
 
-    // This is the test we are modifying
     func testNavigateToAddTransferMethod_success() {
         // Given
         addGetHyperwalletUserResponse(fileName: "UserBusinessResponse")
