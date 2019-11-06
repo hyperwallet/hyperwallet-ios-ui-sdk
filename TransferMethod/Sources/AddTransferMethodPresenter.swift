@@ -238,13 +238,12 @@ final class AddTransferMethodPresenter {
     }
 
     private func trackUILoadImpression () {
-        HyperwalletInsights.shared.trackImpression(pageName: pageName,
-                                                   pageGroup: pageGroup,
-                                                   params:
-            [
-                InsightsTags.country: country, InsightsTags.currency: currency,
-                InsightsTags.transferMethodType: transferMethodTypeCode,
-                InsightsTags.profileType: profileType
-            ])
+        let params = [
+            InsightsTags.country: country,
+            InsightsTags.currency: currency,
+            InsightsTags.transferMethodType: transferMethodTypeCode,
+            InsightsTags.profileType: profileType
+        ]
+        HyperwalletInsights.shared.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
     }
 }
