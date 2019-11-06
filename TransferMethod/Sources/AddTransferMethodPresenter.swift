@@ -49,6 +49,7 @@ final class AddTransferMethodPresenter {
     private let pageName = "transfer-method:add:collect-transfer-method-information"
     private let pageGroup = "transfer-method"
     private let pageLink = "create-transfer-method"
+    private let transferMethodCreatedGoal = "transfer-method-created"
     private var hyperwalletInsights: HyperwalletInsightsProtocol = HyperwalletInsights.shared
     var sectionData = [AddTransferMethodSectionData]()
 
@@ -255,7 +256,13 @@ final class AddTransferMethodPresenter {
     }
 
     private func trackTransferMethodCreatedConfirmationImpression() {
-        getInsights().trackImpression(pageName: pageName, pageGroup: pageGroup, params: insightsParam())
+        getInsights().trackImpression(pageName: pageName, pageGroup: pageGroup, params: [
+            InsightsTags.country: country,
+            InsightsTags.currency: currency,
+            InsightsTags.transferMethodType: transferMethodTypeCode,
+            InsightsTags.profileType: profileType,
+            InsightsTags.goal: transferMethodCreatedGoal
+        ])
     }
 
     func insightsParam () -> [String: String] {
