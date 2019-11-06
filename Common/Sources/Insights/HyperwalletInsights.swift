@@ -20,9 +20,16 @@ import Foundation
 import HyperwalletSDK
 import Insights
 
+public protocol HyperwalletInsightsProtocol: class {
+    func trackClick(pageName: String, pageGroup: String, link: String, params: [String: String])
+
+    func trackImpression(pageName: String, pageGroup: String, params: [String: String])
+
+    func trackError(pageName: String, pageGroup: String)
+}
 /// Class responsible for initializing the Insights module.
 /// It contains methods to call Insights for various actions performed by the user
-public class HyperwalletInsights {
+public class HyperwalletInsights: HyperwalletInsightsProtocol {
     private static var instance: HyperwalletInsights?
 
     /// Returns the previously initialized instance of the HyperwalletInsights interface object

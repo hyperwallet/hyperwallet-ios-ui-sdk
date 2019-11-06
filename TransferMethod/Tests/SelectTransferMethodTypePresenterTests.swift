@@ -12,6 +12,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
     private let mockView = MockSelectTransferMethodTypeView()
     private lazy var mockResponseData = HyperwalletTestHelper.getDataFromJson("TransferMethodConfigurationKeysResponse")
     private lazy var userMockResponseData = HyperwalletTestHelper.getDataFromJson("UserIndividualResponse")
+    private var mockHyperwalletInsights = MockHyperwalletInsights()
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
         presenter = SelectTransferMethodTypePresenter(mockView)
@@ -22,8 +23,10 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
             Hippolyte.shared.stop()
         }
         mockView.resetStates()
+        mockHyperwalletInsights.resetStates()
     }
 
+    // This is the test!!!!
     func testLoadTransferMethodKeys_success() {
         // Given
         addGetIndividualHyperwalletUserResponse()
@@ -50,6 +53,9 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
                       "The countryCurrencyTableViewReloadData should be performed")
         XCTAssertTrue(mockView.isTransferMethodTypeTableViewReloadDataPerformed,
                       "The transferMethodTypeTableViewReloadData should be performed")
+
+        XCTAssertNotNil(Insights.shared, "Insights was not initialized")
+        XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights was not initialized")
     }
 
     func testLoadTransferMethodKeys_getUserWithoutCountry() {
@@ -184,6 +190,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
                        "The transferMethodTypeTableViewReloadData should not be performed")
     }
 
+    // This is the test we are modifying
     func testNavigateToAddTransferMethod_success() {
         // Given
         addGetHyperwalletUserResponse(fileName: "UserBusinessResponse")
@@ -359,5 +366,29 @@ class MockSelectTransferMethodTypeView: SelectTransferMethodTypeView {
 
     func countryCurrencyTableViewReloadData() {
         isCountryCurrencyTableViewReloadDataPerformed = true
+    }
+}
+
+class MockHyperwalletInsights: HyperwalletInsightsProtocol {
+    var trackClick = false
+    var trackImpression = false
+    var trackError = false
+
+    func trackClick(pageName: String, pageGroup: String, link: String, params: [String: String]) {
+        trackClick = true
+    }
+
+    func trackImpression(pageName: String, pageGroup: String, params: [String: String]) {
+        trackImpression = true
+    }
+
+    func trackError(pageName: String, pageGroup: String) {
+        trackError = true
+    }
+
+    func resetStates() {
+        trackClick = false
+        trackImpression = false
+        trackError = false
     }
 }
