@@ -57,7 +57,7 @@ final class SelectTransferMethodTypePresenter {
     private (set) var selectedCurrency = ""
     private let pageName = "transfer-method:add:select-transfer-method"
     private let pageGroup = "transfer-method"
-    var hyperwalletInsights: HyperwalletInsightsProtocol = HyperwalletInsights.shared
+    private var hyperwalletInsights: HyperwalletInsightsProtocol
 
     private lazy var transferMethodConfigurationRepository = {
         TransferMethodRepositoryFactory.shared.transferMethodConfigurationRepository()
@@ -70,8 +70,9 @@ final class SelectTransferMethodTypePresenter {
     private (set) var sectionData = [HyperwalletTransferMethodType]()
 
     /// Initialize SelectTransferMethodPresenter
-    init(_ view: SelectTransferMethodTypeView) {
+    init(_ view: SelectTransferMethodTypeView, _ hyperwalletInsights: HyperwalletInsightsProtocol) {
         self.view = view
+        self.hyperwalletInsights = hyperwalletInsights
     }
 
     /// Return the countryCurrency item composed by the tuple (title and value)

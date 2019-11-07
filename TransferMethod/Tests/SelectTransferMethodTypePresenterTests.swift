@@ -14,8 +14,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
     private var mockHyperwalletInsights = MockHyperwalletInsights()
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
-        presenter = SelectTransferMethodTypePresenter(mockView)
-        presenter.hyperwalletInsights = mockHyperwalletInsights
+        presenter = SelectTransferMethodTypePresenter(mockView, mockHyperwalletInsights)
     }
 
     override func tearDown() {

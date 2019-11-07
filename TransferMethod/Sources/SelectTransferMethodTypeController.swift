@@ -53,7 +53,7 @@ final class SelectTransferMethodTypeController: UITableViewController {
     }
 
     private func initializePresenter() {
-        presenter = SelectTransferMethodTypePresenter(self)
+        presenter = SelectTransferMethodTypePresenter(self, HyperwalletInsights.shared)
     }
 
     // MARK: - Setup Layout
