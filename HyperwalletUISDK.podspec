@@ -13,7 +13,7 @@ Pod::Spec.new do |spec|
     spec.dependency 'HyperwalletSDK', '1.0.0-beta05'
     spec.dependency 'Insights', 'task/HW-57214-create-insights-framework'
 
-    spec.default_subspec = 'TransferMethod', 'Receipt', 'Transfer', 'Insights'
+    spec.default_subspec = 'TransferMethod', 'Receipt', 'Transfer'
 
     spec.subspec "Common" do |common|
         common.resources = ['Common/**/*.xcassets', 'Common/**/*.ttf', 'Common/**/*.xib', 'Common/**/*.strings']
