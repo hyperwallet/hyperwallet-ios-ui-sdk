@@ -73,6 +73,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
 
     func testCreateTransferMethod_createBankAccount() {
         presenter = AddTransferMethodPresenter(mockView, "US", "USD", "INDIVIDUAL", "BANK_ACCOUNT")
+        presenter.hyperwalletInsights = mockHyperwalletInsights
         let url = String(format: "%@/bank-accounts", HyperwalletTestHelper.userRestURL)
         let response = HyperwalletTestHelper.okHTTPResponse(for: "BankAccountIndividualResponse")
         let request = HyperwalletTestHelper.buildPostRequest(baseUrl: url, response)
@@ -95,6 +96,22 @@ class AddTransferMethodPresenterTests: XCTestCase {
         XCTAssertFalse(mockView.isShowErrorPerformed, "The showError should not be performed")
         XCTAssertTrue(mockView.isShowConfirmationPerformed, "The showConfirmation should be performed")
         XCTAssertTrue(mockView.isNotificationSent, "The notification should be sent")
+
+        XCTAssert(mockHyperwalletInsights.trackClick, "HyperwalletInsights.trackClick should be called")
+        XCTAssert(mockHyperwalletInsights.trackImpression, "HyperwalletInsights.trackImpression should be called")
+        XCTAssert(mockHyperwalletInsights.pageName == "transfer-method:add:collect-transfer-method-information",
+                  "Page name should be transfer-method:add:collect-transfer-method-information")
+        XCTAssert(mockHyperwalletInsights.pageGroup == "transfer-method",
+                  "Page group should be transfer-method")
+        XCTAssert((mockHyperwalletInsights.params[InsightsTags.country] != nil),
+                  "Params should have country")
+        XCTAssert((mockHyperwalletInsights.params[InsightsTags.currency] != nil),
+                  "Params should have currency")
+        XCTAssert((mockHyperwalletInsights.params[InsightsTags.profileType] != nil),
+                  "Params should have profile type")
+        XCTAssert((mockHyperwalletInsights.params[InsightsTags.transferMethodType] != nil),
+                  "Params should have transfer method type")
+        XCTAssert((mockHyperwalletInsights.params[InsightsTags.goal] != nil), "Params should have goal")
     }
 
     func testCreateTransferMethod_createWireAccount() {
