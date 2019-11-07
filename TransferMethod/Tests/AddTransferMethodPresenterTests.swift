@@ -1,3 +1,4 @@
+import Common
 import Hippolyte
 import HyperwalletSDK
 @testable import TransferMethod

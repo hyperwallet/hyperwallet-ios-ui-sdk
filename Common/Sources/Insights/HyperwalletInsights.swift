@@ -49,6 +49,7 @@ public protocol HyperwalletInsightsProtocol: class {
 /// It contains methods to call Insights for various actions performed by the user
 public class HyperwalletInsights: HyperwalletInsightsProtocol {
     private static var instance: HyperwalletInsights?
+    var insights: InsightsProtocol? = Insights.shared
 
     /// Returns the previously initialized instance of the HyperwalletInsights interface object
     public static var shared: HyperwalletInsights {
@@ -76,13 +77,13 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
     ///   - link: The link clicked - example : select-transfer-method
     ///   - params: A list of other information to be tracked - example : country,currency
     public func trackClick(pageName: String, pageGroup: String, link: String, params: [String: String]) {
-        if let insights = Insights.shared {
+        if let insights = insights {
             insights.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
         } else {
             HyperwalletInsights.shared.loadConfiguration { configuration in
                 if let configuration = configuration {
                     HyperwalletInsights.shared.initializeInsights(configuration: configuration)
-                    Insights.shared?.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
+                    self.insights?.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
                 }
             }
         }
@@ -103,13 +104,13 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
     ///   - pageGroup: Page group name - example : transfer-method
     ///   - params: A list of other information to be tracked - example : country,currency
     public func trackImpression(pageName: String, pageGroup: String, params: [String: String]) {
-        if let insights = Insights.shared {
+        if let insights = insights {
             insights.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
         } else {
             HyperwalletInsights.shared.loadConfiguration { configuration in
                 if let configuration = configuration {
                     HyperwalletInsights.shared.initializeInsights(configuration: configuration)
-                    Insights.shared?.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
+                    self.insights?.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
                 }
             }
         }
