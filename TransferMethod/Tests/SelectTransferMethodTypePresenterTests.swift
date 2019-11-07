@@ -51,15 +51,13 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
                       "The transferMethodTypeTableViewReloadData should be performed")
 
         XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
-        XCTAssert(mockHyperwalletInsights.trackImpression, "HyperwalletInsights.trackImpression should be called")
-        XCTAssert(mockHyperwalletInsights.pageName == "transfer-method:add:select-transfer-method",
-                  "Page name should be transfer-method:add:select-transfer-method")
-        XCTAssert(mockHyperwalletInsights.pageGroup == "transfer-method",
-                  "Page group should be transfer-method")
-        XCTAssert((mockHyperwalletInsights.params[InsightsTags.country] != nil),
-                  "Params should have country")
-        XCTAssert((mockHyperwalletInsights.params[InsightsTags.currency] != nil),
-                  "Params should have currency")
+        XCTAssertTrue(mockHyperwalletInsights.trackImpression, "HyperwalletInsights.trackImpression should be called")
+        XCTAssertTrue(mockHyperwalletInsights.pageName == "transfer-method:add:select-transfer-method",
+                      "Page name should be transfer-method:add:select-transfer-method")
+        XCTAssertTrue(mockHyperwalletInsights.pageGroup == "transfer-method",
+                      "Page group should be transfer-method")
+        XCTAssertNotNil(mockHyperwalletInsights.params[InsightsTags.country], "Params should have country")
+        XCTAssertNotNil(mockHyperwalletInsights.params[InsightsTags.currency], "Params should have currency")
     }
 
     func testLoadTransferMethodKeys_getUserWithoutCountry() {
