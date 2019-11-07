@@ -9,10 +9,12 @@ class AddTransferMethodPresenterTests: XCTestCase {
     private let mockView = MockAddTransferMethodViewTests()
     private lazy var transferMethodConfigurationFieldsResponse = HyperwalletTestHelper
         .getDataFromJson("TransferMethodConfigurationFieldsResponse")
+    private var mockHyperwalletInsights = MockHyperwalletInsights()
 
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
         presenter = AddTransferMethodPresenter(mockView, "US", "USD", "INDIVIDUAL", "BANK_ACCOUNT")
+        presenter.hyperwalletInsights = mockHyperwalletInsights
     }
 
     override func tearDown() {
@@ -20,6 +22,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
             Hippolyte.shared.stop()
         }
         mockView.resetStates()
+        mockHyperwalletInsights.resetStates()
     }
 
     public func testLoadTransferMethodConfigurationFields_success() {
@@ -36,6 +39,20 @@ class AddTransferMethodPresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isShowLoadingPerformed, "The showLoading should be performed")
         XCTAssertTrue(mockView.isHideLoadingPerformed, "The hideLoading should be performed")
         XCTAssertEqual(mockView.fieldGroups.count, 2, "The `response.getFields()` should be 2")
+
+        XCTAssert(mockHyperwalletInsights.trackImpression, "HyperwalletInsights.trackImpression should be called")
+        XCTAssert(mockHyperwalletInsights.pageName == "transfer-method:add:collect-transfer-method-information",
+                  "Page name should be transfer-method:add:collect-transfer-method-information")
+        XCTAssert(mockHyperwalletInsights.pageGroup == "transfer-method",
+                  "Page group should be transfer-method")
+        XCTAssert((mockHyperwalletInsights.params[InsightsTags.country] != nil),
+                  "Params should have country")
+        XCTAssert((mockHyperwalletInsights.params[InsightsTags.currency] != nil),
+                  "Params should have currency")
+        XCTAssert((mockHyperwalletInsights.params[InsightsTags.profileType] != nil),
+                  "Params should have profile type")
+        XCTAssert((mockHyperwalletInsights.params[InsightsTags.transferMethodType] != nil),
+                  "Params should have transfer method type")
     }
 
     public func testLoadTransferMethodConfigurationFields_failure() {
