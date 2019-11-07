@@ -37,7 +37,7 @@ Pod::Spec.new do |spec|
     end
 
     spec.subspec "InsightsRepository" do |insightsRepository|
-        insightsRepository.source_files = "InsightsRepository/Sources/**/*.{swift,h}"
+        insightsRepository.source_files = "Common/Sources/Insights/**/*.{swift,h}"
     end
 
     spec.subspec "TransferMethod" do |transferMethod|
@@ -62,9 +62,9 @@ Pod::Spec.new do |spec|
     end
 
     spec.subspec "Insights" do |insights|
-        insights.source_files = "Insights/Sources/**/*.{swift,h}"
+        insights.source_files = "Common/Sources/Insights/**/*.{swift,h}"
         insights.dependency 'HyperwalletUISDK/Common'
-        insights.dependency 'HyperwalletUISDK/InsightsRepository'
+        insights.dependency 'HyperwalletUISDK/Common/Sources/Insights'
     end
 
     spec.test_spec 'Tests' do |ts|
