@@ -1,3 +1,6 @@
+#if !COCOAPODS
+import Common
+#endif
 import Hippolyte
 import HyperwalletSDK
 @testable import TransferMethod
@@ -39,19 +42,9 @@ class AddTransferMethodPresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isHideLoadingPerformed, "The hideLoading should be performed")
         XCTAssertEqual(mockView.fieldGroups.count, 2, "The `response.getFields()` should be 2")
 
-        XCTAssert(mockHyperwalletInsights.trackImpression, "HyperwalletInsights.trackImpression should be called")
-        XCTAssert(mockHyperwalletInsights.pageName == "transfer-method:add:collect-transfer-method-information",
-                  "Page name should be transfer-method:add:collect-transfer-method-information")
-        XCTAssert(mockHyperwalletInsights.pageGroup == "transfer-method",
-                  "Page group should be transfer-method")
-        XCTAssert((mockHyperwalletInsights.params[InsightsTags.country] != nil),
-                  "Params should have country")
-        XCTAssert((mockHyperwalletInsights.params[InsightsTags.currency] != nil),
-                  "Params should have currency")
-        XCTAssert((mockHyperwalletInsights.params[InsightsTags.profileType] != nil),
-                  "Params should have profile type")
-        XCTAssert((mockHyperwalletInsights.params[InsightsTags.transferMethodType] != nil),
-                  "Params should have transfer method type")
+        XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
+        XCTAssertTrue(mockHyperwalletInsights.didTrackImpression,
+                      "HyperwalletInsights.trackImpression should be called")
     }
 
     public func testLoadTransferMethodConfigurationFields_failure() {
@@ -96,21 +89,11 @@ class AddTransferMethodPresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isShowConfirmationPerformed, "The showConfirmation should be performed")
         XCTAssertTrue(mockView.isNotificationSent, "The notification should be sent")
 
-        XCTAssert(mockHyperwalletInsights.trackClick, "HyperwalletInsights.trackClick should be called")
-        XCTAssert(mockHyperwalletInsights.trackImpression, "HyperwalletInsights.trackImpression should be called")
-        XCTAssert(mockHyperwalletInsights.pageName == "transfer-method:add:collect-transfer-method-information",
-                  "Page name should be transfer-method:add:collect-transfer-method-information")
-        XCTAssert(mockHyperwalletInsights.pageGroup == "transfer-method",
-                  "Page group should be transfer-method")
-        XCTAssert((mockHyperwalletInsights.params[InsightsTags.country] != nil),
-                  "Params should have country")
-        XCTAssert((mockHyperwalletInsights.params[InsightsTags.currency] != nil),
-                  "Params should have currency")
-        XCTAssert((mockHyperwalletInsights.params[InsightsTags.profileType] != nil),
-                  "Params should have profile type")
-        XCTAssert((mockHyperwalletInsights.params[InsightsTags.transferMethodType] != nil),
-                  "Params should have transfer method type")
-        XCTAssert((mockHyperwalletInsights.params[InsightsTags.goal] != nil), "Params should have goal")
+        XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
+        XCTAssertTrue(mockHyperwalletInsights.didTrackClick,
+                      "HyperwalletInsights.trackClick should be called")
+        XCTAssertTrue(mockHyperwalletInsights.didTrackImpression,
+                      "HyperwalletInsights.trackImpression should be called")
     }
 
     func testCreateTransferMethod_createWireAccount() {
