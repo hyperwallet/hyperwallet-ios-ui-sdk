@@ -50,7 +50,7 @@ final class AddTransferMethodPresenter {
     private let pageGroup = "transfer-method"
     private let pageLink = "create-transfer-method"
     private let transferMethodCreatedGoal = "transfer-method-created"
-    var hyperwalletInsights: HyperwalletInsightsProtocol = HyperwalletInsights.shared
+    private var hyperwalletInsights: HyperwalletInsightsProtocol
     var sectionData = [AddTransferMethodSectionData]()
 
     private lazy var transferMethodConfigurationRepository = {
@@ -65,12 +65,14 @@ final class AddTransferMethodPresenter {
          _ country: String,
          _ currency: String,
          _ profileType: String,
-         _ transferMethodTypeCode: String) {
+         _ transferMethodTypeCode: String,
+         _ hyperwalletInsights: HyperwalletInsightsProtocol) {
         self.view = view
         self.country = country
         self.currency = currency
         self.profileType = profileType
         self.transferMethodTypeCode = transferMethodTypeCode
+        self.hyperwalletInsights = hyperwalletInsights
     }
 
     func loadTransferMethodConfigurationFields(_ forceUpdate: Bool = false) {
