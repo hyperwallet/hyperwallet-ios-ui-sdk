@@ -19,7 +19,6 @@
 import HyperwalletSDK
 #if !COCOAPODS
 import Common
-import Insights
 import TransferMethodRepository
 #endif
 
