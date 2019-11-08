@@ -218,7 +218,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
         XCTAssertEqual(mockView.profileType, "INDIVIDUAL", "The profileType should be INDIVIDUAL")
         XCTAssertEqual(presenter.countryCurrencySectionData.count, 2, "The countryCurrencyCount should be 2")
         XCTAssertEqual(presenter.sectionData.count, 1, "The transferMethodTypesCount should be 1")
-        XCTAssertTrue(mockHyperwalletInsights.trackImpression, "HyperwalletInsights.trackImpression should be called")
+        XCTAssertTrue(mockHyperwalletInsights.trackClick, "HyperwalletInsights.trackClick should be called")
     }
 
     func testTrackCountryClick_success() {
@@ -231,6 +231,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
         mockView.ignoreXCTestExpectation = true
         presenter.performShowSelectCountryOrCurrencyView(index: countryIndex)
+        XCTAssertTrue(mockView.isShowGenericTableViewPerformed, "Show Generic Table View should be performed")
         XCTAssertTrue(mockHyperwalletInsights.trackClick, "HyperwalletInsights.trackClick should be called")
     }
 
@@ -244,6 +245,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
         mockView.ignoreXCTestExpectation = true
         presenter.performShowSelectCountryOrCurrencyView(index: currencyIndex)
+        XCTAssertTrue(mockView.isShowGenericTableViewPerformed, "Show Generic Table View should be performed")
         XCTAssertTrue(mockHyperwalletInsights.trackClick, "HyperwalletInsights.trackClick should be called")
        }
 

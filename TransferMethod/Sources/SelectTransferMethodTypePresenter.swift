@@ -59,6 +59,7 @@ final class SelectTransferMethodTypePresenter {
     private let pageGroup = "transfer-method"
     private let linkCountry = "select-country"
     private let linkCurrency = "select-currency"
+    private let linkTransferMethod = "select-transfer-method"
     private var selectedTransferMethodType = ""
     var hyperwalletInsights: HyperwalletInsightsProtocol = HyperwalletInsights.shared
 
@@ -299,7 +300,7 @@ final class SelectTransferMethodTypePresenter {
     }
 
     private func trackTransferMethodClick() {
-       let impressionParams = [
+       let clickParams = [
                InsightsTags.country:
                    self.selectedCountry,
                InsightsTags.currency:
@@ -307,7 +308,8 @@ final class SelectTransferMethodTypePresenter {
                InsightsTags.transferMethodType:
                    self.selectedTransferMethodType
        ]
-         hyperwalletInsights.trackImpression(pageName: pageName, pageGroup: pageGroup, params: impressionParams)
+         hyperwalletInsights
+            .trackClick(pageName: pageName, pageGroup: pageGroup, link: linkTransferMethod, params: clickParams)
      }
 
     private func trackCountryClick() {
