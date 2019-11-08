@@ -43,39 +43,30 @@ class HyperwalletInsightsTests: XCTestCase {
         XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
         let params = [countryTag: country, currencyTag: currency]
         HyperwalletInsights.shared.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
-        XCTAssert(mockInsights.trackImpression, "HyperwalletInsights.trackImpression should be called")
-        XCTAssert(mockInsights.pageName == pageName,
-                  "Page name should be as expected")
-        XCTAssert(mockInsights.pageGroup == pageGroup,
-                  "Page group should as expected")
-        XCTAssert((mockInsights.params[countryTag] != nil),
-                  "Params should have country")
-        XCTAssert((mockInsights.params[currencyTag] != nil),
-                  "Params should have currency")
+        XCTAssertTrue(mockInsights.didTrackImpression, "HyperwalletInsights.trackImpression should be called")
+        XCTAssertEqual(mockInsights.pageName, pageName, "Page name should be as expected")
+        XCTAssertEqual(mockInsights.pageGroup, pageGroup, "Page group should as expected")
+        XCTAssertNotNil(mockInsights.params[countryTag], "Params should have country")
+        XCTAssertNotNil(mockInsights.params[currencyTag], "Params should have currency")
     }
 
     func testTrackClick() {
         XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
         let params = [countryTag: country, currencyTag: currency]
         HyperwalletInsights.shared.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
-        XCTAssert(mockInsights.trackClick, "HyperwalletInsights.trackClick should be called")
-        XCTAssert(mockInsights.pageName == pageName,
-                  "Page name should be as expected")
-        XCTAssert(mockInsights.pageGroup == pageGroup,
-                  "Page group should as expected")
-        XCTAssert(mockInsights.link == link,
-                  "Link should be as expected")
-        XCTAssert((mockInsights.params[countryTag] != nil),
-                  "Params should have country")
-        XCTAssert((mockInsights.params[currencyTag] != nil),
-                  "Params should have currency")
+        XCTAssertTrue(mockInsights.didTrackClick, "HyperwalletInsights.trackClick should be called")
+        XCTAssertEqual(mockInsights.pageName, pageName, "Page name should be as expected")
+        XCTAssertEqual(mockInsights.pageGroup, pageGroup, "Page group should as expected")
+        XCTAssertEqual(mockInsights.link, link, "Link should be as expected")
+        XCTAssertNotNil(mockInsights.params[countryTag], "Params should have country")
+        XCTAssertNotNil(mockInsights.params[currencyTag], "Params should have currency")
     }
 }
 
 class MockInsights: InsightsProtocol {
-    var trackClick = false
-    var trackImpression = false
-    var trackError = false
+    var didTrackClick = false
+    var didTrackImpression = false
+    var didTrackError = false
     var pageName = ""
     var pageGroup = ""
     var params = [String: String]()
@@ -86,26 +77,26 @@ class MockInsights: InsightsProtocol {
         self.pageName = pageName
         self.link = link
         self.params = params
-        trackClick = true
+        didTrackClick = true
     }
 
     func trackImpression(pageName: String, pageGroup: String, params: [String: String]) {
         self.pageGroup = pageGroup
         self.pageName = pageName
         self.params = params
-        trackImpression = true
+        didTrackImpression = true
     }
 
     func trackError(pageName: String, pageGroup: String, errorInfo: ErrorInfo) {
         self.pageGroup = pageGroup
         self.pageName = pageName
-        trackError = true
+        didTrackError = true
     }
 
     func resetStates() {
-        trackClick = false
-        trackImpression = false
-        trackError = false
+        didTrackClick = false
+        didTrackImpression = false
+        didTrackError = false
         pageName = ""
         pageGroup = ""
         params = [String: String]()

@@ -39,7 +39,6 @@
 		09E7165622A6983400FA9B96 /* ListReceiptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7165522A6983400FA9B96 /* ListReceiptTests.swift */; };
 		2BF9E5F822EF8BF200BB7DA5 /* TransferRepositoryFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF9E5F722EF8BF200BB7DA5 /* TransferRepositoryFactoryTests.swift */; };
 		2E3B047D237241B200BB1FFE /* InsightsTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3B047C237241B200BB1FFE /* InsightsTags.swift */; };
-		2E3B04812372473900BB1FFE /* HyperwalletInsightsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3B04802372473900BB1FFE /* HyperwalletInsightsTests.swift */; };
 		2E4D6CAD23679AB400916CDD /* HyperwalletInsights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4D6CAC23679AB400916CDD /* HyperwalletInsights.swift */; };
 		2E6DBB8C2326F2C200863672 /* AvailableFundMultiCurrenciesFxChange.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E6DBB8A2326F0F800863672 /* AvailableFundMultiCurrenciesFxChange.json */; };
 		2E8AFE5823062316002B6D24 /* CreateTransferController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7C0222E86F580022E573 /* CreateTransferController.swift */; };
@@ -1676,7 +1675,6 @@
 		DB551FB322E1409700DD65C2 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				DB551FE322E1447B00DD65C2 /* Helper */,
 				078B45672273895C005B0248 /* Responses */,
 				078B45732273895C005B0248 /* AddTransferMethodPresenterTests.swift */,
 				078B45712273895C005B0248 /* ListTransferMethodPresenterTests.swift */,
@@ -1710,13 +1708,6 @@
 				DBCA384E225E8BAA00CD4137 /* Widget */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		DB551FE322E1447B00DD65C2 /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helper;
 			sourceTree = "<group>";
 		};
 		DB6523B222DFD82700F52EA7 /* Helper */ = {
@@ -3103,7 +3094,6 @@
 				09E7165622A6983400FA9B96 /* ListReceiptTests.swift in Sources */,
 				98F3D754230C5BE400A8195F /* TransferFundsConfirmation.swift in Sources */,
 				09E7165022A697C400FA9B96 /* ReceiptsList.swift in Sources */,
-				2E3B04812372473900BB1FFE /* HyperwalletInsightsTests.swift in Sources */,
 				DBB2B7272261C142006C48D3 /* AddTransferMethodBankAccountIndividualTests.swift in Sources */,
 				C358A9A72272644000E5AE47 /* SelectTransferMethodType.swift in Sources */,
 				41D8361122FB425E003544AB /* TransferFunds.swift in Sources */,

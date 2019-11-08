@@ -14,8 +14,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
     private var mockHyperwalletInsights = MockHyperwalletInsights()
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
-        presenter = SelectTransferMethodTypePresenter(mockView)
-        presenter.hyperwalletInsights = mockHyperwalletInsights
+        presenter = SelectTransferMethodTypePresenter(mockView, mockHyperwalletInsights)
     }
 
     override func tearDown() {
@@ -52,15 +51,8 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
                       "The transferMethodTypeTableViewReloadData should be performed")
 
         XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
-        XCTAssert(mockHyperwalletInsights.trackImpression, "HyperwalletInsights.trackImpression should be called")
-        XCTAssert(mockHyperwalletInsights.pageName == "transfer-method:add:select-transfer-method",
-                  "Page name should be transfer-method:add:select-transfer-method")
-        XCTAssert(mockHyperwalletInsights.pageGroup == "transfer-method",
-                  "Page group should be transfer-method")
-        XCTAssert((mockHyperwalletInsights.params[InsightsTags.country] != nil),
-                  "Params should have country")
-        XCTAssert((mockHyperwalletInsights.params[InsightsTags.currency] != nil),
-                  "Params should have currency")
+        XCTAssertTrue(mockHyperwalletInsights.didTrackImpression,
+                      "HyperwalletInsights.trackImpression should be called")
     }
 
     func testLoadTransferMethodKeys_getUserWithoutCountry() {
@@ -374,42 +366,25 @@ class MockSelectTransferMethodTypeView: SelectTransferMethodTypeView {
 }
 
 class MockHyperwalletInsights: HyperwalletInsightsProtocol {
-    var trackClick = false
-    var trackImpression = false
-    var trackError = false
-    var pageName = ""
-    var pageGroup = ""
-    var params = [String: String]()
-    var link = ""
+    var didTrackClick = false
+    var didTrackImpression = false
+    var didTrackError = false
 
     func trackClick(pageName: String, pageGroup: String, link: String, params: [String: String]) {
-        self.pageGroup = pageGroup
-        self.pageName = pageName
-        self.link = link
-        self.params = params
-        trackClick = true
+        didTrackClick = true
     }
 
     func trackImpression(pageName: String, pageGroup: String, params: [String: String]) {
-        self.pageGroup = pageGroup
-        self.pageName = pageName
-        self.params = params
-        trackImpression = true
+        didTrackImpression = true
     }
 
     func trackError(pageName: String, pageGroup: String) {
-        self.pageGroup = pageGroup
-        self.pageName = pageName
-        trackError = true
+        didTrackError = true
     }
 
     func resetStates() {
-        trackClick = false
-        trackImpression = false
-        trackError = false
-        pageName = ""
-        pageGroup = ""
-        params = [String: String]()
-        link = ""
+        didTrackClick = false
+        didTrackImpression = false
+        didTrackError = false
     }
 }
