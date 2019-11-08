@@ -8,10 +8,16 @@ class AddTransferMethodPresenterTests: XCTestCase {
     private let mockView = MockAddTransferMethodViewTests()
     private lazy var transferMethodConfigurationFieldsResponse = HyperwalletTestHelper
         .getDataFromJson("TransferMethodConfigurationFieldsResponse")
+    private var mockHyperwalletInsights = MockHyperwalletInsights()
 
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
-        presenter = AddTransferMethodPresenter(mockView, "US", "USD", "INDIVIDUAL", "BANK_ACCOUNT")
+        presenter = AddTransferMethodPresenter(mockView,
+                                               "US",
+                                               "USD",
+                                               "INDIVIDUAL",
+                                               "BANK_ACCOUNT",
+                                               mockHyperwalletInsights)
     }
 
     override func tearDown() {
@@ -19,6 +25,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
             Hippolyte.shared.stop()
         }
         mockView.resetStates()
+        mockHyperwalletInsights.resetStates()
     }
 
     public func testLoadTransferMethodConfigurationFields_success() {
@@ -35,6 +42,8 @@ class AddTransferMethodPresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isShowLoadingPerformed, "The showLoading should be performed")
         XCTAssertTrue(mockView.isHideLoadingPerformed, "The hideLoading should be performed")
         XCTAssertEqual(mockView.fieldGroups.count, 2, "The `response.getFields()` should be 2")
+        XCTAssertTrue(mockHyperwalletInsights.didTrackImpression,
+                      "HyperwalletInsights.trackImpression should be called")
     }
 
     public func testLoadTransferMethodConfigurationFields_failure() {
@@ -54,7 +63,12 @@ class AddTransferMethodPresenterTests: XCTestCase {
     }
 
     func testCreateTransferMethod_createBankAccount() {
-        presenter = AddTransferMethodPresenter(mockView, "US", "USD", "INDIVIDUAL", "BANK_ACCOUNT")
+        presenter = AddTransferMethodPresenter(mockView,
+                                               "US",
+                                               "USD",
+                                               "INDIVIDUAL",
+                                               "BANK_ACCOUNT",
+                                               mockHyperwalletInsights)
         let url = String(format: "%@/bank-accounts", HyperwalletTestHelper.userRestURL)
         let response = HyperwalletTestHelper.okHTTPResponse(for: "BankAccountIndividualResponse")
         let request = HyperwalletTestHelper.buildPostRequest(baseUrl: url, response)
@@ -77,10 +91,19 @@ class AddTransferMethodPresenterTests: XCTestCase {
         XCTAssertFalse(mockView.isShowErrorPerformed, "The showError should not be performed")
         XCTAssertTrue(mockView.isShowConfirmationPerformed, "The showConfirmation should be performed")
         XCTAssertTrue(mockView.isNotificationSent, "The notification should be sent")
+        XCTAssertTrue(mockHyperwalletInsights.didTrackClick,
+                      "HyperwalletInsights.trackClick should be called")
+        XCTAssertTrue(mockHyperwalletInsights.didTrackImpression,
+                      "HyperwalletInsights.trackImpression should be called")
     }
 
     func testCreateTransferMethod_createWireAccount() {
-        presenter = AddTransferMethodPresenter(mockView, "US", "USD", "INDIVIDUAL", "WIRE_ACCOUNT")
+        presenter = AddTransferMethodPresenter(mockView,
+                                               "US",
+                                               "USD",
+                                               "INDIVIDUAL",
+                                               "WIRE_ACCOUNT",
+                                               mockHyperwalletInsights)
         let url = String(format: "%@/bank-accounts", HyperwalletTestHelper.userRestURL)
         let response = HyperwalletTestHelper.okHTTPResponse(for: "WireAccountIndividualResponse")
         let request = HyperwalletTestHelper.buildPostRequest(baseUrl: url, response)
@@ -107,7 +130,12 @@ class AddTransferMethodPresenterTests: XCTestCase {
     }
 
     func testCreateTransferMethod_createBankCard() {
-        presenter = AddTransferMethodPresenter(mockView, "US", "USD", "INDIVIDUAL", "BANK_CARD")
+        presenter = AddTransferMethodPresenter(mockView,
+                                               "US",
+                                               "USD",
+                                               "INDIVIDUAL",
+                                               "BANK_CARD",
+                                               mockHyperwalletInsights)
 
         let url = String(format: "%@/bank-cards", HyperwalletTestHelper.userRestURL)
         let response = HyperwalletTestHelper.okHTTPResponse(for: "BankCardResponse")
@@ -136,7 +164,12 @@ class AddTransferMethodPresenterTests: XCTestCase {
     }
 
     func testCreateTransferMethod_createPayPalAccount() {
-        presenter = AddTransferMethodPresenter(mockView, "US", "USD", "INDIVIDUAL", "PAYPAL_ACCOUNT")
+        presenter = AddTransferMethodPresenter(mockView,
+                                               "US",
+                                               "USD",
+                                               "INDIVIDUAL",
+                                               "PAYPAL_ACCOUNT",
+                                               mockHyperwalletInsights)
         let url = String(format: "%@/paypal-accounts", HyperwalletTestHelper.userRestURL)
         let response = HyperwalletTestHelper.okHTTPResponse(for: "PayPalAccountResponse")
         let request = HyperwalletTestHelper.buildPostRequest(baseUrl: url, response)
@@ -248,7 +281,12 @@ class AddTransferMethodPresenterTests: XCTestCase {
 
     func testCreateTransferMethod_notSupportedTransferMethodType() {
         // Given
-        presenter = AddTransferMethodPresenter(mockView, "US", "USD", "INDIVIDUAL", "PREPAID_CARD")
+        presenter = AddTransferMethodPresenter(mockView,
+                                               "US",
+                                               "USD",
+                                               "INDIVIDUAL",
+                                               "PREPAID_CARD",
+                                               mockHyperwalletInsights)
         mockView.mockFieldStatusReturnResult.append(true)
 
         // When
