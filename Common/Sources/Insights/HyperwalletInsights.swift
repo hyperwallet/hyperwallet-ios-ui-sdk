@@ -19,6 +19,7 @@
 import Foundation
 import HyperwalletSDK
 import Insights
+
 // Protocol for HyperwalletInsights
 public protocol HyperwalletInsightsProtocol: class {
     /// Track Clicks
@@ -57,11 +58,7 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
     }
 
     private init() {
-        loadConfiguration { configuration in
-            if let configuration = configuration {
-                self.initializeInsights(configuration: configuration)
-            }
-        }
+        loadConfigurationAndInitializeInsights()
     }
 
     /// Set up HyperwalletInsights
@@ -80,11 +77,9 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
         if let insights = insights {
             insights.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
         } else {
-            HyperwalletInsights.shared.loadConfiguration { configuration in
-                if let configuration = configuration {
-                    HyperwalletInsights.shared.initializeInsights(configuration: configuration)
-                    self.insights?.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
-                }
+            loadConfigurationAndInitializeInsights()
+            if let insights = insights {
+                insights.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
             }
         }
     }
@@ -107,11 +102,17 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
         if let insights = insights {
             insights.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
         } else {
-            HyperwalletInsights.shared.loadConfiguration { configuration in
-                if let configuration = configuration {
-                    HyperwalletInsights.shared.initializeInsights(configuration: configuration)
-                    self.insights?.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
-                }
+            loadConfigurationAndInitializeInsights()
+            if let insights = insights {
+                insights.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
+            }
+        }
+    }
+
+    private func loadConfigurationAndInitializeInsights() {
+        loadConfiguration { configuration in
+            if let configuration = configuration {
+                self.initializeInsights(configuration: configuration)
             }
         }
     }

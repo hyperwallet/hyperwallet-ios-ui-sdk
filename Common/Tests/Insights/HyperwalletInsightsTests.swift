@@ -61,6 +61,14 @@ class HyperwalletInsightsTests: XCTestCase {
         XCTAssertNotNil(mockInsights.params[countryTag], "Params should have country")
         XCTAssertNotNil(mockInsights.params[currencyTag], "Params should have currency")
     }
+
+    func testTrackClick_InsightsNotInitialized() {
+        hyperwalletInsights?.insights = nil
+        XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
+        let params = [countryTag: country, currencyTag: currency]
+        HyperwalletInsights.shared.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
+        XCTAssertNotNil(hyperwalletInsights?.insights, "Insights should be reloaded if nil")
+    }
 }
 
 class MockInsights: InsightsProtocol {
