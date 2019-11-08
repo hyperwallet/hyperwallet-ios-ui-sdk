@@ -20,7 +20,6 @@ import HyperwalletSDK
 
 #if !COCOAPODS
 import Common
-import Insights
 import TransferMethodRepository
 import UserRepository
 #endif
@@ -129,6 +128,7 @@ final class SelectTransferMethodTypePresenter {
                             strongSelf.loadSelectedCountry(countries, with: user?.country)
                             strongSelf.loadCurrency(result)
                             strongSelf.loadTransferMethodTypes(result)
+                            self?.trackUILoadImpression()
                         },
                         failure: { strongSelf.loadTransferMethodKeys() })
                 )
@@ -276,7 +276,6 @@ final class SelectTransferMethodTypePresenter {
 
         sectionData = transferMethodTypes
         view.transferMethodTypeTableViewReloadData()
-        trackUILoadImpression()
     }
 
     private func trackUILoadImpression() {

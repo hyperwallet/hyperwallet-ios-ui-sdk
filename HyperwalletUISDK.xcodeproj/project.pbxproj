@@ -1675,7 +1675,6 @@
 		DB551FB322E1409700DD65C2 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				DB551FE322E1447B00DD65C2 /* Helper */,
 				078B45672273895C005B0248 /* Responses */,
 				078B45732273895C005B0248 /* AddTransferMethodPresenterTests.swift */,
 				078B45712273895C005B0248 /* ListTransferMethodPresenterTests.swift */,
@@ -1709,13 +1708,6 @@
 				DBCA384E225E8BAA00CD4137 /* Widget */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		DB551FE322E1447B00DD65C2 /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helper;
 			sourceTree = "<group>";
 		};
 		DB6523B222DFD82700F52EA7 /* Helper */ = {
