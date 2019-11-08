@@ -136,8 +136,7 @@ final class AddTransferMethodController: UITableViewController {
                                                    country,
                                                    currency,
                                                    profileType,
-                                                   transferMethodTypeCode,
-                                                   HyperwalletInsights.shared)
+                                                   transferMethodTypeCode)
         } else {
             fatalError("Required data not provided in initializePresenter")
         }

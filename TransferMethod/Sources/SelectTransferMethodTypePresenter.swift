@@ -73,7 +73,8 @@ final class SelectTransferMethodTypePresenter {
     private (set) var sectionData = [HyperwalletTransferMethodType]()
 
     /// Initialize SelectTransferMethodPresenter
-    init(_ view: SelectTransferMethodTypeView, _ hyperwalletInsights: HyperwalletInsightsProtocol) {
+    init(_ view: SelectTransferMethodTypeView,
+         _ hyperwalletInsights: HyperwalletInsightsProtocol = HyperwalletInsights.shared) {
         self.view = view
         self.hyperwalletInsights = hyperwalletInsights
     }

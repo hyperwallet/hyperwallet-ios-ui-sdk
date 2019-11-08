@@ -1,6 +1,3 @@
-#if !COCOAPODS
-import Common
-#endif
 import Hippolyte
 import HyperwalletSDK
 @testable import TransferMethod
@@ -45,8 +42,6 @@ class AddTransferMethodPresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isShowLoadingPerformed, "The showLoading should be performed")
         XCTAssertTrue(mockView.isHideLoadingPerformed, "The hideLoading should be performed")
         XCTAssertEqual(mockView.fieldGroups.count, 2, "The `response.getFields()` should be 2")
-
-        XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
         XCTAssertTrue(mockHyperwalletInsights.didTrackImpression,
                       "HyperwalletInsights.trackImpression should be called")
     }
@@ -96,8 +91,6 @@ class AddTransferMethodPresenterTests: XCTestCase {
         XCTAssertFalse(mockView.isShowErrorPerformed, "The showError should not be performed")
         XCTAssertTrue(mockView.isShowConfirmationPerformed, "The showConfirmation should be performed")
         XCTAssertTrue(mockView.isNotificationSent, "The notification should be sent")
-
-        XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
         XCTAssertTrue(mockHyperwalletInsights.didTrackClick,
                       "HyperwalletInsights.trackClick should be called")
         XCTAssertTrue(mockHyperwalletInsights.didTrackImpression,

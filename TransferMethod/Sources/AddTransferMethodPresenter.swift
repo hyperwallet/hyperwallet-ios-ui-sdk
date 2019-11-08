@@ -65,7 +65,7 @@ final class AddTransferMethodPresenter {
          _ currency: String,
          _ profileType: String,
          _ transferMethodTypeCode: String,
-         _ hyperwalletInsights: HyperwalletInsightsProtocol) {
+         _ hyperwalletInsights: HyperwalletInsightsProtocol = HyperwalletInsights.shared) {
         self.view = view
         self.country = country
         self.currency = currency
