@@ -128,7 +128,7 @@ final class SelectTransferMethodTypePresenter {
                             strongSelf.loadSelectedCountry(countries, with: user?.country)
                             strongSelf.loadCurrency(result)
                             strongSelf.loadTransferMethodTypes(result)
-                            self?.trackUILoadImpression()
+                            strongSelf.trackUILoadImpression()
                         },
                         failure: { strongSelf.loadTransferMethodKeys() })
                 )
