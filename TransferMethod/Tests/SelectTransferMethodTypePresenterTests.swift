@@ -51,7 +51,8 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
                       "The transferMethodTypeTableViewReloadData should be performed")
 
         XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
-        XCTAssertTrue(mockHyperwalletInsights.didTrackImpression, "HyperwalletInsights.trackImpression should be called")
+        XCTAssertTrue(mockHyperwalletInsights.didTrackImpression,
+                      "HyperwalletInsights.trackImpression should be called")
     }
 
     func testLoadTransferMethodKeys_getUserWithoutCountry() {
