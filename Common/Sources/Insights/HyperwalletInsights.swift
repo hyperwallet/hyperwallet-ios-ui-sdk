@@ -44,7 +44,8 @@ public protocol HyperwalletInsightsProtocol: class {
     /// - Parameters:
     ///   - pageName: Name of the page - example : transfer-method:add:select-transfer-method
     ///   - pageGroup: Page group name - example : transfer-method
-    func trackError(pageName: String, pageGroup: String)
+    ///   - errorInfo: The ErrorInfo structure is used to describe an occurred error
+    func trackError(pageName: String, pageGroup: String, errorInfo: ErrorInfo)
 }
 /// Class responsible for initializing the Insights module.
 /// It contains methods to call Insights for various actions performed by the user
@@ -66,13 +67,6 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
         instance = HyperwalletInsights()
     }
 
-    /// Track Clicks
-    ///
-    /// - Parameters:
-    ///   - pageName: Name of the page
-    ///   - pageGroup: Page group name
-    ///   - link: The link clicked - example : select-transfer-method
-    ///   - params: A list of other information to be tracked - example : country,currency
     public func trackClick(pageName: String, pageGroup: String, link: String, params: [String: String]) {
         if let insights = insights {
             insights.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
@@ -84,20 +78,13 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
         }
     }
 
-    /// Track Error
-    ///
-    /// - Parameters:
-    ///   - pageName: Name of the page - example : transfer-method:add:select-transfer-method
-    ///   - pageGroup: Page group name - example : transfer-method
-    public func trackError(pageName: String, pageGroup: String) {
+    public func trackError(pageName: String, pageGroup: String, errorInfo: ErrorInfo) {
+        if insights == nil {
+            loadConfigurationAndInitializeInsights()
+        }
+        insights?.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
     }
 
-    /// Track Impressions
-    ///
-    /// - Parameters:
-    ///   - pageName: Name of the page - example : transfer-method:add:select-transfer-method
-    ///   - pageGroup: Page group name - example : transfer-method
-    ///   - params: A list of other information to be tracked - example : country,currency
     public func trackImpression(pageName: String, pageGroup: String, params: [String: String]) {
         if let insights = insights {
             insights.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
