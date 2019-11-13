@@ -88,12 +88,12 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
     }
 
     func isValid() -> Bool {
+        var isValid = true
         if isInvalidEmptyValue() || isInvalidLength() || isInvalidRegex() {
             trackError()
-            return false
-        } else {
-            return true
+            isValid = false
         }
+        return isValid
     }
 
     func trackError() {
