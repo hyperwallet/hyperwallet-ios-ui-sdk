@@ -26,8 +26,8 @@ import UIKit
 /// Represents the abstract widget input
 class AbstractWidget: UIStackView, UITextFieldDelegate {
     var field: HyperwalletField!
-    var pageName: String?
-    var pageGroup: String?
+    var pageName: String!
+    var pageGroup: String!
     let errorTypeForm = "FORM"
 
     let label: UILabel = {
@@ -97,9 +97,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
     }
 
     func trackError() {
-        if let pageName = self.pageName,
-            let pageGroup = self.pageGroup,
-            let fieldName = field.name,
+         if let fieldName = field.name,
             let errorMessage = errorMessage() {
             let errorInfo = ErrorInfo(type: errorTypeForm,
                                       message: errorMessage,
@@ -107,7 +105,8 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
                                       description: Thread.callStackSymbols.joined(separator: "\n"),
                                       code: "")
             HyperwalletInsights.shared.trackError(pageName: pageName,
-                                                  pageGroup: pageGroup)
+                                                  pageGroup: pageGroup,
+                                                  errorInfo: errorInfo)
         }
     }
 
