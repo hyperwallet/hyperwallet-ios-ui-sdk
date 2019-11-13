@@ -48,6 +48,8 @@ final class AddTransferMethodController: UITableViewController {
     private var presenter: AddTransferMethodPresenter!
     private var widgets = [AbstractWidget]()
     private var isCalledByScrollToRow = false
+    private let pageName = "transfer-method:add:collect-transfer-method-information"
+    private let pageGroup = "transfer-method"
     // MARK: - Button -
     private lazy var createAccountButton: UIButton = {
         let button = UIButton()
@@ -388,7 +390,9 @@ extension AddTransferMethodController: AddTransferMethodView {
                 else {
                     continue
             }
-            let newWidgets = fields.map(WidgetFactory.newWidget)
+            let newWidgets = fields.map({ field in WidgetFactory.newWidget(field: field,
+                                                                           pageName: pageName,
+                                                                           pageGroup: pageGroup)})
             let section = AddTransferMethodSectionData(
                 fieldGroup: fieldGroup,
                 country: country,

@@ -20,11 +20,15 @@
 import Common
 #endif
 import HyperwalletSDK
+import Insights
 import UIKit
 
 /// Represents the abstract widget input
 class AbstractWidget: UIStackView, UITextFieldDelegate {
     var field: HyperwalletField!
+    var pageName: String?
+    var pageGroup: String?
+    let errorTypeForm = "FORM"
 
     let label: UILabel = {
         let label = UILabel()
@@ -35,7 +39,11 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
         return label
     }()
 
-    required init(field: HyperwalletField) {
+    required init(field: HyperwalletField,
+                  pageName: String,
+                  pageGroup: String) {
+        self.pageName = pageName
+        self.pageGroup = pageGroup
         super.init(frame: CGRect())
         translatesAutoresizingMaskIntoConstraints = false
         axis = .horizontal
@@ -80,7 +88,27 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
     }
 
     func isValid() -> Bool {
-        return !isInvalidEmptyValue() && !isInvalidLength() && !isInvalidRegex()
+        if isInvalidEmptyValue() || isInvalidLength() || isInvalidRegex() {
+            trackError()
+            return false
+        } else {
+            return true
+        }
+    }
+
+    func trackError() {
+        if let pageName = self.pageName,
+            let pageGroup = self.pageGroup,
+            let fieldName = field.name,
+            let errorMessage = errorMessage() {
+            let errorInfo = ErrorInfo(type: errorTypeForm,
+                                      message: errorMessage,
+                                      fieldName: fieldName,
+                                      description: Thread.callStackSymbols.joined(separator: "\n"),
+                                      code: "")
+            HyperwalletInsights.shared.trackError(pageName: pageName,
+                                                  pageGroup: pageGroup)
+        }
     }
 
     func name() -> String {
