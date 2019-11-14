@@ -51,7 +51,7 @@ public protocol HyperwalletInsightsProtocol: class {
 /// It contains methods to call Insights for various actions performed by the user
 public class HyperwalletInsights: HyperwalletInsightsProtocol {
     private static var instance: HyperwalletInsights?
-    var insights: Insights?
+    var insights: InsightsProtocol?
 
     /// Returns the previously initialized instance of the HyperwalletInsights interface object
     public static var shared: HyperwalletInsights {
