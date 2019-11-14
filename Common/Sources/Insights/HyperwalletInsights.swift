@@ -51,7 +51,7 @@ public protocol HyperwalletInsightsProtocol: class {
 /// It contains methods to call Insights for various actions performed by the user
 public class HyperwalletInsights: HyperwalletInsightsProtocol {
     private static var instance: HyperwalletInsights?
-    var insights: InsightsProtocol?
+    var insights: Insights?
 
     /// Returns the previously initialized instance of the HyperwalletInsights interface object
     public static var shared: HyperwalletInsights {
@@ -79,10 +79,14 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
     }
 
     public func trackError(pageName: String, pageGroup: String, errorInfo: ErrorInfo) {
-        if insights == nil {
+        if let insights = insights {
+            insights.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
+        } else {
             loadConfigurationAndInitializeInsights()
+            if let insights = insights {
+                insights.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
+            }
         }
-        insights?.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
     }
 
     public func trackImpression(pageName: String, pageGroup: String, params: [String: String]) {
