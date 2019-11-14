@@ -44,12 +44,12 @@ final class AddTransferMethodPresenter {
     private let currency: String
     private let profileType: String
     private let transferMethodTypeCode: String
-    static let addTransferMethodPageName = "transfer-method:add:collect-transfer-method-information"
     private let createdConfirmationPageName = "transfer-method:add:transfer-method-created"
-    static let addTransferMethodPageGroup = "transfer-method"
     private let pageLink = "create-transfer-method"
     private let transferMethodCreatedGoal = "transfer-method-created"
     private var hyperwalletInsights: HyperwalletInsightsProtocol
+    static let addTransferMethodPageGroup = "transfer-method"
+    static let addTransferMethodPageName = "transfer-method:add:collect-transfer-method-information"
     var sectionData = [AddTransferMethodSectionData]()
 
     private lazy var transferMethodConfigurationRepository = {

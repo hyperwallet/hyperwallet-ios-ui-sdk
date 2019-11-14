@@ -28,6 +28,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
     var field: HyperwalletField!
     var pageName: String!
     var pageGroup: String!
+    lazy var hyperwalletInsights: HyperwalletInsightsProtocol = HyperwalletInsights.shared
     let errorTypeForm = "FORM"
 
     let label: UILabel = {
@@ -96,20 +97,6 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
         return isValid
     }
 
-    func trackError() {
-         if let fieldName = field.name,
-            let errorMessage = errorMessage() {
-            let errorInfo = ErrorInfo(type: errorTypeForm,
-                                      message: errorMessage,
-                                      fieldName: fieldName,
-                                      description: Thread.callStackSymbols.joined(separator: "\n"),
-                                      code: "")
-            HyperwalletInsights.shared.trackError(pageName: pageName,
-                                                  pageGroup: pageGroup,
-                                                  errorInfo: errorInfo)
-        }
-    }
-
     func name() -> String {
         return field.name!
     }
@@ -166,5 +153,19 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
             return false
         }
         return !NSRegularExpression(regexExpression).matches(value())
+    }
+
+    private func trackError() {
+        if let fieldName = field.name,
+            let errorMessage = errorMessage() {
+            let errorInfo = ErrorInfo(type: errorTypeForm,
+                                      message: errorMessage,
+                                      fieldName: fieldName,
+                                      description: Thread.callStackSymbols.joined(separator: "\n"),
+                                      code: "")
+            hyperwalletInsights.trackError(pageName: pageName,
+                                           pageGroup: pageGroup,
+                                           errorInfo: errorInfo)
+        }
     }
 }
