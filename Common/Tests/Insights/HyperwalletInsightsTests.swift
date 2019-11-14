@@ -90,6 +90,19 @@ class HyperwalletInsightsTests: XCTestCase {
         HyperwalletInsights.shared.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
         XCTAssertNotNil(hyperwalletInsights?.insights, "Insights should be reloaded if nil")
     }
+
+    func testtrackError_InsightsNotInitialized() {
+        let errorInfo = ErrorInfo(
+                             type: "test_type",
+                             message: "test_message",
+                             fieldName: "test_fieldName",
+                             description: "test_description",
+                             code: "test_code")
+        hyperwalletInsights?.insights = nil
+        XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
+        HyperwalletInsights.shared.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
+        XCTAssertNotNil(hyperwalletInsights?.insights, "Insights should be reloaded if nil")
+       }
 }
 
 class MockInsights: InsightsProtocol {
