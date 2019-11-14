@@ -62,6 +62,19 @@ class HyperwalletInsightsTests: XCTestCase {
         XCTAssertNotNil(mockInsights.params[currencyTag], "Params should have currency")
     }
 
+    func testtrackError() {
+        let errorInfo = ErrorInfo(
+                        type: "test_type",
+                        message: "test_message",
+                        fieldName: "test_fieldName",
+                        description: "test_description",
+                        code: "test_code")
+        HyperwalletInsights.shared.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
+        XCTAssertEqual(mockInsights.pageName, pageName, "Page name should be as expected")
+        XCTAssertEqual(mockInsights.pageGroup, pageGroup, "Page group should as expected")
+        XCTAssertNotNil(mockInsights.errorInfo, "ErrorInfo should not be empty")
+    }
+
     func testTrackClick_InsightsNotInitialized() {
         hyperwalletInsights?.insights = nil
         XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
@@ -87,6 +100,7 @@ class MockInsights: InsightsProtocol {
     var pageGroup = ""
     var params = [String: String]()
     var link = ""
+    var errorInfo: ErrorInfo?
 
     func trackClick(pageName: String, pageGroup: String, link: String, params: [String: String]) {
         self.pageGroup = pageGroup
@@ -106,6 +120,7 @@ class MockInsights: InsightsProtocol {
     func trackError(pageName: String, pageGroup: String, errorInfo: ErrorInfo) {
         self.pageGroup = pageGroup
         self.pageName = pageName
+        self.errorInfo = errorInfo
         didTrackError = true
     }
 

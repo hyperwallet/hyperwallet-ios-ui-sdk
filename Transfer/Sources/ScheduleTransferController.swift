@@ -28,7 +28,8 @@ final class ScheduleTransferController: UITableViewController, UITextFieldDelega
     private var processingView: ProcessingView?
     private var presenter: ScheduleTransferPresenter!
     private let footerIdentifier = "scheduleTransferFooterViewIdentifier"
-
+    private let pageName = "schedule-transfer"
+    private let pageGroup = "transfer"
     private let registeredCells: [(type: AnyClass, id: String)] = [
         (TransferDestinationCell.self, TransferDestinationCell.reuseIdentifier),
         (TransferForeignExchangeCell.self, TransferForeignExchangeCell.reuseIdentifier),
@@ -203,7 +204,11 @@ extension ScheduleTransferController: ScheduleTransferView {
     }
 
     func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
-        let errorView = ErrorView(viewController: self, error: error)
+        let errorView = ErrorView(
+        viewController: self,
+        error: error,
+        pageName: self.pageName,
+        pageGroup: self.pageGroup)
         errorView.show(retry)
     }
 

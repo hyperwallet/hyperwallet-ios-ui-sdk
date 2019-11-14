@@ -48,6 +48,8 @@ final class AddTransferMethodController: UITableViewController {
     private var presenter: AddTransferMethodPresenter!
     private var widgets = [AbstractWidget]()
     private var isCalledByScrollToRow = false
+    private let pageName = "transfer-method:add:collect-transfer-method-information"
+    private let pageGroup = "transfer-method"
     // MARK: - Button -
     private lazy var createAccountButton: UIButton = {
         let button = UIButton()
@@ -328,7 +330,11 @@ extension AddTransferMethodController: AddTransferMethodView {
     }
 
     func showError(_ error: HyperwalletErrorType, _ handler: (() -> Void)?) {
-        let errorView = ErrorView(viewController: self, error: error)
+        let errorView = ErrorView(
+        viewController: self,
+        error: error,
+        pageName: self.pageName,
+        pageGroup: self.pageGroup)
         errorView.show(handler)
     }
 

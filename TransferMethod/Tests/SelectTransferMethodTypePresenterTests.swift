@@ -3,6 +3,7 @@ import Common
 #endif
 import Hippolyte
 import HyperwalletSDK
+import Insights
 @testable import TransferMethod
 import XCTest
 
@@ -386,7 +387,7 @@ class MockHyperwalletInsights: HyperwalletInsightsProtocol {
         didTrackImpression = true
     }
 
-    func trackError(pageName: String, pageGroup: String) {
+    func trackError(pageName: String, pageGroup: String, errorInfo: ErrorInfo) {
         didTrackError = true
     }
 

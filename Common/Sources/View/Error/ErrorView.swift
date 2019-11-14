@@ -17,21 +17,27 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import HyperwalletSDK
+import Insights
 import UIKit
 
 /// The class to handle UI errors
 public final class ErrorView {
     weak var viewController: UIViewController!
     var error: HyperwalletErrorType
+    var pageName: String
+    var pageGroup: String
+    let errorTypeException = "EXCEPTION"
 
     /// Initializer to initialize the class with errors to be displayed and the viewcontroller responsible
     /// to display the errors
     /// - Parameters:
     ///   - viewController: view controller that contains errors
     ///   - error: hyperwallet error
-    public init(viewController: UIViewController, error: HyperwalletErrorType) {
+    public init(viewController: UIViewController, error: HyperwalletErrorType, pageName: String, pageGroup: String) {
         self.viewController = viewController
         self.error = error
+        self.pageName = pageName
+        self.pageGroup = pageGroup
     }
 
     /// To show error messages
@@ -64,6 +70,15 @@ public final class ErrorView {
     }
 
     private func unexpectedError() {
+        let errorInfo = ErrorInfo(type: self.errorTypeException,
+                                  message: self.error.errorDescription ?? "",
+                                  fieldName: "",
+                                  description: Thread.callStackSymbols.joined(separator: "\n"),
+                                  code: self.error.getHyperwalletErrors()?.errorList?.first?.code ?? "")
+        HyperwalletInsights.shared.trackError(pageName: self.pageName,
+                                              pageGroup: self.pageGroup,
+                                              errorInfo: errorInfo)
+
         HyperwalletUtilViews.showAlert(viewController,
                                        title: "unexpected_title".localized(),
                                        message: "unexpected_error_message".localized(),

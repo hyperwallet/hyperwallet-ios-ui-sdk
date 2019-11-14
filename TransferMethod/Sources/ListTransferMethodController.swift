@@ -34,7 +34,8 @@ final class ListTransferMethodController: UITableViewController {
                                                                               .localized())
     private lazy var addAccountButton: UIButton = view.setUpEmptyListButton(text: "add_account_title".localized(),
                                                                             firstItem: emptyListLabel)
-
+    private let pageName = "list-transfer-methods"
+    private let pageGroup = "transferMethods"
     override public func viewDidLoad() {
         super.viewDidLoad()
         title = "title_accounts".localized()
@@ -151,7 +152,11 @@ extension ListTransferMethodController: ListTransferMethodView {
     }
 
     func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
-        let errorView = ErrorView(viewController: self, error: error)
+        let errorView = ErrorView(
+        viewController: self,
+        error: error,
+        pageName: self.pageName,
+        pageGroup: self.pageGroup)
         errorView.show(retry)
     }
 

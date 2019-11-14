@@ -30,7 +30,8 @@ final class ListReceiptController: UITableViewController {
     private var presenter: ListReceiptPresenter!
     private let sectionTitleDateFormat = "MMMM yyyy"
     private var loadMoreReceipts = false
-
+    private let pageName = "list-receipts"
+    private let pageGroup = "receipts"
     private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "empty_list_receipt_message".localized())
 
     override public func viewDidLoad() {
@@ -136,7 +137,11 @@ extension ListReceiptController: ListReceiptView {
     }
 
     func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
-        let errorView = ErrorView(viewController: self, error: error)
+        let errorView = ErrorView(
+            viewController: self,
+            error: error,
+            pageName: self.pageName,
+            pageGroup: self.pageGroup)
         errorView.show(retry)
     }
 

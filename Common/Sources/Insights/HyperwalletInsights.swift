@@ -44,7 +44,8 @@ public protocol HyperwalletInsightsProtocol: class {
     /// - Parameters:
     ///   - pageName: Name of the page - example : transfer-method:add:select-transfer-method
     ///   - pageGroup: Page group name - example : transfer-method
-    func trackError(pageName: String, pageGroup: String)
+    ///   - ErrorInfo:  ErrorInfo have the information about the error
+    func trackError(pageName: String, pageGroup: String, errorInfo: ErrorInfo)
 }
 /// Class responsible for initializing the Insights module.
 /// It contains methods to call Insights for various actions performed by the user
@@ -89,7 +90,16 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
     /// - Parameters:
     ///   - pageName: Name of the page - example : transfer-method:add:select-transfer-method
     ///   - pageGroup: Page group name - example : transfer-method
-    public func trackError(pageName: String, pageGroup: String) {
+    ///   - ErrorInfo:  ErrorInfo have the information about the error
+    public func trackError(pageName: String, pageGroup: String, errorInfo: ErrorInfo) {
+        if let insights = insights {
+            insights.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
+               } else {
+            loadConfigurationAndInitializeInsights()
+            if let insights = insights {
+                insights.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
+                   }
+               }
     }
 
     /// Track Impressions
