@@ -135,8 +135,8 @@ extension ListReceiptController: ListReceiptView {
         }
     }
 
-    func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
-        let errorView = ErrorView(viewController: self, error: error)
+    func showError(_ error: HyperwalletErrorType, pageName: String, pageGroup: String, _ retry: (() -> Void)?) {
+        let errorView = ErrorView(viewController: self, error: error, pageName: pageName, pageGroup: pageGroup)
         errorView.show(retry)
     }
 

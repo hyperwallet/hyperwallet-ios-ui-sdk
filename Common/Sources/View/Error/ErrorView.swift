@@ -26,8 +26,8 @@ public final class ErrorView {
 
     private weak var viewController: UIViewController!
     private var error: HyperwalletErrorType
-    private var pageName: String?
-    private var pageGroup: String?
+    private var pageName: String
+    private var pageGroup: String
 
     /// Initializer to initialize the class with errors to be displayed and the viewcontroller responsible
     /// to display the errors
@@ -38,8 +38,8 @@ public final class ErrorView {
     ///   - pageGroup: The group of the Page or screen that is currently visible
     public init(viewController: UIViewController,
                 error: HyperwalletErrorType,
-                pageName: String? = nil,
-                pageGroup: String? = nil) {
+                pageName: String,
+                pageGroup: String) {
         self.viewController = viewController
         self.error = error
         self.pageName = pageName
@@ -83,7 +83,7 @@ public final class ErrorView {
     }
 
     private func connectionError(_ handler: @escaping (UIAlertAction) -> Void) {
-        if let pageName = self.pageName, let pageGroup = self.pageGroup {
+        if !pageName.isEmpty, !pageGroup.isEmpty {
             let errorInfo = ErrorInfo(type: errorTypeConnection,
                                       message: self.error.errorDescription ?? "",
                                       fieldName: "",

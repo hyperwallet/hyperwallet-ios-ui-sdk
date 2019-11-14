@@ -448,7 +448,7 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
         isTransferMethodSupported = true
     }
 
-    func showError(_ error: HyperwalletErrorType, _ handler: (() -> Void)?) {
+    func showError(_ error: HyperwalletErrorType, pageName: String, pageGroup: String, _ retry: (() -> Void)?) {
         isShowErrorPerformed = true
         handler?()
         expectations?[expectation]?.fulfill()

@@ -30,7 +30,7 @@ protocol AddTransferMethodView: class {
     func notifyTransferMethodAdded(_ transferMethod: HyperwalletTransferMethod)
     func showConfirmation(handler: @escaping () -> Void)
     func showError( title: String, message: String)
-    func showError(_ error: HyperwalletErrorType, _ handler: (() -> Void)?)
+    func showError(_ error: HyperwalletErrorType, pageName: String, pageGroup: String, _ retry: (() -> Void)?)
     func showLoading()
     func showProcessing()
     func showTransferMethodFields(_ fieldGroups: [HyperwalletFieldGroup],
@@ -44,12 +44,12 @@ final class AddTransferMethodPresenter {
     private let currency: String
     private let profileType: String
     private let transferMethodTypeCode: String
-    private let pageName = "transfer-method:add:collect-transfer-method-information"
     private let createdConfirmationPageName = "transfer-method:add:transfer-method-created"
-    private let pageGroup = "transfer-method"
     private let pageLink = "create-transfer-method"
     private let transferMethodCreatedGoal = "transfer-method-created"
     private var hyperwalletInsights: HyperwalletInsightsProtocol
+    let pageGroup = "transfer-method"
+    let pageName = "transfer-method:add:collect-transfer-method-information"
     var sectionData = [AddTransferMethodSectionData]()
 
     private lazy var transferMethodConfigurationRepository = {
@@ -93,9 +93,9 @@ final class AddTransferMethodPresenter {
 
             switch result {
             case .failure(let error):
-                strongSelf.view.showError(error, { () -> Void in
+                strongSelf.view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
                     strongSelf.loadTransferMethodConfigurationFields()
-                })
+                }
 
             case .success(let fieldResult):
                 if let fieldGroups = fieldResult?.fieldGroups(),
@@ -154,14 +154,18 @@ final class AddTransferMethodPresenter {
             resetErrorMessagesForAllSections()
             if let errors = error.getHyperwalletErrors()?.errorList, errors.isNotEmpty {
                 if errors.contains(where: { $0.fieldName == nil }) {
-                    view.showError(error, { [weak self] () -> Void in self?.updateFooterContent(errors) })
+                    view.showError(error, pageName: pageName, pageGroup: pageGroup) { [weak self] in
+                        self?.updateFooterContent(errors)
+                    }
                 } else {
                     updateFooterContent(errors)
                 }
             }
 
         default:
-            view.showError(error, { [weak self] () -> Void in self?.createTransferMethod() })
+            view.showError(error, pageName: pageName, pageGroup: pageGroup) { [weak self] in
+                self?.createTransferMethod()
+            }
         }
     }
 
