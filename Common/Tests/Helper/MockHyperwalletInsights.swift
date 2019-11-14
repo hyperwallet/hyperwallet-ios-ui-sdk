@@ -1,9 +1,9 @@
 import Insights
 
 public final class MockHyperwalletInsights: HyperwalletInsightsProtocol {
-    var didTrackClick = false
-    var didTrackImpression = false
-    var didTrackError = false
+    public var didTrackClick = false
+    public var didTrackImpression = false
+    public var didTrackError = false
 
     public init() { }
 
