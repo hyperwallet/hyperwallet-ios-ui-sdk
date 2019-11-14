@@ -1,3 +1,6 @@
+#if !COCOAPODS
+import Common
+#endif
 import Hippolyte
 import HyperwalletSDK
 @testable import Receipt
@@ -6,6 +9,7 @@ import XCTest
 class ListReceiptPresenterTests: XCTestCase {
     private var presenter: ListReceiptPresenter!
     private let mockView = MockListReceiptView()
+    private var mockHyperwalletInsights = MockHyperwalletInsights()
     private lazy var listReceiptPayload = HyperwalletTestHelper
         .getDataFromJson("UserReceiptResponse")
     private lazy var listReceiptNextPagePayload = HyperwalletTestHelper
@@ -17,7 +21,7 @@ class ListReceiptPresenterTests: XCTestCase {
 
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
-        presenter = ListReceiptPresenter(view: mockView)
+        presenter = ListReceiptPresenter(view: mockView, mockHyperwalletInsights)
     }
 
     override func tearDown() {
@@ -25,6 +29,7 @@ class ListReceiptPresenterTests: XCTestCase {
             Hippolyte.shared.stop()
         }
         mockView.resetStates()
+        mockHyperwalletInsights.resetStates()
     }
     //swiftlint:disable function_body_length
     func testListUserReceipt_success() {
@@ -208,7 +213,11 @@ class MockListReceiptView: ListReceiptView {
         expectation?.fulfill()
     }
 
-    func showError(_ error: HyperwalletErrorType, pageName: String, pageGroup: String, _ retry: (() -> Void)?) {
+    func showError(_ error: HyperwalletErrorType,
+                   hyperwalletInsights: HyperwalletInsightsProtocol,
+                   pageName: String,
+                   pageGroup: String,
+                   _ retry: (() -> Void)?) {
         isShowErrorPerformed = true
         retry!()
         expectation?.fulfill()

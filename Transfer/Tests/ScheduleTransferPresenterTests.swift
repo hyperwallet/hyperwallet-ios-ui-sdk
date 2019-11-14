@@ -1,3 +1,6 @@
+#if !COCOAPODS
+import Common
+#endif
 import Hippolyte
 import HyperwalletSDK
 @testable import Transfer
@@ -6,6 +9,7 @@ import XCTest
 class ScheduleTransferPresenterTests: XCTestCase {
     private var presenter: ScheduleTransferPresenter!
     private let mockView = MockScheduleTransferViewTests()
+    private var mockHyperwalletInsights = MockHyperwalletInsights()
     private let transferMethod = HyperwalletBankAccount.Builder(transferMethodCountry: "US",
                                                                 transferMethodCurrency: "USD",
                                                                 transferMethodProfileType: "INDIVIDUAL",
@@ -20,7 +24,8 @@ class ScheduleTransferPresenterTests: XCTestCase {
             view: mockView,
             transferMethod: transferMethod,
             transfer: transfer,
-            didFxQuoteChange: false)
+            didFxQuoteChange: false,
+            mockHyperwalletInsights)
     }
 
     override func tearDown() {
@@ -28,6 +33,7 @@ class ScheduleTransferPresenterTests: XCTestCase {
             Hippolyte.shared.stop()
         }
         mockView.resetStates()
+        mockHyperwalletInsights.resetStates()
     }
 
     public func testScheduleTransfer_success() {
@@ -206,7 +212,11 @@ class MockScheduleTransferViewTests: ScheduleTransferView {
         handler()
     }
 
-    func showError(_ error: HyperwalletErrorType, pageName: String, pageGroup: String, _ retry: (() -> Void)?) {
+    func showError(_ error: HyperwalletErrorType,
+                   hyperwalletInsights: HyperwalletInsightsProtocol,
+                   pageName: String,
+                   pageGroup: String,
+                   _ retry: (() -> Void)?) {
         isShowErrorPerformed = true
         retry!()
         expectation?.fulfill()

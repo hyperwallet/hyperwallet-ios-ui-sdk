@@ -18,6 +18,7 @@
 
 import HyperwalletSDK
 #if !COCOAPODS
+import Common
 import TransferMethodRepository
 #endif
 
@@ -29,7 +30,11 @@ protocol ListTransferMethodView: class {
     func showConfirmation(handler: @escaping (() -> Void))
     func showTransferMethods()
     func notifyTransferMethodDeactivated(_ hyperwalletStatusTransition: HyperwalletStatusTransition)
-    func showError(_ error: HyperwalletErrorType, pageName: String, pageGroup: String, _ retry: (() -> Void)?)
+    func showError(_ error: HyperwalletErrorType,
+                   hyperwalletInsights: HyperwalletInsightsProtocol,
+                   pageName: String,
+                   pageGroup: String,
+                   _ retry: (() -> Void)?)
 }
 
 final class ListTransferMethodPresenter {
@@ -37,14 +42,17 @@ final class ListTransferMethodPresenter {
     private let pageGroup = "transfer-method"
     private let pageName = "transfer-method:add:list-transfer-method"
     private (set) var sectionData = [HyperwalletTransferMethod]()
+    private var hyperwalletInsights: HyperwalletInsightsProtocol
 
     private lazy var transferMethodRepository = {
         TransferMethodRepositoryFactory.shared.transferMethodRepository()
     }()
 
     /// Initialize ListTransferMethodPresenter
-    init(view: ListTransferMethodView) {
+    init(view: ListTransferMethodView,
+         _ hyperwalletInsights: HyperwalletInsightsProtocol = HyperwalletInsights.shared) {
         self.view = view
+        self.hyperwalletInsights = hyperwalletInsights
     }
 
     func deactivateTransferMethod(at index: Int) {
@@ -65,7 +73,10 @@ final class ListTransferMethodPresenter {
             switch result {
             case .failure(let error):
                 strongSelf.view.dismissProcessing(handler: {
-                    strongSelf.view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
+                    strongSelf.view.showError(error,
+                                              hyperwalletInsights: strongSelf.hyperwalletInsights,
+                                              pageName: strongSelf.pageName,
+                                              pageGroup: strongSelf.pageGroup) {
                         strongSelf.deactivateTransferMethod(transferMethod)
                     }
                 })
@@ -98,7 +109,10 @@ final class ListTransferMethodPresenter {
 
             switch result {
             case .failure(let error):
-                strongSelf.view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
+                strongSelf.view.showError(error,
+                                          hyperwalletInsights: strongSelf.hyperwalletInsights,
+                                          pageName: strongSelf.pageName,
+                                          pageGroup: strongSelf.pageGroup) {
                     strongSelf.listTransferMethods()
                 }
 

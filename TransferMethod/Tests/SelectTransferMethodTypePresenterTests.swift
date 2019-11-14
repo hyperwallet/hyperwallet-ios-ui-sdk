@@ -348,7 +348,11 @@ class MockSelectTransferMethodTypeView: SelectTransferMethodTypeView {
         }
     }
 
-    func showError(_ error: HyperwalletErrorType, pageName: String, pageGroup: String, _ retry: (() -> Void)?) {
+    func showError(_ error: HyperwalletErrorType,
+                   hyperwalletInsights: HyperwalletInsightsProtocol,
+                   pageName: String,
+                   pageGroup: String,
+                   _ retry: (() -> Void)?) {
         isShowErrorPerformed = true
         retry?()
     }
@@ -371,29 +375,5 @@ class MockSelectTransferMethodTypeView: SelectTransferMethodTypeView {
 
     func countryCurrencyTableViewReloadData() {
         isCountryCurrencyTableViewReloadDataPerformed = true
-    }
-}
-
-class MockHyperwalletInsights: HyperwalletInsightsProtocol {
-    var didTrackClick = false
-    var didTrackImpression = false
-    var didTrackError = false
-
-    func trackClick(pageName: String, pageGroup: String, link: String, params: [String: String]) {
-        didTrackClick = true
-    }
-
-    func trackImpression(pageName: String, pageGroup: String, params: [String: String]) {
-        didTrackImpression = true
-    }
-
-    func trackError(pageName: String, pageGroup: String, errorInfo: ErrorInfo) {
-        didTrackError = true
-    }
-
-    func resetStates() {
-        didTrackClick = false
-        didTrackImpression = false
-        didTrackError = false
     }
 }
