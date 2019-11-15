@@ -73,11 +73,7 @@
 		2EF70C54237CDF71007E3844 /* HyperwalletFieldResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 2EF70C53237CDEAE007E3844 /* HyperwalletFieldResponse.json */; };
 		2EF70C65237E396C007E3844 /* HyperwalletInsightsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF70C55237E2B5F007E3844 /* HyperwalletInsightsMock.swift */; };
 		2EF70C66237E3A2F007E3844 /* HyperwalletInsightsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF70C55237E2B5F007E3844 /* HyperwalletInsightsMock.swift */; };
-		2EF70C67237E3A30007E3844 /* HyperwalletInsightsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF70C55237E2B5F007E3844 /* HyperwalletInsightsMock.swift */; };
 		2EF70C68237E3A32007E3844 /* HyperwalletInsightsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF70C55237E2B5F007E3844 /* HyperwalletInsightsMock.swift */; };
-		2EF70C69237E3A36007E3844 /* HyperwalletInsightsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF70C55237E2B5F007E3844 /* HyperwalletInsightsMock.swift */; };
-		2EF70C6A237E3A38007E3844 /* HyperwalletInsightsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF70C55237E2B5F007E3844 /* HyperwalletInsightsMock.swift */; };
-		2EF70C6B237E3A39007E3844 /* HyperwalletInsightsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF70C55237E2B5F007E3844 /* HyperwalletInsightsMock.swift */; };
 		412F723722B45DB100837F8F /* TransactionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F723222B458C700837F8F /* TransactionDetails.swift */; };
 		4157135D22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json in Resources */ = {isa = PBXBuildFile; fileRef = 4157135C22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json */; };
 		4157135F22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json in Resources */ = {isa = PBXBuildFile; fileRef = 4157135E22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json */; };
@@ -3008,7 +3004,6 @@
 			files = (
 				073BB9BA22E643880053C24E /* TransferRepositoryRequestHelper.swift in Sources */,
 				073BB9B122E6424C0053C24E /* TransferRepositoryTests.swift in Sources */,
-				2EF70C6A237E3A38007E3844 /* HyperwalletInsightsMock.swift in Sources */,
 				2EBD0C5B2373A0F300569342 /* AuthenticationTokenGeneratorMock.swift in Sources */,
 				2BF9E5F822EF8BF200BB7DA5 /* TransferRepositoryFactoryTests.swift in Sources */,
 				2EBD0C542373A0E100569342 /* HyperwalletTestHelper.swift in Sources */,
@@ -3077,7 +3072,6 @@
 				4AE6B6CE22D605B20009DEFE /* UserReceiptRepositoryTests.swift in Sources */,
 				2EBD0C5E2373A0FB00569342 /* AuthenticationProviderMock.swift in Sources */,
 				4A31BDB722D762AE0027DACA /* PrepaidCardReceiptRepositoryTests.swift in Sources */,
-				2EF70C67237E3A30007E3844 /* HyperwalletInsightsMock.swift in Sources */,
 				4A31BDB922D762CE0027DACA /* ReceiptRepositoryFactoryTests.swift in Sources */,
 				2EBD0C582373A0EE00569342 /* AuthenticationTokenGeneratorMock.swift in Sources */,
 				2EBD0C562373A0E400569342 /* HyperwalletTestHelper.swift in Sources */,
@@ -3100,7 +3094,6 @@
 			files = (
 				6439130222DF411F00036609 /* UserRepositoryTests.swift in Sources */,
 				6439130122DF411F00036609 /* UserRepositoryFactoryTests.swift in Sources */,
-				2EF70C6B237E3A39007E3844 /* HyperwalletInsightsMock.swift in Sources */,
 				2EBD0C5C2373A0F400569342 /* AuthenticationTokenGeneratorMock.swift in Sources */,
 				6439130A22DF423B00036609 /* UserRequestHelper.swift in Sources */,
 				2EBD0C552373A0E300569342 /* HyperwalletTestHelper.swift in Sources */,
@@ -3302,7 +3295,6 @@
 			files = (
 				DBDE15DD22D6562900BD646F /* TransferMethodRepositoryTests.swift in Sources */,
 				DB4BDFDF22D40B2B00761710 /* TransferMethodRepositoryFactoryTests.swift in Sources */,
-				2EF70C69237E3A36007E3844 /* HyperwalletInsightsMock.swift in Sources */,
 				2EBD0C5F2373A0FD00569342 /* AuthenticationProviderMock.swift in Sources */,
 				DBAF92BC22D01959004F197A /* TransferMethodConfigurationRepositoryTests.swift in Sources */,
 				2EBD0C532373A0DE00569342 /* HyperwalletTestHelper.swift in Sources */,
