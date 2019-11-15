@@ -18,12 +18,11 @@
 
 import Common
 import HyperwalletSDK
-import Insights
 @testable import TransferMethod
 import XCTest
 
 class AbstractWidgetTests: XCTestCase {
-    private var mockHyperwalletInsights = MockHyperwalletInsights()
+    private var hyperwalletInsightsMock = HyperwalletInsightsMock()
     let fieldData = HyperwalletTestHelper.getDataFromJson("HyperwalletFieldResponse")
     var textWidget: AbstractWidget!
     override func setUp() {
@@ -34,11 +33,11 @@ class AbstractWidgetTests: XCTestCase {
         textWidget = TextWidget(field: field,
                                 pageName: "transfer-method:add:collect-transfer-method-information",
                                 pageGroup: "transfer-method")
-        textWidget.hyperwalletInsights = mockHyperwalletInsights
+        textWidget.hyperwalletInsights = hyperwalletInsightsMock
     }
 
     override func tearDown() {
-        mockHyperwalletInsights.resetStates()
+        hyperwalletInsightsMock.resetStates()
     }
 
     func testWidgetFieldShouldNotBeEmpty() {
@@ -48,6 +47,6 @@ class AbstractWidgetTests: XCTestCase {
     func testIsValid() {
         let isValid = textWidget.isValid()
         XCTAssertFalse(isValid, "Should be invalid")
-        XCTAssertTrue(mockHyperwalletInsights.didTrackError, "Track error should be called")
+        XCTAssertTrue(hyperwalletInsightsMock.didTrackError, "Track error should be called")
     }
 }

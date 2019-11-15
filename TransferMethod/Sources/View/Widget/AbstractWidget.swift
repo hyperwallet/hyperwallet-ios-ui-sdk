@@ -20,7 +20,6 @@
 import Common
 #endif
 import HyperwalletSDK
-import Insights
 import UIKit
 
 /// Represents the abstract widget input
@@ -158,11 +157,10 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
     private func trackError() {
         if let fieldName = field.name,
             let errorMessage = errorMessage() {
-            let errorInfo = ErrorInfo(type: errorTypeForm,
-                                      message: errorMessage,
-                                      fieldName: fieldName,
-                                      description: Thread.callStackSymbols.joined(separator: "\n"),
-                                      code: "")
+            let errorInfo = ErrorInfoBuilder(type: errorTypeForm,
+                                             message: errorMessage)
+                .fieldName(fieldName: fieldName)
+                .build()
             hyperwalletInsights.trackError(pageName: pageName,
                                            pageGroup: pageGroup,
                                            errorInfo: errorInfo)
