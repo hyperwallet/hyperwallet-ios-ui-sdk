@@ -9,7 +9,7 @@ import XCTest
 class ListTransferMethodPresenterTests: XCTestCase {
     private var presenter: ListTransferMethodPresenter!
     private let mockView = MockListTransferMethodView()
-    private var mockHyperwalletInsights = MockHyperwalletInsights()
+    private var hyperwalletInsightsMock = HyperwalletInsightsMock()
 
     private lazy var listTransferMethodPayload = HyperwalletTestHelper
         .getDataFromJson("ListTransferMethodSuccessResponse")
@@ -40,7 +40,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
 
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
-        presenter = ListTransferMethodPresenter(view: mockView, mockHyperwalletInsights)
+        presenter = ListTransferMethodPresenter(view: mockView, hyperwalletInsightsMock)
     }
 
     override func tearDown() {
@@ -48,7 +48,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
             Hippolyte.shared.stop()
         }
         mockView.resetStates()
-        mockHyperwalletInsights.resetStates()
+        hyperwalletInsightsMock.resetStates()
     }
 
     func testListTransferMethod_success() {

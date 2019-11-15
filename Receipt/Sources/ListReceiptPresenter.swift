@@ -37,8 +37,8 @@ final class ListReceiptPresenter {
     private unowned let view: ListReceiptView
     private let userReceiptLimit = 20
 
-    let pageGroup = "receipts"
-    lazy var pageName = {
+    private let pageGroup = "receipts"
+    private lazy var pageName = {
         prepaidCardToken == nil
             ? "receipts:user:list-receipts"
             : "receipts:prepaidCard:list-receipts"

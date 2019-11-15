@@ -1,6 +1,6 @@
 import Insights
 
-public final class MockHyperwalletInsights: HyperwalletInsightsProtocol {
+public final class HyperwalletInsightsMock: HyperwalletInsightsProtocol {
     public var didTrackClick = false
     public var didTrackImpression = false
     public var didTrackError = false

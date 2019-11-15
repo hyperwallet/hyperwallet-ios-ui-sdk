@@ -9,7 +9,7 @@ import XCTest
 class ListReceiptPresenterTests: XCTestCase {
     private var presenter: ListReceiptPresenter!
     private let mockView = MockListReceiptView()
-    private var mockHyperwalletInsights = MockHyperwalletInsights()
+    private var hyperwalletInsightsMock = HyperwalletInsightsMock()
     private lazy var listReceiptPayload = HyperwalletTestHelper
         .getDataFromJson("UserReceiptResponse")
     private lazy var listReceiptNextPagePayload = HyperwalletTestHelper
@@ -21,7 +21,7 @@ class ListReceiptPresenterTests: XCTestCase {
 
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
-        presenter = ListReceiptPresenter(view: mockView, mockHyperwalletInsights)
+        presenter = ListReceiptPresenter(view: mockView, hyperwalletInsightsMock)
     }
 
     override func tearDown() {
@@ -29,7 +29,7 @@ class ListReceiptPresenterTests: XCTestCase {
             Hippolyte.shared.stop()
         }
         mockView.resetStates()
-        mockHyperwalletInsights.resetStates()
+        hyperwalletInsightsMock.resetStates()
     }
     //swiftlint:disable function_body_length
     func testListUserReceipt_success() {
