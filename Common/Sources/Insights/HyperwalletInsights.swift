@@ -193,6 +193,6 @@ public class ErrorInfoBuilder {
                          message: message,
                          fieldName: fieldName,
                          description: description,
-                         code: description)
+                         code: code)
     }
 }
