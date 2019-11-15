@@ -22,18 +22,24 @@ import UIKit
 
 /// The class to handle UI errors
 public final class ErrorView {
-    weak var viewController: UIViewController!
-    var error: HyperwalletErrorType
-    var pageName: String
-    var pageGroup: String
-    let errorTypeException = "EXCEPTION"
+    private let errorTypeConnection = "CONNECTION"
+    private let errorTypeException = "EXCEPTION"
+    private weak var viewController: UIViewController!
+    private var error: HyperwalletErrorType
+    private var pageName: String?
+    private var pageGroup: String?
 
     /// Initializer to initialize the class with errors to be displayed and the viewcontroller responsible
     /// to display the errors
     /// - Parameters:
     ///   - viewController: view controller that contains errors
     ///   - error: hyperwallet error
-    public init(viewController: UIViewController, error: HyperwalletErrorType, pageName: String, pageGroup: String) {
+    ///   - pageName: The Page or screen that is currently visible
+    ///   - pageGroup: The group of the Page or screen that is currently visible
+    public init(viewController: UIViewController,
+                error: HyperwalletErrorType,
+                pageName: String? = nil,
+                pageGroup: String? = nil) {
         self.viewController = viewController
         self.error = error
         self.pageName = pageName
@@ -70,22 +76,33 @@ public final class ErrorView {
     }
 
     private func unexpectedError() {
-        let errorInfo = ErrorInfo(type: self.errorTypeException,
-                                  message: self.error.errorDescription ?? "",
-                                  fieldName: "",
-                                  description: Thread.callStackSymbols.joined(separator: "\n"),
-                                  code: self.error.getHyperwalletErrors()?.errorList?.first?.code ?? "")
-        HyperwalletInsights.shared.trackError(pageName: self.pageName,
-                                              pageGroup: self.pageGroup,
+      if let pageName = self.pageName, let pageGroup = self.pageGroup {
+       let errorInfo = ErrorInfoBuilder(type: self.errorTypeException,
+                                        message: self.error.errorDescription ?? "")
+                .fieldName(fieldName: "")
+                .build()
+        HyperwalletInsights.shared.trackError(pageName: pageName,
+                                              pageGroup: pageGroup,
                                               errorInfo: errorInfo)
 
         HyperwalletUtilViews.showAlert(viewController,
                                        title: "unexpected_title".localized(),
                                        message: "unexpected_error_message".localized(),
                                        actions: UIAlertAction.close(viewController))
+        }
     }
 
     private func connectionError(_ handler: @escaping (UIAlertAction) -> Void) {
+        if let pageName = self.pageName, let pageGroup = self.pageGroup {
+            let errorInfo = ErrorInfo(type: errorTypeConnection,
+                                      message: self.error.errorDescription ?? "",
+                                      fieldName: "",
+                                      description: Thread.callStackSymbols.joined(separator: "\n"),
+                                      code: self.error.getHyperwalletErrors()?.errorList?.first?.code ?? "")
+            HyperwalletInsights.shared.trackError(pageName: pageName,
+                                                  pageGroup: pageGroup,
+                                                  errorInfo: errorInfo)
+        }
         HyperwalletUtilViews.showAlertWithRetry(viewController,
                                                 title: "network_connection_error_title".localized(),
                                                 message: "network_connection_error_message".localized(),

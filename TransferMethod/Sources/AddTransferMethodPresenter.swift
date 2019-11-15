@@ -44,12 +44,12 @@ final class AddTransferMethodPresenter {
     private let currency: String
     private let profileType: String
     private let transferMethodTypeCode: String
-    private let pageName = "transfer-method:add:collect-transfer-method-information"
     private let createdConfirmationPageName = "transfer-method:add:transfer-method-created"
-    private let pageGroup = "transfer-method"
     private let pageLink = "create-transfer-method"
     private let transferMethodCreatedGoal = "transfer-method-created"
     private var hyperwalletInsights: HyperwalletInsightsProtocol
+    static let addTransferMethodPageGroup = "transfer-method"
+    static let addTransferMethodPageName = "transfer-method:add:collect-transfer-method-information"
     var sectionData = [AddTransferMethodSectionData]()
 
     private lazy var transferMethodConfigurationRepository = {
@@ -245,25 +245,29 @@ final class AddTransferMethodPresenter {
     }
 
     private func trackUILoadImpression () {
-        hyperwalletInsights.trackImpression(pageName: pageName, pageGroup: pageGroup, params: insightsParam())
+        hyperwalletInsights.trackImpression(pageName: AddTransferMethodPresenter.addTransferMethodPageName,
+                                            pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup,
+                                            params: insightsParam())
     }
 
     private func trackConfirmClick() {
         hyperwalletInsights.trackClick(
-            pageName: pageName,
-            pageGroup: pageGroup,
+            pageName: AddTransferMethodPresenter.addTransferMethodPageName,
+            pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup,
             link: pageLink,
             params: insightsParam())
     }
 
     private func trackTransferMethodCreatedConfirmationImpression() {
-        hyperwalletInsights.trackImpression(pageName: createdConfirmationPageName, pageGroup: pageGroup, params: [
+        hyperwalletInsights.trackImpression(pageName: createdConfirmationPageName,
+                                            pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup,
+                                            params: [
             InsightsTags.country: country,
             InsightsTags.currency: currency,
             InsightsTags.transferMethodType: transferMethodTypeCode,
             InsightsTags.profileType: profileType,
             InsightsTags.goal: transferMethodCreatedGoal
-        ])
+                                            ])
     }
 
     private func insightsParam () -> [String: String] {

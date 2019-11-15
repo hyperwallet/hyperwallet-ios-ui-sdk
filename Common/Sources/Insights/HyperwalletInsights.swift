@@ -44,7 +44,7 @@ public protocol HyperwalletInsightsProtocol: class {
     /// - Parameters:
     ///   - pageName: Name of the page - example : transfer-method:add:select-transfer-method
     ///   - pageGroup: Page group name - example : transfer-method
-    ///   - ErrorInfo:  ErrorInfo have the information about the error
+    ///   - errorInfo: The ErrorInfo structure is used to describe an occurred error
     func trackError(pageName: String, pageGroup: String, errorInfo: ErrorInfo)
 }
 /// Class responsible for initializing the Insights module.
@@ -143,7 +143,7 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
 
     /// Initialize the Insights module if the url and environment variables are available
     private func initializeInsights(configuration: Configuration) {
-        if let environment = configuration.environment,
+         if let environment = configuration.environment,
             let insightsUrl = configuration.insightsUrl,
             let sdkVersion = HyperwalletBundle.currentSDKAppVersion {
             Insights.setup(environment: environment,
@@ -153,5 +153,65 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
                            userToken: configuration.userToken)
             insights = Insights.shared
         }
+    }
+}
+
+/// A helper class to build the `ErrorInfo` instance.
+public class ErrorInfoBuilder {
+    private let type: String
+    private let message: String
+    private var fieldName = ""
+    private var description = Thread.callStackSymbols.joined(separator: "\n")
+    private var code = ""
+
+    /// Initializes ErrorInfoBuilder
+    ///
+    /// - Parameters:
+    ///   - type: The Type of error that occurred.
+    ///   - message: The Field Name is especially interesting when there is a validation error/issue in combination
+    ///     with error_type = FORM
+    public init(type: String, message: String) {
+        self.type = type
+        self.message = message
+    }
+
+    /// Sets FieldName
+    ///
+    /// - Parameter fieldName: The Field Name is especially interesting when there is a validation
+    ///     error/issue incombination with error_type = FORM or when an API error occurs in relation
+    ///     to a field, error_type = API
+    /// - Returns: ErrorInfoBuilder
+    public func fieldName(fieldName: String) -> ErrorInfoBuilder {
+        self.fieldName = fieldName
+        return self
+    }
+
+    /// Sets Code
+    ///
+    /// - Parameter code: The Error Code is the type of error that occurred
+    /// - Returns: ErrorInfoBuilder
+    public func code(code: String) -> ErrorInfoBuilder {
+        self.code = code
+        return self
+    }
+
+    /// Sets description
+    ///
+    /// - Parameter description: The Source of error that occurred. This allows to understand what caused the error.
+    /// - Returns: ErrorInfoBuilder
+    public func description(description: String) -> ErrorInfoBuilder {
+        self.description = description
+        return self
+    }
+
+    /// Builds a new instance of the `ErrorInfo`.
+    ///
+    /// - Returns: a new instance of the `ErrorInfo`.
+    public func build() -> ErrorInfo {
+        return ErrorInfo(type: type,
+                         message: message,
+                         fieldName: fieldName,
+                         description: description,
+                         code: description)
     }
 }

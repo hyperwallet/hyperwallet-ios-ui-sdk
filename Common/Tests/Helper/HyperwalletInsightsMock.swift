@@ -15,27 +15,29 @@
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+import Common
+import Insights
 
-import HyperwalletSDK
-import UIKit
+class HyperwalletInsightsMock: HyperwalletInsightsProtocol {
+    var didTrackClick = false
+    var didTrackImpression = false
+    var didTrackError = false
 
-/// Factories of widget
-final class WidgetFactory {
-    /// Defines a dictionary of the widget
-    static let widgetDefinition: Dictionary = [
-        HyperwalletDataType.text.rawValue: TextWidget.self,
-        HyperwalletDataType.number.rawValue: NumberWidget.self,
-        HyperwalletDataType.selection.rawValue: SelectionWidget.self,
-        HyperwalletDataType.expiryDate.rawValue: ExpiryDateWidget.self,
-        HyperwalletDataType.phone.rawValue: PhoneWidget.self,
-        HyperwalletDataType.date.rawValue: DateWidget.self
-    ]
+    func trackClick(pageName: String, pageGroup: String, link: String, params: [String: String]) {
+        didTrackClick = true
+    }
 
-    /// Creates a new instance of a `Widget` based on the `HyperwalletField.type`
-    static func newWidget(field: HyperwalletField, pageName: String, pageGroup: String) -> AbstractWidget {
-        guard let widget = widgetDefinition[field.dataType ?? HyperwalletDataType.text.rawValue] else {
-            return TextWidget(field: field, pageName: pageName, pageGroup: pageGroup)
-        }
-        return widget.init(field: field, pageName: pageName, pageGroup: pageGroup)
+    func trackImpression(pageName: String, pageGroup: String, params: [String: String]) {
+        didTrackImpression = true
+    }
+
+    func trackError(pageName: String, pageGroup: String, errorInfo: ErrorInfo) {
+        didTrackError = true
+    }
+
+    func resetStates() {
+        didTrackClick = false
+        didTrackImpression = false
+        didTrackError = false
     }
 }

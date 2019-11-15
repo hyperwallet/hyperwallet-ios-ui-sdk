@@ -62,14 +62,15 @@ class HyperwalletInsightsTests: XCTestCase {
         XCTAssertNotNil(mockInsights.params[currencyTag], "Params should have currency")
     }
 
-    func testtrackError() {
-        let errorInfo = ErrorInfo(
-                        type: "test_type",
-                        message: "test_message",
-                        fieldName: "test_fieldName",
-                        description: "test_description",
-                        code: "test_code")
+    func testTrackError() {
+        let errorInfo = ErrorInfoBuilder(type: "test_type",
+                                         message: "test_message")
+                            .fieldName(fieldName: "test_fieldName")
+                            .description(description: "test_description")
+                            .code(code: "test_code")
+                            .build()
         HyperwalletInsights.shared.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
+        XCTAssertTrue(mockInsights.didTrackError, "HyperwalletInsights.trackError should be called")
         XCTAssertEqual(mockInsights.pageName, pageName, "Page name should be as expected")
         XCTAssertEqual(mockInsights.pageGroup, pageGroup, "Page group should as expected")
         XCTAssertNotNil(mockInsights.errorInfo, "ErrorInfo should not be empty")
@@ -91,13 +92,13 @@ class HyperwalletInsightsTests: XCTestCase {
         XCTAssertNotNil(hyperwalletInsights?.insights, "Insights should be reloaded if nil")
     }
 
-    func testtrackError_InsightsNotInitialized() {
-        let errorInfo = ErrorInfo(
-                             type: "test_type",
-                             message: "test_message",
-                             fieldName: "test_fieldName",
-                             description: "test_description",
-                             code: "test_code")
+    func testTrackError_InsightsNotInitialized() {
+        let errorInfo = ErrorInfoBuilder(type: "test_type",
+                                         message: "test_message")
+                       .fieldName(fieldName: "test_fieldName")
+                       .description(description: "test_description")
+                       .code(code: "test_code")
+                       .build()
         hyperwalletInsights?.insights = nil
         XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
         HyperwalletInsights.shared.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)

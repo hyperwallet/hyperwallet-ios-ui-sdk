@@ -12,10 +12,10 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
     private let mockView = MockSelectTransferMethodTypeView()
     private lazy var mockResponseData = HyperwalletTestHelper.getDataFromJson("TransferMethodConfigurationKeysResponse")
     private lazy var userMockResponseData = HyperwalletTestHelper.getDataFromJson("UserIndividualResponse")
-    private var mockHyperwalletInsights = MockHyperwalletInsights()
+    private var hyperwalletInsightsMock = HyperwalletInsightsMock()
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
-        presenter = SelectTransferMethodTypePresenter(mockView, mockHyperwalletInsights)
+        presenter = SelectTransferMethodTypePresenter(mockView, hyperwalletInsightsMock)
     }
 
     override func tearDown() {
@@ -23,7 +23,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
             Hippolyte.shared.stop()
         }
         mockView.resetStates()
-        mockHyperwalletInsights.resetStates()
+        hyperwalletInsightsMock.resetStates()
     }
 
     func testLoadTransferMethodKeys_success() {
@@ -52,7 +52,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
                       "The transferMethodTypeTableViewReloadData should be performed")
 
         XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
-        XCTAssertTrue(mockHyperwalletInsights.didTrackImpression,
+        XCTAssertTrue(hyperwalletInsightsMock.didTrackImpression,
                       "HyperwalletInsights.trackImpression should be called")
     }
 
@@ -211,7 +211,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
         XCTAssertEqual(mockView.profileType, "INDIVIDUAL", "The profileType should be INDIVIDUAL")
         XCTAssertEqual(presenter.countryCurrencySectionData.count, 2, "The countryCurrencyCount should be 2")
         XCTAssertEqual(presenter.sectionData.count, 1, "The transferMethodTypesCount should be 1")
-        XCTAssertTrue(mockHyperwalletInsights.didTrackClick, "HyperwalletInsights.trackClick should be called")
+        XCTAssertTrue(hyperwalletInsightsMock.didTrackClick, "HyperwalletInsights.trackClick should be called")
     }
 
     func testTrackCountryClick_success() {
@@ -225,7 +225,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
         mockView.ignoreXCTestExpectation = true
         presenter.performShowSelectCountryOrCurrencyView(index: countryIndex)
         XCTAssertTrue(mockView.isShowGenericTableViewPerformed, "Show Generic Table View should be performed")
-        XCTAssertTrue(mockHyperwalletInsights.didTrackClick, "HyperwalletInsights.trackClick should be called")
+        XCTAssertTrue(hyperwalletInsightsMock.didTrackClick, "HyperwalletInsights.trackClick should be called")
     }
 
     func testTrackCurrencyClick_success() {
@@ -239,7 +239,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
         mockView.ignoreXCTestExpectation = true
         presenter.performShowSelectCountryOrCurrencyView(index: currencyIndex)
         XCTAssertTrue(mockView.isShowGenericTableViewPerformed, "Show Generic Table View should be performed")
-        XCTAssertTrue(mockHyperwalletInsights.didTrackClick, "HyperwalletInsights.trackClick should be called")
+        XCTAssertTrue(hyperwalletInsightsMock.didTrackClick, "HyperwalletInsights.trackClick should be called")
        }
 
     private func loadTransferMethodKeys() {
@@ -371,29 +371,5 @@ class MockSelectTransferMethodTypeView: SelectTransferMethodTypeView {
 
     func countryCurrencyTableViewReloadData() {
         isCountryCurrencyTableViewReloadDataPerformed = true
-    }
-}
-
-class MockHyperwalletInsights: HyperwalletInsightsProtocol {
-    var didTrackClick = false
-    var didTrackImpression = false
-    var didTrackError = false
-
-    func trackClick(pageName: String, pageGroup: String, link: String, params: [String: String]) {
-        didTrackClick = true
-    }
-
-    func trackImpression(pageName: String, pageGroup: String, params: [String: String]) {
-        didTrackImpression = true
-    }
-
-    func trackError(pageName: String, pageGroup: String, errorInfo: ErrorInfo) {
-        didTrackError = true
-    }
-
-    func resetStates() {
-        didTrackClick = false
-        didTrackImpression = false
-        didTrackError = false
     }
 }
