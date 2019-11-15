@@ -79,10 +79,14 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
     }
 
     public func trackError(pageName: String, pageGroup: String, errorInfo: ErrorInfo) {
-        if insights == nil {
+        if let insights = insights {
+            insights.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
+        } else {
             loadConfigurationAndInitializeInsights()
+            if let insights = insights {
+                insights.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
+            }
         }
-        insights?.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
     }
 
     public func trackImpression(pageName: String, pageGroup: String, params: [String: String]) {

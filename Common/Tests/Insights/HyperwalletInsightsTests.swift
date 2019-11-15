@@ -62,6 +62,22 @@ class HyperwalletInsightsTests: XCTestCase {
         XCTAssertNotNil(mockInsights.params[currencyTag], "Params should have currency")
     }
 
+    func testTrackError() {
+        XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
+        let errorInfo = ErrorInfo(type: "errorInfo_type",
+                                  message: "errorInfo_message",
+                                  fieldName: "errorInfo_fieldName",
+                                  description: "errorInfo_description",
+                                  code: "errorInfo_code")
+
+        HyperwalletInsights.shared.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
+
+        XCTAssertTrue(mockInsights.didTrackError, "HyperwalletInsights.trackError should be called")
+        XCTAssertEqual(mockInsights.pageName, pageName, "Page name should be as expected")
+        XCTAssertEqual(mockInsights.pageGroup, pageGroup, "Page group should be as expected")
+        XCTAssertNotNil(mockInsights.errorInfo, "ErrorInfo shouldn't be empty")
+    }
+
     func testTrackClick_InsightsNotInitialized() {
         hyperwalletInsights?.insights = nil
         XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
@@ -77,6 +93,18 @@ class HyperwalletInsightsTests: XCTestCase {
         HyperwalletInsights.shared.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
         XCTAssertNotNil(hyperwalletInsights?.insights, "Insights should be reloaded if nil")
     }
+
+    func testTrackError_InsightsNotInitialized() {
+        hyperwalletInsights?.insights = nil
+        XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
+        let errorInfo = ErrorInfo(type: "errorInfo_type",
+                                  message: "errorInfo_message",
+                                  fieldName: "errorInfo_fieldName",
+                                  description: "errorInfo_description",
+                                  code: "errorInfo_code")
+        HyperwalletInsights.shared.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
+        XCTAssertNotNil(hyperwalletInsights?.insights, "Insights should be reloaded if nil")
+    }
 }
 
 class MockInsights: InsightsProtocol {
@@ -87,6 +115,7 @@ class MockInsights: InsightsProtocol {
     var pageGroup = ""
     var params = [String: String]()
     var link = ""
+    var errorInfo: ErrorInfo!
 
     func trackClick(pageName: String, pageGroup: String, link: String, params: [String: String]) {
         self.pageGroup = pageGroup
@@ -106,6 +135,7 @@ class MockInsights: InsightsProtocol {
     func trackError(pageName: String, pageGroup: String, errorInfo: ErrorInfo) {
         self.pageGroup = pageGroup
         self.pageName = pageName
+        self.errorInfo = errorInfo
         didTrackError = true
     }
 

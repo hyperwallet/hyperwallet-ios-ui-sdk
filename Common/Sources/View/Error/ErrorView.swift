@@ -26,8 +26,9 @@ public final class ErrorView {
 
     private weak var viewController: UIViewController!
     private var error: HyperwalletErrorType
-    private var pageName: String?
-    private var pageGroup: String?
+    private var pageName: String
+    private var pageGroup: String
+    private let hyperwalletInsights: HyperwalletInsightsProtocol
 
     /// Initializer to initialize the class with errors to be displayed and the viewcontroller responsible
     /// to display the errors
@@ -37,13 +38,15 @@ public final class ErrorView {
     ///   - pageName: The Page or screen that is currently visible
     ///   - pageGroup: The group of the Page or screen that is currently visible
     public init(viewController: UIViewController,
+                hyperwalletInsights: HyperwalletInsightsProtocol,
                 error: HyperwalletErrorType,
-                pageName: String? = nil,
-                pageGroup: String? = nil) {
+                pageName: String,
+                pageGroup: String) {
         self.viewController = viewController
         self.error = error
         self.pageName = pageName
         self.pageGroup = pageGroup
+        self.hyperwalletInsights = hyperwalletInsights
     }
 
     /// To show error messages
@@ -83,15 +86,15 @@ public final class ErrorView {
     }
 
     private func connectionError(_ handler: @escaping (UIAlertAction) -> Void) {
-        if let pageName = self.pageName, let pageGroup = self.pageGroup {
+        if !pageName.isEmpty, !pageGroup.isEmpty {
             let errorInfo = ErrorInfo(type: errorTypeConnection,
                                       message: self.error.errorDescription ?? "",
                                       fieldName: "",
                                       description: Thread.callStackSymbols.joined(separator: "\n"),
                                       code: self.error.getHyperwalletErrors()?.errorList?.first?.code ?? "")
-            HyperwalletInsights.shared.trackError(pageName: pageName,
-                                                  pageGroup: pageGroup,
-                                                  errorInfo: errorInfo)
+            hyperwalletInsights.trackError(pageName: pageName,
+                                           pageGroup: pageGroup,
+                                           errorInfo: errorInfo)
         }
         HyperwalletUtilViews.showAlertWithRetry(viewController,
                                                 title: "network_connection_error_title".localized(),

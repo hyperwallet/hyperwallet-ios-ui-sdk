@@ -347,7 +347,11 @@ class MockSelectTransferMethodTypeView: SelectTransferMethodTypeView {
         }
     }
 
-    func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
+    func showError(_ error: HyperwalletErrorType,
+                   hyperwalletInsights: HyperwalletInsightsProtocol,
+                   pageName: String,
+                   pageGroup: String,
+                   _ retry: (() -> Void)?) {
         isShowErrorPerformed = true
         retry?()
     }
