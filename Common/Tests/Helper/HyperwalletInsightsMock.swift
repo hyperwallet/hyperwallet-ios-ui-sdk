@@ -1,25 +1,26 @@
+import Common
 import Insights
 
-public final class HyperwalletInsightsMock: HyperwalletInsightsProtocol {
-    public var didTrackClick = false
-    public var didTrackImpression = false
-    public var didTrackError = false
+final class HyperwalletInsightsMock: HyperwalletInsightsProtocol {
+    var didTrackClick = false
+    var didTrackImpression = false
+    var didTrackError = false
 
-    public init() { }
+    init() { }
 
-    public func trackClick(pageName: String, pageGroup: String, link: String, params: [String: String]) {
+    func trackClick(pageName: String, pageGroup: String, link: String, params: [String: String]) {
         didTrackClick = true
     }
 
-    public func trackImpression(pageName: String, pageGroup: String, params: [String: String]) {
+    func trackImpression(pageName: String, pageGroup: String, params: [String: String]) {
         didTrackImpression = true
     }
 
-    public func trackError(pageName: String, pageGroup: String, errorInfo: ErrorInfo) {
+    func trackError(pageName: String, pageGroup: String, errorInfo: ErrorInfo) {
         didTrackError = true
     }
 
-    public func resetStates() {
+    func resetStates() {
         didTrackClick = false
         didTrackImpression = false
         didTrackError = false
