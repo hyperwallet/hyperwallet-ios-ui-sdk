@@ -15,18 +15,18 @@
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
 import Foundation
 
-/// Hyperwallet Bundle
-public final class HyperwalletBundle {
-    static let bundle: Bundle = {
-        Bundle(for: HyperwalletBundle.self)
-    }()
-
-    /// Get the current SDK version
-    public static let currentSDKAppVersion: String? = {
-        let version: String? = HyperwalletBundle.bundle.infoDictionary?["CFBundleShortVersionString"] as? String
-        return version
-    }()
+/// Representation of Insights API Tags property for `InsightsTags`.
+public struct InsightsTags {
+    /// The country tag
+    public static let country = "hyperwallet_ea_country"
+    /// The currency tag
+    public static let currency = "hyperwallet_ea_currency"
+    /// The profile type tag
+    public static let profileType = "hyperwallet_profile_type"
+    /// The transfer method type tag
+    public static let transferMethodType = "hyperwallet_ea_type"
+    /// The goal tag
+    public static let goal = "goal"
 }

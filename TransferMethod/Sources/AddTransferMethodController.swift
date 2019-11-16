@@ -58,12 +58,12 @@ final class AddTransferMethodController: UITableViewController {
         button.titleLabel?.adjustsFontForContentSizeCategory = true
         button.titleLabel?.font = Theme.Label.bodyFont
         button.setTitleColor(Theme.Button.color, for: UIControl.State.normal)
-        button.addTarget(self, action: #selector(onTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTap), for: .touchUpInside)
         return button
     }()
 
     @objc
-    private func onTapped() {
+    private func didTap() {
         presenter.createTransferMethod()
     }
 
@@ -330,11 +330,6 @@ extension AddTransferMethodController: AddTransferMethodView {
     func showError(_ error: HyperwalletErrorType, _ handler: (() -> Void)?) {
         let errorView = ErrorView(viewController: self, error: error)
         errorView.show(handler)
-    }
-
-    func showBusinessError(_ error: HyperwalletErrorType, _ handler: @escaping (() -> Void)) {
-        let errorView = ErrorView(viewController: self, error: error)
-        errorView.businessError({ (_) in handler() })
     }
 
     func notifyTransferMethodAdded(_ transferMethod: HyperwalletTransferMethod) {
