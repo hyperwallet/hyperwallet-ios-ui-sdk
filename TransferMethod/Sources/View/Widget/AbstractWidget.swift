@@ -25,6 +25,10 @@ import UIKit
 /// Represents the abstract widget input
 class AbstractWidget: UIStackView, UITextFieldDelegate {
     var field: HyperwalletField!
+    var pageName: String!
+    var pageGroup: String!
+    lazy var hyperwalletInsights: HyperwalletInsightsProtocol = HyperwalletInsights.shared
+    let errorTypeForm = "FORM"
 
     let label: UILabel = {
         let label = UILabel()
@@ -35,7 +39,11 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
         return label
     }()
 
-    required init(field: HyperwalletField) {
+    required init(field: HyperwalletField,
+                  pageName: String,
+                  pageGroup: String) {
+        self.pageName = pageName
+        self.pageGroup = pageGroup
         super.init(frame: CGRect())
         translatesAutoresizingMaskIntoConstraints = false
         axis = .horizontal
@@ -80,7 +88,12 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
     }
 
     func isValid() -> Bool {
-        return !isInvalidEmptyValue() && !isInvalidLength() && !isInvalidRegex()
+        var isValid = true
+        if isInvalidEmptyValue() || isInvalidLength() || isInvalidRegex() {
+            trackError()
+            isValid = false
+        }
+        return isValid
     }
 
     func name() -> String {
@@ -139,5 +152,18 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
             return false
         }
         return !NSRegularExpression(regexExpression).matches(value())
+    }
+
+    private func trackError() {
+        if let fieldName = field.name,
+            let errorMessage = errorMessage() {
+            let errorInfo = ErrorInfoBuilder(type: errorTypeForm,
+                                             message: errorMessage)
+                .fieldName(fieldName: fieldName)
+                .build()
+            hyperwalletInsights.trackError(pageName: pageName,
+                                           pageGroup: pageGroup,
+                                           errorInfo: errorInfo)
+        }
     }
 }

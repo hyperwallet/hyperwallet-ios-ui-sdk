@@ -3,7 +3,6 @@ import Common
 #endif
 import Hippolyte
 import HyperwalletSDK
-import Insights
 @testable import TransferMethod
 import XCTest
 
