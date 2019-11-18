@@ -58,9 +58,7 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
         return instance ?? HyperwalletInsights()
     }
 
-    private init() {
-        loadConfigurationAndInitializeInsights()
-    }
+    private init() { }
 
     /// Set up HyperwalletInsights
     public static func setup() {
@@ -71,9 +69,13 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
         if let insights = insights {
             insights.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
         } else {
-            loadConfigurationAndInitializeInsights()
-            if let insights = insights {
-                insights.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
+            loadConfiguration { configuration in
+                if let configuration = configuration {
+                    self.initializeInsights(configuration: configuration)
+                    if let insights = self.insights {
+                        insights.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
+                    }
+                }
             }
         }
     }
@@ -82,9 +84,13 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
         if let insights = insights {
             insights.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
         } else {
-            loadConfigurationAndInitializeInsights()
-            if let insights = insights {
-                insights.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
+            loadConfiguration { configuration in
+                if let configuration = configuration {
+                    self.initializeInsights(configuration: configuration)
+                    if let insights = self.insights {
+                        insights.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
+                    }
+                }
             }
         }
     }
@@ -93,24 +99,17 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
         if let insights = insights {
             insights.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
         } else {
-            loadConfigurationAndInitializeInsights()
-            if let insights = insights {
-                insights.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
+            loadConfiguration { configuration in
+                if let configuration = configuration {
+                    self.initializeInsights(configuration: configuration)
+                    if let insights = self.insights {
+                        insights.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
+                    }
+                }
             }
         }
     }
 
-    private func loadConfigurationAndInitializeInsights() {
-        loadConfiguration { configuration in
-            if let configuration = configuration {
-                self.initializeInsights(configuration: configuration)
-            }
-        }
-    }
-
-    /// Fetch configuration
-    ///
-    /// - Parameter completion: boolean completion handler
     private func loadConfiguration(completion: @escaping(Configuration?) -> Void) {
         // Fetch configuration again
         Hyperwallet.shared.getConfiguration { configuration, _ in
