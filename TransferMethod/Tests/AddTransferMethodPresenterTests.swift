@@ -242,6 +242,9 @@ class AddTransferMethodPresenterTests: XCTestCase {
                       "The displayErrorMessageInFooter should be performed")
         XCTAssertFalse(mockView.isShowConfirmationPerformed, "The showConfirmation should not be performed")
         XCTAssertFalse(mockView.isNotificationSent, "The notification should not be sent")
+
+        XCTAssertTrue(hyperwalletInsightsMock.didTrackError,
+                      "HyperwalletInsights.trackError should be called")
     }
 
     func testCreateTransferMethod_failure_unexpectedError() {
