@@ -38,7 +38,7 @@ public final class ErrorView {
     ///   - pageName: The Page or screen that is currently visible
     ///   - pageGroup: The group of the Page or screen that is currently visible
     public init(viewController: UIViewController,
-                //hyperwalletInsights: HyperwalletInsightsProtocol = HyperwalletInsights.shared,
+                hyperwalletInsights: HyperwalletInsightsProtocol = HyperwalletInsights.shared,
                 error: HyperwalletErrorType,
                 pageName: String,
                 pageGroup: String) {
@@ -46,7 +46,7 @@ public final class ErrorView {
         self.error = error
         self.pageName = pageName
         self.pageGroup = pageGroup
-        self.hyperwalletInsights = HyperwalletInsights.shared //hyperwalletInsights
+        self.hyperwalletInsights = hyperwalletInsights
     }
 
     /// To show error messages
