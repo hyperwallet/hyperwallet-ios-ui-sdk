@@ -105,7 +105,8 @@ class AddTransferMethodPresenterTests: XCTestCase {
                                                "US",
                                                "USD",
                                                "INDIVIDUAL",
-                                               "WIRE_ACCOUNT")
+                                               "WIRE_ACCOUNT",
+                                               hyperwalletInsightsMock)
         let url = String(format: "%@/bank-accounts", HyperwalletTestHelper.userRestURL)
         let response = HyperwalletTestHelper.okHTTPResponse(for: "WireAccountIndividualResponse")
         let request = HyperwalletTestHelper.buildPostRequest(baseUrl: url, response)
@@ -136,7 +137,8 @@ class AddTransferMethodPresenterTests: XCTestCase {
                                                "US",
                                                "USD",
                                                "INDIVIDUAL",
-                                               "BANK_CARD")
+                                               "BANK_CARD",
+                                               hyperwalletInsightsMock)
 
         let url = String(format: "%@/bank-cards", HyperwalletTestHelper.userRestURL)
         let response = HyperwalletTestHelper.okHTTPResponse(for: "BankCardResponse")
@@ -169,7 +171,8 @@ class AddTransferMethodPresenterTests: XCTestCase {
                                                "US",
                                                "USD",
                                                "INDIVIDUAL",
-                                               "PAYPAL_ACCOUNT")
+                                               "PAYPAL_ACCOUNT",
+                                               hyperwalletInsightsMock)
         let url = String(format: "%@/paypal-accounts", HyperwalletTestHelper.userRestURL)
         let response = HyperwalletTestHelper.okHTTPResponse(for: "PayPalAccountResponse")
         let request = HyperwalletTestHelper.buildPostRequest(baseUrl: url, response)
@@ -285,7 +288,8 @@ class AddTransferMethodPresenterTests: XCTestCase {
                                                "US",
                                                "USD",
                                                "INDIVIDUAL",
-                                               "PREPAID_CARD")
+                                               "PREPAID_CARD",
+                                               hyperwalletInsightsMock)
         mockView.mockFieldStatusReturnResult.append(true)
 
         // When
