@@ -18,21 +18,33 @@
 
 import HyperwalletSDK
 #if !COCOAPODS
+import Common
 import ReceiptRepository
 #endif
 
 protocol ListReceiptView: class {
     func hideLoading()
     func loadReceipts()
-    func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?)
+    func showError(_ error: HyperwalletErrorType,
+                   hyperwalletInsights: HyperwalletInsightsProtocol,
+                   pageName: String,
+                   pageGroup: String,
+                   _ retry: (() -> Void)?)
     func showLoading()
 }
 
 final class ListReceiptPresenter {
     private unowned let view: ListReceiptView
-
-    private var offset = 0
     private let userReceiptLimit = 20
+
+    private let pageGroup = "receipts"
+    private lazy var pageName = {
+        prepaidCardToken == nil
+            ? "receipts:user:list-receipts"
+            : "receipts:prepaidCard:list-receipts"
+    }()
+    private var hyperwalletInsights: HyperwalletInsightsProtocol
+    private var offset = 0
     private var prepaidCardToken: String?
     private lazy var userReceiptRepository = {
         ReceiptRepositoryFactory.shared.userReceiptRepository()
@@ -46,9 +58,12 @@ final class ListReceiptPresenter {
     private(set) var sectionData = [(key: Date, value: [HyperwalletReceipt])]()
 
     /// Initialize ListReceiptPresenter
-    init(view: ListReceiptView, prepaidCardToken: String? = nil) {
+    init(view: ListReceiptView,
+         prepaidCardToken: String? = nil,
+         _ hyperwalletInsights: HyperwalletInsightsProtocol = HyperwalletInsights.shared) {
         self.view = view
         self.prepaidCardToken = prepaidCardToken
+        self.hyperwalletInsights = hyperwalletInsights
     }
 
     func listReceipts() {
@@ -100,7 +115,12 @@ final class ListReceiptPresenter {
                     strongSelf.offset += receipts.count
 
                 case .failure(let error):
-                    strongSelf.view.showError(error, { strongSelf.listUserReceipts() })
+                    strongSelf.view.showError(error,
+                                              hyperwalletInsights: strongSelf.hyperwalletInsights,
+                                              pageName: strongSelf.pageName,
+                                              pageGroup: strongSelf.pageGroup) {
+                        strongSelf.listUserReceipts()
+                    }
                     return
                 }
                 strongSelf.view.loadReceipts()
@@ -123,7 +143,12 @@ final class ListReceiptPresenter {
 
                 case .failure(let error):
                     guard let prepaidCardToken = strongSelf.prepaidCardToken else { break }
-                    strongSelf.view.showError(error, { strongSelf.listPrepaidCardReceipts(prepaidCardToken) })
+                    strongSelf.view.showError(error,
+                                              hyperwalletInsights: strongSelf.hyperwalletInsights,
+                                              pageName: strongSelf.pageName,
+                                              pageGroup: strongSelf.pageGroup) {
+                        strongSelf.listPrepaidCardReceipts(prepaidCardToken)
+                    }
                     return
                 }
                 strongSelf.view.loadReceipts()

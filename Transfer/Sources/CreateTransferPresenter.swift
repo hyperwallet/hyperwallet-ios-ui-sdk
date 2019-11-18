@@ -31,7 +31,11 @@ protocol CreateTransferView: class {
     func hideLoading()
     func notifyTransferCreated(_ transfer: HyperwalletTransfer)
     func showCreateTransfer()
-    func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?)
+    func showError(_ error: HyperwalletErrorType,
+                   hyperwalletInsights: HyperwalletInsightsProtocol,
+                   pageName: String,
+                   pageGroup: String,
+                   _ retry: (() -> Void)?)
     func showGenericTableView(items: [HyperwalletTransferMethod],
                               title: String,
                               selectItemHandler: @escaping SelectItemHandler,
@@ -45,6 +49,9 @@ protocol CreateTransferView: class {
 
 final class CreateTransferPresenter {
     private unowned let view: CreateTransferView
+    private let pageName = "transfer-funds:create-transfer"
+    private let pageGroup = "transfer-funds"
+    private var hyperwalletInsights: HyperwalletInsightsProtocol
 
     private lazy var userRepository: UserRepository = {
         UserRepositoryFactory.shared.userRepository()
@@ -78,10 +85,14 @@ final class CreateTransferPresenter {
         return selectedTransferMethod?.transferMethodCurrency
     }
 
-    init(_ clientTransferId: String, _ sourceToken: String?, view: CreateTransferView) {
+    init(_ clientTransferId: String,
+         _ sourceToken: String?,
+         view: CreateTransferView,
+         _ hyperwalletInsights: HyperwalletInsightsProtocol = HyperwalletInsights.shared) {
         self.clientTransferId = clientTransferId
         self.sourceToken = sourceToken
         self.view = view
+        self.hyperwalletInsights = hyperwalletInsights
     }
 
     func initializeSections() {
@@ -113,9 +124,12 @@ final class CreateTransferPresenter {
                 switch result {
                 case .failure(let error):
                     strongSelf.view.hideLoading()
-                    strongSelf.view.showError(error, { () -> Void in
+                    strongSelf.view.showError(error,
+                                              hyperwalletInsights: strongSelf.hyperwalletInsights,
+                                              pageName: strongSelf.pageName,
+                                              pageGroup: strongSelf.pageGroup) {
                         strongSelf.loadCreateTransfer()
-                    })
+                    }
 
                 case .success(let user):
                     strongSelf.sourceToken = user?.token
@@ -134,9 +148,12 @@ final class CreateTransferPresenter {
             switch result {
             case .failure(let error):
                 strongSelf.view.hideLoading()
-                strongSelf.view.showError(error, { () -> Void in
+                strongSelf.view.showError(error,
+                                          hyperwalletInsights: strongSelf.hyperwalletInsights,
+                                          pageName: strongSelf.pageName,
+                                          pageGroup: strongSelf.pageGroup) {
                     strongSelf.loadTransferMethods()
-                })
+                }
 
             case .success(let result):
                 if strongSelf.selectedTransferMethod == nil {
@@ -168,9 +185,12 @@ final class CreateTransferPresenter {
             strongSelf.view.hideLoading()
             switch result {
             case .failure(let error):
-                strongSelf.view.showError(error, { () -> Void in
+                strongSelf.view.showError(error,
+                                          hyperwalletInsights: strongSelf.hyperwalletInsights,
+                                          pageName: strongSelf.pageName,
+                                          pageGroup: strongSelf.pageGroup) {
                     strongSelf.createInitialTransfer()
-                })
+                }
 
             case .success(let transfer):
                 strongSelf.availableBalance = transfer?.destinationAmount
@@ -205,9 +225,12 @@ final class CreateTransferPresenter {
                 switch result {
                 case .failure(let error):
                     strongSelf.errorHandler(for: error) {
-                        strongSelf.view.showError(error, { () -> Void in
+                        strongSelf.view.showError(error,
+                                                  hyperwalletInsights: strongSelf.hyperwalletInsights,
+                                                  pageName: strongSelf.pageName,
+                                                  pageGroup: strongSelf.pageGroup) {
                             strongSelf.createTransfer()
-                        })
+                        }
                     }
 
                 case .success(let transfer):
@@ -241,9 +264,12 @@ final class CreateTransferPresenter {
                 }
 
             case .failure(let error):
-                strongSelf.view.showError(error, { () -> Void in
+                strongSelf.view.showError(error,
+                                          hyperwalletInsights: strongSelf.hyperwalletInsights,
+                                          pageName: strongSelf.pageName,
+                                          pageGroup: strongSelf.pageGroup) {
                     strongSelf.loadTransferMethods()
-                })
+                }
             }
         }
     }
@@ -274,7 +300,12 @@ final class CreateTransferPresenter {
             resetErrorMessagesForAllSections()
             if let errors = error.getHyperwalletErrors()?.errorList, errors.isNotEmpty {
                 if errors.contains(where: { $0.fieldName == nil }) {
-                    view.showError(error) { [weak self] in self?.updateFooterContent(errors) }
+                    view.showError(error,
+                                   hyperwalletInsights: hyperwalletInsights,
+                                   pageName: pageName,
+                                   pageGroup: pageGroup) { [weak self] in
+                        self?.updateFooterContent(errors)
+                    }
                 } else {
                     updateFooterContent(errors)
                 }

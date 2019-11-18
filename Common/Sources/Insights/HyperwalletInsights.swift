@@ -94,12 +94,12 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
     public func trackError(pageName: String, pageGroup: String, errorInfo: ErrorInfo) {
         if let insights = insights {
             insights.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
-               } else {
+        } else {
             loadConfigurationAndInitializeInsights()
             if let insights = insights {
                 insights.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
-                   }
-               }
+            }
+        }
     }
 
     /// Track Impressions
@@ -212,6 +212,6 @@ public class ErrorInfoBuilder {
                          message: message,
                          fieldName: fieldName,
                          description: description,
-                         code: description)
+                         code: code)
     }
 }

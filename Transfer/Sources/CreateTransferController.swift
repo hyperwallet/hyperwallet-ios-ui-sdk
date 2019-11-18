@@ -42,9 +42,6 @@ final class CreateTransferController: UITableViewController {
         (TransferButtonCell.self, TransferButtonCell.reuseIdentifier),
         (TransferNotesCell.self, TransferNotesCell.reuseIdentifier)
     ]
-    private let pageName = "create-transfer"
-    private let pageGroup = "transfer"
-
     override public func viewDidLoad() {
         super.viewDidLoad()
         title = "transfer_funds".localized()
@@ -299,12 +296,16 @@ extension CreateTransferController: CreateTransferView {
         }
     }
 
-    func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
-        let errorView = ErrorView(
-        viewController: self,
-        error: error,
-        pageName: self.pageName,
-        pageGroup: self.pageGroup)
+    func showError(_ error: HyperwalletErrorType,
+                   hyperwalletInsights: HyperwalletInsightsProtocol,
+                   pageName: String,
+                   pageGroup: String,
+                   _ retry: (() -> Void)?) {
+        let errorView = ErrorView(viewController: self,
+                                  hyperwalletInsights: hyperwalletInsights,
+                                  error: error,
+                                  pageName: pageName,
+                                  pageGroup: pageGroup)
         errorView.show(retry)
     }
 

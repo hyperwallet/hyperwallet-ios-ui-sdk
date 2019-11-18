@@ -27,8 +27,6 @@ import UIKit
 final class SelectTransferMethodTypeController: UITableViewController {
     // MARK: - Outlets
     private var countryCurrencyTableView: UITableView!
-    private let pageName = "transfer-method:add:select-transfer-method"
-    private let pageGroup = "transfer-method"
     private var spinnerView: SpinnerView?
     private var presenter: SelectTransferMethodTypePresenter!
     private var countryCurrencyView: CountryCurrencyTableView!
@@ -156,12 +154,16 @@ extension SelectTransferMethodTypeController: SelectTransferMethodTypeView {
         }
     }
 
-    func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
-        let errorView = ErrorView(
-        viewController: self,
-        error: error,
-        pageName: self.pageName,
-        pageGroup: self.pageGroup)
+    func showError(_ error: HyperwalletErrorType,
+                   hyperwalletInsights: HyperwalletInsightsProtocol,
+                   pageName: String,
+                   pageGroup: String,
+                   _ retry: (() -> Void)?) {
+        let errorView = ErrorView(viewController: self,
+                                  hyperwalletInsights: hyperwalletInsights,
+                                  error: error,
+                                  pageName: pageName,
+                                  pageGroup: pageGroup)
         errorView.show(retry)
     }
 

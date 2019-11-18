@@ -329,13 +329,17 @@ extension AddTransferMethodController: AddTransferMethodView {
         HyperwalletUtilViews.showAlert(self, title: title, message: message, actions: UIAlertAction.close(self))
     }
 
-    func showError(_ error: HyperwalletErrorType, _ handler: (() -> Void)?) {
-        let errorView = ErrorView(
-        viewController: self,
-        error: error,
-        pageName: self.pageName,
-        pageGroup: self.pageGroup)
-        errorView.show(handler)
+    func showError(_ error: HyperwalletErrorType,
+                   hyperwalletInsights: HyperwalletInsightsProtocol,
+                   pageName: String,
+                   pageGroup: String,
+                   _ retry: (() -> Void)?) {
+        let errorView = ErrorView(viewController: self,
+                                  hyperwalletInsights: hyperwalletInsights,
+                                  error: error,
+                                  pageName: pageName,
+                                  pageGroup: pageGroup)
+        errorView.show(retry)
     }
 
     func notifyTransferMethodAdded(_ transferMethod: HyperwalletTransferMethod) {
