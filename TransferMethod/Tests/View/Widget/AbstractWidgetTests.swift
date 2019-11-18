@@ -16,7 +16,9 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+#if !COCOAPODS
 import Common
+#endif
 import HyperwalletSDK
 @testable import TransferMethod
 import XCTest
@@ -44,7 +46,7 @@ class AbstractWidgetTests: XCTestCase {
         XCTAssertNotNil(textWidget.field, "Field value was not initialized")
     }
 
-    func testIsValid() {
+    func testIsValid_false() {
         let isValid = textWidget.isValid()
         XCTAssertFalse(isValid, "Should be invalid")
         XCTAssertTrue(hyperwalletInsightsMock.didTrackError, "Track error should be called")

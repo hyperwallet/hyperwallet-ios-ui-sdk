@@ -8,7 +8,7 @@ import XCTest
 
 class ListTransferMethodPresenterTests: XCTestCase {
     private var presenter: ListTransferMethodPresenter!
-    private let mockView = MockListTransferMethodView()
+    private let mockView = ListTransferMethodViewMock()
     private var hyperwalletInsightsMock = HyperwalletInsightsMock()
 
     private lazy var listTransferMethodPayload = HyperwalletTestHelper
@@ -247,7 +247,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
     }
 }
 
-class MockListTransferMethodView: ListTransferMethodView {
+class ListTransferMethodViewMock: ListTransferMethodView {
     var isHideLoadingPerformed = false
     var isShowLoadingPerformed = false
     var isShowTransferMethodsPerformed = false

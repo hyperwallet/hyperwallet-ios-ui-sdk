@@ -69,12 +69,9 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
         if let insights = insights {
             insights.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
         } else {
-            loadConfiguration { configuration in
-                if let configuration = configuration {
-                    self.initializeInsights(configuration: configuration)
-                    if let insights = self.insights {
-                        insights.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
-                    }
+            loadConfigurationAndInitializeInsights { isInsightsInitialized in
+                if isInsightsInitialized {
+                    Insights.shared?.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
                 }
             }
         }
@@ -84,12 +81,9 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
         if let insights = insights {
             insights.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
         } else {
-            loadConfiguration { configuration in
-                if let configuration = configuration {
-                    self.initializeInsights(configuration: configuration)
-                    if let insights = self.insights {
-                        insights.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
-                    }
+            loadConfigurationAndInitializeInsights { isInsightsInitialized in
+                if isInsightsInitialized {
+                    Insights.shared?.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
                 }
             }
         }
@@ -99,13 +93,21 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
         if let insights = insights {
             insights.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
         } else {
-            loadConfiguration { configuration in
-                if let configuration = configuration {
-                    self.initializeInsights(configuration: configuration)
-                    if let insights = self.insights {
-                        insights.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
-                    }
+            loadConfigurationAndInitializeInsights { isInsightsInitialized in
+                if isInsightsInitialized {
+                    Insights.shared?.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
                 }
+            }
+        }
+    }
+
+    private func loadConfigurationAndInitializeInsights(completion: @escaping(Bool) -> Void) {
+        loadConfiguration { configuration in
+            if let configuration = configuration {
+                self.initializeInsights(configuration: configuration)
+                completion(true)
+            } else {
+                completion(false)
             }
         }
     }
