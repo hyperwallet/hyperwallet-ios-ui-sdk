@@ -88,10 +88,10 @@ public final class ErrorView {
     private func connectionError(_ handler: @escaping (UIAlertAction) -> Void) {
         if !pageName.isEmpty, !pageGroup.isEmpty {
             let errorInfo = ErrorInfo(type: errorTypeConnection,
-                                      message: self.error.errorDescription ?? "",
+                                      message: error.getHyperwalletErrors()?.errorList?.first?.message ?? "",
                                       fieldName: "",
                                       description: Thread.callStackSymbols.joined(separator: "\n"),
-                                      code: self.error.getHyperwalletErrors()?.errorList?.first?.code ?? "")
+                                      code: error.getHyperwalletErrors()?.errorList?.first?.code ?? "")
             hyperwalletInsights.trackError(pageName: pageName,
                                            pageGroup: pageGroup,
                                            errorInfo: errorInfo)

@@ -127,7 +127,6 @@
 		4A9E9A0F22F4AD5700739150 /* CreateTransferPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7BEC22E859E60022E573 /* CreateTransferPresenterTests.swift */; };
 		4A9E9A1022F4AD5700739150 /* ScheduleTransferPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078C6EFB22EF7E0500CF81EE /* ScheduleTransferPresenterTests.swift */; };
 		4AB37CFC22EAF087005C1078 /* TransferAllFundsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB37CFB22EAF087005C1078 /* TransferAllFundsCell.swift */; };
-		4AC464EA237F121700D7C092 /* AuthenticationProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB551FE622E1447B00DD65C2 /* AuthenticationProviderMock.swift */; };
 		4AC7808822EB360B00AB73FD /* PasteOnlyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC7808722EB360B00AB73FD /* PasteOnlyTextField.swift */; };
 		4AD300DA22F9972A005FD01F /* TransferTableViewFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD300D922F9972A005FD01F /* TransferTableViewFooterView.swift */; };
 		4ADBEC7222E9F16A00D43A48 /* TransferDestinationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBEC7122E9F16A00D43A48 /* TransferDestinationCell.swift */; };
@@ -3188,7 +3187,6 @@
 				DBC199EB22E29CD0004447DD /* UIFont.swift in Sources */,
 				2E4D6CAD23679AB400916CDD /* HyperwalletInsights.swift in Sources */,
 				DBC199EC22E29CD0004447DD /* UIImage.swift in Sources */,
-				4AC464EA237F121700D7C092 /* AuthenticationProviderMock.swift in Sources */,
 				DBC199ED22E29CD0004447DD /* UINavigationController.swift in Sources */,
 				DBC199EE22E29CD0004447DD /* UIToolbar.swift in Sources */,
 				2E8AFE5C2307668F002B6D24 /* HyperwalletCoordinatorTypes.swift in Sources */,
