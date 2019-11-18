@@ -33,8 +33,8 @@ class AbstractWidgetTests: XCTestCase {
             return
         }
         textWidget = TextWidget(field: field,
-                                pageName: "transfer-method:add:collect-transfer-method-information",
-                                pageGroup: "transfer-method")
+                                pageName: AddTransferMethodPresenter.addTransferMethodPageName,
+                                pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup)
         textWidget.hyperwalletInsights = hyperwalletInsightsMock
     }
 

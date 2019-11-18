@@ -8,7 +8,7 @@ import XCTest
 
 class AddTransferMethodPresenterTests: XCTestCase {
     private var presenter: AddTransferMethodPresenter!
-    private let mockView = MockAddTransferMethodViewTests()
+    private let mockView = AddTransferMethodViewTestsMock()
     private lazy var transferMethodConfigurationFieldsResponse = HyperwalletTestHelper
         .getDataFromJson("TransferMethodConfigurationFieldsResponse")
     private var hyperwalletInsightsMock = HyperwalletInsightsMock()
@@ -343,7 +343,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
     }
 }
 
-class MockAddTransferMethodViewTests: AddTransferMethodView {
+class AddTransferMethodViewTestsMock: AddTransferMethodView {
     let expectation: String = "expectation"
     let updateFooterContentExpectation: String = "updateFooterContentExpectation"
 

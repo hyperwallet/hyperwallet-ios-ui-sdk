@@ -24,11 +24,11 @@ import UIKit
 
 /// Represents the abstract widget input
 class AbstractWidget: UIStackView, UITextFieldDelegate {
-    var field: HyperwalletField!
-    var pageName: String!
-    var pageGroup: String!
+    private(set) var field: HyperwalletField!
+    private var pageName: String!
+    private var pageGroup: String!
     lazy var hyperwalletInsights: HyperwalletInsightsProtocol = HyperwalletInsights.shared
-    let errorTypeForm = "FORM"
+    private let errorTypeForm = "FORM"
 
     let label: UILabel = {
         let label = UILabel()
