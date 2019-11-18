@@ -159,7 +159,7 @@ public class ErrorInfoBuilder {
     /// Sets FieldName
     ///
     /// - Parameter fieldName: The Field Name is especially interesting when there is a validation
-    ///     error/issue incombination with error_type = FORM or when an API error occurs in relation
+    ///     error/issue in combination with error_type = FORM or when an API error occurs in relation
     ///     to a field, error_type = API
     /// - Returns: ErrorInfoBuilder
     public func fieldName(fieldName: String) -> ErrorInfoBuilder {

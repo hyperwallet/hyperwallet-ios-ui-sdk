@@ -9,7 +9,6 @@ import XCTest
 class ScheduleTransferPresenterTests: XCTestCase {
     private var presenter: ScheduleTransferPresenter!
     private let mockView = MockScheduleTransferViewTests()
-    private var hyperwalletInsightsMock = HyperwalletInsightsMock()
     private let transferMethod = HyperwalletBankAccount.Builder(transferMethodCountry: "US",
                                                                 transferMethodCurrency: "USD",
                                                                 transferMethodProfileType: "INDIVIDUAL",
@@ -24,8 +23,7 @@ class ScheduleTransferPresenterTests: XCTestCase {
             view: mockView,
             transferMethod: transferMethod,
             transfer: transfer,
-            didFxQuoteChange: false,
-            hyperwalletInsightsMock)
+            didFxQuoteChange: false)
     }
 
     override func tearDown() {
@@ -33,7 +31,6 @@ class ScheduleTransferPresenterTests: XCTestCase {
             Hippolyte.shared.stop()
         }
         mockView.resetStates()
-        hyperwalletInsightsMock.resetStates()
     }
 
     public func testScheduleTransfer_success() {
@@ -213,7 +210,6 @@ class MockScheduleTransferViewTests: ScheduleTransferView {
     }
 
     func showError(_ error: HyperwalletErrorType,
-                   hyperwalletInsights: HyperwalletInsightsProtocol,
                    pageName: String,
                    pageGroup: String,
                    _ retry: (() -> Void)?) {

@@ -40,7 +40,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
 
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
-        presenter = ListTransferMethodPresenter(view: mockView, hyperwalletInsightsMock)
+        presenter = ListTransferMethodPresenter(view: mockView)
     }
 
     override func tearDown() {
@@ -300,7 +300,6 @@ class MockListTransferMethodView: ListTransferMethodView {
     }
 
     func showError(_ error: HyperwalletErrorType,
-                   hyperwalletInsights: HyperwalletInsightsProtocol,
                    pageName: String,
                    pageGroup: String,
                    _ retry: (() -> Void)?) {

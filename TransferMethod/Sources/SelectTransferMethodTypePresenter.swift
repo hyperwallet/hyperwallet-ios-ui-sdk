@@ -42,7 +42,6 @@ protocol SelectTransferMethodTypeView: class {
                                                transferMethodTypeCode: String)
     func showAlert(message: String?)
     func showError(_ error: HyperwalletErrorType,
-                   hyperwalletInsights: HyperwalletInsightsProtocol,
                    pageName: String,
                    pageGroup: String,
                    _ retry: (() -> Void)?)
@@ -121,7 +120,6 @@ final class SelectTransferMethodTypePresenter {
             case .failure(let error):
                 strongSelf.view.hideLoading()
                 strongSelf.view.showError(error,
-                                          hyperwalletInsights: strongSelf.hyperwalletInsights,
                                           pageName: strongSelf.pageName,
                                           pageGroup: strongSelf.pageGroup) {
                     strongSelf.loadTransferMethodKeys()
@@ -189,7 +187,6 @@ final class SelectTransferMethodTypePresenter {
             switch result {
             case .failure(let error):
                 strongSelf.view.showError(error,
-                                          hyperwalletInsights: strongSelf.hyperwalletInsights,
                                           pageName: strongSelf.pageName,
                                           pageGroup: strongSelf.pageGroup,
                                           failure)

@@ -31,7 +31,6 @@ protocol ListTransferMethodView: class {
     func showTransferMethods()
     func notifyTransferMethodDeactivated(_ hyperwalletStatusTransition: HyperwalletStatusTransition)
     func showError(_ error: HyperwalletErrorType,
-                   hyperwalletInsights: HyperwalletInsightsProtocol,
                    pageName: String,
                    pageGroup: String,
                    _ retry: (() -> Void)?)
@@ -42,17 +41,14 @@ final class ListTransferMethodPresenter {
     private let pageGroup = "transfer-method"
     private let pageName = "transfer-method:add:list-transfer-method"
     private (set) var sectionData = [HyperwalletTransferMethod]()
-    private var hyperwalletInsights: HyperwalletInsightsProtocol
-
+    private let hyperwalletInsights: HyperwalletInsightsProtocol = HyperwalletInsights.shared
     private lazy var transferMethodRepository = {
         TransferMethodRepositoryFactory.shared.transferMethodRepository()
     }()
 
     /// Initialize ListTransferMethodPresenter
-    init(view: ListTransferMethodView,
-         _ hyperwalletInsights: HyperwalletInsightsProtocol = HyperwalletInsights.shared) {
+    init(view: ListTransferMethodView) {
         self.view = view
-        self.hyperwalletInsights = hyperwalletInsights
     }
 
     func deactivateTransferMethod(at index: Int) {
@@ -74,7 +70,6 @@ final class ListTransferMethodPresenter {
             case .failure(let error):
                 strongSelf.view.dismissProcessing(handler: {
                     strongSelf.view.showError(error,
-                                              hyperwalletInsights: strongSelf.hyperwalletInsights,
                                               pageName: strongSelf.pageName,
                                               pageGroup: strongSelf.pageGroup) {
                         strongSelf.deactivateTransferMethod(transferMethod)
@@ -110,7 +105,6 @@ final class ListTransferMethodPresenter {
             switch result {
             case .failure(let error):
                 strongSelf.view.showError(error,
-                                          hyperwalletInsights: strongSelf.hyperwalletInsights,
                                           pageName: strongSelf.pageName,
                                           pageGroup: strongSelf.pageGroup) {
                     strongSelf.listTransferMethods()

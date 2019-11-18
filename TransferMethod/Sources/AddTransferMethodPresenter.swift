@@ -31,7 +31,6 @@ protocol AddTransferMethodView: class {
     func showConfirmation(handler: @escaping () -> Void)
     func showError( title: String, message: String)
     func showError(_ error: HyperwalletErrorType,
-                   hyperwalletInsights: HyperwalletInsightsProtocol,
                    pageName: String,
                    pageGroup: String,
                    _ retry: (() -> Void)?)
@@ -51,9 +50,9 @@ final class AddTransferMethodPresenter {
     private let createdConfirmationPageName = "transfer-method:add:transfer-method-created"
     private let pageLink = "create-transfer-method"
     private let transferMethodCreatedGoal = "transfer-method-created"
-    private var hyperwalletInsights: HyperwalletInsightsProtocol
     static let addTransferMethodPageGroup = "transfer-method"
     static let addTransferMethodPageName = "transfer-method:add:collect-transfer-method-information"
+    private let hyperwalletInsights: HyperwalletInsightsProtocol
     var sectionData = [AddTransferMethodSectionData]()
 
     private lazy var transferMethodConfigurationRepository = {
@@ -98,7 +97,6 @@ final class AddTransferMethodPresenter {
             switch result {
             case .failure(let error):
                 strongSelf.view.showError(error,
-                                          hyperwalletInsights: strongSelf.hyperwalletInsights,
                                           pageName: AddTransferMethodPresenter.addTransferMethodPageName,
                                           pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup) {
                     strongSelf.loadTransferMethodConfigurationFields()
@@ -162,7 +160,6 @@ final class AddTransferMethodPresenter {
             if let errors = error.getHyperwalletErrors()?.errorList, errors.isNotEmpty {
                 if errors.contains(where: { $0.fieldName == nil }) {
                     view.showError(error,
-                                   hyperwalletInsights: hyperwalletInsights,
                                    pageName: AddTransferMethodPresenter.addTransferMethodPageName,
                                    pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup) { [weak self] in
                         self?.updateFooterContent(errors)
@@ -174,7 +171,6 @@ final class AddTransferMethodPresenter {
 
         default:
             view.showError(error,
-                           hyperwalletInsights: hyperwalletInsights,
                            pageName: AddTransferMethodPresenter.addTransferMethodPageName,
                            pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup) { [weak self] in
                 self?.createTransferMethod()
