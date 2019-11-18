@@ -51,6 +51,8 @@ public protocol HyperwalletInsightsProtocol: class {
 /// It contains methods to call Insights for various actions performed by the user
 public class HyperwalletInsights: HyperwalletInsightsProtocol {
     private static var instance: HyperwalletInsights?
+    private let initInsightsSemaphore = DispatchSemaphore(value: 0)
+    private let insightsDispathQueue = DispatchQueue(label: "com.paypal.queue.insights", attributes: .concurrent)
     var insights: InsightsProtocol?
 
     /// Returns the previously initialized instance of the HyperwalletInsights interface object
@@ -58,9 +60,7 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
         return instance ?? HyperwalletInsights()
     }
 
-    private init() {
-        loadConfigurationAndInitializeInsights()
-    }
+    private init() { }
 
     /// Set up HyperwalletInsights
     public static func setup() {
@@ -68,57 +68,41 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
     }
 
     public func trackClick(pageName: String, pageGroup: String, link: String, params: [String: String]) {
-        if let insights = insights {
-            insights.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
-        } else {
+        if insights == nil {
             loadConfigurationAndInitializeInsights()
-            if let insights = insights {
-                insights.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
-            }
+        }
+        insightsDispathQueue.async { [weak self] in
+            self?.insights?.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
         }
     }
 
     public func trackError(pageName: String, pageGroup: String, errorInfo: ErrorInfo) {
-        if let insights = insights {
-            insights.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
-        } else {
+        if insights == nil {
             loadConfigurationAndInitializeInsights()
-            if let insights = insights {
-                insights.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
-            }
+        }
+        insightsDispathQueue.async { [weak self] in
+            self?.insights?.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
         }
     }
 
     public func trackImpression(pageName: String, pageGroup: String, params: [String: String]) {
-        if let insights = insights {
-            insights.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
-        } else {
+        if insights == nil {
             loadConfigurationAndInitializeInsights()
-            if let insights = insights {
-                insights.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
-            }
+        }
+        insightsDispathQueue.async { [weak self] in
+            self?.insights!.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
         }
     }
 
     private func loadConfigurationAndInitializeInsights() {
-        loadConfiguration { configuration in
-            if let configuration = configuration {
-                self.initializeInsights(configuration: configuration)
+        insightsDispathQueue.async(flags: .barrier) { [weak self] in
+            Hyperwallet.shared.getConfiguration { configuration, _ in
+                if let configuration = configuration {
+                    self?.initializeInsights(configuration: configuration)
+                }
+                self?.initInsightsSemaphore.signal()
             }
-        }
-    }
-
-    /// Fetch configuration
-    ///
-    /// - Parameter completion: boolean completion handler
-    private func loadConfiguration(completion: @escaping(Configuration?) -> Void) {
-        // Fetch configuration again
-        Hyperwallet.shared.getConfiguration { configuration, _ in
-            if let configuration = configuration {
-                completion(configuration)
-            } else {
-                completion(nil)
-            }
+            self?.initInsightsSemaphore.wait()
         }
     }
 
