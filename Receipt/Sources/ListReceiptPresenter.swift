@@ -56,8 +56,7 @@ final class ListReceiptPresenter {
     private(set) var sectionData = [(key: Date, value: [HyperwalletReceipt])]()
 
     /// Initialize ListReceiptPresenter
-    init(view: ListReceiptView,
-         prepaidCardToken: String? = nil) {
+    init(view: ListReceiptView, prepaidCardToken: String? = nil) {
         self.view = view
         self.prepaidCardToken = prepaidCardToken
     }

@@ -83,9 +83,7 @@ final class CreateTransferPresenter {
         return selectedTransferMethod?.transferMethodCurrency
     }
 
-    init(_ clientTransferId: String,
-         _ sourceToken: String?,
-         view: CreateTransferView) {
+    init(_ clientTransferId: String, _ sourceToken: String?, view: CreateTransferView) {
         self.clientTransferId = clientTransferId
         self.sourceToken = sourceToken
         self.view = view
