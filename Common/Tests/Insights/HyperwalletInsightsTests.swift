@@ -64,11 +64,11 @@ class HyperwalletInsightsTests: XCTestCase {
 
     func testTrackError() {
         XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
-        let errorInfo = ErrorInfo(type: "errorInfo_type",
-                                  message: "errorInfo_message",
-                                  fieldName: "errorInfo_fieldName",
-                                  description: "errorInfo_description",
-                                  code: "errorInfo_code")
+        let errorInfo = ErrorInfoBuilder(type: "errorInfo_type", message: "errorInfo_message")
+            .fieldName("errorInfo_fieldName")
+            .description("errorInfo_description")
+            .code("errorInfo_code")
+            .build()
 
         HyperwalletInsights.shared.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
 
@@ -97,11 +97,11 @@ class HyperwalletInsightsTests: XCTestCase {
     func testTrackError_InsightsNotInitialized() {
         hyperwalletInsights?.insights = nil
         XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
-        let errorInfo = ErrorInfo(type: "errorInfo_type",
-                                  message: "errorInfo_message",
-                                  fieldName: "errorInfo_fieldName",
-                                  description: "errorInfo_description",
-                                  code: "errorInfo_code")
+        let errorInfo = ErrorInfoBuilder(type: "errorInfo_type", message: "errorInfo_message")
+            .fieldName("errorInfo_fieldName")
+            .description("errorInfo_description")
+            .code("errorInfo_code")
+            .build()
         HyperwalletInsights.shared.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
         XCTAssertNotNil(hyperwalletInsights?.insights, "Insights should be reloaded if nil")
     }

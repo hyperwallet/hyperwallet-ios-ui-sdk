@@ -21,12 +21,14 @@ import HyperwalletSDK
 
 public class IntegratorAuthenticationProvider: HyperwalletAuthenticationTokenProvider {
     private var url: String
-    private let user: String = "userName"
-    private let password: String = "password"
+    public let baseUrl1 = "https://qamaster-hyperwallet.aws.paylution.net"
+    public let userToken1 = "usr-16960a42-c133-4048-b25c-a3c689267d86"
+    private let user: String = "selrestuser@1861681"
+    private let password: String = "Password1!"
     private let session: URLSession
 
     init(_ baseUrl: String, _ userToken: String) {
-        url = "\(baseUrl)/rest/v3/users/\(userToken)/authentication-token"
+        url = "\(baseUrl1)/rest/v3/users/\(userToken1)/authentication-token"
         self.session = IntegratorAuthenticationProvider.createUrlSession(username: user, password: password)
     }
 

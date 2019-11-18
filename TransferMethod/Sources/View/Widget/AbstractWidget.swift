@@ -159,7 +159,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
             let errorMessage = errorMessage() {
             let errorInfo = ErrorInfoBuilder(type: errorTypeForm,
                                              message: errorMessage)
-                .fieldName(fieldName: fieldName)
+                .fieldName(fieldName)
                 .build()
             hyperwalletInsights.trackError(pageName: pageName,
                                            pageGroup: pageGroup,
