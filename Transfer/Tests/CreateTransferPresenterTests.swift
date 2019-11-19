@@ -11,14 +11,12 @@ import XCTest
 class CreateTransferTests: XCTestCase {
     private var presenter: CreateTransferPresenter!
     private var mockView = MockCreateTransferView()
-    private var hyperwalletInsightsMock = HyperwalletInsightsMock()
     private let clientTransferId = "6712348070812"
     private let clientSourceToken = "trm-123456789"
 
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
         mockView.resetStates()
-        hyperwalletInsightsMock.resetStates()
     }
 
     override func tearDown() {
@@ -82,7 +80,7 @@ class CreateTransferTests: XCTestCase {
         createTransferResult.setUpRequest()
         getUserResultType.setUpRequest()
 
-        presenter = CreateTransferPresenter(clientTransferId, sourceToken, view: mockView, hyperwalletInsightsMock)
+        presenter = CreateTransferPresenter(clientTransferId, sourceToken, view: mockView)
         var expectations = [XCTestExpectation]()
 
         if mockView.stopOnError {
@@ -395,7 +393,6 @@ class MockCreateTransferView: CreateTransferView {
     }
 
     func showError(_ error: HyperwalletErrorType,
-                   hyperwalletInsights: HyperwalletInsightsProtocol,
                    pageName: String,
                    pageGroup: String,
                    _ retry: (() -> Void)?) {

@@ -1,4 +1,6 @@
+#if !COCOAPODS
 import Common
+#endif
 import Insights
 
 final class HyperwalletInsightsMock: HyperwalletInsightsProtocol {

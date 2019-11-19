@@ -17,8 +17,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import HyperwalletSDK
-import Insights
-import UIKit
 
 /// The class to handle UI errors
 public final class ErrorView {
@@ -30,7 +28,7 @@ public final class ErrorView {
     private var pageGroup: String
     private let hyperwalletInsights: HyperwalletInsightsProtocol
 
-    /// Initializer to initialize the class with errors to be displayed and the viewcontroller responsible
+    /// Initializer to initialize the class with errors to be displayed and the ViewController responsible
     /// to display the errors
     /// - Parameters:
     ///   - viewController: view controller that contains errors
@@ -38,7 +36,7 @@ public final class ErrorView {
     ///   - pageName: The Page or screen that is currently visible
     ///   - pageGroup: The group of the Page or screen that is currently visible
     public init(viewController: UIViewController,
-                hyperwalletInsights: HyperwalletInsightsProtocol,
+                hyperwalletInsights: HyperwalletInsightsProtocol = HyperwalletInsights.shared,
                 error: HyperwalletErrorType,
                 pageName: String,
                 pageGroup: String) {
@@ -97,16 +95,14 @@ public final class ErrorView {
     }
 
     private func connectionError(_ handler: @escaping (UIAlertAction) -> Void) {
-        if !pageName.isEmpty, !pageGroup.isEmpty {
-            let errorInfo = ErrorInfo(type: errorTypeConnection,
-                                      message: self.error.errorDescription ?? "",
-                                      fieldName: "",
-                                      description: Thread.callStackSymbols.joined(separator: "\n"),
-                                      code: self.error.getHyperwalletErrors()?.errorList?.first?.code ?? "")
-            hyperwalletInsights.trackError(pageName: pageName,
-                                           pageGroup: pageGroup,
-                                           errorInfo: errorInfo)
-        }
+        let errorInfo = ErrorInfoBuilder(type: errorTypeConnection,
+                                         message: error.getHyperwalletErrors()?.errorList?.first?.message ?? "")
+            .description(Thread.callStackSymbols.joined(separator: "\n"))
+            .code(error.getHyperwalletErrors()?.errorList?.first?.code ?? "")
+            .build()
+        hyperwalletInsights.trackError(pageName: pageName,
+                                       pageGroup: pageGroup,
+                                       errorInfo: errorInfo)
         HyperwalletUtilViews.showAlertWithRetry(viewController,
                                                 title: "network_connection_error_title".localized(),
                                                 message: "network_connection_error_message".localized(),

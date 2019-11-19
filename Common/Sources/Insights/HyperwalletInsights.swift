@@ -58,9 +58,7 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
         return instance ?? HyperwalletInsights()
     }
 
-    private init() {
-        loadConfigurationAndInitializeInsights()
-    }
+    private init() { }
 
     /// Set up HyperwalletInsights
     public static func setup() {
@@ -78,9 +76,10 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
         if let insights = insights {
             insights.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
         } else {
-            loadConfigurationAndInitializeInsights()
-            if let insights = insights {
-                insights.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
+            loadConfigurationAndInitializeInsights { isInsightsInitialized in
+                if isInsightsInitialized {
+                    Insights.shared?.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
+                }
             }
         }
     }
@@ -95,9 +94,10 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
         if let insights = insights {
             insights.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
         } else {
-            loadConfigurationAndInitializeInsights()
-            if let insights = insights {
-                insights.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
+            loadConfigurationAndInitializeInsights { isInsightsInitialized in
+                if isInsightsInitialized {
+                    Insights.shared?.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
+                }
             }
         }
     }
@@ -112,24 +112,25 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
         if let insights = insights {
             insights.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
         } else {
-            loadConfigurationAndInitializeInsights()
-            if let insights = insights {
-                insights.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
+            loadConfigurationAndInitializeInsights { isInsightsInitialized in
+                if isInsightsInitialized {
+                    Insights.shared?.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
+                }
             }
         }
     }
 
-    private func loadConfigurationAndInitializeInsights() {
+    private func loadConfigurationAndInitializeInsights(completion: @escaping(Bool) -> Void) {
         loadConfiguration { configuration in
             if let configuration = configuration {
                 self.initializeInsights(configuration: configuration)
+                completion(true)
+            } else {
+                completion(false)
             }
         }
     }
 
-    /// Fetch configuration
-    ///
-    /// - Parameter completion: boolean completion handler
     private func loadConfiguration(completion: @escaping(Configuration?) -> Void) {
         // Fetch configuration again
         Hyperwallet.shared.getConfiguration { configuration, _ in
@@ -178,10 +179,10 @@ public class ErrorInfoBuilder {
     /// Sets FieldName
     ///
     /// - Parameter fieldName: The Field Name is especially interesting when there is a validation
-    ///     error/issue incombination with error_type = FORM or when an API error occurs in relation
+    ///     error/issue in combination with error_type = FORM or when an API error occurs in relation
     ///     to a field, error_type = API
     /// - Returns: ErrorInfoBuilder
-    public func fieldName(fieldName: String) -> ErrorInfoBuilder {
+    public func fieldName(_ fieldName: String) -> ErrorInfoBuilder {
         self.fieldName = fieldName
         return self
     }
@@ -190,7 +191,7 @@ public class ErrorInfoBuilder {
     ///
     /// - Parameter code: The Error Code is the type of error that occurred
     /// - Returns: ErrorInfoBuilder
-    public func code(code: String) -> ErrorInfoBuilder {
+    public func code(_ code: String) -> ErrorInfoBuilder {
         self.code = code
         return self
     }
@@ -199,7 +200,7 @@ public class ErrorInfoBuilder {
     ///
     /// - Parameter description: The Source of error that occurred. This allows to understand what caused the error.
     /// - Returns: ErrorInfoBuilder
-    public func description(description: String) -> ErrorInfoBuilder {
+    public func description(_ description: String) -> ErrorInfoBuilder {
         self.description = description
         return self
     }

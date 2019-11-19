@@ -30,52 +30,52 @@ class HyperwalletInsightsTests: XCTestCase {
     private let countryTag = "hyperwallet_ea_country"
     private let currencyTag = "hyperwallet_ea_currency"
     private let link = "test.link"
-    private var mockInsights = MockInsights()
+    private var insightsMock = InsightsMock()
 
     override func setUp() {
         HyperwalletUI.setup(HyperwalletTestHelper.authenticationProvider)
         HyperwalletInsights.setup()
         self.hyperwalletInsights = HyperwalletInsights.shared
-        hyperwalletInsights?.insights = mockInsights
+        hyperwalletInsights?.insights = insightsMock
     }
 
     func testTrackImpression() {
         XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
         let params = [countryTag: country, currencyTag: currency]
         HyperwalletInsights.shared.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
-        XCTAssertTrue(mockInsights.didTrackImpression, "HyperwalletInsights.trackImpression should be called")
-        XCTAssertEqual(mockInsights.pageName, pageName, "Page name should be as expected")
-        XCTAssertEqual(mockInsights.pageGroup, pageGroup, "Page group should as expected")
-        XCTAssertNotNil(mockInsights.params[countryTag], "Params should have country")
-        XCTAssertNotNil(mockInsights.params[currencyTag], "Params should have currency")
+        XCTAssertTrue(insightsMock.didTrackImpression, "HyperwalletInsights.trackImpression should be called")
+        XCTAssertEqual(insightsMock.pageName, pageName, "Page name should be as expected")
+        XCTAssertEqual(insightsMock.pageGroup, pageGroup, "Page group should as expected")
+        XCTAssertNotNil(insightsMock.params[countryTag], "Params should have country")
+        XCTAssertNotNil(insightsMock.params[currencyTag], "Params should have currency")
     }
 
     func testTrackClick() {
         XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
         let params = [countryTag: country, currencyTag: currency]
         HyperwalletInsights.shared.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
-        XCTAssertTrue(mockInsights.didTrackClick, "HyperwalletInsights.trackClick should be called")
-        XCTAssertEqual(mockInsights.pageName, pageName, "Page name should be as expected")
-        XCTAssertEqual(mockInsights.pageGroup, pageGroup, "Page group should as expected")
-        XCTAssertEqual(mockInsights.link, link, "Link should be as expected")
-        XCTAssertNotNil(mockInsights.params[countryTag], "Params should have country")
-        XCTAssertNotNil(mockInsights.params[currencyTag], "Params should have currency")
+        XCTAssertTrue(insightsMock.didTrackClick, "HyperwalletInsights.trackClick should be called")
+        XCTAssertEqual(insightsMock.pageName, pageName, "Page name should be as expected")
+        XCTAssertEqual(insightsMock.pageGroup, pageGroup, "Page group should as expected")
+        XCTAssertEqual(insightsMock.link, link, "Link should be as expected")
+        XCTAssertNotNil(insightsMock.params[countryTag], "Params should have country")
+        XCTAssertNotNil(insightsMock.params[currencyTag], "Params should have currency")
     }
 
     func testTrackError() {
         XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
-        let errorInfo = ErrorInfo(type: "errorInfo_type",
-                                  message: "errorInfo_message",
-                                  fieldName: "errorInfo_fieldName",
-                                  description: "errorInfo_description",
-                                  code: "errorInfo_code")
+        let errorInfo = ErrorInfoBuilder(type: "errorInfo_type", message: "errorInfo_message")
+            .fieldName("errorInfo_fieldName")
+            .description("errorInfo_description")
+            .code("errorInfo_code")
+            .build()
 
         HyperwalletInsights.shared.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
 
-        XCTAssertTrue(mockInsights.didTrackError, "HyperwalletInsights.trackError should be called")
-        XCTAssertEqual(mockInsights.pageName, pageName, "Page name should be as expected")
-        XCTAssertEqual(mockInsights.pageGroup, pageGroup, "Page group should be as expected")
-        XCTAssertNotNil(mockInsights.errorInfo, "ErrorInfo shouldn't be empty")
+        XCTAssertTrue(insightsMock.didTrackError, "HyperwalletInsights.trackError should be called")
+        XCTAssertEqual(insightsMock.pageName, pageName, "Page name should be as expected")
+        XCTAssertEqual(insightsMock.pageGroup, pageGroup, "Page group should be as expected")
+        XCTAssertNotNil(insightsMock.errorInfo, "ErrorInfo shouldn't be empty")
     }
 
     func testTrackClick_InsightsNotInitialized() {
@@ -97,17 +97,17 @@ class HyperwalletInsightsTests: XCTestCase {
     func testTrackError_InsightsNotInitialized() {
         hyperwalletInsights?.insights = nil
         XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
-        let errorInfo = ErrorInfo(type: "errorInfo_type",
-                                  message: "errorInfo_message",
-                                  fieldName: "errorInfo_fieldName",
-                                  description: "errorInfo_description",
-                                  code: "errorInfo_code")
+        let errorInfo = ErrorInfoBuilder(type: "errorInfo_type", message: "errorInfo_message")
+            .fieldName("errorInfo_fieldName")
+            .description("errorInfo_description")
+            .code("errorInfo_code")
+            .build()
         HyperwalletInsights.shared.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
         XCTAssertNotNil(hyperwalletInsights?.insights, "Insights should be reloaded if nil")
     }
 }
 
-class MockInsights: InsightsProtocol {
+class InsightsMock: InsightsProtocol {
     var didTrackClick = false
     var didTrackImpression = false
     var didTrackError = false

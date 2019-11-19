@@ -127,7 +127,6 @@
 		4A9E9A0F22F4AD5700739150 /* CreateTransferPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7BEC22E859E60022E573 /* CreateTransferPresenterTests.swift */; };
 		4A9E9A1022F4AD5700739150 /* ScheduleTransferPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078C6EFB22EF7E0500CF81EE /* ScheduleTransferPresenterTests.swift */; };
 		4AB37CFC22EAF087005C1078 /* TransferAllFundsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB37CFB22EAF087005C1078 /* TransferAllFundsCell.swift */; };
-		4AC464EA237F121700D7C092 /* AuthenticationProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB551FE622E1447B00DD65C2 /* AuthenticationProviderMock.swift */; };
 		4AC7808822EB360B00AB73FD /* PasteOnlyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC7808722EB360B00AB73FD /* PasteOnlyTextField.swift */; };
 		4AD300DA22F9972A005FD01F /* TransferTableViewFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD300D922F9972A005FD01F /* TransferTableViewFooterView.swift */; };
 		4ADBEC7222E9F16A00D43A48 /* TransferDestinationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBEC7122E9F16A00D43A48 /* TransferDestinationCell.swift */; };
@@ -624,7 +623,6 @@
 		2EBD0C682375FAE400569342 /* Insights.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Insights.framework; path = Carthage/Build/iOS/Insights.framework; sourceTree = "<group>"; };
 		2EF70C50237CA2E6007E3844 /* AbstractWidgetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractWidgetTests.swift; sourceTree = "<group>"; };
 		2EF70C53237CDEAE007E3844 /* HyperwalletFieldResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = HyperwalletFieldResponse.json; sourceTree = "<group>"; };
-		2EF70C55237E2B5F007E3844 /* HyperwalletInsightsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletInsightsMock.swift; sourceTree = "<group>"; };
 		2EF70C6E237F543F007E3844 /* HyperwalletInsightsMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyperwalletInsightsMock.swift; sourceTree = "<group>"; };
 		412F723222B458C700837F8F /* TransactionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetails.swift; sourceTree = "<group>"; };
 		4157135C22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardReceiptsForOneMonth.json; sourceTree = "<group>"; };
@@ -1230,14 +1228,6 @@
 				2EF70C50237CA2E6007E3844 /* AbstractWidgetTests.swift */,
 			);
 			path = Widget;
-			sourceTree = "<group>";
-		};
-		2EF70C6D237F43AB007E3844 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				2EF70C55237E2B5F007E3844 /* HyperwalletInsightsMock.swift */,
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		41D8360B22FB420F003544AB /* TransferFunds */ = {
@@ -1910,7 +1900,6 @@
 				073BB99B22E63DBF0053C24E /* TransferRepository */,
 				DB2587FC2261BFF100E6236B /* UITests */,
 				643912ED22DF40F200036609 /* UserRepository */,
-				2EF70C6D237F43AB007E3844 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -3195,7 +3184,6 @@
 				DBC199EB22E29CD0004447DD /* UIFont.swift in Sources */,
 				2E4D6CAD23679AB400916CDD /* HyperwalletInsights.swift in Sources */,
 				DBC199EC22E29CD0004447DD /* UIImage.swift in Sources */,
-				4AC464EA237F121700D7C092 /* AuthenticationProviderMock.swift in Sources */,
 				DBC199ED22E29CD0004447DD /* UINavigationController.swift in Sources */,
 				DBC199EE22E29CD0004447DD /* UIToolbar.swift in Sources */,
 				2E8AFE5C2307668F002B6D24 /* HyperwalletCoordinatorTypes.swift in Sources */,

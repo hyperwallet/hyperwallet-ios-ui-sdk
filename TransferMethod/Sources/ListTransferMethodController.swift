@@ -150,12 +150,10 @@ extension ListTransferMethodController: ListTransferMethodView {
     }
 
     func showError(_ error: HyperwalletErrorType,
-                   hyperwalletInsights: HyperwalletInsightsProtocol,
                    pageName: String,
                    pageGroup: String,
                    _ retry: (() -> Void)?) {
         let errorView = ErrorView(viewController: self,
-                                  hyperwalletInsights: hyperwalletInsights,
                                   error: error,
                                   pageName: pageName,
                                   pageGroup: pageGroup)
