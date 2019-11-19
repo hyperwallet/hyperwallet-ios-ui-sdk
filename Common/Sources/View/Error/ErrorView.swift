@@ -22,7 +22,6 @@ import HyperwalletSDK
 public final class ErrorView {
     private let errorTypeApi = "API"
     private let errorTypeConnection = "CONNECTION"
-    private let hyperwalletInsights: HyperwalletInsightsProtocol
     private weak var viewController: UIViewController!
     private var error: HyperwalletErrorType
     private var pageName: String
@@ -68,12 +67,12 @@ public final class ErrorView {
         if let errorMessage = error.getHyperwalletErrors()?.errorList?.first?.message {
             let errorInfo = ErrorInfoBuilder(type: errorTypeApi,
                                              message: errorMessage)
-                .fieldName(fieldName: error.getHyperwalletErrors()?.errorList?.first?.fieldName ?? "")
-                .code(code: error.getHyperwalletErrors()?.errorList?.first?.code ?? "")
+                .fieldName(error.getHyperwalletErrors()?.errorList?.first?.fieldName ?? "")
+                .code(error.getHyperwalletErrors()?.errorList?.first?.code ?? "")
                 .build()
-            hyperwalletInsights.trackError(pageName: pageName,
-                                           pageGroup: pageGroup,
-                                           errorInfo: errorInfo)
+            HyperwalletInsights.shared.trackError(pageName: pageName,
+                                                  pageGroup: pageGroup,
+                                                  errorInfo: errorInfo)
         }
 
         HyperwalletUtilViews.showAlert(viewController,
