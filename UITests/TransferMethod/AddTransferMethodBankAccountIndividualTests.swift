@@ -68,8 +68,8 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
 
         addTransferMethod.clickCreateTransferMethodButton()
 
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["branchId_error"].exists)
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["bankAccountId_error"].exists)
+        XCTAssert(app.tables["addTransferMethodTable"].buttons["branchId_error"].exists)
+        XCTAssert(app.tables["addTransferMethodTable"].buttons["bankAccountId_error"].exists)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidLength() {
@@ -78,8 +78,8 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
 
         addTransferMethod.clickCreateTransferMethodButton()
 
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["branchId_error"].exists)
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["bankAccountId_error"].exists)
+        XCTAssert(app.tables["addTransferMethodTable"].buttons["branchId_error"].exists)
+        XCTAssert(app.tables["addTransferMethodTable"].buttons["bankAccountId_error"].exists)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidPresence() {
@@ -88,9 +88,9 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
 
         addTransferMethod.clickCreateTransferMethodButton()
 
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["branchId_error"].exists)
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["bankAccountId_error"].exists)
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["bankAccountPurpose_error"].exists)
+        XCTAssert(app.tables["addTransferMethodTable"].buttons["branchId_error"].exists)
+        XCTAssert(app.tables["addTransferMethodTable"].buttons["bankAccountId_error"].exists)
+        XCTAssert(app.tables["addTransferMethodTable"].buttons["bankAccountPurpose_error"].exists)
     }
 
     func testAddTransferMethod_createBankAccountInvalidRouting() {
