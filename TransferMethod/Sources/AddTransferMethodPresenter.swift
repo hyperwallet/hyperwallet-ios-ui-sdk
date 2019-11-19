@@ -254,8 +254,8 @@ final class AddTransferMethodPresenter {
                             errorType: String,
                             fieldName: String) {
         let errorInfo = ErrorInfoBuilder(type: errorType, message: errorMessage)
-            .fieldName(fieldName: fieldName)
-            .code(code: errorCode)
+            .fieldName(fieldName)
+            .code(errorCode)
             .build()
         hyperwalletInsights.trackError(pageName: AddTransferMethodPresenter.addTransferMethodPageName,
                                        pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup,
