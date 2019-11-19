@@ -30,7 +30,6 @@ final class ListReceiptController: UITableViewController {
     private var presenter: ListReceiptPresenter!
     private let sectionTitleDateFormat = "MMMM yyyy"
     private var loadMoreReceipts = false
-
     private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "empty_list_receipt_message".localized())
 
     override public func viewDidLoad() {

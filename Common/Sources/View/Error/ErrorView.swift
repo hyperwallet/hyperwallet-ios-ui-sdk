@@ -21,7 +21,7 @@ import HyperwalletSDK
 /// The class to handle UI errors
 public final class ErrorView {
     private let errorTypeConnection = "CONNECTION"
-
+    private let errorTypeException = "EXCEPTION"
     private weak var viewController: UIViewController!
     private var error: HyperwalletErrorType
     private var pageName: String
@@ -74,6 +74,14 @@ public final class ErrorView {
     }
 
     private func unexpectedError() {
+       let errorInfo = ErrorInfoBuilder(type: self.errorTypeException,
+                                        message: error.getHyperwalletErrors()?.errorList?.first?.message ?? "")
+                .code(error.getHyperwalletErrors()?.errorList?.first?.code ?? "")
+                .build()
+        HyperwalletInsights.shared.trackError(pageName: pageName,
+                                              pageGroup: pageGroup,
+                                              errorInfo: errorInfo)
+
         HyperwalletUtilViews.showAlert(viewController,
                                        title: "unexpected_title".localized(),
                                        message: "unexpected_error_message".localized(),

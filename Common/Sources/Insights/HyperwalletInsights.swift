@@ -67,6 +67,13 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
         instance = HyperwalletInsights()
     }
 
+    /// Track Clicks
+    ///
+    /// - Parameters:
+    ///   - pageName: Name of the page
+    ///   - pageGroup: Page group name
+    ///   - link: The link clicked - example : select-transfer-method
+    ///   - params: A list of other information to be tracked - example : country,currency
     public func trackClick(pageName: String, pageGroup: String, link: String, params: [String: String]) {
         DispatchQueue.global().async { [weak self] in
             if let insights = self?.insights {
@@ -84,6 +91,12 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
         }
     }
 
+    /// Track Error
+    ///
+    /// - Parameters:
+    ///   - pageName: Name of the page - example : transfer-method:add:select-transfer-method
+    ///   - pageGroup: Page group name - example : transfer-method
+    ///   - ErrorInfo:  ErrorInfo have the information about the error
     public func trackError(pageName: String, pageGroup: String, errorInfo: ErrorInfo) {
         DispatchQueue.global().async { [weak self] in
             if let insights = self?.insights {
@@ -98,6 +111,12 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
         }
     }
 
+    /// Track Impressions
+    ///
+    /// - Parameters:
+    ///   - pageName: Name of the page - example : transfer-method:add:select-transfer-method
+    ///   - pageGroup: Page group name - example : transfer-method
+    ///   - params: A list of other information to be tracked - example : country,currency
     public func trackImpression(pageName: String, pageGroup: String, params: [String: String]) {
         DispatchQueue.global().async { [weak self] in
             if let insights = self?.insights {
