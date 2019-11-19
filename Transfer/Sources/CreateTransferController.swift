@@ -42,6 +42,7 @@ final class CreateTransferController: UITableViewController {
         (TransferButtonCell.self, TransferButtonCell.reuseIdentifier),
         (TransferNotesCell.self, TransferNotesCell.reuseIdentifier)
     ]
+
     override public func viewDidLoad() {
         super.viewDidLoad()
         title = "transfer_funds".localized()

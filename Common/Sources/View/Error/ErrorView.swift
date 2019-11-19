@@ -77,11 +77,9 @@ public final class ErrorView {
     }
 
     private func unexpectedError() {
-      if !pageName.isEmpty, !pageGroup.isEmpty {
        let errorInfo = ErrorInfoBuilder(type: self.errorTypeException,
                                         message: error.getHyperwalletErrors()?.errorList?.first?.message ?? "")
-                .fieldName(fieldName: "")
-                .code(code: error.getHyperwalletErrors()?.errorList?.first?.code ?? "")
+                .code(error.getHyperwalletErrors()?.errorList?.first?.code ?? "")
                 .build()
         HyperwalletInsights.shared.trackError(pageName: pageName,
                                               pageGroup: pageGroup,
@@ -91,7 +89,6 @@ public final class ErrorView {
                                        title: "unexpected_title".localized(),
                                        message: "unexpected_error_message".localized(),
                                        actions: UIAlertAction.close(viewController))
-        }
     }
 
     private func connectionError(_ handler: @escaping (UIAlertAction) -> Void) {

@@ -34,6 +34,7 @@ final class ListTransferMethodController: UITableViewController {
                                                                               .localized())
     private lazy var addAccountButton: UIButton = view.setUpEmptyListButton(text: "add_account_title".localized(),
                                                                             firstItem: emptyListLabel)
+
     override public func viewDidLoad() {
         super.viewDidLoad()
         title = "title_accounts".localized()
