@@ -353,7 +353,7 @@ class AddTransferMethodViewMock: AddTransferMethodView {
     var isShowProcessingPerformed = false
     var isShowConfirmationPerformed = false
     var isDismissProcessingPerformed = false
-    var isFieldFocusPerformad = false
+    var isFieldFocusPerformed = false
     var fieldFocusField = ""
     var isShowTransferMethodFieldsPerformed = false
     var fieldGroups = [HyperwalletFieldGroup]()
@@ -378,7 +378,7 @@ class AddTransferMethodViewMock: AddTransferMethodView {
         isShowProcessingPerformed = false
         isShowConfirmationPerformed = false
         isDismissProcessingPerformed = false
-        isFieldFocusPerformad = false
+        isFieldFocusPerformed = false
         fieldFocusField = ""
         isShowTransferMethodFieldsPerformed = false
         fieldGroups = [HyperwalletFieldGroup]()
@@ -438,7 +438,7 @@ class AddTransferMethodViewMock: AddTransferMethodView {
     }
 
     func fieldFocus(fieldName: String) {
-        isFieldFocusPerformad = true
+        isFieldFocusPerformed = true
         fieldFocusField = fieldName
     }
 
