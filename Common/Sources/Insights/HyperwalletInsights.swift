@@ -58,7 +58,9 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
         return instance ?? HyperwalletInsights()
     }
 
-    private init() { }
+    private init() {
+        loadConfigurationAndInitializeInsights(completion: { _ in })
+    }
 
     /// Set up HyperwalletInsights
     public static func setup() {
@@ -66,36 +68,45 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
     }
 
     public func trackClick(pageName: String, pageGroup: String, link: String, params: [String: String]) {
-        if let insights = insights {
-            insights.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
-        } else {
-            loadConfigurationAndInitializeInsights { isInsightsInitialized in
-                if isInsightsInitialized {
-                    Insights.shared?.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
+        DispatchQueue.global().async { [weak self] in
+            if let insights = self?.insights {
+                insights.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
+            } else {
+                self?.loadConfigurationAndInitializeInsights { isInsightsInitialized in
+                    if isInsightsInitialized {
+                        Insights.shared?.trackClick(pageName: pageName,
+                                                    pageGroup: pageGroup,
+                                                    link: link,
+                                                    params: params)
+                    }
                 }
             }
         }
     }
 
     public func trackError(pageName: String, pageGroup: String, errorInfo: ErrorInfo) {
-        if let insights = insights {
-            insights.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
-        } else {
-            loadConfigurationAndInitializeInsights { isInsightsInitialized in
-                if isInsightsInitialized {
-                    Insights.shared?.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
+        DispatchQueue.global().async { [weak self] in
+            if let insights = self?.insights {
+                insights.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
+            } else {
+                self?.loadConfigurationAndInitializeInsights { isInsightsInitialized in
+                    if isInsightsInitialized {
+                        Insights.shared?.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
+                    }
                 }
             }
         }
     }
 
     public func trackImpression(pageName: String, pageGroup: String, params: [String: String]) {
-        if let insights = insights {
-            insights.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
-        } else {
-            loadConfigurationAndInitializeInsights { isInsightsInitialized in
-                if isInsightsInitialized {
-                    Insights.shared?.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
+        DispatchQueue.global().async { [weak self] in
+            if let insights = self?.insights {
+                insights.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
+            } else {
+                self?.loadConfigurationAndInitializeInsights { isInsightsInitialized in
+                    if isInsightsInitialized {
+                        Insights.shared?.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
+                    }
                 }
             }
         }
@@ -140,11 +151,11 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
 
 /// A helper class to build the `ErrorInfo` instance.
 public class ErrorInfoBuilder {
-    private let type: String
     private let message: String
-    private var fieldName = ""
-    private var description = Thread.callStackSymbols.joined(separator: "\n")
+    private let type: String
     private var code = ""
+    private var description = Thread.callStackSymbols.joined(separator: "\n")
+    private var fieldName = ""
 
     /// Initializes ErrorInfoBuilder
     ///

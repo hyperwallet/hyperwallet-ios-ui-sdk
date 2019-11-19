@@ -26,7 +26,6 @@ public final class ErrorView {
     private var error: HyperwalletErrorType
     private var pageName: String
     private var pageGroup: String
-    private let hyperwalletInsights: HyperwalletInsightsProtocol
 
     /// Initializer to initialize the class with errors to be displayed and the ViewController responsible
     /// to display the errors
@@ -36,7 +35,6 @@ public final class ErrorView {
     ///   - pageName: The Page or screen that is currently visible
     ///   - pageGroup: The group of the Page or screen that is currently visible
     public init(viewController: UIViewController,
-                hyperwalletInsights: HyperwalletInsightsProtocol = HyperwalletInsights.shared,
                 error: HyperwalletErrorType,
                 pageName: String,
                 pageGroup: String) {
@@ -44,7 +42,6 @@ public final class ErrorView {
         self.error = error
         self.pageName = pageName
         self.pageGroup = pageGroup
-        self.hyperwalletInsights = hyperwalletInsights
     }
 
     /// To show error messages
@@ -89,9 +86,9 @@ public final class ErrorView {
             .description(Thread.callStackSymbols.joined(separator: "\n"))
             .code(error.getHyperwalletErrors()?.errorList?.first?.code ?? "")
             .build()
-        hyperwalletInsights.trackError(pageName: pageName,
-                                       pageGroup: pageGroup,
-                                       errorInfo: errorInfo)
+        HyperwalletInsights.shared.trackError(pageName: pageName,
+                                              pageGroup: pageGroup,
+                                              errorInfo: errorInfo)
         HyperwalletUtilViews.showAlertWithRetry(viewController,
                                                 title: "network_connection_error_title".localized(),
                                                 message: "network_connection_error_message".localized(),
