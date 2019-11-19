@@ -41,7 +41,6 @@ final class ListTransferMethodPresenter {
     private let pageGroup = "transfer-method"
     private let pageName = "transfer-method:add:list-transfer-method"
     private (set) var sectionData = [HyperwalletTransferMethod]()
-    private let hyperwalletInsights: HyperwalletInsightsProtocol = HyperwalletInsights.shared
     private lazy var transferMethodRepository = {
         TransferMethodRepositoryFactory.shared.transferMethodRepository()
     }()

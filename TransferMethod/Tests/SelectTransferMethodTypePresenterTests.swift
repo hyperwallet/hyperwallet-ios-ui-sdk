@@ -8,7 +8,7 @@ import XCTest
 
 class SelectTransferMethodTypePresenterTests: XCTestCase {
     private var presenter: SelectTransferMethodTypePresenter!
-    private let mockView = MockSelectTransferMethodTypeView()
+    private let mockView = SelectTransferMethodTypeViewMock()
     private lazy var mockResponseData = HyperwalletTestHelper.getDataFromJson("TransferMethodConfigurationKeysResponse")
     private lazy var userMockResponseData = HyperwalletTestHelper.getDataFromJson("UserIndividualResponse")
     private var hyperwalletInsightsMock = HyperwalletInsightsMock()
@@ -278,7 +278,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
     }
 }
 
-class MockSelectTransferMethodTypeView: SelectTransferMethodTypeView {
+class SelectTransferMethodTypeViewMock: SelectTransferMethodTypeView {
     var isHideLoadingPerformed = false
     var isShowLoadingPerformed = false
     var isShowGenericTableViewPerformed = false

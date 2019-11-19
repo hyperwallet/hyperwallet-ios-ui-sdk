@@ -620,7 +620,6 @@
 		2EBD0C682375FAE400569342 /* Insights.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Insights.framework; path = Carthage/Build/iOS/Insights.framework; sourceTree = "<group>"; };
 		2EF70C50237CA2E6007E3844 /* AbstractWidgetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractWidgetTests.swift; sourceTree = "<group>"; };
 		2EF70C53237CDEAE007E3844 /* HyperwalletFieldResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = HyperwalletFieldResponse.json; sourceTree = "<group>"; };
-		2EF70C55237E2B5F007E3844 /* HyperwalletInsightsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletInsightsMock.swift; sourceTree = "<group>"; };
 		2EF70C6E237F543F007E3844 /* HyperwalletInsightsMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyperwalletInsightsMock.swift; sourceTree = "<group>"; };
 		412F723222B458C700837F8F /* TransactionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetails.swift; sourceTree = "<group>"; };
 		4157135C22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardReceiptsForOneMonth.json; sourceTree = "<group>"; };
@@ -1225,14 +1224,6 @@
 				2EF70C50237CA2E6007E3844 /* AbstractWidgetTests.swift */,
 			);
 			path = Widget;
-			sourceTree = "<group>";
-		};
-		2EF70C6D237F43AB007E3844 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				2EF70C55237E2B5F007E3844 /* HyperwalletInsightsMock.swift */,
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		41D8360B22FB420F003544AB /* TransferFunds */ = {
@@ -1905,7 +1896,6 @@
 				073BB99B22E63DBF0053C24E /* TransferRepository */,
 				DB2587FC2261BFF100E6236B /* UITests */,
 				643912ED22DF40F200036609 /* UserRepository */,
-				2EF70C6D237F43AB007E3844 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};

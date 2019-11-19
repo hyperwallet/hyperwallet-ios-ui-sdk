@@ -30,52 +30,65 @@ class HyperwalletInsightsTests: XCTestCase {
     private let countryTag = "hyperwallet_ea_country"
     private let currencyTag = "hyperwallet_ea_currency"
     private let link = "test.link"
-    private var mockInsights = MockInsights()
+    private var insightsMock = InsightsMock()
 
     override func setUp() {
         HyperwalletUI.setup(HyperwalletTestHelper.authenticationProvider)
         HyperwalletInsights.setup()
         self.hyperwalletInsights = HyperwalletInsights.shared
-        hyperwalletInsights?.insights = mockInsights
+        hyperwalletInsights?.insights = insightsMock
     }
 
     func testTrackImpression() {
         XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
         let params = [countryTag: country, currencyTag: currency]
+        let expectation = self.expectation(description: InsightsMock.trackImpressionExpectation)
+        insightsMock.expectations = [InsightsMock.trackImpressionExpectation: expectation]
+
         HyperwalletInsights.shared.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
-        XCTAssertTrue(mockInsights.didTrackImpression, "HyperwalletInsights.trackImpression should be called")
-        XCTAssertEqual(mockInsights.pageName, pageName, "Page name should be as expected")
-        XCTAssertEqual(mockInsights.pageGroup, pageGroup, "Page group should as expected")
-        XCTAssertNotNil(mockInsights.params[countryTag], "Params should have country")
-        XCTAssertNotNil(mockInsights.params[currencyTag], "Params should have currency")
+        wait(for: [expectation], timeout: 1)
+
+        XCTAssertTrue(insightsMock.didTrackImpression, "HyperwalletInsights.trackImpression should be called")
+        XCTAssertEqual(insightsMock.pageName, pageName, "Page name should be as expected")
+        XCTAssertEqual(insightsMock.pageGroup, pageGroup, "Page group should as expected")
+        XCTAssertNotNil(insightsMock.params[countryTag], "Params should have country")
+        XCTAssertNotNil(insightsMock.params[currencyTag], "Params should have currency")
     }
 
     func testTrackClick() {
         XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
         let params = [countryTag: country, currencyTag: currency]
+        let expectation = self.expectation(description: InsightsMock.trackClickExpectation)
+        insightsMock.expectations = [InsightsMock.trackClickExpectation: expectation]
+
         HyperwalletInsights.shared.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
-        XCTAssertTrue(mockInsights.didTrackClick, "HyperwalletInsights.trackClick should be called")
-        XCTAssertEqual(mockInsights.pageName, pageName, "Page name should be as expected")
-        XCTAssertEqual(mockInsights.pageGroup, pageGroup, "Page group should as expected")
-        XCTAssertEqual(mockInsights.link, link, "Link should be as expected")
-        XCTAssertNotNil(mockInsights.params[countryTag], "Params should have country")
-        XCTAssertNotNil(mockInsights.params[currencyTag], "Params should have currency")
+        wait(for: [expectation], timeout: 1)
+
+        XCTAssertTrue(insightsMock.didTrackClick, "HyperwalletInsights.trackClick should be called")
+        XCTAssertEqual(insightsMock.pageName, pageName, "Page name should be as expected")
+        XCTAssertEqual(insightsMock.pageGroup, pageGroup, "Page group should as expected")
+        XCTAssertEqual(insightsMock.link, link, "Link should be as expected")
+        XCTAssertNotNil(insightsMock.params[countryTag], "Params should have country")
+        XCTAssertNotNil(insightsMock.params[currencyTag], "Params should have currency")
     }
 
     func testTrackError() {
         XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
-        let errorInfo = ErrorInfo(type: "errorInfo_type",
-                                  message: "errorInfo_message",
-                                  fieldName: "errorInfo_fieldName",
-                                  description: "errorInfo_description",
-                                  code: "errorInfo_code")
+        let errorInfo = ErrorInfoBuilder(type: "errorInfo_type", message: "errorInfo_message")
+            .fieldName("errorInfo_fieldName")
+            .description("errorInfo_description")
+            .code("errorInfo_code")
+            .build()
+        let expectation = self.expectation(description: InsightsMock.trackErrorExpectation)
+        insightsMock.expectations = [InsightsMock.trackErrorExpectation: expectation]
 
         HyperwalletInsights.shared.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
+        wait(for: [expectation], timeout: 1)
 
-        XCTAssertTrue(mockInsights.didTrackError, "HyperwalletInsights.trackError should be called")
-        XCTAssertEqual(mockInsights.pageName, pageName, "Page name should be as expected")
-        XCTAssertEqual(mockInsights.pageGroup, pageGroup, "Page group should be as expected")
-        XCTAssertNotNil(mockInsights.errorInfo, "ErrorInfo shouldn't be empty")
+        XCTAssertTrue(insightsMock.didTrackError, "HyperwalletInsights.trackError should be called")
+        XCTAssertEqual(insightsMock.pageName, pageName, "Page name should be as expected")
+        XCTAssertEqual(insightsMock.pageGroup, pageGroup, "Page group should be as expected")
+        XCTAssertNotNil(insightsMock.errorInfo, "ErrorInfo shouldn't be empty")
     }
 
     func testTrackClick_InsightsNotInitialized() {
@@ -83,6 +96,7 @@ class HyperwalletInsightsTests: XCTestCase {
         XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
         let params = [countryTag: country, currencyTag: currency]
         HyperwalletInsights.shared.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
+        sleep(2)
         XCTAssertNotNil(hyperwalletInsights?.insights, "Insights should be reloaded if nil")
     }
 
@@ -91,23 +105,29 @@ class HyperwalletInsightsTests: XCTestCase {
         XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
         let params = [countryTag: country, currencyTag: currency]
         HyperwalletInsights.shared.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
+        sleep(2)
         XCTAssertNotNil(hyperwalletInsights?.insights, "Insights should be reloaded if nil")
     }
 
     func testTrackError_InsightsNotInitialized() {
         hyperwalletInsights?.insights = nil
         XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
-        let errorInfo = ErrorInfo(type: "errorInfo_type",
-                                  message: "errorInfo_message",
-                                  fieldName: "errorInfo_fieldName",
-                                  description: "errorInfo_description",
-                                  code: "errorInfo_code")
+        let errorInfo = ErrorInfoBuilder(type: "errorInfo_type", message: "errorInfo_message")
+            .fieldName("errorInfo_fieldName")
+            .description("errorInfo_description")
+            .code("errorInfo_code")
+            .build()
         HyperwalletInsights.shared.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
+        sleep(2)
         XCTAssertNotNil(hyperwalletInsights?.insights, "Insights should be reloaded if nil")
     }
 }
 
-class MockInsights: InsightsProtocol {
+class InsightsMock: InsightsProtocol {
+    static let trackClickExpectation = "trackClickExpectation"
+    static let trackImpressionExpectation = "trackImpressionExpectation"
+    static let trackErrorExpectation = "trackErrorExpectation"
+
     var didTrackClick = false
     var didTrackImpression = false
     var didTrackError = false
@@ -116,6 +136,7 @@ class MockInsights: InsightsProtocol {
     var params = [String: String]()
     var link = ""
     var errorInfo: ErrorInfo!
+    var expectations: [String: XCTestExpectation]?
 
     func trackClick(pageName: String, pageGroup: String, link: String, params: [String: String]) {
         self.pageGroup = pageGroup
@@ -123,6 +144,7 @@ class MockInsights: InsightsProtocol {
         self.link = link
         self.params = params
         didTrackClick = true
+        expectations?[InsightsMock.trackClickExpectation]?.fulfill()
     }
 
     func trackImpression(pageName: String, pageGroup: String, params: [String: String]) {
@@ -130,6 +152,7 @@ class MockInsights: InsightsProtocol {
         self.pageName = pageName
         self.params = params
         didTrackImpression = true
+        expectations?[InsightsMock.trackImpressionExpectation]?.fulfill()
     }
 
     func trackError(pageName: String, pageGroup: String, errorInfo: ErrorInfo) {
@@ -137,6 +160,7 @@ class MockInsights: InsightsProtocol {
         self.pageName = pageName
         self.errorInfo = errorInfo
         didTrackError = true
+        expectations?[InsightsMock.trackErrorExpectation]?.fulfill()
     }
 
     func resetStates() {
@@ -147,5 +171,6 @@ class MockInsights: InsightsProtocol {
         pageGroup = ""
         params = [String: String]()
         link = ""
+        expectations = nil
     }
 }

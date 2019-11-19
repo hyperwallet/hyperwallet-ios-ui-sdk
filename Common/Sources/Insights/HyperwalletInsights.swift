@@ -59,7 +59,7 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
     }
 
     private init() {
-        loadConfigurationAndInitializeInsights()
+        loadConfigurationAndInitializeInsights(completion: { _ in })
     }
 
     /// Set up HyperwalletInsights
@@ -68,49 +68,61 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
     }
 
     public func trackClick(pageName: String, pageGroup: String, link: String, params: [String: String]) {
-        if let insights = insights {
-            insights.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
-        } else {
-            loadConfigurationAndInitializeInsights()
-            if let insights = insights {
+        DispatchQueue.global().async { [weak self] in
+            if let insights = self?.insights {
                 insights.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
+            } else {
+                self?.loadConfigurationAndInitializeInsights { isInsightsInitialized in
+                    if isInsightsInitialized {
+                        Insights.shared?.trackClick(pageName: pageName,
+                                                    pageGroup: pageGroup,
+                                                    link: link,
+                                                    params: params)
+                    }
+                }
             }
         }
     }
 
     public func trackError(pageName: String, pageGroup: String, errorInfo: ErrorInfo) {
-        if let insights = insights {
-            insights.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
-        } else {
-            loadConfigurationAndInitializeInsights()
-            if let insights = insights {
+        DispatchQueue.global().async { [weak self] in
+            if let insights = self?.insights {
                 insights.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
+            } else {
+                self?.loadConfigurationAndInitializeInsights { isInsightsInitialized in
+                    if isInsightsInitialized {
+                        Insights.shared?.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
+                    }
+                }
             }
         }
     }
 
     public func trackImpression(pageName: String, pageGroup: String, params: [String: String]) {
-        if let insights = insights {
-            insights.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
-        } else {
-            loadConfigurationAndInitializeInsights()
-            if let insights = insights {
+        DispatchQueue.global().async { [weak self] in
+            if let insights = self?.insights {
                 insights.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
+            } else {
+                self?.loadConfigurationAndInitializeInsights { isInsightsInitialized in
+                    if isInsightsInitialized {
+                        Insights.shared?.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
+                    }
+                }
             }
         }
     }
 
-    private func loadConfigurationAndInitializeInsights() {
+    private func loadConfigurationAndInitializeInsights(completion: @escaping(Bool) -> Void) {
         loadConfiguration { configuration in
             if let configuration = configuration {
                 self.initializeInsights(configuration: configuration)
+                completion(true)
+            } else {
+                completion(false)
             }
         }
     }
 
-    /// Fetch configuration
-    ///
-    /// - Parameter completion: boolean completion handler
     private func loadConfiguration(completion: @escaping(Configuration?) -> Void) {
         // Fetch configuration again
         Hyperwallet.shared.getConfiguration { configuration, _ in
@@ -139,11 +151,11 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
 
 /// A helper class to build the `ErrorInfo` instance.
 public class ErrorInfoBuilder {
-    private let type: String
     private let message: String
-    private var fieldName = ""
-    private var description = Thread.callStackSymbols.joined(separator: "\n")
+    private let type: String
     private var code = ""
+    private var description = Thread.callStackSymbols.joined(separator: "\n")
+    private var fieldName = ""
 
     /// Initializes ErrorInfoBuilder
     ///
@@ -162,7 +174,7 @@ public class ErrorInfoBuilder {
     ///     error/issue in combination with error_type = FORM or when an API error occurs in relation
     ///     to a field, error_type = API
     /// - Returns: ErrorInfoBuilder
-    public func fieldName(fieldName: String) -> ErrorInfoBuilder {
+    public func fieldName(_ fieldName: String) -> ErrorInfoBuilder {
         self.fieldName = fieldName
         return self
     }
@@ -171,7 +183,7 @@ public class ErrorInfoBuilder {
     ///
     /// - Parameter code: The Error Code is the type of error that occurred
     /// - Returns: ErrorInfoBuilder
-    public func code(code: String) -> ErrorInfoBuilder {
+    public func code(_ code: String) -> ErrorInfoBuilder {
         self.code = code
         return self
     }
@@ -180,7 +192,7 @@ public class ErrorInfoBuilder {
     ///
     /// - Parameter description: The Source of error that occurred. This allows to understand what caused the error.
     /// - Returns: ErrorInfoBuilder
-    public func description(description: String) -> ErrorInfoBuilder {
+    public func description(_ description: String) -> ErrorInfoBuilder {
         self.description = description
         return self
     }

@@ -8,7 +8,7 @@ import XCTest
 
 class AddTransferMethodPresenterTests: XCTestCase {
     private var presenter: AddTransferMethodPresenter!
-    private let mockView = MockAddTransferMethodViewTests()
+    private let mockView = AddTransferMethodViewMock()
     private lazy var transferMethodConfigurationFieldsResponse = HyperwalletTestHelper
         .getDataFromJson("TransferMethodConfigurationFieldsResponse")
     private var hyperwalletInsightsMock = HyperwalletInsightsMock()
@@ -346,7 +346,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
     }
 }
 
-class MockAddTransferMethodViewTests: AddTransferMethodView {
+class AddTransferMethodViewMock: AddTransferMethodView {
     let expectation: String = "expectation"
     let updateFooterContentExpectation: String = "updateFooterContentExpectation"
 
@@ -356,7 +356,7 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
     var isShowProcessingPerformed = false
     var isShowConfirmationPerformed = false
     var isDismissProcessingPerformed = false
-    var isFieldFocusPerformad = false
+    var isFieldFocusPerformed = false
     var fieldFocusField = ""
     var isShowTransferMethodFieldsPerformed = false
     var fieldGroups = [HyperwalletFieldGroup]()
@@ -381,7 +381,7 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
         isShowProcessingPerformed = false
         isShowConfirmationPerformed = false
         isDismissProcessingPerformed = false
-        isFieldFocusPerformad = false
+        isFieldFocusPerformed = false
         fieldFocusField = ""
         isShowTransferMethodFieldsPerformed = false
         fieldGroups = [HyperwalletFieldGroup]()
@@ -441,7 +441,7 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
     }
 
     func fieldFocus(fieldName: String) {
-        isFieldFocusPerformad = true
+        isFieldFocusPerformed = true
         fieldFocusField = fieldName
     }
 
