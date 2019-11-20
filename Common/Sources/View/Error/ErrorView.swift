@@ -91,7 +91,6 @@ public final class ErrorView {
     private func connectionError(_ handler: @escaping (UIAlertAction) -> Void) {
         let errorInfo = ErrorInfoBuilder(type: errorTypeConnection,
                                          message: error.getHyperwalletErrors()?.errorList?.first?.message ?? "")
-            .description(Thread.callStackSymbols.joined(separator: "\n"))
             .code(error.getHyperwalletErrors()?.errorList?.first?.code ?? "")
             .build()
         HyperwalletInsights.shared.trackError(pageName: pageName,

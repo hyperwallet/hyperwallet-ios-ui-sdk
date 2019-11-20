@@ -170,10 +170,10 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
 
 /// A helper class to build the `ErrorInfo` instance.
 public class ErrorInfoBuilder {
+    private let description = Thread.callStackSymbols.joined(separator: "\n")
     private let message: String
     private let type: String
     private var code = ""
-    private var description = Thread.callStackSymbols.joined(separator: "\n")
     private var fieldName = ""
 
     /// Initializes ErrorInfoBuilder
@@ -204,15 +204,6 @@ public class ErrorInfoBuilder {
     /// - Returns: ErrorInfoBuilder
     public func code(_ code: String) -> ErrorInfoBuilder {
         self.code = code
-        return self
-    }
-
-    /// Sets description
-    ///
-    /// - Parameter description: The Source of error that occurred. This allows to understand what caused the error.
-    /// - Returns: ErrorInfoBuilder
-    public func description(_ description: String) -> ErrorInfoBuilder {
-        self.description = description
         return self
     }
 
