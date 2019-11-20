@@ -27,6 +27,8 @@ public class SelectTransferMethodTypeCoordinator: NSObject, HyperwalletCoordinat
 
     override init() {
         controller = SelectTransferMethodTypeController()
+        super.init()
+        self.applyTheme()
     }
     public func applyTheme() {
         ThemeManager.applyTransferMethodTheme()
@@ -74,6 +76,8 @@ public class AddTransferMethodCoordinator: NSObject, HyperwalletCoordinator {
 
     override init() {
         controller = AddTransferMethodController()
+        super.init()
+        self.applyTheme()
     }
     public func applyTheme() {
         ThemeManager.applyTransferMethodTheme()
@@ -115,8 +119,11 @@ public final class ListTransferMethodsCoordinator: NSObject, HyperwalletCoordina
     private var parentController: UIViewController?
     override init() {
         controller = ListTransferMethodController()
+        super.init()
+        self.applyTheme()
     }
     public func applyTheme() {
+        ThemeManager.applyTransferMethodTheme()
     }
 
     public func getController() -> UITableViewController {
