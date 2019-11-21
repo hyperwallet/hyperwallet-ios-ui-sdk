@@ -45,6 +45,7 @@ final class AddTransferMethodPresenter {
     private unowned var view: AddTransferMethodView
     private let country: String
     private let currency: String
+    private let errorTypeApi = "API"
     private let profileType: String
     private let transferMethodTypeCode: String
     private let createdConfirmationPageName = "transfer-method:add:transfer-method-created"
@@ -237,11 +238,28 @@ final class AddTransferMethodPresenter {
         for widget in errorWidgets {
             // get the errorMessage by widget name and update widget UI
             if let error = errors.first(where: { error in widget.name() == error.fieldName }) {
+                trackError(errorMessage: error.message,
+                           errorCode: error.code,
+                           errorType: errorTypeApi,
+                           fieldName: widget.name())
                 widget.showError()
                 errorMessages.append(error.message)
             }
         }
         section.errorMessage = errorMessages.joined(separator: "\n")
+    }
+
+    private func trackError(errorMessage: String,
+                            errorCode: String,
+                            errorType: String,
+                            fieldName: String) {
+        let errorInfo = ErrorInfoBuilder(type: errorType, message: errorMessage)
+            .fieldName(fieldName)
+            .code(errorCode)
+            .build()
+        hyperwalletInsights.trackError(pageName: AddTransferMethodPresenter.addTransferMethodPageName,
+                                       pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup,
+                                       errorInfo: errorInfo)
     }
 
     private func widgetsContainError(for section: AddTransferMethodSectionData,

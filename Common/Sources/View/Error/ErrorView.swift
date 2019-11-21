@@ -20,6 +20,7 @@ import HyperwalletSDK
 
 /// The class to handle UI errors
 public final class ErrorView {
+    private let errorTypeApi = "API"
     private let errorTypeConnection = "CONNECTION"
     private let errorTypeException = "EXCEPTION"
     private weak var viewController: UIViewController!
@@ -64,6 +65,17 @@ public final class ErrorView {
     ///
     /// - Parameter handler: to handle business error
     private func businessError(_ handler: ((UIAlertAction) -> Void)? = nil) {
+        if let error = error.getHyperwalletErrors()?.errorList?.first {
+            let errorInfo = ErrorInfoBuilder(type: errorTypeApi,
+                                             message: error.message)
+                .fieldName(error.fieldName ?? "")
+                .code(error.code)
+                .build()
+            HyperwalletInsights.shared.trackError(pageName: pageName,
+                                                  pageGroup: pageGroup,
+                                                  errorInfo: errorInfo)
+        }
+
         HyperwalletUtilViews.showAlert(viewController,
                                        title: "error".localized(),
                                        message: error.getHyperwalletErrors()?.errorList?
