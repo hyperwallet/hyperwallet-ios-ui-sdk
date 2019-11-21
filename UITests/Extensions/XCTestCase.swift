@@ -7,12 +7,12 @@ extension XCTestCase {
                                        evaluatedWith: element,
                                        handler: nil)
 
-        XCTWaiter().wait(for: [expectation1], timeout: 5)
+        XCTWaiter().wait(for: [expectation1], timeout: 10)
     }
 
     func waitForExistence(_ element: XCUIElement,
                           file: StaticString = #file,
                           line: UInt = #line ) {
-        XCTAssertTrue(element.waitForExistence(timeout: 5), file: file, line: line)
+        XCTAssertTrue(element.waitForExistence(timeout: 10), file: file, line: line)
     }
 }
