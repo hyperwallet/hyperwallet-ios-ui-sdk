@@ -41,7 +41,10 @@ protocol SelectTransferMethodTypeView: class {
                                                profileType: String,
                                                transferMethodTypeCode: String)
     func showAlert(message: String?)
-    func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?)
+    func showError(_ error: HyperwalletErrorType,
+                   pageName: String,
+                   pageGroup: String,
+                   _ retry: (() -> Void)?)
     func showLoading()
     func hideLoading()
     func transferMethodTypeTableViewReloadData()
@@ -113,13 +116,14 @@ final class SelectTransferMethodTypePresenter {
             guard let strongSelf = self else {
                 return
             }
-
             switch getUserResult {
             case .failure(let error):
                 strongSelf.view.hideLoading()
-                strongSelf.view.showError(error, { () -> Void in
+                strongSelf.view.showError(error,
+                                          pageName: strongSelf.pageName,
+                                          pageGroup: strongSelf.pageGroup) {
                     strongSelf.loadTransferMethodKeys()
-                })
+                }
 
             case .success(let user):
                 strongSelf.transferMethodConfigurationRepository
@@ -182,7 +186,10 @@ final class SelectTransferMethodTypePresenter {
 
             switch result {
             case .failure(let error):
-                strongSelf.view.showError(error, failure)
+                strongSelf.view.showError(error,
+                                          pageName: strongSelf.pageName,
+                                          pageGroup: strongSelf.pageGroup,
+                                          failure)
 
             case .success(let keyResult):
                 success(keyResult)

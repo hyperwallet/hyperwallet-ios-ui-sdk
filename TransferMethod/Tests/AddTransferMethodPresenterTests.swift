@@ -1,3 +1,6 @@
+#if !COCOAPODS
+import Common
+#endif
 import Hippolyte
 import HyperwalletSDK
 @testable import TransferMethod
@@ -5,10 +8,10 @@ import XCTest
 
 class AddTransferMethodPresenterTests: XCTestCase {
     private var presenter: AddTransferMethodPresenter!
-    private let mockView = MockAddTransferMethodViewTests()
+    private let mockView = AddTransferMethodViewMock()
     private lazy var transferMethodConfigurationFieldsResponse = HyperwalletTestHelper
         .getDataFromJson("TransferMethodConfigurationFieldsResponse")
-    private var mockHyperwalletInsights = MockHyperwalletInsights()
+    private var hyperwalletInsightsMock = HyperwalletInsightsMock()
 
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
@@ -17,7 +20,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
                                                "USD",
                                                "INDIVIDUAL",
                                                "BANK_ACCOUNT",
-                                               mockHyperwalletInsights)
+                                               hyperwalletInsightsMock)
     }
 
     override func tearDown() {
@@ -25,7 +28,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
             Hippolyte.shared.stop()
         }
         mockView.resetStates()
-        mockHyperwalletInsights.resetStates()
+        hyperwalletInsightsMock.resetStates()
     }
 
     public func testLoadTransferMethodConfigurationFields_success() {
@@ -42,7 +45,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isShowLoadingPerformed, "The showLoading should be performed")
         XCTAssertTrue(mockView.isHideLoadingPerformed, "The hideLoading should be performed")
         XCTAssertEqual(mockView.fieldGroups.count, 2, "The `response.getFields()` should be 2")
-        XCTAssertTrue(mockHyperwalletInsights.didTrackImpression,
+        XCTAssertTrue(hyperwalletInsightsMock.didTrackImpression,
                       "HyperwalletInsights.trackImpression should be called")
     }
 
@@ -68,7 +71,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
                                                "USD",
                                                "INDIVIDUAL",
                                                "BANK_ACCOUNT",
-                                               mockHyperwalletInsights)
+                                               hyperwalletInsightsMock)
         let url = String(format: "%@/bank-accounts", HyperwalletTestHelper.userRestURL)
         let response = HyperwalletTestHelper.okHTTPResponse(for: "BankAccountIndividualResponse")
         let request = HyperwalletTestHelper.buildPostRequest(baseUrl: url, response)
@@ -91,9 +94,9 @@ class AddTransferMethodPresenterTests: XCTestCase {
         XCTAssertFalse(mockView.isShowErrorPerformed, "The showError should not be performed")
         XCTAssertTrue(mockView.isShowConfirmationPerformed, "The showConfirmation should be performed")
         XCTAssertTrue(mockView.isNotificationSent, "The notification should be sent")
-        XCTAssertTrue(mockHyperwalletInsights.didTrackClick,
+        XCTAssertTrue(hyperwalletInsightsMock.didTrackClick,
                       "HyperwalletInsights.trackClick should be called")
-        XCTAssertTrue(mockHyperwalletInsights.didTrackImpression,
+        XCTAssertTrue(hyperwalletInsightsMock.didTrackImpression,
                       "HyperwalletInsights.trackImpression should be called")
     }
 
@@ -103,7 +106,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
                                                "USD",
                                                "INDIVIDUAL",
                                                "WIRE_ACCOUNT",
-                                               mockHyperwalletInsights)
+                                               hyperwalletInsightsMock)
         let url = String(format: "%@/bank-accounts", HyperwalletTestHelper.userRestURL)
         let response = HyperwalletTestHelper.okHTTPResponse(for: "WireAccountIndividualResponse")
         let request = HyperwalletTestHelper.buildPostRequest(baseUrl: url, response)
@@ -135,7 +138,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
                                                "USD",
                                                "INDIVIDUAL",
                                                "BANK_CARD",
-                                               mockHyperwalletInsights)
+                                               hyperwalletInsightsMock)
 
         let url = String(format: "%@/bank-cards", HyperwalletTestHelper.userRestURL)
         let response = HyperwalletTestHelper.okHTTPResponse(for: "BankCardResponse")
@@ -169,7 +172,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
                                                "USD",
                                                "INDIVIDUAL",
                                                "PAYPAL_ACCOUNT",
-                                               mockHyperwalletInsights)
+                                               hyperwalletInsightsMock)
         let url = String(format: "%@/paypal-accounts", HyperwalletTestHelper.userRestURL)
         let response = HyperwalletTestHelper.okHTTPResponse(for: "PayPalAccountResponse")
         let request = HyperwalletTestHelper.buildPostRequest(baseUrl: url, response)
@@ -286,7 +289,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
                                                "USD",
                                                "INDIVIDUAL",
                                                "PREPAID_CARD",
-                                               mockHyperwalletInsights)
+                                               hyperwalletInsightsMock)
         mockView.mockFieldStatusReturnResult.append(true)
 
         // When
@@ -322,7 +325,10 @@ class AddTransferMethodPresenterTests: XCTestCase {
                     else {
                         continue
                 }
-                let newWidgets = fields.map(WidgetFactory.newWidget)
+                let newWidgets = fields.map({
+                    WidgetFactory.newWidget(field: $0,
+                                            pageName: AddTransferMethodPresenter.addTransferMethodPageName,
+                                            pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup)})
                 let section = AddTransferMethodSectionData(
                     fieldGroup: fieldGroup,
                     country: "US",
@@ -337,7 +343,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
     }
 }
 
-class MockAddTransferMethodViewTests: AddTransferMethodView {
+class AddTransferMethodViewMock: AddTransferMethodView {
     let expectation: String = "expectation"
     let updateFooterContentExpectation: String = "updateFooterContentExpectation"
 
@@ -347,7 +353,7 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
     var isShowProcessingPerformed = false
     var isShowConfirmationPerformed = false
     var isDismissProcessingPerformed = false
-    var isFieldFocusPerformad = false
+    var isFieldFocusPerformed = false
     var fieldFocusField = ""
     var isShowTransferMethodFieldsPerformed = false
     var fieldGroups = [HyperwalletFieldGroup]()
@@ -372,7 +378,7 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
         isShowProcessingPerformed = false
         isShowConfirmationPerformed = false
         isDismissProcessingPerformed = false
-        isFieldFocusPerformad = false
+        isFieldFocusPerformed = false
         fieldFocusField = ""
         isShowTransferMethodFieldsPerformed = false
         fieldGroups = [HyperwalletFieldGroup]()
@@ -432,7 +438,7 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
     }
 
     func fieldFocus(fieldName: String) {
-        isFieldFocusPerformad = true
+        isFieldFocusPerformed = true
         fieldFocusField = fieldName
     }
 
@@ -448,9 +454,12 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
         isTransferMethodSupported = true
     }
 
-    func showError(_ error: HyperwalletErrorType, _ handler: (() -> Void)?) {
+    func showError(_ error: HyperwalletErrorType,
+                   pageName: String,
+                   pageGroup: String,
+                   _ retry: (() -> Void)?) {
         isShowErrorPerformed = true
-        handler?()
+        retry?()
         expectations?[expectation]?.fulfill()
     }
 
