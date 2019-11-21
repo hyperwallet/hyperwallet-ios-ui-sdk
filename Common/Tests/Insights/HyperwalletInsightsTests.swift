@@ -30,13 +30,25 @@ class HyperwalletInsightsTests: XCTestCase {
     private let countryTag = "hyperwallet_ea_country"
     private let currencyTag = "hyperwallet_ea_currency"
     private let link = "test.link"
-    private var insightsMock = InsightsMock()
+    private var insightsMock: InsightsMock!
 
     override func setUp() {
+        if self.name.contains("testTrackError_ConfigNotInitialized") {
+            return
+        }
         HyperwalletUI.setup(HyperwalletTestHelper.authenticationProvider)
         HyperwalletInsights.setup()
-        self.hyperwalletInsights = HyperwalletInsights.shared
+        hyperwalletInsights = HyperwalletInsights.shared
+        insightsMock = InsightsMock()
         hyperwalletInsights?.insights = insightsMock
+    }
+
+    override func tearDown() {
+        insightsMock = nil
+        hyperwalletInsights?.insights = nil
+        hyperwalletInsights = nil
+        AuthenticationTokenGeneratorMock.isInsightsConfigValid = true
+        super.tearDown()
     }
 
     func testTrackImpression() {
@@ -118,6 +130,25 @@ class HyperwalletInsightsTests: XCTestCase {
         HyperwalletInsights.shared.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
         sleep(2)
         XCTAssertNotNil(hyperwalletInsights?.insights, "Insights should be reloaded if nil")
+    }
+
+    func testTrackError_ConfigNotInitialized() {
+        AuthenticationTokenGeneratorMock.isInsightsConfigValid = false
+        HyperwalletUI.setup(HyperwalletTestHelper.authenticationProvider)
+        HyperwalletInsights.setup()
+
+        XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
+        XCTAssertNil(HyperwalletInsights.shared.insights, "Insights should be empty because of the wrong config")
+
+        let errorInfo = ErrorInfoBuilder(type: "errorInfo_type", message: "errorInfo_message")
+            .fieldName("errorInfo_fieldName")
+            .code("errorInfo_code")
+            .build()
+        HyperwalletInsights.shared.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
+
+        sleep(2)
+
+        XCTAssertNil(hyperwalletInsights?.insights, "Insights shouldn't be reloaded because of the wrong config")
     }
 }
 

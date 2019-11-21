@@ -4,8 +4,12 @@ import XCTest
 
 class HyperwalletTestHelper {
     static let applicationJson = "application/json"
-    static let authenticationToken = AuthenticationTokenGeneratorMock(hostName: "localhost").token
-    static let authenticationProvider = AuthenticationProviderMock(authorizationData: authenticationToken)
+    static var authenticationToken: String {
+        AuthenticationTokenGeneratorMock(hostName: "localhost").token
+    }
+    static var authenticationProvider: AuthenticationProviderMock {
+        AuthenticationProviderMock(authorizationData: authenticationToken)
+    }
     static let contentType = "Content-Type"
     static let graphQlURL = "https://localhost/graphql"
     static let restURL = "https://localhost/rest/v3/"
