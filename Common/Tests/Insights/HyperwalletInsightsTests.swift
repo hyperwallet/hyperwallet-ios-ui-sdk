@@ -47,7 +47,7 @@ class HyperwalletInsightsTests: XCTestCase {
         insightsMock = nil
         hyperwalletInsights?.insights = nil
         hyperwalletInsights = nil
-        AuthenticationTokenGeneratorMock.isInsightsConfigValid = true
+        AuthenticationTokenGeneratorMock.isConfigValid = true
         super.tearDown()
     }
 
@@ -133,7 +133,7 @@ class HyperwalletInsightsTests: XCTestCase {
     }
 
     func testTrackError_ConfigNotInitialized() {
-        AuthenticationTokenGeneratorMock.isInsightsConfigValid = false
+        AuthenticationTokenGeneratorMock.isConfigValid = false
         HyperwalletUI.setup(HyperwalletTestHelper.authenticationProvider)
         HyperwalletInsights.setup()
 
