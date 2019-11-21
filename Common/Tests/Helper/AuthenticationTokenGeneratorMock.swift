@@ -16,7 +16,7 @@ struct AuthenticationTokenGeneratorMock {
         self.graphQlUrl = "https://\(hostName)/graphql"
         self.minuteExpireIn = minuteExpireIn
         self.userToken = userToken
-        self.insightsUrl = "https://\(hostName)/track/events"
+        self.insightsUrl = "http://insights.url"
         self.environment = "DEV"
     }
 
@@ -27,7 +27,7 @@ struct AuthenticationTokenGeneratorMock {
         self.graphQlUrl = graphQlUrl
         self.minuteExpireIn = 10
         self.userToken = "YourUserToken"
-        self.insightsUrl = "https://localhost/track/events"
+        self.insightsUrl = "http://insights.url"
         self.environment = "DEV"
     }
 
