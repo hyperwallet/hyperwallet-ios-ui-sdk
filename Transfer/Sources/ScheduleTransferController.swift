@@ -28,7 +28,6 @@ final class ScheduleTransferController: UITableViewController, UITextFieldDelega
     private var processingView: ProcessingView?
     private var presenter: ScheduleTransferPresenter!
     private let footerIdentifier = "scheduleTransferFooterViewIdentifier"
-
     private let registeredCells: [(type: AnyClass, id: String)] = [
         (TransferDestinationCell.self, TransferDestinationCell.reuseIdentifier),
         (TransferForeignExchangeCell.self, TransferForeignExchangeCell.reuseIdentifier),

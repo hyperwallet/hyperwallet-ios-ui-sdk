@@ -27,7 +27,6 @@ import UIKit
 final class SelectTransferMethodTypeController: UITableViewController {
     // MARK: - Outlets
     private var countryCurrencyTableView: UITableView!
-
     private var spinnerView: SpinnerView?
     private var presenter: SelectTransferMethodTypePresenter!
     private var countryCurrencyView: CountryCurrencyTableView!

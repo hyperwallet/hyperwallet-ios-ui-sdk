@@ -22,6 +22,7 @@ import HyperwalletSDK
 public final class ErrorView {
     private let errorTypeApi = "API"
     private let errorTypeConnection = "CONNECTION"
+    private let errorTypeException = "EXCEPTION"
     private weak var viewController: UIViewController!
     private var error: HyperwalletErrorType
     private var pageName: String
@@ -85,6 +86,14 @@ public final class ErrorView {
     }
 
     private func unexpectedError() {
+       let errorInfo = ErrorInfoBuilder(type: self.errorTypeException,
+                                        message: error.getHyperwalletErrors()?.errorList?.first?.message ?? "")
+                .code(error.getHyperwalletErrors()?.errorList?.first?.code ?? "")
+                .build()
+        HyperwalletInsights.shared.trackError(pageName: pageName,
+                                              pageGroup: pageGroup,
+                                              errorInfo: errorInfo)
+
         HyperwalletUtilViews.showAlert(viewController,
                                        title: "unexpected_title".localized(),
                                        message: "unexpected_error_message".localized(),
@@ -94,7 +103,6 @@ public final class ErrorView {
     private func connectionError(_ handler: @escaping (UIAlertAction) -> Void) {
         let errorInfo = ErrorInfoBuilder(type: errorTypeConnection,
                                          message: error.getHyperwalletErrors()?.errorList?.first?.message ?? "")
-            .description(Thread.callStackSymbols.joined(separator: "\n"))
             .code(error.getHyperwalletErrors()?.errorList?.first?.code ?? "")
             .build()
         HyperwalletInsights.shared.trackError(pageName: pageName,

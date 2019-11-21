@@ -67,6 +67,13 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
         instance = HyperwalletInsights()
     }
 
+    /// Track Clicks
+    ///
+    /// - Parameters:
+    ///   - pageName: Name of the page
+    ///   - pageGroup: Page group name
+    ///   - link: The link clicked - example : select-transfer-method
+    ///   - params: A list of other information to be tracked - example : country,currency
     public func trackClick(pageName: String, pageGroup: String, link: String, params: [String: String]) {
         DispatchQueue.global().async { [weak self] in
             if let insights = self?.insights {
@@ -84,6 +91,12 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
         }
     }
 
+    /// Track Error
+    ///
+    /// - Parameters:
+    ///   - pageName: Name of the page - example : transfer-method:add:select-transfer-method
+    ///   - pageGroup: Page group name - example : transfer-method
+    ///   - ErrorInfo:  ErrorInfo have the information about the error
     public func trackError(pageName: String, pageGroup: String, errorInfo: ErrorInfo) {
         DispatchQueue.global().async { [weak self] in
             if let insights = self?.insights {
@@ -98,6 +111,12 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
         }
     }
 
+    /// Track Impressions
+    ///
+    /// - Parameters:
+    ///   - pageName: Name of the page - example : transfer-method:add:select-transfer-method
+    ///   - pageGroup: Page group name - example : transfer-method
+    ///   - params: A list of other information to be tracked - example : country,currency
     public func trackImpression(pageName: String, pageGroup: String, params: [String: String]) {
         DispatchQueue.global().async { [weak self] in
             if let insights = self?.insights {
@@ -151,10 +170,10 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
 
 /// A helper class to build the `ErrorInfo` instance.
 public class ErrorInfoBuilder {
+    private let description = Thread.callStackSymbols.joined(separator: "\n")
     private let message: String
     private let type: String
     private var code = ""
-    private var description = Thread.callStackSymbols.joined(separator: "\n")
     private var fieldName = ""
 
     /// Initializes ErrorInfoBuilder
@@ -185,15 +204,6 @@ public class ErrorInfoBuilder {
     /// - Returns: ErrorInfoBuilder
     public func code(_ code: String) -> ErrorInfoBuilder {
         self.code = code
-        return self
-    }
-
-    /// Sets description
-    ///
-    /// - Parameter description: The Source of error that occurred. This allows to understand what caused the error.
-    /// - Returns: ErrorInfoBuilder
-    public func description(_ description: String) -> ErrorInfoBuilder {
-        self.description = description
         return self
     }
 
