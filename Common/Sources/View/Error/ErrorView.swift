@@ -65,11 +65,11 @@ public final class ErrorView {
     ///
     /// - Parameter handler: to handle business error
     private func businessError(_ handler: ((UIAlertAction) -> Void)? = nil) {
-        if let errorMessage = error.getHyperwalletErrors()?.errorList?.first?.message {
+        if let error = error.getHyperwalletErrors()?.errorList?.first {
             let errorInfo = ErrorInfoBuilder(type: errorTypeApi,
-                                             message: errorMessage)
-                .fieldName(error.getHyperwalletErrors()?.errorList?.first?.fieldName ?? "")
-                .code(error.getHyperwalletErrors()?.errorList?.first?.code ?? "")
+                                             message: error.message)
+                .fieldName(error.fieldName ?? "")
+                .code(error.code)
                 .build()
             HyperwalletInsights.shared.trackError(pageName: pageName,
                                                   pageGroup: pageGroup,
