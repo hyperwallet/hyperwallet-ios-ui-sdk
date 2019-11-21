@@ -9,7 +9,7 @@ struct AuthenticationTokenGeneratorMock {
     private let insightsUrl: String?
     private let environment: String?
 
-    static var isInsightsConfigValid = true
+    static var isConfigValid = true
 
     init(hostName: String = "localhost",
          minuteExpireIn: Int = 10,
@@ -43,7 +43,7 @@ struct AuthenticationTokenGeneratorMock {
     }
 
     private var payload: String {
-        guard AuthenticationTokenGeneratorMock.isInsightsConfigValid else {
+        guard AuthenticationTokenGeneratorMock.isConfigValid else {
             return #"{"broken_payload":"true"}"#
         }
         let currentDate = Date()
