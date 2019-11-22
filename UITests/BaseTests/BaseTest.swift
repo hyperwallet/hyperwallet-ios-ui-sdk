@@ -10,15 +10,15 @@ class BaseTests: XCTestCase {
         mockServer = HyperwalletMockWebServer()
         mockServer.setUp()
 
-        if runWithInsights {
+//        if runWithInsights {
             mockServer.setupStub(url: "/rest/v3/users/usr-token/authentication-token",
                                  filename: "AuthenticationTokenResponse",
                                  method: HTTPMethod.post)
-        } else {
-            mockServer.setupStub(url: "/rest/v3/users/usr-token/authentication-token",
-                                 filename: "AuthenticationTokenResponseWithoutInsights",
-                                 method: HTTPMethod.post)
-        }
+//        } else {
+//            mockServer.setupStub(url: "/rest/v3/users/usr-token/authentication-token",
+//                                 filename: "AuthenticationTokenResponseWithoutInsights",
+//                                 method: HTTPMethod.post)
+//        }
 
         mockServer.setupStub(url: "/rest/v3/users/usr-token",
                              filename: "UserIndividualResponse",
