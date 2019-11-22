@@ -6,7 +6,6 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
     let payPalAccount = NSPredicate(format: "label CONTAINS[c] 'PayPal'")
 
     override func setUp() {
-        super.enableInsights()
         super.setUp()
 
         app = XCUIApplication()
@@ -26,10 +25,6 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
         addTransferMethod = AddTransferMethod(app: app)
-    }
-
-    override func tearDown() {
-        super.tearDown()
     }
 
     func testAddTransferMethod_displaysElementsOnTmcResponse() {
