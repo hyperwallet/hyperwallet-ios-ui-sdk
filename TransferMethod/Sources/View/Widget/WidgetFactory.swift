@@ -32,10 +32,10 @@ final class WidgetFactory {
     ]
 
     /// Creates a new instance of a `Widget` based on the `HyperwalletField.type`
-    static func newWidget(field: HyperwalletField) -> AbstractWidget {
+    static func newWidget(field: HyperwalletField, pageName: String, pageGroup: String) -> AbstractWidget {
         guard let widget = widgetDefinition[field.dataType ?? HyperwalletDataType.text.rawValue] else {
-            return TextWidget(field: field)
+            return TextWidget(field: field, pageName: pageName, pageGroup: pageGroup)
         }
-        return widget.init(field: field)
+        return widget.init(field: field, pageName: pageName, pageGroup: pageGroup)
     }
 }

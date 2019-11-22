@@ -44,7 +44,8 @@ public protocol HyperwalletInsightsProtocol: class {
     /// - Parameters:
     ///   - pageName: Name of the page - example : transfer-method:add:select-transfer-method
     ///   - pageGroup: Page group name - example : transfer-method
-    func trackError(pageName: String, pageGroup: String)
+    ///   - errorInfo: The ErrorInfo structure is used to describe an occurred error
+    func trackError(pageName: String, pageGroup: String, errorInfo: ErrorInfo)
 }
 /// Class responsible for initializing the Insights module.
 /// It contains methods to call Insights for various actions performed by the user
@@ -58,7 +59,7 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
     }
 
     private init() {
-        loadConfigurationAndInitializeInsights()
+        loadConfigurationAndInitializeInsights(completion: { _ in })
     }
 
     /// Set up HyperwalletInsights
@@ -74,12 +75,18 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
     ///   - link: The link clicked - example : select-transfer-method
     ///   - params: A list of other information to be tracked - example : country,currency
     public func trackClick(pageName: String, pageGroup: String, link: String, params: [String: String]) {
-        if let insights = insights {
-            insights.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
-        } else {
-            loadConfigurationAndInitializeInsights()
-            if let insights = insights {
+        DispatchQueue.global().async { [weak self] in
+            if let insights = self?.insights {
                 insights.trackClick(pageName: pageName, pageGroup: pageGroup, link: link, params: params)
+            } else {
+                self?.loadConfigurationAndInitializeInsights { isInsightsInitialized in
+                    if isInsightsInitialized {
+                        Insights.shared?.trackClick(pageName: pageName,
+                                                    pageGroup: pageGroup,
+                                                    link: link,
+                                                    params: params)
+                    }
+                }
             }
         }
     }
@@ -89,7 +96,19 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
     /// - Parameters:
     ///   - pageName: Name of the page - example : transfer-method:add:select-transfer-method
     ///   - pageGroup: Page group name - example : transfer-method
-    public func trackError(pageName: String, pageGroup: String) {
+    ///   - ErrorInfo:  ErrorInfo have the information about the error
+    public func trackError(pageName: String, pageGroup: String, errorInfo: ErrorInfo) {
+        DispatchQueue.global().async { [weak self] in
+            if let insights = self?.insights {
+                insights.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
+            } else {
+                self?.loadConfigurationAndInitializeInsights { isInsightsInitialized in
+                    if isInsightsInitialized {
+                        Insights.shared?.trackError(pageName: pageName, pageGroup: pageGroup, errorInfo: errorInfo)
+                    }
+                }
+            }
+        }
     }
 
     /// Track Impressions
@@ -99,27 +118,30 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
     ///   - pageGroup: Page group name - example : transfer-method
     ///   - params: A list of other information to be tracked - example : country,currency
     public func trackImpression(pageName: String, pageGroup: String, params: [String: String]) {
-        if let insights = insights {
-            insights.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
-        } else {
-            loadConfigurationAndInitializeInsights()
-            if let insights = insights {
+        DispatchQueue.global().async { [weak self] in
+            if let insights = self?.insights {
                 insights.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
+            } else {
+                self?.loadConfigurationAndInitializeInsights { isInsightsInitialized in
+                    if isInsightsInitialized {
+                        Insights.shared?.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
+                    }
+                }
             }
         }
     }
 
-    private func loadConfigurationAndInitializeInsights() {
+    private func loadConfigurationAndInitializeInsights(completion: @escaping(Bool) -> Void) {
         loadConfiguration { configuration in
             if let configuration = configuration {
                 self.initializeInsights(configuration: configuration)
+                completion(true)
+            } else {
+                completion(false)
             }
         }
     }
 
-    /// Fetch configuration
-    ///
-    /// - Parameter completion: boolean completion handler
     private func loadConfiguration(completion: @escaping(Configuration?) -> Void) {
         // Fetch configuration again
         Hyperwallet.shared.getConfiguration { configuration, _ in
@@ -133,7 +155,7 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
 
     /// Initialize the Insights module if the url and environment variables are available
     private func initializeInsights(configuration: Configuration) {
-        if let environment = configuration.environment,
+         if let environment = configuration.environment,
             let insightsUrl = configuration.insightsUrl,
             let sdkVersion = HyperwalletBundle.currentSDKAppVersion {
             Insights.setup(environment: environment,
@@ -143,5 +165,56 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
                            userToken: configuration.userToken)
             insights = Insights.shared
         }
+    }
+}
+
+/// A helper class to build the `ErrorInfo` instance.
+public class ErrorInfoBuilder {
+    private let description = Thread.callStackSymbols.joined(separator: "\n")
+    private let message: String
+    private let type: String
+    private var code = ""
+    private var fieldName = ""
+
+    /// Initializes ErrorInfoBuilder
+    ///
+    /// - Parameters:
+    ///   - type: The Type of error that occurred.
+    ///   - message: The Field Name is especially interesting when there is a validation error/issue in combination
+    ///     with error_type = FORM
+    public init(type: String, message: String) {
+        self.type = type
+        self.message = message
+    }
+
+    /// Sets FieldName
+    ///
+    /// - Parameter fieldName: The Field Name is especially interesting when there is a validation
+    ///     error/issue in combination with error_type = FORM or when an API error occurs in relation
+    ///     to a field, error_type = API
+    /// - Returns: ErrorInfoBuilder
+    public func fieldName(_ fieldName: String) -> ErrorInfoBuilder {
+        self.fieldName = fieldName
+        return self
+    }
+
+    /// Sets Code
+    ///
+    /// - Parameter code: The Error Code is the type of error that occurred
+    /// - Returns: ErrorInfoBuilder
+    public func code(_ code: String) -> ErrorInfoBuilder {
+        self.code = code
+        return self
+    }
+
+    /// Builds a new instance of the `ErrorInfo`.
+    ///
+    /// - Returns: a new instance of the `ErrorInfo`.
+    public func build() -> ErrorInfo {
+        return ErrorInfo(type: type,
+                         message: message,
+                         fieldName: fieldName,
+                         description: description,
+                         code: code)
     }
 }

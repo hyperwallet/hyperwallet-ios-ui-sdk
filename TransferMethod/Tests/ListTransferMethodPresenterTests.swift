@@ -8,7 +8,9 @@ import XCTest
 
 class ListTransferMethodPresenterTests: XCTestCase {
     private var presenter: ListTransferMethodPresenter!
-    private let mockView = MockListTransferMethodView()
+    private let mockView = ListTransferMethodViewMock()
+    private var hyperwalletInsightsMock = HyperwalletInsightsMock()
+
     private lazy var listTransferMethodPayload = HyperwalletTestHelper
         .getDataFromJson("ListTransferMethodSuccessResponse")
     private lazy var deactivateTransferMethodPayload = HyperwalletTestHelper
@@ -46,6 +48,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
             Hippolyte.shared.stop()
         }
         mockView.resetStates()
+        hyperwalletInsightsMock.resetStates()
     }
 
     func testListTransferMethod_success() {
@@ -244,7 +247,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
     }
 }
 
-class MockListTransferMethodView: ListTransferMethodView {
+class ListTransferMethodViewMock: ListTransferMethodView {
     var isHideLoadingPerformed = false
     var isShowLoadingPerformed = false
     var isShowTransferMethodsPerformed = false
@@ -296,7 +299,10 @@ class MockListTransferMethodView: ListTransferMethodView {
         expectation?.fulfill()
     }
 
-    func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
+    func showError(_ error: HyperwalletErrorType,
+                   pageName: String,
+                   pageGroup: String,
+                   _ retry: (() -> Void)?) {
         isShowErrorPerformed = true
         retry?()
         expectation?.fulfill()
