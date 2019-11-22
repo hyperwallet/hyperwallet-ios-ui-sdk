@@ -4,14 +4,21 @@ class BaseTests: XCTestCase {
     var app: XCUIApplication!
     var mockServer: HyperwalletMockWebServer!
     var spinner: XCUIElement!
+    var runWithInsights = false
 
     override func setUp() {
         mockServer = HyperwalletMockWebServer()
         mockServer.setUp()
 
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/authentication-token",
-                             filename: "AuthenticationTokenResponse",
-                             method: HTTPMethod.post)
+        if runWithInsights {
+            mockServer.setupStub(url: "/rest/v3/users/usr-token/authentication-token",
+                                 filename: "AuthenticationTokenResponse",
+                                 method: HTTPMethod.post)
+        } else {
+            mockServer.setupStub(url: "/rest/v3/users/usr-token/authentication-token",
+                                 filename: "AuthenticationTokenResponseWithoutInsights",
+                                 method: HTTPMethod.post)
+        }
 
         mockServer.setupStub(url: "/rest/v3/users/usr-token",
                              filename: "UserIndividualResponse",
@@ -26,6 +33,11 @@ class BaseTests: XCTestCase {
     }
 
     override func tearDown() {
+        runWithInsights = false
         mockServer.tearDown()
+    }
+
+    func enableInsights() {
+        runWithInsights = true
     }
 }
