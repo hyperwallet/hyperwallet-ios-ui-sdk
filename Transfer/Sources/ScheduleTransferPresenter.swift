@@ -26,7 +26,10 @@ protocol ScheduleTransferView: class {
     func showProcessing()
     func dismissProcessing(handler: @escaping () -> Void)
     func showConfirmation(handler: @escaping (() -> Void))
-    func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?)
+    func showError(_ error: HyperwalletErrorType,
+                   pageName: String,
+                   pageGroup: String,
+                   _ retry: (() -> Void)?)
     func notifyTransferScheduled(_ hyperwalletStatusTransition: HyperwalletStatusTransition)
 }
 
@@ -36,6 +39,8 @@ final class ScheduleTransferPresenter {
     private var transferMethod: HyperwalletTransferMethod
     private var transfer: HyperwalletTransfer
     private var didFxQuoteChange: Bool
+    private let pageName = "transfer-funds:review-transfer"
+    private let pageGroup = "transfer-funds"
 
     /// Initialize ScheduleTransferPresenter
     init(
@@ -88,8 +93,11 @@ final class ScheduleTransferPresenter {
             switch result {
             case .failure(let error):
                 strongSelf.view.dismissProcessing(handler: {
-                    strongSelf.view.showError(error, {
-                        strongSelf.scheduleTransfer()})
+                    strongSelf.view.showError(error,
+                                              pageName: strongSelf.pageName,
+                                              pageGroup: strongSelf.pageGroup) {
+                        strongSelf.scheduleTransfer()
+                    }
                 })
 
             case .success(let resultStatusTransition):
