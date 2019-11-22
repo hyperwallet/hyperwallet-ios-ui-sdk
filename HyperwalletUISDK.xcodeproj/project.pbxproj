@@ -39,7 +39,7 @@
 		09E7165622A6983400FA9B96 /* ListReceiptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7165522A6983400FA9B96 /* ListReceiptTests.swift */; };
 		2BF9E5F822EF8BF200BB7DA5 /* TransferRepositoryFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF9E5F722EF8BF200BB7DA5 /* TransferRepositoryFactoryTests.swift */; };
 		2E3B047D237241B200BB1FFE /* InsightsTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3B047C237241B200BB1FFE /* InsightsTags.swift */; };
-		2E4B376523876D6F00414243 /* AuthenticationTokenResponseWithoutInsights.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E4B376423876D6F00414243 /* AuthenticationTokenResponseWithoutInsights.json */; };
+		2E4B376623876FC700414243 /* AuthenticationTokenResponseWithoutInsights.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E4B376423876D6F00414243 /* AuthenticationTokenResponseWithoutInsights.json */; };
 		2E4D6CAD23679AB400916CDD /* HyperwalletInsights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4D6CAC23679AB400916CDD /* HyperwalletInsights.swift */; };
 		2E6DBB8C2326F2C200863672 /* AvailableFundMultiCurrenciesFxChange.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E6DBB8A2326F0F800863672 /* AvailableFundMultiCurrenciesFxChange.json */; };
 		2E8AFE5823062316002B6D24 /* CreateTransferController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7C0222E86F580022E573 /* CreateTransferController.swift */; };
@@ -2680,6 +2680,7 @@
 				41D8363D22FB4814003544AB /* NoDestinationFee.json in Resources */,
 				B3DDC1012385D7E800E1A562 /* InsightsSuccessResponse.json in Resources */,
 				41D8363922FB4814003544AB /* TransferErrorQuoteExpired.json in Resources */,
+				2E4B376623876FC700414243 /* AuthenticationTokenResponseWithoutInsights.json in Resources */,
 				41D8363622FB4814003544AB /* ListOneBankAccountTransferUSD.json in Resources */,
 				98F3D759230C5C1C00A8195F /* CreateTransferWithZeroFee.json in Resources */,
 				41D8363822FB4814003544AB /* CreateTransferWithFX_JPY.json in Resources */,
@@ -2702,7 +2703,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E4B376523876D6F00414243 /* AuthenticationTokenResponseWithoutInsights.json in Resources */,
 				DB46798F2260380D00E1AF49 /* LaunchScreen.storyboard in Resources */,
 				DB46798C2260380D00E1AF49 /* Assets.xcassets in Resources */,
 				DB46798A2260380C00E1AF49 /* Main.storyboard in Resources */,
