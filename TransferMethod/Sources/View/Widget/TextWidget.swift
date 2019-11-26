@@ -88,7 +88,8 @@ class TextWidget: AbstractWidget {
         if !inputText.isEmpty {
             var patternIndex = pattern.startIndex
             var currentTextIndex = inputText.startIndex
-            let currentText = getTextForPatternCharacter(PatternCharacter.lettersAndNumbersMask.rawValue, inputText)
+            let currentText = getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue,
+                                                         inputText)
 
             if let currentText = currentText, !currentText.isEmpty {
                 while true {
@@ -98,12 +99,13 @@ class TextWidget: AbstractWidget {
                     let currentTextCharacter = String(currentText[currentTextRange])
 
                     switch currentPatternCharacter {
-                    case PatternCharacter.lettersAndNumbersMask.rawValue:
+                    case PatternCharacter.lettersAndNumbersPatternCharacter.rawValue:
                         finalText += currentTextCharacter
                         currentTextIndex = currentText.index(after: currentTextIndex)
                         patternIndex = pattern.index(after: patternIndex)
 
-                    case PatternCharacter.lettersOnlyMask.rawValue, PatternCharacter.numbersOnlyMask.rawValue:
+                    case PatternCharacter.lettersOnlyPatternCharacter.rawValue,
+                         PatternCharacter.numbersOnlyPatternCharacter.rawValue:
                         let filteredCharacter =
                             getTextForPatternCharacter(currentPatternCharacter, currentTextCharacter)
                         if let filteredCharacter = filteredCharacter, !filteredCharacter.isEmpty {
@@ -128,13 +130,13 @@ class TextWidget: AbstractWidget {
 
     private func getTextForPatternCharacter(_ patternCharacter: String, _ text: String) -> String? {
         switch patternCharacter {
-        case PatternCharacter.lettersAndNumbersMask.rawValue:
+        case PatternCharacter.lettersAndNumbersPatternCharacter.rawValue:
             return text.components(separatedBy: CharacterSet.alphanumerics.inverted).joined()
 
-        case PatternCharacter.lettersOnlyMask.rawValue:
+        case PatternCharacter.lettersOnlyPatternCharacter.rawValue:
             return text.components(separatedBy: CharacterSet.letters.inverted).joined()
 
-        case PatternCharacter.numbersOnlyMask.rawValue:
+        case PatternCharacter.numbersOnlyPatternCharacter.rawValue:
             return text.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
 
         default:
@@ -144,7 +146,7 @@ class TextWidget: AbstractWidget {
 }
 
 enum PatternCharacter: String {
-    case lettersAndNumbersMask = "*"
-    case lettersOnlyMask = "@"
-    case numbersOnlyMask = "#"
+    case lettersAndNumbersPatternCharacter = "*"
+    case lettersOnlyPatternCharacter = "@"
+    case numbersOnlyPatternCharacter = "#"
 }
