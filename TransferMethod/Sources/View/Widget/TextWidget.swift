@@ -69,6 +69,82 @@ class TextWidget: AbstractWidget {
         textField.textColor = field.isEditable ?? true ? Theme.Text.color : Theme.Text.disabledColor
         textField.font = Theme.Label.bodyFont
         textField.adjustsFontForContentSizeCategory = true
+        textField.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
         addArrangedSubview(textField)
     }
+
+    // WIP
+    @objc
+    private func textFieldDidChange() {
+        let pattern = "+# (@@@) ***-####" // will come from getFormatPattern method
+        let text = textField.text
+        textField.text = formatDisplayString(inputText: text!, pattern: pattern)
+    }
+
+    // WIP
+    private func formatDisplayString(inputText: String, pattern: String) -> String {
+        var finalText = ""
+
+        if !inputText.isEmpty {
+            var patternIndex = pattern.startIndex
+            var currentTextIndex = inputText.startIndex
+            let currentText = getTextForPatternCharacter(PatternCharacter.lettersAndNumbersMask.rawValue, inputText)
+
+            if let currentText = currentText, !currentText.isEmpty {
+                while true {
+                    let patternRange = patternIndex ..< pattern.index(after: patternIndex)
+                    let currentPatternCharacter = String(pattern[patternRange])
+                    let currentTextRange = currentTextIndex ..< currentText.index(after: currentTextIndex)
+                    let currentTextCharacter = String(currentText[currentTextRange])
+
+                    switch currentPatternCharacter {
+                    case PatternCharacter.lettersAndNumbersMask.rawValue:
+                        finalText += currentTextCharacter
+                        currentTextIndex = currentText.index(after: currentTextIndex)
+                        patternIndex = pattern.index(after: patternIndex)
+
+                    case PatternCharacter.lettersOnlyMask.rawValue, PatternCharacter.numbersOnlyMask.rawValue:
+                        let filteredCharacter =
+                            getTextForPatternCharacter(currentPatternCharacter, currentTextCharacter)
+                        if let filteredCharacter = filteredCharacter, !filteredCharacter.isEmpty {
+                            finalText += filteredCharacter
+                            patternIndex = pattern.index(after: patternIndex)
+                        }
+                        currentTextIndex = currentText.index(after: currentTextIndex)
+
+                    default:
+                        finalText += currentPatternCharacter
+                        patternIndex = pattern.index(after: patternIndex)
+                    }
+
+                    if patternIndex >= pattern.endIndex || currentTextIndex >= currentText.endIndex {
+                        break
+                    }
+                }
+            }
+        }
+        return finalText
+    }
+
+    private func getTextForPatternCharacter(_ patternCharacter: String, _ text: String) -> String? {
+        switch patternCharacter {
+        case PatternCharacter.lettersAndNumbersMask.rawValue:
+            return text.components(separatedBy: CharacterSet.alphanumerics.inverted).joined()
+
+        case PatternCharacter.lettersOnlyMask.rawValue:
+            return text.components(separatedBy: CharacterSet.letters.inverted).joined()
+
+        case PatternCharacter.numbersOnlyMask.rawValue:
+            return text.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+
+        default:
+            return nil
+        }
+    }
+}
+
+enum PatternCharacter: String {
+    case lettersAndNumbersMask = "*"
+    case lettersOnlyMask = "@"
+    case numbersOnlyMask = "#"
 }
