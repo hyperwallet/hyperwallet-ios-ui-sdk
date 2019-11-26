@@ -70,5 +70,5 @@ after_success:
     local-dir: docs
     target-branch: gh-pages
     on:
-        branch: development
+        all_branches: true
 
