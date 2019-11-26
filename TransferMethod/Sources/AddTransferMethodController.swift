@@ -38,11 +38,7 @@ final class AddTransferMethodController: UITableViewController {
     }()
 
     // MARK: - Properties -
-    private var country: String?
-    private var currency: String?
     private var forceUpdate: Bool?
-    private var profileType: String?
-    private var transferMethodTypeCode: String?
     private var processingView: ProcessingView?
     private var spinnerView: SpinnerView?
     private var presenter: AddTransferMethodPresenter!
@@ -82,30 +78,15 @@ final class AddTransferMethodController: UITableViewController {
         )
         return stackView
     }()
-    private func initializeData() {
-        if let country = initializationData?[InitializationDataField.country] as? String,
-            let currency = initializationData?[InitializationDataField.currency] as? String,
-            let forceUpdate = initializationData?[InitializationDataField.forceUpdateData] as? Bool,
-            let profileType = initializationData?[InitializationDataField.profileType] as? String,
-            let transferMethodTypeCode = initializationData?[InitializationDataField.transferMethodTypeCode]
-                as? String {
-            self.country = country
-            self.currency = currency
-            self.forceUpdate = forceUpdate
-            self.profileType = profileType
-            self.transferMethodTypeCode = transferMethodTypeCode
-        }
-    }
 
     override public func viewDidLoad() {
         super.viewDidLoad()
         largeTitle()
-        initializeData()
         initializePresenter()
         presenter.loadTransferMethodConfigurationFields(forceUpdate ?? false)
         setupLayout()
         hideKeyboardWhenTappedAround()
-        title = transferMethodTypeCode?.lowercased().localized()
+        title = presenter.transferMethodTypeCode.lowercased().localized()
         navigationItem.backBarButtonItem = UIBarButtonItem.back
     }
 
@@ -128,15 +109,14 @@ final class AddTransferMethodController: UITableViewController {
     }
 
     private func initializePresenter() {
-        if let country = country,
-            let currency = currency,
-            let profileType = profileType,
-            let transferMethodTypeCode = transferMethodTypeCode {
-            presenter = AddTransferMethodPresenter(self,
-                                                   country,
-                                                   currency,
-                                                   profileType,
-                                                   transferMethodTypeCode)
+        if let country = initializationData?[InitializationDataField.country] as? String,
+            let currency = initializationData?[InitializationDataField.currency] as? String,
+            let forceUpdate = initializationData?[InitializationDataField.forceUpdateData] as? Bool,
+            let profileType = initializationData?[InitializationDataField.profileType] as? String,
+            let transferMethodTypeCode = initializationData?[InitializationDataField.transferMethodTypeCode]
+                as? String {
+            self.forceUpdate = forceUpdate
+            presenter = AddTransferMethodPresenter(self, country, currency, profileType, transferMethodTypeCode)
         } else {
             fatalError("Required data not provided in initializePresenter")
         }
@@ -391,8 +371,8 @@ extension AddTransferMethodController: AddTransferMethodView {
             let newWidgets = fields.map(WidgetFactory.newWidget)
             let section = AddTransferMethodSectionData(
                 fieldGroup: fieldGroup,
-                country: country,
-                currency: currency,
+                country: presenter.country,
+                currency: presenter.currency,
                 cells: newWidgets
             )
             presenter.sectionData.append(section)
