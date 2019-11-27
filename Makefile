@@ -1,7 +1,7 @@
 docs:
 	@jazzy \
         --min-acl public \
-		--podspec HyperwalletUISDK.podspec \
+				--podspec HyperwalletUISDK.podspec \
         --no-hide-documentation-coverage \
         --theme fullwidth \
         --output ./docs \
