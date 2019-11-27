@@ -5,9 +5,9 @@ git config --global user.email "travis-ci-hyperwallet@paypal.com"
 git config --global user.name "travis-ci-hyperwallet"
 
 # Publish docs
-mkdir gh-pages
-cp -r docs/* gh-pages
-cd gh-pages
+mkdir ../gh-pages
+cp -r docs/* ../gh-pages/
+cd ../gh-pages
 
 # Add branch
 git init
