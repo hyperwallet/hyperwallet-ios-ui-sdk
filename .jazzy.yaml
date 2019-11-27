@@ -1,0 +1,14 @@
+author: Hyperwallet Systems Inc
+clean: true
+author_url: https://www.hyperwallet.com/
+github_url: https://github.com/hyperwallet/hyperwallet-ios-ui-sdk
+copyright: Copyright (c) 2018-present, Hyperwallet Systems Inc. All rights reserved.
+module: HyperwalletUISDK
+module_version: 0.0.1
+hide_documentation_coverage: true
+podspec: HyperwalletUISDK.podspec
+readme: README.md
+skip_undocumented: true
+theme: fullwidth
+use_safe_filenames: true
+output: docs

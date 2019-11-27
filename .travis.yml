@@ -41,8 +41,6 @@ before_install:
   - swiftlint version
   # Installing Jazzy
   - gem install jazzy
-  # Making document for UI SDK
-  - make documentation
 script: |
   set -o pipefail
   set -e
@@ -60,14 +58,9 @@ script: |
   # Lint - Add `--strict` to fail for warning and violation
   swiftlint lint --quiet --reporter json
 after_success:
- if [ "$code_coverage" == "YES" ]; then
+  - if [ "$code_coverage" == "YES" ]; then
       slather;
- fi
-deploy:
-    provider: pages
-    skip-cleanup: true
-    github-token: $CI_USER_TOKEN  # Set in the settings page of your repository, as a secure variable
-    local-dir: docs
-    target-branch: gh-pages
-    on:
-       all_branches: true
+  fi
+  - make docs
+  - if [ $TRAVIS_BRANCH = 'task/HW-57465-Github.io-Page-iOS-UI' ] && [ $TRAVIS_PULL_REQUEST = 'false' ]; then sh
+  ./scripts/travisPublishDocs.sh; fi

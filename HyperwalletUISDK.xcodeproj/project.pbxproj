@@ -158,6 +158,7 @@
 		A65312D222FC046200A83D30 /* ReceiptCoordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65312D122FC046200A83D30 /* ReceiptCoordinators.swift */; };
 		A65312D522FC055300A83D30 /* TransferMethodCoordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65312D422FC055300A83D30 /* TransferMethodCoordinators.swift */; };
 		A65312D822FC293C00A83D30 /* TransferCoordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65312D722FC293C00A83D30 /* TransferCoordinators.swift */; };
+		A66A5DF7238EA92700B55151 /* travisPublishDocs.sh in Resources */ = {isa = PBXBuildFile; fileRef = A66A5DF6238EA92700B55151 /* travisPublishDocs.sh */; };
 		C345BFC22289E6EC0049E67B /* XCUIElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C345BFC02289E6EC0049E67B /* XCUIElement.swift */; };
 		C358A9A52272644000E5AE47 /* AddTransferMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = C358A9A22272644000E5AE47 /* AddTransferMethod.swift */; };
 		C358A9A62272644000E5AE47 /* ListTransferMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = C358A9A32272644000E5AE47 /* ListTransferMethods.swift */; };
@@ -732,6 +733,7 @@
 		A65312D122FC046200A83D30 /* ReceiptCoordinators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiptCoordinators.swift; sourceTree = "<group>"; };
 		A65312D422FC055300A83D30 /* TransferMethodCoordinators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferMethodCoordinators.swift; sourceTree = "<group>"; };
 		A65312D722FC293C00A83D30 /* TransferCoordinators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferCoordinators.swift; sourceTree = "<group>"; };
+		A66A5DF6238EA92700B55151 /* travisPublishDocs.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = travisPublishDocs.sh; sourceTree = "<group>"; };
 		C345BFC02289E6EC0049E67B /* XCUIElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCUIElement.swift; sourceTree = "<group>"; };
 		C358A9A22272644000E5AE47 /* AddTransferMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethod.swift; sourceTree = "<group>"; };
 		C358A9A32272644000E5AE47 /* ListTransferMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTransferMethods.swift; sourceTree = "<group>"; };
@@ -1467,6 +1469,14 @@
 			path = Coordinators;
 			sourceTree = "<group>";
 		};
+		A66A5DF5238EA8B100B55151 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				A66A5DF6238EA92700B55151 /* travisPublishDocs.sh */,
+			);
+			path = Scripts;
+			sourceTree = "<group>";
+		};
 		C358A9A12272644000E5AE47 /* TransferMethod */ = {
 			isa = PBXGroup;
 			children = (
@@ -1866,6 +1876,7 @@
 		DBCA37EB225E892400CD4137 = {
 			isa = PBXGroup;
 			children = (
+				A66A5DF5238EA8B100B55151 /* Scripts */,
 				DB551F6222E1316D00DD65C2 /* Common */,
 				DB4679832260380C00E1AF49 /* Demo */,
 				DBD2667F2261A601002973C3 /* Deployment */,
@@ -2701,6 +2712,7 @@
 			files = (
 				DB46798F2260380D00E1AF49 /* LaunchScreen.storyboard in Resources */,
 				DB46798C2260380D00E1AF49 /* Assets.xcassets in Resources */,
+				A66A5DF7238EA92700B55151 /* travisPublishDocs.sh in Resources */,
 				DB46798A2260380C00E1AF49 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
