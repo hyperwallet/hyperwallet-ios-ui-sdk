@@ -69,47 +69,29 @@ class TextWidget: AbstractWidget {
         textField.textColor = field.isEditable ?? true ? Theme.Text.color : Theme.Text.disabledColor
         textField.font = Theme.Label.bodyFont
         textField.adjustsFontForContentSizeCategory = true
+        textField.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
         addArrangedSubview(textField)
     }
 
-    func textField(_ textField: UITextField,
-                   shouldChangeCharactersIn range: NSRange,
-                   replacementString string: String) -> Bool {
-        let pattern = "+# (@@@) ***-####" // temporarily for testing
-        if !string.isEmpty && !pattern.isEmpty {
-            var inputText = string
-            var currentText = textField.text ?? ""
-            let startIndex = currentText.index(currentText.startIndex, offsetBy: range.location)
-            if range.length > 0 {
-                let replaceRange = startIndex ..< currentText.index(startIndex, offsetBy: range.length)
-                currentText = currentText.replacingCharacters(in: replaceRange, with: string)
-                inputText = ""
-            }
-            textField.text = formatDisplayString(inputText: inputText,
-                                                 formattedText: currentText,
-                                                 startIndex: range.location,
-                                                 pattern: pattern)
-            return false
-        }
-        return true
+    // WIP
+    @objc
+    private func textFieldDidChange() {
+        let pattern = "+# (@@@) ***-####" // will come from getFormatPattern method
+        let text = textField.text
+        textField.text = formatDisplayString(inputText: text!, pattern: pattern)
     }
 
-    private func formatDisplayString(inputText: String,
-                                     formattedText: String,
-                                     startIndex: Int,
-                                     pattern: String) -> String {
-        var patternIndex = pattern.index(pattern.startIndex, offsetBy: startIndex)
-        var currentTextIndex = formattedText.index(formattedText.startIndex, offsetBy: startIndex)
-        let textBeforStartIndex = String(formattedText.prefix(upTo: currentTextIndex))
-        let textAfterStartIndex = String(formattedText.suffix(from: currentTextIndex))
-        var finalText = textBeforStartIndex
+    // WIP
+    private func formatDisplayString(inputText: String, pattern: String) -> String {
+        var finalText = ""
 
-        if startIndex < pattern.count {
-            let filteredTextAfterStartIndex =
-                getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue,
-                                           inputText + textAfterStartIndex)
-            if let filteredTextAfterStartIndex = filteredTextAfterStartIndex, !filteredTextAfterStartIndex.isEmpty {
-                let currentText = textBeforStartIndex + filteredTextAfterStartIndex
+        if !inputText.isEmpty {
+            var patternIndex = pattern.startIndex
+            var currentTextIndex = inputText.startIndex
+            let currentText = getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue,
+                                                         inputText)
+
+            if let currentText = currentText, !currentText.isEmpty {
                 while true {
                     let patternRange = patternIndex ..< pattern.index(after: patternIndex)
                     let currentPatternCharacter = String(pattern[patternRange])
