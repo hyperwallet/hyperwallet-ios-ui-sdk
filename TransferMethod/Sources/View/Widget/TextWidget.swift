@@ -73,15 +73,17 @@ class TextWidget: AbstractWidget {
         addArrangedSubview(textField)
     }
 
-    // WIP
     @objc
     private func textFieldDidChange() {
-        let pattern = "+# (@@@) ***-####" // will come from getFormatPattern method
-        let text = textField.text
-        textField.text = formatDisplayString(inputText: text!, pattern: pattern)
+        let text = value()
+        let pattern = getFormatPattern(inputText: text)
+        if let pattern = pattern {
+            textField.text = formatDisplayString(inputText: text, pattern: pattern)
+        } else {
+            textField.text = value()
+        }
     }
 
-    // WIP
     private func formatDisplayString(inputText: String, pattern: String) -> String {
         var finalText = ""
 
@@ -142,6 +144,18 @@ class TextWidget: AbstractWidget {
         default:
             return nil
         }
+    }
+
+    private func getFormatPattern(inputText: String) -> String? {
+        var maskPattern = field.mask?.defaultPattern
+        let conditionalPatterns = field.mask?.conditionalPatterns
+
+        if let matchingConditionalPattern = conditionalPatterns?.first(where: {
+            NSRegularExpression($0.regex).matches(inputText)
+        }) {
+            maskPattern = matchingConditionalPattern.pattern
+        }
+        return maskPattern
     }
 }
 
