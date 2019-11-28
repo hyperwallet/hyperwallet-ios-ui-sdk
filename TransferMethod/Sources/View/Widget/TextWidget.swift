@@ -159,7 +159,7 @@ class TextWidget: AbstractWidget {
     }
 }
 
-enum PatternCharacter: String {
+private enum PatternCharacter: String {
     case lettersAndNumbersPatternCharacter = "*"
     case lettersOnlyPatternCharacter = "@"
     case numbersOnlyPatternCharacter = "#"
