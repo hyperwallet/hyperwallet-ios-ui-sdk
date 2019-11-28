@@ -80,7 +80,7 @@ class TextWidget: AbstractWidget {
         if let pattern = pattern {
             textField.text = formatDisplayString(inputText: text, pattern: pattern)
         } else {
-            textField.text = value()
+            textField.text = text
         }
     }
 
