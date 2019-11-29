@@ -34,6 +34,10 @@ class TextWidget: AbstractWidget {
     }()
 
     override func value() -> String {
+        if field.mask?.scrubRegex != nil,
+            let text = textField.text {
+            return getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue, text) ?? ""
+        }
         return textField.text ?? ""
     }
 
