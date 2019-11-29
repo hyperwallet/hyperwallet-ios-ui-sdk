@@ -43,17 +43,17 @@ protocol AddTransferMethodView: class {
 
 final class AddTransferMethodPresenter {
     private unowned var view: AddTransferMethodView
-    private let country: String
-    private let currency: String
     private let errorTypeApi = "API"
     private let profileType: String
-    private let transferMethodTypeCode: String
     private let createdConfirmationPageName = "transfer-method:add:transfer-method-created"
     private let pageLink = "create-transfer-method"
     private let transferMethodCreatedGoal = "transfer-method-created"
     static let addTransferMethodPageGroup = "transfer-method"
     static let addTransferMethodPageName = "transfer-method:add:collect-transfer-method-information"
     private let hyperwalletInsights: HyperwalletInsightsProtocol
+    let country: String
+    let currency: String
+    let transferMethodTypeCode: String
     var sectionData = [AddTransferMethodSectionData]()
 
     private lazy var transferMethodConfigurationRepository = {
