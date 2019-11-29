@@ -1,6 +1,6 @@
 docs:
-		mkdir ../TempJson
-		mkdir TempJson
+		@mkdir ../TempJson
+		@mkdir TempJson
 		sourcekitten doc --module-name Transfer > TempJson/Transfer.json
 		sourcekitten doc --module-name UserRepository > TempJson/UserRepository.json
 		sourcekitten doc --module-name TransferRepository > TempJson/TransferRepository.json
