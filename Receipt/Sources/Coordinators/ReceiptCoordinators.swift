@@ -27,6 +27,8 @@ public class ListReceiptCoordinator: NSObject, HyperwalletCoordinator {
 
     override init() {
         controller = ListReceiptController()
+        super.init()
+        self.applyTheme()
     }
     public func applyTheme() {
         ThemeManager.applyReceiptTheme()
