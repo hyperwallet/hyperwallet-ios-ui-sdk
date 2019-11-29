@@ -35,6 +35,8 @@ public class CreateTransferCoordinator: NSObject, HyperwalletCoordinator  {
 
     override init() {
         controller = CreateTransferController()
+        super.init()
+        self.applyTheme()
     }
 
     public func start(initializationData: [InitializationDataField: Any]? = nil, parentController: UIViewController) {
