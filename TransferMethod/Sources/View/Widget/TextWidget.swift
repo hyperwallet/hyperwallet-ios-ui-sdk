@@ -88,7 +88,7 @@ class TextWidget: AbstractWidget {
         }
     }
 
-    private func formatDisplayString(inputText: String, pattern: String) -> String {
+    func formatDisplayString(inputText: String, pattern: String) -> String {
         var finalText = ""
 
         if !inputText.isEmpty {
@@ -131,7 +131,7 @@ class TextWidget: AbstractWidget {
                 }
             }
         }
-        return finalText
+        return removeLastCharacterIfPatternCharacter(formattedText: finalText)
     }
 
     private func getTextForPatternCharacter(_ patternCharacter: Character, _ text: String) -> String? {
@@ -162,6 +162,19 @@ class TextWidget: AbstractWidget {
             maskPattern = matchingConditionalPattern.pattern
         }
         return maskPattern
+    }
+
+    private func removeLastCharacterIfPatternCharacter(formattedText: String) -> String {
+        if let lastCharacter = formattedText.last {
+            let textCharacter = getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue,
+                                                           String(lastCharacter))
+            if let textCharacter = textCharacter, !textCharacter.isEmpty {
+                return formattedText
+            } else {
+                return String(formattedText.dropLast())
+            }
+        }
+        return formattedText
     }
 }
 
