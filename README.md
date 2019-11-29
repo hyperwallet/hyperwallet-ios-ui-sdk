@@ -317,33 +317,40 @@ On the Theme is possible to customize the properties:
 
 | Property | Default Value | Description |
 |:--------|:-------------|:-----------|
-| `Theme.themeColor` | `#00AFD0` | The primary color |
+| `Theme.themeColor` | `#00AFD0` | The main color |
 | `Theme.tintColor` | `UIColor.white` | The tint color |
-| `Theme.Label.color` | `#FFFFFF` | The primary color |
+| `Theme.Label.color` | `UIColor.black` | The label primary color |
 | `Theme.Label.errorColor` | `#FF3B30` | The color to highlight errors|
 | `Theme.Label.subTitleColor` | `#666666` | The subtitle color |
 | `Theme.Label.textColor` | `#8e8e93` | The text color |
 | `Theme.Label.titleFont` | `UIFont.preferredFont(forTextStyle: .headline)` | The title font style |
 | `Theme.Label.bodyFont` | `UIFont.preferredFont(forTextStyle: .body)` | The body font style |
-| `Theme.Label.bodyFontMedium` | `UIFont.systemFont(ofSize: bodyFont.pointSize, weight: .medium)` | The body font style with medium weight |
 | `Theme.Label.captionOne` | `UIFont.preferredFont(forTextStyle: .caption1)` | The caption one font style |
-| `Theme.Label.captionOneMedium` | `UIFont.systemFont(ofSize: captionOne.pointSize, weight: .medium)` | The caption one font style with medium weight |
 | `Theme.Label.footnoteFont` | `UIFont.preferredFont(forTextStyle: .footnote)` | The footnote font style |
 | `Theme.NavigationBar.barStyle` | `UIBarStyle.black` | The `UINavigationBar` bar style. |
-| `Theme.NavigationBar.isTranslucent` | `false`	| Sets the opaque background color. When the value is false the navigation bar will appear with a solid color. |
+| `Theme.NavigationBar.isTranslucent` | `false`	| Sets the opaque background color |
+| `Theme.NavigationBar.shadowColor` | `UIColor.clear`	| The color of NavigationBar shadow |
 | `Theme.Button.color` | `Theme.themeColor` | The button primary color |
+| `Theme.Button.font` | `Theme.Label.bodyFont` | The button font |
 | `Theme.Text.color` | `UIColor.black` | The text primary color |
+| `Theme.Text.disabledColor` | `Theme.Label.textColor` | The text disabled color |
 | `Theme.SearchBar.textFieldTintColor` | `Theme.tintColor` | The `UITextField` tint color |
 | `Theme.SearchBar.textFieldBackgroundColor` | `#28BBD7` | The `UITextField` background color |
-| `Theme.Cell.height` | `88` | The `UITableViewViewCell` height for the List transfer method items and the Select transfer method type items. |
-| `Theme.Cell.rowHeight` | `44`	| The common `UITableViewViewCell` height. |
+| `Theme.Cell.smallHeight` | `44` | The common `UITableViewViewCell` height. |
+| `Theme.Cell.mediumHeight` | `63`	| The `UITableViewViewCell` height for the receipt items |
+| `Theme.Cell.largeHeight` | `88` | The `UITableViewViewCell` height for the List transfer method items and the Select transfer method type items. |
 | `Theme.Cell.headerHeight` | `16` | The Select transfer method type items header height. |
-| `Theme.Cell.separatorInsetZero` | `UIEdgeInsets.zero` | The separator inset with edge insets struct whose top, left, bottom, and right fields are all set to 0. |
-| `Theme.Cell.separatorInset16` | `UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)` | The separator inset with the left edge set to 16. |
-| `Theme.Cell.separatorInset70` | `UIEdgeInsets(top: 0, left: 70, bottom: 0, right: 0)` | The separator inset with the left edge set to 70. |
-| `Theme.Icon.size` | `20` | The icon size. |
-| `Theme.Icon.color` | `Theme.themeColor` | The icon primary color |
-| `Theme.Icon.backgroundColor` | `#E5F7FA` | The icon background color |
+| `Theme.Cell.dividerHeight` | `8` | The divider UITableViewViewCell height. |
+| `Theme.Icon.size` | `20` | The icon font size |
+| `Theme.Icon.frame` | `CGSize(width: 40, height: 40)` | The icon frame |
+| `Theme.Icon.primaryColor` | `Theme.themeColor` | The icon primary color |
+| `Theme.Icon.primaryBackgroundColor` | `#E5F7FA` | The icon primary background color |
+| `Theme.Icon.creditColor` | `Amount.creditColor` | The icon credit color |
+| `Theme.Icon.creditBackgroundColor` | `#F1FAE8` | The icon credit background color |
+| `Theme.Icon.debitColor` | `Amount.debitColor` | The icon debit color |
+| `Theme.Icon.debitBackgroundColor` | `#FEF7F7` | The icon debit background color |
+| `Theme.Amount.creditColor` | `#5FBF00` | The credit color |
+| `Theme.Amount.debitColor` | `#DB4437` | The debit color |
 | `Theme.ViewController.backgroundColor` | `#EFEFF4` | The `UIViewController` background color. |
 | `Theme.SpinnerView.activityIndicatorViewStyle` | `UIActivityIndicatorView.Style.whiteLarge` | The `UIActivityIndicatorView` style. |
 | `Theme.SpinnerView.activityIndicatorViewColor` | `Theme.themeColor` | The `UIActivityIndicatorView` color. |
