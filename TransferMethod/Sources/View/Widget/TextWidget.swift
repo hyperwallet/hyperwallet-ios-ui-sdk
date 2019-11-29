@@ -164,6 +164,7 @@ class TextWidget: AbstractWidget {
         return maskPattern
     }
 
+    // not a good solution, will rewrite the logic for this scenario
     private func removeLastCharacterIfPatternCharacter(formattedText: String) -> String {
         if let lastCharacter = formattedText.last {
             let textCharacter = getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue,
