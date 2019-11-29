@@ -1,5 +1,5 @@
 language: swift
-osx_image: xcode10.3
+osx_image: xcode11.2.1
 os: osx
 branches:
  only:
@@ -16,9 +16,9 @@ env:
   - IOS_UI_TESTS_SCHEME="Demo"
 
   matrix:
-    - ios_version='12.1'  ios_device='iPhone XR' scheme="$IOS_FRAMEWORK_SCHEME" platform='iOS Simulator' configuration="Debug" code_coverage="YES" only_active_arch="YES"
-    - ios_version='12.1'  ios_device='iPhone XR' scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS Simulator' configuration="XCUITest" code_coverage="NO" only_active_arch="NO"
-    - ios_version='11.1'  ios_device='iPhone 7'  scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS Simulator' configuration="XCUITest" code_coverage="NO" only_active_arch="NO"
+    - ios_version='13.2.1'  ios_device='iPhone XR' scheme="$IOS_FRAMEWORK_SCHEME" platform='iOS Simulator' configuration="Debug" code_coverage="YES" only_active_arch="YES"
+    - ios_version='13.2.1'  ios_device='iPhone XR' scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS Simulator' configuration="XCUITest" code_coverage="NO" only_active_arch="NO"
+    - ios_version='12.1'  ios_device='iPhone 7'  scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS Simulator' configuration="XCUITest" code_coverage="NO" only_active_arch="NO"
 
 before_install:
   # Boot the emulator by ID
@@ -33,6 +33,10 @@ before_install:
   - gem i slather
   # Install build output formatting tool
   - gem install xcpretty
+  # Installing Jazzy for making documentation
+  - gem install jazzy
+  # Making document using Jazzy
+  - make docs
   # Force to update the Swiftlint to the last stable version
   - brew outdated swiftlint || brew upgrade swiftlint
   # Print the booted emulator
@@ -58,4 +62,5 @@ script: |
 after_success:
  if [ "$code_coverage" == "YES" ]; then
       slather;
+      sh ./Scripts/travisPublishDocs.sh;
  fi
