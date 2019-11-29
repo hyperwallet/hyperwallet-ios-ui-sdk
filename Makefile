@@ -1,6 +1,5 @@
 docs:
 	@jazzy \
-	--xcodebuild-arguments -scheme,HyperwalletUISDK \
         --min-acl public \
         --no-hide-documentation-coverage \
         --theme fullwidth \
