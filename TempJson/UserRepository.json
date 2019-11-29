@@ -1,0 +1,652 @@
+[{
+  "\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/Helper\/UserRepositoryCompletionHelper.swift" : {
+    "key.diagnostic_stage" : "source.diagnostic.stage.swift.parse",
+    "key.length" : 1709,
+    "key.offset" : 0,
+    "key.substructure" : [
+      {
+        "key.accessibility" : "source.lang.swift.accessibility.internal",
+        "key.annotated_decl" : "<Declaration>final class UserRepositoryCompletionHelper<\/Declaration>",
+        "key.attributes" : [
+          {
+            "key.attribute" : "source.decl.attribute.final",
+            "key.length" : 5,
+            "key.offset" : 1133
+          }
+        ],
+        "key.bodylength" : 530,
+        "key.bodyoffset" : 1177,
+        "key.filepath" : "\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/Helper\/UserRepositoryCompletionHelper.swift",
+        "key.fully_annotated_decl" : "<decl.class><syntaxtype.keyword>final<\/syntaxtype.keyword> <syntaxtype.keyword>class<\/syntaxtype.keyword> <decl.name>UserRepositoryCompletionHelper<\/decl.name><\/decl.class>",
+        "key.kind" : "source.lang.swift.decl.class",
+        "key.length" : 569,
+        "key.name" : "UserRepositoryCompletionHelper",
+        "key.namelength" : 30,
+        "key.nameoffset" : 1145,
+        "key.offset" : 1139,
+        "key.parsed_declaration" : "final class UserRepositoryCompletionHelper",
+        "key.parsed_scope.end" : 39,
+        "key.parsed_scope.start" : 21,
+        "key.runtime_name" : "_TtC4main30UserRepositoryCompletionHelper",
+        "key.substructure" : [
+          {
+            "key.accessibility" : "source.lang.swift.accessibility.internal",
+            "key.annotated_decl" : "<Declaration>@discardableResult static func performHandler&lt;T&gt;(_ error: <Type usr=\"s:14HyperwalletSDK0A9ErrorTypeO\">HyperwalletErrorType<\/Type>?, _ result: <Type usr=\"s:14UserRepository0aB16CompletionHelperC14performHandleryxSg14HyperwalletSDK0G9ErrorTypeOSg_AEys6ResultOyAeHGctlFZ1TL_xmfp\">T<\/Type>?, _ completionHandler: @escaping (<Type usr=\"s:s6ResultO\">Result<\/Type>&lt;<Type usr=\"s:14UserRepository0aB16CompletionHelperC14performHandleryxSg14HyperwalletSDK0G9ErrorTypeOSg_AEys6ResultOyAeHGctlFZ1TL_xmfp\">T<\/Type>?, <Type usr=\"s:14HyperwalletSDK0A9ErrorTypeO\">HyperwalletErrorType<\/Type>&gt;) -&gt; <Type usr=\"s:s4Voida\">Void<\/Type>) -&gt; <Type usr=\"s:14UserRepository0aB16CompletionHelperC14performHandleryxSg14HyperwalletSDK0G9ErrorTypeOSg_AEys6ResultOyAeHGctlFZ1TL_xmfp\">T<\/Type>?<\/Declaration>",
+            "key.attributes" : [
+              {
+                "key.attribute" : "source.decl.attribute.discardableResult",
+                "key.length" : 18,
+                "key.offset" : 1182
+              }
+            ],
+            "key.bodylength" : 317,
+            "key.bodyoffset" : 1388,
+            "key.filepath" : "\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/Helper\/UserRepositoryCompletionHelper.swift",
+            "key.fully_annotated_decl" : "<decl.function.method.static><syntaxtype.attribute.builtin><syntaxtype.attribute.name>@discardableResult<\/syntaxtype.attribute.name><\/syntaxtype.attribute.builtin> <syntaxtype.keyword>static<\/syntaxtype.keyword> <syntaxtype.keyword>func<\/syntaxtype.keyword> <decl.name>performHandler<\/decl.name>&lt;<decl.generic_type_param usr=\"s:14UserRepository0aB16CompletionHelperC14performHandleryxSg14HyperwalletSDK0G9ErrorTypeOSg_AEys6ResultOyAeHGctlFZ1TL_xmfp\"><decl.generic_type_param.name>T<\/decl.generic_type_param.name><\/decl.generic_type_param>&gt;(<decl.var.parameter><decl.var.parameter.argument_label>_<\/decl.var.parameter.argument_label> <decl.var.parameter.name>error<\/decl.var.parameter.name>: <decl.var.parameter.type><ref.enum usr=\"s:14HyperwalletSDK0A9ErrorTypeO\">HyperwalletErrorType<\/ref.enum>?<\/decl.var.parameter.type><\/decl.var.parameter>, <decl.var.parameter><decl.var.parameter.argument_label>_<\/decl.var.parameter.argument_label> <decl.var.parameter.name>result<\/decl.var.parameter.name>: <decl.var.parameter.type><ref.generic_type_param usr=\"s:14UserRepository0aB16CompletionHelperC14performHandleryxSg14HyperwalletSDK0G9ErrorTypeOSg_AEys6ResultOyAeHGctlFZ1TL_xmfp\">T<\/ref.generic_type_param>?<\/decl.var.parameter.type><\/decl.var.parameter>, <decl.var.parameter><decl.var.parameter.argument_label>_<\/decl.var.parameter.argument_label> <decl.var.parameter.name>completionHandler<\/decl.var.parameter.name>: <decl.var.parameter.type><syntaxtype.attribute.builtin><syntaxtype.attribute.name>@escaping<\/syntaxtype.attribute.name><\/syntaxtype.attribute.builtin> (<decl.var.parameter><decl.var.parameter.type><ref.enum usr=\"s:s6ResultO\">Result<\/ref.enum>&lt;<ref.generic_type_param usr=\"s:14UserRepository0aB16CompletionHelperC14performHandleryxSg14HyperwalletSDK0G9ErrorTypeOSg_AEys6ResultOyAeHGctlFZ1TL_xmfp\">T<\/ref.generic_type_param>?, <ref.enum usr=\"s:14HyperwalletSDK0A9ErrorTypeO\">HyperwalletErrorType<\/ref.enum>&gt;<\/decl.var.parameter.type><\/decl.var.parameter>) -&gt; <decl.function.returntype><ref.typealias usr=\"s:s4Voida\">Void<\/ref.typealias><\/decl.function.returntype><\/decl.var.parameter.type><\/decl.var.parameter>) -&gt; <decl.function.returntype><ref.generic_type_param usr=\"s:14UserRepository0aB16CompletionHelperC14performHandleryxSg14HyperwalletSDK0G9ErrorTypeOSg_AEys6ResultOyAeHGctlFZ1TL_xmfp\">T<\/ref.generic_type_param>?<\/decl.function.returntype><\/decl.function.method.static>",
+            "key.kind" : "source.lang.swift.decl.function.method.static",
+            "key.length" : 501,
+            "key.name" : "performHandler(_:_:_:)",
+            "key.namelength" : 163,
+            "key.nameoffset" : 1217,
+            "key.offset" : 1205,
+            "key.parsed_declaration" : "static func performHandler<T>(\n    _ error: HyperwalletErrorType?,\n    _ result: T?,\n    _ completionHandler: @escaping (Result<T?, HyperwalletErrorType>) -> Void) -> T?",
+            "key.parsed_scope.end" : 38,
+            "key.parsed_scope.start" : 23,
+            "key.substructure" : [
+              {
+                "key.annotated_decl" : "<Declaration>T<\/Declaration>",
+                "key.filepath" : "\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/Helper\/UserRepositoryCompletionHelper.swift",
+                "key.fully_annotated_decl" : "<decl.generic_type_param><decl.generic_type_param.name>T<\/decl.generic_type_param.name><\/decl.generic_type_param>",
+                "key.kind" : "source.lang.swift.decl.generic_type_param",
+                "key.length" : 1,
+                "key.name" : "T",
+                "key.namelength" : 1,
+                "key.nameoffset" : 1232,
+                "key.offset" : 1232,
+                "key.parsed_declaration" : "static func performHandler<T>(",
+                "key.parsed_scope.end" : 23,
+                "key.parsed_scope.start" : 23,
+                "key.typename" : "T.Type",
+                "key.typeusr" : "$sxmD",
+                "key.usr" : "s:14UserRepository0aB16CompletionHelperC14performHandleryxSg14HyperwalletSDK0G9ErrorTypeOSg_AEys6ResultOyAeHGctlFZ1TL_xmfp"
+              }
+            ],
+            "key.typename" : "<T> (UserRepositoryCompletionHelper.Type) -> (HyperwalletErrorType?, T?, @escaping (Result<T?, HyperwalletErrorType>) -> ()) -> T?",
+            "key.typeusr" : "$syxSg14HyperwalletSDK0A9ErrorTypeOSg_AAys6ResultOyAaDGctcluD",
+            "key.usr" : "s:14UserRepository0aB16CompletionHelperC14performHandleryxSg14HyperwalletSDK0G9ErrorTypeOSg_AEys6ResultOyAeHGctlFZ"
+          }
+        ],
+        "key.typename" : "UserRepositoryCompletionHelper.Type",
+        "key.typeusr" : "$s14UserRepository0aB16CompletionHelperCmD",
+        "key.usr" : "s:14UserRepository0aB16CompletionHelperC"
+      }
+    ]
+  }
+}, {
+  "\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepository.swift" : {
+    "key.diagnostic_stage" : "source.diagnostic.stage.swift.parse",
+    "key.length" : 2289,
+    "key.offset" : 0,
+    "key.substructure" : [
+      {
+        "key.accessibility" : "source.lang.swift.accessibility.public",
+        "key.annotated_decl" : "<Declaration>public protocol UserRepository<\/Declaration>",
+        "key.attributes" : [
+          {
+            "key.attribute" : "source.decl.attribute.public",
+            "key.length" : 6,
+            "key.offset" : 1162
+          }
+        ],
+        "key.bodylength" : 282,
+        "key.bodyoffset" : 1194,
+        "key.doc.column" : 17,
+        "key.doc.comment" : "User repository protocol",
+        "key.doc.declaration" : "public protocol UserRepository",
+        "key.doc.file" : "\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepository.swift",
+        "key.doc.full_as_xml" : "<Class file=\"\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepository.swift\" line=\"22\" column=\"17\"><Name>UserRepository<\/Name><USR>s:14UserRepositoryAAP<\/USR><Declaration>public protocol UserRepository<\/Declaration><CommentParts><Abstract><Para>User repository protocol<\/Para><\/Abstract><\/CommentParts><\/Class>",
+        "key.doc.line" : 22,
+        "key.doc.name" : "UserRepository",
+        "key.doc.type" : "Class",
+        "key.doclength" : 29,
+        "key.docoffset" : 1133,
+        "key.filepath" : "\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepository.swift",
+        "key.fully_annotated_decl" : "<decl.protocol><syntaxtype.keyword>public<\/syntaxtype.keyword> <syntaxtype.keyword>protocol<\/syntaxtype.keyword> <decl.name>UserRepository<\/decl.name><\/decl.protocol>",
+        "key.kind" : "source.lang.swift.decl.protocol",
+        "key.length" : 308,
+        "key.name" : "UserRepository",
+        "key.namelength" : 14,
+        "key.nameoffset" : 1178,
+        "key.offset" : 1169,
+        "key.parsed_declaration" : "public protocol UserRepository",
+        "key.parsed_scope.end" : 31,
+        "key.parsed_scope.start" : 22,
+        "key.runtime_name" : "_TtP4main14UserRepository_",
+        "key.substructure" : [
+          {
+            "key.accessibility" : "source.lang.swift.accessibility.public",
+            "key.annotated_decl" : "<Declaration>func getUser(completion: @escaping (<Type usr=\"s:s6ResultO\">Result<\/Type>&lt;<Type usr=\"c:@M@HyperwalletSDK@objc(cs)HyperwalletUser\">HyperwalletUser<\/Type>?, <Type usr=\"s:14HyperwalletSDK0A9ErrorTypeO\">HyperwalletErrorType<\/Type>&gt;) -&gt; <Type usr=\"s:s4Voida\">Void<\/Type>)<\/Declaration>",
+            "key.doc.column" : 10,
+            "key.doc.comment" : "Gets the user\n\n- Parameter:\n- completion: the callback handler of responses from the Hyperwallet platform",
+            "key.doc.declaration" : "func getUser(completion: @escaping (Result<HyperwalletUser?, HyperwalletErrorType>) -> Void)",
+            "key.doc.discussion" : [
+              {
+                "List-Bullet" : ""
+              }
+            ],
+            "key.doc.file" : "\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepository.swift",
+            "key.doc.full_as_xml" : "<Function file=\"\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepository.swift\" line=\"27\" column=\"10\"><Name>getUser(completion:)<\/Name><USR>s:14UserRepositoryAAP03getA010completionyys6ResultOy14HyperwalletSDK0fA0CSgAG0F9ErrorTypeOGc_tF<\/USR><Declaration>func getUser(completion: @escaping (Result&lt;HyperwalletUser?, HyperwalletErrorType&gt;) -&gt; Void)<\/Declaration><CommentParts><Abstract><Para>Gets the user<\/Para><\/Abstract><Discussion><List-Bullet><Item><Para>Parameter:<\/Para><\/Item><Item><Para>completion: the callback handler of responses from the Hyperwallet platform<\/Para><\/Item><\/List-Bullet><\/Discussion><\/CommentParts><\/Function>",
+            "key.doc.line" : 27,
+            "key.doc.name" : "getUser(completion:)",
+            "key.doc.type" : "Function",
+            "key.doclength" : 133,
+            "key.docoffset" : 1199,
+            "key.filepath" : "\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepository.swift",
+            "key.fully_annotated_decl" : "<decl.function.method.instance><syntaxtype.keyword>func<\/syntaxtype.keyword> <decl.name>getUser<\/decl.name>(<decl.var.parameter><decl.var.parameter.argument_label>completion<\/decl.var.parameter.argument_label>: <decl.var.parameter.type><syntaxtype.attribute.builtin><syntaxtype.attribute.name>@escaping<\/syntaxtype.attribute.name><\/syntaxtype.attribute.builtin> (<decl.var.parameter><decl.var.parameter.type><ref.enum usr=\"s:s6ResultO\">Result<\/ref.enum>&lt;<ref.class usr=\"c:@M@HyperwalletSDK@objc(cs)HyperwalletUser\">HyperwalletUser<\/ref.class>?, <ref.enum usr=\"s:14HyperwalletSDK0A9ErrorTypeO\">HyperwalletErrorType<\/ref.enum>&gt;<\/decl.var.parameter.type><\/decl.var.parameter>) -&gt; <decl.function.returntype><ref.typealias usr=\"s:s4Voida\">Void<\/ref.typealias><\/decl.function.returntype><\/decl.var.parameter.type><\/decl.var.parameter>)<\/decl.function.method.instance>",
+            "key.kind" : "source.lang.swift.decl.function.method.instance",
+            "key.length" : 92,
+            "key.name" : "getUser(completion:)",
+            "key.namelength" : 87,
+            "key.nameoffset" : 1341,
+            "key.offset" : 1336,
+            "key.parsed_declaration" : "func getUser(completion: @escaping (Result<HyperwalletUser?, HyperwalletErrorType>) -> Void)",
+            "key.parsed_scope.end" : 27,
+            "key.parsed_scope.start" : 27,
+            "key.substructure" : [
+
+            ],
+            "key.typename" : "<Self where Self : UserRepository> (Self) -> (@escaping (Result<HyperwalletUser?, HyperwalletErrorType>) -> ()) -> ()",
+            "key.typeusr" : "$s10completionyys6ResultOy14HyperwalletSDK0C4UserCSgAD0C9ErrorTypeOGc_tcD",
+            "key.usr" : "s:14UserRepositoryAAP03getA010completionyys6ResultOy14HyperwalletSDK0fA0CSgAG0F9ErrorTypeOGc_tF"
+          },
+          {
+            "key.accessibility" : "source.lang.swift.accessibility.public",
+            "key.annotated_decl" : "<Declaration>func refreshUser()<\/Declaration>",
+            "key.doc.column" : 10,
+            "key.doc.comment" : "Refreshes user",
+            "key.doc.declaration" : "func refreshUser()",
+            "key.doc.file" : "\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepository.swift",
+            "key.doc.full_as_xml" : "<Function file=\"\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepository.swift\" line=\"30\" column=\"10\"><Name>refreshUser()<\/Name><USR>s:14UserRepositoryAAP07refreshA0yyF<\/USR><Declaration>func refreshUser()<\/Declaration><CommentParts><Abstract><Para>Refreshes user<\/Para><\/Abstract><\/CommentParts><\/Function>",
+            "key.doc.line" : 30,
+            "key.doc.name" : "refreshUser()",
+            "key.doc.type" : "Function",
+            "key.doclength" : 19,
+            "key.docoffset" : 1434,
+            "key.filepath" : "\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepository.swift",
+            "key.fully_annotated_decl" : "<decl.function.method.instance><syntaxtype.keyword>func<\/syntaxtype.keyword> <decl.name>refreshUser<\/decl.name>()<\/decl.function.method.instance>",
+            "key.kind" : "source.lang.swift.decl.function.method.instance",
+            "key.length" : 18,
+            "key.name" : "refreshUser()",
+            "key.namelength" : 13,
+            "key.nameoffset" : 1462,
+            "key.offset" : 1457,
+            "key.parsed_declaration" : "func refreshUser()",
+            "key.parsed_scope.end" : 30,
+            "key.parsed_scope.start" : 30,
+            "key.typename" : "<Self where Self : UserRepository> (Self) -> () -> ()",
+            "key.typeusr" : "$syycD",
+            "key.usr" : "s:14UserRepositoryAAP07refreshA0yyF"
+          }
+        ],
+        "key.typename" : "UserRepository.Protocol",
+        "key.typeusr" : "$s14UserRepositoryAA_pmD",
+        "key.usr" : "s:14UserRepositoryAAP"
+      },
+      {
+        "key.kind" : "source.lang.swift.syntaxtype.comment.mark",
+        "key.length" : 28,
+        "key.name" : "MARK: - RemoteUserRepository",
+        "key.namelength" : 0,
+        "key.nameoffset" : 0,
+        "key.offset" : 1482
+      },
+      {
+        "key.accessibility" : "source.lang.swift.accessibility.public",
+        "key.annotated_decl" : "<Declaration>public final class RemoteUserRepository : <Type usr=\"s:14UserRepositoryAAP\">UserRepository<\/Type><\/Declaration>",
+        "key.attributes" : [
+          {
+            "key.attribute" : "source.decl.attribute.final",
+            "key.length" : 5,
+            "key.offset" : 1518
+          },
+          {
+            "key.attribute" : "source.decl.attribute.public",
+            "key.length" : 6,
+            "key.offset" : 1511
+          }
+        ],
+        "key.bodylength" : 719,
+        "key.bodyoffset" : 1568,
+        "key.elements" : [
+          {
+            "key.kind" : "source.lang.swift.structure.elem.typeref",
+            "key.length" : 14,
+            "key.offset" : 1552
+          }
+        ],
+        "key.filepath" : "\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepository.swift",
+        "key.fully_annotated_decl" : "<decl.class><syntaxtype.keyword>public<\/syntaxtype.keyword> <syntaxtype.keyword>final<\/syntaxtype.keyword> <syntaxtype.keyword>class<\/syntaxtype.keyword> <decl.name>RemoteUserRepository<\/decl.name> : <ref.protocol usr=\"s:14UserRepositoryAAP\">UserRepository<\/ref.protocol><\/decl.class>",
+        "key.inheritedtypes" : [
+          {
+            "key.name" : "UserRepository"
+          }
+        ],
+        "key.kind" : "source.lang.swift.decl.class",
+        "key.length" : 764,
+        "key.name" : "RemoteUserRepository",
+        "key.namelength" : 20,
+        "key.nameoffset" : 1530,
+        "key.offset" : 1524,
+        "key.parsed_declaration" : "public final class RemoteUserRepository: UserRepository",
+        "key.parsed_scope.end" : 56,
+        "key.parsed_scope.start" : 34,
+        "key.runtime_name" : "_TtC4main20RemoteUserRepository",
+        "key.substructure" : [
+          {
+            "key.accessibility" : "source.lang.swift.accessibility.private",
+            "key.annotated_decl" : "<Declaration>private var user: <Type usr=\"c:@M@HyperwalletSDK@objc(cs)HyperwalletUser\">HyperwalletUser<\/Type>?<\/Declaration>",
+            "key.attributes" : [
+              {
+                "key.attribute" : "source.decl.attribute.private",
+                "key.length" : 7,
+                "key.offset" : 1573
+              }
+            ],
+            "key.filepath" : "\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepository.swift",
+            "key.fully_annotated_decl" : "<decl.var.instance><syntaxtype.keyword>private<\/syntaxtype.keyword> <syntaxtype.keyword>var<\/syntaxtype.keyword> <decl.name>user<\/decl.name>: <decl.var.type><ref.class usr=\"c:@M@HyperwalletSDK@objc(cs)HyperwalletUser\">HyperwalletUser<\/ref.class>?<\/decl.var.type><\/decl.var.instance>",
+            "key.kind" : "source.lang.swift.decl.var.instance",
+            "key.length" : 26,
+            "key.name" : "user",
+            "key.namelength" : 4,
+            "key.nameoffset" : 1585,
+            "key.offset" : 1581,
+            "key.parsed_declaration" : "private var user: HyperwalletUser?",
+            "key.parsed_scope.end" : 35,
+            "key.parsed_scope.start" : 35,
+            "key.setter_accessibility" : "source.lang.swift.accessibility.private",
+            "key.typename" : "HyperwalletUser?",
+            "key.typeusr" : "$s14HyperwalletSDK0A4UserCSgD",
+            "key.usr" : "s:14UserRepository06RemoteaB0C4user33_D8A9C5A7028AE1E62B0024546DAA0704LL14HyperwalletSDK0mA0CSgvp"
+          },
+          {
+            "key.accessibility" : "source.lang.swift.accessibility.public",
+            "key.annotated_decl" : "<Declaration>public func getUser(completion: @escaping (<Type usr=\"s:s6ResultO\">Result<\/Type>&lt;<Type usr=\"c:@M@HyperwalletSDK@objc(cs)HyperwalletUser\">HyperwalletUser<\/Type>?, <Type usr=\"s:14HyperwalletSDK0A9ErrorTypeO\">HyperwalletErrorType<\/Type>&gt;) -&gt; <Type usr=\"s:s4Voida\">Void<\/Type>)<\/Declaration>",
+            "key.attributes" : [
+              {
+                "key.attribute" : "source.decl.attribute.public",
+                "key.length" : 6,
+                "key.offset" : 1613
+              }
+            ],
+            "key.bodylength" : 186,
+            "key.bodyoffset" : 1714,
+            "key.doc.column" : 10,
+            "key.doc.declaration" : "func getUser(completion: @escaping (Result<HyperwalletUser?, HyperwalletErrorType>) -> Void)",
+            "key.doc.discussion" : [
+              {
+                "List-Bullet" : ""
+              },
+              {
+                "Note" : ""
+              }
+            ],
+            "key.doc.file" : "\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepository.swift",
+            "key.doc.full_as_xml" : "<Function file=\"\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepository.swift\" line=\"27\" column=\"10\"><Name>getUser(completion:)<\/Name><USR>s:14UserRepositoryAAP03getA010completionyys6ResultOy14HyperwalletSDK0fA0CSgAG0F9ErrorTypeOGc_tF<\/USR><Declaration>func getUser(completion: @escaping (Result&lt;HyperwalletUser?, HyperwalletErrorType&gt;) -&gt; Void)<\/Declaration><CommentParts><Abstract><Para>Gets the user<\/Para><\/Abstract><Discussion><List-Bullet><Item><Para>Parameter:<\/Para><\/Item><Item><Para>completion: the callback handler of responses from the Hyperwallet platform<\/Para><\/Item><\/List-Bullet><Note><Para>This documentation comment was inherited from <codeVoice>UserRepository<\/codeVoice>.<\/Para><\/Note><\/Discussion><\/CommentParts><\/Function>",
+            "key.doc.line" : 27,
+            "key.doc.name" : "getUser(completion:)",
+            "key.doc.type" : "Function",
+            "key.filepath" : "\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepository.swift",
+            "key.fully_annotated_decl" : "<decl.function.method.instance><syntaxtype.keyword>public<\/syntaxtype.keyword> <syntaxtype.keyword>func<\/syntaxtype.keyword> <decl.name>getUser<\/decl.name>(<decl.var.parameter><decl.var.parameter.argument_label>completion<\/decl.var.parameter.argument_label>: <decl.var.parameter.type><syntaxtype.attribute.builtin><syntaxtype.attribute.name>@escaping<\/syntaxtype.attribute.name><\/syntaxtype.attribute.builtin> (<decl.var.parameter><decl.var.parameter.type><ref.enum usr=\"s:s6ResultO\">Result<\/ref.enum>&lt;<ref.class usr=\"c:@M@HyperwalletSDK@objc(cs)HyperwalletUser\">HyperwalletUser<\/ref.class>?, <ref.enum usr=\"s:14HyperwalletSDK0A9ErrorTypeO\">HyperwalletErrorType<\/ref.enum>&gt;<\/decl.var.parameter.type><\/decl.var.parameter>) -&gt; <decl.function.returntype><ref.typealias usr=\"s:s4Voida\">Void<\/ref.typealias><\/decl.function.returntype><\/decl.var.parameter.type><\/decl.var.parameter>)<\/decl.function.method.instance>",
+            "key.kind" : "source.lang.swift.decl.function.method.instance",
+            "key.length" : 281,
+            "key.name" : "getUser(completion:)",
+            "key.namelength" : 87,
+            "key.nameoffset" : 1625,
+            "key.offset" : 1620,
+            "key.overrides" : [
+              {
+                "key.usr" : "s:14UserRepositoryAAP03getA010completionyys6ResultOy14HyperwalletSDK0fA0CSgAG0F9ErrorTypeOGc_tF"
+              }
+            ],
+            "key.parsed_declaration" : "public func getUser(completion: @escaping (Result<HyperwalletUser?, HyperwalletErrorType>) -> Void)",
+            "key.parsed_scope.end" : 44,
+            "key.parsed_scope.start" : 37,
+            "key.substructure" : [
+
+            ],
+            "key.typename" : "(RemoteUserRepository) -> (@escaping (Result<HyperwalletUser?, HyperwalletErrorType>) -> ()) -> ()",
+            "key.typeusr" : "$s10completionyys6ResultOy14HyperwalletSDK0C4UserCSgAD0C9ErrorTypeOGc_tcD",
+            "key.usr" : "s:14UserRepositoryAAP03getA010completionyys6ResultOy14HyperwalletSDK0fA0CSgAG0F9ErrorTypeOGc_tF"
+          },
+          {
+            "key.accessibility" : "source.lang.swift.accessibility.public",
+            "key.annotated_decl" : "<Declaration>public func refreshUser()<\/Declaration>",
+            "key.attributes" : [
+              {
+                "key.attribute" : "source.decl.attribute.public",
+                "key.length" : 6,
+                "key.offset" : 1907
+              }
+            ],
+            "key.bodylength" : 24,
+            "key.bodyoffset" : 1934,
+            "key.doc.column" : 10,
+            "key.doc.declaration" : "func refreshUser()",
+            "key.doc.discussion" : [
+              {
+                "Note" : ""
+              }
+            ],
+            "key.doc.file" : "\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepository.swift",
+            "key.doc.full_as_xml" : "<Function file=\"\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepository.swift\" line=\"30\" column=\"10\"><Name>refreshUser()<\/Name><USR>s:14UserRepositoryAAP07refreshA0yyF<\/USR><Declaration>func refreshUser()<\/Declaration><CommentParts><Abstract><Para>Refreshes user<\/Para><\/Abstract><Discussion><Note><Para>This documentation comment was inherited from <codeVoice>UserRepository<\/codeVoice>.<\/Para><\/Note><\/Discussion><\/CommentParts><\/Function>",
+            "key.doc.line" : 30,
+            "key.doc.name" : "refreshUser()",
+            "key.doc.type" : "Function",
+            "key.filepath" : "\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepository.swift",
+            "key.fully_annotated_decl" : "<decl.function.method.instance><syntaxtype.keyword>public<\/syntaxtype.keyword> <syntaxtype.keyword>func<\/syntaxtype.keyword> <decl.name>refreshUser<\/decl.name>()<\/decl.function.method.instance>",
+            "key.kind" : "source.lang.swift.decl.function.method.instance",
+            "key.length" : 45,
+            "key.name" : "refreshUser()",
+            "key.namelength" : 13,
+            "key.nameoffset" : 1919,
+            "key.offset" : 1914,
+            "key.overrides" : [
+              {
+                "key.usr" : "s:14UserRepositoryAAP07refreshA0yyF"
+              }
+            ],
+            "key.parsed_declaration" : "public func refreshUser()",
+            "key.parsed_scope.end" : 48,
+            "key.parsed_scope.start" : 46,
+            "key.typename" : "(RemoteUserRepository) -> () -> ()",
+            "key.typeusr" : "$syycD",
+            "key.usr" : "s:14UserRepositoryAAP07refreshA0yyF"
+          },
+          {
+            "key.accessibility" : "source.lang.swift.accessibility.private",
+            "key.annotated_decl" : "<Declaration>private func getUserHandler(_ completion: @escaping (<Type usr=\"s:s6ResultO\">Result<\/Type>&lt;<Type usr=\"c:@M@HyperwalletSDK@objc(cs)HyperwalletUser\">HyperwalletUser<\/Type>?, <Type usr=\"s:14HyperwalletSDK0A9ErrorTypeO\">HyperwalletErrorType<\/Type>&gt;) -&gt; <Type usr=\"s:s4Voida\">Void<\/Type>) -&gt; (<Type usr=\"c:@M@HyperwalletSDK@objc(cs)HyperwalletUser\">HyperwalletUser<\/Type>?, <Type usr=\"s:14HyperwalletSDK0A9ErrorTypeO\">HyperwalletErrorType<\/Type>?) -&gt; <Type usr=\"s:s4Voida\">Void<\/Type><\/Declaration>",
+            "key.attributes" : [
+              {
+                "key.attribute" : "source.decl.attribute.private",
+                "key.length" : 7,
+                "key.offset" : 1965
+              }
+            ],
+            "key.bodylength" : 147,
+            "key.bodyoffset" : 2138,
+            "key.filepath" : "\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepository.swift",
+            "key.fully_annotated_decl" : "<decl.function.method.instance><syntaxtype.keyword>private<\/syntaxtype.keyword> <syntaxtype.keyword>func<\/syntaxtype.keyword> <decl.name>getUserHandler<\/decl.name>(<decl.var.parameter><decl.var.parameter.argument_label>_<\/decl.var.parameter.argument_label> <decl.var.parameter.name>completion<\/decl.var.parameter.name>: <decl.var.parameter.type><syntaxtype.attribute.builtin><syntaxtype.attribute.name>@escaping<\/syntaxtype.attribute.name><\/syntaxtype.attribute.builtin> (<decl.var.parameter><decl.var.parameter.type><ref.enum usr=\"s:s6ResultO\">Result<\/ref.enum>&lt;<ref.class usr=\"c:@M@HyperwalletSDK@objc(cs)HyperwalletUser\">HyperwalletUser<\/ref.class>?, <ref.enum usr=\"s:14HyperwalletSDK0A9ErrorTypeO\">HyperwalletErrorType<\/ref.enum>&gt;<\/decl.var.parameter.type><\/decl.var.parameter>) -&gt; <decl.function.returntype><ref.typealias usr=\"s:s4Voida\">Void<\/ref.typealias><\/decl.function.returntype><\/decl.var.parameter.type><\/decl.var.parameter>) -&gt; <decl.function.returntype>(<decl.var.parameter><decl.var.parameter.type><ref.class usr=\"c:@M@HyperwalletSDK@objc(cs)HyperwalletUser\">HyperwalletUser<\/ref.class>?<\/decl.var.parameter.type><\/decl.var.parameter>, <decl.var.parameter><decl.var.parameter.type><ref.enum usr=\"s:14HyperwalletSDK0A9ErrorTypeO\">HyperwalletErrorType<\/ref.enum>?<\/decl.var.parameter.type><\/decl.var.parameter>) -&gt; <decl.function.returntype><ref.typealias usr=\"s:s4Voida\">Void<\/ref.typealias><\/decl.function.returntype><\/decl.function.returntype><\/decl.function.method.instance>",
+            "key.kind" : "source.lang.swift.decl.function.method.instance",
+            "key.length" : 313,
+            "key.name" : "getUserHandler(_:)",
+            "key.namelength" : 97,
+            "key.nameoffset" : 1978,
+            "key.offset" : 1973,
+            "key.parsed_declaration" : "private func getUserHandler( _ completion: @escaping (Result<HyperwalletUser?, HyperwalletErrorType>) -> Void)\n    -> (HyperwalletUser?, HyperwalletErrorType?) -> Void",
+            "key.parsed_scope.end" : 55,
+            "key.parsed_scope.start" : 50,
+            "key.substructure" : [
+
+            ],
+            "key.typename" : "(RemoteUserRepository) -> (@escaping (Result<HyperwalletUser?, HyperwalletErrorType>) -> ()) -> (HyperwalletUser?, HyperwalletErrorType?) -> ()",
+            "key.typeusr" : "$syy14HyperwalletSDK0A4UserCSg_AA0A9ErrorTypeOSgtcys6ResultOyAdFGccD",
+            "key.usr" : "s:14UserRepository06RemoteaB0C03getA7Handler33_D8A9C5A7028AE1E62B0024546DAA0704LLyy14HyperwalletSDK0nA0CSg_AF0N9ErrorTypeOSgtcys6ResultOyAiKGcF"
+          }
+        ],
+        "key.typename" : "RemoteUserRepository.Type",
+        "key.typeusr" : "$s14UserRepository06RemoteaB0CmD",
+        "key.usr" : "s:14UserRepository06RemoteaB0C"
+      }
+    ]
+  }
+}, {
+  "\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepositoryFactory.swift" : {
+    "key.diagnostic_stage" : "source.diagnostic.stage.swift.parse",
+    "key.length" : 2059,
+    "key.offset" : 0,
+    "key.substructure" : [
+      {
+        "key.accessibility" : "source.lang.swift.accessibility.public",
+        "key.annotated_decl" : "<Declaration>public final class UserRepositoryFactory<\/Declaration>",
+        "key.attributes" : [
+          {
+            "key.attribute" : "source.decl.attribute.final",
+            "key.length" : 5,
+            "key.offset" : 1201
+          },
+          {
+            "key.attribute" : "source.decl.attribute.public",
+            "key.length" : 6,
+            "key.offset" : 1194
+          }
+        ],
+        "key.bodylength" : 821,
+        "key.bodyoffset" : 1236,
+        "key.doc.column" : 20,
+        "key.doc.comment" : "Class contains methods to get an instance of user repository",
+        "key.doc.declaration" : "public final class UserRepositoryFactory",
+        "key.doc.file" : "\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepositoryFactory.swift",
+        "key.doc.full_as_xml" : "<Class file=\"\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepositoryFactory.swift\" line=\"22\" column=\"20\"><Name>UserRepositoryFactory<\/Name><USR>s:14UserRepository0aB7FactoryC<\/USR><Declaration>public final class UserRepositoryFactory<\/Declaration><CommentParts><Abstract><Para>Class contains methods to get an instance of user repository<\/Para><\/Abstract><\/CommentParts><\/Class>",
+        "key.doc.line" : 22,
+        "key.doc.name" : "UserRepositoryFactory",
+        "key.doc.type" : "Class",
+        "key.doclength" : 65,
+        "key.docoffset" : 1129,
+        "key.filepath" : "\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepositoryFactory.swift",
+        "key.fully_annotated_decl" : "<decl.class><syntaxtype.keyword>public<\/syntaxtype.keyword> <syntaxtype.keyword>final<\/syntaxtype.keyword> <syntaxtype.keyword>class<\/syntaxtype.keyword> <decl.name>UserRepositoryFactory<\/decl.name><\/decl.class>",
+        "key.kind" : "source.lang.swift.decl.class",
+        "key.length" : 851,
+        "key.name" : "UserRepositoryFactory",
+        "key.namelength" : 21,
+        "key.nameoffset" : 1213,
+        "key.offset" : 1207,
+        "key.parsed_declaration" : "public final class UserRepositoryFactory",
+        "key.parsed_scope.end" : 50,
+        "key.parsed_scope.start" : 22,
+        "key.runtime_name" : "_TtC4main21UserRepositoryFactory",
+        "key.substructure" : [
+          {
+            "key.accessibility" : "source.lang.swift.accessibility.private",
+            "key.annotated_decl" : "<Declaration>private static var instance: <Type usr=\"s:14UserRepository0aB7FactoryC\">UserRepositoryFactory<\/Type>?<\/Declaration>",
+            "key.attributes" : [
+              {
+                "key.attribute" : "source.decl.attribute.private",
+                "key.length" : 7,
+                "key.offset" : 1241
+              }
+            ],
+            "key.filepath" : "\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepositoryFactory.swift",
+            "key.fully_annotated_decl" : "<decl.var.static><syntaxtype.keyword>private<\/syntaxtype.keyword> <syntaxtype.keyword>static<\/syntaxtype.keyword> <syntaxtype.keyword>var<\/syntaxtype.keyword> <decl.name>instance<\/decl.name>: <decl.var.type><ref.class usr=\"s:14UserRepository0aB7FactoryC\">UserRepositoryFactory<\/ref.class>?<\/decl.var.type><\/decl.var.static>",
+            "key.kind" : "source.lang.swift.decl.var.static",
+            "key.length" : 43,
+            "key.name" : "instance",
+            "key.namelength" : 8,
+            "key.nameoffset" : 1260,
+            "key.offset" : 1249,
+            "key.parsed_declaration" : "private static var instance: UserRepositoryFactory?",
+            "key.parsed_scope.end" : 23,
+            "key.parsed_scope.start" : 23,
+            "key.setter_accessibility" : "source.lang.swift.accessibility.private",
+            "key.typename" : "UserRepositoryFactory?",
+            "key.typeusr" : "$s14UserRepository0aB7FactoryCSgD",
+            "key.usr" : "s:14UserRepository0aB7FactoryC8instance33_6FFA0A93E0658FE389CF5576CE1A12DBLLACSgvpZ"
+          },
+          {
+            "key.accessibility" : "source.lang.swift.accessibility.private",
+            "key.annotated_decl" : "<Declaration>private let remoteUserRepository: <Type usr=\"s:14UserRepositoryAAP\">UserRepository<\/Type><\/Declaration>",
+            "key.attributes" : [
+              {
+                "key.attribute" : "source.decl.attribute.private",
+                "key.length" : 7,
+                "key.offset" : 1297
+              }
+            ],
+            "key.filepath" : "\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepositoryFactory.swift",
+            "key.fully_annotated_decl" : "<decl.var.instance><syntaxtype.keyword>private<\/syntaxtype.keyword> <syntaxtype.keyword>let<\/syntaxtype.keyword> <decl.name>remoteUserRepository<\/decl.name>: <decl.var.type><ref.protocol usr=\"s:14UserRepositoryAAP\">UserRepository<\/ref.protocol><\/decl.var.type><\/decl.var.instance>",
+            "key.kind" : "source.lang.swift.decl.var.instance",
+            "key.length" : 40,
+            "key.name" : "remoteUserRepository",
+            "key.namelength" : 20,
+            "key.nameoffset" : 1309,
+            "key.offset" : 1305,
+            "key.parsed_declaration" : "private let remoteUserRepository: UserRepository",
+            "key.parsed_scope.end" : 24,
+            "key.parsed_scope.start" : 24,
+            "key.typename" : "UserRepository",
+            "key.typeusr" : "$s14UserRepositoryAA_pD",
+            "key.usr" : "s:14UserRepository0aB7FactoryC06remoteaB033_6FFA0A93E0658FE389CF5576CE1A12DBLLA2A_pvp"
+          },
+          {
+            "key.accessibility" : "source.lang.swift.accessibility.public",
+            "key.annotated_decl" : "<Declaration>public static var shared: <Type usr=\"s:14UserRepository0aB7FactoryC\">UserRepositoryFactory<\/Type> { get }<\/Declaration>",
+            "key.attributes" : [
+              {
+                "key.attribute" : "source.decl.attribute.public",
+                "key.length" : 6,
+                "key.offset" : 1435
+              }
+            ],
+            "key.bodylength" : 170,
+            "key.bodyoffset" : 1484,
+            "key.doc.column" : 23,
+            "key.doc.comment" : "Returns the previously initialized instance of the RepositoryFactory object",
+            "key.doc.declaration" : "public static var shared: UserRepositoryFactory { get }",
+            "key.doc.file" : "\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepositoryFactory.swift",
+            "key.doc.full_as_xml" : "<Other file=\"\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepositoryFactory.swift\" line=\"27\" column=\"23\"><Name>shared<\/Name><USR>s:14UserRepository0aB7FactoryC6sharedACvpZ<\/USR><Declaration>public static var shared: UserRepositoryFactory { get }<\/Declaration><CommentParts><Abstract><Para>Returns the previously initialized instance of the RepositoryFactory object<\/Para><\/Abstract><\/CommentParts><\/Other>",
+            "key.doc.line" : 27,
+            "key.doc.name" : "shared",
+            "key.doc.type" : "Other",
+            "key.doclength" : 80,
+            "key.docoffset" : 1351,
+            "key.filepath" : "\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepositoryFactory.swift",
+            "key.fully_annotated_decl" : "<decl.var.static><syntaxtype.keyword>public<\/syntaxtype.keyword> <syntaxtype.keyword>static<\/syntaxtype.keyword> <syntaxtype.keyword>var<\/syntaxtype.keyword> <decl.name>shared<\/decl.name>: <decl.var.type><ref.class usr=\"s:14UserRepository0aB7FactoryC\">UserRepositoryFactory<\/ref.class><\/decl.var.type> { <syntaxtype.keyword>get<\/syntaxtype.keyword> }<\/decl.var.static>",
+            "key.kind" : "source.lang.swift.decl.var.static",
+            "key.length" : 213,
+            "key.name" : "shared",
+            "key.namelength" : 6,
+            "key.nameoffset" : 1453,
+            "key.offset" : 1442,
+            "key.parsed_declaration" : "public static var shared: UserRepositoryFactory",
+            "key.parsed_scope.end" : 33,
+            "key.parsed_scope.start" : 27,
+            "key.typename" : "UserRepositoryFactory",
+            "key.typeusr" : "$s14UserRepository0aB7FactoryCD",
+            "key.usr" : "s:14UserRepository0aB7FactoryC6sharedACvpZ"
+          },
+          {
+            "key.accessibility" : "source.lang.swift.accessibility.public",
+            "key.annotated_decl" : "<Declaration>public static func clearInstance()<\/Declaration>",
+            "key.attributes" : [
+              {
+                "key.attribute" : "source.decl.attribute.public",
+                "key.length" : 6,
+                "key.offset" : 1722
+              }
+            ],
+            "key.bodylength" : 28,
+            "key.bodyoffset" : 1758,
+            "key.doc.column" : 24,
+            "key.doc.comment" : "Clears the UserRepositoryFactory singleton instance.",
+            "key.doc.declaration" : "public static func clearInstance()",
+            "key.doc.file" : "\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepositoryFactory.swift",
+            "key.doc.full_as_xml" : "<Function file=\"\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepositoryFactory.swift\" line=\"36\" column=\"24\"><Name>clearInstance()<\/Name><USR>s:14UserRepository0aB7FactoryC13clearInstanceyyFZ<\/USR><Declaration>public static func clearInstance()<\/Declaration><CommentParts><Abstract><Para>Clears the UserRepositoryFactory singleton instance.<\/Para><\/Abstract><\/CommentParts><\/Function>",
+            "key.doc.line" : 36,
+            "key.doc.name" : "clearInstance()",
+            "key.doc.type" : "Function",
+            "key.doclength" : 57,
+            "key.docoffset" : 1661,
+            "key.filepath" : "\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepositoryFactory.swift",
+            "key.fully_annotated_decl" : "<decl.function.method.static><syntaxtype.keyword>public<\/syntaxtype.keyword> <syntaxtype.keyword>static<\/syntaxtype.keyword> <syntaxtype.keyword>func<\/syntaxtype.keyword> <decl.name>clearInstance<\/decl.name>()<\/decl.function.method.static>",
+            "key.kind" : "source.lang.swift.decl.function.method.static",
+            "key.length" : 58,
+            "key.name" : "clearInstance()",
+            "key.namelength" : 15,
+            "key.nameoffset" : 1741,
+            "key.offset" : 1729,
+            "key.parsed_declaration" : "public static func clearInstance()",
+            "key.parsed_scope.end" : 38,
+            "key.parsed_scope.start" : 36,
+            "key.typename" : "(UserRepositoryFactory.Type) -> () -> ()",
+            "key.typeusr" : "$syycD",
+            "key.usr" : "s:14UserRepository0aB7FactoryC13clearInstanceyyFZ"
+          },
+          {
+            "key.accessibility" : "source.lang.swift.accessibility.private",
+            "key.annotated_decl" : "<Declaration>private init()<\/Declaration>",
+            "key.attributes" : [
+              {
+                "key.attribute" : "source.decl.attribute.private",
+                "key.length" : 7,
+                "key.offset" : 1793
+              }
+            ],
+            "key.bodylength" : 59,
+            "key.bodyoffset" : 1809,
+            "key.filepath" : "\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepositoryFactory.swift",
+            "key.fully_annotated_decl" : "<decl.function.constructor><syntaxtype.keyword>private<\/syntaxtype.keyword> <syntaxtype.keyword>init<\/syntaxtype.keyword>()<\/decl.function.constructor>",
+            "key.kind" : "source.lang.swift.decl.function.method.instance",
+            "key.length" : 68,
+            "key.name" : "init()",
+            "key.namelength" : 6,
+            "key.nameoffset" : 1801,
+            "key.offset" : 1801,
+            "key.parsed_declaration" : "private init()",
+            "key.parsed_scope.end" : 42,
+            "key.parsed_scope.start" : 40,
+            "key.substructure" : [
+
+            ],
+            "key.typename" : "(UserRepositoryFactory.Type) -> () -> UserRepositoryFactory",
+            "key.typeusr" : "$s14UserRepository0aB7FactoryCycD",
+            "key.usr" : "s:14UserRepository0aB7FactoryCACyc33_6FFA0A93E0658FE389CF5576CE1A12DBLlfc"
+          },
+          {
+            "key.accessibility" : "source.lang.swift.accessibility.public",
+            "key.annotated_decl" : "<Declaration>public func userRepository() -&gt; <Type usr=\"s:14UserRepositoryAAP\">UserRepository<\/Type><\/Declaration>",
+            "key.attributes" : [
+              {
+                "key.attribute" : "source.decl.attribute.public",
+                "key.length" : 6,
+                "key.offset" : 1966
+              }
+            ],
+            "key.bodylength" : 41,
+            "key.bodyoffset" : 2014,
+            "key.doc.column" : 17,
+            "key.doc.comment" : "Gets an instance of user repository.\n\n- Returns: The UserRepository",
+            "key.doc.declaration" : "public func userRepository() -> UserRepository",
+            "key.doc.file" : "\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepositoryFactory.swift",
+            "key.doc.full_as_xml" : "<Function file=\"\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepositoryFactory.swift\" line=\"47\" column=\"17\"><Name>userRepository()<\/Name><USR>s:14UserRepository0aB7FactoryC04userB0A2A_pyF<\/USR><Declaration>public func userRepository() -&gt; UserRepository<\/Declaration><CommentParts><Abstract><Para>Gets an instance of user repository.<\/Para><\/Abstract><ResultDiscussion><Para>The UserRepository<\/Para><\/ResultDiscussion><\/CommentParts><\/Function>",
+            "key.doc.line" : 47,
+            "key.doc.name" : "userRepository()",
+            "key.doc.result_discussion" : [
+              {
+                "Para" : "The UserRepository"
+              }
+            ],
+            "key.doc.type" : "Function",
+            "key.doclength" : 87,
+            "key.docoffset" : 1875,
+            "key.filepath" : "\/Users\/sena\/Desktop\/Projects\/Hyperwallet\/UISDK\/task:HW-57465-Github.io-Page-iOS-UI\/hyperwallet-ios-ui-sdk\/UserRepository\/Sources\/UserRepositoryFactory.swift",
+            "key.fully_annotated_decl" : "<decl.function.method.instance><syntaxtype.keyword>public<\/syntaxtype.keyword> <syntaxtype.keyword>func<\/syntaxtype.keyword> <decl.name>userRepository<\/decl.name>() -&gt; <decl.function.returntype><ref.protocol usr=\"s:14UserRepositoryAAP\">UserRepository<\/ref.protocol><\/decl.function.returntype><\/decl.function.method.instance>",
+            "key.kind" : "source.lang.swift.decl.function.method.instance",
+            "key.length" : 83,
+            "key.name" : "userRepository()",
+            "key.namelength" : 16,
+            "key.nameoffset" : 1978,
+            "key.offset" : 1973,
+            "key.parsed_declaration" : "public func userRepository() -> UserRepository",
+            "key.parsed_scope.end" : 49,
+            "key.parsed_scope.start" : 47,
+            "key.typename" : "(UserRepositoryFactory) -> () -> UserRepository",
+            "key.typeusr" : "$s14UserRepositoryAA_pycD",
+            "key.usr" : "s:14UserRepository0aB7FactoryC04userB0A2A_pyF"
+          }
+        ],
+        "key.typename" : "UserRepositoryFactory.Type",
+        "key.typeusr" : "$s14UserRepository0aB7FactoryCmD",
+        "key.usr" : "s:14UserRepository0aB7FactoryC"
+      }
+    ]
+  }
+}]
