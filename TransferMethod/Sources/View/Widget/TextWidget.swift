@@ -96,11 +96,11 @@ class TextWidget: AbstractWidget {
             if let currentText = currentText, !currentText.isEmpty {
                 while true {
                     let patternRange = patternIndex ..< pattern.index(after: patternIndex)
-                    let currentPatternCharacter = String(pattern[patternRange])
+                    let currentPatternCharacter = [Character](pattern[patternRange])
                     let currentTextRange = currentTextIndex ..< currentText.index(after: currentTextIndex)
                     let currentTextCharacter = String(currentText[currentTextRange])
 
-                    switch currentPatternCharacter {
+                    switch currentPatternCharacter.first {
                     case PatternCharacter.lettersAndNumbersPatternCharacter.rawValue:
                         finalText += currentTextCharacter
                         currentTextIndex = currentText.index(after: currentTextIndex)
@@ -109,7 +109,7 @@ class TextWidget: AbstractWidget {
                     case PatternCharacter.lettersOnlyPatternCharacter.rawValue,
                          PatternCharacter.numbersOnlyPatternCharacter.rawValue:
                         let filteredCharacter =
-                            getTextForPatternCharacter(currentPatternCharacter, currentTextCharacter)
+                            getTextForPatternCharacter(currentPatternCharacter.first!, currentTextCharacter)
                         if let filteredCharacter = filteredCharacter, !filteredCharacter.isEmpty {
                             finalText += filteredCharacter
                             patternIndex = pattern.index(after: patternIndex)
@@ -130,7 +130,7 @@ class TextWidget: AbstractWidget {
         return finalText
     }
 
-    private func getTextForPatternCharacter(_ patternCharacter: String, _ text: String) -> String? {
+    private func getTextForPatternCharacter(_ patternCharacter: Character, _ text: String) -> String? {
         switch patternCharacter {
         case PatternCharacter.lettersAndNumbersPatternCharacter.rawValue:
             return text.components(separatedBy: CharacterSet.alphanumerics.inverted).joined()
@@ -161,7 +161,7 @@ class TextWidget: AbstractWidget {
     }
 }
 
-private enum PatternCharacter: String {
+private enum PatternCharacter: Character {
     case lettersAndNumbersPatternCharacter = "*"
     case lettersOnlyPatternCharacter = "@"
     case numbersOnlyPatternCharacter = "#"
