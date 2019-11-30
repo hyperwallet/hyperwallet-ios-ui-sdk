@@ -58,7 +58,11 @@ class TextWidget: AbstractWidget {
         textField.placeholder = "\(field.placeholder ?? "")"
         textField.delegate = self
         textField.accessibilityIdentifier = field.name
-        textField.text = field.value
+        if let valueString = field.value {
+            textField.text = formatDisplayString(inputText: valueString)
+        } else {
+            textField.text = field.value
+        }
 
         if field.isEditable ?? true {
             textField.isUserInteractionEnabled = true
@@ -79,65 +83,64 @@ class TextWidget: AbstractWidget {
 
     @objc
     private func textFieldDidChange() {
-        let text = value()
-        let pattern = getFormatPattern(inputText: text)
-        if let pattern = pattern {
-            textField.text = formatDisplayString(inputText: text, pattern: pattern)
-        } else {
-            textField.text = text
-        }
+        textField.text = formatDisplayString(inputText: value())
     }
 
-    func formatDisplayString(inputText: String, pattern: String) -> String {
-        var finalText = ""
+    func formatDisplayString(inputText: String) -> String {
+        let pattern = getFormatPattern(inputText: inputText)
+        if let pattern = pattern {
+            var finalText = ""
 
-        if !inputText.isEmpty {
-            var patternIndex = pattern.startIndex
-            var currentTextIndex = inputText.startIndex
-            let currentText = getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue,
-                                                         inputText)
+            if !inputText.isEmpty {
+                var patternIndex = pattern.startIndex
+                var currentTextIndex = inputText.startIndex
+                let currentText = getTextForPatternCharacter(
+                    PatternCharacter.lettersAndNumbersPatternCharacter.rawValue,
+                    inputText)
 
-            if let currentText = currentText, !currentText.isEmpty {
-                var patternCharactersToBeWritten = ""
+                if let currentText = currentText, !currentText.isEmpty {
+                    var patternCharactersToBeWritten = ""
 
-                while true {
-                    let patternRange = patternIndex ..< pattern.index(after: patternIndex)
-                    let currentPatternCharacter = [Character](pattern[patternRange])
-                    let currentTextRange = currentTextIndex ..< currentText.index(after: currentTextIndex)
-                    let currentTextCharacter = String(currentText[currentTextRange])
+                    while true {
+                        let patternRange = patternIndex ..< pattern.index(after: patternIndex)
+                        let currentPatternCharacter = [Character](pattern[patternRange])
+                        let currentTextRange = currentTextIndex ..< currentText.index(after: currentTextIndex)
+                        let currentTextCharacter = String(currentText[currentTextRange])
 
-                    switch currentPatternCharacter.first {
-                    case PatternCharacter.lettersAndNumbersPatternCharacter.rawValue:
-                        finalText += patternCharactersToBeWritten
-                        patternCharactersToBeWritten = ""
-                        finalText += currentTextCharacter
-                        currentTextIndex = currentText.index(after: currentTextIndex)
-                        patternIndex = pattern.index(after: patternIndex)
-
-                    case PatternCharacter.lettersOnlyPatternCharacter.rawValue,
-                         PatternCharacter.numbersOnlyPatternCharacter.rawValue:
-                        let filteredCharacter =
-                            getTextForPatternCharacter(currentPatternCharacter.first!, currentTextCharacter)
-                        if let filteredCharacter = filteredCharacter, !filteredCharacter.isEmpty {
+                        switch currentPatternCharacter.first {
+                        case PatternCharacter.lettersAndNumbersPatternCharacter.rawValue:
                             finalText += patternCharactersToBeWritten
                             patternCharactersToBeWritten = ""
-                            finalText += filteredCharacter
+                            finalText += currentTextCharacter
+                            currentTextIndex = currentText.index(after: currentTextIndex)
+                            patternIndex = pattern.index(after: patternIndex)
+
+                        case PatternCharacter.lettersOnlyPatternCharacter.rawValue,
+                             PatternCharacter.numbersOnlyPatternCharacter.rawValue:
+                            let filteredCharacter =
+                                getTextForPatternCharacter(currentPatternCharacter.first!, currentTextCharacter)
+                            if let filteredCharacter = filteredCharacter, !filteredCharacter.isEmpty {
+                                finalText += patternCharactersToBeWritten
+                                patternCharactersToBeWritten = ""
+                                finalText += filteredCharacter
+                                patternIndex = pattern.index(after: patternIndex)
+                            }
+                            currentTextIndex = currentText.index(after: currentTextIndex)
+
+                        default:
+                            patternCharactersToBeWritten += currentPatternCharacter
                             patternIndex = pattern.index(after: patternIndex)
                         }
-                        currentTextIndex = currentText.index(after: currentTextIndex)
 
-                    default:
-                        patternCharactersToBeWritten += currentPatternCharacter
-                        patternIndex = pattern.index(after: patternIndex)
-                    }
-
-                    if patternIndex >= pattern.endIndex || currentTextIndex >= currentText.endIndex {
-                        break
+                        if patternIndex >= pattern.endIndex || currentTextIndex >= currentText.endIndex {
+                            break
+                        }
                     }
                 }
             }
+            return finalText
         }
-        return finalText
+        return inputText
     }
 
     private func getTextForPatternCharacter(_ patternCharacter: Character, _ text: String) -> String? {
