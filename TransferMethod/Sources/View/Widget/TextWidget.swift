@@ -98,6 +98,8 @@ class TextWidget: AbstractWidget {
                                                          inputText)
 
             if let currentText = currentText, !currentText.isEmpty {
+                var patternCharactersToBeWritten = ""
+
                 while true {
                     let patternRange = patternIndex ..< pattern.index(after: patternIndex)
                     let currentPatternCharacter = [Character](pattern[patternRange])
@@ -106,6 +108,8 @@ class TextWidget: AbstractWidget {
 
                     switch currentPatternCharacter.first {
                     case PatternCharacter.lettersAndNumbersPatternCharacter.rawValue:
+                        finalText += patternCharactersToBeWritten
+                        patternCharactersToBeWritten = ""
                         finalText += currentTextCharacter
                         currentTextIndex = currentText.index(after: currentTextIndex)
                         patternIndex = pattern.index(after: patternIndex)
@@ -115,13 +119,15 @@ class TextWidget: AbstractWidget {
                         let filteredCharacter =
                             getTextForPatternCharacter(currentPatternCharacter.first!, currentTextCharacter)
                         if let filteredCharacter = filteredCharacter, !filteredCharacter.isEmpty {
+                            finalText += patternCharactersToBeWritten
+                            patternCharactersToBeWritten = ""
                             finalText += filteredCharacter
                             patternIndex = pattern.index(after: patternIndex)
                         }
                         currentTextIndex = currentText.index(after: currentTextIndex)
 
                     default:
-                        finalText += currentPatternCharacter
+                        patternCharactersToBeWritten += currentPatternCharacter
                         patternIndex = pattern.index(after: patternIndex)
                     }
 
@@ -131,7 +137,7 @@ class TextWidget: AbstractWidget {
                 }
             }
         }
-        return removeLastCharacterIfPatternCharacter(formattedText: finalText)
+        return finalText
     }
 
     private func getTextForPatternCharacter(_ patternCharacter: Character, _ text: String) -> String? {
@@ -162,20 +168,6 @@ class TextWidget: AbstractWidget {
             maskPattern = matchingConditionalPattern.pattern
         }
         return maskPattern
-    }
-
-    // not a good solution, will rewrite the logic for this scenario
-    private func removeLastCharacterIfPatternCharacter(formattedText: String) -> String {
-        if let lastCharacter = formattedText.last {
-            let textCharacter = getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue,
-                                                           String(lastCharacter))
-            if let textCharacter = textCharacter, !textCharacter.isEmpty {
-                return formattedText
-            } else {
-                return String(formattedText.dropLast())
-            }
-        }
-        return formattedText
     }
 }
 
