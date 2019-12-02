@@ -27,3 +27,5 @@ docs:
 					--output ./docs \
 					--documentation=./*.md
 		@rm -rf ./build
+		@rm -rf TempJson
+		@rm -rf ../TempJson
