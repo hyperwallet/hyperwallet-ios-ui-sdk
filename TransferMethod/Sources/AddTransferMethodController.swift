@@ -54,12 +54,12 @@ final class AddTransferMethodController: UITableViewController {
         button.titleLabel?.adjustsFontForContentSizeCategory = true
         button.titleLabel?.font = Theme.Label.bodyFont
         button.setTitleColor(Theme.Button.color, for: UIControl.State.normal)
-        button.addTarget(self, action: #selector(onTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTap), for: .touchUpInside)
         return button
     }()
 
     @objc
-    private func onTapped() {
+    private func didTap() {
         presenter.createTransferMethod()
     }
 
@@ -228,7 +228,7 @@ extension AddTransferMethodController: AddTransferMethodView {
         // to be focused is visible. We need to scroll to the field in order to focus.
         if let section = getSectionContainingFocusedField() {
             let indexPath = getIndexPath(for: section)
-            if isCellVisibile(indexPath) {
+            if isCellVisible(indexPath) {
                 focusField(in: section)
             } else {
                 isCalledByScrollToRow = true
@@ -240,7 +240,7 @@ extension AddTransferMethodController: AddTransferMethodView {
     override public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         // update footer once scroll ends
         if let section = getSectionContainingFocusedField() {
-            if isCellVisibile(getIndexPath(for: section)) && isCalledByScrollToRow {
+            if isCellVisible(getIndexPath(for: section)) && isCalledByScrollToRow {
                 focusField(in: section)
                 isCalledByScrollToRow = false
             }
@@ -307,9 +307,15 @@ extension AddTransferMethodController: AddTransferMethodView {
         HyperwalletUtilViews.showAlert(self, title: title, message: message, actions: UIAlertAction.close(self))
     }
 
-    func showError(_ error: HyperwalletErrorType, _ handler: (() -> Void)?) {
-        let errorView = ErrorView(viewController: self, error: error)
-        errorView.show(handler)
+    func showError(_ error: HyperwalletErrorType,
+                   pageName: String,
+                   pageGroup: String,
+                   _ retry: (() -> Void)?) {
+        let errorView = ErrorView(viewController: self,
+                                  error: error,
+                                  pageName: pageName,
+                                  pageGroup: pageGroup)
+        errorView.show(retry)
     }
 
     func notifyTransferMethodAdded(_ transferMethod: HyperwalletTransferMethod) {
@@ -323,7 +329,7 @@ extension AddTransferMethodController: AddTransferMethodView {
 
     private func focusOnInvalidField(_ widget: AbstractWidget) {
         if let indexPath = getIndexPathFor(fieldToBeFocused: widget) {
-            if isCellVisibile(indexPath) {
+            if isCellVisible(indexPath) {
                 widget.focus()
             } else {
                 let sectionContainingInvalidWidget = presenter.sectionData[indexPath.section]
@@ -368,7 +374,10 @@ extension AddTransferMethodController: AddTransferMethodView {
                 else {
                     continue
             }
-            let newWidgets = fields.map(WidgetFactory.newWidget)
+            let newWidgets =
+                fields.map({WidgetFactory.newWidget(field: $0,
+                                                    pageName: AddTransferMethodPresenter.addTransferMethodPageName,
+                                                    pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup)})
             let section = AddTransferMethodSectionData(
                 fieldGroup: fieldGroup,
                 country: presenter.country,
@@ -403,7 +412,7 @@ extension AddTransferMethodController: AddTransferMethodView {
         presenter.sectionData.append(buttonSection)
     }
 
-    private func isCellVisibile(_ indexPath: IndexPath) -> Bool {
+    private func isCellVisible(_ indexPath: IndexPath) -> Bool {
         let cellRect = tableView.rectForRow(at: indexPath)
         return tableView.bounds.contains(cellRect)
     }
