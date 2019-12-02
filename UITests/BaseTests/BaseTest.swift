@@ -16,6 +16,10 @@ class BaseTests: XCTestCase {
         mockServer.setupStub(url: "/rest/v3/users/usr-token",
                              filename: "UserIndividualResponse",
                              method: HTTPMethod.get)
+
+        mockServer.setupStub(url: "/track/events",
+                             filename: "InsightsSuccessResponse",
+                             method: HTTPMethod.post)
         // speed up UI
         UIApplication.shared.keyWindow?.layer.speed = 100
         UIView.setAnimationsEnabled(false)

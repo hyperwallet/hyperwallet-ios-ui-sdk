@@ -52,7 +52,7 @@ UISearchResultsUpdating, UISearchControllerDelegate {
     /// Event handler to return the item selected
     public var selectedHandler: SelectedHandler?
 
-    /// MARK: - Private properties
+    // MARK: - Private properties
     private let searchController: UISearchController = {
         UISearchController(searchResultsController: nil)
     }()
