@@ -1,5 +1,5 @@
 docs:
-		@mkdir -p ../TempJson
+		@mkdir -p TempJson
 		sourcekitten doc --module-name Transfer > TempJson/Transfer.json
 		sourcekitten doc --module-name UserRepository > TempJson/UserRepository.json
 		sourcekitten doc --module-name TransferRepository > TempJson/TransferRepository.json
@@ -27,4 +27,4 @@ docs:
 					--output ./docs \
 					--documentation=./*.md
 		@rm -rf ./build
-		@rm -rf ../TempJson
+		@rm -rf TempJson
