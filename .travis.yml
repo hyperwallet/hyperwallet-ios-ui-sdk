@@ -16,9 +16,9 @@ env:
   - IOS_UI_TESTS_SCHEME="Demo"
 
   matrix:
-    - ios_version='12.1'  ios_device='iPhone XR' scheme="$IOS_FRAMEWORK_SCHEME" platform='iOS Simulator' configuration="Debug" code_coverage="YES" only_active_arch="YES"
-    - ios_version='12.1'  ios_device='iPhone XR' scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS Simulator' configuration="XCUITest" code_coverage="NO" only_active_arch="NO"
-    - ios_version='11.1'  ios_device='iPhone 7'  scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS Simulator' configuration="XCUITest" code_coverage="NO" only_active_arch="NO"
+    - ios_version='12.1'  ios_device='iPhone XR' scheme="$IOS_FRAMEWORK_SCHEME" platform='iOS Simulator' configuration="Debug" code_coverage="YES" publish_docs="YES" only_active_arch="YES"
+    - ios_version='12.1'  ios_device='iPhone XR' scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS Simulator' configuration="XCUITest" code_coverage="NO" publish_docs="NO" only_active_arch="NO"
+    - ios_version='11.1'  ios_device='iPhone 7'  scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS Simulator' configuration="XCUITest" code_coverage="NO" publish_docs="NO" only_active_arch="NO"
 
 before_install:
   # Boot the emulator by ID
@@ -62,8 +62,10 @@ script: |
 after_success:
   if [ "$code_coverage" == "YES" ]; then
       slather;
+  fi
+  if [ "$publish_docs" == "YES" ]; then
       make docs;
-        if [ $TRAVIS_BRANCH = 'task/HW-57465-Github.io-Page-iOS-UI' ] && [ $TRAVIS_PULL_REQUEST = 'false' ]; then
-            sh ./Scripts/travisPublishDocs.sh;
-        fi
+      if [ $TRAVIS_BRANCH = 'task/HW-57465-Github.io-Page-iOS-UI' ] && [ $TRAVIS_PULL_REQUEST = 'false' ]; then
+          sh ./Scripts/travisPublishDocs.sh;
+      fi
   fi
