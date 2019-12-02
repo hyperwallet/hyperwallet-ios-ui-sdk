@@ -13,7 +13,7 @@ class TextWidgetTests: XCTestCase {
     }
 
     func testInputs() {
-        let formattedText = textWidget.formatDisplayString(inputText: inputText ?? "", pattern: pattern ?? "")
+        let formattedText = textWidget.formatDisplayString(with: pattern ?? "", inputText: inputText ?? "")
         XCTAssertEqual(formattedText, self.expectedFormattedText)
     }
 

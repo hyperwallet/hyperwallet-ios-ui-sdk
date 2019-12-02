@@ -59,7 +59,7 @@ class TextWidget: AbstractWidget {
         textField.delegate = self
         textField.accessibilityIdentifier = field.name
         if let valueString = field.value {
-            textField.text = formatDisplayString(inputText: valueString)
+            textField.text = formatDisplayString(with: getFormatPattern(inputText: valueString), inputText: valueString)
         } else {
             textField.text = field.value
         }
@@ -83,11 +83,10 @@ class TextWidget: AbstractWidget {
 
     @objc
     private func textFieldDidChange() {
-        textField.text = formatDisplayString(inputText: value())
+        textField.text = formatDisplayString(with: getFormatPattern(inputText: value()), inputText: value())
     }
 
-    func formatDisplayString(inputText: String) -> String {
-        let pattern = getFormatPattern(inputText: inputText)
+    func formatDisplayString(with pattern: String?, inputText: String) -> String {
         if let pattern = pattern {
             var finalText = ""
 
