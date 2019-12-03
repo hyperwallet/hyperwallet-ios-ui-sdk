@@ -86,9 +86,12 @@ class TextWidget: AbstractWidget {
         textField.text = formatDisplayString(with: getFormatPattern(inputText: value()), inputText: value())
     }
 
+    // This method has become too long and needs to be broken down for length and complexity
+    // Making fixing unit test first priority, will refactor this method later
     func formatDisplayString(with pattern: String?, inputText: String) -> String {
         if let pattern = pattern {
             var finalText = ""
+            var isEscapedCharacter = false
 
             if !inputText.isEmpty {
                 var patternIndex = pattern.startIndex
@@ -105,6 +108,13 @@ class TextWidget: AbstractWidget {
                         let currentPatternCharacter = [Character](pattern[patternRange])
                         let currentTextRange = currentTextIndex ..< currentText.index(after: currentTextIndex)
                         let currentTextCharacter = String(currentText[currentTextRange])
+
+                        if isEscapedCharacter {
+                            isEscapedCharacter = false
+                            patternCharactersToBeWritten += currentPatternCharacter
+                            patternIndex = pattern.index(after: patternIndex)
+                            continue
+                        }
 
                         switch currentPatternCharacter.first {
                         case PatternCharacter.lettersAndNumbersPatternCharacter.rawValue:
@@ -127,11 +137,14 @@ class TextWidget: AbstractWidget {
                             currentTextIndex = currentText.index(after: currentTextIndex)
 
                         default:
-                            if String(currentPatternCharacter) == currentTextCharacter {
-                                finalText += currentTextCharacter
-                                currentTextIndex = currentText.index(after: currentTextIndex)
-                            } else {
-                                patternCharactersToBeWritten += currentPatternCharacter
+                            isEscapedCharacter = self.isEscapedCharacter(currentPatternCharacter.first!)
+                            if !isEscapedCharacter {
+                                if String(currentPatternCharacter) == currentTextCharacter {
+                                    finalText += currentTextCharacter
+                                    currentTextIndex = currentText.index(after: currentTextIndex)
+                                } else {
+                                    patternCharactersToBeWritten += currentPatternCharacter
+                                }
                             }
                             patternIndex = pattern.index(after: patternIndex)
                         }
@@ -175,6 +188,10 @@ class TextWidget: AbstractWidget {
             maskPattern = matchingConditionalPattern.pattern
         }
         return maskPattern
+    }
+
+    private func isEscapedCharacter(_ character: Character) -> Bool {
+        return character == "\\"
     }
 }
 
