@@ -87,7 +87,6 @@ class TextWidget: AbstractWidget {
     }
 
     // This method has become too long and needs to be broken down for length and complexity
-    // Making fixing unit test first priority, will refactor this method later
     func formatDisplayString(with pattern: String?, inputText: String) -> String {
         if let pattern = pattern {
             var finalText = ""
@@ -111,8 +110,14 @@ class TextWidget: AbstractWidget {
 
                         if isEscapedCharacter {
                             isEscapedCharacter = false
-                            patternCharactersToBeWritten += currentPatternCharacter
+                            finalText += currentPatternCharacter
                             patternIndex = pattern.index(after: patternIndex)
+                            if isEndOfText(currentPatternIndex: patternIndex,
+                                           currentTextIndex: currentTextIndex,
+                                           pattern: pattern,
+                                           currentText: currentText) {
+                                break
+                            }
                             continue
                         }
 
@@ -149,7 +154,10 @@ class TextWidget: AbstractWidget {
                             patternIndex = pattern.index(after: patternIndex)
                         }
 
-                        if patternIndex >= pattern.endIndex || currentTextIndex >= currentText.endIndex {
+                        if isEndOfText(currentPatternIndex: patternIndex,
+                                       currentTextIndex: currentTextIndex,
+                                       pattern: pattern,
+                                       currentText: currentText) {
                             break
                         }
                     }
@@ -166,10 +174,15 @@ class TextWidget: AbstractWidget {
             return text.components(separatedBy: CharacterSet.alphanumerics.inverted).joined()
 
         case PatternCharacter.lettersOnlyPatternCharacter.rawValue:
-            return text.components(separatedBy: CharacterSet.letters.inverted).joined()
+            return text
+                .components(separatedBy:
+                    CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ").inverted)
+                .joined()
 
         case PatternCharacter.numbersOnlyPatternCharacter.rawValue:
-            return text.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+            return text
+                .components(separatedBy: CharacterSet(charactersIn: "0123456789").inverted)
+                .joined()
 
         default:
             return nil
@@ -192,6 +205,13 @@ class TextWidget: AbstractWidget {
 
     private func isEscapedCharacter(_ character: Character) -> Bool {
         return character == "\\"
+    }
+
+    private func isEndOfText(currentPatternIndex: String.Index,
+                             currentTextIndex: String.Index,
+                             pattern: String,
+                             currentText: String) -> Bool {
+        return currentPatternIndex >= pattern.endIndex || currentTextIndex >= currentText.endIndex
     }
 }
 
