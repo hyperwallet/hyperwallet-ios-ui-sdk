@@ -1,0 +1,17 @@
+{
+    "dataType": "TEXT",
+    "isRequired": true,
+    "isEditable": true,
+    "name": "firstName",
+    "label": "First Name",
+    "maxLength": 9,
+    "minLength": 1,
+    "placeholder": "",
+    "value": "testnameislong",
+    "regularExpression": "^[\\sa-zA-Z0-9\\-.,'\\u00C0-\\u00FF\\u0100-\\u017F\\u0180-\\u024F]{1,50}$",
+    "validationMessage": {
+        "length": "",
+        "pattern": "is invalid length or format.",
+        "empty": "You must provide a value for this field"
+    }
+}

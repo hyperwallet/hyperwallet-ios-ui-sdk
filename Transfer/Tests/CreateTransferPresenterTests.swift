@@ -392,7 +392,10 @@ class MockCreateTransferView: CreateTransferView {
         loadCreateTransferExpectation?.fulfill()
     }
 
-    func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
+    func showError(_ error: HyperwalletErrorType,
+                   pageName: String,
+                   pageGroup: String,
+                   _ retry: (() -> Void)?) {
         isShowErrorPerformed = true
         retry!()
         showErrorExpectation?.fulfill()
