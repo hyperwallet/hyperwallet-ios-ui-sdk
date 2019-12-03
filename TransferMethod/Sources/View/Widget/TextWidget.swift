@@ -127,7 +127,12 @@ class TextWidget: AbstractWidget {
                             currentTextIndex = currentText.index(after: currentTextIndex)
 
                         default:
-                            patternCharactersToBeWritten += currentPatternCharacter
+                            if String(currentPatternCharacter) == currentTextCharacter {
+                                finalText += currentTextCharacter
+                                currentTextIndex = currentText.index(after: currentTextIndex)
+                            } else {
+                                patternCharactersToBeWritten += currentPatternCharacter
+                            }
                             patternIndex = pattern.index(after: patternIndex)
                         }
 

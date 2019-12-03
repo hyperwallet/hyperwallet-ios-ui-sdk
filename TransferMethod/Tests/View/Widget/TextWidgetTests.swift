@@ -22,16 +22,16 @@ class TextWidgetTests: XCTestCase {
         let testParameters = getTestParameters()
 
         for testParameter in testParameters {
-            addTest(inputText: testParameter[0],
-                    pattern: testParameter[1],
+            addTest(pattern: testParameter[0],
+                    inputText: testParameter[1],
                     expectedFormattedText: testParameter[2],
                     toTestSuite: testSuite)
         }
         return testSuite
     }
 
-    private static func addTest(inputText: String,
-                                pattern: String,
+    private static func addTest(pattern: String,
+                                inputText: String,
                                 expectedFormattedText: String,
                                 toTestSuite testSuite: XCTestSuite) {
         testInvocations.forEach { invocation in
@@ -44,22 +44,49 @@ class TextWidgetTests: XCTestCase {
     }
 
     private static func getTestParameters() -> [[String]] {
-        var testParameters = [[String]]()
-        testParameters.append(["1", "#", "1"])
-        testParameters.append(["11", "#", "1"])
-        testParameters.append(["a", "#", ""])
-        testParameters.append(["a1", "#", "1"])
-        testParameters.append(["", "#", ""])
-        testParameters.append(["11", "##", "11"])
-        testParameters.append(["1111", "##", "11"])
-        testParameters.append(["aa11", "##", "11"])
-        testParameters.append(["1a1a", "##", "11"])
-        testParameters.append(["", "##", ""])
-        testParameters.append(["11", "##-##", "11"])
-        testParameters.append(["1111", "##-##", "11-11"])
-        testParameters.append(["aa11aa11", "##-##", "11-11"])
-        testParameters.append(["11-11", "##-##", "11-11"])
-        testParameters.append(["aa-aa-1111", "##-##", "11-11"])
+        let testParameters = [
+            ["#", "1", "1"], ["#", "11", "1"], ["#", "a", ""], ["#", "a1", "1"], ["#", "", ""], ["##", "11", "11"],
+            ["##", "1111", "11"], ["##", "aa11", "11"], ["##", "1a1a", "11"], ["##", "", ""], ["##-##", "11", "11"],
+            ["##-##", "1111", "11-11"], ["##-##", "aa11aa11", "11-11"], ["##-##", "11-11", "11-11"],
+            ["##-##", "aa-aa-1111", "11-11"], ["A##B##", "11", "A11"], ["A##B##", "111", "A11B1"],
+            ["A##B##", "A11B11", "A11B11"], ["A##B##", "AAA11BBB11", "A11B11"], ["A##B##", "", ""],
+            // ["##\\###", "11", "11#"], ["##\\###", "1111", "11#11"], ["##\\###", "aa11aa11", "11#11"],
+            // ["##\\###", "11-11", "11#11"], ["##\\###", "aa-aa-1111", "11#11"],
+            ["@", "a", "a"], ["@", "aa", "a"],
+            ["@", "1", ""], ["@", "1a", "a"], ["@", "", ""], ["@@", "aa", "aa"], ["@@", "aaaa", "aa"],
+            ["@@", "11aa", "aa"], ["@@", "a1a1", "aa"], ["@@", "", ""], ["@@-@@", "aa", "aa"],
+            ["@@-@@", "aaaa", "aa-aa"], ["@@-@@", "11aa11aa", "aa-aa"], ["@@-@@", "aa-aa", "aa-aa"],
+            ["@@-@@", "11-11-aaaa", "aa-aa"], ["1@@2@@", "aa", "1aa"], ["1@@2@@", "aaa", "1aa2a"],
+            ["1@@2@@", "1aa2aa", "1aa2aa"], ["1@@2@@", "111aa222bb", "1aa2bb"], ["1@@2@@", "", ""],
+            // ["@@\\@@@", "aa", "aa@"], ["@@\\@@@", "aaaa", "aa@aa"], ["@@\\@@@", "11aa11aa", "aa@aa"],
+            // ["@@\\@@@", "aa-aa", "aa@aa"], ["@@\\@@@", "11-11-aaaa", "aa@aa"],
+            ["*", "1", "1"], ["*", "11", "1"],
+            ["*", "a", "a"], ["*", "a1", "a"], ["*", "", ""], ["**", "aa", "aa"], ["**", "aaaa", "aa"],
+            ["**", "11aa", "11"], ["**", "a1a1", "a1"], ["**", "", ""], ["**-**", "11", "11"],
+            ["**-**", "1111", "11-11"], ["**-**", "aa11aa11", "aa-11"], ["**-**", "11-11", "11-11"],
+            ["**-**", "aa-aa-1111", "aa-aa"], ["**-**", "11-", "11"], ["1**A**", "aa", "1aa"],
+            ["1**A**", "aaa", "1aaAa"],
+            ["1**A**", "1aa2aa", "1aaA2a"],
+            ["1**A**", "111aa222bb", "111Aaa"],
+            ["1**A**", "", ""],
+            // ["**\\***", "11", "11*"], ["**\\***", "1111", "11*11"],
+            // ["**\\***", "aa11aa11", "aa*11"], ["**\\***", "11-NOV", "11*-N"], ["**\\***", "aa-aa-1111", "aa*-a"],
+            ["#@*", "aaa", ""], ["#@*", "111", "1"], ["#@*", "1ab", "1ab"], ["#@*", "ba1", "1"],
+            ["#@*", "1ab1", "1ab"], ["#@*#@*", "aaaaaa", ""], ["#@*#@*", "111111", "1"],
+            ["#@*#@*", "1a11a1", "1a11a1"], ["#@*#@*", "a1aa1a", "1aa1a"],
+            ["#@*#@*", "-1a-", "1a"],
+            ["#@*-@#*", "aaaaaa", ""],
+            ["#@*-@#*", "111111", "1"], ["#@*-@#*", "1a11a1", "1a1-a1"], ["#@*-@#*", "-12ab-12ab", "1ab-a"],
+            ["#@*-@#*", "", ""], ["^#@*-@#*", "aaaaaa", ""], ["^#@*-@#*", "111111", "^1"],
+            ["^#@*-@#*", "1a11a1", "^1a1-a1"], ["^#@*-@#*", "-12ab-12ab", "^1ab-a"], ["^#@*-@#*", "", ""],
+            // ["\\@@#*\\#@#*\\*@#*", "aaaaaa", "@a"], ["\\@@#*\\#@#*\\*@#*", "111111", "@"],
+            // ["\\@@#*\\#@#*\\*@#*", "a1aa1a", "@a1a#a1a*"], ["\\@@#*\\#@#*\\*@#*", "@a1a#a1a*a1a", "@a1a#a1a*a1a"],
+            ["@#@ #@#", "V1B2N3", "V1B 2N3"], ["###", "A123", "123"],
+            ["#### #### #### ####", "4123567891234567", "4123 5678 9123 4567"],
+            ["#### ###### #####", "347356789134567", "3473 567891 34567"],
+            ["Hello: @@@@@", "Hello: abcde", "Hello: abcde"],
+            ["", "", ""]
+        ]
         return testParameters
     }
 }
