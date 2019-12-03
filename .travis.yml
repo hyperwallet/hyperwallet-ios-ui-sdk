@@ -2,11 +2,11 @@ language: swift
 osx_image: xcode10.3
 os: osx
 branches:
- only:
-  - /.*/
+  only:
+  - "/.*/"
 cache:
   directories:
-    - Carthage/Build/
+  - Carthage/Build/
 env:
   global:
   - LC_CTYPE=en_US.UTF-8
@@ -14,7 +14,6 @@ env:
   - PROJECT=HyperwalletUISDK.xcodeproj
   - IOS_FRAMEWORK_SCHEME="HyperwalletUISDK"
   - IOS_UI_TESTS_SCHEME="Demo"
-
   matrix:
     - ios_version='12.1'  ios_device='iPhone XR' scheme="$IOS_FRAMEWORK_SCHEME" platform='iOS Simulator' configuration="Debug" code_coverage="YES" publish_docs="YES" only_active_arch="YES"
     - ios_version='12.1'  ios_device='iPhone XR' scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS Simulator' configuration="XCUITest" code_coverage="NO" publish_docs="NO" only_active_arch="NO"

@@ -4,8 +4,12 @@ import XCTest
 
 class HyperwalletTestHelper {
     static let applicationJson = "application/json"
-    static let authenticationToken = AuthenticationTokenGeneratorMock(hostName: "localhost").token
-    static let authenticationProvider = AuthenticationProviderMock(authorizationData: authenticationToken)
+    static var authenticationToken: String {
+        return AuthenticationTokenGeneratorMock(hostName: "localhost").token
+    }
+    static var authenticationProvider: AuthenticationProviderMock {
+        return AuthenticationProviderMock(authorizationData: authenticationToken)
+    }
     static let contentType = "Content-Type"
     static let graphQlURL = "https://localhost/graphql"
     static let restURL = "https://localhost/rest/v3/"
@@ -73,7 +77,7 @@ class HyperwalletTestHelper {
         return setUpMockedResponse(payload: data, httpCode: 400)
     }
 
-    /// Builts the stub HTTP 500 - Unexpected Error
+    /// Builds the stub HTTP 500 - Unexpected Error
     ///
     /// - Parameter for: The response file name will be loaded by `getDataFromJson(responseFileName)`
     /// - Returns: the StubResponse

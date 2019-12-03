@@ -6,6 +6,10 @@ struct AuthenticationTokenGeneratorMock {
     private var restUrl: String
     private var graphQlUrl: String
     private var minuteExpireIn: Int
+    private let insightsUrl: String?
+    private let environment: String?
+
+    static var isConfigValid = true
 
     init(hostName: String = "localhost",
          minuteExpireIn: Int = 10,
@@ -14,6 +18,8 @@ struct AuthenticationTokenGeneratorMock {
         self.graphQlUrl = "https://\(hostName)/graphql"
         self.minuteExpireIn = minuteExpireIn
         self.userToken = userToken
+        self.insightsUrl = "http://insights.url"
+        self.environment = "DEV"
     }
 
     init(
@@ -23,6 +29,8 @@ struct AuthenticationTokenGeneratorMock {
         self.graphQlUrl = graphQlUrl
         self.minuteExpireIn = 10
         self.userToken = "YourUserToken"
+        self.insightsUrl = "http://insights.url"
+        self.environment = "DEV"
     }
 
     /// Returns the Authentication Token
@@ -35,6 +43,9 @@ struct AuthenticationTokenGeneratorMock {
     }
 
     private var payload: String {
+        guard AuthenticationTokenGeneratorMock.isConfigValid else {
+            return #"{"broken_payload":"true"}"#
+        }
         let currentDate = Date()
         let expireIn = buildFutureDate(baseDate: currentDate, minute: minuteExpireIn)
         return """
@@ -45,7 +56,9 @@ struct AuthenticationTokenGeneratorMock {
         "aud": "abc-00000-00000",
         "iss": "cbd-00000-00000",
         "rest-uri": "\(restUrl)",
-        "graphql-uri": "\(graphQlUrl)"
+        "graphql-uri": "\(graphQlUrl)",
+        "insights-uri": "\(insightsUrl!)",
+        "environment": "\(environment!)"
         }
         """
     }
