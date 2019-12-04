@@ -131,10 +131,10 @@ class TextWidget: AbstractWidget {
                         continue
                     }
 
-                    applyFormatForPatternCharacter(currentText: currentText,
+                    applyFormatForPatternCharacter(currentPatternCharacter: currentPatternCharacter,
+                                                   currentText: currentText,
                                                    currentTextCharacter: currentTextCharacter,
                                                    currentTextIndex: &currentTextIndex,
-                                                   currentPatternCharacter: currentPatternCharacter,
                                                    finalText: &finalText,
                                                    isEscapedCharacter: &isEscapedCharacter,
                                                    pattern: pattern,
@@ -152,10 +152,10 @@ class TextWidget: AbstractWidget {
     }
 
     // swiftlint:disable function_parameter_count
-    private func applyFormatForPatternCharacter(currentText: String,
+    private func applyFormatForPatternCharacter(currentPatternCharacter: [Character],
+                                                currentText: String,
                                                 currentTextCharacter: String,
                                                 currentTextIndex: inout String.Index,
-                                                currentPatternCharacter: [Character],
                                                 finalText: inout String,
                                                 isEscapedCharacter: inout Bool,
                                                 pattern: String,
