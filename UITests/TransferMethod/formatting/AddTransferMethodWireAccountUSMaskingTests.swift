@@ -36,6 +36,9 @@ class AddTransferMethodWireAccountUSMaskingTests: BaseTests {
         checkSelectFieldValueIsEqualTo("111-222-333", addTransferMethod.branchIdInput)
     }
 
+    /**
+     "defaultPattern": "###-###-###"
+     */
     func testAddTransferMethod_brandIdDefaultPatternByPaste() {
         mockServer.setupStub(url: "/graphql",
                              filename: "TransferMethodConfigurationWireAccountResponseWithMask",
@@ -49,6 +52,9 @@ class AddTransferMethodWireAccountUSMaskingTests: BaseTests {
         checkSelectFieldValueIsEqualTo("111-222-333", addTransferMethod.branchIdInput)
     }
 
+    /**
+      "defaultPattern": "@@@@@@**"
+     */
     func testAddTransferMethod_swiftNumberDefaultPattern() {
         mockServer.setupStub(url: "/graphql",
                              filename: "TransferMethodConfigurationWireAccountResponseWithMask",
@@ -67,8 +73,13 @@ class AddTransferMethodWireAccountUSMaskingTests: BaseTests {
 
         addTransferMethod.setBankId("abNANL22")
         checkSelectFieldValueIsEqualTo("abNANL22", addTransferMethod.bankIdInput)
+        addTransferMethod.setBankId("abnanL汉字")
+        checkSelectFieldValueIsEqualTo("abnanL汉字", addTransferMethod.bankIdInput)
     }
 
+    /**
+     "defaultPattern": "@@@@@@**"
+    */
     func testAddTransferMethod_swiftNumberInvalidPattern() {
         mockServer.setupStub(url: "/graphql",
                              filename: "TransferMethodConfigurationWireAccountResponseWithMask",
@@ -76,11 +87,11 @@ class AddTransferMethodWireAccountUSMaskingTests: BaseTests {
         openMenu()
         XCTAssert(app.navigationBars["Wire Account"].exists)
 
-        addTransferMethod.setBankId("A1B2C3D")
-        checkSelectFieldValueIsEqualTo("ABCD", addTransferMethod.bankIdInput)
+        addTransferMethod.setBankId("A1B2C3DFG12")
+        checkSelectFieldValueIsEqualTo("ABCDFG12", addTransferMethod.bankIdInput)
 
-        addTransferMethod.setBankId("a1b2c3d")
-        checkSelectFieldValueIsEqualTo("abcd", addTransferMethod.bankIdInput)
+        addTransferMethod.setBankId("a1b2c3dfg12")
+        checkSelectFieldValueIsEqualTo("abcdfg12", addTransferMethod.bankIdInput)
 
         addTransferMethod.setBankId("A1B2C3D4EF4%^5#")
         checkSelectFieldValueIsEqualTo("ABCDEF45", addTransferMethod.bankIdInput)
@@ -92,6 +103,9 @@ class AddTransferMethodWireAccountUSMaskingTests: BaseTests {
         checkSelectFieldValueIsEqualTo("ABNANL1", addTransferMethod.bankIdInput)
 
         addTransferMethod.setBankId("$#$%^&*")
+        checkSelectFieldValueIsEqualTo("", addTransferMethod.bankIdInput)
+
+        addTransferMethod.setBankId("字字字字")
         checkSelectFieldValueIsEqualTo("", addTransferMethod.bankIdInput)
     }
 
@@ -109,8 +123,15 @@ class AddTransferMethodWireAccountUSMaskingTests: BaseTests {
         checkSelectFieldValueIsEqualTo("AABNANLX", addTransferMethod.bankIdInput)
     }
 
+    /**
+     default pattern
+     ###-##\           -> expect 123-45
+     ###-##\\         -> expect 123-45   (because single has no meaning)
+     ###-##\\\\     -> 123-45\
+     ###-##\\\\9     -> 123-45\9
+     ###-##\\9       ->123-459
+     */
     /*
-     Implementing....in progress
     func testAddTransferMethod_escapeCharTest() {
         mockServer.setupStub(url: "/graphql",
                              filename: "TransferMethodConfigurationResponseWithEscapeMasks",
@@ -133,6 +154,9 @@ class AddTransferMethodWireAccountUSMaskingTests: BaseTests {
         checkSelectFieldValueIsEqualTo("123-459", addTransferMethod.postalCodeInput)
     } */
 
+    /**
+     default pattern "**@#**"
+     */
     func testAddTransferMethod_starForAllCharTest() {
         mockServer.setupStub(url: "/graphql",
                              filename: "TransferMethodConfigurationResponseWithStarMasks",
@@ -149,18 +173,17 @@ class AddTransferMethodWireAccountUSMaskingTests: BaseTests {
 
         addTransferMethod.setFirstName("汉字a2ab")
         checkSelectFieldValueIsEqualTo("汉字a2ab", addTransferMethod.firstNameInput)
-
-        // Existing issue right now it will show "汉字汉"
-
         addTransferMethod.setFirstName("汉字汉字")
         checkSelectFieldValueIsEqualTo("汉字", addTransferMethod.firstNameInput)
     }
 
+    /**
+     "defaultPattern": "##\\###\\@##-###"
+     */
     func testAddTransferMethod_specialCharsTest() {
         mockServer.setupStub(url: "/graphql",
-                            filename: "TransferMethodConfigurationResponseWithStarMasks",
-                            method: HTTPMethod.post)
-
+                             filename: "TransferMethodConfigurationResponseWithStarMasks",
+                             method: HTTPMethod.post)
         openMenu()
 
         addTransferMethod.setBankId("11223344")
@@ -168,26 +191,31 @@ class AddTransferMethodWireAccountUSMaskingTests: BaseTests {
         addTransferMethod.setBranchId("aaa111字字字")
         checkSelectFieldValueIsEqualTo("#aaa#111#字字字", addTransferMethod.branchIdInput)
     }
-
+    /**
+     "defaultPattern": "999999 ####"
+     */
     func testAddTransferMethod_prefixCharsTest() {
         mockServer.setupStub(url: "/graphql",
-                                   filename: "TransferMethodConfigurationResponseWithStarMasks",
-                                   method: HTTPMethod.post)
+                             filename: "TransferMethodConfigurationResponseWithStarMasks",
+                             method: HTTPMethod.post)
         openMenu()
         addTransferMethod.setStateProvince("1234")
         checkSelectFieldValueIsEqualTo("999999 1234", addTransferMethod.stateProvinceInput)
     }
 
+    /**
+     "defaultPattern": "999999 ####"
+     */
     func testAddTransferMethod_prefixCharsTestByPaste() {
-           mockServer.setupStub(url: "/graphql",
-                                      filename: "TransferMethodConfigurationResponseWithStarMasks",
-                                      method: HTTPMethod.post)
-           openMenu()
+        mockServer.setupStub(url: "/graphql",
+                             filename: "TransferMethodConfigurationResponseWithStarMasks",
+                             method: HTTPMethod.post)
+        openMenu()
 
-           addTransferMethod.stateProvinceInput.enterByPaste(
-                     text: "99991", field: addTransferMethod.stateProvinceInput, app: app)
-           checkSelectFieldValueIsEqualTo("999999 1", addTransferMethod.stateProvinceInput)
-       }
+        addTransferMethod.stateProvinceInput.enterByPaste(
+            text: "99991", field: addTransferMethod.stateProvinceInput, app: app)
+        checkSelectFieldValueIsEqualTo("999999 1", addTransferMethod.stateProvinceInput)
+    }
 
     private func openMenu() {
         app.tables.cells.staticTexts["Add Transfer Method"].tap()
