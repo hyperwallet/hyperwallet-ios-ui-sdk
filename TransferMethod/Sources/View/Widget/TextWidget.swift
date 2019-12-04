@@ -105,7 +105,7 @@ class TextWidget: AbstractWidget {
 
     func formatDisplayString(with pattern: String?, inputText: String) -> String {
         if let pattern = pattern {
-            let currentText = getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue,
+            let currentText = getTextForPatternCharacter(PatternCharacter.anyPatternCharacter.rawValue,
                                                          inputText)
             var currentTextIndex = inputText.startIndex
             var finalText = ""
@@ -162,7 +162,7 @@ class TextWidget: AbstractWidget {
                                                 patternIndex: inout String.Index,
                                                 patternCharactersToBeWritten: inout String) {
         switch currentPatternCharacter.first {
-        case PatternCharacter.lettersAndNumbersPatternCharacter.rawValue:
+        case PatternCharacter.anyPatternCharacter.rawValue:
             handleTextForLettersAndNumbers(currentText: currentText,
                                            currentTextCharacter: currentTextCharacter,
                                            currentTextIndex: &currentTextIndex,
@@ -215,8 +215,8 @@ class TextWidget: AbstractWidget {
 
     private func getTextForPatternCharacter(_ patternCharacter: Character, _ text: String) -> String? {
         switch patternCharacter {
-        case PatternCharacter.lettersAndNumbersPatternCharacter.rawValue:
-            return text.components(separatedBy: CharacterSet.alphanumerics.inverted).joined()
+        case PatternCharacter.anyPatternCharacter.rawValue:
+            return text
 
         case PatternCharacter.lettersOnlyPatternCharacter.rawValue:
             return text.components(separatedBy: CharacterSet(charactersIn: allowedLetters).inverted).joined()
@@ -238,7 +238,7 @@ class TextWidget: AbstractWidget {
     func getMaskPattern(inputText: String,
                         defaultPattern: String?,
                         conditionalPatterns: [HyperwalletSDK.HyperwalletConditionalPattern]?) -> String? {
-        let scrubbedText = getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue,
+        let scrubbedText = getTextForPatternCharacter(PatternCharacter.anyPatternCharacter.rawValue,
                                                       inputText)
         if let scrubbedText = scrubbedText,
            let matchingConditionalPattern = conditionalPatterns?.first(where: {
@@ -262,14 +262,14 @@ class TextWidget: AbstractWidget {
 
     private func getUnformattedText() -> String {
         if let text = textField.text {
-            return getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue, text) ?? ""
+            return getTextForPatternCharacter(PatternCharacter.anyPatternCharacter.rawValue, text) ?? ""
         }
         return ""
     }
 }
 
 private enum PatternCharacter: Character {
-    case lettersAndNumbersPatternCharacter = "*"
+    case anyPatternCharacter = "*"
     case lettersOnlyPatternCharacter = "@"
     case numbersOnlyPatternCharacter = "#"
 }
