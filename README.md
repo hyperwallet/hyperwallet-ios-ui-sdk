@@ -364,7 +364,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Avoid to display a black area during the view transaction in the UINavigationBar.
         window?.backgroundColor = Theme.ViewController.backgroundColor
 
-        ThemeManager.applyTheme()
+        ThemeManager.applyWhiteTheme()
         return true
     }
 }
