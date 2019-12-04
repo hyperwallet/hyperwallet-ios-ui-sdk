@@ -57,6 +57,8 @@ class TextWidgetTests: XCTestCase {
 
     // swiftlint:disable function_body_length
     private static func getTestParameters() -> [[String]] {
+        // Each test parameter describes: pattern, inputText, expectedFormattedText, scrubRegex, expectedScrubbedText
+        // remove "fixed" comments after review for validity
         let testParameters = [
             ["#", "1", "1", "\\s", "1"],
             ["#", "11", "1", "\\s", "1"],
