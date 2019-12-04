@@ -105,7 +105,7 @@ class TextWidget: AbstractWidget {
 
     func formatDisplayString(with pattern: String?, inputText: String) -> String {
         if let pattern = pattern {
-            let currentText = getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue,
+            let currentText = getTextForPatternCharacter(PatternCharacter.anyPatternCharacter.rawValue,
                                                          inputText)
             var currentTextIndex = inputText.startIndex
             var finalText = ""
@@ -229,8 +229,8 @@ class TextWidget: AbstractWidget {
         }
     }
 
-    private func getFormatPattern(inputText: String) -> String? {
-        let scrubbedText = getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue,
+    func getFormatPattern(inputText: String) -> String? {
+        let scrubbedText = getTextForPatternCharacter(PatternCharacter.anyPatternCharacter.rawValue,
                                                       inputText)
         var maskPattern = field.mask?.defaultPattern
         let conditionalPatterns = field.mask?.conditionalPatterns
