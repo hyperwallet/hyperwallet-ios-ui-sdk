@@ -23,7 +23,7 @@ class TextWidgetTests: XCTestCase {
     }
 
     override static var defaultTestSuite: XCTestSuite {
-        let testSuite = XCTestSuite(name: NSStringFromClass(self))
+        let testSuite = XCTestSuite(name: String(describing: self))
         let testParameters = getTestParameters()
 
         for testParameter in testParameters {
