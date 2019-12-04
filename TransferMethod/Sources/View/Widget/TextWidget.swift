@@ -34,9 +34,9 @@ class TextWidget: AbstractWidget {
     }()
 
     override func value() -> String {
-        if field.mask?.scrubRegex != nil,
+        if let scrubRegex = field.mask?.scrubRegex,
             let text = textField.text {
-            return getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue, text) ?? ""
+            return getScrubbedText(formattedText: text, scrubRegex: scrubRegex)
         }
         return textField.text ?? ""
     }
@@ -160,7 +160,7 @@ class TextWidget: AbstractWidget {
         return inputText
     }
 
-    private func getTextForPatternCharacter(_ patternCharacter: Character, _ text: String) -> String? {
+    func getTextForPatternCharacter(_ patternCharacter: Character, _ text: String) -> String? {
         switch patternCharacter {
         case PatternCharacter.lettersAndNumbersPatternCharacter.rawValue:
             return text.components(separatedBy: CharacterSet.alphanumerics.inverted).joined()
@@ -192,6 +192,14 @@ class TextWidget: AbstractWidget {
 
     private func isEscapedCharacter(_ character: Character) -> Bool {
         return character == "\\"
+    }
+
+    func getScrubbedText(formattedText: String, scrubRegex: String) -> String {
+        return formattedText.replacingOccurrences(
+            of: scrubRegex,
+            with: "",
+            options: NSString.CompareOptions.regularExpression,
+            range: nil)
     }
 }
 
