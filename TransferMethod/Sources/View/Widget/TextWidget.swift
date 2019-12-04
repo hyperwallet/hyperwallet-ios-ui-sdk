@@ -24,6 +24,18 @@ import UIKit
 
 /// Represents the text input widget.
 class TextWidget: AbstractWidget {
+    private var allowedLetters: String {
+        let lowercaseLetters = UInt32("a") ... UInt32("z")
+        let uppercaseLetters = UInt32("A") ... UInt32("Z")
+        return String(String.UnicodeScalarView(lowercaseLetters.compactMap(UnicodeScalar.init)) +
+            uppercaseLetters.compactMap(UnicodeScalar.init))
+    }
+
+    private var allowedNumbers: String {
+        let numbers = UInt32("0") ... UInt32("9")
+        return String(String.UnicodeScalarView(numbers.compactMap(UnicodeScalar.init)))
+    }
+
     var textField: PasteOnlyTextField = {
         let textField = PasteOnlyTextField()
         textField.setContentHuggingPriority(UILayoutPriority.defaultLow, for: NSLayoutConstraint.Axis.horizontal)
@@ -93,12 +105,12 @@ class TextWidget: AbstractWidget {
 
     func formatDisplayString(with pattern: String?, inputText: String) -> String {
         if let pattern = pattern {
+            let currentText = getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue,
+                                                         inputText)
+            var currentTextIndex = inputText.startIndex
             var finalText = ""
             var isEscapedCharacter = false
             var patternIndex = pattern.startIndex
-            var currentTextIndex = inputText.startIndex
-            let currentText = getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue,
-                                                         inputText)
 
             if let currentText = currentText, !currentText.isEmpty {
                 var patternCharactersToBeWritten = ""
@@ -119,15 +131,15 @@ class TextWidget: AbstractWidget {
                         continue
                     }
 
-                    applyFormatForPatternCharacter(currentPatternCharacter: currentPatternCharacter,
-                                                   finalText: &finalText,
-                                                   patternCharactersToBeWritten: &patternCharactersToBeWritten,
+                    applyFormatForPatternCharacter(currentText: currentText,
                                                    currentTextCharacter: currentTextCharacter,
-                                                   currentText: currentText,
-                                                   pattern: pattern,
                                                    currentTextIndex: &currentTextIndex,
+                                                   currentPatternCharacter: currentPatternCharacter,
+                                                   finalText: &finalText,
+                                                   isEscapedCharacter: &isEscapedCharacter,
+                                                   pattern: pattern,
                                                    patternIndex: &patternIndex,
-                                                   isEscapedCharacter: &isEscapedCharacter)
+                                                   patternCharactersToBeWritten: &patternCharactersToBeWritten)
 
                     if patternIndex >= pattern.endIndex || currentTextIndex >= currentText.endIndex {
                         break
@@ -140,35 +152,35 @@ class TextWidget: AbstractWidget {
     }
 
     // swiftlint:disable function_parameter_count
-    private func applyFormatForPatternCharacter(currentPatternCharacter: [Character],
-                                                finalText: inout String,
-                                                patternCharactersToBeWritten: inout String,
+    private func applyFormatForPatternCharacter(currentText: String,
                                                 currentTextCharacter: String,
-                                                currentText: String,
-                                                pattern: String,
                                                 currentTextIndex: inout String.Index,
+                                                currentPatternCharacter: [Character],
+                                                finalText: inout String,
+                                                isEscapedCharacter: inout Bool,
+                                                pattern: String,
                                                 patternIndex: inout String.Index,
-                                                isEscapedCharacter: inout Bool) {
+                                                patternCharactersToBeWritten: inout String) {
         switch currentPatternCharacter.first {
         case PatternCharacter.lettersAndNumbersPatternCharacter.rawValue:
-            handleTextForLettersAndNumbers(finalText: &finalText,
-                                           patternCharactersToBeWritten: &patternCharactersToBeWritten,
+            handleTextForLettersAndNumbers(currentText: currentText,
                                            currentTextCharacter: currentTextCharacter,
-                                           currentText: currentText,
-                                           pattern: pattern,
                                            currentTextIndex: &currentTextIndex,
+                                           finalText: &finalText,
+                                           pattern: pattern,
+                                           patternCharactersToBeWritten: &patternCharactersToBeWritten,
                                            patternIndex: &patternIndex)
 
         case PatternCharacter.lettersOnlyPatternCharacter.rawValue,
              PatternCharacter.numbersOnlyPatternCharacter.rawValue:
             let filteredCharacter =
                 getTextForPatternCharacter(currentPatternCharacter.first!, currentTextCharacter)
-            handleTextForLettersAndNumbers(finalText: &finalText,
-                                           patternCharactersToBeWritten: &patternCharactersToBeWritten,
+            handleTextForLettersAndNumbers(currentText: currentText,
                                            currentTextCharacter: filteredCharacter,
-                                           currentText: currentText,
-                                           pattern: pattern,
                                            currentTextIndex: &currentTextIndex,
+                                           finalText: &finalText,
+                                           pattern: pattern,
+                                           patternCharactersToBeWritten: &patternCharactersToBeWritten,
                                            patternIndex: &patternIndex)
 
         default:
@@ -185,12 +197,12 @@ class TextWidget: AbstractWidget {
         }
     }
 
-    private func handleTextForLettersAndNumbers(finalText: inout String,
-                                                patternCharactersToBeWritten: inout String,
+    private func handleTextForLettersAndNumbers(currentText: String,
                                                 currentTextCharacter: String?,
-                                                currentText: String,
-                                                pattern: String,
                                                 currentTextIndex: inout String.Index,
+                                                finalText: inout String,
+                                                pattern: String,
+                                                patternCharactersToBeWritten: inout String,
                                                 patternIndex: inout String.Index) {
         if let currentTextCharacter = currentTextCharacter, !currentTextCharacter.isEmpty {
             finalText += patternCharactersToBeWritten
@@ -207,15 +219,10 @@ class TextWidget: AbstractWidget {
             return text.components(separatedBy: CharacterSet.alphanumerics.inverted).joined()
 
         case PatternCharacter.lettersOnlyPatternCharacter.rawValue:
-            return text
-                .components(separatedBy:
-                    CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ").inverted)
-                .joined()
+            return text.components(separatedBy: CharacterSet(charactersIn: allowedLetters).inverted).joined()
 
         case PatternCharacter.numbersOnlyPatternCharacter.rawValue:
-            return text
-                .components(separatedBy: CharacterSet(charactersIn: "0123456789").inverted)
-                .joined()
+            return text.components(separatedBy: CharacterSet(charactersIn: allowedNumbers).inverted).joined()
 
         default:
             return nil
