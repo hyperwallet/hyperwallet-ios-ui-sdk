@@ -18,6 +18,7 @@
 
 import HyperwalletSDK
 #if !COCOAPODS
+import Common
 import TransferMethodRepository
 #endif
 
@@ -29,13 +30,17 @@ protocol ListTransferMethodView: class {
     func showConfirmation(handler: @escaping (() -> Void))
     func showTransferMethods()
     func notifyTransferMethodDeactivated(_ hyperwalletStatusTransition: HyperwalletStatusTransition)
-    func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?)
+    func showError(_ error: HyperwalletErrorType,
+                   pageName: String,
+                   pageGroup: String,
+                   _ retry: (() -> Void)?)
 }
 
 final class ListTransferMethodPresenter {
     private unowned let view: ListTransferMethodView
+    private let pageGroup = "transfer-method"
+    private let pageName = "transfer-method:add:list-transfer-method"
     private (set) var sectionData = [HyperwalletTransferMethod]()
-
     private lazy var transferMethodRepository = {
         TransferMethodRepositoryFactory.shared.transferMethodRepository()
     }()
@@ -63,8 +68,11 @@ final class ListTransferMethodPresenter {
             switch result {
             case .failure(let error):
                 strongSelf.view.dismissProcessing(handler: {
-                    strongSelf.view.showError(error, {
-                        strongSelf.deactivateTransferMethod(transferMethod) })
+                    strongSelf.view.showError(error,
+                                              pageName: strongSelf.pageName,
+                                              pageGroup: strongSelf.pageGroup) {
+                        strongSelf.deactivateTransferMethod(transferMethod)
+                    }
                 })
 
             case .success(let resultStatusTransition):
@@ -95,7 +103,11 @@ final class ListTransferMethodPresenter {
 
             switch result {
             case .failure(let error):
-                strongSelf.view.showError(error, { strongSelf.listTransferMethods() })
+                strongSelf.view.showError(error,
+                                          pageName: strongSelf.pageName,
+                                          pageGroup: strongSelf.pageGroup) {
+                    strongSelf.listTransferMethods()
+                }
 
             case .success(let resultPageList):
                 if let data = resultPageList?.data {
