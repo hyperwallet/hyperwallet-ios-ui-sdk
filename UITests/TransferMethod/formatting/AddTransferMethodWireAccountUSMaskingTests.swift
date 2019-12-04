@@ -151,10 +151,9 @@ class AddTransferMethodWireAccountUSMaskingTests: BaseTests {
         checkSelectFieldValueIsEqualTo("汉字a2ab", addTransferMethod.firstNameInput)
 
         // Existing issue right now it will show "汉字汉"
-        /*
+
         addTransferMethod.setFirstName("汉字汉字")
         checkSelectFieldValueIsEqualTo("汉字", addTransferMethod.firstNameInput)
-         */
     }
 
     func testAddTransferMethod_specialCharsTest() {

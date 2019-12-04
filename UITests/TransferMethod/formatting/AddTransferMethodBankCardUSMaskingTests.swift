@@ -82,8 +82,11 @@ class AddTransferMethodBankCardUSMaskingTests: BaseTests {
     func testAddTransferMethod_cvvMaskInvalidInput() {
               XCTAssert(app.navigationBars["Debit Card"].exists)
               XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
-              addTransferMethod.setCvv("9#4")
+           addTransferMethod.setCvv("9#@")
            checkSelectFieldValueIsEqualTo("9", addTransferMethod.cvvInput)
+
+           addTransferMethod.setCvv("!#@")
+           checkSelectFieldValueIsEqualTo("", addTransferMethod.cvvInput)
        }
 
     func testAddTransferMethod_cvvMaskInvalidLength() {
