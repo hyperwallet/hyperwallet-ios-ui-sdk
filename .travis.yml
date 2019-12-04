@@ -15,9 +15,9 @@ env:
   - IOS_FRAMEWORK_SCHEME="HyperwalletUISDK"
   - IOS_UI_TESTS_SCHEME="Demo"
   matrix:
-  - ios_version='13.2'  ios_device='iPhone XR' scheme="$IOS_FRAMEWORK_SCHEME" platform='iOS
+  - ios_version='13.2'  ios_device='iPhone 11' scheme="$IOS_FRAMEWORK_SCHEME" platform='iOS
     Simulator' configuration="Debug" code_coverage="YES" only_active_arch="YES"
-  - ios_version='13.2'  ios_device='iPhone XR' scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS
+  - ios_version='13.2'  ios_device='iPhone 11' scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS
     Simulator' configuration="XCUITest" code_coverage="NO" only_active_arch="NO"
   - ios_version='12.1'  ios_device='iPhone 7'  scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS
     Simulator' configuration="XCUITest" code_coverage="NO" only_active_arch="NO"
