@@ -60,11 +60,6 @@ final class ListTransferMethodCell: UITableViewCell {
         set { detailTextLabel?.font = newValue
             detailTextLabel?.font = newValue }
     }
-
-    @objc dynamic var subTitleLabelColor: UIColor! {
-        get { return detailTextLabel?.textColor }
-        set { detailTextLabel?.textColor = newValue }
-    }
 }
 
 extension ListTransferMethodCell {
