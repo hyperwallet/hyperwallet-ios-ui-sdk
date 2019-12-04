@@ -30,16 +30,20 @@
                                         "mask": {
                                             "conditionalPatterns": [
                                                 {
-                                                    "pattern": "#### #### #### ####",
+                                                    "pattern": "###### ###",
                                                     "regex": "^4"
                                                 },
                                                 {
-                                                    "pattern": "#### #### #### ####",
+                                                    "pattern": "### ##### ###",
                                                     "regex": "^5[0-5]"
                                                 },
                                                 {
-                                                    "pattern": "#### #### #### ####",
+                                                    "pattern": "#### ### ####",
                                                     "regex": "^58"
+                                                },
+                                                {
+                                                    "pattern": "####",
+                                                    "regex": "^4"
                                                 }
                                             ],
                                             "defaultPattern": "#### #### #### ####",

@@ -99,19 +99,20 @@ class AddTransferMethodBankCardUSMaskingTests: BaseTests {
     func testAddTransferMethod_cardNumberConditionalPattern() {
         XCTAssert(app.navigationBars["Debit Card"].exists)
         XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
-        addTransferMethod.setCardNumber("4111222233334444")
-        checkSelectFieldValueIsEqualTo("4111 2222 3333 4444", addTransferMethod.cardNumberInput)
+        addTransferMethod.setCardNumber("411111123")
+        checkSelectFieldValueIsEqualTo("411111 123", addTransferMethod.cardNumberInput)
 
-        addTransferMethod.setCardNumber("5111222233334444")
-        checkSelectFieldValueIsEqualTo("5111 2222 3333 4444", addTransferMethod.cardNumberInput)
+        addTransferMethod.setCardNumber("4111111230000")
+               checkSelectFieldValueIsEqualTo("411111 123", addTransferMethod.cardNumberInput)
 
-        addTransferMethod.setCardNumber("5211222233334444")
-               checkSelectFieldValueIsEqualTo("5211 2222 3333 4444", addTransferMethod.cardNumberInput)
-        addTransferMethod.setCardNumber("5311222233334444")
-                     checkSelectFieldValueIsEqualTo("5311 2222 3333 4444", addTransferMethod.cardNumberInput)
+        addTransferMethod.setCardNumber("50566666555")
+        checkSelectFieldValueIsEqualTo("505 66666 555", addTransferMethod.cardNumberInput)
 
-        addTransferMethod.setCardNumber("5811222233334444")
-                            checkSelectFieldValueIsEqualTo("5811 2222 3333 4444", addTransferMethod.cardNumberInput)
+        addTransferMethod.setCardNumber("58001231234")
+               checkSelectFieldValueIsEqualTo("5800 123 1234", addTransferMethod.cardNumberInput)
+
+        addTransferMethod.setCardNumber("5600123412340000")
+                            checkSelectFieldValueIsEqualTo("5600 1234 1234 0000", addTransferMethod.cardNumberInput)
 
         addTransferMethod.setCardNumber("1111222233334444")
                                    checkSelectFieldValueIsEqualTo("1111 2222 3333 4444", addTransferMethod.cardNumberInput)
