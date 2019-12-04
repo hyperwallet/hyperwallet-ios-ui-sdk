@@ -28,7 +28,7 @@
                                             "empty": "You must provide a value for this field"
                                         },
                                         "mask": {
-                                            "defaultPattern": "###-##"
+                                            "defaultPattern": "###-##\\"
                                         }
                                     },
                                     {
