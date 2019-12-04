@@ -37,7 +37,7 @@ class TextWidgetTests: XCTestCase {
         return testSuite
     }
 
-     // swiftlint:disable function_parameter
+    // swiftlint:disable function_parameter_count
     private static func addTest(pattern: String,
                                 inputText: String,
                                 expectedFormattedText: String,
@@ -155,8 +155,8 @@ class TextWidgetTests: XCTestCase {
             ["^#@*-@#*", "-12ab-12ab", "^1ab-a", "\\s", "^1ab-a"],
             ["^#@*-@#*", "", "", "\\s", ""],
             ["\\@@#*\\#@#*\\*@#*", "aaaaaa", "@a", "\\s", "@a"],
-            // ["\\@@#*\\#@#*\\*@#*", "111111", "@"],
-            // ["\\@@#*\\#@#*\\*@#*", "a1aa1a", "@a1a#a1a*"],
+            ["\\@@#*\\#@#*\\*@#*", "111111", "@", "\\s", "@"],
+            ["\\@@#*\\#@#*\\*@#*", "a1aa1a", "@a1a#a1a", "\\s", "@a1a#a1a"],
             ["\\@@#*\\#@#*\\*@#*", "@a1a#a1a*a1a", "@a1a#a1a*a1a", "\\s", "@a1a#a1a*a1a"],
             ["@#@ #@#", "V1B2N3", "V1B 2N3", "\\s", "V1B2N3"],
             ["###", "A123", "123", "", "123"],
@@ -164,7 +164,11 @@ class TextWidgetTests: XCTestCase {
             ["####-####-####-####", "4123567891234567", "4123-5678-9123-4567", "\\-", "4123567891234567"],
             ["#### ###### #####", "347356789134567", "3473 567891 34567", "\\s", "347356789134567"],
             ["Hello: @@@@@", "Hello: abcde", "Hello: abcde", "\\s", "Hello:abcde"],
-            ["", "", "", "", ""]
+            ["", "", "", "", ""],
+            ["###-##\\", "12345", "123-45", "", "123-45"],
+            ["###-##\\\\", "123456", "123-45\\", "", "123-45\\"],
+            ["###-##\\\\9", "123459", "123-45\\9", "", "123-45\\9"],
+            ["###-##\\9", "123459", "123-459", "", "123-459"]
         ]
         return testParameters
     }
