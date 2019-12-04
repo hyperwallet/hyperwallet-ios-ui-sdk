@@ -151,23 +151,25 @@ class TextWidget: AbstractWidget {
                                                 isEscapedCharacter: inout Bool) {
         switch currentPatternCharacter.first {
         case PatternCharacter.lettersAndNumbersPatternCharacter.rawValue:
-            finalText += patternCharactersToBeWritten
-            patternCharactersToBeWritten = ""
-            finalText += currentTextCharacter
-            currentTextIndex = currentText.index(after: currentTextIndex)
-            patternIndex = pattern.index(after: patternIndex)
+            handleTextForLettersAndNumbers(finalText: &finalText,
+                                           patternCharactersToBeWritten: &patternCharactersToBeWritten,
+                                           currentTextCharacter: currentTextCharacter,
+                                           currentText: currentText,
+                                           pattern: pattern,
+                                           currentTextIndex: &currentTextIndex,
+                                           patternIndex: &patternIndex)
 
         case PatternCharacter.lettersOnlyPatternCharacter.rawValue,
              PatternCharacter.numbersOnlyPatternCharacter.rawValue:
             let filteredCharacter =
                 getTextForPatternCharacter(currentPatternCharacter.first!, currentTextCharacter)
-            if let filteredCharacter = filteredCharacter, !filteredCharacter.isEmpty {
-                finalText += patternCharactersToBeWritten
-                patternCharactersToBeWritten = ""
-                finalText += filteredCharacter
-                patternIndex = pattern.index(after: patternIndex)
-            }
-            currentTextIndex = currentText.index(after: currentTextIndex)
+            handleTextForLettersAndNumbers(finalText: &finalText,
+                                           patternCharactersToBeWritten: &patternCharactersToBeWritten,
+                                           currentTextCharacter: filteredCharacter,
+                                           currentText: currentText,
+                                           pattern: pattern,
+                                           currentTextIndex: &currentTextIndex,
+                                           patternIndex: &patternIndex)
 
         default:
             isEscapedCharacter = self.isEscapedCharacter(currentPatternCharacter.first!)
@@ -181,6 +183,22 @@ class TextWidget: AbstractWidget {
             }
             patternIndex = pattern.index(after: patternIndex)
         }
+    }
+
+    private func handleTextForLettersAndNumbers(finalText: inout String,
+                                                patternCharactersToBeWritten: inout String,
+                                                currentTextCharacter: String?,
+                                                currentText: String,
+                                                pattern: String,
+                                                currentTextIndex: inout String.Index,
+                                                patternIndex: inout String.Index) {
+        if let currentTextCharacter = currentTextCharacter, !currentTextCharacter.isEmpty {
+            finalText += patternCharactersToBeWritten
+            patternCharactersToBeWritten = ""
+            finalText += currentTextCharacter
+            patternIndex = pattern.index(after: patternIndex)
+        }
+        currentTextIndex = currentText.index(after: currentTextIndex)
     }
 
     private func getTextForPatternCharacter(_ patternCharacter: Character, _ text: String) -> String? {
