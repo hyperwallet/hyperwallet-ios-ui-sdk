@@ -19,10 +19,6 @@ class TransferUserFundsTest: BaseTests {
         addTransferMethod = AddTransferMethod(app: app)
     }
 
-    override func tearDown() {
-        mockServer.tearDown()
-    }
-
     /*
      Given that no Transfer methods have been created
      When module is loaded
@@ -217,11 +213,10 @@ class TransferUserFundsTest: BaseTests {
 
         // Next Button
         XCTAssertTrue(transferFunds.nextLabel.exists)
-        transferFunds.nextLabel.tap()
+        transferFunds.tapNextButton()
 
         // Assert Confirmation Page
         waitForExistence(app.tables["scheduleTransferTableView"].staticTexts["Confirm"])
-        XCTAssertTrue(app.tables["scheduleTransferTableView"].staticTexts["Confirm"].exists)
     }
 
     func testTransferFunds_createTransferWithoutFX() {
@@ -268,11 +263,10 @@ class TransferUserFundsTest: BaseTests {
 
         // Next Button
         XCTAssertTrue(transferFunds.nextLabel.exists)
-        transferFunds.nextLabel.tap()
+        transferFunds.tapNextButton()
 
         // Assert Confirmation Page
         waitForExistence(app.tables["scheduleTransferTableView"].staticTexts["Confirm"])
-        XCTAssertTrue(app.tables["scheduleTransferTableView"].staticTexts["Confirm"].exists)
     }
 
     /* Given that user is on the Transfer fund page and selected a Transfer Destination
@@ -390,7 +384,7 @@ class TransferUserFundsTest: BaseTests {
                        "An account hasn\'t been set up yet, please add an account first.")
 
         XCTAssertTrue(transferFunds.nextLabel.exists)
-        transferFunds.nextLabel.tap()
+        transferFunds.tapNextButton()
         waitForNonExistence(spinner)
 
         let addTransferMethodPredicate = NSPredicate(format:
@@ -426,7 +420,7 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.transferAmount.exists)
 
         XCTAssertTrue(transferFunds.nextLabel.exists)
-        transferFunds.nextLabel.tap()
+        transferFunds.tapNextButton()
         waitForNonExistence(spinner)
 
         let error = app.tables["createTransferTableView"].staticTexts["transferTableViewFooterViewIdentifier"].label
@@ -512,10 +506,9 @@ class TransferUserFundsTest: BaseTests {
                                   method: HTTPMethod.post)
 
         XCTAssertTrue(transferFunds.nextLabel.exists)
-        transferFunds.nextLabel.tap()
+        transferFunds.tapNextButton()
 
         waitForExistence(app.alerts["Error"])
-        // XCTAssert(app.alerts["Error"].exists)
         let predicate = NSPredicate(format:
             "label CONTAINS[c] 'Requested transfer amount $0.01, is below the transaction limit of $1.00.'")
         XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
@@ -555,7 +548,7 @@ class TransferUserFundsTest: BaseTests {
                                   method: HTTPMethod.post)
 
         XCTAssertTrue(transferFunds.nextLabel.exists)
-        transferFunds.nextLabel.tap()
+        transferFunds.tapNextButton()
         waitForNonExistence(spinner)
 
         let error = app.tables["createTransferTableView"].staticTexts["transferTableViewFooterViewIdentifier"].label
@@ -595,10 +588,9 @@ class TransferUserFundsTest: BaseTests {
                                   filename: "TransferErrorLimitExceeded",
                                   method: HTTPMethod.post)
         XCTAssertTrue(transferFunds.nextLabel.exists)
-        transferFunds.nextLabel.tap()
+        transferFunds.tapNextButton()
 
         waitForExistence(app.alerts["Error"])
-        XCTAssert(app.alerts["Error"].exists)
         let predicate = NSPredicate(format: """
             label CONTAINS[c] 'Your attempted transaction has exceeded the approved payout limit; \
             please contact Hyperwallet for further assistance.'
@@ -633,10 +625,9 @@ class TransferUserFundsTest: BaseTests {
                                   method: HTTPMethod.post)
 
         XCTAssertTrue(transferFunds.nextLabel.exists)
-        transferFunds.nextLabel.tap()
+        transferFunds.tapNextButton()
 
         waitForExistence(app.alerts["Error"])
-        XCTAssert(app.alerts["Error"].exists)
         let predicate = NSPredicate(format:
             "label CONTAINS[c] 'You do not have enough funds in any single currency to complete this transfer'")
         XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
@@ -652,7 +643,6 @@ class TransferUserFundsTest: BaseTests {
         waitForNonExistence(spinner)
 
         waitForExistence(app.alerts["Error"])
-        XCTAssert(app.alerts["Error"].exists)
         let predicate = NSPredicate(format:
             "label CONTAINS[c] 'The source token you provided doesn’t exist or is not a valid source.'")
         XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)

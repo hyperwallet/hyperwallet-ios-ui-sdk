@@ -6,11 +6,12 @@ enum HTTPMethod {
     case post
 }
 
-class HyperwalletMockWebServer {
-    var server = HttpServer()
+final class HyperwalletMockWebServer {
+    private var server: HttpServer!
     let testBundle = Bundle(for: HyperwalletMockWebServer.self)
 
     func setUp() {
+        server = HttpServer()
         do {
             try server.start()
         } catch {
@@ -19,7 +20,10 @@ class HyperwalletMockWebServer {
     }
 
     func tearDown() {
-        server.stop()
+        if server.operating {
+            server.stop()
+        }
+        server = nil
     }
 
     func setupStub(url: String, filename: String, method: HTTPMethod) {

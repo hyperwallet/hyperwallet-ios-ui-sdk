@@ -2,11 +2,11 @@ language: swift
 osx_image: xcode10.3
 os: osx
 branches:
- only:
-  - /.*/
+  only:
+  - "/.*/"
 cache:
   directories:
-    - Carthage/Build/
+  - Carthage/Build/
 env:
   global:
   - LC_CTYPE=en_US.UTF-8
@@ -14,31 +14,25 @@ env:
   - PROJECT=HyperwalletUISDK.xcodeproj
   - IOS_FRAMEWORK_SCHEME="HyperwalletUISDK"
   - IOS_UI_TESTS_SCHEME="Demo"
-
   matrix:
-    - ios_version='12.1'  ios_device='iPhone XR' scheme="$IOS_FRAMEWORK_SCHEME" platform='iOS Simulator' configuration="Debug" code_coverage="YES" only_active_arch="YES"
-    - ios_version='12.1'  ios_device='iPhone XR' scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS Simulator' configuration="XCUITest" code_coverage="NO" only_active_arch="NO"
-    - ios_version='11.1'  ios_device='iPhone 7'  scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS Simulator' configuration="XCUITest" code_coverage="NO" only_active_arch="NO"
-
+  - ios_version='12.1'  ios_device='iPhone XR' scheme="$IOS_FRAMEWORK_SCHEME" platform='iOS
+    Simulator' configuration="Debug" code_coverage="YES" only_active_arch="YES"
+  - ios_version='12.1'  ios_device='iPhone XR' scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS
+    Simulator' configuration="XCUITest" code_coverage="NO" only_active_arch="NO"
+  - ios_version='11.1'  ios_device='iPhone 7'  scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS
+    Simulator' configuration="XCUITest" code_coverage="NO" only_active_arch="NO"
 before_install:
-  # Boot the emulator by ID
-  - |
-     ios_uid=$(xcrun instruments -s devices | grep Simulator | grep "$ios_device ($ios_version)*" | grep -o "[0-9A-F]\{8\}-[0-9A-F]\{4\}-[0-9A-F]\{4\}-[0-9A-F]\{4\}-[0-9A-F]\{12\}")
-     xcrun simctl boot $ios_uid
-  # List all emulator available
-  - xcrun simctl list
-  # Update the brew and build dependencies tools
-  # - brew outdated carthage || brew upgrade carthage
-  - Carthage update --platform iOS  --cache-builds
-  - gem i slather
-  # Install build output formatting tool
-  - gem install xcpretty
-  # Force to update the Swiftlint to the last stable version
-  - brew outdated swiftlint || brew upgrade swiftlint
-  # Print the booted emulator
-  - xcrun simctl list | grep "(Booted)"
-  # Print the swiftlint version
-  - swiftlint version
+- echo -e "machine github.com\n  login $CI_USER_TOKEN" > ~/.netrc
+- |
+  ios_uid=$(xcrun instruments -s devices | grep Simulator | grep "$ios_device ($ios_version)*" | grep -o "[0-9A-F]\{8\}-[0-9A-F]\{4\}-[0-9A-F]\{4\}-[0-9A-F]\{4\}-[0-9A-F]\{12\}")
+  xcrun simctl boot $ios_uid
+- xcrun simctl list
+- Carthage bootstrap --platform ios --cache-builds
+- gem i slather
+- gem install xcpretty
+- brew outdated swiftlint || brew upgrade swiftlint
+- xcrun simctl list | grep "(Booted)"
+- swiftlint version
 script: |
   set -o pipefail
   set -e
@@ -51,11 +45,8 @@ script: |
     -scheme "$scheme" \
     -destination "$destination" \
     -configuration "$configuration" ONLY_ACTIVE_ARCH="$only_active_arch" ENABLE_TESTABILITY=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
-    | xcpretty
+    | xcpretty --color
 
   # Lint - Add `--strict` to fail for warning and violation
   swiftlint lint --quiet --reporter json
-after_success:
- if [ "$code_coverage" == "YES" ]; then
-      slather;
- fi
+after_success: if [ "$code_coverage" == "YES" ]; then slather; fi

@@ -21,6 +21,7 @@ xcuserdata/
 *.moved-aside
 *.xccheckout
 *.xcscmblueprint
+**/.DS_Store
 
 ## Obj-C/Swift specific
 *.hmap
@@ -58,3 +59,10 @@ Carthage/
 # !/Carthage/Build/.swifter.version
 # !/Carthage/Build/iOS/Hippolyte.framework
 # !/Carthage/Build/iOS/Swifter.framework
+
+# Fastlane
+fastlane/README.md
+fastlane/report.xml
+
+# Gem
+Gemfile.lock

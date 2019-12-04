@@ -18,6 +18,7 @@
 
 import HyperwalletSDK
 #if !COCOAPODS
+import Common
 import TransferMethodRepository
 #endif
 
@@ -29,8 +30,10 @@ protocol AddTransferMethodView: class {
     func notifyTransferMethodAdded(_ transferMethod: HyperwalletTransferMethod)
     func showConfirmation(handler: @escaping () -> Void)
     func showError( title: String, message: String)
-    func showError(_ error: HyperwalletErrorType, _ handler: (() -> Void)?)
-    func showBusinessError(_ error: HyperwalletErrorType, _ handler: @escaping () -> Void)
+    func showError(_ error: HyperwalletErrorType,
+                   pageName: String,
+                   pageGroup: String,
+                   _ retry: (() -> Void)?)
     func showLoading()
     func showProcessing()
     func showTransferMethodFields(_ fieldGroups: [HyperwalletFieldGroup],
@@ -40,10 +43,17 @@ protocol AddTransferMethodView: class {
 
 final class AddTransferMethodPresenter {
     private unowned var view: AddTransferMethodView
-    private let country: String
-    private let currency: String
+    private let errorTypeApi = "API"
     private let profileType: String
-    private let transferMethodTypeCode: String
+    private let createdConfirmationPageName = "transfer-method:add:transfer-method-created"
+    private let pageLink = "create-transfer-method"
+    private let transferMethodCreatedGoal = "transfer-method-created"
+    static let addTransferMethodPageGroup = "transfer-method"
+    static let addTransferMethodPageName = "transfer-method:add:collect-transfer-method-information"
+    private let hyperwalletInsights: HyperwalletInsightsProtocol
+    let country: String
+    let currency: String
+    let transferMethodTypeCode: String
     var sectionData = [AddTransferMethodSectionData]()
 
     private lazy var transferMethodConfigurationRepository = {
@@ -58,12 +68,14 @@ final class AddTransferMethodPresenter {
          _ country: String,
          _ currency: String,
          _ profileType: String,
-         _ transferMethodTypeCode: String) {
+         _ transferMethodTypeCode: String,
+         _ hyperwalletInsights: HyperwalletInsightsProtocol = HyperwalletInsights.shared) {
         self.view = view
         self.country = country
         self.currency = currency
         self.profileType = profileType
         self.transferMethodTypeCode = transferMethodTypeCode
+        self.hyperwalletInsights = hyperwalletInsights
     }
 
     func loadTransferMethodConfigurationFields(_ forceUpdate: Bool = false) {
@@ -73,32 +85,38 @@ final class AddTransferMethodPresenter {
             transferMethodConfigurationRepository.refreshFields()
         }
 
-        transferMethodConfigurationRepository.getFields(country,
-                                                        currency,
-                                                        transferMethodTypeCode,
-                                                        profileType) { [weak self] (result) in
-            guard let strongSelf = self else {
-                return
+        transferMethodConfigurationRepository
+            .getFields(country,
+                       currency,
+                       transferMethodTypeCode,
+                       profileType) { [weak self] (result) in
+                        guard let strongSelf = self else {
+                            return
+                        }
+
+                        strongSelf.view.hideLoading()
+
+                        switch result {
+                        case .failure(let error):
+                            strongSelf.view.showError(
+                                error,
+                                pageName: AddTransferMethodPresenter.addTransferMethodPageName,
+                                pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup) {
+                                    strongSelf.loadTransferMethodConfigurationFields()
+                            }
+
+                        case .success(let fieldResult):
+                            if let fieldGroups = fieldResult?.fieldGroups(),
+                                let transferMethodType = fieldResult?.transferMethodType() {
+                                strongSelf.trackUILoadImpression()
+                                strongSelf.view.showTransferMethodFields(fieldGroups, transferMethodType)
+                            }
+                        }
             }
-
-            strongSelf.view.hideLoading()
-
-            switch result {
-            case .failure(let error):
-                strongSelf.view.showError(error, { () -> Void in
-                    strongSelf.loadTransferMethodConfigurationFields()
-                })
-
-            case .success(let fieldResult):
-                if let fieldGroups = fieldResult?.fieldGroups(),
-                    let transferMethodType = fieldResult?.transferMethodType() {
-                    strongSelf.view.showTransferMethodFields(fieldGroups, transferMethodType)
-                }
-            }
-        }
     }
 
     func createTransferMethod() {
+        trackConfirmClick()
         guard view.areAllFieldsValid() else {
             return
         }
@@ -111,22 +129,23 @@ final class AddTransferMethodPresenter {
 
         view.showProcessing()
         transferMethodRepository.createTransferMethod(hyperwalletTransferMethod) { [weak self] (result) in
-                guard let strongSelf = self else {
-                    return
-                }
-                switch result {
-                case .failure(let error):
-                    strongSelf.view.dismissProcessing(handler: {
-                        strongSelf.errorHandler(for: error)
-                    })
+            guard let strongSelf = self else {
+                return
+            }
+            switch result {
+            case .failure(let error):
+                strongSelf.view.dismissProcessing(handler: {
+                    strongSelf.errorHandler(for: error)
+                })
 
-                case .success(let transferMethodResult):
-                    strongSelf.view.showConfirmation(handler: {
-                        if let transferMethod = transferMethodResult {
-                            strongSelf.view.notifyTransferMethodAdded(transferMethod)
-                        }
-                    })
-                }
+            case .success(let transferMethodResult):
+                strongSelf.view.showConfirmation(handler: {
+                    if let transferMethod = transferMethodResult {
+                        strongSelf.trackTransferMethodCreatedConfirmationImpression()
+                        strongSelf.view.notifyTransferMethodAdded(transferMethod)
+                    }
+                })
+            }
         }
     }
 
@@ -143,14 +162,22 @@ final class AddTransferMethodPresenter {
             resetErrorMessagesForAllSections()
             if let errors = error.getHyperwalletErrors()?.errorList, errors.isNotEmpty {
                 if errors.contains(where: { $0.fieldName == nil }) {
-                    view.showBusinessError(error, { [weak self] () -> Void in self?.updateFooterContent(errors) })
+                    view.showError(error,
+                                   pageName: AddTransferMethodPresenter.addTransferMethodPageName,
+                                   pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup) { [weak self] in
+                                    self?.updateFooterContent(errors)
+                    }
                 } else {
                     updateFooterContent(errors)
                 }
             }
 
         default:
-            view.showError(error, { [weak self] () -> Void in self?.createTransferMethod() })
+            view.showError(error,
+                           pageName: AddTransferMethodPresenter.addTransferMethodPageName,
+                           pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup) { [weak self] in
+                            self?.createTransferMethod()
+            }
         }
     }
 
@@ -211,11 +238,28 @@ final class AddTransferMethodPresenter {
         for widget in errorWidgets {
             // get the errorMessage by widget name and update widget UI
             if let error = errors.first(where: { error in widget.name() == error.fieldName }) {
+                trackError(errorMessage: error.message,
+                           errorCode: error.code,
+                           errorType: errorTypeApi,
+                           fieldName: widget.name())
                 widget.showError()
                 errorMessages.append(error.message)
             }
         }
         section.errorMessage = errorMessages.joined(separator: "\n")
+    }
+
+    private func trackError(errorMessage: String,
+                            errorCode: String,
+                            errorType: String,
+                            fieldName: String) {
+        let errorInfo = ErrorInfoBuilder(type: errorType, message: errorMessage)
+            .fieldName(fieldName)
+            .code(errorCode)
+            .build()
+        hyperwalletInsights.trackError(pageName: AddTransferMethodPresenter.addTransferMethodPageName,
+                                       pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup,
+                                       errorInfo: errorInfo)
     }
 
     private func widgetsContainError(for section: AddTransferMethodSectionData,
@@ -231,5 +275,40 @@ final class AddTransferMethodPresenter {
 
     private func resetErrorMessagesForAllSections() {
         sectionData.forEach { $0.errorMessage = nil }
+    }
+
+    private func trackUILoadImpression () {
+        hyperwalletInsights.trackImpression(pageName: AddTransferMethodPresenter.addTransferMethodPageName,
+                                            pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup,
+                                            params: insightsParam())
+    }
+
+    private func trackConfirmClick() {
+        hyperwalletInsights.trackClick(
+            pageName: AddTransferMethodPresenter.addTransferMethodPageName,
+            pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup,
+            link: pageLink,
+            params: insightsParam())
+    }
+
+    private func trackTransferMethodCreatedConfirmationImpression() {
+        hyperwalletInsights.trackImpression(pageName: createdConfirmationPageName,
+                                            pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup,
+                                            params: [
+                                                InsightsTags.country: country,
+                                                InsightsTags.currency: currency,
+                                                InsightsTags.transferMethodType: transferMethodTypeCode,
+                                                InsightsTags.profileType: profileType,
+                                                InsightsTags.goal: transferMethodCreatedGoal
+                                            ])
+    }
+
+    private func insightsParam () -> [String: String] {
+        return [
+            InsightsTags.country: country,
+            InsightsTags.currency: currency,
+            InsightsTags.transferMethodType: transferMethodTypeCode,
+            InsightsTags.profileType: profileType
+        ]
     }
 }

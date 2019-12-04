@@ -1,3 +1,6 @@
+#if !COCOAPODS
+import Common
+#endif
 import Hippolyte
 import HyperwalletSDK
 @testable import TransferMethod
@@ -5,13 +8,19 @@ import XCTest
 
 class AddTransferMethodPresenterTests: XCTestCase {
     private var presenter: AddTransferMethodPresenter!
-    private let mockView = MockAddTransferMethodViewTests()
+    private let mockView = AddTransferMethodViewMock()
     private lazy var transferMethodConfigurationFieldsResponse = HyperwalletTestHelper
         .getDataFromJson("TransferMethodConfigurationFieldsResponse")
+    private var hyperwalletInsightsMock = HyperwalletInsightsMock()
 
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
-        presenter = AddTransferMethodPresenter(mockView, "US", "USD", "INDIVIDUAL", "BANK_ACCOUNT")
+        presenter = AddTransferMethodPresenter(mockView,
+                                               "US",
+                                               "USD",
+                                               "INDIVIDUAL",
+                                               "BANK_ACCOUNT",
+                                               hyperwalletInsightsMock)
     }
 
     override func tearDown() {
@@ -19,22 +28,25 @@ class AddTransferMethodPresenterTests: XCTestCase {
             Hippolyte.shared.stop()
         }
         mockView.resetStates()
+        hyperwalletInsightsMock.resetStates()
     }
 
     public func testLoadTransferMethodConfigurationFields_success() {
         HyperwalletTestHelper.setUpMockServer(request: setupTransferMethodConfigurationFields())
 
         let expectation = self.expectation(description: "Load transfer method configuration fields")
-        mockView.expectation = expectation
+        mockView.expectations = [mockView.expectation: expectation]
 
         presenter.loadTransferMethodConfigurationFields(true)
 
-        wait(for: [expectation], timeout: 1)
+        wait(for: Array(mockView.expectations!.values), timeout: 1)
 
         XCTAssertFalse(mockView.isShowErrorPerformed, "The showError should not be performed")
         XCTAssertTrue(mockView.isShowLoadingPerformed, "The showLoading should be performed")
         XCTAssertTrue(mockView.isHideLoadingPerformed, "The hideLoading should be performed")
         XCTAssertEqual(mockView.fieldGroups.count, 2, "The `response.getFields()` should be 2")
+        XCTAssertTrue(hyperwalletInsightsMock.didTrackImpression,
+                      "HyperwalletInsights.trackImpression should be called")
     }
 
     public func testLoadTransferMethodConfigurationFields_failure() {
@@ -43,18 +55,23 @@ class AddTransferMethodPresenterTests: XCTestCase {
             setupTransferMethodConfigurationFields(NSError(domain: "", code: -1009, userInfo: nil)))
 
         let expectation = self.expectation(description: "load transfer methods")
-        mockView.expectation = expectation
+        mockView.expectations = [mockView.expectation: expectation]
 
         // When
         presenter.loadTransferMethodConfigurationFields(true)
-        wait(for: [expectation], timeout: 1)
+        wait(for: Array(mockView.expectations!.values), timeout: 1)
 
         XCTAssertTrue(mockView.isShowErrorPerformed, "The showError should be performed")
         XCTAssertFalse(mockView.isShowConfirmationPerformed, "The showError should not be performed")
     }
 
     func testCreateTransferMethod_createBankAccount() {
-        presenter = AddTransferMethodPresenter(mockView, "US", "USD", "INDIVIDUAL", "BANK_ACCOUNT")
+        presenter = AddTransferMethodPresenter(mockView,
+                                               "US",
+                                               "USD",
+                                               "INDIVIDUAL",
+                                               "BANK_ACCOUNT",
+                                               hyperwalletInsightsMock)
         let url = String(format: "%@/bank-accounts", HyperwalletTestHelper.userRestURL)
         let response = HyperwalletTestHelper.okHTTPResponse(for: "BankAccountIndividualResponse")
         let request = HyperwalletTestHelper.buildPostRequest(baseUrl: url, response)
@@ -67,20 +84,29 @@ class AddTransferMethodPresenterTests: XCTestCase {
 
         // press the create transfer method button
         let expectation = self.expectation(description: "Create bank account completed")
-        mockView.expectation = expectation
+        mockView.expectations = [mockView.expectation: expectation]
 
         presenter.createTransferMethod()
 
-        wait(for: [expectation], timeout: 1)
+        wait(for: Array(mockView.expectations!.values), timeout: 1)
 
         // Then
         XCTAssertFalse(mockView.isShowErrorPerformed, "The showError should not be performed")
         XCTAssertTrue(mockView.isShowConfirmationPerformed, "The showConfirmation should be performed")
         XCTAssertTrue(mockView.isNotificationSent, "The notification should be sent")
+        XCTAssertTrue(hyperwalletInsightsMock.didTrackClick,
+                      "HyperwalletInsights.trackClick should be called")
+        XCTAssertTrue(hyperwalletInsightsMock.didTrackImpression,
+                      "HyperwalletInsights.trackImpression should be called")
     }
 
     func testCreateTransferMethod_createWireAccount() {
-        presenter = AddTransferMethodPresenter(mockView, "US", "USD", "INDIVIDUAL", "WIRE_ACCOUNT")
+        presenter = AddTransferMethodPresenter(mockView,
+                                               "US",
+                                               "USD",
+                                               "INDIVIDUAL",
+                                               "WIRE_ACCOUNT",
+                                               hyperwalletInsightsMock)
         let url = String(format: "%@/bank-accounts", HyperwalletTestHelper.userRestURL)
         let response = HyperwalletTestHelper.okHTTPResponse(for: "WireAccountIndividualResponse")
         let request = HyperwalletTestHelper.buildPostRequest(baseUrl: url, response)
@@ -94,11 +120,11 @@ class AddTransferMethodPresenterTests: XCTestCase {
 
         // press the create transfer method button
         let expectation = self.expectation(description: "Create wire account completed")
-        mockView.expectation = expectation
+        mockView.expectations = [mockView.expectation: expectation]
 
         presenter.createTransferMethod()
 
-        wait(for: [expectation], timeout: 1)
+        wait(for: Array(mockView.expectations!.values), timeout: 1)
 
         // Then
         XCTAssertFalse(mockView.isShowErrorPerformed, "The showError should not be performed")
@@ -107,7 +133,12 @@ class AddTransferMethodPresenterTests: XCTestCase {
     }
 
     func testCreateTransferMethod_createBankCard() {
-        presenter = AddTransferMethodPresenter(mockView, "US", "USD", "INDIVIDUAL", "BANK_CARD")
+        presenter = AddTransferMethodPresenter(mockView,
+                                               "US",
+                                               "USD",
+                                               "INDIVIDUAL",
+                                               "BANK_CARD",
+                                               hyperwalletInsightsMock)
 
         let url = String(format: "%@/bank-cards", HyperwalletTestHelper.userRestURL)
         let response = HyperwalletTestHelper.okHTTPResponse(for: "BankCardResponse")
@@ -121,11 +152,11 @@ class AddTransferMethodPresenterTests: XCTestCase {
 
         // press the create transfer method button
         let expectation = self.expectation(description: "Create bank card completed")
-        mockView.expectation = expectation
+        mockView.expectations = [mockView.expectation: expectation]
 
         presenter.createTransferMethod()
 
-        wait(for: [expectation], timeout: 1)
+        wait(for: Array(mockView.expectations!.values), timeout: 1)
 
         // Then
         XCTAssertTrue(mockView.isFieldValuesPerformed, "The FieldValues should be performed")
@@ -136,7 +167,12 @@ class AddTransferMethodPresenterTests: XCTestCase {
     }
 
     func testCreateTransferMethod_createPayPalAccount() {
-        presenter = AddTransferMethodPresenter(mockView, "US", "USD", "INDIVIDUAL", "PAYPAL_ACCOUNT")
+        presenter = AddTransferMethodPresenter(mockView,
+                                               "US",
+                                               "USD",
+                                               "INDIVIDUAL",
+                                               "PAYPAL_ACCOUNT",
+                                               hyperwalletInsightsMock)
         let url = String(format: "%@/paypal-accounts", HyperwalletTestHelper.userRestURL)
         let response = HyperwalletTestHelper.okHTTPResponse(for: "PayPalAccountResponse")
         let request = HyperwalletTestHelper.buildPostRequest(baseUrl: url, response)
@@ -148,11 +184,11 @@ class AddTransferMethodPresenterTests: XCTestCase {
 
         // press the create transfer method button
         let expectation = self.expectation(description: "Create PayPal account completed")
-        mockView.expectation = expectation
+        mockView.expectations = [mockView.expectation: expectation]
 
         presenter.createTransferMethod()
 
-        wait(for: [expectation], timeout: 1)
+        wait(for: Array(mockView.expectations!.values), timeout: 1)
 
         // Then
         XCTAssertFalse(mockView.isShowErrorPerformed, "The showError should not be performed")
@@ -166,12 +202,16 @@ class AddTransferMethodPresenterTests: XCTestCase {
         mockView.mockFieldValuesReturnResult.append((name: "bankAccountId", value: "000"))
         mockView.mockFieldStatusReturnResult.append(true)
 
-        let expectation = self.expectation(description: "Create bank account failed")
-        mockView.expectation = expectation
+        let showErrorExpectation = self.expectation(description: "Create bank account failed")
+        let updateFooterContentExpectation = self.expectation(description: "Create bank account failed")
+        mockView.expectations = [
+            mockView.expectation: showErrorExpectation,
+            mockView.updateFooterContentExpectation: updateFooterContentExpectation
+        ]
 
         // When
         presenter.createTransferMethod()
-        wait(for: [expectation], timeout: 1)
+        wait(for: Array(mockView.expectations!.values), timeout: 1)
 
         // Then
         XCTAssertTrue(mockView.isFieldValuesPerformed, "The FieldValues should be performed")
@@ -187,12 +227,12 @@ class AddTransferMethodPresenterTests: XCTestCase {
         mockView.mockFieldValuesReturnResult.append((name: "bankAccountId", value: "000"))
         mockView.mockFieldStatusReturnResult.append(true)
 
-        let expectation = self.expectation(description: "Create bank account failed")
-        mockView.expectation = expectation
+        let updateFooterContentExpectation = self.expectation(description: "Create bank account failed")
+        mockView.expectations = [mockView.updateFooterContentExpectation: updateFooterContentExpectation]
 
         // When
         presenter.createTransferMethod()
-        wait(for: [expectation], timeout: 1)
+        wait(for: Array(mockView.expectations!.values), timeout: 1)
 
         // Then
         XCTAssertTrue(mockView.isFieldValuesPerformed, "The FieldValues should be performed")
@@ -202,6 +242,9 @@ class AddTransferMethodPresenterTests: XCTestCase {
                       "The displayErrorMessageInFooter should be performed")
         XCTAssertFalse(mockView.isShowConfirmationPerformed, "The showConfirmation should not be performed")
         XCTAssertFalse(mockView.isNotificationSent, "The notification should not be sent")
+
+        XCTAssertTrue(hyperwalletInsightsMock.didTrackError,
+                      "HyperwalletInsights.trackError should be called")
     }
 
     func testCreateTransferMethod_failure_unexpectedError() {
@@ -213,11 +256,11 @@ class AddTransferMethodPresenterTests: XCTestCase {
         HyperwalletTestHelper.setUpMockServer(request: request)
 
         let expectation = self.expectation(description: "Create bank account failed")
-        mockView.expectation = expectation
+        mockView.expectations = [mockView.expectation: expectation]
 
         // When
         presenter.createTransferMethod()
-        wait(for: [expectation], timeout: 1)
+        wait(for: Array(mockView.expectations!.values), timeout: 1)
 
         // Then
         XCTAssertTrue(mockView.isFieldValuesPerformed, "The FieldValues should be performed")
@@ -244,7 +287,12 @@ class AddTransferMethodPresenterTests: XCTestCase {
 
     func testCreateTransferMethod_notSupportedTransferMethodType() {
         // Given
-        presenter = AddTransferMethodPresenter(mockView, "US", "USD", "INDIVIDUAL", "PREPAID_CARD")
+        presenter = AddTransferMethodPresenter(mockView,
+                                               "US",
+                                               "USD",
+                                               "INDIVIDUAL",
+                                               "PREPAID_CARD",
+                                               hyperwalletInsightsMock)
         mockView.mockFieldStatusReturnResult.append(true)
 
         // When
@@ -273,14 +321,17 @@ class AddTransferMethodPresenterTests: XCTestCase {
         Hippolyte.shared.add(stubbedRequest: setupTransferMethodConfigurationFields())
         HyperwalletTestHelper.setUpMockServer(request: request)
         let expectation = self.expectation(description: "HTTP bad response")
-        mockView.expectation = expectation
+        mockView.expectations = [mockView.expectation: expectation]
         mockView.showTransferMethodFieldsHandler = { fieldGroups in
             for fieldGroup in fieldGroups {
                 guard let fields = fieldGroup.fields, let fieldGroup = fieldGroup.group
                     else {
                         continue
                 }
-                let newWidgets = fields.map(WidgetFactory.newWidget)
+                let newWidgets = fields.map({
+                    WidgetFactory.newWidget(field: $0,
+                                            pageName: AddTransferMethodPresenter.addTransferMethodPageName,
+                                            pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup)})
                 let section = AddTransferMethodSectionData(
                     fieldGroup: fieldGroup,
                     country: "US",
@@ -291,18 +342,21 @@ class AddTransferMethodPresenterTests: XCTestCase {
             }
         }
         presenter.loadTransferMethodConfigurationFields(true)
-        wait(for: [expectation], timeout: 1)
+        wait(for: Array(mockView.expectations!.values), timeout: 1)
     }
 }
 
-class MockAddTransferMethodViewTests: AddTransferMethodView {
+class AddTransferMethodViewMock: AddTransferMethodView {
+    let expectation: String = "expectation"
+    let updateFooterContentExpectation: String = "updateFooterContentExpectation"
+
     var isUpdateFooterPerformed = false
     var isHideLoadingPerformed = false
     var isShowLoadingPerformed = false
     var isShowProcessingPerformed = false
     var isShowConfirmationPerformed = false
     var isDismissProcessingPerformed = false
-    var isFieldFocusPerformad = false
+    var isFieldFocusPerformed = false
     var fieldFocusField = ""
     var isShowTransferMethodFieldsPerformed = false
     var fieldGroups = [HyperwalletFieldGroup]()
@@ -318,7 +372,7 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
     var mockFieldValuesReturnResult = [(name: String, value: String)]()
     var showTransferMethodFieldsHandler: (([HyperwalletFieldGroup]) -> Void)?
 
-    var expectation: XCTestExpectation?
+    var expectations: [String: XCTestExpectation]?
 
     func resetStates() {
         isUpdateFooterPerformed = false
@@ -327,7 +381,7 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
         isShowProcessingPerformed = false
         isShowConfirmationPerformed = false
         isDismissProcessingPerformed = false
-        isFieldFocusPerformad = false
+        isFieldFocusPerformed = false
         fieldFocusField = ""
         isShowTransferMethodFieldsPerformed = false
         fieldGroups = [HyperwalletFieldGroup]()
@@ -342,7 +396,7 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
         mockFieldStatusReturnResult = [Bool]()
         mockFieldValuesReturnResult = [(name: String, value: String)]()
         showTransferMethodFieldsHandler = nil
-        expectation = nil
+        expectations = nil
     }
 
     func fieldStatus() -> [Bool] {
@@ -387,7 +441,7 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
     }
 
     func fieldFocus(fieldName: String) {
-        isFieldFocusPerformad = true
+        isFieldFocusPerformed = true
         fieldFocusField = fieldName
     }
 
@@ -396,30 +450,29 @@ class MockAddTransferMethodViewTests: AddTransferMethodView {
         self.fieldGroups = fieldGroups
         isShowTransferMethodFieldsPerformed = true
         showTransferMethodFieldsHandler?(fieldGroups)
-        expectation?.fulfill()
+        expectations?[expectation]?.fulfill()
     }
 
     func showError(title: String, message: String) {
         isTransferMethodSupported = true
     }
 
-    func showError(_ error: HyperwalletErrorType, _ handler: (() -> Void)?) {
+    func showError(_ error: HyperwalletErrorType,
+                   pageName: String,
+                   pageGroup: String,
+                   _ retry: (() -> Void)?) {
         isShowErrorPerformed = true
-        handler?()
-        expectation?.fulfill()
-    }
-
-    func showBusinessError(_ error: HyperwalletErrorType, _ handler: @escaping () -> Void) {
-        isShowErrorPerformed = true
-        handler()
+        retry?()
+        expectations?[expectation]?.fulfill()
     }
 
     func notifyTransferMethodAdded(_ transferMethod: HyperwalletTransferMethod) {
         isNotificationSent = true
-        expectation?.fulfill()
+        expectations?[expectation]?.fulfill()
     }
+
     func showFooterViewWithUpdatedSectionData(for sections: [AddTransferMethodSectionData]) {
         isDisplayErrorMessageInFooterPerformed = true
-        expectation?.fulfill()
+        expectations?[updateFooterContentExpectation]?.fulfill()
     }
 }

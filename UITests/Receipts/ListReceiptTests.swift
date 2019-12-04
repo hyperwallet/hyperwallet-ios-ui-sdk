@@ -16,10 +16,6 @@ class ListReceiptTests: BaseTests {
         spinner = app.activityIndicators["activityIndicator"]
     }
 
-    override func tearDown() {
-        mockServer.tearDown()
-    }
-
     func testReceiptsList_verifyReceiptsOrder() {
         openupReceiptsListScreenForFewMonths()
         validateListOrder()
