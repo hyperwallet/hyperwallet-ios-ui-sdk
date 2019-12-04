@@ -1,3 +1,4 @@
+import HyperwalletSDK
 @testable import TransferMethod
 import XCTest
 
@@ -20,6 +21,24 @@ class TextWidgetTests: XCTestCase {
         // Now scrub the formatted text
         let scrubbedText = textWidget.getScrubbedText(formattedText: formattedText, scrubRegex: self.scrubRegex ?? "")
         XCTAssertEqual(scrubbedText, self.expectedScrubbedText)
+    }
+
+    func testGetApplicablePattern() {
+        let fieldData = HyperwalletTestHelper.getDataFromJson("HyperwalletFieldResponseWithPattern")
+        guard let field = try? JSONDecoder().decode(HyperwalletField.self, from: fieldData) else {
+            XCTFail("Can't decode HyperwalletField from test data")
+            return
+        }
+        let textWidget = TextWidget(field: field,
+                                    pageName: AddTransferMethodPresenter.addTransferMethodPageName,
+                                    pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup)
+
+        var returnedPattern = textWidget.getFormatPattern(inputText: "4")
+        XCTAssertEqual(returnedPattern, "######## ########")
+        returnedPattern = textWidget.getFormatPattern(inputText: "50")
+        XCTAssertEqual(returnedPattern, "### ######### ####")
+        returnedPattern = textWidget.getFormatPattern(inputText: "56")
+        XCTAssertEqual(returnedPattern, "#### #### #### ####")
     }
 
     override static var defaultTestSuite: XCTestSuite {
@@ -170,7 +189,7 @@ class TextWidgetTests: XCTestCase {
             ["###-##\\", "12345", "123-45", "", "123-45"],
             ["###-##\\\\", "123456", "123-45\\", "", "123-45\\"],
             ["###-##\\\\9", "123459", "123-45\\9", "", "123-45\\9"],
-            ["###-##\\9", "123459", "123-459", "", "123-459"]
+            ["(###)###-####", "1234591111", "(123)459-1111", "([()-])", "1234591111"]
         ]
         return testParameters
     }
