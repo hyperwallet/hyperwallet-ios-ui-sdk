@@ -131,10 +131,10 @@ class TextWidget: AbstractWidget {
                         continue
                     }
 
-                    applyFormatForPatternCharacter(currentText: currentText,
+                    applyFormatForPatternCharacter(currentPatternCharacter: currentPatternCharacter,
+                                                   currentText: currentText,
                                                    currentTextCharacter: currentTextCharacter,
                                                    currentTextIndex: &currentTextIndex,
-                                                   currentPatternCharacter: currentPatternCharacter,
                                                    finalText: &finalText,
                                                    isEscapedCharacter: &isEscapedCharacter,
                                                    pattern: pattern,
@@ -152,17 +152,17 @@ class TextWidget: AbstractWidget {
     }
 
     // swiftlint:disable function_parameter_count
-    private func applyFormatForPatternCharacter(currentText: String,
+    private func applyFormatForPatternCharacter(currentPatternCharacter: [Character],
+                                                currentText: String,
                                                 currentTextCharacter: String,
                                                 currentTextIndex: inout String.Index,
-                                                currentPatternCharacter: [Character],
                                                 finalText: inout String,
                                                 isEscapedCharacter: inout Bool,
                                                 pattern: String,
                                                 patternIndex: inout String.Index,
                                                 patternCharactersToBeWritten: inout String) {
         switch currentPatternCharacter.first {
-        case PatternCharacter.lettersAndNumbersPatternCharacter.rawValue:
+        case PatternCharacter.anyPatternCharacter.rawValue:
             handleTextForLettersAndNumbers(currentText: currentText,
                                            currentTextCharacter: currentTextCharacter,
                                            currentTextIndex: &currentTextIndex,
@@ -215,8 +215,8 @@ class TextWidget: AbstractWidget {
 
     private func getTextForPatternCharacter(_ patternCharacter: Character, _ text: String) -> String? {
         switch patternCharacter {
-        case PatternCharacter.lettersAndNumbersPatternCharacter.rawValue:
-            return text.components(separatedBy: CharacterSet.alphanumerics.inverted).joined()
+        case PatternCharacter.anyPatternCharacter.rawValue:
+            return text
 
         case PatternCharacter.lettersOnlyPatternCharacter.rawValue:
             return text.components(separatedBy: CharacterSet(charactersIn: allowedLetters).inverted).joined()
@@ -257,14 +257,14 @@ class TextWidget: AbstractWidget {
 
     private func getUnformattedText() -> String {
         if let text = textField.text {
-            return getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue, text) ?? ""
+            return getTextForPatternCharacter(PatternCharacter.anyPatternCharacter.rawValue, text) ?? ""
         }
         return ""
     }
 }
 
 private enum PatternCharacter: Character {
-    case lettersAndNumbersPatternCharacter = "*"
+    case anyPatternCharacter = "*"
     case lettersOnlyPatternCharacter = "@"
     case numbersOnlyPatternCharacter = "#"
 }
