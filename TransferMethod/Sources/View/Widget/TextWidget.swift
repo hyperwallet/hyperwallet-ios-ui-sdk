@@ -84,53 +84,53 @@ class TextWidget: AbstractWidget {
     @objc
     private func textFieldDidChange() {
         let text = getUnformattedText()
-        textField.text = formatDisplayString(with: getFormatPattern(inputText: text), inputText: text)
+        if !text.isEmpty {
+            textField.text = formatDisplayString(with: getFormatPattern(inputText: text), inputText: text)
+        } else {
+            textField.text = ""
+        }
     }
 
     func formatDisplayString(with pattern: String?, inputText: String) -> String {
         if let pattern = pattern {
             var finalText = ""
             var isEscapedCharacter = false
+            var patternIndex = pattern.startIndex
+            var currentTextIndex = inputText.startIndex
+            let currentText = getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue,
+                                                         inputText)
 
-            if !inputText.isEmpty {
-                var patternIndex = pattern.startIndex
-                var currentTextIndex = inputText.startIndex
-                let currentText = getTextForPatternCharacter(
-                    PatternCharacter.lettersAndNumbersPatternCharacter.rawValue,
-                    inputText)
+            if let currentText = currentText, !currentText.isEmpty {
+                var patternCharactersToBeWritten = ""
 
-                if let currentText = currentText, !currentText.isEmpty {
-                    var patternCharactersToBeWritten = ""
+                while true {
+                    let patternRange = patternIndex ..< pattern.index(after: patternIndex)
+                    let currentPatternCharacter = [Character](pattern[patternRange])
+                    let currentTextRange = currentTextIndex ..< currentText.index(after: currentTextIndex)
+                    let currentTextCharacter = String(currentText[currentTextRange])
 
-                    while true {
-                        let patternRange = patternIndex ..< pattern.index(after: patternIndex)
-                        let currentPatternCharacter = [Character](pattern[patternRange])
-                        let currentTextRange = currentTextIndex ..< currentText.index(after: currentTextIndex)
-                        let currentTextCharacter = String(currentText[currentTextRange])
-
-                        if isEscapedCharacter {
-                            isEscapedCharacter = false
-                            finalText += currentPatternCharacter
-                            patternIndex = pattern.index(after: patternIndex)
-                            if patternIndex >= pattern.endIndex || currentTextIndex >= currentText.endIndex {
-                                break
-                            }
-                            continue
-                        }
-
-                        applyFormatForPatternCharacter(currentPatternCharacter: currentPatternCharacter,
-                                                       finalText: &finalText,
-                                                       patternCharactersToBeWritten: &patternCharactersToBeWritten,
-                                                       currentTextCharacter: currentTextCharacter,
-                                                       currentText: currentText,
-                                                       pattern: pattern,
-                                                       currentTextIndex: &currentTextIndex,
-                                                       patternIndex: &patternIndex,
-                                                       isEscapedCharacter: &isEscapedCharacter)
-
+                    if isEscapedCharacter {
+                        isEscapedCharacter = false
+                        finalText += currentPatternCharacter
+                        patternIndex = pattern.index(after: patternIndex)
                         if patternIndex >= pattern.endIndex || currentTextIndex >= currentText.endIndex {
                             break
                         }
+                        continue
+                    }
+
+                    applyFormatForPatternCharacter(currentPatternCharacter: currentPatternCharacter,
+                                                   finalText: &finalText,
+                                                   patternCharactersToBeWritten: &patternCharactersToBeWritten,
+                                                   currentTextCharacter: currentTextCharacter,
+                                                   currentText: currentText,
+                                                   pattern: pattern,
+                                                   currentTextIndex: &currentTextIndex,
+                                                   patternIndex: &patternIndex,
+                                                   isEscapedCharacter: &isEscapedCharacter)
+
+                    if patternIndex >= pattern.endIndex || currentTextIndex >= currentText.endIndex {
+                        break
                     }
                 }
             }
@@ -252,7 +252,7 @@ class TextWidget: AbstractWidget {
         if let text = textField.text {
             return getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue, text) ?? ""
         }
-        return textField.text ?? ""
+        return ""
     }
 }
 
