@@ -60,11 +60,6 @@ final class ListTransferMethodCell: UITableViewCell {
         set { detailTextLabel?.font = newValue
             detailTextLabel?.font = newValue }
     }
-
-    @objc dynamic var subTitleLabelColor: UIColor! {
-        get { return detailTextLabel?.textColor }
-        set { detailTextLabel?.textColor = newValue }
-    }
 }
 
 extension ListTransferMethodCell {
@@ -98,9 +93,9 @@ extension ListTransferMethodCell {
         let attributedText = NSMutableAttributedString()
         attributedText.append(value: String(format: "%@\n", transferMethodCountry),
                               font: subTitleLabelFont,
-                              color: subTitleLabelColor)
+                              color: Theme.Label.subTitleColor)
         if let additionalInfo = additionalInfo {
-            attributedText.append(value: additionalInfo, font: subTitleLabelFont, color: subTitleLabelColor)
+            attributedText.append(value: additionalInfo, font: subTitleLabelFont, color: Theme.Label.subTitleColor)
         }
 
         return attributedText
