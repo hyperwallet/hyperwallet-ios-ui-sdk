@@ -94,16 +94,16 @@ class AddTransferMethodWireAccountUSMoreMaskingTests: BaseTests {
      default pattern "\\@@#*\\#@#*\\*@#*"
     */
     func testAddTransferMethod_combinedWithEscapeTest() {
-           XCTAssert(app.navigationBars["Wire Account"].exists)
+        XCTAssert(app.navigationBars["Wire Account"].exists)
         addTransferMethod.setMiddleName("aaaaaa")
         checkSelectFieldValueIsEqualTo("@a", addTransferMethod.middleNameInput)
 
         addTransferMethod.setMiddleName("111111")
         checkSelectFieldValueIsEqualTo("@", addTransferMethod.middleNameInput)
 
-        // spreadsheet-case-100
+        // spreadsheet-case-100 only takes a-zA-Z0-9 and therefor * is not an input
         addTransferMethod.setMiddleName("a1aa1a")
-        checkSelectFieldValueIsEqualTo("@a1a#a1a*", addTransferMethod.middleNameInput)
+        checkSelectFieldValueIsEqualTo("@a1a#a1a", addTransferMethod.middleNameInput)
 
         addTransferMethod.setMiddleName("@a1a#a1a*a1a")
         checkSelectFieldValueIsEqualTo("@a1a#a1a*a1a", addTransferMethod.middleNameInput)
@@ -116,12 +116,18 @@ class AddTransferMethodWireAccountUSMoreMaskingTests: BaseTests {
         XCTAssert(app.navigationBars["Wire Account"].exists)
         addTransferMethod.setPhoneNumber("aaaaaa")
         checkSelectFieldValueIsEqualTo("", addTransferMethod.phoneNumberInput)
+
         addTransferMethod.setPhoneNumber("111111")
         checkSelectFieldValueIsEqualTo("1", addTransferMethod.phoneNumberInput)
+
         addTransferMethod.setPhoneNumber("1a12a2")
         checkSelectFieldValueIsEqualTo("1a12a2", addTransferMethod.phoneNumberInput)
+
         addTransferMethod.setPhoneNumber("a1aa1a")
         checkSelectFieldValueIsEqualTo("1aa1a", addTransferMethod.phoneNumberInput)
+
+        addTransferMethod.setPhoneNumber("1ab12b")
+        checkSelectFieldValueIsEqualTo("1ab1b", addTransferMethod.phoneNumberInput)
     }
 
     /**
@@ -129,23 +135,23 @@ class AddTransferMethodWireAccountUSMoreMaskingTests: BaseTests {
        */
        func testAddTransferMethod_charsWithEscapeTest() {
               XCTAssert(app.navigationBars["Wire Account"].exists)
-        // spreadsheet-case-73
+        // spreadsheet-case-73 (same as spreadsheet case-22)
         addTransferMethod.setMobileNumber("11")
-        checkSelectFieldValueIsEqualTo("11*", addTransferMethod.mobileNumberInput)
+        checkSelectFieldValueIsEqualTo("11", addTransferMethod.mobileNumberInput)
 
         addTransferMethod.setMobileNumber("1111")
-        checkSelectFieldValueIsEqualTo("11*11", addTransferMethod.mobileNumberInput)
+        checkSelectFieldValueIsEqualTo("11*1", addTransferMethod.mobileNumberInput)
 
         addTransferMethod.setMobileNumber("aa11aa11")
-        checkSelectFieldValueIsEqualTo("aa*11", addTransferMethod.mobileNumberInput)
+        checkSelectFieldValueIsEqualTo("aa*1", addTransferMethod.mobileNumberInput)
 
-        // spreadsheet-case-76
+        // spreadsheet-case-76 (only takes a-zA-Z0-9 and therefore "-" is not an input)
         addTransferMethod.setMobileNumber("11-NOV")
-        checkSelectFieldValueIsEqualTo("11*-N", addTransferMethod.mobileNumberInput)
+        checkSelectFieldValueIsEqualTo("11*N", addTransferMethod.mobileNumberInput)
 
-         // spreadsheet-case-77
+         // spreadsheet-case-77 (only takes a-zA-Z0-9 and therefore "-" is not an input)
         addTransferMethod.setMobileNumber("aa-aa-1111")
-        checkSelectFieldValueIsEqualTo("aa*-a", addTransferMethod.mobileNumberInput)
+        checkSelectFieldValueIsEqualTo("aa*a", addTransferMethod.mobileNumberInput)
        }
 
     /**
@@ -153,8 +159,9 @@ class AddTransferMethodWireAccountUSMoreMaskingTests: BaseTests {
     */
      func testAddTransferMethod_letterWithEscapeTest() {
         // spreadsheet-case-47 (this will not work)
+
         addTransferMethod.setIntermediaryBankId("aa")
-        checkSelectFieldValueIsEqualTo("aa@", addTransferMethod.intermediaryBankIdInput)
+        checkSelectFieldValueIsEqualTo("aa", addTransferMethod.intermediaryBankIdInput)
 
         // This will work with your implementation
         addTransferMethod.setIntermediaryBankId("aaa")
