@@ -91,4 +91,34 @@ class AddTransferMethodWireAccountUSMoreMaskingTests: BaseTests {
         // Assert it shows "ABC\DEF" - swift requires to enter double \\
         checkSelectFieldValueIsEqualTo("ABC\\DEF", addTransferMethod.lastNameInput)
     }
+
+    /**
+     default pattern "\\@@#*\\#@#*\\*@#*"
+    */
+    func testAddTransferMethod_combinedWithEscapeTest() {
+           XCTAssert(app.navigationBars["Wire Account"].exists)
+        addTransferMethod.setMiddleName("aaaaaa")
+        checkSelectFieldValueIsEqualTo("@a", addTransferMethod.middleNameInput)
+        addTransferMethod.setMiddleName("111111")
+        checkSelectFieldValueIsEqualTo("@1", addTransferMethod.middleNameInput)
+        addTransferMethod.setMiddleName("a1aa1a")
+        checkSelectFieldValueIsEqualTo("@a1a#a1a*", addTransferMethod.middleNameInput)
+        addTransferMethod.setMiddleName("@a1a#a1a*a1a")
+        checkSelectFieldValueIsEqualTo("@a1a#a1a*a1a", addTransferMethod.middleNameInput)
+    }
+
+    /**
+       default pattern "#@*#@*"
+     */
+    func testAddTransferMethod_combinedDoubleTest() {
+        XCTAssert(app.navigationBars["Wire Account"].exists)
+        addTransferMethod.setPhoneNumber("aaaaaa")
+        checkSelectFieldValueIsEqualTo("", addTransferMethod.phoneNumberInput)
+        addTransferMethod.setPhoneNumber("111111")
+        checkSelectFieldValueIsEqualTo("1", addTransferMethod.phoneNumberInput)
+        addTransferMethod.setPhoneNumber("1a12a2")
+        checkSelectFieldValueIsEqualTo("1a12a2", addTransferMethod.phoneNumberInput)
+        addTransferMethod.setPhoneNumber("a1aa1a")
+        checkSelectFieldValueIsEqualTo("1aa1a", addTransferMethod.phoneNumberInput)
+    }
 }

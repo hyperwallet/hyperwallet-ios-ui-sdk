@@ -179,6 +179,9 @@
                                             "length": "",
                                             "pattern": "is invalid length or format.",
                                             "empty": "You must provide a value for this field"
+                                        },
+                                        "mask": {
+                                            "defaultPattern": "\\@@#*\\#@#*\\*@#*"
                                         }
                                     },
                                     {
@@ -231,7 +234,11 @@
                                             "length": "",
                                             "pattern": "is invalid length or format.",
                                             "empty": "You must provide a value for this field"
+                                        },
+                                        "mask": {
+                                            "defaultPattern": "#@*#@*"
                                         }
+
                                     },
                                     {
                                         "dataType": "PHONE",

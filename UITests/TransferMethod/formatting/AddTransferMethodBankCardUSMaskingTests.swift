@@ -51,6 +51,12 @@ class AddTransferMethodBankCardUSMaskingTests: BaseTests {
         addTransferMethod.setCardNumber("1111$2222$3333$4444$")
         checkSelectFieldValueIsEqualTo("1111 2222 3333 4444", addTransferMethod.cardNumberInput)
 
+        addTransferMethod.setCardNumber("aa aa 11112222")
+               checkSelectFieldValueIsEqualTo("1111 2222", addTransferMethod.cardNumberInput)
+
+        addTransferMethod.setCardNumber("aa-aa11112222")
+                      checkSelectFieldValueIsEqualTo("1111 2222", addTransferMethod.cardNumberInput)
+
         addTransferMethod.setCardNumber("Aa")
               checkSelectFieldValueIsEqualTo("", addTransferMethod.cardNumberInput)
     }
