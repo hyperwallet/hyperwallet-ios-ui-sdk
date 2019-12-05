@@ -19,8 +19,8 @@ env:
     Simulator' configuration="Debug" code_coverage="YES" only_active_arch="YES"
   - ios_version='13.1'  ios_device='iPhone 11' scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS
     Simulator' configuration="XCUITest" code_coverage="NO" only_active_arch="NO"
-  - ios_version='12.1'  ios_device='iPhone 7'  scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS
-    Simulator' configuration="XCUITest" code_coverage="NO" only_active_arch="NO"
+  #- ios_version='12.1'  ios_device='iPhone 7'  scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS
+  #  Simulator' configuration="XCUITest" code_coverage="NO" only_active_arch="NO"
 before_install:
 - echo -e "machine github.com\n  login $CI_USER_TOKEN" > ~/.netrc
 - |
