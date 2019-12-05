@@ -124,37 +124,6 @@ class AddTransferMethodWireAccountUSMaskingTests: BaseTests {
     }
 
     /**
-     default pattern
-     ###-##\           -> expect 123-45
-     ###-##\\         -> expect 123-45   (because single has no meaning)
-     ###-##\\\\     -> 123-45\
-     ###-##\\\\9     -> 123-45\9
-     ###-##\\9       ->123-459
-     */
-    /*
-    func testAddTransferMethod_escapeCharTest() {
-        mockServer.setupStub(url: "/graphql",
-                             filename: "TransferMethodConfigurationResponseWithEscapeMasks",
-                             method: HTTPMethod.post)
-
-        openMenu()
-
-        XCTAssert(app.navigationBars["Wire Account"].exists)
-        let input: String = "12345"
-        addTransferMethod.setBankId(input)
-        checkSelectFieldValueIsEqualTo("123-45", addTransferMethod.bankIdInput)
-
-        addTransferMethod.setBranchId(input)
-        checkSelectFieldValueIsEqualTo("123-45", addTransferMethod.branchIdInput)
-
-        addTransferMethod.setBankAccountId(input)
-        checkSelectFieldValueIsEqualTo("123-45\\9", addTransferMethod.bankAccountIdInput)
-
-        addTransferMethod.setPostalCode(input)
-        checkSelectFieldValueIsEqualTo("123-459", addTransferMethod.postalCodeInput)
-    } */
-
-    /**
      default pattern "**@#**"
      */
     func testAddTransferMethod_starForAllCharTest() {
@@ -163,18 +132,15 @@ class AddTransferMethodWireAccountUSMaskingTests: BaseTests {
                              method: HTTPMethod.post)
         openMenu()
         XCTAssert(app.navigationBars["Wire Account"].exists)
-        addTransferMethod.setFirstName("汉字a2汉字")
-        checkSelectFieldValueIsEqualTo("汉字a2汉字", addTransferMethod.firstNameInput)
+        addTransferMethod.setFirstName("AAa2BB")
+        checkSelectFieldValueIsEqualTo("AAa2BB", addTransferMethod.firstNameInput)
 
-        addTransferMethod.setFirstName("汉字a299")
-        checkSelectFieldValueIsEqualTo("汉字a299", addTransferMethod.firstNameInput)
-        addTransferMethod.setFirstName("汉字a2AB")
-        checkSelectFieldValueIsEqualTo("汉字a2AB", addTransferMethod.firstNameInput)
-
-        addTransferMethod.setFirstName("汉字a2ab")
-        checkSelectFieldValueIsEqualTo("汉字a2ab", addTransferMethod.firstNameInput)
-        addTransferMethod.setFirstName("汉字汉字")
-        checkSelectFieldValueIsEqualTo("汉字", addTransferMethod.firstNameInput)
+        addTransferMethod.setFirstName("aaa2bb")
+        checkSelectFieldValueIsEqualTo("aaa2bb", addTransferMethod.firstNameInput)
+        addTransferMethod.setFirstName("11a2AB")
+        checkSelectFieldValueIsEqualTo("11a2AB", addTransferMethod.firstNameInput)
+        addTransferMethod.setFirstName("11a2ab汉字$%%123abc")
+        checkSelectFieldValueIsEqualTo("11a2ab", addTransferMethod.firstNameInput)
     }
 
     /**
@@ -188,8 +154,6 @@ class AddTransferMethodWireAccountUSMaskingTests: BaseTests {
 
         addTransferMethod.setBankId("11223344")
         checkSelectFieldValueIsEqualTo("11#22@33-44", addTransferMethod.bankIdInput)
-        addTransferMethod.setBranchId("aaa111字字字")
-        checkSelectFieldValueIsEqualTo("#aaa#111#字字字", addTransferMethod.branchIdInput)
     }
     /**
      "defaultPattern": "999999 ####"
@@ -216,6 +180,39 @@ class AddTransferMethodWireAccountUSMaskingTests: BaseTests {
             text: "99991", field: addTransferMethod.stateProvinceInput, app: app)
         checkSelectFieldValueIsEqualTo("999999 1", addTransferMethod.stateProvinceInput)
     }
+
+    /**
+       default pattern
+       ###-##\           -> expect 123-45
+       ###-##\\         -> expect 123-45   (because single has no meaning)
+       ###-##\\\\     -> expect 123-45\
+       ###-##\\\\9     -> expect 123-45\9
+       ###-##\\9       -> expect 123-459
+       */
+      /*
+      func testAddTransferMethod_escapeCharTest() {
+          mockServer.setupStub(url: "/graphql",
+                               filename: "TransferMethodConfigurationResponseWithEscapeMasks",
+                               method: HTTPMethod.post)
+
+          openMenu()
+          XCTAssert(app.navigationBars["Wire Account"].exists)
+          let input: String = "12345"
+          // verify ###-##\
+          addTransferMethod.setBankId(input)
+          checkSelectFieldValueIsEqualTo("123-45", addTransferMethod.bankIdInput)
+
+          // verify ###-##\\
+          addTransferMethod.setBranchId(input)
+          checkSelectFieldValueIsEqualTo("123-45", addTransferMethod.branchIdInput)
+
+           // verify ###-##\\
+          addTransferMethod.setBankAccountId(input)
+          checkSelectFieldValueIsEqualTo("123-45\\9", addTransferMethod.bankAccountIdInput)
+
+          addTransferMethod.setPostalCode(input)
+          checkSelectFieldValueIsEqualTo("123-459", addTransferMethod.postalCodeInput)
+      } */
 
     private func openMenu() {
         app.tables.cells.staticTexts["Add Transfer Method"].tap()

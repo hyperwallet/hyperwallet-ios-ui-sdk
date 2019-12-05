@@ -27,8 +27,6 @@ class AddTransferMethodMaskingTest: BaseTests {
            addTransferMethod = AddTransferMethod(app: app)
        }
 
-    // conditionalPattern = "####-###-########"
-    // defaultPattern = "####"
     func testAddTransferMethod_accountNumberDefaultPattern() {
            XCTAssert(app.navigationBars["Bank Account"].exists)
            XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
@@ -39,14 +37,16 @@ class AddTransferMethodMaskingTest: BaseTests {
         checkSelectFieldValueIsEqualTo("1234-5", addTransferMethod.bankAccountIdInput)
     }
 
+    // "defaultPattern": "####-####-####-##"
     func testAddTransferMethod_accountNumberDefaultPatternByPaste() {
         XCTAssert(app.navigationBars["Bank Account"].exists)
         XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
         addTransferMethod.bankAccountIdInput.enterByPaste(
-            text: "123456780000", field: addTransferMethod.bankAccountIdInput, app: app)
-        checkSelectFieldValueIsEqualTo("1234-5678-0000", addTransferMethod.bankAccountIdInput)
+            text: "12345678000088", field: addTransferMethod.bankAccountIdInput, app: app)
+        checkSelectFieldValueIsEqualTo("1234-5678-0000-88", addTransferMethod.bankAccountIdInput)
     }
 
+    // "defaultPattern": "####-####-####-##"
     func testAddTransferMethod_accountNumberDefaultPatternByPasteWithHyphen() {
            XCTAssert(app.navigationBars["Bank Account"].exists)
            XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
@@ -55,7 +55,6 @@ class AddTransferMethodMaskingTest: BaseTests {
            checkSelectFieldValueIsEqualTo("1234-5678-0000-99", addTransferMethod.bankAccountIdInput)
        }
 
-    // Assert invalid input is not allowed
     func testAddTransferMethod_accountNumberMaskingInvalidInput() {
            XCTAssert(app.navigationBars["Bank Account"].exists)
            XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
@@ -63,16 +62,16 @@ class AddTransferMethodMaskingTest: BaseTests {
            addTransferMethod.bankAccountIdInput.enterByPaste(
             text: "abc123abc", field: addTransferMethod.bankAccountIdInput, app: app)
 
-        // Assert the field only shows "123"
+         // Assert the field only shows "123"
          checkSelectFieldValueIsEqualTo("123", addTransferMethod.bankAccountIdInput)
     }
 
-    // Assert extra char is not entered
     func testAddTransferMethod_accountNumberMaskingInvalidLength() {
            XCTAssert(app.navigationBars["Bank Account"].exists)
            XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
            addTransferMethod.bankAccountIdInput.enterByPaste(
             text: "1234-5678-00001111", field: addTransferMethod.bankAccountIdInput, app: app)
+           // Assert extra char is not entered
            checkSelectFieldValueIsEqualTo("1234-5678-0000-11", addTransferMethod.bankAccountIdInput)
     }
 }

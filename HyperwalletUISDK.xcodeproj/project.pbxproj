@@ -82,8 +82,6 @@
 		4175941B239715A900921392 /* AddTransferMethodWireAccountUSMaskingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417594072397152A00921392 /* AddTransferMethodWireAccountUSMaskingTests.swift */; };
 		4175941C239715AC00921392 /* AddTransferMethodBankCardUSMaskingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417594082397152A00921392 /* AddTransferMethodBankCardUSMaskingTests.swift */; };
 		4175941D239715AF00921392 /* AddTransferMethodBankAccountUSMaskingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417594092397152A00921392 /* AddTransferMethodBankAccountUSMaskingTests.swift */; };
-		4175941E239715B300921392 /* TransferMethodBankAccountResponseConditionalPatternMask.json in Resources */ = {isa = PBXBuildFile; fileRef = 417594112397156700921392 /* TransferMethodBankAccountResponseConditionalPatternMask.json */; };
-		4175941F239716C200921392 /* TransferMethodConfigrationCABankAccountResponseMask.json in Resources */ = {isa = PBXBuildFile; fileRef = 4175940E2397156600921392 /* TransferMethodConfigrationCABankAccountResponseMask.json */; };
 		41759420239716C600921392 /* TransferMethodConfigrationUSBankAccountResponseMask.json in Resources */ = {isa = PBXBuildFile; fileRef = 4175940F2397156700921392 /* TransferMethodConfigrationUSBankAccountResponseMask.json */; };
 		41759422239716CC00921392 /* TransferMethodConfigurationResponseWithStarMasks.json in Resources */ = {isa = PBXBuildFile; fileRef = 417594122397156700921392 /* TransferMethodConfigurationResponseWithStarMasks.json */; };
 		41759423239716CF00921392 /* TransferMethodConfigurationUSBankCardResponseWithMask.json in Resources */ = {isa = PBXBuildFile; fileRef = 417594132397156700921392 /* TransferMethodConfigurationUSBankCardResponseWithMask.json */; };
@@ -645,10 +643,8 @@
 		417594072397152A00921392 /* AddTransferMethodWireAccountUSMaskingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodWireAccountUSMaskingTests.swift; sourceTree = "<group>"; };
 		417594082397152A00921392 /* AddTransferMethodBankCardUSMaskingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodBankCardUSMaskingTests.swift; sourceTree = "<group>"; };
 		417594092397152A00921392 /* AddTransferMethodBankAccountUSMaskingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodBankAccountUSMaskingTests.swift; sourceTree = "<group>"; };
-		4175940E2397156600921392 /* TransferMethodConfigrationCABankAccountResponseMask.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = TransferMethodConfigrationCABankAccountResponseMask.json; path = Individual/TransferMethodConfigrationCABankAccountResponseMask.json; sourceTree = "<group>"; };
 		4175940F2397156700921392 /* TransferMethodConfigrationUSBankAccountResponseMask.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = TransferMethodConfigrationUSBankAccountResponseMask.json; path = Individual/TransferMethodConfigrationUSBankAccountResponseMask.json; sourceTree = "<group>"; };
 		417594102397156700921392 /* TransferMethodConfigurationWireAccountResponseWithMask.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = TransferMethodConfigurationWireAccountResponseWithMask.json; path = Individual/TransferMethodConfigurationWireAccountResponseWithMask.json; sourceTree = "<group>"; };
-		417594112397156700921392 /* TransferMethodBankAccountResponseConditionalPatternMask.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = TransferMethodBankAccountResponseConditionalPatternMask.json; path = Individual/TransferMethodBankAccountResponseConditionalPatternMask.json; sourceTree = "<group>"; };
 		417594122397156700921392 /* TransferMethodConfigurationResponseWithStarMasks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = TransferMethodConfigurationResponseWithStarMasks.json; path = Individual/TransferMethodConfigurationResponseWithStarMasks.json; sourceTree = "<group>"; };
 		417594132397156700921392 /* TransferMethodConfigurationUSBankCardResponseWithMask.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = TransferMethodConfigurationUSBankCardResponseWithMask.json; path = Individual/TransferMethodConfigurationUSBankCardResponseWithMask.json; sourceTree = "<group>"; };
 		4175942A2398454300921392 /* TransferMethodConfigurationResponseWithEscapeMasks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = TransferMethodConfigurationResponseWithEscapeMasks.json; path = Individual/TransferMethodConfigurationResponseWithEscapeMasks.json; sourceTree = "<group>"; };
@@ -1595,8 +1591,6 @@
 			isa = PBXGroup;
 			children = (
 				4175942A2398454300921392 /* TransferMethodConfigurationResponseWithEscapeMasks.json */,
-				417594112397156700921392 /* TransferMethodBankAccountResponseConditionalPatternMask.json */,
-				4175940E2397156600921392 /* TransferMethodConfigrationCABankAccountResponseMask.json */,
 				4175940F2397156700921392 /* TransferMethodConfigrationUSBankAccountResponseMask.json */,
 				417594122397156700921392 /* TransferMethodConfigurationResponseWithStarMasks.json */,
 				417594132397156700921392 /* TransferMethodConfigurationUSBankCardResponseWithMask.json */,
@@ -2750,14 +2744,12 @@
 				9807B76B226442C60028A280 /* TransferMethodConfigurationBankAccountResponse.json in Resources */,
 				4157135D22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json in Resources */,
 				41D8363722FB4814003544AB /* ListOneBankAccountTransferJPY.json in Resources */,
-				4175941F239716C200921392 /* TransferMethodConfigrationCABankAccountResponseMask.json in Resources */,
 				41D8363422FB4814003544AB /* AvailableFundJPY.json in Resources */,
 				DBA9FA5E22791B2900C1301A /* UserIndividualResponse.json in Resources */,
 				641324E62295764500512816 /* AuthenticationTokenResponse.json in Resources */,
 				2E6DBB8C2326F2C200863672 /* AvailableFundMultiCurrenciesFxChange.json in Resources */,
 				41759424239716D100921392 /* TransferMethodConfigurationWireAccountResponseWithMask.json in Resources */,
 				9807B76C226442C60028A280 /* TransferMethodConfigurationBankCardResponse.json in Resources */,
-				4175941E239715B300921392 /* TransferMethodBankAccountResponseConditionalPatternMask.json in Resources */,
 				98F63E6E2284AD370090101D /* PayPalAccountDuplicateResponse.json in Resources */,
 				41759420239716C600921392 /* TransferMethodConfigrationUSBankAccountResponseMask.json in Resources */,
 				98F3D757230C5C1000A8195F /* AvailableFundCAD.json in Resources */,
