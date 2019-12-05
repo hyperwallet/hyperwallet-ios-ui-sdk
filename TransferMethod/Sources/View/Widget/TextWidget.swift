@@ -105,7 +105,7 @@ class TextWidget: AbstractWidget {
 
     func formatDisplayString(with pattern: String?, inputText: String) -> String {
         if let pattern = pattern {
-            let currentText = getTextForPatternCharacter(PatternCharacter.anyPatternCharacter.rawValue,
+            let currentText = getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue,
                                                          inputText)
             var currentTextIndex = inputText.startIndex
             var finalText = ""
@@ -162,7 +162,7 @@ class TextWidget: AbstractWidget {
                                                 patternIndex: inout String.Index,
                                                 patternCharactersToBeWritten: inout String) {
         switch currentPatternCharacter.first {
-        case PatternCharacter.anyPatternCharacter.rawValue:
+        case PatternCharacter.lettersAndNumbersPatternCharacter.rawValue:
             handleTextForLettersAndNumbers(currentText: currentText,
                                            currentTextCharacter: currentTextCharacter,
                                            currentTextIndex: &currentTextIndex,
@@ -215,8 +215,9 @@ class TextWidget: AbstractWidget {
 
     private func getTextForPatternCharacter(_ patternCharacter: Character, _ text: String) -> String? {
         switch patternCharacter {
-        case PatternCharacter.anyPatternCharacter.rawValue:
+        case PatternCharacter.lettersAndNumbersPatternCharacter.rawValue:
             return text
+                .components(separatedBy: CharacterSet(charactersIn: allowedLetters + allowedNumbers).inverted).joined()
 
         case PatternCharacter.lettersOnlyPatternCharacter.rawValue:
             return text.components(separatedBy: CharacterSet(charactersIn: allowedLetters).inverted).joined()
@@ -230,7 +231,7 @@ class TextWidget: AbstractWidget {
     }
 
     func getFormatPattern(inputText: String) -> String? {
-        let scrubbedText = getTextForPatternCharacter(PatternCharacter.anyPatternCharacter.rawValue,
+        let scrubbedText = getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue,
                                                       inputText)
         var maskPattern = field.mask?.defaultPattern
         let conditionalPatterns = field.mask?.conditionalPatterns
@@ -257,14 +258,14 @@ class TextWidget: AbstractWidget {
 
     private func getUnformattedText() -> String {
         if let text = textField.text {
-            return getTextForPatternCharacter(PatternCharacter.anyPatternCharacter.rawValue, text) ?? ""
+            return getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue, text) ?? ""
         }
         return ""
     }
 }
 
 private enum PatternCharacter: Character {
-    case anyPatternCharacter = "*"
+    case lettersAndNumbersPatternCharacter = "*"
     case lettersOnlyPatternCharacter = "@"
     case numbersOnlyPatternCharacter = "#"
 }
