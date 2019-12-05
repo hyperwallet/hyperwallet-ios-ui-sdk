@@ -47,6 +47,15 @@ class AddTransferMethodWireAccountUSMoreMaskingTests: BaseTests {
         XCTAssert(app.navigationBars["Wire Account"].exists)
         addTransferMethod.setBankId("11223344")
         checkSelectFieldValueIsEqualTo("11#22@33-44", addTransferMethod.bankIdInput)
+
+        addTransferMethod.setBankId("aa11aa22aa33aa$$")
+        checkSelectFieldValueIsEqualTo("11#22@33-44", addTransferMethod.bankIdInput)
+
+        addTransferMethod.setBankId("11223344xxyyxx")
+               checkSelectFieldValueIsEqualTo("11#22@33-44", addTransferMethod.bankIdInput)
+
+        addTransferMethod.setBankId("汉字$%%")
+        checkSelectFieldValueIsEqualTo("", addTransferMethod.bankIdInput)
     }
     /**
      "defaultPattern": "999999 ####"
@@ -99,10 +108,14 @@ class AddTransferMethodWireAccountUSMoreMaskingTests: BaseTests {
            XCTAssert(app.navigationBars["Wire Account"].exists)
         addTransferMethod.setMiddleName("aaaaaa")
         checkSelectFieldValueIsEqualTo("@a", addTransferMethod.middleNameInput)
+
         addTransferMethod.setMiddleName("111111")
-        checkSelectFieldValueIsEqualTo("@1", addTransferMethod.middleNameInput)
+        checkSelectFieldValueIsEqualTo("@", addTransferMethod.middleNameInput)
+
+        // spreadsheet-case-100
         addTransferMethod.setMiddleName("a1aa1a")
         checkSelectFieldValueIsEqualTo("@a1a#a1a*", addTransferMethod.middleNameInput)
+
         addTransferMethod.setMiddleName("@a1a#a1a*a1a")
         checkSelectFieldValueIsEqualTo("@a1a#a1a*a1a", addTransferMethod.middleNameInput)
     }
@@ -121,4 +134,28 @@ class AddTransferMethodWireAccountUSMoreMaskingTests: BaseTests {
         addTransferMethod.setPhoneNumber("a1aa1a")
         checkSelectFieldValueIsEqualTo("1aa1a", addTransferMethod.phoneNumberInput)
     }
+
+    /**
+        default pattern "**\\***"
+       */
+       func testAddTransferMethod_charsWithEscapeTest() {
+              XCTAssert(app.navigationBars["Wire Account"].exists)
+        // spreadsheet-case-73
+        addTransferMethod.setMobileNumber("11")
+        checkSelectFieldValueIsEqualTo("11*", addTransferMethod.mobileNumberInput)
+
+        addTransferMethod.setMobileNumber("1111")
+        checkSelectFieldValueIsEqualTo("11*11", addTransferMethod.mobileNumberInput)
+
+        addTransferMethod.setMobileNumber("aa11aa11")
+        checkSelectFieldValueIsEqualTo("aa*11", addTransferMethod.mobileNumberInput)
+
+        // spreadsheet-case-76
+        addTransferMethod.setMobileNumber("11-NOV")
+        checkSelectFieldValueIsEqualTo("11*-N", addTransferMethod.mobileNumberInput)
+
+         // spreadsheet-case-77
+        addTransferMethod.setMobileNumber("aa-aa-1111")
+        checkSelectFieldValueIsEqualTo("aa*-a", addTransferMethod.mobileNumberInput)
+       }
 }
