@@ -216,7 +216,8 @@ class TextWidget: AbstractWidget {
     private func getTextForPatternCharacter(_ patternCharacter: Character, _ text: String) -> String? {
         switch patternCharacter {
         case PatternCharacter.lettersAndNumbersPatternCharacter.rawValue:
-            return text.components(separatedBy: CharacterSet.alphanumerics.inverted).joined()
+            return text
+                .components(separatedBy: CharacterSet(charactersIn: allowedLetters + allowedNumbers).inverted).joined()
 
         case PatternCharacter.lettersOnlyPatternCharacter.rawValue:
             return text.components(separatedBy: CharacterSet(charactersIn: allowedLetters).inverted).joined()
@@ -229,23 +230,18 @@ class TextWidget: AbstractWidget {
         }
     }
 
-    private func getFormatPattern(inputText: String) -> String? {
-        return getMaskPattern(inputText: inputText,
-                              defaultPattern: field.mask?.defaultPattern,
-                              conditionalPatterns: field.mask?.conditionalPatterns)
-    }
-
-    func getMaskPattern(inputText: String,
-                        defaultPattern: String?,
-                        conditionalPatterns: [HyperwalletSDK.HyperwalletConditionalPattern]?) -> String? {
+    func getFormatPattern(inputText: String) -> String? {
         let scrubbedText = getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue,
                                                       inputText)
-        if let scrubbedText = scrubbedText,
-           let matchingConditionalPattern = conditionalPatterns?.first(where: {
-            NSRegularExpression($0.regex).matches(scrubbedText)}) {
-            return matchingConditionalPattern.pattern
+        var maskPattern = field.mask?.defaultPattern
+        let conditionalPatterns = field.mask?.conditionalPatterns
+
+        if let scrubbedText = scrubbedText, let matchingConditionalPattern = conditionalPatterns?.first(where: {
+            NSRegularExpression($0.regex).matches(scrubbedText)
+        }) {
+            maskPattern = matchingConditionalPattern.pattern
         }
-        return defaultPattern
+        return maskPattern
     }
 
     private func isEscapedCharacter(_ character: Character) -> Bool {
