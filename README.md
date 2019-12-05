@@ -351,13 +351,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         // Override point for customization after application launch.
-
-        Theme.themeColor = UIColor.white
-        Theme.tintColor = UIColor(red: 3 / 255, green: 124 / 255, blue: 1, alpha: 1) //blue
-        Theme.Button.color = Theme.tintColor
-        Theme.Icon.color = Theme.tintColor
         Theme.Icon.backgroundColor = UIColor(red: 219 / 255, green: 241 / 255, blue: 1, alpha: 1) // Light blue
-        Theme.SpinnerView.activityIndicatorViewColor = Theme.tintColor
 
         // Set the default tint color
         window?.tintColor = Theme.tintColor
