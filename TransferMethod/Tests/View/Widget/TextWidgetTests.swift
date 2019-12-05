@@ -77,7 +77,6 @@ class TextWidgetTests: XCTestCase {
     // swiftlint:disable function_body_length
     private static func getTestParameters() -> [[String]] {
         // Each test parameter describes: pattern, inputText, expectedFormattedText, scrubRegex, expectedScrubbedText
-        // remove "fixed" comments after review for validity
         let testParameters = [
             ["#", "1", "1", "\\s", "1"],
             ["#", "11", "1", "\\s", "1"],
@@ -99,7 +98,7 @@ class TextWidgetTests: XCTestCase {
             ["A##B##", "A11B11", "A11B11", "\\s", "A11B11"],
             ["A##B##", "AAA11BBB11", "A11B11", "\\s", "A11B11"],
             ["A##B##", "", "", "\\s", ""],
-            ["##\\###", "111", "11#1", "\\#", "111"], // fixed
+            ["##\\###", "111", "11#1", "\\#", "111"],
             ["##\\###", "1111", "11#11", "\\#", "1111"],
             ["##\\###", "aa11aa11", "11#11", "\\s", "11#11"],
             ["##\\###", "11-11", "11#11", "\\s", "11#11"],
@@ -124,7 +123,7 @@ class TextWidgetTests: XCTestCase {
             ["1@@2@@", "1aa2aa", "1aa2aa", "\\s", "1aa2aa"],
             ["1@@2@@", "111aa222bb", "1aa2bb", "2", "1aabb"],
             ["1@@2@@", "", "", "\\s", ""],
-            ["@@\\@@@", "aaa", "aa@a", "\\s", "aa@a"], // fixed
+            ["@@\\@@@", "aaa", "aa@a", "\\s", "aa@a"],
             ["@@\\@@@", "aaaa", "aa@aa", "\\@", "aaaa"],
             ["@@\\@@@", "11aa11aa", "aa@aa", "\\@", "aaaa"],
             ["@@\\@@@", "aa-aa", "aa@aa", "\\@", "aaaa"],
@@ -150,7 +149,7 @@ class TextWidgetTests: XCTestCase {
             ["1**A**", "1aa2aa", "1aaA2a", "A", "1aa2a"],
             ["1**A**", "111aa222bb", "111Aaa", "\\s", "111Aaa"],
             ["1**A**", "", "", "\\s", ""],
-            ["**\\***", "111", "11*1", "\\s", "11*1"], // fixed
+            ["**\\***", "111", "11*1", "\\s", "11*1"],
             ["**\\***", "1111", "11*11", "\\s", "11*11"],
             ["**\\***", "aa11aa11", "aa*11", "\\s", "aa*11"],
             ["**\\***", "11-NOV", "11*NO", "\\*", "11NO"],
@@ -177,7 +176,7 @@ class TextWidgetTests: XCTestCase {
             ["^#@*-@#*", "", "", "\\s", ""],
             ["\\@@#*\\#@#*\\*@#*", "aaaaaa", "@a", "\\s", "@a"],
             ["\\@@#*\\#@#*\\*@#*", "111111", "@", "\\s", "@"],
-            ["\\@@#*\\#@#*\\*@#*", "a1aa1a", "@a1a#a1a", "\\s", "@a1a#a1a"], // fixed
+            ["\\@@#*\\#@#*\\*@#*", "a1aa1a", "@a1a#a1a", "\\s", "@a1a#a1a"],
             ["\\@@#*\\#@#*\\*@#*", "@a1a#a1a*a1a", "@a1a#a1a*a1a", "\\s", "@a1a#a1a*a1a"],
             ["@#@ #@#", "V1B2N3", "V1B 2N3", "\\s", "V1B2N3"],
             ["###", "A123", "123", "", "123"],
