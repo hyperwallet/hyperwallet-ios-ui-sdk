@@ -95,11 +95,13 @@ class TextWidget: AbstractWidget {
 
     @objc
     private func textFieldDidChange() {
-        let text = getUnformattedText()
-        if !text.isEmpty {
-            textField.text = formatDisplayString(with: getFormatPattern(inputText: text), inputText: text)
-        } else {
-            textField.text = ""
+        if (field.mask?.defaultPattern) != nil {
+            let text = getUnformattedText()
+            if !text.isEmpty {
+                textField.text = formatDisplayString(with: getFormatPattern(inputText: text), inputText: text)
+            } else {
+                textField.text = ""
+            }
         }
     }
 
@@ -163,7 +165,7 @@ class TextWidget: AbstractWidget {
                                                 patternCharactersToBeWritten: inout String) {
         switch currentPatternCharacter.first {
         case PatternCharacter.lettersAndNumbersPatternCharacter.rawValue:
-            handleTextForLettersAndNumbers(currentText: currentText,
+            formatTextForLettersAndNumbers(currentText: currentText,
                                            currentTextCharacter: currentTextCharacter,
                                            currentTextIndex: &currentTextIndex,
                                            finalText: &finalText,
@@ -175,7 +177,7 @@ class TextWidget: AbstractWidget {
              PatternCharacter.numbersOnlyPatternCharacter.rawValue:
             let filteredCharacter =
                 getTextForPatternCharacter(currentPatternCharacter.first!, currentTextCharacter)
-            handleTextForLettersAndNumbers(currentText: currentText,
+            formatTextForLettersAndNumbers(currentText: currentText,
                                            currentTextCharacter: filteredCharacter,
                                            currentTextIndex: &currentTextIndex,
                                            finalText: &finalText,
@@ -197,7 +199,7 @@ class TextWidget: AbstractWidget {
         }
     }
 
-    private func handleTextForLettersAndNumbers(currentText: String,
+    private func formatTextForLettersAndNumbers(currentText: String,
                                                 currentTextCharacter: String?,
                                                 currentTextIndex: inout String.Index,
                                                 finalText: inout String,
