@@ -24,6 +24,7 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
 
         app.tables.cells.staticTexts["Add Transfer Method"].tap()
         spinner = app.activityIndicators["activityIndicator"]
+        table = app.tables["addTransferMethodTable"]
         waitForNonExistence(spinner)
         addTransferMethod = AddTransferMethod(app: app)
     }
@@ -68,8 +69,8 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
 
         addTransferMethod.clickCreateTransferMethodButton()
 
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["branchId_error"].exists)
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["bankAccountId_error"].exists)
+        XCTAssert(elementquery["branchId_error"].exists)
+        XCTAssert(elementquery["bankAccountId_error"].exists)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidLength() {
@@ -78,8 +79,8 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
 
         addTransferMethod.clickCreateTransferMethodButton()
 
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["branchId_error"].exists)
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["bankAccountId_error"].exists)
+        XCTAssert(elementquery["branchId_error"].exists)
+        XCTAssert(elementquery["bankAccountId_error"].exists)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidPresence() {
@@ -88,9 +89,9 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
 
         addTransferMethod.clickCreateTransferMethodButton()
 
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["branchId_error"].exists)
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["bankAccountId_error"].exists)
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["bankAccountPurpose_error"].exists)
+        XCTAssert(elementquery["branchId_error"].exists)
+        XCTAssert(elementquery["bankAccountId_error"].exists)
+        XCTAssert(elementquery["bankAccountPurpose_error"].exists)
     }
 
     func testAddTransferMethod_createBankAccountInvalidRouting() {

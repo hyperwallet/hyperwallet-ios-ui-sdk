@@ -23,6 +23,7 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
 
         app.tables.cells.staticTexts["Add Transfer Method"].tap()
         spinner = app.activityIndicators["activityIndicator"]
+        table = app.tables["addTransferMethodTable"]
         waitForNonExistence(spinner)
         addTransferMethod = AddTransferMethod(app: app)
     }
@@ -46,21 +47,21 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
         addTransferMethod.setEmail("abc@testcom")
         addTransferMethod.clickCreateTransferMethodButton()
 
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["email_error"].exists)
+        XCTAssert(elementquery["email_error"].exists)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidLength() {
         addTransferMethod.setEmail("ab")
         addTransferMethod.clickCreateTransferMethodButton()
 
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["email_error"].exists)
+        XCTAssert(elementquery["email_error"].exists)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidPresence() {
         addTransferMethod.setEmail("")
         addTransferMethod.clickCreateTransferMethodButton()
 
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["email_error"].exists)
+        XCTAssert(elementquery["email_error"].exists)
     }
 
     func testAddTransferMethod_createPayPalAccountValidResponse() {

@@ -23,6 +23,7 @@ class AddTransferMethodBankCardTests: BaseTests {
 
         app.tables.cells.staticTexts["Add Transfer Method"].tap()
         spinner = app.activityIndicators["activityIndicator"]
+        table = app.tables["addTransferMethodTable"]
         waitForNonExistence(spinner)
         addTransferMethod = AddTransferMethod(app: app)
     }
@@ -51,8 +52,8 @@ class AddTransferMethodBankCardTests: BaseTests {
         addTransferMethod.setCvv("99-a11")
         addTransferMethod.clickCreateTransferMethodButton()
 
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["cardNumber_error"].exists)
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["cvv_error"].exists)
+        XCTAssert(elementquery["cardNumber_error"].exists)
+        XCTAssert(elementquery["cvv_error"].exists)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidLength() {
@@ -60,8 +61,8 @@ class AddTransferMethodBankCardTests: BaseTests {
         addTransferMethod.setCvv("990011")
         addTransferMethod.clickCreateTransferMethodButton()
 
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["cardNumber_error"].exists)
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["cvv_error"].exists)
+        XCTAssert(elementquery["cardNumber_error"].exists)
+        XCTAssert(elementquery["cvv_error"].exists)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidPresence() {
@@ -69,8 +70,8 @@ class AddTransferMethodBankCardTests: BaseTests {
         addTransferMethod.setCvv("")
         addTransferMethod.clickCreateTransferMethodButton()
 
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["cardNumber_error"].exists)
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["cvv_error"].exists)
+        XCTAssert(elementquery["cardNumber_error"].exists)
+        XCTAssert(elementquery["cvv_error"].exists)
     }
 
     func testAddTransferMethod_createBankCardValidResponse() {

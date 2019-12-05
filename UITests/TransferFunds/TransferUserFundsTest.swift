@@ -17,6 +17,7 @@ class TransferUserFundsTest: BaseTests {
         transferFunds = TransferFunds(app: app)
         selectDestination = TransferFundsSelectDestination(app: app)
         addTransferMethod = AddTransferMethod(app: app)
+        table = app.tables["scheduleTransferTableView"]
     }
 
     /*
@@ -216,7 +217,7 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.tapNextButton()
 
         // Assert Confirmation Page
-        waitForExistence(app.tables["scheduleTransferTableView"].staticTexts["Confirm"])
+        waitForExistence(elementquery["Confirm"])
     }
 
     func testTransferFunds_createTransferWithoutFX() {
@@ -266,7 +267,7 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.tapNextButton()
 
         // Assert Confirmation Page
-        waitForExistence(app.tables["scheduleTransferTableView"].staticTexts["Confirm"])
+        waitForExistence(elementquery["Confirm"])
     }
 
     /* Given that user is on the Transfer fund page and selected a Transfer Destination
