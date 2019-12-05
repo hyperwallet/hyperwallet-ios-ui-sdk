@@ -125,6 +125,9 @@
                                             "length": "The minimum length of this field is 8 and maximum length is 11.",
                                             "pattern": "is invalid length or format.",
                                             "empty": "You must provide a value for this field"
+                                        },
+                                        "mask": {
+                                            "defaultPattern": "@@\\@@@"
                                         }
                                     },
                                     {
@@ -141,6 +144,9 @@
                                             "length": "The minimum length of this field is 1 and maximum length is 34.",
                                             "pattern": "is invalid length or format.",
                                             "empty": "You must provide a value for this field"
+                                        },
+                                        "mask": {
+                                            "defaultPattern": "**-**"
                                         }
                                     }
                                 ]

@@ -91,17 +91,6 @@ class AddTransferMethodWireAccountUSMoreMaskingTests: BaseTests {
     }
 
     /**
-     default pattern "@@@\\\\@@@"
-     */
-    func testAddTransferMethod_fourEscapeCharsTestByPaste() {
-        XCTAssert(app.navigationBars["Wire Account"].exists)
-        addTransferMethod.lastNameInput.enterByPaste(
-            text: "ABCDEF", field: addTransferMethod.lastNameInput, app: app)
-        // Assert it shows "ABC\DEF" - swift requires to enter double \\
-        checkSelectFieldValueIsEqualTo("ABC\\DEF", addTransferMethod.lastNameInput)
-    }
-
-    /**
      default pattern "\\@@#*\\#@#*\\*@#*"
     */
     func testAddTransferMethod_combinedWithEscapeTest() {
@@ -158,4 +147,37 @@ class AddTransferMethodWireAccountUSMoreMaskingTests: BaseTests {
         addTransferMethod.setMobileNumber("aa-aa-1111")
         checkSelectFieldValueIsEqualTo("aa*-a", addTransferMethod.mobileNumberInput)
        }
+
+    /**
+     default pattern "@@\\@@@@*"
+    */
+     func testAddTransferMethod_letterWithEscapeTest() {
+        // spreadsheet-case-47 (this will not work)
+        addTransferMethod.setIntermediaryBankId("aa")
+        checkSelectFieldValueIsEqualTo("aa@", addTransferMethod.intermediaryBankIdInput)
+
+        // This will work with your implementation
+        addTransferMethod.setIntermediaryBankId("aaa")
+        checkSelectFieldValueIsEqualTo("aa@a", addTransferMethod.intermediaryBankIdInput)
+
+        addTransferMethod.setIntermediaryBankId("aaaa")
+        checkSelectFieldValueIsEqualTo("aa@aa", addTransferMethod.intermediaryBankIdInput)
+
+        addTransferMethod.setIntermediaryBankId("11aa11aa")
+        checkSelectFieldValueIsEqualTo("aa@aa", addTransferMethod.intermediaryBankIdInput)
+
+        addTransferMethod.setIntermediaryBankId("aa-aa")
+        checkSelectFieldValueIsEqualTo("aa@aa", addTransferMethod.intermediaryBankIdInput)
+
+        addTransferMethod.setIntermediaryBankId("11-11-aaaa")
+        checkSelectFieldValueIsEqualTo("aa@aa", addTransferMethod.intermediaryBankIdInput)
+    }
+
+    /**
+      defaultPattern": "**-**"
+     */
+     func testAddTransferMethod_charWithDelimiterTest() {
+        addTransferMethod.setIntermediaryBankAccountId("11-")
+        checkSelectFieldValueIsEqualTo("11", addTransferMethod.intermediaryBankAccountIdInput)
+    }
 }
