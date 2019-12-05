@@ -29,8 +29,8 @@
                                             "empty": "You must provide a value for this field"
                                         },
                                         "mask": {
-                                           "defaultPattern": "##\\###\\@##-###"
-                                         }
+                                            "defaultPattern": "##\\###\\@##-###"
+                                        }
                                     },
                                     {
                                         "dataType": "TEXT",
@@ -47,8 +47,8 @@
                                             "pattern": "is invalid length or format.",
                                             "empty": "You must provide a value for this field"
                                         },
-                                       "mask": {
-                                          "defaultPattern": "\\#@@@\\####\\#***"
+                                        "mask": {
+                                            "defaultPattern": "\\#@@@\\####\\#***"
                                         }
                                     },
                                     {
@@ -194,6 +194,9 @@
                                             "length": "",
                                             "pattern": "is invalid length or format.",
                                             "empty": "You must provide a value for this field"
+                                        },
+                                        "mask": {
+                                            "defaultPattern": "@@@\\\\@@@"
                                         }
                                     },
                                     {
@@ -1213,7 +1216,7 @@
                                             "empty": "You must provide a value for this field"
                                         },
                                         "mask": {
-                                        "defaultPattern": "999999 ####"
+                                            "defaultPattern": "999999 ####"
                                         }
                                     },
                                     {
@@ -1261,9 +1264,9 @@
                                             "empty": "You must provide a value for this field"
                                         },
                                         "mask": {
-                                                                                   "defaultPattern": "###-##\\9",
-                                                                                   "scrubRegex": "\\-"
-                                                                               }
+                                            "defaultPattern": "###-##\\9",
+                                            "scrubRegex": "\\-"
+                                        }
                                     }
                                 ]
                             }

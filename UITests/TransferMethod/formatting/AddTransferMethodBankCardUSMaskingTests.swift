@@ -3,8 +3,6 @@ import XCTest
 class AddTransferMethodBankCardUSMaskingTests: BaseTests {
     var selectTransferMethodType: SelectTransferMethodType!
     var addTransferMethod: AddTransferMethod!
-    let bankCard = NSPredicate(format: "label CONTAINS[c] 'Bank Card'")
-
         override func setUp() {
                super.setUp()
                app = XCUIApplication()
@@ -25,10 +23,6 @@ class AddTransferMethodBankCardUSMaskingTests: BaseTests {
                waitForNonExistence(spinner)
                addTransferMethod = AddTransferMethod(app: app)
            }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
 
     func testAddTransferMethod_cardNumberDefaultPattern() {
         XCTAssert(app.navigationBars["Debit Card"].exists)
@@ -64,10 +58,10 @@ class AddTransferMethodBankCardUSMaskingTests: BaseTests {
     func testAddTransferMethod_cardNumberMaskingInvalidLength() {
         XCTAssert(app.navigationBars["Debit Card"].exists)
         XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
-        // length up to 19
+
         addTransferMethod.setCardNumber("11112222333344444")
         checkSelectFieldValueIsEqualTo("1111 2222 3333 4444", addTransferMethod.cardNumberInput)
-        // length more than 19
+
         addTransferMethod.setCardNumber("111a 12222333344445555")
         checkSelectFieldValueIsEqualTo("1111 2222 3333 4444", addTransferMethod.cardNumberInput)
     }

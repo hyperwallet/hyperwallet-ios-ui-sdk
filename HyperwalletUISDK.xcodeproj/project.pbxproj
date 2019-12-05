@@ -87,7 +87,7 @@
 		41759422239716CC00921392 /* TransferMethodConfigurationResponseWithStarMasks.json in Resources */ = {isa = PBXBuildFile; fileRef = 417594122397156700921392 /* TransferMethodConfigurationResponseWithStarMasks.json */; };
 		41759423239716CF00921392 /* TransferMethodConfigurationUSBankCardResponseWithMask.json in Resources */ = {isa = PBXBuildFile; fileRef = 417594132397156700921392 /* TransferMethodConfigurationUSBankCardResponseWithMask.json */; };
 		41759424239716D100921392 /* TransferMethodConfigurationWireAccountResponseWithMask.json in Resources */ = {isa = PBXBuildFile; fileRef = 417594102397156700921392 /* TransferMethodConfigurationWireAccountResponseWithMask.json */; };
-		4175942C239845FE00921392 /* TransferMethodConfigurationResponseWithEscapeMasks.json in Resources */ = {isa = PBXBuildFile; fileRef = 4175942A2398454300921392 /* TransferMethodConfigurationResponseWithEscapeMasks.json */; };
+		4175942E239981FC00921392 /* AddTransferMethodWireAccountUSMoreMaskingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4175942D239981FC00921392 /* AddTransferMethodWireAccountUSMoreMaskingTests.swift */; };
 		41C3CA1C231084DA008A904C /* AddNewTransferMethodsMoreThanOneTransferMethod.json in Resources */ = {isa = PBXBuildFile; fileRef = 41C3CA1B231084DA008A904C /* AddNewTransferMethodsMoreThanOneTransferMethod.json */; };
 		41C3CA1E23108677008A904C /* AddNewTransferMethodOneTransferMethod.json in Resources */ = {isa = PBXBuildFile; fileRef = 41C3CA1D23108677008A904C /* AddNewTransferMethodOneTransferMethod.json */; };
 		41D8361122FB425E003544AB /* TransferFunds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D8360F22FB4255003544AB /* TransferFunds.swift */; };
@@ -649,7 +649,7 @@
 		417594102397156700921392 /* TransferMethodConfigurationWireAccountResponseWithMask.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = TransferMethodConfigurationWireAccountResponseWithMask.json; path = Individual/TransferMethodConfigurationWireAccountResponseWithMask.json; sourceTree = "<group>"; };
 		417594122397156700921392 /* TransferMethodConfigurationResponseWithStarMasks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = TransferMethodConfigurationResponseWithStarMasks.json; path = Individual/TransferMethodConfigurationResponseWithStarMasks.json; sourceTree = "<group>"; };
 		417594132397156700921392 /* TransferMethodConfigurationUSBankCardResponseWithMask.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = TransferMethodConfigurationUSBankCardResponseWithMask.json; path = Individual/TransferMethodConfigurationUSBankCardResponseWithMask.json; sourceTree = "<group>"; };
-		4175942A2398454300921392 /* TransferMethodConfigurationResponseWithEscapeMasks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = TransferMethodConfigurationResponseWithEscapeMasks.json; path = Individual/TransferMethodConfigurationResponseWithEscapeMasks.json; sourceTree = "<group>"; };
+		4175942D239981FC00921392 /* AddTransferMethodWireAccountUSMoreMaskingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransferMethodWireAccountUSMoreMaskingTests.swift; sourceTree = "<group>"; };
 		41C3CA1B231084DA008A904C /* AddNewTransferMethodsMoreThanOneTransferMethod.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AddNewTransferMethodsMoreThanOneTransferMethod.json; sourceTree = "<group>"; };
 		41C3CA1D23108677008A904C /* AddNewTransferMethodOneTransferMethod.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AddNewTransferMethodOneTransferMethod.json; sourceTree = "<group>"; };
 		41D8360C22FB420F003544AB /* TransferUserFundsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferUserFundsTest.swift; sourceTree = "<group>"; };
@@ -1249,6 +1249,7 @@
 			isa = PBXGroup;
 			children = (
 				417594072397152A00921392 /* AddTransferMethodWireAccountUSMaskingTests.swift */,
+				4175942D239981FC00921392 /* AddTransferMethodWireAccountUSMoreMaskingTests.swift */,
 				417594082397152A00921392 /* AddTransferMethodBankCardUSMaskingTests.swift */,
 				417594092397152A00921392 /* AddTransferMethodBankAccountUSMaskingTests.swift */,
 			);
@@ -1593,7 +1594,6 @@
 		C358A9A9227267C000E5AE47 /* TransferMethod */ = {
 			isa = PBXGroup;
 			children = (
-				4175942A2398454300921392 /* TransferMethodConfigurationResponseWithEscapeMasks.json */,
 				4175940F2397156700921392 /* TransferMethodConfigrationUSBankAccountResponseMask.json */,
 				417594122397156700921392 /* TransferMethodConfigurationResponseWithStarMasks.json */,
 				417594132397156700921392 /* TransferMethodConfigurationUSBankCardResponseWithMask.json */,
@@ -2756,7 +2756,6 @@
 				98F63E6E2284AD370090101D /* PayPalAccountDuplicateResponse.json in Resources */,
 				41759420239716C600921392 /* TransferMethodConfigrationUSBankAccountResponseMask.json in Resources */,
 				98F3D757230C5C1000A8195F /* AvailableFundCAD.json in Resources */,
-				4175942C239845FE00921392 /* TransferMethodConfigurationResponseWithEscapeMasks.json in Resources */,
 				41D8363D22FB4814003544AB /* NoDestinationFee.json in Resources */,
 				41759422239716CC00921392 /* TransferMethodConfigurationResponseWithStarMasks.json in Resources */,
 				B3DDC1012385D7E800E1A562 /* InsightsSuccessResponse.json in Resources */,
@@ -3181,6 +3180,7 @@
 				4175941C239715AC00921392 /* AddTransferMethodBankCardUSMaskingTests.swift in Sources */,
 				641EBE92228EE35A00D718F4 /* AddTransferMethodBankAccountBusinessTests.swift in Sources */,
 				C358A9A62272644000E5AE47 /* ListTransferMethods.swift in Sources */,
+				4175942E239981FC00921392 /* AddTransferMethodWireAccountUSMoreMaskingTests.swift in Sources */,
 				C358A9A52272644000E5AE47 /* AddTransferMethod.swift in Sources */,
 				4157136422C56B53005D6DB1 /* PrepaidCardListReceiptTests.swift in Sources */,
 				DBB2B7152261C142006C48D3 /* SelectTransferMethodTypeTests.swift in Sources */,
