@@ -344,9 +344,15 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 2), "United States Ending on 4281")
 
         // Assert first row is checked by default
+        if #available(iOS 13.0, *) {
+        XCTAssertTrue(usdBankAccount.buttons["checkmark"].exists, "By default the first row should be selected")
+        XCTAssertFalse(cadBankAccount.buttons["checkmark"].exists, "By default the first row should be selected")
+        XCTAssertFalse(prepaidCard.buttons["checkmark"].exists, "By default the first row should be selected")
+        } else {
         XCTAssertTrue(usdBankAccount.buttons["More Info"].exists, "By default the first row should be selected")
         XCTAssertFalse(cadBankAccount.buttons["More Info"].exists, "By default the first row should be selected")
         XCTAssertFalse(prepaidCard.buttons["More Info"].exists, "By default the first row should be selected")
+        }
 
         // Assert can go back to previous page
         selectDestination.clickBackButton()
