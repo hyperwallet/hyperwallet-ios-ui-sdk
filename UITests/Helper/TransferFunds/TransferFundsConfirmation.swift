@@ -59,9 +59,9 @@ class TransferFundsConfirmation {
         foreignExchangeRate = scheduleTable.staticTexts["transfer_fx_rate_confirmation".localized()]
 
         if #available(iOS 13.0, *) {
-        confirmButton = scheduleTable.cells.buttons["scheduleTransferLabel"]
+            confirmButton = scheduleTable.cells.buttons["scheduleTransferLabel"]
         } else {
-        confirmButton = scheduleTable.cells.staticTexts["scheduleTransferLabel"]
+            confirmButton = scheduleTable.cells.staticTexts["scheduleTransferLabel"]
         }
     }
 

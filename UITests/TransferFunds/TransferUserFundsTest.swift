@@ -20,9 +20,9 @@ class TransferUserFundsTest: BaseTests {
         selectDestination = TransferFundsSelectDestination(app: app)
         addTransferMethod = AddTransferMethod(app: app)
         if #available(iOS 13.0, *) {
-        elementQuery = app.tables["scheduleTransferTableView"].buttons
+            elementQuery = app.tables["scheduleTransferTableView"].buttons
         } else {
-        elementQuery = app.tables["scheduleTransferTableView"].staticTexts
+            elementQuery = app.tables["scheduleTransferTableView"].staticTexts
         }
     }
 
@@ -351,13 +351,13 @@ class TransferUserFundsTest: BaseTests {
 
         // Assert first row is checked by default
         if #available(iOS 13.0, *) {
-        XCTAssertTrue(usdBankAccount.buttons["checkmark"].exists, "By default the first row should be selected")
-        XCTAssertFalse(cadBankAccount.buttons["checkmark"].exists, "By default the first row should be selected")
-        XCTAssertFalse(prepaidCard.buttons["checkmark"].exists, "By default the first row should be selected")
+            XCTAssertTrue(usdBankAccount.buttons["checkmark"].exists, "By default the first row should be selected")
+            XCTAssertFalse(cadBankAccount.buttons["checkmark"].exists, "By default the first row should be selected")
+            XCTAssertFalse(prepaidCard.buttons["checkmark"].exists, "By default the first row should be selected")
         } else {
-        XCTAssertTrue(usdBankAccount.buttons["More Info"].exists, "By default the first row should be selected")
-        XCTAssertFalse(cadBankAccount.buttons["More Info"].exists, "By default the first row should be selected")
-        XCTAssertFalse(prepaidCard.buttons["More Info"].exists, "By default the first row should be selected")
+            XCTAssertTrue(usdBankAccount.buttons["More Info"].exists, "By default the first row should be selected")
+            XCTAssertFalse(cadBankAccount.buttons["More Info"].exists, "By default the first row should be selected")
+            XCTAssertFalse(prepaidCard.buttons["More Info"].exists, "By default the first row should be selected")
         }
 
         // Assert can go back to previous page

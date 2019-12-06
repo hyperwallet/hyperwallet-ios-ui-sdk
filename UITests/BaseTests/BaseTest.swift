@@ -4,7 +4,6 @@ class BaseTests: XCTestCase {
     var app: XCUIApplication!
     var mockServer: HyperwalletMockWebServer!
     var spinner: XCUIElement!
-    var table: XCUIElement!
 
     override func setUp() {
         mockServer = HyperwalletMockWebServer()

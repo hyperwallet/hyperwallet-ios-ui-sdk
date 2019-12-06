@@ -26,9 +26,9 @@ class AddTransferMethodBankCardTests: BaseTests {
         waitForNonExistence(spinner)
         addTransferMethod = AddTransferMethod(app: app)
         if #available(iOS 13.0, *) {
-        elementQuery = app.tables["addTransferMethodTable"].buttons
+            elementQuery = app.tables["addTransferMethodTable"].buttons
         } else {
-        elementQuery = app.tables["addTransferMethodTable"].staticTexts
+            elementQuery = app.tables["addTransferMethodTable"].staticTexts
         }
     }
 
