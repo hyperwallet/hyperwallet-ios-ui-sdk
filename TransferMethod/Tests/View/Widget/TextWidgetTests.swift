@@ -17,7 +17,9 @@ class TextWidgetTests: XCTestCase {
 
     func testInputs() {
         let formattedText = textWidget.formatDisplayString(with: pattern ?? "", inputText: inputText ?? "")
-        XCTAssertEqual(formattedText, self.expectedFormattedText)
+        XCTAssertEqual(formattedText,
+                       self.expectedFormattedText,
+                       "formatted text should be " + self.expectedFormattedText!)
         // Now scrub the formatted text
         let scrubbedText = textWidget.getScrubbedText(formattedText: formattedText, scrubRegex: self.scrubRegex ?? "")
         XCTAssertEqual(scrubbedText, self.expectedScrubbedText)
