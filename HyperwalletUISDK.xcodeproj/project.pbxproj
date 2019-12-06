@@ -1895,6 +1895,7 @@
 		DBCA37EB225E892400CD4137 = {
 			isa = PBXGroup;
 			children = (
+				A66A5DF5238EA8B100B55151 /* Scripts */,
 				DB551F6222E1316D00DD65C2 /* Common */,
 				DB4679832260380C00E1AF49 /* Demo */,
 				DBD2667F2261A601002973C3 /* Deployment */,
@@ -2731,6 +2732,7 @@
 			files = (
 				DB46798F2260380D00E1AF49 /* LaunchScreen.storyboard in Resources */,
 				DB46798C2260380D00E1AF49 /* Assets.xcassets in Resources */,
+				A66A5DF7238EA92700B55151 /* travisPublishDocs.sh in Resources */,
 				DB46798A2260380C00E1AF49 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
