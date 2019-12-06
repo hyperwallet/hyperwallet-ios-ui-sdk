@@ -19,10 +19,10 @@ class TextWidgetTests: XCTestCase {
         let formattedText = textWidget.formatDisplayString(with: pattern ?? "", inputText: inputText ?? "")
         XCTAssertEqual(formattedText,
                        self.expectedFormattedText,
-                       "formatted text should be " + self.expectedFormattedText!)
+                       "formatted text should be \(self.expectedFormattedText!)")
         // Now scrub the formatted text
         let scrubbedText = textWidget.getScrubbedText(formattedText: formattedText, scrubRegex: self.scrubRegex ?? "")
-        XCTAssertEqual(scrubbedText, self.expectedScrubbedText, "Scrubbed text should be as expected")
+        XCTAssertEqual(scrubbedText, self.expectedScrubbedText, "Scrubbed text should be \(self.expectedScrubbedText!)")
     }
 
     func testGetApplicablePattern() {
@@ -35,12 +35,10 @@ class TextWidgetTests: XCTestCase {
                                     pageName: AddTransferMethodPresenter.addTransferMethodPageName,
                                     pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup)
 
-        var returnedPattern = textWidget.getFormatPattern(inputText: "4")
-        XCTAssertEqual(returnedPattern, "######## ########", "Formatted text should be ######## ########")
         var returnedPattern = textWidget.getFormatPattern(inputText: "41")
-        XCTAssertEqual(returnedPattern, "######## ########")
+        XCTAssertEqual(returnedPattern, "######## ########", "Formatted text should be ######## ########")
         returnedPattern = textWidget.getFormatPattern(inputText: "46")
-        XCTAssertEqual(returnedPattern, "# ###############")
+        XCTAssertEqual(returnedPattern, "# ###############", "Formatted text should be # ###############")
         returnedPattern = textWidget.getFormatPattern(inputText: "50")
         XCTAssertEqual(returnedPattern, "### ######### ####", "Formatted text should be ### ######### ####")
         returnedPattern = textWidget.getFormatPattern(inputText: "56")
