@@ -34,6 +34,7 @@ class AddTransferMethodWireAccountUSMoreMaskingTests: BaseTests {
 
         addTransferMethod.setFirstName("aaa2bb")
         checkSelectFieldValueIsEqualTo("aaa2bb", addTransferMethod.firstNameInput)
+
         addTransferMethod.setFirstName("11a2AB")
         checkSelectFieldValueIsEqualTo("11a2AB", addTransferMethod.firstNameInput)
         addTransferMethod.setFirstName("11a2ab汉字$%%123abc")
@@ -83,8 +84,10 @@ class AddTransferMethodWireAccountUSMoreMaskingTests: BaseTests {
     func testAddTransferMethod_fourEscapeCharsTest() {
         XCTAssert(app.navigationBars["Wire Account"].exists)
         addTransferMethod.setLastName("ABCDEF")
+
         // Assert it shows "ABC\DEF" - swift requires to enter double \\
         checkSelectFieldValueIsEqualTo("ABC\\DEF", addTransferMethod.lastNameInput)
+
         addTransferMethod.setLastName("ABCDEFG")
         // Assert it shows "ABC\DEF" - swift requires to enter double \\
         checkSelectFieldValueIsEqualTo("ABC\\DEF", addTransferMethod.lastNameInput)
@@ -187,10 +190,14 @@ class AddTransferMethodWireAccountUSMoreMaskingTests: BaseTests {
         XCTAssert(app.navigationBars["Wire Account"].exists)
         addTransferMethod.setIntermediaryBankAccountId("11-")
         checkSelectFieldValueIsEqualTo("11", addTransferMethod.intermediaryBankAccountIdInput)
+        addTransferMethod.setIntermediaryBankAccountId("汉汉-")
+        checkSelectFieldValueIsEqualTo("", addTransferMethod.intermediaryBankAccountIdInput)
+        addTransferMethod.setIntermediaryBankAccountId("汉%-")
+        checkSelectFieldValueIsEqualTo("", addTransferMethod.intermediaryBankAccountIdInput)
     }
 
     /**
-     defaultPattern": "###-##\\"
+     defaultPattern": "###-##\\"  (will not test ###-##\  as '\' is invalid input)
      */
     func testAddTransferMethod_escapeCharAppearAtEndTest() {
         XCTAssert(app.navigationBars["Wire Account"].exists)
