@@ -49,7 +49,6 @@ public extension ThemeManager {
         proxy.titleLabelFont = Theme.Label.bodyFont
         proxy.titleLabelColor = Theme.Label.color
         proxy.subTitleLabelFont = Theme.Label.captionOne
-        proxy.subTitleLabelColor = Theme.Label.subTitleColor
     }
 
     private static func applyToSelectTransferMethodTypeCell() {
@@ -57,6 +56,5 @@ public extension ThemeManager {
         proxy.titleLabelFont = Theme.Label.bodyFont
         proxy.titleLabelColor = Theme.Label.color
         proxy.subTitleLabelFont = Theme.Label.captionOne
-        proxy.subTitleLabelColor = Theme.Label.subTitleColor
     }
 }
