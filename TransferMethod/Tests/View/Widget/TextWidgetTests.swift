@@ -35,8 +35,10 @@ class TextWidgetTests: XCTestCase {
                                     pageName: AddTransferMethodPresenter.addTransferMethodPageName,
                                     pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup)
 
-        var returnedPattern = textWidget.getFormatPattern(inputText: "4")
+        var returnedPattern = textWidget.getFormatPattern(inputText: "41")
         XCTAssertEqual(returnedPattern, "######## ########")
+        returnedPattern = textWidget.getFormatPattern(inputText: "46")
+        XCTAssertEqual(returnedPattern, "# ###############")
         returnedPattern = textWidget.getFormatPattern(inputText: "50")
         XCTAssertEqual(returnedPattern, "### ######### ####")
         returnedPattern = textWidget.getFormatPattern(inputText: "56")
