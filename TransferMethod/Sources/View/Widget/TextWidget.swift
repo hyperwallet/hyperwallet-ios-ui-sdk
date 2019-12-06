@@ -233,13 +233,11 @@ class TextWidget: AbstractWidget {
     }
 
     func getFormatPattern(inputText: String) -> String? {
-        let scrubbedText = getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue,
-                                                      inputText)
         var maskPattern = field.mask?.defaultPattern
         let conditionalPatterns = field.mask?.conditionalPatterns
 
-        if let scrubbedText = scrubbedText, let matchingConditionalPattern = conditionalPatterns?.first(where: {
-            NSRegularExpression($0.regex).matches(scrubbedText)
+        if let matchingConditionalPattern = conditionalPatterns?.first(where: {
+            NSRegularExpression($0.regex).matches(inputText)
         }) {
             maskPattern = matchingConditionalPattern.pattern
         }
