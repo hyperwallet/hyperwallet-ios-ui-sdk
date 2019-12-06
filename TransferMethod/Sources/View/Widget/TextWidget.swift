@@ -72,8 +72,6 @@ class TextWidget: AbstractWidget {
         textField.accessibilityIdentifier = field.name
         if let valueString = field.value {
             textField.text = formatDisplayString(with: getFormatPattern(inputText: valueString), inputText: valueString)
-        } else {
-            textField.text = field.value
         }
 
         if field.isEditable ?? true {
