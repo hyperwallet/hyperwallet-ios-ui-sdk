@@ -188,6 +188,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
     }
 
     func testNavigateToAddTransferMethod_success() {
+        let indexPath = IndexPath(row: 0, section: 0)
         // Given
         addGetIndividualHyperwalletUserResponse()
         HyperwalletTestHelper.setUpMockServer(request: setUpTransferMethodConfigurationKeys())
@@ -211,6 +212,8 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
         XCTAssertEqual(presenter.countryCurrencySectionData.count, 2, "The countryCurrencyCount should be 2")
         XCTAssertEqual(presenter.sectionData.count, 1, "The transferMethodTypesCount should be 1")
         XCTAssertTrue(hyperwalletInsightsMock.didTrackClick, "HyperwalletInsights.trackClick should be called")
+        XCTAssertNotNil(presenter.getCountryCurrencyConfiguration(indexPath: indexPath),
+                        "The country currency cell configuration should not be nil")
     }
 
     func testTrackCountryClick_success() {
