@@ -50,7 +50,7 @@ class AddTransferMethodWireAccountUSMoreMaskingTests: BaseTests {
         checkSelectFieldValueIsEqualTo("11#22@33-44", addTransferMethod.bankIdInput)
 
         addTransferMethod.setBankId("aa11aa22aa33aa$$")
-        checkSelectFieldValueIsEqualTo("11#22@33-44", addTransferMethod.bankIdInput)
+        checkSelectFieldValueIsEqualTo("11#22@33", addTransferMethod.bankIdInput)
 
         addTransferMethod.setBankId("11223344xxyyxx")
         checkSelectFieldValueIsEqualTo("11#22@33-44", addTransferMethod.bankIdInput)
