@@ -5,7 +5,7 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
     var addTransferMethod: AddTransferMethod!
 
     let wireAccount = NSPredicate(format: "label CONTAINS[c] 'Wire Transfer'")
-
+    var elementQuery: XCUIElementQuery!
     override func setUp() {
         super.setUp()
 
@@ -24,9 +24,13 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
 
         app.tables.cells.staticTexts["Add Transfer Method"].tap()
         spinner = app.activityIndicators["activityIndicator"]
-        table = app.tables["addTransferMethodTable"]
         waitForNonExistence(spinner)
         addTransferMethod = AddTransferMethod(app: app)
+        if #available(iOS 13.0, *) {
+        elementQuery = app.tables["addTransferMethodTable"].buttons
+        } else {
+        elementQuery = app.tables["addTransferMethodTable"].staticTexts
+        }
     }
 
     func testAddTransferMethod_displaysElementsOnTmcResponse() {
@@ -52,9 +56,9 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
 
         addTransferMethod.clickCreateTransferMethodButton()
 
-        XCTAssert(elementquery["bankId_error"].exists)
-        XCTAssert(elementquery["branchId_error"].exists)
-        XCTAssert(elementquery["bankAccountId_error"].exists)
+        XCTAssert(elementQuery["bankId_error"].exists)
+        XCTAssert(elementQuery["branchId_error"].exists)
+        XCTAssert(elementQuery["bankAccountId_error"].exists)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidPattern() {
@@ -64,9 +68,9 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
 
         addTransferMethod.clickCreateTransferMethodButton()
 
-        XCTAssert(elementquery["bankId_error"].exists)
-        XCTAssert(elementquery["branchId_error"].exists)
-        XCTAssert(elementquery["bankAccountId_error"].exists)
+        XCTAssert(elementQuery["bankId_error"].exists)
+        XCTAssert(elementQuery["branchId_error"].exists)
+        XCTAssert(elementQuery["bankAccountId_error"].exists)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidLength() {
@@ -76,9 +80,9 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
 
         addTransferMethod.clickCreateTransferMethodButton()
 
-        XCTAssert(elementquery["bankId_error"].exists)
-        XCTAssert(elementquery["branchId_error"].exists)
-        XCTAssert(elementquery["bankAccountId_error"].exists)
+        XCTAssert(elementQuery["bankId_error"].exists)
+        XCTAssert(elementQuery["branchId_error"].exists)
+        XCTAssert(elementQuery["bankAccountId_error"].exists)
     }
 
     func testAddTransferMethod_createBankAccount() {
@@ -122,33 +126,33 @@ private extension AddTransferMethodWireAccountIndividualTests {
     func verifyAccountInformationSection() {
         XCTAssert(addTransferMethod.addTransferMethodTableView
             .staticTexts["Account Information - United States (USD)"].exists)
-        XCTAssert(elementquery["BIC/SWIFT"].exists)
+        XCTAssert(elementQuery["BIC/SWIFT"].exists)
         XCTAssert(addTransferMethod.bankIdInput.exists)
-        XCTAssert(elementquery["Routing Number"].exists)
+        XCTAssert(elementQuery["Routing Number"].exists)
         XCTAssert(addTransferMethod.branchIdInput.exists)
-        XCTAssert(elementquery["Account Number OR IBAN"].exists)
+        XCTAssert(elementQuery["Account Number OR IBAN"].exists)
         XCTAssert(addTransferMethod.bankAccountIdInput.exists)
     }
 
     func verifyIntermediaryAccountSection() {
         XCTAssert(addTransferMethod.intermediaryAccountHeader.exists)
-        XCTAssert(elementquery["Additional Wire Instructions"].exists)
+        XCTAssert(elementQuery["Additional Wire Instructions"].exists)
         XCTAssert(addTransferMethod.wireInstructionsInput.exists)
-        XCTAssert(elementquery["Intermediary BIC / SWIFT Code"].exists)
+        XCTAssert(elementQuery["Intermediary BIC / SWIFT Code"].exists)
         XCTAssert(addTransferMethod.intermediaryBankIdInput.exists)
-        XCTAssert(elementquery["Intermediary Account Number"].exists)
+        XCTAssert(elementQuery["Intermediary Account Number"].exists)
         XCTAssert(addTransferMethod.intermediaryBankAccountIdInput.exists)
     }
 
     func verifyIndividualAccountHolderSection() {
         XCTAssert(addTransferMethod.accountHolderHeader.exists)
-        XCTAssert(elementquery["First Name"].exists)
+        XCTAssert(elementQuery["First Name"].exists)
         XCTAssert(addTransferMethod.firstNameInput.exists)
-        XCTAssert(elementquery["Middle Name"].exists)
+        XCTAssert(elementQuery["Middle Name"].exists)
         XCTAssert(addTransferMethod.lastNameInput.exists)
-        XCTAssert(elementquery["Last Name"].exists)
+        XCTAssert(elementQuery["Last Name"].exists)
         XCTAssert(addTransferMethod.middleNameInput.exists)
-        XCTAssert(elementquery["Date of Birth"].exists)
+        XCTAssert(elementQuery["Date of Birth"].exists)
         XCTAssert(addTransferMethod.dateOfBirthInput.exists)
     }
 
@@ -163,13 +167,13 @@ private extension AddTransferMethodWireAccountIndividualTests {
     func verifyAddressSection() {
         XCTAssert(addTransferMethod.addressHeader.exists)
         XCTAssert(addTransferMethod.countrySelect.exists)
-        XCTAssert(elementquery["State/Province"].exists)
+        XCTAssert(elementQuery["State/Province"].exists)
         XCTAssert(addTransferMethod.stateProvinceInput.exists)
-        XCTAssert(elementquery["Street"].exists)
+        XCTAssert(elementQuery["Street"].exists)
         XCTAssert(addTransferMethod.addressLineInput.exists)
-        XCTAssert(elementquery["City"].exists)
+        XCTAssert(elementQuery["City"].exists)
         XCTAssert(addTransferMethod.cityInput.exists)
-        XCTAssert(elementquery["Zip/Postal Code"].exists)
+        XCTAssert(elementQuery["Zip/Postal Code"].exists)
         XCTAssert(addTransferMethod.postalCodeInput.exists)
     }
 
@@ -190,7 +194,7 @@ private extension AddTransferMethodWireAccountIndividualTests {
         XCTAssertEqual(addTransferMethod.phoneNumberInput.value as? String, "+1 604 6666666")
         XCTAssertEqual(addTransferMethod.mobileNumberInput.value as? String, "604 666 6666")
 
-        XCTAssert(elementquery["Canada"].exists)
+        XCTAssert(elementQuery["Canada"].exists)
         XCTAssertEqual(addTransferMethod.stateProvinceInput.value as? String, "BC")
         XCTAssertEqual(addTransferMethod.addressLineInput.value as? String, "950 Granville Street")
         XCTAssertEqual(addTransferMethod.cityInput.value as? String, "Vancouver")

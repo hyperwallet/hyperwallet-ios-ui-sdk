@@ -5,7 +5,7 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
     var addTransferMethod: AddTransferMethod!
 
     let bankAccount = NSPredicate(format: "label CONTAINS[c] 'Bank Account'")
-
+    var elementQuery: XCUIElementQuery!
     override func setUp() {
         super.setUp()
 
@@ -24,9 +24,13 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
 
         app.tables.cells.staticTexts["Add Transfer Method"].tap()
         spinner = app.activityIndicators["activityIndicator"]
-        table = app.tables["addTransferMethodTable"]
         waitForNonExistence(spinner)
         addTransferMethod = AddTransferMethod(app: app)
+        if #available(iOS 13.0, *) {
+        elementQuery = app.tables["addTransferMethodTable"].buttons
+        } else {
+        elementQuery = app.tables["addTransferMethodTable"].staticTexts
+        }
     }
 
     func testAddTransferMethod_displaysElementsOnTmcResponse() {
@@ -69,8 +73,8 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
 
         addTransferMethod.clickCreateTransferMethodButton()
 
-        XCTAssert(elementquery["branchId_error"].exists)
-        XCTAssert(elementquery["bankAccountId_error"].exists)
+        XCTAssert(elementQuery["branchId_error"].exists)
+        XCTAssert(elementQuery["bankAccountId_error"].exists)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidLength() {
@@ -79,8 +83,8 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
 
         addTransferMethod.clickCreateTransferMethodButton()
 
-        XCTAssert(elementquery["branchId_error"].exists)
-        XCTAssert(elementquery["bankAccountId_error"].exists)
+        XCTAssert(elementQuery["branchId_error"].exists)
+        XCTAssert(elementQuery["bankAccountId_error"].exists)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidPresence() {
@@ -89,9 +93,9 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
 
         addTransferMethod.clickCreateTransferMethodButton()
 
-        XCTAssert(elementquery["branchId_error"].exists)
-        XCTAssert(elementquery["bankAccountId_error"].exists)
-        XCTAssert(elementquery["bankAccountPurpose_error"].exists)
+        XCTAssert(elementQuery["branchId_error"].exists)
+        XCTAssert(elementQuery["bankAccountId_error"].exists)
+        XCTAssert(elementQuery["bankAccountPurpose_error"].exists)
     }
 
     func testAddTransferMethod_createBankAccountInvalidRouting() {

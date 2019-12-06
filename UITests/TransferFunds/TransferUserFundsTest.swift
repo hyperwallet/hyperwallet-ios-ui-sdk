@@ -5,6 +5,8 @@ class TransferUserFundsTest: BaseTests {
     var transferFunds: TransferFunds!
     var selectDestination: TransferFundsSelectDestination!
     var addTransferMethod: AddTransferMethod!
+    var elementQuery: XCUIElementQuery!
+
     override func setUp() {
         super.setUp()
         app = XCUIApplication()
@@ -17,7 +19,11 @@ class TransferUserFundsTest: BaseTests {
         transferFunds = TransferFunds(app: app)
         selectDestination = TransferFundsSelectDestination(app: app)
         addTransferMethod = AddTransferMethod(app: app)
-        table = app.tables["scheduleTransferTableView"]
+        if #available(iOS 13.0, *) {
+        elementQuery = app.tables["scheduleTransferTableView"].buttons
+        } else {
+        elementQuery = app.tables["scheduleTransferTableView"].staticTexts
+        }
     }
 
     /*
@@ -217,7 +223,7 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.tapNextButton()
 
         // Assert Confirmation Page
-        waitForExistence(elementquery["Confirm"])
+        waitForExistence(elementQuery["Confirm"])
     }
 
     func testTransferFunds_createTransferWithoutFX() {
@@ -267,7 +273,7 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.tapNextButton()
 
         // Assert Confirmation Page
-        waitForExistence(elementquery["Confirm"])
+        waitForExistence(elementQuery["Confirm"])
     }
 
     /* Given that user is on the Transfer fund page and selected a Transfer Destination

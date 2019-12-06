@@ -6,14 +6,6 @@ class BaseTests: XCTestCase {
     var spinner: XCUIElement!
     var table: XCUIElement!
 
-    var elementquery: XCUIElementQuery {
-        if #available(iOS 13.0, *) {
-            return table.buttons
-        } else {
-            return table.staticTexts
-        }
-    }
-
     override func setUp() {
         mockServer = HyperwalletMockWebServer()
         mockServer.setUp()
