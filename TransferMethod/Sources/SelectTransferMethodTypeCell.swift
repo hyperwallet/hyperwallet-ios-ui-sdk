@@ -55,11 +55,6 @@ final class SelectTransferMethodTypeCell: UITableViewCell {
         set { self.textLabel?.font = newValue }
     }
 
-    @objc dynamic var subTitleLabelColor: UIColor! {
-        get { return self.detailTextLabel?.textColor }
-        set { self.detailTextLabel?.textColor = newValue }
-    }
-
     @objc dynamic var subTitleLabelFont: UIFont! {
         get { return self.detailTextLabel?.font }
         set { self.detailTextLabel?.font = newValue }
@@ -77,7 +72,7 @@ extension SelectTransferMethodTypeCell {
             textLabel?.adjustsFontForContentSizeCategory = true
 
             detailTextLabel?.attributedText = configuration
-                .formatFeesProcessingTime(font: subTitleLabelFont, color: subTitleLabelColor)
+                .formatFeesProcessingTime(font: subTitleLabelFont, color: Theme.Label.subTitleColor)
             detailTextLabel?.numberOfLines = 0
             detailTextLabel?.lineBreakMode = .byWordWrapping
             detailTextLabel?.adjustsFontForContentSizeCategory = true
