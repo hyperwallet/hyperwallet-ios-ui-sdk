@@ -73,6 +73,13 @@ class AddTransferMethod {
         addTransferMethodTableView = app.tables["addTransferMethodTable"]
         createTransferMethodButton = addTransferMethodTableView.buttons["createAccountButton"]
 
+        var elementQuery: XCUIElementQuery
+        if #available(iOS 13.0, *) {
+            elementQuery = addTransferMethodTableView.buttons
+        } else {
+            elementQuery = addTransferMethodTableView.staticTexts
+        }
+
         // Section Headers
         intermediaryAccountHeader = addTransferMethodTableView.staticTexts["Intermediary Account"]
         accountHolderHeader = addTransferMethodTableView.staticTexts["Account Holder"]
@@ -98,7 +105,7 @@ class AddTransferMethod {
         phoneNumberInput = addTransferMethodTableView.textFields["phoneNumber"]
         mobileNumberInput = addTransferMethodTableView.textFields["mobileNumber"]
         dateOfBirthInput = addTransferMethodTableView.textFields["dateOfBirth"]
-        countrySelect = addTransferMethodTableView.cells.staticTexts["countryValue"]
+        countrySelect = elementQuery["countryValue"]
         stateProvinceInput = addTransferMethodTableView.textFields["stateProvince"]
         addressLineInput = addTransferMethodTableView.textFields["addressLine1"]
         cityInput = addTransferMethodTableView.textFields["city"]
@@ -107,31 +114,31 @@ class AddTransferMethod {
         businessRegistrationIdInput = addTransferMethodTableView.textFields["businessRegistrationId"]
 
         // Labels
-        bankIdLabel = addTransferMethodTableView.staticTexts["bankId"]
-        bankAccountIdLabel = addTransferMethodTableView.staticTexts["bankAccountId"]
-        buildingSocietyAccountLabel = addTransferMethodTableView.staticTexts["buildingSocietyAccount"]
-        branchIdLabel = addTransferMethodTableView.staticTexts["branchId"]
-        accountTypeLabel = addTransferMethodTableView.staticTexts["bankAccountPurpose"]
-        cardNumberLabel = addTransferMethodTableView.staticTexts["cardNumber"]
-        dateOfExpiryLabel = addTransferMethodTableView.staticTexts["dateOfExpiry"]
-        cvvLabel = addTransferMethodTableView.staticTexts["cvv"]
-        emailLabel = addTransferMethodTableView.staticTexts["email"]
-        wireInstructionsLabel = addTransferMethodTableView.staticTexts["wireInstructions"]
-        intermediaryBankIdLabel = addTransferMethodTableView.staticTexts["intermediaryBankId"]
-        intermediaryBankAccountIdLabel = addTransferMethodTableView.staticTexts["intermediaryBankAccountId"]
+        bankIdLabel = elementQuery["bankId"]
+        bankAccountIdLabel = elementQuery["bankAccountId"]
+        buildingSocietyAccountLabel = elementQuery["buildingSocietyAccount"]
+        branchIdLabel = elementQuery["branchId"]
+        accountTypeLabel = elementQuery["bankAccountPurpose"]
+        cardNumberLabel = elementQuery["cardNumber"]
+        dateOfExpiryLabel = elementQuery["dateOfExpiry"]
+        cvvLabel = elementQuery["cvv"]
+        emailLabel = elementQuery["email"]
+        wireInstructionsLabel = elementQuery["wireInstructions"]
+        intermediaryBankIdLabel = elementQuery["intermediaryBankId"]
+        intermediaryBankAccountIdLabel = elementQuery["intermediaryBankAccountId"]
         firstNameLabel = addTransferMethodTableView.staticTexts["firstName"]
-        middleNameLabel = addTransferMethodTableView.staticTexts["middleName"]
+        middleNameLabel = elementQuery["middleName"]
         lastNameLabel = addTransferMethodTableView.staticTexts["lastName"]
-        businessNameLabel = addTransferMethodTableView.staticTexts["businessName"]
-        businessRegistrationIdLabel = addTransferMethodTableView.staticTexts["businessRegistrationId"]
-        phoneNumberLabel = addTransferMethodTableView.staticTexts["phoneNumber"]
-        mobileNumberLabel = addTransferMethodTableView.staticTexts["mobileNumber"]
-        dateOfBirthLabel = addTransferMethodTableView.staticTexts["dateOfBirth"]
-        countryLabel = addTransferMethodTableView.cells.staticTexts["country"]
-        stateProvinceLabel = addTransferMethodTableView.staticTexts["stateProvince"]
-        addressLineLabel = addTransferMethodTableView.staticTexts["addressLine1"]
-        cityLabel = addTransferMethodTableView.staticTexts["city"]
-        postalCodeLabel = addTransferMethodTableView.staticTexts["postalCode"]
+        businessNameLabel = elementQuery["businessName"]
+        businessRegistrationIdLabel = elementQuery["businessRegistrationId"]
+        phoneNumberLabel = elementQuery["phoneNumber"]
+        mobileNumberLabel = elementQuery["mobileNumber"]
+        dateOfBirthLabel = elementQuery["dateOfBirth"]
+        countryLabel = elementQuery["country"]
+        stateProvinceLabel = elementQuery["stateProvince"]
+        addressLineLabel = elementQuery["addressLine1"]
+        cityLabel = elementQuery["city"]
+        postalCodeLabel = elementQuery["postalCode"]
     }
 
     func setBankId(_ bankId: String) {
