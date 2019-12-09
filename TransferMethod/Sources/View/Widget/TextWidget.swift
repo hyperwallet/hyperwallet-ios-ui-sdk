@@ -107,41 +107,34 @@ class TextWidget: AbstractWidget {
         if let pattern = pattern {
             let currentText = getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue,
                                                          inputText)
-            var currentTextIndex = inputText.startIndex
             var finalText = ""
+            var index = CurrentIndex(textIndex: inputText.startIndex, patternIndex: pattern.startIndex)
             var isEscapedCharacter = false
-            var patternIndex = pattern.startIndex
 
             if let currentText = currentText, !currentText.isEmpty {
                 var patternCharactersToBeWritten = ""
 
                 while true {
-                    let patternRange = patternIndex ..< pattern.index(after: patternIndex)
-                    let currentPatternCharacter = [Character](pattern[patternRange])
-                    let currentTextRange = currentTextIndex ..< currentText.index(after: currentTextIndex)
-                    let currentTextCharacter = String(currentText[currentTextRange])
+                    let currentPatternCharacter = getCharacterAt(index.patternIndex, pattern)
 
                     if isEscapedCharacter {
                         isEscapedCharacter = false
-                        finalText += currentPatternCharacter
-                        patternIndex = pattern.index(after: patternIndex)
-                        if patternIndex >= pattern.endIndex || currentTextIndex >= currentText.endIndex {
+                        finalText += String(currentPatternCharacter)
+                        index.patternIndex = pattern.index(after: index.patternIndex)
+                        if index.patternIndex >= pattern.endIndex || index.textIndex >= currentText.endIndex {
                             break
                         }
                         continue
                     }
 
-                    applyFormatForPatternCharacter(currentPatternCharacter: currentPatternCharacter,
-                                                   currentText: currentText,
-                                                   currentTextCharacter: currentTextCharacter,
-                                                   currentTextIndex: &currentTextIndex,
+                    applyFormatForPatternCharacter(currentText: currentText,
                                                    finalText: &finalText,
-                                                   isEscapedCharacter: &isEscapedCharacter,
                                                    pattern: pattern,
-                                                   patternIndex: &patternIndex,
+                                                   index: &index,
                                                    patternCharactersToBeWritten: &patternCharactersToBeWritten)
+                    isEscapedCharacter = self.isEscapedCharacter(currentPatternCharacter)
 
-                    if patternIndex >= pattern.endIndex || currentTextIndex >= currentText.endIndex {
+                    if index.patternIndex >= pattern.endIndex || index.textIndex >= currentText.endIndex {
                         break
                     }
                 }
@@ -151,66 +144,58 @@ class TextWidget: AbstractWidget {
         return inputText
     }
 
-    // swiftlint:disable function_parameter_count
-    private func applyFormatForPatternCharacter(currentPatternCharacter: [Character],
-                                                currentText: String,
-                                                currentTextCharacter: String,
-                                                currentTextIndex: inout String.Index,
+    private func applyFormatForPatternCharacter(currentText: String,
                                                 finalText: inout String,
-                                                isEscapedCharacter: inout Bool,
                                                 pattern: String,
-                                                patternIndex: inout String.Index,
+                                                index: inout CurrentIndex,
                                                 patternCharactersToBeWritten: inout String) {
-        switch currentPatternCharacter.first {
+        let currentPatternCharacter = getCharacterAt(index.patternIndex, pattern)
+        let currentTextCharacter = getCharacterAt(index.textIndex, currentText)
+
+        switch currentPatternCharacter {
         case PatternCharacter.lettersAndNumbersPatternCharacter.rawValue:
-            formatTextForLettersAndNumbers(currentText: currentText,
-                                           currentTextCharacter: currentTextCharacter,
-                                           currentTextIndex: &currentTextIndex,
+            formatTextForLettersAndNumbers(currentTextCharacter: currentTextCharacter,
                                            finalText: &finalText,
                                            pattern: pattern,
                                            patternCharactersToBeWritten: &patternCharactersToBeWritten,
-                                           patternIndex: &patternIndex)
+                                           index: &index)
+            index.textIndex = currentText.index(after: index.textIndex)
 
         case PatternCharacter.lettersOnlyPatternCharacter.rawValue,
              PatternCharacter.numbersOnlyPatternCharacter.rawValue:
             let filteredCharacter =
-                getTextForPatternCharacter(currentPatternCharacter.first!, currentTextCharacter)
-            formatTextForLettersAndNumbers(currentText: currentText,
-                                           currentTextCharacter: filteredCharacter,
-                                           currentTextIndex: &currentTextIndex,
-                                           finalText: &finalText,
-                                           pattern: pattern,
-                                           patternCharactersToBeWritten: &patternCharactersToBeWritten,
-                                           patternIndex: &patternIndex)
+                getTextForPatternCharacter(currentPatternCharacter, String(currentTextCharacter))
+            if let filteredCharacter = filteredCharacter, !filteredCharacter.isEmpty {
+                formatTextForLettersAndNumbers(currentTextCharacter: filteredCharacter.first!,
+                                               finalText: &finalText,
+                                               pattern: pattern,
+                                               patternCharactersToBeWritten: &patternCharactersToBeWritten,
+                                               index: &index)
+            }
+            index.textIndex = currentText.index(after: index.textIndex)
 
         default:
-            isEscapedCharacter = self.isEscapedCharacter(currentPatternCharacter.first!)
-            if !isEscapedCharacter {
-                if String(currentPatternCharacter) == currentTextCharacter {
-                    finalText += currentTextCharacter
-                    currentTextIndex = currentText.index(after: currentTextIndex)
+            if !self.isEscapedCharacter(currentPatternCharacter) {
+                if currentPatternCharacter == currentTextCharacter {
+                    finalText += String(currentTextCharacter)
+                    index.textIndex = currentText.index(after: index.textIndex)
                 } else {
-                    patternCharactersToBeWritten += currentPatternCharacter
+                    patternCharactersToBeWritten += String(currentPatternCharacter)
                 }
             }
-            patternIndex = pattern.index(after: patternIndex)
+            index.patternIndex = pattern.index(after: index.patternIndex)
         }
     }
 
-    private func formatTextForLettersAndNumbers(currentText: String,
-                                                currentTextCharacter: String?,
-                                                currentTextIndex: inout String.Index,
+    private func formatTextForLettersAndNumbers(currentTextCharacter: Character,
                                                 finalText: inout String,
                                                 pattern: String,
                                                 patternCharactersToBeWritten: inout String,
-                                                patternIndex: inout String.Index) {
-        if let currentTextCharacter = currentTextCharacter, !currentTextCharacter.isEmpty {
-            finalText += patternCharactersToBeWritten
-            patternCharactersToBeWritten = ""
-            finalText += currentTextCharacter
-            patternIndex = pattern.index(after: patternIndex)
-        }
-        currentTextIndex = currentText.index(after: currentTextIndex)
+                                                index: inout CurrentIndex) {
+        finalText += patternCharactersToBeWritten
+        patternCharactersToBeWritten = ""
+        finalText += String(currentTextCharacter)
+        index.patternIndex = pattern.index(after: index.patternIndex)
     }
 
     private func getTextForPatternCharacter(_ patternCharacter: Character, _ text: String) -> String? {
@@ -260,6 +245,16 @@ class TextWidget: AbstractWidget {
         }
         return ""
     }
+
+    private func getCharacterAt(_ index: String.Index, _ text: String) -> Character {
+        let range = index ..< text.index(after: index)
+        return [Character](text[range]).first!
+    }
+}
+
+private struct CurrentIndex {
+    var textIndex: String.Index
+    var patternIndex: String.Index
 }
 
 private enum PatternCharacter: Character {
