@@ -44,12 +44,20 @@ public class ThemeManager: NSObject {
 
     private static func applyToUINavigationBar() {
         let proxy = UINavigationBar.appearance()
-        proxy.barTintColor = Theme.themeColor
-        proxy.tintColor = Theme.tintColor
-        proxy.titleTextAttributes = [NSAttributedString.Key.foregroundColor: Theme.tintColor]
         if #available(iOS 11.0, *) {
             proxy.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: Theme.tintColor]
         }
+        if #available(iOS 13.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: Theme.tintColor]
+            navBarAppearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: Theme.tintColor]
+            navBarAppearance.backgroundColor = Theme.themeColor
+            proxy.standardAppearance = navBarAppearance
+            proxy.scrollEdgeAppearance = navBarAppearance
+        }
+        proxy.barTintColor = Theme.themeColor
+        proxy.tintColor = Theme.tintColor
+        proxy.titleTextAttributes = [NSAttributedString.Key.foregroundColor: Theme.tintColor]
         proxy.backItem?.backBarButtonItem?.tintColor = Theme.tintColor
         proxy.barStyle = Theme.NavigationBar.barStyle
         proxy.isTranslucent = Theme.NavigationBar.isTranslucent
