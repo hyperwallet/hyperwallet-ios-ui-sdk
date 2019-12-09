@@ -4,7 +4,7 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
     var selectTransferMethodType: SelectTransferMethodType!
     var addTransferMethod: AddTransferMethod!
     let payPalAccount = NSPredicate(format: "label CONTAINS[c] 'PayPal'")
-
+    var elementQuery: XCUIElementQuery!
     override func setUp() {
         super.setUp()
 
@@ -25,6 +25,11 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
         addTransferMethod = AddTransferMethod(app: app)
+        if #available(iOS 13.0, *) {
+            elementQuery = app.tables["addTransferMethodTable"].buttons
+        } else {
+            elementQuery = app.tables["addTransferMethodTable"].staticTexts
+        }
     }
 
     func testAddTransferMethod_displaysElementsOnTmcResponse() {
@@ -46,21 +51,21 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
         addTransferMethod.setEmail("abc@testcom")
         addTransferMethod.clickCreateTransferMethodButton()
 
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["email_error"].exists)
+        XCTAssert(elementQuery["email_error"].exists)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidLength() {
         addTransferMethod.setEmail("ab")
         addTransferMethod.clickCreateTransferMethodButton()
 
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["email_error"].exists)
+        XCTAssert(elementQuery["email_error"].exists)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidPresence() {
         addTransferMethod.setEmail("")
         addTransferMethod.clickCreateTransferMethodButton()
 
-        XCTAssert(app.tables["addTransferMethodTable"].staticTexts["email_error"].exists)
+        XCTAssert(elementQuery["email_error"].exists)
     }
 
     func testAddTransferMethod_createPayPalAccountValidResponse() {
