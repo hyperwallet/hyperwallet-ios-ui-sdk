@@ -161,14 +161,12 @@ final class AddTransferMethodPresenter {
         case .business:
             resetErrorMessagesForAllSections()
             if let errors = error.getHyperwalletErrors()?.errorList, errors.isNotEmpty {
+                updateFooterContent(errors)
                 if errors.contains(where: { $0.fieldName == nil }) {
                     view.showError(error,
                                    pageName: AddTransferMethodPresenter.addTransferMethodPageName,
-                                   pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup) { [weak self] in
-                                    self?.updateFooterContent(errors)
-                    }
-                } else {
-                    updateFooterContent(errors)
+                                   pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup,
+                                   nil)
                 }
             }
 
