@@ -129,8 +129,8 @@ class TextWidget: AbstractWidget {
 
                     applyFormatForPatternCharacter(currentText: currentText,
                                                    finalText: &finalText,
-                                                   pattern: pattern,
                                                    index: &index,
+                                                   pattern: pattern,
                                                    patternCharactersToBeWritten: &patternCharactersToBeWritten)
                     isEscapedCharacter = self.isEscapedCharacter(currentPatternCharacter)
 
@@ -146,8 +146,8 @@ class TextWidget: AbstractWidget {
 
     private func applyFormatForPatternCharacter(currentText: String,
                                                 finalText: inout String,
-                                                pattern: String,
                                                 index: inout CurrentIndex,
+                                                pattern: String,
                                                 patternCharactersToBeWritten: inout String) {
         let currentPatternCharacter = getCharacterAt(index.patternIndex, pattern)
         let currentTextCharacter = getCharacterAt(index.textIndex, currentText)
@@ -156,9 +156,9 @@ class TextWidget: AbstractWidget {
         case PatternCharacter.lettersAndNumbersPatternCharacter.rawValue:
             formatTextForLettersAndNumbers(currentTextCharacter: currentTextCharacter,
                                            finalText: &finalText,
+                                           index: &index,
                                            pattern: pattern,
-                                           patternCharactersToBeWritten: &patternCharactersToBeWritten,
-                                           index: &index)
+                                           patternCharactersToBeWritten: &patternCharactersToBeWritten)
             index.textIndex = currentText.index(after: index.textIndex)
 
         case PatternCharacter.lettersOnlyPatternCharacter.rawValue,
@@ -168,9 +168,9 @@ class TextWidget: AbstractWidget {
             if let filteredCharacter = filteredCharacter, !filteredCharacter.isEmpty {
                 formatTextForLettersAndNumbers(currentTextCharacter: filteredCharacter.first!,
                                                finalText: &finalText,
+                                               index: &index,
                                                pattern: pattern,
-                                               patternCharactersToBeWritten: &patternCharactersToBeWritten,
-                                               index: &index)
+                                               patternCharactersToBeWritten: &patternCharactersToBeWritten)
             }
             index.textIndex = currentText.index(after: index.textIndex)
 
@@ -189,9 +189,9 @@ class TextWidget: AbstractWidget {
 
     private func formatTextForLettersAndNumbers(currentTextCharacter: Character,
                                                 finalText: inout String,
+                                                index: inout CurrentIndex,
                                                 pattern: String,
-                                                patternCharactersToBeWritten: inout String,
-                                                index: inout CurrentIndex) {
+                                                patternCharactersToBeWritten: inout String) {
         finalText += patternCharactersToBeWritten
         patternCharactersToBeWritten = ""
         finalText += String(currentTextCharacter)
