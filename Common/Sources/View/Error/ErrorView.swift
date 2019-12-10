@@ -62,8 +62,6 @@ public final class ErrorView {
     }
 
     /// To handle business errors
-    ///
-    /// - Parameter handler: to handle business error
     private func businessError() {
         if let error = error.getHyperwalletErrors()?.errorList?.first {
             let errorInfo = ErrorInfoBuilder(type: errorTypeApi,

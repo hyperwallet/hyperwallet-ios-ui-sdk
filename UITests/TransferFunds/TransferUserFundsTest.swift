@@ -350,9 +350,9 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 2), "United States Ending on 4281")
 
         // Assert first row is checked by default
-        assertbuttonTrue(element: usdBankAccount)
-        assertbuttonFalse(element: cadBankAccount)
-        assertbuttonFalse(element: prepaidCard)
+        assertButtonTrue(element: usdBankAccount)
+        assertButtonFalse(element: cadBankAccount)
+        assertButtonFalse(element: prepaidCard)
 
         // Assert can go back to previous page
         selectDestination.clickBackButton()
@@ -363,7 +363,7 @@ class TransferUserFundsTest: BaseTests {
         }
     }
 
-    private func assertbuttonTrue(element: XCUIElement) {
+    private func assertButtonTrue(element: XCUIElement) {
         if #available(iOS 13.0, *) {
             XCTAssertTrue(element.buttons["checkmark"].exists, "By default the first row should be selected")
         } else {
@@ -371,7 +371,7 @@ class TransferUserFundsTest: BaseTests {
         }
     }
 
-    private func assertbuttonFalse(element: XCUIElement) {
+    private func assertButtonFalse(element: XCUIElement) {
            if #available(iOS 13.0, *) {
                XCTAssertFalse(element.buttons["checkmark"].exists, "By default the first row should be selected")
            } else {
