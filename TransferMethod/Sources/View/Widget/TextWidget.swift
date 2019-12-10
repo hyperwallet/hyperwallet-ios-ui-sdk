@@ -103,6 +103,10 @@ class TextWidget: AbstractWidget {
         }
     }
 
+    /// Formats input text as per pattern
+    /// Character after escape character is not formatted and written as it is
+    /// For example for pattern `(###)#\\@#`
+    /// For input text `11199` output will be `(111)9@9`
     func formatDisplayString(with pattern: String?, inputText: String) -> String {
         if let pattern = pattern {
             let currentText = getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue,
@@ -146,6 +150,17 @@ class TextWidget: AbstractWidget {
         return inputText
     }
 
+    /// Compares pattern character with corresponding text character and gives formatted characters
+    /// Only alphanumeric input text is considered, everything else is ignored
+    /// If pattern character matches corresponding text character then it is replaced
+    /// For example `9` matches `#`
+    /// If pattern character doesn't match corresponding text character then pattern character is stored
+    /// For ex.  pattern character `(` will not match any user input text and will be stored
+    /// If there is any match for next character then stored characters will be prepended
+    /// For example, with pattern `(#)-@`
+    /// For input text `9`, output will be `(9`
+    /// For input text `99`, output will remain `(9` as second `9` doesn't match `@`
+    /// For input text `9a`, output will be `(9)-a`
     private func applyFormatForPatternCharacter(currentText: String,
                                                 finalText: inout String,
                                                 currentIndex: inout CurrentIndex,
@@ -247,7 +262,6 @@ class TextWidget: AbstractWidget {
         }
         return ""
     }
-
 }
 
 private struct CurrentIndex {
