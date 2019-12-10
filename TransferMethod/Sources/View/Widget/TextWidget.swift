@@ -115,7 +115,7 @@ class TextWidget: AbstractWidget {
                 var patternCharactersToBeWritten = ""
 
                 while true {
-                    let currentPatternCharacter = getCharacterAt(currentIndex.patternIndex, pattern)
+                    let currentPatternCharacter = pattern[currentIndex.patternIndex]
 
                     if isEscapedCharacter {
                         isEscapedCharacter = false
@@ -151,8 +151,8 @@ class TextWidget: AbstractWidget {
                                                 currentIndex: inout CurrentIndex,
                                                 pattern: String,
                                                 patternCharactersToBeWritten: inout String) {
-        let currentPatternCharacter = getCharacterAt(currentIndex.patternIndex, pattern)
-        let currentTextCharacter = getCharacterAt(currentIndex.textIndex, currentText)
+        let currentPatternCharacter = pattern[currentIndex.patternIndex]
+        let currentTextCharacter = currentText[currentIndex.textIndex]
 
         switch currentPatternCharacter {
         case PatternCharacter.lettersAndNumbersPatternCharacter.rawValue:
@@ -248,10 +248,6 @@ class TextWidget: AbstractWidget {
         return ""
     }
 
-    private func getCharacterAt(_ index: String.Index, _ text: String) -> Character {
-        let range = index ..< text.index(after: index)
-        return [Character](text[range]).first!
-    }
 }
 
 private struct CurrentIndex {
