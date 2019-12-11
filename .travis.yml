@@ -15,9 +15,9 @@ env:
   - IOS_FRAMEWORK_SCHEME="HyperwalletUISDK"
   - IOS_UI_TESTS_SCHEME="Demo"
   matrix:
-  - ios_version='13.1'  ios_device='iPhone 11' scheme="$IOS_FRAMEWORK_SCHEME" platform='iOS
+  - ios_version='13.1'  ios_device='iPhone 8' scheme="$IOS_FRAMEWORK_SCHEME" platform='iOS
     Simulator' configuration="Debug" code_coverage="YES" only_active_arch="YES"
-  - ios_version='13.1'  ios_device='iPhone 11' scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS
+  - ios_version='13.1'  ios_device='iPhone 8' scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS
     Simulator' configuration="XCUITest" code_coverage="NO" only_active_arch="NO"
 before_install:
   - echo -e "machine github.com\n  login $CI_USER_TOKEN" > ~/.netrc
