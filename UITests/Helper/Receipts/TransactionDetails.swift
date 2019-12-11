@@ -64,7 +64,6 @@ class TransactionDetails {
     init(app: XCUIApplication) {
         self.app = app
         navigationBar = app.navigationBars["Transaction Details"]
-        detailHeaderTitle = app.navigationBars["Transaction Details"].otherElements["Transaction Details"]
         typeLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionTypeLabel"]
         paymentAmountLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionAmountLabel"]
         createdOnLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionCreatedOnLabel"]
@@ -98,6 +97,12 @@ class TransactionDetails {
         backButton = navigationBar.children(matching: .button).matching(identifier: "Back").element(boundBy: 0)
 
         notesValue = app.tables["receiptDetailTableView"].staticTexts["ReceiptDetailSectionNotesTextLabel"]
+
+        if #available(iOS 13.0, *) {
+            detailHeaderTitle = app.navigationBars["Transaction Details"].staticTexts["Transaction Details"]
+        } else {
+            detailHeaderTitle = app.navigationBars["Transaction Details"].otherElements["Transaction Details"]
+        }
     }
 
     func openReceipt(row: Int) {
