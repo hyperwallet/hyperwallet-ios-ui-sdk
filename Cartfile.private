@@ -1,3 +1,3 @@
 github "JanGorman/Hippolyte" "0.8.0"
 github "httpswift/swifter" "1.4.7"
-git "https://github.com/hyperwallet/hyperwallet-ios-insights-sdk.git" "1.0.0-beta01"
+git "https://github.com/hyperwallet/hyperwallet-ios-insights-sdk.git" "master"
