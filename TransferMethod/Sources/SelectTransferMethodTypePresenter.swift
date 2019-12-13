@@ -137,7 +137,6 @@ final class SelectTransferMethodTypePresenter {
                             strongSelf.loadSelectedCountry(countries, with: user?.country)
                             strongSelf.loadCurrency(result)
                             strongSelf.loadTransferMethodTypes(result)
-                            strongSelf.trackUILoadImpression()
                         },
                         failure: { strongSelf.loadTransferMethodKeys() })
                 )
@@ -302,9 +301,9 @@ final class SelectTransferMethodTypePresenter {
         view.transferMethodTypeTableViewReloadData()
     }
 
-    private func trackUILoadImpression() {
+    func trackUILoadImpression() {
         let params = [InsightsTags.country: selectedCountry, InsightsTags.currency: selectedCurrency]
-       hyperwalletInsights.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
+        hyperwalletInsights.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
     }
 
     private func trackTransferMethodClick() {
