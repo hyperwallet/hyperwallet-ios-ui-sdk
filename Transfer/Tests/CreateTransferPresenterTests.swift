@@ -397,6 +397,9 @@ class MockCreateTransferView: CreateTransferView {
                    pageGroup: String,
                    _ retry: (() -> Void)?) {
         isShowErrorPerformed = true
+        if retry != nil {
+            retry!()
+        }
         showErrorExpectation?.fulfill()
     }
 
