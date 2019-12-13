@@ -103,45 +103,44 @@ class TextWidget: AbstractWidget {
         }
     }
 
+    /// Formats input text as per pattern
+    /// Character after escape character is not formatted and written as it is
+    /// For example for pattern `(###)#\\@#`
+    /// For input text `11199` output will be `(111)9@9`
     func formatDisplayString(with pattern: String?, inputText: String) -> String {
         if let pattern = pattern {
             let currentText = getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue,
                                                          inputText)
-            var currentTextIndex = inputText.startIndex
             var finalText = ""
+            var currentIndex = CurrentIndex(textIndex: inputText.startIndex, patternIndex: pattern.startIndex)
             var isEscapedCharacter = false
-            var patternIndex = pattern.startIndex
 
             if let currentText = currentText, !currentText.isEmpty {
                 var patternCharactersToBeWritten = ""
 
                 while true {
-                    let patternRange = patternIndex ..< pattern.index(after: patternIndex)
-                    let currentPatternCharacter = [Character](pattern[patternRange])
-                    let currentTextRange = currentTextIndex ..< currentText.index(after: currentTextIndex)
-                    let currentTextCharacter = String(currentText[currentTextRange])
+                    let currentPatternCharacter = pattern[currentIndex.patternIndex]
 
                     if isEscapedCharacter {
                         isEscapedCharacter = false
-                        finalText += currentPatternCharacter
-                        patternIndex = pattern.index(after: patternIndex)
-                        if patternIndex >= pattern.endIndex || currentTextIndex >= currentText.endIndex {
+                        finalText += String(currentPatternCharacter)
+                        currentIndex.patternIndex = pattern.index(after: currentIndex.patternIndex)
+                        if currentIndex.patternIndex >= pattern.endIndex
+                            || currentIndex.textIndex >= currentText.endIndex {
                             break
                         }
                         continue
                     }
 
-                    applyFormatForPatternCharacter(currentPatternCharacter: currentPatternCharacter,
-                                                   currentText: currentText,
-                                                   currentTextCharacter: currentTextCharacter,
-                                                   currentTextIndex: &currentTextIndex,
+                    applyFormatForPatternCharacter(currentText: currentText,
                                                    finalText: &finalText,
-                                                   isEscapedCharacter: &isEscapedCharacter,
+                                                   currentIndex: &currentIndex,
                                                    pattern: pattern,
-                                                   patternIndex: &patternIndex,
                                                    patternCharactersToBeWritten: &patternCharactersToBeWritten)
+                    isEscapedCharacter = self.isEscapedCharacter(currentPatternCharacter)
 
-                    if patternIndex >= pattern.endIndex || currentTextIndex >= currentText.endIndex {
+                    if currentIndex.patternIndex >= pattern.endIndex
+                        || currentIndex.textIndex >= currentText.endIndex {
                         break
                     }
                 }
@@ -151,66 +150,69 @@ class TextWidget: AbstractWidget {
         return inputText
     }
 
-    // swiftlint:disable function_parameter_count
-    private func applyFormatForPatternCharacter(currentPatternCharacter: [Character],
-                                                currentText: String,
-                                                currentTextCharacter: String,
-                                                currentTextIndex: inout String.Index,
+    /// Compares pattern character with corresponding text character and replaces with formatted characters
+    /// Only alphanumeric input text is considered, everything else is ignored
+    /// If a pattern character matches corresponding text character then it is replaced
+    /// For example `#` matches `9`
+    /// If pattern character doesn't match corresponding text character then that pattern character is stored
+    /// For ex.  pattern character `(` will not match any user input text and will be stored
+    /// If there is any match for next character then stored characters will be prepended
+    /// For example, with pattern `(#)-@`
+    /// For input text `9`, formatted text will be `(9`
+    /// For input text `99`, formatted text will remain `(9` as second `9` doesn't match `@`
+    /// For input text `9a`, formatted text will be `(9)-a`
+    private func applyFormatForPatternCharacter(currentText: String,
                                                 finalText: inout String,
-                                                isEscapedCharacter: inout Bool,
+                                                currentIndex: inout CurrentIndex,
                                                 pattern: String,
-                                                patternIndex: inout String.Index,
                                                 patternCharactersToBeWritten: inout String) {
-        switch currentPatternCharacter.first {
+        let currentPatternCharacter = pattern[currentIndex.patternIndex]
+        let currentTextCharacter = currentText[currentIndex.textIndex]
+
+        switch currentPatternCharacter {
         case PatternCharacter.lettersAndNumbersPatternCharacter.rawValue:
-            formatTextForLettersAndNumbers(currentText: currentText,
-                                           currentTextCharacter: currentTextCharacter,
-                                           currentTextIndex: &currentTextIndex,
+            formatTextForLettersAndNumbers(currentTextCharacter: currentTextCharacter,
                                            finalText: &finalText,
+                                           currentIndex: &currentIndex,
                                            pattern: pattern,
-                                           patternCharactersToBeWritten: &patternCharactersToBeWritten,
-                                           patternIndex: &patternIndex)
+                                           patternCharactersToBeWritten: &patternCharactersToBeWritten)
+            currentIndex.textIndex = currentText.index(after: currentIndex.textIndex)
 
         case PatternCharacter.lettersOnlyPatternCharacter.rawValue,
              PatternCharacter.numbersOnlyPatternCharacter.rawValue:
             let filteredCharacter =
-                getTextForPatternCharacter(currentPatternCharacter.first!, currentTextCharacter)
-            formatTextForLettersAndNumbers(currentText: currentText,
-                                           currentTextCharacter: filteredCharacter,
-                                           currentTextIndex: &currentTextIndex,
-                                           finalText: &finalText,
-                                           pattern: pattern,
-                                           patternCharactersToBeWritten: &patternCharactersToBeWritten,
-                                           patternIndex: &patternIndex)
+                getTextForPatternCharacter(currentPatternCharacter, String(currentTextCharacter))
+            if let filteredCharacter = filteredCharacter?.first {
+                formatTextForLettersAndNumbers(currentTextCharacter: filteredCharacter,
+                                               finalText: &finalText,
+                                               currentIndex: &currentIndex,
+                                               pattern: pattern,
+                                               patternCharactersToBeWritten: &patternCharactersToBeWritten)
+            }
+            currentIndex.textIndex = currentText.index(after: currentIndex.textIndex)
 
         default:
-            isEscapedCharacter = self.isEscapedCharacter(currentPatternCharacter.first!)
-            if !isEscapedCharacter {
-                if String(currentPatternCharacter) == currentTextCharacter {
-                    finalText += currentTextCharacter
-                    currentTextIndex = currentText.index(after: currentTextIndex)
+            if !self.isEscapedCharacter(currentPatternCharacter) {
+                if currentPatternCharacter == currentTextCharacter {
+                    finalText += String(currentTextCharacter)
+                    currentIndex.textIndex = currentText.index(after: currentIndex.textIndex)
                 } else {
-                    patternCharactersToBeWritten += currentPatternCharacter
+                    patternCharactersToBeWritten += String(currentPatternCharacter)
                 }
             }
-            patternIndex = pattern.index(after: patternIndex)
+            currentIndex.patternIndex = pattern.index(after: currentIndex.patternIndex)
         }
     }
 
-    private func formatTextForLettersAndNumbers(currentText: String,
-                                                currentTextCharacter: String?,
-                                                currentTextIndex: inout String.Index,
+    private func formatTextForLettersAndNumbers(currentTextCharacter: Character,
                                                 finalText: inout String,
+                                                currentIndex: inout CurrentIndex,
                                                 pattern: String,
-                                                patternCharactersToBeWritten: inout String,
-                                                patternIndex: inout String.Index) {
-        if let currentTextCharacter = currentTextCharacter, !currentTextCharacter.isEmpty {
-            finalText += patternCharactersToBeWritten
-            patternCharactersToBeWritten = ""
-            finalText += currentTextCharacter
-            patternIndex = pattern.index(after: patternIndex)
-        }
-        currentTextIndex = currentText.index(after: currentTextIndex)
+                                                patternCharactersToBeWritten: inout String) {
+        finalText += patternCharactersToBeWritten
+        patternCharactersToBeWritten = ""
+        finalText += String(currentTextCharacter)
+        currentIndex.patternIndex = pattern.index(after: currentIndex.patternIndex)
     }
 
     private func getTextForPatternCharacter(_ patternCharacter: Character, _ text: String) -> String? {
@@ -260,6 +262,11 @@ class TextWidget: AbstractWidget {
         }
         return ""
     }
+}
+
+private struct CurrentIndex {
+    var textIndex: String.Index
+    var patternIndex: String.Index
 }
 
 private enum PatternCharacter: Character {
