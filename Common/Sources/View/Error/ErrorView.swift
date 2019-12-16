@@ -51,7 +51,7 @@ public final class ErrorView {
     public func show(_ handler: (() -> Void)?) {
         switch error.group {
         case .business:
-            businessError({ (_) in handler?() })
+            businessError()
 
         case .connection:
             connectionError({ (_) in handler?() })
@@ -62,9 +62,7 @@ public final class ErrorView {
     }
 
     /// To handle business errors
-    ///
-    /// - Parameter handler: to handle business error
-    private func businessError(_ handler: ((UIAlertAction) -> Void)? = nil) {
+    private func businessError() {
         if let error = error.getHyperwalletErrors()?.errorList?.first {
             let errorInfo = ErrorInfoBuilder(type: errorTypeApi,
                                              message: error.message)
@@ -82,7 +80,7 @@ public final class ErrorView {
                                                 .filter { $0.fieldName == nil }
                                                 .map { $0.message }
                                                 .joined(separator: "\n"),
-                                       actions: UIAlertAction.close(handler))
+                                       actions: UIAlertAction.close(viewController))
     }
 
     private func unexpectedError() {

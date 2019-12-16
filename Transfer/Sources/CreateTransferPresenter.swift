@@ -288,14 +288,12 @@ final class CreateTransferPresenter {
         case .business:
             resetErrorMessagesForAllSections()
             if let errors = error.getHyperwalletErrors()?.errorList, errors.isNotEmpty {
+                updateFooterContent(errors)
                 if errors.contains(where: { $0.fieldName == nil }) {
                     view.showError(error,
                                    pageName: pageName,
-                                   pageGroup: pageGroup) { [weak self] in
-                        self?.updateFooterContent(errors)
-                    }
-                } else {
-                    updateFooterContent(errors)
+                                   pageGroup: pageGroup,
+                                   nil)
                 }
             }
 

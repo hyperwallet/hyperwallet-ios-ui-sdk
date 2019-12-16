@@ -350,15 +350,9 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 2), "United States Ending on 4281")
 
         // Assert first row is checked by default
-        if #available(iOS 13.0, *) {
-            XCTAssertTrue(usdBankAccount.buttons["checkmark"].exists, "By default the first row should be selected")
-            XCTAssertFalse(cadBankAccount.buttons["checkmark"].exists, "By default the first row should be selected")
-            XCTAssertFalse(prepaidCard.buttons["checkmark"].exists, "By default the first row should be selected")
-        } else {
-            XCTAssertTrue(usdBankAccount.buttons["More Info"].exists, "By default the first row should be selected")
-            XCTAssertFalse(cadBankAccount.buttons["More Info"].exists, "By default the first row should be selected")
-            XCTAssertFalse(prepaidCard.buttons["More Info"].exists, "By default the first row should be selected")
-        }
+        assertButtonTrue(element: usdBankAccount)
+        assertButtonFalse(element: cadBankAccount)
+        assertButtonFalse(element: prepaidCard)
 
         // Assert can go back to previous page
         selectDestination.clickBackButton()
@@ -368,6 +362,22 @@ class TransferUserFundsTest: BaseTests {
             XCTAssertTrue(app.navigationBars["Transfer Funds"].exists)
         }
     }
+
+    private func assertButtonTrue(element: XCUIElement) {
+        if #available(iOS 13.0, *) {
+            XCTAssertTrue(element.buttons["checkmark"].exists, "By default the first row should be selected")
+        } else {
+            XCTAssertTrue(element.buttons["More Info"].exists, "By default the first row should be selected")
+        }
+    }
+
+    private func assertButtonFalse(element: XCUIElement) {
+           if #available(iOS 13.0, *) {
+               XCTAssertFalse(element.buttons["checkmark"].exists, "By default the first row should be selected")
+           } else {
+               XCTAssertFalse(element.buttons["More Info"].exists, "By default the first row should be selected")
+           }
+       }
 
     // MARK: UI Error Handling
     /*
