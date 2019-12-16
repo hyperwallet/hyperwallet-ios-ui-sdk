@@ -26,7 +26,7 @@ Note that this SDK is geared towards those who need both backend data and UI fea
 
 ## Installation
 Use [Carthage](https://github.com/Carthage/Carthage) or [CocoaPods](https://cocoapods.org/) to integrate to HyperwalletSDK.
-Currently, the following modules are available: 
+Currently, the following modules are available:
 * TransferMethod - List, add or remove Transfer Methods
 * Transfer - Create a transfer from user account or prepaid card to available accounts for the user
 * Receipt - List user/prepaid card receipts
@@ -62,8 +62,6 @@ the themes for all the modules in HyperwalletUISDK.
 For example:
 ```swift
 ...
-import HyperwalletUISDK
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
@@ -107,9 +105,6 @@ Then, you need to provide a class (an authentication provider) which implements 
 
 Example implementation using the  `URLRequest` from Swift  Foundation :
 ```swift
-import Foundation
-import HyperwalletSDK
-
 public struct AuthenticationTokenProviders: HyperwalletAuthenticationTokenProvider {
     private let url = URL(string: "http://your/server/to/retrieve/authenticationToken")!
 
@@ -193,7 +188,7 @@ let coordinator = HyperwalletUI.shared.listPrepaidCardReceiptCoordinator(parentC
 coordinator.navigate()
 ```
 
-### Make a new transfer from user's account 
+### Make a new transfer from user's account
 To add new Transfer Method from Transfer module, TransferMethod module needs to be added as a dependency in the app. If TransferMethod module is not added, users will not be able to add a new Transfer Method inside the Transfer flow.
 ```swift
 let clientTransferId = UUID().uuidString.lowercased()
@@ -202,7 +197,7 @@ let coordinator = HyperwalletUI.shared
 coordinator.navigate()
 ```
 
-### Make a new transfer from prepaid card 
+### Make a new transfer from prepaid card
 ```swift
 let clientTransferId = UUID().uuidString.lowercased()
 let coordinator = HyperwalletUI.shared
@@ -227,9 +222,6 @@ When an object adds itself as an observer, it specifies which notifications it s
 ### How to use `Notification.Name.transferMethodAdded`
 
 ```swift
-import HyperwalletSDK
-import HyperwalletUISDK
-
 override public func viewDidLoad() {
     super.viewDidLoad()
     ...
@@ -248,9 +240,6 @@ override public func viewDidLoad() {
 ### How to use `Notification.Name.transferMethodDeactivated`
 
 ```swift
-import HyperwalletSDK
-import HyperwalletUISDK
-
 override public func viewDidLoad() {
     super.viewDidLoad()
     ...
@@ -269,9 +258,6 @@ override public func viewDidLoad() {
 ### How to use `Notification.Name.transferCreated`
 
 ```swift
-import HyperwalletSDK
-import HyperwalletUISDK
-
 override public func viewDidLoad() {
     super.viewDidLoad()
     ...
@@ -290,9 +276,6 @@ override public func viewDidLoad() {
 ### How to use `Notification.Name.transferScheduled`
 
 ```swift
-import HyperwalletSDK
-import HyperwalletUISDK
-
 override public func viewDidLoad() {
     super.viewDidLoad()
     ...
@@ -317,34 +300,41 @@ On the Theme is possible to customize the properties:
 
 | Property | Default Value | Description |
 |:--------|:-------------|:-----------|
-| `Theme.themeColor` | `#00AFD0` | The primary color |
+| `Theme.themeColor` | `0x00AFD0` | The main color |
 | `Theme.tintColor` | `UIColor.white` | The tint color |
-| `Theme.Label.color` | `#FFFFFF` | The primary color |
-| `Theme.Label.errorColor` | `#FF3B30` | The color to highlight errors|
-| `Theme.Label.subTitleColor` | `#666666` | The subtitle color |
-| `Theme.Label.textColor` | `#8e8e93` | The text color |
+| `Theme.Label.color` | `UIColor.black` | The label primary color |
+| `Theme.Label.errorColor` | `0xFF3B30` | The color to highlight errors|
+| `Theme.Label.subTitleColor` | `0x666666` | The subtitle color |
+| `Theme.Label.textColor` | `0x8e8e93` | The text color |
 | `Theme.Label.titleFont` | `UIFont.preferredFont(forTextStyle: .headline)` | The title font style |
 | `Theme.Label.bodyFont` | `UIFont.preferredFont(forTextStyle: .body)` | The body font style |
-| `Theme.Label.bodyFontMedium` | `UIFont.systemFont(ofSize: bodyFont.pointSize, weight: .medium)` | The body font style with medium weight |
 | `Theme.Label.captionOne` | `UIFont.preferredFont(forTextStyle: .caption1)` | The caption one font style |
-| `Theme.Label.captionOneMedium` | `UIFont.systemFont(ofSize: captionOne.pointSize, weight: .medium)` | The caption one font style with medium weight |
 | `Theme.Label.footnoteFont` | `UIFont.preferredFont(forTextStyle: .footnote)` | The footnote font style |
 | `Theme.NavigationBar.barStyle` | `UIBarStyle.black` | The `UINavigationBar` bar style. |
-| `Theme.NavigationBar.isTranslucent` | `false`	| Sets the opaque background color. When the value is false the navigation bar will appear with a solid color. |
+| `Theme.NavigationBar.isTranslucent` | `false`	| Sets the opaque background color |
+| `Theme.NavigationBar.shadowColor` | `UIColor.clear`	| The color of NavigationBar shadow |
 | `Theme.Button.color` | `Theme.themeColor` | The button primary color |
+| `Theme.Button.font` | `Theme.Label.bodyFont` | The button font |
 | `Theme.Text.color` | `UIColor.black` | The text primary color |
+| `Theme.Text.disabledColor` | `Theme.Label.textColor` | The text disabled color |
 | `Theme.SearchBar.textFieldTintColor` | `Theme.tintColor` | The `UITextField` tint color |
-| `Theme.SearchBar.textFieldBackgroundColor` | `#28BBD7` | The `UITextField` background color |
-| `Theme.Cell.height` | `88` | The `UITableViewViewCell` height for the List transfer method items and the Select transfer method type items. |
-| `Theme.Cell.rowHeight` | `44`	| The common `UITableViewViewCell` height. |
+| `Theme.SearchBar.textFieldBackgroundColor` | `0x28BBD7` | The `UITextField` background color |
+| `Theme.Cell.smallHeight` | `44` | The common `UITableViewViewCell` height. |
+| `Theme.Cell.mediumHeight` | `63`	| The `UITableViewViewCell` height for the receipt items |
+| `Theme.Cell.largeHeight` | `88` | The `UITableViewViewCell` height for the List transfer method items and the Select transfer method type items. |
 | `Theme.Cell.headerHeight` | `16` | The Select transfer method type items header height. |
-| `Theme.Cell.separatorInsetZero` | `UIEdgeInsets.zero` | The separator inset with edge insets struct whose top, left, bottom, and right fields are all set to 0. |
-| `Theme.Cell.separatorInset16` | `UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)` | The separator inset with the left edge set to 16. |
-| `Theme.Cell.separatorInset70` | `UIEdgeInsets(top: 0, left: 70, bottom: 0, right: 0)` | The separator inset with the left edge set to 70. |
-| `Theme.Icon.size` | `20` | The icon size. |
-| `Theme.Icon.color` | `Theme.themeColor` | The icon primary color |
-| `Theme.Icon.backgroundColor` | `#E5F7FA` | The icon background color |
-| `Theme.ViewController.backgroundColor` | `#EFEFF4` | The `UIViewController` background color. |
+| `Theme.Cell.dividerHeight` | `8` | The divider UITableViewViewCell height. |
+| `Theme.Icon.size` | `20` | The icon font size |
+| `Theme.Icon.frame` | `CGSize(width: 40, height: 40)` | The icon frame |
+| `Theme.Icon.primaryColor` | `Theme.themeColor` | The icon primary color |
+| `Theme.Icon.primaryBackgroundColor` | `0xE5F7FA` | The icon primary background color |
+| `Theme.Icon.creditColor` | `Amount.creditColor` | The icon credit color |
+| `Theme.Icon.creditBackgroundColor` | `0xF1FAE8` | The icon credit background color |
+| `Theme.Icon.debitColor` | `Amount.debitColor` | The icon debit color |
+| `Theme.Icon.debitBackgroundColor` | `0xFEF7F7` | The icon debit background color |
+| `Theme.Amount.creditColor` | `0x5FBF00` | The credit color |
+| `Theme.Amount.debitColor` | `0xDB4437` | The debit color |
+| `Theme.ViewController.backgroundColor` | `0xEFEFF4` | The `UIViewController` background color. |
 | `Theme.SpinnerView.activityIndicatorViewStyle` | `UIActivityIndicatorView.Style.whiteLarge` | The `UIActivityIndicatorView` style. |
 | `Theme.SpinnerView.activityIndicatorViewColor` | `Theme.themeColor` | The `UIActivityIndicatorView` color. |
 | `Theme.SpinnerView.backgroundColor` | `UIColor.clear` | The background color |
@@ -353,9 +343,6 @@ On the Theme is possible to customize the properties:
 
 Example to define the light theme code in class AppDelegate:
 ```swift
-import HyperwalletUISDK
-import UIKit
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
@@ -364,20 +351,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         // Override point for customization after application launch.
-
-        Theme.themeColor = UIColor.white
-        Theme.tintColor = UIColor(red: 3 / 255, green: 124 / 255, blue: 1, alpha: 1) //blue
-        Theme.Button.color = Theme.tintColor
-        Theme.Icon.color = Theme.tintColor
-        Theme.Icon.backgroundColor = UIColor(red: 219 / 255, green: 241 / 255, blue: 1, alpha: 1) // Light blue
-        Theme.SpinnerView.activityIndicatorViewColor = Theme.tintColor
-
+        
+        ThemeManager.applyWhiteTheme()
         // Set the default tint color
         window?.tintColor = Theme.tintColor
         // Avoid to display a black area during the view transaction in the UINavigationBar.
         window?.backgroundColor = Theme.ViewController.backgroundColor
 
-        ThemeManager.applyTheme()
         return true
     }
 }
