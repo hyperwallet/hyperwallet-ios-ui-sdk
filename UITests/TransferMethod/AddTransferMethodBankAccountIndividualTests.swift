@@ -211,7 +211,7 @@ private extension AddTransferMethodBankAccountIndividualTests {
 
     func verifyPresetValue(for uiElement: XCUIElement, with text: String) {
         guard let element = uiElement.value as? String else {
-            XCTFail("preset value is nill")
+            XCTFail("preset value is nil")
             return
         }
 

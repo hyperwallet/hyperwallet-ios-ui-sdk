@@ -33,12 +33,12 @@ public struct HyperwalletUtilViews {
     }
 
     /// Display the alert view with custom list of options
-    ///
-    /// - parameters: viewController - The view controller will present the Alert View
-    /// - parameters: title - The title will be displayed in top of Alert View
-    /// - parameters: message - The message will be displayed in the body of Alert View
-    /// - parameters: style - The style of the alert controller.
-    /// - parameters: actions - The list of option `UIAlertAction` the use can choose.
+    /// - Parameters:
+    ///   - viewController: The view controller will present the Alert View
+    ///   - title: The title will be displayed in top of Alert View
+    ///   - message: The message will be displayed in the body of Alert View
+    ///   - style: The style of the alert controller
+    ///   - actions: The list of option `UIAlertAction` the use can choose
     public static func showAlert(
         _ viewController: UIViewController,
         title: String? = nil,
@@ -78,8 +78,8 @@ public struct HyperwalletUtilViews {
 
     /// Displays the Activity Indicator embedded on view
     ///
-    /// - parameters: onView - The view where the `SpinnerView` will be embedded
-    /// - returns: SpinnerView
+    /// - Parameters: onView - The view where the `SpinnerView` will be embedded
+    /// - Returns: SpinnerView
     ///
     /// Example: the `self` is ViewController
     ///    let spinnerView = HyperwalletUtilViews.showSpinner(self.view)
@@ -98,7 +98,7 @@ public struct HyperwalletUtilViews {
 
     /// Displays the Processing view in a modal view for indicating the UI is processing the data
     ///
-    /// - returns: ProcessingView
+    /// - Returns: ProcessingView
     ///
     /// Example:
     ///    To show ProcessingView:
@@ -129,6 +129,8 @@ public final class SpinnerView: UIView {
         return activity
     }()
 
+    /// Returns an instance of SpinnerView
+    /// - Parameter view: The parent view for a SpinnerView
     public convenience init(showInView view: UIView) {
         self.init(frame: view.frame)
         setupLayout()
@@ -178,7 +180,7 @@ public final class SpinnerView: UIView {
     }
 
     // MARK: Theme manager's proxy properties
-    /// Defines the view backgrounnd color
+    /// Defines the view background color
     @objc dynamic var viewBackgroundColor: UIColor! {
         get { return self.backgroundColor }
         set { self.backgroundColor = newValue }

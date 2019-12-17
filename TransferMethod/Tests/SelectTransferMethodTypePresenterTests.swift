@@ -52,7 +52,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
 
         XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
         XCTAssertFalse(hyperwalletInsightsMock.didTrackImpression,
-                      "HyperwalletInsights.trackImpression shouldn't be called")
+                       "HyperwalletInsights.trackImpression shouldn't be called")
     }
 
     func testLoadTransferMethodKeys_getUserWithoutCountry() {
@@ -319,14 +319,14 @@ class SelectTransferMethodTypeViewMock: SelectTransferMethodTypeView {
                               markCellHandler: @escaping MarkCellHandler,
                               filterContentHandler: @escaping FilterContentHandler) {
         if title == "Select Country" {
-            let country = SelectedContryCurrencyCellConfiguration(title: "United States", value: "US")
+            let country = SelectedCountryCurrencyCellConfiguration(title: "United States", value: "US")
             selectItemHandler(country)
             _ = markCellHandler(country)
             _ = filterContentHandler(items, "")
         }
 
         if title == "Select Currency" {
-            let currency = SelectedContryCurrencyCellConfiguration(title: "US Dollar", value: "USD")
+            let currency = SelectedCountryCurrencyCellConfiguration(title: "US Dollar", value: "USD")
             selectItemHandler(currency)
             _ = markCellHandler(currency)
             _ = filterContentHandler(items, "")

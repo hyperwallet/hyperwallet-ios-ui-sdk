@@ -18,6 +18,7 @@
 
 import Foundation
 
+/// Represents a field for the data initialization during the flow (navigation)
 public enum InitializationDataField: String {
     case country
     case currency

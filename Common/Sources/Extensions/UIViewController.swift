@@ -37,7 +37,7 @@ public extension UIViewController {
         }
     }
 
-    /// Set bavkground color for the view
+    /// Set background color for the view
     func setViewBackgroundColor() {
         view.backgroundColor = Theme.ViewController.backgroundColor
     }

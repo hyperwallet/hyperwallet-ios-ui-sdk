@@ -18,14 +18,14 @@
 
 import UIKit
 
-/// Represents the country and currency data to be displyed on the CountryCurrencyCell
-
+/// Represents the country and currency data to be displayed on the CountryCurrencyCell
 public protocol GenericCellConfiguration {
     /// The title
     var title: String? { get }
     /// The value
     var value: String? { get }
 }
+
 extension GenericCellConfiguration {
     /// The cell identifier
     public var identifier: String {
@@ -33,13 +33,20 @@ extension GenericCellConfiguration {
     }
 }
 
+/// Generic cell
 open class GenericCell<ModelType>: UITableViewCell {
     open var item: ModelType!
 
+    /// Returns UITableViewCell with initialized style and reuse identifier
+    /// - Parameters:
+    ///   - style: Style of cell
+    ///   - reuseIdentifier: reuse identifier
     override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
 
+    /// Returns an object initialized from data in a given unarchiver
+    /// - Parameter aDecoder: An unarchiver object.
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }

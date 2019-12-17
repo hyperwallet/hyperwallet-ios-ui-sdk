@@ -65,7 +65,7 @@ public enum HyperwalletIconContent: String {
     case info1 = "\u{e02a}"
     case premiumFinal = "\u{e02b}"
     case info2 = "\u{e02c}"
-    case basicfinal = "\u{e030}"
+    case basicFinal = "\u{e030}"
     case credit = "\u{e902}"
     case debit = "\u{e900}"
 }

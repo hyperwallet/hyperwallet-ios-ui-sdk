@@ -22,7 +22,7 @@ import UIKit
 public class GenericController<T: GenericCell<ModelType>, ModelType>: UITableViewController,
 UISearchResultsUpdating, UISearchControllerDelegate {
     private let reuseIdentifier = "genericCellIdentifier"
-    private let reuseHeaderIdentifier = "headerCellIentifier"
+    private let reuseHeaderIdentifier = "headerCellIdentifier"
     /// Enable the search controller
     private var shouldDisplaySearchBar = false
     /// The amount of items to enable the search bar to the Generic TableView
@@ -42,7 +42,7 @@ UISearchResultsUpdating, UISearchControllerDelegate {
     public var filterContentForSearchTextAction: ((_ items: [ModelType], _ searchText: String) -> [ModelType])? {
         didSet {
             if shouldDisplaySearchBar {
-                setupSeachBar()
+                setupSearchBar()
             } else {
                 setupWithoutSearchBar()
             }
@@ -80,7 +80,7 @@ UISearchResultsUpdating, UISearchControllerDelegate {
         guard #available(iOS 11.0, *) else {
             DispatchQueue.main.async {
                 self.setupSearchBarSize()
-                self.searchController.searchBar.setLeftAligment()
+                self.searchController.searchBar.setLeftAlignment()
             }
             return
         }
@@ -169,7 +169,7 @@ private extension GenericController {
         definesPresentationContext = true
         searchController.dimsBackgroundDuringPresentation = false
         setupSearchBarSize()
-        searchController.searchBar.setLeftAligment()
+        searchController.searchBar.setLeftAlignment()
         searchController.delegate = self
         searchController.hidesNavigationBarDuringPresentation = false
     }
@@ -193,7 +193,7 @@ private extension GenericController {
         }
     }
 
-    func setupSeachBar() {
+    func setupSearchBar() {
         setupUISearchController()
 
         if #available(iOS 11.0, *) {

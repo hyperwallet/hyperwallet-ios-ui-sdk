@@ -85,8 +85,8 @@ final class SelectTransferMethodTypePresenter {
     /// Return the countryCurrency item composed by the tuple (title and value)
     func getCountryCurrencyConfiguration(indexPath: IndexPath) -> GenericCellConfiguration {
         let title = countryCurrencySectionData[indexPath.row]
-        return SelectedContryCurrencyCellConfiguration(title: title.localized(),
-                                                       value: countryCurrencyValues(at: indexPath.row))
+        return SelectedCountryCurrencyCellConfiguration(title: title.localized(),
+                                                        value: countryCurrencyValues(at: indexPath.row))
     }
 
     /// Display all the select Country or Currency based on the index

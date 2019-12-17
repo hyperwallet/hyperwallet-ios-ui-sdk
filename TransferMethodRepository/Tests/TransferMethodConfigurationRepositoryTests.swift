@@ -235,7 +235,7 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
         // When
         repository.refreshKeys()
 
-        let expectationReflesh = self.expectation(description: "Get transfer method keys")
+        let expectationRefresh = self.expectation(description: "Get transfer method keys")
         repository.getKeys { (result) in
             switch result {
             case .success(let resultKey):
@@ -244,9 +244,9 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
             case .failure(let resultError):
                 refreshError = resultError
             }
-            expectationReflesh.fulfill()
+            expectationRefresh.fulfill()
         }
-        wait(for: [expectationReflesh], timeout: 1)
+        wait(for: [expectationRefresh], timeout: 1)
         XCTAssertNil(error, "The error should be nil")
         XCTAssertNotNil(transferMethodConfigurationKey, "The result should not be nil")
         XCTAssertEqual(transferMethodConfigurationKey!.countries()!.count,
@@ -274,8 +274,8 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
         var transferMethodConfigurationField: HyperwalletTransferMethodConfigurationField?
         var error: HyperwalletErrorType?
 
-        var refeshTransferMethodConfigurationField: HyperwalletTransferMethodConfigurationField?
-        var refeshError: HyperwalletErrorType?
+        var refreshTransferMethodConfigurationField: HyperwalletTransferMethodConfigurationField?
+        var refreshError: HyperwalletErrorType?
 
         repository.getFields(country, currency, transferMethodType, profileType, completion: { (result) in
             switch result {
@@ -294,18 +294,18 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
         // When
         repository.refreshFields()
 
-        let expectationReflesh = self.expectation(description: "Get transfer method configuration fields")
+        let expectationRefresh = self.expectation(description: "Get transfer method configuration fields")
         repository.getFields(country, currency, transferMethodType, profileType, completion: { (result) in
             switch result {
             case .success(let resultField):
-                refeshTransferMethodConfigurationField = resultField
+                refreshTransferMethodConfigurationField = resultField
 
             case .failure(let resultError):
-                refeshError = resultError
+                refreshError = resultError
             }
-            expectationReflesh.fulfill()
+            expectationRefresh.fulfill()
         })
-        wait(for: [expectationReflesh], timeout: 1)
+        wait(for: [expectationRefresh], timeout: 1)
 
         XCTAssertNil(error, "The error should be nil")
         XCTAssertNotNil(transferMethodConfigurationField, "The result should not be nil")
@@ -314,10 +314,10 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
                        "Bank Account",
                        "transferMethodType()!.name` should be Bank Account")
 
-        XCTAssertNil(refeshError, "The error should be nil")
-        XCTAssertNotNil(refeshTransferMethodConfigurationField, "The result should not be nil")
-        XCTAssertEqual(refeshTransferMethodConfigurationField!.fieldGroups()!.count, 1, "`fieldGroups()` should be 1")
-        XCTAssertEqual(refeshTransferMethodConfigurationField!.transferMethodType()!.name,
+        XCTAssertNil(refreshError, "The error should be nil")
+        XCTAssertNotNil(refreshTransferMethodConfigurationField, "The result should not be nil")
+        XCTAssertEqual(refreshTransferMethodConfigurationField!.fieldGroups()!.count, 1, "`fieldGroups()` should be 1")
+        XCTAssertEqual(refreshTransferMethodConfigurationField!.transferMethodType()!.name,
                        "PayPal Account",
                        "transferMethodType()!.name` should be PayPal Account")
     }
@@ -337,7 +337,7 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
     static func refreshHippolyteResponse(_ jsonFileName: String) {
         Hippolyte.shared.clearStubs()
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
-        let refleshResponseData = HyperwalletTestHelper.getDataFromJson(jsonFileName)
-        setupResponseMockServer(refleshResponseData)
+        let refreshResponseData = HyperwalletTestHelper.getDataFromJson(jsonFileName)
+        setupResponseMockServer(refreshResponseData)
     }
 }

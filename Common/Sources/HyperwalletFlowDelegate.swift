@@ -18,6 +18,9 @@
 
 import Foundation
 
+/// Protocol for the flow events delegate
 public protocol HyperwalletFlowDelegate: class {
+    /// Responds for the `didFlowComplete` event
+    /// - Parameter response: Response object
     func didFlowComplete(with response: Any)
 }

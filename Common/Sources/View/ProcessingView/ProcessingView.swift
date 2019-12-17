@@ -18,8 +18,11 @@
 
 import UIKit
 
+/// Represents the state of processing
 public enum ProcessingState: CustomStringConvertible {
+    /// Processing in progress
     case processing
+    /// Processing completed
     case complete
 
     public var description: String {
@@ -33,6 +36,7 @@ public enum ProcessingState: CustomStringConvertible {
     }
 }
 
+/// An object that displays a rectangle view to show the state of processing
 public final class ProcessingView: UIView {
     @IBOutlet private weak var stateLabel: UILabel!
     @IBOutlet private weak var checkImageView: UIImageView!
@@ -61,6 +65,8 @@ public final class ProcessingView: UIView {
         defaultInit()
     }
 
+    /// Returns an object of the ProcessingView type
+    /// - Parameter view: The parent view for a ProcessingView object
     public convenience init(showInView view: UIView) {
         var parentView = view
         if let superView = (view as? UITableView)?.superview {
@@ -71,6 +77,7 @@ public final class ProcessingView: UIView {
         self.layer.add(fadeInAnimation(), forKey: nil)
     }
 
+    /// Returns an object of the ProcessingView type
     public convenience init() {
         guard let view = UIApplication.shared.keyWindow!.rootViewController?.view
             else {
@@ -122,6 +129,8 @@ public final class ProcessingView: UIView {
         stateLabel.text = state?.description
     }
 
+    /// Hides and removes a ProcessingView from the parent view
+    /// - Parameter state: Processing state
     public func hide(with state: ProcessingState? = nil) {
         CATransaction.begin()
         if let state = state {

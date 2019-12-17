@@ -18,7 +18,7 @@
 
 import UIKit
 
-/// The `Theme` is used custumize all visual style provided by Hyperwallet UI SDK.
+/// The `Theme` is used customize all visual style provided by Hyperwallet UI SDK.
 /// In order to apply a new style changes the method `ThemeManager.applyTheme()` has to been called.
 ///
 /// - Example:

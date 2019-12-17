@@ -27,9 +27,18 @@ public protocol HyperwalletCoordinator {
     /// Navigate to the flow
     func navigate()
     /// Navigate to next page from the current flow
+    /// - Parameter initializationData: Initial data for the next page
     func navigateToNextPage(initializationData: [InitializationDataField: Any]?)
     /// Navigate back from the next page to either current flow or parent flow.
+    /// - Parameter response: Data which is given back from the next page
     func navigateBackFromNextPage(with response: Any)
     /// Start the coordinator
+    /// - Parameters:
+    ///   - initializationData: Initial data for the next page
+    ///   - parentController: The parent view controller of the recipient
     func start(initializationData: [InitializationDataField: Any]?, parentController: UIViewController)
 }
+
+/// A Coordinator object that manages navigation for the SelectTransferMethodType controller
+
+/// Returns a newly initialized Hyperwallet Coordinator

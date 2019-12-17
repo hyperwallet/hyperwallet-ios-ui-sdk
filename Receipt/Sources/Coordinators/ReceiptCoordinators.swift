@@ -21,29 +21,33 @@ import Common
 #endif
 import UIKit
 
+/// A Coordinator object that manages navigation for the ListReceipt controller
 public class ListReceiptCoordinator: NSObject, HyperwalletCoordinator {
     private let controller: ListReceiptController
     private var parentController: UIViewController?
 
+    /// Returns a newly initialized Hyperwallet Coordinator
     override init() {
         controller = ListReceiptController()
         super.init()
         self.applyTheme()
     }
+    /// Apply Theme
     public func applyTheme() {
         ThemeManager.applyReceiptTheme()
     }
-
+    /// Get the current Controller class for the Coordinator
     public func getController() -> UITableViewController {
         return controller
     }
-
+    /// Navigate to the flow
     @objc
     public func navigate() {
         controller.flowDelegate = parentController
         parentController?.show(controller, sender: parentController)
     }
-
+    /// Navigate to next page from the current flow
+    /// - Parameter initializationData: Initial data for the next page
     public func navigateToNextPage(initializationData: [InitializationDataField: Any]?) {
         let childController = ReceiptDetailController()
         childController.coordinator = self
@@ -51,7 +55,8 @@ public class ListReceiptCoordinator: NSObject, HyperwalletCoordinator {
         childController.initializationData = initializationData
         controller.show(childController, sender: controller)
     }
-
+    /// Navigate back from the next page to either current flow or parent flow.
+    /// - Parameter response: Data which is given back from the next page
     public func navigateBackFromNextPage(with response: Any) {
         if let parentController = parentController {
             if let navigationController = controller.navigationController {
@@ -62,7 +67,10 @@ public class ListReceiptCoordinator: NSObject, HyperwalletCoordinator {
         }
         controller.flowDelegate?.didFlowComplete(with: response)
     }
-
+    /// Start the coordinator
+    /// - Parameters:
+    ///   - initializationData: Initial data for the next page
+    ///   - parentController: The parent view controller of the recipient
     public func start(initializationData: [InitializationDataField: Any]? = nil, parentController: UIViewController) {
         controller.coordinator = self
         controller.initializationData = initializationData

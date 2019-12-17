@@ -17,17 +17,17 @@ class ListReceiptTests: BaseTests {
     }
 
     func testReceiptsList_verifyReceiptsOrder() {
-        openupReceiptsListScreenForFewMonths()
+        openUpReceiptsListScreenForFewMonths()
         validateListOrder()
     }
 
     func testReceiptsList_verifySectionHeaders() {
-        openupReceiptsListScreenForFewMonths()
+        openUpReceiptsListScreenForFewMonths()
         validateSectionsHeaders()
     }
 
     func testReceiptsList_verifyNumberOfReceipts() {
-        openupReceiptsListScreenForFewMonths()
+        openUpReceiptsListScreenForFewMonths()
         let expectedNumberOfCells = 8
         XCTAssertEqual(app.tables.cells.count, expectedNumberOfCells)
     }
@@ -136,13 +136,13 @@ class ListReceiptTests: BaseTests {
         XCTAssertFalse(app.tables.cells.containing(.staticText, identifier: "March 2019").element.exists)
     }
 
-    private func validatetestReceiptsListScreen() {
+    private func validateTestReceiptsListScreen() {
         XCTAssertTrue(receiptsList.navigationBar.exists)
         validateListOrder()
         validateSectionsHeaders()
     }
 
-    private func openupReceiptsListScreenForFewMonths() {
+    private func openUpReceiptsListScreenForFewMonths() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/receipts",
                              filename: "ReceiptsForFewMonths",
                              method: HTTPMethod.get)
@@ -154,11 +154,11 @@ class ListReceiptTests: BaseTests {
         waitForNonExistence(spinner)
     }
 
-    // MARK: Detail Page Testcases
+    // MARK: Detail Page Test cases
 
     // Credit Transaction
     func testReceiptDetail_verifyCreditTransaction() {
-        openupReceiptsListScreenForFewMonths()
+        openUpReceiptsListScreenForFewMonths()
         transactionDetails.openReceipt(row: 0)
         waitForExistence(transactionDetails.detailHeaderTitle)
         verifyPayment("Payment", "2019-05-24T18:16:19", "6.00", "\(currency)")
@@ -172,7 +172,7 @@ class ListReceiptTests: BaseTests {
 
     // Debit Transaction
     func testReceiptDetail_verifyDebitTransaction() {
-        openupReceiptsListScreenForFewMonths()
+        openUpReceiptsListScreenForFewMonths()
         transactionDetails.openReceipt(row: 1)
         waitForExistence(transactionDetails.detailHeaderTitle)
 
@@ -186,7 +186,7 @@ class ListReceiptTests: BaseTests {
     }
 
     func testReceiptDetail_verifyTransactionOptionalFields() {
-        openupReceiptsListScreenForOneMonth()
+        openUpReceiptsListScreenForOneMonth()
         transactionDetails.openReceipt(row: 4)
         waitForExistence(transactionDetails.detailHeaderTitle)
 
@@ -210,7 +210,7 @@ class ListReceiptTests: BaseTests {
 
     // Verify when no Notes and Fee sections
     func testReceiptDetail_verifyTransactionReceiptNoNoteSectionAndFeeLabel() {
-        openupReceiptsListScreenForOneMonth()
+        openUpReceiptsListScreenForOneMonth()
         transactionDetails.openReceipt(row: 2)
         let transactionDetailHeaderLabel = transactionDetails.detailHeaderTitle
         waitForNonExistence(transactionDetailHeaderLabel)
@@ -223,7 +223,7 @@ class ListReceiptTests: BaseTests {
     }
 
     // MARK: Helper methods
-    private func openupReceiptsListScreenForOneMonth() {
+    private func openUpReceiptsListScreenForOneMonth() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/receipts",
                              filename: "ReceiptsForOneMonth",
                              method: HTTPMethod.get)
