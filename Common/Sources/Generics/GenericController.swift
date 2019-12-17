@@ -27,11 +27,13 @@ UISearchResultsUpdating, UISearchControllerDelegate {
     private var shouldDisplaySearchBar = false
     /// The amount of items to enable the search bar to the Generic TableView
     let amountOfItemsToEnableSearchBar = 20
+    /// The item list to be displayed
     public var items = [ModelType]() {
         didSet {
             shouldDisplaySearchBar = items.count >= amountOfItemsToEnableSearchBar
         }
     }
+    /// The filtered items
     public var filteredItems = [ModelType]()
     /// Event handler to indicate if the item cell should be marked
     public var shouldMarkCellAction: ((_ value: ModelType) -> Bool)?
@@ -48,6 +50,7 @@ UISearchResultsUpdating, UISearchControllerDelegate {
             }
         }
     }
+    /// The typealias  for event handler to return the item selected
     public typealias SelectedHandler = (_ value: ModelType) -> Void
     /// Event handler to return the item selected
     public var selectedHandler: SelectedHandler?
@@ -56,7 +59,7 @@ UISearchResultsUpdating, UISearchControllerDelegate {
     private let searchController: UISearchController = {
         UISearchController(searchResultsController: nil)
     }()
-
+    /// Called after the view controller has loaded its view hierarchy into memory.
     override public func viewDidLoad() {
         super.viewDidLoad()
 
@@ -66,14 +69,18 @@ UISearchResultsUpdating, UISearchControllerDelegate {
         setupTable()
         setViewBackgroundColor()
     }
-
+    /// Notifies the view controller that its view is about to be added to a view hierarchy.
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
         scrollToSelectedRow()
         setupUISearchController()
     }
-
+    /// UIKit calls this method before changing the size of a presented view controller’s view
+    ///
+    /// - Parameters:
+    ///   - size: The new size for the container’s view.
+    ///   - coordinator: The transition coordinator object managing the size change.
     override public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
 
@@ -85,7 +92,7 @@ UISearchResultsUpdating, UISearchControllerDelegate {
             return
         }
     }
-
+    /// Called when the search controller is automatically dismissed.
     public func didDismissSearchController(_ searchController: UISearchController) {
         setupSearchBarSize()
     }
@@ -93,12 +100,11 @@ UISearchResultsUpdating, UISearchControllerDelegate {
     private func setupSearchBarSize() {
        searchController.searchBar.sizeToFit()
     }
-    // MARK: - UITableViewDataSource
-
+    /// Returns number of items
     override public func tableView( _ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return retrieveItems().count
     }
-
+    /// Displays the retrieved items
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
 
@@ -116,7 +122,7 @@ UISearchResultsUpdating, UISearchControllerDelegate {
     }
 
     // MARK: - UITableViewDelegate
-
+    /// - Returns  headerview
     override public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard #available(iOS 11.0, *) else {
             if shouldDisplaySearchBar {
@@ -131,7 +137,7 @@ UISearchResultsUpdating, UISearchControllerDelegate {
 
         return nil
     }
-
+    /// - Returns height of headerview
     override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         guard #available(iOS 11.0, *) else {
             return shouldDisplaySearchBar ? searchController.searchBar.frame.size.height : CGFloat.leastNormalMagnitude
@@ -139,7 +145,7 @@ UISearchResultsUpdating, UISearchControllerDelegate {
 
         return CGFloat.leastNormalMagnitude
     }
-
+    /// - To select the items
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Retrieve the item selected
         if let performItemSelected = selectedHandler {
@@ -150,6 +156,7 @@ UISearchResultsUpdating, UISearchControllerDelegate {
     }
 
     // MARK: - UISearchResultsUpdating
+    /// To update search result
     public func updateSearchResults(for searchController: UISearchController) {
         guard let performFilter = filterContentForSearchTextAction,
             let searchText = searchController.searchBar.text else {

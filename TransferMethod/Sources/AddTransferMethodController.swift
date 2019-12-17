@@ -125,10 +125,11 @@ final class AddTransferMethodController: UITableViewController {
 
 // MARK: - TableViewController Data source and delegate
 extension AddTransferMethodController {
+    /// Returns the title for header
     override public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return presenter.sectionData[section].header
     }
-
+    /// Returns the header view
     override public func tableView(_ tableView: UITableView,
                                    willDisplayHeaderView view: UIView,
                                    forSection section: Int) {
@@ -138,7 +139,7 @@ extension AddTransferMethodController {
         }
         headerView.textLabel?.textColor = Theme.Label.textColor
     }
-
+    /// Returns the title for footer
     override public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         var footerText = ""
         if let errorMessage = presenter.sectionData[section].errorMessage {
@@ -146,7 +147,7 @@ extension AddTransferMethodController {
         }
         return footerText
     }
-
+    /// Returns the height of header
     override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if let header = presenter.sectionData[section].header {
             if header.height(withConstrainedWidth: self.view.frame.width,
@@ -159,15 +160,15 @@ extension AddTransferMethodController {
             return emptyHeaderHeight
         }
     }
-
+    /// Returns tableview section count
     override public func numberOfSections(in tableView: UITableView) -> Int {
         return presenter.sectionData.count
     }
-
+    /// Returns fields count to add transfer method
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.sectionData[section].count
     }
-
+    /// Display's the fields to add transfer method
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: AddTransferMethodCell.reuseIdentifier)
             else {
@@ -237,6 +238,7 @@ extension AddTransferMethodController: AddTransferMethodView {
         }
     }
 
+    /// Scrollview delegate
     override public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         // update footer once scroll ends
         if let section = getSectionContainingFocusedField() {
@@ -360,6 +362,7 @@ extension AddTransferMethodController: AddTransferMethodView {
         UIView.setAnimationsEnabled(true)
     }
 
+    /// Tableview delegate for footer view
     override public func tableView(_ tableView: UITableView,
                                    willDisplayFooterView view: UIView,
                                    forSection section: Int) {

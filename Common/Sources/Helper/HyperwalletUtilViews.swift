@@ -128,7 +128,7 @@ public final class SpinnerView: UIView {
         activity.startAnimating()
         return activity
     }()
-
+    /// Convenience Initializers
     public convenience init(showInView view: UIView) {
         self.init(frame: view.frame)
         setupLayout()

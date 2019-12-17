@@ -20,7 +20,7 @@ import Foundation
 import HyperwalletSDK
 import Insights
 
-// Protocol for HyperwalletInsights
+/// Protocol for HyperwalletInsights
 public protocol HyperwalletInsightsProtocol: class {
     /// Track Clicks
     ///

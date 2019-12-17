@@ -66,7 +66,7 @@ after_success:
   fi
   if [ "$publish_docs" == "YES" ]; then
       make docs;
-      if [ $TRAVIS_BRANCH = 'master' ] && [ $TRAVIS_PULL_REQUEST = 'false' ]; then
+      if [ $TRAVIS_BRANCH = 'task/HW-58895-Add-documentation-to-the-missing-classes/function-in-UI-SDK' ] && [ $TRAVIS_PULL_REQUEST = 'false' ]; then
           sh ./Scripts/travisPublishDocs.sh;
       fi
   fi

@@ -81,22 +81,23 @@ final class ScheduleTransferController: UITableViewController, UITextFieldDelega
 
 // MARK: - Schedule transfer table data source
 extension ScheduleTransferController {
+    /// Returns the title for header
     override public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return presenter.sectionData[section].title
     }
-
+    /// Returns tableview section count
     override public func numberOfSections(in tableView: UITableView) -> Int {
         return presenter.sectionData.count
     }
-
+    /// Returns number of rows
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.sectionData[section].rowCount
     }
-
+    /// Displays cell configuration
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return getCellConfiguration(indexPath)
     }
-
+    /// Returns the footer view of tableview
     override public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let attributedText = getAttributedFooterText(for: section)
         if attributedText == nil {
@@ -176,6 +177,7 @@ extension ScheduleTransferController {
 
 // MARK: - Schedule transfer table delegate
 extension ScheduleTransferController {
+    /// Estimated height of header
     override public func tableView(_ tableView: UITableView,
                                    estimatedHeightForHeaderInSection section: Int) -> CGFloat {
         return CGFloat(Theme.Cell.headerHeight)

@@ -46,9 +46,13 @@ public extension HyperwalletFee {
     /// - percent: the percent format
     /// - mixed: the flat and percent format
     // swiftlint:disable missing_docs
+    /// Different fee types
     enum FeeTypes {
+        /// Flat fee
         case flat(_ flatFee: HyperwalletFee)
+        /// Percent fee
         case percent(_ percentFee: HyperwalletFee)
+        /// Mixed fee
         case mixed(_ percentFee: HyperwalletFee, _ flatFee: HyperwalletFee)
 
         func feeDescription() -> String {

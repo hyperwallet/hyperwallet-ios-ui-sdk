@@ -48,7 +48,7 @@ public protocol TransferMethodConfigurationRepository {
     func refreshKeys()
 }
 
-// MARK: - RemoteTransferMethodConfigurationRepository
+/// RemoteTransferMethodConfigurationRepository
 public final class RemoteTransferMethodConfigurationRepository: TransferMethodConfigurationRepository {
     private var transferMethodConfigurationFieldsDictionary =
         [HyperwalletTransferMethodConfigurationFieldQuery: HyperwalletTransferMethodConfigurationField]()

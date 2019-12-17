@@ -21,6 +21,7 @@ import Common
 #endif
 import UIKit
 
+/// SelectTransferMethodTypeCoordinator
 public class SelectTransferMethodTypeCoordinator: NSObject, HyperwalletCoordinator {
     private let controller: SelectTransferMethodTypeController
     private var parentController: UIViewController?
@@ -69,7 +70,7 @@ public class SelectTransferMethodTypeCoordinator: NSObject, HyperwalletCoordinat
         self.parentController = parentController
     }
 }
-
+/// AddTransferMethodCoordinator
 public class AddTransferMethodCoordinator: NSObject, HyperwalletCoordinator {
     private let controller: AddTransferMethodController
     private var parentController: UIViewController?
@@ -113,7 +114,7 @@ public class AddTransferMethodCoordinator: NSObject, HyperwalletCoordinator {
         self.parentController = parentController
     }
 }
-
+/// ListTransferMethodsCoordinator
 public final class ListTransferMethodsCoordinator: NSObject, HyperwalletCoordinator {
     private let controller: ListTransferMethodController
     private var parentController: UIViewController?

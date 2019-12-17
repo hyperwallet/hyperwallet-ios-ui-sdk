@@ -20,7 +20,7 @@
 import Common
 #endif
 import HyperwalletSDK
-
+/// The class to display detail recipt
 final class ReceiptDetailController: UITableViewController {
     private let registeredCells: [(type: AnyClass, id: String)] = [
         (ReceiptTransactionCell.self, ReceiptTransactionCell.reuseIdentifier),
@@ -30,7 +30,7 @@ final class ReceiptDetailController: UITableViewController {
     ]
 
     private var presenter: ReceiptDetailPresenter!
-
+    /// Called after the view controller has loaded its view hierarchy into memory.
     override public func viewDidLoad() {
         super.viewDidLoad()
         title = "title_receipts_details".localized()
@@ -97,24 +97,25 @@ final class ReceiptDetailController: UITableViewController {
         return cell
     }
 }
-
+/// The recipt detail controller
 extension ReceiptDetailController {
+    /// Returns tableview section count
     override public func numberOfSections(in tableView: UITableView) -> Int {
         return presenter.sectionData.count
     }
-
+    /// Returns title for header
     override public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return presenter.sectionData[section].title
     }
-
+    /// Returns the count of receipt detail fields
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.sectionData[section].rowCount
     }
-
+    /// Display the receipt details
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return getCellConfiguration(indexPath)
     }
-
+    /// Estimated height of header
     override public func tableView(_ tableView: UITableView,
                                    estimatedHeightForHeaderInSection section: Int) -> CGFloat {
         return CGFloat(Theme.Cell.headerHeight)

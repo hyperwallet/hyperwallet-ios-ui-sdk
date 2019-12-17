@@ -21,6 +21,7 @@ import Common
 #endif
 import UIKit
 
+/// Coordinator class for ListReceipt
 public class ListReceiptCoordinator: NSObject, HyperwalletCoordinator {
     private let controller: ListReceiptController
     private var parentController: UIViewController?

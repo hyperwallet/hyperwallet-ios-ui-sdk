@@ -21,6 +21,7 @@ import Common
 #endif
 import UIKit
 
+/// Coordinator class for CreateTransfer
 public class CreateTransferCoordinator: NSObject, HyperwalletCoordinator  {
     private let controller: CreateTransferController
     private var parentController: UIViewController?

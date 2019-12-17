@@ -30,7 +30,7 @@ public protocol UserRepository {
     func refreshUser()
 }
 
-// MARK: - RemoteUserRepository
+/// RemoteUserRepository
 public final class RemoteUserRepository: UserRepository {
     private var user: HyperwalletUser?
 

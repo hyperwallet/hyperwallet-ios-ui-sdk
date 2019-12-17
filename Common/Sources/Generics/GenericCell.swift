@@ -32,14 +32,15 @@ extension GenericCellConfiguration {
         return "cell\(title ?? "")"
     }
 }
-
+/// The tableview cell
 open class GenericCell<ModelType>: UITableViewCell {
+    /// The item
     open var item: ModelType!
-
+    /// Initializes the tableview cell
     override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
-
+    /// The required initializer
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
