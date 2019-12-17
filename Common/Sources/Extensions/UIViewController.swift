@@ -26,6 +26,9 @@ public extension UIViewController {
             self.navigationController?.navigationBar.prefersLargeTitles = true
             self.navigationItem.largeTitleDisplayMode = .always
         }
+        if #available(iOS 13.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = false
+        }
     }
 
     /// To set the display mode for large titles
