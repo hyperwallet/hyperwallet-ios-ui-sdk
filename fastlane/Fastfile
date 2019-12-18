@@ -34,9 +34,8 @@ def update(type, version)
   increment_version_number(version_number: version)
   get_version_number(target: "Common")
   git_add(path: podspec_name)
-  git_add(path: "**/Info.plist")
   git_add(path: "**/*/Info.plist")
-  git_commit(path: [podspec_name, "**/Info.plist", "**/*/Info.plist"],
+  git_commit(path: [podspec_name, "**/*/Info.plist"],
              message: "#{version} release")
   push_to_git_remote
 end
