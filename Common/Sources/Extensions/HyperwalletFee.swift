@@ -41,12 +41,6 @@ public extension HyperwalletFee {
     }
 
     /// Represents the fee types
-    ///
-    /// - flat: the flat format
-    /// - percent: the percent format
-    /// - mixed: the flat and percent format
-    // swiftlint:disable missing_docs
-    /// Different fee types
     enum FeeTypes {
         /// Flat fee
         case flat(_ flatFee: HyperwalletFee)
