@@ -21,7 +21,7 @@ import UIKit
 /// The UISearchBar extension
 public extension UISearchBar {
     /// Setup text alignment to the left
-    func setLeftAligment() {
+    func setLeftAlignment() {
         guard let textField = self.value(forKey: "searchField") as? UITextField else {
             return
         }

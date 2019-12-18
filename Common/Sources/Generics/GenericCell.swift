@@ -18,14 +18,14 @@
 
 import UIKit
 
-/// Represents the country and currency data to be displyed on the CountryCurrencyCell
-
+/// Represents the country and currency data to be displayed on the CountryCurrencyCell
 public protocol GenericCellConfiguration {
     /// The title
     var title: String? { get }
     /// The value
     var value: String? { get }
 }
+
 extension GenericCellConfiguration {
     /// The cell identifier
     public var identifier: String {

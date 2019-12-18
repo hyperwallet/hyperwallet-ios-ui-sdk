@@ -6,7 +6,7 @@ class SelectTransferMethodTypeTests: BaseTests {
     let debitCard = NSPredicate(format: "label CONTAINS[c] 'Debit Card'")
     let processingTime = NSPredicate(format: "label CONTAINS[c] 'Processing Time'")
     let transactionFee = NSPredicate(format: "label CONTAINS[c] 'Transaction Fees'")
-    let wiretransfer = NSPredicate(format: "label CONTAINS[c] 'Wire Transfer'")
+    let wireTransfer = NSPredicate(format: "label CONTAINS[c] 'Wire Transfer'")
 
     override func setUp() {
         super.setUp()
@@ -107,14 +107,14 @@ class SelectTransferMethodTypeTests: BaseTests {
     func testSelectTransferMethod_verifyTransferMethodsListEmptyFee () {
         selectTransferMethodType.selectCountry(country: "THAILAND")
 
-        XCTAssertTrue(app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: wiretransfer).exists)
+        XCTAssertTrue(app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: wireTransfer).exists)
         XCTAssertFalse(app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: transactionFee).exists)
     }
 
     func testSelectTransferMethod_verifyTransferMethodsListEmptyProcessing () {
         selectTransferMethodType.selectCountry(country: "SPAIN")
 
-        XCTAssertTrue(app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: wiretransfer).exists)
+        XCTAssertTrue(app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: wireTransfer).exists)
         XCTAssertFalse(app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: processingTime).exists)
         XCTAssertTrue(app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: transactionFee).exists)
     }

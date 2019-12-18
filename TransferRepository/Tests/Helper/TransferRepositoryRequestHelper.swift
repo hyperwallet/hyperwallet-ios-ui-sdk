@@ -21,7 +21,7 @@ import HyperwalletSDK
 import XCTest
 
 class TransferRepositoryRequestHelper {
-    static func setupSucessRequest(_ responseFileName: String, _ requestUrl: String) {
+    static func setupSuccessRequest(_ responseFileName: String, _ requestUrl: String) {
         let dataResponse = HyperwalletTestHelper.okHTTPResponse(for: responseFileName)
         TransferRepositoryRequestHelper.setUpMockServer(dataResponse, requestUrl)
     }

@@ -38,7 +38,7 @@ class TransferRepositoryTests: XCTestCase {
     func testCreateTransfer_success() {
         // Given
         let requestUrl = String(format: "%@transfers", HyperwalletTestHelper.restURL)
-        TransferRepositoryRequestHelper.setupSucessRequest("CreateTransferResponse", requestUrl)
+        TransferRepositoryRequestHelper.setupSuccessRequest("CreateTransferResponse", requestUrl)
         let expectation = self.expectation(description: "create a transfer")
 
         var createdTransfer: HyperwalletTransfer?
@@ -99,7 +99,7 @@ class TransferRepositoryTests: XCTestCase {
     func testScheduleTransfer_success() {
         // Given
         let requestUrl = String(format: "%@transfers/trf-123456/status-transitions", HyperwalletTestHelper.restURL)
-        TransferRepositoryRequestHelper.setupSucessRequest("ScheduleTransferResponse", requestUrl)
+        TransferRepositoryRequestHelper.setupSuccessRequest("ScheduleTransferResponse", requestUrl)
         let expectation = self.expectation(description: "schedule a transfer")
 
         var statusTransition: HyperwalletStatusTransition?

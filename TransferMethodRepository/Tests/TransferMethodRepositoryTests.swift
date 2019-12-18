@@ -298,7 +298,7 @@ class TransferMethodRepositoryTests: XCTestCase {
                        "The statusTransitionResult?.toStatus should be deactivated")
     }
 
-    func testDeactivateTransferMethod_wireAcount() {
+    func testDeactivateTransferMethod_wireAccount() {
         let expectation = self.expectation(description: "Deactivate wire account completed")
         var statusTransitionResult: HyperwalletStatusTransition?
         var statusTransitionError: HyperwalletErrorType?

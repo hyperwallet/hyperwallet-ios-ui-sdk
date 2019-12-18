@@ -888,7 +888,7 @@ class TransferUserFundsTest: BaseTests {
      XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
      XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
 
-     XCTAssertEqual(transferFunds.transferSectionLabel.label, "TRANSER")
+     XCTAssertEqual(transferFunds.transferSectionLabel.label, "TRANSFER")
      XCTAssertEqual(transferFunds.transferAmountLabel.label, "Amount")
      XCTAssertEqual(transferFunds.transferCurrency.label, "JPY")
 

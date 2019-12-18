@@ -121,7 +121,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
 
     func testDeactivateBankAccount_success() {
         // Given
-        loadMockTransfermethods()
+        loadMockTransferMethods()
         XCTAssertTrue(presenter.sectionData.isNotEmpty, "sectionData should not be empty")
 
         HyperwalletTestHelper.setUpMockServer(request: setUpDeactivateTransferMethodRequest("/bank-accounts/"))
@@ -141,7 +141,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
 
     func testDeactivateBankAccount_failureWithError() {
         // Given
-        loadMockTransfermethods()
+        loadMockTransferMethods()
         XCTAssertTrue(presenter.sectionData.isNotEmpty, "sectionData should not be empty")
 
         HyperwalletTestHelper.setUpMockServer(request:
@@ -163,7 +163,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
 
     func testDeactivateBankCard_success() {
         // Given
-        loadMockTransfermethods()
+        loadMockTransferMethods()
         HyperwalletTestHelper.setUpMockServer(request: setUpDeactivateTransferMethodRequest("/bank-cards/"))
 
         let expectation = self.expectation(description: "deactivate a bank account")
@@ -181,7 +181,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
 
     func testDeactivatePayPalAccount_success() {
         // Given
-        loadMockTransfermethods()
+        loadMockTransferMethods()
         XCTAssertTrue(presenter.sectionData.isNotEmpty, "sectionData should not be empty")
         HyperwalletTestHelper.setUpMockServer(request: setUpDeactivateTransferMethodRequest("/paypal-accounts/"))
 
@@ -200,7 +200,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
 
     func testDeactivateBankCard_failureWithError() {
         // Given
-        loadMockTransfermethods()
+        loadMockTransferMethods()
         XCTAssertTrue(presenter.sectionData.isNotEmpty, "sectionData should not be empty")
         HyperwalletTestHelper.setUpMockServer(request:
             setUpDeactivateTransferMethodRequest("/bank-cards/", NSError(domain: "", code: -1009, userInfo: nil)))
@@ -218,7 +218,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
         XCTAssertFalse(mockView.isShowConfirmationPerformed, "The showConfirmation should not be performed")
     }
 
-    private func loadMockTransfermethods() {
+    private func loadMockTransferMethods() {
         // Given
         HyperwalletTestHelper.setUpMockServer(request: setUpListTransferMethodRequest())
 

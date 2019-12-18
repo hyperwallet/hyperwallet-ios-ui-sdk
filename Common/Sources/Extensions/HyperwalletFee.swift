@@ -19,7 +19,7 @@
 import Foundation
 import HyperwalletSDK
 
-/// The HyperwalletFee extenstion
+/// The HyperwalletFee extension
 public extension HyperwalletFee {
     private static let percent = "PERCENT"
     private static let flat = "FLAT"

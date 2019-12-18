@@ -330,7 +330,7 @@ class ListTransferMethodTests: BaseTests {
         waitForNonExistence(spinner)
     }
 
-    private func validatetestListTransferMethodScreen() {
+    private func validateTestListTransferMethodScreen() {
         let expectedCellsCount = 5
         XCTAssertTrue(listTransferMethod.navigationBar.exists)
         XCTAssertTrue(app.tables.element(boundBy: 0).cells.count == expectedCellsCount)
