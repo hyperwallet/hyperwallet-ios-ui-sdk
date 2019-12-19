@@ -18,7 +18,7 @@
 
 import UIKit
 
-/// Represents the country and currency data to be displayed on the CountryCurrencyCell
+/// Represents the data displayed in the selection screens (like country, currency)
 public protocol GenericCellConfiguration {
     /// The title
     var title: String? { get }

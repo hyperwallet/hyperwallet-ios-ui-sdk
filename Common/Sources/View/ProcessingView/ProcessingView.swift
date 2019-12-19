@@ -63,7 +63,7 @@ public final class ProcessingView: UIView {
         super.init(coder: aDecoder)
         defaultInit()
     }
-    /// Convenience Initializers for view
+    /// Convenience Initializer for view
     public convenience init(showInView view: UIView) {
         var parentView = view
         if let superView = (view as? UITableView)?.superview {
@@ -73,7 +73,7 @@ public final class ProcessingView: UIView {
         parentView.addSubview(self)
         self.layer.add(fadeInAnimation(), forKey: nil)
     }
-   /// Convenience Initializers
+   /// Convenience Initializer
     public convenience init() {
         guard let view = UIApplication.shared.keyWindow!.rootViewController?.view
             else {

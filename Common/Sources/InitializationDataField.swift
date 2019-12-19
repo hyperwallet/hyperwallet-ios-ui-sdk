@@ -27,20 +27,20 @@ public enum InitializationDataField: String {
     case profileType
     /// The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD.
     case transferMethodTypeCode
-    ///  Forces to refresh the cached data.
+    /// Forces to refresh the cached data.
     case forceUpdateData
-    ///  The receipt
+    /// The receipt
     case receipt
-    ///  The client TransferId
+    /// The client TransferId
     case clientTransferId
-    ///  The prepaid token
+    /// The prepaid token
     case prepaidCardToken
-    ///  The source token
+    /// The source token
     case sourceToken
-    ///  The transfer
+    /// The transfer
     case transfer
-    ///  The transfer method like bank account, bank card, PayPal account, prepaid card, paper check
+    /// The transfer method like bank account, bank card, PayPal account, prepaid card, paper check
     case transferMethod
-    ///   Boolean value to check whether foreign exchange rate changed
+    /// Boolean value to check whether foreign exchange rate changed
     case didFxQuoteChange
 }

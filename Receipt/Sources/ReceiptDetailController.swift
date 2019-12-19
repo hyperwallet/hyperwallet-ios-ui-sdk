@@ -20,7 +20,7 @@
 import Common
 #endif
 import HyperwalletSDK
-/// The class to display detail recipt
+/// The class to display detail receipt
 final class ReceiptDetailController: UITableViewController {
     private let registeredCells: [(type: AnyClass, id: String)] = [
         (ReceiptTransactionCell.self, ReceiptTransactionCell.reuseIdentifier),
@@ -97,7 +97,7 @@ final class ReceiptDetailController: UITableViewController {
         return cell
     }
 }
-/// The recipt detail controller
+/// The receipt detail controller
 extension ReceiptDetailController {
     /// Returns tableview section count
     override public func numberOfSections(in tableView: UITableView) -> Int {

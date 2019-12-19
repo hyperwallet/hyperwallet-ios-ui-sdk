@@ -83,7 +83,7 @@ extension UIViewController: HyperwalletFlowDelegate {
             Holder.coordinator[ObjectIdentifier(self)] = newValue
         }
     }
-    /// Initialization of data
+    /// Data required to initialize a flow (render UI screen)
     public var initializationData: [InitializationDataField: Any]? {
         get {
             return Holder.initializationData[ObjectIdentifier(self)]

@@ -83,15 +83,15 @@ final class SelectTransferMethodTypeController: UITableViewController {
 }
 
 extension SelectTransferMethodTypeController {
-    /// - Returns  transfer method count
+    /// Returns  transfer method count
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.sectionData.count
     }
-    /// - Returns tableview section count
+    /// Returns tableview section count
     override public func numberOfSections(in tableView: UITableView) -> Int {
         return presenter.countryCurrencySectionData.isNotEmpty ? 1:0
     }
-    /// - Display transfer methods
+    /// Display transfer methods
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SelectTransferMethodTypeCell.reuseIdentifier,
                                                  for: indexPath)
@@ -104,17 +104,17 @@ extension SelectTransferMethodTypeController {
 }
    // MARK: - TableViewController delegate
 extension SelectTransferMethodTypeController {
-    /// - Returns  headerview
+    /// Returns  headerview
     override public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return countryCurrencyTableView
     }
-    /// - Returns height of headerview
+    /// Returns height of headerview
     override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         let blankHeaderHeight = countryCurrencyTableView.estimatedRowHeight / 2.5
         return countryCurrencyTableView
             .estimatedRowHeight * CGFloat(presenter.countryCurrencySectionData.count) + blankHeaderHeight
     }
-    /// - To select transfer method
+    /// To select transfer method
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.navigateToAddTransferMethod(indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
@@ -197,7 +197,7 @@ final class CountryCurrencyTableView: NSObject {
 }
 // MARK: - TableViewController Data source
 extension CountryCurrencyTableView: UITableViewDataSource {
-    /// - Returns number of country and currency
+    /// Returns number of country and currency
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.countryCurrencySectionData.count
     }

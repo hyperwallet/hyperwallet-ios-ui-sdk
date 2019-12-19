@@ -122,7 +122,7 @@ UISearchResultsUpdating, UISearchControllerDelegate {
     }
 
     // MARK: - UITableViewDelegate
-    /// - Returns  headerview
+    /// Returns  headerview
     override public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard #available(iOS 11.0, *) else {
             if shouldDisplaySearchBar {
@@ -137,7 +137,7 @@ UISearchResultsUpdating, UISearchControllerDelegate {
 
         return nil
     }
-    /// - Returns height of headerview
+    /// Returns height of headerview
     override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         guard #available(iOS 11.0, *) else {
             return shouldDisplaySearchBar ? searchController.searchBar.frame.size.height : CGFloat.leastNormalMagnitude
@@ -145,7 +145,7 @@ UISearchResultsUpdating, UISearchControllerDelegate {
 
         return CGFloat.leastNormalMagnitude
     }
-    /// - To select the items
+    /// To select the items
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Retrieve the item selected
         if let performItemSelected = selectedHandler {

@@ -15,7 +15,7 @@
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-/// To perform past action in UITextField
+/// To perform paste action in UITextField
 public final class PasteOnlyTextField: UITextField {
     /// Requests the receiving responder to paste text in UITextField
     override public func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
