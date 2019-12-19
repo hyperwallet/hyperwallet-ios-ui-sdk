@@ -52,7 +52,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
 
         XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
         XCTAssertFalse(hyperwalletInsightsMock.didTrackImpression,
-                      "HyperwalletInsights.trackImpression shouldn't be called")
+                       "HyperwalletInsights.trackImpression shouldn't be called")
     }
 
     func testLoadTransferMethodKeys_getUserWithoutCountry() {
