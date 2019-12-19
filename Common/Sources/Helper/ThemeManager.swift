@@ -79,24 +79,32 @@ public class ThemeManager: NSObject {
         searchBar.setSearchFieldBackgroundImage(backgroundImage, for: UIControl.State.normal)
         searchBar.searchTextPositionAdjustment = UIOffset(horizontal: 8.0, vertical: 0.0)
 
-        if let textField = searchBar.value(forKey: "searchField") as? UITextField {
-            textField.defaultTextAttributes = [
-                NSAttributedString.Key.foregroundColor: Theme.SearchBar.textFieldTintColor,
-                NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body)
-            ]
-            textField.attributedPlaceholder = NSAttributedString(
-                string: "search_placeholder_label".localized(),
-                attributes: [
-                    .foregroundColor: Theme.SearchBar.textFieldTintColor.withAlphaComponent(0.5),
-                    .font: UIFont.preferredFont(forTextStyle: .body)
-                ])
-            if let leftImageView = textField.leftView as? UIImageView {
-                leftImageView.image = leftImageView.image?.withRenderingMode(.alwaysTemplate)
-                leftImageView.tintColor = Theme.SearchBar.textFieldTintColor.withAlphaComponent(0.5)
-            }
-            if let clearButton = textField.value(forKey: "clearButton") as? UIButton {
-                clearButton.setImage(clearButton.imageView?.image?.withRenderingMode(.alwaysTemplate), for: .normal)
-                clearButton.tintColor = Theme.SearchBar.textFieldTintColor.withAlphaComponent(0.5)
+        if #available(iOS 13.0, *) {
+            searchBar.tintColor = Theme.SearchBar.textFieldTintColor.withAlphaComponent(0.5)
+            searchBar.placeholder = "search_placeholder_label".localized()
+            searchBar.setPlaceholder(textColor: Theme.SearchBar.textFieldTintColor.withAlphaComponent(0.5))
+            searchBar.setSearchImage(color: Theme.SearchBar.textFieldTintColor.withAlphaComponent(0.5))
+            searchBar.setClearButton(color: Theme.SearchBar.textFieldTintColor.withAlphaComponent(0.5))
+        } else {
+            if let textField = searchBar.value(forKey: "searchField") as? UITextField {
+                textField.defaultTextAttributes = [
+                    NSAttributedString.Key.foregroundColor: Theme.SearchBar.textFieldTintColor,
+                    NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body)
+                ]
+                textField.attributedPlaceholder = NSAttributedString(
+                    string: "search_placeholder_label".localized(),
+                    attributes: [
+                        .foregroundColor: Theme.SearchBar.textFieldTintColor.withAlphaComponent(0.5),
+                        .font: UIFont.preferredFont(forTextStyle: .body)
+                    ])
+                if let leftImageView = textField.leftView as? UIImageView {
+                    leftImageView.image = leftImageView.image?.withRenderingMode(.alwaysTemplate)
+                    leftImageView.tintColor = Theme.SearchBar.textFieldTintColor.withAlphaComponent(0.5)
+                }
+                if let clearButton = textField.value(forKey: "clearButton") as? UIButton {
+                    clearButton.setImage(clearButton.imageView?.image?.withRenderingMode(.alwaysTemplate), for: .normal)
+                    clearButton.tintColor = Theme.SearchBar.textFieldTintColor.withAlphaComponent(0.5)
+                }
             }
         }
     }
