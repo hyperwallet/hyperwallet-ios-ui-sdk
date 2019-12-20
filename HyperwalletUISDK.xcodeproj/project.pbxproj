@@ -864,8 +864,6 @@
 		DBC199D922E29A3D004447DD /* HyperwalletTransferMethodTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyperwalletTransferMethodTests.swift; sourceTree = "<group>"; };
 		DBC8404322D463CA00178B64 /* HyperwalletCountry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletCountry.swift; sourceTree = "<group>"; };
 		DBC8404522D4655C00178B64 /* HyperwalletCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletCurrency.swift; sourceTree = "<group>"; };
-		DBCA37F8225E892400CD4137 /* HyperwalletUISDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HyperwalletUISDK.h; sourceTree = "<group>"; };
-		DBCA37F9225E892400CD4137 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DBCA381C225E8BA900CD4137 /* SelectTransferMethodTypeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectTransferMethodTypeController.swift; sourceTree = "<group>"; };
 		DBCA381E225E8BA900CD4137 /* CountryCurrencyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCurrencyCell.swift; sourceTree = "<group>"; };
 		DBCA3821225E8BA900CD4137 /* ListTransferMethodCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTransferMethodCell.swift; sourceTree = "<group>"; };
@@ -1950,7 +1948,6 @@
 				DBCA37F6225E892400CD4137 /* Products */,
 				DB99C2C222E2207300E45185 /* Receipt */,
 				4AE6B6C122D605B20009DEFE /* ReceiptRepository */,
-				DBCA37F7225E892400CD4137 /* Sources */,
 				4A9A7BE022E859E60022E573 /* Transfer */,
 				DB551FC022E140A100DD65C2 /* TransferMethod */,
 				DBAF929722CFCB87004F197A /* TransferMethodRepository */,
@@ -1984,15 +1981,6 @@
 				4A9A7BE722E859E60022E573 /* TransferTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		DBCA37F7225E892400CD4137 /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				DBCA37F8225E892400CD4137 /* HyperwalletUISDK.h */,
-				DBCA37F9225E892400CD4137 /* Info.plist */,
-			);
-			path = Sources;
 			sourceTree = "<group>";
 		};
 		DBCA382E225E8BA900CD4137 /* Extensions */ = {
