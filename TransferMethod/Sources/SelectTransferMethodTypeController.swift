@@ -192,6 +192,7 @@ extension SelectTransferMethodTypeController: SelectTransferMethodTypeView {
 }
 
 // MARK: Country and Currency - UITableViewDataSource UITableViewDelegate
+/// The TableView to display country and currency
 final class CountryCurrencyTableView: NSObject {
     weak var presenter: SelectTransferMethodTypePresenter!
 
