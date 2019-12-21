@@ -83,22 +83,23 @@ final class CreateTransferController: UITableViewController {
 
 // MARK: - Create transfer table view dataSource
 extension CreateTransferController {
+    /// Returns tableview section count
     override public func numberOfSections(in tableView: UITableView) -> Int {
         return presenter.sectionData.count
     }
-
+    /// Returns number of rows
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.sectionData[section].rowCount
     }
-
+    /// Displays cell configuration
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return getCellConfiguration(indexPath)
     }
-
+    /// Returns the title for header
     override public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return presenter.sectionData[section].title
     }
-
+    /// Returns the footer view of tableview
     override public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let attributedText = getAttributedFooterText(for: section)
         if attributedText == nil {
@@ -219,6 +220,7 @@ extension CreateTransferController {
 
 // MARK: - Create transfer table view delegate
 extension CreateTransferController {
+    /// - To select the transfer method
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let sectionData = presenter.sectionData[indexPath.section]
@@ -366,6 +368,7 @@ extension CreateTransferController: CreateTransferView {
 }
 
 extension CreateTransferController {
+    /// To reload create transfer method
     override public func didFlowComplete(with response: Any) {
         if let transferMethod = response as? HyperwalletTransferMethod {
             presenter.selectedTransferMethod = transferMethod

@@ -37,7 +37,7 @@ public extension UIViewController {
         }
     }
 
-    /// Set bavkground color for the view
+    /// Set background color for the view
     func setViewBackgroundColor() {
         view.backgroundColor = Theme.ViewController.backgroundColor
     }
@@ -56,6 +56,7 @@ public extension UIViewController {
 }
 
 extension UIViewController: HyperwalletFlowDelegate {
+    /// Protocol method
     @objc
     open func didFlowComplete(with response: Any) {
     }
@@ -64,7 +65,7 @@ extension UIViewController: HyperwalletFlowDelegate {
         static var coordinator =  [ObjectIdentifier: HyperwalletCoordinator]()
         static var initializationData = [ObjectIdentifier: [InitializationDataField: Any]]()
     }
-
+    /// The reference to call didFlowComplete
     public weak var flowDelegate: HyperwalletFlowDelegate? {
         get {
             return Holder.flowDelegate[ObjectIdentifier(self)]
@@ -73,6 +74,7 @@ extension UIViewController: HyperwalletFlowDelegate {
             Holder.flowDelegate[ObjectIdentifier(self)] = newValue
         }
     }
+    /// The reference to start/navigate Hyperwallet UI SDK flow
     public var coordinator: HyperwalletCoordinator? {
         get {
             return Holder.coordinator[ObjectIdentifier(self)]
@@ -81,6 +83,7 @@ extension UIViewController: HyperwalletFlowDelegate {
             Holder.coordinator[ObjectIdentifier(self)] = newValue
         }
     }
+    /// Data required to initialize a flow (render UI screen)
     public var initializationData: [InitializationDataField: Any]? {
         get {
             return Holder.initializationData[ObjectIdentifier(self)]

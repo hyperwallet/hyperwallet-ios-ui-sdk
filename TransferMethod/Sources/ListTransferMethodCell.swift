@@ -21,7 +21,7 @@ import Common
 #endif
 import HyperwalletSDK
 import UIKit
-
+/// ListTransferMethodCell
 final class ListTransferMethodCell: UITableViewCell {
     static let reuseIdentifier = "listTransferMethodCellIdentifier"
 

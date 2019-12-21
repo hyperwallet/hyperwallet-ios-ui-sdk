@@ -17,7 +17,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import Foundation
-
+/// Flow complete protocol
 public protocol HyperwalletFlowDelegate: class {
+    /// Protocol method to be called after flow completes
     func didFlowComplete(with response: Any)
 }

@@ -742,7 +742,7 @@
                             "transferMethodTypes" : {
                                 "nodes" : [ {
                                     "code" : "WIRE_ACCOUNT",
-                                    "name" : "Wire Transfer",
+                                    "name" : "Wire Transfer"
 
                                 } ]
                             }

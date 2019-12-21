@@ -19,7 +19,7 @@
 import Foundation
 /// Hyperwallet's enum for the types of coordinators
 public enum HyperwalletCoordinatorTypes {
-    /// - selectTransferMethodType: Coordinator for select transfer method type.
+    /// Coordinator for select transfer method type.
     case selectTransferMethodType
 }
 

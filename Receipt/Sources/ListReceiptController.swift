@@ -66,7 +66,7 @@ final class ListReceiptController: UITableViewController {
     override public func numberOfSections(in tableView: UITableView) -> Int {
         return presenter.sectionData.count
     }
-
+    /// Returns title for header
     override public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let date = presenter.sectionData[section].key
         return date.formatDateToString(dateFormat: sectionTitleDateFormat)
