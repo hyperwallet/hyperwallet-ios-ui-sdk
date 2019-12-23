@@ -51,11 +51,6 @@ final class SelectTransferMethodTypeController: UITableViewController {
         presenter.loadTransferMethodKeys(forceUpdate)
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        presenter.trackUILoadImpression()
-    }
-
     private func initializePresenter() {
         presenter = SelectTransferMethodTypePresenter(self)
     }

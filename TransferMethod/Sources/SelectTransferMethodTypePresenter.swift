@@ -299,9 +299,10 @@ final class SelectTransferMethodTypePresenter {
 
         sectionData = transferMethodTypes
         view.transferMethodTypeTableViewReloadData()
+        trackUILoadImpression()
     }
 
-    func trackUILoadImpression() {
+    private func trackUILoadImpression() {
         let params = [InsightsTags.country: selectedCountry, InsightsTags.currency: selectedCurrency]
         hyperwalletInsights.trackImpression(pageName: pageName, pageGroup: pageGroup, params: params)
     }
