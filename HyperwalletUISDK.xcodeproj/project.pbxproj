@@ -633,7 +633,6 @@
 		2E6DBB8A2326F0F800863672 /* AvailableFundMultiCurrenciesFxChange.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AvailableFundMultiCurrenciesFxChange.json; sourceTree = "<group>"; };
 		2E8AFE5B2307668F002B6D24 /* HyperwalletCoordinatorTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletCoordinatorTypes.swift; sourceTree = "<group>"; };
 		2EBD0C682375FAE400569342 /* Insights.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Insights.framework; path = Carthage/Build/iOS/Insights.framework; sourceTree = "<group>"; };
-		2EF70C50237CA2E6007E3844 /* AbstractWidgetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractWidgetTests.swift; sourceTree = "<group>"; };
 		2EF70C53237CDEAE007E3844 /* HyperwalletFieldResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = HyperwalletFieldResponse.json; sourceTree = "<group>"; };
 		2EF70C6E237F543F007E3844 /* HyperwalletInsightsMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyperwalletInsightsMock.swift; sourceTree = "<group>"; };
 		412F723222B458C700837F8F /* TransactionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetails.swift; sourceTree = "<group>"; };
@@ -1197,14 +1196,6 @@
 				4157136222C56B4B005D6DB1 /* PrepaidCardListReceiptTests.swift */,
 			);
 			path = Receipts;
-			sourceTree = "<group>";
-		};
-		2E1DA9542395DC5D008D08A8 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				2EF70C50237CA2E6007E3844 /* AbstractWidgetTests.swift */,
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		2E3B047F2372470900BB1FFE /* Insights */ = {
@@ -1940,7 +1931,6 @@
 		DBCA37EB225E892400CD4137 = {
 			isa = PBXGroup;
 			children = (
-				A66A5DF5238EA8B100B55151 /* Scripts */,
 				DB551F6222E1316D00DD65C2 /* Common */,
 				DB4679832260380C00E1AF49 /* Demo */,
 				DBD2667F2261A601002973C3 /* Deployment */,
@@ -1954,7 +1944,6 @@
 				073BB99B22E63DBF0053C24E /* TransferRepository */,
 				DB2587FC2261BFF100E6236B /* UITests */,
 				643912ED22DF40F200036609 /* UserRepository */,
-				2E1DA9542395DC5D008D08A8 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2772,7 +2761,6 @@
 			files = (
 				DB46798F2260380D00E1AF49 /* LaunchScreen.storyboard in Resources */,
 				DB46798C2260380D00E1AF49 /* Assets.xcassets in Resources */,
-				A66A5DF7238EA92700B55151 /* travisPublishDocs.sh in Resources */,
 				DB46798A2260380C00E1AF49 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
