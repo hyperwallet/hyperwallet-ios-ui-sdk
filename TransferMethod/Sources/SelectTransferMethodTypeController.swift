@@ -41,14 +41,18 @@ final class SelectTransferMethodTypeController: UITableViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         initializeData()
-        title = "add_account_title".localized()
-        largeTitle()
         setViewBackgroundColor()
-        navigationItem.backBarButtonItem = UIBarButtonItem.back
         initializePresenter()
         setupCountryCurrencyTableView()
         setupTransferMethodTypeTableView()
         presenter.loadTransferMethodKeys(forceUpdate)
+    }
+
+    override public func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let currentNavigationItem: UINavigationItem = tabBarController?.navigationItem ?? navigationItem
+        currentNavigationItem.backBarButtonItem = UIBarButtonItem.back
+        titleDisplayMode(.always, for: "add_account_title".localized())
     }
 
     private func initializePresenter() {

@@ -81,13 +81,17 @@ final class AddTransferMethodController: UITableViewController {
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        largeTitle()
         initializePresenter()
         presenter.loadTransferMethodConfigurationFields(forceUpdate ?? false)
         setupLayout()
         hideKeyboardWhenTappedAround()
-        title = presenter.transferMethodTypeCode.lowercased().localized()
-        navigationItem.backBarButtonItem = UIBarButtonItem.back
+    }
+
+    override public func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let currentNavigationItem: UINavigationItem = tabBarController?.navigationItem ?? navigationItem
+        currentNavigationItem.backBarButtonItem = UIBarButtonItem.back
+        titleDisplayMode(.always, for: presenter.transferMethodTypeCode.lowercased().localized())
     }
 
     // MARK: - Setup Layout -

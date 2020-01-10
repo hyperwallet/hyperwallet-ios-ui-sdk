@@ -38,13 +38,17 @@ final class ScheduleTransferController: UITableViewController, UITextFieldDelega
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        title = "transfer_funds".localized()
-        largeTitle()
         setViewBackgroundColor()
-        navigationItem.backBarButtonItem = UIBarButtonItem.back
         initializePresenter()
         // setup table view
         setUpScheduleTransferTableView()
+    }
+
+    override public func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let currentNavigationItem: UINavigationItem = tabBarController?.navigationItem ?? navigationItem
+        currentNavigationItem.backBarButtonItem = UIBarButtonItem.back
+        titleDisplayMode(.always, for: "transfer_funds".localized())
     }
 
     private func initializePresenter() {

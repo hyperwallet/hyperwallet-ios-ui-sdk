@@ -37,19 +37,21 @@ final class ListTransferMethodController: UITableViewController {
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        title = "title_accounts".localized()
-        largeTitle()
         setViewBackgroundColor()
-
-        navigationItem.backBarButtonItem = UIBarButtonItem.back
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
-                                                            target: self,
-                                                            action: #selector(didTapAddButton))
-
         initializePresenter()
         presenter.listTransferMethods()
         // setup table view
         setupTransferMethodTableView()
+    }
+
+    override public func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let currentNavigationItem: UINavigationItem = tabBarController?.navigationItem ?? navigationItem
+        currentNavigationItem.backBarButtonItem = UIBarButtonItem.back
+        currentNavigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
+                                                                   target: self,
+                                                                   action: #selector(didTapAddButton))
+        titleDisplayMode(.always, for: "title_accounts".localized())
     }
 
     private func initializePresenter() {

@@ -20,20 +20,17 @@ import UIKit
 
 /// The UIViewController extension
 public extension UIViewController {
-    /// To always prefer LargeTitles
-    func largeTitle() {
-        if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.prefersLargeTitles = true
-            self.navigationItem.largeTitleDisplayMode = .always
-        }
-    }
-
     /// To set the display mode for large titles
     ///
-    /// - Parameter mode: UINavigationItem.LargeTitleDisplayMode
-    func titleDisplayMode(_ mode: UINavigationItem.LargeTitleDisplayMode) {
+    /// - Parameters:
+    ///   - mode: UINavigationItem.LargeTitleDisplayMode
+    ///   - title: title displayed
+    func titleDisplayMode(_ mode: UINavigationItem.LargeTitleDisplayMode, for title: String?) {
         if #available(iOS 11.0, *) {
-            self.navigationItem.largeTitleDisplayMode = mode
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+            let currentNavigationItem: UINavigationItem = self.tabBarController?.navigationItem ?? self.navigationItem
+            currentNavigationItem.largeTitleDisplayMode = mode
+            currentNavigationItem.title = title
         }
     }
 
