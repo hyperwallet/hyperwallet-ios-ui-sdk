@@ -26,11 +26,11 @@ public extension UIViewController {
     ///   - mode: UINavigationItem.LargeTitleDisplayMode
     ///   - title: title displayed
     func titleDisplayMode(_ mode: UINavigationItem.LargeTitleDisplayMode, for title: String?) {
+        let currentNavigationItem: UINavigationItem = self.tabBarController?.navigationItem ?? self.navigationItem
+        currentNavigationItem.title = title
         if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.prefersLargeTitles = true
-            let currentNavigationItem: UINavigationItem = self.tabBarController?.navigationItem ?? self.navigationItem
             currentNavigationItem.largeTitleDisplayMode = mode
-            currentNavigationItem.title = title
         }
     }
 
