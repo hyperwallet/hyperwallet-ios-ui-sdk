@@ -34,13 +34,17 @@ final class ListReceiptController: UITableViewController {
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        title = "title_receipts".localized()
-        largeTitle()
         setViewBackgroundColor()
-        navigationItem.backBarButtonItem = UIBarButtonItem.back
         initializePresenter()
         presenter.listReceipts()
         setupListReceiptTableView()
+    }
+
+    override public func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let currentNavigationItem: UINavigationItem = tabBarController?.navigationItem ?? navigationItem
+        currentNavigationItem.backBarButtonItem = UIBarButtonItem.back
+        titleDisplayMode(.always, for: "title_receipts".localized())
     }
 
     private func initializePresenter() {

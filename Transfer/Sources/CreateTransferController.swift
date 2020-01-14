@@ -45,14 +45,18 @@ final class CreateTransferController: UITableViewController {
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        title = "transfer_funds".localized()
-        navigationItem.backBarButtonItem = UIBarButtonItem.back
-        largeTitle()
         setViewBackgroundColor()
         initializePresenter()
         presenter.loadCreateTransfer()
         setUpCreateTransferTableView()
         hideKeyboardWhenTappedAround()
+    }
+
+    override public func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let currentNavigationItem: UINavigationItem = tabBarController?.navigationItem ?? navigationItem
+        currentNavigationItem.backBarButtonItem = UIBarButtonItem.back
+        titleDisplayMode(.always, for: "transfer_funds".localized())
     }
 
     private func initializePresenter() {

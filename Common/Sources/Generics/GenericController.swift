@@ -64,7 +64,7 @@ UISearchResultsUpdating, UISearchControllerDelegate {
         super.viewDidLoad()
 
         view.backgroundColor = .white
-        titleDisplayMode(.never)
+        titleDisplayMode(.never, for: title)
         extendedLayoutIncludesOpaqueBars = true
         setupTable()
         setViewBackgroundColor()

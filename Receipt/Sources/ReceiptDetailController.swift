@@ -33,11 +33,14 @@ final class ReceiptDetailController: UITableViewController {
     /// Called after the view controller has loaded its view hierarchy into memory.
     override public func viewDidLoad() {
         super.viewDidLoad()
-        title = "title_receipts_details".localized()
-        titleDisplayMode(.never)
         setViewBackgroundColor()
         initializePresenter()
         setupReceiptDetailTableView()
+    }
+
+    override public func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        titleDisplayMode(.never, for: "title_receipts_details".localized())
     }
 
     private func initializePresenter() {
