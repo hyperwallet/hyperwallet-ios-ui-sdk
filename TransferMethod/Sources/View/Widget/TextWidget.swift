@@ -36,6 +36,11 @@ class TextWidget: AbstractWidget {
         return String(String.UnicodeScalarView(numbers.compactMap(UnicodeScalar.init)))
     }
 
+    private var allowedSpecialCharacters: String {
+         let specialCharacters = UInt32("(") ... UInt32(")")
+         return String(String.UnicodeScalarView(specialCharacters.compactMap(UnicodeScalar.init)))
+     }
+
     var textField: PasteOnlyTextField = {
         let textField = PasteOnlyTextField()
         textField.setContentHuggingPriority(UILayoutPriority.defaultLow, for: NSLayoutConstraint.Axis.horizontal)
@@ -194,6 +199,8 @@ class TextWidget: AbstractWidget {
         default:
             if !self.isEscapedCharacter(currentPatternCharacter) {
                 if currentPatternCharacter == currentTextCharacter {
+                    finalText += patternCharactersToBeWritten
+                    patternCharactersToBeWritten = ""
                     finalText += String(currentTextCharacter)
                     currentIndex.textIndex = currentText.index(after: currentIndex.textIndex)
                 } else {
@@ -218,8 +225,9 @@ class TextWidget: AbstractWidget {
     private func getTextForPatternCharacter(_ patternCharacter: Character, _ text: String) -> String? {
         switch patternCharacter {
         case PatternCharacter.lettersAndNumbersPatternCharacter.rawValue:
-            return text
-                .components(separatedBy: CharacterSet(charactersIn: allowedLetters + allowedNumbers).inverted).joined()
+            return text.components(separatedBy:
+                        CharacterSet(charactersIn: allowedLetters + allowedNumbers + allowedSpecialCharacters).inverted)
+                    .joined()
 
         case PatternCharacter.lettersOnlyPatternCharacter.rawValue:
             return text.components(separatedBy: CharacterSet(charactersIn: allowedLetters).inverted).joined()
