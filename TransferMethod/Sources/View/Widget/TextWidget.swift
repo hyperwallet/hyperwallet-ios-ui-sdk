@@ -194,6 +194,8 @@ class TextWidget: AbstractWidget {
         default:
             if !self.isEscapedCharacter(currentPatternCharacter) {
                 if currentPatternCharacter == currentTextCharacter {
+                    finalText += patternCharactersToBeWritten
+                    patternCharactersToBeWritten = ""
                     finalText += String(currentTextCharacter)
                     currentIndex.textIndex = currentText.index(after: currentIndex.textIndex)
                 } else {
