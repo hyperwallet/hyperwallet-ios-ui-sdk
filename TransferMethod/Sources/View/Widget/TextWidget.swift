@@ -87,20 +87,42 @@ class TextWidget: AbstractWidget {
         textField.textColor = field.isEditable ?? true ? Theme.Text.color : Theme.Text.disabledColor
         textField.font = Theme.Label.bodyFont
         textField.adjustsFontForContentSizeCategory = true
-        textField.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
         addArrangedSubview(textField)
     }
 
-    @objc
-    private func textFieldDidChange() {
-        if (field.mask?.defaultPattern) != nil {
-            let text = getUnformattedText()
-            if !text.isEmpty {
-                textField.text = formatDisplayString(with: getFormatPattern(inputText: text), inputText: text)
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+        if (field.mask?.defaultPattern) != nil || string.isEmpty {
+            // Get updated text
+            var currentText = textField.text ?? ""
+            let startIndex = currentText.index(currentText.startIndex, offsetBy: range.location)
+            let replaceRange = startIndex ..< currentText.index(startIndex, offsetBy: range.length)
+            currentText = currentText.replacingCharacters(in: replaceRange, with: string)
+
+            // Get unformatted text for getting pattern
+            let unformattedText = getTextForPatternCharacter(PatternCharacter
+                .lettersAndNumbersPatternCharacter.rawValue, currentText) ?? ""
+
+            // Get pattern using unformatted text
+            let pattern = getFormatPattern(inputText: unformattedText)
+
+            // Use current text to get filtered text
+            let alphanumericRange = pattern?
+                .rangeOfCharacter(from: CharacterSet(charactersIn: allowedLetters + allowedNumbers))
+            var filteredText: String = ""
+            if alphanumericRange != nil, !currentText.isEmpty {
+                filteredText = filterAlphnumericPatternCharacters(for: currentText,
+                                                                  pattern: pattern,
+                                                                  replaceRange: replaceRange)
             } else {
-                textField.text = ""
+                filteredText = currentText
             }
+
+            textField.text = formatDisplayString(with: pattern, inputText: filteredText)
+            return false
         }
+        return true
     }
 
     /// Formats input text as per pattern
@@ -217,6 +239,43 @@ class TextWidget: AbstractWidget {
         currentIndex.patternIndex = pattern.index(after: currentIndex.patternIndex)
     }
 
+    private func filterAlphnumericPatternCharacters(for currentText: String,
+                                                    pattern: String?,
+                                                    replaceRange: Range<String.Index>) -> String {
+        if let pattern = pattern {
+            var updatedText: String = ""
+            var currentIndex = CurrentIndex(textIndex: currentText.startIndex, patternIndex: pattern.startIndex)
+
+            while true {
+                let textCharacter = currentText[currentIndex.textIndex]
+                let currentPatternCharacter = pattern[currentIndex.patternIndex]
+                if currentIndex.textIndex >= replaceRange.lowerBound
+                    && currentIndex.textIndex <= replaceRange.upperBound {
+                    updatedText += String(textCharacter)
+                    currentIndex.textIndex = currentText.index(after: currentIndex.textIndex)
+                } else {
+                    if  (allowedLetters + allowedNumbers).contains(currentPatternCharacter) {
+                        if textCharacter != currentPatternCharacter {
+                            updatedText += String(textCharacter)
+                        }
+                        currentIndex.textIndex = currentText.index(after: currentIndex.textIndex)
+                        currentIndex.patternIndex = pattern.index(after: currentIndex.patternIndex)
+                    } else {
+                        updatedText += String(textCharacter)
+                        currentIndex.textIndex = currentText.index(after: currentIndex.textIndex)
+                        currentIndex.patternIndex = pattern.index(after: currentIndex.patternIndex)
+                    }
+                }
+
+                if currentIndex.patternIndex >= pattern.endIndex || currentIndex.textIndex >= currentText.endIndex {
+                    break
+                }
+            }
+            return updatedText
+        }
+        return currentText
+    }
+
     private func getTextForPatternCharacter(_ patternCharacter: Character, _ text: String) -> String? {
         switch patternCharacter {
         case PatternCharacter.lettersAndNumbersPatternCharacter.rawValue:
@@ -256,13 +315,6 @@ class TextWidget: AbstractWidget {
             with: "",
             options: NSString.CompareOptions.regularExpression,
             range: nil)
-    }
-
-    private func getUnformattedText() -> String {
-        if let text = textField.text {
-            return getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue, text) ?? ""
-        }
-        return ""
     }
 }
 
