@@ -43,7 +43,7 @@ public final class CreateTransferController: UITableViewController {
         (TransferNotesCell.self, TransferNotesCell.reuseIdentifier)
     ]
 
-    init() {
+    public init() {
         super.init(style: UITableView.Style.plain)
     }
 
