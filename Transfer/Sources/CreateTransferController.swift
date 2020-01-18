@@ -26,7 +26,7 @@ import UIKit
 ///
 /// Each transfer will be represented by an auto-generated, non-editable token that can be used
 /// to retrieve the transfer resource.
-public final class CreateTransferController: UITableViewController {
+final class CreateTransferController: UITableViewController {
     enum FooterSection: Int, CaseIterable {
         case destination, transfer, notes, button
     }
@@ -42,14 +42,6 @@ public final class CreateTransferController: UITableViewController {
         (TransferButtonCell.self, TransferButtonCell.reuseIdentifier),
         (TransferNotesCell.self, TransferNotesCell.reuseIdentifier)
     ]
-
-    public init() {
-        super.init(style: UITableView.Style.plain)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 
     override public func viewDidLoad() {
         super.viewDidLoad()

@@ -80,7 +80,7 @@ public final class ErrorView {
                                                 .filter { $0.fieldName == nil }
                                                 .map { $0.message }
                                                 .joined(separator: "\n"),
-                                       actions: UIAlertAction.close(viewController))
+                                       actions: UIAlertAction.close())
     }
 
     private func unexpectedError() {
