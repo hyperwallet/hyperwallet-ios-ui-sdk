@@ -227,6 +227,7 @@ class ViewController: UITableViewController {
     }
 
     func didCreateTransferMethod(transferMethod: HyperwalletTransferMethod) {
+        navigationController?.popViewController(animated: false)
         print("Transfer method has been created successfully")
     }
 

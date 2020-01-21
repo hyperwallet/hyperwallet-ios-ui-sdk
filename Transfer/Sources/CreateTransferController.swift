@@ -375,8 +375,14 @@ extension CreateTransferController {
     /// To reload create transfer method
     override public func didFlowComplete(with response: Any) {
         if let transferMethod = response as? HyperwalletTransferMethod {
+            for _ in 1...2 {
+                navigationController?.popViewController(animated: false)
+            }
             presenter.selectedTransferMethod = transferMethod
             presenter.loadCreateTransfer()
+        } else if let statusTransition = response as? HyperwalletStatusTransition {
+            navigationController?.popViewController(animated: false)
+            flowDelegate?.didFlowComplete(with: statusTransition)
         }
     }
 }

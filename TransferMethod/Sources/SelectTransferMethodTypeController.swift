@@ -234,3 +234,12 @@ extension CountryCurrencyTableView: UITableViewDelegate {
         return nil
     }
 }
+// MARK: - SelectTransferMethodTypeController Extension
+extension SelectTransferMethodTypeController {
+    override public func didFlowComplete(with response: Any) {
+        if response as? HyperwalletTransferMethod != nil {
+            navigationController?.popViewController(animated: false)
+            flowDelegate?.didFlowComplete(with: response)
+        }
+    }
+}
