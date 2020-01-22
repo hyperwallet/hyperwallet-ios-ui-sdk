@@ -214,14 +214,14 @@ class ViewController: UITableViewController {
     // MARK: - Notifications
     func createTransferMethodObserver() {
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(transferMethodAddedNotification(notification:)),
+                                               selector: #selector(transferMethodAdded(notification:)),
                                                name: Notification.Name.transferMethodAdded,
                                                object: nil)
     }
 
     func removeTransferMethodObserver() {
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(transferMethodDeactivatedNotification(notification:)),
+                                               selector: #selector(transferMethodDeactivated(notification:)),
                                                name: Notification.Name.transferMethodDeactivated,
                                                object: nil)
     }
@@ -235,12 +235,12 @@ class ViewController: UITableViewController {
     }
 
     @objc
-    func transferMethodAddedNotification(notification: Notification) {
+    func transferMethodAdded(notification: Notification) {
         print("Transfer method has been added successfully")
     }
 
     @objc
-    func transferMethodDeactivatedNotification(notification: Notification) {
+    func transferMethodDeactivated(notification: Notification) {
         print("Transfer method has been deleted successfully")
     }
 
@@ -252,7 +252,7 @@ class ViewController: UITableViewController {
             didCreateTransfer(transfer: transfer)
         } else if let statusTransition = response as? HyperwalletStatusTransition,
             let transition = statusTransition.transition {
-            if  transition == HyperwalletStatusTransition.Status.scheduled {
+            if transition == HyperwalletStatusTransition.Status.scheduled {
                 navigationController?.popViewController(animated: false)
             }
         }
