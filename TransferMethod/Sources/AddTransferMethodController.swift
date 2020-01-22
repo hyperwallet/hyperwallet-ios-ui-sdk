@@ -330,7 +330,7 @@ extension AddTransferMethodController: AddTransferMethodView {
                                             object: self,
                                             userInfo: [UserInfo.transferMethodAdded: transferMethod])
         }
-        coordinator?.navigateBackFromNextPage(with: transferMethod)
+        flowDelegate?.didFlowComplete(with: transferMethod)
     }
 
     private func focusOnInvalidField(_ widget: AbstractWidget) {

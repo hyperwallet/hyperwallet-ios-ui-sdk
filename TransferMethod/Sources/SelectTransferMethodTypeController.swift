@@ -234,3 +234,13 @@ extension CountryCurrencyTableView: UITableViewDelegate {
         return nil
     }
 }
+
+extension SelectTransferMethodTypeController {
+    /// This function will navigate back from next page and pass the control back to it's caller
+    override public func didFlowComplete(with response: Any) {
+        if response as? HyperwalletTransferMethod != nil {
+            coordinator?.navigateBackFromNextPage(with: response)
+            flowDelegate?.didFlowComplete(with: response)
+        }
+    }
+}
