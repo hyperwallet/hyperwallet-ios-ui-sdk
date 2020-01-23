@@ -50,12 +50,12 @@ public class SelectTransferMethodTypeCoordinator: NSObject, HyperwalletCoordinat
             let profileType = initializationData?[InitializationDataField.profileType] as? String,
             let transferMethodTypeCode = initializationData?[InitializationDataField.transferMethodTypeCode]
                 as? String {
-            let cordinator = HyperwalletUI.shared.addTransferMethodCoordinator(country,
+            let coordinator = HyperwalletUI.shared.addTransferMethodCoordinator(country,
                                                                                currency,
                                                                                profileType,
                                                                                transferMethodTypeCode,
                                                                                parentController: controller)
-            cordinator.navigate()
+            coordinator.navigate()
         }
     }
 

@@ -366,7 +366,6 @@
 		DBC199EA22E29CD0004447DD /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3833225E8BA900CD4137 /* UIColor.swift */; };
 		DBC199EB22E29CD0004447DD /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4679BE2261083F00E1AF49 /* UIFont.swift */; };
 		DBC199EC22E29CD0004447DD /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3839225E8BA900CD4137 /* UIImage.swift */; };
-		DBC199ED22E29CD0004447DD /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA383B225E8BA900CD4137 /* UINavigationController.swift */; };
 		DBC199EE22E29CD0004447DD /* UIToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9826056722822E8A000CCA2D /* UIToolbar.swift */; };
 		DBC199EF22E29CD0004447DD /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3831225E8BA900CD4137 /* UIView.swift */; };
 		DBC199F022E29CD0004447DD /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA383A225E8BA900CD4137 /* UIViewController.swift */; };
@@ -1053,7 +1052,6 @@
 		DBCA3836225E8BA900CD4137 /* NSRegularExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSRegularExpression.swift; sourceTree = "<group>"; };
 		DBCA3839225E8BA900CD4137 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		DBCA383A225E8BA900CD4137 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
-		DBCA383B225E8BA900CD4137 /* UINavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		DBCA383E225E8BAA00CD4137 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DBCA3841225E8BAA00CD4137 /* GenericController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericController.swift; sourceTree = "<group>"; };
 		DBCA3842225E8BAA00CD4137 /* GenericCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericCell.swift; sourceTree = "<group>"; };
@@ -2176,7 +2174,6 @@
 				DBCA3833225E8BA900CD4137 /* UIColor.swift */,
 				DB4679BE2261083F00E1AF49 /* UIFont.swift */,
 				DBCA3839225E8BA900CD4137 /* UIImage.swift */,
-				DBCA383B225E8BA900CD4137 /* UINavigationController.swift */,
 				4A5C576422E73F3400F3359B /* UISearchBar.swift */,
 				9826056722822E8A000CCA2D /* UIToolbar.swift */,
 				DBCA3831225E8BA900CD4137 /* UIView.swift */,
@@ -3428,7 +3425,6 @@
 				DBC199EB22E29CD0004447DD /* UIFont.swift in Sources */,
 				2E4D6CAD23679AB400916CDD /* HyperwalletInsights.swift in Sources */,
 				DBC199EC22E29CD0004447DD /* UIImage.swift in Sources */,
-				DBC199ED22E29CD0004447DD /* UINavigationController.swift in Sources */,
 				DBC199EE22E29CD0004447DD /* UIToolbar.swift in Sources */,
 				2E8AFE5C2307668F002B6D24 /* HyperwalletCoordinatorTypes.swift in Sources */,
 				DBC199EF22E29CD0004447DD /* UIView.swift in Sources */,
