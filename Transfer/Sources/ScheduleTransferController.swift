@@ -224,6 +224,6 @@ extension ScheduleTransferController: ScheduleTransferView {
                                             object: self,
                                             userInfo: [UserInfo.transferScheduled: hyperwalletStatusTransition])
         }
-        coordinator?.navigateBackFromNextPage(with: hyperwalletStatusTransition)
+        flowDelegate?.didFlowComplete(with: hyperwalletStatusTransition)
     }
 }
