@@ -86,6 +86,13 @@ final class ListTransferDestinationController: UITableViewController {
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ListTransferDestinationCell.reuseIdentifier,
                                                  for: indexPath)
+        cell.accessoryType = .none
+
+        if let transferMethod = initializationData?[InitializationDataField.transferMethod]
+            as? HyperwalletTransferMethod, transferMethod.token == presenter.sectionData[indexPath.row].token {
+            cell.accessoryType = .checkmark
+        }
+
         if let listTransferDestinationCell = cell as? ListTransferDestinationCell {
             listTransferDestinationCell.configure(transferMethod: presenter.sectionData[indexPath.row])
         }

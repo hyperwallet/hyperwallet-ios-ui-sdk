@@ -231,7 +231,7 @@ extension CreateTransferController {
         if sectionData.createTransferSectionHeader == .destination,
             presenter.sectionData[indexPath.section] is CreateTransferSectionDestinationData {
             if presenter.selectedTransferMethod != nil {
-                presenter.showSelectDestinationAccountView()
+                navigateToListTransferDestination()
             } else {
                 navigateToTransferMethodIfInitialized()
             }
@@ -337,8 +337,11 @@ extension CreateTransferController: CreateTransferView {
         show(genericTableView, sender: self)
     }
 
-    public func navigateToListTransferDestination() {
+    private func navigateToListTransferDestination() {
         let listTransferDestinationController = ListTransferDestinationController()
+        var initializationData = [InitializationDataField: Any]()
+        initializationData[InitializationDataField.transferMethod] = presenter.selectedTransferMethod
+        listTransferDestinationController.initializationData = initializationData
         listTransferDestinationController.flowDelegate = self
         show(listTransferDestinationController, sender: self)
     }
