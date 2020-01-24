@@ -163,6 +163,15 @@ coordinator.navigate()
 let coordinator = HyperwalletUI.shared.selectTransferMethodTypeCoordinator(parentController: self)
 coordinator.navigate()
 ```
+Also add following method to dismiss the presented view and perform any action based on the transfer method created.
+```swift
+override public func didFlowComplete(with response: Any) {
+    if let transferMethod = response as? HyperwalletTransferMethod {
+    navigationController?.popViewController(animated: false)
+    }
+}
+```
+
 
 ### Create a transfer method
 The form fields are based on the country, currency, user's profile type, and transfer method type. These values should be passed to this method to create a new Transfer Method.
@@ -174,6 +183,14 @@ let coordinator = HyperwalletUI.shared.addTransferMethodCoordinator(
     "BANK_ACCOUNT", // The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD, PAYPAL_ACCOUNT
     parentController: self)
 coordinator.navigate()
+```
+Also add following method to dismiss the presented view on successful creation of transfer method and perform any action based on the transfer method created.
+```swift
+override public func didFlowComplete(with response: Any) {
+    if let transferMethod = response as? HyperwalletTransferMethod {
+    navigationController?.popViewController(animated: false)
+    }
+}
 ```
 
 ### Lists the user's receipts
@@ -196,6 +213,16 @@ let coordinator = HyperwalletUI.shared
             .createTransferFromUserCoordinator(clientTransferId: clientTransferId, parentController: self)
 coordinator.navigate()
 ```
+Also add following method to dismiss the presented view on successful creation of transfer and perform any action based on the transfer created.
+```swift
+override public func didFlowComplete(with response: Any) {
+    if let statusTransition = response as? HyperwalletStatusTransition, let transition = statusTransition.transition {
+        if transition == HyperwalletStatusTransition.Status.scheduled {
+            navigationController?.popViewController(animated: false)
+        }
+    }
+}
+```
 
 ### Make a new transfer from prepaid card
 ```swift
@@ -205,6 +232,16 @@ let coordinator = HyperwalletUI.shared
                                                       sourceToken: "your-prepaid-card-token",
                                                       parentController: self)
 coordinator.navigate()
+```
+Also add following method to dismiss the presented view on successful creation of transfer and perform any action based on the transfer created.
+```swift
+override public func didFlowComplete(with response: Any) {
+    if let statusTransition = response as? HyperwalletStatusTransition, let transition = statusTransition.transition {
+        if transition == HyperwalletStatusTransition.Status.scheduled {
+            navigationController?.popViewController(animated: false)
+        }
+    }
+}
 ```
 
 
