@@ -62,3 +62,43 @@ final class ListTransferDestinationCell: UITableViewCell {
             detailTextLabel?.font = newValue }
     }
 }
+
+extension ListTransferDestinationCell {
+    /// Fill `ListTransferDestinationCell` related fields
+    ///
+    /// - Parameter transferMethod: a transfer method which contains the info needs to be filled to the cell.
+    public func configure(transferMethod: HyperwalletTransferMethod) {
+        textLabel?.text = transferMethod.type?.lowercased().localized()
+        textLabel?.adjustsFontForContentSizeCategory = true
+        textLabel?.numberOfLines = 0
+        textLabel?.lineBreakMode = .byWordWrapping
+        textLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellTextLabel"
+        detailTextLabel?.attributedText = formatDetails(
+            transferMethodCountry: transferMethod.transferMethodCountry?.localized() ?? "",
+            additionalInfo: transferMethod.value)
+        detailTextLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellDetailTextLabel"
+        detailTextLabel?.adjustsFontForContentSizeCategory = true
+        detailTextLabel?.numberOfLines = 0
+        detailTextLabel?.lineBreakMode = .byWordWrapping
+        if !UIFont.isLargeSizeCategory {
+            let icon = UIImage.fontIcon(HyperwalletIcon.of(transferMethod.type ?? "").rawValue,
+                                        Theme.Icon.frame,
+                                        CGFloat(Theme.Icon.size),
+                                        Theme.Icon.primaryColor)
+            imageView?.image = icon
+            imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
+        }
+    }
+
+    func formatDetails(transferMethodCountry: String, additionalInfo: String?) -> NSAttributedString {
+        let attributedText = NSMutableAttributedString()
+        attributedText.append(value: String(format: "%@\n", transferMethodCountry),
+                              font: subTitleLabelFont,
+                              color: Theme.Label.subTitleColor)
+        if let additionalInfo = additionalInfo {
+            attributedText.append(value: additionalInfo, font: subTitleLabelFont, color: Theme.Label.subTitleColor)
+        }
+
+        return attributedText
+    }
+}

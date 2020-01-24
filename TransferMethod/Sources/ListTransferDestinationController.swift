@@ -76,6 +76,28 @@ final class ListTransferDestinationController: UITableViewController {
         presenter = ListTransferDestinationPresenter(view: self)
     }
 
+    // MARK: - Transfer method list table view dataSource and delegate
+    override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return presenter.sectionData.count
+    }
+
+    override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: ListTransferDestinationCell.reuseIdentifier,
+                                                 for: indexPath)
+        if let listTransferDestinationCell = cell as? ListTransferDestinationCell {
+            listTransferDestinationCell.configure(transferMethod: presenter.sectionData[indexPath.row])
+        }
+        return cell
+    }
+
+    override public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return nil
+    }
+
+    override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat.leastNormalMagnitude
+    }
+
     // MARK: set up list of transfer methods table view
     private func setupTransferMethodTableView() {
         tableView = UITableView(frame: .zero, style: .grouped)
