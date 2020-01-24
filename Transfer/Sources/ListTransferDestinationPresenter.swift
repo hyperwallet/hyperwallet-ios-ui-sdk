@@ -46,7 +46,6 @@ final class ListTransferDestinationPresenter {
     }
 
     /// Get the list of all Activated transfer methods from core SDK
-    /// - Parameter forceUpdate: Forces to refresh the data
     func listTransferMethods() {
         view.showLoading()
 
