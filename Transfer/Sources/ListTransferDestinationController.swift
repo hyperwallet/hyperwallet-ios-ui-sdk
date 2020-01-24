@@ -37,6 +37,15 @@ final class ListTransferDestinationController: UITableViewController {
         setupTransferMethodTableView()
     }
 
+    override public func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.backBarButtonItem = UIBarButtonItem.back
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
+                                                            target: self,
+                                                            action: #selector(didTapAddButton))
+        titleDisplayMode(.always, for: "transfer_select_destination".localized())
+    }
+
     override public func didFlowComplete(with response: Any) {
         if response as? HyperwalletTransferMethod != nil {
             coordinator?.navigateBackFromNextPage(with: response)
@@ -65,15 +74,37 @@ final class ListTransferDestinationController: UITableViewController {
             .selectTransferMethodType)
     }
 
-    override public func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        let currentNavigationItem: UINavigationItem = tabBarController?.navigationItem ?? navigationItem
-        currentNavigationItem.backBarButtonItem = UIBarButtonItem.back
-        titleDisplayMode(.always, for: "transfer_select_destination".localized())
-    }
-
     private func initializePresenter() {
         presenter = ListTransferDestinationPresenter(view: self)
+    }
+
+    // MARK: - Transfer method list table view dataSource and delegate
+    override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return presenter.sectionData.count
+    }
+
+    override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: ListTransferDestinationCell.reuseIdentifier,
+                                                 for: indexPath)
+        if let listTransferDestinationCell = cell as? ListTransferDestinationCell {
+            listTransferDestinationCell.configure(transferMethod: presenter.sectionData[indexPath.row])
+        }
+        return cell
+    }
+
+    /// To select the transfer method
+    override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let hyperwalletTransferMethod = presenter.sectionData[indexPath.row]
+        navigationController?.popViewController(animated: true)
+        flowDelegate?.didFlowComplete(with: hyperwalletTransferMethod)
+    }
+
+    override public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return nil
+    }
+
+    override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat.leastNormalMagnitude
     }
 
     // MARK: set up list of transfer methods table view

@@ -337,6 +337,12 @@ extension CreateTransferController: CreateTransferView {
         show(genericTableView, sender: self)
     }
 
+    public func navigateToListTransferDestination() {
+        let listTransferDestinationController = ListTransferDestinationController()
+        listTransferDestinationController.flowDelegate = self
+        show(listTransferDestinationController, sender: self)
+    }
+
     @objc
     private func didTapAddButton(sender: AnyObject) {
         navigateToTransferMethodIfInitialized()
