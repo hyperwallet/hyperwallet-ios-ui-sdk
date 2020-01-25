@@ -319,24 +319,6 @@ extension CreateTransferController: CreateTransferView {
         tableView.reloadData()
     }
 
-    func showGenericTableView(items: [HyperwalletTransferMethod],
-                              title: String,
-                              selectItemHandler: @escaping SelectItemHandler,
-                              markCellHandler: @escaping MarkCellHandler) {
-        let genericTableView = GenericController<TransferDestinationCell, HyperwalletTransferMethod>()
-
-        if selectTransferMethodCoordinator != nil {
-            genericTableView.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
-                                                                                 target: self,
-                                                                                 action: #selector(didTapAddButton))
-        }
-        genericTableView.title = title
-        genericTableView.items = items
-        genericTableView.selectedHandler = selectItemHandler
-        genericTableView.shouldMarkCellAction = markCellHandler
-        show(genericTableView, sender: self)
-    }
-
     private func navigateToListTransferDestination() {
         let listTransferDestinationController = ListTransferDestinationController()
         var initializationData = [InitializationDataField: Any]()
@@ -344,11 +326,6 @@ extension CreateTransferController: CreateTransferView {
         listTransferDestinationController.initializationData = initializationData
         listTransferDestinationController.flowDelegate = self
         show(listTransferDestinationController, sender: self)
-    }
-
-    @objc
-    private func didTapAddButton(sender: AnyObject) {
-        navigateToTransferMethodIfInitialized()
     }
 
     private func navigateToTransferMethodIfInitialized() {
