@@ -24,9 +24,9 @@ import UIKit
 
 /// Lists user's transfer methods
 final class ListTransferDestinationController: UITableViewController {
-    private var spinnerView: SpinnerView?
     private var presenter: ListTransferDestinationPresenter!
     private var processingView: ProcessingView?
+    private var spinnerView: SpinnerView?
     private lazy var selectTransferMethodCoordinator = getSelectTransferMethodCoordinator()
 
     override public func viewDidLoad() {
@@ -58,6 +58,25 @@ final class ListTransferDestinationController: UITableViewController {
         navigateToTransferMethodIfInitialized()
     }
 
+    private func initializePresenter() {
+        presenter = ListTransferDestinationPresenter(view: self)
+    }
+
+    // MARK: set up list of transfer methods table view
+    private func setupTransferMethodTableView() {
+        tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.tableFooterView = UIView()
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = Theme.Cell.smallHeight
+        tableView.register(ListTransferDestinationCell.self,
+                           forCellReuseIdentifier: ListTransferDestinationCell.reuseIdentifier)
+    }
+
+    private func getSelectTransferMethodCoordinator() -> HyperwalletCoordinator? {
+        return HyperwalletCoordinatorFactory.shared.getHyperwalletCoordinator(hyperwalletCoordinatorType:
+            .selectTransferMethodType)
+    }
+
     private func navigateToTransferMethodIfInitialized() {
         if let transferMethodCoordinator = selectTransferMethodCoordinator {
             transferMethodCoordinator.start(initializationData: nil, parentController: self)
@@ -67,15 +86,6 @@ final class ListTransferDestinationController: UITableViewController {
                                            title: "error".localized(),
                                            message: "transfer_error_no_transfer_method_module_initialized".localized())
         }
-    }
-
-    private func getSelectTransferMethodCoordinator() -> HyperwalletCoordinator? {
-        return HyperwalletCoordinatorFactory.shared.getHyperwalletCoordinator(hyperwalletCoordinatorType:
-            .selectTransferMethodType)
-    }
-
-    private func initializePresenter() {
-        presenter = ListTransferDestinationPresenter(view: self)
     }
 
     // MARK: - Transfer method list table view dataSource and delegate
@@ -112,31 +122,10 @@ final class ListTransferDestinationController: UITableViewController {
     override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return CGFloat.leastNormalMagnitude
     }
-
-    // MARK: set up list of transfer methods table view
-    private func setupTransferMethodTableView() {
-        tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.tableFooterView = UIView()
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = Theme.Cell.smallHeight
-        tableView.register(ListTransferDestinationCell.self,
-                           forCellReuseIdentifier: ListTransferDestinationCell.reuseIdentifier)
-    }
 }
 
 // MARK: `ListTransferDestinationView` delegate
 extension ListTransferDestinationController: ListTransferDestinationView {
-    /// Loads the transfer methods
-    func showTransferMethods() {
-        tableView.reloadData()
-    }
-
-    func showLoading() {
-        if let view = self.navigationController?.view {
-            spinnerView = HyperwalletUtilViews.showSpinner(view: view)
-        }
-    }
-
     func hideLoading() {
         if let spinnerView = self.spinnerView {
             HyperwalletUtilViews.removeSpinner(spinnerView)
@@ -152,5 +141,16 @@ extension ListTransferDestinationController: ListTransferDestinationView {
                                   pageName: pageName,
                                   pageGroup: pageGroup)
         errorView.show(retry)
+    }
+
+    func showLoading() {
+        if let view = self.navigationController?.view {
+            spinnerView = HyperwalletUtilViews.showSpinner(view: view)
+        }
+    }
+
+    /// Loads the transfer methods
+    func showTransferMethods() {
+        tableView.reloadData()
     }
 }
