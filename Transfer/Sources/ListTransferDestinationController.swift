@@ -48,7 +48,7 @@ final class ListTransferDestinationController: UITableViewController {
 
     override public func didFlowComplete(with response: Any) {
         if response as? HyperwalletTransferMethod != nil {
-            coordinator?.navigateBackFromNextPage(with: response)
+            navigationController?.popViewController(animated: false)
             flowDelegate?.didFlowComplete(with: response)
         }
     }
@@ -102,7 +102,6 @@ final class ListTransferDestinationController: UITableViewController {
     /// To select the transfer method
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let hyperwalletTransferMethod = presenter.sectionData[indexPath.row]
-        navigationController?.popViewController(animated: true)
         flowDelegate?.didFlowComplete(with: hyperwalletTransferMethod)
     }
 

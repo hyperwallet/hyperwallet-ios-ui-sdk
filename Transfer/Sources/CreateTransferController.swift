@@ -385,14 +385,6 @@ extension CreateTransferController {
     override public func didFlowComplete(with response: Any) {
         if let transferMethod = response as? HyperwalletTransferMethod {
             coordinator?.navigateBackFromNextPage(with: transferMethod)
-        // TODO - remove this logic once ticket HW-60275 is done
-            if let viewControllers = navigationController?.viewControllers {
-                for viewController in viewControllers.reversed()
-                    where viewController is GenericController<TransferDestinationCell, HyperwalletTransferMethod> {
-                    coordinator?.navigateBackFromNextPage(with: transferMethod)
-                    break
-                }
-            }
             presenter.selectedTransferMethod = transferMethod
             presenter.loadCreateTransfer()
         } else if let statusTransition = response as? HyperwalletStatusTransition {
