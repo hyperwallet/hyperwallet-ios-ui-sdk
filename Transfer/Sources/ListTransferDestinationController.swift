@@ -43,7 +43,8 @@ final class ListTransferDestinationController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                             target: self,
                                                             action: #selector(didTapAddButton))
-        titleDisplayMode(.always, for: "transfer_select_destination".localized())
+        titleDisplayMode(.never, for: "transfer_select_destination".localized())
+        scrollToSelectedRow()
     }
 
     override public func didFlowComplete(with response: Any) {
@@ -85,6 +86,27 @@ final class ListTransferDestinationController: UITableViewController {
             HyperwalletUtilViews.showAlert(self,
                                            title: "error".localized(),
                                            message: "transfer_error_no_transfer_method_module_initialized".localized())
+        }
+    }
+
+    private func scrollToSelectedRow() {
+        let transferMethods = presenter.sectionData
+        var selectedItemIndex: Int?
+
+        if let selectedTransferMethod = initializationData?[InitializationDataField.transferMethod]
+            as? HyperwalletTransferMethod {
+            for index in transferMethods.indices where transferMethods[index].token == selectedTransferMethod.token {
+                selectedItemIndex = index
+                break
+            }
+        }
+
+        guard let indexToScrollTo = selectedItemIndex, indexToScrollTo < transferMethods.count else {
+            return
+        }
+
+        DispatchQueue.main.async {
+            self.tableView.scrollToRow(at: IndexPath(row: indexToScrollTo, section: 0), at: .middle, animated: false)
         }
     }
 
