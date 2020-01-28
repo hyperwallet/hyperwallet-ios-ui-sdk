@@ -47,13 +47,6 @@ final class ListTransferDestinationController: UITableViewController {
         scrollToSelectedRow()
     }
 
-    override public func didFlowComplete(with response: Any) {
-        if response as? HyperwalletTransferMethod != nil {
-            navigationController?.popViewController(animated: false)
-            flowDelegate?.didFlowComplete(with: response)
-        }
-    }
-
     @objc
     private func didTapAddButton(sender: AnyObject) {
         navigateToTransferMethodIfInitialized()
@@ -109,8 +102,41 @@ final class ListTransferDestinationController: UITableViewController {
             self.tableView.scrollToRow(at: IndexPath(row: indexToScrollTo, section: 0), at: .middle, animated: false)
         }
     }
+}
 
-    // MARK: - Transfer method list table view dataSource and delegate
+// MARK: `ListTransferDestinationView` delegate
+extension ListTransferDestinationController: ListTransferDestinationView {
+    func hideLoading() {
+        if let spinnerView = self.spinnerView {
+            HyperwalletUtilViews.removeSpinner(spinnerView)
+        }
+    }
+
+    func showError(_ error: HyperwalletErrorType,
+                   pageName: String,
+                   pageGroup: String,
+                   _ retry: (() -> Void)?) {
+        let errorView = ErrorView(viewController: self,
+                                  error: error,
+                                  pageName: pageName,
+                                  pageGroup: pageGroup)
+        errorView.show(retry)
+    }
+
+    func showLoading() {
+        if let view = self.navigationController?.view {
+            spinnerView = HyperwalletUtilViews.showSpinner(view: view)
+        }
+    }
+
+    /// Loads the transfer methods
+    func showTransferMethods() {
+        tableView.reloadData()
+    }
+}
+
+/// Transfer method list table view dataSource and delegate
+extension ListTransferDestinationController {
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.sectionData.count
     }
@@ -146,33 +172,12 @@ final class ListTransferDestinationController: UITableViewController {
     }
 }
 
-// MARK: `ListTransferDestinationView` delegate
-extension ListTransferDestinationController: ListTransferDestinationView {
-    func hideLoading() {
-        if let spinnerView = self.spinnerView {
-            HyperwalletUtilViews.removeSpinner(spinnerView)
+extension ListTransferDestinationController {
+    /// The callback to refresh create transfer
+    override public func didFlowComplete(with response: Any) {
+        if response as? HyperwalletTransferMethod != nil {
+            navigationController?.popViewController(animated: false)
+            flowDelegate?.didFlowComplete(with: response)
         }
-    }
-
-    func showError(_ error: HyperwalletErrorType,
-                   pageName: String,
-                   pageGroup: String,
-                   _ retry: (() -> Void)?) {
-        let errorView = ErrorView(viewController: self,
-                                  error: error,
-                                  pageName: pageName,
-                                  pageGroup: pageGroup)
-        errorView.show(retry)
-    }
-
-    func showLoading() {
-        if let view = self.navigationController?.view {
-            spinnerView = HyperwalletUtilViews.showSpinner(view: view)
-        }
-    }
-
-    /// Loads the transfer methods
-    func showTransferMethods() {
-        tableView.reloadData()
     }
 }
