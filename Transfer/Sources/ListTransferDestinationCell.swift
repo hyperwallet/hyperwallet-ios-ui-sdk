@@ -67,7 +67,7 @@ extension ListTransferDestinationCell {
     /// Fill `ListTransferDestinationCell` related fields
     ///
     /// - Parameter transferMethod: a transfer method which contains the info needs to be filled to the cell.
-    public func configure(transferMethod: HyperwalletTransferMethod) {
+    func configure(transferMethod: HyperwalletTransferMethod) {
         textLabel?.accessibilityIdentifier = "transferDestinationTitleLabel"
         textLabel?.text = transferMethod.type?.lowercased().localized()
         textLabel?.adjustsFontForContentSizeCategory = true

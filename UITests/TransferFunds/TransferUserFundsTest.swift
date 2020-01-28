@@ -357,7 +357,7 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(prepaidCard.exists)
 
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 0), "Bank Account")
-        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), "United States Ending on 1234")
+        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), expectedUSDestinationLabel + "1234")
 
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 1), "Bank Account")
         XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 1), expectedCanadaDestinationLabel)
