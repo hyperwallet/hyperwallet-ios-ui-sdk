@@ -68,18 +68,20 @@ extension ListTransferDestinationCell {
     ///
     /// - Parameter transferMethod: a transfer method which contains the info needs to be filled to the cell.
     public func configure(transferMethod: HyperwalletTransferMethod) {
+        textLabel?.accessibilityIdentifier = "transferDestinationTitleLabel"
         textLabel?.text = transferMethod.type?.lowercased().localized()
         textLabel?.adjustsFontForContentSizeCategory = true
         textLabel?.numberOfLines = 0
         textLabel?.lineBreakMode = .byWordWrapping
-        textLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellTextLabel"
+
+        detailTextLabel?.accessibilityIdentifier = "transferDestinationSubtitleLabel"
         detailTextLabel?.attributedText = formatDetails(
             transferMethodCountry: transferMethod.transferMethodCountry?.localized() ?? "",
             additionalInfo: transferMethod.value)
-        detailTextLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellDetailTextLabel"
         detailTextLabel?.adjustsFontForContentSizeCategory = true
         detailTextLabel?.numberOfLines = 0
         detailTextLabel?.lineBreakMode = .byWordWrapping
+
         if !UIFont.isLargeSizeCategory {
             let icon = UIImage.fontIcon(HyperwalletIcon.of(transferMethod.type ?? "").rawValue,
                                         Theme.Icon.frame,
