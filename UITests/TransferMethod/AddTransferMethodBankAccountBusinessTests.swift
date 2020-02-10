@@ -87,4 +87,24 @@ class AddTransferMethodBankAccountBusinessTests: BaseTests {
 
         addTransferMethod.clickCreateTransferMethodButton()
     }
+
+    func testAddTransferMethod_displayBusinessErrorWithDuplicateData() {
+        mockServer.setupStubError(url: "/rest/v3/users/usr-token/bank-accounts",
+                                  filename: "PayPalAccountDuplicateResponse",
+                                  method: HTTPMethod.post)
+
+        addTransferMethod.setBranchId("021000021")
+        addTransferMethod.setBankAccountId("12345")
+        addTransferMethod.selectAccountType("CHECKING")
+
+        addTransferMethod.clickCreateTransferMethodButton()
+        waitForNonExistence(spinner)
+        XCTAssert(app.alerts["Error"].exists)
+        let predicate = NSPredicate(format:
+            "label CONTAINS[c] 'The account information you provided is already registered'")
+        XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
+        XCTAssertTrue(app.navigationBars["Bank Account"].exists)
+        app.alerts["Error"].buttons["OK"].tap()
+        XCTAssertTrue(app.navigationBars["Bank Account"].exists)
+    }
 }
