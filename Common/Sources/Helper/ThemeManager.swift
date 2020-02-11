@@ -59,7 +59,7 @@ public class ThemeManager: NSObject {
         proxy.tintColor = Theme.tintColor
         proxy.titleTextAttributes = [NSAttributedString.Key.foregroundColor: Theme.tintColor]
         proxy.backItem?.backBarButtonItem?.tintColor = Theme.tintColor
-        proxy.barStyle = Theme.NavigationBar.barStyle
+        proxy.barStyle = .default
         proxy.isTranslucent = Theme.NavigationBar.isTranslucent
         proxy.shadowImage = UIImage.imageWithColor(
             color: Theme.NavigationBar.shadowColor,
