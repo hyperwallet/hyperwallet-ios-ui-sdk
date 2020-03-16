@@ -231,7 +231,7 @@ extension CreateTransferController {
         if sectionData.createTransferSectionHeader == .destination,
             presenter.sectionData[indexPath.section] is CreateTransferSectionDestinationData {
             if presenter.selectedTransferMethod != nil {
-                presenter.showSelectDestinationAccountView()
+                navigateToListTransferDestination()
             } else {
                 navigateToTransferMethodIfInitialized()
             }
@@ -319,27 +319,13 @@ extension CreateTransferController: CreateTransferView {
         tableView.reloadData()
     }
 
-    func showGenericTableView(items: [HyperwalletTransferMethod],
-                              title: String,
-                              selectItemHandler: @escaping SelectItemHandler,
-                              markCellHandler: @escaping MarkCellHandler) {
-        let genericTableView = GenericController<TransferDestinationCell, HyperwalletTransferMethod>()
-
-        if selectTransferMethodCoordinator != nil {
-            genericTableView.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
-                                                                                 target: self,
-                                                                                 action: #selector(didTapAddButton))
-        }
-        genericTableView.title = title
-        genericTableView.items = items
-        genericTableView.selectedHandler = selectItemHandler
-        genericTableView.shouldMarkCellAction = markCellHandler
-        show(genericTableView, sender: self)
-    }
-
-    @objc
-    private func didTapAddButton(sender: AnyObject) {
-        navigateToTransferMethodIfInitialized()
+    private func navigateToListTransferDestination() {
+        let listTransferDestinationController = ListTransferDestinationController()
+        var initializationData = [InitializationDataField: Any]()
+        initializationData[InitializationDataField.transferMethod] = presenter.selectedTransferMethod
+        listTransferDestinationController.initializationData = initializationData
+        listTransferDestinationController.flowDelegate = self
+        show(listTransferDestinationController, sender: self)
     }
 
     private func navigateToTransferMethodIfInitialized() {
@@ -375,8 +361,14 @@ extension CreateTransferController {
     /// To reload create transfer method
     override public func didFlowComplete(with response: Any) {
         if let transferMethod = response as? HyperwalletTransferMethod {
+            coordinator?.navigateBackFromNextPage(with: transferMethod)
             presenter.selectedTransferMethod = transferMethod
+            presenter.amount = nil
+            presenter.transferAllFundsIsOn = false
             presenter.loadCreateTransfer()
+        } else if let statusTransition = response as? HyperwalletStatusTransition {
+            coordinator?.navigateBackFromNextPage(with: statusTransition)
+            flowDelegate?.didFlowComplete(with: statusTransition)
         }
     }
 }
