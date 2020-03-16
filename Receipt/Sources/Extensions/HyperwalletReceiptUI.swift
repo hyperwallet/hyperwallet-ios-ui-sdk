@@ -23,7 +23,7 @@ import ReceiptRepository
 
 /// The HyperwalletUI extension
 public extension HyperwalletUI {
-    /// Clearing ReceiptRepositoryFactory instance.
+    /// Clears ReceiptRepositoryFactory instance.
     static func receiptUIClearInstance() {
         ReceiptRepositoryFactory.clearInstance()
     }

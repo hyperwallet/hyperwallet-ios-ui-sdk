@@ -23,7 +23,7 @@ import TransferMethodRepository
 
 /// The HyperwalletUI extension
 public extension HyperwalletUI {
-    /// Clearing TransferMethodRepositoryFactory instance.
+    /// Clears TransferMethodRepositoryFactory instance.
     static func transferMethodUIClearInstance() {
         TransferMethodRepositoryFactory.clearInstance()
     }
