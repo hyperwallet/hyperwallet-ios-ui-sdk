@@ -62,9 +62,17 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
         loadConfigurationAndInitializeInsights(completion: { _ in })
     }
 
+    /// Clearing Insights SDK instance.
+    public static func clearInstance() {
+        Insights.clearInstance()
+        instance = nil
+    }
+
     /// Set up HyperwalletInsights
     public static func setup() {
-        instance = HyperwalletInsights()
+        if instance == nil {
+            instance = HyperwalletInsights()
+        }
     }
 
     /// Track Clicks
