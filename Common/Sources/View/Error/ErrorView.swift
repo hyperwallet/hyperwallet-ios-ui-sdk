@@ -57,7 +57,11 @@ public final class ErrorView {
             connectionError({ (_) in handler?() })
 
         default:
-            unexpectedError()
+            if error.getAuthenticationError() != nil {
+                authenticationError(error)
+            } else {
+                unexpectedError()
+            }
         }
     }
 
@@ -110,5 +114,19 @@ public final class ErrorView {
                                                 title: "network_connection_error_title".localized(),
                                                 message: "network_connection_error_message".localized(),
                                                 handler)
+    }
+
+    private func authenticationError(_ error: HyperwalletErrorType) {
+        HyperwalletUtilViews.showAlert(viewController,
+                                       title: "authentication_error_title".localized(),
+                                       message: error.getAuthenticationError()?.message() ??
+                                        "authentication_error_message".localized(),
+                                       actions: UIAlertAction.close({ (_) in
+                                        NotificationCenter.default
+                                            .post(name:
+                                                .authenticationError,
+                                                  object: self,
+                                                  userInfo: [UserInfo.authenticationError: error])
+                                       }))
     }
 }

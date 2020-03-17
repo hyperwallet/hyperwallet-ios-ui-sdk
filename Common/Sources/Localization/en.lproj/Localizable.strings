@@ -50,6 +50,8 @@
 "fee_percent_no_min_and_max_formatter" = "%1$@%%";
 "transfer_method_not_supported_message" = "This transfer method is currently not supported";
 "error" = "Error";
+"authentication_error_title" = "Authentication Error";
+"authentication_error_message" = "Authentication token retrieval attempt resulted in an error";
 
 // Transfer methods
 "bank_account" = "Bank Account";
