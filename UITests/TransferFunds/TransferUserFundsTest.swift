@@ -790,7 +790,7 @@ class TransferUserFundsTest: BaseTests {
             || destinationDetail == "United States Ending on 6789")
 
         transferFunds.addSelectDestinationLabel.tap()
-
+        waitForNonExistence(spinner)
         XCTAssertTrue(selectDestination.selectDestinationTitle.exists)
         XCTAssertTrue(selectDestination.addTransferMethodButton.exists)
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 0), "Bank Account")
