@@ -36,6 +36,7 @@ class HyperwalletInsightsTests: XCTestCase {
         if self.name.contains("testTrackError_ConfigNotInitialized") {
             return
         }
+        HyperwalletUI.clearInstance()
         HyperwalletUI.setup(HyperwalletTestHelper.authenticationProvider)
         HyperwalletInsights.setup()
         hyperwalletInsights = HyperwalletInsights.shared
