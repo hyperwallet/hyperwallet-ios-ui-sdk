@@ -18,10 +18,16 @@
 
 #if !COCOAPODS
 import Common
+import ReceiptRepository
 #endif
 
 /// The HyperwalletUI extension
 public extension HyperwalletUI {
+    /// Clears ReceiptRepositoryFactory instance.
+    static func receiptUIClearInstance() {
+        ReceiptRepositoryFactory.clearInstance()
+    }
+
     /// Lists the user's transactions.
     ///
     ///

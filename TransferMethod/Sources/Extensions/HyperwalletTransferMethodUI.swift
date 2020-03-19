@@ -18,10 +18,15 @@
 
 #if !COCOAPODS
 import Common
+import TransferMethodRepository
 #endif
 
 /// The HyperwalletUI extension
 public extension HyperwalletUI {
+    /// Clears TransferMethodRepositoryFactory instance.
+    static func transferMethodUIClearInstance() {
+        TransferMethodRepositoryFactory.clearInstance()
+    }
     /// Lists the user's transfer methods (bank account, bank card, PayPal account, prepaid card, paper check).
     ///
     /// The user can deactivate and add a new transfer method.
@@ -43,9 +48,9 @@ public extension HyperwalletUI {
         -> SelectTransferMethodTypeCoordinator {
             let coordinator = SelectTransferMethodTypeCoordinator()
             coordinator
-            .start(initializationData:
-                [InitializationDataField.forceUpdateData: forceUpdateData],
-                   parentController: parentController)
+                .start(initializationData:
+                    [InitializationDataField.forceUpdateData: forceUpdateData],
+                       parentController: parentController)
             return coordinator
     }
 
@@ -78,5 +83,5 @@ public extension HyperwalletUI {
         let coordinator = AddTransferMethodCoordinator()
         coordinator.start(initializationData: initializationData, parentController: parentController)
         return coordinator
-}
+    }
 }

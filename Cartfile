@@ -1,2 +1,2 @@
-github "hyperwallet/hyperwallet-ios-sdk" "development"
-github "hyperwallet/hyperwallet-ios-insight" "1.0.0-beta01"
+github "hyperwallet/hyperwallet-ios-sdk" "task/HW-61254-iOS-Add-clearInstance-in-Core-SDK,-UI-SDK-and-Insights-SDK"
+github "hyperwallet/hyperwallet-ios-insight" "task/HW-61254-iOS-Add-clearInstance-in-Core-SDK,-UI-SDK-and-Insights-SDK"
