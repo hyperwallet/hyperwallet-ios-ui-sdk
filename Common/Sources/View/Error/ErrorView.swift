@@ -56,12 +56,11 @@ public final class ErrorView {
         case .connection:
             connectionError({ (_) in handler?() })
 
+        case .authentication:
+            authenticationError(error)
+
         default:
-            if error.getAuthenticationError() != nil {
-                authenticationError(error)
-            } else {
-                unexpectedError()
-            }
+            unexpectedError()
         }
     }
 
