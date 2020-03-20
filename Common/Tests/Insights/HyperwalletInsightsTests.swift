@@ -36,7 +36,7 @@ class HyperwalletInsightsTests: XCTestCase {
         if self.name.contains("testTrackError_ConfigNotInitialized") {
             return
         }
-        HyperwalletUI.clearInstance()
+
         HyperwalletUI.setup(HyperwalletTestHelper.authenticationProvider)
         HyperwalletInsights.setup()
         hyperwalletInsights = HyperwalletInsights.shared
@@ -150,6 +150,19 @@ class HyperwalletInsightsTests: XCTestCase {
         sleep(2)
 
         XCTAssertNil(hyperwalletInsights?.insights, "Insights shouldn't be reloaded because of the wrong config")
+    }
+
+    func testClearInstance() {
+        HyperwalletUI.setup(HyperwalletTestHelper.authenticationProvider)
+        let hyperwalletInstance1 = HyperwalletUI.shared
+        XCTAssertNotNil(hyperwalletInstance1)
+        HyperwalletUI.clearInstance()
+        HyperwalletUI.setup(HyperwalletTestHelper.authenticationProvider)
+        let hyperwalletInstance2 = HyperwalletUI.shared
+        XCTAssertNotNil(hyperwalletInstance2)
+        XCTAssertNotEqual(hyperwalletInstance1,
+                          hyperwalletInstance2,
+                          "hyperwalletInstance2 should not be same as hyperwalletInstance1")
     }
 }
 

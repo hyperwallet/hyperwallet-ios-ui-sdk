@@ -19,13 +19,15 @@
 #if !COCOAPODS
 import Common
 import TransferMethodRepository
+import UserRepository
 #endif
 
 /// The HyperwalletUI extension
 public extension HyperwalletUI {
-    /// Clears TransferMethodRepositoryFactory instance.
+    /// Clears TransferMethodRepositoryFactory and UserRepositoryFactory instances.
     static func transferMethodUIClearInstance() {
         TransferMethodRepositoryFactory.clearInstance()
+        UserRepositoryFactory.clearInstance()
     }
     /// Lists the user's transfer methods (bank account, bank card, PayPal account, prepaid card, paper check).
     ///
