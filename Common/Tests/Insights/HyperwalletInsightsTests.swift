@@ -154,14 +154,14 @@ class HyperwalletInsightsTests: XCTestCase {
 
     func testClearInstance() {
         HyperwalletUI.setup(HyperwalletTestHelper.authenticationProvider)
-        let hyperwalletInstance1 = HyperwalletUI.shared
-        XCTAssertNotNil(hyperwalletInstance1)
+        let hyperwalletUIInstance1 = HyperwalletUI.shared
+        XCTAssertNotNil(hyperwalletUIInstance1)
         HyperwalletUI.clearInstance()
         HyperwalletUI.setup(HyperwalletTestHelper.authenticationProvider)
-        let hyperwalletInstance2 = HyperwalletUI.shared
-        XCTAssertNotNil(hyperwalletInstance2)
-        XCTAssertNotEqual(hyperwalletInstance1,
-                          hyperwalletInstance2,
+        let hyperwalletUIInstance2 = HyperwalletUI.shared
+        XCTAssertNotNil(hyperwalletUIInstance2)
+        XCTAssertNotEqual(hyperwalletUIInstance1,
+                          hyperwalletUIInstance2,
                           "hyperwalletInstance2 should not be same as hyperwalletInstance1")
     }
 }
