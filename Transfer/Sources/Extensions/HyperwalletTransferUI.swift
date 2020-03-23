@@ -31,6 +31,7 @@ public extension HyperwalletUI {
         TransferMethodRepositoryFactory.clearInstance()
         UserRepositoryFactory.clearInstance()
     }
+
     /// Create transfer funds
     ///
     /// - Returns: An instance of `CreateTransferCoordinator`

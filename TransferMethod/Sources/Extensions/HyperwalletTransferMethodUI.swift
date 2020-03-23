@@ -29,6 +29,7 @@ public extension HyperwalletUI {
         TransferMethodRepositoryFactory.clearInstance()
         UserRepositoryFactory.clearInstance()
     }
+
     /// Lists the user's transfer methods (bank account, bank card, PayPal account, prepaid card, paper check).
     ///
     /// The user can deactivate and add a new transfer method.
@@ -49,10 +50,8 @@ public extension HyperwalletUI {
     func selectTransferMethodTypeCoordinator(forceUpdateData: Bool = false, parentController: UIViewController)
         -> SelectTransferMethodTypeCoordinator {
             let coordinator = SelectTransferMethodTypeCoordinator()
-            coordinator
-                .start(initializationData:
-                    [InitializationDataField.forceUpdateData: forceUpdateData],
-                       parentController: parentController)
+            coordinator.start(initializationData: [InitializationDataField.forceUpdateData: forceUpdateData],
+                              parentController: parentController)
             return coordinator
     }
 

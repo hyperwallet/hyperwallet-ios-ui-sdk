@@ -34,6 +34,7 @@ public final class HyperwalletUI: NSObject {
         }
         return instance
     }
+
     /// Clears Hyperwallet, UserRepositoryFactory and HyperwalletInsights instances.
     public static func clearInstance() {
         Hyperwallet.clearInstance()
