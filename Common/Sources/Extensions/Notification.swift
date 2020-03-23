@@ -58,6 +58,6 @@ public enum UserInfo: String {
     case transferCreated
     /// A transfer has been scheduled.
     case transferScheduled
-    ///  Authentication error has been occured
+    /// Authentication error has been occured
     case authenticationError
 }

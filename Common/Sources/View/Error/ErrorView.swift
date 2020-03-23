@@ -80,17 +80,17 @@ public final class ErrorView {
         HyperwalletUtilViews.showAlert(viewController,
                                        title: "error".localized(),
                                        message: error.getHyperwalletErrors()?.errorList?
-                                                .filter { $0.fieldName == nil }
-                                                .map { $0.message }
-                                                .joined(separator: "\n"),
+                                        .filter { $0.fieldName == nil }
+                                        .map { $0.message }
+                                        .joined(separator: "\n"),
                                        actions: UIAlertAction.close())
     }
 
     private func unexpectedError() {
-       let errorInfo = ErrorInfoBuilder(type: self.errorTypeException,
-                                        message: error.getHyperwalletErrors()?.errorList?.first?.message ?? "")
-                .code(error.getHyperwalletErrors()?.errorList?.first?.code ?? "")
-                .build()
+        let errorInfo = ErrorInfoBuilder(type: self.errorTypeException,
+                                         message: error.getHyperwalletErrors()?.errorList?.first?.message ?? "")
+            .code(error.getHyperwalletErrors()?.errorList?.first?.code ?? "")
+            .build()
         HyperwalletInsights.shared.trackError(pageName: pageName,
                                               pageGroup: pageGroup,
                                               errorInfo: errorInfo)
