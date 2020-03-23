@@ -162,7 +162,7 @@ class HyperwalletInsightsTests: XCTestCase {
         XCTAssertNotNil(hyperwalletUIInstance2)
         XCTAssertNotEqual(hyperwalletUIInstance1,
                           hyperwalletUIInstance2,
-                          "hyperwalletInstance2 should not be same as hyperwalletInstance1")
+                          "hyperwalletUIInstance2 should not be same as hyperwalletUIInstance1")
     }
 }
 
