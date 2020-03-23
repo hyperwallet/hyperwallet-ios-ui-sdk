@@ -121,11 +121,9 @@ public final class ErrorView {
                                        message: error.getAuthenticationError()?.message() ??
                                         "authentication_error_message".localized(),
                                        actions: UIAlertAction.close({ (_) in
-                                        NotificationCenter.default
-                                            .post(name:
-                                                .authenticationError,
-                                                  object: self,
-                                                  userInfo: [UserInfo.authenticationError: error])
+                                        NotificationCenter.default.post(name: .authenticationError,
+                                                                        object: self,
+                                                                        userInfo: [UserInfo.authenticationError: error])
                                        }))
     }
 }
