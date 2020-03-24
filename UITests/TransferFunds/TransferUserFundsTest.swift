@@ -356,6 +356,8 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(cadBankAccount.exists)
         XCTAssertTrue(prepaidCard.exists)
 
+        waitForNonExistence(spinner)
+
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 0), "Bank Account")
         XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), expectedUSDestinationLabel + "1234")
 
@@ -514,6 +516,7 @@ class TransferUserFundsTest: BaseTests {
         let pastAmountWithNumberNoDigit = "10000"
         transferFunds.pasteAmountToTransferAmount(amount: pastAmountWithNumberNoDigit)
         waitForNonExistence(spinner)
+
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "10,000.00")
     }
 
@@ -752,6 +755,9 @@ class TransferUserFundsTest: BaseTests {
                              method: HTTPMethod.get)
 
         transferFunds.addSelectDestinationLabel.tap()
+
+        waitForNonExistence(spinner)
+
         XCTAssertTrue(selectDestination.selectDestinationTitle.exists)
         XCTAssertTrue(selectDestination.addTransferMethodButton.exists)
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 0), "Bank Account")
@@ -790,6 +796,7 @@ class TransferUserFundsTest: BaseTests {
             || destinationDetail == "United States Ending on 6789")
 
         transferFunds.addSelectDestinationLabel.tap()
+        waitForNonExistence(spinner)
 
         XCTAssertTrue(selectDestination.selectDestinationTitle.exists)
         XCTAssertTrue(selectDestination.addTransferMethodButton.exists)
@@ -838,7 +845,7 @@ class TransferUserFundsTest: BaseTests {
                              method: HTTPMethod.get)
         transferFunds.addSelectDestinationLabel.tap()
         waitForNonExistence(spinner)
-                XCTAssertTrue(selectDestination.selectDestinationTitle.exists)
+        XCTAssertTrue(selectDestination.selectDestinationTitle.exists)
         XCTAssertTrue(selectDestination.addTransferMethodButton.exists)
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 0), "Bank Account")
         XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), expectedUSDestinationLabel + "6789")
