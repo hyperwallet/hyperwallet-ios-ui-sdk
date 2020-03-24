@@ -62,9 +62,17 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
         loadConfigurationAndInitializeInsights(completion: { _ in })
     }
 
+    /// Clears Insights SDK instance.
+    public static func clearInstance() {
+        Insights.clearInstance()
+        instance = nil
+    }
+
     /// Set up HyperwalletInsights
     public static func setup() {
-        instance = HyperwalletInsights()
+        if instance == nil {
+            instance = HyperwalletInsights()
+        }
     }
 
     /// Track Clicks
@@ -155,7 +163,7 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
 
     /// Initialize the Insights module if the url and environment variables are available
     private func initializeInsights(configuration: Configuration) {
-         if let environment = configuration.environment,
+        if let environment = configuration.environment,
             let insightsUrl = configuration.insightsUrl,
             let sdkVersion = HyperwalletBundle.currentSDKAppVersion {
             Insights.setup(environment: environment,
