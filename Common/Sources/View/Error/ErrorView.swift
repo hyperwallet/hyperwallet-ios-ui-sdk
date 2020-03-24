@@ -116,6 +116,13 @@ public final class ErrorView {
     }
 
     private func authenticationError(_ error: HyperwalletErrorType) {
+        let errorInfo = ErrorInfoBuilder(type: errorTypeException,
+                                         message: error.getHyperwalletErrors()?.errorList?.first?.message ?? "")
+            .code(error.getHyperwalletErrors()?.errorList?.first?.code ?? "")
+            .build()
+        HyperwalletInsights.shared.trackError(pageName: pageName,
+                                              pageGroup: pageGroup,
+                                              errorInfo: errorInfo)
         HyperwalletUtilViews.showAlert(viewController,
                                        title: "authentication_error_title".localized(),
                                        message: error.getAuthenticationError()?.message() ??
