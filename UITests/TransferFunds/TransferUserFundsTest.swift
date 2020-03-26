@@ -7,6 +7,22 @@ class TransferUserFundsTest: BaseTests {
     var addTransferMethod: AddTransferMethod!
     var elementQuery: XCUIElementQuery!
 
+    var expectedUSDestinationLabel: String = {
+        if #available(iOS 11.2, *) {
+            return "United States\nEnding on "
+        } else {
+            return "United States Ending on "
+        }
+    }()
+
+    var expectedCanadaDestinationLabel: String = {
+        if #available(iOS 11.2, *) {
+            return "CANADA\nEnding on 1235"
+        } else {
+            return "CANADA Ending on 1235"
+        }
+    }()
+
     override func setUp() {
         super.setUp()
         app = XCUIApplication()
@@ -340,14 +356,16 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(cadBankAccount.exists)
         XCTAssertTrue(prepaidCard.exists)
 
+        waitForNonExistence(spinner)
+
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 0), "Bank Account")
-        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), "United States Ending on 1234")
+        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), expectedUSDestinationLabel + "1234")
 
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 1), "Bank Account")
-        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 1), "CANADA Ending on 1235")
+        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 1), expectedCanadaDestinationLabel)
 
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 2), "Prepaid Card")
-        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 2), "United States Ending on 4281")
+        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 2), expectedUSDestinationLabel + "4281")
 
         // Assert first row is checked by default
         assertButtonTrue(element: usdBankAccount)
@@ -498,6 +516,7 @@ class TransferUserFundsTest: BaseTests {
         let pastAmountWithNumberNoDigit = "10000"
         transferFunds.pasteAmountToTransferAmount(amount: pastAmountWithNumberNoDigit)
         waitForNonExistence(spinner)
+
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "10,000.00")
     }
 
@@ -736,10 +755,13 @@ class TransferUserFundsTest: BaseTests {
                              method: HTTPMethod.get)
 
         transferFunds.addSelectDestinationLabel.tap()
+
+        waitForNonExistence(spinner)
+
         XCTAssertTrue(selectDestination.selectDestinationTitle.exists)
         XCTAssertTrue(selectDestination.addTransferMethodButton.exists)
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 0), "Bank Account")
-        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), "United States Ending on 2345")
+        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), expectedUSDestinationLabel + "2345")
     }
 
     //swiftlint:disable function_body_length
@@ -774,11 +796,12 @@ class TransferUserFundsTest: BaseTests {
             || destinationDetail == "United States Ending on 6789")
 
         transferFunds.addSelectDestinationLabel.tap()
+        waitForNonExistence(spinner)
 
         XCTAssertTrue(selectDestination.selectDestinationTitle.exists)
         XCTAssertTrue(selectDestination.addTransferMethodButton.exists)
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 0), "Bank Account")
-        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), "United States Ending on 6789")
+        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), expectedUSDestinationLabel + "6789")
 
         mockServer.setupStub(url: "/rest/v3/users/usr-token/bank-accounts",
                              filename: "BankAccountIndividualResponse",
@@ -822,12 +845,12 @@ class TransferUserFundsTest: BaseTests {
                              method: HTTPMethod.get)
         transferFunds.addSelectDestinationLabel.tap()
         waitForNonExistence(spinner)
-                XCTAssertTrue(selectDestination.selectDestinationTitle.exists)
+        XCTAssertTrue(selectDestination.selectDestinationTitle.exists)
         XCTAssertTrue(selectDestination.addTransferMethodButton.exists)
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 0), "Bank Account")
-        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), "United States Ending on 6789")
+        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), expectedUSDestinationLabel + "6789")
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 1), "Bank Account")
-        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 1), "United States Ending on 2345")
+        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 1), expectedUSDestinationLabel + "2345")
     }
 
     // it passed on my local but not remote, so will comment it out for now

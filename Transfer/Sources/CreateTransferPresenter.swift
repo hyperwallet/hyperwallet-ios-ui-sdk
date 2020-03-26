@@ -25,9 +25,6 @@ import UserRepository
 import HyperwalletSDK
 
 protocol CreateTransferView: class {
-    typealias SelectItemHandler = (_ value: HyperwalletTransferMethod) -> Void
-    typealias MarkCellHandler = (_ value: HyperwalletTransferMethod) -> Bool
-
     func hideLoading()
     func notifyTransferCreated(_ transfer: HyperwalletTransfer)
     func showCreateTransfer()
@@ -35,10 +32,6 @@ protocol CreateTransferView: class {
                    pageName: String,
                    pageGroup: String,
                    _ retry: (() -> Void)?)
-    func showGenericTableView(items: [HyperwalletTransferMethod],
-                              title: String,
-                              selectItemHandler: @escaping SelectItemHandler,
-                              markCellHandler: @escaping MarkCellHandler)
     func showLoading()
     func showScheduleTransfer(_ transfer: HyperwalletTransfer)
     func updateTransferSection()
@@ -233,48 +226,6 @@ final class CreateTransferPresenter {
                     }
                 }
             }
-        }
-    }
-
-    // MARK: - Destination view
-    func showSelectDestinationAccountView() {
-        transferMethodRepository.listTransferMethods { [weak self] result in
-            guard let strongSelf = self else {
-                return
-            }
-            switch result {
-            case .success(let pageList):
-                if let transferMethods = pageList?.data {
-                    strongSelf.view.showGenericTableView(items: transferMethods,
-                                                         title: "transfer_select_destination".localized(),
-                                                         selectItemHandler: strongSelf
-                                                            .selectDestinationAccountHandler(),
-                                                         markCellHandler: strongSelf
-                                                            .destinationAccountMarkCellHandler())
-                }
-
-            case .failure(let error):
-                strongSelf.view.showError(error,
-                                          pageName: strongSelf.pageName,
-                                          pageGroup: strongSelf.pageGroup) {
-                    strongSelf.loadTransferMethods()
-                }
-            }
-        }
-    }
-
-    private func destinationAccountMarkCellHandler() -> CreateTransferView.MarkCellHandler {
-        return { [weak selectedTransferMethod] item in
-            selectedTransferMethod?.token == item.token
-        }
-    }
-
-    private func selectDestinationAccountHandler() -> CreateTransferView.SelectItemHandler {
-        return { [weak self] item in
-            self?.selectedTransferMethod = item
-            self?.amount = nil
-            self?.transferAllFundsIsOn = false
-            self?.createInitialTransfer()
         }
     }
 

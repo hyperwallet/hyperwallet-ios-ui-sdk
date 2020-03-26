@@ -56,6 +56,9 @@ public final class ErrorView {
         case .connection:
             connectionError({ (_) in handler?() })
 
+        case .authentication:
+            authenticationError(error)
+
         default:
             unexpectedError()
         }
@@ -77,17 +80,17 @@ public final class ErrorView {
         HyperwalletUtilViews.showAlert(viewController,
                                        title: "error".localized(),
                                        message: error.getHyperwalletErrors()?.errorList?
-                                                .filter { $0.fieldName == nil }
-                                                .map { $0.message }
-                                                .joined(separator: "\n"),
+                                        .filter { $0.fieldName == nil }
+                                        .map { $0.message }
+                                        .joined(separator: "\n"),
                                        actions: UIAlertAction.close())
     }
 
     private func unexpectedError() {
-       let errorInfo = ErrorInfoBuilder(type: self.errorTypeException,
-                                        message: error.getHyperwalletErrors()?.errorList?.first?.message ?? "")
-                .code(error.getHyperwalletErrors()?.errorList?.first?.code ?? "")
-                .build()
+        let errorInfo = ErrorInfoBuilder(type: self.errorTypeException,
+                                         message: error.getHyperwalletErrors()?.errorList?.first?.message ?? "")
+            .code(error.getHyperwalletErrors()?.errorList?.first?.code ?? "")
+            .build()
         HyperwalletInsights.shared.trackError(pageName: pageName,
                                               pageGroup: pageGroup,
                                               errorInfo: errorInfo)
@@ -110,5 +113,24 @@ public final class ErrorView {
                                                 title: "network_connection_error_title".localized(),
                                                 message: "network_connection_error_message".localized(),
                                                 handler)
+    }
+
+    private func authenticationError(_ error: HyperwalletErrorType) {
+        let errorInfo = ErrorInfoBuilder(type: errorTypeException,
+                                         message: error.getHyperwalletErrors()?.errorList?.first?.message ?? "")
+            .code(error.getHyperwalletErrors()?.errorList?.first?.code ?? "")
+            .build()
+        HyperwalletInsights.shared.trackError(pageName: pageName,
+                                              pageGroup: pageGroup,
+                                              errorInfo: errorInfo)
+        HyperwalletUtilViews.showAlert(viewController,
+                                       title: "authentication_error_title".localized(),
+                                       message: error.getAuthenticationError()?.message() ??
+                                        "authentication_error_message".localized(),
+                                       actions: UIAlertAction.close({ (_) in
+                                        NotificationCenter.default.post(name: .authenticationError,
+                                                                        object: self,
+                                                                        userInfo: [UserInfo.authenticationError: error])
+                                       }))
     }
 }
