@@ -61,6 +61,8 @@ final class ReceiptDetailController: UITableViewController {
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)
         }
+        tableView.isAccessibilityElement = false
+        tableView.shouldGroupAccessibilityChildren = true
     }
 
     private func getCellConfiguration(_ indexPath: IndexPath) -> UITableViewCell {

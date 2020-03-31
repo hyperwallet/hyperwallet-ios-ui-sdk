@@ -110,6 +110,8 @@ final class ListReceiptController: UITableViewController {
         tableView.sectionHeaderHeight = UITableView.automaticDimension
         tableView.register(ReceiptTransactionCell.self,
                            forCellReuseIdentifier: ReceiptTransactionCell.reuseIdentifier)
+        tableView.isAccessibilityElement = false
+        tableView.shouldGroupAccessibilityChildren = true
     }
 }
 

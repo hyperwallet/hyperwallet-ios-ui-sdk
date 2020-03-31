@@ -161,6 +161,17 @@ extension ReceiptTransactionCell {
             imageView?.image = icon
             imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
         }
+        applyAccessibility()
+    }
+    
+    private func applyAccessibility() {
+        isAccessibilityElement = true
+        accessibilityHint = "Tap to view receipt details"
+        receiptTypeLabel.isAccessibilityElement = false
+        amountLabel.isAccessibilityElement = false
+        createdOnLabel.isAccessibilityElement = false
+        currencyLabel.isAccessibilityElement = false
+        imageView?.isAccessibilityElement = false
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
