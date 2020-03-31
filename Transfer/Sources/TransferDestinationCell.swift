@@ -22,7 +22,7 @@ import Common
 import HyperwalletSDK
 import UIKit
 
-final class TransferDestinationCell: GenericCell<HyperwalletTransferMethod> {
+final class TransferDestinationCell: UITableViewCell {
     public static let reuseIdentifier = "transferDestinationCellIdentifier"
 
     private lazy var titleLabel: UILabel = {
@@ -100,15 +100,6 @@ final class TransferDestinationCell: GenericCell<HyperwalletTransferMethod> {
     @objc dynamic var subTitleLabelColor: UIColor! {
         get { return subtitleLabel.textColor }
         set { subtitleLabel.textColor = newValue }
-    }
-
-    override var item: HyperwalletTransferMethod? {
-        didSet {
-            guard let configuration = item  else {
-                return
-            }
-            configure(transferMethod: configuration)
-        }
     }
 }
 

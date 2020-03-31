@@ -339,25 +339,6 @@ class CreateTransferTests: XCTestCase {
         XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
         XCTAssertTrue(mockView.isShowErrorPerformed, "showError should be performed")
     }
-
-    func testShowSelectDestinationAccountView_success() {
-        initializePresenter()
-        presenter.showSelectDestinationAccountView()
-        XCTAssertTrue(mockView.isShowGenericTableViewPerformed, "isShowGenericTableViewPerformed should be performed")
-        XCTAssertNotNil(presenter.selectedTransferMethod, "selectedTransferMethod should not be nil")
-        XCTAssertNil(presenter.amount, "amount should be nil")
-        XCTAssertTrue(mockView.isShowCreateTransferPerformed, "isShowCreateTransferPerformed should be performed")
-    }
-
-    func testShowSelectDestinationAccountView_failure() {
-        presenter = CreateTransferPresenter(clientTransferId, nil, view: mockView)
-        TransferMethodRepositoryRequestHelper.setupFailureRequest()
-        presenter.showSelectDestinationAccountView()
-        wait(for: [mockView.showErrorExpectation], timeout: 1)
-        XCTAssertFalse(mockView.isShowGenericTableViewPerformed,
-                       "isShowGenericTableViewPerformed should not be performed")
-        XCTAssertTrue(mockView.isShowErrorPerformed, "isShowErrorPerformed should be performed")
-    }
 }
 
 class MockCreateTransferView: CreateTransferView {
@@ -401,15 +382,6 @@ class MockCreateTransferView: CreateTransferView {
             retry!()
         }
         showErrorExpectation?.fulfill()
-    }
-
-    func showGenericTableView(items: [HyperwalletTransferMethod],
-                              title: String,
-                              selectItemHandler: @escaping CreateTransferView.SelectItemHandler,
-                              markCellHandler: @escaping CreateTransferView.MarkCellHandler) {
-        isShowGenericTableViewPerformed = true
-        selectItemHandler(items.first!)
-        _ = markCellHandler(items.first!)
     }
 
     func showLoading() {

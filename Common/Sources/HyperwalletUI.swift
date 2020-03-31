@@ -35,12 +35,22 @@ public final class HyperwalletUI: NSObject {
         return instance
     }
 
+    /// Clears Hyperwallet, UserRepositoryFactory and HyperwalletInsights instances.
+    public static func clearInstance() {
+        Hyperwallet.clearInstance()
+        HyperwalletInsights.clearInstance()
+        UserRepositoryFactory.clearInstance()
+        instance = nil
+    }
+
     /// Creates a new instance of the Hyperwallet UI SDK interface object. If a previously created instance exists,
     /// it will be replaced.
     ///
     /// - Parameter provider: a provider of Hyperwallet authentication tokens.
     public class func setup(_ provider: HyperwalletAuthenticationTokenProvider) {
-        instance = HyperwalletUI(provider)
+        if instance == nil {
+            instance = HyperwalletUI(provider)
+        }
     }
 
     private init(_ provider: HyperwalletAuthenticationTokenProvider) {
