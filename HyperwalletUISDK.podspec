@@ -17,7 +17,6 @@ Pod::Spec.new do |spec|
     spec.subspec "Common" do |common|
         common.resources = ['Common/**/*.xcassets', 'Common/**/*.ttf', 'Common/**/*.xib', 'Common/**/*.strings']
         common.source_files  = "Common/Sources/**/*.{swift,h}"
-        common.dependency "HyperwalletUISDK/UserRepository"
         common.dependency 'Insights', '1.0.0-beta01'
     end
 
