@@ -169,7 +169,9 @@ final class SelectTransferMethodTypePresenter {
     }
 
     private func countryCurrencyValues(at index: Int) -> String {
-        return (index == 0 ? selectedCountry.localized() : selectedCurrency)
+        return (index == 0
+            ? Locale.current.localizedString(forRegionCode: selectedCountry) ?? selectedCountry
+            : selectedCurrency)
     }
 
     private func getKeysHandler(
