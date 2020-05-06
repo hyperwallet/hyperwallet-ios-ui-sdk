@@ -17,9 +17,9 @@ class TransferUserFundsTest: BaseTests {
 
     var expectedCanadaDestinationLabel: String = {
         if #available(iOS 11.2, *) {
-            return "CANADA\nEnding on 1235"
+            return "Canada\nEnding on 1235"
         } else {
-            return "CANADA Ending on 1235"
+            return "Canada Ending on 1235"
         }
     }()
 
