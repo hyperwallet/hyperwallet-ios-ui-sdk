@@ -108,7 +108,7 @@ extension TransferDestinationCell {
         titleLabel.text = transferMethod.title
         titleLabel.adjustsFontForContentSizeCategory = true
         subtitleLabel.attributedText = formatDetails(
-            subtitle: transferMethod.transferMethodCountry?.localized() ?? "",
+            subtitle: Locale.current.localizedString(forRegionCode: transferMethod.transferMethodCountry ?? "") ?? "",
             additionalInfo: transferMethod.value)
 
         subtitleLabel.numberOfLines = 0

@@ -76,7 +76,8 @@ extension ListTransferDestinationCell {
 
         detailTextLabel?.accessibilityIdentifier = "transferDestinationSubtitleLabel"
         detailTextLabel?.attributedText = formatDetails(
-            transferMethodCountry: transferMethod.transferMethodCountry?.localized() ?? "",
+            transferMethodCountry:
+                Locale.current.localizedString(forRegionCode: transferMethod.transferMethodCountry ?? "") ?? "",
             additionalInfo: transferMethod.value)
         detailTextLabel?.adjustsFontForContentSizeCategory = true
         detailTextLabel?.numberOfLines = 0

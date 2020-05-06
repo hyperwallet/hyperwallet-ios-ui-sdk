@@ -73,7 +73,8 @@ extension ListTransferMethodCell {
         textLabel?.lineBreakMode = .byWordWrapping
         textLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellTextLabel"
         detailTextLabel?.attributedText = formatDetails(
-            transferMethodCountry: transferMethod.transferMethodCountry?.localized() ?? "",
+            transferMethodCountry:
+                Locale.current.localizedString(forRegionCode: transferMethod.transferMethodCountry ?? "") ?? "",
             additionalInfo: transferMethod.value)
         detailTextLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellDetailTextLabel"
         detailTextLabel?.adjustsFontForContentSizeCategory = true
