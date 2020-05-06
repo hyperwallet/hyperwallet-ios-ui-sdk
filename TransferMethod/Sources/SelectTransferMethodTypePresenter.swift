@@ -281,8 +281,7 @@ final class SelectTransferMethodTypePresenter {
     private func loadCurrency(_ keys: HyperwalletTransferMethodConfigurationKey?) {
         guard let firstCurrency = keys?.currencies(from: selectedCountry)?.first,
             let currencyCode = firstCurrency.code else {
-            view.showAlert(message: String(format: "no_currency_available_error_message".localized(),
-                                           selectedCountry.localized()))
+            view.showAlert(message: String(format: "no_currency_available_error_message".localized(), selectedCountry))
             return
         }
         selectedCurrency = currencyCode

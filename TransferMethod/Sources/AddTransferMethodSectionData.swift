@@ -33,7 +33,10 @@ final class AddTransferMethodSectionData {
         case "ACCOUNT_INFORMATION":
             let format = "\(fieldGroup)_header".lowercased().localized()
             let title = "account_information_title"
-            return String(format: format, title.localized(), country?.localized() ?? "", currency ?? "")
+            return String(format: format,
+                          title.localized(),
+                          Locale.current.localizedString(forRegionCode: country ?? "")?.uppercased() ?? "",
+                          currency ?? "")
         case "CREATE_BUTTON":
             return nil
 
