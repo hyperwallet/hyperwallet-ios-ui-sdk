@@ -10,14 +10,14 @@ Pod::Spec.new do |spec|
     spec.source                = { :git => 'https://github.com/hyperwallet/hyperwallet-ios-ui-sdk.git', :branch => "development"}
     spec.requires_arc          = true
     spec.swift_version         = '5.0'
-    spec.dependency 'HyperwalletSDK', '1.0.0-beta05'
+    spec.dependency 'HyperwalletSDK', '1.0.0-beta06'
 
     spec.default_subspec = 'TransferMethod', 'Receipt', 'Transfer'
 
     spec.subspec "Common" do |common|
         common.resources = ['Common/**/*.xcassets', 'Common/**/*.ttf', 'Common/**/*.xib', 'Common/**/*.strings']
         common.source_files  = "Common/Sources/**/*.{swift,h}"
-        common.dependency 'Insights', '1.0.0-beta01'
+        common.dependency 'Insights', '1.0.0-beta02'
     end
 
     spec.subspec "TransferMethodRepository" do |transferMethodRepository|
