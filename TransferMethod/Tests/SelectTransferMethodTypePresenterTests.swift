@@ -120,7 +120,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isHideLoadingPerformed, "The hideLoading should be performed")
         XCTAssertTrue(mockView.isShowAlertPerformed, "The showAlert should not be performed")
 
-        XCTAssertEqual(mockView.alertMessages[0], "There is no currency available for country United States")
+        XCTAssertEqual(mockView.alertMessages[0], "There is no currency available for country US")
     }
 
     func testLoadTransferMethodKeys_returnsNoTransferMethodTypes() {

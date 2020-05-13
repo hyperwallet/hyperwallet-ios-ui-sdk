@@ -45,7 +45,7 @@
         "status": "ACTIVATED",
         "verificationStatus": "NOT_REQUIRED",
         "createdOn": "2019-06-25T22:22:15",
-        "transferMethodCountry": "CANADA",
+        "transferMethodCountry": "CA",
         "transferMethodCurrency": "CAD",
         "branchId": "021000021",
         "bankAccountId": "4111222233331235",

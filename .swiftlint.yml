@@ -4,6 +4,7 @@ disabled_rules: # rule identifiers to exclude from running
   - type_body_length
   - file_length
   - closure_body_length
+  - implicit_return
 type_name:
     max_length: # warning and error
       warning: 60

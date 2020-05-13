@@ -21,9 +21,10 @@ import Common
 #endif
 import HyperwalletSDK
 import UIKit
-/// ListTransferMethodCell
-final class ListTransferMethodCell: UITableViewCell {
-    static let reuseIdentifier = "listTransferMethodCellIdentifier"
+
+/// ListTransferDestinationCell
+final class ListTransferDestinationCell: UITableViewCell {
+    static let reuseIdentifier = "listTransferDestinationCellIdentifier"
 
     // MARK: Life cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -62,24 +63,26 @@ final class ListTransferMethodCell: UITableViewCell {
     }
 }
 
-extension ListTransferMethodCell {
-    /// Fill `ListTransferMethodCell` related fields
+extension ListTransferDestinationCell {
+    /// Fill `ListTransferDestinationCell` related fields
     ///
     /// - Parameter transferMethod: a transfer method which contains the info needs to be filled to the cell.
-    public func configure(transferMethod: HyperwalletTransferMethod) {
+    func configure(transferMethod: HyperwalletTransferMethod) {
+        textLabel?.accessibilityIdentifier = "transferDestinationTitleLabel"
         textLabel?.text = transferMethod.type?.lowercased().localized()
         textLabel?.adjustsFontForContentSizeCategory = true
         textLabel?.numberOfLines = 0
         textLabel?.lineBreakMode = .byWordWrapping
-        textLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellTextLabel"
+
+        detailTextLabel?.accessibilityIdentifier = "transferDestinationSubtitleLabel"
         detailTextLabel?.attributedText = formatDetails(
             transferMethodCountry:
                 Locale.current.localizedString(forRegionCode: transferMethod.transferMethodCountry ?? "") ?? "",
             additionalInfo: transferMethod.value)
-        detailTextLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellDetailTextLabel"
         detailTextLabel?.adjustsFontForContentSizeCategory = true
         detailTextLabel?.numberOfLines = 0
         detailTextLabel?.lineBreakMode = .byWordWrapping
+
         if !UIFont.isLargeSizeCategory {
             let icon = UIImage.fontIcon(HyperwalletIcon.of(transferMethod.type ?? "").rawValue,
                                         Theme.Icon.frame,

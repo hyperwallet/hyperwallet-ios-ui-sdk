@@ -16,9 +16,6 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#if !COCOAPODS
-import UserRepository
-#endif
 import HyperwalletSDK
 
 /// Class responsible for initializing the Hyperwallet UI SDK. It contains methods to interact with the controllers
@@ -35,17 +32,25 @@ public final class HyperwalletUI: NSObject {
         return instance
     }
 
+    /// Clears Hyperwallet and HyperwalletInsights instances.
+    public static func clearInstance() {
+        Hyperwallet.clearInstance()
+        HyperwalletInsights.clearInstance()
+        instance = nil
+    }
+
     /// Creates a new instance of the Hyperwallet UI SDK interface object. If a previously created instance exists,
     /// it will be replaced.
     ///
     /// - Parameter provider: a provider of Hyperwallet authentication tokens.
     public class func setup(_ provider: HyperwalletAuthenticationTokenProvider) {
-        instance = HyperwalletUI(provider)
+        if instance == nil {
+            instance = HyperwalletUI(provider)
+        }
     }
 
     private init(_ provider: HyperwalletAuthenticationTokenProvider) {
         Hyperwallet.setup(provider)
         HyperwalletInsights.setup()
-        UserRepositoryFactory.shared.userRepository().getUser { _ in }
     }
 }

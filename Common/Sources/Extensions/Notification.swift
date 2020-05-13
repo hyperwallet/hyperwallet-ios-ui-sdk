@@ -41,6 +41,11 @@ public extension Notification.Name {
     static var transferScheduled: Notification.Name {
         return .init(rawValue: "transferScheduled")
     }
+
+    /// Posted when authentication error occurs
+    static var authenticationError: Notification.Name {
+        return .init(rawValue: "authenticationError")
+    }
 }
 
 /// The Hyperwallet's `NotificationCenter` key to access the information.
@@ -53,4 +58,6 @@ public enum UserInfo: String {
     case transferCreated
     /// A transfer has been scheduled.
     case transferScheduled
+    /// Authentication error has been occured
+    case authenticationError
 }
