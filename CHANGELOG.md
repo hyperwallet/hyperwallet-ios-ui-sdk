@@ -1,6 +1,11 @@
 Changelog
 =========
 
+[1.0.0-beta05](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta05)
+-------------------
+- Added Analytics to Transfer Method Module
+- Enhancements
+
 [1.0.0-beta04](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta04)
 -------------------
 - Added support for Create Transfer Funds
