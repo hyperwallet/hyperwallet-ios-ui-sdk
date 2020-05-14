@@ -294,7 +294,7 @@ class ListTransferMethodViewMock: ListTransferMethodView {
         expectation?.fulfill()
     }
 
-    func showTransferMethods() {
+    func reloadData() {
         isShowTransferMethodsPerformed = true
         expectation?.fulfill()
     }

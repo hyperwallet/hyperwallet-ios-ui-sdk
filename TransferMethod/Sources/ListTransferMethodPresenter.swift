@@ -28,7 +28,7 @@ protocol ListTransferMethodView: class {
     func showProcessing()
     func dismissProcessing(handler: @escaping () -> Void)
     func showConfirmation(handler: @escaping (() -> Void))
-    func showTransferMethods()
+    func reloadData()
     func notifyTransferMethodDeactivated(_ hyperwalletStatusTransition: HyperwalletStatusTransition)
     func showError(_ error: HyperwalletErrorType,
                    pageName: String,
@@ -116,7 +116,7 @@ final class ListTransferMethodPresenter {
                     strongSelf.sectionData = []
                 }
 
-                strongSelf.view.showTransferMethods()
+                strongSelf.view.reloadData()
             }
         }
     }

@@ -116,7 +116,7 @@ final class ListReceiptController: UITableViewController {
 // MARK: `ListReceiptView` delegate
 extension ListReceiptController: ListReceiptView {
     /// Loads the receipts
-    func loadReceipts() {
+    func reloadData() {
         if presenter.sectionData.isNotEmpty {
             toggleEmptyListView(hideLabel: true)
         } else {

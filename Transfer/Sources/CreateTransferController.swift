@@ -314,8 +314,7 @@ extension CreateTransferController: CreateTransferView {
         errorView.show(retry)
     }
 
-    func showCreateTransfer() {
-        presenter.initializeSections()
+    func reloadData() {
         tableView.reloadData()
     }
 

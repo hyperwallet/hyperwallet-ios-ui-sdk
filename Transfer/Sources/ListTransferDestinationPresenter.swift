@@ -28,7 +28,7 @@ protocol ListTransferDestinationView: class {
                    pageGroup: String,
                    _ retry: (() -> Void)?)
     func showLoading()
-    func showTransferMethods()
+    func reloadData()
 }
 
 final class ListTransferDestinationPresenter {
@@ -70,7 +70,7 @@ final class ListTransferDestinationPresenter {
                     strongSelf.sectionData = []
                 }
 
-                strongSelf.view.showTransferMethods()
+                strongSelf.view.reloadData()
             }
         }
     }

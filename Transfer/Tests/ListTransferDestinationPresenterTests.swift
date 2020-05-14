@@ -129,7 +129,7 @@ class ListTransferDestinationViewMock: ListTransferDestinationView {
         isShowLoadingPerformed = true
     }
 
-    func showTransferMethods() {
+    func reloadData() {
         isShowTransferMethodsPerformed = true
         expectation?.fulfill()
     }

@@ -24,7 +24,7 @@ import ReceiptRepository
 
 protocol ListReceiptView: class {
     func hideLoading()
-    func loadReceipts()
+    func reloadData()
     func showError(_ error: HyperwalletErrorType,
                    pageName: String,
                    pageGroup: String,
@@ -117,7 +117,7 @@ final class ListReceiptPresenter {
                     }
                     return
                 }
-                strongSelf.view.loadReceipts()
+                strongSelf.view.reloadData()
             }
     }
 
@@ -144,7 +144,7 @@ final class ListReceiptPresenter {
                     }
                     return
                 }
-                strongSelf.view.loadReceipts()
+                strongSelf.view.reloadData()
             }
     }
 

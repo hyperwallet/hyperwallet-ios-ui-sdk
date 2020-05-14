@@ -445,8 +445,7 @@ class AddTransferMethodViewMock: AddTransferMethodView {
         fieldFocusField = fieldName
     }
 
-    func showTransferMethodFields(_ fieldGroups: [HyperwalletFieldGroup],
-                                  _ transferMethodType: HyperwalletTransferMethodType) {
+    func reloadData(_ fieldGroups: [HyperwalletFieldGroup], _ transferMethodType: HyperwalletTransferMethodType) {
         self.fieldGroups = fieldGroups
         isShowTransferMethodFieldsPerformed = true
         showTransferMethodFieldsHandler?(fieldGroups)

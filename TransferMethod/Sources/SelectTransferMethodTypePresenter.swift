@@ -47,8 +47,8 @@ protocol SelectTransferMethodTypeView: class {
                    _ retry: (() -> Void)?)
     func showLoading()
     func hideLoading()
-    func transferMethodTypeTableViewReloadData()
-    func countryCurrencyTableViewReloadData()
+    func reloadTransferMethodTypeData()
+    func reloadCountryCurrencyData()
 }
 
 final class SelectTransferMethodTypePresenter {
@@ -243,7 +243,7 @@ final class SelectTransferMethodTypePresenter {
             self.transferMethodConfigurationRepository.getKeys(completion: self.getKeysHandler(
                 success: { (result) in
                     self.loadTransferMethodTypes(result)
-                    self.view.countryCurrencyTableViewReloadData()
+                    self.view.reloadCountryCurrencyData()
                 }))
         }
     }
@@ -285,7 +285,7 @@ final class SelectTransferMethodTypePresenter {
             return
         }
         selectedCurrency = currencyCode
-        view.countryCurrencyTableViewReloadData()
+        view.reloadCountryCurrencyData()
     }
 
     private func loadTransferMethodTypes(_ keys: HyperwalletTransferMethodConfigurationKey?) {
@@ -299,7 +299,7 @@ final class SelectTransferMethodTypePresenter {
         }
 
         sectionData = transferMethodTypes
-        view.transferMethodTypeTableViewReloadData()
+        view.reloadTransferMethodTypeData()
         trackUILoadImpression()
     }
 

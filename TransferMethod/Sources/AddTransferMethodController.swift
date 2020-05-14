@@ -301,8 +301,7 @@ extension AddTransferMethodController: AddTransferMethodView {
         }
     }
 
-    func showTransferMethodFields(_ fieldGroups: [HyperwalletFieldGroup],
-                                  _ transferMethodType: HyperwalletTransferMethodType) {
+    func reloadData(_ fieldGroups: [HyperwalletFieldGroup], _ transferMethodType: HyperwalletTransferMethodType) {
         addFieldsSection(fieldGroups)
         addInfoSection(transferMethodType)
         addCreateButtonSection()
