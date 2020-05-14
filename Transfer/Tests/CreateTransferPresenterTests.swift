@@ -410,7 +410,6 @@ class MockCreateTransferView: CreateTransferView {
         isHideLoadingPerformed = false
         isNotifyTransferCreatedPerformed = false
         isShowCreateTransferPerformed = false
-        isShowDestinationTransferMethod = false
         isShowErrorPerformed = false
         isShowGenericTableViewPerformed = false
         isShowLoadingPerformed = false
