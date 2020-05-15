@@ -127,11 +127,11 @@ extension SelectTransferMethodTypeController {
 
 // MARK: - SelectTransferMethodView
 extension SelectTransferMethodTypeController: SelectTransferMethodTypeView {
-    func transferMethodTypeTableViewReloadData() {
+    func reloadTransferMethodTypeData() {
         tableView.reloadData()
     }
 
-    func countryCurrencyTableViewReloadData() {
+    func reloadCountryCurrencyData() {
         countryCurrencyTableView.reloadData()
     }
 

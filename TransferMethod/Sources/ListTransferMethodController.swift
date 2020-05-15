@@ -181,7 +181,7 @@ extension ListTransferMethodController: ListTransferMethodView {
         }
     }
 
-    func showTransferMethods() {
+    func reloadData() {
         if presenter.sectionData.isNotEmpty {
             toggleEmptyListView()
         } else {

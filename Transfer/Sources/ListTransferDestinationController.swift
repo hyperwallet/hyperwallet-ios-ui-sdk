@@ -130,7 +130,7 @@ extension ListTransferDestinationController: ListTransferDestinationView {
     }
 
     /// Loads the transfer methods
-    func showTransferMethods() {
+    func reloadData() {
         tableView.reloadData()
     }
 }

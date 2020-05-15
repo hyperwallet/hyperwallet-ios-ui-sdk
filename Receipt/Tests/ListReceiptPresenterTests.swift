@@ -206,7 +206,7 @@ class MockListReceiptView: ListReceiptView {
         isHideLoadingPerformed = true
     }
 
-    func loadReceipts() {
+    func reloadData() {
         isLoadReceiptPerformed = true
         expectation?.fulfill()
     }

@@ -61,9 +61,7 @@ final class TransferNotesCell: UITableViewCell {
    }
 
     func configure(notes: String?, isEditable: Bool, _ handler: @escaping EnteredNoteHandler) {
-        if let notes = notes {
-            notesTextField.text = notes
-        }
+        notesTextField.text = notes
         notesTextField.isEnabled = isEditable
         enteredNoteHandler = handler
     }

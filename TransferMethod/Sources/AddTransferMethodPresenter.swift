@@ -36,8 +36,7 @@ protocol AddTransferMethodView: class {
                    _ retry: (() -> Void)?)
     func showLoading()
     func showProcessing()
-    func showTransferMethodFields(_ fieldGroups: [HyperwalletFieldGroup],
-                                  _ transferMethodType: HyperwalletTransferMethodType)
+    func reloadData(_ fieldGroups: [HyperwalletFieldGroup], _ transferMethodType: HyperwalletTransferMethodType)
     func showFooterViewWithUpdatedSectionData(for sections: [AddTransferMethodSectionData])
 }
 
@@ -109,7 +108,7 @@ final class AddTransferMethodPresenter {
                             if let fieldGroups = fieldResult?.fieldGroups(),
                                 let transferMethodType = fieldResult?.transferMethodType() {
                                 strongSelf.trackUILoadImpression()
-                                strongSelf.view.showTransferMethodFields(fieldGroups, transferMethodType)
+                                strongSelf.view.reloadData(fieldGroups, transferMethodType)
                             }
                         }
             }

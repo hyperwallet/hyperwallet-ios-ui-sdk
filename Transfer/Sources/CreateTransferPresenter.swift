@@ -27,7 +27,7 @@ import HyperwalletSDK
 protocol CreateTransferView: class {
     func hideLoading()
     func notifyTransferCreated(_ transfer: HyperwalletTransfer)
-    func showCreateTransfer()
+    func reloadData()
     func showError(_ error: HyperwalletErrorType,
                    pageName: String,
                    pageGroup: String,
@@ -82,7 +82,7 @@ final class CreateTransferPresenter {
         self.view = view
     }
 
-    func initializeSections() {
+    private func initializeSections() {
         sectionData.removeAll()
 
         let createTransferDestinationSection = CreateTransferSectionDestinationData()
@@ -101,9 +101,7 @@ final class CreateTransferPresenter {
 
     func loadCreateTransfer() {
         view.showLoading()
-        if sourceToken != nil {
-            loadTransferMethods()
-        } else {
+        if sourceToken != nil { loadTransferMethods() } else {
             userRepository.getUser { [weak self] result in
                 guard let strongSelf = self else {
                     return
@@ -153,8 +151,9 @@ final class CreateTransferPresenter {
         guard let sourceToken = sourceToken,
             let destinationToken = selectedTransferMethod?.token,
             let destinationCurrency = destinationCurrency else {
+                initializeSections()
+                view.reloadData()
                 view.hideLoading()
-                view.showCreateTransfer()
                 return
         }
         let transfer = HyperwalletTransfer.Builder(clientTransferId: clientTransferId,
@@ -178,8 +177,9 @@ final class CreateTransferPresenter {
 
             case .success(let transfer):
                 strongSelf.availableBalance = transfer?.destinationAmount
-                strongSelf.view.showCreateTransfer()
             }
+            strongSelf.initializeSections()
+            strongSelf.view.reloadData()
         }
     }
 

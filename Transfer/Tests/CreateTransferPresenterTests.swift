@@ -1,17 +1,17 @@
 #if !COCOAPODS
 import Common
+import TransferMethodRepository
+import UserRepository
 #endif
 import Hippolyte
 import HyperwalletSDK
 @testable import Transfer
-import TransferMethodRepository
-import UserRepository
 import XCTest
 
 class CreateTransferTests: XCTestCase {
     private var presenter: CreateTransferPresenter!
     private var mockView = MockCreateTransferView()
-    private let clientTransferId = "6712348070812"
+    private let clientTransferId = UUID().uuidString
     private let clientSourceToken = "trm-123456789"
 
     override func setUp() {
@@ -91,7 +91,6 @@ class CreateTransferTests: XCTestCase {
 
         presenter.loadCreateTransfer()
         wait(for: expectations, timeout: 1)
-        presenter.initializeSections()
     }
 
     func testLoadCreateTransfer_sourceTokenIsNil() {
@@ -368,7 +367,7 @@ class MockCreateTransferView: CreateTransferView {
         isNotifyTransferCreatedPerformed = true
     }
 
-    func showCreateTransfer() {
+    func reloadData() {
         isShowCreateTransferPerformed = true
         loadCreateTransferExpectation?.fulfill()
     }

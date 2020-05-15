@@ -370,11 +370,11 @@ class SelectTransferMethodTypeViewMock: SelectTransferMethodTypeView {
         }
     }
 
-    func transferMethodTypeTableViewReloadData() {
+    func reloadTransferMethodTypeData() {
         isTransferMethodTypeTableViewReloadDataPerformed = true
     }
 
-    func countryCurrencyTableViewReloadData() {
+    func reloadCountryCurrencyData() {
         isCountryCurrencyTableViewReloadDataPerformed = true
     }
 }

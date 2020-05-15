@@ -36,7 +36,6 @@ final class ListReceiptController: UITableViewController {
         super.viewDidLoad()
         setViewBackgroundColor()
         initializePresenter()
-        presenter.listReceipts()
         setupListReceiptTableView()
     }
 
@@ -45,6 +44,7 @@ final class ListReceiptController: UITableViewController {
         let currentNavigationItem: UINavigationItem = tabBarController?.navigationItem ?? navigationItem
         currentNavigationItem.backBarButtonItem = UIBarButtonItem.back
         titleDisplayMode(.always, for: "title_receipts".localized())
+        presenter.listReceipts()
     }
 
     private func initializePresenter() {
@@ -93,7 +93,7 @@ final class ListReceiptController: UITableViewController {
         }
     }
 
-    override public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    override public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         if loadMoreReceipts {
             presenter.listReceipts()
             loadMoreReceipts = false
@@ -116,7 +116,7 @@ final class ListReceiptController: UITableViewController {
 // MARK: `ListReceiptView` delegate
 extension ListReceiptController: ListReceiptView {
     /// Loads the receipts
-    func loadReceipts() {
+    func reloadData() {
         if presenter.sectionData.isNotEmpty {
             toggleEmptyListView(hideLabel: true)
         } else {

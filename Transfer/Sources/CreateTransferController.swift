@@ -303,19 +303,12 @@ extension CreateTransferController: CreateTransferView {
         }
     }
 
-    func showError(_ error: HyperwalletErrorType,
-                   pageName: String,
-                   pageGroup: String,
-                   _ retry: (() -> Void)?) {
-        let errorView = ErrorView(viewController: self,
-                                  error: error,
-                                  pageName: pageName,
-                                  pageGroup: pageGroup)
+    func showError(_ error: HyperwalletErrorType, pageName: String, pageGroup: String, _ retry: (() -> Void)?) {
+        let errorView = ErrorView(viewController: self, error: error, pageName: pageName, pageGroup: pageGroup)
         errorView.show(retry)
     }
 
-    func showCreateTransfer() {
-        presenter.initializeSections()
+    func reloadData() {
         tableView.reloadData()
     }
 
@@ -365,6 +358,7 @@ extension CreateTransferController {
             presenter.selectedTransferMethod = transferMethod
             presenter.amount = nil
             presenter.transferAllFundsIsOn = false
+            presenter.notes = nil
             presenter.loadCreateTransfer()
         } else if let statusTransition = response as? HyperwalletStatusTransition {
             coordinator?.navigateBackFromNextPage(with: statusTransition)
