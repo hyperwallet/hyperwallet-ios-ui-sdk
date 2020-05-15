@@ -101,9 +101,6 @@ final class CreateTransferPresenter {
 
     func loadCreateTransfer() {
         view.showLoading()
-        if amount != nil { amount = nil }
-        if transferAllFundsIsOn { transferAllFundsIsOn = false }
-        if notes != nil { notes = nil }
         if sourceToken != nil { loadTransferMethods() } else {
             userRepository.getUser { [weak self] result in
                 guard let strongSelf = self else {

@@ -47,6 +47,7 @@ final class CreateTransferController: UITableViewController {
         super.viewDidLoad()
         setViewBackgroundColor()
         initializePresenter()
+        presenter.loadCreateTransfer()
         setUpCreateTransferTableView()
         hideKeyboardWhenTappedAround()
     }
@@ -56,7 +57,6 @@ final class CreateTransferController: UITableViewController {
         let currentNavigationItem: UINavigationItem = tabBarController?.navigationItem ?? navigationItem
         currentNavigationItem.backBarButtonItem = UIBarButtonItem.back
         titleDisplayMode(.always, for: "transfer_funds".localized())
-        presenter.loadCreateTransfer()
     }
 
     private func initializePresenter() {
@@ -356,6 +356,10 @@ extension CreateTransferController {
         if let transferMethod = response as? HyperwalletTransferMethod {
             coordinator?.navigateBackFromNextPage(with: transferMethod)
             presenter.selectedTransferMethod = transferMethod
+            presenter.amount = nil
+            presenter.transferAllFundsIsOn = false
+            presenter.notes = nil
+            presenter.loadCreateTransfer()
         } else if let statusTransition = response as? HyperwalletStatusTransition {
             coordinator?.navigateBackFromNextPage(with: statusTransition)
             flowDelegate?.didFlowComplete(with: statusTransition)

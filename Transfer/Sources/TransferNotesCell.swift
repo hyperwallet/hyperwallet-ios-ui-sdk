@@ -61,7 +61,6 @@ final class TransferNotesCell: UITableViewCell {
    }
 
     func configure(notes: String?, isEditable: Bool, _ handler: @escaping EnteredNoteHandler) {
-        notesTextField.resignFirstResponder()
         notesTextField.text = notes
         notesTextField.isEnabled = isEditable
         enteredNoteHandler = handler
@@ -71,6 +70,7 @@ final class TransferNotesCell: UITableViewCell {
 extension TransferNotesCell: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         enteredNoteHandler?(notesTextField.text)
+        notesTextField.resignFirstResponder()
     }
 }
 
