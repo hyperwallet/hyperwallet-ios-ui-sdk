@@ -70,7 +70,6 @@ final class TransferNotesCell: UITableViewCell {
 extension TransferNotesCell: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         enteredNoteHandler?(notesTextField.text)
-        notesTextField.resignFirstResponder()
     }
 }
 

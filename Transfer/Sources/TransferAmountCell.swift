@@ -124,7 +124,6 @@ extension TransferAmountCell: UITextFieldDelegate {
             textField.text = currentText
         }
         enteredAmountHandler?(currentText)
-        amountTextField.resignFirstResponder()
     }
 
     private func setCursorToTheEnd(_ textField: UITextField) {
