@@ -93,7 +93,7 @@ final class ListReceiptController: UITableViewController {
         }
     }
 
-    override public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    override public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         if loadMoreReceipts {
             presenter.listReceipts()
             loadMoreReceipts = false
