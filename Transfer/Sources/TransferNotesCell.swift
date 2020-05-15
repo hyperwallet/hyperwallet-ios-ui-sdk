@@ -61,6 +61,7 @@ final class TransferNotesCell: UITableViewCell {
    }
 
     func configure(notes: String?, isEditable: Bool, _ handler: @escaping EnteredNoteHandler) {
+        notesTextField.resignFirstResponder()
         notesTextField.text = notes
         notesTextField.isEnabled = isEditable
         enteredNoteHandler = handler

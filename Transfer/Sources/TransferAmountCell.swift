@@ -102,6 +102,7 @@ final class TransferAmountCell: UITableViewCell {
         titleLabel.text = "transfer_amount".localized()
         titleLabel.numberOfLines = 0
         titleLabel.adjustsFontForContentSizeCategory = true
+        amountTextField.resignFirstResponder()
         amountTextField.text = amount
         amountTextField.adjustsFontForContentSizeCategory = true
         amountTextField.isEnabled = isEnabled
