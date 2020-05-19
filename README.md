@@ -252,6 +252,7 @@ override public func didFlowComplete(with response: Any) {
 | Notification.Name.transferMethodDeactivated | Posted when a transfer method (bank account, bank card, PayPal account, prepaid card, paper check) has been deactivated. |
 | Notification.Name.transferCreated | Posted when a transfer of funds has been created. |
 | Notification.Name.transferScheduled | Posted when a transfer of funds has been scheduled. |
+| Notification.Name.authenticationError | Posted when SDK is unable to fetch new authentication token from client implementation. Client can choose to close the app/ logout/ navigate to some other screen when this notification is received. |
 
 When an object adds itself as an observer, it specifies which notifications it should receive. An object may, therefore, call this method several times in order to register itself as an observer for several different notifications.
 
@@ -327,6 +328,22 @@ override public func viewDidLoad() {
 }
 ```
 
+### How to use `Notification.Name.authenticationError`
+
+```swift
+override public func viewDidLoad() {
+super.viewDidLoad()
+...
+NotificationCenter.default.addObserver(self,
+selector: #selector(didAuthenticationErrorOccur(notification:)),
+name: Notification.Name.authenticationError, object: nil)
+}
+
+@objc func didAuthenticationErrorOccur(notification: Notification) {
+// Logout/ navigate to any other screen
+}
+```
+
 ## Customize the visual style
 UI SDK is designed to make the process of the UI Styling as simple as possible. The `Theme.swift` object is responsible for UI customization.
 
@@ -346,7 +363,7 @@ On the Theme is possible to customize the properties:
 | `Theme.Label.bodyFont` | `UIFont.preferredFont(forTextStyle: .body)` | The body font style |
 | `Theme.Label.captionOne` | `UIFont.preferredFont(forTextStyle: .caption1)` | The caption one font style |
 | `Theme.Label.footnoteFont` | `UIFont.preferredFont(forTextStyle: .footnote)` | The footnote font style |
-| `Theme.NavigationBar.barStyle` | `UIBarStyle.black` | The `UINavigationBar` bar style. |
+| `Theme.NavigationBar.barStyle` | `UIBarStyle.default` | The `UINavigationBar` bar style. |
 | `Theme.NavigationBar.isTranslucent` | `false`	| Sets the opaque background color |
 | `Theme.NavigationBar.shadowColor` | `UIColor.clear`	| The color of NavigationBar shadow |
 | `Theme.Button.color` | `Theme.themeColor` | The button primary color |
@@ -413,13 +430,16 @@ Theme.Label.errorColor = .red
 In Hyperwallet UI SDK, we categorized HyperwalletException into three groups, which are input errors (business errors), network errors and unexpected errors.
 
 ### Unexpected Error
-Once an unexpected error happened, an AlertView that only contains the `OK` button will be shown in the UI.
+Once an unexpected error occurs, an AlertView that only contains the `OK` button will be shown in the UI.
 
 ### Network Error
-Network errors happen due to connectivity issues, such as poor-quality network connection, the request timed out from the server side, etc. Once a network error happened, an AlertView that contains a `Cancel` and a `Try Again` buttons will be shown in the UI.
+Network errors occurs due to connectivity issues, such as poor-quality network connection, the request timed out from the server side, etc. Once a network error happened, an AlertView that contains a `Cancel` and a `Try Again` buttons will be shown in the UI.
 
 ### Business Errors
-Business errors happen when the Hyperwallet platform has found invalid information or some business restriction related to the data has been submitted and require some action from the user.
+Business errors occurs when the Hyperwallet platform has found invalid information or some business restriction related to the data has been submitted and require some action from the user.
+
+### Authentication Error
+Authentication error occurs when the Hyperwallet SDK is not able to fetch the authentication token from the client implementation.
 
 ## License
 The Hyperwallet iOS SDK is open source and available under the [MIT](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/blob/master/LICENSE) license

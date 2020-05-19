@@ -61,10 +61,6 @@ public class ThemeManager: NSObject {
         proxy.backItem?.backBarButtonItem?.tintColor = Theme.tintColor
         proxy.barStyle = Theme.NavigationBar.barStyle
         proxy.isTranslucent = Theme.NavigationBar.isTranslucent
-        proxy.shadowImage = UIImage.imageWithColor(
-            color: Theme.NavigationBar.shadowColor,
-            size: CGSize(width: 1, height: 1)
-        )
     }
 
     static func applyTo(searchBar: UISearchBar) {
