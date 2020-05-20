@@ -30,18 +30,21 @@ final class ListReceiptController: UITableViewController {
     private var presenter: ListReceiptPresenter!
     private let sectionTitleDateFormat = "MMMM yyyy"
     private var loadMoreReceipts = false
-
     private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "empty_list_receipt_message".localized())
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        title = "title_receipts".localized()
-        largeTitle()
         setViewBackgroundColor()
-        navigationItem.backBarButtonItem = UIBarButtonItem.back
         initializePresenter()
-        presenter.listReceipts()
         setupListReceiptTableView()
+        presenter.listReceipts()
+    }
+
+    override public func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let currentNavigationItem: UINavigationItem = tabBarController?.navigationItem ?? navigationItem
+        currentNavigationItem.backBarButtonItem = UIBarButtonItem.back
+        titleDisplayMode(.always, for: "title_receipts".localized())
     }
 
     private func initializePresenter() {
@@ -67,7 +70,7 @@ final class ListReceiptController: UITableViewController {
     override public func numberOfSections(in tableView: UITableView) -> Int {
         return presenter.sectionData.count
     }
-
+    /// Returns title for header
     override public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let date = presenter.sectionData[section].key
         return date.formatDateToString(dateFormat: sectionTitleDateFormat)
@@ -90,7 +93,7 @@ final class ListReceiptController: UITableViewController {
         }
     }
 
-    override public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    override public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         if loadMoreReceipts {
             presenter.listReceipts()
             loadMoreReceipts = false
@@ -113,7 +116,7 @@ final class ListReceiptController: UITableViewController {
 // MARK: `ListReceiptView` delegate
 extension ListReceiptController: ListReceiptView {
     /// Loads the receipts
-    func loadReceipts() {
+    func reloadData() {
         if presenter.sectionData.isNotEmpty {
             toggleEmptyListView(hideLabel: true)
         } else {
@@ -135,8 +138,14 @@ extension ListReceiptController: ListReceiptView {
         }
     }
 
-    func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
-        let errorView = ErrorView(viewController: self, error: error)
+    func showError(_ error: HyperwalletErrorType,
+                   pageName: String,
+                   pageGroup: String,
+                   _ retry: (() -> Void)?) {
+        let errorView = ErrorView(viewController: self,
+                                  error: error,
+                                  pageName: pageName,
+                                  pageGroup: pageGroup)
         errorView.show(retry)
     }
 

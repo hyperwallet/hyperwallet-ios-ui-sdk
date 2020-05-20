@@ -25,17 +25,13 @@ import UserRepository
 import HyperwalletSDK
 
 protocol CreateTransferView: class {
-    typealias SelectItemHandler = (_ value: HyperwalletTransferMethod) -> Void
-    typealias MarkCellHandler = (_ value: HyperwalletTransferMethod) -> Bool
-
     func hideLoading()
     func notifyTransferCreated(_ transfer: HyperwalletTransfer)
-    func showCreateTransfer()
-    func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?)
-    func showGenericTableView(items: [HyperwalletTransferMethod],
-                              title: String,
-                              selectItemHandler: @escaping SelectItemHandler,
-                              markCellHandler: @escaping MarkCellHandler)
+    func reloadData()
+    func showError(_ error: HyperwalletErrorType,
+                   pageName: String,
+                   pageGroup: String,
+                   _ retry: (() -> Void)?)
     func showLoading()
     func showScheduleTransfer(_ transfer: HyperwalletTransfer)
     func updateTransferSection()
@@ -45,6 +41,8 @@ protocol CreateTransferView: class {
 
 final class CreateTransferPresenter {
     private unowned let view: CreateTransferView
+    private let pageName = "transfer-funds:create-transfer"
+    private let pageGroup = "transfer-funds"
 
     private lazy var userRepository: UserRepository = {
         UserRepositoryFactory.shared.userRepository()
@@ -84,7 +82,7 @@ final class CreateTransferPresenter {
         self.view = view
     }
 
-    func initializeSections() {
+    private func initializeSections() {
         sectionData.removeAll()
 
         let createTransferDestinationSection = CreateTransferSectionDestinationData()
@@ -103,9 +101,7 @@ final class CreateTransferPresenter {
 
     func loadCreateTransfer() {
         view.showLoading()
-        if sourceToken != nil {
-            loadTransferMethods()
-        } else {
+        if sourceToken != nil { loadTransferMethods() } else {
             userRepository.getUser { [weak self] result in
                 guard let strongSelf = self else {
                     return
@@ -113,9 +109,11 @@ final class CreateTransferPresenter {
                 switch result {
                 case .failure(let error):
                     strongSelf.view.hideLoading()
-                    strongSelf.view.showError(error, { () -> Void in
+                    strongSelf.view.showError(error,
+                                              pageName: strongSelf.pageName,
+                                              pageGroup: strongSelf.pageGroup) {
                         strongSelf.loadCreateTransfer()
-                    })
+                    }
 
                 case .success(let user):
                     strongSelf.sourceToken = user?.token
@@ -134,9 +132,11 @@ final class CreateTransferPresenter {
             switch result {
             case .failure(let error):
                 strongSelf.view.hideLoading()
-                strongSelf.view.showError(error, { () -> Void in
+                strongSelf.view.showError(error,
+                                          pageName: strongSelf.pageName,
+                                          pageGroup: strongSelf.pageGroup) {
                     strongSelf.loadTransferMethods()
-                })
+                }
 
             case .success(let result):
                 if strongSelf.selectedTransferMethod == nil {
@@ -151,8 +151,9 @@ final class CreateTransferPresenter {
         guard let sourceToken = sourceToken,
             let destinationToken = selectedTransferMethod?.token,
             let destinationCurrency = destinationCurrency else {
+                initializeSections()
+                view.reloadData()
                 view.hideLoading()
-                view.showCreateTransfer()
                 return
         }
         let transfer = HyperwalletTransfer.Builder(clientTransferId: clientTransferId,
@@ -168,14 +169,17 @@ final class CreateTransferPresenter {
             strongSelf.view.hideLoading()
             switch result {
             case .failure(let error):
-                strongSelf.view.showError(error, { () -> Void in
+                strongSelf.view.showError(error,
+                                          pageName: strongSelf.pageName,
+                                          pageGroup: strongSelf.pageGroup) {
                     strongSelf.createInitialTransfer()
-                })
+                }
 
             case .success(let transfer):
                 strongSelf.availableBalance = transfer?.destinationAmount
-                strongSelf.view.showCreateTransfer()
             }
+            strongSelf.initializeSections()
+            strongSelf.view.reloadData()
         }
     }
 
@@ -205,9 +209,11 @@ final class CreateTransferPresenter {
                 switch result {
                 case .failure(let error):
                     strongSelf.errorHandler(for: error) {
-                        strongSelf.view.showError(error, { () -> Void in
+                        strongSelf.view.showError(error,
+                                                  pageName: strongSelf.pageName,
+                                                  pageGroup: strongSelf.pageGroup) {
                             strongSelf.createTransfer()
-                        })
+                        }
                     }
 
                 case .success(let transfer):
@@ -223,46 +229,6 @@ final class CreateTransferPresenter {
         }
     }
 
-    // MARK: - Destination view
-    func showSelectDestinationAccountView() {
-        transferMethodRepository.listTransferMethods { [weak self] result in
-            guard let strongSelf = self else {
-                return
-            }
-            switch result {
-            case .success(let pageList):
-                if let transferMethods = pageList?.data {
-                    strongSelf.view.showGenericTableView(items: transferMethods,
-                                                         title: "transfer_select_destination".localized(),
-                                                         selectItemHandler: strongSelf
-                                                            .selectDestinationAccountHandler(),
-                                                         markCellHandler: strongSelf
-                                                            .destinationAccountMarkCellHandler())
-                }
-
-            case .failure(let error):
-                strongSelf.view.showError(error, { () -> Void in
-                    strongSelf.loadTransferMethods()
-                })
-            }
-        }
-    }
-
-    private func destinationAccountMarkCellHandler() -> CreateTransferView.MarkCellHandler {
-        return { [weak selectedTransferMethod] item in
-            selectedTransferMethod?.token == item.token
-        }
-    }
-
-    private func selectDestinationAccountHandler() -> CreateTransferView.SelectItemHandler {
-        return { [weak self] item in
-            self?.selectedTransferMethod = item
-            self?.amount = nil
-            self?.transferAllFundsIsOn = false
-            self?.createInitialTransfer()
-        }
-    }
-
     func resetErrorMessagesForAllSections() {
         sectionData.forEach { $0.errorMessage = nil }
         CreateTransferController.FooterSection.allCases.forEach({ view.updateFooter(for: $0) })
@@ -273,10 +239,12 @@ final class CreateTransferPresenter {
         case .business:
             resetErrorMessagesForAllSections()
             if let errors = error.getHyperwalletErrors()?.errorList, errors.isNotEmpty {
+                updateFooterContent(errors)
                 if errors.contains(where: { $0.fieldName == nil }) {
-                    view.showError(error) { [weak self] in self?.updateFooterContent(errors) }
-                } else {
-                    updateFooterContent(errors)
+                    view.showError(error,
+                                   pageName: pageName,
+                                   pageGroup: pageGroup,
+                                   nil)
                 }
             }
 

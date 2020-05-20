@@ -27,7 +27,6 @@ import UIKit
 final class SelectTransferMethodTypeController: UITableViewController {
     // MARK: - Outlets
     private var countryCurrencyTableView: UITableView!
-
     private var spinnerView: SpinnerView?
     private var presenter: SelectTransferMethodTypePresenter!
     private var countryCurrencyView: CountryCurrencyTableView!
@@ -42,14 +41,18 @@ final class SelectTransferMethodTypeController: UITableViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         initializeData()
-        title = "add_account_title".localized()
-        largeTitle()
         setViewBackgroundColor()
-        navigationItem.backBarButtonItem = UIBarButtonItem.back
         initializePresenter()
         setupCountryCurrencyTableView()
         setupTransferMethodTypeTableView()
         presenter.loadTransferMethodKeys(forceUpdate)
+    }
+
+    override public func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let currentNavigationItem: UINavigationItem = tabBarController?.navigationItem ?? navigationItem
+        currentNavigationItem.backBarButtonItem = UIBarButtonItem.back
+        titleDisplayMode(.always, for: "add_account_title".localized())
     }
 
     private func initializePresenter() {
@@ -84,14 +87,15 @@ final class SelectTransferMethodTypeController: UITableViewController {
 }
 
 extension SelectTransferMethodTypeController {
+    /// Returns  transfer method count
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.sectionData.count
     }
-
+    /// Returns tableview section count
     override public func numberOfSections(in tableView: UITableView) -> Int {
         return presenter.countryCurrencySectionData.isNotEmpty ? 1:0
     }
-
+    /// Display transfer methods
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SelectTransferMethodTypeCell.reuseIdentifier,
                                                  for: indexPath)
@@ -102,18 +106,19 @@ extension SelectTransferMethodTypeController {
         return cell
     }
 }
-
+   // MARK: - TableViewController delegate
 extension SelectTransferMethodTypeController {
+    /// Returns  headerview
     override public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return countryCurrencyTableView
     }
-
+    /// Returns height of headerview
     override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         let blankHeaderHeight = countryCurrencyTableView.estimatedRowHeight / 2.5
         return countryCurrencyTableView
             .estimatedRowHeight * CGFloat(presenter.countryCurrencySectionData.count) + blankHeaderHeight
     }
-
+    /// To select transfer method
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.navigateToAddTransferMethod(indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
@@ -122,11 +127,11 @@ extension SelectTransferMethodTypeController {
 
 // MARK: - SelectTransferMethodView
 extension SelectTransferMethodTypeController: SelectTransferMethodTypeView {
-    func transferMethodTypeTableViewReloadData() {
+    func reloadTransferMethodTypeData() {
         tableView.reloadData()
     }
 
-    func countryCurrencyTableViewReloadData() {
+    func reloadCountryCurrencyData() {
         countryCurrencyTableView.reloadData()
     }
 
@@ -155,8 +160,14 @@ extension SelectTransferMethodTypeController: SelectTransferMethodTypeView {
         }
     }
 
-    func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
-        let errorView = ErrorView(viewController: self, error: error)
+    func showError(_ error: HyperwalletErrorType,
+                   pageName: String,
+                   pageGroup: String,
+                   _ retry: (() -> Void)?) {
+        let errorView = ErrorView(viewController: self,
+                                  error: error,
+                                  pageName: pageName,
+                                  pageGroup: pageGroup)
         errorView.show(retry)
     }
 
@@ -169,8 +180,7 @@ extension SelectTransferMethodTypeController: SelectTransferMethodTypeView {
                               selectItemHandler: @escaping SelectItemHandler,
                               markCellHandler: @escaping MarkCellHandler,
                               filterContentHandler: @escaping FilterContentHandler) {
-        let genericTableView = GenericController < CountryCurrencyCell,
-            GenericCellConfiguration> ()
+        let genericTableView = GenericController<CountryCurrencyCell, GenericCellConfiguration>()
         genericTableView.title = title
         genericTableView.items = items
         genericTableView.selectedHandler = selectItemHandler
@@ -181,6 +191,7 @@ extension SelectTransferMethodTypeController: SelectTransferMethodTypeView {
 }
 
 // MARK: Country and Currency - UITableViewDataSource UITableViewDelegate
+/// The TableView to display country and currency
 final class CountryCurrencyTableView: NSObject {
     weak var presenter: SelectTransferMethodTypePresenter!
 
@@ -189,8 +200,9 @@ final class CountryCurrencyTableView: NSObject {
         self.presenter = presenter
     }
 }
-
+// MARK: - TableViewController Data source
 extension CountryCurrencyTableView: UITableViewDataSource {
+    /// Returns number of country and currency
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.countryCurrencySectionData.count
     }
@@ -207,7 +219,7 @@ extension CountryCurrencyTableView: UITableViewDataSource {
         return cell
     }
 }
-
+// MARK: - TableViewController delegate
 extension CountryCurrencyTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.performShowSelectCountryOrCurrencyView(index: indexPath.row)
@@ -220,5 +232,15 @@ extension CountryCurrencyTableView: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return nil
+    }
+}
+
+extension SelectTransferMethodTypeController {
+    /// This function will navigate back from next page and pass the control back to it's caller
+    override public func didFlowComplete(with response: Any) {
+        if response as? HyperwalletTransferMethod != nil {
+            coordinator?.navigateBackFromNextPage(with: response)
+            flowDelegate?.didFlowComplete(with: response)
+        }
     }
 }

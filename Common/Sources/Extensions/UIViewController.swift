@@ -20,24 +20,21 @@ import UIKit
 
 /// The UIViewController extension
 public extension UIViewController {
-    /// To always prefer LargeTitles
-    func largeTitle() {
-        if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.prefersLargeTitles = true
-            self.navigationItem.largeTitleDisplayMode = .always
-        }
-    }
-
     /// To set the display mode for large titles
     ///
-    /// - Parameter mode: UINavigationItem.LargeTitleDisplayMode
-    func titleDisplayMode(_ mode: UINavigationItem.LargeTitleDisplayMode) {
+    /// - Parameters:
+    ///   - mode: UINavigationItem.LargeTitleDisplayMode
+    ///   - title: title displayed
+    func titleDisplayMode(_ mode: UINavigationItem.LargeTitleDisplayMode, for title: String?) {
+        let currentNavigationItem: UINavigationItem = self.tabBarController?.navigationItem ?? self.navigationItem
+        currentNavigationItem.title = title
         if #available(iOS 11.0, *) {
-            self.navigationItem.largeTitleDisplayMode = mode
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+            currentNavigationItem.largeTitleDisplayMode = mode
         }
     }
 
-    /// Set bavkground color for the view
+    /// Set background color for the view
     func setViewBackgroundColor() {
         view.backgroundColor = Theme.ViewController.backgroundColor
     }
@@ -56,6 +53,7 @@ public extension UIViewController {
 }
 
 extension UIViewController: HyperwalletFlowDelegate {
+    /// Protocol method
     @objc
     open func didFlowComplete(with response: Any) {
     }
@@ -64,7 +62,7 @@ extension UIViewController: HyperwalletFlowDelegate {
         static var coordinator =  [ObjectIdentifier: HyperwalletCoordinator]()
         static var initializationData = [ObjectIdentifier: [InitializationDataField: Any]]()
     }
-
+    /// The reference to call didFlowComplete
     public weak var flowDelegate: HyperwalletFlowDelegate? {
         get {
             return Holder.flowDelegate[ObjectIdentifier(self)]
@@ -73,6 +71,7 @@ extension UIViewController: HyperwalletFlowDelegate {
             Holder.flowDelegate[ObjectIdentifier(self)] = newValue
         }
     }
+    /// The reference to start/navigate Hyperwallet UI SDK flow
     public var coordinator: HyperwalletCoordinator? {
         get {
             return Holder.coordinator[ObjectIdentifier(self)]
@@ -81,6 +80,7 @@ extension UIViewController: HyperwalletFlowDelegate {
             Holder.coordinator[ObjectIdentifier(self)] = newValue
         }
     }
+    /// Data required to initialize a flow (render UI screen)
     public var initializationData: [InitializationDataField: Any]? {
         get {
             return Holder.initializationData[ObjectIdentifier(self)]

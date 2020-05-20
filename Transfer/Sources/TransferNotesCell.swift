@@ -19,7 +19,7 @@
 #if !COCOAPODS
 import Common
 #endif
-
+/// The TableViewCell to display transfer notes
 final class TransferNotesCell: UITableViewCell {
     static let reuseIdentifier = "transferNotesCellIdentifier"
     typealias EnteredNoteHandler = (_ value: String?) -> Void
@@ -61,9 +61,7 @@ final class TransferNotesCell: UITableViewCell {
    }
 
     func configure(notes: String?, isEditable: Bool, _ handler: @escaping EnteredNoteHandler) {
-        if let notes = notes {
-            notesTextField.text = notes
-        }
+        notesTextField.text = notes
         notesTextField.isEnabled = isEditable
         enteredNoteHandler = handler
     }

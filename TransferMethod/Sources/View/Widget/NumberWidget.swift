@@ -20,8 +20,8 @@ import UIKit
 
 /// Represents the number input widget. 
 class NumberWidget: TextWidget {
-    required init(field: HyperwalletField) {
-        super.init(field: field)
+    required init(field: HyperwalletField, pageName: String, pageGroup: String) {
+        super.init(field: field, pageName: pageName, pageGroup: pageGroup)
         textField.keyboardType = UIKeyboardType.numberPad
     }
 

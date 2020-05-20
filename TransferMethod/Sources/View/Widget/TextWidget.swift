@@ -24,6 +24,18 @@ import UIKit
 
 /// Represents the text input widget.
 class TextWidget: AbstractWidget {
+    private var allowedLetters: String {
+        let lowercaseLetters = UInt32("a") ... UInt32("z")
+        let uppercaseLetters = UInt32("A") ... UInt32("Z")
+        return String(String.UnicodeScalarView(lowercaseLetters.compactMap(UnicodeScalar.init)) +
+            uppercaseLetters.compactMap(UnicodeScalar.init))
+    }
+
+    private var allowedNumbers: String {
+        let numbers = UInt32("0") ... UInt32("9")
+        return String(String.UnicodeScalarView(numbers.compactMap(UnicodeScalar.init)))
+    }
+
     var textField: PasteOnlyTextField = {
         let textField = PasteOnlyTextField()
         textField.setContentHuggingPriority(UILayoutPriority.defaultLow, for: NSLayoutConstraint.Axis.horizontal)
@@ -34,6 +46,10 @@ class TextWidget: AbstractWidget {
     }()
 
     override func value() -> String {
+        if let scrubRegex = field.mask?.scrubRegex,
+            let text = textField.text {
+            return getScrubbedText(formattedText: text, scrubRegex: scrubRegex)
+        }
         return textField.text ?? ""
     }
 
@@ -54,7 +70,9 @@ class TextWidget: AbstractWidget {
         textField.placeholder = "\(field.placeholder ?? "")"
         textField.delegate = self
         textField.accessibilityIdentifier = field.name
-        textField.text = field.value
+        if let valueString = field.value {
+            textField.text = formatDisplayString(with: getFormatPattern(inputText: valueString), inputText: valueString)
+        }
 
         if field.isEditable ?? true {
             textField.isUserInteractionEnabled = true
@@ -69,6 +87,192 @@ class TextWidget: AbstractWidget {
         textField.textColor = field.isEditable ?? true ? Theme.Text.color : Theme.Text.disabledColor
         textField.font = Theme.Label.bodyFont
         textField.adjustsFontForContentSizeCategory = true
+        textField.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
         addArrangedSubview(textField)
     }
+
+    @objc
+    private func textFieldDidChange() {
+        if (field.mask?.defaultPattern) != nil {
+            let text = getUnformattedText()
+            if !text.isEmpty {
+                textField.text = formatDisplayString(with: getFormatPattern(inputText: text), inputText: text)
+            } else {
+                textField.text = ""
+            }
+        }
+    }
+
+    /// Formats input text as per pattern
+    /// Character after escape character is not formatted and written as it is
+    /// For example for pattern `(###)#\\@#`
+    /// For input text `11199` output will be `(111)9@9`
+    func formatDisplayString(with pattern: String?, inputText: String) -> String {
+        if let pattern = pattern {
+            let currentText = getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue,
+                                                         inputText)
+            var finalText = ""
+            var currentIndex = CurrentIndex(textIndex: inputText.startIndex, patternIndex: pattern.startIndex)
+            var isEscapedCharacter = false
+
+            if let currentText = currentText, !currentText.isEmpty {
+                var patternCharactersToBeWritten = ""
+
+                while true {
+                    let currentPatternCharacter = pattern[currentIndex.patternIndex]
+
+                    if isEscapedCharacter {
+                        isEscapedCharacter = false
+                        finalText += String(currentPatternCharacter)
+                        currentIndex.patternIndex = pattern.index(after: currentIndex.patternIndex)
+                        if currentIndex.patternIndex >= pattern.endIndex
+                            || currentIndex.textIndex >= currentText.endIndex {
+                            break
+                        }
+                        continue
+                    }
+
+                    applyFormatForPatternCharacter(currentText: currentText,
+                                                   finalText: &finalText,
+                                                   currentIndex: &currentIndex,
+                                                   pattern: pattern,
+                                                   patternCharactersToBeWritten: &patternCharactersToBeWritten)
+                    isEscapedCharacter = self.isEscapedCharacter(currentPatternCharacter)
+
+                    if currentIndex.patternIndex >= pattern.endIndex
+                        || currentIndex.textIndex >= currentText.endIndex {
+                        break
+                    }
+                }
+            }
+            return finalText
+        }
+        return inputText
+    }
+
+    /// Compares pattern character with corresponding text character and replaces with formatted characters
+    /// Only alphanumeric input text is considered, everything else is ignored
+    /// If a pattern character matches corresponding text character then it is replaced
+    /// For example `#` matches `9`
+    /// If pattern character doesn't match corresponding text character then that pattern character is stored
+    /// For ex.  pattern character `(` will not match any user input text and will be stored
+    /// If there is any match for next character then stored characters will be prepended
+    /// For example, with pattern `(#)-@`
+    /// For input text `9`, formatted text will be `(9`
+    /// For input text `99`, formatted text will remain `(9` as second `9` doesn't match `@`
+    /// For input text `9a`, formatted text will be `(9)-a`
+    private func applyFormatForPatternCharacter(currentText: String,
+                                                finalText: inout String,
+                                                currentIndex: inout CurrentIndex,
+                                                pattern: String,
+                                                patternCharactersToBeWritten: inout String) {
+        let currentPatternCharacter = pattern[currentIndex.patternIndex]
+        let currentTextCharacter = currentText[currentIndex.textIndex]
+
+        switch currentPatternCharacter {
+        case PatternCharacter.lettersAndNumbersPatternCharacter.rawValue:
+            formatTextForLettersAndNumbers(currentTextCharacter: currentTextCharacter,
+                                           finalText: &finalText,
+                                           currentIndex: &currentIndex,
+                                           pattern: pattern,
+                                           patternCharactersToBeWritten: &patternCharactersToBeWritten)
+            currentIndex.textIndex = currentText.index(after: currentIndex.textIndex)
+
+        case PatternCharacter.lettersOnlyPatternCharacter.rawValue,
+             PatternCharacter.numbersOnlyPatternCharacter.rawValue:
+            let filteredCharacter =
+                getTextForPatternCharacter(currentPatternCharacter, String(currentTextCharacter))
+            if let filteredCharacter = filteredCharacter?.first {
+                formatTextForLettersAndNumbers(currentTextCharacter: filteredCharacter,
+                                               finalText: &finalText,
+                                               currentIndex: &currentIndex,
+                                               pattern: pattern,
+                                               patternCharactersToBeWritten: &patternCharactersToBeWritten)
+            }
+            currentIndex.textIndex = currentText.index(after: currentIndex.textIndex)
+
+        default:
+            if !self.isEscapedCharacter(currentPatternCharacter) {
+                if currentPatternCharacter == currentTextCharacter {
+                    finalText += patternCharactersToBeWritten
+                    patternCharactersToBeWritten = ""
+                    finalText += String(currentTextCharacter)
+                    currentIndex.textIndex = currentText.index(after: currentIndex.textIndex)
+                } else {
+                    patternCharactersToBeWritten += String(currentPatternCharacter)
+                }
+            }
+            currentIndex.patternIndex = pattern.index(after: currentIndex.patternIndex)
+        }
+    }
+
+    private func formatTextForLettersAndNumbers(currentTextCharacter: Character,
+                                                finalText: inout String,
+                                                currentIndex: inout CurrentIndex,
+                                                pattern: String,
+                                                patternCharactersToBeWritten: inout String) {
+        finalText += patternCharactersToBeWritten
+        patternCharactersToBeWritten = ""
+        finalText += String(currentTextCharacter)
+        currentIndex.patternIndex = pattern.index(after: currentIndex.patternIndex)
+    }
+
+    private func getTextForPatternCharacter(_ patternCharacter: Character, _ text: String) -> String? {
+        switch patternCharacter {
+        case PatternCharacter.lettersAndNumbersPatternCharacter.rawValue:
+            return text
+                .components(separatedBy: CharacterSet(charactersIn: allowedLetters + allowedNumbers).inverted).joined()
+
+        case PatternCharacter.lettersOnlyPatternCharacter.rawValue:
+            return text.components(separatedBy: CharacterSet(charactersIn: allowedLetters).inverted).joined()
+
+        case PatternCharacter.numbersOnlyPatternCharacter.rawValue:
+            return text.components(separatedBy: CharacterSet(charactersIn: allowedNumbers).inverted).joined()
+
+        default:
+            return nil
+        }
+    }
+
+    func getFormatPattern(inputText: String) -> String? {
+        var maskPattern = field.mask?.defaultPattern
+        let conditionalPatterns = field.mask?.conditionalPatterns
+
+        if let matchingConditionalPattern = conditionalPatterns?.first(where: {
+            NSRegularExpression($0.regex).matches(inputText)
+        }) {
+            maskPattern = matchingConditionalPattern.pattern
+        }
+        return maskPattern
+    }
+
+    private func isEscapedCharacter(_ character: Character) -> Bool {
+        return character == "\\"
+    }
+
+    func getScrubbedText(formattedText: String, scrubRegex: String) -> String {
+        return formattedText.replacingOccurrences(
+            of: scrubRegex,
+            with: "",
+            options: NSString.CompareOptions.regularExpression,
+            range: nil)
+    }
+
+    private func getUnformattedText() -> String {
+        if let text = textField.text {
+            return getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue, text) ?? ""
+        }
+        return ""
+    }
+}
+
+private struct CurrentIndex {
+    var textIndex: String.Index
+    var patternIndex: String.Index
+}
+
+private enum PatternCharacter: Character {
+    case lettersAndNumbersPatternCharacter = "*"
+    case lettersOnlyPatternCharacter = "@"
+    case numbersOnlyPatternCharacter = "#"
 }

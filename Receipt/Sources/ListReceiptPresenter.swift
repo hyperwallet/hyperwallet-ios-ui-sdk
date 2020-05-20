@@ -18,21 +18,31 @@
 
 import HyperwalletSDK
 #if !COCOAPODS
+import Common
 import ReceiptRepository
 #endif
 
 protocol ListReceiptView: class {
     func hideLoading()
-    func loadReceipts()
-    func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?)
+    func reloadData()
+    func showError(_ error: HyperwalletErrorType,
+                   pageName: String,
+                   pageGroup: String,
+                   _ retry: (() -> Void)?)
     func showLoading()
 }
 
 final class ListReceiptPresenter {
     private unowned let view: ListReceiptView
-
-    private var offset = 0
     private let userReceiptLimit = 20
+
+    private let pageGroup = "receipts"
+    private lazy var pageName = {
+        prepaidCardToken == nil
+            ? "receipts:user:list-receipts"
+            : "receipts:prepaidCard:list-receipts"
+    }()
+    private var offset = 0
     private var prepaidCardToken: String?
     private lazy var userReceiptRepository = {
         ReceiptRepositoryFactory.shared.userReceiptRepository()
@@ -100,10 +110,14 @@ final class ListReceiptPresenter {
                     strongSelf.offset += receipts.count
 
                 case .failure(let error):
-                    strongSelf.view.showError(error, { strongSelf.listUserReceipts() })
+                    strongSelf.view.showError(error,
+                                              pageName: strongSelf.pageName,
+                                              pageGroup: strongSelf.pageGroup) {
+                        strongSelf.listUserReceipts()
+                    }
                     return
                 }
-                strongSelf.view.loadReceipts()
+                strongSelf.view.reloadData()
             }
     }
 
@@ -123,10 +137,14 @@ final class ListReceiptPresenter {
 
                 case .failure(let error):
                     guard let prepaidCardToken = strongSelf.prepaidCardToken else { break }
-                    strongSelf.view.showError(error, { strongSelf.listPrepaidCardReceipts(prepaidCardToken) })
+                    strongSelf.view.showError(error,
+                                              pageName: strongSelf.pageName,
+                                              pageGroup: strongSelf.pageGroup) {
+                        strongSelf.listPrepaidCardReceipts(prepaidCardToken)
+                    }
                     return
                 }
-                strongSelf.view.loadReceipts()
+                strongSelf.view.reloadData()
             }
     }
 

@@ -1,23 +1,23 @@
 Pod::Spec.new do |spec|
     spec.name                  = 'HyperwalletUISDK'
-    spec.version               = '1.0.0-beta04'
+    spec.version               = '1.0.0-beta05'
     spec.summary               = 'Hyperwallet UI SDK for iOS to integrate with Hyperwallet Platform'
     spec.homepage              = 'https://github.com/hyperwallet/hyperwallet-ios-ui-sdk'
     spec.license               = { :type => 'MIT', :file => 'LICENSE' }
     spec.author                = { 'Hyperwallet Systems Inc' => 'devsupport@hyperwallet.com' }
     spec.platform              = :ios
     spec.ios.deployment_target = '10.0'
-    spec.source                = { :git => 'https://github.com/hyperwallet/hyperwallet-ios-ui-sdk.git', :branch => "development"}
+    spec.source                = { :git => 'https://github.com/hyperwallet/hyperwallet-ios-ui-sdk.git', :tag => "#{spec.version}"}
     spec.requires_arc          = true
     spec.swift_version         = '5.0'
-    spec.dependency 'HyperwalletSDK', '1.0.0-beta05'
+    spec.dependency 'HyperwalletSDK', '1.0.0-beta06'
 
     spec.default_subspec = 'TransferMethod', 'Receipt', 'Transfer'
 
     spec.subspec "Common" do |common|
         common.resources = ['Common/**/*.xcassets', 'Common/**/*.ttf', 'Common/**/*.xib', 'Common/**/*.strings']
         common.source_files  = "Common/Sources/**/*.{swift,h}"
-        common.dependency "HyperwalletUISDK/UserRepository"
+        common.dependency 'Insights', '1.0.0-beta02'
     end
 
     spec.subspec "TransferMethodRepository" do |transferMethodRepository|
@@ -55,18 +55,5 @@ Pod::Spec.new do |spec|
         transfer.dependency 'HyperwalletUISDK/UserRepository'
         transfer.dependency 'HyperwalletUISDK/TransferRepository'
         transfer.dependency 'HyperwalletUISDK/TransferMethodRepository'
-    end
-
-    spec.test_spec 'Tests' do |ts|
-        ts.source_files = '**/Tests/**/*.swift'
-        ts.resources = '**/Tests/**/*.json'
-        ts.dependency 'Hippolyte', '0.6.0'
-    end
-
-    spec.test_spec 'UITests' do |ts|
-        ts.requires_app_host = true
-        ts.source_files = 'UITests/**/*.swift'
-        ts.resources = 'UITests/**/*.json'
-        ts.dependency 'Swifter', '1.4.6'
     end
 end

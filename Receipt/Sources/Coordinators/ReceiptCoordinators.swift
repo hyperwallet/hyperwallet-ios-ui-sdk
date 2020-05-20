@@ -21,12 +21,15 @@ import Common
 #endif
 import UIKit
 
+/// Coordinator class for ListReceipt
 public class ListReceiptCoordinator: NSObject, HyperwalletCoordinator {
     private let controller: ListReceiptController
     private var parentController: UIViewController?
 
     override init() {
         controller = ListReceiptController()
+        super.init()
+        self.applyTheme()
     }
     public func applyTheme() {
         ThemeManager.applyReceiptTheme()
@@ -38,7 +41,6 @@ public class ListReceiptCoordinator: NSObject, HyperwalletCoordinator {
 
     @objc
     public func navigate() {
-        controller.flowDelegate = parentController
         parentController?.show(controller, sender: parentController)
     }
 
@@ -51,19 +53,13 @@ public class ListReceiptCoordinator: NSObject, HyperwalletCoordinator {
     }
 
     public func navigateBackFromNextPage(with response: Any) {
-        if let parentController = parentController {
-            if let navigationController = controller.navigationController {
-                navigationController.popToViewController(parentController, animated: true)
-            } else {
-                controller.dismiss(animated: true, completion: nil)
-            }
-        }
-        controller.flowDelegate?.didFlowComplete(with: response)
+        controller.navigationController?.popViewController(animated: false)
     }
 
     public func start(initializationData: [InitializationDataField: Any]? = nil, parentController: UIViewController) {
         controller.coordinator = self
         controller.initializationData = initializationData
+        controller.flowDelegate = parentController
         self.parentController = parentController
     }
 }

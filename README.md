@@ -22,11 +22,11 @@ Note that this SDK is geared towards those who need both backend data and UI fea
 
 ## Dependencies
 
-- [HyperwalletSDK 1.0.0-beta05](https://github.com/hyperwallet/hyperwallet-ios-sdk)
+- [HyperwalletSDK 1.0.0-beta06](https://github.com/hyperwallet/hyperwallet-ios-sdk)
 
 ## Installation
 Use [Carthage](https://github.com/Carthage/Carthage) or [CocoaPods](https://cocoapods.org/) to integrate to HyperwalletSDK.
-Currently, the following modules are available: 
+Currently, the following modules are available:
 * TransferMethod - List, add or remove Transfer Methods
 * Transfer - Create a transfer from user account or prepaid card to available accounts for the user
 * Receipt - List user/prepaid card receipts
@@ -34,7 +34,7 @@ Adding one or more of these frameworks allows users to explore the particular fu
 ### Carthage
 Specify it in your Cartfile:
 ```ogdl
-github "hyperwallet/hyperwallet-ios-ui-sdk" "1.0.0-beta04"
+github "hyperwallet/hyperwallet-ios-ui-sdk" "1.0.0-beta05"
 ```
 Add desired modules using the `Linked Frameworks and Libraries` option to make them available in the app.
 Use `import <module-name>` to add the dependency within a file
@@ -42,13 +42,13 @@ Use `import <module-name>` to add the dependency within a file
 ### CocoaPods
 - Install a specific framework (install one or more frameworks based on your requirement)
 ```ruby
-pod "HyperwalletUISDK/TransferMethod", "1.0.0-beta04"
-pod "HyperwalletUISDK/Transfer", "1.0.0-beta04"
-pod "HyperwalletUISDK/Receipt", "1.0.0-beta04"
+pod "HyperwalletUISDK/TransferMethod", "1.0.0-beta05"
+pod "HyperwalletUISDK/Transfer", "1.0.0-beta05"
+pod "HyperwalletUISDK/Receipt", "1.0.0-beta05"
 ```
 - To install all available modules (TransferMethod, Transfer, Receipt)
 ```ruby
-pod 'HyperwalletUISDK', '~> 1.0.0-beta04'
+pod 'HyperwalletUISDK', '~> 1.0.0-beta05'
 ```
 Use `import HyperwalletUISDK` to add the dependency within a file.
 
@@ -62,8 +62,6 @@ the themes for all the modules in HyperwalletUISDK.
 For example:
 ```swift
 ...
-import HyperwalletUISDK
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
@@ -100,16 +98,12 @@ Initialize the `HyperwalletUISDK` with a `HyperwalletAuthenticationTokenProvider
 HyperwalletUI.setup(_ :HyperwalletAuthenticationTokenProvider)
 ```
 
-
 ## Authentication
 Your server side should be able to send a POST request to Hyperwallet endpoint `/rest/v3/users/{user-token}/authentication-token` to retrieve an [authentication token](https://jwt.io/).
 Then, you need to provide a class (an authentication provider) which implements HyperwalletAuthenticationTokenProvider to retrieve an authentication token from your server.
 
 Example implementation using the  `URLRequest` from Swift  Foundation :
 ```swift
-import Foundation
-import HyperwalletSDK
-
 public struct AuthenticationTokenProviders: HyperwalletAuthenticationTokenProvider {
     private let url = URL(string: "http://your/server/to/retrieve/authenticationToken")!
 
@@ -168,6 +162,15 @@ coordinator.navigate()
 let coordinator = HyperwalletUI.shared.selectTransferMethodTypeCoordinator(parentController: self)
 coordinator.navigate()
 ```
+Also add following method to dismiss the presented view and perform any action based on the transfer method created.
+```swift
+override public func didFlowComplete(with response: Any) {
+    if let transferMethod = response as? HyperwalletTransferMethod {
+    navigationController?.popViewController(animated: false)
+    }
+}
+```
+
 
 ### Create a transfer method
 The form fields are based on the country, currency, user's profile type, and transfer method type. These values should be passed to this method to create a new Transfer Method.
@@ -179,6 +182,14 @@ let coordinator = HyperwalletUI.shared.addTransferMethodCoordinator(
     "BANK_ACCOUNT", // The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD, PAYPAL_ACCOUNT
     parentController: self)
 coordinator.navigate()
+```
+Also add following method to dismiss the presented view on successful creation of transfer method and perform any action based on the transfer method created.
+```swift
+override public func didFlowComplete(with response: Any) {
+    if let transferMethod = response as? HyperwalletTransferMethod {
+    navigationController?.popViewController(animated: false)
+    }
+}
 ```
 
 ### Lists the user's receipts
@@ -193,7 +204,7 @@ let coordinator = HyperwalletUI.shared.listPrepaidCardReceiptCoordinator(parentC
 coordinator.navigate()
 ```
 
-### Make a new transfer from user's account 
+### Make a new transfer from user's account
 To add new Transfer Method from Transfer module, TransferMethod module needs to be added as a dependency in the app. If TransferMethod module is not added, users will not be able to add a new Transfer Method inside the Transfer flow.
 ```swift
 let clientTransferId = UUID().uuidString.lowercased()
@@ -201,8 +212,18 @@ let coordinator = HyperwalletUI.shared
             .createTransferFromUserCoordinator(clientTransferId: clientTransferId, parentController: self)
 coordinator.navigate()
 ```
+Also add following method to dismiss the presented view on successful creation of transfer and perform any action based on the transfer created.
+```swift
+override public func didFlowComplete(with response: Any) {
+    if let statusTransition = response as? HyperwalletStatusTransition, let transition = statusTransition.transition {
+        if transition == HyperwalletStatusTransition.Status.scheduled {
+            navigationController?.popViewController(animated: false)
+        }
+    }
+}
+```
 
-### Make a new transfer from prepaid card 
+### Make a new transfer from prepaid card
 ```swift
 let clientTransferId = UUID().uuidString.lowercased()
 let coordinator = HyperwalletUI.shared
@@ -210,6 +231,16 @@ let coordinator = HyperwalletUI.shared
                                                       sourceToken: "your-prepaid-card-token",
                                                       parentController: self)
 coordinator.navigate()
+```
+Also add following method to dismiss the presented view on successful creation of transfer and perform any action based on the transfer created.
+```swift
+override public func didFlowComplete(with response: Any) {
+    if let statusTransition = response as? HyperwalletStatusTransition, let transition = statusTransition.transition {
+        if transition == HyperwalletStatusTransition.Status.scheduled {
+            navigationController?.popViewController(animated: false)
+        }
+    }
+}
 ```
 
 
@@ -221,15 +252,13 @@ coordinator.navigate()
 | Notification.Name.transferMethodDeactivated | Posted when a transfer method (bank account, bank card, PayPal account, prepaid card, paper check) has been deactivated. |
 | Notification.Name.transferCreated | Posted when a transfer of funds has been created. |
 | Notification.Name.transferScheduled | Posted when a transfer of funds has been scheduled. |
+| Notification.Name.authenticationError | Posted when SDK is unable to fetch new authentication token from client implementation. Client can choose to close the app/ logout/ navigate to some other screen when this notification is received. |
 
 When an object adds itself as an observer, it specifies which notifications it should receive. An object may, therefore, call this method several times in order to register itself as an observer for several different notifications.
 
 ### How to use `Notification.Name.transferMethodAdded`
 
 ```swift
-import HyperwalletSDK
-import HyperwalletUISDK
-
 override public func viewDidLoad() {
     super.viewDidLoad()
     ...
@@ -248,9 +277,6 @@ override public func viewDidLoad() {
 ### How to use `Notification.Name.transferMethodDeactivated`
 
 ```swift
-import HyperwalletSDK
-import HyperwalletUISDK
-
 override public func viewDidLoad() {
     super.viewDidLoad()
     ...
@@ -269,9 +295,6 @@ override public func viewDidLoad() {
 ### How to use `Notification.Name.transferCreated`
 
 ```swift
-import HyperwalletSDK
-import HyperwalletUISDK
-
 override public func viewDidLoad() {
     super.viewDidLoad()
     ...
@@ -290,9 +313,6 @@ override public func viewDidLoad() {
 ### How to use `Notification.Name.transferScheduled`
 
 ```swift
-import HyperwalletSDK
-import HyperwalletUISDK
-
 override public func viewDidLoad() {
     super.viewDidLoad()
     ...
@@ -308,6 +328,22 @@ override public func viewDidLoad() {
 }
 ```
 
+### How to use `Notification.Name.authenticationError`
+
+```swift
+override public func viewDidLoad() {
+super.viewDidLoad()
+...
+NotificationCenter.default.addObserver(self,
+selector: #selector(didAuthenticationErrorOccur(notification:)),
+name: Notification.Name.authenticationError, object: nil)
+}
+
+@objc func didAuthenticationErrorOccur(notification: Notification) {
+// Logout/ navigate to any other screen
+}
+```
+
 ## Customize the visual style
 UI SDK is designed to make the process of the UI Styling as simple as possible. The `Theme.swift` object is responsible for UI customization.
 
@@ -317,34 +353,41 @@ On the Theme is possible to customize the properties:
 
 | Property | Default Value | Description |
 |:--------|:-------------|:-----------|
-| `Theme.themeColor` | `#00AFD0` | The primary color |
+| `Theme.themeColor` | `0x00AFD0` | The main color |
 | `Theme.tintColor` | `UIColor.white` | The tint color |
-| `Theme.Label.color` | `#FFFFFF` | The primary color |
-| `Theme.Label.errorColor` | `#FF3B30` | The color to highlight errors|
-| `Theme.Label.subTitleColor` | `#666666` | The subtitle color |
-| `Theme.Label.textColor` | `#8e8e93` | The text color |
+| `Theme.Label.color` | `UIColor.black` | The label primary color |
+| `Theme.Label.errorColor` | `0xFF3B30` | The color to highlight errors|
+| `Theme.Label.subTitleColor` | `0x666666` | The subtitle color |
+| `Theme.Label.textColor` | `0x8e8e93` | The text color |
 | `Theme.Label.titleFont` | `UIFont.preferredFont(forTextStyle: .headline)` | The title font style |
 | `Theme.Label.bodyFont` | `UIFont.preferredFont(forTextStyle: .body)` | The body font style |
-| `Theme.Label.bodyFontMedium` | `UIFont.systemFont(ofSize: bodyFont.pointSize, weight: .medium)` | The body font style with medium weight |
 | `Theme.Label.captionOne` | `UIFont.preferredFont(forTextStyle: .caption1)` | The caption one font style |
-| `Theme.Label.captionOneMedium` | `UIFont.systemFont(ofSize: captionOne.pointSize, weight: .medium)` | The caption one font style with medium weight |
 | `Theme.Label.footnoteFont` | `UIFont.preferredFont(forTextStyle: .footnote)` | The footnote font style |
-| `Theme.NavigationBar.barStyle` | `UIBarStyle.black` | The `UINavigationBar` bar style. |
-| `Theme.NavigationBar.isTranslucent` | `false`	| Sets the opaque background color. When the value is false the navigation bar will appear with a solid color. |
+| `Theme.NavigationBar.barStyle` | `UIBarStyle.default` | The `UINavigationBar` bar style. |
+| `Theme.NavigationBar.isTranslucent` | `false`	| Sets the opaque background color |
+| `Theme.NavigationBar.shadowColor` | `UIColor.clear`	| The color of NavigationBar shadow |
 | `Theme.Button.color` | `Theme.themeColor` | The button primary color |
+| `Theme.Button.font` | `Theme.Label.bodyFont` | The button font |
 | `Theme.Text.color` | `UIColor.black` | The text primary color |
+| `Theme.Text.disabledColor` | `Theme.Label.textColor` | The text disabled color |
 | `Theme.SearchBar.textFieldTintColor` | `Theme.tintColor` | The `UITextField` tint color |
-| `Theme.SearchBar.textFieldBackgroundColor` | `#28BBD7` | The `UITextField` background color |
-| `Theme.Cell.height` | `88` | The `UITableViewViewCell` height for the List transfer method items and the Select transfer method type items. |
-| `Theme.Cell.rowHeight` | `44`	| The common `UITableViewViewCell` height. |
+| `Theme.SearchBar.textFieldBackgroundColor` | `0x28BBD7` | The `UITextField` background color |
+| `Theme.Cell.smallHeight` | `44` | The common `UITableViewViewCell` height. |
+| `Theme.Cell.mediumHeight` | `63`	| The `UITableViewViewCell` height for the receipt items |
+| `Theme.Cell.largeHeight` | `88` | The `UITableViewViewCell` height for the List transfer method items and the Select transfer method type items. |
 | `Theme.Cell.headerHeight` | `16` | The Select transfer method type items header height. |
-| `Theme.Cell.separatorInsetZero` | `UIEdgeInsets.zero` | The separator inset with edge insets struct whose top, left, bottom, and right fields are all set to 0. |
-| `Theme.Cell.separatorInset16` | `UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)` | The separator inset with the left edge set to 16. |
-| `Theme.Cell.separatorInset70` | `UIEdgeInsets(top: 0, left: 70, bottom: 0, right: 0)` | The separator inset with the left edge set to 70. |
-| `Theme.Icon.size` | `20` | The icon size. |
-| `Theme.Icon.color` | `Theme.themeColor` | The icon primary color |
-| `Theme.Icon.backgroundColor` | `#E5F7FA` | The icon background color |
-| `Theme.ViewController.backgroundColor` | `#EFEFF4` | The `UIViewController` background color. |
+| `Theme.Cell.dividerHeight` | `8` | The divider UITableViewViewCell height. |
+| `Theme.Icon.size` | `20` | The icon font size |
+| `Theme.Icon.frame` | `CGSize(width: 40, height: 40)` | The icon frame |
+| `Theme.Icon.primaryColor` | `Theme.themeColor` | The icon primary color |
+| `Theme.Icon.primaryBackgroundColor` | `0xE5F7FA` | The icon primary background color |
+| `Theme.Icon.creditColor` | `Amount.creditColor` | The icon credit color |
+| `Theme.Icon.creditBackgroundColor` | `0xF1FAE8` | The icon credit background color |
+| `Theme.Icon.debitColor` | `Amount.debitColor` | The icon debit color |
+| `Theme.Icon.debitBackgroundColor` | `0xFEF7F7` | The icon debit background color |
+| `Theme.Amount.creditColor` | `0x5FBF00` | The credit color |
+| `Theme.Amount.debitColor` | `0xDB4437` | The debit color |
+| `Theme.ViewController.backgroundColor` | `0xEFEFF4` | The `UIViewController` background color. |
 | `Theme.SpinnerView.activityIndicatorViewStyle` | `UIActivityIndicatorView.Style.whiteLarge` | The `UIActivityIndicatorView` style. |
 | `Theme.SpinnerView.activityIndicatorViewColor` | `Theme.themeColor` | The `UIActivityIndicatorView` color. |
 | `Theme.SpinnerView.backgroundColor` | `UIColor.clear` | The background color |
@@ -353,9 +396,6 @@ On the Theme is possible to customize the properties:
 
 Example to define the light theme code in class AppDelegate:
 ```swift
-import HyperwalletUISDK
-import UIKit
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
@@ -364,20 +404,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         // Override point for customization after application launch.
-
-        Theme.themeColor = UIColor.white
-        Theme.tintColor = UIColor(red: 3 / 255, green: 124 / 255, blue: 1, alpha: 1) //blue
-        Theme.Button.color = Theme.tintColor
-        Theme.Icon.color = Theme.tintColor
-        Theme.Icon.backgroundColor = UIColor(red: 219 / 255, green: 241 / 255, blue: 1, alpha: 1) // Light blue
-        Theme.SpinnerView.activityIndicatorViewColor = Theme.tintColor
-
+        
+        ThemeManager.applyWhiteTheme()
         // Set the default tint color
         window?.tintColor = Theme.tintColor
         // Avoid to display a black area during the view transaction in the UINavigationBar.
         window?.backgroundColor = Theme.ViewController.backgroundColor
 
-        ThemeManager.applyTheme()
         return true
     }
 }
@@ -397,13 +430,16 @@ Theme.Label.errorColor = .red
 In Hyperwallet UI SDK, we categorized HyperwalletException into three groups, which are input errors (business errors), network errors and unexpected errors.
 
 ### Unexpected Error
-Once an unexpected error happened, an AlertView that only contains the `OK` button will be shown in the UI.
+Once an unexpected error occurs, an AlertView that only contains the `OK` button will be shown in the UI.
 
 ### Network Error
-Network errors happen due to connectivity issues, such as poor-quality network connection, the request timed out from the server side, etc. Once a network error happened, an AlertView that contains a `Cancel` and a `Try Again` buttons will be shown in the UI.
+Network errors occurs due to connectivity issues, such as poor-quality network connection, the request timed out from the server side, etc. Once a network error happened, an AlertView that contains a `Cancel` and a `Try Again` buttons will be shown in the UI.
 
 ### Business Errors
-Business errors happen when the Hyperwallet platform has found invalid information or some business restriction related to the data has been submitted and require some action from the user.
+Business errors occurs when the Hyperwallet platform has found invalid information or some business restriction related to the data has been submitted and require some action from the user.
+
+### Authentication Error
+Authentication error occurs when the Hyperwallet SDK is not able to fetch the authentication token from the client implementation.
 
 ## License
 The Hyperwallet iOS SDK is open source and available under the [MIT](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/blob/master/LICENSE) license

@@ -41,17 +41,23 @@ public extension Notification.Name {
     static var transferScheduled: Notification.Name {
         return .init(rawValue: "transferScheduled")
     }
+
+    /// Posted when authentication error occurs
+    static var authenticationError: Notification.Name {
+        return .init(rawValue: "authenticationError")
+    }
 }
 
 /// The Hyperwallet's `NotificationCenter` key to access the information.
-///
-/// - transferMethodAdded: A new transfer method has been added.
-/// - transferMethodDeactivated: A transfer method has been deactivated.
-/// - transferCreated: A transfer of funds has been created.
-/// - transferScheduled: A transfer has been scheduled.
 public enum UserInfo: String {
+    /// A new transfer method has been added.
     case transferMethodAdded
+    /// A transfer method has been deactivated.
     case transferMethodDeactivated
+    /// A transfer of funds has been created.
     case transferCreated
+    /// A transfer has been scheduled.
     case transferScheduled
+    /// Authentication error has been occured
+    case authenticationError
 }

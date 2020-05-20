@@ -19,7 +19,7 @@
 #if !COCOAPODS
 import Common
 #endif
-
+/// The TableViewCell to display transfer amount
 final class TransferAmountCell: UITableViewCell {
     static let reuseIdentifier = "transferAmountCellIdentifier"
     typealias EnteredAmountHandler = (_ value: String) -> Void

@@ -18,10 +18,20 @@
 
 #if !COCOAPODS
 import Common
+import TransferMethodRepository
+import TransferRepository
+import UserRepository
 #endif
 
 /// The HyperwalletUI extension
 public extension HyperwalletUI {
+    /// Clears TransferRepositoryFactory , TransferMethodRepositoryFactory and UserRepositoryFactory instances.
+    static func transferUIClearInstance() {
+        TransferRepositoryFactory.clearInstance()
+        TransferMethodRepositoryFactory.clearInstance()
+        UserRepositoryFactory.clearInstance()
+    }
+
     /// Create transfer funds
     ///
     /// - Returns: An instance of `CreateTransferCoordinator`

@@ -37,19 +37,21 @@ final class ListTransferMethodController: UITableViewController {
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        title = "title_accounts".localized()
-        largeTitle()
         setViewBackgroundColor()
-
-        navigationItem.backBarButtonItem = UIBarButtonItem.back
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
-                                                            target: self,
-                                                            action: #selector(didTapAddButton))
-
         initializePresenter()
         presenter.listTransferMethods()
         // setup table view
         setupTransferMethodTableView()
+    }
+
+    override public func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let currentNavigationItem: UINavigationItem = tabBarController?.navigationItem ?? navigationItem
+        currentNavigationItem.backBarButtonItem = UIBarButtonItem.back
+        currentNavigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
+                                                                   target: self,
+                                                                   action: #selector(didTapAddButton))
+        titleDisplayMode(.always, for: "title_accounts".localized())
     }
 
     private func initializePresenter() {
@@ -150,8 +152,14 @@ extension ListTransferMethodController: ListTransferMethodView {
         }
     }
 
-    func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
-        let errorView = ErrorView(viewController: self, error: error)
+    func showError(_ error: HyperwalletErrorType,
+                   pageName: String,
+                   pageGroup: String,
+                   _ retry: (() -> Void)?) {
+        let errorView = ErrorView(viewController: self,
+                                  error: error,
+                                  pageName: pageName,
+                                  pageGroup: pageGroup)
         errorView.show(retry)
     }
 
@@ -173,7 +181,7 @@ extension ListTransferMethodController: ListTransferMethodView {
         }
     }
 
-    func showTransferMethods() {
+    func reloadData() {
         if presenter.sectionData.isNotEmpty {
             toggleEmptyListView()
         } else {
@@ -199,8 +207,10 @@ extension ListTransferMethodController: ListTransferMethodView {
 }
 
 extension ListTransferMethodController {
+    /// The callback to refresh transfer method list
     override public func didFlowComplete(with response: Any) {
         if response as? HyperwalletTransferMethod != nil {
+            coordinator?.navigateBackFromNextPage(with: response)
             // refresh transfer method list
             presenter.listTransferMethods()
         }

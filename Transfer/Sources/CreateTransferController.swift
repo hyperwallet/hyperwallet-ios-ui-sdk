@@ -45,14 +45,18 @@ final class CreateTransferController: UITableViewController {
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        title = "transfer_funds".localized()
-        navigationItem.backBarButtonItem = UIBarButtonItem.back
-        largeTitle()
         setViewBackgroundColor()
         initializePresenter()
         presenter.loadCreateTransfer()
         setUpCreateTransferTableView()
         hideKeyboardWhenTappedAround()
+    }
+
+    override public func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let currentNavigationItem: UINavigationItem = tabBarController?.navigationItem ?? navigationItem
+        currentNavigationItem.backBarButtonItem = UIBarButtonItem.back
+        titleDisplayMode(.always, for: "transfer_funds".localized())
     }
 
     private func initializePresenter() {
@@ -83,22 +87,23 @@ final class CreateTransferController: UITableViewController {
 
 // MARK: - Create transfer table view dataSource
 extension CreateTransferController {
+    /// Returns tableview section count
     override public func numberOfSections(in tableView: UITableView) -> Int {
         return presenter.sectionData.count
     }
-
+    /// Returns number of rows
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.sectionData[section].rowCount
     }
-
+    /// Displays cell configuration
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return getCellConfiguration(indexPath)
     }
-
+    /// Returns the title for header
     override public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return presenter.sectionData[section].title
     }
-
+    /// Returns the footer view of tableview
     override public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let attributedText = getAttributedFooterText(for: section)
         if attributedText == nil {
@@ -219,13 +224,14 @@ extension CreateTransferController {
 
 // MARK: - Create transfer table view delegate
 extension CreateTransferController {
+    /// - To select the transfer method
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let sectionData = presenter.sectionData[indexPath.section]
         if sectionData.createTransferSectionHeader == .destination,
             presenter.sectionData[indexPath.section] is CreateTransferSectionDestinationData {
             if presenter.selectedTransferMethod != nil {
-                presenter.showSelectDestinationAccountView()
+                navigateToListTransferDestination()
             } else {
                 navigateToTransferMethodIfInitialized()
             }
@@ -297,37 +303,22 @@ extension CreateTransferController: CreateTransferView {
         }
     }
 
-    func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
-        let errorView = ErrorView(viewController: self, error: error)
+    func showError(_ error: HyperwalletErrorType, pageName: String, pageGroup: String, _ retry: (() -> Void)?) {
+        let errorView = ErrorView(viewController: self, error: error, pageName: pageName, pageGroup: pageGroup)
         errorView.show(retry)
     }
 
-    func showCreateTransfer() {
-        presenter.initializeSections()
+    func reloadData() {
         tableView.reloadData()
     }
 
-    func showGenericTableView(items: [HyperwalletTransferMethod],
-                              title: String,
-                              selectItemHandler: @escaping SelectItemHandler,
-                              markCellHandler: @escaping MarkCellHandler) {
-        let genericTableView = GenericController<TransferDestinationCell, HyperwalletTransferMethod>()
-
-        if selectTransferMethodCoordinator != nil {
-            genericTableView.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
-                                                                                 target: self,
-                                                                                 action: #selector(didTapAddButton))
-        }
-        genericTableView.title = title
-        genericTableView.items = items
-        genericTableView.selectedHandler = selectItemHandler
-        genericTableView.shouldMarkCellAction = markCellHandler
-        show(genericTableView, sender: self)
-    }
-
-    @objc
-    private func didTapAddButton(sender: AnyObject) {
-        navigateToTransferMethodIfInitialized()
+    private func navigateToListTransferDestination() {
+        let listTransferDestinationController = ListTransferDestinationController()
+        var initializationData = [InitializationDataField: Any]()
+        initializationData[InitializationDataField.transferMethod] = presenter.selectedTransferMethod
+        listTransferDestinationController.initializationData = initializationData
+        listTransferDestinationController.flowDelegate = self
+        show(listTransferDestinationController, sender: self)
     }
 
     private func navigateToTransferMethodIfInitialized() {
@@ -360,10 +351,18 @@ extension CreateTransferController: CreateTransferView {
 }
 
 extension CreateTransferController {
+    /// To reload create transfer method
     override public func didFlowComplete(with response: Any) {
         if let transferMethod = response as? HyperwalletTransferMethod {
+            coordinator?.navigateBackFromNextPage(with: transferMethod)
             presenter.selectedTransferMethod = transferMethod
+            presenter.amount = nil
+            presenter.transferAllFundsIsOn = false
+            presenter.notes = nil
             presenter.loadCreateTransfer()
+        } else if let statusTransition = response as? HyperwalletStatusTransition {
+            coordinator?.navigateBackFromNextPage(with: statusTransition)
+            flowDelegate?.didFlowComplete(with: statusTransition)
         }
     }
 }

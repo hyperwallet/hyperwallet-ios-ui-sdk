@@ -21,6 +21,7 @@ xcuserdata/
 *.moved-aside
 *.xccheckout
 *.xcscmblueprint
+**/.DS_Store
 
 ## Obj-C/Swift specific
 *.hmap
@@ -62,6 +63,3 @@ Carthage/
 # Fastlane
 fastlane/README.md
 fastlane/report.xml
-
-# Gem
-Gemfile.lock

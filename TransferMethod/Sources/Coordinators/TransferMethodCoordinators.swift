@@ -21,12 +21,15 @@ import Common
 #endif
 import UIKit
 
+/// Coordinator class for SelectTransferMethodType
 public class SelectTransferMethodTypeCoordinator: NSObject, HyperwalletCoordinator {
     private let controller: SelectTransferMethodTypeController
     private var parentController: UIViewController?
 
     override init() {
         controller = SelectTransferMethodTypeController()
+        super.init()
+        self.applyTheme()
     }
     public func applyTheme() {
         ThemeManager.applyTransferMethodTheme()
@@ -38,42 +41,44 @@ public class SelectTransferMethodTypeCoordinator: NSObject, HyperwalletCoordinat
 
     @objc
     public func navigate() {
-        controller.flowDelegate = parentController
         parentController?.show(controller, sender: parentController)
     }
 
     public func navigateToNextPage(initializationData: [InitializationDataField: Any]?) {
-        let childController = AddTransferMethodController()
-        childController.initializationData = initializationData
-        childController.coordinator = self
-        childController.flowDelegate = controller
-        controller.show(childController, sender: controller)
+        if let country = initializationData?[InitializationDataField.country] as? String,
+            let currency = initializationData?[InitializationDataField.currency] as? String,
+            let profileType = initializationData?[InitializationDataField.profileType] as? String,
+            let transferMethodTypeCode = initializationData?[InitializationDataField.transferMethodTypeCode]
+                as? String {
+            let coordinator = HyperwalletUI.shared.addTransferMethodCoordinator(country,
+                                                                                currency,
+                                                                                profileType,
+                                                                                transferMethodTypeCode,
+                                                                                parentController: controller)
+            coordinator.navigate()
+        }
     }
 
     public func navigateBackFromNextPage(with response: Any) {
-        if let parentController = parentController {
-            if let navigationController = controller.navigationController {
-                navigationController.popToViewController(parentController, animated: true)
-            } else {
-                controller.dismiss(animated: true, completion: nil)
-            }
-        }
-        controller.flowDelegate?.didFlowComplete(with: response)
+        controller.navigationController?.popViewController(animated: false)
     }
 
     public func start(initializationData: [InitializationDataField: Any]? = nil, parentController: UIViewController) {
         controller.coordinator = self
         controller.initializationData = initializationData
+        controller.flowDelegate = parentController
         self.parentController = parentController
     }
 }
-
+/// Coordinator class for AddTransferMethod
 public class AddTransferMethodCoordinator: NSObject, HyperwalletCoordinator {
     private let controller: AddTransferMethodController
     private var parentController: UIViewController?
 
     override init() {
         controller = AddTransferMethodController()
+        super.init()
+        self.applyTheme()
     }
     public func applyTheme() {
         ThemeManager.applyTransferMethodTheme()
@@ -85,7 +90,6 @@ public class AddTransferMethodCoordinator: NSObject, HyperwalletCoordinator {
 
     @objc
     public func navigate() {
-        controller.flowDelegate = parentController
         parentController?.show(controller, sender: parentController)
     }
 
@@ -93,30 +97,27 @@ public class AddTransferMethodCoordinator: NSObject, HyperwalletCoordinator {
     }
 
     public func navigateBackFromNextPage(with response: Any) {
-        if let parentController = parentController {
-            if let navigationController = controller.navigationController {
-                navigationController.popToViewController(parentController, animated: true)
-            } else {
-                controller.dismiss(animated: true, completion: nil)
-            }
-        }
-        controller.flowDelegate?.didFlowComplete(with: response)
+        controller.navigationController?.popViewController(animated: false)
     }
 
     public func start(initializationData: [InitializationDataField: Any]? = nil, parentController: UIViewController) {
         controller.coordinator = self
         controller.initializationData = initializationData
+        controller.flowDelegate = parentController
         self.parentController = parentController
     }
 }
-
+/// Coordinator class for ListTransferMethods
 public final class ListTransferMethodsCoordinator: NSObject, HyperwalletCoordinator {
     private let controller: ListTransferMethodController
     private var parentController: UIViewController?
     override init() {
         controller = ListTransferMethodController()
+        super.init()
+        self.applyTheme()
     }
     public func applyTheme() {
+        ThemeManager.applyTransferMethodTheme()
     }
 
     public func getController() -> UITableViewController {
@@ -125,7 +126,6 @@ public final class ListTransferMethodsCoordinator: NSObject, HyperwalletCoordina
 
     @objc
     public func navigate() {
-        controller.flowDelegate = parentController
         parentController?.show(controller, sender: parentController)
     }
 
@@ -135,17 +135,13 @@ public final class ListTransferMethodsCoordinator: NSObject, HyperwalletCoordina
     }
 
     public func navigateBackFromNextPage(with response: Any) {
-        if let navigationController = controller.navigationController {
-            navigationController.popToViewController(controller, animated: true)
-        } else {
-            controller.dismiss(animated: true, completion: nil)
-        }
-        controller.flowDelegate?.didFlowComplete(with: response)
+        controller.navigationController?.popViewController(animated: false)
     }
 
     public func start(initializationData: [InitializationDataField: Any]? = nil, parentController: UIViewController) {
         controller.coordinator = self
         controller.initializationData = initializationData
+        controller.flowDelegate = parentController
         self.parentController = parentController
     }
 }

@@ -8,12 +8,13 @@ import XCTest
 
 class SelectTransferMethodTypePresenterTests: XCTestCase {
     private var presenter: SelectTransferMethodTypePresenter!
-    private let mockView = MockSelectTransferMethodTypeView()
+    private let mockView = SelectTransferMethodTypeViewMock()
     private lazy var mockResponseData = HyperwalletTestHelper.getDataFromJson("TransferMethodConfigurationKeysResponse")
     private lazy var userMockResponseData = HyperwalletTestHelper.getDataFromJson("UserIndividualResponse")
+    private var hyperwalletInsightsMock = HyperwalletInsightsMock()
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
-        presenter = SelectTransferMethodTypePresenter(mockView)
+        presenter = SelectTransferMethodTypePresenter(mockView, hyperwalletInsightsMock)
     }
 
     override func tearDown() {
@@ -21,6 +22,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
             Hippolyte.shared.stop()
         }
         mockView.resetStates()
+        hyperwalletInsightsMock.resetStates()
     }
 
     func testLoadTransferMethodKeys_success() {
@@ -43,11 +45,14 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
 
         XCTAssertTrue(!presenter.selectedCountry.isEmpty, "A country should be selected by default")
         XCTAssertTrue(!presenter.selectedCurrency.isEmpty, "A currency should be selected by default")
-
         XCTAssertTrue(mockView.isCountryCurrencyTableViewReloadDataPerformed,
                       "The countryCurrencyTableViewReloadData should be performed")
         XCTAssertTrue(mockView.isTransferMethodTypeTableViewReloadDataPerformed,
                       "The transferMethodTypeTableViewReloadData should be performed")
+
+        XCTAssertNotNil(HyperwalletInsights.shared, "HyperwalletInsights should be initialized")
+        XCTAssertTrue(hyperwalletInsightsMock.didTrackImpression,
+                      "HyperwalletInsights.trackImpression should be called")
     }
 
     func testLoadTransferMethodKeys_getUserWithoutCountry() {
@@ -115,7 +120,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isHideLoadingPerformed, "The hideLoading should be performed")
         XCTAssertTrue(mockView.isShowAlertPerformed, "The showAlert should not be performed")
 
-        XCTAssertEqual(mockView.alertMessages[0], "There is no currency available for country United States")
+        XCTAssertEqual(mockView.alertMessages[0], "There is no currency available for country US")
     }
 
     func testLoadTransferMethodKeys_returnsNoTransferMethodTypes() {
@@ -183,50 +188,61 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
     }
 
     func testNavigateToAddTransferMethod_success() {
+        let indexPath = IndexPath(row: 0, section: 0)
         // Given
-        addGetHyperwalletUserResponse(fileName: "UserBusinessResponse")
+        addGetIndividualHyperwalletUserResponse()
         HyperwalletTestHelper.setUpMockServer(request: setUpTransferMethodConfigurationKeys())
 
-        let countryIndex = 0
-        let currencyIndex = 1
-        let sectionDataCount = 3
-        let firstIndexPath = IndexPath(row: 0, section: 0)
-        let secondIndexPath = IndexPath(row: 1, section: 0)
         let expectation = self.expectation(description: "load transfer methods keys")
         mockView.expectation = expectation
 
         presenter.loadTransferMethodKeys(true)
         wait(for: [expectation], timeout: 1)
 
-        mockView.ignoreXCTestExpectation = true
-        presenter.performShowSelectCountryOrCurrencyView(index: countryIndex)
-
-        presenter.performShowSelectCountryOrCurrencyView(index: currencyIndex)
-
         // When
         presenter.navigateToAddTransferMethod(0)
 
         // Then
         XCTAssertEqual(presenter.selectedCountry, "US", "The country should be US")
-        XCTAssertEqual(presenter.selectedCurrency, "USD", "The currency should be USD")
+        XCTAssertEqual(presenter.selectedCurrency, "CAD", "The currency should be CAD")
         XCTAssertTrue(mockView.isNavigateToAddTransferMethodControllerPerformed,
                       "The navigateToAddTransferMethodControllerPerformed should be performed")
 
-        XCTAssertEqual(mockView.profileType!, "BUSINESS", "The profileType should be BUSINESS")
+        XCTAssertEqual(mockView.profileType, "INDIVIDUAL", "The profileType should be INDIVIDUAL")
         XCTAssertEqual(presenter.countryCurrencySectionData.count, 2, "The countryCurrencyCount should be 2")
-        XCTAssertEqual(presenter.sectionData.count, sectionDataCount, "The transferMethodTypesCount should be 3")
-        XCTAssertNotNil(presenter
-            .sectionData[firstIndexPath
-                .row] as HyperwalletTransferMethodType, "The cell configuration should not be nil")
-        XCTAssertNotNil(presenter
-            .sectionData[secondIndexPath
-                .row] as HyperwalletTransferMethodType, "The cell configuration should not be nil")
-
-        XCTAssertNotNil(presenter.getCountryCurrencyConfiguration(indexPath: firstIndexPath),
+        XCTAssertEqual(presenter.sectionData.count, 1, "The transferMethodTypesCount should be 1")
+        XCTAssertTrue(hyperwalletInsightsMock.didTrackClick, "HyperwalletInsights.trackClick should be called")
+        XCTAssertNotNil(presenter.getCountryCurrencyConfiguration(indexPath: indexPath),
                         "The country currency cell configuration should not be nil")
-        XCTAssertNotNil(presenter.getCountryCurrencyConfiguration(indexPath: secondIndexPath),
-                        "Out of bounds country currency configuration should not be nil")
     }
+
+    func testTrackCountryClick_success() {
+        let countryIndex = 0
+        addGetIndividualHyperwalletUserResponse()
+        HyperwalletTestHelper.setUpMockServer(request: setUpTransferMethodConfigurationKeys())
+        let expectation = self.expectation(description: "load transfer methods keys")
+        mockView.expectation = expectation
+        presenter.loadTransferMethodKeys(true)
+        wait(for: [expectation], timeout: 1)
+        mockView.ignoreXCTestExpectation = true
+        presenter.performShowSelectCountryOrCurrencyView(index: countryIndex)
+        XCTAssertTrue(mockView.isShowGenericTableViewPerformed, "Show Generic Table View should be performed")
+        XCTAssertTrue(hyperwalletInsightsMock.didTrackClick, "HyperwalletInsights.trackClick should be called")
+    }
+
+    func testTrackCurrencyClick_success() {
+        let currencyIndex = 1
+        addGetIndividualHyperwalletUserResponse()
+        HyperwalletTestHelper.setUpMockServer(request: setUpTransferMethodConfigurationKeys())
+        let expectation = self.expectation(description: "load transfer methods keys")
+        mockView.expectation = expectation
+        presenter.loadTransferMethodKeys(true)
+        wait(for: [expectation], timeout: 1)
+        mockView.ignoreXCTestExpectation = true
+        presenter.performShowSelectCountryOrCurrencyView(index: currencyIndex)
+        XCTAssertTrue(mockView.isShowGenericTableViewPerformed, "Show Generic Table View should be performed")
+        XCTAssertTrue(hyperwalletInsightsMock.didTrackClick, "HyperwalletInsights.trackClick should be called")
+       }
 
     private func loadTransferMethodKeys() {
         HyperwalletTestHelper.setUpMockServer(request: setUpTransferMethodConfigurationKeys())
@@ -265,7 +281,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
     }
 }
 
-class MockSelectTransferMethodTypeView: SelectTransferMethodTypeView {
+class SelectTransferMethodTypeViewMock: SelectTransferMethodTypeView {
     var isHideLoadingPerformed = false
     var isShowLoadingPerformed = false
     var isShowGenericTableViewPerformed = false
@@ -303,14 +319,14 @@ class MockSelectTransferMethodTypeView: SelectTransferMethodTypeView {
                               markCellHandler: @escaping MarkCellHandler,
                               filterContentHandler: @escaping FilterContentHandler) {
         if title == "Select Country" {
-            let country = SelectedContryCurrencyCellConfiguration(title: "United States", value: "US")
+            let country = SelectedCountryCurrencyCellConfiguration(title: "United States", value: "US")
             selectItemHandler(country)
             _ = markCellHandler(country)
             _ = filterContentHandler(items, "")
         }
 
         if title == "Select Currency" {
-            let currency = SelectedContryCurrencyCellConfiguration(title: "US Dollar", value: "USD")
+            let currency = SelectedCountryCurrencyCellConfiguration(title: "US Dollar", value: "USD")
             selectItemHandler(currency)
             _ = markCellHandler(currency)
             _ = filterContentHandler(items, "")
@@ -334,7 +350,10 @@ class MockSelectTransferMethodTypeView: SelectTransferMethodTypeView {
         }
     }
 
-    func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
+    func showError(_ error: HyperwalletErrorType,
+                   pageName: String,
+                   pageGroup: String,
+                   _ retry: (() -> Void)?) {
         isShowErrorPerformed = true
         retry?()
     }
@@ -351,11 +370,11 @@ class MockSelectTransferMethodTypeView: SelectTransferMethodTypeView {
         }
     }
 
-    func transferMethodTypeTableViewReloadData() {
+    func reloadTransferMethodTypeData() {
         isTransferMethodTypeTableViewReloadDataPerformed = true
     }
 
-    func countryCurrencyTableViewReloadData() {
+    func reloadCountryCurrencyData() {
         isCountryCurrencyTableViewReloadDataPerformed = true
     }
 }

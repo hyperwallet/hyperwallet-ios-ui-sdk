@@ -21,7 +21,7 @@ import Common
 #endif
 import HyperwalletSDK
 import UIKit
-
+/// ListTransferMethodCell
 final class ListTransferMethodCell: UITableViewCell {
     static let reuseIdentifier = "listTransferMethodCellIdentifier"
 
@@ -60,11 +60,6 @@ final class ListTransferMethodCell: UITableViewCell {
         set { detailTextLabel?.font = newValue
             detailTextLabel?.font = newValue }
     }
-
-    @objc dynamic var subTitleLabelColor: UIColor! {
-        get { return detailTextLabel?.textColor }
-        set { detailTextLabel?.textColor = newValue }
-    }
 }
 
 extension ListTransferMethodCell {
@@ -78,7 +73,8 @@ extension ListTransferMethodCell {
         textLabel?.lineBreakMode = .byWordWrapping
         textLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellTextLabel"
         detailTextLabel?.attributedText = formatDetails(
-            transferMethodCountry: transferMethod.transferMethodCountry?.localized() ?? "",
+            transferMethodCountry:
+                Locale.current.localizedString(forRegionCode: transferMethod.transferMethodCountry ?? "") ?? "",
             additionalInfo: transferMethod.value)
         detailTextLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellDetailTextLabel"
         detailTextLabel?.adjustsFontForContentSizeCategory = true
@@ -98,9 +94,9 @@ extension ListTransferMethodCell {
         let attributedText = NSMutableAttributedString()
         attributedText.append(value: String(format: "%@\n", transferMethodCountry),
                               font: subTitleLabelFont,
-                              color: subTitleLabelColor)
+                              color: Theme.Label.subTitleColor)
         if let additionalInfo = additionalInfo {
-            attributedText.append(value: additionalInfo, font: subTitleLabelFont, color: subTitleLabelColor)
+            attributedText.append(value: additionalInfo, font: subTitleLabelFont, color: Theme.Label.subTitleColor)
         }
 
         return attributedText

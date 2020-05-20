@@ -51,7 +51,7 @@ struct ReceiptDetailSectionTransactionData: ReceiptDetailSectionData {
 }
 
 struct ReceiptDetailSectionDetailData: ReceiptDetailSectionData {
-    var rows = [ReceiptDetailRow] ()
+    var rows = [ReceiptDetailRow]()
     var receiptDetailSectionHeader: ReceiptDetailSectionHeader { return .details }
     var rowCount: Int { return rows.count }
     var cellIdentifier: String { return ReceiptDetailCell.reuseIdentifier }

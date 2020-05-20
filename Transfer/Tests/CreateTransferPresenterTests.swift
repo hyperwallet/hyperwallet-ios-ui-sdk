@@ -1,17 +1,17 @@
 #if !COCOAPODS
 import Common
+import TransferMethodRepository
+import UserRepository
 #endif
 import Hippolyte
 import HyperwalletSDK
 @testable import Transfer
-import TransferMethodRepository
-import UserRepository
 import XCTest
 
 class CreateTransferTests: XCTestCase {
     private var presenter: CreateTransferPresenter!
     private var mockView = MockCreateTransferView()
-    private let clientTransferId = "6712348070812"
+    private let clientTransferId = UUID().uuidString
     private let clientSourceToken = "trm-123456789"
 
     override func setUp() {
@@ -91,7 +91,6 @@ class CreateTransferTests: XCTestCase {
 
         presenter.loadCreateTransfer()
         wait(for: expectations, timeout: 1)
-        presenter.initializeSections()
     }
 
     func testLoadCreateTransfer_sourceTokenIsNil() {
@@ -339,25 +338,6 @@ class CreateTransferTests: XCTestCase {
         XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
         XCTAssertTrue(mockView.isShowErrorPerformed, "showError should be performed")
     }
-
-    func testShowSelectDestinationAccountView_success() {
-        initializePresenter()
-        presenter.showSelectDestinationAccountView()
-        XCTAssertTrue(mockView.isShowGenericTableViewPerformed, "isShowGenericTableViewPerformed should be performed")
-        XCTAssertNotNil(presenter.selectedTransferMethod, "selectedTransferMethod should not be nil")
-        XCTAssertNil(presenter.amount, "amount should be nil")
-        XCTAssertTrue(mockView.isShowCreateTransferPerformed, "isShowCreateTransferPerformed should be performed")
-    }
-
-    func testShowSelectDestinationAccountView_failure() {
-        presenter = CreateTransferPresenter(clientTransferId, nil, view: mockView)
-        TransferMethodRepositoryRequestHelper.setupFailureRequest()
-        presenter.showSelectDestinationAccountView()
-        wait(for: [mockView.showErrorExpectation], timeout: 1)
-        XCTAssertFalse(mockView.isShowGenericTableViewPerformed,
-                       "isShowGenericTableViewPerformed should not be performed")
-        XCTAssertTrue(mockView.isShowErrorPerformed, "isShowErrorPerformed should be performed")
-    }
 }
 
 class MockCreateTransferView: CreateTransferView {
@@ -387,24 +367,20 @@ class MockCreateTransferView: CreateTransferView {
         isNotifyTransferCreatedPerformed = true
     }
 
-    func showCreateTransfer() {
+    func reloadData() {
         isShowCreateTransferPerformed = true
         loadCreateTransferExpectation?.fulfill()
     }
 
-    func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
+    func showError(_ error: HyperwalletErrorType,
+                   pageName: String,
+                   pageGroup: String,
+                   _ retry: (() -> Void)?) {
         isShowErrorPerformed = true
-        retry!()
+        if retry != nil {
+            retry!()
+        }
         showErrorExpectation?.fulfill()
-    }
-
-    func showGenericTableView(items: [HyperwalletTransferMethod],
-                              title: String,
-                              selectItemHandler: @escaping CreateTransferView.SelectItemHandler,
-                              markCellHandler: @escaping CreateTransferView.MarkCellHandler) {
-        isShowGenericTableViewPerformed = true
-        selectItemHandler(items.first!)
-        _ = markCellHandler(items.first!)
     }
 
     func showLoading() {

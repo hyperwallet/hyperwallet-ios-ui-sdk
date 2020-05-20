@@ -28,7 +28,6 @@ final class ScheduleTransferController: UITableViewController, UITextFieldDelega
     private var processingView: ProcessingView?
     private var presenter: ScheduleTransferPresenter!
     private let footerIdentifier = "scheduleTransferFooterViewIdentifier"
-
     private let registeredCells: [(type: AnyClass, id: String)] = [
         (TransferDestinationCell.self, TransferDestinationCell.reuseIdentifier),
         (TransferForeignExchangeCell.self, TransferForeignExchangeCell.reuseIdentifier),
@@ -39,13 +38,17 @@ final class ScheduleTransferController: UITableViewController, UITextFieldDelega
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        title = "transfer_funds".localized()
-        largeTitle()
         setViewBackgroundColor()
-        navigationItem.backBarButtonItem = UIBarButtonItem.back
         initializePresenter()
         // setup table view
         setUpScheduleTransferTableView()
+    }
+
+    override public func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let currentNavigationItem: UINavigationItem = tabBarController?.navigationItem ?? navigationItem
+        currentNavigationItem.backBarButtonItem = UIBarButtonItem.back
+        titleDisplayMode(.always, for: "transfer_funds".localized())
     }
 
     private func initializePresenter() {
@@ -82,22 +85,23 @@ final class ScheduleTransferController: UITableViewController, UITextFieldDelega
 
 // MARK: - Schedule transfer table data source
 extension ScheduleTransferController {
+    /// Returns the title for header
     override public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return presenter.sectionData[section].title
     }
-
+    /// Returns tableview section count
     override public func numberOfSections(in tableView: UITableView) -> Int {
         return presenter.sectionData.count
     }
-
+    /// Returns number of rows
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.sectionData[section].rowCount
     }
-
+    /// Displays cell configuration
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return getCellConfiguration(indexPath)
     }
-
+    /// Returns the footer view of tableview
     override public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let attributedText = getAttributedFooterText(for: section)
         if attributedText == nil {
@@ -177,6 +181,7 @@ extension ScheduleTransferController {
 
 // MARK: - Schedule transfer table delegate
 extension ScheduleTransferController {
+    /// Estimated height of header
     override public func tableView(_ tableView: UITableView,
                                    estimatedHeightForHeaderInSection section: Int) -> CGFloat {
         return CGFloat(Theme.Cell.headerHeight)
@@ -202,8 +207,14 @@ extension ScheduleTransferController: ScheduleTransferView {
         }
     }
 
-    func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
-        let errorView = ErrorView(viewController: self, error: error)
+    func showError(_ error: HyperwalletErrorType,
+                   pageName: String,
+                   pageGroup: String,
+                   _ retry: (() -> Void)?) {
+        let errorView = ErrorView(viewController: self,
+                                  error: error,
+                                  pageName: pageName,
+                                  pageGroup: pageGroup)
         errorView.show(retry)
     }
 
@@ -213,6 +224,6 @@ extension ScheduleTransferController: ScheduleTransferView {
                                             object: self,
                                             userInfo: [UserInfo.transferScheduled: hyperwalletStatusTransition])
         }
-        coordinator?.navigateBackFromNextPage(with: hyperwalletStatusTransition)
+        flowDelegate?.didFlowComplete(with: hyperwalletStatusTransition)
     }
 }

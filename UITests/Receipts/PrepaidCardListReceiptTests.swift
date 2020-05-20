@@ -14,10 +14,6 @@ class PrepaidCardListReceiptTests: BaseTests {
         transactionDetails = TransactionDetails(app: app)
     }
 
-    override func tearDown() {
-        mockServer.tearDown()
-    }
-
     // MARK: Prepaid Card List Receipt TestCases
     func testPrepaidCardReceiptsList_verifyReceiptsOrder() {
         let expectedNumberOfCells = 5
@@ -177,7 +173,7 @@ class PrepaidCardListReceiptTests: BaseTests {
         XCTAssertFalse(transactionDetails.feeSection.exists)
     }
 
-    // MARK: Detail View Testcases
+    // MARK: Detail View Test cases
     func testPrepaidReceiptDetail_verifyTransactionOptionalFields() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/prepaid-cards/trm-token/receipts",
                              filename: "PrepaidCardReceiptsForOneMonth",

@@ -1,0 +1,34 @@
+{
+    "dataType": "NUMBER",
+    "isRequired": true,
+    "isEditable": true,
+    "maxLength": 17,
+    "minLength": 4,
+    "name": "bankAccountId",
+    "label": "Account Number",
+    "placeholder": "",
+    "regularExpression": "^(?![0-]+$)[0-9-]{4,17}$",
+    "validationMessage": {
+        "length": "The minimum length of this field is 4 and maximum length is 17.",
+        "pattern": "is invalid length or format.",
+        "empty": "You must provide a value for this field"
+    },
+    "mask": {
+      "conditionalPatterns": [
+        {
+          "pattern": "######## ########",
+          "regex": "^4[0-5]"
+        },
+        {
+            "pattern": "# ###############",
+            "regex": "^4[6-9]"
+        },
+        {
+          "pattern": "### ######### ####",
+          "regex": "^5[0-5]"
+        }
+      ],
+      "defaultPattern": "#### #### #### ####",
+      "scrubRegex": "\\s"
+    }
+}

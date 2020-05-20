@@ -21,7 +21,7 @@ import Common
 #endif
 import UIKit
 
-struct SelectedContryCurrencyCellConfiguration: GenericCellConfiguration {
+struct SelectedCountryCurrencyCellConfiguration: GenericCellConfiguration {
     var title: String?
     var value: String?
 }

@@ -18,7 +18,7 @@
 
 import UIKit
 
-/// The `Theme` is used custumize all visual style provided by Hyperwallet UI SDK.
+/// The `Theme` is used customize all visual style provided by Hyperwallet UI SDK.
 /// In order to apply a new style changes the method `ThemeManager.applyTheme()` has to been called.
 ///
 /// - Example:
@@ -54,7 +54,7 @@ public class Theme: NSObject {
     /// Representation of all customizable visual style property for `UINavigationBar`.
     public struct NavigationBar {
         /// The `UINavigationBar` bar style
-        public static var barStyle = UIBarStyle.black
+        public static var barStyle = UIBarStyle.default
         /// Sets the opaque background color
         public static var isTranslucent = false
         /// The color of NavigationBar shadow

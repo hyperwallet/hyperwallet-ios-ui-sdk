@@ -5,6 +5,24 @@ class TransferUserFundsTest: BaseTests {
     var transferFunds: TransferFunds!
     var selectDestination: TransferFundsSelectDestination!
     var addTransferMethod: AddTransferMethod!
+    var elementQuery: XCUIElementQuery!
+
+    var expectedUSDestinationLabel: String = {
+        if #available(iOS 11.2, *) {
+            return "United States\nEnding on "
+        } else {
+            return "United States Ending on "
+        }
+    }()
+
+    var expectedCanadaDestinationLabel: String = {
+        if #available(iOS 11.2, *) {
+            return "Canada\nEnding on 1235"
+        } else {
+            return "Canada Ending on 1235"
+        }
+    }()
+
     override func setUp() {
         super.setUp()
         app = XCUIApplication()
@@ -17,10 +35,11 @@ class TransferUserFundsTest: BaseTests {
         transferFunds = TransferFunds(app: app)
         selectDestination = TransferFundsSelectDestination(app: app)
         addTransferMethod = AddTransferMethod(app: app)
-    }
-
-    override func tearDown() {
-        mockServer.tearDown()
+        if #available(iOS 13.0, *) {
+            elementQuery = app.tables["scheduleTransferTableView"].buttons
+        } else {
+            elementQuery = app.tables["scheduleTransferTableView"].staticTexts
+        }
     }
 
     /*
@@ -217,11 +236,10 @@ class TransferUserFundsTest: BaseTests {
 
         // Next Button
         XCTAssertTrue(transferFunds.nextLabel.exists)
-        transferFunds.nextLabel.tap()
+        transferFunds.tapNextButton()
 
         // Assert Confirmation Page
-        waitForExistence(app.tables["scheduleTransferTableView"].staticTexts["Confirm"])
-        XCTAssertTrue(app.tables["scheduleTransferTableView"].staticTexts["Confirm"].exists)
+        waitForExistence(elementQuery["Confirm"])
     }
 
     func testTransferFunds_createTransferWithoutFX() {
@@ -268,11 +286,10 @@ class TransferUserFundsTest: BaseTests {
 
         // Next Button
         XCTAssertTrue(transferFunds.nextLabel.exists)
-        transferFunds.nextLabel.tap()
+        transferFunds.tapNextButton()
 
         // Assert Confirmation Page
-        waitForExistence(app.tables["scheduleTransferTableView"].staticTexts["Confirm"])
-        XCTAssertTrue(app.tables["scheduleTransferTableView"].staticTexts["Confirm"].exists)
+        waitForExistence(elementQuery["Confirm"])
     }
 
     /* Given that user is on the Transfer fund page and selected a Transfer Destination
@@ -339,19 +356,21 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(cadBankAccount.exists)
         XCTAssertTrue(prepaidCard.exists)
 
+        waitForNonExistence(spinner)
+
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 0), "Bank Account")
-        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), "United States Ending on 1234")
+        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), expectedUSDestinationLabel + "1234")
 
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 1), "Bank Account")
-        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 1), "CANADA Ending on 1235")
+        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 1), expectedCanadaDestinationLabel)
 
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 2), "Prepaid Card")
-        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 2), "United States Ending on 4281")
+        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 2), expectedUSDestinationLabel + "4281")
 
         // Assert first row is checked by default
-        XCTAssertTrue(usdBankAccount.buttons["More Info"].exists, "By default the first row should be selected")
-        XCTAssertFalse(cadBankAccount.buttons["More Info"].exists, "By default the first row should be selected")
-        XCTAssertFalse(prepaidCard.buttons["More Info"].exists, "By default the first row should be selected")
+        assertButtonTrue(element: usdBankAccount)
+        assertButtonFalse(element: cadBankAccount)
+        assertButtonFalse(element: prepaidCard)
 
         // Assert can go back to previous page
         selectDestination.clickBackButton()
@@ -361,6 +380,22 @@ class TransferUserFundsTest: BaseTests {
             XCTAssertTrue(app.navigationBars["Transfer Funds"].exists)
         }
     }
+
+    private func assertButtonTrue(element: XCUIElement) {
+        if #available(iOS 13.0, *) {
+            XCTAssertTrue(element.buttons["checkmark"].exists, "By default the first row should be selected")
+        } else {
+            XCTAssertTrue(element.buttons["More Info"].exists, "By default the first row should be selected")
+        }
+    }
+
+    private func assertButtonFalse(element: XCUIElement) {
+           if #available(iOS 13.0, *) {
+               XCTAssertFalse(element.buttons["checkmark"].exists, "By default the first row should be selected")
+           } else {
+               XCTAssertFalse(element.buttons["More Info"].exists, "By default the first row should be selected")
+           }
+       }
 
     // MARK: UI Error Handling
     /*
@@ -390,7 +425,7 @@ class TransferUserFundsTest: BaseTests {
                        "An account hasn\'t been set up yet, please add an account first.")
 
         XCTAssertTrue(transferFunds.nextLabel.exists)
-        transferFunds.nextLabel.tap()
+        transferFunds.tapNextButton()
         waitForNonExistence(spinner)
 
         let addTransferMethodPredicate = NSPredicate(format:
@@ -426,7 +461,7 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.transferAmount.exists)
 
         XCTAssertTrue(transferFunds.nextLabel.exists)
-        transferFunds.nextLabel.tap()
+        transferFunds.tapNextButton()
         waitForNonExistence(spinner)
 
         let error = app.tables["createTransferTableView"].staticTexts["transferTableViewFooterViewIdentifier"].label
@@ -481,6 +516,7 @@ class TransferUserFundsTest: BaseTests {
         let pastAmountWithNumberNoDigit = "10000"
         transferFunds.pasteAmountToTransferAmount(amount: pastAmountWithNumberNoDigit)
         waitForNonExistence(spinner)
+
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "10,000.00")
     }
 
@@ -512,10 +548,9 @@ class TransferUserFundsTest: BaseTests {
                                   method: HTTPMethod.post)
 
         XCTAssertTrue(transferFunds.nextLabel.exists)
-        transferFunds.nextLabel.tap()
+        transferFunds.tapNextButton()
 
         waitForExistence(app.alerts["Error"])
-        // XCTAssert(app.alerts["Error"].exists)
         let predicate = NSPredicate(format:
             "label CONTAINS[c] 'Requested transfer amount $0.01, is below the transaction limit of $1.00.'")
         XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
@@ -555,7 +590,7 @@ class TransferUserFundsTest: BaseTests {
                                   method: HTTPMethod.post)
 
         XCTAssertTrue(transferFunds.nextLabel.exists)
-        transferFunds.nextLabel.tap()
+        transferFunds.tapNextButton()
         waitForNonExistence(spinner)
 
         let error = app.tables["createTransferTableView"].staticTexts["transferTableViewFooterViewIdentifier"].label
@@ -595,10 +630,9 @@ class TransferUserFundsTest: BaseTests {
                                   filename: "TransferErrorLimitExceeded",
                                   method: HTTPMethod.post)
         XCTAssertTrue(transferFunds.nextLabel.exists)
-        transferFunds.nextLabel.tap()
+        transferFunds.tapNextButton()
 
         waitForExistence(app.alerts["Error"])
-        XCTAssert(app.alerts["Error"].exists)
         let predicate = NSPredicate(format: """
             label CONTAINS[c] 'Your attempted transaction has exceeded the approved payout limit; \
             please contact Hyperwallet for further assistance.'
@@ -633,10 +667,9 @@ class TransferUserFundsTest: BaseTests {
                                   method: HTTPMethod.post)
 
         XCTAssertTrue(transferFunds.nextLabel.exists)
-        transferFunds.nextLabel.tap()
+        transferFunds.tapNextButton()
 
         waitForExistence(app.alerts["Error"])
-        XCTAssert(app.alerts["Error"].exists)
         let predicate = NSPredicate(format:
             "label CONTAINS[c] 'You do not have enough funds in any single currency to complete this transfer'")
         XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
@@ -652,7 +685,6 @@ class TransferUserFundsTest: BaseTests {
         waitForNonExistence(spinner)
 
         waitForExistence(app.alerts["Error"])
-        XCTAssert(app.alerts["Error"].exists)
         let predicate = NSPredicate(format:
             "label CONTAINS[c] 'The source token you provided doesn’t exist or is not a valid source.'")
         XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
@@ -723,10 +755,13 @@ class TransferUserFundsTest: BaseTests {
                              method: HTTPMethod.get)
 
         transferFunds.addSelectDestinationLabel.tap()
+
+        waitForNonExistence(spinner)
+
         XCTAssertTrue(selectDestination.selectDestinationTitle.exists)
         XCTAssertTrue(selectDestination.addTransferMethodButton.exists)
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 0), "Bank Account")
-        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), "United States Ending on 2345")
+        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), expectedUSDestinationLabel + "2345")
     }
 
     //swiftlint:disable function_body_length
@@ -761,11 +796,12 @@ class TransferUserFundsTest: BaseTests {
             || destinationDetail == "United States Ending on 6789")
 
         transferFunds.addSelectDestinationLabel.tap()
+        waitForNonExistence(spinner)
 
         XCTAssertTrue(selectDestination.selectDestinationTitle.exists)
         XCTAssertTrue(selectDestination.addTransferMethodButton.exists)
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 0), "Bank Account")
-        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), "United States Ending on 6789")
+        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), expectedUSDestinationLabel + "6789")
 
         mockServer.setupStub(url: "/rest/v3/users/usr-token/bank-accounts",
                              filename: "BankAccountIndividualResponse",
@@ -809,12 +845,12 @@ class TransferUserFundsTest: BaseTests {
                              method: HTTPMethod.get)
         transferFunds.addSelectDestinationLabel.tap()
         waitForNonExistence(spinner)
-                XCTAssertTrue(selectDestination.selectDestinationTitle.exists)
+        XCTAssertTrue(selectDestination.selectDestinationTitle.exists)
         XCTAssertTrue(selectDestination.addTransferMethodButton.exists)
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 0), "Bank Account")
-        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), "United States Ending on 6789")
+        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), expectedUSDestinationLabel + "6789")
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 1), "Bank Account")
-        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 1), "United States Ending on 2345")
+        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 1), expectedUSDestinationLabel + "2345")
     }
 
     // it passed on my local but not remote, so will comment it out for now
@@ -875,7 +911,7 @@ class TransferUserFundsTest: BaseTests {
      XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
      XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
 
-     XCTAssertEqual(transferFunds.transferSectionLabel.label, "TRANSER")
+     XCTAssertEqual(transferFunds.transferSectionLabel.label, "TRANSFER")
      XCTAssertEqual(transferFunds.transferAmountLabel.label, "Amount")
      XCTAssertEqual(transferFunds.transferCurrency.label, "JPY")
 

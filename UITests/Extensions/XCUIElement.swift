@@ -49,4 +49,21 @@ extension XCUIElement {
         self.typeText(deleteString)
         self.typeText(text)
     }
+
+    /**
+     Removes any current text in the field before typing in the new value
+     - Parameter text: the text to enter into the field
+     - Parameter field: the test field
+     - Parameter app: the XCUIApplication instance
+     */
+    func enterByPaste(text: String, field: XCUIElement, app: XCUIApplication) {
+        guard case !text.isEmpty = true else {
+            XCTFail("Tried to paste empty string!")
+            return
+        }
+        let pasteBoard = UIPasteboard.general
+        pasteBoard.string = text
+        field.doubleTap()
+        app.menuItems["Paste"].tap()
+    }
 }

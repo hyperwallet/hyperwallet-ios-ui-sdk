@@ -8,7 +8,9 @@ import XCTest
 
 class ListTransferMethodPresenterTests: XCTestCase {
     private var presenter: ListTransferMethodPresenter!
-    private let mockView = MockListTransferMethodView()
+    private let mockView = ListTransferMethodViewMock()
+    private var hyperwalletInsightsMock = HyperwalletInsightsMock()
+
     private lazy var listTransferMethodPayload = HyperwalletTestHelper
         .getDataFromJson("ListTransferMethodSuccessResponse")
     private lazy var deactivateTransferMethodPayload = HyperwalletTestHelper
@@ -46,6 +48,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
             Hippolyte.shared.stop()
         }
         mockView.resetStates()
+        hyperwalletInsightsMock.resetStates()
     }
 
     func testListTransferMethod_success() {
@@ -118,7 +121,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
 
     func testDeactivateBankAccount_success() {
         // Given
-        loadMockTransfermethods()
+        loadMockTransferMethods()
         XCTAssertTrue(presenter.sectionData.isNotEmpty, "sectionData should not be empty")
 
         HyperwalletTestHelper.setUpMockServer(request: setUpDeactivateTransferMethodRequest("/bank-accounts/"))
@@ -138,7 +141,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
 
     func testDeactivateBankAccount_failureWithError() {
         // Given
-        loadMockTransfermethods()
+        loadMockTransferMethods()
         XCTAssertTrue(presenter.sectionData.isNotEmpty, "sectionData should not be empty")
 
         HyperwalletTestHelper.setUpMockServer(request:
@@ -160,7 +163,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
 
     func testDeactivateBankCard_success() {
         // Given
-        loadMockTransfermethods()
+        loadMockTransferMethods()
         HyperwalletTestHelper.setUpMockServer(request: setUpDeactivateTransferMethodRequest("/bank-cards/"))
 
         let expectation = self.expectation(description: "deactivate a bank account")
@@ -178,7 +181,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
 
     func testDeactivatePayPalAccount_success() {
         // Given
-        loadMockTransfermethods()
+        loadMockTransferMethods()
         XCTAssertTrue(presenter.sectionData.isNotEmpty, "sectionData should not be empty")
         HyperwalletTestHelper.setUpMockServer(request: setUpDeactivateTransferMethodRequest("/paypal-accounts/"))
 
@@ -197,7 +200,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
 
     func testDeactivateBankCard_failureWithError() {
         // Given
-        loadMockTransfermethods()
+        loadMockTransferMethods()
         XCTAssertTrue(presenter.sectionData.isNotEmpty, "sectionData should not be empty")
         HyperwalletTestHelper.setUpMockServer(request:
             setUpDeactivateTransferMethodRequest("/bank-cards/", NSError(domain: "", code: -1009, userInfo: nil)))
@@ -215,7 +218,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
         XCTAssertFalse(mockView.isShowConfirmationPerformed, "The showConfirmation should not be performed")
     }
 
-    private func loadMockTransfermethods() {
+    private func loadMockTransferMethods() {
         // Given
         HyperwalletTestHelper.setUpMockServer(request: setUpListTransferMethodRequest())
 
@@ -244,7 +247,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
     }
 }
 
-class MockListTransferMethodView: ListTransferMethodView {
+class ListTransferMethodViewMock: ListTransferMethodView {
     var isHideLoadingPerformed = false
     var isShowLoadingPerformed = false
     var isShowTransferMethodsPerformed = false
@@ -291,12 +294,15 @@ class MockListTransferMethodView: ListTransferMethodView {
         expectation?.fulfill()
     }
 
-    func showTransferMethods() {
+    func reloadData() {
         isShowTransferMethodsPerformed = true
         expectation?.fulfill()
     }
 
-    func showError(_ error: HyperwalletErrorType, _ retry: (() -> Void)?) {
+    func showError(_ error: HyperwalletErrorType,
+                   pageName: String,
+                   pageGroup: String,
+                   _ retry: (() -> Void)?) {
         isShowErrorPerformed = true
         retry?()
         expectation?.fulfill()

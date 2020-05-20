@@ -18,8 +18,11 @@
 
 import UIKit
 
+/// Hyperwallet's enum to indicate processing state
 public enum ProcessingState: CustomStringConvertible {
+    /// The processing state
     case processing
+    /// The complete state
     case complete
 
     public var description: String {
@@ -32,7 +35,7 @@ public enum ProcessingState: CustomStringConvertible {
         }
     }
 }
-
+/// The processing view
 public final class ProcessingView: UIView {
     @IBOutlet private weak var stateLabel: UILabel!
     @IBOutlet private weak var checkImageView: UIImageView!
@@ -60,7 +63,7 @@ public final class ProcessingView: UIView {
         super.init(coder: aDecoder)
         defaultInit()
     }
-
+    /// Convenience Initializer for view
     public convenience init(showInView view: UIView) {
         var parentView = view
         if let superView = (view as? UITableView)?.superview {
@@ -70,7 +73,7 @@ public final class ProcessingView: UIView {
         parentView.addSubview(self)
         self.layer.add(fadeInAnimation(), forKey: nil)
     }
-
+   /// Convenience Initializer
     public convenience init() {
         guard let view = UIApplication.shared.keyWindow!.rootViewController?.view
             else {
@@ -88,7 +91,7 @@ public final class ProcessingView: UIView {
         self.addSubview(contentView)
         state = .processing
     }
-
+    /// Tells the view that its superview changed
     override public func didMoveToSuperview() {
         if self.superview == nil {
             return
@@ -121,7 +124,7 @@ public final class ProcessingView: UIView {
         }
         stateLabel.text = state?.description
     }
-
+    /// To hide processing symbol
     public func hide(with state: ProcessingState? = nil) {
         CATransaction.begin()
         if let state = state {

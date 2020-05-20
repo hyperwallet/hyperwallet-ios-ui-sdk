@@ -35,37 +35,38 @@ class TransferFundsConfirmation {
     // Confirm button
     var confirmButton: XCUIElement
 
+    var scheduleTable: XCUIElement
+
     init(app: XCUIApplication) {
         self.app = app
+        scheduleTable = app.tables["scheduleTransferTableView"]
 
-        transferDestinationLabel = app.tables["scheduleTransferTableView"]
-            .staticTexts["transferDestinationTitleLabel"]
-        transferDestinationDetailLabel = app.tables["scheduleTransferTableView"]
-            .staticTexts["transferDestinationSubtitleLabel"]
+        transferDestinationLabel = scheduleTable.staticTexts["transferDestinationTitleLabel"]
+        transferDestinationDetailLabel = scheduleTable.staticTexts["transferDestinationSubtitleLabel"]
 
-        summaryTitle = app.tables["scheduleTransferTableView"]
-            .staticTexts["transfer_section_header_summary".localized()]
-        summaryAmountLabel = app.tables["scheduleTransferTableView"]
-            .staticTexts["transfer_amount_confirmation".localized()]
-        summaryFeeLabel = app.tables["scheduleTransferTableView"]
-            .staticTexts["transfer_fee_confirmation".localized()]
-        summaryReceiveLabel = app.tables["scheduleTransferTableView"]
-            .staticTexts["transfer_net_amount_confirmation".localized()]
+        summaryTitle = scheduleTable.staticTexts["transfer_section_header_summary".localized()]
+        summaryAmountLabel = scheduleTable.staticTexts["transfer_amount_confirmation".localized()]
+        summaryFeeLabel = scheduleTable.staticTexts["transfer_fee_confirmation".localized()]
+        summaryReceiveLabel = scheduleTable.staticTexts["transfer_net_amount_confirmation".localized()]
 
-        noteLabel = app.tables["scheduleTransferTableView"].staticTexts["NOTES"]
+        noteLabel = scheduleTable.staticTexts["NOTES"]
 
         noteDescription = app.cells.textFields["transferNotesTextField"]
 
-        foreignExchangeSectionLabel = app.tables["scheduleTransferTableView"]
-            .staticTexts["transfer_section_header_foreignExchange".localized()]
-        foreignExchangeSell = app.tables["scheduleTransferTableView"]
-            .staticTexts["transfer_fx_sell_confirmation".localized()]
-        foreignExchangeBuy = app.tables["scheduleTransferTableView"]
-            .staticTexts["transfer_fx_buy_confirmation".localized()]
-        foreignExchangeRate = app.tables["scheduleTransferTableView"]
-            .staticTexts["transfer_fx_rate_confirmation".localized()]
+        foreignExchangeSectionLabel = scheduleTable.staticTexts["transfer_section_header_foreignExchange".localized()]
+        foreignExchangeSell = scheduleTable.staticTexts["transfer_fx_sell_confirmation".localized()]
+        foreignExchangeBuy = scheduleTable.staticTexts["transfer_fx_buy_confirmation".localized()]
+        foreignExchangeRate = scheduleTable.staticTexts["transfer_fx_rate_confirmation".localized()]
 
-        confirmButton = app.tables["scheduleTransferTableView"]
-            .staticTexts["transfer_button_confirm".localized()]
+        if #available(iOS 13.0, *) {
+            confirmButton = scheduleTable.cells.buttons["scheduleTransferLabel"]
+        } else {
+            confirmButton = scheduleTable.cells.staticTexts["scheduleTransferLabel"]
+        }
+    }
+
+    func tapConfirmButton() {
+        app.scroll(to: confirmButton)
+        confirmButton.tap()
     }
 }

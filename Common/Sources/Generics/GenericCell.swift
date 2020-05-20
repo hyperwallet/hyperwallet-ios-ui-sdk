@@ -18,28 +18,29 @@
 
 import UIKit
 
-/// Represents the country and currency data to be displyed on the CountryCurrencyCell
-
+/// Represents the data displayed in the selection screens (like country, currency)
 public protocol GenericCellConfiguration {
     /// The title
     var title: String? { get }
     /// The value
     var value: String? { get }
 }
+
 extension GenericCellConfiguration {
     /// The cell identifier
     public var identifier: String {
         return "cell\(title ?? "")"
     }
 }
-
+/// The tableview cell
 open class GenericCell<ModelType>: UITableViewCell {
+    /// The item
     open var item: ModelType!
-
+    /// Initializes the tableview cell
     override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
-
+    /// The required initializer
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
