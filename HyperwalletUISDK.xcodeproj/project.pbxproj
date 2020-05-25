@@ -169,18 +169,6 @@
 		9807B76B226442C60028A280 /* TransferMethodConfigurationBankAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFB61522261E84D00C4A8AA /* TransferMethodConfigurationBankAccountResponse.json */; };
 		9807B76C226442C60028A280 /* TransferMethodConfigurationBankCardResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFB614F2261E84C00C4A8AA /* TransferMethodConfigurationBankCardResponse.json */; };
 		9807B76D226442C60028A280 /* UnexpectedErrorResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFB61492261E84C00C4A8AA /* UnexpectedErrorResponse.json */; };
-		9873BA77246DD33A00B9D4F1 /* HyperwalletSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98FBC68923D8D8D90050E2B6 /* HyperwalletSDK.framework */; };
-		9873BA78246DD33A00B9D4F1 /* HyperwalletSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 98FBC68923D8D8D90050E2B6 /* HyperwalletSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		9873BA79246DD3C800B9D4F1 /* HyperwalletSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98FBC68923D8D8D90050E2B6 /* HyperwalletSDK.framework */; };
-		9873BA7A246DD3C800B9D4F1 /* HyperwalletSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 98FBC68923D8D8D90050E2B6 /* HyperwalletSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		9873BA7C246DD3DE00B9D4F1 /* HyperwalletSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98FBC68923D8D8D90050E2B6 /* HyperwalletSDK.framework */; };
-		9873BA7D246DD3DE00B9D4F1 /* HyperwalletSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 98FBC68923D8D8D90050E2B6 /* HyperwalletSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		9873BA7F246DD3F200B9D4F1 /* HyperwalletSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98FBC68923D8D8D90050E2B6 /* HyperwalletSDK.framework */; };
-		9873BA80246DD3F200B9D4F1 /* HyperwalletSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 98FBC68923D8D8D90050E2B6 /* HyperwalletSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		9873BA82246DD47800B9D4F1 /* HyperwalletSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98FBC68923D8D8D90050E2B6 /* HyperwalletSDK.framework */; };
-		9873BA83246DD47800B9D4F1 /* HyperwalletSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 98FBC68923D8D8D90050E2B6 /* HyperwalletSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		98EDBF80246DFDFB008A4015 /* Insights.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EBD0C682375FAE400569342 /* Insights.framework */; };
-		98EDBF81246DFDFB008A4015 /* Insights.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EBD0C682375FAE400569342 /* Insights.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		98EDBF8E2474649D008A4015 /* PrepaidCardReceiptResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98EDBF89247451C0008A4015 /* PrepaidCardReceiptResponse.json */; };
 		98EDBF8F247464A1008A4015 /* UserReceiptResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98EDBF8A247451C0008A4015 /* UserReceiptResponse.json */; };
 		98F3D754230C5BE400A8195F /* TransferFundsConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F3D747230C5ABB00A8195F /* TransferFundsConfirmation.swift */; };
@@ -552,65 +540,6 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		9873BA76246DD23700B9D4F1 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				9873BA78246DD33A00B9D4F1 /* HyperwalletSDK.framework in Embed Frameworks */,
-				98EDBF81246DFDFB008A4015 /* Insights.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9873BA7B246DD3C900B9D4F1 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				9873BA7A246DD3C800B9D4F1 /* HyperwalletSDK.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9873BA7E246DD3DF00B9D4F1 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				9873BA7D246DD3DE00B9D4F1 /* HyperwalletSDK.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9873BA81246DD3F300B9D4F1 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				9873BA80246DD3F200B9D4F1 /* HyperwalletSDK.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9873BA84246DD47900B9D4F1 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				9873BA83246DD47800B9D4F1 /* HyperwalletSDK.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		0702673A22B308B60057D62B /* PrepaidCardReceiptResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardReceiptResponse.json; sourceTree = "<group>"; };
 		070769E322D7E1FB00F3C7CF /* UnexpectedErrorResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UnexpectedErrorResponse.json; sourceTree = "<group>"; };
@@ -972,7 +901,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9873BA82246DD47800B9D4F1 /* HyperwalletSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1003,7 +931,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9873BA79246DD3C800B9D4F1 /* HyperwalletSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1019,7 +946,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9873BA7F246DD3F200B9D4F1 /* HyperwalletSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1058,8 +984,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9873BA77246DD33A00B9D4F1 /* HyperwalletSDK.framework in Frameworks */,
-				98EDBF80246DFDFB008A4015 /* Insights.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1105,7 +1029,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9873BA7C246DD3DE00B9D4F1 /* HyperwalletSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2230,7 +2153,6 @@
 				073BB97F22E63DB50053C24E /* Frameworks */,
 				073BB98022E63DB50053C24E /* Resources */,
 				073BB99C22E63E530053C24E /* SwiftLint */,
-				9873BA84246DD47900B9D4F1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2308,7 +2230,6 @@
 				4AE6B6BD22D605B20009DEFE /* Frameworks */,
 				4AE6B6BE22D605B20009DEFE /* Resources */,
 				4A012F5022D62EAA008C1D35 /* Swift Lint */,
-				9873BA7B246DD3C900B9D4F1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2346,7 +2267,6 @@
 				643912D122DF40CB00036609 /* Frameworks */,
 				643912D222DF40CB00036609 /* Resources */,
 				DB551F6322E132C000DD65C2 /* SwiftLint */,
-				9873BA81246DD3F300B9D4F1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2428,7 +2348,6 @@
 				DB551F4622E1316400DD65C2 /* Frameworks */,
 				DB551F4722E1316400DD65C2 /* Resources */,
 				DB551F6422E132D900DD65C2 /* SwiftLint */,
-				9873BA76246DD23700B9D4F1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2546,7 +2465,6 @@
 				DBAF929A22CFCBC7004F197A /* Frameworks */,
 				DBAF929B22CFCBC7004F197A /* Resources */,
 				DBAF92B922CFCEF2004F197A /* SwiftLint */,
-				9873BA7E246DD3DF00B9D4F1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -3592,7 +3510,6 @@
 		073BB99322E63DB50053C24E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -3624,7 +3541,6 @@
 		073BB99422E63DB50053C24E /* XCUITest */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -3656,7 +3572,6 @@
 		073BB99522E63DB50053C24E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -3915,7 +3830,6 @@
 		4AE6B6D222D605B20009DEFE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -3951,7 +3865,6 @@
 		4AE6B6D322D605B20009DEFE /* XCUITest */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -3987,7 +3900,6 @@
 		4AE6B6D422D605B20009DEFE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -4100,7 +4012,6 @@
 		643912E522DF40CB00036609 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4131,7 +4042,6 @@
 		643912E622DF40CB00036609 /* XCUITest */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4162,7 +4072,6 @@
 		643912E722DF40CB00036609 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4375,7 +4284,6 @@
 		DB551F5A22E1316400DD65C2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4406,7 +4314,6 @@
 		DB551F5B22E1316400DD65C2 /* XCUITest */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4437,7 +4344,6 @@
 		DB551F5C22E1316400DD65C2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4967,7 +4873,6 @@
 		DBAF92AF22CFCBC7004F197A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -5001,7 +4906,6 @@
 		DBAF92B022CFCBC7004F197A /* XCUITest */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -5035,7 +4939,6 @@
 		DBAF92B122CFCBC7004F197A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
