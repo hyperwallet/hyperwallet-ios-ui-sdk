@@ -58,8 +58,12 @@ final class ListTransferDestinationCell: UITableViewCell {
 
     @objc dynamic var subTitleLabelFont: UIFont! {
         get { return detailTextLabel?.font }
-        set { detailTextLabel?.font = newValue
-            detailTextLabel?.font = newValue }
+        set { detailTextLabel?.font = newValue }
+    }
+
+    @objc dynamic var subTitleLabelColor: UIColor! {
+        get { return detailTextLabel?.textColor }
+        set { detailTextLabel?.textColor = newValue }
     }
 }
 

@@ -41,6 +41,15 @@ public extension ThemeManager {
         proxy.subTitleLabelColor = Theme.Label.subTitleColor
     }
 
+    private static func applyToListTransferDestinationCell() {
+        let proxy = ListTransferDestinationCell.appearance()
+        proxy.titleLabelFont = Theme.Label.bodyFont
+        proxy.titleLabelColor = Theme.Label.color
+        proxy.subTitleLabelFont = Theme.Label.captionOne
+        proxy.subTitleLabelColor = Theme.Label.subTitleColor
+        proxy.tintColor = Theme.Cell.tintColor
+    }
+
     private static func applyToTransferButtonCell() {
         let proxy = TransferButtonCell.appearance()
         proxy.titleLabelColor = Theme.Button.color

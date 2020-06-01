@@ -59,6 +59,12 @@ public class Theme: NSObject {
         public static var isTranslucent = false
         /// The color of NavigationBar shadow
         public static var shadowColor = UIColor.clear
+        /// UINavigationBar large title color
+        public static var largeTitleColor = Theme.tintColor
+        /// UINavigationBar title color
+        public static var titleColor = Theme.tintColor
+        /// UINavigationBar Back Button color
+        public static var backButtonColor = Theme.tintColor
     }
 
     /// Representation of all customizable visual style property for `UIButton`.
@@ -67,6 +73,8 @@ public class Theme: NSObject {
         public static var color = Theme.themeColor
         /// The button font
         public static var font = Theme.Label.bodyFont
+        /// Button background color
+        public static var backgroundColor = Theme.tintColor
     }
 
     /// Representation of all customizable visual style property for `UIText`.
@@ -79,8 +87,14 @@ public class Theme: NSObject {
 
     /// Representation of all customizable visual style property for `UISearchBar`.
     public struct SearchBar {
-        /// The `UITextField` tint color
+        /// The `SearchBar`style
+        public static var style = UISearchBar.Style.default
+        /// The `SearchBar`bar style
+        public static var barStyle = UIBarStyle.default
+        /// The `SearchBar` tint color
         public static var textFieldTintColor = Theme.tintColor
+        /// The `UITextField` search icon color
+        public static var searchIconColor = Theme.tintColor
         /// The `UITextField` background color.
         public static var textFieldBackgroundColor = UIColor(rgb: 0x28BBD7)
     }
@@ -98,6 +112,8 @@ public class Theme: NSObject {
         public static let headerHeight = CGFloat(16)
         /// The divider UITableViewViewCell height.
         public static let dividerHeight = CGFloat(8)
+        /// The `UITableViewViewCell` tint color
+        public static var tintColor = Theme.tintColor
     }
 
     /// Representation of all customizable visual style property for the `Hyperwallet`'s icon.

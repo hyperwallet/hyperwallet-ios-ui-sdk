@@ -55,6 +55,7 @@ final class AddTransferMethodController: UITableViewController {
         button.titleLabel?.font = Theme.Label.bodyFont
         button.setTitleColor(Theme.Button.color, for: UIControl.State.normal)
         button.addTarget(self, action: #selector(didTap), for: .touchUpInside)
+        button.backgroundColor = Theme.Button.backgroundColor
         return button
     }()
 
