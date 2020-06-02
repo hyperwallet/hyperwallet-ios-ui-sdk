@@ -88,6 +88,8 @@ public class Theme: NSObject {
         public static var color = UIColor.black
         /// The text disabled color
         public static var disabledColor = Theme.Label.textColor
+        /// The text font style
+        public static var font = UIFont.preferredFont(forTextStyle: .body)
     }
 
     /// Representation of all customizable visual style property for `UISearchBar`.
