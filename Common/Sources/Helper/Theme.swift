@@ -55,25 +55,30 @@ public class Theme: NSObject {
     public struct NavigationBar {
         /// The `UINavigationBar` bar style
         public static var barStyle = UIBarStyle.default
-        /// Sets the opaque background color
+        /// Sets the opaque background color for The `UINavigationBar`
         public static var isTranslucent = false
-        /// The color of NavigationBar shadow
+        /// The `UINavigationBar` shadow color
         public static var shadowColor = UIColor.clear
-        /// UINavigationBar large title color
+        /// The `UINavigationBar` large title color
         public static var largeTitleColor = Theme.tintColor
-        /// UINavigationBar title color
+        /// The `UINavigationBar` title color
         public static var titleColor = Theme.tintColor
-        /// UINavigationBar Back Button color
+        /// The `UINavigationBar` Back Button color
         public static var backButtonColor = Theme.tintColor
+        @available(iOS 11.0, *)
+        /// The `UINavigationBar` large title font
+        public static var largeTitleFont = UIFont.preferredFont(forTextStyle: .largeTitle)
+        /// The `UINavigationBar` title font
+        public static var titleFont = UIFont.preferredFont(forTextStyle: .title1)
     }
 
     /// Representation of all customizable visual style property for `UIButton`.
     public struct Button {
-        /// The button primary color
+        /// The `UIButton` primary color
         public static var color = Theme.themeColor
-        /// The button font
+        /// The `UIButton` font
         public static var font = Theme.Label.bodyFont
-        /// Button background color
+        /// The `UIButton` background color
         public static var backgroundColor = Theme.tintColor
     }
 

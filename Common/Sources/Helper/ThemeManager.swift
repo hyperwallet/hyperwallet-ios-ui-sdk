@@ -46,21 +46,33 @@ public class ThemeManager: NSObject {
         let proxy = UINavigationBar.appearance()
         if #available(iOS 11.0, *) {
             proxy.largeTitleTextAttributes =
-                [NSAttributedString.Key.foregroundColor: Theme.NavigationBar.largeTitleColor]
+                [
+                    NSAttributedString.Key.foregroundColor: Theme.NavigationBar.largeTitleColor,
+                    NSAttributedString.Key.font: Theme.NavigationBar.largeTitleFont
+                ]
         }
         if #available(iOS 13.0, *) {
             let navBarAppearance = UINavigationBarAppearance()
             navBarAppearance.titleTextAttributes =
-                [NSAttributedString.Key.foregroundColor: Theme.NavigationBar.titleColor]
+                [
+                    NSAttributedString.Key.foregroundColor: Theme.NavigationBar.titleColor,
+                    NSAttributedString.Key.font: Theme.NavigationBar.titleFont
+                ]
             navBarAppearance.largeTitleTextAttributes =
-                [NSAttributedString.Key.foregroundColor: Theme.NavigationBar.largeTitleColor]
+                [
+                    NSAttributedString.Key.foregroundColor: Theme.NavigationBar.largeTitleColor,
+                    NSAttributedString.Key.font: Theme.NavigationBar.largeTitleFont
+                ]
             navBarAppearance.backgroundColor = Theme.themeColor
             proxy.standardAppearance = navBarAppearance
             proxy.scrollEdgeAppearance = navBarAppearance
         }
         proxy.barTintColor = Theme.themeColor
         proxy.tintColor = Theme.tintColor
-        proxy.titleTextAttributes = [NSAttributedString.Key.foregroundColor: Theme.NavigationBar.titleColor]
+        proxy.titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: Theme.NavigationBar.titleColor,
+            NSAttributedString.Key.font: Theme.NavigationBar.titleFont
+        ]
         proxy.backItem?.backBarButtonItem?.tintColor = Theme.NavigationBar.backButtonColor
         proxy.barStyle = Theme.NavigationBar.barStyle
         proxy.isTranslucent = Theme.NavigationBar.isTranslucent
