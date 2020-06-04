@@ -48,13 +48,13 @@ public extension ThemeManager {
         let proxy = ListTransferMethodCell.appearance()
         proxy.titleLabelFont = Theme.Label.bodyFont
         proxy.titleLabelColor = Theme.Label.color
-        proxy.subTitleLabelFont = Theme.Label.captionOne
+        proxy.subTitleLabelFont = Theme.Label.subTitleFont
     }
 
     private static func applyToSelectTransferMethodTypeCell() {
         let proxy = SelectTransferMethodTypeCell.appearance()
         proxy.titleLabelFont = Theme.Label.bodyFont
         proxy.titleLabelColor = Theme.Label.color
-        proxy.subTitleLabelFont = Theme.Label.captionOne
+        proxy.subTitleLabelFont = Theme.Label.subTitleFont
     }
 }

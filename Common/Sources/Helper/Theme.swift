@@ -45,8 +45,8 @@ public class Theme: NSObject {
         public static var titleFont = UIFont.preferredFont(forTextStyle: .headline)
         /// The body font style
         public static var bodyFont = UIFont.preferredFont(forTextStyle: .body)
-        /// The caption one font style
-        public static var captionOne = UIFont.preferredFont(forTextStyle: .caption1)
+        /// The subtitle font style
+        public static var subTitleFont = UIFont.preferredFont(forTextStyle: .caption1)
         /// The footnote font style
         public static var footnoteFont = UIFont.preferredFont(forTextStyle: .footnote)
     }
