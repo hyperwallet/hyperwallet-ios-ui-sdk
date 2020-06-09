@@ -39,6 +39,16 @@ public extension UIViewController {
         view.backgroundColor = Theme.ViewController.backgroundColor
     }
 
+   /// Removes the current coordinator while moving back
+    func removeCoordinator() {
+        Holder.coordinator.removeValue(forKey: ObjectIdentifier(self))
+    }
+
+    /// Removes  all the coordinators while moving back
+    func removeAllCoordinators() {
+        Holder.coordinator.removeAll()
+    }
+
     /// Hide keyboard when tapped around on the screen
     func hideKeyboardWhenTappedAround() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))

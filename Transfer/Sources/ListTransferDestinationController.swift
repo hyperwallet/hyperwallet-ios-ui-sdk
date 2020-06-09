@@ -56,6 +56,13 @@ final class ListTransferDestinationController: UITableViewController {
         presenter = ListTransferDestinationPresenter(view: self)
     }
 
+    override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
+        if parent == nil {
+            self.removeCoordinator()
+        }
+    }
+
     // MARK: set up list of transfer methods table view
     private func setupTransferMethodTableView() {
         tableView = UITableView(frame: .zero, style: .grouped)
@@ -179,5 +186,6 @@ extension ListTransferDestinationController {
             navigationController?.popViewController(animated: false)
             flowDelegate?.didFlowComplete(with: response)
         }
+        self.removeAllCoordinators()
     }
 }

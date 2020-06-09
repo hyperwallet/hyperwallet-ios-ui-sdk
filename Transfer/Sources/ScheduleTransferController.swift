@@ -66,6 +66,13 @@ final class ScheduleTransferController: UITableViewController, UITextFieldDelega
         }
     }
 
+    override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
+        if parent == nil {
+            self.removeCoordinator()
+        }
+    }
+
     private func setUpScheduleTransferTableView() {
         tableView = UITableView(frame: view.frame, style: .grouped)
         tableView.accessibilityIdentifier = "scheduleTransferTableView"

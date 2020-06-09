@@ -59,6 +59,13 @@ final class SelectTransferMethodTypeController: UITableViewController {
         presenter = SelectTransferMethodTypePresenter(self)
     }
 
+    override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
+        if parent == nil {
+            self.removeCoordinator()
+        }
+    }
+
     // MARK: - Setup Layout
     private func setupTransferMethodTypeTableView() {
         tableView = UITableView(frame: .zero, style: .plain)
@@ -242,5 +249,6 @@ extension SelectTransferMethodTypeController {
             coordinator?.navigateBackFromNextPage(with: response)
             flowDelegate?.didFlowComplete(with: response)
         }
+        self.removeAllCoordinators()
     }
 }

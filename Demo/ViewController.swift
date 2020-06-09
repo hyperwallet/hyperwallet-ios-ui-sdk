@@ -256,5 +256,6 @@ class ViewController: UITableViewController {
                 navigationController?.popViewController(animated: false)
             }
         }
+        self.removeAllCoordinators()
     }
 }

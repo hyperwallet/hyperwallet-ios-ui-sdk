@@ -29,9 +29,10 @@ final class ListTransferMethodController: UITableViewController {
     private var spinnerView: SpinnerView?
     private var processingView: ProcessingView?
     private var presenter: ListTransferMethodPresenter!
+    private var listTransferMethodsCoordinator: ListTransferMethodsCoordinator!
 
     private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "empty_list_transfer_method_message"
-                                                                              .localized())
+        .localized())
     private lazy var addAccountButton: UIButton = view.setUpEmptyListButton(text: "add_account_title".localized(),
                                                                             firstItem: emptyListLabel)
 
@@ -61,6 +62,13 @@ final class ListTransferMethodController: UITableViewController {
     @objc
     private func didTapAddButton(sender: AnyObject) {
         addTransferMethod()
+    }
+
+    override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
+        if parent == nil {
+            self.removeCoordinator()
+        }
     }
 
     // MARK: - Transfer method list table view dataSource and delegate
@@ -111,6 +119,11 @@ final class ListTransferMethodController: UITableViewController {
     }
 
     private func addTransferMethod() {
+        if coordinator == nil {
+            coordinator = listTransferMethodsCoordinator
+        } else {
+            listTransferMethodsCoordinator = coordinator as? ListTransferMethodsCoordinator
+        }
         coordinator?.navigateToNextPage(initializationData: nil)
     }
 
@@ -214,5 +227,6 @@ extension ListTransferMethodController {
             // refresh transfer method list
             presenter.listTransferMethods()
         }
+        self.removeAllCoordinators()
     }
 }

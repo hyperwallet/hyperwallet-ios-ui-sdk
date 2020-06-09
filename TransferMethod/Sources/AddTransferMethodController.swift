@@ -100,6 +100,13 @@ final class AddTransferMethodController: UITableViewController {
         setupTableView()
     }
 
+    override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
+        if parent == nil {
+            self.removeCoordinator()
+        }
+    }
+
     private func setupTableView() {
         tableView = UITableView(frame: view.frame, style: .grouped)
         tableView.allowsSelection = false

@@ -63,6 +63,13 @@ final class ReceiptDetailController: UITableViewController {
         }
     }
 
+    override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
+        if parent == nil {
+            self.removeCoordinator()
+        }
+    }
+
     private func getCellConfiguration(_ indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = presenter.sectionData[indexPath.section].cellIdentifier
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)

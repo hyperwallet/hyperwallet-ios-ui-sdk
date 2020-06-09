@@ -83,6 +83,13 @@ final class CreateTransferController: UITableViewController {
         tableView.register(TransferTableViewFooterView.self,
                            forHeaderFooterViewReuseIdentifier: footerIdentifier)
     }
+
+    override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
+        if parent == nil {
+            self.removeCoordinator()
+        }
+    }
 }
 
 // MARK: - Create transfer table view dataSource
@@ -364,5 +371,6 @@ extension CreateTransferController {
             coordinator?.navigateBackFromNextPage(with: statusTransition)
             flowDelegate?.didFlowComplete(with: statusTransition)
         }
+        self.removeAllCoordinators()
     }
 }
