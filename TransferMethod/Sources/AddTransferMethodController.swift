@@ -55,6 +55,7 @@ final class AddTransferMethodController: UITableViewController {
         button.titleLabel?.font = Theme.Label.bodyFont
         button.setTitleColor(Theme.Button.color, for: UIControl.State.normal)
         button.addTarget(self, action: #selector(didTap), for: .touchUpInside)
+        button.backgroundColor = Theme.Button.backgroundColor
         return button
     }()
 
@@ -410,8 +411,8 @@ extension AddTransferMethodController: AddTransferMethodView {
 
         if let infoLabel = infoView.arrangedSubviews[0] as? UILabel {
             infoLabel.attributedText = transferMethodType
-                .formatFeesProcessingTime(font: Theme.Label.captionOne, color: Theme.Label.subTitleColor)
-            infoLabel.font = Theme.Label.captionOne
+                .formatFeesProcessingTime(font: Theme.Label.subTitleFont, color: Theme.Label.subTitleColor)
+            infoLabel.font = Theme.Label.subTitleFont
             let infoSection = AddTransferMethodSectionData(
                 fieldGroup: "INFORMATION",
                 cells: [infoView])

@@ -57,9 +57,9 @@ public extension ThemeManager {
         proxy.receiptTypeFont = Theme.Label.bodyFont
         proxy.receiptTypeColor = Theme.Label.color
         proxy.amountFont = Theme.Label.bodyFont
-        proxy.createdOnFont = Theme.Label.captionOne
+        proxy.createdOnFont = Theme.Label.subTitleFont
         proxy.createdOnColor = Theme.Label.subTitleColor
-        proxy.currencyFont = Theme.Label.captionOne
+        proxy.currencyFont = Theme.Label.subTitleFont
         proxy.currencyColor = Theme.Label.subTitleColor
     }
 }

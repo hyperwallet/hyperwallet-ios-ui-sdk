@@ -361,7 +361,7 @@ On the Theme is possible to customize the properties:
 | `Theme.Label.textColor` | `0x8e8e93` | The text color |
 | `Theme.Label.titleFont` | `UIFont.preferredFont(forTextStyle: .headline)` | The title font style |
 | `Theme.Label.bodyFont` | `UIFont.preferredFont(forTextStyle: .body)` | The body font style |
-| `Theme.Label.captionOne` | `UIFont.preferredFont(forTextStyle: .caption1)` | The caption one font style |
+| `Theme.Label.subTitleFont` | `UIFont.preferredFont(forTextStyle: .caption1)` | The caption one font style |
 | `Theme.Label.footnoteFont` | `UIFont.preferredFont(forTextStyle: .footnote)` | The footnote font style |
 | `Theme.NavigationBar.barStyle` | `UIBarStyle.default` | The `UINavigationBar` bar style. |
 | `Theme.NavigationBar.isTranslucent` | `false`	| Sets the opaque background color |

@@ -28,6 +28,7 @@ final class TransferNotesCell: UITableViewCell {
 
     private lazy var notesTextField: UITextField = {
         let textField = UITextField(frame: .zero)
+        textField.font = Theme.Text.font
         textField.placeholder = "transfer_description".localized()
         textField.delegate = self
         textField.translatesAutoresizingMaskIntoConstraints = false

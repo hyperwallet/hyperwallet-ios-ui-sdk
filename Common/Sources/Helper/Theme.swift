@@ -45,8 +45,8 @@ public class Theme: NSObject {
         public static var titleFont = UIFont.preferredFont(forTextStyle: .headline)
         /// The body font style
         public static var bodyFont = UIFont.preferredFont(forTextStyle: .body)
-        /// The caption one font style
-        public static var captionOne = UIFont.preferredFont(forTextStyle: .caption1)
+        /// The subtitle font style
+        public static var subTitleFont = UIFont.preferredFont(forTextStyle: .caption1)
         /// The footnote font style
         public static var footnoteFont = UIFont.preferredFont(forTextStyle: .footnote)
     }
@@ -55,18 +55,31 @@ public class Theme: NSObject {
     public struct NavigationBar {
         /// The `UINavigationBar` bar style
         public static var barStyle = UIBarStyle.default
-        /// Sets the opaque background color
+        /// Sets the opaque background color for The `UINavigationBar`
         public static var isTranslucent = false
-        /// The color of NavigationBar shadow
+        /// The `UINavigationBar` shadow color
         public static var shadowColor = UIColor.clear
+        /// The `UINavigationBar` large title color
+        public static var largeTitleColor = Theme.tintColor
+        /// The `UINavigationBar` title color
+        public static var titleColor = Theme.tintColor
+        /// The `UINavigationBar` Back Button color
+        public static var backButtonColor = Theme.tintColor
+        @available(iOS 11.0, *)
+        /// The `UINavigationBar` large title font
+        public static var largeTitleFont = UIFont.preferredFont(forTextStyle: .largeTitle)
+        /// The `UINavigationBar` title font
+        public static var titleFont = UIFont.preferredFont(forTextStyle: .title1)
     }
 
     /// Representation of all customizable visual style property for `UIButton`.
     public struct Button {
-        /// The button primary color
+        /// The `UIButton` primary color
         public static var color = Theme.themeColor
-        /// The button font
+        /// The `UIButton` font
         public static var font = Theme.Label.bodyFont
+        /// The `UIButton` background color
+        public static var backgroundColor = Theme.tintColor
     }
 
     /// Representation of all customizable visual style property for `UIText`.
@@ -75,12 +88,20 @@ public class Theme: NSObject {
         public static var color = UIColor.black
         /// The text disabled color
         public static var disabledColor = Theme.Label.textColor
+        /// The text font style
+        public static var font = UIFont.preferredFont(forTextStyle: .body)
     }
 
     /// Representation of all customizable visual style property for `UISearchBar`.
     public struct SearchBar {
-        /// The `UITextField` tint color
+        /// The `SearchBar`style
+        public static var style = UISearchBar.Style.default
+        /// The `SearchBar`bar style
+        public static var barStyle = UIBarStyle.default
+        /// The `SearchBar` tint color
         public static var textFieldTintColor = Theme.tintColor
+        /// The `UITextField` search icon color
+        public static var searchIconColor = Theme.tintColor
         /// The `UITextField` background color.
         public static var textFieldBackgroundColor = UIColor(rgb: 0x28BBD7)
     }
@@ -98,6 +119,8 @@ public class Theme: NSObject {
         public static let headerHeight = CGFloat(16)
         /// The divider UITableViewViewCell height.
         public static let dividerHeight = CGFloat(8)
+        /// The `UITableViewViewCell` tint color
+        public static var tintColor = Theme.tintColor
     }
 
     /// Representation of all customizable visual style property for the `Hyperwallet`'s icon.

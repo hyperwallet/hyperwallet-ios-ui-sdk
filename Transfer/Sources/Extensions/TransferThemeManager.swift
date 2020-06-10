@@ -37,8 +37,17 @@ public extension ThemeManager {
         let proxy = TransferDestinationCell.appearance()
         proxy.titleLabelFont = Theme.Label.bodyFont
         proxy.titleLabelColor = Theme.Label.color
-        proxy.subTitleLabelFont = Theme.Label.captionOne
+        proxy.subTitleLabelFont = Theme.Label.subTitleFont
         proxy.subTitleLabelColor = Theme.Label.subTitleColor
+    }
+
+    private static func applyToListTransferDestinationCell() {
+        let proxy = ListTransferDestinationCell.appearance()
+        proxy.titleLabelFont = Theme.Label.bodyFont
+        proxy.titleLabelColor = Theme.Label.color
+        proxy.subTitleLabelFont = Theme.Label.subTitleFont
+        proxy.subTitleLabelColor = Theme.Label.subTitleColor
+        proxy.tintColor = Theme.Cell.tintColor
     }
 
     private static func applyToTransferButtonCell() {
@@ -71,7 +80,7 @@ public extension ThemeManager {
         let proxy = TransferSummaryCell.appearance()
         proxy.titleLabelFont = Theme.Label.bodyFont
         proxy.titleLabelColor = Theme.Label.color
-        proxy.subTitleLabelFont = Theme.Label.captionOne
+        proxy.subTitleLabelFont = Theme.Label.subTitleFont
         proxy.subTitleLabelColor = Theme.Label.subTitleColor
     }
 
@@ -79,7 +88,7 @@ public extension ThemeManager {
         let proxy = TransferForeignExchangeCell.appearance()
         proxy.titleLabelFont = Theme.Label.bodyFont
         proxy.titleLabelColor = Theme.Label.color
-        proxy.subTitleLabelFont = Theme.Label.captionOne
+        proxy.subTitleLabelFont = Theme.Label.subTitleFont
         proxy.subTitleLabelColor = Theme.Label.subTitleColor
     }
 }

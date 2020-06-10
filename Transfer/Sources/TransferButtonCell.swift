@@ -29,6 +29,7 @@ final class TransferButtonCell: UITableViewCell {
         label.adjustsFontForContentSizeCategory = true
         label.accessibilityIdentifier = "createTransferNextLabel"
         label.textAlignment = .center
+        label.backgroundColor = Theme.Button.backgroundColor
         return label
     }()
 
