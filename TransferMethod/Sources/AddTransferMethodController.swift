@@ -103,7 +103,7 @@ final class AddTransferMethodController: UITableViewController {
     override func willMove(toParent parent: UIViewController?) {
         super.willMove(toParent: parent)
         if parent == nil {
-            self.removeCoordinator()
+            removeCoordinator()
         }
     }
 
@@ -336,6 +336,7 @@ extension AddTransferMethodController: AddTransferMethodView {
                                             object: self,
                                             userInfo: [UserInfo.transferMethodAdded: transferMethod])
         }
+        removeCoordinator()
         flowDelegate?.didFlowComplete(with: transferMethod)
     }
 

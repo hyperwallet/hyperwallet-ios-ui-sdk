@@ -87,7 +87,7 @@ final class CreateTransferController: UITableViewController {
     override func willMove(toParent parent: UIViewController?) {
         super.willMove(toParent: parent)
         if parent == nil {
-            self.removeCoordinator()
+            removeCoordinator()
         }
     }
 }
@@ -369,8 +369,8 @@ extension CreateTransferController {
             presenter.loadCreateTransfer()
         } else if let statusTransition = response as? HyperwalletStatusTransition {
             coordinator?.navigateBackFromNextPage(with: statusTransition)
+            removeCoordinator()
             flowDelegate?.didFlowComplete(with: statusTransition)
         }
-        self.removeAllCoordinators()
     }
 }

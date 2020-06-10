@@ -29,7 +29,6 @@ final class ListTransferMethodController: UITableViewController {
     private var spinnerView: SpinnerView?
     private var processingView: ProcessingView?
     private var presenter: ListTransferMethodPresenter!
-    private var listTransferMethodsCoordinator: ListTransferMethodsCoordinator!
 
     private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "empty_list_transfer_method_message"
         .localized())
@@ -67,7 +66,7 @@ final class ListTransferMethodController: UITableViewController {
     override func willMove(toParent parent: UIViewController?) {
         super.willMove(toParent: parent)
         if parent == nil {
-            self.removeCoordinator()
+            removeCoordinator()
         }
     }
 
@@ -119,11 +118,6 @@ final class ListTransferMethodController: UITableViewController {
     }
 
     private func addTransferMethod() {
-        if coordinator == nil {
-            coordinator = listTransferMethodsCoordinator
-        } else {
-            listTransferMethodsCoordinator = coordinator as? ListTransferMethodsCoordinator
-        }
         coordinator?.navigateToNextPage(initializationData: nil)
     }
 
@@ -227,6 +221,5 @@ extension ListTransferMethodController {
             // refresh transfer method list
             presenter.listTransferMethods()
         }
-        self.removeAllCoordinators()
     }
 }
