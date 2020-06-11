@@ -46,7 +46,6 @@ public class ListReceiptCoordinator: NSObject, HyperwalletCoordinator {
 
     public func navigateToNextPage(initializationData: [InitializationDataField: Any]?) {
         let childController = ReceiptDetailController()
-        childController.coordinator = self
         childController.flowDelegate = controller
         childController.initializationData = initializationData
         controller.show(childController, sender: controller)

@@ -54,7 +54,6 @@ public class CreateTransferCoordinator: NSObject, HyperwalletCoordinator  {
 
     public func navigateToNextPage(initializationData: [InitializationDataField: Any]? = nil) {
         let childController = ScheduleTransferController()
-        childController.coordinator = self
         childController.initializationData = initializationData
         childController.flowDelegate = controller
         controller.show(childController, sender: controller)
