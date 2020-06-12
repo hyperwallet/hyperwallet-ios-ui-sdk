@@ -97,6 +97,6 @@ extension UIViewController: HyperwalletFlowDelegate {
 
     /// Removes all coordinators
     public func removeAllCoordinators() {
-        Holder.coordinator.removeValue(forKey: ObjectIdentifier(self))
+        Holder.coordinator.removeAll()
     }
 }
