@@ -53,6 +53,13 @@ final class ListReceiptController: UITableViewController {
                                             as? String)
     }
 
+    override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
+        if parent == nil {
+            removeCoordinator()
+        }
+    }
+
     // MARK: list receipt table view data source
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.sectionData[section].value.count

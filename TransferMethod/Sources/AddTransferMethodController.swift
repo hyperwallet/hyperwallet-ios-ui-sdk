@@ -101,6 +101,13 @@ final class AddTransferMethodController: UITableViewController {
         setupTableView()
     }
 
+    override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
+        if parent == nil {
+            removeCoordinator()
+        }
+    }
+
     private func setupTableView() {
         tableView = UITableView(frame: view.frame, style: .grouped)
         tableView.allowsSelection = false
@@ -330,6 +337,7 @@ extension AddTransferMethodController: AddTransferMethodView {
                                             object: self,
                                             userInfo: [UserInfo.transferMethodAdded: transferMethod])
         }
+        removeCoordinator()
         flowDelegate?.didFlowComplete(with: transferMethod)
     }
 
