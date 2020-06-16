@@ -126,7 +126,7 @@ public class Theme: NSObject {
     /// Representation of all customizable visual style property for the `Hyperwallet`'s icon.
     public struct Icon {
         /// The icon font size
-        public static let size = 20
+        public static var size = 20
         /// The icon frame
         public static let frame = CGSize(width: 40, height: 40)
         /// The icon primary color
