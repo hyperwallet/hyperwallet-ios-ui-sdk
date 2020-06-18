@@ -27,7 +27,7 @@ final class SelectionWidget: AbstractWidget {
 
     private let labelField: UILabel = {
         let label = UILabel()
-        label.font = Theme.Label.bodyFont
+        label.font = Theme.Label.titleFont
         return label
     }()
     private var selectedValue: String?
@@ -46,7 +46,7 @@ final class SelectionWidget: AbstractWidget {
         }
 
         addArrangedSubview(labelField)
-        labelField.font = Theme.Label.bodyFont
+        labelField.font = Theme.Label.titleFont
         labelField.adjustsFontForContentSizeCategory = true
         spacing = 16
         if field.isEditable ?? true {

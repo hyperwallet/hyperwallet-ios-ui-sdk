@@ -28,6 +28,7 @@ final class TransferAmountCell: UITableViewCell {
 
     private lazy var amountTextField: PasteOnlyTextField = {
         let textField = PasteOnlyTextField(frame: .zero)
+        textField.font = Theme.Text.font
         textField.textAlignment = .right
         textField.keyboardType = UIKeyboardType.decimalPad
         textField.delegate = self

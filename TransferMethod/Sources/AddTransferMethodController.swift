@@ -52,9 +52,10 @@ final class AddTransferMethodController: UITableViewController {
         button.accessibilityIdentifier = "createAccountButton"
         button.setTitle("create_account_label".localized(), for: .normal)
         button.titleLabel?.adjustsFontForContentSizeCategory = true
-        button.titleLabel?.font = Theme.Label.bodyFont
+        button.titleLabel?.font = Theme.Label.titleFont
         button.setTitleColor(Theme.Button.color, for: UIControl.State.normal)
         button.addTarget(self, action: #selector(didTap), for: .touchUpInside)
+        button.backgroundColor = Theme.Button.backgroundColor
         return button
     }()
 
@@ -98,6 +99,13 @@ final class AddTransferMethodController: UITableViewController {
     private func setupLayout() {
         setViewBackgroundColor()
         setupTableView()
+    }
+
+    override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
+        if parent == nil {
+            removeCoordinator()
+        }
     }
 
     private func setupTableView() {
@@ -329,6 +337,7 @@ extension AddTransferMethodController: AddTransferMethodView {
                                             object: self,
                                             userInfo: [UserInfo.transferMethodAdded: transferMethod])
         }
+        removeCoordinator()
         flowDelegate?.didFlowComplete(with: transferMethod)
     }
 
@@ -402,8 +411,8 @@ extension AddTransferMethodController: AddTransferMethodView {
 
         if let infoLabel = infoView.arrangedSubviews[0] as? UILabel {
             infoLabel.attributedText = transferMethodType
-                .formatFeesProcessingTime(font: Theme.Label.captionOne, color: Theme.Label.subTitleColor)
-            infoLabel.font = Theme.Label.captionOne
+                .formatFeesProcessingTime(font: Theme.Label.subtitleFont, color: Theme.Label.subtitleColor)
+            infoLabel.font = Theme.Label.subtitleFont
             let infoSection = AddTransferMethodSectionData(
                 fieldGroup: "INFORMATION",
                 cells: [infoView])
