@@ -101,9 +101,9 @@ extension ListTransferDestinationCell {
         let attributedText = NSMutableAttributedString()
         attributedText.append(value: String(format: "%@\n", transferMethodCountry),
                               font: subTitleLabelFont,
-                              color: Theme.Label.subTitleColor)
+                              color: Theme.Label.subtitleColor)
         if let additionalInfo = additionalInfo {
-            attributedText.append(value: additionalInfo, font: subTitleLabelFont, color: Theme.Label.subTitleColor)
+            attributedText.append(value: additionalInfo, font: subTitleLabelFont, color: Theme.Label.subtitleColor)
         }
 
         return attributedText

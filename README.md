@@ -357,28 +357,38 @@ On the Theme is possible to customize the properties:
 | `Theme.tintColor` | `UIColor.white` | The tint color |
 | `Theme.Label.color` | `UIColor.black` | The label primary color |
 | `Theme.Label.errorColor` | `0xFF3B30` | The color to highlight errors|
-| `Theme.Label.subTitleColor` | `0x666666` | The subtitle color |
+| `Theme.Label.subtitleColor` | `0x666666` | The subtitle color |
 | `Theme.Label.textColor` | `0x8e8e93` | The text color |
-| `Theme.Label.titleFont` | `UIFont.preferredFont(forTextStyle: .headline)` | The title font style |
-| `Theme.Label.bodyFont` | `UIFont.preferredFont(forTextStyle: .body)` | The body font style |
-| `Theme.Label.subTitleFont` | `UIFont.preferredFont(forTextStyle: .caption1)` | The caption one font style |
+| `Theme.Label.titleFont` | `UIFont.preferredFont(forTextStyle: .body)` | The title font style |
+| `Theme.Label.subtitleFont` | `UIFont.preferredFont(forTextStyle: .caption1)` | The caption one font style |
 | `Theme.Label.footnoteFont` | `UIFont.preferredFont(forTextStyle: .footnote)` | The footnote font style |
 | `Theme.NavigationBar.barStyle` | `UIBarStyle.default` | The `UINavigationBar` bar style. |
 | `Theme.NavigationBar.isTranslucent` | `false`	| Sets the opaque background color |
 | `Theme.NavigationBar.shadowColor` | `UIColor.clear`	| The color of NavigationBar shadow |
+| `Theme.NavigationBar.largeTitleColor` | `UIColor.white`    | The UINavigationBar large title color |
+| `Theme.NavigationBar.titleColor` | `UIColor.white`    | The UINavigationBar title color |
+| `Theme.NavigationBar.backButtonColor` | `UIColor.white`    | The UINavigationBar Back Button color |
+| `Theme.NavigationBar.largeTitleFont` | `UIFont.preferredFont(forTextStyle: .largeTitle)`    | The UINavigationBar large title font |
+| `Theme.NavigationBar.titleFont` | `UIFont.preferredFont(forTextStyle: .title1)`    | The UINavigationBar title font |
 | `Theme.Button.color` | `Theme.themeColor` | The button primary color |
 | `Theme.Button.font` | `Theme.Label.bodyFont` | The button font |
+| `Theme.Button.backgroundColor` | `UIColor.white` | The button background color |
+| `Theme.Text.font` | `UIFont.preferredFont(forTextStyle: .body)` | The text font style |
 | `Theme.Text.color` | `UIColor.black` | The text primary color |
 | `Theme.Text.disabledColor` | `Theme.Label.textColor` | The text disabled color |
-| `Theme.SearchBar.textFieldTintColor` | `Theme.tintColor` | The `UITextField` tint color |
+| `Theme.SearchBar.style` | `UISearchBar.Style.default` | The `UISearchBar` style |
+| `Theme.SearchBar.barStyle` | `UIBarStyle.default` | The `UISearchBar` bar style |
+| `Theme.SearchBar.searchIconColor` | `UIColor.white` | The `UISearchBar` search icon color |
+| `Theme.SearchBar.textFieldTintColor` | `UIColor.white` | The `UITextField` tint color |
 | `Theme.SearchBar.textFieldBackgroundColor` | `0x28BBD7` | The `UITextField` background color |
-| `Theme.Cell.smallHeight` | `44` | The common `UITableViewViewCell` height. |
-| `Theme.Cell.mediumHeight` | `63`	| The `UITableViewViewCell` height for the receipt items |
-| `Theme.Cell.largeHeight` | `88` | The `UITableViewViewCell` height for the List transfer method items and the Select transfer method type items. |
+| `Theme.Cell.smallHeight` | `44` | The common ``UITableViewCell`` height. |
+| `Theme.Cell.mediumHeight` | `63`	| The `UITableViewCell` height for the receipt items |
+| `Theme.Cell.largeHeight` | `88` | The `UITableViewCell` height for the List transfer method items and the Select transfer method type items. |
 | `Theme.Cell.headerHeight` | `16` | The Select transfer method type items header height. |
-| `Theme.Cell.dividerHeight` | `8` | The divider UITableViewViewCell height. |
-| `Theme.Icon.size` | `20` | The icon font size |
-| `Theme.Icon.frame` | `CGSize(width: 40, height: 40)` | The icon frame |
+| `Theme.Cell.dividerHeight` | `8` | The divider `UITableViewCell` height. |
+| `Theme.Cell.tintColor` | `UIColor.white` | The `UITableViewCell` tint color. |
+| `Theme.Icon.size` | `30` | The icon font size |
+| `Theme.Icon.frame` | `CGSize(width: 30, height: 30)` | The icon frame |
 | `Theme.Icon.primaryColor` | `Theme.themeColor` | The icon primary color |
 | `Theme.Icon.primaryBackgroundColor` | `0xE5F7FA` | The icon primary background color |
 | `Theme.Icon.creditColor` | `Amount.creditColor` | The icon credit color |

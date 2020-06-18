@@ -143,7 +143,7 @@ extension CreateTransferController {
             attributedText = NSMutableAttributedString()
             attributedText.appendParagraph(value: footer,
                                            font: Theme.Label.footnoteFont,
-                                           color: Theme.Label.subTitleColor)
+                                           color: Theme.Label.subtitleColor)
         }
         if let error = error {
             if attributedText == nil {

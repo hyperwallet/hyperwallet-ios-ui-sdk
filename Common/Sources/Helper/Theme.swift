@@ -38,15 +38,13 @@ public class Theme: NSObject {
         /// The color to highlight errors
         public static var errorColor = UIColor(rgb: 0xFF3B30)
         /// The subtitle color
-        public static var subTitleColor = UIColor(rgb: 0x666666)
+        public static var subtitleColor = UIColor(rgb: 0x666666)
         /// The text color
         public static var textColor = UIColor(rgb: 0x8e8e93)
         /// The title font style
-        public static var titleFont = UIFont.preferredFont(forTextStyle: .headline)
-        /// The body font style
-        public static var bodyFont = UIFont.preferredFont(forTextStyle: .body)
+        public static var titleFont = UIFont.preferredFont(forTextStyle: .body)
         /// The subtitle font style
-        public static var subTitleFont = UIFont.preferredFont(forTextStyle: .caption1)
+        public static var subtitleFont = UIFont.preferredFont(forTextStyle: .caption1)
         /// The footnote font style
         public static var footnoteFont = UIFont.preferredFont(forTextStyle: .footnote)
     }
@@ -77,7 +75,7 @@ public class Theme: NSObject {
         /// The `UIButton` primary color
         public static var color = Theme.themeColor
         /// The `UIButton` font
-        public static var font = Theme.Label.bodyFont
+        public static var font = Theme.Label.titleFont
         /// The `UIButton` background color
         public static var backgroundColor = Theme.tintColor
     }
@@ -94,32 +92,32 @@ public class Theme: NSObject {
 
     /// Representation of all customizable visual style property for `UISearchBar`.
     public struct SearchBar {
-        /// The `SearchBar`style
+        /// The `UISearchBar`style
         public static var style = UISearchBar.Style.default
-        /// The `SearchBar`bar style
+        /// The `UISearchBar`bar style
         public static var barStyle = UIBarStyle.default
-        /// The `SearchBar` tint color
+        /// The `UISearchBar` tint color
         public static var textFieldTintColor = Theme.tintColor
-        /// The `UITextField` search icon color
+        /// The `UISearchBar` search icon color
         public static var searchIconColor = Theme.tintColor
         /// The `UITextField` background color.
         public static var textFieldBackgroundColor = UIColor(rgb: 0x28BBD7)
     }
 
-   /// Representation of all customizable visual style property for `UITableViewViewCell`
+   /// Representation of all customizable visual style property for `UITableViewCell`
     public struct Cell {
-        /// The common `UITableViewViewCell` height.
+        /// The common `UITableViewCell` height.
         public static let smallHeight = CGFloat(44)
-        /// The `UITableViewViewCell` height for the receipt items
+        /// The `UITableViewCell` height for the receipt items
         public static let mediumHeight = CGFloat(63)
-        /// The `UITableViewViewCell` height for the List transfer method items and
+        /// The `UITableViewCell` height for the List transfer method items and
         /// the Select transfer method type items.
         public static let largeHeight = CGFloat(88)
         /// The Select transfer method type items header height.
         public static let headerHeight = CGFloat(16)
-        /// The divider UITableViewViewCell height.
+        /// The divider `UITableViewCell` height.
         public static let dividerHeight = CGFloat(8)
-        /// The `UITableViewViewCell` tint color
+        /// The `UITableViewCell` tint color
         public static var tintColor = Theme.tintColor
     }
 

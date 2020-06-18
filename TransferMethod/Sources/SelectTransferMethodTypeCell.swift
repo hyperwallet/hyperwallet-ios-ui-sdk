@@ -72,7 +72,7 @@ extension SelectTransferMethodTypeCell {
             textLabel?.adjustsFontForContentSizeCategory = true
 
             detailTextLabel?.attributedText = configuration
-                .formatFeesProcessingTime(font: subTitleLabelFont, color: Theme.Label.subTitleColor)
+                .formatFeesProcessingTime(font: subTitleLabelFont, color: Theme.Label.subtitleColor)
             detailTextLabel?.numberOfLines = 0
             detailTextLabel?.lineBreakMode = .byWordWrapping
             detailTextLabel?.adjustsFontForContentSizeCategory = true

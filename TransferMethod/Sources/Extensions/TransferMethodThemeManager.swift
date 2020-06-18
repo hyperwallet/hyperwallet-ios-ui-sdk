@@ -32,29 +32,29 @@ public extension ThemeManager {
 
     private static func applyToCountryCurrencyCell() {
         let proxy = CountryCurrencyCell.appearance()
-        proxy.titleLabelFont = Theme.Label.bodyFont
+        proxy.titleLabelFont = Theme.Label.titleFont
         proxy.titleLabelColor = Theme.Label.color
-        proxy.valueLabelFont = Theme.Label.bodyFont
+        proxy.valueLabelFont = Theme.Label.titleFont
         proxy.valueLabelColor = Theme.Label.textColor
     }
 
     private static func applyToSelectionWidgetCell() {
         let proxy = SelectionWidgetCell.appearance()
         proxy.textLabelColor = Theme.Label.color
-        proxy.textLabelFont = Theme.Label.bodyFont
+        proxy.textLabelFont = Theme.Label.titleFont
     }
 
     private static func applyToListTransferMethodTableViewCell() {
         let proxy = ListTransferMethodCell.appearance()
-        proxy.titleLabelFont = Theme.Label.bodyFont
+        proxy.titleLabelFont = Theme.Label.titleFont
         proxy.titleLabelColor = Theme.Label.color
-        proxy.subTitleLabelFont = Theme.Label.subTitleFont
+        proxy.subTitleLabelFont = Theme.Label.subtitleFont
     }
 
     private static func applyToSelectTransferMethodTypeCell() {
         let proxy = SelectTransferMethodTypeCell.appearance()
-        proxy.titleLabelFont = Theme.Label.bodyFont
+        proxy.titleLabelFont = Theme.Label.titleFont
         proxy.titleLabelColor = Theme.Label.color
-        proxy.subTitleLabelFont = Theme.Label.subTitleFont
+        proxy.subTitleLabelFont = Theme.Label.subtitleFont
     }
 }

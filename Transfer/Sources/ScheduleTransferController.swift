@@ -130,7 +130,7 @@ extension ScheduleTransferController {
             attributedText = NSMutableAttributedString()
             attributedText.appendParagraph(value: footer,
                                            font: Theme.Label.footnoteFont,
-                                           color: Theme.Label.subTitleColor)
+                                           color: Theme.Label.subtitleColor)
         }
         return attributedText
     }
