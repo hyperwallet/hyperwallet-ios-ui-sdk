@@ -133,7 +133,7 @@ public final class SpinnerView: UIView {
         self.init(frame: view.frame)
         setupLayout()
         view.addSubview(self)
-        view.addConstraintsFillEntireView(view: self)
+        //view.addConstraintsFillEntireView(view: self)
         view.bringSubviewToFront(self)
         layer.add(fadeInAnimation(), forKey: nil)
     }
