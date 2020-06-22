@@ -70,6 +70,7 @@ final class ListReceiptController: UITableViewController {
                                                  for: indexPath)
         if let listReceiptCell = cell as? ReceiptTransactionCell {
             listReceiptCell.configure(presenter.sectionData[indexPath.section].value[indexPath.row])
+            listReceiptCell.accessoryType = .disclosureIndicator
         }
         return cell
     }
@@ -77,6 +78,11 @@ final class ListReceiptController: UITableViewController {
     override public func numberOfSections(in tableView: UITableView) -> Int {
         return presenter.sectionData.count
     }
+
+    override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return Theme.Cell.height
+    }
+
     /// Returns title for header
     override public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let date = presenter.sectionData[section].key
@@ -113,8 +119,10 @@ final class ListReceiptController: UITableViewController {
         tableView.sectionFooterHeight = CGFloat.leastNormalMagnitude
         tableView.tableFooterView = UIView()
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = Theme.Cell.smallHeight
+        tableView.estimatedRowHeight = Theme.Cell.height
         tableView.sectionHeaderHeight = UITableView.automaticDimension
+        tableView.backgroundColor = Theme.ViewController.backgroundColor
+        tableView.separatorColor = Theme.Cell.separatorColor
         tableView.register(ReceiptTransactionCell.self,
                            forCellReuseIdentifier: ReceiptTransactionCell.reuseIdentifier)
     }
@@ -134,13 +142,15 @@ extension ListReceiptController: ListReceiptView {
     }
 
     func showLoading() {
-        if let view = self.navigationController?.view {
+        if let view = navigationController?.view {
+            navigationController?.setNavigationBarHidden(true, animated: false)
             spinnerView = HyperwalletUtilViews.showSpinner(view: view)
         }
     }
 
     func hideLoading() {
         if let spinnerView = self.spinnerView {
+            navigationController?.setNavigationBarHidden(false, animated: false)
             HyperwalletUtilViews.removeSpinner(spinnerView)
         }
     }
