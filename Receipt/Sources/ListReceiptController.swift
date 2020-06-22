@@ -143,14 +143,12 @@ extension ListReceiptController: ListReceiptView {
 
     func showLoading() {
         if let view = navigationController?.view {
-            navigationController?.setNavigationBarHidden(true, animated: false)
             spinnerView = HyperwalletUtilViews.showSpinner(view: view)
         }
     }
 
     func hideLoading() {
         if let spinnerView = self.spinnerView {
-            navigationController?.setNavigationBarHidden(false, animated: false)
             HyperwalletUtilViews.removeSpinner(spinnerView)
         }
     }
