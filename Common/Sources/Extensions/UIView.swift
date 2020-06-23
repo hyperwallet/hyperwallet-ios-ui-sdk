@@ -73,42 +73,6 @@ public extension UIView {
         }
     }
 
-    /// Add constraint based in Visual Format
-    ///
-    /// - parameter: format - The value should follow the visual format language
-    /// - views
-    func addConstraintsWithFormat(format: String, views: UIView...) {
-        var viewsDict = [String: UIView]()
-
-        for (index, view) in views.enumerated() {
-            view.translatesAutoresizingMaskIntoConstraints = false
-            viewsDict["v\(index)"] = view
-        }
-
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format,
-                                                      options: NSLayoutConstraint.FormatOptions(),
-                                                      metrics: nil,
-                                                      views: viewsDict))
-    }
-
-    /// Fill entire view to the super view
-    func addConstraintsFillEntireView(view: UIView) {
-        addConstraintsWithFormat(format: "H:|[v0]|", views: view)
-        addConstraintsWithFormat(format: "V:|[v0]|", views: view)
-    }
-
-    /// Defines fixed constraint validation to the attribute
-    func setConstraint(value: CGFloat, attribute: NSLayoutConstraint.Attribute) {
-        let constraint = NSLayoutConstraint(item: self,
-                                            attribute: attribute,
-                                            relatedBy: .equal,
-                                            toItem: nil,
-                                            attribute: .notAnAttribute,
-                                            multiplier: 1 ,
-                                            constant: value)
-        addConstraint(constraint)
-    }
-
     /// Setups the empty list with message
     ///
     /// - Parameter text: the string description

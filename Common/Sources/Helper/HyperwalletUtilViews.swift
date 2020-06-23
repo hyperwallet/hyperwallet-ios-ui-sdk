@@ -79,11 +79,12 @@ public struct HyperwalletUtilViews {
     /// Displays the Activity Indicator embedded on view
     ///
     /// - parameters: onView - The view where the `SpinnerView` will be embedded
-    ///               heightToBeShown - The height of the underneath view that will still be shown after the `SpinnerView` is embedded
+    ///               heightToBeShown - The height of the underneath view that will still be visible
     /// - returns: SpinnerView
     ///
     /// Example: the `self` is ViewController
-    ///    let spinnerView = HyperwalletUtilViews.showSpinner(view: self.view, heightToBeShown: tabBarController?.view.frame.height )
+    ///    let spinnerView = HyperwalletUtilViews.showSpinner(view: self.view,
+    ///    heightToBeShown: tabBarController?.tabBar.frame.height )
     ///
     ///    DispatchQueue.main.asyncAfter(deadline: .now() + 2) { // represent a callback
     ///        HyperwalletUtilViews.removeSpinner(spinnerView)
