@@ -79,16 +79,17 @@ public struct HyperwalletUtilViews {
     /// Displays the Activity Indicator embedded on view
     ///
     /// - parameters: onView - The view where the `SpinnerView` will be embedded
+    ///               heightToBeShown - The height of the underneath view that will still be shown after the `SpinnerView` is embedded
     /// - returns: SpinnerView
     ///
     /// Example: the `self` is ViewController
-    ///    let spinnerView = HyperwalletUtilViews.showSpinner(self.view)
+    ///    let spinnerView = HyperwalletUtilViews.showSpinner(view: self.view, heightToBeShown: tabBarController?.view.frame.height )
     ///
     ///    DispatchQueue.main.asyncAfter(deadline: .now() + 2) { // represent a callback
     ///        HyperwalletUtilViews.removeSpinner(spinnerView)
     ///    }
-    public static func showSpinner(view: UIView) -> SpinnerView {
-        return SpinnerView(showInView: view)
+    public static func showSpinner(view: UIView, heightToBeShown: CGFloat?) -> SpinnerView {
+        return SpinnerView(showInView: view, heightToBeShown: heightToBeShown ?? 0)
     }
 
     /// Remove the `SpinnerView` with animation
@@ -129,11 +130,10 @@ public final class SpinnerView: UIView {
         return activity
     }()
     /// Convenience Initializer
-    public convenience init(showInView view: UIView) {
-        self.init(frame: view.frame)
+    public convenience init(showInView view: UIView, heightToBeShown: CGFloat) {
+        self.init(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height - heightToBeShown))
         setupLayout()
         view.addSubview(self)
-        //view.addConstraintsFillEntireView(view: self)
         view.bringSubviewToFront(self)
         layer.add(fadeInAnimation(), forKey: nil)
     }

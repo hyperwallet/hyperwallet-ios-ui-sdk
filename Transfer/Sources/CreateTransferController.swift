@@ -300,7 +300,8 @@ extension CreateTransferController: CreateTransferView {
 
     func showLoading() {
         if let view = self.navigationController?.view {
-            spinnerView = HyperwalletUtilViews.showSpinner(view: view)
+            spinnerView = HyperwalletUtilViews.showSpinner(view: view,
+                                                           heightToBeShown: tabBarController?.view.frame.height)
         }
     }
 
