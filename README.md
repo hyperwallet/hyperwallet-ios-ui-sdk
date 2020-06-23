@@ -355,12 +355,12 @@ On the Theme is possible to customize the properties:
 |:--------|:-------------|:-----------|
 | `Theme.themeColor` | `0x00AFD0` | The main color |
 | `Theme.tintColor` | `UIColor.white` | The tint color |
-| `Theme.Label.color` | `UIColor.black` | The label primary color |
+| `Theme.Label.color` | `UIColor(rgb: 0x2C2E2F)` | The label primary color |
 | `Theme.Label.errorColor` | `0xFF3B30` | The color to highlight errors|
-| `Theme.Label.subtitleColor` | `0x666666` | The subtitle color |
+| `Theme.Label.subtitleColor` | `UIColor(rgb: 0x3c3c43, alpha: 0.6)` | The subtitle color |
 | `Theme.Label.textColor` | `0x8e8e93` | The text color |
 | `Theme.Label.titleFont` | `UIFont.preferredFont(forTextStyle: .body)` | The title font style |
-| `Theme.Label.subtitleFont` | `UIFont.preferredFont(forTextStyle: .caption1)` | The caption one font style |
+| `Theme.Label.subtitleFont` | `UIFont.preferredFont(forTextStyle: .subheadline)` | The caption one font style |
 | `Theme.Label.footnoteFont` | `UIFont.preferredFont(forTextStyle: .footnote)` | The footnote font style |
 | `Theme.NavigationBar.barStyle` | `UIBarStyle.default` | The `UINavigationBar` bar style. |
 | `Theme.NavigationBar.isTranslucent` | `false`	| Sets the opaque background color |
@@ -374,7 +374,7 @@ On the Theme is possible to customize the properties:
 | `Theme.Button.font` | `Theme.Label.bodyFont` | The button font |
 | `Theme.Button.backgroundColor` | `UIColor.white` | The button background color |
 | `Theme.Text.font` | `UIFont.preferredFont(forTextStyle: .body)` | The text font style |
-| `Theme.Text.color` | `UIColor.black` | The text primary color |
+| `Theme.Text.color` | `Theme.Label.color` | The text primary color |
 | `Theme.Text.disabledColor` | `Theme.Label.textColor` | The text disabled color |
 | `Theme.SearchBar.style` | `UISearchBar.Style.default` | The `UISearchBar` style |
 | `Theme.SearchBar.barStyle` | `UIBarStyle.default` | The `UISearchBar` bar style |
@@ -382,22 +382,20 @@ On the Theme is possible to customize the properties:
 | `Theme.SearchBar.textFieldTintColor` | `UIColor.white` | The `UITextField` tint color |
 | `Theme.SearchBar.textFieldBackgroundColor` | `0x28BBD7` | The `UITextField` background color |
 | `Theme.Cell.smallHeight` | `44` | The common ``UITableViewCell`` height. |
-| `Theme.Cell.mediumHeight` | `63`	| The `UITableViewCell` height for the receipt items |
+| `Theme.Cell.height` | `80` | The common ``UITableViewCell`` height. |
 | `Theme.Cell.largeHeight` | `88` | The `UITableViewCell` height for the List transfer method items and the Select transfer method type items. |
-| `Theme.Cell.headerHeight` | `16` | The Select transfer method type items header height. |
+| `Theme.Cell.headerHeight` | `37` | The Select transfer method type items header height. |
 | `Theme.Cell.dividerHeight` | `8` | The divider `UITableViewCell` height. |
+| `Theme.Cell.separatorColor` | `UIColor(rgb: 0x3c3c43, alpha: 0.29)` | The `UITableViewCell` separator color. |
 | `Theme.Cell.tintColor` | `UIColor.white` | The `UITableViewCell` tint color. |
 | `Theme.Icon.size` | `30` | The icon font size |
 | `Theme.Icon.frame` | `CGSize(width: 30, height: 30)` | The icon frame |
 | `Theme.Icon.primaryColor` | `Theme.themeColor` | The icon primary color |
-| `Theme.Icon.primaryBackgroundColor` | `0xE5F7FA` | The icon primary background color |
 | `Theme.Icon.creditColor` | `Amount.creditColor` | The icon credit color |
-| `Theme.Icon.creditBackgroundColor` | `0xF1FAE8` | The icon credit background color |
 | `Theme.Icon.debitColor` | `Amount.debitColor` | The icon debit color |
-| `Theme.Icon.debitBackgroundColor` | `0xFEF7F7` | The icon debit background color |
-| `Theme.Amount.creditColor` | `0x5FBF00` | The credit color |
-| `Theme.Amount.debitColor` | `0xDB4437` | The debit color |
-| `Theme.ViewController.backgroundColor` | `0xEFEFF4` | The `UIViewController` background color. |
+| `Theme.Amount.creditColor` | `UIColor(rgb: 0x299976)` | The credit color |
+| `Theme.Amount.debitColor` | `Theme.Label.color` | The debit color |
+| `Theme.ViewController.backgroundColor` | `UIColor.white` | The `UIViewController` background color. |
 | `Theme.SpinnerView.activityIndicatorViewStyle` | `UIActivityIndicatorView.Style.whiteLarge` | The `UIActivityIndicatorView` style. |
 | `Theme.SpinnerView.activityIndicatorViewColor` | `Theme.themeColor` | The `UIActivityIndicatorView` color. |
 | `Theme.SpinnerView.backgroundColor` | `UIColor.clear` | The background color |
