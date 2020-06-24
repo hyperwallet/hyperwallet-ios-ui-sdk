@@ -143,6 +143,7 @@ extension ListReceiptController: ListReceiptView {
 
     func showLoading() {
         spinnerView = HyperwalletUtilViews.showSpinner(view: view)
+        spinnerView?.backgroundColor = UIColor.clear
     }
 
     func hideLoading() {
