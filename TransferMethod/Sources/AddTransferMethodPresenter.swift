@@ -116,17 +116,17 @@ final class AddTransferMethodPresenter {
 
     func createTransferMethod() {
         trackConfirmClick()
-        guard view?.areAllFieldsValid() ?? false else {
+        guard let view = view, view.areAllFieldsValid() else {
             return
         }
 
         guard let hyperwalletTransferMethod = buildHyperwalletTransferMethod() else {
-            view?.showError(title: "error".localized(), message: "transfer_method_not_supported_message".localized())
+            view.showError(title: "error".localized(), message: "transfer_method_not_supported_message".localized())
             return
         }
-        view?.fieldValues().forEach { hyperwalletTransferMethod.setField(key: $0.name, value: $0.value) }
+        view.fieldValues().forEach { hyperwalletTransferMethod.setField(key: $0.name, value: $0.value) }
 
-        view?.showProcessing()
+        view.showProcessing()
         transferMethodRepository.createTransferMethod(hyperwalletTransferMethod) { [weak self] (result) in
             guard let strongSelf = self, let view = strongSelf.view else {
                 return

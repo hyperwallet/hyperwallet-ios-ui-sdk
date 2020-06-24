@@ -179,14 +179,14 @@ final class CreateTransferPresenter {
 
     // MARK: - Create Transfer Button Tapped
     func createTransfer() {
-        guard view?.areAllFieldsValid() ?? false else {
+        guard let view = view, view.areAllFieldsValid() else {
             return
         }
 
         if let sourceToken = sourceToken,
             let destinationToken = selectedTransferMethod?.token,
             let destinationCurrency = destinationCurrency {
-            view?.showLoading()
+            view.showLoading()
             let transfer = HyperwalletTransfer.Builder(clientTransferId: clientTransferId,
                                                        sourceToken: sourceToken,
                                                        destinationToken: destinationToken)
