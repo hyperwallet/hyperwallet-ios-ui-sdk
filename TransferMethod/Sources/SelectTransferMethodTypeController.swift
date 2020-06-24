@@ -156,10 +156,7 @@ extension SelectTransferMethodTypeController: SelectTransferMethodTypeView {
     }
 
     func showLoading() {
-        if let view = self.navigationController?.view {
-            spinnerView = HyperwalletUtilViews.showSpinner(view: view,
-                                                           heightToBeShown: tabBarController?.tabBar.frame.height)
-        }
+        spinnerView = HyperwalletUtilViews.showSpinner(view: view)
     }
 
     func hideLoading() {

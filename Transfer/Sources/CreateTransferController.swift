@@ -47,8 +47,8 @@ final class CreateTransferController: UITableViewController {
         super.viewDidLoad()
         setViewBackgroundColor()
         initializePresenter()
-        presenter.loadCreateTransfer()
         setUpCreateTransferTableView()
+        presenter.loadCreateTransfer()
         hideKeyboardWhenTappedAround()
     }
 
@@ -299,10 +299,7 @@ extension CreateTransferController: CreateTransferView {
     }
 
     func showLoading() {
-        if let view = self.navigationController?.view {
-            spinnerView = HyperwalletUtilViews.showSpinner(view: view,
-                                                           heightToBeShown: tabBarController?.tabBar.frame.height)
-        }
+        spinnerView = HyperwalletUtilViews.showSpinner(view: view)
     }
 
     func hideLoading() {

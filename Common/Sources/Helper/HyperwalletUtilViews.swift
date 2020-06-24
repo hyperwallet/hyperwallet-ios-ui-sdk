@@ -79,18 +79,16 @@ public struct HyperwalletUtilViews {
     /// Displays the Activity Indicator embedded on view
     ///
     /// - parameters: onView - The view where the `SpinnerView` will be embedded
-    ///               heightToBeShown - The height of the underneath view that will still be visible
     /// - returns: SpinnerView
     ///
     /// Example: the `self` is ViewController
-    ///    let spinnerView = HyperwalletUtilViews.showSpinner(view: self.view,
-    ///    heightToBeShown: tabBarController?.tabBar.frame.height )
+    ///    let spinnerView = HyperwalletUtilViews.showSpinner(view: self.view )
     ///
     ///    DispatchQueue.main.asyncAfter(deadline: .now() + 2) { // represent a callback
     ///        HyperwalletUtilViews.removeSpinner(spinnerView)
     ///    }
-    public static func showSpinner(view: UIView, heightToBeShown: CGFloat?) -> SpinnerView {
-        return SpinnerView(showInView: view, heightToBeShown: heightToBeShown ?? 0)
+    public static func showSpinner(view: UIView) -> SpinnerView {
+        return SpinnerView(showInView: view)
     }
 
     /// Remove the `SpinnerView` with animation
@@ -131,10 +129,22 @@ public final class SpinnerView: UIView {
         return activity
     }()
     /// Convenience Initializer
-    public convenience init(showInView view: UIView, heightToBeShown: CGFloat) {
-        self.init(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height - heightToBeShown))
+    public convenience init(showInView view: UIView) {
+        self.init(frame: view.frame)
         setupLayout()
         view.addSubview(self)
+        translatesAutoresizingMaskIntoConstraints = false
+
+        let margins = view.layoutMarginsGuide
+
+        let constraints = [
+            safeAreaLeadingAnchor.constraint(equalTo: margins.leadingAnchor),
+            safeAreaTrailingAnchor.constraint(equalTo: margins.trailingAnchor),
+            safeAreaTopAnchor.constraint(equalTo: margins.topAnchor),
+            safeAreaBottomAnchor.constraint(equalTo: margins.bottomAnchor)
+        ]
+        constraints.forEach { $0.priority = UILayoutPriority(999) }
+        NSLayoutConstraint.activate(constraints)
         view.bringSubviewToFront(self)
         layer.add(fadeInAnimation(), forKey: nil)
     }

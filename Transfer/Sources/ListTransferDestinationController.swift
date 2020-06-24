@@ -33,8 +33,8 @@ final class ListTransferDestinationController: UITableViewController {
         super.viewDidLoad()
         setViewBackgroundColor()
         initializePresenter()
-        presenter.listTransferMethods()
         setupTransferMethodTableView()
+        presenter.listTransferMethods()
     }
 
     override public func viewWillAppear(_ animated: Bool) {
@@ -124,10 +124,7 @@ extension ListTransferDestinationController: ListTransferDestinationView {
     }
 
     func showLoading() {
-        if let view = self.navigationController?.view {
-            spinnerView = HyperwalletUtilViews.showSpinner(view: view,
-                                                           heightToBeShown: tabBarController?.tabBar.frame.height)
-        }
+        spinnerView = HyperwalletUtilViews.showSpinner(view: view)
     }
 
     /// Loads the transfer methods

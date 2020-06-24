@@ -142,10 +142,7 @@ extension ListReceiptController: ListReceiptView {
     }
 
     func showLoading() {
-        if let view = navigationController?.view {
-            spinnerView = HyperwalletUtilViews.showSpinner(view: view,
-                                                           heightToBeShown: tabBarController?.tabBar.frame.height)
-        }
+        spinnerView = HyperwalletUtilViews.showSpinner(view: view)
     }
 
     func hideLoading() {
