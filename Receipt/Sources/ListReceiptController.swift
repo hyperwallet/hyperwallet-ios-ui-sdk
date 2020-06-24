@@ -30,7 +30,7 @@ final class ListReceiptController: UITableViewController {
     private var presenter: ListReceiptPresenter!
     private let sectionTitleDateFormat = "MMMM yyyy"
     private var loadMoreReceipts = false
-    private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "empty_list_receipt_message".localized())
+    private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "mobileNoTransactions".localized())
 
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +44,7 @@ final class ListReceiptController: UITableViewController {
         super.viewWillAppear(animated)
         let currentNavigationItem: UINavigationItem = tabBarController?.navigationItem ?? navigationItem
         currentNavigationItem.backBarButtonItem = UIBarButtonItem.back
-        titleDisplayMode(.always, for: "title_receipts".localized())
+        titleDisplayMode(.always, for: "transactions".localized())
     }
 
     private func initializePresenter() {

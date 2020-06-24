@@ -94,8 +94,8 @@
 "complete_view_label" = "Complete";
 
 // Receipt
-"title_receipts" = "Transactions";
-"empty_list_receipt_message" = "Seems like, you don’t have any Transactions, yet.";
+"transactions" = "Transactions";
+"mobileNoTransactions" = "There's no activity to display.";
 "add_transaction_title" = "Add Transaction";
 "account_closure_fee" = "Account Closure Fee";
 "account_closure" = "Account Closure";
