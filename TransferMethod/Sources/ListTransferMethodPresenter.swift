@@ -37,7 +37,7 @@ protocol ListTransferMethodView: class {
 }
 
 final class ListTransferMethodPresenter {
-    private unowned let view: ListTransferMethodView
+    private weak var view: ListTransferMethodView?
     private let pageGroup = "transfer-method"
     private let pageName = "transfer-method:add:list-transfer-method"
     private (set) var sectionData = [HyperwalletTransferMethod]()
@@ -58,19 +58,17 @@ final class ListTransferMethodPresenter {
 
     /// Deactivate the selected Transfer Method
     private func deactivateTransferMethod(_ transferMethod: HyperwalletTransferMethod) {
-        view.showProcessing()
+        view?.showProcessing()
 
         transferMethodRepository.deactivateTransferMethod(transferMethod) { [weak self] (result) in
-            guard let strongSelf = self else {
+            guard let strongSelf = self, let view = strongSelf.view else {
                 return
             }
 
             switch result {
             case .failure(let error):
-                strongSelf.view.dismissProcessing(handler: {
-                    strongSelf.view.showError(error,
-                                              pageName: strongSelf.pageName,
-                                              pageGroup: strongSelf.pageGroup) {
+                view.dismissProcessing(handler: {
+                    view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
                         strongSelf.deactivateTransferMethod(transferMethod)
                     }
                 })
@@ -79,9 +77,9 @@ final class ListTransferMethodPresenter {
                 guard let statusTransition = resultStatusTransition else {
                     return
                 }
-                strongSelf.view.showConfirmation(handler: { () -> Void in
+                view.showConfirmation(handler: { () -> Void in
                     strongSelf.listTransferMethods(true)
-                    strongSelf.view.notifyTransferMethodDeactivated(statusTransition)
+                    view.notifyTransferMethodDeactivated(statusTransition)
                 })
             }
         }
@@ -90,22 +88,20 @@ final class ListTransferMethodPresenter {
     /// Get the list of all Activated transfer methods from core SDK
     /// - Parameter forceUpdate: Forces to refresh the data
     func listTransferMethods(_ forceUpdate: Bool = true) {
-        view.showLoading()
+        view?.showLoading()
         if forceUpdate {
             transferMethodRepository.refreshTransferMethods()
         }
 
         transferMethodRepository.listTransferMethods { [weak self] (result) in
-            guard let strongSelf = self else {
+            guard let strongSelf = self, let view = strongSelf.view else {
                 return
             }
-            strongSelf.view.hideLoading()
+            view.hideLoading()
 
             switch result {
             case .failure(let error):
-                strongSelf.view.showError(error,
-                                          pageName: strongSelf.pageName,
-                                          pageGroup: strongSelf.pageGroup) {
+                view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
                     strongSelf.listTransferMethods()
                 }
 
@@ -116,7 +112,7 @@ final class ListTransferMethodPresenter {
                     strongSelf.sectionData = []
                 }
 
-                strongSelf.view.reloadData()
+                view.reloadData()
             }
         }
     }

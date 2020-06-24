@@ -40,7 +40,7 @@ protocol CreateTransferView: class {
 }
 
 final class CreateTransferPresenter {
-    private unowned let view: CreateTransferView
+    private weak var view: CreateTransferView?
     private let pageName = "transfer-funds:create-transfer"
     private let pageGroup = "transfer-funds"
 
@@ -69,7 +69,7 @@ final class CreateTransferPresenter {
     var transferAllFundsIsOn: Bool = false {
         didSet {
             amount = transferAllFundsIsOn ? availableBalance : nil
-            view.updateTransferSection()
+            view?.updateTransferSection()
         }
     }
     var destinationCurrency: String? {
@@ -100,18 +100,16 @@ final class CreateTransferPresenter {
     }
 
     func loadCreateTransfer() {
-        view.showLoading()
+        view?.showLoading()
         if sourceToken != nil { loadTransferMethods() } else {
             userRepository.getUser { [weak self] result in
-                guard let strongSelf = self else {
+                guard let strongSelf = self, let view = strongSelf.view else {
                     return
                 }
                 switch result {
                 case .failure(let error):
-                    strongSelf.view.hideLoading()
-                    strongSelf.view.showError(error,
-                                              pageName: strongSelf.pageName,
-                                              pageGroup: strongSelf.pageGroup) {
+                    view.hideLoading()
+                    view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
                         strongSelf.loadCreateTransfer()
                     }
 
@@ -126,15 +124,13 @@ final class CreateTransferPresenter {
     private func loadTransferMethods() {
         transferMethodRepository.refreshTransferMethods()
         transferMethodRepository.listTransferMethods { [weak self] result in
-            guard let strongSelf = self else {
+            guard let strongSelf = self, let view = strongSelf.view else {
                 return
             }
             switch result {
             case .failure(let error):
-                strongSelf.view.hideLoading()
-                strongSelf.view.showError(error,
-                                          pageName: strongSelf.pageName,
-                                          pageGroup: strongSelf.pageGroup) {
+                view.hideLoading()
+                view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
                     strongSelf.loadTransferMethods()
                 }
 
@@ -152,8 +148,8 @@ final class CreateTransferPresenter {
             let destinationToken = selectedTransferMethod?.token,
             let destinationCurrency = destinationCurrency else {
                 initializeSections()
-                view.reloadData()
-                view.hideLoading()
+                view?.reloadData()
+                view?.hideLoading()
                 return
         }
         let transfer = HyperwalletTransfer.Builder(clientTransferId: clientTransferId,
@@ -163,15 +159,13 @@ final class CreateTransferPresenter {
             .build()
 
         transferRepository.createTransfer(transfer) { [weak self] result in
-            guard let strongSelf = self else {
+            guard let strongSelf = self, let view = strongSelf.view else {
                 return
             }
-            strongSelf.view.hideLoading()
+            view.hideLoading()
             switch result {
             case .failure(let error):
-                strongSelf.view.showError(error,
-                                          pageName: strongSelf.pageName,
-                                          pageGroup: strongSelf.pageGroup) {
+                view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
                     strongSelf.createInitialTransfer()
                 }
 
@@ -179,20 +173,20 @@ final class CreateTransferPresenter {
                 strongSelf.availableBalance = transfer?.destinationAmount
             }
             strongSelf.initializeSections()
-            strongSelf.view.reloadData()
+            view.reloadData()
         }
     }
 
     // MARK: - Create Transfer Button Tapped
     func createTransfer() {
-        guard view.areAllFieldsValid() else {
+        guard view?.areAllFieldsValid() ?? false else {
             return
         }
 
         if let sourceToken = sourceToken,
             let destinationToken = selectedTransferMethod?.token,
             let destinationCurrency = destinationCurrency {
-            view.showLoading()
+            view?.showLoading()
             let transfer = HyperwalletTransfer.Builder(clientTransferId: clientTransferId,
                                                        sourceToken: sourceToken,
                                                        destinationToken: destinationToken)
@@ -202,16 +196,14 @@ final class CreateTransferPresenter {
                 .build()
 
             transferRepository.createTransfer(transfer) { [weak self] result in
-                guard let strongSelf = self else {
+                guard let strongSelf = self, let view = strongSelf.view else {
                     return
                 }
-                strongSelf.view.hideLoading()
+                view.hideLoading()
                 switch result {
                 case .failure(let error):
                     strongSelf.errorHandler(for: error) {
-                        strongSelf.view.showError(error,
-                                                  pageName: strongSelf.pageName,
-                                                  pageGroup: strongSelf.pageGroup) {
+                        view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
                             strongSelf.createTransfer()
                         }
                     }
@@ -221,8 +213,8 @@ final class CreateTransferPresenter {
                         if self?.transferAllFundsIsOn ?? false && transfer.destinationAmount != self?.availableBalance {
                             strongSelf.didFxQuoteChange = true
                         }
-                        strongSelf.view.notifyTransferCreated(transfer)
-                        strongSelf.view.showScheduleTransfer(transfer)
+                        view.notifyTransferCreated(transfer)
+                        view.showScheduleTransfer(transfer)
                     }
                 }
             }
@@ -231,7 +223,7 @@ final class CreateTransferPresenter {
 
     func resetErrorMessagesForAllSections() {
         sectionData.forEach { $0.errorMessage = nil }
-        CreateTransferController.FooterSection.allCases.forEach({ view.updateFooter(for: $0) })
+        CreateTransferController.FooterSection.allCases.forEach({ view?.updateFooter(for: $0) })
     }
 
     private func errorHandler(for error: HyperwalletErrorType, _ nonBusinessErrorHandler: @escaping () -> Void) {
@@ -241,10 +233,7 @@ final class CreateTransferPresenter {
             if let errors = error.getHyperwalletErrors()?.errorList, errors.isNotEmpty {
                 updateFooterContent(errors)
                 if errors.contains(where: { $0.fieldName == nil }) {
-                    view.showError(error,
-                                   pageName: pageName,
-                                   pageGroup: pageGroup,
-                                   nil)
+                    view?.showError(error, pageName: pageName, pageGroup: pageGroup, nil)
                 }
             }
 
@@ -257,7 +246,7 @@ final class CreateTransferPresenter {
         for error in errors {
             if let sectionData = sectionData.first(where: { $0.createTransferSectionHeader == .transfer }) {
                 sectionData.errorMessage = error.message
-                view.updateFooter(for: .transfer)
+                view?.updateFooter(for: .transfer)
             }
         }
     }

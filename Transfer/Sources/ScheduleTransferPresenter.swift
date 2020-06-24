@@ -34,7 +34,7 @@ protocol ScheduleTransferView: class {
 }
 
 final class ScheduleTransferPresenter {
-    private unowned let view: ScheduleTransferView
+    private weak var view: ScheduleTransferView?
     private(set) var sectionData = [ScheduleTransferSectionData]()
     private var transferMethod: HyperwalletTransferMethod
     private var transfer: HyperwalletTransfer
@@ -84,18 +84,16 @@ final class ScheduleTransferPresenter {
     }
 
     func scheduleTransfer() {
-        view.showProcessing()
+        view?.showProcessing()
         transferRepository.scheduleTransfer(transfer) { [weak self] (result) in
-            guard let strongSelf = self else {
+            guard let strongSelf = self, let view = strongSelf.view else {
                 return
             }
 
             switch result {
             case .failure(let error):
-                strongSelf.view.dismissProcessing(handler: {
-                    strongSelf.view.showError(error,
-                                              pageName: strongSelf.pageName,
-                                              pageGroup: strongSelf.pageGroup) {
+                view.dismissProcessing(handler: {
+                    view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
                         strongSelf.scheduleTransfer()
                     }
                 })
@@ -104,8 +102,8 @@ final class ScheduleTransferPresenter {
                 guard let statusTransition = resultStatusTransition else {
                     return
                 }
-                strongSelf.view.showConfirmation(handler: { () -> Void in
-                    strongSelf.view.notifyTransferScheduled(statusTransition)
+                view.showConfirmation(handler: { () -> Void in
+                    view.notifyTransferScheduled(statusTransition)
                 })
             }
         }
