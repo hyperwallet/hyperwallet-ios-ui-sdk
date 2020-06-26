@@ -183,11 +183,11 @@
 "mobileTransactionDetailsLabel" = "DETAILS";
 "mobileFeeInfoLabel" = "FEE INFO";
 "mobileConfirmNotesLabel" = "NOTE";
-"receipt_details_charity_name" = "Charity Name:";
-"receipt_details_check_number" = "Check Number:";
+"mobileCharityName" = "Charity Name:";
+"mobileCheckNumber" = "Check Number:";
 "mobileTransactionIdLabel" = "Transaction ID:";
-"receipt_details_website" = "Promo Website:";
-"receipt_details_transaction" = "Transaction:";
+"mobilePromoWebsite" = "Promo Website:";
+"mobileTransactionDetailsTotal" = "Transaction total:";
 "amount" = "Amount:";
 "mobileFeeLabel" = "Fee:";
 "mobileJournalNumberLabel" = "Receipt ID:";

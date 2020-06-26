@@ -72,12 +72,12 @@ struct ReceiptDetailSectionDetailData: ReceiptDetailSectionData {
         }
 
         if let charityName = receipt.details?.charityName {
-            rows.append(ReceiptDetailRow(title: "receipt_details_charity_name".localized(),
+            rows.append(ReceiptDetailRow(title: "mobileCharityName".localized(),
                                          value: charityName,
                                          field: "charityName"))
         }
         if let checkNumber = receipt.details?.checkNumber {
-            rows.append(ReceiptDetailRow(title: "receipt_details_check_number".localized(),
+            rows.append(ReceiptDetailRow(title: "mobileCheckNumber".localized(),
                                          value: checkNumber,
                                          field: "checkNumber"))
         }
@@ -87,7 +87,7 @@ struct ReceiptDetailSectionDetailData: ReceiptDetailSectionData {
                                          field: "clientPaymentId"))
         }
         if let website = receipt.details?.website {
-            rows.append(ReceiptDetailRow(title: "receipt_details_website".localized(),
+            rows.append(ReceiptDetailRow(title: "mobilePromoWebsite".localized(),
                                          value: website,
                                          field: "website"))
         }
