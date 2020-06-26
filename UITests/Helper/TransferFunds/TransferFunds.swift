@@ -64,10 +64,9 @@ class TransferFunds {
         notesSectionLabel = createTable
             .staticTexts.containing(.staticText, identifier: "NOTES")
             .element(matching: NSPredicate(format: "label CONTAINS[c] 'NOTES'"))
-        notesPlaceHolderString = "transfer_description".localized()
         notesDescriptionTextField = createTable.textFields["transferNotesTextField"]
         notesDescriptionOptionLabel = createTable.staticTexts["receiptTransactionTypeLabel"]
-        availableBalance = createTable.staticTexts["available_balance_footer"]
+        availableBalance = createTable.staticTexts["mobileAvailableBalance"]
         nextLabel = createTable.staticTexts["createTransferNextLabel"]
     }
 

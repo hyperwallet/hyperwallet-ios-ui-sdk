@@ -39,9 +39,9 @@ final class TransferAllFundsCell: UITableViewCell {
     private lazy var transferMaxAmountButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.accessibilityLabel = "transfer_all_funds".localized()
+        button.accessibilityLabel = "mobileTransferMax".localized()
         button.accessibilityIdentifier = "transferAllFundsTitleLabel"
-        button.setTitle("transfer_all_funds".localized(), for: .normal)
+        button.setTitle("mobileTransferMax".localized(), for: .normal)
         button.titleLabel?.adjustsFontForContentSizeCategory = true
         button.titleLabel?.font = Theme.Label.bodyFont
         button.setTitleColor(Theme.Button.color, for: UIControl.State.normal)
@@ -105,7 +105,7 @@ final class TransferAllFundsCell: UITableViewCell {
         let locale = NSLocale(localeIdentifier: currencyCode)
         let currencySymbol = locale.displayName(forKey: NSLocale.Key.currencySymbol, value: currencyCode)
         if let currencySymbol = currencySymbol {
-            availableFundsLabel.text = String(format: "available_balance_footer".localized(),
+            availableFundsLabel.text = String(format: "mobileAvailableBalance".localized(),
                                               currencySymbol,
                                               availableBalance,
                                               currencyCode)
