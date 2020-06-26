@@ -64,9 +64,9 @@ public extension ThemeManager {
     private static func applyToTransferAmountCell() {
         let proxy = TransferAmountCell.appearance()
         if #available(iOS 11.0, *) {
-            proxy.amountTextFieldFont = Theme.Label.largeTitleFont
+            proxy.amountTextFieldFont = Theme.Label.largeTitleFont.withSize(60)
         } else {
-            // Fallback on earlier versions
+            // Fallback on earlier versions TODO
         }
         proxy.currencyLabelFont = Theme.Label.bodyFont
         proxy.currencyLabelColor = Theme.Label.color

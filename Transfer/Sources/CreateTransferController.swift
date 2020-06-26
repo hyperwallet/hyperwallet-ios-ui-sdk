@@ -48,6 +48,7 @@ final class CreateTransferController: UITableViewController {
         setViewBackgroundColor()
         initializePresenter()
         presenter.loadCreateTransfer()
+        presenter.amount = "0"
         setUpCreateTransferTableView()
         hideKeyboardWhenTappedAround()
     }

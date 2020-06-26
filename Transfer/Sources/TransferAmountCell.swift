@@ -32,9 +32,10 @@ final class TransferAmountCell: UITableViewCell {
         textField.keyboardType = UIKeyboardType.decimalPad
         textField.delegate = self
         textField.accessibilityIdentifier = "transferAmountTextField"
-        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        textField.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        textField.adjustsFontSizeToFitWidth = true
+        textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         return textField
     }()
 
@@ -42,7 +43,6 @@ final class TransferAmountCell: UITableViewCell {
         let label = UILabel(frame: .zero)
         label.textAlignment = .right
         label.accessibilityIdentifier = "transferAmountTitleLabel"
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         label.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         return label
@@ -52,7 +52,6 @@ final class TransferAmountCell: UITableViewCell {
         let label = UILabel(frame: .zero)
         label.textAlignment = .left
         label.accessibilityIdentifier = "transferAmountCurrencyLabel"
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         label.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         return label
@@ -70,6 +69,12 @@ final class TransferAmountCell: UITableViewCell {
     @objc
     private func didTapCell() {
         amountTextField.becomeFirstResponder()
+    }
+
+    @objc
+    private func textFieldDidChange(_ textField: UITextField) {
+        textField.invalidateIntrinsicContentSize()
+        textField.sizeToFit()
     }
 
     private func setupCell() {
