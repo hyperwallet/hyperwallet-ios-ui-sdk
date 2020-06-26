@@ -107,7 +107,7 @@ public class Theme: NSObject {
    /// Representation of all customizable visual style property for `UITableViewCell`
     public struct Cell {
         /// The common `UITableViewCell` height.
-        public static let smallHeight = CGFloat(44)
+        public static let smallHeight = CGFloat(61)
         /// The common `UITableViewCell` height.
         public static let height = CGFloat(80)
         /// The `UITableViewCell` height for the List transfer method items and

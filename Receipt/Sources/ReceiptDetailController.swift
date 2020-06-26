@@ -40,7 +40,7 @@ final class ReceiptDetailController: UITableViewController {
 
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        titleDisplayMode(.never, for: "title_receipts_details".localized())
+        titleDisplayMode(.never, for: "mobileTransactionDetailsHeader".localized())
     }
 
     private func initializePresenter() {
@@ -122,5 +122,9 @@ extension ReceiptDetailController {
     override public func tableView(_ tableView: UITableView,
                                    estimatedHeightForHeaderInSection section: Int) -> CGFloat {
         return CGFloat(Theme.Cell.headerHeight)
+    }
+
+    override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return indexPath.section == 0 ? Theme.Cell.height : Theme.Cell.smallHeight
     }
 }
