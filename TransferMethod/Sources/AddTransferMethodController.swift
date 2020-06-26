@@ -96,7 +96,6 @@ final class AddTransferMethodController: UITableViewController {
 
     // MARK: - Setup Layout -
     private func setupLayout() {
-        setViewBackgroundColor()
         setupTableView()
     }
 

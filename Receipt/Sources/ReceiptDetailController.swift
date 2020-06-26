@@ -33,7 +33,6 @@ final class ReceiptDetailController: UITableViewController {
     /// Called after the view controller has loaded its view hierarchy into memory.
     override public func viewDidLoad() {
         super.viewDidLoad()
-        setViewBackgroundColor()
         initializePresenter()
         setupReceiptDetailTableView()
     }

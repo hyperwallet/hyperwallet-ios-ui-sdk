@@ -34,11 +34,6 @@ public extension UIViewController {
         }
     }
 
-    /// Set background color for the view
-    func setViewBackgroundColor() {
-        view.backgroundColor = Theme.ViewController.backgroundColor
-    }
-
     /// Hide keyboard when tapped around on the screen
     func hideKeyboardWhenTappedAround() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))

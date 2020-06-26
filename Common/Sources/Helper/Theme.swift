@@ -131,10 +131,10 @@ public class Theme: NSObject {
         public static var debitColor = UIColor(rgb: 0xDB4437)
     }
 
-    /// Representation of all customizable visual style property for `UIViewController`.
-    public struct ViewController {
-        /// The `UIViewController` background color
-        public static var backgroundColor = UIColor(rgb: 0xEFEFF4)
+    /// Representation of all customizable visual style property for `UITableViewController`.
+    public struct UITableViewController {
+        /// The `UITableViewController` background color
+        public static var backgroundColor = UIColor(rgb: 0xFFFFFF)
     }
 
     /// Representation of all customizable visual style property for `SpinnerView`.

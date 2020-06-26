@@ -38,7 +38,6 @@ final class ScheduleTransferController: UITableViewController, UITextFieldDelega
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        setViewBackgroundColor()
         initializePresenter()
         // setup table view
         setUpScheduleTransferTableView()

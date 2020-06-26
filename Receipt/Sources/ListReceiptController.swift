@@ -34,7 +34,6 @@ final class ListReceiptController: UITableViewController {
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        setViewBackgroundColor()
         initializePresenter()
         setupListReceiptTableView()
         presenter.listReceipts()

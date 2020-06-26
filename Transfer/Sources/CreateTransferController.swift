@@ -45,7 +45,6 @@ final class CreateTransferController: UITableViewController {
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        setViewBackgroundColor()
         initializePresenter()
         presenter.loadCreateTransfer()
         presenter.amount = "0"
@@ -77,6 +76,7 @@ final class CreateTransferController: UITableViewController {
         tableView.estimatedSectionFooterHeight = Theme.Cell.smallHeight
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Theme.Cell.smallHeight
+        tableView.backgroundColor = Theme.UITableViewController.backgroundColor
 
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)
@@ -255,7 +255,7 @@ extension CreateTransferController: CreateTransferView {
 
             case .transfer:
                 if presenter.amount == nil || presenter.amount!.isEmpty || Double(presenter.amount!) == 0.00 {
-                    section.errorMessage = "transfer_error_enter_amount_or_transfer_all".localized()
+                    section.errorMessage = "transferAmountInvalid".localized()
                 }
 
             default:
