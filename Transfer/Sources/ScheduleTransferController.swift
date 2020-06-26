@@ -48,7 +48,7 @@ final class ScheduleTransferController: UITableViewController, UITextFieldDelega
         super.viewWillAppear(animated)
         let currentNavigationItem: UINavigationItem = tabBarController?.navigationItem ?? navigationItem
         currentNavigationItem.backBarButtonItem = UIBarButtonItem.back
-        titleDisplayMode(.always, for: "transfer_funds".localized())
+        titleDisplayMode(.always, for: "mobileTransferFundsHeader".localized())
     }
 
     private func initializePresenter() {

@@ -194,28 +194,28 @@
 "receipt_details_date" = "Date:";
 
 // Transfer Funds
-"transfer_funds" = "Transfer Funds";
-"transfer_section_header_destination" = "DESTINATION";
+"mobileTransferFundsHeader" = "Transfer funds";
+"mobileTransferToLabel" = "TRANSFER TO";
 "transfer_section_header_transfer" = "TRANSFER";
-"transfer_section_header_notes" = "NOTES";
+"mobileNoteLabel" = "Note";
 "transfer_amount" = "Amount";
 "transfer_amount_confirmation" = "Amount:";
 "transfer_fee_confirmation" = "Fee:";
 "transfer_net_amount_confirmation" = "You will receive:";
-"transfer_all_funds" = "Transfer all funds";
+"transfer_all_funds" = "Transfer all funds"; // "mobileTransferMax": "Transfer max amount",
 "transfer_fx_sell_confirmation" = "You sell:";
 "transfer_fx_buy_confirmation" = "You buy:";
 "transfer_fx_rate_confirmation" = "Exchange Rate:";
-"available_balance_footer" = "Available for transfer: %1$@ %2$@";
+"available_balance_footer" = "Available for transfer: %1$@ %2$@ %3$@"; // "mobileAvailableBalance": "Available funds",
 "transfer_description" = "Description";
-"transfer_next_button" = "Next";
+"continueButtonLabel" = "Continue";
 "transfer_add_account_title" = "Add Account";
 "transfer_add_account_subtitle" = "An account hasn't been set up yet, please add an account first.";
 "transfer_select_destination" = "Select Destination";
 "transfer_section_header_foreignExchange" = "FOREIGN EXCHANGE";
 "transfer_section_header_summary" = "SUMMARY";
 "transfer_button_confirm" = "Confirm";
-"transfer_error_enter_amount_or_transfer_all" = "Enter amount or select tranfer all funds";
-"transfer_error_add_a_transfer_method_first" = "Add a transfer method first";
+"transfer_error_enter_amount_or_transfer_all" = "Enter amount or select tranfer all funds"; // "transferAmountInvalid": "Enter a valid transfer amount",
+"transfer_error_add_a_transfer_method_first" = "Add a transfer method first"; // "noTransferMethodAdded": "Transfer method is required",
 "transfer_error_no_transfer_method_module_initialized" = "Functionality to add an Account has not been included in this application.";
 "transfer_fx_rate_changed" = "Due to changes in the FX rate, you will now receive: %1$@";

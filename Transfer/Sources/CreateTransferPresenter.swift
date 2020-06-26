@@ -68,7 +68,7 @@ final class CreateTransferPresenter {
     var notes: String?
     var transferAllFundsIsOn: Bool = false {
         didSet {
-            amount = transferAllFundsIsOn ? availableBalance : nil
+            amount = transferAllFundsIsOn ? availableBalance : "0"
             view.updateTransferSection()
         }
     }
@@ -85,12 +85,11 @@ final class CreateTransferPresenter {
     private func initializeSections() {
         sectionData.removeAll()
 
+        let createTransferSectionTransferData = CreateTransferSectionTransferData()
+        sectionData.append(createTransferSectionTransferData)
+
         let createTransferDestinationSection = CreateTransferSectionDestinationData()
         sectionData.append(createTransferDestinationSection)
-
-        let createTransferSectionTransferData = CreateTransferSectionTransferData(availableBalance: availableBalance,
-                                                                                  currencyCode: destinationCurrency)
-        sectionData.append(createTransferSectionTransferData)
 
         let createTransferNotesSection = CreateTransferSectionNotesData()
         sectionData.append(createTransferNotesSection)
@@ -257,7 +256,6 @@ final class CreateTransferPresenter {
         for error in errors {
             if let sectionData = sectionData.first(where: { $0.createTransferSectionHeader == .transfer }) {
                 sectionData.errorMessage = error.message
-                view.updateFooter(for: .transfer)
             }
         }
     }

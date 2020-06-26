@@ -28,7 +28,7 @@ final class TransferAmountCell: UITableViewCell {
 
     private lazy var amountTextField: PasteOnlyTextField = {
         let textField = PasteOnlyTextField(frame: .zero)
-        textField.textAlignment = .right
+        textField.textAlignment = .center
         textField.keyboardType = UIKeyboardType.decimalPad
         textField.delegate = self
         textField.accessibilityIdentifier = "transferAmountTextField"
@@ -40,19 +40,21 @@ final class TransferAmountCell: UITableViewCell {
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
+        label.textAlignment = .right
         label.accessibilityIdentifier = "transferAmountTitleLabel"
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.setContentHuggingPriority(.required, for: .horizontal)
-        label.setContentCompressionResistancePriority(.required, for: .horizontal)
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        label.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         return label
     }()
 
     private lazy var currencyLabel: UILabel = {
         let label = UILabel(frame: .zero)
+        label.textAlignment = .left
         label.accessibilityIdentifier = "transferAmountCurrencyLabel"
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.setContentHuggingPriority(.required, for: .horizontal)
-        label.setContentCompressionResistancePriority(.required, for: .horizontal)
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        label.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         return label
     }()
 
@@ -79,7 +81,7 @@ final class TransferAmountCell: UITableViewCell {
         stackView.axis = .horizontal
         stackView.alignment = .fill
         stackView.distribution = .fill
-        stackView.spacing = 15
+        stackView.spacing = 0
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(amountTextField)
         stackView.addArrangedSubview(currencyLabel)
@@ -99,9 +101,15 @@ final class TransferAmountCell: UITableViewCell {
     }
 
     func configure(amount: String?, currency: String?, isEnabled: Bool, _ handler: @escaping EnteredAmountHandler) {
-        titleLabel.text = "transfer_amount".localized()
-        titleLabel.numberOfLines = 0
-        titleLabel.adjustsFontForContentSizeCategory = true
+        if let currency = currency {
+            let locale = NSLocale(localeIdentifier: currency)
+            let currencySymbol = locale.displayName(forKey: NSLocale.Key.currencySymbol, value: currency)
+            if let currencySymbol = currencySymbol {
+                titleLabel.text = currencySymbol
+                titleLabel.numberOfLines = 0
+                titleLabel.adjustsFontForContentSizeCategory = true
+            }
+        }
         amountTextField.text = amount
         amountTextField.adjustsFontForContentSizeCategory = true
         amountTextField.isEnabled = isEnabled
@@ -201,6 +209,11 @@ extension TransferAmountCell {
         get { return titleLabel.textColor }
         set { titleLabel.textColor = newValue
             amountTextField.textColor = newValue }
+    }
+
+    @objc dynamic var amountTextFieldFont: UIFont! {
+        get { return amountTextField.font }
+        set { amountTextField.font = newValue }
     }
 
     @objc dynamic var currencyLabelFont: UIFont! {

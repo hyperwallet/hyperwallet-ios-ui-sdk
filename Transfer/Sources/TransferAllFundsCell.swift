@@ -26,25 +26,29 @@ final class TransferAllFundsCell: UITableViewCell {
 
     private var transferAllFundsSwitchHandler: TransferAllFundsSwitchHandler?
 
-    private lazy var titleLabel: UILabel = {
+    private lazy var availableFundsLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.text = "transfer_all_funds".localized()
-        label.accessibilityLabel = "transfer_all_funds".localized()
-        label.accessibilityIdentifier = "transferAllFundsTitleLabel"
+        label.textAlignment = .center
+        label.accessibilityIdentifier = "transferAmountTitleLabel"
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        label.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         return label
     }()
 
-    private lazy var transferAllFundsSwitch: UISwitch = {
-        let transferAllSwitch = UISwitch(frame: .zero)
-        transferAllSwitch.setOn(false, animated: false)
-        transferAllSwitch.accessibilityIdentifier = "transferAllFundsSwitch"
-        transferAllSwitch.translatesAutoresizingMaskIntoConstraints = false
-        transferAllSwitch.setContentHuggingPriority(.required, for: .horizontal)
-        transferAllSwitch.setContentCompressionResistancePriority(.required, for: .horizontal)
-        return transferAllSwitch
+    private lazy var transferMaxAmountButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.accessibilityLabel = "transfer_all_funds".localized()
+        button.accessibilityIdentifier = "transferAllFundsTitleLabel"
+        button.setTitle("transfer_all_funds".localized(), for: .normal)
+        button.titleLabel?.adjustsFontForContentSizeCategory = true
+        button.titleLabel?.font = Theme.Label.bodyFont
+        button.setTitleColor(Theme.Button.color, for: UIControl.State.normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        button.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        return button
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -58,15 +62,15 @@ final class TransferAllFundsCell: UITableViewCell {
 
     private func setupCell() {
         selectionStyle = .none
-        transferAllFundsSwitch.addTarget(self, action: #selector(switchStateDidChange), for: .valueChanged)
+        transferMaxAmountButton.addTarget(self, action: #selector(didTap), for: .touchUpInside)
 
         let stackView = UIStackView(frame: .zero)
-        stackView.axis = .horizontal
+        stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.distribution = .fill
-        stackView.spacing = 15
-        stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(transferAllFundsSwitch)
+        stackView.spacing = 2
+        stackView.addArrangedSubview(availableFundsLabel)
+        stackView.addArrangedSubview(transferMaxAmountButton)
         stackView.translatesAutoresizingMaskIntoConstraints = false
 
         contentView.addSubview(stackView)
@@ -83,25 +87,54 @@ final class TransferAllFundsCell: UITableViewCell {
     }
 
     @objc
-    private func switchStateDidChange() {
-        transferAllFundsSwitchHandler?(transferAllFundsSwitch.isOn)
+    private func didTap() {
+        transferAllFundsSwitchHandler?(true)
     }
 
-    func configure(setOn: Bool, _ handler: @escaping TransferAllFundsSwitchHandler) {
-        transferAllFundsSwitch.setOn(setOn, animated: false)
+    func configure(setOn: Bool,
+                   availableBalance: String?,
+                   currencyCode: String?,
+                   _ handler: @escaping TransferAllFundsSwitchHandler) {
+        guard let availableBalance = availableBalance,
+            availableBalance.formatToDouble() != 0,
+            let currencyCode = currencyCode else {
+                availableFundsLabel.text = ""
+                return
+        }
+
+        let locale = NSLocale(localeIdentifier: currencyCode)
+        let currencySymbol = locale.displayName(forKey: NSLocale.Key.currencySymbol, value: currencyCode)
+        if let currencySymbol = currencySymbol {
+            availableFundsLabel.text = String(format: "available_balance_footer".localized(),
+                                              currencySymbol,
+                                              availableBalance,
+                                              currencyCode)
+            availableFundsLabel.numberOfLines = 0
+            availableFundsLabel.adjustsFontForContentSizeCategory = true
+        }
         transferAllFundsSwitchHandler = handler
     }
 }
 
 extension TransferAllFundsCell {
     // MARK: Theme manager's proxy properties
-    @objc dynamic var titleLabelFont: UIFont! {
-        get { return titleLabel.font }
-        set { titleLabel.font = newValue }
+    @objc dynamic var availableFundsLabelFont: UIFont! {
+        get { return availableFundsLabel.font }
+        set { availableFundsLabel.font = newValue }
     }
 
-    @objc dynamic var titleLabelColor: UIColor! {
-        get { return titleLabel.textColor }
-        set { titleLabel.textColor = newValue }
+    @objc dynamic var availableFundsLabelColor: UIColor! {
+        get { return availableFundsLabel.textColor }
+        set { availableFundsLabel.textColor = newValue }
+    }
+
+    @objc dynamic var transferMaxAmountButtonFont: UIFont! {
+        get { return transferMaxAmountButton.titleLabel?.font }
+        set { transferMaxAmountButton.titleLabel?.font = newValue }
+    }
+
+    @objc dynamic var transferMaxAmountButtonColor: UIColor! {
+        get { return transferMaxAmountButton.titleLabel?.textColor }
+        set { transferMaxAmountButton.titleLabel?.textColor = newValue }
     }
 }

@@ -36,9 +36,17 @@ protocol CreateTransferSectionData: class {
 
 extension CreateTransferSectionData {
     var rowCount: Int { return 1 }
-    var title: String? { return createTransferSectionHeader !=
-        CreateTransferSectionHeader.button ?
-            "transfer_section_header_\(createTransferSectionHeader.rawValue)".localized() : nil }
+    var title: String? {
+        if createTransferSectionHeader != CreateTransferSectionHeader.button {
+            let sectionHeader = createTransferSectionHeader.rawValue.lowercased()
+            if sectionHeader == "destination" {
+                return "mobileTransferToLabel".localized()
+            } else if sectionHeader == "notes" {
+                return "mobileNoteLabel".localized()
+            }
+        }
+        return nil
+    }
 }
 
 final class CreateTransferSectionDestinationData: CreateTransferSectionData {
@@ -54,18 +62,7 @@ final class CreateTransferSectionTransferData: CreateTransferSectionData {
         TransferAmountCell.reuseIdentifier,
         TransferAllFundsCell.reuseIdentifier
     ]}
-    var footer: String?
     var errorMessage: String?
-
-    init(availableBalance: String?, currencyCode: String?) {
-        guard let availableBalance = availableBalance,
-            availableBalance.formatToDouble() != 0,
-            let currencyCode = currencyCode else {
-                footer = nil
-                return
-        }
-        footer = String(format: "available_balance_footer".localized(), availableBalance, currencyCode)
-    }
 }
 
 final class CreateTransferSectionButtonData: CreateTransferSectionData {

@@ -28,7 +28,7 @@ import UIKit
 /// to retrieve the transfer resource.
 final class CreateTransferController: UITableViewController {
     enum FooterSection: Int, CaseIterable {
-        case destination, transfer, notes, button
+        case destination, notes, button
     }
 
     private let footerIdentifier = "transferTableViewFooterViewIdentifier"
@@ -56,7 +56,7 @@ final class CreateTransferController: UITableViewController {
         super.viewWillAppear(animated)
         let currentNavigationItem: UINavigationItem = tabBarController?.navigationItem ?? navigationItem
         currentNavigationItem.backBarButtonItem = UIBarButtonItem.back
-        titleDisplayMode(.always, for: "transfer_funds".localized())
+        titleDisplayMode(.always, for: "mobileTransferFundsHeader".localized())
     }
 
     private func initializePresenter() {
@@ -122,11 +122,7 @@ extension CreateTransferController {
     private func getAttributedFooterText(for section: Int) -> NSAttributedString? {
         let sectionData = presenter.sectionData[section]
         var attributedText: NSAttributedString?
-        if  let transferSectionData = sectionData as? CreateTransferSectionTransferData {
-            attributedText = format(footer: transferSectionData.footer, error: transferSectionData.errorMessage)
-        } else {
-            attributedText = format(error: sectionData.errorMessage)
-        }
+        attributedText = format(error: sectionData.errorMessage)
         return attributedText
     }
 
@@ -199,7 +195,9 @@ extension CreateTransferController {
             return
         }
         if let tableViewCell = cell as? TransferAllFundsCell {
-            tableViewCell.configure(setOn: presenter.transferAllFundsIsOn
+            tableViewCell.configure(setOn: presenter.transferAllFundsIsOn,
+                                    availableBalance: presenter.availableBalance,
+                                    currencyCode: presenter.destinationCurrency
             ) { [weak presenter] transferAllFundsIsOn in
                 presenter?.transferAllFundsIsOn = transferAllFundsIsOn
             }
@@ -217,7 +215,7 @@ extension CreateTransferController {
 
     private func getButtonSectionCellConfiguration(_ cell: UITableViewCell, _ indexPath: IndexPath) {
         if let tableViewCell = cell as? TransferButtonCell {
-            tableViewCell.configure(title: "transfer_next_button".localized())
+            tableViewCell.configure(title: "continueButtonLabel".localized())
         }
     }
 }
@@ -257,7 +255,6 @@ extension CreateTransferController: CreateTransferView {
             case .transfer:
                 if presenter.amount == nil || presenter.amount!.isEmpty || Double(presenter.amount!) == 0.00 {
                     section.errorMessage = "transfer_error_enter_amount_or_transfer_all".localized()
-                    updateFooter(for: .transfer)
                 }
 
             default:
@@ -280,7 +277,7 @@ extension CreateTransferController: CreateTransferView {
     }
 
     func updateTransferSection() {
-        tableView.reloadRows(at: [IndexPath(row: 0, section: FooterSection.transfer.rawValue)], with: .none)
+        tableView.reloadData()
     }
 
     func notifyTransferCreated(_ transfer: HyperwalletTransfer) {
@@ -356,7 +353,7 @@ extension CreateTransferController {
         if let transferMethod = response as? HyperwalletTransferMethod {
             coordinator?.navigateBackFromNextPage(with: transferMethod)
             presenter.selectedTransferMethod = transferMethod
-            presenter.amount = nil
+            presenter.amount = "0"
             presenter.transferAllFundsIsOn = false
             presenter.notes = nil
             presenter.loadCreateTransfer()
