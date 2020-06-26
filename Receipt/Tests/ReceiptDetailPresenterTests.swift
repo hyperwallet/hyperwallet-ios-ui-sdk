@@ -40,7 +40,7 @@ class ReceiptDetailPresenterTests: XCTestCase {
         }
         XCTAssertEqual(section.receiptDetailSectionHeader, .transaction)
         XCTAssertEqual(section.cellIdentifier, ReceiptTransactionCell.reuseIdentifier)
-        XCTAssertEqual(section.title, "Transaction")
+        XCTAssertEqual(section.title, "mobileTransactionTypeLabel".localized())
         XCTAssertEqual(section.rowCount, 1)
 
         let receipt = section.receipt
@@ -58,15 +58,18 @@ class ReceiptDetailPresenterTests: XCTestCase {
         }
         XCTAssertEqual(section.receiptDetailSectionHeader, .details)
         XCTAssertEqual(section.cellIdentifier, ReceiptDetailCell.reuseIdentifier)
-        XCTAssertEqual(section.title, "Details")
+        XCTAssertEqual(section.title, "mobileTransactionDetailsLabel".localized())
         XCTAssertEqual(section.rowCount, 3)
 
-        XCTAssertTrue(rowEqual(section.rows[0], "Receipt ID:", "55176986", "journalId"))
+        XCTAssertTrue(rowEqual(section.rows[0], "mobileJournalNumberLabel".localized(), "55176986", "journalId"))
         let expectedDateTime = ISO8601DateFormatter.ignoreTimeZone
             .date(from: "2019-04-28T18:16:04")!
             .format(for: .dateTime)
-        XCTAssertTrue(rowEqual(section.rows[1], "Date:", expectedDateTime, "createdOn"))
-        XCTAssertTrue(rowEqual(section.rows[2], "Client Transaction ID:", "DyClk0VG2a", "clientPaymentId"))
+        XCTAssertTrue(rowEqual(section.rows[1], "date".localized(), expectedDateTime, "createdOn"))
+        XCTAssertTrue(rowEqual(section.rows[2],
+                               "mobileTransactionIdLabel".localized(),
+                               "DyClk0VG2a",
+                               "clientPaymentId"))
     }
 
     func testSectionCreditFeeDataShouldNotBeEmpty() {
@@ -76,12 +79,12 @@ class ReceiptDetailPresenterTests: XCTestCase {
         }
         XCTAssertEqual(section.receiptDetailSectionHeader, .fee)
         XCTAssertEqual(section.cellIdentifier, ReceiptFeeCell.reuseIdentifier)
-        XCTAssertEqual(section.title, "Fee Specification")
+        XCTAssertEqual(section.title, "mobileFeeInfoLabel".localized())
         XCTAssertEqual(section.rowCount, 3)
 
-        XCTAssertTrue(rowEqual(section.rows[0], "Amount:", "6.00 USD", "amount"))
-        XCTAssertTrue(rowEqual(section.rows[1], "Fee:", "1.11 USD", "fee"))
-        XCTAssertTrue(rowEqual(section.rows[2], "Transaction:", "4.89 USD", "transaction"))
+        XCTAssertTrue(rowEqual(section.rows[0], "amount".localized(), "6.00 USD", "amount"))
+        XCTAssertTrue(rowEqual(section.rows[1], "mobileFeeLabel".localized(), "1.11 USD", "fee"))
+        XCTAssertTrue(rowEqual(section.rows[2], "mobileTransactionDetailsTotal".localized(), "4.89 USD", "transaction"))
     }
 
     func testSectionDebitFeeDataShouldNotBeEmpty() {
@@ -93,9 +96,9 @@ class ReceiptDetailPresenterTests: XCTestCase {
         XCTAssertEqual(section.cellIdentifier, ReceiptFeeCell.reuseIdentifier)
         XCTAssertEqual(section.rowCount, 3)
 
-        XCTAssertTrue(rowEqual(section.rows[0], "Amount:", "-9.87 USD", "amount"))
-        XCTAssertTrue(rowEqual(section.rows[1], "Fee:", "0.11 USD", "fee"))
-        XCTAssertTrue(rowEqual(section.rows[2], "Transaction:", "9.76 USD", "transaction"))
+        XCTAssertTrue(rowEqual(section.rows[0], "amount".localized(), "-9.87 USD", "amount"))
+        XCTAssertTrue(rowEqual(section.rows[1], "mobileFeeLabel".localized(), "0.11 USD", "fee"))
+        XCTAssertTrue(rowEqual(section.rows[2], "mobileTransactionDetailsTotal".localized(), "9.76 USD", "transaction"))
     }
 
     func testSectionFeeDataWithIntegerAmountShouldNotBeEmpty() {
@@ -107,9 +110,12 @@ class ReceiptDetailPresenterTests: XCTestCase {
         XCTAssertEqual(section.cellIdentifier, ReceiptFeeCell.reuseIdentifier)
         XCTAssertEqual(section.rowCount, 3)
 
-        XCTAssertTrue(rowEqual(section.rows[0], "Amount:", "-100500 KRW", "amount"))
-        XCTAssertTrue(rowEqual(section.rows[1], "Fee:", "500 KRW", "fee"))
-        XCTAssertTrue(rowEqual(section.rows[2], "Transaction:", "100000 KRW", "transaction"))
+        XCTAssertTrue(rowEqual(section.rows[0], "amount".localized(), "-100500 KRW", "amount"))
+        XCTAssertTrue(rowEqual(section.rows[1], "mobileFeeLabel".localized(), "500 KRW", "fee"))
+        XCTAssertTrue(rowEqual(section.rows[2],
+                               "mobileTransactionDetailsTotal".localized(),
+                               "100000 KRW",
+                               "transaction"))
     }
 
     func testSectionNotesDataShouldNotBeEmpty() {
@@ -119,7 +125,7 @@ class ReceiptDetailPresenterTests: XCTestCase {
         }
         XCTAssertEqual(section.receiptDetailSectionHeader, .notes)
         XCTAssertEqual(section.cellIdentifier, ReceiptNotesCell.reuseIdentifier)
-        XCTAssertEqual(section.title, "Notes")
+        XCTAssertEqual(section.title, "mobileConfirmNotesLabel".localized())
         XCTAssertEqual(section.rowCount, 1)
 
         XCTAssertNotNil(section.notes)

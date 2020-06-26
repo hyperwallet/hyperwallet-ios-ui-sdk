@@ -122,7 +122,7 @@ struct ReceiptDetailSectionFeeData: ReceiptDetailSectionData {
 
         let transaction: Double = amount - fee
         let transactionFormat = getTransactionFormat(basedOn: amountValue)
-        rows.append(ReceiptDetailRow(title: "receipt_details_transaction".localized(),
+        rows.append(ReceiptDetailRow(title: "mobileTransactionDetailsTotal".localized(),
                                      value: String(format: valueCurrencyFormat,
                                                    String(format: transactionFormat, transaction),
                                                    currency),

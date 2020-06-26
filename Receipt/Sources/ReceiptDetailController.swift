@@ -33,7 +33,6 @@ final class ReceiptDetailController: UITableViewController {
     /// Called after the view controller has loaded its view hierarchy into memory.
     override public func viewDidLoad() {
         super.viewDidLoad()
-        setViewBackgroundColor()
         initializePresenter()
         setupReceiptDetailTableView()
     }
@@ -53,6 +52,7 @@ final class ReceiptDetailController: UITableViewController {
     private func setupReceiptDetailTableView() {
         tableView = UITableView(frame: view.frame, style: .grouped)
         tableView.allowsSelection = false
+        tableView.backgroundColor = Theme.ViewController.backgroundColor
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Theme.Cell.smallHeight
         tableView.separatorStyle = .singleLine
