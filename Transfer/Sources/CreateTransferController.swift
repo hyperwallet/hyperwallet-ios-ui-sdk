@@ -216,8 +216,14 @@ extension CreateTransferController {
 
     private func getButtonSectionCellConfiguration(_ cell: UITableViewCell, _ indexPath: IndexPath) {
         if let tableViewCell = cell as? TransferButtonCell {
-            tableViewCell.configure(title: "continueButtonLabel".localized())
+            let tapConfirmation = UITapGestureRecognizer(target: self, action: #selector(tapTransfer))
+            tableViewCell.configure(title: "continueButtonLabel".localized(), action: tapConfirmation)
         }
+    }
+
+    @objc
+    private func tapTransfer(sender: UITapGestureRecognizer) {
+        presenter.createTransfer()
     }
 }
 
@@ -234,9 +240,6 @@ extension CreateTransferController {
             } else {
                 navigateToTransferMethodIfInitialized()
             }
-        }
-        if sectionData.createTransferSectionHeader == .button {
-            presenter.createTransfer()
         }
     }
 }

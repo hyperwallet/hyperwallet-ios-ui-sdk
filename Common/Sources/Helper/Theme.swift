@@ -67,7 +67,9 @@ public class Theme: NSObject {
     /// Representation of all customizable visual style property for `UIButton`.
     public struct Button {
         /// The button primary color
-        public static var color = Theme.themeColor
+        public static var color = UIColor(rgb: 0xFFFFFF)
+        /// The button background color
+        public static var backgroundColor = UIColor(rgb: 0x2C2E2F)
         /// The button font
         public static var font = Theme.Label.bodyFont
     }
