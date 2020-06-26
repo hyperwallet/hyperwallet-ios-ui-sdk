@@ -34,23 +34,24 @@ final class TransferAmountCell: UITableViewCell {
         textField.accessibilityIdentifier = "transferAmountTextField"
         textField.setContentHuggingPriority(.defaultLow, for: .horizontal)
         textField.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
-        textField.adjustsFontSizeToFitWidth = true
         textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         return textField
     }()
 
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.textAlignment = .right
+    private lazy var titleLabel: UITextField = {
+        let label = UITextField(frame: .zero)
+        label.isUserInteractionEnabled = false
+        label.contentVerticalAlignment = .top
         label.accessibilityIdentifier = "transferAmountTitleLabel"
         label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         label.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         return label
     }()
 
-    private lazy var currencyLabel: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.textAlignment = .left
+    private lazy var currencyLabel: UITextField = {
+        let label = UITextField(frame: .zero)
+        label.isUserInteractionEnabled = false
+        label.contentVerticalAlignment = .bottom
         label.accessibilityIdentifier = "transferAmountCurrencyLabel"
         label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         label.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
@@ -74,7 +75,9 @@ final class TransferAmountCell: UITableViewCell {
     @objc
     private func textFieldDidChange(_ textField: UITextField) {
         textField.invalidateIntrinsicContentSize()
-        textField.sizeToFit()
+        let fixedWidth = textField.frame.size.width
+        let newSize = textField.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+        textField.frame.size = CGSize(width: max(newSize.width, fixedWidth), height: newSize.height)
     }
 
     private func setupCell() {
@@ -96,8 +99,7 @@ final class TransferAmountCell: UITableViewCell {
         let margins = contentView.layoutMarginsGuide
 
         let constraints = [
-            stackView.safeAreaLeadingAnchor.constraint(equalTo: margins.leadingAnchor),
-            stackView.safeAreaTrailingAnchor.constraint(equalTo: margins.trailingAnchor),
+            stackView.centerXAnchor.constraint(equalTo: margins.centerXAnchor),
             stackView.safeAreaTopAnchor.constraint(equalTo: margins.topAnchor),
             stackView.safeAreaBottomAnchor.constraint(equalTo: margins.bottomAnchor)
         ]
@@ -111,7 +113,6 @@ final class TransferAmountCell: UITableViewCell {
             let currencySymbol = locale.displayName(forKey: NSLocale.Key.currencySymbol, value: currency)
             if let currencySymbol = currencySymbol {
                 titleLabel.text = currencySymbol
-                titleLabel.numberOfLines = 0
                 titleLabel.adjustsFontForContentSizeCategory = true
             }
         }
@@ -119,7 +120,6 @@ final class TransferAmountCell: UITableViewCell {
         amountTextField.adjustsFontForContentSizeCategory = true
         amountTextField.isEnabled = isEnabled
         currencyLabel.text = currency ?? String(repeating: " ", count: 3)
-        currencyLabel.numberOfLines = 0
         currencyLabel.adjustsFontForContentSizeCategory = true
         enteredAmountHandler = handler
     }
