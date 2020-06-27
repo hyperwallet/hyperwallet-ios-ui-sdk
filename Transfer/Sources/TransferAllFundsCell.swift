@@ -73,7 +73,6 @@ final class TransferAllFundsCell: UITableViewCell {
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.distribution = .fill
-        stackView.spacing = 2
         stackView.addArrangedSubview(availableFundsLabel)
         stackView.addArrangedSubview(transferMaxAmountButton)
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -84,7 +83,6 @@ final class TransferAllFundsCell: UITableViewCell {
         let constraints = [
             stackView.safeAreaLeadingAnchor.constraint(equalTo: margins.leadingAnchor),
             stackView.safeAreaTrailingAnchor.constraint(equalTo: margins.trailingAnchor),
-            stackView.safeAreaTopAnchor.constraint(equalTo: margins.topAnchor),
             stackView.safeAreaBottomAnchor.constraint(equalTo: margins.bottomAnchor)
         ]
         constraints.forEach { $0.priority = UILayoutPriority(999) }
