@@ -288,7 +288,7 @@ extension CreateTransferController: CreateTransferView {
         if let footerView = tableView.footerView(forSection: section.rawValue) as? TransferTableViewFooterView {
             footerView.footerLabel.attributedText = getAttributedFooterText(for: section.rawValue)
         } else {
-            tableView.reloadSections(IndexSet(integer: section.rawValue), with: .none)
+            tableView.reloadData()
         }
         tableView.endUpdates()
         UIView.setAnimationsEnabled(true)
