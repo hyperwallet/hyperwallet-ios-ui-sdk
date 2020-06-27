@@ -42,6 +42,15 @@ final class TransferButtonCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        subviews.forEach { (view) in
+            if type(of: view).description() == "_UITableViewCellSeparatorView" {
+                view.isHidden = true
+            }
+        }
+    }
+
     private func setupCell() {
         contentView.addSubview(button)
 

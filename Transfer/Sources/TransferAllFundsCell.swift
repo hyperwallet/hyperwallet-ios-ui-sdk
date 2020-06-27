@@ -60,6 +60,15 @@ final class TransferAllFundsCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        subviews.forEach { (view) in
+            if type(of: view).description() == "_UITableViewCellSeparatorView" {
+                view.isHidden = true
+            }
+        }
+    }
+
     private func setupCell() {
         selectionStyle = .none
         transferMaxAmountButton.addTarget(self, action: #selector(didTap), for: .touchUpInside)

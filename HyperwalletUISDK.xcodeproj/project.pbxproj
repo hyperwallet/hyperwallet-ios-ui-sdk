@@ -223,6 +223,7 @@
 		B309EF3623DA5D5400160855 /* ListTransferDestinationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B309EF3523DA5D5400160855 /* ListTransferDestinationCell.swift */; };
 		B32D70922391A7410079A34E /* TextWidgetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32D70912391A7410079A34E /* TextWidgetTests.swift */; };
 		B32FD83823DF66D700832544 /* ListTransferDestinationPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32FD83723DF66D700832544 /* ListTransferDestinationPresenterTests.swift */; };
+		B3758D9D24A6D63400ED9151 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3758D9C24A6D63400ED9151 /* UITextField.swift */; };
 		B3DCEA8A23DA2AA500217CF9 /* ListTransferDestinationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DCEA8923DA2AA500217CF9 /* ListTransferDestinationController.swift */; };
 		B3DCEA8C23DA30BC00217CF9 /* ListTransferDestinationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DCEA8B23DA30BC00217CF9 /* ListTransferDestinationPresenter.swift */; };
 		B3DDC1012385D7E800E1A562 /* InsightsSuccessResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = B3DDC1002385D7E800E1A562 /* InsightsSuccessResponse.json */; };
@@ -845,6 +846,7 @@
 		B309EF3523DA5D5400160855 /* ListTransferDestinationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTransferDestinationCell.swift; sourceTree = "<group>"; };
 		B32D70912391A7410079A34E /* TextWidgetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextWidgetTests.swift; sourceTree = "<group>"; };
 		B32FD83723DF66D700832544 /* ListTransferDestinationPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTransferDestinationPresenterTests.swift; sourceTree = "<group>"; };
+		B3758D9C24A6D63400ED9151 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		B3DCEA8923DA2AA500217CF9 /* ListTransferDestinationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTransferDestinationController.swift; sourceTree = "<group>"; };
 		B3DCEA8B23DA30BC00217CF9 /* ListTransferDestinationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTransferDestinationPresenter.swift; sourceTree = "<group>"; };
 		B3DDC1002385D7E800E1A562 /* InsightsSuccessResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = InsightsSuccessResponse.json; sourceTree = "<group>"; };
@@ -1456,6 +1458,7 @@
 			children = (
 				4A9A7C0F22E87EA10022E573 /* HyperwalletTransferUI.swift */,
 				4ADBEC7322E9F92800D43A48 /* TransferThemeManager.swift */,
+				B3758D9C24A6D63400ED9151 /* UITextField.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -3162,6 +3165,7 @@
 				4A9A7C1022E87EA70022E573 /* HyperwalletTransferUI.swift in Sources */,
 				4ADBEC7422E9F92800D43A48 /* TransferThemeManager.swift in Sources */,
 				4A9A7C0422E86F580022E573 /* CreateTransferSectionData.swift in Sources */,
+				B3758D9D24A6D63400ED9151 /* UITextField.swift in Sources */,
 				4A9A7C0722E86F580022E573 /* CreateTransferPresenter.swift in Sources */,
 				4ADBEC7222E9F16A00D43A48 /* TransferDestinationCell.swift in Sources */,
 				B309EF3623DA5D5400160855 /* ListTransferDestinationCell.swift in Sources */,

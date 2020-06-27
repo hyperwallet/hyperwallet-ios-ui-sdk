@@ -45,6 +45,15 @@ final class TransferNotesCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        subviews.forEach { (view) in
+            if type(of: view).description() == "_UITableViewCellSeparatorView" {
+                view.isHidden = true
+            }
+        }
+    }
+
     private func setupCell() {
         contentView.addSubview(notesTextField)
 
@@ -60,6 +69,7 @@ final class TransferNotesCell: UITableViewCell {
    }
 
     func configure(notes: String?, isEditable: Bool, _ handler: @escaping EnteredNoteHandler) {
+        notesTextField.setBottomBorder()
         notesTextField.text = notes
         notesTextField.isEnabled = isEditable
         enteredNoteHandler = handler

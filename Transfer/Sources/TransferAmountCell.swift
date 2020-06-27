@@ -35,10 +35,20 @@ final class TransferAmountCell: UITableViewCell {
         textField.setContentHuggingPriority(.defaultLow, for: .horizontal)
         textField.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+
+        let heightConstraint = NSLayoutConstraint(item: textField,
+                                                  attribute: .height,
+                                                  relatedBy: .equal,
+                                                  toItem: nil,
+                                                  attribute: .notAnAttribute,
+                                                  multiplier: 1,
+                                                  constant: 50)
+        textField.addConstraint(heightConstraint)
+
         return textField
     }()
 
-    private lazy var titleLabel: UITextField = {
+    private lazy var currencySymbolLabel: UITextField = {
         let label = UITextField(frame: .zero)
         label.isUserInteractionEnabled = false
         label.contentVerticalAlignment = .top
@@ -67,6 +77,15 @@ final class TransferAmountCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        subviews.forEach { (view) in
+            if type(of: view).description() == "_UITableViewCellSeparatorView" {
+                view.isHidden = true
+            }
+        }
+    }
+
     @objc
     private func didTapCell() {
         amountTextField.becomeFirstResponder()
@@ -90,7 +109,7 @@ final class TransferAmountCell: UITableViewCell {
         stackView.alignment = .fill
         stackView.distribution = .fill
         stackView.spacing = 0
-        stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(currencySymbolLabel)
         stackView.addArrangedSubview(amountTextField)
         stackView.addArrangedSubview(currencyLabel)
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -112,8 +131,8 @@ final class TransferAmountCell: UITableViewCell {
             let locale = NSLocale(localeIdentifier: currency)
             let currencySymbol = locale.displayName(forKey: NSLocale.Key.currencySymbol, value: currency)
             if let currencySymbol = currencySymbol {
-                titleLabel.text = currencySymbol
-                titleLabel.adjustsFontForContentSizeCategory = true
+                currencySymbolLabel.text = currencySymbol
+                currencySymbolLabel.adjustsFontForContentSizeCategory = true
             }
         }
         amountTextField.text = amount
@@ -204,16 +223,16 @@ extension TransferAmountCell: UITextFieldDelegate {
 
 extension TransferAmountCell {
     // MARK: Theme manager's proxy properties
-    @objc dynamic var titleLabelFont: UIFont! {
-        get { return titleLabel.font }
-        set { titleLabel.font = newValue
-            amountTextField.font = newValue }
+    @objc dynamic var currencySymbolLabelFont: UIFont! {
+        get { return currencySymbolLabel.font }
+        set { currencySymbolLabel.font = newValue
+            currencySymbolLabel.font = newValue }
     }
 
-    @objc dynamic var titleLabelColor: UIColor! {
-        get { return titleLabel.textColor }
-        set { titleLabel.textColor = newValue
-            amountTextField.textColor = newValue }
+    @objc dynamic var currencySymbolLabelColor: UIColor! {
+        get { return currencySymbolLabel.textColor }
+        set { currencySymbolLabel.textColor = newValue
+            currencySymbolLabel.textColor = newValue }
     }
 
     @objc dynamic var amountTextFieldFont: UIFont! {
