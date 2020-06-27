@@ -60,6 +60,7 @@ final class CreateTransferSectionAmountData: CreateTransferSectionData {
     var cellIdentifiers: [String] { return [
         TransferAmountCell.reuseIdentifier
     ]}
+    var footer: String?
     var errorMessage: String?
 }
 

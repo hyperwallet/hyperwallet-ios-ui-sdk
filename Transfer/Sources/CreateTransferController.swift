@@ -28,7 +28,7 @@ import UIKit
 /// to retrieve the transfer resource.
 final class CreateTransferController: UITableViewController {
     enum FooterSection: Int, CaseIterable {
-        case destination, notes, button
+        case destination, amount, notes, button
     }
 
     private let footerIdentifier = "transferTableViewFooterViewIdentifier"
@@ -123,7 +123,11 @@ extension CreateTransferController {
     private func getAttributedFooterText(for section: Int) -> NSAttributedString? {
         let sectionData = presenter.sectionData[section]
         var attributedText: NSAttributedString?
-        attributedText = format(error: sectionData.errorMessage)
+        if  let transferSectionData = sectionData as? CreateTransferSectionAmountData {
+            attributedText = format(footer: transferSectionData.footer, error: transferSectionData.errorMessage)
+        } else {
+            attributedText = format(error: sectionData.errorMessage)
+        }
         return attributedText
     }
 
@@ -265,6 +269,7 @@ extension CreateTransferController: CreateTransferView {
             case .amount:
                 if presenter.amount == nil || presenter.amount!.isEmpty || Double(presenter.amount!) == 0.00 {
                     section.errorMessage = "transferAmountInvalid".localized()
+                    updateFooter(for: .amount)
                 }
 
             default:
