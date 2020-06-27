@@ -43,7 +43,7 @@ public extension ThemeManager {
 
     private static func applyToTransferButtonCell() {
         let proxy = TransferButtonCell.appearance()
-        proxy.buttonTitleLabelColor = Theme.Button.color
+        proxy.buttonTitleLabelColor = Theme.Button.lightColor
         proxy.buttonTitleLabelFont = Theme.Button.font
         proxy.buttonBackgroundColor = Theme.Button.backgroundColor
     }

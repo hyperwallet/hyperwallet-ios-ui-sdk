@@ -23,7 +23,7 @@ import Common
 import HyperwalletSDK
 
 enum CreateTransferSectionHeader: String {
-    case button, destination, notes, transfer
+    case button, destination, notes, transfer, amount
 }
 
 protocol CreateTransferSectionData: class {
@@ -55,11 +55,17 @@ final class CreateTransferSectionDestinationData: CreateTransferSectionData {
     var errorMessage: String?
 }
 
+final class CreateTransferSectionAmountData: CreateTransferSectionData {
+    var createTransferSectionHeader: CreateTransferSectionHeader { return .amount }
+    var cellIdentifiers: [String] { return [
+        TransferAmountCell.reuseIdentifier
+    ]}
+    var errorMessage: String?
+}
+
 final class CreateTransferSectionTransferData: CreateTransferSectionData {
     var createTransferSectionHeader: CreateTransferSectionHeader { return .transfer }
-    var rowCount: Int { return 2 }
     var cellIdentifiers: [String] { return [
-        TransferAmountCell.reuseIdentifier,
         TransferAllFundsCell.reuseIdentifier
     ]}
     var errorMessage: String?

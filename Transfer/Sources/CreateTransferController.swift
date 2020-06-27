@@ -162,6 +162,9 @@ extension CreateTransferController {
 
         case .button:
             getButtonSectionCellConfiguration(cell, indexPath)
+
+        case .amount:
+            getAmountSectionCellConfiguration(cell, indexPath)
         }
         return cell
     }
@@ -183,7 +186,7 @@ extension CreateTransferController {
         }
     }
 
-    private func getTransferSectionCellConfiguration(_ cell: UITableViewCell, _ indexPath: IndexPath) {
+    private func getAmountSectionCellConfiguration(_ cell: UITableViewCell, _ indexPath: IndexPath) {
         if let tableViewCell = cell as? TransferAmountCell {
             tableViewCell.configure(amount: presenter.amount,
                                     currency: presenter.destinationCurrency,
@@ -195,6 +198,9 @@ extension CreateTransferController {
             }
             return
         }
+    }
+
+    private func getTransferSectionCellConfiguration(_ cell: UITableViewCell, _ indexPath: IndexPath) {
         if let tableViewCell = cell as? TransferAllFundsCell {
             tableViewCell.configure(setOn: presenter.transferAllFundsIsOn,
                                     availableBalance: presenter.availableBalance,
@@ -256,7 +262,7 @@ extension CreateTransferController: CreateTransferView {
                     updateFooter(for: .destination)
                 }
 
-            case .transfer:
+            case .amount:
                 if presenter.amount == nil || presenter.amount!.isEmpty || Double(presenter.amount!) == 0.00 {
                     section.errorMessage = "transferAmountInvalid".localized()
                 }

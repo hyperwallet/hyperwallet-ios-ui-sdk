@@ -85,6 +85,9 @@ final class CreateTransferPresenter {
     private func initializeSections() {
         sectionData.removeAll()
 
+        let createTransferSectionAmountData = CreateTransferSectionAmountData()
+        sectionData.append(createTransferSectionAmountData)
+
         let createTransferSectionTransferData = CreateTransferSectionTransferData()
         sectionData.append(createTransferSectionTransferData)
 
