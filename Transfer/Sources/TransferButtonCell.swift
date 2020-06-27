@@ -30,6 +30,16 @@ final class TransferButtonCell: UITableViewCell {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setContentHuggingPriority(.defaultLow, for: .horizontal)
         button.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+
+        let heightConstraint = NSLayoutConstraint(item: button,
+                                                  attribute: .height,
+                                                  relatedBy: .equal,
+                                                  toItem: nil,
+                                                  attribute: .notAnAttribute,
+                                                  multiplier: 1,
+                                                  constant: 52)
+        button.addConstraint(heightConstraint)
+
         return button
     }()
 
