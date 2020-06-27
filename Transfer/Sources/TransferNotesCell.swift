@@ -52,6 +52,7 @@ final class TransferNotesCell: UITableViewCell {
                 view.isHidden = true
             }
         }
+        notesTextField.setBottomBorder()
     }
 
     private func setupCell() {
@@ -69,7 +70,6 @@ final class TransferNotesCell: UITableViewCell {
    }
 
     func configure(notes: String?, isEditable: Bool, _ handler: @escaping EnteredNoteHandler) {
-        notesTextField.setBottomBorder()
         notesTextField.text = notes
         notesTextField.isEnabled = isEditable
         enteredNoteHandler = handler
