@@ -21,10 +21,7 @@ import Common
 #endif
 
 final class TransferAllFundsCell: UITableViewCell {
-    typealias TransferAllFundsSwitchHandler = (_ value: Bool) -> Void
     static let reuseIdentifier = "transferAllFundsCellIdentifier"
-
-    private var transferAllFundsSwitchHandler: TransferAllFundsSwitchHandler?
 
     private lazy var availableFundsLabel: UILabel = {
         let label = UILabel(frame: .zero)
@@ -71,7 +68,6 @@ final class TransferAllFundsCell: UITableViewCell {
 
     private func setupCell() {
         selectionStyle = .none
-        transferMaxAmountButton.addTarget(self, action: #selector(didTap), for: .touchUpInside)
 
         let stackView = UIStackView(frame: .zero)
         stackView.axis = .vertical
@@ -95,15 +91,9 @@ final class TransferAllFundsCell: UITableViewCell {
         NSLayoutConstraint.activate(constraints)
     }
 
-    @objc
-    private func didTap() {
-        transferAllFundsSwitchHandler?(true)
-    }
-
-    func configure(setOn: Bool,
+    func configure(action: UIGestureRecognizer,
                    availableBalance: String?,
-                   currencyCode: String?,
-                   _ handler: @escaping TransferAllFundsSwitchHandler) {
+                   currencyCode: String?) {
         guard let availableBalance = availableBalance,
             availableBalance.formatToDouble() != 0,
             let currencyCode = currencyCode else {
@@ -121,7 +111,7 @@ final class TransferAllFundsCell: UITableViewCell {
             availableFundsLabel.numberOfLines = 0
             availableFundsLabel.adjustsFontForContentSizeCategory = true
         }
-        transferAllFundsSwitchHandler = handler
+        transferMaxAmountButton.addGestureRecognizer(action)
     }
 }
 

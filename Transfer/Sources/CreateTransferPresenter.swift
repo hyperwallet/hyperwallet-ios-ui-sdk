@@ -66,12 +66,7 @@ final class CreateTransferPresenter {
     var selectedTransferMethod: HyperwalletTransferMethod?
     var amount: String?
     var notes: String?
-    var transferAllFundsIsOn: Bool = false {
-        didSet {
-            amount = transferAllFundsIsOn ? availableBalance : "0"
-            view.updateTransferSection()
-        }
-    }
+    var isTransferMaxAmount: Bool = false
     var destinationCurrency: String? {
         return selectedTransferMethod?.transferMethodCurrency
     }
@@ -185,6 +180,13 @@ final class CreateTransferPresenter {
         }
     }
 
+    // MARK: - Transfer Max Amount Button Tapped
+    func transferMaxAmount() {
+        amount = availableBalance
+        view.updateTransferSection()
+        isTransferMaxAmount = true
+    }
+
     // MARK: - Create Transfer Button Tapped
     func createTransfer() {
         guard view.areAllFieldsValid() else {
@@ -198,7 +200,7 @@ final class CreateTransferPresenter {
             let transfer = HyperwalletTransfer.Builder(clientTransferId: clientTransferId,
                                                        sourceToken: sourceToken,
                                                        destinationToken: destinationToken)
-                .destinationAmount(transferAllFundsIsOn ? nil : amount)
+                .destinationAmount(isTransferMaxAmount ? nil : amount)
                 .notes(notes)
                 .destinationCurrency(destinationCurrency)
                 .build()
@@ -220,7 +222,7 @@ final class CreateTransferPresenter {
 
                 case .success(let transfer):
                     if let transfer = transfer {
-                        if self?.transferAllFundsIsOn ?? false && transfer.destinationAmount != self?.availableBalance {
+                        if self?.isTransferMaxAmount ?? false && transfer.destinationAmount != self?.availableBalance {
                             strongSelf.didFxQuoteChange = true
                         }
                         strongSelf.view.notifyTransferCreated(transfer)
@@ -257,8 +259,9 @@ final class CreateTransferPresenter {
 
     private func updateFooterContent(_ errors: [HyperwalletError]) {
         for error in errors {
-            if let sectionData = sectionData.first(where: { $0.createTransferSectionHeader == .transfer }) {
+            if let sectionData = sectionData.first(where: { $0.createTransferSectionHeader == .amount }) {
                 sectionData.errorMessage = error.message
+                view.updateFooter(for: .amount)
             }
         }
     }

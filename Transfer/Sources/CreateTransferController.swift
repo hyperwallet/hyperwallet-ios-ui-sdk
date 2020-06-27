@@ -194,9 +194,9 @@ extension CreateTransferController {
         if let tableViewCell = cell as? TransferAmountCell {
             tableViewCell.configure(amount: presenter.amount,
                                     currency: presenter.destinationCurrency,
-                                    isEnabled: !presenter.transferAllFundsIsOn
+                                    isEnabled: !presenter.isTransferMaxAmount
             ) { [weak presenter] amount in
-                if let transferAllFundsIsOn = presenter?.transferAllFundsIsOn, transferAllFundsIsOn == false {
+                if let isTransferMaxAmount = presenter?.isTransferMaxAmount, isTransferMaxAmount == false {
                     presenter?.amount = amount
                 }
             }
@@ -206,12 +206,10 @@ extension CreateTransferController {
 
     private func getTransferSectionCellConfiguration(_ cell: UITableViewCell, _ indexPath: IndexPath) {
         if let tableViewCell = cell as? TransferAllFundsCell {
-            tableViewCell.configure(setOn: presenter.transferAllFundsIsOn,
+            let tapConfirmation = UITapGestureRecognizer(target: self, action: #selector(tapTransferMaxAmount))
+            tableViewCell.configure(action: tapConfirmation,
                                     availableBalance: presenter.availableBalance,
-                                    currencyCode: presenter.destinationCurrency
-            ) { [weak presenter] transferAllFundsIsOn in
-                presenter?.transferAllFundsIsOn = transferAllFundsIsOn
-            }
+                                    currencyCode: presenter.destinationCurrency)
             return
         }
     }
@@ -229,6 +227,11 @@ extension CreateTransferController {
             let tapConfirmation = UITapGestureRecognizer(target: self, action: #selector(tapTransfer))
             tableViewCell.configure(title: "continueButtonLabel".localized(), action: tapConfirmation)
         }
+    }
+
+    @objc
+    private func tapTransferMaxAmount(sender: UITapGestureRecognizer) {
+        presenter.transferMaxAmount()
     }
 
     @objc
@@ -369,7 +372,6 @@ extension CreateTransferController {
             coordinator?.navigateBackFromNextPage(with: transferMethod)
             presenter.selectedTransferMethod = transferMethod
             presenter.amount = "0"
-            presenter.transferAllFundsIsOn = false
             presenter.notes = nil
             presenter.loadCreateTransfer()
         } else if let statusTransition = response as? HyperwalletStatusTransition {
