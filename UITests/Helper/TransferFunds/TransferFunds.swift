@@ -59,7 +59,7 @@ class TransferFunds {
         transferAmountLabel = createTable.staticTexts["transferAmountTitleLabel"]
         transferAmount = createTable.textFields["transferAmountTextField"]
         transferCurrency = createTable.staticTexts["transferAmountCurrencyLabel"]
-        transferAllFundsLabel = createTable.staticTexts["transferAllFundsTitleLabel"]
+        transferAllFundsLabel = createTable.staticTexts["transferMaxAmountTitleLabel"]
         transferAllFundsSwitch = createTable.switches["transferAllFundsSwitch"]
         notesSectionLabel = createTable
             .staticTexts.containing(.staticText, identifier: "NOTES")

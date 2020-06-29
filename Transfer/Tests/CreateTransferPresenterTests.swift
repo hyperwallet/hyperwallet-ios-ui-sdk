@@ -243,30 +243,30 @@ class CreateTransferTests: XCTestCase {
                        "Section cellIdentifier should be transferButtonCellIdentifier")
     }
 
-    func testTransferAllFundsIsOn_selectedTransferMethodIsNil() {
+    func testIsTransferMaxAmount_selectedTransferMethodIsNil() {
         initializePresenter(transferMethodResult: .noContent)
-        XCTAssertFalse(presenter.transferAllFundsIsOn, "transferAllFundsIsOn should be False")
+        XCTAssertFalse(presenter.isTransferMaxAmount, "isTransferMaxAmount should be False")
         XCTAssertFalse(mockView.isUpdateTransferSectionPerformed, "updateTransferSection should not be performed")
         XCTAssertNil(presenter.amount, "Amount should be nil")
         XCTAssertNil(presenter.availableBalance, "availableBalance should be Nil")
-        presenter.transferAllFundsIsOn = true
+        presenter.isTransferMaxAmount = true
         XCTAssertTrue(mockView.isUpdateTransferSectionPerformed, "updateTransferSection should not be performed")
         XCTAssertNil(presenter.amount, "Amount should be nil")
     }
 
-    func testTransferAllFundsIsOn_selectedTransferMethodIsNotNil() {
+    func testIsTransferMaxAmount_selectedTransferMethodIsNotNil() {
         initializePresenter()
-        XCTAssertFalse(presenter.transferAllFundsIsOn, "transferAllFundsIsOn should be False")
+        XCTAssertFalse(presenter.isTransferMaxAmount, "isTransferMaxAmount should be False")
         XCTAssertFalse(mockView.isUpdateTransferSectionPerformed, "updateTransferSection should not be performed")
         XCTAssertNil(presenter.amount, "Amount should be nil")
         XCTAssertEqual(presenter.availableBalance, "62.29", "availableBalance should be 62.29")
 
-        presenter.transferAllFundsIsOn = true
+        presenter.isTransferMaxAmount = true
         XCTAssertTrue(mockView.isUpdateTransferSectionPerformed, "updateTransferSection should be performed")
         XCTAssertEqual(presenter.amount, "62.29", "Amount should be 62.29")
 
         mockView.isUpdateTransferSectionPerformed = false
-        presenter.transferAllFundsIsOn = false
+        presenter.isTransferMaxAmount = false
         XCTAssertTrue(mockView.isUpdateTransferSectionPerformed, "updateTransferSection should be performed")
         XCTAssertNil(presenter.amount, "Amount should be Nil")
     }
@@ -281,10 +281,10 @@ class CreateTransferTests: XCTestCase {
         XCTAssertEqual(presenter.destinationCurrency, "USD", "destinationCurrency should be USD")
     }
 
-    func testCreateTransfer_emptyAmount_transferAllFundsIsOn_success() {
+    func testCreateTransfer_emptyAmount_isTransferMaxAmount_success() {
         initializePresenter()
         mockView.resetStates()
-        presenter.transferAllFundsIsOn = true
+        presenter.isTransferMaxAmount = true
         presenter.createTransfer()
         wait(for: [mockView.showScheduleTransferExpectation], timeout: 1)
         XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
@@ -292,7 +292,7 @@ class CreateTransferTests: XCTestCase {
         XCTAssertFalse(mockView.isShowErrorPerformed, "showError should not be performed")
     }
 
-    func testCreateTransfer_notEmptyAmount_transferAllFundsIsOn_success() {
+    func testCreateTransfer_notEmptyAmount_isTransferMaxAmount_success() {
         initializePresenter()
         mockView.resetStates()
         presenter.amount = "1.00"

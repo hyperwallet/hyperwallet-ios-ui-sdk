@@ -372,6 +372,7 @@ extension CreateTransferController {
             coordinator?.navigateBackFromNextPage(with: transferMethod)
             presenter.selectedTransferMethod = transferMethod
             presenter.amount = "0"
+            presenter.isTransferMaxAmount = false
             presenter.notes = nil
             presenter.loadCreateTransfer()
         } else if let statusTransition = response as? HyperwalletStatusTransition {
