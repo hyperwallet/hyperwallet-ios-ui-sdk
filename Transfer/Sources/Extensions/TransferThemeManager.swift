@@ -65,23 +65,22 @@ public extension ThemeManager {
 
     private static func applyToTransferAllFundsCell() {
         let proxy = TransferAllFundsCell.appearance()
-        proxy.availableFundsLabelFont = Theme.Label.bodyFont
-        proxy.availableFundsLabelColor = Theme.Label.subTitleColor
+        proxy.availableFundsLabelFont = Theme.Label.titleFont
+        proxy.availableFundsLabelColor = Theme.Label.subtitleColor
         proxy.transferMaxAmountButtonFont = Theme.Button.font
         proxy.transferMaxAmountButtonColor = Theme.Button.color
     }
 
     private static func applyToTransferAmountCell() {
         let proxy = TransferAmountCell.appearance()
-        proxy.titleLabelFont = Theme.Label.titleFont
-        proxy.titleLabelColor = Theme.Label.color
-        proxy.currencyLabelFont = Theme.Label.titleFont
+        proxy.currencySymbolLabelFont = Theme.Label.titleFont
+        proxy.currencySymbolLabelColor = Theme.Label.color
         if #available(iOS 11.0, *) {
             proxy.amountTextFieldFont = Theme.Label.largeTitleFont.withSize(60)
         } else {
             proxy.amountTextFieldFont = Theme.Label.titleFont
         }
-        proxy.currencyLabelFont = Theme.Label.bodyFont
+        proxy.currencyLabelFont = Theme.Label.titleFont
         proxy.currencyLabelColor = Theme.Label.color
     }
 

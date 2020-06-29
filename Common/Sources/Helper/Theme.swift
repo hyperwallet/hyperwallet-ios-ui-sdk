@@ -82,7 +82,7 @@ public class Theme: NSObject {
         /// The button background color
         public static var backgroundColor = UIColor(rgb: 0x2C2E2F)
         /// The button font
-        public static var font = Theme.Label.bodyFont
+        public static var font = Theme.Label.titleFont
     }
 
     /// Representation of all customizable visual style property for `UIText`.

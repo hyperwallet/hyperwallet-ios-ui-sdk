@@ -207,7 +207,6 @@
 "transfer_fx_buy_confirmation" = "You buy:";
 "transfer_fx_rate_confirmation" = "Exchange Rate:";
 "mobileAvailableBalance" = "Available funds %1$@%2$@ %3$@";
-"transfer_description" = "Description";
 "continueButtonLabel" = "Continue";
 "mobileAddTransferMethod" = "Add transfer method";
 "transfer_add_account_subtitle" = "An account hasn't been set up yet, please add an account first.";
