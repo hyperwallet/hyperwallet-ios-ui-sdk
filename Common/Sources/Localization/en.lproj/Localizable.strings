@@ -215,6 +215,6 @@
 "transfer_section_header_summary" = "SUMMARY";
 "transfer_button_confirm" = "Confirm";
 "transferAmountInvalid" = "Enter a valid transfer amount";
-"transfer_error_add_a_transfer_method_first" = "Add a transfer method first"; // "noTransferMethodAdded": "Transfer method is required",
+"noTransferMethodAdded" = "Transfer method is required"; // "noTransferMethodAdded": "Transfer method is required",
 "transfer_error_no_transfer_method_module_initialized" = "Functionality to add an Account has not been included in this application.";
 "transfer_fx_rate_changed" = "Due to changes in the FX rate, you will now receive: %1$@";

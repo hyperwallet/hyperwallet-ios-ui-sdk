@@ -272,7 +272,7 @@ extension CreateTransferController: CreateTransferView {
             switch section.createTransferSectionHeader {
             case .destination:
                 if presenter.selectedTransferMethod == nil {
-                    section.errorMessage = "transfer_error_add_a_transfer_method_first".localized()
+                    section.errorMessage = "noTransferMethodAdded".localized()
                     updateFooter(for: .destination)
                 }
 
