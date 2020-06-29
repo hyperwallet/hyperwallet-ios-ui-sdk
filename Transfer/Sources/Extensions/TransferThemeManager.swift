@@ -76,9 +76,9 @@ public extension ThemeManager {
         proxy.currencySymbolLabelFont = Theme.Label.titleFont
         proxy.currencySymbolLabelColor = Theme.Label.color
         if #available(iOS 11.0, *) {
-            proxy.amountTextFieldFont = Theme.Label.largeTitleFont.withSize(60)
+            proxy.amountTextFieldFont = Theme.Text.largeTitleFont.withSize(60)
         } else {
-            proxy.amountTextFieldFont = Theme.Label.titleFont
+            proxy.amountTextFieldFont = Theme.Text.titleFont
         }
         proxy.currencyLabelFont = Theme.Label.titleFont
         proxy.currencyLabelColor = Theme.Label.color

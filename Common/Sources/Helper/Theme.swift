@@ -47,9 +47,6 @@ public class Theme: NSObject {
         public static var subtitleFont = UIFont.preferredFont(forTextStyle: .caption1)
         /// The footnote font style
         public static var footnoteFont = UIFont.preferredFont(forTextStyle: .footnote)
-        /// The large title font style
-        @available(iOS 11.0, *)
-        public static var largeTitleFont = UIFont.preferredFont(forTextStyle: .largeTitle)
     }
 
     /// Representation of all customizable visual style property for `UINavigationBar`.
@@ -95,6 +92,11 @@ public class Theme: NSObject {
         public static var disabledColor = Theme.Label.textColor
         /// The text font style
         public static var font = UIFont.preferredFont(forTextStyle: .body)
+        /// The large title font style
+        @available(iOS 11.0, *)
+        public static var largeTitleFont = UIFont.preferredFont(forTextStyle: .largeTitle)
+        /// The text font
+        public static var titleFont = UIFont.preferredFont(forTextStyle: .body)
     }
 
     /// Representation of all customizable visual style property for `UISearchBar`.
