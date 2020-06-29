@@ -39,8 +39,6 @@ final class TransferAllFundsCell: UITableViewCell {
         button.accessibilityLabel = "mobileTransferMax".localized()
         button.accessibilityIdentifier = "transferMaxAmountTitleLabel"
         button.setTitle("mobileTransferMax".localized(), for: .normal)
-        button.titleLabel?.adjustsFontForContentSizeCategory = true
-        button.titleLabel?.font = Theme.Label.bodyFont
         button.setTitleColor(Theme.Button.color, for: UIControl.State.normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setContentHuggingPriority(.defaultLow, for: .horizontal)
