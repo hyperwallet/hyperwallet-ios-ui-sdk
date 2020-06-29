@@ -38,15 +38,13 @@ public class Theme: NSObject {
         /// The color to highlight errors
         public static var errorColor = UIColor(rgb: 0xFF3B30)
         /// The subtitle color
-        public static var subTitleColor = UIColor(rgb: 0x666666)
+        public static var subtitleColor = UIColor(rgb: 0x666666)
         /// The text color
         public static var textColor = UIColor(rgb: 0x8e8e93)
         /// The title font style
-        public static var titleFont = UIFont.preferredFont(forTextStyle: .headline)
-        /// The body font style
-        public static var bodyFont = UIFont.preferredFont(forTextStyle: .body)
-        /// The caption one font style
-        public static var captionOne = UIFont.preferredFont(forTextStyle: .caption1)
+        public static var titleFont = UIFont.preferredFont(forTextStyle: .body)
+        /// The subtitle font style
+        public static var subtitleFont = UIFont.preferredFont(forTextStyle: .caption1)
         /// The footnote font style
         public static var footnoteFont = UIFont.preferredFont(forTextStyle: .footnote)
         /// The large title font style
@@ -58,15 +56,26 @@ public class Theme: NSObject {
     public struct NavigationBar {
         /// The `UINavigationBar` bar style
         public static var barStyle = UIBarStyle.default
-        /// Sets the opaque background color
+        /// Sets the opaque background color for The `UINavigationBar`
         public static var isTranslucent = false
-        /// The color of NavigationBar shadow
+        /// The `UINavigationBar` shadow color
         public static var shadowColor = UIColor.clear
+        /// The `UINavigationBar` large title color
+        public static var largeTitleColor = Theme.tintColor
+        /// The `UINavigationBar` title color
+        public static var titleColor = Theme.tintColor
+        /// The `UINavigationBar` Back Button color
+        public static var backButtonColor = Theme.tintColor
+        @available(iOS 11.0, *)
+        /// The `UINavigationBar` large title font
+        public static var largeTitleFont = UIFont.preferredFont(forTextStyle: .largeTitle)
+        /// The `UINavigationBar` title font
+        public static var titleFont = UIFont.preferredFont(forTextStyle: .title1)
     }
 
     /// Representation of all customizable visual style property for `UIButton`.
     public struct Button {
-        /// The button primary color
+        /// The `UIButton` primary color
         public static var color = Theme.themeColor
         /// The light button title color
         public static var lightColor = UIColor(rgb: 0xFFFFFF)
@@ -82,37 +91,47 @@ public class Theme: NSObject {
         public static var color = UIColor.black
         /// The text disabled color
         public static var disabledColor = Theme.Label.textColor
+        /// The text font style
+        public static var font = UIFont.preferredFont(forTextStyle: .body)
     }
 
     /// Representation of all customizable visual style property for `UISearchBar`.
     public struct SearchBar {
-        /// The `UITextField` tint color
+        /// The `UISearchBar`style
+        public static var style = UISearchBar.Style.default
+        /// The `UISearchBar`bar style
+        public static var barStyle = UIBarStyle.default
+        /// The `UISearchBar` tint color
         public static var textFieldTintColor = Theme.tintColor
+        /// The `UISearchBar` search icon color
+        public static var searchIconColor = Theme.tintColor
         /// The `UITextField` background color.
         public static var textFieldBackgroundColor = UIColor(rgb: 0x28BBD7)
     }
 
-   /// Representation of all customizable visual style property for `UITableViewViewCell`
+   /// Representation of all customizable visual style property for `UITableViewCell`
     public struct Cell {
-        /// The common `UITableViewViewCell` height.
+        /// The common `UITableViewCell` height.
         public static let smallHeight = CGFloat(44)
-        /// The `UITableViewViewCell` height for the receipt items
+        /// The `UITableViewCell` height for the receipt items
         public static let mediumHeight = CGFloat(63)
-        /// The `UITableViewViewCell` height for the List transfer method items and
+        /// The `UITableViewCell` height for the List transfer method items and
         /// the Select transfer method type items.
         public static let largeHeight = CGFloat(88)
         /// The Select transfer method type items header height.
         public static let headerHeight = CGFloat(16)
-        /// The divider UITableViewViewCell height.
+        /// The divider `UITableViewCell` height.
         public static let dividerHeight = CGFloat(8)
+        /// The `UITableViewCell` tint color
+        public static var tintColor = Theme.tintColor
     }
 
     /// Representation of all customizable visual style property for the `Hyperwallet`'s icon.
     public struct Icon {
         /// The icon font size
-        public static let size = 20
+        public static let size = 30
         /// The icon frame
-        public static let frame = CGSize(width: 40, height: 40)
+        public static let frame = CGSize(width: 30, height: 30)
         /// The icon primary color
         public static var primaryColor = Theme.themeColor
         /// The icon primary background color

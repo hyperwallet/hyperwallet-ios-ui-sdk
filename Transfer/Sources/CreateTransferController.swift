@@ -84,6 +84,13 @@ final class CreateTransferController: UITableViewController {
         tableView.register(TransferTableViewFooterView.self,
                            forHeaderFooterViewReuseIdentifier: footerIdentifier)
     }
+
+    override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
+        if parent == nil {
+            removeCoordinator()
+        }
+    }
 }
 
 // MARK: - Create transfer table view dataSource
@@ -137,7 +144,7 @@ extension CreateTransferController {
             attributedText = NSMutableAttributedString()
             attributedText.appendParagraph(value: footer,
                                            font: Theme.Label.footnoteFont,
-                                           color: Theme.Label.subTitleColor)
+                                           color: Theme.Label.subtitleColor)
         }
         if let error = error {
             if attributedText == nil {
@@ -377,6 +384,7 @@ extension CreateTransferController {
             presenter.loadCreateTransfer()
         } else if let statusTransition = response as? HyperwalletStatusTransition {
             coordinator?.navigateBackFromNextPage(with: statusTransition)
+            removeCoordinator()
             flowDelegate?.didFlowComplete(with: statusTransition)
         }
     }

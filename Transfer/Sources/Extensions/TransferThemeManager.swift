@@ -35,10 +35,19 @@ public extension ThemeManager {
 
     private static func applyToTransferDestinationCell() {
         let proxy = TransferDestinationCell.appearance()
-        proxy.titleLabelFont = Theme.Label.bodyFont
+        proxy.titleLabelFont = Theme.Label.titleFont
         proxy.titleLabelColor = Theme.Label.color
-        proxy.subTitleLabelFont = Theme.Label.captionOne
-        proxy.subTitleLabelColor = Theme.Label.subTitleColor
+        proxy.subTitleLabelFont = Theme.Label.subtitleFont
+        proxy.subTitleLabelColor = Theme.Label.subtitleColor
+    }
+
+    private static func applyToListTransferDestinationCell() {
+        let proxy = ListTransferDestinationCell.appearance()
+        proxy.titleLabelFont = Theme.Label.titleFont
+        proxy.titleLabelColor = Theme.Label.color
+        proxy.subTitleLabelFont = Theme.Label.subtitleFont
+        proxy.subTitleLabelColor = Theme.Label.subtitleColor
+        proxy.tintColor = Theme.Cell.tintColor
     }
 
     private static func applyToTransferButtonCell() {
@@ -51,7 +60,7 @@ public extension ThemeManager {
     private static func applyToTransferNotesCell() {
         let proxy = TransferNotesCell.appearance()
         proxy.notesTextFieldColor = Theme.Label.color
-        proxy.notesTextFieldFont = Theme.Label.bodyFont
+        proxy.notesTextFieldFont = Theme.Label.titleFont
     }
 
     private static func applyToTransferAllFundsCell() {
@@ -64,6 +73,8 @@ public extension ThemeManager {
 
     private static func applyToTransferAmountCell() {
         let proxy = TransferAmountCell.appearance()
+        proxy.titleLabelFont = Theme.Label.titleFont
+        proxy.titleLabelColor = Theme.Label.color
         proxy.currencyLabelFont = Theme.Label.titleFont
         if #available(iOS 11.0, *) {
             proxy.amountTextFieldFont = Theme.Label.largeTitleFont.withSize(60)
@@ -76,17 +87,17 @@ public extension ThemeManager {
 
     private static func applyToScheduleTransferSummaryCell() {
         let proxy = TransferSummaryCell.appearance()
-        proxy.titleLabelFont = Theme.Label.bodyFont
+        proxy.titleLabelFont = Theme.Label.titleFont
         proxy.titleLabelColor = Theme.Label.color
-        proxy.subTitleLabelFont = Theme.Label.captionOne
-        proxy.subTitleLabelColor = Theme.Label.subTitleColor
+        proxy.subTitleLabelFont = Theme.Label.subtitleFont
+        proxy.subTitleLabelColor = Theme.Label.subtitleColor
     }
 
     private static func applyToScheduleForeignExchangeCell() {
         let proxy = TransferForeignExchangeCell.appearance()
-        proxy.titleLabelFont = Theme.Label.bodyFont
+        proxy.titleLabelFont = Theme.Label.titleFont
         proxy.titleLabelColor = Theme.Label.color
-        proxy.subTitleLabelFont = Theme.Label.captionOne
-        proxy.subTitleLabelColor = Theme.Label.subTitleColor
+        proxy.subTitleLabelFont = Theme.Label.subtitleFont
+        proxy.subTitleLabelColor = Theme.Label.subtitleColor
     }
 }

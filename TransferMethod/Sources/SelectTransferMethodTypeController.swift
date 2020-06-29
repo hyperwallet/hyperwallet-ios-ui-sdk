@@ -58,6 +58,13 @@ final class SelectTransferMethodTypeController: UITableViewController {
         presenter = SelectTransferMethodTypePresenter(self)
     }
 
+    override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
+        if parent == nil {
+            removeCoordinator()
+        }
+    }
+
     // MARK: - Setup Layout
     private func setupTransferMethodTypeTableView() {
         tableView = UITableView(frame: .zero, style: .plain)
@@ -239,6 +246,7 @@ extension SelectTransferMethodTypeController {
     override public func didFlowComplete(with response: Any) {
         if response as? HyperwalletTransferMethod != nil {
             coordinator?.navigateBackFromNextPage(with: response)
+            removeCoordinator()
             flowDelegate?.didFlowComplete(with: response)
         }
     }

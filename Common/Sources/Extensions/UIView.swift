@@ -162,6 +162,7 @@ public extension UIView {
         emptyListButton.setTitle(text, for: .normal)
         emptyListButton.frame.size = CGSize(width: 90, height: 30)
         emptyListButton.accessibilityIdentifier = "emptyListButton"
+        emptyListButton.backgroundColor = Theme.Button.backgroundColor
 
         self.addSubview(emptyListButton)
 

@@ -33,7 +33,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
     let label: UILabel = {
         let label = UILabel()
         label.textColor = Theme.Label.textColor
-        label.font = Theme.Label.bodyFont
+        label.font = Theme.Label.titleFont
         label.translatesAutoresizingMaskIntoConstraints = false
         label.setContentHuggingPriority(UILayoutPriority.defaultLow, for: NSLayoutConstraint.Axis.horizontal)
         return label
