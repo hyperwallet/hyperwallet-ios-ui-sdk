@@ -67,7 +67,7 @@ public extension ThemeManager {
         let proxy = TransferAllFundsCell.appearance()
         proxy.availableFundsLabelFont = Theme.Label.titleFont
         proxy.availableFundsLabelColor = Theme.Label.subtitleColor
-        proxy.transferMaxAmountButtonFont = Theme.Button.font
+        proxy.transferMaxAmountButtonFont = Theme.Button.linkFont
         proxy.transferMaxAmountButtonColor = Theme.Button.linkColor
     }
 
