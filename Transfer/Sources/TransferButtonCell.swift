@@ -69,6 +69,7 @@ final class TransferButtonCell: UITableViewCell {
             button.safeAreaLeadingAnchor.constraint(equalTo: margins.leadingAnchor),
             button.safeAreaTrailingAnchor.constraint(equalTo: margins.trailingAnchor),
             button.safeAreaCenterXAnchor.constraint(equalTo: margins.centerXAnchor),
+            button.safeAreaCenterYAnchor.constraint(equalTo: margins.centerYAnchor),
             button.safeAreaTopAnchor.constraint(equalTo: margins.topAnchor),
             button.safeAreaBottomAnchor.constraint(equalTo: margins.bottomAnchor)
         ]

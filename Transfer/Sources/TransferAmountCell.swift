@@ -119,6 +119,7 @@ final class TransferAmountCell: UITableViewCell {
 
         let constraints = [
             stackView.centerXAnchor.constraint(equalTo: margins.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: margins.centerYAnchor),
             stackView.safeAreaTopAnchor.constraint(equalTo: margins.topAnchor),
             stackView.safeAreaBottomAnchor.constraint(equalTo: margins.bottomAnchor)
         ]
