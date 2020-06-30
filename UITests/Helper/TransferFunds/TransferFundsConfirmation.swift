@@ -44,19 +44,19 @@ class TransferFundsConfirmation {
         transferDestinationLabel = scheduleTable.staticTexts["transferDestinationTitleLabel"]
         transferDestinationDetailLabel = scheduleTable.staticTexts["transferDestinationSubtitleLabel"]
 
-        summaryTitle = scheduleTable.staticTexts["transfer_section_header_summary".localized()]
-        summaryAmountLabel = scheduleTable.staticTexts["transfer_amount_confirmation".localized()]
-        summaryFeeLabel = scheduleTable.staticTexts["transfer_fee_confirmation".localized()]
-        summaryReceiveLabel = scheduleTable.staticTexts["transfer_net_amount_confirmation".localized()]
+        summaryTitle = scheduleTable.staticTexts["mobileSummaryLabel".localized()]
+        summaryAmountLabel = scheduleTable.staticTexts["mobileConfirmDetailsAmount".localized()]
+        summaryFeeLabel = scheduleTable.staticTexts["mobileConfirmDetailsFee".localized()]
+        summaryReceiveLabel = scheduleTable.staticTexts["mobileConfirmDetailsTotal".localized()]
 
         noteLabel = scheduleTable.staticTexts["NOTES"]
 
         noteDescription = app.cells.textFields["transferNotesTextField"]
 
-        foreignExchangeSectionLabel = scheduleTable.staticTexts["transfer_section_header_foreignExchange".localized()]
-        foreignExchangeSell = scheduleTable.staticTexts["transfer_fx_sell_confirmation".localized()]
-        foreignExchangeBuy = scheduleTable.staticTexts["transfer_fx_buy_confirmation".localized()]
-        foreignExchangeRate = scheduleTable.staticTexts["transfer_fx_rate_confirmation".localized()]
+        foreignExchangeSectionLabel = scheduleTable.staticTexts["mobileFXlabel".localized()]
+        foreignExchangeSell = scheduleTable.staticTexts["mobileFXsell".localized()]
+        foreignExchangeBuy = scheduleTable.staticTexts["mobileFXbuy".localized()]
+        foreignExchangeRate = scheduleTable.staticTexts["mobileFXRateLabel".localized()]
 
         if #available(iOS 13.0, *) {
             confirmButton = scheduleTable.cells.buttons["scheduleTransferLabel"]

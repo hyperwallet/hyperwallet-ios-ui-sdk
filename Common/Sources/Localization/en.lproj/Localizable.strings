@@ -195,26 +195,26 @@
 
 // Transfer Funds
 "mobileTransferFundsHeader" = "Transfer funds";
+"mobileConfirmationHeader" = "Confirm the details";
 "mobileTransferToLabel" = "TRANSFER TO";
-"transfer_section_header_transfer" = "TRANSFER";
 "mobileNoteLabel" = "Note";
 "transfer_amount" = "Amount";
-"transfer_amount_confirmation" = "Amount:";
-"transfer_fee_confirmation" = "Fee:";
-"transfer_net_amount_confirmation" = "You will receive:";
+"mobileConfirmDetailsAmount" = "Amount";
+"mobileConfirmDetailsFee" = "Fee";
+"mobileConfirmDetailsTotal" = "You will receive";
 "mobileTransferMax" = "Transfer max amount";
-"transfer_fx_sell_confirmation" = "You sell:";
-"transfer_fx_buy_confirmation" = "You buy:";
-"transfer_fx_rate_confirmation" = "Exchange Rate:";
+"mobileFXsell" = "From";
+"mobileFXbuy" = "To";
+"mobileFXRateLabel" = "Exchange rate";
 "mobileAvailableBalance" = "Available funds %1$@%2$@ %3$@";
 "continueButtonLabel" = "Continue";
 "mobileAddTransferMethod" = "Add transfer method";
 "transfer_add_account_subtitle" = "An account hasn't been set up yet, please add an account first.";
 "transfer_select_destination" = "Select Destination";
-"transfer_section_header_foreignExchange" = "FOREIGN EXCHANGE";
-"transfer_section_header_summary" = "SUMMARY";
-"transfer_button_confirm" = "Confirm";
+"mobileFXlabel" = "FOREIGN EXCHANGE";
+"mobileSummaryLabel" = "SUMMARY";
+"transfer" = "Transfer";
 "transferAmountInvalid" = "Enter a valid transfer amount";
-"noTransferMethodAdded" = "Transfer method is required"; // "noTransferMethodAdded": "Transfer method is required",
+"noTransferMethodAdded" = "Transfer method is required";
 "transfer_error_no_transfer_method_module_initialized" = "Functionality to add an Account has not been included in this application.";
 "transfer_fx_rate_changed" = "Due to changes in the FX rate, you will now receive: %1$@";

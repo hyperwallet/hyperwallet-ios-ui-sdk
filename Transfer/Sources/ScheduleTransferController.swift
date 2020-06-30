@@ -47,7 +47,7 @@ final class ScheduleTransferController: UITableViewController, UITextFieldDelega
         super.viewWillAppear(animated)
         let currentNavigationItem: UINavigationItem = tabBarController?.navigationItem ?? navigationItem
         currentNavigationItem.backBarButtonItem = UIBarButtonItem.back
-        titleDisplayMode(.always, for: "mobileTransferFundsHeader".localized())
+        titleDisplayMode(.always, for: "mobileConfirmationHeader".localized())
     }
 
     private func initializePresenter() {
@@ -73,6 +73,7 @@ final class ScheduleTransferController: UITableViewController, UITextFieldDelega
         tableView.estimatedRowHeight = Theme.Cell.smallHeight
         tableView.sectionFooterHeight = UITableView.automaticDimension
         tableView.estimatedSectionFooterHeight = Theme.Cell.smallHeight
+        tableView.backgroundColor = Theme.UITableViewController.backgroundColor
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)
         }
@@ -112,6 +113,14 @@ extension ScheduleTransferController {
         }
         view.footerLabel.attributedText = attributedText
         return view
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let section = presenter.sectionData[indexPath.section].scheduleTransferSectionHeader
+        if section == .destination {
+            return Theme.Cell.largeHeight
+        }
+        return Theme.Cell.mediumHeight
     }
 
     private func getAttributedFooterText(for section: Int) -> NSAttributedString? {
@@ -166,7 +175,7 @@ extension ScheduleTransferController {
         case .button:
             if let tableViewCell = cell as? TransferButtonCell, section is ScheduleTransferButtonData {
                 let tapConfirmation = UITapGestureRecognizer(target: self, action: #selector(tapScheduleTransfer))
-                tableViewCell.configure(title: "transfer_button_confirm".localized(), action: tapConfirmation)
+                tableViewCell.configure(title: "transfer".localized(), action: tapConfirmation)
             }
         }
         return cell
