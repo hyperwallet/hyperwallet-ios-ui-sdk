@@ -121,7 +121,7 @@ class PrepaidCardListReceiptTests: BaseTests {
         transactionDetails.openReceipt(row: 0)
         waitForExistence(transactionDetails.detailHeaderTitle)
         // Transaction
-        XCTAssertEqual(transactionDetails.transactionSection.label, "Transaction")
+        XCTAssertEqual(transactionDetails.transactionSection.label, "mobileTransactionTypeLabel".localized())
 
         XCTAssertEqual(transactionDetails.typeLabel.label, "Funds Deposit")
         XCTAssertEqual(transactionDetails.paymentAmountLabel.label, "$10.00")
@@ -130,9 +130,9 @@ class PrepaidCardListReceiptTests: BaseTests {
         XCTAssertEqual(transactionDetails.currencyLabel.label, "USD")
 
         // Details
-        XCTAssertEqual(transactionDetails.detailSection.label, "Details")
-        XCTAssertEqual(transactionDetails.receiptIdLabel.label, "Receipt ID:")
-        XCTAssertEqual(transactionDetails.dateLabel.label, "Date:")
+        XCTAssertEqual(transactionDetails.detailSection.label, "mobileTransactionDetailsLabel".localized())
+        XCTAssertEqual(transactionDetails.receiptIdLabel.label, "mobileJournalNumberLabel".localized())
+        XCTAssertEqual(transactionDetails.dateLabel.label, "date".localized())
         XCTAssertEqual(transactionDetails.receiptIdValue.label, "FISVL_5269000")
 
         XCTAssertEqual(transactionDetails.dateValue.label,
@@ -153,7 +153,7 @@ class PrepaidCardListReceiptTests: BaseTests {
         waitForExistence(transactionDetails.detailHeaderTitle)
 
         // Transaction
-        XCTAssertEqual(transactionDetails.transactionSection.label, "Transaction")
+        XCTAssertEqual(transactionDetails.transactionSection.label, "mobileTransactionTypeLabel".localized())
         XCTAssertEqual(transactionDetails.typeLabel.label, "Balance Adjustment")
         XCTAssertEqual(transactionDetails.paymentAmountLabel.label, "-$7.00")
         XCTAssertEqual(transactionDetails.createdOnLabel.label,
@@ -161,9 +161,9 @@ class PrepaidCardListReceiptTests: BaseTests {
         XCTAssertEqual(transactionDetails.currencyLabel.label, "USD")
 
         // Details
-        XCTAssertEqual(transactionDetails.detailSection.label, "Details")
-        XCTAssertEqual(transactionDetails.receiptIdLabel.label, "Receipt ID:")
-        XCTAssertEqual(transactionDetails.dateLabel.label, "Date:")
+        XCTAssertEqual(transactionDetails.detailSection.label, "mobileTransactionDetailsLabel".localized())
+        XCTAssertEqual(transactionDetails.receiptIdLabel.label, "mobileJournalNumberLabel".localized())
+        XCTAssertEqual(transactionDetails.dateLabel.label, "date".localized())
         XCTAssertEqual(transactionDetails.receiptIdValue.label, "FISA_5269017")
 
         XCTAssertEqual(transactionDetails.dateValue.label,
@@ -185,7 +185,7 @@ class PrepaidCardListReceiptTests: BaseTests {
         waitForExistence(transactionDetails.detailHeaderTitle)
 
         // Transaction
-        XCTAssertEqual(transactionDetails.transactionSection.label, "Transaction")
+        XCTAssertEqual(transactionDetails.transactionSection.label, "mobileTransactionTypeLabel".localized())
         XCTAssertEqual(transactionDetails.typeLabel.label, "Balance Adjustment")
         XCTAssertEqual(transactionDetails.paymentAmountLabel.label, "-$10.00")
         XCTAssertEqual(transactionDetails.createdOnLabel.label,
@@ -193,12 +193,13 @@ class PrepaidCardListReceiptTests: BaseTests {
         XCTAssertEqual(transactionDetails.currencyLabel.label, "USD")
 
         // Details
-        XCTAssertEqual(transactionDetails.clientTransactionIdLabel.label, "Client Transaction ID:")
-        XCTAssertEqual(transactionDetails.detailSection.label, "Details")
-        XCTAssertEqual(transactionDetails.receiptIdLabel.label, "Receipt ID:")
-        XCTAssertEqual(transactionDetails.dateLabel.label, "Date:")
-        XCTAssertEqual(transactionDetails.charityNameLabel.label, "Charity Name:")
-        XCTAssertEqual(transactionDetails.promoWebSiteLabel.label, "Promo Website:")
+        XCTAssertEqual(transactionDetails.clientTransactionIdLabel.label, "mobileTransactionIdLabel".localized())
+        XCTAssertEqual(transactionDetails.detailSection.label, "mobileTransactionDetailsLabel".localized())
+        XCTAssertEqual(transactionDetails.receiptIdLabel.label, "mobileJournalNumberLabel".localized())
+        XCTAssertEqual(transactionDetails.dateLabel.label, "date".localized())
+        XCTAssertEqual(transactionDetails.charityNameLabel.label, "mobileCharityName".localized())
+        XCTAssertEqual(transactionDetails.checkNumLabel.label, "mobileCheckNumber".localized())
+        XCTAssertEqual(transactionDetails.promoWebSiteLabel.label, "mobilePromoWebsite".localized())
         XCTAssertEqual(transactionDetails.receiptIdValue.label, "FISVL_5240220")
         XCTAssertEqual(transactionDetails.charityNameValue.label, "Sample Charity")
         XCTAssertEqual(transactionDetails.checkNumValue.label, "Sample Check Number")
@@ -207,14 +208,14 @@ class PrepaidCardListReceiptTests: BaseTests {
         XCTAssertEqual(transactionDetails.dateValue.label,
                        transactionDetails.getExpectedDateTimeFormat(datetime: "2019-06-25T22:48:41"))
         // Notes
-        XCTAssertEqual(transactionDetails.noteSectionLabel.label, "Notes")
+        XCTAssertEqual(transactionDetails.noteSectionLabel.label, "mobileConfirmNotesLabel".localized())
         XCTAssertEqual(transactionDetails.notesValue.label, "Sample prepaid card payment")
 
         // Fee
-        XCTAssertEqual(transactionDetails.feeSection.label, "Fee Specification")
-        XCTAssertEqual(transactionDetails.amountLabel.label, "Amount:")
-        XCTAssertEqual(transactionDetails.feeLabel.label, "Fee:")
-        XCTAssertEqual(transactionDetails.transactionLabel.label, "Transaction:")
+        XCTAssertEqual(transactionDetails.feeSection.label, "mobileFeeInfoLabel".localized())
+        XCTAssertEqual(transactionDetails.amountLabel.label, "amount".localized())
+        XCTAssertEqual(transactionDetails.feeLabel.label, "mobileFeeLabel".localized())
+        XCTAssertEqual(transactionDetails.transactionLabel.label, "mobileTransactionDetailsTotal".localized())
         XCTAssertEqual(transactionDetails.amountValue.label, "-10.00 USD")
         XCTAssertEqual(transactionDetails.feeValue.label, "3.00 USD")
         XCTAssertEqual(transactionDetails.transactionValue.label, "7.00 USD")

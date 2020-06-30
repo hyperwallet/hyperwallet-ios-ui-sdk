@@ -69,9 +69,9 @@ class TransactionDetails {
         createdOnLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionCreatedOnLabel"]
         currencyLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionCurrencyLabel"]
 
-        detailSection = app.tables["receiptDetailTableView"].staticTexts["Details"]
-        feeSection = app.tables["receiptDetailTableView"].staticTexts["Fee Specification"]
-        transactionSection = app.tables["receiptDetailTableView"].staticTexts["Transaction"]
+        detailSection = app.tables["receiptDetailTableView"].staticTexts["mobileTransactionDetailsLabel".localized()]
+        feeSection = app.tables["receiptDetailTableView"].staticTexts["mobileFeeInfoLabel".localized()]
+        transactionSection = app.tables["receiptDetailTableView"].staticTexts["mobileTransactionTypeLabel".localized()]
         receiptIdLabel = app.tables["receiptDetailTableView"].staticTexts["journalIdLabel"]
         receiptIdValue = app.tables["receiptDetailTableView"].staticTexts["journalIdValue"]
         dateLabel = app.tables["receiptDetailTableView"].staticTexts["createdOnLabel"]
@@ -86,7 +86,7 @@ class TransactionDetails {
         promoWebSiteLabel = app.tables["receiptDetailTableView"].staticTexts["websiteLabel"]
         promoWebSiteValue = app.tables["receiptDetailTableView"].staticTexts["websiteValue"]
 
-        noteSectionLabel = app.tables["receiptDetailTableView"].staticTexts["Notes"]
+        noteSectionLabel = app.tables["receiptDetailTableView"].staticTexts["mobileConfirmNotesLabel".localized()]
 
         amountLabel = app.tables["receiptDetailTableView"].staticTexts["amountLabel"]
         amountValue = app.tables["receiptDetailTableView"].staticTexts["amountValue"]
@@ -99,9 +99,11 @@ class TransactionDetails {
         notesValue = app.tables["receiptDetailTableView"].staticTexts["ReceiptDetailSectionNotesTextLabel"]
 
         if #available(iOS 13.0, *) {
-            detailHeaderTitle = app.navigationBars["Transaction Details"].staticTexts["Transaction Details"]
+            detailHeaderTitle = app.navigationBars["mobileTransactionDetailsHeader".localized()]
+                .staticTexts["mobileTransactionDetailsHeader".localized()]
         } else {
-            detailHeaderTitle = app.navigationBars["Transaction Details"].otherElements["Transaction Details"]
+            detailHeaderTitle = app.navigationBars["mobileTransactionDetailsHeader".localized()]
+                .otherElements["mobileTransactionDetailsHeader".localized()]
         }
     }
 

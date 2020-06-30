@@ -191,13 +191,14 @@ class ListReceiptTests: BaseTests {
         transactionDetails.openReceipt(row: 4)
         waitForExistence(transactionDetails.detailHeaderTitle)
 
-        XCTAssertEqual(transactionDetails.clientTransactionIdLabel.label, "Client Transaction ID:")
-        XCTAssertEqual(transactionDetails.detailSection.label, "Details")
-        XCTAssertEqual(transactionDetails.receiptIdLabel.label, "Receipt ID:")
-        XCTAssertEqual(transactionDetails.dateLabel.label, "Date:")
-        XCTAssertEqual(transactionDetails.charityNameLabel.label, "Charity Name:")
-        XCTAssertEqual(transactionDetails.promoWebSiteLabel.label, "Promo Website:")
-        XCTAssertEqual(transactionDetails.noteSectionLabel.label, "Notes")
+        XCTAssertEqual(transactionDetails.clientTransactionIdLabel.label, "mobileTransactionIdLabel".localized())
+        XCTAssertEqual(transactionDetails.detailSection.label, "mobileTransactionDetailsLabel".localized())
+        XCTAssertEqual(transactionDetails.receiptIdLabel.label, "mobileJournalNumberLabel".localized())
+        XCTAssertEqual(transactionDetails.dateLabel.label, "date".localized())
+        XCTAssertEqual(transactionDetails.charityNameLabel.label, "mobileCharityName".localized())
+        XCTAssertEqual(transactionDetails.checkNumLabel.label, "mobileCheckNumber".localized())
+        XCTAssertEqual(transactionDetails.promoWebSiteLabel.label, "mobilePromoWebsite".localized())
+        XCTAssertEqual(transactionDetails.noteSectionLabel.label, "mobileConfirmNotesLabel".localized())
 
         XCTAssertEqual(transactionDetails.receiptIdValue.label, "3051579")
         XCTAssertEqual(transactionDetails.clientTransactionIdValue.label, "8OxXefx5")
@@ -246,9 +247,9 @@ class ListReceiptTests: BaseTests {
 
     // Detail section verification
     private func verifyDetailSection(receiptIdVal: String, dateVal: String, clientIdVal: String?) {
-        XCTAssertEqual(transactionDetails.detailSection.label, "Details")
-        XCTAssertEqual(transactionDetails.receiptIdLabel.label, "Receipt ID:")
-        XCTAssertEqual(transactionDetails.dateLabel.label, "Date:")
+        XCTAssertEqual(transactionDetails.detailSection.label, "mobileTransactionDetailsLabel".localized())
+        XCTAssertEqual(transactionDetails.receiptIdLabel.label, "mobileJournalNumberLabel".localized())
+        XCTAssertEqual(transactionDetails.dateLabel.label, "date".localized())
         XCTAssertEqual(transactionDetails.receiptIdValue.label, receiptIdVal)
         XCTAssertEqual(transactionDetails.receiptIdValue.label, receiptIdVal)
         XCTAssertEqual(transactionDetails.dateValue.label,
@@ -265,12 +266,12 @@ class ListReceiptTests: BaseTests {
 
     // FEE section verification
     private func verifyFeeSection(amountVal: String, feeVal: String, transactionVal: String) {
-        XCTAssertEqual(transactionDetails.feeSection.label, "Fee Specification")
-        XCTAssertEqual(transactionDetails.amountLabel.label, "Amount:")
+        XCTAssertEqual(transactionDetails.feeSection.label, "mobileFeeInfoLabel".localized())
+        XCTAssertEqual(transactionDetails.amountLabel.label, "amount".localized())
         XCTAssertEqual(transactionDetails.amountValue.label, amountVal)
-        XCTAssertEqual(transactionDetails.transactionLabel.label, "Transaction:")
+        XCTAssertEqual(transactionDetails.transactionLabel.label, "mobileTransactionDetailsTotal".localized())
         XCTAssertEqual(transactionDetails.transactionValue.label, transactionVal)
-        XCTAssertEqual(transactionDetails.feeLabel.label, "Fee:")
+        XCTAssertEqual(transactionDetails.feeLabel.label, "mobileFeeLabel".localized())
         XCTAssertEqual(transactionDetails.feeValue.label, feeVal)
     }
 }

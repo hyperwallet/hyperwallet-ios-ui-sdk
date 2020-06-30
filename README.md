@@ -381,7 +381,7 @@ On the Theme is possible to customize the properties:
 | `Theme.SearchBar.searchIconColor` | `UIColor.white` | The `UISearchBar` search icon color |
 | `Theme.SearchBar.textFieldTintColor` | `UIColor.white` | The `UITextField` tint color |
 | `Theme.SearchBar.textFieldBackgroundColor` | `0x28BBD7` | The `UITextField` background color |
-| `Theme.Cell.smallHeight` | `44` | The common ``UITableViewCell`` height. |
+| `Theme.Cell.smallHeight` | `61` | The common ``UITableViewCell`` height. |
 | `Theme.Cell.height` | `80` | The common ``UITableViewCell`` height. |
 | `Theme.Cell.largeHeight` | `88` | The `UITableViewCell` height for the List transfer method items and the Select transfer method type items. |
 | `Theme.Cell.headerHeight` | `37` | The Select transfer method type items header height. |
