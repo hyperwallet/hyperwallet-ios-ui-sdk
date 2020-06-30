@@ -93,6 +93,9 @@ final class TransferAmountCell: UITableViewCell {
 
     @objc
     private func textFieldDidChange(_ textField: UITextField) {
+        if !textField.adjustsFontSizeToFitWidth {
+            textField.adjustsFontSizeToFitWidth = true
+        }
         textField.invalidateIntrinsicContentSize()
         let fixedWidth = textField.frame.size.width
         let newSize = textField.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
@@ -103,20 +106,24 @@ final class TransferAmountCell: UITableViewCell {
         self.selectionStyle = .none
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapCell))
         self.addGestureRecognizer(tap)
+        let maxTextFieldWidth = UIScreen.main.bounds.width * 0.7
 
         let stackView = UIStackView(frame: .zero)
         stackView.axis = .horizontal
         stackView.alignment = .fill
         stackView.distribution = .fill
-        stackView.spacing = 0
         stackView.addArrangedSubview(currencySymbolLabel)
         stackView.addArrangedSubview(amountTextField)
         stackView.addArrangedSubview(currencyLabel)
         stackView.translatesAutoresizingMaskIntoConstraints = false
-
         contentView.addSubview(stackView)
-        let margins = contentView.layoutMarginsGuide
 
+        let maxWidthConstraint = [
+            amountTextField.widthAnchor.constraint(lessThanOrEqualToConstant: CGFloat(maxTextFieldWidth))
+        ]
+        NSLayoutConstraint.activate(maxWidthConstraint)
+
+        let margins = contentView.layoutMarginsGuide
         let constraints = [
             stackView.centerXAnchor.constraint(equalTo: margins.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: margins.centerYAnchor),
