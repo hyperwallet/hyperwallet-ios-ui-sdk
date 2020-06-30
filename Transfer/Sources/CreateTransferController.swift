@@ -127,6 +127,10 @@ extension CreateTransferController {
         return view
     }
 
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return Theme.Cell.largeHeight
+    }
+
     private func getAttributedFooterText(for section: Int) -> NSAttributedString? {
         let sectionData = presenter.sectionData[section]
         var attributedText: NSAttributedString?

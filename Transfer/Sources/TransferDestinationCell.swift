@@ -65,9 +65,7 @@ final class TransferDestinationCell: UITableViewCell {
         NSLayoutConstraint.activate([
             stackViewLeadingConstraints,
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
-            stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 0),
-            stackView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 10),
-            stackView.bottomAnchor.constraint(greaterThanOrEqualTo: contentView.bottomAnchor, constant: -10)
+            stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 0)
         ])
     }
 
