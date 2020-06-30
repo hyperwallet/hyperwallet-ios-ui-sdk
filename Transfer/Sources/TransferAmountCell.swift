@@ -106,7 +106,6 @@ final class TransferAmountCell: UITableViewCell {
         self.selectionStyle = .none
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapCell))
         self.addGestureRecognizer(tap)
-        let maxTextFieldWidth = UIScreen.main.bounds.width * 0.7
 
         let stackView = UIStackView(frame: .zero)
         stackView.axis = .horizontal
@@ -118,12 +117,12 @@ final class TransferAmountCell: UITableViewCell {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(stackView)
 
+        let margins = contentView.layoutMarginsGuide
         let maxWidthConstraint = [
-            amountTextField.widthAnchor.constraint(lessThanOrEqualToConstant: CGFloat(maxTextFieldWidth))
+            amountTextField.widthAnchor.constraint(lessThanOrEqualTo: margins.widthAnchor, multiplier: 0.70)
         ]
         NSLayoutConstraint.activate(maxWidthConstraint)
-
-        let margins = contentView.layoutMarginsGuide
+        
         let constraints = [
             stackView.centerXAnchor.constraint(equalTo: margins.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: margins.centerYAnchor),
