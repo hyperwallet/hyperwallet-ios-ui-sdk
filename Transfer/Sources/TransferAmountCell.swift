@@ -122,7 +122,7 @@ final class TransferAmountCell: UITableViewCell {
             amountTextField.widthAnchor.constraint(lessThanOrEqualTo: margins.widthAnchor, multiplier: 0.70)
         ]
         NSLayoutConstraint.activate(maxWidthConstraint)
-        
+
         let constraints = [
             stackView.centerXAnchor.constraint(equalTo: margins.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: margins.centerYAnchor),
@@ -133,7 +133,7 @@ final class TransferAmountCell: UITableViewCell {
         NSLayoutConstraint.activate(constraints)
     }
 
-    func configure(amount: String?, currency: String?, isEnabled: Bool, _ handler: @escaping EnteredAmountHandler) {
+    func configure(amount: String?, currency: String?, _ handler: @escaping EnteredAmountHandler) {
         if let currency = currency {
             let locale = NSLocale(localeIdentifier: currency)
             let currencySymbol = locale.displayName(forKey: NSLocale.Key.currencySymbol, value: currency)
@@ -144,7 +144,6 @@ final class TransferAmountCell: UITableViewCell {
         }
         amountTextField.text = amount
         amountTextField.adjustsFontForContentSizeCategory = true
-        amountTextField.isEnabled = isEnabled
         currencyLabel.text = currency ?? String(repeating: " ", count: 3)
         currencyLabel.adjustsFontForContentSizeCategory = true
         enteredAmountHandler = handler

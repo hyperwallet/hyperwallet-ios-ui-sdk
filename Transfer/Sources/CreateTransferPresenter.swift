@@ -66,7 +66,6 @@ final class CreateTransferPresenter {
     var selectedTransferMethod: HyperwalletTransferMethod?
     var amount: String?
     var notes: String?
-    var isTransferMaxAmount: Bool = false
     var destinationCurrency: String? {
         return selectedTransferMethod?.transferMethodCurrency
     }
@@ -184,7 +183,6 @@ final class CreateTransferPresenter {
     func transferMaxAmount() {
         amount = availableBalance
         view.updateTransferSection()
-        isTransferMaxAmount = true
     }
 
     // MARK: - Create Transfer Button Tapped
@@ -200,7 +198,7 @@ final class CreateTransferPresenter {
             let transfer = HyperwalletTransfer.Builder(clientTransferId: clientTransferId,
                                                        sourceToken: sourceToken,
                                                        destinationToken: destinationToken)
-                .destinationAmount(isTransferMaxAmount ? nil : amount)
+                .destinationAmount(availableBalance == amount ? nil : amount)
                 .notes(notes)
                 .destinationCurrency(destinationCurrency)
                 .build()
@@ -222,7 +220,7 @@ final class CreateTransferPresenter {
 
                 case .success(let transfer):
                     if let transfer = transfer {
-                        if self?.isTransferMaxAmount ?? false && transfer.destinationAmount != self?.availableBalance {
+                        if transfer.destinationAmount != self?.availableBalance {
                             strongSelf.didFxQuoteChange = true
                         }
                         strongSelf.view.notifyTransferCreated(transfer)

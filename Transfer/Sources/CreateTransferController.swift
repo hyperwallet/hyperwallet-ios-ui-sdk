@@ -208,10 +208,9 @@ extension CreateTransferController {
     private func getAmountSectionCellConfiguration(_ cell: UITableViewCell, _ indexPath: IndexPath) {
         if let tableViewCell = cell as? TransferAmountCell {
             tableViewCell.configure(amount: presenter.amount,
-                                    currency: presenter.destinationCurrency,
-                                    isEnabled: !presenter.isTransferMaxAmount
+                                    currency: presenter.destinationCurrency
             ) { [weak presenter] amount in
-                if let isTransferMaxAmount = presenter?.isTransferMaxAmount, isTransferMaxAmount == false {
+                if amount != presenter?.availableBalance {
                     presenter?.amount = amount
                 }
             }
@@ -387,7 +386,6 @@ extension CreateTransferController {
             coordinator?.navigateBackFromNextPage(with: transferMethod)
             presenter.selectedTransferMethod = transferMethod
             presenter.amount = "0"
-            presenter.isTransferMaxAmount = false
             presenter.notes = nil
             presenter.loadCreateTransfer()
         } else if let statusTransition = response as? HyperwalletStatusTransition {

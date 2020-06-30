@@ -245,28 +245,23 @@ class CreateTransferTests: XCTestCase {
 
     func testIsTransferMaxAmount_selectedTransferMethodIsNil() {
         initializePresenter(transferMethodResult: .noContent)
-        XCTAssertFalse(presenter.isTransferMaxAmount, "isTransferMaxAmount should be False")
         XCTAssertFalse(mockView.isUpdateTransferSectionPerformed, "updateTransferSection should not be performed")
         XCTAssertNil(presenter.amount, "Amount should be nil")
         XCTAssertNil(presenter.availableBalance, "availableBalance should be Nil")
-        presenter.isTransferMaxAmount = true
         XCTAssertTrue(mockView.isUpdateTransferSectionPerformed, "updateTransferSection should not be performed")
         XCTAssertNil(presenter.amount, "Amount should be nil")
     }
 
     func testIsTransferMaxAmount_selectedTransferMethodIsNotNil() {
         initializePresenter()
-        XCTAssertFalse(presenter.isTransferMaxAmount, "isTransferMaxAmount should be False")
         XCTAssertFalse(mockView.isUpdateTransferSectionPerformed, "updateTransferSection should not be performed")
         XCTAssertNil(presenter.amount, "Amount should be nil")
         XCTAssertEqual(presenter.availableBalance, "62.29", "availableBalance should be 62.29")
 
-        presenter.isTransferMaxAmount = true
         XCTAssertTrue(mockView.isUpdateTransferSectionPerformed, "updateTransferSection should be performed")
         XCTAssertEqual(presenter.amount, "62.29", "Amount should be 62.29")
 
         mockView.isUpdateTransferSectionPerformed = false
-        presenter.isTransferMaxAmount = false
         XCTAssertTrue(mockView.isUpdateTransferSectionPerformed, "updateTransferSection should be performed")
         XCTAssertNil(presenter.amount, "Amount should be Nil")
     }
@@ -284,7 +279,6 @@ class CreateTransferTests: XCTestCase {
     func testCreateTransfer_emptyAmount_isTransferMaxAmount_success() {
         initializePresenter()
         mockView.resetStates()
-        presenter.isTransferMaxAmount = true
         presenter.createTransfer()
         wait(for: [mockView.showScheduleTransferExpectation], timeout: 1)
         XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
