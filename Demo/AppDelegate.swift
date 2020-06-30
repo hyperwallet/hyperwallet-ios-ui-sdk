@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        // ThemeManager.applyWhiteTheme()
         ThemeManager.applyTheme()
         // Set the default tint color
-        window?.tintColor = Theme.Button.color
+        window?.tintColor = .systemBlue
 
         return true
     }
