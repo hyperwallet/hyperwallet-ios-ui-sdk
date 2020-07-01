@@ -78,7 +78,7 @@ public extension ThemeManager {
         if #available(iOS 11.0, *) {
             proxy.amountTextFieldFont = Theme.Text.largeTitleFont.withSize(60)
         } else {
-            proxy.amountTextFieldFont = Theme.Text.titleFont
+            proxy.amountTextFieldFont = Theme.Text.font
         }
         proxy.currencyLabelFont = Theme.Label.titleFont
         proxy.currencyLabelColor = Theme.Label.color

@@ -95,8 +95,6 @@ public class Theme: NSObject {
         /// The large title font style
         @available(iOS 11.0, *)
         public static var largeTitleFont = UIFont.preferredFont(forTextStyle: .largeTitle)
-        /// The text font
-        public static var titleFont = UIFont.preferredFont(forTextStyle: .body)
     }
 
     /// Representation of all customizable visual style property for `UISearchBar`.
