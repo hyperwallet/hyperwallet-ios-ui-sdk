@@ -32,7 +32,7 @@ protocol ListTransferDestinationView: class {
 }
 
 final class ListTransferDestinationPresenter {
-    private unowned let view: ListTransferDestinationView
+    private weak var view: ListTransferDestinationView?
     private let pageGroup = "transfer-funds"
     private let pageName = "trasfer-funds:create:list-transfer-destination"
     private(set) var sectionData = [HyperwalletTransferMethod]()
@@ -47,20 +47,18 @@ final class ListTransferDestinationPresenter {
 
     /// Get the list of all Activated transfer methods from core SDK
     func listTransferMethods() {
-        view.showLoading()
+        view?.showLoading()
 
         transferMethodRepository.listTransferMethods { [weak self] (result) in
-            guard let strongSelf = self else {
+            guard let strongSelf = self, let view = strongSelf.view else {
                 return
             }
-            strongSelf.view.hideLoading()
+            view.hideLoading()
 
             switch result {
             case .failure(let error):
-                strongSelf.view.showError(error,
-                                          pageName: strongSelf.pageName,
-                                          pageGroup: strongSelf.pageGroup) {
-                                            strongSelf.listTransferMethods()
+                view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
+                    strongSelf.listTransferMethods()
                 }
 
             case .success(let resultPageList):
@@ -70,7 +68,7 @@ final class ListTransferDestinationPresenter {
                     strongSelf.sectionData = []
                 }
 
-                strongSelf.view.reloadData()
+                view.reloadData()
             }
         }
     }

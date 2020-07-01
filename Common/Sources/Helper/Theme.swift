@@ -34,17 +34,17 @@ public class Theme: NSObject {
     /// Representation of all customizable visual style property for `UILabel`.
     public struct Label {
         /// The label primary color
-        public static var color = UIColor.black
+        public static var color = UIColor(rgb: 0x2C2E2F)
         /// The color to highlight errors
         public static var errorColor = UIColor(rgb: 0xFF3B30)
         /// The subtitle color
-        public static var subtitleColor = UIColor(rgb: 0x666666)
+        public static var subtitleColor = UIColor(rgb: 0x3c3c43, alpha: 0.6)
         /// The text color
         public static var textColor = UIColor(rgb: 0x8e8e93)
         /// The title font style
         public static var titleFont = UIFont.preferredFont(forTextStyle: .body)
         /// The subtitle font style
-        public static var subtitleFont = UIFont.preferredFont(forTextStyle: .caption1)
+        public static var subtitleFont = UIFont.preferredFont(forTextStyle: .subheadline)
         /// The footnote font style
         public static var footnoteFont = UIFont.preferredFont(forTextStyle: .footnote)
     }
@@ -83,7 +83,7 @@ public class Theme: NSObject {
     /// Representation of all customizable visual style property for `UIText`.
     public struct Text {
         /// The text primary color
-        public static var color = UIColor.black
+        public static var color = Theme.Label.color
         /// The text disabled color
         public static var disabledColor = Theme.Label.textColor
         /// The text font style
@@ -107,18 +107,20 @@ public class Theme: NSObject {
    /// Representation of all customizable visual style property for `UITableViewCell`
     public struct Cell {
         /// The common `UITableViewCell` height.
-        public static let smallHeight = CGFloat(44)
-        /// The `UITableViewCell` height for the receipt items
-        public static let mediumHeight = CGFloat(63)
+        public static let smallHeight = CGFloat(61)
+        /// The common `UITableViewCell` height.
+        public static let height = CGFloat(80)
         /// The `UITableViewCell` height for the List transfer method items and
         /// the Select transfer method type items.
         public static let largeHeight = CGFloat(88)
         /// The Select transfer method type items header height.
-        public static let headerHeight = CGFloat(16)
+        public static let headerHeight = CGFloat(37)
         /// The divider `UITableViewCell` height.
         public static let dividerHeight = CGFloat(8)
         /// The `UITableViewCell` tint color
         public static var tintColor = Theme.tintColor
+        /// The `UITableViewCell` separator color
+        public static var separatorColor = UIColor(rgb: 0x3c3c43, alpha: 0.29)
     }
 
     /// Representation of all customizable visual style property for the `Hyperwallet`'s icon.
@@ -129,30 +131,24 @@ public class Theme: NSObject {
         public static let frame = CGSize(width: 30, height: 30)
         /// The icon primary color
         public static var primaryColor = Theme.themeColor
-        /// The icon primary background color
-        public static var primaryBackgroundColor = UIColor(rgb: 0xE5F7FA)
         /// The icon credit color
         public static var creditColor = Amount.creditColor
-        /// The icon credit background color
-        public static var creditBackgroundColor = UIColor(rgb: 0xF1FAE8)
         /// The icon debit color
         public static var debitColor = Amount.debitColor
-        /// The icon debit background color
-        public static var debitBackgroundColor = UIColor(rgb: 0xFEF7F7)
     }
 
     /// Representation of all customized visual style property for numbers
     public struct Amount {
         /// The credit color
-        public static var creditColor = UIColor(rgb: 0x5FBF00)
+        public static var creditColor = UIColor(rgb: 0x299976)
         /// The debit color
-        public static var debitColor = UIColor(rgb: 0xDB4437)
+        public static var debitColor = Theme.Label.color
     }
 
     /// Representation of all customizable visual style property for `UIViewController`.
     public struct ViewController {
         /// The `UIViewController` background color
-        public static var backgroundColor = UIColor(rgb: 0xEFEFF4)
+        public static var backgroundColor = UIColor.white
     }
 
     /// Representation of all customizable visual style property for `SpinnerView`.

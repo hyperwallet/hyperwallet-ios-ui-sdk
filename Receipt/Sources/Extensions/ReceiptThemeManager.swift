@@ -32,24 +32,24 @@ public extension ThemeManager {
 
     private static func applyToReceiptDetailCell() {
         let proxy = ReceiptDetailCell.appearance()
-        proxy.titleLabelFont = Theme.Label.footnoteFont
-        proxy.titleLabelColor = Theme.Label.subtitleColor
-        proxy.subTitleLabelFont = Theme.Label.footnoteFont
+        proxy.titleLabelFont = Theme.Label.titleFont
+        proxy.titleLabelColor = Theme.Label.color
+        proxy.subTitleLabelFont = Theme.Label.titleFont
         proxy.subTitleLabelColor = Theme.Label.subtitleColor
     }
 
     private static func applyToReceiptFeeCell() {
         let proxy = ReceiptFeeCell.appearance()
-        proxy.titleLabelFont = Theme.Label.footnoteFont
-        proxy.titleLabelColor = Theme.Label.subtitleColor
-        proxy.subTitleLabelFont = Theme.Label.footnoteFont
+        proxy.titleLabelFont = Theme.Label.titleFont
+        proxy.titleLabelColor = Theme.Label.color
+        proxy.subTitleLabelFont = Theme.Label.titleFont
         proxy.subTitleLabelColor = Theme.Label.subtitleColor
     }
 
     private static func applyToReceiptNotesCell() {
         let proxy = ReceiptNotesCell.appearance()
-        proxy.titleLabelFont = Theme.Label.footnoteFont
-        proxy.titleLabelColor = Theme.Label.subtitleColor
+        proxy.titleLabelFont = Theme.Label.titleFont
+        proxy.titleLabelColor = Theme.Label.color
     }
 
     private static func applyToReceiptTransactionCell() {
