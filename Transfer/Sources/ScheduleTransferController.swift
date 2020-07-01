@@ -166,7 +166,7 @@ extension ScheduleTransferController {
         case .notes:
             if let tableViewCell = cell as? TransferNotesCell,
                 let notesSection = section as? ScheduleTransferNotesData {
-                tableViewCell.configure(notes: notesSection.notes, isEditable: false, { _ in })
+                tableViewCell.configure(notes: notesSection.notes, isEditable: false, isHideBorder: false, { _ in })
             }
 
         case .button:
