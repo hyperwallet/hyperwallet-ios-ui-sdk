@@ -82,9 +82,10 @@ final class AddTransferMethodController: UITableViewController {
 
     override public func viewDidLoad() {
         super.viewDidLoad()
+        setViewBackgroundColor()
         initializePresenter()
+        setupTableView()
         presenter.loadTransferMethodConfigurationFields(forceUpdate ?? false)
-        setupLayout()
         hideKeyboardWhenTappedAround()
     }
 
@@ -279,9 +280,7 @@ extension AddTransferMethodController: AddTransferMethodView {
     }
 
     func showLoading() {
-        if let view = self.navigationController?.view {
-            spinnerView = HyperwalletUtilViews.showSpinner(view: view)
-        }
+        spinnerView = HyperwalletUtilViews.showSpinner(view: view)
     }
 
     func hideLoading() {

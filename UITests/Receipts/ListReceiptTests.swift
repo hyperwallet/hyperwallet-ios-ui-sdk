@@ -39,13 +39,13 @@ class ListReceiptTests: BaseTests {
                              method: HTTPMethod.get)
         openReceiptsListScreen()
 
-        verifyCellExists("Bank Account", "2019-05-10T18:16:17", "-5.00", "USD", at: 0)
-        verifyCellExists("Payment", "2019-05-08T18:16:19", "6.00", "USD", at: 1)
-        verifyCellExists("Bank Account", "2019-05-06T18:16:17", "-5.00", "USD", at: 2)
-        verifyCellExists("Payment", "2019-05-04T18:16:14", "6.00", "USD", at: 3)
-        verifyCellExists("Payment", "2019-05-03T17:08:58", "20.00", "USD", at: 4)
-        verifyCellExists("PayPal", "2019-05-02T18:16:17", "5.00", "USD", at: 5)
-        verifyCellExists("Debit Card", "2019-05-01T18:16:17", "5.00", "USD", at: 6)
+        verifyCellExists("Bank Account", "2019-05-10T18:16:17", "-$5.00", "USD", at: 0)
+        verifyCellExists("Payment", "2019-05-08T18:16:19", "$6.00", "USD", at: 1)
+        verifyCellExists("Bank Account", "2019-05-06T18:16:17", "-$5.00", "USD", at: 2)
+        verifyCellExists("Payment", "2019-05-04T18:16:14", "$6.00", "USD", at: 3)
+        verifyCellExists("Payment", "2019-05-03T17:08:58", "$20.00", "USD", at: 4)
+        verifyCellExists("PayPal", "2019-05-02T18:16:17", "$5.00", "USD", at: 5)
+        verifyCellExists("Debit Card", "2019-05-01T18:16:17", "$5.00", "USD", at: 6)
 
         XCTAssertEqual(app.tables.cells.count, expectedNumberOfCells)
         XCTAssertTrue(app.tables.staticTexts["May 2019"].exists)
@@ -56,7 +56,8 @@ class ListReceiptTests: BaseTests {
         mockServer.setUpEmptyResponse(url: "/rest/v3/users/usr-token/receipts")
         openReceiptsListScreen()
 
-        XCTAssertTrue(app.staticTexts["Seems like, you don’t have any Transactions, yet."].exists)
+        let emptyPlaceHolder = "mobileNoTransactions".localized()
+        XCTAssertTrue(app.staticTexts[emptyPlaceHolder].exists)
         XCTAssertEqual(app.tables.cells.count, 0)
     }
 
@@ -69,17 +70,17 @@ class ListReceiptTests: BaseTests {
                              filename: "ReceiptsForLazyLoadingNextPage",
                              method: HTTPMethod.get)
 
-        verifyCellDoesNotExist("Payment", "Mar 24, 2019", "5.00", "USD", at: 20)
-        verifyCellDoesNotExist("Payment", "Mar 24, 2019", "6.00", "USD", at: 21)
-        verifyCellDoesNotExist("Bank Account", "Mar 24, 2019", "-5.00", "USD", at: 22)
+        verifyCellDoesNotExist("Payment", "Mar 24, 2019", "$5.00", "USD", at: 20)
+        verifyCellDoesNotExist("Payment", "Mar 24, 2019", "$6.00", "USD", at: 21)
+        verifyCellDoesNotExist("Bank Account", "Mar 24, 2019", "-$5.00", "USD", at: 22)
 
         app.swipeUp()
         app.swipeUp()
         waitForNonExistence(spinner)
 
-        verifyCellExists("Payment", "2019-03-24T17:35:20", "5.00", "USD", at: 20)
-        verifyCellExists("Payment", "2019-03-24T17:39:19", "6.00", "USD", at: 21)
-        verifyCellExists("Bank Account", "2019-03-24T17:46:28", "-5.00", "USD", at: 22)
+        verifyCellExists("Payment", "2019-03-24T17:35:20", "$5.00", "USD", at: 20)
+        verifyCellExists("Payment", "2019-03-24T17:39:19", "$6.00", "USD", at: 21)
+        verifyCellExists("Bank Account", "2019-03-24T17:46:28", "-$5.00", "USD", at: 22)
     }
 
     private func verifyCellExists(_ type: String,
@@ -116,14 +117,14 @@ class ListReceiptTests: BaseTests {
     }
 
     private func validateListOrder() {
-        verifyCellExists("Payment", "2019-05-24T18:16:19", "6.00", "USD", at: 0)
-        verifyCellExists("Bank Account", "2019-05-12T18:16:17", "-5.00", "USD", at: 1)
-        verifyCellExists("Payment", "2019-05-04T18:16:14", "6.00", "USD", at: 2)
-        verifyCellExists("Payment", "2019-04-27T18:16:12", "6.00", "USD", at: 3)
-        verifyCellExists("Payment", "2019-04-19T18:16:10", "6.00", "USD", at: 4)
-        verifyCellExists("Bank Account", "2019-04-14T17:46:28", "-7.50", "USD", at: 5)
-        verifyCellExists("Payment", "2019-03-25T18:16:08", "6.00", "USD", at: 6)
-        verifyCellExists("Payment", "2019-03-18T18:16:04", "6.00", "USD", at: 7)
+        verifyCellExists("Payment", "2019-05-24T18:16:19", "$6.00", "USD", at: 0)
+        verifyCellExists("Bank Account", "2019-05-12T18:16:17", "-$5.00", "USD", at: 1)
+        verifyCellExists("Payment", "2019-05-04T18:16:14", "$6.00", "USD", at: 2)
+        verifyCellExists("Payment", "2019-04-27T18:16:12", "$6.00", "USD", at: 3)
+        verifyCellExists("Payment", "2019-04-19T18:16:10", "$6.00", "USD", at: 4)
+        verifyCellExists("Bank Account", "2019-04-14T17:46:28", "-$7.50", "USD", at: 5)
+        verifyCellExists("Payment", "2019-03-25T18:16:08", "$6.00", "USD", at: 6)
+        verifyCellExists("Payment", "2019-03-18T18:16:04", "$6.00", "USD", at: 7)
     }
 
     private func validateSectionsHeaders() {
@@ -161,7 +162,7 @@ class ListReceiptTests: BaseTests {
         openUpReceiptsListScreenForFewMonths()
         transactionDetails.openReceipt(row: 0)
         waitForExistence(transactionDetails.detailHeaderTitle)
-        verifyPayment("Payment", "2019-05-24T18:16:19", "6.00", "\(currency)")
+        verifyPayment("Payment", "2019-05-24T18:16:19", "$6.00", "\(currency)")
 
         // DETAILS Section
         verifyDetailSection(receiptIdVal: "55176992", dateVal: "2019-05-24T18:16:19", clientIdVal: "DyClk0VG9a")
@@ -176,7 +177,7 @@ class ListReceiptTests: BaseTests {
         transactionDetails.openReceipt(row: 1)
         waitForExistence(transactionDetails.detailHeaderTitle)
 
-        verifyPayment("Bank Account", "2019-05-12T18:16:17", "-5.00", "\(currency)")
+        verifyPayment("Bank Account", "2019-05-12T18:16:17", "-$5.00", "\(currency)")
 
         // DETAILS Section
         verifyDetailSection(receiptIdVal: "55176991", dateVal: "2019-05-12T18:16:17", clientIdVal: nil)
@@ -190,13 +191,14 @@ class ListReceiptTests: BaseTests {
         transactionDetails.openReceipt(row: 4)
         waitForExistence(transactionDetails.detailHeaderTitle)
 
-        XCTAssertEqual(transactionDetails.clientTransactionIdLabel.label, "Client Transaction ID:")
-        XCTAssertEqual(transactionDetails.detailSection.label, "Details")
-        XCTAssertEqual(transactionDetails.receiptIdLabel.label, "Receipt ID:")
-        XCTAssertEqual(transactionDetails.dateLabel.label, "Date:")
-        XCTAssertEqual(transactionDetails.charityNameLabel.label, "Charity Name:")
-        XCTAssertEqual(transactionDetails.promoWebSiteLabel.label, "Promo Website:")
-        XCTAssertEqual(transactionDetails.noteSectionLabel.label, "Notes")
+        XCTAssertEqual(transactionDetails.clientTransactionIdLabel.label, "mobileTransactionIdLabel".localized())
+        XCTAssertEqual(transactionDetails.detailSection.label, "mobileTransactionDetailsLabel".localized())
+        XCTAssertEqual(transactionDetails.receiptIdLabel.label, "mobileJournalNumberLabel".localized())
+        XCTAssertEqual(transactionDetails.dateLabel.label, "date".localized())
+        XCTAssertEqual(transactionDetails.charityNameLabel.label, "mobileCharityName".localized())
+        XCTAssertEqual(transactionDetails.checkNumLabel.label, "mobileCheckNumber".localized())
+        XCTAssertEqual(transactionDetails.promoWebSiteLabel.label, "mobilePromoWebsite".localized())
+        XCTAssertEqual(transactionDetails.noteSectionLabel.label, "mobileConfirmNotesLabel".localized())
 
         XCTAssertEqual(transactionDetails.receiptIdValue.label, "3051579")
         XCTAssertEqual(transactionDetails.clientTransactionIdValue.label, "8OxXefx5")
@@ -245,9 +247,9 @@ class ListReceiptTests: BaseTests {
 
     // Detail section verification
     private func verifyDetailSection(receiptIdVal: String, dateVal: String, clientIdVal: String?) {
-        XCTAssertEqual(transactionDetails.detailSection.label, "Details")
-        XCTAssertEqual(transactionDetails.receiptIdLabel.label, "Receipt ID:")
-        XCTAssertEqual(transactionDetails.dateLabel.label, "Date:")
+        XCTAssertEqual(transactionDetails.detailSection.label, "mobileTransactionDetailsLabel".localized())
+        XCTAssertEqual(transactionDetails.receiptIdLabel.label, "mobileJournalNumberLabel".localized())
+        XCTAssertEqual(transactionDetails.dateLabel.label, "date".localized())
         XCTAssertEqual(transactionDetails.receiptIdValue.label, receiptIdVal)
         XCTAssertEqual(transactionDetails.receiptIdValue.label, receiptIdVal)
         XCTAssertEqual(transactionDetails.dateValue.label,
@@ -264,12 +266,12 @@ class ListReceiptTests: BaseTests {
 
     // FEE section verification
     private func verifyFeeSection(amountVal: String, feeVal: String, transactionVal: String) {
-        XCTAssertEqual(transactionDetails.feeSection.label, "Fee Specification")
-        XCTAssertEqual(transactionDetails.amountLabel.label, "Amount:")
+        XCTAssertEqual(transactionDetails.feeSection.label, "mobileFeeInfoLabel".localized())
+        XCTAssertEqual(transactionDetails.amountLabel.label, "amount".localized())
         XCTAssertEqual(transactionDetails.amountValue.label, amountVal)
-        XCTAssertEqual(transactionDetails.transactionLabel.label, "Transaction:")
+        XCTAssertEqual(transactionDetails.transactionLabel.label, "mobileTransactionDetailsTotal".localized())
         XCTAssertEqual(transactionDetails.transactionValue.label, transactionVal)
-        XCTAssertEqual(transactionDetails.feeLabel.label, "Fee:")
+        XCTAssertEqual(transactionDetails.feeLabel.label, "mobileFeeLabel".localized())
         XCTAssertEqual(transactionDetails.feeValue.label, feeVal)
     }
 }

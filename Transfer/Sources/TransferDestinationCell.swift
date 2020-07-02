@@ -69,16 +69,6 @@ final class TransferDestinationCell: UITableViewCell {
         ])
     }
 
-    override public func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        imageView?.backgroundColor = Theme.Icon.primaryBackgroundColor
-    }
-
-    override public func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        super.setHighlighted(highlighted, animated: animated)
-        imageView?.backgroundColor = Theme.Icon.primaryBackgroundColor
-    }
-
     // MARK: Theme manager's proxy properties
     @objc dynamic var titleLabelFont: UIFont! {
         get { return titleLabel.font }

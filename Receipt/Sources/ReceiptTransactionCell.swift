@@ -88,10 +88,10 @@ final class ReceiptTransactionCell: UITableViewCell {
                 .constraint(equalTo: contentView.leadingAnchor, constant: 20)
         NSLayoutConstraint.activate([
             stackViewLeadingConstraints,
-            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 0),
-            stackView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 10),
-            stackView.bottomAnchor.constraint(greaterThanOrEqualTo: contentView.bottomAnchor, constant: -10)
+            stackView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 18),
+            stackView.bottomAnchor.constraint(greaterThanOrEqualTo: contentView.bottomAnchor, constant: -18)
         ])
     }
 
@@ -130,7 +130,8 @@ extension ReceiptTransactionCell {
         guard let receipt = receipt,
             let entry = receipt.entry?.rawValue,
             let createdOn = receipt.createdOn,
-            let amount = receipt.amount else {
+            let amount = receipt.amount,
+            let currency = receipt.currency else {
                 return
         }
         let formattedCreatedOn = ISO8601DateFormatter.ignoreTimeZone
@@ -140,9 +141,13 @@ extension ReceiptTransactionCell {
         let iconFont = HyperwalletIcon.of(entry).rawValue
 
         receiptTypeLabel.text = receipt.type?.rawValue.lowercased().localized()
-        amountLabel.text = entry == credit
-            ? receipt.amount
-            : String(format: "-%@", amount)
+
+        let locale = NSLocale(localeIdentifier: currency)
+        let currencySymbol = locale.displayName(forKey: NSLocale.Key.currencySymbol, value: currency)
+        if let currencySymbol = currencySymbol {
+            amountLabel.text = entry == credit ?  String(format: "%@%@", currencySymbol, amount) :
+                String(format: "-%@%@", currencySymbol, amount)
+        }
 
         amountLabel.textColor = entry == credit
             ? Theme.Amount.creditColor
@@ -150,8 +155,6 @@ extension ReceiptTransactionCell {
         createdOnLabel.text = formattedCreatedOn
         currencyLabel.text = receipt.currency
         iconColor = entry == credit ? Theme.Icon.creditColor : Theme.Icon.debitColor
-        iconBackgroundColor = entry == credit ? Theme.Icon.creditBackgroundColor
-            : Theme.Icon.debitBackgroundColor
 
         if !UIFont.isLargeSizeCategory {
             let icon = UIImage.fontIcon(iconFont,
@@ -159,18 +162,7 @@ extension ReceiptTransactionCell {
                                         CGFloat(Theme.Icon.size),
                                         iconColor)
             imageView?.image = icon
-            imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
         }
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        imageView?.backgroundColor = iconBackgroundColor
-    }
-
-    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        super.setHighlighted(highlighted, animated: animated)
-        imageView?.backgroundColor = iconBackgroundColor
     }
 }
 

@@ -94,8 +94,8 @@
 "complete_view_label" = "Complete";
 
 // Receipt
-"title_receipts" = "Transactions";
-"empty_list_receipt_message" = "Seems like, you don’t have any Transactions, yet.";
+"transactions" = "Transactions";
+"mobileNoTransactions" = "There's no activity to display.";
 "add_transaction_title" = "Add Transaction";
 "account_closure_fee" = "Account Closure Fee";
 "account_closure" = "Account Closure";
@@ -178,20 +178,20 @@
 "unknown_receipt_type" = "Unknown Transaction Type";
 
 // Receipt Detail
-"title_receipts_details" = "Transaction Details";
-"receipt_details_section_header_transaction" = "Transaction";
-"receipt_details_section_header_details" = "Details";
-"receipt_details_section_header_fee" = "Fee Specification";
-"receipt_details_section_header_notes" = "Notes";
-"receipt_details_charity_name" = "Charity Name:";
-"receipt_details_check_number" = "Check Number:";
-"receipt_details_client_payment_id" = "Client Transaction ID:";
-"receipt_details_website" = "Promo Website:";
-"receipt_details_transaction" = "Transaction:";
-"receipt_details_amount" = "Amount:";
-"receipt_details_fee" = "Fee:";
-"receipt_details_receipt_id" = "Receipt ID:";
-"receipt_details_date" = "Date:";
+"mobileTransactionDetailsHeader" = "Transaction details";
+"mobileTransactionTypeLabel" = "TRANSACTION";
+"mobileTransactionDetailsLabel" = "DETAILS";
+"mobileFeeInfoLabel" = "FEE INFO";
+"mobileConfirmNotesLabel" = "NOTE";
+"mobileCharityName" = "Charity Name:";
+"mobileCheckNumber" = "Check Number:";
+"mobileTransactionIdLabel" = "Transaction ID:";
+"mobilePromoWebsite" = "Promo Website:";
+"mobileTransactionDetailsTotal" = "Transaction total:";
+"amount" = "Amount:";
+"mobileFeeLabel" = "Fee:";
+"mobileJournalNumberLabel" = "Receipt ID:";
+"date" = "Date:";
 
 // Transfer Funds
 "mobileTransferFundsHeader" = "Transfer funds";
