@@ -21,7 +21,7 @@
 "select_transfer_method_currency" = "Select Currency";
 "remove_button_label" = "Remove";
 "cancel_button_label" = "Cancel";
-"ok_button_label" = "OK";
+"doneButtonLabel" = "Done";
 "try_again_button_label" = "Try Again";
 "done_button_label" = "Done";
 "search_placeholder_label" = "Search";
@@ -218,3 +218,5 @@
 "noTransferMethodAdded" = "Transfer method is required";
 "transfer_error_no_transfer_method_module_initialized" = "Functionality to add an Account has not been included in this application.";
 "transfer_fx_rate_changed" = "Due to changes in the FX rate, you will now receive: %1$@";
+"mobileTransferSuccessMsg" = "Your transfer is being processed";
+"mobileTransferSuccessDetails" = "The funds are on the way to your %1$@ %2$@.";

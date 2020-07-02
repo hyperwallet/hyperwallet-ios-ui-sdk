@@ -206,10 +206,18 @@ extension ScheduleTransferController: ScheduleTransferView {
     }
 
     func showConfirmation(handler: @escaping (() -> Void)) {
+        let destinationData = presenter!.sectionData[0] as? ScheduleTransferDestinationData
         processingView?.hide(with: .complete)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            handler()
-        }
+        HyperwalletUtilViews.showAlert(self,
+                                       title: "mobileTransferSuccessMsg".localized(),
+                                       message: String(format: "mobileTransferSuccessDetails".localized(),
+                                                       destinationData?.transferMethod.title ?? " ",
+                                                       destinationData?.transferMethod.value ?? " "),
+                                       actions: UIAlertAction.close({ (_) in
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                            handler()
+                                        }
+                                       }))
     }
 
     func showError(_ error: HyperwalletErrorType,
