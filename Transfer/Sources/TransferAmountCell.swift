@@ -43,8 +43,15 @@ final class TransferAmountCell: UITableViewCell {
                                                   attribute: .notAnAttribute,
                                                   multiplier: 1,
                                                   constant: 50)
+        let widthConstraint = NSLayoutConstraint(item: textField,
+                                                 attribute: .width,
+                                                 relatedBy: .greaterThanOrEqual,
+                                                 toItem: nil,
+                                                 attribute: .notAnAttribute,
+                                                 multiplier: 1,
+                                                 constant: 50)
         textField.addConstraint(heightConstraint)
-
+        textField.addConstraint(widthConstraint)
         return textField
     }()
 
@@ -93,9 +100,6 @@ final class TransferAmountCell: UITableViewCell {
 
     @objc
     private func textFieldDidChange(_ textField: UITextField) {
-        if !textField.adjustsFontSizeToFitWidth {
-            textField.adjustsFontSizeToFitWidth = true
-        }
         textField.invalidateIntrinsicContentSize()
         let fixedWidth = textField.frame.size.width
         let newSize = textField.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
@@ -143,6 +147,7 @@ final class TransferAmountCell: UITableViewCell {
             }
         }
         amountTextField.text = amount
+        amountTextField.adjustsFontSizeToFitWidth = true
         amountTextField.adjustsFontForContentSizeCategory = true
         currencyLabel.text = currency ?? String(repeating: " ", count: 3)
         currencyLabel.adjustsFontForContentSizeCategory = true
