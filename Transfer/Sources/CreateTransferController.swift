@@ -47,7 +47,6 @@ final class CreateTransferController: UITableViewController {
         super.viewDidLoad()
         initializePresenter()
         presenter.loadCreateTransfer()
-        presenter.amount = "0"
         setUpCreateTransferTableView()
         hideKeyboardWhenTappedAround()
     }
@@ -283,7 +282,7 @@ extension CreateTransferController: CreateTransferView {
                 }
 
             case .amount:
-                if presenter.amount == nil || presenter.amount!.isEmpty || Double(presenter.amount!) == 0.00 {
+                if presenter.amount.isEmpty || Double(presenter.amount) == 0.00 {
                     section.errorMessage = "transferAmountInvalid".localized()
                     updateFooter(for: .amount)
                 }

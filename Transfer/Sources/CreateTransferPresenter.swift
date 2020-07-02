@@ -64,7 +64,7 @@ final class CreateTransferPresenter {
     private var sourceToken: String?
 
     var selectedTransferMethod: HyperwalletTransferMethod?
-    var amount: String?
+    var amount: String = "0"
     var notes: String?
     var destinationCurrency: String? {
         return selectedTransferMethod?.transferMethodCurrency
@@ -181,7 +181,7 @@ final class CreateTransferPresenter {
 
     // MARK: - Transfer Max Amount Button Tapped
     func transferMaxAmount() {
-        amount = availableBalance
+        amount = availableBalance ?? "0"
         view.updateTransferSection()
     }
 
