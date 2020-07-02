@@ -120,7 +120,7 @@ final class ListReceiptController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Theme.Cell.height
         tableView.sectionHeaderHeight = UITableView.automaticDimension
-        tableView.backgroundColor = Theme.ViewController.backgroundColor
+        tableView.backgroundColor = Theme.UITableViewController.backgroundColor
         tableView.separatorColor = Theme.Cell.separatorColor
         tableView.register(ReceiptTransactionCell.self,
                            forCellReuseIdentifier: ReceiptTransactionCell.reuseIdentifier)

@@ -52,7 +52,7 @@ final class ReceiptDetailController: UITableViewController {
     private func setupReceiptDetailTableView() {
         tableView = UITableView(frame: view.frame, style: .grouped)
         tableView.allowsSelection = false
-        tableView.backgroundColor = Theme.ViewController.backgroundColor
+        tableView.backgroundColor = Theme.UITableViewController.backgroundColor
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Theme.Cell.smallHeight
         tableView.separatorStyle = .singleLine

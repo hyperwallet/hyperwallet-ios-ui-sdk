@@ -176,7 +176,7 @@ final class CreateTransferPresenter {
     // MARK: - Transfer Max Amount Button Tapped
     func transferMaxAmount() {
         amount = availableBalance ?? "0"
-        view.updateTransferSection()
+        view?.updateTransferSection()
     }
 
     // MARK: - Create Transfer Button Tapped
@@ -248,7 +248,7 @@ final class CreateTransferPresenter {
         for error in errors {
             if let sectionData = sectionData.first(where: { $0.createTransferSectionHeader == .amount }) {
                 sectionData.errorMessage = error.message
-                view.updateFooter(for: .amount)
+                view?.updateFooter(for: .amount)
             }
         }
     }

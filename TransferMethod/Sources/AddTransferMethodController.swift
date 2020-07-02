@@ -82,7 +82,6 @@ final class AddTransferMethodController: UITableViewController {
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        setViewBackgroundColor()
         initializePresenter()
         setupTableView()
         presenter.loadTransferMethodConfigurationFields(forceUpdate ?? false)

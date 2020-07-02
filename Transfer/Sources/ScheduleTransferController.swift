@@ -117,7 +117,7 @@ extension ScheduleTransferController {
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let section = presenter.sectionData[indexPath.section].scheduleTransferSectionHeader
-        return section == .destination ? Theme.Cell.largeHeight : Theme.Cell.mediumHeight
+        return section == .destination ? Theme.Cell.largeHeight : Theme.Cell.smallHeight
     }
 
     private func getAttributedFooterText(for section: Int) -> NSAttributedString? {
