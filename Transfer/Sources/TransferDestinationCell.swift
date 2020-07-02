@@ -122,15 +122,11 @@ extension TransferDestinationCell {
         }
     }
 
-    func configure(_ title: String, _ subtitle: String, _ hyperwalletIcon: HyperwalletIconContent) {
+    func configure(_ title: String, _ hyperwalletIcon: HyperwalletIconContent) {
         titleLabel.text = title
         titleLabel.adjustsFontForContentSizeCategory = true
         titleLabel.numberOfLines = 0
         titleLabel.lineBreakMode = .byWordWrapping
-        subtitleLabel.attributedText = formatDetails(subtitle: subtitle)
-        subtitleLabel.numberOfLines = 0
-        subtitleLabel.adjustsFontForContentSizeCategory = true
-        subtitleLabel.lineBreakMode = .byWordWrapping
         if !UIFont.isLargeSizeCategory {
             let icon = UIImage.fontIcon(hyperwalletIcon.rawValue,
                                         Theme.Icon.frame,

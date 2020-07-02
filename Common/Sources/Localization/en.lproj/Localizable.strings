@@ -198,7 +198,6 @@
 "mobileConfirmationHeader" = "Confirm the details";
 "mobileTransferToLabel" = "TRANSFER TO";
 "mobileNoteLabel" = "Note";
-"transfer_amount" = "Amount";
 "mobileConfirmDetailsAmount" = "Amount";
 "mobileConfirmDetailsFee" = "Fee";
 "mobileConfirmDetailsTotal" = "You will receive";
@@ -209,7 +208,6 @@
 "mobileAvailableBalance" = "Available funds %1$@%2$@ %3$@";
 "continueButtonLabel" = "Continue";
 "mobileAddTransferMethod" = "Add transfer method";
-"transfer_add_account_subtitle" = "An account hasn't been set up yet, please add an account first.";
 "transfer_select_destination" = "Select Destination";
 "mobileFXlabel" = "FOREIGN EXCHANGE";
 "mobileSummaryLabel" = "SUMMARY";

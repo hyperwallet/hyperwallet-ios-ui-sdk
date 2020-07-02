@@ -196,8 +196,7 @@ extension CreateTransferController {
                 tableViewCell.accessoryType = .none
             }
             let title = "mobileAddTransferMethod".localized()
-            let subtitle = "transfer_add_account_subtitle".localized()
-            tableViewCell.configure(title, subtitle, HyperwalletIconContent.circle)
+            tableViewCell.configure(title, HyperwalletIconContent.circle)
         }
     }
 
