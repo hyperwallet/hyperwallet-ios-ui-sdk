@@ -370,9 +370,11 @@ On the Theme is possible to customize the properties:
 | `Theme.NavigationBar.backButtonColor` | `UIColor.white`    | The UINavigationBar Back Button color |
 | `Theme.NavigationBar.largeTitleFont` | `UIFont.preferredFont(forTextStyle: .largeTitle)`    | The UINavigationBar large title font |
 | `Theme.NavigationBar.titleFont` | `UIFont.preferredFont(forTextStyle: .title1)`    | The UINavigationBar title font |
-| `Theme.Button.color` | `Theme.themeColor` | The button primary color |
+| `Theme.Button.color` | `UIColor(rgb: 0xFFFFFF)` | The button primary color |
+| `Theme.Button.linkColor` | `Theme.themeColor` | The button link color |
 | `Theme.Button.font` | `Theme.Label.bodyFont` | The button font |
-| `Theme.Button.backgroundColor` | `UIColor.white` | The button background color |
+| `Theme.Button.linkFont` | `Theme.Label.titleFont` | The link button font |
+| `Theme.Button.backgroundColor` | `Theme.themeColor` | The button background color |
 | `Theme.Text.font` | `UIFont.preferredFont(forTextStyle: .body)` | The text font style |
 | `Theme.Text.color` | `Theme.Label.color` | The text primary color |
 | `Theme.Text.disabledColor` | `Theme.Label.textColor` | The text disabled color |
