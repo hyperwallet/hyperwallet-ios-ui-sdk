@@ -92,9 +92,6 @@ public class Theme: NSObject {
         public static var disabledColor = Theme.Label.textColor
         /// The text font style
         public static var font = UIFont.preferredFont(forTextStyle: .body)
-        /// The large title font style
-        @available(iOS 11.0, *)
-        public static var largeTitleFont = UIFont.preferredFont(forTextStyle: .largeTitle)
     }
 
     /// Representation of all customizable visual style property for `UISearchBar`.
