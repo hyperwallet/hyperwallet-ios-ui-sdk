@@ -63,7 +63,7 @@ final class CreateTransferSectionAmountData: CreateTransferSectionData {
     var errorMessage: String?
 }
 
-final class CreateTransferSectionTransferData: CreateTransferSectionData {
+final class CreateTransferSectionTransferAllData: CreateTransferSectionData {
     var createTransferSectionHeader: CreateTransferSectionHeader { return .transfer }
     var cellIdentifiers: [String] { return [
         TransferAllFundsCell.reuseIdentifier

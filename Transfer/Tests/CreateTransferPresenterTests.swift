@@ -207,7 +207,7 @@ class CreateTransferTests: XCTestCase {
                        "Section cellIdentifier should be transferDestinationCellIdentifier")
     }
 
-    func testCreateTransferSectionTransferData_validateProperties() {
+    func testCreateTransferSectionTransferAllData_validateProperties() {
         initializePresenter()
         let section = presenter.sectionData[1]
         XCTAssertEqual(section.title, "TRANSFER", "Section title should be TRANSFER")

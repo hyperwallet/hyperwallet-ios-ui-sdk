@@ -166,7 +166,7 @@ extension CreateTransferController {
             getDestinationSectionCellConfiguration(cell, indexPath)
 
         case .transfer:
-            getTransferSectionCellConfiguration(cell, indexPath)
+            getTransferAllSectionCellConfiguration(cell, indexPath)
 
         case .notes:
             getNotesSectionCellConfiguration(cell)
@@ -209,7 +209,7 @@ extension CreateTransferController {
         }
     }
 
-    private func getTransferSectionCellConfiguration(_ cell: UITableViewCell, _ indexPath: IndexPath) {
+    private func getTransferAllSectionCellConfiguration(_ cell: UITableViewCell, _ indexPath: IndexPath) {
         if let tableViewCell = cell as? TransferAllFundsCell {
             let tapConfirmation = UITapGestureRecognizer(target: self, action: #selector(tapTransferMaxAmount))
             tableViewCell.configure(action: tapConfirmation,

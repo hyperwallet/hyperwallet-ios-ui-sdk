@@ -82,8 +82,8 @@ final class CreateTransferPresenter {
         let createTransferSectionAmountData = CreateTransferSectionAmountData()
         sectionData.append(createTransferSectionAmountData)
 
-        let createTransferSectionTransferData = CreateTransferSectionTransferData()
-        sectionData.append(createTransferSectionTransferData)
+        let createTransferSectionTransferAllData = CreateTransferSectionTransferAllData()
+        sectionData.append(createTransferSectionTransferAllData)
 
         let createTransferDestinationSection = CreateTransferSectionDestinationData()
         sectionData.append(createTransferDestinationSection)
