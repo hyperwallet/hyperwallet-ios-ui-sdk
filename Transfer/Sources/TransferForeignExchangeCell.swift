@@ -28,6 +28,11 @@ final class TransferForeignExchangeCell: UITableViewCell {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
         textLabel?.accessibilityIdentifier = "scheduleTransferForeignExchangeTextLabel"
         detailTextLabel?.accessibilityIdentifier = "scheduleTransferForeignExchangeTextValue"
+        let constraints = [
+            heightAnchor.constraint(equalToConstant: Theme.Cell.smallHeight)
+        ]
+        constraints.forEach { $0.priority = UILayoutPriority(999) }
+        NSLayoutConstraint.activate(constraints)
     }
 
     required init?(coder aDecoder: NSCoder) {
