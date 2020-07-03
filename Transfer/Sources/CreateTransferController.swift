@@ -123,6 +123,20 @@ extension CreateTransferController {
         view.footerLabel.adjustsFontForContentSizeCategory = true
         view.footerLabel.lineBreakMode = .byWordWrapping
         view.footerLabel.attributedText = attributedText
+
+        let margins = view.layoutMarginsGuide
+        if section == 0 {
+            let constraint = view.footerLabel.centerXAnchor.constraint(equalTo: margins.centerXAnchor)
+            constraint.priority = UILayoutPriority(999)
+            NSLayoutConstraint.activate([constraint])
+        } else {
+            let constraints = [
+                view.footerLabel.safeAreaLeadingAnchor.constraint(equalTo: margins.leadingAnchor),
+                view.footerLabel.safeAreaTrailingAnchor.constraint(equalTo: margins.trailingAnchor)
+            ]
+            constraints.forEach { $0.priority = UILayoutPriority(999) }
+            NSLayoutConstraint.activate(constraints)
+        }
         return view
     }
 
