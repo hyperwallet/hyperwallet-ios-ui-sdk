@@ -369,7 +369,7 @@ On the Theme is possible to customize the properties:
 | `Theme.NavigationBar.titleColor` | `UIColor.white`    | The UINavigationBar title color |
 | `Theme.NavigationBar.backButtonColor` | `UIColor.white`    | The UINavigationBar Back Button color |
 | `Theme.NavigationBar.largeTitleFont` | `UIFont.preferredFont(forTextStyle: .largeTitle)`    | The UINavigationBar large title font |
-| `Theme.NavigationBar.titleFont` | `UIFont.preferredFont(forTextStyle: .title1)`    | The UINavigationBar title font |
+| `Theme.NavigationBar.titleFont` | `UIFont.preferredFont(forTextStyle: .body)`    | The UINavigationBar title font |
 | `Theme.Button.color` | `UIColor(rgb: 0xFFFFFF)` | The button primary color |
 | `Theme.Button.linkColor` | `Theme.themeColor` | The button link color |
 | `Theme.Button.font` | `Theme.Label.bodyFont` | The button font |
