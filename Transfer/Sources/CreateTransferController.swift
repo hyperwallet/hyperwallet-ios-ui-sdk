@@ -134,11 +134,7 @@ extension CreateTransferController {
     private func getAttributedFooterText(for section: Int) -> NSAttributedString? {
         let sectionData = presenter.sectionData[section]
         var attributedText: NSAttributedString?
-        if  let transferSectionData = sectionData as? CreateTransferSectionAmountData {
-            attributedText = format(footer: transferSectionData.footer, error: transferSectionData.errorMessage)
-        } else {
-            attributedText = format(error: sectionData.errorMessage)
-        }
+        attributedText = format(error: sectionData.errorMessage)
         return attributedText
     }
 
@@ -299,14 +295,14 @@ extension CreateTransferController: CreateTransferView {
         if let footerView = tableView.footerView(forSection: section.rawValue) as? TransferTableViewFooterView {
             footerView.footerLabel.attributedText = getAttributedFooterText(for: section.rawValue)
         } else {
-            tableView.reloadData()
+            tableView.reloadSections(IndexSet(integer: section.rawValue), with: .none)
         }
         tableView.endUpdates()
         UIView.setAnimationsEnabled(true)
     }
 
     func updateTransferSection() {
-        tableView.reloadData()
+        tableView.reloadSections(IndexSet(integer: 0), with: .none)
     }
 
     func notifyTransferCreated(_ transfer: HyperwalletTransfer) {

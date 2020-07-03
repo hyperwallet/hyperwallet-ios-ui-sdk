@@ -101,9 +101,10 @@ final class TransferAmountCell: UITableViewCell {
     @objc
     private func textFieldDidChange(_ textField: UITextField) {
         textField.invalidateIntrinsicContentSize()
-        let fixedWidth = textField.frame.size.width
-        let newSize = textField.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
-        textField.frame.size = CGSize(width: max(newSize.width, fixedWidth), height: newSize.height)
+        let maxWidth = UIScreen.main.bounds.width * 0.7
+        let minWidthToFit = min(maxWidth, textField.frame.size.width)
+        let newSize = textField.sizeThatFits(CGSize(width: minWidthToFit, height: CGFloat.greatestFiniteMagnitude))
+        textField.frame.size = CGSize(width: min(newSize.width, minWidthToFit), height: 50)
     }
 
     private func setupCell() {

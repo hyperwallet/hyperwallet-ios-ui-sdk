@@ -76,7 +76,7 @@ public class Theme: NSObject {
         public static var color = UIColor(rgb: 0xFFFFFF)
         /// The `UIButton` link color
         public static var linkColor = Theme.themeColor
-        /// The button background color
+        /// The `UIButton` background color
         public static var backgroundColor = Theme.themeColor
         /// The `UIButton` link font
         public static var linkFont = Theme.Label.titleFont
