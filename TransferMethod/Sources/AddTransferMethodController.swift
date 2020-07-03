@@ -95,11 +95,6 @@ final class AddTransferMethodController: UITableViewController {
         titleDisplayMode(.always, for: presenter.transferMethodTypeCode.lowercased().localized())
     }
 
-    // MARK: - Setup Layout -
-    private func setupLayout() {
-        setupTableView()
-    }
-
     override func willMove(toParent parent: UIViewController?) {
         super.willMove(toParent: parent)
         if parent == nil {

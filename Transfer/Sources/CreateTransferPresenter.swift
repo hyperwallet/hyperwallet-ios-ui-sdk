@@ -34,7 +34,7 @@ protocol CreateTransferView: class {
                    _ retry: (() -> Void)?)
     func showLoading()
     func showScheduleTransfer(_ transfer: HyperwalletTransfer)
-    func updateTransferSection()
+    func updateTransferAmountSection()
     func updateFooter(for section: CreateTransferController.FooterSection)
     func areAllFieldsValid() -> Bool
 }
@@ -73,7 +73,7 @@ final class CreateTransferPresenter {
     var didTapTransferAllFunds: Bool = false {
         didSet {
             amount = didTapTransferAllFunds ? availableBalance ?? "0" : "0"
-            view?.updateTransferSection()
+            view?.updateTransferAmountSection()
         }
     }
 
@@ -247,9 +247,9 @@ final class CreateTransferPresenter {
 
     private func updateFooterContent(_ errors: [HyperwalletError]) {
         for error in errors {
-            if let sectionData = sectionData.first(where: { $0.createTransferSectionHeader == .transfer }) {
+            if let sectionData = sectionData.first(where: { $0.createTransferSectionHeader == .transferAll }) {
                 sectionData.errorMessage = error.message
-                view?.updateFooter(for: .transfer)
+                view?.updateFooter(for: .transferAll)
             }
         }
     }

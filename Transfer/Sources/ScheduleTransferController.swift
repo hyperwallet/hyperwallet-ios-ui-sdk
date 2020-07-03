@@ -141,40 +141,48 @@ extension ScheduleTransferController {
 
     private func getCellConfiguration(_ indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = presenter.sectionData[indexPath.section].cellIdentifier
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         let section = presenter.sectionData[indexPath.section]
         switch section.scheduleTransferSectionHeader {
         case .destination:
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
             if let tableViewCell = cell as? TransferDestinationCell,
                 let destinationData = section as? ScheduleTransferDestinationData {
                 tableViewCell.configure(transferMethod: destinationData.transferMethod)
             }
+            return cell
 
         case .foreignExchange:
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)
             if let tableViewCell = cell as? TransferForeignExchangeCell,
                 let foreignExchangeData = section as? ScheduleTransferForeignExchangeData {
                 return tableViewCell.configure(foreignExchangeData, indexPath, tableView)
             }
+            return cell ?? UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: cellIdentifier)
 
         case .summary:
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
             if let tableViewCell = cell as? TransferSummaryCell,
                 let summaryData = section as? ScheduleTransferSummaryData {
                 tableViewCell.configure(summaryData.rows[indexPath.row].title, summaryData.rows[indexPath.row].value)
             }
+            return cell
 
         case .notes:
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
             if let tableViewCell = cell as? TransferNotesCell,
                 let notesSection = section as? ScheduleTransferNotesData {
                 tableViewCell.configure(notes: notesSection.notes, isEditable: false, isHideBorder: false, { _ in })
             }
+            return cell
 
         case .button:
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
             if let tableViewCell = cell as? TransferButtonCell, section is ScheduleTransferButtonData {
                 let tapConfirmation = UITapGestureRecognizer(target: self, action: #selector(tapScheduleTransfer))
                 tableViewCell.configure(title: "transfer".localized(), action: tapConfirmation)
             }
+            return cell
         }
-        return cell
     }
 
     @objc
