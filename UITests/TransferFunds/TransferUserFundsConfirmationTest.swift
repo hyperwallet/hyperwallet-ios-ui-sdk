@@ -42,14 +42,14 @@ class TransferUserFundsConfirmationTest: BaseTests {
 
         // Turn on the Transfer All Funds Switch
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "")
-        transferFunds.transferAllFundsSwitch.tap()
+        transferFunds.transferMaxAllFunds.tap()
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "452.14")
 
         mockServer.setupStub(url: "/rest/v3/transfers",
                              filename: "AvailableFundUSD",
                              method: HTTPMethod.post)
 
-        transferFunds.tapNextButton()
+        transferFunds.tapContinueButton()
         waitForExistence(transferFundsConfirmation.transferDestinationLabel)
 
         XCTAssertTrue(transferFundsConfirmation.transferDestinationDetailLabel.exists)
@@ -99,24 +99,21 @@ class TransferUserFundsConfirmationTest: BaseTests {
         transferFundMenu.tap()
         waitForNonExistence(spinner)
 
-        if #available(iOS 11.4, *) {
-            XCTAssertTrue(transferFunds.transferFundTitle.exists)
-        } else {
-            XCTAssertTrue(app.navigationBars["Transfer Funds"].exists)
-        }
+        transferFunds.verifyTransferFundsTitle()
+        // Amount row
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+        XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
+        XCTAssertEqual(transferFunds.transferAmountLabel.label, "Available funds $452.14 USD")
 
         // Add Destination Section
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
 
-        // Turn on the Transfer All Funds Switch
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "")
-
-        transferFunds.transferAllFundsSwitch.tap()
+        transferFunds.transferMaxAllFunds.tap()
 
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "5,855.17")
 
-        transferFunds.tapNextButton()
+        transferFunds.tapContinueButton()
 
         waitForExistence(transferFundsConfirmation.transferDestinationLabel)
         // 1.  Add Destination Section
@@ -210,10 +207,10 @@ class TransferUserFundsConfirmationTest: BaseTests {
 
         // Turn on the Transfer All Funds Switch
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "")
-        transferFunds.transferAllFundsSwitch.tap()
+        transferFunds.transferMaxAllFunds.tap()
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "5,855.17")
 
-        transferFunds.tapNextButton()
+        transferFunds.tapContinueButton()
 
         waitForExistence(transferFundsConfirmation.foreignExchangeSectionLabel)
         XCTAssertEqual(transferFundsConfirmation.foreignExchangeSectionLabel.label, "FOREIGN EXCHANGE")
@@ -253,14 +250,14 @@ class TransferUserFundsConfirmationTest: BaseTests {
 
         // Turn on the Transfer All Funds Switch
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "")
-        transferFunds.transferAllFundsSwitch.tap()
+        transferFunds.transferMaxAllFunds.tap()
         // Assert Destination Amount is automatically insert into the amount field
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "452.14")
 
         mockServer.setupStub(url: "/rest/v3/transfers",
                              filename: "CreateTransferWithNoFee",
                              method: HTTPMethod.post)
-        transferFunds.tapNextButton()
+        transferFunds.tapContinueButton()
 
         waitForExistence(transferFundsConfirmation.transferDestinationLabel)
         // Assert confirmation page has no FEE section
@@ -285,11 +282,11 @@ class TransferUserFundsConfirmationTest: BaseTests {
         transferFundMenu.tap()
         waitForNonExistence(spinner)
 
-        if #available(iOS 11.4, *) {
-            XCTAssertTrue(transferFunds.transferFundTitle.exists)
-        } else {
-            XCTAssertTrue(app.navigationBars["Transfer Funds"].exists)
-        }
+        transferFunds.verifyTransferFundsTitle()
+        // Amount row
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+        XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
+        XCTAssertEqual(transferFunds.transferAmountLabel.label, "Available funds $452.14 USD")
 
         // Add Destination Section
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
@@ -297,14 +294,14 @@ class TransferUserFundsConfirmationTest: BaseTests {
 
         // Turn on the Transfer All Funds Switch
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "")
-        transferFunds.transferAllFundsSwitch.tap()
+        transferFunds.transferMaxAllFunds.tap()
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "5,855.17")
 
         mockServer.setupStub(url: "/rest/v3/transfers",
                              filename: "AvailableFundMultiCurrenciesFxChange",
                              method: HTTPMethod.post)
 
-        transferFunds.tapNextButton()
+        transferFunds.tapContinueButton()
 
         waitForExistence(transferFundsConfirmation.foreignExchangeSectionLabel)
         app.scroll(to: transferFundsConfirmation.confirmButton)

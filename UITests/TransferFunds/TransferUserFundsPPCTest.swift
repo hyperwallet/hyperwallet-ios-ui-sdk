@@ -35,33 +35,27 @@ class TransferUserFundsPPCTest: BaseTests {
         waitForNonExistence(spinner)
 
         // Add Destination Section
-        if #available(iOS 11.4, *) {
-            XCTAssertTrue(transferFunds.transferFundTitle.exists)
-        } else {
-            XCTAssertTrue(app.navigationBars["Transfer Funds"].exists)
-        }
-        XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
-        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Prepaid Card")
-
-        let destinationDetail = transferFunds.addSelectDestinationDetailLabel.label
-        XCTAssertTrue(destinationDetail == "United States\nEnding on 4281"
-            || destinationDetail == "United States Ending on 4281")
+        transferFunds.verifyTransferFundsTitle()
+        transferFunds.verifyBankAccountDestination(type: "Prepaid Card", endingDigit: "4281")
 
         // Transfer Section
         XCTAssertTrue(transferFunds.transferSectionLabel.exists)
         // Amount
-        XCTAssertEqual(transferFunds.transferAmountLabel.label, "Amount")
-        XCTAssertEqual(transferFunds.transferCurrency.label, "USD")
-        // Transfer all funds row
-        XCTAssertEqual(transferFunds.transferAllFundsLabel.label, "Transfer all funds")
-        XCTAssertTrue(transferFunds.transferAllFundsSwitch.exists, "Transfer all funds switch should exist")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+        XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
+        XCTAssertEqual(transferFunds.transferAmountLabel.label, "Available funds $452.14 USD")
+        // Transfer max funds
+        XCTAssertTrue(transferFunds.transferMaxAllFunds.exists, "Transfer all funds switch should exist")
 
-        let availableFunds = app.tables["createTransferTableView"].staticTexts["Available for transfer: 452.14 USD"]
-        XCTAssertTrue(availableFunds.exists)
+        // NOTE
+        XCTAssertTrue(transferFunds.notesSectionLabel.exists)
+        XCTAssertEqual(transferFunds.notesSectionLabel.label, transferFunds.noteLabel)
+        if #available(iOS 11.0, *) {
+            transferFunds.enterNotes(description: "testing")
+            XCTAssertEqual(transferFunds.notesDescriptionTextField.value as? String, "testing")
+        }
 
-        XCTAssertEqual(transferFunds.notesSectionLabel.label, "NOTES")
-        XCTAssertEqual(transferFunds.notesDescriptionTextField.placeholderValue, "Description")
-        transferFunds.enterNotes(description: "testing")
-        XCTAssertEqual(transferFunds.notesDescriptionTextField.value as? String, "testing")
+        // Continue Button
+        XCTAssertTrue(transferFunds.nextLabel.exists)
     }
 }
