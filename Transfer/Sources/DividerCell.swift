@@ -28,9 +28,12 @@ final class DividerCell: UITableViewCell {
     // MARK: Life cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
-        self.heightAnchor.constraint(equalToConstant: Theme.Cell.dividerHeight).isActive = true
-        backgroundColor = Theme.UITableViewController.backgroundColor
-        separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
+
+        let constraints = [
+            heightAnchor.constraint(equalToConstant: Theme.Cell.dividerHeight)
+        ]
+        constraints.forEach { $0.priority = UILayoutPriority(999) }
+        NSLayoutConstraint.activate(constraints)
     }
 
     required init?(coder aDecoder: NSCoder) {

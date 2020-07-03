@@ -54,14 +54,13 @@ class TransferUserFundsTest: BaseTests {
         transferFundMenu.tap()
         waitForNonExistence(spinner)
 
-        verifyTransferFundsTitle()
+        transferFunds.verifyTransferFundsTitle()
 
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Add transfer method".localized())
 
         // assert NOTE
         XCTAssertTrue(transferFunds.notesSectionLabel.exists)
-        // XCTAssertEqual(transferFunds.notesSectionLabel.label, transferFunds.noteLabel)
 
         // assert Continue button
         XCTAssertTrue(transferFunds.nextLabel.exists)
@@ -84,7 +83,7 @@ class TransferUserFundsTest: BaseTests {
         transferFundMenu.tap()
         waitForNonExistence(spinner)
 
-        verifyTransferFundsTitle()
+        transferFunds.verifyTransferFundsTitle()
 
         // Amount row
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
@@ -99,16 +98,11 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
 
-        let destinationDetail = transferFunds.addSelectDestinationDetailLabel.label
-        XCTAssertTrue(destinationDetail == "United States\nEnding on 1234"
-            || destinationDetail == "United States Ending on 1234")
+        transferFunds.verifyBankAccountDestination(type: "Bank Account", endingDigit: "1234")
 
         // Notes
         XCTAssertTrue(transferFunds.notesSectionLabel.exists)
-        if #available(iOS 11.0, *) {
-            transferFunds.enterNotes(description: "testing")
-            XCTAssertEqual(transferFunds.notesDescriptionTextField.value as? String, "testing")
-        }
+        transferFunds.verifyNotes()
 
         // Next Button
         XCTAssertTrue(transferFunds.nextLabel.exists)
@@ -131,7 +125,7 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFundMenu.exists)
         transferFundMenu.tap()
         waitForNonExistence(spinner)
-        verifyTransferFundsTitle()
+        transferFunds.verifyTransferFundsTitle()
 
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
 
@@ -202,9 +196,7 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
 
-        let destinationDetail = transferFunds.addSelectDestinationDetailLabel.label
-        XCTAssertTrue(destinationDetail == "United States\nEnding on 1234"
-            || destinationDetail == "United States Ending on 1234")
+        transferFunds.verifyBankAccountDestination(type: "Bank Account", endingDigit: "1234")
 
         // Transfer Section
         XCTAssertTrue(transferFunds.transferSectionLabel.exists)
@@ -253,9 +245,10 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
 
-        let destinationDetail = transferFunds.addSelectDestinationDetailLabel.label
-        XCTAssertTrue(destinationDetail == "United States\nEnding on 6789"
-            || destinationDetail == "United States Ending on 6789")
+//        let destinationDetail = transferFunds.addSelectDestinationDetailLabel.label
+//        XCTAssertTrue(destinationDetail == "United States\nEnding on 6789"
+//            || destinationDetail == "United States Ending on 6789")
+        transferFunds.verifyBankAccountDestination(type: "Bank Account", endingDigit: "6789")
 
         // Notes
         XCTAssertTrue(transferFunds.notesSectionLabel.exists)
@@ -394,7 +387,7 @@ class TransferUserFundsTest: BaseTests {
         transferFundMenu.tap()
         waitForNonExistence(spinner)
 
-        verifyTransferFundsTitle()
+        transferFunds.verifyTransferFundsTitle()
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Add transfer method".localized())
 
@@ -420,7 +413,7 @@ class TransferUserFundsTest: BaseTests {
         transferFundMenu.tap()
         waitForNonExistence(spinner)
 
-        verifyTransferFundsTitle()
+        transferFunds.verifyTransferFundsTitle()
 
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertTrue(transferFunds.transferAmount.exists)
@@ -556,8 +549,8 @@ class TransferUserFundsTest: BaseTests {
 
         let error = app.tables["createTransferTableView"].staticTexts["transferTableViewFooterViewIdentifier"].label
 
-        // show no footer error
-        XCTAssertTrue(error.contains(""))
+        // show error at footer
+        XCTAssertTrue(error.contains("Notes should be between 1 and 255 characters"))
     }
 
     /* Given that Transfer methods exist
@@ -578,7 +571,7 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFundMenu.exists)
         transferFundMenu.tap()
         waitForNonExistence(spinner)
-        verifyTransferFundsTitle()
+        transferFunds.verifyTransferFundsTitle()
         // waitForNonExistence(transferFunds.addSelectDestinationSectionLabel)
 
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
@@ -666,7 +659,7 @@ class TransferUserFundsTest: BaseTests {
         transferFundMenu.tap()
         waitForNonExistence(spinner)
 
-        verifyTransferFundsTitle()
+        transferFunds.verifyTransferFundsTitle()
 
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Add transfer method".localized())
@@ -692,14 +685,16 @@ class TransferUserFundsTest: BaseTests {
         waitForNonExistence(spinner)
 
         // Assert navigate to the Transfer Fund again
-        verifyTransferFundsTitle()
+        transferFunds.verifyTransferFundsTitle()
 
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
 
-        let destinationDetail = transferFunds.addSelectDestinationDetailLabel.label
-        XCTAssertTrue(destinationDetail == "United States\nEnding on 2345"
-            || destinationDetail == "United States Ending on 2345")
+//        let destinationDetail = transferFunds.addSelectDestinationDetailLabel.label
+//        XCTAssertTrue(destinationDetail == "United States\nEnding on 2345"
+//            || destinationDetail == "United States Ending on 2345")
+
+        transferFunds.verifyBankAccountDestination(type: "Bank Account", endingDigit: "2345")
 
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "AddNewTransferMethodOneTransferMethod",
@@ -732,15 +727,17 @@ class TransferUserFundsTest: BaseTests {
         transferFundMenu.tap()
         waitForNonExistence(spinner)
 
-        verifyTransferFundsTitle()
+        transferFunds.verifyTransferFundsTitle()
 
         // Add Destination Section
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
 
-        var destinationDetail = transferFunds.addSelectDestinationDetailLabel.label
-        XCTAssertTrue(destinationDetail == "United States\nEnding on 6789"
-            || destinationDetail == "United States Ending on 6789")
+        //var destinationDetail = transferFunds.addSelectDestinationDetailLabel.label
+//        XCTAssertTrue(destinationDetail == "United States\nEnding on 6789"
+//            || destinationDetail == "United States Ending on 6789")
+
+        transferFunds.verifyBankAccountDestination(type: "Bank Account", endingDigit: "6789")
 
         transferFunds.addSelectDestinationLabel.tap()
         waitForNonExistence(spinner)
@@ -775,13 +772,15 @@ class TransferUserFundsTest: BaseTests {
         waitForNonExistence(spinner)
 
         // Assert navigate to the Transfer Fund again
-        verifyTransferFundsTitle()
+         transferFunds.verifyTransferFundsTitle()
 
-        destinationDetail = transferFunds.addSelectDestinationDetailLabel.label
-        XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
-        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
-        XCTAssertTrue(destinationDetail == "United States\nEnding on 2345"
-            || destinationDetail == "United States Ending on 2345")
+        //destinationDetail = transferFunds.addSelectDestinationDetailLabel.label
+//        XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
+//        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
+//        XCTAssertTrue(destinationDetail == "United States\nEnding on 2345"
+//            || destinationDetail == "United States Ending on 2345")
+
+        transferFunds.verifyBankAccountDestination(type: "Bank Account", endingDigit: "2345")
 
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "AddNewTransferMethodsMoreThanOneTransferMethod",
@@ -879,21 +878,4 @@ class TransferUserFundsTest: BaseTests {
      XCTAssertTrue(app.alerts["Connectivity Issue"].staticTexts.element(matching: predicate).exists)
      }
      */
-
-    private func verifyTransferFundsTitle() {
-        if #available(iOS 11.4, *) {
-            XCTAssertTrue(transferFunds.transferFundTitle.exists)
-        } else {
-            XCTAssertTrue(app.navigationBars["Transfer funds"].exists)
-        }
-    }
-
-    private func verifyBankAccountDestination() {
-        XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
-        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
-
-        let destinationDetail = transferFunds.addSelectDestinationDetailLabel.label
-        XCTAssertTrue(destinationDetail == "United States\nEnding on 1234"
-            || destinationDetail == "United States Ending on 1234")
-    }
 }

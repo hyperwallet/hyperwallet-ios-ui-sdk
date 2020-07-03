@@ -88,6 +88,11 @@ extension ScheduleTransferController {
     override public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return presenter.sectionData[section].title
     }
+    /// Estimated height of header
+    override public func tableView(_ tableView: UITableView,
+                                   estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat(Theme.Cell.headerHeight)
+    }
     /// Returns tableview section count
     override public func numberOfSections(in tableView: UITableView) -> Int {
         return presenter.sectionData.count
@@ -116,7 +121,16 @@ extension ScheduleTransferController {
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let section = presenter.sectionData[indexPath.section].scheduleTransferSectionHeader
-        return section == .destination ? Theme.Cell.largeHeight : Theme.Cell.smallHeight
+        switch section {
+        case .destination:
+            return Theme.Cell.largeHeight
+
+        case .foreignExchange:
+            return UITableView.automaticDimension
+
+        default:
+            return Theme.Cell.smallHeight
+        }
     }
 
     private func getAttributedFooterText(for section: Int) -> NSAttributedString? {
@@ -191,50 +205,30 @@ extension ScheduleTransferController {
     }
 }
 
-// MARK: - Schedule transfer table delegate
-extension ScheduleTransferController {
-    /// Estimated height of header
-    override public func tableView(_ tableView: UITableView,
-                                   estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-        return CGFloat(Theme.Cell.headerHeight)
-    }
-}
-
 extension ScheduleTransferController: ScheduleTransferView {
-    func showProcessing() {
+    func showLoading() {
         spinnerView = HyperwalletUtilViews.showSpinner(view: view)
     }
 
-    func dismissProcessing(handler: @escaping () -> Void) {
+    func hideLoading() {
         if let spinnerView = self.spinnerView {
             HyperwalletUtilViews.removeSpinner(spinnerView)
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            handler()
         }
     }
 
     func showConfirmation(handler: @escaping (() -> Void)) {
-        let destinationData = presenter!.sectionData[0] as? ScheduleTransferDestinationData
+        let destinationData = presenter.sectionData[0] as? ScheduleTransferDestinationData
         HyperwalletUtilViews.showAlert(self,
                                        title: "mobileTransferSuccessMsg".localized(),
                                        message: String(format: "mobileTransferSuccessDetails".localized(),
                                                        destinationData?.transferMethod.title ?? " "),
                                        actions: UIAlertAction.close({ (_) in
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                             handler()
-                                        }
                                        }))
     }
 
-    func showError(_ error: HyperwalletErrorType,
-                   pageName: String,
-                   pageGroup: String,
-                   _ retry: (() -> Void)?) {
-        let errorView = ErrorView(viewController: self,
-                                  error: error,
-                                  pageName: pageName,
-                                  pageGroup: pageGroup)
+    func showError(_ error: HyperwalletErrorType, pageName: String, pageGroup: String, _ retry: (() -> Void)?) {
+        let errorView = ErrorView(viewController: self, error: error, pageName: pageName, pageGroup: pageGroup)
         errorView.show(retry)
     }
 

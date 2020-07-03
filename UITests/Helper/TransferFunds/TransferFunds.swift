@@ -118,7 +118,14 @@ class TransferFunds {
           XCTAssertEqual(addSelectDestinationLabel.label, type)
 
           let destinationDetail = addSelectDestinationDetailLabel.label
-          XCTAssertTrue(destinationDetail == "United States\nEnding on \(endingDigit)"
-              || destinationDetail == "United States Ending on \(endingDigit)")
+          XCTAssertTrue(destinationDetail == "United States\nending in \(endingDigit)"
+              || destinationDetail == "United States ending in \(endingDigit)")
       }
+
+    func verifyNotes() {
+        if #available(iOS 11.0, *) {
+            enterNotes(description: "testing")
+            XCTAssertEqual(notesDescriptionTextField.value as? String, "testing")
+        }
+    }
 }
