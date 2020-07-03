@@ -28,7 +28,7 @@ import UIKit
 /// to retrieve the transfer resource.
 final class CreateTransferController: UITableViewController {
     enum FooterSection: Int, CaseIterable {
-        case destination, amount, notes, button
+        case amount, destination, notes, button
     }
 
     private let footerIdentifier = "transferTableViewFooterViewIdentifier"
@@ -205,7 +205,7 @@ extension CreateTransferController {
             tableViewCell.configure(amount: presenter.amount,
                                     currency: presenter.destinationCurrency
             ) { [weak presenter] amount in
-                if amount != presenter?.availableBalance {
+                if !(presenter?.didTapTransferAllFunds ?? true) {
                     presenter?.amount = amount
                 }
             }
@@ -242,7 +242,7 @@ extension CreateTransferController {
 
     @objc
     private func tapTransferMaxAmount(sender: UITapGestureRecognizer) {
-        presenter.transferMaxAmount()
+        presenter.didTapTransferAllFunds = true
     }
 
     @objc
@@ -306,7 +306,7 @@ extension CreateTransferController: CreateTransferView {
     }
 
     func updateTransferSection() {
-        tableView.reloadData()
+        tableView.reloadRows(at: [IndexPath(row: 0, section: FooterSection.amount.rawValue)], with: .none)
     }
 
     func notifyTransferCreated(_ transfer: HyperwalletTransfer) {
@@ -380,6 +380,7 @@ extension CreateTransferController {
         if let transferMethod = response as? HyperwalletTransferMethod {
             coordinator?.navigateBackFromNextPage(with: transferMethod)
             presenter.selectedTransferMethod = transferMethod
+            presenter.didTapTransferAllFunds = false
             presenter.amount = "0"
             presenter.notes = nil
             presenter.loadCreateTransfer()

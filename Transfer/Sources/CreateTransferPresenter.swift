@@ -70,6 +70,13 @@ final class CreateTransferPresenter {
         return selectedTransferMethod?.transferMethodCurrency
     }
 
+    var didTapTransferAllFunds: Bool = false {
+        didSet {
+            amount = didTapTransferAllFunds ? availableBalance ?? "0" : "0"
+            view?.updateTransferSection()
+        }
+    }
+
     init(_ clientTransferId: String, _ sourceToken: String?, view: CreateTransferView) {
         self.clientTransferId = clientTransferId
         self.sourceToken = sourceToken
@@ -171,12 +178,6 @@ final class CreateTransferPresenter {
             strongSelf.initializeSections()
             view.reloadData()
         }
-    }
-
-    // MARK: - Transfer Max Amount Button Tapped
-    func transferMaxAmount() {
-        amount = availableBalance ?? "0"
-        view?.updateTransferSection()
     }
 
     // MARK: - Create Transfer Button Tapped
