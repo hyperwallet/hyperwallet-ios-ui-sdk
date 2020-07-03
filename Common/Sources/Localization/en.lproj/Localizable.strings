@@ -55,11 +55,11 @@
 "authentication_error_message" = "Authentication token retrieval attempt resulted in an error";
 
 // Transfer methods
-"bank_account" = "Bank Account";
+"bankAccount" = "Bank Account";
 "bank_card" = "Debit Card";
 "paper_check" = "Paper Check";
 "prepaid_card" = "Prepaid Card";
-"wire_account" = "Wire Account";
+"BANK_ACCOUNT_WIRE" = "Wire Transfer Account";
 "paypal_account" = "PayPal";
 
 //Select Transfer Method View
