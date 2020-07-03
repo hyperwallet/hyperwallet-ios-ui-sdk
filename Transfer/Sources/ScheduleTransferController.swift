@@ -211,8 +211,7 @@ extension ScheduleTransferController: ScheduleTransferView {
         HyperwalletUtilViews.showAlert(self,
                                        title: "mobileTransferSuccessMsg".localized(),
                                        message: String(format: "mobileTransferSuccessDetails".localized(),
-                                                       destinationData?.transferMethod.title ?? " ",
-                                                       destinationData?.transferMethod.value ?? " "),
+                                                       destinationData?.transferMethod.title ?? " "),
                                        actions: UIAlertAction.close({ (_) in
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                             handler()
