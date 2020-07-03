@@ -213,7 +213,8 @@ final class CreateTransferPresenter {
 
                 case .success(let transfer):
                     if let transfer = transfer {
-                        if transfer.destinationAmount != self?.availableBalance {
+                        if strongSelf.didTapTransferAllFunds &&
+                            transfer.destinationAmount != strongSelf.availableBalance {
                             strongSelf.didFxQuoteChange = true
                         }
                         view.notifyTransferCreated(transfer)

@@ -27,9 +27,6 @@ final class TransferAllFundsCell: UITableViewCell {
         let label = UILabel(frame: .zero)
         label.textAlignment = .center
         label.accessibilityIdentifier = "transferAmountTitleLabel"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        label.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         return label
     }()
 
@@ -40,9 +37,6 @@ final class TransferAllFundsCell: UITableViewCell {
         button.accessibilityIdentifier = "transferMaxAmountTitleLabel"
         button.setTitle("mobileTransferMax".localized(), for: .normal)
         button.setTitleColor(Theme.Button.linkColor, for: UIControl.State.normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        button.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         return button
     }()
 
@@ -80,8 +74,7 @@ final class TransferAllFundsCell: UITableViewCell {
 
         let constraints = [
             stackView.safeAreaLeadingAnchor.constraint(equalTo: margins.leadingAnchor),
-            stackView.safeAreaTrailingAnchor.constraint(equalTo: margins.trailingAnchor),
-            stackView.safeAreaBottomAnchor.constraint(equalTo: margins.bottomAnchor)
+            stackView.safeAreaTrailingAnchor.constraint(equalTo: margins.trailingAnchor)
         ]
         constraints.forEach { $0.priority = UILayoutPriority(999) }
         NSLayoutConstraint.activate(constraints)

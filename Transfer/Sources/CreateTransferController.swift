@@ -141,8 +141,16 @@ extension CreateTransferController {
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let section = presenter.sectionData[indexPath.section].createTransferSectionHeader
-        return section == .destination ? Theme.Cell.largeHeight : UITableView.automaticDimension
+        switch presenter.sectionData[indexPath.section].createTransferSectionHeader {
+        case .destination:
+            return Theme.Cell.largeHeight
+
+        case .transferAll:
+            return Theme.Cell.smallHeight
+
+        default:
+            return UITableView.automaticDimension
+        }
     }
 
     private func getAttributedFooterText(for section: Int) -> NSAttributedString? {
