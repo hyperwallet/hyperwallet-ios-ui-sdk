@@ -89,8 +89,8 @@ final class CreateTransferPresenter {
         let createTransferSectionAmountData = CreateTransferSectionAmountData()
         sectionData.append(createTransferSectionAmountData)
 
-        let createTransferSectionTransferData = CreateTransferSectionTransferData()
-        sectionData.append(createTransferSectionTransferData)
+        let createTransferSectionTransferAllData = CreateTransferSectionTransferAllData()
+        sectionData.append(createTransferSectionTransferAllData)
 
         let createTransferDestinationSection = CreateTransferSectionDestinationData()
         sectionData.append(createTransferDestinationSection)
@@ -247,9 +247,9 @@ final class CreateTransferPresenter {
 
     private func updateFooterContent(_ errors: [HyperwalletError]) {
         for error in errors {
-            if let sectionData = sectionData.first(where: { $0.createTransferSectionHeader == .amount }) {
+            if let sectionData = sectionData.first(where: { $0.createTransferSectionHeader == .transfer }) {
                 sectionData.errorMessage = error.message
-                view?.updateFooter(for: .amount)
+                view?.updateFooter(for: .transfer)
             }
         }
     }

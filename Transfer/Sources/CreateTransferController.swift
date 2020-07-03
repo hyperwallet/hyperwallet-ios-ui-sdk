@@ -28,7 +28,7 @@ import UIKit
 /// to retrieve the transfer resource.
 final class CreateTransferController: UITableViewController {
     enum FooterSection: Int, CaseIterable {
-        case amount, destination, notes, button
+        case amount, destination, transfer, notes, button
     }
 
     private let footerIdentifier = "transferTableViewFooterViewIdentifier"
@@ -134,11 +134,7 @@ extension CreateTransferController {
     private func getAttributedFooterText(for section: Int) -> NSAttributedString? {
         let sectionData = presenter.sectionData[section]
         var attributedText: NSAttributedString?
-        if  let transferSectionData = sectionData as? CreateTransferSectionAmountData {
-            attributedText = format(footer: transferSectionData.footer, error: transferSectionData.errorMessage)
-        } else {
-            attributedText = format(error: sectionData.errorMessage)
-        }
+        attributedText = format(error: sectionData.errorMessage)
         return attributedText
     }
 
@@ -170,7 +166,7 @@ extension CreateTransferController {
             getDestinationSectionCellConfiguration(cell, indexPath)
 
         case .transfer:
-            getTransferSectionCellConfiguration(cell, indexPath)
+            getTransferAllSectionCellConfiguration(cell, indexPath)
 
         case .notes:
             getNotesSectionCellConfiguration(cell)
@@ -213,7 +209,7 @@ extension CreateTransferController {
         }
     }
 
-    private func getTransferSectionCellConfiguration(_ cell: UITableViewCell, _ indexPath: IndexPath) {
+    private func getTransferAllSectionCellConfiguration(_ cell: UITableViewCell, _ indexPath: IndexPath) {
         if let tableViewCell = cell as? TransferAllFundsCell {
             let tapConfirmation = UITapGestureRecognizer(target: self, action: #selector(tapTransferMaxAmount))
             tableViewCell.configure(action: tapConfirmation,
@@ -299,14 +295,14 @@ extension CreateTransferController: CreateTransferView {
         if let footerView = tableView.footerView(forSection: section.rawValue) as? TransferTableViewFooterView {
             footerView.footerLabel.attributedText = getAttributedFooterText(for: section.rawValue)
         } else {
-            tableView.reloadData()
+            tableView.reloadSections(IndexSet(integersIn: 0..<section.rawValue + 1), with: .none)
         }
         tableView.endUpdates()
         UIView.setAnimationsEnabled(true)
     }
 
     func updateTransferSection() {
-        tableView.reloadRows(at: [IndexPath(row: 0, section: FooterSection.amount.rawValue)], with: .none)
+        tableView.reloadSections(IndexSet(integer: FooterSection.amount.rawValue), with: .none)
     }
 
     func notifyTransferCreated(_ transfer: HyperwalletTransfer) {

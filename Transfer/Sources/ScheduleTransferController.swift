@@ -25,7 +25,6 @@ import UIKit
 /// Schedule a transfer that was previously created
 final class ScheduleTransferController: UITableViewController, UITextFieldDelegate {
     private var spinnerView: SpinnerView?
-    private var processingView: ProcessingView?
     private var presenter: ScheduleTransferPresenter!
     private let footerIdentifier = "scheduleTransferFooterViewIdentifier"
     private let registeredCells: [(type: AnyClass, id: String)] = [
@@ -195,11 +194,13 @@ extension ScheduleTransferController {
 
 extension ScheduleTransferController: ScheduleTransferView {
     func showProcessing() {
-        processingView = HyperwalletUtilViews.showProcessing()
+        spinnerView = HyperwalletUtilViews.showSpinner(view: view)
     }
 
     func dismissProcessing(handler: @escaping () -> Void) {
-        processingView?.hide()
+        if let spinnerView = self.spinnerView {
+            HyperwalletUtilViews.removeSpinner(spinnerView)
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             handler()
         }
@@ -207,12 +208,10 @@ extension ScheduleTransferController: ScheduleTransferView {
 
     func showConfirmation(handler: @escaping (() -> Void)) {
         let destinationData = presenter!.sectionData[0] as? ScheduleTransferDestinationData
-        processingView?.hide(with: .complete)
         HyperwalletUtilViews.showAlert(self,
                                        title: "mobileTransferSuccessMsg".localized(),
                                        message: String(format: "mobileTransferSuccessDetails".localized(),
-                                                       destinationData?.transferMethod.title ?? " ",
-                                                       destinationData?.transferMethod.value ?? " "),
+                                                       destinationData?.transferMethod.title ?? " "),
                                        actions: UIAlertAction.close({ (_) in
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                             handler()

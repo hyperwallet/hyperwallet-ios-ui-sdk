@@ -42,7 +42,7 @@ final class ListTransferDestinationController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                             target: self,
                                                             action: #selector(didTapAddButton))
-        titleDisplayMode(.never, for: "transfer_select_destination".localized())
+        titleDisplayMode(.never, for: "mobileTransferMethodsHeader".localized())
         scrollToSelectedRow()
     }
 
