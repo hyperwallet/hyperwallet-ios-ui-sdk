@@ -28,7 +28,7 @@ import UIKit
 /// to retrieve the transfer resource.
 final class CreateTransferController: UITableViewController {
     enum FooterSection: Int, CaseIterable {
-        case destination, amount, notes, button
+        case destination, amount, trasnfer, notes, button
     }
 
     private let footerIdentifier = "transferTableViewFooterViewIdentifier"
@@ -295,7 +295,7 @@ extension CreateTransferController: CreateTransferView {
         if let footerView = tableView.footerView(forSection: section.rawValue) as? TransferTableViewFooterView {
             footerView.footerLabel.attributedText = getAttributedFooterText(for: section.rawValue)
         } else {
-            tableView.reloadSections(IndexSet(integer: section.rawValue), with: .none)
+             tableView.reloadSections(IndexSet(integersIn: 0..<section.rawValue + 1), with: .none)
         }
         tableView.endUpdates()
         UIView.setAnimationsEnabled(true)
