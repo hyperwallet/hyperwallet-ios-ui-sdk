@@ -68,7 +68,7 @@ extension ListTransferDestinationCell {
             textLabel?.text = "bankAccount".localized()
 
         case "wire_account":
-            textLabel?.text = "BANK_ACCOUNT_WIRE".localized()
+            textLabel?.text = "bank_account_wire".localized()
 
         default:
             textLabel?.text = transferMethod.type?.lowercased().localized()
