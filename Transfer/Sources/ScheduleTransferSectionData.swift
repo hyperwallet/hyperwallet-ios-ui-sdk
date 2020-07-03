@@ -136,7 +136,7 @@ struct ScheduleTransferNotesData: ScheduleTransferSectionData {
     var cellIdentifier: String { return TransferNotesCell.reuseIdentifier }
 
     init?(transfer: HyperwalletTransfer) {
-        guard let notes = transfer.notes else {
+        guard let notes = transfer.notes, !notes.isEmpty else {
             return nil
         }
         self.notes = notes

@@ -193,7 +193,7 @@ final class CreateTransferPresenter {
             let transfer = HyperwalletTransfer.Builder(clientTransferId: clientTransferId,
                                                        sourceToken: sourceToken,
                                                        destinationToken: destinationToken)
-                .destinationAmount(availableBalance == amount ? nil : amount)
+                .destinationAmount(didTapTransferAllFunds ? nil : amount)
                 .notes(notes)
                 .destinationCurrency(destinationCurrency)
                 .build()
