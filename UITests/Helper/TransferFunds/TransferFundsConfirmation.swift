@@ -5,6 +5,7 @@ class TransferFundsConfirmation {
     var app: XCUIApplication
 
     // Destination Section
+    var tranferToSectionLabel: XCUIElement
     var transferDestinationLabel: XCUIElement
 
     var transferDestinationDetailLabel: XCUIElement
@@ -53,6 +54,7 @@ class TransferFundsConfirmation {
         self.app = app
         scheduleTable = app.tables["scheduleTransferTableView"]
 
+        tranferToSectionLabel = scheduleTable.staticTexts["mobileTransferToLabel".localized()]
         transferDestinationLabel = scheduleTable.staticTexts["transferDestinationTitleLabel"]
         transferDestinationDetailLabel = scheduleTable.staticTexts["transferDestinationSubtitleLabel"]
 
@@ -83,16 +85,11 @@ class TransferFundsConfirmation {
         }
     }
 
-//    func tapConfirmButton() {
-//        app.scroll(to: confirmButton)
-//        confirmButton.tap()
-//    }
-
     func verifyDestination(country: String, endingDigit: String) {
         XCTAssertTrue(transferDestinationDetailLabel.exists)
         let destinationDetail = transferDestinationDetailLabel.label
-        XCTAssertTrue(destinationDetail == "\(country)\nending on \(endingDigit)"
-            || destinationDetail == "\(country) ending on \(endingDigit)")
+        XCTAssertTrue(destinationDetail == "\(country)\nending in \(endingDigit)"
+            || destinationDetail == "\(country) ending in \(endingDigit)")
     }
 
     func getCell(row: Int) -> XCUIElement {
@@ -109,6 +106,9 @@ class TransferFundsConfirmation {
         }
 
         app.scroll(to: confirmButton)
-        confirmButton.tap()
+        XCTAssertTrue(confirmButton.exists)
+        if confirmButton.isHittable {
+            confirmButton.tap()
+        }
     }
 }

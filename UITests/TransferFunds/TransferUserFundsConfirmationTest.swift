@@ -50,8 +50,9 @@ class TransferUserFundsConfirmationTest: BaseTests {
                              method: HTTPMethod.post)
 
         transferFunds.tapContinueButton()
-        waitForExistence(transferFundsConfirmation.transferDestinationLabel)
 
+        waitForExistence(transferFundsConfirmation.transferDestinationLabel)
+        XCTAssertTrue(transferFundsConfirmation.tranferToSectionLabel.exists)
         transferFundsConfirmation.verifyDestination(country: "United States", endingDigit: "1234")
 
         // Assert Summary Section
@@ -105,11 +106,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         // Amount row
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
-        XCTAssertEqual(transferFunds.transferAmountLabel.label, "Available funds $452.14 USD")
-
-        // Add Destination Section
-        XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
-        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
+        XCTAssertEqual(transferFunds.transferAmountLabel.label, "Available funds $5,855.17 USD")
 
         transferFunds.transferMaxAllFunds.tap()
 
@@ -120,11 +117,6 @@ class TransferUserFundsConfirmationTest: BaseTests {
         waitForExistence(transferFundsConfirmation.transferDestinationLabel)
         // 1.  Add Destination Section
         transferFundsConfirmation.verifyDestination(country: "United States", endingDigit: "1234")
-
-        //XCTAssertTrue(transferFundsConfirmation.transferDestinationDetailLabel.exists)
-//        let destinationDetail = transferFundsConfirmation.transferDestinationDetailLabel.label
-//        XCTAssertTrue(destinationDetail == "United States\nEnding on 1234"
-//            || destinationDetail == "United States Ending on 1234")
 
         // 2.Exchange Rate Section
         let youSell = transferFundsConfirmation.foreignExchangeSellLabel
@@ -142,7 +134,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertTrue(app.cells.element(boundBy: 5).staticTexts["1,464.53 CAD"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 6).staticTexts[youBuy].exists)
         XCTAssertTrue(app.cells.element(boundBy: 6).staticTexts["1,134.13 USD"].exists)
-        XCTAssertTrue(app.cells.element(boundBy: 7).staticTexts["Exchange Rate"].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 7).staticTexts[exchangeRate].exists)
         XCTAssertTrue(app.cells.element(boundBy: 7).staticTexts["1 CAD = 0.774399 USD"].exists)
 
         XCTAssertTrue(app.cells.element(boundBy: 9).staticTexts[youSell].exists)
@@ -161,32 +153,23 @@ class TransferUserFundsConfirmationTest: BaseTests {
 
         // 3. Summary Section
         verifySummary()
-        //XCTAssertTrue(transferFundsConfirmation.summaryTitle.label == "SUMMARY")
-//        XCTAssertEqual(app.cells.element(boundBy: 16)
-//            .staticTexts["scheduleTransferSummaryTextLabel"].label, "Amount:")
         XCTAssertEqual(app.cells.element(boundBy: 16)
             .staticTexts["scheduleTransferSummaryTextValue"].label, "5,857.17")
-
-//        XCTAssertEqual(app.cells.element(boundBy: 17)
-//            .staticTexts["scheduleTransferSummaryTextLabel"].label, "Fee:")
         XCTAssertEqual(app.cells.element(boundBy: 17)
             .staticTexts["scheduleTransferSummaryTextValue"].label, "2.00")
-
-//        XCTAssertEqual(app.cells.element(boundBy: 18)
-//            .staticTexts["scheduleTransferSummaryTextLabel"].label, "You will receive:")
         XCTAssertEqual(app.cells.element(boundBy: 18)
             .staticTexts["scheduleTransferSummaryTextValue"].label, "5,855.17")
 
         XCTAssertTrue(transferFundsConfirmation.noteLabel.exists)
         XCTAssertEqual(transferFundsConfirmation.noteDescription.value as? String, "Transfer All")
 
-        transferFundsConfirmation.tapConfirmButton()
+        //transferFundsConfirmation.tapConfirmButton()
+        let button = transferFundsConfirmation.scheduleTable.buttons["scheduleTransferLabel"]
+        app.scroll(to: button)
+        button.tap()
 
         verifyConfirmationSuccess()
         waitForNonExistence(spinner)
-
-        // Assert go back to the menu page
-        //waitForExistence(transferFundMenu)
     }
 
     //swiftlint:disable line_length
@@ -206,29 +189,24 @@ class TransferUserFundsConfirmationTest: BaseTests {
         transferFundMenu.tap()
         waitForNonExistence(spinner)
 
-        if #available(iOS 11.4, *) {
-            XCTAssertTrue(transferFunds.transferFundTitle.exists)
-        } else {
-            XCTAssertTrue(app.navigationBars["Transfer Funds"].exists)
-        }
+        transferFunds.verifyTransferFundsTitle()
+        // Amount row
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+        XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
+        XCTAssertEqual(transferFunds.transferAmountLabel.label, "Available funds $5,855.17 USD")
 
-        // Add Destination Section
-        XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
-        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
-
-        // Turn on the Transfer All Funds Switch
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "")
         transferFunds.transferMaxAllFunds.tap()
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "5,855.17")
-
         transferFunds.tapContinueButton()
 
         waitForExistence(transferFundsConfirmation.foreignExchangeSectionLabel)
-        XCTAssertEqual(transferFundsConfirmation.foreignExchangeSectionLabel.label, "FOREIGN EXCHANGE")
-        XCTAssertEqual(transferFundsConfirmation.summaryTitle.label, "SUMMARY")
-        XCTAssertEqual(transferFundsConfirmation.noteLabel.label, "NOTES")
+        XCTAssertEqual(transferFundsConfirmation.foreignExchangeSectionLabel.label, "mobileFXlabel".localized())
+        XCTAssertEqual(transferFundsConfirmation.summaryTitle.label, "mobileSummaryLabel".localized())
+        XCTAssertEqual(transferFundsConfirmation.noteLabel.label, "mobileNoteLabel".localized())
 
-        transferFundsConfirmation.tapConfirmButton()
+        let button = transferFundsConfirmation.scheduleTable.buttons["scheduleTransferLabel"]
+        app.scroll(to: button)
+        button.tap()
 
         // Assert Transfer Quote Expire error
         waitForExistence(app.alerts["Error"])
@@ -249,36 +227,32 @@ class TransferUserFundsConfirmationTest: BaseTests {
         transferFundMenu.tap()
         waitForNonExistence(spinner)
 
-        if #available(iOS 11.4, *) {
-            XCTAssertTrue(transferFunds.transferFundTitle.exists)
-        } else {
-            XCTAssertTrue(app.navigationBars["Transfer Funds"].exists)
-        }
+        transferFunds.verifyTransferFundsTitle()
+        // Amount row
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+        XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
+        XCTAssertEqual(transferFunds.transferAmountLabel.label, "Available funds $452.14 USD")
 
-        // Add Destination Section
-        XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
-        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
-
-        // Turn on the Transfer All Funds Switch
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "")
         transferFunds.transferMaxAllFunds.tap()
-        // Assert Destination Amount is automatically insert into the amount field
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "452.14")
+        transferFunds.tapContinueButton()
 
         mockServer.setupStub(url: "/rest/v3/transfers",
                              filename: "CreateTransferWithNoFee",
                              method: HTTPMethod.post)
-        transferFunds.tapContinueButton()
 
         waitForExistence(transferFundsConfirmation.transferDestinationLabel)
-        // Assert confirmation page has no FEE section
-        //XCTAssertFalse(transferFundsConfirmation.summaryFeeLabel.exists)
 
         // Summary Section
-        XCTAssertTrue(transferFundsConfirmation.summaryTitle.label == "SUMMARY")
-        XCTAssertEqual(app.cells.element(boundBy: 8)
-            .staticTexts["scheduleTransferSummaryTextLabel"].label, "Amount:")
-        XCTAssertEqual(app.cells.element(boundBy: 8).staticTexts["scheduleTransferSummaryTextValue"].label, "5,855.17")
+        XCTAssertEqual(transferFundsConfirmation.summaryTitle.label, "mobileSummaryLabel".localized())
+        XCTAssertEqual(transferFundsConfirmation.summaryAmount.label, transferFundsConfirmation.summaryAmountLabel)
+
+        // Assert confirmation page has no FEE section
+        XCTAssertFalse(transferFundsConfirmation.summaryFee.exists)
+
+        let button = transferFundsConfirmation.scheduleTable.buttons["scheduleTransferLabel"]
+        app.scroll(to: button)
+        XCTAssertTrue(button.exists)
     }
 
     func testTransferFundsConfirmation_FxChanged() {
@@ -297,14 +271,12 @@ class TransferUserFundsConfirmationTest: BaseTests {
         // Amount row
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
-        XCTAssertEqual(transferFunds.transferAmountLabel.label, "Available funds $452.14 USD")
+        XCTAssertEqual(transferFunds.transferAmountLabel.label, "Available funds $5,855.17 USD")
 
         // Add Destination Section
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
 
-        // Turn on the Transfer All Funds Switch
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "")
         transferFunds.transferMaxAllFunds.tap()
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "5,855.17")
 
@@ -315,7 +287,10 @@ class TransferUserFundsConfirmationTest: BaseTests {
         transferFunds.tapContinueButton()
 
         waitForExistence(transferFundsConfirmation.foreignExchangeSectionLabel)
-        app.scroll(to: transferFundsConfirmation.confirmButton)
+        let button = transferFundsConfirmation.scheduleTable.buttons["scheduleTransferLabel"]
+        app.scroll(to: button)
+        XCTAssertTrue(button.exists)
+
         // Assert the message showing the final amount to be transferred has changed
         XCTAssertTrue(app.otherElements["Due to changes in the FX rate, you will now receive: 5,855.66 USD"].exists)
     }
@@ -385,7 +360,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         let alert = app.alerts[messageTitle]
         waitForExistence(app.alerts[messageTitle])
         let predicate = NSPredicate(format:
-                   "label CONTAINS[c] '\(message)'")
+            "label CONTAINS[c] '\(message)'")
         XCTAssert(alert.staticTexts.element(matching: predicate).exists)
 
         alert.buttons["doneButtonLabel".localized()].tap()
