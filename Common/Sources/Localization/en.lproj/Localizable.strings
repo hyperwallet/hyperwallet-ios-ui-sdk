@@ -59,7 +59,7 @@
 "bank_card" = "Debit Card";
 "paper_check" = "Paper Check";
 "prepaid_card" = "Prepaid Card";
-"BANK_ACCOUNT_WIRE" = "Wire Transfer Account";
+"bank_account_wire" = "Wire Transfer Account";
 "paypal_account" = "PayPal";
 
 //Select Transfer Method View
