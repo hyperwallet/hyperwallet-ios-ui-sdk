@@ -28,7 +28,7 @@ import UIKit
 /// to retrieve the transfer resource.
 final class CreateTransferController: UITableViewController {
     enum FooterSection: Int, CaseIterable {
-        case amount, destination, transfer, notes, button
+        case amount, destination, transferAll, notes, button
     }
 
     private let footerIdentifier = "transferTableViewFooterViewIdentifier"
@@ -165,7 +165,7 @@ extension CreateTransferController {
         case .destination:
             getDestinationSectionCellConfiguration(cell, indexPath)
 
-        case .transfer:
+        case .transferAll:
             getTransferAllSectionCellConfiguration(cell, indexPath)
 
         case .notes:
@@ -295,14 +295,14 @@ extension CreateTransferController: CreateTransferView {
         if let footerView = tableView.footerView(forSection: section.rawValue) as? TransferTableViewFooterView {
             footerView.footerLabel.attributedText = getAttributedFooterText(for: section.rawValue)
         } else {
-            tableView.reloadSections(IndexSet(integersIn: 0..<section.rawValue + 1), with: .none)
+            tableView.reloadSections(IndexSet(integersIn: 0...section.rawValue), with: .none)
         }
         tableView.endUpdates()
         UIView.setAnimationsEnabled(true)
     }
 
-    func updateTransferSection() {
-        tableView.reloadSections(IndexSet(integer: FooterSection.amount.rawValue), with: .none)
+    func updateTransferAmountSection() {
+        tableView.reloadSections(IndexSet(integer: 0), with: .none)
     }
 
     func notifyTransferCreated(_ transfer: HyperwalletTransfer) {
