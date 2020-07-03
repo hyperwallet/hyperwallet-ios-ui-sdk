@@ -12,11 +12,17 @@ class TransferFundsConfirmation {
     // Summary Section
     var summaryTitle: XCUIElement
 
-    var summaryAmountLabel: XCUIElement
+    var summaryAmount: XCUIElement
 
-    var summaryFeeLabel: XCUIElement
+    var summaryFee: XCUIElement
 
-    var summaryReceiveLabel: XCUIElement
+    var summaryReceive: XCUIElement
+
+    var summaryAmountLabel: String
+
+    var summaryFeeLabel: String
+
+    var summaryReceiveLabel: String
 
     // Note Section
     var noteLabel: XCUIElement
@@ -32,6 +38,12 @@ class TransferFundsConfirmation {
 
     var foreignExchangeRate: XCUIElement
 
+    var foreignExchangeSellLabel: String
+
+    var foreignExchangeBuyLabel: String
+
+    var foreignExchangeRateLabel: String
+
     // Confirm button
     var confirmButton: XCUIElement
 
@@ -45,27 +57,57 @@ class TransferFundsConfirmation {
         transferDestinationDetailLabel = scheduleTable.staticTexts["transferDestinationSubtitleLabel"]
 
         summaryTitle = scheduleTable.staticTexts["mobileSummaryLabel".localized()]
-        summaryAmountLabel = scheduleTable.staticTexts["mobileConfirmDetailsAmount".localized()]
-        summaryFeeLabel = scheduleTable.staticTexts["mobileConfirmDetailsFee".localized()]
-        summaryReceiveLabel = scheduleTable.staticTexts["mobileConfirmDetailsTotal".localized()]
+        summaryAmount = scheduleTable.staticTexts["mobileConfirmDetailsAmount".localized()]
+        summaryFee = scheduleTable.staticTexts["mobileConfirmDetailsFee".localized()]
+        summaryReceive = scheduleTable.staticTexts["mobileConfirmDetailsTotal".localized()]
+        summaryAmountLabel = "mobileConfirmDetailsAmount".localized()
+        summaryFeeLabel = "mobileConfirmDetailsFee".localized()
+        summaryReceiveLabel = "mobileConfirmDetailsTotal".localized()
 
-        noteLabel = scheduleTable.staticTexts["NOTES"]
+        noteLabel = scheduleTable.staticTexts["mobileNoteLabel".localized()]
 
-        noteDescription = app.cells.textFields["transferNotesTextField"]
+        noteDescription = scheduleTable.textFields["transferNotesTextField"]
 
         foreignExchangeSectionLabel = scheduleTable.staticTexts["mobileFXlabel".localized()]
         foreignExchangeSell = scheduleTable.staticTexts["mobileFXsell".localized()]
         foreignExchangeBuy = scheduleTable.staticTexts["mobileFXbuy".localized()]
         foreignExchangeRate = scheduleTable.staticTexts["mobileFXRateLabel".localized()]
+        foreignExchangeSellLabel = "mobileFXsell".localized()
+        foreignExchangeBuyLabel = "mobileFXbuy".localized()
+        foreignExchangeRateLabel = "mobileFXRateLabel".localized()
 
         if #available(iOS 13.0, *) {
-            confirmButton = scheduleTable.cells.buttons["scheduleTransferLabel"]
+            confirmButton = scheduleTable.buttons["scheduleTransferLabel"]
         } else {
-            confirmButton = scheduleTable.cells.staticTexts["scheduleTransferLabel"]
+            confirmButton = scheduleTable.staticTexts["scheduleTransferLabel"]
         }
     }
 
+//    func tapConfirmButton() {
+//        app.scroll(to: confirmButton)
+//        confirmButton.tap()
+//    }
+
+    func verifyDestination(country: String, endingDigit: String) {
+        XCTAssertTrue(transferDestinationDetailLabel.exists)
+        let destinationDetail = transferDestinationDetailLabel.label
+        XCTAssertTrue(destinationDetail == "\(country)\nending on \(endingDigit)"
+            || destinationDetail == "\(country) ending on \(endingDigit)")
+    }
+
+    func getCell(row: Int) -> XCUIElement {
+        let cell = scheduleTable.children(matching: .cell).element(boundBy: row)
+        XCTAssert(cell.exists)
+        return cell
+    }
+
     func tapConfirmButton() {
+        if #available(iOS 13.0, *) {
+            confirmButton = scheduleTable.buttons["scheduleTransferLabel"]
+        } else {
+            confirmButton = scheduleTable.staticTexts["scheduleTransferLabel"]
+        }
+
         app.scroll(to: confirmButton)
         confirmButton.tap()
     }

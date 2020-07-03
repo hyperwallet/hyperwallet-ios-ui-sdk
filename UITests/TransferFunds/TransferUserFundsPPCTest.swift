@@ -49,11 +49,7 @@ class TransferUserFundsPPCTest: BaseTests {
 
         // NOTE
         XCTAssertTrue(transferFunds.notesSectionLabel.exists)
-        XCTAssertEqual(transferFunds.notesSectionLabel.label, transferFunds.noteLabel)
-        if #available(iOS 11.0, *) {
-            transferFunds.enterNotes(description: "testing")
-            XCTAssertEqual(transferFunds.notesDescriptionTextField.value as? String, "testing")
-        }
+        transferFunds.verifyNotes()
 
         // Continue Button
         XCTAssertTrue(transferFunds.nextLabel.exists)
