@@ -248,7 +248,7 @@ final class CreateTransferPresenter {
         for error in errors {
             if let sectionData = sectionData.first(where: { $0.createTransferSectionHeader == .transfer }) {
                 sectionData.errorMessage = error.message
-                view?.updateFooter(for: .trasnfer)
+                view?.updateFooter(for: .transfer)
             }
         }
     }
