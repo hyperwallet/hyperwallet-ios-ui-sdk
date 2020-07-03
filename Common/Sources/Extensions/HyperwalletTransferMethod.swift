@@ -33,16 +33,18 @@ extension HyperwalletTransferMethod: GenericCellConfiguration {
         switch type {
         case "BANK_CARD", "PREPAID_CARD":
             return String(format: "%@%@",
-                          "transfer_method_list_item_description".localized(),
+                          "endingIn".localized(),
                           getField(TransferMethodField.cardNumber.rawValue)?
                             .suffix(startAt: 4) ?? "" )
 
         case "PAYPAL_ACCOUNT":
-            return getField(TransferMethodField.email.rawValue)
+            return String(format: "%@%@",
+                          "to".localized(),
+                          getField(TransferMethodField.email.rawValue) ?? "")
 
         default:
             return String(format: "%@%@",
-                          "transfer_method_list_item_description".localized(),
+                          "endingIn".localized(),
                           getField(TransferMethodField.bankAccountId.rawValue)?
                             .suffix(startAt: 4) ?? "")
         }
