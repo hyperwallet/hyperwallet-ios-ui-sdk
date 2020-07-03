@@ -23,8 +23,8 @@ import TransferRepository
 import HyperwalletSDK
 
 protocol ScheduleTransferView: class {
-    func showProcessing()
-    func dismissProcessing(handler: @escaping () -> Void)
+    func showLoading()
+    func hideLoading()
     func showConfirmation(handler: @escaping (() -> Void))
     func showError(_ error: HyperwalletErrorType,
                    pageName: String,
@@ -84,19 +84,17 @@ final class ScheduleTransferPresenter {
     }
 
     func scheduleTransfer() {
-        view?.showProcessing()
+        view?.showLoading()
         transferRepository.scheduleTransfer(transfer) { [weak self] (result) in
             guard let strongSelf = self, let view = strongSelf.view else {
                 return
             }
-
+            view.hideLoading()
             switch result {
             case .failure(let error):
-                view.dismissProcessing(handler: {
-                    view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
-                        strongSelf.scheduleTransfer()
-                    }
-                })
+                view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
+                    strongSelf.scheduleTransfer()
+                }
 
             case .success(let resultStatusTransition):
                 guard let statusTransition = resultStatusTransition else {
