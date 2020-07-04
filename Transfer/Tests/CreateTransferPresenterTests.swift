@@ -135,7 +135,7 @@ class CreateTransferTests: XCTestCase {
                        .destination,
                        "Section type should be Destination")
         XCTAssertEqual(presenter.sectionData[1].createTransferSectionHeader,
-                       .transfer,
+                       .transferAll,
                        "Section type should be Transfer")
         XCTAssertEqual(presenter.sectionData[2].createTransferSectionHeader,
                        .notes,
@@ -154,7 +154,7 @@ class CreateTransferTests: XCTestCase {
                        .destination,
                        "Section type should be Destination")
         XCTAssertEqual(presenter.sectionData[1].createTransferSectionHeader,
-                       .transfer,
+                       .transferAll,
                        "Section type should be Transfer")
         XCTAssertEqual(presenter.sectionData[2].createTransferSectionHeader,
                        .notes,
@@ -212,7 +212,7 @@ class CreateTransferTests: XCTestCase {
         let section = presenter.sectionData[1]
         XCTAssertEqual(section.title, "TRANSFER", "Section title should be TRANSFER")
         XCTAssertEqual(section.rowCount, 2, "Section rowCount should be 2")
-        XCTAssertEqual(section.createTransferSectionHeader, .transfer, "Section type should be .transfer")
+        XCTAssertEqual(section.createTransferSectionHeader, .transferAll, "Section type should be .transferAll")
         XCTAssertEqual(section.cellIdentifiers.count, 2, "Section cellIdentifiers.count should be 2")
         XCTAssertEqual(section.cellIdentifiers[0],
                        "transferAmountCellIdentifier",
@@ -386,7 +386,7 @@ class MockCreateTransferView: CreateTransferView {
         showScheduleTransferExpectation?.fulfill()
     }
 
-    func updateTransferSection() {
+    func updateTransferAmountSection() {
         isUpdateTransferSectionPerformed = true
     }
 

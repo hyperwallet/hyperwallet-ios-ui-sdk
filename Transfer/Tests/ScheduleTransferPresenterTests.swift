@@ -195,7 +195,7 @@ class MockScheduleTransferViewTests: ScheduleTransferView {
         expectation = nil
     }
 
-    func showProcessing() {
+    func showLoading() {
         isShowProcessingPerformed = true
     }
 
@@ -204,9 +204,8 @@ class MockScheduleTransferViewTests: ScheduleTransferView {
         handler()
     }
 
-    func dismissProcessing(handler: @escaping () -> Void) {
+    func hideLoading() {
         isDismissProcessingPerformed = true
-        handler()
     }
 
     func showError(_ error: HyperwalletErrorType,
