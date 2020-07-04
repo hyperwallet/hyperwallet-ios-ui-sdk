@@ -32,7 +32,7 @@ class HyperwalletTransferMethodTests: XCTestCase {
             .cardNumber("1111111100001234")
             .build()
 
-        XCTAssertEqual(transferMethod.additionalInfo!, "Ending on 1234")
+        XCTAssertEqual(transferMethod.additionalInfo!, "ending in 1234")
     }
 
     func testAdditionalInfo_prepaidCard() {
@@ -42,7 +42,7 @@ class HyperwalletTransferMethodTests: XCTestCase {
         transferMethod.setField(key: HyperwalletTransferMethod.TransferMethodField.cardNumber.rawValue,
                                 value: "1111111100006789")
 
-        XCTAssertEqual(transferMethod.additionalInfo!, "Ending on 6789")
+        XCTAssertEqual(transferMethod.additionalInfo!, "ending in 6789")
     }
 
     func testAdditionalInfo_payPalAccount() {
@@ -52,7 +52,7 @@ class HyperwalletTransferMethodTests: XCTestCase {
             .email("email@domain.com")
             .build()
 
-        XCTAssertEqual(transferMethod.additionalInfo!, "email@domain.com")
+        XCTAssertEqual(transferMethod.additionalInfo!, "to email@domain.com")
     }
 
     func testAdditionalInfo_bankAccount() {
@@ -63,6 +63,6 @@ class HyperwalletTransferMethodTests: XCTestCase {
             .bankAccountId("0001233")
             .build()
 
-        XCTAssertEqual(transferMethod.additionalInfo!, "Ending on 1233")
+        XCTAssertEqual(transferMethod.additionalInfo!, "ending in 1233")
     }
 }

@@ -32,7 +32,7 @@
 "unexpected_title" = "Unexpected Error";
 "network_connection_error_message" = "We are encountering a problem processing the request. Please check your connectivity.";
 "endingIn" = "ending in ";
-"to" = "to";
+"to" = "to ";
 "no_country_available_error_message" = "There is no country available";
 "no_transfer_method_available_error_message" = "There is no transfer method available for %1$@ and %2$@";
 "no_currency_available_error_message" = "There is no currency available for country %1$@";
