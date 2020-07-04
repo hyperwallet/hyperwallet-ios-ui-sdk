@@ -213,25 +213,28 @@ class CreateTransferTests: XCTestCase {
                        "Section cellIdentifier should be transferDestinationCellIdentifier")
     }
 
-    //todo
+    func testCreateTransferSectionAmountData_validateProperties() {
+        initializePresenter()
+        let section = presenter.sectionData[0]
+        XCTAssertNil(section.title, "Section title should be nil")
+        XCTAssertEqual(section.rowCount, 1, "Section rowCount should be 1")
+        XCTAssertEqual(section.createTransferSectionHeader, .amount, "Section type should be .amount")
+        XCTAssertEqual(section.cellIdentifiers.count, 1, "Section cellIdentifiers.count should be 1")
+        XCTAssertEqual(section.cellIdentifiers[0],
+                       "transferAmountCellIdentifier",
+                       "Section cellIdentifier should be transferAmountCellIdentifier")
+    }
+
     func testCreateTransferSectionTransferAllData_validateProperties() {
         initializePresenter()
         let section = presenter.sectionData[1]
+        XCTAssertNil(section.title, "Section title should be nil")
         XCTAssertEqual(section.rowCount, 1, "Section rowCount should be 1")
         XCTAssertEqual(section.createTransferSectionHeader, .transferAll, "Section type should be .transferAll")
         XCTAssertEqual(section.cellIdentifiers.count, 1, "Section cellIdentifiers.count should be 1")
         XCTAssertEqual(section.cellIdentifiers[0],
                        "transferAllFundsCellIdentifier",
                        "Section cellIdentifier should be transferAllFundsCellIdentifier")
-    }
-
-    func testCreateTransferSectionButtonData_validateProperties() {
-        initializePresenter()
-        let section = presenter.sectionData[3]
-        XCTAssertEqual(section.title, "Note", "Section title should be Note")
-        XCTAssertEqual(section.rowCount, 1, "Section rowCount should be 1")
-        XCTAssertEqual(section.createTransferSectionHeader, .notes, "Section type should be .notes")
-        XCTAssertEqual(section.cellIdentifiers.count, 1, "Section cellIdentifiers.count should be 1")
     }
 
     func testCreateTransferSectionNotesData_validateProperties() {
@@ -244,6 +247,18 @@ class CreateTransferTests: XCTestCase {
         XCTAssertEqual(section.cellIdentifiers[0],
                        "transferNotesCellIdentifier",
                        "Section cellIdentifier should be transferNotesCellIdentifier")
+    }
+
+    func testCreateTransferSectionButtonData_validateProperties() {
+        initializePresenter()
+        let section = presenter.sectionData[4]
+        XCTAssertNil(section.title, "Section title should be nil")
+        XCTAssertEqual(section.rowCount, 1, "Section rowCount should be 1")
+        XCTAssertEqual(section.createTransferSectionHeader, .button, "Section type should be .button")
+        XCTAssertEqual(section.cellIdentifiers.count, 1, "Section cellIdentifiers.count should be 1")
+        XCTAssertEqual(section.cellIdentifiers[0],
+                       "transferButtonCellIdentifier",
+                       "Section cellIdentifier should be transferButtonCellIdentifier")
     }
 
     func testIsTransferMaxAmount_selectedTransferMethodIsNil() {
