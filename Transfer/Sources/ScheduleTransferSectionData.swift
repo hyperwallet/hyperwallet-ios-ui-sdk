@@ -36,22 +36,19 @@ protocol ScheduleTransferSectionData {
 extension ScheduleTransferSectionData {
     var rowCount: Int { return 1 }
     var title: String? {
-        if scheduleTransferSectionHeader != ScheduleTransferSectionHeader.button {
-            switch scheduleTransferSectionHeader.rawValue {
-            case "destination":
-                return "mobileTransferToLabel".localized()
-            case "notes":
-                return "mobileNoteLabel".localized()
-            case "summary":
-                return "mobileSummaryLabel".localized()
-            case "foreignExchange":
-                return "mobileFXlabel".localized()
+        switch scheduleTransferSectionHeader.rawValue {
+        case "destination":
+            return "mobileTransferToLabel".localized()
+        case "notes":
+            return "mobileNoteLabel".localized()
+        case "summary":
+            return "mobileSummaryLabel".localized()
+        case "foreignExchange":
+            return "mobileFXlabel".localized()
 
-            default:
-                return nil
-            }
+        default:
+            return nil
         }
-        return nil
     }
 }
 

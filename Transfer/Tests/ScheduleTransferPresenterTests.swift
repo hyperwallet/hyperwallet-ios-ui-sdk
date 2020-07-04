@@ -170,6 +170,7 @@ class ScheduleTransferPresenterTests: XCTestCase {
     }
 
     private func assertButtonSectionResult(buttonSection: ScheduleTransferSectionData) {
+        XCTAssertNil(buttonSection.title, "The title of button section should be nil")
         XCTAssertEqual(buttonSection.rowCount, 1, "Button section should have 1 row")
         XCTAssertNotNil(buttonSection.scheduleTransferSectionHeader,
                         "The header of button section should not be nil")
