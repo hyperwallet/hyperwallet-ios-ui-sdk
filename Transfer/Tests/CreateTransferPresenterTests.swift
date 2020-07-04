@@ -263,12 +263,11 @@ class CreateTransferTests: XCTestCase {
                        "updateTransferAmountSection should not be performed")
         XCTAssertEqual(presenter.amount, "0", "Amount should be 0")
         XCTAssertEqual(presenter.availableBalance, "62.29", "availableBalance should be 62.29")
-
+        presenter.didTapTransferAllFunds = true
         XCTAssertTrue(mockView.isUpdateTransferAmountSectionPerformed,
                       "updateTransferAmountSection should be performed")
         XCTAssertEqual(presenter.amount, "62.29", "Amount should be 62.29")
-
-        mockView.isUpdateTransferAmountSectionPerformed = false
+        presenter.didTapTransferAllFunds = false
         XCTAssertTrue(mockView.isUpdateTransferAmountSectionPerformed,
                       "updateTransferAmountSection should be performed")
         XCTAssertEqual(presenter.amount, "0", "Amount should be 0")
