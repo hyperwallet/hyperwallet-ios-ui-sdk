@@ -192,7 +192,7 @@ class CreateTransferTests: XCTestCase {
     func testCreateTransferSectionAddDestinationAccountData_validateProperties() {
         initializePresenter()
         let section = presenter.sectionData[2]
-        XCTAssertEqual(section.title, "DESTINATION", "Section title should be DESTINATION")
+        XCTAssertEqual(section.title, "TRANSFER TO", "Section title should be TRANSFER TO")
         XCTAssertEqual(section.rowCount, 1, "Section rowCount should be 1")
         XCTAssertEqual(section.createTransferSectionHeader, .destination, "Section type should be .destination")
         XCTAssertEqual(section.cellIdentifiers.count, 1, "Section cellIdentifiers.count should be 1")
@@ -204,7 +204,7 @@ class CreateTransferTests: XCTestCase {
     func testCreateTransferSectionDestinationData_validateProperties() {
         initializePresenter(transferMethodResult: .noContent)
         let section = presenter.sectionData[2]
-        XCTAssertEqual(section.title, "DESTINATION", "Section title should be DESTINATION")
+        XCTAssertEqual(section.title, "TRANSFER TO", "Section title should be TRANSFER TO")
         XCTAssertEqual(section.rowCount, 1, "Section rowCount should be 1")
         XCTAssertEqual(section.createTransferSectionHeader, .destination, "Section type should be .destination")
         XCTAssertEqual(section.cellIdentifiers.count, 1, "Section cellIdentifiers.count should be 1")
@@ -217,14 +217,10 @@ class CreateTransferTests: XCTestCase {
     func testCreateTransferSectionTransferAllData_validateProperties() {
         initializePresenter()
         let section = presenter.sectionData[1]
-        XCTAssertEqual(section.title, "TRANSFER", "Section title should be TRANSFER")
-        XCTAssertEqual(section.rowCount, 2, "Section rowCount should be 2")
+        XCTAssertEqual(section.rowCount, 1, "Section rowCount should be 1")
         XCTAssertEqual(section.createTransferSectionHeader, .transferAll, "Section type should be .transferAll")
-        XCTAssertEqual(section.cellIdentifiers.count, 2, "Section cellIdentifiers.count should be 2")
+        XCTAssertEqual(section.cellIdentifiers.count, 1, "Section cellIdentifiers.count should be 1")
         XCTAssertEqual(section.cellIdentifiers[0],
-                       "transferAmountCellIdentifier",
-                       "Section cellIdentifier should be transferAmountCellIdentifier")
-        XCTAssertEqual(section.cellIdentifiers[1],
                        "transferAllFundsCellIdentifier",
                        "Section cellIdentifier should be transferAllFundsCellIdentifier")
     }
@@ -232,7 +228,7 @@ class CreateTransferTests: XCTestCase {
     func testCreateTransferSectionButtonData_validateProperties() {
         initializePresenter()
         let section = presenter.sectionData[3]
-        XCTAssertEqual(section.title, "NOTES", "Section title should be NOTES")
+        XCTAssertEqual(section.title, "Note", "Section title should be Note")
         XCTAssertEqual(section.rowCount, 1, "Section rowCount should be 1")
         XCTAssertEqual(section.createTransferSectionHeader, .notes, "Section type should be .notes")
         XCTAssertEqual(section.cellIdentifiers.count, 1, "Section cellIdentifiers.count should be 1")
@@ -241,36 +237,41 @@ class CreateTransferTests: XCTestCase {
     func testCreateTransferSectionNotesData_validateProperties() {
         initializePresenter()
         let section = presenter.sectionData[3]
-        XCTAssertNil(section.title, "Section title should be Nil")
+        XCTAssertEqual(section.title, "Note", "Section title should be Note")
         XCTAssertEqual(section.rowCount, 1, "Section rowCount should be 1")
-        XCTAssertEqual(section.createTransferSectionHeader, .button, "Section type should be .button")
+        XCTAssertEqual(section.createTransferSectionHeader, .notes, "Section type should be .notes")
         XCTAssertEqual(section.cellIdentifiers.count, 1, "Section cellIdentifiers.count should be 1")
         XCTAssertEqual(section.cellIdentifiers[0],
-                       "transferButtonCellIdentifier",
-                       "Section cellIdentifier should be transferButtonCellIdentifier")
+                       "transferNotesCellIdentifier",
+                       "Section cellIdentifier should be transferNotesCellIdentifier")
     }
 
     func testIsTransferMaxAmount_selectedTransferMethodIsNil() {
         initializePresenter(transferMethodResult: .noContent)
-        XCTAssertFalse(mockView.isUpdateTransferSectionPerformed, "updateTransferSection should not be performed")
-        XCTAssertEqual(presenter.amount, "0",  "Amount should be 0")
+        XCTAssertFalse(mockView.isUpdateTransferAmountSectionPerformed,
+                       "updateTransferAmountSection should not be performed")
+        XCTAssertEqual(presenter.amount, "0", "Amount should be 0")
         XCTAssertNil(presenter.availableBalance, "availableBalance should be Nil")
-        XCTAssertTrue(mockView.isUpdateTransferSectionPerformed, "updateTransferSection should not be performed")
-        XCTAssertEqual(presenter.amount, "0",  "Amount should be 0")
+        XCTAssertFalse(mockView.isUpdateTransferAmountSectionPerformed,
+                       "updateTransferAmountSection should not be performed")
+        XCTAssertEqual(presenter.amount, "0", "Amount should be 0")
     }
 
     func testIsTransferMaxAmount_selectedTransferMethodIsNotNil() {
         initializePresenter()
-        XCTAssertFalse(mockView.isUpdateTransferSectionPerformed, "updateTransferSection should not be performed")
-        XCTAssertEqual(presenter.amount, "0",  "Amount should be 0")
+        XCTAssertFalse(mockView.isUpdateTransferAmountSectionPerformed,
+                       "updateTransferAmountSection should not be performed")
+        XCTAssertEqual(presenter.amount, "0", "Amount should be 0")
         XCTAssertEqual(presenter.availableBalance, "62.29", "availableBalance should be 62.29")
 
-        XCTAssertTrue(mockView.isUpdateTransferSectionPerformed, "updateTransferSection should be performed")
+        XCTAssertTrue(mockView.isUpdateTransferAmountSectionPerformed,
+                      "updateTransferAmountSection should be performed")
         XCTAssertEqual(presenter.amount, "62.29", "Amount should be 62.29")
 
-        mockView.isUpdateTransferSectionPerformed = false
-        XCTAssertTrue(mockView.isUpdateTransferSectionPerformed, "updateTransferSection should be performed")
-        XCTAssertEqual(presenter.amount, "0",  "Amount should be 0")
+        mockView.isUpdateTransferAmountSectionPerformed = false
+        XCTAssertTrue(mockView.isUpdateTransferAmountSectionPerformed,
+                      "updateTransferAmountSection should be performed")
+        XCTAssertEqual(presenter.amount, "0", "Amount should be 0")
     }
 
     func testDestinationCurrency_selectedTransferMethodIsNil() {
@@ -349,7 +350,7 @@ class MockCreateTransferView: CreateTransferView {
     var isShowGenericTableViewPerformed = false
     var isShowLoadingPerformed = false
     var isShowScheduleTransferPerformed = false
-    var isUpdateTransferSectionPerformed = false
+    var isUpdateTransferAmountSectionPerformed = false
     var isAreAllFieldsValidPerformed = false
     var isUpdateFooterPerformed = false
 
@@ -394,7 +395,7 @@ class MockCreateTransferView: CreateTransferView {
     }
 
     func updateTransferAmountSection() {
-        isUpdateTransferSectionPerformed = true
+        isUpdateTransferAmountSectionPerformed = true
     }
 
     func areAllFieldsValid() -> Bool {
@@ -415,7 +416,7 @@ class MockCreateTransferView: CreateTransferView {
         isShowGenericTableViewPerformed = false
         isShowLoadingPerformed = false
         isShowScheduleTransferPerformed = false
-        isUpdateTransferSectionPerformed = false
+        isUpdateTransferAmountSectionPerformed = false
         isAreAllFieldsValidPerformed = false
         isUpdateFooterPerformed = false
 
