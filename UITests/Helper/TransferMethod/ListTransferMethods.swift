@@ -46,4 +46,13 @@ class ListTransferMethod {
     func clickBackButton() {
         navigationBar.children(matching: .button).matching(identifier: "Back").element(boundBy: 0).tap()
     }
+
+    func verifyDestination(type: String, endingDigit: String) {
+//             XCTAssertTrue(addSelectDestinationSectionLabel.exists)
+//             XCTAssertEqual(addSelectDestinationLabel.label, type)
+//
+//             let destinationDetail = addSelectDestinationDetailLabel.label
+//             XCTAssertTrue(destinationDetail == "United States\nending in \(endingDigit)"
+//                 || destinationDetail == "United States ending in \(endingDigit)")
+         }
 }

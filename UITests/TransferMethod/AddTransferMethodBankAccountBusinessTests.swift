@@ -22,14 +22,15 @@ class AddTransferMethodBankAccountBusinessTests: BaseTests {
                              filename: "TransferMethodConfigurationBankAccountBusinessResponse",
                              method: HTTPMethod.post)
 
-        app.tables.cells.staticTexts["Add Transfer Method"].tap()
+        addTransferMethod = AddTransferMethod(app: app)
+        addTransferMethod.addTransferMethodtable.tap()
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
         addTransferMethod = AddTransferMethod(app: app)
     }
 
     func testAddTransferMethodBankAccountBusiness_displaysElementsOnBusinessProfileTmcResponse() {
-        XCTAssert(app.navigationBars["Bank Account"].exists)
+        XCTAssert(addTransferMethod.navBarBankAccount.exists)
 
         XCTAssert(addTransferMethod.addTransferMethodTableView
             .otherElements["ACCOUNT INFORMATION - UNITED STATES (USD)"].exists)

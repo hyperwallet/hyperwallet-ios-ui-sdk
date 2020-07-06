@@ -9,6 +9,9 @@ class AddTransferMethodBankCardTests: BaseTests {
         super.setUp()
 
         app = XCUIApplication()
+        selectTransferMethodType = SelectTransferMethodType(app: app)
+        addTransferMethod = AddTransferMethod(app: app)
+
         app.launchEnvironment = [
             "COUNTRY": "US",
             "CURRENCY": "USD",
@@ -24,7 +27,7 @@ class AddTransferMethodBankCardTests: BaseTests {
         app.tables.cells.staticTexts["Add Transfer Method"].tap()
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
-        addTransferMethod = AddTransferMethod(app: app)
+
         if #available(iOS 13.0, *) {
             elementQuery = app.tables["addTransferMethodTable"].buttons
         } else {
@@ -33,7 +36,7 @@ class AddTransferMethodBankCardTests: BaseTests {
     }
 
     func testAddTransferMethod_displaysElementsOnTmcResponse() {
-        XCTAssert(app.navigationBars["Debit Card"].exists)
+        XCTAssert(addTransferMethod.navBarDebitCard.exists)
 
         XCTAssert(addTransferMethod.addTransferMethodTableView
             .staticTexts["Account Information - United States (USD)"].exists)

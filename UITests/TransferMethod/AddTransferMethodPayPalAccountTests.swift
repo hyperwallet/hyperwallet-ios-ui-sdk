@@ -24,6 +24,7 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
         app.tables.cells.staticTexts["Add Transfer Method"].tap()
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
+        selectTransferMethodType = SelectTransferMethodType(app: app)
         addTransferMethod = AddTransferMethod(app: app)
         if #available(iOS 13.0, *) {
             elementQuery = app.tables["addTransferMethodTable"].buttons
@@ -33,7 +34,7 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
     }
 
     func testAddTransferMethod_displaysElementsOnTmcResponse() {
-        XCTAssert(app.navigationBars["PayPal"].exists)
+        XCTAssert(addTransferMethod.navBarPaypal.exists)
 
         XCTAssert(addTransferMethod.addTransferMethodTableView
             .staticTexts["Account Information - United States (USD)"].exists)

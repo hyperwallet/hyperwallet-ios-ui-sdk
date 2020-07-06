@@ -7,13 +7,15 @@ class TransferFundsSelectDestination {
     var addTransferMethodButton: XCUIElement
     var destination: XCUIElement
     var destinationDetail: XCUIElement
+    let destinationCellTitle = "transferDestinationTitleLabel"
+    let destinationCellSubtitle = "transferDestinationSubtitleLabel"
 
     init(app: XCUIApplication) {
         self.app = app
         selectDestinationTitle = app.navigationBars["Select Destination"]
-        addTransferMethodButton = app.navigationBars["Select Destination"].buttons["Add"]
-        destination = app.tables.staticTexts["transferDestinationTitleLabel"]
-        destinationDetail = app.tables.staticTexts["transferDestinationTitleLabel"]
+        addTransferMethodButton = selectDestinationTitle.buttons["Add"]
+        destination = app.tables.staticTexts[destinationCellTitle]
+        destinationDetail = app.tables.staticTexts[destinationCellSubtitle]
     }
 
     func clickBackButton() {
@@ -22,11 +24,11 @@ class TransferFundsSelectDestination {
 
     func getSelectDestinationRowTitle(index: Int) -> String {
         let row = app.tables.element.children(matching: .cell).element(boundBy: index)
-        return row.staticTexts["transferDestinationTitleLabel"].label
+        return row.staticTexts[destinationCellTitle].label
     }
 
     func getSelectDestinationRowDetail(index: Int) -> String {
         let row = app.tables.element.children(matching: .cell).element(boundBy: index)
-        return row.staticTexts["transferDestinationSubtitleLabel"].label
+        return row.staticTexts[destinationCellSubtitle].label
     }
 }

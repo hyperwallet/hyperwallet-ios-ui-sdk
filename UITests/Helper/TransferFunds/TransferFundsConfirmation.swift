@@ -50,9 +50,12 @@ class TransferFundsConfirmation {
 
     var scheduleTable: XCUIElement
 
+    let confirmButtonAccessbility = "scheduleTransferLabel"
+    let tableAccessibility = "scheduleTransferTableView"
+
     init(app: XCUIApplication) {
         self.app = app
-        scheduleTable = app.tables["scheduleTransferTableView"]
+        scheduleTable = app.tables[tableAccessibility]
 
         tranferToSectionLabel = scheduleTable.staticTexts["mobileTransferToLabel".localized()]
         transferDestinationLabel = scheduleTable.staticTexts["transferDestinationTitleLabel"]
@@ -79,9 +82,9 @@ class TransferFundsConfirmation {
         foreignExchangeRateLabel = "mobileFXRateLabel".localized()
 
         if #available(iOS 13.0, *) {
-            confirmButton = scheduleTable.buttons["scheduleTransferLabel"]
+            confirmButton = scheduleTable.buttons[confirmButtonAccessbility]
         } else {
-            confirmButton = scheduleTable.staticTexts["scheduleTransferLabel"]
+            confirmButton = scheduleTable.staticTexts[confirmButtonAccessbility]
         }
     }
 
@@ -99,11 +102,11 @@ class TransferFundsConfirmation {
     }
 
     func tapConfirmButton() {
-        if #available(iOS 13.0, *) {
-            confirmButton = scheduleTable.buttons["scheduleTransferLabel"]
-        } else {
-            confirmButton = scheduleTable.staticTexts["scheduleTransferLabel"]
-        }
+//        if #available(iOS 13.0, *) {
+//            confirmButton = scheduleTable.buttons[confirmButtonAccessbility]
+//        } else {
+//            confirmButton = scheduleTable.staticTexts[confirmButtonAccessbility]
+//        }
 
         app.scroll(to: confirmButton)
         XCTAssertTrue(confirmButton.exists)
