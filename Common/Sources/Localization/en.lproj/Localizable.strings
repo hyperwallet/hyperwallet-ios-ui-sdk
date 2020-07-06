@@ -40,6 +40,8 @@
 "mobileAddTransferMethodHeader" = "Add a transfer method";
 "mobileCountryCurrencyLabel" = "LOCATION AND CURRENCY";
 "mobileTransferMethodLabel" = "TRANSFER METHOD";
+"mobileCountryRegion" = "Country/Region";
+"mobileCurrencyLabel" = "Currency";
 "remove_transfer_method_confirmation_title" = "Remove Account";
 "remove_transfer_method_confirmation_message" = "Are you sure you want to remove this account?";
 "fee_flat_formatter" = "%1$@ %2$@";
