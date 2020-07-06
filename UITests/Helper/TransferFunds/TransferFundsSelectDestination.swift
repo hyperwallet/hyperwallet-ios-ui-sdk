@@ -12,14 +12,14 @@ class TransferFundsSelectDestination {
 
     init(app: XCUIApplication) {
         self.app = app
-        selectDestinationTitle = app.navigationBars["Select Destination"]
+        selectDestinationTitle = app.navigationBars["mobileTransferMethodsHeader".localized()]
         addTransferMethodButton = selectDestinationTitle.buttons["Add"]
         destination = app.tables.staticTexts[destinationCellTitle]
         destinationDetail = app.tables.staticTexts[destinationCellSubtitle]
     }
 
     func clickBackButton() {
-        app.navigationBars.buttons["Back"].tap()
+        app.navigationBars.buttons["Back".localized()].tap()
     }
 
     func getSelectDestinationRowTitle(index: Int) -> String {

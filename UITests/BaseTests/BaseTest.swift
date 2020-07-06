@@ -15,17 +15,17 @@ class BaseTests: XCTestCase {
 
     public struct TransferMethods {
          // Transfer methods
-         static let bankAccount = "bankAccount".localized()
-         static let debitCard = "bank_card".localized()
-         static let paperCheck = "paper_check".localized()
-         static let prepaidCard = "prepaid_card".localized()
-         static let wireTransfer = "bank_account_wire".localized()
-         static let paypal = "paypal_account".localized()
+         static let bankAccount = "Bank Account"
+         static let debitCard = "Debit Card"
+         static let paperCheck = "Paper Check"
+         static let prepaidCard = "Prepaid Card"
+         static let wireTransfer = "Wire Transfer"
+         static let paypal = "PayPal"
      }
 
     public struct Common {
          // Navigation Bar
-         static let navBackButton = "Back"
+        static let navBackButton = "Back".localized()
      }
 
     override func setUp() {
@@ -60,5 +60,9 @@ class BaseTests: XCTestCase {
         XCTAssert(alert.staticTexts[message].exists)
         alert.buttons[Dialog.done].tap()
         XCTAssertFalse(alert.exists)
+    }
+
+    func clickBackButton() {
+        app.navigationBars.buttons[Common.navBackButton].tap()
     }
 }
