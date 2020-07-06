@@ -215,6 +215,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
     }
 
+    /*
     func testTransferFundsConfirmation_verifySummaryWithNoFee() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListMoreThanOneTransferMethod",
@@ -253,7 +254,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         let button = transferFundsConfirmation.scheduleTable.buttons["scheduleTransferLabel"]
         app.scroll(to: button)
         XCTAssertTrue(button.exists)
-    }
+    } */
 
     func testTransferFundsConfirmation_FxChanged() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",

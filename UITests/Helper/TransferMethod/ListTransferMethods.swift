@@ -56,12 +56,13 @@ class ListTransferMethod {
     }
 
     func getTransferMethodLabel(endingDigits: String) -> String {
+          // "ending in " already has a space!
           let endingIn = "endingIn".localized()
           let expectedLabel: String = {
                 if #available(iOS 11.2, *) {
-                    return "United States\n\(endingIn) \(endingDigits)"
+                    return "United States\n\(endingIn)\(endingDigits)"
                 } else {
-                    return "United States \(endingIn) \(endingDigits)"
+                    return "United States \(endingIn)\(endingDigits)"
                 }
           }()
 
@@ -69,12 +70,12 @@ class ListTransferMethod {
       }
 
     func getTransferMethodPayalLabel(email: String) -> String {
-          let endingIn = "endingIn".localized()
+          let toLabel = "to".localized()
           let expectedLabel: String = {
                 if #available(iOS 11.2, *) {
-                    return "United States\nto\(endingIn) \(email)"
+                    return "United States\n\(toLabel)\(email)"
                 } else {
-                    return "United States to \(endingIn) \(email)"
+                    return "United States \(toLabel)\(email)"
                 }
           }()
 
