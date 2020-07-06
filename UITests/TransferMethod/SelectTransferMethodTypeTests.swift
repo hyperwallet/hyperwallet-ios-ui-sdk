@@ -30,7 +30,7 @@ class SelectTransferMethodTypeTests: BaseTests {
 
     func testSelectTransferMethodType_validateTransferMethodScreen() {
         XCTAssertNotNil(app.cells.images)
-        XCTAssertTrue(app.navigationBars["Add Account"].exists)
+        XCTAssertTrue(app.navigationBars["mobileAddTransferMethodHeader".localized()].exists)
         XCTAssertTrue(app.tables.staticTexts["United States"].exists)
         XCTAssertTrue(app.tables.staticTexts["USD"].exists)
         XCTAssertEqual(app.tables["selectTransferMethodTypeTable"].cells.count, 6)

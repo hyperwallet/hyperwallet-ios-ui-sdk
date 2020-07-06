@@ -378,11 +378,6 @@ On the Theme is possible to customize the properties:
 | `Theme.Text.font` | `UIFont.preferredFont(forTextStyle: .body)` | The text font style |
 | `Theme.Text.color` | `Theme.Label.color` | The text primary color |
 | `Theme.Text.disabledColor` | `Theme.Label.textColor` | The text disabled color |
-| `Theme.SearchBar.style` | `UISearchBar.Style.default` | The `UISearchBar` style |
-| `Theme.SearchBar.barStyle` | `UIBarStyle.default` | The `UISearchBar` bar style |
-| `Theme.SearchBar.searchIconColor` | `UIColor.white` | The `UISearchBar` search icon color |
-| `Theme.SearchBar.textFieldTintColor` | `UIColor.white` | The `UITextField` tint color |
-| `Theme.SearchBar.textFieldBackgroundColor` | `0x28BBD7` | The `UITextField` background color |
 | `Theme.Cell.smallHeight` | `61` | The common ``UITableViewCell`` height. |
 | `Theme.Cell.height` | `80` | The common ``UITableViewCell`` height. |
 | `Theme.Cell.largeHeight` | `88` | The `UITableViewCell` height for the List transfer method items and the Select transfer method type items. |

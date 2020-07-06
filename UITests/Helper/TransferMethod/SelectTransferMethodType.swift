@@ -20,7 +20,7 @@ class SelectTransferMethodType {
         countryTable = app.otherElements.containing(.navigationBar, identifier: "Select Country").element
         currencyTable = app.otherElements.containing(.navigationBar, identifier: "Select Currency").element
         searchBar = app.searchFields["search"]
-        navigationBar = app.navigationBars["Add Account"]
+        navigationBar = app.navigationBars["mobileAddTransferMethodHeader".localized()]
     }
 
     func tapCountry() {

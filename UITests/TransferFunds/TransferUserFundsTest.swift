@@ -630,7 +630,6 @@ class TransferUserFundsTest: BaseTests {
     }
 
     // MARK: Add Transfer Method Tests
-    //swiftlint:disable function_body_length
     func testTransferFunds_addTransferMethodWhenNoTransferMethods() {
         mockServer.setUpEmptyResponse(url: "/rest/v3/users/usr-token/transfer-methods")
         mockServer.setupStub(url: "/rest/v3/transfers",
@@ -651,8 +650,8 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Add transfer method".localized())
         transferFunds.addSelectDestinationLabel.tap()
 
-        // Assert Add Account View
-        XCTAssertTrue(app.navigationBars["Add Account"].exists)
+        // Assert Add a transfer method View
+        XCTAssertTrue(app.navigationBars["mobileAddTransferMethodHeader".localized()].exists)
         XCTAssertTrue(app.tables.staticTexts["United States"].exists)
         XCTAssertTrue(app.tables.staticTexts["USD"].exists)
 
@@ -691,7 +690,6 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), expectedUSDestinationLabel + "2345")
     }
 
-    //swiftlint:disable function_body_length
     // will fix later
     /*
     func testTransferFunds_addBankAccountWhenMoreThanOneTransferMethods() {
@@ -730,8 +728,8 @@ class TransferUserFundsTest: BaseTests {
                              filename: "BankAccountIndividualResponse",
                              method: HTTPMethod.post)
         selectDestination.addTransferMethodButton.tap()
-        // Assert Add Account View
-        XCTAssertTrue(app.navigationBars["Add Account"].exists)
+        // Assert Add a transfer method View
+        XCTAssertTrue(app.navigationBars["mobileAddTransferMethodHeader".localized()].exists)
         XCTAssertTrue(app.tables.staticTexts["United States"].exists)
         XCTAssertTrue(app.tables.staticTexts["USD"].exists)
 

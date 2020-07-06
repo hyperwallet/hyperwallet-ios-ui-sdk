@@ -31,26 +31,15 @@ public extension HyperwalletTransferMethodType {
         let attributedText = NSMutableAttributedString()
         // Fees
         if let fees = self.fees?.nodes {
-            let feeLabel = "add_transfer_method_fee_label".localized()
-
-            attributedText.append(value: feeLabel, font: font, color: color)
-            attributedText.append(value: HyperwalletFee.format(fees: fees),
-                                  font: font,
-                                  color: color)
+            attributedText.append(value: HyperwalletFee.format(fees: fees), font: font, color: color)
         }
 
         // Processing Time
         if let processingTimeValue = self.processingTimes?.nodes?.first?.value, !processingTimeValue.isEmpty {
-            var processingTimeLabel = ""
-
             if attributedText.length > 0 {
-                processingTimeLabel = "\n"
+                let bulletSymbol = " \u{2022} "
+                attributedText.append(value: bulletSymbol, font: font, color: color)
             }
-            processingTimeLabel = String(format: "%@%@",
-                                         processingTimeLabel,
-                                         "add_transfer_method_processing_time_label".localized())
-
-            attributedText.append(value: processingTimeLabel, font: font, color: color)
             attributedText.append(value: processingTimeValue, font: font, color: color)
         }
 

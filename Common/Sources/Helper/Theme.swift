@@ -94,20 +94,6 @@ public class Theme: NSObject {
         public static var font = UIFont.preferredFont(forTextStyle: .body)
     }
 
-    /// Representation of all customizable visual style property for `UISearchBar`.
-    public struct SearchBar {
-        /// The `UISearchBar`style
-        public static var style = UISearchBar.Style.default
-        /// The `UISearchBar`bar style
-        public static var barStyle = UIBarStyle.default
-        /// The `UISearchBar` tint color
-        public static var textFieldTintColor = Theme.tintColor
-        /// The `UISearchBar` search icon color
-        public static var searchIconColor = Theme.tintColor
-        /// The `UITextField` background color.
-        public static var textFieldBackgroundColor = UIColor(rgb: 0x28BBD7)
-    }
-
    /// Representation of all customizable visual style property for `UITableViewCell`
     public struct Cell {
         /// The common `UITableViewCell` height.

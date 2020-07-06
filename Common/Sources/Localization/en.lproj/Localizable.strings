@@ -37,7 +37,9 @@
 "no_transfer_method_available_error_message" = "There is no transfer method available for %1$@ and %2$@";
 "no_currency_available_error_message" = "There is no currency available for country %1$@";
 "empty_list_transfer_method_message" = "You didn’t add an account yet. Once created, it will show up here!";
-"add_account_title" = "Add Account";
+"mobileAddTransferMethodHeader" = "Add a transfer method";
+"mobileCountryCurrencyLabel" = "LOCATION AND CURRENCY";
+"mobileTransferMethodLabel" = "TRANSFER METHOD";
 "remove_transfer_method_confirmation_title" = "Remove Account";
 "remove_transfer_method_confirmation_message" = "Are you sure you want to remove this account?";
 "fee_flat_formatter" = "%1$@ %2$@";

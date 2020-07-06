@@ -16,7 +16,7 @@ class ListTransferMethod {
         self.app = app
 
         addTransferMethodButton = app.navigationBars.buttons["Add"]
-        addTransferMethodEmptyScreenButton = app.buttons["Add Account"]
+        addTransferMethodEmptyScreenButton = app.buttons["mobileAddTransferMethodHeader".localized()]
         removeAccountButton = app.buttons["Remove Account"]
         confirmAccountRemoveButton = app.alerts["Remove Account"].buttons["Remove"]
         cancelAccountRemoveButton = app.alerts["Remove Account"].buttons["Cancel"]

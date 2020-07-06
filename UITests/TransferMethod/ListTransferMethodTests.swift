@@ -119,7 +119,7 @@ class ListTransferMethodTests: BaseTests {
         openTransferMethodsList()
         listTransferMethod.tapAddTransferMethodEmptyScreenButton()
 
-        XCTAssertTrue(app.navigationBars["Add Account"].exists)
+        XCTAssertTrue(app.navigationBars["mobileAddTransferMethodHeader".localized()].exists)
     }
 
     func testListTransferMethod_addTransferMethod() {
@@ -130,7 +130,7 @@ class ListTransferMethodTests: BaseTests {
         openTransferMethodsList()
         listTransferMethod.tapAddTransferMethodButton()
 
-        XCTAssertTrue(app.navigationBars["Add Account"].exists)
+        XCTAssertTrue(app.navigationBars["mobileAddTransferMethodHeader".localized()].exists)
     }
 
     func testListTransferMethod_openDeleteTransferMethodActionSheet() {
