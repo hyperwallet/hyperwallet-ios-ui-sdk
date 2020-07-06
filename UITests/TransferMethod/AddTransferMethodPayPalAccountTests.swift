@@ -108,7 +108,7 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
             "label CONTAINS[c] 'The account information you provided is already registered'")
         XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
         XCTAssertTrue(app.navigationBars["PayPal"].exists)
-        app.alerts["Error"].buttons["OK"].tap()
+        app.alerts["Error"].buttons[Dialog.done].tap()
         XCTAssertTrue(app.navigationBars["PayPal"].exists)
     }
 }

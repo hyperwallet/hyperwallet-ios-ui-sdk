@@ -11,16 +11,24 @@ class ListTransferMethod {
     var confirmAccountRemoveButton: XCUIElement
     var cancelAccountRemoveButton: XCUIElement
     var navigationBar: XCUIElement
+    let removeAccountTitle = "remove_transfer_method_confirmation_title".localized()
+    let removeAccountMessage = "remove_transfer_method_confirmation_message".localized()
+    let addAccountTitle = "add_account_title".localized()
+    let title = "title_accounts".localized()
+    let removeButtonLabel = "remove_button_label".localized()
+    let cancelButtonLabel = "cancel_button_label".localized()
+    var alert: XCUIElement
 
     init(app: XCUIApplication) {
         self.app = app
 
         addTransferMethodButton = app.navigationBars.buttons["Add"]
-        addTransferMethodEmptyScreenButton = app.buttons["Add Account"]
-        removeAccountButton = app.buttons["Remove Account"]
-        confirmAccountRemoveButton = app.alerts["Remove Account"].buttons["Remove"]
-        cancelAccountRemoveButton = app.alerts["Remove Account"].buttons["Cancel"]
-        navigationBar = app.navigationBars["Accounts"]
+        addTransferMethodEmptyScreenButton = app.buttons[addAccountTitle]
+        removeAccountButton = app.buttons[removeAccountTitle]
+        alert = app.alerts[removeAccountTitle]
+        confirmAccountRemoveButton = alert.buttons[removeButtonLabel]
+        cancelAccountRemoveButton = alert.buttons[cancelButtonLabel]
+        navigationBar = app.navigationBars[title]
     }
 
     func tapAddTransferMethodButton() {
@@ -46,4 +54,30 @@ class ListTransferMethod {
     func clickBackButton() {
         navigationBar.children(matching: .button).matching(identifier: "Back").element(boundBy: 0).tap()
     }
+
+    func getTransferMethodLabel(endingDigits: String) -> String {
+          let endingIn = "endingIn".localized()
+          let expectedLabel: String = {
+                if #available(iOS 11.2, *) {
+                    return "United States\n\(endingIn) \(endingDigits)"
+                } else {
+                    return "United States \(endingIn) \(endingDigits)"
+                }
+          }()
+
+          return expectedLabel
+      }
+
+    func getTransferMethodPayalLabel(email: String) -> String {
+          let endingIn = "endingIn".localized()
+          let expectedLabel: String = {
+                if #available(iOS 11.2, *) {
+                    return "United States\nto\(endingIn) \(email)"
+                } else {
+                    return "United States to \(endingIn) \(email)"
+                }
+          }()
+
+          return expectedLabel
+      }
 }
