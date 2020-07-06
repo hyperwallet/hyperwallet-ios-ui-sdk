@@ -48,10 +48,6 @@ class BaseTests: XCTestCase {
         UIView.setAnimationsEnabled(false)
     }
 
-    override func tearDown() {
-        mockServer.tearDown()
-    }
-
     func verifyUnexpectedError() {
         let title = "unexpected_title".localized()
         let message = "unexpected_error_message".localized()
@@ -65,4 +61,9 @@ class BaseTests: XCTestCase {
     func clickBackButton() {
         app.navigationBars.buttons[Common.navBackButton].tap()
     }
+
+    override func tearDown() {
+        mockServer.tearDown()
+    }
+
 }

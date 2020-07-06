@@ -78,9 +78,9 @@ class AddTransferMethod {
         self.app = app
 
         navBar = app.navigationBars[title]
-        navBarBankAccount = app.navigationBars["bankAccount".localized()]
+        navBarBankAccount = app.navigationBars["bank_account".localized()]
         navBarDebitCard = app.navigationBars["bank_card".localized()]
-        navBarWireAccount = app.navigationBars["bank_account_wire".localized()]
+        navBarWireAccount = app.navigationBars["wire_account".localized()]
         navBarPaypal = app.navigationBars["paypal_account".localized()]
         addTransferMethodtable = app.tables.cells.staticTexts["Add Transfer Method"]
         addTransferMethodTableView = app.tables["addTransferMethodTable"]
