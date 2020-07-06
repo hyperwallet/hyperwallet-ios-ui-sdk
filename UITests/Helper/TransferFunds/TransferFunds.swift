@@ -37,7 +37,7 @@ class TransferFunds {
 
     var nextLabel: XCUIElement
 
-    var createTable: XCUIElement
+    var transferFundsTable: XCUIElement
 
     var invalidAmountError: XCUIElement
 
@@ -45,45 +45,45 @@ class TransferFunds {
 
     var noteLabel: String
 
+    let title = "Transfer funds"
+    let mobileTransferFundsHeader =  "mobileTransferFundsHeader".localized()
+    let mobileConfirmationHeader = "mobileConfirmationHeader".localized()
+    let mobileTransferToLabel = "mobileTransferToLabel".localized()
+    let mobileNoteLabel = "mobileNoteLabel".localized()
+    let continueButtonLabel = "continueButtonLabel".localized()
+    let transferAmountInvalid = "transferAmountInvalid".localized()
+    let noTransferMethodAdded = "noTransferMethodAdded".localized()
+
     init(app: XCUIApplication) {
         self.app = app
-        let title = "Transfer funds"
         transferFundTitle = app.navigationBars[title].staticTexts[title]
-        createTable = app.tables["createTransferTableView"]
+        transferFundsTable = app.tables["createTransferTableView"]
 
         // ERROR
-        invalidAmountError = createTable.staticTexts["transferAmountInvalid".localized()]
-        transferMethodRequireError = createTable.staticTexts["noTransferMethodAdded".localized()]
+        invalidAmountError = transferFundsTable.staticTexts["transferAmountInvalid".localized()]
+        transferMethodRequireError = transferFundsTable.staticTexts["noTransferMethodAdded".localized()]
 
         // "DESTINATIONS"
-        addSelectDestinationSectionLabel = createTable
-            .staticTexts["mobileTransferToLabel".localized()]
-        addSelectDestinationLabel = createTable.staticTexts["transferDestinationTitleLabel"]
+        addSelectDestinationSectionLabel = transferFundsTable
+            .staticTexts[mobileTransferToLabel]
+        addSelectDestinationLabel = transferFundsTable.staticTexts["transferDestinationTitleLabel"]
         addSelectDestinationPlaceholderString = ""
-        addSelectDestinationDetailLabel = createTable.staticTexts["transferDestinationSubtitleLabel"]
-        transferSectionLabel = createTable
-            .staticTexts.containing(.staticText, identifier: "TRANSFER TO")
-            .element(matching: NSPredicate(format: "label CONTAINS[c] 'TRANSFER'"))
-        transferAmountLabel = createTable.staticTexts["transferAmountTitleLabel"]
-        transferAmount = createTable.textFields["transferAmountTextField"]
-        transferCurrency = createTable.textFields["transferAmountCurrencyLabel"]
-        transferAllFundsLabel = createTable.staticTexts["transferAllFundsTitleLabel"]
-        transferMaxAllFunds = createTable.buttons["transferMaxAmountTitleLabel"]
-        notesSectionLabel = createTable
-            .staticTexts.containing(.staticText, identifier: "NOTES")
-            .element(matching: NSPredicate(format: "label CONTAINS[c] 'NOTES'"))
-        notesSectionLabel = createTable.staticTexts["Note"]
+        addSelectDestinationDetailLabel = transferFundsTable.staticTexts["transferDestinationSubtitleLabel"]
+
+        transferSectionLabel = transferFundsTable.staticTexts[mobileTransferToLabel]
+        transferAmountLabel = transferFundsTable.staticTexts["transferAmountTitleLabel"]
+        transferAmount = transferFundsTable.textFields["transferAmountTextField"]
+        transferCurrency = transferFundsTable.textFields["transferAmountCurrencyLabel"]
+        transferAllFundsLabel = transferFundsTable.staticTexts["transferAllFundsTitleLabel"]
+        transferMaxAllFunds = transferFundsTable.buttons["transferMaxAmountTitleLabel"]
+
+        notesSectionLabel = transferFundsTable.staticTexts[mobileNoteLabel]
         noteLabel = "mobileConfirmNotesLabel".localized()
+        notesDescriptionTextField = transferFundsTable.textFields["transferNotesTextField"]
+        notesDescriptionOptionLabel = transferFundsTable.staticTexts["receiptTransactionTypeLabel"]
 
-        //notesPlaceHolderString = "transfer_description".localized()
-        notesDescriptionTextField = createTable.textFields["transferNotesTextField"]
-        notesDescriptionOptionLabel = createTable.staticTexts["receiptTransactionTypeLabel"]
-        availableBalance = createTable.staticTexts["available_balance_footer"]
-        nextLabel = createTable.buttons["scheduleTransferLabel"]
-    }
-
-    func tabTransferMaxFunds() {
-        // transferMaxAllFunds.tap()
+        availableBalance = transferFundsTable.staticTexts["available_balance_footer"]
+        nextLabel = transferFundsTable.buttons["scheduleTransferLabel"]
     }
 
     func enterNotes(description: String) {
@@ -109,7 +109,7 @@ class TransferFunds {
           if #available(iOS 11.4, *) {
               XCTAssertTrue(transferFundTitle.exists)
           } else {
-              XCTAssertTrue(app.navigationBars["Transfer funds"].exists)
+              XCTAssertTrue(app.navigationBars[title].exists)
           }
       }
 

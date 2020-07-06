@@ -22,10 +22,11 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
                              filename: "TransferMethodConfigurationBankAccountResponse",
                              method: HTTPMethod.post)
 
-        app.tables.cells.staticTexts["Add Transfer Method"].tap()
+        addTransferMethod = AddTransferMethod(app: app)
+
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
-        addTransferMethod = AddTransferMethod(app: app)
+        addTransferMethod.addTransferMethodtable.tap()
         if #available(iOS 13.0, *) {
             elementQuery = app.tables["addTransferMethodTable"].buttons
         } else {
@@ -34,7 +35,7 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
     }
 
     func testAddTransferMethod_displaysElementsOnTmcResponse() {
-        XCTAssert(app.navigationBars["Bank Account"].exists)
+        XCTAssert(addTransferMethod.navBarBankAccount.exists)
 
         verifyAccountInformationSection()
         verifyIndividualAccountHolderSection()
@@ -142,13 +143,10 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
         addTransferMethod.clickCreateTransferMethodButton()
         waitForNonExistence(spinner)
 
-        XCTAssert(app.alerts["Unexpected Error"].exists)
-        XCTAssert(app.alerts["Unexpected Error"].staticTexts["Oops... Something went wrong, please try again"].exists)
-        app.alerts["Unexpected Error"].buttons["OK"].tap()
-        XCTAssertFalse(app.alerts["Unexpected Error"].exists)
+        verifyUnexpectedError()
 
-        waitForExistence(app.navigationBars["Account Settings"])
-        XCTAssertTrue(app.navigationBars["Account Settings"].exists)
+        waitForExistence(addTransferMethod.navBar)
+        XCTAssertTrue(addTransferMethod.navBar.exists)
     }
 }
 

@@ -5,12 +5,11 @@ class ListTransferMethodTests: BaseTests {
     var selectTransferMethodType: SelectTransferMethodType!
     var addTransferMethod: AddTransferMethod!
     var loadingSpinner: XCUIElement!
-
-    let debitCard = NSPredicate(format: "label CONTAINS[c] 'Debit Card'")
-    let bankAccount = NSPredicate(format: "label CONTAINS[c] 'Bank Account'")
-    let bankAccountTitle = "Bank Account"
-    let debitCardTitle = "Debit Card"
-    let payPalAccountTitle = "PayPal"
+    let bankAccountTitle = TransferMethods.bankAccount
+    let debitCardTitle = TransferMethods.debitCard
+    let payPalAccountTitle = TransferMethods.paypal
+    var debitCard: NSPredicate!
+    var bankAccount: NSPredicate!
 
     var expectedFirstBankAccountLabel: String = {
         if #available(iOS 11.2, *) {
@@ -86,6 +85,8 @@ class ListTransferMethodTests: BaseTests {
         listTransferMethod = ListTransferMethod(app: app)
         selectTransferMethodType = SelectTransferMethodType(app: app)
         addTransferMethod = AddTransferMethod(app: app)
+        debitCard = NSPredicate(format: "label CONTAINS[c] \(debitCardTitle)")
+        bankAccount = NSPredicate(format: "label CONTAINS[c] \(bankAccountTitle)")
     }
 
     func testListTransferMethod_emptyTransferMethodsList() {
@@ -313,14 +314,13 @@ class ListTransferMethodTests: BaseTests {
         listTransferMethod.tapConfirmAccountRemoveButton()
         waitForNonExistence(spinner)
 
-        XCTAssert(app.alerts["Unexpected Error"].exists)
-
-        app.alerts["Unexpected Error"].buttons["OK"].tap()
-        XCTAssertFalse(app.alerts["Unexpected Error"].exists)
+        verifyUnexpectedError()
 
         waitForNonExistence(spinner)
 
-        XCTAssertTrue(app.navigationBars["Account Settings"].exists)
+        addTransferMethod.navBar.exists
+
+        XCTAssertTrue(addTransferMethod.navBar.exists)
     }
 
     private func openTransferMethodsList() {

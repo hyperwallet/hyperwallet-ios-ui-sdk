@@ -310,33 +310,35 @@ class TransferUserFundsTest: BaseTests {
         transferFundMenu.tap()
         waitForNonExistence(spinner)
 
-        transferFunds.verifyBankAccountDestination(type: "Bank Account", endingDigit: "1234")
+        transferFunds.verifyBankAccountDestination(type: TransferMethods.bankAccount, endingDigit: "1234")
         transferFunds.addSelectDestinationLabel.tap()
 
-//        let usdBankAccount = app.tables.element.children(matching: .cell).element(boundBy: 0)
-//        let cadBankAccount = app.tables.element.children(matching: .cell).element(boundBy: 1)
-//        let prepaidCard = app.tables.element.children(matching: .cell).element(boundBy: 2)
-//        XCTAssertTrue(selectDestination.selectDestinationTitle.exists)
-//        XCTAssertTrue(selectDestination.addTransferMethodButton.exists)
+        let usdBankAccount = app.tables.element.children(matching: .cell).element(boundBy: 0)
+        let cadBankAccount = app.tables.element.children(matching: .cell).element(boundBy: 1)
+        let prepaidCard = app.tables.element.children(matching: .cell).element(boundBy: 2)
+
+        XCTAssertTrue(selectDestination.selectDestinationTitle.exists)
+        XCTAssertTrue(selectDestination.addTransferMethodButton.exists)
 
         waitForNonExistence(spinner)
 
-        XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 0), "Bank Account")
+        XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 0), TransferMethods.bankAccount)
         XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), expectedUSDestinationLabel + "1234")
 
-        XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 1), "Bank Account")
+        XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 1), TransferMethods.bankAccount)
         XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 1), expectedCanadaDestinationLabel)
 
-        XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 2), "Prepaid Card")
+        XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 2), TransferMethods.prepaidCard)
         XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 2), expectedUSDestinationLabel + "4281")
 
         // Assert first row is checked by default
-//        assertButtonTrue(element: usdBankAccount)
-//        assertButtonFalse(element: cadBankAccount)
-//        assertButtonFalse(element: prepaidCard)
+        assertButtonTrue(element: usdBankAccount)
+        assertButtonFalse(element: cadBankAccount)
+        assertButtonFalse(element: prepaidCard)
 
         // Assert can go back to previous page
-        selectDestination.clickBackButton()
+        //selectDestination.clickBackButton()
+        clickBackButton()
         transferFunds.verifyTransferFundsTitle()
     }
 
