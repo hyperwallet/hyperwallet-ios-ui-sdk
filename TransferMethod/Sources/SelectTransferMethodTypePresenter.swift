@@ -133,8 +133,10 @@ final class SelectTransferMethodTypePresenter {
                                 strongSelf.view?.showAlert(message: "no_country_available_error_message".localized())
                                 return
                             }
-                            strongSelf.countryCurrencySectionData = ["mobileCountryRegion".localized(),
-                                                                     "mobileCurrencyLabel".localized()]
+                            strongSelf.countryCurrencySectionData = [
+                                "mobileCountryRegion".localized(),
+                                "mobileCurrencyLabel".localized()
+                            ]
                             strongSelf.loadSelectedCountry(countries, with: user?.country)
                             strongSelf.loadCurrency(result)
                             strongSelf.loadTransferMethodTypes(result)

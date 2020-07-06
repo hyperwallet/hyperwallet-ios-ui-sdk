@@ -65,5 +65,4 @@ class BaseTests: XCTestCase {
     override func tearDown() {
         mockServer.tearDown()
     }
-
 }
