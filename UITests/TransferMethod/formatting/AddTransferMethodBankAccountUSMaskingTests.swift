@@ -3,7 +3,7 @@ import XCTest
 class AddTransferMethodMaskingTest: BaseTests {
     var selectTransferMethodType: SelectTransferMethodType!
     var addTransferMethod: AddTransferMethod!
-    let bankAccount = "bankAccount".localized()
+    let bankAccount = "bank_account".localized()
     override func setUp() {
            super.setUp()
 

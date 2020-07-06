@@ -15,11 +15,11 @@ class BaseTests: XCTestCase {
 
     public struct TransferMethods {
          // Transfer methods
-         static let bankAccount = "bankAccount".localized()
+         static let bankAccount = "bank_account".localized()
          static let debitCard = "bank_card".localized()
          static let paperCheck = "paper_check".localized()
          static let prepaidCard = "prepaid_card".localized()
-         static let wireTransfer = "bank_account_wire".localized()
+         static let wireTransfer = "wire_account".localized()
          static let paypal = "paypal_account".localized()
      }
 

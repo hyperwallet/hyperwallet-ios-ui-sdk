@@ -63,16 +63,7 @@ extension ListTransferDestinationCell {
     /// - Parameter transferMethod: a transfer method which contains the info needs to be filled to the cell.
     func configure(transferMethod: HyperwalletTransferMethod) {
         textLabel?.accessibilityIdentifier = "transferDestinationTitleLabel"
-        switch transferMethod.type?.lowercased() {
-        case "bank_account":
-            textLabel?.text = "bankAccount".localized()
-
-        case "wire_account":
-            textLabel?.text = "bank_account_wire".localized()
-
-        default:
-            textLabel?.text = transferMethod.type?.lowercased().localized()
-        }
+        textLabel?.text = transferMethod.type?.lowercased().localized()
         textLabel?.adjustsFontForContentSizeCategory = true
         textLabel?.numberOfLines = 0
         textLabel?.lineBreakMode = .byWordWrapping

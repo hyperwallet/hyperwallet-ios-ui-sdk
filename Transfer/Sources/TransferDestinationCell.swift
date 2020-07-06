@@ -57,16 +57,7 @@ final class TransferDestinationCell: UITableViewCell {
 
 extension TransferDestinationCell {
     func configure(transferMethod: HyperwalletTransferMethod) {
-        switch transferMethod.type?.lowercased() {
-        case "bank_account":
-            textLabel?.text = "bankAccount".localized()
-
-        case "wire_account":
-            textLabel?.text = "bank_account_wire".localized()
-
-        default:
-            textLabel?.text = transferMethod.title
-        }
+        textLabel?.text = transferMethod.title
         textLabel?.adjustsFontForContentSizeCategory = true
         textLabel?.accessibilityIdentifier = "transferDestinationTitleLabel"
         detailTextLabel?.attributedText = formatDetails(
