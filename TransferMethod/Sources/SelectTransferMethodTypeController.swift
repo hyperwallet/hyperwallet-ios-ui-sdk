@@ -119,17 +119,19 @@ extension SelectTransferMethodTypeController {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.addArrangedSubview(countryCurrencyTableView)
+
         let separatorView = UIView()
         separatorView.heightAnchor.constraint(equalToConstant: 0.2).isActive = true
         separatorView.backgroundColor = tableView.separatorColor
         stackView.addArrangedSubview(separatorView)
+
         return stackView
     }
 
     /// Returns height of headerview
     override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return Theme.Cell.smallHeight * CGFloat(presenter.countryCurrencySectionData.count)
-            + Theme.Cell.headerHeight * 2 + 0.2
+            + Theme.Cell.headerHeight * 3 + 0.2
     }
     /// To select transfer method
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -253,7 +255,12 @@ extension CountryCurrencyTableView: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return "mobileTransferMethodLabel".localized()
+        let titleString = "\n\n" + "mobileTransferMethodLabel".localized()
+        return titleString
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return Theme.Cell.headerHeight * 2
     }
 }
 

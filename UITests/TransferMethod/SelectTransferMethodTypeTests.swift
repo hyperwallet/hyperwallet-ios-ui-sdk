@@ -60,10 +60,10 @@ class SelectTransferMethodTypeTests: BaseTests {
         XCTAssert(app.tables["selectTransferMethodTypeTable"].cells.element(boundBy: 1).staticTexts[
             "PayPal Account"].exists)
 
-        XCTAssert(app.tables["selectTransferMethodTypeTable"].cells.element(boundBy: 0).staticTexts[
-            "CA$2.20 {\u{2022} 1-2 Business days"].exists)
+        XCTAssert(app.tables[" "].cells.element(boundBy: 0).staticTexts[
+            "CA$2.20 \u{2022} 1-2 Business days"].exists)
         XCTAssert(app.tables["selectTransferMethodTypeTable"].cells.element(boundBy: 1).staticTexts[
-            "CA$0.25 {\u{2022} IMMEDIATE"].exists)
+            "CA$0.25 \u{2022} IMMEDIATE"].exists)
     }
 
     func testSelectTransferMethodType_verifyCountrySelectionSearch() {
