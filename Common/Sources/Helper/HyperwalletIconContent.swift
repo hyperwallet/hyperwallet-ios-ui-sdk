@@ -48,6 +48,10 @@ public enum HyperwalletIconContent: String {
     case westernUnion = "\u{e00c}"
     /// The icon for wire transfer type
     case wire = "\u{e90a}"
+    /// The icon for venmo transfer type
+    case venmo = "\u{e909}"
+    /// The icon for moenygram transfer type
+    case moneygram = "\u{905}"
     /// The icon for cashpayment02
     case cashPayment02 = "\u{e00e}"
     /// The icon for date of birth for activation

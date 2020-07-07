@@ -61,6 +61,8 @@
 "prepaid_card" = "Prepaid Card";
 "wire_account" = "Wire Account";
 "paypal_account" = "PayPal";
+"venmo_account" = "Venmo";
+"cash_pickup_mg" = "MoneyGram";
 
 //Select Transfer Method View
 "select_a_country_message" = "Select a country";
