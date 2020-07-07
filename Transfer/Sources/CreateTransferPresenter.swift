@@ -34,7 +34,7 @@ protocol CreateTransferView: class {
                    _ retry: (() -> Void)?)
     func showLoading()
     func showScheduleTransfer(_ transfer: HyperwalletTransfer)
-    func updateTransferSection()
+    func updateTransferAmountSection()
     func updateFooter(for section: CreateTransferController.FooterSection)
     func areAllFieldsValid() -> Bool
 }
@@ -64,16 +64,17 @@ final class CreateTransferPresenter {
     private var sourceToken: String?
 
     var selectedTransferMethod: HyperwalletTransferMethod?
-    var amount: String?
+    var amount: String = "0"
     var notes: String?
-    var transferAllFundsIsOn: Bool = false {
-        didSet {
-            amount = transferAllFundsIsOn ? availableBalance : nil
-            view?.updateTransferSection()
-        }
-    }
     var destinationCurrency: String? {
         return selectedTransferMethod?.transferMethodCurrency
+    }
+
+    var didTapTransferAllFunds: Bool = false {
+        didSet {
+            amount = didTapTransferAllFunds ? availableBalance ?? "0" : "0"
+            view?.updateTransferAmountSection()
+        }
     }
 
     init(_ clientTransferId: String, _ sourceToken: String?, view: CreateTransferView) {
@@ -85,12 +86,14 @@ final class CreateTransferPresenter {
     private func initializeSections() {
         sectionData.removeAll()
 
+        let createTransferSectionAmountData = CreateTransferSectionAmountData()
+        sectionData.append(createTransferSectionAmountData)
+
+        let createTransferSectionTransferAllData = CreateTransferSectionTransferAllData()
+        sectionData.append(createTransferSectionTransferAllData)
+
         let createTransferDestinationSection = CreateTransferSectionDestinationData()
         sectionData.append(createTransferDestinationSection)
-
-        let createTransferSectionTransferData = CreateTransferSectionTransferData(availableBalance: availableBalance,
-                                                                                  currencyCode: destinationCurrency)
-        sectionData.append(createTransferSectionTransferData)
 
         let createTransferNotesSection = CreateTransferSectionNotesData()
         sectionData.append(createTransferNotesSection)
@@ -190,7 +193,7 @@ final class CreateTransferPresenter {
             let transfer = HyperwalletTransfer.Builder(clientTransferId: clientTransferId,
                                                        sourceToken: sourceToken,
                                                        destinationToken: destinationToken)
-                .destinationAmount(transferAllFundsIsOn ? nil : amount)
+                .destinationAmount(didTapTransferAllFunds ? nil : amount)
                 .notes(notes)
                 .destinationCurrency(destinationCurrency)
                 .build()
@@ -210,7 +213,8 @@ final class CreateTransferPresenter {
 
                 case .success(let transfer):
                     if let transfer = transfer {
-                        if self?.transferAllFundsIsOn ?? false && transfer.destinationAmount != self?.availableBalance {
+                        if strongSelf.didTapTransferAllFunds &&
+                            transfer.destinationAmount != strongSelf.availableBalance {
                             strongSelf.didFxQuoteChange = true
                         }
                         view.notifyTransferCreated(transfer)
@@ -244,9 +248,9 @@ final class CreateTransferPresenter {
 
     private func updateFooterContent(_ errors: [HyperwalletError]) {
         for error in errors {
-            if let sectionData = sectionData.first(where: { $0.createTransferSectionHeader == .transfer }) {
+            if let sectionData = sectionData.first(where: { $0.createTransferSectionHeader == .transferAll }) {
                 sectionData.errorMessage = error.message
-                view?.updateFooter(for: .transfer)
+                view?.updateFooter(for: .transferAll)
             }
         }
     }

@@ -26,7 +26,7 @@ class AddTransferMethodWireAccountUSMaskingTests: BaseTests {
     }
 
     func testAddTransferMethod_brandIdDefaultPattern() {
-        XCTAssert(app.navigationBars["Wire Account"].exists)
+        XCTAssert(addTransferMethod.navBarWireAccount.exists)
         addTransferMethod.setBranchId("111222333")
         checkSelectFieldValueIsEqualTo("111-222-333", addTransferMethod.branchIdInput)
 
@@ -39,7 +39,7 @@ class AddTransferMethodWireAccountUSMaskingTests: BaseTests {
      "defaultPattern": "###-###-###"
      */
     func testAddTransferMethod_brandIdDefaultPatternByPaste() {
-        XCTAssert(app.navigationBars["Wire Account"].exists)
+        XCTAssert(addTransferMethod.navBarWireAccount.exists)
         addTransferMethod.branchIdInput.enterByPaste(
             text: "111222333", field: addTransferMethod.branchIdInput, app: app)
 
@@ -50,7 +50,7 @@ class AddTransferMethodWireAccountUSMaskingTests: BaseTests {
      "defaultPattern": "@@@@@@**"
      */
     func testAddTransferMethod_swiftNumberDefaultPattern() {
-        XCTAssert(app.navigationBars["Wire Account"].exists)
+        XCTAssert(addTransferMethod.navBarWireAccount.exists)
         addTransferMethod.setBankId("ABNANL2A")
         checkSelectFieldValueIsEqualTo("ABNANL2A", addTransferMethod.bankIdInput)
 
@@ -71,7 +71,7 @@ class AddTransferMethodWireAccountUSMaskingTests: BaseTests {
      "defaultPattern": "@@@@@@**"
      */
     func testAddTransferMethod_swiftNumberInvalidPattern() {
-        XCTAssert(app.navigationBars["Wire Account"].exists)
+       XCTAssert(addTransferMethod.navBarWireAccount.exists)
 
         addTransferMethod.setBankId("A1B2C3DFG12")
         checkSelectFieldValueIsEqualTo("ABCDFG12", addTransferMethod.bankIdInput)
@@ -96,7 +96,7 @@ class AddTransferMethodWireAccountUSMaskingTests: BaseTests {
     }
 
     func testAddTransferMethod_swiftNumberInvalidLength() {
-        XCTAssert(app.navigationBars["Wire Account"].exists)
+        XCTAssert(addTransferMethod.navBarWireAccount.exists)
         addTransferMethod.setBankId("AABNANL1233333")
         checkSelectFieldValueIsEqualTo("AABNANL1", addTransferMethod.bankIdInput)
         addTransferMethod.setBankId("AABNANLXXBBB")

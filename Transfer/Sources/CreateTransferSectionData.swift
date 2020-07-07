@@ -23,7 +23,7 @@ import Common
 import HyperwalletSDK
 
 enum CreateTransferSectionHeader: String {
-    case button, destination, notes, transfer
+    case button, destination, notes, transferAll, amount
 }
 
 protocol CreateTransferSectionData: class {
@@ -36,9 +36,17 @@ protocol CreateTransferSectionData: class {
 
 extension CreateTransferSectionData {
     var rowCount: Int { return 1 }
-    var title: String? { return createTransferSectionHeader !=
-        CreateTransferSectionHeader.button ?
-            "transfer_section_header_\(createTransferSectionHeader.rawValue)".localized() : nil }
+    var title: String? {
+        if createTransferSectionHeader != CreateTransferSectionHeader.button {
+            let sectionHeader = createTransferSectionHeader.rawValue.lowercased()
+            if sectionHeader == "destination" {
+                return "mobileTransferToLabel".localized()
+            } else if sectionHeader == "notes" {
+                return "mobileNoteLabel".localized()
+            }
+        }
+        return nil
+    }
 }
 
 final class CreateTransferSectionDestinationData: CreateTransferSectionData {
@@ -47,25 +55,20 @@ final class CreateTransferSectionDestinationData: CreateTransferSectionData {
     var errorMessage: String?
 }
 
-final class CreateTransferSectionTransferData: CreateTransferSectionData {
-    var createTransferSectionHeader: CreateTransferSectionHeader { return .transfer }
-    var rowCount: Int { return 2 }
+final class CreateTransferSectionAmountData: CreateTransferSectionData {
+    var createTransferSectionHeader: CreateTransferSectionHeader { return .amount }
     var cellIdentifiers: [String] { return [
-        TransferAmountCell.reuseIdentifier,
+        TransferAmountCell.reuseIdentifier
+    ]}
+    var errorMessage: String?
+}
+
+final class CreateTransferSectionTransferAllData: CreateTransferSectionData {
+    var createTransferSectionHeader: CreateTransferSectionHeader { return .transferAll }
+    var cellIdentifiers: [String] { return [
         TransferAllFundsCell.reuseIdentifier
     ]}
-    var footer: String?
     var errorMessage: String?
-
-    init(availableBalance: String?, currencyCode: String?) {
-        guard let availableBalance = availableBalance,
-            availableBalance.formatToDouble() != 0,
-            let currencyCode = currencyCode else {
-                footer = nil
-                return
-        }
-        footer = String(format: "available_balance_footer".localized(), availableBalance, currencyCode)
-    }
 }
 
 final class CreateTransferSectionButtonData: CreateTransferSectionData {

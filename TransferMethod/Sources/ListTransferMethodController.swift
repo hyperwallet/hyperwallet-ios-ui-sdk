@@ -37,7 +37,6 @@ final class ListTransferMethodController: UITableViewController {
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        setViewBackgroundColor()
         initializePresenter()
         // setup table view
         setupTransferMethodTableView()

@@ -65,11 +65,24 @@ class AddTransferMethod {
     var contactInformationHeader: XCUIElement
     var addressHeader: XCUIElement
     var transferMethodInformationHeader: XCUIElement
+    var addTransferMethodtable: XCUIElement
+    var navBar: XCUIElement
+    var navBarBankAccount: XCUIElement
+    var navBarDebitCard: XCUIElement
+    var navBarWireAccount: XCUIElement
+    var navBarPaypal: XCUIElement
+    var title = "Account Settings"
 
     // swiftlint:disable function_body_length
     init(app: XCUIApplication) {
         self.app = app
 
+        navBar = app.navigationBars[title]
+        navBarBankAccount = app.navigationBars["bank_account".localized()]
+        navBarDebitCard = app.navigationBars["bank_card".localized()]
+        navBarWireAccount = app.navigationBars["wire_account".localized()]
+        navBarPaypal = app.navigationBars["paypal_account".localized()]
+        addTransferMethodtable = app.tables.cells.staticTexts["Add Transfer Method"]
         addTransferMethodTableView = app.tables["addTransferMethodTable"]
         createTransferMethodButton = addTransferMethodTableView.buttons["createAccountButton"]
 

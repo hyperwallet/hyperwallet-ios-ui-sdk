@@ -41,7 +41,6 @@ final class SelectTransferMethodTypeController: UITableViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         initializeData()
-        setViewBackgroundColor()
         initializePresenter()
         setupCountryCurrencyTableView()
         setupTransferMethodTypeTableView()
@@ -84,7 +83,7 @@ final class SelectTransferMethodTypeController: UITableViewController {
         countryCurrencyView = CountryCurrencyTableView(presenter)
         countryCurrencyTableView.register(CountryCurrencyCell.self,
                                           forCellReuseIdentifier: CountryCurrencyCell.reuseIdentifier)
-        countryCurrencyTableView.backgroundColor = Theme.ViewController.backgroundColor
+        countryCurrencyTableView.backgroundColor = Theme.UITableViewController.backgroundColor
         countryCurrencyTableView.rowHeight = UITableView.automaticDimension
         countryCurrencyTableView.estimatedRowHeight = Theme.Cell.smallHeight
         countryCurrencyTableView.dataSource = countryCurrencyView

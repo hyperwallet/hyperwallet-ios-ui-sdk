@@ -31,7 +31,6 @@ final class ListTransferDestinationController: UITableViewController {
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        setViewBackgroundColor()
         initializePresenter()
         setupTransferMethodTableView()
         presenter.listTransferMethods()
@@ -43,7 +42,7 @@ final class ListTransferDestinationController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                             target: self,
                                                             action: #selector(didTapAddButton))
-        titleDisplayMode(.never, for: "transfer_select_destination".localized())
+        titleDisplayMode(.never, for: "mobileTransferMethodsHeader".localized())
         scrollToSelectedRow()
     }
 
@@ -167,6 +166,10 @@ extension ListTransferDestinationController {
 
     override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return CGFloat.leastNormalMagnitude
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return Theme.Cell.largeHeight
     }
 }
 

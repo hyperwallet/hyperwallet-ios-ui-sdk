@@ -25,7 +25,6 @@ import UIKit
 /// Schedule a transfer that was previously created
 final class ScheduleTransferController: UITableViewController, UITextFieldDelegate {
     private var spinnerView: SpinnerView?
-    private var processingView: ProcessingView?
     private var presenter: ScheduleTransferPresenter!
     private let footerIdentifier = "scheduleTransferFooterViewIdentifier"
     private let registeredCells: [(type: AnyClass, id: String)] = [
@@ -38,7 +37,6 @@ final class ScheduleTransferController: UITableViewController, UITextFieldDelega
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        setViewBackgroundColor()
         initializePresenter()
         // setup table view
         setUpScheduleTransferTableView()
@@ -48,7 +46,7 @@ final class ScheduleTransferController: UITableViewController, UITextFieldDelega
         super.viewWillAppear(animated)
         let currentNavigationItem: UINavigationItem = tabBarController?.navigationItem ?? navigationItem
         currentNavigationItem.backBarButtonItem = UIBarButtonItem.back
-        titleDisplayMode(.always, for: "transfer_funds".localized())
+        titleDisplayMode(.always, for: "mobileConfirmationHeader".localized())
     }
 
     private func initializePresenter() {
@@ -74,6 +72,7 @@ final class ScheduleTransferController: UITableViewController, UITextFieldDelega
         tableView.estimatedRowHeight = Theme.Cell.smallHeight
         tableView.sectionFooterHeight = UITableView.automaticDimension
         tableView.estimatedSectionFooterHeight = Theme.Cell.smallHeight
+        tableView.backgroundColor = Theme.UITableViewController.backgroundColor
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)
         }
@@ -88,6 +87,11 @@ extension ScheduleTransferController {
     /// Returns the title for header
     override public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return presenter.sectionData[section].title
+    }
+    /// Estimated height of header
+    override public func tableView(_ tableView: UITableView,
+                                   estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat(Theme.Cell.headerHeight)
     }
     /// Returns tableview section count
     override public func numberOfSections(in tableView: UITableView) -> Int {
@@ -115,6 +119,20 @@ extension ScheduleTransferController {
         return view
     }
 
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let section = presenter.sectionData[indexPath.section].scheduleTransferSectionHeader
+        switch section {
+        case .destination:
+            return Theme.Cell.largeHeight
+
+        case .foreignExchange:
+            return UITableView.automaticDimension
+
+        default:
+            return Theme.Cell.smallHeight
+        }
+    }
+
     private func getAttributedFooterText(for section: Int) -> NSAttributedString? {
         let sectionData = presenter.sectionData[section]
         var attributedText: NSAttributedString?
@@ -137,40 +155,48 @@ extension ScheduleTransferController {
 
     private func getCellConfiguration(_ indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = presenter.sectionData[indexPath.section].cellIdentifier
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         let section = presenter.sectionData[indexPath.section]
         switch section.scheduleTransferSectionHeader {
         case .destination:
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
             if let tableViewCell = cell as? TransferDestinationCell,
                 let destinationData = section as? ScheduleTransferDestinationData {
                 tableViewCell.configure(transferMethod: destinationData.transferMethod)
             }
+            return cell
 
         case .foreignExchange:
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)
             if let tableViewCell = cell as? TransferForeignExchangeCell,
                 let foreignExchangeData = section as? ScheduleTransferForeignExchangeData {
                 return tableViewCell.configure(foreignExchangeData, indexPath, tableView)
             }
+            return cell ?? UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: cellIdentifier)
 
         case .summary:
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
             if let tableViewCell = cell as? TransferSummaryCell,
                 let summaryData = section as? ScheduleTransferSummaryData {
                 tableViewCell.configure(summaryData.rows[indexPath.row].title, summaryData.rows[indexPath.row].value)
             }
+            return cell
 
         case .notes:
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
             if let tableViewCell = cell as? TransferNotesCell,
                 let notesSection = section as? ScheduleTransferNotesData {
-                tableViewCell.configure(notes: notesSection.notes, isEditable: false, { _ in })
+                tableViewCell.configure(notes: notesSection.notes, isEditable: false, isHideBorder: false, { _ in })
             }
+            return cell
 
         case .button:
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
             if let tableViewCell = cell as? TransferButtonCell, section is ScheduleTransferButtonData {
                 let tapConfirmation = UITapGestureRecognizer(target: self, action: #selector(tapScheduleTransfer))
-                tableViewCell.configure(title: "transfer_button_confirm".localized(), action: tapConfirmation)
+                tableViewCell.configure(title: "transfer".localized(), action: tapConfirmation)
             }
+            return cell
         }
-        return cell
     }
 
     @objc
@@ -179,42 +205,30 @@ extension ScheduleTransferController {
     }
 }
 
-// MARK: - Schedule transfer table delegate
-extension ScheduleTransferController {
-    /// Estimated height of header
-    override public func tableView(_ tableView: UITableView,
-                                   estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-        return CGFloat(Theme.Cell.headerHeight)
-    }
-}
-
 extension ScheduleTransferController: ScheduleTransferView {
-    func showProcessing() {
-        processingView = HyperwalletUtilViews.showProcessing()
+    func showLoading() {
+        spinnerView = HyperwalletUtilViews.showSpinner(view: view)
     }
 
-    func dismissProcessing(handler: @escaping () -> Void) {
-        processingView?.hide()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            handler()
+    func hideLoading() {
+        if let spinnerView = self.spinnerView {
+            HyperwalletUtilViews.removeSpinner(spinnerView)
         }
     }
 
     func showConfirmation(handler: @escaping (() -> Void)) {
-        processingView?.hide(with: .complete)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            handler()
-        }
+        let destinationData = presenter.sectionData[0] as? ScheduleTransferDestinationData
+        HyperwalletUtilViews.showAlert(self,
+                                       title: "mobileTransferSuccessMsg".localized(),
+                                       message: String(format: "mobileTransferSuccessDetails".localized(),
+                                                       destinationData?.transferMethod.title ?? " "),
+                                       actions: UIAlertAction.close({ (_) in
+                                            handler()
+                                       }))
     }
 
-    func showError(_ error: HyperwalletErrorType,
-                   pageName: String,
-                   pageGroup: String,
-                   _ retry: (() -> Void)?) {
-        let errorView = ErrorView(viewController: self,
-                                  error: error,
-                                  pageName: pageName,
-                                  pageGroup: pageGroup)
+    func showError(_ error: HyperwalletErrorType, pageName: String, pageGroup: String, _ retry: (() -> Void)?) {
+        let errorView = ErrorView(viewController: self, error: error, pageName: pageName, pageGroup: pageGroup)
         errorView.show(retry)
     }
 

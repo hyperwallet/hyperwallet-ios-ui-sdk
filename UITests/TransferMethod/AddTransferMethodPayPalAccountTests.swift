@@ -24,6 +24,7 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
         app.tables.cells.staticTexts["Add Transfer Method"].tap()
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
+        selectTransferMethodType = SelectTransferMethodType(app: app)
         addTransferMethod = AddTransferMethod(app: app)
         if #available(iOS 13.0, *) {
             elementQuery = app.tables["addTransferMethodTable"].buttons
@@ -33,7 +34,7 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
     }
 
     func testAddTransferMethod_displaysElementsOnTmcResponse() {
-        XCTAssert(app.navigationBars["PayPal"].exists)
+        XCTAssert(addTransferMethod.navBarPaypal.exists)
 
         XCTAssert(addTransferMethod.addTransferMethodTableView
             .staticTexts["Account Information - United States (USD)"].exists)
@@ -107,7 +108,7 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
             "label CONTAINS[c] 'The account information you provided is already registered'")
         XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
         XCTAssertTrue(app.navigationBars["PayPal"].exists)
-        app.alerts["Error"].buttons["OK"].tap()
+        app.alerts["Error"].buttons[Dialog.done].tap()
         XCTAssertTrue(app.navigationBars["PayPal"].exists)
     }
 }

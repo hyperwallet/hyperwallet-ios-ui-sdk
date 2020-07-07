@@ -25,85 +25,49 @@ import UIKit
 final class TransferDestinationCell: UITableViewCell {
     public static let reuseIdentifier = "transferDestinationCellIdentifier"
 
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.accessibilityIdentifier = "transferDestinationTitleLabel"
-        return label
-    }()
-
-    private lazy var subtitleLabel: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.accessibilityIdentifier = "transferDestinationSubtitleLabel"
-        return label
-    }()
-
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
-        setupCell()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setupCell()
-    }
-
-    private func setupCell() {
-        let stackView = UIStackView(frame: .zero)
-        let stackViewLeadingConstraints: NSLayoutConstraint
-        stackView.axis = .vertical
-        stackView.alignment = .fill
-        stackView.distribution = .fill
-        stackView.spacing = 2
-        stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(subtitleLabel)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-
-        contentView.addSubview(stackView)
-        stackViewLeadingConstraints = !UIFont.isLargeSizeCategory ? stackView.leadingAnchor
-            .constraint(equalTo: imageView!.trailingAnchor, constant: 15) : stackView.leadingAnchor
-                .constraint(equalTo: contentView.leadingAnchor, constant: 20)
-        NSLayoutConstraint.activate([
-            stackViewLeadingConstraints,
-            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
-            stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 0),
-            stackView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 10),
-            stackView.bottomAnchor.constraint(greaterThanOrEqualTo: contentView.bottomAnchor, constant: -10)
-        ])
     }
 
     // MARK: Theme manager's proxy properties
     @objc dynamic var titleLabelFont: UIFont! {
-        get { return titleLabel.font }
-        set { titleLabel.font = newValue }
+        get { return textLabel?.font }
+        set { textLabel?.font = newValue }
     }
 
     @objc dynamic var titleLabelColor: UIColor! {
-        get { return titleLabel.textColor }
-        set { titleLabel.textColor = newValue }
+        get { return textLabel?.textColor }
+        set { textLabel?.textColor = newValue }
     }
 
     @objc dynamic var subTitleLabelFont: UIFont! {
-        get { return subtitleLabel.font }
-        set { subtitleLabel.font = newValue }
+        get { return detailTextLabel?.font }
+        set { detailTextLabel?.font = newValue }
     }
 
     @objc dynamic var subTitleLabelColor: UIColor! {
-        get { return subtitleLabel.textColor }
-        set { subtitleLabel.textColor = newValue }
+        get { return detailTextLabel?.textColor }
+        set { detailTextLabel?.textColor = newValue }
     }
 }
 
 extension TransferDestinationCell {
     func configure(transferMethod: HyperwalletTransferMethod) {
-        titleLabel.text = transferMethod.title
-        titleLabel.adjustsFontForContentSizeCategory = true
-        subtitleLabel.attributedText = formatDetails(
+        textLabel?.text = transferMethod.title
+        textLabel?.adjustsFontForContentSizeCategory = true
+        textLabel?.accessibilityIdentifier = "transferDestinationTitleLabel"
+        detailTextLabel?.attributedText = formatDetails(
             subtitle: Locale.current.localizedString(forRegionCode: transferMethod.transferMethodCountry ?? "") ?? "",
             additionalInfo: transferMethod.value)
 
-        subtitleLabel.numberOfLines = 0
-        subtitleLabel.adjustsFontForContentSizeCategory = true
-        subtitleLabel.lineBreakMode = .byWordWrapping
+        detailTextLabel?.numberOfLines = 0
+        detailTextLabel?.adjustsFontForContentSizeCategory = true
+        detailTextLabel?.lineBreakMode = .byWordWrapping
+        detailTextLabel?.accessibilityIdentifier = "transferDestinationSubtitleLabel"
         if !UIFont.isLargeSizeCategory {
             let icon = UIImage.fontIcon(HyperwalletIcon.of(transferMethod.type ?? "").rawValue,
                                         Theme.Icon.frame,
@@ -114,15 +78,12 @@ extension TransferDestinationCell {
         }
     }
 
-    func configure(_ title: String, _ subtitle: String, _ hyperwalletIcon: HyperwalletIconContent) {
-        titleLabel.text = title
-        titleLabel.adjustsFontForContentSizeCategory = true
-        titleLabel.numberOfLines = 0
-        titleLabel.lineBreakMode = .byWordWrapping
-        subtitleLabel.attributedText = formatDetails(subtitle: subtitle)
-        subtitleLabel.numberOfLines = 0
-        subtitleLabel.adjustsFontForContentSizeCategory = true
-        subtitleLabel.lineBreakMode = .byWordWrapping
+    func configure(_ title: String, _ hyperwalletIcon: HyperwalletIconContent) {
+        textLabel?.text = title
+        textLabel?.adjustsFontForContentSizeCategory = true
+        textLabel?.numberOfLines = 0
+        textLabel?.lineBreakMode = .byWordWrapping
+        textLabel?.accessibilityIdentifier = "transferDestinationTitleLabel"
         if !UIFont.isLargeSizeCategory {
             let icon = UIImage.fontIcon(hyperwalletIcon.rawValue,
                                         Theme.Icon.frame,

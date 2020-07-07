@@ -28,32 +28,50 @@ final class TransferAmountCell: UITableViewCell {
 
     private lazy var amountTextField: PasteOnlyTextField = {
         let textField = PasteOnlyTextField(frame: .zero)
-        textField.font = Theme.Text.font
-        textField.textAlignment = .right
+        textField.textAlignment = .center
         textField.keyboardType = UIKeyboardType.decimalPad
         textField.delegate = self
         textField.accessibilityIdentifier = "transferAmountTextField"
-        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        textField.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+
+        let heightConstraint = NSLayoutConstraint(item: textField,
+                                                  attribute: .height,
+                                                  relatedBy: .equal,
+                                                  toItem: nil,
+                                                  attribute: .notAnAttribute,
+                                                  multiplier: 1,
+                                                  constant: 50)
+        let widthConstraint = NSLayoutConstraint(item: textField,
+                                                 attribute: .width,
+                                                 relatedBy: .greaterThanOrEqual,
+                                                 toItem: nil,
+                                                 attribute: .notAnAttribute,
+                                                 multiplier: 1,
+                                                 constant: 50)
+        textField.addConstraint(heightConstraint)
+        textField.addConstraint(widthConstraint)
         return textField
     }()
 
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel(frame: .zero)
+    private lazy var currencySymbolLabel: UITextField = {
+        let label = UITextField(frame: .zero)
+        label.isUserInteractionEnabled = false
+        label.contentVerticalAlignment = .top
         label.accessibilityIdentifier = "transferAmountTitleLabel"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.setContentHuggingPriority(.required, for: .horizontal)
-        label.setContentCompressionResistancePriority(.required, for: .horizontal)
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        label.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         return label
     }()
 
-    private lazy var currencyLabel: UILabel = {
-        let label = UILabel(frame: .zero)
+    private lazy var currencyLabel: UITextField = {
+        let label = UITextField(frame: .zero)
+        label.isUserInteractionEnabled = false
+        label.contentVerticalAlignment = .bottom
         label.accessibilityIdentifier = "transferAmountCurrencyLabel"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.setContentHuggingPriority(.required, for: .horizontal)
-        label.setContentCompressionResistancePriority(.required, for: .horizontal)
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        label.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         return label
     }()
 
@@ -66,9 +84,27 @@ final class TransferAmountCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        subviews.forEach { (view) in
+            if type(of: view).description() == "_UITableViewCellSeparatorView" {
+                view.isHidden = true
+            }
+        }
+    }
+
     @objc
     private func didTapCell() {
         amountTextField.becomeFirstResponder()
+    }
+
+    @objc
+    private func textFieldDidChange(_ textField: UITextField) {
+        textField.invalidateIntrinsicContentSize()
+        let maxWidth = UIScreen.main.bounds.width * 0.7
+        let minWidthToFit = min(maxWidth, textField.frame.size.width)
+        let newSize = textField.sizeThatFits(CGSize(width: minWidthToFit, height: CGFloat.greatestFiniteMagnitude))
+        textField.frame.size = CGSize(width: min(newSize.width, minWidthToFit), height: 50)
     }
 
     private func setupCell() {
@@ -80,18 +116,21 @@ final class TransferAmountCell: UITableViewCell {
         stackView.axis = .horizontal
         stackView.alignment = .fill
         stackView.distribution = .fill
-        stackView.spacing = 15
-        stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(currencySymbolLabel)
         stackView.addArrangedSubview(amountTextField)
         stackView.addArrangedSubview(currencyLabel)
         stackView.translatesAutoresizingMaskIntoConstraints = false
-
         contentView.addSubview(stackView)
+
         let margins = contentView.layoutMarginsGuide
+        let maxWidthConstraint = [
+            amountTextField.widthAnchor.constraint(lessThanOrEqualTo: margins.widthAnchor, multiplier: 0.70)
+        ]
+        NSLayoutConstraint.activate(maxWidthConstraint)
 
         let constraints = [
-            stackView.safeAreaLeadingAnchor.constraint(equalTo: margins.leadingAnchor),
-            stackView.safeAreaTrailingAnchor.constraint(equalTo: margins.trailingAnchor),
+            stackView.centerXAnchor.constraint(equalTo: margins.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: margins.centerYAnchor),
             stackView.safeAreaTopAnchor.constraint(equalTo: margins.topAnchor),
             stackView.safeAreaBottomAnchor.constraint(equalTo: margins.bottomAnchor)
         ]
@@ -99,15 +138,19 @@ final class TransferAmountCell: UITableViewCell {
         NSLayoutConstraint.activate(constraints)
     }
 
-    func configure(amount: String?, currency: String?, isEnabled: Bool, _ handler: @escaping EnteredAmountHandler) {
-        titleLabel.text = "transfer_amount".localized()
-        titleLabel.numberOfLines = 0
-        titleLabel.adjustsFontForContentSizeCategory = true
+    func configure(amount: String?, currency: String?, _ handler: @escaping EnteredAmountHandler) {
+        if let currency = currency {
+            let locale = NSLocale(localeIdentifier: currency)
+            let currencySymbol = locale.displayName(forKey: NSLocale.Key.currencySymbol, value: currency)
+            if let currencySymbol = currencySymbol {
+                currencySymbolLabel.text = currencySymbol
+                currencySymbolLabel.adjustsFontForContentSizeCategory = true
+            }
+        }
         amountTextField.text = amount
+        amountTextField.adjustsFontSizeToFitWidth = true
         amountTextField.adjustsFontForContentSizeCategory = true
-        amountTextField.isEnabled = isEnabled
         currencyLabel.text = currency ?? String(repeating: " ", count: 3)
-        currencyLabel.numberOfLines = 0
         currencyLabel.adjustsFontForContentSizeCategory = true
         enteredAmountHandler = handler
     }
@@ -192,16 +235,21 @@ extension TransferAmountCell: UITextFieldDelegate {
 
 extension TransferAmountCell {
     // MARK: Theme manager's proxy properties
-    @objc dynamic var titleLabelFont: UIFont! {
-        get { return titleLabel.font }
-        set { titleLabel.font = newValue
-            amountTextField.font = newValue }
+    @objc dynamic var currencySymbolLabelFont: UIFont! {
+        get { return currencySymbolLabel.font }
+        set { currencySymbolLabel.font = newValue
+            currencySymbolLabel.font = newValue }
     }
 
-    @objc dynamic var titleLabelColor: UIColor! {
-        get { return titleLabel.textColor }
-        set { titleLabel.textColor = newValue
-            amountTextField.textColor = newValue }
+    @objc dynamic var currencySymbolLabelColor: UIColor! {
+        get { return currencySymbolLabel.textColor }
+        set { currencySymbolLabel.textColor = newValue
+            currencySymbolLabel.textColor = newValue }
+    }
+
+    @objc dynamic var amountTextFieldFont: UIFont! {
+        get { return amountTextField.font }
+        set { amountTextField.font = newValue }
     }
 
     @objc dynamic var currencyLabelFont: UIFont! {

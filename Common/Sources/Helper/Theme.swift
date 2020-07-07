@@ -67,17 +67,21 @@ public class Theme: NSObject {
         /// The `UINavigationBar` large title font
         public static var largeTitleFont = UIFont.preferredFont(forTextStyle: .largeTitle)
         /// The `UINavigationBar` title font
-        public static var titleFont = UIFont.preferredFont(forTextStyle: .title1)
+        public static var titleFont = UIFont.preferredFont(forTextStyle: .body)
     }
 
     /// Representation of all customizable visual style property for `UIButton`.
     public struct Button {
         /// The `UIButton` primary color
-        public static var color = Theme.themeColor
-        /// The `UIButton` font
-        public static var font = Theme.Label.titleFont
+        public static var color = UIColor(rgb: 0xFFFFFF)
+        /// The `UIButton` link color
+        public static var linkColor = Theme.themeColor
         /// The `UIButton` background color
-        public static var backgroundColor = Theme.tintColor
+        public static var backgroundColor = Theme.themeColor
+        /// The `UIButton` link font
+        public static var linkFont = Theme.Label.titleFont
+        /// The button font
+        public static var font = Theme.Label.titleFont
     }
 
     /// Representation of all customizable visual style property for `UIText`.
@@ -145,10 +149,10 @@ public class Theme: NSObject {
         public static var debitColor = Theme.Label.color
     }
 
-    /// Representation of all customizable visual style property for `UIViewController`.
-    public struct ViewController {
-        /// The `UIViewController` background color
-        public static var backgroundColor = UIColor.white
+    /// Representation of all customizable visual style property for `UITableViewController`.
+    public struct UITableViewController {
+        /// The `UITableViewController` background color
+        public static var backgroundColor = UIColor(rgb: 0xFFFFFF)
     }
 
     /// Representation of all customizable visual style property for `SpinnerView`.

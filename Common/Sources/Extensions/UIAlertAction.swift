@@ -25,7 +25,7 @@ public extension UIAlertAction {
     /// The default retry button label
     static let retry = "try_again_button_label".localized()
     /// The default close button label
-    static let close = "ok_button_label".localized()
+    static let close = "doneButtonLabel".localized()
     /// The default remove button label
     static let remove = "remove_button_label".localized()
 

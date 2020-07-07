@@ -67,7 +67,6 @@ UISearchResultsUpdating, UISearchControllerDelegate {
         titleDisplayMode(.never, for: title)
         extendedLayoutIncludesOpaqueBars = true
         setupTable()
-        setViewBackgroundColor()
     }
     /// Notifies the view controller that its view is about to be added to a view hierarchy.
     override public func viewWillAppear(_ animated: Bool) {

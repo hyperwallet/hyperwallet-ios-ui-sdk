@@ -170,6 +170,7 @@ class ScheduleTransferPresenterTests: XCTestCase {
     }
 
     private func assertButtonSectionResult(buttonSection: ScheduleTransferSectionData) {
+        XCTAssertNil(buttonSection.title, "The title of button section should be nil")
         XCTAssertEqual(buttonSection.rowCount, 1, "Button section should have 1 row")
         XCTAssertNotNil(buttonSection.scheduleTransferSectionHeader,
                         "The header of button section should not be nil")
@@ -195,7 +196,7 @@ class MockScheduleTransferViewTests: ScheduleTransferView {
         expectation = nil
     }
 
-    func showProcessing() {
+    func showLoading() {
         isShowProcessingPerformed = true
     }
 
@@ -204,9 +205,8 @@ class MockScheduleTransferViewTests: ScheduleTransferView {
         handler()
     }
 
-    func dismissProcessing(handler: @escaping () -> Void) {
+    func hideLoading() {
         isDismissProcessingPerformed = true
-        handler()
     }
 
     func showError(_ error: HyperwalletErrorType,
