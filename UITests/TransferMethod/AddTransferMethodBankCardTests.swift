@@ -48,7 +48,7 @@ class AddTransferMethodBankCardTests: BaseTests {
         XCTAssert(addTransferMethod.cvvInput.exists)
 
         XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
-        XCTAssert(app.staticTexts["Transaction Fees: USD 1.75 Processing Time: 1-2 Business days"].exists)
+        XCTAssert(app.staticTexts["$1.75 fee \u{2022} 1-2 Business days"].exists)
 
         addTransferMethod.addTransferMethodTableView.scroll(to: addTransferMethod.createTransferMethodButton)
         XCTAssert(addTransferMethod.createTransferMethodButton.exists)

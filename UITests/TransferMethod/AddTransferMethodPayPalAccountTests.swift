@@ -42,7 +42,7 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
         XCTAssert(addTransferMethod.emailInput.exists)
 
         XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
-        XCTAssert(app.staticTexts["Transaction Fees: USD 0.25 Processing Time: 1-2 Business days"].exists)
+        XCTAssert(app.staticTexts["$0.25 fee \u{2022} 1-2 Business days"].exists)
 
         addTransferMethod.addTransferMethodTableView.scroll(to: addTransferMethod.createTransferMethodButton)
         XCTAssert(addTransferMethod.createTransferMethodButton.exists)

@@ -43,7 +43,7 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
         verifyDefaultValues()
 
         XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
-        XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["Transaction Fees: USD 20.00"].exists)
+        XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["$20.00 fee"].exists)
 
         addTransferMethod.addTransferMethodTableView.scroll(to: addTransferMethod.createTransferMethodButton)
         XCTAssert(addTransferMethod.createTransferMethodButton.exists)
