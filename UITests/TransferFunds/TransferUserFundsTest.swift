@@ -632,7 +632,6 @@ class TransferUserFundsTest: BaseTests {
     }
 
     // MARK: Add Transfer Method Tests
-    //swiftlint:disable function_body_length
     func testTransferFunds_addTransferMethodWhenNoTransferMethods() {
         mockServer.setUpEmptyResponse(url: "/rest/v3/users/usr-token/transfer-methods")
         mockServer.setupStub(url: "/rest/v3/transfers",
@@ -693,7 +692,6 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), expectedUSDestinationLabel + "2345")
     }
 
-    //swiftlint:disable function_body_length
     // will fix later
     /*
     func testTransferFunds_addBankAccountWhenMoreThanOneTransferMethods() {
