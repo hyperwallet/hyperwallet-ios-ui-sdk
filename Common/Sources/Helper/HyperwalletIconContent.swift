@@ -21,17 +21,17 @@ import Foundation
 /// Represents the Hyperwallet Icon type
 public enum HyperwalletIconContent: String {
     /// The icon for Bank
-    case bank = "\u{e000}"
+    case bank = "\u{e900}"
     /// The icon for cash payment type
     case cashPayment = "\u{e001}"
     /// The icon for check type
-    case check = "\u{e002}"
+    case check = "\u{e902}"
     /// The icon for collection
     case collection = "\u{e003}"
     /// The icon for contact
     case contact = "\u{e004}"
     /// The icon for debit and credit card type
-    case debitCredit = "\u{e005}"
+    case debitCredit = "\u{e903}"
     /// The icon for FAQ
     case faq = "\u{e006}"
     /// The icon for getting Started
@@ -41,13 +41,13 @@ public enum HyperwalletIconContent: String {
     /// The icon for notifications
     case notifications01 = "\u{e009}"
     /// The icon for prepaid card type
-    case prepaidCard = "\u{e00a}"
+    case prepaidCard = "\u{e901}"
     /// The icon for security
     case security = "\u{e00b}"
     /// The icon for westernunion transfer type
     case westernUnion = "\u{e00c}"
     /// The icon for wire transfer type
-    case wire = "\u{e00d}"
+    case wire = "\u{e90a}"
     /// The icon for cashpayment02
     case cashPayment02 = "\u{e00e}"
     /// The icon for date of birth for activation
@@ -87,7 +87,7 @@ public enum HyperwalletIconContent: String {
     /// The icon for deposit account
     case depositAcct = "\u{e020}"
     /// The icon for paypal transfer type
-    case paypal = "\u{e021}"
+    case paypal = "\u{e906}"
     /// The icon for business type
     case business = "\u{e022}"
     /// The icon for individual type
@@ -113,7 +113,7 @@ public enum HyperwalletIconContent: String {
     /// The basicfinal icon
     case basicfinal = "\u{e030}"
     /// The credit icon
-    case credit = "\u{e902}"
+    case credit = "\u{e907}"
     /// The debit icon
-    case debit = "\u{e900}"
+    case debit = "\u{e908}"
 }

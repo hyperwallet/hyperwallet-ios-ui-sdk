@@ -36,7 +36,7 @@ public extension UIImage {
         paragraph.alignment = NSTextAlignment.center
         let fontSize = fontSize
         let attributedString = NSAttributedString(string: name, attributes: [
-            NSAttributedString.Key.font: UIFont(name: "icomoon", size: fontSize)!,
+            NSAttributedString.Key.font: UIFont(name: "hw_mobile_ui_sdk_icons", size: fontSize)!,
             NSAttributedString.Key.foregroundColor: textColor,
             NSAttributedString.Key.paragraphStyle: paragraph
         ])

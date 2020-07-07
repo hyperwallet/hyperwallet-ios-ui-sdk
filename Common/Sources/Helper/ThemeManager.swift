@@ -128,6 +128,6 @@ public class ThemeManager: NSObject {
     }
 
     private static let registerFonts: Void = {
-        UIFont.register("icomoon", type: "ttf")
+        UIFont.register("hw_mobile_ui_sdk_icons", type: "ttf")
     }()
 }

@@ -214,6 +214,7 @@
 		B32D70922391A7410079A34E /* TextWidgetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32D70912391A7410079A34E /* TextWidgetTests.swift */; };
 		B32FD83823DF66D700832544 /* ListTransferDestinationPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32FD83723DF66D700832544 /* ListTransferDestinationPresenterTests.swift */; };
 		B3758D9D24A6D63400ED9151 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3758D9C24A6D63400ED9151 /* UITextField.swift */; };
+		B39E00D924B4E57900E3BC4D /* hw_mobile_ui_sdk_icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B39E00D824B4E57900E3BC4D /* hw_mobile_ui_sdk_icons.ttf */; };
 		B3DCEA8A23DA2AA500217CF9 /* ListTransferDestinationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DCEA8923DA2AA500217CF9 /* ListTransferDestinationController.swift */; };
 		B3DCEA8C23DA30BC00217CF9 /* ListTransferDestinationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DCEA8B23DA30BC00217CF9 /* ListTransferDestinationPresenter.swift */; };
 		B3DDC1012385D7E800E1A562 /* InsightsSuccessResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = B3DDC1002385D7E800E1A562 /* InsightsSuccessResponse.json */; };
@@ -236,7 +237,6 @@
 		DB5295DF22E22F0200657F50 /* PrepaidCardReceiptResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 0702673A22B308B60057D62B /* PrepaidCardReceiptResponse.json */; };
 		DB5295E222E22F0B00657F50 /* ListReceiptPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0743EF9B22A5987100C089EE /* ListReceiptPresenterTests.swift */; };
 		DB5295E322E22F0B00657F50 /* ReceiptDetailPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEBF0FC22AA86DA00C664D3 /* ReceiptDetailPresenterTests.swift */; };
-		DB5295EC22E231C500657F50 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB2EB66F22617AB100FBEB3D /* icomoon.ttf */; };
 		DB5295ED22E231C500657F50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBFB61452261E44C00C4A8AA /* Assets.xcassets */; };
 		DB5295FC22E233AB00657F50 /* HyperwalletReceiptUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5295FB22E233AB00657F50 /* HyperwalletReceiptUI.swift */; };
 		DB5295FF22E2344B00657F50 /* HyperwalletTransferMethodUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5295FE22E2344B00657F50 /* HyperwalletTransferMethodUI.swift */; };
@@ -779,6 +779,7 @@
 		B32D70912391A7410079A34E /* TextWidgetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextWidgetTests.swift; sourceTree = "<group>"; };
 		B32FD83723DF66D700832544 /* ListTransferDestinationPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTransferDestinationPresenterTests.swift; sourceTree = "<group>"; };
 		B3758D9C24A6D63400ED9151 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
+		B39E00D824B4E57900E3BC4D /* hw_mobile_ui_sdk_icons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = hw_mobile_ui_sdk_icons.ttf; path = "../../../../../Downloads/hw_mobile_ui_sdk_icons-v1/fonts/hw_mobile_ui_sdk_icons.ttf"; sourceTree = "<group>"; };
 		B3DCEA8923DA2AA500217CF9 /* ListTransferDestinationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTransferDestinationController.swift; sourceTree = "<group>"; };
 		B3DCEA8B23DA30BC00217CF9 /* ListTransferDestinationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTransferDestinationPresenter.swift; sourceTree = "<group>"; };
 		B3DDC1002385D7E800E1A562 /* InsightsSuccessResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = InsightsSuccessResponse.json; sourceTree = "<group>"; };
@@ -792,7 +793,6 @@
 		DB2587FB2261BFF100E6236B /* HyperwalletUISDKUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HyperwalletUISDKUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB2587FF2261BFF100E6236B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB2EB66C22617A8500FBEB3D /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
-		DB2EB66F22617AB100FBEB3D /* icomoon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = icomoon.ttf; sourceTree = "<group>"; };
 		DB4679822260380C00E1AF49 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB4679842260380C00E1AF49 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB4679862260380C00E1AF49 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -1658,7 +1658,7 @@
 		DB2EB66E22617AB100FBEB3D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				DB2EB66F22617AB100FBEB3D /* icomoon.ttf */,
+				B39E00D824B4E57900E3BC4D /* hw_mobile_ui_sdk_icons.ttf */,
 				DBFB61452261E44C00C4A8AA /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -2791,7 +2791,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB5295EC22E231C500657F50 /* icomoon.ttf in Resources */,
+				B39E00D924B4E57900E3BC4D /* hw_mobile_ui_sdk_icons.ttf in Resources */,
 				DB551F8122E137B600DD65C2 /* Localizable.strings in Resources */,
 				DB5295ED22E231C500657F50 /* Assets.xcassets in Resources */,
 				DB551F8C22E137D800DD65C2 /* ProcessingView.xib in Resources */,
