@@ -21,7 +21,7 @@ class SelectTransferMethodType {
                                                     identifier: "select_transfer_method_country".localized()).element
         currencyTable = app.otherElements.containing(.navigationBar,
                                                      identifier: "select_transfer_method_currency".localized()).element
-        searchBar = app.searchFields["search"]
+        searchBar = app.searchFields["search_placeholder_label".localized()]
         navigationBar = app.navigationBars["mobileAddTransferMethodHeader".localized()]
     }
 
