@@ -92,6 +92,10 @@ public class Theme: NSObject {
         public static var disabledColor = Theme.Label.textColor
         /// The text font style
         public static var font = UIFont.preferredFont(forTextStyle: .body)
+        /// The text label font
+        public static var labelFont = Theme.Label.titleFont
+        /// The text label color
+        public static var labelColor = Theme.Label.color
     }
 
    /// Representation of all customizable visual style property for `UITableViewCell`

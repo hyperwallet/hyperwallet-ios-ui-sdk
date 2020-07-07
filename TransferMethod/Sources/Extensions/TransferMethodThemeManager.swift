@@ -33,10 +33,10 @@ public extension ThemeManager {
 
     private static func applyToCountryCurrencyCell() {
         let proxy = CountryCurrencyCell.appearance()
-        proxy.textLabelFont = Theme.Label.titleFont
-        proxy.textLabelColor = Theme.Label.color
-        proxy.detailTextLabelFont = Theme.Label.titleFont
-        proxy.detailTextLabelColor = Theme.Label.textColor
+        proxy.textLabelFont = Theme.Text.labelFont
+        proxy.textLabelColor = Theme.Text.labelColor
+        proxy.detailTextLabelFont = Theme.Text.font
+        proxy.detailTextLabelColor = Theme.Text.color
     }
 
     private static func applyToCountryCurrencySelectionCell() {
