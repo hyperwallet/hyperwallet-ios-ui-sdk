@@ -49,7 +49,7 @@ public final class HyperwalletIcon {
             return .moneygram
 
         default:
-            return .westernUnion
+            return .bank
         }
     }
 }
