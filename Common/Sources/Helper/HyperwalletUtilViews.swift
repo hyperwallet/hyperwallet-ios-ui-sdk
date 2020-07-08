@@ -135,13 +135,11 @@ public final class SpinnerView: UIView {
         view.addSubview(self)
         translatesAutoresizingMaskIntoConstraints = false
 
-        let margins = view.layoutMarginsGuide
-
         let constraints = [
-            safeAreaLeadingAnchor.constraint(equalTo: margins.leadingAnchor),
-            safeAreaTrailingAnchor.constraint(equalTo: margins.trailingAnchor),
-            safeAreaTopAnchor.constraint(equalTo: margins.topAnchor),
-            safeAreaBottomAnchor.constraint(equalTo: margins.bottomAnchor)
+            safeAreaLeadingAnchor.constraint(equalTo: view.leadingAnchor),
+            safeAreaTrailingAnchor.constraint(equalTo: view.trailingAnchor),
+            safeAreaTopAnchor.constraint(equalTo: view.topAnchor),
+            safeAreaBottomAnchor.constraint(equalTo: view.bottomAnchor)
         ]
         constraints.forEach { $0.priority = UILayoutPriority(999) }
         NSLayoutConstraint.activate(constraints)
