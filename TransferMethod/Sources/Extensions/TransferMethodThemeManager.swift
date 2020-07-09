@@ -68,8 +68,8 @@ public extension ThemeManager {
 
     private static func applyToTextWidget() {
         let proxy = TextWidget.appearance()
-        proxy.textLabelFont = Theme.Label.titleFont
-        proxy.textLabelColor = Theme.Label.color
+        proxy.textLabelFont = Theme.Text.labelFont
+        proxy.textLabelColor = Theme.Text.labelColor
         proxy.textFieldFont = Theme.Text.font
         proxy.textFieldColor = Theme.Text.color
     }
