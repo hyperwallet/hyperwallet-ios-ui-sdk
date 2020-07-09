@@ -50,7 +50,7 @@ final class AddTransferMethodController: UITableViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.accessibilityLabel = "create_account_label".localized()
         button.accessibilityIdentifier = "createAccountButton"
-        button.setTitle("create_account_label".localized(), for: .normal)
+        button.setTitle("createTransferMethodButtonLabel".localized(), for: .normal)
         button.titleLabel?.adjustsFontForContentSizeCategory = true
         button.titleLabel?.font = Theme.Label.titleFont
         button.setTitleColor(Theme.Button.color, for: UIControl.State.normal)

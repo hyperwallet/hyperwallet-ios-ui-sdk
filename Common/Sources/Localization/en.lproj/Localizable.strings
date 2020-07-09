@@ -66,20 +66,20 @@
 "select_a_country_message" = "Select a country";
 
 // Add Transfer Method
-"create_account_label" = "Create Account";
+"createTransferMethodButtonLabel" = "Create Transfer Method";
 "enter_your_information_formatter" = "Enter your %@ information";
 "bank_account_footer" = "On a paper check, the routing number is printed as the first 9 digits on the bottom of the check, followed by 4-17 digits for the account number.";
 "bank_card_footer" = "CVV is a 3 digit number, typically found on the back of the card.";
 "paypal_account_footer" = "PayPal transfer method email address should be same as profile email address.";
 
 "account_information_header" = "%1$@ - %2$@ (%3$@)";
-"account_holder_header"="Account Holder";
+"mobileAccountHolderLabel"="ACCOUNT HOLDER INFO";
 "address_header"="Address";
-"information_header"="Transfer method information";
+"mobileFeesAndProcessingTime"="FEES AND PROCESSING TIME";
 "intermediary_account_header" = "Intermediary Account";
 "contact_information_header" = "Contact Information";
 
-"account_information_title" = "Account Information";
+"mobileAccountInfoLabel" = "ACCOUNT INFO";
 
 // expiry date format - arguments order is %1$-month, %2$-year(two last digits)
 "expiry_date_format" = "%1$02d/%2$02d";
