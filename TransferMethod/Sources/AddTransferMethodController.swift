@@ -167,6 +167,10 @@ extension AddTransferMethodController {
             return emptyHeaderHeight
         }
     }
+    /// Returns height of row
+    override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return Theme.Cell.smallHeight
+    }
     /// Returns tableview section count
     override public func numberOfSections(in tableView: UITableView) -> Int {
         return presenter.sectionData.count

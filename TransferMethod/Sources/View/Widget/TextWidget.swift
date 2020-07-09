@@ -264,6 +264,26 @@ class TextWidget: AbstractWidget {
         }
         return ""
     }
+
+    @objc dynamic var textLabelColor: UIColor! {
+        get { return self.label.textColor }
+        set { self.label.textColor = newValue }
+    }
+
+    @objc dynamic var textLabelFont: UIFont! {
+        get { return self.label.font }
+        set { self.label.font = newValue }
+    }
+
+    @objc dynamic var textFieldColor: UIColor! {
+        get { return self.textField.textColor }
+        set { self.textField.textColor = newValue }
+    }
+
+    @objc dynamic var textFieldFont: UIFont! {
+        get { return self.textField.font }
+        set { self.textField.font = newValue }
+    }
 }
 
 private struct CurrentIndex {

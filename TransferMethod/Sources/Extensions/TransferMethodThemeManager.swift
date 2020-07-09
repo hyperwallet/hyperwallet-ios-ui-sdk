@@ -29,6 +29,7 @@ public extension ThemeManager {
         applyToSelectionWidgetCell()
         applyToListTransferMethodTableViewCell()
         applyToSelectTransferMethodTypeCell()
+        applyToTextWidget()
     }
 
     private static func applyToCountryCurrencyCell() {
@@ -63,5 +64,13 @@ public extension ThemeManager {
         proxy.titleLabelFont = Theme.Label.titleFont
         proxy.titleLabelColor = Theme.Label.color
         proxy.subTitleLabelFont = Theme.Label.subtitleFont
+    }
+
+    private static func applyToTextWidget() {
+        let proxy = TextWidget.appearance()
+        proxy.textLabelFont = Theme.Label.titleFont
+        proxy.textLabelColor = Theme.Label.color
+        proxy.textFieldFont = Theme.Text.font
+        proxy.textFieldColor = Theme.Text.color
     }
 }
