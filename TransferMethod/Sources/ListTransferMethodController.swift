@@ -32,8 +32,8 @@ final class ListTransferMethodController: UITableViewController {
 
     private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "empty_list_transfer_method_message"
         .localized())
-    private lazy var addAccountButton: UIButton = view.setUpEmptyListButton(text: "add_account_title".localized(),
-                                                                            firstItem: emptyListLabel)
+    private lazy var addAccountButton: UIButton =
+        view.setUpEmptyListButton(text: "mobileAddTransferMethodHeader".localized(), firstItem: emptyListLabel)
 
     override public func viewDidLoad() {
         super.viewDidLoad()

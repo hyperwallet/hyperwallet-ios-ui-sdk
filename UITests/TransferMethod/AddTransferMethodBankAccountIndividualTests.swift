@@ -43,7 +43,7 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
 
         XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
         XCTAssert(addTransferMethod.addTransferMethodTableView
-            .staticTexts["Transaction Fees: USD 2.00 Processing Time: 1-2 Business days"].exists)
+            .staticTexts["$2.00 fee \u{2022} 1-2 Business days"].exists)
 
         app.scroll(to: addTransferMethod.createTransferMethodButton)
         XCTAssert(addTransferMethod.createTransferMethodButton.exists)

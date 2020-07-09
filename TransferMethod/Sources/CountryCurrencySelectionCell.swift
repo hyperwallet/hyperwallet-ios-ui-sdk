@@ -21,33 +21,32 @@ import Common
 #endif
 import UIKit
 
-struct CountryCurrencyCellConfiguration: GenericCellConfiguration {
-    var title: String?
-    var value: String?
-}
+/// Represents the Country and Currency Generic cell
+final class CountryCurrencySelectionCell: GenericCell<GenericCellConfiguration> {
+    static let reuseIdentifier = "countryCurrencySelectionCellIdentifier"
+    private let trailingConstraintIdentifier = "trailingConstraintIdentifier"
 
-/// Represents the Country and Currency cell
-final class CountryCurrencyCell: UITableViewCell {
-    static let reuseIdentifier = "countryCurrencyCellIdentifier"
+    // MARK: Property
+    override var item: GenericCellConfiguration? {
+        didSet {
+            guard let configuration = item  else {
+                return
+            }
+            accessibilityIdentifier = configuration.identifier
+
+            textLabel?.text = configuration.title
+            textLabel?.adjustsFontForContentSizeCategory = true
+            textLabel?.accessibilityLabel = configuration.title
+            textLabel?.accessibilityIdentifier = configuration.title
+        }
+    }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+        super.init(style: .default, reuseIdentifier: reuseIdentifier)
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-    }
-
-    func configure(configuration: CountryCurrencyCellConfiguration) {
-        accessibilityIdentifier = configuration.identifier
-        textLabel?.text = configuration.title
-        textLabel?.adjustsFontForContentSizeCategory = true
-        textLabel?.accessibilityLabel = configuration.title
-        textLabel?.accessibilityIdentifier = configuration.title
-        detailTextLabel?.text = configuration.value
-        detailTextLabel?.adjustsFontForContentSizeCategory = true
-        detailTextLabel?.accessibilityLabel = configuration.value
-        detailTextLabel?.accessibilityIdentifier = configuration.value
     }
 
     @objc dynamic var textLabelColor: UIColor! {
@@ -58,15 +57,5 @@ final class CountryCurrencyCell: UITableViewCell {
     @objc dynamic var textLabelFont: UIFont! {
         get { return textLabel?.font }
         set { textLabel?.font = newValue }
-    }
-
-    @objc dynamic var detailTextLabelColor: UIColor! {
-        get { return detailTextLabel?.textColor }
-        set { detailTextLabel?.textColor = newValue }
-    }
-
-    @objc dynamic var detailTextLabelFont: UIFont! {
-        get { return detailTextLabel?.font }
-        set { detailTextLabel?.font = newValue }
     }
 }

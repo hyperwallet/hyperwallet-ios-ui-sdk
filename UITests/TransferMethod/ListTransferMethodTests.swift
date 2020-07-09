@@ -71,7 +71,8 @@ class ListTransferMethodTests: BaseTests {
         let expectedThirdBankAccountLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "0003")
         let expectedDebitCardCellLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "0006")
 
-        let expectedPayPalAccountCellLabel = listTransferMethod.getTransferMethodPayalLabel(email: "carroll.lynn@byteme.com")
+        let expectedPayPalAccountCellLabel = listTransferMethod
+            .getTransferMethodPayalLabel(email: "carroll.lynn@byteme.com")
 
         XCTAssertTrue(app.cells.element(boundBy: 0).staticTexts[expectedFirstBankAccountLabel].exists)
         XCTAssertTrue(app.cells.element(boundBy: 1).staticTexts[expectedSecondBankAccountLabel].exists)
@@ -86,7 +87,7 @@ class ListTransferMethodTests: BaseTests {
         openTransferMethodsList()
         listTransferMethod.tapAddTransferMethodEmptyScreenButton()
 
-        XCTAssertTrue(app.navigationBars["Add Account"].exists)
+        XCTAssertTrue(app.navigationBars["mobileAddTransferMethodHeader".localized()].exists)
     }
 
     func testListTransferMethod_addTransferMethod() {
@@ -97,7 +98,7 @@ class ListTransferMethodTests: BaseTests {
         openTransferMethodsList()
         listTransferMethod.tapAddTransferMethodButton()
 
-        XCTAssertTrue(app.navigationBars["Add Account"].exists)
+        XCTAssertTrue(app.navigationBars["mobileAddTransferMethodHeader".localized()].exists)
     }
 
     func testListTransferMethod_openDeleteTransferMethodActionSheet() {
@@ -159,7 +160,8 @@ class ListTransferMethodTests: BaseTests {
         let expectedSecondBankAccountLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "0002")
         let expectedThirdBankAccountLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "0003")
         let expectedDebitCardCellLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "0006")
-        let expectedPayPalAccountCellLabel = listTransferMethod.getTransferMethodPayalLabel(email: "carroll.lynn@byteme.com")
+        let expectedPayPalAccountCellLabel = listTransferMethod
+            .getTransferMethodPayalLabel(email: "carroll.lynn@byteme.com")
 
         XCTAssertTrue(app.cells.element(boundBy: 0).staticTexts[expectedSecondBankAccountLabel].exists)
         XCTAssertTrue(app.cells.element(boundBy: 1).staticTexts[expectedThirdBankAccountLabel].exists)
@@ -200,7 +202,8 @@ class ListTransferMethodTests: BaseTests {
         let expectedFirstBankAccountLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "0001")
         let expectedSecondBankAccountLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "0002")
         let expectedThirdBankAccountLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "0003")
-        let expectedPayPalAccountCellLabel = listTransferMethod.getTransferMethodPayalLabel(email: "carroll.lynn@byteme.com")
+        let expectedPayPalAccountCellLabel = listTransferMethod
+            .getTransferMethodPayalLabel(email: "carroll.lynn@byteme.com")
         XCTAssertTrue(app.cells.element(boundBy: 0).staticTexts[expectedFirstBankAccountLabel].exists)
         XCTAssertTrue(app.cells.element(boundBy: 1).staticTexts[expectedSecondBankAccountLabel].exists)
         XCTAssertTrue(app.cells.element(boundBy: 2).staticTexts[expectedThirdBankAccountLabel].exists)
@@ -273,7 +276,8 @@ class ListTransferMethodTests: BaseTests {
         let expectedSecondBankAccountLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "0002")
         let expectedThirdBankAccountLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "0003")
         let expectedDebitCardCellLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "0006")
-        let expectedPayPalAccountCellLabel = listTransferMethod.getTransferMethodPayalLabel(email: "carroll.lynn@byteme.com")
+        let expectedPayPalAccountCellLabel = listTransferMethod
+            .getTransferMethodPayalLabel(email: "carroll.lynn@byteme.com")
         XCTAssertTrue(app.cells.element(boundBy: 1).staticTexts[expectedSecondBankAccountLabel].exists)
         XCTAssertTrue(app.cells.element(boundBy: 2).staticTexts[expectedThirdBankAccountLabel].exists)
         XCTAssertTrue(app.cells.element(boundBy: 3).staticTexts[expectedDebitCardCellLabel].exists)
@@ -323,7 +327,8 @@ class ListTransferMethodTests: BaseTests {
         let expectedSecondBankAccountLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "0002")
         let expectedThirdBankAccountLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "0003")
         let expectedDebitCardCellLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "0006")
-        let expectedPayPalAccountCellLabel = listTransferMethod.getTransferMethodPayalLabel(email: "carroll.lynn@byteme.com")
+        let expectedPayPalAccountCellLabel = listTransferMethod
+            .getTransferMethodPayalLabel(email: "carroll.lynn@byteme.com")
 
         XCTAssertTrue(app.cells.element(boundBy: 0).staticTexts[expectedFirstBankAccountLabel].exists)
         XCTAssertTrue(app.cells.element(boundBy: 1).staticTexts[expectedSecondBankAccountLabel].exists)

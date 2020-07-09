@@ -61,7 +61,7 @@ class AddTransferMethodBankAccountBusinessTests: BaseTests {
         XCTAssert(addTransferMethod.postalCodeInput.exists)
 
         XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["Transfer method information"].exists)
-        XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["Transaction Fees: USD 2.00"].exists)
+        XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["$2.00 fee"].exists)
 
         app.scroll(to: addTransferMethod.createTransferMethodButton)
         XCTAssert(addTransferMethod.createTransferMethodButton.exists)
