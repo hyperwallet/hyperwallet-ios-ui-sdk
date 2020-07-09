@@ -33,7 +33,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
     let label: UILabel = {
         let label = UILabel()
         label.textColor = Theme.Label.textColor
-        label.font = Theme.Label.titleFont
+        label.font = Theme.Label.subtitleFont
         label.translatesAutoresizingMaskIntoConstraints = false
         label.setContentHuggingPriority(UILayoutPriority.defaultLow, for: NSLayoutConstraint.Axis.horizontal)
         return label
@@ -46,7 +46,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
         self.pageGroup = pageGroup
         super.init(frame: CGRect())
         translatesAutoresizingMaskIntoConstraints = false
-        axis = .horizontal
+        axis = .vertical
         spacing = 5
         distribution = .fill
         isLayoutMarginsRelativeArrangement = true
@@ -108,9 +108,6 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         label.addGestureRecognizer(tap)
         addArrangedSubview(label)
-        if let widthAnchor = label.superview?.widthAnchor {
-            label.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.35).isActive = true
-        }
     }
 
     func showError() {

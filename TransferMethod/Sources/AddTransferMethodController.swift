@@ -107,6 +107,7 @@ final class AddTransferMethodController: UITableViewController {
         tableView.allowsSelection = false
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Theme.Cell.smallHeight
+        tableView.backgroundColor = Theme.UITableViewController.backgroundColor
         tableView.accessibilityIdentifier = "addTransferMethodTable"
         tableView.register(
             AddTransferMethodCell.self,
