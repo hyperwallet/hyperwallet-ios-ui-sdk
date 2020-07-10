@@ -40,7 +40,8 @@ class AddTransferMethodBankAccountBusinessTests: BaseTests {
         XCTAssert(addTransferMethod.bankAccountIdInput.exists)
         XCTAssertEqual(addTransferMethod.accountTypeLabel.label, "Account Type")
 
-        XCTAssert(addTransferMethod.addTransferMethodTableView.otherElements["mobileAccountInfoLabel".localized()].exists )
+        XCTAssert(addTransferMethod.addTransferMethodTableView
+                .otherElements["mobileAccountHolderLabel".localized()].exists )
         XCTAssertEqual(addTransferMethod.businessNameLabel.label, "Business Name")
         XCTAssert(addTransferMethod.businessNameInput.exists)
         XCTAssertEqual(addTransferMethod.phoneNumberLabel.label, "Phone Number")
@@ -60,7 +61,8 @@ class AddTransferMethodBankAccountBusinessTests: BaseTests {
         XCTAssertEqual(addTransferMethod.postalCodeLabel.label, "Zip/Postal Code")
         XCTAssert(addTransferMethod.postalCodeInput.exists)
 
-        XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["mobileFeesAndProcessingTime".localized()].exists)
+        XCTAssert(addTransferMethod.addTransferMethodTableView
+                .staticTexts["mobileFeesAndProcessingTime".localized()].exists)
         XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["$2.00 fee"].exists)
 
         app.scroll(to: addTransferMethod.createTransferMethodButton)
