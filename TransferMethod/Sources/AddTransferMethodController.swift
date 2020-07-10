@@ -144,7 +144,7 @@ extension AddTransferMethodController {
             else {
                 return
         }
-        headerView.textLabel?.textColor = Theme.Label.textColor
+        headerView.textLabel?.textColor = Theme.Label.subtitleColor
     }
     /// Returns the title for footer
     override public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
@@ -167,6 +167,15 @@ extension AddTransferMethodController {
             return emptyHeaderHeight
         }
     }
+    /// Updates info section background color
+    override public func tableView(_ tableView: UITableView,
+                                   willDisplay cell: UITableViewCell,
+                                   forRowAt indexPath: IndexPath) {
+        let fieldGroup = presenter.sectionData[indexPath.section].fieldGroup
+        if fieldGroup == "INFORMATION" {
+            cell.backgroundColor = Theme.Cell.backgroundColor
+        }
+    }
     /// Returns height of row
     override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return Theme.Cell.smallHeight
@@ -181,6 +190,8 @@ extension AddTransferMethodController {
     }
     /// Display's the fields to add transfer method
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let fieldGroup = presenter.sectionData[indexPath.section].fieldGroup
+        var rightAnchorConstant: Int = 0
         guard let cell = tableView.dequeueReusableCell(withIdentifier: AddTransferMethodCell.reuseIdentifier)
             else {
                 fatalError("Can't dequeue the cell")
@@ -192,6 +203,10 @@ extension AddTransferMethodController {
             widget.viewController = self
         }
 
+        if fieldGroup == "CREATE_BUTTON" {
+            rightAnchorConstant = -14
+        }
+
         let leftAnchor = widget.safeAreaLeadingAnchor
             .constraint(equalTo: cell.contentView.layoutMarginsGuide.leadingAnchor)
         leftAnchor.priority = UILayoutPriority(999)
@@ -199,7 +214,8 @@ extension AddTransferMethodController {
         let topAnchor = widget.topAnchor.constraint(equalTo: cell.contentView.topAnchor)
         topAnchor.priority = UILayoutPriority(999)
 
-        let rightAnchor = widget.rightAnchor.constraint(equalTo: cell.contentView.rightAnchor)
+        let rightAnchor = widget.rightAnchor.constraint(equalTo: cell.contentView.rightAnchor,
+                constant: CGFloat(rightAnchorConstant))
         rightAnchor.priority = UILayoutPriority(999)
 
         let bottomAnchor = widget.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor)

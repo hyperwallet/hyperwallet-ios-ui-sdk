@@ -115,6 +115,8 @@ public class Theme: NSObject {
         public static var tintColor = Theme.tintColor
         /// The `UITableViewCell` separator color
         public static var separatorColor = UIColor(rgb: 0x3c3c43, alpha: 0.29)
+        /// The `UITableViewCell` background color
+        public static var backgroundColor = UIColor(rgb: 0xf8f8f8)
     }
 
     /// Representation of all customizable visual style property for the `Hyperwallet`'s icon.
