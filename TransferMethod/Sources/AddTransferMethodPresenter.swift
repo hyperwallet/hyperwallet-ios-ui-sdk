@@ -116,7 +116,7 @@ final class AddTransferMethodPresenter {
 
     func createTransferMethod() {
         trackConfirmClick()
-        guard let view = view, view.areAllFieldsValid() else {
+        guard let view = view else {
             return
         }
 

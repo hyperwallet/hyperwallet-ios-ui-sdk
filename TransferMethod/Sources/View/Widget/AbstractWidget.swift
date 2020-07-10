@@ -50,7 +50,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
         spacing = 5
         distribution = .fill
         isLayoutMarginsRelativeArrangement = true
-        layoutMargins = UIEdgeInsets(top: 11.0, left: 0, bottom: 11.0, right: 16.0)
+        layoutMargins = UIEdgeInsets(top: 11.0, left: 0, bottom: 1.0, right: 16.0)
         self.field = field
         setupLayout(field: field)
     }
@@ -108,6 +108,9 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         label.addGestureRecognizer(tap)
         addArrangedSubview(label)
+        if let heightAnchor = label.superview?.heightAnchor {
+            label.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.35).isActive = true
+        }
     }
 
     func showError() {
