@@ -153,7 +153,7 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
 private extension AddTransferMethodBankAccountIndividualTests {
     func verifyAccountInformationSection() {
         XCTAssert(addTransferMethod.addTransferMethodTableView
-            .staticTexts["Account Information - United States (USD)"].exists)
+            .staticTexts["mobileAccountHolderLabel".localized() + " - United States (USD)"].exists)
         XCTAssertEqual(addTransferMethod.branchIdLabel.label, "Routing Number")
         XCTAssert(addTransferMethod.branchIdInput.exists)
         XCTAssertEqual(addTransferMethod.bankAccountIdLabel.label, "Account Number")
