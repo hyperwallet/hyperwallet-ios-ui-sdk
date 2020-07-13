@@ -15,12 +15,14 @@ class SelectTransferMethodType {
     init(app: XCUIApplication) {
         self.app = app
 
-        countrySelect = app.tables.cells["cellCountry"].staticTexts["Country"]
-        currencySelect = app.tables.cells["cellCurrency"].staticTexts["Currency"]
-        countryTable = app.otherElements.containing(.navigationBar, identifier: "Select Country").element
-        currencyTable = app.otherElements.containing(.navigationBar, identifier: "Select Currency").element
-        searchBar = app.searchFields["search"]
-        navigationBar = app.navigationBars["Add Account"]
+        countrySelect = app.tables.cells["cellCountry/Region"].staticTexts["mobileCountryRegion".localized()]
+        currencySelect = app.tables.cells["cellCurrency"].staticTexts["mobileCurrencyLabel".localized()]
+        countryTable = app.otherElements.containing(.navigationBar,
+                                                    identifier: "select_transfer_method_country".localized()).element
+        currencyTable = app.otherElements.containing(.navigationBar,
+                                                     identifier: "select_transfer_method_currency".localized()).element
+        searchBar = app.searchFields["search_placeholder_label".localized()]
+        navigationBar = app.navigationBars["mobileAddTransferMethodHeader".localized()]
     }
 
     func tapCountry() {
