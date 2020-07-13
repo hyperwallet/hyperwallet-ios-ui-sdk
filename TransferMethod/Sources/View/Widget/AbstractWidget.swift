@@ -29,6 +29,9 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
     private var pageGroup: String!
     lazy var hyperwalletInsights: HyperwalletInsightsProtocol = HyperwalletInsights.shared
     private let errorTypeForm = "FORM"
+    typealias InputHandler = (_ isValid: Bool) -> Void
+    private var inputHandler: InputHandler?
+    private(set) var errorMessage: String?
 
     let label: UILabel = {
         let label = UILabel()
@@ -41,9 +44,11 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
 
     required init(field: HyperwalletField,
                   pageName: String,
-                  pageGroup: String) {
+                  pageGroup: String,
+                  inputHandler: @escaping InputHandler) {
         self.pageName = pageName
         self.pageGroup = pageGroup
+        self.inputHandler = inputHandler
         super.init(frame: CGRect())
         translatesAutoresizingMaskIntoConstraints = false
         axis = .vertical
@@ -59,7 +64,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
         super.init(coder: coder)
     }
 
-    func errorMessage() -> String? {
+    func getErrorMessage() -> String? {
         if isInvalidEmptyValue() {
             return field.validationMessage?.empty
         }
@@ -123,11 +128,13 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if !isValid() {
+        let isFieldValid = isValid()
+        if isFieldValid {
             showError()
         } else {
             hideError()
         }
+        inputHandler?(isFieldValid)
     }
 
     //swiftlint:disable unavailable_function
@@ -136,14 +143,22 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
     }
 
     private func isInvalidEmptyValue() -> Bool {
-        return field.isRequired ?? false && value().isEmpty
+        let isInvalid = field.isRequired ?? false && value().isEmpty
+        if isInvalid {
+            updateErrorMessage(with: field.validationMessage?.empty ?? "")
+        }
+        return isInvalid
     }
 
     /// Checks the field should be validated by min and max length constraint
     private func isInvalidLength() -> Bool {
         let minLength = field.minLength ?? 0
         let maxLength = field.maxLength ?? Int.max
-        return !value().isEmpty && (value().count < minLength || value().count > maxLength)
+        let isInvalid = !value().isEmpty && (value().count < minLength || value().count > maxLength)
+        if isInvalid {
+            updateErrorMessage(with: field.validationMessage?.length ?? "")
+        }
+        return isInvalid
     }
 
     /// Checks the field should be validated by regex constraint
@@ -151,12 +166,21 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
         guard !value().isEmpty, let regexExpression = field.regularExpression else {
             return false
         }
-        return !NSRegularExpression(regexExpression).matches(value())
+        let isInvalid = !NSRegularExpression(regexExpression).matches(value())
+        if isInvalid {
+            updateErrorMessage(with: field.validationMessage?.pattern ?? "")
+        }
+        return isInvalid
+    }
+
+    /// Updates error message with given text
+    private func updateErrorMessage(with message: String) {
+        errorMessage = (field.label ?? "") + ": " + message
     }
 
     private func trackError() {
         if let fieldName = field.name,
-            let errorMessage = errorMessage() {
+            let errorMessage = getErrorMessage() {
             let errorInfo = ErrorInfoBuilder(type: errorTypeForm,
                                              message: errorMessage)
                 .fieldName(fieldName)

@@ -270,7 +270,7 @@ final class AddTransferMethodPresenter {
         return section.cells.compactMap { $0 as? AbstractWidget }
     }
 
-    private func resetErrorMessagesForAllSections() {
+    func resetErrorMessagesForAllSections() {
         sectionData.forEach { $0.errorMessage = nil }
     }
 

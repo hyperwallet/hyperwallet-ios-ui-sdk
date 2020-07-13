@@ -190,8 +190,6 @@ extension AddTransferMethodController {
     }
     /// Display's the fields to add transfer method
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let fieldGroup = presenter.sectionData[indexPath.section].fieldGroup
-        var rightAnchorConstant: Int = 0
         guard let cell = tableView.dequeueReusableCell(withIdentifier: AddTransferMethodCell.reuseIdentifier)
             else {
                 fatalError("Can't dequeue the cell")
@@ -203,9 +201,8 @@ extension AddTransferMethodController {
             widget.viewController = self
         }
 
-        if fieldGroup == "CREATE_BUTTON" {
-            rightAnchorConstant = -14
-        }
+        let fieldGroup = presenter.sectionData[indexPath.section].fieldGroup
+        let rightAnchorConstant = fieldGroup == "CREATE_BUTTON" ? -14 : 0
 
         let leftAnchor = widget.safeAreaLeadingAnchor
             .constraint(equalTo: cell.contentView.layoutMarginsGuide.leadingAnchor)
@@ -215,7 +212,7 @@ extension AddTransferMethodController {
         topAnchor.priority = UILayoutPriority(999)
 
         let rightAnchor = widget.rightAnchor.constraint(equalTo: cell.contentView.rightAnchor,
-                constant: CGFloat(rightAnchorConstant))
+                                                        constant: CGFloat(rightAnchorConstant))
         rightAnchor.priority = UILayoutPriority(999)
 
         let bottomAnchor = widget.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor)
@@ -290,6 +287,9 @@ extension AddTransferMethodController: AddTransferMethodView {
                 }
                 isFormValid = false
             }
+        }
+        if !isFormValid {
+            showErrorMessagesInFooter()
         }
         return isFormValid
     }
@@ -405,7 +405,12 @@ extension AddTransferMethodController: AddTransferMethodView {
             let newWidgets =
                 fields.map({WidgetFactory.newWidget(field: $0,
                                                     pageName: AddTransferMethodPresenter.addTransferMethodPageName,
-                                                    pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup)})
+                                                    pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup
+                ) { isValid in
+                    if !isValid {
+                        self.showErrorMessagesInFooter()
+                    }
+                }})
             let section = AddTransferMethodSectionData(
                 fieldGroup: fieldGroup,
                 country: presenter.country,
@@ -415,6 +420,21 @@ extension AddTransferMethodController: AddTransferMethodView {
             presenter.sectionData.append(section)
             widgets.append(contentsOf: newWidgets)
         }
+    }
+
+    /// Shows error messages if present for widgets, under corresponding section in footer
+    private func showErrorMessagesInFooter() {
+        presenter.resetErrorMessagesForAllSections()
+        presenter.sectionData.forEach { sectionData in
+            var errorMessages = [String]()
+            sectionData.cells.forEach { cell in
+                if let widget = cell as? AbstractWidget, let errorMessage = widget.errorMessage {
+                    errorMessages.append(errorMessage)
+                }
+            }
+            sectionData.errorMessage = errorMessages.joined(separator: "\n")
+        }
+        showFooterViewWithUpdatedSectionData(for: presenter.sectionData)
     }
 
     private func addInfoSection(_ transferMethodType: HyperwalletTransferMethodType) {
