@@ -13,7 +13,7 @@ class ListTransferMethod {
     var navigationBar: XCUIElement
     let removeAccountTitle = "remove_transfer_method_confirmation_title".localized()
     let removeAccountMessage = "remove_transfer_method_confirmation_message".localized()
-    let addAccountTitle = "add_account_title".localized()
+    let addAccountTitle = "mobileAddTransferMethodHeader".localized()
     let title = "title_accounts".localized()
     let removeButtonLabel = "remove_button_label".localized()
     let cancelButtonLabel = "cancel_button_label".localized()

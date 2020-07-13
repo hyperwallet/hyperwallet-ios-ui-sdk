@@ -36,8 +36,6 @@ public class ThemeManager: NSObject {
         Theme.Button.color = Theme.tintColor
         Theme.Icon.primaryColor = Theme.tintColor
         Theme.SpinnerView.activityIndicatorViewColor = Theme.tintColor
-        Theme.SearchBar.textFieldBackgroundColor = UIColor(rgb: 0xdcdcdc)
-        Theme.SearchBar.textFieldTintColor = UIColor(rgb: 0xdcdcdc)
         Theme.NavigationBar.shadowColor = UIColor(rgb: 0xe3e3e5)
         ThemeManager.applyTheme()
     }
@@ -76,41 +74,6 @@ public class ThemeManager: NSObject {
         proxy.backItem?.backBarButtonItem?.tintColor = Theme.NavigationBar.backButtonColor
         proxy.barStyle = Theme.NavigationBar.barStyle
         proxy.isTranslucent = Theme.NavigationBar.isTranslucent
-    }
-
-    static func applyTo(searchBar: UISearchBar) {
-        searchBar.searchBarStyle = Theme.SearchBar.style
-        searchBar.barStyle = Theme.SearchBar.barStyle
-        searchBar.backgroundColor = Theme.themeColor
-        searchBar.tintColor = Theme.SearchBar.searchIconColor
-
-        let backgroundImage = UIImage.createBackgroundPattern(
-            color: Theme.SearchBar.textFieldBackgroundColor,
-            size: CGSize(width: 36, height: 36),
-            cornerRadius: 10)
-        searchBar.setSearchFieldBackgroundImage(backgroundImage, for: UIControl.State.normal)
-        searchBar.searchTextPositionAdjustment = UIOffset(horizontal: 8.0, vertical: 0.0)
-
-        if let textField = searchBar.value(forKey: "searchField") as? UITextField {
-            textField.defaultTextAttributes = [
-                NSAttributedString.Key.foregroundColor: Theme.SearchBar.textFieldTintColor,
-                NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body)
-            ]
-            textField.attributedPlaceholder = NSAttributedString(
-                string: "search_placeholder_label".localized(),
-                attributes: [
-                    .foregroundColor: Theme.SearchBar.textFieldTintColor.withAlphaComponent(0.5),
-                    .font: UIFont.preferredFont(forTextStyle: .body)
-                ])
-            if let leftImageView = textField.leftView as? UIImageView {
-                leftImageView.image = leftImageView.image?.withRenderingMode(.alwaysTemplate)
-                leftImageView.tintColor = Theme.SearchBar.textFieldTintColor.withAlphaComponent(0.5)
-            }
-            if let clearButton = textField.value(forKey: "clearButton") as? UIButton {
-                clearButton.setImage(clearButton.imageView?.image?.withRenderingMode(.alwaysTemplate), for: .normal)
-                clearButton.tintColor = Theme.SearchBar.textFieldTintColor.withAlphaComponent(0.5)
-            }
-        }
     }
 
     private static func applyToProcessingView() {

@@ -83,10 +83,10 @@ final class SelectTransferMethodTypePresenter {
     }
 
     /// Return the countryCurrency item composed by the tuple (title and value)
-    func getCountryCurrencyConfiguration(indexPath: IndexPath) -> GenericCellConfiguration {
+    func getCountryCurrencyConfiguration(indexPath: IndexPath) -> CountryCurrencyCellConfiguration {
         let title = countryCurrencySectionData[indexPath.row]
-        return SelectedCountryCurrencyCellConfiguration(title: title.localized(),
-                                                        value: countryCurrencyValues(at: indexPath.row))
+        return CountryCurrencyCellConfiguration(title: title.localized(),
+                                                value: countryCurrencyValues(at: indexPath.row))
     }
 
     /// Display all the select Country or Currency based on the index
@@ -133,7 +133,10 @@ final class SelectTransferMethodTypePresenter {
                                 strongSelf.view?.showAlert(message: "no_country_available_error_message".localized())
                                 return
                             }
-                            strongSelf.countryCurrencySectionData = ["Country", "Currency"]
+                            strongSelf.countryCurrencySectionData = [
+                                "mobileCountryRegion".localized(),
+                                "mobileCurrencyLabel".localized()
+                            ]
                             strongSelf.loadSelectedCountry(countries, with: user?.country)
                             strongSelf.loadCurrency(result)
                             strongSelf.loadTransferMethodTypes(result)

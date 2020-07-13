@@ -25,6 +25,7 @@ public extension ThemeManager {
     /// Applies default visual styles to the Hyperwallet user interface components.
     static func applyTransferMethodTheme() {
         applyToCountryCurrencyCell()
+        applyToCountryCurrencySelectionCell()
         applyToSelectionWidgetCell()
         applyToListTransferMethodTableViewCell()
         applyToSelectTransferMethodTypeCell()
@@ -32,10 +33,16 @@ public extension ThemeManager {
 
     private static func applyToCountryCurrencyCell() {
         let proxy = CountryCurrencyCell.appearance()
-        proxy.titleLabelFont = Theme.Label.titleFont
-        proxy.titleLabelColor = Theme.Label.color
-        proxy.valueLabelFont = Theme.Label.titleFont
-        proxy.valueLabelColor = Theme.Label.textColor
+        proxy.textLabelFont = Theme.Text.labelFont
+        proxy.textLabelColor = Theme.Text.labelColor
+        proxy.detailTextLabelFont = Theme.Text.font
+        proxy.detailTextLabelColor = Theme.Text.color
+    }
+
+    private static func applyToCountryCurrencySelectionCell() {
+        let proxy = CountryCurrencySelectionCell.appearance()
+        proxy.textLabelFont = Theme.Label.titleFont
+        proxy.textLabelColor = Theme.Label.color
     }
 
     private static func applyToSelectionWidgetCell() {

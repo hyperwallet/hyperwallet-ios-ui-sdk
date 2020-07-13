@@ -652,8 +652,8 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Add transfer method".localized())
         transferFunds.addSelectDestinationLabel.tap()
 
-        // Assert Add Account View
-        XCTAssertTrue(app.navigationBars["Add Account"].exists)
+        // Assert Add a transfer method View
+        XCTAssertTrue(app.navigationBars["mobileAddTransferMethodHeader".localized()].exists)
         XCTAssertTrue(app.tables.staticTexts["United States"].exists)
         XCTAssertTrue(app.tables.staticTexts["USD"].exists)
 
@@ -730,8 +730,8 @@ class TransferUserFundsTest: BaseTests {
                              filename: "BankAccountIndividualResponse",
                              method: HTTPMethod.post)
         selectDestination.addTransferMethodButton.tap()
-        // Assert Add Account View
-        XCTAssertTrue(app.navigationBars["Add Account"].exists)
+        // Assert Add a transfer method View
+        XCTAssertTrue(app.navigationBars["mobileAddTransferMethodHeader".localized()].exists)
         XCTAssertTrue(app.tables.staticTexts["United States"].exists)
         XCTAssertTrue(app.tables.staticTexts["USD"].exists)
 
