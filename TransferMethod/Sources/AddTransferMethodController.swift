@@ -203,9 +203,10 @@ extension AddTransferMethodController {
         let fieldGroup = presenter.sectionData[indexPath.section].fieldGroup
         if fieldGroup == "INFORMATION" {
             cell.backgroundColor = Theme.Cell.disabledBackgroundColor
-        }
-        if let widget = widget as? AbstractWidget, !(widget.field.isEditable ?? true) {
+        } else if let widget = widget as? AbstractWidget, !(widget.field.isEditable ?? true) {
             cell.backgroundColor = Theme.Cell.disabledBackgroundColor
+        } else {
+            cell.backgroundColor = Theme.Cell.tintColor
         }
 
         if let widget = widget as? SelectionWidget, widget.field.isEditable ?? true {
