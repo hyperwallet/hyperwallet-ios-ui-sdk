@@ -248,7 +248,6 @@
 		DB551FC922E1421E00DD65C2 /* AbstractWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3857225E8BAA00CD4137 /* AbstractWidget.swift */; };
 		DB551FCA22E1421E00DD65C2 /* DateWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12653B2280B02900C0F59E /* DateWidget.swift */; };
 		DB551FCB22E1421E00DD65C2 /* ExpiryDateWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3851225E8BAA00CD4137 /* ExpiryDateWidget.swift */; };
-		DB551FCC22E1421E00DD65C2 /* ExpiryDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA385A225E8BAA00CD4137 /* ExpiryDatePickerView.swift */; };
 		DB551FCD22E1421E00DD65C2 /* NumberWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3850225E8BAA00CD4137 /* NumberWidget.swift */; };
 		DB551FCE22E1421E00DD65C2 /* PhoneWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12653D2280B12F00C0F59E /* PhoneWidget.swift */; };
 		DB551FCF22E1421E00DD65C2 /* SelectionWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3852225E8BAA00CD4137 /* SelectionWidget.swift */; };
@@ -906,7 +905,6 @@
 		DBCA3853225E8BAA00CD4137 /* WidgetFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetFactory.swift; sourceTree = "<group>"; };
 		DBCA3854225E8BAA00CD4137 /* TextWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextWidget.swift; sourceTree = "<group>"; };
 		DBCA3857225E8BAA00CD4137 /* AbstractWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractWidget.swift; sourceTree = "<group>"; };
-		DBCA385A225E8BAA00CD4137 /* ExpiryDatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpiryDatePickerView.swift; sourceTree = "<group>"; };
 		DBCA385C225E8BAA00CD4137 /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		DBD266802261A611002973C3 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		DBD266812261A611002973C3 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
@@ -2074,7 +2072,6 @@
 			children = (
 				DBCA3857225E8BAA00CD4137 /* AbstractWidget.swift */,
 				4A12653B2280B02900C0F59E /* DateWidget.swift */,
-				DBCA385A225E8BAA00CD4137 /* ExpiryDatePickerView.swift */,
 				DBCA3851225E8BAA00CD4137 /* ExpiryDateWidget.swift */,
 				DBCA3850225E8BAA00CD4137 /* NumberWidget.swift */,
 				4A12653D2280B12F00C0F59E /* PhoneWidget.swift */,
@@ -3284,7 +3281,6 @@
 				DB551FCD22E1421E00DD65C2 /* NumberWidget.swift in Sources */,
 				DB551FDD22E1424200DD65C2 /* SelectTransferMethodTypeController.swift in Sources */,
 				9874E68124B3981F00E95F4F /* CountryCurrencyCell.swift in Sources */,
-				DB551FCC22E1421E00DD65C2 /* ExpiryDatePickerView.swift in Sources */,
 				DB551FD022E1421E00DD65C2 /* SelectionWidgetCell.swift in Sources */,
 				DB551FCF22E1421E00DD65C2 /* SelectionWidget.swift in Sources */,
 				DB551FDA22E1424200DD65C2 /* SelectTransferMethodTypeCell.swift in Sources */,

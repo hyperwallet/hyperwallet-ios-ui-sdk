@@ -92,7 +92,7 @@ class TextWidget: AbstractWidget {
     }
 
     @objc
-    private func textFieldDidChange() {
+    func textFieldDidChange() {
         if (field.mask?.defaultPattern) != nil {
             let text = getUnformattedText()
             if !text.isEmpty {
@@ -258,7 +258,7 @@ class TextWidget: AbstractWidget {
             range: nil)
     }
 
-    private func getUnformattedText() -> String {
+    func getUnformattedText() -> String {
         if let text = textField.text {
             return getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue, text) ?? ""
         }
