@@ -167,13 +167,16 @@ extension AddTransferMethodController {
             return emptyHeaderHeight
         }
     }
-    /// Updates info section background color
+    /// Hides borders for button row
     override public func tableView(_ tableView: UITableView,
                                    willDisplay cell: UITableViewCell,
                                    forRowAt indexPath: IndexPath) {
         let fieldGroup = presenter.sectionData[indexPath.section].fieldGroup
-        if fieldGroup == "INFORMATION" {
-            cell.backgroundColor = Theme.Cell.backgroundColor
+        if fieldGroup == "CREATE_BUTTON" {
+            for subview in cell.subviews
+                where NSStringFromClass(subview.classForCoder) == "_UITableViewCellSeparatorView" {
+                subview.isHidden = true
+            }
         }
     }
     /// Returns height of row
@@ -196,12 +199,20 @@ extension AddTransferMethodController {
         }
         let widget = presenter.sectionData[indexPath.section][indexPath.row]
         cell.contentView.addSubview(widget)
+
+        let fieldGroup = presenter.sectionData[indexPath.section].fieldGroup
+        if fieldGroup == "INFORMATION" {
+            cell.backgroundColor = Theme.Cell.disabledBackgroundColor
+        }
+        if let widget = widget as? AbstractWidget, !(widget.field.isEditable ?? true) {
+            cell.backgroundColor = Theme.Cell.disabledBackgroundColor
+        }
+
         if let widget = widget as? SelectionWidget, widget.field.isEditable ?? true {
             cell.accessoryType = .disclosureIndicator
             widget.viewController = self
         }
 
-        let fieldGroup = presenter.sectionData[indexPath.section].fieldGroup
         let rightAnchorConstant = fieldGroup == "CREATE_BUTTON" ? -14 : 0
 
         let leftAnchor = widget.safeAreaLeadingAnchor
