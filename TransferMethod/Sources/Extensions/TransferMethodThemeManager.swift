@@ -29,6 +29,8 @@ public extension ThemeManager {
         applyToSelectionWidgetCell()
         applyToListTransferMethodTableViewCell()
         applyToSelectTransferMethodTypeCell()
+        applyToTextWidget()
+        applyToSelectionWidget()
     }
 
     private static func applyToCountryCurrencyCell() {
