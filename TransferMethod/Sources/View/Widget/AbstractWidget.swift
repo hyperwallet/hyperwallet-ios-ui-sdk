@@ -129,7 +129,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         let isFieldValid = isValid()
-        if isFieldValid {
+        if !isFieldValid {
             showError()
         } else {
             hideError()
