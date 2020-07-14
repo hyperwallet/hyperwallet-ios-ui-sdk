@@ -20,8 +20,14 @@ import UIKit
 
 /// Represents the expiry date widget.
 final class ExpiryDateWidget: TextWidget {
+    private static let dateTextFieldFormat = "##/##"
+    private static let dateApiFormat = "yyyy-MM"
     private static let placeholderText = "MM/YY"
-    private static let expiryDateFormat = "##/##"
+    private static var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/yy"
+        return formatter
+    }()
 
     override func setupLayout(field: HyperwalletField) {
         super.setupLayout(field: field)
@@ -31,7 +37,7 @@ final class ExpiryDateWidget: TextWidget {
     override func textFieldDidChange() {
         let text = getUnformattedText()
         if !text.isEmpty {
-            textField.text = formatDisplayString(with: ExpiryDateWidget.expiryDateFormat, inputText: text)
+            textField.text = formatDisplayString(with: ExpiryDateWidget.dateTextFieldFormat, inputText: text)
         } else {
             textField.text = ""
             textField.placeholder = ExpiryDateWidget.placeholderText
@@ -50,9 +56,8 @@ final class ExpiryDateWidget: TextWidget {
     /// - Returns: formatted expiryDate
     override func value() -> String {
         if let text = textField.text, !(textField.text?.isEmpty ?? true) {
-            let year = "20" + text.suffix(2) // TODO find a better way of doing this
-            let month = String(text.prefix(2))
-            return String(format: "%@-%@", year, month)
+            let date = ExpiryDateWidget.dateFormatter.date(from: text)
+            return date?.formatDateToString(dateFormat: ExpiryDateWidget.dateApiFormat) ?? ""
         }
         return ""
     }
