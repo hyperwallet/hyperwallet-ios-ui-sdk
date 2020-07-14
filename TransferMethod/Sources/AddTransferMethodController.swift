@@ -167,7 +167,7 @@ extension AddTransferMethodController {
             return emptyHeaderHeight
         }
     }
-    /// Hides borders for button row
+    /// Hides borders for button cell
     override public func tableView(_ tableView: UITableView,
                                    willDisplay cell: UITableViewCell,
                                    forRowAt indexPath: IndexPath) {
@@ -176,6 +176,10 @@ extension AddTransferMethodController {
             for subview in cell.subviews
                 where NSStringFromClass(subview.classForCoder) == "_UITableViewCellSeparatorView" {
                 subview.isHidden = true
+            }
+        } else {
+            for subview in cell.subviews {
+                subview.isHidden = false
             }
         }
     }
@@ -199,6 +203,9 @@ extension AddTransferMethodController {
         }
         let widget = presenter.sectionData[indexPath.section][indexPath.row]
         cell.contentView.addSubview(widget)
+        if let widget = widget as? AbstractWidget, widget.errorMessage != nil {
+            widget.showError()
+        }
 
         let fieldGroup = presenter.sectionData[indexPath.section].fieldGroup
         if fieldGroup == "INFORMATION" {
