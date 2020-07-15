@@ -56,10 +56,14 @@ final class ExpiryDateWidget: TextWidget {
     /// - Returns: formatted expiryDate
     override func value() -> String {
         if let text = textField.text, !(textField.text?.isEmpty ?? true) {
-            let date = ExpiryDateWidget.dateFormatter.date(from: text)
-            return date?.formatDateToString(dateFormat: ExpiryDateWidget.dateApiFormat) ?? ""
+            return formatExpiryDateForApi(text)
         }
         return ""
+    }
+
+    func formatExpiryDateForApi(_ text: String) -> String {
+        let date = ExpiryDateWidget.dateFormatter.date(from: text)
+        return date?.formatDateToString(dateFormat: ExpiryDateWidget.dateApiFormat) ?? ""
     }
 
     private func setupTextField() {
