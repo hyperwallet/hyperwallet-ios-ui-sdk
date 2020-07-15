@@ -155,6 +155,7 @@ extension AddTransferMethodController {
             else {
                 return
         }
+        headerView.textLabel?.font = Theme.Label.subtitleFont
         headerView.textLabel?.textColor = Theme.Label.subtitleColor
     }
     /// Returns the title for footer
