@@ -33,7 +33,7 @@ class AddTransferMethodBankAccountBusinessTests: BaseTests {
         XCTAssert(addTransferMethod.navBarBankAccount.exists)
 
         XCTAssert(addTransferMethod.addTransferMethodTableView
-            .otherElements["mobileAccountInfoLabel".localized() + " - UNITED STATES (USD)"].exists)
+            .otherElements["mobileAccountInfoLabel".localized() + ": UNITED STATES (USD)"].exists)
         XCTAssertEqual(addTransferMethod.branchIdLabel.label, "Routing Number")
         XCTAssert(addTransferMethod.branchIdInput.exists)
         XCTAssertEqual(addTransferMethod.bankAccountIdLabel.label, "Account Number")

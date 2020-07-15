@@ -76,7 +76,7 @@
 "bank_card_footer" = "CVV is a 3 digit number, typically found on the back of the card.";
 "paypal_account_footer" = "PayPal transfer method email address should be same as profile email address.";
 
-"account_information_header" = "%1$@ - %2$@ (%3$@)";
+"account_information_header" = "%1$@: %2$@ (%3$@)";
 "mobileAccountHolderLabel" = "ACCOUNT HOLDER INFO";
 "address_header"="Address";
 "mobileFeesAndProcessingTime" = "FEES AND PROCESSING TIME";

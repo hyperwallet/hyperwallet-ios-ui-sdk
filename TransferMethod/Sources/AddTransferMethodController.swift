@@ -56,6 +56,16 @@ final class AddTransferMethodController: UITableViewController {
         button.setTitleColor(Theme.Button.color, for: UIControl.State.normal)
         button.addTarget(self, action: #selector(didTap), for: .touchUpInside)
         button.backgroundColor = Theme.Button.backgroundColor
+
+        let heightConstraint = NSLayoutConstraint(item: button,
+                                                  attribute: .height,
+                                                  relatedBy: .equal,
+                                                  toItem: nil,
+                                                  attribute: .notAnAttribute,
+                                                  multiplier: 1,
+                                                  constant: 52)
+        button.addConstraint(heightConstraint)
+
         return button
     }()
 
@@ -90,6 +100,7 @@ final class AddTransferMethodController: UITableViewController {
 
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.reloadData()
         let currentNavigationItem: UINavigationItem = tabBarController?.navigationItem ?? navigationItem
         currentNavigationItem.backBarButtonItem = UIBarButtonItem.back
         titleDisplayMode(.always, for: presenter.transferMethodTypeCode.lowercased().localized())
