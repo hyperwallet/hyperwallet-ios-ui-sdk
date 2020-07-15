@@ -9,6 +9,7 @@ class TextWidgetTests: XCTestCase {
     private var expectedFormattedText: String?
     private var scrubRegex: String?
     private var expectedScrubbedText: String?
+    private var inputHandler: (Bool) -> Void = { arg in }
 
     override func setUp() {
         let coder = NSKeyedUnarchiver(forReadingWith: NSMutableData() as Data)
@@ -33,7 +34,8 @@ class TextWidgetTests: XCTestCase {
         }
         let textWidget = TextWidget(field: field,
                                     pageName: AddTransferMethodPresenter.addTransferMethodPageName,
-                                    pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup)
+                                    pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup,
+                                    inputHandler: inputHandler)
 
         var returnedPattern = textWidget.getFormatPattern(inputText: "41")
         XCTAssertEqual(returnedPattern, "######## ########", "Formatted text should be ######## ########")
