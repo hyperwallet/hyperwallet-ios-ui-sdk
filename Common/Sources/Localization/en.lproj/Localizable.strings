@@ -77,9 +77,9 @@
 "paypal_account_footer" = "PayPal transfer method email address should be same as profile email address.";
 
 "account_information_header" = "%1$@ - %2$@ (%3$@)";
-"mobileAccountHolderLabel"="ACCOUNT HOLDER INFO";
+"mobileAccountHolderLabel" = "ACCOUNT HOLDER INFO";
 "address_header"="Address";
-"mobileFeesAndProcessingTime"="FEES AND PROCESSING TIME";
+"mobileFeesAndProcessingTime" = "FEES AND PROCESSING TIME";
 "intermediary_account_header" = "Intermediary Account";
 "contact_information_header" = "Contact Information";
 
