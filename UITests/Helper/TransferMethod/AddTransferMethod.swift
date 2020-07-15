@@ -160,11 +160,19 @@ class AddTransferMethod {
     }
 
     func setBranchId(_ branchId: String) {
-        branchIdInput.clearAndEnterText(text: branchId)
+        if #available(iOS 13.0, *) {
+            branchIdInput.enterText(text: branchId)
+        } else {
+            branchIdInput.clearAndEnterText(text: branchId)
+        }
     }
 
     func setBankAccountId(_ bankAccountId: String) {
-        bankAccountIdInput.clearAndEnterText(text: bankAccountId)
+        if #available(iOS 13.0, *) {
+            bankAccountIdInput.enterText(text: bankAccountId)
+        } else {
+            bankAccountIdInput.clearAndEnterText(text: bankAccountId)
+        }
     }
 
     func selectAccountType(_ accountType: String) {

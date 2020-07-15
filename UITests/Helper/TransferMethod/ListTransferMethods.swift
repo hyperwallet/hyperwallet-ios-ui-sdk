@@ -81,4 +81,8 @@ class ListTransferMethod {
 
           return expectedLabel
       }
+
+    func getTransferMethodIcon(index: Int) -> XCUIElement {
+       return app.cells.element(boundBy: index).images["ListTransferMethodTableViewCellIcon"]
+    }
 }

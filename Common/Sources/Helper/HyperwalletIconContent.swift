@@ -21,99 +21,25 @@ import Foundation
 /// Represents the Hyperwallet Icon type
 public enum HyperwalletIconContent: String {
     /// The icon for Bank
-    case bank = "\u{e000}"
-    /// The icon for cash payment type
-    case cashPayment = "\u{e001}"
+    case bank = "\u{e900}"
+    /// The icon for add transfer method
+    case addTransferMethod = "\u{e90b}"
     /// The icon for check type
-    case check = "\u{e002}"
-    /// The icon for collection
-    case collection = "\u{e003}"
-    /// The icon for contact
-    case contact = "\u{e004}"
+    case check = "\u{e902}"
     /// The icon for debit and credit card type
-    case debitCredit = "\u{e005}"
-    /// The icon for FAQ
-    case faq = "\u{e006}"
-    /// The icon for getting Started
-    case gettingStarted = "\u{e007}"
-    /// The icon for mobile
-    case mobile = "\u{e008}"
-    /// The icon for notifications
-    case notifications01 = "\u{e009}"
+    case debitCredit = "\u{e903}"
     /// The icon for prepaid card type
-    case prepaidCard = "\u{e00a}"
-    /// The icon for security
-    case security = "\u{e00b}"
-    /// The icon for westernunion transfer type
-    case westernUnion = "\u{e00c}"
+    case prepaidCard = "\u{e901}"
     /// The icon for wire transfer type
-    case wire = "\u{e00d}"
-    /// The icon for cashpayment02
-    case cashPayment02 = "\u{e00e}"
-    /// The icon for date of birth for activation
-    case activationDateOfBirth = "\u{e00f}"
-    /// The icon for incentives
-    case incentives = "\u{e010}"
-    /// The icon for activation initials
-    case activationInitials = "\u{e011}"
-    /// The icon for activationId
-    case activationId = "\u{e012}"
-    /// The icon for activation code
-    case activationCode = "\u{e013}"
-    /// The icon for activation extra id
-    case activationExtraid = "\u{e014}"
-    /// The icon for activation sms
-    case activationSms = "\u{e015}"
-    /// The icon for activation call
-    case activationCall = "\u{e016}"
-    /// The icon for amazon
-    case amazon = "\u{e017}"
-    /// The icon for verify account
-    case verifyAccount = "\u{e018}"
-    /// The icon for transfer funds
-    case transferFunds = "\u{e019}"
-    /// The icon for bank notes
-    case bankNotes = "\u{e01a}"
-    /// The icon for amazon smile
-    case amazonSmile = "\u{e01b}"
-    /// The icon for activation of email
-    case activationEmail = "\u{e01c}"
-    /// The icon to refresh
-    case refresh = "\u{e01d}"
-    /// The icon for info
-    case info = "\u{e01e}"
-    /// The icon for money
-    case money = "\u{e01f}"
-    /// The icon for deposit account
-    case depositAcct = "\u{e020}"
+    case wire = "\u{e90a}"
+    /// The icon for venmo transfer type
+    case venmo = "\u{e909}"
+    /// The icon for moenygram transfer type
+    case moneygram = "\u{e905}"
     /// The icon for paypal transfer type
-    case paypal = "\u{e021}"
-    /// The icon for business type
-    case business = "\u{e022}"
-    /// The icon for individual type
-    case individual = "\u{e023}"
-    /// The globe icon
-    case globe = "\u{e024}"
-    /// The circle icon
-    case circle = "\u{e025}"
-    /// The trash icon
-    case trash = "\u{e026}"
-    /// The white questionicon icon
-    case whiteQuestion = "\u{e027}"
-    /// The link icon
-    case link = "\u{e028}"
-    /// The record icon
-    case record = "\u{e029}"
-    /// The info1 icon
-    case info1 = "\u{e02a}"
-    /// The premiumFinal icon
-    case premiumFinal = "\u{e02b}"
-    /// The info2 icon
-    case info2 = "\u{e02c}"
-    /// The basicfinal icon
-    case basicfinal = "\u{e030}"
+    case paypal = "\u{e906}"
     /// The credit icon
-    case credit = "\u{e902}"
+    case credit = "\u{e907}"
     /// The debit icon
-    case debit = "\u{e900}"
+    case debit = "\u{e908}"
 }
