@@ -29,7 +29,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
     private var pageGroup: String!
     lazy var hyperwalletInsights: HyperwalletInsightsProtocol = HyperwalletInsights.shared
     private let errorTypeForm = "FORM"
-    typealias InputHandler = (_ isValid: Bool) -> Void
+    typealias InputHandler = () -> Void
     private var inputHandler: InputHandler?
     private(set) var errorMessage: String?
 
@@ -97,6 +97,8 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
         if isInvalidEmptyValue() || isInvalidLength() || isInvalidRegex() {
             trackError()
             isValid = false
+        } else {
+            errorMessage = nil
         }
         return isValid
     }
@@ -134,7 +136,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
         } else {
             hideError()
         }
-        inputHandler?(isFieldValid)
+        inputHandler?()
     }
 
     //swiftlint:disable unavailable_function

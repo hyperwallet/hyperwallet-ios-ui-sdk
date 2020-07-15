@@ -12,7 +12,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
     private lazy var transferMethodConfigurationFieldsResponse = HyperwalletTestHelper
         .getDataFromJson("TransferMethodConfigurationFieldsResponse")
     private var hyperwalletInsightsMock = HyperwalletInsightsMock()
-    private var inputHandler: (Bool) -> Void = { arg in }
+    private var inputHandler: () -> Void = {}
 
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)

@@ -52,7 +52,7 @@ final class AddTransferMethodController: UITableViewController {
         button.accessibilityIdentifier = "createAccountButton"
         button.setTitle("createTransferMethodButtonLabel".localized(), for: .normal)
         button.titleLabel?.adjustsFontForContentSizeCategory = true
-        button.titleLabel?.font = Theme.Label.titleFont
+        button.titleLabel?.font = Theme.Button.font
         button.setTitleColor(Theme.Button.color, for: UIControl.State.normal)
         button.addTarget(self, action: #selector(didTap), for: .touchUpInside)
         button.backgroundColor = Theme.Button.backgroundColor
@@ -224,7 +224,7 @@ extension AddTransferMethodController {
         } else if let widget = widget as? AbstractWidget, !(widget.field.isEditable ?? true) {
             cell.backgroundColor = Theme.Cell.disabledBackgroundColor
         } else {
-            cell.backgroundColor = Theme.Cell.tintColor
+            cell.backgroundColor = Theme.UITableViewController.backgroundColor
         }
 
         if let widget = widget as? SelectionWidget, widget.field.isEditable ?? true {
@@ -318,9 +318,7 @@ extension AddTransferMethodController: AddTransferMethodView {
                 isFormValid = false
             }
         }
-        if !isFormValid {
-            showErrorMessagesInFooter()
-        }
+        updateErrorMessagesInFooter()
         return isFormValid
     }
 
@@ -436,10 +434,8 @@ extension AddTransferMethodController: AddTransferMethodView {
                 fields.map({WidgetFactory.newWidget(field: $0,
                                                     pageName: AddTransferMethodPresenter.addTransferMethodPageName,
                                                     pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup
-                ) { isValid in
-                    if !isValid {
-                        self.showErrorMessagesInFooter()
-                    }
+                ) {
+                    self.updateErrorMessagesInFooter()
                 }})
             let section = AddTransferMethodSectionData(
                 fieldGroup: fieldGroup,
@@ -452,8 +448,8 @@ extension AddTransferMethodController: AddTransferMethodView {
         }
     }
 
-    /// Shows error messages if present for widgets, under corresponding section in footer
-    private func showErrorMessagesInFooter() {
+    /// Updates error messages if present for widgets, under corresponding section in footer
+    private func updateErrorMessagesInFooter() {
         presenter.resetErrorMessagesForAllSections()
         presenter.sectionData.forEach { sectionData in
             var errorMessages = [String]()

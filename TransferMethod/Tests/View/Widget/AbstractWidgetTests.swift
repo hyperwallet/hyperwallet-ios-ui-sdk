@@ -27,7 +27,7 @@ class AbstractWidgetTests: XCTestCase {
     private var hyperwalletInsightsMock = HyperwalletInsightsMock()
     let fieldData = HyperwalletTestHelper.getDataFromJson("HyperwalletFieldResponse")
     var textWidget: AbstractWidget!
-    private var inputHandler: (Bool) -> Void = { arg in }
+    private var inputHandler: () -> Void = {}
 
     override func setUp() {
         guard let field = try? JSONDecoder().decode(HyperwalletField.self, from: fieldData) else {
