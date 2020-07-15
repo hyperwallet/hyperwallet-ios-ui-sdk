@@ -20,6 +20,7 @@ import Foundation
 
 /// The HyperwalletIcon class
 public final class HyperwalletIcon {
+    // swiftlint:disable cyclomatic_complexity
     /// Make transfer method type icon by transfer method type
     ///
     /// - Parameter transferMethodType: a type of transfer method in String
@@ -42,9 +43,13 @@ public final class HyperwalletIcon {
             return .credit
         case "DEBIT":
             return .debit
+        case "VENMO_ACCOUNT":
+            return .venmo
+        case "CASH_PICKUP_MG":
+            return .moneygram
 
         default:
-            return .westernUnion
+            return .bank
         }
     }
 }
