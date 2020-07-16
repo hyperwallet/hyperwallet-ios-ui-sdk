@@ -215,6 +215,7 @@
 		B312939A24BF70F1000B6DAE /* ExpiryDateWidgetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B312939924BF70F1000B6DAE /* ExpiryDateWidgetTests.swift */; };
 		B32D70922391A7410079A34E /* TextWidgetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32D70912391A7410079A34E /* TextWidgetTests.swift */; };
 		B32FD83823DF66D700832544 /* ListTransferDestinationPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32FD83723DF66D700832544 /* ListTransferDestinationPresenterTests.swift */; };
+		B344D3A524C103D300F17DC3 /* CreateTransferMethodButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B344D3A424C103D300F17DC3 /* CreateTransferMethodButtonCell.swift */; };
 		B3758D9D24A6D63400ED9151 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3758D9C24A6D63400ED9151 /* UITextField.swift */; };
 		B39E00DF24B4FB0A00E3BC4D /* hw_mobile_ui_sdk_icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B39E00DE24B4FB0A00E3BC4D /* hw_mobile_ui_sdk_icons.ttf */; };
 		B3DCEA8A23DA2AA500217CF9 /* ListTransferDestinationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DCEA8923DA2AA500217CF9 /* ListTransferDestinationController.swift */; };
@@ -781,6 +782,7 @@
 		B312939924BF70F1000B6DAE /* ExpiryDateWidgetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpiryDateWidgetTests.swift; sourceTree = "<group>"; };
 		B32D70912391A7410079A34E /* TextWidgetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextWidgetTests.swift; sourceTree = "<group>"; };
 		B32FD83723DF66D700832544 /* ListTransferDestinationPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTransferDestinationPresenterTests.swift; sourceTree = "<group>"; };
+		B344D3A424C103D300F17DC3 /* CreateTransferMethodButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransferMethodButtonCell.swift; sourceTree = "<group>"; };
 		B3758D9C24A6D63400ED9151 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		B39E00DE24B4FB0A00E3BC4D /* hw_mobile_ui_sdk_icons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = hw_mobile_ui_sdk_icons.ttf; sourceTree = "<group>"; };
 		B3DCEA8923DA2AA500217CF9 /* ListTransferDestinationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTransferDestinationController.swift; sourceTree = "<group>"; };
@@ -1772,6 +1774,7 @@
 				DBCA381C225E8BA900CD4137 /* SelectTransferMethodTypeController.swift */,
 				DB551FA922E1409700DD65C2 /* TransferMethod.h */,
 				DB551FAA22E1409700DD65C2 /* Info.plist */,
+				B344D3A424C103D300F17DC3 /* CreateTransferMethodButtonCell.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -3285,6 +3288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A65312D522FC055300A83D30 /* TransferMethodCoordinators.swift in Sources */,
+				B344D3A524C103D300F17DC3 /* CreateTransferMethodButtonCell.swift in Sources */,
 				DB551FCD22E1421E00DD65C2 /* NumberWidget.swift in Sources */,
 				DB551FDD22E1424200DD65C2 /* SelectTransferMethodTypeController.swift in Sources */,
 				9874E68124B3981F00E95F4F /* CountryCurrencyCell.swift in Sources */,
