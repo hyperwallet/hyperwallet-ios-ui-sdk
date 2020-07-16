@@ -65,7 +65,6 @@ class AddTransferMethodBankCardTests: BaseTests {
 
         XCTAssertEqual(addTransferMethod.cardNumberLabel.label, addTransferMethod.cardNumber)
 
-            
         XCTAssert(addTransferMethod.cardNumberInput.exists)
 
         XCTAssertEqual(addTransferMethod.dateOfExpiryLabel.label, addTransferMethod.expiryDate)
@@ -94,7 +93,7 @@ class AddTransferMethodBankCardTests: BaseTests {
 
         XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", cardNumberPatternError)).count == 1)
         XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", expiryDateEmptyError)).count == 1)
-        XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", cvvLengthError)).count == 1)
+        XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", cvvPatternError)).count == 1)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidLength() {
