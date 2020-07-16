@@ -71,7 +71,17 @@ class AddTransferMethod {
     var navBarDebitCard: XCUIElement
     var navBarWireAccount: XCUIElement
     var navBarPaypal: XCUIElement
-    var title = "Account Settings"
+    var cardNumberError: XCUIElement!
+    var cvvNumberError: XCUIElement!
+    var dateOfExpiryError: XCUIElement
+    let title = "Account Settings"
+    let cardNumber = "Card Number"
+    let expiryDate = "Expiry Date"
+    let cvvSecurityCode = "CVV (Card Security Code)"
+    let emptyError = "You must provide a value for this field"
+    let lengthConstraintError = "The minimum length of this field is %d and maximum length is %d."
+    let patternValidationError = "is invalid length or format."
+    let expireDatePlaceholder = "MM/YY"
 
     // swiftlint:disable function_body_length
     init(app: XCUIApplication) {
@@ -99,7 +109,7 @@ class AddTransferMethod {
         contactInformationHeader = addTransferMethodTableView.staticTexts["Contact Information"]
         addressHeader = addTransferMethodTableView.staticTexts["Address"]
         transferMethodInformationHeader = addTransferMethodTableView
-                .staticTexts["mobileFeesAndProcessingTime".localized()]
+            .staticTexts["mobileFeesAndProcessingTime".localized()]
 
         // Inputs
         bankIdInput = addTransferMethodTableView.textFields["bankId"]
@@ -153,6 +163,11 @@ class AddTransferMethod {
         addressLineLabel = elementQuery["addressLine1"]
         cityLabel = elementQuery["city"]
         postalCodeLabel = elementQuery["postalCode"]
+
+        // Debit Errors
+        cardNumberError = elementQuery["cardNumber_error"]
+        cvvNumberError = elementQuery["cvv_error"]
+        dateOfExpiryError = elementQuery["dateOfExpiry_error"]
     }
 
     func setBankId(_ bankId: String) {
@@ -181,7 +196,7 @@ class AddTransferMethod {
         cardNumberInput.clearAndEnterText(text: cardNumber)
     }
 
-    func setDateOfExpiry(expiryMonth: String, expiryYear: String) {
+    func setDateOfExpiryByDatePicker(expiryMonth: String, expiryYear: String) {
         dateOfExpiryInput.tap()
 
         // Supporting multiple localizations for month and year
@@ -194,6 +209,18 @@ class AddTransferMethod {
         app.pickerWheels[String(dateComponent.year!)].adjust(toPickerWheelValue: expiryYear)
         app.pickerWheels[monthText].adjust(toPickerWheelValue: expiryMonth)
         app.toolbars.buttons["Done"].tap()
+    }
+
+    func setDateOfExpiryByMMYY(expiryMonth: String, expiryYear: String) {
+        dateOfExpiryInput.tap()
+        // Supporting multiple localizations for month and year
+        dateOfExpiryInput.clearAndEnterText(text: expiryMonth + expiryYear)
+    }
+
+    func setDateOfExpiryByMMPYYWithSlash(expiryMonth: String, expiryYear: String) {
+        dateOfExpiryInput.tap()
+        // Supporting multiple localizations for month and year
+        dateOfExpiryInput.clearAndEnterText(text: expiryMonth + "/" + expiryYear)
     }
 
     func clickBackButton() {
@@ -277,5 +304,17 @@ class AddTransferMethod {
 
     func setBusinessRegistrationId(_ registrationId: String) {
         businessRegistrationIdInput.clearAndEnterText(text: registrationId)
+    }
+
+    func getLengthConstraintError(label: String, min: Int, max: Int) -> String {
+        return label + ": " + String(format: lengthConstraintError, min, max)
+    }
+
+    func getEmptyError(label: String) -> String {
+        return label + ": " + emptyError
+    }
+
+    func getPatternError(label: String) -> String {
+        return label + ": " + patternValidationError
     }
 }
