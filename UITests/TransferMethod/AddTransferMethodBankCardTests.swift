@@ -61,9 +61,11 @@ class AddTransferMethodBankCardTests: BaseTests {
         XCTAssert(addTransferMethod.navBarDebitCard.exists)
 
         XCTAssert(addTransferMethod.addTransferMethodTableView
-            .staticTexts["mobileAccountInfoLabel".localized() + " - United States (USD)"].exists)
+            .staticTexts["mobileAccountInfoLabel".localized() + ": United States (USD)"].exists)
 
         XCTAssertEqual(addTransferMethod.cardNumberLabel.label, addTransferMethod.cardNumber)
+
+            
         XCTAssert(addTransferMethod.cardNumberInput.exists)
 
         XCTAssertEqual(addTransferMethod.dateOfExpiryLabel.label, addTransferMethod.expiryDate)

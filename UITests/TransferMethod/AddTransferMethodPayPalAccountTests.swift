@@ -37,7 +37,7 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
         XCTAssert(addTransferMethod.navBarPaypal.exists)
 
         XCTAssert(addTransferMethod.addTransferMethodTableView
-            .staticTexts["mobileAccountInfoLabel".localized() + " - United States (USD)"].exists)
+            .staticTexts["mobileAccountInfoLabel".localized() + ": United States (USD)"].exists)
         XCTAssertEqual(addTransferMethod.emailLabel.label, "Email")
         XCTAssert(addTransferMethod.emailInput.exists)
 

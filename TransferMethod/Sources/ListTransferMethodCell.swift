@@ -76,6 +76,7 @@ extension ListTransferMethodCell {
                                         CGFloat(Theme.Icon.size),
                                         Theme.Icon.primaryColor)
             imageView?.image = icon
+            imageView?.accessibilityIdentifier = "ListTransferMethodTableViewCellIcon"
             imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
         }
     }

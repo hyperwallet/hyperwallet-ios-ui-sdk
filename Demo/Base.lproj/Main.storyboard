@@ -5,8 +5,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="icomoon.ttf">
-            <string>icomoon</string>
+        <array key="hw_mobile_ui_sdk_icons.ttf">
+            <string>hw_mobile_ui_sdk_icons</string>
         </array>
     </customFonts>
     <scenes>

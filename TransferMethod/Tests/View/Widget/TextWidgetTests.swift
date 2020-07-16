@@ -9,7 +9,7 @@ class TextWidgetTests: XCTestCase {
     private var expectedFormattedText: String?
     private var scrubRegex: String?
     private var expectedScrubbedText: String?
-    private var inputHandler: (Bool) -> Void = { arg in }
+    private var inputHandler: () -> Void = {}
 
     override func setUp() {
         let coder = NSKeyedUnarchiver(forReadingWith: NSMutableData() as Data)

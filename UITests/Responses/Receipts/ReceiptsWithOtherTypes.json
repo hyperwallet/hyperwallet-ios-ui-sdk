@@ -1,0 +1,126 @@
+{
+    "count": 4,
+    "offset": 0,
+    "limit": 20,
+    "data": [
+        {
+            "token": "rcp-a60c11d7-a082-492d-93b7-fc4e6357ca58",
+            "journalId": "63904540",
+            "type": "FOREIGN_EXCHANGE",
+            "createdOn": "2020-07-09T23:19:21",
+            "entry": "DEBIT",
+            "sourceToken": "usr-04364ef3-23c5-47b9-bf81-2fe09eb41bea",
+            "destinationToken": "usr-04364ef3-23c5-47b9-bf81-2fe09eb41bea",
+            "amount": "15.89",
+            "currency": "USD",
+            "foreignExchangeRate": "1.274386",
+            "foreignExchangeCurrency": "CAD",
+            "details": {
+                "notes": "Buying $20.25 CAD at exchange rate 1.274386"
+            },
+            "links": [
+                {
+                    "params": {
+                        "rel": "self"
+                    },
+                    "href": "https://qamaster-hyperwallet.aws.paylution.net/rest/v3/users/usr-04364ef3-23c5-47b9-bf81-2fe09eb41bea/receipts/rcp-a60c11d7-a082-492d-93b7-fc4e6357ca58"
+                }
+            ]
+        },
+        {
+            "token": "rcp-token",
+            "journalId": "63898087",
+            "type": "TRANSFER_TO_MONEYGRAM",
+            "createdOn": "2020-07-07T22:56:08",
+            "entry": "DEBIT",
+            "sourceToken": "usr-token",
+            "destinationToken": "trm-token",
+            "amount": "107.00",
+            "fee": "7.00",
+            "currency": "CAD",
+            "links": [
+                {
+                    "params": {
+                        "rel": "self"
+                    },
+                    "href": "https://localhost/rest/v3/users/usr-token/receipts/rcp-token"
+                }
+            ]
+        },
+        {
+            "token": "rcp-efd71225-8758-4a38-993f-3695c1516754",
+            "journalId": "63897950",
+            "type": "TRANSFER_TO_VENMO_ACCOUNT",
+            "createdOn": "2020-07-06T22:31:25",
+            "entry": "DEBIT",
+            "sourceToken": "usr-04364ef3-23c5-47b9-bf81-2fe09eb41bea",
+            "destinationToken": "trm-dc13016b-b749-47ee-86e2-9afade7bccf2",
+            "amount": "101.94",
+            "fee": "0.95",
+            "currency": "USD",
+            "details": {
+                "payeeName": "iOS Mobile mobile-qa UITest",
+                "accountId": "5555555555"
+            },
+            "links": [
+                {
+                    "params": {
+                        "rel": "self"
+                    },
+                    "href": "https://qamaster-hyperwallet.aws.paylution.net/rest/v3/users/usr-04364ef3-23c5-47b9-bf81-2fe09eb41bea/receipts/rcp-efd71225-8758-4a38-993f-3695c1516754"
+                }
+            ]
+        },
+        {
+            "journalId": "55176995",
+            "type": "TRANSFER_TO_PAYPAL_ACCOUNT",
+            "createdOn": "2020-05-02T18:16:17",
+            "entry": "CREDIT",
+            "sourceToken": "usr-token",
+            "destinationToken": "trm-00000000-0000-0000-0000-0000000000",
+            "amount": "5.00",
+            "currency": "USD"
+        },
+        {
+            "journalId": "55176996",
+            "type": "TRANSFER_TO_DEBIT_CARD",
+            "createdOn": "2020-05-01T18:16:17",
+            "entry": "CREDIT",
+            "sourceToken": "usr-token",
+            "destinationToken": "trm-00000000-0000-0000-0000-0000000000",
+            "amount": "5.00",
+            "currency": "USD"
+        },
+        {
+            "journalId": "55176996",
+            "type": "TRANSFER_UNKNOWN",
+            "createdOn": "2019-04-01T18:16:17",
+            "entry": "CREDIT",
+            "sourceToken": "usr-token",
+            "destinationToken": "trm-00000000-0000-0000-0000-0000000000",
+            "amount": "99.99",
+            "currency": "USD"
+        }
+    ]
+    "links": [
+        {
+            "params": {
+                "rel": "self"
+            },
+            "href": "https://localhost/rest/v3/users/usr-token/receipts?offset=0&limit=10"
+        },
+        {
+            "params": {
+                "rel": "next"
+            },
+            "href": "https://localhost/rest/v3/users/usr-token/receipts?offset=10&limit=10"
+        },
+        {
+            "params": {
+                "rel": "last"
+            },
+            "href": "https://localhost/rest/v3/users/usr-token/receipts?offset=11&limit=10"
+        }
+    ]
+}
+
