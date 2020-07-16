@@ -472,6 +472,7 @@ extension AddTransferMethodController: AddTransferMethodView {
             infoLabel.attributedText = transferMethodType
                 .formatFeesProcessingTime(font: Theme.Label.subtitleFont, color: Theme.Label.subtitleColor)
             infoLabel.font = Theme.Label.subtitleFont
+            infoLabel.textColor = Theme.Label.color
             let infoSection = AddTransferMethodSectionData(
                 fieldGroup: "INFORMATION",
                 cells: [infoView])
