@@ -88,7 +88,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
     }
 
     func hideError() {
-        label.textColor = Theme.Label.textColor
+        label.textColor = Theme.Text.labelColor
         label.accessibilityIdentifier = String(format: "%@", field.name ?? "")
     }
 
