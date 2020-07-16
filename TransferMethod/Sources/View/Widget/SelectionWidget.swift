@@ -106,7 +106,11 @@ final class SelectionWidget: AbstractWidget {
 
     @objc dynamic var textLabelColor: UIColor! {
         get { return self.label.textColor }
-        set { self.label.textColor = newValue }
+        set {
+            if !(self.label.accessibilityIdentifier?.hasSuffix("_error") ?? false) {
+                self.label.textColor = newValue
+            }
+        }
     }
 
     @objc dynamic var textLabelFont: UIFont! {
