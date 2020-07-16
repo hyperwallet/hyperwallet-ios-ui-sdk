@@ -3,6 +3,7 @@ import XCTest
 class AddTransferMethodBankCardTests: BaseTests {
     var selectTransferMethodType: SelectTransferMethodType!
     var addTransferMethod: AddTransferMethod!
+    var otherElements: XCUIElementQuery!
     let debitCard = NSPredicate(format: "label CONTAINS[c] 'Debit Card'")
     let debitCardDuplicateError = "The card is already registered."
     let debitCardInvalidCvvError = "The card cannot be registered - The CVV entered is invalid."
@@ -54,6 +55,8 @@ class AddTransferMethodBankCardTests: BaseTests {
         cardLengthError = addTransferMethod.getLengthConstraintError(label: addTransferMethod.cardNumber, min: 13, max: 19)
 
         cvvLengthError = addTransferMethod.getLengthConstraintError(label: addTransferMethod.cvvSecurityCode, min: 3, max: 4)
+
+        otherElements = addTransferMethod.addTransferMethodTableView.otherElements
     }
 
     func testAddTransferMethod_displaysElementsOnTmcResponse() {
@@ -86,8 +89,6 @@ class AddTransferMethodBankCardTests: BaseTests {
         addTransferMethod.setCvv("9#-")
         addTransferMethod.clickCreateTransferMethodButton()
 
-        let otherElements = addTransferMethod.addTransferMethodTableView.otherElements
-
         XCTAssert(addTransferMethod.cardNumberError.exists)
         XCTAssert(addTransferMethod.cvvNumberError.exists)
 
@@ -104,8 +105,6 @@ class AddTransferMethodBankCardTests: BaseTests {
         XCTAssert(addTransferMethod.cardNumberError.exists)
         XCTAssert(addTransferMethod.cvvNumberError.exists)
 
-        let otherElements = addTransferMethod.addTransferMethodTableView.otherElements
-
         XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", cardLengthError)).count == 1)
         XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", expiryDateEmptyError)).count == 1)
         XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", cvvLengthError)).count == 1)
@@ -119,7 +118,6 @@ class AddTransferMethodBankCardTests: BaseTests {
         XCTAssert(addTransferMethod.dateOfExpiryError.exists)
         XCTAssert(addTransferMethod.cardNumberError.exists)
         XCTAssert(addTransferMethod.cvvNumberError.exists)
-        let otherElements = addTransferMethod.addTransferMethodTableView.otherElements
 
         XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", cardNumberEmptyError)).count == 1)
 
@@ -176,7 +174,6 @@ class AddTransferMethodBankCardTests: BaseTests {
         addTransferMethod.clickCreateTransferMethodButton()
         waitForNonExistence(spinner)
 
-        let otherElements = addTransferMethod.addTransferMethodTableView.otherElements
         XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", debitCardDuplicateError)).count == 1)
     }
 }

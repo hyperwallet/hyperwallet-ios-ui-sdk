@@ -4,7 +4,7 @@ class AddTransferMethod {
     let defaultTimeout = 5.0
 
     var app: XCUIApplication
-
+    var elementQuery: XCUIElementQuery
     var addTransferMethodTableView: XCUIElement
     var bankIdInput: XCUIElement
     var branchIdInput: XCUIElement
@@ -74,7 +74,21 @@ class AddTransferMethod {
     var cardNumberError: XCUIElement!
     var cvvNumberError: XCUIElement!
     var dateOfExpiryError: XCUIElement
+    var bankIdError: XCUIElement
+    var branchIdError: XCUIElement
+    var bankAccountIdError: XCUIElement
+    var bankAccountPurposeError: XCUIElement
+
+    // labels
     let title = "Account Settings"
+    // Wire Account
+    let swiftNumber = "BIC/SWIFT"
+    let accountNumberORIBan = "Account Number OR IBAN"
+
+    // Bank Account
+    let routingNumber = "Routing Number"
+    let accountNumber = "Account Number"
+    // Bank Card
     let cardNumber = "Card Number"
     let expiryDate = "Expiry Date"
     let cvvSecurityCode = "CVV (Card Security Code)"
@@ -82,11 +96,16 @@ class AddTransferMethod {
     let lengthConstraintError = "The minimum length of this field is %d and maximum length is %d."
     let patternValidationError = "is invalid length or format."
     let expireDatePlaceholder = "MM/YY"
+    let firstName = "First Name"
+    let middleName = "Middle Name"
+    let lastName =  "Last Name"
+    let phoneNumber = "Phone Number"
+    let mobileNumber = "Mobile Number"
+    let dateOfBirth = "Date of Birth"
 
     // swiftlint:disable function_body_length
     init(app: XCUIApplication) {
         self.app = app
-
         navBar = app.navigationBars[title]
         navBarBankAccount = app.navigationBars["bank_account".localized()]
         navBarDebitCard = app.navigationBars["bank_card".localized()]
@@ -96,7 +115,6 @@ class AddTransferMethod {
         addTransferMethodTableView = app.tables["addTransferMethodTable"]
         createTransferMethodButton = addTransferMethodTableView.buttons["createAccountButton"]
 
-        var elementQuery: XCUIElementQuery
         if #available(iOS 13.0, *) {
             elementQuery = addTransferMethodTableView.buttons
         } else {
@@ -164,10 +182,16 @@ class AddTransferMethod {
         cityLabel = elementQuery["city"]
         postalCodeLabel = elementQuery["postalCode"]
 
-        // Debit Errors
+        // Bank Card Errors
         cardNumberError = elementQuery["cardNumber_error"]
         cvvNumberError = elementQuery["cvv_error"]
         dateOfExpiryError = elementQuery["dateOfExpiry_error"]
+
+        // Bank Account Errors
+        bankIdError = elementQuery["bankId_error"]
+        branchIdError = elementQuery["branchId_error"]
+        bankAccountIdError = elementQuery["bankAccountId_error"]
+        bankAccountPurposeError = elementQuery["bankAccountPurpose_error"]
     }
 
     func setBankId(_ bankId: String) {
@@ -324,5 +348,17 @@ class AddTransferMethod {
 
     func getPatternError(label: String) -> String {
         return label + ": " + patternValidationError
+    }
+
+    func getEmailPatternError(label: String) -> String {
+        return label + ": " + "email is invalid"
+    }
+
+    func getSwiftNumberError(length: Int) -> String {
+        return swiftNumber + ": " + "The exact length of this field is \(length)"
+    }
+
+    func getRoutingNumberError(length: Int) -> String {
+        return routingNumber + ": " + "The exact length of this field is \(length)"
     }
 }
