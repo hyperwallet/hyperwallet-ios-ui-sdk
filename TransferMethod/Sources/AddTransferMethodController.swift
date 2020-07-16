@@ -37,6 +37,11 @@ final class AddTransferMethodController: UITableViewController {
         }
     }()
 
+    private let registeredCells: [(type: AnyClass, id: String)] = [
+        (AddTransferMethodCell.self, AddTransferMethodCell.reuseIdentifier),
+        (CreateTransferMethodButtonCell.self, CreateTransferMethodButtonCell.reuseIdentifier)
+    ]
+
     // MARK: - Properties -
     private var forceUpdate: Bool?
     private var processingView: ProcessingView?
@@ -120,10 +125,9 @@ final class AddTransferMethodController: UITableViewController {
         tableView.estimatedRowHeight = Theme.Cell.smallHeight
         tableView.backgroundColor = Theme.UITableViewController.backgroundColor
         tableView.accessibilityIdentifier = "addTransferMethodTable"
-        tableView.register(
-            AddTransferMethodCell.self,
-            forCellReuseIdentifier: AddTransferMethodCell.reuseIdentifier
-        )
+        registeredCells.forEach {
+            tableView.register($0.type, forCellReuseIdentifier: $0.id)
+        }
     }
 
     private func initializePresenter() {
@@ -178,22 +182,6 @@ extension AddTransferMethodController {
             return emptyHeaderHeight
         }
     }
-    /// Hides borders for button cell
-    override public func tableView(_ tableView: UITableView,
-                                   willDisplay cell: UITableViewCell,
-                                   forRowAt indexPath: IndexPath) {
-        let fieldGroup = presenter.sectionData[indexPath.section].fieldGroup
-        if fieldGroup == "CREATE_BUTTON" {
-            for subview in cell.subviews
-                where NSStringFromClass(subview.classForCoder) == "_UITableViewCellSeparatorView" {
-                subview.isHidden = true
-            }
-        } else {
-            for subview in cell.subviews {
-                subview.isHidden = false
-            }
-        }
-    }
     /// Returns height of row
     override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return Theme.Cell.smallHeight
@@ -208,7 +196,11 @@ extension AddTransferMethodController {
     }
     /// Display's the fields to add transfer method
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: AddTransferMethodCell.reuseIdentifier)
+        let fieldGroup = presenter.sectionData[indexPath.section].fieldGroup
+        let reuseIdentifier = fieldGroup == "CREATE_BUTTON" ?
+                CreateTransferMethodButtonCell.reuseIdentifier : AddTransferMethodCell.reuseIdentifier
+
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)
             else {
                 fatalError("Can't dequeue the cell")
         }
@@ -218,7 +210,6 @@ extension AddTransferMethodController {
             widget.showError()
         }
 
-        let fieldGroup = presenter.sectionData[indexPath.section].fieldGroup
         if fieldGroup == "INFORMATION" {
             cell.backgroundColor = Theme.Cell.disabledBackgroundColor
         } else if let widget = widget as? AbstractWidget, !(widget.field.isEditable ?? true) {
