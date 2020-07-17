@@ -3,7 +3,6 @@ import XCTest
 class AddTransferMethodBankAccountBusinessTests: BaseTests {
     var selectTransferMethodType: SelectTransferMethodType!
     var addTransferMethod: AddTransferMethod!
-
     let bankAccount = NSPredicate(format: "label CONTAINS[c] 'Bank Account'")
 
     override func setUp() {
@@ -49,7 +48,7 @@ class AddTransferMethodBankAccountBusinessTests: BaseTests {
         XCTAssertEqual(addTransferMethod.mobileNumberLabel.label, "Mobile Number")
         XCTAssert(addTransferMethod.mobileNumberInput.exists)
 
-        XCTAssert(addTransferMethod.addTransferMethodTableView.otherElements["ADDRESS"].exists)
+        XCTAssert(addTransferMethod.addressHeader.exists)
         XCTAssertEqual(addTransferMethod.countryLabel.label, "Country")
         XCTAssert(addTransferMethod.countrySelect.exists)
         XCTAssertEqual(addTransferMethod.stateProvinceLabel.label, "State/Province")

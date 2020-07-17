@@ -58,6 +58,16 @@ class BaseTests: XCTestCase {
         XCTAssertFalse(alert.exists)
     }
 
+    func verifyBusinessError(errorMessage: String, dismiss: Bool) {
+        XCTAssert(app.alerts["Error"].exists)
+        let predicate = NSPredicate(format:
+                  "label CONTAINS[c] '\(errorMessage)'")
+        XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
+        if dismiss {
+            app.alerts["Error"].buttons[Dialog.done].tap()
+        }
+    }
+
     func clickBackButton() {
         app.navigationBars.buttons[Common.navBackButton].tap()
     }
