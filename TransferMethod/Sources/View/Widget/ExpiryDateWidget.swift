@@ -19,7 +19,7 @@ import HyperwalletSDK
 import UIKit
 
 /// Represents the expiry date widget.
-final class ExpiryDateWidget: TextWidget {
+final class ExpiryDateWidget: NumberWidget {
     private static let dateTextFieldFormat = "##/##"
     private static let dateApiFormat = "yyyy-MM"
     private static let placeholderText = "MM/YY"
@@ -31,7 +31,7 @@ final class ExpiryDateWidget: TextWidget {
 
     override func setupLayout(field: HyperwalletField) {
         super.setupLayout(field: field)
-        setupTextField()
+        setPlaceholderText()
     }
 
     override func textFieldDidChange() {
@@ -40,14 +40,14 @@ final class ExpiryDateWidget: TextWidget {
             textField.text = formatDisplayString(with: ExpiryDateWidget.dateTextFieldFormat, inputText: text)
         } else {
             textField.text = ""
-            textField.placeholder = ExpiryDateWidget.placeholderText
+            setPlaceholderText()
         }
     }
 
     override func textFieldDidEndEditing(_ textField: UITextField) {
         super.textFieldDidEndEditing(textField)
         if textField.text?.isEmpty ?? true {
-            textField.placeholder = ExpiryDateWidget.placeholderText
+            setPlaceholderText()
         }
     }
 
@@ -66,8 +66,7 @@ final class ExpiryDateWidget: TextWidget {
         return date?.formatDateToString(dateFormat: ExpiryDateWidget.dateApiFormat) ?? ""
     }
 
-    private func setupTextField() {
+    private func setPlaceholderText() {
         textField.placeholder = ExpiryDateWidget.placeholderText
-        textField.keyboardType = UIKeyboardType.numberPad
     }
 }
