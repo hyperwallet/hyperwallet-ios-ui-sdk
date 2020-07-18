@@ -52,9 +52,11 @@ class AddTransferMethodBankCardTests: BaseTests {
         cardNumberPatternError = addTransferMethod.getPatternError(label: addTransferMethod.cardNumber)
         cvvPatternError = addTransferMethod.getPatternError(label: addTransferMethod.cvvSecurityCode)
 
-        cardLengthError = addTransferMethod.getLengthConstraintError(label: addTransferMethod.cardNumber, min: 13, max: 19)
+        cardLengthError = addTransferMethod
+            .getLengthConstraintError(label: addTransferMethod.cardNumber, min: 13, max: 19)
 
-        cvvLengthError = addTransferMethod.getLengthConstraintError(label: addTransferMethod.cvvSecurityCode, min: 3, max: 4)
+        cvvLengthError = addTransferMethod
+            .getLengthConstraintError(label: addTransferMethod.cvvSecurityCode, min: 3, max: 4)
 
         otherElements = addTransferMethod.addTransferMethodTableView.otherElements
     }
@@ -158,7 +160,8 @@ class AddTransferMethodBankCardTests: BaseTests {
 
         let otherElements = addTransferMethod.addTransferMethodTableView.otherElements
 
-        XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", debitCardInvalidCvvError)).count == 1)
+        XCTAssert(otherElements
+            .containing(NSPredicate(format: "label CONTAINS %@", debitCardInvalidCvvError)).count == 1)
     }
 
     func testAddTransferMethod_createBankCardDuplicateBankCard() {
@@ -174,6 +177,7 @@ class AddTransferMethodBankCardTests: BaseTests {
         addTransferMethod.clickCreateTransferMethodButton()
         waitForNonExistence(spinner)
 
-        XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", debitCardDuplicateError)).count == 1)
+        XCTAssert(otherElements
+            .containing(NSPredicate(format: "label CONTAINS %@", debitCardDuplicateError)).count == 1)
     }
 }

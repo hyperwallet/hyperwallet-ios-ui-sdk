@@ -49,7 +49,8 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
         bankAccountIdEmptyError = addTransferMethod.getEmptyError(label: addTransferMethod.accountNumber)
 
         branchIdLengthError = addTransferMethod.getRoutingNumberError(length: 9)
-        bankAccountIdLengthError = addTransferMethod.getLengthConstraintError(label: addTransferMethod.accountNumber, min: 4, max: 17)
+        bankAccountIdLengthError = addTransferMethod
+            .getLengthConstraintError(label: addTransferMethod.accountNumber, min: 4, max: 17)
 
         otherElements = addTransferMethod.addTransferMethodTableView.otherElements
     }
@@ -97,8 +98,10 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
         XCTAssert(addTransferMethod.elementQuery["branchId_error"].exists)
         XCTAssert(addTransferMethod.elementQuery["bankAccountId_error"].exists)
 
-        XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", branchIdPatternError)).count == 1)
-        XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", bankAccountIdPatternError)).count == 1)
+        XCTAssert(otherElements
+            .containing(NSPredicate(format: "label CONTAINS %@", branchIdPatternError)).count == 1)
+        XCTAssert(otherElements
+            .containing(NSPredicate(format: "label CONTAINS %@", bankAccountIdPatternError)).count == 1)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidLength() {
@@ -111,7 +114,8 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
         XCTAssert(addTransferMethod.bankAccountIdError.exists)
 
         XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", branchIdLengthError)).count == 1)
-        XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", bankAccountIdLengthError)).count == 1)
+        XCTAssert(otherElements
+            .containing(NSPredicate(format: "label CONTAINS %@", bankAccountIdLengthError)).count == 1)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidPresence() {
@@ -137,7 +141,8 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
         addTransferMethod.clickCreateTransferMethodButton()
         waitForNonExistence(spinner)
 
-        XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", invalidRoutingNumberError)).count == 1)
+        XCTAssert(otherElements
+            .containing(NSPredicate(format: "label CONTAINS %@", invalidRoutingNumberError)).count == 1)
     }
 
     func testAddTransferMethod_createBankAccountValidResponse() {
@@ -212,8 +217,6 @@ private extension AddTransferMethodBankAccountIndividualTests {
         XCTAssert(addTransferMethod.mobileNumberInput.exists)
         XCTAssertEqual(addTransferMethod.dateOfBirthLabel.label, "Date of Birth")
         XCTAssert(addTransferMethod.dateOfBirthInput.exists)
-
-        //        XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", invalidAccountError)).count == 1)
     }
 
     func verifyAddressSection() {

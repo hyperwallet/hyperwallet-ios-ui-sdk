@@ -47,9 +47,11 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
         branchIdEmptyError = addTransferMethod.getEmptyError(label: addTransferMethod.swiftNumber)
         bankAccountIdEmptyError = addTransferMethod.getEmptyError(label: addTransferMethod.accountNumberORIBan)
 
-        bankIdLengthError = addTransferMethod.getLengthConstraintError(label: addTransferMethod.swiftNumber, min: 8, max: 11)
+        bankIdLengthError = addTransferMethod
+            .getLengthConstraintError(label: addTransferMethod.swiftNumber, min: 8, max: 11)
         branchIdLengthError = addTransferMethod.getRoutingNumberError(length: 9)
-        bankAccountIdLengthError = addTransferMethod.getLengthConstraintError(label: addTransferMethod.accountNumberORIBan, min: 4, max: 17)
+        bankAccountIdLengthError = addTransferMethod
+            .getLengthConstraintError(label: addTransferMethod.accountNumberORIBan, min: 4, max: 17)
 
         otherElements = addTransferMethod.addTransferMethodTableView.otherElements
     }
@@ -83,7 +85,8 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
 
         XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", bankIdEmptyError)).count == 1)
         XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", branchIdEmptyError)).count == 1)
-        XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", bankAccountIdEmptyError)).count == 1)
+        XCTAssert(otherElements
+            .containing(NSPredicate(format: "label CONTAINS %@", bankAccountIdEmptyError)).count == 1)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidPattern() {
@@ -99,7 +102,8 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
 
         XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", bankIdPatternError)).count == 1)
         XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", branchIdPatternError)).count == 1)
-        XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", bankAccountIdPatternError)).count == 1)
+        XCTAssert(otherElements
+            .containing(NSPredicate(format: "label CONTAINS %@", bankAccountIdPatternError)).count == 1)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidLength() {
