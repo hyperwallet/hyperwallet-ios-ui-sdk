@@ -3,7 +3,6 @@ import XCTest
 class AddTransferMethodBankAccountBusinessTests: BaseTests {
     var selectTransferMethodType: SelectTransferMethodType!
     var addTransferMethod: AddTransferMethod!
-
     let bankAccount = NSPredicate(format: "label CONTAINS[c] 'Bank Account'")
 
     override func setUp() {
@@ -33,14 +32,15 @@ class AddTransferMethodBankAccountBusinessTests: BaseTests {
         XCTAssert(addTransferMethod.navBarBankAccount.exists)
 
         XCTAssert(addTransferMethod.addTransferMethodTableView
-            .otherElements["ACCOUNT INFORMATION - UNITED STATES (USD)"].exists)
+            .otherElements["mobileAccountInfoLabel".localized() + ": UNITED STATES (USD)"].exists)
         XCTAssertEqual(addTransferMethod.branchIdLabel.label, "Routing Number")
         XCTAssert(addTransferMethod.branchIdInput.exists)
         XCTAssertEqual(addTransferMethod.bankAccountIdLabel.label, "Account Number")
         XCTAssert(addTransferMethod.bankAccountIdInput.exists)
         XCTAssertEqual(addTransferMethod.accountTypeLabel.label, "Account Type")
 
-        XCTAssert(addTransferMethod.addTransferMethodTableView.otherElements["ACCOUNT HOLDER"].exists )
+        XCTAssert(addTransferMethod.addTransferMethodTableView
+                .otherElements["mobileAccountHolderLabel".localized()].exists )
         XCTAssertEqual(addTransferMethod.businessNameLabel.label, "Business Name")
         XCTAssert(addTransferMethod.businessNameInput.exists)
         XCTAssertEqual(addTransferMethod.phoneNumberLabel.label, "Phone Number")
@@ -48,7 +48,7 @@ class AddTransferMethodBankAccountBusinessTests: BaseTests {
         XCTAssertEqual(addTransferMethod.mobileNumberLabel.label, "Mobile Number")
         XCTAssert(addTransferMethod.mobileNumberInput.exists)
 
-        XCTAssert(addTransferMethod.addTransferMethodTableView.otherElements["ADDRESS"].exists)
+        XCTAssert(addTransferMethod.addressHeader.exists)
         XCTAssertEqual(addTransferMethod.countryLabel.label, "Country")
         XCTAssert(addTransferMethod.countrySelect.exists)
         XCTAssertEqual(addTransferMethod.stateProvinceLabel.label, "State/Province")
@@ -60,7 +60,8 @@ class AddTransferMethodBankAccountBusinessTests: BaseTests {
         XCTAssertEqual(addTransferMethod.postalCodeLabel.label, "Zip/Postal Code")
         XCTAssert(addTransferMethod.postalCodeInput.exists)
 
-        XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["Transfer method information"].exists)
+        XCTAssert(addTransferMethod.addTransferMethodTableView
+                .staticTexts["mobileFeesAndProcessingTime".localized()].exists)
         XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["$2.00 fee"].exists)
 
         app.scroll(to: addTransferMethod.createTransferMethodButton)

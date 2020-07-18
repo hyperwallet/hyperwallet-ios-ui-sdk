@@ -92,7 +92,7 @@ class TextWidget: AbstractWidget {
     }
 
     @objc
-    private func textFieldDidChange() {
+    func textFieldDidChange() {
         if (field.mask?.defaultPattern) != nil {
             let text = getUnformattedText()
             if !text.isEmpty {
@@ -258,11 +258,35 @@ class TextWidget: AbstractWidget {
             range: nil)
     }
 
-    private func getUnformattedText() -> String {
+    func getUnformattedText() -> String {
         if let text = textField.text {
             return getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue, text) ?? ""
         }
         return ""
+    }
+
+    @objc dynamic var textLabelColor: UIColor! {
+        get { return self.label.textColor }
+        set {
+            if !(self.label.accessibilityIdentifier?.hasSuffix("_error") ?? false) {
+                self.label.textColor = newValue
+            }
+        }
+    }
+
+    @objc dynamic var textLabelFont: UIFont! {
+        get { return self.label.font }
+        set { self.label.font = newValue }
+    }
+
+    @objc dynamic var textFieldColor: UIColor! {
+        get { return self.textField.textColor }
+        set { self.textField.textColor = newValue }
+    }
+
+    @objc dynamic var textFieldFont: UIFont! {
+        get { return self.textField.font }
+        set { self.textField.font = newValue }
     }
 }
 

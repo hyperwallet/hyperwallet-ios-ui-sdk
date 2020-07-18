@@ -48,7 +48,6 @@ final class SelectionWidget: AbstractWidget {
         addArrangedSubview(labelField)
         labelField.font = Theme.Label.titleFont
         labelField.adjustsFontForContentSizeCategory = true
-        spacing = 16
         if field.isEditable ?? true {
             labelField.textColor = Theme.Text.color
             labelField.isUserInteractionEnabled = true
@@ -103,5 +102,29 @@ final class SelectionWidget: AbstractWidget {
     private func updateLabelFieldValue(_ option: HyperwalletFieldSelectionOption) {
         labelField.text = option.label
         selectedValue = option.value
+    }
+
+    @objc dynamic var textLabelColor: UIColor! {
+        get { return self.label.textColor }
+        set {
+            if !(self.label.accessibilityIdentifier?.hasSuffix("_error") ?? false) {
+                self.label.textColor = newValue
+            }
+        }
+    }
+
+    @objc dynamic var textLabelFont: UIFont! {
+        get { return self.label.font }
+        set { self.label.font = newValue }
+    }
+
+    @objc dynamic var labelFieldColor: UIColor! {
+        get { return self.labelField.textColor }
+        set { self.labelField.textColor = newValue }
+    }
+
+    @objc dynamic var labelFieldFont: UIFont! {
+        get { return self.labelField.font }
+        set { self.labelField.font = newValue }
     }
 }

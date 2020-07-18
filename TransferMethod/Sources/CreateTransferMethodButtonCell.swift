@@ -15,20 +15,18 @@
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-import HyperwalletSDK
+
 import UIKit
 
-/// Represents the number input widget. 
-class NumberWidget: TextWidget {
-    required init(field: HyperwalletField,
-                  pageName: String,
-                  pageGroup: String,
-                  inputHandler: @escaping InputHandler) {
-        super.init(field: field, pageName: pageName, pageGroup: pageGroup, inputHandler: inputHandler)
-        textField.keyboardType = UIKeyboardType.numberPad
-    }
+class CreateTransferMethodButtonCell: UITableViewCell {
+    static let reuseIdentifier = "createTransferMethodButtonCellIdentifier"
 
-    required init(coder: NSCoder) {
-        super.init(coder: coder)
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        subviews.forEach { (view) in
+            if type(of: view).description() == "_UITableViewCellSeparatorView" {
+                view.isHidden = true
+            }
+        }
     }
 }

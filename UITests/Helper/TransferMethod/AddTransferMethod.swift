@@ -4,7 +4,7 @@ class AddTransferMethod {
     let defaultTimeout = 5.0
 
     var app: XCUIApplication
-
+    var elementQuery: XCUIElementQuery
     var addTransferMethodTableView: XCUIElement
     var bankIdInput: XCUIElement
     var branchIdInput: XCUIElement
@@ -71,12 +71,41 @@ class AddTransferMethod {
     var navBarDebitCard: XCUIElement
     var navBarWireAccount: XCUIElement
     var navBarPaypal: XCUIElement
-    var title = "Account Settings"
+    var cardNumberError: XCUIElement!
+    var cvvNumberError: XCUIElement!
+    var dateOfExpiryError: XCUIElement
+    var bankIdError: XCUIElement
+    var branchIdError: XCUIElement
+    var bankAccountIdError: XCUIElement
+    var bankAccountPurposeError: XCUIElement
+
+    // labels
+    let title = "Account Settings"
+    // Wire Account
+    let swiftNumber = "BIC/SWIFT"
+    let accountNumberORIBan = "Account Number OR IBAN"
+
+    // Bank Account
+    let routingNumber = "Routing Number"
+    let accountNumber = "Account Number"
+    // Bank Card
+    let cardNumber = "Card Number"
+    let expiryDate = "Expiry Date"
+    let cvvSecurityCode = "CVV (Card Security Code)"
+    let emptyError = "You must provide a value for this field"
+    let lengthConstraintError = "The minimum length of this field is %d and maximum length is %d."
+    let patternValidationError = "is invalid length or format."
+    let expireDatePlaceholder = "MM/YY"
+    let firstName = "First Name"
+    let middleName = "Middle Name"
+    let lastName =  "Last Name"
+    let phoneNumber = "Phone Number"
+    let mobileNumber = "Mobile Number"
+    let dateOfBirth = "Date of Birth"
 
     // swiftlint:disable function_body_length
     init(app: XCUIApplication) {
         self.app = app
-
         navBar = app.navigationBars[title]
         navBarBankAccount = app.navigationBars["bank_account".localized()]
         navBarDebitCard = app.navigationBars["bank_card".localized()]
@@ -86,7 +115,6 @@ class AddTransferMethod {
         addTransferMethodTableView = app.tables["addTransferMethodTable"]
         createTransferMethodButton = addTransferMethodTableView.buttons["createAccountButton"]
 
-        var elementQuery: XCUIElementQuery
         if #available(iOS 13.0, *) {
             elementQuery = addTransferMethodTableView.buttons
         } else {
@@ -95,10 +123,11 @@ class AddTransferMethod {
 
         // Section Headers
         intermediaryAccountHeader = addTransferMethodTableView.staticTexts["Intermediary Account"]
-        accountHolderHeader = addTransferMethodTableView.staticTexts["Account Holder"]
+        accountHolderHeader = addTransferMethodTableView.staticTexts["mobileAccountHolderLabel".localized()]
         contactInformationHeader = addTransferMethodTableView.staticTexts["Contact Information"]
         addressHeader = addTransferMethodTableView.staticTexts["Address"]
-        transferMethodInformationHeader = addTransferMethodTableView.staticTexts["Transfer method information"]
+        transferMethodInformationHeader = addTransferMethodTableView
+            .staticTexts["mobileFeesAndProcessingTime".localized()]
 
         // Inputs
         bankIdInput = addTransferMethodTableView.textFields["bankId"]
@@ -152,6 +181,17 @@ class AddTransferMethod {
         addressLineLabel = elementQuery["addressLine1"]
         cityLabel = elementQuery["city"]
         postalCodeLabel = elementQuery["postalCode"]
+
+        // Bank Card Errors
+        cardNumberError = elementQuery["cardNumber_error"]
+        cvvNumberError = elementQuery["cvv_error"]
+        dateOfExpiryError = elementQuery["dateOfExpiry_error"]
+
+        // Bank Account Errors
+        bankIdError = elementQuery["bankId_error"]
+        branchIdError = elementQuery["branchId_error"]
+        bankAccountIdError = elementQuery["bankAccountId_error"]
+        bankAccountPurposeError = elementQuery["bankAccountPurpose_error"]
     }
 
     func setBankId(_ bankId: String) {
@@ -188,7 +228,7 @@ class AddTransferMethod {
         cardNumberInput.clearAndEnterText(text: cardNumber)
     }
 
-    func setDateOfExpiry(expiryMonth: String, expiryYear: String) {
+    func setDateOfExpiryByDatePicker(expiryMonth: String, expiryYear: String) {
         dateOfExpiryInput.tap()
 
         // Supporting multiple localizations for month and year
@@ -201,6 +241,18 @@ class AddTransferMethod {
         app.pickerWheels[String(dateComponent.year!)].adjust(toPickerWheelValue: expiryYear)
         app.pickerWheels[monthText].adjust(toPickerWheelValue: expiryMonth)
         app.toolbars.buttons["Done"].tap()
+    }
+
+    func setDateOfExpiryByMMYY(expiryMonth: String, expiryYear: String) {
+        dateOfExpiryInput.tap()
+        // Supporting multiple localizations for month and year
+        dateOfExpiryInput.clearAndEnterText(text: expiryMonth + expiryYear)
+    }
+
+    func setDateOfExpiryByMMPYYWithSlash(expiryMonth: String, expiryYear: String) {
+        dateOfExpiryInput.tap()
+        // Supporting multiple localizations for month and year
+        dateOfExpiryInput.clearAndEnterText(text: expiryMonth + "/" + expiryYear)
     }
 
     func clickBackButton() {
@@ -284,5 +336,29 @@ class AddTransferMethod {
 
     func setBusinessRegistrationId(_ registrationId: String) {
         businessRegistrationIdInput.clearAndEnterText(text: registrationId)
+    }
+
+    func getLengthConstraintError(label: String, min: Int, max: Int) -> String {
+        return label + ": " + String(format: lengthConstraintError, min, max)
+    }
+
+    func getEmptyError(label: String) -> String {
+        return label + ": " + emptyError
+    }
+
+    func getPatternError(label: String) -> String {
+        return label + ": " + patternValidationError
+    }
+
+    func getEmailPatternError(label: String) -> String {
+        return label + ": " + "email is invalid"
+    }
+
+    func getSwiftNumberError(length: Int) -> String {
+        return swiftNumber + ": " + "The exact length of this field is \(length)"
+    }
+
+    func getRoutingNumberError(length: Int) -> String {
+        return routingNumber + ": " + "The exact length of this field is \(length)"
     }
 }

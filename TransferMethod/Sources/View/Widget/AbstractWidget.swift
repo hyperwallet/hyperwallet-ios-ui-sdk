@@ -29,6 +29,9 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
     private var pageGroup: String!
     lazy var hyperwalletInsights: HyperwalletInsightsProtocol = HyperwalletInsights.shared
     private let errorTypeForm = "FORM"
+    typealias InputHandler = () -> Void
+    private var inputHandler: InputHandler?
+    private(set) var errorMessage: String?
 
     let label: UILabel = {
         let label = UILabel()
@@ -41,16 +44,18 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
 
     required init(field: HyperwalletField,
                   pageName: String,
-                  pageGroup: String) {
+                  pageGroup: String,
+                  inputHandler: @escaping InputHandler) {
         self.pageName = pageName
         self.pageGroup = pageGroup
+        self.inputHandler = inputHandler
         super.init(frame: CGRect())
         translatesAutoresizingMaskIntoConstraints = false
-        axis = .horizontal
+        axis = .vertical
         spacing = 5
         distribution = .fill
         isLayoutMarginsRelativeArrangement = true
-        layoutMargins = UIEdgeInsets(top: 11.0, left: 0, bottom: 11.0, right: 16.0)
+        layoutMargins = UIEdgeInsets(top: 11.0, left: 0, bottom: 1.0, right: 16.0)
         self.field = field
         setupLayout(field: field)
     }
@@ -59,7 +64,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
         super.init(coder: coder)
     }
 
-    func errorMessage() -> String? {
+    func getErrorMessage() -> String? {
         if isInvalidEmptyValue() {
             return field.validationMessage?.empty
         }
@@ -83,7 +88,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
     }
 
     func hideError() {
-        label.textColor = Theme.Label.textColor
+        label.textColor = Theme.Text.labelColor
         label.accessibilityIdentifier = String(format: "%@", field.name ?? "")
     }
 
@@ -92,6 +97,8 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
         if isInvalidEmptyValue() || isInvalidLength() || isInvalidRegex() {
             trackError()
             isValid = false
+        } else {
+            errorMessage = nil
         }
         return isValid
     }
@@ -108,8 +115,8 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         label.addGestureRecognizer(tap)
         addArrangedSubview(label)
-        if let widthAnchor = label.superview?.widthAnchor {
-            label.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.35).isActive = true
+        if let heightAnchor = label.superview?.heightAnchor {
+            label.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.35).isActive = true
         }
     }
 
@@ -123,11 +130,13 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if !isValid() {
+        let isFieldValid = isValid()
+        if !isFieldValid {
             showError()
         } else {
             hideError()
         }
+        inputHandler?()
     }
 
     //swiftlint:disable unavailable_function
@@ -136,14 +145,22 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
     }
 
     private func isInvalidEmptyValue() -> Bool {
-        return field.isRequired ?? false && value().isEmpty
+        let isInvalid = field.isRequired ?? false && value().isEmpty
+        if isInvalid {
+            updateErrorMessage(with: field.validationMessage?.empty ?? "")
+        }
+        return isInvalid
     }
 
     /// Checks the field should be validated by min and max length constraint
     private func isInvalidLength() -> Bool {
         let minLength = field.minLength ?? 0
         let maxLength = field.maxLength ?? Int.max
-        return !value().isEmpty && (value().count < minLength || value().count > maxLength)
+        let isInvalid = !value().isEmpty && (value().count < minLength || value().count > maxLength)
+        if isInvalid {
+            updateErrorMessage(with: field.validationMessage?.length ?? "")
+        }
+        return isInvalid
     }
 
     /// Checks the field should be validated by regex constraint
@@ -151,12 +168,21 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
         guard !value().isEmpty, let regexExpression = field.regularExpression else {
             return false
         }
-        return !NSRegularExpression(regexExpression).matches(value())
+        let isInvalid = !NSRegularExpression(regexExpression).matches(value())
+        if isInvalid {
+            updateErrorMessage(with: field.validationMessage?.pattern ?? "")
+        }
+        return isInvalid
+    }
+
+    /// Updates error message with given text
+    private func updateErrorMessage(with message: String) {
+        errorMessage = (field.label ?? "") + ": " + message
     }
 
     private func trackError() {
         if let fieldName = field.name,
-            let errorMessage = errorMessage() {
+            let errorMessage = getErrorMessage() {
             let errorInfo = ErrorInfoBuilder(type: errorTypeForm,
                                              message: errorMessage)
                 .fieldName(fieldName)
