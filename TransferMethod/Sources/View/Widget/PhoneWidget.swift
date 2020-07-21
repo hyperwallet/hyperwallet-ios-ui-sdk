@@ -20,8 +20,11 @@ import HyperwalletSDK
 
 /// Represents the phone number input widget.
 final class PhoneWidget: TextWidget {
-    required init(field: HyperwalletField, pageName: String, pageGroup: String) {
-        super.init(field: field, pageName: pageName, pageGroup: pageGroup)
+    required init(field: HyperwalletField,
+                  pageName: String,
+                  pageGroup: String,
+                  inputHandler: @escaping InputHandler) {
+        super.init(field: field, pageName: pageName, pageGroup: pageGroup, inputHandler: inputHandler)
         textField.keyboardType = UIKeyboardType.phonePad
     }
 

@@ -32,13 +32,17 @@ final class AddTransferMethodSectionData {
         switch fieldGroup {
         case "ACCOUNT_INFORMATION":
             let format = "\(fieldGroup)_header".lowercased().localized()
-            let title = "account_information_title"
+            let title = "mobileAccountInfoLabel"
             return String(format: format,
                           title.localized(),
                           Locale.current.localizedString(forRegionCode: country ?? "") ?? "",
                           currency ?? "")
         case "CREATE_BUTTON":
             return nil
+        case "ACCOUNT_HOLDER":
+            return "mobileAccountHolderLabel".localized()
+        case "INFORMATION":
+            return "mobileFeesAndProcessingTime".localized()
 
         default:
             return "\(fieldGroup)_header".lowercased().localized()

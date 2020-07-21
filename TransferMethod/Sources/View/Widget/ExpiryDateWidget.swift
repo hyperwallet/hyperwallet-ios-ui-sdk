@@ -19,44 +19,54 @@ import HyperwalletSDK
 import UIKit
 
 /// Represents the expiry date widget.
-final class ExpiryDateWidget: TextWidget {
-    private var pickerView: ExpiryDatePickerView!
-    private let toolbar = UIToolbar()
+final class ExpiryDateWidget: NumberWidget {
+    private static let dateTextFieldFormat = "##/##"
+    private static let dateApiFormat = "yyyy-MM"
+    private static let placeholderText = "MM/YY"
+    private static var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/yy"
+        return formatter
+    }()
 
     override func setupLayout(field: HyperwalletField) {
         super.setupLayout(field: field)
-        setupPickerView(field: field)
-        toolbar.setupToolBar(target: self, action: #selector(self.doneButtonTapped))
-        setupTextField()
+        setPlaceholderText()
+    }
+
+    override func textFieldDidChange() {
+        let text = getUnformattedText()
+        if !text.isEmpty {
+            textField.text = formatDisplayString(with: ExpiryDateWidget.dateTextFieldFormat, inputText: text)
+        } else {
+            textField.text = ""
+            setPlaceholderText()
+        }
+    }
+
+    override func textFieldDidEndEditing(_ textField: UITextField) {
+        super.textFieldDidEndEditing(textField)
+        if textField.text?.isEmpty ?? true {
+            setPlaceholderText()
+        }
     }
 
     /// format the expiryDate to YYYY-MM, which can be accepted by server through REST API call
     ///
     /// - Returns: formatted expiryDate
     override func value() -> String {
-        if textField.text?.isEmpty ?? true {
-            return ""
-        } else {
-            return String(format: "%04d-%02d", pickerView.year, pickerView.month)
+        if let text = textField.text, !(textField.text?.isEmpty ?? true) {
+            return formatExpiryDateForApi(text)
         }
+        return ""
     }
 
-    @objc
-    private func doneButtonTapped() {
-        guard let month = pickerView.month, let year = pickerView.year else {
-            return
-        }
-        textField.text = String(format: "expiry_date_format".localized(), month, year % 100)
-        textField.resignFirstResponder()
+    func formatExpiryDateForApi(_ text: String) -> String {
+        let date = ExpiryDateWidget.dateFormatter.date(from: text)
+        return date?.formatDateToString(dateFormat: ExpiryDateWidget.dateApiFormat) ?? ""
     }
 
-    private func setupPickerView(field: HyperwalletField) {
-        pickerView = ExpiryDatePickerView(value: field.value)
-        pickerView.accessibilityIdentifier = "expiryDateWidgetPicker"
-    }
-
-    private func setupTextField() {
-        textField.inputView = pickerView
-        textField.inputAccessoryView = toolbar
+    private func setPlaceholderText() {
+        textField.placeholder = ExpiryDateWidget.placeholderText
     }
 }
