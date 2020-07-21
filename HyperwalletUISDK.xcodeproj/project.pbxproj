@@ -2957,14 +2957,12 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/HyperwalletSDK.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Insights.framework",
 			);
 			name = "Carthage Copy frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/HyperwalletSDK.framework",
-				"$(DERIVED_FILE_DIR)/Insights.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
