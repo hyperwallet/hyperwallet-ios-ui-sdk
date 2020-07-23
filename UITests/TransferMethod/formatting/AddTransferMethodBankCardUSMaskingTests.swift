@@ -71,13 +71,13 @@ class AddTransferMethodBankCardUSMaskingTests: BaseTests {
     func testAddTransferMethod_cvvDefaultPattern() {
         verifyHeaders()
         addTransferMethod.setCvv("999")
-        checkSelectFieldValueIsEqualTo("999", addTransferMethod.cvvInput)
+        checkSelectFieldValueIsEqualTo("•••", addTransferMethod.cvvInput)
     }
 
     func testAddTransferMethod_cvvMaskInvalidInput() {
         verifyHeaders()
         addTransferMethod.setCvv("9#@")
-        checkSelectFieldValueIsEqualTo("9", addTransferMethod.cvvInput)
+        checkSelectFieldValueIsEqualTo("•", addTransferMethod.cvvInput)
 
         addTransferMethod.setCvv("!#@")
         checkSelectFieldValueIsEqualTo("", addTransferMethod.cvvInput)
@@ -86,7 +86,7 @@ class AddTransferMethodBankCardUSMaskingTests: BaseTests {
     func testAddTransferMethod_cvvMaskInvalidLength() {
         verifyHeaders()
         addTransferMethod.setCvv("9999")
-        checkSelectFieldValueIsEqualTo("999", addTransferMethod.cvvInput)
+        checkSelectFieldValueIsEqualTo("•••", addTransferMethod.cvvInput)
     }
 
     func testAddTransferMethod_cardNumberConditionalPattern() {
