@@ -10,7 +10,7 @@
                     "fieldGroups": {
                         "nodes": [
                             {
-                                "group": "ACCOUNT_INFORMATION",
+                                "group": "CONTACT_INFORMATION",
                                 "fields": [
                                     {
                                         "dataType": "TEXT",

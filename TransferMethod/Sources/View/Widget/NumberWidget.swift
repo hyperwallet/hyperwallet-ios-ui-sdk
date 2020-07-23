@@ -26,6 +26,10 @@ class NumberWidget: TextWidget {
                   inputHandler: @escaping InputHandler) {
         super.init(field: field, pageName: pageName, pageGroup: pageGroup, inputHandler: inputHandler)
         textField.keyboardType = UIKeyboardType.numberPad
+
+        if field.name == HyperwalletTransferMethod.TransferMethodField.cvv.rawValue {
+            textField.isSecureTextEntry = true
+        }
     }
 
     required init(coder: NSCoder) {

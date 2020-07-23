@@ -160,8 +160,8 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
 
 private extension AddTransferMethodWireAccountIndividualTests {
     func verifyAccountInformationSection() {
-        XCTAssert(addTransferMethod.addTransferMethodTableView
-            .staticTexts["mobileAccountInfoLabel".localized() + ": United States (USD)"].exists)
+        let accountInformation = String(format: "account_information".localized(), "UNITED STATES", "USD")
+        XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts[accountInformation].exists)
         XCTAssert(addTransferMethod.elementQuery["BIC/SWIFT"].exists)
         XCTAssert(addTransferMethod.bankIdInput.exists)
         XCTAssert(addTransferMethod.elementQuery["Routing Number"].exists)

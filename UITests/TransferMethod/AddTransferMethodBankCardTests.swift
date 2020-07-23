@@ -65,8 +65,8 @@ class AddTransferMethodBankCardTests: BaseTests {
         let feeAndProcessingTime = app.staticTexts["$1.75 fee \u{2022} 1-2 Business days"]
         XCTAssert(addTransferMethod.navBarDebitCard.exists)
 
-        XCTAssert(addTransferMethod.addTransferMethodTableView
-            .staticTexts["mobileAccountInfoLabel".localized() + ": United States (USD)"].exists)
+        let accountInformation = String(format: "account_information".localized(), "UNITED STATES", "USD")
+        XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts[accountInformation].exists)
 
         XCTAssertEqual(addTransferMethod.cardNumberLabel.label, addTransferMethod.cardNumber)
 

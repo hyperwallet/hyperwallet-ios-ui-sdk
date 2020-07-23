@@ -47,7 +47,7 @@ class TransferMethodRepositoryTests: XCTestCase {
             .Builder(transferMethodCountry: "US",
                      transferMethodCurrency: "USD",
                      transferMethodProfileType: "INDIVIDUAL",
-                     transferMethodType: "BANK_ACCOUNT")
+                     transferMethodType: HyperwalletTransferMethod.TransferMethodType.bankAccount.rawValue)
             .bankName("US BANK NA")
             .bankAccountId("7861012347")
             .build()
@@ -160,7 +160,7 @@ class TransferMethodRepositoryTests: XCTestCase {
             .Builder(transferMethodCountry: "US",
                      transferMethodCurrency: "USD",
                      transferMethodProfileType: "INDIVIDUAL",
-                     transferMethodType: "WIRE_ACCOUNT")
+                     transferMethodType: HyperwalletTransferMethod.TransferMethodType.wireAccount.rawValue)
             .intermediaryBankAccountId("246810")
             .intermediaryBankId("12345678901")
             .build()
@@ -201,7 +201,7 @@ class TransferMethodRepositoryTests: XCTestCase {
             .Builder(transferMethodCountry: "US",
                      transferMethodCurrency: "USD",
                      transferMethodProfileType: "INDIVIDUAL",
-                     transferMethodType: "BANK_ACCOUNT")
+                     transferMethodType: HyperwalletTransferMethod.TransferMethodType.bankAccount.rawValue)
             .build()
 
         transferMethodRepository.createTransferMethod(bankAccount) { result in
@@ -235,7 +235,7 @@ class TransferMethodRepositoryTests: XCTestCase {
             .Builder(transferMethodCountry: "US",
                      transferMethodCurrency: "USD",
                      transferMethodProfileType: "INDIVIDUAL",
-                     transferMethodType: "BANK_ACCOUNT")
+                     transferMethodType: HyperwalletTransferMethod.TransferMethodType.bankAccount.rawValue)
             .build()
         bankAccount.setField(key: "token", value: "trm-123456789")
 
@@ -310,7 +310,7 @@ class TransferMethodRepositoryTests: XCTestCase {
             .Builder(transferMethodCountry: "US",
                      transferMethodCurrency: "USD",
                      transferMethodProfileType: "INDIVIDUAL",
-                     transferMethodType: "WIRE_ACCOUNT")
+                     transferMethodType: HyperwalletTransferMethod.TransferMethodType.wireAccount.rawValue)
             .build()
         wireAccount.setField(key: "token", value: "trm-123456789")
 
@@ -425,7 +425,7 @@ class TransferMethodRepositoryTests: XCTestCase {
             .Builder(transferMethodCountry: "US",
                      transferMethodCurrency: "USD",
                      transferMethodProfileType: "INDIVIDUAL",
-                     transferMethodType: "WIRE_ACCOUNT")
+                     transferMethodType: HyperwalletTransferMethod.TransferMethodType.wireAccount.rawValue)
             .build()
 
         transferMethodRepository.deactivateTransferMethod(bankAccount) { _ in

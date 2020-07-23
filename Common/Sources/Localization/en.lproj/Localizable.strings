@@ -78,14 +78,13 @@
 "bank_card_footer" = "CVV is a 3 digit number, typically found on the back of the card.";
 "paypal_account_footer" = "PayPal transfer method email address should be same as profile email address.";
 
-"account_information_header" = "%1$@: %2$@ (%3$@)";
-"mobileAccountHolderLabel" = "ACCOUNT HOLDER INFO";
-"address_header"="Address";
+"account_information" = "ACCOUNT INFO: %1$@(%2$@)";
+"account_holder" = "ACCOUNT HOLDER INFO";
+"address"="ADDRESS";
 "mobileFeesAndProcessingTime" = "FEES AND PROCESSING TIME";
-"intermediary_account_header" = "Intermediary Account";
-"contact_information_header" = "Contact Information";
-
-"mobileAccountInfoLabel" = "ACCOUNT INFO";
+"intermediary_account" = "INTERMEDIARY ACCOUNT";
+"contact_information" = "CONTACT INFO";
+"identification" = "IDENTIFICATION";
 
 // expiry date format - arguments order is %1$-month, %2$-year(two last digits)
 "expiry_date_format" = "%1$02d/%2$02d";

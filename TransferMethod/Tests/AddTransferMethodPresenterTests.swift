@@ -20,7 +20,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
                                                "US",
                                                "USD",
                                                "INDIVIDUAL",
-                                               "BANK_ACCOUNT",
+                                               HyperwalletTransferMethod.TransferMethodType.bankAccount.rawValue,
                                                hyperwalletInsightsMock)
     }
 
@@ -71,7 +71,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
                                                "US",
                                                "USD",
                                                "INDIVIDUAL",
-                                               "BANK_ACCOUNT",
+                                               HyperwalletTransferMethod.TransferMethodType.bankAccount.rawValue,
                                                hyperwalletInsightsMock)
         let url = String(format: "%@/bank-accounts", HyperwalletTestHelper.userRestURL)
         let response = HyperwalletTestHelper.okHTTPResponse(for: "BankAccountIndividualResponse")
