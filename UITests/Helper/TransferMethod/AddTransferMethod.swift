@@ -136,7 +136,7 @@ class AddTransferMethod {
         accountTypeSelect = addTransferMethodTableView.cells.staticTexts["bankAccountPurposeValue"]
         cardNumberInput = addTransferMethodTableView.textFields["cardNumber"]
         dateOfExpiryInput = addTransferMethodTableView.textFields["dateOfExpiry"]
-        cvvInput = addTransferMethodTableView.textFields["cvv"]
+        cvvInput = addTransferMethodTableView.secureTextFields["cvv"]
         emailInput = addTransferMethodTableView.textFields["email"]
         wireInstructionsInput = addTransferMethodTableView.textFields["wireInstructions"]
         intermediaryBankIdInput = addTransferMethodTableView.textFields["intermediaryBankId"]

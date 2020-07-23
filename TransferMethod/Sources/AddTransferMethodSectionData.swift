@@ -34,14 +34,14 @@ final class AddTransferMethodSectionData {
             let format = "\(fieldGroup)".lowercased().localized()
             return String(format: format,
                           Locale.current.localizedString(forRegionCode: country ?? "") ?? "",
-                          currency ?? "")
+                          currency ?? "").uppercased()
         case "CREATE_BUTTON":
             return nil
         case "INFORMATION":
             return "mobileFeesAndProcessingTime".localized()
 
         default:
-            return "\(fieldGroup)".lowercased().localized()
+            return "\(fieldGroup)".lowercased().localized().uppercased()
         }
     }()
 
