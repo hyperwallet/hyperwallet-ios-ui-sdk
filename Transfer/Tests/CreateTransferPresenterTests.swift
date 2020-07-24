@@ -282,10 +282,6 @@ class CreateTransferTests: XCTestCase {
         XCTAssertTrue(mockView.isUpdateTransferAmountSectionPerformed,
                       "updateTransferAmountSection should be performed")
         XCTAssertEqual(presenter.amount, "62.29", "Amount should be 62.29")
-        presenter.didTapTransferAllFunds = false
-        XCTAssertTrue(mockView.isUpdateTransferAmountSectionPerformed,
-                      "updateTransferAmountSection should be performed")
-        XCTAssertEqual(presenter.amount, "0", "Amount should be 0")
     }
 
     func testDestinationCurrency_selectedTransferMethodIsNil() {
