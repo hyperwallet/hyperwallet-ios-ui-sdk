@@ -47,6 +47,8 @@ public final class HyperwalletIcon {
             return .venmo
         case "CASH_PICKUP_MG":
             return .moneygram
+        case "TRASH":
+            return .trash
 
         default:
             return .bankAccount

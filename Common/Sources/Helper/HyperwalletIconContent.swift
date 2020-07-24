@@ -42,4 +42,6 @@ public enum HyperwalletIconContent: String {
     case credit = "\u{e907}"
     /// The debit icon
     case debit = "\u{e908}"
+    /// The trash can
+    case trash = "\u{e904}"
 }

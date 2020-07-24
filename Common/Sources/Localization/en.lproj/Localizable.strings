@@ -173,15 +173,15 @@
 "mobileTransactionDetailsLabel" = "DETAILS";
 "mobileFeeInfoLabel" = "FEE INFO";
 "mobileConfirmNotesLabel" = "NOTE";
-"mobileCharityName" = "Charity Name:";
-"mobileCheckNumber" = "Check Number:";
-"mobileTransactionIdLabel" = "Transaction ID:";
-"mobilePromoWebsite" = "Promo Website:";
-"mobileTransactionDetailsTotal" = "Transaction total:";
-"amount" = "Amount:";
-"mobileFeeLabel" = "Fee:";
-"mobileJournalNumberLabel" = "Receipt ID:";
-"date" = "Date:";
+"mobileCharityName" = "Charity Name";
+"mobileCheckNumber" = "Check Number";
+"mobileTransactionIdLabel" = "Transaction ID";
+"mobilePromoWebsite" = "Promo Website";
+"mobileTransactionDetailsTotal" = "Transaction total";
+"amount" = "Amount";
+"mobileFeeLabel" = "Fee";
+"mobileJournalNumberLabel" = "Receipt ID";
+"date" = "Date";
 
 // Transfer Funds
 "mobileTransferFundsHeader" = "Transfer funds";
