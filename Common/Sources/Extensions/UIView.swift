@@ -139,7 +139,7 @@ public extension UIView {
 
         let widthConstraint = NSLayoutConstraint(item: emptyListButton,
                                                  attribute: .width,
-                                                 relatedBy: .equal,
+                                                 relatedBy: .lessThanOrEqual,
                                                  toItem: nil,
                                                  attribute: .notAnAttribute,
                                                  multiplier: 1,
