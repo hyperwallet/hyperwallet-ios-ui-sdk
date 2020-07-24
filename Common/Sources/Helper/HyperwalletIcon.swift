@@ -28,7 +28,7 @@ public final class HyperwalletIcon {
     public static func of(_ fontType: String) -> HyperwalletIconContent {
         switch fontType {
         case "BANK_ACCOUNT":
-            return .bank
+            return .bankAccount
         case "BANK_CARD":
             return .debitCredit
         case "PREPAID_CARD":
@@ -49,7 +49,7 @@ public final class HyperwalletIcon {
             return .moneygram
 
         default:
-            return .bank
+            return .bankAccount
         }
     }
 }

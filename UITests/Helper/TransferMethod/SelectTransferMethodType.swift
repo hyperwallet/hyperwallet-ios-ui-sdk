@@ -18,9 +18,9 @@ class SelectTransferMethodType {
         countrySelect = app.tables.cells["cellCountry/Region"].staticTexts["mobileCountryRegion".localized()]
         currencySelect = app.tables.cells["cellCurrency"].staticTexts["mobileCurrencyLabel".localized()]
         countryTable = app.otherElements.containing(.navigationBar,
-                                                    identifier: "select_transfer_method_country".localized()).element
+                                                    identifier: "mobileCountryRegion".localized()).element
         currencyTable = app.otherElements.containing(.navigationBar,
-                                                     identifier: "select_transfer_method_currency".localized()).element
+                                                     identifier: "mobileCurrencyLabel".localized()).element
         searchBar = app.searchFields["search_placeholder_label".localized()]
         navigationBar = app.navigationBars["mobileAddTransferMethodHeader".localized()]
     }

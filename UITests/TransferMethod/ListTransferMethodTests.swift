@@ -107,17 +107,6 @@ class ListTransferMethodTests: BaseTests {
         XCTAssertTrue(app.navigationBars["mobileAddTransferMethodHeader".localized()].exists)
     }
 
-    func testListTransferMethod_openDeleteTransferMethodActionSheet() {
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
-                             filename: "ListTransferMethodResponse",
-                             method: HTTPMethod.get)
-
-        openTransferMethodsList()
-
-        app.tables.cells.containing(.staticText, identifier: "Bank Account").element(boundBy: 0).tap()
-        XCTAssertTrue(listTransferMethod.removeAccountButton.exists)
-    }
-
     func testListTransferMethod_verifyDeleteTransferMethodConfirmationAlertIsShown() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListTransferMethodResponse",
@@ -126,7 +115,6 @@ class ListTransferMethodTests: BaseTests {
         openTransferMethodsList()
 
         app.tables.cells.containing(.staticText, identifier: "Bank Account").element(boundBy: 0).tap()
-        listTransferMethod.tapRemoveAccountButton()
         waitForNonExistence(listTransferMethod.alert)
         XCTAssertTrue(listTransferMethod.alert.exists)
         XCTAssertTrue(listTransferMethod.confirmAccountRemoveButton.exists)
@@ -145,8 +133,6 @@ class ListTransferMethodTests: BaseTests {
         app.tables.cells.containing(.staticText, identifier: "Bank Account").element(boundBy: 0).tap()
 
         XCTAssertEqual(app.tables.element(boundBy: 0).cells.count, cellsCountBeforeRemove)
-
-        listTransferMethod.tapRemoveAccountButton()
 
         mockServer.setupStub(url: removeBankAccountURL,
                              filename: "RemovedTransferMethodResponse",
@@ -189,8 +175,6 @@ class ListTransferMethodTests: BaseTests {
 
         XCTAssertEqual(app.tables.element(boundBy: 0).cells.count, cellsCountBeforeRemove)
 
-        listTransferMethod.tapRemoveAccountButton()
-
         mockServer.setupStub(url: removeBankCardURL,
                              filename: "RemovedTransferMethodResponse",
                              method: HTTPMethod.post)
@@ -230,8 +214,6 @@ class ListTransferMethodTests: BaseTests {
 
         XCTAssertEqual(app.tables.element(boundBy: 0).cells.count, cellsCountBeforeRemove)
 
-        listTransferMethod.tapRemoveAccountButton()
-
         mockServer.setupStub(url: removePayPalAccountURL,
                              filename: "RemovedTransferMethodResponse",
                              method: HTTPMethod.post)
@@ -270,8 +252,6 @@ class ListTransferMethodTests: BaseTests {
 
         XCTAssertEqual(app.tables.element(boundBy: 0).cells.count, expectedCellsCount)
 
-        listTransferMethod.tapRemoveAccountButton()
-
         waitForNonExistence(spinner)
         XCTAssertTrue(listTransferMethod.cancelAccountRemoveButton.exists)
 
@@ -301,7 +281,6 @@ class ListTransferMethodTests: BaseTests {
         openTransferMethodsList()
 
         app.tables.cells.containing(.staticText, identifier: "Bank Account").element(boundBy: 0).tap()
-        listTransferMethod.tapRemoveAccountButton()
 
         waitForNonExistence(spinner)
         XCTAssertTrue(listTransferMethod.confirmAccountRemoveButton.exists)

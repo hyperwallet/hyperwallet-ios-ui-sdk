@@ -202,7 +202,7 @@ final class SelectTransferMethodTypePresenter {
     private func showSelectCountryView(_ countries: [GenericCellConfiguration]?) {
         if let countries = countries {
             view?.showGenericTableView(items: countries,
-                                       title: "select_transfer_method_country".localized(),
+                                       title: "mobileCountryRegion".localized(),
                                        selectItemHandler: selectCountryHandler(),
                                        markCellHandler: countryMarkCellHandler(),
                                        filterContentHandler: filterContentHandler())
@@ -213,7 +213,7 @@ final class SelectTransferMethodTypePresenter {
     private func showSelectCurrencyView(_ currencies: [GenericCellConfiguration]?) {
         if let currencies = currencies {
             view?.showGenericTableView(items: currencies,
-                                       title: "select_transfer_method_currency".localized(),
+                                       title: "mobileCurrencyLabel".localized(),
                                        selectItemHandler: selectCurrencyHandler(),
                                        markCellHandler: currencyMarkCellHandler(),
                                        filterContentHandler: filterContentHandler())

@@ -20,8 +20,8 @@ import Foundation
 
 /// Represents the Hyperwallet Icon type
 public enum HyperwalletIconContent: String {
-    /// The icon for Bank
-    case bank = "\u{e900}"
+    /// The icon for Bank Account
+    case bankAccount = "\u{e900}"
     /// The icon for add transfer method
     case addTransferMethod = "\u{e90b}"
     /// The icon for check type
