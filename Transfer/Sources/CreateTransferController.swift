@@ -223,7 +223,8 @@ extension CreateTransferController {
             tableViewCell.configure(amount: presenter.amount,
                                     currency: presenter.destinationCurrency
             ) { [weak presenter] amount in
-                if !(presenter?.didTapTransferAllFunds ?? true) {
+                if amount != presenter?.amount {
+                    presenter?.didTapTransferAllFunds = false
                     presenter?.amount = amount
                 }
             }
