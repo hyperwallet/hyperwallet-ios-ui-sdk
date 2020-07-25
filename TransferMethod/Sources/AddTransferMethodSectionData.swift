@@ -31,21 +31,17 @@ final class AddTransferMethodSectionData {
     lazy var header: String? = {
         switch fieldGroup {
         case "ACCOUNT_INFORMATION":
-            let format = "\(fieldGroup)_header".lowercased().localized()
-            let title = "mobileAccountInfoLabel"
+            let format = "\(fieldGroup)".lowercased().localized()
             return String(format: format,
-                          title.localized(),
                           Locale.current.localizedString(forRegionCode: country ?? "") ?? "",
-                          currency ?? "")
+                          currency ?? "").uppercased()
         case "CREATE_BUTTON":
             return nil
-        case "ACCOUNT_HOLDER":
-            return "mobileAccountHolderLabel".localized()
         case "INFORMATION":
             return "mobileFeesAndProcessingTime".localized()
 
         default:
-            return "\(fieldGroup)_header".lowercased().localized()
+            return "\(fieldGroup)".lowercased().localized().uppercased()
         }
     }()
 

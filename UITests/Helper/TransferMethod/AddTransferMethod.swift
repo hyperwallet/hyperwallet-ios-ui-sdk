@@ -122,10 +122,10 @@ class AddTransferMethod {
         }
 
         // Section Headers
-        intermediaryAccountHeader = addTransferMethodTableView.staticTexts["Intermediary Account"]
-        accountHolderHeader = addTransferMethodTableView.staticTexts["mobileAccountHolderLabel".localized()]
-        contactInformationHeader = addTransferMethodTableView.staticTexts["Contact Information"]
-        addressHeader = addTransferMethodTableView.staticTexts["Address"]
+        intermediaryAccountHeader = addTransferMethodTableView.staticTexts["intermediary_account".localized()]
+        accountHolderHeader = addTransferMethodTableView.staticTexts["account_holder".localized()]
+        contactInformationHeader = addTransferMethodTableView.staticTexts["contact_information".localized()]
+        addressHeader = addTransferMethodTableView.staticTexts["address".localized()]
         transferMethodInformationHeader = addTransferMethodTableView
             .staticTexts["mobileFeesAndProcessingTime".localized()]
 
@@ -136,7 +136,7 @@ class AddTransferMethod {
         accountTypeSelect = addTransferMethodTableView.cells.staticTexts["bankAccountPurposeValue"]
         cardNumberInput = addTransferMethodTableView.textFields["cardNumber"]
         dateOfExpiryInput = addTransferMethodTableView.textFields["dateOfExpiry"]
-        cvvInput = addTransferMethodTableView.textFields["cvv"]
+        cvvInput = addTransferMethodTableView.secureTextFields["cvv"]
         emailInput = addTransferMethodTableView.textFields["email"]
         wireInstructionsInput = addTransferMethodTableView.textFields["wireInstructions"]
         intermediaryBankIdInput = addTransferMethodTableView.textFields["intermediaryBankId"]
