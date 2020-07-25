@@ -68,14 +68,13 @@
 
 // Add Transfer Method
 "createTransferMethodButtonLabel" = "Create Transfer Method";
-"account_information_header" = "%1$@: %2$@ (%3$@)";
-"mobileAccountHolderLabel" = "ACCOUNT HOLDER INFO";
-"address_header"="Address";
+"account_information" = "ACCOUNT INFO: %1$@(%2$@)";
+"account_holder" = "ACCOUNT HOLDER INFO";
+"address"="ADDRESS";
 "mobileFeesAndProcessingTime" = "FEES AND PROCESSING TIME";
-"intermediary_account_header" = "Intermediary Account";
-"contact_information_header" = "Contact Information";
-
-"mobileAccountInfoLabel" = "ACCOUNT INFO";
+"intermediary_account" = "INTERMEDIARY ACCOUNT";
+"contact_information" = "CONTACT INFO";
+"identification" = "IDENTIFICATION";
 
 "date_format" = "yyyy-MM-dd";
 

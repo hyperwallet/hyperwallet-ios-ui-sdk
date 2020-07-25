@@ -180,18 +180,21 @@ final class AddTransferMethodPresenter {
 
     private func buildHyperwalletTransferMethod() -> HyperwalletTransferMethod? {
         switch transferMethodTypeCode {
-        case "BANK_ACCOUNT", "WIRE_ACCOUNT" :
+        case HyperwalletTransferMethod.TransferMethodType.bankAccount.rawValue,
+             HyperwalletTransferMethod.TransferMethodType.wireAccount.rawValue :
             return HyperwalletBankAccount.Builder(transferMethodCountry: country,
                                                   transferMethodCurrency: currency,
                                                   transferMethodProfileType: profileType,
                                                   transferMethodType: transferMethodTypeCode)
                 .build()
-        case "BANK_CARD" :
+
+        case HyperwalletTransferMethod.TransferMethodType.bankCard.rawValue :
             return HyperwalletBankCard.Builder(transferMethodCountry: country,
                                                transferMethodCurrency: currency,
                                                transferMethodProfileType: profileType)
                 .build()
-        case "PAYPAL_ACCOUNT":
+
+        case HyperwalletTransferMethod.TransferMethodType.payPalAccount.rawValue:
             return HyperwalletPayPalAccount.Builder(transferMethodCountry: country,
                                                     transferMethodCurrency: currency,
                                                     transferMethodProfileType: profileType)

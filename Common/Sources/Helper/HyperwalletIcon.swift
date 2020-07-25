@@ -17,6 +17,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import Foundation
+import HyperwalletSDK
 
 /// The HyperwalletIcon class
 public final class HyperwalletIcon {
@@ -27,26 +28,26 @@ public final class HyperwalletIcon {
     /// - Returns: a `HyperwalletIconContent` object
     public static func of(_ fontType: String) -> HyperwalletIconContent {
         switch fontType {
-        case "BANK_ACCOUNT":
+        case HyperwalletTransferMethod.TransferMethodType.bankAccount.rawValue:
             return .bankAccount
-        case "BANK_CARD":
+        case HyperwalletTransferMethod.TransferMethodType.bankCard.rawValue:
             return .debitCredit
-        case "PREPAID_CARD":
+        case HyperwalletTransferMethod.TransferMethodType.prepaidCard.rawValue:
             return .prepaidCard
-        case "PAPER_CHECK":
-            return .check
-        case "PAYPAL_ACCOUNT":
+        case HyperwalletTransferMethod.TransferMethodType.payPalAccount.rawValue:
             return .paypal
-        case "WIRE_ACCOUNT":
+        case HyperwalletTransferMethod.TransferMethodType.wireAccount.rawValue:
             return .wire
-        case "CREDIT":
-            return .credit
-        case "DEBIT":
-            return .debit
         case "VENMO_ACCOUNT":
             return .venmo
         case "CASH_PICKUP_MG":
             return .moneygram
+        case "PAPER_CHECK":
+            return .check
+        case HyperwalletReceipt.HyperwalletEntryType.credit.rawValue:
+            return .credit
+        case HyperwalletReceipt.HyperwalletEntryType.debit.rawValue:
+            return .debit
         case "TRASH":
             return .trash
 

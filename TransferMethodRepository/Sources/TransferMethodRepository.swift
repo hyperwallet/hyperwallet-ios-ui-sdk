@@ -85,15 +85,18 @@ final class RemoteTransferMethodRepository: TransferMethodRepository {
         }
 
         switch transferMethodType {
-        case "BANK_ACCOUNT", "WIRE_ACCOUNT":
+        case HyperwalletTransferMethod.TransferMethodType.bankAccount.rawValue,
+             HyperwalletTransferMethod.TransferMethodType.wireAccount.rawValue:
             Hyperwallet.shared.deactivateBankAccount(
                 transferMethodToken: token,
                 completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
-        case "BANK_CARD":
+
+        case HyperwalletTransferMethod.TransferMethodType.bankCard.rawValue:
             Hyperwallet.shared.deactivateBankCard(
                 transferMethodToken: token,
                 completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
-        case "PAYPAL_ACCOUNT":
+
+        case HyperwalletTransferMethod.TransferMethodType.payPalAccount.rawValue:
             Hyperwallet.shared.deactivatePayPalAccount(
                 transferMethodToken: token,
                 completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))

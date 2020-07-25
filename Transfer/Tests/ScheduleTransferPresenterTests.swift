@@ -12,7 +12,8 @@ class ScheduleTransferPresenterTests: XCTestCase {
     private let transferMethod = HyperwalletBankAccount.Builder(transferMethodCountry: "US",
                                                                 transferMethodCurrency: "USD",
                                                                 transferMethodProfileType: "INDIVIDUAL",
-                                                                transferMethodType: "BANK_ACCOUNT")
+                                                                transferMethodType:
+        HyperwalletTransferMethod.TransferMethodType.bankAccount.rawValue)
         .build()
     private var transfer: HyperwalletTransfer!
 

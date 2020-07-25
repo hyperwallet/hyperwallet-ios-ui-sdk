@@ -59,7 +59,8 @@ class HyperwalletTransferMethodTests: XCTestCase {
         let transferMethod = HyperwalletBankAccount.Builder(transferMethodCountry: country,
                                                             transferMethodCurrency: currency,
                                                             transferMethodProfileType: profileType,
-                                                            transferMethodType: "BANK_ACCOUNT")
+                                                            transferMethodType:
+            HyperwalletTransferMethod.TransferMethodType.bankAccount.rawValue)
             .bankAccountId("0001233")
             .build()
 
