@@ -24,7 +24,7 @@ public final class HyperwalletIcon {
     // swiftlint:disable cyclomatic_complexity
     /// Make transfer method type icon by transfer method type
     ///
-    /// - Parameter transferMethodType: a type of transfer method in String
+    /// - Parameter fontType: String
     /// - Returns: a `HyperwalletIconContent` object
     public static func of(_ fontType: String) -> HyperwalletIconContent {
         switch fontType {
