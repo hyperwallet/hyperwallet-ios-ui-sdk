@@ -373,6 +373,28 @@ class TransferMethodRepositoryTests: XCTestCase {
                        "The statusTransitionResult?.toStatus should be deactivated")
     }
 
+    func testDeactivateTransferMethod_notSupportedTransferMethod() {
+        var statusTransitionResult: HyperwalletStatusTransition?
+        var statusTransitionError: HyperwalletErrorType?
+
+        let prepaidCard = HyperwalletPrepaidCard.Builder(transferMethodProfileType: "INDIVIDUAL")
+            .build()
+        prepaidCard.setField(key: "token", value: "trm-123456789")
+
+        transferMethodRepository.deactivateTransferMethod(prepaidCard) { result in
+            switch result {
+            case .failure(let error):
+                statusTransitionError = error
+
+            case .success(let createResult):
+                statusTransitionResult = createResult
+            }
+        }
+
+        XCTAssertNotNil(statusTransitionError, "The statusTransitionError should be not nil")
+        XCTAssertNil(statusTransitionResult, "The statusTransitionResult should be nil")
+    }
+
     func testDeactivateTransferMethod_failure() {
         let url = String(format: "%@%@",
                          HyperwalletTestHelper.userRestURL,

@@ -102,7 +102,14 @@ final class RemoteTransferMethodRepository: TransferMethodRepository {
                 completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
 
         default:
-            break
+            let error = HyperwalletErrorType.unexpected(HyperwalletErrors(
+                    errorList: [
+                        HyperwalletError(message: NSLocalizedString("transfer_method_not_supported_message",
+                                                                    comment: "error"),
+                                         code: "UNEXPECTED_ERROR")
+                    ]
+                ))
+            completion(.failure(error))
         }
     }
 
