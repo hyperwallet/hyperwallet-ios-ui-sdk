@@ -457,27 +457,6 @@ class TransferMethodRepositoryTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
 
-    func testDeactivateTransferMethod_unknownTransferMethodType() {
-        let expectation = self.expectation(description: "Deactivate wire account completed")
-        // expectation should not be fulfilled
-        expectation.isInverted = true
-        let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
-
-        let bankAccount = HyperwalletBankAccount
-            .Builder(transferMethodCountry: "US",
-                     transferMethodCurrency: "USD",
-                     transferMethodProfileType: "INDIVIDUAL",
-                     transferMethodType: "UNKNOWN")
-            .build()
-        bankAccount.setField(key: "token", value: "trm-123456789")
-
-        transferMethodRepository.deactivateTransferMethod(bankAccount) { _ in
-            expectation.fulfill()
-        }
-
-        wait(for: [expectation], timeout: 1)
-    }
-
     func testListTransferMethods_returnsBankAccount() {
         let expectation = self.expectation(description: "List transfer methods completed")
         var listTransferMethodsResult: HyperwalletPageList<HyperwalletTransferMethod>?

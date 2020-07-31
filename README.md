@@ -1,7 +1,7 @@
 # Hyperwallet UI SDK
 
 [![Platforms](https://img.shields.io/cocoapods/p/HyperwalletUISDK.svg?)](https://cocoapods.org/pods/HyperwalletUISDK)
-[![Build Status](https://travis-ci.org/hyperwallet/hyperwallet-ios-ui-sdk.svg?branch=master)](https://travis-ci.org/hyperwallet/hyperwallet-ios-ui-sdk)
+[![Build Status](https://travis-ci.com/hyperwallet/hyperwallet-ios-ui-sdk.svg?branch=master)](https://travis-ci.com/hyperwallet/hyperwallet-ios-ui-sdk)
 [![Coverage Status](https://coveralls.io/repos/github/hyperwallet/hyperwallet-ios-ui-sdk/badge.svg?branch=master)](https://coveralls.io/github/hyperwallet/hyperwallet-ios-ui-sdk?branch=master)
 
 [![CocoaPods](https://img.shields.io/cocoapods/v/HyperwalletUISDK.svg?color=blue)](https://cocoapods.org/pods/HyperwalletUISDK)
