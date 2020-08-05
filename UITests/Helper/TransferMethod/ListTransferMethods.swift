@@ -79,4 +79,8 @@ class ListTransferMethod {
     func getTransferMethodIcon(index: Int) -> XCUIElement {
        return app.cells.element(boundBy: index).images["ListTransferMethodTableViewCellIcon"]
     }
+
+    func getConfirmationMessage(transferMethod: String) -> String {
+          return String(format: "mobileRemoveEAconfirm".localized(), transferMethod)
+    }
 }

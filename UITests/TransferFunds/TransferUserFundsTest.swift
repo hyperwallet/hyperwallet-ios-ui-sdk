@@ -174,6 +174,40 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "452.14")
     }
 
+    /*
+       Given that Transfer methods exist
+       When user selects TransferAllFunds AND then remove the All Funds amount AND enter a different fund amount
+       Then the transfer fund amount should show different fund amount.
+       */
+      func testTransferFunds_switchAllFundsToEnterFundsUSD() {
+          mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods", filename: "ListMoreThanOneTransferMethod", method: HTTPMethod.get)
+          mockServer.setupStub(url: "/rest/v3/transfers", filename: "AvailableFundUSD", method: HTTPMethod.post)
+
+          XCTAssertTrue(transferFundMenu.exists)
+          transferFundMenu.tap()
+          waitForNonExistence(spinner)
+
+          XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+          XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
+          XCTAssertEqual(transferFunds.transferAmountLabel.label, "Available funds $452.14 USD")
+          // Transfer all funds row
+          XCTAssertTrue(transferFunds.transferMaxAllFunds.exists, "Transfer all funds switch should exist")
+
+          // Tap on the Transfer max funds
+          transferFunds.transferMaxAllFunds.tap()
+          // Assert Destination Amount is automatically insert into the amount field
+          XCTAssertEqual(transferFunds.transferAmount.value as? String, "452.14")
+
+          transferFunds.enterTransferAmount(amount: "999.99")
+          XCTAssertEqual(transferFunds.transferAmount.value as? String, "999.99")
+
+          // Tap on the Transfer max funds again
+          transferFunds.transferAmountLabel.tap()
+          transferFunds.transferMaxAllFunds.tap()
+
+          checkSelectFieldValueIsEqualTo("452.14", transferFunds.transferAmount)
+      }
+
     /* Given that User has 2 bank accounts which has different Currency from the Source.
      When user transfer the fund
      Then the user should see 2 FX quotes

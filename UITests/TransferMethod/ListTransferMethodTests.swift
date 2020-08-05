@@ -107,19 +107,6 @@ class ListTransferMethodTests: BaseTests {
         XCTAssertTrue(app.navigationBars["mobileAddTransferMethodHeader".localized()].exists)
     }
 
-    func testListTransferMethod_verifyDeleteTransferMethodConfirmationAlertIsShown() {
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
-                             filename: "ListTransferMethodResponse",
-                             method: HTTPMethod.get)
-
-        openTransferMethodsList()
-
-        app.tables.cells.containing(.staticText, identifier: "Bank Account").element(boundBy: 0).tap()
-        waitForNonExistence(listTransferMethod.alert)
-        XCTAssertTrue(listTransferMethod.alert.exists)
-        XCTAssertTrue(listTransferMethod.confirmAccountRemoveButton.exists)
-    }
-
     func testListTransferMethod_deleteBankAccount() {
         let cellsCountBeforeRemove = 5
         let expectedCellsCountAfterRemove = 4
@@ -141,7 +128,7 @@ class ListTransferMethodTests: BaseTests {
                              filename: "ListTransferMethodResponseWithoutFirstElement",
                              method: HTTPMethod.get)
 
-        XCTAssertTrue(listTransferMethod.confirmAccountRemoveButton.exists)
+        verifyRemoveConfirmation(transferMethod: "Bank Account")
 
         listTransferMethod.tapConfirmAccountRemoveButton()
         waitForNonExistence(spinner)
@@ -182,7 +169,7 @@ class ListTransferMethodTests: BaseTests {
                              filename: "ListTransferMethodResponseWithoutDebitCard",
                              method: HTTPMethod.get)
 
-        XCTAssertTrue(listTransferMethod.confirmAccountRemoveButton.exists)
+        verifyRemoveConfirmation(transferMethod: "Debit Card")
 
         listTransferMethod.tapConfirmAccountRemoveButton()
         waitForNonExistence(spinner)
@@ -221,7 +208,7 @@ class ListTransferMethodTests: BaseTests {
                              filename: "ListTransferMethodResponseWithoutPayPalAccount",
                              method: HTTPMethod.get)
 
-        XCTAssertTrue(listTransferMethod.confirmAccountRemoveButton.exists)
+        verifyRemoveConfirmation(transferMethod: "Paypal")
 
         listTransferMethod.tapConfirmAccountRemoveButton()
         waitForNonExistence(spinner)
@@ -253,7 +240,7 @@ class ListTransferMethodTests: BaseTests {
         XCTAssertEqual(app.tables.element(boundBy: 0).cells.count, expectedCellsCount)
 
         waitForNonExistence(spinner)
-        XCTAssertTrue(listTransferMethod.cancelAccountRemoveButton.exists)
+        verifyRemoveConfirmation(transferMethod: "Bank Account")
 
         listTransferMethod.tapCancelAccountRemoveButton()
 
@@ -334,4 +321,18 @@ class ListTransferMethodTests: BaseTests {
             XCTAssertTrue(app.cells.element(boundBy: 4).images.element.exists)
         }
     }
+
+    func verifyRemoveConfirmation(transferMethod: String) {
+          let confirmMessage = listTransferMethod.getConfirmationMessage(transferMethod: transferMethod)
+          XCTAssertTrue(listTransferMethod.confirmAccountRemoveButton.exists)
+          XCTAssertTrue(listTransferMethod.cancelAccountRemoveButton.exists)
+
+        let alert = app.alerts[listTransferMethod.removeAccountTitle]
+          XCTAssert(alert.exists)
+          let predicate = NSPredicate(format:
+              "label CONTAINS[c] '\(confirmMessage)'")
+          XCTAssert(alert.staticTexts.element(matching: predicate).exists)
+          XCTAssertTrue(listTransferMethod.confirmAccountRemoveButton.exists)
+          XCTAssertTrue(listTransferMethod.cancelAccountRemoveButton.exists)
+      }
 }
