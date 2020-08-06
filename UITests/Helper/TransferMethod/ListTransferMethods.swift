@@ -7,16 +7,15 @@ class ListTransferMethod {
 
     var addTransferMethodButton: XCUIElement
     var addTransferMethodEmptyScreenButton: XCUIElement
-    var removeAccountButton: XCUIElement
     var confirmAccountRemoveButton: XCUIElement
     var cancelAccountRemoveButton: XCUIElement
     var navigationBar: XCUIElement
-    let removeAccountTitle = "remove_transfer_method_confirmation_title".localized()
-    let removeAccountMessage = "remove_transfer_method_confirmation_message".localized()
+    let removeAccountTitle = "mobileAreYouSure".localized()
+    let removeAccountMessage = "mobileRemoveEAconfirm".localized()
     let addAccountTitle = "mobileAddTransferMethodHeader".localized()
-    let title = "title_accounts".localized()
-    let removeButtonLabel = "remove_button_label".localized()
-    let cancelButtonLabel = "cancel_button_label".localized()
+    let title = "mobileTransferMethodsHeader".localized()
+    let removeButtonLabel = "remove".localized()
+    let cancelButtonLabel = "cancelButtonLabel".localized()
     var alert: XCUIElement
 
     init(app: XCUIApplication) {
@@ -24,7 +23,6 @@ class ListTransferMethod {
 
         addTransferMethodButton = app.navigationBars.buttons["Add"]
         addTransferMethodEmptyScreenButton = app.buttons[addAccountTitle]
-        removeAccountButton = app.buttons[removeAccountTitle]
         alert = app.alerts[removeAccountTitle]
         confirmAccountRemoveButton = alert.buttons[removeButtonLabel]
         cancelAccountRemoveButton = alert.buttons[cancelButtonLabel]
@@ -37,10 +35,6 @@ class ListTransferMethod {
 
     func tapAddTransferMethodEmptyScreenButton() {
         addTransferMethodEmptyScreenButton.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
-    }
-
-    func tapRemoveAccountButton() {
-        removeAccountButton.tap()
     }
 
     func tapConfirmAccountRemoveButton() {
@@ -84,5 +78,9 @@ class ListTransferMethod {
 
     func getTransferMethodIcon(index: Int) -> XCUIElement {
        return app.cells.element(boundBy: index).images["ListTransferMethodTableViewCellIcon"]
+    }
+
+    func getConfirmationMessage(transferMethod: String) -> String {
+          return String(format: "mobileRemoveEAconfirm".localized(), transferMethod)
     }
 }

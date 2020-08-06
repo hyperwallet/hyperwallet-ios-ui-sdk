@@ -50,7 +50,7 @@ final class ListTransferMethodController: UITableViewController {
         currentNavigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                                    target: self,
                                                                    action: #selector(didTapAddButton))
-        titleDisplayMode(.always, for: "title_accounts".localized())
+        titleDisplayMode(.always, for: "mobileTransferMethodsHeader".localized())
     }
 
     private func initializePresenter() {
@@ -79,33 +79,24 @@ final class ListTransferMethodController: UITableViewController {
                                                  for: indexPath)
         if let listTransferMethodCell = cell as? ListTransferMethodCell {
             listTransferMethodCell.configure(transferMethod: presenter.sectionData[indexPath.row])
+
+            let icon = UIImage.fontIcon(HyperwalletIcon.of("TRASH").rawValue,
+                                        CGSize(width: 24, height: 25),
+                                        CGFloat(24),
+                                        UIColor(red: 0.17, green: 0.18, blue: 0.18, alpha: 1))
+
+            listTransferMethodCell.accessoryView = UIImageView(image: icon)
         }
         return cell
     }
 
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if presenter.transferMethodExists(at: indexPath.row) {
-            let cellRect = tableView.rectForRow(at: indexPath)
-            let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
-            let removeHandler = { (alertAction: UIAlertAction) -> Void in
-                self.showConfirmationAlert(title: "remove_transfer_method_confirmation_title".localized(),
-                                           message: "remove_transfer_method_confirmation_message".localized(),
-                                           transferMethodIndex: indexPath.row)
-            }
-
-            let removeAction = UIAlertAction.remove(removeHandler,
-                                                    "remove_transfer_method_confirmation_title".localized())
-                .addIcon(imageName: "trash")
-
-            optionMenu.addAction(removeAction)
-            optionMenu.addAction(UIAlertAction.cancel())
-            optionMenu.popoverPresentationController?.sourceView = tableView
-            optionMenu.popoverPresentationController?.sourceRect = cellRect
-            optionMenu.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.up
-            navigationController?.present(optionMenu, animated: true, completion: nil)
+        if let transferMethod = presenter.sectionData[indexPath.row].title {
+            showConfirmationAlert(title: "mobileAreYouSure".localized(),
+                                  message: String(format: "mobileRemoveEAconfirm".localized(), transferMethod),
+                                  transferMethodIndex: indexPath.row)
+            tableView.deselectRow(at: indexPath, animated: true)
         }
-        tableView.deselectRow(at: indexPath, animated: true)
     }
 
     override public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -127,6 +118,7 @@ final class ListTransferMethodController: UITableViewController {
                            forCellReuseIdentifier: ListTransferMethodCell.reuseIdentifier)
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Theme.Cell.smallHeight
+        tableView.backgroundColor = Theme.UITableViewController.backgroundColor
     }
 
     private func showConfirmationAlert(title: String?, message: String, transferMethodIndex: Int) {

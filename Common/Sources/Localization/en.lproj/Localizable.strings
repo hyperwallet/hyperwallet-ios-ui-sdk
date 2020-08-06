@@ -16,17 +16,12 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-"title_accounts" = "Accounts";
-"select_transfer_method_country" = "Select Country";
-"select_transfer_method_currency" = "Select Currency";
-"remove_button_label" = "Remove";
-"cancel_button_label" = "Cancel";
+"mobileTransferMethodsHeader" = "Transfer methods";
+"remove" = "Remove";
+"cancelButtonLabel" = "Cancel";
 "doneButtonLabel" = "Done";
 "try_again_button_label" = "Try Again";
-"done_button_label" = "Done";
 "search_placeholder_label" = "Search";
-"add_transfer_method_fee_label" = "Transaction Fees: ";
-"add_transfer_method_processing_time_label" = "Processing Time: ";
 "unexpected_error_message" = "Oops... Something went wrong, please try again";
 "network_connection_error_title" = "Connectivity Issue";
 "unexpected_title" = "Unexpected Error";
@@ -42,8 +37,8 @@
 "mobileTransferMethodLabel" = "TRANSFER METHOD";
 "mobileCountryRegion" = "Country/Region";
 "mobileCurrencyLabel" = "Currency";
-"remove_transfer_method_confirmation_title" = "Remove Account";
-"remove_transfer_method_confirmation_message" = "Are you sure you want to remove this account?";
+"mobileAreYouSure" = "Are you sure?";
+"mobileRemoveEAconfirm" = "Confirm that you want to remove your %1$@";
 "fee_flat_formatter" = "%1$@%2$@ fee";
 "fee_percent_only_min_formatter" = "%1$@%% (Min:%2$@%3$@) fee";
 "fee_percent_only_max_formatter" = "%1$@%% (Max:%2$@%3$@) fee";
@@ -73,11 +68,6 @@
 
 // Add Transfer Method
 "createTransferMethodButtonLabel" = "Create Transfer Method";
-"enter_your_information_formatter" = "Enter your %@ information";
-"bank_account_footer" = "On a paper check, the routing number is printed as the first 9 digits on the bottom of the check, followed by 4-17 digits for the account number.";
-"bank_card_footer" = "CVV is a 3 digit number, typically found on the back of the card.";
-"paypal_account_footer" = "PayPal transfer method email address should be same as profile email address.";
-
 "account_information" = "ACCOUNT INFO: %1$@(%2$@)";
 "account_holder" = "ACCOUNT HOLDER INFO";
 "address"="ADDRESS";
@@ -86,14 +76,7 @@
 "contact_information" = "CONTACT INFO";
 "identification" = "IDENTIFICATION";
 
-// expiry date format - arguments order is %1$-month, %2$-year(two last digits)
-"expiry_date_format" = "%1$02d/%2$02d";
-"expiry_date_picker_format" = "yyyy-MM";
 "date_format" = "yyyy-MM-dd";
-
-// Account types
-"CHECKING" = "Checking";
-"SAVINGS" = "Savings";
 
 // Processing View
 "processing_view_label" = "Processing";
@@ -189,15 +172,15 @@
 "mobileTransactionDetailsLabel" = "DETAILS";
 "mobileFeeInfoLabel" = "FEE INFO";
 "mobileConfirmNotesLabel" = "NOTE";
-"mobileCharityName" = "Charity Name:";
-"mobileCheckNumber" = "Check Number:";
-"mobileTransactionIdLabel" = "Transaction ID:";
-"mobilePromoWebsite" = "Promo Website:";
-"mobileTransactionDetailsTotal" = "Transaction total:";
-"amount" = "Amount:";
-"mobileFeeLabel" = "Fee:";
-"mobileJournalNumberLabel" = "Receipt ID:";
-"date" = "Date:";
+"mobileCharityName" = "Charity Name";
+"mobileCheckNumber" = "Check Number";
+"mobileTransactionIdLabel" = "Transaction ID";
+"mobilePromoWebsite" = "Promo Website";
+"mobileTransactionDetailsTotal" = "Transaction total";
+"amount" = "Amount";
+"mobileFeeLabel" = "Fee";
+"mobileJournalNumberLabel" = "Receipt ID";
+"date" = "Date";
 
 // Transfer Funds
 "mobileTransferFundsHeader" = "Transfer funds";

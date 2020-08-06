@@ -24,22 +24,18 @@ public final class HyperwalletIcon {
     // swiftlint:disable cyclomatic_complexity
     /// Make transfer method type icon by transfer method type
     ///
-    /// - Parameter transferMethodType: a type of transfer method in String
+    /// - Parameter fontType: String
     /// - Returns: a `HyperwalletIconContent` object
     public static func of(_ fontType: String) -> HyperwalletIconContent {
         switch fontType {
         case HyperwalletTransferMethod.TransferMethodType.bankAccount.rawValue:
-            return .bank
-
+            return .bankAccount
         case HyperwalletTransferMethod.TransferMethodType.bankCard.rawValue:
             return .debitCredit
-
         case HyperwalletTransferMethod.TransferMethodType.prepaidCard.rawValue:
             return .prepaidCard
-
         case HyperwalletTransferMethod.TransferMethodType.payPalAccount.rawValue:
             return .paypal
-
         case HyperwalletTransferMethod.TransferMethodType.wireAccount.rawValue:
             return .wire
         case "VENMO_ACCOUNT":
@@ -48,15 +44,15 @@ public final class HyperwalletIcon {
             return .moneygram
         case "PAPER_CHECK":
             return .check
-
         case HyperwalletReceipt.HyperwalletEntryType.credit.rawValue:
             return .credit
-
         case HyperwalletReceipt.HyperwalletEntryType.debit.rawValue:
             return .debit
+        case "TRASH":
+            return .trash
 
         default:
-            return .bank
+            return .bankAccount
         }
     }
 }

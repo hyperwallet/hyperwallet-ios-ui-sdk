@@ -72,8 +72,10 @@ final class CreateTransferPresenter {
 
     var didTapTransferAllFunds: Bool = false {
         didSet {
-            amount = didTapTransferAllFunds ? availableBalance ?? "0" : "0"
-            view?.updateTransferAmountSection()
+            if didTapTransferAllFunds {
+                amount = availableBalance ?? "0"
+                view?.updateTransferAmountSection()
+            }
         }
     }
 

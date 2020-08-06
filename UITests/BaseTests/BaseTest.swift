@@ -7,8 +7,8 @@ class BaseTests: XCTestCase {
 
     public struct Dialog {
          // Dialog buttons
-         static let remove = "remove_button_label".localized()
-         static let cancel = "cancel_button_label".localized()
+         static let remove = "remove".localized()
+         static let cancel = "cancelButtonLabel".localized()
          static let done = "doneButtonLabel".localized()
          static let tryAgain = "try_again_button_label".localized()
      }

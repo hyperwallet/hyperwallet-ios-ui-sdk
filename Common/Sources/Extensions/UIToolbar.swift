@@ -32,7 +32,7 @@ public extension UIToolbar {
         toolbar.tintColor = Theme.themeColor
         toolbar.sizeToFit()
 
-        let doneButton = UIBarButtonItem(title: "done_button_label".localized(),
+        let doneButton = UIBarButtonItem(title: "doneButtonLabel".localized(),
                                          style: .plain,
                                          target: target,
                                          action: action)
