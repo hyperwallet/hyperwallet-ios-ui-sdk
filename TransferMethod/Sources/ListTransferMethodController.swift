@@ -30,7 +30,7 @@ final class ListTransferMethodController: UITableViewController {
     private var processingView: ProcessingView?
     private var presenter: ListTransferMethodPresenter!
 
-    private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "empty_list_transfer_method_message"
+    private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "emptyStateAddTransferMethod"
         .localized())
     private lazy var addAccountButton: UIButton =
         view.setUpEmptyListButton(text: "mobileAddTransferMethodHeader".localized(), firstItem: emptyListLabel)
@@ -91,12 +91,10 @@ final class ListTransferMethodController: UITableViewController {
     }
 
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let transferMethod = presenter.sectionData[indexPath.row].title {
-            showConfirmationAlert(title: "mobileAreYouSure".localized(),
-                                  message: String(format: "mobileRemoveEAconfirm".localized(), transferMethod),
-                                  transferMethodIndex: indexPath.row)
-            tableView.deselectRow(at: indexPath, animated: true)
-        }
+        showConfirmationAlert(title: "mobileRemoveEAconfirm".localized(),
+                message: "mobileAreYouSure".localized(),
+                transferMethodIndex: indexPath.row)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
     override public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
