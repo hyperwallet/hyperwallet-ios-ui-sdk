@@ -54,7 +54,7 @@ class ListTransferMethodTests: BaseTests {
 
         openTransferMethodsList()
 
-        let expectedTitle = "You didn’t add an account yet. Once created, it will show up here!"
+        let expectedTitle = "Add a transfer method to get started."
 
         XCTAssertTrue(app.staticTexts[expectedTitle].exists)
         XCTAssertTrue(listTransferMethod.addTransferMethodButton.exists)
