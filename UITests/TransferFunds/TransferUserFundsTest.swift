@@ -180,7 +180,9 @@ class TransferUserFundsTest: BaseTests {
        Then the transfer fund amount should show different fund amount.
        */
       func testTransferFunds_switchAllFundsToEnterFundsUSD() {
-          mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods", filename: "ListMoreThanOneTransferMethod", method: HTTPMethod.get)
+          mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+                               filename: "ListMoreThanOneTransferMethod",
+                               method: HTTPMethod.get)
           mockServer.setupStub(url: "/rest/v3/transfers", filename: "AvailableFundUSD", method: HTTPMethod.post)
 
           XCTAssertTrue(transferFundMenu.exists)

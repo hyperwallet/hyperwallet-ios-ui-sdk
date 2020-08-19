@@ -63,6 +63,7 @@ final class ListTransferDestinationController: UITableViewController {
         tableView.estimatedRowHeight = Theme.Cell.smallHeight
         tableView.register(ListTransferDestinationCell.self,
                            forCellReuseIdentifier: ListTransferDestinationCell.reuseIdentifier)
+        tableView.backgroundColor = Theme.UITableViewController.backgroundColor
     }
 
     private func getSelectTransferMethodCoordinator() -> HyperwalletCoordinator? {

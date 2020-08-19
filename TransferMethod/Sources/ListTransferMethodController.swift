@@ -71,7 +71,7 @@ final class ListTransferMethodController: UITableViewController {
 
     // MARK: - Transfer method list table view dataSource and delegate
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.sectionData.count
+        presenter.sectionData.count
     }
 
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -92,17 +92,17 @@ final class ListTransferMethodController: UITableViewController {
 
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         showConfirmationAlert(title: "mobileRemoveEAconfirm".localized(),
-                message: "mobileAreYouSure".localized(),
-                transferMethodIndex: indexPath.row)
+                              message: "mobileAreYouSure".localized(),
+                              transferMethodIndex: indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
     override public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return nil
+        nil
     }
 
     override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return CGFloat.leastNormalMagnitude
+        CGFloat.leastNormalMagnitude
     }
 
     private func addTransferMethod() {
@@ -168,7 +168,7 @@ extension ListTransferMethodController: ListTransferMethodView {
         }
     }
 
-    func showConfirmation(handler: @escaping (() -> Void)) {
+    func showConfirmation(handler: @escaping () -> Void) {
         processingView?.hide(with: .complete)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             handler()
