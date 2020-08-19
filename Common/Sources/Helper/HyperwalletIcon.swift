@@ -30,12 +30,16 @@ public final class HyperwalletIcon {
         switch fontType {
         case HyperwalletTransferMethod.TransferMethodType.bankAccount.rawValue:
             return .bankAccount
+
         case HyperwalletTransferMethod.TransferMethodType.bankCard.rawValue:
             return .debitCredit
+
         case HyperwalletTransferMethod.TransferMethodType.prepaidCard.rawValue:
             return .prepaidCard
+
         case HyperwalletTransferMethod.TransferMethodType.payPalAccount.rawValue:
             return .paypal
+
         case HyperwalletTransferMethod.TransferMethodType.wireAccount.rawValue:
             return .wire
         case "VENMO_ACCOUNT":
@@ -44,8 +48,10 @@ public final class HyperwalletIcon {
             return .moneygram
         case "PAPER_CHECK":
             return .check
+
         case HyperwalletReceipt.HyperwalletEntryType.credit.rawValue:
             return .credit
+
         case HyperwalletReceipt.HyperwalletEntryType.debit.rawValue:
             return .debit
         case "TRASH":

@@ -63,3 +63,13 @@ Carthage/
 # Fastlane
 fastlane/README.md
 fastlane/report.xml
+/.idea/.name
+/.idea/runConfigurations/Demo.xml
+/.idea/hyperwallet-ios-ui-sdk.iml
+/.idea/runConfigurations/HyperwalletUISDK.xml
+/.idea/modules.xml
+/.idea/vcs.xml
+/.idea/workspace.xml
+/.idea/xcode.xml
+/.idea/shelf/local-config/shelved.patch
+/.idea/shelf/local-config.xml

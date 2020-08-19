@@ -54,7 +54,7 @@ class ListTransferMethodTests: BaseTests {
 
         openTransferMethodsList()
 
-        let expectedTitle = "You didn’t add an account yet. Once created, it will show up here!"
+        let expectedTitle = "Add a transfer method to get started."
 
         XCTAssertTrue(app.staticTexts[expectedTitle].exists)
         XCTAssertTrue(listTransferMethod.addTransferMethodButton.exists)
@@ -323,7 +323,7 @@ class ListTransferMethodTests: BaseTests {
     }
 
     func verifyRemoveConfirmation(transferMethod: String) {
-          let confirmMessage = listTransferMethod.getConfirmationMessage(transferMethod: transferMethod)
+          let confirmMessage = listTransferMethod.removeAccountMessage
           XCTAssertTrue(listTransferMethod.confirmAccountRemoveButton.exists)
           XCTAssertTrue(listTransferMethod.cancelAccountRemoveButton.exists)
 

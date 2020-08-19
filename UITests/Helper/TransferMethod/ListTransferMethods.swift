@@ -10,8 +10,8 @@ class ListTransferMethod {
     var confirmAccountRemoveButton: XCUIElement
     var cancelAccountRemoveButton: XCUIElement
     var navigationBar: XCUIElement
-    let removeAccountTitle = "mobileAreYouSure".localized()
-    let removeAccountMessage = "mobileRemoveEAconfirm".localized()
+    let removeAccountTitle = "mobileRemoveEAconfirm".localized()
+    let removeAccountMessage = "mobileAreYouSure".localized()
     let addAccountTitle = "mobileAddTransferMethodHeader".localized()
     let title = "mobileTransferMethodsHeader".localized()
     let removeButtonLabel = "remove".localized()
@@ -78,9 +78,5 @@ class ListTransferMethod {
 
     func getTransferMethodIcon(index: Int) -> XCUIElement {
        return app.cells.element(boundBy: index).images["ListTransferMethodTableViewCellIcon"]
-    }
-
-    func getConfirmationMessage(transferMethod: String) -> String {
-          return String(format: "mobileRemoveEAconfirm".localized(), transferMethod)
     }
 }
