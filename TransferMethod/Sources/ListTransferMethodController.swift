@@ -71,7 +71,7 @@ final class ListTransferMethodController: UITableViewController {
 
     // MARK: - Transfer method list table view dataSource and delegate
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        presenter.sectionData.count
+        return presenter.sectionData.count
     }
 
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -98,11 +98,11 @@ final class ListTransferMethodController: UITableViewController {
     }
 
     override public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        nil
+        return nil
     }
 
     override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        CGFloat.leastNormalMagnitude
+        return CGFloat.leastNormalMagnitude
     }
 
     private func addTransferMethod() {
