@@ -5,6 +5,7 @@ class TransferFundsConfirmation {
     var app: XCUIApplication
 
     // Destination Section
+    var tranferToSectionLabel: XCUIElement
     var transferDestinationLabel: XCUIElement
 
     var transferDestinationDetailLabel: XCUIElement
@@ -12,11 +13,17 @@ class TransferFundsConfirmation {
     // Summary Section
     var summaryTitle: XCUIElement
 
-    var summaryAmountLabel: XCUIElement
+    var summaryAmount: XCUIElement
 
-    var summaryFeeLabel: XCUIElement
+    var summaryFee: XCUIElement
 
-    var summaryReceiveLabel: XCUIElement
+    var summaryReceive: XCUIElement
+
+    var summaryAmountLabel: String
+
+    var summaryFeeLabel: String
+
+    var summaryReceiveLabel: String
 
     // Note Section
     var noteLabel: XCUIElement
@@ -32,41 +39,79 @@ class TransferFundsConfirmation {
 
     var foreignExchangeRate: XCUIElement
 
+    var foreignExchangeSellLabel: String
+
+    var foreignExchangeBuyLabel: String
+
+    var foreignExchangeRateLabel: String
+
     // Confirm button
     var confirmButton: XCUIElement
 
     var scheduleTable: XCUIElement
 
+    let confirmButtonAccessbility = "scheduleTransferLabel"
+    let tableAccessibility = "scheduleTransferTableView"
+
     init(app: XCUIApplication) {
         self.app = app
-        scheduleTable = app.tables["scheduleTransferTableView"]
+        scheduleTable = app.tables[tableAccessibility]
 
+        tranferToSectionLabel = scheduleTable.staticTexts["mobileTransferToLabel".localized()]
         transferDestinationLabel = scheduleTable.staticTexts["transferDestinationTitleLabel"]
         transferDestinationDetailLabel = scheduleTable.staticTexts["transferDestinationSubtitleLabel"]
 
-        summaryTitle = scheduleTable.staticTexts["transfer_section_header_summary".localized()]
-        summaryAmountLabel = scheduleTable.staticTexts["transfer_amount_confirmation".localized()]
-        summaryFeeLabel = scheduleTable.staticTexts["transfer_fee_confirmation".localized()]
-        summaryReceiveLabel = scheduleTable.staticTexts["transfer_net_amount_confirmation".localized()]
+        summaryTitle = scheduleTable.staticTexts["mobileSummaryLabel".localized()]
+        summaryAmount = scheduleTable.staticTexts["mobileConfirmDetailsAmount".localized()]
+        summaryFee = scheduleTable.staticTexts["mobileConfirmDetailsFee".localized()]
+        summaryReceive = scheduleTable.staticTexts["mobileConfirmDetailsTotal".localized()]
+        summaryAmountLabel = "mobileConfirmDetailsAmount".localized()
+        summaryFeeLabel = "mobileConfirmDetailsFee".localized()
+        summaryReceiveLabel = "mobileConfirmDetailsTotal".localized()
 
-        noteLabel = scheduleTable.staticTexts["NOTES"]
+        noteLabel = scheduleTable.staticTexts["mobileNoteLabel".localized()]
 
-        noteDescription = app.cells.textFields["transferNotesTextField"]
+        noteDescription = scheduleTable.textFields["transferNotesTextField"]
 
-        foreignExchangeSectionLabel = scheduleTable.staticTexts["transfer_section_header_foreignExchange".localized()]
-        foreignExchangeSell = scheduleTable.staticTexts["transfer_fx_sell_confirmation".localized()]
-        foreignExchangeBuy = scheduleTable.staticTexts["transfer_fx_buy_confirmation".localized()]
-        foreignExchangeRate = scheduleTable.staticTexts["transfer_fx_rate_confirmation".localized()]
+        foreignExchangeSectionLabel = scheduleTable.staticTexts["mobileFXlabel".localized()]
+        foreignExchangeSell = scheduleTable.staticTexts["mobileFXsell".localized()]
+        foreignExchangeBuy = scheduleTable.staticTexts["mobileFXbuy".localized()]
+        foreignExchangeRate = scheduleTable.staticTexts["mobileFXRateLabel".localized()]
+        foreignExchangeSellLabel = "mobileFXsell".localized()
+        foreignExchangeBuyLabel = "mobileFXbuy".localized()
+        foreignExchangeRateLabel = "mobileFXRateLabel".localized()
 
         if #available(iOS 13.0, *) {
-            confirmButton = scheduleTable.cells.buttons["scheduleTransferLabel"]
+            confirmButton = scheduleTable.buttons[confirmButtonAccessbility]
         } else {
-            confirmButton = scheduleTable.cells.staticTexts["scheduleTransferLabel"]
+            confirmButton = scheduleTable.staticTexts[confirmButtonAccessbility]
         }
     }
 
+    func verifyDestination(country: String, endingDigit: String) {
+        XCTAssertTrue(transferDestinationDetailLabel.exists)
+        let destinationDetail = transferDestinationDetailLabel.label
+        XCTAssertTrue(destinationDetail == "\(country)\nending in \(endingDigit)"
+            || destinationDetail == "\(country) ending in \(endingDigit)")
+    }
+
+    func getCell(row: Int) -> XCUIElement {
+        let cell = scheduleTable.children(matching: .cell).element(boundBy: row)
+        XCTAssert(cell.exists)
+        return cell
+    }
+
     func tapConfirmButton() {
+//        if #available(iOS 13.0, *) {
+//            confirmButton = scheduleTable.buttons[confirmButtonAccessbility]
+//        } else {
+//            confirmButton = scheduleTable.staticTexts[confirmButtonAccessbility]
+//        }
+
         app.scroll(to: confirmButton)
-        confirmButton.tap()
+        XCTAssertTrue(confirmButton.exists)
+        if confirmButton.isHittable {
+            confirmButton.tap()
+        }
     }
 }

@@ -62,12 +62,10 @@ UISearchResultsUpdating, UISearchControllerDelegate {
     /// Called after the view controller has loaded its view hierarchy into memory.
     override public func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = .white
         titleDisplayMode(.never, for: title)
         extendedLayoutIncludesOpaqueBars = true
         setupTable()
-        setViewBackgroundColor()
     }
     /// Notifies the view controller that its view is about to be added to a view hierarchy.
     override public func viewWillAppear(_ animated: Bool) {
@@ -137,6 +135,7 @@ UISearchResultsUpdating, UISearchControllerDelegate {
 
         return nil
     }
+
     /// Returns height of headerview
     override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         guard #available(iOS 11.0, *) else {
@@ -145,6 +144,11 @@ UISearchResultsUpdating, UISearchControllerDelegate {
 
         return CGFloat.leastNormalMagnitude
     }
+
+    override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return Theme.Cell.smallHeight
+    }
+
     /// To select the items
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Retrieve the item selected
@@ -176,7 +180,6 @@ private extension GenericController {
         definesPresentationContext = true
         searchController.dimsBackgroundDuringPresentation = false
         setupSearchBarSize()
-        searchController.searchBar.setLeftAlignment()
         searchController.delegate = self
         searchController.hidesNavigationBarDuringPresentation = false
     }
@@ -207,7 +210,6 @@ private extension GenericController {
             navigationItem.searchController = self.searchController
             navigationItem.hidesSearchBarWhenScrolling = false
         }
-        ThemeManager.applyTo(searchBar: searchController.searchBar)
     }
 
     func setupWithoutSearchBar() {
@@ -218,18 +220,12 @@ private extension GenericController {
     }
 
     func setupTable() {
-        if #available(iOS 11.0, *) {
-            tableView = UITableView(frame: .zero, style: .grouped)
-            tableView.tableFooterView = UIView()
-        } else {
-            tableView = UITableView(frame: .zero, style: .plain)
-            let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 0.5))
-            footerView.backgroundColor = tableView.separatorColor
-            tableView.tableFooterView = footerView
-        }
+        tableView = UITableView(frame: .zero, style: .plain)
+        tableView.tableFooterView = UIView()
         tableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: reuseHeaderIdentifier)
         tableView.estimatedRowHeight = Theme.Cell.smallHeight
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.backgroundColor = Theme.UITableViewController.backgroundColor
         tableView.register(T.self, forCellReuseIdentifier: reuseIdentifier)
     }
 

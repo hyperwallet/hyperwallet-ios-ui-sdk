@@ -10,7 +10,7 @@
                     "fieldGroups": {
                         "nodes": [
                             {
-                                "group": "ACCOUNT_INFORMATION",
+                                "group": "CONTACT_INFORMATION",
                                 "fields": [
                                     {
                                         "dataType": "TEXT",
@@ -23,7 +23,7 @@
                                         "minLength": 3,
                                         "regularExpression": "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",
                                         "validationMessage": {
-                                            "length": "",
+                                            "length": "The minimum length of this field is 3 and maximum length is 200.",
                                             "pattern": "email is invalid",
                                             "empty": "You must provide a value for this field"
                                         }

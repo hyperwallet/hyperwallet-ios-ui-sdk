@@ -112,19 +112,19 @@ class ViewController: UITableViewController {
             cell.emailLabel.text = "johndoe@domain.com"
             cell.nameLabel.text = "John Doe"
             cell.phoneLabel.text = "+1 123-122-3213"
-            cell.nameLabel.textColor = Theme.Label.subTitleColor
-            cell.emailLabel.textColor = Theme.Label.subTitleColor
-            cell.phoneLabel.textColor = Theme.Label.subTitleColor
-            cell.iconLabel.font = UIFont(name: "icomoon", size: 51)
+            cell.nameLabel.textColor = Theme.Label.subtitleColor
+            cell.emailLabel.textColor = Theme.Label.subtitleColor
+            cell.phoneLabel.textColor = Theme.Label.subtitleColor
+            cell.iconLabel.font = UIFont(name: "hw_mobile_ui_sdk_icons", size: 51)
             cell.iconLabel.text = "\u{E023}"
-            cell.iconLabel.textColor = Theme.Label.subTitleColor
+            cell.iconLabel.textColor = Theme.Label.subtitleColor
             return cell
 
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
                 as! HeadlineCell
-            cell.headlineTextLabel.textColor = Theme.Label.subTitleColor
-            cell.headlineTitleLabel.textColor = Theme.Label.subTitleColor
+            cell.headlineTextLabel.textColor = Theme.Label.subtitleColor
+            cell.headlineTitleLabel.textColor = Theme.Label.subtitleColor
             if let example = Example(rawValue: indexPath.item) {
                 cell.headlineTextLabel?.text = example.title
                 cell.headlineTitleLabel?.text = example.detail

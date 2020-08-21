@@ -73,42 +73,6 @@ public extension UIView {
         }
     }
 
-    /// Add constraint based in Visual Format
-    ///
-    /// - parameter: format - The value should follow the visual format language
-    /// - views
-    func addConstraintsWithFormat(format: String, views: UIView...) {
-        var viewsDict = [String: UIView]()
-
-        for (index, view) in views.enumerated() {
-            view.translatesAutoresizingMaskIntoConstraints = false
-            viewsDict["v\(index)"] = view
-        }
-
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format,
-                                                      options: NSLayoutConstraint.FormatOptions(),
-                                                      metrics: nil,
-                                                      views: viewsDict))
-    }
-
-    /// Fill entire view to the super view
-    func addConstraintsFillEntireView(view: UIView) {
-        addConstraintsWithFormat(format: "H:|[v0]|", views: view)
-        addConstraintsWithFormat(format: "V:|[v0]|", views: view)
-    }
-
-    /// Defines fixed constraint validation to the attribute
-    func setConstraint(value: CGFloat, attribute: NSLayoutConstraint.Attribute) {
-        let constraint = NSLayoutConstraint(item: self,
-                                            attribute: attribute,
-                                            relatedBy: .equal,
-                                            toItem: nil,
-                                            attribute: .notAnAttribute,
-                                            multiplier: 1 ,
-                                            constant: value)
-        addConstraint(constraint)
-    }
-
     /// Setups the empty list with message
     ///
     /// - Parameter text: the string description
@@ -160,13 +124,32 @@ public extension UIView {
     func setUpEmptyListButton(text: String, firstItem: UIView) -> UIButton {
         let emptyListButton = UIButton(type: .system)
         emptyListButton.setTitle(text, for: .normal)
-        emptyListButton.frame.size = CGSize(width: 90, height: 30)
+        emptyListButton.titleLabel?.font = Theme.Button.font
+        emptyListButton.setTitleColor(Theme.Button.color, for: UIControl.State.normal)
+        emptyListButton.backgroundColor = Theme.Button.backgroundColor
         emptyListButton.accessibilityIdentifier = "emptyListButton"
 
+        let heightConstraint = NSLayoutConstraint(item: emptyListButton,
+                                                  attribute: .height,
+                                                  relatedBy: .equal,
+                                                  toItem: nil,
+                                                  attribute: .notAnAttribute,
+                                                  multiplier: 1,
+                                                  constant: 52)
+
+        let widthConstraint = NSLayoutConstraint(item: emptyListButton,
+                                                 attribute: .width,
+                                                 relatedBy: .lessThanOrEqual,
+                                                 toItem: nil,
+                                                 attribute: .notAnAttribute,
+                                                 multiplier: 1,
+                                                 constant: 382)
+
+        emptyListButton.addConstraint(heightConstraint)
+        emptyListButton.addConstraint(widthConstraint)
+
         self.addSubview(emptyListButton)
-
         emptyListButton.translatesAutoresizingMaskIntoConstraints = false
-
         let buttonCenterXConstraint = NSLayoutConstraint(item: emptyListButton,
                                                          attribute: .centerX,
                                                          relatedBy: .equal,

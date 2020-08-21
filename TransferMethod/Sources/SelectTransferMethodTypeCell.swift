@@ -34,16 +34,6 @@ final class SelectTransferMethodTypeCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        imageView?.backgroundColor = Theme.Icon.primaryBackgroundColor
-    }
-
-    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        super.setHighlighted(highlighted, animated: animated)
-        imageView?.backgroundColor = Theme.Icon.primaryBackgroundColor
-    }
-
     // MARK: Theme manager's proxy properties
     @objc dynamic var titleLabelColor: UIColor! {
         get { return self.textLabel?.textColor }
@@ -72,7 +62,7 @@ extension SelectTransferMethodTypeCell {
             textLabel?.adjustsFontForContentSizeCategory = true
 
             detailTextLabel?.attributedText = configuration
-                .formatFeesProcessingTime(font: subTitleLabelFont, color: Theme.Label.subTitleColor)
+                .formatFeesProcessingTime(font: subTitleLabelFont, color: Theme.Label.subtitleColor)
             detailTextLabel?.numberOfLines = 0
             detailTextLabel?.lineBreakMode = .byWordWrapping
             detailTextLabel?.adjustsFontForContentSizeCategory = true

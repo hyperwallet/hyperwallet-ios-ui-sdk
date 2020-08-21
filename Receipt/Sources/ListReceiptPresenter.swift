@@ -33,7 +33,7 @@ protocol ListReceiptView: class {
 }
 
 final class ListReceiptPresenter {
-    private unowned let view: ListReceiptView
+    private weak var view: ListReceiptView?
     private let userReceiptLimit = 20
 
     private let pageGroup = "receipts"
@@ -75,7 +75,7 @@ final class ListReceiptPresenter {
         }
 
         isLoadInProgress = true
-        view.showLoading()
+        view?.showLoading()
         userReceiptRepository.listUserReceipts(offset: offset,
                                                limit: userReceiptLimit,
                                                completion: listUserReceiptHandler())
@@ -87,7 +87,7 @@ final class ListReceiptPresenter {
         }
 
         isLoadInProgress = true
-        view.showLoading()
+        view?.showLoading()
         prepaidCardReceiptRepository.listPrepaidCardReceipts(
             prepaidCardToken: prepaidCardToken,
             completion: listPrepaidCardReceiptHandler())
@@ -96,11 +96,11 @@ final class ListReceiptPresenter {
     private func listUserReceiptHandler()
         -> (Result<HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType>) -> Void {
             return { [weak self] (result) in
-                guard let strongSelf = self else {
+                guard let strongSelf = self, let view = strongSelf.view else {
                     return
                 }
                 strongSelf.isLoadInProgress = false
-                strongSelf.view.hideLoading()
+                view.hideLoading()
                 switch result {
                 case .success(let receiptList):
                     guard let receiptList = receiptList, let receipts = receiptList.data else { break }
@@ -110,25 +110,23 @@ final class ListReceiptPresenter {
                     strongSelf.offset += receipts.count
 
                 case .failure(let error):
-                    strongSelf.view.showError(error,
-                                              pageName: strongSelf.pageName,
-                                              pageGroup: strongSelf.pageGroup) {
+                    view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
                         strongSelf.listUserReceipts()
                     }
                     return
                 }
-                strongSelf.view.reloadData()
+                view.reloadData()
             }
     }
 
     private func listPrepaidCardReceiptHandler()
         -> (Result<HyperwalletPageList<HyperwalletReceipt>?, HyperwalletErrorType>) -> Void {
             return { [weak self] (result) in
-                guard let strongSelf = self else {
+                guard let strongSelf = self, let view = strongSelf.view else {
                     return
                 }
                 strongSelf.isLoadInProgress = false
-                strongSelf.view.hideLoading()
+                view.hideLoading()
                 switch result {
                 case .success(let receiptList):
                     guard let receiptList = receiptList, let receipts = receiptList.data else { break }
@@ -137,14 +135,12 @@ final class ListReceiptPresenter {
 
                 case .failure(let error):
                     guard let prepaidCardToken = strongSelf.prepaidCardToken else { break }
-                    strongSelf.view.showError(error,
-                                              pageName: strongSelf.pageName,
-                                              pageGroup: strongSelf.pageGroup) {
+                    view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
                         strongSelf.listPrepaidCardReceipts(prepaidCardToken)
                     }
                     return
                 }
-                strongSelf.view.reloadData()
+                view.reloadData()
             }
     }
 

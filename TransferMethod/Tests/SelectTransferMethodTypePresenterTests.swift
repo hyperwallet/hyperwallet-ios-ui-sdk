@@ -318,15 +318,15 @@ class SelectTransferMethodTypeViewMock: SelectTransferMethodTypeView {
                               selectItemHandler: @escaping SelectItemHandler,
                               markCellHandler: @escaping MarkCellHandler,
                               filterContentHandler: @escaping FilterContentHandler) {
-        if title == "Select Country" {
-            let country = SelectedCountryCurrencyCellConfiguration(title: "United States", value: "US")
+        if title == "mobileCountryRegion".localized() {
+            let country = CountryCurrencyCellConfiguration(title: "United States", value: "US")
             selectItemHandler(country)
             _ = markCellHandler(country)
             _ = filterContentHandler(items, "")
         }
 
-        if title == "Select Currency" {
-            let currency = SelectedCountryCurrencyCellConfiguration(title: "US Dollar", value: "USD")
+        if title == "mobileCurrencyLabel".localized() {
+            let currency = CountryCurrencyCellConfiguration(title: "US Dollar", value: "USD")
             selectItemHandler(currency)
             _ = markCellHandler(currency)
             _ = filterContentHandler(items, "")

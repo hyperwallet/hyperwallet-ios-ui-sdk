@@ -34,16 +34,6 @@ final class ListTransferMethodCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
 
-    override public func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        imageView?.backgroundColor = Theme.Icon.primaryBackgroundColor
-    }
-
-    override public func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        super.setHighlighted(highlighted, animated: animated)
-        imageView?.backgroundColor = Theme.Icon.primaryBackgroundColor
-    }
-
     // MARK: Theme manager's proxy properties
     @objc dynamic var titleLabelFont: UIFont! {
         get { return textLabel?.font }
@@ -86,6 +76,7 @@ extension ListTransferMethodCell {
                                         CGFloat(Theme.Icon.size),
                                         Theme.Icon.primaryColor)
             imageView?.image = icon
+            imageView?.accessibilityIdentifier = "ListTransferMethodTableViewCellIcon"
             imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
         }
     }
@@ -94,9 +85,9 @@ extension ListTransferMethodCell {
         let attributedText = NSMutableAttributedString()
         attributedText.append(value: String(format: "%@\n", transferMethodCountry),
                               font: subTitleLabelFont,
-                              color: Theme.Label.subTitleColor)
+                              color: Theme.Label.subtitleColor)
         if let additionalInfo = additionalInfo {
-            attributedText.append(value: additionalInfo, font: subTitleLabelFont, color: Theme.Label.subTitleColor)
+            attributedText.append(value: additionalInfo, font: subTitleLabelFont, color: Theme.Label.subtitleColor)
         }
 
         return attributedText

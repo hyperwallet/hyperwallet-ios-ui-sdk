@@ -37,8 +37,11 @@ final class DateWidget: TextWidget {
         return formatter
     }()
 
-    required init(field: HyperwalletField, pageName: String, pageGroup: String) {
-        super.init(field: field, pageName: pageName, pageGroup: pageGroup)
+    required init(field: HyperwalletField,
+                  pageName: String,
+                  pageGroup: String,
+                  inputHandler: @escaping InputHandler) {
+        super.init(field: field, pageName: pageName, pageGroup: pageGroup, inputHandler: inputHandler)
         if let value = field.value,
             let date = DateWidget.dateFormatter.date(from: value) {
             textField.text = DateWidget.localizedDateFormatter.string(from: date)

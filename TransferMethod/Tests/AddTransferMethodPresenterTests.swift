@@ -12,6 +12,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
     private lazy var transferMethodConfigurationFieldsResponse = HyperwalletTestHelper
         .getDataFromJson("TransferMethodConfigurationFieldsResponse")
     private var hyperwalletInsightsMock = HyperwalletInsightsMock()
+    private var inputHandler: () -> Void = {}
 
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
@@ -19,7 +20,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
                                                "US",
                                                "USD",
                                                "INDIVIDUAL",
-                                               "BANK_ACCOUNT",
+                                               HyperwalletTransferMethod.TransferMethodType.bankAccount.rawValue,
                                                hyperwalletInsightsMock)
     }
 
@@ -70,7 +71,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
                                                "US",
                                                "USD",
                                                "INDIVIDUAL",
-                                               "BANK_ACCOUNT",
+                                               HyperwalletTransferMethod.TransferMethodType.bankAccount.rawValue,
                                                hyperwalletInsightsMock)
         let url = String(format: "%@/bank-accounts", HyperwalletTestHelper.userRestURL)
         let response = HyperwalletTestHelper.okHTTPResponse(for: "BankAccountIndividualResponse")
@@ -331,7 +332,8 @@ class AddTransferMethodPresenterTests: XCTestCase {
                 let newWidgets = fields.map({
                     WidgetFactory.newWidget(field: $0,
                                             pageName: AddTransferMethodPresenter.addTransferMethodPageName,
-                                            pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup)})
+                                            pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup,
+                                            inputHandler: self.inputHandler)})
                 let section = AddTransferMethodSectionData(
                     fieldGroup: fieldGroup,
                     country: "US",

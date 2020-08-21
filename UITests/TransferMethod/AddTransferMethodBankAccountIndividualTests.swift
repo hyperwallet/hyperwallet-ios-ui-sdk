@@ -5,7 +5,21 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
     var addTransferMethod: AddTransferMethod!
 
     let bankAccount = NSPredicate(format: "label CONTAINS[c] 'Bank Account'")
-    var elementQuery: XCUIElementQuery!
+    var otherElements: XCUIElementQuery!
+
+    var branchIdPatternError: String!
+    var bankAccountIdPatternError: String!
+
+    var branchIdEmptyError: String!
+    var bankAccountIdEmptyError: String!
+
+    var branchIdLengthError: String!
+    var bankAccountIdLengthError: String!
+
+    let invalidRoutingNumberError = "Routing Number [021000022] is not valid. " +
+    "Please modify Routing Number to a valid ACH Routing Number of the branch of your bank."
+    let invalidAccountError = "Note: we are not able to support adding an account for someone else."
+
     override func setUp() {
         super.setUp()
 
@@ -22,19 +36,27 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
                              filename: "TransferMethodConfigurationBankAccountResponse",
                              method: HTTPMethod.post)
 
-        app.tables.cells.staticTexts["Add Transfer Method"].tap()
+        addTransferMethod = AddTransferMethod(app: app)
+
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
-        addTransferMethod = AddTransferMethod(app: app)
-        if #available(iOS 13.0, *) {
-            elementQuery = app.tables["addTransferMethodTable"].buttons
-        } else {
-            elementQuery = app.tables["addTransferMethodTable"].staticTexts
-        }
+        addTransferMethod.addTransferMethodtable.tap()
+
+        branchIdPatternError = addTransferMethod.getPatternError(label: addTransferMethod.routingNumber)
+        bankAccountIdPatternError = addTransferMethod.getPatternError(label: addTransferMethod.accountNumber)
+
+        branchIdEmptyError = addTransferMethod.getEmptyError(label: addTransferMethod.routingNumber)
+        bankAccountIdEmptyError = addTransferMethod.getEmptyError(label: addTransferMethod.accountNumber)
+
+        branchIdLengthError = addTransferMethod.getRoutingNumberError(length: 9)
+        bankAccountIdLengthError = addTransferMethod
+            .getLengthConstraintError(label: addTransferMethod.accountNumber, min: 4, max: 17)
+
+        otherElements = addTransferMethod.addTransferMethodTableView.otherElements
     }
 
     func testAddTransferMethod_displaysElementsOnTmcResponse() {
-        XCTAssert(app.navigationBars["Bank Account"].exists)
+        XCTAssert(addTransferMethod.navBarBankAccount.exists)
 
         verifyAccountInformationSection()
         verifyIndividualAccountHolderSection()
@@ -42,7 +64,7 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
 
         XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
         XCTAssert(addTransferMethod.addTransferMethodTableView
-            .staticTexts["Transaction Fees: USD 2.00 Processing Time: 1-2 Business days"].exists)
+            .staticTexts["$2.00 fee \u{2022} 1-2 Business days"].exists)
 
         app.scroll(to: addTransferMethod.createTransferMethodButton)
         XCTAssert(addTransferMethod.createTransferMethodButton.exists)
@@ -73,8 +95,13 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
 
         addTransferMethod.clickCreateTransferMethodButton()
 
-        XCTAssert(elementQuery["branchId_error"].exists)
-        XCTAssert(elementQuery["bankAccountId_error"].exists)
+        XCTAssert(addTransferMethod.elementQuery["branchId_error"].exists)
+        XCTAssert(addTransferMethod.elementQuery["bankAccountId_error"].exists)
+
+        XCTAssert(otherElements
+            .containing(NSPredicate(format: "label CONTAINS %@", branchIdPatternError)).count == 1)
+        XCTAssert(otherElements
+            .containing(NSPredicate(format: "label CONTAINS %@", bankAccountIdPatternError)).count == 1)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidLength() {
@@ -83,8 +110,12 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
 
         addTransferMethod.clickCreateTransferMethodButton()
 
-        XCTAssert(elementQuery["branchId_error"].exists)
-        XCTAssert(elementQuery["bankAccountId_error"].exists)
+        XCTAssert(addTransferMethod.branchIdError.exists)
+        XCTAssert(addTransferMethod.bankAccountIdError.exists)
+
+        XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", branchIdLengthError)).count == 1)
+        XCTAssert(otherElements
+            .containing(NSPredicate(format: "label CONTAINS %@", bankAccountIdLengthError)).count == 1)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidPresence() {
@@ -93,9 +124,9 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
 
         addTransferMethod.clickCreateTransferMethodButton()
 
-        XCTAssert(elementQuery["branchId_error"].exists)
-        XCTAssert(elementQuery["bankAccountId_error"].exists)
-        XCTAssert(elementQuery["bankAccountPurpose_error"].exists)
+        XCTAssert(addTransferMethod.elementQuery["branchId_error"].exists)
+        XCTAssert(addTransferMethod.elementQuery["bankAccountId_error"].exists)
+        XCTAssert(addTransferMethod.elementQuery["bankAccountPurpose_error"].exists)
     }
 
     func testAddTransferMethod_createBankAccountInvalidRouting() {
@@ -110,9 +141,8 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
         addTransferMethod.clickCreateTransferMethodButton()
         waitForNonExistence(spinner)
 
-        XCTAssertNotNil(app.tables.otherElements
-            .containing(NSPredicate(format: "label CONTAINS %@", "Routing Number [021000022] is not valid. " +
-                "Please modify Routing Number to a valid ACH Routing Number of the branch of your bank.")))
+        XCTAssert(otherElements
+            .containing(NSPredicate(format: "label CONTAINS %@", invalidRoutingNumberError)).count == 1)
     }
 
     func testAddTransferMethod_createBankAccountValidResponse() {
@@ -142,20 +172,17 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
         addTransferMethod.clickCreateTransferMethodButton()
         waitForNonExistence(spinner)
 
-        XCTAssert(app.alerts["Unexpected Error"].exists)
-        XCTAssert(app.alerts["Unexpected Error"].staticTexts["Oops... Something went wrong, please try again"].exists)
-        app.alerts["Unexpected Error"].buttons["OK"].tap()
-        XCTAssertFalse(app.alerts["Unexpected Error"].exists)
+        verifyUnexpectedError()
 
-        waitForExistence(app.navigationBars["Account Settings"])
-        XCTAssertTrue(app.navigationBars["Account Settings"].exists)
+        waitForExistence(addTransferMethod.navBar)
+        XCTAssertTrue(addTransferMethod.navBar.exists)
     }
 }
 
 private extension AddTransferMethodBankAccountIndividualTests {
     func verifyAccountInformationSection() {
-        XCTAssert(addTransferMethod.addTransferMethodTableView
-            .staticTexts["Account Information - United States (USD)"].exists)
+        let accountInformation = String(format: "account_information".localized(), "UNITED STATES", "USD")
+        XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts[accountInformation].exists)
         XCTAssertEqual(addTransferMethod.branchIdLabel.label, "Routing Number")
         XCTAssert(addTransferMethod.branchIdInput.exists)
         XCTAssertEqual(addTransferMethod.bankAccountIdLabel.label, "Account Number")
@@ -190,9 +217,6 @@ private extension AddTransferMethodBankAccountIndividualTests {
         XCTAssert(addTransferMethod.mobileNumberInput.exists)
         XCTAssertEqual(addTransferMethod.dateOfBirthLabel.label, "Date of Birth")
         XCTAssert(addTransferMethod.dateOfBirthInput.exists)
-        XCTAssertNotNil(app.tables.otherElements
-            .containing(NSPredicate(format: "label CONTAINS %@",
-                                    "Note: we are not able to support adding an account for someone else.")))
     }
 
     func verifyAddressSection() {

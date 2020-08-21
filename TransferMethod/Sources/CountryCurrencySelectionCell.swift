@@ -19,24 +19,43 @@
 #if !COCOAPODS
 import Common
 #endif
-import HyperwalletSDK
 import UIKit
 
-final class DividerCell: UITableViewCell {
-    static let reuseIdentifier = "dividerCellIdentifier"
+/// Represents the Country and Currency Generic cell
+final class CountryCurrencySelectionCell: GenericCell<GenericCellConfiguration> {
+    static let reuseIdentifier = "countryCurrencySelectionCellIdentifier"
+    private let trailingConstraintIdentifier = "trailingConstraintIdentifier"
 
-    // MARK: Life cycle
+    // MARK: Property
+    override var item: GenericCellConfiguration? {
+        didSet {
+            guard let configuration = item  else {
+                return
+            }
+            accessibilityIdentifier = configuration.identifier
+
+            textLabel?.text = configuration.title
+            textLabel?.adjustsFontForContentSizeCategory = true
+            textLabel?.accessibilityLabel = configuration.title
+            textLabel?.accessibilityIdentifier = configuration.title
+        }
+    }
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
-
-        let constraints = [
-            heightAnchor.constraint(equalToConstant: Theme.Cell.dividerHeight)
-        ]
-        constraints.forEach { $0.priority = UILayoutPriority(999) }
-        NSLayoutConstraint.activate(constraints)
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+
+    @objc dynamic var textLabelColor: UIColor! {
+        get { return textLabel?.textColor }
+        set { textLabel?.textColor = newValue }
+    }
+
+    @objc dynamic var textLabelFont: UIFont! {
+        get { return textLabel?.font }
+        set { textLabel?.font = newValue }
     }
 }

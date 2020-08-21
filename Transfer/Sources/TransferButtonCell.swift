@@ -23,13 +23,24 @@ import Common
 final class TransferButtonCell: UITableViewCell {
     static let reuseIdentifier = "transferButtonCellIdentifier"
 
-    private(set) lazy var buttonLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.adjustsFontForContentSizeCategory = true
-        label.accessibilityIdentifier = "createTransferNextLabel"
-        label.textAlignment = .center
-        return label
+    private(set) lazy var button: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.accessibilityIdentifier = "createTransferNextLabel"
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        button.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+
+        let heightConstraint = NSLayoutConstraint(item: button,
+                                                  attribute: .height,
+                                                  relatedBy: .equal,
+                                                  toItem: nil,
+                                                  attribute: .notAnAttribute,
+                                                  multiplier: 1,
+                                                  constant: 52)
+        button.addConstraint(heightConstraint)
+
+        return button
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -41,15 +52,26 @@ final class TransferButtonCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        subviews.forEach { (view) in
+            if type(of: view).description() == "_UITableViewCellSeparatorView" {
+                view.isHidden = true
+            }
+        }
+    }
+
     private func setupCell() {
-        contentView.addSubview(buttonLabel)
+        contentView.addSubview(button)
 
         let margins = contentView.layoutMarginsGuide
         let constraints = [
-            buttonLabel.safeAreaLeadingAnchor.constraint(equalTo: margins.leadingAnchor),
-            buttonLabel.safeAreaTrailingAnchor.constraint(equalTo: margins.trailingAnchor),
-            buttonLabel.safeAreaTopAnchor.constraint(equalTo: margins.topAnchor),
-            buttonLabel.safeAreaBottomAnchor.constraint(equalTo: margins.bottomAnchor)
+            button.safeAreaLeadingAnchor.constraint(equalTo: margins.leadingAnchor),
+            button.safeAreaTrailingAnchor.constraint(equalTo: margins.trailingAnchor),
+            button.safeAreaCenterXAnchor.constraint(equalTo: margins.centerXAnchor),
+            button.safeAreaCenterYAnchor.constraint(equalTo: margins.centerYAnchor),
+            button.safeAreaTopAnchor.constraint(equalTo: margins.topAnchor),
+            button.safeAreaBottomAnchor.constraint(equalTo: margins.bottomAnchor)
         ]
         constraints.forEach { $0.priority = UILayoutPriority(999) }
         NSLayoutConstraint.activate(constraints)
@@ -57,29 +79,34 @@ final class TransferButtonCell: UITableViewCell {
 
     /// This is to configure the next button in create transfer page
     func configure(title: String) {
-        buttonLabel.text = title
-        buttonLabel.accessibilityLabel = title
+        button.setTitle(title, for: .normal)
+        button.accessibilityLabel = title
     }
 
     /// This is to configure the confirmation button in schedule transfer page
     func configure(title: String, action: UIGestureRecognizer) {
-        buttonLabel.text = title
-        buttonLabel.accessibilityLabel = title
-        buttonLabel.accessibilityIdentifier = "scheduleTransferLabel"
-        buttonLabel.isUserInteractionEnabled = true
-        buttonLabel.addGestureRecognizer(action)
+        button.setTitle(title, for: .normal)
+        button.accessibilityLabel = title
+        button.accessibilityIdentifier = "scheduleTransferLabel"
+        button.isUserInteractionEnabled = true
+        button.addGestureRecognizer(action)
     }
 }
 
 extension TransferButtonCell {
     // MARK: Theme manager's proxy properties
-    @objc dynamic var titleLabelFont: UIFont! {
-        get { return buttonLabel.font }
-        set { buttonLabel.font = newValue }
+    @objc dynamic var buttonTitleLabelFont: UIFont! {
+        get { return button.titleLabel?.font }
+        set { button.titleLabel?.font = newValue }
     }
 
-    @objc dynamic var titleLabelColor: UIColor! {
-        get { return buttonLabel.textColor }
-        set { buttonLabel.textColor = newValue }
+    @objc dynamic var buttonTitleLabelColor: UIColor! {
+        get { return button.titleLabel?.textColor }
+        set { button.titleLabel?.textColor = newValue }
+    }
+
+    @objc dynamic var buttonBackgroundColor: UIColor! {
+        get { return button.backgroundColor }
+        set { button.backgroundColor = newValue }
     }
 }

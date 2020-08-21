@@ -41,7 +41,7 @@ protocol AddTransferMethodView: class {
 }
 
 final class AddTransferMethodPresenter {
-    private unowned var view: AddTransferMethodView
+    private weak var view: AddTransferMethodView?
     private let errorTypeApi = "API"
     private let profileType: String
     private let createdConfirmationPageName = "transfer-method:add:transfer-method-created"
@@ -78,7 +78,7 @@ final class AddTransferMethodPresenter {
     }
 
     func loadTransferMethodConfigurationFields(_ forceUpdate: Bool = false) {
-        view.showLoading()
+        view?.showLoading()
 
         if forceUpdate {
             transferMethodConfigurationRepository.refreshFields()
@@ -89,15 +89,15 @@ final class AddTransferMethodPresenter {
                        currency,
                        transferMethodTypeCode,
                        profileType) { [weak self] (result) in
-                        guard let strongSelf = self else {
+                        guard let strongSelf = self, let view = strongSelf.view else {
                             return
                         }
 
-                        strongSelf.view.hideLoading()
+                        view.hideLoading()
 
                         switch result {
                         case .failure(let error):
-                            strongSelf.view.showError(
+                            view.showError(
                                 error,
                                 pageName: AddTransferMethodPresenter.addTransferMethodPageName,
                                 pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup) {
@@ -108,7 +108,7 @@ final class AddTransferMethodPresenter {
                             if let fieldGroups = fieldResult?.fieldGroups(),
                                 let transferMethodType = fieldResult?.transferMethodType() {
                                 strongSelf.trackUILoadImpression()
-                                strongSelf.view.reloadData(fieldGroups, transferMethodType)
+                                view.reloadData(fieldGroups, transferMethodType)
                             }
                         }
             }
@@ -116,7 +116,7 @@ final class AddTransferMethodPresenter {
 
     func createTransferMethod() {
         trackConfirmClick()
-        guard view.areAllFieldsValid() else {
+        guard let view = view, view.areAllFieldsValid() else {
             return
         }
 
@@ -128,20 +128,20 @@ final class AddTransferMethodPresenter {
 
         view.showProcessing()
         transferMethodRepository.createTransferMethod(hyperwalletTransferMethod) { [weak self] (result) in
-            guard let strongSelf = self else {
+            guard let strongSelf = self, let view = strongSelf.view else {
                 return
             }
             switch result {
             case .failure(let error):
-                strongSelf.view.dismissProcessing(handler: {
+                view.dismissProcessing(handler: {
                     strongSelf.errorHandler(for: error)
                 })
 
             case .success(let transferMethodResult):
-                strongSelf.view.showConfirmation(handler: {
+                view.showConfirmation(handler: {
                     if let transferMethod = transferMethodResult {
                         strongSelf.trackTransferMethodCreatedConfirmationImpression()
-                        strongSelf.view.notifyTransferMethodAdded(transferMethod)
+                        view.notifyTransferMethodAdded(transferMethod)
                     }
                 })
             }
@@ -162,36 +162,39 @@ final class AddTransferMethodPresenter {
             if let errors = error.getHyperwalletErrors()?.errorList, errors.isNotEmpty {
                 updateFooterContent(errors)
                 if errors.contains(where: { $0.fieldName == nil }) {
-                    view.showError(error,
-                                   pageName: AddTransferMethodPresenter.addTransferMethodPageName,
-                                   pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup,
-                                   nil)
+                    view?.showError(error,
+                                    pageName: AddTransferMethodPresenter.addTransferMethodPageName,
+                                    pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup,
+                                    nil)
                 }
             }
 
         default:
-            view.showError(error,
-                           pageName: AddTransferMethodPresenter.addTransferMethodPageName,
-                           pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup) { [weak self] in
-                            self?.createTransferMethod()
+            view?.showError(error,
+                            pageName: AddTransferMethodPresenter.addTransferMethodPageName,
+                            pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup) { [weak self] in
+                                self?.createTransferMethod()
             }
         }
     }
 
     private func buildHyperwalletTransferMethod() -> HyperwalletTransferMethod? {
         switch transferMethodTypeCode {
-        case "BANK_ACCOUNT", "WIRE_ACCOUNT" :
+        case HyperwalletTransferMethod.TransferMethodType.bankAccount.rawValue,
+             HyperwalletTransferMethod.TransferMethodType.wireAccount.rawValue :
             return HyperwalletBankAccount.Builder(transferMethodCountry: country,
                                                   transferMethodCurrency: currency,
                                                   transferMethodProfileType: profileType,
                                                   transferMethodType: transferMethodTypeCode)
                 .build()
-        case "BANK_CARD" :
+
+        case HyperwalletTransferMethod.TransferMethodType.bankCard.rawValue :
             return HyperwalletBankCard.Builder(transferMethodCountry: country,
                                                transferMethodCurrency: currency,
                                                transferMethodProfileType: profileType)
                 .build()
-        case "PAYPAL_ACCOUNT":
+
+        case HyperwalletTransferMethod.TransferMethodType.payPalAccount.rawValue:
             return HyperwalletPayPalAccount.Builder(transferMethodCountry: country,
                                                     transferMethodCurrency: currency,
                                                     transferMethodProfileType: profileType)
@@ -216,7 +219,7 @@ final class AddTransferMethodPresenter {
             }
         }
 
-        view.showFooterViewWithUpdatedSectionData(for: sectionData.reversed())
+        view?.showFooterViewWithUpdatedSectionData(for: sectionData.reversed())
     }
 
     private func updateSectionData(for section: AddTransferMethodSectionData,
@@ -270,7 +273,7 @@ final class AddTransferMethodPresenter {
         return section.cells.compactMap { $0 as? AbstractWidget }
     }
 
-    private func resetErrorMessagesForAllSections() {
+    func resetErrorMessagesForAllSections() {
         sectionData.forEach { $0.errorMessage = nil }
     }
 

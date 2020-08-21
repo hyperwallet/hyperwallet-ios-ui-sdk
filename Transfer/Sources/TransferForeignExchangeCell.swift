@@ -28,6 +28,11 @@ final class TransferForeignExchangeCell: UITableViewCell {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
         textLabel?.accessibilityIdentifier = "scheduleTransferForeignExchangeTextLabel"
         detailTextLabel?.accessibilityIdentifier = "scheduleTransferForeignExchangeTextValue"
+        let constraints = [
+            heightAnchor.constraint(equalToConstant: Theme.Cell.smallHeight)
+        ]
+        constraints.forEach { $0.priority = UILayoutPriority(999) }
+        NSLayoutConstraint.activate(constraints)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -66,20 +71,7 @@ extension TransferForeignExchangeCell {
         } else {
             textLabel?.text = sectionData.rows[rowIndex].title
             detailTextLabel?.text = sectionData.rows[rowIndex].value
-            // modify separatorInset length when there is another foreign exchange after this row
-            if let nextRow = sectionData.rows[safe: rowIndex + 1], nextRow.title == nil {
-               shouldHideSeparator = true
-            }
             return self
-        }
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        if shouldHideSeparator {
-            let separatorView = subviews.first(where: { $0.isSeparatorView() })
-            separatorView?.isHidden = true
-            shouldHideSeparator = false
         }
     }
 }

@@ -1,7 +1,7 @@
 # Hyperwallet UI SDK
 
 [![Platforms](https://img.shields.io/cocoapods/p/HyperwalletUISDK.svg?)](https://cocoapods.org/pods/HyperwalletUISDK)
-[![Build Status](https://travis-ci.org/hyperwallet/hyperwallet-ios-ui-sdk.svg?branch=master)](https://travis-ci.org/hyperwallet/hyperwallet-ios-ui-sdk)
+[![Build Status](https://travis-ci.com/hyperwallet/hyperwallet-ios-ui-sdk.svg?branch=master)](https://travis-ci.com/hyperwallet/hyperwallet-ios-ui-sdk)
 [![Coverage Status](https://coveralls.io/repos/github/hyperwallet/hyperwallet-ios-ui-sdk/badge.svg?branch=master)](https://coveralls.io/github/hyperwallet/hyperwallet-ios-ui-sdk?branch=master)
 
 [![CocoaPods](https://img.shields.io/cocoapods/v/HyperwalletUISDK.svg?color=blue)](https://cocoapods.org/pods/HyperwalletUISDK)
@@ -22,7 +22,7 @@ Note that this SDK is geared towards those who need both backend data and UI fea
 
 ## Dependencies
 
-- [HyperwalletSDK 1.0.0-beta06](https://github.com/hyperwallet/hyperwallet-ios-sdk)
+- [HyperwalletSDK 1.0.0-beta07](https://github.com/hyperwallet/hyperwallet-ios-sdk)
 
 ## Installation
 Use [Carthage](https://github.com/Carthage/Carthage) or [CocoaPods](https://cocoapods.org/) to integrate to HyperwalletSDK.
@@ -34,7 +34,7 @@ Adding one or more of these frameworks allows users to explore the particular fu
 ### Carthage
 Specify it in your Cartfile:
 ```ogdl
-github "hyperwallet/hyperwallet-ios-ui-sdk" "1.0.0-beta05"
+github "hyperwallet/hyperwallet-ios-ui-sdk" "1.0.0-beta06"
 ```
 Add desired modules using the `Linked Frameworks and Libraries` option to make them available in the app.
 Use `import <module-name>` to add the dependency within a file
@@ -42,13 +42,13 @@ Use `import <module-name>` to add the dependency within a file
 ### CocoaPods
 - Install a specific framework (install one or more frameworks based on your requirement)
 ```ruby
-pod "HyperwalletUISDK/TransferMethod", "1.0.0-beta05"
-pod "HyperwalletUISDK/Transfer", "1.0.0-beta05"
-pod "HyperwalletUISDK/Receipt", "1.0.0-beta05"
+pod "HyperwalletUISDK/TransferMethod", "1.0.0-beta06"
+pod "HyperwalletUISDK/Transfer", "1.0.0-beta06"
+pod "HyperwalletUISDK/Receipt", "1.0.0-beta06"
 ```
 - To install all available modules (TransferMethod, Transfer, Receipt)
 ```ruby
-pod 'HyperwalletUISDK', '~> 1.0.0-beta05'
+pod 'HyperwalletUISDK', '~> 1.0.0-beta06'
 ```
 Use `import HyperwalletUISDK` to add the dependency within a file.
 
@@ -355,39 +355,46 @@ On the Theme is possible to customize the properties:
 |:--------|:-------------|:-----------|
 | `Theme.themeColor` | `0x00AFD0` | The main color |
 | `Theme.tintColor` | `UIColor.white` | The tint color |
-| `Theme.Label.color` | `UIColor.black` | The label primary color |
+| `Theme.Label.color` | `UIColor(rgb: 0x2C2E2F)` | The label primary color |
 | `Theme.Label.errorColor` | `0xFF3B30` | The color to highlight errors|
-| `Theme.Label.subTitleColor` | `0x666666` | The subtitle color |
+| `Theme.Label.subtitleColor` | `UIColor(rgb: 0x3c3c43, alpha: 0.6)` | The subtitle color |
 | `Theme.Label.textColor` | `0x8e8e93` | The text color |
-| `Theme.Label.titleFont` | `UIFont.preferredFont(forTextStyle: .headline)` | The title font style |
-| `Theme.Label.bodyFont` | `UIFont.preferredFont(forTextStyle: .body)` | The body font style |
-| `Theme.Label.captionOne` | `UIFont.preferredFont(forTextStyle: .caption1)` | The caption one font style |
+| `Theme.Label.titleFont` | `UIFont.preferredFont(forTextStyle: .body)` | The title font style |
+| `Theme.Label.subtitleFont` | `UIFont.preferredFont(forTextStyle: .subheadline)` | The caption one font style |
 | `Theme.Label.footnoteFont` | `UIFont.preferredFont(forTextStyle: .footnote)` | The footnote font style |
 | `Theme.NavigationBar.barStyle` | `UIBarStyle.default` | The `UINavigationBar` bar style. |
 | `Theme.NavigationBar.isTranslucent` | `false`	| Sets the opaque background color |
 | `Theme.NavigationBar.shadowColor` | `UIColor.clear`	| The color of NavigationBar shadow |
-| `Theme.Button.color` | `Theme.themeColor` | The button primary color |
+| `Theme.NavigationBar.largeTitleColor` | `UIColor.white`    | The UINavigationBar large title color |
+| `Theme.NavigationBar.titleColor` | `UIColor.white`    | The UINavigationBar title color |
+| `Theme.NavigationBar.backButtonColor` | `UIColor.white`    | The UINavigationBar Back Button color |
+| `Theme.NavigationBar.largeTitleFont` | `UIFont.preferredFont(forTextStyle: .largeTitle)`    | The UINavigationBar large title font |
+| `Theme.NavigationBar.titleFont` | `UIFont.preferredFont(forTextStyle: .body)`    | The UINavigationBar title font |
+| `Theme.Button.color` | `UIColor(rgb: 0xFFFFFF)` | The button primary color |
+| `Theme.Button.linkColor` | `Theme.themeColor` | The button link color |
 | `Theme.Button.font` | `Theme.Label.bodyFont` | The button font |
-| `Theme.Text.color` | `UIColor.black` | The text primary color |
+| `Theme.Button.linkFont` | `Theme.Label.titleFont` | The link button font |
+| `Theme.Button.backgroundColor` | `Theme.themeColor` | The button background color |
+| `Theme.Text.font` | `UIFont.preferredFont(forTextStyle: .body)` | The text font style |
+| `Theme.Text.labelFont` | `Theme.Label.titleFont` | The text  label font style |
+| `Theme.Text.color` | `Theme.Label.color` | The text primary color |
+| `Theme.Text.labelColor` | `Theme.Label.color` | The text label primary color |
 | `Theme.Text.disabledColor` | `Theme.Label.textColor` | The text disabled color |
-| `Theme.SearchBar.textFieldTintColor` | `Theme.tintColor` | The `UITextField` tint color |
-| `Theme.SearchBar.textFieldBackgroundColor` | `0x28BBD7` | The `UITextField` background color |
-| `Theme.Cell.smallHeight` | `44` | The common `UITableViewViewCell` height. |
-| `Theme.Cell.mediumHeight` | `63`	| The `UITableViewViewCell` height for the receipt items |
-| `Theme.Cell.largeHeight` | `88` | The `UITableViewViewCell` height for the List transfer method items and the Select transfer method type items. |
-| `Theme.Cell.headerHeight` | `16` | The Select transfer method type items header height. |
-| `Theme.Cell.dividerHeight` | `8` | The divider UITableViewViewCell height. |
-| `Theme.Icon.size` | `20` | The icon font size |
-| `Theme.Icon.frame` | `CGSize(width: 40, height: 40)` | The icon frame |
+| `Theme.Cell.smallHeight` | `61` | The common ``UITableViewCell`` height. |
+| `Theme.Cell.height` | `80` | The common ``UITableViewCell`` height. |
+| `Theme.Cell.largeHeight` | `88` | The `UITableViewCell` height for the List transfer method items and the Select transfer method type items. |
+| `Theme.Cell.headerHeight` | `37` | The Select transfer method type items header height. |
+| `Theme.Cell.dividerHeight` | `8` | The divider `UITableViewCell` height. |
+| `Theme.Cell.separatorColor` | `UIColor(rgb: 0x3c3c43, alpha: 0.29)` | The `UITableViewCell` separator color. |
+| `Theme.Cell.tintColor` | `UIColor.white` | The `UITableViewCell` tint color. |
+| `Theme.Icon.size` | `30` | The icon font size |
+| `Theme.Icon.frame` | `CGSize(width: 30, height: 30)` | The icon frame |
 | `Theme.Icon.primaryColor` | `Theme.themeColor` | The icon primary color |
-| `Theme.Icon.primaryBackgroundColor` | `0xE5F7FA` | The icon primary background color |
 | `Theme.Icon.creditColor` | `Amount.creditColor` | The icon credit color |
-| `Theme.Icon.creditBackgroundColor` | `0xF1FAE8` | The icon credit background color |
 | `Theme.Icon.debitColor` | `Amount.debitColor` | The icon debit color |
-| `Theme.Icon.debitBackgroundColor` | `0xFEF7F7` | The icon debit background color |
-| `Theme.Amount.creditColor` | `0x5FBF00` | The credit color |
-| `Theme.Amount.debitColor` | `0xDB4437` | The debit color |
-| `Theme.ViewController.backgroundColor` | `0xEFEFF4` | The `UIViewController` background color. |
+| `Theme.Amount.creditColor` | `UIColor(rgb: 0x299976)` | The credit color |
+| `Theme.Amount.debitColor` | `Theme.Label.color` | The debit color |
+| `Theme.ViewController.backgroundColor` | `UIColor.white` | The `UIViewController` background color. |
 | `Theme.SpinnerView.activityIndicatorViewStyle` | `UIActivityIndicatorView.Style.whiteLarge` | The `UIActivityIndicatorView` style. |
 | `Theme.SpinnerView.activityIndicatorViewColor` | `Theme.themeColor` | The `UIActivityIndicatorView` color. |
 | `Theme.SpinnerView.backgroundColor` | `UIColor.clear` | The background color |

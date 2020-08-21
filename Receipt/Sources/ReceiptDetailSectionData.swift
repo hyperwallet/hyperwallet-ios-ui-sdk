@@ -37,12 +37,12 @@ protocol ReceiptDetailSectionData {
 
 extension ReceiptDetailSectionData {
     var rowCount: Int { return 1 }
-    var title: String { return "receipt_details_section_header_\(receiptDetailSectionHeader.rawValue)".localized() }
 }
 
 struct ReceiptDetailSectionTransactionData: ReceiptDetailSectionData {
     var receiptDetailSectionHeader: ReceiptDetailSectionHeader { return .transaction }
     var cellIdentifier: String { return ReceiptTransactionCell.reuseIdentifier }
+    var title: String { return "mobileTransactionTypeLabel".localized() }
     let receipt: HyperwalletReceipt
 
     init(from receipt: HyperwalletReceipt) {
@@ -55,38 +55,39 @@ struct ReceiptDetailSectionDetailData: ReceiptDetailSectionData {
     var receiptDetailSectionHeader: ReceiptDetailSectionHeader { return .details }
     var rowCount: Int { return rows.count }
     var cellIdentifier: String { return ReceiptDetailCell.reuseIdentifier }
+    var title: String { return "mobileTransactionDetailsLabel".localized() }
 
     init(from receipt: HyperwalletReceipt) {
         if let receiptId = receipt.journalId {
-            rows.append(ReceiptDetailRow(title: "receipt_details_receipt_id".localized(),
+            rows.append(ReceiptDetailRow(title: "mobileJournalNumberLabel".localized(),
                                          value: receiptId,
                                          field: "journalId"))
         }
 
         if let createdOn = receipt.createdOn,
             let dateTime = ISO8601DateFormatter.ignoreTimeZone.date(from: createdOn)?.format(for: .dateTime) {
-            rows.append(ReceiptDetailRow(title: "receipt_details_date".localized(),
+            rows.append(ReceiptDetailRow(title: "date".localized(),
                                          value: dateTime,
                                          field: "createdOn"))
         }
 
         if let charityName = receipt.details?.charityName {
-            rows.append(ReceiptDetailRow(title: "receipt_details_charity_name".localized(),
+            rows.append(ReceiptDetailRow(title: "mobileCharityName".localized(),
                                          value: charityName,
                                          field: "charityName"))
         }
         if let checkNumber = receipt.details?.checkNumber {
-            rows.append(ReceiptDetailRow(title: "receipt_details_check_number".localized(),
+            rows.append(ReceiptDetailRow(title: "mobileCheckNumber".localized(),
                                          value: checkNumber,
                                          field: "checkNumber"))
         }
         if let clientPaymentId = receipt.details?.clientPaymentId {
-            rows.append(ReceiptDetailRow(title: "receipt_details_client_payment_id".localized(),
+            rows.append(ReceiptDetailRow(title: "mobileTransactionIdLabel".localized(),
                                          value: clientPaymentId,
                                          field: "clientPaymentId"))
         }
         if let website = receipt.details?.website {
-            rows.append(ReceiptDetailRow(title: "receipt_details_website".localized(),
+            rows.append(ReceiptDetailRow(title: "mobilePromoWebsite".localized(),
                                          value: website,
                                          field: "website"))
         }
@@ -98,7 +99,7 @@ struct ReceiptDetailSectionFeeData: ReceiptDetailSectionData {
     var receiptDetailSectionHeader: ReceiptDetailSectionHeader { return .fee }
     var rowCount: Int { return rows.count }
     var cellIdentifier: String { return ReceiptFeeCell.reuseIdentifier }
-
+    var title: String { return "mobileFeeInfoLabel".localized() }
     init?(from receipt: HyperwalletReceipt) {
         guard
             let stringFee = receipt.fee,
@@ -111,17 +112,17 @@ struct ReceiptDetailSectionFeeData: ReceiptDetailSectionData {
         let amountFormat = receipt.entry == HyperwalletReceipt.HyperwalletEntryType.credit ? "%@ %@" : "-%@ %@"
         let valueCurrencyFormat = "%@ %@"
 
-        rows.append(ReceiptDetailRow(title: "receipt_details_amount".localized(),
+        rows.append(ReceiptDetailRow(title: "amount".localized(),
                                      value: String(format: amountFormat, amountValue, currency),
                                      field: "amount"))
 
-        rows.append(ReceiptDetailRow(title: "receipt_details_fee".localized(),
+        rows.append(ReceiptDetailRow(title: "mobileFeeLabel".localized(),
                                      value: String(format: valueCurrencyFormat, stringFee, currency),
                                      field: "fee"))
 
         let transaction: Double = amount - fee
         let transactionFormat = getTransactionFormat(basedOn: amountValue)
-        rows.append(ReceiptDetailRow(title: "receipt_details_transaction".localized(),
+        rows.append(ReceiptDetailRow(title: "mobileTransactionDetailsTotal".localized(),
                                      value: String(format: valueCurrencyFormat,
                                                    String(format: transactionFormat, transaction),
                                                    currency),
@@ -142,6 +143,7 @@ struct ReceiptDetailSectionNotesData: ReceiptDetailSectionData {
     let notes: String?
     var receiptDetailSectionHeader: ReceiptDetailSectionHeader { return .notes }
     var cellIdentifier: String { return ReceiptNotesCell.reuseIdentifier }
+    var title: String { return "mobileConfirmNotesLabel".localized() }
 
     init?(from receipt: HyperwalletReceipt) {
         guard let notes = receipt.details?.notes else {

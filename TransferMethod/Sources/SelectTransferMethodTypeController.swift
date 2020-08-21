@@ -41,7 +41,6 @@ final class SelectTransferMethodTypeController: UITableViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         initializeData()
-        setViewBackgroundColor()
         initializePresenter()
         setupCountryCurrencyTableView()
         setupTransferMethodTypeTableView()
@@ -52,11 +51,18 @@ final class SelectTransferMethodTypeController: UITableViewController {
         super.viewWillAppear(animated)
         let currentNavigationItem: UINavigationItem = tabBarController?.navigationItem ?? navigationItem
         currentNavigationItem.backBarButtonItem = UIBarButtonItem.back
-        titleDisplayMode(.always, for: "add_account_title".localized())
+        titleDisplayMode(.always, for: "mobileAddTransferMethodHeader".localized())
     }
 
     private func initializePresenter() {
         presenter = SelectTransferMethodTypePresenter(self)
+    }
+
+    override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
+        if parent == nil {
+            removeCoordinator()
+        }
     }
 
     // MARK: - Setup Layout
@@ -77,7 +83,7 @@ final class SelectTransferMethodTypeController: UITableViewController {
         countryCurrencyView = CountryCurrencyTableView(presenter)
         countryCurrencyTableView.register(CountryCurrencyCell.self,
                                           forCellReuseIdentifier: CountryCurrencyCell.reuseIdentifier)
-        countryCurrencyTableView.backgroundColor = Theme.ViewController.backgroundColor
+        countryCurrencyTableView.backgroundColor = Theme.UITableViewController.backgroundColor
         countryCurrencyTableView.rowHeight = UITableView.automaticDimension
         countryCurrencyTableView.estimatedRowHeight = Theme.Cell.smallHeight
         countryCurrencyTableView.dataSource = countryCurrencyView
@@ -110,18 +116,31 @@ extension SelectTransferMethodTypeController {
 extension SelectTransferMethodTypeController {
     /// Returns  headerview
     override public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return countryCurrencyTableView
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.addArrangedSubview(countryCurrencyTableView)
+
+        let separatorView = UIView()
+        separatorView.heightAnchor.constraint(equalToConstant: 0.2).isActive = true
+        separatorView.backgroundColor = tableView.separatorColor
+        stackView.addArrangedSubview(separatorView)
+
+        return stackView
     }
+
     /// Returns height of headerview
     override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        let blankHeaderHeight = countryCurrencyTableView.estimatedRowHeight / 2.5
-        return countryCurrencyTableView
-            .estimatedRowHeight * CGFloat(presenter.countryCurrencySectionData.count) + blankHeaderHeight
+        return Theme.Cell.smallHeight * CGFloat(presenter.countryCurrencySectionData.count)
+            + Theme.Cell.headerHeight * 3 + 0.2
     }
     /// To select transfer method
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.navigateToAddTransferMethod(indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return Theme.Cell.height
     }
 }
 
@@ -149,9 +168,7 @@ extension SelectTransferMethodTypeController: SelectTransferMethodTypeView {
     }
 
     func showLoading() {
-        if let view = self.navigationController?.view {
-            spinnerView = HyperwalletUtilViews.showSpinner(view: view)
-        }
+        spinnerView = HyperwalletUtilViews.showSpinner(view: view)
     }
 
     func hideLoading() {
@@ -180,7 +197,7 @@ extension SelectTransferMethodTypeController: SelectTransferMethodTypeView {
                               selectItemHandler: @escaping SelectItemHandler,
                               markCellHandler: @escaping MarkCellHandler,
                               filterContentHandler: @escaping FilterContentHandler) {
-        let genericTableView = GenericController<CountryCurrencyCell, GenericCellConfiguration>()
+        let genericTableView = GenericController<CountryCurrencySelectionCell, GenericCellConfiguration>()
         genericTableView.title = title
         genericTableView.items = items
         genericTableView.selectedHandler = selectItemHandler
@@ -209,14 +226,17 @@ extension CountryCurrencyTableView: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CountryCurrencyCell.reuseIdentifier, for: indexPath)
-
         cell.accessoryType = .disclosureIndicator
-
         if let countryCurrencyCell = cell as? CountryCurrencyCell {
-            countryCurrencyCell.item = presenter.getCountryCurrencyConfiguration(indexPath: indexPath)
+            countryCurrencyCell.configure(configuration:
+                presenter.getCountryCurrencyConfiguration(indexPath: indexPath))
         }
 
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return Theme.Cell.smallHeight
     }
 }
 // MARK: - TableViewController delegate
@@ -227,11 +247,20 @@ extension CountryCurrencyTableView: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return CGFloat.leastNormalMagnitude
+        return Theme.Cell.headerHeight
     }
 
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return nil
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "mobileCountryCurrencyLabel".localized()
+    }
+
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        let titleString = "\n\n" + "mobileTransferMethodLabel".localized()
+        return titleString
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return Theme.Cell.headerHeight * 2
     }
 }
 
@@ -240,6 +269,7 @@ extension SelectTransferMethodTypeController {
     override public func didFlowComplete(with response: Any) {
         if response as? HyperwalletTransferMethod != nil {
             coordinator?.navigateBackFromNextPage(with: response)
+            removeCoordinator()
             flowDelegate?.didFlowComplete(with: response)
         }
     }

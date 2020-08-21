@@ -30,11 +30,10 @@ final class ListReceiptController: UITableViewController {
     private var presenter: ListReceiptPresenter!
     private let sectionTitleDateFormat = "MMMM yyyy"
     private var loadMoreReceipts = false
-    private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "empty_list_receipt_message".localized())
+    private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "mobileNoTransactions".localized())
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        setViewBackgroundColor()
         initializePresenter()
         setupListReceiptTableView()
         presenter.listReceipts()
@@ -44,13 +43,20 @@ final class ListReceiptController: UITableViewController {
         super.viewWillAppear(animated)
         let currentNavigationItem: UINavigationItem = tabBarController?.navigationItem ?? navigationItem
         currentNavigationItem.backBarButtonItem = UIBarButtonItem.back
-        titleDisplayMode(.always, for: "title_receipts".localized())
+        titleDisplayMode(.always, for: "transactions".localized())
     }
 
     private func initializePresenter() {
         presenter = ListReceiptPresenter(view: self,
                                          prepaidCardToken: initializationData?[InitializationDataField.prepaidCardToken]
                                             as? String)
+    }
+
+    override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
+        if parent == nil {
+            removeCoordinator()
+        }
     }
 
     // MARK: list receipt table view data source
@@ -63,6 +69,7 @@ final class ListReceiptController: UITableViewController {
                                                  for: indexPath)
         if let listReceiptCell = cell as? ReceiptTransactionCell {
             listReceiptCell.configure(presenter.sectionData[indexPath.section].value[indexPath.row])
+            listReceiptCell.accessoryType = .disclosureIndicator
         }
         return cell
     }
@@ -70,6 +77,11 @@ final class ListReceiptController: UITableViewController {
     override public func numberOfSections(in tableView: UITableView) -> Int {
         return presenter.sectionData.count
     }
+
+    override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return Theme.Cell.height
+    }
+
     /// Returns title for header
     override public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let date = presenter.sectionData[section].key
@@ -106,8 +118,10 @@ final class ListReceiptController: UITableViewController {
         tableView.sectionFooterHeight = CGFloat.leastNormalMagnitude
         tableView.tableFooterView = UIView()
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = Theme.Cell.smallHeight
+        tableView.estimatedRowHeight = Theme.Cell.height
         tableView.sectionHeaderHeight = UITableView.automaticDimension
+        tableView.backgroundColor = Theme.UITableViewController.backgroundColor
+        tableView.separatorColor = Theme.Cell.separatorColor
         tableView.register(ReceiptTransactionCell.self,
                            forCellReuseIdentifier: ReceiptTransactionCell.reuseIdentifier)
     }
@@ -127,9 +141,8 @@ extension ListReceiptController: ListReceiptView {
     }
 
     func showLoading() {
-        if let view = self.navigationController?.view {
-            spinnerView = HyperwalletUtilViews.showSpinner(view: view)
-        }
+        spinnerView = HyperwalletUtilViews.showSpinner(view: view)
+        spinnerView?.backgroundColor = UIColor.clear
     }
 
     func hideLoading() {

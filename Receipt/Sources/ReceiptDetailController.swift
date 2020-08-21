@@ -33,14 +33,13 @@ final class ReceiptDetailController: UITableViewController {
     /// Called after the view controller has loaded its view hierarchy into memory.
     override public func viewDidLoad() {
         super.viewDidLoad()
-        setViewBackgroundColor()
         initializePresenter()
         setupReceiptDetailTableView()
     }
 
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        titleDisplayMode(.never, for: "title_receipts_details".localized())
+        titleDisplayMode(.never, for: "mobileTransactionDetailsHeader".localized())
     }
 
     private func initializePresenter() {
@@ -53,6 +52,7 @@ final class ReceiptDetailController: UITableViewController {
     private func setupReceiptDetailTableView() {
         tableView = UITableView(frame: view.frame, style: .grouped)
         tableView.allowsSelection = false
+        tableView.backgroundColor = Theme.UITableViewController.backgroundColor
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Theme.Cell.smallHeight
         tableView.separatorStyle = .singleLine
@@ -122,5 +122,9 @@ extension ReceiptDetailController {
     override public func tableView(_ tableView: UITableView,
                                    estimatedHeightForHeaderInSection section: Int) -> CGFloat {
         return CGFloat(Theme.Cell.headerHeight)
+    }
+
+    override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return indexPath.section == 0 ? Theme.Cell.height : Theme.Cell.smallHeight
     }
 }

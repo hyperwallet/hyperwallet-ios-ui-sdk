@@ -25,36 +25,61 @@ public extension ThemeManager {
     /// Applies default visual styles to the Hyperwallet user interface components.
     static func applyTransferMethodTheme() {
         applyToCountryCurrencyCell()
+        applyToCountryCurrencySelectionCell()
         applyToSelectionWidgetCell()
         applyToListTransferMethodTableViewCell()
         applyToSelectTransferMethodTypeCell()
+        applyToTextWidget()
+        applyToSelectionWidget()
     }
 
     private static func applyToCountryCurrencyCell() {
         let proxy = CountryCurrencyCell.appearance()
-        proxy.titleLabelFont = Theme.Label.bodyFont
-        proxy.titleLabelColor = Theme.Label.color
-        proxy.valueLabelFont = Theme.Label.bodyFont
-        proxy.valueLabelColor = Theme.Label.textColor
+        proxy.textLabelFont = Theme.Text.labelFont
+        proxy.textLabelColor = Theme.Text.labelColor
+        proxy.detailTextLabelFont = Theme.Text.font
+        proxy.detailTextLabelColor = Theme.Text.color
+    }
+
+    private static func applyToCountryCurrencySelectionCell() {
+        let proxy = CountryCurrencySelectionCell.appearance()
+        proxy.textLabelFont = Theme.Label.titleFont
+        proxy.textLabelColor = Theme.Label.color
     }
 
     private static func applyToSelectionWidgetCell() {
         let proxy = SelectionWidgetCell.appearance()
         proxy.textLabelColor = Theme.Label.color
-        proxy.textLabelFont = Theme.Label.bodyFont
+        proxy.textLabelFont = Theme.Label.titleFont
     }
 
     private static func applyToListTransferMethodTableViewCell() {
         let proxy = ListTransferMethodCell.appearance()
-        proxy.titleLabelFont = Theme.Label.bodyFont
+        proxy.titleLabelFont = Theme.Label.titleFont
         proxy.titleLabelColor = Theme.Label.color
-        proxy.subTitleLabelFont = Theme.Label.captionOne
+        proxy.subTitleLabelFont = Theme.Label.subtitleFont
     }
 
     private static func applyToSelectTransferMethodTypeCell() {
         let proxy = SelectTransferMethodTypeCell.appearance()
-        proxy.titleLabelFont = Theme.Label.bodyFont
+        proxy.titleLabelFont = Theme.Label.titleFont
         proxy.titleLabelColor = Theme.Label.color
-        proxy.subTitleLabelFont = Theme.Label.captionOne
+        proxy.subTitleLabelFont = Theme.Label.subtitleFont
+    }
+
+    private static func applyToTextWidget() {
+        let proxy = TextWidget.appearance()
+        proxy.textLabelFont = Theme.Text.labelFont
+        proxy.textLabelColor = Theme.Text.labelColor
+        proxy.textFieldFont = Theme.Text.font
+        proxy.textFieldColor = Theme.Text.color
+    }
+
+    private static func applyToSelectionWidget() {
+        let proxy = SelectionWidget.appearance()
+        proxy.textLabelFont = Theme.Text.labelFont
+        proxy.textLabelColor = Theme.Text.labelColor
+        proxy.labelFieldFont = Theme.Text.font
+        proxy.labelFieldColor = Theme.Text.color
     }
 }

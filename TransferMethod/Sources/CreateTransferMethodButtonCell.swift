@@ -16,37 +16,17 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import HyperwalletSDK
+import UIKit
 
-/// The HyperwalletTransferMethod extension
-extension HyperwalletTransferMethod: GenericCellConfiguration {
-    public var title: String? {
-        return type?.lowercased().localized()
-    }
+class CreateTransferMethodButtonCell: UITableViewCell {
+    static let reuseIdentifier = "createTransferMethodButtonCellIdentifier"
 
-    public var value: String? {
-        return additionalInfo
-    }
-
-    /// Additional information about the transfer method
-    var additionalInfo: String? {
-        switch type {
-        case "BANK_CARD", "PREPAID_CARD":
-            return String(format: "%@%@",
-                          "endingIn".localized(),
-                          getField(TransferMethodField.cardNumber.rawValue)?
-                            .suffix(startAt: 4) ?? "" )
-
-        case "PAYPAL_ACCOUNT":
-            return String(format: "%@%@",
-                          "to".localized(),
-                          getField(TransferMethodField.email.rawValue) ?? "")
-
-        default:
-            return String(format: "%@%@",
-                          "endingIn".localized(),
-                          getField(TransferMethodField.bankAccountId.rawValue)?
-                            .suffix(startAt: 4) ?? "")
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        subviews.forEach { (view) in
+            if type(of: view).description() == "_UITableViewCellSeparatorView" {
+                view.isHidden = true
+            }
         }
     }
 }

@@ -85,14 +85,14 @@ class TextWidget: AbstractWidget {
         textField.isUserInteractionEnabled = field.isEditable ?? true
         textField.clearButtonMode = field.isEditable ?? true ? .always : .never
         textField.textColor = field.isEditable ?? true ? Theme.Text.color : Theme.Text.disabledColor
-        textField.font = Theme.Label.bodyFont
+        textField.font = Theme.Text.font
         textField.adjustsFontForContentSizeCategory = true
         textField.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
         addArrangedSubview(textField)
     }
 
     @objc
-    private func textFieldDidChange() {
+    func textFieldDidChange() {
         if (field.mask?.defaultPattern) != nil {
             let text = getUnformattedText()
             if !text.isEmpty {
@@ -258,11 +258,35 @@ class TextWidget: AbstractWidget {
             range: nil)
     }
 
-    private func getUnformattedText() -> String {
+    func getUnformattedText() -> String {
         if let text = textField.text {
             return getTextForPatternCharacter(PatternCharacter.lettersAndNumbersPatternCharacter.rawValue, text) ?? ""
         }
         return ""
+    }
+
+    @objc dynamic var textLabelColor: UIColor! {
+        get { return self.label.textColor }
+        set {
+            if !(self.label.accessibilityIdentifier?.hasSuffix("_error") ?? false) {
+                self.label.textColor = newValue
+            }
+        }
+    }
+
+    @objc dynamic var textLabelFont: UIFont! {
+        get { return self.label.font }
+        set { self.label.font = newValue }
+    }
+
+    @objc dynamic var textFieldColor: UIColor! {
+        get { return self.textField.textColor }
+        set { self.textField.textColor = newValue }
+    }
+
+    @objc dynamic var textFieldFont: UIFont! {
+        get { return self.textField.font }
+        set { self.textField.font = newValue }
     }
 }
 

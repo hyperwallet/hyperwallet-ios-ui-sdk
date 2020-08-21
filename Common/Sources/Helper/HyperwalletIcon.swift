@@ -17,34 +17,48 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import Foundation
+import HyperwalletSDK
 
 /// The HyperwalletIcon class
 public final class HyperwalletIcon {
+    // swiftlint:disable cyclomatic_complexity
     /// Make transfer method type icon by transfer method type
     ///
-    /// - Parameter transferMethodType: a type of transfer method in String
+    /// - Parameter fontType: String
     /// - Returns: a `HyperwalletIconContent` object
     public static func of(_ fontType: String) -> HyperwalletIconContent {
         switch fontType {
-        case "BANK_ACCOUNT":
-            return .bank
-        case "BANK_CARD":
+        case HyperwalletTransferMethod.TransferMethodType.bankAccount.rawValue:
+            return .bankAccount
+
+        case HyperwalletTransferMethod.TransferMethodType.bankCard.rawValue:
             return .debitCredit
-        case "PREPAID_CARD":
+
+        case HyperwalletTransferMethod.TransferMethodType.prepaidCard.rawValue:
             return .prepaidCard
+
+        case HyperwalletTransferMethod.TransferMethodType.payPalAccount.rawValue:
+            return .paypal
+
+        case HyperwalletTransferMethod.TransferMethodType.wireAccount.rawValue:
+            return .wire
+        case "VENMO_ACCOUNT":
+            return .venmo
+        case "CASH_PICKUP_MG":
+            return .moneygram
         case "PAPER_CHECK":
             return .check
-        case "PAYPAL_ACCOUNT":
-            return .paypal
-        case "WIRE_ACCOUNT":
-            return .wire
-        case "CREDIT":
+
+        case HyperwalletReceipt.HyperwalletEntryType.credit.rawValue:
             return .credit
-        case "DEBIT":
+
+        case HyperwalletReceipt.HyperwalletEntryType.debit.rawValue:
             return .debit
+        case "TRASH":
+            return .trash
 
         default:
-            return .westernUnion
+            return .bankAccount
         }
     }
 }

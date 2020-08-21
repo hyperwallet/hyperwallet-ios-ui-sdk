@@ -28,13 +28,15 @@ final class TransferNotesCell: UITableViewCell {
 
     private lazy var notesTextField: UITextField = {
         let textField = UITextField(frame: .zero)
-        textField.placeholder = "transfer_description".localized()
+        textField.font = Theme.Text.font
         textField.delegate = self
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.adjustsFontForContentSizeCategory = true
         textField.accessibilityIdentifier = "transferNotesTextField"
         return textField
     }()
+
+    private var isHideBorder: Bool = false
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
@@ -44,6 +46,18 @@ final class TransferNotesCell: UITableViewCell {
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if isHideBorder {
+            subviews.forEach { (view) in
+                if type(of: view).description() == "_UITableViewCellSeparatorView" {
+                    view.isHidden = true
+                }
+            }
+            notesTextField.setBottomBorder()
+        }
     }
 
     private func setupCell() {
@@ -60,9 +74,10 @@ final class TransferNotesCell: UITableViewCell {
         NSLayoutConstraint.activate(constraints)
    }
 
-    func configure(notes: String?, isEditable: Bool, _ handler: @escaping EnteredNoteHandler) {
+    func configure(notes: String?, isEditable: Bool, isHideBorder: Bool, _ handler: @escaping EnteredNoteHandler) {
         notesTextField.text = notes
         notesTextField.isEnabled = isEditable
+        self.isHideBorder = isHideBorder
         enteredNoteHandler = handler
     }
 }

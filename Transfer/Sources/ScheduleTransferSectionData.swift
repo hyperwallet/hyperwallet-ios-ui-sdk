@@ -35,9 +35,21 @@ protocol ScheduleTransferSectionData {
 
 extension ScheduleTransferSectionData {
     var rowCount: Int { return 1 }
-    var title: String? { return scheduleTransferSectionHeader
-        != ScheduleTransferSectionHeader.button ?
-            "transfer_section_header_\(scheduleTransferSectionHeader.rawValue)".localized() : nil }
+    var title: String? {
+        switch scheduleTransferSectionHeader.rawValue {
+        case "destination":
+            return "mobileTransferToLabel".localized()
+        case "notes":
+            return "mobileNoteLabel".localized()
+        case "summary":
+            return "mobileSummaryLabel".localized()
+        case "foreignExchange":
+            return "mobileFXlabel".localized()
+
+        default:
+            return nil
+        }
+    }
 }
 
 struct ScheduleTransferDestinationData: ScheduleTransferSectionData {
@@ -71,9 +83,9 @@ struct ScheduleTransferForeignExchangeData: ScheduleTransferSectionData {
 
                 let rateFormatted = String(format: "%@ %@ = %@ %@", "1", sourceCurrency, rate, destinationCurrency)
 
-                rows.append((title: "transfer_fx_sell_confirmation".localized(), value: sourceAmountFormatted))
-                rows.append((title: "transfer_fx_buy_confirmation".localized(), value: destinationAmountFormatted))
-                rows.append((title: "transfer_fx_rate_confirmation".localized(), value: rateFormatted))
+                rows.append((title: "mobileFXsell".localized(), value: sourceAmountFormatted))
+                rows.append((title: "mobileFXbuy".localized(), value: destinationAmountFormatted))
+                rows.append((title: "mobileFXRateLabel".localized(), value: rateFormatted))
                 if !foreignExchanges.isLast(index: index) {
                     rows.append((title: nil, value: nil))
                 }
@@ -93,7 +105,7 @@ struct ScheduleTransferSummaryData: ScheduleTransferSectionData {
         if let destinationAmount = transfer.destinationAmount,
             let destinationCurrency = transfer.destinationCurrency {
             guard let feeAmount = transfer.destinationFeeAmount, Double(feeAmount) != 0 else {
-                rows.append((title: "transfer_amount_confirmation".localized(),
+                rows.append((title: "mobileConfirmDetailsAmount".localized(),
                              value: destinationAmount))
                 return
             }
@@ -101,11 +113,11 @@ struct ScheduleTransferSummaryData: ScheduleTransferSectionData {
             let feeAmountFormattedDouble = feeAmount.formatToDouble(with: destinationCurrency)
             let grossTransferAmount = transferAmountFormattedDouble + feeAmountFormattedDouble
 
-            rows.append((title: "transfer_amount_confirmation".localized(),
+            rows.append((title: "mobileConfirmDetailsAmount".localized(),
                          value: String(grossTransferAmount).format(with: destinationCurrency)))
-            rows.append((title: "transfer_fee_confirmation".localized(),
+            rows.append((title: "mobileConfirmDetailsFee".localized(),
                          value: feeAmount))
-            rows.append((title: "transfer_net_amount_confirmation".localized(),
+            rows.append((title: "mobileConfirmDetailsTotal".localized(),
                          value: destinationAmount))
             if didFxQuoteChange {
                 footer = String(format: "transfer_fx_rate_changed".localized(),
@@ -121,7 +133,7 @@ struct ScheduleTransferNotesData: ScheduleTransferSectionData {
     var cellIdentifier: String { return TransferNotesCell.reuseIdentifier }
 
     init?(transfer: HyperwalletTransfer) {
-        guard let notes = transfer.notes else {
+        guard let notes = transfer.notes, !notes.isEmpty else {
             return nil
         }
         self.notes = notes

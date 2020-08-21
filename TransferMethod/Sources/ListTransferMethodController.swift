@@ -30,18 +30,17 @@ final class ListTransferMethodController: UITableViewController {
     private var processingView: ProcessingView?
     private var presenter: ListTransferMethodPresenter!
 
-    private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "empty_list_transfer_method_message"
-                                                                              .localized())
-    private lazy var addAccountButton: UIButton = view.setUpEmptyListButton(text: "add_account_title".localized(),
-                                                                            firstItem: emptyListLabel)
+    private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "emptyStateAddTransferMethod"
+        .localized())
+    private lazy var addAccountButton: UIButton =
+        view.setUpEmptyListButton(text: "mobileAddTransferMethodHeader".localized(), firstItem: emptyListLabel)
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        setViewBackgroundColor()
         initializePresenter()
-        presenter.listTransferMethods()
         // setup table view
         setupTransferMethodTableView()
+        presenter.listTransferMethods()
     }
 
     override public func viewWillAppear(_ animated: Bool) {
@@ -51,7 +50,7 @@ final class ListTransferMethodController: UITableViewController {
         currentNavigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                                    target: self,
                                                                    action: #selector(didTapAddButton))
-        titleDisplayMode(.always, for: "title_accounts".localized())
+        titleDisplayMode(.always, for: "mobileTransferMethodsHeader".localized())
     }
 
     private func initializePresenter() {
@@ -61,6 +60,13 @@ final class ListTransferMethodController: UITableViewController {
     @objc
     private func didTapAddButton(sender: AnyObject) {
         addTransferMethod()
+    }
+
+    override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
+        if parent == nil {
+            removeCoordinator()
+        }
     }
 
     // MARK: - Transfer method list table view dataSource and delegate
@@ -73,32 +79,21 @@ final class ListTransferMethodController: UITableViewController {
                                                  for: indexPath)
         if let listTransferMethodCell = cell as? ListTransferMethodCell {
             listTransferMethodCell.configure(transferMethod: presenter.sectionData[indexPath.row])
+
+            let icon = UIImage.fontIcon(HyperwalletIcon.of("TRASH").rawValue,
+                                        CGSize(width: 24, height: 25),
+                                        CGFloat(24),
+                                        UIColor(red: 0.17, green: 0.18, blue: 0.18, alpha: 1))
+
+            listTransferMethodCell.accessoryView = UIImageView(image: icon)
         }
         return cell
     }
 
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if presenter.transferMethodExists(at: indexPath.row) {
-            let cellRect = tableView.rectForRow(at: indexPath)
-            let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
-            let removeHandler = { (alertAction: UIAlertAction) -> Void in
-                self.showConfirmationAlert(title: "remove_transfer_method_confirmation_title".localized(),
-                                           message: "remove_transfer_method_confirmation_message".localized(),
-                                           transferMethodIndex: indexPath.row)
-            }
-
-            let removeAction = UIAlertAction.remove(removeHandler,
-                                                    "remove_transfer_method_confirmation_title".localized())
-                .addIcon(imageName: "trash")
-
-            optionMenu.addAction(removeAction)
-            optionMenu.addAction(UIAlertAction.cancel())
-            optionMenu.popoverPresentationController?.sourceView = tableView
-            optionMenu.popoverPresentationController?.sourceRect = cellRect
-            optionMenu.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.up
-            navigationController?.present(optionMenu, animated: true, completion: nil)
-        }
+        showConfirmationAlert(title: "mobileRemoveEAconfirm".localized(),
+                              message: "mobileAreYouSure".localized(),
+                              transferMethodIndex: indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
@@ -121,6 +116,7 @@ final class ListTransferMethodController: UITableViewController {
                            forCellReuseIdentifier: ListTransferMethodCell.reuseIdentifier)
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Theme.Cell.smallHeight
+        tableView.backgroundColor = Theme.UITableViewController.backgroundColor
     }
 
     private func showConfirmationAlert(title: String?, message: String, transferMethodIndex: Int) {
@@ -141,9 +137,7 @@ final class ListTransferMethodController: UITableViewController {
 
 extension ListTransferMethodController: ListTransferMethodView {
     func showLoading() {
-        if let view = self.navigationController?.view {
-            spinnerView = HyperwalletUtilViews.showSpinner(view: view)
-        }
+        spinnerView = HyperwalletUtilViews.showSpinner(view: view)
     }
 
     func hideLoading() {
@@ -174,7 +168,7 @@ extension ListTransferMethodController: ListTransferMethodView {
         }
     }
 
-    func showConfirmation(handler: @escaping (() -> Void)) {
+    func showConfirmation(handler: @escaping () -> Void) {
         processingView?.hide(with: .complete)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             handler()

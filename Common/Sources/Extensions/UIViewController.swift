@@ -34,11 +34,6 @@ public extension UIViewController {
         }
     }
 
-    /// Set background color for the view
-    func setViewBackgroundColor() {
-        view.backgroundColor = Theme.ViewController.backgroundColor
-    }
-
     /// Hide keyboard when tapped around on the screen
     func hideKeyboardWhenTappedAround() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
@@ -88,5 +83,15 @@ extension UIViewController: HyperwalletFlowDelegate {
         set(newValue) {
             Holder.initializationData[ObjectIdentifier(self)] = newValue
         }
+    }
+
+    /// Removes the current coordinator while moving back
+    public func removeCoordinator() {
+        Holder.coordinator.removeValue(forKey: ObjectIdentifier(self))
+    }
+
+    /// Removes all coordinators
+    public func removeAllCoordinators() {
+        Holder.coordinator.removeAll()
     }
 }

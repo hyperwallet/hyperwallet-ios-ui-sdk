@@ -24,7 +24,7 @@ import XCTest
 class TransferMethodConfigurationRepositoryTests: XCTestCase {
     private let country = "US"
     private let currency = "USD"
-    private let transferMethodType = "BANK_ACCOUNT"
+    private let transferMethodType = HyperwalletTransferMethod.TransferMethodType.bankAccount.rawValue
     private let profileType = "INDIVIDUAL"
     private lazy var fieldsResponseData = HyperwalletTestHelper
         .getDataFromJson("TransferMethodConfigurationFieldsResponse")

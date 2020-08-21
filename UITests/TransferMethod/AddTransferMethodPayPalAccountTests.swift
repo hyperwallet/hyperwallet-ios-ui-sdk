@@ -4,7 +4,14 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
     var selectTransferMethodType: SelectTransferMethodType!
     var addTransferMethod: AddTransferMethod!
     let payPalAccount = NSPredicate(format: "label CONTAINS[c] 'PayPal'")
-    var elementQuery: XCUIElementQuery!
+    var otherElements: XCUIElementQuery!
+    var emailPatternError: String!
+    var emailLengthError: String!
+    var emailEmptyError: String!
+
+    let paypalEmailError = "PayPal transfer method email address should be same as profile email address."
+    let duplicateAccountError = "The account information you provided is already registered"
+
     override func setUp() {
         super.setUp()
 
@@ -24,24 +31,25 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
         app.tables.cells.staticTexts["Add Transfer Method"].tap()
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
+        selectTransferMethodType = SelectTransferMethodType(app: app)
         addTransferMethod = AddTransferMethod(app: app)
-        if #available(iOS 13.0, *) {
-            elementQuery = app.tables["addTransferMethodTable"].buttons
-        } else {
-            elementQuery = app.tables["addTransferMethodTable"].staticTexts
-        }
+
+        emailPatternError = addTransferMethod.getEmailPatternError(label: "Email")
+        emailLengthError = addTransferMethod.getLengthConstraintError(label: "Email", min: 3, max: 200)
+        emailEmptyError = addTransferMethod.getEmptyError(label: "Email")
+
+        otherElements = addTransferMethod.addTransferMethodTableView.otherElements
     }
 
     func testAddTransferMethod_displaysElementsOnTmcResponse() {
-        XCTAssert(app.navigationBars["PayPal"].exists)
+        XCTAssert(addTransferMethod.navBarPaypal.exists)
 
-        XCTAssert(addTransferMethod.addTransferMethodTableView
-            .staticTexts["Account Information - United States (USD)"].exists)
+        XCTAssert(addTransferMethod.contactInformationHeader.exists)
         XCTAssertEqual(addTransferMethod.emailLabel.label, "Email")
         XCTAssert(addTransferMethod.emailInput.exists)
 
         XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
-        XCTAssert(app.staticTexts["Transaction Fees: USD 0.25 Processing Time: 1-2 Business days"].exists)
+        XCTAssert(app.staticTexts["$0.25 fee \u{2022} 1-2 Business days"].exists)
 
         addTransferMethod.addTransferMethodTableView.scroll(to: addTransferMethod.createTransferMethodButton)
         XCTAssert(addTransferMethod.createTransferMethodButton.exists)
@@ -51,21 +59,25 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
         addTransferMethod.setEmail("abc@testcom")
         addTransferMethod.clickCreateTransferMethodButton()
 
-        XCTAssert(elementQuery["email_error"].exists)
+        XCTAssert(addTransferMethod.elementQuery["email_error"].exists)
+
+        XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", emailPatternError)).count == 1)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidLength() {
         addTransferMethod.setEmail("ab")
         addTransferMethod.clickCreateTransferMethodButton()
 
-        XCTAssert(elementQuery["email_error"].exists)
+        XCTAssert(addTransferMethod.elementQuery["email_error"].exists)
+        XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", emailLengthError)).count == 1)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidPresence() {
         addTransferMethod.setEmail("")
         addTransferMethod.clickCreateTransferMethodButton()
 
-        XCTAssert(elementQuery["email_error"].exists)
+        XCTAssert(addTransferMethod.elementQuery["email_error"].exists)
+        XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", emailEmptyError)).count == 1)
     }
 
     func testAddTransferMethod_createPayPalAccountValidResponse() {
@@ -89,9 +101,8 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
         addTransferMethod.clickCreateTransferMethodButton()
         waitForNonExistence(spinner)
 
-        XCTAssert(app.alerts["Error"].exists)
-        XCTAssert(app.alerts["Error"].staticTexts[
-                "PayPal transfer method email address should be same as profile email address."].exists)
+        verifyBusinessError(errorMessage: paypalEmailError, dismiss: true)
+        XCTAssertTrue(app.navigationBars["PayPal"].exists)
     }
 
     func testAddTransferMethod_createPaypalAccountDuplicateAccount() {
@@ -102,12 +113,8 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
         addTransferMethod.setEmail("abc@test.com")
         addTransferMethod.clickCreateTransferMethodButton()
         waitForNonExistence(spinner)
-        XCTAssert(app.alerts["Error"].exists)
-        let predicate = NSPredicate(format:
-            "label CONTAINS[c] 'The account information you provided is already registered'")
-        XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
-        XCTAssertTrue(app.navigationBars["PayPal"].exists)
-        app.alerts["Error"].buttons["OK"].tap()
+
+        verifyBusinessError(errorMessage: duplicateAccountError, dismiss: true)
         XCTAssertTrue(app.navigationBars["PayPal"].exists)
     }
 }

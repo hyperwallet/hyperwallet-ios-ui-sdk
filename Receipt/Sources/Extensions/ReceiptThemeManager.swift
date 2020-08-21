@@ -32,34 +32,34 @@ public extension ThemeManager {
 
     private static func applyToReceiptDetailCell() {
         let proxy = ReceiptDetailCell.appearance()
-        proxy.titleLabelFont = Theme.Label.footnoteFont
-        proxy.titleLabelColor = Theme.Label.subTitleColor
-        proxy.subTitleLabelFont = Theme.Label.footnoteFont
-        proxy.subTitleLabelColor = Theme.Label.subTitleColor
+        proxy.titleLabelFont = Theme.Label.titleFont
+        proxy.titleLabelColor = Theme.Label.color
+        proxy.subTitleLabelFont = Theme.Label.titleFont
+        proxy.subTitleLabelColor = Theme.Label.subtitleColor
     }
 
     private static func applyToReceiptFeeCell() {
         let proxy = ReceiptFeeCell.appearance()
-        proxy.titleLabelFont = Theme.Label.footnoteFont
-        proxy.titleLabelColor = Theme.Label.subTitleColor
-        proxy.subTitleLabelFont = Theme.Label.footnoteFont
-        proxy.subTitleLabelColor = Theme.Label.subTitleColor
+        proxy.titleLabelFont = Theme.Label.titleFont
+        proxy.titleLabelColor = Theme.Label.color
+        proxy.subTitleLabelFont = Theme.Label.titleFont
+        proxy.subTitleLabelColor = Theme.Label.subtitleColor
     }
 
     private static func applyToReceiptNotesCell() {
         let proxy = ReceiptNotesCell.appearance()
-        proxy.titleLabelFont = Theme.Label.footnoteFont
-        proxy.titleLabelColor = Theme.Label.subTitleColor
+        proxy.titleLabelFont = Theme.Label.titleFont
+        proxy.titleLabelColor = Theme.Label.color
     }
 
     private static func applyToReceiptTransactionCell() {
         let proxy = ReceiptTransactionCell.appearance()
-        proxy.receiptTypeFont = Theme.Label.bodyFont
+        proxy.receiptTypeFont = Theme.Label.titleFont
         proxy.receiptTypeColor = Theme.Label.color
-        proxy.amountFont = Theme.Label.bodyFont
-        proxy.createdOnFont = Theme.Label.captionOne
-        proxy.createdOnColor = Theme.Label.subTitleColor
-        proxy.currencyFont = Theme.Label.captionOne
-        proxy.currencyColor = Theme.Label.subTitleColor
+        proxy.amountFont = Theme.Label.titleFont
+        proxy.createdOnFont = Theme.Label.subtitleFont
+        proxy.createdOnColor = Theme.Label.subtitleColor
+        proxy.currencyFont = Theme.Label.subtitleFont
+        proxy.currencyColor = Theme.Label.subtitleColor
     }
 }

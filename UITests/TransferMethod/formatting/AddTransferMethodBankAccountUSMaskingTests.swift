@@ -3,6 +3,7 @@ import XCTest
 class AddTransferMethodMaskingTest: BaseTests {
     var selectTransferMethodType: SelectTransferMethodType!
     var addTransferMethod: AddTransferMethod!
+    let bankAccount = "bank_account".localized()
     override func setUp() {
            super.setUp()
 
@@ -26,7 +27,7 @@ class AddTransferMethodMaskingTest: BaseTests {
        }
 
     func testAddTransferMethod_accountNumberDefaultPattern() {
-           XCTAssert(app.navigationBars["Bank Account"].exists)
+           XCTAssert(addTransferMethod.navBarBankAccount.exists)
            XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
            addTransferMethod.setBankAccountId("12345")
            print(addTransferMethod.bankAccountIdInput.value ?? "")
@@ -37,7 +38,7 @@ class AddTransferMethodMaskingTest: BaseTests {
 
     // "defaultPattern": "####-####-####-##"
     func testAddTransferMethod_accountNumberDefaultPatternByPaste() {
-        XCTAssert(app.navigationBars["Bank Account"].exists)
+        XCTAssert(addTransferMethod.navBarBankAccount.exists)
         XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
         addTransferMethod.bankAccountIdInput.enterByPaste(
             text: "12345678000088", field: addTransferMethod.bankAccountIdInput, app: app)
@@ -46,7 +47,7 @@ class AddTransferMethodMaskingTest: BaseTests {
 
     // "defaultPattern": "####-####-####-##"
     func testAddTransferMethod_accountNumberDefaultPatternByPasteWithHyphen() {
-           XCTAssert(app.navigationBars["Bank Account"].exists)
+           XCTAssert(addTransferMethod.navBarBankAccount.exists)
            XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
            addTransferMethod.bankAccountIdInput.enterByPaste(
                text: "1234-5678-0000-99", field: addTransferMethod.bankAccountIdInput, app: app)
@@ -54,7 +55,7 @@ class AddTransferMethodMaskingTest: BaseTests {
        }
 
     func testAddTransferMethod_accountNumberMaskingInvalidInput() {
-           XCTAssert(app.navigationBars["Bank Account"].exists)
+           XCTAssert(addTransferMethod.navBarBankAccount.exists)
            XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
 
            addTransferMethod.bankAccountIdInput.enterByPaste(
@@ -65,7 +66,7 @@ class AddTransferMethodMaskingTest: BaseTests {
     }
 
     func testAddTransferMethod_accountNumberMaskingInvalidLength() {
-           XCTAssert(app.navigationBars["Bank Account"].exists)
+           XCTAssert(addTransferMethod.navBarBankAccount.exists)
            XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
            addTransferMethod.bankAccountIdInput.enterByPaste(
             text: "1234-5678-00001111", field: addTransferMethod.bankAccountIdInput, app: app)

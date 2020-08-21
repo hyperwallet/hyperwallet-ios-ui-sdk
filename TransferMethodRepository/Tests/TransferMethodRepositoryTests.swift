@@ -47,7 +47,7 @@ class TransferMethodRepositoryTests: XCTestCase {
             .Builder(transferMethodCountry: "US",
                      transferMethodCurrency: "USD",
                      transferMethodProfileType: "INDIVIDUAL",
-                     transferMethodType: "BANK_ACCOUNT")
+                     transferMethodType: HyperwalletTransferMethod.TransferMethodType.bankAccount.rawValue)
             .bankName("US BANK NA")
             .bankAccountId("7861012347")
             .build()
@@ -160,7 +160,7 @@ class TransferMethodRepositoryTests: XCTestCase {
             .Builder(transferMethodCountry: "US",
                      transferMethodCurrency: "USD",
                      transferMethodProfileType: "INDIVIDUAL",
-                     transferMethodType: "WIRE_ACCOUNT")
+                     transferMethodType: HyperwalletTransferMethod.TransferMethodType.wireAccount.rawValue)
             .intermediaryBankAccountId("246810")
             .intermediaryBankId("12345678901")
             .build()
@@ -201,7 +201,7 @@ class TransferMethodRepositoryTests: XCTestCase {
             .Builder(transferMethodCountry: "US",
                      transferMethodCurrency: "USD",
                      transferMethodProfileType: "INDIVIDUAL",
-                     transferMethodType: "BANK_ACCOUNT")
+                     transferMethodType: HyperwalletTransferMethod.TransferMethodType.bankAccount.rawValue)
             .build()
 
         transferMethodRepository.createTransferMethod(bankAccount) { result in
@@ -235,7 +235,7 @@ class TransferMethodRepositoryTests: XCTestCase {
             .Builder(transferMethodCountry: "US",
                      transferMethodCurrency: "USD",
                      transferMethodProfileType: "INDIVIDUAL",
-                     transferMethodType: "BANK_ACCOUNT")
+                     transferMethodType: HyperwalletTransferMethod.TransferMethodType.bankAccount.rawValue)
             .build()
         bankAccount.setField(key: "token", value: "trm-123456789")
 
@@ -310,7 +310,7 @@ class TransferMethodRepositoryTests: XCTestCase {
             .Builder(transferMethodCountry: "US",
                      transferMethodCurrency: "USD",
                      transferMethodProfileType: "INDIVIDUAL",
-                     transferMethodType: "WIRE_ACCOUNT")
+                     transferMethodType: HyperwalletTransferMethod.TransferMethodType.wireAccount.rawValue)
             .build()
         wireAccount.setField(key: "token", value: "trm-123456789")
 
@@ -373,6 +373,28 @@ class TransferMethodRepositoryTests: XCTestCase {
                        "The statusTransitionResult?.toStatus should be deactivated")
     }
 
+    func testDeactivateTransferMethod_notSupportedTransferMethod() {
+        var statusTransitionResult: HyperwalletStatusTransition?
+        var statusTransitionError: HyperwalletErrorType?
+
+        let prepaidCard = HyperwalletPrepaidCard.Builder(transferMethodProfileType: "INDIVIDUAL")
+            .build()
+        prepaidCard.setField(key: "token", value: "trm-123456789")
+
+        transferMethodRepository.deactivateTransferMethod(prepaidCard) { result in
+            switch result {
+            case .failure(let error):
+                statusTransitionError = error
+
+            case .success(let createResult):
+                statusTransitionResult = createResult
+            }
+        }
+
+        XCTAssertNotNil(statusTransitionError, "The statusTransitionError should be not nil")
+        XCTAssertNil(statusTransitionResult, "The statusTransitionResult should be nil")
+    }
+
     func testDeactivateTransferMethod_failure() {
         let url = String(format: "%@%@",
                          HyperwalletTestHelper.userRestURL,
@@ -425,29 +447,8 @@ class TransferMethodRepositoryTests: XCTestCase {
             .Builder(transferMethodCountry: "US",
                      transferMethodCurrency: "USD",
                      transferMethodProfileType: "INDIVIDUAL",
-                     transferMethodType: "WIRE_ACCOUNT")
+                     transferMethodType: HyperwalletTransferMethod.TransferMethodType.wireAccount.rawValue)
             .build()
-
-        transferMethodRepository.deactivateTransferMethod(bankAccount) { _ in
-            expectation.fulfill()
-        }
-
-        wait(for: [expectation], timeout: 1)
-    }
-
-    func testDeactivateTransferMethod_unknownTransferMethodType() {
-        let expectation = self.expectation(description: "Deactivate wire account completed")
-        // expectation should not be fulfilled
-        expectation.isInverted = true
-        let transferMethodRepository = TransferMethodRepositoryFactory.shared.transferMethodRepository()
-
-        let bankAccount = HyperwalletBankAccount
-            .Builder(transferMethodCountry: "US",
-                     transferMethodCurrency: "USD",
-                     transferMethodProfileType: "INDIVIDUAL",
-                     transferMethodType: "UNKNOWN")
-            .build()
-        bankAccount.setField(key: "token", value: "trm-123456789")
 
         transferMethodRepository.deactivateTransferMethod(bankAccount) { _ in
             expectation.fulfill()

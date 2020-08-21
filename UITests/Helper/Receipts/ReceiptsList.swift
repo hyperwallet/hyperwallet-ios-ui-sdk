@@ -14,6 +14,6 @@ class ReceiptsList {
     }
 
     func clickBackButton() {
-        navigationBar.children(matching: .button).matching(identifier: "Back").element(boundBy: 0).tap()
+        navigationBar.children(matching: .button).matching(identifier: "Back".localized()).element(boundBy: 0).tap()
     }
 }

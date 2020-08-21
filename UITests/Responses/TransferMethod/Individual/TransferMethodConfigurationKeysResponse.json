@@ -9,7 +9,7 @@
                         "nodes": [
                             {
                                 "code": "CAD",
-                                "name": "Canadian Dollar",
+                                "name": "CAD",
                                 "transferMethodTypes": {
                                     "nodes": [
                                         {
@@ -67,7 +67,7 @@
                             },
                             {
                                 "code": "USD",
-                                "name": "United States Dollar",
+                                "name": "USD",
                                 "transferMethodTypes": {
                                     "nodes": [
                                         {
@@ -108,7 +108,7 @@
                         "nodes": [
                             {
                                 "code": "EUR",
-                                "name": "Euro",
+                                "name": "EUR",
                                 "transferMethodTypes": {
                                     "nodes": [
                                         {
@@ -182,7 +182,7 @@
                         "nodes": [
                             {
                                 "code": "MXN",
-                                "name": "Mexican Peso",
+                                "name": "MXN",
                                 "transferMethodTypes": {
                                     "nodes": [
                                         {
@@ -223,7 +223,7 @@
                         "nodes": [
                             {
                                 "code": "EUR",
-                                "name": "Euro",
+                                "name": "EUR",
                                 "transferMethodTypes": {
                                     "nodes": [
                                         {
@@ -256,7 +256,7 @@
                             },
                             {
                                 "code": "GBP",
-                                "name": "British Pound",
+                                "name": "GBP",
                                 "transferMethodTypes": {
                                     "nodes": [
                                         {
@@ -297,7 +297,7 @@
                         "nodes": [
                             {
                                 "code": "USD",
-                                "name": "United States Dollar",
+                                "name": "USD",
                                 "transferMethodTypes": {
                                     "nodes": [
                                         {

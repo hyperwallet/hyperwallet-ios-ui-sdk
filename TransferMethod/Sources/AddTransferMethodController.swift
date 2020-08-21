@@ -37,6 +37,11 @@ final class AddTransferMethodController: UITableViewController {
         }
     }()
 
+    private let registeredCells: [(type: AnyClass, id: String)] = [
+        (AddTransferMethodCell.self, AddTransferMethodCell.reuseIdentifier),
+        (CreateTransferMethodButtonCell.self, CreateTransferMethodButtonCell.reuseIdentifier)
+    ]
+
     // MARK: - Properties -
     private var forceUpdate: Bool?
     private var processingView: ProcessingView?
@@ -50,11 +55,22 @@ final class AddTransferMethodController: UITableViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.accessibilityLabel = "create_account_label".localized()
         button.accessibilityIdentifier = "createAccountButton"
-        button.setTitle("create_account_label".localized(), for: .normal)
+        button.setTitle("createTransferMethodButtonLabel".localized(), for: .normal)
         button.titleLabel?.adjustsFontForContentSizeCategory = true
-        button.titleLabel?.font = Theme.Label.bodyFont
+        button.titleLabel?.font = Theme.Button.font
         button.setTitleColor(Theme.Button.color, for: UIControl.State.normal)
         button.addTarget(self, action: #selector(didTap), for: .touchUpInside)
+        button.backgroundColor = Theme.Button.backgroundColor
+
+        let heightConstraint = NSLayoutConstraint(item: button,
+                                                  attribute: .height,
+                                                  relatedBy: .equal,
+                                                  toItem: nil,
+                                                  attribute: .notAnAttribute,
+                                                  multiplier: 1,
+                                                  constant: 52)
+        button.addConstraint(heightConstraint)
+
         return button
     }()
 
@@ -82,22 +98,24 @@ final class AddTransferMethodController: UITableViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         initializePresenter()
+        setupTableView()
         presenter.loadTransferMethodConfigurationFields(forceUpdate ?? false)
-        setupLayout()
         hideKeyboardWhenTappedAround()
     }
 
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.reloadData()
         let currentNavigationItem: UINavigationItem = tabBarController?.navigationItem ?? navigationItem
         currentNavigationItem.backBarButtonItem = UIBarButtonItem.back
         titleDisplayMode(.always, for: presenter.transferMethodTypeCode.lowercased().localized())
     }
 
-    // MARK: - Setup Layout -
-    private func setupLayout() {
-        setViewBackgroundColor()
-        setupTableView()
+    override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
+        if parent == nil {
+            removeCoordinator()
+        }
     }
 
     private func setupTableView() {
@@ -105,11 +123,11 @@ final class AddTransferMethodController: UITableViewController {
         tableView.allowsSelection = false
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Theme.Cell.smallHeight
+        tableView.backgroundColor = Theme.UITableViewController.backgroundColor
         tableView.accessibilityIdentifier = "addTransferMethodTable"
-        tableView.register(
-            AddTransferMethodCell.self,
-            forCellReuseIdentifier: AddTransferMethodCell.reuseIdentifier
-        )
+        registeredCells.forEach {
+            tableView.register($0.type, forCellReuseIdentifier: $0.id)
+        }
     }
 
     private func initializePresenter() {
@@ -141,7 +159,7 @@ extension AddTransferMethodController {
             else {
                 return
         }
-        headerView.textLabel?.textColor = Theme.Label.textColor
+        headerView.textLabel?.textColor = Theme.Label.subtitleColor
     }
     /// Returns the title for footer
     override public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
@@ -164,6 +182,10 @@ extension AddTransferMethodController {
             return emptyHeaderHeight
         }
     }
+    /// Returns height of row
+    override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return Theme.Cell.smallHeight
+    }
     /// Returns tableview section count
     override public func numberOfSections(in tableView: UITableView) -> Int {
         return presenter.sectionData.count
@@ -174,16 +196,34 @@ extension AddTransferMethodController {
     }
     /// Display's the fields to add transfer method
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: AddTransferMethodCell.reuseIdentifier)
+        let fieldGroup = presenter.sectionData[indexPath.section].fieldGroup
+        let reuseIdentifier = fieldGroup == "CREATE_BUTTON" ?
+                CreateTransferMethodButtonCell.reuseIdentifier : AddTransferMethodCell.reuseIdentifier
+
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)
             else {
                 fatalError("Can't dequeue the cell")
         }
         let widget = presenter.sectionData[indexPath.section][indexPath.row]
         cell.contentView.addSubview(widget)
+        if let widget = widget as? AbstractWidget, widget.errorMessage != nil {
+            widget.showError()
+        }
+
+        if fieldGroup == "INFORMATION" {
+            cell.backgroundColor = Theme.Cell.disabledBackgroundColor
+        } else if let widget = widget as? AbstractWidget, !(widget.field.isEditable ?? true) {
+            cell.backgroundColor = Theme.Cell.disabledBackgroundColor
+        } else {
+            cell.backgroundColor = Theme.UITableViewController.backgroundColor
+        }
+
         if let widget = widget as? SelectionWidget, widget.field.isEditable ?? true {
             cell.accessoryType = .disclosureIndicator
             widget.viewController = self
         }
+
+        let rightAnchorConstant = fieldGroup == "CREATE_BUTTON" ? -14 : 0
 
         let leftAnchor = widget.safeAreaLeadingAnchor
             .constraint(equalTo: cell.contentView.layoutMarginsGuide.leadingAnchor)
@@ -192,7 +232,8 @@ extension AddTransferMethodController {
         let topAnchor = widget.topAnchor.constraint(equalTo: cell.contentView.topAnchor)
         topAnchor.priority = UILayoutPriority(999)
 
-        let rightAnchor = widget.rightAnchor.constraint(equalTo: cell.contentView.rightAnchor)
+        let rightAnchor = widget.rightAnchor.constraint(equalTo: cell.contentView.rightAnchor,
+                                                        constant: CGFloat(rightAnchorConstant))
         rightAnchor.priority = UILayoutPriority(999)
 
         let bottomAnchor = widget.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor)
@@ -268,13 +309,12 @@ extension AddTransferMethodController: AddTransferMethodView {
                 isFormValid = false
             }
         }
+        updateErrorMessagesInFooter()
         return isFormValid
     }
 
     func showLoading() {
-        if let view = self.navigationController?.view {
-            spinnerView = HyperwalletUtilViews.showSpinner(view: view)
-        }
+        spinnerView = HyperwalletUtilViews.showSpinner(view: view)
     }
 
     func hideLoading() {
@@ -329,6 +369,7 @@ extension AddTransferMethodController: AddTransferMethodView {
                                             object: self,
                                             userInfo: [UserInfo.transferMethodAdded: transferMethod])
         }
+        removeCoordinator()
         flowDelegate?.didFlowComplete(with: transferMethod)
     }
 
@@ -383,7 +424,10 @@ extension AddTransferMethodController: AddTransferMethodView {
             let newWidgets =
                 fields.map({WidgetFactory.newWidget(field: $0,
                                                     pageName: AddTransferMethodPresenter.addTransferMethodPageName,
-                                                    pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup)})
+                                                    pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup
+                ) {
+                    self.updateErrorMessagesInFooter()
+                }})
             let section = AddTransferMethodSectionData(
                 fieldGroup: fieldGroup,
                 country: presenter.country,
@@ -395,6 +439,21 @@ extension AddTransferMethodController: AddTransferMethodView {
         }
     }
 
+    /// Updates error messages if present for widgets, under corresponding section in footer
+    private func updateErrorMessagesInFooter() {
+        presenter.resetErrorMessagesForAllSections()
+        presenter.sectionData.forEach { sectionData in
+            var errorMessages = [String]()
+            sectionData.cells.forEach { cell in
+                if let widget = cell as? AbstractWidget, let errorMessage = widget.errorMessage {
+                    errorMessages.append(errorMessage)
+                }
+            }
+            sectionData.errorMessage = errorMessages.joined(separator: "\n")
+        }
+        showFooterViewWithUpdatedSectionData(for: presenter.sectionData)
+    }
+
     private func addInfoSection(_ transferMethodType: HyperwalletTransferMethodType) {
         guard transferMethodType.fees != nil || transferMethodType.processingTimes?.nodes?.first != nil else {
             return
@@ -402,8 +461,9 @@ extension AddTransferMethodController: AddTransferMethodView {
 
         if let infoLabel = infoView.arrangedSubviews[0] as? UILabel {
             infoLabel.attributedText = transferMethodType
-                .formatFeesProcessingTime(font: Theme.Label.captionOne, color: Theme.Label.subTitleColor)
-            infoLabel.font = Theme.Label.captionOne
+                .formatFeesProcessingTime(font: Theme.Label.subtitleFont, color: Theme.Label.subtitleColor)
+            infoLabel.font = Theme.Label.subtitleFont
+            infoLabel.textColor = Theme.Label.color
             let infoSection = AddTransferMethodSectionData(
                 fieldGroup: "INFORMATION",
                 cells: [infoView])

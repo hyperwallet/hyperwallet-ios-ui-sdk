@@ -36,8 +36,6 @@ public class ThemeManager: NSObject {
         Theme.Button.color = Theme.tintColor
         Theme.Icon.primaryColor = Theme.tintColor
         Theme.SpinnerView.activityIndicatorViewColor = Theme.tintColor
-        Theme.SearchBar.textFieldBackgroundColor = UIColor(rgb: 0xdcdcdc)
-        Theme.SearchBar.textFieldTintColor = UIColor(rgb: 0xdcdcdc)
         Theme.NavigationBar.shadowColor = UIColor(rgb: 0xe3e3e5)
         ThemeManager.applyTheme()
     }
@@ -45,56 +43,37 @@ public class ThemeManager: NSObject {
     private static func applyToUINavigationBar() {
         let proxy = UINavigationBar.appearance()
         if #available(iOS 11.0, *) {
-            proxy.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: Theme.tintColor]
+            proxy.largeTitleTextAttributes =
+                [
+                    NSAttributedString.Key.foregroundColor: Theme.NavigationBar.largeTitleColor,
+                    NSAttributedString.Key.font: Theme.NavigationBar.largeTitleFont
+                ]
         }
         if #available(iOS 13.0, *) {
             let navBarAppearance = UINavigationBarAppearance()
-            navBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: Theme.tintColor]
-            navBarAppearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: Theme.tintColor]
+            navBarAppearance.titleTextAttributes =
+                [
+                    NSAttributedString.Key.foregroundColor: Theme.NavigationBar.titleColor,
+                    NSAttributedString.Key.font: Theme.NavigationBar.titleFont
+                ]
+            navBarAppearance.largeTitleTextAttributes =
+                [
+                    NSAttributedString.Key.foregroundColor: Theme.NavigationBar.largeTitleColor,
+                    NSAttributedString.Key.font: Theme.NavigationBar.largeTitleFont
+                ]
             navBarAppearance.backgroundColor = Theme.themeColor
             proxy.standardAppearance = navBarAppearance
             proxy.scrollEdgeAppearance = navBarAppearance
         }
         proxy.barTintColor = Theme.themeColor
         proxy.tintColor = Theme.tintColor
-        proxy.titleTextAttributes = [NSAttributedString.Key.foregroundColor: Theme.tintColor]
-        proxy.backItem?.backBarButtonItem?.tintColor = Theme.tintColor
+        proxy.titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: Theme.NavigationBar.titleColor,
+            NSAttributedString.Key.font: Theme.NavigationBar.titleFont
+        ]
+        proxy.backItem?.backBarButtonItem?.tintColor = Theme.NavigationBar.backButtonColor
         proxy.barStyle = Theme.NavigationBar.barStyle
         proxy.isTranslucent = Theme.NavigationBar.isTranslucent
-    }
-
-    static func applyTo(searchBar: UISearchBar) {
-        searchBar.searchBarStyle = UISearchBar.Style.minimal
-        searchBar.barStyle = .black
-        searchBar.backgroundColor = Theme.themeColor
-        searchBar.tintColor = Theme.tintColor
-        let backgroundImage = UIImage.createBackgroundPattern(
-            color: Theme.SearchBar.textFieldBackgroundColor,
-            size: CGSize(width: 36, height: 36),
-            cornerRadius: 10)
-        searchBar.setSearchFieldBackgroundImage(backgroundImage, for: UIControl.State.normal)
-        searchBar.searchTextPositionAdjustment = UIOffset(horizontal: 8.0, vertical: 0.0)
-
-        if let textField = searchBar.value(forKey: "searchField") as? UITextField {
-            textField.defaultTextAttributes = [
-                NSAttributedString.Key.foregroundColor: Theme.SearchBar.textFieldTintColor,
-                NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body)
-            ]
-            textField.attributedPlaceholder = NSAttributedString(
-                string: "search_placeholder_label".localized(),
-                attributes: [
-                    .foregroundColor: Theme.SearchBar.textFieldTintColor.withAlphaComponent(0.5),
-                    .font: UIFont.preferredFont(forTextStyle: .body)
-                ])
-            if let leftImageView = textField.leftView as? UIImageView {
-                leftImageView.image = leftImageView.image?.withRenderingMode(.alwaysTemplate)
-                leftImageView.tintColor = Theme.SearchBar.textFieldTintColor.withAlphaComponent(0.5)
-            }
-            if let clearButton = textField.value(forKey: "clearButton") as? UIButton {
-                clearButton.setImage(clearButton.imageView?.image?.withRenderingMode(.alwaysTemplate), for: .normal)
-                clearButton.tintColor = Theme.SearchBar.textFieldTintColor.withAlphaComponent(0.5)
-            }
-        }
     }
 
     private static func applyToProcessingView() {
@@ -112,6 +91,6 @@ public class ThemeManager: NSObject {
     }
 
     private static let registerFonts: Void = {
-        UIFont.register("icomoon", type: "ttf")
+        UIFont.register("hw_mobile_ui_sdk_icons", type: "ttf")
     }()
 }

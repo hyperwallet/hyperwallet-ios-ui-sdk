@@ -25,8 +25,7 @@ class AddTransferMethodBankCardUSMaskingTests: BaseTests {
     }
 
     func testAddTransferMethod_cardNumberDefaultPattern() {
-        XCTAssert(app.navigationBars["Debit Card"].exists)
-        XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
+        verifyHeaders()
         addTransferMethod.setCardNumber("1111222233334444")
         checkSelectFieldValueIsEqualTo("1111 2222 3333 4444", addTransferMethod.cardNumberInput)
 
@@ -35,16 +34,14 @@ class AddTransferMethodBankCardUSMaskingTests: BaseTests {
     }
 
     func testAddTransferMethod_cardNumberDefaultPatternByPaste() {
-        XCTAssert(app.navigationBars["Debit Card"].exists)
-        XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
+        verifyHeaders()
         addTransferMethod.cardNumberInput.enterByPaste(
             text: "1111222233334444", field: addTransferMethod.cardNumberInput, app: app)
         checkSelectFieldValueIsEqualTo("1111 2222 3333 4444", addTransferMethod.cardNumberInput)
     }
 
     func testAddTransferMethod_cardNumberMaskingInvalidInput() {
-        XCTAssert(app.navigationBars["Debit Card"].exists)
-        XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
+        verifyHeaders()
         addTransferMethod.setCardNumber("a111a1b22b223a333 4a444aaa")
         checkSelectFieldValueIsEqualTo("1111 2222 3333 4444", addTransferMethod.cardNumberInput)
 
@@ -62,8 +59,7 @@ class AddTransferMethodBankCardUSMaskingTests: BaseTests {
     }
 
     func testAddTransferMethod_cardNumberMaskingInvalidLength() {
-        XCTAssert(app.navigationBars["Debit Card"].exists)
-        XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
+        verifyHeaders()
 
         addTransferMethod.setCardNumber("11112222333344444")
         checkSelectFieldValueIsEqualTo("1111 2222 3333 4444", addTransferMethod.cardNumberInput)
@@ -73,32 +69,28 @@ class AddTransferMethodBankCardUSMaskingTests: BaseTests {
     }
 
     func testAddTransferMethod_cvvDefaultPattern() {
-        XCTAssert(app.navigationBars["Debit Card"].exists)
-        XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
+        verifyHeaders()
         addTransferMethod.setCvv("999")
-        checkSelectFieldValueIsEqualTo("999", addTransferMethod.cvvInput)
+        checkSelectFieldValueIsEqualTo("•••", addTransferMethod.cvvInput)
     }
 
     func testAddTransferMethod_cvvMaskInvalidInput() {
-        XCTAssert(app.navigationBars["Debit Card"].exists)
-        XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
+        verifyHeaders()
         addTransferMethod.setCvv("9#@")
-        checkSelectFieldValueIsEqualTo("9", addTransferMethod.cvvInput)
+        checkSelectFieldValueIsEqualTo("•", addTransferMethod.cvvInput)
 
         addTransferMethod.setCvv("!#@")
         checkSelectFieldValueIsEqualTo("", addTransferMethod.cvvInput)
     }
 
     func testAddTransferMethod_cvvMaskInvalidLength() {
-        XCTAssert(app.navigationBars["Debit Card"].exists)
-        XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
+        verifyHeaders()
         addTransferMethod.setCvv("9999")
-        checkSelectFieldValueIsEqualTo("999", addTransferMethod.cvvInput)
+        checkSelectFieldValueIsEqualTo("•••", addTransferMethod.cvvInput)
     }
 
     func testAddTransferMethod_cardNumberConditionalPattern() {
-        XCTAssert(app.navigationBars["Debit Card"].exists)
-        XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
+        verifyHeaders()
         addTransferMethod.setCardNumber("411111123")
         checkSelectFieldValueIsEqualTo("411111 123", addTransferMethod.cardNumberInput)
 
@@ -117,5 +109,10 @@ class AddTransferMethodBankCardUSMaskingTests: BaseTests {
         addTransferMethod.setCardNumber("1111222233334444")
         checkSelectFieldValueIsEqualTo(
             "1111 2222 3333 4444", addTransferMethod.cardNumberInput)
+    }
+
+    private func verifyHeaders() {
+        XCTAssert(addTransferMethod.navBarDebitCard.exists)
+        XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
     }
 }

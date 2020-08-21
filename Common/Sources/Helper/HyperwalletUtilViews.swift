@@ -82,7 +82,7 @@ public struct HyperwalletUtilViews {
     /// - returns: SpinnerView
     ///
     /// Example: the `self` is ViewController
-    ///    let spinnerView = HyperwalletUtilViews.showSpinner(self.view)
+    ///    let spinnerView = HyperwalletUtilViews.showSpinner(view: self.view )
     ///
     ///    DispatchQueue.main.asyncAfter(deadline: .now() + 2) { // represent a callback
     ///        HyperwalletUtilViews.removeSpinner(spinnerView)
@@ -133,7 +133,16 @@ public final class SpinnerView: UIView {
         self.init(frame: view.frame)
         setupLayout()
         view.addSubview(self)
-        view.addConstraintsFillEntireView(view: self)
+        translatesAutoresizingMaskIntoConstraints = false
+
+        let constraints = [
+            safeAreaLeadingAnchor.constraint(equalTo: view.leadingAnchor),
+            safeAreaTrailingAnchor.constraint(equalTo: view.trailingAnchor),
+            safeAreaTopAnchor.constraint(equalTo: view.topAnchor),
+            safeAreaBottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ]
+        constraints.forEach { $0.priority = UILayoutPriority(999) }
+        NSLayoutConstraint.activate(constraints)
         view.bringSubviewToFront(self)
         layer.add(fadeInAnimation(), forKey: nil)
     }

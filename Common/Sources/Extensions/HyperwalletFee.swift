@@ -65,9 +65,8 @@ public extension HyperwalletFee {
         private func flatFeeDescription(_ flatFee: HyperwalletFee) -> String {
             var description = ""
             let feeFormat = "fee_flat_formatter".localized()
-
-            if let currency = flatFee.currency, let flatValue = flatFee.value {
-                description = String(format: feeFormat.localized(), currency, flatValue)
+            if let currencySymbol = currencySymbol(currency: flatFee.currency), let flatValue = flatFee.value {
+                description = String(format: feeFormat.localized(), currencySymbol, flatValue)
             }
             return description
         }
@@ -80,15 +79,18 @@ public extension HyperwalletFee {
             let max = percentFee.maximum
             let currency = percentFee.currency
 
-            if let min = min, let max = max, let value = value, let currency = currency {
+            if let min = min, let max = max, let value = value,
+                let currencySymbol = currencySymbol(currency: currency) {
                 feeFormat = "fee_percent_formatter".localized()
-                description = String(format: feeFormat, value, currency, min, max)
-            } else if let min = min, max == nil, let value = value, let currency = currency {
+                description = String(format: feeFormat, value, currencySymbol, min, max)
+            } else if let min = min, max == nil, let value = value,
+                let currencySymbol = currencySymbol(currency: currency) {
                 feeFormat = "fee_percent_only_min_formatter".localized()
-                description = String(format: feeFormat, value, currency, min)
-            } else if min == nil, let max = max, let value = value, let currency = currency {
+                description = String(format: feeFormat, value, currencySymbol, min)
+            } else if min == nil, let max = max, let value = value,
+                let currencySymbol = currencySymbol(currency: currency) {
                 feeFormat = "fee_percent_only_max_formatter".localized()
-                description = String(format: feeFormat, value, currency, max)
+                description = String(format: feeFormat, value, currencySymbol, max)
             } else {
                 if let value = value {
                     feeFormat = "fee_percent_no_min_and_max_formatter".localized()
@@ -108,28 +110,37 @@ public extension HyperwalletFee {
             let currency = flatFee.currency
 
             if let min = min, let max = max, let flatValue = flatValue,
-                let percentValue = percentValue, let currency = currency {
+                let percentValue = percentValue, let currencySymbol = currencySymbol(currency: currency) {
                 feeFormat = "fee_mix_formatter".localized()
                 description = String(
-                    format: feeFormat, currency, flatValue, percentValue, min, max)
+                    format: feeFormat, currencySymbol, flatValue, percentValue, min, max)
             } else if let min = min, max == nil, let flatValue = flatValue,
-                let percentValue = percentValue, let currency = currency {
+                let percentValue = percentValue, let currencySymbol = currencySymbol(currency: currency) {
                 feeFormat = "fee_mix_only_min_formatter".localized()
                 description = String(
-                    format: feeFormat, currency, flatValue, percentValue, min)
+                    format: feeFormat, currencySymbol, flatValue, percentValue, min)
             } else if min == nil, let max = max, let flatValue = flatValue,
-                let percentValue = percentValue, let currency = currency {
+                let percentValue = percentValue, let currencySymbol = currencySymbol(currency: currency) {
                 feeFormat = "fee_mix_only_max_formatter".localized()
                 description = String(
-                    format: feeFormat, currency, flatValue, percentValue, max)
+                    format: feeFormat, currencySymbol, flatValue, percentValue, max)
             } else {
-                if let flatValue = flatValue, let percentValue = percentValue, let currency = currency {
+                if let flatValue = flatValue, let percentValue = percentValue,
+                    let currencySymbol = currencySymbol(currency: currency) {
                     feeFormat = "fee_mix_no_min_and_max_formatter".localized()
                     description = String(
-                        format: feeFormat, currency, flatValue, percentValue)
+                        format: feeFormat, currencySymbol, flatValue, percentValue)
                 }
             }
             return description
+        }
+
+        private func currencySymbol(currency: String?) -> String? {
+            if let currency = currency {
+                let locale = NSLocale(localeIdentifier: currency)
+                return locale.displayName(forKey: .currencySymbol, value: currency)
+            }
+            return nil
         }
     }
 }

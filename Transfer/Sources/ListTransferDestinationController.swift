@@ -31,10 +31,9 @@ final class ListTransferDestinationController: UITableViewController {
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        setViewBackgroundColor()
         initializePresenter()
-        presenter.listTransferMethods()
         setupTransferMethodTableView()
+        presenter.listTransferMethods()
     }
 
     override public func viewWillAppear(_ animated: Bool) {
@@ -43,7 +42,7 @@ final class ListTransferDestinationController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                             target: self,
                                                             action: #selector(didTapAddButton))
-        titleDisplayMode(.never, for: "transfer_select_destination".localized())
+        titleDisplayMode(.never, for: "mobileTransferMethodsHeader".localized())
         scrollToSelectedRow()
     }
 
@@ -64,6 +63,7 @@ final class ListTransferDestinationController: UITableViewController {
         tableView.estimatedRowHeight = Theme.Cell.smallHeight
         tableView.register(ListTransferDestinationCell.self,
                            forCellReuseIdentifier: ListTransferDestinationCell.reuseIdentifier)
+        tableView.backgroundColor = Theme.UITableViewController.backgroundColor
     }
 
     private func getSelectTransferMethodCoordinator() -> HyperwalletCoordinator? {
@@ -124,9 +124,7 @@ extension ListTransferDestinationController: ListTransferDestinationView {
     }
 
     func showLoading() {
-        if let view = self.navigationController?.view {
-            spinnerView = HyperwalletUtilViews.showSpinner(view: view)
-        }
+        spinnerView = HyperwalletUtilViews.showSpinner(view: view)
     }
 
     /// Loads the transfer methods
@@ -169,6 +167,10 @@ extension ListTransferDestinationController {
 
     override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return CGFloat.leastNormalMagnitude
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return Theme.Cell.largeHeight
     }
 }
 

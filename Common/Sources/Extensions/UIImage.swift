@@ -27,7 +27,6 @@ public extension UIImage {
     ///   - iconSize: The image size
     ///   - fontSize: The font size of the icon
     ///   - textColor: The text color (optional).
-    ///   - backgroundColor: The background color (optional).
     /// - returns: A string that will appear as icon
     static func fontIcon(_ name: String,
                          _ iconSize: CGSize,
@@ -37,7 +36,7 @@ public extension UIImage {
         paragraph.alignment = NSTextAlignment.center
         let fontSize = fontSize
         let attributedString = NSAttributedString(string: name, attributes: [
-            NSAttributedString.Key.font: UIFont(name: "icomoon", size: fontSize)!,
+            NSAttributedString.Key.font: UIFont(name: "hw_mobile_ui_sdk_icons", size: fontSize)!,
             NSAttributedString.Key.foregroundColor: textColor,
             NSAttributedString.Key.paragraphStyle: paragraph
         ])
@@ -52,13 +51,25 @@ public extension UIImage {
         return image!
     }
 
+    /// Create Background Pattern
+    ///
+    /// - Parameters:
+    ///   - color: UIColor
+    ///   - size: CGSize
+    ///   - cornerRadius: Int
+    /// - Returns: UIImage
+    static func createBackgroundPattern(color: UIColor, size: CGSize, cornerRadius: Int) -> UIImage {
+        let image = imageWithColor(color: color, size: size)
+        return roundedImage(image: image, cornerRadius: cornerRadius)
+    }
+
     /// Get an image with specified colors
     ///
     /// - Parameters:
     ///   - color: color of the image
     ///   - size: size for the image
     /// - Returns: image
-    static func imageWithColor(color: UIColor, size: CGSize) -> UIImage {
+    private static func imageWithColor(color: UIColor, size: CGSize) -> UIImage {
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
         color.setFill()
@@ -77,7 +88,7 @@ public extension UIImage {
     ///   - image: image to be formatted
     ///   - cornerRadius: cornerRadius
     /// - Returns: image with rounded corners
-    static func roundedImage(image: UIImage, cornerRadius: Int) -> UIImage {
+    private static func roundedImage(image: UIImage, cornerRadius: Int) -> UIImage {
         let rect = CGRect(origin: CGPoint(x: 0, y: 0), size: image.size)
         UIGraphicsBeginImageContextWithOptions(image.size, false, 1)
         UIBezierPath(
@@ -86,17 +97,5 @@ public extension UIImage {
             ).addClip()
         image.draw(in: rect)
         return UIGraphicsGetImageFromCurrentImageContext()!
-    }
-
-    /// Create Background Pattern
-    ///
-    /// - Parameters:
-    ///   - color: UIColor
-    ///   - size: CGSize
-    ///   - cornerRadius: Int
-    /// - Returns: UIImage
-    static func createBackgroundPattern(color: UIColor, size: CGSize, cornerRadius: Int) -> UIImage {
-        let image = imageWithColor(color: color, size: size)
-        return roundedImage(image: image, cornerRadius: cornerRadius)
     }
 }
