@@ -1,6 +1,10 @@
 Changelog
 =========
 
+[1.0.0-beta07](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta07)
+-------------------
+- Fixed Cocoapod issue
+
 [1.0.0-beta06](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta06)
 -------------------
 - Security fixes
