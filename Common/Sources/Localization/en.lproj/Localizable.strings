@@ -165,6 +165,28 @@
 "wire_transfer_return" = "Wire Transfer Return";
 "wubs_wire_transfer_return" = "Wire Transfer Return";
 "unknown_receipt_type" = "Unknown Transaction Type";
+"paypal_account_transfer_return" = "Cashout Return";
+"venmo_account_transfer_return" = "Cashout Return"; // This one does not have a content translation
+"prepaid_card_account_deposit" = "Portal deposit";
+"prepaid_card_annual_fee_discount" = "Annual fee discount";
+"prepaid_card_bill_reprint_fee" = "Bill re-print";
+"prepaid_card_atm_or_cash_advance_fee" = "ATM Fee/Cash Advance Fee";
+"prepaid_card_cash_advance_chargeback" = "Cash Advance Chargeback";
+"prepaid_card_cash_advance_chargeback_reversal" = "Cash Advance Chargeback Reversal";
+"prepaid_card_cash_advance_repress" = "Cash Advance Repress";
+"prepaid_card_cash_advance_repress_reversal" = "Advance Repress Reversal";
+"prepaid_card_chargeback" = "Chargeback";
+"prepaid_card_chargeback_refund" = "Chargeback Refund";
+"prepaid_card_chargeback_refund_reversal" = "Chargeback Refund Reversal";
+"prepaid_card_chargeback_reversal" = "Chargeback Reversal";
+"prepaid_card_commission_or_fee" = "Fee / Commission";
+"prepaid_card_debit_transfer" = "Debit/Transfers";
+"prepaid_card_document_request_fee" = "Requests for copies of documents";
+"prepaid_card_emergency_cash" = "Emergency money";
+"prepaid_card_emergency_card" = "Emergency card";
+"prepaid_card_income" = "Income";
+"prepaid_card_load_fee" = "Fee for load pan";
+"prepaid_card_overdue_payment_interest" = "Interest on overdue payment";
 
 // Receipt Detail
 "mobileTransactionDetailsHeader" = "Transaction details";
