@@ -187,6 +187,25 @@
 "prepaid_card_income" = "Income";
 "prepaid_card_load_fee" = "Fee for load pan";
 "prepaid_card_overdue_payment_interest" = "Interest on overdue payment";
+"prepaid_card_payment" = "Load";
+"prepaid_card_pin_reprint_fee" = "PIN reprint";
+"prepaid_card_priority_pass_fee" = "Priority pass fee";
+"prepaid_card_priority_pass_renewal" = "Priority pass renewal";
+"prepaid_card_recurring_interest" = "Revolving Interest";
+"prepaid_card_refund_repress" = "Refund Repress";
+"prepaid_card_refund_repress_reversal" = "Refund Repress Reversal";
+"prepaid_card_sale_repress" = "Sale Repress";
+"prepaid_card_statement_fee" = "UTSKGJ Statement Fee";
+"prepaid_card_telephone_support_fee" = "Information by telephone: balance, trans. etc.";
+"prepaid_card_transfer_fee" = "Card Load Fee";
+"prepaid_card_transfer_return" = "Prepaid Card Load Return";
+"prepaid_card_bank_withdrawal_reversal" = "Reversed bank withdrawal";
+"prepaid_card_bank_withdrawal_chargeback" = "Reversed bank withdrawal chargeback";
+"prepaid_card_refund_fee" = "Refund Fee";
+"prepaid_card_monthly_maintenance_fee" = "Monthly Maintenance Fee";
+"prepaid_card_transaction_fee" = "Transaction Fee";
+"prepaid_card_sms_fee" = "SMS Fee";
+"prepaid_card_declined_authorization_fee" = "Declined Authorization Fee";
 
 // Receipt Detail
 "mobileTransactionDetailsHeader" = "Transaction details";
