@@ -206,6 +206,9 @@
 "prepaid_card_transaction_fee" = "Transaction Fee";
 "prepaid_card_sms_fee" = "SMS Fee";
 "prepaid_card_declined_authorization_fee" = "Declined Authorization Fee";
+"fispc" = "Purchase";
+"visa" = "Visa";
+"mastercard" = "MasterCard";
 
 // Receipt Detail
 "mobileTransactionDetailsHeader" = "Transaction details";
