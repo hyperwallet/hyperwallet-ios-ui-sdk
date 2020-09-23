@@ -114,7 +114,11 @@ final class ListTransferMethodController: UITableViewController {
         tableView.tableFooterView = UIView()
         tableView.register(ListTransferMethodCell.self,
                            forCellReuseIdentifier: ListTransferMethodCell.reuseIdentifier)
-        tableView.rowHeight = UITableView.automaticDimension
+         if #available(iOS 11, *) {
+             tableView.rowHeight = UITableView.automaticDimension
+         } else {
+            tableView.rowHeight = Theme.Cell.largeHeight
+         }
         tableView.estimatedRowHeight = Theme.Cell.smallHeight
         tableView.backgroundColor = Theme.UITableViewController.backgroundColor
     }
