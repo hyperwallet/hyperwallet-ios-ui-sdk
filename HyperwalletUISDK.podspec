@@ -17,7 +17,7 @@ Pod::Spec.new do |spec|
     spec.subspec "Common" do |common|
         common.resources = ['Common/**/*.xcassets', 'Common/**/*.ttf', 'Common/**/*.xib', 'Common/**/*.strings']
         common.source_files  = "Common/Sources/**/*.{swift,h}"
-        common.dependency 'Insights', '1.0.0-beta03'
+        common.dependency 'Insights', '1.0.0-beta04'
     end
 
     spec.subspec "TransferMethodRepository" do |transferMethodRepository|
