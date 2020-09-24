@@ -23,6 +23,7 @@ public final class TransferMethodRepositoryFactory {
     private static var instance: TransferMethodRepositoryFactory?
     private let remoteTransferMethodConfigurationRepository: TransferMethodConfigurationRepository
     private let remoteTransferMethodRepository: TransferMethodRepository
+    private let remotePrepaidCardRepository: PrepaidCardRepository
 
     /// Returns the previously initialized instance of the RepositoryFactory object
     public static var shared: TransferMethodRepositoryFactory {
@@ -41,6 +42,7 @@ public final class TransferMethodRepositoryFactory {
     private init() {
         remoteTransferMethodConfigurationRepository = RemoteTransferMethodConfigurationRepository()
         remoteTransferMethodRepository = RemoteTransferMethodRepository()
+        remotePrepaidCardRepository = RemotePrepaidCardRepository()
     }
 
     /// Gets the `TransferMethodConfigurationRepository` instance.
@@ -55,5 +57,12 @@ public final class TransferMethodRepositoryFactory {
     /// - Returns: The TransferMethodRepository
     public func transferMethodRepository() -> TransferMethodRepository {
         return remoteTransferMethodRepository
+    }
+
+    /// Gets the `PrepaidCardRepository` instance.
+    ///
+    /// - Returns: The PrepaidCardRepository
+    public func prepaidCardRepository() -> PrepaidCardRepository {
+        return remotePrepaidCardRepository
     }
 }

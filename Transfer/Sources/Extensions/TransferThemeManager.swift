@@ -24,6 +24,7 @@ import Common
 public extension ThemeManager {
     /// Applies default visual styles to the Hyperwallet user interface components.
     static func applyTransferTheme() {
+        applyToTransferSourceCell()
         applyToTransferDestinationCell()
         applyToTransferButtonCell()
         applyToTransferNotesCell()
@@ -35,6 +36,14 @@ public extension ThemeManager {
 
     private static func applyToTransferDestinationCell() {
         let proxy = TransferDestinationCell.appearance()
+        proxy.titleLabelFont = Theme.Label.titleFont
+        proxy.titleLabelColor = Theme.Label.color
+        proxy.subTitleLabelFont = Theme.Label.subtitleFont
+        proxy.subTitleLabelColor = Theme.Label.subtitleColor
+    }
+
+    private static func applyToTransferSourceCell() {
+        let proxy = TransferSourceCell.appearance()
         proxy.titleLabelFont = Theme.Label.titleFont
         proxy.titleLabelColor = Theme.Label.color
         proxy.subTitleLabelFont = Theme.Label.subtitleFont

@@ -36,6 +36,7 @@ final class CreateTransferController: UITableViewController {
     private lazy var selectTransferMethodCoordinator = getSelectTransferMethodCoordinator()
     private var presenter: CreateTransferPresenter!
     private let registeredCells: [(type: AnyClass, id: String)] = [
+        (TransferSourceCell.self, TransferSourceCell.reuseIdentifier),
         (TransferDestinationCell.self, TransferDestinationCell.reuseIdentifier),
         (TransferAllFundsCell.self, TransferAllFundsCell.reuseIdentifier),
         (TransferAmountCell.self, TransferAmountCell.reuseIdentifier),
@@ -61,7 +62,8 @@ final class CreateTransferController: UITableViewController {
     private func initializePresenter() {
         if let clientTransferId = initializationData?[InitializationDataField.clientTransferId] as? String {
             let sourceToken = initializationData?[InitializationDataField.sourceToken] as? String
-            presenter = CreateTransferPresenter(clientTransferId, sourceToken, view: self)
+            let showAllAvailableSources = initializationData?[InitializationDataField.showAllAvailableSources] as? Bool
+            presenter = CreateTransferPresenter(clientTransferId, sourceToken, showAllAvailableSources, view: self)
         } else {
             fatalError("Required data not provided in initializePresenter")
         }
@@ -142,7 +144,7 @@ extension CreateTransferController {
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch presenter.sectionData[indexPath.section].createTransferSectionHeader {
-        case .destination:
+        case .source, .destination:
             return Theme.Cell.largeHeight
 
         case .transferAll:
@@ -198,8 +200,35 @@ extension CreateTransferController {
 
         case .amount:
             getAmountSectionCellConfiguration(cell, indexPath)
+
+        case .source:
+            getSourceSectionCellConfiguration(cell, indexPath)
         }
         return cell
+    }
+
+    private func getSourceSectionCellConfiguration(_ cell: UITableViewCell, _ indexPath: IndexPath) {
+        guard let tableViewCell = cell as? TransferSourceCell else {
+            return
+        }
+        if presenter.isTransferFromSelectionAvailable {
+            tableViewCell.accessoryType = .disclosureIndicator
+        }
+
+        if let transferSourceCellConfiguration = presenter.transferSourceCellConfiguration {
+            tableViewCell.configure(transferSourceCellConfiguration: transferSourceCellConfiguration)
+        }
+
+//        if let selectedSourceToken = presenter.selectedSourceToken, selectedSourceToken.starts(with: "trm"),
+//            let prepaidCard = presenter.prepaidCards?.first(where: { $0.token == selectedSourceToken }) {
+//            tableViewCell.configure(prepaidCard: prepaidCard,
+//                                    availableBalance: presenter.availableBalance ?? "0",
+//                                    currency: presenter.destinationCurrency)
+//        } else {
+//            tableViewCell.configure("Available funds",
+//                                    availableBalance: presenter.availableBalance ?? "0",
+//                                    currency: presenter.destinationCurrency)
+//        }
     }
 
     private func getDestinationSectionCellConfiguration(_ cell: UITableViewCell, _ indexPath: IndexPath) {
@@ -344,6 +373,10 @@ extension CreateTransferController: CreateTransferView {
         if let spinnerView = self.spinnerView {
             HyperwalletUtilViews.removeSpinner(spinnerView)
         }
+    }
+
+    func showAlert(message: String?) {
+        HyperwalletUtilViews.showAlert(self, message: message, actions: UIAlertAction.close(self))
     }
 
     func showError(_ error: HyperwalletErrorType, pageName: String, pageGroup: String, _ retry: (() -> Void)?) {

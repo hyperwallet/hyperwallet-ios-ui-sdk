@@ -17,32 +17,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import Foundation
-/// Representation of Initialization DataField
-public enum InitializationDataField: String {
-    /// The 2 letter ISO 3166-1 country code.
-    case country
-    /// The 3 letter ISO 4217-1 currency code.
-    case currency
-    /// The profile type. Possible values - INDIVIDUAL, BUSINESS.
-    case profileType
-    /// The transfer method type. Possible values - BANK_ACCOUNT, BANK_CARD.
-    case transferMethodTypeCode
-    /// Forces to refresh the cached data.
-    case forceUpdateData
-    /// The receipt
-    case receipt
-    /// The client TransferId
-    case clientTransferId
-    /// The prepaid token
-    case prepaidCardToken
-    /// The source token
-    case sourceToken
-    /// The transfer
-    case transfer
-    /// The transfer method like bank account, bank card, PayPal account, prepaid card, paper check
-    case transferMethod
-    /// Boolean value to check whether foreign exchange rate changed
-    case didFxQuoteChange
-    /// Boolean value to check whether to show all the available sources for receipts/ transfers
-    case showAllAvailableSources
+
+enum HyperwalletProgramModel: String {
+    case walletModel = "WALLET_MODEL"
+    case pay2CardModel = "PAY2CARD_MODEL"
+    case cardOnlyModel = "CARD_ONLY_MODEL"
+
+    func isPay2CardOrCardOnlyModel() -> Bool {
+        return self == .pay2CardModel || self == .cardOnlyModel
+    }
 }

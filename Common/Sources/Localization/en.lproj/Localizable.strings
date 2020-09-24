@@ -63,6 +63,9 @@
 "venmo_account" = "Venmo";
 "cash_pickup_mg" = "MoneyGram";
 
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
 //Select Transfer Method View
 "select_a_country_message" = "Select a country";
 
@@ -185,12 +188,14 @@
 // Transfer Funds
 "mobileTransferFundsHeader" = "Transfer funds";
 "mobileConfirmationHeader" = "Confirm the details";
+"mobileTransferFromLabel" = "TRANSFER FROM";
 "mobileTransferToLabel" = "TRANSFER TO";
 "mobileNoteLabel" = "Note";
 "mobileConfirmDetailsAmount" = "Amount";
 "mobileConfirmDetailsFee" = "Fee";
 "mobileConfirmDetailsTotal" = "You will receive";
 "mobileTransferMax" = "Transfer max amount";
+"total" = "Total: %1$@%2$@ %3$@";
 "mobileFXsell" = "From";
 "mobileFXbuy" = "To";
 "mobileFXRateLabel" = "Exchange rate";
@@ -198,6 +203,7 @@
 "continueButtonLabel" = "Continue";
 "mobileAddTransferMethod" = "Add transfer method";
 "mobileTransferMethodsHeader" = "Transfer methods";
+"mobileTransferFromHeader" = "Transfer From";
 "mobileFXlabel" = "FOREIGN EXCHANGE";
 "mobileSummaryLabel" = "SUMMARY";
 "transfer" = "Transfer";
