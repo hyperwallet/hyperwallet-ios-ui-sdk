@@ -23,10 +23,8 @@ import UIKit
 public class ThemeManager: NSObject {
     /// Applies default visual styles to the Hyperwallet user interface components.
     public static func applyTheme() {
-        applyToUINavigationBar()
         applyToProcessingView()
         applyToSpinnerView()
-        registerFonts
     }
 
     /// Applies White Theme visual styles to the Hyperwallet user interface components.
@@ -34,13 +32,15 @@ public class ThemeManager: NSObject {
         Theme.themeColor = .white
         Theme.tintColor = UIColor(red: 0, green: 0.48, blue: 1, alpha: 1)
         Theme.Button.color = Theme.tintColor
+        Theme.Button.linkColor = Theme.tintColor
         Theme.Icon.primaryColor = Theme.tintColor
         Theme.SpinnerView.activityIndicatorViewColor = Theme.tintColor
         Theme.NavigationBar.shadowColor = UIColor(rgb: 0xe3e3e5)
         ThemeManager.applyTheme()
     }
 
-    private static func applyToUINavigationBar() {
+    /// Applies Custom Theme visual styles to the `UINavigationBar` interface component.
+    public static func applyToUINavigationBar() {
         let proxy = UINavigationBar.appearance()
         if #available(iOS 11.0, *) {
             proxy.largeTitleTextAttributes =
@@ -89,8 +89,4 @@ public class ThemeManager: NSObject {
         proxy.activityIndicatorBackgroundColor = Theme.SpinnerView.backgroundColor
         proxy.viewBackgroundColor = Theme.SpinnerView.backgroundColor
     }
-
-    private static let registerFonts: Void = {
-        UIFont.register("hw_mobile_ui_sdk_icons", type: "ttf")
-    }()
 }

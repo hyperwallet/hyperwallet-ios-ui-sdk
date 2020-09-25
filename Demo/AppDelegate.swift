@@ -29,10 +29,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 
-       // ThemeManager.applyWhiteTheme()
-        ThemeManager.applyTheme()
-        // Set the default tint color
         window?.tintColor = .systemBlue
+        window?.backgroundColor = Theme.UITableViewController.backgroundColor
+//        ThemeManager.applyWhiteTheme()
+        ThemeManager.applyTheme()
+        ThemeManager.applyToUINavigationBar()
+        // Set the default tint color
 
         return true
     }

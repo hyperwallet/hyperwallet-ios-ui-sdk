@@ -34,7 +34,7 @@ Adding one or more of these frameworks allows users to explore the particular fu
 ### Carthage
 Specify it in your Cartfile:
 ```ogdl
-github "hyperwallet/hyperwallet-ios-ui-sdk" "1.0.0-beta07"
+github "hyperwallet/hyperwallet-ios-ui-sdk" "1.0.0-beta08"
 ```
 Add desired modules using the `Linked Frameworks and Libraries` option to make them available in the app.
 Use `import <module-name>` to add the dependency within a file
@@ -42,13 +42,13 @@ Use `import <module-name>` to add the dependency within a file
 ### CocoaPods
 - Install a specific framework (install one or more frameworks based on your requirement)
 ```ruby
-pod "HyperwalletUISDK/TransferMethod", "1.0.0-beta07"
-pod "HyperwalletUISDK/Transfer", "1.0.0-beta07"
-pod "HyperwalletUISDK/Receipt", "1.0.0-beta07"
+pod "HyperwalletUISDK/TransferMethod", "1.0.0-beta08"
+pod "HyperwalletUISDK/Transfer", "1.0.0-beta08"
+pod "HyperwalletUISDK/Receipt", "1.0.0-beta08"
 ```
 - To install all available modules (TransferMethod, Transfer, Receipt)
 ```ruby
-pod 'HyperwalletUISDK', '~> 1.0.0-beta07'
+pod 'HyperwalletUISDK', '~> 1.0.0-beta08'
 ```
 Use `import HyperwalletUISDK` to add the dependency within a file.
 
@@ -57,8 +57,7 @@ After you're done installing the SDK, you need to initialize an instance in orde
 
 ### Setup the UI Style
 HyperwalletUISDK provides default themes for all the modules(e.g. TransferMethod, Receipt). If you import HyperwalletUISDK, in order to
-apply all the default themes, firstly you will have to call ThemeManager.applyTheme which will apply the basic theme. Secondly, you need to apply
-the themes for all the modules in HyperwalletUISDK.
+apply the default theme, you will have to call `ThemeManager.applyTheme()` which will apply the basic theme to ProcessingView and SpinnerView. If you want Hyperwallet custom theme for UINavigationBar then add `ThemeManager.applyToUINavigationBar()`
 For example:
 ```swift
 ...
@@ -72,16 +71,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Optional - Define the HyperwalletUISDK on the `Theme` object. See the section `Customize the visual style`.
 
         // Set the default tint color
-        window?.tintColor = Theme.tintColor
+        window?.tintColor = .systemBlue
         // Avoid to display a black area during the view transaction in the UINavigationBar.
-        window?.backgroundColor = Theme.ViewController.backgroundColor
+        window?.backgroundColor = Theme.UITableViewController.backgroundColor
 
         // Apply basic theme
         ThemeManager.applyTheme()
-        // Apply TransferMethod theme
-        ThemeManager.applyTransferMethodTheme()
-        // Apply Receipt theme
-        ThemeManager.applyReceiptTheme()
         return true
     }
 }
@@ -414,9 +409,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         ThemeManager.applyWhiteTheme()
         // Set the default tint color
-        window?.tintColor = Theme.tintColor
+        window?.tintColor = .systemBlue
         // Avoid to display a black area during the view transaction in the UINavigationBar.
-        window?.backgroundColor = Theme.ViewController.backgroundColor
+        window?.backgroundColor = Theme.UITableViewController.backgroundColor
 
         return true
     }
@@ -432,6 +427,8 @@ Theme.Label.subTitleColor = UIColor(red: 19 / 255, green: 165 / 255, blue: 185 /
 Theme.Label.textColor = UIColor(red: 0 / 255, green: 45 / 255, blue: 67 / 255, alpha: 1)
 Theme.Label.errorColor = .red
 ```
+
+Note: If you do not use `ThemeManager.applyToUINavigationBar()`, then any changes done to Theme.NavigationBar.xxx will not be reflected.
 
 ## Error Handling
 In Hyperwallet UI SDK, we categorized HyperwalletException into three groups, which are input errors (business errors), network errors and unexpected errors.
