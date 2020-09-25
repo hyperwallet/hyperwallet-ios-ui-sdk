@@ -211,11 +211,12 @@ extension CreateTransferController {
         guard let tableViewCell = cell as? TransferSourceCell else {
             return
         }
-        if presenter.isTransferFromSelectionAvailable {
+        if presenter.transferSourceCellConfigurations.count > 1 {
             tableViewCell.accessoryType = .disclosureIndicator
         }
 
-        if let transferSourceCellConfiguration = presenter.transferSourceCellConfiguration {
+        if let transferSourceCellConfiguration =
+            presenter.transferSourceCellConfigurations.first(where: { $0.isSelected }) {
             tableViewCell.configure(transferSourceCellConfiguration: transferSourceCellConfiguration)
         }
     }
@@ -225,7 +226,7 @@ extension CreateTransferController {
             return
         }
         tableViewCell.accessoryType = .disclosureIndicator
-        if let transferMethod = presenter.selectedTransferMethod {
+        if let transferMethod = presenter.selectedTransferDestination {
             tableViewCell.configure(transferMethod: transferMethod)
         } else {
             if selectTransferMethodCoordinator == nil {
@@ -296,11 +297,14 @@ extension CreateTransferController {
         let sectionData = presenter.sectionData[indexPath.section]
         if sectionData.createTransferSectionHeader == .destination,
             presenter.sectionData[indexPath.section] is CreateTransferSectionDestinationData {
-            if presenter.selectedTransferMethod != nil {
+            if presenter.selectedTransferDestination != nil {
                 navigateToListTransferDestination()
             } else {
                 navigateToTransferMethodIfInitialized()
             }
+        } else if sectionData.createTransferSectionHeader == .source,
+            presenter.transferSourceCellConfigurations.count > 1 {
+            navigateToListTransferSource()
         }
     }
 }
@@ -312,7 +316,7 @@ extension CreateTransferController: CreateTransferView {
         for section in presenter.sectionData {
             switch section.createTransferSectionHeader {
             case .destination:
-                if presenter.selectedTransferMethod == nil {
+                if presenter.selectedTransferDestination == nil {
                     section.errorMessage = "noTransferMethodAdded".localized()
                     updateFooter(for: .destination)
                 }
@@ -377,16 +381,26 @@ extension CreateTransferController: CreateTransferView {
         tableView.reloadData()
     }
 
+    private func navigateToListTransferSource() {
+        let listTransferSourceController = ListTransferSourceController()
+        var initializationData = [InitializationDataField: Any]()
+        initializationData[InitializationDataField.selectedTransferSource] =
+            presenter.transferSourceCellConfigurations.first(where: { $0.isSelected })
+        initializationData[InitializationDataField.transferSources] =
+            presenter.transferSourceCellConfigurations
+
+        listTransferSourceController.initializationData = initializationData
+        listTransferSourceController.flowDelegate = self
+        show(listTransferSourceController, sender: self)
+    }
+
     private func navigateToListTransferDestination() {
         let listTransferDestinationController = ListTransferDestinationController()
         var initializationData = [InitializationDataField: Any]()
-        initializationData[InitializationDataField.transferMethod] = presenter.selectedTransferMethod
-        if presenter.transferSourceCellConfiguration?.token.starts(with: "trm") ?? false {
-            var prepaidCardTokens = [String]()
-            presenter.prepaidCards?.forEach { prepaidCard in
-                prepaidCardTokens.append(prepaidCard.token ?? "")
-            }
-            initializationData[InitializationDataField.prepaidCardTokens] = prepaidCardTokens
+        initializationData[InitializationDataField.transferMethod] = presenter.selectedTransferDestination
+        if presenter.transferSourceCellConfigurations
+            .first(where: { $0.isSelected })?.type == .prepaidCard {
+            initializationData[InitializationDataField.selectedSourceType] = TransferSourceType.prepaidCard.rawValue
         }
         listTransferDestinationController.initializationData = initializationData
         listTransferDestinationController.flowDelegate = self
@@ -410,7 +424,7 @@ extension CreateTransferController: CreateTransferView {
     }
 
     func showScheduleTransfer(_ transfer: HyperwalletTransfer) {
-        if let transferMethod = presenter.selectedTransferMethod {
+        if let transferMethod = presenter.selectedTransferDestination {
             coordinator?.navigateToNextPage(
                 initializationData: [
                     InitializationDataField.transfer: transfer,
@@ -425,17 +439,27 @@ extension CreateTransferController: CreateTransferView {
 extension CreateTransferController {
     /// To reload create transfer method
     override public func didFlowComplete(with response: Any) {
-        if let transferMethod = response as? HyperwalletTransferMethod {
+        if let transferMethod = response as? HyperwalletTransferMethod,
+            let sourceToken = presenter.transferSourceCellConfigurations
+                .first(where: { $0.isSelected })?.token {
             coordinator?.navigateBackFromNextPage(with: transferMethod)
-            presenter.selectedTransferMethod = transferMethod
-            presenter.didTapTransferAllFunds = false
-            presenter.amount = "0"
-            presenter.notes = nil
-            presenter.loadCreateTransfer()
+            resetValuesAndReload(token: sourceToken, selectedTransferDestination: transferMethod)
         } else if let statusTransition = response as? HyperwalletStatusTransition {
             coordinator?.navigateBackFromNextPage(with: statusTransition)
             removeCoordinator()
             flowDelegate?.didFlowComplete(with: statusTransition)
+        } else if let transferSource = response as? TransferSourceCellConfiguration {
+            coordinator?.navigateBackFromNextPage(with: transferSource)
+            resetValuesAndReload(token: transferSource.token)
         }
+    }
+
+    private func resetValuesAndReload(token: String,
+                                      selectedTransferDestination: HyperwalletTransferMethod? = nil) {
+        presenter.selectedTransferDestination = selectedTransferDestination
+        presenter.didTapTransferAllFunds = false
+        presenter.amount = "0"
+        presenter.notes = nil
+        presenter.loadCreateTransferFromSelectedTransferSource(sourceToken: token)
     }
 }

@@ -63,18 +63,16 @@ final class CreateTransferPresenter {
 
     private(set) var clientTransferId: String
     private(set) var sectionData = [CreateTransferSectionData]()
-    private(set) var transferSourceCellConfiguration: TransferSourceCellConfiguration?
+    private(set) var transferSourceCellConfigurations = [TransferSourceCellConfiguration]()
     private(set) var availableBalance: String?
     private(set) var didFxQuoteChange: Bool = false
     private(set) var showAllAvailableSources: Bool = false
-    private(set) var prepaidCards: [HyperwalletPrepaidCard]?
-    private(set) var isTransferFromSelectionAvailable = false
 
-    var selectedTransferMethod: HyperwalletTransferMethod?
+    var selectedTransferDestination: HyperwalletTransferMethod?
     var amount: String = "0"
     var notes: String?
     var destinationCurrency: String? {
-        return selectedTransferMethod?.transferMethodCurrency
+        return selectedTransferDestination?.transferMethodCurrency
     }
 
     var didTapTransferAllFunds: Bool = false {
@@ -90,15 +88,10 @@ final class CreateTransferPresenter {
          _ sourceToken: String?,
          _ showAllAvailableSources: Bool?,
          view: CreateTransferView) {
+        transferSourceCellConfigurations.removeAll()
         self.clientTransferId = clientTransferId
         if let prepaidCardToken = sourceToken, prepaidCardToken.starts(with: "trm") {
-            self.transferSourceCellConfiguration =
-                TransferSourceCellConfiguration(token: prepaidCardToken,
-                                                title: "prepaid_card".localized(),
-                                                fontIcon: HyperwalletIconContent.prepaidCard.rawValue,
-                                                availableBalance: "0",
-                                                destinationCurrency: "",
-                                                additionalText: nil)
+            createTransferSourceCellConfiguration(true, .prepaidCard, prepaidCardToken)
         }
         if let showAllAvailableSources = showAllAvailableSources {
             self.showAllAvailableSources = showAllAvailableSources
@@ -129,15 +122,23 @@ final class CreateTransferPresenter {
     }
 
     func loadCreateTransfer() {
-        isTransferFromSelectionAvailable = false
         if showAllAvailableSources {
+            transferSourceCellConfigurations.removeAll()
             loadAllAvailableSources()
-        } else if let transferSourceCellConfiguration = transferSourceCellConfiguration,
-            transferSourceCellConfiguration.token.starts(with: "trm") {
-                loadPrepaidCardAndCreateTransfer(token: transferSourceCellConfiguration.token)
-            } else {
-                loadUserAndCreateTransfer()
-            }
+        } else if let token =
+            transferSourceCellConfigurations
+                .first(where: { $0.isSelected && $0.type == .prepaidCard })?.token {
+                loadPrepaidCardAndCreateTransfer(token: token)
+        } else {
+            loadUserAndCreateTransfer()
+        }
+    }
+
+    func loadCreateTransferFromSelectedTransferSource(sourceToken: String) {
+        transferSourceCellConfigurations.forEach { $0.isSelected = false }
+        transferSourceCellConfigurations
+            .first(where: { $0.token == sourceToken })?.isSelected = true
+        loadTransferMethods()
     }
 
     private func loadPrepaidCardAndCreateTransfer(token: String) {
@@ -154,11 +155,12 @@ final class CreateTransferPresenter {
                 }
 
             case .success(let prepaidCard):
-                if let prepaidCard = prepaidCard, strongSelf.transferSourceCellConfiguration != nil {
-                    strongSelf.transferSourceCellConfiguration?
-                        .additionalText = prepaidCard.formattedCardBrandCardNumber
-                    strongSelf.prepaidCards = [prepaidCard]
-                    strongSelf.loadTransferMethods()
+                if let prepaidCard = prepaidCard, let token = prepaidCard.token,
+                    strongSelf.transferSourceCellConfigurations.isNotEmpty {
+                    strongSelf.transferSourceCellConfigurations
+                        .first(where: { $0.isSelected })?.additionalText =
+                        prepaidCard.formattedCardBrandCardNumber
+                    strongSelf.loadCreateTransferFromSelectedTransferSource(sourceToken: token)
                 }
             }
         }
@@ -178,79 +180,76 @@ final class CreateTransferPresenter {
                 }
 
             case .success(let user):
-                strongSelf.transferSourceCellConfiguration =
-                    TransferSourceCellConfiguration(token: user?.token ?? "",
-                                                    title: "availableFunds".localized(),
-                                                    fontIcon: HyperwalletIconContent.bankAccount.rawValue,
-                                                    availableBalance: strongSelf.availableBalance ?? "0",
-                                                    destinationCurrency: strongSelf.destinationCurrency ?? "",
-                                                    additionalText: nil)
-                //strongSelf.selectedSourceToken = user?.token
-                strongSelf.loadTransferMethods()
+                if let token = user?.token {
+                    strongSelf.createTransferSourceCellConfiguration(true, .user, token)
+                    strongSelf.loadCreateTransferFromSelectedTransferSource(sourceToken: token)
+                }
             }
         }
     }
 
-    private func createTransferSourceCellConfiguration(token: String,
-                                                       title: String,
-                                                       fontIcon: String,
-                                                       additionalText: String?) {
-        transferSourceCellConfiguration =
-            TransferSourceCellConfiguration(token: token,
-                                            title: title,
-                                            fontIcon: fontIcon,
-                                            availableBalance: self.availableBalance ?? "0",
-                                            destinationCurrency: self.destinationCurrency ?? "",
-                                            additionalText: additionalText)
+    private func createTransferSourceCellConfiguration(_ isSelectedTransferSource: Bool,
+                                                       _ transferSourceType: TransferSourceType,
+                                                       _ token: String,
+                                                       _ additionalText: String? = nil) {
+        let configuration = TransferSourceCellConfiguration(isSelectedTransferSource: isSelectedTransferSource,
+                                                            type: transferSourceType,
+                                                            token: token,
+                                                            title: transferSourceType == .user
+                                                                ? "mobileAvailableFunds".localized() :
+                                                                "prepaid_card".localized(),
+                                                            fontIcon: transferSourceType == .user
+                                                                ? HyperwalletIconContent.bankAccount.rawValue :
+                                                                HyperwalletIconContent.prepaidCard.rawValue)
+        configuration.additionalText = additionalText
+        configuration.availableBalance = availableBalance
+        configuration.destinationCurrency = destinationCurrency
+        transferSourceCellConfigurations.append(configuration)
     }
 
     private func loadAllAvailableSources() {
         view?.showLoading()
         Hyperwallet.shared.getConfiguration { configuration, _ in
-            if let configuration = configuration {
-                // if program model != (PAY2CARD_MODEL && CARD_ONLY_MODEL)
-                self.createTransferSourceCellConfiguration(token: configuration.userToken,
-                                                           title: "availableFunds".localized(),
-                                                           fontIcon: HyperwalletIconContent.bankAccount.rawValue,
-                                                           additionalText: nil)
-                //self.selectedSourceToken = configuration.userToken
-                self.prepaidCardRepository
-                    .listPrepaidCards(queryParam: self.setUpPrepaidCardQueryParam()) { [weak self] (result) in
-                    guard let strongSelf = self, let view = strongSelf.view else {
-                        return
+            if let configuration = configuration,
+                let programModel = configuration.programModel,
+                let programModelEnum = HyperwalletProgramModel(rawValue: programModel),
+                !programModelEnum.isPay2CardOrCardOnlyModel() {
+                    self.createTransferSourceCellConfiguration(true, .user, configuration.userToken)
+            }
+            self.prepaidCardRepository
+                .listPrepaidCards(queryParam: self.setUpPrepaidCardQueryParam()) { [weak self] (result) in
+                guard let strongSelf = self, let view = strongSelf.view else {
+                    return
+                }
+                strongSelf.view?.hideLoading()
+                switch result {
+                case .success(let pageList):
+                    var isSelectedTransferSource = false
+                    if strongSelf.transferSourceCellConfigurations.isEmpty {
+                        isSelectedTransferSource = true
                     }
-                    strongSelf.view?.hideLoading()
-                    switch result {
-                    case .success(let pageList):
-                        if let prepaidCard = pageList?.data?.first, let type = prepaidCard.type {
-                            if strongSelf.transferSourceCellConfiguration == nil {
-                                strongSelf
-                                    .createTransferSourceCellConfiguration(token: prepaidCard.token ?? "",
-                                                                           title: type.lowercased().localized(),
-                                                                           fontIcon:
-                                        HyperwalletIconContent.prepaidCard.rawValue,
-                                                                           additionalText:
-                                        prepaidCard.formattedCardBrandCardNumber)
-                                strongSelf.prepaidCards = pageList?.data
-                                if pageList?.data?.count ?? 0 > 1 {
-                                    strongSelf.isTransferFromSelectionAvailable = true
-                                }
-                            } else {
-                                strongSelf.isTransferFromSelectionAvailable = true
-                            }
-                            strongSelf.loadTransferMethods()
-                        } else {
-                            view.showAlert(message: "noTransferFromSourceAvailable".localized())
-                            return
-                        }
 
-                    case .failure(let error):
-                        view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
-                            strongSelf.loadAllAvailableSources()
+                    if let prepaidCards = pageList?.data {
+                        prepaidCards.forEach { prepaidCard in
+                            strongSelf
+                                .createTransferSourceCellConfiguration(isSelectedTransferSource,
+                                                                       .prepaidCard,
+                                                                       prepaidCard.token ?? "",
+                                                                       prepaidCard.formattedCardBrandCardNumber)
+                            isSelectedTransferSource = false
                         }
+                    } else {
+                        view.showAlert(message: "noTransferFromSourceAvailable".localized())
                         return
                     }
+                    strongSelf.loadTransferMethods()
+
+                case .failure(let error):
+                    view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
+                        strongSelf.loadAllAvailableSources()
                     }
+                    return
+                }
             }
         }
     }
@@ -277,15 +276,17 @@ final class CreateTransferPresenter {
                 }
 
             case .success(let result):
-                if strongSelf.selectedTransferMethod == nil {
-                    var transferMethods = result?.data
-                    strongSelf.prepaidCards?.forEach { prepaidCard in
-                        if prepaidCard.token == transferMethods?.first?.token {
-                            transferMethods?.removeFirst()
-                        }
-                    }
-
-                    strongSelf.selectedTransferMethod = transferMethods?.first
+                var transferMethods = result?.data
+                if strongSelf.transferSourceCellConfigurations.first(where: {
+                    $0.isSelected
+                })?.type == .prepaidCard {
+                    let prepaidCardType = HyperwalletTransferMethod.TransferMethodType.prepaidCard.rawValue
+                    transferMethods?.removeAll(where: {
+                        $0.type == prepaidCardType
+                    })
+                }
+                if strongSelf.selectedTransferDestination == nil {
+                    strongSelf.selectedTransferDestination = transferMethods?.first
                 }
                 strongSelf.createInitialTransfer()
             }
@@ -293,8 +294,9 @@ final class CreateTransferPresenter {
     }
 
     private func createInitialTransfer() {
-        guard let sourceToken = transferSourceCellConfiguration?.token,
-            let destinationToken = selectedTransferMethod?.token,
+        guard let sourceToken =
+            transferSourceCellConfigurations.first(where: { $0.isSelected })?.token,
+            let destinationToken = selectedTransferDestination?.token,
             let destinationCurrency = destinationCurrency else {
                 initializeSections()
                 view?.reloadData()
@@ -320,9 +322,10 @@ final class CreateTransferPresenter {
 
             case .success(let transfer):
                 strongSelf.availableBalance = transfer?.destinationAmount
-                strongSelf.transferSourceCellConfiguration?.availableBalance = transfer?.destinationAmount
-                strongSelf.transferSourceCellConfiguration?.destinationCurrency =
-                    strongSelf.selectedTransferMethod?.transferMethodCurrency
+                strongSelf.transferSourceCellConfigurations.forEach {
+                    $0.availableBalance = transfer?.destinationAmount
+                    $0.destinationCurrency = strongSelf.selectedTransferDestination?.transferMethodCurrency
+                }
             }
             strongSelf.initializeSections()
             view.reloadData()
@@ -335,8 +338,9 @@ final class CreateTransferPresenter {
             return
         }
 
-        if let sourceToken = transferSourceCellConfiguration?.token,
-            let destinationToken = selectedTransferMethod?.token,
+        if let sourceToken =
+            transferSourceCellConfigurations.first(where: { $0.isSelected })?.token,
+            let destinationToken = selectedTransferDestination?.token,
             let destinationCurrency = destinationCurrency {
             view.showLoading()
             let transfer = HyperwalletTransfer.Builder(clientTransferId: clientTransferId,

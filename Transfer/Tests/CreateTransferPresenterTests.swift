@@ -98,7 +98,7 @@ class CreateTransferTests: XCTestCase {
         XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
         XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
         XCTAssertFalse(mockView.isShowErrorPerformed, "showError should not be performed")
-        XCTAssertNotNil(presenter.selectedTransferMethod, "selectedTransferMethod should not be nil")
+        XCTAssertNotNil(presenter.selectedTransferDestination, "selectedTransferMethod should not be nil")
     }
 
     func testLoadCreateTransfer_sourceTokenIsNotNil() {
@@ -106,7 +106,7 @@ class CreateTransferTests: XCTestCase {
         XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
         XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
         XCTAssertFalse(mockView.isShowErrorPerformed, "showError should not be performed")
-        XCTAssertNotNil(presenter.selectedTransferMethod, "selectedTransferMethod should not be nil")
+        XCTAssertNotNil(presenter.selectedTransferDestination, "selectedTransferMethod should not be nil")
     }
 
     func testLoadCreateTransfer_getUser_success() {
@@ -114,7 +114,7 @@ class CreateTransferTests: XCTestCase {
         XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
         XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
         XCTAssertFalse(mockView.isShowErrorPerformed, "showError should not be performed")
-        XCTAssertNotNil(presenter.selectedTransferMethod, "selectedTransferMethod should not be nil")
+        XCTAssertNotNil(presenter.selectedTransferDestination, "selectedTransferMethod should not be nil")
     }
 
     func testLoadCreateTransfer_getUser_failure() {
@@ -123,7 +123,7 @@ class CreateTransferTests: XCTestCase {
         XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
         XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
         XCTAssertTrue(mockView.isShowErrorPerformed, "showError should be performed")
-        XCTAssertNil(presenter.selectedTransferMethod, "selectedTransferMethod should be nil")
+        XCTAssertNil(presenter.selectedTransferDestination, "selectedTransferMethod should be nil")
     }
 
     func testLoadCreateTransfer_selectedTransferMethodIsNil() {
@@ -176,7 +176,7 @@ class CreateTransferTests: XCTestCase {
         XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
         XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
         XCTAssertTrue(mockView.isShowErrorPerformed, "showError should be performed")
-        XCTAssertNil(presenter.selectedTransferMethod, "selectedTransferMethod should be nil")
+        XCTAssertNil(presenter.selectedTransferDestination, "selectedTransferMethod should be nil")
     }
 
     func testLoadCreateTransfer_createInitialQuote_failure() {
@@ -185,7 +185,7 @@ class CreateTransferTests: XCTestCase {
         XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
         XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
         XCTAssertTrue(mockView.isShowErrorPerformed, "showError should be performed")
-        XCTAssertNotNil(presenter.selectedTransferMethod, "selectedTransferMethod should not be nil")
+        XCTAssertNotNil(presenter.selectedTransferDestination, "selectedTransferMethod should not be nil")
         XCTAssertNil(presenter.availableBalance, "availableBalance should be nil")
     }
 

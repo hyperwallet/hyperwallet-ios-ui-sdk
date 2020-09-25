@@ -22,37 +22,29 @@ import Common
 import HyperwalletSDK
 import UIKit
 
-/// Lists user's transfer methods
+/// Lists user's transfer from sources
 final class ListTransferSourceController: UITableViewController {
     private var presenter: ListTransferSourcePresenter!
     private var processingView: ProcessingView?
     private var spinnerView: SpinnerView?
-    private lazy var selectTransferMethodCoordinator = getSelectTransferMethodCoordinator()
 
     override public func viewDidLoad() {
         super.viewDidLoad()
         initializePresenter()
         setupTransferMethodTableView()
-        presenter.listTransferMethods()
     }
 
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationItem.backBarButtonItem = UIBarButtonItem.back
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
-                                                            target: self,
-                                                            action: #selector(didTapAddButton))
         titleDisplayMode(.never, for: "mobileTransferFromHeader".localized())
-        scrollToSelectedRow()
-    }
-
-    @objc
-    private func didTapAddButton(sender: AnyObject) {
-        navigateToTransferMethodIfInitialized()
     }
 
     private func initializePresenter() {
-        presenter = ListTransferSourcePresenter(view: self)
+        if let data = initializationData?[InitializationDataField.transferSources]
+            as? [TransferSourceCellConfiguration] {
+            presenter = ListTransferSourcePresenter(transferSources: data)
+        }
     }
 
     // MARK: set up list of transfer methods table view
@@ -64,72 +56,6 @@ final class ListTransferSourceController: UITableViewController {
         tableView.register(ListTransferSourceCell.self,
                            forCellReuseIdentifier: ListTransferSourceCell.reuseIdentifier)
         tableView.backgroundColor = Theme.UITableViewController.backgroundColor
-    }
-
-    private func getSelectTransferMethodCoordinator() -> HyperwalletCoordinator? {
-        return HyperwalletCoordinatorFactory.shared.getHyperwalletCoordinator(hyperwalletCoordinatorType:
-            .selectTransferMethodType)
-    }
-
-    private func navigateToTransferMethodIfInitialized() {
-        if let transferMethodCoordinator = selectTransferMethodCoordinator {
-            transferMethodCoordinator.start(initializationData: nil, parentController: self)
-            transferMethodCoordinator.navigate()
-        } else {
-            HyperwalletUtilViews.showAlert(self,
-                                           title: "error".localized(),
-                                           message: "transfer_error_no_transfer_method_module_initialized".localized())
-        }
-    }
-
-    private func scrollToSelectedRow() {
-        let transferMethods = presenter.sectionData
-        var selectedItemIndex: Int?
-
-        if let selectedTransferMethod = initializationData?[InitializationDataField.transferMethod]
-            as? HyperwalletTransferMethod {
-            for index in transferMethods.indices where transferMethods[index].token == selectedTransferMethod.token {
-                selectedItemIndex = index
-                break
-            }
-        }
-
-        guard let indexToScrollTo = selectedItemIndex, indexToScrollTo < transferMethods.count else {
-            return
-        }
-
-        DispatchQueue.main.async {
-            self.tableView.scrollToRow(at: IndexPath(row: indexToScrollTo, section: 0), at: .middle, animated: false)
-        }
-    }
-}
-
-// MARK: `ListTransferSourceView` delegate
-extension ListTransferSourceController: ListTransferSourceView {
-    func hideLoading() {
-        if let spinnerView = self.spinnerView {
-            HyperwalletUtilViews.removeSpinner(spinnerView)
-        }
-    }
-
-    func showError(_ error: HyperwalletErrorType,
-                   pageName: String,
-                   pageGroup: String,
-                   _ retry: (() -> Void)?) {
-        let errorView = ErrorView(viewController: self,
-                                  error: error,
-                                  pageName: pageName,
-                                  pageGroup: pageGroup)
-        errorView.show(retry)
-    }
-
-    func showLoading() {
-        spinnerView = HyperwalletUtilViews.showSpinner(view: view)
-    }
-
-    /// Loads the transfer methods
-    func reloadData() {
-        tableView.reloadData()
     }
 }
 
@@ -144,21 +70,26 @@ extension ListTransferSourceController {
                                                  for: indexPath)
         cell.accessoryType = .none
 
-        if let transferMethod = initializationData?[InitializationDataField.transferMethod]
-            as? HyperwalletTransferMethod, transferMethod.token == presenter.sectionData[indexPath.row].token {
+        if let selectedTransferSource = initializationData?[InitializationDataField.selectedTransferSource]
+            as? TransferSourceCellConfiguration,
+            selectedTransferSource.token == presenter.sectionData[indexPath.row].token {
             cell.accessoryType = .checkmark
         }
 
         if let listTransferSourceCell = cell as? ListTransferSourceCell {
-            listTransferSourceCell.configure(transferMethod: presenter.sectionData[indexPath.row])
+            listTransferSourceCell.configure(transferSourceCellConfiguration: presenter.sectionData[indexPath.row])
         }
         return cell
     }
 
     /// To select the transfer method
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let hyperwalletTransferMethod = presenter.sectionData[indexPath.row]
-        flowDelegate?.didFlowComplete(with: hyperwalletTransferMethod)
+        let selectedTransferSoource = presenter.sectionData[indexPath.row]
+        flowDelegate?.didFlowComplete(with: selectedTransferSoource)
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return Theme.Cell.largeHeight
     }
 
     override public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -167,10 +98,6 @@ extension ListTransferSourceController {
 
     override public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return CGFloat.leastNormalMagnitude
-    }
-
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return Theme.Cell.largeHeight
     }
 }
 

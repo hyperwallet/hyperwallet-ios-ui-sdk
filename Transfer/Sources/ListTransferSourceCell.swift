@@ -60,25 +60,44 @@ final class ListTransferSourceCell: UITableViewCell {
 extension ListTransferSourceCell {
     /// Fill `ListTransferSourceCell` related fields
     ///
-    /// - Parameter transferMethod: a transfer method which contains the info needs to be filled to the cell.
-    func configure(transferMethod: HyperwalletTransferMethod) {
-        textLabel?.accessibilityIdentifier = "transferSourceTitleLabel"
-        textLabel?.text = transferMethod.type?.lowercased().localized()
+    /// - Parameter TransferSourceCellConfiguration:
+    /// a transfer source which contains the info needs to be filled to the cell.
+    func configure(transferSourceCellConfiguration: TransferSourceCellConfiguration) {
+        configure(title: transferSourceCellConfiguration.title,
+                  additionalInfo: transferSourceCellConfiguration.additionalText,
+                  currency: transferSourceCellConfiguration.destinationCurrency,
+                  availableBalance: transferSourceCellConfiguration.availableBalance,
+                  fontIcon: transferSourceCellConfiguration.fontIcon)
+    }
+
+    private func configure(title: String,
+                           additionalInfo: String? = nil,
+                           currency: String?,
+                           availableBalance: String?,
+                           fontIcon: String) {
+        textLabel?.text = title
         textLabel?.adjustsFontForContentSizeCategory = true
         textLabel?.numberOfLines = 0
         textLabel?.lineBreakMode = .byWordWrapping
-
-        detailTextLabel?.accessibilityIdentifier = "transferSourceSubtitleLabel"
-        detailTextLabel?.attributedText = formatDetails(
-            transferMethodCountry:
-                Locale.current.localizedString(forRegionCode: transferMethod.transferMethodCountry ?? "") ?? "",
-            additionalInfo: transferMethod.value)
-        detailTextLabel?.adjustsFontForContentSizeCategory = true
-        detailTextLabel?.numberOfLines = 0
-        detailTextLabel?.lineBreakMode = .byWordWrapping
+        textLabel?.accessibilityIdentifier = "transferSourceTitleLabel"
+        if let currency = currency, let availableBalance = availableBalance {
+            let locale = NSLocale(localeIdentifier: currency)
+            let currencySymbol = locale.displayName(forKey: NSLocale.Key.currencySymbol, value: currency)
+            if let currencySymbol = currencySymbol {
+                detailTextLabel?.attributedText = formatDetails(subtitle: String(format: "total".localized(),
+                                                                                 currencySymbol,
+                                                                                 availableBalance,
+                                                                                 currency),
+                                                                additionalInfo: additionalInfo)
+                detailTextLabel?.numberOfLines = 0
+                detailTextLabel?.adjustsFontForContentSizeCategory = true
+                detailTextLabel?.lineBreakMode = .byWordWrapping
+                detailTextLabel?.accessibilityIdentifier = "transferSourceSubtitleLabel"
+            }
+        }
 
         if !UIFont.isLargeSizeCategory {
-            let icon = UIImage.fontIcon(HyperwalletIcon.of(transferMethod.type ?? "").rawValue,
+            let icon = UIImage.fontIcon(fontIcon,
                                         Theme.Icon.frame,
                                         CGFloat(Theme.Icon.size),
                                         Theme.Icon.primaryColor)
@@ -87,13 +106,14 @@ extension ListTransferSourceCell {
         }
     }
 
-    func formatDetails(transferMethodCountry: String, additionalInfo: String?) -> NSAttributedString {
+    private func formatDetails(subtitle: String, additionalInfo: String? = nil) -> NSAttributedString {
         let attributedText = NSMutableAttributedString()
-        attributedText.append(value: String(format: "%@\n", transferMethodCountry),
+        let stringFormat = additionalInfo != nil ? "%@\n" : "%@"
+        attributedText.append(value: String(format: stringFormat, subtitle),
                               font: subTitleLabelFont,
-                              color: Theme.Label.subtitleColor)
+                              color: subTitleLabelColor)
         if let additionalInfo = additionalInfo {
-            attributedText.append(value: additionalInfo, font: subTitleLabelFont, color: Theme.Label.subtitleColor)
+            attributedText.append(value: additionalInfo, font: subTitleLabelFont, color: subTitleLabelColor)
         }
 
         return attributedText

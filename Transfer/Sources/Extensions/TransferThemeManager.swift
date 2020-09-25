@@ -30,6 +30,8 @@ public extension ThemeManager {
         applyToTransferNotesCell()
         applyToTransferAllFundsCell()
         applyToTransferAmountCell()
+        applyToListTransferSourceCell()
+        applyToListTransferDestinationCell()
         applyToScheduleTransferSummaryCell()
         applyToScheduleForeignExchangeCell()
     }
@@ -50,13 +52,20 @@ public extension ThemeManager {
         proxy.subTitleLabelColor = Theme.Label.subtitleColor
     }
 
+    private static func applyToListTransferSourceCell() {
+        let proxy = ListTransferSourceCell.appearance()
+        proxy.titleLabelFont = Theme.Label.titleFont
+        proxy.titleLabelColor = Theme.Label.color
+        proxy.subTitleLabelFont = Theme.Label.subtitleFont
+        proxy.subTitleLabelColor = Theme.Label.subtitleColor
+    }
+
     private static func applyToListTransferDestinationCell() {
         let proxy = ListTransferDestinationCell.appearance()
         proxy.titleLabelFont = Theme.Label.titleFont
         proxy.titleLabelColor = Theme.Label.color
         proxy.subTitleLabelFont = Theme.Label.subtitleFont
         proxy.subTitleLabelColor = Theme.Label.subtitleColor
-        proxy.tintColor = Theme.Cell.tintColor
     }
 
     private static func applyToTransferButtonCell() {

@@ -22,13 +22,32 @@ import Common
 import HyperwalletSDK
 import UIKit
 
-struct TransferSourceCellConfiguration {
+enum TransferSourceType: String {
+    case user
+    case prepaidCard
+}
+
+class TransferSourceCellConfiguration {
+    let type: TransferSourceType
     let token: String
     let title: String
     let fontIcon: String
+    var isSelected: Bool
     var availableBalance: String?
     var destinationCurrency: String?
     var additionalText: String?
+
+    init(isSelectedTransferSource: Bool,
+         type: TransferSourceType,
+         token: String,
+         title: String,
+         fontIcon: String) {
+        self.isSelected = isSelectedTransferSource
+        self.type = type
+        self.token = token
+        self.title = title
+        self.fontIcon = fontIcon
+    }
 }
 
 final class TransferSourceCell: UITableViewCell {
@@ -71,21 +90,6 @@ extension TransferSourceCell {
                   currency: transferSourceCellConfiguration.destinationCurrency,
                   availableBalance: transferSourceCellConfiguration.availableBalance,
                   fontIcon: transferSourceCellConfiguration.fontIcon)
-    }
-
-    func configure(prepaidCard: HyperwalletPrepaidCard, availableBalance: String?, currency: String?) {
-        configure(title: prepaidCard.title ?? "prepaid_card".localized(),
-                  additionalInfo: prepaidCard.formattedCardBrandCardNumber,
-                  currency: currency,
-                  availableBalance: availableBalance,
-                  fontIcon: HyperwalletIcon.of(prepaidCard.type ?? "").rawValue)
-    }
-
-    func configure(_ title: String, availableBalance: String?, currency: String?) {
-        configure(title: title,
-                  currency: currency,
-                  availableBalance: availableBalance,
-                  fontIcon: HyperwalletIconContent.bankAccount.rawValue)
     }
 
     private func configure(title: String,

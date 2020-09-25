@@ -53,8 +53,8 @@ final class ListTransferDestinationController: UITableViewController {
 
     private func initializePresenter() {
         presenter = ListTransferDestinationPresenter(view: self,
-                                                     prepaidCardTokensToBeRemovedFromList:
-            initializationData?[InitializationDataField.prepaidCardTokens] as? [String])
+                                                     selectedTransferSourceType:
+            initializationData?[InitializationDataField.selectedSourceType] as? String)
     }
 
     // MARK: set up list of transfer methods table view

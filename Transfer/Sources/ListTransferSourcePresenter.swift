@@ -17,59 +17,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import HyperwalletSDK
-#if !COCOAPODS
-import TransferMethodRepository
-#endif
-
-protocol ListTransferSourceView: class {
-    func hideLoading()
-    func showError(_ error: HyperwalletErrorType,
-                   pageName: String,
-                   pageGroup: String,
-                   _ retry: (() -> Void)?)
-    func showLoading()
-    func reloadData()
-}
 
 final class ListTransferSourcePresenter {
-    private weak var view: ListTransferSourceView?
     private let pageGroup = "transfer-funds"
     private let pageName = "trasfer-funds:create:list-transfer-source"
-    private(set) var sectionData = [HyperwalletTransferMethod]()
-    private lazy var transferMethodRepository = {
-        TransferMethodRepositoryFactory.shared.transferMethodRepository()
-    }()
+    private(set) var sectionData: [TransferSourceCellConfiguration]
 
     /// Initialize ListTransferSourcePresenter
-    init(view: ListTransferSourceView) {
-        self.view = view
-    }
-
-    /// Get the list of all Activated transfer methods from core SDK
-    func listTransferMethods() {
-        view?.showLoading()
-
-        transferMethodRepository.listTransferMethods { [weak self] (result) in
-            guard let strongSelf = self, let view = strongSelf.view else {
-                return
-            }
-            view.hideLoading()
-
-            switch result {
-            case .failure(let error):
-                view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
-                    strongSelf.listTransferMethods()
-                }
-
-            case .success(let resultPageList):
-                if let data = resultPageList?.data {
-                    strongSelf.sectionData = data
-                } else {
-                    strongSelf.sectionData = []
-                }
-
-                view.reloadData()
-            }
-        }
+    init(transferSources: [TransferSourceCellConfiguration]) {
+        self.sectionData = transferSources
     }
 }

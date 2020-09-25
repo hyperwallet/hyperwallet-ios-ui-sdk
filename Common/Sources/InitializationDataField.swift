@@ -45,6 +45,10 @@ public enum InitializationDataField: String {
     case didFxQuoteChange
     /// Boolean value to check whether to show all the available sources for receipts/ transfers
     case showAllAvailableSources
-    /// Prepaid Card Tokens
-    case prepaidCardTokens
+    /// Selected Source Type
+    case selectedSourceType
+    /// Selected Transfer Source
+    case selectedTransferSource
+    /// Transfer Sources
+    case transferSources
 }

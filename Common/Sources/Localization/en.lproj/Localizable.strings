@@ -204,6 +204,7 @@
 "mobileAddTransferMethod" = "Add transfer method";
 "mobileTransferMethodsHeader" = "Transfer methods";
 "mobileTransferFromHeader" = "Transfer From";
+"mobileAvailableFunds" = "Available Funds";
 "mobileFXlabel" = "FOREIGN EXCHANGE";
 "mobileSummaryLabel" = "SUMMARY";
 "transfer" = "Transfer";

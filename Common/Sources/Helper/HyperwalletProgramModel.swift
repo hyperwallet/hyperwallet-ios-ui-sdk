@@ -18,12 +18,14 @@
 
 import Foundation
 
-enum HyperwalletProgramModel: String {
+/// Hyperwallet Program Model
+public enum HyperwalletProgramModel: String {
     case walletModel = "WALLET_MODEL"
     case pay2CardModel = "PAY2CARD_MODEL"
     case cardOnlyModel = "CARD_ONLY_MODEL"
 
-    func isPay2CardOrCardOnlyModel() -> Bool {
+    /// returns true if Program Model is either pay2Card or CardOnly
+    public func isPay2CardOrCardOnlyModel() -> Bool {
         return self == .pay2CardModel || self == .cardOnlyModel
     }
 }
