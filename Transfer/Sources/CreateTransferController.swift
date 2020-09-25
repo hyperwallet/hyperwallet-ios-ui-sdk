@@ -218,17 +218,6 @@ extension CreateTransferController {
         if let transferSourceCellConfiguration = presenter.transferSourceCellConfiguration {
             tableViewCell.configure(transferSourceCellConfiguration: transferSourceCellConfiguration)
         }
-
-//        if let selectedSourceToken = presenter.selectedSourceToken, selectedSourceToken.starts(with: "trm"),
-//            let prepaidCard = presenter.prepaidCards?.first(where: { $0.token == selectedSourceToken }) {
-//            tableViewCell.configure(prepaidCard: prepaidCard,
-//                                    availableBalance: presenter.availableBalance ?? "0",
-//                                    currency: presenter.destinationCurrency)
-//        } else {
-//            tableViewCell.configure("Available funds",
-//                                    availableBalance: presenter.availableBalance ?? "0",
-//                                    currency: presenter.destinationCurrency)
-//        }
     }
 
     private func getDestinationSectionCellConfiguration(_ cell: UITableViewCell, _ indexPath: IndexPath) {
@@ -392,6 +381,13 @@ extension CreateTransferController: CreateTransferView {
         let listTransferDestinationController = ListTransferDestinationController()
         var initializationData = [InitializationDataField: Any]()
         initializationData[InitializationDataField.transferMethod] = presenter.selectedTransferMethod
+        if presenter.transferSourceCellConfiguration?.token.starts(with: "trm") ?? false {
+            var prepaidCardTokens = [String]()
+            presenter.prepaidCards?.forEach { prepaidCard in
+                prepaidCardTokens.append(prepaidCard.token ?? "")
+            }
+            initializationData[InitializationDataField.prepaidCardTokens] = prepaidCardTokens
+        }
         listTransferDestinationController.initializationData = initializationData
         listTransferDestinationController.flowDelegate = self
         show(listTransferDestinationController, sender: self)

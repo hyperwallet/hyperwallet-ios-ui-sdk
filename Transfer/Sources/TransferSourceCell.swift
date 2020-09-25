@@ -28,7 +28,7 @@ struct TransferSourceCellConfiguration {
     let fontIcon: String
     var availableBalance: String?
     var destinationCurrency: String?
-    let additionalText: String?
+    var additionalText: String?
 }
 
 final class TransferSourceCell: UITableViewCell {

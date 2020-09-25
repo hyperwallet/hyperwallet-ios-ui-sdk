@@ -80,7 +80,7 @@ class CreateTransferTests: XCTestCase {
         createTransferResult.setUpRequest()
         getUserResultType.setUpRequest()
 
-        presenter = CreateTransferPresenter(clientTransferId, sourceToken, view: mockView)
+        presenter = CreateTransferPresenter(clientTransferId, sourceToken, false, view: mockView)
         var expectations = [XCTestExpectation]()
 
         if mockView.stopOnError {
@@ -357,6 +357,7 @@ class MockCreateTransferView: CreateTransferView {
     var isNotifyTransferCreatedPerformed = false
     var isShowCreateTransferPerformed = false
     var isShowErrorPerformed = false
+    var isShowAlertPerformed = false
     var isShowGenericTableViewPerformed = false
     var isShowLoadingPerformed = false
     var isShowScheduleTransferPerformed = false
@@ -382,6 +383,10 @@ class MockCreateTransferView: CreateTransferView {
     func reloadData() {
         isShowCreateTransferPerformed = true
         loadCreateTransferExpectation?.fulfill()
+    }
+
+    func showAlert(message: String?) {
+        isShowAlertPerformed = true
     }
 
     func showError(_ error: HyperwalletErrorType,
@@ -423,6 +428,7 @@ class MockCreateTransferView: CreateTransferView {
         isNotifyTransferCreatedPerformed = false
         isShowCreateTransferPerformed = false
         isShowErrorPerformed = false
+        isShowAlertPerformed = false
         isShowGenericTableViewPerformed = false
         isShowLoadingPerformed = false
         isShowScheduleTransferPerformed = false

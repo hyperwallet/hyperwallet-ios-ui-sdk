@@ -36,13 +36,15 @@ final class ListTransferDestinationPresenter {
     private let pageGroup = "transfer-funds"
     private let pageName = "trasfer-funds:create:list-transfer-destination"
     private(set) var sectionData = [HyperwalletTransferMethod]()
+    private var prepaidCardTokensToBeRemovedFromList: [String]?
     private lazy var transferMethodRepository = {
         TransferMethodRepositoryFactory.shared.transferMethodRepository()
     }()
 
     /// Initialize ListTransferDestinationPresenter
-    init(view: ListTransferDestinationView) {
+    init(view: ListTransferDestinationView, prepaidCardTokensToBeRemovedFromList: [String]? = nil) {
         self.view = view
+        self.prepaidCardTokensToBeRemovedFromList = prepaidCardTokensToBeRemovedFromList
     }
 
     /// Get the list of all Activated transfer methods from core SDK
@@ -62,10 +64,15 @@ final class ListTransferDestinationPresenter {
                 }
 
             case .success(let resultPageList):
-                if let data = resultPageList?.data {
+                if var data = resultPageList?.data {
+                    strongSelf.prepaidCardTokensToBeRemovedFromList?.forEach { token in
+                        if token == data.first?.token {
+                            data.removeFirst()
+                        }
+                    }
                     strongSelf.sectionData = data
                 } else {
-                    strongSelf.sectionData = []
+                    strongSelf.sectionData.removeAll()
                 }
 
                 view.reloadData()
