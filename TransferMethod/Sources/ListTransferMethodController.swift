@@ -80,20 +80,24 @@ final class ListTransferMethodController: UITableViewController {
         if let listTransferMethodCell = cell as? ListTransferMethodCell {
             listTransferMethodCell.configure(transferMethod: presenter.sectionData[indexPath.row])
 
-            let icon = UIImage.fontIcon(HyperwalletIcon.of("TRASH").rawValue,
-                                        CGSize(width: 24, height: 25),
-                                        CGFloat(24),
-                                        UIColor(red: 0.17, green: 0.18, blue: 0.18, alpha: 1))
+            if !(presenter.sectionData[indexPath.row].isItPrepaidCard()) {
+                let icon = UIImage.fontIcon(HyperwalletIcon.of("TRASH").rawValue,
+                                            CGSize(width: 24, height: 25),
+                                            CGFloat(24),
+                                            UIColor(red: 0.17, green: 0.18, blue: 0.18, alpha: 1))
 
-            listTransferMethodCell.accessoryView = UIImageView(image: icon)
+                listTransferMethodCell.accessoryView = UIImageView(image: icon)
+            }
         }
         return cell
     }
 
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        showConfirmationAlert(title: "mobileRemoveEAconfirm".localized(),
+        if !(presenter.sectionData[indexPath.row].isItPrepaidCard()) {
+            showConfirmationAlert(title: "mobileRemoveEAconfirm".localized(),
                               message: "mobileAreYouSure".localized(),
                               transferMethodIndex: indexPath.row)
+        }
         tableView.deselectRow(at: indexPath, animated: true)
     }
 

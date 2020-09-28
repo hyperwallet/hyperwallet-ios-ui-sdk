@@ -62,10 +62,16 @@ extension ListTransferMethodCell {
         textLabel?.numberOfLines = 0
         textLabel?.lineBreakMode = .byWordWrapping
         textLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellTextLabel"
-        detailTextLabel?.attributedText = formatDetails(
+        if transferMethod.isItPrepaidCard() {
+            detailTextLabel?.attributedText = formatDetails(
+            transferMethodCountry: transferMethod.value ?? "",
+            additionalInfo: "manage_prepaid_card_message".localized())
+        } else {
+            detailTextLabel?.attributedText = formatDetails(
             transferMethodCountry:
                 Locale.current.localizedString(forRegionCode: transferMethod.transferMethodCountry ?? "") ?? "",
             additionalInfo: transferMethod.value)
+        }
         detailTextLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellDetailTextLabel"
         detailTextLabel?.adjustsFontForContentSizeCategory = true
         detailTextLabel?.numberOfLines = 0
