@@ -102,7 +102,7 @@ extension TransferButtonCell {
 
     @objc dynamic var buttonTitleLabelColor: UIColor! {
         get { return button.titleLabel?.textColor }
-        set { button.titleLabel?.textColor = newValue }
+        set { button.setTitleColor(newValue, for: .normal) }
     }
 
     @objc dynamic var buttonBackgroundColor: UIColor! {
