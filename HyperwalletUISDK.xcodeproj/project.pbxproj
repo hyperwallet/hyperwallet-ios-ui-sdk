@@ -176,6 +176,8 @@
 		980B9AEB251D446400653D1C /* ListTransferSourcePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980B9AE8251D446400653D1C /* ListTransferSourcePresenter.swift */; };
 		980B9AEC251D446400653D1C /* ListTransferSourceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980B9AE9251D446400653D1C /* ListTransferSourceCell.swift */; };
 		980B9AED251D446400653D1C /* ListTransferSourceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980B9AEA251D446400653D1C /* ListTransferSourceController.swift */; };
+		980C2E9525224D8300DFDC94 /* GetPrepaidCardSuccessResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 980C2E9225224D6D00DFDC94 /* GetPrepaidCardSuccessResponse.json */; };
+		980C2E9625224F6E00DFDC94 /* PrepaidCardRepositoryRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980C2E8D25224C8200DFDC94 /* PrepaidCardRepositoryRequestHelper.swift */; };
 		984D82DB24BE590000991DAD /* Insights.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EBD0C682375FAE400569342 /* Insights.framework */; };
 		984D82DC24BE590000991DAD /* Insights.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EBD0C682375FAE400569342 /* Insights.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		984D82FB24C25AAD00991DAD /* HyperwalletSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98FBC68923D8D8D90050E2B6 /* HyperwalletSDK.framework */; };
@@ -760,6 +762,8 @@
 		980B9AE8251D446400653D1C /* ListTransferSourcePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTransferSourcePresenter.swift; sourceTree = "<group>"; };
 		980B9AE9251D446400653D1C /* ListTransferSourceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTransferSourceCell.swift; sourceTree = "<group>"; };
 		980B9AEA251D446400653D1C /* ListTransferSourceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTransferSourceController.swift; sourceTree = "<group>"; };
+		980C2E8D25224C8200DFDC94 /* PrepaidCardRepositoryRequestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepaidCardRepositoryRequestHelper.swift; sourceTree = "<group>"; };
+		980C2E9225224D6D00DFDC94 /* GetPrepaidCardSuccessResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GetPrepaidCardSuccessResponse.json; sourceTree = "<group>"; };
 		98175428228DE42E0019159A /* ReceiptTransactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptTransactionCell.swift; sourceTree = "<group>"; };
 		98220B8B2265793700055E18 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		9826056722822E8A000CCA2D /* UIToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIToolbar.swift; sourceTree = "<group>"; };
@@ -1329,6 +1333,7 @@
 			children = (
 				4A2B94AA22F1C954000A0F14 /* CreateTransferResponse.json */,
 				075FCFEC22F2154700997A7A /* CreateTransferWithoutForeignExchangeResponse.json */,
+				980C2E9225224D6D00DFDC94 /* GetPrepaidCardSuccessResponse.json */,
 				4A2B949C22F1BC00000A0F14 /* ListTransferMethodSuccessResponse.json */,
 				98F3D75C230C67A800A8195F /* MultipleCurrenciesErrorResponse.json */,
 				98F3D75D230C67A800A8195F /* MultipleFXErrorResponse.json */,
@@ -1417,6 +1422,7 @@
 			isa = PBXGroup;
 			children = (
 				4A2B94A822F1C81F000A0F14 /* CreateTransferRequestHelper.swift */,
+				980C2E8D25224C8200DFDC94 /* PrepaidCardRepositoryRequestHelper.swift */,
 				4A2B94A422F1C7BD000A0F14 /* TransferMethodRepositoryRequestHelper.swift */,
 				078C6EFF22EF81A900CF81EE /* TransferRequestHelper.swift */,
 				4A2B949D22F1BD8E000A0F14 /* UserRepositoryRequestHelper.swift */,
@@ -2698,6 +2704,7 @@
 				4A2B94B522F1CB31000A0F14 /* UserIndividualResponse.json in Resources */,
 				075FCFEF22F2439800997A7A /* UnexpectedErrorResponse.json in Resources */,
 				4A2B94B322F1CB31000A0F14 /* CreateTransferResponse.json in Resources */,
+				980C2E9525224D8300DFDC94 /* GetPrepaidCardSuccessResponse.json in Resources */,
 				078C6EFE22EF815900CF81EE /* ScheduleTransferResponse.json in Resources */,
 				075FCFED22F2154700997A7A /* CreateTransferWithoutForeignExchangeResponse.json in Resources */,
 				078C6F0822EF967400CF81EE /* ScheduleTransferExpiredTransferResponse.json in Resources */,
@@ -3152,6 +3159,7 @@
 				4A9E9A0C22F4AD3700739150 /* TransferMethodRepositoryRequestHelper.swift in Sources */,
 				4A9E9A0D22F4AD3700739150 /* TransferRequestHelper.swift in Sources */,
 				4A9E9A0E22F4AD3700739150 /* UserRepositoryRequestHelper.swift in Sources */,
+				980C2E9625224F6E00DFDC94 /* PrepaidCardRepositoryRequestHelper.swift in Sources */,
 				2EBD0C4F2373902B00569342 /* HyperwalletTestHelper.swift in Sources */,
 				2EF70C72237F5482007E3844 /* HyperwalletInsightsMock.swift in Sources */,
 				B32FD83823DF66D700832544 /* ListTransferDestinationPresenterTests.swift in Sources */,

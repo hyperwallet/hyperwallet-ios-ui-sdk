@@ -22,7 +22,7 @@ import Common
 
 import HyperwalletSDK
 
-enum CreateTransferSectionHeader: String {
+enum CreateTransferSectionHeader: String, CaseIterable {
     case button, destination, notes, transferAll, amount, source
 }
 
