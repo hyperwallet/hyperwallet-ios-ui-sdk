@@ -208,7 +208,7 @@
 "prepaid_card_declined_authorization_fee" = "Declined Authorization Fee";
 "fispc" = "Purchase";
 "visa" = "Visa";
-"mastercard" = "MasterCard";
+"mastercard" = "Mastercard";
 
 // Receipt Detail
 "mobileTransactionDetailsHeader" = "Transaction details";
