@@ -250,7 +250,7 @@ final class CreateTransferPresenter {
                     }
                     return
                 }
-            }
+                }
         }
     }
 

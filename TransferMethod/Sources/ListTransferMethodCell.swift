@@ -62,7 +62,7 @@ extension ListTransferMethodCell {
         textLabel?.numberOfLines = 0
         textLabel?.lineBreakMode = .byWordWrapping
         textLabel?.accessibilityIdentifier = "ListTransferMethodTableViewCellTextLabel"
-        if transferMethod.isItPrepaidCard() {
+        if transferMethod.isPrepaidCard() {
             detailTextLabel?.attributedText = formatDetails(
             transferMethodCountry: transferMethod.value ?? "",
             additionalInfo: "manage_prepaid_card_message".localized())

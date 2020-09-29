@@ -42,7 +42,7 @@ class HyperwalletTransferMethodTests: XCTestCase {
         transferMethod.setField(key: HyperwalletTransferMethod.TransferMethodField.cardBrand.rawValue, value: "VISA")
         transferMethod.setField(key: HyperwalletTransferMethod.TransferMethodField.cardNumber.rawValue,
                                 value: "1111111100006789")
-        XCTAssertEqual(transferMethod.isItPrepaidCard(), true)
+        XCTAssertEqual(transferMethod.isPrepaidCard(), true)
         XCTAssertEqual(transferMethod.additionalInfo!, "Visa \u{2022}\u{2022}\u{2022}\u{2022} 6789")
     }
 

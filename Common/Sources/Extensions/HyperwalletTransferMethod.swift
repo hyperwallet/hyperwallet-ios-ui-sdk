@@ -44,9 +44,9 @@ extension HyperwalletTransferMethod: GenericCellConfiguration {
         case "PREPAID_CARD":
             let cardBrand = getField(TransferMethodField.cardBrand.rawValue)?.lowercased().localized() ?? ""
             let cardNumber = getField(TransferMethodField.cardNumber.rawValue)?.suffix(startAt: 4) ?? ""
-            let dots = Array(repeating: "\u{2022}", count: 4).joined()
-            return String(format: "%@ %@ %@", cardBrand, dots, cardNumber)
-            
+            let bullets = Array(repeating: "\u{2022}", count: 4).joined()
+            return String(format: "%@ %@ %@", cardBrand, bullets, cardNumber)
+
         default:
             return String(format: "%@%@",
                           "endingIn".localized(),
@@ -57,10 +57,5 @@ extension HyperwalletTransferMethod: GenericCellConfiguration {
 
     /// Checking for transfer method is prepaid card or not
     /// - Returns: True if transfer method is prepaid card
-    public func isItPrepaidCard() -> Bool {
-        if type == "PREPAID_CARD" {
-            return true
-        }
-        return false
-    }
+    public func isPrepaidCard() -> Bool { return type == TransferMethodType.prepaidCard.rawValue }
 }
