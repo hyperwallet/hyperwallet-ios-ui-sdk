@@ -1,6 +1,10 @@
 Changelog
 =========
 
+[1.0.0-beta09](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta09)
+-------------------
+- Increased API Response wait time
+
 [1.0.0-beta08](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta08)
 -------------------
 - Fixed Cocoapod Insights Integration issue
