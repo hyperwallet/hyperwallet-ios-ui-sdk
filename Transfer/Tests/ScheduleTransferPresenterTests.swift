@@ -86,31 +86,30 @@ class ScheduleTransferPresenterTests: XCTestCase {
     }
 
     public func testScheduleSectionData_allSections() {
-        XCTAssertEqual(presenter.sectionData.count, 5)
+        XCTAssertEqual(presenter.sectionData.count, 6)
         assertSourceSectionResult(sourceSection: presenter.sectionData.first!)
         assertDestinationSectionResult(destinationSection: presenter.sectionData[1])
-//        assertForeignExchangeSectionResult(foreignExchangeSection: presenter.sectionData[1])
-        assertSummarySectionResult(summarySection: presenter.sectionData[2])
-        assertNotesSectionResult(notesSection: presenter.sectionData[3])
+        assertForeignExchangeSectionResult(foreignExchangeSection: presenter.sectionData[2])
+        assertSummarySectionResult(summarySection: presenter.sectionData[3])
+        assertNotesSectionResult(notesSection: presenter.sectionData[4])
         assertButtonSectionResult(buttonSection: presenter.sectionData.last!)
     }
 
-    // Not showing Foreign Exchange Not for now
-//    public func testScheduleSectionData_withoutForeignExchangeAndNotesSection() {
-//        transfer = getTransfer(from: HyperwalletTestHelper
-//            .getDataFromJson("CreateTransferWithoutForeignExchangeResponse"))!
-//        presenter = ScheduleTransferPresenter(
-//            view: mockView,
-//            transferMethod: transferMethod,
-//            transfer: transfer,
-//            didFxQuoteChange: false,
-//            transferSourceCellConfiguration: configuration)
-//
-//        XCTAssertEqual(presenter.sectionData.count, 3)
-//        assertDestinationSectionResult(destinationSection: presenter.sectionData.first!)
-//        assertSummarySectionWithoutFeeResult(summarySection: presenter.sectionData[1])
-//        assertButtonSectionResult(buttonSection: presenter.sectionData.last!)
-//    }
+    public func testScheduleSectionData_withoutForeignExchangeAndNotesSection() {
+        transfer = getTransfer(from: HyperwalletTestHelper
+            .getDataFromJson("CreateTransferWithoutForeignExchangeResponse"))!
+        presenter = ScheduleTransferPresenter(
+            view: mockView,
+            transferMethod: transferMethod,
+            transfer: transfer,
+            didFxQuoteChange: false,
+            transferSourceCellConfiguration: configuration)
+
+        XCTAssertEqual(presenter.sectionData.count, 4)
+        assertDestinationSectionResult(destinationSection: presenter.sectionData[1])
+        assertSummarySectionWithoutFeeResult(summarySection: presenter.sectionData[2])
+        assertButtonSectionResult(buttonSection: presenter.sectionData.last!)
+    }
 
     public func testScheduleSectionData_FxChanged() {
         transfer = getTransfer(from: HyperwalletTestHelper
@@ -122,9 +121,9 @@ class ScheduleTransferPresenterTests: XCTestCase {
             didFxQuoteChange: true,
             transferSourceCellConfiguration: configuration)
 
-        XCTAssertEqual(presenter.sectionData.count, 5)
+        XCTAssertEqual(presenter.sectionData.count, 6)
         assertDestinationSectionResult(destinationSection: presenter.sectionData.first!)
-        assertSummarySectionWithFxChange(summarySection: presenter.sectionData[2])
+        assertSummarySectionWithFxChange(summarySection: presenter.sectionData[3])
     }
 
     private func getTransfer(from jsonData: Data) -> HyperwalletTransfer? {
@@ -149,15 +148,15 @@ class ScheduleTransferPresenterTests: XCTestCase {
         XCTAssertNotNil(destinationSection.cellIdentifier,
                         "The cellIdentifier of Destination section should not be nil")
     }
-    // Not showing Foreign Exchange Not for now
-//    private func assertForeignExchangeSectionResult(foreignExchangeSection: ScheduleTransferSectionData) {
-//        XCTAssertEqual(foreignExchangeSection.rowCount, 11, "Foreign exchange section should have 11 rows")
-//        XCTAssertNotNil(foreignExchangeSection.title, "The title of foreign exchange section should not be nil")
-//        XCTAssertNotNil(foreignExchangeSection.scheduleTransferSectionHeader,
-//                        "The header of foreign exchange section should not be nil")
-//        XCTAssertNotNil(foreignExchangeSection.cellIdentifier,
-//                        "The cellIdentifier of foreign exchange section should not be nil")
-//    }
+
+    private func assertForeignExchangeSectionResult(foreignExchangeSection: ScheduleTransferSectionData) {
+        XCTAssertEqual(foreignExchangeSection.rowCount, 11, "Foreign exchange section should have 11 rows")
+        XCTAssertNotNil(foreignExchangeSection.title, "The title of foreign exchange section should not be nil")
+        XCTAssertNotNil(foreignExchangeSection.scheduleTransferSectionHeader,
+                        "The header of foreign exchange section should not be nil")
+        XCTAssertNotNil(foreignExchangeSection.cellIdentifier,
+                        "The cellIdentifier of foreign exchange section should not be nil")
+    }
 
     private func assertSummarySectionResult(summarySection: ScheduleTransferSectionData) {
         XCTAssertEqual(summarySection.rowCount, 3, "Summary section should have 3 rows")

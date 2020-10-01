@@ -118,8 +118,7 @@ struct ScheduleTransferSummaryData: ScheduleTransferSectionData {
             let destinationCurrency = transfer.destinationCurrency {
             guard let feeAmount = transfer.destinationFeeAmount, Double(feeAmount) != 0 else {
                 rows.append((title: "mobileConfirmDetailsAmount".localized(),
-                             value: formatAmountWithCurrencySymbol(amount: destinationAmount,
-                                                                   currency: destinationCurrency)))
+                             value: destinationAmount))
                 return
             }
             let transferAmountFormattedDouble = destinationAmount.formatToDouble(with: destinationCurrency)
@@ -127,35 +126,16 @@ struct ScheduleTransferSummaryData: ScheduleTransferSectionData {
             let grossTransferAmount = transferAmountFormattedDouble + feeAmountFormattedDouble
 
             rows.append((title: "mobileConfirmDetailsAmount".localized(),
-                         value: formatAmountWithCurrencySymbol(amount:
-                            String(grossTransferAmount)
-                                .format(with: destinationCurrency), currency: destinationCurrency)))
+                         value: String(grossTransferAmount).format(with: destinationCurrency)))
             rows.append((title: "mobileConfirmDetailsFee".localized(),
-                         value: formatAmountWithCurrencySymbol(amount: feeAmount,
-                                                               currency: destinationCurrency)))
+                         value: feeAmount))
             rows.append((title: "mobileConfirmDetailsTotal".localized(),
-                         value: formatAmountWithCurrencySymbol(amount: destinationAmount,
-                                                               currency: destinationCurrency)))
+                         value: destinationAmount))
             if didFxQuoteChange {
                 footer = String(format: "transfer_fx_rate_changed".localized(),
                                 String(format: "%@ %@", destinationAmount, destinationCurrency))
             }
         }
-    }
-
-    /// Format Amount Text with Currency Sysmbol
-    /// - Parameters:
-    ///   - amount: Any value : e.g  4.00
-    ///   - currency: Any Currency : e.g USD
-    /// - Returns: Formatted String : e.g $4.00
-    func formatAmountWithCurrencySymbol(amount: String?, currency: String?) -> String {
-        guard let amount = amount, let currency = currency
-            else { return "" }
-        if let currencySymbol = NSLocale(localeIdentifier: currency)
-            .displayName(forKey: NSLocale.Key.currencySymbol, value: currency) {
-            return String(format: "%@%@", currencySymbol, amount)
-        }
-        return ""
     }
 }
 

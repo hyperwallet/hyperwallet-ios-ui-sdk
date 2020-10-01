@@ -73,12 +73,11 @@ final class ScheduleTransferPresenter {
         let confirmTransferDestinationSection = ScheduleTransferDestinationData(transferMethod: transferMethod)
         sectionData.append(confirmTransferDestinationSection)
 
-        // Hiding foreign exchages as per new confirm transfer design - Ashok (DISERWTHRE-23)
-//        if let foreignExchanges = transfer.foreignExchanges {
-//            let scheduleTransferForeignExchangesSection =
-//                ScheduleTransferForeignExchangeData(foreignExchanges: foreignExchanges)
-//            sectionData.append(scheduleTransferForeignExchangesSection)
-//        }
+        if let foreignExchanges = transfer.foreignExchanges {
+            let scheduleTransferForeignExchangesSection =
+                ScheduleTransferForeignExchangeData(foreignExchanges: foreignExchanges)
+            sectionData.append(scheduleTransferForeignExchangesSection)
+        }
 
         let scheduleTransferSummaryData = ScheduleTransferSummaryData(
             transfer: transfer,
