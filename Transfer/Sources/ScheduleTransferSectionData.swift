@@ -118,7 +118,8 @@ struct ScheduleTransferSummaryData: ScheduleTransferSectionData {
             let destinationCurrency = transfer.destinationCurrency {
             guard let feeAmount = transfer.destinationFeeAmount, Double(feeAmount) != 0 else {
                 rows.append((title: "mobileConfirmDetailsAmount".localized(),
-                             value: destinationAmount))
+                             value: formatAmountWithCurrencySymbol(amount: destinationAmount,
+                                                                   currency: destinationCurrency)))
                 return
             }
             let transferAmountFormattedDouble = destinationAmount.formatToDouble(with: destinationCurrency)
