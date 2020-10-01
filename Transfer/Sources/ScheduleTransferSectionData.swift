@@ -23,7 +23,7 @@ import Common
 import HyperwalletSDK
 
 enum ScheduleTransferSectionHeader: String {
-    case button, destination, foreignExchange, notes, summary
+    case button, destination, foreignExchange, notes, summary, source
 }
 
 protocol ScheduleTransferSectionData {
@@ -37,6 +37,8 @@ extension ScheduleTransferSectionData {
     var rowCount: Int { return 1 }
     var title: String? {
         switch scheduleTransferSectionHeader.rawValue {
+        case "source":
+            return "mobileTransferFromLabel".localized()
         case "destination":
             return "mobileTransferToLabel".localized()
         case "notes":
@@ -49,6 +51,16 @@ extension ScheduleTransferSectionData {
         default:
             return nil
         }
+    }
+}
+
+struct ScheduleTransferSectionSourceData: ScheduleTransferSectionData {
+    var scheduleTransferSectionHeader: ScheduleTransferSectionHeader { return .source }
+    var cellIdentifier: String { return TransferSourceCell.reuseIdentifier }
+    var transferSourceCellConfiguration: TransferSourceCellConfiguration
+
+    init(transferSourceCellConfiguration: TransferSourceCellConfiguration) {
+        self.transferSourceCellConfiguration = transferSourceCellConfiguration
     }
 }
 
@@ -114,16 +126,35 @@ struct ScheduleTransferSummaryData: ScheduleTransferSectionData {
             let grossTransferAmount = transferAmountFormattedDouble + feeAmountFormattedDouble
 
             rows.append((title: "mobileConfirmDetailsAmount".localized(),
-                         value: String(grossTransferAmount).format(with: destinationCurrency)))
+                         value: formatAmountWithCurrencySymbol(amount:
+                            String(grossTransferAmount)
+                                .format(with: destinationCurrency), currency: destinationCurrency)))
             rows.append((title: "mobileConfirmDetailsFee".localized(),
-                         value: feeAmount))
+                         value: formatAmountWithCurrencySymbol(amount: feeAmount,
+                                                               currency: destinationCurrency)))
             rows.append((title: "mobileConfirmDetailsTotal".localized(),
-                         value: destinationAmount))
+                         value: formatAmountWithCurrencySymbol(amount: destinationAmount,
+                                                               currency: destinationCurrency)))
             if didFxQuoteChange {
                 footer = String(format: "transfer_fx_rate_changed".localized(),
                                 String(format: "%@ %@", destinationAmount, destinationCurrency))
             }
         }
+    }
+
+    /// Format Amount Text with Currency Sysmbol
+    /// - Parameters:
+    ///   - amount: Any value : e.g  4.00
+    ///   - currency: Any Currency : e.g USD
+    /// - Returns: Formatted String : e.g $4.00
+    func formatAmountWithCurrencySymbol(amount: String?, currency: String?) -> String {
+        guard let amount = amount, let currency = currency
+            else { return "" }
+        if let currencySymbol = NSLocale(localeIdentifier: currency)
+            .displayName(forKey: NSLocale.Key.currencySymbol, value: currency) {
+            return String(format: "%@%@", currencySymbol, amount)
+        }
+        return ""
     }
 }
 

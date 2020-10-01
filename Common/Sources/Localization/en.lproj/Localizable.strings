@@ -231,7 +231,7 @@
 
 // Transfer Funds
 "mobileTransferFundsHeader" = "Transfer funds";
-"mobileConfirmationHeader" = "Confirm the details";
+"mobileConfirmationHeader" = "Confirm details";
 "mobileTransferFromLabel" = "TRANSFER FROM";
 "mobileTransferToLabel" = "TRANSFER TO";
 "mobileNoteLabel" = "Note";

@@ -18,6 +18,7 @@
 
 #if !COCOAPODS
 import Common
+import TransferMethodRepository
 import TransferRepository
 #endif
 import HyperwalletSDK
@@ -41,17 +42,20 @@ final class ScheduleTransferPresenter {
     private var didFxQuoteChange: Bool
     private let pageName = "transfer-funds:review-transfer"
     private let pageGroup = "transfer-funds"
+    private var transferSourceCellConfiguration: TransferSourceCellConfiguration
 
     /// Initialize ScheduleTransferPresenter
     init(
         view: ScheduleTransferView,
         transferMethod: HyperwalletTransferMethod,
         transfer: HyperwalletTransfer,
-        didFxQuoteChange: Bool) {
+        didFxQuoteChange: Bool,
+        transferSourceCellConfiguration: TransferSourceCellConfiguration) {
         self.view = view
         self.transferMethod = transferMethod
         self.transfer = transfer
         self.didFxQuoteChange = didFxQuoteChange
+        self.transferSourceCellConfiguration = transferSourceCellConfiguration
         initializeSections()
     }
 
@@ -61,14 +65,20 @@ final class ScheduleTransferPresenter {
 
     private func initializeSections() {
         sectionData.removeAll()
+
+        let confirmTrnasferSourceSection =
+            ScheduleTransferSectionSourceData(transferSourceCellConfiguration: transferSourceCellConfiguration)
+        sectionData.append(confirmTrnasferSourceSection)
+
         let confirmTransferDestinationSection = ScheduleTransferDestinationData(transferMethod: transferMethod)
         sectionData.append(confirmTransferDestinationSection)
 
-        if let foreignExchanges = transfer.foreignExchanges {
-            let scheduleTransferForeignExchangesSection =
-                ScheduleTransferForeignExchangeData(foreignExchanges: foreignExchanges)
-            sectionData.append(scheduleTransferForeignExchangesSection)
-        }
+        // Hiding foreign exchages as per new confirm transfer design - Ashok (DISERWTHRE-23)
+//        if let foreignExchanges = transfer.foreignExchanges {
+//            let scheduleTransferForeignExchangesSection =
+//                ScheduleTransferForeignExchangeData(foreignExchanges: foreignExchanges)
+//            sectionData.append(scheduleTransferForeignExchangesSection)
+//        }
 
         let scheduleTransferSummaryData = ScheduleTransferSummaryData(
             transfer: transfer,

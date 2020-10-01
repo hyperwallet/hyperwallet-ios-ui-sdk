@@ -28,6 +28,7 @@ final class ScheduleTransferController: UITableViewController, UITextFieldDelega
     private var presenter: ScheduleTransferPresenter!
     private let footerIdentifier = "scheduleTransferFooterViewIdentifier"
     private let registeredCells: [(type: AnyClass, id: String)] = [
+        (TransferSourceCell.self, TransferSourceCell.reuseIdentifier),
         (TransferDestinationCell.self, TransferDestinationCell.reuseIdentifier),
         (TransferForeignExchangeCell.self, TransferForeignExchangeCell.reuseIdentifier),
         (TransferSummaryCell.self, TransferSummaryCell.reuseIdentifier),
@@ -53,12 +54,14 @@ final class ScheduleTransferController: UITableViewController, UITextFieldDelega
         if let transferMethod = initializationData?[InitializationDataField.transferMethod]
             as? HyperwalletTransferMethod,
             let transfer = initializationData?[InitializationDataField.transfer] as? HyperwalletTransfer,
-            let didFxQuoteChange = initializationData?[InitializationDataField.didFxQuoteChange] as? Bool {
+            let didFxQuoteChange = initializationData?[InitializationDataField.didFxQuoteChange] as? Bool,
+            let transferSourceCellConfiguration = initializationData?[InitializationDataField.selectedTransferSource] as? TransferSourceCellConfiguration {
             presenter = ScheduleTransferPresenter(
                 view: self,
                 transferMethod: transferMethod,
                 transfer: transfer,
-                didFxQuoteChange: didFxQuoteChange)
+                didFxQuoteChange: didFxQuoteChange,
+                transferSourceCellConfiguration: transferSourceCellConfiguration)
         } else {
             fatalError("Required data not provided in initializePresenter")
         }
@@ -122,7 +125,7 @@ extension ScheduleTransferController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let section = presenter.sectionData[indexPath.section].scheduleTransferSectionHeader
         switch section {
-        case .destination:
+        case .destination, .source:
             return Theme.Cell.largeHeight
 
         case .foreignExchange:
@@ -194,6 +197,14 @@ extension ScheduleTransferController {
             if let tableViewCell = cell as? TransferButtonCell, section is ScheduleTransferButtonData {
                 let tapConfirmation = UITapGestureRecognizer(target: self, action: #selector(tapScheduleTransfer))
                 tableViewCell.configure(title: "transfer".localized(), action: tapConfirmation)
+            }
+            return cell
+
+        case .source:
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+            if let tableViewCell = cell as? TransferSourceCell,
+                let sourceData = section as? ScheduleTransferSectionSourceData {
+                tableViewCell.configure(transferSourceCellConfiguration: sourceData.transferSourceCellConfiguration)
             }
             return cell
         }
