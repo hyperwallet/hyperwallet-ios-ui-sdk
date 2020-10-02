@@ -127,7 +127,6 @@ final class ListReceiptController: UITableViewController {
     // MARK: set up list receipt table view
     private func setupListReceiptTableView() {
         tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.tableHeaderView = tabbedHeaderView()
         tableView.sectionFooterHeight = CGFloat.leastNormalMagnitude
         tableView.tableFooterView = UIView()
         tableView.rowHeight = UITableView.automaticDimension
@@ -141,15 +140,15 @@ final class ListReceiptController: UITableViewController {
 
     private func tabbedHeaderView() -> UIView {
         if presenter.showAllAvailableSources {
-            let recentReceiptsHeaderView = UIView(frame: CGRect(x: 0,
-                                                                y: 0,
-                                                                width: tableView.frame.size.width,
-                                                                height: 60))
-            recentReceiptsHeaderView.backgroundColor = Theme.UITableViewController.backgroundColor
+            let receiptsHeaderView = UIView(frame: CGRect(x: 0,
+                                                          y: 0,
+                                                          width: 400,
+                                                          height: 60))
+            receiptsHeaderView.backgroundColor = Theme.UITableViewController.backgroundColor
             if presenter.segmentedControlItems.count > 1 {
                 let segementedControl = UISegmentedControl(frame: CGRect(x: 30,
                                                                          y: 40,
-                                                                         width: tableView.frame.size.width - 60,
+                                                                         width: 340,
                                                                          height: 24))
                 var index = 0
                 presenter.segmentedControlItems.forEach { segementedControlItem in
@@ -161,11 +160,11 @@ final class ListReceiptController: UITableViewController {
                 segementedControl.addTarget(self,
                                             action: #selector(segmentControlHandler(sender:)),
                                             for: .valueChanged)
-                recentReceiptsHeaderView.addSubview(segementedControl)
+                receiptsHeaderView.addSubview(segementedControl)
                 segementedControl.selectedSegmentIndex = selectedSegmentedControl
             }
 
-            return recentReceiptsHeaderView
+            return receiptsHeaderView
         }
         return UIView()
     }
