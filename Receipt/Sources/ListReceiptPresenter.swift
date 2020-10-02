@@ -109,7 +109,6 @@ final class ListReceiptPresenter {
                     if strongSelf.selectedSegmentControlItem == nil {
                         strongSelf.selectedSegmentControlItem = strongSelf.segmentedControlItems[0]
                     }
-                    strongSelf.view?.reloadTableViewHeader()
 
                 case .failure(let error):
                     view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
@@ -177,6 +176,7 @@ final class ListReceiptPresenter {
                 }
                 strongSelf.isLoadInProgress = false
                 view.hideLoading()
+                view.reloadTableViewHeader()
                 switch result {
                 case .success(let receiptList):
                     guard let receiptList = receiptList, let receipts = receiptList.data else { break }
@@ -203,6 +203,7 @@ final class ListReceiptPresenter {
                 }
                 strongSelf.isLoadInProgress = false
                 view.hideLoading()
+                view.reloadTableViewHeader()
                 switch result {
                 case .success(let receiptList):
                     guard let receiptList = receiptList, let receipts = receiptList.data else { break }
