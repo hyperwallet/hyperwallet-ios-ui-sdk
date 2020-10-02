@@ -57,6 +57,7 @@ final class ListReceiptPresenter {
     }()
 
     private var isLoadInProgress = false
+    private var isFirstTimeLoadingPage = true
     private(set) var areAllReceiptsLoaded = true
     private(set) var sectionData = [(key: Date, value: [HyperwalletReceipt])]()
     private(set) var segmentedControlItems = [SegmentedControlItem]()
@@ -176,7 +177,10 @@ final class ListReceiptPresenter {
                 }
                 strongSelf.isLoadInProgress = false
                 view.hideLoading()
-                view.reloadTableViewHeader()
+                if strongSelf.isFirstTimeLoadingPage {
+                    view.reloadTableViewHeader()
+                    strongSelf.isFirstTimeLoadingPage = false
+                }
                 switch result {
                 case .success(let receiptList):
                     guard let receiptList = receiptList, let receipts = receiptList.data else { break }
@@ -203,7 +207,10 @@ final class ListReceiptPresenter {
                 }
                 strongSelf.isLoadInProgress = false
                 view.hideLoading()
-                view.reloadTableViewHeader()
+                if strongSelf.isFirstTimeLoadingPage {
+                    view.reloadTableViewHeader()
+                    strongSelf.isFirstTimeLoadingPage = false
+                }
                 switch result {
                 case .success(let receiptList):
                     guard let receiptList = receiptList, let receipts = receiptList.data else { break }

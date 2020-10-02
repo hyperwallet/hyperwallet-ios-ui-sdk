@@ -139,31 +139,28 @@ final class ListReceiptController: UITableViewController {
     }
 
     private func tabbedHeaderView(frame: CGRect) -> UIView {
-        if presenter.showAllAvailableSources {
+        if presenter.showAllAvailableSources && presenter.segmentedControlItems.count > 1 {
             let receiptsHeaderView = UIView(frame: CGRect(x: 0,
                                                           y: 0,
-                                                          width: frame.width,
+                                                          width: self.view.frame.size.width,
                                                           height: Theme.Cell.height))
             receiptsHeaderView.backgroundColor = Theme.UITableViewController.backgroundColor
-            if presenter.segmentedControlItems.count > 1 {
-                let segementedControl = UISegmentedControl(frame: CGRect(x: 30,
-                                                                         y: 40,
-                                                                         width: frame.width - 60,
-                                                                         height: Theme.Cell.height - 50))
-                var index = 0
-                presenter.segmentedControlItems.forEach { segementedControlItem in
-                    segementedControl.insertSegment(withTitle: segementedControlItem.segmentedControlHeader,
-                                                    at: index,
-                                                    animated: true)
-                    index += 1
-                }
-                segementedControl.addTarget(self,
-                                            action: #selector(segmentControlHandler(sender:)),
-                                            for: .valueChanged)
-                receiptsHeaderView.addSubview(segementedControl)
-                segementedControl.selectedSegmentIndex = selectedSegmentedControl
+            let segementedControl = UISegmentedControl(frame: CGRect(x: 30,
+                                                                     y: 40,
+                                                                     width: self.view.frame.size.width - 60,
+                                                                     height: Theme.Cell.height - 50))
+            var index = 0
+            presenter.segmentedControlItems.forEach { segementedControlItem in
+                segementedControl.insertSegment(withTitle: segementedControlItem.segmentedControlHeader,
+                                                at: index,
+                                                animated: true)
+                index += 1
             }
-
+            segementedControl.addTarget(self,
+                                        action: #selector(segmentControlHandler(sender:)),
+                                        for: .valueChanged)
+            receiptsHeaderView.addSubview(segementedControl)
+            segementedControl.selectedSegmentIndex = selectedSegmentedControl
             return receiptsHeaderView
         }
         return UIView()
