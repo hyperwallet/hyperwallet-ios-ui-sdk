@@ -78,7 +78,7 @@ final class ListReceiptPresenter {
                !programModelEnum.isPay2CardOrCardOnlyModel() {
                 let segmentedControlItem =
                     SegmentedControlItem(token: configuration.userToken,
-                                         segmentedControlHeader: "mobileAvailableBalance".localized(),
+                                         segmentedControlHeader: "mobileAvailableFunds".localized(),
                                          receiptSourceType: .user)
                 self.segmentedControlItems.append(segmentedControlItem)
                 self.selectedSegmentControlItem = segmentedControlItem
@@ -109,6 +109,7 @@ final class ListReceiptPresenter {
                     if strongSelf.selectedSegmentControlItem == nil {
                         strongSelf.selectedSegmentControlItem = strongSelf.segmentedControlItems[0]
                     }
+                    strongSelf.view?.reloadTableViewHeader()
 
                 case .failure(let error):
                     view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
@@ -122,6 +123,7 @@ final class ListReceiptPresenter {
     }
 
     func loadReceiptsForSelectedToken() {
+        sectionData.removeAll()
         if let selectedItem = selectedSegmentControlItem {
             if selectedItem.receiptSourceType == .user {
                 listUserReceipts()
