@@ -143,6 +143,7 @@ class TransferUserFundsTest: BaseTests {
         let cadBankAccount = app.tables.element.children(matching: .cell).element(boundBy: 1)
         cadBankAccount.tap()
 
+        waitForNonExistence(spinner)
         transferFunds.transferMaxAllFunds.tap()
         // Assert Destination Amount is automatically insert into the amount field
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "7,301.64")
