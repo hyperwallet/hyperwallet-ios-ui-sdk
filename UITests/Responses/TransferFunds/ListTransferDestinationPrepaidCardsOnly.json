@@ -1,5 +1,5 @@
 {
-    "count": 1,
+    "count": 2,
     "offset": 0,
     "limit": 10,
     "data": [
@@ -26,9 +26,10 @@
             ]
         },
         {
-            "token": "trm-token",
+            "token": "trm-token-secondary-card",
             "type": "PREPAID_CARD",
             "status": "ACTIVATED",
+            "primaryCardToken": "trrm-token",
             "verificationStatus": "NOT_REQUIRED",
             "createdOn": "2019-07-23T22:08:43",
             "transferMethodCountry": "US",

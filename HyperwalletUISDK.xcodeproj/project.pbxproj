@@ -107,7 +107,7 @@
 		41D8364022FB4814003544AB /* TransferErrorAmountLessThanFee.json in Resources */ = {isa = PBXBuildFile; fileRef = 41D8362022FB480A003544AB /* TransferErrorAmountLessThanFee.json */; };
 		41D8364122FB4814003544AB /* TransferStatusQuoted.json in Resources */ = {isa = PBXBuildFile; fileRef = 41D8362122FB480A003544AB /* TransferStatusQuoted.json */; };
 		41D8364222FB4814003544AB /* InvalidSourceError.json in Resources */ = {isa = PBXBuildFile; fileRef = 41D8362222FB480A003544AB /* InvalidSourceError.json */; };
-		41D8364322FB4814003544AB /* ListPrepaidCardTransferUSD.json in Resources */ = {isa = PBXBuildFile; fileRef = 41D8362322FB480A003544AB /* ListPrepaidCardTransferUSD.json */; };
+		41D8364322FB4814003544AB /* ListTransferDestinationsUSD.json in Resources */ = {isa = PBXBuildFile; fileRef = 41D8362322FB480A003544AB /* ListTransferDestinationsUSD.json */; };
 		41D8364522FB4874003544AB /* TransferUserFundsPPCTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D8364422FB4874003544AB /* TransferUserFundsPPCTest.swift */; };
 		4A2B94B322F1CB31000A0F14 /* CreateTransferResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 4A2B94AA22F1C954000A0F14 /* CreateTransferResponse.json */; };
 		4A2B94B422F1CB31000A0F14 /* ListTransferMethodSuccessResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 4A2B949C22F1BC00000A0F14 /* ListTransferMethodSuccessResponse.json */; };
@@ -178,6 +178,7 @@
 		980B9AED251D446400653D1C /* ListTransferSourceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980B9AEA251D446400653D1C /* ListTransferSourceController.swift */; };
 		980C2E9525224D8300DFDC94 /* GetPrepaidCardSuccessResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 980C2E9225224D6D00DFDC94 /* GetPrepaidCardSuccessResponse.json */; };
 		980C2E9625224F6E00DFDC94 /* PrepaidCardRepositoryRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980C2E8D25224C8200DFDC94 /* PrepaidCardRepositoryRequestHelper.swift */; };
+		983EF20F2526A950000A55B3 /* ListTransferDestinationPrepaidCardsOnly.json in Resources */ = {isa = PBXBuildFile; fileRef = 983EF20D2526A8EB000A55B3 /* ListTransferDestinationPrepaidCardsOnly.json */; };
 		984D82DB24BE590000991DAD /* Insights.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EBD0C682375FAE400569342 /* Insights.framework */; };
 		984D82DC24BE590000991DAD /* Insights.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EBD0C682375FAE400569342 /* Insights.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		984D82FB24C25AAD00991DAD /* HyperwalletSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98FBC68923D8D8D90050E2B6 /* HyperwalletSDK.framework */; };
@@ -198,6 +199,7 @@
 		98CACE2724A6CFDA0000F2B0 /* UserRepository.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 643912D422DF40CB00036609 /* UserRepository.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		98DAF67D24B7E33600A8D7CA /* Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB551F4922E1316400DD65C2 /* Common.framework */; };
 		98DAF67E24B7E33600A8D7CA /* Common.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DB551F4922E1316400DD65C2 /* Common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		98DC5D512526A39A00729477 /* GetPrepaidCardSuccessResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98DC5D502526A39A00729477 /* GetPrepaidCardSuccessResponse.json */; };
 		98EDBF8E2474649D008A4015 /* PrepaidCardReceiptResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98EDBF89247451C0008A4015 /* PrepaidCardReceiptResponse.json */; };
 		98EDBF8F247464A1008A4015 /* UserReceiptResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98EDBF8A247451C0008A4015 /* UserReceiptResponse.json */; };
 		98F3D754230C5BE400A8195F /* TransferFundsConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F3D747230C5ABB00A8195F /* TransferFundsConfirmation.swift */; };
@@ -683,7 +685,7 @@
 		41D8362022FB480A003544AB /* TransferErrorAmountLessThanFee.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TransferErrorAmountLessThanFee.json; sourceTree = "<group>"; };
 		41D8362122FB480A003544AB /* TransferStatusQuoted.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TransferStatusQuoted.json; sourceTree = "<group>"; };
 		41D8362222FB480A003544AB /* InvalidSourceError.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = InvalidSourceError.json; sourceTree = "<group>"; };
-		41D8362322FB480A003544AB /* ListPrepaidCardTransferUSD.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ListPrepaidCardTransferUSD.json; sourceTree = "<group>"; };
+		41D8362322FB480A003544AB /* ListTransferDestinationsUSD.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ListTransferDestinationsUSD.json; sourceTree = "<group>"; };
 		41D8364422FB4874003544AB /* TransferUserFundsPPCTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferUserFundsPPCTest.swift; sourceTree = "<group>"; };
 		4A12653B2280B02900C0F59E /* DateWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateWidget.swift; sourceTree = "<group>"; };
 		4A12653D2280B12F00C0F59E /* PhoneWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneWidget.swift; sourceTree = "<group>"; };
@@ -767,11 +769,13 @@
 		98175428228DE42E0019159A /* ReceiptTransactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptTransactionCell.swift; sourceTree = "<group>"; };
 		98220B8B2265793700055E18 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		9826056722822E8A000CCA2D /* UIToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIToolbar.swift; sourceTree = "<group>"; };
+		983EF20D2526A8EB000A55B3 /* ListTransferDestinationPrepaidCardsOnly.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ListTransferDestinationPrepaidCardsOnly.json; sourceTree = "<group>"; };
 		98541F142273D72C007D4238 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		9874E68024B3981F00E95F4F /* CountryCurrencyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCurrencyCell.swift; sourceTree = "<group>"; };
 		988547C92294B829007B312C /* ListReceiptController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListReceiptController.swift; sourceTree = "<group>"; };
 		988547CB2294B879007B312C /* ListReceiptPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListReceiptPresenter.swift; sourceTree = "<group>"; };
 		988547CF22970FA1007B312C /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		98DC5D502526A39A00729477 /* GetPrepaidCardSuccessResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GetPrepaidCardSuccessResponse.json; sourceTree = "<group>"; };
 		98EDBF89247451C0008A4015 /* PrepaidCardReceiptResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PrepaidCardReceiptResponse.json; sourceTree = "<group>"; };
 		98EDBF8A247451C0008A4015 /* UserReceiptResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UserReceiptResponse.json; sourceTree = "<group>"; };
 		98F3D744230C5AA800A8195F /* TransferUserFundsConfirmationTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferUserFundsConfirmationTest.swift; sourceTree = "<group>"; };
@@ -1312,7 +1316,7 @@
 				41D8361C22FB480A003544AB /* ListMoreThanOneTransferMethod.json */,
 				41D8361722FB480A003544AB /* ListOneBankAccountTransferJPY.json */,
 				41D8361622FB480A003544AB /* ListOneBankAccountTransferUSD.json */,
-				41D8362322FB480A003544AB /* ListPrepaidCardTransferUSD.json */,
+				41D8362322FB480A003544AB /* ListTransferDestinationsUSD.json */,
 				41D8361D22FB480A003544AB /* NoDestinationFee.json */,
 				98F3D74D230C5ADC00A8195F /* NoteDescriptionLengthValidationError.json */,
 				98F3D74E230C5ADC00A8195F /* TransferBelowTransactionLimitError.json */,
@@ -1324,6 +1328,8 @@
 				41C3CA1B231084DA008A904C /* AddNewTransferMethodsMoreThanOneTransferMethod.json */,
 				41C3CA1D23108677008A904C /* AddNewTransferMethodOneTransferMethod.json */,
 				2E6DBB8A2326F0F800863672 /* AvailableFundMultiCurrenciesFxChange.json */,
+				98DC5D502526A39A00729477 /* GetPrepaidCardSuccessResponse.json */,
+				983EF20D2526A8EB000A55B3 /* ListTransferDestinationPrepaidCardsOnly.json */,
 			);
 			path = TransferFunds;
 			sourceTree = "<group>";
@@ -2759,6 +2765,7 @@
 				0961D63322AA8817007F0B44 /* ReceiptsForLazyLoading.json in Resources */,
 				41D8363C22FB4814003544AB /* ListMoreThanOneTransferMethod.json in Resources */,
 				9807B766226442C60028A280 /* BankCardInvalidDateOfExpiry.json in Resources */,
+				983EF20F2526A950000A55B3 /* ListTransferDestinationPrepaidCardsOnly.json in Resources */,
 				64F45BD022BA27DA00515AE1 /* WireAccountIndividualResponse.json in Resources */,
 				41D8363F22FB4814003544AB /* TransferErrorOverAvailableFund.json in Resources */,
 				DBF89CB8227C072400AF4344 /* UserIndividualCountryCanadaResponse.json in Resources */,
@@ -2769,8 +2776,9 @@
 				9807B769226442C60028A280 /* ListTransferMethodResponseWithoutFirstElement.json in Resources */,
 				41D8364222FB4814003544AB /* InvalidSourceError.json in Resources */,
 				41D8363A22FB4814003544AB /* AvailableFundMultiCurrencies.json in Resources */,
-				41D8364322FB4814003544AB /* ListPrepaidCardTransferUSD.json in Resources */,
+				41D8364322FB4814003544AB /* ListTransferDestinationsUSD.json in Resources */,
 				41D8364022FB4814003544AB /* TransferErrorAmountLessThanFee.json in Resources */,
+				98DC5D512526A39A00729477 /* GetPrepaidCardSuccessResponse.json in Resources */,
 				9807B76A226442C60028A280 /* RemovedTransferMethodResponse.json in Resources */,
 				41D8363522FB4814003544AB /* AvailableFundUSD.json in Resources */,
 				41D8363B22FB4814003544AB /* AvailableFundZero.json in Resources */,

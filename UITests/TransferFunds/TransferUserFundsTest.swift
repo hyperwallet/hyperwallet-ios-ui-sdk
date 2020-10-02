@@ -57,7 +57,7 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.verifyTransferFundsTitle()
 
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
-        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Add transfer method".localized())
+        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "mobileAddTransferMethod".localized())
 
         // assert NOTE
         XCTAssertTrue(transferFunds.notesSectionLabel.exists)
@@ -413,7 +413,7 @@ class TransferUserFundsTest: BaseTests {
 
         transferFunds.verifyTransferFundsTitle()
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
-        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Add transfer method".localized())
+        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "mobileAddTransferMethod".localized())
 
         XCTAssertTrue(transferFunds.nextLabel.exists)
         transferFunds.tapContinueButton()
@@ -685,7 +685,7 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.verifyTransferFundsTitle()
 
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
-        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Add transfer method".localized())
+        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "mobileAddTransferMethod".localized())
         transferFunds.addSelectDestinationLabel.tap()
 
         // Assert Add a transfer method View
