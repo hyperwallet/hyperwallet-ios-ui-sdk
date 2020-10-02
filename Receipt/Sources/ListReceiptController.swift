@@ -31,8 +31,6 @@ final class ListReceiptController: UITableViewController {
     private let sectionTitleDateFormat = "MMMM yyyy"
     private var loadMoreReceipts = false
     private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "mobileNoTransactions".localized())
-    private var uiSegmentedControl: UISegmentedControl?
-    private var selectedSegmentedControl = 0
 
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -50,10 +48,8 @@ final class ListReceiptController: UITableViewController {
 
     private func initializePresenter() {
         presenter = ListReceiptPresenter(view: self,
-                                         prepaidCardToken:
-            initializationData?[InitializationDataField.prepaidCardToken] as? String,
-                                         showAllAvailableSources:
-            initializationData?[InitializationDataField.showAllAvailableSources] as? Bool)
+                                         prepaidCardToken: initializationData?[InitializationDataField.prepaidCardToken]
+                                            as? String)
     }
 
     override func willMove(toParent parent: UIViewController?) {
@@ -61,14 +57,6 @@ final class ListReceiptController: UITableViewController {
         if parent == nil {
             removeCoordinator()
         }
-    }
-
-    @objc
-    func segmentControlHandler(sender: UISegmentedControl) {
-        let index = sender.selectedSegmentIndex
-        presenter.selectedSegmentControlItem = presenter.segmentedControlItems[index]
-        selectedSegmentedControl = index
-        presenter.loadReceiptsForSelectedToken()
     }
 
     // MARK: list receipt table view data source
@@ -127,7 +115,6 @@ final class ListReceiptController: UITableViewController {
     // MARK: set up list receipt table view
     private func setupListReceiptTableView() {
         tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.tableHeaderView = tabbedHeaderView()
         tableView.sectionFooterHeight = CGFloat.leastNormalMagnitude
         tableView.tableFooterView = UIView()
         tableView.rowHeight = UITableView.automaticDimension
@@ -137,37 +124,6 @@ final class ListReceiptController: UITableViewController {
         tableView.separatorColor = Theme.Cell.separatorColor
         tableView.register(ReceiptTransactionCell.self,
                            forCellReuseIdentifier: ReceiptTransactionCell.reuseIdentifier)
-    }
-
-    private func tabbedHeaderView() -> UIView {
-        if presenter.showAllAvailableSources {
-            let recentReceiptsHeaderView = UIView(frame: CGRect(x: 0,
-                                                                y: 0,
-                                                                width: tableView.frame.size.width,
-                                                                height: 60))
-            recentReceiptsHeaderView.backgroundColor = Theme.UITableViewController.backgroundColor
-            if presenter.segmentedControlItems.count > 1 {
-                let segementedControl = UISegmentedControl(frame: CGRect(x: 30,
-                                                                         y: 40,
-                                                                         width: tableView.frame.size.width - 60,
-                                                                         height: 24))
-                var index = 0
-                presenter.segmentedControlItems.forEach { segementedControlItem in
-                    segementedControl.insertSegment(withTitle: segementedControlItem.segmentedControlHeader,
-                                                    at: index,
-                                                    animated: true)
-                    index += 1
-                }
-                segementedControl.addTarget(self,
-                                            action: #selector(segmentControlHandler(sender:)),
-                                            for: .valueChanged)
-                recentReceiptsHeaderView.addSubview(segementedControl)
-                segementedControl.selectedSegmentIndex = selectedSegmentedControl
-            }
-
-            return recentReceiptsHeaderView
-        }
-        return UIView()
     }
 }
 
@@ -187,10 +143,6 @@ extension ListReceiptController: ListReceiptView {
     func showLoading() {
         spinnerView = HyperwalletUtilViews.showSpinner(view: view)
         spinnerView?.backgroundColor = UIColor.clear
-    }
-
-    func reloadTableViewHeader() {
-        tableView.tableHeaderView = tabbedHeaderView()
     }
 
     func hideLoading() {
