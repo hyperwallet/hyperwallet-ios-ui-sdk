@@ -20,7 +20,7 @@ class ListReceiptPresenterTests: XCTestCase {
 
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
-        presenter = ListReceiptPresenter(view: mockView)
+        presenter = ListReceiptPresenter(view: mockView, showAllAvailableSources: false)
     }
 
     override func tearDown() {
@@ -120,7 +120,9 @@ class ListReceiptPresenterTests: XCTestCase {
     }
 
     func testListPrepaidCardReceipt_success() {
-        presenter = ListReceiptPresenter(view: mockView, prepaidCardToken: "trm-123456789")
+        presenter = ListReceiptPresenter(view: mockView,
+                                         prepaidCardToken: "trm-123456789",
+                                         showAllAvailableSources: false)
 
         // Given
         HyperwalletTestHelper.setUpMockServer(request: setUpReceiptRequest(listPrepaidCardReceiptPayload,
@@ -156,7 +158,9 @@ class ListReceiptPresenterTests: XCTestCase {
 
     func testListPrepaidCardReceipt_failureWithError() {
         // Given
-        presenter = ListReceiptPresenter(view: mockView, prepaidCardToken: "trm-123456789")
+        presenter = ListReceiptPresenter(view: mockView,
+                                         prepaidCardToken: "trm-123456789",
+                                         showAllAvailableSources: false)
 
         HyperwalletTestHelper.setUpMockServer(request:
             setUpReceiptRequest(listReceiptPayload, (NSError(domain: "", code: -1009, userInfo: nil)), "trm-123456789"))
@@ -191,6 +195,7 @@ class MockListReceiptView: ListReceiptView {
     var isShowLoadingPerformed = false
     var isShowErrorPerformed = false
     var isLoadReceiptPerformed = false
+    var isLoadTableHeaderPerformed = false
 
     var expectation: XCTestExpectation?
 
@@ -199,6 +204,7 @@ class MockListReceiptView: ListReceiptView {
         isShowLoadingPerformed = false
         isShowErrorPerformed = false
         isLoadReceiptPerformed = false
+        isLoadTableHeaderPerformed = false
         expectation = nil
     }
 
@@ -209,6 +215,10 @@ class MockListReceiptView: ListReceiptView {
     func reloadData() {
         isLoadReceiptPerformed = true
         expectation?.fulfill()
+    }
+
+    func reloadTableViewHeader() {
+        isLoadTableHeaderPerformed = true
     }
 
     func showError(_ error: HyperwalletErrorType,
