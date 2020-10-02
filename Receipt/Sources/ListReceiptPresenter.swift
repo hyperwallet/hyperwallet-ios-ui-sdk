@@ -20,6 +20,7 @@ import HyperwalletSDK
 #if !COCOAPODS
 import Common
 import ReceiptRepository
+import TransferMethodRepository
 #endif
 
 protocol ListReceiptView: class {
@@ -30,6 +31,7 @@ protocol ListReceiptView: class {
                    pageGroup: String,
                    _ retry: (() -> Void)?)
     func showLoading()
+    func reloadTableViewHeader()
 }
 
 final class ListReceiptPresenter {
@@ -50,22 +52,96 @@ final class ListReceiptPresenter {
     private lazy var prepaidCardReceiptRepository = {
         ReceiptRepositoryFactory.shared.prepaidCardReceiptRepository()
     }()
+    private lazy var prepaidCardRepository = {
+        TransferMethodRepositoryFactory.shared.prepaidCardRepository()
+    }()
 
     private var isLoadInProgress = false
     private(set) var areAllReceiptsLoaded = true
     private(set) var sectionData = [(key: Date, value: [HyperwalletReceipt])]()
+    private(set) var segmentedControlItems = [SegmentedControlItem]()
+    var showAllAvailableSources = false
+    var selectedSegmentControlItem: SegmentedControlItem?
 
     /// Initialize ListReceiptPresenter
-    init(view: ListReceiptView, prepaidCardToken: String? = nil) {
+    init(view: ListReceiptView, prepaidCardToken: String? = nil, showAllAvailableSources: Bool?) {
         self.view = view
         self.prepaidCardToken = prepaidCardToken
+        self.showAllAvailableSources = showAllAvailableSources ?? false
+    }
+
+    func listAllAvailableReceipts() {
+        Hyperwallet.shared.getConfiguration { configuration, _ in
+            if let configuration = configuration,
+               let programModel = configuration.programModel,
+               let programModelEnum = HyperwalletProgramModel(rawValue: programModel),
+               !programModelEnum.isPay2CardOrCardOnlyModel() {
+                let segmentedControlItem =
+                    SegmentedControlItem(token: configuration.userToken,
+                                         segmentedControlHeader: "mobileAvailableFunds".localized(),
+                                         receiptSourceType: .user)
+                self.segmentedControlItems.append(segmentedControlItem)
+                self.selectedSegmentControlItem = segmentedControlItem
+            }
+            self.prepaidCardRepository
+                    .listPrepaidCards(queryParam: self.setUpPrepaidCardQueryParam()) { [weak self] (result) in
+                guard let strongSelf = self, let view = strongSelf.view else {
+                    return
+                }
+                switch result {
+                case .success(let pageList):
+                    if let prepaidCards = pageList?.data {
+                        prepaidCards.filter { $0.primaryCardToken == nil }.forEach {
+                            strongSelf.segmentedControlItems.append(
+                                SegmentedControlItem(
+                                    token: $0.token ?? "",
+                                    segmentedControlHeader: $0.formattedCardBrandCardNumber ?? "",
+                                    receiptSourceType: .prepaidCard))
+                        }
+                        prepaidCards.filter { $0.primaryCardToken != nil }.forEach {
+                            strongSelf.segmentedControlItems.append(
+                                SegmentedControlItem(
+                                    token: $0.token ?? "",
+                                    segmentedControlHeader: $0.formattedCardBrandCardNumber ?? "",
+                                    receiptSourceType: .prepaidCard))
+                        }
+                    }
+                    if strongSelf.selectedSegmentControlItem == nil {
+                        strongSelf.selectedSegmentControlItem = strongSelf.segmentedControlItems[0]
+                    }
+                    strongSelf.view?.reloadTableViewHeader()
+
+                case .failure(let error):
+                    view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
+                        strongSelf.listAllAvailableReceipts()
+                    }
+                    return
+                }
+                    }
+            self.loadReceiptsForSelectedToken()
+        }
+    }
+
+    func loadReceiptsForSelectedToken() {
+        sectionData.removeAll()
+        if let selectedItem = selectedSegmentControlItem {
+            if selectedItem.receiptSourceType == .user {
+                listUserReceipts()
+            } else {
+                listPrepaidCardReceipts(selectedItem.token)
+            }
+        }
     }
 
     func listReceipts() {
-        if let prepaidCardToken = prepaidCardToken {
-            listPrepaidCardReceipts(prepaidCardToken)
+        if showAllAvailableSources {
+            listAllAvailableReceipts()
         } else {
-            listUserReceipts()
+            if let prepaidCardToken = prepaidCardToken {
+                listPrepaidCardReceipts(prepaidCardToken)
+            } else {
+                listUserReceipts()
+            }
         }
     }
 
@@ -164,4 +240,25 @@ final class ListReceiptPresenter {
             }
         }
     }
+
+    private func setUpPrepaidCardQueryParam() -> HyperwalletPrepaidCardQueryParm {
+        let queryParam = HyperwalletPrepaidCardQueryParm()
+        // Only fetch active prepaid cards
+        queryParam.status = .activated
+        return queryParam
+    }
+}
+
+struct SegmentedControlItem {
+    let token: String
+    let segmentedControlHeader: String
+    let receiptSourceType: ReceiptSourceType
+}
+
+/// Enum to store the type of Source - User or PrepaidCard
+enum ReceiptSourceType {
+    /// Represents user
+    case user
+    /// Represents prepaid card
+    case prepaidCard
 }
