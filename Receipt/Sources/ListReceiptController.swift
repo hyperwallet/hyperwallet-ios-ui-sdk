@@ -138,17 +138,12 @@ final class ListReceiptController: UITableViewController {
                            forCellReuseIdentifier: ReceiptTransactionCell.reuseIdentifier)
     }
 
-    private func tabbedHeaderView() -> UIView {
+    private func tabbedHeaderView() {
         if presenter.showAllAvailableSources && presenter.segmentedControlItems.count > 1 {
-            let receiptsHeaderView = UIView(frame: CGRect(x: 0,
-                                                          y: 0,
-                                                          width: tableView.frame.size.width,
-                                                          height: Theme.Cell.height))
-            receiptsHeaderView.backgroundColor = Theme.UITableViewController.backgroundColor
             let segementedControl = UISegmentedControl(frame: CGRect(x: 30,
                                                                      y: 40,
-                                                                     width: tableView.frame.size.width - 60,
-                                                                     height: Theme.Cell.height - 50))
+                                                                     width: tableView.frame.size.width,
+                                                                     height: 36))
             var index = 0
             presenter.segmentedControlItems.forEach { segementedControlItem in
                 segementedControl.insertSegment(withTitle: segementedControlItem.segmentedControlHeader,
@@ -159,11 +154,9 @@ final class ListReceiptController: UITableViewController {
             segementedControl.addTarget(self,
                                         action: #selector(segmentControlHandler(sender:)),
                                         for: .valueChanged)
-            receiptsHeaderView.addSubview(segementedControl)
             segementedControl.selectedSegmentIndex = selectedSegmentedControl
-            return receiptsHeaderView
+            tableView.tableHeaderView = segementedControl
         }
-        return UIView()
     }
 }
 
@@ -186,7 +179,7 @@ extension ListReceiptController: ListReceiptView {
     }
 
     func reloadTableViewHeader() {
-        tableView.tableHeaderView = tabbedHeaderView()
+        tabbedHeaderView()
     }
 
     func hideLoading() {
