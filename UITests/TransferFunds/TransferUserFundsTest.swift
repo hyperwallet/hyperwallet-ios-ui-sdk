@@ -57,7 +57,7 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.verifyTransferFundsTitle()
 
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
-        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Add transfer method".localized())
+        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "mobileAddTransferMethod".localized())
 
         // assert NOTE
         XCTAssertTrue(transferFunds.notesSectionLabel.exists)
@@ -143,6 +143,7 @@ class TransferUserFundsTest: BaseTests {
         let cadBankAccount = app.tables.element.children(matching: .cell).element(boundBy: 1)
         cadBankAccount.tap()
 
+        waitForNonExistence(spinner)
         transferFunds.transferMaxAllFunds.tap()
         // Assert Destination Amount is automatically insert into the amount field
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "7,301.64")
@@ -413,7 +414,7 @@ class TransferUserFundsTest: BaseTests {
 
         transferFunds.verifyTransferFundsTitle()
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
-        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Add transfer method".localized())
+        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "mobileAddTransferMethod".localized())
 
         XCTAssertTrue(transferFunds.nextLabel.exists)
         transferFunds.tapContinueButton()
@@ -685,7 +686,7 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.verifyTransferFundsTitle()
 
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
-        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Add transfer method".localized())
+        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "mobileAddTransferMethod".localized())
         transferFunds.addSelectDestinationLabel.tap()
 
         // Assert Add a transfer method View
