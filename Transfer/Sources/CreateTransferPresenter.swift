@@ -326,8 +326,18 @@ final class CreateTransferPresenter {
             view.hideLoading()
             switch result {
             case .failure(let error):
-                view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
-                    strongSelf.createInitialTransfer()
+                if let selectedIndex = strongSelf.transferSourceCellConfigurations.firstIndex(where: { $0.isSelected }),
+                    strongSelf.transferSourceCellConfigurations.count > selectedIndex + 1 {
+                        strongSelf.transferSourceCellConfigurations.remove(at: selectedIndex)
+                        strongSelf.transferSourceCellConfigurations.first?.isSelected = true
+                        strongSelf.selectedTransferDestination = nil
+                        strongSelf.loadTransferMethods()
+                    return
+                } else {
+                    strongSelf.transferSourceCellConfigurations.first?.isSelected = true
+                    view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
+                        strongSelf.createInitialTransfer()
+                    }
                 }
 
             case .success(let transfer):
