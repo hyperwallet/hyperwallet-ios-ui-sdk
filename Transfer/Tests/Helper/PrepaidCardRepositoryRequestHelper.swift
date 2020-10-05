@@ -6,21 +6,36 @@ class PrepaidCardRepositoryRequestHelper {
     static let clientSourceToken = "trm-123456789"
     private static let successResponseFile = "GetPrepaidCardSuccessResponse"
     private static let failureResponseFile = "UnexpectedErrorResponse"
-    private static let requestUrl = "\(HyperwalletTestHelper.userRestURL)/prepaid-cards/\(clientSourceToken)"
+    private static let requestUrl = "\(HyperwalletTestHelper.userRestURL)/prepaid-cards"
 
-    static func setupSuccessRequest() {
-        let dataResponse = HyperwalletTestHelper.okHTTPResponse(for: successResponseFile)
-        PrepaidCardRepositoryRequestHelper.setUpMockServer(dataResponse, requestUrl)
+    static func setupSuccessRequest(responseFile: String, prepaidCardToken: String?) {
+        let dataResponse = HyperwalletTestHelper.okHTTPResponse(for: responseFile)
+        if let prepaidCardToken = prepaidCardToken {
+            PrepaidCardRepositoryRequestHelper.setUpMockServer(dataResponse,
+                                                               String(format: "%@/%@", requestUrl, prepaidCardToken))
+        } else {
+            PrepaidCardRepositoryRequestHelper.setUpMockServer(dataResponse, requestUrl)
+        }
     }
 
-    static func setupNoContentRequest() {
+    static func setupNoContentRequest(prepaidCardToken: String?) {
         let dataResponse = HyperwalletTestHelper.noContentHTTPResponse()
-        PrepaidCardRepositoryRequestHelper.setUpMockServer(dataResponse, requestUrl)
+        if let prepaidCardToken = prepaidCardToken {
+            PrepaidCardRepositoryRequestHelper.setUpMockServer(dataResponse,
+                                                               String(format: "%@/%@", requestUrl, prepaidCardToken))
+        } else {
+            PrepaidCardRepositoryRequestHelper.setUpMockServer(dataResponse, requestUrl)
+        }
     }
 
-    static func setupFailureRequest() {
+    static func setupFailureRequest(prepaidCardToken: String?) {
         let errorResponse = HyperwalletTestHelper.badRequestHTTPResponse(for: failureResponseFile)
-        PrepaidCardRepositoryRequestHelper.setUpMockServer(errorResponse, requestUrl)
+        if let prepaidCardToken = prepaidCardToken {
+            PrepaidCardRepositoryRequestHelper.setUpMockServer(errorResponse,
+                                                               String(format: "%@/%@", requestUrl, prepaidCardToken))
+        } else {
+            PrepaidCardRepositoryRequestHelper.setUpMockServer(errorResponse, requestUrl)
+        }
     }
 
     static func getResponseError(_ error: HyperwalletErrorType) -> HyperwalletError {
