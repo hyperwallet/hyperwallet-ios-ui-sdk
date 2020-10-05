@@ -66,9 +66,9 @@ final class ScheduleTransferPresenter {
     private func initializeSections() {
         sectionData.removeAll()
 
-        let confirmTrnasferSourceSection =
+        let confirmTransferSourceSection =
             ScheduleTransferSectionSourceData(transferSourceCellConfiguration: transferSourceCellConfiguration)
-        sectionData.append(confirmTrnasferSourceSection)
+        sectionData.append(confirmTransferSourceSection)
 
         let confirmTransferDestinationSection = ScheduleTransferDestinationData(transferMethod: transferMethod)
         sectionData.append(confirmTransferDestinationSection)
