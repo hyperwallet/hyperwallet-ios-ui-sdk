@@ -126,6 +126,7 @@ final class ListReceiptPresenter {
         sectionData.removeAll()
         if let selectedItem = selectedSegmentControlItem {
             if selectedItem.receiptSourceType == .user {
+                offset = 0
                 listUserReceipts()
             } else {
                 listPrepaidCardReceipts(selectedItem.token)

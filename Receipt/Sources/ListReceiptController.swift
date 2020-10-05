@@ -138,16 +138,16 @@ final class ListReceiptController: UITableViewController {
                            forCellReuseIdentifier: ReceiptTransactionCell.reuseIdentifier)
     }
 
-    private func tabbedHeaderView(frame: CGRect) -> UIView {
+    private func tabbedHeaderView() -> UIView {
         if presenter.showAllAvailableSources && presenter.segmentedControlItems.count > 1 {
             let receiptsHeaderView = UIView(frame: CGRect(x: 0,
                                                           y: 0,
-                                                          width: self.view.frame.size.width,
+                                                          width: tableView.frame.size.width,
                                                           height: Theme.Cell.height))
             receiptsHeaderView.backgroundColor = Theme.UITableViewController.backgroundColor
             let segementedControl = UISegmentedControl(frame: CGRect(x: 30,
                                                                      y: 40,
-                                                                     width: self.view.frame.size.width - 60,
+                                                                     width: tableView.frame.size.width - 60,
                                                                      height: Theme.Cell.height - 50))
             var index = 0
             presenter.segmentedControlItems.forEach { segementedControlItem in
@@ -186,7 +186,7 @@ extension ListReceiptController: ListReceiptView {
     }
 
     func reloadTableViewHeader() {
-        tableView.tableHeaderView = tabbedHeaderView(frame: tableView.frame)
+        tableView.tableHeaderView = tabbedHeaderView()
     }
 
     func hideLoading() {
