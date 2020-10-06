@@ -31,7 +31,7 @@ class TransferSourceCellConfiguration {
     let type: TransferSourceType
     let token: String
     let title: String
-    let fontIcon: String
+    let fontIcon: HyperwalletIconContent
     var isSelected: Bool
     var availableBalance: String?
     var destinationCurrency: String?
@@ -41,7 +41,7 @@ class TransferSourceCellConfiguration {
          type: TransferSourceType,
          token: String,
          title: String,
-         fontIcon: String) {
+         fontIcon: HyperwalletIconContent) {
         self.isSelected = isSelectedTransferSource
         self.type = type
         self.token = token
@@ -89,7 +89,7 @@ extension TransferSourceCell {
                   additionalInfo: transferSourceCellConfiguration.additionalText,
                   currency: transferSourceCellConfiguration.destinationCurrency,
                   availableBalance: transferSourceCellConfiguration.availableBalance,
-                  fontIcon: transferSourceCellConfiguration.fontIcon)
+                  fontIcon: transferSourceCellConfiguration.fontIcon.rawValue)
     }
 
     private func configure(title: String,
@@ -108,6 +108,9 @@ extension TransferSourceCell {
             detailTextLabel?.adjustsFontForContentSizeCategory = true
             detailTextLabel?.lineBreakMode = .byWordWrapping
             detailTextLabel?.accessibilityIdentifier = "transferSourceSubtitleLabel"
+        } else {
+            detailTextLabel?.text = nil
+            detailTextLabel?.accessibilityIdentifier = nil
         }
 
         if !UIFont.isLargeSizeCategory {
