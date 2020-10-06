@@ -228,7 +228,7 @@ extension ScheduleTransferController: ScheduleTransferView {
     }
 
     func showConfirmation(handler: @escaping (() -> Void)) {
-        let destinationData = presenter.sectionData[0] as? ScheduleTransferDestinationData
+        let destinationData = presenter.sectionData[1] as? ScheduleTransferDestinationData
         HyperwalletUtilViews.showAlert(self,
                                        title: "mobileTransferSuccessMsg".localized(),
                                        message: String(format: "mobileTransferSuccessDetails".localized(),
