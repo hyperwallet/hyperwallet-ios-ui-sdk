@@ -219,12 +219,12 @@ final class CreateTransferPresenter {
                 }
                 return
             }
-            
+
             if let configuration = configuration,
-                let programModel = configuration.programModel,
-                let programModelEnum = HyperwalletProgramModel(rawValue: programModel),
-                !programModelEnum.isPay2CardOrCardOnlyModel() {
-                    strongSelf.createTransferSourceCellConfiguration(true, .user, configuration.userToken)
+            let programModel = configuration.programModel,
+            let programModelEnum = HyperwalletProgramModel(rawValue: programModel),
+            !programModelEnum.isPay2CardOrCardOnlyModel() {
+                strongSelf.createTransferSourceCellConfiguration(true, .user, configuration.userToken)
             }
             strongSelf.prepaidCardRepository
                 .listPrepaidCards(queryParam: strongSelf.setUpPrepaidCardQueryParam()) { [weak self] (result) in
@@ -326,18 +326,8 @@ final class CreateTransferPresenter {
             view.hideLoading()
             switch result {
             case .failure(let error):
-                if let selectedIndex = strongSelf.transferSourceCellConfigurations.firstIndex(where: { $0.isSelected }),
-                    strongSelf.transferSourceCellConfigurations.count > selectedIndex + 1 {
-                        strongSelf.transferSourceCellConfigurations.remove(at: selectedIndex)
-                        strongSelf.transferSourceCellConfigurations.first?.isSelected = true
-                        strongSelf.selectedTransferDestination = nil
-                        strongSelf.loadTransferMethods()
-                    return
-                } else {
-                    strongSelf.transferSourceCellConfigurations.first?.isSelected = true
-                    view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
-                        strongSelf.createInitialTransfer()
-                    }
+                view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
+                    strongSelf.createInitialTransfer()
                 }
 
             case .success(let transfer):
