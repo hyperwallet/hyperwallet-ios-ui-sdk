@@ -84,8 +84,8 @@ final class TransferAmountCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override func layoutIfNeeded() {
+        super.layoutIfNeeded()
         subviews.forEach { (view) in
             if type(of: view).description() == "_UITableViewCellSeparatorView" {
                 view.isHidden = true

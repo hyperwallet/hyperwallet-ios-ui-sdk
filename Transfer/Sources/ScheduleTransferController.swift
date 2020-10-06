@@ -185,7 +185,7 @@ extension ScheduleTransferController {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
             if let tableViewCell = cell as? TransferNotesCell,
                 let notesSection = section as? ScheduleTransferNotesData {
-                tableViewCell.configure(notes: notesSection.notes, isEditable: false, isHideBorder: false, { _ in })
+                tableViewCell.configure(notes: notesSection.notes, isEditable: false, hideBorder: false, { _ in })
             }
             return cell
 
