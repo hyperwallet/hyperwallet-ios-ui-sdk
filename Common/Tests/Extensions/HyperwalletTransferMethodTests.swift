@@ -69,9 +69,9 @@ class HyperwalletTransferMethodTests: XCTestCase {
 
     func testAdditionalInfo_venmoAccount() {
         let transferMethod = HyperwalletVenmoAccount.Builder(transferMethodCountry: country,
-                                                            transferMethodCurrency: currency,
-                                                            transferMethodProfileType: profileType,
-                                                            transferMethodType:
+                                                             transferMethodCurrency: currency,
+                                                             transferMethodProfileType: profileType,
+                                                             transferMethodType:
             HyperwalletTransferMethod.TransferMethodType.venmoAccount.rawValue)
             .accountId("9876543210")
             .build()
@@ -79,4 +79,3 @@ class HyperwalletTransferMethodTests: XCTestCase {
         XCTAssertEqual(transferMethod.additionalInfo!, "ending in 3210")
     }
 }
-
