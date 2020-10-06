@@ -1,49 +1,50 @@
 {
-    "count": 1,
+    "count": 2,
     "offset": 0,
     "limit": 10,
     "data": [
         {
-            "token": "trm-token",
+            "token": "trm-123",
             "type": "PREPAID_CARD",
             "status": "ACTIVATED",
             "verificationStatus": "NOT_REQUIRED",
-            "createdOn": "2019-07-24T21:08:43",
-            "transferMethodCountry": "US",
+            "createdOn": "2019-06-20T21:21:43",
+            "transferMethodCountry": "CA",
             "transferMethodCurrency": "USD",
             "cardType": "VIRTUAL",
             "cardPackage": "L1",
-            "cardNumber": "************4281",
+            "cardNumber": "************6198",
             "cardBrand": "VISA",
-            "dateOfExpiry": "2023-07",
+            "dateOfExpiry": "2023-06",
             "links": [
                 {
                     "params": {
                         "rel": "self"
                     },
-                    "href": "https://localhost.com/rest/v3/users/usr-token/transfer-methods/trm-token"
+                    "href": "https://localhost/rest/v3/users/usr-123/prepaid-cards/trm-123"
                 }
             ]
         },
         {
-            "token": "trm-token",
+            "token": "trm-456",
+            "primaryCardToken": "trm-123",
             "type": "PREPAID_CARD",
             "status": "ACTIVATED",
             "verificationStatus": "NOT_REQUIRED",
-            "createdOn": "2019-07-23T22:08:43",
-            "transferMethodCountry": "US",
+            "createdOn": "2019-06-20T22:21:43",
+            "transferMethodCountry": "CA",
             "transferMethodCurrency": "USD",
             "cardType": "VIRTUAL",
             "cardPackage": "L1",
-            "cardNumber": "************4292",
-            "cardBrand": "VISA",
-            "dateOfExpiry": "2023-12",
+            "cardNumber": "************2345",
+            "cardBrand": "MASTERCARD",
+            "dateOfExpiry": "2023-06",
             "links": [
                 {
                     "params": {
                         "rel": "self"
                     },
-                    "href": "https://localhost.com/rest/v3/users/usr-token/transfer-methods/trm-token"
+                    "href": "https://localhost/rest/v3/users/usr-123/prepaid-cards/trm-456"
                 }
             ]
         }
@@ -53,7 +54,7 @@
             "params": {
                 "rel": "self"
             },
-            "href": "https://localhost.com/rest/v3/users/usr-token/transfer-methods?offset=0&limit=10&createdAfter=2018-01-01T17%3A12%3A00"
+            "href": "https://localhost/rest/v3/users/usr-123/prepaid-cards?offset=0&limit=10&sortBy=-createdOn&createdAfter=2019-05-31T20%3A59%3A58"
         }
     ]
 }

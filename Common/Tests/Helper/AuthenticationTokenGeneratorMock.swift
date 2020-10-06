@@ -1,4 +1,7 @@
 import Foundation
+#if !COCOAPODS
+import Common
+#endif
 
 /// Generates a mock Authentication Token
 struct AuthenticationTokenGeneratorMock {
@@ -8,21 +11,24 @@ struct AuthenticationTokenGeneratorMock {
     private var minuteExpireIn: Int
     private let insightsUrl: String?
     private let environment: String?
+    private let programModel: String?
 
     static var isConfigValid = true
 
     init(hostName: String = "localhost",
          minuteExpireIn: Int = 10,
-         userToken: String = "YourUserToken") {
+         userToken: String = "YourUserToken",
+         programModel: HyperwalletProgramModel) {
         self.restUrl = "https://\(hostName)/rest/v3/"
         self.graphQlUrl = "https://\(hostName)/graphql"
         self.minuteExpireIn = minuteExpireIn
         self.userToken = userToken
         self.insightsUrl = "http://insights.url"
         self.environment = "DEV"
+        self.programModel = programModel.rawValue
     }
 
-    init(
+    init(programModel: String = "WALLET_MODEL",
          restUrl: String = "https://localhost/rest/v3/",
          graphQlUrl: String = "https://localhost/graphql") {
         self.restUrl = restUrl
@@ -31,6 +37,7 @@ struct AuthenticationTokenGeneratorMock {
         self.userToken = "YourUserToken"
         self.insightsUrl = "http://insights.url"
         self.environment = "DEV"
+        self.programModel = programModel
     }
 
     /// Returns the Authentication Token
@@ -58,7 +65,8 @@ struct AuthenticationTokenGeneratorMock {
         "rest-uri": "\(restUrl)",
         "graphql-uri": "\(graphQlUrl)",
         "insights-uri": "\(insightsUrl!)",
-        "environment": "\(environment!)"
+        "environment": "\(environment!)",
+        "program-model": "\(programModel!)"
         }
         """
     }

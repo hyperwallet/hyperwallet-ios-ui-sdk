@@ -1,6 +1,11 @@
 Changelog
 =========
 
+[1.0.0-beta08](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta08)
+-------------------
+- Fixed Cocoapod Insights Integration issue
+- Made UINavigationBar Theme customization optional
+
 [1.0.0-beta07](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta07)
 -------------------
 - Fixed Cocoapod issue

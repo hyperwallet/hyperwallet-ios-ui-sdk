@@ -209,15 +209,25 @@ final class CreateTransferPresenter {
 
     private func loadAllAvailableSources() {
         view?.showLoading()
-        Hyperwallet.shared.getConfiguration { configuration, _ in
-            if let configuration = configuration,
-                let programModel = configuration.programModel,
-                let programModelEnum = HyperwalletProgramModel(rawValue: programModel),
-                !programModelEnum.isPay2CardOrCardOnlyModel() {
-                    self.createTransferSourceCellConfiguration(true, .user, configuration.userToken)
+        Hyperwallet.shared.getConfiguration { [weak self] configuration, error in
+            guard let strongSelf = self, let view = strongSelf.view else {
+                return
             }
-            self.prepaidCardRepository
-                .listPrepaidCards(queryParam: self.setUpPrepaidCardQueryParam()) { [weak self] (result) in
+            if let error = error {
+                view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
+                    strongSelf.loadAllAvailableSources()
+                }
+                return
+            }
+
+            if let configuration = configuration,
+            let programModel = configuration.programModel,
+            let programModelEnum = HyperwalletProgramModel(rawValue: programModel),
+            !programModelEnum.isPay2CardOrCardOnlyModel() {
+                strongSelf.createTransferSourceCellConfiguration(true, .user, configuration.userToken)
+            }
+            strongSelf.prepaidCardRepository
+                .listPrepaidCards(queryParam: strongSelf.setUpPrepaidCardQueryParam()) { [weak self] (result) in
                 guard let strongSelf = self, let view = strongSelf.view else {
                     return
                 }
@@ -254,8 +264,8 @@ final class CreateTransferPresenter {
         }
     }
 
-    private func setUpPrepaidCardQueryParam() -> HyperwalletPrepaidCardQueryParm {
-        let queryParam = HyperwalletPrepaidCardQueryParm()
+    private func setUpPrepaidCardQueryParam() -> HyperwalletPrepaidCardQueryParam {
+        let queryParam = HyperwalletPrepaidCardQueryParam()
         // Only fetch active prepaid cards
         queryParam.status = .activated
         return queryParam
