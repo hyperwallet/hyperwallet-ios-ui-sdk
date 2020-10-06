@@ -19,8 +19,6 @@
 import HyperwalletSDK
 
 final class ListTransferSourcePresenter {
-    private let pageGroup = "transfer-funds"
-    private let pageName = "trasfer-funds:create:list-transfer-source"
     private(set) var sectionData: [TransferSourceCellConfiguration]
 
     /// Initialize ListTransferSourcePresenter

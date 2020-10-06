@@ -67,7 +67,7 @@ extension ListTransferSourceCell {
                   additionalInfo: transferSourceCellConfiguration.additionalText,
                   currency: transferSourceCellConfiguration.destinationCurrency,
                   availableBalance: transferSourceCellConfiguration.availableBalance,
-                  fontIcon: transferSourceCellConfiguration.fontIcon)
+                  fontIcon: transferSourceCellConfiguration.fontIcon.rawValue)
     }
 
     private func configure(title: String,

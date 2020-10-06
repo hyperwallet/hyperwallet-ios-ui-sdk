@@ -199,8 +199,7 @@ final class CreateTransferPresenter {
                                                                 ? "mobileAvailableFunds".localized() :
                                                                 "prepaid_card".localized(),
                                                             fontIcon: transferSourceType == .user
-                                                                ? HyperwalletIconContent.bankAccount.rawValue :
-                                                                HyperwalletIconContent.prepaidCard.rawValue)
+                                                                ? .bankAccount : .prepaidCard)
         configuration.additionalText = additionalText
         configuration.availableBalance = availableBalance
         configuration.destinationCurrency = destinationCurrency
