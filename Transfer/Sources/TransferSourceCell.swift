@@ -102,16 +102,11 @@ extension TransferSourceCell {
         textLabel?.numberOfLines = 0
         textLabel?.lineBreakMode = .byWordWrapping
         textLabel?.accessibilityIdentifier = "transferSourceTitleLabel"
-        if let additionalInfo = additionalInfo {
-            detailTextLabel?.text = additionalInfo
-            detailTextLabel?.numberOfLines = 0
-            detailTextLabel?.adjustsFontForContentSizeCategory = true
-            detailTextLabel?.lineBreakMode = .byWordWrapping
-            detailTextLabel?.accessibilityIdentifier = "transferSourceSubtitleLabel"
-        } else {
-            detailTextLabel?.text = nil
-            detailTextLabel?.accessibilityIdentifier = nil
-        }
+        detailTextLabel?.text = additionalInfo
+        detailTextLabel?.numberOfLines = 0
+        detailTextLabel?.adjustsFontForContentSizeCategory = true
+        detailTextLabel?.lineBreakMode = .byWordWrapping
+        detailTextLabel?.accessibilityIdentifier = availableBalance == nil ? nil : "transferSourceSubtitleLabel"
 
         if !UIFont.isLargeSizeCategory {
             let icon = UIImage.fontIcon(fontIcon,
