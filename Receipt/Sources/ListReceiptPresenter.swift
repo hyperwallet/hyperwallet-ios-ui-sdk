@@ -73,16 +73,17 @@ final class ListReceiptPresenter {
 
     func listAllAvailableReceipts() {
         Hyperwallet.shared.getConfiguration { configuration, _ in
-            if let configuration = configuration,
-               let programModel = configuration.programModel,
-               let programModelEnum = HyperwalletProgramModel(rawValue: programModel),
-               !programModelEnum.isPay2CardOrCardOnlyModel() {
-                let segmentedControlItem =
-                    SegmentedControlItem(token: configuration.userToken,
-                                         segmentedControlHeader: "mobileAvailableFunds".localized(),
-                                         receiptSourceType: .user)
-                self.segmentedControlItems.append(segmentedControlItem)
-                self.selectedSegmentControlItem = segmentedControlItem
+             let programModel = "WALLET_MODEL"
+               if let configuration = configuration,
+                  //let programModel = configuration.programModel,
+                  let programModelEnum = HyperwalletProgramModel(rawValue: programModel),
+                  !programModelEnum.isPay2CardOrCardOnlyModel() {
+                   let segmentedControlItem =
+                       SegmentedControlItem(token: configuration.userToken,
+                                            segmentedControlHeader: "mobileAvailableFunds".localized(),
+                                            receiptSourceType: .user)
+                   self.segmentedControlItems.append(segmentedControlItem)
+                   self.selectedSegmentControlItem = segmentedControlItem
             }
             self.prepaidCardRepository
                     .listPrepaidCards(queryParam: self.setUpPrepaidCardQueryParam()) { [weak self] (result) in

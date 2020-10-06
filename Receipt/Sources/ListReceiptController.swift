@@ -31,6 +31,8 @@ final class ListReceiptController: UITableViewController {
     private let sectionTitleDateFormat = "MMMM yyyy"
     private var loadMoreReceipts = false
     private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "mobileNoTransactions".localized())
+    private lazy var emptyPPCListLabel: UILabel =
+        view.setUpEmptyListLabel(text: "mobilePrepaidCardNoTransactions".localized())
     private var uiSegmentedControl: UISegmentedControl?
     private var selectedSegmentedControl = 0
 
@@ -164,6 +166,11 @@ final class ListReceiptController: UITableViewController {
 extension ListReceiptController: ListReceiptView {
     /// Loads the receipts
     func reloadData() {
+        if presenter.selectedSegmentControlItem?.receiptSourceType == .prepaidCard {
+            emptyListLabel = view.setUpEmptyListLabel(text: "mobilePrepaidCardNoTransactions".localized())
+        } else {
+            emptyListLabel = view.setUpEmptyListLabel(text: "mobileNoTransactions".localized())
+        }
         if presenter.sectionData.isNotEmpty {
             toggleEmptyListView(hideLabel: true)
         } else {
@@ -200,6 +207,12 @@ extension ListReceiptController: ListReceiptView {
     }
 
     private func toggleEmptyListView(hideLabel: Bool) {
-        emptyListLabel.isHidden = hideLabel
+        if presenter.selectedSegmentControlItem?.receiptSourceType == .prepaidCard {
+            emptyPPCListLabel.isHidden = hideLabel
+            emptyListLabel.isHidden = true
+        } else {
+            emptyListLabel.isHidden = hideLabel
+            emptyPPCListLabel.isHidden = true
+        }
     }
 }
