@@ -139,27 +139,6 @@ final class ListReceiptController: UITableViewController {
         tableView.register(ReceiptTransactionCell.self,
                            forCellReuseIdentifier: ReceiptTransactionCell.reuseIdentifier)
     }
-
-    private func tabbedHeaderView() {
-        if presenter.showAllAvailableSources && presenter.segmentedControlItems.count > 1 {
-            let segementedControl = UISegmentedControl(frame: CGRect(x: 30,
-                                                                     y: 40,
-                                                                     width: tableView.frame.size.width,
-                                                                     height: 36))
-            var index = 0
-            presenter.segmentedControlItems.forEach { segementedControlItem in
-                segementedControl.insertSegment(withTitle: segementedControlItem.segmentedControlHeader,
-                                                at: index,
-                                                animated: true)
-                index += 1
-            }
-            segementedControl.addTarget(self,
-                                        action: #selector(segmentControlHandler(sender:)),
-                                        for: .valueChanged)
-            segementedControl.selectedSegmentIndex = selectedSegmentedControl
-            tableView.tableHeaderView = segementedControl
-        }
-    }
 }
 
 // MARK: `ListReceiptView` delegate
@@ -186,7 +165,24 @@ extension ListReceiptController: ListReceiptView {
     }
 
     func reloadTableViewHeader() {
-        tabbedHeaderView()
+        if presenter.showAllAvailableSources && presenter.segmentedControlItems.count > 1 {
+            let segementedControl = UISegmentedControl(frame: CGRect(x: 30,
+                                                                    y: 40,
+                                                                    width: tableView.frame.size.width,
+                                                                    height: 36))
+            var index = 0
+            presenter.segmentedControlItems.forEach { segementedControlItem in
+               segementedControl.insertSegment(withTitle: segementedControlItem.segmentedControlHeader,
+                                               at: index,
+                                               animated: true)
+               index += 1
+            }
+            segementedControl.addTarget(self,
+                                       action: #selector(segmentControlHandler(sender:)),
+                                       for: .valueChanged)
+            segementedControl.selectedSegmentIndex = selectedSegmentedControl
+            tableView.tableHeaderView = segementedControl
+        }
     }
 
     func hideLoading() {
