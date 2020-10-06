@@ -219,12 +219,12 @@ final class CreateTransferPresenter {
                 }
                 return
             }
-            
+
             if let configuration = configuration,
-                let programModel = configuration.programModel,
-                let programModelEnum = HyperwalletProgramModel(rawValue: programModel),
-                !programModelEnum.isPay2CardOrCardOnlyModel() {
-                    strongSelf.createTransferSourceCellConfiguration(true, .user, configuration.userToken)
+            let programModel = configuration.programModel,
+            let programModelEnum = HyperwalletProgramModel(rawValue: programModel),
+            !programModelEnum.isPay2CardOrCardOnlyModel() {
+                strongSelf.createTransferSourceCellConfiguration(true, .user, configuration.userToken)
             }
             strongSelf.prepaidCardRepository
                 .listPrepaidCards(queryParam: strongSelf.setUpPrepaidCardQueryParam()) { [weak self] (result) in

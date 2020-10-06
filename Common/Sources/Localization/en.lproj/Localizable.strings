@@ -239,7 +239,6 @@
 "mobileConfirmDetailsFee" = "Fee";
 "mobileConfirmDetailsTotal" = "You will receive";
 "mobileTransferMax" = "Transfer max amount";
-"total" = "Total: %1$@%2$@ %3$@";
 "mobileFXsell" = "From";
 "mobileFXbuy" = "To";
 "mobileFXRateLabel" = "Exchange rate";

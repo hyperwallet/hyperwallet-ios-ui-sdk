@@ -102,20 +102,12 @@ extension TransferSourceCell {
         textLabel?.numberOfLines = 0
         textLabel?.lineBreakMode = .byWordWrapping
         textLabel?.accessibilityIdentifier = "transferSourceTitleLabel"
-        if let currency = currency, let availableBalance = availableBalance {
-            let locale = NSLocale(localeIdentifier: currency)
-            let currencySymbol = locale.displayName(forKey: NSLocale.Key.currencySymbol, value: currency)
-            if let currencySymbol = currencySymbol {
-                detailTextLabel?.attributedText = formatDetails(subtitle: String(format: "total".localized(),
-                                                                                 currencySymbol,
-                                                                                 availableBalance,
-                                                                                 currency),
-                                                                additionalInfo: additionalInfo)
-                detailTextLabel?.numberOfLines = 0
-                detailTextLabel?.adjustsFontForContentSizeCategory = true
-                detailTextLabel?.lineBreakMode = .byWordWrapping
-                detailTextLabel?.accessibilityIdentifier = "transferSourceSubtitleLabel"
-            }
+        if let additionalInfo = additionalInfo {
+            detailTextLabel?.text = additionalInfo
+            detailTextLabel?.numberOfLines = 0
+            detailTextLabel?.adjustsFontForContentSizeCategory = true
+            detailTextLabel?.lineBreakMode = .byWordWrapping
+            detailTextLabel?.accessibilityIdentifier = "transferSourceSubtitleLabel"
         }
 
         if !UIFont.isLargeSizeCategory {
@@ -126,18 +118,5 @@ extension TransferSourceCell {
             imageView?.image = icon
             imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
         }
-    }
-
-    private func formatDetails(subtitle: String, additionalInfo: String? = nil) -> NSAttributedString {
-        let attributedText = NSMutableAttributedString()
-        let stringFormat = additionalInfo != nil ? "%@\n" : "%@"
-        attributedText.append(value: String(format: stringFormat, subtitle),
-                              font: subTitleLabelFont,
-                              color: subTitleLabelColor)
-        if let additionalInfo = additionalInfo {
-            attributedText.append(value: additionalInfo, font: subTitleLabelFont, color: subTitleLabelColor)
-        }
-
-        return attributedText
     }
 }
