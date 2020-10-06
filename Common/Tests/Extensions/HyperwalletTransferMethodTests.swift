@@ -70,9 +70,7 @@ class HyperwalletTransferMethodTests: XCTestCase {
     func testAdditionalInfo_venmoAccount() {
         let transferMethod = HyperwalletVenmoAccount.Builder(transferMethodCountry: country,
                                                              transferMethodCurrency: currency,
-                                                             transferMethodProfileType: profileType,
-                                                             transferMethodType:
-            HyperwalletTransferMethod.TransferMethodType.venmoAccount.rawValue)
+                                                             transferMethodProfileType: profileType)
             .accountId("9876543210")
             .build()
 
