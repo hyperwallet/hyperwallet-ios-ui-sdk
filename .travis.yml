@@ -15,9 +15,9 @@ env:
   - IOS_FRAMEWORK_SCHEME="HyperwalletUISDK"
   - IOS_UI_TESTS_SCHEME="Demo"
   matrix:
-  - ios_version='13.4.1'  ios_device='iPhone 11' scheme="$IOS_FRAMEWORK_SCHEME" platform='iOS
+  - ios_version='13.3'  ios_device='iPhone 11' scheme="$IOS_FRAMEWORK_SCHEME" platform='iOS
     Simulator' configuration="Debug" code_coverage="YES" publish_docs="YES" only_active_arch="YES"
-  - ios_version='13.4.1'  ios_device='iPhone 11' scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS
+  - ios_version='13.3'  ios_device='iPhone 11' scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS
     Simulator' configuration="XCUITest" code_coverage="NO" publish_docs="NO" only_active_arch="NO"
 before_install:
   # Boot the emulator by ID
@@ -45,6 +45,8 @@ before_install:
 script: |
   set -o pipefail
   set -e
+
+  - open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app --args -CurrentDeviceUDID $ios_uid
 
   # Define the destination emulator
   destination="platform=$platform,OS=$ios_version,name=$ios_device"
