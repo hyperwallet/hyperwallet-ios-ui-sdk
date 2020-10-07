@@ -3,13 +3,19 @@ import HyperwalletSDK
 ///  Prepaid Card repository protocol
 public protocol PrepaidCardRepository {
     /// List Prepaid cards
-    func listPrepaidCards(queryParam: HyperwalletPrepaidCardQueryParm,
+    func listPrepaidCards(queryParam: HyperwalletPrepaidCardQueryParam,
                           completion: @escaping (Result<HyperwalletPageList<HyperwalletPrepaidCard>?,
     HyperwalletErrorType>) -> Void)
 
     /// Get Prepaid card
     func getPrepaidCard(token: String, completion: @escaping (Result < HyperwalletPrepaidCard?,
         HyperwalletErrorType>) -> Void)
+
+    /// Refreshes Prepaid Card
+    func refreshPrepaidCard()
+
+    /// Refreshes Prepaid Cards
+    func refreshPrepaidCards()
 }
 
 /// Prepaid Card repository
@@ -17,7 +23,7 @@ public final class RemotePrepaidCardRepository: PrepaidCardRepository {
     var prepaidCardPageList: HyperwalletPageList<HyperwalletPrepaidCard>?
     var prepaidCard: HyperwalletPrepaidCard?
 
-    public func listPrepaidCards(queryParam: HyperwalletPrepaidCardQueryParm,
+    public func listPrepaidCards(queryParam: HyperwalletPrepaidCardQueryParam,
                                  completion: @escaping (Result<HyperwalletPageList<HyperwalletPrepaidCard>?,
     HyperwalletErrorType>) -> Void) {
         if prepaidCardPageList == nil {
@@ -36,6 +42,16 @@ public final class RemotePrepaidCardRepository: PrepaidCardRepository {
         } else {
             completion(.success(prepaidCard))
         }
+    }
+
+    /// Refreshes Prepaid Card
+    public func refreshPrepaidCard() {
+        prepaidCard = nil
+    }
+
+    /// Refreshes Prepaid Cards
+    public func refreshPrepaidCards() {
+        prepaidCardPageList = nil
     }
 
     private func getPrepaidCardHandler(
@@ -74,8 +90,8 @@ public final class RemotePrepaidCardRepository: PrepaidCardRepository {
         }
     }
 
-    private func setUpPrepaidCardQueryParam() -> HyperwalletPrepaidCardQueryParm {
-        let queryParam = HyperwalletPrepaidCardQueryParm()
+    private func setUpPrepaidCardQueryParam() -> HyperwalletPrepaidCardQueryParam {
+        let queryParam = HyperwalletPrepaidCardQueryParam()
         // Only fetch active prepaid cards
         queryParam.status = .activated
         return queryParam

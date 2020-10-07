@@ -20,7 +20,7 @@ import HyperwalletSDK
 
 /// Class contains methods to get an instance of transfer method repository
 public final class TransferMethodRepositoryFactory {
-    private static var instance: TransferMethodRepositoryFactory?
+    private(set) static var instance: TransferMethodRepositoryFactory?
     private let remoteTransferMethodConfigurationRepository: TransferMethodConfigurationRepository
     private let remoteTransferMethodRepository: TransferMethodRepository
     private let remotePrepaidCardRepository: PrepaidCardRepository

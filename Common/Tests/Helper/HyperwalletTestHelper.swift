@@ -1,15 +1,27 @@
 import Hippolyte
 import HyperwalletSDK
+#if !COCOAPODS
+import Common
+#endif
 import XCTest
 
 class HyperwalletTestHelper {
     static let applicationJson = "application/json"
+    static var programModel: HyperwalletProgramModel = .walletModel
     static var authenticationToken: String {
-        return AuthenticationTokenGeneratorMock(hostName: "localhost").token
+        return AuthenticationTokenGeneratorMock(hostName: "localhost",
+                                                programModel: programModel).token
     }
     static var authenticationProvider: AuthenticationProviderMock {
         return AuthenticationProviderMock(authorizationData: authenticationToken)
     }
+
+    static var authenticationProviderWithErrorResponse: AuthenticationProviderMock {
+        return AuthenticationProviderMock(authorizationData: nil,
+                                          error: HyperwalletAuthenticationErrorType
+                                            .unexpected("authentication token cannot be retrieved."))
+    }
+
     static let contentType = "Content-Type"
     static let graphQlURL = "https://localhost/graphql"
     static let restURL = "https://localhost/rest/v3/"

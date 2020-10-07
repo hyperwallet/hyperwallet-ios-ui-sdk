@@ -31,13 +31,34 @@ class CreateTransferTests: XCTestCase {
         func setUpRequest() {
             switch self {
             case .success:
-                PrepaidCardRepositoryRequestHelper.setupSuccessRequest()
+                PrepaidCardRepositoryRequestHelper
+                    .setupSuccessRequest(responseFile: "GetPrepaidCardSuccessResponse",
+                                         prepaidCardToken: PrepaidCardRepositoryRequestHelper.clientSourceToken)
 
             case .failure:
-                PrepaidCardRepositoryRequestHelper.setupFailureRequest()
+                PrepaidCardRepositoryRequestHelper
+                    .setupFailureRequest(prepaidCardToken: PrepaidCardRepositoryRequestHelper.clientSourceToken)
 
             case .noContent:
-                PrepaidCardRepositoryRequestHelper.setupNoContentRequest()
+                PrepaidCardRepositoryRequestHelper
+                    .setupNoContentRequest(prepaidCardToken: PrepaidCardRepositoryRequestHelper.clientSourceToken)
+            }
+        }
+    }
+
+    private enum ListPrepaidCardsResultType {
+        case success, failure, noContent
+        func setUpRequest() {
+            switch self {
+            case .success:
+                PrepaidCardRepositoryRequestHelper.setupSuccessRequest(responseFile: "ListPrepaidCardResponse",
+                                                                       prepaidCardToken: nil)
+
+            case .failure:
+                PrepaidCardRepositoryRequestHelper.setupFailureRequest(prepaidCardToken: nil)
+
+            case .noContent:
+                PrepaidCardRepositoryRequestHelper.setupNoContentRequest(prepaidCardToken: nil)
             }
         }
     }
@@ -90,18 +111,21 @@ class CreateTransferTests: XCTestCase {
     private func initializePresenter(prepaidCardResult: LoadPrepaidCardResultType = .success,
                                      transferMethodResult: LoadTransferMethodsResultType = .success,
                                      createTransferResult: CreateTransferResultType = .success,
-                                     getUserResultType: GetUserResultType = .success,
-                                     sourceToken: String? = nil) {
+                                     getUserResult: GetUserResultType = .success,
+                                     listPrepaidCardResult: ListPrepaidCardsResultType = .success,
+                                     sourceToken: String? = nil,
+                                     showAllAvailableSources: Bool = false) {
         var expectations = [XCTestExpectation]()
         if sourceToken != nil {
             prepaidCardResult.setUpRequest()
-            //expectations.append(mockView.loadCreateTransferExpectation)
+        } else if showAllAvailableSources {
+            listPrepaidCardResult.setUpRequest()
+        } else {
+            getUserResult.setUpRequest()
         }
         transferMethodResult.setUpRequest()
         createTransferResult.setUpRequest()
-        getUserResultType.setUpRequest()
-
-        presenter = CreateTransferPresenter(clientTransferId, sourceToken, false, view: mockView)
+        presenter = CreateTransferPresenter(clientTransferId, sourceToken, showAllAvailableSources, view: mockView)
 
         if mockView.stopOnError {
             expectations.append(mockView.showErrorExpectation)
@@ -113,29 +137,163 @@ class CreateTransferTests: XCTestCase {
         wait(for: expectations, timeout: 1)
     }
 
-    func testLoadCreateTransfer_sourceTokenIsNil() {
-        initializePresenter()
+    private func assertResponse(isShowErrorPerformed: Bool,
+                                transferSourceCellConfigurationsCount: Int,
+                                transferSourceType: TransferSourceType,
+                                selectedTransferDestination: Bool) {
         XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
         XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
-        XCTAssertFalse(mockView.isShowErrorPerformed, "showError should not be performed")
-        XCTAssertNotNil(presenter.selectedTransferDestination, "selectedTransferDestination should not be nil")
+        XCTAssertEqual(mockView.isShowErrorPerformed,
+                       isShowErrorPerformed,
+                       "showError should be \(isShowErrorPerformed)")
+        XCTAssertEqual(presenter.transferSourceCellConfigurations.count,
+                       transferSourceCellConfigurationsCount,
+                       "transferSourceCellConfigurations should be \(transferSourceCellConfigurationsCount)")
+        if presenter.transferSourceCellConfigurations.isNotEmpty {
+            XCTAssertNotNil(presenter.transferSourceCellConfigurations.first(where: { $0.isSelected }),
+                            "transferSourceCellConfigurations isSelected should not be nil")
+            XCTAssertEqual(presenter.transferSourceCellConfigurations.first(where: { $0.isSelected })?.type,
+                           transferSourceType,
+                           "TransferSourceType shoould be \(transferSourceType)")
+        }
+        XCTAssertEqual(presenter.selectedTransferDestination != nil,
+                       selectedTransferDestination,
+                       "selectedTransferDestination != nil should be \(selectedTransferDestination)")
+    }
+
+    func testLoadCreateTransfer_sourceTokenIsNil() {
+        initializePresenter()
+        assertResponse(isShowErrorPerformed: false,
+                       transferSourceCellConfigurationsCount: 1,
+                       transferSourceType: .user,
+                       selectedTransferDestination: true)
+    }
+
+    func testLoadCreateTransfer_sourceTokenIsNil_userErrorResponse() {
+        mockView.stopOnError = true
+        initializePresenter(getUserResult: .failure)
+        assertResponse(isShowErrorPerformed: true,
+                       transferSourceCellConfigurationsCount: 0,
+                       transferSourceType: .user,
+                       selectedTransferDestination: false)
     }
 
     func testLoadCreateTransfer_sourceTokenIsNotNil() {
         initializePresenter(sourceToken: PrepaidCardRepositoryRequestHelper.clientSourceToken)
-        XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
-        XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
-        XCTAssertFalse(mockView.isShowErrorPerformed, "showError should not be performed")
-        XCTAssertNotNil(presenter.selectedTransferDestination, "selectedTransferDestination should not be nil")
+        assertResponse(isShowErrorPerformed: false,
+                       transferSourceCellConfigurationsCount: 1,
+                       transferSourceType: .prepaidCard,
+                       selectedTransferDestination: true)
     }
 
-    func testLoadCreateTransfer_getUser_failure() {
+    func testLoadCreateTransfer_sourceTokenIsNotNil_prepaidCardErrorResponse() {
         mockView.stopOnError = true
-        initializePresenter(getUserResultType: .failure)
-        XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
-        XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
-        XCTAssertTrue(mockView.isShowErrorPerformed, "showError should be performed")
-        XCTAssertNil(presenter.selectedTransferDestination, "selectedTransferMethod should be nil")
+        initializePresenter(prepaidCardResult: .failure,
+                            sourceToken: PrepaidCardRepositoryRequestHelper.clientSourceToken)
+        assertResponse(isShowErrorPerformed: true,
+                       transferSourceCellConfigurationsCount: 1,
+                       transferSourceType: .prepaidCard,
+                       selectedTransferDestination: false)
+    }
+
+    func testLoadCreateTransfer_showAllAvailableSources_walletModel_activePrepaidCards() {
+        Hyperwallet.clearInstance()
+        HyperwalletTestHelper.programModel = .walletModel
+        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
+        initializePresenter(showAllAvailableSources: true)
+        assertResponse(isShowErrorPerformed: false,
+                       transferSourceCellConfigurationsCount: 3,
+                       transferSourceType: .user,
+                       selectedTransferDestination: true)
+        Hyperwallet.clearInstance()
+    }
+
+    func testLoadCreateTransfer_showAllAvailableSources_pay2CardModel() {
+        Hyperwallet.clearInstance()
+        HyperwalletTestHelper.programModel = .pay2CardModel
+        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
+        initializePresenter(showAllAvailableSources: true)
+        assertResponse(isShowErrorPerformed: false,
+                       transferSourceCellConfigurationsCount: 2,
+                       transferSourceType: .prepaidCard,
+                       selectedTransferDestination: true)
+        Hyperwallet.clearInstance()
+    }
+
+    func testLoadCreateTransfer_showAllAvailableSources_cardOnlyModel() {
+        Hyperwallet.clearInstance()
+        HyperwalletTestHelper.programModel = .cardOnlyModel
+        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
+        initializePresenter(showAllAvailableSources: true)
+        assertResponse(isShowErrorPerformed: false,
+                       transferSourceCellConfigurationsCount: 2,
+                       transferSourceType: .prepaidCard,
+                       selectedTransferDestination: true)
+        Hyperwallet.clearInstance()
+    }
+
+    func testLoadCreateTransfer_showAllAvailableSources_walletModel_configurationErrorResponse() {
+        Hyperwallet.clearInstance()
+        Hyperwallet.setup(HyperwalletTestHelper.authenticationProviderWithErrorResponse)
+        mockView.stopOnError = true
+        initializePresenter(showAllAvailableSources: true)
+        assertResponse(isShowErrorPerformed: true,
+                       transferSourceCellConfigurationsCount: 0,
+                       transferSourceType: .user,
+                       selectedTransferDestination: false)
+        Hyperwallet.clearInstance()
+    }
+
+    func testLoadCreateTransfer_showAllAvailableSources_walletModel_listPrepaidCardsNoResponse() {
+        Hyperwallet.clearInstance()
+        HyperwalletTestHelper.programModel = .walletModel
+        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
+        initializePresenter(listPrepaidCardResult: .noContent, showAllAvailableSources: true)
+        assertResponse(isShowErrorPerformed: false,
+                       transferSourceCellConfigurationsCount: 1,
+                       transferSourceType: .user,
+                       selectedTransferDestination: true)
+        Hyperwallet.clearInstance()
+    }
+
+    func testLoadCreateTransfer_showAllAvailableSources_walletModel_listPrepaidCardsErrorResponse() {
+        Hyperwallet.clearInstance()
+        HyperwalletTestHelper.programModel = .walletModel
+        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
+        mockView.stopOnError = true
+        initializePresenter(listPrepaidCardResult: .failure, showAllAvailableSources: true)
+        assertResponse(isShowErrorPerformed: true,
+                       transferSourceCellConfigurationsCount: 1,
+                       transferSourceType: .user,
+                       selectedTransferDestination: false)
+        Hyperwallet.clearInstance()
+    }
+
+    func testLoadCreateTransfer_showAllAvailableSources_pay2CardModel_listPrepaidCardsNoResponse() {
+        Hyperwallet.clearInstance()
+        HyperwalletTestHelper.programModel = .pay2CardModel
+        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
+        mockView.stopOnError = true
+        initializePresenter(listPrepaidCardResult: .noContent, showAllAvailableSources: true)
+        assertResponse(isShowErrorPerformed: false,
+                       transferSourceCellConfigurationsCount: 0,
+                       transferSourceType: .prepaidCard,
+                       selectedTransferDestination: false)
+        XCTAssertTrue(mockView.isShowAlertPerformed, "showAlert should be performed")
+        Hyperwallet.clearInstance()
+    }
+
+    func testLoadCreateTransfer_showAllAvailableSources_pay2CardModel_listPrepaidCardsErrorResponse() {
+        Hyperwallet.clearInstance()
+        HyperwalletTestHelper.programModel = .pay2CardModel
+        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
+        mockView.stopOnError = true
+        initializePresenter(listPrepaidCardResult: .failure, showAllAvailableSources: true)
+        assertResponse(isShowErrorPerformed: true,
+                       transferSourceCellConfigurationsCount: 0,
+                       transferSourceType: .prepaidCard,
+                       selectedTransferDestination: false)
+        Hyperwallet.clearInstance()
     }
 
     func testLoadCreateTransfer_selectedTransferMethodIsNil() {
@@ -398,6 +556,7 @@ class MockCreateTransferView: CreateTransferView {
     var isUpdateTransferAmountSectionPerformed = false
     var isAreAllFieldsValidPerformed = false
     var isUpdateFooterPerformed = false
+    var isRetryPerformed = false
 
     var stopOnError = false
 
@@ -421,6 +580,7 @@ class MockCreateTransferView: CreateTransferView {
 
     func showAlert(message: String?) {
         isShowAlertPerformed = true
+        showErrorExpectation?.fulfill()
     }
 
     func showError(_ error: HyperwalletErrorType,
@@ -428,7 +588,8 @@ class MockCreateTransferView: CreateTransferView {
                    pageGroup: String,
                    _ retry: (() -> Void)?) {
         isShowErrorPerformed = true
-        if retry != nil {
+        if retry != nil, !isRetryPerformed {
+            isRetryPerformed = true
             retry!()
         }
         showErrorExpectation?.fulfill()
@@ -469,6 +630,7 @@ class MockCreateTransferView: CreateTransferView {
         isUpdateTransferAmountSectionPerformed = false
         isAreAllFieldsValidPerformed = false
         isUpdateFooterPerformed = false
+        isRetryPerformed = false
 
         stopOnError = false
 

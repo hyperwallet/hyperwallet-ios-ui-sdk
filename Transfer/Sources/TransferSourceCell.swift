@@ -31,7 +31,7 @@ class TransferSourceCellConfiguration {
     let type: TransferSourceType
     let token: String
     let title: String
-    let fontIcon: String
+    let fontIcon: HyperwalletIconContent
     var isSelected: Bool
     var availableBalance: String?
     var destinationCurrency: String?
@@ -41,7 +41,7 @@ class TransferSourceCellConfiguration {
          type: TransferSourceType,
          token: String,
          title: String,
-         fontIcon: String) {
+         fontIcon: HyperwalletIconContent) {
         self.isSelected = isSelectedTransferSource
         self.type = type
         self.token = token
@@ -89,7 +89,7 @@ extension TransferSourceCell {
                   additionalInfo: transferSourceCellConfiguration.additionalText,
                   currency: transferSourceCellConfiguration.destinationCurrency,
                   availableBalance: transferSourceCellConfiguration.availableBalance,
-                  fontIcon: transferSourceCellConfiguration.fontIcon)
+                  fontIcon: transferSourceCellConfiguration.fontIcon.rawValue)
     }
 
     private func configure(title: String,
@@ -102,21 +102,11 @@ extension TransferSourceCell {
         textLabel?.numberOfLines = 0
         textLabel?.lineBreakMode = .byWordWrapping
         textLabel?.accessibilityIdentifier = "transferSourceTitleLabel"
-        if let currency = currency, let availableBalance = availableBalance {
-            let locale = NSLocale(localeIdentifier: currency)
-            let currencySymbol = locale.displayName(forKey: NSLocale.Key.currencySymbol, value: currency)
-            if let currencySymbol = currencySymbol {
-                detailTextLabel?.attributedText = formatDetails(subtitle: String(format: "total".localized(),
-                                                                                 currencySymbol,
-                                                                                 availableBalance,
-                                                                                 currency),
-                                                                additionalInfo: additionalInfo)
-                detailTextLabel?.numberOfLines = 0
-                detailTextLabel?.adjustsFontForContentSizeCategory = true
-                detailTextLabel?.lineBreakMode = .byWordWrapping
-                detailTextLabel?.accessibilityIdentifier = "transferSourceSubtitleLabel"
-            }
-        }
+        detailTextLabel?.text = additionalInfo
+        detailTextLabel?.numberOfLines = 0
+        detailTextLabel?.adjustsFontForContentSizeCategory = true
+        detailTextLabel?.lineBreakMode = .byWordWrapping
+        detailTextLabel?.accessibilityIdentifier = availableBalance == nil ? nil : "transferSourceSubtitleLabel"
 
         if !UIFont.isLargeSizeCategory {
             let icon = UIImage.fontIcon(fontIcon,
@@ -126,18 +116,5 @@ extension TransferSourceCell {
             imageView?.image = icon
             imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
         }
-    }
-
-    private func formatDetails(subtitle: String, additionalInfo: String? = nil) -> NSAttributedString {
-        let attributedText = NSMutableAttributedString()
-        let stringFormat = additionalInfo != nil ? "%@\n" : "%@"
-        attributedText.append(value: String(format: stringFormat, subtitle),
-                              font: subTitleLabelFont,
-                              color: subTitleLabelColor)
-        if let additionalInfo = additionalInfo {
-            attributedText.append(value: additionalInfo, font: subTitleLabelFont, color: subTitleLabelColor)
-        }
-
-        return attributedText
     }
 }
