@@ -189,6 +189,40 @@ class TransferMethodRepositoryTests: XCTestCase {
                        "The intermediaryBankId should be 12345678901")
     }
 
+    func testCreateTransferMethod_venmoAccount() {
+        let expectation = self.expectation(description: "Create Venmo account completed")
+        var venmoAccountResult: HyperwalletTransferMethod?
+        var venmoAccountError: HyperwalletErrorType?
+
+        setupOkResponseMockServer(endpoint: "/venmo-accounts", responseDataFile: "VenmoAccountResponse")
+
+        let venmoAccount = HyperwalletVenmoAccount
+            .Builder(transferMethodCountry: "US",
+                     transferMethodCurrency: "USD",
+                     transferMethodProfileType: "INDIVIDUAL")
+            .accountId("9876543210")
+            .build()
+
+        transferMethodRepository.createTransferMethod(venmoAccount) { result in
+            switch result {
+            case .failure(let error):
+                    venmoAccountError = error
+
+            case .success(let createResult):
+                    venmoAccountResult = createResult
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1000)
+
+        XCTAssertNil(venmoAccountError, "The venmoAccountError should be nil")
+        XCTAssertNotNil(venmoAccountResult, "The venmoAccountError should not be nil")
+        XCTAssertEqual(venmoAccountResult?
+            .getField(HyperwalletTransferMethod.TransferMethodField.accountId.rawValue)!,
+                       "9876543210",
+                       "The venmoAccountId should be 9876543210")
+    }
+
     func testCreateTransferMethod_failure() {
         let expectation = self.expectation(description: "Create bank account failed")
         var bankAccountResult: HyperwalletTransferMethod?
@@ -358,6 +392,43 @@ class TransferMethodRepositoryTests: XCTestCase {
 
             case .success(let deactivateResult):
                 statusTransitionResult = deactivateResult
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+
+        XCTAssertNil(statusTransitionError, "The statusTransitionError should be nil")
+        XCTAssertNotNil(statusTransitionResult, "The statusTransitionResult should not be nil")
+        XCTAssertEqual(statusTransitionResult?.fromStatus,
+                       HyperwalletStatusTransition.Status.activated,
+                       "The statusTransitionResult?.fromStatus should be activated")
+        XCTAssertEqual(statusTransitionResult?.toStatus,
+                       HyperwalletStatusTransition.Status.deactivated,
+                       "The statusTransitionResult?.toStatus should be deactivated")
+    }
+
+    func testDeactivateTransferMethod_venmoAccount() {
+        let expectation = self.expectation(description: "Deactivate Venmo Account completed")
+        var statusTransitionResult: HyperwalletStatusTransition?
+        var statusTransitionError: HyperwalletErrorType?
+
+        setupOkResponseMockServer(endpoint: "/venmo-accounts/trm-123456789/status-transitions",
+                                  responseDataFile: "StatusTransitionResponseSuccess")
+
+        let venmoAccount = HyperwalletVenmoAccount
+            .Builder(transferMethodCountry: "US",
+                     transferMethodCurrency: "USD",
+                     transferMethodProfileType: "INDIVIDUAL")
+            .build()
+        venmoAccount.setField(key: "token", value: "trm-123456789")
+
+        transferMethodRepository.deactivateTransferMethod(venmoAccount) { result in
+            switch result {
+            case .failure(let error):
+                    statusTransitionError = error
+
+            case .success(let deactivateResult):
+                    statusTransitionResult = deactivateResult
             }
             expectation.fulfill()
         }
