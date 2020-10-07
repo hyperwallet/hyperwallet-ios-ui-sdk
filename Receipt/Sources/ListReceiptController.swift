@@ -167,9 +167,9 @@ extension ListReceiptController: ListReceiptView {
     func reloadTableViewHeader() {
         if presenter.showAllAvailableSources && presenter.segmentedControlItems.count > 1 {
             let segementedControl = UISegmentedControl(frame: CGRect(x: 30,
-                                                                    y: 40,
-                                                                    width: tableView.frame.size.width,
-                                                                    height: 36))
+                                                                     y: 40,
+                                                                     width: tableView.frame.size.width,
+                                                                     height: 36))
             var index = 0
             presenter.segmentedControlItems.forEach { segementedControlItem in
                segementedControl.insertSegment(withTitle: segementedControlItem.segmentedControlHeader,
@@ -178,8 +178,8 @@ extension ListReceiptController: ListReceiptView {
                index += 1
             }
             segementedControl.addTarget(self,
-                                       action: #selector(segmentControlHandler(sender:)),
-                                       for: .valueChanged)
+                                        action: #selector(segmentControlHandler(sender:)),
+                                        for: .valueChanged)
             segementedControl.selectedSegmentIndex = selectedSegmentedControl
             tableView.tableHeaderView = segementedControl
         }
