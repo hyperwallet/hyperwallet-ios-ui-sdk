@@ -259,3 +259,4 @@
 "transfer_fx_rate_changed" = "Due to changes in the FX rate, you will now receive: %1$@";
 "mobileTransferSuccessMsg" = "Your transfer is being processed";
 "mobileTransferSuccessDetails" = "The funds are on the way to your %1$@.";
+"noTransferFromSourceAvailable" = "No Transfer from source available";

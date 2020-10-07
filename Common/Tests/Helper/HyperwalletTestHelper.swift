@@ -16,6 +16,12 @@ class HyperwalletTestHelper {
         return AuthenticationProviderMock(authorizationData: authenticationToken)
     }
 
+    static var authenticationProviderWithErrorResponse: AuthenticationProviderMock {
+        return AuthenticationProviderMock(authorizationData: nil,
+                                          error: HyperwalletAuthenticationErrorType
+                                            .unexpected("authentication token cannot be retrieved."))
+    }
+
     static let contentType = "Content-Type"
     static let graphQlURL = "https://localhost/graphql"
     static let restURL = "https://localhost/rest/v3/"

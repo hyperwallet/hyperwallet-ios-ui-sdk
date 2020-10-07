@@ -168,6 +168,7 @@ final class CreateTransferPresenter {
 
     private func loadUserAndCreateTransfer() {
         view?.showLoading()
+        transferSourceCellConfigurations.removeAll()
         userRepository.getUser { [weak self] result in
             guard let strongSelf = self, let view = strongSelf.view else {
                 return
@@ -199,8 +200,7 @@ final class CreateTransferPresenter {
                                                                 ? "mobileAvailableFunds".localized() :
                                                                 "prepaid_card".localized(),
                                                             fontIcon: transferSourceType == .user
-                                                                ? HyperwalletIconContent.bankAccount.rawValue :
-                                                                HyperwalletIconContent.prepaidCard.rawValue)
+                                                                ? .bankAccount : .prepaidCard)
         configuration.additionalText = additionalText
         configuration.availableBalance = availableBalance
         configuration.destinationCurrency = destinationCurrency
@@ -209,19 +209,20 @@ final class CreateTransferPresenter {
 
     private func loadAllAvailableSources() {
         view?.showLoading()
+        transferSourceCellConfigurations.removeAll()
         Hyperwallet.shared.getConfiguration { [weak self] configuration, error in
             guard let strongSelf = self, let view = strongSelf.view else {
                 return
             }
             if let error = error {
+                strongSelf.view?.hideLoading()
                 view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
                     strongSelf.loadAllAvailableSources()
                 }
                 return
             }
 
-            if let configuration = configuration,
-            let programModel = configuration.programModel,
+            if let configuration = configuration, let programModel = configuration.programModel,
             let programModelEnum = HyperwalletProgramModel(rawValue: programModel),
             !programModelEnum.isPay2CardOrCardOnlyModel() {
                 strongSelf.createTransferSourceCellConfiguration(true, .user, configuration.userToken)
@@ -235,10 +236,7 @@ final class CreateTransferPresenter {
                 switch result {
                 case .success(let pageList):
                     var isSelectedTransferSource = false
-                    if strongSelf.transferSourceCellConfigurations.isEmpty {
-                        isSelectedTransferSource = true
-                    }
-
+                    if strongSelf.transferSourceCellConfigurations.isEmpty { isSelectedTransferSource = true }
                     if let prepaidCards = pageList?.data {
                         prepaidCards.forEach { prepaidCard in
                             strongSelf
@@ -248,7 +246,7 @@ final class CreateTransferPresenter {
                                                                        prepaidCard.formattedCardBrandCardNumber)
                             isSelectedTransferSource = false
                         }
-                    } else {
+                    } else if isSelectedTransferSource {
                         view.showAlert(message: "noTransferFromSourceAvailable".localized())
                         return
                     }
