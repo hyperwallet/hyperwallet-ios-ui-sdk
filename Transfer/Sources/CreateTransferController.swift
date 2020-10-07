@@ -460,9 +460,6 @@ extension CreateTransferController {
     private func resetValuesAndReload(token: String,
                                       selectedTransferDestination: HyperwalletTransferMethod? = nil) {
         presenter.selectedTransferDestination = selectedTransferDestination
-        presenter.didTapTransferAllFunds = false
-        presenter.amount = "0"
-        presenter.notes = nil
         presenter.loadCreateTransferFromSelectedTransferSource(sourceToken: token)
     }
 }
