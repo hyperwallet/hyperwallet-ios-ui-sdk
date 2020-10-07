@@ -265,7 +265,7 @@ extension CreateTransferController {
         if let tableViewCell = cell as? TransferNotesCell {
             tableViewCell.configure(notes: presenter.notes,
                                     isEditable: true,
-                                    isHideBorder: true) { [weak presenter] notes in
+                                    hideBorder: true) { [weak presenter] notes in
                 presenter?.notes = notes
             }
         }

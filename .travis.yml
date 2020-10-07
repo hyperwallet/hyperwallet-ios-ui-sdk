@@ -1,5 +1,5 @@
 language: swift
-osx_image: xcode11.3
+osx_image: xcode11.4
 os: osx
 branches:
   only:
@@ -15,9 +15,9 @@ env:
   - IOS_FRAMEWORK_SCHEME="HyperwalletUISDK"
   - IOS_UI_TESTS_SCHEME="Demo"
   matrix:
-  - ios_version='13.3'  ios_device='iPhone 8' scheme="$IOS_FRAMEWORK_SCHEME" platform='iOS
+  - ios_version='13.3'  ios_device='iPhone 11' scheme="$IOS_FRAMEWORK_SCHEME" platform='iOS
     Simulator' configuration="Debug" code_coverage="YES" publish_docs="YES" only_active_arch="YES"
-  - ios_version='13.3'  ios_device='iPhone 8' scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS
+  - ios_version='13.3'  ios_device='iPhone 11' scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS
     Simulator' configuration="XCUITest" code_coverage="NO" publish_docs="NO" only_active_arch="NO"
 before_install:
   # Boot the emulator by ID
