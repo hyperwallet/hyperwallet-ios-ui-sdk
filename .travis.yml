@@ -46,8 +46,6 @@ script: |
   set -o pipefail
   set -e
 
-  - open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app --args -CurrentDeviceUDID $ios_uid
-
   # Define the destination emulator
   destination="platform=$platform,OS=$ios_version,name=$ios_device"
 
