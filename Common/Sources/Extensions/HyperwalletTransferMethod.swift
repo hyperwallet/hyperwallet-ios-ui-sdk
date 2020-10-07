@@ -31,18 +31,18 @@ extension HyperwalletTransferMethod: GenericCellConfiguration {
     /// Additional information about the transfer method
     var additionalInfo: String? {
         switch type {
-        case "BANK_CARD", "PREPAID_CARD":
+        case TransferMethodType.bankCard.rawValue, TransferMethodType.prepaidCard.rawValue:
             return String(format: "%@%@",
                           "endingIn".localized(),
                           getField(TransferMethodField.cardNumber.rawValue)?
                             .suffix(startAt: 4) ?? "" )
 
-        case "PAYPAL_ACCOUNT":
+        case TransferMethodType.payPalAccount.rawValue:
             return String(format: "%@%@",
                           "to".localized(),
                           getField(TransferMethodField.email.rawValue) ?? "")
 
-        case "VENMO_ACCOUNT":
+        case TransferMethodType.venmoAccount.rawValue:
             return String(format: "%@%@",
                           "endingIn".localized(),
                           getField(TransferMethodField.accountId.rawValue)?
