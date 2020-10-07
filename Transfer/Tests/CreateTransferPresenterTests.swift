@@ -257,7 +257,7 @@ class CreateTransferTests: XCTestCase {
                        isAvailableBalancePresent: true)
         Hyperwallet.clearInstance()
     }
-    
+
     func testLoadCreateTransfer_showAllAvailableSources_pay2CardModel_transferMethodErrorResponse() {
         Hyperwallet.clearInstance()
         HyperwalletTestHelper.programModel = .pay2CardModel
@@ -271,7 +271,7 @@ class CreateTransferTests: XCTestCase {
                        isAvailableBalancePresent: false)
         Hyperwallet.clearInstance()
     }
-    
+
     func testLoadCreateTransfer_showAllAvailableSources_pay2CardModel_createInitialTransferErrorResponse() {
         Hyperwallet.clearInstance()
         HyperwalletTestHelper.programModel = .pay2CardModel
