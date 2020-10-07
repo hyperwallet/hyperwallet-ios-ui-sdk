@@ -29,6 +29,7 @@ class ListReceiptPresenterTests: XCTestCase {
         }
         mockView.resetStates()
     }
+
     //swiftlint:disable function_body_length
     func testListUserReceipt_success() {
         // Given
@@ -160,6 +161,9 @@ class ListReceiptPresenterTests: XCTestCase {
         presenter = ListReceiptPresenter(view: mockView,
                                          prepaidCardToken: "trm-123456789",
                                          showAllAvailableSources: true)
+
+//        PrepaidCardRepositoryRequestHelper.setupSuccessRequest(responseFile: "GetPrepaidCardSuccessResponse",
+//                                                               prepaidCardToken: PrepaidCardRepositoryRequestHelper.clientSourceToken)
 
         // Given
         HyperwalletTestHelper.setUpMockServer(request: setUpReceiptRequest(listPrepaidCardReceiptPayload,
