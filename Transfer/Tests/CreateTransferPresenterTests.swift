@@ -140,7 +140,8 @@ class CreateTransferTests: XCTestCase {
     private func assertResponse(isShowErrorPerformed: Bool,
                                 transferSourceCellConfigurationsCount: Int,
                                 transferSourceType: TransferSourceType,
-                                selectedTransferDestination: Bool) {
+                                selectedTransferDestination: Bool,
+                                isAvailableBalancePresent: Bool) {
         XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
         XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
         XCTAssertEqual(mockView.isShowErrorPerformed,
@@ -159,6 +160,9 @@ class CreateTransferTests: XCTestCase {
         XCTAssertEqual(presenter.selectedTransferDestination != nil,
                        selectedTransferDestination,
                        "selectedTransferDestination != nil should be \(selectedTransferDestination)")
+        XCTAssertEqual(presenter.availableBalance != nil,
+                       isAvailableBalancePresent,
+                       "availableBalance != nil should be \(isAvailableBalancePresent)")
     }
 
     func testLoadCreateTransfer_sourceTokenIsNil() {
@@ -166,7 +170,8 @@ class CreateTransferTests: XCTestCase {
         assertResponse(isShowErrorPerformed: false,
                        transferSourceCellConfigurationsCount: 1,
                        transferSourceType: .user,
-                       selectedTransferDestination: true)
+                       selectedTransferDestination: true,
+                       isAvailableBalancePresent: true)
     }
 
     func testLoadCreateTransfer_sourceTokenIsNil_userErrorResponse() {
@@ -175,7 +180,8 @@ class CreateTransferTests: XCTestCase {
         assertResponse(isShowErrorPerformed: true,
                        transferSourceCellConfigurationsCount: 0,
                        transferSourceType: .user,
-                       selectedTransferDestination: false)
+                       selectedTransferDestination: false,
+                       isAvailableBalancePresent: false)
     }
 
     func testLoadCreateTransfer_sourceTokenIsNotNil() {
@@ -183,7 +189,8 @@ class CreateTransferTests: XCTestCase {
         assertResponse(isShowErrorPerformed: false,
                        transferSourceCellConfigurationsCount: 1,
                        transferSourceType: .prepaidCard,
-                       selectedTransferDestination: true)
+                       selectedTransferDestination: true,
+                       isAvailableBalancePresent: true)
     }
 
     func testLoadCreateTransfer_sourceTokenIsNotNil_prepaidCardErrorResponse() {
@@ -193,7 +200,8 @@ class CreateTransferTests: XCTestCase {
         assertResponse(isShowErrorPerformed: true,
                        transferSourceCellConfigurationsCount: 1,
                        transferSourceType: .prepaidCard,
-                       selectedTransferDestination: false)
+                       selectedTransferDestination: false,
+                       isAvailableBalancePresent: false)
     }
 
     func testLoadCreateTransfer_showAllAvailableSources_walletModel_activePrepaidCards() {
@@ -204,7 +212,36 @@ class CreateTransferTests: XCTestCase {
         assertResponse(isShowErrorPerformed: false,
                        transferSourceCellConfigurationsCount: 3,
                        transferSourceType: .user,
-                       selectedTransferDestination: true)
+                       selectedTransferDestination: true,
+                       isAvailableBalancePresent: true)
+        Hyperwallet.clearInstance()
+    }
+
+    func testLoadCreateTransfer_showAllAvailableSources_walletModel_transferMethodErrorResponse() {
+        Hyperwallet.clearInstance()
+        HyperwalletTestHelper.programModel = .walletModel
+        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
+        mockView.stopOnError = true
+        initializePresenter(transferMethodResult: .failure, showAllAvailableSources: true)
+        assertResponse(isShowErrorPerformed: true,
+                       transferSourceCellConfigurationsCount: 3,
+                       transferSourceType: .user,
+                       selectedTransferDestination: false,
+                       isAvailableBalancePresent: false)
+        Hyperwallet.clearInstance()
+    }
+
+    func testLoadCreateTransfer_showAllAvailableSources_walletModel_createInitialTransferErrorResponse() {
+        Hyperwallet.clearInstance()
+        HyperwalletTestHelper.programModel = .walletModel
+        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
+        mockView.stopOnError = true
+        initializePresenter(createTransferResult: .failure, showAllAvailableSources: true)
+        assertResponse(isShowErrorPerformed: true,
+                       transferSourceCellConfigurationsCount: 3,
+                       transferSourceType: .user,
+                       selectedTransferDestination: true,
+                       isAvailableBalancePresent: false)
         Hyperwallet.clearInstance()
     }
 
@@ -216,7 +253,36 @@ class CreateTransferTests: XCTestCase {
         assertResponse(isShowErrorPerformed: false,
                        transferSourceCellConfigurationsCount: 2,
                        transferSourceType: .prepaidCard,
-                       selectedTransferDestination: true)
+                       selectedTransferDestination: true,
+                       isAvailableBalancePresent: true)
+        Hyperwallet.clearInstance()
+    }
+    
+    func testLoadCreateTransfer_showAllAvailableSources_pay2CardModel_transferMethodErrorResponse() {
+        Hyperwallet.clearInstance()
+        HyperwalletTestHelper.programModel = .pay2CardModel
+        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
+        mockView.stopOnError = true
+        initializePresenter(transferMethodResult: .failure, showAllAvailableSources: true)
+        assertResponse(isShowErrorPerformed: true,
+                       transferSourceCellConfigurationsCount: 2,
+                       transferSourceType: .prepaidCard,
+                       selectedTransferDestination: false,
+                       isAvailableBalancePresent: false)
+        Hyperwallet.clearInstance()
+    }
+    
+    func testLoadCreateTransfer_showAllAvailableSources_pay2CardModel_createInitialTransferErrorResponse() {
+        Hyperwallet.clearInstance()
+        HyperwalletTestHelper.programModel = .pay2CardModel
+        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
+        mockView.stopOnError = true
+        initializePresenter(createTransferResult: .failure, showAllAvailableSources: true)
+        assertResponse(isShowErrorPerformed: true,
+                       transferSourceCellConfigurationsCount: 2,
+                       transferSourceType: .prepaidCard,
+                       selectedTransferDestination: true,
+                       isAvailableBalancePresent: false)
         Hyperwallet.clearInstance()
     }
 
@@ -228,7 +294,8 @@ class CreateTransferTests: XCTestCase {
         assertResponse(isShowErrorPerformed: false,
                        transferSourceCellConfigurationsCount: 2,
                        transferSourceType: .prepaidCard,
-                       selectedTransferDestination: true)
+                       selectedTransferDestination: true,
+                       isAvailableBalancePresent: true)
         Hyperwallet.clearInstance()
     }
 
@@ -240,7 +307,8 @@ class CreateTransferTests: XCTestCase {
         assertResponse(isShowErrorPerformed: true,
                        transferSourceCellConfigurationsCount: 0,
                        transferSourceType: .user,
-                       selectedTransferDestination: false)
+                       selectedTransferDestination: false,
+                       isAvailableBalancePresent: false)
         Hyperwallet.clearInstance()
     }
 
@@ -252,7 +320,8 @@ class CreateTransferTests: XCTestCase {
         assertResponse(isShowErrorPerformed: false,
                        transferSourceCellConfigurationsCount: 1,
                        transferSourceType: .user,
-                       selectedTransferDestination: true)
+                       selectedTransferDestination: true,
+                       isAvailableBalancePresent: true)
         Hyperwallet.clearInstance()
     }
 
@@ -265,7 +334,8 @@ class CreateTransferTests: XCTestCase {
         assertResponse(isShowErrorPerformed: true,
                        transferSourceCellConfigurationsCount: 1,
                        transferSourceType: .user,
-                       selectedTransferDestination: false)
+                       selectedTransferDestination: false,
+                       isAvailableBalancePresent: false)
         Hyperwallet.clearInstance()
     }
 
@@ -278,7 +348,8 @@ class CreateTransferTests: XCTestCase {
         assertResponse(isShowErrorPerformed: false,
                        transferSourceCellConfigurationsCount: 0,
                        transferSourceType: .prepaidCard,
-                       selectedTransferDestination: false)
+                       selectedTransferDestination: false,
+                       isAvailableBalancePresent: false)
         XCTAssertTrue(mockView.isShowAlertPerformed, "showAlert should be performed")
         Hyperwallet.clearInstance()
     }
@@ -292,7 +363,8 @@ class CreateTransferTests: XCTestCase {
         assertResponse(isShowErrorPerformed: true,
                        transferSourceCellConfigurationsCount: 0,
                        transferSourceType: .prepaidCard,
-                       selectedTransferDestination: false)
+                       selectedTransferDestination: false,
+                       isAvailableBalancePresent: false)
         Hyperwallet.clearInstance()
     }
 
@@ -479,11 +551,15 @@ class CreateTransferTests: XCTestCase {
     func testDestinationCurrency_selectedTransferMethodIsNil() {
         initializePresenter(transferMethodResult: .noContent)
         XCTAssertNil(presenter.destinationCurrency, "destinationCurrency should be Nil")
+        XCTAssertEqual(presenter.amount, "0", "amount should be 0")
+        XCTAssertNil(presenter.availableBalance, "availableBalance should be Nil")
+        XCTAssertNil(presenter.notes, "notes should be Nil")
     }
 
     func testDestinationCurrency_selectedTransferMethodIsNotNil() {
         initializePresenter()
         XCTAssertEqual(presenter.destinationCurrency, "USD", "destinationCurrency should be USD")
+        XCTAssertNotNil(presenter.availableBalance, "availableBalance should not be Nil")
     }
 
     func testCreateTransfer_emptyAmount_isTransferMaxAmount_success() {
