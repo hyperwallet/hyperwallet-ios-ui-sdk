@@ -22,8 +22,7 @@ class ScheduleTransferPresenterTests: XCTestCase {
                                                             type: .prepaidCard,
                                                             token: PrepaidCardRepositoryRequestHelper.clientSourceToken,
                                                             title: "prepaid_card".localized(),
-                                                            fontIcon: HyperwalletIconContent.prepaidCard.rawValue)
-
+                                                            fontIcon: HyperwalletIconContent.prepaidCard)
         configuration.additionalText = prepaidCard.formattedCardBrandCardNumber
         configuration.availableBalance = transfer.destinationAmount
         configuration.destinationCurrency = transfer.destinationCurrency
