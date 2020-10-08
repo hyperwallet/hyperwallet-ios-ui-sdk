@@ -68,6 +68,9 @@ final class ListReceiptController: UITableViewController {
     @objc
     func segmentControlHandler(sender: UISegmentedControl) {
         let index = sender.selectedSegmentIndex
+        presenter.segmentedControlItems.forEach { segmentedControlItem in
+            segmentedControlItem.isSelected = false
+        }
         presenter.segmentedControlItems[index].isSelected = true
         selectedSegmentedControl = index
         presenter.loadReceiptsForSelectedToken()

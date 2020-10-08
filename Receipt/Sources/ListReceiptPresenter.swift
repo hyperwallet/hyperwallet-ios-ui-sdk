@@ -57,12 +57,10 @@ final class ListReceiptPresenter {
     }()
 
     private var isLoadInProgress = false
-    private var isFirstTimeLoadingPage = true
     private(set) var areAllReceiptsLoaded = true
     private(set) var sectionData = [(key: Date, value: [HyperwalletReceipt])]()
     private(set) var segmentedControlItems = [SegmentedControlItem]()
     var showAllAvailableSources = false
-    //var selectedSegmentControlItem: SegmentedControlItem?
 
     /// Initialize ListReceiptPresenter
     init(view: ListReceiptView, prepaidCardToken: String? = nil, showAllAvailableSources: Bool?) {
@@ -88,6 +86,7 @@ final class ListReceiptPresenter {
     }
 
     func listReceipts() {
+        segmentedControlItems.removeAll()
         if showAllAvailableSources {
             listAllAvailableReceipts()
         } else {
@@ -100,13 +99,13 @@ final class ListReceiptPresenter {
     }
 
     private func listAllAvailableReceipts() {
-        segmentedControlItems.removeAll()
+        view?.showLoading()
         Hyperwallet.shared.getConfiguration {[weak self] configuration, error in
             guard let strongSelf = self, let view = strongSelf.view else {
                 return
             }
+            strongSelf.view?.hideLoading()
             if let error = error {
-                strongSelf.view?.hideLoading()
                 view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
                     strongSelf.listAllAvailableReceipts()
                 }
@@ -124,7 +123,6 @@ final class ListReceiptPresenter {
                strongSelf.segmentedControlItems.append(segmentedControlItem)
             }
             strongSelf.populatePrepaidCardSegments()
-            strongSelf.loadReceiptsForSelectedToken()
         }
     }
 
@@ -153,14 +151,16 @@ final class ListReceiptPresenter {
                                 receiptSourceType: .prepaidCard,
                                 isSelected: strongSelf.getSelectedSegmentControlItem() == nil))
                     }
+                    view.reloadTableViewHeader()
                 }
 
             case .failure(let error):
                 view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
-                    strongSelf.listAllAvailableReceipts()
+                    strongSelf.populatePrepaidCardSegments()
                 }
                 return
             }
+                    strongSelf.loadReceiptsForSelectedToken()
                 }
     }
 
@@ -196,10 +196,6 @@ final class ListReceiptPresenter {
                 }
                 strongSelf.isLoadInProgress = false
                 view.hideLoading()
-                if strongSelf.isFirstTimeLoadingPage {
-                    view.reloadTableViewHeader()
-                    strongSelf.isFirstTimeLoadingPage = false
-                }
                 switch result {
                 case .success(let receiptList):
                     guard let receiptList = receiptList, let receipts = receiptList.data else { break }
@@ -226,10 +222,6 @@ final class ListReceiptPresenter {
                 }
                 strongSelf.isLoadInProgress = false
                 view.hideLoading()
-                if strongSelf.isFirstTimeLoadingPage {
-                    view.reloadTableViewHeader()
-                    strongSelf.isFirstTimeLoadingPage = false
-                }
                 switch result {
                 case .success(let receiptList):
                     guard let receiptList = receiptList, let receipts = receiptList.data else { break }
