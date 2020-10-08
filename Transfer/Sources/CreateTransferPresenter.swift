@@ -135,10 +135,18 @@ final class CreateTransferPresenter {
     }
 
     func loadCreateTransferFromSelectedTransferSource(sourceToken: String) {
+        resetValues()
         transferSourceCellConfigurations.forEach { $0.isSelected = false }
         transferSourceCellConfigurations
             .first(where: { $0.token == sourceToken })?.isSelected = true
         loadTransferMethods()
+    }
+
+    private func resetValues() {
+        amount = "0"
+        notes = nil
+        didTapTransferAllFunds = false
+        availableBalance = nil
     }
 
     private func loadPrepaidCardAndCreateTransfer(token: String) {
@@ -302,6 +310,7 @@ final class CreateTransferPresenter {
     }
 
     private func createInitialTransfer() {
+        availableBalance = nil
         guard let sourceToken =
             transferSourceCellConfigurations.first(where: { $0.isSelected })?.token,
             let destinationToken = selectedTransferDestination?.token,
