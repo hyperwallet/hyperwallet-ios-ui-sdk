@@ -55,13 +55,14 @@ final class ScheduleTransferController: UITableViewController, UITextFieldDelega
             as? HyperwalletTransferMethod,
             let transfer = initializationData?[InitializationDataField.transfer] as? HyperwalletTransfer,
             let didFxQuoteChange = initializationData?[InitializationDataField.didFxQuoteChange] as? Bool,
-            let transferSourceCellConfiguration = initializationData?[InitializationDataField.selectedTransferSource] as? TransferSourceCellConfiguration {
-            presenter = ScheduleTransferPresenter(
-                view: self,
-                transferMethod: transferMethod,
-                transfer: transfer,
-                didFxQuoteChange: didFxQuoteChange,
-                transferSourceCellConfiguration: transferSourceCellConfiguration)
+            let transferSourceCellConfiguration = initializationData?[InitializationDataField.selectedTransferSource]
+                as? TransferSourceCellConfiguration {
+                presenter = ScheduleTransferPresenter(
+                    view: self,
+                    transferMethod: transferMethod,
+                    transfer: transfer,
+                    didFxQuoteChange: didFxQuoteChange,
+                    transferSourceCellConfiguration: transferSourceCellConfiguration)
         } else {
             fatalError("Required data not provided in initializePresenter")
         }
@@ -156,57 +157,93 @@ extension ScheduleTransferController {
         return attributedText
     }
 
+    private func getDestinationCellConfiguration(_ cellIdentifier: String,
+                                                 _ indexPath: IndexPath,
+                                                 _ section: ScheduleTransferSectionData) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        if let tableViewCell = cell as? TransferDestinationCell,
+            let destinationData = section as? ScheduleTransferDestinationData {
+            tableViewCell.configure(transferMethod: destinationData.transferMethod)
+        }
+        return cell
+    }
+
+    private func getForeignExchangeCellConfiguration(_ cellIdentifier: String,
+                                                     _ indexPath: IndexPath,
+                                                     _ section: ScheduleTransferSectionData) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)
+        if let tableViewCell = cell as? TransferForeignExchangeCell,
+            let foreignExchangeData = section as? ScheduleTransferForeignExchangeData {
+            return tableViewCell.configure(foreignExchangeData, indexPath, tableView)
+        }
+        return cell ?? UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: cellIdentifier)
+    }
+
+    private func getSummaryCellConfiguration(_ cellIdentifier: String,
+                                             _ indexPath: IndexPath,
+                                             _ section: ScheduleTransferSectionData) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        if let tableViewCell = cell as? TransferSummaryCell,
+            let summaryData = section as? ScheduleTransferSummaryData {
+            tableViewCell.configure(summaryData.rows[indexPath.row].title, summaryData.rows[indexPath.row].value)
+        }
+        return cell
+    }
+
+    private func getNotesCellConfiguration(_ cellIdentifier: String,
+                                           _ indexPath: IndexPath,
+                                           _ section: ScheduleTransferSectionData) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        if let tableViewCell = cell as? TransferNotesCell,
+            let notesSection = section as? ScheduleTransferNotesData {
+            tableViewCell.configure(notes: notesSection.notes, isEditable: false, hideBorder: false, { _ in })
+        }
+        return cell
+    }
+
+    private func getButtonCellConfiguration(_ cellIdentifier: String,
+                                            _ indexPath: IndexPath,
+                                            _ section: ScheduleTransferSectionData) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        if let tableViewCell = cell as? TransferButtonCell, section is ScheduleTransferButtonData {
+            let tapConfirmation = UITapGestureRecognizer(target: self, action: #selector(tapScheduleTransfer))
+            tableViewCell.configure(title: "transfer".localized(), action: tapConfirmation)
+        }
+        return cell
+    }
+
+    private func getSourceCellConfiguration(_ cellIdentifier: String,
+                                            _ indexPath: IndexPath,
+                                            _ section: ScheduleTransferSectionData) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        if let tableViewCell = cell as? TransferSourceCell,
+            let sourceData = section as? ScheduleTransferSectionSourceData {
+            tableViewCell.configure(transferSourceCellConfiguration: sourceData.transferSourceCellConfiguration)
+        }
+        return cell
+    }
+
     private func getCellConfiguration(_ indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = presenter.sectionData[indexPath.section].cellIdentifier
         let section = presenter.sectionData[indexPath.section]
         switch section.scheduleTransferSectionHeader {
         case .destination:
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-            if let tableViewCell = cell as? TransferDestinationCell,
-                let destinationData = section as? ScheduleTransferDestinationData {
-                tableViewCell.configure(transferMethod: destinationData.transferMethod)
-            }
-            return cell
+            return getDestinationCellConfiguration(cellIdentifier, indexPath, section)
 
         case .foreignExchange:
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)
-            if let tableViewCell = cell as? TransferForeignExchangeCell,
-                let foreignExchangeData = section as? ScheduleTransferForeignExchangeData {
-                return tableViewCell.configure(foreignExchangeData, indexPath, tableView)
-            }
-            return cell ?? UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: cellIdentifier)
+            return getForeignExchangeCellConfiguration(cellIdentifier, indexPath, section)
 
         case .summary:
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-            if let tableViewCell = cell as? TransferSummaryCell,
-                let summaryData = section as? ScheduleTransferSummaryData {
-                tableViewCell.configure(summaryData.rows[indexPath.row].title, summaryData.rows[indexPath.row].value)
-            }
-            return cell
+            return getSummaryCellConfiguration(cellIdentifier, indexPath, section)
 
         case .notes:
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-            if let tableViewCell = cell as? TransferNotesCell,
-                let notesSection = section as? ScheduleTransferNotesData {
-                tableViewCell.configure(notes: notesSection.notes, isEditable: false, hideBorder: false, { _ in })
-            }
-            return cell
+            return getNotesCellConfiguration(cellIdentifier, indexPath, section)
 
         case .button:
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-            if let tableViewCell = cell as? TransferButtonCell, section is ScheduleTransferButtonData {
-                let tapConfirmation = UITapGestureRecognizer(target: self, action: #selector(tapScheduleTransfer))
-                tableViewCell.configure(title: "transfer".localized(), action: tapConfirmation)
-            }
-            return cell
+            return getButtonCellConfiguration(cellIdentifier, indexPath, section)
 
         case .source:
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-            if let tableViewCell = cell as? TransferSourceCell,
-                let sourceData = section as? ScheduleTransferSectionSourceData {
-                tableViewCell.configure(transferSourceCellConfiguration: sourceData.transferSourceCellConfiguration)
-            }
-            return cell
+            return getSourceCellConfiguration(cellIdentifier, indexPath, section)
         }
     }
 
