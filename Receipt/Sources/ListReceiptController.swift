@@ -68,7 +68,7 @@ final class ListReceiptController: UITableViewController {
     @objc
     func segmentControlHandler(sender: UISegmentedControl) {
         let index = sender.selectedSegmentIndex
-        presenter.selectedSegmentControlItem = presenter.segmentedControlItems[index]
+        presenter.segmentedControlItems[index].isSelected = true
         selectedSegmentedControl = index
         presenter.loadReceiptsForSelectedToken()
     }
@@ -145,7 +145,7 @@ final class ListReceiptController: UITableViewController {
 extension ListReceiptController: ListReceiptView {
     /// Loads the receipts
     func reloadData() {
-        if presenter.selectedSegmentControlItem?.receiptSourceType == .prepaidCard {
+        if presenter.getSelectedSegmentControlItem()?.receiptSourceType == .prepaidCard {
             emptyListLabel = view.setUpEmptyListLabel(text: "mobilePrepaidCardNoTransactions".localized())
         } else {
             emptyListLabel = view.setUpEmptyListLabel(text: "mobileNoTransactions".localized())
@@ -203,7 +203,7 @@ extension ListReceiptController: ListReceiptView {
     }
 
     private func toggleEmptyListView(hideLabel: Bool) {
-        if presenter.selectedSegmentControlItem?.receiptSourceType == .prepaidCard {
+        if presenter.getSelectedSegmentControlItem()?.receiptSourceType == .prepaidCard {
             emptyPPCListLabel.isHidden = hideLabel
             emptyListLabel.isHidden = true
         } else {
