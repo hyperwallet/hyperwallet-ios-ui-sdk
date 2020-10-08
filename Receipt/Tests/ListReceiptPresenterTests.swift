@@ -17,6 +17,8 @@ class ListReceiptPresenterTests: XCTestCase {
         .getDataFromJson("PrepaidCardReceiptResponse")
     private lazy var listPrepaidCardReceiptNextPagePayload = HyperwalletTestHelper
         .getDataFromJson("PrepaidCardReceiptNextPageResponse")
+    private lazy var listPrepaidCardsPayload = HyperwalletTestHelper
+        .getDataFromJson("ListPrepaidCardResponse")
 
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
@@ -157,44 +159,50 @@ class ListReceiptPresenterTests: XCTestCase {
                        "The receipt number of the fifth section should be 2")
     }
 
-    func testListAllSourcesReceipt_success() {
+    func testListAllSourcesReceipt_UserReceiptOnly() {
         presenter = ListReceiptPresenter(view: mockView,
-                                         prepaidCardToken: "trm-123456789",
                                          showAllAvailableSources: true)
 
-//        PrepaidCardRepositoryRequestHelper.setupSuccessRequest(responseFile: "GetPrepaidCardSuccessResponse",
-//                                                               prepaidCardToken: PrepaidCardRepositoryRequestHelper.clientSourceToken)
+        HyperwalletTestHelper.setUpMockServer(request: setUpReceiptRequest(listReceiptPayload))
 
-        // Given
-        HyperwalletTestHelper.setUpMockServer(request: setUpReceiptRequest(listPrepaidCardReceiptPayload,
-                                                                           nil,
-                                                                           "trm-123456789"))
-
-        let expectation = self.expectation(description: "load prepaid card receipts")
+        let expectation = self.expectation(description: "load user receipts")
         mockView.expectation = expectation
 
         // When
         presenter.listReceipts()
         wait(for: [expectation], timeout: 1)
+        XCTAssertEqual(presenter.segmentedControlItems.count, 1, "There should be 1 segment control item")
+        XCTAssertEqual(presenter.segmentedControlItems[0].receiptSourceType,
+                       .user,
+                       "Segment control item should be of type user")
+    }
 
-        // Then
+    func testListAllSourcesReceipt_UserAndPPCReceipt() {
+        presenter = ListReceiptPresenter(view: mockView,
+                                         showAllAvailableSources: true)
 
-        XCTAssertFalse(mockView.isShowErrorPerformed, "The showError should not be performed")
-        XCTAssertTrue(mockView.isShowLoadingPerformed, "The showLoading should be performed")
-        XCTAssertTrue(mockView.isHideLoadingPerformed, "The hideLoading should be performed")
-        XCTAssertTrue(mockView.isLoadReceiptPerformed, "The loadReceipt should be performed")
+        HyperwalletTestHelper.setUpMockServer(request: setUpReceiptRequest(listReceiptPayload))
+        PrepaidCardRepositoryRequestHelper.setupSuccessRequest(responseFile: "ListPrepaidCardResponse",
+                                                               prepaidCardToken: nil)
 
-        XCTAssertEqual(presenter.sectionData.count, 5, "The count of sections should be 5")
-        XCTAssertEqual(presenter.sectionData.first?.value.count,
+        let expectation = self.expectation(description: "load user receipts")
+        mockView.expectation = expectation
+
+        // When
+        presenter.listReceipts()
+        wait(for: [expectation], timeout: 1)
+        XCTAssertEqual(presenter.segmentedControlItems.count,
                        3,
-                       "The receipt number of the first section should be 3")
-        XCTAssertEqual(presenter.sectionData[1].value.count,
-                       3,
-                       "The receipt number of the second section should be 3")
-
-        XCTAssertEqual(presenter.sectionData[4].value.count,
-                       2,
-                       "The receipt number of the fifth section should be 2")
+                       "There should be 3 segment control items - 1 user + 2 ppc")
+        XCTAssertEqual(presenter.segmentedControlItems[0].receiptSourceType,
+                       .user,
+                       "Segment control item 1 should be of type user")
+        XCTAssertEqual(presenter.segmentedControlItems[1].receiptSourceType,
+                       .prepaidCard,
+                       "Segment control item 2 should be of type prepaid card")
+        XCTAssertEqual(presenter.segmentedControlItems[2].receiptSourceType,
+                       .prepaidCard,
+                       "Segment control item 3 should be of type prepaid card")
     }
 
     func testListPrepaidCardReceipt_failureWithError() {
@@ -226,6 +234,14 @@ class ListReceiptPresenterTests: XCTestCase {
                                      _ prepaidCardToken: String? = nil) -> StubRequest {
         let response = HyperwalletTestHelper.setUpMockedResponse(payload: payload, error: error)
         let receiptUrl = prepaidCardToken == nil ? "/receipts?":"/prepaid-cards/\(prepaidCardToken!)/receipts?"
+        let url = String(format: "%@%@", HyperwalletTestHelper.userRestURL, receiptUrl)
+        return HyperwalletTestHelper.buildGetRequestRegexMatcher(pattern: url, response)
+    }
+
+    private func setUpPrepaidCardRequest(_ payload: Data,
+                                         _ error: NSError? = nil) -> StubRequest {
+        let response = HyperwalletTestHelper.setUpMockedResponse(payload: payload, error: error)
+        let receiptUrl =  "\(HyperwalletTestHelper.userRestURL)/prepaid-cards"
         let url = String(format: "%@%@", HyperwalletTestHelper.userRestURL, receiptUrl)
         return HyperwalletTestHelper.buildGetRequestRegexMatcher(pattern: url, response)
     }

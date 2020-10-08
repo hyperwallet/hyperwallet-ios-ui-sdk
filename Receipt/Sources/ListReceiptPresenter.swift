@@ -72,10 +72,10 @@ final class ListReceiptPresenter {
     }
 
     func listAllAvailableReceipts() {
+        segmentedControlItems.removeAll()
         Hyperwallet.shared.getConfiguration { configuration, _ in
-             let programModel = "WALLET_MODEL"
                if let configuration = configuration,
-                  //let programModel = configuration.programModel,
+                  let programModel = configuration.programModel,
                   let programModelEnum = HyperwalletProgramModel(rawValue: programModel),
                   !programModelEnum.isPay2CardOrCardOnlyModel() {
                    let segmentedControlItem =
@@ -251,8 +251,8 @@ final class ListReceiptPresenter {
         }
     }
 
-    private func setUpPrepaidCardQueryParam() -> HyperwalletPrepaidCardQueryParm {
-        let queryParam = HyperwalletPrepaidCardQueryParm()
+    private func setUpPrepaidCardQueryParam() -> HyperwalletPrepaidCardQueryParam {
+        let queryParam = HyperwalletPrepaidCardQueryParam()
         // Only fetch active prepaid cards
         queryParam.status = .activated
         return queryParam
