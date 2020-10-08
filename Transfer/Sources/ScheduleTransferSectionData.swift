@@ -23,7 +23,7 @@ import Common
 import HyperwalletSDK
 
 enum ScheduleTransferSectionHeader: String {
-    case button, destination, foreignExchange, notes, summary
+    case button, destination, foreignExchange, notes, summary, source
 }
 
 protocol ScheduleTransferSectionData {
@@ -37,6 +37,8 @@ extension ScheduleTransferSectionData {
     var rowCount: Int { return 1 }
     var title: String? {
         switch scheduleTransferSectionHeader.rawValue {
+        case "source":
+            return "mobileTransferFromLabel".localized()
         case "destination":
             return "mobileTransferToLabel".localized()
         case "notes":
@@ -49,6 +51,16 @@ extension ScheduleTransferSectionData {
         default:
             return nil
         }
+    }
+}
+
+struct ScheduleTransferSectionSourceData: ScheduleTransferSectionData {
+    var scheduleTransferSectionHeader: ScheduleTransferSectionHeader { return .source }
+    var cellIdentifier: String { return TransferSourceCell.reuseIdentifier }
+    var transferSourceCellConfiguration: TransferSourceCellConfiguration
+
+    init(transferSourceCellConfiguration: TransferSourceCellConfiguration) {
+        self.transferSourceCellConfiguration = transferSourceCellConfiguration
     }
 }
 

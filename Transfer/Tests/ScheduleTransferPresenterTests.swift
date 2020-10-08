@@ -16,6 +16,18 @@ class ScheduleTransferPresenterTests: XCTestCase {
         HyperwalletTransferMethod.TransferMethodType.bankAccount.rawValue)
         .build()
     private var transfer: HyperwalletTransfer!
+    private let prepaidCard = HyperwalletPrepaidCard.Builder(transferMethodProfileType: "INDIVIDUAL").build()
+    private var configuration: TransferSourceCellConfiguration {
+        let configuration = TransferSourceCellConfiguration(isSelectedTransferSource: true,
+                                                            type: .prepaidCard,
+                                                            token: PrepaidCardRepositoryRequestHelper.clientSourceToken,
+                                                            title: "prepaid_card".localized(),
+                                                            fontIcon: HyperwalletIconContent.prepaidCard)
+        configuration.additionalText = prepaidCard.formattedCardBrandCardNumber
+        configuration.availableBalance = transfer.destinationAmount
+        configuration.destinationCurrency = transfer.destinationCurrency
+        return configuration
+    }
 
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
@@ -24,7 +36,8 @@ class ScheduleTransferPresenterTests: XCTestCase {
             view: mockView,
             transferMethod: transferMethod,
             transfer: transfer,
-            didFxQuoteChange: false)
+            didFxQuoteChange: false,
+            transferSourceCellConfiguration: configuration)
     }
 
     override func tearDown() {
@@ -72,11 +85,12 @@ class ScheduleTransferPresenterTests: XCTestCase {
     }
 
     public func testScheduleSectionData_allSections() {
-        XCTAssertEqual(presenter.sectionData.count, 5)
-        assertDestinationSectionResult(destinationSection: presenter.sectionData.first!)
-        assertForeignExchangeSectionResult(foreignExchangeSection: presenter.sectionData[1])
-        assertSummarySectionResult(summarySection: presenter.sectionData[2])
-        assertNotesSectionResult(notesSection: presenter.sectionData[3])
+        XCTAssertEqual(presenter.sectionData.count, 6)
+        assertSourceSectionResult(sourceSection: presenter.sectionData.first!)
+        assertDestinationSectionResult(destinationSection: presenter.sectionData[1])
+        assertForeignExchangeSectionResult(foreignExchangeSection: presenter.sectionData[2])
+        assertSummarySectionResult(summarySection: presenter.sectionData[3])
+        assertNotesSectionResult(notesSection: presenter.sectionData[4])
         assertButtonSectionResult(buttonSection: presenter.sectionData.last!)
     }
 
@@ -87,11 +101,12 @@ class ScheduleTransferPresenterTests: XCTestCase {
             view: mockView,
             transferMethod: transferMethod,
             transfer: transfer,
-            didFxQuoteChange: false)
+            didFxQuoteChange: false,
+            transferSourceCellConfiguration: configuration)
 
-        XCTAssertEqual(presenter.sectionData.count, 3)
-        assertDestinationSectionResult(destinationSection: presenter.sectionData.first!)
-        assertSummarySectionWithoutFeeResult(summarySection: presenter.sectionData[1])
+        XCTAssertEqual(presenter.sectionData.count, 4)
+        assertDestinationSectionResult(destinationSection: presenter.sectionData[1])
+        assertSummarySectionWithoutFeeResult(summarySection: presenter.sectionData[2])
         assertButtonSectionResult(buttonSection: presenter.sectionData.last!)
     }
 
@@ -102,16 +117,26 @@ class ScheduleTransferPresenterTests: XCTestCase {
             view: mockView,
             transferMethod: transferMethod,
             transfer: transfer,
-            didFxQuoteChange: true)
+            didFxQuoteChange: true,
+            transferSourceCellConfiguration: configuration)
 
-        XCTAssertEqual(presenter.sectionData.count, 5)
+        XCTAssertEqual(presenter.sectionData.count, 6)
         assertDestinationSectionResult(destinationSection: presenter.sectionData.first!)
-        assertSummarySectionWithFxChange(summarySection: presenter.sectionData[2])
+        assertSummarySectionWithFxChange(summarySection: presenter.sectionData[3])
     }
 
     private func getTransfer(from jsonData: Data) -> HyperwalletTransfer? {
         let decoder = JSONDecoder()
         return try? decoder.decode(HyperwalletTransfer.self, from: jsonData)
+    }
+
+    private func assertSourceSectionResult(sourceSection: ScheduleTransferSectionData) {
+        XCTAssertEqual(sourceSection.rowCount, 1, "Source section should have 1 row")
+        XCTAssertNotNil(sourceSection.title, "The title of Source section should not be nil")
+        XCTAssertNotNil(sourceSection.scheduleTransferSectionHeader,
+                        "The header of Source section should not be nil")
+        XCTAssertNotNil(sourceSection.cellIdentifier,
+                        "The cellIdentifier of Source section should not be nil")
     }
 
     private func assertDestinationSectionResult(destinationSection: ScheduleTransferSectionData) {
