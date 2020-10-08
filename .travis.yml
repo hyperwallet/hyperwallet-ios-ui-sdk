@@ -57,7 +57,7 @@ script: |
     | xcpretty --color
 
   # Lint - Add `--strict` to fail for warning and violation
-  swiftlint lint --quiet --reporter json
+  swiftlint lint --strict --reporter json
 after_success:
 - |
   if [ "$code_coverage" == "YES" ]; then
