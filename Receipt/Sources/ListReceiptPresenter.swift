@@ -226,7 +226,7 @@ final class ListReceiptPresenter {
                 case .success(let receiptList):
                     guard let receiptList = receiptList, let receipts = receiptList.data else { break }
                     strongSelf.areAllReceiptsLoaded = true
-                    strongSelf.groupReceiptsByMonth(receipts)
+                    strongSelf.groupReceiptsByMonth(receipts.reversed())
 
                 case .failure(let error):
                     guard let prepaidCardToken = strongSelf.prepaidCardToken else { break }
@@ -249,7 +249,7 @@ final class ListReceiptPresenter {
         })
 
         let sortedGroupedSections = groupedSections
-            .sorted(by: prepaidCardToken == nil ? { $0.key > $1.key } : { $0.key < $1.key })
+            .sorted(by: { $0.key > $1.key })
 
         for section in sortedGroupedSections {
             if let sectionIndex = sectionData.firstIndex(where: { $0.key == section.key }) {
