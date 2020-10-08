@@ -366,8 +366,8 @@
 		DBC199FB22E29CF0004447DD /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA385C225E8BAA00CD4137 /* ErrorView.swift */; };
 		DBDE15DD22D6562900BD646F /* TransferMethodRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDE15DB22D655F000BD646F /* TransferMethodRepositoryTests.swift */; };
 		DBF89CB8227C072400AF4344 /* UserIndividualCountryCanadaResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBF89CB7227C072400AF4344 /* UserIndividualCountryCanadaResponse.json */; };
-		DC870F8A252EE3630070F91B /* VenmoAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DC870F89252EE3630070F91B /* VenmoAccountResponse.json */; };
-		DC870F8C252EE36E0070F91B /* VenmoAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DC870F8B252EE36E0070F91B /* VenmoAccountResponse.json */; };
+		DC870F9A252F5D880070F91B /* VenmoAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DC870F8B252EE36E0070F91B /* VenmoAccountResponse.json */; };
+		DC870F9B252F5D950070F91B /* VenmoAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DC870F89252EE3630070F91B /* VenmoAccountResponse.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2823,7 +2823,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC870F8C252EE36E0070F91B /* VenmoAccountResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2851,6 +2850,7 @@
 				DB55202022E145B800DD65C2 /* BankCardResponse.json in Resources */,
 				DB55202B22E145B800DD65C2 /* UserIndividualResponseWithoutCountry.json in Resources */,
 				DB55201C22E145B800DD65C2 /* BankAccountErrorResponseWithValidationError.json in Resources */,
+				DC870F9A252F5D880070F91B /* VenmoAccountResponse.json in Resources */,
 				4A2B94B622F1CC74000A0F14 /* UserIndividualResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2877,7 +2877,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC870F8A252EE3630070F91B /* VenmoAccountResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2897,6 +2896,7 @@
 				DB55206E22E1498300DD65C2 /* PayPalAccountResponse.json in Resources */,
 				DB55207122E1498300DD65C2 /* BankAccountResponse.json in Resources */,
 				DB55207222E1498300DD65C2 /* UserIndividualResponse.json in Resources */,
+				DC870F9B252F5D950070F91B /* VenmoAccountResponse.json in Resources */,
 				DB55207022E1498300DD65C2 /* StatusTransitionResponseSuccess.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
