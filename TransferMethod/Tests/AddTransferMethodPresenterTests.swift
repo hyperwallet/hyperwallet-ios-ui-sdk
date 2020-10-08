@@ -210,7 +210,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
         HyperwalletTestHelper.setUpMockServer(request: request)
 
         // Add fields to the form
-        mockView.mockFieldValuesReturnResult.append((name: "accountId", value: "9876543215"))
+        mockView.mockFieldValuesReturnResult.append((name: "accountId", value: "9876543210"))
         mockView.mockFieldStatusReturnResult.append(true)
 
         // press the create transfer method button

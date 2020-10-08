@@ -200,7 +200,7 @@ class TransferMethodRepositoryTests: XCTestCase {
             .Builder(transferMethodCountry: "US",
                      transferMethodCurrency: "USD",
                      transferMethodProfileType: "INDIVIDUAL")
-            .accountId("9876543215")
+            .accountId("9876543210")
             .build()
 
         transferMethodRepository.createTransferMethod(venmoAccount) { result in
@@ -219,8 +219,8 @@ class TransferMethodRepositoryTests: XCTestCase {
         XCTAssertNotNil(venmoAccountResult, "The venmoAccountError should not be nil")
         XCTAssertEqual(venmoAccountResult?
             .getField(HyperwalletTransferMethod.TransferMethodField.accountId.rawValue)!,
-                       "9876543215",
-                       "The venmoAccountId should be 9876543215")
+                       "9876543210",
+                       "The venmoAccountId should be 9876543210")
     }
 
     func testCreateTransferMethod_failure() {
