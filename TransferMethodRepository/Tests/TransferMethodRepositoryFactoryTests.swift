@@ -32,69 +32,30 @@ class TransferMethodRepositoryFactoryTests: XCTestCase {
         XCTAssertNotNil(repositoryFactory, "The repositoryFactory should not be nil")
         XCTAssertNotNil(repositoryFactory.transferMethodConfigurationRepository(),
                         "The transferMethodConfigurationRepository should not be nil")
+        XCTAssertNotNil(repositoryFactory.transferMethodRepository(),
+                        "The transferMethodRepository should not be nil")
+        XCTAssertNotNil(repositoryFactory.prepaidCardRepository(),
+                        "The prepaidCardRepository should not be nil")
     }
-    // swiftlint:disable function_body_length
-    func testShared_verifyRepositoriesCleared() {
-        TransferMethodConfigurationRepositoryTests
-            .setupResponseMockServer(keyResponseData)
-        let expectation = self.expectation(description: "Get transfer method configuration keys")
-        var transferMethodConfigurationKey: HyperwalletTransferMethodConfigurationKey?
-        var error: HyperwalletErrorType?
-        var refreshTransferMethodConfigurationKey: HyperwalletTransferMethodConfigurationKey?
-        var refreshError: HyperwalletErrorType?
-        TransferMethodRepositoryFactory.shared
-            .transferMethodConfigurationRepository().getKeys { (result) in
-            switch result {
-            case .success(let resultKey):
-                transferMethodConfigurationKey = resultKey
 
-            case .failure(let resultError):
-                error = resultError
-            }
-            expectation.fulfill()
-            }
-        wait(for: [expectation], timeout: 1)
-        TransferMethodConfigurationRepositoryTests
-            .refreshHippolyteResponse("TransferMethodConfigurationKeysOnlyPaypalAccountUsResponse")
+    func testClearInstance() {
+        let factoryInstance = TransferMethodRepositoryFactory.shared
+        let transferMethodConfigurationRepositoryInstance = factoryInstance.transferMethodConfigurationRepository()
+        let transferMethodRepositoryInstance = factoryInstance.transferMethodRepository()
+        let prepaidCardRepositoryInstance = factoryInstance.prepaidCardRepository()
+
+        XCTAssertNotNil(TransferMethodRepositoryFactory.instance, "instance should not be nil")
+        XCTAssertNotNil(factoryInstance, "The factoryInstance should not be nil")
+        XCTAssertNotNil(transferMethodConfigurationRepositoryInstance,
+                        "The transferMethodConfigurationRepositoryInstance should not be nil")
+        XCTAssertNotNil(transferMethodRepositoryInstance,
+                        "The transferMethodRepositoryInstance should not be nil")
+        XCTAssertNotNil(prepaidCardRepositoryInstance,
+                        "The prepaidCardRepositoryInstance1 should not be nil")
 
         // When
         TransferMethodRepositoryFactory.clearInstance()
 
-        let expectationRefresh = self.expectation(description: "Get transfer method configuration keys")
-        TransferMethodRepositoryFactory.shared
-            .transferMethodConfigurationRepository().getKeys { (result) in
-                switch result {
-                case .success(let resultKey):
-                    refreshTransferMethodConfigurationKey = resultKey
-
-                case .failure(let resultError):
-                    refreshError = resultError
-                }
-                expectationRefresh.fulfill()
-            }
-        wait(for: [expectationRefresh], timeout: 1)
-        XCTAssertNil(error, "The error should be nil")
-        XCTAssertNotNil(transferMethodConfigurationKey, "The result should not be nil")
-        XCTAssertEqual(transferMethodConfigurationKey!.countries()!.count,
-                       4,
-                       "The transferMethodConfigurationKey!.countries() should be 4")
-        XCTAssertEqual(transferMethodConfigurationKey!.currencies(from: country)!.count,
-                       2,
-                       "The transferMethodConfigurationKey!.currencies(from: country)!.count should be 2")
-        XCTAssertEqual(transferMethodConfigurationKey!.currencies(from: country)!.first!.code,
-                       "CAD",
-                       "The transferMethodConfigurationKey!.currencies(from: country)!.first!.code should be CAD")
-        XCTAssertNil(refreshError, "The error should be nil")
-        XCTAssertNotNil(refreshTransferMethodConfigurationKey, "The result should not be nil")
-        XCTAssertEqual(refreshTransferMethodConfigurationKey!.countries()!.count,
-                       1,
-                       "The refreshTransferMethodConfigurationKey!.countries()!.count should be 1")
-        XCTAssertEqual(refreshTransferMethodConfigurationKey!.currencies(from: country)!.count,
-                       1,
-                       "The refreshTransferMethodConfigurationKey!.currencies(from: country)!.count should be 1")
-        XCTAssertEqual(refreshTransferMethodConfigurationKey!.currencies(from: country)!.first!.code,
-                       "USD",
-                       "The refreshTransferMethodConfigurationKey!.currencies(from: country)!.first!.code should be USD"
-                       )
+        XCTAssertNil(TransferMethodRepositoryFactory.instance, "instance should be nil")
     }
 }

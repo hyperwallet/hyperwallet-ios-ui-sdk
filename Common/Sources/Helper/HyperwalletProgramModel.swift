@@ -16,13 +16,16 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import HyperwalletSDK
+import Foundation
 
-final class ListTransferSourcePresenter {
-    private(set) var sectionData: [TransferSourceCellConfiguration]
+/// Hyperwallet Program Model
+public enum HyperwalletProgramModel: String {
+    case walletModel = "WALLET_MODEL"
+    case pay2CardModel = "PAY2CARD_MODEL"
+    case cardOnlyModel = "CARD_ONLY_MODEL"
 
-    /// Initialize ListTransferSourcePresenter
-    init(transferSources: [TransferSourceCellConfiguration]) {
-        self.sectionData = transferSources
+    /// returns true if Program Model is either pay2Card or CardOnly
+    public func isPay2CardOrCardOnlyModel() -> Bool {
+        return self == .pay2CardModel || self == .cardOnlyModel
     }
 }

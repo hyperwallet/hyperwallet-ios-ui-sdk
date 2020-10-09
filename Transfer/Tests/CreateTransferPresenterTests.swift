@@ -12,7 +12,6 @@ class CreateTransferTests: XCTestCase {
     private var presenter: CreateTransferPresenter!
     private var mockView = MockCreateTransferView()
     private let clientTransferId = UUID().uuidString
-    private let clientSourceToken = "trm-123456789"
 
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
@@ -25,6 +24,43 @@ class CreateTransferTests: XCTestCase {
         }
         UserRepositoryFactory.clearInstance()
         TransferMethodRepositoryFactory.clearInstance()
+    }
+
+    private enum LoadPrepaidCardResultType {
+        case success, failure, noContent
+        func setUpRequest() {
+            switch self {
+            case .success:
+                PrepaidCardRepositoryRequestHelper
+                    .setupSuccessRequest(responseFile: "GetPrepaidCardSuccessResponse",
+                                         prepaidCardToken: PrepaidCardRepositoryRequestHelper.clientSourceToken)
+
+            case .failure:
+                PrepaidCardRepositoryRequestHelper
+                    .setupFailureRequest(prepaidCardToken: PrepaidCardRepositoryRequestHelper.clientSourceToken)
+
+            case .noContent:
+                PrepaidCardRepositoryRequestHelper
+                    .setupNoContentRequest(prepaidCardToken: PrepaidCardRepositoryRequestHelper.clientSourceToken)
+            }
+        }
+    }
+
+    private enum ListPrepaidCardsResultType {
+        case success, failure, noContent
+        func setUpRequest() {
+            switch self {
+            case .success:
+                PrepaidCardRepositoryRequestHelper.setupSuccessRequest(responseFile: "ListPrepaidCardResponse",
+                                                                       prepaidCardToken: nil)
+
+            case .failure:
+                PrepaidCardRepositoryRequestHelper.setupFailureRequest(prepaidCardToken: nil)
+
+            case .noContent:
+                PrepaidCardRepositoryRequestHelper.setupNoContentRequest(prepaidCardToken: nil)
+            }
+        }
     }
 
     private enum LoadTransferMethodsResultType {
@@ -72,16 +108,24 @@ class CreateTransferTests: XCTestCase {
         }
     }
 
-    private func initializePresenter(transferMethodResult: LoadTransferMethodsResultType = .success,
+    private func initializePresenter(prepaidCardResult: LoadPrepaidCardResultType = .success,
+                                     transferMethodResult: LoadTransferMethodsResultType = .success,
                                      createTransferResult: CreateTransferResultType = .success,
-                                     getUserResultType: GetUserResultType = .success,
-                                     sourceToken: String? = nil) {
+                                     getUserResult: GetUserResultType = .success,
+                                     listPrepaidCardResult: ListPrepaidCardsResultType = .success,
+                                     sourceToken: String? = nil,
+                                     showAllAvailableSources: Bool = false) {
+        var expectations = [XCTestExpectation]()
+        if sourceToken != nil {
+            prepaidCardResult.setUpRequest()
+        } else if showAllAvailableSources {
+            listPrepaidCardResult.setUpRequest()
+        } else {
+            getUserResult.setUpRequest()
+        }
         transferMethodResult.setUpRequest()
         createTransferResult.setUpRequest()
-        getUserResultType.setUpRequest()
-
-        presenter = CreateTransferPresenter(clientTransferId, sourceToken, view: mockView)
-        var expectations = [XCTestExpectation]()
+        presenter = CreateTransferPresenter(clientTransferId, sourceToken, showAllAvailableSources, view: mockView)
 
         if mockView.stopOnError {
             expectations.append(mockView.showErrorExpectation)
@@ -95,41 +139,213 @@ class CreateTransferTests: XCTestCase {
 
     func testLoadCreateTransfer_sourceTokenIsNil() {
         initializePresenter()
-        XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
-        XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
-        XCTAssertFalse(mockView.isShowErrorPerformed, "showError should not be performed")
-        XCTAssertNotNil(presenter.selectedTransferMethod, "selectedTransferMethod should not be nil")
+        assertResponse(isShowErrorPerformed: false,
+                       transferSourceCellConfigurationsCount: 1,
+                       transferSourceType: .user,
+                       selectedTransferDestination: true,
+                       isAvailableBalancePresent: true)
+    }
+
+    func testLoadCreateTransfer_sourceTokenIsNil_userErrorResponse() {
+        mockView.stopOnError = true
+        initializePresenter(getUserResult: .failure)
+        assertResponse(isShowErrorPerformed: true,
+                       transferSourceCellConfigurationsCount: 0,
+                       transferSourceType: .user,
+                       selectedTransferDestination: false,
+                       isAvailableBalancePresent: false)
     }
 
     func testLoadCreateTransfer_sourceTokenIsNotNil() {
-        initializePresenter(sourceToken: clientSourceToken)
-        XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
-        XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
-        XCTAssertFalse(mockView.isShowErrorPerformed, "showError should not be performed")
-        XCTAssertNotNil(presenter.selectedTransferMethod, "selectedTransferMethod should not be nil")
+        initializePresenter(sourceToken: PrepaidCardRepositoryRequestHelper.clientSourceToken)
+        assertResponse(isShowErrorPerformed: false,
+                       transferSourceCellConfigurationsCount: 1,
+                       transferSourceType: .prepaidCard,
+                       selectedTransferDestination: true,
+                       isAvailableBalancePresent: true)
     }
 
-    func testLoadCreateTransfer_getUser_success() {
-        initializePresenter(sourceToken: clientSourceToken)
-        XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
-        XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
-        XCTAssertFalse(mockView.isShowErrorPerformed, "showError should not be performed")
-        XCTAssertNotNil(presenter.selectedTransferMethod, "selectedTransferMethod should not be nil")
-    }
-
-    func testLoadCreateTransfer_getUser_failure() {
+    func testLoadCreateTransfer_sourceTokenIsNotNil_prepaidCardErrorResponse() {
         mockView.stopOnError = true
-        initializePresenter(getUserResultType: .failure)
-        XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
-        XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
-        XCTAssertTrue(mockView.isShowErrorPerformed, "showError should be performed")
-        XCTAssertNil(presenter.selectedTransferMethod, "selectedTransferMethod should be nil")
+        initializePresenter(prepaidCardResult: .failure,
+                            sourceToken: PrepaidCardRepositoryRequestHelper.clientSourceToken)
+        assertResponse(isShowErrorPerformed: true,
+                       transferSourceCellConfigurationsCount: 1,
+                       transferSourceType: .prepaidCard,
+                       selectedTransferDestination: false,
+                       isAvailableBalancePresent: false)
+    }
+
+    func testLoadCreateTransfer_showAllAvailableSources_walletModel_activePrepaidCards() {
+        Hyperwallet.clearInstance()
+        HyperwalletTestHelper.programModel = .walletModel
+        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
+        initializePresenter(showAllAvailableSources: true)
+        assertResponse(isShowErrorPerformed: false,
+                       transferSourceCellConfigurationsCount: 3,
+                       transferSourceType: .user,
+                       selectedTransferDestination: true,
+                       isAvailableBalancePresent: true)
+        Hyperwallet.clearInstance()
+    }
+
+    func testLoadCreateTransfer_showAllAvailableSources_walletModel_transferMethodErrorResponse() {
+        Hyperwallet.clearInstance()
+        HyperwalletTestHelper.programModel = .walletModel
+        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
+        mockView.stopOnError = true
+        initializePresenter(transferMethodResult: .failure, showAllAvailableSources: true)
+        assertResponse(isShowErrorPerformed: true,
+                       transferSourceCellConfigurationsCount: 3,
+                       transferSourceType: .user,
+                       selectedTransferDestination: false,
+                       isAvailableBalancePresent: false)
+        Hyperwallet.clearInstance()
+    }
+
+    func testLoadCreateTransfer_showAllAvailableSources_walletModel_createInitialTransferErrorResponse() {
+        Hyperwallet.clearInstance()
+        HyperwalletTestHelper.programModel = .walletModel
+        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
+        mockView.stopOnError = true
+        initializePresenter(createTransferResult: .failure, showAllAvailableSources: true)
+        assertResponse(isShowErrorPerformed: true,
+                       transferSourceCellConfigurationsCount: 3,
+                       transferSourceType: .user,
+                       selectedTransferDestination: true,
+                       isAvailableBalancePresent: false)
+        Hyperwallet.clearInstance()
+    }
+
+    func testLoadCreateTransfer_showAllAvailableSources_pay2CardModel() {
+        Hyperwallet.clearInstance()
+        HyperwalletTestHelper.programModel = .pay2CardModel
+        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
+        initializePresenter(showAllAvailableSources: true)
+        assertResponse(isShowErrorPerformed: false,
+                       transferSourceCellConfigurationsCount: 2,
+                       transferSourceType: .prepaidCard,
+                       selectedTransferDestination: true,
+                       isAvailableBalancePresent: true)
+        Hyperwallet.clearInstance()
+    }
+
+    func testLoadCreateTransfer_showAllAvailableSources_pay2CardModel_transferMethodErrorResponse() {
+        Hyperwallet.clearInstance()
+        HyperwalletTestHelper.programModel = .pay2CardModel
+        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
+        mockView.stopOnError = true
+        initializePresenter(transferMethodResult: .failure, showAllAvailableSources: true)
+        assertResponse(isShowErrorPerformed: true,
+                       transferSourceCellConfigurationsCount: 2,
+                       transferSourceType: .prepaidCard,
+                       selectedTransferDestination: false,
+                       isAvailableBalancePresent: false)
+        Hyperwallet.clearInstance()
+    }
+
+    func testLoadCreateTransfer_showAllAvailableSources_pay2CardModel_createInitialTransferErrorResponse() {
+        Hyperwallet.clearInstance()
+        HyperwalletTestHelper.programModel = .pay2CardModel
+        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
+        mockView.stopOnError = true
+        initializePresenter(createTransferResult: .failure, showAllAvailableSources: true)
+        assertResponse(isShowErrorPerformed: true,
+                       transferSourceCellConfigurationsCount: 2,
+                       transferSourceType: .prepaidCard,
+                       selectedTransferDestination: true,
+                       isAvailableBalancePresent: false)
+        Hyperwallet.clearInstance()
+    }
+
+    func testLoadCreateTransfer_showAllAvailableSources_cardOnlyModel() {
+        Hyperwallet.clearInstance()
+        HyperwalletTestHelper.programModel = .cardOnlyModel
+        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
+        initializePresenter(showAllAvailableSources: true)
+        assertResponse(isShowErrorPerformed: false,
+                       transferSourceCellConfigurationsCount: 2,
+                       transferSourceType: .prepaidCard,
+                       selectedTransferDestination: true,
+                       isAvailableBalancePresent: true)
+        Hyperwallet.clearInstance()
+    }
+
+    func testLoadCreateTransfer_showAllAvailableSources_walletModel_configurationErrorResponse() {
+        Hyperwallet.clearInstance()
+        Hyperwallet.setup(HyperwalletTestHelper.authenticationProviderWithErrorResponse)
+        mockView.stopOnError = true
+        initializePresenter(showAllAvailableSources: true)
+        assertResponse(isShowErrorPerformed: true,
+                       transferSourceCellConfigurationsCount: 0,
+                       transferSourceType: .user,
+                       selectedTransferDestination: false,
+                       isAvailableBalancePresent: false)
+        Hyperwallet.clearInstance()
+    }
+
+    func testLoadCreateTransfer_showAllAvailableSources_walletModel_listPrepaidCardsNoResponse() {
+        Hyperwallet.clearInstance()
+        HyperwalletTestHelper.programModel = .walletModel
+        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
+        initializePresenter(listPrepaidCardResult: .noContent, showAllAvailableSources: true)
+        assertResponse(isShowErrorPerformed: false,
+                       transferSourceCellConfigurationsCount: 1,
+                       transferSourceType: .user,
+                       selectedTransferDestination: true,
+                       isAvailableBalancePresent: true)
+        Hyperwallet.clearInstance()
+    }
+
+    func testLoadCreateTransfer_showAllAvailableSources_walletModel_listPrepaidCardsErrorResponse() {
+        Hyperwallet.clearInstance()
+        HyperwalletTestHelper.programModel = .walletModel
+        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
+        mockView.stopOnError = true
+        initializePresenter(listPrepaidCardResult: .failure, showAllAvailableSources: true)
+        assertResponse(isShowErrorPerformed: true,
+                       transferSourceCellConfigurationsCount: 1,
+                       transferSourceType: .user,
+                       selectedTransferDestination: false,
+                       isAvailableBalancePresent: false)
+        Hyperwallet.clearInstance()
+    }
+
+    func testLoadCreateTransfer_showAllAvailableSources_pay2CardModel_listPrepaidCardsNoResponse() {
+        Hyperwallet.clearInstance()
+        HyperwalletTestHelper.programModel = .pay2CardModel
+        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
+        mockView.stopOnError = true
+        initializePresenter(listPrepaidCardResult: .noContent, showAllAvailableSources: true)
+        assertResponse(isShowErrorPerformed: false,
+                       transferSourceCellConfigurationsCount: 0,
+                       transferSourceType: .prepaidCard,
+                       selectedTransferDestination: false,
+                       isAvailableBalancePresent: false)
+        XCTAssertTrue(mockView.isShowAlertPerformed, "showAlert should be performed")
+        Hyperwallet.clearInstance()
+    }
+
+    func testLoadCreateTransfer_showAllAvailableSources_pay2CardModel_listPrepaidCardsErrorResponse() {
+        Hyperwallet.clearInstance()
+        HyperwalletTestHelper.programModel = .pay2CardModel
+        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
+        mockView.stopOnError = true
+        initializePresenter(listPrepaidCardResult: .failure, showAllAvailableSources: true)
+        assertResponse(isShowErrorPerformed: true,
+                       transferSourceCellConfigurationsCount: 0,
+                       transferSourceType: .prepaidCard,
+                       selectedTransferDestination: false,
+                       isAvailableBalancePresent: false)
+        Hyperwallet.clearInstance()
     }
 
     func testLoadCreateTransfer_selectedTransferMethodIsNil() {
         initializePresenter(transferMethodResult: .noContent)
 
-        XCTAssertEqual(presenter.sectionData.count, 5, "Section data count should be 5")
+        XCTAssertEqual(presenter.sectionData.count,
+                       CreateTransferSectionHeader.allCases.count,
+                       "Section data count should be \(CreateTransferSectionHeader.allCases.count)")
 
         XCTAssertEqual(presenter.sectionData[0].createTransferSectionHeader,
                        .amount,
@@ -138,12 +354,15 @@ class CreateTransferTests: XCTestCase {
                        .transferAll,
                        "Section type should be TransferAll")
         XCTAssertEqual(presenter.sectionData[2].createTransferSectionHeader,
+                       .source,
+                       "Section type should be Source")
+        XCTAssertEqual(presenter.sectionData[3].createTransferSectionHeader,
                        .destination,
                        "Section type should be Destination")
-        XCTAssertEqual(presenter.sectionData[3].createTransferSectionHeader,
+        XCTAssertEqual(presenter.sectionData[4].createTransferSectionHeader,
                        .notes,
                        "Section type should be Notes")
-        XCTAssertEqual(presenter.sectionData[4].createTransferSectionHeader,
+        XCTAssertEqual(presenter.sectionData[5].createTransferSectionHeader,
                        .button,
                        "Section type should be Button")
     }
@@ -151,7 +370,9 @@ class CreateTransferTests: XCTestCase {
     func testLoadCreateTransfer_selectedTransferMethodIsNotNil() {
         initializePresenter()
 
-        XCTAssertEqual(presenter.sectionData.count, 5, "Section data count should be 5")
+        XCTAssertEqual(presenter.sectionData.count,
+                       CreateTransferSectionHeader.allCases.count,
+                       "Section data count should be \(CreateTransferSectionHeader.allCases.count)")
 
         XCTAssertEqual(presenter.sectionData[0].createTransferSectionHeader,
                        .amount,
@@ -160,12 +381,15 @@ class CreateTransferTests: XCTestCase {
                        .transferAll,
                        "Section type should be TransferAll")
         XCTAssertEqual(presenter.sectionData[2].createTransferSectionHeader,
+                       .source,
+                       "Section type should be Source")
+        XCTAssertEqual(presenter.sectionData[3].createTransferSectionHeader,
                        .destination,
                        "Section type should be Destination")
-        XCTAssertEqual(presenter.sectionData[3].createTransferSectionHeader,
+        XCTAssertEqual(presenter.sectionData[4].createTransferSectionHeader,
                        .notes,
                        "Section type should be Notes")
-        XCTAssertEqual(presenter.sectionData[4].createTransferSectionHeader,
+        XCTAssertEqual(presenter.sectionData[5].createTransferSectionHeader,
                        .button,
                        "Section type should be Button")
     }
@@ -176,7 +400,7 @@ class CreateTransferTests: XCTestCase {
         XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
         XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
         XCTAssertTrue(mockView.isShowErrorPerformed, "showError should be performed")
-        XCTAssertNil(presenter.selectedTransferMethod, "selectedTransferMethod should be nil")
+        XCTAssertNil(presenter.selectedTransferDestination, "selectedTransferMethod should be nil")
     }
 
     func testLoadCreateTransfer_createInitialQuote_failure() {
@@ -185,32 +409,44 @@ class CreateTransferTests: XCTestCase {
         XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
         XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
         XCTAssertTrue(mockView.isShowErrorPerformed, "showError should be performed")
-        XCTAssertNotNil(presenter.selectedTransferMethod, "selectedTransferMethod should not be nil")
+        XCTAssertNotNil(presenter.selectedTransferDestination, "selectedTransferMethod should not be nil")
         XCTAssertNil(presenter.availableBalance, "availableBalance should be nil")
+    }
+
+    func testCreateTransferSectionTransferFromData_validateProperties() {
+        initializePresenter()
+        let section = presenter.sectionData[2]
+        XCTAssertEqual(section.title, "mobileTransferFromLabel".localized(), "Section title should be TRANSFER FROM")
+        XCTAssertEqual(section.rowCount, 1, "Section rowCount should be 1")
+        XCTAssertEqual(section.createTransferSectionHeader, .source, "Section type should be .source")
+        XCTAssertEqual(section.cellIdentifiers.count, 1, "Section cellIdentifiers.count should be 1")
+        XCTAssertEqual(section.cellIdentifiers[0],
+                       TransferSourceCell.reuseIdentifier,
+                       "Section cellIdentifier should be \(TransferSourceCell.reuseIdentifier)")
     }
 
     func testCreateTransferSectionAddDestinationAccountData_validateProperties() {
         initializePresenter()
-        let section = presenter.sectionData[2]
+        let section = presenter.sectionData[3]
         XCTAssertEqual(section.title, "TRANSFER TO", "Section title should be TRANSFER TO")
         XCTAssertEqual(section.rowCount, 1, "Section rowCount should be 1")
         XCTAssertEqual(section.createTransferSectionHeader, .destination, "Section type should be .destination")
         XCTAssertEqual(section.cellIdentifiers.count, 1, "Section cellIdentifiers.count should be 1")
         XCTAssertEqual(section.cellIdentifiers[0],
-                       "transferDestinationCellIdentifier",
-                       "Section cellIdentifier should be transferDestinationCellIdentifier")
+                       TransferDestinationCell.reuseIdentifier,
+                       "Section cellIdentifier should be \(TransferDestinationCell.reuseIdentifier)")
     }
 
     func testCreateTransferSectionDestinationData_validateProperties() {
         initializePresenter(transferMethodResult: .noContent)
-        let section = presenter.sectionData[2]
+        let section = presenter.sectionData[3]
         XCTAssertEqual(section.title, "TRANSFER TO", "Section title should be TRANSFER TO")
         XCTAssertEqual(section.rowCount, 1, "Section rowCount should be 1")
         XCTAssertEqual(section.createTransferSectionHeader, .destination, "Section type should be .destination")
         XCTAssertEqual(section.cellIdentifiers.count, 1, "Section cellIdentifiers.count should be 1")
         XCTAssertEqual(section.cellIdentifiers[0],
-                       "transferDestinationCellIdentifier",
-                       "Section cellIdentifier should be transferDestinationCellIdentifier")
+                       TransferDestinationCell.reuseIdentifier,
+                       "Section cellIdentifier should be \(TransferDestinationCell.reuseIdentifier)")
     }
 
     func testCreateTransferSectionAmountData_validateProperties() {
@@ -221,8 +457,8 @@ class CreateTransferTests: XCTestCase {
         XCTAssertEqual(section.createTransferSectionHeader, .amount, "Section type should be .amount")
         XCTAssertEqual(section.cellIdentifiers.count, 1, "Section cellIdentifiers.count should be 1")
         XCTAssertEqual(section.cellIdentifiers[0],
-                       "transferAmountCellIdentifier",
-                       "Section cellIdentifier should be transferAmountCellIdentifier")
+                       TransferAmountCell.reuseIdentifier,
+                       "Section cellIdentifier should be \(TransferAmountCell.reuseIdentifier)")
     }
 
     func testCreateTransferSectionTransferAllData_validateProperties() {
@@ -233,47 +469,57 @@ class CreateTransferTests: XCTestCase {
         XCTAssertEqual(section.createTransferSectionHeader, .transferAll, "Section type should be .transferAll")
         XCTAssertEqual(section.cellIdentifiers.count, 1, "Section cellIdentifiers.count should be 1")
         XCTAssertEqual(section.cellIdentifiers[0],
-                       "transferAllFundsCellIdentifier",
-                       "Section cellIdentifier should be transferAllFundsCellIdentifier")
+                       TransferAllFundsCell.reuseIdentifier,
+                       "Section cellIdentifier should be \(TransferAllFundsCell.reuseIdentifier)")
     }
 
     func testCreateTransferSectionNotesData_validateProperties() {
         initializePresenter()
-        let section = presenter.sectionData[3]
+        let section = presenter.sectionData[4]
         XCTAssertEqual(section.title, "Note", "Section title should be Note")
         XCTAssertEqual(section.rowCount, 1, "Section rowCount should be 1")
         XCTAssertEqual(section.createTransferSectionHeader, .notes, "Section type should be .notes")
         XCTAssertEqual(section.cellIdentifiers.count, 1, "Section cellIdentifiers.count should be 1")
         XCTAssertEqual(section.cellIdentifiers[0],
-                       "transferNotesCellIdentifier",
-                       "Section cellIdentifier should be transferNotesCellIdentifier")
+                       TransferNotesCell.reuseIdentifier,
+                       "Section cellIdentifier should be \(TransferNotesCell.reuseIdentifier)")
     }
 
     func testCreateTransferSectionButtonData_validateProperties() {
         initializePresenter()
-        let section = presenter.sectionData[4]
+        let section = presenter.sectionData[5]
         XCTAssertNil(section.title, "Section title should be nil")
         XCTAssertEqual(section.rowCount, 1, "Section rowCount should be 1")
         XCTAssertEqual(section.createTransferSectionHeader, .button, "Section type should be .button")
         XCTAssertEqual(section.cellIdentifiers.count, 1, "Section cellIdentifiers.count should be 1")
         XCTAssertEqual(section.cellIdentifiers[0],
-                       "transferButtonCellIdentifier",
-                       "Section cellIdentifier should be transferButtonCellIdentifier")
+                       TransferButtonCell.reuseIdentifier,
+                       "Section cellIdentifier should be \(TransferButtonCell.reuseIdentifier)")
     }
 
     func testIsTransferMaxAmount_selectedTransferMethodIsNil() {
         initializePresenter(transferMethodResult: .noContent)
+        assertResponse(isShowErrorPerformed: false,
+                       transferSourceCellConfigurationsCount: 1,
+                       transferSourceType: .user,
+                       selectedTransferDestination: false,
+                       isAvailableBalancePresent: false)
         XCTAssertFalse(mockView.isUpdateTransferAmountSectionPerformed,
                        "updateTransferAmountSection should not be performed")
         XCTAssertEqual(presenter.amount, "0", "Amount should be 0")
-        XCTAssertNil(presenter.availableBalance, "availableBalance should be Nil")
-        XCTAssertFalse(mockView.isUpdateTransferAmountSectionPerformed,
-                       "updateTransferAmountSection should not be performed")
+        presenter.didTapTransferAllFunds = true
+        XCTAssertTrue(mockView.isUpdateTransferAmountSectionPerformed,
+                      "updateTransferAmountSection should be performed")
         XCTAssertEqual(presenter.amount, "0", "Amount should be 0")
     }
 
     func testIsTransferMaxAmount_selectedTransferMethodIsNotNil() {
         initializePresenter()
+        assertResponse(isShowErrorPerformed: false,
+                       transferSourceCellConfigurationsCount: 1,
+                       transferSourceType: .user,
+                       selectedTransferDestination: true,
+                       isAvailableBalancePresent: true)
         XCTAssertFalse(mockView.isUpdateTransferAmountSectionPerformed,
                        "updateTransferAmountSection should not be performed")
         XCTAssertEqual(presenter.amount, "0", "Amount should be 0")
@@ -286,11 +532,23 @@ class CreateTransferTests: XCTestCase {
 
     func testDestinationCurrency_selectedTransferMethodIsNil() {
         initializePresenter(transferMethodResult: .noContent)
+        assertResponse(isShowErrorPerformed: false,
+                       transferSourceCellConfigurationsCount: 1,
+                       transferSourceType: .user,
+                       selectedTransferDestination: false,
+                       isAvailableBalancePresent: false)
         XCTAssertNil(presenter.destinationCurrency, "destinationCurrency should be Nil")
+        XCTAssertEqual(presenter.amount, "0", "amount should be 0")
+        XCTAssertNil(presenter.notes, "notes should be Nil")
     }
 
     func testDestinationCurrency_selectedTransferMethodIsNotNil() {
         initializePresenter()
+        assertResponse(isShowErrorPerformed: false,
+                       transferSourceCellConfigurationsCount: 1,
+                       transferSourceType: .user,
+                       selectedTransferDestination: true,
+                       isAvailableBalancePresent: true)
         XCTAssertEqual(presenter.destinationCurrency, "USD", "destinationCurrency should be USD")
     }
 
@@ -299,9 +557,11 @@ class CreateTransferTests: XCTestCase {
         mockView.resetStates()
         presenter.createTransfer()
         wait(for: [mockView.showScheduleTransferExpectation], timeout: 1)
-        XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
-        XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
-        XCTAssertFalse(mockView.isShowErrorPerformed, "showError should not be performed")
+        assertResponse(isShowErrorPerformed: false,
+                       transferSourceCellConfigurationsCount: 1,
+                       transferSourceType: .user,
+                       selectedTransferDestination: true,
+                       isAvailableBalancePresent: true)
     }
 
     func testCreateTransfer_notEmptyAmount_isTransferMaxAmount_success() {
@@ -310,9 +570,11 @@ class CreateTransferTests: XCTestCase {
         presenter.amount = "1.00"
         presenter.createTransfer()
         wait(for: [mockView.showScheduleTransferExpectation], timeout: 1)
-        XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
-        XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
-        XCTAssertFalse(mockView.isShowErrorPerformed, "showError should not be performed")
+        assertResponse(isShowErrorPerformed: false,
+                       transferSourceCellConfigurationsCount: 1,
+                       transferSourceType: .user,
+                       selectedTransferDestination: true,
+                       isAvailableBalancePresent: true)
     }
 
     func testCreateTransfer_failureWithFieldName() {
@@ -322,9 +584,11 @@ class CreateTransferTests: XCTestCase {
         CreateTransferRequestHelper.setupFailureRequestWithFieldName()
         presenter.createTransfer()
         wait(for: [mockView.updateFooterExpectation], timeout: 1)
-        XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
-        XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
-        XCTAssertNotNil(presenter.sectionData[1].errorMessage, "errorMessage should not be nil")
+        assertResponse(isShowErrorPerformed: false,
+                       transferSourceCellConfigurationsCount: 1,
+                       transferSourceType: .user,
+                       selectedTransferDestination: true,
+                       isAvailableBalancePresent: true)
     }
 
     func testCreateTransfer_failureWithoutFieldName() {
@@ -334,9 +598,11 @@ class CreateTransferTests: XCTestCase {
         CreateTransferRequestHelper.setupFailureRequestWithoutFieldName()
         presenter.createTransfer()
         wait(for: [mockView.showErrorExpectation], timeout: 1)
-        XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
-        XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
-        XCTAssertTrue(mockView.isShowErrorPerformed, "showError should be performed")
+        assertResponse(isShowErrorPerformed: true,
+                       transferSourceCellConfigurationsCount: 1,
+                       transferSourceType: .user,
+                       selectedTransferDestination: true,
+                       isAvailableBalancePresent: true)
     }
 
     func testCreateTransfer_unexpectedErrorFailure() {
@@ -346,9 +612,39 @@ class CreateTransferTests: XCTestCase {
         CreateTransferRequestHelper.setupUnexpectedFailureRequest()
         presenter.createTransfer()
         wait(for: [mockView.showErrorExpectation], timeout: 1)
+        assertResponse(isShowErrorPerformed: true,
+                       transferSourceCellConfigurationsCount: 1,
+                       transferSourceType: .user,
+                       selectedTransferDestination: true,
+                       isAvailableBalancePresent: true)
+    }
+
+    private func assertResponse(isShowErrorPerformed: Bool,
+                                transferSourceCellConfigurationsCount: Int,
+                                transferSourceType: TransferSourceType,
+                                selectedTransferDestination: Bool,
+                                isAvailableBalancePresent: Bool) {
         XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
         XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
-        XCTAssertTrue(mockView.isShowErrorPerformed, "showError should be performed")
+        XCTAssertEqual(mockView.isShowErrorPerformed,
+                       isShowErrorPerformed,
+                       "showError should be \(isShowErrorPerformed)")
+        XCTAssertEqual(presenter.transferSourceCellConfigurations.count,
+                       transferSourceCellConfigurationsCount,
+                       "transferSourceCellConfigurations should be \(transferSourceCellConfigurationsCount)")
+        if presenter.transferSourceCellConfigurations.isNotEmpty {
+            XCTAssertNotNil(presenter.transferSourceCellConfigurations.first(where: { $0.isSelected }),
+                            "transferSourceCellConfigurations isSelected should not be nil")
+            XCTAssertEqual(presenter.transferSourceCellConfigurations.first(where: { $0.isSelected })?.type,
+                           transferSourceType,
+                           "TransferSourceType shoould be \(transferSourceType)")
+        }
+        XCTAssertEqual(presenter.selectedTransferDestination != nil,
+                       selectedTransferDestination,
+                       "selectedTransferDestination != nil should be \(selectedTransferDestination)")
+        XCTAssertEqual(presenter.availableBalance != nil,
+                       isAvailableBalancePresent,
+                       "availableBalance != nil should be \(isAvailableBalancePresent)")
     }
 }
 
@@ -357,12 +653,14 @@ class MockCreateTransferView: CreateTransferView {
     var isNotifyTransferCreatedPerformed = false
     var isShowCreateTransferPerformed = false
     var isShowErrorPerformed = false
+    var isShowAlertPerformed = false
     var isShowGenericTableViewPerformed = false
     var isShowLoadingPerformed = false
     var isShowScheduleTransferPerformed = false
     var isUpdateTransferAmountSectionPerformed = false
     var isAreAllFieldsValidPerformed = false
     var isUpdateFooterPerformed = false
+    var isRetryPerformed = false
 
     var stopOnError = false
 
@@ -384,12 +682,18 @@ class MockCreateTransferView: CreateTransferView {
         loadCreateTransferExpectation?.fulfill()
     }
 
+    func showAlert(message: String?) {
+        isShowAlertPerformed = true
+        showErrorExpectation?.fulfill()
+    }
+
     func showError(_ error: HyperwalletErrorType,
                    pageName: String,
                    pageGroup: String,
                    _ retry: (() -> Void)?) {
         isShowErrorPerformed = true
-        if retry != nil {
+        if retry != nil, !isRetryPerformed {
+            isRetryPerformed = true
             retry!()
         }
         showErrorExpectation?.fulfill()
@@ -423,12 +727,14 @@ class MockCreateTransferView: CreateTransferView {
         isNotifyTransferCreatedPerformed = false
         isShowCreateTransferPerformed = false
         isShowErrorPerformed = false
+        isShowAlertPerformed = false
         isShowGenericTableViewPerformed = false
         isShowLoadingPerformed = false
         isShowScheduleTransferPerformed = false
         isUpdateTransferAmountSectionPerformed = false
         isAreAllFieldsValidPerformed = false
         isUpdateFooterPerformed = false
+        isRetryPerformed = false
 
         stopOnError = false
 

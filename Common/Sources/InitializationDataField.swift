@@ -43,4 +43,12 @@ public enum InitializationDataField: String {
     case transferMethod
     /// Boolean value to check whether foreign exchange rate changed
     case didFxQuoteChange
+    /// Boolean value to check whether to show all the available sources for receipts/ transfers
+    case showAllAvailableSources
+    /// Selected Source Type
+    case selectedSourceType
+    /// Selected Transfer Source
+    case selectedTransferSource
+    /// Transfer Sources
+    case transferSources
 }
