@@ -492,6 +492,7 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertTrue(transferFunds.transferAmount.exists)
 
+        transferFunds.transferAmount.tap()
         let pastAmountWithNumberNoDigit = "10000.00"
         transferFunds.pasteAmountToTransferAmount(amount: pastAmountWithNumberNoDigit)
         waitForNonExistence(spinner)

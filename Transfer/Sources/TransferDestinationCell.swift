@@ -84,6 +84,8 @@ extension TransferDestinationCell {
         textLabel?.numberOfLines = 0
         textLabel?.lineBreakMode = .byWordWrapping
         textLabel?.accessibilityIdentifier = "transferDestinationTitleLabel"
+        detailTextLabel?.text = nil
+        detailTextLabel?.accessibilityIdentifier = nil
         if !UIFont.isLargeSizeCategory {
             let icon = UIImage.fontIcon(hyperwalletIcon.rawValue,
                                         Theme.Icon.frame,
