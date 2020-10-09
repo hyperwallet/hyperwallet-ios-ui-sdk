@@ -66,6 +66,8 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
+// Manage Prepaid Card Message
+"manage_prepaid_card_message" = "Log in using a web browser to manage your card";
 //Select Transfer Method View
 "select_a_country_message" = "Select a country";
 

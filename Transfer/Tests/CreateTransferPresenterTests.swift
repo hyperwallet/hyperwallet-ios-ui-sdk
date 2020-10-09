@@ -539,6 +539,7 @@ class CreateTransferTests: XCTestCase {
                        isAvailableBalancePresent: false)
         XCTAssertNil(presenter.destinationCurrency, "destinationCurrency should be Nil")
         XCTAssertEqual(presenter.amount, "0", "amount should be 0")
+        XCTAssertNil(presenter.availableBalance, "availableBalance should be Nil")
         XCTAssertNil(presenter.notes, "notes should be Nil")
     }
 
@@ -550,6 +551,7 @@ class CreateTransferTests: XCTestCase {
                        selectedTransferDestination: true,
                        isAvailableBalancePresent: true)
         XCTAssertEqual(presenter.destinationCurrency, "USD", "destinationCurrency should be USD")
+        XCTAssertNotNil(presenter.availableBalance, "availableBalance should not be Nil")
     }
 
     func testCreateTransfer_emptyAmount_isTransferMaxAmount_success() {

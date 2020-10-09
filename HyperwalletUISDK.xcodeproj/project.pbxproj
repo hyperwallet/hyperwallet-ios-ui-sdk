@@ -228,6 +228,7 @@
 		A65312D222FC046200A83D30 /* ReceiptCoordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65312D122FC046200A83D30 /* ReceiptCoordinators.swift */; };
 		A65312D522FC055300A83D30 /* TransferMethodCoordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65312D422FC055300A83D30 /* TransferMethodCoordinators.swift */; };
 		A65312D822FC293C00A83D30 /* TransferCoordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65312D722FC293C00A83D30 /* TransferCoordinators.swift */; };
+		AB26C8F7252F61B60097D8CB /* ListTransferMethodManagePrepaidCard.json in Resources */ = {isa = PBXBuildFile; fileRef = AB26C8F4252F570C0097D8CB /* ListTransferMethodManagePrepaidCard.json */; };
 		B309EF3623DA5D5400160855 /* ListTransferDestinationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B309EF3523DA5D5400160855 /* ListTransferDestinationCell.swift */; };
 		B312939A24BF70F1000B6DAE /* ExpiryDateWidgetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B312939924BF70F1000B6DAE /* ExpiryDateWidgetTests.swift */; };
 		B32D70922391A7410079A34E /* TextWidgetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32D70912391A7410079A34E /* TextWidgetTests.swift */; };
@@ -811,6 +812,7 @@
 		A65312D122FC046200A83D30 /* ReceiptCoordinators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiptCoordinators.swift; sourceTree = "<group>"; };
 		A65312D422FC055300A83D30 /* TransferMethodCoordinators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferMethodCoordinators.swift; sourceTree = "<group>"; };
 		A65312D722FC293C00A83D30 /* TransferCoordinators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferCoordinators.swift; sourceTree = "<group>"; };
+		AB26C8F4252F570C0097D8CB /* ListTransferMethodManagePrepaidCard.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ListTransferMethodManagePrepaidCard.json; sourceTree = "<group>"; };
 		B309EF3523DA5D5400160855 /* ListTransferDestinationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTransferDestinationCell.swift; sourceTree = "<group>"; };
 		B312939924BF70F1000B6DAE /* ExpiryDateWidgetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpiryDateWidgetTests.swift; sourceTree = "<group>"; };
 		B32D70912391A7410079A34E /* TextWidgetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextWidgetTests.swift; sourceTree = "<group>"; };
@@ -1685,6 +1687,7 @@
 				DBF89CB7227C072400AF4344 /* UserIndividualCountryCanadaResponse.json */,
 				DBA9FA5C227918B500C1301A /* UserIndividualResponse.json */,
 				64F45BCD22BA27CB00515AE1 /* WireAccountIndividualResponse.json */,
+				AB26C8F4252F570C0097D8CB /* ListTransferMethodManagePrepaidCard.json */,
 			);
 			path = TransferMethod;
 			sourceTree = "<group>";
@@ -2802,6 +2805,7 @@
 				98F3D75A230C5C2600A8195F /* NoteDescriptionLengthValidationError.json in Resources */,
 				41D8364122FB4814003544AB /* TransferStatusQuoted.json in Resources */,
 				98F63E6B2284AC330090101D /* PayPalAccountInvalidEmailResponse.json in Resources */,
+				AB26C8F7252F61B60097D8CB /* ListTransferMethodManagePrepaidCard.json in Resources */,
 				9807B76B226442C60028A280 /* TransferMethodConfigurationBankAccountResponse.json in Resources */,
 				4157135D22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json in Resources */,
 				41D8363722FB4814003544AB /* ListOneBankAccountTransferJPY.json in Resources */,
