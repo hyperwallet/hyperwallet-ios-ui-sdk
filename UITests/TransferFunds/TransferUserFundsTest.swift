@@ -7,6 +7,14 @@ class TransferUserFundsTest: BaseTests {
     var addTransferMethod: AddTransferMethod!
     var elementQuery: XCUIElementQuery!
 
+    var expectedUSDestinationPrepaidLabel: String = {
+        if #available(iOS 11.2, *) {
+            return "United States\nVisa •••• "
+        } else {
+            return "United States Visa •••• "
+        }
+    }()
+
     var expectedUSDestinationLabel: String = {
         if #available(iOS 11.2, *) {
             return "United States\nending in "
@@ -366,7 +374,8 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 1), expectedCanadaDestinationLabel)
 
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 2), TransferMethods.prepaidCard)
-        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 2), expectedUSDestinationLabel + "4281")
+        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 2),
+                       expectedUSDestinationPrepaidLabel + "4281")
 
         // Assert first row is checked by default
         assertButtonTrue(element: usdBankAccount)
