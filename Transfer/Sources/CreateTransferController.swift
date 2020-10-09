@@ -424,12 +424,15 @@ extension CreateTransferController: CreateTransferView {
     }
 
     func showScheduleTransfer(_ transfer: HyperwalletTransfer) {
-        if let transferMethod = presenter.selectedTransferDestination {
+        if let transferMethod = presenter.selectedTransferDestination,
+            let selectedTransferSource =
+            presenter.transferSourceCellConfigurations.first(where: { $0.isSelected }) {
             coordinator?.navigateToNextPage(
                 initializationData: [
                     InitializationDataField.transfer: transfer,
                     InitializationDataField.transferMethod: transferMethod,
-                    InitializationDataField.didFxQuoteChange: presenter.didFxQuoteChange
+                    InitializationDataField.didFxQuoteChange: presenter.didFxQuoteChange,
+                    InitializationDataField.selectedTransferSource: selectedTransferSource
                 ]
             )
         }
