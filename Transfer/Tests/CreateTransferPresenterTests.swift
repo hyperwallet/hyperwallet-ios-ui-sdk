@@ -137,34 +137,6 @@ class CreateTransferTests: XCTestCase {
         wait(for: expectations, timeout: 1)
     }
 
-    private func assertResponse(isShowErrorPerformed: Bool,
-                                transferSourceCellConfigurationsCount: Int,
-                                transferSourceType: TransferSourceType,
-                                selectedTransferDestination: Bool,
-                                isAvailableBalancePresent: Bool) {
-        XCTAssertTrue(mockView.isShowLoadingPerformed, "showLoading should be performed")
-        XCTAssertTrue(mockView.isHideLoadingPerformed, "hideLoading should be performed")
-        XCTAssertEqual(mockView.isShowErrorPerformed,
-                       isShowErrorPerformed,
-                       "showError should be \(isShowErrorPerformed)")
-        XCTAssertEqual(presenter.transferSourceCellConfigurations.count,
-                       transferSourceCellConfigurationsCount,
-                       "transferSourceCellConfigurations should be \(transferSourceCellConfigurationsCount)")
-        if presenter.transferSourceCellConfigurations.isNotEmpty {
-            XCTAssertNotNil(presenter.transferSourceCellConfigurations.first(where: { $0.isSelected }),
-                            "transferSourceCellConfigurations isSelected should not be nil")
-            XCTAssertEqual(presenter.transferSourceCellConfigurations.first(where: { $0.isSelected })?.type,
-                           transferSourceType,
-                           "TransferSourceType shoould be \(transferSourceType)")
-        }
-        XCTAssertEqual(presenter.selectedTransferDestination != nil,
-                       selectedTransferDestination,
-                       "selectedTransferDestination != nil should be \(selectedTransferDestination)")
-        XCTAssertEqual(presenter.availableBalance != nil,
-                       isAvailableBalancePresent,
-                       "availableBalance != nil should be \(isAvailableBalancePresent)")
-    }
-
     func testLoadCreateTransfer_sourceTokenIsNil() {
         initializePresenter()
         assertResponse(isShowErrorPerformed: false,
