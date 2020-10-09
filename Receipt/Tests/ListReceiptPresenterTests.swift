@@ -32,13 +32,13 @@ class ListReceiptPresenterTests: XCTestCase {
         }
         mockView.resetStates()
         TransferMethodRepositoryFactory.clearInstance()
+        Hyperwallet.clearInstance()
+        HyperwalletTestHelper.programModel = .walletModel
+        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
     }
 
     //swiftlint:disable function_body_length
     func testListUserReceipt_success() {
-        Hyperwallet.clearInstance()
-        HyperwalletTestHelper.programModel = .walletModel
-        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
         // Given
         HyperwalletTestHelper.setUpMockServer(request: setUpReceiptRequest(listReceiptPayload))
 
@@ -107,9 +107,6 @@ class ListReceiptPresenterTests: XCTestCase {
     }
 
     func testListUserReceipt_failureWithError() {
-        Hyperwallet.clearInstance()
-        HyperwalletTestHelper.programModel = .walletModel
-        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
         // Given
         HyperwalletTestHelper.setUpMockServer(request:
             setUpReceiptRequest(listReceiptPayload, (NSError(domain: "", code: -1009, userInfo: nil))))
@@ -130,9 +127,6 @@ class ListReceiptPresenterTests: XCTestCase {
     }
 
     func testListPrepaidCardReceipt_success() {
-        Hyperwallet.clearInstance()
-        HyperwalletTestHelper.programModel = .walletModel
-        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
         presenter = ListReceiptPresenter(view: mockView,
                                          prepaidCardToken: "trm-123456789",
                                          showAllAvailableSources: false)
@@ -170,9 +164,6 @@ class ListReceiptPresenterTests: XCTestCase {
     }
 
     func testListAllSourcesReceipt_UserReceiptOnly() {
-        Hyperwallet.clearInstance()
-        HyperwalletTestHelper.programModel = .walletModel
-        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
         presenter = ListReceiptPresenter(view: mockView,
                                          showAllAvailableSources: true)
 
@@ -192,9 +183,6 @@ class ListReceiptPresenterTests: XCTestCase {
     }
 
     func testListAllSourcesReceipt_UserReceiptOnlyPPCFailure() {
-        Hyperwallet.clearInstance()
-        HyperwalletTestHelper.programModel = .walletModel
-        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
         presenter = ListReceiptPresenter(view: mockView,
                                          showAllAvailableSources: true)
 
@@ -214,9 +202,6 @@ class ListReceiptPresenterTests: XCTestCase {
     }
 
     func testListAllSourcesReceipt_UserAndPPCReceipt() {
-        Hyperwallet.clearInstance()
-        HyperwalletTestHelper.programModel = .walletModel
-        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
         presenter = ListReceiptPresenter(view: mockView,
                                          showAllAvailableSources: true)
 
@@ -273,9 +258,6 @@ class ListReceiptPresenterTests: XCTestCase {
     }
 
     func testListPrepaidCardReceipt_failureWithError() {
-        Hyperwallet.clearInstance()
-        HyperwalletTestHelper.programModel = .walletModel
-        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
         // Given
         presenter = ListReceiptPresenter(view: mockView,
                                          prepaidCardToken: "trm-123456789",
