@@ -41,6 +41,7 @@
 		2E16213423987284007E140D /* HyperwalletFieldResponseWithPattern.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E1621322398727E007E140D /* HyperwalletFieldResponseWithPattern.json */; };
 		2E1E11C3252E657700C10180 /* PrepaidCardRepositoryRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980C2E8D25224C8200DFDC94 /* PrepaidCardRepositoryRequestHelper.swift */; };
 		2E1E11C5252E998700C10180 /* ListPrepaidCardResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 984C47F32527EC5C00CC442D /* ListPrepaidCardResponse.json */; };
+		2E1E11C6252FEBBA00C10180 /* UnexpectedErrorResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 075FCFEE22F2439800997A7A /* UnexpectedErrorResponse.json */; };
 		2E3B047D237241B200BB1FFE /* InsightsTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3B047C237241B200BB1FFE /* InsightsTags.swift */; };
 		2E4D6CAD23679AB400916CDD /* HyperwalletInsights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4D6CAC23679AB400916CDD /* HyperwalletInsights.swift */; };
 		2E6DBB8C2326F2C200863672 /* AvailableFundMultiCurrenciesFxChange.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E6DBB8A2326F0F800863672 /* AvailableFundMultiCurrenciesFxChange.json */; };
@@ -2913,6 +2914,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E1E11C6252FEBBA00C10180 /* UnexpectedErrorResponse.json in Resources */,
 				DB5295DD22E22F0200657F50 /* UserReceiptNextPageResponse.json in Resources */,
 				2E1E11C5252E998700C10180 /* ListPrepaidCardResponse.json in Resources */,
 				DB5295DF22E22F0200657F50 /* PrepaidCardReceiptResponse.json in Resources */,
