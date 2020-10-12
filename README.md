@@ -238,6 +238,25 @@ override public func didFlowComplete(with response: Any) {
 }
 ```
 
+### Display all the available sources to make a new transfer from. User can then select the transfer from source and make a new tansfer from that source
+```swift
+let clientTransferId = UUID().uuidString.lowercased()
+let coordinator = HyperwalletUI.shared
+            .createTransferFromAllAvailableSourcesCoordinator(clientTransferId: clientTransferId,
+                                                              parentController: self)
+coordinator.navigate()
+```
+Also add following method to dismiss the presented view on successful creation of transfer and perform any action based on the transfer created.
+```swift
+override public func didFlowComplete(with response: Any) {
+    if let statusTransition = response as? HyperwalletStatusTransition, let transition = statusTransition.transition {
+        if transition == HyperwalletStatusTransition.Status.scheduled {
+            navigationController?.popViewController(animated: false)
+        }
+    }
+}
+```
+
 
 ## NotificationCenter Events
 

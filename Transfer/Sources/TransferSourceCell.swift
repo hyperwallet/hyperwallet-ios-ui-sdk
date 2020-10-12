@@ -22,6 +22,34 @@ import Common
 import HyperwalletSDK
 import UIKit
 
+enum TransferSourceType: String {
+    case user
+    case prepaidCard
+}
+
+class TransferSourceCellConfiguration {
+    let type: TransferSourceType
+    let token: String
+    let title: String
+    let fontIcon: HyperwalletIconContent
+    var isSelected: Bool
+    var availableBalance: String?
+    var destinationCurrency: String?
+    var additionalText: String?
+
+    init(isSelectedTransferSource: Bool,
+         type: TransferSourceType,
+         token: String,
+         title: String,
+         fontIcon: HyperwalletIconContent) {
+        self.isSelected = isSelectedTransferSource
+        self.type = type
+        self.token = token
+        self.title = title
+        self.fontIcon = fontIcon
+    }
+}
+
 final class TransferSourceCell: UITableViewCell {
     public static let reuseIdentifier = "transferSourceCellIdentifier"
 
@@ -56,58 +84,37 @@ final class TransferSourceCell: UITableViewCell {
 }
 
 extension TransferSourceCell {
-    func configure(for availableFunds: String, amount: String?) {
-        textLabel?.text = availableFunds
-        textLabel?.adjustsFontForContentSizeCategory = true
-        textLabel?.accessibilityIdentifier = "transferDestinationTitleLabel"
-        detailTextLabel?.text = amount
+    func configure(transferSourceCellConfiguration: TransferSourceCellConfiguration) {
+        configure(title: transferSourceCellConfiguration.title,
+                  additionalInfo: transferSourceCellConfiguration.additionalText,
+                  currency: transferSourceCellConfiguration.destinationCurrency,
+                  availableBalance: transferSourceCellConfiguration.availableBalance,
+                  fontIcon: transferSourceCellConfiguration.fontIcon.rawValue)
+    }
 
+    private func configure(title: String,
+                           additionalInfo: String? = nil,
+                           currency: String?,
+                           availableBalance: String?,
+                           fontIcon: String) {
+        textLabel?.text = title
+        textLabel?.adjustsFontForContentSizeCategory = true
+        textLabel?.numberOfLines = 0
+        textLabel?.lineBreakMode = .byWordWrapping
+        textLabel?.accessibilityIdentifier = "transferSourceTitleLabel"
+        detailTextLabel?.text = additionalInfo
         detailTextLabel?.numberOfLines = 0
         detailTextLabel?.adjustsFontForContentSizeCategory = true
         detailTextLabel?.lineBreakMode = .byWordWrapping
-        detailTextLabel?.accessibilityIdentifier = "transferDestinationSubtitleLabel"
+        detailTextLabel?.accessibilityIdentifier = availableBalance == nil ? nil : "transferSourceSubtitleLabel"
+
         if !UIFont.isLargeSizeCategory {
-            let icon = UIImage.fontIcon(HyperwalletIcon.of("BANK_ACCOUNT").rawValue,
+            let icon = UIImage.fontIcon(fontIcon,
                                         Theme.Icon.frame,
                                         CGFloat(Theme.Icon.size),
                                         Theme.Icon.primaryColor)
             imageView?.image = icon
             imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
         }
-    }
-
-    func configure(for transferMethod: HyperwalletPrepaidCard, amount: String?) {
-        textLabel?.text = transferMethod.title
-        textLabel?.adjustsFontForContentSizeCategory = true
-        textLabel?.accessibilityIdentifier = "transferDestinationTitleLabel"
-        detailTextLabel?.attributedText = formatDetails(
-            subtitle: Locale.current.localizedString(forRegionCode: transferMethod.transferMethodCountry ?? "") ?? "",
-            additionalInfo: transferMethod.value)
-
-        detailTextLabel?.numberOfLines = 0
-        detailTextLabel?.adjustsFontForContentSizeCategory = true
-        detailTextLabel?.lineBreakMode = .byWordWrapping
-        detailTextLabel?.accessibilityIdentifier = "transferDestinationSubtitleLabel"
-        if !UIFont.isLargeSizeCategory {
-            let icon = UIImage.fontIcon(HyperwalletIcon.of(transferMethod.type ?? "").rawValue,
-                                        Theme.Icon.frame,
-                                        CGFloat(Theme.Icon.size),
-                                        Theme.Icon.primaryColor)
-            imageView?.image = icon
-            imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
-        }
-    }
-
-    private func formatDetails(subtitle: String, additionalInfo: String? = nil) -> NSAttributedString {
-        let attributedText = NSMutableAttributedString()
-        let stringFormat = additionalInfo != nil ? "%@\n" : "%@"
-        attributedText.append(value: String(format: stringFormat, subtitle),
-                              font: subTitleLabelFont,
-                              color: subTitleLabelColor)
-        if let additionalInfo = additionalInfo {
-            attributedText.append(value: additionalInfo, font: subTitleLabelFont, color: subTitleLabelColor)
-        }
-
-        return attributedText
     }
 }

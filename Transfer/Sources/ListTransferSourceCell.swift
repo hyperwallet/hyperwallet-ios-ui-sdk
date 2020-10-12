@@ -22,7 +22,7 @@ import Common
 import HyperwalletSDK
 import UIKit
 
-/// ListTransferDestinationCell
+/// ListTransferSourceCell
 final class ListTransferSourceCell: UITableViewCell {
     static let reuseIdentifier = "listTransferSourceCellIdentifier"
 
@@ -60,42 +60,41 @@ final class ListTransferSourceCell: UITableViewCell {
 extension ListTransferSourceCell {
     /// Fill `ListTransferSourceCell` related fields
     ///
-    /// - Parameter transferMethod: a transfer method which contains the info needs to be filled to the cell.
-    func configure(transferMethod: HyperwalletTransferMethod) {
-        textLabel?.accessibilityIdentifier = "transferDestinationTitleLabel"
-        textLabel?.text = transferMethod.type?.lowercased().localized()
+    /// - Parameter TransferSourceCellConfiguration:
+    /// a transfer source which contains the info needs to be filled to the cell.
+    func configure(transferSourceCellConfiguration: TransferSourceCellConfiguration) {
+        configure(title: transferSourceCellConfiguration.title,
+                  additionalInfo: transferSourceCellConfiguration.additionalText,
+                  currency: transferSourceCellConfiguration.destinationCurrency,
+                  availableBalance: transferSourceCellConfiguration.availableBalance,
+                  fontIcon: transferSourceCellConfiguration.fontIcon.rawValue)
+    }
+
+    private func configure(title: String,
+                           additionalInfo: String? = nil,
+                           currency: String?,
+                           availableBalance: String?,
+                           fontIcon: String) {
+        textLabel?.text = title
         textLabel?.adjustsFontForContentSizeCategory = true
         textLabel?.numberOfLines = 0
         textLabel?.lineBreakMode = .byWordWrapping
-
-        detailTextLabel?.accessibilityIdentifier = "transferDestinationSubtitleLabel"
-        detailTextLabel?.attributedText = formatDetails(
-            transferMethodCountry:
-                Locale.current.localizedString(forRegionCode: transferMethod.transferMethodCountry ?? "") ?? "",
-            additionalInfo: transferMethod.value)
-        detailTextLabel?.adjustsFontForContentSizeCategory = true
-        detailTextLabel?.numberOfLines = 0
-        detailTextLabel?.lineBreakMode = .byWordWrapping
+        textLabel?.accessibilityIdentifier = "transferSourceTitleLabel"
+        if let additionalInfo = additionalInfo {
+            detailTextLabel?.text = additionalInfo
+            detailTextLabel?.numberOfLines = 0
+            detailTextLabel?.adjustsFontForContentSizeCategory = true
+            detailTextLabel?.lineBreakMode = .byWordWrapping
+            detailTextLabel?.accessibilityIdentifier = "transferSourceSubtitleLabel"
+        }
 
         if !UIFont.isLargeSizeCategory {
-            let icon = UIImage.fontIcon(HyperwalletIcon.of(transferMethod.type ?? "").rawValue,
+            let icon = UIImage.fontIcon(fontIcon,
                                         Theme.Icon.frame,
                                         CGFloat(Theme.Icon.size),
                                         Theme.Icon.primaryColor)
             imageView?.image = icon
             imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
         }
-    }
-
-    func formatDetails(transferMethodCountry: String, additionalInfo: String?) -> NSAttributedString {
-        let attributedText = NSMutableAttributedString()
-        attributedText.append(value: String(format: "%@\n", transferMethodCountry),
-                              font: subTitleLabelFont,
-                              color: Theme.Label.subtitleColor)
-        if let additionalInfo = additionalInfo {
-            attributedText.append(value: additionalInfo, font: subTitleLabelFont, color: Theme.Label.subtitleColor)
-        }
-
-        return attributedText
     }
 }

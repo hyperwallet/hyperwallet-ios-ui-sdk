@@ -63,6 +63,11 @@
 "venmo_account" = "Venmo";
 "cash_pickup_mg" = "MoneyGram";
 
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+// Manage Prepaid Card Message
+"manage_prepaid_card_message" = "Log in using a web browser to manage your card";
 //Select Transfer Method View
 "select_a_country_message" = "Select a country";
 
@@ -229,6 +234,7 @@
 // Transfer Funds
 "mobileTransferFundsHeader" = "Transfer funds";
 "mobileConfirmationHeader" = "Confirm the details";
+"mobileTransferFromLabel" = "TRANSFER FROM";
 "mobileTransferToLabel" = "TRANSFER TO";
 "mobileNoteLabel" = "Note";
 "mobileConfirmDetailsAmount" = "Amount";
@@ -242,6 +248,8 @@
 "continueButtonLabel" = "Continue";
 "mobileAddTransferMethod" = "Add transfer method";
 "mobileTransferMethodsHeader" = "Transfer methods";
+"mobileTransferFromHeader" = "Transfer From";
+"mobileAvailableFunds" = "Available Funds";
 "mobileFXlabel" = "FOREIGN EXCHANGE";
 "mobileSummaryLabel" = "SUMMARY";
 "transfer" = "Transfer";
@@ -251,3 +259,4 @@
 "transfer_fx_rate_changed" = "Due to changes in the FX rate, you will now receive: %1$@";
 "mobileTransferSuccessMsg" = "Your transfer is being processed";
 "mobileTransferSuccessDetails" = "The funds are on the way to your %1$@.";
+"noTransferFromSourceAvailable" = "No Transfer from source available";

@@ -22,8 +22,8 @@ import Common
 
 import HyperwalletSDK
 
-enum CreateTransferSectionHeader: String {
-    case button, destination, notes, transferAll, amount
+enum CreateTransferSectionHeader: String, CaseIterable {
+    case button, destination, notes, transferAll, amount, source
 }
 
 protocol CreateTransferSectionData: class {
@@ -39,14 +39,22 @@ extension CreateTransferSectionData {
     var title: String? {
         if createTransferSectionHeader != CreateTransferSectionHeader.button {
             let sectionHeader = createTransferSectionHeader.rawValue.lowercased()
-            if sectionHeader == "destination" {
+            if sectionHeader == CreateTransferSectionHeader.source.rawValue {
+                return "mobileTransferFromLabel".localized()
+            } else if sectionHeader == CreateTransferSectionHeader.destination.rawValue {
                 return "mobileTransferToLabel".localized()
-            } else if sectionHeader == "notes" {
+            } else if sectionHeader == CreateTransferSectionHeader.notes.rawValue {
                 return "mobileNoteLabel".localized()
             }
         }
         return nil
     }
+}
+
+final class CreateTransferSectionSourceData: CreateTransferSectionData {
+    var createTransferSectionHeader: CreateTransferSectionHeader { return .source }
+    var cellIdentifiers: [String] { return [TransferSourceCell.reuseIdentifier] }
+    var errorMessage: String?
 }
 
 final class CreateTransferSectionDestinationData: CreateTransferSectionData {

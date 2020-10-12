@@ -335,4 +335,37 @@ class ListTransferMethodTests: BaseTests {
           XCTAssertTrue(listTransferMethod.confirmAccountRemoveButton.exists)
           XCTAssertTrue(listTransferMethod.cancelAccountRemoveButton.exists)
       }
+
+    func testListTransferMethod_managePrepaidcard() {
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+                             filename: "ListTransferMethodManagePrepaidCard",
+                             method: HTTPMethod.get)
+
+        openTransferMethodsList()
+
+        XCTAssertTrue( app.tables.cells.containing(.staticText, identifier: "Prepaid Card").element(boundBy: 0).exists)
+        XCTAssertTrue( app.tables.cells.containing(.staticText, identifier: "Prepaid Card").element(boundBy: 1).exists)
+
+        //prepaid card 1 & 2 info
+        let expectedPPCCellLabel1 = listTransferMethod
+            .getTransferMethodPrepaidCardLabel(visacard: "Visa •••• 8766")
+        let expectedPPCCellLabel2 = listTransferMethod
+            .getTransferMethodPrepaidCardLabel(visacard: "Mastercard •••• 8767")
+
+        XCTAssertTrue(app.cells.element(boundBy: 0).staticTexts[expectedPPCCellLabel1].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 1).staticTexts[expectedPPCCellLabel2].exists)
+
+        //icon
+        XCTAssertTrue(listTransferMethod.getTransferMethodIcon(index: 0).exists, "Expect icon")
+        XCTAssertTrue(listTransferMethod.getTransferMethodIcon(index: 1).exists, "Expect icon")
+
+        //tap n confirm no delete feature
+        app.tables.cells.containing(.staticText, identifier: "Prepaid Card").element(boundBy: 0).tap()
+        waitForNonExistence(spinner)
+        XCTAssertFalse(listTransferMethod.confirmAccountRemoveButton.exists)
+
+        app.tables.cells.containing(.staticText, identifier: "Prepaid Card").element(boundBy: 1).tap()
+        waitForNonExistence(spinner)
+        XCTAssertFalse(listTransferMethod.confirmAccountRemoveButton.exists)
+    }
 }

@@ -7,6 +7,14 @@ class TransferUserFundsTest: BaseTests {
     var addTransferMethod: AddTransferMethod!
     var elementQuery: XCUIElementQuery!
 
+    var expectedUSDestinationPrepaidLabel: String = {
+        if #available(iOS 11.2, *) {
+            return "United States\nVisa •••• "
+        } else {
+            return "United States Visa •••• "
+        }
+    }()
+
     var expectedUSDestinationLabel: String = {
         if #available(iOS 11.2, *) {
             return "United States\nending in "
@@ -57,7 +65,7 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.verifyTransferFundsTitle()
 
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
-        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Add transfer method".localized())
+        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "mobileAddTransferMethod".localized())
 
         // assert NOTE
         XCTAssertTrue(transferFunds.notesSectionLabel.exists)
@@ -143,6 +151,7 @@ class TransferUserFundsTest: BaseTests {
         let cadBankAccount = app.tables.element.children(matching: .cell).element(boundBy: 1)
         cadBankAccount.tap()
 
+        waitForNonExistence(spinner)
         transferFunds.transferMaxAllFunds.tap()
         // Assert Destination Amount is automatically insert into the amount field
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "7,301.64")
@@ -365,7 +374,8 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 1), expectedCanadaDestinationLabel)
 
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 2), TransferMethods.prepaidCard)
-        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 2), expectedUSDestinationLabel + "4281")
+        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 2),
+                       expectedUSDestinationPrepaidLabel + "4281")
 
         // Assert first row is checked by default
         assertButtonTrue(element: usdBankAccount)
@@ -413,7 +423,7 @@ class TransferUserFundsTest: BaseTests {
 
         transferFunds.verifyTransferFundsTitle()
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
-        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Add transfer method".localized())
+        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "mobileAddTransferMethod".localized())
 
         XCTAssertTrue(transferFunds.nextLabel.exists)
         transferFunds.tapContinueButton()
@@ -491,6 +501,7 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertTrue(transferFunds.transferAmount.exists)
 
+        transferFunds.transferAmount.tap()
         let pastAmountWithNumberNoDigit = "10000.00"
         transferFunds.pasteAmountToTransferAmount(amount: pastAmountWithNumberNoDigit)
         waitForNonExistence(spinner)
@@ -685,7 +696,7 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.verifyTransferFundsTitle()
 
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
-        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Add transfer method".localized())
+        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "mobileAddTransferMethod".localized())
         transferFunds.addSelectDestinationLabel.tap()
 
         // Assert Add a transfer method View

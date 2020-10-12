@@ -21,6 +21,9 @@ import Common
 import Receipt
 import Transfer
 import TransferMethod
+import TransferMethodRepository
+import TransferRepository
+import UserRepository
 #endif
 import HyperwalletSDK
 import os.log
@@ -35,7 +38,6 @@ class TopCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
-    @IBOutlet var imageView2: UIImageView!
     @IBOutlet var iconLabel: UILabel!
 }
 
@@ -49,6 +51,7 @@ class ViewController: UITableViewController {
         case userReceipts
         case prepaidCardReceipts
         case transferFunds
+        case transferFundsSource
         case transferFundsPPC
 
         var title: String {
@@ -60,6 +63,7 @@ class ViewController: UITableViewController {
             case .userReceipts: return "List User Receipts"
             case .prepaidCardReceipts: return "List Prepaid Card Receipts"
             case .transferFunds: return "Transfer Funds"
+            case .transferFundsSource: return "Transfer Funds Source"
             case .transferFundsPPC: return "Transfer Funds PPC"
             }
         }
@@ -73,6 +77,7 @@ class ViewController: UITableViewController {
             case .userReceipts: return "List User Receipts"
             case .prepaidCardReceipts: return "List Prepaid Card Receipts"
             case .transferFunds: return "Transfer Funds"
+            case .transferFundsSource: return "Transfer Funds Source"
             case .transferFundsPPC: return "Transfer Funds PPC"
             }
         }
@@ -100,6 +105,7 @@ class ViewController: UITableViewController {
             .userReceipts: showExampleUserReceipts,
             .prepaidCardReceipts: showExamplePrepaidCardReceipts,
             .transferFunds: showExampleTransferFunds,
+            .transferFundsSource: showExampleTransferFundsSource,
             .transferFundsPPC: showExampleTransferFundsPPC
         ]
     }
@@ -171,6 +177,14 @@ class ViewController: UITableViewController {
         let clientTransferId = UUID().uuidString.lowercased()
         let coordinator = HyperwalletUI.shared
             .createTransferFromUserCoordinator(clientTransferId: clientTransferId, parentController: self)
+        coordinator.navigate()
+    }
+
+    private func showExampleTransferFundsSource() {
+        let clientTransferId = UUID().uuidString.lowercased()
+        let coordinator = HyperwalletUI.shared
+            .createTransferFromAllAvailableSourcesCoordinator(clientTransferId: clientTransferId,
+                                                              parentController: self)
         coordinator.navigate()
     }
 
