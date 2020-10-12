@@ -229,6 +229,10 @@
 		A65312D522FC055300A83D30 /* TransferMethodCoordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65312D422FC055300A83D30 /* TransferMethodCoordinators.swift */; };
 		A65312D822FC293C00A83D30 /* TransferCoordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65312D722FC293C00A83D30 /* TransferCoordinators.swift */; };
 		AB26C8F7252F61B60097D8CB /* ListTransferMethodManagePrepaidCard.json in Resources */ = {isa = PBXBuildFile; fileRef = AB26C8F4252F570C0097D8CB /* ListTransferMethodManagePrepaidCard.json */; };
+		ABE841F625321A200010240A /* TransferMethodVenmoList.json in Resources */ = {isa = PBXBuildFile; fileRef = ABE841F525321A200010240A /* TransferMethodVenmoList.json */; };
+		ABE841F8253445F70010240A /* ListTransferMethodMoreThanOneVenmo.json in Resources */ = {isa = PBXBuildFile; fileRef = ABE841F7253445F70010240A /* ListTransferMethodMoreThanOneVenmo.json */; };
+		ABE841FA25344D0B0010240A /* AvailableFundsVenmoDetails.json in Resources */ = {isa = PBXBuildFile; fileRef = ABE841F925344D0B0010240A /* AvailableFundsVenmoDetails.json */; };
+		ABE841FC25347D9D0010240A /* VenmoReceiptsForFewMonths.json in Resources */ = {isa = PBXBuildFile; fileRef = ABE841FB25347D9D0010240A /* VenmoReceiptsForFewMonths.json */; };
 		B309EF3623DA5D5400160855 /* ListTransferDestinationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B309EF3523DA5D5400160855 /* ListTransferDestinationCell.swift */; };
 		B312939A24BF70F1000B6DAE /* ExpiryDateWidgetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B312939924BF70F1000B6DAE /* ExpiryDateWidgetTests.swift */; };
 		B32D70922391A7410079A34E /* TextWidgetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32D70912391A7410079A34E /* TextWidgetTests.swift */; };
@@ -815,6 +819,10 @@
 		A65312D422FC055300A83D30 /* TransferMethodCoordinators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferMethodCoordinators.swift; sourceTree = "<group>"; };
 		A65312D722FC293C00A83D30 /* TransferCoordinators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferCoordinators.swift; sourceTree = "<group>"; };
 		AB26C8F4252F570C0097D8CB /* ListTransferMethodManagePrepaidCard.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ListTransferMethodManagePrepaidCard.json; sourceTree = "<group>"; };
+		ABE841F525321A200010240A /* TransferMethodVenmoList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TransferMethodVenmoList.json; sourceTree = "<group>"; };
+		ABE841F7253445F70010240A /* ListTransferMethodMoreThanOneVenmo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ListTransferMethodMoreThanOneVenmo.json; sourceTree = "<group>"; };
+		ABE841F925344D0B0010240A /* AvailableFundsVenmoDetails.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AvailableFundsVenmoDetails.json; sourceTree = "<group>"; };
+		ABE841FB25347D9D0010240A /* VenmoReceiptsForFewMonths.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = VenmoReceiptsForFewMonths.json; sourceTree = "<group>"; };
 		B309EF3523DA5D5400160855 /* ListTransferDestinationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTransferDestinationCell.swift; sourceTree = "<group>"; };
 		B312939924BF70F1000B6DAE /* ExpiryDateWidgetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpiryDateWidgetTests.swift; sourceTree = "<group>"; };
 		B32D70912391A7410079A34E /* TextWidgetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextWidgetTests.swift; sourceTree = "<group>"; };
@@ -1239,6 +1247,7 @@
 				4157135C22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json */,
 				4157135E22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json */,
 				4157136022C43660005D6DB1 /* PrepaidCardReceiptsPaging.json */,
+				ABE841FB25347D9D0010240A /* VenmoReceiptsForFewMonths.json */,
 			);
 			path = Receipts;
 			sourceTree = "<group>";
@@ -1347,6 +1356,8 @@
 				2E6DBB8A2326F0F800863672 /* AvailableFundMultiCurrenciesFxChange.json */,
 				98DC5D502526A39A00729477 /* GetPrepaidCardSuccessResponse.json */,
 				983EF20D2526A8EB000A55B3 /* ListTransferDestinationPrepaidCardsOnly.json */,
+				ABE841F7253445F70010240A /* ListTransferMethodMoreThanOneVenmo.json */,
+				ABE841F925344D0B0010240A /* AvailableFundsVenmoDetails.json */,
 			);
 			path = TransferFunds;
 			sourceTree = "<group>";
@@ -1661,6 +1672,7 @@
 			isa = PBXGroup;
 			children = (
 				4175940F2397156700921392 /* TransferMethodConfigrationUSBankAccountResponseMask.json */,
+				ABE841F525321A200010240A /* TransferMethodVenmoList.json */,
 				417594122397156700921392 /* TransferMethodConfigurationResponseWithStarMasks.json */,
 				417594132397156700921392 /* TransferMethodConfigurationUSBankCardResponseWithMask.json */,
 				417594102397156700921392 /* TransferMethodConfigurationWireAccountResponseWithMask.json */,
@@ -2802,10 +2814,13 @@
 				41D8364222FB4814003544AB /* InvalidSourceError.json in Resources */,
 				41D8363A22FB4814003544AB /* AvailableFundMultiCurrencies.json in Resources */,
 				41D8364322FB4814003544AB /* ListTransferDestinationsUSD.json in Resources */,
+				41D8364322FB4814003544AB /* ListTransferDestinationsUSD.json in Resources */,
+				ABE841F8253445F70010240A /* ListTransferMethodMoreThanOneVenmo.json in Resources */,
 				41D8364022FB4814003544AB /* TransferErrorAmountLessThanFee.json in Resources */,
 				98DC5D512526A39A00729477 /* GetPrepaidCardSuccessResponse.json in Resources */,
 				9807B76A226442C60028A280 /* RemovedTransferMethodResponse.json in Resources */,
 				41D8363522FB4814003544AB /* AvailableFundUSD.json in Resources */,
+				ABE841F625321A200010240A /* TransferMethodVenmoList.json in Resources */,
 				41D8363B22FB4814003544AB /* AvailableFundZero.json in Resources */,
 				0961D62F22AA861A007F0B44 /* ReceiptsForOneMonth.json in Resources */,
 				98F3D75A230C5C2600A8195F /* NoteDescriptionLengthValidationError.json in Resources */,
@@ -2818,6 +2833,7 @@
 				41D8363422FB4814003544AB /* AvailableFundJPY.json in Resources */,
 				DBA9FA5E22791B2900C1301A /* UserIndividualResponse.json in Resources */,
 				641324E62295764500512816 /* AuthenticationTokenResponse.json in Resources */,
+				ABE841FC25347D9D0010240A /* VenmoReceiptsForFewMonths.json in Resources */,
 				2E6DBB8C2326F2C200863672 /* AvailableFundMultiCurrenciesFxChange.json in Resources */,
 				41759424239716D100921392 /* TransferMethodConfigurationWireAccountResponseWithMask.json in Resources */,
 				9807B76C226442C60028A280 /* TransferMethodConfigurationBankCardResponse.json in Resources */,
@@ -2828,6 +2844,7 @@
 				41759422239716CC00921392 /* TransferMethodConfigurationResponseWithStarMasks.json in Resources */,
 				B3DDC1012385D7E800E1A562 /* InsightsSuccessResponse.json in Resources */,
 				41D8363922FB4814003544AB /* TransferErrorQuoteExpired.json in Resources */,
+				ABE841FA25344D0B0010240A /* AvailableFundsVenmoDetails.json in Resources */,
 				41D8363622FB4814003544AB /* ListOneBankAccountTransferUSD.json in Resources */,
 				98F3D759230C5C1C00A8195F /* CreateTransferWithZeroFee.json in Resources */,
 				41D8363822FB4814003544AB /* CreateTransferWithFX_JPY.json in Resources */,
