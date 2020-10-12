@@ -368,4 +368,24 @@ class ListTransferMethodTests: BaseTests {
         waitForNonExistence(spinner)
         XCTAssertFalse(listTransferMethod.confirmAccountRemoveButton.exists)
     }
+
+    func testListTransferMethod_VenmoManage() {
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+                             filename: "TransferMethodVenmoList",
+                             method: HTTPMethod.get)
+
+        openTransferMethodsList()
+
+        XCTAssertTrue( app.tables.cells.containing(.staticText, identifier: "Venmo").element(boundBy: 0).exists)
+        XCTAssertTrue( app.tables.cells.containing(.staticText, identifier: "Venmo").element(boundBy: 1).exists)
+
+        let expectedFirstBankAccountLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "5555")
+        let expectedSecondBankAccountLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "5556")
+
+        XCTAssertTrue(app.cells.element(boundBy: 0).staticTexts[expectedFirstBankAccountLabel].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 1).staticTexts[expectedSecondBankAccountLabel].exists)
+
+        XCTAssertTrue(listTransferMethod.getTransferMethodIcon(index: 0).exists, "Expect icon")
+        XCTAssertTrue(listTransferMethod.getTransferMethodIcon(index: 1).exists, "Expect icon")
+    }
 }
