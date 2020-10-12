@@ -41,6 +41,7 @@ extension HyperwalletTransferMethod: GenericCellConfiguration {
             return String(format: "%@%@",
                           "to".localized(),
                           getField(TransferMethodField.email.rawValue) ?? "")
+
         case TransferMethodType.prepaidCard.rawValue:
             let cardBrand = getField(TransferMethodField.cardBrand.rawValue)?.lowercased().localized() ?? ""
             let cardNumber = getField(TransferMethodField.cardNumber.rawValue)?.suffix(startAt: 4) ?? ""
