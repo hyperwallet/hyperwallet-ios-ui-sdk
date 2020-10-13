@@ -142,12 +142,11 @@ extension ReceiptTransactionCell {
 
         receiptTypeLabel.text = receipt.type?.rawValue.lowercased().localized()
 
-        let locale = NSLocale(localeIdentifier: currency)
-        let currencySymbol = locale.displayName(forKey: NSLocale.Key.currencySymbol, value: currency)
-        if let currencySymbol = currencySymbol {
-            amountLabel.text = entry == credit ?  String(format: "%@%@", currencySymbol, amount) :
-                String(format: "-%@%@", currencySymbol, amount)
-        }
+        let formattedAmount = amount.format(with: currency)
+
+        amountLabel.text = entry == credit ?
+            String(format: "%@", formattedAmount) :
+            String(format: "-%@", formattedAmount)
 
         amountLabel.textColor = entry == credit
             ? Theme.Amount.creditColor

@@ -64,14 +64,22 @@ public extension String {
     /// - Parameter currencyCode: the currency code
     /// - Returns: a formatted String amount with currency code
     func format(with currencyCode: String?) -> String {
-        if !self.isEmpty {
+        if !self.isEmpty, let currencyCode = currencyCode {
+            let locale = NSLocale(localeIdentifier: currencyCode)
+            let currencySymbol = locale.displayName(forKey: NSLocale.Key.currencySymbol, value: currencyCode)
+
             let currencyFormatter = NumberFormatter()
             currencyFormatter.minimumIntegerDigits = 1
             currencyFormatter.numberStyle = .currency
             currencyFormatter.currencyCode = currencyCode
             currencyFormatter.currencySymbol = ""
             let formattedAmountInNumber = currencyFormatter.number(from: self)
-            return currencyFormatter.string(for: formattedAmountInNumber) ?? ""
+
+            if let currencySymbol = currencySymbol, currencySymbol != currencyCode {
+                return currencySymbol + (currencyFormatter.string(for: formattedAmountInNumber) ?? "")
+            } else {
+                return (currencyFormatter.string(for: formattedAmountInNumber) ?? "")
+            }
         } else {
             return ""
         }
