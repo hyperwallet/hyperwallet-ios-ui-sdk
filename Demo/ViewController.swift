@@ -50,6 +50,7 @@ class ViewController: UITableViewController {
         case addTransferMethod
         case userReceipts
         case prepaidCardReceipts
+        case allSourcesReceipts
         case transferFunds
         case transferFundsSource
         case transferFundsPPC
@@ -62,6 +63,7 @@ class ViewController: UITableViewController {
             case .addTransferMethod: return "Add Transfer Method"
             case .userReceipts: return "List User Receipts"
             case .prepaidCardReceipts: return "List Prepaid Card Receipts"
+            case .allSourcesReceipts: return "List All Receipts"
             case .transferFunds: return "Transfer Funds"
             case .transferFundsSource: return "Transfer Funds Source"
             case .transferFundsPPC: return "Transfer Funds PPC"
@@ -76,6 +78,7 @@ class ViewController: UITableViewController {
             case .addTransferMethod: return "Add the default Transfer Method"
             case .userReceipts: return "List User Receipts"
             case .prepaidCardReceipts: return "List Prepaid Card Receipts"
+            case .allSourcesReceipts: return "List All Receipts"
             case .transferFunds: return "Transfer Funds"
             case .transferFundsSource: return "Transfer Funds Source"
             case .transferFundsPPC: return "Transfer Funds PPC"
@@ -104,6 +107,7 @@ class ViewController: UITableViewController {
             .addTransferMethod: showExampleAddTransferMethod,
             .userReceipts: showExampleUserReceipts,
             .prepaidCardReceipts: showExamplePrepaidCardReceipts,
+            .allSourcesReceipts: showExampleAllAvailableReceipts,
             .transferFunds: showExampleTransferFunds,
             .transferFundsSource: showExampleTransferFundsSource,
             .transferFundsPPC: showExampleTransferFundsPPC
@@ -197,6 +201,11 @@ class ViewController: UITableViewController {
 
     private func showExampleUserReceipts() {
         let coordinator = HyperwalletUI.shared.listUserReceiptCoordinator(parentController: self)
+        coordinator.navigate()
+    }
+
+    private func showExampleAllAvailableReceipts() {
+        let coordinator = HyperwalletUI.shared.listAllAvailableSourcesReceiptCoordinator(parentController: self)
         coordinator.navigate()
     }
 
