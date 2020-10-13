@@ -163,7 +163,7 @@ class ListReceiptPresenterTests: XCTestCase {
                        "The receipt number of the fifth section should be 2")
     }
 
-    func testListAllSourcesReceipt_UserReceiptOnly() {
+    func testListAllSourcesReceipt_userReceiptOnly() {
         presenter = ListReceiptPresenter(view: mockView,
                                          showAllAvailableSources: true)
 
@@ -182,7 +182,7 @@ class ListReceiptPresenterTests: XCTestCase {
                        "Segment control item should be of type user")
     }
 
-    func testListAllSourcesReceipt_UserReceiptOnlyPPCFailure() {
+    func testListAllSourcesReceipt_userReceiptOnlyPrepaidCardFailure() {
         presenter = ListReceiptPresenter(view: mockView,
                                          showAllAvailableSources: true)
 
@@ -201,7 +201,7 @@ class ListReceiptPresenterTests: XCTestCase {
                        "Segment control item should be of type user")
     }
 
-    func testListAllSourcesReceipt_UserAndPPCReceipt() {
+    func testListAllSourcesReceipt_userAndPrepaidCardReceipt() {
         presenter = ListReceiptPresenter(view: mockView,
                                          showAllAvailableSources: true)
 
@@ -217,7 +217,7 @@ class ListReceiptPresenterTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
         XCTAssertEqual(presenter.segmentedControlItems.count,
                        3,
-                       "There should be 3 segment control items - 1 user + 2 ppc")
+                       "There should be 3 segment control items - 1 user + 2 prepaid cards")
         XCTAssertEqual(presenter.segmentedControlItems[0].receiptSourceType,
                        .user,
                        "Segment control item 1 should be of type user")
@@ -229,7 +229,7 @@ class ListReceiptPresenterTests: XCTestCase {
                        "Segment control item 3 should be of type prepaid card")
     }
 
-    func testListAllSourcesReceipt_PPCReceipt_Pay2Card() {
+    func testListAllSourcesReceipt_prepaidCardReceipt_pay2Card() {
         Hyperwallet.clearInstance()
         HyperwalletTestHelper.programModel = .pay2CardModel
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
@@ -248,13 +248,13 @@ class ListReceiptPresenterTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
         XCTAssertEqual(presenter.segmentedControlItems.count,
                        2,
-                       "There should be 2 segment control items - 2 ppc")
+                       "There should be 2 segment control items - 2 prepaid cards")
         XCTAssertEqual(presenter.segmentedControlItems[0].receiptSourceType,
                        .prepaidCard,
-                       "Segment control item 1 should be of type ppc")
+                       "Segment control item 1 should be of type prepaid card")
         XCTAssertEqual(presenter.segmentedControlItems[1].receiptSourceType,
                        .prepaidCard,
-                       "Segment control item 2 should be of type ppc")
+                       "Segment control item 2 should be of type prepaid card")
     }
 
     func testListPrepaidCardReceipt_failureWithError() {
