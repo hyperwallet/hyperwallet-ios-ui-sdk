@@ -93,7 +93,7 @@ public final class RemotePrepaidCardRepository: PrepaidCardRepository {
     private func setUpPrepaidCardQueryParam() -> HyperwalletPrepaidCardQueryParam {
         let queryParam = HyperwalletPrepaidCardQueryParam()
         // Only fetch active prepaid cards
-        queryParam.status = .activated
+        queryParam.status = HyperwalletPrepaidCardQueryParam.QueryStatus.activated.rawValue
         return queryParam
     }
 }
