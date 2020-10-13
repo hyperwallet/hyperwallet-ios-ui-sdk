@@ -331,15 +331,15 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.transferAmount.typeText(".12345")
 
         transferFunds.transferSectionLabel.tap()
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.12")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, ".10")
 
         transferFunds.transferAmount.clearAndEnterText(text: "12345678901234567890")
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "123456789012")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "123456789010")
         transferFunds.transferAmount.typeText(".123456")
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "123456789012.12")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "1234567890.10")
 
         transferFunds.transferSectionLabel.tap()
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "123456789012.12")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "1234567890.10")
     }
 
     // MARK: Select Destination Page
