@@ -199,6 +199,12 @@ let coordinator = HyperwalletUI.shared.listPrepaidCardReceiptCoordinator(parentC
 coordinator.navigate()
 ```
 
+### Lists receipts from all available sources
+```swift
+let coordinator = HyperwalletUI.shared.listAllAvailableSourcesReceiptCoordinator(parentController: self)
+coordinator.navigate()
+```
+
 ### Make a new transfer from user's account
 To add new Transfer Method from Transfer module, TransferMethod module needs to be added as a dependency in the app. If TransferMethod module is not added, users will not be able to add a new Transfer Method inside the Transfer flow.
 ```swift
