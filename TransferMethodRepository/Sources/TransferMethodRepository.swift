@@ -119,7 +119,7 @@ final class RemoteTransferMethodRepository: TransferMethodRepository {
         guard let transferMethods = transferMethods else {
             let queryParam = HyperwalletTransferMethodQueryParam()
             queryParam.limit = 100
-            queryParam.status = .activated
+            queryParam.status = HyperwalletTransferMethodQueryParam.QueryStatus.activated.rawValue
             Hyperwallet.shared.listTransferMethods(
                 queryParam: queryParam,
                 completion: getTransferMethodsHandler(completion))
