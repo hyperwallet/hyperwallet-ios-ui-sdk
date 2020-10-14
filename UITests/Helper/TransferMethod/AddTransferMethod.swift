@@ -7,6 +7,7 @@ class AddTransferMethod {
     var elementQuery: XCUIElementQuery
     var addTransferMethodTableView: XCUIElement
     var bankIdInput: XCUIElement
+    var accountIdInput: XCUIElement
     var branchIdInput: XCUIElement
     var bankAccountIdInput: XCUIElement
     var accountTypeSelect: XCUIElement
@@ -131,6 +132,7 @@ class AddTransferMethod {
 
         // Inputs
         bankIdInput = addTransferMethodTableView.textFields["bankId"]
+        accountIdInput = addTransferMethodTableView.textFields["accountId"]
         branchIdInput = addTransferMethodTableView.textFields["branchId"]
         bankAccountIdInput = addTransferMethodTableView.textFields["bankAccountId"]
         accountTypeSelect = addTransferMethodTableView.cells.staticTexts["bankAccountPurposeValue"]
@@ -203,6 +205,13 @@ class AddTransferMethod {
             branchIdInput.enterText(text: branchId)
         } else {
             branchIdInput.clearAndEnterText(text: branchId)
+        }
+    }
+    func setAccountId(_ accountId: String) {
+        if #available(iOS 13.0, *) {
+            accountIdInput.enterText(text: accountId)
+        } else {
+            accountIdInput.clearAndEnterText(text: accountId)
         }
     }
 

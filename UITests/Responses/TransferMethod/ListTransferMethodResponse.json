@@ -42,7 +42,7 @@
         },
         {
             "token": "trm-11111111-0000-0000-0000-000000000000",
-            "type": "BANK_ACCOUNT",
+            "type": "VENMO_ACCOUNT",
             "status": "ACTIVATED",
             "verificationStatus": "NOT_REQUIRED",
             "createdOn": "2019-03-19T23:10:42",
