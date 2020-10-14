@@ -112,7 +112,7 @@ class PrepaidCardRepositoryTests: XCTestCase {
 
         // When
         let prepaidCardQueryParam = HyperwalletPrepaidCardQueryParam()
-        prepaidCardQueryParam.status = .activated
+        prepaidCardQueryParam.status = HyperwalletPrepaidCardQueryParam.QueryStatus.activated.rawValue
 
         Hyperwallet.shared.listPrepaidCards(queryParam: prepaidCardQueryParam) { (result, error) in
             prepaidCardList = result
@@ -159,7 +159,7 @@ class PrepaidCardRepositoryTests: XCTestCase {
 
         // When
         let prepaidCardQueryParam = HyperwalletPrepaidCardQueryParam()
-        prepaidCardQueryParam.status = HyperwalletPrepaidCardQueryParam.QueryStatus.activated
+        prepaidCardQueryParam.status = HyperwalletPrepaidCardQueryParam.QueryStatus.activated.rawValue
         prepaidCardQueryParam.sortBy = HyperwalletPrepaidCardQueryParam.QuerySortable.ascendantCreatedOn.rawValue
         prepaidCardQueryParam.createdAfter = ISO8601DateFormatter.ignoreTimeZone.date(from: "2019-01-01T00:30:11")
 
