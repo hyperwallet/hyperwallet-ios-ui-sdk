@@ -85,8 +85,10 @@ final class ListReceiptController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: ReceiptTransactionCell.reuseIdentifier,
                                                  for: indexPath)
         if let listReceiptCell = cell as? ReceiptTransactionCell {
-            listReceiptCell.configure(presenter.sectionData[indexPath.section].value[indexPath.row])
-            listReceiptCell.accessoryType = .disclosureIndicator
+            if presenter.sectionData.isNotEmpty {
+                listReceiptCell.configure(presenter.sectionData[indexPath.section].value[indexPath.row])
+                listReceiptCell.accessoryType = .disclosureIndicator
+            }
         }
         return cell
     }
@@ -101,6 +103,9 @@ final class ListReceiptController: UITableViewController {
 
     /// Returns title for header
     override public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if presenter.sectionData.isEmpty {
+            return nil
+        }
         let date = presenter.sectionData[section].key
         return date.formatDateToString(dateFormat: sectionTitleDateFormat)
     }
