@@ -18,6 +18,7 @@
 
 #if !COCOAPODS
 import Common
+import TransferMethodRepository
 import TransferRepository
 #endif
 import HyperwalletSDK
@@ -41,17 +42,20 @@ final class ScheduleTransferPresenter {
     private var didFxQuoteChange: Bool
     private let pageName = "transfer-funds:review-transfer"
     private let pageGroup = "transfer-funds"
+    private var transferSourceCellConfiguration: TransferSourceCellConfiguration
 
     /// Initialize ScheduleTransferPresenter
     init(
         view: ScheduleTransferView,
         transferMethod: HyperwalletTransferMethod,
         transfer: HyperwalletTransfer,
-        didFxQuoteChange: Bool) {
+        didFxQuoteChange: Bool,
+        transferSourceCellConfiguration: TransferSourceCellConfiguration) {
         self.view = view
         self.transferMethod = transferMethod
         self.transfer = transfer
         self.didFxQuoteChange = didFxQuoteChange
+        self.transferSourceCellConfiguration = transferSourceCellConfiguration
         initializeSections()
     }
 
@@ -61,6 +65,11 @@ final class ScheduleTransferPresenter {
 
     private func initializeSections() {
         sectionData.removeAll()
+
+        let confirmTransferSourceSection =
+            ScheduleTransferSectionSourceData(transferSourceCellConfiguration: transferSourceCellConfiguration)
+        sectionData.append(confirmTransferSourceSection)
+
         let confirmTransferDestinationSection = ScheduleTransferDestinationData(transferMethod: transferMethod)
         sectionData.append(confirmTransferDestinationSection)
 

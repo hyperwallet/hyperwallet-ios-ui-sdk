@@ -84,8 +84,8 @@ final class TransferAmountCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override func layoutIfNeeded() {
+        super.layoutIfNeeded()
         subviews.forEach { (view) in
             if type(of: view).description() == "_UITableViewCellSeparatorView" {
                 view.isHidden = true
@@ -139,14 +139,13 @@ final class TransferAmountCell: UITableViewCell {
     }
 
     func configure(amount: String?, currency: String?, _ handler: @escaping EnteredAmountHandler) {
+        var currencySymbol: String?
         if let currency = currency {
             let locale = NSLocale(localeIdentifier: currency)
-            let currencySymbol = locale.displayName(forKey: NSLocale.Key.currencySymbol, value: currency)
-            if let currencySymbol = currencySymbol {
-                currencySymbolLabel.text = currencySymbol
-                currencySymbolLabel.adjustsFontForContentSizeCategory = true
-            }
+            currencySymbol = locale.displayName(forKey: NSLocale.Key.currencySymbol, value: currency)
         }
+        currencySymbolLabel.text = currencySymbol
+        currencySymbolLabel.adjustsFontForContentSizeCategory = true
         amountTextField.text = amount
         amountTextField.adjustsFontSizeToFitWidth = true
         amountTextField.adjustsFontForContentSizeCategory = true

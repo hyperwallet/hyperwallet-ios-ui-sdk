@@ -199,6 +199,12 @@ let coordinator = HyperwalletUI.shared.listPrepaidCardReceiptCoordinator(parentC
 coordinator.navigate()
 ```
 
+### Lists receipts from all available sources
+```swift
+let coordinator = HyperwalletUI.shared.listAllAvailableSourcesReceiptCoordinator(parentController: self)
+coordinator.navigate()
+```
+
 ### Make a new transfer from user's account
 To add new Transfer Method from Transfer module, TransferMethod module needs to be added as a dependency in the app. If TransferMethod module is not added, users will not be able to add a new Transfer Method inside the Transfer flow.
 ```swift
@@ -225,6 +231,25 @@ let coordinator = HyperwalletUI.shared
             .createTransferFromPrepaidCardCoordinator(clientTransferId: clientTransferId,
                                                       sourceToken: "your-prepaid-card-token",
                                                       parentController: self)
+coordinator.navigate()
+```
+Also add following method to dismiss the presented view on successful creation of transfer and perform any action based on the transfer created.
+```swift
+override public func didFlowComplete(with response: Any) {
+    if let statusTransition = response as? HyperwalletStatusTransition, let transition = statusTransition.transition {
+        if transition == HyperwalletStatusTransition.Status.scheduled {
+            navigationController?.popViewController(animated: false)
+        }
+    }
+}
+```
+
+### Display all the available sources to make a new transfer from. User can then select the transfer from source and make a new tansfer from that source
+```swift
+let clientTransferId = UUID().uuidString.lowercased()
+let coordinator = HyperwalletUI.shared
+            .createTransferFromAllAvailableSourcesCoordinator(clientTransferId: clientTransferId,
+                                                              parentController: self)
 coordinator.navigate()
 ```
 Also add following method to dismiss the presented view on successful creation of transfer and perform any action based on the transfer created.

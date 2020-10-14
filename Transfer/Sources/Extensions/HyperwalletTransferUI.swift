@@ -32,7 +32,7 @@ public extension HyperwalletUI {
         UserRepositoryFactory.clearInstance()
     }
 
-    /// Create transfer funds
+    /// Create transfer funds from User Source
     ///
     /// - Returns: An instance of `CreateTransferCoordinator`
     func createTransferFromUserCoordinator(clientTransferId: String,
@@ -43,7 +43,7 @@ public extension HyperwalletUI {
         return coordinator
     }
 
-    /// Create transfer funds
+    /// Create transfer funds from Prepaid Card Token Source
     ///
     /// - Returns: An instance of `CreateTransferCoordinator`
     func createTransferFromPrepaidCardCoordinator(clientTransferId: String,
@@ -54,6 +54,22 @@ public extension HyperwalletUI {
             coordinator.start(initializationData: [
                 InitializationDataField.clientTransferId: clientTransferId,
                 InitializationDataField.sourceToken: sourceToken
+            ],
+                              parentController: parentController)
+            return coordinator
+    }
+
+    /// Create transfer funds
+    ///  This function will show all the available sources to create a transfer from.
+    ///
+    /// - Returns: An instance of `CreateTransferCoordinator`
+    func createTransferFromAllAvailableSourcesCoordinator(clientTransferId: String,
+                                                          parentController: UIViewController)
+        -> CreateTransferCoordinator {
+            let coordinator = CreateTransferCoordinator()
+            coordinator.start(initializationData: [
+                InitializationDataField.clientTransferId: clientTransferId,
+                InitializationDataField.showAllAvailableSources: true
             ],
                               parentController: parentController)
             return coordinator

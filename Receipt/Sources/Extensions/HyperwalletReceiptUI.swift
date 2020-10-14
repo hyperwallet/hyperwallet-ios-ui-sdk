@@ -49,4 +49,15 @@ public extension HyperwalletUI {
                               parentController: parentController)
             return coordinator
     }
+
+    /// Lists the user's transactions from all sources - wallet and prepaid card
+    ///
+    ///
+    /// - Returns: An instance of `ListReceiptCoordinator`
+    func listAllAvailableSourcesReceiptCoordinator(parentController: UIViewController) -> ListReceiptCoordinator {
+        let coordinator = ListReceiptCoordinator()
+        coordinator.start(initializationData: [InitializationDataField.showAllAvailableSources: true],
+                          parentController: parentController)
+        return coordinator
+    }
 }

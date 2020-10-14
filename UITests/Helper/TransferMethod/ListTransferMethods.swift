@@ -79,4 +79,17 @@ class ListTransferMethod {
     func getTransferMethodIcon(index: Int) -> XCUIElement {
        return app.cells.element(boundBy: index).images["ListTransferMethodTableViewCellIcon"]
     }
+
+    func getTransferMethodPrepaidCardLabel(visacard: String) -> String {
+        // let toLabel = "to".localized()
+        let expectedLabel: String = {
+            if #available(iOS 11.2, *) {
+                return "\(visacard)\nLog in using a web browser to manage your card"
+            } else {
+                return "\(visacard) Log in using a web browser to manage your card"
+            }
+        }()
+
+        return expectedLabel
+    }
 }

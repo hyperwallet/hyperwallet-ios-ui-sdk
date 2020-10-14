@@ -36,7 +36,7 @@ final class TransferNotesCell: UITableViewCell {
         return textField
     }()
 
-    private var isHideBorder: Bool = false
+    private var hideBorder: Bool = false
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
@@ -48,9 +48,9 @@ final class TransferNotesCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        if isHideBorder {
+    override func layoutIfNeeded() {
+        super.layoutIfNeeded()
+        if hideBorder {
             subviews.forEach { (view) in
                 if type(of: view).description() == "_UITableViewCellSeparatorView" {
                     view.isHidden = true
@@ -74,10 +74,10 @@ final class TransferNotesCell: UITableViewCell {
         NSLayoutConstraint.activate(constraints)
    }
 
-    func configure(notes: String?, isEditable: Bool, isHideBorder: Bool, _ handler: @escaping EnteredNoteHandler) {
+    func configure(notes: String?, isEditable: Bool, hideBorder: Bool, _ handler: @escaping EnteredNoteHandler) {
         notesTextField.text = notes
         notesTextField.isEnabled = isEditable
-        self.isHideBorder = isHideBorder
+        self.hideBorder = hideBorder
         enteredNoteHandler = handler
     }
 }
