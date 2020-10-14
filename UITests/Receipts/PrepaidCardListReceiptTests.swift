@@ -216,9 +216,9 @@ class PrepaidCardListReceiptTests: BaseTests {
         XCTAssertEqual(transactionDetails.amountLabel.label, "amount".localized())
         XCTAssertEqual(transactionDetails.feeLabel.label, "mobileFeeLabel".localized())
         XCTAssertEqual(transactionDetails.transactionLabel.label, "mobileTransactionDetailsTotal".localized())
-        XCTAssertEqual(transactionDetails.amountValue.label, "-10.00 USD")
-        XCTAssertEqual(transactionDetails.feeValue.label, "3.00 USD")
-        XCTAssertEqual(transactionDetails.transactionValue.label, "7.00 USD")
+        XCTAssertEqual(transactionDetails.amountValue.label, "-$10.00 USD")
+        XCTAssertEqual(transactionDetails.feeValue.label, "$3.00 USD")
+        XCTAssertEqual(transactionDetails.transactionValue.label, "$7.00 USD")
     }
 
     // MARK: helper functions
