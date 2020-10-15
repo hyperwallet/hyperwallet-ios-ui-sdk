@@ -113,27 +113,38 @@ struct ReceiptDetailSectionFeeData: ReceiptDetailSectionData {
         let valueCurrencyFormat = "%@ %@"
 
         rows.append(ReceiptDetailRow(title: "amount".localized(),
-                                     value: String(format: amountFormat, amountValue.format(with: currency), currency),
+                                     value: String(format: amountFormat,
+                                                   amountValue.formatToCurrency(with: currency),
+                                                   currency),
                                      field: "amount"))
 
         rows.append(ReceiptDetailRow(title: "mobileFeeLabel".localized(),
                                      value: String(format: valueCurrencyFormat,
-                                                   stringFee.format(with: currency),
+                                                   stringFee.formatToCurrency(with: currency),
                                                    currency),
                                      field: "fee"))
 
         let transaction: Double = amount - fee
-        let transactionFormat = getTransactionFormat(basedOn: amountValue)
+        let transactionFormat = getTransactionFormat(basedOn: amountValue, currencyCode: currency)
         rows.append(ReceiptDetailRow(title: "mobileTransactionDetailsTotal".localized(),
                                      value: String(format: valueCurrencyFormat,
                                                    String(format: transactionFormat, transaction)
-                                                    .format(with: currency),
+                                                    .formatToCurrency(with: currency),
                                                    currency),
                                      field: "transaction"))
     }
 
     private func getTransactionFormat(basedOn value: String) -> String {
         let locale = Locale(identifier: Locale.preferredLanguages[0])
+        let localizedDecimalSeparator: Character = locale.decimalSeparator?.first ?? "."
+        let components = value.split(separator: localizedDecimalSeparator)
+        return components.count == 1
+            ? "%.0f"
+            : "%.\(components[1].count)f"
+    }
+
+    private func getTransactionFormat(basedOn value: String, currencyCode: String) -> String {
+        let locale = Locale(identifier: currencyCode)
         let localizedDecimalSeparator: Character = locale.decimalSeparator?.first ?? "."
         let components = value.split(separator: localizedDecimalSeparator)
         return components.count == 1

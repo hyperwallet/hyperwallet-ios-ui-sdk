@@ -142,7 +142,7 @@ extension ReceiptTransactionCell {
 
         receiptTypeLabel.text = receipt.type?.rawValue.lowercased().localized()
 
-        let formattedAmount = amount.format(with: currency)
+        let formattedAmount = amount.formatToCurrency(with: currency)
 
         amountLabel.text = entry == credit ?
             String(format: "%@", formattedAmount) :

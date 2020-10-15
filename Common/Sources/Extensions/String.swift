@@ -64,20 +64,37 @@ public extension String {
     /// - Parameter currencyCode: the currency code
     /// - Returns: a formatted String amount with currency code
     func format(with currencyCode: String?) -> String {
+        if !self.isEmpty {
+            let currencyFormatter = NumberFormatter()
+            currencyFormatter.minimumIntegerDigits = 1
+            currencyFormatter.numberStyle = .currency
+            currencyFormatter.currencyCode = currencyCode
+            currencyFormatter.currencySymbol = ""
+            let formattedAmountInNumber = currencyFormatter.number(from: self)
+            return currencyFormatter.string(for: formattedAmountInNumber) ?? ""
+        } else {
+            return ""
+        }
+    }
+
+    /// Format an amount to a currency format including symbole with currency code
+    /// - Parameter currencyCode: the currency code
+    /// - Returns: a formatted string amount with currency symbol
+    func formatToCurrency(with currencyCode: String?) -> String {
         guard let currencyCode = currencyCode, !self.isEmpty
             else { return "" }
-        //Create locale using English US, So that when locale changes in iphone, will not affect formatting
-        let locale = NSLocale(localeIdentifier: "en_US")
+        let locale = NSLocale(localeIdentifier: currencyCode)
         let currencyFormatter = NumberFormatter()
         currencyFormatter.minimumIntegerDigits = 1
         currencyFormatter.numberStyle = .currency
         currencyFormatter.currencyCode = currencyCode
         currencyFormatter.currencySymbol = ""
-        currencyFormatter.locale = locale as Locale
-        guard let formattedAmountInNumber = currencyFormatter.number(from: self),
+        guard
+            let formattedAmountInNumber = currencyFormatter.number(from: self),
             let formattedAmountInString = currencyFormatter.string(for: formattedAmountInNumber)
             else { return "" }
-        guard let currencySymbol = locale.displayName(forKey: NSLocale.Key.currencySymbol, value: currencyCode),
+        guard
+            let currencySymbol = locale.displayName(forKey: NSLocale.Key.currencySymbol, value: currencyCode),
             currencySymbol != currencyCode
             else { return formattedAmountInString }
         return currencySymbol + formattedAmountInString

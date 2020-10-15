@@ -84,7 +84,10 @@ class ReceiptDetailPresenterTests: XCTestCase {
 
         XCTAssertTrue(rowEqual(section.rows[0], "amount".localized(), "$6.00 USD", "amount"))
         XCTAssertTrue(rowEqual(section.rows[1], "mobileFeeLabel".localized(), "$1.11 USD", "fee"))
-        XCTAssertTrue(rowEqual(section.rows[2], "mobileTransactionDetailsTotal".localized(), "$4.89 USD", "transaction"))
+        XCTAssertTrue(rowEqual(section.rows[2],
+                               "mobileTransactionDetailsTotal".localized(),
+                               "$4.89 USD",
+                               "transaction"))
     }
 
     func testSectionDebitFeeDataShouldNotBeEmpty() {
@@ -98,7 +101,10 @@ class ReceiptDetailPresenterTests: XCTestCase {
 
         XCTAssertTrue(rowEqual(section.rows[0], "amount".localized(), "-$9.87 USD", "amount"))
         XCTAssertTrue(rowEqual(section.rows[1], "mobileFeeLabel".localized(), "$0.11 USD", "fee"))
-        XCTAssertTrue(rowEqual(section.rows[2], "mobileTransactionDetailsTotal".localized(), "$9.76 USD", "transaction"))
+        XCTAssertTrue(rowEqual(section.rows[2],
+                               "mobileTransactionDetailsTotal".localized(),
+                               "$9.76 USD",
+                               "transaction"))
     }
 
     func testSectionFeeDataWithIntegerAmountShouldNotBeEmpty() {
