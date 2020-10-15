@@ -1,0 +1,199 @@
+{
+    "count": 20,
+    "offset": 0,
+    "limit": 11,
+    "data": [
+        {
+            "journalId": "55047035",
+            "type": "PAYMENT",
+            "createdOn": "2019-05-24T17:35:20",
+            "entry": "CREDIT",
+            "sourceToken": "act-123456789",
+            "destinationToken": "usr-123456789",
+            "amount": "34003.00",
+            "fee": "3.50",
+            "currency": "BRL",
+            "details": {
+                "clientPaymentId": "DyClk0VG",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55047040",
+            "type": "PAYMENT",
+            "createdOn": "2019-05-24T17:39:19",
+            "entry": "CREDIT",
+            "sourceToken": "act-123456789",
+            "destinationToken": "usr-123456789",
+            "amount": "272890.00",
+            "fee": "0.89",
+            "currency": "CAD",
+            "details": {
+                "clientPaymentId": "DyClk0VGa",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55047041",
+            "type": "TRANSFER_TO_BANK_ACCOUNT",
+            "createdOn": "2019-05-24T17:46:28",
+            "entry": "DEBIT",
+            "sourceToken": "usr-123456789",
+            "destinationToken": "trm-123456789",
+            "amount": "5999.00",
+            "fee": "2.00",
+            "currency": "EUR",
+            "details": {
+                "payeeName": "Shaoyun Yang",
+                "branchId": "026009593",
+                "bankAccountId": "*****5209",
+                "bankAccountPurpose": "CHECKING"
+            }
+        },
+        {
+            "journalId": "55047035",
+            "type": "PAYMENT",
+            "createdOn": "2019-05-24T17:35:20",
+            "entry": "CREDIT",
+            "sourceToken": "act-123456789",
+            "destinationToken": "usr-123456789",
+            "amount": "9039329.00",
+            "fee": "69.00",
+            "currency": "INR",
+            "details": {
+                "clientPaymentId": "DyClk0VG",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55047035",
+            "type": "PAYMENT",
+            "createdOn": "2019-05-24T17:35:20",
+            "entry": "CREDIT",
+            "sourceToken": "act-123456789",
+            "destinationToken": "usr-123456789",
+            "amount": "5.90",
+            "fee": "0.03",
+            "currency": "JPY",
+            "details": {
+                "clientPaymentId": "DyClk0VG",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55047040",
+            "type": "PAYMENT",
+            "createdOn": "2019-05-24T17:39:19",
+            "entry": "CREDIT",
+            "sourceToken": "act-123456789",
+            "destinationToken": "usr-123456789",
+            "amount": "3242561.00",
+            "fee": "140.50",
+            "currency": "JOD",
+            "details": {
+                "clientPaymentId": "DyClk0VGa",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55047041",
+            "type": "TRANSFER_TO_BANK_ACCOUNT",
+            "createdOn": "2019-05-24T17:46:28",
+            "entry": "DEBIT",
+            "sourceToken": "usr-123456789",
+            "destinationToken": "trm-123456789",
+            "amount": "10002302.80",
+            "fee": "2.00",
+            "currency": "ZAR",
+            "details": {
+                "payeeName": "Shaoyun Yang",
+                "branchId": "026009593",
+                "bankAccountId": "*****5209",
+                "bankAccountPurpose": "CHECKING"
+            }
+        },
+        {
+            "journalId": "55047040",
+            "type": "PAYMENT",
+            "createdOn": "2019-05-24T17:39:19",
+            "entry": "CREDIT",
+            "sourceToken": "act-123456789",
+            "destinationToken": "usr-123456789",
+            "amount": "7382920.00",
+            "fee": "0.00",
+            "currency": "SEK",
+            "details": {
+                "clientPaymentId": "DyClk0VGa",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55047041",
+            "type": "TRANSFER_TO_BANK_ACCOUNT",
+            "createdOn": "2019-05-24T17:46:28",
+            "entry": "DEBIT",
+            "sourceToken": "usr-123456789",
+            "destinationToken": "trm-123456789",
+            "amount": "5892118.00",
+            "fee": "2.00",
+            "currency": "CHF",
+            "details": {
+                "payeeName": "Shaoyun Yang",
+                "branchId": "026009593",
+                "bankAccountId": "*****5209",
+                "bankAccountPurpose": "CHECKING"
+            }
+        },
+        {
+            "journalId": "55176986",
+            "type": "PAYMENT",
+            "createdOn": "2019-04-28T18:16:04",
+            "entry": "CREDIT",
+            "sourceToken": "act-123456789",
+            "destinationToken": "usr-123456789",
+            "amount": "78181.00",
+            "fee": "0.00",
+            "currency": "TND",
+            "details": {
+                "clientPaymentId": "DyClk0VG2a",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55176987",
+            "type": "PAYMENT",
+            "createdOn": "2019-04-28T18:16:08",
+            "entry": "CREDIT",
+            "sourceToken": "act-123456789",
+            "destinationToken": "usr-123456789",
+            "amount": "9929210.00",
+            "fee": "0.00",
+            "currency": "VND",
+            "details": {
+                "clientPaymentId": "DyClk0VG3a",
+                "payeeName": "Shaoyun Yang"
+            }
+        }
+    ],
+    "links": [
+        {
+            "params": {
+                "rel": "self"
+            },
+            "href": "https://localhost/rest/v3/users/usr-123456789/receipts?offset=0&limit=10"
+        },
+        {
+            "params": {
+                "rel": "next"
+            },
+            "href": "https://localhost/rest/v3/users/usr-123456789/receipts?offset=10&limit=10"
+        },
+        {
+            "params": {
+                "rel": "last"
+            },
+            "href": "https://localhost/rest/v3/users/usr-123456789/receipts?offset=1&limit=10"
+        }
+    ]
+}
+

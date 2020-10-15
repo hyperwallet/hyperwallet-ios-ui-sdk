@@ -386,6 +386,10 @@
 		DBC199FB22E29CF0004447DD /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA385C225E8BAA00CD4137 /* ErrorView.swift */; };
 		DBDE15DD22D6562900BD646F /* TransferMethodRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDE15DB22D655F000BD646F /* TransferMethodRepositoryTests.swift */; };
 		DBF89CB8227C072400AF4344 /* UserIndividualCountryCanadaResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBF89CB7227C072400AF4344 /* UserIndividualCountryCanadaResponse.json */; };
+		FD506621253815C900640B36 /* UserReceiptResponseWithMultipleCurrencies.json in Resources */ = {isa = PBXBuildFile; fileRef = FD50661F2538124C00640B36 /* UserReceiptResponseWithMultipleCurrencies.json */; };
+		FD5066242538238900640B36 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3839225E8BA900CD4137 /* UIImage.swift */; };
+		FD5066252538239100640B36 /* hw_mobile_ui_sdk_icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B39E00DE24B4FB0A00E3BC4D /* hw_mobile_ui_sdk_icons.ttf */; };
+		FD50662725382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json in Resources */ = {isa = PBXBuildFile; fileRef = FD50662625382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -969,6 +973,8 @@
 		DBFB614F2261E84C00C4A8AA /* TransferMethodConfigurationBankCardResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TransferMethodConfigurationBankCardResponse.json; sourceTree = "<group>"; };
 		DBFB61502261E84C00C4A8AA /* ListTransferMethodResponseWithoutDebitCard.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ListTransferMethodResponseWithoutDebitCard.json; sourceTree = "<group>"; };
 		DBFB61522261E84D00C4A8AA /* TransferMethodConfigurationBankAccountResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = TransferMethodConfigurationBankAccountResponse.json; path = Individual/TransferMethodConfigurationBankAccountResponse.json; sourceTree = "<group>"; };
+		FD50661F2538124C00640B36 /* UserReceiptResponseWithMultipleCurrencies.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UserReceiptResponseWithMultipleCurrencies.json; sourceTree = "<group>"; };
+		FD50662625382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserReceiptDetailsWithMultipleCurrencies.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1184,8 +1190,10 @@
 			children = (
 				0702673A22B308B60057D62B /* PrepaidCardReceiptResponse.json */,
 				4AEBF0FE22AA8CB000C664D3 /* UserReceiptDetails.json */,
+				FD50662625382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json */,
 				0743EFA022A59EE100C089EE /* UserReceiptNextPageResponse.json */,
 				07BE415E229DE181002DECAF /* UserReceiptResponse.json */,
+				FD50661F2538124C00640B36 /* UserReceiptResponseWithMultipleCurrencies.json */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -2911,6 +2919,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD5066252538239100640B36 /* hw_mobile_ui_sdk_icons.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2919,8 +2928,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E1E11C6252FEBBA00C10180 /* UnexpectedErrorResponse.json in Resources */,
+				FD50662725382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json in Resources */,
 				DB5295DD22E22F0200657F50 /* UserReceiptNextPageResponse.json in Resources */,
 				2E1E11C5252E998700C10180 /* ListPrepaidCardResponse.json in Resources */,
+				FD506621253815C900640B36 /* UserReceiptResponseWithMultipleCurrencies.json in Resources */,
 				DB5295DF22E22F0200657F50 /* PrepaidCardReceiptResponse.json in Resources */,
 				DB5295DE22E22F0200657F50 /* UserReceiptDetails.json in Resources */,
 				DB5295DC22E22F0200657F50 /* UserReceiptResponse.json in Resources */,
@@ -3420,6 +3431,7 @@
 				DB99C2E522E22ADF00E45185 /* ReceiptDetailSectionData.swift in Sources */,
 				DB99C2E322E22ADF00E45185 /* ReceiptDetailPresenter.swift in Sources */,
 				DB99C2E922E22ADF00E45185 /* ListReceiptController.swift in Sources */,
+				FD5066242538238900640B36 /* UIImage.swift in Sources */,
 				A65312D222FC046200A83D30 /* ReceiptCoordinators.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
