@@ -3,7 +3,7 @@ import XCTest
 class AddTransferMethodVemoAccountTests: BaseTests {
     var selectTransferMethodType: SelectTransferMethodType!
     var addTransferMethod: AddTransferMethod!
-    let bankAccount = NSPredicate(format: "label CONTAINS[c] 'Bank Account'")
+    let venmoAccount = NSPredicate(format: "label CONTAINS[c] 'Venmo Account'")
 
     override func setUp() {
         super.setUp()
@@ -34,7 +34,7 @@ class AddTransferMethodVemoAccountTests: BaseTests {
                              method: HTTPMethod.post)
 
         waitForNonExistence(spinner)
-        addTransferMethod.setBankAccountId("9876549991")
+        addTransferMethod.setAccountId("9876549991")
         addTransferMethod.clickCreateTransferMethodButton()
         waitForNonExistence(spinner)
         XCTAssert(app.navigationBars[addTransferMethod.title].exists)

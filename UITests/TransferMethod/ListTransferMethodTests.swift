@@ -400,7 +400,7 @@ class ListTransferMethodTests: BaseTests {
         let cellsCountBeforeRemove = 5
         let expectedCellsCountAfterRemove = 4
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
-                             filename: "ListTransferMethodResponse",
+                             filename: "ListTransferMethodResponseVenmo",
                              method: HTTPMethod.get)
         openTransferMethodsList()
         app.tables.cells.containing(.staticText, identifier: "Venmo").element(boundBy: 0).tap()

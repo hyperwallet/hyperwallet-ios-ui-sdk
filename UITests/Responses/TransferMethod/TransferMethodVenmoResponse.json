@@ -17,8 +17,8 @@
                                         "dataType": "NUMBER",
                                         "isRequired": true,
                                         "isEditable": true,
-                                        "name": "bankAccountId",
-                                        "label": "Account Number",
+                                        "name": "accountId",
+                                        "label": "Mobile Number",
                                         "placeholder": "",
                                         "maxLength": 17,
                                         "minLength": 4,
@@ -57,7 +57,7 @@
                                                     {
                                                         "currency": "USD",
                                                         "feeRateType": "FLAT",
-                                                        "value": "2.00"
+                                                        "value": "0.95"
                                                     }
                                                 ]
                                             }
