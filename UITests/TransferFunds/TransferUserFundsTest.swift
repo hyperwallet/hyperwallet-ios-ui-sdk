@@ -430,8 +430,8 @@ class TransferUserFundsTest: BaseTests {
         waitForNonExistence(spinner)
 
         // Assert inline errors
-        XCTAssertEqual(transferFunds.invalidAmountError.label, "transferAmountInvalid".localized())
         XCTAssertEqual(transferFunds.transferMethodRequireError.label, "noTransferMethodAdded".localized())
+        XCTAssertEqual(transferFunds.invalidAmountError.label, "transferAmountInvalid".localized())
     }
 
     func testTransferFunds_createTransferWhenDestinationAmountNotSet() {
@@ -530,7 +530,7 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.transferAmount.exists)
 
         // Enter amount lower than the transaction limit
-        transferFunds.enterTransferAmount(amount: "0.01")
+        transferFunds.enterTransferAmount(amount: "0.10")
 
         mockServer.setupStubError(url: "/rest/v3/transfers",
                                   filename: "TransferBelowTransactionLimitError",
@@ -541,7 +541,7 @@ class TransferUserFundsTest: BaseTests {
 
         waitForExistence(app.alerts["Error"])
         let predicate = NSPredicate(format:
-            "label CONTAINS[c] 'Requested transfer amount $0.01, is below the transaction limit of $1.00.'")
+            "label CONTAINS[c] 'Requested transfer amount $0.10, is below the transaction limit of $1.00.'")
         XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
     }
 
