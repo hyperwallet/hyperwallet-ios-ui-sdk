@@ -36,6 +36,23 @@
             }
         },
         {
+            "journalId": "64287013",
+            "type": "TRANSFER_TO_VENMO",
+            "createdOn": "2020-10-12T18:16:17",
+            "entry": "DEBIT",
+            "sourceToken": "usr-token",
+            "destinationToken": "trm-00000000-0000-0000-0000-0000000000",
+            "amount": "5.00",
+            "fee": "2.00",
+            "currency": "USD",
+            "details": {
+                "payeeName": "Shaoyun Yang",
+                "branchId": "026009593",
+                "bankAccountId": "*****5555",
+                "bankAccountPurpose": "CHECKING"
+            }
+        },
+        {
             "journalId": "55176990",
             "type": "PAYMENT",
             "createdOn": "2019-05-04T18:16:14",
@@ -150,4 +167,5 @@
         }
     ]
 }
+
 
