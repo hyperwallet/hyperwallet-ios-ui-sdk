@@ -21,6 +21,7 @@ class BaseTests: XCTestCase {
          static let prepaidCard = "Prepaid Card"
          static let wireTransfer = "Wire Transfer"
          static let paypal = "PayPal"
+         static let venmo = "Venmo"
      }
 
     public struct Common {

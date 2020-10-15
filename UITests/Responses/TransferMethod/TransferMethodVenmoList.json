@@ -1,0 +1,49 @@
+{
+    "count":2,
+    "offset":0,
+    "limit":10,
+    "data":[
+            {
+            "token": "trm-123456789",
+            "type": "VENMO_ACCOUNT",
+            "status": "ACTIVATED",
+            "createdOn": "2020-07-07T22:30:52",
+            "transferMethodCountry": "US",
+            "transferMethodCurrency": "USD",
+            "accountId": "5555555555",
+            "links": [
+                {
+                    "params": {
+                        "rel": "self"
+                    },
+                    "href": "https://localhost/rest/v3/users/usr-123456789/venmo-accounts/trm-123456789"
+                }
+            ]
+            },
+            {
+                "token": "trm-123456789",
+                "type": "VENMO_ACCOUNT",
+                "status": "ACTIVATED",
+                "createdOn": "2020-08-07T22:30:52",
+                "transferMethodCountry": "US",
+                "transferMethodCurrency": "USD",
+                "accountId": "5555555556",
+                "links": [
+                    {
+                        "params": {
+                            "rel": "self"
+                        },
+                        "href": "https://localhost/rest/v3/users/usr-123456789/venmo-accounts/trm-123456789"
+                    }
+                ]
+            }
+    ],
+    "links":[
+        {
+            "params":{
+                "rel":"self"
+            },
+            "href":"https://localhost/rest/v3/users/usr-123456789/transfer-methods?offset=0&limit=10&createdBefore=2018-12-18T00%3A30%3A11.000Z&sortBy=+createdOn&createdAfter=2018-12-15T00%3A30%3A11.000Z"
+        }
+    ]
+}

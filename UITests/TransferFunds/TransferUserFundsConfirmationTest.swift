@@ -172,6 +172,60 @@ class TransferUserFundsConfirmationTest: BaseTests {
         waitForNonExistence(spinner)
     }
 
+    //Tranfer Venmo Manage method
+    func testTransferFundsConfirmationVenmo_withFX() {
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+                             filename: "ListTransferMethodMoreThanOneVenmo",
+                             method: HTTPMethod.get)
+
+        mockServer.setupStub(url: "/rest/v3/transfers",
+                             filename: "AvailableFundsVenmoDetails",
+                             method: HTTPMethod.post)
+
+        mockServer.setupStub(url: "/rest/v3/transfers/trf-token/status-transitions",
+                             filename: "TransferStatusQuoted",
+                             method: HTTPMethod.post)
+
+        transferFundMenu.tap()
+        waitForNonExistence(spinner)
+
+        transferFunds.verifyTransferFundsTitle()
+        // Amount row
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+        XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
+        XCTAssertEqual(transferFunds.transferAmountLabel.label, "Available funds $5,855.17 USD")
+
+        transferFunds.transferMaxAllFunds.tap()
+
+        //verify venmo destination
+        waitForExistence(transferFunds.addSelectDestinationLabel)
+        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Venmo")
+
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "5,855.17")
+
+        transferFunds.tapContinueButton()
+
+        waitForExistence(transferFundsConfirmation.transferDestinationLabel)
+
+        // 1.  Add Destination Section
+        XCTAssertEqual(transferFundsConfirmation.transferDestinationLabel.label, "Venmo")
+        transferFundsConfirmation.verifyDestination(country: "United States", endingDigit: "5555")
+
+        // 3. Summary Section
+        verifySummary()
+
+        XCTAssertTrue(transferFundsConfirmation.noteLabel.exists)
+        XCTAssertEqual(transferFundsConfirmation.noteDescription.value as? String, "Transfer All")
+
+        //transferFundsConfirmation.tapConfirmButton()
+        let button = transferFundsConfirmation.scheduleTable.buttons["scheduleTransferLabel"]
+        app.scroll(to: button)
+        button.tap()
+
+        verifyConfirmationSuccessVenmo()
+        waitForNonExistence(spinner)
+    }
+
     //swiftlint:disable line_length
     func testTransferFundsConfirmation_timeOutError() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
@@ -358,6 +412,19 @@ class TransferUserFundsConfirmationTest: BaseTests {
         let messageTitle = "mobileTransferSuccessMsg".localized()
         let messagePlaceholder = "mobileTransferSuccessDetails".localized()
         let message = String(format: messagePlaceholder, "Bank Account")
+        let alert = app.alerts[messageTitle]
+        waitForExistence(app.alerts[messageTitle])
+        let predicate = NSPredicate(format:
+            "label CONTAINS[c] '\(message)'")
+        XCTAssert(alert.staticTexts.element(matching: predicate).exists)
+
+        alert.buttons["doneButtonLabel".localized()].tap()
+    }
+
+    private func verifyConfirmationSuccessVenmo() {
+        let messageTitle = "mobileTransferSuccessMsg".localized()
+        let messagePlaceholder = "mobileTransferSuccessDetails".localized()
+        let message = String(format: messagePlaceholder, "Venmo")
         let alert = app.alerts[messageTitle]
         waitForExistence(app.alerts[messageTitle])
         let predicate = NSPredicate(format:
