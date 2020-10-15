@@ -191,6 +191,8 @@
 		984D82DC24BE590000991DAD /* Insights.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EBD0C682375FAE400569342 /* Insights.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		984D82FB24C25AAD00991DAD /* HyperwalletSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98FBC68923D8D8D90050E2B6 /* HyperwalletSDK.framework */; };
 		9874E68124B3981F00E95F4F /* CountryCurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9874E68024B3981F00E95F4F /* CountryCurrencyCell.swift */; };
+		98A0AD2E2538CC6100B338B8 /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0AD2C2538CC6100B338B8 /* StringTests.swift */; };
+		98A0AD302538E9AD00B338B8 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0AD2F2538E9AD00B338B8 /* Currency.swift */; };
 		98CACE1A24A6CFD10000F2B0 /* Receipt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB99C2C822E220C200E45185 /* Receipt.framework */; };
 		98CACE1B24A6CFD10000F2B0 /* Receipt.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DB99C2C822E220C200E45185 /* Receipt.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		98CACE1C24A6CFD30000F2B0 /* ReceiptRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE6B6C022D605B20009DEFE /* ReceiptRepository.framework */; };
@@ -386,7 +388,6 @@
 		DBC199FB22E29CF0004447DD /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA385C225E8BAA00CD4137 /* ErrorView.swift */; };
 		DBDE15DD22D6562900BD646F /* TransferMethodRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDE15DB22D655F000BD646F /* TransferMethodRepositoryTests.swift */; };
 		DBF89CB8227C072400AF4344 /* UserIndividualCountryCanadaResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBF89CB7227C072400AF4344 /* UserIndividualCountryCanadaResponse.json */; };
-		FD506621253815C900640B36 /* UserReceiptResponseWithMultipleCurrencies.json in Resources */ = {isa = PBXBuildFile; fileRef = FD50661F2538124C00640B36 /* UserReceiptResponseWithMultipleCurrencies.json */; };
 		FD5066242538238900640B36 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3839225E8BA900CD4137 /* UIImage.swift */; };
 		FD5066252538239100640B36 /* hw_mobile_ui_sdk_icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B39E00DE24B4FB0A00E3BC4D /* hw_mobile_ui_sdk_icons.ttf */; };
 		FD50662725382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json in Resources */ = {isa = PBXBuildFile; fileRef = FD50662625382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json */; };
@@ -793,6 +794,8 @@
 		988547C92294B829007B312C /* ListReceiptController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListReceiptController.swift; sourceTree = "<group>"; };
 		988547CB2294B879007B312C /* ListReceiptPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListReceiptPresenter.swift; sourceTree = "<group>"; };
 		988547CF22970FA1007B312C /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		98A0AD2C2538CC6100B338B8 /* StringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
+		98A0AD2F2538E9AD00B338B8 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		98DC5D502526A39A00729477 /* GetPrepaidCardSuccessResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GetPrepaidCardSuccessResponse.json; sourceTree = "<group>"; };
 		98EDBF89247451C0008A4015 /* PrepaidCardReceiptResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PrepaidCardReceiptResponse.json; sourceTree = "<group>"; };
 		98EDBF8A247451C0008A4015 /* UserReceiptResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UserReceiptResponse.json; sourceTree = "<group>"; };
@@ -973,7 +976,6 @@
 		DBFB614F2261E84C00C4A8AA /* TransferMethodConfigurationBankCardResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TransferMethodConfigurationBankCardResponse.json; sourceTree = "<group>"; };
 		DBFB61502261E84C00C4A8AA /* ListTransferMethodResponseWithoutDebitCard.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ListTransferMethodResponseWithoutDebitCard.json; sourceTree = "<group>"; };
 		DBFB61522261E84D00C4A8AA /* TransferMethodConfigurationBankAccountResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = TransferMethodConfigurationBankAccountResponse.json; path = Individual/TransferMethodConfigurationBankAccountResponse.json; sourceTree = "<group>"; };
-		FD50661F2538124C00640B36 /* UserReceiptResponseWithMultipleCurrencies.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UserReceiptResponseWithMultipleCurrencies.json; sourceTree = "<group>"; };
 		FD50662625382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserReceiptDetailsWithMultipleCurrencies.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1193,7 +1195,6 @@
 				FD50662625382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json */,
 				0743EFA022A59EE100C089EE /* UserReceiptNextPageResponse.json */,
 				07BE415E229DE181002DECAF /* UserReceiptResponse.json */,
-				FD50661F2538124C00640B36 /* UserReceiptResponseWithMultipleCurrencies.json */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -2016,6 +2017,7 @@
 			isa = PBXGroup;
 			children = (
 				DBC199D922E29A3D004447DD /* HyperwalletTransferMethodTests.swift */,
+				98A0AD2C2538CC6100B338B8 /* StringTests.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2118,6 +2120,7 @@
 				DBCA3848225E8BAA00CD4137 /* Theme.swift */,
 				DBCA3846225E8BAA00CD4137 /* ThemeManager.swift */,
 				980B9AE3251BFD1300653D1C /* HyperwalletProgramModel.swift */,
+				98A0AD2F2538E9AD00B338B8 /* Currency.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -2931,7 +2934,6 @@
 				FD50662725382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json in Resources */,
 				DB5295DD22E22F0200657F50 /* UserReceiptNextPageResponse.json in Resources */,
 				2E1E11C5252E998700C10180 /* ListPrepaidCardResponse.json in Resources */,
-				FD506621253815C900640B36 /* UserReceiptResponseWithMultipleCurrencies.json in Resources */,
 				DB5295DF22E22F0200657F50 /* PrepaidCardReceiptResponse.json in Resources */,
 				DB5295DE22E22F0200657F50 /* UserReceiptDetails.json in Resources */,
 				DB5295DC22E22F0200657F50 /* UserReceiptResponse.json in Resources */,
@@ -3348,6 +3350,7 @@
 				DBC199EF22E29CD0004447DD /* UIView.swift in Sources */,
 				DBC199F022E29CD0004447DD /* UIViewController.swift in Sources */,
 				DBC199F122E29CD0004447DD /* GenericCell.swift in Sources */,
+				98A0AD302538E9AD00B338B8 /* Currency.swift in Sources */,
 				2E3B047D237241B200BB1FFE /* InsightsTags.swift in Sources */,
 				DBC199F222E29CD0004447DD /* GenericController.swift in Sources */,
 				DBC199F322E29CD0004447DD /* HyperwalletBundle.swift in Sources */,
@@ -3362,6 +3365,7 @@
 				2EBD0C4A23738FA200569342 /* HyperwalletTestHelper.swift in Sources */,
 				2EF70C70237F547B007E3844 /* HyperwalletInsightsMock.swift in Sources */,
 				2EBD0C4C23738FB000569342 /* AuthenticationProviderMock.swift in Sources */,
+				98A0AD2E2538CC6100B338B8 /* StringTests.swift in Sources */,
 				DBC199DB22E29A85004447DD /* HyperwalletTransferMethodTests.swift in Sources */,
 				2EBD0C4B23738FAB00569342 /* AuthenticationTokenGeneratorMock.swift in Sources */,
 			);

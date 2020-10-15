@@ -20,8 +20,6 @@ class ListReceiptPresenterTests: XCTestCase {
         .getDataFromJson("PrepaidCardReceiptNextPageResponse")
     private lazy var listPrepaidCardsPayload = HyperwalletTestHelper
         .getDataFromJson("ListPrepaidCardResponse")
-    private lazy var listReceiptPayloadForDifferentCurrencies = HyperwalletTestHelper
-        .getDataFromJson("UserReceiptResponseWithMultipleCurrencies")
 
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
@@ -281,65 +279,6 @@ class ListReceiptPresenterTests: XCTestCase {
         XCTAssertFalse(mockView.isLoadReceiptPerformed, "The loadReceipt should not be performed")
 
         XCTAssertEqual(presenter.sectionData.count, 0, "The count of sections should be 0")
-    }
-
-    private func getReceiptsCellForSectionData(from presenter: ListReceiptPresenter) -> [ReceiptTransactionCell] {
-        var receiptsCells = [ReceiptTransactionCell]()
-        for sectionData in presenter.sectionData {
-            for value in sectionData.value {
-                let cell = ReceiptTransactionCell()
-                cell.configure(value)
-                receiptsCells.append(cell)
-            }
-        }
-        return receiptsCells
-    }
-
-    func testListReceiptWithDifferentCurrencies() {
-        // Given
-        HyperwalletTestHelper.setUpMockServer(request: setUpReceiptRequest(listReceiptPayloadForDifferentCurrencies))
-
-        let expectation = self.expectation(description: "load user receipts")
-        mockView.expectation = expectation
-
-        // When
-        presenter.listReceipts()
-        wait(for: [expectation], timeout: 10)
-
-        let receiptCells = getReceiptsCellForSectionData(from: presenter)
-        XCTAssertEqual(receiptCells[0].amountLabel.text,
-                       "R$34,003.00",
-                       "Amount  formatted with currency symbol in BRL")
-        XCTAssertEqual(receiptCells[1].amountLabel.text,
-                       "CA$272,890.00",
-                       "Amount  formatted with currency symbol in CAD")
-        XCTAssertEqual(receiptCells[2].amountLabel.text,
-                       "-€5,999.00",
-                       "Amount  formatted with currency symbol in EUR")
-        XCTAssertEqual(receiptCells[3].amountLabel.text,
-                       "₹9,039,329.00",
-                       "Amount  formatted with currency symbol in INR")
-        XCTAssertEqual(receiptCells[4].amountLabel.text,
-                       "¥6",
-                       "Amount  formatted with currency symbol in JPY")
-        XCTAssertEqual(receiptCells[5].amountLabel.text,
-                       "3,242,561.000",
-                       "Amount  formatted with currency symbol in JOD")
-        XCTAssertEqual(receiptCells[6].amountLabel.text,
-                       "-10,002,302.80",
-                       "Amount  formatted with currency symbol in ZAR")
-        XCTAssertEqual(receiptCells[7].amountLabel.text,
-                       "7,382,920.00",
-                       "Amount  formatted with currency symbol in SEK")
-        XCTAssertEqual(receiptCells[8].amountLabel.text,
-                       "-5,892,118.00",
-                       "Amount  formatted with currency symbol in CHF")
-        XCTAssertEqual(receiptCells[9].amountLabel.text,
-                       "78,181.000",
-                       "Amount  formatted with currency symbol in TND")
-        XCTAssertEqual(receiptCells[10].amountLabel.text,
-                       "₫9,929,210",
-                       "Amount  formatted with currency symbol in VND")
     }
 
     private func setUpReceiptRequest(_ payload: Data,

@@ -77,27 +77,21 @@ public extension String {
         }
     }
 
-    /// Format an amount to a currency format including symbole with currency code
+    /// Format an amount to a currency format including symbol with currency code
     /// - Parameter currencyCode: the currency code
     /// - Returns: a formatted string amount with currency symbol
     func formatToCurrency(with currencyCode: String?) -> String {
         guard let currencyCode = currencyCode, !self.isEmpty
             else { return "" }
-        let locale = NSLocale(localeIdentifier: currencyCode)
+
         let currencyFormatter = NumberFormatter()
-        currencyFormatter.minimumIntegerDigits = 1
+        currencyFormatter.usesGroupingSeparator = true
         currencyFormatter.numberStyle = .currency
         currencyFormatter.currencyCode = currencyCode
         currencyFormatter.currencySymbol = ""
-        guard
-            let formattedAmountInNumber = currencyFormatter.number(from: self),
-            let formattedAmountInString = currencyFormatter.string(for: formattedAmountInNumber)
-            else { return "" }
-        guard
-            let currencySymbol = locale.displayName(forKey: NSLocale.Key.currencySymbol, value: currencyCode),
-            currencySymbol != currencyCode
-            else { return formattedAmountInString }
-        return currencySymbol + formattedAmountInString
+        let formattedAmountInNumber = currencyFormatter.number(from: self)
+        currencyFormatter.currencySymbol = Currency.shared.findCurrencySymbol(for: currencyCode)
+        return currencyFormatter.string(for: formattedAmountInNumber) ?? self
     }
 
     /// Format an amount to a currency format with currency code
