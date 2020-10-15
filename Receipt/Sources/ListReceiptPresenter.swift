@@ -97,6 +97,18 @@ final class ListReceiptPresenter {
             }
         }
     }
+    
+    func listUserReceipts() {
+        guard !isLoadInProgress else {
+            return
+        }
+        
+        isLoadInProgress = true
+        view?.showLoading()
+        userReceiptRepository.listUserReceipts(offset: offset,
+                                               limit: userReceiptLimit,
+                                               completion: listUserReceiptHandler())
+    }
 
     private func listAllAvailableReceipts() {
         view?.showLoading()
@@ -162,18 +174,6 @@ final class ListReceiptPresenter {
             }
                     strongSelf.loadReceiptsForSelectedToken()
                 }
-    }
-
-    private func listUserReceipts() {
-        guard !isLoadInProgress else {
-            return
-        }
-
-        isLoadInProgress = true
-        view?.showLoading()
-        userReceiptRepository.listUserReceipts(offset: offset,
-                                               limit: userReceiptLimit,
-                                               completion: listUserReceiptHandler())
     }
 
     private func listPrepaidCardReceipts(_ prepaidCardToken: String) {
