@@ -97,12 +97,12 @@ final class ListReceiptPresenter {
             }
         }
     }
-    
+
     func listUserReceipts() {
         guard !isLoadInProgress else {
             return
         }
-        
+
         isLoadInProgress = true
         view?.showLoading()
         userReceiptRepository.listUserReceipts(offset: offset,

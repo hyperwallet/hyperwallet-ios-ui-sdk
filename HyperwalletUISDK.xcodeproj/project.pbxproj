@@ -2627,7 +2627,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1030;
-				LastUpgradeCheck = 1120;
+				LastUpgradeCheck = 1170;
 				ORGANIZATIONNAME = "Hyperwallet Systems";
 				TargetAttributes = {
 					073BB98122E63DB50053C24E = {
@@ -2831,7 +2831,6 @@
 				41D8364222FB4814003544AB /* InvalidSourceError.json in Resources */,
 				41D8363A22FB4814003544AB /* AvailableFundMultiCurrencies.json in Resources */,
 				ABDB502525382A6B00D3AF0B /* ListTransferMethodResponseVenmo.json in Resources */,
-				41D8364322FB4814003544AB /* ListTransferDestinationsUSD.json in Resources */,
 				41D8364322FB4814003544AB /* ListTransferDestinationsUSD.json in Resources */,
 				ABE841F8253445F70010240A /* ListTransferMethodMoreThanOneVenmo.json in Resources */,
 				41D8364022FB4814003544AB /* TransferErrorAmountLessThanFee.json in Resources */,
