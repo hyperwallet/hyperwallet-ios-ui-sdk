@@ -39,6 +39,16 @@ class ListTransferMethodPresenterTests: XCTestCase {
         return bankCard
     }()
 
+    private lazy var venmoAccount: HyperwalletVenmoAccount = {
+        let venmoAccount = HyperwalletVenmoAccount.Builder(transferMethodCountry: "US",
+                                                           transferMethodCurrency: "USD",
+                                                           transferMethodProfileType: "INDIVIDUAL")
+            .build()
+        venmoAccount.setField(key: HyperwalletTransferMethod.TransferMethodField.token.rawValue,
+                              value: transferMethodToken)
+        return venmoAccount
+    }()
+
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
         presenter = ListTransferMethodPresenter(view: mockView)
@@ -207,6 +217,44 @@ class ListTransferMethodPresenterTests: XCTestCase {
             setUpDeactivateTransferMethodRequest("/bank-cards/", NSError(domain: "", code: -1009, userInfo: nil)))
 
         let expectation = self.expectation(description: "deactivate a bank card")
+        mockView.expectation = expectation
+
+        // When
+        presenter.deactivateTransferMethod(at: 1)
+        wait(for: [expectation], timeout: 1)
+
+        // Then
+        XCTAssertTrue(mockView.isShowProcessingPerformed, "The showProcessing should be performed")
+        XCTAssertTrue(mockView.isDismissProcessingPerformed, "The dismissProcessing should be performed")
+        XCTAssertFalse(mockView.isShowConfirmationPerformed, "The showConfirmation should not be performed")
+    }
+
+    func testDeactivateVenmoAccount_success() {
+        // Given
+        loadMockTransferMethods()
+        HyperwalletTestHelper.setUpMockServer(request: setUpDeactivateTransferMethodRequest("/venmo-accounts/"))
+
+        let expectation = self.expectation(description: "deactivate a venmo account")
+        mockView.expectation = expectation
+
+        // When
+        presenter.deactivateTransferMethod(at: 3)
+        wait(for: [expectation], timeout: 1)
+
+        // Then
+        XCTAssertTrue(mockView.isShowProcessingPerformed, "The showProcessing should be performed")
+        XCTAssertFalse(mockView.isShowErrorPerformed, "The showError should not be performed")
+        XCTAssertTrue(mockView.isShowConfirmationPerformed, "The showConfirmation should be performed")
+    }
+
+    func testDeactivateVenmoAccount_failureWithError() {
+        // Given
+        loadMockTransferMethods()
+        XCTAssertTrue(presenter.sectionData.isNotEmpty, "sectionData should not be empty")
+        HyperwalletTestHelper.setUpMockServer(request:
+            setUpDeactivateTransferMethodRequest("/venmo-accounts/", NSError(domain: "", code: -1009, userInfo: nil)))
+
+        let expectation = self.expectation(description: "deactivate a venmo account")
         mockView.expectation = expectation
 
         // When
