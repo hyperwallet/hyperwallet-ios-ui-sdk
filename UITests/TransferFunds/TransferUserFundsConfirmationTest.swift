@@ -350,6 +350,96 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertTrue(app.otherElements["Due to changes in the FX rate, you will now receive: 5,855.66 USD"].exists)
     }
 
+    // MARK: PPC is the transfer source
+    /*
+     Given that user selects Prepaid Card for Transfer From
+     When create transfer to a Bank Account with different currency from the PPC
+     Then user can create transfer successfully
+     */
+    // swiftlint:disable function_body_length
+    func testTransferFunds_TransferFromPrimaryPPCWithFX() {
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+                             filename: "ListMoreThanOneTransferMethod",
+                             method: HTTPMethod.get)
+
+        mockServer.setupStub(url: "/rest/v3/transfers",
+                             filename: "AvailableFundMultiCurrencies",
+                             method: HTTPMethod.post)
+
+        // Quote response from Confirm button
+        mockServer.setupStub(url: "/rest/v3/transfers/trf-token/status-transitions",
+                             filename: "TransferStatusQuoted",
+                             method: .post)
+
+        let cardRes = "PrepaidCardPrimarycardOnlyResponse"
+        let success = "GetPrepaidCardSuccessResponse"
+
+        XCTAssertTrue(transferFundMenu.exists)
+        transferFundMenu.tap()
+
+        waitForNonExistence(spinner)
+        transferFunds.verifyTransferFundsTitle()
+
+        // Transfer From
+        transferFunds.verifyTransferFrom(isAvailableFunds: true)
+
+        // assert NOTE
+        XCTAssertTrue(transferFunds.notesSectionLabel.exists)
+
+        // assert Continue button
+        app.scroll(to: transferFunds.nextLabel)
+        XCTAssertTrue(transferFunds.nextLabel.exists)
+
+        // Select PPC as transfer source
+        transferFunds.transferSourceTitleLabel.tap()
+        let ppcCell = app.tables.element.children(matching: .cell).element(boundBy: 1)
+        ppcCell.tap()
+
+        // Enter transfer amount
+        transferFunds.transferMaxAllFunds.tap()
+
+        // Navigate to Confirmation Detail
+        transferFunds.tapContinueButton()
+
+        waitForNonExistence(spinner)
+
+        // Transfer from
+        transferFundsConfirmation.verifyTransferFrom(isAvailableFunds: false)
+        transferFundsConfirmation.verifyPPCInfo(brandType: transferFunds.prepaidCardVisa, endingDigit: "9285")
+
+        // 1.  Add Destination Section
+        transferFundsConfirmation.verifyDestination(country: "United States", endingDigit: "1234")
+
+        // 2.Exchange Rate Section
+        verifyForeignExchangeSection()
+
+        // 3. Summary Section
+        transferFundsConfirmation.verifySummary()
+        XCTAssertEqual(app.cells.element(boundBy: 17)
+            .staticTexts["scheduleTransferSummaryTextValue"].label, "5,857.17")
+        XCTAssertEqual(app.cells.element(boundBy: 18)
+            .staticTexts["scheduleTransferSummaryTextValue"].label, "2.00")
+        XCTAssertEqual(app.cells.element(boundBy: 19)
+            .staticTexts["scheduleTransferSummaryTextValue"].label, "5,855.17")
+
+        // 4. Note Section
+        XCTAssertTrue(transferFundsConfirmation.noteLabel.exists)
+        XCTAssertEqual(transferFundsConfirmation.noteDescription.value as? String, "Transfer All")
+
+        mockServer.setupStub(url: "/rest/v3/transfers/trf-token/status-transitions",
+                             filename: "TransferStatusQuoted",
+                             method: HTTPMethod.post)
+
+        // 5. Confirmation Button
+        let button = transferFundsConfirmation.scheduleTable.buttons["scheduleTransferLabel"]
+        app.scroll(to: button)
+        button.tap()
+
+        // Verify Confirmation Success Dialog
+        waitForExistence(transferFundsConfirmation.successAlert)
+        transferFundsConfirmation.verifyConfirmationSuccess()
+    }
+
     /*
      // After the bug fix the test should work
      func testTransferFundsConfirmation_verifySummaryWithZeroFee() {
@@ -432,5 +522,43 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssert(alert.staticTexts.element(matching: predicate).exists)
 
         alert.buttons["doneButtonLabel".localized()].tap()
+    }
+
+    private func verifyForeignExchangeSection() {
+        // 2.Exchange Rate Section
+        // From
+        let youSell = transferFundsConfirmation.foreignExchangeSellLabel
+        // To
+        let youBuy = transferFundsConfirmation.foreignExchangeBuyLabel
+        let exchangeRate = transferFundsConfirmation.foreignExchangeRateLabel
+        XCTAssertTrue(transferFundsConfirmation.foreignExchangeSectionLabel.label == "mobileFXlabel".localized())
+
+        XCTAssertTrue(app.cells.element(boundBy: 2).staticTexts[youSell].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 2).staticTexts["9,992.50 MYR"].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 3).staticTexts[youBuy].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 3).staticTexts["2,337.93 USD"].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 4).staticTexts[exchangeRate].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 4).staticTexts["1 MYR = 0.233968 USD"].exists)
+
+        XCTAssertTrue(app.cells.element(boundBy: 6).staticTexts[youSell].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 6).staticTexts["1,464.53 CAD"].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 7).staticTexts[youBuy].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 7).staticTexts["1,134.13 USD"].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 8).staticTexts[exchangeRate].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 8).staticTexts["1 CAD = 0.774399 USD"].exists)
+
+        XCTAssertTrue(app.cells.element(boundBy: 10).staticTexts[youSell].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 10).staticTexts["50,000 KRW"].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 11).staticTexts[youBuy].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 11).staticTexts["42.76 USD"].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 12).staticTexts[exchangeRate].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 12).staticTexts["1 KRW = 0.000855 USD"].exists)
+
+        XCTAssertTrue(app.cells.element(boundBy: 14).staticTexts[youSell].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 14).staticTexts["1,000.00 EUR"].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 15).staticTexts[youBuy].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 15).staticTexts["1,135.96 USD"].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 16).staticTexts[exchangeRate].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 16).staticTexts["1 EUR = 1.135960 USD"].exists)
     }
 }

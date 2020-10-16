@@ -79,6 +79,8 @@
 		2EF70C72237F5482007E3844 /* HyperwalletInsightsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF70C6E237F543F007E3844 /* HyperwalletInsightsMock.swift */; };
 		2EF70C73237F548A007E3844 /* HyperwalletInsightsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF70C6E237F543F007E3844 /* HyperwalletInsightsMock.swift */; };
 		412F723722B45DB100837F8F /* TransactionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F723222B458C700837F8F /* TransactionDetails.swift */; };
+		41460982253926AB00912078 /* PrepaidCardPrimaryOnlyResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 41460980253926A600912078 /* PrepaidCardPrimaryOnlyResponse.json */; };
+		4146098725392A6200912078 /* PrepaidCardSecondaryResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 41460983253926DD00912078 /* PrepaidCardSecondaryResponse.json */; };
 		4157135D22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json in Resources */ = {isa = PBXBuildFile; fileRef = 4157135C22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json */; };
 		4157135F22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json in Resources */ = {isa = PBXBuildFile; fileRef = 4157135E22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json */; };
 		4157136122C43660005D6DB1 /* PrepaidCardReceiptsPaging.json in Resources */ = {isa = PBXBuildFile; fileRef = 4157136022C43660005D6DB1 /* PrepaidCardReceiptsPaging.json */; };
@@ -673,6 +675,8 @@
 		2EF70C53237CDEAE007E3844 /* HyperwalletFieldResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = HyperwalletFieldResponse.json; sourceTree = "<group>"; };
 		2EF70C6E237F543F007E3844 /* HyperwalletInsightsMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyperwalletInsightsMock.swift; sourceTree = "<group>"; };
 		412F723222B458C700837F8F /* TransactionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetails.swift; sourceTree = "<group>"; };
+		41460980253926A600912078 /* PrepaidCardPrimaryOnlyResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardPrimaryOnlyResponse.json; sourceTree = "<group>"; };
+		41460983253926DD00912078 /* PrepaidCardSecondaryResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardSecondaryResponse.json; sourceTree = "<group>"; };
 		4157135C22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardReceiptsForOneMonth.json; sourceTree = "<group>"; };
 		4157135E22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardReceiptsForFewMonths.json; sourceTree = "<group>"; };
 		4157136022C43660005D6DB1 /* PrepaidCardReceiptsPaging.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardReceiptsPaging.json; sourceTree = "<group>"; };
@@ -1369,6 +1373,8 @@
 				983EF20D2526A8EB000A55B3 /* ListTransferDestinationPrepaidCardsOnly.json */,
 				ABE841F7253445F70010240A /* ListTransferMethodMoreThanOneVenmo.json */,
 				ABE841F925344D0B0010240A /* AvailableFundsVenmoDetails.json */,
+				41460980253926A600912078 /* PrepaidCardPrimaryOnlyResponse.json */,
+				41460983253926DD00912078 /* PrepaidCardSecondaryResponse.json */,
 			);
 			path = TransferFunds;
 			sourceTree = "<group>";
@@ -2823,6 +2829,7 @@
 				64F45BD022BA27DA00515AE1 /* WireAccountIndividualResponse.json in Resources */,
 				41D8363F22FB4814003544AB /* TransferErrorOverAvailableFund.json in Resources */,
 				DBF89CB8227C072400AF4344 /* UserIndividualCountryCanadaResponse.json in Resources */,
+				4146098725392A6200912078 /* PrepaidCardSecondaryResponse.json in Resources */,
 				41C3CA1C231084DA008A904C /* AddNewTransferMethodsMoreThanOneTransferMethod.json in Resources */,
 				9807B767226442C60028A280 /* ListTransferMethodResponse.json in Resources */,
 				640030C722982C7D0087DDB2 /* BankAccountBusinessResponse.json in Resources */,
@@ -2879,6 +2886,7 @@
 				09795B78229D7FE000EF407F /* ListTransferMethodResponseWithoutPayPalAccount.json in Resources */,
 				98F63E722284B4AF0090101D /* TransferMethodConfigurationPayPalAccountResponse.json in Resources */,
 				0961D63D22AA954B007F0B44 /* ReceiptsForLazyLoadingNextPage.json in Resources */,
+				41460982253926AB00912078 /* PrepaidCardPrimaryOnlyResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
