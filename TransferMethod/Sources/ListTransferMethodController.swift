@@ -87,6 +87,9 @@ final class ListTransferMethodController: UITableViewController {
                                             UIColor(red: 0.17, green: 0.18, blue: 0.18, alpha: 1))
 
                 listTransferMethodCell.accessoryView = UIImageView(image: icon)
+                listTransferMethodCell.accessoryView?.isHidden = false
+            } else {
+                listTransferMethodCell.accessoryView?.isHidden = true
             }
         }
         return cell
