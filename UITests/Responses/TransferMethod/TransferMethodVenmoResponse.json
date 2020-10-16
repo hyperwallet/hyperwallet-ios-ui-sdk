@@ -1,0 +1,74 @@
+
+{
+    "data": {
+        "transferMethodUIConfigurations": {
+            "nodes": [
+                {
+                    "country": "US",
+                    "currency": "USD",
+                    "transferMethodType": "VENMO_ACCOUNT",
+                    "profile": "BUSINESS",
+                    "fieldGroups": {
+                        "nodes": [
+                            {
+                                "group": "ACCOUNT_INFORMATION",
+                                "fields": [
+                                    {
+                                        "dataType": "NUMBER",
+                                        "isRequired": true,
+                                        "isEditable": true,
+                                        "name": "accountId",
+                                        "label": "Mobile Number",
+                                        "placeholder": "",
+                                        "maxLength": 17,
+                                        "minLength": 4,
+                                        "regularExpression": "^(?![0-]+$)[0-9-]{4,17}$",
+                                        "validationMessage": {
+                                            "length": "The minimum length of this field is 4 and maximum length is 17.",
+                                            "pattern": "is invalid length or format.",
+                                            "empty": "You must provide a value for this field"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "countries": {
+            "nodes": [
+                {
+                    "code": "US",
+                    "name": "UNITED STATES",
+                    "iso3": "USA",
+                    "currencies": {
+                        "nodes": [
+                            {
+                                "code": "USD",
+                                "name": "USD",
+                                "transferMethodTypes": {
+                                    "nodes": [
+                                        {
+                                            "code": "VEMO_ACCOUNT",
+                                            "name": "Venmo Account",
+                                            "fees": {
+                                                "nodes": [
+                                                    {
+                                                        "currency": "USD",
+                                                        "feeRateType": "FLAT",
+                                                        "value": "0.95"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+}

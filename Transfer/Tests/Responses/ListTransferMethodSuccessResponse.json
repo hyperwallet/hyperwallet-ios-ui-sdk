@@ -1,5 +1,5 @@
 {
-    "count":3,
+    "count":4,
     "offset":0,
     "limit":10,
     "data":[
@@ -76,8 +76,24 @@
                     "href": "https://localhost/rest/v3/users/usr-123456789/paypal-accounts/trm-123456789"
                 }
             ]
+        },
+        {
+            "token": "trm-123456789",
+            "type": "VENMO_ACCOUNT",
+            "status": "ACTIVATED",
+            "createdOn": "2020-07-07T22:30:52",
+            "transferMethodCountry": "US",
+            "transferMethodCurrency": "USD",
+            "accountId": "5555555555",
+            "links": [
+                {
+                    "params": {
+                        "rel": "self"
+                    },
+                    "href": "https://localhost/rest/v3/users/usr-123456789/venmo-accounts/trm-123456789"
+                }
+            ]
         }
-
     ],
     "links":[
         {
