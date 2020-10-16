@@ -201,7 +201,7 @@ class ListReceiptTests: BaseTests {
         verifyDetailSection(receiptIdVal: "64287013", dateVal: "2020-10-12T18:16:17", clientIdVal: nil)
 
         // FEE Section
-        verifyFeeSection(amountVal: "-5.00 USD", feeVal: "2.00 USD", transactionVal: "3.00 USD")
+        verifyFeeSection(amountVal: "-$5.00 USD", feeVal: "$2.00 USD", transactionVal: "$3.00 USD")
     }
 
     func testReceiptDetail_verifyTransactionOptionalFields() {
