@@ -799,6 +799,9 @@
 		988547C92294B829007B312C /* ListReceiptController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListReceiptController.swift; sourceTree = "<group>"; };
 		988547CB2294B879007B312C /* ListReceiptPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListReceiptPresenter.swift; sourceTree = "<group>"; };
 		988547CF22970FA1007B312C /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		98A0AD232537830900B338B8 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
+		98A0AD242537830900B338B8 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		98A0AD252537831400B338B8 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		98DC5D502526A39A00729477 /* GetPrepaidCardSuccessResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GetPrepaidCardSuccessResponse.json; sourceTree = "<group>"; };
 		98EDBF89247451C0008A4015 /* PrepaidCardReceiptResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PrepaidCardReceiptResponse.json; sourceTree = "<group>"; };
 		98EDBF8A247451C0008A4015 /* UserReceiptResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UserReceiptResponse.json; sourceTree = "<group>"; };
@@ -2698,6 +2701,7 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
 			);
 			mainGroup = DBCA37EB225E892400CD4137;
 			productRefGroup = DBCA37F6225E892400CD4137 /* Products */;
@@ -3652,6 +3656,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				DB4679892260380C00E1AF49 /* Base */,
+				98A0AD232537830900B338B8 /* es */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -3660,6 +3665,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				DB46798E2260380D00E1AF49 /* Base */,
+				98A0AD242537830900B338B8 /* es */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -3668,6 +3674,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				DBCA383E225E8BAA00CD4137 /* en */,
+				98A0AD252537831400B338B8 /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -4801,6 +4808,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -5265,6 +5273,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -5331,6 +5340,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
