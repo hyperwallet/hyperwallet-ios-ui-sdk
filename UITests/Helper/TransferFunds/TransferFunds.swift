@@ -88,6 +88,7 @@ class TransferFunds {
 
     func enterNotes(description: String) {
         notesDescriptionTextField.clearAndEnterText(text: description)
+        //notesDescriptionTextField.typeText(description)
     }
 
     func enterTransferAmount(amount: String) {

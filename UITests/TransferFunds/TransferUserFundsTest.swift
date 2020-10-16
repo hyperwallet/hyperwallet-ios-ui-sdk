@@ -429,6 +429,8 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.tapContinueButton()
         waitForNonExistence(spinner)
 
+        app.swipeDown()
+
         // Assert inline errors
         XCTAssertEqual(transferFunds.invalidAmountError.label, "transferAmountInvalid".localized())
         XCTAssertEqual(transferFunds.transferMethodRequireError.label, "noTransferMethodAdded".localized())
@@ -455,6 +457,8 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.nextLabel.exists)
         transferFunds.tapContinueButton()
         waitForNonExistence(spinner)
+
+         app.swipeDown()
 
         XCTAssertEqual(transferFunds.invalidAmountError.label, "transferAmountInvalid".localized())
     }
@@ -570,8 +574,12 @@ class TransferUserFundsTest: BaseTests {
         waitForNonExistence(spinner)
 
         transferFunds.enterTransferAmount(amount: "1000")
-        if #available(iOS 11.0, *) {
-            transferFunds.enterNotes(description: over255String)
+
+        if #available(iOS 13.0, *) {
+            transferFunds.notesDescriptionTextField.tap()
+            transferFunds.notesDescriptionTextField.typeText(over255String)
+        } else {
+             transferFunds.enterNotes(description: over255String)
         }
 
         mockServer.setupStubError(url: "/rest/v3/transfers",
