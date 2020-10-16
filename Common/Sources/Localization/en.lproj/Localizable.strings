@@ -162,6 +162,7 @@
 "transfer_to_western_union" = "Western Union";
 "transfer_to_wire" = "Wire Transfer";
 "transfer_to_wubs_wire" = "Wire Transfer";
+"transfer_to_venmo_account" = "Venmo";
 "virtual_incentive_cancellation" = "Promo Cancellation";
 "virtual_incentive_issuance" = "Issued Promo";
 "virtual_incentive_purchase" = "Promo Purchase";
