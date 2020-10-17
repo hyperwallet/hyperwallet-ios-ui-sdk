@@ -33,8 +33,12 @@ class BaseTests: XCTestCase {
         mockServer = HyperwalletMockWebServer()
         mockServer.setUp()
 
+//        mockServer.setupStub(url: "/rest/v3/users/usr-token/authentication-token",
+//                             filename: "AuthenticationTokenResponse",
+//                             method: HTTPMethod.post)
+
         mockServer.setupStub(url: "/rest/v3/users/usr-token/authentication-token",
-                             filename: "AuthenticationTokenResponse",
+                             filename: "AuthenticationTokenWalletModelResponse",
                              method: HTTPMethod.post)
 
         mockServer.setupStub(url: "/rest/v3/users/usr-token",
