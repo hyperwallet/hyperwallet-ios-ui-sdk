@@ -103,6 +103,21 @@ class ListReceiptTests: BaseTests {
         XCTAssertEqual(currency, cell.staticTexts["receiptTransactionCurrencyLabel"].label)
     }
 
+    private func verifyCurrencyAndCurrencyCode(_ type: String, _ amount: String, _ currency: String, at index: Int) {
+        let cell = app.cells.element(boundBy: index)
+        app.scroll(to: cell)
+        XCTAssertTrue(cell.staticTexts["receiptTransactionTypeLabel"].exists)
+        XCTAssertTrue(cell.staticTexts["receiptTransactionAmountLabel"].exists)
+        // XCTAssertTrue(cell.staticTexts["receiptTransactionCreatedOnLabel"].exists)
+        XCTAssertTrue(cell.staticTexts["receiptTransactionCurrencyLabel"].exists)
+
+        XCTAssertEqual(type, cell.staticTexts["receiptTransactionTypeLabel"].label)
+//        XCTAssertEqual(transactionDetails.getExpectedDate(date: createdOn),
+//                       cell.staticTexts["receiptTransactionCreatedOnLabel"].label)
+        XCTAssertEqual(amount, cell.staticTexts["receiptTransactionAmountLabel"].label)
+        XCTAssertEqual(currency, cell.staticTexts["receiptTransactionCurrencyLabel"].label)
+    }
+
     private func verifyCellDoesNotExist(_ type: String,
                                         _ createdOn: String,
                                         _ amount: String,
@@ -240,6 +255,34 @@ class ListReceiptTests: BaseTests {
         let feeLabel = transactionDetails.feeLabel
         XCTAssertFalse(noteSection.exists)
         XCTAssertFalse(feeLabel.exists)
+    }
+
+     // MARK: Currencies Test
+     // Test format an amount to a currency format with currency code
+     func testReceiptDetail_verifyTransactionReceiptWithUSD() {
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/receipts",
+                             filename: "ReceiptsMultipleCurrenciesRespsonse",
+                             method: HTTPMethod.get)
+
+        openReceiptsListScreen()
+
+        verifyCurrencyAndCurrencyCode("Payment", CurrencyCode.USD.1 + "5.00", CurrencyCode.USD.0, at: 0)
+
+        //verifyCellExists("Payment", "2019-03-24T17:35:20", "$5.00", "USD", at: 20)
+
+        // add back assertions
+
+     }
+
+    func testReceiptDetail_verifyTransactionReceiptWithOtherCurrencies() {
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/receipts",
+                             filename: "ReceiptsMultipleCurrenciesRespsonse",
+                             method: HTTPMethod.get)
+
+        openReceiptsListScreen()
+
+        // add back asssertions
+
     }
 
     // MARK: Helper methods

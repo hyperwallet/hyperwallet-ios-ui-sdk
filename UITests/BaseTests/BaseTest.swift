@@ -24,6 +24,21 @@ class BaseTests: XCTestCase {
          static let venmo = "Venmo"
      }
 
+    public struct CurrencyCode {
+        // Currency Code , Symbol Tuple
+        static let USD = ("USD", "$")
+        static let CAD = ("CAD", "CA$")
+        static let EURO = ("EURO", "€")
+        static let JPY = ("JPY", "¥")
+        static let INR = ("INR", "₹")
+        static let VND = ("VND", "₫")
+        static let SEK = ("SEK", "kr")
+        static let JOD = ("JOD", "د.ا")
+        // static let TND = ("TND", "د.ت")
+        static let TND = ("TND", "DT")
+        static let ZAR = ("ZAR", "$")
+    }
+
     public struct Common {
          // Navigation Bar
         static let navBackButton = "Back".localized()
