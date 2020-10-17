@@ -81,6 +81,8 @@
 		412F723722B45DB100837F8F /* TransactionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F723222B458C700837F8F /* TransactionDetails.swift */; };
 		41460982253926AB00912078 /* PrepaidCardPrimaryOnlyResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 41460980253926A600912078 /* PrepaidCardPrimaryOnlyResponse.json */; };
 		4146098725392A6200912078 /* PrepaidCardSecondaryResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 41460983253926DD00912078 /* PrepaidCardSecondaryResponse.json */; };
+		4146098D2539323F00912078 /* AuthenticationTokenWalletModelResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 4146098B2539323600912078 /* AuthenticationTokenWalletModelResponse.json */; };
+		414609902539330B00912078 /* AuthenticationTokenPayToCardModelResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 4146098E253932D600912078 /* AuthenticationTokenPayToCardModelResponse.json */; };
 		4157135D22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json in Resources */ = {isa = PBXBuildFile; fileRef = 4157135C22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json */; };
 		4157135F22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json in Resources */ = {isa = PBXBuildFile; fileRef = 4157135E22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json */; };
 		4157136122C43660005D6DB1 /* PrepaidCardReceiptsPaging.json in Resources */ = {isa = PBXBuildFile; fileRef = 4157136022C43660005D6DB1 /* PrepaidCardReceiptsPaging.json */; };
@@ -677,6 +679,8 @@
 		412F723222B458C700837F8F /* TransactionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetails.swift; sourceTree = "<group>"; };
 		41460980253926A600912078 /* PrepaidCardPrimaryOnlyResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardPrimaryOnlyResponse.json; sourceTree = "<group>"; };
 		41460983253926DD00912078 /* PrepaidCardSecondaryResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardSecondaryResponse.json; sourceTree = "<group>"; };
+		4146098B2539323600912078 /* AuthenticationTokenWalletModelResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AuthenticationTokenWalletModelResponse.json; sourceTree = "<group>"; };
+		4146098E253932D600912078 /* AuthenticationTokenPayToCardModelResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AuthenticationTokenPayToCardModelResponse.json; sourceTree = "<group>"; };
 		4157135C22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardReceiptsForOneMonth.json; sourceTree = "<group>"; };
 		4157135E22C43467005D6DB1 /* PrepaidCardReceiptsForFewMonths.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardReceiptsForFewMonths.json; sourceTree = "<group>"; };
 		4157136022C43660005D6DB1 /* PrepaidCardReceiptsPaging.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardReceiptsPaging.json; sourceTree = "<group>"; };
@@ -1546,6 +1550,8 @@
 			isa = PBXGroup;
 			children = (
 				641324E42295764500512816 /* AuthenticationTokenResponse.json */,
+				4146098B2539323600912078 /* AuthenticationTokenWalletModelResponse.json */,
+				4146098E253932D600912078 /* AuthenticationTokenPayToCardModelResponse.json */,
 			);
 			path = AuthenticationTokens;
 			sourceTree = "<group>";
@@ -2823,6 +2829,7 @@
 				ABDB501F2536CA4A00D3AF0B /* TransferMethodCreateVenmoAccount.json in Resources */,
 				0961D63322AA8817007F0B44 /* ReceiptsForLazyLoading.json in Resources */,
 				41D8363C22FB4814003544AB /* ListMoreThanOneTransferMethod.json in Resources */,
+				414609902539330B00912078 /* AuthenticationTokenPayToCardModelResponse.json in Resources */,
 				9807B766226442C60028A280 /* BankCardInvalidDateOfExpiry.json in Resources */,
 				ABDB50232537341A00D3AF0B /* TransferMethodVenmoResponse.json in Resources */,
 				983EF20F2526A950000A55B3 /* ListTransferDestinationPrepaidCardsOnly.json in Resources */,
@@ -2841,6 +2848,7 @@
 				41D8364322FB4814003544AB /* ListTransferDestinationsUSD.json in Resources */,
 				41D8364322FB4814003544AB /* ListTransferDestinationsUSD.json in Resources */,
 				ABE841F8253445F70010240A /* ListTransferMethodMoreThanOneVenmo.json in Resources */,
+				4146098D2539323F00912078 /* AuthenticationTokenWalletModelResponse.json in Resources */,
 				41D8364022FB4814003544AB /* TransferErrorAmountLessThanFee.json in Resources */,
 				98DC5D512526A39A00729477 /* GetPrepaidCardSuccessResponse.json in Resources */,
 				9807B76A226442C60028A280 /* RemovedTransferMethodResponse.json in Resources */,

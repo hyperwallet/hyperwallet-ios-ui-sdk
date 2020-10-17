@@ -2,6 +2,7 @@ import XCTest
 
 class TransferUserFundsTest: BaseTests {
     var transferFundMenu: XCUIElement!
+    var transferFundSourceMenu: XCUIElement!
     var transferFunds: TransferFunds!
     var selectDestination: TransferFundsSelectDestination!
     var addTransferMethod: AddTransferMethod!
@@ -42,6 +43,11 @@ class TransferUserFundsTest: BaseTests {
         transferFundMenu = app.tables.cells
             .containing(.staticText, identifier: "Transfer Funds")
             .element(boundBy: 0)
+
+        transferFundSourceMenu = app.tables.cells
+            .containing(.staticText, identifier: "Transfer Funds Source")
+            .element(boundBy: 0)
+
         transferFunds = TransferFunds(app: app)
         selectDestination = TransferFundsSelectDestination(app: app)
         addTransferMethod = AddTransferMethod(app: app)
@@ -795,8 +801,8 @@ class TransferUserFundsTest: BaseTests {
                              filename: "GetPrepaidCardSuccessResponse",
                              method: HTTPMethod.get)
 
-        XCTAssertTrue(transferFundMenu.exists)
-        transferFundMenu.tap()
+        XCTAssertTrue(transferFundSourceMenu.exists)
+        transferFundSourceMenu.tap()
 
         waitForNonExistence(spinner)
         transferFunds.verifyTransferFrom(isAvailableFunds: true)
@@ -849,7 +855,7 @@ class TransferUserFundsTest: BaseTests {
 
         // List the available PPC of the user to select from source
         mockServer.setupStub(url: listppcUrl,
-                             filename: "PrimaryCardSecondaryResponse",
+                             filename: "PrepaidCardSecondaryResponse",
                              method: HTTPMethod.get)
 
         // Retreive details of PPC by trm-token
@@ -857,8 +863,8 @@ class TransferUserFundsTest: BaseTests {
                              filename: "GetPrepaidCardSuccessResponse",
                              method: HTTPMethod.get)
 
-        XCTAssertTrue(transferFundMenu.exists)
-        transferFundMenu.tap()
+        XCTAssertTrue(transferFundSourceMenu.exists)
+        transferFundSourceMenu.tap()
 
         waitForNonExistence(spinner)
         transferFunds.verifyTransferFrom(isAvailableFunds: true)
