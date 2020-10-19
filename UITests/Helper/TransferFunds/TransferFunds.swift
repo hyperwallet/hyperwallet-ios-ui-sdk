@@ -97,7 +97,9 @@ class TransferFunds {
     func pasteAmountToTransferAmount(amount: String) {
         UIPasteboard.general.string = amount
         transferAmount.doubleTap()
+        sleep(1)
         app.menuItems["Paste"].tap()
+        sleep(1)
     }
 
     func tapContinueButton() {
