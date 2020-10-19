@@ -14,7 +14,7 @@ class BaseTests: XCTestCase {
      }
 
     public struct TransferMethods {
-         // Transfer methods
+         // Transfer methods 
          static let bankAccount = "Bank Account"
          static let debitCard = "Debit Card"
          static let paperCheck = "Paper Check"
@@ -27,16 +27,16 @@ class BaseTests: XCTestCase {
     public struct CurrencyCode {
         // Currency Code , Symbol Tuple
         static let USD = ("USD", "$")
-        static let CAD = ("CAD", "CA$")
-        static let EURO = ("EURO", "€")
+        static let CAD = ("CAD", "$")
+        static let EURO = ("EUR", "€")
         static let JPY = ("JPY", "¥")
         static let INR = ("INR", "₹")
         static let VND = ("VND", "₫")
         static let SEK = ("SEK", "kr")
-        static let JOD = ("JOD", "د.ا")
+        static let JOD = ("JOD", "د.أ.‏")
         // static let TND = ("TND", "د.ت")
         static let TND = ("TND", "DT")
-        static let ZAR = ("ZAR", "$")
+        static let ZAR = ("ZAR", "R")
     }
 
     public struct Common {

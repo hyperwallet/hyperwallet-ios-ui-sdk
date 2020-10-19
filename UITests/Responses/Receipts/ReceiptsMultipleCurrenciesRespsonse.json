@@ -1,6 +1,5 @@
-
 {
-    "count": 10,
+    "count": 13,
     "offset": 0,
     "limit": 20,
     "data": [
@@ -87,7 +86,7 @@
             "destinationToken": "usr-token",
             "amount": "1000000000.99",
             "fee": "2.25",
-            "currency": "EURO",
+            "currency": "EUR",
             "details": {
                 "clientPaymentId": "8OxXefx5",
                 "payeeName": "A Person",
