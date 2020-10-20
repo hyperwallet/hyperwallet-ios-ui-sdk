@@ -740,6 +740,7 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.addSelectDestinationLabel.tap()
 
         // Assert Add a transfer method View
+        waitForNonExistence(spinner)
         XCTAssertTrue(app.navigationBars["mobileAddTransferMethodHeader".localized()].exists)
         XCTAssertTrue(app.tables.staticTexts["United States"].exists)
         XCTAssertTrue(app.tables.staticTexts["USD"].exists)

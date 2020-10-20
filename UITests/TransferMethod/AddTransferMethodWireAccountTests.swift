@@ -57,7 +57,7 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
     }
 
     func testAddTransferMethod_displaysElementsOnTmcResponse() {
-        XCTAssert(app.navigationBars["Wire Account"].exists)
+        XCTAssert(app.navigationBars["Wire Transfer Account"].exists)
 
         verifyAccountInformationSection()
         verifyIntermediaryAccountSection()
