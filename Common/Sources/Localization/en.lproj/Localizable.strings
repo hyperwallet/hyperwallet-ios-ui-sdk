@@ -59,7 +59,7 @@
 "bank_card" = "Debit Card";
 "paper_check" = "Paper Check";
 "prepaid_card" = "Prepaid Card";
-"wire_account" = "Wire Account";
+"wire_account" = "Wire Transfer Account";
 "paypal_account" = "PayPal";
 "venmo_account" = "Venmo";
 "cash_pickup_mg" = "MoneyGram";
