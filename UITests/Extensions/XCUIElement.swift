@@ -59,6 +59,22 @@ extension XCUIElement {
          self.typeText(text)
      }
 
+    /// Clear amount field
+    /// - Parameter text: amount 
+    func clearAmountFieldAndEnterText(text: String) {
+        guard let stringValue = self.value as? String else {
+            XCTFail("Tried to clear and enter text into a non string value")
+            return
+        }
+
+        let lowerRightCorner = self.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.9))
+        lowerRightCorner.tap()
+
+        let deleteString = String(repeating: XCUIKeyboardKey.delete.rawValue, count: stringValue.count)
+        self.typeText(deleteString)
+        self.typeText(text)
+    }
+
     /**
      Removes any current text in the field before typing in the new value
      - Parameter text: the text to enter into the field

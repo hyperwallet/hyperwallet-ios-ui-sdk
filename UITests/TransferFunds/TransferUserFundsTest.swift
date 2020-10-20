@@ -328,18 +328,18 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.transferAmount.exists)
 
         transferFunds.transferAmount.tap()
-        transferFunds.transferAmount.typeText(".12345")
+        transferFunds.transferAmount.clearAmountFieldAndEnterText(text: ".12345")
 
         transferFunds.transferSectionLabel.tap()
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, ".10")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.12")
 
         transferFunds.transferAmount.clearAndEnterText(text: "12345678901234567890")
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "123456789010")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "123456789012")
         transferFunds.transferAmount.typeText(".123456")
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "1234567890.10")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "123456789012.12")
 
         transferFunds.transferSectionLabel.tap()
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "1234567890.10")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "123456789012.12")
     }
 
     // MARK: Select Destination Page
@@ -530,7 +530,7 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.transferAmount.exists)
 
         // Enter amount lower than the transaction limit
-        transferFunds.enterTransferAmount(amount: "0.10")
+        transferFunds.enterTransferAmount(amount: "0.01")
 
         mockServer.setupStubError(url: "/rest/v3/transfers",
                                   filename: "TransferBelowTransactionLimitError",
@@ -541,7 +541,7 @@ class TransferUserFundsTest: BaseTests {
 
         waitForExistence(app.alerts["Error"])
         let predicate = NSPredicate(format:
-            "label CONTAINS[c] 'Requested transfer amount $0.10, is below the transaction limit of $1.00.'")
+            "label CONTAINS[c] 'Requested transfer amount $0.01, is below the transaction limit of $1.00.'")
         XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
     }
 
