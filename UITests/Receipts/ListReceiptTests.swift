@@ -268,8 +268,14 @@ class ListReceiptTests: BaseTests {
 
         verifyCurrencyAndCurrencyCode("Bank Account", "-"+CurrencyCode.USD.1 + "0.00", CurrencyCode.USD.0, at: 0)
         verifyCurrencyAndCurrencyCode("Payment", CurrencyCode.USD.1 + "1,000,000.99", CurrencyCode.USD.0, at: 1)
-        verifyCurrencyAndCurrencyCode("Bank Account", "-"+CurrencyCode.USD.1 + "1,000,000,000.99", CurrencyCode.USD.0, at: 2)
-        verifyCurrencyAndCurrencyCode("Bank Account", "-"+CurrencyCode.USD.1 + "10,000,000,000,000,000,000.00", CurrencyCode.USD.0, at: 3)
+        verifyCurrencyAndCurrencyCode("Bank Account",
+                                      "-"+CurrencyCode.USD.1 + "1,000,000,000.99",
+                                      CurrencyCode.USD.0,
+                                      at: 2)
+        verifyCurrencyAndCurrencyCode("Bank Account",
+                                      "-"+CurrencyCode.USD.1 + "10,000,000,000,000,000,000.00",
+                                      CurrencyCode.USD.0,
+                                      at: 3)
         verifyCellExists("Debit Card", "2019-05-01T17:35:20", "¥1,000,000,000", "JPY", at: 11)
         verifyCellExists("Debit Card", "2019-05-01T17:35:20", "₫1,000,000,000", "VND", at: 12)
 
@@ -282,7 +288,9 @@ class ListReceiptTests: BaseTests {
         verifyDetailSection(receiptIdVal: "55176994", dateVal: "2019-5-10T18:16:17", clientIdVal: nil)
 
         // FEE Section
-        verifyFeeSection(amountVal: "-$1,000,000,000.99 USD", feeVal: "$2.00 USD", transactionVal: "$999,999,998.99 USD")
+        verifyFeeSection(amountVal: "-$1,000,000,000.99 USD",
+                         feeVal: "$2.00 USD",
+                         transactionVal: "$999,999,998.99 USD")
      }
 
     func testReceiptDetail_verifyTransactionReceiptWithOtherCurrencies() {
@@ -295,8 +303,14 @@ class ListReceiptTests: BaseTests {
         // add back asssertions
         verifyCurrencyAndCurrencyCode("Bank Account", "-"+CurrencyCode.USD.1 + "0.00", CurrencyCode.USD.0, at: 0)
         verifyCurrencyAndCurrencyCode("Payment", CurrencyCode.USD.1 + "1,000,000.99", CurrencyCode.USD.0, at: 1)
-        verifyCurrencyAndCurrencyCode("Bank Account", "-"+CurrencyCode.USD.1 + "1,000,000,000.99", CurrencyCode.USD.0, at: 2)
-        verifyCurrencyAndCurrencyCode("Bank Account", "-"+CurrencyCode.USD.1 + "10,000,000,000,000,000,000.00", CurrencyCode.USD.0, at: 3)
+        verifyCurrencyAndCurrencyCode("Bank Account",
+                                      "-"+CurrencyCode.USD.1 + "1,000,000,000.99",
+                                      CurrencyCode.USD.0,
+                                      at: 2)
+        verifyCurrencyAndCurrencyCode("Bank Account",
+                                      "-"+CurrencyCode.USD.1 + "10,000,000,000,000,000,000.00",
+                                      CurrencyCode.USD.0,
+                                      at: 3)
         verifyCurrencyAndCurrencyCode("Payment", CurrencyCode.CAD.1 + "1,000,000,000.99", CurrencyCode.CAD.0, at: 4)
         verifyCurrencyAndCurrencyCode("Payment", CurrencyCode.EURO.1 + "1,000,000,000.99", CurrencyCode.EURO.0, at: 5)
         verifyCurrencyAndCurrencyCode("Payment", CurrencyCode.JOD.1 + " 1,000,000,000.990", CurrencyCode.JOD.0, at: 6)
