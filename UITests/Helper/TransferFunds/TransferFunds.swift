@@ -135,7 +135,7 @@ class TransferFunds {
     }
 
     func enterTransferAmount(amount: String) {
-        transferAmount.clearAndEnterText(text: amount)
+        transferAmount.clearAmountFieldAndEnterText(text: amount)
     }
 
     func pasteAmountToTransferAmount(amount: String) {

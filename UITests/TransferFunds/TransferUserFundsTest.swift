@@ -339,7 +339,7 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.transferAmount.exists)
 
         transferFunds.transferAmount.tap()
-        transferFunds.transferAmount.typeText(".12345")
+        transferFunds.transferAmount.clearAmountFieldAndEnterText(text: ".12345")
 
         transferFunds.transferSectionLabel.tap()
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.12")
@@ -448,8 +448,8 @@ class TransferUserFundsTest: BaseTests {
         app.swipeDown()
 
         // Assert inline errors
-        XCTAssertEqual(transferFunds.invalidAmountError.label, "transferAmountInvalid".localized())
         XCTAssertEqual(transferFunds.transferMethodRequireError.label, "noTransferMethodAdded".localized())
+        XCTAssertEqual(transferFunds.invalidAmountError.label, "transferAmountInvalid".localized())
     }
 
     func testTransferFunds_createTransferWhenDestinationAmountNotSet() {
