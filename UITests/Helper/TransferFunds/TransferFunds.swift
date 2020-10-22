@@ -45,7 +45,6 @@ class TransferFunds {
 
     var noteLabel: String
 
-    // let title = "Transfer funds"
     let mobileTransferFundsHeader =  "mobileTransferFundsHeader".localized()
     let mobileConfirmationHeader = "mobileConfirmationHeader".localized()
     let mobileTransferToLabel = "mobileTransferToLabel".localized()
@@ -131,7 +130,6 @@ class TransferFunds {
 
     func enterNotes(description: String) {
         notesDescriptionTextField.clearAndEnterText(text: description)
-        //notesDescriptionTextField.typeText(description)
     }
 
     func enterTransferAmount(amount: String) {

@@ -274,47 +274,6 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
     }
 
-    /*
-     func testTransferFundsConfirmation_verifySummaryWithNoFee() {
-     mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
-     filename: "ListMoreThanOneTransferMethod",
-     method: HTTPMethod.get)
-
-     mockServer.setupStub(url: "/rest/v3/transfers",
-     filename: "AvailableFundUSD",
-     method: HTTPMethod.post)
-
-     transferFundMenu.tap()
-     waitForNonExistence(spinner)
-
-     transferFunds.verifyTransferFundsTitle()
-     // Amount row
-     XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
-     XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
-     XCTAssertEqual(transferFunds.transferAmountLabel.label, "Available funds $452.14 USD")
-
-     transferFunds.transferMaxAllFunds.tap()
-     XCTAssertEqual(transferFunds.transferAmount.value as? String, "452.14")
-     transferFunds.tapContinueButton()
-
-     mockServer.setupStub(url: "/rest/v3/transfers",
-     filename: "CreateTransferWithNoFee",
-     method: HTTPMethod.post)
-
-     waitForExistence(transferFundsConfirmation.transferDestinationLabel)
-
-     // Summary Section
-     XCTAssertEqual(transferFundsConfirmation.summaryTitle.label, "mobileSummaryLabel".localized())
-     XCTAssertEqual(transferFundsConfirmation.summaryAmount.label, transferFundsConfirmation.summaryAmountLabel)
-
-     // Assert confirmation page has no FEE section
-     XCTAssertFalse(transferFundsConfirmation.summaryFee.exists)
-
-     let button = transferFundsConfirmation.scheduleTable.buttons["scheduleTransferLabel"]
-     app.scroll(to: button)
-     XCTAssertTrue(button.exists)
-     } */
-
     func testTransferFundsConfirmation_FxChanged() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListMoreThanOneTransferMethod",

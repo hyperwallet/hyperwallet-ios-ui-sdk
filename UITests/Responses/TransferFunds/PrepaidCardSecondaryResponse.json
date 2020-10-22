@@ -4,8 +4,8 @@
     "limit": 10,
     "data": [
         {
-            "token": "trm-token",
-            "primaryCardToken": "trm-0000",
+            "token": "trm-token2",
+            "primaryCardToken": "trm-token",
             "type": "PREPAID_CARD",
             "status": "ACTIVATED",
             "verificationStatus": "NOT_REQUIRED",
