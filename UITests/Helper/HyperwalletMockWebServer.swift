@@ -86,6 +86,21 @@ final class HyperwalletMockWebServer {
 
         server.GET[url] = response
     }
+    func setupStubEmpty(url: String, statusCode: Int, method: HTTPMethod) {
+        let headers = ["Content-Type": "application/json"]
+
+        let response: ((HttpRequest) -> HttpResponse) = { _ in
+            HttpResponse.raw(statusCode, "Empty", headers, nil)
+        }
+
+        switch method {
+            case HTTPMethod.get :
+                server.GET[url] = response
+
+            case HTTPMethod.post:
+                server.POST[url] = response
+        }
+    }
 
     func dataToJSON(data: Data) -> Any? {
         do {
