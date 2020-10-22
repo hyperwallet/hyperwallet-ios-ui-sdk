@@ -98,11 +98,11 @@ class ListAllReceiptsTests: BaseTests {
         // Assert PPC receipts
         verifyCellExists_ListAll("Balance Adjustment", "2020-09-26T18:16:12", "-$20.99", "USD", at: 0)
         verifyCellExists_ListAll("Funds Deposit", "2020-08-26T17:46:28", "$998.15", "USD", at: 1)
-        verifyCellExists_ListAll("Purchase", "2020-07-23T18:16:10", "-$6.47", "USD", at: 2)
-        verifyCellExists_ListAll("Purchase", "2020-07-13T18:16:08", "-$6.47", "USD", at: 3)
-        verifyCellExists_ListAll("Purchase", "2020-07-13T18:16:12", "-$6.47", "USD", at: 4)
-        verifyCellExists_ListAll("Purchase", "2020-07-12T18:16:12", "-$6.47", "USD", at: 5)
-        verifyCellExists_ListAll("Purchase", "2020-06-27T18:16:12", "-$6.47", "USD", at: 6)
+        verifyCellExists_ListAll("Purchase", "2020-07-22T18:16:10", "-$6.47", "USD", at: 2)
+        verifyCellExists_ListAll("Purchase", "2020-07-12T18:16:08", "-$6.47", "USD", at: 3)
+        verifyCellExists_ListAll("Purchase", "2020-07-12T18:16:12", "-$6.47", "USD", at: 4)
+        verifyCellExists_ListAll("Purchase", "2020-07-11T18:16:12", "-$6.47", "USD", at: 5)
+        verifyCellExists_ListAll("Purchase", "2020-06-26T18:16:12", "-$6.47", "USD", at: 6)
     }
 
     /*
@@ -210,15 +210,15 @@ class ListAllReceiptsTests: BaseTests {
         waitForNonExistence(spinner)
         XCTAssertTrue(primardCardTab.isSelected, "Primary Card tab isselected")
         // Assert PPC receipts
-       verifyCellExists_ListAll("Purchase", "2020-09-27T18:16:12", "-$100.47", "USD", at: 0)
+       verifyCellExists_ListAll("Purchase", "2020-09-26T18:16:12", "-$100.47", "USD", at: 0)
 
         // Assert PPC secondary
         secondaryCardTab.tap()
         waitForNonExistence(spinner)
         XCTAssertTrue(secondaryCardTab.isSelected, "Secondary Prepaid Card is selected")
         // Assert PPC secondary receipts
-        verifyCellExists_ListAll("Purchase", "2020-09-27T18:16:12", "-$100.47", "USD", at: 0)
-        verifyCellExists_ListAll("Purchase", "2020-08-28T18:16:12", "-$20.47", "USD", at: 1)
+        verifyCellExists_ListAll("Purchase", "2020-09-26T18:16:12", "-$100.47", "USD", at: 0)
+        verifyCellExists_ListAll("Purchase", "2020-08-27T18:16:12", "-$20.47", "USD", at: 1)
     }
 
     /*
