@@ -35,7 +35,7 @@ class BaseTests: XCTestCase {
         static let SEK = ("SEK", "kr")
         static let JOD = ("JOD", "د.أ.‏")
         // static let TND = ("TND", "د.ت")
-        static let TND = ("TND", "DT")
+        static let TND = ("TND", "د.ت.‏")
         static let ZAR = ("ZAR", "R")
     }
 
