@@ -94,6 +94,20 @@ public extension String {
         return currencyFormatter.string(for: formattedAmountInNumber) ?? self
     }
 
+    /// Format amount for currency code using users locale
+    /// - Parameter currencyCode: currency code
+    /// - Returns: a formatted amount string
+    func formatCurrencyAmount(with currencyCode: String?) -> String {
+        guard let currencyCode = currencyCode, !self.isEmpty
+        else { return "" }
+        let number = Double(self)
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = Locale.current
+        formatter.currencyCode = currencyCode
+        return formatter.string(for: number) ?? self
+    }
+
     /// Format an amount to a currency format with currency code
     ///
     /// - Parameter currencyCode: the currency code
