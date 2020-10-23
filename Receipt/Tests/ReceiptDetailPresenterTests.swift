@@ -168,11 +168,11 @@ class ReceiptDetailPresenterTests: XCTestCase {
             return
         }
 
-        XCTAssertTrue(rowEqual(sectionOne.rows[0], "amount".localized(), "$272,890.00 CAD", "amount"))
-        XCTAssertTrue(rowEqual(sectionOne.rows[1], "mobileFeeLabel".localized(), "$0.89 CAD", "fee"))
+        XCTAssertTrue(rowEqual(sectionOne.rows[0], "amount".localized(), "CA$272,890.00 CAD", "amount"))
+        XCTAssertTrue(rowEqual(sectionOne.rows[1], "mobileFeeLabel".localized(), "CA$0.89 CAD", "fee"))
         XCTAssertTrue(rowEqual(sectionOne.rows[2],
                                "mobileTransactionDetailsTotal".localized(),
-                               "$272,889.11 CAD",
+                               "CA$272,889.11 CAD",
                                "transaction"))
     }
 

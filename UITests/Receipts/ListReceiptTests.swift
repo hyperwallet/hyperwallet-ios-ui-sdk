@@ -316,7 +316,7 @@ class ListReceiptTests: BaseTests {
         verifyCurrencyAndCurrencyCode("Payment", CurrencyCode.JOD.1 + " 1,000,000,000.990", CurrencyCode.JOD.0, at: 6)
         verifyCurrencyAndCurrencyCode("Payment", CurrencyCode.ZAR.1 + " 1,000,000,000.00", CurrencyCode.ZAR.0, at: 7)
         verifyCurrencyAndCurrencyCode("Payment", CurrencyCode.SEK.1 + " 10,000,000,000.00", CurrencyCode.SEK.0, at: 8)
-        verifyCurrencyAndCurrencyCode("Payment", CurrencyCode.TND.1 + " 1,000,000,000.000", CurrencyCode.TND.0, at: 9)
+        verifyCurrencyAndCurrencyCode("Payment", CurrencyCode.TND.1 + "1,000,000,000.000", CurrencyCode.TND.0, at: 9)
         verifyCurrencyAndCurrencyCode("PayPal", CurrencyCode.INR.1 + "1,000,000,000.99", CurrencyCode.INR.0, at: 10)
         verifyCurrencyAndCurrencyCode("Debit Card", CurrencyCode.JPY.1 + "1,000,000,000", CurrencyCode.JPY.0, at: 11)
         verifyCurrencyAndCurrencyCode("Debit Card", CurrencyCode.VND.1 + "1,000,000,000", CurrencyCode.VND.0, at: 12)

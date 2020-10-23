@@ -27,16 +27,16 @@ class BaseTests: XCTestCase {
     public struct CurrencyCode {
         // Currency Code , Symbol Tuple
         static let USD = ("USD", "$")
-        static let CAD = ("CAD", "$")
+        static let CAD = ("CAD", "CA$")
         static let EURO = ("EUR", "€")
         static let JPY = ("JPY", "¥")
         static let INR = ("INR", "₹")
         static let VND = ("VND", "₫")
-        static let SEK = ("SEK", "kr")
-        static let JOD = ("JOD", "د.أ.‏")
+        static let SEK = ("SEK", "SEK")
+        static let JOD = ("JOD", "JOD")
         // static let TND = ("TND", "د.ت")
-        static let TND = ("TND", "د.ت.‏")
-        static let ZAR = ("ZAR", "R")
+        static let TND = ("TND", "TND ")
+        static let ZAR = ("ZAR", "ZAR")
     }
 
     public struct Common {
