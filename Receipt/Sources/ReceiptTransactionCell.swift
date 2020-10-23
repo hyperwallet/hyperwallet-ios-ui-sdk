@@ -37,6 +37,8 @@ final class ReceiptTransactionCell: UITableViewCell {
     lazy var amountLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.textAlignment = .right
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
         label.accessibilityIdentifier = "receiptTransactionAmountLabel"
         return label
     }()
