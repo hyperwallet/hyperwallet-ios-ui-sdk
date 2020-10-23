@@ -1,0 +1,33 @@
+[
+    {
+        "journalId": "55047035",
+        "type": "PAYMENT",
+        "createdOn": "2019-05-24T17:35:20",
+        "entry": "CREDIT",
+        "sourceToken": "act-123456789",
+        "destinationToken": "usr-123456789",
+        "amount": "34003.00",
+        "fee": "3.50",
+        "currency": "BRL",
+        "details": {
+            "clientPaymentId": "DyClk0VG",
+            "payeeName": "Shaoyun Yang"
+        }
+    },
+    {
+        "journalId": "55047040",
+        "type": "PAYMENT",
+        "createdOn": "2019-05-24T17:39:19",
+        "entry": "CREDIT",
+        "sourceToken": "act-123456789",
+        "destinationToken": "usr-123456789",
+        "amount": "272890.00",
+        "fee": "0.89",
+        "currency": "CAD",
+        "details": {
+            "clientPaymentId": "DyClk0VGa",
+            "payeeName": "Shaoyun Yang"
+        }
+    }
+]
+

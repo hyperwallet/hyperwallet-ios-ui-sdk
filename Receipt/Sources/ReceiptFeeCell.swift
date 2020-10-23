@@ -41,6 +41,8 @@ final class ReceiptFeeCell: UITableViewCell {
         detailTextLabel?.lineBreakMode = .byWordWrapping
         detailTextLabel?.numberOfLines = 0
         detailTextLabel?.adjustsFontForContentSizeCategory = true
+        detailTextLabel?.adjustsFontSizeToFitWidth = true
+        detailTextLabel?.minimumScaleFactor = 0.5
         detailTextLabel?.accessibilityIdentifier = "\(row.field)Value"
     }
 
