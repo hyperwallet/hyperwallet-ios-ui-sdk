@@ -4,9 +4,11 @@ import XCTest
 
 class ReceiptDetailPresenterTests: XCTestCase {
     let receiptsData = HyperwalletTestHelper.getDataFromJson("UserReceiptDetails")
+    let receiptsInMultipleCurrency = HyperwalletTestHelper.getDataFromJson("UserReceiptDetailsWithMultipleCurrencies")
     var presenterNoNotes: ReceiptDetailPresenter!
     var presenterWithNotes: ReceiptDetailPresenter!
     var presenterWithIntegerAmount: ReceiptDetailPresenter!
+    var presenterWithDifferentCurrencies: ReceiptDetailPresenter!
 
     override func setUp() {
         guard let receipts = try? JSONDecoder().decode([HyperwalletReceipt].self, from: receiptsData) else {
@@ -82,9 +84,12 @@ class ReceiptDetailPresenterTests: XCTestCase {
         XCTAssertEqual(section.title, "mobileFeeInfoLabel".localized())
         XCTAssertEqual(section.rowCount, 3)
 
-        XCTAssertTrue(rowEqual(section.rows[0], "amount".localized(), "6.00 USD", "amount"))
-        XCTAssertTrue(rowEqual(section.rows[1], "mobileFeeLabel".localized(), "1.11 USD", "fee"))
-        XCTAssertTrue(rowEqual(section.rows[2], "mobileTransactionDetailsTotal".localized(), "4.89 USD", "transaction"))
+        XCTAssertTrue(rowEqual(section.rows[0], "amount".localized(), "$6.00 USD", "amount"))
+        XCTAssertTrue(rowEqual(section.rows[1], "mobileFeeLabel".localized(), "$1.11 USD", "fee"))
+        XCTAssertTrue(rowEqual(section.rows[2],
+                               "mobileTransactionDetailsTotal".localized(),
+                               "$4.89 USD",
+                               "transaction"))
     }
 
     func testSectionDebitFeeDataShouldNotBeEmpty() {
@@ -96,9 +101,12 @@ class ReceiptDetailPresenterTests: XCTestCase {
         XCTAssertEqual(section.cellIdentifier, ReceiptFeeCell.reuseIdentifier)
         XCTAssertEqual(section.rowCount, 3)
 
-        XCTAssertTrue(rowEqual(section.rows[0], "amount".localized(), "-9.87 USD", "amount"))
-        XCTAssertTrue(rowEqual(section.rows[1], "mobileFeeLabel".localized(), "0.11 USD", "fee"))
-        XCTAssertTrue(rowEqual(section.rows[2], "mobileTransactionDetailsTotal".localized(), "9.76 USD", "transaction"))
+        XCTAssertTrue(rowEqual(section.rows[0], "amount".localized(), "-$9.87 USD", "amount"))
+        XCTAssertTrue(rowEqual(section.rows[1], "mobileFeeLabel".localized(), "$0.11 USD", "fee"))
+        XCTAssertTrue(rowEqual(section.rows[2],
+                               "mobileTransactionDetailsTotal".localized(),
+                               "$9.76 USD",
+                               "transaction"))
     }
 
     func testSectionFeeDataWithIntegerAmountShouldNotBeEmpty() {
@@ -110,11 +118,11 @@ class ReceiptDetailPresenterTests: XCTestCase {
         XCTAssertEqual(section.cellIdentifier, ReceiptFeeCell.reuseIdentifier)
         XCTAssertEqual(section.rowCount, 3)
 
-        XCTAssertTrue(rowEqual(section.rows[0], "amount".localized(), "-100500 KRW", "amount"))
-        XCTAssertTrue(rowEqual(section.rows[1], "mobileFeeLabel".localized(), "500 KRW", "fee"))
+        XCTAssertTrue(rowEqual(section.rows[0], "amount".localized(), "-₩100,500 KRW", "amount"))
+        XCTAssertTrue(rowEqual(section.rows[1], "mobileFeeLabel".localized(), "₩500 KRW", "fee"))
         XCTAssertTrue(rowEqual(section.rows[2],
                                "mobileTransactionDetailsTotal".localized(),
-                               "100000 KRW",
+                               "₩100,000 KRW",
                                "transaction"))
     }
 
@@ -130,6 +138,42 @@ class ReceiptDetailPresenterTests: XCTestCase {
 
         XCTAssertNotNil(section.notes)
         XCTAssertFalse(section.notes!.isEmpty)
+    }
+
+    func testReceiptFeeDetailsForMultipleCurrencies() {
+        guard let receipts = try? JSONDecoder().decode([HyperwalletReceipt].self, from: receiptsInMultipleCurrency)
+            else {
+            XCTFail("Can't decode user receipts from test data")
+            return
+        }
+
+        presenterWithDifferentCurrencies = ReceiptDetailPresenter(with: receipts[0])
+
+        guard let section = presenterWithDifferentCurrencies.sectionData[2] as? ReceiptDetailSectionFeeData else {
+            XCTFail("Section Fee Data shouldn't be empty")
+            return
+        }
+
+        XCTAssertTrue(rowEqual(section.rows[0], "amount".localized(), "R$34,003.00 BRL", "amount"))
+        XCTAssertTrue(rowEqual(section.rows[1], "mobileFeeLabel".localized(), "R$3.50 BRL", "fee"))
+        XCTAssertTrue(rowEqual(section.rows[2],
+                               "mobileTransactionDetailsTotal".localized(),
+                               "R$33,999.50 BRL",
+                               "transaction"))
+
+        presenterWithDifferentCurrencies = ReceiptDetailPresenter(with: receipts[1])
+
+        guard let sectionOne = presenterWithDifferentCurrencies.sectionData[2] as? ReceiptDetailSectionFeeData else {
+            XCTFail("Section Fee Data shouldn't be empty")
+            return
+        }
+
+        XCTAssertTrue(rowEqual(sectionOne.rows[0], "amount".localized(), "CA$272,890.00 CAD", "amount"))
+        XCTAssertTrue(rowEqual(sectionOne.rows[1], "mobileFeeLabel".localized(), "CA$0.89 CAD", "fee"))
+        XCTAssertTrue(rowEqual(sectionOne.rows[2],
+                               "mobileTransactionDetailsTotal".localized(),
+                               "CA$272,889.11 CAD",
+                               "transaction"))
     }
 
     private func rowEqual(_ row: ReceiptDetailRow, _ title: String, _ value: String, _ field: String) -> Bool {

@@ -1,0 +1,226 @@
+{
+    "count": 13,
+    "offset": 0,
+    "limit": 20,
+    "data": [
+        {
+            "journalId": "55176991",
+            "type": "TRANSFER_TO_BANK_ACCOUNT",
+            "createdOn": "2019-05-06T18:16:17",
+            "entry": "DEBIT",
+            "sourceToken": "usr-token",
+            "destinationToken": "trm-00000000-0000-0000-0000-0000000000",
+            "amount": "0.00",
+            "currency": "USD"
+        },
+        {
+            "journalId": "55176992",
+            "type": "PAYMENT",
+            "createdOn": "2019-05-08T18:16:19",
+            "entry": "CREDIT",
+            "sourceToken": "act-00000000-0000-0000-0000-0000000000",
+            "destinationToken": "usr-00000000-0000-0000-0000-0000000000",
+            "amount": "1000000.99",
+            "fee": "0.00",
+            "currency": "USD",
+            "details": {
+                "clientPaymentId": "DyClk0VG9a",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "55176994",
+            "type": "TRANSFER_TO_BANK_ACCOUNT",
+            "createdOn": "2019-05-10T18:16:17",
+            "entry": "DEBIT",
+            "sourceToken": "usr-token",
+            "destinationToken": "trm-00000000-0000-0000-0000-0000000000",
+            "amount": "1000000000.99",
+            "fee": "2.00",
+            "currency": "USD",
+            "details": {
+                "payeeName": "Shaoyun Yang",
+                "branchId": "026009593",
+                "bankAccountId": "*****5209",
+                "bankAccountPurpose": "CHECKING"
+            }
+        },
+        {
+            "journalId": "55176994",
+            "type": "TRANSFER_TO_BANK_ACCOUNT",
+            "createdOn": "2019-05-10T18:16:17",
+            "entry": "DEBIT",
+            "sourceToken": "usr-token",
+            "destinationToken": "trm-00000000-0000-0000-0000-0000000000",
+            "amount": "10000000000000000000.99",
+            "fee": "2.00",
+            "currency": "USD",
+            "details": {
+                "payeeName": "Shaoyun Yang",
+                "branchId": "026009593",
+                "bankAccountId": "*****5209",
+                "bankAccountPurpose": "CHECKING"
+            }
+        },
+        {
+            "journalId": "55176990",
+            "type": "PAYMENT",
+            "createdOn": "2019-05-04T18:16:14",
+            "entry": "CREDIT",
+            "sourceToken": "act-00000000-0000-0000-0000-0000000000",
+            "destinationToken": "usr-token",
+            "amount": "1000000000.99",
+            "fee": "0.00",
+            "currency": "CAD",
+            "details": {
+                "clientPaymentId": "DyClk0VG6a",
+                "payeeName": "Shaoyun Yang"
+            }
+        },
+        {
+            "journalId": "3051579",
+            "type": "PAYMENT",
+            "createdOn": "2019-05-03T17:08:58",
+            "entry": "CREDIT",
+            "sourceToken": "act-12345",
+            "destinationToken": "usr-token",
+            "amount": "1000000000.99",
+            "fee": "2.25",
+            "currency": "EUR",
+            "details": {
+                "clientPaymentId": "8OxXefx5",
+                "payeeName": "A Person",
+                "website": "https://localhost",
+                "notes": "Sample payment notes",
+                "charityName": "Sample Charity",
+                "checkNumber": "Sample Check Number"
+            }
+        },
+        {
+            "journalId": "3051579",
+            "type": "PAYMENT",
+            "createdOn": "2019-05-03T17:08:58",
+            "entry": "CREDIT",
+            "sourceToken": "act-12345",
+            "destinationToken": "usr-token",
+            "amount": "1000000000.99",
+            "fee": "2.25",
+            "currency": "JOD",
+            "details": {
+                "clientPaymentId": "8OxXefx5",
+                "payeeName": "A Person",
+                "website": "https://localhost",
+                "notes": "Sample payment notes",
+                "charityName": "Sample Charity",
+                "checkNumber": "Sample Check Number"
+            }
+        },
+        {
+            "journalId": "3051579",
+            "type": "PAYMENT",
+            "createdOn": "2019-05-03T17:08:58",
+            "entry": "CREDIT",
+            "sourceToken": "act-12345",
+            "destinationToken": "usr-token",
+            "amount": "1000000000.00",
+            "fee": "2.25",
+            "currency": "ZAR",
+            "details": {
+                "clientPaymentId": "8OxXefx5",
+                "payeeName": "A Person",
+                "website": "https://localhost",
+                "notes": "Sample payment notes",
+                "charityName": "Sample Charity",
+                "checkNumber": "Sample Check Number"
+            }
+        },
+        {
+            "journalId": "3051579",
+            "type": "PAYMENT",
+            "createdOn": "2019-05-03T17:08:58",
+            "entry": "CREDIT",
+            "sourceToken": "act-12345",
+            "destinationToken": "usr-token",
+            "amount": "10000000000.00",
+            "fee": "2.25",
+            "currency": "SEK",
+            "details": {
+                "clientPaymentId": "8OxXefx5",
+                "payeeName": "A Person",
+                "website": "https://localhost",
+                "notes": "Sample payment notes",
+                "charityName": "Sample Charity",
+                "checkNumber": "Sample Check Number"
+            }
+        },
+        {
+            "journalId": "3051579",
+            "type": "PAYMENT",
+            "createdOn": "2019-05-03T17:08:58",
+            "entry": "CREDIT",
+            "sourceToken": "act-12345",
+            "destinationToken": "usr-token",
+            "amount": "1000000000.00",
+            "fee": "2.25",
+            "currency": "TND",
+            "details": {
+                "clientPaymentId": "8OxXefx5",
+                "payeeName": "A Person",
+                "website": "https://localhost",
+                "notes": "Sample payment notes",
+                "charityName": "Sample Charity",
+                "checkNumber": "Sample Check Number"
+            }
+        },
+        {
+            "journalId": "55176995",
+            "type": "TRANSFER_TO_PAYPAL_ACCOUNT",
+            "createdOn": "2019-05-02T18:16:17",
+            "entry": "CREDIT",
+            "sourceToken": "usr-token",
+            "destinationToken": "trm-00000000-0000-0000-0000-0000000000",
+            "amount": "1000000000.99",
+            "currency": "INR"
+        },
+        {
+            "journalId": "55176996",
+            "type": "TRANSFER_TO_DEBIT_CARD",
+            "createdOn": "2019-05-01T18:16:17",
+            "entry": "CREDIT",
+            "sourceToken": "usr-token",
+            "destinationToken": "trm-00000000-0000-0000-0000-0000000000",
+            "amount": "1000000000",
+            "currency": "JPY"
+        },
+        {
+            "journalId": "55176996",
+            "type": "TRANSFER_TO_DEBIT_CARD",
+            "createdOn": "2019-05-01T18:16:17",
+            "entry": "CREDIT",
+            "sourceToken": "usr-token",
+            "destinationToken": "trm-00000000-0000-0000-0000-0000000000",
+            "amount": "1000000000",
+            "currency": "VND"
+        }
+    ],
+    "links": [
+        {
+            "params": {
+                "rel": "self"
+            },
+            "href": "https://localhost/rest/v3/users/usr-token/receipts?offset=0&limit=10"
+        },
+        {
+            "params": {
+                "rel": "next"
+            },
+            "href": "https://localhost/rest/v3/users/usr-token/receipts?offset=10&limit=10"
+        },
+        {
+            "params": {
+                "rel": "last"
+            },
+            "href": "https://localhost/rest/v3/users/usr-token/receipts?offset=11&limit=10"
+        }
+    ]
+}
