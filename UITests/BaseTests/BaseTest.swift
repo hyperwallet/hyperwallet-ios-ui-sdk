@@ -59,6 +59,18 @@ class BaseTests: XCTestCase {
         mockServer.setupStub(url: "/track/events",
                              filename: "InsightsSuccessResponse",
                              method: HTTPMethod.post)
+
+        mockServer.setupStubEmpty(url: "/rest/v3/users/usr-token/prepaid-cards",
+                                  statusCode: 204,
+                                  method: HTTPMethod.get)
+
+        mockServer.setupStubEmpty(url: "/rest/v3/users/usr-token/prepaid-cards/trm-token/receipts",
+                                  statusCode: 204,
+                                  method: HTTPMethod.get)
+        mockServer.setupStubEmpty(url: "/rest/v3/users/usr-token/receipts",
+                                  statusCode: 204,
+                                  method: HTTPMethod.get)
+
         // speed up UI
         UIApplication.shared.keyWindow?.layer.speed = 100
         UIView.setAnimationsEnabled(false)
