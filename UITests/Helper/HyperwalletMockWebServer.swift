@@ -36,11 +36,9 @@ final class HyperwalletMockWebServer {
                 HttpResponse.ok(.json(json as AnyObject))
             }
 
-            switch method {
-            case HTTPMethod.get :
+            if method == .get {
                 server.GET[url] = response
-
-            case HTTPMethod.post:
+            } else {
                 server.POST[url] = response
             }
         } catch {
@@ -64,11 +62,9 @@ final class HyperwalletMockWebServer {
                 })
             }
 
-            switch method {
-            case HTTPMethod.get :
+            if method == .get {
                 server.GET[url] = response
-
-            case HTTPMethod.post:
+            } else {
                 server.POST[url] = response
             }
         } catch {
@@ -93,12 +89,10 @@ final class HyperwalletMockWebServer {
             HttpResponse.raw(statusCode, "Empty", headers, nil)
         }
 
-        switch method {
-            case HTTPMethod.get :
-                server.GET[url] = response
-
-            case HTTPMethod.post:
-                server.POST[url] = response
+        if method == .get {
+            server.GET[url] = response
+        } else {
+            server.POST[url] = response
         }
     }
 
