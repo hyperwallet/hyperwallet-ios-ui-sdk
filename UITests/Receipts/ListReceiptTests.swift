@@ -108,12 +108,9 @@ class ListReceiptTests: BaseTests {
         app.scroll(to: cell)
         XCTAssertTrue(cell.staticTexts["receiptTransactionTypeLabel"].exists)
         XCTAssertTrue(cell.staticTexts["receiptTransactionAmountLabel"].exists)
-        // XCTAssertTrue(cell.staticTexts["receiptTransactionCreatedOnLabel"].exists)
         XCTAssertTrue(cell.staticTexts["receiptTransactionCurrencyLabel"].exists)
 
         XCTAssertEqual(type, cell.staticTexts["receiptTransactionTypeLabel"].label)
-//        XCTAssertEqual(transactionDetails.getExpectedDate(date: createdOn),
-//                       cell.staticTexts["receiptTransactionCreatedOnLabel"].label)
         XCTAssertEqual(amount, cell.staticTexts["receiptTransactionAmountLabel"].label)
         XCTAssertEqual(currency, cell.staticTexts["receiptTransactionCurrencyLabel"].label)
     }

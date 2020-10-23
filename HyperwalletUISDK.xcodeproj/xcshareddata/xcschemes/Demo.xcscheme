@@ -55,11 +55,6 @@
                BlueprintName = "HyperwalletUISDKUITests"
                ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "ListReceiptTests/testReceiptDetail_verifyTransactionReceiptWithOtherCurrencies()">
-               </Test>
-            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>
