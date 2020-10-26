@@ -411,6 +411,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
 
         waitForNonExistence(spinner)
 
+        waitForExistence(transferFundsConfirmation.tranferFromSectionLabel)
         // Transfer from
         transferFundsConfirmation.verifyTransferFrom(isAvailableFunds: false)
         transferFundsConfirmation.verifyPPCInfo(brandType: transferFunds.prepaidCardVisa, endingDigit: "9285")
