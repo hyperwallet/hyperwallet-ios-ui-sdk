@@ -263,3 +263,4 @@
 "mobileTransferSuccessMsg" = "Your transfer is being processed";
 "mobileTransferSuccessDetails" = "The funds are on the way to your %1$@.";
 "noTransferFromSourceAvailable" = "No Transfer from source available";
+"transfer_to_bank_card" = "Transfer to Debit / Credit Card";
