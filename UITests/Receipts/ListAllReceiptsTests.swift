@@ -18,6 +18,7 @@ class ListAllReceiptsTests: BaseTests {
         spinner = app.activityIndicators["activityIndicator"]
     }
 
+    //selects the List All Receipts
     private func openListAllReceiptsScreen() {
         app.tables.cells.containing(.staticText, identifier: "List All Receipts").element(boundBy: 0).tap()
         waitForNonExistence(spinner)
