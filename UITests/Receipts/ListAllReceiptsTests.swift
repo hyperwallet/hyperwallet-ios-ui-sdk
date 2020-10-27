@@ -5,6 +5,7 @@ class ListAllReceiptsTests: BaseTests {
     let ppcURL = "/rest/v3/users/usr-token/prepaid-cards"
     let receiptsURL = "/rest/v3/users/usr-token/receipts"
     let ppcReceiptsURL = "/rest/v3/users/usr-token/prepaid-cards/trm-token/receipts"
+    let ppcSecondaryReceiptsURL = "/rest/v3/users/usr-token/prepaid-cards/trm-token1/receipts"
 
     override func setUp() {
         super.setUp()
@@ -167,7 +168,7 @@ class ListAllReceiptsTests: BaseTests {
         waitForNonExistence(spinner)
 
         let noTransaction = transactionDetails.getPPCNoTransactionStringYear()
-        XCTAssertEqual(transactionDetails.noPPCReceiptLabel.label, noTransaction+".")
+        XCTAssertEqual(transactionDetails.noPPCReceiptLabel.label, noTransaction)
     }
 
     /*
@@ -185,13 +186,14 @@ class ListAllReceiptsTests: BaseTests {
                              filename: "ReceiptsForOneMonth",
                              method: HTTPMethod.get)
 
-        mockServer.setupStub(url: ppcReceiptsURL,
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/prepaid-cards/trm-token2/receipts",
                              filename: "PrepaidCardOneYearReceiptsResponse",
                              method: HTTPMethod.get)
 
-        mockServer.setupStub(url: ppcReceiptsURL,
-                             filename: "PrepaidCardSecondaryReceiptsResponse",
-                             method: HTTPMethod.get)
+       mockServer.setupStub(url: ppcSecondaryReceiptsURL,
+                            filename: "PrepaidCardSecondaryReceiptsResponse",
+                            method: HTTPMethod.get)
+
         openListAllReceiptsScreen()
         waitForNonExistence(spinner)
 
@@ -210,7 +212,7 @@ class ListAllReceiptsTests: BaseTests {
         waitForNonExistence(spinner)
         XCTAssertTrue(primardCardTab.isSelected, "Primary Card tab isselected")
         // Assert PPC receipts
-       verifyCellExists_ListAll("Purchase", "2020-09-26T18:16:12", "-$100.47", "USD", at: 0)
+       verifyCellExists_ListAll("Balance Adjustment", "2020-09-26T18:16:12", "-$20.99", "USD", at: 0)
 
         // Assert PPC secondary
         secondaryCardTab.tap()
@@ -262,7 +264,7 @@ class ListAllReceiptsTests: BaseTests {
         waitForNonExistence(spinner)
         XCTAssertTrue(secondaryCardTab.isSelected, "Secondary Prepaid Card is selected")
         let noTransaction = transactionDetails.getPPCNoTransactionStringYear()
-        XCTAssertEqual(transactionDetails.noPPCReceiptLabel.label, noTransaction+".")
+        XCTAssertEqual(transactionDetails.noPPCReceiptLabel.label, noTransaction)
     }
 
     /*
@@ -310,7 +312,6 @@ class ListAllReceiptsTests: BaseTests {
         XCTAssertTrue(cell.staticTexts["receiptTransactionAmountLabel"].exists)
         XCTAssertTrue(cell.staticTexts["receiptTransactionCreatedOnLabel"].exists)
         XCTAssertTrue(cell.staticTexts["receiptTransactionCurrencyLabel"].exists)
-
         XCTAssertEqual(type, cell.staticTexts["receiptTransactionTypeLabel"].label)
         XCTAssertEqual(transactionDetails.getExpectedDate(date: createdOn),
                        cell.staticTexts["receiptTransactionCreatedOnLabel"].label)
