@@ -143,8 +143,6 @@ final class CreateTransferPresenter {
     }
 
     private func resetValues() {
-        amount = "0"
-        notes = nil
         didTapTransferAllFunds = false
         availableBalance = nil
     }
