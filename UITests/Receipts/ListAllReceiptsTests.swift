@@ -5,6 +5,7 @@ class ListAllReceiptsTests: BaseTests {
     let ppcURL = "/rest/v3/users/usr-token/prepaid-cards"
     let receiptsURL = "/rest/v3/users/usr-token/receipts"
     let ppcReceiptsURL = "/rest/v3/users/usr-token/prepaid-cards/trm-token/receipts"
+    let ppcSecondaryReceiptsURL = "/rest/v3/users/usr-token/prepaid-cards/trm-token1/receipts"
 
     override func setUp() {
         super.setUp()
@@ -17,6 +18,7 @@ class ListAllReceiptsTests: BaseTests {
         spinner = app.activityIndicators["activityIndicator"]
     }
 
+    //selects the List All Receipts
     private func openListAllReceiptsScreen() {
         app.tables.cells.containing(.staticText, identifier: "List All Receipts").element(boundBy: 0).tap()
         waitForNonExistence(spinner)
@@ -167,7 +169,7 @@ class ListAllReceiptsTests: BaseTests {
         waitForNonExistence(spinner)
 
         let noTransaction = transactionDetails.getPPCNoTransactionStringYear()
-        XCTAssertEqual(transactionDetails.noPPCReceiptLabel.label, noTransaction+".")
+        XCTAssertEqual(transactionDetails.noPPCReceiptLabel.label, noTransaction)
     }
 
     /*
@@ -185,13 +187,14 @@ class ListAllReceiptsTests: BaseTests {
                              filename: "ReceiptsForOneMonth",
                              method: HTTPMethod.get)
 
-        mockServer.setupStub(url: ppcReceiptsURL,
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/prepaid-cards/trm-token2/receipts",
                              filename: "PrepaidCardOneYearReceiptsResponse",
                              method: HTTPMethod.get)
 
-        mockServer.setupStub(url: ppcReceiptsURL,
+        mockServer.setupStub(url: ppcSecondaryReceiptsURL,
                              filename: "PrepaidCardSecondaryReceiptsResponse",
                              method: HTTPMethod.get)
+
         openListAllReceiptsScreen()
         waitForNonExistence(spinner)
 
@@ -210,7 +213,7 @@ class ListAllReceiptsTests: BaseTests {
         waitForNonExistence(spinner)
         XCTAssertTrue(primardCardTab.isSelected, "Primary Card tab isselected")
         // Assert PPC receipts
-       verifyCellExists_ListAll("Purchase", "2020-09-26T18:16:12", "-$100.47", "USD", at: 0)
+        verifyCellExists_ListAll("Balance Adjustment", "2020-09-26T18:16:12", "-$20.99", "USD", at: 0)
 
         // Assert PPC secondary
         secondaryCardTab.tap()
@@ -251,7 +254,7 @@ class ListAllReceiptsTests: BaseTests {
         XCTAssertTrue(getTransactionsAvailableFundsTab().isSelected, "Available Funds tab is selected")
 
         //Asserts AF
-         verifyCellExists_ListAll("Bank Account", "2019-05-10T18:16:17", "-$5.00", "USD", at: 0)
+        verifyCellExists_ListAll("Bank Account", "2019-05-10T18:16:17", "-$5.00", "USD", at: 0)
         waitForNonExistence(spinner)
 
         // Assert PPC exxists
@@ -262,7 +265,7 @@ class ListAllReceiptsTests: BaseTests {
         waitForNonExistence(spinner)
         XCTAssertTrue(secondaryCardTab.isSelected, "Secondary Prepaid Card is selected")
         let noTransaction = transactionDetails.getPPCNoTransactionStringYear()
-        XCTAssertEqual(transactionDetails.noPPCReceiptLabel.label, noTransaction+".")
+        XCTAssertEqual(transactionDetails.noPPCReceiptLabel.label, noTransaction)
     }
 
     /*
@@ -290,7 +293,7 @@ class ListAllReceiptsTests: BaseTests {
         verifyCellExists_ListAll("Bank Account", "2019-05-10T18:16:17", "-$5.00", "USD", at: 0)
         waitForNonExistence(spinner)
 
-         XCTAssertFalse(primardCardTab.exists, "Primary Prepaid Card does not exists")
+        XCTAssertFalse(primardCardTab.exists, "Primary Prepaid Card does not exists")
 
         XCTAssertFalse(secondaryCardTab.exists, "Secondary Prepaid Card does not exists")
     }
@@ -310,7 +313,6 @@ class ListAllReceiptsTests: BaseTests {
         XCTAssertTrue(cell.staticTexts["receiptTransactionAmountLabel"].exists)
         XCTAssertTrue(cell.staticTexts["receiptTransactionCreatedOnLabel"].exists)
         XCTAssertTrue(cell.staticTexts["receiptTransactionCurrencyLabel"].exists)
-
         XCTAssertEqual(type, cell.staticTexts["receiptTransactionTypeLabel"].label)
         XCTAssertEqual(transactionDetails.getExpectedDate(date: createdOn),
                        cell.staticTexts["receiptTransactionCreatedOnLabel"].label)
