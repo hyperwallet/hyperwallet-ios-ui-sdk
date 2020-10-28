@@ -23,6 +23,7 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
         ]
         app.launch()
 
+        addTransferMethod = AddTransferMethod(app: app)
         mockServer.setupStub(url: "/graphql",
                              filename: "TransferMethodConfigurationPayPalAccountResponse",
                              method: HTTPMethod.post)
@@ -36,7 +37,6 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
         app.tables.cells.staticTexts["Add Transfer Method"].tap()
-        addTransferMethod = AddTransferMethod(app: app)
         waitForExistence(addTransferMethod.navBarPaypal)
     }
 

@@ -30,6 +30,7 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
         ]
         app.launch()
 
+        addTransferMethod = AddTransferMethod(app: app)
         mockServer.setupStub(url: "/graphql",
                              filename: "TransferMethodConfigurationWireAccountResponse",
                              method: HTTPMethod.post)
@@ -50,7 +51,6 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
 
         otherElements = addTransferMethod.addTransferMethodTableView.otherElements
 
-        addTransferMethod = AddTransferMethod(app: app)
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
         app.tables.cells.staticTexts["Add Transfer Method"].tap()
