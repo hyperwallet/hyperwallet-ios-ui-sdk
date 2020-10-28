@@ -27,16 +27,17 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
                              filename: "TransferMethodConfigurationPayPalAccountResponse",
                              method: HTTPMethod.post)
 
-        app.tables.cells.staticTexts["Add Transfer Method"].tap()
-        spinner = app.activityIndicators["activityIndicator"]
-        waitForNonExistence(spinner)
-        addTransferMethod = AddTransferMethod(app: app)
-
         emailPatternError = addTransferMethod.getEmailPatternError(label: "Email")
         emailLengthError = addTransferMethod.getLengthConstraintError(label: "Email", min: 3, max: 200)
         emailEmptyError = addTransferMethod.getEmptyError(label: "Email")
 
         otherElements = addTransferMethod.addTransferMethodTableView.otherElements
+
+        spinner = app.activityIndicators["activityIndicator"]
+        waitForNonExistence(spinner)
+        app.tables.cells.staticTexts["Add Transfer Method"].tap()
+        addTransferMethod = AddTransferMethod(app: app)
+        waitForExistence(addTransferMethod.navBarPaypal)
     }
 
     func testAddTransferMethod_displaysElementsOnTmcResponse() {

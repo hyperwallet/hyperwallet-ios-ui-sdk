@@ -20,11 +20,13 @@ class AddTransferMethodBankAccountBusinessTests: BaseTests {
         mockServer.setupStub(url: "/graphql",
                              filename: "TransferMethodConfigurationBankAccountBusinessResponse",
                              method: HTTPMethod.post)
-        
-        addTransferMethod.addTransferMethodtable.tap()
+
+        addTransferMethod = AddTransferMethod(app: app)
+
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
-        addTransferMethod = AddTransferMethod(app: app)
+        addTransferMethod.addTransferMethodtable.tap()
+        waitForExistence(addTransferMethod.navBarBankAccount)
     }
 
     func testAddTransferMethodBankAccountBusiness_displaysElementsOnBusinessProfileTmcResponse() {
