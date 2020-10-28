@@ -231,10 +231,8 @@
 		A65312D222FC046200A83D30 /* ReceiptCoordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65312D122FC046200A83D30 /* ReceiptCoordinators.swift */; };
 		A65312D522FC055300A83D30 /* TransferMethodCoordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65312D422FC055300A83D30 /* TransferMethodCoordinators.swift */; };
 		A65312D822FC293C00A83D30 /* TransferCoordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65312D722FC293C00A83D30 /* TransferCoordinators.swift */; };
-		AB0221102540416A005CFBE1 /* ListAllReceiptsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB02210F2540416A005CFBE1 /* ListAllReceiptsTests.swift */; };
 		AB022112254041DF005CFBE1 /* PrepaidCardPrimarycardOnlyResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = AB022111254041DF005CFBE1 /* PrepaidCardPrimarycardOnlyResponse.json */; };
 		AB02211425404208005CFBE1 /* PrepaidCardOneYearReceiptsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = AB02211325404208005CFBE1 /* PrepaidCardOneYearReceiptsResponse.json */; };
-		AB02211625404C47005CFBE1 /* PrepaidCardSecondaryResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = AB02211525404C47005CFBE1 /* PrepaidCardSecondaryResponse.json */; };
 		AB02211825406490005CFBE1 /* PrepaidCardSecondaryReceiptsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = AB02211725406490005CFBE1 /* PrepaidCardSecondaryReceiptsResponse.json */; };
 		AB26C8F7252F61B60097D8CB /* ListTransferMethodManagePrepaidCard.json in Resources */ = {isa = PBXBuildFile; fileRef = AB26C8F4252F570C0097D8CB /* ListTransferMethodManagePrepaidCard.json */; };
 		ABDB501F2536CA4A00D3AF0B /* TransferMethodCreateVenmoAccount.json in Resources */ = {isa = PBXBuildFile; fileRef = ABDB501E2536CA4900D3AF0B /* TransferMethodCreateVenmoAccount.json */; };
@@ -833,10 +831,8 @@
 		A65312D122FC046200A83D30 /* ReceiptCoordinators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiptCoordinators.swift; sourceTree = "<group>"; };
 		A65312D422FC055300A83D30 /* TransferMethodCoordinators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferMethodCoordinators.swift; sourceTree = "<group>"; };
 		A65312D722FC293C00A83D30 /* TransferCoordinators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferCoordinators.swift; sourceTree = "<group>"; };
-		AB02210F2540416A005CFBE1 /* ListAllReceiptsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAllReceiptsTests.swift; sourceTree = "<group>"; };
 		AB022111254041DF005CFBE1 /* PrepaidCardPrimarycardOnlyResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardPrimarycardOnlyResponse.json; sourceTree = "<group>"; };
 		AB02211325404208005CFBE1 /* PrepaidCardOneYearReceiptsResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardOneYearReceiptsResponse.json; sourceTree = "<group>"; };
-		AB02211525404C47005CFBE1 /* PrepaidCardSecondaryResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardSecondaryResponse.json; sourceTree = "<group>"; };
 		AB02211725406490005CFBE1 /* PrepaidCardSecondaryReceiptsResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardSecondaryReceiptsResponse.json; sourceTree = "<group>"; };
 		AB26C8F4252F570C0097D8CB /* ListTransferMethodManagePrepaidCard.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ListTransferMethodManagePrepaidCard.json; sourceTree = "<group>"; };
 		ABDB501E2536CA4900D3AF0B /* TransferMethodCreateVenmoAccount.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TransferMethodCreateVenmoAccount.json; sourceTree = "<group>"; };
@@ -1274,7 +1270,6 @@
 				ABE841FB25347D9D0010240A /* VenmoReceiptsForFewMonths.json */,
 				AB022111254041DF005CFBE1 /* PrepaidCardPrimarycardOnlyResponse.json */,
 				AB02211325404208005CFBE1 /* PrepaidCardOneYearReceiptsResponse.json */,
-				AB02211525404C47005CFBE1 /* PrepaidCardSecondaryResponse.json */,
 				AB02211725406490005CFBE1 /* PrepaidCardSecondaryReceiptsResponse.json */,
 			);
 			path = Receipts;
@@ -1285,7 +1280,6 @@
 			children = (
 				09E7165522A6983400FA9B96 /* ListReceiptTests.swift */,
 				4157136222C56B4B005D6DB1 /* PrepaidCardListReceiptTests.swift */,
-				AB02210F2540416A005CFBE1 /* ListAllReceiptsTests.swift */,
 			);
 			path = Receipts;
 			sourceTree = "<group>";
@@ -2842,7 +2836,6 @@
 				64F45BD022BA27DA00515AE1 /* WireAccountIndividualResponse.json in Resources */,
 				41D8363F22FB4814003544AB /* TransferErrorOverAvailableFund.json in Resources */,
 				DBF89CB8227C072400AF4344 /* UserIndividualCountryCanadaResponse.json in Resources */,
-				AB02211625404C47005CFBE1 /* PrepaidCardSecondaryResponse.json in Resources */,
 				41C3CA1C231084DA008A904C /* AddNewTransferMethodsMoreThanOneTransferMethod.json in Resources */,
 				9807B767226442C60028A280 /* ListTransferMethodResponse.json in Resources */,
 				AB022112254041DF005CFBE1 /* PrepaidCardPrimarycardOnlyResponse.json in Resources */,
@@ -3347,7 +3340,6 @@
 				DBB2B7272261C142006C48D3 /* AddTransferMethodBankAccountIndividualTests.swift in Sources */,
 				C358A9A72272644000E5AE47 /* SelectTransferMethodType.swift in Sources */,
 				41D8361122FB425E003544AB /* TransferFunds.swift in Sources */,
-				AB0221102540416A005CFBE1 /* ListAllReceiptsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
