@@ -83,6 +83,7 @@ class AddTransferMethodWireAccountUSMoreMaskingTests: BaseTests {
      */
     func testAddTransferMethod_fourEscapeCharsTest() {
         XCTAssert(addTransferMethod.navBarWireAccount.exists)
+        app.swipeUp()
         addTransferMethod.setLastName("ABCDEF")
 
         // Assert it shows "ABC\DEF" - swift requires to enter double \\

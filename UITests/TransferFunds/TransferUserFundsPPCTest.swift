@@ -38,6 +38,9 @@ class TransferUserFundsPPCTest: BaseTests {
         transferFundPPCMenu.tap()
         waitForNonExistence(spinner)
 
+        // Verify Transfer from is Prepaid Card
+        transferFunds.verifyTransferFrom(isAvailableFunds: false)
+
         // Transfer Destination Section
         transferFunds.verifyTransferFundsTitle()
         transferFunds.verifyBankAccountDestination(type: "Bank Account", endingDigit: "1234")
@@ -74,6 +77,9 @@ class TransferUserFundsPPCTest: BaseTests {
         XCTAssertTrue(transferFundPPCMenu.exists)
         transferFundPPCMenu.tap()
         waitForNonExistence(spinner)
+
+        // Verify Transfer from is Prepaid Card
+        transferFunds.verifyTransferFrom(isAvailableFunds: false)
 
         // Add Destination Section
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)

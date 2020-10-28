@@ -2,10 +2,13 @@ import XCTest
 
 class TransferUserFundsTest: BaseTests {
     var transferFundMenu: XCUIElement!
+    var transferFundSourceMenu: XCUIElement!
     var transferFunds: TransferFunds!
     var selectDestination: TransferFundsSelectDestination!
     var addTransferMethod: AddTransferMethod!
     var elementQuery: XCUIElementQuery!
+    let listppcUrl = "/rest/v3/users/usr-token/prepaid-cards"
+    let ppcInfoUrl = "/rest/v3/users/usr-token/prepaid-cards/trm-token"
 
     var expectedUSDestinationPrepaidLabel: String = {
         if #available(iOS 11.2, *) {
@@ -40,6 +43,11 @@ class TransferUserFundsTest: BaseTests {
         transferFundMenu = app.tables.cells
             .containing(.staticText, identifier: "Transfer Funds")
             .element(boundBy: 0)
+
+        transferFundSourceMenu = app.tables.cells
+            .containing(.staticText, identifier: "Transfer Funds Source")
+            .element(boundBy: 0)
+
         transferFunds = TransferFunds(app: app)
         selectDestination = TransferFundsSelectDestination(app: app)
         addTransferMethod = AddTransferMethod(app: app)
@@ -63,6 +71,9 @@ class TransferUserFundsTest: BaseTests {
         waitForNonExistence(spinner)
 
         transferFunds.verifyTransferFundsTitle()
+
+        // TRANSFER FROM
+        transferFunds.verifyTransferFrom(isAvailableFunds: true)
 
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "mobileAddTransferMethod".localized())
@@ -328,7 +339,7 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.transferAmount.exists)
 
         transferFunds.transferAmount.tap()
-        transferFunds.transferAmount.typeText(".12345")
+        transferFunds.transferAmount.clearAmountFieldAndEnterText(text: ".12345")
 
         transferFunds.transferSectionLabel.tap()
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.12")
@@ -422,6 +433,11 @@ class TransferUserFundsTest: BaseTests {
         waitForNonExistence(spinner)
 
         transferFunds.verifyTransferFundsTitle()
+
+        // Transfer From
+        transferFunds.verifyTransferFrom(isAvailableFunds: true)
+
+        // Transfer To
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "mobileAddTransferMethod".localized())
 
@@ -429,9 +445,11 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.tapContinueButton()
         waitForNonExistence(spinner)
 
+        app.swipeDown()
+
         // Assert inline errors
-        XCTAssertEqual(transferFunds.invalidAmountError.label, "transferAmountInvalid".localized())
         XCTAssertEqual(transferFunds.transferMethodRequireError.label, "noTransferMethodAdded".localized())
+        XCTAssertEqual(transferFunds.invalidAmountError.label, "transferAmountInvalid".localized())
     }
 
     func testTransferFunds_createTransferWhenDestinationAmountNotSet() {
@@ -449,12 +467,18 @@ class TransferUserFundsTest: BaseTests {
 
         transferFunds.verifyTransferFundsTitle()
 
+        // Transfer From
+        transferFunds.verifyTransferFrom(isAvailableFunds: true)
+
+        // Transfer To
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertTrue(transferFunds.transferAmount.exists)
 
         XCTAssertTrue(transferFunds.nextLabel.exists)
         transferFunds.tapContinueButton()
         waitForNonExistence(spinner)
+
+         app.swipeDown()
 
         XCTAssertEqual(transferFunds.invalidAmountError.label, "transferAmountInvalid".localized())
     }
@@ -477,6 +501,10 @@ class TransferUserFundsTest: BaseTests {
         transferFundMenu.tap()
         waitForNonExistence(spinner)
 
+        // Transfer From
+        transferFunds.verifyTransferFrom(isAvailableFunds: true)
+
+        // Transfer To
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertTrue(transferFunds.transferAmount.exists)
 
@@ -498,6 +526,10 @@ class TransferUserFundsTest: BaseTests {
         transferFundMenu.tap()
         waitForNonExistence(spinner)
 
+        // Transfer From
+        transferFunds.verifyTransferFrom(isAvailableFunds: true)
+
+        // Transfer To
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertTrue(transferFunds.transferAmount.exists)
 
@@ -526,6 +558,10 @@ class TransferUserFundsTest: BaseTests {
         transferFundMenu.tap()
         waitForNonExistence(spinner)
 
+        // Transfer From
+        transferFunds.verifyTransferFrom(isAvailableFunds: true)
+
+        // Transfer To
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertTrue(transferFunds.transferAmount.exists)
 
@@ -570,8 +606,12 @@ class TransferUserFundsTest: BaseTests {
         waitForNonExistence(spinner)
 
         transferFunds.enterTransferAmount(amount: "1000")
-        if #available(iOS 11.0, *) {
-            transferFunds.enterNotes(description: over255String)
+
+        if #available(iOS 13.0, *) {
+            transferFunds.notesDescriptionTextField.tap()
+            transferFunds.notesDescriptionTextField.typeText(over255String)
+        } else {
+             transferFunds.enterNotes(description: over255String)
         }
 
         mockServer.setupStubError(url: "/rest/v3/transfers",
@@ -740,163 +780,208 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), expectedUSDestinationLabel + "2345")
     }
 
-    // will fix later
-    /*
-    func testTransferFunds_addBankAccountWhenMoreThanOneTransferMethods() {
+    // MARK: Select PPC as the Transfer source
+    func testTransferFunds_createTransferPrepaidCard_transferFromPrepaidCard() {
+        // Get the transfer method list
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
-                             filename: "ListOneBankAccountTransferUSD",
+                             filename: "ListMoreThanOneTransferMethod",
                              method: HTTPMethod.get)
 
+        // Get the Available funds
         mockServer.setupStub(url: "/rest/v3/transfers",
                              filename: "AvailableFundUSD",
                              method: HTTPMethod.post)
 
-        mockServer.setupStub(url: "/graphql",
-                             filename: "TransferMethodConfigurationBankAccountBusinessResponse",
+        // List the available PPC of the user to select from source
+        mockServer.setupStub(url: listppcUrl,
+                             filename: "PrepaidCardPrimaryOnlyResponse",
+                             method: HTTPMethod.get)
+
+        // Retreive details of PPC by trm-token
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/prepaid-cards/trm-token",
+                             filename: "GetPrepaidCardSuccessResponse",
+                             method: HTTPMethod.get)
+
+        XCTAssertTrue(transferFundSourceMenu.exists)
+        transferFundSourceMenu.tap()
+
+        waitForNonExistence(spinner)
+        transferFunds.verifyTransferFrom(isAvailableFunds: true)
+
+        // Select Transfer source - PPC
+        transferFunds.transferSourceTitleLabel.tap()
+        let ppcCell = app.tables.element.children(matching: .cell).element(boundBy: 1)
+        ppcCell.tap()
+
+        // Transfer From by PPC Section
+        transferFunds.verifyTransferFrom(isAvailableFunds: false)
+        transferFunds.verifyPPCInfo(brandType: transferFunds.prepaidCardVisa, endingDigit: "9285")
+
+        // Transfer Destination Section - Bank Account
+        transferFunds.verifyTransferFundsTitle()
+        transferFunds.verifyBankAccountDestination(type: "Bank Account", endingDigit: "1234")
+
+        // Transfer Section
+        XCTAssertTrue(transferFunds.transferSectionLabel.exists)
+        // Amount
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+        XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
+        XCTAssertEqual(transferFunds.transferAmountLabel.label, "Available funds $452.14 USD")
+        // Transfer max funds
+        XCTAssertTrue(transferFunds.transferMaxAllFunds.exists, "Transfer all funds switch should exist")
+
+        // NOTE
+        XCTAssertTrue(transferFunds.notesSectionLabel.exists)
+        transferFunds.verifyNotes()
+
+        // Continue Button
+        XCTAssertTrue(transferFunds.nextLabel.exists)
+    }
+
+    /*
+     Given that user selects a Secondary Prepaid Card method for Transfer From
+     When create transfer with a Bank Account Transfer To method
+     Then user can create transfer successfully
+     */
+    func testTransferFunds_TransferFromSecondaryPPC() {
+        // Get the transfer method list
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+                             filename: "ListMoreThanOneTransferMethod",
+                             method: HTTPMethod.get)
+
+        // Get the Available funds
+        mockServer.setupStub(url: "/rest/v3/transfers",
+                             filename: "AvailableFundUSD",
                              method: HTTPMethod.post)
 
-        transferFundMenu.tap()
+        // List the available PPC of the user to select from source
+        mockServer.setupStub(url: listppcUrl,
+                             filename: "PrepaidCardSecondaryResponse",
+                             method: HTTPMethod.get)
+
+        // Retreive details of PPC by trm-token
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/prepaid-cards/trm-token",
+                             filename: "GetPrepaidCardSuccessResponse",
+                             method: HTTPMethod.get)
+
+        XCTAssertTrue(transferFundSourceMenu.exists)
+        transferFundSourceMenu.tap()
+
         waitForNonExistence(spinner)
+        transferFunds.verifyTransferFrom(isAvailableFunds: true)
 
         transferFunds.verifyTransferFundsTitle()
 
+        // TRANSFER FROM
+        transferFunds.verifyTransferFrom(isAvailableFunds: true)
+
+        // Available Funds
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+        XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
+        let balance = String(format: transferFunds.availableBalanceFormat, "$", "452.14", "USD")
+        XCTAssertEqual(transferFunds.transferAmountLabel.label, balance)
+
+        // TRANSFER TO
+        XCTAssertTrue(transferFunds.transferSectionLabel.exists)
         // Add Destination Section
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
-        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
+        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, TransferMethods.bankAccount)
 
-        transferFunds.verifyBankAccountDestination(type: "Bank Account", endingDigit: "6789")
+        transferFunds.verifyBankAccountDestination(type: TransferMethods.bankAccount, endingDigit: "1234")
 
-        transferFunds.addSelectDestinationLabel.tap()
+        // assert NOTE
+        XCTAssertTrue(transferFunds.notesSectionLabel.exists)
+
+        // assert Continue button
+
+        app.scroll(to: transferFunds.nextLabel)
+        XCTAssertTrue(transferFunds.nextLabel.exists)
+
+        transferFunds.transferSourceTitleLabel.tap()
+
+        // Assert Transfer from list
+        let transferFromTitle = transferFunds.getTransferFromTitle()
+        XCTAssertEqual(transferFromTitle.label, transferFunds.transferFromHeaderLabel)
+        XCTAssertEqual(transferFunds.getSelectSourceRowTitle(index: 0), transferFunds.availableFunds)
+        XCTAssertEqual(transferFunds.getSelectSourceRowTitle(index: 1), transferFunds.prepaidCard)
+        XCTAssertEqual(transferFunds.getSelectSourceRowTitle(index: 2), transferFunds.prepaidCard)
+
+        let ppcCell = app.tables.element.children(matching: .cell).element(boundBy: 1)
+        ppcCell.tap()
         waitForNonExistence(spinner)
 
-        XCTAssertTrue(selectDestination.selectDestinationTitle.exists)
-        XCTAssertTrue(selectDestination.addTransferMethodButton.exists)
-        XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 0), "Bank Account")
-        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), expectedUSDestinationLabel + "6789")
+        transferFunds.verifyTransferFrom(isAvailableFunds: false)
+        transferFunds.verifyPPCInfo(brandType: transferFunds.prepaidCardVisa, endingDigit: "8884")
+    }
 
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/bank-accounts",
-                             filename: "BankAccountIndividualResponse",
-                             method: HTTPMethod.post)
-        selectDestination.addTransferMethodButton.tap()
-        // Assert Add a transfer method View
-        XCTAssertTrue(app.navigationBars["mobileAddTransferMethodHeader".localized()].exists)
-        XCTAssertTrue(app.tables.staticTexts["United States"].exists)
-        XCTAssertTrue(app.tables.staticTexts["USD"].exists)
-
-        // Tap on Bank Account
-        app.tables["selectTransferMethodTypeTable"].cells["Bank Account"].tap()
-
-        XCTAssert(app.navigationBars["Bank Account"].exists)
-        addTransferMethod.setBranchId("021000021")
-        addTransferMethod.setBankAccountId("12345")
-        addTransferMethod.selectAccountType("CHECKING")
-
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
-                             filename: "AddNewTransferMethodsMoreThanOneTransferMethod",
-                             method: HTTPMethod.get)
-
-        addTransferMethod.clickCreateTransferMethodButton()
-        waitForNonExistence(spinner)
-
-        // Assert navigate to the Transfer Fund again
-        transferFunds.verifyTransferFundsTitle()
-
-        transferFunds.verifyBankAccountDestination(type: "Bank Account", endingDigit: "2345")
-
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
-                             filename: "AddNewTransferMethodsMoreThanOneTransferMethod",
-                             method: HTTPMethod.get)
-        transferFunds.addSelectDestinationLabel.tap()
-        waitForNonExistence(spinner)
-        XCTAssertTrue(selectDestination.selectDestinationTitle.exists)
-        XCTAssertTrue(selectDestination.addTransferMethodButton.exists)
-        XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 0), "Bank Account")
-        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), expectedUSDestinationLabel + "6789")
-        XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 1), "Bank Account")
-        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 1), expectedUSDestinationLabel + "2345")
-    } */
-
-    // it passed on my local but not remote, so will comment it out for now
-    /* Given that Transfer methods exist And there is NO available fund
-     When user tabs on the Transfer Fund menu
-     Then will see the error
-     */
+    // MARK: Select PPC as the Transfer Destination
     /*
-     func testTransferFunds_createTransferMinimumAmountError() {
-     mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
-     filename: "ListOneBankAccountTransferUSD",
-     method: HTTPMethod.get)
-
-     mockServer.setupStub(url: "/rest/v3/transfers",
-     filename: "AvailableFundZero",
-     method: HTTPMethod.post)
-
-     XCTAssertTrue(transferFundMenu.exists)
-     transferFundMenu.tap()
-     mockServer.setupStubError(url: "/rest/v3/transfers",
-     filename: "TransferErrorAmountLessThanFee",
-     method: HTTPMethod.post)
-
-     waitForNonExistence(spinner)
-
-     if #available(iOS 12.0, *) {
-     waitForExistence(app.alerts["Error"])
-     XCTAssert(app.alerts["Error"].exists)
-     let predicate = NSPredicate(format:
-     "label CONTAINS[c] 'Amount is less than the fee amount'")
-     XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
-     }
-     }
-     */
-
-    /*
-
-     Given thatTransfer methods exist
-     AND PrepaidCard Transfer method is selected
-     When Payee enters the amount in non-digit amount currency for eg. JPY or KRW
+     Given that Transfer methods exist that contains prepaid cards as well
+     AND user selects Prepaid Card as the Transfer To
+     When Payee enters the amount and Notes
      Then Next button is enabled
      */
-    /*
-     func testTransferFunds_createTransferDestinationAmount_JPY() {
-     mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
-     filename: "ListOneBankAccountTransferJPY",
-     method: HTTPMethod.get)
+    func testTransferFunds_createTransfer_transferTosPrepaidCard() {
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+                             filename: "ListMoreThanOneTransferMethod",
+                             method: HTTPMethod.get)
 
-     mockServer.setupStub(url: "/rest/v3/transfers",
-     filename: "AvailableFundJPY",
-     method: HTTPMethod.get)
+        // Get the Available funds
+        mockServer.setupStub(url: "/rest/v3/transfers",
+                             filename: "AvailableFundUSD",
+                             method: HTTPMethod.post)
+        // List the available PPC of the user to select from source
+        mockServer.setupStub(url: listppcUrl,
+                             filename: "PrepaidCardPrimaryOnlyResponse",
+                             method: HTTPMethod.get)
 
-     XCTAssertTrue(transferFundMenu.exists)
-     transferFundMenu.tap()
-     waitForNonExistence(spinner)
+        // Retreive details of PPC by trm-token
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/prepaid-cards/trm-token",
+                             filename: "GetPrepaidCardSuccessResponse",
+                             method: HTTPMethod.get)
 
-     XCTAssertTrue(transferFunds.transferFundTitle.exists)
-     XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
-     XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
+        XCTAssertTrue(transferFundMenu.exists)
+        transferFundMenu.tap()
+        waitForNonExistence(spinner)
+        // Select PPC as the transfer method from Destination
 
-     XCTAssertEqual(transferFunds.transferSectionLabel.label, "TRANSFER")
-     XCTAssertEqual(transferFunds.transferAmountLabel.label, "Amount")
-     XCTAssertEqual(transferFunds.transferCurrency.label, "JPY")
+        transferFunds.verifyBankAccountDestination(type: TransferMethods.bankAccount, endingDigit: "1234")
+        transferFunds.addSelectDestinationLabel.tap()
 
-     //let availableFunds = app.tables["createTransferTableView"].staticTexts["Available for transfer: 10000"]
-     //XCTAssertTrue(availableFunds.exists)
-     } */
+        let usdBankAccount = app.tables.element.children(matching: .cell).element(boundBy: 0)
+        let cadBankAccount = app.tables.element.children(matching: .cell).element(boundBy: 1)
+        let prepaidCardTransferMethod = app.tables.element.children(matching: .cell).element(boundBy: 2)
 
-    /*
-     func testTransferFunds_createTransferConnectionError() {
-     mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
-     filename: "ListMoreThanOneTransferMethod",
-     method: HTTPMethod.get)
-     mockServer.setUpConnectionResponse(url: "/rest/v3/transfer", filename: "AvailableFundUSD", method: HTTPMethod.post)
-     XCTAssertTrue(transferFundMenu.exists)
-     transferFundMenu.tap()
-     
-     waitForNonExistence(spinner)
-     
-     let predicate = NSPredicate(format:
-     "label CONTAINS[c] 'We are encountering a problem processing the request. Please check your connectivity'")
-     
-     XCTAssertTrue(app.alerts["Connectivity Issue"].staticTexts.element(matching: predicate).exists)
-     }
-     */
+        XCTAssertTrue(selectDestination.selectDestinationTitle.exists)
+        XCTAssertTrue(selectDestination.addTransferMethodButton.exists)
+
+        waitForNonExistence(spinner)
+        XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 0), TransferMethods.bankAccount)
+        //XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), expectedUSDestinationLabel + "1234")
+
+        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0),
+                       transferFunds.getDestinationLabel(country: "United States",
+                                                         type: TransferMethods.bankAccount,
+                                                         endingDigit: "1234"))
+
+        XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 1), TransferMethods.bankAccount)
+
+        XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 2), TransferMethods.prepaidCard)
+        let ppcInfo = "United States\n\(transferFunds.prepaidCardVisa)\(transferFunds.numberMask)4281"
+        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 2), ppcInfo)
+
+        // Assert first row is checked by default
+        assertButtonTrue(element: usdBankAccount)
+        assertButtonFalse(element: cadBankAccount)
+        assertButtonFalse(element: prepaidCardTransferMethod)
+
+        // Select Prepaid card as the destination
+        selectDestination.tapSelectDestinationRow(index: 2)
+        // Assert can go back to previous page
+        waitForNonExistence(spinner)
+        XCTAssertTrue(app.navigationBars[transferFunds.title].exists)
+
+        // Assert Prepaid Card is set as the Destination
+        transferFunds.verifyPrepaidCardDestination(brandType: transferFunds.prepaidCardVisa, endingDigit: "4281")
+    }
 }
