@@ -20,8 +20,7 @@ class AddTransferMethodBankAccountBusinessTests: BaseTests {
         mockServer.setupStub(url: "/graphql",
                              filename: "TransferMethodConfigurationBankAccountBusinessResponse",
                              method: HTTPMethod.post)
-
-        addTransferMethod = AddTransferMethod(app: app)
+        
         addTransferMethod.addTransferMethodtable.tap()
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)

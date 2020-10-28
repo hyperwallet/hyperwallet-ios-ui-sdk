@@ -1,7 +1,6 @@
 import XCTest
 
 class AddTransferMethodPayPalAccountTests: BaseTests {
-    var selectTransferMethodType: SelectTransferMethodType!
     var addTransferMethod: AddTransferMethod!
     let payPalAccount = NSPredicate(format: "label CONTAINS[c] 'PayPal'")
     var otherElements: XCUIElementQuery!
@@ -31,7 +30,6 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
         app.tables.cells.staticTexts["Add Transfer Method"].tap()
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
-        selectTransferMethodType = SelectTransferMethodType(app: app)
         addTransferMethod = AddTransferMethod(app: app)
 
         emailPatternError = addTransferMethod.getEmailPatternError(label: "Email")

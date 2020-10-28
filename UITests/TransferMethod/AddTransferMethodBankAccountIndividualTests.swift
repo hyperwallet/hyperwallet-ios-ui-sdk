@@ -39,8 +39,8 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
         addTransferMethod = AddTransferMethod(app: app)
 
         spinner = app.activityIndicators["activityIndicator"]
-        waitForNonExistence(spinner)
         addTransferMethod.addTransferMethodtable.tap()
+        waitForNonExistence(spinner)
 
         branchIdPatternError = addTransferMethod.getPatternError(label: addTransferMethod.routingNumber)
         bankAccountIdPatternError = addTransferMethod.getPatternError(label: addTransferMethod.accountNumber)

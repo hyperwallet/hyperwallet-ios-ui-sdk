@@ -21,7 +21,6 @@ class AddTransferMethodVemoAccountTests: BaseTests {
                              filename: "TransferMethodVenmoResponse",
                              method: HTTPMethod.post)
 
-        addTransferMethod = AddTransferMethod(app: app)
         addTransferMethod.addTransferMethodtable.tap()
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
