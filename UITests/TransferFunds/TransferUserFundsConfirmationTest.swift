@@ -404,7 +404,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         ppcCell.tap()
 
         // Enter transfer amount
-        transferFunds.transferMaxAllFunds.tap()
+        transferFunds.transferMaxAllFunds.doubleTap()
 
         // Navigate to Confirmation Detail
         transferFunds.tapContinueButton()
