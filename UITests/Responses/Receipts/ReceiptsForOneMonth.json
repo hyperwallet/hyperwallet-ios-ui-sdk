@@ -98,6 +98,23 @@
             "destinationToken": "trm-00000000-0000-0000-0000-0000000000",
             "amount": "5.00",
             "currency": "USD"
+        },
+        {
+            "journalId": "55176997",
+            "type": "TRANSFER_TO_BANK_CARD",
+            "createdOn": "2019-05-10T23:16:17",
+            "entry": "DEBIT",
+            "sourceToken": "usr-token",
+            "destinationToken": "trm-00000000-0000-0000-0000-0000000000",
+            "amount": "8393993.00",
+            "fee": "345.00",
+            "currency": "USD",
+            "details": {
+                "payeeName": "Shaoyun Yang",
+                "branchId": "026009593",
+                "bankAccountId": "*****5209",
+                "bankAccountPurpose": "CHECKING"
+            }
         }
     ],
     "links": [
