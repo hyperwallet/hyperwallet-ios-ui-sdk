@@ -331,7 +331,7 @@ final class CreateTransferPresenter {
 
             case .success(let transfer):
                 strongSelf.availableBalance = transfer?.destinationAmount
-                if strongSelf.didTapTransferAllFunds { strongSelf.amount = strongSelf.availableBalance ?? "" }
+                if strongSelf.didTapTransferAllFunds { strongSelf.amount = strongSelf.availableBalance ?? "0" }
                 strongSelf.transferSourceCellConfigurations.forEach {
                     $0.availableBalance = transfer?.destinationAmount
                     $0.destinationCurrency = strongSelf.selectedTransferDestination?.transferMethodCurrency
