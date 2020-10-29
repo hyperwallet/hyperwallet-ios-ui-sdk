@@ -84,6 +84,8 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
     }
 
     func testAddTransferMethod_verifyNotEditableFields() {
+        waitForExistence(addTransferMethod.branchIdInput)
+
         addTransferMethod.firstNameInput.tap()
         XCTAssertFalse(app.keyboards.element.exists)
         addTransferMethod.lastNameInput.tap()
@@ -91,6 +93,7 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidPattern() {
+        waitForExistence(addTransferMethod.branchIdInput)
         addTransferMethod.setBranchId("abc123abc")
         addTransferMethod.setBankAccountId("1a31a")
 
@@ -106,6 +109,7 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidLength() {
+        waitForExistence(addTransferMethod.branchIdInput)
         addTransferMethod.setBranchId("91")
         addTransferMethod.setBankAccountId("19")
 
@@ -120,6 +124,8 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidPresence() {
+        waitForExistence(addTransferMethod.branchIdInput)
+
         addTransferMethod.setBranchId("")
         addTransferMethod.setBankAccountId("")
 
@@ -134,6 +140,8 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
         mockServer.setupStubError(url: "/rest/v3/users/usr-token/bank-accounts",
                                   filename: "BankAccountInvalidRoutingResponse",
                                   method: HTTPMethod.post)
+
+        waitForExistence(addTransferMethod.branchIdInput)
 
         addTransferMethod.setBranchId("021000022")
         addTransferMethod.setBankAccountId("12345")
@@ -151,6 +159,8 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
                              filename: "BankAccountIndividualResponse",
                              method: HTTPMethod.post)
 
+        waitForExistence(addTransferMethod.branchIdInput)
+
         addTransferMethod.setBranchId("021000021")
         addTransferMethod.setBankAccountId("12345")
         addTransferMethod.selectAccountType("CHECKING")
@@ -165,6 +175,8 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
         mockServer.setupStubError(url: "/rest/v3/users/usr-token/bank-accounts",
                                   filename: "UnexpectedErrorResponse",
                                   method: HTTPMethod.post)
+
+        waitForExistence(addTransferMethod.branchIdInput)
 
         addTransferMethod.setBranchId("021000022")
         addTransferMethod.setBankAccountId("12345")

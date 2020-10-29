@@ -30,7 +30,10 @@ class AddTransferMethodBankAccountBusinessTests: BaseTests {
     }
 
     func testAddTransferMethodBankAccountBusiness_displaysElementsOnBusinessProfileTmcResponse() {
+        waitForNonExistence(spinner)
         XCTAssert(addTransferMethod.navBarBankAccount.exists)
+        waitForExistence(addTransferMethod.branchIdInput)
+
         let accountInformation = String(format: "account_information".localized(), "UNITED STATES", "USD")
         XCTAssert(addTransferMethod.addTransferMethodTableView.otherElements[accountInformation].exists)
         XCTAssertEqual(addTransferMethod.branchIdLabel.label, "Routing Number")
@@ -72,6 +75,8 @@ class AddTransferMethodBankAccountBusinessTests: BaseTests {
                              method: HTTPMethod.post)
 
         waitForNonExistence(spinner)
+        XCTAssert(addTransferMethod.navBarBankAccount.exists)
+        waitForExistence(addTransferMethod.branchIdInput)
 
         addTransferMethod.setBranchId("021000021")
         addTransferMethod.setBankAccountId("7861012347")
