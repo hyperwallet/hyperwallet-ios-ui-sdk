@@ -135,16 +135,10 @@ final class CreateTransferPresenter {
     }
 
     func loadCreateTransferFromSelectedTransferSource(sourceToken: String) {
-        resetValues()
         transferSourceCellConfigurations.forEach { $0.isSelected = false }
         transferSourceCellConfigurations
             .first(where: { $0.token == sourceToken })?.isSelected = true
         loadTransferMethods()
-    }
-
-    private func resetValues() {
-        didTapTransferAllFunds = false
-        availableBalance = nil
     }
 
     private func loadPrepaidCardAndCreateTransfer(token: String) {
@@ -337,6 +331,7 @@ final class CreateTransferPresenter {
 
             case .success(let transfer):
                 strongSelf.availableBalance = transfer?.destinationAmount
+                if strongSelf.didTapTransferAllFunds { strongSelf.amount = strongSelf.availableBalance ?? "" }
                 strongSelf.transferSourceCellConfigurations.forEach {
                     $0.availableBalance = transfer?.destinationAmount
                     $0.destinationCurrency = strongSelf.selectedTransferDestination?.transferMethodCurrency
