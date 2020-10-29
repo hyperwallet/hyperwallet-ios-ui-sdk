@@ -1,7 +1,6 @@
 import XCTest
 
 class AddTransferMethodPayPalAccountTests: BaseTests {
-    var selectTransferMethodType: SelectTransferMethodType!
     var addTransferMethod: AddTransferMethod!
     let payPalAccount = NSPredicate(format: "label CONTAINS[c] 'PayPal'")
     var otherElements: XCUIElementQuery!
@@ -24,21 +23,21 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
         ]
         app.launch()
 
+        addTransferMethod = AddTransferMethod(app: app)
         mockServer.setupStub(url: "/graphql",
                              filename: "TransferMethodConfigurationPayPalAccountResponse",
                              method: HTTPMethod.post)
-
-        app.tables.cells.staticTexts["Add Transfer Method"].tap()
-        spinner = app.activityIndicators["activityIndicator"]
-        waitForNonExistence(spinner)
-        selectTransferMethodType = SelectTransferMethodType(app: app)
-        addTransferMethod = AddTransferMethod(app: app)
 
         emailPatternError = addTransferMethod.getEmailPatternError(label: "Email")
         emailLengthError = addTransferMethod.getLengthConstraintError(label: "Email", min: 3, max: 200)
         emailEmptyError = addTransferMethod.getEmptyError(label: "Email")
 
         otherElements = addTransferMethod.addTransferMethodTableView.otherElements
+
+        spinner = app.activityIndicators["activityIndicator"]
+        waitForNonExistence(spinner)
+        app.tables.cells.staticTexts["Add Transfer Method"].tap()
+        waitForExistence(addTransferMethod.navBarPaypal)
     }
 
     func testAddTransferMethod_displaysElementsOnTmcResponse() {

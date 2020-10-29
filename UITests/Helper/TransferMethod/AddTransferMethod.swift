@@ -72,6 +72,7 @@ class AddTransferMethod {
     var navBarDebitCard: XCUIElement
     var navBarWireAccount: XCUIElement
     var navBarPaypal: XCUIElement
+    var navBarVenmo: XCUIElement
     var cardNumberError: XCUIElement!
     var cvvNumberError: XCUIElement!
     var dateOfExpiryError: XCUIElement
@@ -112,6 +113,7 @@ class AddTransferMethod {
         navBarDebitCard = app.navigationBars["bank_card".localized()]
         navBarWireAccount = app.navigationBars["wire_account".localized()]
         navBarPaypal = app.navigationBars["paypal_account".localized()]
+        navBarVenmo = app.navigationBars["venmo_account".localized()]
         addTransferMethodtable = app.tables.cells.staticTexts["Add Transfer Method"]
         addTransferMethodTableView = app.tables["addTransferMethodTable"]
         createTransferMethodButton = addTransferMethodTableView.buttons["createAccountButton"]

@@ -48,7 +48,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         // Transfer max funds
         XCTAssertTrue(transferFunds.transferMaxAllFunds.exists, "Transfer all funds switch should exist")
         // tap Transfer max funds
-        transferFunds.transferMaxAllFunds.tap()
+        transferFunds.transferMaxAllFunds.doubleTap()
 
         mockServer.setupStub(url: "/rest/v3/transfers",
                              filename: "AvailableFundUSD",
@@ -113,7 +113,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
         XCTAssertEqual(transferFunds.transferAmountLabel.label, "Available funds $5,855.17 USD")
 
-        transferFunds.transferMaxAllFunds.tap()
+        transferFunds.transferMaxAllFunds.doubleTap()
 
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "5,855.17")
 
@@ -200,7 +200,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
         XCTAssertEqual(transferFunds.transferAmountLabel.label, "Available funds $5,855.17 USD")
 
-        transferFunds.transferMaxAllFunds.tap()
+        transferFunds.transferMaxAllFunds.doubleTap()
 
         //verify venmo destination
         waitForExistence(transferFunds.addSelectDestinationLabel)
@@ -254,7 +254,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
         XCTAssertEqual(transferFunds.transferAmountLabel.label, "Available funds $5,855.17 USD")
 
-        transferFunds.transferMaxAllFunds.tap()
+        transferFunds.transferMaxAllFunds.doubleTap()
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "5,855.17")
         transferFunds.tapContinueButton()
 
@@ -296,7 +296,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
 
-        transferFunds.transferMaxAllFunds.tap()
+        transferFunds.transferMaxAllFunds.doubleTap()
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "5,855.17")
 
         mockServer.setupStub(url: "/rest/v3/transfers",
@@ -333,7 +333,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
 
         // Tap to insert max amounts to transfer
-        transferFunds.transferMaxAllFunds.tap()
+        transferFunds.transferMaxAllFunds.doubleTap()
 
         // Assert Destination Amount is automatically insert into the amount field
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "452.14")
