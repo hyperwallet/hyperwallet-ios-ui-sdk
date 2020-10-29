@@ -64,6 +64,7 @@ class ListAllReceiptsTests: BaseTests {
      When user selects the "Transaction" tab
      Then user can see the tabs for Primary PPC and receipts
      */
+
     func testListAllReceipts_NavigateToTransactionsPPCTabs() {
         waitForNonExistence(spinner)
         mockServer.setupStub(url: ppcURL,
@@ -112,6 +113,7 @@ class ListAllReceiptsTests: BaseTests {
      When user selects the "Transaction" tab
      Then user can see the tabs for Available funds and Place holder text
      */
+
     func testListAllReceipts_NavigateToTransactionsAvailbleFundsNoTransactions() {
         waitForNonExistence(spinner)
         mockServer.setupStub(url: ppcURL,
@@ -137,6 +139,7 @@ class ListAllReceiptsTests: BaseTests {
         let noTransaction = transactionDetails.getNoTransactionStrings()
         XCTAssertEqual(transactionDetails.noPPCReceiptLabel.label, noTransaction)
     }
+
     /*
      Given user has Available funds and Primary PPC and PPC has no transactions
      When user selects the "Transaction" tab
@@ -298,6 +301,7 @@ class ListAllReceiptsTests: BaseTests {
         XCTAssertFalse(secondaryCardTab.exists, "Secondary Prepaid Card does not exists")
     }
 
+    //Asserts the transactions
     func getTransactionsAvailableFundsTab() -> XCUIElement {
         app.tables.buttons["Available Funds"]
     }
