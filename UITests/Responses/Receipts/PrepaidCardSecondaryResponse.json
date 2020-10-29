@@ -4,8 +4,8 @@
     "limit": 10,
     "data": [
         {
-            "token": "trm-token1",
-            "primaryCardToken": "trm-token1",
+            "token": "trm-token2",
+            "primaryCardToken": "trm-token",
             "type": "PREPAID_CARD",
             "status": "ACTIVATED",
             "verificationStatus": "NOT_REQUIRED",
@@ -23,12 +23,12 @@
                     "params": {
                         "rel": "self"
                     },
-                    "href": "https://localhost.com/rest/v3/users/usr-token/prepaid-cards/trm-token1"
+                    "href": "https://localhost.com/rest/v3/users/usr-token/prepaid-cards/trm-token2"
                 }
             ]
         },
         {
-            "token": "trm-token2",
+            "token": "trm-token",
             "type": "PREPAID_CARD",
             "status": "ACTIVATED",
             "verificationStatus": "NOT_REQUIRED",
@@ -46,7 +46,7 @@
                     "params": {
                         "rel": "self"
                     },
-                    "href": "https://localhost.com/rest/v3/users/usr-7f512d44-9743-42c7-acf4-b1b35c8ce244/prepaid-cards/trm-token2"
+                    "href": "https://localhost.com/rest/v3/users/usr-7f512d44-9743-42c7-acf4-b1b35c8ce244/prepaid-cards/trm-token"
                 }
             ]
         }

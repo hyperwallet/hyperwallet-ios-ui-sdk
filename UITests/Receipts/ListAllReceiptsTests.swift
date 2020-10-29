@@ -4,8 +4,8 @@ class ListAllReceiptsTests: BaseTests {
     private var transactionDetails: TransactionDetails!
     let ppcURL = "/rest/v3/users/usr-token/prepaid-cards"
     let receiptsURL = "/rest/v3/users/usr-token/receipts"
-    let ppcReceiptsURL = "/rest/v3/users/usr-token/prepaid-cards/trm-token/receipts"
-    let ppcSecondaryReceiptsURL = "/rest/v3/users/usr-token/prepaid-cards/trm-token1/receipts"
+    let ppcPrimaryReceiptsURL = "/rest/v3/users/usr-token/prepaid-cards/trm-token/receipts"
+    let ppcSecondaryReceiptsURL = "/rest/v3/users/usr-token/prepaid-cards/trm-token2/receipts"
 
     override func setUp() {
         super.setUp()
@@ -42,7 +42,7 @@ class ListAllReceiptsTests: BaseTests {
                              filename: "ReceiptsForOneMonth",
                              method: HTTPMethod.get)
 
-        mockServer.setupStub(url: ppcReceiptsURL,
+        mockServer.setupStub(url: ppcPrimaryReceiptsURL,
                              filename: "PrepaidCardOneYearReceiptsResponse",
                              method: HTTPMethod.get)
 
@@ -74,7 +74,7 @@ class ListAllReceiptsTests: BaseTests {
                              filename: "ReceiptsForOneMonth",
                              method: HTTPMethod.get)
 
-        mockServer.setupStub(url: ppcReceiptsURL,
+        mockServer.setupStub(url: ppcPrimaryReceiptsURL,
                              filename: "PrepaidCardOneYearReceiptsResponse",
                              method: HTTPMethod.get)
 
@@ -120,7 +120,7 @@ class ListAllReceiptsTests: BaseTests {
 
         mockServer.setupStubEmpty(url: receiptsURL, statusCode: 204, method: HTTPMethod.get)
 
-        mockServer.setupStub(url: ppcReceiptsURL,
+        mockServer.setupStub(url: ppcPrimaryReceiptsURL,
                              filename: "PrepaidCardOneYearReceiptsResponse",
                              method: HTTPMethod.get)
 
@@ -153,7 +153,7 @@ class ListAllReceiptsTests: BaseTests {
                              filename: "ReceiptsForOneMonth",
                              method: HTTPMethod.get)
 
-        mockServer.setupStubEmpty(url: ppcReceiptsURL, statusCode: 204, method: HTTPMethod.get)
+        mockServer.setupStubEmpty(url: ppcPrimaryReceiptsURL, statusCode: 204, method: HTTPMethod.get)
 
         openListAllReceiptsScreen()
         waitForNonExistence(spinner)
@@ -187,7 +187,7 @@ class ListAllReceiptsTests: BaseTests {
                              filename: "ReceiptsForOneMonth",
                              method: HTTPMethod.get)
 
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/prepaid-cards/trm-token2/receipts",
+        mockServer.setupStub(url: ppcPrimaryReceiptsURL,
                              filename: "PrepaidCardOneYearReceiptsResponse",
                              method: HTTPMethod.get)
 
@@ -239,9 +239,9 @@ class ListAllReceiptsTests: BaseTests {
                              filename: "ReceiptsForOneMonth",
                              method: HTTPMethod.get)
 
-        mockServer.setupStubEmpty(url: ppcReceiptsURL, statusCode: 204, method: HTTPMethod.get)
+        mockServer.setupStubEmpty(url: ppcPrimaryReceiptsURL, statusCode: 204, method: HTTPMethod.get)
 
-        mockServer.setupStubEmpty(url: ppcReceiptsURL, statusCode: 204, method: HTTPMethod.get)
+        mockServer.setupStubEmpty(url: ppcSecondaryReceiptsURL, statusCode: 204, method: HTTPMethod.get)
         openListAllReceiptsScreen()
         waitForNonExistence(spinner)
 
