@@ -383,10 +383,10 @@ class ListTransferMethodTests: BaseTests {
 
         openTransferMethodsList()
 
-        XCTAssertTrue( app.tables.cells.containing(.staticText,
-                                                   identifier: "venmo_account".localized()).element(boundBy: 0).exists)
-        XCTAssertTrue( app.tables.cells.containing(.staticText,
-                                                   identifier: "venmo_account".localized()).element(boundBy: 1).exists)
+        XCTAssertTrue( app.tables.cells.containing(.staticText, identifier: "venmo_account".localized())
+            .element(boundBy: 0).exists)
+        XCTAssertTrue( app.tables.cells.containing(.staticText, identifier: "venmo_account".localized())
+            .element(boundBy: 1).exists)
 
         let expectedFirstBankAccountLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "5555")
         let expectedSecondBankAccountLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "5556")
