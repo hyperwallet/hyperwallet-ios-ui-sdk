@@ -60,8 +60,8 @@
 "paper_check" = "Paper Check";
 "prepaid_card" = "Prepaid Card";
 "wire_account" = "Wire Transfer Account";
-"paypal_account" = "PayPal";
-"venmo_account" = "Venmo";
+"paypal_account" = "PayPal Account";
+"venmo_account" = "Venmo Account";
 "cash_pickup_mg" = "MoneyGram";
 
 "visa" = "Visa";
@@ -107,7 +107,7 @@
 "card_fee" = "Card Fee";
 "customer_service_fee_refund" = "Customer Service Fee Refund";
 "customer_service_fee" = "Customer Service Fee";
-"deposit" = "Funds Deposit";
+"deposit" = "Payment";
 "donation_fee" = "Donation Fee";
 "donation_return" = "Donation Return";
 "donation" = "Donation";
@@ -178,8 +178,8 @@
 "venmo_account_transfer_return" = "Cashout Return";
 "prepaid_card_account_deposit" = "Account Deposit";
 "prepaid_card_annual_fee_discount" = "Annual fee discount";
-"prepaid_card_bill_reprint_fee" = "Bill re-print";
-"prepaid_card_atm_or_cash_advance_fee" = "ATM Fee/Cash Advance Fee";
+"prepaid_card_bill_reprint_fee" = "Bill Reprint Fee";
+"prepaid_card_atm_or_cash_advance_fee" = "ATM/Cash Advance Fee";
 "prepaid_card_cash_advance_chargeback" = "Cash Advance Chargeback";
 "prepaid_card_cash_advance_chargeback_reversal" = "Cash Advance Chargeback Reversal";
 "prepaid_card_cash_advance_repress" = "Cash Advance Repress";
