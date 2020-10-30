@@ -139,11 +139,13 @@ final class ListReceiptPresenter {
     }
 
     private func populatePrepaidCardSegments() {
+        view?.showLoading()
         self.prepaidCardRepository
                 .listPrepaidCards(queryParam: self.setUpPrepaidCardQueryParam()) { [weak self] (result) in
             guard let strongSelf = self, let view = strongSelf.view else {
                 return
             }
+            strongSelf.view?.hideLoading()
             switch result {
             case .success(let pageList):
                 if let prepaidCards = pageList?.data {
