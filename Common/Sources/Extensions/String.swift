@@ -107,6 +107,36 @@ public extension String {
             return 0
         }
     }
+
+    /// Get number of decimals from the currency string
+    /// - Returns: Number of Decimals
+    func numberOfDecimals() -> Int {
+        let decimalSeparator = NumberFormatter().decimalSeparator
+        return self.split(separator: Character(decimalSeparator!)).last?.count ?? 0
+    }
+
+    /// Format Only Currency Digits
+    /// - Parameters:
+    ///   - decimals: Format with decimals or not
+    ///   - currencyCode: Currency Code
+    /// - Returns: Formatted currency string
+    func formatOnlyCurrencyDigits(for currencyCode: String?) -> String {
+        guard let currencyCode = currencyCode, !self.isEmpty
+        else { return "" }
+        let number = self.formatToDouble(with: currencyCode)
+        let formatter = NumberFormatter()
+        formatter.usesGroupingSeparator = true
+        formatter.numberStyle = .currency
+        formatter.currencyCode = currencyCode
+        formatter.currencySymbol = ""
+        return formatter.string(for: number) ?? self
+    }
+
+    /// Only digits from the currency string
+    var digits: String {
+        return components(separatedBy: CharacterSet.decimalDigits.inverted)
+            .joined()
+    }
 }
 
 /// The NSMutableAttributedString extension
