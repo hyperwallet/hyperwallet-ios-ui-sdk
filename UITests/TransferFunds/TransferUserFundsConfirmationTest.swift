@@ -8,6 +8,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
     var transferFundSourceMenu: XCUIElement!
     var transferFundsConfirmation: TransferFundsConfirmation!
     let listppcUrl = "/rest/v3/users/usr-token/prepaid-cards"
+    let venmoAccount = "Venmo Account"
 
     override func setUp() {
         super.setUp()
@@ -84,8 +85,10 @@ class TransferUserFundsConfirmationTest: BaseTests {
                              filename: "TransferStatusQuoted",
                              method: HTTPMethod.post)
 
-        // Assert go back to the menu page
-        transferFundsConfirmation.scheduleTable.buttons["scheduleTransferLabel"].tap()
+        let button = transferFundsConfirmation.scheduleTable.buttons["scheduleTransferLabel"]
+        app.scroll(to: button)
+        button.tap()
+
         // Assert confirmation alert dialog
         verifyConfirmationSuccess()
         waitForNonExistence(spinner)
@@ -206,7 +209,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
 
         //verify venmo destination
         waitForExistence(transferFunds.addSelectDestinationLabel)
-        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Venmo")
+        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, venmoAccount)
 
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "5,855.17")
 
@@ -215,7 +218,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         waitForExistence(transferFundsConfirmation.transferDestinationLabel)
 
         // 1.  Add Destination Section
-        XCTAssertEqual(transferFundsConfirmation.transferDestinationLabel.label, "Venmo")
+        XCTAssertEqual(transferFundsConfirmation.transferDestinationLabel.label, venmoAccount)
         transferFundsConfirmation.verifyDestination(country: "United States", endingDigit: "5555")
 
         // 3. Summary Section
@@ -477,7 +480,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
     private func verifyConfirmationSuccessVenmo() {
         let messageTitle = "mobileTransferSuccessMsg".localized()
         let messagePlaceholder = "mobileTransferSuccessDetails".localized()
-        let message = String(format: messagePlaceholder, "Venmo")
+        let message = String(format: messagePlaceholder, venmoAccount)
         let alert = app.alerts[messageTitle]
         waitForExistence(app.alerts[messageTitle])
         let predicate = NSPredicate(format:
