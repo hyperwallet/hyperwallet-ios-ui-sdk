@@ -23,7 +23,7 @@
 "doneButtonLabel" = "Done";
 "try_again_button_label" = "Try Again";
 "search_placeholder_label" = "Search";
-"unexpected_error_message" = "Oops... Something went wrong, please try again";
+"unexpected_error_message" = "Something went wrong, please try again";
 "network_connection_error_title" = "Connectivity Issue";
 "unexpected_title" = "Unexpected Error";
 "network_connection_error_message" = "We are encountering a problem processing the request. Please check your connectivity.";
@@ -49,7 +49,7 @@
 "fee_mix_only_max_formatter" = "%1$@%2$@ + %3$@%% (Max:%1$@%4$@) fee";
 "fee_mix_formatter" = "%1$@%2$@ + %3$@%% (Min:%1$@%4$@, Max:%1$@%5$@) fee";
 "fee_percent_no_min_and_max_formatter" = "%1$@%% fee";
-"transfer_method_not_supported_message" = "This transfer method is currently not supported";
+"transfer_method_not_supported_message" = "This transfer method is not supported.";
 "error" = "Error";
 "authentication_error_title" = "Authentication Error";
 "authentication_error_message" = "Authentication token retrieval attempt resulted in an error";
@@ -60,8 +60,8 @@
 "paper_check" = "Paper Check";
 "prepaid_card" = "Prepaid Card";
 "wire_account" = "Wire Transfer Account";
-"paypal_account" = "PayPal";
-"venmo_account" = "Venmo";
+"paypal_account" = "PayPal Account";
+"venmo_account" = "Venmo Account";
 "cash_pickup_mg" = "MoneyGram";
 
 "visa" = "Visa";
@@ -73,7 +73,7 @@
 "select_a_country_message" = "Select a country";
 
 // Add Transfer Method
-"createTransferMethodButtonLabel" = "Create Transfer Method";
+"createTransferMethodButtonLabel" = "Add Transfer Method";
 "account_information" = "ACCOUNT INFO: %1$@(%2$@)";
 "account_holder" = "ACCOUNT HOLDER INFO";
 "address"="ADDRESS";
@@ -82,7 +82,7 @@
 "contact_information" = "CONTACT INFO";
 "identification" = "IDENTIFICATION";
 
-"date_format" = "yyyy-MM-dd";
+"date_format" = "YYYY-MM-DD";
 
 // Processing View
 "processing_view_label" = "Processing";
@@ -95,7 +95,7 @@
 "add_transaction_title" = "Add Transaction";
 "account_closure_fee" = "Account Closure Fee";
 "account_closure" = "Account Closure";
-"account_unload" = "Funds Unloaded";
+"account_unload" = "Funds Return";
 "adjustment" = "Balance Adjustment";
 "annual_fee_refund" = "Annual Fee Refund";
 "annual_fee" = "Annual Fee";
@@ -107,7 +107,7 @@
 "card_fee" = "Card Fee";
 "customer_service_fee_refund" = "Customer Service Fee Refund";
 "customer_service_fee" = "Customer Service Fee";
-"deposit" = "Funds Deposit";
+"deposit" = "Payment";
 "donation_fee" = "Donation Fee";
 "donation_return" = "Donation Return";
 "donation" = "Donation";
@@ -117,7 +117,7 @@
 "foreign_exchange" = "Foreign Exchange";
 "generic_fee_refund" = "Generic Fee Refund";
 "manual_adjustment" = "Adjustment";
-"manual_transfer_to_prepaid_card" = "Card Load";
+"manual_transfer_to_prepaid_card" = "Transfer to Card";
 "merchant_payment_fee" = "Merchant Payment Fee";
 "merchant_payment_refund" = "Merchant Payment Refund";
 "merchant_payment_return" = "Merchant Payment Return";
@@ -129,7 +129,7 @@
 "paper_check_refund" = "Paper Check Refund";
 "payment_cancellation" = "Payment Cancellation";
 "payment_expiration" = "Payment Expired";
-"payment_expiry_fee" = "Payment Expiry Fee";
+"payment_expiry_fee" = "Payment Expiration Fee";
 "payment_fee" = "Payment Fee";
 "payment_return" = "Payment Return";
 "payment_reversal_fee" = "Payment Reversal Fee";
@@ -141,14 +141,14 @@
 "prepaid_card_disputed_charge_refund" = "Disputed Charge Refund";
 "prepaid_card_domestic_cash_withdrawal_fee" = "ATM Withdrawal";
 "prepaid_card_exchange_rate_difference" = "Exchange Rate Difference";
-"prepaid_card_manual_unload" = "Card Unload";
+"prepaid_card_manual_unload" = "Transfer from Card";
 "prepaid_card_overseas_cash_withdrawal_fee" = "ATM Withdrawal";
 "prepaid_card_pin_change_fee" = "PIN Change Fee";
 "prepaid_card_refund" = "Refund";
 "prepaid_card_replacement_fee" = "Card Replacement Fee";
 "prepaid_card_sale_reversal" = "Reversed Transaction";
 "prepaid_card_sale" = "Transaction";
-"prepaid_card_unload" = "Card Unload";
+"prepaid_card_unload" = "Transfer from Card";
 "processing_fee" = "Processing Fee";
 "standard_shipping_fee" = "Standard Shipping Fee";
 "transfer_fee" = "Transfer Fee";
@@ -157,13 +157,14 @@
 "transfer_to_moneygram" = "MoneyGram";
 "transfer_to_paper_check" = "Paper Check";
 "transfer_to_paypal_account" = "PayPal";
-"transfer_to_prepaid_card" = "Card Load";
+"transfer_to_prepaid_card" = "Transfer to Card";
 "transfer_to_program_account" = "Transfer to Program";
 "transfer_to_user" = "Transfer to User";
 "transfer_to_western_union" = "Western Union";
 "transfer_to_wire" = "Wire Transfer";
 "transfer_to_wubs_wire" = "Wire Transfer";
 "transfer_to_venmo_account" = "Venmo";
+"transfer_to_bank_card" = "Bank Card";
 "virtual_incentive_cancellation" = "Promo Cancellation";
 "virtual_incentive_issuance" = "Issued Promo";
 "virtual_incentive_purchase" = "Promo Purchase";
@@ -174,11 +175,11 @@
 "wubs_wire_transfer_return" = "Wire Transfer Return";
 "unknown_receipt_type" = "Unknown Transaction Type";
 "paypal_account_transfer_return" = "Cashout Return";
-"venmo_account_transfer_return" = "Cashout Return"; // This one does not have a content translation
-"prepaid_card_account_deposit" = "Portal deposit";
+"venmo_account_transfer_return" = "Cashout Return";
+"prepaid_card_account_deposit" = "Account Deposit";
 "prepaid_card_annual_fee_discount" = "Annual fee discount";
-"prepaid_card_bill_reprint_fee" = "Bill re-print";
-"prepaid_card_atm_or_cash_advance_fee" = "ATM Fee/Cash Advance Fee";
+"prepaid_card_bill_reprint_fee" = "Bill Reprint Fee";
+"prepaid_card_atm_or_cash_advance_fee" = "ATM/Cash Advance Fee";
 "prepaid_card_cash_advance_chargeback" = "Cash Advance Chargeback";
 "prepaid_card_cash_advance_chargeback_reversal" = "Cash Advance Chargeback Reversal";
 "prepaid_card_cash_advance_repress" = "Cash Advance Repress";
@@ -187,13 +188,13 @@
 "prepaid_card_chargeback_refund" = "Chargeback Refund";
 "prepaid_card_chargeback_refund_reversal" = "Chargeback Refund Reversal";
 "prepaid_card_chargeback_reversal" = "Chargeback Reversal";
-"prepaid_card_commission_or_fee" = "Fee / Commission";
+"prepaid_card_commission_or_fee" = "Fee/Commission";
 "prepaid_card_debit_transfer" = "Debit/Transfers";
-"prepaid_card_document_request_fee" = "Requests for copies of documents";
-"prepaid_card_emergency_cash" = "Emergency money";
-"prepaid_card_emergency_card" = "Emergency card";
+"prepaid_card_document_request_fee" = "Document Request Fee";
+"prepaid_card_emergency_cash" = "Emergency Money";
+"prepaid_card_emergency_card" = "Emergency Card";
 "prepaid_card_income" = "Income";
-"prepaid_card_load_fee" = "Fee for load pan";
+"prepaid_card_load_fee" = "PAN Fee";
 "prepaid_card_overdue_payment_interest" = "Interest on overdue payment";
 "prepaid_card_payment" = "Load";
 "prepaid_card_pin_reprint_fee" = "PIN reprint";
@@ -235,7 +236,7 @@
 "date" = "Date";
 
 // Transfer Funds
-"mobileTransferFundsHeader" = "Transfer funds";
+"mobileTransferFundsHeader" = "Transfer";
 "mobileConfirmationHeader" = "Confirm the details";
 "mobileTransferFromLabel" = "TRANSFER FROM";
 "mobileTransferToLabel" = "TRANSFER TO";
@@ -247,7 +248,7 @@
 "mobileFXsell" = "From";
 "mobileFXbuy" = "To";
 "mobileFXRateLabel" = "Exchange rate";
-"mobileAvailableBalance" = "Available funds %1$@%2$@ %3$@";
+"mobileAvailableBalance" = "Amount available %1$@%2$@ %3$@";
 "continueButtonLabel" = "Continue";
 "mobileAddTransferMethod" = "Add transfer method";
 "mobileTransferMethodsHeader" = "Transfer methods";
@@ -258,9 +259,9 @@
 "transfer" = "Transfer";
 "transferAmountInvalid" = "Enter a valid transfer amount";
 "noTransferMethodAdded" = "Transfer method is required";
-"transfer_error_no_transfer_method_module_initialized" = "Functionality to add an Account has not been included in this application.";
-"transfer_fx_rate_changed" = "Due to changes in the FX rate, you will now receive: %1$@";
+"transfer_error_no_transfer_method_module_initialized" = "You're not able to add a transfer method.";
+"transfer_fx_rate_changed" = "Due to changes in the exchange rate, you'll now receive: %1$@";
 "mobileTransferSuccessMsg" = "Your transfer is being processed";
-"mobileTransferSuccessDetails" = "The funds are on the way to your %1$@.";
+"mobileTransferSuccessDetails" = "The money is on the way to your %1$@.";
 "noTransferFromSourceAvailable" = "No Transfer from source available";
 "transfer_to_bank_card" = "Bank Card";

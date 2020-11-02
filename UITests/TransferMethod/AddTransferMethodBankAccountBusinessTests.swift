@@ -75,6 +75,7 @@ class AddTransferMethodBankAccountBusinessTests: BaseTests {
                              method: HTTPMethod.post)
 
         waitForNonExistence(spinner)
+        waitForExistence(addTransferMethod.navBarBankAccount)
         XCTAssert(addTransferMethod.navBarBankAccount.exists)
         waitForExistence(addTransferMethod.branchIdInput)
 

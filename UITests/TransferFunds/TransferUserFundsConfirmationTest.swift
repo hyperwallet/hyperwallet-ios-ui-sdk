@@ -8,6 +8,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
     var transferFundSourceMenu: XCUIElement!
     var transferFundsConfirmation: TransferFundsConfirmation!
     let listppcUrl = "/rest/v3/users/usr-token/prepaid-cards"
+    let venmoAccount = "Venmo Account"
 
     override func setUp() {
         super.setUp()
@@ -44,7 +45,8 @@ class TransferUserFundsConfirmationTest: BaseTests {
         // Amount row
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
-        XCTAssertEqual(transferFunds.transferAmountLabel.label, "Available funds $452.14 USD")
+        XCTAssertEqual(transferFunds.transferAmountLabel.label,
+                       String(format: "mobileAvailableBalance".localized(), "$", "452.14", "USD"))
         // Transfer max funds
         XCTAssertTrue(transferFunds.transferMaxAllFunds.exists, "Transfer all funds switch should exist")
         // tap Transfer max funds
@@ -83,8 +85,10 @@ class TransferUserFundsConfirmationTest: BaseTests {
                              filename: "TransferStatusQuoted",
                              method: HTTPMethod.post)
 
-        // Assert go back to the menu page
-        transferFundsConfirmation.scheduleTable.buttons["scheduleTransferLabel"].tap()
+        let button = transferFundsConfirmation.scheduleTable.buttons["scheduleTransferLabel"]
+        app.scroll(to: button)
+        button.tap()
+
         // Assert confirmation alert dialog
         verifyConfirmationSuccess()
         waitForNonExistence(spinner)
@@ -111,7 +115,8 @@ class TransferUserFundsConfirmationTest: BaseTests {
         // Amount row
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
-        XCTAssertEqual(transferFunds.transferAmountLabel.label, "Available funds $5,855.17 USD")
+        XCTAssertEqual(transferFunds.transferAmountLabel.label,
+                       String(format: "mobileAvailableBalance".localized(), "$", "5,855.17", "USD"))
 
         transferFunds.transferMaxAllFunds.doubleTap()
 
@@ -198,13 +203,13 @@ class TransferUserFundsConfirmationTest: BaseTests {
         // Amount row
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
-        XCTAssertEqual(transferFunds.transferAmountLabel.label, "Available funds $5,855.17 USD")
-
+        XCTAssertEqual(transferFunds.transferAmountLabel.label,
+                       String(format: "mobileAvailableBalance".localized(), "$", "5,855.17", "USD"))
         transferFunds.transferMaxAllFunds.doubleTap()
 
         //verify venmo destination
         waitForExistence(transferFunds.addSelectDestinationLabel)
-        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Venmo")
+        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, venmoAccount)
 
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "5,855.17")
 
@@ -213,7 +218,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         waitForExistence(transferFundsConfirmation.transferDestinationLabel)
 
         // 1.  Add Destination Section
-        XCTAssertEqual(transferFundsConfirmation.transferDestinationLabel.label, "Venmo")
+        XCTAssertEqual(transferFundsConfirmation.transferDestinationLabel.label, venmoAccount)
         transferFundsConfirmation.verifyDestination(country: "United States", endingDigit: "5555")
 
         // 3. Summary Section
@@ -252,7 +257,8 @@ class TransferUserFundsConfirmationTest: BaseTests {
         // Amount row
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
-        XCTAssertEqual(transferFunds.transferAmountLabel.label, "Available funds $5,855.17 USD")
+        XCTAssertEqual(transferFunds.transferAmountLabel.label,
+                       String(format: "mobileAvailableBalance".localized(), "$", "5,855.17", "USD"))
 
         transferFunds.transferMaxAllFunds.doubleTap()
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "5,855.17")
@@ -290,7 +296,8 @@ class TransferUserFundsConfirmationTest: BaseTests {
         // Amount row
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
-        XCTAssertEqual(transferFunds.transferAmountLabel.label, "Available funds $5,855.17 USD")
+        XCTAssertEqual(transferFunds.transferAmountLabel.label,
+                       String(format: "mobileAvailableBalance".localized(), "$", "5,855.17", "USD"))
 
         // Add Destination Section
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
@@ -311,7 +318,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertTrue(button.exists)
 
         // Assert the message showing the final amount to be transferred has changed
-        XCTAssertTrue(app.otherElements["Due to changes in the FX rate, you will now receive: 5,855.66 USD"].exists)
+        XCTAssertTrue(app.otherElements["Due to changes in the exchange rate, you'll now receive: 5,855.66 USD"].exists)
     }
 
     // Transfer with no fee section test
@@ -473,7 +480,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
     private func verifyConfirmationSuccessVenmo() {
         let messageTitle = "mobileTransferSuccessMsg".localized()
         let messagePlaceholder = "mobileTransferSuccessDetails".localized()
-        let message = String(format: messagePlaceholder, "Venmo")
+        let message = String(format: messagePlaceholder, venmoAccount)
         let alert = app.alerts[messageTitle]
         waitForExistence(app.alerts[messageTitle])
         let predicate = NSPredicate(format:

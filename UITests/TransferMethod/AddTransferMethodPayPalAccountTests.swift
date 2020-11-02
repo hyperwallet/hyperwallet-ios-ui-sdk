@@ -101,7 +101,7 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
         waitForNonExistence(spinner)
 
         verifyBusinessError(errorMessage: paypalEmailError, dismiss: true)
-        XCTAssertTrue(app.navigationBars["PayPal"].exists)
+        XCTAssertTrue(app.navigationBars["paypal_account".localized()].exists)
     }
 
     func testAddTransferMethod_createPaypalAccountDuplicateAccount() {
@@ -114,6 +114,6 @@ class AddTransferMethodPayPalAccountTests: BaseTests {
         waitForNonExistence(spinner)
 
         verifyBusinessError(errorMessage: duplicateAccountError, dismiss: true)
-        XCTAssertTrue(app.navigationBars["PayPal"].exists)
+        XCTAssertTrue(app.navigationBars["paypal_account".localized()].exists)
     }
 }
