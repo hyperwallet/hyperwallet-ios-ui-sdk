@@ -40,13 +40,13 @@ class PrepaidCardListReceiptTests: BaseTests {
                          currency: "USD",
                          by: 2)
 
-        verifyCellLabels(with: "Funds Deposit",
+        verifyCellLabels(with: "Payment",
                          createdOn: "2019-06-21T21:24:02",
                          amount: "$20.00",
                          currency: "USD",
                          by: 3)
 
-        verifyCellLabels(with: "Funds Deposit",
+        verifyCellLabels(with: "Payment",
                          createdOn: "2019-06-20T21:23:51",
                          amount: "$10.00",
                          currency: "USD",
@@ -121,7 +121,7 @@ class PrepaidCardListReceiptTests: BaseTests {
         // Transaction
         XCTAssertEqual(transactionDetails.transactionSection.label, "mobileTransactionTypeLabel".localized())
 
-        XCTAssertEqual(transactionDetails.typeLabel.label, "Funds Deposit")
+        XCTAssertEqual(transactionDetails.typeLabel.label, "Payment")
         XCTAssertEqual(transactionDetails.paymentAmountLabel.label, "$10.00")
         XCTAssertEqual(transactionDetails.createdOnLabel.label,
                        transactionDetails.getExpectedDate(date: "2019-06-20T21:23:51"))
