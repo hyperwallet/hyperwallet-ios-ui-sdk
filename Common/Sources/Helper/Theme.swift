@@ -91,7 +91,9 @@ public class Theme: NSObject {
         /// The text disabled color
         public static var disabledColor = Theme.Label.textColor
         /// The text font style
-        public static var font = UIFont.systemFont(ofSize: 17)
+        public static var font = UIFont.preferredFont(forTextStyle: .body)
+        /// Create Transfer Amount Font
+        public static var createTransferAmountFont = UIFont.systemFont(ofSize: 60)
         /// The text label font
         public static var labelFont = Theme.Label.titleFont
         /// The text label color
