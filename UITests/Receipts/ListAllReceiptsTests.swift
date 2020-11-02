@@ -301,7 +301,7 @@ class ListAllReceiptsTests: BaseTests {
         XCTAssertFalse(secondaryCardTab.exists, "Secondary Prepaid Card does not exists")
     }
 
-    //Asserts the transactions
+    //Asserts the transactions - List All Receipts
     func getTransactionsAvailableFundsTab() -> XCUIElement {
         app.tables.buttons["Available Funds"]
     }
