@@ -23,13 +23,13 @@ import Common
 final class TransferAmountCell: UITableViewCell {
     static let reuseIdentifier = "transferAmountCellIdentifier"
     typealias EnteredAmountHandler = (_ value: String) -> Void
+    let decimalSymbol = Character(NumberFormatter().decimalSeparator!)
+    let groupSeparator = Character(NumberFormatter().groupingSeparator!)
 
     var enteredAmountHandler: EnteredAmountHandler?
     var numberOfDecimals: Int = 0
-    let decimalSymbol = Character(NumberFormatter().decimalSeparator!)
-    let groupSeparator = Character(NumberFormatter().groupingSeparator!)
     var defaultNumberOfDigits = 0
-    var defaultFormattedAmount: String = ""
+    var formattedZeroAmount = "0"
 
     private lazy var amountTextField: AmountTextField = {
         let textField = AmountTextField(frame: .zero)
@@ -155,7 +155,7 @@ final class TransferAmountCell: UITableViewCell {
         amountTextField.text = amount?.formatOnlyCurrencyDigits(for: currency)
         numberOfDecimals = amountTextField.text?.numberOfDecimals() ?? 0
         defaultNumberOfDigits = amountTextField.text?.digits.count ?? 0
-        defaultFormattedAmount = amountTextField.text ?? "0"
+        formattedZeroAmount = "0".formatOnlyCurrencyDigits(for: currency)
         amountTextField.adjustsFontSizeToFitWidth = true
         amountTextField.adjustsFontForContentSizeCategory = true
         currencyLabel.text = currency ?? String(repeating: " ", count: 3)
@@ -181,12 +181,16 @@ extension TransferAmountCell: UITextFieldDelegate {
     @objc
     func didAmountTextFieldChange(_ textField: UITextField) {
         if let currentText = textField.text?.digits, !currentText.isEmpty, let currencyCode = currencyLabel.text {
-            let index = currentText.index(currentText.endIndex,
-                                          offsetBy: -numberOfDecimals)
-            let tempText = String(currentText[currentText.startIndex..<index]
-                + "\(decimalSymbol)"
-                + currentText[index..<currentText.endIndex])
-            textField.text = tempText.formatOnlyCurrencyDigits(for: currencyCode)
+            if currentText.count > 1 {
+                let index = currentText.index(currentText.endIndex,
+                                              offsetBy: -numberOfDecimals)
+                let tempText = String(currentText[currentText.startIndex..<index]
+                    + "\(decimalSymbol)"
+                    + currentText[index..<currentText.endIndex])
+                textField.text = tempText.formatOnlyCurrencyDigits(for: currencyCode)
+            } else {
+                textField.text = currentText.formatOnlyCurrencyDigits(for: currencyCode)
+            }
         }
         setCursorToTheEnd(textField)
     }
@@ -206,7 +210,7 @@ extension TransferAmountCell: UITextFieldDelegate {
 
         // BackSpace
         if string.isEmpty {
-            if currentText == defaultFormattedAmount {
+            if currentText == formattedZeroAmount {
                 return false
             } else if currentText.digits.count <= defaultNumberOfDigits {
                 currentText.insert("0", at: currentText.startIndex)

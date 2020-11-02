@@ -115,14 +115,14 @@ public extension String {
         return self.split(separator: Character(decimalSeparator!)).last?.count ?? 0
     }
 
-    /// Format Only Currency Digits
+    /// Format only currency digits without symbol
     /// - Parameters:
     ///   - decimals: Format with decimals or not
     ///   - currencyCode: Currency Code
     /// - Returns: Formatted currency string
     func formatOnlyCurrencyDigits(for currencyCode: String?) -> String {
         guard let currencyCode = currencyCode, !self.isEmpty
-        else { return "" }
+        else { return self }
         let number = self.formatToDouble(with: currencyCode)
         let formatter = NumberFormatter()
         formatter.usesGroupingSeparator = true

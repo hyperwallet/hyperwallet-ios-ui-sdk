@@ -94,7 +94,7 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.verifyTransferFundsTitle()
 
         // Amount row
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.00")
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
         XCTAssertEqual(transferFunds.transferAmountLabel.label, "Available funds $452.14 USD")
         // Transfer max funds
@@ -138,7 +138,7 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
 
         // Amount row
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.00")
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
         XCTAssertEqual(transferFunds.transferAmountLabel.label, "Available funds $452.14 USD")
         // Transfer max funds
@@ -171,7 +171,7 @@ class TransferUserFundsTest: BaseTests {
         transferFundMenu.tap()
         waitForNonExistence(spinner)
 
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.00")
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
         XCTAssertEqual(transferFunds.transferAmountLabel.label, "Available funds $452.14 USD")
         // Transfer all funds row
@@ -198,7 +198,7 @@ class TransferUserFundsTest: BaseTests {
           transferFundMenu.tap()
           waitForNonExistence(spinner)
 
-          XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+          XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.00")
           XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
           XCTAssertEqual(transferFunds.transferAmountLabel.label, "Available funds $452.14 USD")
           // Transfer all funds row
@@ -246,7 +246,7 @@ class TransferUserFundsTest: BaseTests {
         // Transfer Section
         XCTAssertTrue(transferFunds.transferSectionLabel.exists)
         // Amount row
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.00")
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
         XCTAssertEqual(transferFunds.transferAmountLabel.label, "Available funds $5,855.17 USD")
         // Transfer all funds row
@@ -280,7 +280,7 @@ class TransferUserFundsTest: BaseTests {
         // Transfer Section
         XCTAssertTrue(transferFunds.transferSectionLabel.exists)
         // Amount row
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.00")
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
         XCTAssertEqual(transferFunds.transferAmountLabel.label, "Available funds $452.14 USD")
         // Transfer all funds row
@@ -331,15 +331,15 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.transferAmount.clearAmountFieldAndEnterText(text: ".12345")
 
         transferFunds.transferSectionLabel.tap()
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.12")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "123.45")
 
-        transferFunds.transferAmount.clearAndEnterText(text: "12345678901234567890")
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "123456789012")
-        transferFunds.transferAmount.typeText(".123456")
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "123456789012.12")
+        transferFunds.transferAmount.clearAndEnterText(text: "123456789012")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "1,234,567,890.12")
+        transferFunds.transferAmount.typeText("1234.56")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "1,234,567,890.12")
 
         transferFunds.transferSectionLabel.tap()
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "123456789012.12")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "1,234,567,890.12")
     }
 
     // MARK: Select Destination Page
@@ -480,9 +480,10 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertTrue(transferFunds.transferAmount.exists)
 
-        let pasteAmountWithCharacters = "1000CAN"
-        transferFunds.pasteAmountToTransferAmount(amount: pasteAmountWithCharacters)
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+        // Paste is disabled.
+//        let pasteAmountWithCharacters = "1000CAN"
+//        transferFunds.pasteAmountToTransferAmount(amount: pasteAmountWithCharacters)
+//        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
     }
 
     func testTransferFunds_createTransferCopyAndPasteTransferAmountWithDigits() {
@@ -501,12 +502,13 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertTrue(transferFunds.transferAmount.exists)
 
-        transferFunds.transferAmount.tap()
-        let pastAmountWithNumberNoDigit = "10000.00"
-        transferFunds.pasteAmountToTransferAmount(amount: pastAmountWithNumberNoDigit)
-        waitForNonExistence(spinner)
+        // Paste Disabled
+//        transferFunds.transferAmount.tap()
+//        let pastAmountWithNumberNoDigit = "10000.00"
+//        transferFunds.pasteAmountToTransferAmount(amount: pastAmountWithNumberNoDigit)
+//        waitForNonExistence(spinner)
 
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.00")
     }
 
     /* When user enters amount below the transaction limit in transfer amount Field
