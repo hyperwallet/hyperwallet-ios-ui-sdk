@@ -33,7 +33,7 @@ class ListReceiptTests: BaseTests {
     }
 
     func testReceiptsList_verifyReceiptsListForOneMonth() {
-        let expectedNumberOfCells = 7
+        let expectedNumberOfCells = 8
         mockServer.setupStub(url: "/rest/v3/users/usr-token/receipts",
                              filename: "ReceiptsForOneMonth",
                              method: HTTPMethod.get)
@@ -46,6 +46,7 @@ class ListReceiptTests: BaseTests {
         verifyCellExists("Payment", "2019-05-03T17:08:58", "$20.00", "USD", at: 4)
         verifyCellExists("PayPal", "2019-05-02T18:16:17", "$5.00", "USD", at: 5)
         verifyCellExists("Debit Card", "2019-05-01T18:16:17", "$5.00", "USD", at: 6)
+        verifyCellExists("Bank Card", "2019-05-10T23:16:17", "-$8,393,993.00", "USD", at: 7)
 
         XCTAssertEqual(app.tables.cells.count, expectedNumberOfCells)
         XCTAssertTrue(app.tables.staticTexts["May 2019"].exists)
