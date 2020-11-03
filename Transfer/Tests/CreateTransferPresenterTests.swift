@@ -665,6 +665,7 @@ class MockCreateTransferView: CreateTransferView {
     var isRetryPerformed = false
 
     var stopOnError = false
+    var dismissKeyBoard = false
 
     var loadCreateTransferExpectation: XCTestExpectation!
     var showErrorExpectation: XCTestExpectation!
@@ -744,5 +745,9 @@ class MockCreateTransferView: CreateTransferView {
         showErrorExpectation = XCTestExpectation(description: "showErrorExpectation")
         showScheduleTransferExpectation = XCTestExpectation(description: "showScheduleTransferExpectation")
         updateFooterExpectation = XCTestExpectation(description: "updateFooterExpectation")
+    }
+
+    func dismissKeyboard() {
+        dismissKeyBoard = true
     }
 }
