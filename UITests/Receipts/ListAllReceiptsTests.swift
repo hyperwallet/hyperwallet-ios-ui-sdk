@@ -4,7 +4,8 @@ class ListAllReceiptsTests: BaseTests {
     private var transactionDetails: TransactionDetails!
     let ppcURL = "/rest/v3/users/usr-token/prepaid-cards"
     let receiptsURL = "/rest/v3/users/usr-token/receipts"
-    let ppcReceiptsURL = "/rest/v3/users/usr-token/prepaid-cards/trm-token/receipts"
+    let ppcPrimaryReceiptsURL = "/rest/v3/users/usr-token/prepaid-cards/trm-token/receipts"
+    let ppcSecondaryReceiptsURL = "/rest/v3/users/usr-token/prepaid-cards/trm-token2/receipts"
 
     override func setUp() {
         super.setUp()
@@ -17,6 +18,7 @@ class ListAllReceiptsTests: BaseTests {
         spinner = app.activityIndicators["activityIndicator"]
     }
 
+    //selects the List All Receipts
     private func openListAllReceiptsScreen() {
         app.tables.cells.containing(.staticText, identifier: "List All Receipts").element(boundBy: 0).tap()
         waitForNonExistence(spinner)
@@ -40,7 +42,7 @@ class ListAllReceiptsTests: BaseTests {
                              filename: "ReceiptsForOneMonth",
                              method: HTTPMethod.get)
 
-        mockServer.setupStub(url: ppcReceiptsURL,
+        mockServer.setupStub(url: ppcPrimaryReceiptsURL,
                              filename: "PrepaidCardOneYearReceiptsResponse",
                              method: HTTPMethod.get)
 
@@ -62,6 +64,7 @@ class ListAllReceiptsTests: BaseTests {
      When user selects the "Transaction" tab
      Then user can see the tabs for Primary PPC and receipts
      */
+
     func testListAllReceipts_NavigateToTransactionsPPCTabs() {
         waitForNonExistence(spinner)
         mockServer.setupStub(url: ppcURL,
@@ -72,7 +75,7 @@ class ListAllReceiptsTests: BaseTests {
                              filename: "ReceiptsForOneMonth",
                              method: HTTPMethod.get)
 
-        mockServer.setupStub(url: ppcReceiptsURL,
+        mockServer.setupStub(url: ppcPrimaryReceiptsURL,
                              filename: "PrepaidCardOneYearReceiptsResponse",
                              method: HTTPMethod.get)
 
@@ -110,6 +113,7 @@ class ListAllReceiptsTests: BaseTests {
      When user selects the "Transaction" tab
      Then user can see the tabs for Available funds and Place holder text
      */
+
     func testListAllReceipts_NavigateToTransactionsAvailbleFundsNoTransactions() {
         waitForNonExistence(spinner)
         mockServer.setupStub(url: ppcURL,
@@ -118,7 +122,7 @@ class ListAllReceiptsTests: BaseTests {
 
         mockServer.setupStubEmpty(url: receiptsURL, statusCode: 204, method: HTTPMethod.get)
 
-        mockServer.setupStub(url: ppcReceiptsURL,
+        mockServer.setupStub(url: ppcPrimaryReceiptsURL,
                              filename: "PrepaidCardOneYearReceiptsResponse",
                              method: HTTPMethod.get)
 
@@ -135,6 +139,7 @@ class ListAllReceiptsTests: BaseTests {
         let noTransaction = transactionDetails.getNoTransactionStrings()
         XCTAssertEqual(transactionDetails.noPPCReceiptLabel.label, noTransaction)
     }
+
     /*
      Given user has Available funds and Primary PPC and PPC has no transactions
      When user selects the "Transaction" tab
@@ -151,7 +156,7 @@ class ListAllReceiptsTests: BaseTests {
                              filename: "ReceiptsForOneMonth",
                              method: HTTPMethod.get)
 
-        mockServer.setupStubEmpty(url: ppcReceiptsURL, statusCode: 204, method: HTTPMethod.get)
+        mockServer.setupStubEmpty(url: ppcPrimaryReceiptsURL, statusCode: 204, method: HTTPMethod.get)
 
         openListAllReceiptsScreen()
         waitForNonExistence(spinner)
@@ -167,7 +172,7 @@ class ListAllReceiptsTests: BaseTests {
         waitForNonExistence(spinner)
 
         let noTransaction = transactionDetails.getPPCNoTransactionStringYear()
-        XCTAssertEqual(transactionDetails.noPPCReceiptLabel.label, noTransaction+".")
+        XCTAssertEqual(transactionDetails.noPPCReceiptLabel.label, noTransaction)
     }
 
     /*
@@ -185,13 +190,14 @@ class ListAllReceiptsTests: BaseTests {
                              filename: "ReceiptsForOneMonth",
                              method: HTTPMethod.get)
 
-        mockServer.setupStub(url: ppcReceiptsURL,
+        mockServer.setupStub(url: ppcPrimaryReceiptsURL,
                              filename: "PrepaidCardOneYearReceiptsResponse",
                              method: HTTPMethod.get)
 
-        mockServer.setupStub(url: ppcReceiptsURL,
+        mockServer.setupStub(url: ppcSecondaryReceiptsURL,
                              filename: "PrepaidCardSecondaryReceiptsResponse",
                              method: HTTPMethod.get)
+
         openListAllReceiptsScreen()
         waitForNonExistence(spinner)
 
@@ -210,7 +216,7 @@ class ListAllReceiptsTests: BaseTests {
         waitForNonExistence(spinner)
         XCTAssertTrue(primardCardTab.isSelected, "Primary Card tab isselected")
         // Assert PPC receipts
-       verifyCellExists_ListAll("Purchase", "2020-09-26T18:16:12", "-$100.47", "USD", at: 0)
+        verifyCellExists_ListAll("Balance Adjustment", "2020-09-26T18:16:12", "-$20.99", "USD", at: 0)
 
         // Assert PPC secondary
         secondaryCardTab.tap()
@@ -236,9 +242,9 @@ class ListAllReceiptsTests: BaseTests {
                              filename: "ReceiptsForOneMonth",
                              method: HTTPMethod.get)
 
-        mockServer.setupStubEmpty(url: ppcReceiptsURL, statusCode: 204, method: HTTPMethod.get)
+        mockServer.setupStubEmpty(url: ppcPrimaryReceiptsURL, statusCode: 204, method: HTTPMethod.get)
 
-        mockServer.setupStubEmpty(url: ppcReceiptsURL, statusCode: 204, method: HTTPMethod.get)
+        mockServer.setupStubEmpty(url: ppcSecondaryReceiptsURL, statusCode: 204, method: HTTPMethod.get)
         openListAllReceiptsScreen()
         waitForNonExistence(spinner)
 
@@ -251,7 +257,7 @@ class ListAllReceiptsTests: BaseTests {
         XCTAssertTrue(getTransactionsAvailableFundsTab().isSelected, "Available Funds tab is selected")
 
         //Asserts AF
-         verifyCellExists_ListAll("Bank Account", "2019-05-10T18:16:17", "-$5.00", "USD", at: 0)
+        verifyCellExists_ListAll("Bank Account", "2019-05-10T18:16:17", "-$5.00", "USD", at: 0)
         waitForNonExistence(spinner)
 
         // Assert PPC exxists
@@ -262,7 +268,7 @@ class ListAllReceiptsTests: BaseTests {
         waitForNonExistence(spinner)
         XCTAssertTrue(secondaryCardTab.isSelected, "Secondary Prepaid Card is selected")
         let noTransaction = transactionDetails.getPPCNoTransactionStringYear()
-        XCTAssertEqual(transactionDetails.noPPCReceiptLabel.label, noTransaction+".")
+        XCTAssertEqual(transactionDetails.noPPCReceiptLabel.label, noTransaction)
     }
 
     /*
@@ -290,11 +296,12 @@ class ListAllReceiptsTests: BaseTests {
         verifyCellExists_ListAll("Bank Account", "2019-05-10T18:16:17", "-$5.00", "USD", at: 0)
         waitForNonExistence(spinner)
 
-         XCTAssertFalse(primardCardTab.exists, "Primary Prepaid Card does not exists")
+        XCTAssertFalse(primardCardTab.exists, "Primary Prepaid Card does not exists")
 
         XCTAssertFalse(secondaryCardTab.exists, "Secondary Prepaid Card does not exists")
     }
 
+    //Asserts the transactions - List All Receipts
     func getTransactionsAvailableFundsTab() -> XCUIElement {
         app.tables.buttons["Available Funds"]
     }
@@ -310,7 +317,6 @@ class ListAllReceiptsTests: BaseTests {
         XCTAssertTrue(cell.staticTexts["receiptTransactionAmountLabel"].exists)
         XCTAssertTrue(cell.staticTexts["receiptTransactionCreatedOnLabel"].exists)
         XCTAssertTrue(cell.staticTexts["receiptTransactionCurrencyLabel"].exists)
-
         XCTAssertEqual(type, cell.staticTexts["receiptTransactionTypeLabel"].label)
         XCTAssertEqual(transactionDetails.getExpectedDate(date: createdOn),
                        cell.staticTexts["receiptTransactionCreatedOnLabel"].label)
