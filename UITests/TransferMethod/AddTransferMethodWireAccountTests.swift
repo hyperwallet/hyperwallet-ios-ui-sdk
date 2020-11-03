@@ -30,14 +30,10 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
         ]
         app.launch()
 
+        addTransferMethod = AddTransferMethod(app: app)
         mockServer.setupStub(url: "/graphql",
                              filename: "TransferMethodConfigurationWireAccountResponse",
                              method: HTTPMethod.post)
-
-        app.tables.cells.staticTexts["Add Transfer Method"].tap()
-        spinner = app.activityIndicators["activityIndicator"]
-        waitForNonExistence(spinner)
-        addTransferMethod = AddTransferMethod(app: app)
 
         bankIdPatternError = addTransferMethod.getPatternError(label: addTransferMethod.swiftNumber)
         branchIdPatternError = addTransferMethod.getPatternError(label: addTransferMethod.routingNumber)
@@ -54,6 +50,11 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
             .getLengthConstraintError(label: addTransferMethod.accountNumberORIBan, min: 4, max: 17)
 
         otherElements = addTransferMethod.addTransferMethodTableView.otherElements
+
+        spinner = app.activityIndicators["activityIndicator"]
+        waitForNonExistence(spinner)
+        app.tables.cells.staticTexts["Add Transfer Method"].tap()
+        waitForExistence(addTransferMethod.navBarWireAccount)
     }
 
     func testAddTransferMethod_displaysElementsOnTmcResponse() {

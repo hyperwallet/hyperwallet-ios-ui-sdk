@@ -22,10 +22,10 @@ class AddTransferMethodVemoAccountTests: BaseTests {
                              method: HTTPMethod.post)
 
         addTransferMethod = AddTransferMethod(app: app)
-        addTransferMethod.addTransferMethodtable.tap()
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
-        addTransferMethod = AddTransferMethod(app: app)
+        addTransferMethod.addTransferMethodtable.tap()
+        waitForExistence(addTransferMethod.navBarVenmo)
 }
 
     func testAddTransferMethod_Venmo() {

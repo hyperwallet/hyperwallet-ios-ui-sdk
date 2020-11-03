@@ -38,6 +38,9 @@ class TransferUserFundsPPCTest: BaseTests {
         transferFundPPCMenu.tap()
         waitForNonExistence(spinner)
 
+        // Verify Transfer from is Prepaid Card
+        transferFunds.verifyTransferFrom(isAvailableFunds: false)
+
         // Transfer Destination Section
         transferFunds.verifyTransferFundsTitle()
         transferFunds.verifyBankAccountDestination(type: "Bank Account", endingDigit: "1234")
@@ -47,7 +50,8 @@ class TransferUserFundsPPCTest: BaseTests {
         // Amount
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.00")
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
-        XCTAssertEqual(transferFunds.transferAmountLabel.label, "Available funds $452.14 USD")
+        XCTAssertEqual(transferFunds.transferAmountLabel.label,
+                       String(format: "mobileAvailableBalance".localized(), "$", "452.14", "USD"))
         // Transfer max funds
         XCTAssertTrue(transferFunds.transferMaxAllFunds.exists, "Transfer all funds switch should exist")
 
@@ -74,6 +78,9 @@ class TransferUserFundsPPCTest: BaseTests {
         XCTAssertTrue(transferFundPPCMenu.exists)
         transferFundPPCMenu.tap()
         waitForNonExistence(spinner)
+
+        // Verify Transfer from is Prepaid Card
+        transferFunds.verifyTransferFrom(isAvailableFunds: false)
 
         // Add Destination Section
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)

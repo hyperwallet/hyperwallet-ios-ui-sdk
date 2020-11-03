@@ -40,9 +40,9 @@ class TransactionDetails {
     var feeValue: XCUIElement
     var transactionValue: XCUIElement
     var promoWebSiteValue: XCUIElement
-    let prepaidCard = "Prepaid Card"
-    let prepaidCardVisa = "Visa"
-    let prepaidCardMaster = "Mastercard"
+    let prepaidCard = "prepaid_card".localized()
+    let prepaidCardVisa = "visa".localized()
+    let prepaidCardMaster = "mastercard".localized()
     let numberMask = " \u{2022}\u{2022}\u{2022}\u{2022} "
      let noPPCReceiptLabel: XCUIElement
 
@@ -141,11 +141,9 @@ class TransactionDetails {
         return "\(type)\(numberMask)\(digit)"
     }
     func getNoTransactionStrings() -> String {
-        // return "noPrepaidCardTransactions".localized()
-        return "There's no activity to display.".localized()
+        return "mobileNoTransactions".localized()
     }
     func getPPCNoTransactionStringYear() -> String {
-        // return "noTransactions".localized()
-        return "No transactions in the past 365 days".localized()
+        return "mobilePrepaidCardNoTransactions".localized()
     }
 }

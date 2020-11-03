@@ -204,7 +204,7 @@ class ListTransferMethodTests: BaseTests {
                              method: HTTPMethod.get)
 
         openTransferMethodsList()
-        app.tables.cells.containing(.staticText, identifier: "PayPal").element(boundBy: 0).tap()
+        app.tables.cells.containing(.staticText, identifier: "paypal_account".localized()).element(boundBy: 0).tap()
 
         XCTAssertEqual(app.tables.element(boundBy: 0).cells.count, cellsCountBeforeRemove)
 
@@ -215,7 +215,7 @@ class ListTransferMethodTests: BaseTests {
                              filename: "ListTransferMethodResponseWithoutPayPalAccount",
                              method: HTTPMethod.get)
 
-        verifyRemoveConfirmation(transferMethod: "Paypal")
+        verifyRemoveConfirmation(transferMethod: "paypal_account".localized())
 
         listTransferMethod.tapConfirmAccountRemoveButton()
         waitForNonExistence(spinner)
@@ -383,8 +383,10 @@ class ListTransferMethodTests: BaseTests {
 
         openTransferMethodsList()
 
-        XCTAssertTrue( app.tables.cells.containing(.staticText, identifier: "Venmo").element(boundBy: 0).exists)
-        XCTAssertTrue( app.tables.cells.containing(.staticText, identifier: "Venmo").element(boundBy: 1).exists)
+        XCTAssertTrue( app.tables.cells.containing(.staticText, identifier: "venmo_account".localized())
+            .element(boundBy: 0).exists)
+        XCTAssertTrue( app.tables.cells.containing(.staticText, identifier: "venmo_account".localized())
+            .element(boundBy: 1).exists)
 
         let expectedFirstBankAccountLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "5555")
         let expectedSecondBankAccountLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "5556")
@@ -403,7 +405,7 @@ class ListTransferMethodTests: BaseTests {
                              filename: "ListTransferMethodResponseVenmo",
                              method: HTTPMethod.get)
         openTransferMethodsList()
-        app.tables.cells.containing(.staticText, identifier: "Venmo").element(boundBy: 0).tap()
+        app.tables.cells.containing(.staticText, identifier: "venmo_account".localized()).element(boundBy: 0).tap()
 
         XCTAssertEqual(app.tables.element(boundBy: 0).cells.count, cellsCountBeforeRemove)
 
@@ -414,7 +416,7 @@ class ListTransferMethodTests: BaseTests {
                              filename: "ListTransferMethodResponseWithoutFirstElement",
                              method: HTTPMethod.get)
 
-       verifyRemoveConfirmation(transferMethod: "Venmo")
+       verifyRemoveConfirmation(transferMethod: "venmo_account".localized())
 
         listTransferMethod.tapConfirmAccountRemoveButton()
         waitForNonExistence(spinner)
