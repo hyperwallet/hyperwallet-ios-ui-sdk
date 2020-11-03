@@ -23,8 +23,6 @@ import Common
 final class TransferAmountCell: UITableViewCell {
     static let reuseIdentifier = "transferAmountCellIdentifier"
     typealias EnteredAmountHandler = (_ value: String) -> Void
-    let decimalSymbol = Character(NumberFormatter().decimalSeparator!)
-    let groupSeparator = Character(NumberFormatter().groupingSeparator!)
 
     var enteredAmountHandler: EnteredAmountHandler?
     var numberOfDecimals: Int = 0
@@ -183,7 +181,10 @@ extension TransferAmountCell: UITextFieldDelegate {
     /// - Parameter textField: Amount text field
     private func formatCurrencyText(for textField: UITextField) {
         if let currentText = textField.text?.digits, !currentText.isEmpty, let currencyCode = currencyLabel.text {
-            if currentText.count > 1 { ////Shift positions only when amount is having more than one digit
+            let decimalSymbol = currentText.decimalSymbol(for: currencyCode)
+            let textFieldText = textField.text!
+            ////Shift positions only when amount is having more than one digit
+            if currentText.count > 1 && textFieldText.contains(decimalSymbol) {
                 let index = currentText.index(currentText.endIndex,
                                               offsetBy: -numberOfDecimals)
                 let tempText = String(currentText[currentText.startIndex..<index]
