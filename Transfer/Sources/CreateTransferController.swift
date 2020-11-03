@@ -78,6 +78,7 @@ final class CreateTransferController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Theme.Cell.smallHeight
         tableView.backgroundColor = Theme.UITableViewController.backgroundColor
+        tableView.keyboardDismissMode = .onDrag
 
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)
@@ -436,6 +437,10 @@ extension CreateTransferController: CreateTransferView {
                 ]
             )
         }
+    }
+
+    func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
 

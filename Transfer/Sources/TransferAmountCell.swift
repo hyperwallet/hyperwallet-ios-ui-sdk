@@ -40,7 +40,6 @@ final class TransferAmountCell: UITableViewCell {
         textField.setContentHuggingPriority(.defaultLow, for: .horizontal)
         textField.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        textField.addTarget(self, action: #selector(didAmountTextFieldChange(_:)), for: .editingChanged)
 
         let heightConstraint = NSLayoutConstraint(item: textField,
                                                   attribute: .height,
@@ -58,6 +57,7 @@ final class TransferAmountCell: UITableViewCell {
                                                  constant: 50)
         textField.addConstraint(heightConstraint)
         textField.addConstraint(widthConstraint)
+        textField.becomeFirstResponder()
         return textField
     }()
 
@@ -111,6 +111,7 @@ final class TransferAmountCell: UITableViewCell {
         let minWidthToFit = min(maxWidth, textField.frame.size.width)
         let newSize = textField.sizeThatFits(CGSize(width: minWidthToFit, height: CGFloat.greatestFiniteMagnitude))
         textField.frame.size = CGSize(width: min(newSize.width, minWidthToFit), height: 50)
+        formatCurrencyText(for: textField)
     }
 
     private func setupCell() {
@@ -178,10 +179,11 @@ extension TransferAmountCell: UITextFieldDelegate {
         enteredAmountHandler?(currentText)
     }
 
-    @objc
-    func didAmountTextFieldChange(_ textField: UITextField) {
+    /// Format currency text
+    /// - Parameter textField: Amount text field
+    private func formatCurrencyText(for textField: UITextField) {
         if let currentText = textField.text?.digits, !currentText.isEmpty, let currencyCode = currencyLabel.text {
-            if currentText.count > 1 {
+            if currentText.count > 1 { ////Shift positions only when amount is having more than one digit
                 let index = currentText.index(currentText.endIndex,
                                               offsetBy: -numberOfDecimals)
                 let tempText = String(currentText[currentText.startIndex..<index]

@@ -16,18 +16,15 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 /// To perform paste action in UITextField
-public final class PasteOnlyTextField: UITextField {
+public class PasteOnlyTextField: UITextField {
     /// Requests the receiving responder to paste text in UITextField
     override public func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         return action == #selector(paste(_:))
     }
 }
 
-public final class AmountTextField: UITextField {
+public final class AmountTextField: PasteOnlyTextField {
     override public func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-        if action == #selector(UIResponderStandardEditActions.paste(_:)) {
-            return false
-        }
-        return super.canPerformAction(action, withSender: sender)
+        return false
     }
 }
