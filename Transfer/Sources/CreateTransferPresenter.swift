@@ -38,7 +38,6 @@ protocol CreateTransferView: class {
     func updateTransferAmountSection()
     func updateFooter(for section: CreateTransferController.FooterSection)
     func areAllFieldsValid() -> Bool
-    func dismissKeyboard()
 }
 
 final class CreateTransferPresenter {
@@ -348,8 +347,6 @@ final class CreateTransferPresenter {
         guard let view = view, view.areAllFieldsValid() else {
             return
         }
-
-        view.dismissKeyboard()
 
         if let sourceToken =
             transferSourceCellConfigurations.first(where: { $0.isSelected })?.token,

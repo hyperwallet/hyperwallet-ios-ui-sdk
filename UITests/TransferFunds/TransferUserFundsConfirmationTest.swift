@@ -50,7 +50,6 @@ class TransferUserFundsConfirmationTest: BaseTests {
         // Transfer max funds
         XCTAssertTrue(transferFunds.transferMaxAllFunds.exists, "Transfer all funds switch should exist")
         // tap Transfer max funds
-        transferFunds.transferAmount.swipeUpSlow()
         transferFunds.transferMaxAllFunds.doubleTap()
 
         mockServer.setupStub(url: "/rest/v3/transfers",
@@ -119,7 +118,6 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertEqual(transferFunds.transferAmountLabel.label,
                        String(format: "mobileAvailableBalance".localized(), "$", "5,855.17", "USD"))
 
-        transferFunds.transferAmount.swipeUpSlow()
         transferFunds.transferMaxAllFunds.doubleTap()
 
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "5,855.17")
@@ -207,7 +205,6 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
         XCTAssertEqual(transferFunds.transferAmountLabel.label,
                        String(format: "mobileAvailableBalance".localized(), "$", "5,855.17", "USD"))
-        transferFunds.transferAmount.swipeUpSlow()
         transferFunds.transferMaxAllFunds.doubleTap()
 
         //verify venmo destination
@@ -263,7 +260,6 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertEqual(transferFunds.transferAmountLabel.label,
                        String(format: "mobileAvailableBalance".localized(), "$", "5,855.17", "USD"))
 
-        transferFunds.transferAmount.swipeUpSlow()
         transferFunds.transferMaxAllFunds.doubleTap()
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "5,855.17")
         transferFunds.tapContinueButton()
@@ -307,7 +303,6 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
 
-        transferFunds.transferAmount.swipeUpSlow()
         transferFunds.transferMaxAllFunds.doubleTap()
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "5,855.17")
 
@@ -344,7 +339,6 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
 
-        transferFunds.transferAmount.swipeUpSlow()
         // Tap to insert max amounts to transfer
         transferFunds.transferMaxAllFunds.doubleTap()
 
@@ -416,7 +410,6 @@ class TransferUserFundsConfirmationTest: BaseTests {
         let ppcCell = app.tables.element.children(matching: .cell).element(boundBy: 1)
         ppcCell.tap()
 
-        transferFunds.transferAmount.swipeUpSlow()
         // Enter transfer amount
         transferFunds.transferMaxAllFunds.doubleTap()
 

@@ -438,10 +438,6 @@ extension CreateTransferController: CreateTransferView {
             )
         }
     }
-
-    func dismissKeyboard() {
-        view.endEditing(true)
-    }
 }
 
 extension CreateTransferController {

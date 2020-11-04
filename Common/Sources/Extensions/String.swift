@@ -150,6 +150,28 @@ public extension String {
         formatter.currencyCode = currencyCode
         return formatter.decimalSeparator
     }
+
+    /// Currency digits without group separators
+    /// - Parameter currencyCode: currency code
+    /// - Returns: currency digits
+    func currencyDigits(for currencyCode: String?) -> String {
+        guard let currencyCode = currencyCode, !self.isEmpty
+        else { return self }
+        let currentText = self.digits
+        let decimalSymbol = self.decimalSymbol(for: currencyCode)
+        var currencyDigits = self
+        if digits.count > 1 && currencyDigits.contains(decimalSymbol) {
+            let index = currentText.index(currentText.endIndex,
+                                          offsetBy: -self.numberOfDecimals())
+            let tempText = String(currentText[currentText.startIndex..<index]
+                + "\(decimalSymbol)"
+                + currentText[index..<currentText.endIndex])
+            currencyDigits = tempText
+        } else {
+            currencyDigits = currentText
+        }
+        return currencyDigits
+    }
 }
 
 /// The NSMutableAttributedString extension

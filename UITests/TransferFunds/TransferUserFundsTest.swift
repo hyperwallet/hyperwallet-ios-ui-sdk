@@ -190,7 +190,6 @@ class TransferUserFundsTest: BaseTests {
                        String(format: "mobileAvailableBalance".localized(), "$", "452.14", "USD"))
         // Transfer all funds row
         XCTAssertTrue(transferFunds.transferMaxAllFunds.exists, "Transfer all funds switch should exist")
-        transferFunds.transferAmount.swipeUpSlow()
         // Tap on the Transfer max funds
         transferFunds.transferMaxAllFunds.tap()
         // Assert Destination Amount is automatically insert into the amount field
@@ -219,7 +218,6 @@ class TransferUserFundsTest: BaseTests {
           // Transfer all funds row
           XCTAssertTrue(transferFunds.transferMaxAllFunds.exists, "Transfer all funds switch should exist")
 
-          transferFunds.transferAmount.swipeUpSlow()
           // Tap on the Transfer max funds
           transferFunds.transferMaxAllFunds.tap()
           // Assert Destination Amount is automatically insert into the amount field
@@ -269,7 +267,6 @@ class TransferUserFundsTest: BaseTests {
         // Transfer all funds row
         XCTAssertTrue(transferFunds.transferMaxAllFunds.exists, "Transfer all funds switch should exist")
 
-        transferFunds.transferAmount.swipeUpSlow()
         // Turn the Transfer All Switch On
         transferFunds.transferMaxAllFunds.tap()
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "5,855.17")
@@ -314,7 +311,6 @@ class TransferUserFundsTest: BaseTests {
         // Notes
         XCTAssertTrue(transferFunds.notesSectionLabel.exists)
 
-        transferFunds.transferAmount.swipeUpSlow()
         // Turn the Transfer max funds
         transferFunds.transferMaxAllFunds.tap()
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "452.14")

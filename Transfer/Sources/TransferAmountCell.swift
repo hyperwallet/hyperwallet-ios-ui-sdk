@@ -55,7 +55,6 @@ final class TransferAmountCell: UITableViewCell {
                                                  constant: 50)
         textField.addConstraint(heightConstraint)
         textField.addConstraint(widthConstraint)
-        textField.becomeFirstResponder()
         return textField
     }()
 
@@ -165,15 +164,11 @@ final class TransferAmountCell: UITableViewCell {
 
 extension TransferAmountCell: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        guard var currentText = textField.text else {
+        guard var currentText = textField.text, let currencyCode = currencyLabel.text else {
             enteredAmountHandler?("")
             return
         }
-        let decimalPointSymbol = "."
-        if currentText.last == Character(decimalPointSymbol) {
-            currentText.removeLast()
-            textField.text = currentText
-        }
+        currentText = currentText.currencyDigits(for: currencyCode)
         enteredAmountHandler?(currentText)
     }
 
