@@ -88,10 +88,20 @@ extension UIViewController: HyperwalletFlowDelegate {
     /// Removes the current coordinator while moving back
     public func removeCoordinator() {
         Holder.coordinator.removeValue(forKey: ObjectIdentifier(self))
+        Holder.flowDelegate.removeValue(forKey: ObjectIdentifier(self))
+        Holder.initializationData.removeValue(forKey: ObjectIdentifier(self))
     }
 
     /// Removes all coordinators
     public func removeAllCoordinators() {
         Holder.coordinator.removeAll()
+        Holder.flowDelegate.removeAll()
+        Holder.initializationData.removeAll()
+    }
+}
+
+extension UIViewController: UIAdaptivePresentationControllerDelegate {
+    public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        removeCoordinator()
     }
 }

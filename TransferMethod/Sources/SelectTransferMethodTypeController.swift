@@ -45,6 +45,7 @@ final class SelectTransferMethodTypeController: UITableViewController {
         setupCountryCurrencyTableView()
         setupTransferMethodTypeTableView()
         presenter.loadTransferMethodKeys(forceUpdate)
+        self.navigationController?.presentationController?.delegate = self
     }
 
     override public func viewWillAppear(_ animated: Bool) {

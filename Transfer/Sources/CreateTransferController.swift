@@ -50,6 +50,7 @@ final class CreateTransferController: UITableViewController {
         setUpCreateTransferTableView()
         presenter.loadCreateTransfer()
         hideKeyboardWhenTappedAround()
+        self.navigationController?.presentationController?.delegate = self
     }
 
     override public func viewWillAppear(_ animated: Bool) {
