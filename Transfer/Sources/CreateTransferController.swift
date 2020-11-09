@@ -28,7 +28,7 @@ import UIKit
 /// to retrieve the transfer resource.
 final class CreateTransferController: UITableViewController {
     enum FooterSection: Int, CaseIterable {
-        case amount, destination, transferAll, notes, button
+        case amount, destination, transferAll, notes, button, source
     }
 
     private let footerIdentifier = "transferTableViewFooterViewIdentifier"

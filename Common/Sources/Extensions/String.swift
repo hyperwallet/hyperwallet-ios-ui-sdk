@@ -59,24 +59,6 @@ public extension String {
         return ceil(boundingBox.height)
     }
 
-    /// Format an amount to a currency format with currency code
-    ///
-    /// - Parameter currencyCode: the currency code
-    /// - Returns: a formatted String amount with currency code
-    func format(with currencyCode: String?) -> String {
-        if !self.isEmpty {
-            let currencyFormatter = NumberFormatter()
-            currencyFormatter.minimumIntegerDigits = 1
-            currencyFormatter.numberStyle = .currency
-            currencyFormatter.currencyCode = currencyCode
-            currencyFormatter.currencySymbol = ""
-            let formattedAmountInNumber = currencyFormatter.number(from: self)
-            return currencyFormatter.string(for: formattedAmountInNumber) ?? ""
-        } else {
-            return ""
-        }
-    }
-
     /// Format amount for currency code using users locale
     /// - Parameter currencyCode: currency code
     /// - Returns: a formatted amount string
@@ -98,7 +80,6 @@ public extension String {
     func formatToDouble(with currencyCode: String? = nil) -> Double {
         if !self.isEmpty {
             let currencyFormatter = NumberFormatter()
-            currencyFormatter.minimumIntegerDigits = 1
             currencyFormatter.numberStyle = .currency
             currencyFormatter.currencyCode = currencyCode
             currencyFormatter.currencySymbol = ""
@@ -106,36 +87,6 @@ public extension String {
         } else {
             return 0
         }
-    }
-
-    /// Get number of decimals from the currency string
-    /// - Returns: Number of Decimals
-    func numberOfDecimals() -> Int {
-        let decimalSeparator = NumberFormatter().decimalSeparator
-        return self.split(separator: Character(decimalSeparator!)).last?.count ?? 0
-    }
-
-    /// Format only currency digits without symbol
-    /// - Parameters:
-    ///   - decimals: Format with decimals or not
-    ///   - currencyCode: Currency Code
-    /// - Returns: Formatted currency string
-    func formatOnlyCurrencyDigits(for currencyCode: String?) -> String {
-        guard let currencyCode = currencyCode, !self.isEmpty
-        else { return self }
-        let number = self.formatToDouble(with: currencyCode)
-        let formatter = NumberFormatter()
-        formatter.usesGroupingSeparator = true
-        formatter.numberStyle = .currency
-        formatter.currencyCode = currencyCode
-        formatter.currencySymbol = ""
-        return formatter.string(for: number) ?? self
-    }
-
-    /// Only digits from the currency string
-    var digits: String {
-        return components(separatedBy: CharacterSet.decimalDigits.inverted)
-            .joined()
     }
 
     /// Return decimal symbol for the given currency code
@@ -149,28 +100,6 @@ public extension String {
         formatter.numberStyle = .currency
         formatter.currencyCode = currencyCode
         return formatter.decimalSeparator
-    }
-
-    /// Currency digits without group separators
-    /// - Parameter currencyCode: currency code
-    /// - Returns: currency digits
-    func currencyDigits(for currencyCode: String?) -> String {
-        guard let currencyCode = currencyCode, !self.isEmpty
-        else { return self }
-        let currentText = self.digits
-        let decimalSymbol = self.decimalSymbol(for: currencyCode)
-        var currencyDigits = self
-        if digits.count > 1 && currencyDigits.contains(decimalSymbol) {
-            let index = currentText.index(currentText.endIndex,
-                                          offsetBy: -self.numberOfDecimals())
-            let tempText = String(currentText[currentText.startIndex..<index]
-                + "\(decimalSymbol)"
-                + currentText[index..<currentText.endIndex])
-            currencyDigits = tempText
-        } else {
-            currencyDigits = currentText
-        }
-        return currencyDigits
     }
 }
 

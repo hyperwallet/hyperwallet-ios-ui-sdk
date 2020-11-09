@@ -389,8 +389,20 @@ final class CreateTransferPresenter {
     }
 
     func resetErrorMessagesForAllSections() {
-        sectionData.forEach { $0.errorMessage = nil }
-        CreateTransferController.FooterSection.allCases.forEach({ view?.updateFooter(for: $0) })
+        if sectionData.contains(where: { $0.errorMessage != nil }) {
+            sectionData.filter({ $0.errorMessage != nil }).forEach({
+                $0.errorMessage = nil
+                switch $0.createTransferSectionHeader {
+                case .amount: view?.updateFooter(for: .amount)
+
+                case .button: view?.updateFooter(for: .button)
+                case .destination: view?.updateFooter(for: .destination)
+                case .notes: view?.updateFooter(for: .notes)
+                case .transferAll: view?.updateFooter(for: .transferAll)
+                case .source: view?.updateFooter(for: .source)
+                }
+            })
+        }
     }
 
     private func errorHandler(for error: HyperwalletErrorType, _ nonBusinessErrorHandler: @escaping () -> Void) {
