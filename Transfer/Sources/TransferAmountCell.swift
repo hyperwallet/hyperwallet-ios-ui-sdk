@@ -160,6 +160,9 @@ final class TransferAmountCell: UITableViewCell {
                 .split(separator: Character(NumberFormatter().decimalSeparator)).last?.count ?? 0
             defaultNumberOfDigits = TransferAmountCurrencyFormatter
                 .getTransferAmountCurrency(for: currencyCode)?.decimals ?? 0
+        } else {
+            amountTextField.text = formattedZeroAmount
+            currencyLabel.text = String(repeating: " ", count: 3)
         }
     }
 }
@@ -211,6 +214,11 @@ extension TransferAmountCell: UITextFieldDelegate {
                    replacementString string: String) -> Bool {
         let maximumIntegerDigits = 12
         var currentText = textField.text ?? ""
+
+        //Decimal
+        if string == "." {
+            return false
+        }
 
         // BackSpace
         if string.isEmpty {
