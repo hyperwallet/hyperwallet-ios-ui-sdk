@@ -166,7 +166,9 @@ final class TransferAmountCell: UITableViewCell {
 
 extension TransferAmountCell: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if defaultNumberOfDigits > 0, !inputAmount.isEmpty {
+        if inputAmount.isEmpty {
+            inputAmount = textField.text ?? ""
+        } else if defaultNumberOfDigits > 0, !inputAmount.isEmpty {
             let index = inputAmount.index(inputAmount.endIndex,
                                           offsetBy: -defaultNumberOfDigits)
             inputAmount.insert(contentsOf: ".", at: index)
