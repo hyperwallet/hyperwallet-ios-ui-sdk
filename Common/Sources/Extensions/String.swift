@@ -64,7 +64,7 @@ public extension String {
     /// - Returns: a formatted amount string
     func formatToCurrency(with currencyCode: String?) -> String {
         guard let currencyCode = currencyCode, !self.isEmpty
-        else { return "" }
+        else { return "0" }
         let number = Double(self)
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
