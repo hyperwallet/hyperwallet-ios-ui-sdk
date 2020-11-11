@@ -97,6 +97,7 @@ extension UIViewController: HyperwalletFlowDelegate {
 }
 
 extension UIViewController: UIAdaptivePresentationControllerDelegate {
+    /// Removes the current coordinator after dismissing the Controller
     public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         removeCoordinator()
     }
