@@ -51,6 +51,7 @@ final class ListTransferMethodController: UITableViewController {
                                                                    target: self,
                                                                    action: #selector(didTapAddButton))
         titleDisplayMode(.always, for: "mobileTransferMethodsHeader".localized())
+        self.navigationController?.presentationController?.delegate = self
     }
 
     private func initializePresenter() {

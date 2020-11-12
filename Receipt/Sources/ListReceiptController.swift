@@ -41,6 +41,7 @@ final class ListReceiptController: UITableViewController {
         initializePresenter()
         setupListReceiptTableView()
         presenter.listReceipts()
+        self.navigationController?.presentationController?.delegate = self
     }
 
     override public func viewWillAppear(_ animated: Bool) {

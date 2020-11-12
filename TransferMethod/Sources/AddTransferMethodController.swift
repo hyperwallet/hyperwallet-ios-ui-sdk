@@ -101,6 +101,7 @@ final class AddTransferMethodController: UITableViewController {
         setupTableView()
         presenter.loadTransferMethodConfigurationFields(forceUpdate ?? false)
         hideKeyboardWhenTappedAround()
+        self.navigationController?.presentationController?.delegate = self
     }
 
     override public func viewWillAppear(_ animated: Bool) {
