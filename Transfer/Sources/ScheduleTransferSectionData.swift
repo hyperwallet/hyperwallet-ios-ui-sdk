@@ -118,23 +118,26 @@ struct ScheduleTransferSummaryData: ScheduleTransferSectionData {
             let destinationCurrency = transfer.destinationCurrency {
             guard let feeAmount = transfer.destinationFeeAmount, Double(feeAmount) != 0 else {
                 rows.append((title: "mobileConfirmDetailsAmount".localized(),
-                             value: TransferAmountCurrencyFormatter.format(amount: destinationAmount,
-                                                                           with: destinationCurrency)))
+                             value: TransferAmountCurrencyFormatter
+                                .formatToLocaleFromAPI(for: destinationAmount,
+                                                       currencyCode: destinationCurrency)))
                 return
             }
-            let transferAmountFormattedDouble = destinationAmount.formatToDouble(with: destinationCurrency)
-            let feeAmountFormattedDouble = feeAmount.formatToDouble(with: destinationCurrency)
+            let transferAmountFormattedDouble = destinationAmount.formatAmountToDouble()
+            let feeAmountFormattedDouble = feeAmount.formatAmountToDouble()
             let grossTransferAmount = transferAmountFormattedDouble + feeAmountFormattedDouble
 
             rows.append((title: "mobileConfirmDetailsAmount".localized(),
-                         value: TransferAmountCurrencyFormatter.format(amount: String(grossTransferAmount),
-                                                                       with: destinationCurrency)))
+                         value: TransferAmountCurrencyFormatter
+                            .formatToLocaleFromAPI(for: String(grossTransferAmount),
+                                                   currencyCode: destinationCurrency)))
             rows.append((title: "mobileConfirmDetailsFee".localized(),
-                         value: TransferAmountCurrencyFormatter.format(amount: feeAmount,
-                                                                       with: destinationCurrency)))
+                         value: TransferAmountCurrencyFormatter
+                            .formatToLocaleFromAPI(for: feeAmount,
+                                                   currencyCode: destinationCurrency)))
             rows.append((title: "mobileConfirmDetailsTotal".localized(),
-                         value: TransferAmountCurrencyFormatter.format(amount: destinationAmount,
-                                                                       with: destinationCurrency)))
+                         value: TransferAmountCurrencyFormatter
+                            .formatToLocaleFromAPI(for: destinationAmount, currencyCode: destinationCurrency)))
             if didFxQuoteChange {
                 footer = String(format: "transfer_fx_rate_changed".localized(),
                                 String(format: "%@ %@", destinationAmount, destinationCurrency))

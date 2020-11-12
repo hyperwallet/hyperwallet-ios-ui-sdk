@@ -101,6 +101,14 @@ public extension String {
         formatter.currencyCode = currencyCode
         return formatter.decimalSeparator
     }
+
+    /// Format amount to double
+    /// - Returns: double value
+    func formatAmountToDouble() -> Double {
+        let decimals = Set("0123456789.")
+        let result = String(self.filter { decimals.contains($0) })
+        return Double(result) ?? 0
+    }
 }
 
 /// The NSMutableAttributedString extension

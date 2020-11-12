@@ -330,10 +330,15 @@ final class CreateTransferPresenter {
                 }
 
             case .success(let transfer):
-                strongSelf.availableBalance = transfer?.destinationAmount
+
+                strongSelf.availableBalance = TransferAmountCurrencyFormatter
+                    .formatToLocaleFromAPI(for: transfer?.destinationAmount,
+                                           currencyCode: transfer?.destinationCurrency)
                 if strongSelf.didTapTransferAllFunds { strongSelf.amount = strongSelf.availableBalance ?? "0" }
                 strongSelf.transferSourceCellConfigurations.forEach {
-                    $0.availableBalance = transfer?.destinationAmount
+                    $0.availableBalance = TransferAmountCurrencyFormatter
+                    .formatToLocaleFromAPI(for: transfer?.destinationAmount,
+                                           currencyCode: transfer?.destinationCurrency)
                     $0.destinationCurrency = strongSelf.selectedTransferDestination?.transferMethodCurrency
                 }
             }
@@ -353,6 +358,9 @@ final class CreateTransferPresenter {
             let destinationToken = selectedTransferDestination?.token,
             let destinationCurrency = destinationCurrency {
             view.showLoading()
+            amount = TransferAmountCurrencyFormatter
+                .formatToAPIFromLocale(for: amount,
+                                       currencyCode: destinationCurrency)
             let transfer = HyperwalletTransfer.Builder(clientTransferId: clientTransferId,
                                                        sourceToken: sourceToken,
                                                        destinationToken: destinationToken)
@@ -393,13 +401,23 @@ final class CreateTransferPresenter {
             sectionData.filter({ $0.errorMessage != nil }).forEach({
                 $0.errorMessage = nil
                 switch $0.createTransferSectionHeader {
-                case .amount: view?.updateFooter(for: .amount)
+                case .amount:
+                    view?.updateFooter(for: .amount)
 
-                case .button: view?.updateFooter(for: .button)
-                case .destination: view?.updateFooter(for: .destination)
-                case .notes: view?.updateFooter(for: .notes)
-                case .transferAll: view?.updateFooter(for: .transferAll)
-                case .source: view?.updateFooter(for: .source)
+                case .button:
+                    view?.updateFooter(for: .button)
+
+                case .destination:
+                    view?.updateFooter(for: .destination)
+
+                case .notes:
+                    view?.updateFooter(for: .notes)
+
+                case .transferAll:
+                    view?.updateFooter(for: .transferAll)
+
+                case .source:
+                    view?.updateFooter(for: .source)
                 }
             })
         }
