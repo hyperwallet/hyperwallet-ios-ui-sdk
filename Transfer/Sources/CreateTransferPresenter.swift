@@ -334,7 +334,12 @@ final class CreateTransferPresenter {
                 strongSelf.availableBalance = TransferAmountCurrencyFormatter
                     .formatToLocaleFromAPI(for: transfer?.destinationAmount,
                                            currencyCode: transfer?.destinationCurrency)
-                if strongSelf.didTapTransferAllFunds { strongSelf.amount = strongSelf.availableBalance ?? "0" }
+                if strongSelf.didTapTransferAllFunds {
+                    strongSelf.amount = strongSelf.availableBalance ?? "0"
+                } else {
+                    strongSelf.amount = TransferAmountCurrencyFormatter
+                        .format(amount: strongSelf.amount, with: strongSelf.destinationCurrency ?? "")
+                }
                 strongSelf.transferSourceCellConfigurations.forEach {
                     $0.availableBalance = TransferAmountCurrencyFormatter
                     .formatToLocaleFromAPI(for: transfer?.destinationAmount,
