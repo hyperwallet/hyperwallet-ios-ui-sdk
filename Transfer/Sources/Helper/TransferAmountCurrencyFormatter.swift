@@ -36,7 +36,8 @@ struct TransferAmountCurrencyFormatter {
 
     static func format(amount: String, with currencyCode: String) -> String {
         if let transferAmountCurrency = getTransferAmountCurrency(for: currencyCode) {
-            let number = amount.formatToDouble(with: currencyCode)
+            let amountCleared = clearGroupSeparator(for: amount, currencyCode: currencyCode)
+            let number = amountCleared.formatToDouble(with: currencyCode)
             let formatter = NumberFormatter()
             formatter.usesGroupingSeparator = true
             formatter.maximumFractionDigits = transferAmountCurrency.decimals
@@ -69,6 +70,23 @@ struct TransferAmountCurrencyFormatter {
         if numberOfDecimals != 0 {
             let decimalValues = result.suffix(numberOfDecimals)
             return result.dropLast(numberOfDecimals) + "." + decimalValues
+        }
+        return result
+    }
+
+    static func clearGroupSeparator(for amount: String?, currencyCode: String?) -> String {
+        guard let currencyCode = currencyCode, let amount = amount, !amount.isEmpty
+        else { return "0" }
+        let decimalsSymbol = amount.decimalSymbol(for: currencyCode)
+        let decimals = Set("0123456789")
+        let result = String(amount.filter { decimals.contains($0) })
+        let numberOfDecimals = self.getTransferAmountCurrency(for: currencyCode)?.decimals ?? 0
+
+        if amount.contains(decimalsSymbol) {
+            if numberOfDecimals != 0 {
+                let decimalValues = result.suffix(numberOfDecimals)
+                return result.dropLast(numberOfDecimals) + decimalsSymbol + decimalValues
+            }
         }
         return result
     }

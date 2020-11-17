@@ -24,7 +24,6 @@ final class TransferAmountCell: UITableViewCell {
     static let reuseIdentifier = "transferAmountCellIdentifier"
     typealias EnteredAmountHandler = (_ value: String) -> Void
 
-    private var numberOfDecimals = 0
     private var defaultNumberOfDigits = 0
     private var formattedZeroAmount = "0"
     private var inputAmount = ""
@@ -156,10 +155,9 @@ final class TransferAmountCell: UITableViewCell {
             enteredAmountHandler = handler
             formattedZeroAmount = TransferAmountCurrencyFormatter.format(amount: formattedZeroAmount,
                                                                          with: currencyCode)
-            numberOfDecimals = amountTextField.text?
-                .split(separator: Character(NumberFormatter().decimalSeparator)).last?.count ?? 0
             defaultNumberOfDigits = TransferAmountCurrencyFormatter
                 .getTransferAmountCurrency(for: currencyCode)?.decimals ?? 0
+            inputAmount = digits(amount: amount)
         } else {
             amountTextField.text = formattedZeroAmount
             currencyLabel.text = String(repeating: " ", count: 3)
@@ -182,7 +180,7 @@ extension TransferAmountCell: UITextFieldDelegate {
             ////Shift positions only when amount is having more than one digit
             if currentText.count > 1 && textFieldText.contains(decimalSymbol) {
                 let index = currentText.index(currentText.endIndex,
-                                              offsetBy: -numberOfDecimals)
+                                              offsetBy: -defaultNumberOfDigits)
                 let tempText = String(currentText[currentText.startIndex..<index]
                     + "\(decimalSymbol)"
                     + currentText[index..<currentText.endIndex])
@@ -210,9 +208,10 @@ extension TransferAmountCell: UITextFieldDelegate {
                    replacementString string: String) -> Bool {
         let maximumIntegerDigits = 12
         var currentText = textField.text ?? ""
+        let decimalSymbol = currentText.decimalSymbol(for: currencyLabel.text)
 
         //Decimal
-        if string == "." {
+        if string == decimalSymbol {
             return false
         }
 

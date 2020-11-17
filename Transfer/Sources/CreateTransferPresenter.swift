@@ -338,7 +338,7 @@ final class CreateTransferPresenter {
                     strongSelf.amount = strongSelf.availableBalance ?? "0"
                 } else {
                     strongSelf.amount = TransferAmountCurrencyFormatter
-                        .format(amount: strongSelf.amount, with: strongSelf.destinationCurrency ?? "")
+                        .format(amount: strongSelf.amount, with: strongSelf.destinationCurrency ?? "0")
                 }
                 strongSelf.transferSourceCellConfigurations.forEach {
                     $0.availableBalance = TransferAmountCurrencyFormatter
