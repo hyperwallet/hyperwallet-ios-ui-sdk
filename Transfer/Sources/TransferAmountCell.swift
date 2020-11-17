@@ -177,7 +177,7 @@ extension TransferAmountCell: UITextFieldDelegate {
         if let textFieldText = textField.text, !textFieldText.isEmpty, let currencyCode = currencyLabel.text {
             let currentText = digits(amount: textFieldText)
             let decimalSymbol = currentText.decimalSymbol(for: currencyCode)
-            ////Shift positions only when amount is having more than one digit
+            // Shift positions only when amount is having more than one digit
             if currentText.count > 1 && textFieldText.contains(decimalSymbol) {
                 let index = currentText.index(currentText.endIndex,
                                               offsetBy: -defaultNumberOfDigits)
