@@ -1,0 +1,266 @@
+//
+// Copyright 2018 - Present Hyperwallet
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+// and associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+// BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+"backBarButton" = "Terug";
+"mobileTransferMethodsHeader" = "Overboekingsmethoden";
+"remove" = "Verwijderen";
+"cancelButtonLabel" = "Annuleren";
+"doneButtonLabel" = "Gereed";
+"try_again_button_label" = "Probeer opnieuw";
+"search_placeholder_label" = "Zoeken";
+"unexpected_error_message" = "Er is iets mis gegaan, probeer het opnieuw";
+"network_connection_error_title" = "Connectiviteitsprobleem";
+"unexpected_title" = "Onverwachte fout";
+"network_connection_error_message" = "Er is een probleem opgetreden bij het verwerken van de aanvraag. Controleer uw connectiviteit.";
+"endingIn" = "eindigend op ";
+"to" = "naar ";
+"no_country_available_error_message" = "Er is geen land beschikbaar";
+"no_transfer_method_available_error_message" = "Er is geen overboekingsmethode beschikbaar voor %1$@ en %2$@";
+"no_currency_available_error_message" = "Er is geen valuta beschikbaar voor het land %1$@";
+"emptyStateAddTransferMethod" = "Voeg een overboekingsmethode toe om te beginnen.";
+"mobileAddTransferMethodHeader" = "Een overboekingsmethode toevoegen";
+"mobileCountryCurrencyLabel" = "LOCATIE EN VALUTA";
+"mobileTransferMethodLabel" = "OVERBOEKINGSMETHODE";
+"mobileCountryRegion" = "Land/regio";
+"mobileCurrencyLabel" = "Valuta";
+"mobileAreYouSure" = "Weet u het zeker?";
+"mobileRemoveEAconfirm" = "Overboekingsmethode verwijderen";
+"fee_flat_formatter" = "%1$@%2$@ kosten";
+"fee_percent_only_min_formatter" = "%1$@%% (min:%2$@%3$@) kosten";
+"fee_percent_only_max_formatter" = "%1$@%% (max:%2$@%3$@) kosten";
+"fee_percent_formatter" = "%1$@%% (min:%2$@%3$@, max:%2$@%4$@) kosten";
+"fee_mix_no_min_and_max_formatter" = "%1$@%2$@ + %3$@%% kosten";
+"fee_mix_only_min_formatter" = "%1$@%2$@ + %3$@%% (min:%1$@%4$@) kosten";
+"fee_mix_only_max_formatter" = "%1$@%2$@ + %3$@%% (max:%1$@%4$@) kosten";
+"fee_mix_formatter" = "%1$@%2$@ + %3$@%% (min%1$@%4$@:, max:%1$@%5$@) kosten";
+"fee_percent_no_min_and_max_formatter" = "%1$@%% kosten";
+"transfer_method_not_supported_message" = "Deze overboekingsmethode wordt niet ondersteund.";
+"error" = "Fout";
+"authentication_error_title" = "Verificatiefout";
+"authentication_error_message" = "Ophaalpoging verificatietoken resulteerde in een fout";
+
+    // Transfer methods
+"bank_account" = "Bankrekening";
+"bank_card" = "Debetkaart";
+"paper_check" = "Papieren check";
+"prepaid_card" = "Prepaidkaart";
+"wire_account" = "Bankrekening";
+"paypal_account" = "PayPal-account";
+"venmo_account" = "Venmo-account";
+"cash_pickup_mg" = "MoneyGram";
+
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Manage Prepaid Card Message
+"manage_prepaid_card_message" = "Log in met een webbrowser om uw kaart te beheren";
+    //Select Transfer Method View
+"select_a_country_message" = "Selecteer een land";
+
+    // Add Transfer Method
+"createTransferMethodButtonLabel" = "Overboekingsmethode toevoegen";
+"account_information" = "GEGEVENS REKENINGHOUDER: %1$@(%2$@)";
+"account_holder" = "GEGEVENS REKENINGHOUDER";
+"address"="ADRES";
+"mobileFeesAndProcessingTime" = "KOSTEN EN VERWERKINGSTIJD";
+"intermediary_account" = "TUSSENREKENING";
+"contact_information" = "CONTACTGEGEVENS";
+"identification" = "IDENTIFICATIE";
+
+"date_format" = "DD-MM-JJJJ";
+
+    // Processing View
+"processing_view_label" = "Bezig met verwerken";
+"complete_view_label" = "Invullen";
+
+    // Receipt
+"transactions" = "Transacties";
+"mobileNoTransactions" = "Er is geen activiteit om weer te geven.";
+"mobilePrepaidCardNoTransactions" = "Geen transacties in de afgelopen 365 dagen.";
+"add_transaction_title" = "Transactie toevoegen";
+"account_closure_fee" = "Kosten rekening sluiten";
+"account_closure" = "Rekening sluiten";
+"account_unload" = "Terugbetaling geld";
+"adjustment" = "Aanpassing saldo";
+"annual_fee_refund" = "Terugbetaling jaarlijkse kosten";
+"annual_fee" = "Jaarlijkse kosten";
+"bank_account_transfer_fee" = "Kosten terugbetaling bankrekening";
+"bank_account_transfer_return_fee" = "Kosten terugbetaling bankrekening";
+"bank_account_transfer_return" = "Terugbetaling bankrekening";
+"card_activation_fee_waiver" = "Vrijstelling kaartactiveringskosten";
+"card_activation_fee" = "Kaartactiveringskosten";
+"card_fee" = "Kosten kaart";
+"customer_service_fee_refund" = "Terugbetaling kosten klantenservice";
+"customer_service_fee" = "Kosten klantenservice";
+"deposit" = "Betaling";
+"donation_fee" = "Kosten donatie";
+"donation_return" = "Terugbetaling donatie";
+"donation" = "Donatie";
+"dormant_user_fee_refund" = "Terugbetaling kosten slapende gebruikersrekening";
+"dormant_user_fee" = "Kosten slapende gebruikersrekening";
+"expedited_shipping_fee" = "Kosten versnelde verzending";
+"foreign_exchange" = "Vreemde valuta";
+"generic_fee_refund" = "Terugbetaling algemene kosten";
+"manual_adjustment" = "Aanpassing";
+"manual_transfer_to_prepaid_card" = "Overboeken naar kaart";
+"merchant_payment_fee" = "Kosten betaling verkoper";
+"merchant_payment_refund" = "Terugbetaling betaling verkoper";
+"merchant_payment_return" = "Terugbetaling betaling verkoper";
+"merchant_payment" = "Betaling verkoper";
+"moneygram_transfer_return" = "Terugbetaling MoneyGram";
+"monthly_fee_refund" = "Terugbetaling maandelijkse kosten";
+"monthly_fee" = "Maandelijkse kosten";
+"paper_check_fee" = "Kosten papieren cheque";
+"paper_check_refund" = "Terugbetaling papieren cheque";
+"payment_cancellation" = "Annulering betaling";
+"payment_expiration" = "Betaling verlopen";
+"payment_expiry_fee" = "Kosten betaling verlopen";
+"payment_fee" = "Kosten betaling";
+"payment_return" = "Terugbetaling betaling";
+"payment_reversal_fee" = "Kosten terugboeking betaling";
+"payment_reversal" = "Terugboeking betaling";
+"payment" = "Betaling";
+"prepaid_card_balance_inquiry_fee" = "Kosten opvragen saldo";
+"prepaid_card_cash_advance" = "Voorschot";
+"prepaid_card_dispute_deposit" = "Betwiste kaartstorting";
+"prepaid_card_disputed_charge_refund" = "Terugbetaling betwiste kosten";
+"prepaid_card_domestic_cash_withdrawal_fee" = "Opname geldautomaat";
+"prepaid_card_exchange_rate_difference" = "Wisselkoersverschil";
+"prepaid_card_manual_unload" = "Overboeken van kaart";
+"prepaid_card_overseas_cash_withdrawal_fee" = "Opname geldautomaat";
+"prepaid_card_pin_change_fee" = "Kosten wijziging pincode";
+"prepaid_card_refund" = "Terugbetaling";
+"prepaid_card_replacement_fee" = "Kosten kaartvervanging";
+"prepaid_card_sale_reversal" = "Omgekeerde transactie";
+"prepaid_card_sale" = "Transactie";
+"prepaid_card_unload" = "Overboeken van kaart";
+"processing_fee" = "Verwerkingskosten";
+"standard_shipping_fee" = "Standaard verzendkosten";
+"transfer_fee" = "Overdrachtskosten";
+"transfer_to_bank_account" = "Bankrekening";
+"transfer_to_debit_card" = "Debetkaart";
+"transfer_to_moneygram" = "MoneyGram";
+"transfer_to_paper_check" = "Papieren cheque";
+"transfer_to_paypal_account" = "PayPal";
+"transfer_to_prepaid_card" = "Overboeken naar kaart";
+"transfer_to_program_account" = "Overboeken naar programma";
+"transfer_to_user" = "Overboeken naar gebruiker";
+"transfer_to_western_union" = "Western Union";
+"transfer_to_wire" = "Bankoverschrijving";
+"transfer_to_wubs_wire" = "Bankoverschrijving";
+"transfer_to_venmo_account" = "Venmo";
+"transfer_to_bank_card" = "Bankkaart";
+"virtual_incentive_cancellation" = "Annulering promotie";
+"virtual_incentive_issuance" = "Uitgegeven promotie";
+"virtual_incentive_purchase" = "Aankoop promotie";
+"virtual_incentive_refund" = "Terugbetaling promotie";
+"western_union_transfer_return" = "Opname Western Union";
+"wire_transfer_fee" = "Kosten bankoverschrijving";
+"wire_transfer_return" = "Terugbetaling bankoverschrijving";
+"wubs_wire_transfer_return" = "Terugbetaling bankoverschrijving";
+"unknown_receipt_type" = "Onbekend transactietype";
+"paypal_account_transfer_return" = "Terugbetaling uitbetaling";
+"venmo_account_transfer_return" = "Terugbetaling uitbetaling";
+"prepaid_card_account_deposit" = "Storting op rekening";
+"prepaid_card_annual_fee_discount" = "Korting jaarlijkse kosten";
+"prepaid_card_bill_reprint_fee" = "Kosten opnieuw afdrukken factuur";
+"prepaid_card_atm_or_cash_advance_fee" = "Kosten geldautomaat/voorschot";
+"prepaid_card_cash_advance_chargeback" = "Terugboeking voorschot";
+"prepaid_card_cash_advance_chargeback_reversal" = "Terugboeking van terugboeking voorschot";
+"prepaid_card_cash_advance_repress" = "Voorschot onderdrukken";
+"prepaid_card_cash_advance_repress_reversal" = "Terugboeking voorschot onderdrukken";
+"prepaid_card_chargeback" = "Terugboeking";
+"prepaid_card_chargeback_refund" = "Terugbetaling terugboeking";
+"prepaid_card_chargeback_refund_reversal" = "Terugbetaling van terugbetaling terugboeking";
+"prepaid_card_chargeback_reversal" = "Terugboeking van terugboeking";
+"prepaid_card_commission_or_fee" = "Kosten/commissie";
+"prepaid_card_debit_transfer" = "Debet/overboekingen";
+"prepaid_card_document_request_fee" = "Kosten document opvragen";
+"prepaid_card_emergency_cash" = "Noodgeld";
+"prepaid_card_emergency_card" = "Noodkaart";
+"prepaid_card_income" = "Inkomen";
+"prepaid_card_load_fee" = "PAN-kosten";
+"prepaid_card_overdue_payment_interest" = "Rente over achterstallige betaling";
+"prepaid_card_payment" = "Opladen";
+"prepaid_card_pin_reprint_fee" = "Pincode opnieuw afdrukken";
+"prepaid_card_priority_pass_fee" = "Kosten priority-pas";
+"prepaid_card_priority_pass_renewal" = "Verlenging priority-pas";
+"prepaid_card_recurring_interest" = "Doorlopende rente";
+"prepaid_card_refund_repress" = "Terugbetaling onderdrukken";
+"prepaid_card_refund_repress_reversal" = "Terugbetaling van terugbetaling onderdrukken";
+"prepaid_card_sale_repress" = "Verkoop onderdrukken";
+"prepaid_card_statement_fee" = "Kosten UTSKGJ-afschrift";
+"prepaid_card_telephone_support_fee" = "Telefonische informatie: saldo, trans. enz.";
+"prepaid_card_transfer_fee" = "Kosten kaart opladen";
+"prepaid_card_transfer_return" = "Terugbetaling opladen prepaidkaart";
+"prepaid_card_bank_withdrawal_reversal" = "Omgekeerde bankopname";
+"prepaid_card_bank_withdrawal_chargeback" = "Terugboeking omgekeerde bankopname";
+"prepaid_card_refund_fee" = "Kosten terugbetaling";
+"prepaid_card_monthly_maintenance_fee" = "Maandelijkse onderhoudskosten";
+"prepaid_card_transaction_fee" = "Transactiekosten";
+"prepaid_card_sms_fee" = "Sms-kosten";
+"prepaid_card_declined_authorization_fee" = "Kosten afgewezen autorisatie";
+"fispc" = "Aankoop";
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Receipt Detail
+"mobileTransactionDetailsHeader" = "Transactiegegevens";
+"mobileTransactionTypeLabel" = "TRANSACTIE";
+"mobileTransactionDetailsLabel" = "GEGEVENS";
+"mobileFeeInfoLabel" = "KOSTEN INFORMATIE";
+"mobileConfirmNotesLabel" = "OPMERKING";
+"mobileCharityName" = "Naam liefdadigheidsinstelling";
+"mobileCheckNumber" = "Checknummer";
+"mobileTransactionIdLabel" = "Transactie-ID";
+"mobilePromoWebsite" = "Promotiewebsite";
+"mobileTransactionDetailsTotal" = "Transactietotaal";
+"amount" = "Bedrag";
+"mobileFeeLabel" = "Kosten";
+"mobileJournalNumberLabel" = "Ontvangstbewijs-ID";
+"date" = "Datum";
+
+    // Transfer Funds
+"mobileTransferFundsHeader" = "Overboeken";
+"mobileConfirmationHeader" = "Bevestig de gegevens";
+"mobileTransferFromLabel" = "OVERBOEKEN VAN";
+"mobileTransferToLabel" = "OVERBOEKEN NAAR";
+"mobileNoteLabel" = "Opmerking";
+"mobileConfirmDetailsAmount" = "Bedrag";
+"mobileConfirmDetailsFee" = "Kosten";
+"mobileConfirmDetailsTotal" = "U ontvangt";
+"mobileTransferMax" = "Max. bedrag overboeken";
+"mobileFXsell" = "Van";
+"mobileFXbuy" = "Naar";
+"mobileFXRateLabel" = "Wisselkoers";
+"mobileAvailableBalance" = "Beschikbaar bedrag %1$@%2$@ %3$@";
+"continueButtonLabel" = "Doorgaan";
+"mobileAddTransferMethod" = "Overboekingsmethode toevoegen";
+"mobileTransferMethodsHeader" = "Overboekingsmethoden";
+"mobileTransferFromHeader" = "Overboeken van";
+"mobileAvailableFunds" = "Beschikbaar geld";
+"mobileFXlabel" = "VREEMDE VALUTA";
+"mobileSummaryLabel" = "SAMENVATTING";
+"transfer" = "Overboeken";
+"transferAmountInvalid" = "Voer een geldig overboekingsbedrag in";
+"noTransferMethodAdded" = "Overboekingsmethode is verplicht";
+"transfer_error_no_transfer_method_module_initialized" = "U kunt geen overboekingsmethode toevoegen.";
+"transfer_fx_rate_changed" = "Door veranderingen in de wisselkoers ontvangt u nu: %1$@";
+"mobileTransferSuccessMsg" = "Uw overboeking wordt verwerkt";
+"mobileTransferSuccessDetails" = "Het geld is onderweg naar uw %1$@.";
+"noTransferFromSourceAvailable" = "Geen overboeking van bron beschikbaar";

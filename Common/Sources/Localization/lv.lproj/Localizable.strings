@@ -1,0 +1,266 @@
+//
+// Copyright 2018 - Present Hyperwallet
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+// and associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+// BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+"backBarButton" = "Atpakaļ";
+"mobileTransferMethodsHeader" = "Pārskaitījumu veidi";
+"remove" = "Dzēst";
+"cancelButtonLabel" = "Atcelt";
+"doneButtonLabel" = "Pabeigts";
+"try_again_button_label" = "Mēģiniet vēlreiz";
+"search_placeholder_label" = "Meklēt";
+"unexpected_error_message" = "Radusies kļūda. Lūdzu, mēģiniet atkārtoti";
+"network_connection_error_title" = "Problēma ar savienojumu";
+"unexpected_title" = "Neparedzēta kļūda";
+"network_connection_error_message" = "Apstrādājot pieprasījumu, radās problēma. Lūdzu, pārbaudiet savienojumu.";
+"endingIn" = "derīguma termiņš  ";
+"to" = "līdz  ";
+"no_country_available_error_message" = "Nav pieejama neviena valsts";
+"no_transfer_method_available_error_message" = "%1$@ un %2$@ nav pieejams neviens pārskaitījuma veids";
+"no_currency_available_error_message" = "Valstij %1$@ nav pieejama valūta";
+"emptyStateAddTransferMethod" = "Pievienojiet pārskaitījuma veidu, lai uzsāktu darījumu.";
+"mobileAddTransferMethodHeader" = "Pievienot pārskaitījuma veidu";
+"mobileCountryCurrencyLabel" = "ATRAŠANĀS VIETA UN VALŪTA";
+"mobileTransferMethodLabel" = "PĀRSKAITĪJUMA VEIDS";
+"mobileCountryRegion" = "Valsts/reģions";
+"mobileCurrencyLabel" = "Valūta";
+"mobileAreYouSure" = "Vai tiešām?";
+"mobileRemoveEAconfirm" = "Dzēst pārskaitījuma veidu";
+"fee_flat_formatter" = "%1$@%2$@ maksa";
+"fee_percent_only_min_formatter" = "%1$@%% (Min.:%2$@%3$@) maksa";
+"fee_percent_only_max_formatter" = "%1$@%% (Maks.:%2$@%3$@) maksa";
+"fee_percent_formatter" = "%1$@%% (Min.:%2$@%3$@, maks.:%2$@%4$@) maksa";
+"fee_mix_no_min_and_max_formatter" = "%1$@%2$@ + %3$@%% maksa";
+"fee_mix_only_min_formatter" = "%1$@%2$@ + %3$@%% (Min.:%1$@%4$@) maksa";
+"fee_mix_only_max_formatter" = "%1$@%2$@ + %3$@%% (Maks.:%1$@%4$@) maksa";
+"fee_mix_formatter" = "%1$@%2$@ + %3$@%% (Min.:%1$@%4$@, maks.:%1$@%5$@) maksa";
+"fee_percent_no_min_and_max_formatter" = "%1$@%% maksa";
+"transfer_method_not_supported_message" = "Šis pārskaitījuma veids netiek atbalstīts.";
+"error" = "Kļūda";
+"authentication_error_title" = "Autorizācijas kļūda";
+"authentication_error_message" = "Mēģinājuma izgūt autorizācijas marķieri rezultātā radās kļūda";
+
+    // Transfer methods
+"bank_account" = "Bankas konts";
+"bank_card" = "Debetkarte";
+"paper_check" = "Naudas čeks";
+"prepaid_card" = "Priekšapmaksas karte";
+"wire_account" = "Elektronisko pārskaitījumu konts";
+"paypal_account" = "PayPal konts";
+"venmo_account" = "Venmo konts";
+"cash_pickup_mg" = "MoneyGram";
+
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Manage Prepaid Card Message
+"manage_prepaid_card_message" = "Pierakstieties, izmantojot tīmekļa pārlūku, lai pārvaldītu savu karti";
+    //Select Transfer Method View
+"select_a_country_message" = "Atlasīt valsti";
+
+    // Add Transfer Method
+"createTransferMethodButtonLabel" = "Pievienot pārskaitījuma veidu";
+"account_information" = "KONTA INFORMĀCIJA: %1$@(%2$@)";
+"account_holder" = "KONTA TURĒTĀJA INFORMĀCIJA";
+"address"="ADRESE";
+"mobileFeesAndProcessingTime" = "KOMISIJAS MAKSA UN APSTRĀDES LAIKS";
+"intermediary_account" = "STARPNIEKBANKAS KONTS";
+"contact_information" = "KONTAKTINFORMĀCIJA";
+"identification" = "IDENTIFIKĀCIJA";
+
+"date_format" = "GGGG-MM-DD";
+
+    // Processing View
+"processing_view_label" = "Apstrādā";
+"complete_view_label" = "Izpildīts";
+
+    // Receipt
+"transactions" = "Darījumi";
+"mobileNoTransactions" = "Nav nevienas darbības, ko attēlot.";
+"mobilePrepaidCardNoTransactions" = "Pēdējo 365 dienu laikā nav veikts neviens darījums.";
+"add_transaction_title" = "Pievienot darījumu";
+"account_closure_fee" = "Maksa par konta slēgšanu";
+"account_closure" = "Konta slēgšana";
+"account_unload" = "Līdzekļu atgriešana";
+"adjustment" = "Atlikuma korekcija";
+"annual_fee_refund" = "Gada maksas atmaksa";
+"annual_fee" = "Gada maksa";
+"bank_account_transfer_fee" = "Bankas konta atgriešanas maksa";
+"bank_account_transfer_return_fee" = "Bankas konta atgriešanas maksa";
+"bank_account_transfer_return" = "Bankas konta atgriešana";
+"card_activation_fee_waiver" = "Atcelta kartes aktivizācijas maksa";
+"card_activation_fee" = "Kartes aktivizācijas maksa";
+"card_fee" = "Kartes maksa";
+"customer_service_fee_refund" = "Klienta apkalpošanas maksas atmaksa";
+"customer_service_fee" = "Klienta apkalpošanas maksa";
+"deposit" = "Maksājums";
+"donation_fee" = "Ziedojuma maksa";
+"donation_return" = "Ziedojuma atmaksa";
+"donation" = "Ziedojums";
+"dormant_user_fee_refund" = "Neaktīva lietotāja konta maksas atmaksa";
+"dormant_user_fee" = "Neaktīva lietotāja konta maksa";
+"expedited_shipping_fee" = "Paātrinātas piegādes maksa";
+"foreign_exchange" = "Valūtas maiņas kurss";
+"generic_fee_refund" = "Vispārējās maksas atmaksa";
+"manual_adjustment" = "Korekcija";
+"manual_transfer_to_prepaid_card" = "Pārskaitījums uz karti";
+"merchant_payment_fee" = "Komersanta maksājuma maksa";
+"merchant_payment_refund" = "Komersanta maksājuma atmaksa";
+"merchant_payment_return" = "Komersanta maksājuma atgriešana";
+"merchant_payment" = "Komersanta maksājums";
+"moneygram_transfer_return" = "MoneyGram atgriešana";
+"monthly_fee_refund" = "Ikmēneša maksas atmaksa";
+"monthly_fee" = "Ikmēneša maksa";
+"paper_check_fee" = "Naudas čeka maksa";
+"paper_check_refund" = "Naudas čeka atmaksa";
+"payment_cancellation" = "Maksājuma atcelšana";
+"payment_expiration" = "Beidzies maksājuma derīguma termiņš";
+"payment_expiry_fee" = "Maksājuma derīguma termiņa beigu maksa";
+"payment_fee" = "Maksājuma komisijas maksa";
+"payment_return" = "Maksājuma atgriešana";
+"payment_reversal_fee" = "Maksa par maksājuma nosūtīšanu atpakaļ";
+"payment_reversal" = "Maksājuma nosūtīšana atpakaļ";
+"payment" = "Maksājums";
+"prepaid_card_balance_inquiry_fee" = "Maksa par atlikuma vaicājumu";
+"prepaid_card_cash_advance" = "Skaidras naudas avanss";
+"prepaid_card_dispute_deposit" = "Apstrīdētais kartes depozīts";
+"prepaid_card_disputed_charge_refund" = "Apstrīdētās maksas atmaksa";
+"prepaid_card_domestic_cash_withdrawal_fee" = "Skaidras naudas izņemšana bankomātā";
+"prepaid_card_exchange_rate_difference" = "Valūtas maiņas kursa starpība";
+"prepaid_card_manual_unload" = "Pārskaitījums no kartes";
+"prepaid_card_overseas_cash_withdrawal_fee" = "Skaidras naudas izņemšana bankomātā";
+"prepaid_card_pin_change_fee" = "Maksa par PIN koda maiņu";
+"prepaid_card_refund" = "Atmaksa";
+"prepaid_card_replacement_fee" = "Kartes aizstāšanas maksa";
+"prepaid_card_sale_reversal" = "Atgriezts darījums";
+"prepaid_card_sale" = "Darījums";
+"prepaid_card_unload" = "Pārskaitījums no kartes";
+"processing_fee" = "Apstrādes maksa";
+"standard_shipping_fee" = "Standarta piegādes maksa";
+"transfer_fee" = "Pārskaitījuma maksa";
+"transfer_to_bank_account" = "Bankas konts";
+"transfer_to_debit_card" = "Debetkarte";
+"transfer_to_moneygram" = "MoneyGram";
+"transfer_to_paper_check" = "Naudas čeks";
+"transfer_to_paypal_account" = "PayPal";
+"transfer_to_prepaid_card" = "Pārskaitījums uz karti";
+"transfer_to_program_account" = "Pārskaitījums uz programmu";
+"transfer_to_user" = "Pārskaitījums lietotājam";
+"transfer_to_western_union" = "Western Union";
+"transfer_to_wire" = "Elektroniskais pārskaitījums";
+"transfer_to_wubs_wire" = "Elektroniskais pārskaitījums";
+"transfer_to_venmo_account" = "Venmo";
+"transfer_to_bank_card" = "Bankas karte";
+"virtual_incentive_cancellation" = "Akcijas atcelšana";
+"virtual_incentive_issuance" = "Izsniegts akcijas kods";
+"virtual_incentive_purchase" = "Akcijas pirkums";
+"virtual_incentive_refund" = "Akcijas atmaksa";
+"western_union_transfer_return" = "Western Union naudas izņemšana";
+"wire_transfer_fee" = "Elektroniskā pārskaitījuma maksa";
+"wire_transfer_return" = "Elektroniskā pārskaitījuma atgriešana";
+"wubs_wire_transfer_return" = "Elektroniskā pārskaitījuma atgriešana";
+"unknown_receipt_type" = "Nezināms darījuma veids";
+"paypal_account_transfer_return" = "Naudas līdzekļu atgriešana";
+"venmo_account_transfer_return" = "Naudas līdzekļu atgriešana";
+"prepaid_card_account_deposit" = "Konta depozīts";
+"prepaid_card_annual_fee_discount" = "Gada maksas atlaide";
+"prepaid_card_bill_reprint_fee" = "Maksa par rēķina atkārtotu izdrukāšanu";
+"prepaid_card_atm_or_cash_advance_fee" = "Maksa par skaidras naudas izņemšanu bankomātā / avansā";
+"prepaid_card_cash_advance_chargeback" = "Skaidras naudas avansa atteikums";
+"prepaid_card_cash_advance_chargeback_reversal" = "Skaidras naudas avansa atteikuma atgriešana";
+"prepaid_card_cash_advance_repress" = "Skaidras naudas avansa ieturējums";
+"prepaid_card_cash_advance_repress_reversal" = "Skaidras naudas avansa ieturējuma atgriešana";
+"prepaid_card_chargeback" = "Maksas piemērošanas atteikums";
+"prepaid_card_chargeback_refund" = "Atteiktās maksas atmaksa";
+"prepaid_card_chargeback_refund_reversal" = "Atteiktās maksas atmaksas atgriešana";
+"prepaid_card_chargeback_reversal" = "Atteiktās maksas atgriešana";
+"prepaid_card_commission_or_fee" = "Maksa / komisijas maksa";
+"prepaid_card_debit_transfer" = "Debets / pārskaitījumi";
+"prepaid_card_document_request_fee" = "Maksa par dokumenta pieprasīšanu";
+"prepaid_card_emergency_cash" = "Ārkārtas naudas līdzekļi";
+"prepaid_card_emergency_card" = "Ārkārtas karte";
+"prepaid_card_income" = "Ienākumi";
+"prepaid_card_load_fee" = "PAN maksa";
+"prepaid_card_overdue_payment_interest" = "Procenti par kavētu maksājumu";
+"prepaid_card_payment" = "Papildināšana";
+"prepaid_card_pin_reprint_fee" = "PIN koda atkārtota izdruka";
+"prepaid_card_priority_pass_fee" = "Maksa par privilēģiju karti";
+"prepaid_card_priority_pass_renewal" = "Privilēģiju kartes atjaunošana";
+"prepaid_card_recurring_interest" = "Periodiskā procentu maksa";
+"prepaid_card_refund_repress" = "Atmaksas ieturējums";
+"prepaid_card_refund_repress_reversal" = "Atmaksa ieturējums atgriešana";
+"prepaid_card_sale_repress" = "Pārdošanas ieturējums";
+"prepaid_card_statement_fee" = "UTSKGJ izdrukas maksa";
+"prepaid_card_telephone_support_fee" = "Informācija pa tālruni: atlikums, dar., utt.";
+"prepaid_card_transfer_fee" = "Kartes papildināšanas maksa";
+"prepaid_card_transfer_return" = "Priekšapmaksas kartes papildināšanas atmaksa";
+"prepaid_card_bank_withdrawal_reversal" = "Reversā izņemšana bankā";
+"prepaid_card_bank_withdrawal_chargeback" = "Reversās izņemšana bankā atteikums";
+"prepaid_card_refund_fee" = "Maksa par atmaksu";
+"prepaid_card_monthly_maintenance_fee" = "Ikmēneša uzturēšanas maksa";
+"prepaid_card_transaction_fee" = "Darījuma maksa";
+"prepaid_card_sms_fee" = "SMS maksa";
+"prepaid_card_declined_authorization_fee" = "Atteiktas autorizācijas maksa";
+"fispc" = "Pirkums";
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Receipt Detail
+"mobileTransactionDetailsHeader" = "Informācija par darījumu";
+"mobileTransactionTypeLabel" = "DARĪJUMS";
+"mobileTransactionDetailsLabel" = "INFORMĀCIJA";
+"mobileFeeInfoLabel" = "INFORMĀCIJA PAR MAKSU";
+"mobileConfirmNotesLabel" = "PIEZĪME";
+"mobileCharityName" = "Labdarības organizācijas nosaukums";
+"mobileCheckNumber" = "Čeka numurs";
+"mobileTransactionIdLabel" = "Darījuma ID";
+"mobilePromoWebsite" = "Akcijas tīmekļa vietne";
+"mobileTransactionDetailsTotal" = "Darījuma kopsumma";
+"amount" = "Summa";
+"mobileFeeLabel" = "Maksa";
+"mobileJournalNumberLabel" = "Kvīts ID";
+"date" = "Datums";
+
+    // Transfer Funds
+"mobileTransferFundsHeader" = "Pārskaitījums";
+"mobileConfirmationHeader" = "Apstiprināt informāciju";
+"mobileTransferFromLabel" = "PĀRSKAITĪT NO";
+"mobileTransferToLabel" = "SAŅĒMĒJS";
+"mobileNoteLabel" = "Piezīme";
+"mobileConfirmDetailsAmount" = "Summa";
+"mobileConfirmDetailsFee" = "Maksa";
+"mobileConfirmDetailsTotal" = "Jūs saņemsiet";
+"mobileTransferMax" = "Pārskaitīt maksimālo summu";
+"mobileFXsell" = "No";
+"mobileFXbuy" = "Kam";
+"mobileFXRateLabel" = "Valūtas maiņas kurss";
+"mobileAvailableBalance" = "Pieejamā summa %1$@%2$@ %3$@";
+"continueButtonLabel" = "Turpināt";
+"mobileAddTransferMethod" = "Pievienot pārskaitījuma veidu";
+"mobileTransferMethodsHeader" = "Pārskaitījumu veidi";
+"mobileTransferFromHeader" = "Pārskaitīt no";
+"mobileAvailableFunds" = "Pieejamie līdzekļi";
+"mobileFXlabel" = "VALŪTAS MAIŅAS KURSS";
+"mobileSummaryLabel" = "KOPSAVILKUMS";
+"transfer" = "Pārskaitījums";
+"transferAmountInvalid" = "Ievadiet derīgu pārskaitījuma summu";
+"noTransferMethodAdded" = "Jānorāda pārskaitījuma veids";
+"transfer_error_no_transfer_method_module_initialized" = "Jūs nevarat pievienot pārskaitījuma veidu.";
+"transfer_fx_rate_changed" = "Valūtas maiņas kursa izmaiņu dēļ jūs tagad saņemsiet: %1$@";
+"mobileTransferSuccessMsg" = "Jūsu pārskaitījums tiek apstrādāts";
+"mobileTransferSuccessDetails" = "Nauda ir ceļā uz jūsu %1$@.";
+"noTransferFromSourceAvailable" = "Nav pieejams pārskaitījums no avota";

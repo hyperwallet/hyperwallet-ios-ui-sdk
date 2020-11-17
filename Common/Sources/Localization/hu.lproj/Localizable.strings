@@ -1,0 +1,266 @@
+//
+// Copyright 2018 - Present Hyperwallet
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+// and associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+// BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+"backBarButton" = "Vissza";
+"mobileTransferMethodsHeader" = "Átutalási módok";
+"remove" = "Eltávolítás";
+"cancelButtonLabel" = "Mégse";
+"doneButtonLabel" = "Kész";
+"try_again_button_label" = "Újra";
+"search_placeholder_label" = "Keresése";
+"unexpected_error_message" = "Valami hiba történt. Kérjük, próbálja újra";
+"network_connection_error_title" = "Kapcsolódási hiba";
+"unexpected_title" = "Váratlan hiba";
+"network_connection_error_message" = "Problémába ütköztünk a kérelem feldolgozása során. Kérjük, ellenőrizze a kapcsolatot.";
+"endingIn" = "a következő számra végződő kártya: ";
+"to" = "címzett:  ";
+"no_country_available_error_message" = "Nincs elérhető ország";
+"no_transfer_method_available_error_message" = "Nincs elérhető átutalási mód a következőkre: %1$@ és %2$@";
+"no_currency_available_error_message" = "Nincs elérhető pénznem a következő országra: %1$@";
+"emptyStateAddTransferMethod" = "A kezdéshez adjon hozzá egy átutalási módot";
+"mobileAddTransferMethodHeader" = "Adjon hozzá egy átutalási módot";
+"mobileCountryCurrencyLabel" = "HELYSZÍN ÉS PÉNZNEM";
+"mobileTransferMethodLabel" = "ÁTUTALÁSI MÓD";
+"mobileCountryRegion" = "Ország/régió";
+"mobileCurrencyLabel" = "Pénznem";
+"mobileAreYouSure" = "Biztos benne?";
+"mobileRemoveEAconfirm" = "Átutalási mód eltávolítása";
+"fee_flat_formatter" = "%1$@%2$@ díj";
+"fee_percent_only_min_formatter" = "%1$@%% (Min.:%2$@%3$@) díj";
+"fee_percent_only_max_formatter" = "%1$@%% (Max.:%2$@%3$@) díj";
+"fee_percent_formatter" = "%1$@%% (Min.:%2$@%3$@, max.:%2$@%4$@) díj";
+"fee_mix_no_min_and_max_formatter" = "%1$@%2$@ + %3$@%% díj";
+"fee_mix_only_min_formatter" = "%1$@%2$@ + %3$@%% (Min.:%1$@%4$@) díj";
+"fee_mix_only_max_formatter" = "%1$@%2$@ + %3$@%% (Max.:%1$@%4$@) díj";
+"fee_mix_formatter" = "%1$@%2$@ + %3$@%% (Min.:%1$@%4$@, Max.:%1$@%5$@) díj";
+"fee_percent_no_min_and_max_formatter" = "%1$@%% díj";
+"transfer_method_not_supported_message" = "Ez az átutalási mód nem támogatott.";
+"error" = "Hiba";
+"authentication_error_title" = "Hitelesítési hiba";
+"authentication_error_message" = "A hitelesítési token lehívási kísérlete hibát eredményezett";
+
+    // Transfer methods
+"bank_account" = "Bankszámla";
+"bank_card" = "Betéti kártya";
+"paper_check" = "Papír alapú csekk";
+"prepaid_card" = "Előre fizetett kártya";
+"wire_account" = "Átutalási számla";
+"paypal_account" = "Paypal-számla";
+"venmo_account" = "Venmo-számla";
+"cash_pickup_mg" = "MoneyGram";
+
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Manage Prepaid Card Message
+"manage_prepaid_card_message" = "A kártyája kezeléséhez webböngészőből jelentkezzen be";
+    //Select Transfer Method View
+"select_a_country_message" = "Válasszon egy országot";
+
+    // Add Transfer Method
+"createTransferMethodButtonLabel" = "Adjon hozzá egy átutalási módot";
+"account_information" = "SZÁMLAADATOK: %1$@(%2$@)";
+"account_holder" = "SZÁMLATULAJDONOSI ADATOK";
+"address"="CÍM";
+"mobileFeesAndProcessingTime" = "DÍJAK ÉS FELDOLGOZÁSI IDŐ";
+"intermediary_account" = "KÖZVETÍTŐ BANKSZÁMLA";
+"contact_information" = "ELÉRHETŐSÉG";
+"identification" = "AZONOSÍTÓ";
+
+"date_format" = "ÉÉÉÉ-HH-DD";
+
+    // Processing View
+"processing_view_label" = "Feldolgozás alatt";
+"complete_view_label" = "Teljesítve";
+
+    // Receipt
+"transactions" = "Tranzakciók";
+"mobileNoTransactions" = "Nincs megjeleníthető tevékenység.";
+"mobilePrepaidCardNoTransactions" = "Nincs tranzakció az elmúlt 365 napban.";
+"add_transaction_title" = "Tranzakció hozzáadása";
+"account_closure_fee" = "Számlazárási díj";
+"account_closure" = "Számlazárás";
+"account_unload" = "Pénzösszeg-visszatérítés";
+"adjustment" = "Egyenlegkiegészítés";
+"annual_fee_refund" = "Éves díjvisszatérítés";
+"annual_fee" = "Éves díj";
+"bank_account_transfer_fee" = "Bankszámla visszatérítési díj";
+"bank_account_transfer_return_fee" = "Bankszámla visszatérítési díj";
+"bank_account_transfer_return" = "Bankszámla-visszatérítés";
+"card_activation_fee_waiver" = "Kártyaaktivációs díjelengedés";
+"card_activation_fee" = "Kártyaaktivációs díj";
+"card_fee" = "Kártyadíj";
+"customer_service_fee_refund" = "Ügyfélszolgálati djjvisszatérítés";
+"customer_service_fee" = "Ügyfélszolgálati díj";
+"deposit" = "Fizetés";
+"donation_fee" = "Adománydíj";
+"donation_return" = "Adományvisszatérítés";
+"donation" = "Adomány";
+"dormant_user_fee_refund" = "„Alvó” felhasználói fiók díjvisszatérítés";
+"dormant_user_fee" = "„Alvó” felhasználói fiók díj";
+"expedited_shipping_fee" = "Gyorsított szállítási díj";
+"foreign_exchange" = "Deviza";
+"generic_fee_refund" = "Általános díjvisszatérítés";
+"manual_adjustment" = "Módosítás";
+"manual_transfer_to_prepaid_card" = "Átutalás kártyára";
+"merchant_payment_fee" = "Kereskedői fizetés díja";
+"merchant_payment_refund" = "Kereskedői fizetés visszatérítése";
+"merchant_payment_return" = "Kereskedői fizetés visszatérítése";
+"merchant_payment" = "Kereskedői fizetés";
+"moneygram_transfer_return" = "MoneyGram-visszatérítés";
+"monthly_fee_refund" = "MoneyGram-díjvisszatérítés";
+"monthly_fee" = "Havi díj";
+"paper_check_fee" = "Papír alapú csekk díja";
+"paper_check_refund" = "Papír alapú csekk visszatérítése";
+"payment_cancellation" = "Fizetés törlése";
+"payment_expiration" = "Lejárt fizetés";
+"payment_expiry_fee" = "Lejárt fizetés díja";
+"payment_fee" = "Fizetés díja";
+"payment_return" = "Fizetés visszatérítése";
+"payment_reversal_fee" = "Fizetés visszafordítási díja";
+"payment_reversal" = "Fizetés visszafordítása";
+"payment" = "Fizetés";
+"prepaid_card_balance_inquiry_fee" = "Egyenleglekérdezés díja";
+"prepaid_card_cash_advance" = "Készpénz-előleg";
+"prepaid_card_dispute_deposit" = "Vitatott kártyaelőleg";
+"prepaid_card_disputed_charge_refund" = "Vitatott terhelés visszatérítése";
+"prepaid_card_domestic_cash_withdrawal_fee" = "ATM-pénzfelvétel";
+"prepaid_card_exchange_rate_difference" = "Árfolyamkülönbözet";
+"prepaid_card_manual_unload" = "Átutalás kártyáról";
+"prepaid_card_overseas_cash_withdrawal_fee" = "ATM-pénzfelvétel";
+"prepaid_card_pin_change_fee" = "PIN-módosítási díj";
+"prepaid_card_refund" = "Visszatérítés";
+"prepaid_card_replacement_fee" = "Kártyacsere díja";
+"prepaid_card_sale_reversal" = "Visszafordított tranzakció";
+"prepaid_card_sale" = "Tranzakció";
+"prepaid_card_unload" = "Átutalás kártyáról";
+"processing_fee" = "Feldolgozási díj";
+"standard_shipping_fee" = "Standard szállítási díj";
+"transfer_fee" = "Átutalási díj";
+"transfer_to_bank_account" = "Bankszámla";
+"transfer_to_debit_card" = "Betéti kártya";
+"transfer_to_moneygram" = "MoneyGram";
+"transfer_to_paper_check" = "Papír alapú csekk";
+"transfer_to_paypal_account" = "PayPal";
+"transfer_to_prepaid_card" = "Átutalás kártyára";
+"transfer_to_program_account" = "Átutalás programba";
+"transfer_to_user" = "Átutalás felhasználónak";
+"transfer_to_western_union" = "Western Union";
+"transfer_to_wire" = "Banki átutalás";
+"transfer_to_wubs_wire" = "Banki átutalás";
+"transfer_to_venmo_account" = "Venmo";
+"transfer_to_bank_card" = "Bankkártya";
+"virtual_incentive_cancellation" = "Promó lemondása";
+"virtual_incentive_issuance" = "Promó kiadva";
+"virtual_incentive_purchase" = "Promó megvásárlása";
+"virtual_incentive_refund" = "Promó visszatérítése";
+"western_union_transfer_return" = "Western Union-pénzfelvétel";
+"wire_transfer_fee" = "Banki átutalás díja";
+"wire_transfer_return" = "Banki átutalás visszatérítése";
+"wubs_wire_transfer_return" = "Banki átutalás visszatérítése";
+"unknown_receipt_type" = "Ismeretlen tranzakciótípus";
+"paypal_account_transfer_return" = "Kifizetés visszatérítése";
+"venmo_account_transfer_return" = "Kifizetés visszatérítése";
+"prepaid_card_account_deposit" = "Számlabefizetés";
+"prepaid_card_annual_fee_discount" = "Éves díjkedvezmény";
+"prepaid_card_bill_reprint_fee" = "Számla újranyomtatási díja";
+"prepaid_card_atm_or_cash_advance_fee" = "ATM-/Készpénzelőleg díja";
+"prepaid_card_cash_advance_chargeback" = "Készpénzelőleg visszaterhelése";
+"prepaid_card_cash_advance_chargeback_reversal" = "Készpénzelőleg visszaterhelésének visszafordítása";
+"prepaid_card_cash_advance_repress" = "Készpénzelőleg visszaterhelésének visszatartása";
+"prepaid_card_cash_advance_repress_reversal" = "Előleg visszaterhelésének visszatartása";
+"prepaid_card_chargeback" = "Visszaterhelés";
+"prepaid_card_chargeback_refund" = "Visszaterhelés visszatérítése";
+"prepaid_card_chargeback_refund_reversal" = "Visszaterhelés visszatérítésének visszafordítása";
+"prepaid_card_chargeback_reversal" = "Visszaterhelés visszatérítése";
+"prepaid_card_commission_or_fee" = "Díj/Jutalék";
+"prepaid_card_debit_transfer" = "Letét/Átutalások";
+"prepaid_card_document_request_fee" = "Dokumentumlekérés díja";
+"prepaid_card_emergency_cash" = "Vészhelyzeti pénzösszeg";
+"prepaid_card_emergency_card" = "Vészhelyzeti kártya";
+"prepaid_card_income" = "Bevétel";
+"prepaid_card_load_fee" = "PAN díja";
+"prepaid_card_overdue_payment_interest" = "Lejárt határidejű fizetés kamata";
+"prepaid_card_payment" = "Feltöltés";
+"prepaid_card_pin_reprint_fee" = "PIN újranyomtatása";
+"prepaid_card_priority_pass_fee" = "Elsőbbségi jegy díja";
+"prepaid_card_priority_pass_renewal" = "Elsőbbségi jegy megújítása";
+"prepaid_card_recurring_interest" = "Forgó kamat";
+"prepaid_card_refund_repress" = "Visszatérítés visszaterhelése";
+"prepaid_card_refund_repress_reversal" = "Visszatérítés visszaterhelésének visszafordítása";
+"prepaid_card_sale_repress" = "Leértékelés visszaterhelése";
+"prepaid_card_statement_fee" = "UTSKGJ nyilatkozat díja";
+"prepaid_card_telephone_support_fee" = "Tájékoztatás telefonon: egyenleg, átutalás stb.";
+"prepaid_card_transfer_fee" = "Kártyafeltöltési díj";
+"prepaid_card_transfer_return" = "Előre fizetett kártyafeltöltés visszatérítési";
+"prepaid_card_bank_withdrawal_reversal" = "Visszafordított banki pénzfelvétel";
+"prepaid_card_bank_withdrawal_chargeback" = "Visszafordított banki pénzfelvétel visszaterhelése";
+"prepaid_card_refund_fee" = "Visszatérítési díj";
+"prepaid_card_monthly_maintenance_fee" = "Havi karbantartási díj";
+"prepaid_card_transaction_fee" = "Tranzakciós díj";
+"prepaid_card_sms_fee" = "SMS-díj";
+"prepaid_card_declined_authorization_fee" = "Elutasított hitelesítési díj";
+"fispc" = "Vásárlás";
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Receipt Detail
+"mobileTransactionDetailsHeader" = "Tranzakció részletei";
+"mobileTransactionTypeLabel" = "TRANZAKCIÓ";
+"mobileTransactionDetailsLabel" = "ADATOK";
+"mobileFeeInfoLabel" = "DÍJINFORMÁCIÓ";
+"mobileConfirmNotesLabel" = "MEGJEGYZÉS";
+"mobileCharityName" = "Jótékonysági szervezet neve";
+"mobileCheckNumber" = "Ellenőrző szám";
+"mobileTransactionIdLabel" = "Tranzakció azonosító";
+"mobilePromoWebsite" = "Promó weboldal";
+"mobileTransactionDetailsTotal" = "Tranzakció összesen";
+"amount" = "Összeg";
+"mobileFeeLabel" = "Díj";
+"mobileJournalNumberLabel" = "Bizonylatazonosító";
+"date" = "Dátum";
+
+    // Transfer Funds
+"mobileTransferFundsHeader" = "Átutalás";
+"mobileConfirmationHeader" = "Adatok megerősítése";
+"mobileTransferFromLabel" = "ÁTUTALÁS FELADÓJA";
+"mobileTransferToLabel" = "ÁTUTALÁS CÍMZETTJE";
+"mobileNoteLabel" = "Megjegyzés";
+"mobileConfirmDetailsAmount" = "Összeg";
+"mobileConfirmDetailsFee" = "Díj";
+"mobileConfirmDetailsTotal" = "Az Ön által fogadott összeg:";
+"mobileTransferMax" = "Max. összeg átutalása";
+"mobileFXsell" = "Feladó";
+"mobileFXbuy" = "Címzett";
+"mobileFXRateLabel" = "Árfolyam";
+"mobileAvailableBalance" = "Elérhető összeg: %1$@%2$@ %3$@";
+"continueButtonLabel" = "Tovább";
+"mobileAddTransferMethod" = "Átutalási mód hozzáadása";
+"mobileTransferMethodsHeader" = "Átutalási módok";
+"mobileTransferFromHeader" = "Átutalás forrása";
+"mobileAvailableFunds" = "Elérhető pénzösszegek";
+"mobileFXlabel" = "DEVIZA";
+"mobileSummaryLabel" = "ÖSSZEGZÉS";
+"transfer" = "Átutalás";
+"transferAmountInvalid" = "Adjon meg egy érvényes átutalási összeget";
+"noTransferMethodAdded" = "Átutalási mód megadása kötelező";
+"transfer_error_no_transfer_method_module_initialized" = "Önnek nem áll módjában átutalási módot hozzáadni.";
+"transfer_fx_rate_changed" = "Árfolyamváltozás miatt a következő összeget fogja kapni: %1$@.";
+"mobileTransferSuccessMsg" = "Átutalása feldolgozás alatt áll";
+"mobileTransferSuccessDetails" = "Pénzösszege úton van a következőre: %1$@.";
+"noTransferFromSourceAvailable" = "Nincs elérhető átutalási forrás";

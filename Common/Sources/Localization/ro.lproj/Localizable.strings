@@ -1,0 +1,266 @@
+//
+// Copyright 2018 - Present Hyperwallet
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+// and associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+// BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+"backBarButton" = "Înapoi";
+"mobileTransferMethodsHeader" = "Metode de transfer";
+"remove" = "Eliminați";
+"cancelButtonLabel" = "Anulați";
+"doneButtonLabel" = "Efectuat";
+"try_again_button_label" = "Încercați din nou";
+"search_placeholder_label" = "Căutați";
+"unexpected_error_message" = "Ceva nu a funcționat corespunzător; vă rugăm să încercați din nou";
+"network_connection_error_title" = "Problemă de conectivitate";
+"unexpected_title" = "Eroare neprevăzută";
+"network_connection_error_message" = "Ne confruntăm cu o problemă la procesarea cererii. Vă rugăm să vă verificați conexiunea.";
+"endingIn" = "cu terminația ";
+"to" = "către ";
+"no_country_available_error_message" = "Nu există nicio țară disponibilă";
+"no_transfer_method_available_error_message" = "Nu există o metodă de transfer disponibilă pentru %1$@ și %2$@";
+"no_currency_available_error_message" = "Nu există nicio monedă disponibilă pentru țara %1$@";
+"emptyStateAddTransferMethod" = "Adăugați o metodă de transfer pentru a începe.";
+"mobileAddTransferMethodHeader" = "Adăugați o metodă de transfer";
+"mobileCountryCurrencyLabel" = "LOCAȚIE ȘI MONEDĂ";
+"mobileTransferMethodLabel" = "METODA DE TRANSFER";
+"mobileCountryRegion" = "Țara/Regiunea";
+"mobileCurrencyLabel" = "Moneda";
+"mobileAreYouSure" = "Sunteți sigur(ă)?";
+"mobileRemoveEAconfirm" = "Eliminați metodă de transfer";
+"fee_flat_formatter" = "Comision %1$@%2$@ ";
+"fee_percent_only_min_formatter" = "Comision %1$@%% (Minim:%2$@%3$@)";
+"fee_percent_only_max_formatter" = "Comision %1$@%% (Maxim:%2$@%3$@)";
+"fee_percent_formatter" = "Comision %1$@%% (Minim:%2$@%3$@, Maxim:%2$@%4$@)";
+"fee_mix_no_min_and_max_formatter" = "Comision %1$@%2$@ + %3$@%%";
+"fee_mix_only_min_formatter" = "Comision %1$@%2$@ + %3$@%% (Minim:%1$@%4$@)";
+"fee_mix_only_max_formatter" = "Comision %1$@%2$@ + %3$@%% (Maxim:%1$@%4$@)";
+"fee_mix_formatter" = "Comision %1$@%2$@ + %3$@%% (Minim:%1$@%4$@, Maxim:%1$@%5$@)";
+"fee_percent_no_min_and_max_formatter" = "Comision %1$@%%";
+"transfer_method_not_supported_message" = "Această metodă de transfer nu este acceptată.";
+"error" = "Eroare";
+"authentication_error_title" = "Eroare de autentificare";
+"authentication_error_message" = "Încercarea de recuperare a codului de autentificare a dus la o eroare";
+
+    // Transfer methods
+"bank_account" = "Cont bancar";
+"bank_card" = "Card de debit";
+"paper_check" = "Cec";
+"prepaid_card" = "Card pre-plătit";
+"wire_account" = "Cont transfer bancar";
+"paypal_account" = "Cont PayPal";
+"venmo_account" = "Cont Venmo";
+"cash_pickup_mg" = "MoneyGram";
+
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Manage Prepaid Card Message
+"manage_prepaid_card_message" = "Autentificați-vă utilizând un browser web pentru a vă gestiona cardul";
+    //Select Transfer Method View
+"select_a_country_message" = "Selectați o țară";
+
+    // Add Transfer Method
+"createTransferMethodButtonLabel" = "Adăugați metoda de transfer";
+"account_information" = "INFORMAȚII CONT: %1$@(%2$@)";
+"account_holder" = "INFORMAȚII TITULAR CONT";
+"address"="ADRESĂ";
+"mobileFeesAndProcessingTime" = "COMISIOANE ȘI TIMP DE PROCESARE";
+"intermediary_account" = "CONT INTERMEDIAR";
+"contact_information" = "INFORMAȚII DE CONTACT";
+"identification" = "IDENTIFICARE";
+
+"date_format" = "AAAA-LL-ZZ";
+
+    // Processing View
+"processing_view_label" = "Se procesează";
+"complete_view_label" = "Finalizare";
+
+    // Receipt
+"transactions" = "Tranzacții";
+"mobileNoTransactions" = "Nu există nicio activitate de afișat.";
+"mobilePrepaidCardNoTransactions" = "Nu există tranzacții în ultimele 365 de zile.";
+"add_transaction_title" = "Adăugați tranzacție";
+"account_closure_fee" = "Comision închidere cont";
+"account_closure" = "Închidere cont";
+"account_unload" = "Returnare fonduri";
+"adjustment" = "Ajustare balanță";
+"annual_fee_refund" = "Comision anual de rambursare";
+"annual_fee" = "Comision anual";
+"bank_account_transfer_fee" = "Comision returnare cont bancar";
+"bank_account_transfer_return_fee" = "Comision returnare cont bancar";
+"bank_account_transfer_return" = "Returnare cont bancar";
+"card_activation_fee_waiver" = "Renunțare la taxa de activare a cardului";
+"card_activation_fee" = "Comision activare card";
+"card_fee" = "Comision card";
+"customer_service_fee_refund" = "Rambursare comision serviciu clienți";
+"customer_service_fee" = "Comision serviciu clienți";
+"deposit" = "Plată";
+"donation_fee" = "Comision donație";
+"donation_return" = "Returnare donație";
+"donation" = "Donație";
+"dormant_user_fee_refund" = "Rambursare comision cont utilizator Dormant";
+"dormant_user_fee" = "Comision cont utilizator Dormant";
+"expedited_shipping_fee" = "Taxă de expediere urgentă";
+"foreign_exchange" = "Curs valutar";
+"generic_fee_refund" = "Rambursare comision general";
+"manual_adjustment" = "Ajustare";
+"manual_transfer_to_prepaid_card" = "Transfer pe card";
+"merchant_payment_fee" = "Comision plată la comerciant";
+"merchant_payment_refund" = "Rambursare plată la comerciant";
+"merchant_payment_return" = "Returnare plată la comerciant";
+"merchant_payment" = "Plată la comerciant";
+"moneygram_transfer_return" = "Returnare MoneyGram";
+"monthly_fee_refund" = "Comision lunar de rambursare";
+"monthly_fee" = "Comision lunar";
+"paper_check_fee" = "Comision cec";
+"paper_check_refund" = "Rambursare cec";
+"payment_cancellation" = "Anulare plată";
+"payment_expiration" = "Plată expirată";
+"payment_expiry_fee" = "Comision expirare plată";
+"payment_fee" = "Comision plată";
+"payment_return" = "Returnare plată";
+"payment_reversal_fee" = "Comision reversare operațiune de plată";
+"payment_reversal" = "Reversare operațiune de plată";
+"payment" = "Plată";
+"prepaid_card_balance_inquiry_fee" = "Comision interogare sold";
+"prepaid_card_cash_advance" = "Avans numerar";
+"prepaid_card_dispute_deposit" = "Depunere card contestată";
+"prepaid_card_disputed_charge_refund" = "Rambursare taxă contestată";
+"prepaid_card_domestic_cash_withdrawal_fee" = "Retragere ATM";
+"prepaid_card_exchange_rate_difference" = "Diferență curs de schimb";
+"prepaid_card_manual_unload" = "Transfer de pe card";
+"prepaid_card_overseas_cash_withdrawal_fee" = "Retragere ATM";
+"prepaid_card_pin_change_fee" = "Comision schimbare PIN";
+"prepaid_card_refund" = "Rambursare";
+"prepaid_card_replacement_fee" = "Comision înlocuire card";
+"prepaid_card_sale_reversal" = "Tranzacție reversată";
+"prepaid_card_sale" = "Tranzacție";
+"prepaid_card_unload" = "Transfer de pe card";
+"processing_fee" = "Comision de procesare";
+"standard_shipping_fee" = "Comision de transport standard";
+"transfer_fee" = "Comision de transfer";
+"transfer_to_bank_account" = "Cont bancar";
+"transfer_to_debit_card" = "Card de debit";
+"transfer_to_moneygram" = "MoneyGram";
+"transfer_to_paper_check" = "Cec";
+"transfer_to_paypal_account" = "PayPal";
+"transfer_to_prepaid_card" = "Transferați pe card";
+"transfer_to_program_account" = "Transferați către program";
+"transfer_to_user" = "Transferați către utilizator";
+"transfer_to_western_union" = "Western Union";
+"transfer_to_wire" = "Transfer bancar";
+"transfer_to_wubs_wire" = "Transfer bancar";
+"transfer_to_venmo_account" = "Venmo";
+"transfer_to_bank_card" = "Card bancar";
+"virtual_incentive_cancellation" = "Anulare ofertă promoțională";
+"virtual_incentive_issuance" = "Ofertă promoțională emisă";
+"virtual_incentive_purchase" = "Achiziționare ofertă promoțională";
+"virtual_incentive_refund" = "Rambursare ofertă promoțională";
+"western_union_transfer_return" = "Retragere Western Union";
+"wire_transfer_fee" = "Comision transfer bancar";
+"wire_transfer_return" = "Returnare transfer bancar";
+"wubs_wire_transfer_return" = "Returnare transfer bancar";
+"unknown_receipt_type" = "Tip tranzacție necunoscut";
+"paypal_account_transfer_return" = "Returnare încasări";
+"venmo_account_transfer_return" = "Returnare încasări";
+"prepaid_card_account_deposit" = "Depunere cont";
+"prepaid_card_annual_fee_discount" = "Reducerea comisionului anual";
+"prepaid_card_bill_reprint_fee" = "Comision reimprimare factură";
+"prepaid_card_atm_or_cash_advance_fee" = "Comision ATM/Avans numerar";
+"prepaid_card_cash_advance_chargeback" = "Stornare avans numerar";
+"prepaid_card_cash_advance_chargeback_reversal" = "Reversare stornare avans numerar";
+"prepaid_card_cash_advance_repress" = "Blocare avans numerar";
+"prepaid_card_cash_advance_repress_reversal" = "Reversare blocare avans";
+"prepaid_card_chargeback" = "Stornare";
+"prepaid_card_chargeback_refund" = "Rambursare stornare";
+"prepaid_card_chargeback_refund_reversal" = "Reversare rambursare stornare";
+"prepaid_card_chargeback_reversal" = "Reversare stornare";
+"prepaid_card_commission_or_fee" = "Taxă/Comision";
+"prepaid_card_debit_transfer" = "Debit/Transferuri";
+"prepaid_card_document_request_fee" = "Comision de solicitare documente";
+"prepaid_card_emergency_cash" = "Bani în caz de urgență";
+"prepaid_card_emergency_card" = "Card în caz de urgență";
+"prepaid_card_income" = "Venit";
+"prepaid_card_load_fee" = "Comision PAN";
+"prepaid_card_overdue_payment_interest" = "Dobândă la plată restantă";
+"prepaid_card_payment" = "Încarcă";
+"prepaid_card_pin_reprint_fee" = "Re-imprimare PIN";
+"prepaid_card_priority_pass_fee" = "Comision acces prioritar";
+"prepaid_card_priority_pass_renewal" = "Reînnoire acces prioritar";
+"prepaid_card_recurring_interest" = "Dobândă cu reînnoire automată";
+"prepaid_card_refund_repress" = "Blocare rambursare";
+"prepaid_card_refund_repress_reversal" = "Reversare blocare rambursare";
+"prepaid_card_sale_repress" = "Blocare vânzare";
+"prepaid_card_statement_fee" = "Comision extras UTSKGJ";
+"prepaid_card_telephone_support_fee" = "Informații la telefon: sold, transferuri, etc.";
+"prepaid_card_transfer_fee" = "Comision încărcare card";
+"prepaid_card_transfer_return" = "Returnare încărcare card preplătit";
+"prepaid_card_bank_withdrawal_reversal" = "Retragere bancară reversată";
+"prepaid_card_bank_withdrawal_chargeback" = "Stornare retragere bancară reversată";
+"prepaid_card_refund_fee" = "Comision de rambursare";
+"prepaid_card_monthly_maintenance_fee" = "Comision lunar de întreținere";
+"prepaid_card_transaction_fee" = "Comision tranzacție";
+"prepaid_card_sms_fee" = "Comision SMS";
+"prepaid_card_declined_authorization_fee" = "Comision de autorizare refuzat";
+"fispc" = "Achiziție";
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Receipt Detail
+"mobileTransactionDetailsHeader" = "Detalii tranzacție";
+"mobileTransactionTypeLabel" = "TRANZACȚIE";
+"mobileTransactionDetailsLabel" = "DETALII";
+"mobileFeeInfoLabel" = "INFORMAȚII COMISION";
+"mobileConfirmNotesLabel" = "NOTĂ";
+"mobileCharityName" = "Denumire organizație caritabilă";
+"mobileCheckNumber" = "Număr cec";
+"mobileTransactionIdLabel" = "ID tranzacție";
+"mobilePromoWebsite" = "Site-ul web al ofertei promoționale";
+"mobileTransactionDetailsTotal" = "Total tranzacție";
+"amount" = "Suma";
+"mobileFeeLabel" = "Comision";
+"mobileJournalNumberLabel" = "ID confirmare de primire";
+"date" = "Data";
+
+    // Transfer Funds
+"mobileTransferFundsHeader" = "Transfer";
+"mobileConfirmationHeader" = "Confirmați detaliile";
+"mobileTransferFromLabel" = "TRANSFER DE LA";
+"mobileTransferToLabel" = "TRANSFER CĂTRE";
+"mobileNoteLabel" = "Notă";
+"mobileConfirmDetailsAmount" = "Suma";
+"mobileConfirmDetailsFee" = "Comision";
+"mobileConfirmDetailsTotal" = "Veți primi";
+"mobileTransferMax" = "Suma maximă de transfer";
+"mobileFXsell" = "De la";
+"mobileFXbuy" = "Către";
+"mobileFXRateLabel" = "Curs de schimb";
+"mobileAvailableBalance" = "Sumă disponibilă %1$@%2$@ %3$@";
+"continueButtonLabel" = "Continuați";
+"mobileAddTransferMethod" = "Adăugați metoda de transfer";
+"mobileTransferMethodsHeader" = "Metode de transfer";
+"mobileTransferFromHeader" = "Transfer de la";
+"mobileAvailableFunds" = "Fonduri disponibile";
+"mobileFXlabel" = "CURS VALUTAR";
+"mobileSummaryLabel" = "SUMAR";
+"transfer" = "Transfer";
+"transferAmountInvalid" = "Introduceți o sumă de transfer validă";
+"noTransferMethodAdded" = "Este necesară o metodă de transfer";
+"transfer_error_no_transfer_method_module_initialized" = "Nu puteți adăuga o metodă de transfer.";
+"transfer_fx_rate_changed" = "Datorită modificărilor cursului de schimb, veți primi acum: %1$@";
+"mobileTransferSuccessMsg" = "Transferul dvs. este în curs de procesare";
+"mobileTransferSuccessDetails" = "Banii sunt în drum spre %1$@ dumneavoastră.";
+"noTransferFromSourceAvailable" = "Nu există transfer de la sursă disponibil";

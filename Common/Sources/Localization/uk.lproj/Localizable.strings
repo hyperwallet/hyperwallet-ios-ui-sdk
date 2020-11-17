@@ -1,0 +1,266 @@
+//
+// Copyright 2018 - Present Hyperwallet
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+// and associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+// BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+"backBarButton" = "Назад";
+"mobileTransferMethodsHeader" = "Способи переказу";
+"remove" = "Видалити";
+"cancelButtonLabel" = "Скасувати";
+"doneButtonLabel" = "Готово";
+"try_again_button_label" = "Спробувати ще раз";
+"search_placeholder_label" = "Пошук";
+"unexpected_error_message" = "Щось пішло не так, спробуйте ще раз";
+"network_connection_error_title" = "Проблема зв’язку";
+"unexpected_title" = "Неочікувана помилка";
+"network_connection_error_message" = "Виникла проблема під час обробки цього запиту. Перевірте, будь ласка, своє з’єднання.";
+"endingIn" = "закінчується на ";
+"to" = "для  ";
+"no_country_available_error_message" = "Немає доступної країни";
+"no_transfer_method_available_error_message" = "Немає доступного способу переказу для %1$@ і %2$@";
+"no_currency_available_error_message" = "Немає доступної валюти для країни %1$@";
+"emptyStateAddTransferMethod" = "Щоб розпочати, додайте спосіб переказу.";
+"mobileAddTransferMethodHeader" = "Додати спосіб переказу";
+"mobileCountryCurrencyLabel" = "МІСЦЕРОЗТАШУВАННЯ ТА ВАЛЮТА";
+"mobileTransferMethodLabel" = "СПОСІБ ПЕРЕКАЗУ";
+"mobileCountryRegion" = "Країна/регіон";
+"mobileCurrencyLabel" = "Валюта";
+"mobileAreYouSure" = "Ви впевнені?";
+"mobileRemoveEAconfirm" = "Видалити спосіб переказу";
+"fee_flat_formatter" = "%1$@%2$@ комісія";
+"fee_percent_only_min_formatter" = "%1$@%% (Мін.:%2$@%3$@) комісія";
+"fee_percent_only_max_formatter" = "%1$@%% (Макс.:%2$@%3$@) комісія";
+"fee_percent_formatter" = "%1$@%% (Мін.:%2$@%3$@, макс.:%2$@%4$@) комісія";
+"fee_mix_no_min_and_max_formatter" = "%1$@%2$@ + %3$@%% комісія";
+"fee_mix_only_min_formatter" = "%1$@%2$@ + %3$@%% (Мін.:%1$@%4$@) комісія";
+"fee_mix_only_max_formatter" = "%1$@%2$@ + %3$@%% (Макс.:%1$@%4$@) комісія";
+"fee_mix_formatter" = "%1$@%2$@ + %3$@%% (Мін.:%1$@%4$@, макс.:%1$@%5$@) комісія";
+"fee_percent_no_min_and_max_formatter" = "%1$@%% комісія";
+"transfer_method_not_supported_message" = "Цей спосіб переказу не підтримується.";
+"error" = "Помилка";
+"authentication_error_title" = "Помилка автентифікації";
+"authentication_error_message" = "Помилка спроби отримання маркера автентифікації";
+
+    // Transfer methods
+"bank_account" = "Банківський рахунок";
+"bank_card" = "Дебетова картка";
+"paper_check" = "Паперовий чек";
+"prepaid_card" = "Дебетова картка";
+"wire_account" = "Рахунок для банківського переказу";
+"paypal_account" = "Рахунок Paypal";
+"venmo_account" = "Рахунок Venmo";
+"cash_pickup_mg" = "MoneyGram";
+
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Manage Prepaid Card Message
+"manage_prepaid_card_message" = "Увійдіть за допомогою браузера, щоби керувати своєю карткою";
+    //Select Transfer Method View
+"select_a_country_message" = "Виберіть країну";
+
+    // Add Transfer Method
+"createTransferMethodButtonLabel" = "Додати спосіб переказу";
+"account_information" = "ДАНІ ПРО ОБЛІКОВИЙ ЗАПИС: %1$@(%2$@)";
+"account_holder" = "ДАНІ ПРО ВЛАСНИКА ОБЛІКОВОГО ЗАПИСУ";
+"address"="АДРЕСА";
+"mobileFeesAndProcessingTime" = "КОМІСІЯ ТА ЧАС ОБРОБКИ";
+"intermediary_account" = "РАХУНОК ПОСЕРЕДНИКА";
+"contact_information" = "КОНТАКТНІ ДАНІ";
+"identification" = "ІДЕНТИФІКАЦІЯ";
+
+"date_format" = "РРРР-ММ-ДД";
+
+    // Processing View
+"processing_view_label" = "Обробка";
+"complete_view_label" = "Завершити";
+
+    // Receipt
+"transactions" = "Транзакції";
+"mobileNoTransactions" = "Немає видів діяльності для відображення.";
+"mobilePrepaidCardNoTransactions" = "Жодних транзакцій за останні 365 днів";
+"add_transaction_title" = "Додати транзакцію";
+"account_closure_fee" = "Комісія за закриття рахунку";
+"account_closure" = "Закриття рахунку";
+"account_unload" = "Повернення коштів";
+"adjustment" = "Регулювання балансу";
+"annual_fee_refund" = "Компенсація щорічної комісії";
+"annual_fee" = "Щорічна комісія";
+"bank_account_transfer_fee" = "Комісія за повернення на банківський рахунок";
+"bank_account_transfer_return_fee" = "Комісія за повернення на банківський рахунок";
+"bank_account_transfer_return" = "Повернення на банківський рахунок";
+"card_activation_fee_waiver" = "Відмова від комісії за активацію картки";
+"card_activation_fee" = "Комісія за активацію картки";
+"card_fee" = "Комісія за карткою";
+"customer_service_fee_refund" = "Компенсація комісії за обслуговування клієнта";
+"customer_service_fee" = "Комісія за обслуговування клієнта";
+"deposit" = "Плата";
+"donation_fee" = "Пожертва";
+"donation_return" = "Повернення пожертви";
+"donation" = "Пожертва";
+"dormant_user_fee_refund" = "Компенсація комісії за обліковий запис неактивного користувача";
+"dormant_user_fee" = "Комісія за обліковий запис неактивного користувача";
+"expedited_shipping_fee" = "Комісія за експрес-доставку";
+"foreign_exchange" = "Обмін валют";
+"generic_fee_refund" = "Компенсація загальної комісії";
+"manual_adjustment" = "Регулювання";
+"manual_transfer_to_prepaid_card" = "Переказ на картку";
+"merchant_payment_fee" = "Комісія за плату продавцю";
+"merchant_payment_refund" = "Компенсація за плату продавцю";
+"merchant_payment_return" = "Повернення плати продавцю";
+"merchant_payment" = "Плата продавцю";
+"moneygram_transfer_return" = "Повернення MoneyGram";
+"monthly_fee_refund" = "Повернення щомісячної комісії";
+"monthly_fee" = "Щомісячна комісія";
+"paper_check_fee" = "Комісія за паперовий чек";
+"paper_check_refund" = "Компенсація за паперовий чек";
+"payment_cancellation" = "Скасування плати";
+"payment_expiration" = "Термін оплати сплив";
+"payment_expiry_fee" = "Комісія за закінчення терміну оплати";
+"payment_fee" = "Комісія за плату";
+"payment_return" = "Повернення плати";
+"payment_reversal_fee" = "Комісія за повернення плати";
+"payment_reversal" = "Повернення плати";
+"payment" = "Плата";
+"prepaid_card_balance_inquiry_fee" = "Комісія за запит балансу";
+"prepaid_card_cash_advance" = "Аванс готівкою";
+"prepaid_card_dispute_deposit" = "Спірний залишок на картці";
+"prepaid_card_disputed_charge_refund" = "Компенсація спірної плати";
+"prepaid_card_domestic_cash_withdrawal_fee" = "Зняття в банкоматі";
+"prepaid_card_exchange_rate_difference" = "Різниця в курсі обміну";
+"prepaid_card_manual_unload" = "Переказ із картки";
+"prepaid_card_overseas_cash_withdrawal_fee" = "Зняття в банкоматі";
+"prepaid_card_pin_change_fee" = "Комісія за зміну PIN-коду";
+"prepaid_card_refund" = "Компенсація";
+"prepaid_card_replacement_fee" = "Комісія за заміну картки";
+"prepaid_card_sale_reversal" = "Скасована транзакція";
+"prepaid_card_sale" = "Транзакція";
+"prepaid_card_unload" = "Переказ із картки";
+"processing_fee" = "Комісія за обробку";
+"standard_shipping_fee" = "Комісія за стандартну доставку";
+"transfer_fee" = "Комісія за переказ";
+"transfer_to_bank_account" = "Банківський рахунок";
+"transfer_to_debit_card" = "Дебетова картка";
+"transfer_to_moneygram" = "MoneyGram";
+"transfer_to_paper_check" = "Паперовий чек";
+"transfer_to_paypal_account" = "PayPal";
+"transfer_to_prepaid_card" = "Переказ на картку";
+"transfer_to_program_account" = "Переказ на програму";
+"transfer_to_user" = "Переказ користувачу";
+"transfer_to_western_union" = "Western Union";
+"transfer_to_wire" = "Банківський переказ";
+"transfer_to_wubs_wire" = "Банківський переказ";
+"transfer_to_venmo_account" = "Venmo";
+"transfer_to_bank_card" = "Банківська картка";
+"virtual_incentive_cancellation" = "Скасування реклами";
+"virtual_incentive_issuance" = "Випущена реклама";
+"virtual_incentive_purchase" = "Рекламна покупка";
+"virtual_incentive_refund" = "Рекламна компенсація";
+"western_union_transfer_return" = "Зняття через Western Union";
+"wire_transfer_fee" = "Комісія за безготівкову оплату";
+"wire_transfer_return" = "Повернення безготівкової оплати";
+"wubs_wire_transfer_return" = "Повернення безготівкової оплати";
+"unknown_receipt_type" = "Невідомий тип транзакції";
+"paypal_account_transfer_return" = "Повернення виведених коштів";
+"venmo_account_transfer_return" = "Повернення виведених коштів";
+"prepaid_card_account_deposit" = "Залишок на рахунку";
+"prepaid_card_annual_fee_discount" = "Знижка на щорічну комісію";
+"prepaid_card_bill_reprint_fee" = "Комісія за повторний друк рахунку";
+"prepaid_card_atm_or_cash_advance_fee" = "Комісія за аванс готівкою/у банкоматі";
+"prepaid_card_cash_advance_chargeback" = "Повернення авансу готівкою";
+"prepaid_card_cash_advance_chargeback_reversal" = "Скасування повернення авансу готівкою";
+"prepaid_card_cash_advance_repress" = "Запобігання авансу готівкою";
+"prepaid_card_cash_advance_repress_reversal" = "Скасування запобігання авансу";
+"prepaid_card_chargeback" = "Повернення оплати";
+"prepaid_card_chargeback_refund" = "Компенсація повернення оплати";
+"prepaid_card_chargeback_refund_reversal" = "Скасування компенсації повернення оплати";
+"prepaid_card_chargeback_reversal" = "Скасування повернення оплати";
+"prepaid_card_commission_or_fee" = "Комісія";
+"prepaid_card_debit_transfer" = "Дебет/Перекази";
+"prepaid_card_document_request_fee" = "Комісія за запит документа";
+"prepaid_card_emergency_cash" = "Термінові гроші";
+"prepaid_card_emergency_card" = "Термінова картка";
+"prepaid_card_income" = "Прибуток";
+"prepaid_card_load_fee" = "Комісія PAN";
+"prepaid_card_overdue_payment_interest" = "Відсоток за прострочену оплату";
+"prepaid_card_payment" = "Завантаження";
+"prepaid_card_pin_reprint_fee" = "Повторний друк PIN-коду";
+"prepaid_card_priority_pass_fee" = "Комісія за пріоритетний пропуск";
+"prepaid_card_priority_pass_renewal" = "Поновлення пріоритетного пропуску";
+"prepaid_card_recurring_interest" = "Відновлюваний відсоток";
+"prepaid_card_refund_repress" = "Запобігання компенсації";
+"prepaid_card_refund_repress_reversal" = "Скасування запобігання компенсації";
+"prepaid_card_sale_repress" = "Запобігання продажу";
+"prepaid_card_statement_fee" = "Комісія за щомісячну виписку за рахунком";
+"prepaid_card_telephone_support_fee" = "Інформація за телефоном: баланс, транз. тощо.";
+"prepaid_card_transfer_fee" = "Комісія за поповнення картки";
+"prepaid_card_transfer_return" = "Повернення за передплачене поповнення картки";
+"prepaid_card_bank_withdrawal_reversal" = "Скасоване зняття в банку";
+"prepaid_card_bank_withdrawal_chargeback" = "Повернення оплати за скасоване зняття в банку";
+"prepaid_card_refund_fee" = "Комісія за компенсацію";
+"prepaid_card_monthly_maintenance_fee" = "Щомісячна комісія за обслуговування";
+"prepaid_card_transaction_fee" = "Комісія за транзакцію";
+"prepaid_card_sms_fee" = "Комісія за смс";
+"prepaid_card_declined_authorization_fee" = "Комісія за відхилену авторизацію";
+"fispc" = "Купівля";
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Receipt Detail
+"mobileTransactionDetailsHeader" = "Дані про транзакцію";
+"mobileTransactionTypeLabel" = "ТРАНЗАКЦІЯ";
+"mobileTransactionDetailsLabel" = "ДАНІ";
+"mobileFeeInfoLabel" = "ДАНІ ПРО КОМІСІЮ";
+"mobileConfirmNotesLabel" = "ПРИМІТКА.";
+"mobileCharityName" = "Назва пожертви";
+"mobileCheckNumber" = "Номер чека";
+"mobileTransactionIdLabel" = "Номер транзакції";
+"mobilePromoWebsite" = "Рекламний вебсайт";
+"mobileTransactionDetailsTotal" = "Загальна сума транзакції";
+"amount" = "Сума";
+"mobileFeeLabel" = "Комісія";
+"mobileJournalNumberLabel" = "Номер квитанції";
+"date" = "Дата";
+
+    // Transfer Funds
+"mobileTransferFundsHeader" = "Переказ";
+"mobileConfirmationHeader" = "Підтвердити дані";
+"mobileTransferFromLabel" = "ПЕРЕКАЗ ВІД";
+"mobileTransferToLabel" = "ПЕРЕКАЗАТИ ДЛЯ";
+"mobileNoteLabel" = "Примітка.";
+"mobileConfirmDetailsAmount" = "Сума";
+"mobileConfirmDetailsFee" = "Комісія";
+"mobileConfirmDetailsTotal" = "Ви отримаєте";
+"mobileTransferMax" = "Макс. сума переказу";
+"mobileFXsell" = "Від";
+"mobileFXbuy" = "Для";
+"mobileFXRateLabel" = "Курс обміну";
+"mobileAvailableBalance" = "Доступна сума %1$@%2$@ %3$@";
+"continueButtonLabel" = "Продовжити";
+"mobileAddTransferMethod" = "Додати спосіб переказу";
+"mobileTransferMethodsHeader" = "Способи переказу";
+"mobileTransferFromHeader" = "Переказ від";
+"mobileAvailableFunds" = "Наявні кошти";
+"mobileFXlabel" = "ОБМІН ВАЛЮТ";
+"mobileSummaryLabel" = "ПІДСУМОК";
+"transfer" = "Переказ";
+"transferAmountInvalid" = "Введіть дійсну суму для переказу";
+"noTransferMethodAdded" = "Потрібен спосіб переказу";
+"transfer_error_no_transfer_method_module_initialized" = "Ви не можете додати спосіб переказу.";
+"transfer_fx_rate_changed" = "Через зміни в курсі обміну ви тепер отримаєте: %1$@";
+"mobileTransferSuccessMsg" = "Ваш переказ обробляється";
+"mobileTransferSuccessDetails" = "Гроші скоро надійдуть на ваш %1$@.";
+"noTransferFromSourceAvailable" = "Немає переказу від джерела";

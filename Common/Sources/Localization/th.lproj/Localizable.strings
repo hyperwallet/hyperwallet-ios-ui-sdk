@@ -1,0 +1,266 @@
+//
+// Copyright 2018 - Present Hyperwallet
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+// and associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+// BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+"backBarButton" = "ย้อนกลับ";
+"mobileTransferMethodsHeader" = "วิธีการโอนเงิน";
+"remove" = "ลบ";
+"cancelButtonLabel" = "ยกเลิก";
+"doneButtonLabel" = "เสร็จสิ้น";
+"try_again_button_label" = "ลองอีกครั้ง";
+"search_placeholder_label" = "ค้นหา";
+"unexpected_error_message" = "เกิดข้อผิดพลาด โปรดลองอีกครั้ง";
+"network_connection_error_title" = "ปัญหาด้านการเชื่อมต่อ";
+"unexpected_title" = "ข้อผิดพลาดที่ไม่คาดคิด";
+"network_connection_error_message" = "เรากำลังพบปัญหาในการดำเนินการตามคำขอ โปรดตรวจสอบการเชื่อมต่อของคุณ";
+"endingIn" = "ลงท้ายด้วย ";
+"to" = "ไป ";
+"no_country_available_error_message" = "ไม่มีประเทศที่ใช้ได้";
+"no_transfer_method_available_error_message" = "ไม่มีวิธีการโอนเงินสำหรับ %1$@ และ %2$@";
+"no_currency_available_error_message" = "ไม่มีสกุลเงินที่ใช้ได้สำหรับประเทศ %1$@";
+"emptyStateAddTransferMethod" = "เพิ่มวิธีการโอนเงินเพื่อเริ่มต้นใช้งาน";
+"mobileAddTransferMethodHeader" = "เพิ่มวิธีการโอนเงิน";
+"mobileCountryCurrencyLabel" = "ที่ตั้งและสกุลเงิน";
+"mobileTransferMethodLabel" = "วิธีการโอนเงิน";
+"mobileCountryRegion" = "ประเทศ/ภูมิภาค";
+"mobileCurrencyLabel" = "สกุลเงิน";
+"mobileAreYouSure" = "คุณแน่ใจหรือไม่";
+"mobileRemoveEAconfirm" = "ลบวิธีการโอนเงิน";
+"fee_flat_formatter" = "%1$@%2$@ ค่าธรรมเนียม";
+"fee_percent_only_min_formatter" = "%1$@%% ค่าธรรมเนียม (ต่ำสุด:%2$@%3$@)";
+"fee_percent_only_max_formatter" = "%1$@%% ค่าธรรมเนียม (สูงสุด:%2$@%3$@)";
+"fee_percent_formatter" = "%1$@%% ค่าธรรมเนียม (ต่ำสุด:%2$@%3$@ สูงสุด:%2$@%4$@)";
+"fee_mix_no_min_and_max_formatter" = "%1$@%2$@ + %3$@%% ค่าธรรมเนียม";
+"fee_mix_only_min_formatter" = "%1$@%2$@ + %3$@%% ค่าธรรมเนียม (ต่ำสุด:%1$@%4$@)";
+"fee_mix_only_max_formatter" = "%1$@%2$@ + %3$@%% ค่าธรรมเนียม (สูงสุด:%1$@%4$@)";
+"fee_mix_formatter" = "%1$@%2$@ + %3$@%% ค่าธรรมเนียม (ต่ำสุด:%1$@%4$@ สูงสุด:%1$@%5$@)";
+"fee_percent_no_min_and_max_formatter" = "%1$@%% ค่าธรรมเนียม";
+"transfer_method_not_supported_message" = "ไม่รองรับวิธีการโอนเงินประเภทนี้";
+"error" = "ข้อผิดพลาด";
+"authentication_error_title" = "ข้อผิดพลาดในการพิสูจน์ตัวตนถูกต้อง";
+"authentication_error_message" = "เกิดข้อผิดพลาดในความพยายามเรียกข้อมูลโทเค็นการพิสูจน์ตัวตน";
+
+    // Transfer methods
+"bank_account" = "บัญชีธนาคาร";
+"bank_card" = "บัตรเดบิต";
+"paper_check" = "เช็ค";
+"prepaid_card" = "บัตรเงินสด";
+"wire_account" = "บัญชีโอนเงิน";
+"paypal_account" = "บัญชี Paypal";
+"venmo_account" = "บัญชี Venmo";
+"cash_pickup_mg" = "MoneyGram";
+
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Manage Prepaid Card Message
+"manage_prepaid_card_message" = "เข้าสู่ระบบโดยใช้เว็บเบราว์เซอร์เพื่อจัดการบัตรของคุณ";
+    //Select Transfer Method View
+"select_a_country_message" = "เลือกประเทศ";
+
+    // Add Transfer Method
+"createTransferMethodButtonLabel" = "เพิ่มวิธีการโอนเงิน";
+"account_information" = "ข้อมูลบัญชี: %1$@(%2$@)";
+"account_holder" = "ข้อมูลเจ้าของบัญชี";
+"address"="ที่อยู่";
+"mobileFeesAndProcessingTime" = "ค่าธรรมเนียมและเวลาในการดำเนินการ";
+"intermediary_account" = "บัญชีธนาคารตัวกลาง";
+"contact_information" = "ข้อมูลการติดต่อ";
+"identification" = "รหัสประจำตัว";
+
+"date_format" = "วว-ดด-ปปปป";
+
+    // Processing View
+"processing_view_label" = "กำลังดำเนินการ";
+"complete_view_label" = "เสร็จสมบูรณ์";
+
+    // Receipt
+"transactions" = "ธุรกรรม";
+"mobileNoTransactions" = "ไม่มีกิจกรรมที่จะแสดง";
+"mobilePrepaidCardNoTransactions" = "ไม่มีธุรกรรมใน 365 วันที่ผ่านมา";
+"add_transaction_title" = "เพิ่มธุรกรรม";
+"account_closure_fee" = "ค่าธรรมเนียมการปิดบัญชี";
+"account_closure" = "การปิดบัญชี";
+"account_unload" = "การส่งคืนเงิน";
+"adjustment" = "การปรับยอดคงเหลือ";
+"annual_fee_refund" = "การคืนเงินค่าธรรมเนียมรายปี";
+"annual_fee" = "ค่าธรรมเนียมรายปี";
+"bank_account_transfer_fee" = "ค่าธรรมเนียมส่งคืนเข้าบัญชีธนาคาร";
+"bank_account_transfer_return_fee" = "ค่าธรรมเนียมส่งคืนเข้าบัญชีธนาคาร";
+"bank_account_transfer_return" = "การส่งคืนเข้าบัญชีธนาคาร";
+"card_activation_fee_waiver" = "การยกเว้นค่าธรรมเนียมการเปิดใช้บัตร";
+"card_activation_fee" = "ค่าธรรมเนียมการเปิดใช้บัตร";
+"card_fee" = "ค่าธรรมเนียมบัตร";
+"customer_service_fee_refund" = "การคืนค่าธรรมเนียมบริการลูกค้า";
+"customer_service_fee" = "ค่าธรรมเนียมบริการลูกค้า";
+"deposit" = "การชำระเงิน";
+"donation_fee" = "ค่าธรรมเนียมการบริจาค";
+"donation_return" = "การส่งคืนเงินบริจาค";
+"donation" = "การบริจาค";
+"dormant_user_fee_refund" = "การคืนเงินค่าธรรมเนียมบัญชีผู้ใช้ที่ไม่มีการเคลื่อนไหว";
+"dormant_user_fee" = "ค่าธรรมเนียมบัญชีผู้ใช้ที่ไม่มีการเคลื่อนไหว";
+"expedited_shipping_fee" = "ค่าธรรมเนียมการจัดส่งเร่งด่วน";
+"foreign_exchange" = "อัตราแลกเปลี่ยน";
+"generic_fee_refund" = "การคืนเงินค่าธรรมเนียมทั่วไป";
+"manual_adjustment" = "การปรับปรุง";
+"manual_transfer_to_prepaid_card" = "โอนไปยังบัตร";
+"merchant_payment_fee" = "ค่าธรรมเนียมการชำระเงินกับผู้ขาย";
+"merchant_payment_refund" = "การคืนเงินที่ชำระเงินกับผู้ขาย";
+"merchant_payment_return" = "การส่งคืนเงินที่ชำระเงินกับผู้ขาย";
+"merchant_payment" = "การชำระเงินกับผู้ขาย";
+"moneygram_transfer_return" = "การส่งคืน MoneyGram";
+"monthly_fee_refund" = "การคืนเงินค่าธรรมเนียมรายเดือน";
+"monthly_fee" = "ค่าธรรมเนียมรายเดือน";
+"paper_check_fee" = "ค่าธรรมเนียมเช็ค";
+"paper_check_refund" = "การคืนเช็ค";
+"payment_cancellation" = "การยกเลิกการชำระเงิน";
+"payment_expiration" = "การชำระเงินที่หมดอายุ";
+"payment_expiry_fee" = "ค่าธรรมเนียมหมดอายุการชำระเงิน";
+"payment_fee" = "ค่าธรรมเนียมการชำระเงิน";
+"payment_return" = "การส่งคืนการชำระเงิน";
+"payment_reversal_fee" = "ค่าธรรมเนียมการกลับรายการชำระเงิน";
+"payment_reversal" = "การกลับรายการชำระเงิน";
+"payment" = "การชำระเงิน";
+"prepaid_card_balance_inquiry_fee" = "ค่าธรรมเนียมการสอบถามยอดคงเหลือ";
+"prepaid_card_cash_advance" = "การเบิกถอนเงินสดล่วงหน้า";
+"prepaid_card_dispute_deposit" = "การฝากเงินด้วยบัตรที่ถูกปฏิเสธ";
+"prepaid_card_disputed_charge_refund" = "การคืนเงินที่เรียกเก็บเงินที่ถูกปฏิเสธ";
+"prepaid_card_domestic_cash_withdrawal_fee" = "การถอนเงินจาก ATM";
+"prepaid_card_exchange_rate_difference" = "ส่วนต่างของอัตราแลกเปลี่ยน";
+"prepaid_card_manual_unload" = "โอนจากบัตร";
+"prepaid_card_overseas_cash_withdrawal_fee" = "การถอนเงินจาก ATM";
+"prepaid_card_pin_change_fee" = "ค่าธรรมเนียมการเปลี่ยน PIN";
+"prepaid_card_refund" = "การคืนเงิน";
+"prepaid_card_replacement_fee" = "ค่าธรรมเนียมการเปลี่ยนบัตร";
+"prepaid_card_sale_reversal" = "ธุรกรรมที่กลับรายการ";
+"prepaid_card_sale" = "ธุรกรรม";
+"prepaid_card_unload" = "โอนจากบัตร";
+"processing_fee" = "ค่าธรรมเนียมการดำเนินการ";
+"standard_shipping_fee" = "ค่าธรรมเนียมการขนส่งมาตรฐาน";
+"transfer_fee" = "ค่าธรรมเนียมการโอน";
+"transfer_to_bank_account" = "บัญชีธนาคาร";
+"transfer_to_debit_card" = "บัตรเดบิต";
+"transfer_to_moneygram" = "MoneyGram";
+"transfer_to_paper_check" = "เช็ค";
+"transfer_to_paypal_account" = "PayPal";
+"transfer_to_prepaid_card" = "โอนไปยังบัตร";
+"transfer_to_program_account" = "โอนไปยังโปรแกรม";
+"transfer_to_user" = "โอนไปยังผู้ใช้";
+"transfer_to_western_union" = "Western Union";
+"transfer_to_wire" = "โอนเงินผ่านธนาคาร";
+"transfer_to_wubs_wire" = "โอนเงินผ่านธนาคาร";
+"transfer_to_venmo_account" = "Venmo";
+"transfer_to_bank_card" = "บัตรจากธนาคาร";
+"virtual_incentive_cancellation" = "การยกเลิกโปรโมชั่น";
+"virtual_incentive_issuance" = "โปรโมชั่นที่ออก";
+"virtual_incentive_purchase" = "การสั่งซื้อตามโปรโมชั่น";
+"virtual_incentive_refund" = "การคืนเงินตามราคาโปรโมชั่น";
+"western_union_transfer_return" = "การถอนเงินจาก Western Union";
+"wire_transfer_fee" = "ค่าธรรมเนียมการโอนเงินผ่านธนาคาร";
+"wire_transfer_return" = "การส่งคืนการโอนเงินผ่านธนาคาร";
+"wubs_wire_transfer_return" = "การส่งคืนการโอนเงินผ่านธนาคาร";
+"unknown_receipt_type" = "ประเภทธุรกรรมที่ไม่รู้จัก";
+"paypal_account_transfer_return" = "ยกเลิกการจ่ายเงินสด";
+"venmo_account_transfer_return" = "ยกเลิกการจ่ายเงินสด";
+"prepaid_card_account_deposit" = "การฝากเงินในบัญชี";
+"prepaid_card_annual_fee_discount" = "ส่วนลดค่าธรรมเนียมรายปี";
+"prepaid_card_bill_reprint_fee" = "ค่าธรรมเนียมการพิมพ์บิลซ้ำ";
+"prepaid_card_atm_or_cash_advance_fee" = "ค่าธรรมเนียม ATM/การเบิกเงินสดล่วงหน้า";
+"prepaid_card_cash_advance_chargeback" = "การขอคืนเงินสำหรับการเบิกเงินสดล่วงหน้า";
+"prepaid_card_cash_advance_chargeback_reversal" = "การกลับรายการคืนเงินสำหรับการเบิกเงินสดล่วงหน้า";
+"prepaid_card_cash_advance_repress" = "การระงับการเบิกเงินสดล่วงหน้า";
+"prepaid_card_cash_advance_repress_reversal" = "การกลับรายการระงับล่วงหน้า";
+"prepaid_card_chargeback" = "การขอคืนเงิน";
+"prepaid_card_chargeback_refund" = "การคืนเงินที่ขอคืน";
+"prepaid_card_chargeback_refund_reversal" = "การกลับรายการคืนเงินที่ขอคืน";
+"prepaid_card_chargeback_reversal" = "การกลับรายการขอคืนเงิน";
+"prepaid_card_commission_or_fee" = "ค่าธรรมเนียม/คอมมิชชัน";
+"prepaid_card_debit_transfer" = "หักโดยตรง/โอนเงิน";
+"prepaid_card_document_request_fee" = "ค่าธรรมเนียมการขอเอกสาร";
+"prepaid_card_emergency_cash" = "เงินฉุกเฉิน";
+"prepaid_card_emergency_card" = "บัตรฉุกเฉิน";
+"prepaid_card_income" = "รายได้";
+"prepaid_card_load_fee" = "ค่าธรรมเนียม PAN";
+"prepaid_card_overdue_payment_interest" = "ดอกเบี้ยจากการค้างชำระ";
+"prepaid_card_payment" = "โหลด";
+"prepaid_card_pin_reprint_fee" = "การพิมพ์ PIN ซ้ำ";
+"prepaid_card_priority_pass_fee" = "ค่าธรรมเนียมบัตร Priority pass";
+"prepaid_card_priority_pass_renewal" = "การต่ออายุบัตร Priority pass";
+"prepaid_card_recurring_interest" = "ดอกเบี้ยหมุนเวียน";
+"prepaid_card_refund_repress" = "การระงับการคืนเงิน";
+"prepaid_card_refund_repress_reversal" = "การกลับรายการระงับการคืนเงิน";
+"prepaid_card_sale_repress" = "การระงับการขาย";
+"prepaid_card_statement_fee" = "ค่าธรรมเนียมรายงาน UTSKGJ";
+"prepaid_card_telephone_support_fee" = "ข้อมูลทางโทรศัพท์: ยอดคงเหลือ ธุรกรรม เป็นต้น";
+"prepaid_card_transfer_fee" = "ค่าธรรมเนียมการโหลดบัตร";
+"prepaid_card_transfer_return" = "การส่งคืนบัตรเติมที่โหลด";
+"prepaid_card_bank_withdrawal_reversal" = "การถอนเงินธนาคารที่กลับรายการ";
+"prepaid_card_bank_withdrawal_chargeback" = "การขอคืนเงินที่ถอนจากธนาคารที่กลับรายการ";
+"prepaid_card_refund_fee" = "ค่าธรรมเนียมการคืนเงิน";
+"prepaid_card_monthly_maintenance_fee" = "ค่าธรรมเนียมการบำรุงรักษารายเดือน";
+"prepaid_card_transaction_fee" = "ค่าธรรมเนียมการทำธุรกรรม";
+"prepaid_card_sms_fee" = "ค่าธรรมเนียม SMS";
+"prepaid_card_declined_authorization_fee" = "ค่าธรรมเนียมการอนุมัติที่ถูกปฏิเสธ";
+"fispc" = "การสั่งซื้อ";
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Receipt Detail
+"mobileTransactionDetailsHeader" = "รายละเอียดธุรกรรม";
+"mobileTransactionTypeLabel" = "ธุรกรรม";
+"mobileTransactionDetailsLabel" = "รายละเอียด";
+"mobileFeeInfoLabel" = "ข้อมูลค่าธรรมเนียม";
+"mobileConfirmNotesLabel" = "หมายเหตุ";
+"mobileCharityName" = "ชื่อการกุศล";
+"mobileCheckNumber" = "หมายเลขเช็ค";
+"mobileTransactionIdLabel" = "ID ธุรกรรม";
+"mobilePromoWebsite" = "เว็บไซต์โปรโมชั่น";
+"mobileTransactionDetailsTotal" = "ยอดรวมธุรกรรม";
+"amount" = "จำนวนเงิน";
+"mobileFeeLabel" = "ค่าธรรมเนียม";
+"mobileJournalNumberLabel" = "ID ใบเสร็จรับเงิน";
+"date" = "วันที่";
+
+    // Transfer Funds
+"mobileTransferFundsHeader" = "การโอนเงิน";
+"mobileConfirmationHeader" = "ยืนยันรายละเอียด";
+"mobileTransferFromLabel" = "โอนมาจาก";
+"mobileTransferToLabel" = "โอนไปยัง";
+"mobileNoteLabel" = "หมายเหตุ";
+"mobileConfirmDetailsAmount" = "จำนวนเงิน";
+"mobileConfirmDetailsFee" = "ค่าธรรมเนียม";
+"mobileConfirmDetailsTotal" = "คุณจะได้รับ";
+"mobileTransferMax" = "จำนวนเงินที่โอนได้สูงสุด";
+"mobileFXsell" = "จาก";
+"mobileFXbuy" = "ไป";
+"mobileFXRateLabel" = "อัตราแลกเปลี่ยน";
+"mobileAvailableBalance" = "จำนวนเงินที่ใช้ได้ %1$@%2$@ %3$@";
+"continueButtonLabel" = "ดำเนินการต่อ";
+"mobileAddTransferMethod" = "เพิ่มวิธีการโอนเงิน";
+"mobileTransferMethodsHeader" = "วิธีการโอนเงิน";
+"mobileTransferFromHeader" = "โอนมาจาก";
+"mobileAvailableFunds" = "ยอดเงินที่ใช้ได้";
+"mobileFXlabel" = "อัตราแลกเปลี่ยน";
+"mobileSummaryLabel" = "สรุป";
+"transfer" = "การโอนเงิน";
+"transferAmountInvalid" = "ป้อนจำนวนเงินที่ต้องการโอนที่ถูกต้อง";
+"noTransferMethodAdded" = "ต้องระบุวิธีการโอนเงิน";
+"transfer_error_no_transfer_method_module_initialized" = "คุณไม่สามารถเพิ่มวิธีการโอนเงินได้";
+"transfer_fx_rate_changed" = "เนื่องจากการเปลี่ยนแปลงของอัตราแลกเปลี่ยน ตอนนี้คุณจะได้รับ: %1$@";
+"mobileTransferSuccessMsg" = "กำลังประมวลผลการโอนเงินของคุณ";
+"mobileTransferSuccessDetails" = "คุณกำลังจะได้รับเงินใน %1$@";
+"noTransferFromSourceAvailable" = "ไม่มีการโอนเงินจากแหล่งที่มา";
