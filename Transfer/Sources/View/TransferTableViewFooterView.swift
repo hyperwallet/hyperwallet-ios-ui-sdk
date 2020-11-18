@@ -36,7 +36,9 @@ final class TransferTableViewFooterView: UITableViewHeaderFooterView {
         let margins = contentView.layoutMarginsGuide
         let constraints = [
             footerLabel.safeAreaTopAnchor.constraint(equalTo: margins.topAnchor),
-            footerLabel.safeAreaBottomAnchor.constraint(equalTo: margins.bottomAnchor)
+            footerLabel.safeAreaBottomAnchor.constraint(equalTo: margins.bottomAnchor),
+            footerLabel.safeAreaLeadingAnchor.constraint(equalTo: margins.leadingAnchor),
+            footerLabel.safeAreaTrailingAnchor.constraint(equalTo: margins.trailingAnchor)
         ]
         constraints.forEach { $0.priority = UILayoutPriority(999) }
         NSLayoutConstraint.activate(constraints)
