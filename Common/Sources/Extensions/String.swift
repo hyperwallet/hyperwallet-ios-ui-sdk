@@ -73,22 +73,6 @@ public extension String {
         return formatter.string(for: number) ?? self
     }
 
-    /// Format an amount to a currency format with currency code
-    ///
-    /// - Parameter currencyCode: the currency code
-    /// - Returns: a formatted Double amount  with currency code
-    func formatToDouble(with currencyCode: String? = nil) -> Double {
-        if !self.isEmpty {
-            let currencyFormatter = NumberFormatter()
-            currencyFormatter.numberStyle = .currency
-            currencyFormatter.currencyCode = currencyCode
-            currencyFormatter.currencySymbol = ""
-            return currencyFormatter.number(from: self)?.doubleValue ?? 0
-        } else {
-            return 0
-        }
-    }
-
     /// Return decimal symbol for the given currency code
     /// - Parameter currencyCode: currency code
     /// - Returns: decimal symbol
