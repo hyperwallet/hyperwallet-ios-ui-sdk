@@ -64,12 +64,16 @@ struct TransferAmountCurrencyFormatter {
     static func formatToAPIFromLocale(for amount: String?, currencyCode: String?) -> String {
         guard let currencyCode = currencyCode, let amount = amount, !amount.isEmpty
         else { return "0" }
+        let decimalsSymbol = amount.decimalSymbol(for: currencyCode)
+        let containsDecimalPoints = amount.contains(decimalsSymbol)
         let decimals = Set("0123456789")
         let result = String(amount.filter { decimals.contains($0) })
         let numberOfDecimals = self.getTransferAmountCurrency(for: currencyCode)?.decimals ?? 0
         if numberOfDecimals != 0 {
-            let decimalValues = result.suffix(numberOfDecimals)
-            return result.dropLast(numberOfDecimals) + "." + decimalValues
+            if containsDecimalPoints {
+                let decimalValues = result.suffix(numberOfDecimals)
+                return result.dropLast(numberOfDecimals) + "." + decimalValues
+            }
         }
         return result
     }
