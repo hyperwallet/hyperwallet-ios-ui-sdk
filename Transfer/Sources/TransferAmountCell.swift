@@ -172,6 +172,7 @@ extension TransferAmountCell: UITextFieldDelegate {
     func textField(_ textField: UITextField,
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
+        let maximumIntegerDigits = 12
         switch string {
         case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9":
             if amountString == "0" {
@@ -186,10 +187,10 @@ extension TransferAmountCell: UITextFieldDelegate {
             }
         }
 
-        let amount = TransferAmountCurrencyFormatter.getDecimalAmount(amount: amountString, currencyCode: currencyCode)
-
-        setFormattedAmount(amount)
-
+        if digits(amount: amountString).count <= maximumIntegerDigits {
+            let amount = TransferAmountCurrencyFormatter.getDecimalAmount(amount: amountString, currencyCode: currencyCode)
+            setFormattedAmount(amount)
+        }
         return false
     }
 
