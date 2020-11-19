@@ -503,6 +503,7 @@ class TransferUserFundsTest: BaseTests {
                              filename: "AvailableFundUSD",
                              method: HTTPMethod.post)
 
+        waitForExistence(transferFundMenu)
         XCTAssertTrue(transferFundMenu.exists)
         transferFundMenu.tap()
         waitForNonExistence(spinner)
