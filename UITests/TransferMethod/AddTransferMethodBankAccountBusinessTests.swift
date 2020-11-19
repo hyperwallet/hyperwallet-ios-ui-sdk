@@ -62,10 +62,10 @@ class AddTransferMethodBankAccountBusinessTests: BaseTests {
         XCTAssertEqual(addTransferMethod.postalCodeLabel.label, "Zip/Postal Code")
         XCTAssert(addTransferMethod.postalCodeInput.exists)
 
-        app.scroll(to: addTransferMethod.createTransferMethodButton)
         XCTAssert(addTransferMethod.transferMethodInformationHeader.exists)
-        XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["US$2.00 fee"].exists)
+        XCTAssert(addTransferMethod.addTransferMethodTableView.staticTexts["$2.00 fee"].exists)
 
+        app.scroll(to: addTransferMethod.createTransferMethodButton)
         XCTAssert(addTransferMethod.createTransferMethodButton.exists)
     }
 
