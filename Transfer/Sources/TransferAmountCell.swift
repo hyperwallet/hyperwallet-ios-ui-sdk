@@ -194,6 +194,8 @@ extension TransferAmountCell: UITextFieldDelegate {
             let amount = TransferAmountCurrencyFormatter.getDecimalAmount(amount: amountString,
                                                                           currencyCode: currencyCode)
             setFormattedAmount(amount)
+        } else {
+            if !amountString.isEmpty { amountString.removeLast() }
         }
         return false
     }
