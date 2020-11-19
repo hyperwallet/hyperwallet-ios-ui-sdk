@@ -226,7 +226,7 @@ class AddTransferMethod {
     }
 
     func selectAccountType(_ accountType: String) {
-        accountTypeLabel.tap()
+        accountTypeLabel.doubleTap()
         app.tables.staticTexts[accountType].tap()
     }
 
