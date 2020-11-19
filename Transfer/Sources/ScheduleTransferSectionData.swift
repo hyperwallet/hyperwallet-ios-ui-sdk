@@ -98,7 +98,7 @@ struct ScheduleTransferForeignExchangeData: ScheduleTransferSectionData {
                                                                                     with: destinationCurrency)
 
                 let rateFormatted = String(format: "%@ = %@",
-                                           TransferAmountCurrencyFormatter.formatCurrencyWithSymbolAndCode(
+                                           TransferAmountCurrencyFormatter.addCurrencySymbolAndCode(
                                             "1",
                                             with: sourceCurrency),
                                            TransferAmountCurrencyFormatter.formatCurrencyWithSymbolAndCode(
