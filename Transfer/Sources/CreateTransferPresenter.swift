@@ -330,20 +330,10 @@ final class CreateTransferPresenter {
                 }
 
             case .success(let transfer):
-
-                strongSelf.availableBalance = TransferAmountCurrencyFormatter
-                    .formatToLocaleFromAPI(for: transfer?.destinationAmount,
-                                           currencyCode: transfer?.destinationCurrency)
-                if strongSelf.didTapTransferAllFunds {
-                    strongSelf.amount = strongSelf.availableBalance ?? "0"
-                } else {
-                    strongSelf.amount = TransferAmountCurrencyFormatter
-                        .format(amount: strongSelf.amount, with: strongSelf.destinationCurrency ?? "0")
-                }
+                strongSelf.availableBalance = transfer?.destinationAmount
+                if strongSelf.didTapTransferAllFunds { strongSelf.amount = strongSelf.availableBalance ?? "0" }
                 strongSelf.transferSourceCellConfigurations.forEach {
-                    $0.availableBalance = TransferAmountCurrencyFormatter
-                    .formatToLocaleFromAPI(for: transfer?.destinationAmount,
-                                           currencyCode: transfer?.destinationCurrency)
+                    $0.availableBalance = transfer?.destinationAmount
                     $0.destinationCurrency = strongSelf.selectedTransferDestination?.transferMethodCurrency
                 }
             }
@@ -363,9 +353,6 @@ final class CreateTransferPresenter {
             let destinationToken = selectedTransferDestination?.token,
             let destinationCurrency = destinationCurrency {
             view.showLoading()
-            amount = TransferAmountCurrencyFormatter
-                .formatToAPIFromLocale(for: amount,
-                                       currencyCode: destinationCurrency)
             let transfer = HyperwalletTransfer.Builder(clientTransferId: clientTransferId,
                                                        sourceToken: sourceToken,
                                                        destinationToken: destinationToken)
