@@ -90,10 +90,20 @@ struct ScheduleTransferForeignExchangeData: ScheduleTransferSectionData {
                 let destinationAmount = foreignExchange.destinationAmount,
                 let destinationCurrency = foreignExchange.destinationCurrency,
                 let rate = foreignExchange.rate {
-                let sourceAmountFormatted = String(format: "%@ %@", sourceAmount, sourceCurrency)
-                let destinationAmountFormatted = String(format: "%@ %@", destinationAmount, destinationCurrency)
+                let sourceAmountFormatted =
+                    TransferAmountCurrencyFormatter.formatCurrencyWithSymbolAndCode(sourceAmount,
+                                                                                    with: sourceCurrency)
+                let destinationAmountFormatted =
+                    TransferAmountCurrencyFormatter.formatCurrencyWithSymbolAndCode(destinationAmount,
+                                                                                    with: destinationCurrency)
 
-                let rateFormatted = String(format: "%@ %@ = %@ %@", "1", sourceCurrency, rate, destinationCurrency)
+                let rateFormatted = String(format: "%@ = %@",
+                                           TransferAmountCurrencyFormatter.formatCurrencyWithSymbolAndCode(
+                                            "1",
+                                            with: sourceCurrency),
+                                           TransferAmountCurrencyFormatter.formatCurrencyWithSymbolAndCode(
+                                            rate,
+                                            with: destinationCurrency))
 
                 rows.append((title: "mobileFXsell".localized(), value: sourceAmountFormatted))
                 rows.append((title: "mobileFXbuy".localized(), value: destinationAmountFormatted))
@@ -127,14 +137,17 @@ struct ScheduleTransferSummaryData: ScheduleTransferSectionData {
             let grossTransferAmount = transferAmountFormattedDouble + feeAmountFormattedDouble
 
             rows.append((title: "mobileConfirmDetailsAmount".localized(),
-                         value: TransferAmountCurrencyFormatter.formatStringAmount(String(grossTransferAmount),
-                                                                                   with: destinationCurrency)))
+                         value:
+                TransferAmountCurrencyFormatter.formatCurrencyWithSymbolAndCode(String(grossTransferAmount),
+                                                                                with: destinationCurrency)))
             rows.append((title: "mobileConfirmDetailsFee".localized(),
-                         value: TransferAmountCurrencyFormatter.formatStringAmount(feeAmount,
-                                                                                   with: destinationCurrency)))
+                         value:
+                TransferAmountCurrencyFormatter.formatCurrencyWithSymbolAndCode(feeAmount,
+                                                                                with: destinationCurrency)))
             rows.append((title: "mobileConfirmDetailsTotal".localized(),
-                         value: TransferAmountCurrencyFormatter.formatStringAmount(destinationAmount,
-                                                                                   with: destinationCurrency)))
+                         value:
+                TransferAmountCurrencyFormatter.formatCurrencyWithSymbolAndCode(destinationAmount,
+                                                                                with: destinationCurrency)))
             if didFxQuoteChange {
                 footer = String(format: "transfer_fx_rate_changed".localized(),
                                 String(format: "%@ %@", destinationAmount, destinationCurrency))
