@@ -34,9 +34,8 @@ struct TransferAmountCurrencyFormatter {
         return transferAmountCurrencyData?.data.first(where: { $0.currencyCode == currencyCode })
     }
 
-    static func format(amount: String, with currencyCode: String) -> String {
+    static func formatDoubleAmount(_ amount: Double, with currencyCode: String) -> String {
         if let transferAmountCurrency = getTransferAmountCurrency(for: currencyCode) {
-            let number = formatToDouble(for: amount, currencyCode: currencyCode)
             let formatter = NumberFormatter()
             formatter.usesGroupingSeparator = true
             formatter.maximumFractionDigits = transferAmountCurrency.decimals
@@ -44,42 +43,45 @@ struct TransferAmountCurrencyFormatter {
             formatter.currencyCode = currencyCode
             formatter.locale = Locale.current
             formatter.currencySymbol = ""
-            let formattedAmount = formatter.string(for: number) ?? amount
-            return formattedAmount.trimmingCharacters(in: .whitespaces)
+
+            if let amount = formatter.string(from: NSNumber(value: amount)) {
+                return amount.trimmingCharacters(in: .whitespaces)
+            }
+        }
+        return "\(amount)"
+    }
+
+    static func getDecimalAmount(amount: String, currencyCode: String?) -> Double {
+        let doubleAmount = NSString(string: amount).doubleValue
+        if let currencyCode = currencyCode,
+            let currency = getTransferAmountCurrency(for: currencyCode) {
+            var fractionalDenominator: Double = 10
+            if currency.decimals > 0 {
+                for _ in 1..<currency.decimals {
+                    fractionalDenominator *= 10
+                }
+                return doubleAmount / fractionalDenominator
+            }
+        }
+        return doubleAmount
+    }
+
+    /// Format amount for currency code using users locale
+    /// - Parameter currencyCode: currency code
+    /// - Returns: a formatted amount string
+    static func formatStringAmount(_ amount: String, with currencyCode: String) -> String {
+        if let transferAmountCurrency = getTransferAmountCurrency(for: currencyCode) {
+            let number = amount.formatAmountToDouble()
+            let formatter = NumberFormatter()
+            formatter.usesGroupingSeparator = true
+            formatter.maximumFractionDigits = transferAmountCurrency.decimals
+            formatter.numberStyle = .currency
+            formatter.currencyCode = currencyCode
+            formatter.locale = Locale.current
+            formatter.currencySymbol = ""
+            return formatter.string(for: number)?.trimmingCharacters(in: .whitespaces) ?? amount
         } else {
             return amount
         }
-    }
-
-    static func formatToLocaleFromAPI(for amount: String?, currencyCode: String?) -> String {
-        guard let currencyCode = currencyCode, let amount = amount, !amount.isEmpty
-        else { return "0" }
-        let decimalsSymbol = amount.decimalSymbol(for: currencyCode)
-        let decimals = Set("0123456789.")
-        let result = String(amount.filter { decimals.contains($0) })
-        let formattedAmount = result.replacingOccurrences(of: ".", with: decimalsSymbol)
-        return self.format(amount: formattedAmount, with: currencyCode)
-    }
-
-    static func formatToAPIFromLocale(for amount: String?, currencyCode: String?) -> String {
-        guard let currencyCode = currencyCode, let amount = amount, !amount.isEmpty
-        else { return "0" }
-        let decimalsSymbol = amount.decimalSymbol(for: currencyCode)
-        let containsDecimalPoints = amount.contains(decimalsSymbol)
-        let decimals = Set("0123456789")
-        let result = String(amount.filter { decimals.contains($0) })
-        let numberOfDecimals = self.getTransferAmountCurrency(for: currencyCode)?.decimals ?? 0
-        if numberOfDecimals != 0 {
-            if containsDecimalPoints {
-                let decimalValues = result.suffix(numberOfDecimals)
-                return result.dropLast(numberOfDecimals) + "." + decimalValues
-            }
-        }
-        return result
-    }
-
-    static func formatToDouble(for amount: String?, currencyCode: String?) -> Double {
-        let amount = formatToAPIFromLocale(for: amount, currencyCode: currencyCode)
-        return Double(amount) ?? 0
     }
 }

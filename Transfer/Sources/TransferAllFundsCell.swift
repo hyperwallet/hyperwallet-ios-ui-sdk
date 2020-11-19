@@ -89,11 +89,14 @@ final class TransferAllFundsCell: UITableViewCell {
                 return
         }
 
+        let formattedAvailableBalance = TransferAmountCurrencyFormatter.formatStringAmount(availableBalance,
+                                                                                           with: currencyCode)
+
         if let currencySymbol = TransferAmountCurrencyFormatter
             .getTransferAmountCurrency(for: currencyCode)?.symbol {
             availableFundsLabel.text = String(format: "mobileAvailableBalance".localized(),
                                               currencySymbol,
-                                              availableBalance,
+                                              formattedAvailableBalance,
                                               currencyCode)
             availableFundsLabel.numberOfLines = 0
             availableFundsLabel.adjustsFontForContentSizeCategory = true
