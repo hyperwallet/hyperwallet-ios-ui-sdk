@@ -57,7 +57,13 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "AddTransferMethodBankAccountBusinessTests">
+               </Test>
+               <Test
                   Identifier = "AddTransferMethodBankAccountBusinessTests/testAddTransferMethodBankAccountBusiness_createBankAccountBusiness()">
+               </Test>
+               <Test
+                  Identifier = "AddTransferMethodBankAccountBusinessTests/testAddTransferMethodBankAccountBusiness_displaysElementsOnBusinessProfileTmcResponse()">
                </Test>
             </SkippedTests>
          </TestableReference>
