@@ -69,27 +69,27 @@ class AddTransferMethodBankAccountBusinessTests: BaseTests {
         XCTAssert(addTransferMethod.createTransferMethodButton.exists)
     }
 
-//    func testAddTransferMethodBankAccountBusiness_createBankAccountBusiness() {
-//        mockServer.setupStub(url: "/rest/v3/users/usr-token/bank-accounts",
-//                             filename: "BankAccountBusinessResponse",
-//                             method: HTTPMethod.post)
-//
-//        waitForNonExistence(spinner)
-//        waitForExistence(addTransferMethod.navBarBankAccount)
-//        XCTAssert(addTransferMethod.navBarBankAccount.exists)
-//
-//        addTransferMethod.setBranchId("021000021")
-//        addTransferMethod.setBankAccountId("7861012347")
-//        addTransferMethod.selectAccountType("CHECKING")
-//        addTransferMethod.setBusinessName("Smith & Co")
-//        addTransferMethod.setPhoneNumber("+16045555555")
-//        addTransferMethod.setMobileNumber("+16046666666")
-//        addTransferMethod.selectCountry("United States")
-//        addTransferMethod.setStateProvince("Maine")
-//        addTransferMethod.setStreet("632 Broadway")
-//        addTransferMethod.setCity("Bangor")
-//        addTransferMethod.setPostalCode("04401")
-//
-//        addTransferMethod.clickCreateTransferMethodButton()
-//    }
+    func testAddTransferMethodBankAccountBusiness_createBankAccountBusiness() {
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/bank-accounts",
+                             filename: "BankAccountBusinessResponse",
+                             method: HTTPMethod.post)
+
+        waitForNonExistence(spinner)
+        waitForExistence(addTransferMethod.navBarBankAccount)
+        XCTAssert(addTransferMethod.navBarBankAccount.exists)
+
+        addTransferMethod.setBranchId("021000021")
+        addTransferMethod.setBankAccountId("7861012347")
+        addTransferMethod.selectAccountType("CHECKING")
+        addTransferMethod.setBusinessName("Smith & Co")
+        addTransferMethod.setPhoneNumber("+16045555555")
+        addTransferMethod.setMobileNumber("+16046666666")
+        addTransferMethod.selectCountry("United States")
+        addTransferMethod.setStateProvince("Maine")
+        addTransferMethod.setStreet("632 Broadway")
+        addTransferMethod.setCity("Bangor")
+        addTransferMethod.setPostalCode("04401")
+
+        addTransferMethod.clickCreateTransferMethodButton()
+    }
 }
