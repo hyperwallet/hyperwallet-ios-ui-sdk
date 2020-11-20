@@ -55,59 +55,6 @@
                BlueprintName = "HyperwalletUISDKUITests"
                ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "AddTransferMethodBankAccountIndividualTests">
-               </Test>
-               <Test
-                  Identifier = "AddTransferMethodBankCardTests">
-               </Test>
-               <Test
-                  Identifier = "AddTransferMethodBankCardUSMaskingTests">
-               </Test>
-               <Test
-                  Identifier = "AddTransferMethodMaskingTest">
-               </Test>
-               <Test
-                  Identifier = "AddTransferMethodPayPalAccountTests">
-               </Test>
-               <Test
-                  Identifier = "AddTransferMethodVemoAccountTests">
-               </Test>
-               <Test
-                  Identifier = "AddTransferMethodWireAccountIndividualTests">
-               </Test>
-               <Test
-                  Identifier = "AddTransferMethodWireAccountUSMaskingTests">
-               </Test>
-               <Test
-                  Identifier = "AddTransferMethodWireAccountUSMoreMaskingTests">
-               </Test>
-               <Test
-                  Identifier = "BaseTests">
-               </Test>
-               <Test
-                  Identifier = "ListAllReceiptsTests">
-               </Test>
-               <Test
-                  Identifier = "ListReceiptTests">
-               </Test>
-               <Test
-                  Identifier = "ListTransferMethodTests">
-               </Test>
-               <Test
-                  Identifier = "PrepaidCardListReceiptTests">
-               </Test>
-               <Test
-                  Identifier = "SelectTransferMethodTypeTests">
-               </Test>
-               <Test
-                  Identifier = "TransferUserFundsConfirmationTest">
-               </Test>
-               <Test
-                  Identifier = "TransferUserFundsPPCTest">
-               </Test>
-            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>
