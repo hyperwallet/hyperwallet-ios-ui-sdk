@@ -88,7 +88,7 @@ struct TransferAmountCurrencyFormatter {
     static func formatCurrencyWithSymbolAndCode(_ amount: String, with currencyCode: String) -> String {
         if let currencySymbol = TransferAmountCurrencyFormatter.getTransferAmountCurrency(for: currencyCode)?.symbol {
             let formattedAmount = formatStringAmount(amount, with: currencyCode)
-            return String(format: "%@ %@ %@", currencySymbol, formattedAmount, currencyCode)
+            return String(format: "%@%@ %@", currencySymbol, formattedAmount, currencyCode)
         } else {
             return amount
         }
@@ -96,7 +96,7 @@ struct TransferAmountCurrencyFormatter {
 
     static func addCurrencySymbolAndCode(_ amount: String, with currencyCode: String) -> String {
         if let currencySymbol = TransferAmountCurrencyFormatter.getTransferAmountCurrency(for: currencyCode)?.symbol {
-            return String(format: "%@ %@ %@", currencySymbol, amount, currencyCode)
+            return String(format: "%@%@ %@", currencySymbol, amount, currencyCode)
         } else {
             return amount
         }
