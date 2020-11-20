@@ -101,7 +101,7 @@ struct ScheduleTransferForeignExchangeData: ScheduleTransferSectionData {
                                            TransferAmountCurrencyFormatter.addCurrencySymbolAndCode(
                                             "1",
                                             with: sourceCurrency),
-                                           TransferAmountCurrencyFormatter.formatCurrencyWithSymbolAndCode(
+                                           TransferAmountCurrencyFormatter.addCurrencySymbolAndCode(
                                             rate,
                                             with: destinationCurrency))
 
