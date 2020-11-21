@@ -48,7 +48,7 @@ class TransferUserFundsPPCTest: BaseTests {
         // Transfer Section
         XCTAssertTrue(transferFunds.transferSectionLabel.exists)
         // Amount
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.00")
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
         XCTAssertEqual(transferFunds.transferAmountLabel.label,
                        String(format: "mobileAvailableBalance".localized(), "$", "452.14", "USD"))
