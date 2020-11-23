@@ -15,16 +15,43 @@
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-/// To perform paste action in UITextField
-public class PasteOnlyTextField: UITextField {
-    /// Requests the receiving responder to paste text in UITextField
-    override public func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-        return action == #selector(paste(_:))
-    }
+
+import Foundation
+
+struct TransferAmountCurrencyData: Decodable {
+    let data: [TransferAmountCurrency]
 }
 
-public final class AmountTextField: PasteOnlyTextField {
-    override public func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-        return false
+struct TransferAmountCurrency: Decodable {
+    let baseUnit: String
+    let currencyCode: String
+    let decimals: Int
+    let denominationAmount: Int
+    let displayedAs: String?
+    let exchangeable: Int
+    let fxTransactionVisible: Int
+    let governmentIssued: Int
+    let groupingUsed: Int
+    let hiddenDecimals: Int
+    let identifier: Int
+    let isoCurrencyCode: String
+    let name: String
+    let symbol: String
+
+    enum CodingKeys: String, CodingKey {
+        case baseUnit = "baseunit"
+        case currencyCode = "currencycode"
+        case denominationAmount = "denominationamount"
+        case governmentIssued = "governmentissued"
+        case identifier = "id"
+        case isoCurrencyCode = "isocurrencycode"
+        case decimals
+        case displayedAs
+        case exchangeable
+        case fxTransactionVisible
+        case groupingUsed
+        case hiddenDecimals
+        case name
+        case symbol
     }
 }

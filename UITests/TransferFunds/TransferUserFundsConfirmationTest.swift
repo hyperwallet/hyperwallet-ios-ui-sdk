@@ -43,7 +43,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
 
         // Amount row
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.00")
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
         XCTAssertEqual(transferFunds.transferAmountLabel.label,
                        String(format: "mobileAvailableBalance".localized(), "$", "452.14", "USD"))
@@ -113,7 +113,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
 
         transferFunds.verifyTransferFundsTitle()
         // Amount row
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.00")
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
         XCTAssertEqual(transferFunds.transferAmountLabel.label,
                        String(format: "mobileAvailableBalance".localized(), "$", "5,855.17", "USD"))
@@ -201,7 +201,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
 
         transferFunds.verifyTransferFundsTitle()
         // Amount row
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.00")
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
         XCTAssertEqual(transferFunds.transferAmountLabel.label,
                        String(format: "mobileAvailableBalance".localized(), "$", "5,855.17", "USD"))
@@ -255,7 +255,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
 
         transferFunds.verifyTransferFundsTitle()
         // Amount row
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.00")
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
         XCTAssertEqual(transferFunds.transferAmountLabel.label,
                        String(format: "mobileAvailableBalance".localized(), "$", "5,855.17", "USD"))
@@ -294,7 +294,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
 
         transferFunds.verifyTransferFundsTitle()
         // Amount row
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.00")
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
         XCTAssertEqual(transferFunds.transferAmountLabel.label,
                        String(format: "mobileAvailableBalance".localized(), "$", "5,855.17", "USD"))

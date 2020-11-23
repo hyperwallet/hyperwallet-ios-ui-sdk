@@ -105,7 +105,7 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.verifyTransferFundsTitle()
 
         // Amount row
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.00")
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
         XCTAssertEqual(transferFunds.transferAmountLabel.label,
                        String(format: "mobileAvailableBalance".localized(), "$", "452.14", "USD"))
@@ -150,7 +150,7 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
 
         // Amount row
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.00")
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
         XCTAssertEqual(transferFunds.transferAmountLabel.label,
                        String(format: "mobileAvailableBalance".localized(), "$", "452.14", "USD"))
@@ -184,13 +184,12 @@ class TransferUserFundsTest: BaseTests {
         transferFundMenu.tap()
         waitForNonExistence(spinner)
 
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.00")
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
         XCTAssertEqual(transferFunds.transferAmountLabel.label,
                        String(format: "mobileAvailableBalance".localized(), "$", "452.14", "USD"))
         // Transfer all funds row
         XCTAssertTrue(transferFunds.transferMaxAllFunds.exists, "Transfer all funds switch should exist")
-
         // Tap on the Transfer max funds
         transferFunds.transferMaxAllFunds.tap()
         // Assert Destination Amount is automatically insert into the amount field
@@ -212,7 +211,7 @@ class TransferUserFundsTest: BaseTests {
           transferFundMenu.tap()
           waitForNonExistence(spinner)
 
-          XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+          XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.00")
           XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
           XCTAssertEqual(transferFunds.transferAmountLabel.label,
                          String(format: "mobileAvailableBalance".localized(), "$", "452.14", "USD"))
@@ -261,7 +260,7 @@ class TransferUserFundsTest: BaseTests {
         // Transfer Section
         XCTAssertTrue(transferFunds.transferSectionLabel.exists)
         // Amount row
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.00")
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
         XCTAssertEqual(transferFunds.transferAmountLabel.label,
                        String(format: "mobileAvailableBalance".localized(), "$", "5,855.17", "USD"))
@@ -296,7 +295,7 @@ class TransferUserFundsTest: BaseTests {
         // Transfer Section
         XCTAssertTrue(transferFunds.transferSectionLabel.exists)
         // Amount row
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.00")
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
         XCTAssertEqual(transferFunds.transferAmountLabel.label,
                        String(format: "mobileAvailableBalance".localized(), "$", "452.14", "USD"))
@@ -348,15 +347,15 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.transferAmount.clearAmountFieldAndEnterText(text: ".12345")
 
         transferFunds.transferSectionLabel.tap()
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.12")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "123.45")
 
-        transferFunds.transferAmount.clearAndEnterText(text: "12345678901234567890")
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "123456789012")
-        transferFunds.transferAmount.typeText(".123456")
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "123456789012.12")
+        transferFunds.transferAmount.clearAndEnterText(text: "123456789012")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "1,234,567,890.12")
+        transferFunds.transferAmount.typeText("1234.56")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "1,234,567,890.12")
 
         transferFunds.transferSectionLabel.tap()
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "123456789012.12")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "1,234,567,890.12")
     }
 
     // MARK: Select Destination Page
@@ -832,7 +831,7 @@ class TransferUserFundsTest: BaseTests {
         // Transfer Section
         XCTAssertTrue(transferFunds.transferSectionLabel.exists)
         // Amount
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.00")
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
         XCTAssertEqual(transferFunds.transferAmountLabel.label,
                        String(format: "mobileAvailableBalance".localized(), "$", "452.14", "USD"))
@@ -885,7 +884,7 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.verifyTransferFrom(isAvailableFunds: true)
 
         // Available Funds
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.00")
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
         let balance = String(format: transferFunds.availableBalanceFormat, "$", "452.14", "USD")
         XCTAssertEqual(transferFunds.transferAmountLabel.label, balance)

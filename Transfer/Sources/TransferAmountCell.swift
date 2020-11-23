@@ -24,10 +24,13 @@ final class TransferAmountCell: UITableViewCell {
     static let reuseIdentifier = "transferAmountCellIdentifier"
     typealias EnteredAmountHandler = (_ value: String) -> Void
 
+    private var formattedZeroAmount = "0"
     var enteredAmountHandler: EnteredAmountHandler?
+    private var amountString = ""
+    private var currencyCode: String?
 
-    private lazy var amountTextField: PasteOnlyTextField = {
-        let textField = PasteOnlyTextField(frame: .zero)
+    private lazy var amountTextField: AmountTextField = {
+        let textField = AmountTextField(frame: .zero)
         textField.textAlignment = .center
         textField.keyboardType = UIKeyboardType.decimalPad
         textField.delegate = self
@@ -139,34 +142,62 @@ final class TransferAmountCell: UITableViewCell {
     }
 
     func configure(amount: String?, currency: String?, _ handler: @escaping EnteredAmountHandler) {
-        var currencySymbol: String?
-        if let currency = currency {
-            let locale = NSLocale(localeIdentifier: currency)
-            currencySymbol = locale.displayName(forKey: NSLocale.Key.currencySymbol, value: currency)
+        currencyCode = currency
+        if let amount = amount, let currencyCode = currency {
+            currencySymbolLabel.text = TransferAmountCurrencyFormatter
+                .getTransferAmountCurrency(for: currencyCode)?.symbol
+            currencySymbolLabel.adjustsFontForContentSizeCategory = true
+
+            amountString = digits(amount: amount)
+            setFormattedAmount(amount.formatAmountToDouble())
+            amountTextField.adjustsFontSizeToFitWidth = true
+            amountTextField.adjustsFontForContentSizeCategory = true
+            currencyLabel.text = currencyCode
+            currencyLabel.adjustsFontForContentSizeCategory = true
+            enteredAmountHandler = handler
+        } else {
+            amountString = formattedZeroAmount
+            amountTextField.text = formattedZeroAmount
+            currencyLabel.text = String(repeating: " ", count: 3)
         }
-        currencySymbolLabel.text = currencySymbol
-        currencySymbolLabel.adjustsFontForContentSizeCategory = true
-        amountTextField.text = amount
-        amountTextField.adjustsFontSizeToFitWidth = true
-        amountTextField.adjustsFontForContentSizeCategory = true
-        currencyLabel.text = currency ?? String(repeating: " ", count: 3)
-        currencyLabel.adjustsFontForContentSizeCategory = true
-        enteredAmountHandler = handler
     }
 }
 
 extension TransferAmountCell: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        guard var currentText = textField.text else {
-            enteredAmountHandler?("")
-            return
+        let amount = TransferAmountCurrencyFormatter.getDecimalAmount(amount: amountString, currencyCode: currencyCode)
+        enteredAmountHandler?("\(amount)")
+    }
+
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+        let maximumIntegerDigits = 12
+        if string == "," || string == "." {
+            return false
         }
-        let decimalPointSymbol = "."
-        if currentText.last == Character(decimalPointSymbol) {
-            currentText.removeLast()
-            textField.text = currentText
+        switch string {
+        case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9":
+            if amountString == "0" {
+                amountString = string
+            } else {
+                amountString += string
         }
-        enteredAmountHandler?(currentText)
+
+        default:
+            if !amountString.isEmpty {
+                amountString.removeLast()
+            }
+        }
+
+        if digits(amount: amountString).count <= maximumIntegerDigits {
+            let amount = TransferAmountCurrencyFormatter.getDecimalAmount(amount: amountString,
+                                                                          currencyCode: currencyCode)
+            setFormattedAmount(amount)
+        } else {
+            if !amountString.isEmpty { amountString.removeLast() }
+        }
+        return false
     }
 
     private func setCursorToTheEnd(_ textField: UITextField) {
@@ -176,59 +207,16 @@ extension TransferAmountCell: UITextFieldDelegate {
         }
     }
 
-    func textField(_ textField: UITextField,
-                   shouldChangeCharactersIn range: NSRange,
-                   replacementString string: String) -> Bool {
-        let maximumIntegerDigits = 12
-        let maximumFractionDigits = 2
-        let decimalPointSymbol = "."
-        let currentText = textField.text ?? ""
+    private func setFormattedAmount(_ amount: Double) {
+        if let currencyCode = currencyCode {
+            amountTextField.text = TransferAmountCurrencyFormatter.formatDoubleAmount(amount, with: currencyCode)
+        } else {
+            amountTextField.text = "\(amount)"
+        }
+    }
 
-        // BackSpace
-        if string.isEmpty {
-            return true
-        }
-        // Paste
-        if string.count > 1 {
-            let stringPastedAmount = string.format(with: currencyLabel.text)
-            let pastedDigitsOnly = stringPastedAmount.replacingOccurrences(of: "[^0-9]",
-                                                                           with: "",
-                                                                           options: .regularExpression)
-            let pointEntered = stringPastedAmount.contains(decimalPointSymbol)
-            let maximumAllowedDigits = pointEntered
-                ? maximumIntegerDigits + maximumFractionDigits
-                : maximumIntegerDigits
-            guard !stringPastedAmount.isEmpty,
-                currentText.isEmpty,
-                pastedDigitsOnly.count <= maximumAllowedDigits else {
-                    return false
-            }
-            textField.text = stringPastedAmount
-            setCursorToTheEnd(textField)
-            return false
-        }
-        // Decimal point
-        if string == decimalPointSymbol {
-            if currentText.isEmpty {
-                textField.text = "0\(decimalPointSymbol)"
-                return false
-            }
-            return !currentText.contains(decimalPointSymbol)
-        }
-        // Digit
-        if currentText == "0" {
-            if string != "0" {
-                textField.text = string
-            }
-            return false
-        }
-        let split = currentText.split(separator: Character(decimalPointSymbol),
-                                      omittingEmptySubsequences: false)
-        let pointEntered = split.count == 2
-
-        return pointEntered
-            ? split[1].count < maximumFractionDigits
-            : split[0].count < maximumIntegerDigits
+    private func digits(amount: String) -> String {
+        return amount.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
     }
 }
 
