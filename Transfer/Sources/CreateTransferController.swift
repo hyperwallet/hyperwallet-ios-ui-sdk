@@ -28,7 +28,7 @@ import UIKit
 /// to retrieve the transfer resource.
 final class CreateTransferController: UITableViewController {
     enum FooterSection: Int, CaseIterable {
-        case amount, destination, transferAll, notes, button
+        case amount, destination, transferAll, notes, button, source
     }
 
     private let footerIdentifier = "transferTableViewFooterViewIdentifier"
@@ -79,6 +79,7 @@ final class CreateTransferController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Theme.Cell.smallHeight
         tableView.backgroundColor = Theme.UITableViewController.backgroundColor
+        tableView.keyboardDismissMode = .onDrag
 
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)

@@ -195,6 +195,10 @@
 		984D82FB24C25AAD00991DAD /* HyperwalletSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98FBC68923D8D8D90050E2B6 /* HyperwalletSDK.framework */; };
 		9874E68124B3981F00E95F4F /* CountryCurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9874E68024B3981F00E95F4F /* CountryCurrencyCell.swift */; };
 		98A0AD2E2538CC6100B338B8 /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0AD2C2538CC6100B338B8 /* StringTests.swift */; };
+		98A844EB2555CCAD00D7C265 /* Currency.json in Resources */ = {isa = PBXBuildFile; fileRef = 98A844EA2555CCAD00D7C265 /* Currency.json */; };
+		98A844ED2555CD6800D7C265 /* TransferAmountCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A844EC2555CD6800D7C265 /* TransferAmountCurrency.swift */; };
+		98A844F02555EFA100D7C265 /* TransferAmountCurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A844EF2555EFA100D7C265 /* TransferAmountCurrencyFormatter.swift */; };
+		98A844F22558F70A00D7C265 /* TransferAmountCurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A844F12558F70A00D7C265 /* TransferAmountCurrencyFormatter.swift */; };
 		98CACE1A24A6CFD10000F2B0 /* Receipt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB99C2C822E220C200E45185 /* Receipt.framework */; };
 		98CACE1B24A6CFD10000F2B0 /* Receipt.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DB99C2C822E220C200E45185 /* Receipt.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		98CACE1C24A6CFD30000F2B0 /* ReceiptRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE6B6C022D605B20009DEFE /* ReceiptRepository.framework */; };
@@ -820,6 +824,10 @@
 		98A0AD242537830900B338B8 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		98A0AD252537831400B338B8 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		98A0AD2C2538CC6100B338B8 /* StringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
+		98A844EA2555CCAD00D7C265 /* Currency.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Currency.json; sourceTree = "<group>"; };
+		98A844EC2555CD6800D7C265 /* TransferAmountCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferAmountCurrency.swift; sourceTree = "<group>"; };
+		98A844EF2555EFA100D7C265 /* TransferAmountCurrencyFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferAmountCurrencyFormatter.swift; sourceTree = "<group>"; };
+		98A844F12558F70A00D7C265 /* TransferAmountCurrencyFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferAmountCurrencyFormatter.swift; sourceTree = "<group>"; };
 		98DC5D502526A39A00729477 /* GetPrepaidCardSuccessResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GetPrepaidCardSuccessResponse.json; sourceTree = "<group>"; };
 		98EDBF89247451C0008A4015 /* PrepaidCardReceiptResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PrepaidCardReceiptResponse.json; sourceTree = "<group>"; };
 		98EDBF8A247451C0008A4015 /* UserReceiptResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UserReceiptResponse.json; sourceTree = "<group>"; };
@@ -1547,6 +1555,7 @@
 				B32FD83723DF66D700832544 /* ListTransferDestinationPresenterTests.swift */,
 				984C47FB252BED9200CC442D /* ListTransferSourcePresenterTests.swift */,
 				078C6EFB22EF7E0500CF81EE /* ScheduleTransferPresenterTests.swift */,
+				98A844F12558F70A00D7C265 /* TransferAmountCurrencyFormatter.swift */,
 				4A9A7BEE22E859E60022E573 /* Info.plist */,
 			);
 			path = Tests;
@@ -1557,6 +1566,7 @@
 			children = (
 				A65312D622FC291600A83D30 /* Coordinators */,
 				4A9A7C0E22E87E500022E573 /* Extensions */,
+				98A844EE2555EF5400D7C265 /* Helper */,
 				4A9A7C0222E86F580022E573 /* CreateTransferController.swift */,
 				4A9A7C0122E86F580022E573 /* CreateTransferPresenter.swift */,
 				4A9A7BFE22E86F580022E573 /* CreateTransferSectionData.swift */,
@@ -1572,6 +1582,7 @@
 				077C336F22E8CCAF000314CD /* ScheduleTransferSectionData.swift */,
 				4AB37CFB22EAF087005C1078 /* TransferAllFundsCell.swift */,
 				4A9A7C0322E86F580022E573 /* TransferAmountCell.swift */,
+				98A844EC2555CD6800D7C265 /* TransferAmountCurrency.swift */,
 				4A9A7BFF22E86F580022E573 /* TransferButtonCell.swift */,
 				4ADBEC7122E9F16A00D43A48 /* TransferDestinationCell.swift */,
 				077C337222E8CCB0000314CD /* TransferForeignExchangeCell.swift */,
@@ -1726,6 +1737,14 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
+		98A844EE2555EF5400D7C265 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				98A844EF2555EFA100D7C265 /* TransferAmountCurrencyFormatter.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		98EDBF8D247451CE008A4015 /* Responses */ = {
 			isa = PBXGroup;
 			children = (
@@ -1874,6 +1893,7 @@
 		DB2EB66E22617AB100FBEB3D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				98A844EA2555CCAD00D7C265 /* Currency.json */,
 				B39E00DE24B4FB0A00E3BC4D /* hw_mobile_ui_sdk_icons.ttf */,
 				DBFB61452261E44C00C4A8AA /* Assets.xcassets */,
 			);
@@ -3069,6 +3089,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98A844EB2555CCAD00D7C265 /* Currency.json in Resources */,
 				DB551F8122E137B600DD65C2 /* Localizable.strings in Resources */,
 				B39E00DF24B4FB0A00E3BC4D /* hw_mobile_ui_sdk_icons.ttf in Resources */,
 				DB5295ED22E231C500657F50 /* Assets.xcassets in Resources */,
@@ -3370,6 +3391,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A9A7C1022E87EA70022E573 /* HyperwalletTransferUI.swift in Sources */,
+				98A844ED2555CD6800D7C265 /* TransferAmountCurrency.swift in Sources */,
 				4ADBEC7422E9F92800D43A48 /* TransferThemeManager.swift in Sources */,
 				980B9AEB251D446400653D1C /* ListTransferSourcePresenter.swift in Sources */,
 				980B9AED251D446400653D1C /* ListTransferSourceController.swift in Sources */,
@@ -3388,6 +3410,7 @@
 				980B9AE0251BD6D700653D1C /* TransferSourceCell.swift in Sources */,
 				077C337722E8CCB0000314CD /* ScheduleTransferSectionData.swift in Sources */,
 				077C337822E8CCB0000314CD /* ScheduleTransferPresenter.swift in Sources */,
+				98A844F02555EFA100D7C265 /* TransferAmountCurrencyFormatter.swift in Sources */,
 				2E8AFE5823062316002B6D24 /* CreateTransferController.swift in Sources */,
 				07C91E9F22E8CF4000167B05 /* ScheduleTransferController.swift in Sources */,
 				077C337522E8CCB0000314CD /* TransferSummaryCell.swift in Sources */,
@@ -3408,6 +3431,7 @@
 				2EBD0C4E2373902700569342 /* AuthenticationTokenGeneratorMock.swift in Sources */,
 				4A9E9A0C22F4AD3700739150 /* TransferMethodRepositoryRequestHelper.swift in Sources */,
 				4A9E9A0D22F4AD3700739150 /* TransferRequestHelper.swift in Sources */,
+				98A844F22558F70A00D7C265 /* TransferAmountCurrencyFormatter.swift in Sources */,
 				4A9E9A0E22F4AD3700739150 /* UserRepositoryRequestHelper.swift in Sources */,
 				980C2E9625224F6E00DFDC94 /* PrepaidCardRepositoryRequestHelper.swift in Sources */,
 				2EBD0C4F2373902B00569342 /* HyperwalletTestHelper.swift in Sources */,

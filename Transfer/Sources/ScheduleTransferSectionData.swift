@@ -118,19 +118,23 @@ struct ScheduleTransferSummaryData: ScheduleTransferSectionData {
             let destinationCurrency = transfer.destinationCurrency {
             guard let feeAmount = transfer.destinationFeeAmount, Double(feeAmount) != 0 else {
                 rows.append((title: "mobileConfirmDetailsAmount".localized(),
-                             value: destinationAmount))
+                             value: TransferAmountCurrencyFormatter.formatStringAmount(destinationAmount,
+                                                                                       with: destinationCurrency)))
                 return
             }
-            let transferAmountFormattedDouble = destinationAmount.formatToDouble(with: destinationCurrency)
-            let feeAmountFormattedDouble = feeAmount.formatToDouble(with: destinationCurrency)
+            let transferAmountFormattedDouble = destinationAmount.formatAmountToDouble()
+            let feeAmountFormattedDouble = feeAmount.formatAmountToDouble()
             let grossTransferAmount = transferAmountFormattedDouble + feeAmountFormattedDouble
 
             rows.append((title: "mobileConfirmDetailsAmount".localized(),
-                         value: String(grossTransferAmount).format(with: destinationCurrency)))
+                         value: TransferAmountCurrencyFormatter.formatStringAmount(String(grossTransferAmount),
+                                                                                   with: destinationCurrency)))
             rows.append((title: "mobileConfirmDetailsFee".localized(),
-                         value: feeAmount))
+                         value: TransferAmountCurrencyFormatter.formatStringAmount(feeAmount,
+                                                                                   with: destinationCurrency)))
             rows.append((title: "mobileConfirmDetailsTotal".localized(),
-                         value: destinationAmount))
+                         value: TransferAmountCurrencyFormatter.formatStringAmount(destinationAmount,
+                                                                                   with: destinationCurrency)))
             if didFxQuoteChange {
                 footer = String(format: "transfer_fx_rate_changed".localized(),
                                 String(format: "%@ %@", destinationAmount, destinationCurrency))
