@@ -1,0 +1,266 @@
+//
+// Copyright 2018 - Present Hyperwallet
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+// and associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+// BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+"backBarButton" = "Takaisin";
+"mobileTransferMethodsHeader" = "Siirtomenetelmät";
+"remove" = "Poista";
+"cancelButtonLabel" = "Peruuta";
+"doneButtonLabel" = "Valmis";
+"try_again_button_label" = "Yritä uudelleen";
+"search_placeholder_label" = "Haku";
+"unexpected_error_message" = "Jokin meni vikaan, yritä uudelleen";
+"network_connection_error_title" = "Yhteysongelma";
+"unexpected_title" = "Odottamaton virhe";
+"network_connection_error_message" = "Pyynnön käsittelemisen yhteydessä ilmeni ongelma. Tarkista yhteys.";
+"endingIn" = "päättyy ";
+"to" = "kohteeseen ";
+"no_country_available_error_message" = "Maita ei ole käytettävissä";
+"no_transfer_method_available_error_message" = "Kohteelle %1$@ ja %2$@ ei ole käytettävissä siirtomenetelmää";
+"no_currency_available_error_message" = "Maalle %1$@ ei ole käytettävissä valuuttoja";
+"emptyStateAddTransferMethod" = "Aloita lisäämällä siirtomenetelmä.";
+"mobileAddTransferMethodHeader" = "Lisää siirtomenetelmä";
+"mobileCountryCurrencyLabel" = "SIJAINTI JA VALUUTTA";
+"mobileTransferMethodLabel" = "SIIRTOMENETELMÄ";
+"mobileCountryRegion" = "Maa/alue";
+"mobileCurrencyLabel" = "Valuutta";
+"mobileAreYouSure" = "Oletko varma?";
+"mobileRemoveEAconfirm" = "Poista siirtomenetelmä";
+"fee_flat_formatter" = "%1$@%2$@ maksu";
+"fee_percent_only_min_formatter" = "%1$@%% (Min:%2$@%3$@) maksu";
+"fee_percent_only_max_formatter" = "%1$@%% (Maks:%2$@%3$@) maksu";
+"fee_percent_formatter" = "%1$@%% (Min:%2$@%3$@, Max:%2$@%4$@) maksu";
+"fee_mix_no_min_and_max_formatter" = "%1$@%2$@ + %3$@%% maksu";
+"fee_mix_only_min_formatter" = "%1$@%2$@ + %3$@%% (Min:%1$@%4$@) maksu";
+"fee_mix_only_max_formatter" = "%1$@%2$@ + %3$@%% (Maks:%1$@%4$@) maksu";
+"fee_mix_formatter" = "%1$@%2$@ + %3$@%% (Min:%1$@%4$@, Maks:%1$@%5$@) maksu";
+"fee_percent_no_min_and_max_formatter" = "%1$@%% maksu";
+"transfer_method_not_supported_message" = "Tätä siirtomenetelmää ei tueta.";
+"error" = "Virhe";
+"authentication_error_title" = "Varmennusvirhe";
+"authentication_error_message" = "Todentamistunnuksen hakuyritys johti virheeseen";
+
+    // Transfer methods
+"bank_account" = "Pankkitili";
+"bank_card" = "Maksukortti";
+"paper_check" = "Paperinen sekki";
+"prepaid_card" = "Prepaid-kortti";
+"wire_account" = "Pankkisiirtotili";
+"paypal_account" = "PayPal-tili";
+"venmo_account" = "Venmo-tili";
+"cash_pickup_mg" = "MoneyGram";
+
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Manage Prepaid Card Message
+"manage_prepaid_card_message" = "Kirjaudu sisään verkkoselaimessa hallinnoidaksesi korttiasi";
+    //Select Transfer Method View
+"select_a_country_message" = "Valitse maa";
+
+    // Add Transfer Method
+"createTransferMethodButtonLabel" = "Lisää siirtomenetelmä";
+"account_information" = "TILITIEDOT: %1$@(%2$@)";
+"account_holder" = "TILINHALTIJAN TIEDOT";
+"address"="OSOITE";
+"mobileFeesAndProcessingTime" = "MAKSUT JA KÄSITTELYAIKA";
+"intermediary_account" = "VÄLITTÄVÄ TILI";
+"contact_information" = "YHTEYSTIEDOT";
+"identification" = "TUNNISTUS";
+
+"date_format" = "PP-KK-VVVV";
+
+    // Processing View
+"processing_view_label" = "Käsitellään";
+"complete_view_label" = "Suorita";
+
+    // Receipt
+"transactions" = "Tapahtumat";
+"mobileNoTransactions" = "Näytettäviä toimia ei ole.";
+"mobilePrepaidCardNoTransactions" = "Ei tapahtumia edellisen 365 päivän aikana.";
+"add_transaction_title" = "Lisää tapahtuma";
+"account_closure_fee" = "Tilin sulkemismaksu";
+"account_closure" = "Tilin sulkeminen";
+"account_unload" = "Varojen palautus";
+"adjustment" = "Saldon oikaisu";
+"annual_fee_refund" = "Vuosittaisen maksun hyvitys";
+"annual_fee" = "Vuosittainen maksu";
+"bank_account_transfer_fee" = "Pankkitilin palautusmaksu";
+"bank_account_transfer_return_fee" = "Pankkitilin palautusmaksu";
+"bank_account_transfer_return" = "Pankkitilin palautus";
+"card_activation_fee_waiver" = "Kortin aktivointimaksun vastuuvapautus";
+"card_activation_fee" = "Kortin aktivointimaksu";
+"card_fee" = "Korttimaksu";
+"customer_service_fee_refund" = "Asiakaspalvelumaksun hyvitys";
+"customer_service_fee" = "Asiakaspalvelumaksu";
+"deposit" = "Maksu";
+"donation_fee" = "Lahjoitusmaksu";
+"donation_return" = "Lahjoituksen palautus";
+"donation" = "Lahjoitus";
+"dormant_user_fee_refund" = "Ei-aktiivisen käyttäjän tilimaksun hyvitys";
+"dormant_user_fee" = "Ei-aktiivisen käyttäjän tilimaksu";
+"expedited_shipping_fee" = "Nopean toimituksen maksu";
+"foreign_exchange" = "Valuutanvaihto";
+"generic_fee_refund" = "Yleisen maksun hyvitys";
+"manual_adjustment" = "Oikaisu";
+"manual_transfer_to_prepaid_card" = "Siirrä kortille";
+"merchant_payment_fee" = "Kauppiasmaksu";
+"merchant_payment_refund" = "Kauppiasmaksun hyvitys";
+"merchant_payment_return" = "Kauppiasmaksun palautus";
+"merchant_payment" = "Kauppiasmaksu";
+"moneygram_transfer_return" = "MoneyGram-palautus";
+"monthly_fee_refund" = "Kuukausimaksun hyvitys";
+"monthly_fee" = "Kuukausimaksu";
+"paper_check_fee" = "Paperisen sekin maksu";
+"paper_check_refund" = "Paperisen sekin hyvitys";
+"payment_cancellation" = "Maksun peruutus";
+"payment_expiration" = "Maksu erääntynyt";
+"payment_expiry_fee" = "Maksun erääntymispäivä";
+"payment_fee" = "Maksu";
+"payment_return" = "Maksun palautus";
+"payment_reversal_fee" = "Maksun peruutusmaksu";
+"payment_reversal" = "Maksun peruuttaminen";
+"payment" = "Maksu";
+"prepaid_card_balance_inquiry_fee" = "Saldokyselymaksu";
+"prepaid_card_cash_advance" = "Käteinen ennakko";
+"prepaid_card_dispute_deposit" = "Riitautetun kortin talletus";
+"prepaid_card_disputed_charge_refund" = "Riitautetun veloituksen hyvitys";
+"prepaid_card_domestic_cash_withdrawal_fee" = "Pankkiautomaattinosto";
+"prepaid_card_exchange_rate_difference" = "Vaihtokurssin ero";
+"prepaid_card_manual_unload" = "Siirrä kortilta";
+"prepaid_card_overseas_cash_withdrawal_fee" = "Pankkiautomaattinosto";
+"prepaid_card_pin_change_fee" = "PIN-koodin vaihtomaksu";
+"prepaid_card_refund" = "Hyvitys";
+"prepaid_card_replacement_fee" = "Kortin korvausmaksu";
+"prepaid_card_sale_reversal" = "Käänteinen tapahtuma";
+"prepaid_card_sale" = "Tapahtuma";
+"prepaid_card_unload" = "Siirrä kortilta";
+"processing_fee" = "Käsittelymaksu";
+"standard_shipping_fee" = "Normaalin toimituksen maksu";
+"transfer_fee" = "Siirtomaksu";
+"transfer_to_bank_account" = "Pankkitili";
+"transfer_to_debit_card" = "Maksukortti";
+"transfer_to_moneygram" = "MoneyGram";
+"transfer_to_paper_check" = "Paperinen sekki";
+"transfer_to_paypal_account" = "PayPal";
+"transfer_to_prepaid_card" = "Siirrä kortille";
+"transfer_to_program_account" = "Siirrä ohjelmaan";
+"transfer_to_user" = "Siirrä käyttäjälle";
+"transfer_to_western_union" = "Western Union";
+"transfer_to_wire" = "Pankkisiirto";
+"transfer_to_wubs_wire" = "Pankkisiirto";
+"transfer_to_venmo_account" = "Venmo";
+"transfer_to_bank_card" = "Pankkikortti";
+"virtual_incentive_cancellation" = "Kampanjan peruutus";
+"virtual_incentive_issuance" = "Myönnetty kampanja";
+"virtual_incentive_purchase" = "Kampanjaostos";
+"virtual_incentive_refund" = "Kampanjan hyvitys";
+"western_union_transfer_return" = "Western Union -nosto";
+"wire_transfer_fee" = "Pankkisiirtomaksu";
+"wire_transfer_return" = "Pankkisiirron palautus";
+"wubs_wire_transfer_return" = "Pankkisiirron palautus";
+"unknown_receipt_type" = "Tuntematon tapahtuman tyyppi";
+"paypal_account_transfer_return" = "Maksutapahtuman peruutus";
+"venmo_account_transfer_return" = "Maksutapahtuman peruutus";
+"prepaid_card_account_deposit" = "Tilitalletus";
+"prepaid_card_annual_fee_discount" = "Vuosittaisen maksun alennus";
+"prepaid_card_bill_reprint_fee" = "Laskun uudelleentulostushinta";
+"prepaid_card_atm_or_cash_advance_fee" = "Pankkiautomaatti-/käteisennakkomaksu";
+"prepaid_card_cash_advance_chargeback" = "Käteisennakon takaisinperintä";
+"prepaid_card_cash_advance_chargeback_reversal" = "Käteisennakon takaisinperinnän peruutus";
+"prepaid_card_cash_advance_repress" = "Käteisennakon pidätys";
+"prepaid_card_cash_advance_repress_reversal" = "Ennakkopidätyksen peruutus";
+"prepaid_card_chargeback" = "Takaisinperintä";
+"prepaid_card_chargeback_refund" = "Takaisinperinnän hyvitys";
+"prepaid_card_chargeback_refund_reversal" = "Takaisinperinnän hyvityksen peruutus";
+"prepaid_card_chargeback_reversal" = "Takaisinperinnän peruutus";
+"prepaid_card_commission_or_fee" = "Maksu/palkkio";
+"prepaid_card_debit_transfer" = "Veloitus/siirrot";
+"prepaid_card_document_request_fee" = "Asiakirjan pyyntömaksu";
+"prepaid_card_emergency_cash" = "Raha hätätilanteita varten";
+"prepaid_card_emergency_card" = "Hätätilannekortti";
+"prepaid_card_income" = "Tulot";
+"prepaid_card_load_fee" = "PAN-maksu";
+"prepaid_card_overdue_payment_interest" = "Erääntyneen maksun korko";
+"prepaid_card_payment" = "Lataa";
+"prepaid_card_pin_reprint_fee" = "PIN-koodin uudelleentulostus";
+"prepaid_card_priority_pass_fee" = "Prioriteettipassin maksu";
+"prepaid_card_priority_pass_renewal" = "Prioriteettipassin uusiminen";
+"prepaid_card_recurring_interest" = "Jatkuva korko";
+"prepaid_card_refund_repress" = "Hyvityksen pidätys";
+"prepaid_card_refund_repress_reversal" = "Hyvityksen pidätyksen peruutus";
+"prepaid_card_sale_repress" = "Myynnin pidätys";
+"prepaid_card_statement_fee" = "UTSKGJ-selvitysmaksu";
+"prepaid_card_telephone_support_fee" = "Tiedot puhelimitse: saldo, tapahtumat jne.";
+"prepaid_card_transfer_fee" = "Korttilatausmaksu";
+"prepaid_card_transfer_return" = "Prepaid-kortin latauksen palautus";
+"prepaid_card_bank_withdrawal_reversal" = "Peruutettu pankkinosto";
+"prepaid_card_bank_withdrawal_chargeback" = "Peruutetun pankkinoston takaisinperintä";
+"prepaid_card_refund_fee" = "Hyvitysmaksu";
+"prepaid_card_monthly_maintenance_fee" = "Kuukausittainen ylläpitomaksu";
+"prepaid_card_transaction_fee" = "Tapahtumamaksu";
+"prepaid_card_sms_fee" = "Tekstiviestimaksu";
+"prepaid_card_declined_authorization_fee" = "Valtuutuksen hylkäyksen maksu";
+"fispc" = "Osta";
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Receipt Detail
+"mobileTransactionDetailsHeader" = "Tapahtuman tiedot";
+"mobileTransactionTypeLabel" = "TAPAHTUMA";
+"mobileTransactionDetailsLabel" = "TIEDOT";
+"mobileFeeInfoLabel" = "MAKSUN TIEDOT";
+"mobileConfirmNotesLabel" = "HUOMAUTUS";
+"mobileCharityName" = "Hyväntekeväisyyden nimi";
+"mobileCheckNumber" = "Sekin numero";
+"mobileTransactionIdLabel" = "Tapahtumatunnus";
+"mobilePromoWebsite" = "Kampanjaverkkosivusto";
+"mobileTransactionDetailsTotal" = "Tapahtuma yhteensä";
+"amount" = "Summa";
+"mobileFeeLabel" = "Maksu";
+"mobileJournalNumberLabel" = "Kuittitunnus";
+"date" = "Päivämäärä";
+
+    // Transfer Funds
+"mobileTransferFundsHeader" = "Siirrä";
+"mobileConfirmationHeader" = "Vahvista tiedot";
+"mobileTransferFromLabel" = "SIIRRÄ KOHTEESTA";
+"mobileTransferToLabel" = "SIIRRÄ KOHTEESEEN";
+"mobileNoteLabel" = "Huomautus";
+"mobileConfirmDetailsAmount" = "Summa";
+"mobileConfirmDetailsFee" = "Maksu";
+"mobileConfirmDetailsTotal" = "Tulet vastaanottamaan";
+"mobileTransferMax" = "Siirrä suurin sallittu summa";
+"mobileFXsell" = "Kohteesta";
+"mobileFXbuy" = "Kohteeseen";
+"mobileFXRateLabel" = "Vaihtokurssi";
+"mobileAvailableBalance" = "Käytettävissä oleva summa: %1$@%2$@ %3$@";
+"continueButtonLabel" = "Jatka";
+"mobileAddTransferMethod" = "Lisää siirtomenetelmä";
+"mobileTransferMethodsHeader" = "Siirtomenetelmät";
+"mobileTransferFromHeader" = "Siirrä kohteesta";
+"mobileAvailableFunds" = "Käytettävissä olevat varat";
+"mobileFXlabel" = "VALUUTANVAIHTO";
+"mobileSummaryLabel" = "YHTEENVETO";
+"transfer" = "Siirrä";
+"transferAmountInvalid" = "Syötä kelvollinen siirrettävä summa";
+"noTransferMethodAdded" = "Siirtomenetelmä on pakollinen";
+"transfer_error_no_transfer_method_module_initialized" = "Et pysty lisäämään siirtomenetelmää.";
+"transfer_fx_rate_changed" = "Vaihtokurssin muutosten vuoksi tulet vastaanottamaan: %1$@";
+"mobileTransferSuccessMsg" = "Siirtoasi käsitellään";
+"mobileTransferSuccessDetails" = "Rahat ovat matkalla kohteeseen %1$@.";
+"noTransferFromSourceAvailable" = "Lähteestä ei ole käytettävissä siirtoja";

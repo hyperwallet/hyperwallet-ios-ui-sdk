@@ -1,0 +1,266 @@
+//
+// Copyright 2018 - Present Hyperwallet
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+// and associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+// BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+"backBarButton" = "Retour";
+"mobileTransferMethodsHeader" = "Méthodes de transfert";
+"remove" = "Supprimer";
+"cancelButtonLabel" = "Annuler";
+"doneButtonLabel" = "Terminé";
+"try_again_button_label" = "Réessayer";
+"search_placeholder_label" = "Rechercher";
+"unexpected_error_message" = "Une erreur s’est produite, veuillez réessayer";
+"network_connection_error_title" = "Problème de connectivité";
+"unexpected_title" = "Erreur inattendue";
+"network_connection_error_message" = "Nous rencontrons un problème lors du traitement de votre demande. Veuillez vérifier votre connectivité.";
+"endingIn" = "expire dans ";
+"to" = "à ";
+"no_country_available_error_message" = "Aucun pays disponible";
+"no_transfer_method_available_error_message" = "Aucune méthode de transfert disponible pour %1$@ et %2$@";
+"no_currency_available_error_message" = "Aucune devise disponible pour le pays %1$@";
+"emptyStateAddTransferMethod" = "Ajouter une méthode de transfert pour commencer.";
+"mobileAddTransferMethodHeader" = "Ajouter une méthode de transfert";
+"mobileCountryCurrencyLabel" = "LIEU ET DEVISE";
+"mobileTransferMethodLabel" = "MÉTHODE DE TRANSFERT";
+"mobileCountryRegion" = "Pays/Région";
+"mobileCurrencyLabel" = "Devise";
+"mobileAreYouSure" = "Êtes-vous sûr(e) ?";
+"mobileRemoveEAconfirm" = "Supprimer la méthode de transfert";
+"fee_flat_formatter" = "%1$@%2$@ frais";
+"fee_percent_only_min_formatter" = "%1$@%% frais (Min. :%2$@%3$@)";
+"fee_percent_only_max_formatter" = "%1$@%% frais (Max. :%2$@%3$@)";
+"fee_percent_formatter" = "%1$@%% frais (Min. :%2$@%3$@, Max. :%2$@%4$@)";
+"fee_mix_no_min_and_max_formatter" = "%1$@%2$@ + %3$@%% frais";
+"fee_mix_only_min_formatter" = "%1$@%2$@ + %3$@%% frais de (Min. :%1$@%4$@)";
+"fee_mix_only_max_formatter" = "%1$@%2$@ + %3$@%% frais de (Max. :%1$@%4$@)";
+"fee_mix_formatter" = "%1$@%2$@ + %3$@%% frais (Min. :%1$@%4$@, Max. :%1$@%5$@)";
+"fee_percent_no_min_and_max_formatter" = "%1$@%% frais";
+"transfer_method_not_supported_message" = "Cette méthode de transfert n’est pas prise en charge.";
+"error" = "Erreur";
+"authentication_error_title" = "Erreur d’authentification";
+"authentication_error_message" = "La tentative de récupération du jeton d’authentification a donné lieu à une erreur";
+
+    // Transfer methods
+"bank_account" = "Compte bancaire";
+"bank_card" = "Carte de débit";
+"paper_check" = "Chèque";
+"prepaid_card" = "Carte prépayée";
+"wire_account" = "Compte de virement bancaire";
+"paypal_account" = "Compte Paypal";
+"venmo_account" = "Compte Venmo";
+"cash_pickup_mg" = "MoneyGram";
+
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Manage Prepaid Card Message
+"manage_prepaid_card_message" = "Connectez-vous via un navigateur pour gérer votre carte";
+    //Select Transfer Method View
+"select_a_country_message" = "Sélectionnez un pays";
+
+    // Add Transfer Method
+"createTransferMethodButtonLabel" = "Ajouter méthode de transfert";
+"account_information" = "INFORMATIONS RELATIVES AU COMPTE : %1$@(%2$@)";
+"account_holder" = "INFORMATIONS RELATIVES AU TITULAIRE DU COMPTE";
+"address"="ADRESSE";
+"mobileFeesAndProcessingTime" = "FRAIS ET DURÉE DE TRAITEMENT";
+"intermediary_account" = "COMPTE DE L’INTERMÉDIAIRE";
+"contact_information" = "COORDONNÉES";
+"identification" = "IDENTIFICATION";
+
+"date_format" = "JJ-MM-AAAA";
+
+    // Processing View
+"processing_view_label" = "Traitement en cours";
+"complete_view_label" = "Terminé";
+
+    // Receipt
+"transactions" = "Transactions";
+"mobileNoTransactions" = "Il n’y a aucune activité à afficher.";
+"mobilePrepaidCardNoTransactions" = "Aucune transaction au cours des 365 derniers jours.";
+"add_transaction_title" = "Ajouter transaction";
+"account_closure_fee" = "Frais de clôture de compte";
+"account_closure" = "Clôture de compte";
+"account_unload" = "Retour de fonds";
+"adjustment" = "Ajustement de solde";
+"annual_fee_refund" = "Remboursement des frais annuels";
+"annual_fee" = "Frais annuels";
+"bank_account_transfer_fee" = "Frais de restitution de compte bancaire";
+"bank_account_transfer_return_fee" = "Frais de restitution de compte bancaire";
+"bank_account_transfer_return" = "Restitution de compte bancaire";
+"card_activation_fee_waiver" = "Exonération de frais d’activation de carte";
+"card_activation_fee" = "Frais d’activation de carte";
+"card_fee" = "Frais de carte";
+"customer_service_fee_refund" = "Remboursement des frais de service d’assistance à la clientèle";
+"customer_service_fee" = "Frais de service d’assistance à la clientèle";
+"deposit" = "Paiement";
+"donation_fee" = "Frais sur donation";
+"donation_return" = "Retour de donation";
+"donation" = "Donation";
+"dormant_user_fee_refund" = "Remboursement de frais de compte utilisateur dormant";
+"dormant_user_fee" = "Frais de compte utilisateur dormant";
+"expedited_shipping_fee" = "Frais d’expédition";
+"foreign_exchange" = "Taux de change";
+"generic_fee_refund" = "Remboursement de frais génériques";
+"manual_adjustment" = "Ajustement";
+"manual_transfer_to_prepaid_card" = "Transfert vers carte";
+"merchant_payment_fee" = "Frais de paiement marchand";
+"merchant_payment_refund" = "Remboursement de paiement marchand";
+"merchant_payment_return" = "Retour de paiement marchand";
+"merchant_payment" = "Paiement marchand";
+"moneygram_transfer_return" = "Retour MoneyGram";
+"monthly_fee_refund" = "Remboursement de frais mensuels";
+"monthly_fee" = "Frais mensuels";
+"paper_check_fee" = "Frais de chèque";
+"paper_check_refund" = "Remboursement de chèque";
+"payment_cancellation" = "Annulation de paiement";
+"payment_expiration" = "Paiement expiré";
+"payment_expiry_fee" = "Frais d’expiration de paiement";
+"payment_fee" = "Frais de paiement";
+"payment_return" = "Retour de paiement";
+"payment_reversal_fee" = "Frais d’annulation de paiement";
+"payment_reversal" = "Annulation de paiement";
+"payment" = "Paiement";
+"prepaid_card_balance_inquiry_fee" = "Frais de demande de solde";
+"prepaid_card_cash_advance" = "Avance de fonds";
+"prepaid_card_dispute_deposit" = "Dépôt par carte contesté";
+"prepaid_card_disputed_charge_refund" = "Remboursement de frais disputé";
+"prepaid_card_domestic_cash_withdrawal_fee" = "Retrait en DAB";
+"prepaid_card_exchange_rate_difference" = "Différence de taux de change";
+"prepaid_card_manual_unload" = "Transfert depuis une carte";
+"prepaid_card_overseas_cash_withdrawal_fee" = "Retrait en DAB";
+"prepaid_card_pin_change_fee" = "Frais de modification de code PIN";
+"prepaid_card_refund" = "Remboursement";
+"prepaid_card_replacement_fee" = "Frais de remplacement de carte";
+"prepaid_card_sale_reversal" = "Transaction annulée";
+"prepaid_card_sale" = "Transaction";
+"prepaid_card_unload" = "Transfert depuis une carte";
+"processing_fee" = "Frais de traitement";
+"standard_shipping_fee" = "Frais d’expédition standard";
+"transfer_fee" = "Frais de transfert";
+"transfer_to_bank_account" = "Compte bancaire";
+"transfer_to_debit_card" = "Carte de débit";
+"transfer_to_moneygram" = "MoneyGram";
+"transfer_to_paper_check" = "Chèque";
+"transfer_to_paypal_account" = "PayPal";
+"transfer_to_prepaid_card" = "Transfert vers carte";
+"transfer_to_program_account" = "Transfert vers programme";
+"transfer_to_user" = "Transfert vers utilisateur";
+"transfer_to_western_union" = "Western Union";
+"transfer_to_wire" = "Virement électronique";
+"transfer_to_wubs_wire" = "Virement électronique";
+"transfer_to_venmo_account" = "Venmo";
+"transfer_to_bank_card" = "Carte bancaire";
+"virtual_incentive_cancellation" = "Annulation de Promo";
+"virtual_incentive_issuance" = "Promo offerte";
+"virtual_incentive_purchase" = "Achat de Promo";
+"virtual_incentive_refund" = "Remboursement de Promo";
+"western_union_transfer_return" = "Retrait Western Union";
+"wire_transfer_fee" = "Frais de virement bancaire";
+"wire_transfer_return" = "Retour de virement bancaire";
+"wubs_wire_transfer_return" = "Retour de virement bancaire";
+"unknown_receipt_type" = "Type de transaction inconnu";
+"paypal_account_transfer_return" = "Retour de retrait";
+"venmo_account_transfer_return" = "Retour de retrait";
+"prepaid_card_account_deposit" = "Dépôt sur compte";
+"prepaid_card_annual_fee_discount" = "Réduction des frais annuels";
+"prepaid_card_bill_reprint_fee" = "Frais de réimpression de facture";
+"prepaid_card_atm_or_cash_advance_fee" = "Frais d’avance DAB/de fonds";
+"prepaid_card_cash_advance_chargeback" = "Rétrofacturation d’avance de fonds";
+"prepaid_card_cash_advance_chargeback_reversal" = "Annulation de rétrofacturation d’avance de fonds";
+"prepaid_card_cash_advance_repress" = "Retenue d’avance de fonds";
+"prepaid_card_cash_advance_repress_reversal" = "Annulation de retenue d’avance";
+"prepaid_card_chargeback" = "Rétrofacturation";
+"prepaid_card_chargeback_refund" = "Remboursement de rétrofacturation";
+"prepaid_card_chargeback_refund_reversal" = "Annulation de remboursement de rétrofacturation";
+"prepaid_card_chargeback_reversal" = "Annulation de rétrofacturation";
+"prepaid_card_commission_or_fee" = "Frais/commission";
+"prepaid_card_debit_transfer" = "Débit/transferts";
+"prepaid_card_document_request_fee" = "Frais de demande de documents";
+"prepaid_card_emergency_cash" = "Fonds d’urgence";
+"prepaid_card_emergency_card" = "Carte d’urgence";
+"prepaid_card_income" = "Revenus";
+"prepaid_card_load_fee" = "Frais de monétique";
+"prepaid_card_overdue_payment_interest" = "Intérêts sur retard de paiement";
+"prepaid_card_payment" = "Recharge";
+"prepaid_card_pin_reprint_fee" = "Réédition de code PIN";
+"prepaid_card_priority_pass_fee" = "Frais de passe prioritaire";
+"prepaid_card_priority_pass_renewal" = "Renouvellement de passe prioritaire";
+"prepaid_card_recurring_interest" = "Intérêts renouvelables";
+"prepaid_card_refund_repress" = "Retenue de remboursement";
+"prepaid_card_refund_repress_reversal" = "Annulation de retenue de remboursement";
+"prepaid_card_sale_repress" = "Retenue de vente";
+"prepaid_card_statement_fee" = "Frais de déclaration UTSKGJ";
+"prepaid_card_telephone_support_fee" = "Informations fournies par téléphone : solde, transactions, etc.";
+"prepaid_card_transfer_fee" = "Frais de chargement de carte";
+"prepaid_card_transfer_return" = "Retour de chargement de carte prépayée";
+"prepaid_card_bank_withdrawal_reversal" = "Retrait en banque annulé";
+"prepaid_card_bank_withdrawal_chargeback" = "Rétrofaturation de retrait en banque annulé";
+"prepaid_card_refund_fee" = "Frais de remboursement";
+"prepaid_card_monthly_maintenance_fee" = "Frais de maintenance mensuels";
+"prepaid_card_transaction_fee" = "Frais de transaction";
+"prepaid_card_sms_fee" = "Frais SMS";
+"prepaid_card_declined_authorization_fee" = "Frais d’autorisation rejetée";
+"fispc" = "Achat";
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Receipt Detail
+"mobileTransactionDetailsHeader" = "Détails de la transaction";
+"mobileTransactionTypeLabel" = "TRANSACTION";
+"mobileTransactionDetailsLabel" = "DÉTAILS";
+"mobileFeeInfoLabel" = "INFORMATIONS RELATIVES AUX FRAIS";
+"mobileConfirmNotesLabel" = "NOTE";
+"mobileCharityName" = "Nom de l’organisme caritatif";
+"mobileCheckNumber" = "Numéro de chèque";
+"mobileTransactionIdLabel" = "Identifiant de transaction";
+"mobilePromoWebsite" = "Site Web de la Promo";
+"mobileTransactionDetailsTotal" = "Total de la transaction";
+"amount" = "Montant";
+"mobileFeeLabel" = "Frais";
+"mobileJournalNumberLabel" = "Identifiant du reçu";
+"date" = "Date";
+
+    // Transfer Funds
+"mobileTransferFundsHeader" = "Transfert";
+"mobileConfirmationHeader" = "Confirmer les coordonnées";
+"mobileTransferFromLabel" = "TRANSFERT DE";
+"mobileTransferToLabel" = "TRANSFERT VERS";
+"mobileNoteLabel" = "Note";
+"mobileConfirmDetailsAmount" = "Montant";
+"mobileConfirmDetailsFee" = "Frais";
+"mobileConfirmDetailsTotal" = "Vous recevrez";
+"mobileTransferMax" = "Montant max. de transfert";
+"mobileFXsell" = "De";
+"mobileFXbuy" = "À";
+"mobileFXRateLabel" = "Taux de change";
+"mobileAvailableBalance" = "Montant disponible %1$@%2$@ %3$@";
+"continueButtonLabel" = "Continuer";
+"mobileAddTransferMethod" = "Ajouter méthode de transfert";
+"mobileTransferMethodsHeader" = "Méthodes de transfert";
+"mobileTransferFromHeader" = "Transfert de";
+"mobileAvailableFunds" = "Fonds disponibles";
+"mobileFXlabel" = "TAUX DE CHANGE";
+"mobileSummaryLabel" = "RÉCAPITULATIF";
+"transfer" = "Transfert";
+"transferAmountInvalid" = "Veuillez saisir un montant de transfert valide";
+"noTransferMethodAdded" = "Veuillez sélectionner une méthode de transfert";
+"transfer_error_no_transfer_method_module_initialized" = "Vous ne pouvez pas ajouter de méthode de transfert.";
+"transfer_fx_rate_changed" = "Suite à des changements du taux de change, vous recevrez désormais : %1$@";
+"mobileTransferSuccessMsg" = "Votre transfert est en cours de traitement";
+"mobileTransferSuccessDetails" = "L’argent est en cours de transfert vers votre %1$@.";
+"noTransferFromSourceAvailable" = "Transfert depuis cette source indisponible";
