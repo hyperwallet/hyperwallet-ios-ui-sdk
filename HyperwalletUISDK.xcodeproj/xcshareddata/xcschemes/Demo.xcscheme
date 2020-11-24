@@ -63,7 +63,7 @@
                   Identifier = "TransferUserFundsTest/testTransferFunds_createTransferCopyAndPasteTransferAmountWithChars()">
                </Test>
                <Test
-                  Identifier = "TransferUserFundsTest/testTransferFunds_createTransferCopyAndPasteTransferAmountWithDigits()">
+                  Identifier = "AddTransferMethodBankAccountBusinessTests">
                </Test>
             </SkippedTests>
          </TestableReference>
@@ -73,7 +73,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = "es"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
