@@ -759,6 +759,7 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.transferSourceTitleLabel.tap()
         let ppcCell = app.tables.element.children(matching: .cell).element(boundBy: 1)
         ppcCell.tap()
+        waitForNonExistence(spinner)
 
         // Transfer From by PPC Section
         transferFunds.verifyTransferFrom(isAvailableFunds: false)
