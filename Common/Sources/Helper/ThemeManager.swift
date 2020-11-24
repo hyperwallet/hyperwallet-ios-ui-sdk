@@ -46,7 +46,7 @@ public class ThemeManager: NSObject {
             proxy.largeTitleTextAttributes =
                 [
                     NSAttributedString.Key.foregroundColor: Theme.NavigationBar.largeTitleColor,
-                    NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 17.0)
+                    NSAttributedString.Key.font: Theme.NavigationBar.titleFont
                 ]
         }
         if #available(iOS 13.0, *) {
@@ -59,7 +59,7 @@ public class ThemeManager: NSObject {
             navBarAppearance.largeTitleTextAttributes =
                 [
                     NSAttributedString.Key.foregroundColor: Theme.NavigationBar.largeTitleColor,
-                    NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20.0)
+                    NSAttributedString.Key.font: Theme.NavigationBar.largeTitleFont
                 ]
             navBarAppearance.backgroundColor = Theme.themeColor
             proxy.standardAppearance = navBarAppearance

@@ -65,9 +65,9 @@ public class Theme: NSObject {
         public static var backButtonColor = Theme.tintColor
         @available(iOS 11.0, *)
         /// The `UINavigationBar` large title font
-        public static var largeTitleFont = UIFont.preferredFont(forTextStyle: .largeTitle)
+        public static var largeTitleFont = UIFont.boldSystemFont(ofSize: 20.0)
         /// The `UINavigationBar` title font
-        public static var titleFont = UIFont.preferredFont(forTextStyle: .body)
+        public static var titleFont = UIFont.boldSystemFont(ofSize: 17.0)
     }
 
     /// Representation of all customizable visual style property for `UIButton`.
