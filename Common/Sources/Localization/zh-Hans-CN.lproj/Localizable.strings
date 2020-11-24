@@ -1,0 +1,266 @@
+//
+// Copyright 2018 - Present Hyperwallet
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+// and associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+// BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+"backBarButton" = "返回";
+"mobileTransferMethodsHeader" = "转账方式";
+"remove" = "删除";
+"cancelButtonLabel" = "取消";
+"doneButtonLabel" = "完成";
+"try_again_button_label" = "重新尝试";
+"search_placeholder_label" = "搜索";
+"unexpected_error_message" = "出现错误，请重新尝试";
+"network_connection_error_title" = "连接问题";
+"unexpected_title" = "意外错误";
+"network_connection_error_message" = "我们遇到了处理请求问题。请检查您的连接。";
+"endingIn" = "截至 ";
+"to" = "至 ";
+"no_country_available_error_message" = "无可用国家/地区";
+"no_transfer_method_available_error_message" = "对于 %1$@ 和 %2$@，无可用转账方式";
+"no_currency_available_error_message" = "对于国家/地区 %1$@，无可用货币";
+"emptyStateAddTransferMethod" = "添加转账方式以开始。";
+"mobileAddTransferMethodHeader" = "添加转账方式";
+"mobileCountryCurrencyLabel" = "所在地和货币";
+"mobileTransferMethodLabel" = "转账方式";
+"mobileCountryRegion" = "国家/地区";
+"mobileCurrencyLabel" = "货币";
+"mobileAreYouSure" = "是否确定？";
+"mobileRemoveEAconfirm" = "移除转账方式";
+"fee_flat_formatter" = "%1$@%2$@ 费用";
+"fee_percent_only_min_formatter" = "%1$@%%（最低：%2$@%3$@）费用";
+"fee_percent_only_max_formatter" = "%1$@%%（最高：%2$@%3$@）费用";
+"fee_percent_formatter" = "%1$@%%（最低：%2$@%3$@，最高：%2$@%4$@）费用";
+"fee_mix_no_min_and_max_formatter" = "%1$@%2$@ + %3$@%% 费用";
+"fee_mix_only_min_formatter" = "%1$@%2$@ + %3$@%%（最低：%1$@%4$@）费用";
+"fee_mix_only_max_formatter" = "%1$@%2$@ + %3$@%%（最高：%1$@%4$@）费用";
+"fee_mix_formatter" = "%1$@%2$@ + %3$@%%（最低：%1$@%4$@，最高：%1$@%5$@）费用";
+"fee_percent_no_min_and_max_formatter" = "%1$@%% 费用";
+"transfer_method_not_supported_message" = "此转账方式不受支持。";
+"error" = "错误";
+"authentication_error_title" = "验证错误";
+"authentication_error_message" = "验证令牌检索尝试导致错误";
+
+    // Transfer methods
+"bank_account" = "银行账户";
+"bank_card" = "借记卡";
+"paper_check" = "纸面支票";
+"prepaid_card" = "预付卡";
+"wire_account" = "电汇账户";
+"paypal_account" = "PayPal 账户";
+"venmo_account" = "Venmo 账户";
+"cash_pickup_mg" = "MoneyGram";
+
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Manage Prepaid Card Message
+"manage_prepaid_card_message" = "使用网页浏览器登录，管理您的卡";
+    //Select Transfer Method View
+"select_a_country_message" = "选择国家/地区";
+
+    // Add Transfer Method
+"createTransferMethodButtonLabel" = "添加转账方式";
+"account_information" = "账户信息：%1$@(%2$@)";
+"account_holder" = "账户持有者信息";
+"address"="地址";
+"mobileFeesAndProcessingTime" = "费用和处理时间";
+"intermediary_account" = "中间银行账户";
+"contact_information" = "联系信息";
+"identification" = "身份验证";
+
+"date_format" = "年年年年-月月-日日";
+
+    // Processing View
+"processing_view_label" = "处理中";
+"complete_view_label" = "完成";
+
+    // Receipt
+"transactions" = "交易";
+"mobileNoTransactions" = "没有可显示的活动。";
+"mobilePrepaidCardNoTransactions" = "过去 365 天内无交易。";
+"add_transaction_title" = "添加交易";
+"account_closure_fee" = "账户关闭费";
+"account_closure" = "账户关闭";
+"account_unload" = "资金退回";
+"adjustment" = "余额调整";
+"annual_fee_refund" = "年费退款";
+"annual_fee" = "年费";
+"bank_account_transfer_fee" = "银行账户退回费";
+"bank_account_transfer_return_fee" = "银行账户退回费";
+"bank_account_transfer_return" = "银行账户退回";
+"card_activation_fee_waiver" = "免除卡激活费";
+"card_activation_fee" = "卡激活费";
+"card_fee" = "卡费";
+"customer_service_fee_refund" = "客户服务费退款";
+"customer_service_fee" = "客户服务费";
+"deposit" = "付款";
+"donation_fee" = "捐赠费";
+"donation_return" = "捐赠退回";
+"donation" = "捐赠";
+"dormant_user_fee_refund" = "不活跃用户账户费退款";
+"dormant_user_fee" = "不活跃用户账户费";
+"expedited_shipping_fee" = "加急运费";
+"foreign_exchange" = "外汇";
+"generic_fee_refund" = "一般费用退款";
+"manual_adjustment" = "调整";
+"manual_transfer_to_prepaid_card" = "转账至卡";
+"merchant_payment_fee" = "商家付款费用";
+"merchant_payment_refund" = "商家付款退款";
+"merchant_payment_return" = "商家付款退回";
+"merchant_payment" = "商家付款";
+"moneygram_transfer_return" = "MoneyGram 退回";
+"monthly_fee_refund" = "月费退款";
+"monthly_fee" = "月费";
+"paper_check_fee" = "纸面支票费";
+"paper_check_refund" = "纸面支票退款";
+"payment_cancellation" = "付款取消";
+"payment_expiration" = "付款已过期";
+"payment_expiry_fee" = "付款过期费";
+"payment_fee" = "付款费用";
+"payment_return" = "付款退回";
+"payment_reversal_fee" = "付款返还费";
+"payment_reversal" = "付款返还";
+"payment" = "付款";
+"prepaid_card_balance_inquiry_fee" = "余额查询费";
+"prepaid_card_cash_advance" = "现金预付";
+"prepaid_card_dispute_deposit" = "争议卡存款";
+"prepaid_card_disputed_charge_refund" = "争议收费退款";
+"prepaid_card_domestic_cash_withdrawal_fee" = "ATM 取款";
+"prepaid_card_exchange_rate_difference" = "汇率差异";
+"prepaid_card_manual_unload" = "从卡转账";
+"prepaid_card_overseas_cash_withdrawal_fee" = "ATM 取款";
+"prepaid_card_pin_change_fee" = "PIN 更改费";
+"prepaid_card_refund" = "退款";
+"prepaid_card_replacement_fee" = "换卡费";
+"prepaid_card_sale_reversal" = "反向交易";
+"prepaid_card_sale" = "交易";
+"prepaid_card_unload" = "从卡转账";
+"processing_fee" = "处理费";
+"standard_shipping_fee" = "标准运输费";
+"transfer_fee" = "转账费";
+"transfer_to_bank_account" = "银行账户";
+"transfer_to_debit_card" = "借记卡";
+"transfer_to_moneygram" = "MoneyGram";
+"transfer_to_paper_check" = "纸面支票";
+"transfer_to_paypal_account" = "PayPal";
+"transfer_to_prepaid_card" = "转账至卡";
+"transfer_to_program_account" = "转账至程序";
+"transfer_to_user" = "转账至用户";
+"transfer_to_western_union" = "西联汇款";
+"transfer_to_wire" = "电汇";
+"transfer_to_wubs_wire" = "电汇";
+"transfer_to_venmo_account" = "Venmo";
+"transfer_to_bank_card" = "银行卡";
+"virtual_incentive_cancellation" = "促销取消";
+"virtual_incentive_issuance" = "发布促销";
+"virtual_incentive_purchase" = "促销购买";
+"virtual_incentive_refund" = "促销退款";
+"western_union_transfer_return" = "西联汇款取款";
+"wire_transfer_fee" = "电汇费";
+"wire_transfer_return" = "电汇退回";
+"wubs_wire_transfer_return" = "电汇退回";
+"unknown_receipt_type" = "未知交易类型";
+"paypal_account_transfer_return" = "提现退回";
+"venmo_account_transfer_return" = "提现退回";
+"prepaid_card_account_deposit" = "账户存款";
+"prepaid_card_annual_fee_discount" = "年费打折";
+"prepaid_card_bill_reprint_fee" = "票据重印费";
+"prepaid_card_atm_or_cash_advance_fee" = "ATM/现金预付费";
+"prepaid_card_cash_advance_chargeback" = "现金预付退单";
+"prepaid_card_cash_advance_chargeback_reversal" = "现金预付退单返还";
+"prepaid_card_cash_advance_repress" = "现金预付抑制";
+"prepaid_card_cash_advance_repress_reversal" = "现金预付抑制返还";
+"prepaid_card_chargeback" = "退单";
+"prepaid_card_chargeback_refund" = "退单退款";
+"prepaid_card_chargeback_refund_reversal" = "退单退款返还";
+"prepaid_card_chargeback_reversal" = "退单返还";
+"prepaid_card_commission_or_fee" = "费用/佣金";
+"prepaid_card_debit_transfer" = "借记/转账";
+"prepaid_card_document_request_fee" = "文档申请费";
+"prepaid_card_emergency_cash" = "应急资金";
+"prepaid_card_emergency_card" = "应急卡";
+"prepaid_card_income" = "收入";
+"prepaid_card_load_fee" = "PAN 费用";
+"prepaid_card_overdue_payment_interest" = "逾期付款利息";
+"prepaid_card_payment" = "充值";
+"prepaid_card_pin_reprint_fee" = "PIN 重印";
+"prepaid_card_priority_pass_fee" = "优先通行费";
+"prepaid_card_priority_pass_renewal" = "优先通行证续期";
+"prepaid_card_recurring_interest" = "循环利息";
+"prepaid_card_refund_repress" = "退款抑制";
+"prepaid_card_refund_repress_reversal" = "退款抑制返还";
+"prepaid_card_sale_repress" = "销售抑制";
+"prepaid_card_statement_fee" = "UTSKGJ 声明费";
+"prepaid_card_telephone_support_fee" = "通过电话获知信息：余额、交易等。";
+"prepaid_card_transfer_fee" = "卡片充值费";
+"prepaid_card_transfer_return" = "预付卡充值退回";
+"prepaid_card_bank_withdrawal_reversal" = "反向银行取款";
+"prepaid_card_bank_withdrawal_chargeback" = "反向银行取款退单";
+"prepaid_card_refund_fee" = "退款手续费";
+"prepaid_card_monthly_maintenance_fee" = "每月维护费";
+"prepaid_card_transaction_fee" = "交易费";
+"prepaid_card_sms_fee" = "短信服务费";
+"prepaid_card_declined_authorization_fee" = "拒绝授权费";
+"fispc" = "购买";
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Receipt Detail
+"mobileTransactionDetailsHeader" = "交易详细信息";
+"mobileTransactionTypeLabel" = "交易";
+"mobileTransactionDetailsLabel" = "详细信息";
+"mobileFeeInfoLabel" = "费用信息";
+"mobileConfirmNotesLabel" = "注";
+"mobileCharityName" = "慈善机构名称";
+"mobileCheckNumber" = "支票数量";
+"mobileTransactionIdLabel" = "交易 ID";
+"mobilePromoWebsite" = "促销网站";
+"mobileTransactionDetailsTotal" = "交易总额";
+"amount" = "金额";
+"mobileFeeLabel" = "费用";
+"mobileJournalNumberLabel" = "收据 ID";
+"date" = "日期";
+
+    // Transfer Funds
+"mobileTransferFundsHeader" = "转账";
+"mobileConfirmationHeader" = "确认详细信息";
+"mobileTransferFromLabel" = "转出账户";
+"mobileTransferToLabel" = "转至";
+"mobileNoteLabel" = "注";
+"mobileConfirmDetailsAmount" = "金额";
+"mobileConfirmDetailsFee" = "费用";
+"mobileConfirmDetailsTotal" = "您将收到";
+"mobileTransferMax" = "最高转账限额";
+"mobileFXsell" = "从";
+"mobileFXbuy" = "至";
+"mobileFXRateLabel" = "汇率";
+"mobileAvailableBalance" = "可用金额 %1$@%2$@ %3$@";
+"continueButtonLabel" = "继续";
+"mobileAddTransferMethod" = "添加转账方式";
+"mobileTransferMethodsHeader" = "转账方式";
+"mobileTransferFromHeader" = "转出账户";
+"mobileAvailableFunds" = "可用资金";
+"mobileFXlabel" = "外汇";
+"mobileSummaryLabel" = "总结";
+"transfer" = "转账";
+"transferAmountInvalid" = "请输入有效转账金额";
+"noTransferMethodAdded" = "需要填写转账方式";
+"transfer_error_no_transfer_method_module_initialized" = "您无法添加转账方式。";
+"transfer_fx_rate_changed" = "由于汇率变化，您现在将收到：%1$@";
+"mobileTransferSuccessMsg" = "您的转账正在处理中";
+"mobileTransferSuccessDetails" = "正在向您的 %1$@ 转账。";
+"noTransferFromSourceAvailable" = "没有可用的从来源转出的转账";

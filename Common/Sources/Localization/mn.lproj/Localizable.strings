@@ -1,0 +1,266 @@
+//
+// Copyright 2018 - Present Hyperwallet
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+// and associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+// BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+"backBarButton" = "Буцах";
+"mobileTransferMethodsHeader" = "Шилжүүлгийн арга";
+"remove" = "Устгах";
+"cancelButtonLabel" = "Цуцлах";
+"doneButtonLabel" = "Дууссан";
+"try_again_button_label" = "Дахин оролдоно уу";
+"search_placeholder_label" = "Хайх";
+"unexpected_error_message" = "Алдаа гарлаа, дахин оролдоно уу";
+"network_connection_error_title" = "Холболтын асуудал";
+"unexpected_title" = "Гэнэтийн алдаа";
+"network_connection_error_message" = "Хүсэлтийг биелүүлэхэд бидэнд асуудал гарлаа. Холболтоо шалгана уу.";
+"endingIn" = "-аар төгссөн ";
+"to" = "уруу ";
+"no_country_available_error_message" = "Холбогдох улс байхгүй";
+"no_transfer_method_available_error_message" = "%1$@ болон %2$@-ын хувьд шилжүүлгийн арга байхгүй";
+"no_currency_available_error_message" = "%1$@ улсад холбогдох валют байхгүй байна";
+"emptyStateAddTransferMethod" = "Эхлэхийн тулд шилжүүлгийн аргыг нэмнэ үү.";
+"mobileAddTransferMethodHeader" = "Шилжүүлгийг аргыг нэмнэ үү";
+"mobileCountryCurrencyLabel" = "БАЙРШИЛ, ВАЛЮТ";
+"mobileTransferMethodLabel" = "ШИЛЖҮҮЛГИЙН АРГА";
+"mobileCountryRegion" = "Улс/Бүс";
+"mobileCurrencyLabel" = "Валют";
+"mobileAreYouSure" = "Та итгэлтэй байна уу?";
+"mobileRemoveEAconfirm" = "Шилжүүлгийн аргыг устгах";
+"fee_flat_formatter" = "%1$@%2$@ хураамж";
+"fee_percent_only_min_formatter" = "%1$@%% (Хамгийн бага:%2$@%3$@) хураамж";
+"fee_percent_only_max_formatter" = "%1$@%% (Хамгийн их:%2$@%3$@) хураамж";
+"fee_percent_formatter" = "%1$@%% (Хамгийн бага:%2$@%3$@, Хамгийн их:%2$@%4$@) хураамж";
+"fee_mix_no_min_and_max_formatter" = "%1$@%2$@ + %3$@%% хураамж";
+"fee_mix_only_min_formatter" = "%1$@%2$@ + %3$@%% (Хамгийн бага:%1$@%4$@) хураамж";
+"fee_mix_only_max_formatter" = "%1$@%2$@ + %3$@%% (Хамгийн их:%1$@%4$@) хураамж";
+"fee_mix_formatter" = "%1$@%2$@ + %3$@%% (Хамгийн бага:%1$@%4$@, Хамгийн их:%1$@%5$@) хураамж";
+"fee_percent_no_min_and_max_formatter" = "%1$@%% хураамж";
+"transfer_method_not_supported_message" = "Энэ шилжүүлгийн аргыг хэрэглэх боломжгүй.";
+"error" = "Алдаа";
+"authentication_error_title" = "Баталгаажуулалтын алдаа";
+"authentication_error_message" = "Баталгаажуулах код авах оролдлого алдаа гаргахад хүргэв";
+
+    // Transfer methods
+"bank_account" = "Банкны данс";
+"bank_card" = "Дебит карт";
+"paper_check" = "Цаасан чек";
+"prepaid_card" = "Урьдчилсан төлбөрт карт";
+"wire_account" = "Банкны шилжүүлгийн данс";
+"paypal_account" = "Paypal данс";
+"venmo_account" = "Venmo данс";
+"cash_pickup_mg" = "MoneyGram";
+
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Manage Prepaid Card Message
+"manage_prepaid_card_message" = "Картаа удирдахын тулд вэб хөтөч ашиглан нэвтэрнэ үү";
+    //Select Transfer Method View
+"select_a_country_message" = "Улс сонгох";
+
+    // Add Transfer Method
+"createTransferMethodButtonLabel" = "Шилжүүлгийн арга нэмэх";
+"account_information" = "ДАНСНЫ МЭДЭЭЛЭЛ: %1$@(%2$@)";
+"account_holder" = "ДАНС ЭЗЭМШИГЧИЙН МЭДЭЭЛЭЛ";
+"address"="ХАЯГ";
+"mobileFeesAndProcessingTime" = "ХУРААМЖ, ГҮЙЦЭТГЭХ ХУГАЦАА";
+"intermediary_account" = "ЗУУЧЛАГЧИЙН ДАНС";
+"contact_information" = "ХОЛБОО БАРИХ МЭДЭЭЛЭЛ";
+"identification" = "ТАНИХ ҮЙЛ АЖИЛЛАГАА";
+
+"date_format" = "ОООО-СС-ӨӨ";
+
+    // Processing View
+"processing_view_label" = "Гүйцэтгэж байна";
+"complete_view_label" = "Бүрэн дууссан";
+
+    // Receipt
+"transactions" = "Гүйлгээ";
+"mobileNoTransactions" = "Харуулах үйл ажиллагаа байхгүй.";
+"mobilePrepaidCardNoTransactions" = "Сүүлийн 365 хоногт гүйлгээ хийгээгүй.";
+"add_transaction_title" = "Гүйлгээ нэмэх";
+"account_closure_fee" = "Данс хаах хураамж";
+"account_closure" = "Данс хаах";
+"account_unload" = "Мөнгө буцаах";
+"adjustment" = "Үлдэгдлийн тохируулга";
+"annual_fee_refund" = "Жилийн хураамжийн буцаан олголт";
+"annual_fee" = "Жилийн хураамж";
+"bank_account_transfer_fee" = "Банкны дансны буцаах хураамж";
+"bank_account_transfer_return_fee" = "Банкны дансны буцаах хураамж";
+"bank_account_transfer_return" = "Банкны дансны буцаалт";
+"card_activation_fee_waiver" = "Карт идэвхжүүлэх хураамжаас чөлөөлөх";
+"card_activation_fee" = "Карт идэвхжүүлэх хураамж";
+"card_fee" = "Картын хураамж";
+"customer_service_fee_refund" = "Хэрэглэгчийн үйлчилгээний хураамжийг буцаан олгох";
+"customer_service_fee" = "Хэрэглэгчийн үйлчилгээний хураамж";
+"deposit" = "Төлбөр";
+"donation_fee" = "Хандивын хураамж";
+"donation_return" = "Хандив буцаах";
+"donation" = "Хандив";
+"dormant_user_fee_refund" = "Идэвхгүй хэрэглэгчийн дансны хураамжийн буцаан олголт";
+"dormant_user_fee" = "Идэвхгүй хэрэглэгчийн дансны хураамж";
+"expedited_shipping_fee" = "Түргэвчилсэн хүргэлтийн хураамж";
+"foreign_exchange" = "Гадаад валют";
+"generic_fee_refund" = "Ерөнхий хураамжийн буцаан олголт";
+"manual_adjustment" = "Тохируулга";
+"manual_transfer_to_prepaid_card" = "Карт уруу шилжүүлэх";
+"merchant_payment_fee" = "Картаар үйлчлэгч байгууллагын төлбөрийн хураамж";
+"merchant_payment_refund" = "Картаар үйлчлэгч байгууллагын төлбөрийн буцаан олголт";
+"merchant_payment_return" = "Картаар үйлчлэгч байгууллагын төлбөрийн буцаалт";
+"merchant_payment" = "Картаар үйлчлэгч байгууллагын төлбөр";
+"moneygram_transfer_return" = "MoneyGram буцаалт";
+"monthly_fee_refund" = "Сарын хураамжийн буцаан олголт";
+"monthly_fee" = "Сарын хураамж";
+"paper_check_fee" = "Цаасан чекийн хураамж";
+"paper_check_refund" = "Цаасан чекийн буцаан олголт";
+"payment_cancellation" = "Төлбөр цуцлах";
+"payment_expiration" = "Төлбөрийн хугацаа дууссан";
+"payment_expiry_fee" = "Төлбөрийн хугацаа дуусахад авах хураамж";
+"payment_fee" = "Төлбөрийн хураамж";
+"payment_return" = "Төлбөрийн буцаалт";
+"payment_reversal_fee" = "Төлбөрийг буцаах хураамж";
+"payment_reversal" = "Төлбөрийн буцаалт";
+"payment" = "Төлбөр";
+"prepaid_card_balance_inquiry_fee" = "Үлдэгдэл лавлах хураамж";
+"prepaid_card_cash_advance" = "Бэлэн мөнгө урьдчилан авах";
+"prepaid_card_dispute_deposit" = "Маргаантай картын мөнгө";
+"prepaid_card_disputed_charge_refund" = "Маргаантай төлбөрийн буцаан олголт";
+"prepaid_card_domestic_cash_withdrawal_fee" = "АТМ-с мөнгө авах";
+"prepaid_card_exchange_rate_difference" = "Валютын ханшийн зөрүү";
+"prepaid_card_manual_unload" = "Картаас шилжүүлэх";
+"prepaid_card_overseas_cash_withdrawal_fee" = "АТМ-с мөнгө авах";
+"prepaid_card_pin_change_fee" = "ПИН өөрчлөх хураамж";
+"prepaid_card_refund" = "Буцаан олголт";
+"prepaid_card_replacement_fee" = "Карт солих хураамж";
+"prepaid_card_sale_reversal" = "Буцаасан гүйлгээ";
+"prepaid_card_sale" = "Гүйлгээ";
+"prepaid_card_unload" = "Картаас шилжүүлэх";
+"processing_fee" = "Гүйцэтгэх хураамж";
+"standard_shipping_fee" = "Стандарт хүргэлтийн хураамж";
+"transfer_fee" = "Шилжүүлгийн хураамж";
+"transfer_to_bank_account" = "Банкны данс";
+"transfer_to_debit_card" = "Дебит карт";
+"transfer_to_moneygram" = "MoneyGram";
+"transfer_to_paper_check" = "Цаасан чек";
+"transfer_to_paypal_account" = "PayPal";
+"transfer_to_prepaid_card" = "Карт уруу шилжүүлэх";
+"transfer_to_program_account" = "Хөтөлбөрт шилжүүлэх";
+"transfer_to_user" = "Хэрэглэгчид шилжүүлэх";
+"transfer_to_western_union" = "Western Union";
+"transfer_to_wire" = "Банкны шилжүүлэг";
+"transfer_to_wubs_wire" = "Банкны шилжүүлэг";
+"transfer_to_venmo_account" = "Venmo";
+"transfer_to_bank_card" = "Банкны карт";
+"virtual_incentive_cancellation" = "Урамшуулал цуцлах";
+"virtual_incentive_issuance" = "Гаргасан урамшуулал";
+"virtual_incentive_purchase" = "Урамшууллаар худалдан авах";
+"virtual_incentive_refund" = "Урамшууллын буцаан олголт";
+"western_union_transfer_return" = "Western Union-ээс мөнгө авах";
+"wire_transfer_fee" = "Банкны шилжүүлгийн хураамж";
+"wire_transfer_return" = "Банкны шилжүүлгийг буцаах";
+"wubs_wire_transfer_return" = "Банкны шилжүүлгийг буцаах";
+"unknown_receipt_type" = "Үл мэдэгдэх гүйлгээний төрөл";
+"paypal_account_transfer_return" = "Бэлэн мөнгө гаргалтын буцаалт";
+"venmo_account_transfer_return" = "Бэлэн мөнгө гаргалтын буцаалт";
+"prepaid_card_account_deposit" = "Дансанд мөнгө байршуулах";
+"prepaid_card_annual_fee_discount" = "Жилийн хураамжийн хөнгөлөлт";
+"prepaid_card_bill_reprint_fee" = "Баримт дахин хэвлэх хураамж";
+"prepaid_card_atm_or_cash_advance_fee" = "АТМ/Бэлэн мөнгө урьдчилан авах хураамж";
+"prepaid_card_cash_advance_chargeback" = "Урьдчилж авсан бэлэн мөнгийг буцаах";
+"prepaid_card_cash_advance_chargeback_reversal" = "Урьдчилж авсан бэлэн мөнгөний буцаалтыг цуцлах";
+"prepaid_card_cash_advance_repress" = "Урьдчилж бэлэн мөнгө авахыг зогсоох";
+"prepaid_card_cash_advance_repress_reversal" = "Урьдчилж бэлэн мөнгө авахыг зогсоохыг цуцлах";
+"prepaid_card_chargeback" = "Буцаах";
+"prepaid_card_chargeback_refund" = "Буцаалтыг зогсоох";
+"prepaid_card_chargeback_refund_reversal" = "Буцаалт зогсоохыг цуцлах";
+"prepaid_card_chargeback_reversal" = "Буцаалтыг зогсоох";
+"prepaid_card_commission_or_fee" = "Хураамж/Шимтгэл";
+"prepaid_card_debit_transfer" = "Дебет/Шилжүүлэг";
+"prepaid_card_document_request_fee" = "Баримт бичгийн хүсэлтийн хураамж";
+"prepaid_card_emergency_cash" = "Яаралтай тусламжийн мөнгө";
+"prepaid_card_emergency_card" = "Яаралтай тусламжийн карт";
+"prepaid_card_income" = "Орлого";
+"prepaid_card_load_fee" = "PAN хураамж";
+"prepaid_card_overdue_payment_interest" = "Хугацаа хэтэрсэн төлбөрийн хүү";
+"prepaid_card_payment" = "Цэнэглэх";
+"prepaid_card_pin_reprint_fee" = "ПИН дахин хэвлэх";
+"prepaid_card_priority_pass_fee" = "Давуу эрхтэй үнэмлэхийн хураамж";
+"prepaid_card_priority_pass_renewal" = "Давуу эрхтэй үнэмлэх сунгах";
+"prepaid_card_recurring_interest" = "Эргэлтийн хүү";
+"prepaid_card_refund_repress" = "Буцаан олгохыг зогсоох";
+"prepaid_card_refund_repress_reversal" = "Буцаан олголтыг зогсоохыг цуцлах";
+"prepaid_card_sale_repress" = "Худалдан авалтыг буцаах";
+"prepaid_card_statement_fee" = "UTSKGJ хуулгын хураамж";
+"prepaid_card_telephone_support_fee" = "Утсаар өгөх мэдээлэл: үлдэгдэл, шилжүүлэг гэх мэт.";
+"prepaid_card_transfer_fee" = "Карт цэнэглэх хураамж";
+"prepaid_card_transfer_return" = "Урьдчилсан төлбөрт карт цэнэглэлтийн буцаалт";
+"prepaid_card_bank_withdrawal_reversal" = "Банкнаас авсан мөнгийг буцаах";
+"prepaid_card_bank_withdrawal_chargeback" = "Банкнаас авсан мөнгийг буцаан олгохыг зогсоох";
+"prepaid_card_refund_fee" = "Буцаан олголтын хураамж";
+"prepaid_card_monthly_maintenance_fee" = "Сарын үйлчилгээний хураамж";
+"prepaid_card_transaction_fee" = "Гүйлгээний хураамж";
+"prepaid_card_sms_fee" = "SMS хураамж";
+"prepaid_card_declined_authorization_fee" = "Татгалзсан зөвшөөрлийн хураамж";
+"fispc" = "Худалдан авах";
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Receipt Detail
+"mobileTransactionDetailsHeader" = "Гүйлгээний мэдээлэл";
+"mobileTransactionTypeLabel" = "ГҮЙЛГЭЭ";
+"mobileTransactionDetailsLabel" = "ДЭЛГЭРЭНГҮЙ МЭДЭЭЛЭЛ";
+"mobileFeeInfoLabel" = "ХУРААМЖИЙН МЭДЭЭЛЭЛ";
+"mobileConfirmNotesLabel" = "АНХААР";
+"mobileCharityName" = "Буяны байгууллагын нэр";
+"mobileCheckNumber" = "Чекийн дугаар";
+"mobileTransactionIdLabel" = "Гүйлгээний ID";
+"mobilePromoWebsite" = "Сурталчилгааны вэбсайт";
+"mobileTransactionDetailsTotal" = "Гүйлгээний нийт дүн";
+"amount" = "Дүн";
+"mobileFeeLabel" = "Хураамж";
+"mobileJournalNumberLabel" = "Баримтын ID";
+"date" = "Огноо";
+
+    // Transfer Funds
+"mobileTransferFundsHeader" = "Шилжүүлэг";
+"mobileConfirmationHeader" = "Мэдээллийг баталгаажуулах";
+"mobileTransferFromLabel" = "ХЭНЭЭС ШИЛЖҮҮЛЭХ";
+"mobileTransferToLabel" = "ХЭНД ШИЛЖҮҮЛЭХ";
+"mobileNoteLabel" = "Анхаар";
+"mobileConfirmDetailsAmount" = "Дүн";
+"mobileConfirmDetailsFee" = "Хураамж";
+"mobileConfirmDetailsTotal" = "Та хүлээн авна";
+"mobileTransferMax" = "Шилжүүлгийн хамгийн их дүн";
+"mobileFXsell" = "Хэнээс";
+"mobileFXbuy" = "Хэнд";
+"mobileFXRateLabel" = "Ханш";
+"mobileAvailableBalance" = "Боломжтой дүн %1$@%2$@ %3$@";
+"continueButtonLabel" = "Үргэлжлүүлэх";
+"mobileAddTransferMethod" = "Шилжүүлгийн арга нэмэх";
+"mobileTransferMethodsHeader" = "Шилжүүлгийн арга";
+"mobileTransferFromHeader" = "Хэнээс шилжүүлэх";
+"mobileAvailableFunds" = "Бэлэн байгаа мөнгө";
+"mobileFXlabel" = "ГАДААД ВАЛЮТ";
+"mobileSummaryLabel" = "ХУРААНГУЙ";
+"transfer" = "Шилжүүлэг";
+"transferAmountInvalid" = "Зөв шилжүүлэх дүнг оруулна уу";
+"noTransferMethodAdded" = "Шилжүүлгийн аргыг зааж өгөх ёстой";
+"transfer_error_no_transfer_method_module_initialized" = "Та шилжүүлгийн аргыг нэмэх боломжгүй.";
+"transfer_fx_rate_changed" = "Валютын ханшийн өөрчлөлтийн улмаас та одоо дараахыг авна: %1$@";
+"mobileTransferSuccessMsg" = "Таны шилжүүлгийг гүйцэтгэж байна";
+"mobileTransferSuccessDetails" = "Мөнгө таны %1$@-д очиж явна.";
+"noTransferFromSourceAvailable" = "Эх үүсвэрээс ирэх шилжүүлэг байхгүй";

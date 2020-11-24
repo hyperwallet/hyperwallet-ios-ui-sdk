@@ -1,0 +1,266 @@
+//
+// Copyright 2018 - Present Hyperwallet
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+// and associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+// BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+"backBarButton" = "Zpět";
+"mobileTransferMethodsHeader" = "Způsoby převodu";
+"remove" = "Odebrat";
+"cancelButtonLabel" = "Zrušit";
+"doneButtonLabel" = "Hotovo";
+"try_again_button_label" = "Zkusit znovu";
+"search_placeholder_label" = "Vyhledat";
+"unexpected_error_message" = "Něco se pokazilo, zkuste to prosím znovu";
+"network_connection_error_title" = "Problém s připojením";
+"unexpected_title" = "Neočkávaná chyba";
+"network_connection_error_message" = "Máme problém se zpracováním požadavku. Zkontrolujte prosím své připojení.";
+"endingIn" = "končí v ";
+"to" = "pro ";
+"no_country_available_error_message" = "Není k dispozici žádá země";
+"no_transfer_method_available_error_message" = "Pro %1$@ a %2$@ není k dispozici žádný způsob převodu";
+"no_currency_available_error_message" = "Pro zemi %1$@ není k dispozici žádná měna";
+"emptyStateAddTransferMethod" = "Chcete-li začít, přidejte způsob převodu.";
+"mobileAddTransferMethodHeader" = "Přidejte způsob převodu";
+"mobileCountryCurrencyLabel" = "MÍSTO A MĚNA";
+"mobileTransferMethodLabel" = "ZPŮSOB PŘEVODU";
+"mobileCountryRegion" = "Země / oblast";
+"mobileCurrencyLabel" = "Měna";
+"mobileAreYouSure" = "Jste si jistí?";
+"mobileRemoveEAconfirm" = "Odeberte způsob převodu";
+"fee_flat_formatter" = "Poplatek %1$@%2$@ ";
+"fee_percent_only_min_formatter" = "Poplatek %1$@%% (min.:%2$@%3$@)";
+"fee_percent_only_max_formatter" = "Poplatek %1$@%% (max.:%2$@%3$@)";
+"fee_percent_formatter" = "Poplatek %1$@%% (min.:%2$@%3$@, max.:%2$@%4$@)";
+"fee_mix_no_min_and_max_formatter" = "Poplatek %1$@%2$@ + %3$@%%";
+"fee_mix_only_min_formatter" = "Poplatek %1$@%2$@ + %3$@%% (min.:%1$@%4$@)";
+"fee_mix_only_max_formatter" = "Poplatek %1$@%2$@ + %3$@%% (max.:%1$@%4$@)";
+"fee_mix_formatter" = "Poplatek %1$@%2$@ + %3$@%% (min.:%1$@%4$@, max.:%1$@%5$@)";
+"fee_percent_no_min_and_max_formatter" = "Poplatek %1$@%%";
+"transfer_method_not_supported_message" = "Tento způsob převodu není podporován.";
+"error" = "Chyba";
+"authentication_error_title" = "Chyba ověření";
+"authentication_error_message" = "Pokus o načtení ověřovacího tokenu způsobil chybu";
+
+    // Transfer methods
+"bank_account" = "Bankovní účet";
+"bank_card" = "Debetní Karta";
+"paper_check" = "Papírový šek";
+"prepaid_card" = "Předplacená karta";
+"wire_account" = "Účet pro bezhotovostní převody";
+"paypal_account" = "Účty PayPal";
+"venmo_account" = "Účet Venmo";
+"cash_pickup_mg" = "MoneyGram";
+
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Manage Prepaid Card Message
+"manage_prepaid_card_message" = "Chcete-li spravovat svou kartu, přihlaste se pomocí webového prohlížeče";
+    //Select Transfer Method View
+"select_a_country_message" = "Vyberte zemi";
+
+    // Add Transfer Method
+"createTransferMethodButtonLabel" = "Přidejte Způsob Převodu";
+"account_information" = "INFORMACE O ÚČTU: %1$@(%2$@)";
+"account_holder" = "INFORMACE O DRŽITELI ÚČTU";
+"address"="ADRESA";
+"mobileFeesAndProcessingTime" = "POPLATKY A DOBA ZPRACOVÁNÍ";
+"intermediary_account" = "ÚČET ZPROSTŘEDKOVATELE";
+"contact_information" = "KONTAKTNÍ ÚDAJE";
+"identification" = "IDENTIFIKACE";
+
+"date_format" = "RRRR-MM-DD";
+
+    // Processing View
+"processing_view_label" = "Zpracovává se";
+"complete_view_label" = "Dokončit";
+
+    // Receipt
+"transactions" = "Transakce";
+"mobileNoTransactions" = "Žádná aktivita k zobrazení.";
+"mobilePrepaidCardNoTransactions" = "Žádné transakce za posledních 365 dnů.";
+"add_transaction_title" = "Přidat transakci";
+"account_closure_fee" = "Poplatek za zrušení účtu";
+"account_closure" = "Zrušení účtu";
+"account_unload" = "Vrácení prostředků";
+"adjustment" = "Úprava zůstatku";
+"annual_fee_refund" = "Vrácení ročního poplatku";
+"annual_fee" = "Roční poplatek";
+"bank_account_transfer_fee" = "Poplatek za vrácení na bankovní účet";
+"bank_account_transfer_return_fee" = "Poplatek za vrácení na bankovní účet";
+"bank_account_transfer_return" = "Vrácení na bankovní účet";
+"card_activation_fee_waiver" = "Zřeknutí se poplatku za aktivaci karty";
+"card_activation_fee" = "Poplatek za aktivaci karty";
+"card_fee" = "Poplatek za kartu";
+"customer_service_fee_refund" = "Vrácení poplatku za služby zákazníkům";
+"customer_service_fee" = "Poplatek za služby zákazníkům";
+"deposit" = "Platba";
+"donation_fee" = "Poplatek za dar";
+"donation_return" = "Vrácení daru";
+"donation" = "Dar";
+"dormant_user_fee_refund" = "Vrácení poplatku za účet neaktivního uživatele";
+"dormant_user_fee" = "Poplatek za účet neaktivního uživatele";
+"expedited_shipping_fee" = "Poplatek za urychlenou přepravu";
+"foreign_exchange" = "Cizí měna";
+"generic_fee_refund" = "Obecné vrácení poplatku";
+"manual_adjustment" = "Úprava";
+"manual_transfer_to_prepaid_card" = "Převod na kartu";
+"merchant_payment_fee" = "Poplatek za platbu pro obchodníka";
+"merchant_payment_refund" = "Refundace platby pro obchodníka";
+"merchant_payment_return" = "Vrácení platby pro obchodníka";
+"merchant_payment" = "Platba pro obchodníka";
+"moneygram_transfer_return" = "Vrácení platby přes MoneyGram";
+"monthly_fee_refund" = "Refundace měsíčního poplatku";
+"monthly_fee" = "Měsíční poplatek";
+"paper_check_fee" = "Poplatek za papírový šek";
+"paper_check_refund" = "Refundace papírového šeku";
+"payment_cancellation" = "Storno platby";
+"payment_expiration" = "Platnost platby vypršela";
+"payment_expiry_fee" = "Poplatek za vypršení platnosti platby";
+"payment_fee" = "Poplatek za platbu";
+"payment_return" = "Vrácení platby";
+"payment_reversal_fee" = "Poplatek za zrušení platby";
+"payment_reversal" = "Zrušení platby";
+"payment" = "Platba";
+"prepaid_card_balance_inquiry_fee" = "Poplatek za dotaz na zůstatek";
+"prepaid_card_cash_advance" = "Záloha v hotovosti";
+"prepaid_card_dispute_deposit" = "Sporný vklad na kartu";
+"prepaid_card_disputed_charge_refund" = "Refundace sportného poplatku";
+"prepaid_card_domestic_cash_withdrawal_fee" = "Výběr z bankomatu";
+"prepaid_card_exchange_rate_difference" = "Rozdíl směnného kurzu";
+"prepaid_card_manual_unload" = "Převod z karty";
+"prepaid_card_overseas_cash_withdrawal_fee" = "Výběr z bankomatu";
+"prepaid_card_pin_change_fee" = "Poplatek za změnu PINu";
+"prepaid_card_refund" = "Refundace";
+"prepaid_card_replacement_fee" = "Poplatek za výměnu karty";
+"prepaid_card_sale_reversal" = "Zpětná transakce";
+"prepaid_card_sale" = "Transakce";
+"prepaid_card_unload" = "Převod z karty";
+"processing_fee" = "Poplatek za zpracování";
+"standard_shipping_fee" = "Poplatek za standardní přepravu";
+"transfer_fee" = "Poplatek za převod";
+"transfer_to_bank_account" = "Bankovní účet";
+"transfer_to_debit_card" = "Debetní Karta";
+"transfer_to_moneygram" = "MoneyGram";
+"transfer_to_paper_check" = "Papírový šek";
+"transfer_to_paypal_account" = "PayPal";
+"transfer_to_prepaid_card" = "Převod na kartu";
+"transfer_to_program_account" = "Převod do programu";
+"transfer_to_user" = "Převod uživateli";
+"transfer_to_western_union" = "Western Union";
+"transfer_to_wire" = "Bezhotovostní převod";
+"transfer_to_wubs_wire" = "Bezhotovostní převod";
+"transfer_to_venmo_account" = "Venmo";
+"transfer_to_bank_card" = "Bankovní karta";
+"virtual_incentive_cancellation" = "Zrušení akce";
+"virtual_incentive_issuance" = "Vystavená akce";
+"virtual_incentive_purchase" = "Nákup v rámci akce";
+"virtual_incentive_refund" = "Refundace v rámci akce";
+"western_union_transfer_return" = "Výběr u Western Union";
+"wire_transfer_fee" = "Poplatek za bezhotovostní převod";
+"wire_transfer_return" = "Vrácení bezhotovostního převodu";
+"wubs_wire_transfer_return" = "Vrácení bezhotovostního převodu";
+"unknown_receipt_type" = "Neznámý typ transakce";
+"paypal_account_transfer_return" = "Vrátit vyplacení hned";
+"venmo_account_transfer_return" = "Vrátit vyplacení hned";
+"prepaid_card_account_deposit" = "Vklad na účet";
+"prepaid_card_annual_fee_discount" = "Sleva z ročního poplatku";
+"prepaid_card_bill_reprint_fee" = "Poplatek za kopii faktury";
+"prepaid_card_atm_or_cash_advance_fee" = "Poplatek za výběr z bankomatu/hotovostní zálohu";
+"prepaid_card_cash_advance_chargeback" = "Zpětné zúčtování zálohy v hotovosti";
+"prepaid_card_cash_advance_chargeback_reversal" = "Zrušení zpětného zúčtování zálohy v hotovosti";
+"prepaid_card_cash_advance_repress" = "Odmítnutí zálohy v hotovosti";
+"prepaid_card_cash_advance_repress_reversal" = "Zrušení odmítnutí zálohy";
+"prepaid_card_chargeback" = "Zpětné zúčování";
+"prepaid_card_chargeback_refund" = "Refundace zpětného zúčtování";
+"prepaid_card_chargeback_refund_reversal" = "Zrušení refundace zpětného zúčtování";
+"prepaid_card_chargeback_reversal" = "Zrušení zpětného zúčtování";
+"prepaid_card_commission_or_fee" = "Poplatek/provize";
+"prepaid_card_debit_transfer" = "Debet/Převody";
+"prepaid_card_document_request_fee" = "Poplatek za vyžádání dokumentu";
+"prepaid_card_emergency_cash" = "Peníze pro případ nutnosti";
+"prepaid_card_emergency_card" = "Karta pro případ nutnosti";
+"prepaid_card_income" = "Příjem";
+"prepaid_card_load_fee" = "Poplatek za primární číslo účtu";
+"prepaid_card_overdue_payment_interest" = "Úrok za platbu v prodlení";
+"prepaid_card_payment" = "Nabít";
+"prepaid_card_pin_reprint_fee" = "Kopie PIN";
+"prepaid_card_priority_pass_fee" = "Poplatek za přednostní průkaz";
+"prepaid_card_priority_pass_renewal" = "Obnovení přednostního průkazu";
+"prepaid_card_recurring_interest" = "Revolvingový úrok";
+"prepaid_card_refund_repress" = "Odmítnutí refundace";
+"prepaid_card_refund_repress_reversal" = "Zrušení odmítnutí refundace";
+"prepaid_card_sale_repress" = "Odmítnutí prodeje";
+"prepaid_card_statement_fee" = "Poplatek za prohlášení UTSKGJ";
+"prepaid_card_telephone_support_fee" = "Telefonické informace: zůstatek, trans. atd.";
+"prepaid_card_transfer_fee" = "Poplatek za nabití karty";
+"prepaid_card_transfer_return" = "Vrácení částky nabité na předplacené kartě";
+"prepaid_card_bank_withdrawal_reversal" = "Stornovaný výběr u banky";
+"prepaid_card_bank_withdrawal_chargeback" = "Poplatek za stornovaný výběr u banky";
+"prepaid_card_refund_fee" = "Poplatek za refundaci";
+"prepaid_card_monthly_maintenance_fee" = "Měsíční poplatek za údržbu";
+"prepaid_card_transaction_fee" = "Poplatek za transakci";
+"prepaid_card_sms_fee" = "Poplatek za SMS";
+"prepaid_card_declined_authorization_fee" = "Poplatek za zamítnutí ověření";
+"fispc" = "Nákup";
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Receipt Detail
+"mobileTransactionDetailsHeader" = "Detaily transakce";
+"mobileTransactionTypeLabel" = "TRANSAKCE";
+"mobileTransactionDetailsLabel" = "DETAILY";
+"mobileFeeInfoLabel" = "INFORMACE O POPLATKU";
+"mobileConfirmNotesLabel" = "POZNÁMKA";
+"mobileCharityName" = "Název charitativní organizace";
+"mobileCheckNumber" = "Číslo šeku";
+"mobileTransactionIdLabel" = "ID transakce";
+"mobilePromoWebsite" = "Webové stránky akce";
+"mobileTransactionDetailsTotal" = "Transakce celkem";
+"amount" = "Částka";
+"mobileFeeLabel" = "Poplatek";
+"mobileJournalNumberLabel" = "ID příjmu";
+"date" = "Datum";
+
+    // Transfer Funds
+"mobileTransferFundsHeader" = "Převod";
+"mobileConfirmationHeader" = "Potvrďte podrobné údaje";
+"mobileTransferFromLabel" = "PŘEVOD OD";
+"mobileTransferToLabel" = "PŘEVOD PRO";
+"mobileNoteLabel" = "Poznámka";
+"mobileConfirmDetailsAmount" = "Částka";
+"mobileConfirmDetailsFee" = "Poplatek";
+"mobileConfirmDetailsTotal" = "Obdržíte";
+"mobileTransferMax" = "Maximální převáděná částka";
+"mobileFXsell" = "Od";
+"mobileFXbuy" = "Komu";
+"mobileFXRateLabel" = "Směnný kurz";
+"mobileAvailableBalance" = "Dostupná částka %1$@%2$@ %3$@";
+"continueButtonLabel" = "Pokračovat";
+"mobileAddTransferMethod" = "Přidat způsob převodu";
+"mobileTransferMethodsHeader" = "Způsoby převodu";
+"mobileTransferFromHeader" = "Převod od";
+"mobileAvailableFunds" = "Dostupné prostředky";
+"mobileFXlabel" = "CIZÍ MĚNA";
+"mobileSummaryLabel" = "SHRNUTÍ";
+"transfer" = "Převod";
+"transferAmountInvalid" = "Zadejte platnou částku pro převod";
+"noTransferMethodAdded" = "Způsob převodu je povinné pole";
+"transfer_error_no_transfer_method_module_initialized" = "Nemůžete přidat způsob převodu.";
+"transfer_fx_rate_changed" = "Vzhledem ke změnám směnného kurzu nyní obdržíte: %1$@";
+"mobileTransferSuccessMsg" = "Váš převod se zpracovává";
+"mobileTransferSuccessDetails" = "Peníze jsou na cestě na váš %1$@.";
+"noTransferFromSourceAvailable" = "Od zdroje není k dispozici žádný převod";

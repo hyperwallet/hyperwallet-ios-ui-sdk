@@ -1,0 +1,266 @@
+//
+// Copyright 2018 - Present Hyperwallet
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+// and associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+// BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+"backBarButton" = "Til baka";
+"mobileTransferMethodsHeader" = "Millifærsluaðferðir";
+"remove" = "Fjarlægja";
+"cancelButtonLabel" = "Hætta við";
+"doneButtonLabel" = "Búið";
+"try_again_button_label" = "Reyndu aftur";
+"search_placeholder_label" = "Leita";
+"unexpected_error_message" = "Eitthvað fór úrskeiðis, vinsamlegast reyndu aftur";
+"network_connection_error_title" = "Tengingarvandamál";
+"unexpected_title" = "Óvænt villa";
+"network_connection_error_message" = "Vandamál kom upp við afgreiðslu beiðninnar. Vinsamlegast athugaðu tenginguna þína.";
+"endingIn" = "lýkur eftir ";
+"to" = "til ";
+"no_country_available_error_message" = "Ekkert land er í boði";
+"no_transfer_method_available_error_message" = "Engin millifærsluaðferð er í boði fyrir %1$@ og %2$@";
+"no_currency_available_error_message" = "Enginn gjaldmiðill er í boði fyrir land %1$@";
+"emptyStateAddTransferMethod" = "Bæta við millifærsluaðferð til að byrja.";
+"mobileAddTransferMethodHeader" = "Bæta við millifærsluaðferð";
+"mobileCountryCurrencyLabel" = "STAÐSETNING OG GJALDMIÐILL";
+"mobileTransferMethodLabel" = "MILLIFÆRSLUAÐFERÐ";
+"mobileCountryRegion" = "Land/svæði";
+"mobileCurrencyLabel" = "Gjaldmiðill";
+"mobileAreYouSure" = "Ertu viss?";
+"mobileRemoveEAconfirm" = "Fjarlægja millifærsluaðferð";
+"fee_flat_formatter" = "%1$@%2$@ gjald";
+"fee_percent_only_min_formatter" = "%1$@%% (Lágmark:%2$@%3$@) gjald";
+"fee_percent_only_max_formatter" = "%1$@%% (Hámark:%2$@%3$@) gjald";
+"fee_percent_formatter" = "%1$@%% (Lágmark:%2$@%3$@, Hámark:%2$@%4$@) gjald";
+"fee_mix_no_min_and_max_formatter" = "%1$@%2$@ + %3$@%% gjald";
+"fee_mix_only_min_formatter" = "%1$@%2$@ + %3$@%% (Lágmark:%1$@%4$@) gjald";
+"fee_mix_only_max_formatter" = "%1$@%2$@ + %3$@%% (Hámark:%1$@%4$@) gjald";
+"fee_mix_formatter" = "%1$@%2$@ + %3$@%% (Lágmark:%1$@%4$@, Hámark:%1$@%5$@) gjald";
+"fee_percent_no_min_and_max_formatter" = "%1$@%% gjald";
+"transfer_method_not_supported_message" = "Þessi millifærsluaðferð er ekki studd.";
+"error" = "Villa";
+"authentication_error_title" = "Sannvottunarvilla";
+"authentication_error_message" = "Tilraun til að sækja sannvottunartóka leiddi til villu";
+
+    // Transfer methods
+"bank_account" = "Bankareikningur";
+"bank_card" = "Debetkort";
+"paper_check" = "Pappírsávísun";
+"prepaid_card" = "Fyrirframgreitt kort";
+"wire_account" = "Reikningur fyrir millifærslu með símgreiðslu";
+"paypal_account" = "PayPal reikningur";
+"venmo_account" = "Venmo reikningur";
+"cash_pickup_mg" = "MoneyGram";
+
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Manage Prepaid Card Message
+"manage_prepaid_card_message" = "Skráðu þig inn með netvafra til að stilla kortið þitt";
+    //Select Transfer Method View
+"select_a_country_message" = "Veldu land";
+
+    // Add Transfer Method
+"createTransferMethodButtonLabel" = "Bæta við millifærsluaðferð";
+"account_information" = "REIKNINGSUPPLÝSINGAR: %1$@(%2$@)";
+"account_holder" = "UPPLÝSINGAR UM REIKNINGSEIGANDA";
+"address"="HEIMILISFANG";
+"mobileFeesAndProcessingTime" = "GJÖLD OG AFGREIÐSLUTÍMI";
+"intermediary_account" = "MILLILIÐAREIKNINGUR";
+"contact_information" = "TENGILIÐAUPPLÝSINGAR";
+"identification" = "AUÐKENNING";
+
+"date_format" = "ÁÁÁÁ-MM-DD";
+
+    // Processing View
+"processing_view_label" = "Í vinnslu";
+"complete_view_label" = "Lokið";
+
+    // Receipt
+"transactions" = "Færslur";
+"mobileNoTransactions" = "Engar hreyfingar til að sýna.";
+"mobilePrepaidCardNoTransactions" = "Engar færslur síðustu 365 daga.";
+"add_transaction_title" = "Bæta við færslu";
+"account_closure_fee" = "Gjald fyrir lokun reiknings";
+"account_closure" = "Lokun reiknings";
+"account_unload" = "Skil fjármuna";
+"adjustment" = "Leiðrétting stöðu";
+"annual_fee_refund" = "Endurgreiðsla ársgjalds";
+"annual_fee" = "Ársgjald";
+"bank_account_transfer_fee" = "Gjald vegna skila á bankareikning";
+"bank_account_transfer_return_fee" = "Gjald vegna skila á bankareikning";
+"bank_account_transfer_return" = "Skil á bankareikning";
+"card_activation_fee_waiver" = "Eftirgjöf gjalds vegna virkjunar korts";
+"card_activation_fee" = "Gjald vegna virkjunar korts";
+"card_fee" = "Kortagjald";
+"customer_service_fee_refund" = "Endurgreiðsla gjalds vegna viðskiptavinaþjónustu";
+"customer_service_fee" = "Gjald vegna viðskiptavinaþjónustu";
+"deposit" = "Greiðsla";
+"donation_fee" = "Framlagsgjald";
+"donation_return" = "Skil framlags";
+"donation" = "Framlag";
+"dormant_user_fee_refund" = "Endurgreiðsla gjalds vegna óvirks notanda";
+"dormant_user_fee" = "Gjald vegna óvirks notanda";
+"expedited_shipping_fee" = "Gjald vegna flýtisendingar";
+"foreign_exchange" = "Gjaldeyrisviðskipti";
+"generic_fee_refund" = "Almenn endurgreiðsla gjalds";
+"manual_adjustment" = "Leiðrétting";
+"manual_transfer_to_prepaid_card" = "Millifæra á kort";
+"merchant_payment_fee" = "Gjald vegna greiðslu til söluaðila";
+"merchant_payment_refund" = "Endurgreiðsla á greiðslu til söluaðila";
+"merchant_payment_return" = "Skil á greiðslu til söluaðila";
+"merchant_payment" = "Greiðsla til söluaðila";
+"moneygram_transfer_return" = "MoneyGram skil";
+"monthly_fee_refund" = "Endurgreiðsla mánaðargjalds";
+"monthly_fee" = "Mánaðargjald";
+"paper_check_fee" = "Gjald vegna pappírsávísunar";
+"paper_check_refund" = "Endurgreiðsla pappírsávísunar";
+"payment_cancellation" = "Hætt við greiðslu";
+"payment_expiration" = "Greiðsla útrunnin";
+"payment_expiry_fee" = "Gjald vegna þess að greiðsla er útrunnin";
+"payment_fee" = "Greiðslugjald";
+"payment_return" = "Greiðsluskil";
+"payment_reversal_fee" = "Gjald vegna bakfærslu greiðslu";
+"payment_reversal" = "Bakfærsla greiðslu";
+"payment" = "Greiðsla";
+"prepaid_card_balance_inquiry_fee" = "Gjald vegna athugunar á stöðu";
+"prepaid_card_cash_advance" = "Útgreiðsla reiðufjár";
+"prepaid_card_dispute_deposit" = "Umdeild innlögn á kort";
+"prepaid_card_disputed_charge_refund" = "Umdeild endurgreiðsla gjaldfærslu";
+"prepaid_card_domestic_cash_withdrawal_fee" = "Úttekt úr hraðbanka";
+"prepaid_card_exchange_rate_difference" = "Gengismunur";
+"prepaid_card_manual_unload" = "Millifærsla af korti";
+"prepaid_card_overseas_cash_withdrawal_fee" = "Úttekt úr hraðbanka";
+"prepaid_card_pin_change_fee" = "Gjald vegna breytingar á PIN númeri";
+"prepaid_card_refund" = "Endurgreiðsla";
+"prepaid_card_replacement_fee" = "Gjald vegna nýs korts";
+"prepaid_card_sale_reversal" = "Bakfærð færsla";
+"prepaid_card_sale" = "Færsla";
+"prepaid_card_unload" = "Millifærsla af korti";
+"processing_fee" = "Afgreiðslugjald";
+"standard_shipping_fee" = "Gjald vegna venjulegs flutnings";
+"transfer_fee" = "Millifærslugjald";
+"transfer_to_bank_account" = "Bankareikningur";
+"transfer_to_debit_card" = "Debetkort";
+"transfer_to_moneygram" = "MoneyGram";
+"transfer_to_paper_check" = "Pappírsávísun";
+"transfer_to_paypal_account" = "PayPal";
+"transfer_to_prepaid_card" = "Millifæra á kort";
+"transfer_to_program_account" = "Millifæra á forrit";
+"transfer_to_user" = "Millifæra á notanda";
+"transfer_to_western_union" = "Western Union";
+"transfer_to_wire" = "Símgreiðsla";
+"transfer_to_wubs_wire" = "Símgreiðsla";
+"transfer_to_venmo_account" = "Venmo";
+"transfer_to_bank_card" = "Bankakort";
+"virtual_incentive_cancellation" = "Hætt við kynningartilboð";
+"virtual_incentive_issuance" = "Útgefið kynningartilboð";
+"virtual_incentive_purchase" = "Kaup kynningartilboðs";
+"virtual_incentive_refund" = "Endurgreiðsla kynningartilboðs";
+"western_union_transfer_return" = "Western Union úttekt";
+"wire_transfer_fee" = "Gjald vegna símgreiðslu";
+"wire_transfer_return" = "Skil símgreiðslu";
+"wubs_wire_transfer_return" = "Skil símgreiðslu";
+"unknown_receipt_type" = "Óþekkt færslugerð";
+"paypal_account_transfer_return" = "Skil úttektar";
+"venmo_account_transfer_return" = "Skil úttektar";
+"prepaid_card_account_deposit" = "Innlögn á reikning";
+"prepaid_card_annual_fee_discount" = "Afsláttur af ársgjaldi";
+"prepaid_card_bill_reprint_fee" = "Gjald vegna endurprentunar reiknings";
+"prepaid_card_atm_or_cash_advance_fee" = "Gjald vegna úttektar úr hraðbanka/reiðufjárúttektar";
+"prepaid_card_cash_advance_chargeback" = "Bakfærsla reiðufjárúttektar";
+"prepaid_card_cash_advance_chargeback_reversal" = "Bakfærð bakfærsla reiðufjárúttektar";
+"prepaid_card_cash_advance_repress" = "Repress reiðufjárúttekt";
+"prepaid_card_cash_advance_repress_reversal" = "Bakfærsla Repress úttektar";
+"prepaid_card_chargeback" = "Bakfærsla";
+"prepaid_card_chargeback_refund" = "Endurgreiðsla bakfærslu";
+"prepaid_card_chargeback_refund_reversal" = "Bakfærð endurgreiðsla bakfærslu";
+"prepaid_card_chargeback_reversal" = "Bakfærð bakfærsla";
+"prepaid_card_commission_or_fee" = "Gjald/Umboðsþóknun";
+"prepaid_card_debit_transfer" = "Skuldfærslur/Millifærslur";
+"prepaid_card_document_request_fee" = "Gjald vegna beiðni um skjal";
+"prepaid_card_emergency_cash" = "Neyðarfé";
+"prepaid_card_emergency_card" = "Neyðarkort";
+"prepaid_card_income" = "Tekjur";
+"prepaid_card_load_fee" = "PAN gjald";
+"prepaid_card_overdue_payment_interest" = "Vextir af gjaldfallinni greiðslu";
+"prepaid_card_payment" = "Hlaða";
+"prepaid_card_pin_reprint_fee" = "PIN endurprentun";
+"prepaid_card_priority_pass_fee" = "Priority pass gjald";
+"prepaid_card_priority_pass_renewal" = "Priority pass endurnýjun";
+"prepaid_card_recurring_interest" = "Hlaupandi vextir";
+"prepaid_card_refund_repress" = "Repress endurgreiðsla";
+"prepaid_card_refund_repress_reversal" = "Bakfærsla á Repress endurgreiðslu";
+"prepaid_card_sale_repress" = "Þvinguð sala";
+"prepaid_card_statement_fee" = "Gjald vegna UTSKGJ yfirlits";
+"prepaid_card_telephone_support_fee" = "Upplýsingar í gegnum síma: staða, færslur, o.s.frv.";
+"prepaid_card_transfer_fee" = "Gjald vegna innlagnar á kort";
+"prepaid_card_transfer_return" = "Skil innlagnar á fyrirframgreitt kort";
+"prepaid_card_bank_withdrawal_reversal" = "Bakfærð bankaúttekt";
+"prepaid_card_bank_withdrawal_chargeback" = "Bakfærð bakfærsla bankaúttektar";
+"prepaid_card_refund_fee" = "Endurgreiðslugjald";
+"prepaid_card_monthly_maintenance_fee" = "Mánaðargjald";
+"prepaid_card_transaction_fee" = "Færslugjald";
+"prepaid_card_sms_fee" = "SMS gjald";
+"prepaid_card_declined_authorization_fee" = "Gjald vegna synjunar á heimild";
+"fispc" = "Kaup";
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Receipt Detail
+"mobileTransactionDetailsHeader" = "Upplýsingar um færslu";
+"mobileTransactionTypeLabel" = "FÆRSLA";
+"mobileTransactionDetailsLabel" = "UPPLÝSINGAR";
+"mobileFeeInfoLabel" = "UPPLÝSINGAR UM GJALD";
+"mobileConfirmNotesLabel" = "SKÝRING";
+"mobileCharityName" = "Heiti góðgerðarstarfsemi";
+"mobileCheckNumber" = "Númer ávísunar";
+"mobileTransactionIdLabel" = "Auðkenni færslu";
+"mobilePromoWebsite" = "Vefsíða kynningartilboðs";
+"mobileTransactionDetailsTotal" = "Færsla samtals";
+"amount" = "Fjárhæð";
+"mobileFeeLabel" = "Gjald";
+"mobileJournalNumberLabel" = "Auðkenni móttakanda";
+"date" = "Dagsetning";
+
+    // Transfer Funds
+"mobileTransferFundsHeader" = "Millifæra";
+"mobileConfirmationHeader" = "Staðfesta upplýsingar";
+"mobileTransferFromLabel" = "MILLIFÆRA FRÁ";
+"mobileTransferToLabel" = "MILLIFÆRA TIL";
+"mobileNoteLabel" = "Skýring";
+"mobileConfirmDetailsAmount" = "Fjárhæð";
+"mobileConfirmDetailsFee" = "Gjald";
+"mobileConfirmDetailsTotal" = "Þú munt fá";
+"mobileTransferMax" = "Millifæra hámarksfjárhæð";
+"mobileFXsell" = "Frá";
+"mobileFXbuy" = "Til";
+"mobileFXRateLabel" = "Gengi";
+"mobileAvailableBalance" = "Tiltæk fjárhæð %1$@%2$@ %3$@";
+"continueButtonLabel" = "Halda áfram";
+"mobileAddTransferMethod" = "Bæta við millifærsluaðferð";
+"mobileTransferMethodsHeader" = "Millifærsluaðferðir";
+"mobileTransferFromHeader" = "Millifæra frá";
+"mobileAvailableFunds" = "Tiltækir fjármunir";
+"mobileFXlabel" = "GJALDEYRISVIÐSKIPTI";
+"mobileSummaryLabel" = "SAMANTEKT";
+"transfer" = "Millifæra";
+"transferAmountInvalid" = "Sláðu inn gilda millifærslufjárhæð";
+"noTransferMethodAdded" = "Þörf er á millifærsluaðferð";
+"transfer_error_no_transfer_method_module_initialized" = "Þú getur ekki bætt við millifærsluaðferð.";
+"transfer_fx_rate_changed" = "Vegna gengisbreytinga munt þú nú fá: %1$@";
+"mobileTransferSuccessMsg" = "Millifærslan þín er í vinnslu";
+"mobileTransferSuccessDetails" = "Fjármunir eru á leiðinni inn á %1$@ þinn.";
+"noTransferFromSourceAvailable" = "Millifærsla frá uppruna ekki í boði";

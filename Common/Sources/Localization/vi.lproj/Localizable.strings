@@ -1,0 +1,266 @@
+//
+// Copyright 2018 - Present Hyperwallet
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+// and associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+// BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+"backBarButton" = "Trở lại";
+"mobileTransferMethodsHeader" = "Phương thức chuyển tiền";
+"remove" = "Xóa";
+"cancelButtonLabel" = "Huỷ bỏ";
+"doneButtonLabel" = "Hoàn tất";
+"try_again_button_label" = "Thử lại";
+"search_placeholder_label" = "Tìm kiếm";
+"unexpected_error_message" = "Đã xảy ra lỗi, vui lòng thử lại";
+"network_connection_error_title" = "Lỗi kết nối";
+"unexpected_title" = "Lỗi không mong đợi";
+"network_connection_error_message" = "Chúng tôi đang gặp sự cố khi xử lý yêu cầu. Vui lòng kiểm tra kết nối của bạn.";
+"endingIn" = "kết thúc bằng ";
+"to" = "đến ";
+"no_country_available_error_message" = "Không có quốc gia nào khả dụng";
+"no_transfer_method_available_error_message" = "Không có phương thức chuyển tiền nào khả dụng cho %1$@ và %2$@";
+"no_currency_available_error_message" = "Không có đơn vị tiền tệ quốc gia nào khả dụng %1$@";
+"emptyStateAddTransferMethod" = "Thêm phương thức chuyển tiền để bắt đầu.";
+"mobileAddTransferMethodHeader" = "Thêm phương thức chuyển tiền";
+"mobileCountryCurrencyLabel" = "ĐỊA ĐIỂM VÀ TIỀN TỆ";
+"mobileTransferMethodLabel" = "PHƯƠNG THỨC CHUYỂN TIỀN";
+"mobileCountryRegion" = "Quốc gia/khu vực";
+"mobileCurrencyLabel" = "Đơn vị tiền tệ";
+"mobileAreYouSure" = "Bạn có chắc không?";
+"mobileRemoveEAconfirm" = "Xóa phương thức chuyển tiền";
+"fee_flat_formatter" = "%1$@%2$@ phí";
+"fee_percent_only_min_formatter" = "%1$@%% (Tối thiểu:%2$@%3$@) phí";
+"fee_percent_only_max_formatter" = "%1$@%% (Tối đa:%2$@%3$@) phí";
+"fee_percent_formatter" = "%1$@%% (Tối thiểu:%2$@%3$@, Tối đa:%2$@%4$@) phí";
+"fee_mix_no_min_and_max_formatter" = "%1$@%2$@ + %3$@%% phí";
+"fee_mix_only_min_formatter" = "%1$@%2$@ + %3$@%% (Tối thiểu:%1$@%4$@) phí";
+"fee_mix_only_max_formatter" = "%1$@%2$@ + %3$@%% (Tối đa:%1$@%4$@) phí";
+"fee_mix_formatter" = "%1$@%2$@ + %3$@%% (Tối thiểu:%1$@%4$@, Tối đa:%1$@%5$@) phí";
+"fee_percent_no_min_and_max_formatter" = "%1$@%% phí";
+"transfer_method_not_supported_message" = "Phương thức chuyển tiền này không được hỗ trợ.";
+"error" = "Lỗi";
+"authentication_error_title" = "Lỗi xác thực";
+"authentication_error_message" = "Truy xuất và xác thực bằng chuỗi mã hóa có lỗi";
+
+    // Transfer methods
+"bank_account" = "Tài khoản ngân hàng";
+"bank_card" = "Thẻ ghi nợ";
+"paper_check" = "Séc giấy";
+"prepaid_card" = "Thẻ trả trước";
+"wire_account" = "Tài khoản điện chuyển khoản";
+"paypal_account" = "Tài khoản Paypal";
+"venmo_account" = "Tài khoản Venmo";
+"cash_pickup_mg" = "MoneyGram";
+
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Manage Prepaid Card Message
+"manage_prepaid_card_message" = "Đăng nhập bằng trình duyệt web để quản lý thẻ của bạn";
+    //Select Transfer Method View
+"select_a_country_message" = "Chọn một quốc gia";
+
+    // Add Transfer Method
+"createTransferMethodButtonLabel" = "Thêm phương thức chuyển tiền";
+"account_information" = "THÔNG TIN TÀI KHOẢN: %1$@(%2$@)";
+"account_holder" = "THÔNG TIN CHỦ TÀI KHOẢN";
+"address"="ĐỊA CHỈ";
+"mobileFeesAndProcessingTime" = "LỆ PHÍ VÀ THỜI GIAN XỬ LÝ";
+"intermediary_account" = "TÀI KHOẢN TRUNG GIAN";
+"contact_information" = "THÔNG TIN LIÊN HỆ";
+"identification" = "NHẬN DẠNG";
+
+"date_format" = "NGÀY-THÁNG-NĂM";
+
+    // Processing View
+"processing_view_label" = "Xử lý";
+"complete_view_label" = "Hoàn thành";
+
+    // Receipt
+"transactions" = "Các giao dịch";
+"mobileNoTransactions" = "Không có hoạt động nào để hiển thị.";
+"mobilePrepaidCardNoTransactions" = "Không có giao dịch nào trong 365 ngày qua.";
+"add_transaction_title" = "Thêm giao dịch";
+"account_closure_fee" = "Phí đóng tài khoản";
+"account_closure" = "Đóng tài khoản";
+"account_unload" = "Hoàn lại tiền";
+"adjustment" = "Điều chỉnh số dư";
+"annual_fee_refund" = "Hoàn phí hàng năm";
+"annual_fee" = "Phí hằng năm";
+"bank_account_transfer_fee" = "Phí trả lại tài khoản ngân hàng";
+"bank_account_transfer_return_fee" = "Phí trả lại tài khoản ngân hàng";
+"bank_account_transfer_return" = "Trả lại tài khoản ngân hàng";
+"card_activation_fee_waiver" = "Miễn phí kích hoạt thẻ";
+"card_activation_fee" = "Phí kích hoạt thẻ";
+"card_fee" = "Phí thẻ";
+"customer_service_fee_refund" = "Hoàn lại phí dịch vụ cho khách hàng";
+"customer_service_fee" = "Phí dịch vụ khách hàng";
+"deposit" = "Thanh toán";
+"donation_fee" = "Phí quyên góp";
+"donation_return" = "Hoàn tiền quyên góp";
+"donation" = "Quyên góp";
+"dormant_user_fee_refund" = "Hoàn lại phí cho tài khoản không hoạt động";
+"dormant_user_fee" = "Phí duy trì tài khoản không hoạt động";
+"expedited_shipping_fee" = "Phí vận chuyển nhanh";
+"foreign_exchange" = "Ngoại hối";
+"generic_fee_refund" = "Hoàn lại phí chung";
+"manual_adjustment" = "Điều chỉnh";
+"manual_transfer_to_prepaid_card" = "Chuyển sang thẻ";
+"merchant_payment_fee" = "Phí thanh toán cho người bán";
+"merchant_payment_refund" = "Hoàn lại thanh toán cho người bán";
+"merchant_payment_return" = "Trả lại thanh toán cho người bán";
+"merchant_payment" = "Thanh toán cho người bán";
+"moneygram_transfer_return" = "Trả lại MoneyGram";
+"monthly_fee_refund" = "Hoàn lại phí hàng tháng";
+"monthly_fee" = "Phí hàng tháng";
+"paper_check_fee" = "Phí séc giấy";
+"paper_check_refund" = "Hoàn tiền séc giấy";
+"payment_cancellation" = "Hủy thanh toán";
+"payment_expiration" = "Thanh toán đã hết hạn";
+"payment_expiry_fee" = "Phí hết hạn thanh toán";
+"payment_fee" = "Phí thanh toán";
+"payment_return" = "Trả lại thanh toán";
+"payment_reversal_fee" = "Phí đảo chiều thanh toán";
+"payment_reversal" = "Đảo chiều thanh toán";
+"payment" = "Thanh toán";
+"prepaid_card_balance_inquiry_fee" = "Phí truy vấn số dư";
+"prepaid_card_cash_advance" = "Ứng trước tiền mặt";
+"prepaid_card_dispute_deposit" = "Tiền gửi vào thẻ tranh chấp";
+"prepaid_card_disputed_charge_refund" = "Hoàn lại phí tranh chấp";
+"prepaid_card_domestic_cash_withdrawal_fee" = "Rút tiền từ máy ATM";
+"prepaid_card_exchange_rate_difference" = "Chênh lệch tỷ giá hối đoái";
+"prepaid_card_manual_unload" = "Chuyển từ thẻ";
+"prepaid_card_overseas_cash_withdrawal_fee" = "Rút tiền từ máy ATM";
+"prepaid_card_pin_change_fee" = "Phí thay đổi mã PIN";
+"prepaid_card_refund" = "Hoàn tiền";
+"prepaid_card_replacement_fee" = "Phí thay thế thẻ";
+"prepaid_card_sale_reversal" = "Giao dịch được đảo chiều";
+"prepaid_card_sale" = "Giao dịch";
+"prepaid_card_unload" = "Chuyển từ thẻ";
+"processing_fee" = "Phí xử lý";
+"standard_shipping_fee" = "Phí vận chuyển tiêu chuẩn";
+"transfer_fee" = "Phí chuyển";
+"transfer_to_bank_account" = "Tài khoản ngân hàng";
+"transfer_to_debit_card" = "Thẻ ghi nợ";
+"transfer_to_moneygram" = "MoneyGram";
+"transfer_to_paper_check" = "Séc giấy";
+"transfer_to_paypal_account" = "PayPal";
+"transfer_to_prepaid_card" = "Chuyển sang thẻ";
+"transfer_to_program_account" = "Chuyển sang Chương trình";
+"transfer_to_user" = "Chuyển cho người dùng";
+"transfer_to_western_union" = "Western Union";
+"transfer_to_wire" = "Điện chuyển khoản";
+"transfer_to_wubs_wire" = "Điện chuyển khoản";
+"transfer_to_venmo_account" = "Venmo";
+"transfer_to_bank_card" = "Thẻ ngân hàng";
+"virtual_incentive_cancellation" = "Hủy khuyến mại";
+"virtual_incentive_issuance" = "Khuyến mại đã phát hành";
+"virtual_incentive_purchase" = "Giao dịch mua có khuyến mãi";
+"virtual_incentive_refund" = "Hoàn lại tiền khuyến mãi";
+"western_union_transfer_return" = "Rút tiền qua Western Union";
+"wire_transfer_fee" = "Phí điện chuyển khoản";
+"wire_transfer_return" = "Hoàn trả điện chuyển khoản ngân hàng";
+"wubs_wire_transfer_return" = "Hoàn trả điện chuyển khoản ngân hàng";
+"unknown_receipt_type" = "Loại giao dịch không xác định";
+"paypal_account_transfer_return" = "Trả lại tiền mặt xuất ra";
+"venmo_account_transfer_return" = "Trả lại tiền mặt xuất ra";
+"prepaid_card_account_deposit" = "Tiền gửi tài khoản";
+"prepaid_card_annual_fee_discount" = "Giảm phí hàng năm";
+"prepaid_card_bill_reprint_fee" = "Phí in lại hóa đơn";
+"prepaid_card_atm_or_cash_advance_fee" = "Phí ATM/tạm ứng tiền mặt";
+"prepaid_card_cash_advance_chargeback" = "Hoàn trả tạm ứng tiền mặt";
+"prepaid_card_cash_advance_chargeback_reversal" = "Đảo chiều hoàn trả tạm ứng tiền mặt";
+"prepaid_card_cash_advance_repress" = "Áp chế tạm ứng tiền mặt";
+"prepaid_card_cash_advance_repress_reversal" = "Đảo chiều áp chế tạm ứng tiền mặt";
+"prepaid_card_chargeback" = "Hoàn trả";
+"prepaid_card_chargeback_refund" = "Tiền hoàn trả";
+"prepaid_card_chargeback_refund_reversal" = "Đảo chiều tiền hoàn trả";
+"prepaid_card_chargeback_reversal" = "Đảo chiều hoàn trả";
+"prepaid_card_commission_or_fee" = "Phí/Hoa hồng";
+"prepaid_card_debit_transfer" = "Ghi nợ/Chuyển khoản";
+"prepaid_card_document_request_fee" = "Phí yêu cầu tài liệu";
+"prepaid_card_emergency_cash" = "Tiền khẩn cấp";
+"prepaid_card_emergency_card" = "Thẻ khẩn cấp";
+"prepaid_card_income" = "Thu nhập";
+"prepaid_card_load_fee" = "Phí PAN";
+"prepaid_card_overdue_payment_interest" = "Lãi trả quá hạn";
+"prepaid_card_payment" = "Tải";
+"prepaid_card_pin_reprint_fee" = "In lại mã PIN";
+"prepaid_card_priority_pass_fee" = "Phí thẻ ưu tiên";
+"prepaid_card_priority_pass_renewal" = "Gia hạn thẻ ưu tiên";
+"prepaid_card_recurring_interest" = "Lãi suất quay vòng";
+"prepaid_card_refund_repress" = "Áp chế hoàn tiền";
+"prepaid_card_refund_repress_reversal" = "Đảo chiều áp chế hoàn tiền";
+"prepaid_card_sale_repress" = "Áp chế kinh doanh";
+"prepaid_card_statement_fee" = "Phí sao kê UTSKGJ";
+"prepaid_card_telephone_support_fee" = "Thông tin qua điện thoại: số dư, chuyển khoản, v.v…";
+"prepaid_card_transfer_fee" = "Phí nạp thẻ";
+"prepaid_card_transfer_return" = "Trả lại nạp thẻ trả trước";
+"prepaid_card_bank_withdrawal_reversal" = "Rút tiền ngân hàng được đảo chiều";
+"prepaid_card_bank_withdrawal_chargeback" = "Hoàn trả rút tiền ngân hàng được đảo chiều";
+"prepaid_card_refund_fee" = "Phí hoàn tiền";
+"prepaid_card_monthly_maintenance_fee" = "Phí duy trì hàng tháng";
+"prepaid_card_transaction_fee" = "Phí giao dịch";
+"prepaid_card_sms_fee" = "Phí SMS";
+"prepaid_card_declined_authorization_fee" = "Phí ủy quyền bị từ chối";
+"fispc" = "Mua";
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Receipt Detail
+"mobileTransactionDetailsHeader" = "Chi tiết giao dịch";
+"mobileTransactionTypeLabel" = "GIAO DỊCH";
+"mobileTransactionDetailsLabel" = "CHI TIẾT";
+"mobileFeeInfoLabel" = "THÔNG TIN PHÍ";
+"mobileConfirmNotesLabel" = "LƯU Ý";
+"mobileCharityName" = "Tên tổ chức từ thiện";
+"mobileCheckNumber" = "Số séc";
+"mobileTransactionIdLabel" = "Mã giao dịch";
+"mobilePromoWebsite" = "Trang web quảng cáo";
+"mobileTransactionDetailsTotal" = "Tổng giao dịch";
+"amount" = "Số tiền";
+"mobileFeeLabel" = "Phí";
+"mobileJournalNumberLabel" = "Mã biên nhận";
+"date" = "Ngày";
+
+    // Transfer Funds
+"mobileTransferFundsHeader" = "Chuyển tiền";
+"mobileConfirmationHeader" = "Xác nhận các chi tiết";
+"mobileTransferFromLabel" = "CHUYỂN TỪ";
+"mobileTransferToLabel" = "CHUYỂN TỚI";
+"mobileNoteLabel" = "Lưu ý";
+"mobileConfirmDetailsAmount" = "Số tiền";
+"mobileConfirmDetailsFee" = "Phí";
+"mobileConfirmDetailsTotal" = "Bạn sẽ nhận";
+"mobileTransferMax" = "Chuyển số tiền tối đa";
+"mobileFXsell" = "Từ";
+"mobileFXbuy" = "Đến";
+"mobileFXRateLabel" = "Tỷ giá";
+"mobileAvailableBalance" = "Số tiền khả dụng %1$@%2$@ %3$@";
+"continueButtonLabel" = "Tiếp tục";
+"mobileAddTransferMethod" = "Thêm phương thức chuyển tiền";
+"mobileTransferMethodsHeader" = "Phương thức chuyển tiền";
+"mobileTransferFromHeader" = "Chuyển Từ";
+"mobileAvailableFunds" = "Tiền khả dụng";
+"mobileFXlabel" = "NGOẠI HỐI";
+"mobileSummaryLabel" = "TÓM LƯỢC";
+"transfer" = "Chuyển tiền";
+"transferAmountInvalid" = "Nhập số tiền chuyển hợp lệ";
+"noTransferMethodAdded" = "Phương thức chuyển tiền là bắt buộc";
+"transfer_error_no_transfer_method_module_initialized" = "Bạn không thể thêm phương thức chuyển tiền.";
+"transfer_fx_rate_changed" = "Do những thay đổi trong tỷ giá hối đoái, bây giờ bạn sẽ nhận được: %1$@";
+"mobileTransferSuccessMsg" = "Giao dịch chuyển tiền của bạn đang được xử lý";
+"mobileTransferSuccessDetails" = "Tiền đang được chuyển đến %1$@của bạn.";
+"noTransferFromSourceAvailable" = "Không có chuyển tiền từ nguồn khả dụng";
