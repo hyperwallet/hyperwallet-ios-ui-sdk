@@ -59,12 +59,6 @@
                <Test
                   Identifier = "AddTransferMethodBankAccountBusinessTests">
                </Test>
-               <Test
-                  Identifier = "TransferUserFundsTest/testTransferFunds_createTransferCopyAndPasteTransferAmountWithChars()">
-               </Test>
-               <Test
-                  Identifier = "AddTransferMethodBankAccountBusinessTests">
-               </Test>
             </SkippedTests>
          </TestableReference>
       </Testables>
