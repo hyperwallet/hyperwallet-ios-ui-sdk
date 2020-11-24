@@ -1,0 +1,266 @@
+//
+// Copyright 2018 - Present Hyperwallet
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+// and associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+// BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+"backBarButton" = "Назад";
+"mobileTransferMethodsHeader" = "Методи за трансфер";
+"remove" = "Премахване";
+"cancelButtonLabel" = "Отмяна";
+"doneButtonLabel" = "Готово";
+"try_again_button_label" = "Нов опит";
+"search_placeholder_label" = "Търсене";
+"unexpected_error_message" = "Нещо се обърка. Моля, опитайте отново";
+"network_connection_error_title" = "Проблем с връзката";
+"unexpected_title" = "Неочаквана грешка";
+"network_connection_error_message" = "Възникна проблем при обработка на заявката. Моля, проверете връзката си.";
+"endingIn" = "завършваща на ";
+"to" = "до ";
+"no_country_available_error_message" = "Няма налична държава";
+"no_transfer_method_available_error_message" = "Няма наличен метод за трансфер за %1$@ и %2$@";
+"no_currency_available_error_message" = "Няма налична валута за държавата %1$@";
+"emptyStateAddTransferMethod" = "Добавете метод за трансфер, за да започнете.";
+"mobileAddTransferMethodHeader" = "Добавяне на метод за трансфер";
+"mobileCountryCurrencyLabel" = "МЕСТОПОЛОЖЕНИЕ И ВАЛУТА";
+"mobileTransferMethodLabel" = "МЕТОД ЗА ТРАНСФЕР";
+"mobileCountryRegion" = "Държава/Регион";
+"mobileCurrencyLabel" = "Валута";
+"mobileAreYouSure" = "Сигурни ли сте?";
+"mobileRemoveEAconfirm" = "Премахване на метода за трансфер";
+"fee_flat_formatter" = "%1$@%2$@ такса";
+"fee_percent_only_min_formatter" = "%1$@%% (Мин.:%2$@%3$@) такса";
+"fee_percent_only_max_formatter" = "%1$@%% (Макс.:%2$@%3$@) такса";
+"fee_percent_formatter" = "%1$@%% (Мин.:%2$@%3$@, Макс.:%2$@%4$@) такса";
+"fee_mix_no_min_and_max_formatter" = "%1$@%2$@ + %3$@%% такса";
+"fee_mix_only_min_formatter" = "%1$@%2$@ + %3$@%% (Мин.:%1$@%4$@) такса";
+"fee_mix_only_max_formatter" = "%1$@%2$@ + %3$@%% (Макс.:%1$@%4$@) такса";
+"fee_mix_formatter" = "%1$@%2$@ + %3$@%% (Мин.:%1$@%4$@, Макс.:%1$@%5$@) такса";
+"fee_percent_no_min_and_max_formatter" = "%1$@%% такса";
+"transfer_method_not_supported_message" = "Този метод за трансфер не се поддържа.";
+"error" = "Грешка";
+"authentication_error_title" = "Грешка при удостоверяване";
+"authentication_error_message" = "Опитът за получаване на токен за удостоверяване доведе до грешка";
+
+    // Transfer methods
+"bank_account" = "Банкова сметка";
+"bank_card" = "Дебитна карта";
+"paper_check" = "Хартиен чек";
+"prepaid_card" = "Предплатена карта";
+"wire_account" = "Сметка за банков превод";
+"paypal_account" = "Профил в Paypal";
+"venmo_account" = "Профил във Venmo";
+"cash_pickup_mg" = "MoneyGram";
+
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Manage Prepaid Card Message
+"manage_prepaid_card_message" = "Влезте в системата чрез уеб браузър, за да управлявате Вашата карта";
+    //Select Transfer Method View
+"select_a_country_message" = "Изберете държава";
+
+    // Add Transfer Method
+"createTransferMethodButtonLabel" = "Добавяне на метод за трансфер";
+"account_information" = "ИНФОРМАЦИЯ ЗА СМЕТКАТА: %1$@(%2$@)";
+"account_holder" = "ИНФОРМАЦИЯ ЗА ПРИТЕЖАТЕЛЯ НА СМЕТКАТА";
+"address"="АДРЕС";
+"mobileFeesAndProcessingTime" = "ТАКСИ И ВРЕМЕ ЗА ОБРАБОТВАНЕ";
+"intermediary_account" = "ПОСРЕДНИЧЕСКА СМЕТКА";
+"contact_information" = "ДАННИ ЗА КОНТАКТ";
+"identification" = "ИДЕНТИФИКАЦИЯ";
+
+"date_format" = "ГГГГ-ММ-ДД";
+
+    // Processing View
+"processing_view_label" = "Обработва се";
+"complete_view_label" = "Попълнете";
+
+    // Receipt
+"transactions" = "Трансакции";
+"mobileNoTransactions" = "Няма активност, която да бъде показана.";
+"mobilePrepaidCardNoTransactions" = "Няма трансакции през последните 365 дни.";
+"add_transaction_title" = "Добавяне на трансакция";
+"account_closure_fee" = "Такса за закриване на сметка";
+"account_closure" = "Закриване на сметка";
+"account_unload" = "Връщане на средства";
+"adjustment" = "Коригиране на салдо";
+"annual_fee_refund" = "Възстановяване на годишна такса";
+"annual_fee" = "Годишна такса";
+"bank_account_transfer_fee" = "Такса за върнато плащане от банковата сметка";
+"bank_account_transfer_return_fee" = "Такса за върнато плащане от банковата сметка";
+"bank_account_transfer_return" = "Върнато плащане от банковата сметка";
+"card_activation_fee_waiver" = "Отмяна на такса за активиране на карта";
+"card_activation_fee" = "Такса за активиране на карта";
+"card_fee" = "Такса за карта";
+"customer_service_fee_refund" = "Възстановяване на такса за обслужване на клиенти";
+"customer_service_fee" = "Такса за обслужване на клиенти";
+"deposit" = "Плащане";
+"donation_fee" = "Такса за дарение";
+"donation_return" = "Връщане на дарение";
+"donation" = "Дарение";
+"dormant_user_fee_refund" = "Възстановяване на такса за сметка на неактивен потребител";
+"dormant_user_fee" = "Такса за сметка на неактивен потребител";
+"expedited_shipping_fee" = "Такса за ускорена доставка";
+"foreign_exchange" = "Обмен на валута";
+"generic_fee_refund" = "Възстановяване на обща такса";
+"manual_adjustment" = "Коригиране";
+"manual_transfer_to_prepaid_card" = "Трансфер към карта";
+"merchant_payment_fee" = "Такса за плащане на търговец";
+"merchant_payment_refund" = "Възстановяване на плащане на търговец";
+"merchant_payment_return" = "Връщане на плащане на търговец";
+"merchant_payment" = "Плащане на търговец";
+"moneygram_transfer_return" = "Връщане от MoneyGram";
+"monthly_fee_refund" = "Възстановяване на месечна такса";
+"monthly_fee" = "Месена такса";
+"paper_check_fee" = "Такса за хартиен чек";
+"paper_check_refund" = "Възстановяване на сума от хартиен чек";
+"payment_cancellation" = "Отмяна на плащане";
+"payment_expiration" = "Плащането е изтекло";
+"payment_expiry_fee" = "Такса за изтекло плащане";
+"payment_fee" = "Такса за плащане";
+"payment_return" = "Връщане на плащане";
+"payment_reversal_fee" = "Такса за възстановяване на плащане";
+"payment_reversal" = "Възстановяване на плащане";
+"payment" = "Плащане";
+"prepaid_card_balance_inquiry_fee" = "Такса за справка салдо";
+"prepaid_card_cash_advance" = "Аванс в брой";
+"prepaid_card_dispute_deposit" = "Оспорен картов депозит";
+"prepaid_card_disputed_charge_refund" = "Оспорено възстановяване на разход";
+"prepaid_card_domestic_cash_withdrawal_fee" = "Теглене от банкомат";
+"prepaid_card_exchange_rate_difference" = "Разлика в обменния курс";
+"prepaid_card_manual_unload" = "Трансфер от карта";
+"prepaid_card_overseas_cash_withdrawal_fee" = "Теглене от банкомат";
+"prepaid_card_pin_change_fee" = "Такса за смяна на PIN-код";
+"prepaid_card_refund" = "Възстановяване на сума";
+"prepaid_card_replacement_fee" = "Такса за замяна на карта";
+"prepaid_card_sale_reversal" = "Трансакция с възстановена сума";
+"prepaid_card_sale" = "Трансакция";
+"prepaid_card_unload" = "Трансфер от карта";
+"processing_fee" = "Такса за обработка";
+"standard_shipping_fee" = "Такса за стандартна доставка";
+"transfer_fee" = "Такса за превод";
+"transfer_to_bank_account" = "Банкова сметка";
+"transfer_to_debit_card" = "Дебитна карта";
+"transfer_to_moneygram" = "MoneyGram";
+"transfer_to_paper_check" = "Хартиен чек";
+"transfer_to_paypal_account" = "PayPal";
+"transfer_to_prepaid_card" = "Трансфер към карта";
+"transfer_to_program_account" = "Трансфер към програма";
+"transfer_to_user" = "Трансфер към потребител";
+"transfer_to_western_union" = "Western Union";
+"transfer_to_wire" = "Банков превод";
+"transfer_to_wubs_wire" = "Банков превод";
+"transfer_to_venmo_account" = "Venmo";
+"transfer_to_bank_card" = "Банкова карта";
+"virtual_incentive_cancellation" = "Отмяна на промоция";
+"virtual_incentive_issuance" = "Издадена промоция";
+"virtual_incentive_purchase" = "Покупка чрез промоция";
+"virtual_incentive_refund" = "Възстановяване на промоция";
+"western_union_transfer_return" = "Теглене от Western Union";
+"wire_transfer_fee" = "Такса за банков превод";
+"wire_transfer_return" = "Връщане на банков превод";
+"wubs_wire_transfer_return" = "Връщане на банков превод";
+"unknown_receipt_type" = "Неизвестен тип трансакция";
+"paypal_account_transfer_return" = "Връщане на изтеглени пари";
+"venmo_account_transfer_return" = "Връщане на изтеглени пари";
+"prepaid_card_account_deposit" = "Депозит в сметка";
+"prepaid_card_annual_fee_discount" = "Отстъпка от годишната такса";
+"prepaid_card_bill_reprint_fee" = "Такса за повторно отпечатване на сметка";
+"prepaid_card_atm_or_cash_advance_fee" = "Такса за банкомат/аванс в брой";
+"prepaid_card_cash_advance_chargeback" = "Възстановяване на аванс в брой";
+"prepaid_card_cash_advance_chargeback_reversal" = "Отмяна на възстановяване на аванс в брой";
+"prepaid_card_cash_advance_repress" = "Задържане на аванс в брой";
+"prepaid_card_cash_advance_repress_reversal" = "Отмяна на задържане на аванс";
+"prepaid_card_chargeback" = "Възстановяване на плащане";
+"prepaid_card_chargeback_refund" = "Възстановяване на плащане";
+"prepaid_card_chargeback_refund_reversal" = "Отмяна на възстановяване на плащане";
+"prepaid_card_chargeback_reversal" = "Отмяна на възстановяване на плащане";
+"prepaid_card_commission_or_fee" = "Такса/Комисионна";
+"prepaid_card_debit_transfer" = "Дебит/Трансфери";
+"prepaid_card_document_request_fee" = "Такса за заявка на документ";
+"prepaid_card_emergency_cash" = "Пари за спешни случаи";
+"prepaid_card_emergency_card" = "Карта за спешни случаи";
+"prepaid_card_income" = "Доход";
+"prepaid_card_load_fee" = "PAN такса";
+"prepaid_card_overdue_payment_interest" = "Лихва върху просрочено плащане";
+"prepaid_card_payment" = "Зареждане";
+"prepaid_card_pin_reprint_fee" = "Повторно отпечатване на PIN-код";
+"prepaid_card_priority_pass_fee" = "Такса за приоритетен пропуск";
+"prepaid_card_priority_pass_renewal" = "Подновяване на обработване с приоритет";
+"prepaid_card_recurring_interest" = "Револвираща лихва";
+"prepaid_card_refund_repress" = "Задържане на възстановена сума";
+"prepaid_card_refund_repress_reversal" = "Отмяна на задържане на възстановена сума";
+"prepaid_card_sale_repress" = "Задържане на продажба";
+"prepaid_card_statement_fee" = "Такса за UTSKGJ справка";
+"prepaid_card_telephone_support_fee" = "Информация по телефона: салдо, транс. и др.";
+"prepaid_card_transfer_fee" = "Такса за зареждане на карта";
+"prepaid_card_transfer_return" = "Връщане на сума за зареждане на предплатена карта";
+"prepaid_card_bank_withdrawal_reversal" = "Отмяна на теглене от банка";
+"prepaid_card_bank_withdrawal_chargeback" = "Възстановяване на сума по отменено банково теглене";
+"prepaid_card_refund_fee" = "Такса за възстановяване на сума";
+"prepaid_card_monthly_maintenance_fee" = "Такса за месечна поддръжка";
+"prepaid_card_transaction_fee" = "Такса за трансакция";
+"prepaid_card_sms_fee" = "Такса за SMS";
+"prepaid_card_declined_authorization_fee" = "Такса за отказана оторизация";
+"fispc" = "Покупка";
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Receipt Detail
+"mobileTransactionDetailsHeader" = "Информация за трансакция";
+"mobileTransactionTypeLabel" = "ТРАНСАКЦИЯ";
+"mobileTransactionDetailsLabel" = "ИНФОРМАЦИЯ";
+"mobileFeeInfoLabel" = "ИНФОРМАЦИЯ ЗА ТАКСИ";
+"mobileConfirmNotesLabel" = "ЗАБЕЛЕЖКА";
+"mobileCharityName" = "Название на благотворителна организация";
+"mobileCheckNumber" = "Номер на чек";
+"mobileTransactionIdLabel" = "Идентификационен № на трансакцията";
+"mobilePromoWebsite" = "Уебсайт за промоции";
+"mobileTransactionDetailsTotal" = "Обща стойност на трансакцията";
+"amount" = "Сума";
+"mobileFeeLabel" = "Такса";
+"mobileJournalNumberLabel" = "ИН на бележка";
+"date" = "Дата";
+
+    // Transfer Funds
+"mobileTransferFundsHeader" = "Трансфер";
+"mobileConfirmationHeader" = "Потвърждаване на информацията";
+"mobileTransferFromLabel" = "ТРАНСФЕР ОТ";
+"mobileTransferToLabel" = "ТРАНСФЕР КЪМ";
+"mobileNoteLabel" = "Забележка";
+"mobileConfirmDetailsAmount" = "Сума";
+"mobileConfirmDetailsFee" = "Такса";
+"mobileConfirmDetailsTotal" = "Ще получите";
+"mobileTransferMax" = "Максимална сума за трансфер";
+"mobileFXsell" = "От";
+"mobileFXbuy" = "Към";
+"mobileFXRateLabel" = "Обменен курс";
+"mobileAvailableBalance" = "Налична сума %1$@%2$@ %3$@";
+"continueButtonLabel" = "Продължи";
+"mobileAddTransferMethod" = "Добавяне на метод за трансфер";
+"mobileTransferMethodsHeader" = "Методи за трансфер";
+"mobileTransferFromHeader" = "Трансфер от";
+"mobileAvailableFunds" = "Налични средства";
+"mobileFXlabel" = "ОБМЕН НА ВАЛУТА";
+"mobileSummaryLabel" = "РЕЗЮМЕ";
+"transfer" = "Трансфер";
+"transferAmountInvalid" = "Въведете валидна сума за трансфер";
+"noTransferMethodAdded" = "Изисква се метод за трансфер";
+"transfer_error_no_transfer_method_module_initialized" = "Не можете да въведете метод за трансфер.";
+"transfer_fx_rate_changed" = "Поради промени в обменния курс, сега ще получите: %1$@";
+"mobileTransferSuccessMsg" = "Вашият трансфер се обработва";
+"mobileTransferSuccessDetails" = "Парите пътуват към Вашата %1$@.";
+"noTransferFromSourceAvailable" = "Не е наличен трансфер от източника";

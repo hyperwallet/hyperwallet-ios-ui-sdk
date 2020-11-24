@@ -86,9 +86,11 @@ extension XCUIElement {
             XCTFail("Tried to paste empty string!")
             return
         }
-        let pasteBoard = UIPasteboard.general
-        pasteBoard.string = text
+
+        UIPasteboard.general.string = text
         field.doubleTap()
+        sleep(1)
         app.menuItems["Paste"].tap()
+        sleep(1)
     }
 }

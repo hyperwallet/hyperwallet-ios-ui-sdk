@@ -93,7 +93,7 @@ public extension ThemeManager {
         let proxy = TransferAmountCell.appearance()
         proxy.currencySymbolLabelFont = Theme.Label.titleFont
         proxy.currencySymbolLabelColor = Theme.Label.color
-        proxy.amountTextFieldFont = Theme.Text.font.withSize(60)
+        proxy.amountTextFieldFont = Theme.Text.createTransferAmountFont
         proxy.currencyLabelFont = Theme.Label.titleFont
         proxy.currencyLabelColor = Theme.Label.color
     }

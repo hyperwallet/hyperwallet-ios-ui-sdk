@@ -1,0 +1,266 @@
+//
+// Copyright 2018 - Present Hyperwallet
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+// and associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+// BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+"backBarButton" = "Назад";
+"mobileTransferMethodsHeader" = "Способы перевода";
+"remove" = "Удалить";
+"cancelButtonLabel" = "Отмена";
+"doneButtonLabel" = "Выполнено";
+"try_again_button_label" = "Попробуйте снова";
+"search_placeholder_label" = "Поиск";
+"unexpected_error_message" = "Что-то пошло не так, попробуйте еще раз";
+"network_connection_error_title" = "Проблема с подключением";
+"unexpected_title" = "Непредвиденная ошибка";
+"network_connection_error_message" = "Возникла проблема при обработке запроса. Проверьте ваше соединение.";
+"endingIn" = "заканчивается на ";
+"to" = "на ";
+"no_country_available_error_message" = "Страна отсутствует";
+"no_transfer_method_available_error_message" = "Нет способа перевода для %1$@ и %2$@";
+"no_currency_available_error_message" = "Валюта для страны %1$@ недоступна";
+"emptyStateAddTransferMethod" = "Чтобы начать, добавьте способ перевода.";
+"mobileAddTransferMethodHeader" = "Добавить способ перевода";
+"mobileCountryCurrencyLabel" = "МЕСТОПОЛОЖЕНИЕ И ВАЛЮТА";
+"mobileTransferMethodLabel" = "СПОСОБ ПЕРЕВОДА";
+"mobileCountryRegion" = "Страна/регион";
+"mobileCurrencyLabel" = "Валюта";
+"mobileAreYouSure" = "Вы уверены?";
+"mobileRemoveEAconfirm" = "Удалить способ перевода";
+"fee_flat_formatter" = "%1$@%2$@ сбор";
+"fee_percent_only_min_formatter" = "%1$@%% (Мин.:%2$@%3$@) сбор";
+"fee_percent_only_max_formatter" = "%1$@%% (Макс.:%2$@%3$@) сбор";
+"fee_percent_formatter" = "%1$@%% (Мин.:%2$@%3$@, Макс.:%2$@%4$@) сбор";
+"fee_mix_no_min_and_max_formatter" = "%1$@%2$@ + %3$@%% сбор";
+"fee_mix_only_min_formatter" = "%1$@%2$@ + %3$@%% (Мин.:%1$@%4$@) сбор";
+"fee_mix_only_max_formatter" = "%1$@%2$@ + %3$@%% (Макс.:%1$@%4$@) сбор";
+"fee_mix_formatter" = "%1$@%2$@ + %3$@%% (Мин.:%1$@%4$@, Макс.:%1$@%5$@) сбор";
+"fee_percent_no_min_and_max_formatter" = "%1$@%% сбор";
+"transfer_method_not_supported_message" = "Этот способ перевода не поддерживается.";
+"error" = "Ошибка";
+"authentication_error_title" = "Ошибка аутентификации";
+"authentication_error_message" = "Попытка получения токена аутентификации привела к ошибке";
+
+    // Transfer methods
+"bank_account" = "Банковский счет";
+"bank_card" = "Дебетовая карта";
+"paper_check" = "Бумажный чек";
+"prepaid_card" = "Предоплаченная карта";
+"wire_account" = "Счет для банковского перевода";
+"paypal_account" = "Счет Paypal";
+"venmo_account" = "Счет Venmo";
+"cash_pickup_mg" = "MoneyGram";
+
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Manage Prepaid Card Message
+"manage_prepaid_card_message" = "Войдите в веб-браузере, чтобы управлять своей картой";
+    //Select Transfer Method View
+"select_a_country_message" = "Выбор страны";
+
+    // Add Transfer Method
+"createTransferMethodButtonLabel" = "Добавить способ перевода";
+"account_information" = "ИНФОРМАЦИЯ О СЧЕТЕ: %1$@(%2$@)";
+"account_holder" = "ИНФОРМАЦИЯ О ДЕРЖАТЕЛЕ СЧЕТА";
+"address"="АДРЕС";
+"mobileFeesAndProcessingTime" = "СБОР И ВРЕМЯ ОБРАБОТКИ";
+"intermediary_account" = "СЧЕТ ПОСРЕДНИКА";
+"contact_information" = "КОНТАКТНАЯ ИНФОРМАЦИЯ";
+"identification" = "ИДЕНТИФИКАЦИЯ";
+
+"date_format" = "ГГГГ-ММ-ДД";
+
+    // Processing View
+"processing_view_label" = "Обработка";
+"complete_view_label" = "Завершить";
+
+    // Receipt
+"transactions" = "Транзакции";
+"mobileNoTransactions" = "Нет действий для отображения.";
+"mobilePrepaidCardNoTransactions" = "Нет транзакций за последние 365 дней.";
+"add_transaction_title" = "Добавить транзакцию";
+"account_closure_fee" = "Комиссия за закрытие счета";
+"account_closure" = "Закрытие счета";
+"account_unload" = "Возврат средств";
+"adjustment" = "Коррекция баланса";
+"annual_fee_refund" = "Возврат ежегодной комиссии";
+"annual_fee" = "Ежегодная комиссия";
+"bank_account_transfer_fee" = "Комиссия за возврат на банковский счет";
+"bank_account_transfer_return_fee" = "Комиссия за возврат на банковский счет";
+"bank_account_transfer_return" = "Возврат на банковский счет";
+"card_activation_fee_waiver" = "Отмена комиссии за активацию карты";
+"card_activation_fee" = "Комиссия за активацию карты";
+"card_fee" = "Комиссия за карту";
+"customer_service_fee_refund" = "Возврат комиссии за обслуживание клиентов";
+"customer_service_fee" = "Комиссия за обслуживание клиентов";
+"deposit" = "Платеж";
+"donation_fee" = "Сбор за пожертвование";
+"donation_return" = "Возврат пожертвования";
+"donation" = "Пожертвование";
+"dormant_user_fee_refund" = "Возврат комиссии за бездействующий аккаунт пользователя";
+"dormant_user_fee" = "Комиссия за бездействующий аккаунт пользователя";
+"expedited_shipping_fee" = "Плата за ускоренную доставку";
+"foreign_exchange" = "Обмен валюты";
+"generic_fee_refund" = "Возврат общей комиссии";
+"manual_adjustment" = "Коррекция";
+"manual_transfer_to_prepaid_card" = "Перевод на карту";
+"merchant_payment_fee" = "Комиссия продавца за платеж";
+"merchant_payment_refund" = "Возврат платежа продавцу";
+"merchant_payment_return" = "Возврат платежа продавцом";
+"merchant_payment" = "Платеж продавца";
+"moneygram_transfer_return" = "Возврат MoneyGram";
+"monthly_fee_refund" = "Возврат ежемесячной комиссии";
+"monthly_fee" = "Ежемесячная комиссия";
+"paper_check_fee" = "Комиссия за бумажный чек";
+"paper_check_refund" = "Возврат бумажного чека";
+"payment_cancellation" = "Отмена платежа";
+"payment_expiration" = "Срок платежа истек";
+"payment_expiry_fee" = "Комиссия за истечение срока платежа";
+"payment_fee" = "Комиссия за платеж";
+"payment_return" = "Возврат платежа";
+"payment_reversal_fee" = "Комиссия за отзыв платежа";
+"payment_reversal" = "Отзыв платежа";
+"payment" = "Платеж";
+"prepaid_card_balance_inquiry_fee" = "Комиссия за запрос баланса";
+"prepaid_card_cash_advance" = "Денежный аванс";
+"prepaid_card_dispute_deposit" = "Спорный депозит по карте";
+"prepaid_card_disputed_charge_refund" = "Возврат спорных платежей";
+"prepaid_card_domestic_cash_withdrawal_fee" = "Снятие в банкомате";
+"prepaid_card_exchange_rate_difference" = "Разница обменных курсов";
+"prepaid_card_manual_unload" = "Перевод с карты";
+"prepaid_card_overseas_cash_withdrawal_fee" = "Снятие в банкомате";
+"prepaid_card_pin_change_fee" = "Комиссия за изменение PIN-кода";
+"prepaid_card_refund" = "Возврат денег";
+"prepaid_card_replacement_fee" = "Комиссия за замену карты";
+"prepaid_card_sale_reversal" = "Аннулированная транзакция";
+"prepaid_card_sale" = "Транзакция";
+"prepaid_card_unload" = "Перевод с карты";
+"processing_fee" = "Сервисный сбор";
+"standard_shipping_fee" = "Стандартная плата за доставку";
+"transfer_fee" = "Комиссия за перевод средств";
+"transfer_to_bank_account" = "Банковский счет";
+"transfer_to_debit_card" = "Дебетовая карта";
+"transfer_to_moneygram" = "MoneyGram";
+"transfer_to_paper_check" = "Бумажный чек";
+"transfer_to_paypal_account" = "PayPal";
+"transfer_to_prepaid_card" = "Перевод на карту";
+"transfer_to_program_account" = "Перевод на программу";
+"transfer_to_user" = "Перевод пользователю";
+"transfer_to_western_union" = "Western Union";
+"transfer_to_wire" = "Банковский перевод";
+"transfer_to_wubs_wire" = "Банковский перевод";
+"transfer_to_venmo_account" = "Venmo";
+"transfer_to_bank_card" = "Банковская карта";
+"virtual_incentive_cancellation" = "Отмена промоакции";
+"virtual_incentive_issuance" = "Выпущенная промоакция";
+"virtual_incentive_purchase" = "Промо-покупка";
+"virtual_incentive_refund" = "Возврат по промоакции";
+"western_union_transfer_return" = "Вывод средств через Western Union";
+"wire_transfer_fee" = "Комиссия за банковский перевод";
+"wire_transfer_return" = "Возврат банковского перевода";
+"wubs_wire_transfer_return" = "Возврат банковского перевода";
+"unknown_receipt_type" = "Неизвестный тип транзакции";
+"paypal_account_transfer_return" = "Возврат выведенных средств";
+"venmo_account_transfer_return" = "Возврат выведенных средств";
+"prepaid_card_account_deposit" = "Депозит на счет";
+"prepaid_card_annual_fee_discount" = "Скидка на годовую комиссию";
+"prepaid_card_bill_reprint_fee" = "Комиссия за повторную печать счета";
+"prepaid_card_atm_or_cash_advance_fee" = "Комиссия за банкомат/ аванс";
+"prepaid_card_cash_advance_chargeback" = "Возврат денежного аванса";
+"prepaid_card_cash_advance_chargeback_reversal" = "Аннулирование возврата аванса";
+"prepaid_card_cash_advance_repress" = "Удерживание денежного аванса";
+"prepaid_card_cash_advance_repress_reversal" = "Аннулирование удерживания аванса";
+"prepaid_card_chargeback" = "Возврат средств";
+"prepaid_card_chargeback_refund" = "Возмещение средств";
+"prepaid_card_chargeback_refund_reversal" = "Аннулирование возмещения средств";
+"prepaid_card_chargeback_reversal" = "Аннулирование возврата средств";
+"prepaid_card_commission_or_fee" = "Сбор/ комиссия";
+"prepaid_card_debit_transfer" = "Дебет/ переводы";
+"prepaid_card_document_request_fee" = "Плата за запрос документов";
+"prepaid_card_emergency_cash" = "Деньги на экстренные цели";
+"prepaid_card_emergency_card" = "Карта для экстренных целей";
+"prepaid_card_income" = "Доход";
+"prepaid_card_load_fee" = "Комиссия за первичный идентификатор счета (PAN)";
+"prepaid_card_overdue_payment_interest" = "Проценты за просрочку платежа";
+"prepaid_card_payment" = "Загрузка";
+"prepaid_card_pin_reprint_fee" = "Повторная печать PIN-кода";
+"prepaid_card_priority_pass_fee" = "Плата за приоритетный пропуск";
+"prepaid_card_priority_pass_renewal" = "Продление приоритетного пропуска";
+"prepaid_card_recurring_interest" = "Возобновляемый процент";
+"prepaid_card_refund_repress" = "Задержка возврата средств";
+"prepaid_card_refund_repress_reversal" = "Аннулирование задержки возврата средств";
+"prepaid_card_sale_repress" = "Задержка продажи";
+"prepaid_card_statement_fee" = "Комиссия за выписку по счету UTSKGJ";
+"prepaid_card_telephone_support_fee" = "Информация по телефону: баланс, транзакции и т. п.";
+"prepaid_card_transfer_fee" = "Комиссия за загрузку карты";
+"prepaid_card_transfer_return" = "Возврат суммы предоплаченной карты";
+"prepaid_card_bank_withdrawal_reversal" = "Аннулированный вывод из банка";
+"prepaid_card_bank_withdrawal_chargeback" = "Аннулирование платежа за снятие средств";
+"prepaid_card_refund_fee" = "Комиссия за возврат";
+"prepaid_card_monthly_maintenance_fee" = "Ежемесячная плата за обслуживание";
+"prepaid_card_transaction_fee" = "Комиссия за транзакцию";
+"prepaid_card_sms_fee" = "Плата за SMS";
+"prepaid_card_declined_authorization_fee" = "Плата за отклоненную авторизацию";
+"fispc" = "Покупка";
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Receipt Detail
+"mobileTransactionDetailsHeader" = "Детали транзакции";
+"mobileTransactionTypeLabel" = "ТРАНЗАКЦИЯ";
+"mobileTransactionDetailsLabel" = "ДЕТАЛИ";
+"mobileFeeInfoLabel" = "ИНФОРМАЦИЯ О СБОРЕ";
+"mobileConfirmNotesLabel" = "ПРИМЕЧАНИЕ";
+"mobileCharityName" = "Название благотворительной организации";
+"mobileCheckNumber" = "Номер чека";
+"mobileTransactionIdLabel" = "ID транзакции";
+"mobilePromoWebsite" = "Промо-сайт";
+"mobileTransactionDetailsTotal" = "Итого по транзакции";
+"amount" = "Сумма";
+"mobileFeeLabel" = "Сбор";
+"mobileJournalNumberLabel" = "Номер квитанции";
+"date" = "Дата";
+
+    // Transfer Funds
+"mobileTransferFundsHeader" = "Перевод";
+"mobileConfirmationHeader" = "Подтвердите данные";
+"mobileTransferFromLabel" = "ПЕРЕВОД ИЗ";
+"mobileTransferToLabel" = "ПЕРЕВОД НА";
+"mobileNoteLabel" = "Примечание";
+"mobileConfirmDetailsAmount" = "Сумма";
+"mobileConfirmDetailsFee" = "Сбор";
+"mobileConfirmDetailsTotal" = "Вы получите";
+"mobileTransferMax" = "Максимальная сумма перевода";
+"mobileFXsell" = "С";
+"mobileFXbuy" = "На";
+"mobileFXRateLabel" = "Курс обмена";
+"mobileAvailableBalance" = "Доступная сумма %1$@%2$@ %3$@";
+"continueButtonLabel" = "Продолжить";
+"mobileAddTransferMethod" = "Добавить способ перевода";
+"mobileTransferMethodsHeader" = "Способы перевода";
+"mobileTransferFromHeader" = "Перевод из";
+"mobileAvailableFunds" = "Свободные средства";
+"mobileFXlabel" = "ОБМЕН ВАЛЮТЫ";
+"mobileSummaryLabel" = "КРАТКАЯ ИНФОРМАЦИЯ";
+"transfer" = "Перевод";
+"transferAmountInvalid" = "Введите действительную сумму перевода";
+"noTransferMethodAdded" = "Требуется указать способ перевода";
+"transfer_error_no_transfer_method_module_initialized" = "Вы не можете добавить способ перевода.";
+"transfer_fx_rate_changed" = "В связи с изменением обменного курса вы теперь получите: %1$@";
+"mobileTransferSuccessMsg" = "Ваш перевод обрабатывается";
+"mobileTransferSuccessDetails" = "Средства отправлены на ваш %1$@.";
+"noTransferFromSourceAvailable" = "Перевод из источника отсутствует";

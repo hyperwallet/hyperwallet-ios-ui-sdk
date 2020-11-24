@@ -1,0 +1,266 @@
+//
+// Copyright 2018 - Present Hyperwallet
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+// and associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+// BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+"backBarButton" = "Geri";
+"mobileTransferMethodsHeader" = "Aktarım yöntemleri";
+"remove" = "Kaldır";
+"cancelButtonLabel" = "İptal et";
+"doneButtonLabel" = "İşlem gerçekleşti";
+"try_again_button_label" = "Yeniden Dene";
+"search_placeholder_label" = "Ara";
+"unexpected_error_message" = "Bir hata oluştu; lütfen tekrar deneyin";
+"network_connection_error_title" = "Bağlantı Sorunu";
+"unexpected_title" = "Beklenmeyen Hata";
+"network_connection_error_message" = "Talebi işleme alırken bir sorun oluştu. Lütfen bağlantınızı kontrol edin.";
+"endingIn" = "kart numarasının sonu  ";
+"to" = "kime  ";
+"no_country_available_error_message" = "Geçerli ülke yok";
+"no_transfer_method_available_error_message" = " %1$@ ve %2$@ için aktarım yöntemi mevcut değil";
+"no_currency_available_error_message" = " %1$@ ülkesi için para birimi mevcut değil";
+"emptyStateAddTransferMethod" = "Başlamak için bir aktarım yöntemi ekleyin.";
+"mobileAddTransferMethodHeader" = "Bir aktarım yöntemi ekleyin";
+"mobileCountryCurrencyLabel" = "KONUM VE PARA BİRİMİ";
+"mobileTransferMethodLabel" = "AKTARIM YÖNTEMİ";
+"mobileCountryRegion" = "Ülke/Bölge";
+"mobileCurrencyLabel" = "Para Birimi";
+"mobileAreYouSure" = "Emin misiniz?";
+"mobileRemoveEAconfirm" = "Aktarım yöntemini kaldır";
+"fee_flat_formatter" = "%1$@%2$@ ücret";
+"fee_percent_only_min_formatter" = "%1$@%% (En az:%2$@%3$@) ücret";
+"fee_percent_only_max_formatter" = "%1$@%% (En fazla:%2$@%3$@) ücret";
+"fee_percent_formatter" = "%1$@%% (En az:%2$@%3$@, En fazla:%2$@%4$@) ücret";
+"fee_mix_no_min_and_max_formatter" = "%1$@%2$@ + %3$@%% ücret";
+"fee_mix_only_min_formatter" = "%1$@%2$@ + %3$@%% (En az:%1$@%4$@) ücret";
+"fee_mix_only_max_formatter" = "%1$@%2$@ + %3$@%% (En fazla:%1$@%4$@) ücret";
+"fee_mix_formatter" = "%1$@%2$@ + %3$@%% (En az:%1$@%4$@, En fazla:%1$@%5$@) ücret";
+"fee_percent_no_min_and_max_formatter" = "%1$@%% ücret";
+"transfer_method_not_supported_message" = "Bu aktarım yöntemi desteklenmiyor.";
+"error" = "Hata";
+"authentication_error_title" = "Doğrulama Hatası";
+"authentication_error_message" = "Kimlik doğrulama girişimi bir hatayla sonuçlandı";
+
+    // Transfer methods
+"bank_account" = "Banka Hesabı";
+"bank_card" = "Banka Kartı";
+"paper_check" = "Kâğıt Çek";
+"prepaid_card" = "Ön Ödemeli Kart";
+"wire_account" = "Banka Havalesi Hesabı";
+"paypal_account" = "Paypal Hesabı";
+"venmo_account" = "Venmo Hesabı";
+"cash_pickup_mg" = "MoneyGram";
+
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Manage Prepaid Card Message
+"manage_prepaid_card_message" = "Kartınızı yönetmek için bir web tarayıcısı kullanarak oturum açın";
+    //Select Transfer Method View
+"select_a_country_message" = "Bir ülke seçin";
+
+    // Add Transfer Method
+"createTransferMethodButtonLabel" = "Aktarım Yöntemi Ekleyin";
+"account_information" = "HESAP BİLGİLERİ: %1$@(%2$@)";
+"account_holder" = "HESAP SAHİBİ BİLGİLERİ";
+"address"="ADRES";
+"mobileFeesAndProcessingTime" = "ÜCRETLER VE İŞLEM ZAMANI";
+"intermediary_account" = "ARA HESAP";
+"contact_information" = "İLETİŞİM BİLGİLERİ";
+"identification" = "KİMLİK";
+
+"date_format" = "YYYY-AA-GG";
+
+    // Processing View
+"processing_view_label" = "İşlem Gerçekleştiriliyor";
+"complete_view_label" = "Tamamlandı";
+
+    // Receipt
+"transactions" = "İşlemler";
+"mobileNoTransactions" = "Görüntülenecek etkinlik yok.";
+"mobilePrepaidCardNoTransactions" = "Son 365 günde yapılmış bir işlem yok";
+"add_transaction_title" = "İşlem Ekle";
+"account_closure_fee" = "Hesap Kapanış Ücreti";
+"account_closure" = "Hesap Kapanışı";
+"account_unload" = "Para İadesi";
+"adjustment" = "Bakiye Düzeltme";
+"annual_fee_refund" = "Yıllık Ücretin İadesi";
+"annual_fee" = "Yıllık Ücret";
+"bank_account_transfer_fee" = "Banka Hesabına İade Ücreti";
+"bank_account_transfer_return_fee" = "Banka Hesabına İade Ücreti";
+"bank_account_transfer_return" = "Banka Hesabına İade";
+"card_activation_fee_waiver" = "Kart Etkinleştirme Ücreti Muafiyeti";
+"card_activation_fee" = "Kart Etkinleştirme Ücreti";
+"card_fee" = "Kart Ücreti";
+"customer_service_fee_refund" = "Müşteri Hizmetleri Ücretinin İadesi";
+"customer_service_fee" = "Müşteri Hizmetleri Ücreti";
+"deposit" = "Ödeme";
+"donation_fee" = "Bağış Ücreti";
+"donation_return" = "Bağış İadesi";
+"donation" = "Bağış";
+"dormant_user_fee_refund" = "Etkin Olmayan Kullanıcı Hesap Ücreti İadesi";
+"dormant_user_fee" = "Etkin Olmayan Kullanıcı Hesap Ücreti";
+"expedited_shipping_fee" = "Hızlandırılmış Gönderim Ücreti";
+"foreign_exchange" = "Döviz";
+"generic_fee_refund" = "Genel Ücret İadesi";
+"manual_adjustment" = "Düzeltme";
+"manual_transfer_to_prepaid_card" = "Karta Aktar";
+"merchant_payment_fee" = "Üye İş Yeri Ödemesi Ücreti";
+"merchant_payment_refund" = "Üye İş Yeri Ödeme İadesi";
+"merchant_payment_return" = "Üye İş Yeri Ödeme İadesi";
+"merchant_payment" = "Üye İş Yeri Ödemesi";
+"moneygram_transfer_return" = "MoneyGram İadesi";
+"monthly_fee_refund" = "Aylık Ücretin İadesi";
+"monthly_fee" = "Aylık Ücret";
+"paper_check_fee" = "Kâğıt Çek Ücreti";
+"paper_check_refund" = "Kâğıt Çek İadesi";
+"payment_cancellation" = "Ödeme İptali";
+"payment_expiration" = "Ödeme Süresi Doldu";
+"payment_expiry_fee" = "Ödeme Süresinin Dolması Nedeniyle Alınan Ücret";
+"payment_fee" = "Ödeme Ücreti";
+"payment_return" = "Ödeme İadesi";
+"payment_reversal_fee" = "Ödeme İptal Ücreti";
+"payment_reversal" = "Ödemenin İptali";
+"payment" = "Ödeme";
+"prepaid_card_balance_inquiry_fee" = "Bakiye Sorgulama Ücreti";
+"prepaid_card_cash_advance" = "Nakit Avans";
+"prepaid_card_dispute_deposit" = "İtiraz Edilen Karta Para Yatırma İşlemi ";
+"prepaid_card_disputed_charge_refund" = "İtiraz Edilen Ücret İadesi";
+"prepaid_card_domestic_cash_withdrawal_fee" = "ATM’den Para Çekme";
+"prepaid_card_exchange_rate_difference" = "Döviz Kuru Farkı";
+"prepaid_card_manual_unload" = "Karttan Aktar";
+"prepaid_card_overseas_cash_withdrawal_fee" = "ATM’den Para Çekme";
+"prepaid_card_pin_change_fee" = "PIN Değişikliği Ücreti";
+"prepaid_card_refund" = "İade";
+"prepaid_card_replacement_fee" = "Kart Değişim Ücreti";
+"prepaid_card_sale_reversal" = "Ters İşlem";
+"prepaid_card_sale" = "İşlem";
+"prepaid_card_unload" = "Karttan Aktar";
+"processing_fee" = "İşlem Ücreti";
+"standard_shipping_fee" = "Standart Gönderim Ücreti";
+"transfer_fee" = "Transfer Ücreti";
+"transfer_to_bank_account" = "Banka Hesabı";
+"transfer_to_debit_card" = "Banka Kartı";
+"transfer_to_moneygram" = "MoneyGram";
+"transfer_to_paper_check" = "Kâğıt Çek";
+"transfer_to_paypal_account" = "PayPal";
+"transfer_to_prepaid_card" = "Karta Aktar";
+"transfer_to_program_account" = "Programa Aktar";
+"transfer_to_user" = "Kullanıcıya Aktar";
+"transfer_to_western_union" = "Western Union";
+"transfer_to_wire" = "Banka Havalesi";
+"transfer_to_wubs_wire" = "Banka Havalesi";
+"transfer_to_venmo_account" = "Venmo";
+"transfer_to_bank_card" = "Banka Kartı";
+"virtual_incentive_cancellation" = "Promo İptali";
+"virtual_incentive_issuance" = "Çıkan Promo";
+"virtual_incentive_purchase" = "Promo Satın Alma";
+"virtual_incentive_refund" = "Promo İadesi";
+"western_union_transfer_return" = "Western Union İşlem İptali";
+"wire_transfer_fee" = "Banka Havalesi Ücreti";
+"wire_transfer_return" = "Banka Havalesi İadesi";
+"wubs_wire_transfer_return" = "Banka Havalesi İadesi";
+"unknown_receipt_type" = "Bilinmeyen Aktarım Türü ";
+"paypal_account_transfer_return" = "Çekim İadesi";
+"venmo_account_transfer_return" = "Çekim İadesi";
+"prepaid_card_account_deposit" = "Hesaba Para Yatırma";
+"prepaid_card_annual_fee_discount" = "Yıllık ücret indirimi";
+"prepaid_card_bill_reprint_fee" = "Makbuz Bastırma Ücreti";
+"prepaid_card_atm_or_cash_advance_fee" = "ATM/Nakit Avans Ücreti";
+"prepaid_card_cash_advance_chargeback" = "Nakit Avans Ters İbrazı";
+"prepaid_card_cash_advance_chargeback_reversal" = "Nakit Avans Ters İbraz İptali";
+"prepaid_card_cash_advance_repress" = "Nakit Avans Engellemesi";
+"prepaid_card_cash_advance_repress_reversal" = "Avans Engellemesinin Kaldırılması";
+"prepaid_card_chargeback" = "Ters İbraz";
+"prepaid_card_chargeback_refund" = "Ters İbraz İadesi";
+"prepaid_card_chargeback_refund_reversal" = "Ters İbraz İade İptali";
+"prepaid_card_chargeback_reversal" = "Ters İbraz İptali";
+"prepaid_card_commission_or_fee" = "Ücret/Komisyon";
+"prepaid_card_debit_transfer" = "Borç/Aktarımlar";
+"prepaid_card_document_request_fee" = "Belge Talep Ücreti";
+"prepaid_card_emergency_cash" = "Acil Durum Parası";
+"prepaid_card_emergency_card" = "Acil Durum Kartı";
+"prepaid_card_income" = "Gelir";
+"prepaid_card_load_fee" = "PAN Ücreti";
+"prepaid_card_overdue_payment_interest" = "Vadesi geçmiş ödeme faizi";
+"prepaid_card_payment" = "Yükle";
+"prepaid_card_pin_reprint_fee" = "PIN’in yeniden basımı";
+"prepaid_card_priority_pass_fee" = "Öncelikli geçiş ücreti";
+"prepaid_card_priority_pass_renewal" = "Öncelikli geçiş yenilemesi";
+"prepaid_card_recurring_interest" = "Dönen Faiz";
+"prepaid_card_refund_repress" = "Ücret İadesinin Engellenmesi";
+"prepaid_card_refund_repress_reversal" = "Ücret İadesinin Engelinin Kaldırılması";
+"prepaid_card_sale_repress" = "Satış Engeli";
+"prepaid_card_statement_fee" = "UTSKGJ Hesap Özeti Ücreti";
+"prepaid_card_telephone_support_fee" = "Telefon yoluya bilgi: bakiye, aktarım, vb.";
+"prepaid_card_transfer_fee" = "Kart Yükleme Ücreti";
+"prepaid_card_transfer_return" = "Ön Ödemeli Kart Yükleme İadesi";
+"prepaid_card_bank_withdrawal_reversal" = "İptal edilen banka çekim işlemi";
+"prepaid_card_bank_withdrawal_chargeback" = "İptal edilen banka çekim ters ibrazı";
+"prepaid_card_refund_fee" = "İade Ücreti";
+"prepaid_card_monthly_maintenance_fee" = "Aylık İdame Ücreti";
+"prepaid_card_transaction_fee" = "İşlem Ücreti";
+"prepaid_card_sms_fee" = "SMS Ücreti";
+"prepaid_card_declined_authorization_fee" = "Yetkilendirme Reddi Ücreti";
+"fispc" = "Satın Alma";
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Receipt Detail
+"mobileTransactionDetailsHeader" = "İşlem detayları";
+"mobileTransactionTypeLabel" = "İŞLEM";
+"mobileTransactionDetailsLabel" = "DETAYLAR";
+"mobileFeeInfoLabel" = "ÜCRET BİLGİLERİ";
+"mobileConfirmNotesLabel" = "NOT";
+"mobileCharityName" = "Bağış Adı";
+"mobileCheckNumber" = "Çek Numarası";
+"mobileTransactionIdLabel" = "İşlem Numarası";
+"mobilePromoWebsite" = "Promo Web Sitesi";
+"mobileTransactionDetailsTotal" = "İşlem toplamı";
+"amount" = "Tutar";
+"mobileFeeLabel" = "Ücret";
+"mobileJournalNumberLabel" = "Makbuz Numarası";
+"date" = "Tarih";
+
+    // Transfer Funds
+"mobileTransferFundsHeader" = "Aktarım";
+"mobileConfirmationHeader" = "Detayları doğrulayın";
+"mobileTransferFromLabel" = "AKTARIMI YAPAN";
+"mobileTransferToLabel" = "ŞURAYA AKTAR";
+"mobileNoteLabel" = "Not";
+"mobileConfirmDetailsAmount" = "Tutar";
+"mobileConfirmDetailsFee" = "Ücret";
+"mobileConfirmDetailsTotal" = "Alacağınız tutar";
+"mobileTransferMax" = "En yüksek miktarı aktar";
+"mobileFXsell" = "Kimden";
+"mobileFXbuy" = "Kime";
+"mobileFXRateLabel" = "Döviz kuru";
+"mobileAvailableBalance" = "Mevcut miktar %1$@%2$@ %3$@";
+"continueButtonLabel" = "Devam et";
+"mobileAddTransferMethod" = "Aktarım yöntemi ekle";
+"mobileTransferMethodsHeader" = "Aktarım yöntemleri";
+"mobileTransferFromHeader" = "Aktarımı Yapan";
+"mobileAvailableFunds" = "Mevcut Para";
+"mobileFXlabel" = "DÖVİZ";
+"mobileSummaryLabel" = "ÖZET";
+"transfer" = "Aktarım";
+"transferAmountInvalid" = "Geçerli bir aktarım tutarı gir";
+"noTransferMethodAdded" = "Aktarım yöntemi gerekli";
+"transfer_error_no_transfer_method_module_initialized" = "Bir aktarım yöntemi ekleyemediniz.";
+"transfer_fx_rate_changed" = "Döviz kurundaki değişikliklerden dolayı alacağınız tutar: %1$@";
+"mobileTransferSuccessMsg" = "Transferiniz işleme alındı";
+"mobileTransferSuccessDetails" = "Para %1$@ hesabınıza gönderiliyor.";
+"noTransferFromSourceAvailable" = "Kaynaktan aktarım yok";
