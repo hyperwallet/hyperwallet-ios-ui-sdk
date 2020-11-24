@@ -84,4 +84,22 @@ struct TransferAmountCurrencyFormatter {
             return amount
         }
     }
+
+    /// Format currency amount by adding symbol and currency code
+    /// - Parameter currencyCode: currency code
+    /// - Returns: a formatted amount string
+    static func addCurrencySymbolAndCode(_ amount: String, with currencyCode: String) -> String {
+        if let currencySymbol = TransferAmountCurrencyFormatter.getTransferAmountCurrency(for: currencyCode)?.symbol {
+            return String(format: "%@%@ %@", currencySymbol, amount, currencyCode)
+        } else {
+            return amount
+        }
+    }
+
+    /// Format amount for currency code using users locale while adding symbol and currency code
+    /// - Parameter currencyCode: currency code
+    /// - Returns: a formatted amount string
+    static func formatCurrencyWithSymbolAndCode(_ amount: String, with currencyCode: String) -> String {
+        return addCurrencySymbolAndCode(formatStringAmount(amount, with: currencyCode), with: currencyCode)
+    }
 }
