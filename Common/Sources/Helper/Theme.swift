@@ -67,7 +67,7 @@ public class Theme: NSObject {
         /// The `UINavigationBar` large title font
         public static var largeTitleFont = UIFont.boldSystemFont(ofSize: 20.0)
         /// The `UINavigationBar` title font
-        public static var titleFont = UIFont.boldSystemFont(ofSize: 17.0)
+        public static var titleFont = UIFont.preferredFont(forTextStyle: .body)
     }
 
     /// Representation of all customizable visual style property for `UIButton`.
