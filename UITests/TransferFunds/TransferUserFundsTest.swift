@@ -488,65 +488,6 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertEqual(transferFunds.invalidAmountError.label, "transferAmountInvalid".localized())
     }
 
-    /*
-     When user's account has available fund AND selected a Transfer method
-     when user paste content only includes numbers to the Transfer Amount field
-     THEN the value will be shown on the Transfer Amount field
-     */
-    func testTransferFunds_createTransferCopyAndPasteTransferAmountWithChars() {
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
-                             filename: "ListOneBankAccountTransferUSD",
-                             method: HTTPMethod.get)
-
-        mockServer.setupStub(url: "/rest/v3/transfers",
-                             filename: "AvailableFundUSD",
-                             method: HTTPMethod.post)
-
-        waitForExistence(transferFundMenu)
-        XCTAssertTrue(transferFundMenu.exists)
-        transferFundMenu.tap()
-        waitForNonExistence(spinner)
-
-        // Transfer From
-        transferFunds.verifyTransferFrom(isAvailableFunds: true)
-
-        // Transfer To
-        XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
-        XCTAssertTrue(transferFunds.transferAmount.exists)
-
-        let pasteAmountWithCharacters = "1000CAN"
-        transferFunds.pasteAmountToTransferAmount(amount: pasteAmountWithCharacters)
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
-    }
-
-    func testTransferFunds_createTransferCopyAndPasteTransferAmountWithDigits() {
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
-                             filename: "ListOneBankAccountTransferUSD",
-                             method: HTTPMethod.get)
-
-        mockServer.setupStub(url: "/rest/v3/transfers",
-                             filename: "AvailableFundUSD",
-                             method: HTTPMethod.post)
-
-        XCTAssertTrue(transferFundMenu.exists)
-        transferFundMenu.tap()
-        waitForNonExistence(spinner)
-
-        // Transfer From
-        transferFunds.verifyTransferFrom(isAvailableFunds: true)
-
-        // Transfer To
-        XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
-        XCTAssertTrue(transferFunds.transferAmount.exists)
-
-        transferFunds.transferAmount.tap()
-        let pastAmountWithNumberNoDigit = "10000.00"
-        transferFunds.pasteAmountToTransferAmount(amount: pastAmountWithNumberNoDigit)
-        waitForNonExistence(spinner)
-
-        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0")
-    }
-
     /* When user enters amount below the transaction limit in transfer amount Field
      And when user tab Next
      Then shows error dialog

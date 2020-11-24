@@ -55,6 +55,17 @@
                BlueprintName = "HyperwalletUISDKUITests"
                ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "AddTransferMethodBankAccountBusinessTests">
+               </Test>
+               <Test
+                  Identifier = "TransferUserFundsTest/testTransferFunds_createTransferCopyAndPasteTransferAmountWithChars()">
+               </Test>
+               <Test
+                  Identifier = "TransferUserFundsTest/testTransferFunds_createTransferCopyAndPasteTransferAmountWithDigits()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>
@@ -62,6 +73,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = "es"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
