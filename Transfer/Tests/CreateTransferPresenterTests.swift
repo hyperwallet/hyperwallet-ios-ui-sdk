@@ -621,6 +621,15 @@ class CreateTransferTests: XCTestCase {
                        isAvailableBalancePresent: true)
     }
 
+    func testResetErrorMessagesForAllSections() {
+        initializePresenter()
+        mockView.resetStates()
+        presenter.sectionData.forEach({ $0.errorMessage = "Error Message" })
+        presenter.sectionData.forEach({ XCTAssertNotNil($0.errorMessage, "Error Message should not be nil") })
+        presenter.resetErrorMessagesForAllSections()
+        presenter.sectionData.forEach({ XCTAssertNil($0.errorMessage, "Error Message should be nil") })
+    }
+
     private func assertResponse(isShowErrorPerformed: Bool,
                                 transferSourceCellConfigurationsCount: Int,
                                 transferSourceType: TransferSourceType,
