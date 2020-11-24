@@ -31,10 +31,14 @@ public extension UIViewController {
         if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.prefersLargeTitles = true
             currentNavigationItem.largeTitleDisplayMode = mode
-            self.navigationController?.navigationBar.largeTitleTextAttributes = [
-                NSAttributedString.Key.foregroundColor: UIColor.white,
+            if #available(iOS 13.0, *) {
+                ThemeManager.applyToUINavigationBar()
+            } else {
+              self.navigationController?.navigationBar.largeTitleTextAttributes = [
+                NSAttributedString.Key.foregroundColor: Theme.NavigationBar.largeTitleColor,
                 NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18.0)
-            ]
+              ]
+            }
         }
     }
 

@@ -59,7 +59,7 @@ public class ThemeManager: NSObject {
             navBarAppearance.largeTitleTextAttributes =
                 [
                     NSAttributedString.Key.foregroundColor: Theme.NavigationBar.largeTitleColor,
-                    NSAttributedString.Key.font: Theme.NavigationBar.largeTitleFont
+                    NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20.0)
                 ]
             navBarAppearance.backgroundColor = Theme.themeColor
             proxy.standardAppearance = navBarAppearance
