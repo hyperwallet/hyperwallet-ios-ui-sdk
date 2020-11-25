@@ -22,7 +22,7 @@ Note that this SDK is geared towards those who need both backend data and UI fea
 
 ## Dependencies
 
-- [HyperwalletSDK 1.0.0-beta08](https://github.com/hyperwallet/hyperwallet-ios-sdk)
+- [HyperwalletSDK 1.0.0-beta10](https://github.com/hyperwallet/hyperwallet-ios-sdk)
 
 ## Installation
 Use [Carthage](https://github.com/Carthage/Carthage) or [CocoaPods](https://cocoapods.org/) to integrate to HyperwalletSDK.
@@ -34,7 +34,7 @@ Adding one or more of these frameworks allows users to explore the particular fu
 ### Carthage
 Specify it in your Cartfile:
 ```ogdl
-github "hyperwallet/hyperwallet-ios-ui-sdk" "1.0.0-beta08"
+github "hyperwallet/hyperwallet-ios-ui-sdk" "1.0.0-beta09"
 ```
 Add desired modules using the `Linked Frameworks and Libraries` option to make them available in the app.
 Use `import <module-name>` to add the dependency within a file
@@ -42,13 +42,13 @@ Use `import <module-name>` to add the dependency within a file
 ### CocoaPods
 - Install a specific framework (install one or more frameworks based on your requirement)
 ```ruby
-pod "HyperwalletUISDK/TransferMethod", "1.0.0-beta08"
-pod "HyperwalletUISDK/Transfer", "1.0.0-beta08"
-pod "HyperwalletUISDK/Receipt", "1.0.0-beta08"
+pod "HyperwalletUISDK/TransferMethod", "1.0.0-beta09"
+pod "HyperwalletUISDK/Transfer", "1.0.0-beta09"
+pod "HyperwalletUISDK/Receipt", "1.0.0-beta09"
 ```
 - To install all available modules (TransferMethod, Transfer, Receipt)
 ```ruby
-pod 'HyperwalletUISDK', '~> 1.0.0-beta08'
+pod 'HyperwalletUISDK', '~> 1.0.0-beta09'
 ```
 Use `import HyperwalletUISDK` to add the dependency within a file.
 
