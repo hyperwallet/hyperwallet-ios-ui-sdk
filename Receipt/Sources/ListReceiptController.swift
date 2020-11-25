@@ -177,6 +177,12 @@ extension ListReceiptController: ListReceiptView {
                                        for: .valueChanged)
             segmentedControl.selectedSegmentIndex = selectedSegmentedControl
             tableView.tableHeaderView = segmentedControl
+            segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+            segmentedControl.leadingAnchor.constraint(equalTo: tableView.leadingAnchor, constant: 24)
+                .isActive = true
+            segmentedControl.trailingAnchor.constraint(equalTo: tableView.trailingAnchor, constant: -24)
+                .isActive = true
+            segmentedControl.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
         }
     }
 
