@@ -1,12 +1,16 @@
 Changelog
 =========
 
-[1.0.0-beta09](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta09)
+[1.0.0-beta10](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta10)
 -------------------
 - Added Prepaid Card support
 - Added multiple languages support
 - Added currency formatting
 - UI Enhancements
+
+[1.0.0-beta09](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta09)
+-------------------
+- Increased API Response wait time
 
 [1.0.0-beta08](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta08)
 -------------------
@@ -32,7 +36,7 @@ Changelog
 -------------------
 - Added support for Create Transfer Funds
 - Added support for Objective-C
-    
+
 [1.0.0-beta03](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta03)
 -------------------
 - Enhancements to Add Transfer Method
