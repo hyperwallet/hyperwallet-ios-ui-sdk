@@ -3,7 +3,9 @@ Changelog
 
 [1.0.0-beta09](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta09)
 -------------------
-- Added Prepaid Card Support
+- Added Prepaid Card support
+- Added multiple languages support
+- Added currency formatting
 - UI Enhancements
 
 [1.0.0-beta08](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta08)
