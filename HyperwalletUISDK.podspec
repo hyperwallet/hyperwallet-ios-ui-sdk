@@ -15,7 +15,7 @@ Pod::Spec.new do |spec|
     spec.default_subspec = 'TransferMethod', 'Receipt', 'Transfer'
 
     spec.subspec "Common" do |common|
-        common.resources = ['Common/**/*.xcassets', 'Common/**/*.ttf', 'Common/**/*.xib', 'Common/**/*.strings']
+        common.resources = ['Common/Sources/Resources/*', 'Common/**/*.xib', 'Common/**/*.strings']
         common.source_files  = "Common/Sources/**/*.{swift,h}"
         common.dependency 'Insights', '1.0.0-beta04'
     end
@@ -46,14 +46,15 @@ Pod::Spec.new do |spec|
     spec.subspec "Receipt" do |receipt|
         receipt.source_files = "Receipt/Sources/**/*.{swift,h}"
         receipt.dependency "HyperwalletUISDK/Common"
-        receipt.dependency 'HyperwalletUISDK/ReceiptRepository'
+        receipt.dependency "HyperwalletUISDK/ReceiptRepository"
+        receipt.dependency "HyperwalletUISDK/TransferMethodRepository"
     end
 
     spec.subspec "Transfer" do |transfer|
         transfer.source_files = "Transfer/Sources/**/*.{swift,h}"
-        transfer.dependency 'HyperwalletUISDK/Common'
-        transfer.dependency 'HyperwalletUISDK/UserRepository'
-        transfer.dependency 'HyperwalletUISDK/TransferRepository'
-        transfer.dependency 'HyperwalletUISDK/TransferMethodRepository'
+        transfer.dependency "HyperwalletUISDK/Common"
+        transfer.dependency "HyperwalletUISDK/UserRepository"
+        transfer.dependency "HyperwalletUISDK/TransferRepository"
+        transfer.dependency "HyperwalletUISDK/TransferMethodRepository"
     end
 end
