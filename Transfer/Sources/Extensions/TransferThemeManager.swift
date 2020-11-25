@@ -24,11 +24,14 @@ import Common
 public extension ThemeManager {
     /// Applies default visual styles to the Hyperwallet user interface components.
     static func applyTransferTheme() {
+        applyToTransferSourceCell()
         applyToTransferDestinationCell()
         applyToTransferButtonCell()
         applyToTransferNotesCell()
         applyToTransferAllFundsCell()
         applyToTransferAmountCell()
+        applyToListTransferSourceCell()
+        applyToListTransferDestinationCell()
         applyToScheduleTransferSummaryCell()
         applyToScheduleForeignExchangeCell()
     }
@@ -41,13 +44,28 @@ public extension ThemeManager {
         proxy.subTitleLabelColor = Theme.Label.subtitleColor
     }
 
+    private static func applyToTransferSourceCell() {
+        let proxy = TransferSourceCell.appearance()
+        proxy.titleLabelFont = Theme.Label.titleFont
+        proxy.titleLabelColor = Theme.Label.color
+        proxy.subTitleLabelFont = Theme.Label.subtitleFont
+        proxy.subTitleLabelColor = Theme.Label.subtitleColor
+    }
+
+    private static func applyToListTransferSourceCell() {
+        let proxy = ListTransferSourceCell.appearance()
+        proxy.titleLabelFont = Theme.Label.titleFont
+        proxy.titleLabelColor = Theme.Label.color
+        proxy.subTitleLabelFont = Theme.Label.subtitleFont
+        proxy.subTitleLabelColor = Theme.Label.subtitleColor
+    }
+
     private static func applyToListTransferDestinationCell() {
         let proxy = ListTransferDestinationCell.appearance()
         proxy.titleLabelFont = Theme.Label.titleFont
         proxy.titleLabelColor = Theme.Label.color
         proxy.subTitleLabelFont = Theme.Label.subtitleFont
         proxy.subTitleLabelColor = Theme.Label.subtitleColor
-        proxy.tintColor = Theme.Cell.tintColor
     }
 
     private static func applyToTransferButtonCell() {
@@ -75,7 +93,7 @@ public extension ThemeManager {
         let proxy = TransferAmountCell.appearance()
         proxy.currencySymbolLabelFont = Theme.Label.titleFont
         proxy.currencySymbolLabelColor = Theme.Label.color
-        proxy.amountTextFieldFont = Theme.Text.font.withSize(60)
+        proxy.amountTextFieldFont = Theme.Text.createTransferAmountFont
         proxy.currencyLabelFont = Theme.Label.titleFont
         proxy.currencyLabelColor = Theme.Label.color
     }

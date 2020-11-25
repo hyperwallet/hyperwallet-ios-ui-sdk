@@ -36,11 +36,9 @@ final class HyperwalletMockWebServer {
                 HttpResponse.ok(.json(json as AnyObject))
             }
 
-            switch method {
-            case HTTPMethod.get :
+            if method == .get {
                 server.GET[url] = response
-
-            case HTTPMethod.post:
+            } else {
                 server.POST[url] = response
             }
         } catch {
@@ -64,11 +62,9 @@ final class HyperwalletMockWebServer {
                 })
             }
 
-            switch method {
-            case HTTPMethod.get :
+            if method == .get {
                 server.GET[url] = response
-
-            case HTTPMethod.post:
+            } else {
                 server.POST[url] = response
             }
         } catch {
@@ -85,6 +81,19 @@ final class HyperwalletMockWebServer {
         }
 
         server.GET[url] = response
+    }
+    func setupStubEmpty(url: String, statusCode: Int, method: HTTPMethod) {
+        let headers = ["Content-Type": "application/json"]
+
+        let response: ((HttpRequest) -> HttpResponse) = { _ in
+            HttpResponse.raw(statusCode, "Empty", headers, nil)
+        }
+
+        if method == .get {
+            server.GET[url] = response
+        } else {
+            server.POST[url] = response
+        }
     }
 
     func dataToJSON(data: Data) -> Any? {

@@ -31,12 +31,17 @@ final class ListReceiptController: UITableViewController {
     private let sectionTitleDateFormat = "MMMM yyyy"
     private var loadMoreReceipts = false
     private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "mobileNoTransactions".localized())
+    private lazy var emptyPPCListLabel: UILabel =
+        view.setUpEmptyListLabel(text: "mobilePrepaidCardNoTransactions".localized())
+    private var uiSegmentedControl: UISegmentedControl?
+    private var selectedSegmentedControl = 0
 
     override public func viewDidLoad() {
         super.viewDidLoad()
         initializePresenter()
         setupListReceiptTableView()
         presenter.listReceipts()
+        self.navigationController?.presentationController?.delegate = self
     }
 
     override public func viewWillAppear(_ animated: Bool) {
@@ -48,8 +53,10 @@ final class ListReceiptController: UITableViewController {
 
     private func initializePresenter() {
         presenter = ListReceiptPresenter(view: self,
-                                         prepaidCardToken: initializationData?[InitializationDataField.prepaidCardToken]
-                                            as? String)
+                                         prepaidCardToken:
+            initializationData?[InitializationDataField.prepaidCardToken] as? String,
+                                         showAllAvailableSources:
+            initializationData?[InitializationDataField.showAllAvailableSources] as? Bool)
     }
 
     override func willMove(toParent parent: UIViewController?) {
@@ -57,6 +64,17 @@ final class ListReceiptController: UITableViewController {
         if parent == nil {
             removeCoordinator()
         }
+    }
+
+    @objc
+    func segmentControlHandler(sender: UISegmentedControl) {
+        let index = sender.selectedSegmentIndex
+        presenter.segmentedControlItems.forEach { segmentedControlItem in
+            segmentedControlItem.isSelected = false
+        }
+        presenter.segmentedControlItems[index].isSelected = true
+        selectedSegmentedControl = index
+        presenter.loadReceiptsForSelectedToken()
     }
 
     // MARK: list receipt table view data source
@@ -107,7 +125,7 @@ final class ListReceiptController: UITableViewController {
 
     override public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         if loadMoreReceipts {
-            presenter.listReceipts()
+            presenter.listUserReceipts()
             loadMoreReceipts = false
         }
     }
@@ -131,6 +149,11 @@ final class ListReceiptController: UITableViewController {
 extension ListReceiptController: ListReceiptView {
     /// Loads the receipts
     func reloadData() {
+        if presenter.getSelectedSegmentControlItem()?.receiptSourceType == .prepaidCard {
+            emptyListLabel = view.setUpEmptyListLabel(text: "mobilePrepaidCardNoTransactions".localized())
+        } else {
+            emptyListLabel = view.setUpEmptyListLabel(text: "mobileNoTransactions".localized())
+        }
         if presenter.sectionData.isNotEmpty {
             toggleEmptyListView(hideLabel: true)
         } else {
@@ -143,6 +166,18 @@ extension ListReceiptController: ListReceiptView {
     func showLoading() {
         spinnerView = HyperwalletUtilViews.showSpinner(view: view)
         spinnerView?.backgroundColor = UIColor.clear
+    }
+
+    func reloadTableViewHeader() {
+        if presenter.showAllAvailableSources && presenter.segmentedControlItems.count > 1 {
+            let segmentedControl = UISegmentedControl(items:
+                presenter.segmentedControlItems.map { $0.segmentedControlHeader })
+            segmentedControl.addTarget(self,
+                                       action: #selector(segmentControlHandler(sender:)),
+                                       for: .valueChanged)
+            segmentedControl.selectedSegmentIndex = selectedSegmentedControl
+            tableView.tableHeaderView = segmentedControl
+        }
     }
 
     func hideLoading() {
@@ -163,6 +198,12 @@ extension ListReceiptController: ListReceiptView {
     }
 
     private func toggleEmptyListView(hideLabel: Bool) {
-        emptyListLabel.isHidden = hideLabel
+        if presenter.getSelectedSegmentControlItem()?.receiptSourceType == .prepaidCard {
+            emptyPPCListLabel.isHidden = hideLabel
+            emptyListLabel.isHidden = true
+        } else {
+            emptyListLabel.isHidden = hideLabel
+            emptyPPCListLabel.isHidden = true
+        }
     }
 }

@@ -31,16 +31,28 @@ extension HyperwalletTransferMethod: GenericCellConfiguration {
     /// Additional information about the transfer method
     var additionalInfo: String? {
         switch type {
-        case "BANK_CARD", "PREPAID_CARD":
+        case TransferMethodType.bankCard.rawValue:
             return String(format: "%@%@",
                           "endingIn".localized(),
                           getField(TransferMethodField.cardNumber.rawValue)?
                             .suffix(startAt: 4) ?? "" )
 
-        case "PAYPAL_ACCOUNT":
+        case TransferMethodType.payPalAccount.rawValue:
             return String(format: "%@%@",
                           "to".localized(),
                           getField(TransferMethodField.email.rawValue) ?? "")
+
+        case TransferMethodType.prepaidCard.rawValue:
+            let cardBrand = getField(TransferMethodField.cardBrand.rawValue)?.lowercased().localized() ?? ""
+            let cardNumber = getField(TransferMethodField.cardNumber.rawValue)?.suffix(startAt: 4) ?? ""
+            let bullets = Array(repeating: "\u{2022}", count: 4).joined()
+            return String(format: "%@ %@ %@", cardBrand, bullets, cardNumber)
+
+        case TransferMethodType.venmoAccount.rawValue:
+            return String(format: "%@%@",
+                          "endingIn".localized(),
+                          getField(TransferMethodField.accountId.rawValue)?
+                            .suffix(startAt: 4) ?? "")
 
         default:
             return String(format: "%@%@",
@@ -49,4 +61,7 @@ extension HyperwalletTransferMethod: GenericCellConfiguration {
                             .suffix(startAt: 4) ?? "")
         }
     }
+    /// Checking for transfer method is prepaid card or not
+    /// - Returns: True if transfer method is prepaid card
+    public func isPrepaidCard() -> Bool { return type == TransferMethodType.prepaidCard.rawValue }
 }

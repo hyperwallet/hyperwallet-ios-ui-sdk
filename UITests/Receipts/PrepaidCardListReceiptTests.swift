@@ -28,29 +28,27 @@ class PrepaidCardListReceiptTests: BaseTests {
 
         XCTAssertEqual(app.tables.cells.count, expectedNumberOfCells)
 
-        verifyCellLabels(with: "Funds Deposit",
-                         createdOn: "2019-06-20T21:23:51",
-                         amount: "$10.00",
-                         currency: "USD",
-                         by: 0)
-        verifyCellLabels(with: "Funds Deposit",
-                         createdOn: "2019-06-21T21:24:02",
-                         amount: "$20.00",
+        verifyCellLabels(with: "Balance Adjustment",
+                         createdOn: "2019-06-24T21:25:23",
+                         amount: "-$500.99",
                          currency: "USD",
                          by: 1)
+
         verifyCellLabels(with: "Balance Adjustment",
                          createdOn: "2019-06-23T21:25:09",
                          amount: "-$7.00",
                          currency: "USD",
                          by: 2)
-        verifyCellLabels(with: "Balance Adjustment",
-                         createdOn: "2019-06-24T21:25:23",
-                         amount: "-$500.99",
+
+        verifyCellLabels(with: "Payment",
+                         createdOn: "2019-06-21T21:24:02",
+                         amount: "$20.00",
                          currency: "USD",
                          by: 3)
-        verifyCellLabels(with: "Balance Adjustment",
-                         createdOn: "2019-06-25T22:48:41",
-                         amount: "-$10.00",
+
+        verifyCellLabels(with: "Payment",
+                         createdOn: "2019-06-20T21:23:51",
+                         amount: "$10.00",
                          currency: "USD",
                          by: 4)
     }
@@ -78,9 +76,9 @@ class PrepaidCardListReceiptTests: BaseTests {
         prepaidCardReceiptMenu.tap()
         waitForNonExistence(spinner)
 
-        verifyCellLabels(with: "Funds Deposit",
-                         createdOn: "2019-06-20T21:23:51",
-                         amount: "$10.00",
+        verifyCellLabels(with: "Balance Adjustment",
+                         createdOn: "2019-06-25T22:48:41",
+                         amount: "-$10.00",
                          currency: "USD",
                          by: 0)
     }
@@ -118,12 +116,12 @@ class PrepaidCardListReceiptTests: BaseTests {
         XCTAssertTrue(prepaidCardReceiptMenu.exists)
         prepaidCardReceiptMenu.tap()
         waitForNonExistence(spinner)
-        transactionDetails.openReceipt(row: 0)
+        transactionDetails.openReceipt(row: 4)
         waitForExistence(transactionDetails.detailHeaderTitle)
         // Transaction
         XCTAssertEqual(transactionDetails.transactionSection.label, "mobileTransactionTypeLabel".localized())
 
-        XCTAssertEqual(transactionDetails.typeLabel.label, "Funds Deposit")
+        XCTAssertEqual(transactionDetails.typeLabel.label, "Payment")
         XCTAssertEqual(transactionDetails.paymentAmountLabel.label, "$10.00")
         XCTAssertEqual(transactionDetails.createdOnLabel.label,
                        transactionDetails.getExpectedDate(date: "2019-06-20T21:23:51"))
@@ -181,7 +179,7 @@ class PrepaidCardListReceiptTests: BaseTests {
         XCTAssertTrue(prepaidCardReceiptMenu.exists)
         prepaidCardReceiptMenu.tap()
         waitForNonExistence(spinner)
-        transactionDetails.openReceipt(row: 4)
+        transactionDetails.openReceipt(row: 0)
         waitForExistence(transactionDetails.detailHeaderTitle)
 
         // Transaction
@@ -216,9 +214,9 @@ class PrepaidCardListReceiptTests: BaseTests {
         XCTAssertEqual(transactionDetails.amountLabel.label, "amount".localized())
         XCTAssertEqual(transactionDetails.feeLabel.label, "mobileFeeLabel".localized())
         XCTAssertEqual(transactionDetails.transactionLabel.label, "mobileTransactionDetailsTotal".localized())
-        XCTAssertEqual(transactionDetails.amountValue.label, "-10.00 USD")
-        XCTAssertEqual(transactionDetails.feeValue.label, "3.00 USD")
-        XCTAssertEqual(transactionDetails.transactionValue.label, "7.00 USD")
+        XCTAssertEqual(transactionDetails.amountValue.label, "-$10.00 USD")
+        XCTAssertEqual(transactionDetails.feeValue.label, "$3.00 USD")
+        XCTAssertEqual(transactionDetails.transactionValue.label, "$7.00 USD")
     }
 
     // MARK: helper functions
@@ -234,23 +232,4 @@ class PrepaidCardListReceiptTests: BaseTests {
         XCTAssertEqual(amount, row.staticTexts["receiptTransactionAmountLabel"].label)
         XCTAssertEqual(currency, row.staticTexts["receiptTransactionCurrencyLabel"].label)
     }
-
-    /*
-     func testPrepaidCardReceiptsList_verifyPagingBySwipe() {
-     mockServer.setupStub(url: "/rest/v3/users/usr-token/prepaid-cards/trm-token/receipts",
-     filename: "PrepaidCardReceiptsPaging",
-     method: HTTPMethod.get)
-
-     XCTAssertTrue(prepaidCardReceiptMenu.exists)
-     prepaidCardReceiptMenu.tap()
-     waitForNonExistence(spinner)
-
-     app.swipeUp()
-     app.swipeUp()
-     let lastRow = app.tables.element.children(matching: .cell).element(boundBy: 10)
-     let lastRowLabel = lastRow.staticTexts["ListReceiptTableViewCellTextLabel"].label
-
-     XCTAssertTrue(lastRow.exists)
-     XCTAssertTrue(lastRowLabel.contains("Jun 8, 2019"))
-     } */
 }

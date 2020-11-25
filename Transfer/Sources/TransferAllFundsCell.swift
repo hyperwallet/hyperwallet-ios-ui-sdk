@@ -49,8 +49,8 @@ final class TransferAllFundsCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override func layoutIfNeeded() {
+        super.layoutIfNeeded()
         subviews.forEach { (view) in
             if type(of: view).description() == "_UITableViewCellSeparatorView" {
                 view.isHidden = true
@@ -84,18 +84,19 @@ final class TransferAllFundsCell: UITableViewCell {
                    availableBalance: String?,
                    currencyCode: String?) {
         guard let availableBalance = availableBalance,
-            availableBalance.formatToDouble() != 0,
             let currencyCode = currencyCode else {
                 availableFundsLabel.text = ""
                 return
         }
 
-        let locale = NSLocale(localeIdentifier: currencyCode)
-        let currencySymbol = locale.displayName(forKey: NSLocale.Key.currencySymbol, value: currencyCode)
-        if let currencySymbol = currencySymbol {
+        let formattedAvailableBalance = TransferAmountCurrencyFormatter.formatStringAmount(availableBalance,
+                                                                                           with: currencyCode)
+
+        if let currencySymbol = TransferAmountCurrencyFormatter
+            .getTransferAmountCurrency(for: currencyCode)?.symbol {
             availableFundsLabel.text = String(format: "mobileAvailableBalance".localized(),
                                               currencySymbol,
-                                              availableBalance,
+                                              formattedAvailableBalance,
                                               currencyCode)
             availableFundsLabel.numberOfLines = 0
             availableFundsLabel.adjustsFontForContentSizeCategory = true

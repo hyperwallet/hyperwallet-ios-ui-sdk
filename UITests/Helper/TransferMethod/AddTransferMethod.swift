@@ -7,6 +7,7 @@ class AddTransferMethod {
     var elementQuery: XCUIElementQuery
     var addTransferMethodTableView: XCUIElement
     var bankIdInput: XCUIElement
+    var accountIdInput: XCUIElement
     var branchIdInput: XCUIElement
     var bankAccountIdInput: XCUIElement
     var accountTypeSelect: XCUIElement
@@ -71,6 +72,7 @@ class AddTransferMethod {
     var navBarDebitCard: XCUIElement
     var navBarWireAccount: XCUIElement
     var navBarPaypal: XCUIElement
+    var navBarVenmo: XCUIElement
     var cardNumberError: XCUIElement!
     var cvvNumberError: XCUIElement!
     var dateOfExpiryError: XCUIElement
@@ -111,6 +113,7 @@ class AddTransferMethod {
         navBarDebitCard = app.navigationBars["bank_card".localized()]
         navBarWireAccount = app.navigationBars["wire_account".localized()]
         navBarPaypal = app.navigationBars["paypal_account".localized()]
+        navBarVenmo = app.navigationBars["venmo_account".localized()]
         addTransferMethodtable = app.tables.cells.staticTexts["Add Transfer Method"]
         addTransferMethodTableView = app.tables["addTransferMethodTable"]
         createTransferMethodButton = addTransferMethodTableView.buttons["createAccountButton"]
@@ -131,6 +134,7 @@ class AddTransferMethod {
 
         // Inputs
         bankIdInput = addTransferMethodTableView.textFields["bankId"]
+        accountIdInput = addTransferMethodTableView.textFields["accountId"]
         branchIdInput = addTransferMethodTableView.textFields["branchId"]
         bankAccountIdInput = addTransferMethodTableView.textFields["bankAccountId"]
         accountTypeSelect = addTransferMethodTableView.cells.staticTexts["bankAccountPurposeValue"]
@@ -203,6 +207,13 @@ class AddTransferMethod {
             branchIdInput.enterText(text: branchId)
         } else {
             branchIdInput.clearAndEnterText(text: branchId)
+        }
+    }
+    func setAccountId(_ accountId: String) {
+        if #available(iOS 13.0, *) {
+            accountIdInput.enterText(text: accountId)
+        } else {
+            accountIdInput.clearAndEnterText(text: accountId)
         }
     }
 

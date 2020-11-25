@@ -73,6 +73,10 @@ final class RemoteTransferMethodRepository: TransferMethodRepository {
             Hyperwallet.shared.createPayPalAccount(
                 account: payPalAccount,
                 completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
+        } else if let venmoAccount = transferMethod as? HyperwalletVenmoAccount {
+            Hyperwallet.shared.createVenmoAccount(
+                account: venmoAccount,
+                completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
         }
     }
 
@@ -101,6 +105,11 @@ final class RemoteTransferMethodRepository: TransferMethodRepository {
                 transferMethodToken: token,
                 completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
 
+        case HyperwalletTransferMethod.TransferMethodType.venmoAccount.rawValue:
+                Hyperwallet.shared.deactivateVenmoAccount(
+                    transferMethodToken: token,
+                    completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
+
         default:
             let error = HyperwalletErrorType.unexpected(HyperwalletErrors(
                     errorList: [
@@ -119,7 +128,7 @@ final class RemoteTransferMethodRepository: TransferMethodRepository {
         guard let transferMethods = transferMethods else {
             let queryParam = HyperwalletTransferMethodQueryParam()
             queryParam.limit = 100
-            queryParam.status = .activated
+            queryParam.status = HyperwalletTransferMethodQueryParam.QueryStatus.activated.rawValue
             Hyperwallet.shared.listTransferMethods(
                 queryParam: queryParam,
                 completion: getTransferMethodsHandler(completion))

@@ -37,10 +37,6 @@ class AddTransferMethodBankCardTests: BaseTests {
                              filename: "TransferMethodConfigurationBankCardResponse",
                              method: HTTPMethod.post)
 
-        app.tables.cells.staticTexts["Add Transfer Method"].tap()
-        spinner = app.activityIndicators["activityIndicator"]
-        waitForNonExistence(spinner)
-
         cardNumberEmptyError = addTransferMethod.getEmptyError(label: addTransferMethod.cardNumber
         )
         expiryDateEmptyError = addTransferMethod.getEmptyError(label: addTransferMethod.expiryDate
@@ -59,6 +55,11 @@ class AddTransferMethodBankCardTests: BaseTests {
             .getLengthConstraintError(label: addTransferMethod.cvvSecurityCode, min: 3, max: 4)
 
         otherElements = addTransferMethod.addTransferMethodTableView.otherElements
+
+        spinner = app.activityIndicators["activityIndicator"]
+        waitForNonExistence(spinner)
+        app.tables.cells.staticTexts["Add Transfer Method"].tap()
+        waitForExistence(addTransferMethod.navBarDebitCard)
     }
 
     func testAddTransferMethod_displaysElementsOnTmcResponse() {

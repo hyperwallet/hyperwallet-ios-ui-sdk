@@ -14,14 +14,30 @@ class BaseTests: XCTestCase {
      }
 
     public struct TransferMethods {
-         // Transfer methods
+         // Transfer methods 
          static let bankAccount = "Bank Account"
          static let debitCard = "Debit Card"
          static let paperCheck = "Paper Check"
          static let prepaidCard = "Prepaid Card"
          static let wireTransfer = "Wire Transfer"
          static let paypal = "PayPal"
+         static let venmo = "Venmo"
      }
+
+    public struct CurrencyCode {
+        // Currency Code , Symbol Tuple
+        static let USD = ("USD", "$")
+        static let CAD = ("CAD", "CA$")
+        static let EURO = ("EUR", "€")
+        static let JPY = ("JPY", "¥")
+        static let INR = ("INR", "₹")
+        static let VND = ("VND", "₫")
+        static let SEK = ("SEK", "SEK")
+        static let JOD = ("JOD", "JOD")
+        // static let TND = ("TND", "د.ت")
+        static let TND = ("TND", "TND ")
+        static let ZAR = ("ZAR", "ZAR")
+    }
 
     public struct Common {
          // Navigation Bar
@@ -33,7 +49,7 @@ class BaseTests: XCTestCase {
         mockServer.setUp()
 
         mockServer.setupStub(url: "/rest/v3/users/usr-token/authentication-token",
-                             filename: "AuthenticationTokenResponse",
+                             filename: "AuthenticationTokenWalletModelResponse",
                              method: HTTPMethod.post)
 
         mockServer.setupStub(url: "/rest/v3/users/usr-token",
@@ -43,6 +59,18 @@ class BaseTests: XCTestCase {
         mockServer.setupStub(url: "/track/events",
                              filename: "InsightsSuccessResponse",
                              method: HTTPMethod.post)
+
+        mockServer.setupStubEmpty(url: "/rest/v3/users/usr-token/prepaid-cards",
+                                  statusCode: 204,
+                                  method: HTTPMethod.get)
+
+        mockServer.setupStubEmpty(url: "/rest/v3/users/usr-token/prepaid-cards/trm-token/receipts",
+                                  statusCode: 204,
+                                  method: HTTPMethod.get)
+        mockServer.setupStubEmpty(url: "/rest/v3/users/usr-token/receipts",
+                                  statusCode: 204,
+                                  method: HTTPMethod.get)
+
         // speed up UI
         UIApplication.shared.keyWindow?.layer.speed = 100
         UIView.setAnimationsEnabled(false)

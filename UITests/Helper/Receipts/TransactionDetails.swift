@@ -40,6 +40,11 @@ class TransactionDetails {
     var feeValue: XCUIElement
     var transactionValue: XCUIElement
     var promoWebSiteValue: XCUIElement
+    let prepaidCard = "prepaid_card".localized()
+    let prepaidCardVisa = "visa".localized()
+    let prepaidCardMaster = "mastercard".localized()
+    let numberMask = " \u{2022}\u{2022}\u{2022}\u{2022} "
+     let noPPCReceiptLabel: XCUIElement
 
     var app: XCUIApplication
 
@@ -63,6 +68,7 @@ class TransactionDetails {
 
     init(app: XCUIApplication) {
         self.app = app
+        noPPCReceiptLabel = app.staticTexts["EmptyListLabelAccessibilityIdentifier"]
         navigationBar = app.navigationBars["Transaction Details"]
         typeLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionTypeLabel"]
         paymentAmountLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionAmountLabel"]
@@ -123,5 +129,21 @@ class TransactionDetails {
         let dateUTC = ISO8601DateFormatter.ignoreTimeZone.date(from: date)
         print(localizedDateFormatter.string(from: dateUTC!))
         return localizedDateFormatter.string(from: dateUTC!)
+    }
+
+    func getPPCTabBy(label: String) -> XCUIElement {
+        app.tables.buttons[label]
+    }
+    func getTransactionsPPCTabBy(label: String) -> XCUIElement {
+        app.tables.buttons[label]
+    }
+    func getPPCInfoTab(digit: String, type: String) -> String {
+        return "\(type)\(numberMask)\(digit)"
+    }
+    func getNoTransactionStrings() -> String {
+        return "mobileNoTransactions".localized()
+    }
+    func getPPCNoTransactionStringYear() -> String {
+        return "mobilePrepaidCardNoTransactions".localized()
     }
 }

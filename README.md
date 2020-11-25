@@ -22,7 +22,7 @@ Note that this SDK is geared towards those who need both backend data and UI fea
 
 ## Dependencies
 
-- [HyperwalletSDK 1.0.0-beta09](https://github.com/hyperwallet/hyperwallet-ios-sdk)
+- [HyperwalletSDK 1.0.0-beta10](https://github.com/hyperwallet/hyperwallet-ios-sdk)
 
 ## Installation
 Use [Carthage](https://github.com/Carthage/Carthage) or [CocoaPods](https://cocoapods.org/) to integrate to HyperwalletSDK.
@@ -34,7 +34,7 @@ Adding one or more of these frameworks allows users to explore the particular fu
 ### Carthage
 Specify it in your Cartfile:
 ```ogdl
-github "hyperwallet/hyperwallet-ios-ui-sdk" "1.0.0-beta09"
+github "hyperwallet/hyperwallet-ios-ui-sdk" "1.0.0-beta10"
 ```
 Add desired modules using the `Linked Frameworks and Libraries` option to make them available in the app.
 Use `import <module-name>` to add the dependency within a file
@@ -42,13 +42,13 @@ Use `import <module-name>` to add the dependency within a file
 ### CocoaPods
 - Install a specific framework (install one or more frameworks based on your requirement)
 ```ruby
-pod "HyperwalletUISDK/TransferMethod", "1.0.0-beta09"
-pod "HyperwalletUISDK/Transfer", "1.0.0-beta09"
-pod "HyperwalletUISDK/Receipt", "1.0.0-beta09"
+pod "HyperwalletUISDK/TransferMethod", "1.0.0-beta10"
+pod "HyperwalletUISDK/Transfer", "1.0.0-beta10"
+pod "HyperwalletUISDK/Receipt", "1.0.0-beta10"
 ```
 - To install all available modules (TransferMethod, Transfer, Receipt)
 ```ruby
-pod 'HyperwalletUISDK', '~> 1.0.0-beta09'
+pod 'HyperwalletUISDK', '~> 1.0.0-beta10'
 ```
 Use `import HyperwalletUISDK` to add the dependency within a file.
 
@@ -199,6 +199,12 @@ let coordinator = HyperwalletUI.shared.listPrepaidCardReceiptCoordinator(parentC
 coordinator.navigate()
 ```
 
+### Lists receipts from all available sources
+```swift
+let coordinator = HyperwalletUI.shared.listAllAvailableSourcesReceiptCoordinator(parentController: self)
+coordinator.navigate()
+```
+
 ### Make a new transfer from user's account
 To add new Transfer Method from Transfer module, TransferMethod module needs to be added as a dependency in the app. If TransferMethod module is not added, users will not be able to add a new Transfer Method inside the Transfer flow.
 ```swift
@@ -225,6 +231,25 @@ let coordinator = HyperwalletUI.shared
             .createTransferFromPrepaidCardCoordinator(clientTransferId: clientTransferId,
                                                       sourceToken: "your-prepaid-card-token",
                                                       parentController: self)
+coordinator.navigate()
+```
+Also add following method to dismiss the presented view on successful creation of transfer and perform any action based on the transfer created.
+```swift
+override public func didFlowComplete(with response: Any) {
+    if let statusTransition = response as? HyperwalletStatusTransition, let transition = statusTransition.transition {
+        if transition == HyperwalletStatusTransition.Status.scheduled {
+            navigationController?.popViewController(animated: false)
+        }
+    }
+}
+```
+
+### Display all the available sources to make a new transfer from. User can then select the transfer from source and make a new tansfer from that source
+```swift
+let clientTransferId = UUID().uuidString.lowercased()
+let coordinator = HyperwalletUI.shared
+            .createTransferFromAllAvailableSourcesCoordinator(clientTransferId: clientTransferId,
+                                                              parentController: self)
 coordinator.navigate()
 ```
 Also add following method to dismiss the presented view on successful creation of transfer and perform any action based on the transfer created.
@@ -406,7 +431,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         // Override point for customization after application launch.
-        
+
         ThemeManager.applyWhiteTheme()
         // Set the default tint color
         window?.tintColor = .systemBlue

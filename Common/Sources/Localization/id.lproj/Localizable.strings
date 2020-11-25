@@ -1,0 +1,266 @@
+//
+// Copyright 2018 - Present Hyperwallet
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+// and associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+// BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+"backBarButton" = "Kembali";
+"mobileTransferMethodsHeader" = "Metode transfer";
+"remove" = "Hapus";
+"cancelButtonLabel" = "Batalkan";
+"doneButtonLabel" = "Selesai";
+"try_again_button_label" = "Coba Lagi";
+"search_placeholder_label" = "Cari";
+"unexpected_error_message" = "Terjadi kesalahan, cobalah kembali";
+"network_connection_error_title" = "Masalah Koneksi";
+"unexpected_title" = "Kesalahan Tidak Terduga";
+"network_connection_error_message" = "Kami mengalami masalah saat memproses permintaan. Periksalah koneksi Anda.";
+"endingIn" = "berakhiran ";
+"to" = "ke ";
+"no_country_available_error_message" = "Tidak ada negara yang tersedia";
+"no_transfer_method_available_error_message" = "Tidak ada metode transfer yang tersedia untuk %1$@ dan %2$@";
+"no_currency_available_error_message" = "Tidak ada mata uang yang tersedia untuk negara %1$@";
+"emptyStateAddTransferMethod" = "Tambahkan metode transfer untuk memulai.";
+"mobileAddTransferMethodHeader" = "Tambahkan metode transfer";
+"mobileCountryCurrencyLabel" = "LOKASI DAN MATA UANG";
+"mobileTransferMethodLabel" = "METODE TRANSFER";
+"mobileCountryRegion" = "Negara/Wilayah";
+"mobileCurrencyLabel" = "Mata Uang";
+"mobileAreYouSure" = "Apa Anda yakin?";
+"mobileRemoveEAconfirm" = "Hapus metode transfer";
+"fee_flat_formatter" = "Biaya %1$@%2$@";
+"fee_percent_only_min_formatter" = "Biaya %1$@%% (Min:%2$@%3$@)";
+"fee_percent_only_max_formatter" = "Biaya %1$@%% (Maks:%2$@%3$@)";
+"fee_percent_formatter" = "Biaya%1$@%% (Min:%2$@%3$@, Maks:%2$@%4$@)";
+"fee_mix_no_min_and_max_formatter" = "Biaya %1$@%2$@ + %3$@%%";
+"fee_mix_only_min_formatter" = "Biaya %1$@%2$@ + %3$@%% (Min:%1$@%4$@)";
+"fee_mix_only_max_formatter" = "Biaya %1$@%2$@ + %3$@%% (Maks:%1$@%4$@)";
+"fee_mix_formatter" = "Biaya %1$@%2$@ + %3$@%% (Min:%1$@%4$@, Maks:%1$@%5$@)";
+"fee_percent_no_min_and_max_formatter" = "Biaya %1$@%%";
+"transfer_method_not_supported_message" = "Metode transfer ini tidak didukung.";
+"error" = "Kesalahan";
+"authentication_error_title" = "Kesalahan Autentikasi";
+"authentication_error_message" = "Percobaan pengambilan token autentikasi mengakibatkan kesalahan";
+
+    // Transfer methods
+"bank_account" = "Rekening Bank";
+"bank_card" = "Kartu Debit";
+"paper_check" = "Cek Kertas";
+"prepaid_card" = "Kartu Prabayar";
+"wire_account" = "Rekening Transfer Bank";
+"paypal_account" = "Akun PayPal";
+"venmo_account" = "Akun Venmo";
+"cash_pickup_mg" = "MoneyGram";
+
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Manage Prepaid Card Message
+"manage_prepaid_card_message" = "Login menggunakan peramban web untuk mengelola kartu Anda";
+    //Select Transfer Method View
+"select_a_country_message" = "Pilih negara";
+
+    // Add Transfer Method
+"createTransferMethodButtonLabel" = "Tambahkan Metode Transfer";
+"account_information" = "INFORMASI REKENING: %1$@(%2$@)";
+"account_holder" = "INFORMASI PEMILIK REKENING";
+"address"="ALAMAT";
+"mobileFeesAndProcessingTime" = "BIAYA DAN WAKTU PEMROSESAN";
+"intermediary_account" = "REKENING PERANTARA";
+"contact_information" = "INFORMASI KONTAK";
+"identification" = "IDENTIFIKASI";
+
+"date_format" = "HH-BB-TTTT";
+
+    // Processing View
+"processing_view_label" = "Dalam Proses";
+"complete_view_label" = "Selesai";
+
+    // Receipt
+"transactions" = "Transaksi";
+"mobileNoTransactions" = "Tidak ada kegiatan untuk ditampilkan.";
+"mobilePrepaidCardNoTransactions" = "Tidak ada transaksi dalam 365 hari terakhir.";
+"add_transaction_title" = "Tambahkan Transaksi";
+"account_closure_fee" = "Biaya Penutupan Rekening";
+"account_closure" = "Penutupan Rekening";
+"account_unload" = "Pengembalian Dana";
+"adjustment" = "Penyesuaian Saldo";
+"annual_fee_refund" = "Pengembalian Dana Biaya Tahunan";
+"annual_fee" = "Biaya Tahunan";
+"bank_account_transfer_fee" = "Biaya Pengembalian Rekening Bank";
+"bank_account_transfer_return_fee" = "Biaya Pengembalian Rekening Bank";
+"bank_account_transfer_return" = "Pengembalian Rekening Bank";
+"card_activation_fee_waiver" = "Pengecualian Biaya Aktivasi Kartu";
+"card_activation_fee" = "Biaya Aktivasi Kartu";
+"card_fee" = "Biaya Kartu";
+"customer_service_fee_refund" = "Pengembalian Dana Biaya Layanan Pelanggan";
+"customer_service_fee" = "Biaya Layanan Pelanggan";
+"deposit" = "Pembayaran";
+"donation_fee" = "Biaya Donasi";
+"donation_return" = "Pengembalian Donasi";
+"donation" = "Donasi";
+"dormant_user_fee_refund" = "Pengembalian Dana Biaya Rekening Pengguna Pasif";
+"dormant_user_fee" = "Biaya Rekening Pengguna Pasif";
+"expedited_shipping_fee" = "Biaya Pengiriman Kilat";
+"foreign_exchange" = "Valuta Asing";
+"generic_fee_refund" = "Pengembalian Dana Biaya Generik";
+"manual_adjustment" = "Penyesuaian";
+"manual_transfer_to_prepaid_card" = "Transfer ke Kartu";
+"merchant_payment_fee" = "Biaya Pembayaran Merchant";
+"merchant_payment_refund" = "Pengembalian Dana Pembayaran Merchant";
+"merchant_payment_return" = "Pengembalian Pembayaran Merchant";
+"merchant_payment" = "Pembayaran Merchant";
+"moneygram_transfer_return" = "Pengembalian MoneyGram";
+"monthly_fee_refund" = "Pengembalian Dana Biaya Bulanan";
+"monthly_fee" = "Biaya Bulanan";
+"paper_check_fee" = "Biaya Cek Kertas";
+"paper_check_refund" = "Pengembalian Dana Cek Kertas";
+"payment_cancellation" = "Pembatalan Pembayaran";
+"payment_expiration" = "Pembayaran Kedaluwarsa";
+"payment_expiry_fee" = "Biaya Pengakhiran Pembayaran";
+"payment_fee" = "Biaya Pembayaran";
+"payment_return" = "Pengembalian Pembayaran";
+"payment_reversal_fee" = "Biaya Pembalikan Pembayaran";
+"payment_reversal" = "Pembalikan Pembayaran";
+"payment" = "Pembayaran";
+"prepaid_card_balance_inquiry_fee" = "Biaya Pertanyaan Saldo";
+"prepaid_card_cash_advance" = "Tarik Tunai";
+"prepaid_card_dispute_deposit" = "Setoran Kartu yang Disengketakan";
+"prepaid_card_disputed_charge_refund" = "Pengembalian Dana Biaya yang Disengketakan";
+"prepaid_card_domestic_cash_withdrawal_fee" = "Penarikan ATM";
+"prepaid_card_exchange_rate_difference" = "Selisih Nilai Tukar";
+"prepaid_card_manual_unload" = "Transfer dari Kartu";
+"prepaid_card_overseas_cash_withdrawal_fee" = "Penarikan ATM";
+"prepaid_card_pin_change_fee" = "Biaya Penggantian PIN";
+"prepaid_card_refund" = "Pengembalian Dana";
+"prepaid_card_replacement_fee" = "Biaya Penggantian Kartu";
+"prepaid_card_sale_reversal" = "Transaksi Dibalik";
+"prepaid_card_sale" = "Transaksi";
+"prepaid_card_unload" = "Transfer dari Kartu";
+"processing_fee" = "Biaya Pemrosesan";
+"standard_shipping_fee" = "Biaya Pengiriman Standar";
+"transfer_fee" = "Biaya Transfer";
+"transfer_to_bank_account" = "Rekening Bank";
+"transfer_to_debit_card" = "Kartu Debit";
+"transfer_to_moneygram" = "MoneyGram";
+"transfer_to_paper_check" = "Cek Kertas";
+"transfer_to_paypal_account" = "PayPal";
+"transfer_to_prepaid_card" = "Transfer ke Kartu";
+"transfer_to_program_account" = "Transfer ke Program";
+"transfer_to_user" = "Transfer ke Pengguna";
+"transfer_to_western_union" = "Western Union";
+"transfer_to_wire" = "Transfer Bank";
+"transfer_to_wubs_wire" = "Transfer Bank";
+"transfer_to_venmo_account" = "Venmo";
+"transfer_to_bank_card" = "Kartu Bank";
+"virtual_incentive_cancellation" = "Pembatalan Promo";
+"virtual_incentive_issuance" = "Promo yang Diterbitkan";
+"virtual_incentive_purchase" = "Pembelian Promo";
+"virtual_incentive_refund" = "Pengembalian Dana Promo";
+"western_union_transfer_return" = "Penarikan Western Union";
+"wire_transfer_fee" = "Biaya Transfer Bank";
+"wire_transfer_return" = "Pengembalian Transfer Bank";
+"wubs_wire_transfer_return" = "Pengembalian Transfer Bank";
+"unknown_receipt_type" = "Jenis Transaksi Tidak Diketahui";
+"paypal_account_transfer_return" = "Pengembalian Penarikan Dana";
+"venmo_account_transfer_return" = "Pengembalian Penarikan Dana";
+"prepaid_card_account_deposit" = "Deposito Rekening";
+"prepaid_card_annual_fee_discount" = "Diskon biaya tahunan";
+"prepaid_card_bill_reprint_fee" = "Biaya Pencetakan Kembali Tagihan";
+"prepaid_card_atm_or_cash_advance_fee" = "Biaya ATM/Tarik Tunai";
+"prepaid_card_cash_advance_chargeback" = "Pengembalian Tagihan Tarik Tunai";
+"prepaid_card_cash_advance_chargeback_reversal" = "Pembalikan Pengembalian Tagihan Tarik Tunai";
+"prepaid_card_cash_advance_repress" = "Penahanan Tarik Tunai";
+"prepaid_card_cash_advance_repress_reversal" = "Pembalikan Penahanan Tarik Tunai";
+"prepaid_card_chargeback" = "Pengembalian Tagihan";
+"prepaid_card_chargeback_refund" = "Pengembalian Dana Pengembalian Tagihan";
+"prepaid_card_chargeback_refund_reversal" = "Pembalikan Pengembalian Dana Pengembalian Tagihan";
+"prepaid_card_chargeback_reversal" = "Pembalikan Pengembalian Tagihan";
+"prepaid_card_commission_or_fee" = "Biaya/Komisi";
+"prepaid_card_debit_transfer" = "Debit/Transfer";
+"prepaid_card_document_request_fee" = "Biaya Permintaan Dokumen";
+"prepaid_card_emergency_cash" = "Uang Darurat";
+"prepaid_card_emergency_card" = "Kartu Darurat";
+"prepaid_card_income" = "Penghasilan";
+"prepaid_card_load_fee" = "Biaya PAN";
+"prepaid_card_overdue_payment_interest" = "Bunga pada pembayaran yang terlambat";
+"prepaid_card_payment" = "Beban";
+"prepaid_card_pin_reprint_fee" = "Pencetakan ulang PIN";
+"prepaid_card_priority_pass_fee" = "Biaya pass prioritas";
+"prepaid_card_priority_pass_renewal" = "Pembaruan pas prioritas";
+"prepaid_card_recurring_interest" = "Bunga Bergulir";
+"prepaid_card_refund_repress" = "Penahanan Pengembalian Dana";
+"prepaid_card_refund_repress_reversal" = "Pembalikan Penahanan Pengembalian Dana";
+"prepaid_card_sale_repress" = "Penahanan Penjualan";
+"prepaid_card_statement_fee" = "Biaya Pernyataan UTSKGJ";
+"prepaid_card_telephone_support_fee" = "Informasi melalui telepon: saldo, transaksi, dll.";
+"prepaid_card_transfer_fee" = "Biaya Beban Kartu";
+"prepaid_card_transfer_return" = "Pengembalian Beban Kartu Prabayar";
+"prepaid_card_bank_withdrawal_reversal" = "Penarikan bank terbalik";
+"prepaid_card_bank_withdrawal_chargeback" = "Pengembalian tagihan penarikan bank terbalik";
+"prepaid_card_refund_fee" = "Biaya Pengembalian Dana";
+"prepaid_card_monthly_maintenance_fee" = "Biaya Pemeliharaan Bulanan";
+"prepaid_card_transaction_fee" = "Biaya Transaksi";
+"prepaid_card_sms_fee" = "Biaya SMS";
+"prepaid_card_declined_authorization_fee" = "Biaya Otorisasi yang Ditolak";
+"fispc" = "Pembelian";
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Receipt Detail
+"mobileTransactionDetailsHeader" = "Perincian transaksi";
+"mobileTransactionTypeLabel" = "TRANSAKSI";
+"mobileTransactionDetailsLabel" = "PERINCIAN";
+"mobileFeeInfoLabel" = "INFO BIAYA";
+"mobileConfirmNotesLabel" = "CATATAN";
+"mobileCharityName" = "Nama Badan Amal";
+"mobileCheckNumber" = "Nomor Cek";
+"mobileTransactionIdLabel" = "ID Transaksi";
+"mobilePromoWebsite" = "Situs Web Promo";
+"mobileTransactionDetailsTotal" = "Total transaksi";
+"amount" = "Jumlah";
+"mobileFeeLabel" = "Biaya";
+"mobileJournalNumberLabel" = "ID Penerimaan";
+"date" = "Tanggal";
+
+    // Transfer Funds
+"mobileTransferFundsHeader" = "Transfer";
+"mobileConfirmationHeader" = "Konfirmasi perinciannya";
+"mobileTransferFromLabel" = "TRANSFER DARI";
+"mobileTransferToLabel" = "TRANSFER KE";
+"mobileNoteLabel" = "Catatan";
+"mobileConfirmDetailsAmount" = "Jumlah";
+"mobileConfirmDetailsFee" = "Biaya";
+"mobileConfirmDetailsTotal" = "Anda akan menerima";
+"mobileTransferMax" = "Jumlah maks transfer";
+"mobileFXsell" = "Dari";
+"mobileFXbuy" = "Ke";
+"mobileFXRateLabel" = "Nilai tukar";
+"mobileAvailableBalance" = "Jumlah yang tersedia %1$@%2$@ %3$@";
+"continueButtonLabel" = "Lanjutkan";
+"mobileAddTransferMethod" = "Tambahkan metode transfer";
+"mobileTransferMethodsHeader" = "Metode transfer";
+"mobileTransferFromHeader" = "Transfer dari";
+"mobileAvailableFunds" = "Dana yang Tersedia";
+"mobileFXlabel" = "VALUTA ASING";
+"mobileSummaryLabel" = "RINGKASAN";
+"transfer" = "Transfer";
+"transferAmountInvalid" = "Masukkan jumlah transfer yang valid";
+"noTransferMethodAdded" = "Metode transfer wajib diisi";
+"transfer_error_no_transfer_method_module_initialized" = "Anda tidak dapat menambah metode transfer.";
+"transfer_fx_rate_changed" = "Akibat perubahan dalam nilai tukar, Anda akan menerima: %1$@";
+"mobileTransferSuccessMsg" = "Transfer Anda sedang diproses";
+"mobileTransferSuccessDetails" = "Uang sedang dikirim ke %1$@Anda.";
+"noTransferFromSourceAvailable" = "Tidak ada Transfer dari sumber yang tersedia";

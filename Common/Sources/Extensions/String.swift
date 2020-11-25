@@ -59,39 +59,26 @@ public extension String {
         return ceil(boundingBox.height)
     }
 
-    /// Format an amount to a currency format with currency code
-    ///
-    /// - Parameter currencyCode: the currency code
-    /// - Returns: a formatted String amount with currency code
-    func format(with currencyCode: String?) -> String {
-        if !self.isEmpty {
-            let currencyFormatter = NumberFormatter()
-            currencyFormatter.minimumIntegerDigits = 1
-            currencyFormatter.numberStyle = .currency
-            currencyFormatter.currencyCode = currencyCode
-            currencyFormatter.currencySymbol = ""
-            let formattedAmountInNumber = currencyFormatter.number(from: self)
-            return currencyFormatter.string(for: formattedAmountInNumber) ?? ""
-        } else {
-            return ""
-        }
+    /// Format amount for currency code using users locale
+    /// - Parameter currencyCode: currency code
+    /// - Returns: a formatted amount string
+    func formatToCurrency(with currencyCode: String?) -> String {
+        guard let currencyCode = currencyCode, !self.isEmpty
+        else { return "0" }
+        let number = Double(self)
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = Locale.current
+        formatter.currencyCode = currencyCode
+        return formatter.string(for: number) ?? self
     }
 
-    /// Format an amount to a currency format with currency code
-    ///
-    /// - Parameter currencyCode: the currency code
-    /// - Returns: a formatted Double amount  with currency code
-    func formatToDouble(with currencyCode: String? = nil) -> Double {
-        if !self.isEmpty {
-            let currencyFormatter = NumberFormatter()
-            currencyFormatter.minimumIntegerDigits = 1
-            currencyFormatter.numberStyle = .currency
-            currencyFormatter.currencyCode = currencyCode
-            currencyFormatter.currencySymbol = ""
-            return currencyFormatter.number(from: self)?.doubleValue ?? 0
-        } else {
-            return 0
-        }
+    /// Format amount to double
+    /// - Returns: double value
+    func formatAmountToDouble() -> Double {
+        let decimals = Set("0123456789.")
+        let result = String(self.filter { decimals.contains($0) })
+        return Double(result) ?? 0
     }
 }
 

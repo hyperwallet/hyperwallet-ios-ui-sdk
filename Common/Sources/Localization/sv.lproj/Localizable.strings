@@ -1,0 +1,266 @@
+//
+// Copyright 2018 - Present Hyperwallet
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+// and associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+// BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+"backBarButton" = "Tillbaka";
+"mobileTransferMethodsHeader" = "Överföringsmetoder";
+"remove" = "Ta bort";
+"cancelButtonLabel" = "Avbryt";
+"doneButtonLabel" = "Klart";
+"try_again_button_label" = "Försök igen";
+"search_placeholder_label" = "Sök";
+"unexpected_error_message" = "Något gick fel, försök igen";
+"network_connection_error_title" = "Anslutningsproblem";
+"unexpected_title" = "Oväntat fel";
+"network_connection_error_message" = "Vi har problem med att behandla din begäran. Kontrollera din anslutning.";
+"endingIn" = "upphör om ";
+"to" = "till ";
+"no_country_available_error_message" = "Det finns inget tillgängligt land";
+"no_transfer_method_available_error_message" = "Det finns ingen överföringsmetod tillgänglig för %1$@ och %2$@";
+"no_currency_available_error_message" = "Det finns ingen valuta tillgänglig för land %1$@";
+"emptyStateAddTransferMethod" = "Lägg till en överföringsmetod för att komma igång.";
+"mobileAddTransferMethodHeader" = "Lägg till en överföringsmetod";
+"mobileCountryCurrencyLabel" = "PLATS OCH VALUTA";
+"mobileTransferMethodLabel" = "ÖVERFÖRINGSMETOD";
+"mobileCountryRegion" = "Land/område";
+"mobileCurrencyLabel" = "Valuta";
+"mobileAreYouSure" = "Är du säker?";
+"mobileRemoveEAconfirm" = "Ta bort överföringsmetod";
+"fee_flat_formatter" = "%1$@%2$@ avgift";
+"fee_percent_only_min_formatter" = "%1$@%% (Min:%2$@%3$@) avgift";
+"fee_percent_only_max_formatter" = "%1$@%% (Max:%2$@%3$@) avgift";
+"fee_percent_formatter" = "%1$@%% (Min:%2$@%3$@, Max:%2$@%4$@) avgift";
+"fee_mix_no_min_and_max_formatter" = "%1$@%2$@ + %3$@%% avgift";
+"fee_mix_only_min_formatter" = "%1$@%2$@ + %3$@%% (Min:%1$@%4$@) avgift";
+"fee_mix_only_max_formatter" = "%1$@%2$@ + %3$@%% (Max:%1$@%4$@) avgift";
+"fee_mix_formatter" = "%1$@%2$@ + %3$@%% (Min:%1$@%4$@, Max:%1$@%5$@) avgift";
+"fee_percent_no_min_and_max_formatter" = "%1$@%% avgift";
+"transfer_method_not_supported_message" = "Den här överföringsmetoden stöds inte.";
+"error" = "Fel";
+"authentication_error_title" = "Autentiseringsfel";
+"authentication_error_message" = "Autentiseringstokens hämtningsförsök resulterade i ett fel";
+
+    // Transfer methods
+"bank_account" = "Bankkonto";
+"bank_card" = "Betalkort";
+"paper_check" = "Papperscheck";
+"prepaid_card" = "Förbetalt kort";
+"wire_account" = "Konto för banköverföring";
+"paypal_account" = "PayPal-konto";
+"venmo_account" = "Venmo-konto";
+"cash_pickup_mg" = "MoneyGram";
+
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Manage Prepaid Card Message
+"manage_prepaid_card_message" = "Logga in med en webbläsare för att hantera ditt kort";
+    //Select Transfer Method View
+"select_a_country_message" = "Välj ett land";
+
+    // Add Transfer Method
+"createTransferMethodButtonLabel" = "Lägg till överföringsmetod";
+"account_information" = "KONTOUPPGIFTER: %1$@(%2$@)";
+"account_holder" = "UPPGIFTER OM KONTOINNEHAVARE";
+"address"="ADRESS";
+"mobileFeesAndProcessingTime" = "AVGIFTER OCH BEHANDLINGSTID";
+"intermediary_account" = "MELLANHANDENS KONTO";
+"contact_information" = "KONTAKTUPPGIFTER";
+"identification" = "IDENTIFIKATION";
+
+"date_format" = "ÅÅÅÅ-MM-DD";
+
+    // Processing View
+"processing_view_label" = "Behandlar";
+"complete_view_label" = "Slutför";
+
+    // Receipt
+"transactions" = "Transaktioner";
+"mobileNoTransactions" = "Det finns ingen aktivitet att visa.";
+"mobilePrepaidCardNoTransactions" = "Inga transaktioner de senaste 365 dagarna.";
+"add_transaction_title" = "Lägg till transaktion";
+"account_closure_fee" = "Avgift för stängning av konto";
+"account_closure" = "Stängning av konto";
+"account_unload" = "Returnering av pengar";
+"adjustment" = "Justering av saldo";
+"annual_fee_refund" = "Återbetalning av årsavgift";
+"annual_fee" = "Årsavgift";
+"bank_account_transfer_fee" = "Avgift för returnering till bankkonto";
+"bank_account_transfer_return_fee" = "Avgift för returnering till bankkonto";
+"bank_account_transfer_return" = "Returnering till bankkonto";
+"card_activation_fee_waiver" = "Ingen avgift för kortaktivering";
+"card_activation_fee" = "Avgift för kortaktivering";
+"card_fee" = "Kortavgift";
+"customer_service_fee_refund" = "Återbetalning av kundserviceavgift";
+"customer_service_fee" = "Kundserviceavgift";
+"deposit" = "Betalning";
+"donation_fee" = "Avgift för gåva";
+"donation_return" = "Returnering av gåva";
+"donation" = "Gåva";
+"dormant_user_fee_refund" = "Återbetalning av avgift för vilande användarkonto";
+"dormant_user_fee" = "Avgift för vilande användarkonto";
+"expedited_shipping_fee" = "Avgift för expressfrakt";
+"foreign_exchange" = "Utländsk valuta";
+"generic_fee_refund" = "Återbetalning av allmän avgift";
+"manual_adjustment" = "Justering";
+"manual_transfer_to_prepaid_card" = "Överföring till kort";
+"merchant_payment_fee" = "Handlares betalningsavgift";
+"merchant_payment_refund" = "Återbetalning till handlare";
+"merchant_payment_return" = "Returnering av betalning till handlare";
+"merchant_payment" = "Handlares betalning";
+"moneygram_transfer_return" = "Returnering av MoneyGram";
+"monthly_fee_refund" = "Återbetalning av månadsavgift";
+"monthly_fee" = "Månadsavgift";
+"paper_check_fee" = "Avgift för papperscheck";
+"paper_check_refund" = "Återbetalning av papperscheck";
+"payment_cancellation" = "Annullering av betalning";
+"payment_expiration" = "Förfallen betalning";
+"payment_expiry_fee" = "Avgift för förfallen betalning";
+"payment_fee" = "Betalningsavgift";
+"payment_return" = "Returnering av betalning";
+"payment_reversal_fee" = "Avgift för återföring av betalning";
+"payment_reversal" = "Återföring av betalning";
+"payment" = "Betalning";
+"prepaid_card_balance_inquiry_fee" = "Avgift för saldoförfrågan";
+"prepaid_card_cash_advance" = "Förskott";
+"prepaid_card_dispute_deposit" = "Ifrågasatt insättning på kort";
+"prepaid_card_disputed_charge_refund" = "Ifrågasatt återbetalning av avgift";
+"prepaid_card_domestic_cash_withdrawal_fee" = "Bankomatuttag";
+"prepaid_card_exchange_rate_difference" = "Skillnad i valutakurs";
+"prepaid_card_manual_unload" = "Överföring från kort";
+"prepaid_card_overseas_cash_withdrawal_fee" = "Bankomatuttag";
+"prepaid_card_pin_change_fee" = "Avgift för ändring av PIN-kod";
+"prepaid_card_refund" = "Återbetalning";
+"prepaid_card_replacement_fee" = "Avgift för ersättningskort";
+"prepaid_card_sale_reversal" = "Återförd transaktion";
+"prepaid_card_sale" = "Transaktion";
+"prepaid_card_unload" = "Överföring från kort";
+"processing_fee" = "Administrativ avgift";
+"standard_shipping_fee" = "Avgift för standardfrakt";
+"transfer_fee" = "Överföringsavgift";
+"transfer_to_bank_account" = "Bankkonto";
+"transfer_to_debit_card" = "Betalkort";
+"transfer_to_moneygram" = "MoneyGram";
+"transfer_to_paper_check" = "Papperscheck";
+"transfer_to_paypal_account" = "PayPal";
+"transfer_to_prepaid_card" = "Överföring till kort";
+"transfer_to_program_account" = "Överföring till program";
+"transfer_to_user" = "Överföring till användare";
+"transfer_to_western_union" = "Western Union";
+"transfer_to_wire" = "Banköverföring";
+"transfer_to_wubs_wire" = "Banköverföring";
+"transfer_to_venmo_account" = "Venmo";
+"transfer_to_bank_card" = "Bankkort";
+"virtual_incentive_cancellation" = "Annullering av kampanj";
+"virtual_incentive_issuance" = "Utfärdad kampanj";
+"virtual_incentive_purchase" = "Kampanjköp";
+"virtual_incentive_refund" = "Kampanjåterbetalning";
+"western_union_transfer_return" = "Western Union-uttag";
+"wire_transfer_fee" = "Avgift för banköverföring";
+"wire_transfer_return" = "Returnering av banköverföring";
+"wubs_wire_transfer_return" = "Returnering av banköverföring";
+"unknown_receipt_type" = "Okänd transaktionstyp";
+"paypal_account_transfer_return" = "Returnering av kontanter";
+"venmo_account_transfer_return" = "Returnering av kontanter";
+"prepaid_card_account_deposit" = "Insättning på konto";
+"prepaid_card_annual_fee_discount" = "Rabatt på årsavgift";
+"prepaid_card_bill_reprint_fee" = "Avgift för ny utskrift av räkning";
+"prepaid_card_atm_or_cash_advance_fee" = "Avgift för bankomatuttag/förskott";
+"prepaid_card_cash_advance_chargeback" = "Chargeback av förskott";
+"prepaid_card_cash_advance_chargeback_reversal" = "Återföring av chargeback av förskott";
+"prepaid_card_cash_advance_repress" = "Hejdat förskott";
+"prepaid_card_cash_advance_repress_reversal" = "Återföring av hejdat förskott";
+"prepaid_card_chargeback" = "Chargeback";
+"prepaid_card_chargeback_refund" = "Återbetalning av chargeback";
+"prepaid_card_chargeback_refund_reversal" = "Återföring av återbetald chargeback";
+"prepaid_card_chargeback_reversal" = "Återföring av chargeback";
+"prepaid_card_commission_or_fee" = "Avgift/Provision";
+"prepaid_card_debit_transfer" = "Debitering/Överföringar";
+"prepaid_card_document_request_fee" = "Avgift för begäran om dokument";
+"prepaid_card_emergency_cash" = "Buffertpengar";
+"prepaid_card_emergency_card" = "Buffertkort";
+"prepaid_card_income" = "Inkomst";
+"prepaid_card_load_fee" = "PAN-avgift";
+"prepaid_card_overdue_payment_interest" = "Ränta på försenad betalning";
+"prepaid_card_payment" = "Ladda";
+"prepaid_card_pin_reprint_fee" = "Ny utskrift av PIN-kod";
+"prepaid_card_priority_pass_fee" = "Avgift för Priority pass";
+"prepaid_card_priority_pass_renewal" = "Förnyelse av Priority pass";
+"prepaid_card_recurring_interest" = "Rörlig ränta";
+"prepaid_card_refund_repress" = "Hejdad återbetalning";
+"prepaid_card_refund_repress_reversal" = "Återföring av hejdad återbetalning";
+"prepaid_card_sale_repress" = "Hejdad försäljning";
+"prepaid_card_statement_fee" = "Avgift för UTSKGJ-utdrag";
+"prepaid_card_telephone_support_fee" = "Information via telefon: saldo, trans. osv.";
+"prepaid_card_transfer_fee" = "Avgift för att ladda kort";
+"prepaid_card_transfer_return" = "Returnering av laddat belopp på förbetalt kort";
+"prepaid_card_bank_withdrawal_reversal" = "Återfört uttag från bank";
+"prepaid_card_bank_withdrawal_chargeback" = "Återfört uttag av chargeback";
+"prepaid_card_refund_fee" = "Avgift för återbetalning";
+"prepaid_card_monthly_maintenance_fee" = "Månatlig underhållsavgift";
+"prepaid_card_transaction_fee" = "Transaktionsavgift";
+"prepaid_card_sms_fee" = "SMS-avgift";
+"prepaid_card_declined_authorization_fee" = "Avgift för nekad autentisering";
+"fispc" = "Inköp";
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Receipt Detail
+"mobileTransactionDetailsHeader" = "Transaktionsdetaljer";
+"mobileTransactionTypeLabel" = "TRANSAKTION";
+"mobileTransactionDetailsLabel" = "DETALJER";
+"mobileFeeInfoLabel" = "AVGIFTSINFORMATION";
+"mobileConfirmNotesLabel" = "ANTECKNING";
+"mobileCharityName" = "Namn på välgörenhetsorganisation";
+"mobileCheckNumber" = "Checknummer";
+"mobileTransactionIdLabel" = "Transaktions-ID";
+"mobilePromoWebsite" = "Kampanjwebbplats";
+"mobileTransactionDetailsTotal" = "Transaktionstotal";
+"amount" = "Belopp";
+"mobileFeeLabel" = "Avgift";
+"mobileJournalNumberLabel" = "Kvitto-ID";
+"date" = "Datum";
+
+    // Transfer Funds
+"mobileTransferFundsHeader" = "Överföring";
+"mobileConfirmationHeader" = "Bekräfta uppgifterna";
+"mobileTransferFromLabel" = "ÖVERFÖRING FRÅN";
+"mobileTransferToLabel" = "ÖVERFÖRING TILL";
+"mobileNoteLabel" = "Anteckning";
+"mobileConfirmDetailsAmount" = "Belopp";
+"mobileConfirmDetailsFee" = "Avgift";
+"mobileConfirmDetailsTotal" = "Du kommer att få";
+"mobileTransferMax" = "Överför maxbelopp";
+"mobileFXsell" = "Från";
+"mobileFXbuy" = "Till";
+"mobileFXRateLabel" = "Valutakurs";
+"mobileAvailableBalance" = "Tillgängligt belopp %1$@%2$@ %3$@";
+"continueButtonLabel" = "Fortsätt";
+"mobileAddTransferMethod" = "Lägg till överföringsmetod";
+"mobileTransferMethodsHeader" = "Överföringsmetoder";
+"mobileTransferFromHeader" = "Överföring från";
+"mobileAvailableFunds" = "Tillgängligt saldo";
+"mobileFXlabel" = "UTLÄNDSK VALUTA";
+"mobileSummaryLabel" = "SAMMANFATTNING";
+"transfer" = "Överföring";
+"transferAmountInvalid" = "Ange ett giltigt överföringsbelopp";
+"noTransferMethodAdded" = "Överföringsmetod krävs";
+"transfer_error_no_transfer_method_module_initialized" = "Du kan inte lägga till en överföringsmetod.";
+"transfer_fx_rate_changed" = "På grund av förändringar i valutakursen, kommer du nu att få: %1$@";
+"mobileTransferSuccessMsg" = "Din överföring behandlas";
+"mobileTransferSuccessDetails" = "Pengarna är på väg till ditt %1$@.";
+"noTransferFromSourceAvailable" = "Det finns ingen överföring från källan tillgänglig";

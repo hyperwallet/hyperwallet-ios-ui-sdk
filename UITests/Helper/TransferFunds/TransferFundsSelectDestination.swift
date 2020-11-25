@@ -31,4 +31,10 @@ class TransferFundsSelectDestination {
         let row = app.tables.element.children(matching: .cell).element(boundBy: index)
         return row.staticTexts[destinationCellSubtitle].label
     }
+
+    func tapSelectDestinationRow(index: Int) {
+        let row = app.tables.element.children(matching: .cell).element(boundBy: index)
+        assert(row.exists)
+        row.tap()
+    }
 }

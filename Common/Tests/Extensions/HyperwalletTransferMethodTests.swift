@@ -39,10 +39,11 @@ class HyperwalletTransferMethodTests: XCTestCase {
         let transferMethod = HyperwalletPrepaidCard.Builder(transferMethodProfileType: profileType)
             .build()
 
+        transferMethod.setField(key: HyperwalletTransferMethod.TransferMethodField.cardBrand.rawValue, value: "VISA")
         transferMethod.setField(key: HyperwalletTransferMethod.TransferMethodField.cardNumber.rawValue,
                                 value: "1111111100006789")
-
-        XCTAssertEqual(transferMethod.additionalInfo!, "ending in 6789")
+        XCTAssertEqual(transferMethod.isPrepaidCard(), true)
+        XCTAssertEqual(transferMethod.additionalInfo!, "Visa \u{2022}\u{2022}\u{2022}\u{2022} 6789")
     }
 
     func testAdditionalInfo_payPalAccount() {
@@ -65,5 +66,15 @@ class HyperwalletTransferMethodTests: XCTestCase {
             .build()
 
         XCTAssertEqual(transferMethod.additionalInfo!, "ending in 1233")
+    }
+
+    func testAdditionalInfo_venmoAccount() {
+        let transferMethod = HyperwalletVenmoAccount.Builder(transferMethodCountry: country,
+                                                             transferMethodCurrency: currency,
+                                                             transferMethodProfileType: profileType)
+            .accountId("9876543210")
+            .build()
+
+        XCTAssertEqual(transferMethod.additionalInfo!, "ending in 3210")
     }
 }

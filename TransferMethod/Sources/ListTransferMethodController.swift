@@ -51,6 +51,7 @@ final class ListTransferMethodController: UITableViewController {
                                                                    target: self,
                                                                    action: #selector(didTapAddButton))
         titleDisplayMode(.always, for: "mobileTransferMethodsHeader".localized())
+        self.navigationController?.presentationController?.delegate = self
     }
 
     private func initializePresenter() {
@@ -80,20 +81,26 @@ final class ListTransferMethodController: UITableViewController {
         if let listTransferMethodCell = cell as? ListTransferMethodCell {
             listTransferMethodCell.configure(transferMethod: presenter.sectionData[indexPath.row])
 
-            let icon = UIImage.fontIcon(HyperwalletIcon.of("TRASH").rawValue,
-                                        CGSize(width: 24, height: 25),
-                                        CGFloat(24),
-                                        UIColor(red: 0.17, green: 0.18, blue: 0.18, alpha: 1))
+            if !(presenter.sectionData[indexPath.row].isPrepaidCard()) {
+                let icon = UIImage.fontIcon(HyperwalletIcon.of("TRASH").rawValue,
+                                            CGSize(width: 24, height: 25),
+                                            CGFloat(24),
+                                            UIColor(red: 0.17, green: 0.18, blue: 0.18, alpha: 1))
 
-            listTransferMethodCell.accessoryView = UIImageView(image: icon)
+                listTransferMethodCell.accessoryView = UIImageView(image: icon)
+            } else {
+                listTransferMethodCell.accessoryView = nil
+            }
         }
         return cell
     }
 
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        showConfirmationAlert(title: "mobileRemoveEAconfirm".localized(),
-                              message: "mobileAreYouSure".localized(),
-                              transferMethodIndex: indexPath.row)
+        if !(presenter.sectionData[indexPath.row].isPrepaidCard()) {
+            showConfirmationAlert(title: "mobileRemoveEAconfirm".localized(),
+                                  message: "mobileAreYouSure".localized(),
+                                  transferMethodIndex: indexPath.row)
+        }
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
@@ -114,7 +121,11 @@ final class ListTransferMethodController: UITableViewController {
         tableView.tableFooterView = UIView()
         tableView.register(ListTransferMethodCell.self,
                            forCellReuseIdentifier: ListTransferMethodCell.reuseIdentifier)
-        tableView.rowHeight = UITableView.automaticDimension
+         if #available(iOS 11, *) {
+             tableView.rowHeight = UITableView.automaticDimension
+         } else {
+            tableView.rowHeight = Theme.Cell.largeHeight
+         }
         tableView.estimatedRowHeight = Theme.Cell.smallHeight
         tableView.backgroundColor = Theme.UITableViewController.backgroundColor
     }

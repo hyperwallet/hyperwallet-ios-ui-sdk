@@ -1,0 +1,266 @@
+//
+// Copyright 2018 - Present Hyperwallet
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+// and associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+// BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+"backBarButton" = "Nazaj";
+"mobileTransferMethodsHeader" = "Načini prenosa";
+"remove" = "Odstrani";
+"cancelButtonLabel" = "Prekliči";
+"doneButtonLabel" = "Opravljeno";
+"try_again_button_label" = "Poskusite znova";
+"search_placeholder_label" = "Iskanje";
+"unexpected_error_message" = "Nekaj je narobe, poskusite znova.";
+"network_connection_error_title" = "Težave s povezljivostjo";
+"unexpected_title" = "Nepričakovana napaka";
+"network_connection_error_message" = "Pri obdelavi zahteve smo naleteli na težavo. Preverite povezljivost.";
+"endingIn" = "ki se konča z ";
+"to" = "za ";
+"no_country_available_error_message" = "Ni držav";
+"no_transfer_method_available_error_message" = "Ni načina prenosa za %1$@ in %2$@";
+"no_currency_available_error_message" = "Ni valute za državo %1$@";
+"emptyStateAddTransferMethod" = "Dodaj način prenosa za začetek.";
+"mobileAddTransferMethodHeader" = "Dodaj način prenosa";
+"mobileCountryCurrencyLabel" = "LOKACIJA IN VALUTA";
+"mobileTransferMethodLabel" = "NAČIN PRENOSA";
+"mobileCountryRegion" = "Država/regija";
+"mobileCurrencyLabel" = "Valuta";
+"mobileAreYouSure" = "Ali ste prepričani?";
+"mobileRemoveEAconfirm" = "Odstrani način prenosa";
+"fee_flat_formatter" = "%1$@%2$@pristojbina";
+"fee_percent_only_min_formatter" = "%1$@%% (Min.:%2$@%3$@) pristojbina";
+"fee_percent_only_max_formatter" = "%1$@%% (Maks.:%2$@%3$@) pristojbina";
+"fee_percent_formatter" = "%1$@%% (Min.:%2$@%3$@, maks.:%2$@%4$@) pristojbina";
+"fee_mix_no_min_and_max_formatter" = "%1$@%2$@ + %3$@%% pristojbina";
+"fee_mix_only_min_formatter" = "%1$@%2$@ + %3$@%% (Min.:%1$@%4$@) pristojbina";
+"fee_mix_only_max_formatter" = "%1$@%2$@ + %3$@%% (Maks.:%1$@%4$@) pristojbina";
+"fee_mix_formatter" = "%1$@%2$@ + %3$@%% (Min.:%1$@%4$@, maks.:%1$@%5$@) pristojbina";
+"fee_percent_no_min_and_max_formatter" = "%1$@%% pristojbina";
+"transfer_method_not_supported_message" = "Ta način prenosa ni podprt.";
+"error" = "Napaka";
+"authentication_error_title" = "Napaka pri avtentifikaciji";
+"authentication_error_message" = "Pri prevzemu žetona za avtentifikacijo je prišlo do napake";
+
+    // Transfer methods
+"bank_account" = "Bančni račun";
+"bank_card" = "Debetna kartica";
+"paper_check" = "Ček";
+"prepaid_card" = "Predplačniška kartica";
+"wire_account" = "Račun za elektronski prenos sredstev";
+"paypal_account" = "Račun Paypal";
+"venmo_account" = "Račun Venmo";
+"cash_pickup_mg" = "MoneyGram";
+
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Manage Prepaid Card Message
+"manage_prepaid_card_message" = "Prijavite se prek spletnega brskalnika in upravljajte kartico.";
+    //Select Transfer Method View
+"select_a_country_message" = "Izberi državo";
+
+    // Add Transfer Method
+"createTransferMethodButtonLabel" = "Dodaj način prenosa";
+"account_information" = "PODATKI O RAČUNU: %1$@(%2$@)";
+"account_holder" = "PODATKI O IMETNIKU RAČUNA";
+"address"="NASLOV";
+"mobileFeesAndProcessingTime" = "PRISTOJBINE IN ČAS OBDELAVE";
+"intermediary_account" = "RAČUN POSREDNIKA";
+"contact_information" = "KONTAKTNI PODATKI";
+"identification" = "IDENTIFIKACIJA";
+
+"date_format" = "LLLL-MM-DD";
+
+    // Processing View
+"processing_view_label" = "Obdelava";
+"complete_view_label" = "Izpolnite";
+
+    // Receipt
+"transactions" = "Transakcije";
+"mobileNoTransactions" = "Ni aktivnosti za prikaz";
+"mobilePrepaidCardNoTransactions" = "Ni transakcij v zadnjih 365 dneh";
+"add_transaction_title" = "Dodaj transakcijo";
+"account_closure_fee" = "Pristojbina za zaprtje računa";
+"account_closure" = "Zaprtje računa";
+"account_unload" = "Vračilo sredstev";
+"adjustment" = "Prilagoditev stanja";
+"annual_fee_refund" = "Povračilo letne pristojbine";
+"annual_fee" = "Letna pristojbina";
+"bank_account_transfer_fee" = "Pristojbina za vračilo na račun";
+"bank_account_transfer_return_fee" = "Pristojbina za vračilo na račun";
+"bank_account_transfer_return" = "Vračilo na račun";
+"card_activation_fee_waiver" = "Priistojbina za odpoved aktivacije kartice";
+"card_activation_fee" = "Pristojbina za aktivacijo kartice";
+"card_fee" = "Pristojbina za kartico";
+"customer_service_fee_refund" = "Povračilo pristojbine za storitve za stranke";
+"customer_service_fee" = "Pristojbina za storitve za stranke";
+"deposit" = "Plačilo";
+"donation_fee" = "Pristojbina za donacijo";
+"donation_return" = "Vračilo donacije";
+"donation" = "Donacija";
+"dormant_user_fee_refund" = "Povračilo pristojbine za mirujoči račun uporabnika";
+"dormant_user_fee" = "Pristojbina za mirujoči račun uporabnika";
+"expedited_shipping_fee" = "Pristojbina za pospešeno pošiljko";
+"foreign_exchange" = "Devizna sredstva";
+"generic_fee_refund" = "Povračilo splošne pristojbine";
+"manual_adjustment" = "Prilagoditev";
+"manual_transfer_to_prepaid_card" = "Prenos na kartico";
+"merchant_payment_fee" = "Pristojbina plačila trgovcu";
+"merchant_payment_refund" = "Povračilo plačila trgovcu";
+"merchant_payment_return" = "Vračilo plačila trgovcu";
+"merchant_payment" = "Plačilo trgovcu";
+"moneygram_transfer_return" = "Vračilo MoneyGram";
+"monthly_fee_refund" = "Povračilo mesečne pristojbine";
+"monthly_fee" = "Mesečna pristojbina";
+"paper_check_fee" = "Pristojbina za ček";
+"paper_check_refund" = "Povračilo čeka";
+"payment_cancellation" = "Preklic plačila";
+"payment_expiration" = "Plačilo poteklo";
+"payment_expiry_fee" = "Pristojbina za poteklo plačilo";
+"payment_fee" = "Pristojbina za plačilo";
+"payment_return" = "Vračilo plačila";
+"payment_reversal_fee" = "Pristojbina za razveljavitev plačila";
+"payment_reversal" = "Razveljavitev plačila";
+"payment" = "Plačilo";
+"prepaid_card_balance_inquiry_fee" = "Pristojbina za poizvedbo o stanju";
+"prepaid_card_cash_advance" = "Predujem";
+"prepaid_card_dispute_deposit" = "Sporni polog na kartico";
+"prepaid_card_disputed_charge_refund" = "Povračilo spornega zneska";
+"prepaid_card_domestic_cash_withdrawal_fee" = "Dvig na bankomatu";
+"prepaid_card_exchange_rate_difference" = "Razlika v menjalnem tečaju";
+"prepaid_card_manual_unload" = "Prenos s kartice";
+"prepaid_card_overseas_cash_withdrawal_fee" = "Dvig na bankomatu";
+"prepaid_card_pin_change_fee" = "Pristojbina za spremembo PIN";
+"prepaid_card_refund" = "Povračilo";
+"prepaid_card_replacement_fee" = "Pristojbina za nadomestno kartico";
+"prepaid_card_sale_reversal" = "Preklic transakcije";
+"prepaid_card_sale" = "Transakcija";
+"prepaid_card_unload" = "Prenos s kartice";
+"processing_fee" = "Pristojbina za obdelavo";
+"standard_shipping_fee" = "Standardna pristojbina za pošiljanje";
+"transfer_fee" = "Pristojbina za nakazilo";
+"transfer_to_bank_account" = "Bančni račun";
+"transfer_to_debit_card" = "Debetna kartica";
+"transfer_to_moneygram" = "MoneyGram";
+"transfer_to_paper_check" = "Ček";
+"transfer_to_paypal_account" = "Paypal";
+"transfer_to_prepaid_card" = "Prenos na kartico";
+"transfer_to_program_account" = "Prenos do programa";
+"transfer_to_user" = "Prenos do uporabnika";
+"transfer_to_western_union" = "Western Union";
+"transfer_to_wire" = "Elektronski prenos";
+"transfer_to_wubs_wire" = "Elektronski prenos";
+"transfer_to_venmo_account" = "Venmo";
+"transfer_to_bank_card" = "Bančna kartica";
+"virtual_incentive_cancellation" = "Preklic v promociji";
+"virtual_incentive_issuance" = "Izdano v promociji";
+"virtual_incentive_purchase" = "Nakup v promociji";
+"virtual_incentive_refund" = "Povračilo v promociji";
+"western_union_transfer_return" = "Dvig Western Union";
+"wire_transfer_fee" = "Pristojbina za elektronski prenos";
+"wire_transfer_return" = "Vračilo elektronskega prenosa";
+"wubs_wire_transfer_return" = "Vračilo elektronskega prenosa";
+"unknown_receipt_type" = "Neznana vrsta transakcije";
+"paypal_account_transfer_return" = "Vračilo izplačila";
+"venmo_account_transfer_return" = "Vračilo izplačila";
+"prepaid_card_account_deposit" = "Nakazilo na račun";
+"prepaid_card_annual_fee_discount" = "Popust na letno pristojbino";
+"prepaid_card_bill_reprint_fee" = "Pristojbina za izdajo kopije računa";
+"prepaid_card_atm_or_cash_advance_fee" = "Pristojbina za dvig na bankomatu/predujem";
+"prepaid_card_cash_advance_chargeback" = "Storno predujma";
+"prepaid_card_cash_advance_chargeback_reversal" = "Preklic storna predujma";
+"prepaid_card_cash_advance_repress" = "Zaustavitev predujma";
+"prepaid_card_cash_advance_repress_reversal" = "Preklic zaustavitve predujma";
+"prepaid_card_chargeback" = "Storno";
+"prepaid_card_chargeback_refund" = "Povračilo storna";
+"prepaid_card_chargeback_refund_reversal" = "Preklic povračila storna";
+"prepaid_card_chargeback_reversal" = "Preklic storna";
+"prepaid_card_commission_or_fee" = "Pristojbina/Provizija";
+"prepaid_card_debit_transfer" = "Bremenitev/Prenosi";
+"prepaid_card_document_request_fee" = "Pristojbina za zahtevek za dokument";
+"prepaid_card_emergency_cash" = "Gotovina v nujnem primeru";
+"prepaid_card_emergency_card" = "Kartica v nujnem primeru";
+"prepaid_card_income" = "Prihodek";
+"prepaid_card_load_fee" = "Pristojbina PAN";
+"prepaid_card_overdue_payment_interest" = "Obresti na zapadlo plačilo";
+"prepaid_card_payment" = "Obremenitev";
+"prepaid_card_pin_reprint_fee" = "Ponatis PIN";
+"prepaid_card_priority_pass_fee" = "Pristojbina za prednostno obravnavo";
+"prepaid_card_priority_pass_renewal" = "Obnovitev prednostne obravnave";
+"prepaid_card_recurring_interest" = "Revolving obresti";
+"prepaid_card_refund_repress" = "Zaustavitev povračila";
+"prepaid_card_refund_repress_reversal" = "Preklic zaustavitve povračila";
+"prepaid_card_sale_repress" = "Zaustavitev prodaje";
+"prepaid_card_statement_fee" = "Pristojbina za izjavo UTSKGJ";
+"prepaid_card_telephone_support_fee" = "Podatki po telefonu: stanje, transakcija itd.";
+"prepaid_card_transfer_fee" = "Pristojbina za obremenitev kartice";
+"prepaid_card_transfer_return" = "Povračilo obremenitve predplačniške kartice";
+"prepaid_card_bank_withdrawal_reversal" = "Preklic bančnega dviga";
+"prepaid_card_bank_withdrawal_chargeback" = "Storno preklica bančnega dviga";
+"prepaid_card_refund_fee" = "Pristojbina za povračilo";
+"prepaid_card_monthly_maintenance_fee" = "Pristojbina za mesečno vodenje";
+"prepaid_card_transaction_fee" = "Pristojbina za transakcijo";
+"prepaid_card_sms_fee" = "Pristojbina za SMS sporočilo";
+"prepaid_card_declined_authorization_fee" = "Pristojbina za zavrnjeno avtorizacijo";
+"fispc" = "Nakup";
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+    // Receipt Detail
+"mobileTransactionDetailsHeader" = "Podatki o transakciji:";
+"mobileTransactionTypeLabel" = "TRANSAKCIJA";
+"mobileTransactionDetailsLabel" = "PODATKI";
+"mobileFeeInfoLabel" = "PODATKI O PRISTOJBINI";
+"mobileConfirmNotesLabel" = "OPOMBA:";
+"mobileCharityName" = "Ime dobrodelne organizacije";
+"mobileCheckNumber" = "Številka čeka";
+"mobileTransactionIdLabel" = "ID transakcije";
+"mobilePromoWebsite" = "Spletno mesto promocije";
+"mobileTransactionDetailsTotal" = "Skupaj transakcija";
+"amount" = "Znesek";
+"mobileFeeLabel" = "Provizija";
+"mobileJournalNumberLabel" = "ID prejema";
+"date" = "Datum";
+
+    // Transfer Funds
+"mobileTransferFundsHeader" = "Prenos";
+"mobileConfirmationHeader" = "Potrdi podatke";
+"mobileTransferFromLabel" = "PRENOS OD";
+"mobileTransferToLabel" = "PRENOS V/DO";
+"mobileNoteLabel" = "Opomba";
+"mobileConfirmDetailsAmount" = "Znesek";
+"mobileConfirmDetailsFee" = "Provizija";
+"mobileConfirmDetailsTotal" = "Prejeli boste";
+"mobileTransferMax" = "Prenesi najvišji možni znesek";
+"mobileFXsell" = "Od";
+"mobileFXbuy" = "Za";
+"mobileFXRateLabel" = "Menjalni tečaj";
+"mobileAvailableBalance" = "Znesek na voljo: %1$@%2$@ %3$@";
+"continueButtonLabel" = "Nadaljuj";
+"mobileAddTransferMethod" = "Dodaj način prenosa";
+"mobileTransferMethodsHeader" = "Načini prenosa";
+"mobileTransferFromHeader" = "Prenos od";
+"mobileAvailableFunds" = "Sredstva na voljo";
+"mobileFXlabel" = "DEVIZNA SREDSTVA";
+"mobileSummaryLabel" = "POVZETEK";
+"transfer" = "Prenos";
+"transferAmountInvalid" = "Vnesite veljavni znesek prenosa";
+"noTransferMethodAdded" = "Zahtevan je način prenosa";
+"transfer_error_no_transfer_method_module_initialized" = "Ne morete dodati načina prenosa.";
+"transfer_fx_rate_changed" = "Zaradi sprememb v menjalnem tečaju boste zdaj prejeli %1$@.";
+"mobileTransferSuccessMsg" = "Vaš prenos je v obdelavi";
+"mobileTransferSuccessDetails" = "Denar je na poti na vaš %1$@.";
+"noTransferFromSourceAvailable" = "Iz vira ni na voljo prenosa";
