@@ -206,6 +206,12 @@ final class AddTransferMethodPresenter {
                                                    transferMethodProfileType: profileType)
                     .build()
 
+        case HyperwalletTransferMethod.TransferMethodType.paperCheck.rawValue:
+            return HyperwalletVenmoAccount.Builder(transferMethodCountry: country,
+                                                   transferMethodCurrency: currency,
+                                                   transferMethodProfileType: profileType)
+                    .build()
+
         default:
             return nil
         }

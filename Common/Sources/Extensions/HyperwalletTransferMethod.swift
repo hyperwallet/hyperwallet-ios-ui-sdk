@@ -54,6 +54,12 @@ extension HyperwalletTransferMethod: GenericCellConfiguration {
                           getField(TransferMethodField.accountId.rawValue)?
                             .suffix(startAt: 4) ?? "")
 
+        case TransferMethodType.paperCheck.rawValue:
+                return String(format: "%@%@",
+                              "endingIn".localized(),
+                              getField(TransferMethodField.postalCode.rawValue)?
+                                .suffix(startAt: 4) ?? "")
+
         default:
             return String(format: "%@%@",
                           "endingIn".localized(),
