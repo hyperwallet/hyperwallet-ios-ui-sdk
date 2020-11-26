@@ -73,3 +73,4 @@ fastlane/report.xml
 /.idea/xcode.xml
 /.idea/shelf/local-config/shelved.patch
 /.idea/shelf/local-config.xml
+/.idea/
