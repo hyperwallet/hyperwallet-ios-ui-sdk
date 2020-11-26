@@ -33,7 +33,6 @@ final class ListReceiptController: UITableViewController {
     private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "mobileNoTransactions".localized())
     private lazy var emptyPPCListLabel: UILabel =
         view.setUpEmptyListLabel(text: "mobilePrepaidCardNoTransactions".localized())
-    private var uiSegmentedControl: UISegmentedControl?
     private var selectedSegmentedControl = 0
 
     override public func viewDidLoad() {
