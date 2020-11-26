@@ -175,7 +175,6 @@
 		9807B76B226442C60028A280 /* TransferMethodConfigurationBankAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFB61522261E84D00C4A8AA /* TransferMethodConfigurationBankAccountResponse.json */; };
 		9807B76C226442C60028A280 /* TransferMethodConfigurationBankCardResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFB614F2261E84C00C4A8AA /* TransferMethodConfigurationBankCardResponse.json */; };
 		9807B76D226442C60028A280 /* UnexpectedErrorResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBFB61492261E84C00C4A8AA /* UnexpectedErrorResponse.json */; };
-		980B9ADE251BD3FC00653D1C /* PrepaidCardRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980B9ADD251BD3FB00653D1C /* PrepaidCardRepository.swift */; };
 		980B9AE0251BD6D700653D1C /* TransferSourceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980B9ADF251BD6D700653D1C /* TransferSourceCell.swift */; };
 		980B9AE2251BF7B400653D1C /* HyperwalletPrepaidCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980B9AE1251BF7B400653D1C /* HyperwalletPrepaidCard.swift */; };
 		980B9AE4251BFD1300653D1C /* HyperwalletProgramModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980B9AE3251BFD1300653D1C /* HyperwalletProgramModel.swift */; };
@@ -233,6 +232,7 @@
 		98F63E6E2284AD370090101D /* PayPalAccountDuplicateResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F63E6C2284AD330090101D /* PayPalAccountDuplicateResponse.json */; };
 		98F63E6F2284AD9B0090101D /* AddTransferMethodPayPalAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F63E64228485930090101D /* AddTransferMethodPayPalAccountTests.swift */; };
 		98F63E722284B4AF0090101D /* TransferMethodConfigurationPayPalAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98F63E712284B4AF0090101D /* TransferMethodConfigurationPayPalAccountResponse.json */; };
+		98FD2948256ECBAA0019C7F0 /* PrepaidCardRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FD2947256ECBAA0019C7F0 /* PrepaidCardRepository.swift */; };
 		A65312CD22FC037800A83D30 /* HyperwalletCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65312CA22FC037800A83D30 /* HyperwalletCoordinator.swift */; };
 		A65312CE22FC037800A83D30 /* InitializationDataField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65312CB22FC037800A83D30 /* InitializationDataField.swift */; };
 		A65312CF22FC037800A83D30 /* HyperwalletFlowDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65312CC22FC037800A83D30 /* HyperwalletFlowDelegate.swift */; };
@@ -797,7 +797,6 @@
 		644A69C622B14F4A0058E77E /* AddTransferMethodWireAccountTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodWireAccountTests.swift; sourceTree = "<group>"; };
 		64F45BCD22BA27CB00515AE1 /* WireAccountIndividualResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WireAccountIndividualResponse.json; sourceTree = "<group>"; };
 		64F45BD322BA313E00515AE1 /* TransferMethodConfigurationWireAccountResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TransferMethodConfigurationWireAccountResponse.json; sourceTree = "<group>"; };
-		980B9ADD251BD3FB00653D1C /* PrepaidCardRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PrepaidCardRepository.swift; path = Helper/PrepaidCardRepository.swift; sourceTree = "<group>"; };
 		980B9ADF251BD6D700653D1C /* TransferSourceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferSourceCell.swift; sourceTree = "<group>"; };
 		980B9AE1251BF7B400653D1C /* HyperwalletPrepaidCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletPrepaidCard.swift; sourceTree = "<group>"; };
 		980B9AE3251BFD1300653D1C /* HyperwalletProgramModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletProgramModel.swift; sourceTree = "<group>"; };
@@ -848,6 +847,7 @@
 		98F63E712284B4AF0090101D /* TransferMethodConfigurationPayPalAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TransferMethodConfigurationPayPalAccountResponse.json; sourceTree = "<group>"; };
 		98F63E732284EE890090101D /* PayPalAccountResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PayPalAccountResponse.json; sourceTree = "<group>"; };
 		98FBC68923D8D8D90050E2B6 /* HyperwalletSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HyperwalletSDK.framework; path = Carthage/Build/iOS/HyperwalletSDK.framework; sourceTree = "<group>"; };
+		98FD2947256ECBAA0019C7F0 /* PrepaidCardRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrepaidCardRepository.swift; sourceTree = "<group>"; };
 		A65312CA22FC037800A83D30 /* HyperwalletCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyperwalletCoordinator.swift; sourceTree = "<group>"; };
 		A65312CB22FC037800A83D30 /* InitializationDataField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitializationDataField.swift; sourceTree = "<group>"; };
 		A65312CC22FC037800A83D30 /* HyperwalletFlowDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyperwalletFlowDelegate.swift; sourceTree = "<group>"; };
@@ -2122,7 +2122,7 @@
 			isa = PBXGroup;
 			children = (
 				DBB50B4F22D7ECF90029B74B /* Helper */,
-				980B9ADD251BD3FB00653D1C /* PrepaidCardRepository.swift */,
+				98FD2947256ECBAA0019C7F0 /* PrepaidCardRepository.swift */,
 				DB80BF9B22CD14D700BA5EED /* TransferMethodConfigurationRepository.swift */,
 				DBB4265322D530DD00D721C4 /* TransferMethodRepository.swift */,
 				DB80BF9D22CD14F300BA5EED /* TransferMethodRepositoryFactory.swift */,
@@ -3686,8 +3686,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBB50B5522D7EE200029B74B /* TransferMethodConfigurationRepository.swift in Sources */,
-				980B9ADE251BD3FC00653D1C /* PrepaidCardRepository.swift in Sources */,
 				DBAF92B822CFCE48004F197A /* TransferMethodRepositoryFactory.swift in Sources */,
+				98FD2948256ECBAA0019C7F0 /* PrepaidCardRepository.swift in Sources */,
 				DBB50B5222D7ED6C0029B74B /* TransferMethodRepository.swift in Sources */,
 				DB6523B922DFDAA400F52EA7 /* TransferMethodRepositoryCompletionHelper.swift in Sources */,
 			);
@@ -3864,7 +3864,6 @@
 				DC61F9D62563F63200C93C50 /* fr */,
 				DC61F9D92563F65E00C93C50 /* hr */,
 				DC61F9DC2563F68600C93C50 /* hu */,
-				DC61F9DF2563F6B100C93C50 /* id */,
 				DC61F9E22563F6F600C93C50 /* is */,
 				DC61F9E52563F71D00C93C50 /* it */,
 				DC61F9E82563F74C00C93C50 /* ja */,
@@ -3905,7 +3904,6 @@
 				DC61F9D72563F63200C93C50 /* fr */,
 				DC61F9DA2563F65E00C93C50 /* hr */,
 				DC61F9DD2563F68600C93C50 /* hu */,
-				DC61F9E02563F6B100C93C50 /* id */,
 				DC61F9E32563F6F600C93C50 /* is */,
 				DC61F9E62563F71D00C93C50 /* it */,
 				DC61F9E92563F74C00C93C50 /* ja */,
@@ -3946,7 +3944,6 @@
 				DC61F9D82563F63200C93C50 /* fr */,
 				DC61F9DB2563F65F00C93C50 /* hr */,
 				DC61F9DE2563F68600C93C50 /* hu */,
-				DC61F9E12563F6B100C93C50 /* id */,
 				DC61F9E42563F6F600C93C50 /* is */,
 				DC61F9E72563F71D00C93C50 /* it */,
 				DC61F9EA2563F74C00C93C50 /* ja */,
