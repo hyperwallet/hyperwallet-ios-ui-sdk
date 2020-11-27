@@ -51,7 +51,8 @@ script: |
   xcodebuild -enableCodeCoverage "$code_coverage" clean build test -project "$PROJECT" \
     -scheme "$scheme" \
     -destination "$destination" \
-    -configuration "$configuration" ONLY_ACTIVE_ARCH="$only_active_arch" ENABLE_TESTABILITY=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
+    -configuration "$configuration" ONLY_ACTIVE_ARCH="$only_active_arch" ENABLE_TESTABILITY=YES \
+    -allowProvisioningUpdates \
     | xcpretty --color
 
   # Lint - Add `--strict` to fail for warning and violation
