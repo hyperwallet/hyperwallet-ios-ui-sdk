@@ -61,9 +61,9 @@ after_success:
   if [ "$code_coverage" == "YES" ]; then
       slather;
   fi
-  make docs --debug;
   if [ "$publish_docs" == "YES" ]; then
       if [ $TRAVIS_BRANCH = 'master' ] && [ $TRAVIS_PULL_REQUEST = 'false' ]; then
+          make docs;
           sh ./Scripts/travisPublishDocs.sh;
       fi
   fi
