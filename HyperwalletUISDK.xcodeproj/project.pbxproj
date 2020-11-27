@@ -458,19 +458,19 @@
 			remoteGlobalIDString = 643912D322DF40CB00036609;
 			remoteInfo = UserRepository;
 		};
-		98631ED02571789800A8CBF5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DBAF929C22CFCBC7004F197A;
-			remoteInfo = TransferMethodRepository;
-		};
 		98631ED22571792E00A8CBF5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 073BB98122E63DB50053C24E;
 			remoteInfo = TransferRepository;
+		};
+		98631ED425717B9600A8CBF5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DBAF929C22CFCBC7004F197A;
+			remoteInfo = TransferMethodRepository;
 		};
 		98FBC69223D8D90C0050E2B6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -2718,7 +2718,7 @@
 			);
 			dependencies = (
 				98FBC69323D8D90C0050E2B6 /* PBXTargetDependency */,
-				98631ED12571789800A8CBF5 /* PBXTargetDependency */,
+				98631ED525717B9600A8CBF5 /* PBXTargetDependency */,
 				98FBC69723D8D90C0050E2B6 /* PBXTargetDependency */,
 			);
 			name = Receipt;
@@ -3750,15 +3750,15 @@
 			target = 643912D322DF40CB00036609 /* UserRepository */;
 			targetProxy = 643912DE22DF40CB00036609 /* PBXContainerItemProxy */;
 		};
-		98631ED12571789800A8CBF5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DBAF929C22CFCBC7004F197A /* TransferMethodRepository */;
-			targetProxy = 98631ED02571789800A8CBF5 /* PBXContainerItemProxy */;
-		};
 		98631ED32571792E00A8CBF5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 073BB98122E63DB50053C24E /* TransferRepository */;
 			targetProxy = 98631ED22571792E00A8CBF5 /* PBXContainerItemProxy */;
+		};
+		98631ED525717B9600A8CBF5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DBAF929C22CFCBC7004F197A /* TransferMethodRepository */;
+			targetProxy = 98631ED425717B9600A8CBF5 /* PBXContainerItemProxy */;
 		};
 		98FBC69323D8D90C0050E2B6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
