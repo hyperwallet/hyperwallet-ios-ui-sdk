@@ -80,8 +80,8 @@ class HyperwalletTransferMethodTests: XCTestCase {
 
     func testAdditionalInfo_paperCheck() {
         let transferMethod = HyperwalletPaperCheck.Builder(transferMethodCountry: country,
-                                                             transferMethodCurrency: currency,
-                                                             transferMethodProfileType: profileType)
+                                                           transferMethodCurrency: currency,
+                                                           transferMethodProfileType: profileType)
             .postalCode("43210")
             .build()
 
