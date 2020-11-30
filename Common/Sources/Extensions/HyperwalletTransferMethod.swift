@@ -56,7 +56,7 @@ extension HyperwalletTransferMethod: GenericCellConfiguration {
 
         case TransferMethodType.paperCheck.rawValue:
                 return String(format: "%@%@",
-                              "endingIn".localized(),
+                              "to".localized(),
                               getField(TransferMethodField.postalCode.rawValue)?
                                 .suffix(startAt: 4) ?? "")
 
