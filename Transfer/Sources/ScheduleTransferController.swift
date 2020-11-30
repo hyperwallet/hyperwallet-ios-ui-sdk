@@ -266,13 +266,21 @@ extension ScheduleTransferController: ScheduleTransferView {
 
     func showConfirmation(handler: @escaping (() -> Void)) {
         let destinationData = presenter.sectionData[1] as? ScheduleTransferDestinationData
+        if destinationData?.transferMethod.type == HyperwalletTransferMethod.TransferMethodType.paperCheck.rawValue {
+            HyperwalletUtilViews.showAlert(self,
+                                           title: "mobileTransferSuccessMsg".localized(),
+                                           message: "",
+                                           actions: UIAlertAction.close({ (_) in
+                                            handler()
+                                           }))
+        } else {
         HyperwalletUtilViews.showAlert(self,
                                        title: "mobileTransferSuccessMsg".localized(),
                                        message: String(format: "mobileTransferSuccessDetails".localized(),
                                                        destinationData?.transferMethod.title ?? " "),
                                        actions: UIAlertAction.close({ (_) in
                                             handler()
-                                       }))
+                                       })) }
     }
 
     func showError(_ error: HyperwalletErrorType, pageName: String, pageGroup: String, _ retry: (() -> Void)?) {
