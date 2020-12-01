@@ -176,6 +176,15 @@ extension ListReceiptController: ListReceiptView {
                                        for: .valueChanged)
             segmentedControl.selectedSegmentIndex = selectedSegmentedControl
             tableView.tableHeaderView = segmentedControl
+            var font = UIFont.systemFont(ofSize: 11, weight: .semibold)
+            if #available(iOS 11.0, *) {
+                font = UIFontMetrics(forTextStyle: .body)
+                    .scaledFont(for: UIFont
+                        .systemFont(ofSize: 11, weight: .semibold))
+            }
+            segmentedControl.setTitleTextAttributes(
+                [NSAttributedString.Key.font: font], for: .normal)
+
             /// Add constraints to segmentedControl
             segmentedControl.translatesAutoresizingMaskIntoConstraints = false
             segmentedControl.leadingAnchor.constraint(equalTo: tableView.leadingAnchor, constant: 24)
@@ -183,6 +192,8 @@ extension ListReceiptController: ListReceiptView {
             segmentedControl.trailingAnchor.constraint(equalTo: tableView.trailingAnchor, constant: -24)
                 .isActive = true
             segmentedControl.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
+            segmentedControl.centerYAnchor.constraint(equalTo: tableView.topAnchor, constant: 15)
+                .isActive = true
         }
     }
 
