@@ -175,7 +175,7 @@ public extension UIView {
 
     /// Adjust segment titles width
     /// - Parameter view: Segmented Controller
-    class func adjustWidthOfSegmetTitles(view: UIView) {
+    class func adjustWidthOfSegmentTitles(view: UIView) {
         let subviews = view.subviews
         for subview in subviews {
             if subview is UILabel {
@@ -183,7 +183,7 @@ public extension UIView {
                 label?.adjustsFontSizeToFitWidth = true
                 label?.minimumScaleFactor = 0.1
             } else {
-                adjustWidthOfSegmetTitles(view: subview)
+                adjustWidthOfSegmentTitles(view: subview)
             }
         }
     }
