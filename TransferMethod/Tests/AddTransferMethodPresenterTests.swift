@@ -227,6 +227,36 @@ class AddTransferMethodPresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isNotificationSent, "The notification should be sent")
     }
 
+    func testCreateTransferMethod_createPaperCheckAccount() {
+        presenter = AddTransferMethodPresenter(mockView,
+                                               "US",
+                                               "USD",
+                                               "INDIVIDUAL",
+                                               HyperwalletTransferMethod.TransferMethodType.paperCheck.rawValue,
+                                               hyperwalletInsightsMock)
+        let url = String(format: "%@/papercheck-accounts", HyperwalletTestHelper.userRestURL)
+        let response = HyperwalletTestHelper.okHTTPResponse(for: "PaperCheckAccountResponse")
+        let request = HyperwalletTestHelper.buildPostRequest(baseUrl: url, response)
+        HyperwalletTestHelper.setUpMockServer(request: request)
+
+        // Add fields to the form
+        mockView.mockFieldValuesReturnResult.append((name: "postalCode", value: "43210"))
+        mockView.mockFieldStatusReturnResult.append(true)
+
+        // press the create transfer method button
+        let expectation = self.expectation(description: "Create PaperCheck account completed")
+        mockView.expectations = [mockView.expectation: expectation]
+
+        presenter.createTransferMethod()
+
+        wait(for: Array(mockView.expectations!.values), timeout: 1)
+
+        // Then
+        XCTAssertFalse(mockView.isShowErrorPerformed, "The showError should not be performed")
+        XCTAssertTrue(mockView.isShowConfirmationPerformed, "The showConfirmation should be performed")
+        XCTAssertTrue(mockView.isNotificationSent, "The notification should be sent")
+    }
+
     func testCreateTransferMethod_failure_businessErrorWithValidationError() {
         // Given
         setupBadResponseMockServer(for: "BankAccountErrorResponseWithValidationError")

@@ -223,6 +223,40 @@ class TransferMethodRepositoryTests: XCTestCase {
                        "The venmoAccountId should be 9876543210")
     }
 
+    func testCreateTransferMethod_paperCheckAccount() {
+        let expectation = self.expectation(description: "Create PaperCheck account completed")
+        var papercheckAccountResult: HyperwalletTransferMethod?
+        var papercheckAccountError: HyperwalletErrorType?
+
+        setupOkResponseMockServer(endpoint: "/papercheck-accounts", responseDataFile: "PapercheckAccountResponse")
+
+        let papercheckAccount = HyperwalletPaperCheckAccount
+            .Builder(transferMethodCountry: "US",
+                     transferMethodCurrency: "USD",
+                     transferMethodProfileType: "INDIVIDUAL")
+            .postalCode("43210")
+            .build()
+
+        transferMethodRepository.createTransferMethod(papercheckAccount) { result in
+            switch result {
+            case .failure(let error):
+                    papercheckAccountError = error
+
+            case .success(let createResult):
+                    papercheckAccountResult = createResult
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1000)
+
+        XCTAssertNil(papercheckAccountError, "The paperCheckAccountError should be nil")
+        XCTAssertNotNil(papercheckAccountResult, "The paperCheckAccountError should not be nil")
+        XCTAssertEqual(papercheckAccountResult?
+            .getField(HyperwalletTransferMethod.TransferMethodField.postalCode.rawValue)!,
+                       "43210",
+                       "The papercheckAccountId should be 43210")
+    }
+
     func testCreateTransferMethod_failure() {
         let expectation = self.expectation(description: "Create bank account failed")
         var bankAccountResult: HyperwalletTransferMethod?
@@ -423,6 +457,43 @@ class TransferMethodRepositoryTests: XCTestCase {
         venmoAccount.setField(key: "token", value: "trm-123456789")
 
         transferMethodRepository.deactivateTransferMethod(venmoAccount) { result in
+            switch result {
+            case .failure(let error):
+                    statusTransitionError = error
+
+            case .success(let deactivateResult):
+                    statusTransitionResult = deactivateResult
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+
+        XCTAssertNil(statusTransitionError, "The statusTransitionError should be nil")
+        XCTAssertNotNil(statusTransitionResult, "The statusTransitionResult should not be nil")
+        XCTAssertEqual(statusTransitionResult?.fromStatus,
+                       HyperwalletStatusTransition.Status.activated,
+                       "The statusTransitionResult?.fromStatus should be activated")
+        XCTAssertEqual(statusTransitionResult?.toStatus,
+                       HyperwalletStatusTransition.Status.deactivated,
+                       "The statusTransitionResult?.toStatus should be deactivated")
+    }
+
+    func testDeactivateTransferMethod_paperCheckAccount() {
+        let expectation = self.expectation(description: "Deactivate PaperCheck Account completed")
+        var statusTransitionResult: HyperwalletStatusTransition?
+        var statusTransitionError: HyperwalletErrorType?
+
+        setupOkResponseMockServer(endpoint: "/papercheck-accounts/trm-123456789/status-transitions",
+                                  responseDataFile: "StatusTransitionResponseSuccess")
+
+        let papercheckAccount = HyperwalletPaperCheckAccount
+            .Builder(transferMethodCountry: "US",
+                     transferMethodCurrency: "USD",
+                     transferMethodProfileType: "INDIVIDUAL")
+            .build()
+        papercheckAccount.setField(key: "token", value: "trm-123456789")
+
+        transferMethodRepository.deactivateTransferMethod(papercheckAccount) { result in
             switch result {
             case .failure(let error):
                     statusTransitionError = error

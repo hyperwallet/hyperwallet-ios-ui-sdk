@@ -43,7 +43,7 @@ public protocol TransferMethodRepository {
         _ completion: @escaping (Result<HyperwalletStatusTransition?, HyperwalletErrorType>) -> Void)
 
     /// Returns the `HyperwalletPageList<HyperwalletTransferMethod>` (Bank Account, Bank Card, PayPay Account,
-    /// Prepaid Card, Paper Checks), or nil if non exist.
+    /// Prepaid Card, Paper Checks,Venmo Account), or nil if non exist.
     ///
     /// - Parameters:
     ///   - queryParam: the ordering and filtering criteria
@@ -77,6 +77,10 @@ final class RemoteTransferMethodRepository: TransferMethodRepository {
             Hyperwallet.shared.createVenmoAccount(
                 account: venmoAccount,
                 completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
+        } else if let paperCheckAccount = transferMethod as? HyperwalletPaperCheckAccount {
+            Hyperwallet.shared.createPaperCheckAccount(
+                account: paperCheckAccount,
+                completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
         }
     }
 
@@ -107,6 +111,11 @@ final class RemoteTransferMethodRepository: TransferMethodRepository {
 
         case HyperwalletTransferMethod.TransferMethodType.venmoAccount.rawValue:
                 Hyperwallet.shared.deactivateVenmoAccount(
+                    transferMethodToken: token,
+                    completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
+
+        case HyperwalletTransferMethod.TransferMethodType.paperCheck.rawValue:
+                Hyperwallet.shared.deactivatePaperCheckAccount(
                     transferMethodToken: token,
                     completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
 

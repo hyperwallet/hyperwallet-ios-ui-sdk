@@ -410,6 +410,8 @@
 		DBF89CB8227C072400AF4344 /* UserIndividualCountryCanadaResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBF89CB7227C072400AF4344 /* UserIndividualCountryCanadaResponse.json */; };
 		DC870F9A252F5D880070F91B /* VenmoAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DC870F8B252EE36E0070F91B /* VenmoAccountResponse.json */; };
 		DC870F9B252F5D950070F91B /* VenmoAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DC870F89252EE3630070F91B /* VenmoAccountResponse.json */; };
+		DC92D0D425777444008A4B44 /* PapercheckAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DC92D0D325777444008A4B44 /* PapercheckAccountResponse.json */; };
+		DC92D0D625777480008A4B44 /* PapercheckAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DC92D0D525777480008A4B44 /* PapercheckAccountResponse.json */; };
 		FD5066242538238900640B36 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3839225E8BA900CD4137 /* UIImage.swift */; };
 		FD5066252538239100640B36 /* hw_mobile_ui_sdk_icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B39E00DE24B4FB0A00E3BC4D /* hw_mobile_ui_sdk_icons.ttf */; };
 		FD50662725382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json in Resources */ = {isa = PBXBuildFile; fileRef = FD50662625382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json */; };
@@ -1117,6 +1119,8 @@
 		DC61FA352564F63900C93C50 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		DC870F89252EE3630070F91B /* VenmoAccountResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = VenmoAccountResponse.json; sourceTree = "<group>"; };
 		DC870F8B252EE36E0070F91B /* VenmoAccountResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = VenmoAccountResponse.json; sourceTree = "<group>"; };
+		DC92D0D325777444008A4B44 /* PapercheckAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PapercheckAccountResponse.json; sourceTree = "<group>"; };
+		DC92D0D525777480008A4B44 /* PapercheckAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PapercheckAccountResponse.json; sourceTree = "<group>"; };
 		FD50662625382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserReceiptDetailsWithMultipleCurrencies.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1365,6 +1369,7 @@
 				4A2B949B22F1BBCB000A0F14 /* UserIndividualResponse.json */,
 				DBB50B4622D7CADB0029B74B /* UserIndividualResponseWithoutCountry.json */,
 				644A69C422B127080058E77E /* WireAccountIndividualResponse.json */,
+				DC92D0D525777480008A4B44 /* PapercheckAccountResponse.json */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -1933,6 +1938,7 @@
 				DB55206C22E1498200DD65C2 /* TransferMethodConfigurationKeysResponse.json */,
 				DB55206522E1498200DD65C2 /* UserIndividualResponse.json */,
 				DB55206B22E1498200DD65C2 /* WireAccountIndividualResponse.json */,
+				DC92D0D325777444008A4B44 /* PapercheckAccountResponse.json */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -3108,6 +3114,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC92D0D625777480008A4B44 /* PapercheckAccountResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3166,6 +3173,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC92D0D425777444008A4B44 /* PapercheckAccountResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

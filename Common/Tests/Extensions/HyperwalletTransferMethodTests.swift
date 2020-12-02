@@ -79,9 +79,9 @@ class HyperwalletTransferMethodTests: XCTestCase {
     }
 
     func testAdditionalInfo_paperCheck() {
-        let transferMethod = HyperwalletPaperCheck.Builder(transferMethodCountry: country,
-                                                           transferMethodCurrency: currency,
-                                                           transferMethodProfileType: profileType)
+        let transferMethod = HyperwalletPaperCheckAccount.Builder(transferMethodCountry: country,
+                                                                  transferMethodCurrency: currency,
+                                                                  transferMethodProfileType: profileType)
             .postalCode("43210")
             .build()
 
