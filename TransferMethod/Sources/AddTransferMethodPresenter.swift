@@ -209,7 +209,8 @@ final class AddTransferMethodPresenter {
         case HyperwalletTransferMethod.TransferMethodType.paperCheck.rawValue:
             return HyperwalletPaperCheckAccount.Builder(transferMethodCountry: country,
                                                         transferMethodCurrency: currency,
-                                                        transferMethodProfileType: profileType)
+                                                        transferMethodProfileType: profileType,
+                                                        transferMethodType: transferMethodTypeCode)
                     .build()
 
         default:
