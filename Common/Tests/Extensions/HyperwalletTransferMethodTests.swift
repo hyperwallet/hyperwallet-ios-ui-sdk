@@ -81,10 +81,12 @@ class HyperwalletTransferMethodTests: XCTestCase {
     func testAdditionalInfo_paperCheck() {
         let transferMethod = HyperwalletPaperCheckAccount.Builder(transferMethodCountry: country,
                                                                   transferMethodCurrency: currency,
-                                                                  transferMethodProfileType: profileType)
+                                                                  transferMethodProfileType: profileType,
+                                                                  transferMethodType:
+            HyperwalletTransferMethod.TransferMethodType.paperCheck.rawValue)
             .postalCode("43210")
             .build()
 
-        XCTAssertEqual(transferMethod.additionalInfo!, "ending in 3210")
+        XCTAssertEqual(transferMethod.additionalInfo!, "to 43210")
     }
 }

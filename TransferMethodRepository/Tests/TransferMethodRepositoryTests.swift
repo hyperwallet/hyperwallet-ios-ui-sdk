@@ -233,7 +233,8 @@ class TransferMethodRepositoryTests: XCTestCase {
         let papercheckAccount = HyperwalletPaperCheckAccount
             .Builder(transferMethodCountry: "US",
                      transferMethodCurrency: "USD",
-                     transferMethodProfileType: "INDIVIDUAL")
+                     transferMethodProfileType: "INDIVIDUAL",
+                     transferMethodType: HyperwalletTransferMethod.TransferMethodType.paperCheck.rawValue)
             .postalCode("43210")
             .build()
 
@@ -489,7 +490,8 @@ class TransferMethodRepositoryTests: XCTestCase {
         let papercheckAccount = HyperwalletPaperCheckAccount
             .Builder(transferMethodCountry: "US",
                      transferMethodCurrency: "USD",
-                     transferMethodProfileType: "INDIVIDUAL")
+                     transferMethodProfileType: "INDIVIDUAL",
+                     transferMethodType: HyperwalletTransferMethod.TransferMethodType.paperCheck.rawValue)
             .build()
         papercheckAccount.setField(key: "token", value: "trm-123456789")
 

@@ -52,7 +52,9 @@ class ListTransferMethodPresenterTests: XCTestCase {
     private lazy var paperCheckAccount: HyperwalletPaperCheckAccount = {
         let paperCheckAccount = HyperwalletPaperCheckAccount.Builder(transferMethodCountry: "US",
                                                                      transferMethodCurrency: "USD",
-                                                                     transferMethodProfileType: "INDIVIDUAL")
+                                                                     transferMethodProfileType: "INDIVIDUAL",
+                                                                     transferMethodType:
+            HyperwalletTransferMethod.TransferMethodType.paperCheck.rawValue)
             .build()
         paperCheckAccount.setField(key: HyperwalletTransferMethod.TransferMethodField.token.rawValue,
                                    value: transferMethodToken)
