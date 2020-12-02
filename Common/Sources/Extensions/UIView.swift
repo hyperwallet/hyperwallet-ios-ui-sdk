@@ -172,4 +172,19 @@ public extension UIView {
     func isSeparatorView() -> Bool {
         return type(of: self).description() == "_UITableViewCellSeparatorView"
     }
+
+    /// Adjust segment titles width
+    /// - Parameter view: Segmented Controller
+    class func adjustWidthOfSegmentTitles(view: UIView) {
+        let subviews = view.subviews
+        for subview in subviews {
+            if subview is UILabel {
+                let label: UILabel? = (subview as? UILabel)
+                label?.adjustsFontSizeToFitWidth = true
+                label?.minimumScaleFactor = 0.1
+            } else {
+                adjustWidthOfSegmentTitles(view: subview)
+            }
+        }
+    }
 }
