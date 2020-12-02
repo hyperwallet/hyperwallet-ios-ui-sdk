@@ -39,7 +39,7 @@ class AddTransferMethodWireAccountUSMaskingTests: BaseTests {
      "defaultPattern": "###-###-###"
      */
     func testAddTransferMethod_brandIdDefaultPatternByPaste() {
-        XCTAssert(addTransferMethod.navBarWireAccount.exists)
+        XCTAssertTrue(addTransferMethod.navBarWireAccount.waitForExistence(timeout: 10))
         addTransferMethod.branchIdInput.enterByPaste(
             text: "111222333", field: addTransferMethod.branchIdInput, app: app)
 
