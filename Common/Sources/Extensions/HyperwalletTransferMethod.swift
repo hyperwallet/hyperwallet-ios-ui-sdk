@@ -58,7 +58,7 @@ extension HyperwalletTransferMethod: GenericCellConfiguration {
             return String(format: "%@%@",
                           "to".localized(),
                           getField(TransferMethodField.postalCode.rawValue)?
-                            .suffix(startAt: 4) ?? "")
+                            .suffix(startAt: 5) ?? "")
 
         default:
             return String(format: "%@%@",
