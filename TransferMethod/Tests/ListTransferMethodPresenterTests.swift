@@ -49,11 +49,11 @@ class ListTransferMethodPresenterTests: XCTestCase {
         return venmoAccount
     }()
 
-    private lazy var paperCheckAccount: HyperwalletPaperCheckAccount = {
-        let paperCheckAccount = HyperwalletPaperCheckAccount.Builder(transferMethodCountry: "US",
-                                                                     transferMethodCurrency: "USD",
-                                                                     transferMethodProfileType: "INDIVIDUAL",
-                                                                     transferMethodType:
+    private lazy var paperCheckAccount: HyperwalletPaperCheck = {
+        let paperCheckAccount = HyperwalletPaperCheck.Builder(transferMethodCountry: "US",
+                                                              transferMethodCurrency: "USD",
+                                                              transferMethodProfileType: "INDIVIDUAL",
+                                                              transferMethodType:
             HyperwalletTransferMethod.TransferMethodType.paperCheck.rawValue)
             .build()
         paperCheckAccount.setField(key: HyperwalletTransferMethod.TransferMethodField.token.rawValue,
@@ -279,7 +279,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
         XCTAssertFalse(mockView.isShowConfirmationPerformed, "The showConfirmation should not be performed")
     }
 
-    func testDeactivatePaperCheckAccount_success() {
+    func testDeactivatePaperCheck_success() {
         // Given
         loadMockTransferMethods()
         HyperwalletTestHelper.setUpMockServer(request: setUpDeactivateTransferMethodRequest("/papercheck-accounts/"))
@@ -297,7 +297,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isShowConfirmationPerformed, "The showConfirmation should be performed")
     }
 
-    func testDeactivatePaperCheckAccount_failureWithError() {
+    func testDeactivatePaperCheck_failureWithError() {
         // Given
         loadMockTransferMethods()
         XCTAssertTrue(presenter.sectionData.isNotEmpty, "sectionData should not be empty")

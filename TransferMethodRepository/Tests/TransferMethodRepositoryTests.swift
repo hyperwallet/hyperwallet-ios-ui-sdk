@@ -223,14 +223,14 @@ class TransferMethodRepositoryTests: XCTestCase {
                        "The venmoAccountId should be 9876543210")
     }
 
-    func testCreateTransferMethod_paperCheckAccount() {
+    func testCreateTransferMethod_paperCheck() {
         let expectation = self.expectation(description: "Create PaperCheck account completed")
-        var papercheckAccountResult: HyperwalletTransferMethod?
-        var papercheckAccountError: HyperwalletErrorType?
+        var papercheckResult: HyperwalletTransferMethod?
+        var papercheckError: HyperwalletErrorType?
 
         setupOkResponseMockServer(endpoint: "/papercheck-accounts", responseDataFile: "PapercheckAccountResponse")
 
-        let papercheckAccount = HyperwalletPaperCheckAccount
+        let papercheckAccount = HyperwalletPaperCheck
             .Builder(transferMethodCountry: "US",
                      transferMethodCurrency: "USD",
                      transferMethodProfileType: "INDIVIDUAL",
@@ -250,9 +250,9 @@ class TransferMethodRepositoryTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 1000)
 
-        XCTAssertNil(papercheckAccountError, "The paperCheckAccountError should be nil")
-        XCTAssertNotNil(papercheckAccountResult, "The paperCheckAccountError should not be nil")
-        XCTAssertEqual(papercheckAccountResult?
+        XCTAssertNil(papercheckError, "The paperCheckAccountError should be nil")
+        XCTAssertNotNil(papercheckResult, "The paperCheckAccountError should not be nil")
+        XCTAssertEqual(papercheckResult?
             .getField(HyperwalletTransferMethod.TransferMethodField.postalCode.rawValue)!,
                        "43210",
                        "The papercheckAccountId should be 43210")
@@ -487,15 +487,15 @@ class TransferMethodRepositoryTests: XCTestCase {
         setupOkResponseMockServer(endpoint: "/papercheck-accounts/trm-123456789/status-transitions",
                                   responseDataFile: "StatusTransitionResponseSuccess")
 
-        let papercheckAccount = HyperwalletPaperCheckAccount
+        let papercheck = HyperwalletPaperCheck
             .Builder(transferMethodCountry: "US",
                      transferMethodCurrency: "USD",
                      transferMethodProfileType: "INDIVIDUAL",
                      transferMethodType: HyperwalletTransferMethod.TransferMethodType.paperCheck.rawValue)
             .build()
-        papercheckAccount.setField(key: "token", value: "trm-123456789")
+        papercheck.setField(key: "token", value: "trm-123456789")
 
-        transferMethodRepository.deactivateTransferMethod(papercheckAccount) { result in
+        transferMethodRepository.deactivateTransferMethod(papercheck) { result in
             switch result {
             case .failure(let error):
                     statusTransitionError = error

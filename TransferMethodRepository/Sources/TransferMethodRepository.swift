@@ -77,8 +77,8 @@ final class RemoteTransferMethodRepository: TransferMethodRepository {
             Hyperwallet.shared.createVenmoAccount(
                 account: venmoAccount,
                 completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
-        } else if let paperCheckAccount = transferMethod as? HyperwalletPaperCheckAccount {
-            Hyperwallet.shared.createPaperCheckAccount(
+        } else if let paperCheckAccount = transferMethod as? HyperwalletPaperCheck {
+            Hyperwallet.shared.createPaperCheck(
                 account: paperCheckAccount,
                 completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
         }
@@ -115,7 +115,7 @@ final class RemoteTransferMethodRepository: TransferMethodRepository {
                     completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
 
         case HyperwalletTransferMethod.TransferMethodType.paperCheck.rawValue:
-                Hyperwallet.shared.deactivatePaperCheckAccount(
+                Hyperwallet.shared.deactivatePaperCheck(
                     transferMethodToken: token,
                     completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
 

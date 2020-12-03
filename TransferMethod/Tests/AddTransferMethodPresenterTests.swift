@@ -227,7 +227,7 @@ class AddTransferMethodPresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isNotificationSent, "The notification should be sent")
     }
 
-    func testCreateTransferMethod_createPaperCheckAccount() {
+    func testCreateTransferMethod_createPaperCheck() {
         presenter = AddTransferMethodPresenter(mockView,
                                                "US",
                                                "USD",
