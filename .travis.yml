@@ -51,7 +51,7 @@ script: |
   destination="platform=$platform,OS=$ios_version,name=$ios_device"
 
   # Build and test Framework in Debug
-  xcodebuild -enableCodeCoverage "$code_coverage" clean build -project "$PROJECT" \
+  xcodebuild clean build -project "$PROJECT" \
     -scheme "$scheme" \
     -destination "$destination" \
     -configuration "$configuration" ONLY_ACTIVE_ARCH="$only_active_arch" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
