@@ -282,13 +282,13 @@ class ListTransferMethodPresenterTests: XCTestCase {
     func testDeactivatePaperCheck_success() {
         // Given
         loadMockTransferMethods()
-        HyperwalletTestHelper.setUpMockServer(request: setUpDeactivateTransferMethodRequest("/papercheck-accounts/"))
+        HyperwalletTestHelper.setUpMockServer(request: setUpDeactivateTransferMethodRequest("/paper-checks/"))
 
         let expectation = self.expectation(description: "deactivate a papercheck account")
         mockView.expectation = expectation
 
         // When
-        presenter.deactivateTransferMethod(at: 3)
+        presenter.deactivateTransferMethod(at: 4)
         wait(for: [expectation], timeout: 1)
 
         // Then
@@ -302,7 +302,7 @@ class ListTransferMethodPresenterTests: XCTestCase {
         loadMockTransferMethods()
         XCTAssertTrue(presenter.sectionData.isNotEmpty, "sectionData should not be empty")
         HyperwalletTestHelper.setUpMockServer(request:
-            setUpDeactivateTransferMethodRequest("/papercheck-accounts/",
+            setUpDeactivateTransferMethodRequest("/paper-checks/",
                                                  NSError(domain: "", code: -1009, userInfo: nil)))
 
         let expectation = self.expectation(description: "deactivate a papercheck account")

@@ -234,8 +234,8 @@ class AddTransferMethodPresenterTests: XCTestCase {
                                                "INDIVIDUAL",
                                                HyperwalletTransferMethod.TransferMethodType.paperCheck.rawValue,
                                                hyperwalletInsightsMock)
-        let url = String(format: "%@/papercheck-accounts", HyperwalletTestHelper.userRestURL)
-        let response = HyperwalletTestHelper.okHTTPResponse(for: "PaperCheckAccountResponse")
+        let url = String(format: "%@/paper-checks", HyperwalletTestHelper.userRestURL)
+        let response = HyperwalletTestHelper.okHTTPResponse(for: "PapercheckAccountResponse")
         let request = HyperwalletTestHelper.buildPostRequest(baseUrl: url, response)
         HyperwalletTestHelper.setUpMockServer(request: request)
 

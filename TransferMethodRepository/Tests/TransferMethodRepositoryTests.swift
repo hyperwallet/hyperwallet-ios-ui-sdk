@@ -228,23 +228,23 @@ class TransferMethodRepositoryTests: XCTestCase {
         var papercheckResult: HyperwalletTransferMethod?
         var papercheckError: HyperwalletErrorType?
 
-        setupOkResponseMockServer(endpoint: "/papercheck-accounts", responseDataFile: "PapercheckAccountResponse")
+        setupOkResponseMockServer(endpoint: "/paper-checks", responseDataFile: "PapercheckAccountResponse")
 
         let papercheckAccount = HyperwalletPaperCheck
             .Builder(transferMethodCountry: "US",
                      transferMethodCurrency: "USD",
                      transferMethodProfileType: "INDIVIDUAL",
                      transferMethodType: HyperwalletTransferMethod.TransferMethodType.paperCheck.rawValue)
-            .postalCode("43210")
+            .postalCode("10030")
             .build()
 
         transferMethodRepository.createTransferMethod(papercheckAccount) { result in
             switch result {
             case .failure(let error):
-                    papercheckAccountError = error
+                    papercheckError = error
 
             case .success(let createResult):
-                    papercheckAccountResult = createResult
+                    papercheckResult = createResult
             }
             expectation.fulfill()
         }
@@ -254,8 +254,8 @@ class TransferMethodRepositoryTests: XCTestCase {
         XCTAssertNotNil(papercheckResult, "The paperCheckAccountError should not be nil")
         XCTAssertEqual(papercheckResult?
             .getField(HyperwalletTransferMethod.TransferMethodField.postalCode.rawValue)!,
-                       "43210",
-                       "The papercheckAccountId should be 43210")
+                       "10030",
+                       "The papercheckAccountId should be 10030")
     }
 
     func testCreateTransferMethod_failure() {
@@ -479,12 +479,12 @@ class TransferMethodRepositoryTests: XCTestCase {
                        "The statusTransitionResult?.toStatus should be deactivated")
     }
 
-    func testDeactivateTransferMethod_paperCheckAccount() {
+    func testDeactivateTransferMethod_paperCheck() {
         let expectation = self.expectation(description: "Deactivate PaperCheck Account completed")
         var statusTransitionResult: HyperwalletStatusTransition?
         var statusTransitionError: HyperwalletErrorType?
 
-        setupOkResponseMockServer(endpoint: "/papercheck-accounts/trm-123456789/status-transitions",
+        setupOkResponseMockServer(endpoint: "/paper-checks/trm-123456789/status-transitions",
                                   responseDataFile: "StatusTransitionResponseSuccess")
 
         let papercheck = HyperwalletPaperCheck
