@@ -58,8 +58,8 @@ script: |
     | xcpretty --color
 
   # Lint - Add `--strict` to fail for warning and violation
-  swiftlint lint --strict --reporter json
-  bundle exec fastlane ENABLE_TESTABILITY
+  # swiftlint lint --strict --reporter json
+  # bundle exec fastlane ENABLE_TESTABILITY
   bundle exec fastlane test
 after_success:
 - |
