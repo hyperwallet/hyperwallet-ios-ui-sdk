@@ -19,7 +19,7 @@ lane :test do |options|
     scheme: scheme_to_test,
     device: 'iPhone 11',
     output_directory: 'artifacts/tests',
-    custom_report_file_name: 'report.xml'
+    output_files: 'report.xml'
   }
   begin
     retry_count ||= 0
