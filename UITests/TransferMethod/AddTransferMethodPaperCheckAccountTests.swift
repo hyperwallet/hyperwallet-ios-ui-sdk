@@ -13,7 +13,7 @@ class AddTransferMethodPaperCheckAccountTests: BaseTests {
             "COUNTRY": "US",
             "CURRENCY": "USD",
             "ACCOUNT_TYPE": "PAPER_CHECK",
-            "PROFILE_TYPE": "BUSINESS"
+            "PROFILE_TYPE": "INDIVIDUAL"
         ]
         app.launch()
 

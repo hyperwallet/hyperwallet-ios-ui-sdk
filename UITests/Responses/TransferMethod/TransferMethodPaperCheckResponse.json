@@ -6,7 +6,7 @@
                     "country": "US",
                     "currency": "USD",
                     "transferMethodType": "PAPER_CHECK",
-                    "profile": "BUSINESS",
+                    "profile": "INDIVIDUAL",
                     "fieldGroups": {
                         "nodes": [
                             {
