@@ -29,7 +29,7 @@ class AddTransferMethodPaperCheckAccountTests: BaseTests {
 }
 
     func testAddTransferMethod_PaperCheck() {
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/-accounts",
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/paper-checks",
                              filename: "TransferMethodCreatePaperCheck",
                              method: HTTPMethod.post)
 
