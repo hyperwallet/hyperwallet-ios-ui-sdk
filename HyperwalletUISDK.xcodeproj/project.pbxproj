@@ -37,6 +37,9 @@
 		09795B78229D7FE000EF407F /* ListTransferMethodResponseWithoutPayPalAccount.json in Resources */ = {isa = PBXBuildFile; fileRef = 09795B77229D7FDF00EF407F /* ListTransferMethodResponseWithoutPayPalAccount.json */; };
 		09E7165022A697C400FA9B96 /* ReceiptsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7164F22A697C400FA9B96 /* ReceiptsList.swift */; };
 		09E7165622A6983400FA9B96 /* ListReceiptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7165522A6983400FA9B96 /* ListReceiptTests.swift */; };
+		189A0B0E257A172300D95D5B /* AddTransferMethodPaperCheckAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A0B0D257A172300D95D5B /* AddTransferMethodPaperCheckAccountTests.swift */; };
+		189A0B12257A2B0700D95D5B /* TransferMethodCreatePaperCheck.json in Resources */ = {isa = PBXBuildFile; fileRef = 189A0B11257A2B0700D95D5B /* TransferMethodCreatePaperCheck.json */; };
+		189A0B13257A3E6900D95D5B /* TransferMethodPaperCheckResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 189A0B0F257A261900D95D5B /* TransferMethodPaperCheckResponse.json */; };
 		2BF9E5F822EF8BF200BB7DA5 /* TransferRepositoryFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF9E5F722EF8BF200BB7DA5 /* TransferRepositoryFactoryTests.swift */; };
 		2E16213423987284007E140D /* HyperwalletFieldResponseWithPattern.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E1621322398727E007E140D /* HyperwalletFieldResponseWithPattern.json */; };
 		2E1E11C3252E657700C10180 /* PrepaidCardRepositoryRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980C2E8D25224C8200DFDC94 /* PrepaidCardRepositoryRequestHelper.swift */; };
@@ -681,6 +684,9 @@
 		09795B7A229E7EB700EF407F /* BankAccountIndividualResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BankAccountIndividualResponse.json; sourceTree = "<group>"; };
 		09E7164F22A697C400FA9B96 /* ReceiptsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptsList.swift; sourceTree = "<group>"; };
 		09E7165522A6983400FA9B96 /* ListReceiptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListReceiptTests.swift; sourceTree = "<group>"; };
+		189A0B0D257A172300D95D5B /* AddTransferMethodPaperCheckAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransferMethodPaperCheckAccountTests.swift; sourceTree = "<group>"; };
+		189A0B0F257A261900D95D5B /* TransferMethodPaperCheckResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TransferMethodPaperCheckResponse.json; sourceTree = "<group>"; };
+		189A0B11257A2B0700D95D5B /* TransferMethodCreatePaperCheck.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TransferMethodCreatePaperCheck.json; sourceTree = "<group>"; };
 		2BF9E5F722EF8BF200BB7DA5 /* TransferRepositoryFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferRepositoryFactoryTests.swift; sourceTree = "<group>"; };
 		2E1621322398727E007E140D /* HyperwalletFieldResponseWithPattern.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = HyperwalletFieldResponseWithPattern.json; sourceTree = "<group>"; };
 		2E1DA9592395E26C008D08A8 /* AbstractWidgetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractWidgetTests.swift; sourceTree = "<group>"; };
@@ -1824,6 +1830,7 @@
 		C358A9A8227265C300E5AE47 /* TransferMethod */ = {
 			isa = PBXGroup;
 			children = (
+				189A0B0D257A172300D95D5B /* AddTransferMethodPaperCheckAccountTests.swift */,
 				417594062397152A00921392 /* formatting */,
 				641EBE90228EE19E00D718F4 /* AddTransferMethodBankAccountBusinessTests.swift */,
 				DBB2B70F2261C141006C48D3 /* AddTransferMethodBankAccountIndividualTests.swift */,
@@ -1877,6 +1884,8 @@
 				ABDB501E2536CA4900D3AF0B /* TransferMethodCreateVenmoAccount.json */,
 				ABDB50222537341A00D3AF0B /* TransferMethodVenmoResponse.json */,
 				ABDB502425382A6B00D3AF0B /* ListTransferMethodResponseVenmo.json */,
+				189A0B0F257A261900D95D5B /* TransferMethodPaperCheckResponse.json */,
+				189A0B11257A2B0700D95D5B /* TransferMethodCreatePaperCheck.json */,
 			);
 			path = TransferMethod;
 			sourceTree = "<group>";
@@ -3086,6 +3095,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				189A0B12257A2B0700D95D5B /* TransferMethodCreatePaperCheck.json in Resources */,
 				DB46798F2260380D00E1AF49 /* LaunchScreen.storyboard in Resources */,
 				DB46798C2260380D00E1AF49 /* Assets.xcassets in Resources */,
 				DB46798A2260380C00E1AF49 /* Main.storyboard in Resources */,
@@ -3123,6 +3133,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				189A0B13257A3E6900D95D5B /* TransferMethodPaperCheckResponse.json in Resources */,
 				DB55202422E145B800DD65C2 /* TransferMethodConfigurationKeysEmptyCountriesResponse.json in Resources */,
 				DB55201E22E145B800DD65C2 /* BankAccountResponse.json in Resources */,
 				DB55202122E145B800DD65C2 /* PayPalAccountResponse.json in Resources */,
@@ -3517,6 +3528,7 @@
 				98F3D756230C5BFC00A8195F /* TransferUserFundsConfirmationTest.swift in Sources */,
 				DBB2B7172261C142006C48D3 /* AddTransferMethodBankCardTests.swift in Sources */,
 				644A69C822B14F4A0058E77E /* AddTransferMethodWireAccountTests.swift in Sources */,
+				189A0B0E257A172300D95D5B /* AddTransferMethodPaperCheckAccountTests.swift in Sources */,
 				C345BFC22289E6EC0049E67B /* XCUIElement.swift in Sources */,
 				412F723722B45DB100837F8F /* TransactionDetails.swift in Sources */,
 				641324E1229575EC00512816 /* BaseTest.swift in Sources */,
@@ -4725,7 +4737,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BASE_URL = "http://localhost:8080";
+				BASE_URL = "https://qamaster-hyperwallet.aws.paylution.net";
 				CURRENT_PROJECT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4740,13 +4752,13 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				ONLY_ACTIVE_ARCH = NO;
-				PREPAID_CARD_TOKEN = "trm-token";
+				PREPAID_CARD_TOKEN = "trm-7fac3736-72f3-44ce-bc70-3e272f00e21c";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ui.sdk.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_TOKEN = "usr-your-user-token";
+				USER_TOKEN = "usr-04364ef3-23c5-47b9-bf81-2fe09eb41bea";
 			};
 			name = Debug;
 		};
@@ -4755,7 +4767,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BASE_URL = "http://localhost:8080";
+				BASE_URL = "https://qamaster-hyperwallet.aws.paylution.net";
 				CURRENT_PROJECT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4769,13 +4781,13 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PREPAID_CARD_TOKEN = "trm-token";
+				PREPAID_CARD_TOKEN = "trm-7fac3736-72f3-44ce-bc70-3e272f00e21c";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ui.sdk.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_TOKEN = "usr-your-user-token";
+				USER_TOKEN = "usr-04364ef3-23c5-47b9-bf81-2fe09eb41bea";
 			};
 			name = Release;
 		};
@@ -5205,7 +5217,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BASE_URL = "http://localhost:8080";
+				BASE_URL = "https://qamaster-hyperwallet.aws.paylution.net";
 				CURRENT_PROJECT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5219,13 +5231,13 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PREPAID_CARD_TOKEN = "trm-token";
+				PREPAID_CARD_TOKEN = "trm-7fac3736-72f3-44ce-bc70-3e272f00e21c";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ui.sdk.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_TOKEN = "usr-token";
+				USER_TOKEN = "usr-04364ef3-23c5-47b9-bf81-2fe09eb41bea";
 			};
 			name = XCUITest;
 		};
