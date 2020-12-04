@@ -718,6 +718,7 @@ class TransferUserFundsTest: BaseTests {
                              filename: "AddNewTransferMethodOneTransferMethod",
                              method: HTTPMethod.get)
 
+        waitForNonExistence(spinner)
         transferFunds.addSelectDestinationLabel.tap()
 
         waitForNonExistence(spinner)
