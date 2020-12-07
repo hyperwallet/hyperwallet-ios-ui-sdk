@@ -416,6 +416,9 @@
 		DCE2B85E2578F2D0000EAFA4 /* PapercheckAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DC92D0D325777444008A4B44 /* PapercheckAccountResponse.json */; };
 		DCE2B8602578F2D8000EAFA4 /* PapercheckAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DC92D0D525777480008A4B44 /* PapercheckAccountResponse.json */; };
 		DCE2B8612578F401000EAFA4 /* PapercheckAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DC92D0D525777480008A4B44 /* PapercheckAccountResponse.json */; };
+		DCF74264257E2E2F00A5295A /* TransferMethodPaperCheckList.json in Resources */ = {isa = PBXBuildFile; fileRef = DCF74263257E2E2F00A5295A /* TransferMethodPaperCheckList.json */; };
+		DCF74266257E2F7400A5295A /* PaperCheckReceiptsForFewMonths.json in Resources */ = {isa = PBXBuildFile; fileRef = DCF74265257E2F7400A5295A /* PaperCheckReceiptsForFewMonths.json */; };
+		DCF74268257E305600A5295A /* ListTransferMethodResponsePaperCheck.json in Resources */ = {isa = PBXBuildFile; fileRef = DCF74267257E305600A5295A /* ListTransferMethodResponsePaperCheck.json */; };
 		FD5066242538238900640B36 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3839225E8BA900CD4137 /* UIImage.swift */; };
 		FD5066252538239100640B36 /* hw_mobile_ui_sdk_icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B39E00DE24B4FB0A00E3BC4D /* hw_mobile_ui_sdk_icons.ttf */; };
 		FD50662725382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json in Resources */ = {isa = PBXBuildFile; fileRef = FD50662625382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json */; };
@@ -1128,6 +1131,9 @@
 		DC870F8B252EE36E0070F91B /* VenmoAccountResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = VenmoAccountResponse.json; sourceTree = "<group>"; };
 		DC92D0D325777444008A4B44 /* PapercheckAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PapercheckAccountResponse.json; sourceTree = "<group>"; };
 		DC92D0D525777480008A4B44 /* PapercheckAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PapercheckAccountResponse.json; sourceTree = "<group>"; };
+		DCF74263257E2E2F00A5295A /* TransferMethodPaperCheckList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TransferMethodPaperCheckList.json; sourceTree = "<group>"; };
+		DCF74265257E2F7400A5295A /* PaperCheckReceiptsForFewMonths.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PaperCheckReceiptsForFewMonths.json; sourceTree = "<group>"; };
+		DCF74267257E305600A5295A /* ListTransferMethodResponsePaperCheck.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ListTransferMethodResponsePaperCheck.json; sourceTree = "<group>"; };
 		FD50662625382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserReceiptDetailsWithMultipleCurrencies.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1406,6 +1412,7 @@
 				AB022111254041DF005CFBE1 /* PrepaidCardPrimarycardOnlyResponse.json */,
 				AB02211325404208005CFBE1 /* PrepaidCardOneYearReceiptsResponse.json */,
 				AB02211725406490005CFBE1 /* PrepaidCardSecondaryReceiptsResponse.json */,
+				DCF74265257E2F7400A5295A /* PaperCheckReceiptsForFewMonths.json */,
 			);
 			path = Receipts;
 			sourceTree = "<group>";
@@ -1849,6 +1856,7 @@
 			children = (
 				4175940F2397156700921392 /* TransferMethodConfigrationUSBankAccountResponseMask.json */,
 				ABE841F525321A200010240A /* TransferMethodVenmoList.json */,
+				DCF74263257E2E2F00A5295A /* TransferMethodPaperCheckList.json */,
 				417594122397156700921392 /* TransferMethodConfigurationResponseWithStarMasks.json */,
 				417594132397156700921392 /* TransferMethodConfigurationUSBankCardResponseWithMask.json */,
 				417594102397156700921392 /* TransferMethodConfigurationWireAccountResponseWithMask.json */,
@@ -1886,6 +1894,7 @@
 				ABDB502425382A6B00D3AF0B /* ListTransferMethodResponseVenmo.json */,
 				189A0B0F257A261900D95D5B /* TransferMethodPaperCheckResponse.json */,
 				189A0B11257A2B0700D95D5B /* TransferMethodCreatePaperCheck.json */,
+				DCF74267257E305600A5295A /* ListTransferMethodResponsePaperCheck.json */,
 			);
 			path = TransferMethod;
 			sourceTree = "<group>";
@@ -3013,6 +3022,8 @@
 				0961D62D22AA858E007F0B44 /* ReceiptsForFewMonths.json in Resources */,
 				9807B763226442C60028A280 /* BankAccountInvalidRoutingResponse.json in Resources */,
 				AB9C10C8253DA9DE0041D949 /* ReceiptsMultipleCurrenciesRespsonse.json in Resources */,
+				DCF74264257E2E2F00A5295A /* TransferMethodPaperCheckList.json in Resources */,
+				DCF74266257E2F7400A5295A /* PaperCheckReceiptsForFewMonths.json in Resources */,
 				9807B764226442C60028A280 /* BankCardDuplicateResponse.json in Resources */,
 				641324F122958B5000512816 /* TransferMethodConfigurationBankAccountBusinessResponse.json in Resources */,
 				64F45BD422BA313E00515AE1 /* TransferMethodConfigurationWireAccountResponse.json in Resources */,
@@ -3062,6 +3073,7 @@
 				2E6DBB8C2326F2C200863672 /* AvailableFundMultiCurrenciesFxChange.json in Resources */,
 				41759424239716D100921392 /* TransferMethodConfigurationWireAccountResponseWithMask.json in Resources */,
 				9807B76C226442C60028A280 /* TransferMethodConfigurationBankCardResponse.json in Resources */,
+				DCF74268257E305600A5295A /* ListTransferMethodResponsePaperCheck.json in Resources */,
 				98F63E6E2284AD370090101D /* PayPalAccountDuplicateResponse.json in Resources */,
 				DC49BF15257E06B600567832 /* TransferMethodPaperCheckResponse.json in Resources */,
 				41759420239716C600921392 /* TransferMethodConfigrationUSBankAccountResponseMask.json in Resources */,
