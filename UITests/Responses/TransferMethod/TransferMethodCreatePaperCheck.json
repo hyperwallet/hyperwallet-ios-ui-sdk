@@ -1,34 +1,28 @@
 {
-  "token": "trm-token",
-  "type": "PAPER_CHECK",
-  "status": "ACTIVATED",
-  "verificationStatus": "NOT_REQUIRED",
-  "createdOn": "2019-02-26T22:03:53",
-  "transferMethodCountry": "CA",
-  "transferMethodCurrency": "USD",
-  "bankAccountRelationship": "SELF",
-  "profileType": "INDIVIDUAL",
-  "firstName": "Gannon",
-  "lastName": "Evan",
-  "dateOfBirth": "1980-01-01",
-  "countryOfBirth": "US",
-  "countryOfNationality": "CA",
-  "gender": "MALE",
-  "phoneNumber": "+1 604 6666666",
-  "mobileNumber": "604 666 6666",
-  "governmentId": "987654321",
-  "addressLine1": "950 Granville Street",
-  "city": "Vancouver",
-  "stateProvince": "BC",
-  "country": "CA",
-  "postalCode": "123456",
-  "shippingMethod": "EXPEDITED",
-  "links": [
-    {
-      "params": {
-        "rel": "self"
-      },
-      "href": "https://localhost/rest/v3/users/usr-token/paper-checks/trm-token"
-    }
-  ]
+    "token": "trm-123",
+    "type": "PAPER_CHECK",
+    "status": "ACTIVATED",
+    "verificationStatus": "NOT_REQUIRED",
+    "createdOn": "2020-12-03T09:45:07",
+    "transferMethodCountry": "US",
+    "transferMethodCurrency": "USD",
+    "userToken": "usr-123",
+    "profileType": "INDIVIDUAL",
+    "firstName": "John",
+    "lastName": "Smith",
+    "dateOfBirth": "1980-01-01",
+    "addressLine1": "123 Main Street",
+    "city": "New York",
+    "stateProvince": "NY",
+    "country": "US",
+    "postalCode": "10030",
+    "shippingMethod": "STANDARD",
+    "links": [
+        {
+            "params": {
+                "rel": "self"
+            },
+            "href": "https://localhost/rest/v3/users/usr-123/paper-checks/trm-123"
+        }
+    ]
 }
