@@ -1,0 +1,156 @@
+{
+    "count": 5,
+    "offset": 0,
+    "limit": 100,
+    "data": [
+        {
+            "token": "trm-11111111-1111-1111-1111-000000000000",
+            "type": "BANK_ACCOUNT",
+            "status": "ACTIVATED",
+            "verificationStatus": "NOT_REQUIRED",
+            "createdOn": "2019-03-19T23:10:37",
+            "transferMethodCountry": "US",
+            "transferMethodCurrency": "USD",
+            "bankId": "021000021",
+            "branchId": "021000021",
+            "bankAccountId": "0000000000001",
+            "bankAccountRelationship": "SELF",
+            "bankAccountPurpose": "CHECKING",
+            "profileType": "INDIVIDUAL",
+            "firstName": "Neil",
+            "lastName": "Louis",
+            "dateOfBirth": "1980-01-01",
+            "countryOfBirth": "US",
+            "countryOfNationality": "CA",
+            "gender": "MALE",
+            "phoneNumber": "+1 604 6666666",
+            "mobileNumber": "604 666 6666",
+            "governmentId": "987654321",
+            "addressLine1": "950 Granville Street",
+            "city": "Vancouver",
+            "stateProvince": "BC",
+            "country": "CA",
+            "postalCode": "V6Z1L2",
+            "links": [
+                {
+                    "params": {
+                        "rel": "self"
+                    },
+                    "href": "https://localhost/rest/v3/users/usr-token/transfer-methods/trm-11111111-1111-1111-1111-000000000000"
+                }
+            ]
+        },
+        {
+            "token": "trm-11111111-0000-0000-0000-000000000000",
+            "type": "VENMO_ACCOUNT",
+            "status": "ACTIVATED",
+            "createdOn": "2020-10-07T11:03:36",
+            "transferMethodCountry": "US",
+            "transferMethodCurrency": "USD",
+            "accountId": "9876549999",
+            "links": [
+                {
+                    "params": {
+                        "rel": "self"
+                    },
+                    "href": "https://localhost/rest/v3/users/usr-token/transfer-methods/trm-11111111-0000-0000-0000-000000000000"
+                }
+            ]
+        },
+        {
+            "token": "trm-00000000-1111-0000-0000-000000000000",
+            "type": "BANK_ACCOUNT",
+            "status": "ACTIVATED",
+            "verificationStatus": "NOT_REQUIRED",
+            "createdOn": "2019-03-19T23:10:45",
+            "transferMethodCountry": "US",
+            "transferMethodCurrency": "USD",
+            "bankId": "021000021",
+            "branchId": "021000021",
+            "bankAccountId": "0000000000003",
+            "bankAccountRelationship": "SELF",
+            "bankAccountPurpose": "CHECKING",
+            "profileType": "INDIVIDUAL",
+            "firstName": "Neil",
+            "lastName": "Louis",
+            "dateOfBirth": "1980-01-01",
+            "countryOfBirth": "US",
+            "countryOfNationality": "CA",
+            "gender": "MALE",
+            "phoneNumber": "+1 604 6666666",
+            "mobileNumber": "604 666 6666",
+            "governmentId": "987654321",
+            "addressLine1": "950 Granville Street",
+            "city": "Vancouver",
+            "stateProvince": "BC",
+            "country": "CA",
+            "postalCode": "V6Z1L2",
+            "links": [
+                {
+                    "params": {
+                        "rel": "self"
+                    },
+                    "href": "https://localhost/rest/v3/users/usr-token/transfer-methods/trm-00000000-1111-0000-0000-000000000000"
+                }
+            ]
+        },
+        {
+            "token" : "trm-00000000-0000-0000-0000-111111111111",
+            "type" : "BANK_CARD",
+            "status" : "ACTIVATED",
+            "createdOn" : "2019-02-26T21:45:54",
+            "transferMethodCountry" : "US",
+            "transferMethodCurrency" : "USD",
+            "cardType" : "DEBIT",
+            "cardNumber" : "************0006",
+            "cardBrand" : "VISA",
+            "dateOfExpiry" : "2020-10",
+            "links" : [ {
+                "params" : {
+                    "rel" : "self"
+                },
+                "href" : "https://localhost:8181/rest/v3/users/usr-token/bank-accounts/trm-00000000-0000-0000-0000-111111111111"
+            } ]
+        },
+        {
+            "token": "trm-11111111-1111-1111-1111-000000000000",
+            "type": "PAYPAL_ACCOUNT",
+            "status": "ACTIVATED",
+            "createdOn": "2019-05-08T00:09:06",
+            "transferMethodCountry": "US",
+            "transferMethodCurrency": "USD",
+            "email": "carroll.lynn@byteme.com",
+            "links": [
+                {
+                    "params": {
+                        "rel": "self"
+                    },
+                    "href": "https://localhost/rest/v3/users/usr-1234/transfer-methods/trm-11111111-1111-1111-1111-000000000000"
+                }
+            ]
+        }
+    ],
+    "links": [
+        {
+            "params": {
+                "rel": "self"
+            },
+            "href": "https://localhost/rest/v3/users/usr-token/transfer-methods?offset=0&limit=100&status=ACTIVATED"
+        },
+        {
+            "params": {
+                "rel": "next"
+            },
+            "href": "https://localhost/rest/v3/users/usr-token/transfer-methods?offset=100&limit=100&status=ACTIVATED"
+        },
+        {
+            "params": {
+                "rel": "last"
+            },
+            "href": "https://localhost/rest/v3/users/usr-token/transfer-methods?offset=41&limit=100&status=ACTIVATED"
+        }
+    ]
+}
+
+
+

@@ -306,7 +306,7 @@ class ListTransferMethodTests: BaseTests {
     }
 
     private func validateTestListTransferMethodScreen() {
-        let expectedCellsCount = 5
+        let expectedCellsCount = 6
         XCTAssertTrue(listTransferMethod.navigationBar.exists)
         XCTAssertTrue(app.tables.element(boundBy: 0).cells.count == expectedCellsCount)
         let expectedFirstBankAccountLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "0001")
@@ -337,15 +337,11 @@ class ListTransferMethodTests: BaseTests {
     }
 
     func verifyRemoveConfirmation(transferMethod: String) {
-          let confirmMessage = listTransferMethod.removeAccountMessage
           XCTAssertTrue(listTransferMethod.confirmAccountRemoveButton.exists)
           XCTAssertTrue(listTransferMethod.cancelAccountRemoveButton.exists)
 
         let alert = app.alerts[listTransferMethod.removeAccountTitle]
           XCTAssert(alert.exists)
-          let predicate = NSPredicate(format:
-              "label CONTAINS[c] '\(confirmMessage)'")
-          XCTAssert(alert.staticTexts.element(matching: predicate).exists)
           XCTAssertTrue(listTransferMethod.confirmAccountRemoveButton.exists)
           XCTAssertTrue(listTransferMethod.cancelAccountRemoveButton.exists)
       }
@@ -455,8 +451,8 @@ class ListTransferMethodTests: BaseTests {
         XCTAssertTrue( app.tables.cells.containing(.staticText, identifier: "paper_check".localized())
             .element(boundBy: 1).exists)
 
-        let expectedFirstBankAccountLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "5555")
-        let expectedSecondBankAccountLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "5556")
+        let expectedFirstBankAccountLabel = listTransferMethod.getTransferMethodPaperCheckLabel(postalCode: "12345")
+        let expectedSecondBankAccountLabel = listTransferMethod.getTransferMethodPaperCheckLabel(postalCode: "12345")
 
         XCTAssertTrue(app.cells.element(boundBy: 0).staticTexts[expectedFirstBankAccountLabel].exists)
         XCTAssertTrue(app.cells.element(boundBy: 1).staticTexts[expectedSecondBankAccountLabel].exists)
@@ -466,8 +462,8 @@ class ListTransferMethodTests: BaseTests {
     }
 
     func testListTransferMethod_deletePaperCheckAccount() {
-        let cellsCountBeforeRemove = 5
-        let expectedCellsCountAfterRemove = 4
+        let cellsCountBeforeRemove = 6
+        let expectedCellsCountAfterRemove = 5
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListTransferMethodResponsePaperCheck",
                              method: HTTPMethod.get)
@@ -480,7 +476,7 @@ class ListTransferMethodTests: BaseTests {
                              filename: "RemovedTransferMethodResponse",
                              method: HTTPMethod.post)
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
-                             filename: "ListTransferMethodResponseWithoutFirstElement",
+                             filename: "ListTransferMethodResponseWithoutPaperCheck",
                              method: HTTPMethod.get)
 
        verifyRemoveConfirmation(transferMethod: "paper_check".localized())
@@ -490,7 +486,7 @@ class ListTransferMethodTests: BaseTests {
         waitForNonExistence(loadingSpinner)
 
         XCTAssertEqual(app.tables.element(boundBy: 0).cells.count, expectedCellsCountAfterRemove)
-        let expectedSecondBankAccountLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "0002")
+        let expectedSecondBankAccountLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "0001")
         let expectedThirdBankAccountLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "0003")
         let expectedDebitCardCellLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "0006")
         let expectedPayPalAccountCellLabel = listTransferMethod

@@ -419,6 +419,7 @@
 		DCF74264257E2E2F00A5295A /* TransferMethodPaperCheckList.json in Resources */ = {isa = PBXBuildFile; fileRef = DCF74263257E2E2F00A5295A /* TransferMethodPaperCheckList.json */; };
 		DCF74266257E2F7400A5295A /* PaperCheckReceiptsForFewMonths.json in Resources */ = {isa = PBXBuildFile; fileRef = DCF74265257E2F7400A5295A /* PaperCheckReceiptsForFewMonths.json */; };
 		DCF74268257E305600A5295A /* ListTransferMethodResponsePaperCheck.json in Resources */ = {isa = PBXBuildFile; fileRef = DCF74267257E305600A5295A /* ListTransferMethodResponsePaperCheck.json */; };
+		DCF7426A257E68F500A5295A /* ListTransferMethodResponseWithoutPaperCheck.json in Resources */ = {isa = PBXBuildFile; fileRef = DCF74269257E68F500A5295A /* ListTransferMethodResponseWithoutPaperCheck.json */; };
 		FD5066242538238900640B36 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3839225E8BA900CD4137 /* UIImage.swift */; };
 		FD5066252538239100640B36 /* hw_mobile_ui_sdk_icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B39E00DE24B4FB0A00E3BC4D /* hw_mobile_ui_sdk_icons.ttf */; };
 		FD50662725382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json in Resources */ = {isa = PBXBuildFile; fileRef = FD50662625382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json */; };
@@ -1134,6 +1135,7 @@
 		DCF74263257E2E2F00A5295A /* TransferMethodPaperCheckList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TransferMethodPaperCheckList.json; sourceTree = "<group>"; };
 		DCF74265257E2F7400A5295A /* PaperCheckReceiptsForFewMonths.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PaperCheckReceiptsForFewMonths.json; sourceTree = "<group>"; };
 		DCF74267257E305600A5295A /* ListTransferMethodResponsePaperCheck.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ListTransferMethodResponsePaperCheck.json; sourceTree = "<group>"; };
+		DCF74269257E68F500A5295A /* ListTransferMethodResponseWithoutPaperCheck.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ListTransferMethodResponseWithoutPaperCheck.json; sourceTree = "<group>"; };
 		FD50662625382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserReceiptDetailsWithMultipleCurrencies.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1874,6 +1876,7 @@
 				DBFB614C2261E84C00C4A8AA /* ListTransferMethodResponse.json */,
 				DBFB61502261E84C00C4A8AA /* ListTransferMethodResponseWithoutDebitCard.json */,
 				DBFB614B2261E84C00C4A8AA /* ListTransferMethodResponseWithoutFirstElement.json */,
+				DCF74269257E68F500A5295A /* ListTransferMethodResponseWithoutPaperCheck.json */,
 				09795B77229D7FDF00EF407F /* ListTransferMethodResponseWithoutPayPalAccount.json */,
 				98F63E6C2284AD330090101D /* PayPalAccountDuplicateResponse.json */,
 				98F63E692284AC2A0090101D /* PayPalAccountInvalidEmailResponse.json */,
@@ -3064,6 +3067,7 @@
 				98F63E6B2284AC330090101D /* PayPalAccountInvalidEmailResponse.json in Resources */,
 				AB26C8F7252F61B60097D8CB /* ListTransferMethodManagePrepaidCard.json in Resources */,
 				9807B76B226442C60028A280 /* TransferMethodConfigurationBankAccountResponse.json in Resources */,
+				DCF7426A257E68F500A5295A /* ListTransferMethodResponseWithoutPaperCheck.json in Resources */,
 				4157135D22C42E9F005D6DB1 /* PrepaidCardReceiptsForOneMonth.json in Resources */,
 				41D8363722FB4814003544AB /* ListOneBankAccountTransferJPY.json in Resources */,
 				41D8363422FB4814003544AB /* AvailableFundJPY.json in Resources */,
