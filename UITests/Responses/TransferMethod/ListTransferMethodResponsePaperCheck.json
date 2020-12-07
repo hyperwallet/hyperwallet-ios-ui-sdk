@@ -58,7 +58,7 @@
             ]
         },
         {
-            "token": "trm-00000000-1111-0000-0000-000000000000",
+            "token": "trm-00000000-1111-0000-0000-000000000001",
             "type": "PAPER_CHECK",
             "status": "ACTIVATED",
             "verificationStatus": "NOT_REQUIRED",
@@ -85,7 +85,7 @@
                     "params": {
                         "rel": "self"
                     },
-                    "href": "https://localhost/rest/v3/users/usr-token/transfer-methods/trm-00000000-1111-0000-0000-000000000000"
+                    "href": "https://localhost/rest/v3/users/usr-token/transfer-methods/trm-00000000-1111-0000-0000-000000000001"
                 }
             ]
         },

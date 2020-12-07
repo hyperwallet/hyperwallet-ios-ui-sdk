@@ -39,7 +39,7 @@ class ListTransferMethodTests: BaseTests {
 
     var removePaperCheckURL: String {
            let paperCheckEndpoint = "rest/v3/users/usr-token/paper-checks/"
-           let removePaperCheckEndpoint = "trm-11111111-0000-0000-0000-000000000000/status-transitions"
+           let removePaperCheckEndpoint = "trm-00000000-1111-0000-0000-000000000001/status-transitions"
            return paperCheckEndpoint + removePaperCheckEndpoint
     }
 
@@ -493,9 +493,9 @@ class ListTransferMethodTests: BaseTests {
             .getTransferMethodPayalLabel(email: "carroll.lynn@byteme.com")
 
         XCTAssertTrue(app.cells.element(boundBy: 0).staticTexts[expectedSecondBankAccountLabel].exists)
-        XCTAssertTrue(app.cells.element(boundBy: 1).staticTexts[expectedThirdBankAccountLabel].exists)
-        XCTAssertTrue(app.cells.element(boundBy: 2).staticTexts[expectedDebitCardCellLabel].exists)
-        XCTAssertTrue(app.cells.element(boundBy: 3).staticTexts[expectedPayPalAccountCellLabel].exists)
-        XCTAssertFalse(app.cells.element(boundBy: 4).exists)
+        XCTAssertTrue(app.cells.element(boundBy: 2).staticTexts[expectedThirdBankAccountLabel].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 3).staticTexts[expectedDebitCardCellLabel].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 4).staticTexts[expectedPayPalAccountCellLabel].exists)
+        XCTAssertFalse(app.cells.element(boundBy: 5).exists)
     }
 }
