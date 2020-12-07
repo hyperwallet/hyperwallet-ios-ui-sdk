@@ -54,6 +54,7 @@ lane :test do |options|
   multi_scan(
     project: File.absolute_path('../HyperwalletUISDK.xcodeproj'),
     scheme: "Demo",
+    device: 'iPhone 11',
     try_count: 3,
     batch_count: 1,
     parallel_testrun_count: 1,
