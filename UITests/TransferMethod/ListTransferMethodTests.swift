@@ -9,6 +9,7 @@ class ListTransferMethodTests: BaseTests {
     let debitCardTitle = TransferMethods.debitCard
     let payPalAccountTitle = TransferMethods.paypal
     let venmoAccountTitle = TransferMethods.venmo
+    let paperCheckTitle = TransferMethods.paperCheck
     var debitCard: NSPredicate!
     var bankAccount: NSPredicate!
 
@@ -34,6 +35,12 @@ class ListTransferMethodTests: BaseTests {
         let venmoAccountEndpoint = "rest/v3/users/usr-token/venmo-accounts/"
         let removeVenmoAccountEndpoint = "trm-11111111-0000-0000-0000-000000000000/status-transitions"
         return venmoAccountEndpoint + removeVenmoAccountEndpoint
+    }
+
+    var removePaperCheckURL: String {
+           let paperCheckEndpoint = "rest/v3/users/usr-token/paper-checks/"
+           let removePaperCheckEndpoint = "trm-11111111-0000-0000-0000-000000000000/status-transitions"
+           return paperCheckEndpoint + removePaperCheckEndpoint
     }
 
     override func setUp() {
@@ -417,6 +424,66 @@ class ListTransferMethodTests: BaseTests {
                              method: HTTPMethod.get)
 
        verifyRemoveConfirmation(transferMethod: "venmo_account".localized())
+
+        listTransferMethod.tapConfirmAccountRemoveButton()
+        waitForNonExistence(spinner)
+        waitForNonExistence(loadingSpinner)
+
+        XCTAssertEqual(app.tables.element(boundBy: 0).cells.count, expectedCellsCountAfterRemove)
+        let expectedSecondBankAccountLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "0002")
+        let expectedThirdBankAccountLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "0003")
+        let expectedDebitCardCellLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "0006")
+        let expectedPayPalAccountCellLabel = listTransferMethod
+            .getTransferMethodPayalLabel(email: "carroll.lynn@byteme.com")
+
+        XCTAssertTrue(app.cells.element(boundBy: 0).staticTexts[expectedSecondBankAccountLabel].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 1).staticTexts[expectedThirdBankAccountLabel].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 2).staticTexts[expectedDebitCardCellLabel].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 3).staticTexts[expectedPayPalAccountCellLabel].exists)
+        XCTAssertFalse(app.cells.element(boundBy: 4).exists)
+    }
+
+    func testListTransferMethod_PaperCheckManage() {
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+                             filename: "TransferMethodPaperCheckList",
+                             method: HTTPMethod.get)
+
+        openTransferMethodsList()
+
+        XCTAssertTrue( app.tables.cells.containing(.staticText, identifier: "paper_check".localized())
+            .element(boundBy: 0).exists)
+        XCTAssertTrue( app.tables.cells.containing(.staticText, identifier: "paper_check".localized())
+            .element(boundBy: 1).exists)
+
+        let expectedFirstBankAccountLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "5555")
+        let expectedSecondBankAccountLabel = listTransferMethod.getTransferMethodLabel(endingDigits: "5556")
+
+        XCTAssertTrue(app.cells.element(boundBy: 0).staticTexts[expectedFirstBankAccountLabel].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 1).staticTexts[expectedSecondBankAccountLabel].exists)
+
+        XCTAssertTrue(listTransferMethod.getTransferMethodIcon(index: 0).exists, "Expect icon")
+        XCTAssertTrue(listTransferMethod.getTransferMethodIcon(index: 1).exists, "Expect icon")
+    }
+
+    func testListTransferMethod_deletePaperCheckAccount() {
+        let cellsCountBeforeRemove = 5
+        let expectedCellsCountAfterRemove = 4
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+                             filename: "ListTransferMethodResponsePaperCheck",
+                             method: HTTPMethod.get)
+        openTransferMethodsList()
+        app.tables.cells.containing(.staticText, identifier: "paper_check".localized()).element(boundBy: 0).tap()
+
+        XCTAssertEqual(app.tables.element(boundBy: 0).cells.count, cellsCountBeforeRemove)
+
+        mockServer.setupStub(url: removePaperCheckURL,
+                             filename: "RemovedTransferMethodResponse",
+                             method: HTTPMethod.post)
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+                             filename: "ListTransferMethodResponseWithoutFirstElement",
+                             method: HTTPMethod.get)
+
+       verifyRemoveConfirmation(transferMethod: "paper_check".localized())
 
         listTransferMethod.tapConfirmAccountRemoveButton()
         waitForNonExistence(spinner)
