@@ -35,7 +35,7 @@ class AddTransferMethodPaperCheckAccountTests: BaseTests {
 
         waitForNonExistence(spinner)
 //        addTransferMethod.
-        addTransferMethod.setPostalCode("10030")
+        addTransferMethod.setPostalCode("10016")
         addTransferMethod.clickCreateTransferMethodButton()
         waitForNonExistence(spinner)
         XCTAssert(app.navigationBars[addTransferMethod.title].exists)
