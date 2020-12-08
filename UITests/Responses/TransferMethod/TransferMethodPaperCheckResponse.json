@@ -134,25 +134,40 @@
         }
       ]
     },
-    "fees": {
-      "nodes": [
-        {
-          "value": "0.25",
-          "feeRateType": "FLAT",
-          "country": "US",
-          "currency": "USD"
-        }
-      ]
-    },
-    "processingTimes": {
-      "nodes": [
-        {
-          "country": "US",
-          "currency": "USD",
-          "transferMethodType": "PAPER_CHECK",
-          "value": "5 - 7 Business days"
-        }
-      ]
+    "countries": {
+        "nodes": [
+            {
+                "code": "US",
+                "name": "UNITED STATES",
+                "iso3": "USA",
+                "currencies": {
+                    "nodes": [
+                        {
+                            "code": "USD",
+                            "name": "USD",
+                            "transferMethodTypes": {
+                                "nodes": [
+                                    {
+                                        "code": "PAPER_CHECK",
+                                        "name": "Paper Check",
+                                        "processingTime" : "5-7 Business days",
+                                        "fees": {
+                                            "nodes": [
+                                                {
+                                                    "currency": "USD",
+                                                    "feeRateType": "FLAT",
+                                                    "value": "2.00"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
     }
   }
 }
