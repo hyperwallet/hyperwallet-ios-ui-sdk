@@ -97,8 +97,8 @@ final class ListTransferMethodController: UITableViewController {
 
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !(presenter.sectionData[indexPath.row].isPrepaidCard()) {
-            showConfirmationAlert(title: "mobileRemoveEAconfirm".localized(),
-                                  message: "mobileAreYouSure".localized(),
+            showConfirmationAlert(title: "mobileAreYouSure".localized(),
+                                  message: "",
                                   transferMethodIndex: indexPath.row)
         }
         tableView.deselectRow(at: indexPath, animated: true)

@@ -223,6 +223,41 @@ class TransferMethodRepositoryTests: XCTestCase {
                        "The venmoAccountId should be 9876543210")
     }
 
+    func testCreateTransferMethod_paperCheck() {
+        let expectation = self.expectation(description: "Create PaperCheck account completed")
+        var papercheckResult: HyperwalletTransferMethod?
+        var papercheckError: HyperwalletErrorType?
+
+        setupOkResponseMockServer(endpoint: "/paper-checks", responseDataFile: "PapercheckAccountResponse")
+
+        let papercheckAccount = HyperwalletPaperCheck
+            .Builder(transferMethodCountry: "US",
+                     transferMethodCurrency: "USD",
+                     transferMethodProfileType: "INDIVIDUAL",
+                     transferMethodType: HyperwalletTransferMethod.TransferMethodType.paperCheck.rawValue)
+            .postalCode("10030")
+            .build()
+
+        transferMethodRepository.createTransferMethod(papercheckAccount) { result in
+            switch result {
+            case .failure(let error):
+                    papercheckError = error
+
+            case .success(let createResult):
+                    papercheckResult = createResult
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1000)
+
+        XCTAssertNil(papercheckError, "The paperCheckAccountError should be nil")
+        XCTAssertNotNil(papercheckResult, "The paperCheckAccountError should not be nil")
+        XCTAssertEqual(papercheckResult?
+            .getField(HyperwalletTransferMethod.TransferMethodField.postalCode.rawValue)!,
+                       "10030",
+                       "The papercheckAccountId should be 10030")
+    }
+
     func testCreateTransferMethod_failure() {
         let expectation = self.expectation(description: "Create bank account failed")
         var bankAccountResult: HyperwalletTransferMethod?
@@ -423,6 +458,44 @@ class TransferMethodRepositoryTests: XCTestCase {
         venmoAccount.setField(key: "token", value: "trm-123456789")
 
         transferMethodRepository.deactivateTransferMethod(venmoAccount) { result in
+            switch result {
+            case .failure(let error):
+                    statusTransitionError = error
+
+            case .success(let deactivateResult):
+                    statusTransitionResult = deactivateResult
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+
+        XCTAssertNil(statusTransitionError, "The statusTransitionError should be nil")
+        XCTAssertNotNil(statusTransitionResult, "The statusTransitionResult should not be nil")
+        XCTAssertEqual(statusTransitionResult?.fromStatus,
+                       HyperwalletStatusTransition.Status.activated,
+                       "The statusTransitionResult?.fromStatus should be activated")
+        XCTAssertEqual(statusTransitionResult?.toStatus,
+                       HyperwalletStatusTransition.Status.deactivated,
+                       "The statusTransitionResult?.toStatus should be deactivated")
+    }
+
+    func testDeactivateTransferMethod_paperCheck() {
+        let expectation = self.expectation(description: "Deactivate PaperCheck Account completed")
+        var statusTransitionResult: HyperwalletStatusTransition?
+        var statusTransitionError: HyperwalletErrorType?
+
+        setupOkResponseMockServer(endpoint: "/paper-checks/trm-123456789/status-transitions",
+                                  responseDataFile: "StatusTransitionResponseSuccess")
+
+        let papercheck = HyperwalletPaperCheck
+            .Builder(transferMethodCountry: "US",
+                     transferMethodCurrency: "USD",
+                     transferMethodProfileType: "INDIVIDUAL",
+                     transferMethodType: HyperwalletTransferMethod.TransferMethodType.paperCheck.rawValue)
+            .build()
+        papercheck.setField(key: "token", value: "trm-123456789")
+
+        transferMethodRepository.deactivateTransferMethod(papercheck) { result in
             switch result {
             case .failure(let error):
                     statusTransitionError = error
