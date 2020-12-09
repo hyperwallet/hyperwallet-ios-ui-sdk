@@ -51,6 +51,18 @@ public protocol TransferMethodRepository {
     func listTransferMethods(
         _ completion: @escaping (Result<HyperwalletPageList<HyperwalletTransferMethod>?, HyperwalletErrorType>) -> Void)
 
+    /// updates the `HyperwalletTransferMethod` linked to the transfer method token specified. The
+    /// `HyperwalletTransferMethod` being updated must belong to the User that is associated with the
+    /// authentication token returned from
+    /// `HyperwalletAuthenticationTokenProvider.retrieveAuthenticationToken(_ : @escaping CompletionHandler)`.
+    ///
+    /// - Parameters:
+    ///   - transferMethod: the `HyperwalletTransferMethod` being updated
+    ///   - completion: the callback handler of responses from the Hyperwallet platform
+    func updateTransferMethods(
+        _ transferMethod: HyperwalletTransferMethod,
+        _ completion: @escaping (Result<HyperwalletTransferMethod?, HyperwalletErrorType>) -> Void)
+
     /// Refreshes transfer methods
     func refreshTransferMethods()
 }
@@ -128,6 +140,32 @@ final class RemoteTransferMethodRepository: TransferMethodRepository {
                     ]
                 ))
             completion(.failure(error))
+        }
+    }
+
+    func updateTransferMethods(
+        _ transferMethod: HyperwalletTransferMethod,
+        _ completion: @escaping (Result<HyperwalletTransferMethod?, HyperwalletErrorType>) -> Void) {
+        if let bankAccount = transferMethod as? HyperwalletBankAccount {
+            Hyperwallet.shared.updateBankAccount(
+                account: bankAccount,
+                completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
+        } else if let bankCard = transferMethod as? HyperwalletBankCard {
+            Hyperwallet.shared.updateBankCard(
+                account: bankCard,
+                completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
+        } else if let payPalAccount = transferMethod as? HyperwalletPayPalAccount {
+            Hyperwallet.shared.updatePayPalAccount(
+                account: payPalAccount,
+                completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
+        } else if let venmoAccount = transferMethod as? HyperwalletVenmoAccount {
+            Hyperwallet.shared.updateVenmoAccount(
+                account: venmoAccount,
+                completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
+        } else if let paperCheckAccount = transferMethod as? HyperwalletPaperCheck {
+            Hyperwallet.shared.updatePaperCheck(
+                account: paperCheckAccount,
+                completion: TransferMethodRepositoryCompletionHelper.performHandler(completion))
         }
     }
 

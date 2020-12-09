@@ -22,6 +22,7 @@ import HyperwalletSDK
 public final class TransferMethodRepositoryFactory {
     private(set) static var instance: TransferMethodRepositoryFactory?
     private let remoteTransferMethodConfigurationRepository: TransferMethodConfigurationRepository
+    private let remoteTransferMethodUpdateConfigurationRepository: TransferMethodUpdateConfigurationRepository
     private let remoteTransferMethodRepository: TransferMethodRepository
     private let remotePrepaidCardRepository: PrepaidCardRepository
 
@@ -43,6 +44,7 @@ public final class TransferMethodRepositoryFactory {
         remoteTransferMethodConfigurationRepository = RemoteTransferMethodConfigurationRepository()
         remoteTransferMethodRepository = RemoteTransferMethodRepository()
         remotePrepaidCardRepository = RemotePrepaidCardRepository()
+        remoteTransferMethodUpdateConfigurationRepository = RemoteTransferMethodUpdateConfigurationRepository()
     }
 
     /// Gets the `TransferMethodConfigurationRepository` instance.
@@ -50,6 +52,13 @@ public final class TransferMethodRepositoryFactory {
     /// - Returns: The TransferMethodConfigurationRepository
     public func transferMethodConfigurationRepository() -> TransferMethodConfigurationRepository {
         return remoteTransferMethodConfigurationRepository
+    }
+
+    /// Gets the `TransferMethodUpdateConfigurationRepository` instance.
+    ///
+    /// - Returns: The TransferMethodConfigurationRepository
+    public func transferMethodUpdateConfigurationRepository() -> TransferMethodUpdateConfigurationRepository {
+        return remoteTransferMethodUpdateConfigurationRepository
     }
 
     /// Gets the `TransferMethodRepository` instance.

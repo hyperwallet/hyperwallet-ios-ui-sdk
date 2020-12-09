@@ -423,6 +423,14 @@
 		FD5066242538238900640B36 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3839225E8BA900CD4137 /* UIImage.swift */; };
 		FD5066252538239100640B36 /* hw_mobile_ui_sdk_icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B39E00DE24B4FB0A00E3BC4D /* hw_mobile_ui_sdk_icons.ttf */; };
 		FD50662725382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json in Resources */ = {isa = PBXBuildFile; fileRef = FD50662625382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json */; };
+		FD8EA36B258119BB003CC5E8 /* UpdateTransferMethodButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8EA36A258119BB003CC5E8 /* UpdateTransferMethodButtonCell.swift */; };
+		FDD2F4D32580CC2A008E4CFC /* TransferMethodUpdateConfigurationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD2F4D22580CC2A008E4CFC /* TransferMethodUpdateConfigurationRepository.swift */; };
+		FDD2F4D52580DA77008E4CFC /* TransferMethodUpdateConfigurationRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD2F4D42580DA77008E4CFC /* TransferMethodUpdateConfigurationRepositoryTests.swift */; };
+		FDD2F4E02580F774008E4CFC /* TransferMethodUpdateConfigurationFieldsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = FDD2F4DF2580F774008E4CFC /* TransferMethodUpdateConfigurationFieldsResponse.json */; };
+		FDF2E7A9257E5E9E00589076 /* UpdateTransferMethodPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF2E7A8257E5E9E00589076 /* UpdateTransferMethodPresenter.swift */; };
+		FDF2E7AB257E60BB00589076 /* UpdateTransferMethodSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF2E7AA257E60BB00589076 /* UpdateTransferMethodSectionData.swift */; };
+		FDF2E7AD257E61AE00589076 /* UpdateTransferMethodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF2E7AC257E61AE00589076 /* UpdateTransferMethodCell.swift */; };
+		FDF2E7AF257E622300589076 /* UpdateTransferMethodController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF2E7AE257E622200589076 /* UpdateTransferMethodController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1137,6 +1145,14 @@
 		DCF74267257E305600A5295A /* ListTransferMethodResponsePaperCheck.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ListTransferMethodResponsePaperCheck.json; sourceTree = "<group>"; };
 		DCF74269257E68F500A5295A /* ListTransferMethodResponseWithoutPaperCheck.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ListTransferMethodResponseWithoutPaperCheck.json; sourceTree = "<group>"; };
 		FD50662625382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserReceiptDetailsWithMultipleCurrencies.json; sourceTree = "<group>"; };
+		FD8EA36A258119BB003CC5E8 /* UpdateTransferMethodButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTransferMethodButtonCell.swift; sourceTree = "<group>"; };
+		FDD2F4D22580CC2A008E4CFC /* TransferMethodUpdateConfigurationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodUpdateConfigurationRepository.swift; sourceTree = "<group>"; };
+		FDD2F4D42580DA77008E4CFC /* TransferMethodUpdateConfigurationRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodUpdateConfigurationRepositoryTests.swift; sourceTree = "<group>"; };
+		FDD2F4DF2580F774008E4CFC /* TransferMethodUpdateConfigurationFieldsResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TransferMethodUpdateConfigurationFieldsResponse.json; sourceTree = "<group>"; };
+		FDF2E7A8257E5E9E00589076 /* UpdateTransferMethodPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTransferMethodPresenter.swift; sourceTree = "<group>"; };
+		FDF2E7AA257E60BB00589076 /* UpdateTransferMethodSectionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTransferMethodSectionData.swift; sourceTree = "<group>"; };
+		FDF2E7AC257E61AE00589076 /* UpdateTransferMethodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTransferMethodCell.swift; sourceTree = "<group>"; };
+		FDF2E7AE257E622200589076 /* UpdateTransferMethodController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTransferMethodController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1956,6 +1972,7 @@
 				DB55206322E1498200DD65C2 /* StatusTransitionResponseSuccess.json */,
 				DB55206A22E1498200DD65C2 /* TransferMethodConfigurationFieldsOnlyPaypalAccountUsResponse.json */,
 				DB55206222E1498200DD65C2 /* TransferMethodConfigurationFieldsResponse.json */,
+				FDD2F4DF2580F774008E4CFC /* TransferMethodUpdateConfigurationFieldsResponse.json */,
 				DB55206622E1498200DD65C2 /* TransferMethodConfigurationKeysOnlyPaypalAccountUsResponse.json */,
 				DB55206C22E1498200DD65C2 /* TransferMethodConfigurationKeysResponse.json */,
 				DB55206522E1498200DD65C2 /* UserIndividualResponse.json */,
@@ -2023,9 +2040,13 @@
 				DB551FC122E1418B00DD65C2 /* Extensions */,
 				DB551FC322E1419A00DD65C2 /* View */,
 				073BA5D222A885E6002C58BD /* AddTransferMethodController.swift */,
+				FDF2E7AE257E622200589076 /* UpdateTransferMethodController.swift */,
 				DBCA3822225E8BA900CD4137 /* AddTransferMethodPresenter.swift */,
+				FDF2E7A8257E5E9E00589076 /* UpdateTransferMethodPresenter.swift */,
 				072A53F622838F6B00BC11D0 /* AddTransferMethodSectionData.swift */,
+				FDF2E7AA257E60BB00589076 /* UpdateTransferMethodSectionData.swift */,
 				DBCA3828225E8BA900CD4137 /* AddTransferMethodCell.swift */,
+				FDF2E7AC257E61AE00589076 /* UpdateTransferMethodCell.swift */,
 				9874E68024B3981F00E95F4F /* CountryCurrencyCell.swift */,
 				DBCA381E225E8BA900CD4137 /* CountryCurrencySelectionCell.swift */,
 				DBCA382B225E8BA900CD4137 /* ListTransferMethodPresenter.swift */,
@@ -2037,6 +2058,7 @@
 				DB551FA922E1409700DD65C2 /* TransferMethod.h */,
 				DB551FAA22E1409700DD65C2 /* Info.plist */,
 				B344D3A424C103D300F17DC3 /* CreateTransferMethodButtonCell.swift */,
+				FD8EA36A258119BB003CC5E8 /* UpdateTransferMethodButtonCell.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -2152,6 +2174,7 @@
 				DBB50B4F22D7ECF90029B74B /* Helper */,
 				98FD2947256ECBAA0019C7F0 /* PrepaidCardRepository.swift */,
 				DB80BF9B22CD14D700BA5EED /* TransferMethodConfigurationRepository.swift */,
+				FDD2F4D22580CC2A008E4CFC /* TransferMethodUpdateConfigurationRepository.swift */,
 				DBB4265322D530DD00D721C4 /* TransferMethodRepository.swift */,
 				DB80BF9D22CD14F300BA5EED /* TransferMethodRepositoryFactory.swift */,
 				DBAF929F22CFCBC7004F197A /* TransferMethodRepository.h */,
@@ -2166,6 +2189,7 @@
 				DB4BDFCE22D3F46F00761710 /* Responses */,
 				984C47F02527E89900CC442D /* PrepaidCardRepositoryTests.swift */,
 				DBAF922B22CDBF79004F197A /* TransferMethodConfigurationRepositoryTests.swift */,
+				FDD2F4D42580DA77008E4CFC /* TransferMethodUpdateConfigurationRepositoryTests.swift */,
 				DB4BDFDE22D40B2B00761710 /* TransferMethodRepositoryFactoryTests.swift */,
 				DBDE15DB22D655F000BD646F /* TransferMethodRepositoryTests.swift */,
 				DBAF92AC22CFCBC7004F197A /* Info.plist */,
@@ -3222,6 +3246,7 @@
 				DB55207422E1498300DD65C2 /* BankAccountErrorResponseWithValidationError.json in Resources */,
 				DB55207522E1498300DD65C2 /* BankCardResponse.json in Resources */,
 				DB55206E22E1498300DD65C2 /* PayPalAccountResponse.json in Resources */,
+				FDD2F4E02580F774008E4CFC /* TransferMethodUpdateConfigurationFieldsResponse.json in Resources */,
 				DB55207122E1498300DD65C2 /* BankAccountResponse.json in Resources */,
 				DB55207222E1498300DD65C2 /* UserIndividualResponse.json in Resources */,
 				DC870F9B252F5D950070F91B /* VenmoAccountResponse.json in Resources */,
@@ -3641,6 +3666,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A65312D522FC055300A83D30 /* TransferMethodCoordinators.swift in Sources */,
+				FDF2E7AF257E622300589076 /* UpdateTransferMethodController.swift in Sources */,
 				B344D3A524C103D300F17DC3 /* CreateTransferMethodButtonCell.swift in Sources */,
 				DB551FCD22E1421E00DD65C2 /* NumberWidget.swift in Sources */,
 				DB551FDD22E1424200DD65C2 /* SelectTransferMethodTypeController.swift in Sources */,
@@ -3649,12 +3675,15 @@
 				DB551FCF22E1421E00DD65C2 /* SelectionWidget.swift in Sources */,
 				DB551FDA22E1424200DD65C2 /* SelectTransferMethodTypeCell.swift in Sources */,
 				DB551FDB22E1424200DD65C2 /* ListTransferMethodCell.swift in Sources */,
+				FD8EA36B258119BB003CC5E8 /* UpdateTransferMethodButtonCell.swift in Sources */,
+				FDF2E7AB257E60BB00589076 /* UpdateTransferMethodSectionData.swift in Sources */,
 				DB551FD422E1424200DD65C2 /* AddTransferMethodController.swift in Sources */,
 				DB551FD822E1424200DD65C2 /* ListTransferMethodPresenter.swift in Sources */,
 				DB551FCB22E1421E00DD65C2 /* ExpiryDateWidget.swift in Sources */,
 				DB551FD922E1424200DD65C2 /* AddTransferMethodCell.swift in Sources */,
 				DB5295FF22E2344B00657F50 /* HyperwalletTransferMethodUI.swift in Sources */,
 				DB551FCE22E1421E00DD65C2 /* PhoneWidget.swift in Sources */,
+				FDF2E7A9257E5E9E00589076 /* UpdateTransferMethodPresenter.swift in Sources */,
 				077F60A122E28F8F00C91E59 /* TransferMethodThemeManager.swift in Sources */,
 				DB551FD622E1424200DD65C2 /* CountryCurrencySelectionCell.swift in Sources */,
 				DB551FD522E1424200DD65C2 /* AddTransferMethodPresenter.swift in Sources */,
@@ -3664,6 +3693,7 @@
 				DB551FCA22E1421E00DD65C2 /* DateWidget.swift in Sources */,
 				DB551FDC22E1424200DD65C2 /* SelectTransferMethodTypePresenter.swift in Sources */,
 				DB551FD322E1424200DD65C2 /* AddTransferMethodSectionData.swift in Sources */,
+				FDF2E7AD257E61AE00589076 /* UpdateTransferMethodCell.swift in Sources */,
 				DB551FD722E1424200DD65C2 /* ListTransferMethodController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3724,6 +3754,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBB50B5522D7EE200029B74B /* TransferMethodConfigurationRepository.swift in Sources */,
+				FDD2F4D32580CC2A008E4CFC /* TransferMethodUpdateConfigurationRepository.swift in Sources */,
 				DBAF92B822CFCE48004F197A /* TransferMethodRepositoryFactory.swift in Sources */,
 				98FD2948256ECBAA0019C7F0 /* PrepaidCardRepository.swift in Sources */,
 				DBB50B5222D7ED6C0029B74B /* TransferMethodRepository.swift in Sources */,
@@ -3740,6 +3771,7 @@
 				2EBD0C5F2373A0FD00569342 /* AuthenticationProviderMock.swift in Sources */,
 				984C47F22527E8A600CC442D /* PrepaidCardRepositoryTests.swift in Sources */,
 				DBAF92BC22D01959004F197A /* TransferMethodConfigurationRepositoryTests.swift in Sources */,
+				FDD2F4D52580DA77008E4CFC /* TransferMethodUpdateConfigurationRepositoryTests.swift in Sources */,
 				2EBD0C532373A0DE00569342 /* HyperwalletTestHelper.swift in Sources */,
 				2EBD0C5A2373A0F200569342 /* AuthenticationTokenGeneratorMock.swift in Sources */,
 			);
