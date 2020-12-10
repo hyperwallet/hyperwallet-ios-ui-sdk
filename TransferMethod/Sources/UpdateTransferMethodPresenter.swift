@@ -267,10 +267,10 @@ final class UpdateTransferMethodPresenter {
     // Todo - Update InsightTags
     private func insightsParam () -> [String: String] {
         return [
-            InsightsTags.country: "0000"
-//            InsightsTags.currency: currency,
-//            InsightsTags.transferMethodType: transferMethodTypeCode,
-//            InsightsTags.profileType: profileType
+            InsightsTags.country: transferMethod?.transferMethodCountry ?? "",
+            InsightsTags.currency: transferMethod?.transferMethodCurrency ?? "",
+            InsightsTags.transferMethodType: transferMethod?.type ?? "",
+            InsightsTags.profileType: transferMethod?.profileType ?? ""
         ]
     }
 }
