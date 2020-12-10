@@ -24,8 +24,8 @@ import UIKit
 
 /// Controller to create a new transfer method.
 ///
-/// The form fields are based on the country, currency, user's profile type and transfer method type should be passed
-/// to this Controller to create new Transfer Method for those values.
+/// The form fields are based on transfer method should be passed
+/// to this Controller to update Transfer Method for those values.
 final class UpdateTransferMethodController: UITableViewController {
     typealias ButtonHandler = () -> Void
     private var defaultHeaderHeight = CGFloat(38.0)
@@ -51,11 +51,11 @@ final class UpdateTransferMethodController: UITableViewController {
     private var widgets = [AbstractWidget]()
     private var isCalledByScrollToRow = false
     // MARK: - Button -
-    private lazy var createAccountButton: UIButton = {
+    private lazy var updateTransferMethodButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.accessibilityLabel = "create_account_label".localized()
-        button.accessibilityIdentifier = "createAccountButton"
+        button.accessibilityIdentifier = "updateAccountButton"
         button.setTitle("createTransferMethodButtonLabel".localized(), for: .normal)
         button.titleLabel?.adjustsFontForContentSizeCategory = true
         button.titleLabel?.font = Theme.Button.font
@@ -110,7 +110,7 @@ final class UpdateTransferMethodController: UITableViewController {
         tableView.reloadData()
         let currentNavigationItem: UINavigationItem = tabBarController?.navigationItem ?? navigationItem
         currentNavigationItem.backBarButtonItem = UIBarButtonItem.back
-        titleDisplayMode(.always, for: presenter.transferMethodTypeCode.lowercased().localized())
+        titleDisplayMode(.always, for: presenter.transferMethod?.type?.lowercased().localized())
     }
 
     override func willMove(toParent parent: UIViewController?) {
@@ -126,21 +126,18 @@ final class UpdateTransferMethodController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Theme.Cell.smallHeight
         tableView.backgroundColor = Theme.UITableViewController.backgroundColor
-        tableView.accessibilityIdentifier = "addTransferMethodTable"
+        tableView.accessibilityIdentifier = "updateTransferMethodTable"
         registeredCells.forEach {
             tableView.register($0.type, forCellReuseIdentifier: $0.id)
         }
     }
 
     private func initializePresenter() {
-        if let country = initializationData?[InitializationDataField.country] as? String,
-            let currency = initializationData?[InitializationDataField.currency] as? String,
-            let forceUpdate = initializationData?[InitializationDataField.forceUpdateData] as? Bool,
-            let profileType = initializationData?[InitializationDataField.profileType] as? String,
-            let transferMethodTypeCode = initializationData?[InitializationDataField.transferMethodTypeCode]
-                as? String {
+        if let transferMethod = initializationData?[InitializationDataField.transferMethod] as?
+            HyperwalletTransferMethod,
+            let forceUpdate = initializationData?[InitializationDataField.forceUpdateData] as? Bool {
             self.forceUpdate = forceUpdate
-            presenter = UpdateTransferMethodPresenter(self, country, currency, profileType, transferMethodTypeCode)
+            presenter = UpdateTransferMethodPresenter(self, transferMethod)
         } else {
             fatalError("Required data not provided in initializePresenter")
         }
@@ -247,7 +244,7 @@ extension UpdateTransferMethodController {
     }
 }
 
-// MARK: - Presenter - AddTransferMethodView -
+// MARK: - Presenter - UpdateTransferMethodView -
 extension UpdateTransferMethodController: UpdateTransferMethodView {
     private func getSectionContainingFocusedField() -> UpdateTransferMethodSectionData? {
         return presenter.sectionData.first(where: { $0.containsFocusedField == true })
@@ -424,15 +421,15 @@ extension UpdateTransferMethodController: UpdateTransferMethodView {
             }
             let newWidgets =
                 fields.map({WidgetFactory.newWidget(field: $0,
-                                                    pageName: AddTransferMethodPresenter.addTransferMethodPageName,
-                                                    pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup
+                                                    pageName: UpdateTransferMethodPresenter
+                                                        .updateTransferMethodPageName,
+                                                    pageGroup: UpdateTransferMethodPresenter
+                                                        .updateTransferMethodPageGroup
                 ) {
                     self.updateErrorMessagesInFooter()
                 }})
             let section = UpdateTransferMethodSectionData(
                 fieldGroup: fieldGroup,
-                country: presenter.country,
-                currency: presenter.currency,
                 cells: newWidgets
             )
             presenter.sectionData.append(section)
@@ -458,7 +455,7 @@ extension UpdateTransferMethodController: UpdateTransferMethodView {
     private func addCreateButtonSection() {
         let buttonSection = UpdateTransferMethodSectionData(
             fieldGroup: "UPDATE_BUTTON",
-            cells: [createAccountButton])
+            cells: [updateTransferMethodButton])
         presenter.sectionData.append(buttonSection)
     }
 

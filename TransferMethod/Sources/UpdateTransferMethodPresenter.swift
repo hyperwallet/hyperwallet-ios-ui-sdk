@@ -43,16 +43,13 @@ protocol UpdateTransferMethodView: class {
 final class UpdateTransferMethodPresenter {
     private weak var view: UpdateTransferMethodView?
     private let errorTypeApi = "API"
-    private let profileType: String
     private let createdConfirmationPageName = "transfer-method:update:transfer-method-updated"
     private let pageLink = "update-transfer-method"
     private let transferMethodCreatedGoal = "transfer-method-updated"
     static let updateTransferMethodPageGroup = "update-transfer-method"
     static let updateTransferMethodPageName = "transfer-method:update:collect-transfer-method-information"
     private let hyperwalletInsights: HyperwalletInsightsProtocol
-    let country: String
-    let currency: String
-    let transferMethodTypeCode: String
+    let transferMethod: HyperwalletTransferMethod?
     var sectionData = [UpdateTransferMethodSectionData]()
 
     private lazy var transferMethodUpdateConfigurationRepository = {
@@ -64,16 +61,10 @@ final class UpdateTransferMethodPresenter {
     }()
 
     init(_ view: UpdateTransferMethodView,
-         _ country: String,
-         _ currency: String,
-         _ profileType: String,
-         _ transferMethodTypeCode: String,
+         _ transferMethod: HyperwalletTransferMethod,
          _ hyperwalletInsights: HyperwalletInsightsProtocol = HyperwalletInsights.shared) {
         self.view = view
-        self.country = country
-        self.currency = currency
-        self.profileType = profileType
-        self.transferMethodTypeCode = transferMethodTypeCode
+        self.transferMethod = transferMethod
         self.hyperwalletInsights = hyperwalletInsights
     }
 
@@ -116,7 +107,7 @@ final class UpdateTransferMethodPresenter {
             return
         }
 
-        guard let hyperwalletTransferMethod = buildHyperwalletTransferMethod() else {
+        guard let hyperwalletTransferMethod = transferMethod else {
             view.showError(title: "error".localized(), message: "transfer_method_not_supported_message".localized())
             return
         }
@@ -136,7 +127,7 @@ final class UpdateTransferMethodPresenter {
             case .success(let transferMethodResult):
                 view.showConfirmation(handler: {
                     if let transferMethod = transferMethodResult {
-                        strongSelf.trackTransferMethodCreatedConfirmationImpression()
+                        strongSelf.trackTransferMethodUpdateConfirmationImpression()
                         view.notifyTransferMethodAdded(transferMethod)
                     }
                 })
@@ -171,39 +162,6 @@ final class UpdateTransferMethodPresenter {
                             pageGroup: UpdateTransferMethodPresenter.updateTransferMethodPageGroup) { [weak self] in
                                 self?.updateTransferMethod()
             }
-        }
-    }
-
-    private func buildHyperwalletTransferMethod() -> HyperwalletTransferMethod? {
-        switch transferMethodTypeCode {
-        case HyperwalletTransferMethod.TransferMethodType.bankAccount.rawValue,
-             HyperwalletTransferMethod.TransferMethodType.wireAccount.rawValue :
-            return HyperwalletBankAccount.Builder(transferMethodCountry: country,
-                                                  transferMethodCurrency: currency,
-                                                  transferMethodProfileType: profileType,
-                                                  transferMethodType: transferMethodTypeCode)
-                .build()
-
-        case HyperwalletTransferMethod.TransferMethodType.bankCard.rawValue :
-            return HyperwalletBankCard.Builder(transferMethodCountry: country,
-                                               transferMethodCurrency: currency,
-                                               transferMethodProfileType: profileType)
-                .build()
-
-        case HyperwalletTransferMethod.TransferMethodType.payPalAccount.rawValue:
-            return HyperwalletPayPalAccount.Builder(transferMethodCountry: country,
-                                                    transferMethodCurrency: currency,
-                                                    transferMethodProfileType: profileType)
-                .build()
-
-        case HyperwalletTransferMethod.TransferMethodType.venmoAccount.rawValue:
-            return HyperwalletVenmoAccount.Builder(transferMethodCountry: country,
-                                                   transferMethodCurrency: currency,
-                                                   transferMethodProfileType: profileType)
-                    .build()
-
-        default:
-            return nil
         }
     }
 
@@ -293,24 +251,26 @@ final class UpdateTransferMethodPresenter {
             params: insightsParam())
     }
 
-    private func trackTransferMethodCreatedConfirmationImpression() {
-        hyperwalletInsights.trackImpression(pageName: createdConfirmationPageName,
-                                            pageGroup: UpdateTransferMethodPresenter.updateTransferMethodPageGroup,
-                                            params: [
-                                                InsightsTags.country: country,
-                                                InsightsTags.currency: currency,
-                                                InsightsTags.transferMethodType: transferMethodTypeCode,
-                                                InsightsTags.profileType: profileType,
-                                                InsightsTags.goal: transferMethodCreatedGoal
-                                            ])
+    // Todo - Update
+    private func trackTransferMethodUpdateConfirmationImpression() {
+//        hyperwalletInsights.trackImpression(pageName: createdConfirmationPageName,
+//                                            pageGroup: UpdateTransferMethodPresenter.updateTransferMethodPageGroup,
+//                                            params: [
+//                                                InsightsTags.country: country,
+//                                                InsightsTags.currency: currency,
+//                                                InsightsTags.transferMethodType: transferMethodTypeCode,
+//                                                InsightsTags.profileType: profileType,
+//                                                InsightsTags.goal: transferMethodCreatedGoal
+//                                            ])
     }
 
+    // Todo - Update InsightTags
     private func insightsParam () -> [String: String] {
         return [
-            InsightsTags.country: country,
-            InsightsTags.currency: currency,
-            InsightsTags.transferMethodType: transferMethodTypeCode,
-            InsightsTags.profileType: profileType
+            InsightsTags.country: "0000"
+//            InsightsTags.currency: currency,
+//            InsightsTags.transferMethodType: transferMethodTypeCode,
+//            InsightsTags.profileType: profileType
         ]
     }
 }

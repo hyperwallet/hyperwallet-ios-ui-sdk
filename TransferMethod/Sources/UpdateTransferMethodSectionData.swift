@@ -21,8 +21,6 @@ import UIKit
 
 final class UpdateTransferMethodSectionData {
     var fieldGroup: String
-    var country: String?
-    var currency: String?
 
     var containsFocusedField: Bool = false
     var fieldToBeFocused: AbstractWidget?
@@ -33,8 +31,9 @@ final class UpdateTransferMethodSectionData {
         case "ACCOUNT_INFORMATION":
             let format = "\(fieldGroup)".lowercased().localized()
             return String(format: format,
-                          Locale.current.localizedString(forRegionCode: country ?? "") ?? "",
-                          currency ?? "").uppercased()
+                          Locale.current.localizedString(forRegionCode: "") ?? "",
+                          "")
+                .uppercased()
         case "CREATE_BUTTON":
             return nil
         case "INFORMATION":
@@ -54,13 +53,9 @@ final class UpdateTransferMethodSectionData {
     }
 
     init(fieldGroup: String,
-         country: String? = nil,
-         currency: String? = nil,
          cells: [UIView]
         ) {
         self.fieldGroup = fieldGroup
-        self.country = country
-        self.currency = currency
         self.cells = cells
     }
 
