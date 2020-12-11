@@ -52,8 +52,8 @@ class UpdateTransferMethodPresenterTests: XCTestCase {
         XCTAssertTrue(mockView.isShowLoadingPerformed, "The showLoading should be performed")
         XCTAssertTrue(mockView.isHideLoadingPerformed, "The hideLoading should be performed")
         XCTAssertEqual(mockView.fieldGroups.count, 1, "The `response.getFields()` should be 1")
-        XCTAssertTrue(hyperwalletInsightsMock.didTrackImpression,
-                      "HyperwalletInsights.trackImpression should be called")
+//        XCTAssertTrue(hyperwalletInsightsMock.didTrackImpression,
+//                      "HyperwalletInsights.trackImpression should be called")
     }
 
     public func testLoadUpdateTransferMethodConfigurationFields_failure() {

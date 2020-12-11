@@ -76,7 +76,7 @@ final class UpdateTransferMethodPresenter {
         }
 
         transferMethodUpdateConfigurationRepository
-            .getFields("") { [weak self] (result) in
+            .getFields(transferMethod?.token ?? "") { [weak self] (result) in
                 guard let strongSelf = self, let view = strongSelf.view else {
                     return
                 }

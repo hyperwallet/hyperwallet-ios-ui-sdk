@@ -56,7 +56,7 @@ final class UpdateTransferMethodController: UITableViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.accessibilityLabel = "create_account_label".localized()
         button.accessibilityIdentifier = "updateAccountButton"
-        button.setTitle("createTransferMethodButtonLabel".localized(), for: .normal)
+        button.setTitle("doneButtonLabel".localized(), for: .normal)
         button.titleLabel?.adjustsFontForContentSizeCategory = true
         button.titleLabel?.font = Theme.Button.font
         button.setTitleColor(Theme.Button.color, for: UIControl.State.normal)
@@ -342,7 +342,7 @@ extension UpdateTransferMethodController: UpdateTransferMethodView {
 
     func reloadData(_ fieldGroups: [HyperwalletFieldGroup]) {
         addFieldsSection(fieldGroups)
-        addCreateButtonSection()
+        addUpdateButtonSection()
         self.tableView.reloadData()
     }
 
@@ -430,6 +430,8 @@ extension UpdateTransferMethodController: UpdateTransferMethodView {
                 }})
             let section = UpdateTransferMethodSectionData(
                 fieldGroup: fieldGroup,
+                country: presenter.transferMethod?.transferMethodCountry,
+                currency: presenter.transferMethod?.transferMethodCurrency,
                 cells: newWidgets
             )
             presenter.sectionData.append(section)
@@ -452,9 +454,11 @@ extension UpdateTransferMethodController: UpdateTransferMethodView {
         showFooterViewWithUpdatedSectionData(for: presenter.sectionData)
     }
 
-    private func addCreateButtonSection() {
+    private func addUpdateButtonSection() {
         let buttonSection = UpdateTransferMethodSectionData(
             fieldGroup: "UPDATE_BUTTON",
+            country: presenter.transferMethod?.transferMethodCountry,
+            currency: presenter.transferMethod?.transferMethodCurrency,
             cells: [updateTransferMethodButton])
         presenter.sectionData.append(buttonSection)
     }
