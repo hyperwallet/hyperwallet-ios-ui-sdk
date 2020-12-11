@@ -177,9 +177,10 @@ final class UpdateTransferMethodPresenter {
         switch transferMethodTypeCode {
         case HyperwalletTransferMethod.TransferMethodType.bankAccount.rawValue,
              HyperwalletTransferMethod.TransferMethodType.wireAccount.rawValue :
-            let bankAccount = HyperwalletBankCard.Builder(transferMethodCountry: country,
-                                                          transferMethodCurrency: currency,
-                                                          transferMethodProfileType: profileType)
+            let bankAccount = HyperwalletBankAccount.Builder(transferMethodCountry: country,
+                                                             transferMethodCurrency: currency,
+                                                             transferMethodProfileType: profileType,
+                                                             transferMethodType: transferMethodTypeCode)
                 .build()
             bankAccount.setField(key: HyperwalletTransferMethod.TransferMethodField.token.rawValue,
                                  value: token)

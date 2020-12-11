@@ -425,6 +425,7 @@
 		FD5066242538238900640B36 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3839225E8BA900CD4137 /* UIImage.swift */; };
 		FD5066252538239100640B36 /* hw_mobile_ui_sdk_icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B39E00DE24B4FB0A00E3BC4D /* hw_mobile_ui_sdk_icons.ttf */; };
 		FD50662725382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json in Resources */ = {isa = PBXBuildFile; fileRef = FD50662625382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json */; };
+		FD6D1AF12583AE3C0019333E /* BankAccountIndividualUpdateResposne.json in Resources */ = {isa = PBXBuildFile; fileRef = FD6D1AF02583AE3C0019333E /* BankAccountIndividualUpdateResposne.json */; };
 		FD8EA36B258119BB003CC5E8 /* UpdateTransferMethodButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8EA36A258119BB003CC5E8 /* UpdateTransferMethodButtonCell.swift */; };
 		FDD2F4D32580CC2A008E4CFC /* TransferMethodUpdateConfigurationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD2F4D22580CC2A008E4CFC /* TransferMethodUpdateConfigurationRepository.swift */; };
 		FDD2F4D52580DA77008E4CFC /* TransferMethodUpdateConfigurationRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD2F4D42580DA77008E4CFC /* TransferMethodUpdateConfigurationRepositoryTests.swift */; };
@@ -1148,6 +1149,7 @@
 		DCF74269257E68F500A5295A /* ListTransferMethodResponseWithoutPaperCheck.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ListTransferMethodResponseWithoutPaperCheck.json; sourceTree = "<group>"; };
 		FD1208CD2582433100A8D8B2 /* UpdateTransferMethodPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTransferMethodPresenterTests.swift; sourceTree = "<group>"; };
 		FD50662625382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserReceiptDetailsWithMultipleCurrencies.json; sourceTree = "<group>"; };
+		FD6D1AF02583AE3C0019333E /* BankAccountIndividualUpdateResposne.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BankAccountIndividualUpdateResposne.json; sourceTree = "<group>"; };
 		FD8EA36A258119BB003CC5E8 /* UpdateTransferMethodButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTransferMethodButtonCell.swift; sourceTree = "<group>"; };
 		FDD2F4D22580CC2A008E4CFC /* TransferMethodUpdateConfigurationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodUpdateConfigurationRepository.swift; sourceTree = "<group>"; };
 		FDD2F4D42580DA77008E4CFC /* TransferMethodUpdateConfigurationRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodUpdateConfigurationRepositoryTests.swift; sourceTree = "<group>"; };
@@ -1387,6 +1389,7 @@
 				DB6523A722DF916C00F52EA7 /* BankAccountErrorResponseWithMissingField.json */,
 				DB6523A822DF916C00F52EA7 /* BankAccountErrorResponseWithValidationError.json */,
 				09795B7A229E7EB700EF407F /* BankAccountIndividualResponse.json */,
+				FD6D1AF02583AE3C0019333E /* BankAccountIndividualUpdateResposne.json */,
 				078B456B2273895C005B0248 /* BankAccountResponse.json */,
 				078B456A2273895C005B0248 /* BankCardErrorResponseWithInvalidCardNumber.json */,
 				078B45702273895C005B0248 /* BankCardResponse.json */,
@@ -3191,6 +3194,7 @@
 				DB55202922E145B800DD65C2 /* UserBusinessResponse.json in Resources */,
 				2EF70C54237CDF71007E3844 /* HyperwalletFieldResponse.json in Resources */,
 				DB55202822E145B800DD65C2 /* ListTransferMethodSuccessResponse.json in Resources */,
+				FD6D1AF12583AE3C0019333E /* BankAccountIndividualUpdateResposne.json in Resources */,
 				DCE2B8602578F2D8000EAFA4 /* PapercheckAccountResponse.json in Resources */,
 				DB55202622E145B800DD65C2 /* TransferMethodConfigurationKeysEmptyTransferMethodTypesResponse.json in Resources */,
 				DB55201B22E145B800DD65C2 /* BankAccountErrorResponseWithMissingField.json in Resources */,
