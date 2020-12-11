@@ -361,11 +361,11 @@ extension UpdateTransferMethodController: UpdateTransferMethodView {
         errorView.show(retry)
     }
 
-    func notifyTransferMethodAdded(_ transferMethod: HyperwalletTransferMethod) {
+    func notifyTransferMethodUpdated(_ transferMethod: HyperwalletTransferMethod) {
         DispatchQueue.global(qos: .background).async {
-            NotificationCenter.default.post(name: .transferMethodAdded,
+            NotificationCenter.default.post(name: .transferMethodUpdated,
                                             object: self,
-                                            userInfo: [UserInfo.transferMethodAdded: transferMethod])
+                                            userInfo: [UserInfo.transferMethodUpdated: transferMethod])
         }
         removeCoordinator()
         flowDelegate?.didFlowComplete(with: transferMethod)

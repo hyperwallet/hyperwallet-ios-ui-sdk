@@ -60,6 +60,8 @@ final class UpdateTransferMethodSectionData {
         ) {
         self.fieldGroup = fieldGroup
         self.cells = cells
+        self.currency = currency
+        self.country = country
     }
 
     subscript(index: Int) -> UIView {

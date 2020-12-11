@@ -27,7 +27,7 @@ protocol UpdateTransferMethodView: class {
     func dismissProcessing(handler: @escaping () -> Void)
     func hideLoading()
     func areAllFieldsValid() -> Bool
-    func notifyTransferMethodAdded(_ transferMethod: HyperwalletTransferMethod)
+    func notifyTransferMethodUpdated(_ transferMethod: HyperwalletTransferMethod)
     func showConfirmation(handler: @escaping () -> Void)
     func showError( title: String, message: String)
     func showError(_ error: HyperwalletErrorType,
@@ -107,14 +107,15 @@ final class UpdateTransferMethodPresenter {
             return
         }
 
-        guard let hyperwalletTransferMethod = transferMethod else {
+        guard let transferMethod = transferMethod,
+            let hyperwalletTransferMethod = buildHyperwalletTransferMethod(transferMethod) else {
             view.showError(title: "error".localized(), message: "transfer_method_not_supported_message".localized())
             return
         }
         view.fieldValues().forEach { hyperwalletTransferMethod.setField(key: $0.name, value: $0.value) }
 
         view.showProcessing()
-        transferMethodRepository.createTransferMethod(hyperwalletTransferMethod) { [weak self] (result) in
+        transferMethodRepository.updateTransferMethods(hyperwalletTransferMethod) { [weak self] (result) in
             guard let strongSelf = self, let view = strongSelf.view else {
                 return
             }
@@ -128,7 +129,7 @@ final class UpdateTransferMethodPresenter {
                 view.showConfirmation(handler: {
                     if let transferMethod = transferMethodResult {
                         strongSelf.trackTransferMethodUpdateConfirmationImpression()
-                        view.notifyTransferMethodAdded(transferMethod)
+                        view.notifyTransferMethodUpdated(transferMethod)
                     }
                 })
             }
@@ -162,6 +163,67 @@ final class UpdateTransferMethodPresenter {
                             pageGroup: UpdateTransferMethodPresenter.updateTransferMethodPageGroup) { [weak self] in
                                 self?.updateTransferMethod()
             }
+        }
+    }
+
+    //swiftlint:disable function_body_length
+    private func buildHyperwalletTransferMethod(_ transferMethod: HyperwalletTransferMethod)
+        -> HyperwalletTransferMethod? {
+        let transferMethodTypeCode = transferMethod.type ?? ""
+        let country = transferMethod.transferMethodCountry ?? ""
+        let currency = transferMethod.transferMethodCurrency ?? ""
+        let profileType = transferMethod.profileType ?? ""
+        let token = transferMethod.token ?? ""
+        switch transferMethodTypeCode {
+        case HyperwalletTransferMethod.TransferMethodType.bankAccount.rawValue,
+             HyperwalletTransferMethod.TransferMethodType.wireAccount.rawValue :
+            let bankAccount = HyperwalletBankCard.Builder(transferMethodCountry: country,
+                                                          transferMethodCurrency: currency,
+                                                          transferMethodProfileType: profileType)
+                .build()
+            bankAccount.setField(key: HyperwalletTransferMethod.TransferMethodField.token.rawValue,
+                                 value: token)
+            return bankAccount
+
+        case HyperwalletTransferMethod.TransferMethodType.bankCard.rawValue :
+            let bankCard = HyperwalletBankCard.Builder(transferMethodCountry: country,
+                                                       transferMethodCurrency: currency,
+                                                       transferMethodProfileType: profileType)
+                .build()
+            bankCard.setField(key: HyperwalletTransferMethod.TransferMethodField.token.rawValue,
+                              value: token)
+            return bankCard
+
+        case HyperwalletTransferMethod.TransferMethodType.payPalAccount.rawValue:
+            let payPal = HyperwalletPayPalAccount.Builder(transferMethodCountry: country,
+                                                          transferMethodCurrency: currency,
+                                                          transferMethodProfileType: profileType)
+                .build()
+            payPal.setField(key: HyperwalletTransferMethod.TransferMethodField.token.rawValue,
+                            value: token)
+            return payPal
+
+        case HyperwalletTransferMethod.TransferMethodType.venmoAccount.rawValue:
+            let venmo = HyperwalletVenmoAccount.Builder(transferMethodCountry: country,
+                                                        transferMethodCurrency: currency,
+                                                        transferMethodProfileType: profileType)
+                .build()
+            venmo.setField(key: HyperwalletTransferMethod.TransferMethodField.token.rawValue,
+                           value: token)
+            return venmo
+
+        case HyperwalletTransferMethod.TransferMethodType.paperCheck.rawValue:
+            let paperCheck = HyperwalletPaperCheck.Builder(transferMethodCountry: country,
+                                                           transferMethodCurrency: currency,
+                                                           transferMethodProfileType: profileType,
+                                                           transferMethodType: transferMethodTypeCode)
+                .build()
+            paperCheck.setField(key: HyperwalletTransferMethod.TransferMethodField.token.rawValue,
+                                value: token)
+            return paperCheck
+
+        default:
+            return nil
         }
     }
 

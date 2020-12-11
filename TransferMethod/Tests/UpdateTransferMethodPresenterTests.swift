@@ -191,7 +191,7 @@ class UpdateTransferMethodViewMock: UpdateTransferMethodView {
         expectations?[expectation]?.fulfill()
     }
 
-    func notifyTransferMethodAdded(_ transferMethod: HyperwalletTransferMethod) {
+    func notifyTransferMethodUpdated(_ transferMethod: HyperwalletTransferMethod) {
         isNotificationSent = true
         expectations?[expectation]?.fulfill()
     }

@@ -20,10 +20,16 @@ import Foundation
 
 /// The Notification extension
 public extension Notification.Name {
-    /// Posted when a new transfer method (bank account, bank card, PayPal account, prepaid card, paper check)
+    /// Posted when a new transfer method (bank account, bank card, PayPal account, prepaid card, paper check, venmo)
     /// has been created.
     static var transferMethodAdded: Notification.Name {
         return .init(rawValue: "transferMethodAdded")
+    }
+
+    /// Posted when a  transfer method (bank account, bank card, PayPal account, prepaid card, paper check, venmo)
+    /// has been updated.
+    static var transferMethodUpdated: Notification.Name {
+        return .init(rawValue: "transferMethodUpdated")
     }
 
     /// Posted when a transfer method (bank account, bank card, PayPal account, prepaid card, paper check)
@@ -52,6 +58,8 @@ public extension Notification.Name {
 public enum UserInfo: String {
     /// A new transfer method has been added.
     case transferMethodAdded
+    /// A  transfer method has been updated.
+    case transferMethodUpdated
     /// A transfer method has been deactivated.
     case transferMethodDeactivated
     /// A transfer of funds has been created.
