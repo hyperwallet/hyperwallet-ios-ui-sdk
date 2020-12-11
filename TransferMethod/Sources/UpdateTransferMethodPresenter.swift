@@ -45,7 +45,7 @@ final class UpdateTransferMethodPresenter {
     private let errorTypeApi = "API"
     private let createdConfirmationPageName = "transfer-method:update:transfer-method-updated"
     private let pageLink = "update-transfer-method"
-    private let transferMethodCreatedGoal = "transfer-method-updated"
+    private let transferMethodUpdatedGoal = "transfer-method-updated"
     static let updateTransferMethodPageGroup = "update-transfer-method"
     static let updateTransferMethodPageName = "transfer-method:update:collect-transfer-method-information"
     private let hyperwalletInsights: HyperwalletInsightsProtocol
@@ -253,15 +253,15 @@ final class UpdateTransferMethodPresenter {
 
     // Todo - Update
     private func trackTransferMethodUpdateConfirmationImpression() {
-//        hyperwalletInsights.trackImpression(pageName: createdConfirmationPageName,
-//                                            pageGroup: UpdateTransferMethodPresenter.updateTransferMethodPageGroup,
-//                                            params: [
-//                                                InsightsTags.country: country,
-//                                                InsightsTags.currency: currency,
-//                                                InsightsTags.transferMethodType: transferMethodTypeCode,
-//                                                InsightsTags.profileType: profileType,
-//                                                InsightsTags.goal: transferMethodCreatedGoal
-//                                            ])
+        hyperwalletInsights.trackImpression(pageName: createdConfirmationPageName,
+                                            pageGroup: UpdateTransferMethodPresenter.updateTransferMethodPageGroup,
+                                            params: [
+                                                InsightsTags.country: transferMethod?.transferMethodCountry ?? "",
+                                                InsightsTags.currency: transferMethod?.transferMethodCurrency ?? "",
+                                                InsightsTags.transferMethodType: transferMethod?.type ?? "",
+                                                InsightsTags.profileType: transferMethod?.profileType ?? "",
+                                                InsightsTags.goal: transferMethodUpdatedGoal
+                                            ])
     }
 
     // Todo - Update InsightTags

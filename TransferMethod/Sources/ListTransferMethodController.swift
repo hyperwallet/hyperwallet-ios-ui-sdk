@@ -97,9 +97,13 @@ final class ListTransferMethodController: UITableViewController {
 
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !(presenter.sectionData[indexPath.row].isPrepaidCard()) {
-            showConfirmationAlert(title: "mobileAreYouSure".localized(),
-                                  message: "",
-                                  transferMethodIndex: indexPath.row)
+//            showConfirmationAlert(title: "mobileAreYouSure".localized(),
+//                                  message: "",
+//                                  transferMethodIndex: indexPath.row)
+            let coordinator = HyperwalletUI.shared.updateTransferMethodCoordinator(presenter.sectionData[indexPath.row],
+                                                                                   true,
+                                                                                   parentController: self)
+            coordinator.navigate()
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }

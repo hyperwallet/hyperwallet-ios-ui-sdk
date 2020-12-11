@@ -18,6 +18,7 @@
 
 #if !COCOAPODS
 import Common
+import HyperwalletSDK
 import TransferMethodRepository
 import UserRepository
 #endif
@@ -82,6 +83,26 @@ public extension HyperwalletUI {
         initializationData[InitializationDataField.forceUpdateData]  = forceUpdateData
 
         let coordinator = AddTransferMethodCoordinator()
+        coordinator.start(initializationData: initializationData, parentController: parentController)
+        return coordinator
+    }
+
+    /// Controller to update a transfer method.
+    ///
+    /// The form fields are based transfer method should be
+    /// passed to this Controller to update Transfer Method for those values.
+    ///
+    /// - Parameters:
+    ///   - transferMethod: The transfer method being edited.
+    ///   - forceUpdateData: Forces to refresh the cached data.
+    /// - Returns: An instance of `AddTransferMethodCoordinator`
+    func updateTransferMethodCoordinator(_ transferMethod: HyperwalletTransferMethod,
+                                         _ forceUpdateData: Bool = false,
+                                         parentController: UIViewController) -> UpdateTransferMethodCoordinator {
+        var initializationData = [InitializationDataField: Any]()
+        initializationData[InitializationDataField.transferMethod]  = transferMethod
+        initializationData[InitializationDataField.forceUpdateData]  = forceUpdateData
+        let coordinator = UpdateTransferMethodCoordinator()
         coordinator.start(initializationData: initializationData, parentController: parentController)
         return coordinator
     }

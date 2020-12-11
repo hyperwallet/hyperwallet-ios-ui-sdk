@@ -618,6 +618,20 @@
 			remoteGlobalIDString = DB551F4822E1316400DD65C2;
 			remoteInfo = Common;
 		};
+		FD1208D5258251BE00A8D8B2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FD1208D0258251BD00A8D8B2 /* HyperwalletSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 98101DBA2238A2F000BA04CA;
+			remoteInfo = HyperwalletSDK;
+		};
+		FD1208D7258251BE00A8D8B2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FD1208D0258251BD00A8D8B2 /* HyperwalletSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 98101DC32238A2F000BA04CA;
+			remoteInfo = HyperwalletSDKTests;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -1147,6 +1161,7 @@
 		DCF74267257E305600A5295A /* ListTransferMethodResponsePaperCheck.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ListTransferMethodResponsePaperCheck.json; sourceTree = "<group>"; };
 		DCF74269257E68F500A5295A /* ListTransferMethodResponseWithoutPaperCheck.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ListTransferMethodResponseWithoutPaperCheck.json; sourceTree = "<group>"; };
 		FD1208CD2582433100A8D8B2 /* UpdateTransferMethodPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTransferMethodPresenterTests.swift; sourceTree = "<group>"; };
+		FD1208D0258251BD00A8D8B2 /* HyperwalletSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = HyperwalletSDK.xcodeproj; path = "Carthage/Checkouts/hyperwallet-ios-sdk/HyperwalletSDK.xcodeproj"; sourceTree = "<group>"; };
 		FD50662625382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserReceiptDetailsWithMultipleCurrencies.json; sourceTree = "<group>"; };
 		FD8EA36A258119BB003CC5E8 /* UpdateTransferMethodButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTransferMethodButtonCell.swift; sourceTree = "<group>"; };
 		FDD2F4D22580CC2A008E4CFC /* TransferMethodUpdateConfigurationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodUpdateConfigurationRepository.swift; sourceTree = "<group>"; };
@@ -2254,6 +2269,7 @@
 		DBCA37EB225E892400CD4137 = {
 			isa = PBXGroup;
 			children = (
+				FD1208D0258251BD00A8D8B2 /* HyperwalletSDK.xcodeproj */,
 				DB551F6222E1316D00DD65C2 /* Common */,
 				DB4679832260380C00E1AF49 /* Demo */,
 				DBD2667F2261A601002973C3 /* Deployment */,
@@ -2407,6 +2423,15 @@
 				98220B8B2265793700055E18 /* README.md */,
 			);
 			name = Deployment;
+			sourceTree = "<group>";
+		};
+		FD1208D1258251BD00A8D8B2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FD1208D6258251BE00A8D8B2 /* HyperwalletSDK.framework */,
+				FD1208D8258251BE00A8D8B2 /* HyperwalletSDKTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2944,6 +2969,12 @@
 			mainGroup = DBCA37EB225E892400CD4137;
 			productRefGroup = DBCA37F6225E892400CD4137 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = FD1208D1258251BD00A8D8B2 /* Products */;
+					ProjectRef = FD1208D0258251BD00A8D8B2 /* HyperwalletSDK.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				DB4679812260380C00E1AF49 /* Demo */,
@@ -2967,6 +2998,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		FD1208D6258251BE00A8D8B2 /* HyperwalletSDK.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = HyperwalletSDK.framework;
+			remoteRef = FD1208D5258251BE00A8D8B2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FD1208D8258251BE00A8D8B2 /* HyperwalletSDKTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = HyperwalletSDKTests.xctest;
+			remoteRef = FD1208D7258251BE00A8D8B2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		073BB98022E63DB50053C24E /* Resources */ = {

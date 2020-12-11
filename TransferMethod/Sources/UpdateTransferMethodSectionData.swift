@@ -34,7 +34,7 @@ final class UpdateTransferMethodSectionData {
                           Locale.current.localizedString(forRegionCode: "") ?? "",
                           "")
                 .uppercased()
-        case "CREATE_BUTTON":
+        case "UPDATE_BUTTON":
             return nil
         case "INFORMATION":
             return "mobileFeesAndProcessingTime".localized()
