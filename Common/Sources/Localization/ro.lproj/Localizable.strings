@@ -39,7 +39,6 @@
 "mobileCountryRegion" = "Țara/Regiunea";
 "mobileCurrencyLabel" = "Moneda";
 "mobileAreYouSure" = "Sunteți sigur(ă)?";
-"mobileRemoveEAconfirm" = "Eliminați metodă de transfer";
 "fee_flat_formatter" = "Comision %1$@%2$@ ";
 "fee_percent_only_min_formatter" = "Comision %1$@%% (Minim:%2$@%3$@)";
 "fee_percent_only_max_formatter" = "Comision %1$@%% (Maxim:%2$@%3$@)";

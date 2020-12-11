@@ -166,61 +166,35 @@ final class UpdateTransferMethodPresenter {
         }
     }
 
-    //swiftlint:disable function_body_length
     private func buildHyperwalletTransferMethod(_ transferMethod: HyperwalletTransferMethod)
         -> HyperwalletTransferMethod? {
         let transferMethodTypeCode = transferMethod.type ?? ""
-        let country = transferMethod.transferMethodCountry ?? ""
-        let currency = transferMethod.transferMethodCurrency ?? ""
-        let profileType = transferMethod.profileType ?? ""
         let token = transferMethod.token ?? ""
         switch transferMethodTypeCode {
         case HyperwalletTransferMethod.TransferMethodType.bankAccount.rawValue,
              HyperwalletTransferMethod.TransferMethodType.wireAccount.rawValue :
-            let bankAccount = HyperwalletBankAccount.Builder(transferMethodCountry: country,
-                                                             transferMethodCurrency: currency,
-                                                             transferMethodProfileType: profileType,
-                                                             transferMethodType: transferMethodTypeCode)
+            let bankAccount = HyperwalletBankAccount.Builder(token: token)
                 .build()
-            bankAccount.setField(key: HyperwalletTransferMethod.TransferMethodField.token.rawValue,
-                                 value: token)
             return bankAccount
 
         case HyperwalletTransferMethod.TransferMethodType.bankCard.rawValue :
-            let bankCard = HyperwalletBankCard.Builder(transferMethodCountry: country,
-                                                       transferMethodCurrency: currency,
-                                                       transferMethodProfileType: profileType)
+            let bankCard = HyperwalletBankCard.Builder(token: token)
                 .build()
-            bankCard.setField(key: HyperwalletTransferMethod.TransferMethodField.token.rawValue,
-                              value: token)
             return bankCard
 
         case HyperwalletTransferMethod.TransferMethodType.payPalAccount.rawValue:
-            let payPal = HyperwalletPayPalAccount.Builder(transferMethodCountry: country,
-                                                          transferMethodCurrency: currency,
-                                                          transferMethodProfileType: profileType)
+            let payPal = HyperwalletPayPalAccount.Builder(token: token)
                 .build()
-            payPal.setField(key: HyperwalletTransferMethod.TransferMethodField.token.rawValue,
-                            value: token)
             return payPal
 
         case HyperwalletTransferMethod.TransferMethodType.venmoAccount.rawValue:
-            let venmo = HyperwalletVenmoAccount.Builder(transferMethodCountry: country,
-                                                        transferMethodCurrency: currency,
-                                                        transferMethodProfileType: profileType)
+            let venmo = HyperwalletVenmoAccount.Builder(token: token)
                 .build()
-            venmo.setField(key: HyperwalletTransferMethod.TransferMethodField.token.rawValue,
-                           value: token)
             return venmo
 
         case HyperwalletTransferMethod.TransferMethodType.paperCheck.rawValue:
-            let paperCheck = HyperwalletPaperCheck.Builder(transferMethodCountry: country,
-                                                           transferMethodCurrency: currency,
-                                                           transferMethodProfileType: profileType,
-                                                           transferMethodType: transferMethodTypeCode)
+            let paperCheck = HyperwalletPaperCheck.Builder(token: token)
                 .build()
-            paperCheck.setField(key: HyperwalletTransferMethod.TransferMethodField.token.rawValue,
-                                value: token)
             return paperCheck
 
         default:

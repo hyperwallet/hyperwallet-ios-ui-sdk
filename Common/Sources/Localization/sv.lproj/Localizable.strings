@@ -39,7 +39,6 @@
 "mobileCountryRegion" = "Land/område";
 "mobileCurrencyLabel" = "Valuta";
 "mobileAreYouSure" = "Är du säker?";
-"mobileRemoveEAconfirm" = "Ta bort överföringsmetod";
 "fee_flat_formatter" = "%1$@%2$@ avgift";
 "fee_percent_only_min_formatter" = "%1$@%% (Min:%2$@%3$@) avgift";
 "fee_percent_only_max_formatter" = "%1$@%% (Max:%2$@%3$@) avgift";

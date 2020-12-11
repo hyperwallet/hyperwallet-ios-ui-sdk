@@ -39,7 +39,6 @@
 "mobileCountryRegion" = "国・地域";
 "mobileCurrencyLabel" = "通貨";
 "mobileAreYouSure" = "よろしいですか？";
-"mobileRemoveEAconfirm" = "送金方法を削除";
 "fee_flat_formatter" = "%1$@%2$@手数料";
 "fee_percent_only_min_formatter" = "%1$@%%（最小：%2$@%3$@）手数料";
 "fee_percent_only_max_formatter" = "%1$@%%（最大：%2$@%3$@）手数料";

@@ -39,7 +39,6 @@
 "mobileCountryRegion" = "Země / oblast";
 "mobileCurrencyLabel" = "Měna";
 "mobileAreYouSure" = "Jste si jistí?";
-"mobileRemoveEAconfirm" = "Odeberte způsob převodu";
 "fee_flat_formatter" = "Poplatek %1$@%2$@ ";
 "fee_percent_only_min_formatter" = "Poplatek %1$@%% (min.:%2$@%3$@)";
 "fee_percent_only_max_formatter" = "Poplatek %1$@%% (max.:%2$@%3$@)";

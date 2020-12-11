@@ -29,7 +29,8 @@ class UpdateTransferMethodPresenterTests: XCTestCase {
         let bankCard = HyperwalletBankAccount.Builder(transferMethodCountry: "US",
                                                       transferMethodCurrency: "USD",
                                                       transferMethodProfileType: "INDIVIDUAL",
-                                                      transferMethodType: HyperwalletTransferMethod.TransferMethodType.bankAccount.rawValue)
+                                                      transferMethodType: HyperwalletTransferMethod.TransferMethodType
+                                                        .bankAccount.rawValue)
             .build()
         bankCard.setField(key: HyperwalletTransferMethod.TransferMethodField.token.rawValue,
                           value: transferMethodToken)

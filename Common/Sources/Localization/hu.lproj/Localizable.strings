@@ -39,7 +39,6 @@
 "mobileCountryRegion" = "Ország/régió";
 "mobileCurrencyLabel" = "Pénznem";
 "mobileAreYouSure" = "Biztos benne?";
-"mobileRemoveEAconfirm" = "Átutalási mód eltávolítása";
 "fee_flat_formatter" = "%1$@%2$@ díj";
 "fee_percent_only_min_formatter" = "%1$@%% (Min.:%2$@%3$@) díj";
 "fee_percent_only_max_formatter" = "%1$@%% (Max.:%2$@%3$@) díj";
