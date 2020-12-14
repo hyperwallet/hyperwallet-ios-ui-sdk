@@ -428,6 +428,7 @@
 		FD6D1AF12583AE3C0019333E /* BankAccountIndividualUpdateResposne.json in Resources */ = {isa = PBXBuildFile; fileRef = FD6D1AF02583AE3C0019333E /* BankAccountIndividualUpdateResposne.json */; };
 		FD8EA36B258119BB003CC5E8 /* UpdateTransferMethodButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8EA36A258119BB003CC5E8 /* UpdateTransferMethodButtonCell.swift */; };
 		FD9C483B258791AC00344E93 /* TransferMethodUpdateConfigurationFieldsBankAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = FD9C483925878E6100344E93 /* TransferMethodUpdateConfigurationFieldsBankAccountResponse.json */; };
+		FD9C48462587A2E000344E93 /* BankCardUpdateResposne.json in Resources */ = {isa = PBXBuildFile; fileRef = FD9C48452587A2E000344E93 /* BankCardUpdateResposne.json */; };
 		FDD2F4D32580CC2A008E4CFC /* TransferMethodUpdateConfigurationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD2F4D22580CC2A008E4CFC /* TransferMethodUpdateConfigurationRepository.swift */; };
 		FDD2F4D52580DA77008E4CFC /* TransferMethodUpdateConfigurationRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD2F4D42580DA77008E4CFC /* TransferMethodUpdateConfigurationRepositoryTests.swift */; };
 		FDD2F4E02580F774008E4CFC /* TransferMethodUpdateConfigurationFieldsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = FDD2F4DF2580F774008E4CFC /* TransferMethodUpdateConfigurationFieldsResponse.json */; };
@@ -1153,6 +1154,7 @@
 		FD6D1AF02583AE3C0019333E /* BankAccountIndividualUpdateResposne.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BankAccountIndividualUpdateResposne.json; sourceTree = "<group>"; };
 		FD8EA36A258119BB003CC5E8 /* UpdateTransferMethodButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTransferMethodButtonCell.swift; sourceTree = "<group>"; };
 		FD9C483925878E6100344E93 /* TransferMethodUpdateConfigurationFieldsBankAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TransferMethodUpdateConfigurationFieldsBankAccountResponse.json; sourceTree = "<group>"; };
+		FD9C48452587A2E000344E93 /* BankCardUpdateResposne.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BankCardUpdateResposne.json; sourceTree = "<group>"; };
 		FDD2F4D22580CC2A008E4CFC /* TransferMethodUpdateConfigurationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodUpdateConfigurationRepository.swift; sourceTree = "<group>"; };
 		FDD2F4D42580DA77008E4CFC /* TransferMethodUpdateConfigurationRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodUpdateConfigurationRepositoryTests.swift; sourceTree = "<group>"; };
 		FDD2F4DF2580F774008E4CFC /* TransferMethodUpdateConfigurationFieldsResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TransferMethodUpdateConfigurationFieldsResponse.json; sourceTree = "<group>"; };
@@ -1392,6 +1394,7 @@
 				DB6523A822DF916C00F52EA7 /* BankAccountErrorResponseWithValidationError.json */,
 				09795B7A229E7EB700EF407F /* BankAccountIndividualResponse.json */,
 				FD6D1AF02583AE3C0019333E /* BankAccountIndividualUpdateResposne.json */,
+				FD9C48452587A2E000344E93 /* BankCardUpdateResposne.json */,
 				078B456B2273895C005B0248 /* BankAccountResponse.json */,
 				078B456A2273895C005B0248 /* BankCardErrorResponseWithInvalidCardNumber.json */,
 				078B45702273895C005B0248 /* BankCardResponse.json */,
@@ -3193,6 +3196,7 @@
 				DB55201D22E145B800DD65C2 /* BankAccountIndividualResponse.json in Resources */,
 				DB55202322E145B800DD65C2 /* TransferMethodConfigurationFieldsResponse.json in Resources */,
 				2E16213423987284007E140D /* HyperwalletFieldResponseWithPattern.json in Resources */,
+				FD9C48462587A2E000344E93 /* BankCardUpdateResposne.json in Resources */,
 				DB55202D22E145B800DD65C2 /* UnexpectedErrorResponse.json in Resources */,
 				DB55202222E145B800DD65C2 /* StatusTransitionResponseSuccess.json in Resources */,
 				DB55202922E145B800DD65C2 /* UserBusinessResponse.json in Resources */,

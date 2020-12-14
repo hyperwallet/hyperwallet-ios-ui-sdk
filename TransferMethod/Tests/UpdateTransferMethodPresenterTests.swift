@@ -125,6 +125,42 @@ class UpdateTransferMethodPresenterTests: XCTestCase {
                       "HyperwalletInsights.trackImpression should be called")
     }
 
+    func testUpdateTransferMethod_bankCard() {
+        HyperwalletTestHelper.setUpMockServer(request:
+            setupTransferMethodConfigurationFields(transferMethodConfigurationFieldsResponse))
+        let url = String(format: "%@/bank-cards/%@", HyperwalletTestHelper.userRestURL, transferMethodToken)
+        let response = HyperwalletTestHelper.okHTTPResponse(for: "BankCardUpdateResposne")
+        let request = HyperwalletTestHelper.buildPutRequest(baseUrl: url, response)
+        HyperwalletTestHelper.setUpMockServer(request: request)
+
+        var expectation = self.expectation(description: "Load transfer method configuration fields")
+        mockView.expectations = [mockView.expectation: expectation]
+
+        presenter.loadTransferMethodUpdateConfigurationFields()
+        wait(for: Array(mockView.expectations!.values), timeout: 1)
+
+        // Add fields to the form
+        mockView.mockFieldValuesReturnResult.append((name: "cardNumber", value: "1111111111111111"))
+        mockView.mockFieldValuesReturnResult.append((name: "dateOfExpiry", value: "2050-12"))
+        mockView.mockFieldValuesReturnResult.append((name: "cvv", value: "123"))
+        // press the create transfer method button
+        expectation = self.expectation(description: "Update bank account completed")
+        mockView.expectations = [mockView.expectation: expectation]
+
+        presenter.updateTransferMethod()
+
+        wait(for: Array(mockView.expectations!.values), timeout: 1)
+
+        // Then
+        XCTAssertFalse(mockView.isShowErrorPerformed, "The showError should not be performed")
+        XCTAssertTrue(mockView.isShowConfirmationPerformed, "The showConfirmation should be performed")
+        XCTAssertTrue(mockView.isNotificationSent, "The notification should be sent")
+        XCTAssertTrue(hyperwalletInsightsMock.didTrackClick,
+                      "HyperwalletInsights.trackClick should be called")
+        XCTAssertTrue(hyperwalletInsightsMock.didTrackImpression,
+                      "HyperwalletInsights.trackImpression should be called")
+    }
+
     private func setupTransferMethodConfigurationFields(_ payload: Data, _ error: NSError? = nil) -> StubRequest {
         let response = HyperwalletTestHelper.setUpMockedResponse(payload: payload,
                                                                  error: error)
