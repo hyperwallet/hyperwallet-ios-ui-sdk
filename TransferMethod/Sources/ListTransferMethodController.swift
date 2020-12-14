@@ -81,23 +81,17 @@ final class ListTransferMethodController: UITableViewController {
         if let listTransferMethodCell = cell as? ListTransferMethodCell {
             listTransferMethodCell.configure(transferMethod: presenter.sectionData[indexPath.row])
 
-            if !(presenter.sectionData[indexPath.row].isPrepaidCard()) {
-                let icon = UIImage.fontIcon(HyperwalletIcon.of("TRASH").rawValue,
-                                            CGSize(width: 24, height: 25),
-                                            CGFloat(24),
-                                            UIColor(red: 0.17, green: 0.18, blue: 0.18, alpha: 1))
-
-                listTransferMethodCell.accessoryView = UIImageView(image: icon)
-            } else {
-                listTransferMethodCell.accessoryView = nil
-            }
+            listTransferMethodCell.accessoryView = nil
         }
         return cell
     }
 
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !(presenter.sectionData[indexPath.row].isPrepaidCard()) {
-            let actionSheetController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            let actionSheetController = UIAlertController(title: nil,
+                                                          message: nil,
+                                                          preferredStyle:
+                UIDevice.current.userInterfaceIdiom == .pad ? .alert : .actionSheet)
             let firstAction = UIAlertAction(title: "Edit", style: .default) { _ -> Void in
                 print("Edit pressed")
             }
