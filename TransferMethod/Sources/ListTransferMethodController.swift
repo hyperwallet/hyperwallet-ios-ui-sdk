@@ -95,12 +95,12 @@ final class ListTransferMethodController: UITableViewController {
             let firstAction = UIAlertAction(title: "Edit", style: .default) { _ -> Void in
                 print("Edit pressed")
             }
-            let secondAction = UIAlertAction(title: "Remove", style: .default) { _ -> Void in
+            let secondAction = UIAlertAction(title: "remove".localized(), style: .default) { _ -> Void in
                 self.showConfirmationAlert(title: "mobileAreYouSure".localized(),
                                            message: "",
                                            transferMethodIndex: indexPath.row)
             }
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ -> Void in }
+            let cancelAction = UIAlertAction(title: "cancelButtonLabel".localized(), style: .cancel) { _ -> Void in }
             actionSheetController.addAction(firstAction)
             actionSheetController.addAction(secondAction)
             actionSheetController.addAction(cancelAction)
