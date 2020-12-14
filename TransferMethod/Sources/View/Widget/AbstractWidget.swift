@@ -128,7 +128,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.placeholder = nil
-        if field.fieldValueMasked! {
+        if let isValueMasked = field.fieldValueMasked, isValueMasked {
             textField.text = ""
         }
     }
