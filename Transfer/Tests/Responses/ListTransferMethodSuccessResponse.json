@@ -1,5 +1,5 @@
 {
-    "count":4,
+    "count":5,
     "offset":0,
     "limit":10,
     "data":[
@@ -91,6 +91,44 @@
                         "rel": "self"
                     },
                     "href": "https://localhost/rest/v3/users/usr-123456789/venmo-accounts/trm-123456789"
+                }
+            ]
+        },
+        {
+            "token":"trm-123456789",
+            "type":"PAPER_CHECK",
+            "status":"ACTIVATED",
+            "createdOn":"2017-10-31T16:47:15",
+            "transferMethodCountry":"US",
+            "transferMethodCurrency":"USD",
+            "profileType":"INDIVIDUAL",
+            "firstName":"Some",
+            "lastName":"Guy",
+            "middleName": "Good",
+            "dateOfBirth": "1991-01-01",
+            "addressLine1": "575 Market Street",
+            "addressLine2": "57 Market Street",
+            "city":"San Francisco",
+            "stateProvince":"CA",
+            "country":"US",
+            "postalCode":"94105",
+            "phoneNumber": "604-345-1777",
+            "mobileNumber": "604-345-1888",
+            "countryOfBirth": "US",
+            "driversLicenseId": "1234",
+            "employerId": "1234",
+            "governmentId": "12898",
+            "governmentIdType": "PASSPORT",
+            "gender": "MALE",
+            "passportId": "112323",
+            "shippingMethod": "STANDARD",
+            "bankAccountRelationship": "SELF",
+            "links":[
+                {
+                    "params":{
+                        "rel":"self"
+                    },
+                    "href":"https://localhost/rest/v3/users/usr-0000/paper-checks/trm-123456789"
                 }
             ]
         }

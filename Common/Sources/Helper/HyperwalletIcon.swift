@@ -49,7 +49,7 @@ public final class HyperwalletIcon {
         case "CASH_PICKUP_MG":
             return .moneygram
 
-        case "PAPER_CHECK":
+        case HyperwalletTransferMethod.TransferMethodType.paperCheck.rawValue:
             return .check
 
         case HyperwalletReceipt.HyperwalletEntryType.credit.rawValue:
