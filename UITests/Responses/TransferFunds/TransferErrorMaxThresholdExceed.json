@@ -1,0 +1,6 @@
+{
+    "errors" : [ {
+        "message" : "Transfer amount specified exceeds the maximum threshold of {0}”,
+        "code" : "LIMIT_EXCEED_THRESHOLD"
+    } ]
+}
