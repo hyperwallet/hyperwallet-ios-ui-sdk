@@ -85,7 +85,8 @@ final class TransferAllFundsCell: UITableViewCell {
                    currencyCode: String?) {
         guard let availableBalance = availableBalance,
             let currencyCode = currencyCode else {
-                availableFundsLabel.text = ""
+                availableFundsLabel.text = "Amount available: N/A"
+                transferMaxAmountButton.isHidden = true
                 return
         }
 
@@ -100,8 +101,9 @@ final class TransferAllFundsCell: UITableViewCell {
                                               currencyCode)
             availableFundsLabel.numberOfLines = 0
             availableFundsLabel.adjustsFontForContentSizeCategory = true
+            transferMaxAmountButton.isHidden = false
+            transferMaxAmountButton.addGestureRecognizer(action)
         }
-        transferMaxAmountButton.addGestureRecognizer(action)
     }
 }
 
