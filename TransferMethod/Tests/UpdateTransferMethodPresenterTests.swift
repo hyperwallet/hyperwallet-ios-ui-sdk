@@ -11,6 +11,8 @@ class UpdateTransferMethodPresenterTests: XCTestCase {
     private let mockView = UpdateTransferMethodViewMock()
     private lazy var transferMethodConfigurationFieldsResponse = HyperwalletTestHelper
         .getDataFromJson("TransferMethodUpdateConfigurationFieldsResponse")
+    private lazy var transferMethodConfigurationFieldsBankAccountResponse = HyperwalletTestHelper
+    .getDataFromJson("TransferMethodUpdateConfigurationFieldsBankAccountResponse")
     private var hyperwalletInsightsMock = HyperwalletInsightsMock()
     private var inputHandler: () -> Void = {}
     private let transferMethodToken = "trm-123456789"
@@ -39,7 +41,7 @@ class UpdateTransferMethodPresenterTests: XCTestCase {
 
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
-        presenter = UpdateTransferMethodPresenter(mockView, bankCard)
+        presenter = UpdateTransferMethodPresenter(mockView, transferMethodToken, hyperwalletInsightsMock)
     }
 
     override func tearDown() {
@@ -51,12 +53,13 @@ class UpdateTransferMethodPresenterTests: XCTestCase {
     }
 
     public func testLoadUpdateTransferMethodConfigurationFields_success() {
-        HyperwalletTestHelper.setUpMockServer(request: setupTransferMethodConfigurationFields())
+        HyperwalletTestHelper.setUpMockServer(request:
+            self.setupTransferMethodConfigurationFields(transferMethodConfigurationFieldsResponse))
 
         let expectation = self.expectation(description: "Load transfer method configuration fields")
         mockView.expectations = [mockView.expectation: expectation]
 
-        presenter.loadTransferMethodUpdateConfigurationFields(true)
+        presenter.loadTransferMethodUpdateConfigurationFields()
 
         wait(for: Array(mockView.expectations!.values), timeout: 1)
 
@@ -71,25 +74,33 @@ class UpdateTransferMethodPresenterTests: XCTestCase {
     public func testLoadUpdateTransferMethodConfigurationFields_failure() {
         // Given
         HyperwalletTestHelper.setUpMockServer(request:
-            setupTransferMethodConfigurationFields(NSError(domain: "", code: -1009, userInfo: nil)))
+            setupTransferMethodConfigurationFields(transferMethodConfigurationFieldsResponse,
+                                                   NSError(domain: "", code: -1009, userInfo: nil)))
 
         let expectation = self.expectation(description: "load transfer methods")
         mockView.expectations = [mockView.expectation: expectation]
 
         // When
-        presenter.loadTransferMethodUpdateConfigurationFields(true)
+        presenter.loadTransferMethodUpdateConfigurationFields()
         wait(for: Array(mockView.expectations!.values), timeout: 1)
 
         XCTAssertTrue(mockView.isShowErrorPerformed, "The showError should be performed")
         XCTAssertFalse(mockView.isShowConfirmationPerformed, "The showError should not be performed")
     }
 
-    func testCreateTransferMethod_updateBankAccount() {
-        presenter = UpdateTransferMethodPresenter(mockView, bankAccount, hyperwalletInsightsMock)
+    func testUpdateTransferMethod_bankAccount() {
+        HyperwalletTestHelper.setUpMockServer(request:
+            setupTransferMethodConfigurationFields(transferMethodConfigurationFieldsBankAccountResponse))
         let url = String(format: "%@/bank-accounts/%@", HyperwalletTestHelper.userRestURL, transferMethodToken)
         let response = HyperwalletTestHelper.okHTTPResponse(for: "BankAccountIndividualUpdateResposne")
         let request = HyperwalletTestHelper.buildPutRequest(baseUrl: url, response)
         HyperwalletTestHelper.setUpMockServer(request: request)
+
+        var expectation = self.expectation(description: "Load transfer method configuration fields")
+        mockView.expectations = [mockView.expectation: expectation]
+
+        presenter.loadTransferMethodUpdateConfigurationFields()
+        wait(for: Array(mockView.expectations!.values), timeout: 1)
 
         // Add fields to the form
         mockView.mockFieldValuesReturnResult.append((name: "bankAccountId", value: "000"))
@@ -97,7 +108,7 @@ class UpdateTransferMethodPresenterTests: XCTestCase {
         mockView.mockFieldStatusReturnResult.append(true)
 
         // press the create transfer method button
-        let expectation = self.expectation(description: "Update bank account completed")
+        expectation = self.expectation(description: "Update bank account completed")
         mockView.expectations = [mockView.expectation: expectation]
 
         presenter.updateTransferMethod()
@@ -114,7 +125,7 @@ class UpdateTransferMethodPresenterTests: XCTestCase {
                       "HyperwalletInsights.trackImpression should be called")
     }
 
-    private func setupTransferMethodConfigurationFields(_ error: NSError? = nil) -> StubRequest {
+    private func setupTransferMethodConfigurationFields(_ payload: Data, _ error: NSError? = nil) -> StubRequest {
         let response = HyperwalletTestHelper.setUpMockedResponse(payload: transferMethodConfigurationFieldsResponse,
                                                                  error: error)
         return HyperwalletTestHelper.buildPostRequest(baseUrl: HyperwalletTestHelper.graphQlURL, response)
@@ -184,7 +195,7 @@ class UpdateTransferMethodViewMock: UpdateTransferMethodView {
         return mockFieldValuesReturnResult
     }
 
-    func areAllFieldsValid() -> Bool {
+    func areAllUpdatedFieldsValid() -> Bool {
         areAllFieldsValidPerformed = true
         return mockFieldStatusReturnResult.contains(false) ? false : true
     }

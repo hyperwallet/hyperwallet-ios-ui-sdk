@@ -69,7 +69,7 @@ final class UpdateTransferMethodPresenter {
         self.hyperwalletInsights = hyperwalletInsights
     }
 
-    func loadTransferMethodUpdateConfigurationFields(_ forceUpdate: Bool = false) {
+    func loadTransferMethodUpdateConfigurationFields() {
         view?.showLoading()
 
         transferMethodUpdateConfigurationRepository

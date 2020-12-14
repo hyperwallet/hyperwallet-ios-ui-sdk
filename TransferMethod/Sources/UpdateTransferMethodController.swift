@@ -100,7 +100,7 @@ final class UpdateTransferMethodController: UITableViewController {
         super.viewDidLoad()
         initializePresenter()
         setupTableView()
-        presenter.loadTransferMethodUpdateConfigurationFields(forceUpdate ?? false)
+        presenter.loadTransferMethodUpdateConfigurationFields()
         hideKeyboardWhenTappedAround()
         self.navigationController?.presentationController?.delegate = self
     }
