@@ -93,15 +93,12 @@ public extension HyperwalletUI {
     /// passed to this Controller to update Transfer Method for those values.
     ///
     /// - Parameters:
-    ///   - transferMethod: The transfer method being edited.
-    ///   - forceUpdateData: Forces to refresh the cached data.
-    /// - Returns: An instance of `AddTransferMethodCoordinator`
-    func updateTransferMethodCoordinator(_ transferMethod: HyperwalletTransferMethod,
-                                         _ forceUpdateData: Bool = false,
+    ///   - transferMethodToken: The transfer method token
+    /// - Returns: An instance of `UpdateTransferMethodCoordinator`
+    func updateTransferMethodCoordinator(_ transferMethodToken: String,
                                          parentController: UIViewController) -> UpdateTransferMethodCoordinator {
         var initializationData = [InitializationDataField: Any]()
-        initializationData[InitializationDataField.transferMethod]  = transferMethod
-        initializationData[InitializationDataField.forceUpdateData]  = forceUpdateData
+        initializationData[InitializationDataField.transferMethodToken]  = transferMethodToken
         let coordinator = UpdateTransferMethodCoordinator()
         coordinator.start(initializationData: initializationData, parentController: parentController)
         return coordinator

@@ -29,36 +29,20 @@ public protocol TransferMethodUpdateConfigurationRepository {
         _ transferMethodToken: String,
         completion: @escaping (Result < HyperwalletTransferMethodUpdateConfigurationField?,
         HyperwalletErrorType>) -> Void)
-
-    /// Refreshes the transfer method fields
-    func refreshFields()
 }
 
 /// RemoteTransferMethodUpdateConfigurationRepository
 public final class RemoteTransferMethodUpdateConfigurationRepository: TransferMethodUpdateConfigurationRepository {
-    private var transferMethodUpdateConfigurationFieldsDictionary =
-        [HyperwalletTransferMethodUpdateConfigurationFieldQuery: HyperwalletTransferMethodUpdateConfigurationField]()
-
     public func getFields(_ transferMethodToken: String,
                           completion: @escaping (
         Result<HyperwalletTransferMethodUpdateConfigurationField?, HyperwalletErrorType>) -> Void) {
         let fieldsQuery = HyperwalletTransferMethodUpdateConfigurationFieldQuery(
             transferMethodToken: transferMethodToken)
-        guard let transferMethodUpdateConfigurationFields =
-            transferMethodUpdateConfigurationFieldsDictionary[fieldsQuery]
-            else {
-            Hyperwallet.shared
-                .retrieveTransferMethodUpdateConfigurationFields(request: fieldsQuery,
-                                                                 completion: getFieldsHandler(fieldsQuery, completion))
-            return
-        }
-        completion(.success(transferMethodUpdateConfigurationFields))
+        Hyperwallet.shared.retrieveTransferMethodUpdateConfigurationFields(request: fieldsQuery,
+                                                                           completion:
+            getFieldsHandler(fieldsQuery, completion))
     }
 
-    public func refreshFields() {
-        transferMethodUpdateConfigurationFieldsDictionary =
-        [HyperwalletTransferMethodUpdateConfigurationFieldQuery: HyperwalletTransferMethodUpdateConfigurationField]()
-    }
     private func getFieldsHandler(
         _ fieldQuery: HyperwalletTransferMethodUpdateConfigurationFieldQuery,
         _ completion: @escaping (Result < HyperwalletTransferMethodUpdateConfigurationField?,
@@ -66,9 +50,7 @@ public final class RemoteTransferMethodUpdateConfigurationRepository: TransferMe
         -> (HyperwalletTransferMethodUpdateConfigurationField?,
         HyperwalletErrorType?) -> Void {
         return { (result, error) in
-            self.transferMethodUpdateConfigurationFieldsDictionary[fieldQuery] =
-                TransferMethodRepositoryCompletionHelper
-                .performHandler(error, result, completion)
+            TransferMethodRepositoryCompletionHelper.performHandler(error, result, completion)
         }
     }
 }

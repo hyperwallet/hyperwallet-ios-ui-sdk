@@ -110,7 +110,8 @@ final class UpdateTransferMethodController: UITableViewController {
         tableView.reloadData()
         let currentNavigationItem: UINavigationItem = tabBarController?.navigationItem ?? navigationItem
         currentNavigationItem.backBarButtonItem = UIBarButtonItem.back
-        titleDisplayMode(.always, for: presenter.transferMethod?.type?.lowercased().localized())
+        titleDisplayMode(.always, for: presenter.transferMethodConfiguration?
+            .transferMethodType?.lowercased().localized())
     }
 
     override func willMove(toParent parent: UIViewController?) {
@@ -133,10 +134,8 @@ final class UpdateTransferMethodController: UITableViewController {
     }
 
     private func initializePresenter() {
-        if let transferMethod = initializationData?[InitializationDataField.transferMethod] as?
-            HyperwalletTransferMethod,
-            let forceUpdate = initializationData?[InitializationDataField.forceUpdateData] as? Bool {
-            self.forceUpdate = forceUpdate
+        if let transferMethod = initializationData?[InitializationDataField.transferMethodToken] as?
+            String {
             presenter = UpdateTransferMethodPresenter(self, transferMethod)
         } else {
             fatalError("Required data not provided in initializePresenter")
@@ -294,12 +293,12 @@ extension UpdateTransferMethodController: UpdateTransferMethodView {
     }
 
     func fieldValues() -> [(name: String, value: String)] {
-        return widgets.map { (name: $0.name(), value: $0.value()) }
+        return widgets.filter { $0.isValueUpdated }.map { (name: $0.name(), value: $0.value()) }
     }
 
-    func areAllFieldsValid() -> Bool {
+    func areAllUpdatedFieldsValid() -> Bool {
         var isFormValid = true
-        widgets.forEach {
+        widgets.filter { $0.isValueUpdated }.forEach {
             if $0.isValid() == false {
                 $0.showError()
                 if isFormValid {
@@ -430,8 +429,8 @@ extension UpdateTransferMethodController: UpdateTransferMethodView {
                 }})
             let section = UpdateTransferMethodSectionData(
                 fieldGroup: fieldGroup,
-                country: presenter.transferMethod?.transferMethodCountry,
-                currency: presenter.transferMethod?.transferMethodCurrency,
+                country: presenter.transferMethodConfiguration?.country,
+                currency: presenter.transferMethodConfiguration?.currency,
                 cells: newWidgets
             )
             presenter.sectionData.append(section)
@@ -457,8 +456,8 @@ extension UpdateTransferMethodController: UpdateTransferMethodView {
     private func addUpdateButtonSection() {
         let buttonSection = UpdateTransferMethodSectionData(
             fieldGroup: "UPDATE_BUTTON",
-            country: presenter.transferMethod?.transferMethodCountry,
-            currency: presenter.transferMethod?.transferMethodCurrency,
+            country: presenter.transferMethodConfiguration?.country,
+            currency: presenter.transferMethodConfiguration?.currency,
             cells: [updateTransferMethodButton])
         presenter.sectionData.append(buttonSection)
     }

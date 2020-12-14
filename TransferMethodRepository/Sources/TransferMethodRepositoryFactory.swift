@@ -56,7 +56,7 @@ public final class TransferMethodRepositoryFactory {
 
     /// Gets the `TransferMethodUpdateConfigurationRepository` instance.
     ///
-    /// - Returns: The TransferMethodConfigurationRepository
+    /// - Returns: The TransferMethodUpdateConfigurationRepository
     public func transferMethodUpdateConfigurationRepository() -> TransferMethodUpdateConfigurationRepository {
         return remoteTransferMethodUpdateConfigurationRepository
     }
