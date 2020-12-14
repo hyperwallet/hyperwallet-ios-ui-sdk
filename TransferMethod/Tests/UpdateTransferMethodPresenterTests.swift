@@ -126,7 +126,7 @@ class UpdateTransferMethodPresenterTests: XCTestCase {
     }
 
     private func setupTransferMethodConfigurationFields(_ payload: Data, _ error: NSError? = nil) -> StubRequest {
-        let response = HyperwalletTestHelper.setUpMockedResponse(payload: transferMethodConfigurationFieldsResponse,
+        let response = HyperwalletTestHelper.setUpMockedResponse(payload: payload,
                                                                  error: error)
         return HyperwalletTestHelper.buildPostRequest(baseUrl: HyperwalletTestHelper.graphQlURL, response)
     }
