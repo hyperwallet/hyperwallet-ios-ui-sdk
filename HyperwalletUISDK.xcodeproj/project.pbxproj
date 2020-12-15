@@ -4793,6 +4793,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_TOKEN = "usr-your-user-token";
+				allowProvisioningUpdates = "";
 			};
 			name = Debug;
 		};
@@ -4825,6 +4826,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_TOKEN = "usr-your-user-token";
+				allowProvisioningUpdates = "";
 			};
 			name = Release;
 		};
@@ -5279,6 +5281,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_TOKEN = "usr-token";
+				allowProvisioningUpdates = "";
 			};
 			name = XCUITest;
 		};
