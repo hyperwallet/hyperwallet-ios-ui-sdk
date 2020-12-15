@@ -93,7 +93,7 @@ final class ListTransferMethodController: UITableViewController {
                                                           preferredStyle:
                 UIDevice.current.userInterfaceIdiom == .pad ? .alert : .actionSheet)
             let firstAction = UIAlertAction(title: "Edit", style: .default) { _ -> Void in
-                print("Edit pressed")
+                self.showUpdateTransferMethod(transferMethodIndex: indexPath.row)
             }
             let secondAction = UIAlertAction(title: "remove".localized(), style: .default) { _ -> Void in
                 self.showConfirmationAlert(title: "mobileAreYouSure".localized(),
@@ -138,6 +138,10 @@ final class ListTransferMethodController: UITableViewController {
          }
         tableView.estimatedRowHeight = Theme.Cell.smallHeight
         tableView.backgroundColor = Theme.UITableViewController.backgroundColor
+    }
+
+    private func showUpdateTransferMethod(transferMethodIndex: Int) {
+        self.presenter.showUpdateTransferMethod(at: transferMethodIndex, parentController: self)
     }
 
     private func showConfirmationAlert(title: String?, message: String, transferMethodIndex: Int) {
