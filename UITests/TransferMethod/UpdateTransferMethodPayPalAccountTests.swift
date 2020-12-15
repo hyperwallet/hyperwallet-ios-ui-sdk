@@ -40,15 +40,22 @@ class UpdateTransferMethodPayPalAccountTests: BaseTests {
         waitForExistence(updateTransferMethod.navBarPaypal)
     }
 
-//    func testAddTransferMethod_createPayPalAccountValidResponse() {
-//        mockServer.setupStub(url: "/rest/v3/users/usr-token/paypal-accounts/trm-0001",
-//                             filename: "PayPalUpdateResposne",
-//                             method: HTTPMethod.post)
-//
-//        updateTransferMethod.setEmail("hello1@hw.com")
-//        updateTransferMethod.clicUpdateTransferMethodButton()
-//        waitForNonExistence(spinner)
-//
-//        XCTAssert(app.navigationBars["Account Settings"].exists)
-//    }
+    func testUpdateTransferMethod_updatePayPalAccountValidResponse() {
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/paypal-accounts/trm-0001",
+                             filename: "PayPalUpdateResposne",
+                             method: HTTPMethod.put)
+        updateTransferMethod.setEmail("hello1@hw.com")
+        updateTransferMethod.clickUpdateTransferMethodButton()
+        waitForNonExistence(spinner)
+
+        XCTAssert(app.navigationBars["Account Settings"].exists)
+    }
+
+    func testUpdateTransferMethod_returnsErrorOnInvalidLength() {
+        updateTransferMethod.setEmail("ab")
+        updateTransferMethod.clickUpdateTransferMethodButton()
+
+        XCTAssert(updateTransferMethod.elementQuery["email_error"].exists)
+        XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", emailLengthError)).count == 1)
+    }
 }

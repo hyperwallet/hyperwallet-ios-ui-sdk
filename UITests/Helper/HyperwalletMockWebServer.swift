@@ -4,6 +4,7 @@ import Swifter
 enum HTTPMethod {
     case get
     case post
+    case put
 }
 
 final class HyperwalletMockWebServer {
@@ -38,6 +39,8 @@ final class HyperwalletMockWebServer {
 
             if method == .get {
                 server.GET[url] = response
+            } else if method == .put {
+                server.PUT[url] = response
             } else {
                 server.POST[url] = response
             }
@@ -64,6 +67,8 @@ final class HyperwalletMockWebServer {
 
             if method == .get {
                 server.GET[url] = response
+            } else if method == .put {
+                server.PUT[url] = response
             } else {
                 server.POST[url] = response
             }
@@ -91,6 +96,8 @@ final class HyperwalletMockWebServer {
 
         if method == .get {
             server.GET[url] = response
+        } else if method == .put {
+            server.PUT[url] = response
         } else {
             server.POST[url] = response
         }

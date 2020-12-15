@@ -232,7 +232,7 @@ class UpdateTransferMethod {
         app.tables.staticTexts[accountType].tap()
     }
 
-    func clicUpdateTransferMethodButton() {
+    func clickUpdateTransferMethodButton() {
         app.scroll(to: updateTransferMethodButton)
         updateTransferMethodButton.tap()
     }
