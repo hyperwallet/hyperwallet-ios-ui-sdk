@@ -142,6 +142,8 @@ class ListTransferMethodTests: BaseTests {
                              filename: "ListTransferMethodResponseWithoutFirstElement",
                              method: HTTPMethod.get)
 
+        app.sheets.buttons["Remove"].tap()
+        XCTAssertTrue(listTransferMethod.alert.waitForExistence(timeout: 1))
         verifyRemoveConfirmation(transferMethod: "Bank Account")
 
         listTransferMethod.tapConfirmAccountRemoveButton()
@@ -183,6 +185,8 @@ class ListTransferMethodTests: BaseTests {
                              filename: "ListTransferMethodResponseWithoutDebitCard",
                              method: HTTPMethod.get)
 
+        app.sheets.buttons["Remove"].tap()
+        XCTAssertTrue(listTransferMethod.alert.waitForExistence(timeout: 1))
         verifyRemoveConfirmation(transferMethod: "Debit Card")
 
         listTransferMethod.tapConfirmAccountRemoveButton()
@@ -222,6 +226,8 @@ class ListTransferMethodTests: BaseTests {
                              filename: "ListTransferMethodResponseWithoutPayPalAccount",
                              method: HTTPMethod.get)
 
+        app.sheets.buttons["Remove"].tap()
+        XCTAssertTrue(listTransferMethod.alert.waitForExistence(timeout: 1))
         verifyRemoveConfirmation(transferMethod: "paypal_account".localized())
 
         listTransferMethod.tapConfirmAccountRemoveButton()
@@ -254,6 +260,9 @@ class ListTransferMethodTests: BaseTests {
         XCTAssertEqual(app.tables.element(boundBy: 0).cells.count, expectedCellsCount)
 
         waitForNonExistence(spinner)
+
+        app.sheets.buttons["Remove"].tap()
+        XCTAssertTrue(listTransferMethod.alert.waitForExistence(timeout: 1))
         verifyRemoveConfirmation(transferMethod: "Bank Account")
 
         listTransferMethod.tapCancelAccountRemoveButton()
@@ -271,6 +280,24 @@ class ListTransferMethodTests: BaseTests {
         XCTAssertTrue(app.cells.element(boundBy: 4).staticTexts[expectedPayPalAccountCellLabel].exists)
     }
 
+    func testListTransferMethod_cancelActionDeleteTransferMethod() {
+        let expectedCellsCount = 5
+
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+                             filename: "ListTransferMethodResponse",
+                             method: HTTPMethod.get)
+
+        openTransferMethodsList()
+        app.tables.cells.containing(.staticText, identifier: "Bank Account").element(boundBy: 0).tap()
+
+        XCTAssertEqual(app.tables.element(boundBy: 0).cells.count, expectedCellsCount)
+
+        waitForNonExistence(spinner)
+
+        app.sheets.buttons["Cancel"].tap()
+
+    }
+
     func testListTransferMethod_deleteTransferMethodUnexpectedError() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListTransferMethodResponse",
@@ -284,6 +311,10 @@ class ListTransferMethodTests: BaseTests {
         app.tables.cells.containing(.staticText, identifier: "Bank Account").element(boundBy: 0).tap()
 
         waitForNonExistence(spinner)
+
+        app.sheets.buttons["Remove"].tap()
+        XCTAssertTrue(listTransferMethod.alert.waitForExistence(timeout: 1))
+
         XCTAssertTrue(listTransferMethod.confirmAccountRemoveButton.exists)
 
         listTransferMethod.tapConfirmAccountRemoveButton()
@@ -419,6 +450,8 @@ class ListTransferMethodTests: BaseTests {
                              filename: "ListTransferMethodResponseWithoutFirstElement",
                              method: HTTPMethod.get)
 
+        app.sheets.buttons["Remove"].tap()
+        XCTAssertTrue(listTransferMethod.alert.waitForExistence(timeout: 1))
        verifyRemoveConfirmation(transferMethod: "venmo_account".localized())
 
         listTransferMethod.tapConfirmAccountRemoveButton()
@@ -479,6 +512,8 @@ class ListTransferMethodTests: BaseTests {
                              filename: "ListTransferMethodResponseWithoutPaperCheck",
                              method: HTTPMethod.get)
 
+        app.sheets.buttons["Remove"].tap()
+        XCTAssertTrue(listTransferMethod.alert.waitForExistence(timeout: 1))
        verifyRemoveConfirmation(transferMethod: "paper_check".localized())
 
         listTransferMethod.tapConfirmAccountRemoveButton()
