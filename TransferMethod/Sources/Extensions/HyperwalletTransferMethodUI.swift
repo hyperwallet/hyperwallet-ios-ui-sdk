@@ -18,7 +18,6 @@
 
 #if !COCOAPODS
 import Common
-import HyperwalletSDK
 import TransferMethodRepository
 import UserRepository
 #endif
@@ -89,8 +88,7 @@ public extension HyperwalletUI {
 
     /// Controller to update a transfer method.
     ///
-    /// The form fields are based transfer method should be
-    /// passed to this Controller to update Transfer Method for those values.
+    /// The form fields are based transfer method token passed to this controller to update transfer method
     ///
     /// - Parameters:
     ///   - transferMethodToken: The transfer method token

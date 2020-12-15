@@ -43,7 +43,7 @@ protocol UpdateTransferMethodView: class {
 final class UpdateTransferMethodPresenter {
     private weak var view: UpdateTransferMethodView?
     private let errorTypeApi = "API"
-    private let createdConfirmationPageName = "transfer-method:update:transfer-method-updated"
+    private let updatedConfirmationPageName = "transfer-method:update:transfer-method-updated"
     private let pageLink = "update-transfer-method"
     private let transferMethodUpdatedGoal = "transfer-method-updated"
     static let updateTransferMethodPageGroup = "update-transfer-method"
@@ -89,7 +89,7 @@ final class UpdateTransferMethodPresenter {
                     }
 
                 case .success(let result):
-                    self?.transferMethodConfiguration = result?.transferMethodUpdateConfiguration()
+                    strongSelf.transferMethodConfiguration = result?.transferMethodUpdateConfiguration()
                     if let fieldGroups = self?.transferMethodConfiguration?.fieldGroups?.nodes {
                         strongSelf.trackUILoadImpression()
                         view.reloadData(fieldGroups)
@@ -165,14 +165,11 @@ final class UpdateTransferMethodPresenter {
     private func buildHyperwalletTransferMethod()
         -> HyperwalletTransferMethod? {
         let transferMethodTypeCode = transferMethodConfiguration?.transferMethodType ?? ""
-        let transferMethodProfile = transferMethodConfiguration?.profile ?? ""
         switch transferMethodTypeCode {
         case HyperwalletTransferMethod.TransferMethodType.bankAccount.rawValue,
              HyperwalletTransferMethod.TransferMethodType.wireAccount.rawValue :
             let bankAccount = HyperwalletBankAccount.Builder(token: transferMethodToken)
                 .build()
-            bankAccount.setField(key: HyperwalletTransferMethod.TransferMethodField.profileType.rawValue,
-                                 value: transferMethodProfile)
             return bankAccount
 
         case HyperwalletTransferMethod.TransferMethodType.bankCard.rawValue :
@@ -286,9 +283,8 @@ final class UpdateTransferMethodPresenter {
             params: insightsParam())
     }
 
-    // Todo - Update
     private func trackTransferMethodUpdateConfirmationImpression() {
-        hyperwalletInsights.trackImpression(pageName: createdConfirmationPageName,
+        hyperwalletInsights.trackImpression(pageName: updatedConfirmationPageName,
                                             pageGroup: UpdateTransferMethodPresenter.updateTransferMethodPageGroup,
                                             params: [
                                                 InsightsTags.country: transferMethodConfiguration?.country ?? "",
@@ -300,7 +296,6 @@ final class UpdateTransferMethodPresenter {
                                             ])
     }
 
-    // Todo - Update InsightTags
     private func insightsParam () -> [String: String] {
         return [
             InsightsTags.country: transferMethodConfiguration?.country ?? "",

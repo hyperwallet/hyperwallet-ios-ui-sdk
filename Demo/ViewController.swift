@@ -230,7 +230,7 @@ class ViewController: UITableViewController {
 
     private func showUpdateTransferMethod() {
         let coordinator = HyperwalletUI.shared
-            .updateTransferMethodCoordinator("trm-bf9bd076-ecf2-4608-85d9-1d125e8d85c8",
+            .updateTransferMethodCoordinator("trm-0001",
                                              parentController: self)
         coordinator.navigate()
     }
