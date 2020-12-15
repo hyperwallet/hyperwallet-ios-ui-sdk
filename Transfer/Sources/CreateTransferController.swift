@@ -43,7 +43,6 @@ final class CreateTransferController: UITableViewController {
         (TransferButtonCell.self, TransferButtonCell.reuseIdentifier),
         (TransferNotesCell.self, TransferNotesCell.reuseIdentifier)
     ]
-    private var buttonSelection: Bool = false
 
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -288,7 +287,6 @@ extension CreateTransferController {
 
     @objc
     private func tapTransfer(sender: UITapGestureRecognizer) {
-        buttonSelection = true
         presenter.createTransfer()
     }
 }
@@ -378,13 +376,7 @@ extension CreateTransferController: CreateTransferView {
 
     func showError(_ error: HyperwalletErrorType, pageName: String, pageGroup: String, _ retry: (() -> Void)?) {
         let errorView = ErrorView(viewController: self, error: error, pageName: pageName, pageGroup: pageGroup)
-        print("show the error group *************", error.group)
-        if error.group == .business && buttonSelection == true {
-            errorView.show(retry)
-        } else if error.group != .business {
-            errorView.show(retry)
-        }
-       // errorView.show(retry)
+        errorView.show(retry)
     }
 
     func reloadData() {
