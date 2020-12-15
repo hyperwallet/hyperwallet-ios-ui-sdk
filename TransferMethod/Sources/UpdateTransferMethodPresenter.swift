@@ -89,7 +89,7 @@ final class UpdateTransferMethodPresenter {
                     }
 
                 case .success(let result):
-                    self?.transferMethodConfiguration = result?.transferMethodUpdateConfiguration()
+                    strongSelf.transferMethodConfiguration = result?.transferMethodUpdateConfiguration()
                     if let fieldGroups = self?.transferMethodConfiguration?.fieldGroups?.nodes {
                         strongSelf.trackUILoadImpression()
                         view.reloadData(fieldGroups)
@@ -165,14 +165,11 @@ final class UpdateTransferMethodPresenter {
     private func buildHyperwalletTransferMethod()
         -> HyperwalletTransferMethod? {
         let transferMethodTypeCode = transferMethodConfiguration?.transferMethodType ?? ""
-        let transferMethodProfile = transferMethodConfiguration?.profile ?? ""
         switch transferMethodTypeCode {
         case HyperwalletTransferMethod.TransferMethodType.bankAccount.rawValue,
              HyperwalletTransferMethod.TransferMethodType.wireAccount.rawValue :
             let bankAccount = HyperwalletBankAccount.Builder(token: transferMethodToken)
                 .build()
-            bankAccount.setField(key: HyperwalletTransferMethod.TransferMethodField.profileType.rawValue,
-                                 value: transferMethodProfile)
             return bankAccount
 
         case HyperwalletTransferMethod.TransferMethodType.bankCard.rawValue :

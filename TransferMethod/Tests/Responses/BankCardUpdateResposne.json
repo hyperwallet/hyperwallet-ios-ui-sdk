@@ -1,11 +1,11 @@
 {
-  "token": "trm-7e915660-8c97-47bf-8a4f-0c1bc890d46f",
+  "token": "trm-0001",
   "type": "BANK_CARD",
   "status": "ACTIVATED",
   "createdOn": "2017-11-09T22:50:14",
   "transferMethodCountry": "US",
   "transferMethodCurrency": "USD",
-  "userToken": "usr-c4292f1a-866f-4310-a289-b916853939de",
+  "userToken": "usr-0001",
   "cardType": "DEBIT",
   "cardNumber": "************1015",
   "cardBrand": "VISA",

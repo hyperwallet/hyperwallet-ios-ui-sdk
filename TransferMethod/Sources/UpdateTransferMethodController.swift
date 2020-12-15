@@ -22,10 +22,9 @@ import Common
 import HyperwalletSDK
 import UIKit
 
-/// Controller to create a new transfer method.
+/// Controller to update transfer method.
 ///
-/// The form fields are based on transfer method should be passed
-/// to this Controller to update Transfer Method for those values.
+/// The form fields are based on transfer method token passed to this controller to update transfer method
 final class UpdateTransferMethodController: UITableViewController {
     typealias ButtonHandler = () -> Void
     private var defaultHeaderHeight = CGFloat(38.0)
@@ -54,7 +53,7 @@ final class UpdateTransferMethodController: UITableViewController {
     private lazy var updateTransferMethodButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.accessibilityLabel = "create_account_label".localized()
+        button.accessibilityLabel = "update_account_label".localized()
         button.accessibilityIdentifier = "updateAccountButton"
         button.setTitle("doneButtonLabel".localized(), for: .normal)
         button.titleLabel?.adjustsFontForContentSizeCategory = true
@@ -110,8 +109,6 @@ final class UpdateTransferMethodController: UITableViewController {
         tableView.reloadData()
         let currentNavigationItem: UINavigationItem = tabBarController?.navigationItem ?? navigationItem
         currentNavigationItem.backBarButtonItem = UIBarButtonItem.back
-        titleDisplayMode(.always, for: presenter.transferMethodConfiguration?
-            .transferMethodType?.lowercased().localized())
     }
 
     override func willMove(toParent parent: UIViewController?) {
@@ -188,11 +185,11 @@ extension UpdateTransferMethodController {
     override public func numberOfSections(in tableView: UITableView) -> Int {
         return presenter.sectionData.count
     }
-    /// Returns fields count to add transfer method
+    /// Returns fields count to update transfer method
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.sectionData[section].count
     }
-    /// Display's the fields to add transfer method
+    /// Display's the fields to update transfer method
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let fieldGroup = presenter.sectionData[indexPath.section].fieldGroup
         let reuseIdentifier = fieldGroup == "UPDATE_BUTTON" ?
@@ -340,6 +337,8 @@ extension UpdateTransferMethodController: UpdateTransferMethodView {
     }
 
     func reloadData(_ fieldGroups: [HyperwalletFieldGroup]) {
+        titleDisplayMode(.always, for: presenter.transferMethodConfiguration?
+        .transferMethodType?.lowercased().localized())
         addFieldsSection(fieldGroups)
         addUpdateButtonSection()
         self.tableView.reloadData()

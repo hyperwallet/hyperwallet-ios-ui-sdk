@@ -100,6 +100,7 @@ final class SelectionWidget: AbstractWidget {
     }
 
     private func updateLabelFieldValue(_ option: HyperwalletFieldSelectionOption) {
+        isValueUpdated = true
         labelField.text = option.label
         selectedValue = option.value
     }

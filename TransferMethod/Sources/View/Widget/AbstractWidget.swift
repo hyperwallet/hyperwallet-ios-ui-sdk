@@ -32,7 +32,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
     typealias InputHandler = () -> Void
     private var inputHandler: InputHandler?
     private(set) var errorMessage: String?
-    private(set) var isValueUpdated = false
+    var isValueUpdated = false
 
     let label: UILabel = {
         let label = UILabel()
@@ -134,7 +134,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
-        isValueUpdated.toggle()
+        isValueUpdated = true
         let isFieldValid = isValid()
         if !isFieldValid {
             showError()
