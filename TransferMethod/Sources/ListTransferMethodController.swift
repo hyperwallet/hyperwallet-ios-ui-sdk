@@ -94,7 +94,10 @@ final class ListTransferMethodController: UITableViewController {
                                                           preferredStyle: .actionSheet)
             actionSheetController.addAction(UIAlertAction(title: "edit".localized(),
                                                           style: .default,
-                                                          handler: nil))
+                                                          handler: { _ -> Void in
+                                                           self.showUpdateTransferMethod(
+                                                            transferMethodIndex: indexPath.row
+                                                          )}))
             actionSheetController.addAction(UIAlertAction(title: "remove".localized(),
                                                           style: .default,
                                                           handler: { _ -> Void in

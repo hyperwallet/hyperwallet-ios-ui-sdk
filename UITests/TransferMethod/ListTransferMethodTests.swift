@@ -295,7 +295,6 @@ class ListTransferMethodTests: BaseTests {
         waitForNonExistence(spinner)
 
         app.sheets.buttons["Cancel"].tap()
-
     }
 
     func testListTransferMethod_deleteTransferMethodUnexpectedError() {
