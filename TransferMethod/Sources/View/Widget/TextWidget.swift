@@ -47,7 +47,8 @@ class TextWidget: AbstractWidget {
 
     override func value() -> String {
         if let scrubRegex = field.mask?.scrubRegex,
-            let text = textField.text {
+            let text = textField.text,
+            let isValueMasked = field.fieldValueMasked, !isValueMasked {
             return getScrubbedText(formattedText: text, scrubRegex: scrubRegex)
         }
         return textField.text ?? ""
@@ -71,7 +72,12 @@ class TextWidget: AbstractWidget {
         textField.delegate = self
         textField.accessibilityIdentifier = field.name
         if let valueString = field.value {
-            textField.text = formatDisplayString(with: getFormatPattern(inputText: valueString), inputText: valueString)
+            if let isValueMasked = field.fieldValueMasked, isValueMasked {
+                textField.text = valueString
+            } else {
+                textField.text = formatDisplayString(
+                    with: getFormatPattern(inputText: valueString), inputText: valueString)
+            }
         }
 
         if field.isEditable ?? true {
