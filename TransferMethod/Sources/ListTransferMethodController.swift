@@ -94,7 +94,14 @@ final class ListTransferMethodController: UITableViewController {
                                                           preferredStyle: .actionSheet)
             actionSheetController.addAction(UIAlertAction(title: "edit".localized(),
                                                           style: .default,
-                                                          handler: nil))
+                                                          handler: { _ -> Void in
+                                                            let coordinator = HyperwalletUI
+                                                                .shared
+                                                                .updateTransferMethodCoordinator(
+                                                                self.presenter.sectionData[indexPath.row].token ?? "",
+                                                                parentController: self)
+                                                            coordinator.navigate()
+                                                            }))
             actionSheetController.addAction(UIAlertAction(title: "remove".localized(),
                                                           style: .default,
                                                           handler: { _ -> Void in
