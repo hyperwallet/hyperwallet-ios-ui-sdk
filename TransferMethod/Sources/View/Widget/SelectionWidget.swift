@@ -83,8 +83,10 @@ final class SelectionWidget: AbstractWidget {
         tableView.selectedHandler = { option in
             self.updateLabelFieldValue(option)
             if self.isValid() {
+                self.isValueUpdated = true
                 self.hideError()
             } else {
+                self.isValueUpdated = false
                 self.showError()
             }
         }
@@ -100,7 +102,6 @@ final class SelectionWidget: AbstractWidget {
     }
 
     private func updateLabelFieldValue(_ option: HyperwalletFieldSelectionOption) {
-        isValueUpdated = true
         labelField.text = option.label
         selectedValue = option.value
     }

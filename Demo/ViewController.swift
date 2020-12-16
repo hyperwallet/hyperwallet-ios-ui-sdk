@@ -229,6 +229,7 @@ class ViewController: UITableViewController {
     }
 
     private func showUpdateTransferMethod() {
+        // Replace trm-0001 with valid transfer method token
         let coordinator = HyperwalletUI.shared
             .updateTransferMethodCoordinator("trm-0001",
                                              parentController: self)

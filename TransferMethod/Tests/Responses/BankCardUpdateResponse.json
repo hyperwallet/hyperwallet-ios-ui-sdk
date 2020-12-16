@@ -16,7 +16,7 @@
       "params": {
         "rel": "self"
       },
-      "href": "https://api.sandbox.hyperwallet.com/rest/v3/users/usr-c4292f1a-866f-4310-a289-b916853939de/bank-cards/trm-0001"
+      "href": "https://api.sandbox.hyperwallet.com/rest/v3/users/usr-0001/bank-cards/trm-0001"
     }
   ]
 }
