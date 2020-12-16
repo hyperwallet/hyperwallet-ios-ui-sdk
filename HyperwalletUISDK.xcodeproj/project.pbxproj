@@ -492,12 +492,19 @@
 			remoteGlobalIDString = 643912D322DF40CB00036609;
 			remoteInfo = UserRepository;
 		};
-		98FBC68E23D8D8FE0050E2B6 /* PBXContainerItemProxy */ = {
+		98631ED22571792E00A8CBF5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 643912D322DF40CB00036609;
-			remoteInfo = UserRepository;
+			remoteGlobalIDString = 073BB98122E63DB50053C24E;
+			remoteInfo = TransferRepository;
+		};
+		98631ED425717B9600A8CBF5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DBAF929C22CFCBC7004F197A;
+			remoteInfo = TransferMethodRepository;
 		};
 		98FBC69223D8D90C0050E2B6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -2567,6 +2574,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				98631ED32571792E00A8CBF5 /* PBXTargetDependency */,
 				4ADFD7E022F0FE2700CD0CB4 /* PBXTargetDependency */,
 				4ADFD7DE22F0FE1800CD0CB4 /* PBXTargetDependency */,
 				98FBC69C23D8D91F0050E2B6 /* PBXTargetDependency */,
@@ -2726,7 +2734,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				98FBC68F23D8D8FE0050E2B6 /* PBXTargetDependency */,
 			);
 			name = Common;
 			productName = Common;
@@ -2805,6 +2812,7 @@
 			);
 			dependencies = (
 				98FBC69323D8D90C0050E2B6 /* PBXTargetDependency */,
+				98631ED525717B9600A8CBF5 /* PBXTargetDependency */,
 				98FBC69723D8D90C0050E2B6 /* PBXTargetDependency */,
 			);
 			name = Receipt;
@@ -3870,10 +3878,15 @@
 			target = 643912D322DF40CB00036609 /* UserRepository */;
 			targetProxy = 643912DE22DF40CB00036609 /* PBXContainerItemProxy */;
 		};
-		98FBC68F23D8D8FE0050E2B6 /* PBXTargetDependency */ = {
+		98631ED32571792E00A8CBF5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 643912D322DF40CB00036609 /* UserRepository */;
-			targetProxy = 98FBC68E23D8D8FE0050E2B6 /* PBXContainerItemProxy */;
+			target = 073BB98122E63DB50053C24E /* TransferRepository */;
+			targetProxy = 98631ED22571792E00A8CBF5 /* PBXContainerItemProxy */;
+		};
+		98631ED525717B9600A8CBF5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DBAF929C22CFCBC7004F197A /* TransferMethodRepository */;
+			targetProxy = 98631ED425717B9600A8CBF5 /* PBXContainerItemProxy */;
 		};
 		98FBC69323D8D90C0050E2B6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -4786,7 +4799,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 86FDS64Z83;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -4814,7 +4828,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 86FDS64Z83;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -4844,7 +4859,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BASE_URL = "http://localhost:8080";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 86FDS64Z83;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -4865,6 +4883,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_TOKEN = "usr-your-user-token";
+				allowProvisioningUpdates = "";
 			};
 			name = Debug;
 		};
@@ -4874,7 +4893,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BASE_URL = "http://localhost:8080";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 86FDS64Z83;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -4894,6 +4916,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_TOKEN = "usr-your-user-token";
+				allowProvisioningUpdates = "";
 			};
 			name = Release;
 		};
@@ -5294,7 +5317,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 86FDS64Z83;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -5324,7 +5348,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BASE_URL = "http://localhost:8080";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 86FDS64Z83;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -5344,6 +5371,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_TOKEN = "usr-token";
+				allowProvisioningUpdates = "";
 			};
 			name = XCUITest;
 		};
