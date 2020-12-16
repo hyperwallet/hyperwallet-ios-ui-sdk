@@ -326,9 +326,9 @@ final class CreateTransferPresenter {
             switch result {
             case .failure(let error):
                 if error.group != .business {
-                view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
+                    view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
                         strongSelf.createInitialTransfer()
-                  }
+                    }
                 }
 
             case .success(let transfer):
