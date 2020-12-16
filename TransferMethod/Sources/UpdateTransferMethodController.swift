@@ -131,9 +131,9 @@ final class UpdateTransferMethodController: UITableViewController {
     }
 
     private func initializePresenter() {
-        if let transferMethod = initializationData?[InitializationDataField.transferMethodToken] as?
+        if let transferMethodToken = initializationData?[InitializationDataField.transferMethodToken] as?
             String {
-            presenter = UpdateTransferMethodPresenter(self, transferMethod)
+            presenter = UpdateTransferMethodPresenter(self, transferMethodToken)
         } else {
             fatalError("Required data not provided in initializePresenter")
         }
@@ -158,7 +158,7 @@ extension UpdateTransferMethodController {
     }
     /// Returns the title for footer
     override public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        var footerText = ""
+        var footerText: String?
         if let errorMessage = presenter.sectionData[section].errorMessage {
             footerText = String(format: "%@", errorMessage)
         }
@@ -205,9 +205,7 @@ extension UpdateTransferMethodController {
             widget.showError()
         }
 
-        if fieldGroup == "INFORMATION" {
-            cell.backgroundColor = Theme.Cell.disabledBackgroundColor
-        } else if let widget = widget as? AbstractWidget, !(widget.field.isEditable ?? true) {
+        if let widget = widget as? AbstractWidget, !(widget.field.isEditable ?? true) {
             cell.backgroundColor = Theme.Cell.disabledBackgroundColor
         } else {
             cell.backgroundColor = Theme.UITableViewController.backgroundColor

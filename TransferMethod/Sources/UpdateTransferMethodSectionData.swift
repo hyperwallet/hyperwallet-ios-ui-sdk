@@ -37,8 +37,6 @@ final class UpdateTransferMethodSectionData {
                           currency ?? "").uppercased()
         case "UPDATE_BUTTON":
             return nil
-        case "INFORMATION":
-            return "mobileFeesAndProcessingTime".localized()
 
         default:
             return "\(fieldGroup)".lowercased().localized().uppercased()
