@@ -42,7 +42,7 @@ class UpdateTransferMethodPayPalAccountTests: BaseTests {
 
     func testUpdateTransferMethod_updatePayPalAccountValidResponse() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/paypal-accounts/trm-0001",
-                             filename: "PayPalUpdateResposne",
+                             filename: "PayPalUpdateResponse",
                              method: HTTPMethod.put)
         updateTransferMethod.setEmail("hello1@hw.com")
         updateTransferMethod.clickUpdateTransferMethodButton()

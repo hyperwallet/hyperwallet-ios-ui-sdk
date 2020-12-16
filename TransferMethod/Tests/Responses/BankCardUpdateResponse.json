@@ -1,0 +1,22 @@
+{
+  "token": "trm-0001",
+  "type": "BANK_CARD",
+  "status": "ACTIVATED",
+  "createdOn": "2017-11-09T22:50:14",
+  "transferMethodCountry": "US",
+  "transferMethodCurrency": "USD",
+  "userToken": "usr-0001",
+  "cardType": "DEBIT",
+  "cardNumber": "************1015",
+  "cardBrand": "VISA",
+  "dateOfExpiry": "2019-11",
+  "processingTime": "30 Minutes",
+  "links": [
+    {
+      "params": {
+        "rel": "self"
+      },
+      "href": "https://api.sandbox.hyperwallet.com/rest/v3/users/usr-c4292f1a-866f-4310-a289-b916853939de/bank-cards/trm-0001"
+    }
+  ]
+}

@@ -43,7 +43,7 @@ protocol UpdateTransferMethodView: class {
 final class UpdateTransferMethodPresenter {
     private weak var view: UpdateTransferMethodView?
     private let errorTypeApi = "API"
-    private let createdConfirmationPageName = "transfer-method:update:transfer-method-updated"
+    private let updatedConfirmationPageName = "transfer-method:update:transfer-method-updated"
     private let pageLink = "update-transfer-method"
     private let transferMethodUpdatedGoal = "transfer-method-updated"
     static let updateTransferMethodPageGroup = "update-transfer-method"
@@ -283,9 +283,8 @@ final class UpdateTransferMethodPresenter {
             params: insightsParam())
     }
 
-    // Todo - Update
     private func trackTransferMethodUpdateConfirmationImpression() {
-        hyperwalletInsights.trackImpression(pageName: createdConfirmationPageName,
+        hyperwalletInsights.trackImpression(pageName: updatedConfirmationPageName,
                                             pageGroup: UpdateTransferMethodPresenter.updateTransferMethodPageGroup,
                                             params: [
                                                 InsightsTags.country: transferMethodConfiguration?.country ?? "",
@@ -297,7 +296,6 @@ final class UpdateTransferMethodPresenter {
                                             ])
     }
 
-    // Todo - Update InsightTags
     private func insightsParam () -> [String: String] {
         return [
             InsightsTags.country: transferMethodConfiguration?.country ?? "",

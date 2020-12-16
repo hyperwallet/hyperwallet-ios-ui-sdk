@@ -66,7 +66,6 @@ class UpdateTransferMethod {
     var contactInformationHeader: XCUIElement
     var addressHeader: XCUIElement
     var transferMethodInformationHeader: XCUIElement
-    var updateTransferMethodtable: XCUIElement
     var navBar: XCUIElement
     var navBarBankAccount: XCUIElement
     var navBarDebitCard: XCUIElement
@@ -116,7 +115,6 @@ class UpdateTransferMethod {
         navBarPaypal = app.navigationBars["paypal_account".localized()]
         navBarVenmo = app.navigationBars["venmo_account".localized()]
         navBarPaperCheck = app.navigationBars["paper_check".localized()]
-        updateTransferMethodtable = app.tables.cells.staticTexts["Add Transfer Method"]
         updateTransferMethodTableView = app.tables["updateTransferMethodTable"]
         updateTransferMethodButton = updateTransferMethodTableView.buttons["updateAccountButton"]
 
