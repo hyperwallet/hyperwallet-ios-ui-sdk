@@ -128,12 +128,22 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.placeholder = nil
-        if let isValueMasked = field.fieldValueMasked, isValueMasked {
+    }
+
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+        if let isValueMasked = field.fieldValueMasked, isValueMasked && !isValueUpdated {
             textField.text = ""
+            isValueUpdated = true
         }
+        return true
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
+        if let isValueMasked = field.fieldValueMasked, isValueMasked && !isValueUpdated {
+            return
+        }
         isValueUpdated = true
         let isFieldValid = isValid()
         if !isFieldValid {
