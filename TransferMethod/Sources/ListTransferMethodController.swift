@@ -81,25 +81,36 @@ final class ListTransferMethodController: UITableViewController {
         if let listTransferMethodCell = cell as? ListTransferMethodCell {
             listTransferMethodCell.configure(transferMethod: presenter.sectionData[indexPath.row])
 
-            if !(presenter.sectionData[indexPath.row].isPrepaidCard()) {
-                let icon = UIImage.fontIcon(HyperwalletIcon.of("TRASH").rawValue,
-                                            CGSize(width: 24, height: 25),
-                                            CGFloat(24),
-                                            UIColor(red: 0.17, green: 0.18, blue: 0.18, alpha: 1))
-
-                listTransferMethodCell.accessoryView = UIImageView(image: icon)
-            } else {
-                listTransferMethodCell.accessoryView = nil
-            }
+            listTransferMethodCell.accessoryView = nil
         }
         return cell
     }
 
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !(presenter.sectionData[indexPath.row].isPrepaidCard()) {
-            showConfirmationAlert(title: "mobileAreYouSure".localized(),
-                                  message: "",
-                                  transferMethodIndex: indexPath.row)
+            let cellRect = tableView.rectForRow(at: indexPath)
+            let actionSheetController = UIAlertController(title: nil,
+                                                          message: nil,
+                                                          preferredStyle: .actionSheet)
+            actionSheetController.addAction(UIAlertAction(title: "edit".localized(),
+                                                          style: .default,
+                                                          handler: nil))
+            actionSheetController.addAction(UIAlertAction(title: "remove".localized(),
+                                                          style: .default,
+                                                          handler: { _ -> Void in
+                                                            self.showConfirmationAlert(
+                                                                title: "mobileAreYouSure".localized(),
+                                                                message: "",
+                                                                transferMethodIndex: indexPath.row
+                                                            )}))
+            actionSheetController.addAction(UIAlertAction(title: "cancelButtonLabel".localized(),
+                                                          style: .cancel,
+                                                          handler: nil))
+
+            actionSheetController.popoverPresentationController?.sourceView = tableView
+            actionSheetController.popoverPresentationController?.sourceRect = cellRect
+            actionSheetController.popoverPresentationController?.permittedArrowDirections = .up
+            navigationController?.present(actionSheetController, animated: true, completion: nil)
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }

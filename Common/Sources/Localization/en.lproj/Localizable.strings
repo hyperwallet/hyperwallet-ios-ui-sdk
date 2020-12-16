@@ -21,6 +21,7 @@
 "remove" = "Remove";
 "cancelButtonLabel" = "Cancel";
 "doneButtonLabel" = "Done";
+"edit" = "Edit";
 "try_again_button_label" = "Try Again";
 "search_placeholder_label" = "Search";
 "unexpected_error_message" = "Something went wrong, please try again";
