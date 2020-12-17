@@ -60,6 +60,8 @@ class TransferFunds {
     // "Available funds %1$@%2$@ %3$@"
     let availableBalanceFormat = "mobileAvailableBalance".localized()
 
+    let notAvailableFunds = "naAvailableBalance".localized()
+
     let availableFunds = "mobileAvailableFunds".localized()
 
     let prepaidCard = "prepaid_card".localized()

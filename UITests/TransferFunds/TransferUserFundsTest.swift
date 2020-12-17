@@ -205,33 +205,39 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
         transferFunds.addSelectDestinationLabel.tap()
         // Select Destination (CAD)
-        mockServer.setupStub(url: "/rest/v3/transfers",
-                             filename: "TransferBelowTransactionLimitError",
-                             method: HTTPMethod.post)
+
+        mockServer.setupStubError(url: "/rest/v3/transfers",
+                                  filename: "TransferBelowTransactionLimitError",
+                                  method: HTTPMethod.post)
+
         let cadBankAccount = app.tables.element.children(matching: .cell).element(boundBy: 1)
         cadBankAccount.tap()
 
         waitForNonExistence(spinner)
         // Assert Available available: N/A
+        XCTAssertEqual(transferFunds.transferAmountLabel.label,
+                       transferFunds.notAvailableFunds)
+
+        XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
 
         XCTAssertFalse(transferFunds.transferMaxAllFunds.exists, "Transfer all funds switch should not exist")
     }
 
     /*
      Given that Transfer methods exist
-     When navigate to the Transfer view and Max theshold limit error occurs
+     When navigate to the Transfer view and "Requested transfer amount $0.01, is below the transaction limit of $1.00." occurs
      Then will not show the error
      And "Amount available: N/A" is shown
      And transfer max funds is not shown
      */
-    func testTransferFunds_TransferMethodWithTransactionMaxThesholdError() {
+    func testTransferFunds_TransferMethodWithBelowTransactionLimitError() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListMoreThanOneTransferMethod",
                              method: HTTPMethod.get)
 
-        mockServer.setupStub(url: "/rest/v3/transfers",
-                             filename: "TransferErrorMaxThresholdExceed",
-                             method: HTTPMethod.post)
+        mockServer.setupStubError(url: "/rest/v3/transfers",
+                                  filename: "TransferBelowTransactionLimitError",
+                                  method: HTTPMethod.post)
 
         XCTAssertTrue(transferFundMenu.exists)
         transferFundMenu.tap()
@@ -245,6 +251,8 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
 
         // Assert Available available: N/A
+        XCTAssertEqual(transferFunds.transferAmountLabel.label,
+                       transferFunds.notAvailableFunds)
 
         // Transfer max funds
         XCTAssertFalse(transferFunds.transferMaxAllFunds.exists, "Transfer all funds switch should not exist")
