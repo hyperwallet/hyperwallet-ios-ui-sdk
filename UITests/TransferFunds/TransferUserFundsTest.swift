@@ -205,7 +205,9 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
         transferFunds.addSelectDestinationLabel.tap()
         // Select Destination (CAD)
-        mockServer.setupStub(url: "/rest/v3/transfers", filename: "TransferBelowTransactionLimitError", method: HTTPMethod.post)
+        mockServer.setupStub(url: "/rest/v3/transfers",
+                             filename: "TransferBelowTransactionLimitError",
+                             method: HTTPMethod.post)
         let cadBankAccount = app.tables.element.children(matching: .cell).element(boundBy: 1)
         cadBankAccount.tap()
 
@@ -230,7 +232,6 @@ class TransferUserFundsTest: BaseTests {
         mockServer.setupStub(url: "/rest/v3/transfers",
                              filename: "TransferErrorMaxThresholdExceed",
                              method: HTTPMethod.post)
-
 
         XCTAssertTrue(transferFundMenu.exists)
         transferFundMenu.tap()
