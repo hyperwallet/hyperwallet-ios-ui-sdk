@@ -225,7 +225,7 @@ class TransferUserFundsTest: BaseTests {
 
     /*
      Given that Transfer methods exist
-     When navigate to the Transfer view and "Requested transfer amount $0.01, is below the transaction limit of $1.00." occurs
+     When navigate to the Transfer view and error occurs
      Then will not show the error
      And "Amount available: N/A" is shown
      And transfer max funds is not shown
