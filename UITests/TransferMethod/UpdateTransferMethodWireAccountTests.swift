@@ -30,7 +30,10 @@ class UpdateTransferMethodWireAccountTests: BaseTests {
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
         app.tables.cells.staticTexts["List Transfer Methods"].tap()
-        app.tables.cells.containing(.staticText, identifier: "Wire Transfer Account".localized()).element(boundBy: 0).tap()
+        app.tables.cells.containing(.staticText,
+                                    identifier: "Wire Transfer Account".localized())
+            .element(boundBy: 0)
+            .tap()
 
         app.sheets.buttons["Edit"].tap()
         waitForExistence(updateTransferMethod.navBarWireAccount)

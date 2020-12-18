@@ -47,8 +47,7 @@ class TextWidget: AbstractWidget {
 
     override func value() -> String {
         if let scrubRegex = field.mask?.scrubRegex,
-            let text = textField.text,
-            let isValueMasked = field.fieldValueMasked, !isValueMasked {
+            let text = textField.text {
             return getScrubbedText(formattedText: text, scrubRegex: scrubRegex)
         }
         return textField.text ?? ""
