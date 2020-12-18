@@ -16,7 +16,9 @@ env:
   - IOS_UI_TESTS_SCHEME="Demo"
   matrix:
   - ios_version='13.7'  ios_device='iPhone 11' scheme="$IOS_FRAMEWORK_SCHEME" platform='iOS
-    Simulator' configuration="Debug" code_coverage="NO" publish_docs="YES" only_active_arch="YES"
+    Simulator' configuration="Debug" code_coverage="YES" publish_docs="YES" only_active_arch="YES"
+  - ios_version='13.7'  ios_device='iPhone 11' scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS
+    Simulator' configuration="XCUITest" code_coverage="NO" publish_docs="NO" only_active_arch="NO"
 before_install:
   # Boot the emulator by ID
   - |
@@ -41,17 +43,14 @@ before_install:
 script: |
   set -o pipefail
   set -e
-
   # Define the destination emulator
   destination="platform=$platform,OS=$ios_version,name=$ios_device"
-
   # Build and test Framework in Debug
-  xcodebuild -enableCodeCoverage "$code_coverage" build -project "$PROJECT" \
+  xcodebuild -enableCodeCoverage "$code_coverage" clean build test -project "$PROJECT" \
     -scheme "$scheme" \
     -destination "$destination" \
-    -configuration "$configuration" ONLY_ACTIVE_ARCH="$only_active_arch" ENABLE_TESTABILITY=YES CODE_SIGN_IDENTITY=,CODE_SIGNING_REQUIRED=NO,CODE_SIGNING_ALLOWED=NO \
+    -configuration "$configuration" ONLY_ACTIVE_ARCH="$only_active_arch" ENABLE_TESTABILITY=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
     | xcpretty --color
-
   # Lint - Add `--strict` to fail for warning and violation
   swiftlint lint --strict --reporter json
 after_success:
@@ -59,9 +58,9 @@ after_success:
   if [ "$code_coverage" == "YES" ]; then
       slather;
   fi
-  make docs;
   if [ "$publish_docs" == "YES" ]; then
       if [ $TRAVIS_BRANCH = 'master' ] && [ $TRAVIS_PULL_REQUEST = 'false' ]; then
+          make docs;
           sh ./Scripts/travisPublishDocs.sh;
       fi
   fi
