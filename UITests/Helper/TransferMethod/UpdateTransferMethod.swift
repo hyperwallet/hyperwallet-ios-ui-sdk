@@ -44,6 +44,7 @@ class UpdateTransferMethod {
     var dateOfExpiryLabel: XCUIElement
     var emailLabel: XCUIElement
 
+    var shipMethodLabel: XCUIElement
     var wireInstructionsLabel: XCUIElement
     var intermediaryBankIdLabel: XCUIElement
     var intermediaryBankAccountIdLabel: XCUIElement
@@ -100,7 +101,7 @@ class UpdateTransferMethod {
     let expireDatePlaceholder = "MM/YY"
     let firstName = "First Name"
     let middleName = "Middle Name"
-    let lastName =  "Last Name"
+    let lastName = "Last Name"
     let phoneNumber = "Phone Number"
     let mobileNumber = "Mobile Number"
     let dateOfBirth = "Date of Birth"
@@ -186,6 +187,8 @@ class UpdateTransferMethod {
         cityLabel = elementQuery["city"]
         postalCodeLabel = elementQuery["postalCode"]
 
+        shipMethodLabel = elementQuery["shippingMethod"]
+
         // Bank Card Errors
         cardNumberError = elementQuery["cardNumber_error"]
         cvvNumberError = elementQuery["cvv_error"]
@@ -233,6 +236,11 @@ class UpdateTransferMethod {
     func clickUpdateTransferMethodButton() {
         app.scroll(to: updateTransferMethodButton)
         updateTransferMethodButton.tap()
+    }
+
+    func selectShipMethod(_ shippingMethod: String) {
+        shipMethodLabel.tap()
+        app.tables.staticTexts[shippingMethod].tap()
     }
 
     func setCardNumber(_ cardNumber: String) {

@@ -62,5 +62,8 @@ class UpdateTransferMethodPayPalAccountTests: BaseTests {
 
         XCTAssert(updateTransferMethod.elementQuery["email_error"].exists)
         XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", emailLengthError)).count == 1)
+
+        updateTransferMethod.setEmail("")
+        updateTransferMethod.clickUpdateTransferMethodButton()
     }
 }

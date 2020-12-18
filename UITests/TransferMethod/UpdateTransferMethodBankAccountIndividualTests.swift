@@ -1,8 +1,8 @@
 import XCTest
 
-class UpdateTransferMethodPaPerCheckAccountTests: BaseTests {
+class UpdateTransferMethodBankAccountIndividualTests: BaseTests {
     var updateTransferMethod: UpdateTransferMethod!
-    let paperCheckAccount = NSPredicate(format: "label CONTAINS[c] 'Paper Check'")
+    let bankAccount = NSPredicate(format: "label CONTAINS[c] 'Bank Account'")
     var otherElements: XCUIElementQuery!
 
     override func setUp() {
@@ -12,7 +12,7 @@ class UpdateTransferMethodPaPerCheckAccountTests: BaseTests {
         app.launchEnvironment = [
             "COUNTRY": "US",
             "CURRENCY": "USD",
-            "ACCOUNT_TYPE": "PAPER_CHECK",
+            "ACCOUNT_TYPE": "BANK_ACCOUNT",
             "PROFILE_TYPE": "INDIVIDUAL"
         ]
         app.launch()
@@ -20,28 +20,28 @@ class UpdateTransferMethodPaPerCheckAccountTests: BaseTests {
         updateTransferMethod = UpdateTransferMethod(app: app)
 
         mockServer.setupStub(url: "/graphql",
-                             filename: "TransferMethodUpdateConfigurationFieldsPaperCheckResponse",
+                             filename: "TransferMethodUpdateConfigurationFieldsBankAccountResponse",
                              method: HTTPMethod.post)
 
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
-                             filename: "ListTransferMethodResponsePaperCheck",
+                             filename: "ListTransferMethodResponse",
                              method: HTTPMethod.get)
 
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
         app.tables.cells.staticTexts["List Transfer Methods"].tap()
-        app.tables.cells.containing(.staticText, identifier: "paper_check".localized()).element(boundBy: 0).tap()
+        app.tables.cells.containing(.staticText, identifier: "Bank Account".localized()).element(boundBy: 0).tap()
 
         app.sheets.buttons["Edit"].tap()
-        waitForExistence(updateTransferMethod.navBarPaperCheck)
+        waitForExistence(updateTransferMethod.navBarBankAccount)
     }
 
-    func testUpdateTransferMethod_updatePaPerCheckAccountValidResponse() {
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/paper-checks/trm-00000000-1111-0000-0000-000000000001",
-                             filename: "PaperCheckUpdateResponse",
+    func testUpdateTransferMethod_updateBankAccountIndividualValidResponse() {
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/bank-accounts/trm-11111111-1111-1111-1111-000000000000",
+                             filename: "BankAccountIndividualUpdateResponse",
                              method: HTTPMethod.put)
 
-        updateTransferMethod.selectShipMethod("Expedited Delivery")
+        //updateTransferMethod.selectShipMethod("Expedited Delivery")
         updateTransferMethod.clickUpdateTransferMethodButton()
         waitForNonExistence(spinner)
 
