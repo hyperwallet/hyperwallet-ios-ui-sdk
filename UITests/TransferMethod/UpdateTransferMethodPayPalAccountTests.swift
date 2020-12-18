@@ -27,6 +27,9 @@ class UpdateTransferMethodPayPalAccountTests: BaseTests {
         mockServer.setupStub(url: "/graphql",
                              filename: "TransferMethodUpdateConfigurationFieldsPaypalResponse",
                              method: HTTPMethod.post)
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+                             filename: "ListTransferMethodResponsePaperCheck",
+                             method: HTTPMethod.get)
 
         emailPatternError = updateTransferMethod.getEmailPatternError(label: "Email")
         emailLengthError = updateTransferMethod.getLengthConstraintError(label: "Email", min: 3, max: 200)
@@ -36,19 +39,21 @@ class UpdateTransferMethodPayPalAccountTests: BaseTests {
 
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
-        app.tables.cells.staticTexts["Update Transfer Method"].tap()
+        app.tables.cells.staticTexts["List Transfer Methods"].tap()
+        app.tables.cells.containing(.staticText, identifier: "paypal_account".localized()).element(boundBy: 0).tap()
+        app.sheets.buttons["Edit"].tap()
         waitForExistence(updateTransferMethod.navBarPaypal)
     }
 
     func testUpdateTransferMethod_updatePayPalAccountValidResponse() {
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/paypal-accounts/trm-0001",
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/paypal-accounts/trm-11111111-1111-1111-1111-000000000000",
                              filename: "PayPalUpdateResponse",
                              method: HTTPMethod.put)
         updateTransferMethod.setEmail("hello1@hw.com")
         updateTransferMethod.clickUpdateTransferMethodButton()
         waitForNonExistence(spinner)
 
-        XCTAssert(app.navigationBars["Account Settings"].exists)
+        XCTAssert(app.navigationBars["Transfer methods"].exists)
     }
 
     func testUpdateTransferMethod_returnsErrorOnInvalidLength() {

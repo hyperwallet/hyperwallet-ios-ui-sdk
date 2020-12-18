@@ -24,8 +24,8 @@ class UpdateTransferMethodPaPerCheckAccountTests: BaseTests {
                              method: HTTPMethod.post)
 
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
-        filename: "ListTransferMethodResponsePaperCheck",
-        method: HTTPMethod.get)
+                             filename: "ListTransferMethodResponsePaperCheck",
+                             method: HTTPMethod.get)
 
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
@@ -34,7 +34,6 @@ class UpdateTransferMethodPaPerCheckAccountTests: BaseTests {
 
         app.sheets.buttons["Edit"].tap()
         waitForExistence(updateTransferMethod.navBarPaperCheck)
-        
     }
 
     func testUpdateTransferMethod_updatePaPerCheckAccountValidResponse() {
@@ -42,10 +41,9 @@ class UpdateTransferMethodPaPerCheckAccountTests: BaseTests {
                              filename: "PaperCheckUpdateResponse",
                              method: HTTPMethod.put)
 
-                updateTransferMethod.clickUpdateTransferMethodButton()
-                waitForNonExistence(spinner)
+        updateTransferMethod.clickUpdateTransferMethodButton()
+        waitForNonExistence(spinner)
 
-                XCTAssert(app.navigationBars["Transfer methods"].exists)
+        XCTAssert(app.navigationBars["Transfer methods"].exists)
     }
-
 }

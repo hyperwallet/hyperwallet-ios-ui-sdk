@@ -158,7 +158,7 @@ extension UpdateTransferMethodController {
     }
     /// Returns the title for footer
     override public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        var footerText: String?
+        var footerText = ""
         if let errorMessage = presenter.sectionData[section].errorMessage {
             footerText = String(format: "%@", errorMessage)
         }
