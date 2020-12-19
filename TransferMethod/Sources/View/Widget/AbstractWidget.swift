@@ -128,6 +128,10 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.placeholder = nil
+        if let isValueMasked = field.fieldValueMasked, isValueMasked && !isValueUpdated {
+            textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument,
+                                                              to: textField.endOfDocument)
+        }
     }
 
     func textField(_ textField: UITextField,

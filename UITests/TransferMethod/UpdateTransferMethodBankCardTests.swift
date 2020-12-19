@@ -41,7 +41,7 @@ class UpdateTransferMethodBankCardTests: BaseTests {
                              filename: "BankCardUpdateResponse",
                              method: HTTPMethod.put)
 
-        //updateTransferMethod.selectShipMethod("Expedited Delivery")
+        updateTransferMethod.setCardNumber("9090909090909090")
         updateTransferMethod.clickUpdateTransferMethodButton()
         waitForNonExistence(spinner)
 
