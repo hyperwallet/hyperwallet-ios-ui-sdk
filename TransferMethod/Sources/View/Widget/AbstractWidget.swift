@@ -139,8 +139,8 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
                    replacementString string: String) -> Bool {
         if let isValueMasked = field.fieldValueMasked, isValueMasked && !isValueUpdated {
             textField.text = ""
-            isValueUpdated = true
         }
+        isValueUpdated = true
         return true
     }
 
@@ -148,7 +148,6 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
         if let isValueMasked = field.fieldValueMasked, isValueMasked && !isValueUpdated {
             return
         }
-        isValueUpdated = true
         let isFieldValid = isValid()
         if !isFieldValid {
             showError()
