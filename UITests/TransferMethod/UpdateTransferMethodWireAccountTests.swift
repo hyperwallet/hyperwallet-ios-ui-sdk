@@ -4,6 +4,7 @@ class UpdateTransferMethodWireAccountTests: BaseTests {
     var updateTransferMethod: UpdateTransferMethod!
     let wireAccount = NSPredicate(format: "label CONTAINS[c] 'Wire Transfer'")
     var otherElements: XCUIElementQuery!
+    var cityEmptyError: String!
 
     override func setUp() {
         super.setUp()
@@ -27,6 +28,9 @@ class UpdateTransferMethodWireAccountTests: BaseTests {
                              filename: "ListTransferMethodWireAccount",
                              method: HTTPMethod.get)
 
+        cityEmptyError = updateTransferMethod.getEmptyError(label: "City")
+        otherElements = updateTransferMethod.updateTransferMethodTableView.otherElements
+
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
         app.tables.cells.staticTexts["List Transfer Methods"].tap()
@@ -44,10 +48,25 @@ class UpdateTransferMethodWireAccountTests: BaseTests {
                              filename: "WireAccountUpdateResponse",
                              method: HTTPMethod.put)
 
-        //updateTransferMethod.selectShipMethod("Expedited Delivery")
+        updateTransferMethod.selectCountry("United States")
+        updateTransferMethod.setStateProvince("MA")
+        updateTransferMethod.setCity("Lynn")
+        updateTransferMethod.setPostalCode("1905")
         updateTransferMethod.clickUpdateTransferMethodButton()
         waitForNonExistence(spinner)
 
         XCTAssert(app.navigationBars["Transfer methods"].exists)
+    }
+
+    func testUpdateTransferMethod_returWireAccountEmptyError() {
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/bank-accounts/trm-12345",
+                             filename: "WireAccountUpdateResponse",
+                             method: HTTPMethod.put)
+
+        updateTransferMethod.setCity("")
+        updateTransferMethod.clickUpdateTransferMethodButton()
+
+        XCTAssert(updateTransferMethod.elementQuery["city_error"].exists)
+        XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", cityEmptyError)).count == 1)
     }
 }

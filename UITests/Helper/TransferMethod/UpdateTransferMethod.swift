@@ -81,6 +81,7 @@ class UpdateTransferMethod {
     var branchIdError: XCUIElement
     var bankAccountIdError: XCUIElement
     var bankAccountPurposeError: XCUIElement
+    var postalCodeError: XCUIElement
 
     // labels
     let title = "Account Settings"
@@ -193,6 +194,8 @@ class UpdateTransferMethod {
         cardNumberError = elementQuery["cardNumber_error"]
         cvvNumberError = elementQuery["cvv_error"]
         dateOfExpiryError = elementQuery["dateOfExpiry_error"]
+
+        postalCodeError = elementQuery["postalCode_error"]
 
         // Bank Account Errors
         bankIdError = elementQuery["bankId_error"]
@@ -376,6 +379,10 @@ class UpdateTransferMethod {
     func getSwiftNumberError(length: Int) -> String {
         return swiftNumber + ": " + "The exact length of this field is \(length)"
     }
+
+    func getLengthErrorForVenmo(length: Int) -> String {
+           return mobileNumber + ": " + "The exact length of this field is \(length)"
+       }
 
     func getRoutingNumberError(length: Int) -> String {
         return routingNumber + ": " + "The exact length of this field is \(length)"

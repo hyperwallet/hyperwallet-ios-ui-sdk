@@ -4,6 +4,7 @@ class UpdateTransferMethodPaPerCheckAccountTests: BaseTests {
     var updateTransferMethod: UpdateTransferMethod!
     let paperCheckAccount = NSPredicate(format: "label CONTAINS[c] 'Paper Check'")
     var otherElements: XCUIElementQuery!
+    var postalEmptyError: String!
 
     override func setUp() {
         super.setUp()
@@ -27,6 +28,9 @@ class UpdateTransferMethodPaPerCheckAccountTests: BaseTests {
                              filename: "ListTransferMethodResponsePaperCheck",
                              method: HTTPMethod.get)
 
+        postalEmptyError = updateTransferMethod.getEmptyError(label: "Zip/Postal Code")
+        otherElements = updateTransferMethod.updateTransferMethodTableView.otherElements
+
         spinner = app.activityIndicators["activityIndicator"]
         waitForNonExistence(spinner)
         app.tables.cells.staticTexts["List Transfer Methods"].tap()
@@ -42,9 +46,23 @@ class UpdateTransferMethodPaPerCheckAccountTests: BaseTests {
                              method: HTTPMethod.put)
 
         updateTransferMethod.selectShipMethod("Expedited Delivery")
+        updateTransferMethod.setStateProvince("ON")
+        updateTransferMethod.setCity("Toronto")
+        updateTransferMethod.setPostalCode("M4X1P1")
         updateTransferMethod.clickUpdateTransferMethodButton()
         waitForNonExistence(spinner)
 
         XCTAssert(app.navigationBars["Transfer methods"].exists)
+    }
+
+    func testUpdateTransferMethod_returnPaPerCheckEmptyPostalError() {
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/paper-checks/trm-00000000-1111-0000-0000-000000000001",
+                             filename: "PaperCheckUpdateResponse",
+                             method: HTTPMethod.put)
+
+        updateTransferMethod.setPostalCode("")
+        updateTransferMethod.clickUpdateTransferMethodButton()
+        XCTAssert(updateTransferMethod.elementQuery["postalCode_error"].exists)
+        XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", postalEmptyError)).count == 1)
     }
 }
