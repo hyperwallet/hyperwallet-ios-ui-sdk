@@ -9,7 +9,6 @@ docs:
 		sourcekitten doc --module-name ReceiptRepository > TempJson/ReceiptRepository.json
 		sourcekitten doc --module-name Receipt > TempJson/Receipt.json
 		@jazzy \
-					--build-tool-arguments CODE_SIGN_IDENTITY=,CODE_SIGNING_REQUIRED=NO,CODE_SIGNING_ALLOWED=NO
 					--author Hyperwallet Systems Inc \
 					--author_url https://www.hyperwallet.com/ \
 					--github_url https://github.com/hyperwallet/hyperwallet-ios-ui-sdk \
