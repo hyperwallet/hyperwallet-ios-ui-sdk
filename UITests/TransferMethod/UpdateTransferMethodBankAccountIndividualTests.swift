@@ -65,6 +65,7 @@ class UpdateTransferMethodBankAccountIndividualTests: BaseTests {
         updateTransferMethod.setBranchId("678798789798789768")
         updateTransferMethod.clickUpdateTransferMethodButton()
         XCTAssert(updateTransferMethod.elementQuery["branchId_error"].exists)
-        XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", lengthErrorForRoutingNumber)).count == 1)
+        XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@",
+                                                       lengthErrorForRoutingNumber)).count == 1)
     }
 }

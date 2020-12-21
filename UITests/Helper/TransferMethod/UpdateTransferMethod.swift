@@ -209,26 +209,14 @@ class UpdateTransferMethod {
     }
 
     func setBranchId(_ branchId: String) {
-        if #available(iOS 13.0, *) {
-            branchIdInput.enterText(text: branchId)
-        } else {
-            branchIdInput.clearAndEnterText(text: branchId)
-        }
+        branchIdInput.clearAndEnterText(text: branchId)
     }
     func setAccountId(_ accountId: String) {
-        if #available(iOS 13.0, *) {
-            accountIdInput.enterText(text: accountId)
-        } else {
-            accountIdInput.clearAndEnterText(text: accountId)
-        }
+        accountIdInput.clearAndEnterText(text: accountId)
     }
 
     func setBankAccountId(_ bankAccountId: String) {
-        if #available(iOS 13.0, *) {
-            bankAccountIdInput.enterText(text: bankAccountId)
-        } else {
-            bankAccountIdInput.clearAndEnterText(text: bankAccountId)
-        }
+        bankAccountIdInput.clearAndEnterText(text: bankAccountId)
     }
 
     func selectAccountType(_ accountType: String) {
