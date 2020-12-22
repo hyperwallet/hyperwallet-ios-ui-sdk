@@ -12,7 +12,6 @@ class CreateTransferTests: XCTestCase {
     private var presenter: CreateTransferPresenter!
     private var mockView = MockCreateTransferView()
     private let clientTransferId = UUID().uuidString
-    private var error: HyperwalletErrorType!
 
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
@@ -211,15 +210,13 @@ class CreateTransferTests: XCTestCase {
         Hyperwallet.clearInstance()
         HyperwalletTestHelper.programModel = .walletModel
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
-        if error?.group == .business {
-            mockView.stopOnError = false
-            initializePresenter(createTransferResult: .failure, showAllAvailableSources: true)
-            assertResponse(isShowErrorPerformed: false,
-                           transferSourceCellConfigurationsCount: 3,
-                           transferSourceType: .user,
-                           selectedTransferDestination: true,
-                           isAvailableBalancePresent: true)
-        }
+        mockView.stopOnError = false
+        initializePresenter(createTransferResult: .failure, showAllAvailableSources: true)
+        assertResponse(isShowErrorPerformed: false,
+                       transferSourceCellConfigurationsCount: 3,
+                       transferSourceType: .user,
+                       selectedTransferDestination: true,
+                       isAvailableBalancePresent: true)
         Hyperwallet.clearInstance()
     }
 
@@ -227,15 +224,13 @@ class CreateTransferTests: XCTestCase {
         Hyperwallet.clearInstance()
         HyperwalletTestHelper.programModel = .walletModel
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
-        if error?.group != .business {
-            mockView.stopOnError = true
-            initializePresenter(createTransferResult: .unexpectedFailure, showAllAvailableSources: true)
-            assertResponse(isShowErrorPerformed: true,
-                           transferSourceCellConfigurationsCount: 3,
-                           transferSourceType: .user,
-                           selectedTransferDestination: true,
-                           isAvailableBalancePresent: true)
-        }
+        mockView.stopOnError = true
+        initializePresenter(createTransferResult: .unexpectedFailure, showAllAvailableSources: true)
+        assertResponse(isShowErrorPerformed: true,
+                       transferSourceCellConfigurationsCount: 3,
+                       transferSourceType: .user,
+                       selectedTransferDestination: true,
+                       isAvailableBalancePresent: true)
         Hyperwallet.clearInstance()
     }
 
@@ -270,15 +265,13 @@ class CreateTransferTests: XCTestCase {
         Hyperwallet.clearInstance()
         HyperwalletTestHelper.programModel = .pay2CardModel
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
-        if error?.group == .business {
-            mockView.stopOnError = false
-            initializePresenter(createTransferResult: .failure, showAllAvailableSources: true)
-            assertResponse(isShowErrorPerformed: false,
-                           transferSourceCellConfigurationsCount: 2,
-                           transferSourceType: .prepaidCard,
-                           selectedTransferDestination: true,
-                           isAvailableBalancePresent: false)
-        }
+        mockView.stopOnError = false
+        initializePresenter(createTransferResult: .failure, showAllAvailableSources: true)
+        assertResponse(isShowErrorPerformed: false,
+                       transferSourceCellConfigurationsCount: 2,
+                       transferSourceType: .prepaidCard,
+                       selectedTransferDestination: true,
+                       isAvailableBalancePresent: false)
         Hyperwallet.clearInstance()
     }
 
@@ -286,15 +279,13 @@ class CreateTransferTests: XCTestCase {
         Hyperwallet.clearInstance()
         HyperwalletTestHelper.programModel = .pay2CardModel
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
-        if error?.group != .business {
-            mockView.stopOnError = true
-            initializePresenter(createTransferResult: .unexpectedFailure, showAllAvailableSources: true)
-            assertResponse(isShowErrorPerformed: true,
-                           transferSourceCellConfigurationsCount: 2,
-                           transferSourceType: .prepaidCard,
-                           selectedTransferDestination: true,
-                           isAvailableBalancePresent: false)
-        }
+        mockView.stopOnError = true
+        initializePresenter(createTransferResult: .unexpectedFailure, showAllAvailableSources: true)
+        assertResponse(isShowErrorPerformed: true,
+                       transferSourceCellConfigurationsCount: 2,
+                       transferSourceType: .prepaidCard,
+                       selectedTransferDestination: true,
+                       isAvailableBalancePresent: false)
         Hyperwallet.clearInstance()
     }
 
