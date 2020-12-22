@@ -249,6 +249,7 @@
 "mobileFXbuy" = "To";
 "mobileFXRateLabel" = "Exchange rate";
 "mobileAvailableBalance" = "Amount available %1$@%2$@ %3$@";
+"naAvailableBalance" = "Amount available: N/A";
 "continueButtonLabel" = "Continue";
 "mobileAddTransferMethod" = "Add transfer method";
 "mobileTransferMethodsHeader" = "Transfer methods";

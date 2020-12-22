@@ -171,6 +171,93 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, "CAD")
     }
 
+    /*
+     Given that Transfer methods exist
+     When user select a different transfer method with error occurs
+     Then will not show the error
+     And "Amount available: N/A" is shown
+     And transfer max funds is not shown
+     */
+    func testTransferFunds_switchTransferMethodWithTransactionLimitError() {
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+                             filename: "ListMoreThanOneTransferMethod",
+                             method: HTTPMethod.get)
+
+        mockServer.setupStub(url: "/rest/v3/transfers",
+                             filename: "AvailableFundUSD",
+                             method: HTTPMethod.post)
+
+        XCTAssertTrue(transferFundMenu.exists)
+        transferFundMenu.tap()
+        waitForNonExistence(spinner)
+        transferFunds.verifyTransferFundsTitle()
+
+        XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
+
+        // Amount row
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.00")
+        XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
+        XCTAssertEqual(transferFunds.transferAmountLabel.label,
+                       String(format: "mobileAvailableBalance".localized(), "$", "452.14", "USD"))
+        // Transfer max funds
+        XCTAssertTrue(transferFunds.transferMaxAllFunds.exists, "Transfer all funds switch should exist")
+
+        XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, "Bank Account")
+        transferFunds.addSelectDestinationLabel.tap()
+        // Select Destination (CAD)
+
+        mockServer.setupStubError(url: "/rest/v3/transfers",
+                                  filename: "TransferBelowTransactionLimitError",
+                                  method: HTTPMethod.post)
+
+        let cadBankAccount = app.tables.element.children(matching: .cell).element(boundBy: 1)
+        cadBankAccount.tap()
+
+        waitForNonExistence(spinner)
+        // Assert Available available: N/A
+        XCTAssertEqual(transferFunds.transferAmountLabel.label,
+                       transferFunds.notAvailableFunds)
+
+        XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
+
+        XCTAssertFalse(transferFunds.transferMaxAllFunds.exists, "Transfer all funds switch should not exist")
+    }
+
+    /*
+     Given that Transfer methods exist
+     When navigate to the Transfer view and error occurs
+     Then will not show the error
+     And "Amount available: N/A" is shown
+     And transfer max funds is not shown
+     */
+    func testTransferFunds_TransferMethodWithBelowTransactionLimitError() {
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+                             filename: "ListMoreThanOneTransferMethod",
+                             method: HTTPMethod.get)
+
+        mockServer.setupStubError(url: "/rest/v3/transfers",
+                                  filename: "TransferBelowTransactionLimitError",
+                                  method: HTTPMethod.post)
+
+        XCTAssertTrue(transferFundMenu.exists)
+        transferFundMenu.tap()
+        waitForNonExistence(spinner)
+        transferFunds.verifyTransferFundsTitle()
+
+        XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
+
+        // Amount row
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.00")
+        XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
+
+        // Assert Available available: N/A
+        XCTAssertEqual(transferFunds.transferAmountLabel.label,
+                       transferFunds.notAvailableFunds)
+
+        // Transfer max funds
+        XCTAssertFalse(transferFunds.transferMaxAllFunds.exists, "Transfer all funds switch should not exist")
+    }
+
     func testTransferFunds_createTransferWithAllFunds() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListMoreThanOneTransferMethod",
