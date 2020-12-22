@@ -39,7 +39,6 @@
 "mobileCountryRegion" = "Ülke/Bölge";
 "mobileCurrencyLabel" = "Para Birimi";
 "mobileAreYouSure" = "Emin misiniz?";
-"mobileRemoveEAconfirm" = "Aktarım yöntemini kaldır";
 "fee_flat_formatter" = "%1$@%2$@ ücret";
 "fee_percent_only_min_formatter" = "%1$@%% (En az:%2$@%3$@) ücret";
 "fee_percent_only_max_formatter" = "%1$@%% (En fazla:%2$@%3$@) ücret";

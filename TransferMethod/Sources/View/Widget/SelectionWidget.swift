@@ -83,8 +83,10 @@ final class SelectionWidget: AbstractWidget {
         tableView.selectedHandler = { option in
             self.updateLabelFieldValue(option)
             if self.isValid() {
+                self.isValueUpdated = true
                 self.hideError()
             } else {
+                self.isValueUpdated = false
                 self.showError()
             }
         }

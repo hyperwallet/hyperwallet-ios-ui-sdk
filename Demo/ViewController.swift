@@ -48,6 +48,7 @@ class ViewController: UITableViewController {
         case listTransferMethod
         case selectTransferMethod
         case addTransferMethod
+        case updateTransferMethod
         case userReceipts
         case prepaidCardReceipts
         case allSourcesReceipts
@@ -61,6 +62,7 @@ class ViewController: UITableViewController {
             case .listTransferMethod: return "List Transfer Methods"
             case .selectTransferMethod: return "Select Transfer Method"
             case .addTransferMethod: return "Add Transfer Method"
+            case .updateTransferMethod: return "Update Transfer Method"
             case .userReceipts: return "List User Receipts"
             case .prepaidCardReceipts: return "List Prepaid Card Receipts"
             case .allSourcesReceipts: return "List All Receipts"
@@ -76,6 +78,7 @@ class ViewController: UITableViewController {
             case .listTransferMethod: return "List all the Transfer Methods"
             case .selectTransferMethod: return "Select the Transfer Method you want to add"
             case .addTransferMethod: return "Add the default Transfer Method"
+            case .updateTransferMethod: return "Update the transfer method"
             case .userReceipts: return "List User Receipts"
             case .prepaidCardReceipts: return "List Prepaid Card Receipts"
             case .allSourcesReceipts: return "List All Receipts"
@@ -110,7 +113,8 @@ class ViewController: UITableViewController {
             .allSourcesReceipts: showExampleAllAvailableReceipts,
             .transferFunds: showExampleTransferFunds,
             .transferFundsSource: showExampleTransferFundsSource,
-            .transferFundsPPC: showExampleTransferFundsPPC
+            .transferFundsPPC: showExampleTransferFundsPPC,
+            .updateTransferMethod: showUpdateTransferMethod
         ]
     }
 
@@ -222,6 +226,14 @@ class ViewController: UITableViewController {
                 "US", "USD", "INDIVIDUAL", "BANK_ACCOUNT", parentController: self)
             coordinator.navigate()
         }
+    }
+
+    private func showUpdateTransferMethod() {
+        // Replace trm-0001 with valid transfer method token
+        let coordinator = HyperwalletUI.shared
+            .updateTransferMethodCoordinator("trm-0001",
+                                             parentController: self)
+        coordinator.navigate()
     }
 
     private func showExampleSelectTransferMethod() {

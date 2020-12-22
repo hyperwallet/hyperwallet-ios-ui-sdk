@@ -1,0 +1,27 @@
+{
+  "token": "trm-0001",
+  "type": "PAPER_CHECK",
+  "status": "ACTIVATED",
+  "createdOn": "2017-10-31T22:42:46",
+  "transferMethodCountry": "US",
+  "transferMethodCurrency": "USD",
+  "userToken": "usr-0001",
+  "profileType": "INDIVIDUAL",
+  "firstName": "John",
+  "lastName": "Smith",
+  "dateOfBirth": "1980-01-01",
+  "addressLine1": "123 Other Street",
+  "city": "Hometown",
+  "stateProvince": "NY",
+  "country": "US",
+  "postalCode": "10016",
+  "shippingMethod": "STANDARD",
+  "links": [
+    {
+      "params": {
+        "rel": "self"
+      },
+      "href": "https://api.sandbox.hyperwallet.com/rest/v3/users/usr-0001/paper-checks/trm-0001"
+    }
+  ]
+}

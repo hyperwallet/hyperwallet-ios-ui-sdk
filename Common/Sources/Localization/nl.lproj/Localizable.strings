@@ -39,7 +39,6 @@
 "mobileCountryRegion" = "Land/regio";
 "mobileCurrencyLabel" = "Valuta";
 "mobileAreYouSure" = "Weet u het zeker?";
-"mobileRemoveEAconfirm" = "Overboekingsmethode verwijderen";
 "fee_flat_formatter" = "%1$@%2$@ kosten";
 "fee_percent_only_min_formatter" = "%1$@%% (min:%2$@%3$@) kosten";
 "fee_percent_only_max_formatter" = "%1$@%% (max:%2$@%3$@) kosten";

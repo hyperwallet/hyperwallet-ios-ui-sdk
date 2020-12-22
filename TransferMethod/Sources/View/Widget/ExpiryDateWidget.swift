@@ -32,6 +32,9 @@ final class ExpiryDateWidget: NumberWidget {
     override func setupLayout(field: HyperwalletField) {
         super.setupLayout(field: field)
         setPlaceholderText()
+        if let value = field.value {
+            textField.text = formatExpiryDate(value)
+        }
     }
 
     override func textFieldDidChange() {
@@ -68,5 +71,12 @@ final class ExpiryDateWidget: NumberWidget {
 
     private func setPlaceholderText() {
         textField.placeholder = ExpiryDateWidget.placeholderText
+    }
+
+    private func formatExpiryDate(_ text: String) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let date = formatter.date(from: text)
+        return date?.formatDateToString(dateFormat: "MM/yy") ?? ""
     }
 }

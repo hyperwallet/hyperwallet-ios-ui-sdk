@@ -1,0 +1,18 @@
+{
+  "token": "trm-0001",
+  "type": "PAYPAL_ACCOUNT",
+  "status": "ACTIVATED",
+  "createdOn": "2019-01-09T22:50:14",
+  "transferMethodCountry": "US",
+  "transferMethodCurrency": "USD",
+  "userToken": "usr-0001",
+  "email": "hello1@hw.com",
+  "links": [
+    {
+      "params": {
+        "rel": "self"
+      },
+      "href": "https://api.sandbox.hyperwallet.com/rest/v3/users/usr-0001/paypal-accounts/trm-0001"
+    }
+  ]
+}

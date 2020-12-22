@@ -85,4 +85,20 @@ public extension HyperwalletUI {
         coordinator.start(initializationData: initializationData, parentController: parentController)
         return coordinator
     }
+
+    /// Controller to update a transfer method.
+    ///
+    /// The form fields are based transfer method token passed to this controller to update transfer method
+    ///
+    /// - Parameters:
+    ///   - transferMethodToken: The transfer method token
+    /// - Returns: An instance of `UpdateTransferMethodCoordinator`
+    func updateTransferMethodCoordinator(_ transferMethodToken: String,
+                                         parentController: UIViewController) -> UpdateTransferMethodCoordinator {
+        var initializationData = [InitializationDataField: Any]()
+        initializationData[InitializationDataField.transferMethodToken]  = transferMethodToken
+        let coordinator = UpdateTransferMethodCoordinator()
+        coordinator.start(initializationData: initializationData, parentController: parentController)
+        return coordinator
+    }
 }

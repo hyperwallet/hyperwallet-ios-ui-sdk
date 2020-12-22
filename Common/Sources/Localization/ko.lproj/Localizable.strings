@@ -39,7 +39,6 @@
 "mobileCountryRegion" = "국가/지역";
 "mobileCurrencyLabel" = "통화";
 "mobileAreYouSure" = "계속 진행하시겠습니까?";
-"mobileRemoveEAconfirm" = "이체 방법 삭제";
 "fee_flat_formatter" = "%1$@%2$@ 수수료";
 "fee_percent_only_min_formatter" = "%1$@%% (최소:%2$@%3$@) 수수료";
 "fee_percent_only_max_formatter" = "%1$@%% (최대:%2$@%3$@) 수수료";

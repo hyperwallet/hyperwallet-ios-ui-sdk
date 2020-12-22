@@ -39,7 +39,6 @@
 "mobileCountryRegion" = "Maa/alue";
 "mobileCurrencyLabel" = "Valuutta";
 "mobileAreYouSure" = "Oletko varma?";
-"mobileRemoveEAconfirm" = "Poista siirtomenetelmä";
 "fee_flat_formatter" = "%1$@%2$@ maksu";
 "fee_percent_only_min_formatter" = "%1$@%% (Min:%2$@%3$@) maksu";
 "fee_percent_only_max_formatter" = "%1$@%% (Maks:%2$@%3$@) maksu";

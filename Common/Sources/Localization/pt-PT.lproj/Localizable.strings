@@ -39,7 +39,6 @@
 "mobileCountryRegion" = "País/região";
 "mobileCurrencyLabel" = "Moeda";
 "mobileAreYouSure" = "Tem a certeza?";
-"mobileRemoveEAconfirm" = "Remover método de transferência";
 "fee_flat_formatter" = "%1$@%2$@ taxa";
 "fee_percent_only_min_formatter" = "%1$@%% (Mín:%2$@%3$@) taxa";
 "fee_percent_only_max_formatter" = "%1$@%% (Máx:%2$@%3$@) taxa";

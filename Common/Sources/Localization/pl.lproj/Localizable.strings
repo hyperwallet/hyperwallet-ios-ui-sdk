@@ -39,7 +39,6 @@
 "mobileCountryRegion" = "Kraj/region";
 "mobileCurrencyLabel" = "Waluta";
 "mobileAreYouSure" = "Na pewno?";
-"mobileRemoveEAconfirm" = "Usuń metodę przelewu";
 "fee_flat_formatter" = "%1$@%2$@ opłata";
 "fee_percent_only_min_formatter" = "Opłata %1$@%% (min.: %2$@%3$@)";
 "fee_percent_only_max_formatter" = "Opłata %1$@%% (maks.: %2$@%3$@)";
