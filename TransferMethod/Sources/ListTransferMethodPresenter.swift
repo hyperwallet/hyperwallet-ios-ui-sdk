@@ -56,6 +56,15 @@ final class ListTransferMethodPresenter {
         }
     }
 
+    func showUpdateTransferMethod(at index: Int, parentController: UIViewController) {
+        if transferMethodExists(at: index),
+        let token = sectionData[index].token {
+            let coordinator = HyperwalletUI.shared
+                    .updateTransferMethodCoordinator(token, parentController: parentController)
+            coordinator.navigate()
+        }
+    }
+
     /// Deactivate the selected Transfer Method
     private func deactivateTransferMethod(_ transferMethod: HyperwalletTransferMethod) {
         view?.showProcessing()

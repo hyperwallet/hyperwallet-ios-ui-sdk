@@ -39,7 +39,6 @@
 "mobileCountryRegion" = "Quốc gia/khu vực";
 "mobileCurrencyLabel" = "Đơn vị tiền tệ";
 "mobileAreYouSure" = "Bạn có chắc không?";
-"mobileRemoveEAconfirm" = "Xóa phương thức chuyển tiền";
 "fee_flat_formatter" = "%1$@%2$@ phí";
 "fee_percent_only_min_formatter" = "%1$@%% (Tối thiểu:%2$@%3$@) phí";
 "fee_percent_only_max_formatter" = "%1$@%% (Tối đa:%2$@%3$@) phí";

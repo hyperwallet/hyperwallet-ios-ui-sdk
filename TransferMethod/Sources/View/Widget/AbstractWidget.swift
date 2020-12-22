@@ -32,6 +32,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
     typealias InputHandler = () -> Void
     private var inputHandler: InputHandler?
     private(set) var errorMessage: String?
+    var isValueUpdated = false
 
     let label: UILabel = {
         let label = UILabel()
@@ -127,9 +128,26 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.placeholder = nil
+        if let isValueMasked = field.fieldValueMasked, isValueMasked && !isValueUpdated {
+            textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument,
+                                                              to: textField.endOfDocument)
+        }
+    }
+
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+        if let isValueMasked = field.fieldValueMasked, isValueMasked && !isValueUpdated {
+            textField.text = ""
+        }
+        isValueUpdated = true
+        return true
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
+        if let isValueMasked = field.fieldValueMasked, isValueMasked && !isValueUpdated {
+            return
+        }
         let isFieldValid = isValid()
         if !isFieldValid {
             showError()

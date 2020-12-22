@@ -51,4 +51,6 @@ public enum InitializationDataField: String {
     case selectedTransferSource
     /// Transfer Sources
     case transferSources
+    /// Transfer Method Token
+    case transferMethodToken
 }

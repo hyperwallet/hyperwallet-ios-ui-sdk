@@ -39,7 +39,6 @@
 "mobileCountryRegion" = "ประเทศ/ภูมิภาค";
 "mobileCurrencyLabel" = "สกุลเงิน";
 "mobileAreYouSure" = "คุณแน่ใจหรือไม่";
-"mobileRemoveEAconfirm" = "ลบวิธีการโอนเงิน";
 "fee_flat_formatter" = "%1$@%2$@ ค่าธรรมเนียม";
 "fee_percent_only_min_formatter" = "%1$@%% ค่าธรรมเนียม (ต่ำสุด:%2$@%3$@)";
 "fee_percent_only_max_formatter" = "%1$@%% ค่าธรรมเนียม (สูงสุด:%2$@%3$@)";

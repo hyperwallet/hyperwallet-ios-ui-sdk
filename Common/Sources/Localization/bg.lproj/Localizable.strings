@@ -39,7 +39,6 @@
 "mobileCountryRegion" = "Държава/Регион";
 "mobileCurrencyLabel" = "Валута";
 "mobileAreYouSure" = "Сигурни ли сте?";
-"mobileRemoveEAconfirm" = "Премахване на метода за трансфер";
 "fee_flat_formatter" = "%1$@%2$@ такса";
 "fee_percent_only_min_formatter" = "%1$@%% (Мин.:%2$@%3$@) такса";
 "fee_percent_only_max_formatter" = "%1$@%% (Макс.:%2$@%3$@) такса";

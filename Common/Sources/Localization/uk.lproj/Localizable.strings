@@ -39,7 +39,6 @@
 "mobileCountryRegion" = "Країна/регіон";
 "mobileCurrencyLabel" = "Валюта";
 "mobileAreYouSure" = "Ви впевнені?";
-"mobileRemoveEAconfirm" = "Видалити спосіб переказу";
 "fee_flat_formatter" = "%1$@%2$@ комісія";
 "fee_percent_only_min_formatter" = "%1$@%% (Мін.:%2$@%3$@) комісія";
 "fee_percent_only_max_formatter" = "%1$@%% (Макс.:%2$@%3$@) комісія";

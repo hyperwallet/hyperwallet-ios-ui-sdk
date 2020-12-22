@@ -145,3 +145,41 @@ public final class ListTransferMethodsCoordinator: NSObject, HyperwalletCoordina
         self.parentController = parentController
     }
 }
+
+/// Coordinator class for UpdateTransferMethod
+public class UpdateTransferMethodCoordinator: NSObject, HyperwalletCoordinator {
+    private let controller: UpdateTransferMethodController
+    private var parentController: UIViewController?
+
+    override init() {
+        controller = UpdateTransferMethodController()
+        super.init()
+        self.applyTheme()
+    }
+    public func applyTheme() {
+        ThemeManager.applyTransferMethodTheme()
+    }
+
+    public func getController() -> UITableViewController {
+        return controller
+    }
+
+    @objc
+    public func navigate() {
+        parentController?.show(controller, sender: parentController)
+    }
+
+    public func navigateToNextPage(initializationData: [InitializationDataField: Any]?) {
+    }
+
+    public func navigateBackFromNextPage(with response: Any) {
+        controller.navigationController?.popViewController(animated: false)
+    }
+
+    public func start(initializationData: [InitializationDataField: Any]? = nil, parentController: UIViewController) {
+        controller.coordinator = self
+        controller.initializationData = initializationData
+        controller.flowDelegate = parentController
+        self.parentController = parentController
+    }
+}

@@ -39,7 +39,6 @@
 "mobileCountryRegion" = "Χώρα/Περιοχή";
 "mobileCurrencyLabel" = "Νόμισμα";
 "mobileAreYouSure" = "Είστε βέβαιος/-η;";
-"mobileRemoveEAconfirm" = "Κατάργηση τρόπου μεταφοράς";
 "fee_flat_formatter" = "Τέλος %1$@ %2$@";
 "fee_percent_only_min_formatter" = "Τέλος %1$@%% (ελάχιστο: %2$@ %3$@)";
 "fee_percent_only_max_formatter" = "Τέλος %1$@%% (μέγιστο: %2$@ %3$@)";
