@@ -16,7 +16,7 @@ env:
   - IOS_UI_TESTS_SCHEME="Demo"
   matrix:
   - ios_version='13.7'  ios_device='iPhone 11' scheme="$IOS_FRAMEWORK_SCHEME" platform='iOS
-    Simulator' configuration="Debug" code_coverage="YES" publish_docs="YES" only_active_arch="YES"
+    Simulator' configuration="Debug" code_coverage="YES" publish_docs="NO" only_active_arch="YES"
   - ios_version='13.7'  ios_device='iPhone 11' scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS
     Simulator' configuration="XCUITest" code_coverage="NO" publish_docs="NO" only_active_arch="NO"
 before_install:
