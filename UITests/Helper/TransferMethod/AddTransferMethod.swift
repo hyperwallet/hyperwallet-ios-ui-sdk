@@ -101,7 +101,7 @@ class AddTransferMethod {
     let expireDatePlaceholder = "MM/YY"
     let firstName = "First Name"
     let middleName = "Middle Name"
-    let lastName =  "Last Name"
+    let lastName = "Last Name"
     let phoneNumber = "Phone Number"
     let mobileNumber = "Mobile Number"
     let dateOfBirth = "Date of Birth"
