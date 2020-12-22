@@ -223,7 +223,7 @@ class CreateTransferTests: XCTestCase {
         Hyperwallet.clearInstance()
     }
 
-    func testLoadCreateTransfer_showAllAvailableSources_walletModel_ErrorResponseforunexpectedError() {
+    func testLoadCreateTransfer_showAllAvailableSources_walletModel_errorResponseforunexpectedError() {
         Hyperwallet.clearInstance()
         HyperwalletTestHelper.programModel = .walletModel
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
@@ -282,7 +282,7 @@ class CreateTransferTests: XCTestCase {
         Hyperwallet.clearInstance()
     }
 
-    func testLoadCreateTransfer_showAllAvailableSources_pay2CardModel_ErrorResponseforunexpectedError() {
+    func testLoadCreateTransfer_showAllAvailableSources_pay2CardModel_errorResponseforunexpectedError() {
         Hyperwallet.clearInstance()
         HyperwalletTestHelper.programModel = .pay2CardModel
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
