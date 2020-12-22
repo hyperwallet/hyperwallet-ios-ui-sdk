@@ -45,7 +45,7 @@ class TransferFunds {
 
     var noteLabel: String
 
-    let mobileTransferFundsHeader =  "mobileTransferFundsHeader".localized()
+    let mobileTransferFundsHeader = "mobileTransferFundsHeader".localized()
     let mobileConfirmationHeader = "mobileConfirmationHeader".localized()
     let mobileTransferToLabel = "mobileTransferToLabel".localized()
     let mobileNoteLabel = "mobileNoteLabel".localized()

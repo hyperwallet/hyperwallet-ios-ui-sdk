@@ -160,10 +160,10 @@ extension SelectTransferMethodTypeController: SelectTransferMethodTypeView {
                                                profileType: String,
                                                transferMethodTypeCode: String) {
         var initializationData = [InitializationDataField: Any]()
-        initializationData[InitializationDataField.country]  = country
-        initializationData[InitializationDataField.currency]  = currency
-        initializationData[InitializationDataField.profileType]  = profileType
-        initializationData[InitializationDataField.transferMethodTypeCode]  = transferMethodTypeCode
+        initializationData[InitializationDataField.country] = country
+        initializationData[InitializationDataField.currency] = currency
+        initializationData[InitializationDataField.profileType] = profileType
+        initializationData[InitializationDataField.transferMethodTypeCode] = transferMethodTypeCode
         initializationData[InitializationDataField.forceUpdateData] = true
         coordinator?.navigateToNextPage(initializationData: initializationData)
     }
