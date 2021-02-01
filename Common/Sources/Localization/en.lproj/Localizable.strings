@@ -34,12 +34,12 @@
 "no_transfer_method_available_error_message" = "There is no transfer method available for %1$@ and %2$@";
 "no_currency_available_error_message" = "There is no currency available for country %1$@";
 "emptyStateAddTransferMethod" = "Add a transfer method to get started.";
-"mobileAddTransferMethodHeader" = "Add a transfer method";
+"mobileAddTransferMethodHeader" = "Add transfer method";
 "mobileCountryCurrencyLabel" = "LOCATION AND CURRENCY";
 "mobileTransferMethodLabel" = "TRANSFER METHOD";
 "mobileCountryRegion" = "Country/Region";
 "mobileCurrencyLabel" = "Currency";
-"mobileAreYouSure" = "Are you sure?";
+"mobileAreYouSure" = "Remove this transfer method?";
 "fee_flat_formatter" = "%1$@%2$@ fee";
 "fee_percent_only_min_formatter" = "%1$@%% (Min:%2$@%3$@) fee";
 "fee_percent_only_max_formatter" = "%1$@%% (Max:%2$@%3$@) fee";
@@ -237,7 +237,7 @@
 
 // Transfer Funds
 "mobileTransferFundsHeader" = "Transfer";
-"mobileConfirmationHeader" = "Confirm the details";
+"mobileConfirmationHeader" = "Confirm details";
 "mobileTransferFromLabel" = "TRANSFER FROM";
 "mobileTransferToLabel" = "TRANSFER TO";
 "mobileNoteLabel" = "Note";
