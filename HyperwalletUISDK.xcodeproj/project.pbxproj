@@ -262,7 +262,7 @@
 		B32FD83823DF66D700832544 /* ListTransferDestinationPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32FD83723DF66D700832544 /* ListTransferDestinationPresenterTests.swift */; };
 		B344D3A524C103D300F17DC3 /* CreateTransferMethodButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B344D3A424C103D300F17DC3 /* CreateTransferMethodButtonCell.swift */; };
 		B3758D9D24A6D63400ED9151 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3758D9C24A6D63400ED9151 /* UITextField.swift */; };
-		B39E00DF24B4FB0A00E3BC4D /* hw_mobile_ui_sdk_icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B39E00DE24B4FB0A00E3BC4D /* hw_mobile_ui_sdk_icons.ttf */; };
+		B39E00DF24B4FB0A00E3BC4D /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B39E00DE24B4FB0A00E3BC4D /* icomoon.ttf */; };
 		B3DCEA8A23DA2AA500217CF9 /* ListTransferDestinationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DCEA8923DA2AA500217CF9 /* ListTransferDestinationController.swift */; };
 		B3DCEA8C23DA30BC00217CF9 /* ListTransferDestinationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DCEA8B23DA30BC00217CF9 /* ListTransferDestinationPresenter.swift */; };
 		B3DDC1012385D7E800E1A562 /* InsightsSuccessResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = B3DDC1002385D7E800E1A562 /* InsightsSuccessResponse.json */; };
@@ -439,9 +439,10 @@
 		FD1208CE2582433100A8D8B2 /* UpdateTransferMethodPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1208CD2582433100A8D8B2 /* UpdateTransferMethodPresenterTests.swift */; };
 		FD1208CF258245DF00A8D8B2 /* TransferMethodUpdateConfigurationFieldsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = FDD2F4DF2580F774008E4CFC /* TransferMethodUpdateConfigurationFieldsResponse.json */; };
 		FD5066242538238900640B36 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3839225E8BA900CD4137 /* UIImage.swift */; };
-		FD5066252538239100640B36 /* hw_mobile_ui_sdk_icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B39E00DE24B4FB0A00E3BC4D /* hw_mobile_ui_sdk_icons.ttf */; };
+		FD5066252538239100640B36 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B39E00DE24B4FB0A00E3BC4D /* icomoon.ttf */; platformFilter = ios; };
 		FD50662725382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json in Resources */ = {isa = PBXBuildFile; fileRef = FD50662625382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json */; };
 		FD6D1AF12583AE3C0019333E /* BankAccountIndividualUpdateResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = FD6D1AF02583AE3C0019333E /* BankAccountIndividualUpdateResponse.json */; };
+		FD8D99DF25C46836003FEB1E /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B39E00DE24B4FB0A00E3BC4D /* icomoon.ttf */; };
 		FD8EA36B258119BB003CC5E8 /* UpdateTransferMethodButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8EA36A258119BB003CC5E8 /* UpdateTransferMethodButtonCell.swift */; };
 		FD9C483B258791AC00344E93 /* TransferMethodUpdateConfigurationFieldsBankAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = FD9C483925878E6100344E93 /* TransferMethodUpdateConfigurationFieldsBankAccountResponse.json */; };
 		FD9C48462587A2E000344E93 /* BankCardUpdateResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = FD9C48452587A2E000344E93 /* BankCardUpdateResponse.json */; };
@@ -939,7 +940,7 @@
 		B32FD83723DF66D700832544 /* ListTransferDestinationPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTransferDestinationPresenterTests.swift; sourceTree = "<group>"; };
 		B344D3A424C103D300F17DC3 /* CreateTransferMethodButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransferMethodButtonCell.swift; sourceTree = "<group>"; };
 		B3758D9C24A6D63400ED9151 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
-		B39E00DE24B4FB0A00E3BC4D /* hw_mobile_ui_sdk_icons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = hw_mobile_ui_sdk_icons.ttf; sourceTree = "<group>"; };
+		B39E00DE24B4FB0A00E3BC4D /* icomoon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = icomoon.ttf; sourceTree = "<group>"; };
 		B3DCEA8923DA2AA500217CF9 /* ListTransferDestinationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTransferDestinationController.swift; sourceTree = "<group>"; };
 		B3DCEA8B23DA30BC00217CF9 /* ListTransferDestinationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTransferDestinationPresenter.swift; sourceTree = "<group>"; };
 		B3DDC1002385D7E800E1A562 /* InsightsSuccessResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = InsightsSuccessResponse.json; sourceTree = "<group>"; };
@@ -2014,7 +2015,7 @@
 			isa = PBXGroup;
 			children = (
 				98A844EA2555CCAD00D7C265 /* Currency.json */,
-				B39E00DE24B4FB0A00E3BC4D /* hw_mobile_ui_sdk_icons.ttf */,
+				B39E00DE24B4FB0A00E3BC4D /* icomoon.ttf */,
 				DBFB61452261E44C00C4A8AA /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -3236,6 +3237,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD8D99DF25C46836003FEB1E /* icomoon.ttf in Resources */,
 				DB46798F2260380D00E1AF49 /* LaunchScreen.storyboard in Resources */,
 				DB46798C2260380D00E1AF49 /* Assets.xcassets in Resources */,
 				DB46798A2260380C00E1AF49 /* Main.storyboard in Resources */,
@@ -3248,7 +3250,7 @@
 			files = (
 				98A844EB2555CCAD00D7C265 /* Currency.json in Resources */,
 				DB551F8122E137B600DD65C2 /* Localizable.strings in Resources */,
-				B39E00DF24B4FB0A00E3BC4D /* hw_mobile_ui_sdk_icons.ttf in Resources */,
+				B39E00DF24B4FB0A00E3BC4D /* icomoon.ttf in Resources */,
 				DB5295ED22E231C500657F50 /* Assets.xcassets in Resources */,
 				DB551F8C22E137D800DD65C2 /* ProcessingView.xib in Resources */,
 			);
@@ -3314,7 +3316,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD5066252538239100640B36 /* hw_mobile_ui_sdk_icons.ttf in Resources */,
+				FD5066252538239100640B36 /* icomoon.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -129,7 +129,7 @@ class ViewController: UITableViewController {
             cell.nameLabel.textColor = Theme.Label.subtitleColor
             cell.emailLabel.textColor = Theme.Label.subtitleColor
             cell.phoneLabel.textColor = Theme.Label.subtitleColor
-            cell.iconLabel.font = UIFont(name: "hw_mobile_ui_sdk_icons", size: 51)
+            cell.iconLabel.font = UIFont(name: "icomoon", size: 51)
             cell.iconLabel.text = "\u{E023}"
             cell.iconLabel.textColor = Theme.Label.subtitleColor
             return cell

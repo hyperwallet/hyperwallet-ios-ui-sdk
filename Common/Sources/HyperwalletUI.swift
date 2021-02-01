@@ -51,7 +51,7 @@ public final class HyperwalletUI: NSObject {
 
     private init(_ provider: HyperwalletAuthenticationTokenProvider) {
         //Register custom fonts
-        UIFont.register("hw_mobile_ui_sdk_icons", type: "ttf")
+        UIFont.register("icomoon", type: "ttf")
         Hyperwallet.setup(provider)
         HyperwalletInsights.setup()
     }
