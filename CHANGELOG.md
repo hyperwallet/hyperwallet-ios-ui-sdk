@@ -3,7 +3,6 @@ Changelog
 
 [1.0.0-beta11](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta11)
 -------------------
-- Added support for paper check
 - Added support for update transfer method
 - UI Enhancements
 
