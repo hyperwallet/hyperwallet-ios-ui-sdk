@@ -91,9 +91,7 @@ class TransferUserFundsPPCTest: BaseTests {
         // Amount
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "0", "Input Transfer Amount should be 0")
         XCTAssertEqual(transferFunds.transferCurrency.value as? String, String(repeating: " ", count: 3))
-        XCTAssertFalse(transferFunds.transferAmountLabel.exists, "Available funds text should not exist")
-        // Transfer max funds
-        XCTAssertTrue(transferFunds.transferMaxAllFunds.exists, "Transfer all funds switch should not exist")
+        XCTAssertTrue(transferFunds.transferAmountLabel.exists, "naAvailableBalance".localized())
 
         // NOTE
         XCTAssertTrue(transferFunds.notesSectionLabel.exists)

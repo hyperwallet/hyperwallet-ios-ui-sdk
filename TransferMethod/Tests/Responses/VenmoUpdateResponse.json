@@ -1,0 +1,18 @@
+{
+  "token": "trm-0001",
+  "type": "VENMO_ACCOUNT",
+  "status": "ACTIVATED",
+  "createdOn": "2019-01-09T22:50:14",
+  "transferMethodCountry": "US",
+  "transferMethodCurrency": "USD",
+  "userToken": "usr-0001",
+  "accountId": "9876543211",
+  "links": [
+    {
+      "params": {
+        "rel": "self"
+      },
+      "href": "https://api.sandbox.hyperwallet.com/rest/v3/users/usr-0001/venmo-accounts/trm-0001"
+    }
+  ]
+}

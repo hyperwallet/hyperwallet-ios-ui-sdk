@@ -10,8 +10,7 @@ class ListTransferMethod {
     var confirmAccountRemoveButton: XCUIElement
     var cancelAccountRemoveButton: XCUIElement
     var navigationBar: XCUIElement
-    let removeAccountTitle = "mobileRemoveEAconfirm".localized()
-    let removeAccountMessage = "mobileAreYouSure".localized()
+    let removeAccountTitle = "mobileAreYouSure".localized()
     let addAccountTitle = "mobileAddTransferMethodHeader".localized()
     let title = "mobileTransferMethodsHeader".localized()
     let removeButtonLabel = "remove".localized()
@@ -75,6 +74,19 @@ class ListTransferMethod {
 
           return expectedLabel
       }
+
+    func getTransferMethodPaperCheckLabel(postalCode: String) -> String {
+        let toLabel = "to".localized()
+        let expectedLabel: String = {
+            if #available(iOS 11.2, *) {
+                return "United States\n\(toLabel)\(postalCode)"
+            } else {
+                return "United States \(toLabel)\(postalCode)"
+            }
+        }()
+
+        return expectedLabel
+    }
 
     func getTransferMethodIcon(index: Int) -> XCUIElement {
        return app.cells.element(boundBy: index).images["ListTransferMethodTableViewCellIcon"]

@@ -200,7 +200,7 @@ final class CreateTransferPresenter {
                                                                 ? "mobileAvailableFunds".localized() :
                                                                 "prepaid_card".localized(),
                                                             fontIcon: transferSourceType == .user
-                                                                ? .bankAccount : .prepaidCard)
+                                                                ? .addTransferMethod : .prepaidCard)
         configuration.additionalText = additionalText
         configuration.availableBalance = availableBalance
         configuration.destinationCurrency = destinationCurrency
@@ -325,8 +325,10 @@ final class CreateTransferPresenter {
             view.hideLoading()
             switch result {
             case .failure(let error):
-                view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
-                    strongSelf.createInitialTransfer()
+                if error.group != .business {
+                    view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
+                        strongSelf.createInitialTransfer()
+                    }
                 }
 
             case .success(let transfer):

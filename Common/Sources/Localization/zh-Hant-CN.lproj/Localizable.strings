@@ -1,0 +1,265 @@
+//
+// Copyright 2018 - Present Hyperwallet
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+// and associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+// BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+"backBarButton" = "返回";
+"mobileTransferMethodsHeader" = "轉帳方式";
+"remove" = "移除";
+"cancelButtonLabel" = "取消";
+"doneButtonLabel" = "完成";
+"try_again_button_label" = "重試";
+"search_placeholder_label" = "搜尋";
+"unexpected_error_message" = "發生錯誤，請重試";
+"network_connection_error_title" = "連線問題";
+"unexpected_title" = "意外錯誤";
+"network_connection_error_message" = "處理要求時發生問題。請確認您的連線。";
+"endingIn" = "尾號為 ";
+"to" = "至 ";
+"no_country_available_error_message" = "沒有可使用的國家/地區";
+"no_transfer_method_available_error_message" = "沒有可用於%1$@及%2$@的轉帳方式";
+"no_currency_available_error_message" = "沒有可用於國家/地區%1$@的貨幣";
+"emptyStateAddTransferMethod" = "新增轉帳方式以開始使用。";
+"mobileAddTransferMethodHeader" = "新增轉帳方式";
+"mobileCountryCurrencyLabel" = "所在地及貨幣";
+"mobileTransferMethodLabel" = "轉帳方式";
+"mobileCountryRegion" = "國家/地區";
+"mobileCurrencyLabel" = "貨幣";
+"mobileAreYouSure" = "是否確定？";
+"fee_flat_formatter" = "%1$@%2$@手續費";
+"fee_percent_only_min_formatter" = "%1$@%%（最低金額：%2$@%3$@）手續費";
+"fee_percent_only_max_formatter" = "%1$@%%（最高金額：%2$@%3$@）手續費";
+"fee_percent_formatter" = "%1$@%%（最低金額：%2$@%3$@，最高金額：%2$@%4$@）手續費";
+"fee_mix_no_min_and_max_formatter" = "%1$@%2$@ + %3$@%%手續費";
+"fee_mix_only_min_formatter" = "%1$@%2$@ + %3$@%%（最低金額：%1$@%4$@）手續費";
+"fee_mix_only_max_formatter" = "%1$@%2$@ + %3$@%%（最高金額：%1$@%4$@）手續費";
+"fee_mix_formatter" = "%1$@%2$@ + %3$@%%（最低金額：%1$@%4$@，最高金額：%1$@%5$@）手續費";
+"fee_percent_no_min_and_max_formatter" = "%1$@%%手續費";
+"transfer_method_not_supported_message" = "不支援此轉帳方式。";
+"error" = "錯誤";
+"authentication_error_title" = "驗證錯誤";
+"authentication_error_message" = "驗證權杖擷取嘗試導致錯誤";
+
+// Transfer methods
+"bank_account" = "銀行帳戶";
+"bank_card" = "簽帳金融卡";
+"paper_check" = "紙本支票";
+"prepaid_card" = "預付卡";
+"wire_account" = "匯款轉帳帳戶";
+"paypal_account" = "PayPal 帳戶";
+"venmo_account" = "Venmo 帳戶";
+"cash_pickup_mg" = "MoneyGram";
+
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+// Manage Prepaid Card Message
+"manage_prepaid_card_message" = "以網頁瀏覽器登入，以便管理您的卡片";
+//Select Transfer Method View
+"select_a_country_message" = "選擇國家/地區";
+
+// Add Transfer Method
+"createTransferMethodButtonLabel" = "新增轉帳方式";
+"account_information" = "帳戶資訊：%1$@(%2$@)";
+"account_holder" = "帳戶持有人資訊";
+"address"="地址";
+"mobileFeesAndProcessingTime" = "手續費與處理時間";
+"intermediary_account" = "中間行帳戶";
+"contact_information" = "聯絡資訊";
+"identification" = "身分確認";
+
+"date_format" = "年/月/日";
+
+// Processing View
+"processing_view_label" = "處理中";
+"complete_view_label" = "完成";
+
+// Receipt
+"transactions" = "交易";
+"mobileNoTransactions" = "沒有活動可顯示。";
+"mobilePrepaidCardNoTransactions" = "近 365 天內無交易。";
+"add_transaction_title" = "新增交易";
+"account_closure_fee" = "帳戶關閉手續費";
+"account_closure" = "帳戶關閉";
+"account_unload" = "資金退還";
+"adjustment" = "餘額調整";
+"annual_fee_refund" = "年費退款";
+"annual_fee" = "年費";
+"bank_account_transfer_fee" = "銀行帳戶退款手續費";
+"bank_account_transfer_return_fee" = "銀行帳戶退款手續費";
+"bank_account_transfer_return" = "銀行帳戶退款";
+"card_activation_fee_waiver" = "卡片啟用手續費減免";
+"card_activation_fee" = "卡片啟用手續費";
+"card_fee" = "卡片費";
+"customer_service_fee_refund" = "客戶服務費用退款";
+"customer_service_fee" = "客戶服務費用";
+"deposit" = "付款";
+"donation_fee" = "捐款手續費";
+"donation_return" = "捐款退款";
+"donation" = "捐款";
+"dormant_user_fee_refund" = "非使用中使用者帳戶手續費退款";
+"dormant_user_fee" = "非使用中使用者帳戶手續費";
+"expedited_shipping_fee" = "加急運費";
+"foreign_exchange" = "外匯";
+"generic_fee_refund" = "一般退款";
+"manual_adjustment" = "調整";
+"manual_transfer_to_prepaid_card" = "轉帳至卡片";
+"merchant_payment_fee" = "商家支付手續費";
+"merchant_payment_refund" = "商家支付退款";
+"merchant_payment_return" = "商家支付退款";
+"merchant_payment" = "商家支付";
+"moneygram_transfer_return" = "MoneyGram 退款";
+"monthly_fee_refund" = "月費退款";
+"monthly_fee" = "月費";
+"paper_check_fee" = "紙本支票手續費";
+"paper_check_refund" = "紙本支票退款";
+"payment_cancellation" = "付款取消";
+"payment_expiration" = "付款已到期";
+"payment_expiry_fee" = "付款到期手續費";
+"payment_fee" = "付款手續費";
+"payment_return" = "退款";
+"payment_reversal_fee" = "付款取消手續費";
+"payment_reversal" = "付款取消";
+"payment" = "付款";
+"prepaid_card_balance_inquiry_fee" = "餘額查詢手續費";
+"prepaid_card_cash_advance" = "預付現金";
+"prepaid_card_dispute_deposit" = "爭議卡片存款";
+"prepaid_card_disputed_charge_refund" = "爭議收費退款";
+"prepaid_card_domestic_cash_withdrawal_fee" = "ATM 提款";
+"prepaid_card_exchange_rate_difference" = "匯率差異";
+"prepaid_card_manual_unload" = "自卡片轉帳";
+"prepaid_card_overseas_cash_withdrawal_fee" = "ATM 提款";
+"prepaid_card_pin_change_fee" = "PIN 變更手續費";
+"prepaid_card_refund" = "退款";
+"prepaid_card_replacement_fee" = "卡片更換手續費";
+"prepaid_card_sale_reversal" = "已撤銷交易";
+"prepaid_card_sale" = "交易";
+"prepaid_card_unload" = "自卡片轉帳";
+"processing_fee" = "處理手續費";
+"standard_shipping_fee" = "標準運費";
+"transfer_fee" = "轉帳手續費";
+"transfer_to_bank_account" = "銀行帳戶";
+"transfer_to_debit_card" = "簽帳金融卡";
+"transfer_to_moneygram" = "MoneyGram";
+"transfer_to_paper_check" = "紙本支票";
+"transfer_to_paypal_account" = "PayPal";
+"transfer_to_prepaid_card" = "轉帳至卡片";
+"transfer_to_program_account" = "轉帳至計畫";
+"transfer_to_user" = "轉帳至使用者";
+"transfer_to_western_union" = "西聯";
+"transfer_to_wire" = "匯款轉帳";
+"transfer_to_wubs_wire" = "匯款轉帳";
+"transfer_to_venmo_account" = "Venmo";
+"transfer_to_bank_card" = "銀行卡";
+"virtual_incentive_cancellation" = "促銷取消";
+"virtual_incentive_issuance" = "已發行促銷";
+"virtual_incentive_purchase" = "購買促銷";
+"virtual_incentive_refund" = "促銷退款";
+"western_union_transfer_return" = "西聯提款";
+"wire_transfer_fee" = "西聯手續費";
+"wire_transfer_return" = "匯款轉帳退款";
+"wubs_wire_transfer_return" = "匯款轉帳退款";
+"unknown_receipt_type" = "未知交易類型";
+"paypal_account_transfer_return" = "提現退款";
+"venmo_account_transfer_return" = "提現退款";
+"prepaid_card_account_deposit" = "帳戶存款";
+"prepaid_card_annual_fee_discount" = "年費折扣";
+"prepaid_card_bill_reprint_fee" = "重印帳單手續費";
+"prepaid_card_atm_or_cash_advance_fee" = "ATM/預付現金手續費";
+"prepaid_card_cash_advance_chargeback" = "預付現金退單";
+"prepaid_card_cash_advance_chargeback_reversal" = "預付現金退單取消";
+"prepaid_card_cash_advance_repress" = "退回預付現金";
+"prepaid_card_cash_advance_repress_reversal" = "退回預付現金取消";
+"prepaid_card_chargeback" = "退單";
+"prepaid_card_chargeback_refund" = "退單退款";
+"prepaid_card_chargeback_refund_reversal" = "退單退款取消";
+"prepaid_card_chargeback_reversal" = "退單取消";
+"prepaid_card_commission_or_fee" = "手續費/佣金";
+"prepaid_card_debit_transfer" = "扣款/轉帳";
+"prepaid_card_document_request_fee" = "文件要求手續費";
+"prepaid_card_emergency_cash" = "緊急款項";
+"prepaid_card_emergency_card" = "緊急卡";
+"prepaid_card_income" = "收益";
+"prepaid_card_load_fee" = "PAN 手續費";
+"prepaid_card_overdue_payment_interest" = "逾期付款利息";
+"prepaid_card_payment" = "載入";
+"prepaid_card_pin_reprint_fee" = "重印 PIN";
+"prepaid_card_priority_pass_fee" = "Priority Pass 手續費";
+"prepaid_card_priority_pass_renewal" = "Priority Pass 更新";
+"prepaid_card_recurring_interest" = "循環利息";
+"prepaid_card_refund_repress" = "退回退款";
+"prepaid_card_refund_repress_reversal" = "退回退款取消";
+"prepaid_card_sale_repress" = "退回買賣";
+"prepaid_card_statement_fee" = "UTSKGJ 結單手續費";
+"prepaid_card_telephone_support_fee" = "致電告知資訊：餘額、交易等。";
+"prepaid_card_transfer_fee" = "卡片載入手續費";
+"prepaid_card_transfer_return" = "預付卡載入退還";
+"prepaid_card_bank_withdrawal_reversal" = "已撤銷銀行提款";
+"prepaid_card_bank_withdrawal_chargeback" = "已撤銷銀行提款退單";
+"prepaid_card_refund_fee" = "退款手續費";
+"prepaid_card_monthly_maintenance_fee" = "每月維護費";
+"prepaid_card_transaction_fee" = "交易手續費";
+"prepaid_card_sms_fee" = "簡訊費";
+"prepaid_card_declined_authorization_fee" = "拒絕授權費";
+"fispc" = "購買";
+"visa" = "Visa";
+"mastercard" = "Mastercard";
+
+// Receipt Detail
+"mobileTransactionDetailsHeader" = "交易細節";
+"mobileTransactionTypeLabel" = "交易";
+"mobileTransactionDetailsLabel" = "細節";
+"mobileFeeInfoLabel" = "手續費資訊";
+"mobileConfirmNotesLabel" = "附註";
+"mobileCharityName" = "慈善團體名稱";
+"mobileCheckNumber" = "支票數量";
+"mobileTransactionIdLabel" = "交易代號";
+"mobilePromoWebsite" = "促銷網站";
+"mobileTransactionDetailsTotal" = "交易總額";
+"amount" = "金額";
+"mobileFeeLabel" = "手續費";
+"mobileJournalNumberLabel" = "收款代號";
+"date" = "日期";
+
+// Transfer Funds
+"mobileTransferFundsHeader" = "轉帳";
+"mobileConfirmationHeader" = "確認細節";
+"mobileTransferFromLabel" = "轉帳自";
+"mobileTransferToLabel" = "轉帳至";
+"mobileNoteLabel" = "附註";
+"mobileConfirmDetailsAmount" = "金額";
+"mobileConfirmDetailsFee" = "手續費";
+"mobileConfirmDetailsTotal" = "您將收到";
+"mobileTransferMax" = "最高轉帳金額";
+"mobileFXsell" = "自";
+"mobileFXbuy" = "至";
+"mobileFXRateLabel" = "匯率";
+"mobileAvailableBalance" = "可用金額 %1$@%2$@ %3$@";
+"continueButtonLabel" = "繼續";
+"mobileAddTransferMethod" = "新增轉帳方式";
+"mobileTransferMethodsHeader" = "轉帳方式";
+"mobileTransferFromHeader" = "轉帳自";
+"mobileAvailableFunds" = "可用資金";
+"mobileFXlabel" = "外匯";
+"mobileSummaryLabel" = "摘要";
+"transfer" = "轉帳";
+"transferAmountInvalid" = "請輸入有效的轉帳金額";
+"noTransferMethodAdded" = "轉帳方式為必填項";
+"transfer_error_no_transfer_method_module_initialized" = "您無法新增轉帳方式。";
+"transfer_fx_rate_changed" = "因為匯率有所改變，您即將收到：%1$@";
+"mobileTransferSuccessMsg" = "您的轉帳正在處理中";
+"mobileTransferSuccessDetails" = "款項已匯至您的 %1$@。";
+"noTransferFromSourceAvailable" = "無可用資源可供轉帳";

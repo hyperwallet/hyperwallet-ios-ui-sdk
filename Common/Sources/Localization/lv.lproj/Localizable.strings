@@ -39,7 +39,6 @@
 "mobileCountryRegion" = "Valsts/reģions";
 "mobileCurrencyLabel" = "Valūta";
 "mobileAreYouSure" = "Vai tiešām?";
-"mobileRemoveEAconfirm" = "Dzēst pārskaitījuma veidu";
 "fee_flat_formatter" = "%1$@%2$@ maksa";
 "fee_percent_only_min_formatter" = "%1$@%% (Min.:%2$@%3$@) maksa";
 "fee_percent_only_max_formatter" = "%1$@%% (Maks.:%2$@%3$@) maksa";

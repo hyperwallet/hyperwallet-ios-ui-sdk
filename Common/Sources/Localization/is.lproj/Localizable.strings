@@ -39,7 +39,6 @@
 "mobileCountryRegion" = "Land/svæði";
 "mobileCurrencyLabel" = "Gjaldmiðill";
 "mobileAreYouSure" = "Ertu viss?";
-"mobileRemoveEAconfirm" = "Fjarlægja millifærsluaðferð";
 "fee_flat_formatter" = "%1$@%2$@ gjald";
 "fee_percent_only_min_formatter" = "%1$@%% (Lágmark:%2$@%3$@) gjald";
 "fee_percent_only_max_formatter" = "%1$@%% (Hámark:%2$@%3$@) gjald";

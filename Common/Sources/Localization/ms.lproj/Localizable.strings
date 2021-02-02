@@ -39,7 +39,6 @@
 "mobileCountryRegion" = "Negara/Wilayah";
 "mobileCurrencyLabel" = "Mata wang";
 "mobileAreYouSure" = "Adakah anda pasti?";
-"mobileRemoveEAconfirm" = "Alih keluar kaedah pemindahan";
 "fee_flat_formatter" = "%1$@%2$@ yuran";
 "fee_percent_only_min_formatter" = "%1$@%% (Min:%2$@%3$@) yuran";
 "fee_percent_only_max_formatter" = "%1$@%% (Maks:%2$@%3$@) yuran";

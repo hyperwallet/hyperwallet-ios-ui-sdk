@@ -33,7 +33,6 @@ final class ListReceiptController: UITableViewController {
     private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "mobileNoTransactions".localized())
     private lazy var emptyPPCListLabel: UILabel =
         view.setUpEmptyListLabel(text: "mobilePrepaidCardNoTransactions".localized())
-    private var uiSegmentedControl: UISegmentedControl?
     private var selectedSegmentedControl = 0
 
     override public func viewDidLoad() {
@@ -177,6 +176,18 @@ extension ListReceiptController: ListReceiptView {
                                        for: .valueChanged)
             segmentedControl.selectedSegmentIndex = selectedSegmentedControl
             tableView.tableHeaderView = segmentedControl
+
+            /// Add constraints to segmentedControl
+            segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+            segmentedControl.leadingAnchor.constraint(equalTo: tableView.leadingAnchor, constant: 24)
+                .isActive = true
+            segmentedControl.trailingAnchor.constraint(equalTo: tableView.trailingAnchor, constant: -24)
+                .isActive = true
+            segmentedControl.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
+            segmentedControl.centerYAnchor.constraint(equalTo: tableView.topAnchor, constant: 15)
+                .isActive = true
+            UIView.adjustWidthOfSegmentTitles(view: segmentedControl)
+            segmentedControl.apportionsSegmentWidthsByContent = true
         }
     }
 

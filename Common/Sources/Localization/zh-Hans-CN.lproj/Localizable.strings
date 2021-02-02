@@ -39,7 +39,6 @@
 "mobileCountryRegion" = "国家/地区";
 "mobileCurrencyLabel" = "货币";
 "mobileAreYouSure" = "是否确定？";
-"mobileRemoveEAconfirm" = "移除转账方式";
 "fee_flat_formatter" = "%1$@%2$@ 费用";
 "fee_percent_only_min_formatter" = "%1$@%%（最低：%2$@%3$@）费用";
 "fee_percent_only_max_formatter" = "%1$@%%（最高：%2$@%3$@）费用";

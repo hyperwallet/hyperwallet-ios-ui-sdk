@@ -217,6 +217,24 @@ class ListReceiptTests: BaseTests {
         verifyFeeSection(amountVal: "-$5.00 USD", feeVal: "$2.00 USD", transactionVal: "$3.00 USD")
     }
 
+    // Debit to PaperCheck Transaction
+    func testReceiptDetail_verifyDebitPaperCheckTransaction() {
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/receipts",
+                             filename: "PaperCheckReceiptsForFewMonths",
+                             method: HTTPMethod.get)
+        openReceiptsListScreen()
+        transactionDetails.openReceipt(row: 0)
+        waitForExistence(transactionDetails.detailHeaderTitle)
+
+        verifyPayment("Paper Check", "2020-10-12T18:16:17", "-$5.00", "\(currency)")
+
+        // DETAILS Section
+        verifyDetailSection(receiptIdVal: "64287013", dateVal: "2020-10-12T18:16:17", clientIdVal: nil)
+
+        // FEE Section
+        verifyFeeSection(amountVal: "-$5.00 USD", feeVal: "$2.00 USD", transactionVal: "$3.00 USD")
+    }
+
     func testReceiptDetail_verifyTransactionOptionalFields() {
         openUpReceiptsListScreenForOneMonth()
         transactionDetails.openReceipt(row: 4)

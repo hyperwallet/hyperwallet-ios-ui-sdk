@@ -39,7 +39,6 @@
 "mobileCountryRegion" = "Улс/Бүс";
 "mobileCurrencyLabel" = "Валют";
 "mobileAreYouSure" = "Та итгэлтэй байна уу?";
-"mobileRemoveEAconfirm" = "Шилжүүлгийн аргыг устгах";
 "fee_flat_formatter" = "%1$@%2$@ хураамж";
 "fee_percent_only_min_formatter" = "%1$@%% (Хамгийн бага:%2$@%3$@) хураамж";
 "fee_percent_only_max_formatter" = "%1$@%% (Хамгийн их:%2$@%3$@) хураамж";

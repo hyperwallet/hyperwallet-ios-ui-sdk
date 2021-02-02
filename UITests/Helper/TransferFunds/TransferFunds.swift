@@ -45,7 +45,7 @@ class TransferFunds {
 
     var noteLabel: String
 
-    let mobileTransferFundsHeader =  "mobileTransferFundsHeader".localized()
+    let mobileTransferFundsHeader = "mobileTransferFundsHeader".localized()
     let mobileConfirmationHeader = "mobileConfirmationHeader".localized()
     let mobileTransferToLabel = "mobileTransferToLabel".localized()
     let mobileNoteLabel = "mobileNoteLabel".localized()
@@ -59,6 +59,8 @@ class TransferFunds {
 
     // "Available funds %1$@%2$@ %3$@"
     let availableBalanceFormat = "mobileAvailableBalance".localized()
+
+    let notAvailableFunds = "naAvailableBalance".localized()
 
     let availableFunds = "mobileAvailableFunds".localized()
 

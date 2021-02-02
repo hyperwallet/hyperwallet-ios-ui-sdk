@@ -39,7 +39,6 @@
 "mobileCountryRegion" = "Zemlja/regija";
 "mobileCurrencyLabel" = "Valuta";
 "mobileAreYouSure" = "Jeste li sigurni?";
-"mobileRemoveEAconfirm" = "Uklonite način prijenosa";
 "fee_flat_formatter" = "%1$@%2$@ naknada";
 "fee_percent_only_min_formatter" = "%1$@%% (Min:%2$@%3$@) naknada";
 "fee_percent_only_max_formatter" = "%1$@%% (Maks:%2$@%3$@) naknada";
