@@ -33,9 +33,9 @@ public enum HyperwalletIconContent: String {
     /// The icon for wire transfer type
     case wire = "\u{e90a}"
     /// The icon for venmo transfer type
-    case venmo = "\u{e909}"
+    case venmo = "\u{e905}"
     /// The icon for moenygram transfer type
-    case moneygram = "\u{e905}"
+    case moneygram = "\u{e904}"
     /// The icon for paypal transfer type
     case paypal = "\u{e906}"
     /// The credit icon
@@ -43,5 +43,5 @@ public enum HyperwalletIconContent: String {
     /// The debit icon
     case debit = "\u{e908}"
     /// The trash can
-    case trash = "\u{e904}"
+    case trash = "\u{e909}"
 }
