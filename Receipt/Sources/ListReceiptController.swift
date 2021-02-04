@@ -184,9 +184,8 @@ extension ListReceiptController: ListReceiptView {
             segmentedControl.trailingAnchor.constraint(equalTo: tableView.trailingAnchor, constant: -24)
                 .isActive = true
             segmentedControl.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
-            segmentedControl.centerYAnchor.constraint(equalTo: tableView.topAnchor, constant: 24)
+            segmentedControl.centerYAnchor.constraint(equalTo: tableView.topAnchor, constant: 15)
                 .isActive = true
-            segmentedControl.heightAnchor.constraint(equalTo: tableView.widthAnchor, multiplier: 0.12).isActive = true
             UIView.adjustWidthOfSegmentTitles(view: segmentedControl)
             segmentedControl.apportionsSegmentWidthsByContent = true
         }
