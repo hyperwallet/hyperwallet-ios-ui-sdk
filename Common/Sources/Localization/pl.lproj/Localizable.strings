@@ -21,6 +21,7 @@
 "remove" = "Usuń";
 "cancelButtonLabel" = "Anuluj";
 "doneButtonLabel" = "Gotowe";
+"edit" = "Edytuj";
 "try_again_button_label" = "Spróbuj ponownie";
 "search_placeholder_label" = "Wyszukaj";
 "unexpected_error_message" = "Coś poszło nie tak, spróbuj ponownie";
@@ -38,22 +39,22 @@
 "mobileTransferMethodLabel" = "METODA PRZELEWU";
 "mobileCountryRegion" = "Kraj/region";
 "mobileCurrencyLabel" = "Waluta";
-"mobileAreYouSure" = "Na pewno?";
+"mobileAreYouSure" = "Usunąć tę metodę przelewu?";
 "fee_flat_formatter" = "%1$@%2$@ opłata";
-"fee_percent_only_min_formatter" = "Opłata %1$@%% (min.: %2$@%3$@)";
-"fee_percent_only_max_formatter" = "Opłata %1$@%% (maks.: %2$@%3$@)";
-"fee_percent_formatter" = "Opłata %1$@%% (min.: %2$@%3$@, maks.: %2$@%4$@)";
-"fee_mix_no_min_and_max_formatter" = "Opłata %1$@%2$@ + %3$@%%";
-"fee_mix_only_min_formatter" = "Opłata %1$@%2$@ + %3$@%% (min.: %1$@%4$@)";
-"fee_mix_only_max_formatter" = "Opłata %1$@%2$@ + %3$@%% (maks.: %1$@%4$@)";
-"fee_mix_formatter" = "Opłata %1$@%2$@ + %3$@%% (min.: %1$@%4$@, maks.: %1$@%5$@)";
+"fee_percent_only_min_formatter" = "Opłata %1$@%% (min.: %2$@%3$@";
+"fee_percent_only_max_formatter" = "Opłata %1$@%% (maks.: %2$@%3$@";
+"fee_percent_formatter" = "Opłata %1$@%% (min.: %2$@%3$@, maks.: %2$@%4$@";
+"fee_mix_no_min_and_max_formatter" = "%1$@%2$@ + opłata %3$@%%";
+"fee_mix_only_min_formatter" = "Opłata %1$@%2$@ +  + %3$@%% (min.: %1$@%4$@";
+"fee_mix_only_max_formatter" = "Opłata %1$@%2$@ +  + %3$@%% (maks.: %1$@%4$@";
+"fee_mix_formatter" = "Opłata %1$@%2$@ +  + %3$@%% (min.: %1$@%4$@, maks.: %1$@%5$@";
 "fee_percent_no_min_and_max_formatter" = "%1$@%% opłata";
 "transfer_method_not_supported_message" = "Ta metoda przelewu nie jest obsługiwana.";
 "error" = "Błąd";
 "authentication_error_title" = "Błąd uwierzytelniania";
 "authentication_error_message" = "Próba odzyskania tokena uwierzytelniania zakończyła się błędem";
 
-    // Transfer methods
+// Transfer methods
 "bank_account" = "Rachunek bankowy";
 "bank_card" = "Karta debetowa";
 "paper_check" = "Czek papierowy";
@@ -66,12 +67,12 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Manage Prepaid Card Message
+// Manage Prepaid Card Message
 "manage_prepaid_card_message" = "Zaloguj się za pomocą przeglądarki, aby zarządzać kartą";
-    //Select Transfer Method View
+//Select Transfer Method View
 "select_a_country_message" = "Wybierz kraj";
 
-    // Add Transfer Method
+// Add Transfer Method
 "createTransferMethodButtonLabel" = "Dodawanie metody przelewu";
 "account_information" = "INFORMACJE O RACHUNKU: %1$@(%2$@)";
 "account_holder" = "INFORMACJE O POSIADACZU RACHUNKU";
@@ -83,11 +84,11 @@
 
 "date_format" = "RRRR-MM-DD";
 
-    // Processing View
+// Processing View
 "processing_view_label" = "Przetwarzanie";
 "complete_view_label" = "Uzupełnij";
 
-    // Receipt
+// Receipt
 "transactions" = "Transakcje";
 "mobileNoTransactions" = "Brak aktywności do wyświetlenia.";
 "mobilePrepaidCardNoTransactions" = "Brak transakcji w ostatnich 365 dniach.";
@@ -218,7 +219,7 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Receipt Detail
+// Receipt Detail
 "mobileTransactionDetailsHeader" = "Dane transakcji";
 "mobileTransactionTypeLabel" = "TRANSAKCJA";
 "mobileTransactionDetailsLabel" = "SZCZEGÓŁY";
@@ -234,7 +235,7 @@
 "mobileJournalNumberLabel" = "Ident. przyjęcia";
 "date" = "Data";
 
-    // Transfer Funds
+// Transfer Funds
 "mobileTransferFundsHeader" = "Przelew";
 "mobileConfirmationHeader" = "Potwierdź szczegóły";
 "mobileTransferFromLabel" = "PRZELEW OD";
@@ -248,6 +249,7 @@
 "mobileFXbuy" = "Do";
 "mobileFXRateLabel" = "Kurs wymiany";
 "mobileAvailableBalance" = "Dostępna kwota %1$@%2$@ %3$@";
+"naAvailableBalance" = "Dostępna kwota:   Nie dotyczy";
 "continueButtonLabel" = "Kontynuuj";
 "mobileAddTransferMethod" = "Dodaj metodę przelewu";
 "mobileTransferMethodsHeader" = "Metody przelewu";
@@ -263,3 +265,4 @@
 "mobileTransferSuccessMsg" = "Przetwarzamy Twój przelew";
 "mobileTransferSuccessDetails" = "Wysłano Twoje pieniądze do %1$@.";
 "noTransferFromSourceAvailable" = "Brak dostępnych przelewów od źródła";
+"transfer_to_bank_card" = "Karta bankowa";

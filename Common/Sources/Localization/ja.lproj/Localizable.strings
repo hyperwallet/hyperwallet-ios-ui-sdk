@@ -21,39 +21,40 @@
 "remove" = "削除";
 "cancelButtonLabel" = "キャンセル";
 "doneButtonLabel" = "完了";
+"edit" = "編集";
 "try_again_button_label" = "再試行する";
 "search_placeholder_label" = "検索";
 "unexpected_error_message" = "問題が発生したため、もう一度お試しください";
 "network_connection_error_title" = "接続性の問題";
 "unexpected_title" = "予期しないエラー";
 "network_connection_error_message" = "リクエストの処理中に問題が発生しています。接続を確認してください。";
-"endingIn" = "終了期限 ";
-"to" = "送金先 ";
+"endingIn" = "終了期限：";
+"to" = "送金先：";
 "no_country_available_error_message" = "指定可能な国がありません";
 "no_transfer_method_available_error_message" = "%1$@と%2$@に対して利用可能な送金方法がありません";
-"no_currency_available_error_message" = "国%1$@に対して利用可能な通貨がありません";
+"no_currency_available_error_message" = "国に対して利用可能な通貨がありません%1$@";
 "emptyStateAddTransferMethod" = "始めるには、送金方法を追加します。";
 "mobileAddTransferMethodHeader" = "送金方法を追加";
 "mobileCountryCurrencyLabel" = "場所と通貨";
 "mobileTransferMethodLabel" = "送金方法";
 "mobileCountryRegion" = "国・地域";
 "mobileCurrencyLabel" = "通貨";
-"mobileAreYouSure" = "よろしいですか？";
+"mobileAreYouSure" = "この送金方法を削除しますか?";
 "fee_flat_formatter" = "%1$@%2$@手数料";
 "fee_percent_only_min_formatter" = "%1$@%%（最小：%2$@%3$@）手数料";
 "fee_percent_only_max_formatter" = "%1$@%%（最大：%2$@%3$@）手数料";
-"fee_percent_formatter" = "%1$@%%（ 最小：%2$@%3$@、最大：%2$@%4$@）手数料";
+"fee_percent_formatter" = "%1$@%%（最小：%2$@%3$@、最大：%2$@%4$@）手数料";
 "fee_mix_no_min_and_max_formatter" = "%1$@%2$@ + %3$@%%手数料";
 "fee_mix_only_min_formatter" = "%1$@%2$@ + %3$@%%（最小：%1$@%4$@）手数料";
 "fee_mix_only_max_formatter" = "%1$@%2$@ + %3$@%%（最大：%1$@%4$@）手数料";
-"fee_mix_formatter" = "%1$@%2$@ + %3$@%%（ 最小：%1$@%4$@、最大：%1$@%5$@）手数料";
+"fee_mix_formatter" = "%1$@%2$@ + %3$@%%（最小：%1$@%4$@、最大：%1$@%5$@）手数料";
 "fee_percent_no_min_and_max_formatter" = "%1$@%%手数料";
 "transfer_method_not_supported_message" = "この送金方法はサポートされていません。";
 "error" = "エラー";
 "authentication_error_title" = "認証エラー";
 "authentication_error_message" = "認証トークンの取得の試みがエラーになりました";
 
-    // Transfer methods
+// Transfer methods
 "bank_account" = "銀行口座";
 "bank_card" = "デビットカード";
 "paper_check" = "小切手";
@@ -66,14 +67,14 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Manage Prepaid Card Message
+// Manage Prepaid Card Message
 "manage_prepaid_card_message" = "ウェブブラウザでログインしてカードを管理する";
-    //Select Transfer Method View
+//Select Transfer Method View
 "select_a_country_message" = "国を選択";
 
-    // Add Transfer Method
+// Add Transfer Method
 "createTransferMethodButtonLabel" = "送金方法を追加";
-"account_information" = "口座情報：%1$@（%2$@）";
+"account_information" = "口座情報：%1$@(%2$@)";
 "account_holder" = "口座名義人情報";
 "address"="住所";
 "mobileFeesAndProcessingTime" = "手数料と処理時間";
@@ -83,11 +84,11 @@
 
 "date_format" = "YYYY-MM-DD";
 
-    // Processing View
+// Processing View
 "processing_view_label" = "処理中";
 "complete_view_label" = "完了";
 
-    // Receipt
+// Receipt
 "transactions" = "取引";
 "mobileNoTransactions" = "表示するアクティビティはありません。";
 "mobilePrepaidCardNoTransactions" = "過去365日間取引がありません。";
@@ -178,7 +179,7 @@
 "prepaid_card_account_deposit" = "口座預入";
 "prepaid_card_annual_fee_discount" = "年間手数料割引";
 "prepaid_card_bill_reprint_fee" = "請求書再発行手数料";
-"prepaid_card_atm_or_cash_advance_fee" = "ATM／キャッシングサービス手数料";
+"prepaid_card_atm_or_cash_advance_fee" = "ATM/キャッシングサービス手数料";
 "prepaid_card_cash_advance_chargeback" = "キャッシングサービス支払拒否";
 "prepaid_card_cash_advance_chargeback_reversal" = "キャッシングサービス支払拒否の戻入";
 "prepaid_card_cash_advance_repress" = "キャッシングサービスの抑制";
@@ -187,8 +188,8 @@
 "prepaid_card_chargeback_refund" = "支払拒否の払戻";
 "prepaid_card_chargeback_refund_reversal" = "支払拒否の払戻の取消";
 "prepaid_card_chargeback_reversal" = "支払拒否の取消";
-"prepaid_card_commission_or_fee" = "手数料／コミッション";
-"prepaid_card_debit_transfer" = "借方／送金";
+"prepaid_card_commission_or_fee" = "手数料/コミッション";
+"prepaid_card_debit_transfer" = "借方/送金";
 "prepaid_card_document_request_fee" = "文書請求手数料";
 "prepaid_card_emergency_cash" = "緊急用資金";
 "prepaid_card_emergency_card" = "緊急用カード";
@@ -204,7 +205,7 @@
 "prepaid_card_refund_repress_reversal" = "払戻抑制の取消";
 "prepaid_card_sale_repress" = "販売抑制";
 "prepaid_card_statement_fee" = "UTSKGJステートメント手数料";
-"prepaid_card_telephone_support_fee" = "電話による情報：残高、送金など";
+"prepaid_card_telephone_support_fee" = "電話による情報：残高、取引など";
 "prepaid_card_transfer_fee" = "カードロード手数料";
 "prepaid_card_transfer_return" = "プリペイドカードロードの返金";
 "prepaid_card_bank_withdrawal_reversal" = "銀行引出の取消";
@@ -218,7 +219,7 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Receipt Detail
+// Receipt Detail
 "mobileTransactionDetailsHeader" = "取引明細";
 "mobileTransactionTypeLabel" = "取引";
 "mobileTransactionDetailsLabel" = "明細";
@@ -226,7 +227,7 @@
 "mobileConfirmNotesLabel" = "注";
 "mobileCharityName" = "慈善事業名";
 "mobileCheckNumber" = "小切手番号";
-"mobileTransactionIdLabel" = "取引ID ";
+"mobileTransactionIdLabel" = "取引ID";
 "mobilePromoWebsite" = "プロモーションのウェブサイト";
 "mobileTransactionDetailsTotal" = "取引合計";
 "amount" = "金額";
@@ -234,7 +235,7 @@
 "mobileJournalNumberLabel" = "受領ID";
 "date" = "日付";
 
-    // Transfer Funds
+// Transfer Funds
 "mobileTransferFundsHeader" = "送金";
 "mobileConfirmationHeader" = "詳細を確認";
 "mobileTransferFromLabel" = "送金元";
@@ -247,7 +248,8 @@
 "mobileFXsell" = "送金元";
 "mobileFXbuy" = "送金先";
 "mobileFXRateLabel" = "為替レート";
-"mobileAvailableBalance" = "利用可能額は%1$@%2$@ %3$@";
+"mobileAvailableBalance" = "利用可能額は%1$@%2$@%3$@";
+"naAvailableBalance" = "利用可能額：該当なし";
 "continueButtonLabel" = "続行";
 "mobileAddTransferMethod" = "送金方法を追加";
 "mobileTransferMethodsHeader" = "送金方法";
@@ -263,3 +265,4 @@
 "mobileTransferSuccessMsg" = "お客様の送金を処理しています";
 "mobileTransferSuccessDetails" = "資金はお客様の%1$@に送金中です。";
 "noTransferFromSourceAvailable" = "送金元に利用可能な送金がありません";
+"transfer_to_bank_card" = "銀行カード";

@@ -21,12 +21,13 @@
 "remove" = "Odstrániť";
 "cancelButtonLabel" = "Zrušiť";
 "doneButtonLabel" = "Hotovo";
+"edit" = "Upraviť";
 "try_again_button_label" = "Skúsiť znova";
 "search_placeholder_label" = "Vyhľadávanie";
 "unexpected_error_message" = "Niekde sa stala chyba, skúste to znova";
 "network_connection_error_title" = "Problém s pripojením";
 "unexpected_title" = "Neočakávaná chyba";
-"network_connection_error_message" = "Vyskytol sa problém so spracovaním vašej požiadavky. Skontrolujte svoje pripojenie.";
+"network_connection_error_message" = "Vyskytol sa problém so spracovaním požiadavky. Skontrolujte svoje pripojenie.";
 "endingIn" = "končí sa o ";
 "to" = "do ";
 "no_country_available_error_message" = "Nie je k dispozícii žiadna krajina";
@@ -38,22 +39,22 @@
 "mobileTransferMethodLabel" = "SPÔSOB PREVODU";
 "mobileCountryRegion" = "Krajina alebo oblasť";
 "mobileCurrencyLabel" = "Mena";
-"mobileAreYouSure" = "Naozaj?";
+"mobileAreYouSure" = "Chcete tento spôsob prevodu odstrániť?";
 "fee_flat_formatter" = "Poplatok %1$@%2$@";
-"fee_percent_only_min_formatter" = "Poplatok %1$@%% (Min.:%2$@%3$@)";
-"fee_percent_only_max_formatter" = "Poplatok %1$@%% (Max.:%2$@%3$@)";
-"fee_percent_formatter" = "Poplatok %1$@%% (Min.:%2$@%3$@, max.:%2$@%4$@)";
-"fee_mix_no_min_and_max_formatter" = "%1$@%2$@ + poplatok %3$@%%";
-"fee_mix_only_min_formatter" = "%1$@%2$@ + poplatok %3$@%% (Min.:%1$@%4$@)";
-"fee_mix_only_max_formatter" = "%1$@%2$@ + poplatok %3$@%% (Max.:%1$@%4$@)";
-"fee_mix_formatter" = "%1$@%2$@ + poplatok %3$@%% (Min.:%1$@%4$@, max.:%1$@%5$@)";
+"fee_percent_only_min_formatter" = "Poplatok %1$@%% (min.:%2$@%3$@)";
+"fee_percent_only_max_formatter" = "Poplatok %1$@%% (max.:%2$@%3$@)";
+"fee_percent_formatter" = "Poplatok %1$@%% (min.:%2$@%3$@, max.:%2$@%4$@)";
+"fee_mix_no_min_and_max_formatter" = "%1$@%2$@ + poplatok %3$@%% ";
+"fee_mix_only_min_formatter" = "%1$@%2$@ + poplatok  + %3$@%% (min.:%1$@%4$@)";
+"fee_mix_only_max_formatter" = "%1$@%2$@ + poplatok  + %3$@%% (max.:%1$@%4$@)";
+"fee_mix_formatter" = "%1$@%2$@ + poplatok  + %3$@%% (min.:%1$@%4$@, max.:%1$@%5$@)";
 "fee_percent_no_min_and_max_formatter" = "Poplatok %1$@%%";
 "transfer_method_not_supported_message" = "Tento spôsob prevodu nie je podporovaný.";
 "error" = "Chyba";
 "authentication_error_title" = "Chyba overenia";
 "authentication_error_message" = "Pri pokuse o získanie overovacieho kódu sa vyskytla chyba";
 
-    // Transfer methods
+// Transfer methods
 "bank_account" = "Bankový účet";
 "bank_card" = "Debetná karta";
 "paper_check" = "Papierový šek";
@@ -66,12 +67,12 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Manage Prepaid Card Message
+// Manage Prepaid Card Message
 "manage_prepaid_card_message" = "Prihláste sa pomocou webového prehliadača, aby ste mohli spravovať svoju kartu.";
-    //Select Transfer Method View
+//Select Transfer Method View
 "select_a_country_message" = "Vyberte krajinu";
 
-    // Add Transfer Method
+// Add Transfer Method
 "createTransferMethodButtonLabel" = "Pridať spôsob prevodu";
 "account_information" = "INFORMÁCIE O ÚČTE: %1$@(%2$@)";
 "account_holder" = "INFORMÁCIE O DRŽITEĽOVI ÚČTU";
@@ -83,11 +84,11 @@
 
 "date_format" = "RRRR-MM-DD";
 
-    // Processing View
+// Processing View
 "processing_view_label" = "Spracovanie";
 "complete_view_label" = "Dokončiť";
 
-    // Receipt
+// Receipt
 "transactions" = "Transakcie";
 "mobileNoTransactions" = "Na zobrazenie nie je žiadna aktivita.";
 "mobilePrepaidCardNoTransactions" = "Žiadne transakcie za uplynulých 365 dní.";
@@ -218,7 +219,7 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Receipt Detail
+// Receipt Detail
 "mobileTransactionDetailsHeader" = "Podrobnosti o transakcii";
 "mobileTransactionTypeLabel" = "TRANSAKCIA";
 "mobileTransactionDetailsLabel" = "PODROBNOSTI";
@@ -234,9 +235,9 @@
 "mobileJournalNumberLabel" = "ID dokladu";
 "date" = "Dátum";
 
-    // Transfer Funds
+// Transfer Funds
 "mobileTransferFundsHeader" = "Prevod";
-"mobileConfirmationHeader" = "Potvrdenie údajov";
+"mobileConfirmationHeader" = "Potvrdiť podrobnosti";
 "mobileTransferFromLabel" = "PREVOD Z";
 "mobileTransferToLabel" = "PREVOD NA";
 "mobileNoteLabel" = "Poznámka";
@@ -248,6 +249,7 @@
 "mobileFXbuy" = "Do";
 "mobileFXRateLabel" = "Výmenný kurz";
 "mobileAvailableBalance" = "Disponibilná suma %1$@%2$@ %3$@";
+"naAvailableBalance" = "Disponibilná suma: Neuplatňuje sa";
 "continueButtonLabel" = "Pokračovať";
 "mobileAddTransferMethod" = "Pridať spôsob prevodu";
 "mobileTransferMethodsHeader" = "Spôsoby prevodu";
@@ -263,3 +265,4 @@
 "mobileTransferSuccessMsg" = "Váš prevod sa spracováva";
 "mobileTransferSuccessDetails" = "Peniaze sú na ceste na váš účet %1$@.";
 "noTransferFromSourceAvailable" = "Žiadny prevod z dostupného zdroja";
+"transfer_to_bank_card" = "Banková karta";

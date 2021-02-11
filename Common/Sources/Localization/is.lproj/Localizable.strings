@@ -21,6 +21,7 @@
 "remove" = "Fjarlægja";
 "cancelButtonLabel" = "Hætta við";
 "doneButtonLabel" = "Búið";
+"edit" = "Breyta";
 "try_again_button_label" = "Reyndu aftur";
 "search_placeholder_label" = "Leita";
 "unexpected_error_message" = "Eitthvað fór úrskeiðis, vinsamlegast reyndu aftur";
@@ -38,7 +39,7 @@
 "mobileTransferMethodLabel" = "MILLIFÆRSLUAÐFERÐ";
 "mobileCountryRegion" = "Land/svæði";
 "mobileCurrencyLabel" = "Gjaldmiðill";
-"mobileAreYouSure" = "Ertu viss?";
+"mobileAreYouSure" = "Fjarlægja þessa millifærsluaðferð?";
 "fee_flat_formatter" = "%1$@%2$@ gjald";
 "fee_percent_only_min_formatter" = "%1$@%% (Lágmark:%2$@%3$@) gjald";
 "fee_percent_only_max_formatter" = "%1$@%% (Hámark:%2$@%3$@) gjald";
@@ -53,7 +54,7 @@
 "authentication_error_title" = "Sannvottunarvilla";
 "authentication_error_message" = "Tilraun til að sækja sannvottunartóka leiddi til villu";
 
-    // Transfer methods
+// Transfer methods
 "bank_account" = "Bankareikningur";
 "bank_card" = "Debetkort";
 "paper_check" = "Pappírsávísun";
@@ -66,12 +67,12 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Manage Prepaid Card Message
+// Manage Prepaid Card Message
 "manage_prepaid_card_message" = "Skráðu þig inn með netvafra til að stilla kortið þitt";
-    //Select Transfer Method View
+//Select Transfer Method View
 "select_a_country_message" = "Veldu land";
 
-    // Add Transfer Method
+// Add Transfer Method
 "createTransferMethodButtonLabel" = "Bæta við millifærsluaðferð";
 "account_information" = "REIKNINGSUPPLÝSINGAR: %1$@(%2$@)";
 "account_holder" = "UPPLÝSINGAR UM REIKNINGSEIGANDA";
@@ -83,11 +84,11 @@
 
 "date_format" = "ÁÁÁÁ-MM-DD";
 
-    // Processing View
+// Processing View
 "processing_view_label" = "Í vinnslu";
 "complete_view_label" = "Lokið";
 
-    // Receipt
+// Receipt
 "transactions" = "Færslur";
 "mobileNoTransactions" = "Engar hreyfingar til að sýna.";
 "mobilePrepaidCardNoTransactions" = "Engar færslur síðustu 365 daga.";
@@ -117,7 +118,7 @@
 "generic_fee_refund" = "Almenn endurgreiðsla gjalds";
 "manual_adjustment" = "Leiðrétting";
 "manual_transfer_to_prepaid_card" = "Millifæra á kort";
-"merchant_payment_fee" = "Gjald vegna greiðslu til söluaðila";
+"merchant_payment_fee" = "Greiðslugjald til söluaðila";
 "merchant_payment_refund" = "Endurgreiðsla á greiðslu til söluaðila";
 "merchant_payment_return" = "Skil á greiðslu til söluaðila";
 "merchant_payment" = "Greiðsla til söluaðila";
@@ -218,7 +219,7 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Receipt Detail
+// Receipt Detail
 "mobileTransactionDetailsHeader" = "Upplýsingar um færslu";
 "mobileTransactionTypeLabel" = "FÆRSLA";
 "mobileTransactionDetailsLabel" = "UPPLÝSINGAR";
@@ -234,9 +235,9 @@
 "mobileJournalNumberLabel" = "Auðkenni móttakanda";
 "date" = "Dagsetning";
 
-    // Transfer Funds
+// Transfer Funds
 "mobileTransferFundsHeader" = "Millifæra";
-"mobileConfirmationHeader" = "Staðfesta upplýsingar";
+"mobileConfirmationHeader" = "Staðfestu upplýsingar";
 "mobileTransferFromLabel" = "MILLIFÆRA FRÁ";
 "mobileTransferToLabel" = "MILLIFÆRA TIL";
 "mobileNoteLabel" = "Skýring";
@@ -248,6 +249,7 @@
 "mobileFXbuy" = "Til";
 "mobileFXRateLabel" = "Gengi";
 "mobileAvailableBalance" = "Tiltæk fjárhæð %1$@%2$@ %3$@";
+"naAvailableBalance" = "Tiltæk fjárhæð: Á ekki við";
 "continueButtonLabel" = "Halda áfram";
 "mobileAddTransferMethod" = "Bæta við millifærsluaðferð";
 "mobileTransferMethodsHeader" = "Millifærsluaðferðir";
@@ -261,5 +263,6 @@
 "transfer_error_no_transfer_method_module_initialized" = "Þú getur ekki bætt við millifærsluaðferð.";
 "transfer_fx_rate_changed" = "Vegna gengisbreytinga munt þú nú fá: %1$@";
 "mobileTransferSuccessMsg" = "Millifærslan þín er í vinnslu";
-"mobileTransferSuccessDetails" = "Fjármunir eru á leiðinni inn á %1$@ þinn.";
+"mobileTransferSuccessDetails" = "Fjármunir eru á leiðinni inn á  þinn.%1$@.";
 "noTransferFromSourceAvailable" = "Millifærsla frá uppruna ekki í boði";
+"transfer_to_bank_card" = "Bankakort";

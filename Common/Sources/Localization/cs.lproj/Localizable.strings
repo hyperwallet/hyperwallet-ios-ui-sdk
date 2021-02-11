@@ -21,39 +21,40 @@
 "remove" = "Odebrat";
 "cancelButtonLabel" = "Zrušit";
 "doneButtonLabel" = "Hotovo";
+"edit" = "Upravit";
 "try_again_button_label" = "Zkusit znovu";
 "search_placeholder_label" = "Vyhledat";
 "unexpected_error_message" = "Něco se pokazilo, zkuste to prosím znovu";
 "network_connection_error_title" = "Problém s připojením";
-"unexpected_title" = "Neočkávaná chyba";
+"unexpected_title" = "Neočekávaná chyba";
 "network_connection_error_message" = "Máme problém se zpracováním požadavku. Zkontrolujte prosím své připojení.";
 "endingIn" = "končí v ";
 "to" = "pro ";
 "no_country_available_error_message" = "Není k dispozici žádá země";
 "no_transfer_method_available_error_message" = "Pro %1$@ a %2$@ není k dispozici žádný způsob převodu";
-"no_currency_available_error_message" = "Pro zemi %1$@ není k dispozici žádná měna";
+"no_currency_available_error_message" = "Pro zemi  není k dispozici žádná měna%1$@";
 "emptyStateAddTransferMethod" = "Chcete-li začít, přidejte způsob převodu.";
-"mobileAddTransferMethodHeader" = "Přidejte způsob převodu";
+"mobileAddTransferMethodHeader" = "Přidat způsob převodu";
 "mobileCountryCurrencyLabel" = "MÍSTO A MĚNA";
 "mobileTransferMethodLabel" = "ZPŮSOB PŘEVODU";
 "mobileCountryRegion" = "Země / oblast";
 "mobileCurrencyLabel" = "Měna";
-"mobileAreYouSure" = "Jste si jistí?";
-"fee_flat_formatter" = "Poplatek %1$@%2$@ ";
-"fee_percent_only_min_formatter" = "Poplatek %1$@%% (min.:%2$@%3$@)";
-"fee_percent_only_max_formatter" = "Poplatek %1$@%% (max.:%2$@%3$@)";
-"fee_percent_formatter" = "Poplatek %1$@%% (min.:%2$@%3$@, max.:%2$@%4$@)";
-"fee_mix_no_min_and_max_formatter" = "Poplatek %1$@%2$@ + %3$@%%";
-"fee_mix_only_min_formatter" = "Poplatek %1$@%2$@ + %3$@%% (min.:%1$@%4$@)";
-"fee_mix_only_max_formatter" = "Poplatek %1$@%2$@ + %3$@%% (max.:%1$@%4$@)";
-"fee_mix_formatter" = "Poplatek %1$@%2$@ + %3$@%% (min.:%1$@%4$@, max.:%1$@%5$@)";
-"fee_percent_no_min_and_max_formatter" = "Poplatek %1$@%%";
+"mobileAreYouSure" = "Odebrat tento způsob převodu?";
+"fee_flat_formatter" = "Poplatek %1$@%2$@";
+"fee_percent_only_min_formatter" = "Poplatek %1$@%% (min.:%2$@%3$@";
+"fee_percent_only_max_formatter" = "Poplatek %1$@%% (max.:%2$@%3$@";
+"fee_percent_formatter" = "Poplatek %1$@%% (min.:%2$@%3$@, max.:%2$@%4$@";
+"fee_mix_no_min_and_max_formatter" = "%1$@%2$@ + %3$@%%Poplatek  ";
+"fee_mix_only_min_formatter" = "Poplatek %1$@%2$@ +  + %3$@%% (min.:%1$@%4$@";
+"fee_mix_only_max_formatter" = "Poplatek %1$@%2$@ +  + %3$@%% (max.:%1$@%4$@";
+"fee_mix_formatter" = "Poplatek %1$@%2$@ +  + %3$@%% (min.:%1$@%4$@, max.:%1$@%5$@";
+"fee_percent_no_min_and_max_formatter" = "%1$@%% poplatek";
 "transfer_method_not_supported_message" = "Tento způsob převodu není podporován.";
 "error" = "Chyba";
 "authentication_error_title" = "Chyba ověření";
-"authentication_error_message" = "Pokus o načtení ověřovacího tokenu způsobil chybu";
+"authentication_error_message" = "Pokus o načtení ověřovacího tokenu způsobil chybu";
 
-    // Transfer methods
+// Transfer methods
 "bank_account" = "Bankovní účet";
 "bank_card" = "Debetní Karta";
 "paper_check" = "Papírový šek";
@@ -66,12 +67,12 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Manage Prepaid Card Message
+// Manage Prepaid Card Message
 "manage_prepaid_card_message" = "Chcete-li spravovat svou kartu, přihlaste se pomocí webového prohlížeče";
-    //Select Transfer Method View
+//Select Transfer Method View
 "select_a_country_message" = "Vyberte zemi";
 
-    // Add Transfer Method
+// Add Transfer Method
 "createTransferMethodButtonLabel" = "Přidejte Způsob Převodu";
 "account_information" = "INFORMACE O ÚČTU: %1$@(%2$@)";
 "account_holder" = "INFORMACE O DRŽITELI ÚČTU";
@@ -83,11 +84,11 @@
 
 "date_format" = "RRRR-MM-DD";
 
-    // Processing View
+// Processing View
 "processing_view_label" = "Zpracovává se";
 "complete_view_label" = "Dokončit";
 
-    // Receipt
+// Receipt
 "transactions" = "Transakce";
 "mobileNoTransactions" = "Žádná aktivita k zobrazení.";
 "mobilePrepaidCardNoTransactions" = "Žádné transakce za posledních 365 dnů.";
@@ -137,7 +138,7 @@
 "prepaid_card_balance_inquiry_fee" = "Poplatek za dotaz na zůstatek";
 "prepaid_card_cash_advance" = "Záloha v hotovosti";
 "prepaid_card_dispute_deposit" = "Sporný vklad na kartu";
-"prepaid_card_disputed_charge_refund" = "Refundace sportného poplatku";
+"prepaid_card_disputed_charge_refund" = "Refundace sporného poplatku";
 "prepaid_card_domestic_cash_withdrawal_fee" = "Výběr z bankomatu";
 "prepaid_card_exchange_rate_difference" = "Rozdíl směnného kurzu";
 "prepaid_card_manual_unload" = "Převod z karty";
@@ -183,7 +184,7 @@
 "prepaid_card_cash_advance_chargeback_reversal" = "Zrušení zpětného zúčtování zálohy v hotovosti";
 "prepaid_card_cash_advance_repress" = "Odmítnutí zálohy v hotovosti";
 "prepaid_card_cash_advance_repress_reversal" = "Zrušení odmítnutí zálohy";
-"prepaid_card_chargeback" = "Zpětné zúčování";
+"prepaid_card_chargeback" = "Zpětné zúčtování";
 "prepaid_card_chargeback_refund" = "Refundace zpětného zúčtování";
 "prepaid_card_chargeback_refund_reversal" = "Zrušení refundace zpětného zúčtování";
 "prepaid_card_chargeback_reversal" = "Zrušení zpětného zúčtování";
@@ -218,7 +219,7 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Receipt Detail
+// Receipt Detail
 "mobileTransactionDetailsHeader" = "Detaily transakce";
 "mobileTransactionTypeLabel" = "TRANSAKCE";
 "mobileTransactionDetailsLabel" = "DETAILY";
@@ -234,9 +235,9 @@
 "mobileJournalNumberLabel" = "ID příjmu";
 "date" = "Datum";
 
-    // Transfer Funds
+// Transfer Funds
 "mobileTransferFundsHeader" = "Převod";
-"mobileConfirmationHeader" = "Potvrďte podrobné údaje";
+"mobileConfirmationHeader" = "Potvrdit údaje";
 "mobileTransferFromLabel" = "PŘEVOD OD";
 "mobileTransferToLabel" = "PŘEVOD PRO";
 "mobileNoteLabel" = "Poznámka";
@@ -248,6 +249,7 @@
 "mobileFXbuy" = "Komu";
 "mobileFXRateLabel" = "Směnný kurz";
 "mobileAvailableBalance" = "Dostupná částka %1$@%2$@ %3$@";
+"naAvailableBalance" = "Dostupná částka: není k dispozici";
 "continueButtonLabel" = "Pokračovat";
 "mobileAddTransferMethod" = "Přidat způsob převodu";
 "mobileTransferMethodsHeader" = "Způsoby převodu";
@@ -263,3 +265,4 @@
 "mobileTransferSuccessMsg" = "Váš převod se zpracovává";
 "mobileTransferSuccessDetails" = "Peníze jsou na cestě na váš %1$@.";
 "noTransferFromSourceAvailable" = "Od zdroje není k dispozici žádný převod";
+"transfer_to_bank_card" = "Bankovní karta";
