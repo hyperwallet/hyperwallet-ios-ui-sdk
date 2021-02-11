@@ -105,6 +105,8 @@ public class Theme: NSObject {
         /// The common `UITableViewCell` height.
         public static let smallHeight = CGFloat(61)
         /// The common `UITableViewCell` height.
+        public static let mediumHeight = CGFloat(70)
+        /// The common `UITableViewCell` height.
         public static let height = CGFloat(80)
         /// The `UITableViewCell` height for the List transfer method items and
         /// the Select transfer method type items.
