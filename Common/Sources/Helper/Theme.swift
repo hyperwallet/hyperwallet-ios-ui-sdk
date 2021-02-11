@@ -38,7 +38,7 @@ public class Theme: NSObject {
         /// The color to highlight errors
         public static var errorColor = UIColor(rgb: 0xFF3B30)
         /// The subtitle color
-        public static var subtitleColor = UIColor(rgb: 0x3c3c43, alpha: 0.6)
+        public static var subtitleColor = UIColor(rgb: 0x757575, alpha: 0.6)
         /// The text color
         public static var textColor = UIColor(rgb: 0x8e8e93)
         /// The title font style
@@ -116,7 +116,7 @@ public class Theme: NSObject {
         /// The `UITableViewCell` tint color
         public static var tintColor = Theme.tintColor
         /// The `UITableViewCell` separator color
-        public static var separatorColor = UIColor(rgb: 0x3c3c43, alpha: 0.29)
+        public static var separatorColor = UIColor(rgb: 0x757575, alpha: 0.29)
         /// The `UITableViewCell` disabled background color
         public static var disabledBackgroundColor = UIColor(rgb: 0xf8f8f8)
     }
