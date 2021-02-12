@@ -48,7 +48,7 @@
 "fee_mix_only_min_formatter" = "Biaya %1$@%2$@ + %3$@%% (Min:%1$@%4$@)";
 "fee_mix_only_max_formatter" = "Biaya %1$@%2$@ + %3$@%% (Maks:%1$@%4$@)";
 "fee_mix_formatter" = "Biaya %1$@%2$@ + %3$@%% (Min:%1$@%4$@, Maks:%1$@%5$@)";
-"fee_percent_no_min_and_max_formatter" = "Biaya %1$@%% ";
+"fee_percent_no_min_and_max_formatter" = "Biaya %1$@%%";
 "transfer_method_not_supported_message" = "Metode transfer ini tidak didukung.";
 "error" = "Kesalahan";
 "authentication_error_title" = "Kesalahan Autentikasi";

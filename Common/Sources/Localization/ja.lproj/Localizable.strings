@@ -248,7 +248,7 @@
 "mobileFXsell" = "送金元";
 "mobileFXbuy" = "送金先";
 "mobileFXRateLabel" = "為替レート";
-"mobileAvailableBalance" = "利用可能額は%1$@%2$@%3$@";
+"mobileAvailableBalance" = "利用可能額は%1$@%2$@%3$@)";
 "naAvailableBalance" = "利用可能額：該当なし";
 "continueButtonLabel" = "続行";
 "mobileAddTransferMethod" = "送金方法を追加";
