@@ -21,24 +21,25 @@
 "remove" = "Eltávolítás";
 "cancelButtonLabel" = "Mégse";
 "doneButtonLabel" = "Kész";
+"edit" = "Szerkesztés";
 "try_again_button_label" = "Újra";
 "search_placeholder_label" = "Keresése";
 "unexpected_error_message" = "Valami hiba történt. Kérjük, próbálja újra";
 "network_connection_error_title" = "Kapcsolódási hiba";
 "unexpected_title" = "Váratlan hiba";
-"network_connection_error_message" = "Problémába ütköztünk a kérelem feldolgozása során. Kérjük, ellenőrizze a kapcsolatot.";
-"endingIn" = "a következő számra végződő kártya: ";
-"to" = "címzett:  ";
+"network_connection_error_message" = "Problémába ütköztünk a kérelem feldolgozása során.Kérjük, ellenőrizze a kapcsolatot.";
+"endingIn" = "a következő számra végződő kártya:";
+"to" = "címzett: ";
 "no_country_available_error_message" = "Nincs elérhető ország";
-"no_transfer_method_available_error_message" = "Nincs elérhető átutalási mód a következőkre: %1$@ és %2$@";
-"no_currency_available_error_message" = "Nincs elérhető pénznem a következő országra: %1$@";
+"no_transfer_method_available_error_message" = "Nincs elérhető átutalási mód a következőkhöz: %1$@ és %2$@";
+"no_currency_available_error_message" = "Nincs elérhető pénznem a következő országhoz: %1$@";
 "emptyStateAddTransferMethod" = "A kezdéshez adjon hozzá egy átutalási módot";
-"mobileAddTransferMethodHeader" = "Adjon hozzá egy átutalási módot";
+"mobileAddTransferMethodHeader" = "Átutalási mód hozzáadása";
 "mobileCountryCurrencyLabel" = "HELYSZÍN ÉS PÉNZNEM";
 "mobileTransferMethodLabel" = "ÁTUTALÁSI MÓD";
 "mobileCountryRegion" = "Ország/régió";
 "mobileCurrencyLabel" = "Pénznem";
-"mobileAreYouSure" = "Biztos benne?";
+"mobileAreYouSure" = "Eltávolítja ezt az átutalási módot?";
 "fee_flat_formatter" = "%1$@%2$@ díj";
 "fee_percent_only_min_formatter" = "%1$@%% (Min.:%2$@%3$@) díj";
 "fee_percent_only_max_formatter" = "%1$@%% (Max.:%2$@%3$@) díj";
@@ -53,10 +54,10 @@
 "authentication_error_title" = "Hitelesítési hiba";
 "authentication_error_message" = "A hitelesítési token lehívási kísérlete hibát eredményezett";
 
-    // Transfer methods
+// Transfer methods
 "bank_account" = "Bankszámla";
 "bank_card" = "Betéti kártya";
-"paper_check" = "Papír alapú csekk";
+"paper_check" = "Papíralapú csekk";
 "prepaid_card" = "Előre fizetett kártya";
 "wire_account" = "Átutalási számla";
 "paypal_account" = "Paypal-számla";
@@ -66,12 +67,12 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Manage Prepaid Card Message
+// Manage Prepaid Card Message
 "manage_prepaid_card_message" = "A kártyája kezeléséhez webböngészőből jelentkezzen be";
-    //Select Transfer Method View
+//Select Transfer Method View
 "select_a_country_message" = "Válasszon egy országot";
 
-    // Add Transfer Method
+// Add Transfer Method
 "createTransferMethodButtonLabel" = "Adjon hozzá egy átutalási módot";
 "account_information" = "SZÁMLAADATOK: %1$@(%2$@)";
 "account_holder" = "SZÁMLATULAJDONOSI ADATOK";
@@ -83,11 +84,11 @@
 
 "date_format" = "ÉÉÉÉ-HH-DD";
 
-    // Processing View
+// Processing View
 "processing_view_label" = "Feldolgozás alatt";
 "complete_view_label" = "Teljesítve";
 
-    // Receipt
+// Receipt
 "transactions" = "Tranzakciók";
 "mobileNoTransactions" = "Nincs megjeleníthető tevékenység.";
 "mobilePrepaidCardNoTransactions" = "Nincs tranzakció az elmúlt 365 napban.";
@@ -104,7 +105,7 @@
 "card_activation_fee_waiver" = "Kártyaaktivációs díjelengedés";
 "card_activation_fee" = "Kártyaaktivációs díj";
 "card_fee" = "Kártyadíj";
-"customer_service_fee_refund" = "Ügyfélszolgálati djjvisszatérítés";
+"customer_service_fee_refund" = "Ügyfélszolgálati díjvisszatérítés";
 "customer_service_fee" = "Ügyfélszolgálati díj";
 "deposit" = "Fizetés";
 "donation_fee" = "Adománydíj";
@@ -124,8 +125,8 @@
 "moneygram_transfer_return" = "MoneyGram-visszatérítés";
 "monthly_fee_refund" = "MoneyGram-díjvisszatérítés";
 "monthly_fee" = "Havi díj";
-"paper_check_fee" = "Papír alapú csekk díja";
-"paper_check_refund" = "Papír alapú csekk visszatérítése";
+"paper_check_fee" = "Papíralapú csekk díj";
+"paper_check_refund" = "Papíralapú csekk visszatérítés";
 "payment_cancellation" = "Fizetés törlése";
 "payment_expiration" = "Lejárt fizetés";
 "payment_expiry_fee" = "Lejárt fizetés díja";
@@ -154,7 +155,7 @@
 "transfer_to_bank_account" = "Bankszámla";
 "transfer_to_debit_card" = "Betéti kártya";
 "transfer_to_moneygram" = "MoneyGram";
-"transfer_to_paper_check" = "Papír alapú csekk";
+"transfer_to_paper_check" = "Papíralapú csekk";
 "transfer_to_paypal_account" = "PayPal";
 "transfer_to_prepaid_card" = "Átutalás kártyára";
 "transfer_to_program_account" = "Átutalás programba";
@@ -218,7 +219,7 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Receipt Detail
+// Receipt Detail
 "mobileTransactionDetailsHeader" = "Tranzakció részletei";
 "mobileTransactionTypeLabel" = "TRANZAKCIÓ";
 "mobileTransactionDetailsLabel" = "ADATOK";
@@ -234,7 +235,7 @@
 "mobileJournalNumberLabel" = "Bizonylatazonosító";
 "date" = "Dátum";
 
-    // Transfer Funds
+// Transfer Funds
 "mobileTransferFundsHeader" = "Átutalás";
 "mobileConfirmationHeader" = "Adatok megerősítése";
 "mobileTransferFromLabel" = "ÁTUTALÁS FELADÓJA";
@@ -248,6 +249,7 @@
 "mobileFXbuy" = "Címzett";
 "mobileFXRateLabel" = "Árfolyam";
 "mobileAvailableBalance" = "Elérhető összeg: %1$@%2$@ %3$@";
+"naAvailableBalance" = "Elérhető összeg:  nincs adat";
 "continueButtonLabel" = "Tovább";
 "mobileAddTransferMethod" = "Átutalási mód hozzáadása";
 "mobileTransferMethodsHeader" = "Átutalási módok";
@@ -257,9 +259,10 @@
 "mobileSummaryLabel" = "ÖSSZEGZÉS";
 "transfer" = "Átutalás";
 "transferAmountInvalid" = "Adjon meg egy érvényes átutalási összeget";
-"noTransferMethodAdded" = "Átutalási mód megadása kötelező";
+"noTransferMethodAdded" = "Az átutalási mód megadása kötelező";
 "transfer_error_no_transfer_method_module_initialized" = "Önnek nem áll módjában átutalási módot hozzáadni.";
-"transfer_fx_rate_changed" = "Árfolyamváltozás miatt a következő összeget fogja kapni: %1$@.";
+"transfer_fx_rate_changed" = "Árfolyamváltozás miatt a következő összeget fogja kapni: %1$@";
 "mobileTransferSuccessMsg" = "Átutalása feldolgozás alatt áll";
-"mobileTransferSuccessDetails" = "Pénzösszege úton van a következőre: %1$@.";
+"mobileTransferSuccessDetails" = "Pénzösszege úton van a következőhöz: %1$@.";
 "noTransferFromSourceAvailable" = "Nincs elérhető átutalási forrás";
+"transfer_to_bank_card" = "Bankkártya";

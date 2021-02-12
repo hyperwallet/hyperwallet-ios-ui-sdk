@@ -21,6 +21,7 @@
 "remove" = "Alih keluar";
 "cancelButtonLabel" = "Batal";
 "doneButtonLabel" = "Selesai";
+"edit" = "Edit";
 "try_again_button_label" = "Cuba Lagi";
 "search_placeholder_label" = "Cari/carian";
 "unexpected_error_message" = "Ada yang tidak kena, sila cuba lagi";
@@ -33,12 +34,12 @@
 "no_transfer_method_available_error_message" = "Tiada kaedah pemindahan yang tersedia untuk %1$@ dan %2$@";
 "no_currency_available_error_message" = "Tiada mata wang yang tersedia untuk negara %1$@";
 "emptyStateAddTransferMethod" = "Tambah kaedah pemindahan untuk memulakan.";
-"mobileAddTransferMethodHeader" = "Tambah kaedah pemindahan";
+"mobileAddTransferMethodHeader" = "Tambah kedah pemindahan";
 "mobileCountryCurrencyLabel" = "LOKASI DAN MATA WANG";
 "mobileTransferMethodLabel" = "KAEDAH PEMINDAHAN";
 "mobileCountryRegion" = "Negara/Wilayah";
 "mobileCurrencyLabel" = "Mata wang";
-"mobileAreYouSure" = "Adakah anda pasti?";
+"mobileAreYouSure" = "Alih keluar kaedah pemindahan ini?";
 "fee_flat_formatter" = "%1$@%2$@ yuran";
 "fee_percent_only_min_formatter" = "%1$@%% (Min:%2$@%3$@) yuran";
 "fee_percent_only_max_formatter" = "%1$@%% (Maks:%2$@%3$@) yuran";
@@ -48,12 +49,12 @@
 "fee_mix_only_max_formatter" = "%1$@%2$@ + %3$@%% (Maks:%1$@%4$@) yuran";
 "fee_mix_formatter" = "%1$@%2$@ + %3$@%% (Min:%1$@%4$@, Maks:%1$@%5$@) yuran";
 "fee_percent_no_min_and_max_formatter" = "%1$@%% yuran";
-"transfer_method_not_supported_message" = "Kaedah pemindahan ini tidak disokong.";
+"transfer_method_not_supported_message" = "Kaedah perpindahan ini tidak disokong.";
 "error" = "Ralat";
 "authentication_error_title" = "Ralat Pengesahan";
 "authentication_error_message" = "Percubaan perolehan semula token pengesahan mengakibatkan ralat";
 
-    // Transfer methods
+// Transfer methods
 "bank_account" = "Akaun Bank";
 "bank_card" = "Kad Debit";
 "paper_check" = "Cek Kertas";
@@ -66,12 +67,12 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Manage Prepaid Card Message
+// Manage Prepaid Card Message
 "manage_prepaid_card_message" = "Log masuk menggunakan penyemak imbas web untuk menguruskan kad anda";
-    //Select Transfer Method View
+//Select Transfer Method View
 "select_a_country_message" = "Pilih negara";
 
-    // Add Transfer Method
+// Add Transfer Method
 "createTransferMethodButtonLabel" = "Tambah Kedah Pemindahan";
 "account_information" = "MAKLUMAT AKAUN: %1$@(%2$@)";
 "account_holder" = "MAKLUMAT PEMEGANG AKAUN";
@@ -83,11 +84,11 @@
 
 "date_format" = "TTTT-BB-HH";
 
-    // Processing View
+// Processing View
 "processing_view_label" = "Memproses";
 "complete_view_label" = "Lengkap";
 
-    // Receipt
+// Receipt
 "transactions" = "Transaksi";
 "mobileNoTransactions" = "Tidak ada aktiviti untuk dipaparkan.";
 "mobilePrepaidCardNoTransactions" = "Tiada transaksi dalam tempoh 365 hari yang lalu.";
@@ -114,8 +115,8 @@
 "dormant_user_fee" = "Yuran Akaun Pengguna Dorman";
 "expedited_shipping_fee" = "Yuran Penghantaran yang Dipercepat";
 "foreign_exchange" = "Pertukaran Wang Asing";
-"generic_fee_refund" = "Pembayaran Balik Yuran Generik";
-"manual_adjustment" = "Pelarasan";
+"generic_fee_refund" = "Bayaran Balik Yuran Generik";
+"manual_adjustment" = "Penyesuaian";
 "manual_transfer_to_prepaid_card" = "Pindahkan ke Kad";
 "merchant_payment_fee" = "Yuran Pembayaran Pedagang";
 "merchant_payment_refund" = "Pembayaran Balik Yuran Pedagang";
@@ -157,11 +158,11 @@
 "transfer_to_paper_check" = "Cek Kertas";
 "transfer_to_paypal_account" = "PayPal";
 "transfer_to_prepaid_card" = "Pindahkan ke Kad";
-"transfer_to_program_account" = "Pindahkan ke Program";
-"transfer_to_user" = "Pindahkan kepada Pengguna";
+"transfer_to_program_account" = "Pindah ke Program";
+"transfer_to_user" = "Pindah ke Pengguna";
 "transfer_to_western_union" = "Western Union";
-"transfer_to_wire" = "Pindahan Kawat";
-"transfer_to_wubs_wire" = "Pindahan Kawat";
+"transfer_to_wire" = "Pemindahan Kawat";
+"transfer_to_wubs_wire" = "Pemindahan Kawat";
 "transfer_to_venmo_account" = "Venmo";
 "transfer_to_bank_card" = "Kad Bank";
 "virtual_incentive_cancellation" = "Pembatalan Promo";
@@ -169,7 +170,7 @@
 "virtual_incentive_purchase" = "Pembelian Promo";
 "virtual_incentive_refund" = "Pembayaran Balik Promo";
 "western_union_transfer_return" = "Pengeluaran Western Union";
-"wire_transfer_fee" = "Yuran Pindahan Kawat";
+"wire_transfer_fee" = "Yuran Pemindahan Kawat";
 "wire_transfer_return" = "Pemulangan Pindahan Kawat";
 "wubs_wire_transfer_return" = "Pemulangan Pindahan Kawat";
 "unknown_receipt_type" = "Jenis Transaksi yang Tidak Diketahui";
@@ -186,7 +187,7 @@
 "prepaid_card_chargeback" = "Caj balik";
 "prepaid_card_chargeback_refund" = "Pembayaran Balik Caj Balik";
 "prepaid_card_chargeback_refund_reversal" = "Pembalikan Pembayaran Balik Caj Balik";
-"prepaid_card_chargeback_reversal" = "Pengembalian Caj Balik";
+"prepaid_card_chargeback_reversal" = "Pembalikan Caj Balik";
 "prepaid_card_commission_or_fee" = "Yuran/Komisen";
 "prepaid_card_debit_transfer" = "Debit/Pemindahan";
 "prepaid_card_document_request_fee" = "Yuran Permintaan Dokumen";
@@ -218,7 +219,7 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Receipt Detail
+// Receipt Detail
 "mobileTransactionDetailsHeader" = "Butiran transaksi";
 "mobileTransactionTypeLabel" = "TRANSAKSI";
 "mobileTransactionDetailsLabel" = "BUTIRAN";
@@ -228,13 +229,13 @@
 "mobileCheckNumber" = "Nombor Cek";
 "mobileTransactionIdLabel" = "ID Transaksi";
 "mobilePromoWebsite" = "Laman Web Promo";
-"mobileTransactionDetailsTotal" = "Jumlah Transaksi";
+"mobileTransactionDetailsTotal" = "Jumlah transaksi";
 "amount" = "Jumlah";
 "mobileFeeLabel" = "Yuran";
 "mobileJournalNumberLabel" = "ID Resit";
 "date" = "Tarikh";
 
-    // Transfer Funds
+// Transfer Funds
 "mobileTransferFundsHeader" = "Pindah";
 "mobileConfirmationHeader" = "Mengesahkan butiran";
 "mobileTransferFromLabel" = "PINDAH DARIPADA";
@@ -248,6 +249,7 @@
 "mobileFXbuy" = "Kepada";
 "mobileFXRateLabel" = "Kadar pertukaran";
 "mobileAvailableBalance" = "Jumlah yang tersedia %1$@%2$@ %3$@";
+"naAvailableBalance" = "Jumlah yang tersedia:   N/A";
 "continueButtonLabel" = "Teruskan";
 "mobileAddTransferMethod" = "Tambah kedah pemindahan";
 "mobileTransferMethodsHeader" = "Kaedah pemindahan";
@@ -261,5 +263,6 @@
 "transfer_error_no_transfer_method_module_initialized" = "Anda tidak boleh menambah kaedah pemindahan.";
 "transfer_fx_rate_changed" = "Disebabkan oleh perubahan dalam kadar pertukaran, anda akan menerima: %1$@";
 "mobileTransferSuccessMsg" = "Pemindahan anda sedang diproses";
-"mobileTransferSuccessDetails" = "Wang tersebut sedang dalam perjalanan ke %1$@ anda.";
+"mobileTransferSuccessDetails" = "Wang tersebut sedang dalam perjalanan ke anda %1$@.";
 "noTransferFromSourceAvailable" = "Tiada Pemindahan daripada sumber yang tersedia";
+"transfer_to_bank_card" = "Kad Bank";

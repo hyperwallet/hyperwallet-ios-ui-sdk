@@ -21,6 +21,7 @@
 "remove" = "Xóa";
 "cancelButtonLabel" = "Huỷ bỏ";
 "doneButtonLabel" = "Hoàn tất";
+"edit" = "Chỉnh sửa";
 "try_again_button_label" = "Thử lại";
 "search_placeholder_label" = "Tìm kiếm";
 "unexpected_error_message" = "Đã xảy ra lỗi, vui lòng thử lại";
@@ -38,7 +39,7 @@
 "mobileTransferMethodLabel" = "PHƯƠNG THỨC CHUYỂN TIỀN";
 "mobileCountryRegion" = "Quốc gia/khu vực";
 "mobileCurrencyLabel" = "Đơn vị tiền tệ";
-"mobileAreYouSure" = "Bạn có chắc không?";
+"mobileAreYouSure" = "Xóa phương thức chuyển tiền này?";
 "fee_flat_formatter" = "%1$@%2$@ phí";
 "fee_percent_only_min_formatter" = "%1$@%% (Tối thiểu:%2$@%3$@) phí";
 "fee_percent_only_max_formatter" = "%1$@%% (Tối đa:%2$@%3$@) phí";
@@ -53,7 +54,7 @@
 "authentication_error_title" = "Lỗi xác thực";
 "authentication_error_message" = "Truy xuất và xác thực bằng chuỗi mã hóa có lỗi";
 
-    // Transfer methods
+// Transfer methods
 "bank_account" = "Tài khoản ngân hàng";
 "bank_card" = "Thẻ ghi nợ";
 "paper_check" = "Séc giấy";
@@ -66,12 +67,12 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Manage Prepaid Card Message
+// Manage Prepaid Card Message
 "manage_prepaid_card_message" = "Đăng nhập bằng trình duyệt web để quản lý thẻ của bạn";
-    //Select Transfer Method View
+//Select Transfer Method View
 "select_a_country_message" = "Chọn một quốc gia";
 
-    // Add Transfer Method
+// Add Transfer Method
 "createTransferMethodButtonLabel" = "Thêm phương thức chuyển tiền";
 "account_information" = "THÔNG TIN TÀI KHOẢN: %1$@(%2$@)";
 "account_holder" = "THÔNG TIN CHỦ TÀI KHOẢN";
@@ -83,11 +84,11 @@
 
 "date_format" = "NGÀY-THÁNG-NĂM";
 
-    // Processing View
+// Processing View
 "processing_view_label" = "Xử lý";
 "complete_view_label" = "Hoàn thành";
 
-    // Receipt
+// Receipt
 "transactions" = "Các giao dịch";
 "mobileNoTransactions" = "Không có hoạt động nào để hiển thị.";
 "mobilePrepaidCardNoTransactions" = "Không có giao dịch nào trong 365 ngày qua.";
@@ -218,7 +219,7 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Receipt Detail
+// Receipt Detail
 "mobileTransactionDetailsHeader" = "Chi tiết giao dịch";
 "mobileTransactionTypeLabel" = "GIAO DỊCH";
 "mobileTransactionDetailsLabel" = "CHI TIẾT";
@@ -234,9 +235,9 @@
 "mobileJournalNumberLabel" = "Mã biên nhận";
 "date" = "Ngày";
 
-    // Transfer Funds
+// Transfer Funds
 "mobileTransferFundsHeader" = "Chuyển tiền";
-"mobileConfirmationHeader" = "Xác nhận các chi tiết";
+"mobileConfirmationHeader" = "Xác nhận thông tin chi tiết";
 "mobileTransferFromLabel" = "CHUYỂN TỪ";
 "mobileTransferToLabel" = "CHUYỂN TỚI";
 "mobileNoteLabel" = "Lưu ý";
@@ -248,6 +249,7 @@
 "mobileFXbuy" = "Đến";
 "mobileFXRateLabel" = "Tỷ giá";
 "mobileAvailableBalance" = "Số tiền khả dụng %1$@%2$@ %3$@";
+"naAvailableBalance" = "Số tiền khả dụng: Không áp dụng";
 "continueButtonLabel" = "Tiếp tục";
 "mobileAddTransferMethod" = "Thêm phương thức chuyển tiền";
 "mobileTransferMethodsHeader" = "Phương thức chuyển tiền";
@@ -261,5 +263,6 @@
 "transfer_error_no_transfer_method_module_initialized" = "Bạn không thể thêm phương thức chuyển tiền.";
 "transfer_fx_rate_changed" = "Do những thay đổi trong tỷ giá hối đoái, bây giờ bạn sẽ nhận được: %1$@";
 "mobileTransferSuccessMsg" = "Giao dịch chuyển tiền của bạn đang được xử lý";
-"mobileTransferSuccessDetails" = "Tiền đang được chuyển đến %1$@của bạn.";
+"mobileTransferSuccessDetails" = "Tiền đang được chuyển đến của bạn.%1$@.";
 "noTransferFromSourceAvailable" = "Không có chuyển tiền từ nguồn khả dụng";
+"transfer_to_bank_card" = "Thẻ ngân hàng";

@@ -21,12 +21,13 @@
 "remove" = "删除";
 "cancelButtonLabel" = "取消";
 "doneButtonLabel" = "完成";
+"edit" = "编辑";
 "try_again_button_label" = "重新尝试";
 "search_placeholder_label" = "搜索";
 "unexpected_error_message" = "出现错误，请重新尝试";
 "network_connection_error_title" = "连接问题";
 "unexpected_title" = "意外错误";
-"network_connection_error_message" = "我们遇到了处理请求问题。请检查您的连接。";
+"network_connection_error_message" = "我们在处理请求时遇到了问题。请检查您的连接性。";
 "endingIn" = "截至 ";
 "to" = "至 ";
 "no_country_available_error_message" = "无可用国家/地区";
@@ -38,7 +39,7 @@
 "mobileTransferMethodLabel" = "转账方式";
 "mobileCountryRegion" = "国家/地区";
 "mobileCurrencyLabel" = "货币";
-"mobileAreYouSure" = "是否确定？";
+"mobileAreYouSure" = "移除此转账方式？";
 "fee_flat_formatter" = "%1$@%2$@ 费用";
 "fee_percent_only_min_formatter" = "%1$@%%（最低：%2$@%3$@）费用";
 "fee_percent_only_max_formatter" = "%1$@%%（最高：%2$@%3$@）费用";
@@ -51,9 +52,9 @@
 "transfer_method_not_supported_message" = "此转账方式不受支持。";
 "error" = "错误";
 "authentication_error_title" = "验证错误";
-"authentication_error_message" = "验证令牌检索尝试导致错误";
+"authentication_error_message" = "身份验证令牌尝试检索出现错误";
 
-    // Transfer methods
+// Transfer methods
 "bank_account" = "银行账户";
 "bank_card" = "借记卡";
 "paper_check" = "纸面支票";
@@ -66,12 +67,12 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Manage Prepaid Card Message
-"manage_prepaid_card_message" = "使用网页浏览器登录，管理您的卡";
-    //Select Transfer Method View
+// Manage Prepaid Card Message
+"manage_prepaid_card_message" = "使用网页浏览器登录以管理您的卡";
+//Select Transfer Method View
 "select_a_country_message" = "选择国家/地区";
 
-    // Add Transfer Method
+// Add Transfer Method
 "createTransferMethodButtonLabel" = "添加转账方式";
 "account_information" = "账户信息：%1$@(%2$@)";
 "account_holder" = "账户持有者信息";
@@ -81,13 +82,13 @@
 "contact_information" = "联系信息";
 "identification" = "身份验证";
 
-"date_format" = "年年年年-月月-日日";
+"date_format" = "YYYY-MM-DD";
 
-    // Processing View
+// Processing View
 "processing_view_label" = "处理中";
 "complete_view_label" = "完成";
 
-    // Receipt
+// Receipt
 "transactions" = "交易";
 "mobileNoTransactions" = "没有可显示的活动。";
 "mobilePrepaidCardNoTransactions" = "过去 365 天内无交易。";
@@ -135,14 +136,14 @@
 "payment_reversal" = "付款返还";
 "payment" = "付款";
 "prepaid_card_balance_inquiry_fee" = "余额查询费";
-"prepaid_card_cash_advance" = "现金预付";
+"prepaid_card_cash_advance" = "现金预支";
 "prepaid_card_dispute_deposit" = "争议卡存款";
 "prepaid_card_disputed_charge_refund" = "争议收费退款";
 "prepaid_card_domestic_cash_withdrawal_fee" = "ATM 取款";
 "prepaid_card_exchange_rate_difference" = "汇率差异";
 "prepaid_card_manual_unload" = "从卡转账";
 "prepaid_card_overseas_cash_withdrawal_fee" = "ATM 取款";
-"prepaid_card_pin_change_fee" = "PIN 更改费";
+"prepaid_card_pin_change_fee" = "PIN 变更费";
 "prepaid_card_refund" = "退款";
 "prepaid_card_replacement_fee" = "换卡费";
 "prepaid_card_sale_reversal" = "反向交易";
@@ -178,11 +179,11 @@
 "prepaid_card_account_deposit" = "账户存款";
 "prepaid_card_annual_fee_discount" = "年费打折";
 "prepaid_card_bill_reprint_fee" = "票据重印费";
-"prepaid_card_atm_or_cash_advance_fee" = "ATM/现金预付费";
-"prepaid_card_cash_advance_chargeback" = "现金预付退单";
-"prepaid_card_cash_advance_chargeback_reversal" = "现金预付退单返还";
-"prepaid_card_cash_advance_repress" = "现金预付抑制";
-"prepaid_card_cash_advance_repress_reversal" = "现金预付抑制返还";
+"prepaid_card_atm_or_cash_advance_fee" = "ATM/现金预支费";
+"prepaid_card_cash_advance_chargeback" = "现金预支退单";
+"prepaid_card_cash_advance_chargeback_reversal" = "现金预支退单返还";
+"prepaid_card_cash_advance_repress" = "现金预支抑制";
+"prepaid_card_cash_advance_repress_reversal" = "预支抑制返还";
 "prepaid_card_chargeback" = "退单";
 "prepaid_card_chargeback_refund" = "退单退款";
 "prepaid_card_chargeback_refund_reversal" = "退单退款返还";
@@ -209,7 +210,7 @@
 "prepaid_card_transfer_return" = "预付卡充值退回";
 "prepaid_card_bank_withdrawal_reversal" = "反向银行取款";
 "prepaid_card_bank_withdrawal_chargeback" = "反向银行取款退单";
-"prepaid_card_refund_fee" = "退款手续费";
+"prepaid_card_refund_fee" = "退款费";
 "prepaid_card_monthly_maintenance_fee" = "每月维护费";
 "prepaid_card_transaction_fee" = "交易费";
 "prepaid_card_sms_fee" = "短信服务费";
@@ -218,14 +219,14 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Receipt Detail
+// Receipt Detail
 "mobileTransactionDetailsHeader" = "交易详细信息";
 "mobileTransactionTypeLabel" = "交易";
 "mobileTransactionDetailsLabel" = "详细信息";
 "mobileFeeInfoLabel" = "费用信息";
 "mobileConfirmNotesLabel" = "注";
 "mobileCharityName" = "慈善机构名称";
-"mobileCheckNumber" = "支票数量";
+"mobileCheckNumber" = "支票号码";
 "mobileTransactionIdLabel" = "交易 ID";
 "mobilePromoWebsite" = "促销网站";
 "mobileTransactionDetailsTotal" = "交易总额";
@@ -234,27 +235,28 @@
 "mobileJournalNumberLabel" = "收据 ID";
 "date" = "日期";
 
-    // Transfer Funds
+// Transfer Funds
 "mobileTransferFundsHeader" = "转账";
 "mobileConfirmationHeader" = "确认详细信息";
 "mobileTransferFromLabel" = "转出账户";
-"mobileTransferToLabel" = "转至";
+"mobileTransferToLabel" = "转入账户";
 "mobileNoteLabel" = "注";
 "mobileConfirmDetailsAmount" = "金额";
 "mobileConfirmDetailsFee" = "费用";
 "mobileConfirmDetailsTotal" = "您将收到";
 "mobileTransferMax" = "最高转账限额";
-"mobileFXsell" = "从";
+"mobileFXsell" = "自";
 "mobileFXbuy" = "至";
 "mobileFXRateLabel" = "汇率";
 "mobileAvailableBalance" = "可用金额 %1$@%2$@ %3$@";
+"naAvailableBalance" = "可用金额：不适用";
 "continueButtonLabel" = "继续";
 "mobileAddTransferMethod" = "添加转账方式";
 "mobileTransferMethodsHeader" = "转账方式";
 "mobileTransferFromHeader" = "转出账户";
 "mobileAvailableFunds" = "可用资金";
 "mobileFXlabel" = "外汇";
-"mobileSummaryLabel" = "总结";
+"mobileSummaryLabel" = "汇总";
 "transfer" = "转账";
 "transferAmountInvalid" = "请输入有效转账金额";
 "noTransferMethodAdded" = "需要填写转账方式";
@@ -262,4 +264,5 @@
 "transfer_fx_rate_changed" = "由于汇率变化，您现在将收到：%1$@";
 "mobileTransferSuccessMsg" = "您的转账正在处理中";
 "mobileTransferSuccessDetails" = "正在向您的 %1$@ 转账。";
-"noTransferFromSourceAvailable" = "没有可用的从来源转出的转账";
+"noTransferFromSourceAvailable" = "没有可用的转出账户来源";
+"transfer_to_bank_card" = "银行卡";

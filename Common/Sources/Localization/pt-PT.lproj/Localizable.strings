@@ -21,24 +21,25 @@
 "remove" = "Remover";
 "cancelButtonLabel" = "Cancelar";
 "doneButtonLabel" = "Concluído";
+"edit" = "Editar";
 "try_again_button_label" = "Tentar novamente";
 "search_placeholder_label" = "Pesquisar";
 "unexpected_error_message" = "Algo correu mal, tente novamente.";
 "network_connection_error_title" = "Problema de conectividade";
 "unexpected_title" = "Erro inesperado";
-"network_connection_error_message" = "Estamos a encontrar um problema ao processar a solicitação. Verifique a sua conectividade.";
+"network_connection_error_message" = "Estamos a enfrentar um problema ao processar a solicitação. Verifique a sua conetividade.";
 "endingIn" = "a terminar em ";
 "to" = "para ";
 "no_country_available_error_message" = "Não há nenhum país disponível";
 "no_transfer_method_available_error_message" = "Não há método de transferência disponível para %1$@ e %2$@";
 "no_currency_available_error_message" = "Não há moeda disponível para o país %1$@";
 "emptyStateAddTransferMethod" = "Adicione um método de transferência para começar.";
-"mobileAddTransferMethodHeader" = "Adicione um método de transferência";
+"mobileAddTransferMethodHeader" = "Adicionar método de transferência";
 "mobileCountryCurrencyLabel" = "LOCALIZAÇÃO E MOEDA";
 "mobileTransferMethodLabel" = "MÉTODO DE TRANSFERÊNCIA";
 "mobileCountryRegion" = "País/região";
 "mobileCurrencyLabel" = "Moeda";
-"mobileAreYouSure" = "Tem a certeza?";
+"mobileAreYouSure" = "Remover este método de transferência?";
 "fee_flat_formatter" = "%1$@%2$@ taxa";
 "fee_percent_only_min_formatter" = "%1$@%% (Mín:%2$@%3$@) taxa";
 "fee_percent_only_max_formatter" = "%1$@%% (Máx:%2$@%3$@) taxa";
@@ -53,7 +54,7 @@
 "authentication_error_title" = "Erro de autenticação";
 "authentication_error_message" = "A tentativa de recuperação do token de autenticação resultou num erro";
 
-    // Transfer methods
+// Transfer methods
 "bank_account" = "Conta bancária";
 "bank_card" = "Cartão de débito";
 "paper_check" = "Cheque em papel";
@@ -66,12 +67,12 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Manage Prepaid Card Message
+// Manage Prepaid Card Message
 "manage_prepaid_card_message" = "Inicie sessão usando um navegador da web para gerir o seu cartão";
-    //Select Transfer Method View
+//Select Transfer Method View
 "select_a_country_message" = "Selecione um país";
 
-    // Add Transfer Method
+// Add Transfer Method
 "createTransferMethodButtonLabel" = "Adicionar método de transferência";
 "account_information" = "INFORMAÇÕES DA CONTA: %1$@(%2$@)";
 "account_holder" = "INFORMAÇÕES DO TITULAR DA CONTA";
@@ -83,11 +84,11 @@
 
 "date_format" = "AAAA-MM-DD";
 
-    // Processing View
+// Processing View
 "processing_view_label" = "Processamento";
 "complete_view_label" = "Preencher";
 
-    // Receipt
+// Receipt
 "transactions" = "Transações";
 "mobileNoTransactions" = "Não há nenhuma atividade para exibir.";
 "mobilePrepaidCardNoTransactions" = "Nenhuma transação nos últimos 365 dias.";
@@ -169,7 +170,7 @@
 "virtual_incentive_purchase" = "Compra promocional";
 "virtual_incentive_refund" = "Reembolso promocional";
 "western_union_transfer_return" = "Levantamento Western Union";
-"wire_transfer_fee" = "Taxa de transferência eletrônica";
+"wire_transfer_fee" = "Taxa de transferência eletrónica";
 "wire_transfer_return" = "Devolução por transferência bancária";
 "wubs_wire_transfer_return" = "Devolução por transferência bancária";
 "unknown_receipt_type" = "Tipo de transação desconhecido";
@@ -218,7 +219,7 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Receipt Detail
+// Receipt Detail
 "mobileTransactionDetailsHeader" = "Detalhes da transação";
 "mobileTransactionTypeLabel" = "TRANSAÇÃO";
 "mobileTransactionDetailsLabel" = "DETALHES";
@@ -228,15 +229,15 @@
 "mobileCheckNumber" = "Número do cheque";
 "mobileTransactionIdLabel" = "ID da transação";
 "mobilePromoWebsite" = "Site promocional";
-"mobileTransactionDetailsTotal" = "Total da transação";
+"mobileTransactionDetailsTotal" = "Transação total";
 "amount" = "Montante";
 "mobileFeeLabel" = "Taxa";
 "mobileJournalNumberLabel" = "ID do recibo";
 "date" = "Data";
 
-    // Transfer Funds
+// Transfer Funds
 "mobileTransferFundsHeader" = "Transferência";
-"mobileConfirmationHeader" = "Confirme os detalhes";
+"mobileConfirmationHeader" = "Confirmar detalhes";
 "mobileTransferFromLabel" = "TRANSFERIR DE";
 "mobileTransferToLabel" = "TRANSFERIR PARA";
 "mobileNoteLabel" = "Nota";
@@ -248,6 +249,7 @@
 "mobileFXbuy" = "Para";
 "mobileFXRateLabel" = "Taxa de câmbio";
 "mobileAvailableBalance" = "Quantia disponível %1$@%2$@ %3$@";
+"naAvailableBalance" = "Quantia disponível: N/A";
 "continueButtonLabel" = "Continuar";
 "mobileAddTransferMethod" = "Adicionar método de transferência";
 "mobileTransferMethodsHeader" = "Métodos de transferência";
@@ -263,3 +265,4 @@
 "mobileTransferSuccessMsg" = "A sua transferência está a ser processada";
 "mobileTransferSuccessDetails" = "O dinheiro está a caminho do seu %1$@.";
 "noTransferFromSourceAvailable" = "Nenhuma fonte “Transferir de” disponível";
+"transfer_to_bank_card" = "Cartão bancário";
