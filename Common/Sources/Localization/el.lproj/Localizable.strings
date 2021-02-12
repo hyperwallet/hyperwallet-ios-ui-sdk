@@ -45,9 +45,9 @@
 "fee_percent_only_max_formatter" = "Τέλος %1$@%% (μέγιστο: %2$@%3$@)";
 "fee_percent_formatter" = "Τέλος %1$@%% (ελάχιστο: %2$@ %3$@, μέγιστο: %2$@%4$@)";
 "fee_mix_no_min_and_max_formatter" = "%1$@%2$@ + %3$@%%Τέλος ";
-"fee_mix_only_min_formatter" = "Τέλος %1$@ %2$@ +  + %3$@%% (ελάχιστο: %1$@%4$@)";
-"fee_mix_only_max_formatter" = "Τέλος %1$@ %2$@ +  + %3$@%% (μέγιστο: %1$@%4$@)";
-"fee_mix_formatter" = "Τέλος %1$@ %2$@ +  + %3$@%% (ελάχιστο: %1$@ %4$@, μέγιστο: %1$@%5$@)";
+"fee_mix_only_min_formatter" = "Τέλος %1$@ %2$@ + %3$@%% (ελάχιστο: %1$@%4$@)";
+"fee_mix_only_max_formatter" = "Τέλος %1$@ %2$@ + %3$@%% (μέγιστο: %1$@%4$@)";
+"fee_mix_formatter" = "Τέλος %1$@ %2$@ + %3$@%% (ελάχιστο: %1$@ %4$@, μέγιστο: %1$@%5$@)";
 "fee_percent_no_min_and_max_formatter" = "%1$@%%Τέλος ";
 "transfer_method_not_supported_message" = "Αυτός ο τρόπος μεταφοράς δεν υποστηρίζεται.";
 "error" = "Σφάλμα";
