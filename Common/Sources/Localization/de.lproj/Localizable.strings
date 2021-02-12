@@ -21,6 +21,7 @@
 "remove" = "Entfernen";
 "cancelButtonLabel" = "Abbrechen";
 "doneButtonLabel" = "Fertig";
+"edit" = "Bearbeiten";
 "try_again_button_label" = "Erneut versuchen";
 "search_placeholder_label" = "Suche";
 "unexpected_error_message" = "Etwas ist schiefgelaufen, versuchen Sie es erneut.";
@@ -31,14 +32,14 @@
 "to" = "an ";
 "no_country_available_error_message" = "Es ist kein Land verfügbar.";
 "no_transfer_method_available_error_message" = "Für %1$@ und %2$@ ist keine Überweisungsmethode verfügbar.";
-"no_currency_available_error_message" = "Für das Land %1$@ ist keine Währung verfügbar.";
+"no_currency_available_error_message" = "Für das Land  ist keine Währung verfügbar.%1$@";
 "emptyStateAddTransferMethod" = "Fügen Sie eine Überweisungsmethode hinzu, um zu beginnen.";
 "mobileAddTransferMethodHeader" = "Überweisungsmethode hinzufügen";
 "mobileCountryCurrencyLabel" = "STANDORT UND WÄHRUNG";
 "mobileTransferMethodLabel" = "ÜBERWEISUNGSMETHODE";
 "mobileCountryRegion" = "Land/Region";
 "mobileCurrencyLabel" = "Währung";
-"mobileAreYouSure" = "Sind Sie sicher?";
+"mobileAreYouSure" = "Diese Überweisungsmethode entfernen?";
 "fee_flat_formatter" = "%1$@%2$@ Gebühr";
 "fee_percent_only_min_formatter" = "%1$@%% (Min:%2$@%3$@) Gebühren";
 "fee_percent_only_max_formatter" = "%1$@%% (Max:%2$@%3$@) Gebühren";
@@ -53,7 +54,7 @@
 "authentication_error_title" = "Authentifizierungsfehler";
 "authentication_error_message" = "Der versuchte Abruf des Authentifizierungs-Tokens hat zu einem Fehler geführt.";
 
-    // Transfer methods
+// Transfer methods
 "bank_account" = "Bankkonto";
 "bank_card" = "Debitkarte";
 "paper_check" = "Papierscheck";
@@ -66,12 +67,12 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Manage Prepaid Card Message
+// Manage Prepaid Card Message
 "manage_prepaid_card_message" = "Melden Sie sich mit einem Webbrowser an, um Ihre Karte zu verwalten";
-    //Select Transfer Method View
+//Select Transfer Method View
 "select_a_country_message" = "Wählen Sie ein Land";
 
-    // Add Transfer Method
+// Add Transfer Method
 "createTransferMethodButtonLabel" = "Überweisungsmethode hinzufügen";
 "account_information" = "KONTODATEN: %1$@(%2$@)";
 "account_holder" = "DATEN DES KONTOINHABERS";
@@ -83,11 +84,11 @@
 
 "date_format" = "TT.MM.JJJJ";
 
-    // Processing View
+// Processing View
 "processing_view_label" = "Verarbeitung";
 "complete_view_label" = "Vollständig";
 
-    // Receipt
+// Receipt
 "transactions" = "Transaktionen";
 "mobileNoTransactions" = "Es sind keine Aktivitäten vorhanden.";
 "mobilePrepaidCardNoTransactions" = "Keine Transaktionen in den letzten 365 Tagen.";
@@ -218,14 +219,14 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Receipt Detail
+// Receipt Detail
 "mobileTransactionDetailsHeader" = "Transaktionsdaten";
 "mobileTransactionTypeLabel" = "TRANSAKTION";
 "mobileTransactionDetailsLabel" = "DETAILS";
 "mobileFeeInfoLabel" = "GEBÜHRENINFO";
 "mobileConfirmNotesLabel" = "ANMERKUNG";
 "mobileCharityName" = "Name der Wohltätigkeitsorganisation";
-"mobileCheckNumber" = "Anzahl der Schecks";
+"mobileCheckNumber" = "Schecknummer";
 "mobileTransactionIdLabel" = "Transaktions-ID";
 "mobilePromoWebsite" = "Aktions-Website";
 "mobileTransactionDetailsTotal" = "Gesamtsumme der Transaktion";
@@ -234,9 +235,9 @@
 "mobileJournalNumberLabel" = "Eingangskennung";
 "date" = "Datum";
 
-    // Transfer Funds
+// Transfer Funds
 "mobileTransferFundsHeader" = "Überweisung";
-"mobileConfirmationHeader" = "Daten bestätigen";
+"mobileConfirmationHeader" = "Details bestätigen";
 "mobileTransferFromLabel" = "ÜBERWEISEN VON";
 "mobileTransferToLabel" = "ÜBERWEISEN AN";
 "mobileNoteLabel" = "Anmerkung";
@@ -248,6 +249,7 @@
 "mobileFXbuy" = "An";
 "mobileFXRateLabel" = "Wechselkurs";
 "mobileAvailableBalance" = "Verfügbarer Betrag %1$@%2$@ %3$@";
+"naAvailableBalance" = "Verfügbarer Betrag: Nicht zutreffend";
 "continueButtonLabel" = "Weiter";
 "mobileAddTransferMethod" = "Überweisungsmethode hinzufügen";
 "mobileTransferMethodsHeader" = "Überweisungsmethoden";
@@ -263,3 +265,4 @@
 "mobileTransferSuccessMsg" = "Ihre Überweisung wird bearbeitet.";
 "mobileTransferSuccessDetails" = "Das Geld ist auf dem Weg zu Ihrem %1$@.";
 "noTransferFromSourceAvailable" = "Keine Überweisung von Quelle verfügbar";
+"transfer_to_bank_card" = "Bankkarte";

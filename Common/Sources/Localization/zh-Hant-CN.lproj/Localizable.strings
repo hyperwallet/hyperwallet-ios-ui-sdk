@@ -21,24 +21,25 @@
 "remove" = "移除";
 "cancelButtonLabel" = "取消";
 "doneButtonLabel" = "完成";
+"edit" = "編輯";
 "try_again_button_label" = "重試";
 "search_placeholder_label" = "搜尋";
 "unexpected_error_message" = "發生錯誤，請重試";
 "network_connection_error_title" = "連線問題";
 "unexpected_title" = "意外錯誤";
-"network_connection_error_message" = "處理要求時發生問題。請確認您的連線。";
+"network_connection_error_message" = "處理要求時發生問題。請檢查您的連線。";
 "endingIn" = "尾號為 ";
 "to" = "至 ";
 "no_country_available_error_message" = "沒有可使用的國家/地區";
 "no_transfer_method_available_error_message" = "沒有可用於%1$@及%2$@的轉帳方式";
-"no_currency_available_error_message" = "沒有可用於國家/地區%1$@的貨幣";
+"no_currency_available_error_message" = "沒有可用於%1$@的貨幣";
 "emptyStateAddTransferMethod" = "新增轉帳方式以開始使用。";
 "mobileAddTransferMethodHeader" = "新增轉帳方式";
 "mobileCountryCurrencyLabel" = "所在地及貨幣";
 "mobileTransferMethodLabel" = "轉帳方式";
 "mobileCountryRegion" = "國家/地區";
 "mobileCurrencyLabel" = "貨幣";
-"mobileAreYouSure" = "是否確定？";
+"mobileAreYouSure" = "移除此轉帳方式？";
 "fee_flat_formatter" = "%1$@%2$@手續費";
 "fee_percent_only_min_formatter" = "%1$@%%（最低金額：%2$@%3$@）手續費";
 "fee_percent_only_max_formatter" = "%1$@%%（最高金額：%2$@%3$@）手續費";
@@ -51,7 +52,7 @@
 "transfer_method_not_supported_message" = "不支援此轉帳方式。";
 "error" = "錯誤";
 "authentication_error_title" = "驗證錯誤";
-"authentication_error_message" = "驗證權杖擷取嘗試導致錯誤";
+"authentication_error_message" = "嘗試擷取驗證權杖時導致錯誤";
 
 // Transfer methods
 "bank_account" = "銀行帳戶";
@@ -225,7 +226,7 @@
 "mobileFeeInfoLabel" = "手續費資訊";
 "mobileConfirmNotesLabel" = "附註";
 "mobileCharityName" = "慈善團體名稱";
-"mobileCheckNumber" = "支票數量";
+"mobileCheckNumber" = "支票編號";
 "mobileTransactionIdLabel" = "交易代號";
 "mobilePromoWebsite" = "促銷網站";
 "mobileTransactionDetailsTotal" = "交易總額";
@@ -248,6 +249,7 @@
 "mobileFXbuy" = "至";
 "mobileFXRateLabel" = "匯率";
 "mobileAvailableBalance" = "可用金額 %1$@%2$@ %3$@";
+"naAvailableBalance" = "可用金額：不適用";
 "continueButtonLabel" = "繼續";
 "mobileAddTransferMethod" = "新增轉帳方式";
 "mobileTransferMethodsHeader" = "轉帳方式";
@@ -263,3 +265,4 @@
 "mobileTransferSuccessMsg" = "您的轉帳正在處理中";
 "mobileTransferSuccessDetails" = "款項已匯至您的 %1$@。";
 "noTransferFromSourceAvailable" = "無可用資源可供轉帳";
+"transfer_to_bank_card" = "銀行卡";

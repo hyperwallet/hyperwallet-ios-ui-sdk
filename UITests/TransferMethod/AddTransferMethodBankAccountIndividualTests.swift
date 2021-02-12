@@ -141,7 +141,7 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
                                   filename: "BankAccountInvalidRoutingResponse",
                                   method: HTTPMethod.post)
 
-        XCTAssertTrue(addTransferMethod.branchIdInput.waitForExistence(timeout: 15))
+        XCTAssertTrue(addTransferMethod.branchIdInput.waitForExistence(timeout: 25))
 
         addTransferMethod.setBranchId("021000022")
         addTransferMethod.setBankAccountId("12345")

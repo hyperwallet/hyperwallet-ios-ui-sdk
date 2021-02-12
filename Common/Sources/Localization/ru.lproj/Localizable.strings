@@ -21,6 +21,7 @@
 "remove" = "Удалить";
 "cancelButtonLabel" = "Отмена";
 "doneButtonLabel" = "Выполнено";
+"edit" = "Редактировать";
 "try_again_button_label" = "Попробуйте снова";
 "search_placeholder_label" = "Поиск";
 "unexpected_error_message" = "Что-то пошло не так, попробуйте еще раз";
@@ -31,14 +32,14 @@
 "to" = "на ";
 "no_country_available_error_message" = "Страна отсутствует";
 "no_transfer_method_available_error_message" = "Нет способа перевода для %1$@ и %2$@";
-"no_currency_available_error_message" = "Валюта для страны %1$@ недоступна";
+"no_currency_available_error_message" = "Недоступна валюта для страны %1$@";
 "emptyStateAddTransferMethod" = "Чтобы начать, добавьте способ перевода.";
 "mobileAddTransferMethodHeader" = "Добавить способ перевода";
 "mobileCountryCurrencyLabel" = "МЕСТОПОЛОЖЕНИЕ И ВАЛЮТА";
 "mobileTransferMethodLabel" = "СПОСОБ ПЕРЕВОДА";
 "mobileCountryRegion" = "Страна/регион";
 "mobileCurrencyLabel" = "Валюта";
-"mobileAreYouSure" = "Вы уверены?";
+"mobileAreYouSure" = "Удалить этот способ перевода?";
 "fee_flat_formatter" = "%1$@%2$@ сбор";
 "fee_percent_only_min_formatter" = "%1$@%% (Мин.:%2$@%3$@) сбор";
 "fee_percent_only_max_formatter" = "%1$@%% (Макс.:%2$@%3$@) сбор";
@@ -53,7 +54,7 @@
 "authentication_error_title" = "Ошибка аутентификации";
 "authentication_error_message" = "Попытка получения токена аутентификации привела к ошибке";
 
-    // Transfer methods
+// Transfer methods
 "bank_account" = "Банковский счет";
 "bank_card" = "Дебетовая карта";
 "paper_check" = "Бумажный чек";
@@ -66,12 +67,12 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Manage Prepaid Card Message
+// Manage Prepaid Card Message
 "manage_prepaid_card_message" = "Войдите в веб-браузере, чтобы управлять своей картой";
-    //Select Transfer Method View
+//Select Transfer Method View
 "select_a_country_message" = "Выбор страны";
 
-    // Add Transfer Method
+// Add Transfer Method
 "createTransferMethodButtonLabel" = "Добавить способ перевода";
 "account_information" = "ИНФОРМАЦИЯ О СЧЕТЕ: %1$@(%2$@)";
 "account_holder" = "ИНФОРМАЦИЯ О ДЕРЖАТЕЛЕ СЧЕТА";
@@ -83,11 +84,11 @@
 
 "date_format" = "ГГГГ-ММ-ДД";
 
-    // Processing View
+// Processing View
 "processing_view_label" = "Обработка";
 "complete_view_label" = "Завершить";
 
-    // Receipt
+// Receipt
 "transactions" = "Транзакции";
 "mobileNoTransactions" = "Нет действий для отображения.";
 "mobilePrepaidCardNoTransactions" = "Нет транзакций за последние 365 дней.";
@@ -110,8 +111,8 @@
 "donation_fee" = "Сбор за пожертвование";
 "donation_return" = "Возврат пожертвования";
 "donation" = "Пожертвование";
-"dormant_user_fee_refund" = "Возврат комиссии за бездействующий аккаунт пользователя";
-"dormant_user_fee" = "Комиссия за бездействующий аккаунт пользователя";
+"dormant_user_fee_refund" = "Возврат комиссии за бездействующий счет пользователя";
+"dormant_user_fee" = "Комиссия за бездействующий счет пользователя";
 "expedited_shipping_fee" = "Плата за ускоренную доставку";
 "foreign_exchange" = "Обмен валюты";
 "generic_fee_refund" = "Возврат общей комиссии";
@@ -178,7 +179,7 @@
 "prepaid_card_account_deposit" = "Депозит на счет";
 "prepaid_card_annual_fee_discount" = "Скидка на годовую комиссию";
 "prepaid_card_bill_reprint_fee" = "Комиссия за повторную печать счета";
-"prepaid_card_atm_or_cash_advance_fee" = "Комиссия за банкомат/ аванс";
+"prepaid_card_atm_or_cash_advance_fee" = "Комиссия за банкомат/аванс";
 "prepaid_card_cash_advance_chargeback" = "Возврат денежного аванса";
 "prepaid_card_cash_advance_chargeback_reversal" = "Аннулирование возврата аванса";
 "prepaid_card_cash_advance_repress" = "Удерживание денежного аванса";
@@ -187,8 +188,8 @@
 "prepaid_card_chargeback_refund" = "Возмещение средств";
 "prepaid_card_chargeback_refund_reversal" = "Аннулирование возмещения средств";
 "prepaid_card_chargeback_reversal" = "Аннулирование возврата средств";
-"prepaid_card_commission_or_fee" = "Сбор/ комиссия";
-"prepaid_card_debit_transfer" = "Дебет/ переводы";
+"prepaid_card_commission_or_fee" = "Сбор/комиссия";
+"prepaid_card_debit_transfer" = "Дебет/переводы";
 "prepaid_card_document_request_fee" = "Плата за запрос документов";
 "prepaid_card_emergency_cash" = "Деньги на экстренные цели";
 "prepaid_card_emergency_card" = "Карта для экстренных целей";
@@ -218,7 +219,7 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Receipt Detail
+// Receipt Detail
 "mobileTransactionDetailsHeader" = "Детали транзакции";
 "mobileTransactionTypeLabel" = "ТРАНЗАКЦИЯ";
 "mobileTransactionDetailsLabel" = "ДЕТАЛИ";
@@ -234,10 +235,10 @@
 "mobileJournalNumberLabel" = "Номер квитанции";
 "date" = "Дата";
 
-    // Transfer Funds
+// Transfer Funds
 "mobileTransferFundsHeader" = "Перевод";
 "mobileConfirmationHeader" = "Подтвердите данные";
-"mobileTransferFromLabel" = "ПЕРЕВОД ИЗ";
+"mobileTransferFromLabel" = "ПЕРЕВОД С";
 "mobileTransferToLabel" = "ПЕРЕВОД НА";
 "mobileNoteLabel" = "Примечание";
 "mobileConfirmDetailsAmount" = "Сумма";
@@ -248,10 +249,11 @@
 "mobileFXbuy" = "На";
 "mobileFXRateLabel" = "Курс обмена";
 "mobileAvailableBalance" = "Доступная сумма %1$@%2$@ %3$@";
+"naAvailableBalance" = "Доступная сумма: Н/Д";
 "continueButtonLabel" = "Продолжить";
 "mobileAddTransferMethod" = "Добавить способ перевода";
 "mobileTransferMethodsHeader" = "Способы перевода";
-"mobileTransferFromHeader" = "Перевод из";
+"mobileTransferFromHeader" = "Перевод с";
 "mobileAvailableFunds" = "Свободные средства";
 "mobileFXlabel" = "ОБМЕН ВАЛЮТЫ";
 "mobileSummaryLabel" = "КРАТКАЯ ИНФОРМАЦИЯ";
@@ -263,3 +265,4 @@
 "mobileTransferSuccessMsg" = "Ваш перевод обрабатывается";
 "mobileTransferSuccessDetails" = "Средства отправлены на ваш %1$@.";
 "noTransferFromSourceAvailable" = "Перевод из источника отсутствует";
+"transfer_to_bank_card" = "Банковская карта";

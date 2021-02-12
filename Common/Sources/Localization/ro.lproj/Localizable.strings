@@ -21,6 +21,7 @@
 "remove" = "Eliminați";
 "cancelButtonLabel" = "Anulați";
 "doneButtonLabel" = "Efectuat";
+"edit" = "Editare";
 "try_again_button_label" = "Încercați din nou";
 "search_placeholder_label" = "Căutați";
 "unexpected_error_message" = "Ceva nu a funcționat corespunzător; vă rugăm să încercați din nou";
@@ -33,13 +34,13 @@
 "no_transfer_method_available_error_message" = "Nu există o metodă de transfer disponibilă pentru %1$@ și %2$@";
 "no_currency_available_error_message" = "Nu există nicio monedă disponibilă pentru țara %1$@";
 "emptyStateAddTransferMethod" = "Adăugați o metodă de transfer pentru a începe.";
-"mobileAddTransferMethodHeader" = "Adăugați o metodă de transfer";
+"mobileAddTransferMethodHeader" = "Adăugați metoda de transfer";
 "mobileCountryCurrencyLabel" = "LOCAȚIE ȘI MONEDĂ";
 "mobileTransferMethodLabel" = "METODA DE TRANSFER";
 "mobileCountryRegion" = "Țara/Regiunea";
 "mobileCurrencyLabel" = "Moneda";
-"mobileAreYouSure" = "Sunteți sigur(ă)?";
-"fee_flat_formatter" = "Comision %1$@%2$@ ";
+"mobileAreYouSure" = "Eliminați metodă de transfer?";
+"fee_flat_formatter" = "Comision %1$@%2$@";
 "fee_percent_only_min_formatter" = "Comision %1$@%% (Minim:%2$@%3$@)";
 "fee_percent_only_max_formatter" = "Comision %1$@%% (Maxim:%2$@%3$@)";
 "fee_percent_formatter" = "Comision %1$@%% (Minim:%2$@%3$@, Maxim:%2$@%4$@)";
@@ -51,9 +52,9 @@
 "transfer_method_not_supported_message" = "Această metodă de transfer nu este acceptată.";
 "error" = "Eroare";
 "authentication_error_title" = "Eroare de autentificare";
-"authentication_error_message" = "Încercarea de recuperare a codului de autentificare a dus la o eroare";
+"authentication_error_message" = "Încercare de recuperare a token-ului de autentificare a dus la o eroare";
 
-    // Transfer methods
+// Transfer methods
 "bank_account" = "Cont bancar";
 "bank_card" = "Card de debit";
 "paper_check" = "Cec";
@@ -66,12 +67,12 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Manage Prepaid Card Message
+// Manage Prepaid Card Message
 "manage_prepaid_card_message" = "Autentificați-vă utilizând un browser web pentru a vă gestiona cardul";
-    //Select Transfer Method View
+//Select Transfer Method View
 "select_a_country_message" = "Selectați o țară";
 
-    // Add Transfer Method
+// Add Transfer Method
 "createTransferMethodButtonLabel" = "Adăugați metoda de transfer";
 "account_information" = "INFORMAȚII CONT: %1$@(%2$@)";
 "account_holder" = "INFORMAȚII TITULAR CONT";
@@ -83,11 +84,11 @@
 
 "date_format" = "AAAA-LL-ZZ";
 
-    // Processing View
+// Processing View
 "processing_view_label" = "Se procesează";
 "complete_view_label" = "Finalizare";
 
-    // Receipt
+// Receipt
 "transactions" = "Tranzacții";
 "mobileNoTransactions" = "Nu există nicio activitate de afișat.";
 "mobilePrepaidCardNoTransactions" = "Nu există tranzacții în ultimele 365 de zile.";
@@ -117,7 +118,7 @@
 "generic_fee_refund" = "Rambursare comision general";
 "manual_adjustment" = "Ajustare";
 "manual_transfer_to_prepaid_card" = "Transfer pe card";
-"merchant_payment_fee" = "Comision plată la comerciant";
+"merchant_payment_fee" = "Comision plată comerciant";
 "merchant_payment_refund" = "Rambursare plată la comerciant";
 "merchant_payment_return" = "Returnare plată la comerciant";
 "merchant_payment" = "Plată la comerciant";
@@ -145,7 +146,7 @@
 "prepaid_card_pin_change_fee" = "Comision schimbare PIN";
 "prepaid_card_refund" = "Rambursare";
 "prepaid_card_replacement_fee" = "Comision înlocuire card";
-"prepaid_card_sale_reversal" = "Tranzacție reversată";
+"prepaid_card_sale_reversal" = "Tranzacție inversată";
 "prepaid_card_sale" = "Tranzacție";
 "prepaid_card_unload" = "Transfer de pe card";
 "processing_fee" = "Comision de procesare";
@@ -156,7 +157,7 @@
 "transfer_to_moneygram" = "MoneyGram";
 "transfer_to_paper_check" = "Cec";
 "transfer_to_paypal_account" = "PayPal";
-"transfer_to_prepaid_card" = "Transferați pe card";
+"transfer_to_prepaid_card" = "Transfer pe card";
 "transfer_to_program_account" = "Transferați către program";
 "transfer_to_user" = "Transferați către utilizator";
 "transfer_to_western_union" = "Western Union";
@@ -218,7 +219,7 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Receipt Detail
+// Receipt Detail
 "mobileTransactionDetailsHeader" = "Detalii tranzacție";
 "mobileTransactionTypeLabel" = "TRANZACȚIE";
 "mobileTransactionDetailsLabel" = "DETALII";
@@ -234,7 +235,7 @@
 "mobileJournalNumberLabel" = "ID confirmare de primire";
 "date" = "Data";
 
-    // Transfer Funds
+// Transfer Funds
 "mobileTransferFundsHeader" = "Transfer";
 "mobileConfirmationHeader" = "Confirmați detaliile";
 "mobileTransferFromLabel" = "TRANSFER DE LA";
@@ -248,6 +249,7 @@
 "mobileFXbuy" = "Către";
 "mobileFXRateLabel" = "Curs de schimb";
 "mobileAvailableBalance" = "Sumă disponibilă %1$@%2$@ %3$@";
+"naAvailableBalance" = "Sumă disponibilă: Nu este cazul";
 "continueButtonLabel" = "Continuați";
 "mobileAddTransferMethod" = "Adăugați metoda de transfer";
 "mobileTransferMethodsHeader" = "Metode de transfer";
@@ -261,5 +263,6 @@
 "transfer_error_no_transfer_method_module_initialized" = "Nu puteți adăuga o metodă de transfer.";
 "transfer_fx_rate_changed" = "Datorită modificărilor cursului de schimb, veți primi acum: %1$@";
 "mobileTransferSuccessMsg" = "Transferul dvs. este în curs de procesare";
-"mobileTransferSuccessDetails" = "Banii sunt în drum spre %1$@ dumneavoastră.";
+"mobileTransferSuccessDetails" = "Veți primi banii în curând %1$@.";
 "noTransferFromSourceAvailable" = "Nu există transfer de la sursă disponibil";
+"transfer_to_bank_card" = "Card bancar";

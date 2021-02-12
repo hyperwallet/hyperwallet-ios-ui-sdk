@@ -21,6 +21,7 @@
 "remove" = "Отстрани";
 "cancelButtonLabel" = "Откажи";
 "doneButtonLabel" = "Завршено";
+"edit" = "Уреди";
 "try_again_button_label" = "Обидете се повторно";
 "search_placeholder_label" = "Барај";
 "unexpected_error_message" = "Нешто не е во ред, обидете се повторно";
@@ -38,7 +39,7 @@
 "mobileTransferMethodLabel" = "МЕТОД НА ТРАНСФЕР";
 "mobileCountryRegion" = "Земја/Регион";
 "mobileCurrencyLabel" = "Валута";
-"mobileAreYouSure" = "Дали сте сигурни?";
+"mobileAreYouSure" = "Да се отстрани овој метод на трансфер?";
 "fee_flat_formatter" = "%1$@%2$@ цена";
 "fee_percent_only_min_formatter" = "%1$@%% (Мин.:%2$@%3$@) цена";
 "fee_percent_only_max_formatter" = "%1$@%% (Макс.:%2$@%3$@) цена";
@@ -53,7 +54,7 @@
 "authentication_error_title" = "Грешка во автентикација";
 "authentication_error_message" = "Обидот за повикување на ознака за автентикација резултираше во грешка";
 
-    // Transfer methods
+// Transfer methods
 "bank_account" = "Сметка во банка";
 "bank_card" = "Дебитна картичка";
 "paper_check" = "Физички чек";
@@ -66,12 +67,12 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Manage Prepaid Card Message
+// Manage Prepaid Card Message
 "manage_prepaid_card_message" = "Најави се со прелистувач за да управуваш со твојата картичка";
-    //Select Transfer Method View
+//Select Transfer Method View
 "select_a_country_message" = "Изберете земја";
 
-    // Add Transfer Method
+// Add Transfer Method
 "createTransferMethodButtonLabel" = "Додади метод на трансфер";
 "account_information" = "ИНФОРМАЦИИ ЗА СМЕТКАТА: %1$@(%2$@)";
 "account_holder" = "ИНФОРМАЦИИ ЗА СОПСТВЕНИКОТ НА СМЕТКАТА";
@@ -83,11 +84,11 @@
 
 "date_format" = "ГГГГ-ММ-ДД";
 
-    // Processing View
+// Processing View
 "processing_view_label" = "Процесирање";
 "complete_view_label" = "Завршено";
 
-    // Receipt
+// Receipt
 "transactions" = "Трансакции";
 "mobileNoTransactions" = "Нема активност за прикажување";
 "mobilePrepaidCardNoTransactions" = "Нема трансакции во последниве 365 дена.";
@@ -218,7 +219,7 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Receipt Detail
+// Receipt Detail
 "mobileTransactionDetailsHeader" = "Детали за трансакцијата";
 "mobileTransactionTypeLabel" = "ТРАНСАКЦИЈА";
 "mobileTransactionDetailsLabel" = "ДЕТАЛИ";
@@ -234,7 +235,7 @@
 "mobileJournalNumberLabel" = "Идентификатор на сметка";
 "date" = "Датум";
 
-    // Transfer Funds
+// Transfer Funds
 "mobileTransferFundsHeader" = "Трансфер";
 "mobileConfirmationHeader" = "Потврди ги податоците";
 "mobileTransferFromLabel" = "ТРАНСФЕР ОД";
@@ -248,6 +249,7 @@
 "mobileFXbuy" = "До";
 "mobileFXRateLabel" = "Девизен курс";
 "mobileAvailableBalance" = "Достапен износ %1$@%2$@ %3$@";
+"naAvailableBalance" = "Достапен износ:   N/A (Н/П, не е применливо)";
 "continueButtonLabel" = "Продолжи";
 "mobileAddTransferMethod" = "Додади метод на трансфер";
 "mobileTransferMethodsHeader" = "Методи на трансфер";
@@ -263,3 +265,4 @@
 "mobileTransferSuccessMsg" = "Вашиот трансфер се процесира";
 "mobileTransferSuccessDetails" = "Парите се префрлаат на вашата %1$@.";
 "noTransferFromSourceAvailable" = "Нема достапен трансфер од извор";
+"transfer_to_bank_card" = "Банкарска картичка";

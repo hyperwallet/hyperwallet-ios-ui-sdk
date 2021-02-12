@@ -21,24 +21,25 @@
 "remove" = "Supprimer";
 "cancelButtonLabel" = "Annuler";
 "doneButtonLabel" = "Terminé";
+"edit" = "Modifier";
 "try_again_button_label" = "Réessayer";
 "search_placeholder_label" = "Rechercher";
 "unexpected_error_message" = "Une erreur s’est produite, veuillez réessayer";
 "network_connection_error_title" = "Problème de connectivité";
 "unexpected_title" = "Erreur inattendue";
 "network_connection_error_message" = "Nous rencontrons un problème lors du traitement de votre demande. Veuillez vérifier votre connectivité.";
-"endingIn" = "expire dans ";
+"endingIn" = "termine par ";
 "to" = "à ";
 "no_country_available_error_message" = "Aucun pays disponible";
 "no_transfer_method_available_error_message" = "Aucune méthode de transfert disponible pour %1$@ et %2$@";
 "no_currency_available_error_message" = "Aucune devise disponible pour le pays %1$@";
 "emptyStateAddTransferMethod" = "Ajouter une méthode de transfert pour commencer.";
-"mobileAddTransferMethodHeader" = "Ajouter une méthode de transfert";
+"mobileAddTransferMethodHeader" = "Ajouter méthode de transfert";
 "mobileCountryCurrencyLabel" = "LIEU ET DEVISE";
 "mobileTransferMethodLabel" = "MÉTHODE DE TRANSFERT";
 "mobileCountryRegion" = "Pays/Région";
 "mobileCurrencyLabel" = "Devise";
-"mobileAreYouSure" = "Êtes-vous sûr(e) ?";
+"mobileAreYouSure" = "Supprimer cette méthode de transfert ?";
 "fee_flat_formatter" = "%1$@%2$@ frais";
 "fee_percent_only_min_formatter" = "%1$@%% frais (Min. :%2$@%3$@)";
 "fee_percent_only_max_formatter" = "%1$@%% frais (Max. :%2$@%3$@)";
@@ -53,7 +54,7 @@
 "authentication_error_title" = "Erreur d’authentification";
 "authentication_error_message" = "La tentative de récupération du jeton d’authentification a donné lieu à une erreur";
 
-    // Transfer methods
+// Transfer methods
 "bank_account" = "Compte bancaire";
 "bank_card" = "Carte de débit";
 "paper_check" = "Chèque";
@@ -66,12 +67,12 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Manage Prepaid Card Message
+// Manage Prepaid Card Message
 "manage_prepaid_card_message" = "Connectez-vous via un navigateur pour gérer votre carte";
-    //Select Transfer Method View
+//Select Transfer Method View
 "select_a_country_message" = "Sélectionnez un pays";
 
-    // Add Transfer Method
+// Add Transfer Method
 "createTransferMethodButtonLabel" = "Ajouter méthode de transfert";
 "account_information" = "INFORMATIONS RELATIVES AU COMPTE : %1$@(%2$@)";
 "account_holder" = "INFORMATIONS RELATIVES AU TITULAIRE DU COMPTE";
@@ -83,11 +84,11 @@
 
 "date_format" = "JJ-MM-AAAA";
 
-    // Processing View
+// Processing View
 "processing_view_label" = "Traitement en cours";
 "complete_view_label" = "Terminé";
 
-    // Receipt
+// Receipt
 "transactions" = "Transactions";
 "mobileNoTransactions" = "Il n’y a aucune activité à afficher.";
 "mobilePrepaidCardNoTransactions" = "Aucune transaction au cours des 365 derniers jours.";
@@ -208,7 +209,7 @@
 "prepaid_card_transfer_fee" = "Frais de chargement de carte";
 "prepaid_card_transfer_return" = "Retour de chargement de carte prépayée";
 "prepaid_card_bank_withdrawal_reversal" = "Retrait en banque annulé";
-"prepaid_card_bank_withdrawal_chargeback" = "Rétrofaturation de retrait en banque annulé";
+"prepaid_card_bank_withdrawal_chargeback" = "Rétrofacturation de retrait en banque annulé";
 "prepaid_card_refund_fee" = "Frais de remboursement";
 "prepaid_card_monthly_maintenance_fee" = "Frais de maintenance mensuels";
 "prepaid_card_transaction_fee" = "Frais de transaction";
@@ -218,7 +219,7 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Receipt Detail
+// Receipt Detail
 "mobileTransactionDetailsHeader" = "Détails de la transaction";
 "mobileTransactionTypeLabel" = "TRANSACTION";
 "mobileTransactionDetailsLabel" = "DÉTAILS";
@@ -234,7 +235,7 @@
 "mobileJournalNumberLabel" = "Identifiant du reçu";
 "date" = "Date";
 
-    // Transfer Funds
+// Transfer Funds
 "mobileTransferFundsHeader" = "Transfert";
 "mobileConfirmationHeader" = "Confirmer les coordonnées";
 "mobileTransferFromLabel" = "TRANSFERT DE";
@@ -248,6 +249,7 @@
 "mobileFXbuy" = "À";
 "mobileFXRateLabel" = "Taux de change";
 "mobileAvailableBalance" = "Montant disponible %1$@%2$@ %3$@";
+"naAvailableBalance" = "Montant disponible : S.O.";
 "continueButtonLabel" = "Continuer";
 "mobileAddTransferMethod" = "Ajouter méthode de transfert";
 "mobileTransferMethodsHeader" = "Méthodes de transfert";
@@ -263,3 +265,4 @@
 "mobileTransferSuccessMsg" = "Votre transfert est en cours de traitement";
 "mobileTransferSuccessDetails" = "L’argent est en cours de transfert vers votre %1$@.";
 "noTransferFromSourceAvailable" = "Transfert depuis cette source indisponible";
+"transfer_to_bank_card" = "Carte bancaire";

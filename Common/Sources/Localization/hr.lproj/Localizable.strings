@@ -21,12 +21,13 @@
 "remove" = "Uklonite";
 "cancelButtonLabel" = "Poništite";
 "doneButtonLabel" = "Gotovo";
+"edit" = "Uredite";
 "try_again_button_label" = "Pokušajte ponovo";
 "search_placeholder_label" = "Pretraga";
 "unexpected_error_message" = "Nešto je pošlo po zlu, pokušajte ponovo";
 "network_connection_error_title" = "Problem s povezivanjem";
 "unexpected_title" = "Neočekivana pogreška";
-"network_connection_error_message" = "Nailazimo na problem prilikom obrade zahtjeva. Molimo provjerite svoju povezivost.";
+"network_connection_error_message" = "Nailazimo na problem prilikom obrade zahtjeva. Molimo provjerite svoju povezanost.";
 "endingIn" = "završava sa ";
 "to" = "za ";
 "no_country_available_error_message" = "Nema dostupne zemlje";
@@ -38,7 +39,7 @@
 "mobileTransferMethodLabel" = "NAČIN PRIJENOSA";
 "mobileCountryRegion" = "Zemlja/regija";
 "mobileCurrencyLabel" = "Valuta";
-"mobileAreYouSure" = "Jeste li sigurni?";
+"mobileAreYouSure" = "Želite ukloniti ovaj način prijenosa?";
 "fee_flat_formatter" = "%1$@%2$@ naknada";
 "fee_percent_only_min_formatter" = "%1$@%% (Min:%2$@%3$@) naknada";
 "fee_percent_only_max_formatter" = "%1$@%% (Maks:%2$@%3$@) naknada";
@@ -51,9 +52,9 @@
 "transfer_method_not_supported_message" = "Ovaj način prijenosa nije podržan.";
 "error" = "Pogreška";
 "authentication_error_title" = "Pogreška provjere autentičnosti";
-"authentication_error_message" = "Pokušaj pronalaženja tokena za provjeru autentičnosti rezultirao je pogreškom";
+"authentication_error_message" = "Pokušaj pronalaženja autentifikacijskog tokena rezultirao je pogreškom";
 
-    // Transfer methods
+// Transfer methods
 "bank_account" = "Bankovni račun";
 "bank_card" = "Debitna kartica";
 "paper_check" = "Papirnati ček";
@@ -66,12 +67,12 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Manage Prepaid Card Message
+// Manage Prepaid Card Message
 "manage_prepaid_card_message" = "Prijavite se putem web-preglednika da biste mogli upravljati svojom karticom";
-    //Select Transfer Method View
+//Select Transfer Method View
 "select_a_country_message" = "Odaberite zemlju";
 
-    // Add Transfer Method
+// Add Transfer Method
 "createTransferMethodButtonLabel" = "Dodajte Način Prijenosa";
 "account_information" = "INFORMACIJE O RAČUNU: %1$@(%2$@)";
 "account_holder" = "INFORMACIJE O VLASNIKU RAČUNA";
@@ -83,11 +84,11 @@
 
 "date_format" = "GGGG-MM-DD";
 
-    // Processing View
+// Processing View
 "processing_view_label" = "Obrada";
 "complete_view_label" = "Dovrši";
 
-    // Receipt
+// Receipt
 "transactions" = "Transakcije";
 "mobileNoTransactions" = "Nema aktivnosti za prikaz.";
 "mobilePrepaidCardNoTransactions" = "U posljednjih 365 dana nemate nikakvih transakcija.";
@@ -218,7 +219,7 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Receipt Detail
+// Receipt Detail
 "mobileTransactionDetailsHeader" = "Pojedinosti transakcije";
 "mobileTransactionTypeLabel" = "TRANSAKCIJA";
 "mobileTransactionDetailsLabel" = "POJEDINOSTI";
@@ -234,7 +235,7 @@
 "mobileJournalNumberLabel" = "ID potvrde primitka";
 "date" = "Datum";
 
-    // Transfer Funds
+// Transfer Funds
 "mobileTransferFundsHeader" = "Prijenos";
 "mobileConfirmationHeader" = "Potvrdite detalje";
 "mobileTransferFromLabel" = "PRIJENOS SA";
@@ -248,6 +249,7 @@
 "mobileFXbuy" = "Na";
 "mobileFXRateLabel" = "Devizni tečaj";
 "mobileAvailableBalance" = "Dostupan iznos %1$@%2$@ %3$@";
+"naAvailableBalance" = "Dostupan iznos: Nije primjenjivo";
 "continueButtonLabel" = "Nastavite";
 "mobileAddTransferMethod" = "Dodajte način prijenosa";
 "mobileTransferMethodsHeader" = "Načini prijenosa";
@@ -263,3 +265,4 @@
 "mobileTransferSuccessMsg" = "Vaš transfer je u postupku obrade";
 "mobileTransferSuccessDetails" = "Novac je na putu do vašeg %1$@.";
 "noTransferFromSourceAvailable" = "Prijenos sa izvora nije dostupan";
+"transfer_to_bank_card" = "Bankovna kartica";

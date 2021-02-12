@@ -21,6 +21,7 @@
 "remove" = "Verwijderen";
 "cancelButtonLabel" = "Annuleren";
 "doneButtonLabel" = "Gereed";
+"edit" = "Bewerken";
 "try_again_button_label" = "Probeer opnieuw";
 "search_placeholder_label" = "Zoeken";
 "unexpected_error_message" = "Er is iets mis gegaan, probeer het opnieuw";
@@ -33,12 +34,12 @@
 "no_transfer_method_available_error_message" = "Er is geen overboekingsmethode beschikbaar voor %1$@ en %2$@";
 "no_currency_available_error_message" = "Er is geen valuta beschikbaar voor het land %1$@";
 "emptyStateAddTransferMethod" = "Voeg een overboekingsmethode toe om te beginnen.";
-"mobileAddTransferMethodHeader" = "Een overboekingsmethode toevoegen";
+"mobileAddTransferMethodHeader" = "Overboekingsmethode toevoegen";
 "mobileCountryCurrencyLabel" = "LOCATIE EN VALUTA";
 "mobileTransferMethodLabel" = "OVERBOEKINGSMETHODE";
 "mobileCountryRegion" = "Land/regio";
 "mobileCurrencyLabel" = "Valuta";
-"mobileAreYouSure" = "Weet u het zeker?";
+"mobileAreYouSure" = "Deze overboekingsmethode verwijderen?";
 "fee_flat_formatter" = "%1$@%2$@ kosten";
 "fee_percent_only_min_formatter" = "%1$@%% (min:%2$@%3$@) kosten";
 "fee_percent_only_max_formatter" = "%1$@%% (max:%2$@%3$@) kosten";
@@ -53,10 +54,10 @@
 "authentication_error_title" = "Verificatiefout";
 "authentication_error_message" = "Ophaalpoging verificatietoken resulteerde in een fout";
 
-    // Transfer methods
+// Transfer methods
 "bank_account" = "Bankrekening";
 "bank_card" = "Debetkaart";
-"paper_check" = "Papieren check";
+"paper_check" = "Papieren cheque";
 "prepaid_card" = "Prepaidkaart";
 "wire_account" = "Bankrekening";
 "paypal_account" = "PayPal-account";
@@ -66,12 +67,12 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Manage Prepaid Card Message
+// Manage Prepaid Card Message
 "manage_prepaid_card_message" = "Log in met een webbrowser om uw kaart te beheren";
-    //Select Transfer Method View
+//Select Transfer Method View
 "select_a_country_message" = "Selecteer een land";
 
-    // Add Transfer Method
+// Add Transfer Method
 "createTransferMethodButtonLabel" = "Overboekingsmethode toevoegen";
 "account_information" = "GEGEVENS REKENINGHOUDER: %1$@(%2$@)";
 "account_holder" = "GEGEVENS REKENINGHOUDER";
@@ -83,11 +84,11 @@
 
 "date_format" = "DD-MM-JJJJ";
 
-    // Processing View
+// Processing View
 "processing_view_label" = "Bezig met verwerken";
 "complete_view_label" = "Invullen";
 
-    // Receipt
+// Receipt
 "transactions" = "Transacties";
 "mobileNoTransactions" = "Er is geen activiteit om weer te geven.";
 "mobilePrepaidCardNoTransactions" = "Geen transacties in de afgelopen 365 dagen.";
@@ -201,7 +202,7 @@
 "prepaid_card_priority_pass_renewal" = "Verlenging priority-pas";
 "prepaid_card_recurring_interest" = "Doorlopende rente";
 "prepaid_card_refund_repress" = "Terugbetaling onderdrukken";
-"prepaid_card_refund_repress_reversal" = "Terugbetaling van terugbetaling onderdrukken";
+"prepaid_card_refund_repress_reversal" = "Terugboeking van terugbetaling onderdrukken";
 "prepaid_card_sale_repress" = "Verkoop onderdrukken";
 "prepaid_card_statement_fee" = "Kosten UTSKGJ-afschrift";
 "prepaid_card_telephone_support_fee" = "Telefonische informatie: saldo, trans. enz.";
@@ -218,7 +219,7 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Receipt Detail
+// Receipt Detail
 "mobileTransactionDetailsHeader" = "Transactiegegevens";
 "mobileTransactionTypeLabel" = "TRANSACTIE";
 "mobileTransactionDetailsLabel" = "GEGEVENS";
@@ -234,9 +235,9 @@
 "mobileJournalNumberLabel" = "Ontvangstbewijs-ID";
 "date" = "Datum";
 
-    // Transfer Funds
+// Transfer Funds
 "mobileTransferFundsHeader" = "Overboeken";
-"mobileConfirmationHeader" = "Bevestig de gegevens";
+"mobileConfirmationHeader" = "Bevestig gegevens";
 "mobileTransferFromLabel" = "OVERBOEKEN VAN";
 "mobileTransferToLabel" = "OVERBOEKEN NAAR";
 "mobileNoteLabel" = "Opmerking";
@@ -248,6 +249,7 @@
 "mobileFXbuy" = "Naar";
 "mobileFXRateLabel" = "Wisselkoers";
 "mobileAvailableBalance" = "Beschikbaar bedrag %1$@%2$@ %3$@";
+"naAvailableBalance" = "Beschikbaar bedrag: Niet van toepassing";
 "continueButtonLabel" = "Doorgaan";
 "mobileAddTransferMethod" = "Overboekingsmethode toevoegen";
 "mobileTransferMethodsHeader" = "Overboekingsmethoden";
@@ -263,3 +265,4 @@
 "mobileTransferSuccessMsg" = "Uw overboeking wordt verwerkt";
 "mobileTransferSuccessDetails" = "Het geld is onderweg naar uw %1$@.";
 "noTransferFromSourceAvailable" = "Geen overboeking van bron beschikbaar";
+"transfer_to_bank_card" = "Bankkaart";

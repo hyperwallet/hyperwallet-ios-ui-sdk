@@ -1216,6 +1216,7 @@
 		FDF2E7AA257E60BB00589076 /* UpdateTransferMethodSectionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTransferMethodSectionData.swift; sourceTree = "<group>"; };
 		FDF2E7AC257E61AE00589076 /* UpdateTransferMethodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTransferMethodCell.swift; sourceTree = "<group>"; };
 		FDF2E7AE257E622200589076 /* UpdateTransferMethodController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTransferMethodController.swift; sourceTree = "<group>"; };
+		FDFD2CFB25D525B100C064F7 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -4162,6 +4163,7 @@
 				DC61FA2F2564434200C93C50 /* pt-PT */,
 				DC61FA352564F63900C93C50 /* pt-BR */,
 				DC4170792574BB95007AD1B7 /* zh-Hant-CN */,
+				FDFD2CFB25D525B100C064F7 /* id */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
