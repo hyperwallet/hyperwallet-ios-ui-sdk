@@ -17,10 +17,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 "backBarButton" = "Geri";
-"mobileTransferMethodsHeader" = "Aktarım yöntemleri";
+"mobileTransferMethodsHeader" = "Aktarım Yöntemleri";
 "remove" = "Kaldır";
 "cancelButtonLabel" = "İptal et";
 "doneButtonLabel" = "İşlem gerçekleşti";
+"edit" = "Düzenle";
 "try_again_button_label" = "Yeniden Dene";
 "search_placeholder_label" = "Ara";
 "unexpected_error_message" = "Bir hata oluştu; lütfen tekrar deneyin";
@@ -30,15 +31,15 @@
 "endingIn" = "kart numarasının sonu  ";
 "to" = "kime  ";
 "no_country_available_error_message" = "Geçerli ülke yok";
-"no_transfer_method_available_error_message" = " %1$@ ve %2$@ için aktarım yöntemi mevcut değil";
-"no_currency_available_error_message" = " %1$@ ülkesi için para birimi mevcut değil";
-"emptyStateAddTransferMethod" = "Başlamak için bir aktarım yöntemi ekleyin.";
-"mobileAddTransferMethodHeader" = "Bir aktarım yöntemi ekleyin";
+"no_transfer_method_available_error_message" = "%1$@ ve %2$@ için aktarım yöntemi mevcut değil";
+"no_currency_available_error_message" = " ülkesi için para birimi mevcut değil%1$@";
+"emptyStateAddTransferMethod" = "Başlamak için bir aktarım yöntemi ekle.";
+"mobileAddTransferMethodHeader" = "Aktarım yöntemi ekle";
 "mobileCountryCurrencyLabel" = "KONUM VE PARA BİRİMİ";
 "mobileTransferMethodLabel" = "AKTARIM YÖNTEMİ";
 "mobileCountryRegion" = "Ülke/Bölge";
 "mobileCurrencyLabel" = "Para Birimi";
-"mobileAreYouSure" = "Emin misiniz?";
+"mobileAreYouSure" = "Bu aktarım yöntemi kaldırılsın mı?";
 "fee_flat_formatter" = "%1$@%2$@ ücret";
 "fee_percent_only_min_formatter" = "%1$@%% (En az:%2$@%3$@) ücret";
 "fee_percent_only_max_formatter" = "%1$@%% (En fazla:%2$@%3$@) ücret";
@@ -53,7 +54,7 @@
 "authentication_error_title" = "Doğrulama Hatası";
 "authentication_error_message" = "Kimlik doğrulama girişimi bir hatayla sonuçlandı";
 
-    // Transfer methods
+// Transfer methods
 "bank_account" = "Banka Hesabı";
 "bank_card" = "Banka Kartı";
 "paper_check" = "Kâğıt Çek";
@@ -66,13 +67,13 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Manage Prepaid Card Message
+// Manage Prepaid Card Message
 "manage_prepaid_card_message" = "Kartınızı yönetmek için bir web tarayıcısı kullanarak oturum açın";
-    //Select Transfer Method View
+//Select Transfer Method View
 "select_a_country_message" = "Bir ülke seçin";
 
-    // Add Transfer Method
-"createTransferMethodButtonLabel" = "Aktarım Yöntemi Ekleyin";
+// Add Transfer Method
+"createTransferMethodButtonLabel" = "Aktarım Yöntemi Ekle";
 "account_information" = "HESAP BİLGİLERİ: %1$@(%2$@)";
 "account_holder" = "HESAP SAHİBİ BİLGİLERİ";
 "address"="ADRES";
@@ -83,11 +84,11 @@
 
 "date_format" = "YYYY-AA-GG";
 
-    // Processing View
+// Processing View
 "processing_view_label" = "İşlem Gerçekleştiriliyor";
 "complete_view_label" = "Tamamlandı";
 
-    // Receipt
+// Receipt
 "transactions" = "İşlemler";
 "mobileNoTransactions" = "Görüntülenecek etkinlik yok.";
 "mobilePrepaidCardNoTransactions" = "Son 365 günde yapılmış bir işlem yok";
@@ -218,7 +219,7 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Receipt Detail
+// Receipt Detail
 "mobileTransactionDetailsHeader" = "İşlem detayları";
 "mobileTransactionTypeLabel" = "İŞLEM";
 "mobileTransactionDetailsLabel" = "DETAYLAR";
@@ -234,9 +235,9 @@
 "mobileJournalNumberLabel" = "Makbuz Numarası";
 "date" = "Tarih";
 
-    // Transfer Funds
+// Transfer Funds
 "mobileTransferFundsHeader" = "Aktarım";
-"mobileConfirmationHeader" = "Detayları doğrulayın";
+"mobileConfirmationHeader" = "Detayları onayla";
 "mobileTransferFromLabel" = "AKTARIMI YAPAN";
 "mobileTransferToLabel" = "ŞURAYA AKTAR";
 "mobileNoteLabel" = "Not";
@@ -248,9 +249,10 @@
 "mobileFXbuy" = "Kime";
 "mobileFXRateLabel" = "Döviz kuru";
 "mobileAvailableBalance" = "Mevcut miktar %1$@%2$@ %3$@";
+"naAvailableBalance" = "Mevcut miktar:   Geçerli Değil";
 "continueButtonLabel" = "Devam et";
 "mobileAddTransferMethod" = "Aktarım yöntemi ekle";
-"mobileTransferMethodsHeader" = "Aktarım yöntemleri";
+"mobileTransferMethodsHeader" = "Aktarım Yöntemleri";
 "mobileTransferFromHeader" = "Aktarımı Yapan";
 "mobileAvailableFunds" = "Mevcut Para";
 "mobileFXlabel" = "DÖVİZ";
@@ -261,5 +263,6 @@
 "transfer_error_no_transfer_method_module_initialized" = "Bir aktarım yöntemi ekleyemediniz.";
 "transfer_fx_rate_changed" = "Döviz kurundaki değişikliklerden dolayı alacağınız tutar: %1$@";
 "mobileTransferSuccessMsg" = "Transferiniz işleme alındı";
-"mobileTransferSuccessDetails" = "Para %1$@ hesabınıza gönderiliyor.";
+"mobileTransferSuccessDetails" = "Para  hesabınıza gönderiliyor.%1$@.";
 "noTransferFromSourceAvailable" = "Kaynaktan aktarım yok";
+"transfer_to_bank_card" = "Banka Kartı";

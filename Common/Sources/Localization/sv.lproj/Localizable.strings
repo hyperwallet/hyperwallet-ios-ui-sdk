@@ -21,6 +21,7 @@
 "remove" = "Ta bort";
 "cancelButtonLabel" = "Avbryt";
 "doneButtonLabel" = "Klart";
+"edit" = "Redigera";
 "try_again_button_label" = "Försök igen";
 "search_placeholder_label" = "Sök";
 "unexpected_error_message" = "Något gick fel, försök igen";
@@ -33,12 +34,12 @@
 "no_transfer_method_available_error_message" = "Det finns ingen överföringsmetod tillgänglig för %1$@ och %2$@";
 "no_currency_available_error_message" = "Det finns ingen valuta tillgänglig för land %1$@";
 "emptyStateAddTransferMethod" = "Lägg till en överföringsmetod för att komma igång.";
-"mobileAddTransferMethodHeader" = "Lägg till en överföringsmetod";
+"mobileAddTransferMethodHeader" = "Lägg till överföringsmetod";
 "mobileCountryCurrencyLabel" = "PLATS OCH VALUTA";
 "mobileTransferMethodLabel" = "ÖVERFÖRINGSMETOD";
 "mobileCountryRegion" = "Land/område";
 "mobileCurrencyLabel" = "Valuta";
-"mobileAreYouSure" = "Är du säker?";
+"mobileAreYouSure" = "Ta bort den här överföringsmetoden?";
 "fee_flat_formatter" = "%1$@%2$@ avgift";
 "fee_percent_only_min_formatter" = "%1$@%% (Min:%2$@%3$@) avgift";
 "fee_percent_only_max_formatter" = "%1$@%% (Max:%2$@%3$@) avgift";
@@ -53,7 +54,7 @@
 "authentication_error_title" = "Autentiseringsfel";
 "authentication_error_message" = "Autentiseringstokens hämtningsförsök resulterade i ett fel";
 
-    // Transfer methods
+// Transfer methods
 "bank_account" = "Bankkonto";
 "bank_card" = "Betalkort";
 "paper_check" = "Papperscheck";
@@ -66,12 +67,12 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Manage Prepaid Card Message
+// Manage Prepaid Card Message
 "manage_prepaid_card_message" = "Logga in med en webbläsare för att hantera ditt kort";
-    //Select Transfer Method View
+//Select Transfer Method View
 "select_a_country_message" = "Välj ett land";
 
-    // Add Transfer Method
+// Add Transfer Method
 "createTransferMethodButtonLabel" = "Lägg till överföringsmetod";
 "account_information" = "KONTOUPPGIFTER: %1$@(%2$@)";
 "account_holder" = "UPPGIFTER OM KONTOINNEHAVARE";
@@ -83,11 +84,11 @@
 
 "date_format" = "ÅÅÅÅ-MM-DD";
 
-    // Processing View
+// Processing View
 "processing_view_label" = "Behandlar";
 "complete_view_label" = "Slutför";
 
-    // Receipt
+// Receipt
 "transactions" = "Transaktioner";
 "mobileNoTransactions" = "Det finns ingen aktivitet att visa.";
 "mobilePrepaidCardNoTransactions" = "Inga transaktioner de senaste 365 dagarna.";
@@ -218,7 +219,7 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Receipt Detail
+// Receipt Detail
 "mobileTransactionDetailsHeader" = "Transaktionsdetaljer";
 "mobileTransactionTypeLabel" = "TRANSAKTION";
 "mobileTransactionDetailsLabel" = "DETALJER";
@@ -234,9 +235,9 @@
 "mobileJournalNumberLabel" = "Kvitto-ID";
 "date" = "Datum";
 
-    // Transfer Funds
+// Transfer Funds
 "mobileTransferFundsHeader" = "Överföring";
-"mobileConfirmationHeader" = "Bekräfta uppgifterna";
+"mobileConfirmationHeader" = "Bekräfta uppgifter";
 "mobileTransferFromLabel" = "ÖVERFÖRING FRÅN";
 "mobileTransferToLabel" = "ÖVERFÖRING TILL";
 "mobileNoteLabel" = "Anteckning";
@@ -248,6 +249,7 @@
 "mobileFXbuy" = "Till";
 "mobileFXRateLabel" = "Valutakurs";
 "mobileAvailableBalance" = "Tillgängligt belopp %1$@%2$@ %3$@";
+"naAvailableBalance" = "Tillgängligt belopp: Ej tillämpligt";
 "continueButtonLabel" = "Fortsätt";
 "mobileAddTransferMethod" = "Lägg till överföringsmetod";
 "mobileTransferMethodsHeader" = "Överföringsmetoder";
@@ -259,7 +261,8 @@
 "transferAmountInvalid" = "Ange ett giltigt överföringsbelopp";
 "noTransferMethodAdded" = "Överföringsmetod krävs";
 "transfer_error_no_transfer_method_module_initialized" = "Du kan inte lägga till en överföringsmetod.";
-"transfer_fx_rate_changed" = "På grund av förändringar i valutakursen, kommer du nu att få: %1$@";
+"transfer_fx_rate_changed" = "På grund av förändringar i valutakursen kommer du nu att få: %1$@";
 "mobileTransferSuccessMsg" = "Din överföring behandlas";
 "mobileTransferSuccessDetails" = "Pengarna är på väg till ditt %1$@.";
 "noTransferFromSourceAvailable" = "Det finns ingen överföring från källan tillgänglig";
+"transfer_to_bank_card" = "Bankkort";

@@ -21,6 +21,7 @@
 "remove" = "Κατάργηση";
 "cancelButtonLabel" = "Ακύρωση";
 "doneButtonLabel" = "Τέλος";
+"edit" = "Επεξεργασία";
 "try_again_button_label" = "Δοκιμάστε ξανά";
 "search_placeholder_label" = "Αναζήτηση";
 "unexpected_error_message" = "Κάτι πήγε στραβά. Δοκιμάστε ξανά.";
@@ -33,27 +34,27 @@
 "no_transfer_method_available_error_message" = "Δεν υπάρχει διαθέσιμος τρόπος μεταφοράς για το %1$@ και το %2$@";
 "no_currency_available_error_message" = "Δεν υπάρχει διαθέσιμο νόμισμα για τη χώρα %1$@";
 "emptyStateAddTransferMethod" = "Ξεκινήστε προσθέτοντας έναν τρόπο μεταφοράς.";
-"mobileAddTransferMethodHeader" = "Προσθέστε έναν τρόπο μεταφοράς";
+"mobileAddTransferMethodHeader" = "Προσθήκη τρόπου μεταφοράς";
 "mobileCountryCurrencyLabel" = "ΤΟΠΟΘΕΣΙΑ ΚΑΙ ΝΟΜΙΣΜΑ";
 "mobileTransferMethodLabel" = "ΤΡΟΠΟΣ ΜΕΤΑΦΟΡΑΣ";
 "mobileCountryRegion" = "Χώρα/Περιοχή";
 "mobileCurrencyLabel" = "Νόμισμα";
-"mobileAreYouSure" = "Είστε βέβαιος/-η;";
-"fee_flat_formatter" = "Τέλος %1$@ %2$@";
-"fee_percent_only_min_formatter" = "Τέλος %1$@%% (ελάχιστο: %2$@ %3$@)";
-"fee_percent_only_max_formatter" = "Τέλος %1$@%% (μέγιστο: %2$@ %3$@)";
-"fee_percent_formatter" = "Τέλος %1$@%% (ελάχιστο: %2$@ %3$@, μέγιστο: %2$@ %4$@)";
-"fee_mix_no_min_and_max_formatter" = "Τέλος %1$@ %2$@ + %3$@%%";
-"fee_mix_only_min_formatter" = "Τέλος %1$@ %2$@ + %3$@%% (ελάχιστο: %1$@ %4$@)";
-"fee_mix_only_max_formatter" = "Τέλος %1$@ %2$@ + %3$@%% (μέγιστο: %1$@ %4$@)";
-"fee_mix_formatter" = "Τέλος %1$@ %2$@ + %3$@%% (ελάχιστο: %1$@ %4$@, μέγιστο: %1$@ %5$@)";
-"fee_percent_no_min_and_max_formatter" = "Τέλος %1$@%%";
+"mobileAreYouSure" = "Κατάργηση αυτού του τρόπου μεταφοράς;";
+"fee_flat_formatter" = "Τέλος %1$@%2$@";
+"fee_percent_only_min_formatter" = "Τέλος %1$@%% (ελάχιστο: %2$@%3$@)";
+"fee_percent_only_max_formatter" = "Τέλος %1$@%% (μέγιστο: %2$@%3$@)";
+"fee_percent_formatter" = "Τέλος %1$@%% (ελάχιστο: %2$@ %3$@, μέγιστο: %2$@%4$@)";
+"fee_mix_no_min_and_max_formatter" = "%1$@%2$@ + %3$@%%Τέλος ";
+"fee_mix_only_min_formatter" = "Τέλος %1$@ %2$@ + %3$@%% (ελάχιστο: %1$@%4$@)";
+"fee_mix_only_max_formatter" = "Τέλος %1$@ %2$@ + %3$@%% (μέγιστο: %1$@%4$@)";
+"fee_mix_formatter" = "Τέλος %1$@ %2$@ + %3$@%% (ελάχιστο: %1$@ %4$@, μέγιστο: %1$@%5$@)";
+"fee_percent_no_min_and_max_formatter" = "%1$@%%Τέλος ";
 "transfer_method_not_supported_message" = "Αυτός ο τρόπος μεταφοράς δεν υποστηρίζεται.";
 "error" = "Σφάλμα";
 "authentication_error_title" = "Σφάλμα ελέγχου ταυτότητας";
 "authentication_error_message" = "Η προσπάθεια ανάκτησης του διακριτικού ταυτότητας κατέληξε σε σφάλμα";
 
-    // Transfer methods
+// Transfer methods
 "bank_account" = "Τραπεζικός λογαριασμός";
 "bank_card" = "Χρεωστική κάρτα";
 "paper_check" = "Επιταγή";
@@ -66,14 +67,14 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Manage Prepaid Card Message
+// Manage Prepaid Card Message
 "manage_prepaid_card_message" = "Συνδεθείτε χρησιμοποιώντας ένα πρόγραμμα περιήγησης για να διαχειριστείτε την κάρτα σας";
-    //Select Transfer Method View
+//Select Transfer Method View
 "select_a_country_message" = "Επιλέξτε μια χώρα";
 
-    // Add Transfer Method
+// Add Transfer Method
 "createTransferMethodButtonLabel" = "Προσθήκη τρόπου μεταφοράς";
-"account_information" = "ΣΤΟΙΧΕΙΑ ΛΟΓΑΡΙΑΣΜΟΥ: %1$@ (%2$@)";
+"account_information" = "ΣΤΟΙΧΕΙΑ ΛΟΓΑΡΙΑΣΜΟΥ: %1$@(%2$@)";
 "account_holder" = "ΣΤΟΙΧΕΙΑ ΚΑΤΟΧΟΥ ΛΟΓΑΡΙΑΣΜΟΥ";
 "address"="ΔΙΕΥΘΥΝΣΗ";
 "mobileFeesAndProcessingTime" = "ΤΕΛΗ ΚΑΙ ΧΡΟΝΟΣ ΕΠΕΞΕΡΓΑΣΙΑΣ";
@@ -83,11 +84,11 @@
 
 "date_format" = "ΈΈΈΈ-MM-ΗΗ";
 
-    // Processing View
+// Processing View
 "processing_view_label" = "Γίνεται επεξεργασία";
 "complete_view_label" = "Ολοκληρώθηκε";
 
-    // Receipt
+// Receipt
 "transactions" = "Συναλλαγές";
 "mobileNoTransactions" = "Δεν υπάρχει δραστηριότητα προς προβολή.";
 "mobilePrepaidCardNoTransactions" = "Καμία συναλλαγή τις τελευταίες 365 ημέρες.";
@@ -101,7 +102,7 @@
 "bank_account_transfer_fee" = "Τέλος επιστροφής τραπεζικού λογαριασμού";
 "bank_account_transfer_return_fee" = "Τέλος επιστροφής τραπεζικού λογαριασμού";
 "bank_account_transfer_return" = "Επιστροφή τραπεζικού λογαριασμού";
-"card_activation_fee_waiver" = "Αποποίηση τέλος ενεργοποίησης κάρτας";
+"card_activation_fee_waiver" = "Απαλλαγή τέλους ενεργοποίησης κάρτας";
 "card_activation_fee" = "Τέλος ενεργοποίησης κάρτας";
 "card_fee" = "Τέλος κάρτας";
 "customer_service_fee_refund" = "Επιστροφή τέλους εξυπηρέτησης πελατών";
@@ -218,7 +219,7 @@
 "visa" = "Visa";
 "mastercard" = "Mastercard";
 
-    // Receipt Detail
+// Receipt Detail
 "mobileTransactionDetailsHeader" = "Στοιχεία συναλλαγής";
 "mobileTransactionTypeLabel" = "ΣΥΝΑΛΛΑΓΗ";
 "mobileTransactionDetailsLabel" = "ΣΤΟΙΧΕΙΑ";
@@ -230,13 +231,13 @@
 "mobilePromoWebsite" = "Ιστότοπος προώθησης";
 "mobileTransactionDetailsTotal" = "Σύνολο συναλλαγής";
 "amount" = "Ποσό";
-"mobileFeeLabel" = "Τέλος ";
+"mobileFeeLabel" = "Τέλος";
 "mobileJournalNumberLabel" = "Αναγνωριστικό απόδειξης";
 "date" = "Ημερομηνία";
 
-    // Transfer Funds
+// Transfer Funds
 "mobileTransferFundsHeader" = "Μεταφορά";
-"mobileConfirmationHeader" = "Επιβεβαιώστε τα στοιχεία";
+"mobileConfirmationHeader" = "Επιβεβαίωση στοιχείων";
 "mobileTransferFromLabel" = "ΜΕΤΑΦΟΡΑ ΑΠΟ";
 "mobileTransferToLabel" = "ΜΕΤΑΦΟΡΑ ΠΡΟΣ";
 "mobileNoteLabel" = "Σημείωση";
@@ -247,7 +248,8 @@
 "mobileFXsell" = "Από";
 "mobileFXbuy" = "Προς";
 "mobileFXRateLabel" = "Ισοτιμία";
-"mobileAvailableBalance" = "Διαθέσιμο ποσό %1$@ %2$@ %3$@";
+"mobileAvailableBalance" = "Διαθέσιμο ποσό   %1$@%2$@ %3$@";
+"naAvailableBalance" = "Διαθέσιμο ποσό:   Δ/Ι";
 "continueButtonLabel" = "Συνέχεια";
 "mobileAddTransferMethod" = "Προσθήκη τρόπου μεταφοράς";
 "mobileTransferMethodsHeader" = "Τρόποι μεταφοράς";
@@ -263,3 +265,4 @@
 "mobileTransferSuccessMsg" = "Η μεταφορά σας βρίσκεται σε επεξεργασία";
 "mobileTransferSuccessDetails" = "Τα χρήματα βρίσκονται καθ’ οδόν προς τον %1$@ σας.";
 "noTransferFromSourceAvailable" = "Δεν υπάρχει καμία διαθέσιμη μεταφορά από αυτή την προέλευση";
+"transfer_to_bank_card" = "Τραπεζική κάρτα";
