@@ -38,7 +38,7 @@ public class Theme: NSObject {
         /// The color to highlight errors
         public static var errorColor = UIColor(rgb: 0xFF3B30)
         /// The subtitle color
-        public static var subtitleColor = UIColor(rgb: 0x3c3c43, alpha: 0.6)
+        public static var subtitleColor = UIColor(rgb: 0x757575, alpha: 0.6)
         /// The text color
         public static var textColor = UIColor(rgb: 0x8e8e93)
         /// The title font style
@@ -105,6 +105,8 @@ public class Theme: NSObject {
         /// The common `UITableViewCell` height.
         public static let smallHeight = CGFloat(61)
         /// The common `UITableViewCell` height.
+        public static let mediumHeight = CGFloat(70)
+        /// The common `UITableViewCell` height.
         public static let height = CGFloat(80)
         /// The `UITableViewCell` height for the List transfer method items and
         /// the Select transfer method type items.
@@ -116,7 +118,7 @@ public class Theme: NSObject {
         /// The `UITableViewCell` tint color
         public static var tintColor = Theme.tintColor
         /// The `UITableViewCell` separator color
-        public static var separatorColor = UIColor(rgb: 0x3c3c43, alpha: 0.29)
+        public static var separatorColor = UIColor(rgb: 0x757575, alpha: 0.29)
         /// The `UITableViewCell` disabled background color
         public static var disabledBackgroundColor = UIColor(rgb: 0xf8f8f8)
     }
