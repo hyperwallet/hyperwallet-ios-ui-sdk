@@ -44,7 +44,7 @@ public final class HyperwalletIcon {
             return .wire
 
         case HyperwalletTransferMethod.TransferMethodType.venmoAccount.rawValue:
-            return .venmo
+            return .moneygram
 
         case "CASH_PICKUP_MG":
             return .moneygram
