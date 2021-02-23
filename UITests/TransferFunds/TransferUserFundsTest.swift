@@ -995,7 +995,6 @@ class TransferUserFundsTest: BaseTests {
 
         waitForNonExistence(spinner)
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 0), TransferMethods.bankAccount)
-        // XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), expectedUSDestinationLabel + "1234")
 
         XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0),
                        transferFunds.getDestinationLabel(country: "United States",

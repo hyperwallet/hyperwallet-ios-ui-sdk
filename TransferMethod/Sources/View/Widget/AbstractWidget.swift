@@ -78,7 +78,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
         return nil
     }
 
-    //swiftlint:disable unavailable_function
+    // swiftlint:disable unavailable_function
     func focus() {
         fatalError("not implemented")
     }
@@ -157,7 +157,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
         inputHandler?()
     }
 
-    //swiftlint:disable unavailable_function
+    // swiftlint:disable unavailable_function
     func value() -> String {
         fatalError("value() has not been implemented")
     }
