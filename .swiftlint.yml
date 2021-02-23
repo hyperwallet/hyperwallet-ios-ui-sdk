@@ -5,6 +5,8 @@ disabled_rules: # rule identifiers to exclude from running
   - file_length
   - closure_body_length
   - implicit_return
+  - empty_xctest_method
+  - inclusive_language
 type_name:
     max_length: # warning and error
       warning: 60
@@ -18,7 +20,6 @@ opt_in_rules: # some rules are only opt-in
   - unused_declaration
   - empty_count
   - empty_string
-  - empty_xctest_method
   - explicit_init
   - closure_body_length
   - closure_end_indentation

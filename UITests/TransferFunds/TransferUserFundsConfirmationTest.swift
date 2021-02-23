@@ -23,7 +23,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         transferFundsConfirmation = TransferFundsConfirmation(app: app)
     }
 
-    //swiftlint:disable function_body_length
+    // swiftlint:disable function_body_length
     func testTransferFundsConfirmation_withoutFX() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListMoreThanOneTransferMethod",
@@ -94,7 +94,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         waitForNonExistence(spinner)
     }
 
-    //swiftlint:disable function_body_length
+    // swiftlint:disable function_body_length
     func testTransferFundsConfirmation_withFX() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListMoreThanOneTransferMethod",
@@ -173,7 +173,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertTrue(transferFundsConfirmation.noteLabel.exists)
         XCTAssertEqual(transferFundsConfirmation.noteDescription.value as? String, "Transfer All")
 
-        //transferFundsConfirmation.tapConfirmButton()
+        // transferFundsConfirmation.tapConfirmButton()
         let button = transferFundsConfirmation.scheduleTable.buttons["scheduleTransferLabel"]
         app.scroll(to: button)
         button.tap()
@@ -182,7 +182,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         waitForNonExistence(spinner)
     }
 
-    //Tranfer Venmo Manage method
+    // Tranfer Venmo Manage method
     func testTransferFundsConfirmationVenmo_withFX() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListTransferMethodMoreThanOneVenmo",
@@ -207,7 +207,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
                        String(format: "mobileAvailableBalance".localized(), "$", "5,855.17", "USD"))
         transferFunds.transferMaxAllFunds.doubleTap()
 
-        //verify venmo destination
+        // verify venmo destination
         waitForExistence(transferFunds.addSelectDestinationLabel)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, venmoAccount)
 
@@ -227,7 +227,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertTrue(transferFundsConfirmation.noteLabel.exists)
         XCTAssertEqual(transferFundsConfirmation.noteDescription.value as? String, "Transfer All")
 
-        //transferFundsConfirmation.tapConfirmButton()
+        // transferFundsConfirmation.tapConfirmButton()
         let button = transferFundsConfirmation.scheduleTable.buttons["scheduleTransferLabel"]
         app.scroll(to: button)
         button.tap()
@@ -236,7 +236,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         waitForNonExistence(spinner)
     }
 
-    //swiftlint:disable line_length
+    // swiftlint:disable line_length
     func testTransferFundsConfirmation_timeOutError() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListMoreThanOneTransferMethod",

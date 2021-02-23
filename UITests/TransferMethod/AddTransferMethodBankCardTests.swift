@@ -147,7 +147,7 @@ class AddTransferMethodBankCardTests: BaseTests {
                                   method: HTTPMethod.post)
 
         addTransferMethod.setCardNumber("101001010102221234")
-        //addTransferMethod.setDateOfExpiry(expiryMonth: "January", expiryYear: "2020")
+        // addTransferMethod.setDateOfExpiry(expiryMonth: "January", expiryYear: "2020")
         addTransferMethod.setDateOfExpiryByMMYY(expiryMonth: "01", expiryYear: "20")
         XCTAssertEqual(app.textFields["dateOfExpiry"].value as? String, "01/20")
         addTransferMethod.setCvv("2222")
