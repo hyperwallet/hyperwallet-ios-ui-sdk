@@ -28,7 +28,9 @@ before_install:
   - xcrun simctl list
   # Update the brew and build dependencies tools
   # - brew outdated carthage || brew upgrade carthage
-  - carthage update --platform ios --use-xcframeworks --cache-builds
+  - brew update && brew upgrade carthage
+  - carthage version
+  - carthage update --platform ios --use-xcframeworks --no-use-binaries --cache-builds
   - gem i slather
   # Install build output formatting tool
   - gem install xcpretty
