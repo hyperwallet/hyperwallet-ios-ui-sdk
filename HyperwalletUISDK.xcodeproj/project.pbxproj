@@ -433,6 +433,27 @@
 		DCF74266257E2F7400A5295A /* PaperCheckReceiptsForFewMonths.json in Resources */ = {isa = PBXBuildFile; fileRef = DCF74265257E2F7400A5295A /* PaperCheckReceiptsForFewMonths.json */; };
 		DCF74268257E305600A5295A /* ListTransferMethodResponsePaperCheck.json in Resources */ = {isa = PBXBuildFile; fileRef = DCF74267257E305600A5295A /* ListTransferMethodResponsePaperCheck.json */; };
 		DCF7426A257E68F500A5295A /* ListTransferMethodResponseWithoutPaperCheck.json in Resources */ = {isa = PBXBuildFile; fileRef = DCF74269257E68F500A5295A /* ListTransferMethodResponseWithoutPaperCheck.json */; };
+		FD03133E25E4E96700505BDA /* Hippolyte.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD03133D25E4E96700505BDA /* Hippolyte.xcframework */; };
+		FD03133F25E4E96700505BDA /* Hippolyte.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD03133D25E4E96700505BDA /* Hippolyte.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FD03135125E4E97200505BDA /* Insights.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD4872FE25DE97BB005855B6 /* Insights.xcframework */; };
+		FD03135225E4E97200505BDA /* Insights.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD4872FE25DE97BB005855B6 /* Insights.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FD03136425E4EA2600505BDA /* Hippolyte.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD03133D25E4E96700505BDA /* Hippolyte.xcframework */; };
+		FD03137625E4EA3600505BDA /* Hippolyte.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD03133D25E4E96700505BDA /* Hippolyte.xcframework */; };
+		FD03138825E4EA4E00505BDA /* Hippolyte.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD03133D25E4E96700505BDA /* Hippolyte.xcframework */; };
+		FD03139A25E4EA5D00505BDA /* Hippolyte.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD03133D25E4E96700505BDA /* Hippolyte.xcframework */; };
+		FD0313AC25E4EA6200505BDA /* Hippolyte.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD03133D25E4E96700505BDA /* Hippolyte.xcframework */; };
+		FD0313BE25E4EA9600505BDA /* Hippolyte.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD03133D25E4E96700505BDA /* Hippolyte.xcframework */; };
+		FD0313D025E4EA9B00505BDA /* Hippolyte.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD03133D25E4E96700505BDA /* Hippolyte.xcframework */; };
+		FD0313E225E4EAA300505BDA /* Hippolyte.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD03133D25E4E96700505BDA /* Hippolyte.xcframework */; };
+		FD0313E425E4EAB600505BDA /* Swifter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; };
+		FD03140725E4EABE00505BDA /* Swifter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; };
+		FD03141925E4EAC300505BDA /* Swifter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; };
+		FD03142B25E4EAC700505BDA /* Swifter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; };
+		FD03143D25E4EACC00505BDA /* Swifter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; };
+		FD03144F25E4EAD100505BDA /* Swifter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; };
+		FD03146125E4EAD700505BDA /* Swifter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; };
+		FD03147325E4EADE00505BDA /* Swifter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; };
+		FD03148525E4EB0D00505BDA /* Swifter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; };
 		FD1208CE2582433100A8D8B2 /* UpdateTransferMethodPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1208CD2582433100A8D8B2 /* UpdateTransferMethodPresenterTests.swift */; };
 		FD1208CF258245DF00A8D8B2 /* TransferMethodUpdateConfigurationFieldsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = FDD2F4DF2580F774008E4CFC /* TransferMethodUpdateConfigurationFieldsResponse.json */; };
 		FD48726E25DE975D005855B6 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
@@ -444,7 +465,6 @@
 		FD4872DA25DE979C005855B6 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
 		FD4872EC25DE97A1005855B6 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
 		FD4872FF25DE97BB005855B6 /* Insights.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD4872FE25DE97BB005855B6 /* Insights.xcframework */; };
-		FD48731125DE989E005855B6 /* Insights.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD4872FE25DE97BB005855B6 /* Insights.xcframework */; };
 		FD48732325DE98D6005855B6 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
 		FD48732425DE98D6005855B6 /* HyperwalletSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FD5066242538238900640B36 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3839225E8BA900CD4137 /* UIImage.swift */; };
@@ -677,10 +697,12 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				FD03133F25E4E96700505BDA /* Hippolyte.xcframework in Embed Frameworks */,
 				98CACE2124A6CFD60000F2B0 /* TransferMethod.framework in Embed Frameworks */,
 				98CACE2724A6CFDA0000F2B0 /* UserRepository.framework in Embed Frameworks */,
 				98CACE1B24A6CFD10000F2B0 /* Receipt.framework in Embed Frameworks */,
 				98CACE1D24A6CFD30000F2B0 /* ReceiptRepository.framework in Embed Frameworks */,
+				FD03135225E4E97200505BDA /* Insights.xcframework in Embed Frameworks */,
 				FD48732425DE98D6005855B6 /* HyperwalletSDK.xcframework in Embed Frameworks */,
 				98CACE2524A6CFD80000F2B0 /* TransferRepository.framework in Embed Frameworks */,
 				98DAF67E24B7E33600A8D7CA /* Common.framework in Embed Frameworks */,
@@ -1202,6 +1224,8 @@
 		DCF74265257E2F7400A5295A /* PaperCheckReceiptsForFewMonths.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PaperCheckReceiptsForFewMonths.json; sourceTree = "<group>"; };
 		DCF74267257E305600A5295A /* ListTransferMethodResponsePaperCheck.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ListTransferMethodResponsePaperCheck.json; sourceTree = "<group>"; };
 		DCF74269257E68F500A5295A /* ListTransferMethodResponseWithoutPaperCheck.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ListTransferMethodResponseWithoutPaperCheck.json; sourceTree = "<group>"; };
+		FD03133D25E4E96700505BDA /* Hippolyte.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Hippolyte.xcframework; path = Carthage/Build/Hippolyte.xcframework; sourceTree = "<group>"; };
+		FD0313E325E4EAB600505BDA /* Swifter.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Swifter.xcframework; path = Carthage/Build/Swifter.xcframework; sourceTree = "<group>"; };
 		FD1208CD2582433100A8D8B2 /* UpdateTransferMethodPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTransferMethodPresenterTests.swift; sourceTree = "<group>"; };
 		FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = HyperwalletSDK.xcframework; path = Carthage/Build/HyperwalletSDK.xcframework; sourceTree = "<group>"; };
 		FD4872FE25DE97BB005855B6 /* Insights.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Insights.xcframework; path = Carthage/Build/Insights.xcframework; sourceTree = "<group>"; };
@@ -1244,6 +1268,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				073BB98B22E63DB50053C24E /* TransferRepository.framework in Frameworks */,
+				FD0313D025E4EA9B00505BDA /* Hippolyte.xcframework in Frameworks */,
+				FD03140725E4EABE00505BDA /* Swifter.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1260,6 +1286,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A9A7BE822E859E60022E573 /* Transfer.framework in Frameworks */,
+				FD03139A25E4EA5D00505BDA /* Hippolyte.xcframework in Frameworks */,
+				FD03143D25E4EACC00505BDA /* Swifter.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1276,6 +1304,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AE6B6C922D605B20009DEFE /* ReceiptRepository.framework in Frameworks */,
+				FD03138825E4EA4E00505BDA /* Hippolyte.xcframework in Frameworks */,
+				FD03144F25E4EAD100505BDA /* Swifter.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1292,6 +1322,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				643912DD22DF40CB00036609 /* UserRepository.framework in Frameworks */,
+				FD0313E225E4EAA300505BDA /* Hippolyte.xcframework in Frameworks */,
+				FD0313E425E4EAB600505BDA /* Swifter.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1306,11 +1338,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD48731125DE989E005855B6 /* Insights.xcframework in Frameworks */,
+				FD03133E25E4E96700505BDA /* Hippolyte.xcframework in Frameworks */,
 				98CACE1C24A6CFD30000F2B0 /* ReceiptRepository.framework in Frameworks */,
 				98CACE2624A6CFDA0000F2B0 /* UserRepository.framework in Frameworks */,
+				FD03148525E4EB0D00505BDA /* Swifter.xcframework in Frameworks */,
 				98CACE2224A6CFD70000F2B0 /* TransferMethodRepository.framework in Frameworks */,
 				98CACE2424A6CFD80000F2B0 /* TransferRepository.framework in Frameworks */,
+				FD03135125E4E97200505BDA /* Insights.xcframework in Frameworks */,
 				98CACE2024A6CFD50000F2B0 /* TransferMethod.framework in Frameworks */,
 				98DAF67D24B7E33600A8D7CA /* Common.framework in Frameworks */,
 				98CACE1E24A6CFD40000F2B0 /* Transfer.framework in Frameworks */,
@@ -1333,6 +1367,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB551FA022E13ED000DD65C2 /* Common.framework in Frameworks */,
+				FD03136425E4EA2600505BDA /* Hippolyte.xcframework in Frameworks */,
+				FD03147325E4EADE00505BDA /* Swifter.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1349,6 +1385,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB551FB022E1409700DD65C2 /* TransferMethod.framework in Frameworks */,
+				FD0313AC25E4EA6200505BDA /* Hippolyte.xcframework in Frameworks */,
+				FD03142B25E4EAC700505BDA /* Swifter.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1365,6 +1403,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB99C2D122E220C200E45185 /* Receipt.framework in Frameworks */,
+				FD03137625E4EA3600505BDA /* Hippolyte.xcframework in Frameworks */,
+				FD03146125E4EAD700505BDA /* Swifter.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1381,6 +1421,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBAF92A622CFCBC7004F197A /* TransferMethodRepository.framework in Frameworks */,
+				FD0313BE25E4EA9600505BDA /* Hippolyte.xcframework in Frameworks */,
+				FD03141925E4EAC300505BDA /* Swifter.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2257,6 +2299,8 @@
 		DBAE17C0225F136A00C5CC60 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FD0313E325E4EAB600505BDA /* Swifter.xcframework */,
+				FD03133D25E4E96700505BDA /* Hippolyte.xcframework */,
 				FD4872FE25DE97BB005855B6 /* Insights.xcframework */,
 				FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */,
 				98FBC68923D8D8D90050E2B6 /* HyperwalletSDK.framework */,
