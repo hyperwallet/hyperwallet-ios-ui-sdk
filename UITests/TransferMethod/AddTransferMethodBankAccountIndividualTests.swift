@@ -141,10 +141,9 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
                                   filename: "BankAccountInvalidRoutingResponse",
                                   method: HTTPMethod.post)
         waitForNonExistence(spinner)
-        waitForExistence(addTransferMethod.branchIdInput)
-
-        addTransferMethod.setBranchId("021000022")
+        waitForExistence(addTransferMethod.bankAccountIdInput)
         addTransferMethod.setBankAccountId("12345")
+        addTransferMethod.setBranchId("021000022")
         addTransferMethod.selectAccountType("CHECKING")
 
         addTransferMethod.clickCreateTransferMethodButton()
