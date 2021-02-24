@@ -88,7 +88,8 @@ extension XCUIElement {
         }
 
         UIPasteboard.general.string = text
-        field.doubleTap()
+        field.tap()
+        field.press(forDuration: 2)
         sleep(1)
         app.menuItems["Paste"].tap()
         sleep(1)
