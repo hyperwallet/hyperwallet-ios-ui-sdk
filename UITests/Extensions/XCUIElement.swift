@@ -55,7 +55,7 @@ extension XCUIElement {
       - Parameter text: the text to enter into the field
       */
      func enterText(text: String) {
-         self.tap()
+         self.doubleTap()
          self.typeText(text)
      }
 

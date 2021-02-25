@@ -114,7 +114,7 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
         addTransferMethod.setBankAccountId("19")
 
         addTransferMethod.clickCreateTransferMethodButton()
-
+        waitForExistence(addTransferMethod.branchIdError)
         XCTAssert(addTransferMethod.branchIdError.exists)
         XCTAssert(addTransferMethod.bankAccountIdError.exists)
 
@@ -140,10 +140,9 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
         mockServer.setupStubError(url: "/rest/v3/users/usr-token/bank-accounts",
                                   filename: "BankAccountInvalidRoutingResponse",
                                   method: HTTPMethod.post)
-        waitForNonExistence(spinner)
-        waitForExistence(addTransferMethod.bankAccountIdInput)
-        addTransferMethod.setBankAccountId("12345")
+        XCTAssertTrue(addTransferMethod.branchIdInput.waitForExistence(timeout: 30))
         addTransferMethod.setBranchId("021000022")
+        addTransferMethod.setBankAccountId("12345")
         addTransferMethod.selectAccountType("CHECKING")
 
         addTransferMethod.clickCreateTransferMethodButton()
