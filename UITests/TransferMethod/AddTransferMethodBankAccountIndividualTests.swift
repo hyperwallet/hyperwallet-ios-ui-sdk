@@ -140,7 +140,6 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
         mockServer.setupStubError(url: "/rest/v3/users/usr-token/bank-accounts",
                                   filename: "BankAccountInvalidRoutingResponse",
                                   method: HTTPMethod.post)
-        
         XCTAssertTrue(addTransferMethod.branchIdInput.waitForExistence(timeout: 40))
         addTransferMethod.setBranchId("021000022")
         addTransferMethod.setBankAccountId("12345")
