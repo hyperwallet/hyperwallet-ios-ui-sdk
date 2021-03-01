@@ -20,7 +20,7 @@ import XCTest
 
 @testable import Common
 class StringTests: XCTestCase {
-    //swiftlint:disable function_body_length
+    // swiftlint:disable function_body_length
     func testFormatToCurrency() {
         let cases = [
                      ("Albania Currency", "1000000", "ALL", "ALL 1,000,000"),

@@ -363,7 +363,7 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.tapContinueButton()
 
         // Assert Confirmation Page
-        //waitForExistence(elementQuery["Confirm"])
+        // waitForExistence(elementQuery["Confirm"])
     }
 
     func testTransferFunds_createTransferWithoutFX() {
@@ -407,7 +407,7 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.tapContinueButton()
 
         // Assert Confirmation Page
-        //waitForExistence(elementQuery["Confirm"])
+        // waitForExistence(elementQuery["Confirm"])
     }
 
     /* Given that user is on the Transfer fund page and selected a Transfer Destination
@@ -486,7 +486,7 @@ class TransferUserFundsTest: BaseTests {
         assertButtonFalse(element: prepaidCard)
 
         // Assert can go back to previous page
-        //selectDestination.clickBackButton()
+        // selectDestination.clickBackButton()
         clickBackButton()
         transferFunds.verifyTransferFundsTitle()
     }
@@ -807,6 +807,7 @@ class TransferUserFundsTest: BaseTests {
                              filename: "AddNewTransferMethodOneTransferMethod",
                              method: HTTPMethod.get)
 
+        waitForExistence(transferFunds.addSelectDestinationLabel)
         transferFunds.addSelectDestinationLabel.tap()
 
         waitForNonExistence(spinner)
@@ -995,7 +996,6 @@ class TransferUserFundsTest: BaseTests {
 
         waitForNonExistence(spinner)
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 0), TransferMethods.bankAccount)
-        //XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0), expectedUSDestinationLabel + "1234")
 
         XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 0),
                        transferFunds.getDestinationLabel(country: "United States",

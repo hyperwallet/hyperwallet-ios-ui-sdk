@@ -55,7 +55,7 @@ extension XCUIElement {
       - Parameter text: the text to enter into the field
       */
      func enterText(text: String) {
-         self.tap()
+         self.doubleTap()
          self.typeText(text)
      }
 
@@ -88,7 +88,8 @@ extension XCUIElement {
         }
 
         UIPasteboard.general.string = text
-        field.doubleTap()
+        field.tap()
+        field.press(forDuration: 2)
         sleep(1)
         app.menuItems["Paste"].tap()
         sleep(1)

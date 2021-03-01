@@ -41,7 +41,7 @@ class TopCell: UITableViewCell {
     @IBOutlet var iconLabel: UILabel!
 }
 
-//swiftlint:disable force_cast
+// swiftlint:disable force_cast
 class ViewController: UITableViewController {
     enum Example: Int, CaseIterable {
         case paymentDetails

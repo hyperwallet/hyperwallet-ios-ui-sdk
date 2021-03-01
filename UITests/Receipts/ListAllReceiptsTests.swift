@@ -18,7 +18,7 @@ class ListAllReceiptsTests: BaseTests {
         spinner = app.activityIndicators["activityIndicator"]
     }
 
-    //selects the List All Receipts
+    // selects the List All Receipts
     private func openListAllReceiptsScreen() {
         app.tables.cells.containing(.staticText, identifier: "List All Receipts").element(boundBy: 0).tap()
         waitForNonExistence(spinner)
@@ -209,7 +209,7 @@ class ListAllReceiptsTests: BaseTests {
         let secondaryPPC = transactionDetails.getPPCInfoTab(digit: "8884", type: transactionDetails.prepaidCardVisa)
         let secondaryCardTab = transactionDetails.getTransactionsPPCTabBy(label: secondaryPPC )
 
-        //Asserts AF
+        // Asserts AF
         verifyCellExists_ListAll("Bank Account", "2019-05-10T18:16:17", "-$5.00", "USD", at: 0)
 
         primardCardTab.tap()
@@ -256,7 +256,7 @@ class ListAllReceiptsTests: BaseTests {
 
         XCTAssertTrue(getTransactionsAvailableFundsTab().isSelected, "Available Funds tab is selected")
 
-        //Asserts AF
+        // Asserts AF
         verifyCellExists_ListAll("Bank Account", "2019-05-10T18:16:17", "-$5.00", "USD", at: 0)
         waitForNonExistence(spinner)
 
@@ -292,7 +292,7 @@ class ListAllReceiptsTests: BaseTests {
         let secondaryPPC = transactionDetails.getPPCInfoTab(digit: "8884", type: transactionDetails.prepaidCardVisa)
         let secondaryCardTab = transactionDetails.getTransactionsPPCTabBy(label: secondaryPPC )
 
-        //Asserts AF
+        // Asserts AF
         verifyCellExists_ListAll("Bank Account", "2019-05-10T18:16:17", "-$5.00", "USD", at: 0)
         waitForNonExistence(spinner)
 
@@ -301,7 +301,7 @@ class ListAllReceiptsTests: BaseTests {
         XCTAssertFalse(secondaryCardTab.exists, "Secondary Prepaid Card does not exists")
     }
 
-    //Asserts the transactions - List All Receipts
+    // Asserts the transactions - List All Receipts
     func getTransactionsAvailableFundsTab() -> XCUIElement {
         app.tables.buttons["Available Funds"]
     }
