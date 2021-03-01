@@ -85,6 +85,9 @@ final class DateWidget: TextWidget {
         datePicker.datePickerMode = .date
         datePicker.locale = DateWidget.localizedDateFormatter.locale
         datePicker.accessibilityIdentifier = "dateWidgetPicker"
+        if #available(iOS 13.4, *) {
+            datePicker.preferredDatePickerStyle = .wheels
+        }
     }
 
     private func setupTextField() {

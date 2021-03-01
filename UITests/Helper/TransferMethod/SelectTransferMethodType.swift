@@ -43,7 +43,7 @@ class SelectTransferMethodType {
     func selectCurrency(currency: String) {
         tapCurrency()
 
-       //app.tables.staticTexts[currency].tap()
+       // app.tables.staticTexts[currency].tap()
         app.tables.cells.containing(.staticText, identifier: currency).element.tap()
     }
 

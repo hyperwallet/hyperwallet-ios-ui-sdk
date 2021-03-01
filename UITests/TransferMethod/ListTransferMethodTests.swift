@@ -386,7 +386,7 @@ class ListTransferMethodTests: BaseTests {
         XCTAssertTrue( app.tables.cells.containing(.staticText, identifier: "Prepaid Card").element(boundBy: 0).exists)
         XCTAssertTrue( app.tables.cells.containing(.staticText, identifier: "Prepaid Card").element(boundBy: 1).exists)
 
-        //prepaid card 1 & 2 info
+        // prepaid card 1 & 2 info
         let expectedPPCCellLabel1 = listTransferMethod
             .getTransferMethodPrepaidCardLabel(visacard: "Visa •••• 8766")
         let expectedPPCCellLabel2 = listTransferMethod
@@ -395,11 +395,11 @@ class ListTransferMethodTests: BaseTests {
         XCTAssertTrue(app.cells.element(boundBy: 0).staticTexts[expectedPPCCellLabel1].exists)
         XCTAssertTrue(app.cells.element(boundBy: 1).staticTexts[expectedPPCCellLabel2].exists)
 
-        //icon
+        // icon
         XCTAssertTrue(listTransferMethod.getTransferMethodIcon(index: 0).exists, "Expect icon")
         XCTAssertTrue(listTransferMethod.getTransferMethodIcon(index: 1).exists, "Expect icon")
 
-        //tap n confirm no delete feature
+        // tap n confirm no delete feature
         app.tables.cells.containing(.staticText, identifier: "Prepaid Card").element(boundBy: 0).tap()
         waitForNonExistence(spinner)
         XCTAssertFalse(listTransferMethod.confirmAccountRemoveButton.exists)

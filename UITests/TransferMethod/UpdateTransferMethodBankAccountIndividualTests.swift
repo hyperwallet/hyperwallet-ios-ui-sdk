@@ -60,7 +60,7 @@ class UpdateTransferMethodBankAccountIndividualTests: BaseTests {
                              filename: "BankAccountIndividualUpdateResponse",
                              method: HTTPMethod.put)
 
-        //updateTransferMethod.setBankId("")
+        // updateTransferMethod.setBankId("")
 
         updateTransferMethod.setBranchId("678798789798789768")
         updateTransferMethod.clickUpdateTransferMethodButton()

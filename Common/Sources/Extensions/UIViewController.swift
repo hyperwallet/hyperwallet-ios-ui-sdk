@@ -54,7 +54,7 @@ extension UIViewController: HyperwalletFlowDelegate {
     }
     struct Holder {
         static var flowDelegate = [ObjectIdentifier: HyperwalletFlowDelegate]()
-        static var coordinator =  [ObjectIdentifier: HyperwalletCoordinator]()
+        static var coordinator = [ObjectIdentifier: HyperwalletCoordinator]()
         static var initializationData = [ObjectIdentifier: [InitializationDataField: Any]]()
     }
     /// The reference to call didFlowComplete

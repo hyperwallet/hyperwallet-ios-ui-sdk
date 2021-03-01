@@ -37,7 +37,7 @@ class ListReceiptPresenterTests: XCTestCase {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
     }
 
-    //swiftlint:disable function_body_length
+    // swiftlint:disable function_body_length
     func testListUserReceipt_success() {
         // Given
         HyperwalletTestHelper.setUpMockServer(request: setUpReceiptRequest(listReceiptPayload))
@@ -236,7 +236,7 @@ class ListReceiptPresenterTests: XCTestCase {
         presenter = ListReceiptPresenter(view: mockView,
                                          showAllAvailableSources: true)
 
-        //HyperwalletTestHelper.setUpMockServer(request: setUpReceiptRequest(listReceiptPayload))
+        // HyperwalletTestHelper.setUpMockServer(request: setUpReceiptRequest(listReceiptPayload))
         PrepaidCardRepositoryRequestHelper.setupSuccessRequest(responseFile: "ListPrepaidCardResponse",
                                                                prepaidCardToken: nil)
 
@@ -293,7 +293,7 @@ class ListReceiptPresenterTests: XCTestCase {
     private func setUpPrepaidCardRequest(_ payload: Data,
                                          _ error: NSError? = nil) -> StubRequest {
         let response = HyperwalletTestHelper.setUpMockedResponse(payload: payload, error: error)
-        let receiptUrl =  "\(HyperwalletTestHelper.userRestURL)/prepaid-cards"
+        let receiptUrl = "\(HyperwalletTestHelper.userRestURL)/prepaid-cards"
         let url = String(format: "%@%@", HyperwalletTestHelper.userRestURL, receiptUrl)
         return HyperwalletTestHelper.buildGetRequestRegexMatcher(pattern: url, response)
     }

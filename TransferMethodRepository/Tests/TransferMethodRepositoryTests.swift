@@ -646,7 +646,7 @@ class TransferMethodRepositoryTests: XCTestCase {
         var listTransferMethodsResult: HyperwalletPageList<HyperwalletTransferMethod>?
         var listTransferMethodsError: HyperwalletErrorType?
 
-        //ListTransferMethodSuccessResponse
+        // ListTransferMethodSuccessResponse
         let response = HyperwalletTestHelper.noContentHTTPResponse()
         let url = String(format: "%@%@", HyperwalletTestHelper.userRestURL, "/transfer-methods?")
         let request = HyperwalletTestHelper.buildGetRequestRegexMatcher(pattern: url, response)
