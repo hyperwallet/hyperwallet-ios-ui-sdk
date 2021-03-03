@@ -465,6 +465,10 @@
 		FD0939B325EE2D6200AAA29B /* UserBalanceRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD09393725EE2D2100AAA29B /* UserBalanceRepositoryTests.swift */; };
 		FD1208CE2582433100A8D8B2 /* UpdateTransferMethodPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1208CD2582433100A8D8B2 /* UpdateTransferMethodPresenterTests.swift */; };
 		FD1208CF258245DF00A8D8B2 /* TransferMethodUpdateConfigurationFieldsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = FDD2F4DF2580F774008E4CFC /* TransferMethodUpdateConfigurationFieldsResponse.json */; };
+		FD4842AE25EF839D00CB8B36 /* BalanceRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4842AD25EF839D00CB8B36 /* BalanceRequestHelper.swift */; };
+		FD4842D325EF83C700CB8B36 /* HyperwalletTestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB551FE422E1447B00DD65C2 /* HyperwalletTestHelper.swift */; };
+		FD4842F825EF99BF00CB8B36 /* AuthenticationTokenGeneratorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB551FE522E1447B00DD65C2 /* AuthenticationTokenGeneratorMock.swift */; };
+		FD48430B25EF99D600CB8B36 /* AuthenticationProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB551FE622E1447B00DD65C2 /* AuthenticationProviderMock.swift */; };
 		FD48726E25DE975D005855B6 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
 		FD48728025DE9770005855B6 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
 		FD48729225DE9787005855B6 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
@@ -480,10 +484,14 @@
 		FD5066252538239100640B36 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B39E00DE24B4FB0A00E3BC4D /* icomoon.ttf */; platformFilter = ios; };
 		FD50662725382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json in Resources */ = {isa = PBXBuildFile; fileRef = FD50662625382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json */; };
 		FD6D1AF12583AE3C0019333E /* BankAccountIndividualUpdateResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = FD6D1AF02583AE3C0019333E /* BankAccountIndividualUpdateResponse.json */; };
+		FD8D2A0F25EF6CFF00A01007 /* Hippolyte.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD03133D25E4E96700505BDA /* Hippolyte.xcframework */; };
+		FD8D2A1025EF6CFF00A01007 /* Hippolyte.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD03133D25E4E96700505BDA /* Hippolyte.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FD8D2A2925EF72BC00A01007 /* BalanceRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD09389125EE252E00AAA29B /* BalanceRepository.framework */; };
+		FD8D2A2A25EF72BC00A01007 /* Hippolyte.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD03133D25E4E96700505BDA /* Hippolyte.xcframework */; };
+		FD8D2A2B25EF72BC00A01007 /* Swifter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; };
 		FD8D99DF25C46836003FEB1E /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B39E00DE24B4FB0A00E3BC4D /* icomoon.ttf */; };
 		FD8EA36B258119BB003CC5E8 /* UpdateTransferMethodButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8EA36A258119BB003CC5E8 /* UpdateTransferMethodButtonCell.swift */; };
 		FD95092D25EE2F9400585046 /* ListBalancesResponseSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = FD95091625EE2F4C00585046 /* ListBalancesResponseSuccess.json */; };
-		FD95095425EE2F9800585046 /* PPCBalanceResponseSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = FD95091425EE2F4C00585046 /* PPCBalanceResponseSuccess.json */; };
 		FD95098E25EE2F9C00585046 /* PrepaidCardBalanceResponseSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = FD95091525EE2F4C00585046 /* PrepaidCardBalanceResponseSuccess.json */; };
 		FD9509F125EE31EA00585046 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
 		FD9509F225EE31EA00585046 /* HyperwalletSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -709,12 +717,12 @@
 			remoteGlobalIDString = FD09389025EE252E00AAA29B;
 			remoteInfo = BalanceRepository;
 		};
-		FD0938F525EE2C0100AAA29B /* PBXContainerItemProxy */ = {
+		FD8D2A2725EF729E00A01007 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = DB4679812260380C00E1AF49;
-			remoteInfo = Demo;
+			remoteGlobalIDString = FD09389025EE252E00AAA29B;
+			remoteInfo = BalanceRepository;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -747,6 +755,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				FD8D2A1025EF6CFF00A01007 /* Hippolyte.xcframework in Embed Frameworks */,
 				FD9509F225EE31EA00585046 /* HyperwalletSDK.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -1278,12 +1287,12 @@
 		FD09393725EE2D2100AAA29B /* UserBalanceRepositoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserBalanceRepositoryTests.swift; sourceTree = "<group>"; };
 		FD09393925EE2D2100AAA29B /* BalanceRepositoryFactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceRepositoryFactoryTests.swift; sourceTree = "<group>"; };
 		FD1208CD2582433100A8D8B2 /* UpdateTransferMethodPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTransferMethodPresenterTests.swift; sourceTree = "<group>"; };
+		FD4842AD25EF839D00CB8B36 /* BalanceRequestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceRequestHelper.swift; sourceTree = "<group>"; };
 		FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = HyperwalletSDK.xcframework; path = Carthage/Build/HyperwalletSDK.xcframework; sourceTree = "<group>"; };
 		FD4872FE25DE97BB005855B6 /* Insights.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Insights.xcframework; path = Carthage/Build/Insights.xcframework; sourceTree = "<group>"; };
 		FD50662625382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserReceiptDetailsWithMultipleCurrencies.json; sourceTree = "<group>"; };
 		FD6D1AF02583AE3C0019333E /* BankAccountIndividualUpdateResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BankAccountIndividualUpdateResponse.json; sourceTree = "<group>"; };
 		FD8EA36A258119BB003CC5E8 /* UpdateTransferMethodButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTransferMethodButtonCell.swift; sourceTree = "<group>"; };
-		FD95091425EE2F4C00585046 /* PPCBalanceResponseSuccess.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PPCBalanceResponseSuccess.json; sourceTree = "<group>"; };
 		FD95091525EE2F4C00585046 /* PrepaidCardBalanceResponseSuccess.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PrepaidCardBalanceResponseSuccess.json; sourceTree = "<group>"; };
 		FD95091625EE2F4C00585046 /* ListBalancesResponseSuccess.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ListBalancesResponseSuccess.json; sourceTree = "<group>"; };
 		FD9C483925878E6100344E93 /* TransferMethodUpdateConfigurationFieldsBankAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TransferMethodUpdateConfigurationFieldsBankAccountResponse.json; sourceTree = "<group>"; };
@@ -1485,6 +1494,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD8D2A0F25EF6CFF00A01007 /* Hippolyte.xcframework in Frameworks */,
 				FD9509F125EE31EA00585046 /* HyperwalletSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1493,6 +1503,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD8D2A2925EF72BC00A01007 /* BalanceRepository.framework in Frameworks */,
+				FD8D2A2A25EF72BC00A01007 /* Hippolyte.xcframework in Frameworks */,
+				FD8D2A2B25EF72BC00A01007 /* Swifter.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2643,6 +2656,7 @@
 		FD09388B25EE250400AAA29B /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				FD4842AC25EF79FC00CB8B36 /* Helper */,
 				FD95091325EE2F0D00585046 /* Responses */,
 				FD09393925EE2D2100AAA29B /* BalanceRepositoryFactoryTests.swift */,
 				FD09393625EE2D2100AAA29B /* PrepaidCardBalanceRepositoryTests.swift */,
@@ -2661,11 +2675,18 @@
 			path = BalanceRepository;
 			sourceTree = "<group>";
 		};
+		FD4842AC25EF79FC00CB8B36 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				FD4842AD25EF839D00CB8B36 /* BalanceRequestHelper.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		FD95091325EE2F0D00585046 /* Responses */ = {
 			isa = PBXGroup;
 			children = (
 				FD95091625EE2F4C00585046 /* ListBalancesResponseSuccess.json */,
-				FD95091425EE2F4C00585046 /* PPCBalanceResponseSuccess.json */,
 				FD95091525EE2F4C00585046 /* PrepaidCardBalanceResponseSuccess.json */,
 			);
 			path = Responses;
@@ -3131,7 +3152,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				FD0938F625EE2C0100AAA29B /* PBXTargetDependency */,
+				FD8D2A2825EF729E00A01007 /* PBXTargetDependency */,
 			);
 			name = BalanceRepositoryTests;
 			productName = BalanceRepositoryTests;
@@ -3617,7 +3638,6 @@
 			files = (
 				FD95092D25EE2F9400585046 /* ListBalancesResponseSuccess.json in Resources */,
 				FD95098E25EE2F9C00585046 /* PrepaidCardBalanceResponseSuccess.json in Resources */,
-				FD95095425EE2F9800585046 /* PPCBalanceResponseSuccess.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4163,9 +4183,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD4842AE25EF839D00CB8B36 /* BalanceRequestHelper.swift in Sources */,
+				FD4842F825EF99BF00CB8B36 /* AuthenticationTokenGeneratorMock.swift in Sources */,
 				FD09399F25EE2D5F00AAA29B /* PrepaidCardBalanceRepositoryTests.swift in Sources */,
+				FD4842D325EF83C700CB8B36 /* HyperwalletTestHelper.swift in Sources */,
 				FD09396525EE2D5C00AAA29B /* BalanceRepositoryFactoryTests.swift in Sources */,
 				FD0939B325EE2D6200AAA29B /* UserBalanceRepositoryTests.swift in Sources */,
+				FD48430B25EF99D600CB8B36 /* AuthenticationProviderMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4320,10 +4344,10 @@
 			target = FD09389025EE252E00AAA29B /* BalanceRepository */;
 			targetProxy = FD09389625EE252E00AAA29B /* PBXContainerItemProxy */;
 		};
-		FD0938F625EE2C0100AAA29B /* PBXTargetDependency */ = {
+		FD8D2A2825EF729E00A01007 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = DB4679812260380C00E1AF49 /* Demo */;
-			targetProxy = FD0938F525EE2C0100AAA29B /* PBXContainerItemProxy */;
+			target = FD09389025EE252E00AAA29B /* BalanceRepository */;
+			targetProxy = FD8D2A2725EF729E00A01007 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -6285,6 +6309,7 @@
 		FD0938F825EE2C0100AAA29B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = BalanceRepository/Tests/Info.plist;
@@ -6304,6 +6329,7 @@
 		FD0938F925EE2C0100AAA29B /* XCUITest */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = BalanceRepository/Tests/Info.plist;
@@ -6323,6 +6349,7 @@
 		FD0938FA25EE2C0100AAA29B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = BalanceRepository/Tests/Info.plist;

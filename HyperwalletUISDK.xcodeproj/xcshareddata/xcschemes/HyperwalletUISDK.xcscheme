@@ -429,6 +429,16 @@
                ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FD0938EF25EE2C0100AAA29B"
+               BuildableName = "BalanceRepositoryTests.xctest"
+               BlueprintName = "BalanceRepositoryTests"
+               ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
