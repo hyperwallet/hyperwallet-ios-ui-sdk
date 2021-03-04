@@ -224,6 +224,7 @@ final class CreateTransferPresenter {
                     let currencies = balances
                         .filter({ $0.amount?.formatAmountToDouble() ?? 0 > 0 })
                         .map { String($0.currency!) }
+                        .sorted()
                     let configuration = strongSelf.transferSourceCellConfigurations.first(where: { $0.isSelected })
                     if let type = configuration?.type, type == .user {
                         configuration?.destinationCurrency = currencies.joined(separator: ", ")

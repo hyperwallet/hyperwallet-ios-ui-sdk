@@ -29,6 +29,7 @@ public final class RemotePrepaidCardBalanceRepository: PrepaidCardBalanceReposit
                                                    completion: listPrepaidCardBalancesHandler(completion))
     }
 
+    /// Preparid card balance response handler
     private func listPrepaidCardBalancesHandler(
             _ completion: @escaping (Result<HyperwalletPageList<HyperwalletBalance>?,
             HyperwalletErrorType>) -> Void)
@@ -46,6 +47,7 @@ public final class RemotePrepaidCardBalanceRepository: PrepaidCardBalanceReposit
         }
     }
 
+    /// Set up prepaid card balance query param
     private func setUpPrepaidCardBalanceQueryParam(_ offset: Int, _ limit: Int)
         -> HyperwalletPrepaidCardBalanceQueryParam {
         let queryParam = HyperwalletPrepaidCardBalanceQueryParam()

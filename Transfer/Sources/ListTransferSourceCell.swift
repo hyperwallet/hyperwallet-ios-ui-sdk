@@ -82,17 +82,11 @@ extension ListTransferSourceCell {
         textLabel?.numberOfLines = 0
         textLabel?.lineBreakMode = .byWordWrapping
         textLabel?.accessibilityIdentifier = "transferSourceTitleLabel"
-        if type == .user {
-            detailTextLabel?.text = currency
-        } else {
-            if let additionalInfo = additionalInfo {
-                detailTextLabel?.text = additionalInfo
-                detailTextLabel?.numberOfLines = 0
-                detailTextLabel?.adjustsFontForContentSizeCategory = true
-                detailTextLabel?.lineBreakMode = .byWordWrapping
-                detailTextLabel?.accessibilityIdentifier = "transferSourceSubtitleLabel"
-            }
-        }
+        detailTextLabel?.text = type == .user ? currency : additionalInfo
+        detailTextLabel?.adjustsFontSizeToFitWidth = true
+        detailTextLabel?.minimumScaleFactor = 0.1
+        detailTextLabel?.numberOfLines = 2
+        detailTextLabel?.accessibilityIdentifier = "transferSourceSubtitleLabel"
 
         if !UIFont.isLargeSizeCategory {
             let icon = UIImage.fontIcon(fontIcon,

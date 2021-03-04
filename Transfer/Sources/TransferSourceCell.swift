@@ -105,9 +105,9 @@ extension TransferSourceCell {
         textLabel?.lineBreakMode = .byWordWrapping
         textLabel?.accessibilityIdentifier = "transferSourceTitleLabel"
         detailTextLabel?.text = type == .user ? currency : additionalInfo
-        detailTextLabel?.numberOfLines = 0
-        detailTextLabel?.adjustsFontForContentSizeCategory = true
-        detailTextLabel?.lineBreakMode = .byWordWrapping
+        detailTextLabel?.adjustsFontSizeToFitWidth = true
+        detailTextLabel?.minimumScaleFactor = 0.1
+        detailTextLabel?.numberOfLines = 2
         detailTextLabel?.accessibilityIdentifier = availableBalance == nil ? nil : "transferSourceSubtitleLabel"
 
         if !UIFont.isLargeSizeCategory {
