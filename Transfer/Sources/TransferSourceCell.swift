@@ -104,7 +104,7 @@ extension TransferSourceCell {
         textLabel?.numberOfLines = 0
         textLabel?.lineBreakMode = .byWordWrapping
         textLabel?.accessibilityIdentifier = "transferSourceTitleLabel"
-        detailTextLabel?.text = type == .user ? currency : availableBalance
+        detailTextLabel?.text = type == .user ? currency : additionalInfo
         detailTextLabel?.numberOfLines = 0
         detailTextLabel?.adjustsFontForContentSizeCategory = true
         detailTextLabel?.lineBreakMode = .byWordWrapping
