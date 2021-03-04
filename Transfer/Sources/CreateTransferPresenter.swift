@@ -62,6 +62,10 @@ final class CreateTransferPresenter {
         TransferMethodRepositoryFactory.shared.prepaidCardRepository()
     }()
 
+    private lazy var balanceRepository: UserBalanceRepository = {
+        BalanceRepositoryFactory.shared.balanceRepository()
+    }()
+
     private(set) var clientTransferId: String
     private(set) var sectionData = [CreateTransferSectionData]()
     private(set) var transferSourceCellConfigurations = [TransferSourceCellConfiguration]()
@@ -205,7 +209,31 @@ final class CreateTransferPresenter {
         configuration.additionalText = additionalText
         configuration.availableBalance = availableBalance
         configuration.destinationCurrency = destinationCurrency
+        if transferSourceType == .user { addCurrencyCodesToAvailableFundsConfiguration() }
         transferSourceCellConfigurations.append(configuration)
+    }
+
+    func addCurrencyCodesToAvailableFundsConfiguration() {
+        balanceRepository.listUserBalances(offset: 0, limit: 0) { [weak self]  (result) in
+            guard let strongSelf = self else {
+                return
+            }
+            switch result {
+            case .success(let balanceList):
+                if let balanceList = balanceList, let balances = balanceList.data {
+                    let currencies = balances
+                        .filter({ $0.amount?.formatAmountToDouble() ?? 0 > 0 })
+                        .map { String($0.currency!) }
+                    let configuration = strongSelf.transferSourceCellConfigurations.first(where: { $0.isSelected })
+                    if let type = configuration?.type, type == .user {
+                        configuration?.destinationCurrency = currencies.joined(separator: ", ")
+                    }
+                }
+
+            case .failure:
+                return
+            }
+        }
     }
 
     private func loadAllAvailableSources() {
@@ -337,7 +365,7 @@ final class CreateTransferPresenter {
                 if strongSelf.didTapTransferAllFunds { strongSelf.amount = strongSelf.availableBalance ?? "0" }
                 strongSelf.transferSourceCellConfigurations.forEach {
                     $0.availableBalance = transfer?.destinationAmount
-                    $0.destinationCurrency = strongSelf.selectedTransferDestination?.transferMethodCurrency
+//                    $0.destinationCurrency = strongSelf.selectedTransferDestination?.transferMethodCurrency
                 }
             }
             strongSelf.initializeSections()
