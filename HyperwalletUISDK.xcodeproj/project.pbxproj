@@ -500,6 +500,7 @@
 		FDD2F4D32580CC2A008E4CFC /* TransferMethodUpdateConfigurationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD2F4D22580CC2A008E4CFC /* TransferMethodUpdateConfigurationRepository.swift */; };
 		FDD2F4D52580DA77008E4CFC /* TransferMethodUpdateConfigurationRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD2F4D42580DA77008E4CFC /* TransferMethodUpdateConfigurationRepositoryTests.swift */; };
 		FDD2F4E02580F774008E4CFC /* TransferMethodUpdateConfigurationFieldsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = FDD2F4DF2580F774008E4CFC /* TransferMethodUpdateConfigurationFieldsResponse.json */; };
+		FDEDFB2D25F24B2B00508CD5 /* ListBalancesResponseSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = FD95091625EE2F4C00585046 /* ListBalancesResponseSuccess.json */; };
 		FDF1CEF12588BE36005FB4D1 /* PayPalUpdateResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = FDF1CEF02588BE36005FB4D1 /* PayPalUpdateResponse.json */; };
 		FDF1CEF22588BFBA005FB4D1 /* TransferMethodUpdateConfigurationFieldsPaypalResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = FDF1CEEE2588BD1F005FB4D1 /* TransferMethodUpdateConfigurationFieldsPaypalResponse.json */; };
 		FDF1CEF42588C003005FB4D1 /* UpdateTransferMethodPayPalAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF1CEF32588C003005FB4D1 /* UpdateTransferMethodPayPalAccountTests.swift */; };
@@ -3410,6 +3411,7 @@
 				9807B765226442C60028A280 /* BankCardInvalidCvvResponse.json in Resources */,
 				ABDB501F2536CA4A00D3AF0B /* TransferMethodCreateVenmoAccount.json in Resources */,
 				0961D63322AA8817007F0B44 /* ReceiptsForLazyLoading.json in Resources */,
+				FDEDFB2D25F24B2B00508CD5 /* ListBalancesResponseSuccess.json in Resources */,
 				41D8363C22FB4814003544AB /* ListMoreThanOneTransferMethod.json in Resources */,
 				414609902539330B00912078 /* AuthenticationTokenPayToCardModelResponse.json in Resources */,
 				DC49BF16257E06F900567832 /* TransferMethodCreatePaperCheck.json in Resources */,

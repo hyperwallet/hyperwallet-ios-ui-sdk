@@ -63,6 +63,26 @@ class CreateTransferTests: XCTestCase {
         }
     }
 
+    private enum ListUserBalanceResultType {
+        case success, failure
+        func setUpRequest() {
+            let responseData = HyperwalletTestHelper.getDataFromJson("ListBalancesResponseSuccess")
+            switch self {
+            case .success:
+                HyperwalletTestHelper
+                    .setUpMockServer(request: UserBalanceRequestHelper.setUpRequest(responseData))
+
+            case .failure:
+                HyperwalletTestHelper
+                    .setUpMockServer(request: UserBalanceRequestHelper.setUpRequest(responseData,
+                                                                                    NSError(domain: NSURLErrorDomain,
+                                                                                            code: 500,
+                                                                                            userInfo: nil),
+                                                                                    500))
+            }
+        }
+    }
+
     private enum LoadTransferMethodsResultType {
         case success, failure, noContent
         func setUpRequest() {
@@ -119,6 +139,7 @@ class CreateTransferTests: XCTestCase {
                                      sourceToken: String? = nil,
                                      showAllAvailableSources: Bool = false) {
         var expectations = [XCTestExpectation]()
+        let userBalanceRequest = ListUserBalanceResultType.success
         if sourceToken != nil {
             prepaidCardResult.setUpRequest()
         } else if showAllAvailableSources {
@@ -128,6 +149,8 @@ class CreateTransferTests: XCTestCase {
         }
         transferMethodResult.setUpRequest()
         createTransferResult.setUpRequest()
+        userBalanceRequest.setUpRequest()
+
         presenter = CreateTransferPresenter(clientTransferId, sourceToken, showAllAvailableSources, view: mockView)
 
         if mockView.stopOnError {
@@ -203,6 +226,20 @@ class CreateTransferTests: XCTestCase {
                        transferSourceType: .user,
                        selectedTransferDestination: false,
                        isAvailableBalancePresent: false)
+        Hyperwallet.clearInstance()
+    }
+
+    func testLoadCreateTransfer_showAllAvailableSources_walletModel_listUserBalanceSuccess() {
+        Hyperwallet.clearInstance()
+        HyperwalletTestHelper.programModel = .walletModel
+        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
+        mockView.stopOnError = false
+        initializePresenter(transferMethodResult: .success, showAllAvailableSources: true)
+        assertResponse(isShowErrorPerformed: false,
+                       transferSourceCellConfigurationsCount: 3,
+                       transferSourceType: .user,
+                       selectedTransferDestination: true,
+                       isAvailableBalancePresent: true)
         Hyperwallet.clearInstance()
     }
 
@@ -677,7 +714,12 @@ class CreateTransferTests: XCTestCase {
                             "transferSourceCellConfigurations isSelected should not be nil")
             XCTAssertEqual(presenter.transferSourceCellConfigurations.first(where: { $0.isSelected })?.type,
                            transferSourceType,
-                           "TransferSourceType shoould be \(transferSourceType)")
+                           "TransferSourceType should be \(transferSourceType)")
+            if let configuration = presenter.transferSourceCellConfigurations
+                .first(where: { $0.isSelected }),
+               configuration.type == .user, !isShowErrorPerformed {
+                XCTAssertEqual(configuration.destinationCurrency, "CAD, EUR, USD")
+            }
         }
         XCTAssertEqual(presenter.selectedTransferDestination != nil,
                        selectedTransferDestination,

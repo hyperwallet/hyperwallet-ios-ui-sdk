@@ -99,6 +99,10 @@ class TransferUserFundsTest: BaseTests {
                              filename: "AvailableFundUSD",
                              method: HTTPMethod.post)
 
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/balances",
+                             filename: "ListBalancesResponseSuccess",
+                             method: HTTPMethod.get)
+
         transferFundMenu.tap()
         waitForNonExistence(spinner)
 
@@ -111,6 +115,10 @@ class TransferUserFundsTest: BaseTests {
                        String(format: "mobileAvailableBalance".localized(), "$", "452.14", "USD"))
         // Transfer max funds
         XCTAssertTrue(transferFunds.transferMaxAllFunds.exists, "Transfer all funds switch should exist")
+
+        // TRANSFER FROM
+        XCTAssertEqual(transferFunds.transferSourceTitleLabel.label, "mobileAvailableFunds".localized())
+        XCTAssertEqual(transferFunds.transferSourceSubtitleLabel.label, "CAD, EUR, USD")
 
         // TRANSFER TO
         XCTAssertTrue(transferFunds.transferSectionLabel.exists)
