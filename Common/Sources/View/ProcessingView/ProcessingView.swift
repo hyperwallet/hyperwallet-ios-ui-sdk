@@ -44,7 +44,7 @@ public final class ProcessingView: UIView {
 
     private let propertyOpacity = "opacity"
 
-    private var loadedFromCode: Bool = false
+    private var loadedFromCode = false
 
     private var state: ProcessingState! {
         didSet {

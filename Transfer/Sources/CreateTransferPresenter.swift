@@ -70,8 +70,8 @@ final class CreateTransferPresenter {
     private(set) var sectionData = [CreateTransferSectionData]()
     private(set) var transferSourceCellConfigurations = [TransferSourceCellConfiguration]()
     private(set) var availableBalance: String?
-    private(set) var didFxQuoteChange: Bool = false
-    private(set) var showAllAvailableSources: Bool = false
+    private(set) var didFxQuoteChange = false
+    private(set) var showAllAvailableSources = false
 
     var selectedTransferDestination: HyperwalletTransferMethod?
     var amount: String = "0"
@@ -80,7 +80,7 @@ final class CreateTransferPresenter {
         return selectedTransferDestination?.transferMethodCurrency
     }
 
-    var didTapTransferAllFunds: Bool = false {
+    var didTapTransferAllFunds = false {
         didSet {
             if didTapTransferAllFunds {
                 amount = availableBalance ?? "0"

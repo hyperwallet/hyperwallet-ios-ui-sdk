@@ -36,7 +36,7 @@ final class TransferNotesCell: UITableViewCell {
         return textField
     }()
 
-    private var hideBorder: Bool = false
+    private var hideBorder = false
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
