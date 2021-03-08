@@ -216,7 +216,7 @@ final class CreateTransferPresenter {
     /// Add currency codes to available funds configuration
     func addCurrencyCodesToAvailableFundsConfiguration() {
         balanceRepository.listUserBalances(offset: 0, limit: 0) { [weak self]  (result) in
-            guard let strongSelf = self else {
+            guard let strongSelf = self, let view = strongSelf.view else {
                 return
             }
             switch result {
@@ -232,8 +232,10 @@ final class CreateTransferPresenter {
                     }
                 }
 
-            case .failure:
-                return
+            case .failure(let error):
+                view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
+                    strongSelf.addCurrencyCodesToAvailableFundsConfiguration()
+                }
             }
         }
     }

@@ -251,7 +251,7 @@ class CreateTransferTests: XCTestCase {
         mockView.stopOnError = false
         userBalanceRequest = .failure
         initializePresenter(transferMethodResult: .success, showAllAvailableSources: true)
-        assertResponse(isShowErrorPerformed: false,
+        assertResponse(isShowErrorPerformed: true,
                        transferSourceCellConfigurationsCount: 3,
                        transferSourceType: .user,
                        selectedTransferDestination: true,
