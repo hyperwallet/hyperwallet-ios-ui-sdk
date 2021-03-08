@@ -213,6 +213,7 @@ final class CreateTransferPresenter {
         transferSourceCellConfigurations.append(configuration)
     }
 
+    /// Add currency codes to available funds configuration
     func addCurrencyCodesToAvailableFundsConfiguration() {
         balanceRepository.listUserBalances(offset: 0, limit: 0) { [weak self]  (result) in
             guard let strongSelf = self else {
@@ -366,7 +367,6 @@ final class CreateTransferPresenter {
                 if strongSelf.didTapTransferAllFunds { strongSelf.amount = strongSelf.availableBalance ?? "0" }
                 strongSelf.transferSourceCellConfigurations.forEach {
                     $0.availableBalance = transfer?.destinationAmount
-//                    $0.destinationCurrency = strongSelf.selectedTransferDestination?.transferMethodCurrency
                 }
             }
             strongSelf.initializeSections()

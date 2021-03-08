@@ -11,6 +11,7 @@ import XCTest
 class CreateTransferTests: XCTestCase {
     private var presenter: CreateTransferPresenter!
     private var mockView = MockCreateTransferView()
+    private var userBalanceRequest: ListUserBalanceResultType = .success
     private let clientTransferId = UUID().uuidString
 
     override func setUp() {
@@ -139,7 +140,6 @@ class CreateTransferTests: XCTestCase {
                                      sourceToken: String? = nil,
                                      showAllAvailableSources: Bool = false) {
         var expectations = [XCTestExpectation]()
-        let userBalanceRequest = ListUserBalanceResultType.success
         if sourceToken != nil {
             prepaidCardResult.setUpRequest()
         } else if showAllAvailableSources {
@@ -234,6 +234,22 @@ class CreateTransferTests: XCTestCase {
         HyperwalletTestHelper.programModel = .walletModel
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
         mockView.stopOnError = false
+        userBalanceRequest = .success
+        initializePresenter(transferMethodResult: .success, showAllAvailableSources: true)
+        assertResponse(isShowErrorPerformed: false,
+                       transferSourceCellConfigurationsCount: 3,
+                       transferSourceType: .user,
+                       selectedTransferDestination: true,
+                       isAvailableBalancePresent: true)
+        Hyperwallet.clearInstance()
+    }
+
+    func testLoadCreateTransfer_showAllAvailableSources_walletModel_listUserBalanceErrorResponse() {
+        Hyperwallet.clearInstance()
+        HyperwalletTestHelper.programModel = .walletModel
+        Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
+        mockView.stopOnError = false
+        userBalanceRequest = .failure
         initializePresenter(transferMethodResult: .success, showAllAvailableSources: true)
         assertResponse(isShowErrorPerformed: false,
                        transferSourceCellConfigurationsCount: 3,
@@ -718,7 +734,11 @@ class CreateTransferTests: XCTestCase {
             if let configuration = presenter.transferSourceCellConfigurations
                 .first(where: { $0.isSelected }),
                configuration.type == .user, !isShowErrorPerformed {
-                XCTAssertEqual(configuration.destinationCurrency, "CAD, EUR, USD")
+                if userBalanceRequest == .success {
+                    XCTAssertEqual(configuration.destinationCurrency, "CAD, EUR, USD")
+                } else {
+                    XCTAssertEqual(configuration.destinationCurrency, nil)
+                }
             }
         }
         XCTAssertEqual(presenter.selectedTransferDestination != nil,
