@@ -56,6 +56,10 @@ class TransferUserFundsTest: BaseTests {
         } else {
             elementQuery = app.tables["scheduleTransferTableView"].staticTexts
         }
+
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/balances",
+                             filename: "ListBalancesResponseSuccess",
+                             method: HTTPMethod.get)
     }
 
     /*
@@ -98,10 +102,6 @@ class TransferUserFundsTest: BaseTests {
         mockServer.setupStub(url: "/rest/v3/transfers",
                              filename: "AvailableFundUSD",
                              method: HTTPMethod.post)
-
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/balances",
-                             filename: "ListBalancesResponseSuccess",
-                             method: HTTPMethod.get)
 
         transferFundMenu.tap()
         waitForNonExistence(spinner)
