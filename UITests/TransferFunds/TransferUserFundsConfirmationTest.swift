@@ -16,6 +16,10 @@ class TransferUserFundsConfirmationTest: BaseTests {
         app.launch()
         spinner = app.activityIndicators["activityIndicator"]
 
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/balances",
+                             filename: "ListBalancesResponseSuccess",
+                             method: HTTPMethod.get)
+
         transferFunds = TransferFunds(app: app)
         transferFundSourceMenu = app.tables.cells
             .containing(.staticText, identifier: "Transfer Funds Source")
@@ -32,10 +36,6 @@ class TransferUserFundsConfirmationTest: BaseTests {
         mockServer.setupStub(url: "/rest/v3/transfers",
                              filename: "AvailableFundUSD",
                              method: HTTPMethod.post)
-
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/balances",
-                             filename: "ListBalancesResponseSuccess",
-                             method: HTTPMethod.get)
 
         transferFundMenu.tap()
         waitForNonExistence(spinner)
@@ -115,10 +115,6 @@ class TransferUserFundsConfirmationTest: BaseTests {
         mockServer.setupStub(url: "/rest/v3/transfers/trf-token/status-transitions",
                              filename: "TransferStatusQuoted",
                              method: HTTPMethod.post)
-
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/balances",
-                             filename: "ListBalancesResponseSuccess",
-                             method: HTTPMethod.get)
 
         transferFundMenu.tap()
         waitForNonExistence(spinner)
