@@ -855,8 +855,10 @@ class TransferUserFundsTest: BaseTests {
 
         // Select Transfer source - PPC
         transferFunds.transferSourceTitleLabel.tap()
+        
         let app = XCUIApplication()
         XCTAssert(app.tables.staticTexts["CAD, EUR, USD"].exists)
+
         let ppcCell = app.tables.element.children(matching: .cell).element(boundBy: 1)
         ppcCell.tap()
         waitForNonExistence(spinner)
