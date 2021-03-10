@@ -63,7 +63,7 @@ final class CreateTransferPresenter {
     }()
 
     private lazy var balanceRepository: UserBalanceRepository = {
-        BalanceRepositoryFactory.shared.balanceRepository()
+        BalanceRepositoryFactory.shared.userBalanceRepository()
     }()
 
     private(set) var clientTransferId: String

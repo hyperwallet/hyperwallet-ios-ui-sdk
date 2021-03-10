@@ -28,7 +28,7 @@ public final class BalanceRepositoryFactory {
     /// Gets the `UserBalanceRepository` implementation.
     ///
     /// - Returns: The implementation of the UserBalanceRepository protocol
-    public func balanceRepository() -> UserBalanceRepository {
+    public func userBalanceRepository() -> UserBalanceRepository {
         return remoteUserBalanceRepository
     }
 

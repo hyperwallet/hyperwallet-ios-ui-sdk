@@ -6,7 +6,7 @@ class BalanceRepositoryFactoryTests: XCTestCase {
         let factory = BalanceRepositoryFactory.shared
 
         XCTAssertNotNil(factory, "BalanceRepositoryFactory instance should not be nil")
-        XCTAssertNoThrow(factory.balanceRepository(), "BalanceRepository should exist")
+        XCTAssertNoThrow(factory.userBalanceRepository(), "BalanceRepository should exist")
         XCTAssertNoThrow(factory.prepaidCardBalanceRepository(), "PrepaidCardBalanceRepository should exist")
     }
 

@@ -12,7 +12,7 @@ import Hippolyte
     override func setUp() {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
         factory = BalanceRepositoryFactory.shared
-        userBalanceRepository = factory.balanceRepository()
+        userBalanceRepository = factory.userBalanceRepository()
         balanceExpectation = self.expectation(description: "load user balance")
     }
 
