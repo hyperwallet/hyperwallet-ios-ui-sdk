@@ -89,7 +89,7 @@ struct ScheduleTransferForeignExchangeData: ScheduleTransferSectionData {
                 let sourceCurrency = foreignExchange.sourceCurrency,
                 let destinationAmount = foreignExchange.destinationAmount,
                 let destinationCurrency = foreignExchange.destinationCurrency,
-                let rate = foreignExchange.rate {
+                let rate = foreignExchange.rate?.getFxRateWithFourDecimal() {
                 let sourceAmountFormatted =
                     TransferAmountCurrencyFormatter.formatCurrencyWithSymbolAndCode(sourceAmount,
                                                                                     with: sourceCurrency)
