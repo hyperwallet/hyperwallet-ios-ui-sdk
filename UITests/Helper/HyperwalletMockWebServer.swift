@@ -49,13 +49,14 @@ final class HyperwalletMockWebServer {
         }
     }
 
-    func setupStubError(url: String, filename: String, method: HTTPMethod) {
+    func setupStubError(url: String,
+                        filename: String,
+                        method: HTTPMethod,
+                        statusCode: Int = 400) {
         let filePath = testBundle.path(forResource: filename, ofType: "json")
         let fileUrl = URL(fileURLWithPath: filePath!)
         do {
             let data = try Data(contentsOf: fileUrl, options: .uncached)
-
-            let statusCode = 400
             let reasonPhrase = "Bad Request"
             let headers = ["Content-Type": "application/json"]
 

@@ -88,6 +88,33 @@ class TransferUserFundsTest: BaseTests {
         // assert Continue button
         XCTAssertTrue(transferFunds.nextLabel.exists)
     }
+    
+    func testTransferFunds_userBalanceError() {
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+                             filename: "ListMoreThanOneTransferMethod",
+                             method: HTTPMethod.get)
+        
+        mockServer.setupStub(url: "/rest/v3/transfers",
+                             filename: "AvailableFundUSD",
+                             method: HTTPMethod.post)
+        
+        mockServer.setupStubError(url: "/rest/v3/users/usr-token/balances",
+                                  filename: "ListBalancesResponseSuccess",
+                                  method: .get,
+                                  statusCode: 500)
+        
+        XCTAssertTrue(transferFundMenu.exists)
+        transferFundMenu.tap()
+        waitForNonExistence(spinner)
+        
+        transferFunds.verifyTransferFundsTitle()
+        
+        waitForExistence(app.alerts["Unexpected Error"])
+        XCUIApplication().alerts["Unexpected Error"]
+            .scrollViews.otherElements.buttons["Done"].tap()
+        waitForNonExistence(spinner)
+        XCTAssertTrue(transferFundMenu.exists)
+    }
 
     /*
      Given that Transfer methods exist
