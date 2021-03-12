@@ -46,6 +46,9 @@ class ListTransferSourcePresenterTests: XCTestCase {
         XCTAssertEqual(inputData?.isSelected, initializedData?.isSelected, "isSelected should be same")
         XCTAssertEqual(inputData?.title, initializedData?.title, "title should be same")
         XCTAssertEqual(inputData?.fontIcon, initializedData?.fontIcon, "fontIcon should be same")
+        XCTAssertEqual(inputData?.destinationCurrency,
+                       initializedData?.destinationCurrency,
+                       "destinationCurrency should be same")
     }
 
     private func buildTransferSourceCellConfiguration(for transferSourceType: TransferSourceType,
@@ -57,6 +60,7 @@ class ListTransferSourcePresenterTests: XCTestCase {
                                             title: transferSourceType == .user ?
                                                 "mobileAvailableFunds".localized() : "prepaid_card".localized(),
                                             fontIcon: transferSourceType == .user ? .bankAccount : .prepaidCard)
+        transferSourceCellConfiguration.destinationCurrency = transferSourceType == .user ? "USD" : nil
         return transferSourceCellConfiguration
     }
 }

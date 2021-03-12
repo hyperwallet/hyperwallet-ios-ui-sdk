@@ -30,7 +30,7 @@ final class SelectTransferMethodTypeController: UITableViewController {
     private var spinnerView: SpinnerView?
     private var presenter: SelectTransferMethodTypePresenter!
     private var countryCurrencyView: CountryCurrencyTableView!
-    private var forceUpdate: Bool = false
+    private var forceUpdate = false
 
     private func initializeData() {
         if let forceUpdate = initializationData?[InitializationDataField.forceUpdateData] as? Bool {

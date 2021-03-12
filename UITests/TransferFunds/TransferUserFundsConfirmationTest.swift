@@ -16,6 +16,10 @@ class TransferUserFundsConfirmationTest: BaseTests {
         app.launch()
         spinner = app.activityIndicators["activityIndicator"]
 
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/balances",
+                             filename: "ListBalancesResponseSuccess",
+                             method: HTTPMethod.get)
+
         transferFunds = TransferFunds(app: app)
         transferFundSourceMenu = app.tables.cells
             .containing(.staticText, identifier: "Transfer Funds Source")
@@ -61,6 +65,10 @@ class TransferUserFundsConfirmationTest: BaseTests {
         waitForExistence(transferFundsConfirmation.transferDestinationLabel)
         XCTAssertTrue(transferFundsConfirmation.tranferToSectionLabel.exists)
         transferFundsConfirmation.verifyDestination(country: "United States", endingDigit: "1234")
+
+        // Currency Code
+        XCTAssertEqual(transferFundsConfirmation.transferSourceTitleLabel.label, "mobileAvailableFunds".localized())
+        XCTAssertEqual(transferFundsConfirmation.transferSourceSubtitleLabel.label, "CAD, EUR, USD")
 
         // Assert Summary Section
         let amount = transferFundsConfirmation.getCell(row: 1)
@@ -127,6 +135,10 @@ class TransferUserFundsConfirmationTest: BaseTests {
         waitForExistence(transferFundsConfirmation.transferDestinationLabel)
         // 1.  Add Destination Section
         transferFundsConfirmation.verifyDestination(country: "United States", endingDigit: "1234")
+
+        // Currency Code
+        XCTAssertEqual(transferFundsConfirmation.transferSourceTitleLabel.label, "mobileAvailableFunds".localized())
+        XCTAssertEqual(transferFundsConfirmation.transferSourceSubtitleLabel.label, "CAD, EUR, USD")
 
         // 2.Exchange Rate Section
         let youSell = transferFundsConfirmation.foreignExchangeSellLabel

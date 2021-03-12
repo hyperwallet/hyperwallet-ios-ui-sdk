@@ -7,6 +7,7 @@ disabled_rules: # rule identifiers to exclude from running
   - implicit_return
   - empty_xctest_method
   - inclusive_language
+  - trailing_whitespace
 type_name:
     max_length: # warning and error
       warning: 60
