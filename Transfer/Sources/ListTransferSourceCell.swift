@@ -67,26 +67,26 @@ extension ListTransferSourceCell {
                   additionalInfo: transferSourceCellConfiguration.additionalText,
                   currency: transferSourceCellConfiguration.destinationCurrency,
                   availableBalance: transferSourceCellConfiguration.availableBalance,
-                  fontIcon: transferSourceCellConfiguration.fontIcon.rawValue)
+                  fontIcon: transferSourceCellConfiguration.fontIcon.rawValue,
+                  type: transferSourceCellConfiguration.type)
     }
 
     private func configure(title: String,
                            additionalInfo: String? = nil,
                            currency: String?,
                            availableBalance: String?,
-                           fontIcon: String) {
+                           fontIcon: String,
+                           type: TransferSourceType) {
         textLabel?.text = title
         textLabel?.adjustsFontForContentSizeCategory = true
         textLabel?.numberOfLines = 0
         textLabel?.lineBreakMode = .byWordWrapping
         textLabel?.accessibilityIdentifier = "transferSourceTitleLabel"
-        if let additionalInfo = additionalInfo {
-            detailTextLabel?.text = additionalInfo
-            detailTextLabel?.numberOfLines = 0
-            detailTextLabel?.adjustsFontForContentSizeCategory = true
-            detailTextLabel?.lineBreakMode = .byWordWrapping
-            detailTextLabel?.accessibilityIdentifier = "transferSourceSubtitleLabel"
-        }
+        detailTextLabel?.text = type == .user ? currency : additionalInfo
+        detailTextLabel?.adjustsFontSizeToFitWidth = true
+        detailTextLabel?.minimumScaleFactor = 0.1
+        detailTextLabel?.numberOfLines = 2
+        detailTextLabel?.accessibilityIdentifier = "transferSourceSubtitleLabel"
 
         if !UIFont.isLargeSizeCategory {
             let icon = UIImage.fontIcon(fontIcon,
