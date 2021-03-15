@@ -87,9 +87,12 @@ public extension String {
         guard !self.isEmpty else {
             return ""
         }
-        let decimals = self.split(separator: ".")[1]
-        if decimals.count > 4 {
-            return String(self.dropLast(decimals.count - 4))
+        let numbers = self.split(separator: ".")
+        if numbers.count == 2 {
+            let decimals = numbers[1]
+            if decimals.count > 4 {
+                return String(self.dropLast(decimals.count - 4))
+            }
         }
         return self
     }
