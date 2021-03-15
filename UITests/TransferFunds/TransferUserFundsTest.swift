@@ -56,6 +56,10 @@ class TransferUserFundsTest: BaseTests {
         } else {
             elementQuery = app.tables["scheduleTransferTableView"].staticTexts
         }
+
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/balances",
+                             filename: "ListBalancesResponseSuccess",
+                             method: HTTPMethod.get)
     }
 
     /*
@@ -84,6 +88,33 @@ class TransferUserFundsTest: BaseTests {
         // assert Continue button
         XCTAssertTrue(transferFunds.nextLabel.exists)
     }
+    
+    func testTransferFunds_userBalanceError() {
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+                             filename: "ListMoreThanOneTransferMethod",
+                             method: HTTPMethod.get)
+        
+        mockServer.setupStub(url: "/rest/v3/transfers",
+                             filename: "AvailableFundUSD",
+                             method: HTTPMethod.post)
+        
+        mockServer.setupStubError(url: "/rest/v3/users/usr-token/balances",
+                                  filename: "ListBalancesResponseSuccess",
+                                  method: .get,
+                                  statusCode: 500)
+        
+        XCTAssertTrue(transferFundMenu.exists)
+        transferFundMenu.tap()
+        waitForNonExistence(spinner)
+        
+        transferFunds.verifyTransferFundsTitle()
+        
+        waitForExistence(app.alerts["Unexpected Error"])
+        XCUIApplication().alerts["Unexpected Error"]
+            .scrollViews.otherElements.buttons["Done"].tap()
+        waitForNonExistence(spinner)
+        XCTAssertTrue(transferFundMenu.exists)
+    }
 
     /*
      Given that Transfer methods exist
@@ -111,6 +142,10 @@ class TransferUserFundsTest: BaseTests {
                        String(format: "mobileAvailableBalance".localized(), "$", "452.14", "USD"))
         // Transfer max funds
         XCTAssertTrue(transferFunds.transferMaxAllFunds.exists, "Transfer all funds switch should exist")
+
+        // TRANSFER FROM
+        XCTAssertEqual(transferFunds.transferSourceTitleLabel.label, "mobileAvailableFunds".localized())
+        XCTAssertEqual(transferFunds.transferSourceSubtitleLabel.label, "CAD, EUR, USD")
 
         // TRANSFER TO
         XCTAssertTrue(transferFunds.transferSectionLabel.exists)
@@ -847,6 +882,10 @@ class TransferUserFundsTest: BaseTests {
 
         // Select Transfer source - PPC
         transferFunds.transferSourceTitleLabel.tap()
+        
+        let app = XCUIApplication()
+        XCTAssert(app.tables.staticTexts["CAD, EUR, USD"].exists)
+
         let ppcCell = app.tables.element.children(matching: .cell).element(boundBy: 1)
         ppcCell.tap()
         waitForNonExistence(spinner)

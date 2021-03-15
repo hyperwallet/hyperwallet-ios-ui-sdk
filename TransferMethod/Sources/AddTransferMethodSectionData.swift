@@ -24,7 +24,7 @@ final class AddTransferMethodSectionData {
     var country: String?
     var currency: String?
 
-    var containsFocusedField: Bool = false
+    var containsFocusedField = false
     var fieldToBeFocused: AbstractWidget?
     var rowShouldBeScrolledTo: Int?
 
