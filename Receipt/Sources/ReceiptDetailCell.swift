@@ -37,11 +37,13 @@ final class ReceiptDetailCell: UITableViewCell {
         textLabel?.numberOfLines = 0
         textLabel?.lineBreakMode = .byWordWrapping
         textLabel?.accessibilityIdentifier = "\(row.field)Label"
+        textLabel?.allowTextSelection()
         detailTextLabel?.text = row.value
         detailTextLabel?.numberOfLines = 0
         detailTextLabel?.lineBreakMode = .byWordWrapping
         detailTextLabel?.adjustsFontForContentSizeCategory = true
         detailTextLabel?.accessibilityIdentifier = "\(row.field)Value"
+        detailTextLabel?.allowTextSelection()
     }
 
     // MARK: Theme manager's proxy properties

@@ -24,7 +24,6 @@ final class ReceiptNotesCell: UITableViewCell {
         textLabel?.numberOfLines = 0
         textLabel?.lineBreakMode = .byWordWrapping
         textLabel?.accessibilityIdentifier = "ReceiptDetailSectionNotesTextLabel"
-        textLabel?.becomeFirstResponder()
         textLabel?.allowTextSelection()
     }
 

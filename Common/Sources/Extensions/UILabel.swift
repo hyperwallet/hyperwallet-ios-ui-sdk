@@ -33,9 +33,9 @@ extension UILabel {
         return recognizer
     }
     
-//    override open var canBecomeFirstResponder: Bool {
-//        return true
-//    }
+    override open var canBecomeFirstResponder: Bool {
+        return true
+    }
     
     /// Allow text selection
     public func allowTextSelection() {
@@ -56,7 +56,6 @@ extension UILabel {
         else { return }
         
         becomeFirstResponder()
-        backgroundColor = UIColor.yellow.withAlphaComponent(0.20)
         
         let menu = menuForSelection()
         if !menu.isMenuVisible {
