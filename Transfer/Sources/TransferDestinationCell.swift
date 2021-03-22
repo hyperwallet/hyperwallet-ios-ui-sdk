@@ -89,7 +89,7 @@ extension TransferDestinationCell {
         if !UIFont.isLargeSizeCategory {
             let icon = UIImage.fontIcon(hyperwalletIcon.rawValue,
                                         Theme.Icon.frame,
-                                        CGFloat(Theme.Icon.size),
+                                        CGFloat(20),
                                         Theme.Icon.primaryColor)
             imageView?.image = icon
             imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
