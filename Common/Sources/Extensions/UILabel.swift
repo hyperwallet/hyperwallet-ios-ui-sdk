@@ -29,7 +29,7 @@ extension UILabel {
     
     private var longPress: UILongPressGestureRecognizer {
         let recognizer = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress))
-        recognizer.minimumPressDuration = 1.0
+        recognizer.minimumPressDuration = 0.4
         return recognizer
     }
     
@@ -50,12 +50,21 @@ extension UILabel {
                                                object: nil)
     }
     
+    private func applyBackgroundColor(_ color: UIColor) {
+        let attributes: [NSAttributedString.Key: Any] = [
+            .backgroundColor: color
+        ]
+        attributedText = NSAttributedString(string: text ?? "",
+                                            attributes: attributes)
+    }
+    
     @objc
     private func didLongPress(_ gesture: UILongPressGestureRecognizer) {
         guard let text = text, !text.isEmpty
         else { return }
         
         becomeFirstResponder()
+        applyBackgroundColor(Theme.themeColor.withAlphaComponent(0.14))
         
         let menu = menuForSelection()
         if !menu.isMenuVisible {
@@ -72,11 +81,11 @@ extension UILabel {
     @objc
     private func didHideMenu(_ notification: Notification) {
         selectionOverlay.isHidden = true
-        backgroundColor = UIColor.clear
+        applyBackgroundColor(UIColor.clear)
     }
         
     private func textRect() -> CGRect {
-        let inset: CGFloat = -4
+        let inset: CGFloat = -2
         return textRect(forBounds: bounds, limitedToNumberOfLines: numberOfLines).insetBy(dx: inset, dy: inset)
     }
     
