@@ -127,6 +127,8 @@ public class Theme: NSObject {
     public struct Icon {
         /// The icon font size
         public static let size = 30
+        /// The add tranfer method icon size
+        public static let addTransferMethodIconSize = 20
         /// The icon frame
         public static let frame = CGSize(width: 30, height: 30)
         /// The icon primary color
