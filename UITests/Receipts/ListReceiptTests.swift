@@ -348,10 +348,11 @@ class ListReceiptTests: BaseTests {
     }
 
     private func verifyPayment(_ type: String, _ createdOn: String, _ amount: String, _ currency: String) {
-        let typeLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionTypeLabel"].label
-        let amountLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionAmountLabel"].label
-        let createdOnLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionCreatedOnLabel"].label
-        let currencyLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionCurrencyLabel"].label
+        let table = app.tables["receiptDetailTableView"]
+        let typeLabel = table.buttons["receiptTransactionTypeLabel"].label
+        let amountLabel = table.buttons["receiptTransactionAmountLabel"].label
+        let createdOnLabel = table.buttons["receiptTransactionCreatedOnLabel"].label
+        let currencyLabel = table.buttons["receiptTransactionCurrencyLabel"].label
 
         XCTAssertEqual(typeLabel, type)
         XCTAssertEqual(amountLabel, amount)
