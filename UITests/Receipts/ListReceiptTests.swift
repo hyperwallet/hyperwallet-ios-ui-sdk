@@ -337,6 +337,18 @@ class ListReceiptTests: BaseTests {
         verifyCurrencyAndCurrencyCode("Debit Card", CurrencyCode.JPY.1 + "1,000,000,000", CurrencyCode.JPY.0, at: 11)
         verifyCurrencyAndCurrencyCode("Debit Card", CurrencyCode.VND.1 + "1,000,000,000", CurrencyCode.VND.0, at: 12)
     }
+    
+    // Verify text selection
+    func testReceiptDetail_verifyTextSelection() {
+        openUpReceiptsListScreenForFewMonths()
+        transactionDetails.openReceipt(row: 0)
+        waitForExistence(transactionDetails.detailHeaderTitle)
+
+        transactionDetails.receiptIdValue.press(forDuration: 1.0)
+        app.staticTexts["Copy"].tap()
+        
+        XCTAssert(UIPasteboard.general.string == transactionDetails.receiptIdValue.label, "Data should be same")
+    }
 
     // MARK: Helper methods
     private func openUpReceiptsListScreenForOneMonth() {
