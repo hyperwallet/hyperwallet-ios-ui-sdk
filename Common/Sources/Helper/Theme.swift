@@ -47,6 +47,8 @@ public class Theme: NSObject {
         public static var subtitleFont = UIFont.preferredFont(forTextStyle: .subheadline)
         /// The footnote font style
         public static var footnoteFont = UIFont.preferredFont(forTextStyle: .footnote)
+        /// The text selection color
+        public static var textSelectionColor = UIColor(rgb: 0x00AFD0).withAlphaComponent(0.14)
     }
 
     /// Representation of all customizable visual style property for `UINavigationBar`.

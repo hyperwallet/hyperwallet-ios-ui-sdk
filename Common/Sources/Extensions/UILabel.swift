@@ -64,7 +64,7 @@ extension UILabel {
         else { return }
         
         becomeFirstResponder()
-        applyBackgroundColor(UIColor(rgb: 0x00AFD0).withAlphaComponent(0.14))
+        applyBackgroundColor(Theme.Label.textSelectionColor)
         
         let menu = menuForSelection()
         if !menu.isMenuVisible {
