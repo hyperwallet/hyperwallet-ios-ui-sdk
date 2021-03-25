@@ -346,8 +346,9 @@ class ListReceiptTests: BaseTests {
 
         transactionDetails.receiptIdValue.press(forDuration: 1.0)
         app.staticTexts["Copy"].tap()
-        
-        XCTAssert(UIPasteboard.general.string == transactionDetails.receiptIdValue.label, "Data should be same")
+        sleep(1)
+        let copiedText = UIPasteboard.general.string
+        XCTAssert(copiedText == transactionDetails.receiptIdValue.label, "Data should be same")
     }
 
     // MARK: Helper methods
