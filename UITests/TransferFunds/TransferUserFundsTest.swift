@@ -33,6 +33,14 @@ class TransferUserFundsTest: BaseTests {
             return "Canada ending in 1235"
         }
     }()
+    
+    var expectedJapanDestinationLabel: String = {
+        if #available(iOS 11.2, *) {
+            return "Japan\nending in 1200"
+        } else {
+            return "Japan ending in 1200"
+        }
+    }()
 
     override func setUp() {
         super.setUp()
@@ -524,6 +532,46 @@ class TransferUserFundsTest: BaseTests {
         // selectDestination.clickBackButton()
         clickBackButton()
         transferFunds.verifyTransferFundsTitle()
+    }
+    
+    func testTransferFunds_currencyFormatting() {
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+                             filename: "ListMoreThanOneTransferMethod",
+                             method: HTTPMethod.get)
+        mockServer.setupStub(url: "/rest/v3/transfers",
+                             filename: "AvailableFundUSD",
+                             method: HTTPMethod.post)
+
+        XCTAssertTrue(transferFundMenu.exists)
+        transferFundMenu.tap()
+        waitForNonExistence(spinner)
+
+        transferFunds.verifyBankAccountDestination(type: TransferMethods.bankAccount, endingDigit: "1234")
+        
+        transferFunds.transferAmount.tap()
+        transferFunds.transferAmount.clearAmountFieldAndEnterText(text: "1.23")
+        
+        transferFunds.addSelectDestinationLabel.tap()
+
+        XCTAssertTrue(selectDestination.selectDestinationTitle.exists)
+        XCTAssertTrue(selectDestination.addTransferMethodButton.exists)
+
+        waitForNonExistence(spinner)
+
+        XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 3), TransferMethods.bankAccount)
+        XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 3),
+                       expectedJapanDestinationLabel)
+        
+        selectDestination.tapSelectDestinationRow(index: 3)
+        
+        waitForNonExistence(spinner)
+        
+        XCTAssertTrue(transferFunds.transferAmount.exists)
+                
+        transferFunds.transferAmount.tap()
+        transferFunds.transferAmount.typeText("2")
+        
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "12")
     }
 
     private func assertButtonTrue(element: XCUIElement) {

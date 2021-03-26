@@ -234,11 +234,9 @@ extension CreateTransferController {
         if let transferMethod = presenter.selectedTransferDestination {
             tableViewCell.configure(transferMethod: transferMethod)
         } else {
-            if selectTransferMethodCoordinator == nil {
-                tableViewCell.accessoryType = .none
-            }
+            tableViewCell.accessoryType = .none
             let title = "mobileAddTransferMethod".localized()
-            tableViewCell.configure(title, HyperwalletIconContent.addTransferMethod)
+            tableViewCell.configure(title, HyperwalletIconContent.addNewTransferMethod)
         }
     }
 

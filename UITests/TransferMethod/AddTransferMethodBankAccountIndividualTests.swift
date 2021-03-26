@@ -176,11 +176,11 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
                                   filename: "UnexpectedErrorResponse",
                                   method: HTTPMethod.post)
 
-        waitForExistence(addTransferMethod.branchIdInput)
+        waitForExistence(addTransferMethod.accountTypeLabel)
 
+        addTransferMethod.selectAccountType("CHECKING")
         addTransferMethod.setBranchId("021000022")
         addTransferMethod.setBankAccountId("12345")
-        addTransferMethod.selectAccountType("CHECKING")
 
         addTransferMethod.clickCreateTransferMethodButton()
         waitForNonExistence(spinner)

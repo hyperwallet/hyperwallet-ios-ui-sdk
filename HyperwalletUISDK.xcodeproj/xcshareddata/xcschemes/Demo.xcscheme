@@ -59,6 +59,9 @@
                <Test
                   Identifier = "AddTransferMethodBankAccountBusinessTests">
                </Test>
+               <Test
+                  Identifier = "AddTransferMethodBankAccountIndividualTests/testAddTransferMethod_createBankAccountInvalidRouting()">
+               </Test>
             </SkippedTests>
          </TestableReference>
       </Testables>
