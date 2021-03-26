@@ -337,6 +337,19 @@ class ListReceiptTests: BaseTests {
         verifyCurrencyAndCurrencyCode("Debit Card", CurrencyCode.JPY.1 + "1,000,000,000", CurrencyCode.JPY.0, at: 11)
         verifyCurrencyAndCurrencyCode("Debit Card", CurrencyCode.VND.1 + "1,000,000,000", CurrencyCode.VND.0, at: 12)
     }
+    
+    // Verify text selection
+    func testReceiptDetail_verifyTextSelection() {
+        openUpReceiptsListScreenForFewMonths()
+        transactionDetails.openReceipt(row: 0)
+        waitForExistence(transactionDetails.detailHeaderTitle)
+
+        transactionDetails.receiptIdValue.press(forDuration: 1.0)
+        app.staticTexts["Copy"].tap()
+        sleep(1)
+        let copiedText = UIPasteboard.general.string
+        XCTAssert(copiedText == transactionDetails.receiptIdValue.label, "Data should be same")
+    }
 
     // MARK: Helper methods
     private func openUpReceiptsListScreenForOneMonth() {
@@ -348,10 +361,11 @@ class ListReceiptTests: BaseTests {
     }
 
     private func verifyPayment(_ type: String, _ createdOn: String, _ amount: String, _ currency: String) {
-        let typeLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionTypeLabel"].label
-        let amountLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionAmountLabel"].label
-        let createdOnLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionCreatedOnLabel"].label
-        let currencyLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionCurrencyLabel"].label
+        let table = app.tables["receiptDetailTableView"]
+        let typeLabel = table.buttons["receiptTransactionTypeLabel"].label
+        let amountLabel = table.buttons["receiptTransactionAmountLabel"].label
+        let createdOnLabel = table.buttons["receiptTransactionCreatedOnLabel"].label
+        let currencyLabel = table.buttons["receiptTransactionCurrencyLabel"].label
 
         XCTAssertEqual(typeLabel, type)
         XCTAssertEqual(amountLabel, amount)

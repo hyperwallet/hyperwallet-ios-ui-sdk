@@ -498,6 +498,7 @@
 		FD9509F225EE31EA00585046 /* HyperwalletSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FD9C483B258791AC00344E93 /* TransferMethodUpdateConfigurationFieldsBankAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = FD9C483925878E6100344E93 /* TransferMethodUpdateConfigurationFieldsBankAccountResponse.json */; };
 		FD9C48462587A2E000344E93 /* BankCardUpdateResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = FD9C48452587A2E000344E93 /* BankCardUpdateResponse.json */; };
+		FDB2EF2626033A77000B4218 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB2EF2526033A77000B4218 /* UILabel.swift */; };
 		FDD2F4D32580CC2A008E4CFC /* TransferMethodUpdateConfigurationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD2F4D22580CC2A008E4CFC /* TransferMethodUpdateConfigurationRepository.swift */; };
 		FDD2F4D52580DA77008E4CFC /* TransferMethodUpdateConfigurationRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD2F4D42580DA77008E4CFC /* TransferMethodUpdateConfigurationRepositoryTests.swift */; };
 		FDD2F4E02580F774008E4CFC /* TransferMethodUpdateConfigurationFieldsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = FDD2F4DF2580F774008E4CFC /* TransferMethodUpdateConfigurationFieldsResponse.json */; };
@@ -1309,6 +1310,7 @@
 		FD95091625EE2F4C00585046 /* ListBalancesResponseSuccess.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ListBalancesResponseSuccess.json; sourceTree = "<group>"; };
 		FD9C483925878E6100344E93 /* TransferMethodUpdateConfigurationFieldsBankAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TransferMethodUpdateConfigurationFieldsBankAccountResponse.json; sourceTree = "<group>"; };
 		FD9C48452587A2E000344E93 /* BankCardUpdateResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BankCardUpdateResponse.json; sourceTree = "<group>"; };
+		FDB2EF2526033A77000B4218 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		FDD2F4D22580CC2A008E4CFC /* TransferMethodUpdateConfigurationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodUpdateConfigurationRepository.swift; sourceTree = "<group>"; };
 		FDD2F4D42580DA77008E4CFC /* TransferMethodUpdateConfigurationRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodUpdateConfigurationRepositoryTests.swift; sourceTree = "<group>"; };
 		FDD2F4DF2580F774008E4CFC /* TransferMethodUpdateConfigurationFieldsResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TransferMethodUpdateConfigurationFieldsResponse.json; sourceTree = "<group>"; };
@@ -2562,6 +2564,7 @@
 				DBCA3831225E8BA900CD4137 /* UIView.swift */,
 				DBCA383A225E8BA900CD4137 /* UIViewController.swift */,
 				980B9AE1251BF7B400653D1C /* HyperwalletPrepaidCard.swift */,
+				FDB2EF2526033A77000B4218 /* UILabel.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -4042,6 +4045,7 @@
 				DBC199EA22E29CD0004447DD /* UIColor.swift in Sources */,
 				DBC199EB22E29CD0004447DD /* UIFont.swift in Sources */,
 				2E4D6CAD23679AB400916CDD /* HyperwalletInsights.swift in Sources */,
+				FDB2EF2626033A77000B4218 /* UILabel.swift in Sources */,
 				DBC199EC22E29CD0004447DD /* UIImage.swift in Sources */,
 				DBC199EE22E29CD0004447DD /* UIToolbar.swift in Sources */,
 				2E8AFE5C2307668F002B6D24 /* HyperwalletCoordinatorTypes.swift in Sources */,
