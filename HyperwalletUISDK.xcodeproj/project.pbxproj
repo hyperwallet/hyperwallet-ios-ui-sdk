@@ -2681,8 +2681,8 @@
 		FD09389225EE252E00AAA29B /* BalanceRepository */ = {
 			isa = PBXGroup;
 			children = (
-				FD09388B25EE250400AAA29B /* Tests */,
 				FD09388A25EE24F100AAA29B /* Sources */,
+				FD09388B25EE250400AAA29B /* Tests */,
 			);
 			path = BalanceRepository;
 			sourceTree = "<group>";
