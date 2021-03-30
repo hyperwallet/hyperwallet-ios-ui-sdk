@@ -186,6 +186,8 @@
 		980C2E9525224D8300DFDC94 /* GetPrepaidCardSuccessResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 980C2E9225224D6D00DFDC94 /* GetPrepaidCardSuccessResponse.json */; };
 		980C2E9625224F6E00DFDC94 /* PrepaidCardRepositoryRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980C2E8D25224C8200DFDC94 /* PrepaidCardRepositoryRequestHelper.swift */; };
 		980E7A312613BED800F0834B /* Swifter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; };
+		980E7A682613CB1200F0834B /* Swifter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; };
+		980E7A692613CB1200F0834B /* Swifter.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		983EF20F2526A950000A55B3 /* ListTransferDestinationPrepaidCardsOnly.json in Resources */ = {isa = PBXBuildFile; fileRef = 983EF20D2526A8EB000A55B3 /* ListTransferDestinationPrepaidCardsOnly.json */; };
 		984C47F22527E8A600CC442D /* PrepaidCardRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984C47F02527E89900CC442D /* PrepaidCardRepositoryTests.swift */; };
 		984C47F72527EC6100CC442D /* ListPrepaidCardResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 984C47F32527EC5C00CC442D /* ListPrepaidCardResponse.json */; };
@@ -737,6 +739,7 @@
 				98CACE1B24A6CFD10000F2B0 /* Receipt.framework in Embed Frameworks */,
 				98CACE1D24A6CFD30000F2B0 /* ReceiptRepository.framework in Embed Frameworks */,
 				FD03135225E4E97200505BDA /* Insights.xcframework in Embed Frameworks */,
+				980E7A692613CB1200F0834B /* Swifter.xcframework in Embed Frameworks */,
 				FD48732425DE98D6005855B6 /* HyperwalletSDK.xcframework in Embed Frameworks */,
 				98CACE2524A6CFD80000F2B0 /* TransferRepository.framework in Embed Frameworks */,
 				98DAF67E24B7E33600A8D7CA /* Common.framework in Embed Frameworks */,
@@ -1401,6 +1404,7 @@
 				98CACE2224A6CFD70000F2B0 /* TransferMethodRepository.framework in Frameworks */,
 				98CACE2424A6CFD80000F2B0 /* TransferRepository.framework in Frameworks */,
 				FD03135125E4E97200505BDA /* Insights.xcframework in Frameworks */,
+				980E7A682613CB1200F0834B /* Swifter.xcframework in Frameworks */,
 				98CACE2024A6CFD50000F2B0 /* TransferMethod.framework in Frameworks */,
 				98DAF67D24B7E33600A8D7CA /* Common.framework in Frameworks */,
 				98CACE1E24A6CFD40000F2B0 /* Transfer.framework in Frameworks */,
@@ -5151,7 +5155,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ui.sdk.HyperwalletUISDKUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5180,7 +5183,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ui.sdk.HyperwalletUISDKUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5663,7 +5665,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ui.sdk.HyperwalletUISDKUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
