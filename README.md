@@ -22,7 +22,7 @@ Note that this SDK is geared towards those who need both backend data and UI fea
 
 ## Dependencies
 
-- [HyperwalletSDK 1.0.0-beta12](https://github.com/hyperwallet/hyperwallet-ios-sdk)
+- [HyperwalletSDK](https://github.com/hyperwallet/hyperwallet-ios-sdk)
 
 ## Installation
 Use [Carthage](https://github.com/Carthage/Carthage) or [CocoaPods](https://cocoapods.org/) to integrate to HyperwalletSDK.
