@@ -271,7 +271,8 @@ extension AddTransferMethodController: AddTransferMethodView {
             }
         }
 
-        //even though the footer is visible, the cell might not be visible. So we need to check if the field that needs
+        // even though the footer is visible, the cell might not be visible.
+        // So we need to check if the field that needs
         // to be focused is visible. We need to scroll to the field in order to focus.
         if let section = getSectionContainingFocusedField() {
             let indexPath = getIndexPath(for: section)

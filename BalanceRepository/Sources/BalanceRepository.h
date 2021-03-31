@@ -16,30 +16,14 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
+#import <Foundation/Foundation.h>
 
-/// Represents the Hyperwallet Icon type
-public enum HyperwalletIconContent: String {
-    /// The icon for Bank Account
-    case bankAccount = "\u{e900}"
-    /// The icon for add transfer method
-    case addTransferMethod = "\u{e90b}"
-    /// The icon for check type
-    case check = "\u{e902}"
-    /// The icon for debit and credit card type
-    case debitCredit = "\u{e903}"
-    /// The icon for prepaid card type
-    case prepaidCard = "\u{e901}"
-    /// The icon for wire transfer type
-    case wire = "\u{e90a}"
-    /// The icon for venmo transfer type
-    case venmo = "\u{e905}"
-    /// The icon for moenygram transfer type
-    case moneygram = "\u{e904}"
-    /// The icon for paypal transfer type
-    case paypal = "\u{e906}"
-    /// The credit icon
-    case credit = "\u{e907}"
-    /// The debit icon
-    case debit = "\u{e908}"
-}
+//! Project version number for BalanceRepository.
+FOUNDATION_EXPORT double BalanceRepositoryVersionNumber;
+
+//! Project version string for BalanceRepository.
+FOUNDATION_EXPORT const unsigned char BalanceRepositoryVersionString[];
+
+// In this header, you should import all the public headers of your framework using statements like #import <BalanceRepository/PublicHeader.h>
+
+

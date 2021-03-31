@@ -143,6 +143,13 @@ struct ReceiptDetailSectionNotesData: ReceiptDetailSectionData {
         guard let notes = receipt.details?.notes else {
             return nil
         }
-        self.notes = notes
+        if receipt.type == .foreignExchange,
+           let foreignExchangeRate = receipt.foreignExchangeRate,
+           let fixedFX = receipt.foreignExchangeRate?.getFxRateWithFourDecimal() {
+            self.notes = notes.replacingOccurrences(of: foreignExchangeRate,
+                                                    with: fixedFX)
+        } else {
+            self.notes = notes
+        }
     }
 }

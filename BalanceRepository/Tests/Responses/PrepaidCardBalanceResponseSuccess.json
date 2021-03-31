@@ -1,0 +1,21 @@
+{
+    "count": 1,
+    "offset": 0,
+    "limit": 10,
+    "data": [
+        {
+            "currency": "USD",
+            "amount": "9933.35"
+        }
+    ],
+    "links": [
+        {
+            "params": {
+                "rel": "self"
+            },
+            "href": "http://localhost:8181/rest/v3/users/yourUserToken/balances?offset=0&limit=10"
+        }
+    ]
+}
+
+

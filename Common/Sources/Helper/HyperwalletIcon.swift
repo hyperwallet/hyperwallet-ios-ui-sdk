@@ -58,9 +58,6 @@ public final class HyperwalletIcon {
         case HyperwalletReceipt.HyperwalletEntryType.debit.rawValue:
             return .debit
 
-        case "TRASH":
-            return .trash
-
         default:
             return .bankAccount
         }

@@ -16,6 +16,10 @@ class TransferUserFundsConfirmationTest: BaseTests {
         app.launch()
         spinner = app.activityIndicators["activityIndicator"]
 
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/balances",
+                             filename: "ListBalancesResponseSuccess",
+                             method: HTTPMethod.get)
+
         transferFunds = TransferFunds(app: app)
         transferFundSourceMenu = app.tables.cells
             .containing(.staticText, identifier: "Transfer Funds Source")
@@ -23,7 +27,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         transferFundsConfirmation = TransferFundsConfirmation(app: app)
     }
 
-    //swiftlint:disable function_body_length
+    // swiftlint:disable function_body_length
     func testTransferFundsConfirmation_withoutFX() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListMoreThanOneTransferMethod",
@@ -62,6 +66,10 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertTrue(transferFundsConfirmation.tranferToSectionLabel.exists)
         transferFundsConfirmation.verifyDestination(country: "United States", endingDigit: "1234")
 
+        // Currency Code
+        XCTAssertEqual(transferFundsConfirmation.transferSourceTitleLabel.label, "mobileAvailableFunds".localized())
+        XCTAssertEqual(transferFundsConfirmation.transferSourceSubtitleLabel.label, "CAD, EUR, USD")
+
         // Assert Summary Section
         let amount = transferFundsConfirmation.getCell(row: 1)
         let fee = transferFundsConfirmation.getCell(row: 2)
@@ -94,7 +102,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         waitForNonExistence(spinner)
     }
 
-    //swiftlint:disable function_body_length
+    // swiftlint:disable function_body_length
     func testTransferFundsConfirmation_withFX() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListMoreThanOneTransferMethod",
@@ -128,6 +136,10 @@ class TransferUserFundsConfirmationTest: BaseTests {
         // 1.  Add Destination Section
         transferFundsConfirmation.verifyDestination(country: "United States", endingDigit: "1234")
 
+        // Currency Code
+        XCTAssertEqual(transferFundsConfirmation.transferSourceTitleLabel.label, "mobileAvailableFunds".localized())
+        XCTAssertEqual(transferFundsConfirmation.transferSourceSubtitleLabel.label, "CAD, EUR, USD")
+
         // 2.Exchange Rate Section
         let youSell = transferFundsConfirmation.foreignExchangeSellLabel
         let youBuy = transferFundsConfirmation.foreignExchangeBuyLabel
@@ -138,28 +150,28 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertTrue(app.cells.element(boundBy: 3).staticTexts[youBuy].exists)
         XCTAssertTrue(app.cells.element(boundBy: 3).staticTexts["$2,337.93 USD"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 4).staticTexts[exchangeRate].exists)
-        XCTAssertTrue(app.cells.element(boundBy: 4).staticTexts["\u{200E}RM1 MYR = $0.233968 USD"].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 4).staticTexts["\u{200E}RM1 MYR = $0.2339 USD"].exists)
 
         XCTAssertTrue(app.cells.element(boundBy: 6).staticTexts[youSell].exists)
         XCTAssertTrue(app.cells.element(boundBy: 6).staticTexts["$1,464.53 CAD"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 7).staticTexts[youBuy].exists)
         XCTAssertTrue(app.cells.element(boundBy: 7).staticTexts["$1,134.13 USD"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 8).staticTexts[exchangeRate].exists)
-        XCTAssertTrue(app.cells.element(boundBy: 8).staticTexts["\u{200E}$1 CAD = $0.774399 USD"].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 8).staticTexts["\u{200E}$1 CAD = $0.7743 USD"].exists)
 
         XCTAssertTrue(app.cells.element(boundBy: 10).staticTexts[youSell].exists)
         XCTAssertTrue(app.cells.element(boundBy: 10).staticTexts["₩50,000 KRW"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 11).staticTexts[youBuy].exists)
         XCTAssertTrue(app.cells.element(boundBy: 11).staticTexts["$42.76 USD"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 12).staticTexts[exchangeRate].exists)
-        XCTAssertTrue(app.cells.element(boundBy: 12).staticTexts["\u{200E}₩1 KRW = $0.000855 USD"].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 12).staticTexts["\u{200E}₩1 KRW = $0.0008 USD"].exists)
 
         XCTAssertTrue(app.cells.element(boundBy: 14).staticTexts[youSell].exists)
         XCTAssertTrue(app.cells.element(boundBy: 14).staticTexts["€1,000.00 EUR"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 15).staticTexts[youBuy].exists)
         XCTAssertTrue(app.cells.element(boundBy: 15).staticTexts["$1,135.96 USD"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 16).staticTexts[exchangeRate].exists)
-        XCTAssertTrue(app.cells.element(boundBy: 16).staticTexts["\u{200E}€1 EUR = $1.135960 USD"].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 16).staticTexts["\u{200E}€1 EUR = $1.1359 USD"].exists)
 
         // 3. Summary Section
         verifySummary()
@@ -173,7 +185,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertTrue(transferFundsConfirmation.noteLabel.exists)
         XCTAssertEqual(transferFundsConfirmation.noteDescription.value as? String, "Transfer All")
 
-        //transferFundsConfirmation.tapConfirmButton()
+        // transferFundsConfirmation.tapConfirmButton()
         let button = transferFundsConfirmation.scheduleTable.buttons["scheduleTransferLabel"]
         app.scroll(to: button)
         button.tap()
@@ -182,7 +194,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         waitForNonExistence(spinner)
     }
 
-    //Tranfer Venmo Manage method
+    // Tranfer Venmo Manage method
     func testTransferFundsConfirmationVenmo_withFX() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListTransferMethodMoreThanOneVenmo",
@@ -207,7 +219,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
                        String(format: "mobileAvailableBalance".localized(), "$", "5,855.17", "USD"))
         transferFunds.transferMaxAllFunds.doubleTap()
 
-        //verify venmo destination
+        // verify venmo destination
         waitForExistence(transferFunds.addSelectDestinationLabel)
         XCTAssertEqual(transferFunds.addSelectDestinationLabel.label, venmoAccount)
 
@@ -227,7 +239,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertTrue(transferFundsConfirmation.noteLabel.exists)
         XCTAssertEqual(transferFundsConfirmation.noteDescription.value as? String, "Transfer All")
 
-        //transferFundsConfirmation.tapConfirmButton()
+        // transferFundsConfirmation.tapConfirmButton()
         let button = transferFundsConfirmation.scheduleTable.buttons["scheduleTransferLabel"]
         app.scroll(to: button)
         button.tap()
@@ -236,7 +248,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         waitForNonExistence(spinner)
     }
 
-    //swiftlint:disable line_length
+    // swiftlint:disable line_length
     func testTransferFundsConfirmation_timeOutError() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListMoreThanOneTransferMethod",
@@ -504,27 +516,27 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertTrue(app.cells.element(boundBy: 3).staticTexts[youBuy].exists)
         XCTAssertTrue(app.cells.element(boundBy: 3).staticTexts["$2,337.93 USD"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 4).staticTexts[exchangeRate].exists)
-        XCTAssertTrue(app.cells.element(boundBy: 4).staticTexts["\u{200E}RM1 MYR = $0.233968 USD"].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 4).staticTexts["\u{200E}RM1 MYR = $0.2339 USD"].exists)
 
         XCTAssertTrue(app.cells.element(boundBy: 6).staticTexts[youSell].exists)
         XCTAssertTrue(app.cells.element(boundBy: 6).staticTexts["$1,464.53 CAD"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 7).staticTexts[youBuy].exists)
         XCTAssertTrue(app.cells.element(boundBy: 7).staticTexts["$1,134.13 USD"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 8).staticTexts[exchangeRate].exists)
-        XCTAssertTrue(app.cells.element(boundBy: 8).staticTexts["\u{200E}$1 CAD = $0.774399 USD"].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 8).staticTexts["\u{200E}$1 CAD = $0.7743 USD"].exists)
 
         XCTAssertTrue(app.cells.element(boundBy: 10).staticTexts[youSell].exists)
         XCTAssertTrue(app.cells.element(boundBy: 10).staticTexts["₩50,000 KRW"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 11).staticTexts[youBuy].exists)
         XCTAssertTrue(app.cells.element(boundBy: 11).staticTexts["$42.76 USD"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 12).staticTexts[exchangeRate].exists)
-        XCTAssertTrue(app.cells.element(boundBy: 12).staticTexts["\u{200E}₩1 KRW = $0.000855 USD"].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 12).staticTexts["\u{200E}₩1 KRW = $0.0008 USD"].exists)
 
         XCTAssertTrue(app.cells.element(boundBy: 14).staticTexts[youSell].exists)
         XCTAssertTrue(app.cells.element(boundBy: 14).staticTexts["€1,000.00 EUR"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 15).staticTexts[youBuy].exists)
         XCTAssertTrue(app.cells.element(boundBy: 15).staticTexts["$1,135.96 USD"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 16).staticTexts[exchangeRate].exists)
-        XCTAssertTrue(app.cells.element(boundBy: 16).staticTexts["\u{200E}€1 EUR = $1.135960 USD"].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 16).staticTexts["\u{200E}€1 EUR = $1.1359 USD"].exists)
     }
 }

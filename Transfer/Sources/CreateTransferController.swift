@@ -150,7 +150,10 @@ extension CreateTransferController {
             return Theme.Cell.largeHeight
 
         case .transferAll:
-            return Theme.Cell.smallHeight
+            return Theme.Cell.largeHeight
+
+        case .notes:
+            return Theme.Cell.mediumHeight
 
         default:
             return UITableView.automaticDimension

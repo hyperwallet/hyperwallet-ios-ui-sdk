@@ -80,6 +80,22 @@ public extension String {
         let result = String(self.filter { decimals.contains($0) })
         return Double(result) ?? 0
     }
+
+    /// Get FX Rate with four decimal
+    /// - Returns: return string with four decimal
+    func getFxRateWithFourDecimal() -> String {
+        guard !self.isEmpty else {
+            return ""
+        }
+        let numbers = self.split(separator: ".")
+        if numbers.count == 2 {
+            let decimals = numbers[1]
+            if decimals.count > 4 {
+                return String(self.dropLast(decimals.count - 4))
+            }
+        }
+        return self
+    }
 }
 
 /// The NSMutableAttributedString extension
