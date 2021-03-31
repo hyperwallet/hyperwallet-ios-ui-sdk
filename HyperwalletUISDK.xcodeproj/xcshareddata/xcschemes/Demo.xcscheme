@@ -59,6 +59,9 @@
                <Test
                   Identifier = "AddTransferMethodBankAccountBusinessTests">
                </Test>
+               <Test
+                  Identifier = "AddTransferMethodBankAccountIndividualTests/testAddTransferMethod_createBankAccountUnexpectedError()">
+               </Test>
             </SkippedTests>
          </TestableReference>
       </Testables>
