@@ -1,6 +1,11 @@
 Changelog
 =========
 
+[1.0.0-beta13](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta13)
+-------------------
+- UI Enhancements
+- Added support for iOS 14
+
 [1.0.0-beta12](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta12)
 -------------------
 - UI Enhancements

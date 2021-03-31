@@ -185,6 +185,9 @@
 		980B9AED251D446400653D1C /* ListTransferSourceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980B9AEA251D446400653D1C /* ListTransferSourceController.swift */; };
 		980C2E9525224D8300DFDC94 /* GetPrepaidCardSuccessResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 980C2E9225224D6D00DFDC94 /* GetPrepaidCardSuccessResponse.json */; };
 		980C2E9625224F6E00DFDC94 /* PrepaidCardRepositoryRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980C2E8D25224C8200DFDC94 /* PrepaidCardRepositoryRequestHelper.swift */; };
+		980E7A312613BED800F0834B /* Swifter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; };
+		980E7A682613CB1200F0834B /* Swifter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; };
+		980E7A692613CB1200F0834B /* Swifter.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		983EF20F2526A950000A55B3 /* ListTransferDestinationPrepaidCardsOnly.json in Resources */ = {isa = PBXBuildFile; fileRef = 983EF20D2526A8EB000A55B3 /* ListTransferDestinationPrepaidCardsOnly.json */; };
 		984C47F22527E8A600CC442D /* PrepaidCardRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984C47F02527E89900CC442D /* PrepaidCardRepositoryTests.swift */; };
 		984C47F72527EC6100CC442D /* ListPrepaidCardResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 984C47F32527EC5C00CC442D /* ListPrepaidCardResponse.json */; };
@@ -433,8 +436,6 @@
 		DCF74266257E2F7400A5295A /* PaperCheckReceiptsForFewMonths.json in Resources */ = {isa = PBXBuildFile; fileRef = DCF74265257E2F7400A5295A /* PaperCheckReceiptsForFewMonths.json */; };
 		DCF74268257E305600A5295A /* ListTransferMethodResponsePaperCheck.json in Resources */ = {isa = PBXBuildFile; fileRef = DCF74267257E305600A5295A /* ListTransferMethodResponsePaperCheck.json */; };
 		DCF7426A257E68F500A5295A /* ListTransferMethodResponseWithoutPaperCheck.json in Resources */ = {isa = PBXBuildFile; fileRef = DCF74269257E68F500A5295A /* ListTransferMethodResponseWithoutPaperCheck.json */; };
-		FD03133E25E4E96700505BDA /* Hippolyte.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD03133D25E4E96700505BDA /* Hippolyte.xcframework */; };
-		FD03133F25E4E96700505BDA /* Hippolyte.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD03133D25E4E96700505BDA /* Hippolyte.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FD03135125E4E97200505BDA /* Insights.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD4872FE25DE97BB005855B6 /* Insights.xcframework */; };
 		FD03135225E4E97200505BDA /* Insights.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD4872FE25DE97BB005855B6 /* Insights.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FD03136425E4EA2600505BDA /* Hippolyte.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD03133D25E4E96700505BDA /* Hippolyte.xcframework */; };
@@ -445,14 +446,6 @@
 		FD0313BE25E4EA9600505BDA /* Hippolyte.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD03133D25E4E96700505BDA /* Hippolyte.xcframework */; };
 		FD0313D025E4EA9B00505BDA /* Hippolyte.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD03133D25E4E96700505BDA /* Hippolyte.xcframework */; };
 		FD0313E225E4EAA300505BDA /* Hippolyte.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD03133D25E4E96700505BDA /* Hippolyte.xcframework */; };
-		FD0313E425E4EAB600505BDA /* Swifter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; };
-		FD03140725E4EABE00505BDA /* Swifter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; };
-		FD03141925E4EAC300505BDA /* Swifter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; };
-		FD03142B25E4EAC700505BDA /* Swifter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; };
-		FD03143D25E4EACC00505BDA /* Swifter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; };
-		FD03144F25E4EAD100505BDA /* Swifter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; };
-		FD03146125E4EAD700505BDA /* Swifter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; };
-		FD03147325E4EADE00505BDA /* Swifter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; };
 		FD09389525EE252E00AAA29B /* BalanceRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = FD09389325EE252E00AAA29B /* BalanceRepository.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FD09389825EE252E00AAA29B /* BalanceRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD09389125EE252E00AAA29B /* BalanceRepository.framework */; };
 		FD09389925EE252E00AAA29B /* BalanceRepository.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD09389125EE252E00AAA29B /* BalanceRepository.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -483,13 +476,9 @@
 		FD5066252538239100640B36 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B39E00DE24B4FB0A00E3BC4D /* icomoon.ttf */; platformFilter = ios; };
 		FD50662725382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json in Resources */ = {isa = PBXBuildFile; fileRef = FD50662625382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json */; };
 		FD6D1AF12583AE3C0019333E /* BankAccountIndividualUpdateResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = FD6D1AF02583AE3C0019333E /* BankAccountIndividualUpdateResponse.json */; };
-		FD86F3CC25F5F59B00AA3E0D /* Swifter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; };
-		FD86F3CD25F5F59B00AA3E0D /* Swifter.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FD8D2A0F25EF6CFF00A01007 /* Hippolyte.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD03133D25E4E96700505BDA /* Hippolyte.xcframework */; };
 		FD8D2A1025EF6CFF00A01007 /* Hippolyte.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD03133D25E4E96700505BDA /* Hippolyte.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FD8D2A2925EF72BC00A01007 /* BalanceRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD09389125EE252E00AAA29B /* BalanceRepository.framework */; };
 		FD8D2A2A25EF72BC00A01007 /* Hippolyte.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD03133D25E4E96700505BDA /* Hippolyte.xcframework */; };
-		FD8D2A2B25EF72BC00A01007 /* Swifter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; };
 		FD8D99DF25C46836003FEB1E /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B39E00DE24B4FB0A00E3BC4D /* icomoon.ttf */; };
 		FD8EA36B258119BB003CC5E8 /* UpdateTransferMethodButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8EA36A258119BB003CC5E8 /* UpdateTransferMethodButtonCell.swift */; };
 		FD95092D25EE2F9400585046 /* ListBalancesResponseSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = FD95091625EE2F4C00585046 /* ListBalancesResponseSuccess.json */; };
@@ -745,14 +734,13 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				FD03133F25E4E96700505BDA /* Hippolyte.xcframework in Embed Frameworks */,
 				FD09389925EE252E00AAA29B /* BalanceRepository.framework in Embed Frameworks */,
-				FD86F3CD25F5F59B00AA3E0D /* Swifter.xcframework in Embed Frameworks */,
 				98CACE2124A6CFD60000F2B0 /* TransferMethod.framework in Embed Frameworks */,
 				98CACE2724A6CFDA0000F2B0 /* UserRepository.framework in Embed Frameworks */,
 				98CACE1B24A6CFD10000F2B0 /* Receipt.framework in Embed Frameworks */,
 				98CACE1D24A6CFD30000F2B0 /* ReceiptRepository.framework in Embed Frameworks */,
 				FD03135225E4E97200505BDA /* Insights.xcframework in Embed Frameworks */,
+				980E7A692613CB1200F0834B /* Swifter.xcframework in Embed Frameworks */,
 				FD48732425DE98D6005855B6 /* HyperwalletSDK.xcframework in Embed Frameworks */,
 				98CACE2524A6CFD80000F2B0 /* TransferRepository.framework in Embed Frameworks */,
 				98DAF67E24B7E33600A8D7CA /* Common.framework in Embed Frameworks */,
@@ -1346,7 +1334,6 @@
 			files = (
 				073BB98B22E63DB50053C24E /* TransferRepository.framework in Frameworks */,
 				FD0313D025E4EA9B00505BDA /* Hippolyte.xcframework in Frameworks */,
-				FD03140725E4EABE00505BDA /* Swifter.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1364,7 +1351,6 @@
 			files = (
 				4A9A7BE822E859E60022E573 /* Transfer.framework in Frameworks */,
 				FD03139A25E4EA5D00505BDA /* Hippolyte.xcframework in Frameworks */,
-				FD03143D25E4EACC00505BDA /* Swifter.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1382,7 +1368,6 @@
 			files = (
 				4AE6B6C922D605B20009DEFE /* ReceiptRepository.framework in Frameworks */,
 				FD03138825E4EA4E00505BDA /* Hippolyte.xcframework in Frameworks */,
-				FD03144F25E4EAD100505BDA /* Swifter.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1400,7 +1385,6 @@
 			files = (
 				643912DD22DF40CB00036609 /* UserRepository.framework in Frameworks */,
 				FD0313E225E4EAA300505BDA /* Hippolyte.xcframework in Frameworks */,
-				FD0313E425E4EAB600505BDA /* Swifter.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1408,6 +1392,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				980E7A312613BED800F0834B /* Swifter.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1416,13 +1401,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD09389825EE252E00AAA29B /* BalanceRepository.framework in Frameworks */,
-				FD03133E25E4E96700505BDA /* Hippolyte.xcframework in Frameworks */,
-				FD86F3CC25F5F59B00AA3E0D /* Swifter.xcframework in Frameworks */,
 				98CACE1C24A6CFD30000F2B0 /* ReceiptRepository.framework in Frameworks */,
 				98CACE2624A6CFDA0000F2B0 /* UserRepository.framework in Frameworks */,
 				98CACE2224A6CFD70000F2B0 /* TransferMethodRepository.framework in Frameworks */,
 				98CACE2424A6CFD80000F2B0 /* TransferRepository.framework in Frameworks */,
 				FD03135125E4E97200505BDA /* Insights.xcframework in Frameworks */,
+				980E7A682613CB1200F0834B /* Swifter.xcframework in Frameworks */,
 				98CACE2024A6CFD50000F2B0 /* TransferMethod.framework in Frameworks */,
 				98DAF67D24B7E33600A8D7CA /* Common.framework in Frameworks */,
 				98CACE1E24A6CFD40000F2B0 /* Transfer.framework in Frameworks */,
@@ -1446,7 +1430,6 @@
 			files = (
 				DB551FA022E13ED000DD65C2 /* Common.framework in Frameworks */,
 				FD03136425E4EA2600505BDA /* Hippolyte.xcframework in Frameworks */,
-				FD03147325E4EADE00505BDA /* Swifter.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1464,7 +1447,6 @@
 			files = (
 				DB551FB022E1409700DD65C2 /* TransferMethod.framework in Frameworks */,
 				FD0313AC25E4EA6200505BDA /* Hippolyte.xcframework in Frameworks */,
-				FD03142B25E4EAC700505BDA /* Swifter.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1482,7 +1464,6 @@
 			files = (
 				DB99C2D122E220C200E45185 /* Receipt.framework in Frameworks */,
 				FD03137625E4EA3600505BDA /* Hippolyte.xcframework in Frameworks */,
-				FD03146125E4EAD700505BDA /* Swifter.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1500,7 +1481,6 @@
 			files = (
 				DBAF92A622CFCBC7004F197A /* TransferMethodRepository.framework in Frameworks */,
 				FD0313BE25E4EA9600505BDA /* Hippolyte.xcframework in Frameworks */,
-				FD03141925E4EAC300505BDA /* Swifter.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1508,7 +1488,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD8D2A0F25EF6CFF00A01007 /* Hippolyte.xcframework in Frameworks */,
 				FD9509F125EE31EA00585046 /* HyperwalletSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1519,7 +1498,6 @@
 			files = (
 				FD8D2A2925EF72BC00A01007 /* BalanceRepository.framework in Frameworks */,
 				FD8D2A2A25EF72BC00A01007 /* Hippolyte.xcframework in Frameworks */,
-				FD8D2A2B25EF72BC00A01007 /* Swifter.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2684,8 +2662,8 @@
 		FD09389225EE252E00AAA29B /* BalanceRepository */ = {
 			isa = PBXGroup;
 			children = (
-				FD09388B25EE250400AAA29B /* Tests */,
 				FD09388A25EE24F100AAA29B /* Sources */,
+				FD09388B25EE250400AAA29B /* Tests */,
 			);
 			path = BalanceRepository;
 			sourceTree = "<group>";
@@ -5181,7 +5159,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ui.sdk.HyperwalletUISDKUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5210,7 +5187,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ui.sdk.HyperwalletUISDKUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5693,7 +5669,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ui.sdk.HyperwalletUISDKUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
