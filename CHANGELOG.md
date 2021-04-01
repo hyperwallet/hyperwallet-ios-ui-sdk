@@ -1,6 +1,14 @@
 Changelog
 =========
 
+[1.0.0-beta15](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta15)
+-------------------
+- Fixed frameworks issue after upgrade to Xcode 12
+
+[1.0.0-beta14](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta14)
+-------------------
+- Fixed embedded framework issue
+
 [1.0.0-beta13](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta13)
 -------------------
 - UI Enhancements
