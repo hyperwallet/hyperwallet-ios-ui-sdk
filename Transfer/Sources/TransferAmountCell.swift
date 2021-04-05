@@ -147,9 +147,8 @@ final class TransferAmountCell: UITableViewCell {
             currencySymbolLabel.text = TransferAmountCurrencyFormatter
                 .getTransferAmountCurrency(for: currencyCode)?.symbol
             currencySymbolLabel.adjustsFontForContentSizeCategory = true
-
-            amountString = digits(amount: amount)
             setFormattedAmount(amount.formatAmountToDouble())
+            amountString = digits(amount: amountTextField.text ?? "0")
             amountTextField.adjustsFontSizeToFitWidth = true
             amountTextField.adjustsFontForContentSizeCategory = true
             currencyLabel.text = currencyCode

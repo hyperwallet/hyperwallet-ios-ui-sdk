@@ -390,6 +390,7 @@ On the Theme is possible to customize the properties:
 | `Theme.Label.titleFont` | `UIFont.preferredFont(forTextStyle: .body)` | The title font style |
 | `Theme.Label.subtitleFont` | `UIFont.preferredFont(forTextStyle: .subheadline)` | The caption one font style |
 | `Theme.Label.footnoteFont` | `UIFont.preferredFont(forTextStyle: .footnote)` | The footnote font style |
+| `Theme.Label.textSelectionColor` | `UIColor(rgb: 0x00AFD0).withAlphaComponent(0.14)` | The text selection color |
 | `Theme.NavigationBar.barStyle` | `UIBarStyle.default` | The `UINavigationBar` bar style. |
 | `Theme.NavigationBar.isTranslucent` | `false`	| Sets the opaque background color |
 | `Theme.NavigationBar.shadowColor` | `UIColor.clear`	| The color of NavigationBar shadow |

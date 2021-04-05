@@ -8,6 +8,8 @@ disabled_rules: # rule identifiers to exclude from running
   - empty_xctest_method
   - inclusive_language
   - trailing_whitespace
+  - override_in_extension
+
 type_name:
     max_length: # warning and error
       warning: 60
@@ -43,7 +45,6 @@ opt_in_rules: # some rules are only opt-in
   - multiline_literal_brackets
   - multiline_parameters
   - operator_usage_whitespace
-  - override_in_extension
   - pattern_matching_keywords
   - redundant_nil_coalescing
   - redundant_type_annotation

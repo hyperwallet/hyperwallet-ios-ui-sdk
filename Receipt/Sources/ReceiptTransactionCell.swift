@@ -31,6 +31,7 @@ final class ReceiptTransactionCell: UITableViewCell {
     lazy var receiptTypeLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.accessibilityIdentifier = "receiptTransactionTypeLabel"
+        label.allowTextSelection()
         return label
     }()
 
@@ -40,12 +41,14 @@ final class ReceiptTransactionCell: UITableViewCell {
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
         label.accessibilityIdentifier = "receiptTransactionAmountLabel"
+        label.allowTextSelection()
         return label
     }()
 
     lazy var createdOnLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.accessibilityIdentifier = "receiptTransactionCreatedOnLabel"
+        label.allowTextSelection()
         return label
     }()
 
@@ -53,6 +56,7 @@ final class ReceiptTransactionCell: UITableViewCell {
         let label = UILabel(frame: .zero)
         label.textAlignment = .right
         label.accessibilityIdentifier = "receiptTransactionCurrencyLabel"
+        label.allowTextSelection()
         return label
     }()
 

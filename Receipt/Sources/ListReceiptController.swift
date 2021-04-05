@@ -86,6 +86,10 @@ final class ListReceiptController: UITableViewController {
                                                  for: indexPath)
         if let listReceiptCell = cell as? ReceiptTransactionCell {
             listReceiptCell.configure(presenter.sectionData[indexPath.section].value[indexPath.row])
+            listReceiptCell.receiptTypeLabel.isUserInteractionEnabled = false
+            listReceiptCell.amountLabel.isUserInteractionEnabled = false
+            listReceiptCell.createdOnLabel.isUserInteractionEnabled = false
+            listReceiptCell.currencyLabel.isUserInteractionEnabled = false
             listReceiptCell.accessoryType = .disclosureIndicator
         }
         return cell
