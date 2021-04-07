@@ -31,6 +31,8 @@ final class ReceiptTransactionCell: UITableViewCell {
     lazy var receiptTypeLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.accessibilityIdentifier = "receiptTransactionTypeLabel"
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
         label.allowTextSelection()
         return label
     }()
@@ -105,7 +107,7 @@ final class ReceiptTransactionCell: UITableViewCell {
         stackView.axis = .horizontal
         stackView.alignment = .center
         stackView.distribution = .fill
-        stackView.spacing = 8
+        stackView.spacing = 2
 
         stackView.addArrangedSubview(leftLabel)
         stackView.addArrangedSubview(rightLabel)

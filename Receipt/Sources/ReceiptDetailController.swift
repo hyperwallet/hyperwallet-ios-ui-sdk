@@ -72,6 +72,7 @@ final class ReceiptDetailController: UITableViewController {
             if let tableViewCell = cell as? ReceiptTransactionCell,
                 let transactionSection = section as? ReceiptDetailSectionTransactionData {
                 tableViewCell.configure(transactionSection.receipt)
+                tableViewCell.layoutIfNeeded()
             }
 
         case .details:
@@ -125,6 +126,6 @@ extension ReceiptDetailController {
     }
 
     override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.section == 0 ? Theme.Cell.height : Theme.Cell.smallHeight
+        return indexPath.section == 0 ? UITableView.automaticDimension : Theme.Cell.smallHeight
     }
 }
