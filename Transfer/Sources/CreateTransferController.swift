@@ -163,17 +163,26 @@ extension CreateTransferController {
     private func getAttributedFooterText(for section: Int) -> NSAttributedString? {
         let sectionData = presenter.sectionData[section]
         var attributedText: NSAttributedString?
-        attributedText = format(error: sectionData.errorMessage)
+        attributedText = format(error: sectionData.errorMessage,
+                                sectionHeader: sectionData.createTransferSectionHeader)
         return attributedText
     }
 
-    private func format(footer: String? = nil, error: String? = nil) -> NSAttributedString? {
+    private func format(footer: String? = nil,
+                        error: String? = nil,
+                        sectionHeader: CreateTransferSectionHeader? = nil) -> NSAttributedString? {
         var attributedText: NSMutableAttributedString! = nil
+        var alignment: NSTextAlignment = .natural
+        if sectionHeader == .transferAll || sectionHeader == .amount {
+            alignment = .center
+        }
         if let footer = footer {
             attributedText = NSMutableAttributedString()
+            
             attributedText.appendParagraph(value: footer,
                                            font: Theme.Label.footnoteFont,
-                                           color: Theme.Label.subtitleColor)
+                                           color: Theme.Label.subtitleColor,
+                                           alignment: alignment)
         }
         if let error = error {
             if attributedText == nil {
@@ -181,7 +190,8 @@ extension CreateTransferController {
             }
             attributedText.appendParagraph(value: error,
                                            font: Theme.Label.footnoteFont,
-                                           color: Theme.Label.errorColor)
+                                           color: Theme.Label.errorColor,
+                                           alignment: alignment)
         }
         return attributedText
     }

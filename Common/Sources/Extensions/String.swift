@@ -119,12 +119,16 @@ public extension NSMutableAttributedString {
     ///   - value: the string value
     ///   - font: the UIFont
     ///   - color: the UIColor
-    func appendParagraph(value: String, font: UIFont, color: UIColor) {
+    ///   - alignment: the NSTextAlignment
+    func appendParagraph(value: String,
+                         font: UIFont,
+                         color: UIColor,
+                         alignment: NSTextAlignment = .natural) {
         let paragraphText = self.string.isEmpty
             ? value
             : "\n\(value)"
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .natural
+        paragraphStyle.alignment = alignment
         paragraphStyle.lineBreakMode = .byWordWrapping
         paragraphStyle.paragraphSpacing = font.lineHeight
         append(value: paragraphText, attributes: [
