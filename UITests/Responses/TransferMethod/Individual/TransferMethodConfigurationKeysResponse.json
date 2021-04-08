@@ -440,7 +440,46 @@
                                             "feeRateType" : "FLAT"
                                         } ]
                                     }
-                                } ]
+                                },
+                                {
+                                    "code": "BANK_CARD",
+                                    "name": "Debit Card",
+                                    "fees": {
+                                        "nodes": [
+                                            {
+                                                "country": "ES",
+                                                "currency": "USD",
+                                                "transferMethodType": "BANK_CARD",
+                                                "value": "0.00",
+                                                "feeRateType": "FLAT"
+                                            }
+                                        ]
+                                    }
+                                },{
+                                    "code": "BANK_ACCOUNT",
+                                    "name": "Bank Account",
+                                    "processingTimes": {
+                                        "nodes": [
+                                            {
+                                                "value": "1-2 Business days",
+                                                "country": "ES",
+                                                "currency": "USD",
+                                                "transferMethodType": "BANK_ACCOUNT"
+                                            }
+                                        ]
+                                    },
+                                    "fees": {
+                                        "nodes": [
+                                            {
+                                                "country": "ES",
+                                                "currency": "USD",
+                                                "transferMethodType": "BANK_ACCOUNT",
+                                                "value": "0",
+                                                "feeRateType": "PERCENT"
+                                            }
+                                        ]
+                                    }
+                                }  ]
                             }
                         } ]
                     }
@@ -462,6 +501,13 @@
                                             "transferMethodType" : "WIRE_ACCOUNT",
                                             "value" : "20.00",
                                             "feeRateType" : "FLAT"
+                                        },
+                                        {
+                                            "country": "LK",
+                                            "currency": "USD",
+                                            "transferMethodType": "WIRE_ACCOUNT",
+                                            "value": "0.00",
+                                            "feeRateType": "PERCENT"
                                         } ]
                                     }
                                 } ]

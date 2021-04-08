@@ -36,6 +36,8 @@ public extension HyperwalletFee {
             description = FeeTypes.flat(flatFee).feeDescription()
         } else if let percentFee = percentFee {
             description = FeeTypes.percent(percentFee).feeDescription()
+        } else {
+            description = FeeTypes.noFee.feeDescription()
         }
         return description
     }
@@ -48,6 +50,8 @@ public extension HyperwalletFee {
         case percent(_ percentFee: HyperwalletFee)
         /// Mixed fee
         case mixed(_ percentFee: HyperwalletFee, _ flatFee: HyperwalletFee)
+        /// No Fee
+        case noFee
 
         func feeDescription() -> String {
             switch self {
@@ -59,10 +63,19 @@ public extension HyperwalletFee {
 
             case let .mixed(percentFee, flatFee):
                 return mixedFeeDescription(percentFee, flatFee)
+                
+            case .noFee:
+                return noFeeDescription()
             }
+        }
+        
+        private func noFeeDescription() -> String {
+            return "no_fee".localized()
         }
 
         private func flatFeeDescription(_ flatFee: HyperwalletFee) -> String {
+            guard let flatFeeValue = flatFee.value?.formatAmountToDouble(), flatFeeValue > 0
+            else { return noFeeDescription() }
             var description = ""
             let feeFormat = "fee_flat_formatter".localized()
             if let currencySymbol = currencySymbol(currency: flatFee.currency), let flatValue = flatFee.value {
@@ -72,6 +85,8 @@ public extension HyperwalletFee {
         }
 
         private func percentFeeDescription(_ percentFee: HyperwalletFee) -> String {
+            guard let percentFeeValue = percentFee.value?.formatAmountToDouble(), percentFeeValue > 0
+            else { return noFeeDescription() }
             var description = ""
             var feeFormat = ""
             let value = percentFee.value
@@ -101,6 +116,11 @@ public extension HyperwalletFee {
         }
 
         private func mixedFeeDescription(_ percentFee: HyperwalletFee, _ flatFee: HyperwalletFee) -> String {
+            guard let percentFeeValue = percentFee.value?.formatAmountToDouble(),
+                  let flatFeeValue = flatFee.value?.formatAmountToDouble(),
+                  percentFeeValue > 0,
+                  flatFeeValue > 0
+            else { return noFeeDescription() }
             var description = ""
             var feeFormat = ""
             let flatValue = flatFee.value

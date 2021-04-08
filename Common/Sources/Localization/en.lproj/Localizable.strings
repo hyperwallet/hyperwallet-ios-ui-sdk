@@ -53,6 +53,7 @@
 "error" = "Error";
 "authentication_error_title" = "Authentication Error";
 "authentication_error_message" = "Authentication token retrieval attempt resulted in an error";
+"no_fee" = "No Fee";
 
 // Transfer methods
 "bank_account" = "Bank Account";
