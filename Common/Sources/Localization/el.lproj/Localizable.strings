@@ -53,6 +53,7 @@
 "error" = "Σφάλμα";
 "authentication_error_title" = "Σφάλμα ελέγχου ταυτότητας";
 "authentication_error_message" = "Η προσπάθεια ανάκτησης του διακριτικού ταυτότητας κατέληξε σε σφάλμα";
+"no_fee" = "Δωρεάν";
 
 // Transfer methods
 "bank_account" = "Τραπεζικός λογαριασμός";

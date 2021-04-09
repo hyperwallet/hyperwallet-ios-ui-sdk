@@ -53,6 +53,7 @@
 "error" = "Chyba";
 "authentication_error_title" = "Chyba overenia";
 "authentication_error_message" = "Pri pokuse o získanie overovacieho kódu sa vyskytla chyba";
+"no_fee" = "Bez poplatku";
 
 // Transfer methods
 "bank_account" = "Bankový účet";

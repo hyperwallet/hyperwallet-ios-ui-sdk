@@ -53,6 +53,7 @@
 "error" = "Ralat";
 "authentication_error_title" = "Ralat Pengesahan";
 "authentication_error_message" = "Percubaan perolehan semula token pengesahan mengakibatkan ralat";
+"no_fee" = "Tiada yuran";
 
 // Transfer methods
 "bank_account" = "Akaun Bank";

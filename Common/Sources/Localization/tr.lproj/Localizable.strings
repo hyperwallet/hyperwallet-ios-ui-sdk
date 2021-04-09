@@ -53,6 +53,7 @@
 "error" = "Hata";
 "authentication_error_title" = "Doğrulama Hatası";
 "authentication_error_message" = "Kimlik doğrulama girişimi bir hatayla sonuçlandı";
+"no_fee" = "Ücret Yok";
 
 // Transfer methods
 "bank_account" = "Banka Hesabı";

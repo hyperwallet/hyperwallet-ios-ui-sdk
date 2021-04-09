@@ -53,6 +53,7 @@
 "error" = "Fehler";
 "authentication_error_title" = "Authentifizierungsfehler";
 "authentication_error_message" = "Der versuchte Abruf des Authentifizierungs-Tokens hat zu einem Fehler geführt.";
+"no_fee" = "Keine Gebühr";
 
 // Transfer methods
 "bank_account" = "Bankkonto";

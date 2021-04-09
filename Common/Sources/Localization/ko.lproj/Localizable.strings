@@ -53,6 +53,7 @@
 "error" = "오류";
 "authentication_error_title" = "인증 오류";
 "authentication_error_message" = "인증 토큰 검색 시도 오류 발생";
+"no_fee" = "수수료 없음";
 
 // Transfer methods
 "bank_account" = "은행 계좌";

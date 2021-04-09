@@ -53,6 +53,7 @@
 "error" = "错误";
 "authentication_error_title" = "验证错误";
 "authentication_error_message" = "身份验证令牌尝试检索出现错误";
+"no_fee" = "免手續費";
 
 // Transfer methods
 "bank_account" = "银行账户";

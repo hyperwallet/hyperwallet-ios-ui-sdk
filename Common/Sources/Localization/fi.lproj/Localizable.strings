@@ -53,6 +53,7 @@
 "error" = "Virhe";
 "authentication_error_title" = "Varmennusvirhe";
 "authentication_error_message" = "Tunnistautumismerkin hakuyrityksessä tapahtui virhe";
+"no_fee" = "Ei maksu";
 
 // Transfer methods
 "bank_account" = "Pankkitili";
