@@ -5,7 +5,7 @@ class SelectTransferMethodTypeTests: BaseTests {
     let bankAccount = NSPredicate(format: "label CONTAINS[c] 'Bank Account'")
     let debitCard = NSPredicate(format: "label CONTAINS[c] 'Debit Card'")
     let processingTime = NSPredicate(format: "label CONTAINS[c] '\u{2022}'")
-    let transactionFee = NSPredicate(format: "label CONTAINS[c] 'No Fee'")
+    let transactionFee = NSPredicate(format: "label CONTAINS[c] 'No fee'")
     let wireTransfer = NSPredicate(format: "label CONTAINS[c] 'Wire Transfer'")
 
     override func setUp() {
@@ -126,9 +126,9 @@ class SelectTransferMethodTypeTests: BaseTests {
         XCTAssert(app.tables["selectTransferMethodTypeTable"].cells.element(boundBy: 0).staticTexts[
             "$20.00 fee"].exists)
         XCTAssert(app.tables["selectTransferMethodTypeTable"].cells.element(boundBy: 1).staticTexts[
-            "No Fee"].exists)
+            "No fee"].exists)
         XCTAssert(app.tables["selectTransferMethodTypeTable"].cells.element(boundBy: 2).staticTexts[
-            "No Fee \u{2022} 1-2 Business days"].exists)
+            "No fee \u{2022} 1-2 Business days"].exists)
     }
     
     func testSelectTransferMethod_verifyTransferMethodsZeroFeeMixedType () {
@@ -137,6 +137,6 @@ class SelectTransferMethodTypeTests: BaseTests {
         XCTAssert(app.tables["selectTransferMethodTypeTable"].cells.element(boundBy: 0).staticTexts[
             "Wire Transfer"].exists)
         XCTAssert(app.tables["selectTransferMethodTypeTable"].cells.element(boundBy: 0).staticTexts[
-            "No Fee"].exists)
+            "$20.00 + 0.00% fee"].exists)
     }
 }

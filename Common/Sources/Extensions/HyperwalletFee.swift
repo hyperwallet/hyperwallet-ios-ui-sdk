@@ -116,11 +116,6 @@ public extension HyperwalletFee {
         }
 
         private func mixedFeeDescription(_ percentFee: HyperwalletFee, _ flatFee: HyperwalletFee) -> String {
-            guard let percentFeeValue = percentFee.value?.formatAmountToDouble(),
-                  let flatFeeValue = flatFee.value?.formatAmountToDouble(),
-                  percentFeeValue > 0,
-                  flatFeeValue > 0
-            else { return noFeeDescription() }
             var description = ""
             var feeFormat = ""
             let flatValue = flatFee.value
@@ -128,6 +123,10 @@ public extension HyperwalletFee {
             let min = percentFee.minimum
             let max = percentFee.maximum
             let currency = flatFee.currency
+            
+            if flatValue?.formatAmountToDouble() == 0 && percentValue?.formatAmountToDouble() == 0 {
+                return noFeeDescription()
+            }
 
             if let min = min, let max = max, let flatValue = flatValue,
                 let percentValue = percentValue, let currencySymbol = currencySymbol(currency: currency) {
