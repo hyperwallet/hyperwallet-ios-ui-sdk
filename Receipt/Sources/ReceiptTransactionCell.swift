@@ -31,7 +31,8 @@ final class ReceiptTransactionCell: UITableViewCell {
     lazy var receiptTypeLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.accessibilityIdentifier = "receiptTransactionTypeLabel"
-        label.lineBreakMode = .byWordWrapping
+        label.lineBreakMode = .byClipping
+        label.textAlignment = .left
         label.numberOfLines = 0
         label.allowTextSelection()
         return label
@@ -119,7 +120,7 @@ final class ReceiptTransactionCell: UITableViewCell {
         leftLabel.translatesAutoresizingMaskIntoConstraints = false
         rightLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        leftLabel.widthAnchor.constraint(equalTo: rightLabel.widthAnchor).isActive = true
+        leftLabel.widthAnchor.constraint(equalTo: rightLabel.widthAnchor, constant: 30).isActive = true
 
         leftLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
         leftLabel.setContentHuggingPriority(.required, for: .vertical)
