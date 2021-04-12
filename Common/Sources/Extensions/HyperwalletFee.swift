@@ -80,6 +80,8 @@ public extension HyperwalletFee {
             let feeFormat = "fee_flat_formatter".localized()
             if let currencySymbol = currencySymbol(currency: flatFee.currency), let flatValue = flatFee.value {
                 description = String(format: feeFormat.localized(), currencySymbol, flatValue)
+            } else {
+                description = noFeeDescription()
             }
             return description
         }
@@ -110,6 +112,8 @@ public extension HyperwalletFee {
                 if let value = value {
                     feeFormat = "fee_percent_no_min_and_max_formatter".localized()
                     description = String(format: feeFormat, value)
+                } else {
+                    description = noFeeDescription()
                 }
             }
             return description
@@ -183,6 +187,8 @@ public extension HyperwalletFee {
                         feeFormat = "fee_flat_formatter".localized()
                         description = String(format: feeFormat, currencySymbol, flatValue)
                     }
+                }else {
+                    description = noFeeDescription()
                 }
             }
             return description
