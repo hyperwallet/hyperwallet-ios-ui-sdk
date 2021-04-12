@@ -137,6 +137,6 @@ class SelectTransferMethodTypeTests: BaseTests {
         XCTAssert(app.tables["selectTransferMethodTypeTable"].cells.element(boundBy: 0).staticTexts[
             "Wire Transfer"].exists)
         XCTAssert(app.tables["selectTransferMethodTypeTable"].cells.element(boundBy: 0).staticTexts[
-            "$20.00 + 0.00% fee"].exists)
+            "15% (Min:$4.00, Max:$10.00) fee"].exists)
     }
 }

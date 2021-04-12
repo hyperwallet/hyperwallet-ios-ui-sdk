@@ -499,22 +499,25 @@
                                             "country" : "LK",
                                             "currency" : "USD",
                                             "transferMethodType" : "WIRE_ACCOUNT",
-                                            "value" : "20.00",
+                                            "value" : "0",
                                             "feeRateType" : "FLAT"
                                         },
                                         {
                                             "country": "LK",
                                             "currency": "USD",
                                             "transferMethodType": "WIRE_ACCOUNT",
-                                            "value": "0.00",
-                                            "feeRateType": "PERCENT"
+                                            "value": "15",
+                                            "minimum": "4.00",
+                                            "feeRateType": "PERCENT",
+                                            "maximum": "10.00"
                                         } ]
                                     }
                                 } ]
                             }
                         } ]
                     }
-                }, {
+                },
+                {
                     "code" : "SH",
                     "name" : "ST. HELENA",
                     "currencies" : {
