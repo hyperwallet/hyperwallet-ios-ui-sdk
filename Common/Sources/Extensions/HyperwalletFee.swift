@@ -133,69 +133,70 @@ public extension HyperwalletFee {
             if flatValue?.formatAmountToDouble() == 0 && percentValue?.formatAmountToDouble() == 0 {
                 return noFeeDescription()
             }
-
-            if let min = min, let max = max, let flatValue = flatValue,
-                let percentValue = percentValue, let currencySymbol = currencySymbol(currency: currency) {
-                if flatValue.formatAmountToDouble() > 0 && percentValue.formatAmountToDouble() > 0 {
+            
+            if let min = min, let max = max,
+               let currencySymbol = currencySymbol(currency: currency) {
+                if let flatValue = flatValue, let percentValue = percentValue,
+                   flatValue.formatAmountToDouble() > 0, percentValue.formatAmountToDouble() > 0 {
                     feeFormat = "fee_mix_formatter".localized()
                     description = String(
                         format: feeFormat, currencySymbol, flatValue, percentValue, min, max)
-                } else if flatValue.formatAmountToDouble() == 0 {
-                    feeFormat = "fee_percent_formatter".localized()
-                    description = String(format: feeFormat, percentValue, currencySymbol, min, max)
-                } else if percentValue.formatAmountToDouble() == 0 {
+                } else if let flatValue = flatValue, flatValue.formatAmountToDouble() > 0 {
                     feeFormat = "fee_flat_formatter".localized()
                     description = String(format: feeFormat, currencySymbol, flatValue)
+                } else if let percentValue = percentValue, percentValue.formatAmountToDouble() > 0 {
+                    feeFormat = "fee_percent_formatter".localized()
+                    description = String(format: feeFormat, percentValue, currencySymbol, min, max)
                 } else {
                     description = noFeeDescription()
                 }
-            } else if let min = min, max == nil, let flatValue = flatValue,
-                let percentValue = percentValue, let currencySymbol = currencySymbol(currency: currency) {
-                if flatValue.formatAmountToDouble() > 0 && percentValue.formatAmountToDouble() > 0 {
+            } else if let min = min, max == nil,
+                      let currencySymbol = currencySymbol(currency: currency) {
+                if let flatValue = flatValue, let percentValue = percentValue,
+                   flatValue.formatAmountToDouble() > 0, percentValue.formatAmountToDouble() > 0 {
                     feeFormat = "fee_mix_only_min_formatter".localized()
                     description = String(
                         format: feeFormat, currencySymbol, flatValue, percentValue, min)
-                } else if flatValue.formatAmountToDouble() == 0 {
-                    feeFormat = "fee_percent_only_min_formatter".localized()
-                    description = String(format: feeFormat, percentValue, currencySymbol, min)
-                } else if percentValue.formatAmountToDouble() == 0 {
+                } else if let flatValue = flatValue, flatValue.formatAmountToDouble() > 0 {
                     feeFormat = "fee_flat_formatter".localized()
                     description = String(format: feeFormat, currencySymbol, flatValue)
+                } else if let percentValue = percentValue, percentValue.formatAmountToDouble() > 0 {
+                    feeFormat = "fee_percent_only_min_formatter".localized()
+                    description = String(format: feeFormat, percentValue, currencySymbol, min)
                 } else {
                     description = noFeeDescription()
                 }
-            } else if min == nil, let max = max, let flatValue = flatValue,
-                let percentValue = percentValue, let currencySymbol = currencySymbol(currency: currency) {
-                if flatValue.formatAmountToDouble() > 0 && percentValue.formatAmountToDouble() > 0 {
+            } else if min == nil, let max = max,
+                      let currencySymbol = currencySymbol(currency: currency) {
+                if let flatValue = flatValue, let percentValue = percentValue,
+                   flatValue.formatAmountToDouble() > 0, percentValue.formatAmountToDouble() > 0 {
                     feeFormat = "fee_mix_only_max_formatter".localized()
                     description = String(
                         format: feeFormat, currencySymbol, flatValue, percentValue, max)
-                } else if flatValue.formatAmountToDouble() == 0 {
-                    feeFormat = "fee_percent_only_max_formatter".localized()
-                    description = String(format: feeFormat, percentValue, currencySymbol, max)
-                } else if percentValue.formatAmountToDouble() == 0 {
+                } else if let flatValue = flatValue, flatValue.formatAmountToDouble() > 0 {
                     feeFormat = "fee_flat_formatter".localized()
                     description = String(format: feeFormat, currencySymbol, flatValue)
+                } else if let percentValue = percentValue, percentValue.formatAmountToDouble() > 0 {
+                    feeFormat = "fee_percent_only_max_formatter".localized()
+                    description = String(format: feeFormat, percentValue, currencySymbol, max)
                 } else {
                     description = noFeeDescription()
                 }
             } else {
                 if let flatValue = flatValue, let percentValue = percentValue,
-                    let currencySymbol = currencySymbol(currency: currency) {
-                    if flatValue.formatAmountToDouble() > 0 && percentValue.formatAmountToDouble() > 0 {
-                        feeFormat = "fee_mix_no_min_and_max_formatter".localized()
-                        description = String(
-                            format: feeFormat, currencySymbol, flatValue, percentValue)
-                    } else if flatValue.formatAmountToDouble() == 0 {
-                        feeFormat = "fee_percent_no_min_and_max_formatter".localized()
-                        description = String(format: feeFormat, percentValue)
-                    } else if percentValue.formatAmountToDouble() == 0 {
-                        feeFormat = "fee_flat_formatter".localized()
-                        description = String(format: feeFormat, currencySymbol, flatValue)
-                    } else {
-                        description = noFeeDescription()
-                    }
-                }else {
+                    let currencySymbol = currencySymbol(currency: currency),
+                    (flatValue.formatAmountToDouble() > 0 && percentValue.formatAmountToDouble() > 0) {
+                    feeFormat = "fee_mix_no_min_and_max_formatter".localized()
+                    description = String(
+                        format: feeFormat, currencySymbol, flatValue, percentValue)
+                } else if let flatValue = flatValue, flatValue.formatAmountToDouble() > 0,
+                         let currencySymbol = currencySymbol(currency: currency) {
+                    feeFormat = "fee_flat_formatter".localized()
+                    description = String(format: feeFormat, currencySymbol, flatValue)
+                } else if let percentValue = percentValue, percentValue.formatAmountToDouble() > 0 {
+                    feeFormat = "fee_percent_no_min_and_max_formatter".localized()
+                    description = String(format: feeFormat, percentValue)
+                } else {
                     description = noFeeDescription()
                 }
             }
