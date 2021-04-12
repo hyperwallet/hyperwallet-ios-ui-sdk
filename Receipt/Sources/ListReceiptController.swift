@@ -91,6 +91,7 @@ final class ListReceiptController: UITableViewController {
             listReceiptCell.createdOnLabel.isUserInteractionEnabled = false
             listReceiptCell.currencyLabel.isUserInteractionEnabled = false
             listReceiptCell.accessoryType = .disclosureIndicator
+            listReceiptCell.layoutIfNeeded()
         }
         return cell
     }
@@ -100,7 +101,7 @@ final class ListReceiptController: UITableViewController {
     }
 
     override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return Theme.Cell.height
+        return UITableView.automaticDimension
     }
 
     /// Returns title for header
