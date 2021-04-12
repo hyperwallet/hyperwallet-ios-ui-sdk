@@ -146,6 +146,8 @@ public extension HyperwalletFee {
                 } else if percentValue.formatAmountToDouble() == 0 {
                     feeFormat = "fee_flat_formatter".localized()
                     description = String(format: feeFormat, currencySymbol, flatValue)
+                } else {
+                    description = noFeeDescription()
                 }
             } else if let min = min, max == nil, let flatValue = flatValue,
                 let percentValue = percentValue, let currencySymbol = currencySymbol(currency: currency) {
@@ -159,6 +161,8 @@ public extension HyperwalletFee {
                 } else if percentValue.formatAmountToDouble() == 0 {
                     feeFormat = "fee_flat_formatter".localized()
                     description = String(format: feeFormat, currencySymbol, flatValue)
+                } else {
+                    description = noFeeDescription()
                 }
             } else if min == nil, let max = max, let flatValue = flatValue,
                 let percentValue = percentValue, let currencySymbol = currencySymbol(currency: currency) {
@@ -172,6 +176,8 @@ public extension HyperwalletFee {
                 } else if percentValue.formatAmountToDouble() == 0 {
                     feeFormat = "fee_flat_formatter".localized()
                     description = String(format: feeFormat, currencySymbol, flatValue)
+                } else {
+                    description = noFeeDescription()
                 }
             } else {
                 if let flatValue = flatValue, let percentValue = percentValue,
@@ -186,6 +192,8 @@ public extension HyperwalletFee {
                     } else if percentValue.formatAmountToDouble() == 0 {
                         feeFormat = "fee_flat_formatter".localized()
                         description = String(format: feeFormat, currencySymbol, flatValue)
+                    } else {
+                        description = noFeeDescription()
                     }
                 }else {
                     description = noFeeDescription()
