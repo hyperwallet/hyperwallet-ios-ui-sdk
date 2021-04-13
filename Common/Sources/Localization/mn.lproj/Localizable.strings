@@ -53,6 +53,7 @@
 "error" = "Алдаа";
 "authentication_error_title" = "Баталгаажуулалтын алдаа";
 "authentication_error_message" = "Баталгаажуулах код авах оролдлого алдаа гарахад хүргэв";
+"no_fee" = "Хураамжгүй";
 
 // Transfer methods
 "bank_account" = "Банкны данс";

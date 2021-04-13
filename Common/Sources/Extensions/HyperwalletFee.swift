@@ -48,6 +48,8 @@ public extension HyperwalletFee {
         case percent(_ percentFee: HyperwalletFee)
         /// Mixed fee
         case mixed(_ percentFee: HyperwalletFee, _ flatFee: HyperwalletFee)
+        /// No Fee
+        case noFee
 
         func feeDescription() -> String {
             switch self {
@@ -59,19 +61,32 @@ public extension HyperwalletFee {
 
             case let .mixed(percentFee, flatFee):
                 return mixedFeeDescription(percentFee, flatFee)
+                
+            case .noFee:
+                return noFeeDescription()
             }
+        }
+        
+        private func noFeeDescription() -> String {
+            return "no_fee".localized()
         }
 
         private func flatFeeDescription(_ flatFee: HyperwalletFee) -> String {
+            guard let flatFeeValue = flatFee.value?.formatAmountToDouble(), flatFeeValue > 0
+            else { return FeeTypes.noFee.feeDescription() }
             var description = ""
             let feeFormat = "fee_flat_formatter".localized()
             if let currencySymbol = currencySymbol(currency: flatFee.currency), let flatValue = flatFee.value {
                 description = String(format: feeFormat.localized(), currencySymbol, flatValue)
+            } else {
+                description = FeeTypes.noFee.feeDescription()
             }
             return description
         }
 
         private func percentFeeDescription(_ percentFee: HyperwalletFee) -> String {
+            guard let percentFeeValue = percentFee.value?.formatAmountToDouble(), percentFeeValue > 0
+            else { return FeeTypes.noFee.feeDescription() }
             var description = ""
             var feeFormat = ""
             let value = percentFee.value
@@ -95,6 +110,8 @@ public extension HyperwalletFee {
                 if let value = value {
                     feeFormat = "fee_percent_no_min_and_max_formatter".localized()
                     description = String(format: feeFormat, value)
+                } else {
+                    description = FeeTypes.noFee.feeDescription()
                 }
             }
             return description
@@ -108,6 +125,15 @@ public extension HyperwalletFee {
             let min = percentFee.minimum
             let max = percentFee.maximum
             let currency = flatFee.currency
+            
+            if (flatValue == nil && percentValue == nil) ||
+                ( flatValue?.formatAmountToDouble() == 0 && percentValue?.formatAmountToDouble() == 0) {
+                return FeeTypes.noFee.feeDescription()
+            } else if flatValue == nil || flatValue?.formatAmountToDouble() == 0 {
+                return percentFeeDescription(percentFee)
+            } else if percentValue == nil || percentValue?.formatAmountToDouble() == 0 {
+                return flatFeeDescription(flatFee)
+            }
 
             if let min = min, let max = max, let flatValue = flatValue,
                 let percentValue = percentValue, let currencySymbol = currencySymbol(currency: currency) {

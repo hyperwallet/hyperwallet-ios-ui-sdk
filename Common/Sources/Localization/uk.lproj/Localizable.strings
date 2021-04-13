@@ -53,6 +53,7 @@
 "error" = "Помилка";
 "authentication_error_title" = "Помилка автентифікації";
 "authentication_error_message" = "Помилка спроби отримання маркера автентифікації";
+"no_fee" = "Комісія не стягується";
 
 // Transfer methods
 "bank_account" = "Банківський рахунок";

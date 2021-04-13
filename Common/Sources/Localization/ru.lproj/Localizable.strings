@@ -53,6 +53,7 @@
 "error" = "Ошибка";
 "authentication_error_title" = "Ошибка аутентификации";
 "authentication_error_message" = "Попытка получения токена аутентификации привела к ошибке";
+"no_fee" = "Комиссия отсутствует";
 
 // Transfer methods
 "bank_account" = "Банковский счет";

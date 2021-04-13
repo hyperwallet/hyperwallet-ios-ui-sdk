@@ -53,6 +53,7 @@
 "error" = "Lỗi";
 "authentication_error_title" = "Lỗi xác thực";
 "authentication_error_message" = "Truy xuất và xác thực bằng chuỗi mã hóa có lỗi";
+"no_fee" = "Miễn phí";
 
 // Transfer methods
 "bank_account" = "Tài khoản ngân hàng";

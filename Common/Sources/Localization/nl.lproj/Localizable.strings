@@ -53,6 +53,7 @@
 "error" = "Fout";
 "authentication_error_title" = "Verificatiefout";
 "authentication_error_message" = "Ophaalpoging verificatietoken resulteerde in een fout";
+"no_fee" = "Geen kosten";
 
 // Transfer methods
 "bank_account" = "Bankrekening";

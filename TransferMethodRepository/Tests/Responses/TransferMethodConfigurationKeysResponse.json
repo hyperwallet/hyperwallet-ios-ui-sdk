@@ -262,6 +262,368 @@
                             }
                         ]
                     }
+                },
+                {
+                    "code" : "LK",
+                    "name" : "SRI LANKA",
+                    "currencies" : {
+                        "nodes" : [ {
+                            "code" : "USD",
+                            "name" : "USD",
+                            "transferMethodTypes" : {
+                                "nodes" : [ {
+                                    "code" : "WIRE_ACCOUNT",
+                                    "name" : "Wire Transfer",
+                                    "fees" : {
+                                        "nodes" : [ {
+                                            "country" : "LK",
+                                            "currency" : "USD",
+                                            "transferMethodType" : "WIRE_ACCOUNT",
+                                            "value" : "0",
+                                            "feeRateType" : "FLAT"
+                                        },
+                                        {
+                                            "country": "LK",
+                                            "currency": "USD",
+                                            "transferMethodType": "WIRE_ACCOUNT",
+                                            "value": "15",
+                                            "minimum": "4.00",
+                                            "feeRateType": "PERCENT",
+                                            "maximum": "10.00"
+                                        } ]
+                                    }
+                                },
+                                {
+                                    "code": "PAYPAL_ACCOUNT",
+                                    "name": "PayPal Account",
+                                    "fees": {
+                                        "nodes": [
+                                            {
+                                                "value": "0.00",
+                                                "feeRateType": "FLAT",
+                                                "currency": "USD"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "code": "BANK_ACCOUNT",
+                                    "name": "Bank Account",
+                                    "fees": {
+                                        "nodes": [
+                                            {
+                                                "value": "2.00",
+                                                "feeRateType": "PERCENT",
+                                                "currency": "USD"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "code": "BANK_CARD",
+                                    "name": "Debit Card",
+                                    "fees": {
+                                        "nodes" : [ {
+                                            "country" : "LK",
+                                            "currency" : "USD",
+                                            "transferMethodType" : "BANK_CARD",
+                                            "value" : "12",
+                                            "feeRateType" : "FLAT"
+                                        },
+                                        {
+                                            "country": "LK",
+                                            "currency": "USD",
+                                            "transferMethodType": "BANK_CARD",
+                                            "minimum": "4.00",
+                                            "feeRateType": "PERCENT",
+                                            "maximum": "10.00"
+                                        } ]
+                                    }
+                                }]
+                            }
+                        }, {
+                            "code" : "CAD",
+                            "name" : "CAD",
+                            "transferMethodTypes" : {
+                                "nodes" : [ {
+                                    "code" : "WIRE_ACCOUNT",
+                                    "name" : "Wire Transfer",
+                                    "fees" : {
+                                        "nodes" : [ {
+                                            "country" : "LK",
+                                            "currency" : "CAD",
+                                            "transferMethodType" : "WIRE_ACCOUNT",
+                                            "feeRateType" : "FLAT"
+                                        },
+                                        {
+                                            "country": "LK",
+                                            "currency": "CAD",
+                                            "value": "2.00",
+                                            "transferMethodType": "WIRE_ACCOUNT",
+                                            "minimum": "4.00",
+                                            "feeRateType": "PERCENT",
+                                            "maximum": "10.00"
+                                        } ]
+                                    }
+                                },
+                                {
+                                    "code": "PAYPAL_ACCOUNT",
+                                    "name": "PayPal Account",
+                                    "fees": {
+                                        "nodes": [
+                                            {
+                                                "feeRateType": "FLAT",
+                                                "currency": "CAD"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "code": "BANK_ACCOUNT",
+                                    "name": "Bank Account",
+                                    "fees": {
+                                        "nodes": [
+                                            {
+                                                "value": "2.00",
+                                                "feeRateType": "PERCENT",
+                                                "currency": "CAD",
+                                                "minimum": "4.00",
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "code": "BANK_CARD",
+                                    "name": "Debit Card",
+                                    "fees": {
+                                        "nodes" : [ {
+                                            "country" : "LK",
+                                            "currency" : "CAD",
+                                            "transferMethodType" : "BANK_CARD",
+                                            "value" : "12",
+                                            "feeRateType" : "FLAT"
+                                        },
+                                        {
+                                            "country": "LK",
+                                            "currency": "CAD",
+                                            "transferMethodType": "BANK_CARD",
+                                            "feeRateType": "PERCENT",
+                                            "maximum": "10.00"
+                                        } ]
+                                    }
+                                }]
+                            }
+                        },
+                        {
+                            "code" : "AUD",
+                            "name" : "AUD",
+                            "transferMethodTypes" : {
+                                "nodes" : [ {
+                                    "code" : "WIRE_ACCOUNT",
+                                    "name" : "Wire Transfer",
+                                    "fees" : {
+                                        "nodes" : [ {
+                                            "country" : "LK",
+                                            "currency" : "AUD",
+                                            "transferMethodType" : "WIRE_ACCOUNT",
+                                            "feeRateType" : "FLAT"
+                                        },
+                                        {
+                                            "country": "LK",
+                                            "currency": "AUD",
+                                            "transferMethodType": "WIRE_ACCOUNT",
+                                            "minimum": "4.00",
+                                            "feeRateType": "PERCENT",
+                                            "maximum": "10.00"
+                                        } ]
+                                    }
+                                },
+                                {
+                                    "code": "PAYPAL_ACCOUNT",
+                                    "name": "PayPal Account",
+                                    "fees": {
+                                        "nodes": [
+                                            {
+                                                "value": "2.00",
+                                                "feeRateType": "FLAT",
+                                                "currency": "AUD"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "code": "BANK_ACCOUNT",
+                                    "name": "Bank Account",
+                                    "fees": {
+                                        "nodes": [
+                                            {
+                                                "value": "2.00",
+                                                "feeRateType": "PERCENT",
+                                                "currency": "AUD",
+                                                "maximum": "8.00",
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "code": "BANK_CARD",
+                                    "name": "Debit Card",
+                                    "fees": {
+                                        "nodes" : [ {
+                                            "country" : "LK",
+                                            "currency" : "AUD",
+                                            "transferMethodType" : "BANK_CARD",
+                                            "value" : "12",
+                                            "feeRateType" : "FLAT"
+                                        },
+                                        {
+                                            "country": "LK",
+                                            "currency": "AUD",
+                                            "transferMethodType": "BANK_CARD",
+                                            "feeRateType": "PERCENT",
+                                            "value" : "8",
+                                            "maximum": "10.00"
+                                        } ]
+                                    }
+                                }]
+                            }
+                        },
+                        {
+                            "code" : "INR",
+                            "name" : "INR",
+                            "transferMethodTypes" : {
+                                "nodes" : [ {
+                                    "code" : "WIRE_ACCOUNT",
+                                    "name" : "Wire Transfer",
+                                    "fees" : {
+                                        "nodes" : [ {
+                                            "value": "5.00",
+                                            "country" : "LK",
+                                            "currency" : "INR",
+                                            "transferMethodType" : "WIRE_ACCOUNT",
+                                            "feeRateType" : "FLAT"
+                                        },
+                                        {
+                                            "value": "10.00",
+                                            "country": "LK",
+                                            "currency": "INR",
+                                            "transferMethodType": "WIRE_ACCOUNT",
+                                            "feeRateType": "PERCENT"
+                                        } ]
+                                    }
+                                },
+                                {
+                                    "code": "PAYPAL_ACCOUNT",
+                                    "name": "PayPal Account",
+                                    "fees": {
+                                        "nodes": [
+                                            {
+                                                "value": "2.00",
+                                                "feeRateType": "FLAT",
+                                                "currency": "INR"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "code": "BANK_ACCOUNT",
+                                    "name": "Bank Account",
+                                    "fees": {
+                                        "nodes": [
+                                            {
+                                                "value": "2.00",
+                                                "feeRateType": "FLAT",
+                                                "currency": "INR"
+                                            },
+                                            {
+                                                "value": "2.00",
+                                                "feeRateType": "PERCENT",
+                                                "currency": "INR",
+                                                "minimum": "4.00",
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "code": "BANK_CARD",
+                                    "name": "Debit Card",
+                                    "fees": {
+                                        "nodes" : [
+                                        {
+                                            "country": "LK",
+                                            "currency": "INR",
+                                            "transferMethodType": "BANK_CARD",
+                                            "feeRateType": "PERCENT",
+                                            "maximum": "10.00"
+                                        } ]
+                                    }
+                                }]
+                            }
+                        },
+                        {
+                            "code" : "JPY",
+                            "name" : "JPY",
+                            "transferMethodTypes" : {
+                                "nodes" : [ {
+                                    "code" : "WIRE_ACCOUNT",
+                                    "name" : "Wire Transfer",
+                                    "fees" : {
+                                        "nodes" : [ {
+                                            "value": "5.00",
+                                            "country" : "LK",
+                                            "currency" : "JPY",
+                                            "transferMethodType" : "WIRE_ACCOUNT",
+                                            "feeRateType" : "FLAT"
+                                        },
+                                        {
+                                            "value": "10.00",
+                                            "country": "LK",
+                                            "currency": "JPY",
+                                            "transferMethodType": "WIRE_ACCOUNT",
+                                            "feeRateType": "PERCENT"
+                                        } ]
+                                    }
+                                },
+                                {
+                                    "code": "PAYPAL_ACCOUNT",
+                                    "name": "PayPal Account",
+                                    "fees": {
+                                        "nodes": [
+                                            {
+                                                "country": "LK",
+                                                "feeRateType": "FLAT"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "code": "BANK_ACCOUNT",
+                                    "name": "Bank Account",
+                                    "fees": {
+                                        "nodes": [
+                                            {
+                                                "feeRateType": "FLAT",
+                                                "value": "10.00",
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "code": "BANK_CARD",
+                                    "name": "Debit Card",
+                                    "fees": {
+                                        "nodes" : [
+                                        {
+                                            "country": "LK",
+                                            "transferMethodType": "BANK_CARD",
+                                            "feeRateType": "PERCENT",
+                                            "maximum": "10.00"
+                                        } ]
+                                    }
+                                }]
+                            }
+                        }]
+                    }
                 }
             ]
         }

@@ -53,6 +53,7 @@
 "error" = "Pogreška";
 "authentication_error_title" = "Pogreška provjere autentičnosti";
 "authentication_error_message" = "Pokušaj pronalaženja autentifikacijskog tokena rezultirao je pogreškom";
+"no_fee" = "Bez naknade";
 
 // Transfer methods
 "bank_account" = "Bankovni račun";

@@ -53,6 +53,7 @@
 "error" = "Грешка";
 "authentication_error_title" = "Грешка при удостоверяване";
 "authentication_error_message" = "Опитът за получаване на токен за удостоверяване доведе до грешка";
+"no_fee" = "Без такса";
 
 // Transfer methods
 "bank_account" = "Банкова сметка";

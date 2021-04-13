@@ -53,6 +53,7 @@
 "error" = "Błąd";
 "authentication_error_title" = "Błąd uwierzytelniania";
 "authentication_error_message" = "Próba odzyskania tokena uwierzytelniania zakończyła się błędem";
+"no_fee" = "Brak opłata";
 
 // Transfer methods
 "bank_account" = "Rachunek bankowy";

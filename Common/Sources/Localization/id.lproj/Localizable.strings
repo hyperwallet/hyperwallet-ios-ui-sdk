@@ -53,6 +53,7 @@
 "error" = "Kesalahan";
 "authentication_error_title" = "Kesalahan Autentikasi";
 "authentication_error_message" = "Percobaan pengambilan token autentikasi mengakibatkan kesalahan";
+"no_fee" = "Tidak Ada Biaya";
 
 // Transfer methods
 "bank_account" = "Rekening Bank";
