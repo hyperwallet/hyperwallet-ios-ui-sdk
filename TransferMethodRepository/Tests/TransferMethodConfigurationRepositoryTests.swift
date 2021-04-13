@@ -250,8 +250,8 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
         XCTAssertNil(error, "The error should be nil")
         XCTAssertNotNil(transferMethodConfigurationKey, "The result should not be nil")
         XCTAssertEqual(transferMethodConfigurationKey!.countries()!.count,
-                       4,
-                       "The transferMethodConfigurationKey!.countries()!.count should be 4")
+                       5,
+                       "The transferMethodConfigurationKey!.countries()!.count should be 5")
         XCTAssertEqual(transferMethodConfigurationKey!.currencies(from: country)!.count,
                        2,
                        "The transferMethodConfigurationKey!.currencies(from: country)!.count should be 2")
@@ -320,6 +320,144 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
         XCTAssertEqual(refreshTransferMethodConfigurationField!.transferMethodType()!.name,
                        "PayPal Account",
                        "transferMethodType()!.name` should be PayPal Account")
+    }
+    
+    func testGetKeys_varifyFeeFormatting() {
+        TransferMethodConfigurationRepositoryTests
+            .setupResponseMockServer(keyResponseData)
+        let expectation = self.expectation(description: "Get transfer method configuration keys")
+        var transferMethodConfigurationKey: HyperwalletTransferMethodConfigurationKey?
+        var error: HyperwalletErrorType?
+        let repository = RemoteTransferMethodConfigurationRepository()
+
+        // When
+        repository.getKeys { (result) in
+            switch result {
+            case .success(let resultKey):
+                transferMethodConfigurationKey = resultKey
+
+            case .failure(let resultError):
+                error = resultError
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+
+        XCTAssertNil(error, "The error should be nil")
+        
+        if let transferMethodTypes = transferMethodConfigurationKey?
+            .transferMethodTypes(countryCode: "GB", currencyCode: "HRK") {
+            if let bankAccount = transferMethodTypes[0].fees?.nodes {
+                XCTAssertEqual(HyperwalletFee.format(fees: bankAccount), "No Fee")
+            }
+        }
+        
+        if let transferMethodTypes = transferMethodConfigurationKey?
+            .transferMethodTypes(countryCode: "CA", currencyCode: "CAD") {
+            if let bankAccount = transferMethodTypes[0].fees?.nodes {
+                XCTAssertEqual(HyperwalletFee.format(fees: bankAccount),
+                               "CA$2.20 + 8.9% (Min:CA$0.05, Max:CA$1.00) fee")
+            }
+            if let paypal = transferMethodTypes[1].fees?.nodes {
+                XCTAssertEqual(HyperwalletFee.format(fees: paypal), "CA$0.25 fee")
+            }
+        }
+        
+        assertUSDFees(transferMethodConfigurationKey)
+        assertCADFees(transferMethodConfigurationKey)
+        assertAUDFees(transferMethodConfigurationKey)
+        assertINRFees(transferMethodConfigurationKey)
+        assertJPYFees(transferMethodConfigurationKey)
+    }
+    
+    private func assertUSDFees(_ transferMethodConfigurationKey: HyperwalletTransferMethodConfigurationKey?) {
+        if let transferMethodTypes = transferMethodConfigurationKey?
+            .transferMethodTypes(countryCode: "LK", currencyCode: "USD") {
+            if let wireAccount = transferMethodTypes[0].fees?.nodes {
+                XCTAssertEqual(HyperwalletFee.format(fees: wireAccount), "15% (Min:$4.00, Max:$10.00) fee")
+            }
+            if let paypal = transferMethodTypes[1].fees?.nodes {
+                XCTAssertEqual(HyperwalletFee.format(fees: paypal), "No fee")
+            }
+            if let bankAccount = transferMethodTypes[2].fees?.nodes {
+                XCTAssertEqual(HyperwalletFee.format(fees: bankAccount), "2.00% fee")
+            }
+            if let bankCard = transferMethodTypes[3].fees?.nodes {
+                XCTAssertEqual(HyperwalletFee.format(fees: bankCard), "$12 fee")
+            }
+        }
+    }
+    
+    private func assertCADFees(_ transferMethodConfigurationKey: HyperwalletTransferMethodConfigurationKey?) {
+        if let transferMethodTypes = transferMethodConfigurationKey?
+            .transferMethodTypes(countryCode: "LK", currencyCode: "CAD") {
+            if let wireAccount = transferMethodTypes[0].fees?.nodes {
+                XCTAssertEqual(HyperwalletFee.format(fees: wireAccount), "2.00% (Min:CA$4.00, Max:CA$10.00) fee")
+            }
+            if let paypal = transferMethodTypes[1].fees?.nodes {
+                XCTAssertEqual(HyperwalletFee.format(fees: paypal), "No fee")
+            }
+            if let bankAccount = transferMethodTypes[2].fees?.nodes {
+                XCTAssertEqual(HyperwalletFee.format(fees: bankAccount), "2.00% (Min:CA$4.00) fee")
+            }
+            if let bankCard = transferMethodTypes[3].fees?.nodes {
+                XCTAssertEqual(HyperwalletFee.format(fees: bankCard), "CA$12 fee")
+            }
+        }
+    }
+    
+    private func assertAUDFees(_ transferMethodConfigurationKey: HyperwalletTransferMethodConfigurationKey?) {
+        if let transferMethodTypes = transferMethodConfigurationKey?
+            .transferMethodTypes(countryCode: "LK", currencyCode: "AUD") {
+            if let wireAccount = transferMethodTypes[0].fees?.nodes {
+                XCTAssertEqual(HyperwalletFee.format(fees: wireAccount), "No fee")
+            }
+            if let paypal = transferMethodTypes[1].fees?.nodes {
+                XCTAssertEqual(HyperwalletFee.format(fees: paypal), "A$2.00 fee")
+            }
+            if let bankAccount = transferMethodTypes[2].fees?.nodes {
+                XCTAssertEqual(HyperwalletFee.format(fees: bankAccount), "2.00% (Max:A$8.00) fee")
+            }
+            if let bankCard = transferMethodTypes[3].fees?.nodes {
+                XCTAssertEqual(HyperwalletFee.format(fees: bankCard), "A$12 + 8% (Max:A$10.00) fee")
+            }
+        }
+    }
+    
+    private func assertINRFees(_ transferMethodConfigurationKey: HyperwalletTransferMethodConfigurationKey?) {
+        if let transferMethodTypes = transferMethodConfigurationKey?
+            .transferMethodTypes(countryCode: "LK", currencyCode: "INR") {
+            if let wireAccount = transferMethodTypes[0].fees?.nodes {
+                XCTAssertEqual(HyperwalletFee.format(fees: wireAccount), "₹5.00 + 10.00% fee")
+            }
+            if let paypal = transferMethodTypes[1].fees?.nodes {
+                XCTAssertEqual(HyperwalletFee.format(fees: paypal), "₹2.00 fee")
+            }
+            if let bankAccount = transferMethodTypes[2].fees?.nodes {
+                XCTAssertEqual(HyperwalletFee.format(fees: bankAccount), "₹2.00 + 2.00% (Min:₹4.00) fee")
+            }
+            if let bankCard = transferMethodTypes[3].fees?.nodes {
+                XCTAssertEqual(HyperwalletFee.format(fees: bankCard), "No fee")
+            }
+        }
+    }
+    
+    private func assertJPYFees(_ transferMethodConfigurationKey: HyperwalletTransferMethodConfigurationKey?) {
+        if let transferMethodTypes = transferMethodConfigurationKey?
+            .transferMethodTypes(countryCode: "LK", currencyCode: "JPY") {
+            if let wireAccount = transferMethodTypes[0].fees?.nodes {
+                XCTAssertEqual(HyperwalletFee.format(fees: wireAccount), "¥5.00 + 10.00% fee")
+            }
+            if let paypal = transferMethodTypes[1].fees?.nodes {
+                XCTAssertEqual(HyperwalletFee.format(fees: paypal), "No fee")
+            }
+            if let bankAccount = transferMethodTypes[2].fees?.nodes {
+                XCTAssertEqual(HyperwalletFee.format(fees: bankAccount), "No fee")
+            }
+            if let bankCard = transferMethodTypes[3].fees?.nodes {
+                XCTAssertEqual(HyperwalletFee.format(fees: bankCard), "No fee")
+            }
+        }
     }
 
     static func setupResponseMockServer(_ data: Data, _ error: NSError? = nil) {
