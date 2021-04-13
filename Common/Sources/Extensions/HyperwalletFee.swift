@@ -36,7 +36,7 @@ public extension HyperwalletFee {
             description = FeeTypes.flat(flatFee).feeDescription()
         } else if let percentFee = percentFee {
             description = FeeTypes.percent(percentFee).feeDescription()
-        } 
+        }
         return description
     }
 
@@ -79,7 +79,7 @@ public extension HyperwalletFee {
             if let currencySymbol = currencySymbol(currency: flatFee.currency), let flatValue = flatFee.value {
                 description = String(format: feeFormat.localized(), currencySymbol, flatValue)
             } else {
-                description = noFeeDescription()
+                description = FeeTypes.noFee.feeDescription()
             }
             return description
         }
