@@ -179,8 +179,8 @@ class TransferFundsConfirmation {
         XCTAssertEqual(tranferFromSectionLabel.label, transferFrom)
     }
 
-    func verifyPPCInfo(brandType: String, endingDigit: String) {
-        let info = "\(brandType)\(numberMask)\(endingDigit)"
+    func verifyPPCInfo(brandType: String, endingDigit: String, currency: String) {
+        let info = "\(currency)\n\(brandType)\(numberMask)\(endingDigit)"
         XCTAssertEqual(transferSourceSubtitleLabel.label, info)
     }
 }

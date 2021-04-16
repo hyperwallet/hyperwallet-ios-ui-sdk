@@ -433,7 +433,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         waitForExistence(transferFundsConfirmation.tranferFromSectionLabel)
         // Transfer from
         transferFundsConfirmation.verifyTransferFrom(isAvailableFunds: false)
-        transferFundsConfirmation.verifyPPCInfo(brandType: transferFunds.prepaidCardVisa, endingDigit: "9285")
+        transferFundsConfirmation.verifyPPCInfo(brandType: transferFunds.prepaidCardVisa, endingDigit: "9285", currency: "USD")
 
         // 1.  Add Destination Section
         transferFundsConfirmation.verifyDestination(country: "United States", endingDigit: "1234")
