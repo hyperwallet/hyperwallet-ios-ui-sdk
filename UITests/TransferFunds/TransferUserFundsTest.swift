@@ -1039,9 +1039,7 @@ class TransferUserFundsTest: BaseTests {
         waitForNonExistence(spinner)
 
         transferFunds.verifyTransferFrom(isAvailableFunds: false)
-        transferFunds.verifyPPCInfo(brandType: transferFunds.prepaidCardVisa,
-                                    endingDigit: "8884",
-                                    currency: "USD")
+        transferFunds.verifyPPCInfo(brandType: transferFunds.prepaidCardVisa, endingDigit: "8884", currency: "USD")
     }
 
     // MARK: Select PPC as the Transfer Destination
