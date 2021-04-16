@@ -12,9 +12,9 @@ class TransferUserFundsTest: BaseTests {
 
     var expectedUSDestinationPrepaidLabel: String = {
         if #available(iOS 11.2, *) {
-            return "United States\nVisa •••• "
+            return "USD\nVisa •••• "
         } else {
-            return "United States Visa •••• "
+            return "USD Visa •••• "
         }
     }()
 
@@ -940,7 +940,9 @@ class TransferUserFundsTest: BaseTests {
 
         // Transfer From by PPC Section
         transferFunds.verifyTransferFrom(isAvailableFunds: false)
-        transferFunds.verifyPPCInfo(brandType: transferFunds.prepaidCardVisa, endingDigit: "9285")
+        transferFunds.verifyPPCInfo(brandType: transferFunds.prepaidCardVisa,
+                                    endingDigit: "9285",
+                                    currency: "USD")
 
         // Transfer Destination Section - Bank Account
         transferFunds.verifyTransferFundsTitle()
@@ -1037,7 +1039,9 @@ class TransferUserFundsTest: BaseTests {
         waitForNonExistence(spinner)
 
         transferFunds.verifyTransferFrom(isAvailableFunds: false)
-        transferFunds.verifyPPCInfo(brandType: transferFunds.prepaidCardVisa, endingDigit: "8884")
+        transferFunds.verifyPPCInfo(brandType: transferFunds.prepaidCardVisa,
+                                    endingDigit: "8884",
+                                    currency: "USD")
     }
 
     // MARK: Select PPC as the Transfer Destination
@@ -1092,7 +1096,7 @@ class TransferUserFundsTest: BaseTests {
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 1), TransferMethods.bankAccount)
 
         XCTAssertEqual(selectDestination.getSelectDestinationRowTitle(index: 2), TransferMethods.prepaidCard)
-        let ppcInfo = "United States\n\(transferFunds.prepaidCardVisa)\(transferFunds.numberMask)4281"
+        let ppcInfo = "USD\n\(transferFunds.prepaidCardVisa)\(transferFunds.numberMask)4281"
         XCTAssertEqual(selectDestination.getSelectDestinationRowDetail(index: 2), ppcInfo)
 
         // Assert first row is checked by default
