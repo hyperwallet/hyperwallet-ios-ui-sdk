@@ -71,6 +71,7 @@ class ListTransferMethodTests: BaseTests {
         let expectedTitle = "Add a transfer method to get started."
 
         XCTAssertTrue(app.staticTexts[expectedTitle].exists)
+        XCTAssertTrue(listTransferMethod.addTransferMethodButton.exists)
     }
 
     func testListTransferMethod_verifyTransferMethodsOrder() {
