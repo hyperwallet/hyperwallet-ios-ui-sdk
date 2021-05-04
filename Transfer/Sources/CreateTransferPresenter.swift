@@ -473,7 +473,8 @@ final class CreateTransferPresenter {
 
     private func updateFooterContent(_ errors: [HyperwalletError]) {
         for error in errors {
-            if let sectionData = sectionData.first(where: { $0.createTransferSectionHeader == .transferAll }) {
+            if let sectionData = sectionData.first(where: { $0.createTransferSectionHeader == .transferAll }),
+               error.fieldName != nil {
                 sectionData.errorMessage = error.message
                 view?.updateFooter(for: .transferAll)
             }

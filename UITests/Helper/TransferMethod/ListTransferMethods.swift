@@ -6,7 +6,6 @@ class ListTransferMethod {
     var app: XCUIApplication
 
     var addTransferMethodButton: XCUIElement
-    var addTransferMethodEmptyScreenButton: XCUIElement
     var confirmAccountRemoveButton: XCUIElement
     var cancelAccountRemoveButton: XCUIElement
     var navigationBar: XCUIElement
@@ -21,7 +20,6 @@ class ListTransferMethod {
         self.app = app
 
         addTransferMethodButton = app.navigationBars.buttons["Add"]
-        addTransferMethodEmptyScreenButton = app.buttons[addAccountTitle]
         alert = app.alerts[removeAccountTitle]
         confirmAccountRemoveButton = alert.buttons[removeButtonLabel]
         cancelAccountRemoveButton = alert.buttons[cancelButtonLabel]
@@ -30,10 +28,6 @@ class ListTransferMethod {
 
     func tapAddTransferMethodButton() {
         addTransferMethodButton.tap()
-    }
-
-    func tapAddTransferMethodEmptyScreenButton() {
-        addTransferMethodEmptyScreenButton.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
     }
 
     func tapConfirmAccountRemoveButton() {

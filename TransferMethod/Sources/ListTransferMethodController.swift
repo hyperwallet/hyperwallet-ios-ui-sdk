@@ -32,8 +32,6 @@ final class ListTransferMethodController: UITableViewController {
 
     private lazy var emptyListLabel: UILabel = view.setUpEmptyListLabel(text: "emptyStateAddTransferMethod"
         .localized())
-    private lazy var addAccountButton: UIButton =
-        view.setUpEmptyListButton(text: "mobileAddTransferMethodHeader".localized(), firstItem: emptyListLabel)
 
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -212,8 +210,7 @@ extension ListTransferMethodController: ListTransferMethodView {
         if presenter.sectionData.isNotEmpty {
             toggleEmptyListView()
         } else {
-            addAccountButton.addTarget(self, action: #selector(didTapAddButton), for: .touchUpInside)
-            toggleEmptyListView(hideLabel: false, hideButton: false)
+            toggleEmptyListView(hideLabel: false)
         }
 
         tableView.reloadData()
@@ -227,9 +224,9 @@ extension ListTransferMethodController: ListTransferMethodView {
         }
     }
 
-    private func toggleEmptyListView(hideLabel: Bool = true, hideButton: Bool = true) {
+    private func toggleEmptyListView(hideLabel: Bool = true) {
         emptyListLabel.isHidden = hideLabel
-        addAccountButton.isHidden = hideButton
+        tableView.isScrollEnabled = hideLabel
     }
 }
 
