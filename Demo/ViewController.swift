@@ -101,7 +101,7 @@ class ViewController: UITableViewController {
         createTransferMethodObserver()
         removeTransferMethodObserver()
 
-        // Setup HyperwalletUI
+        // Setup
         HyperwalletUI.setup(IntegratorAuthenticationProvider(baseUrl, userToken))
 
         exampleList = [
