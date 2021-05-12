@@ -370,6 +370,9 @@ final class CreateTransferPresenter {
                     }
                 } else {
                     strongSelf.availableBalance = nil
+                    strongSelf.transferSourceCellConfigurations.forEach {
+                        $0.availableBalance = nil
+                    }
                 }
 
             case .success(let transfer):
