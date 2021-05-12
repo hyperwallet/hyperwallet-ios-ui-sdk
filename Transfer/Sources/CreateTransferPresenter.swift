@@ -368,6 +368,8 @@ final class CreateTransferPresenter {
                     view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
                         strongSelf.createInitialTransfer()
                     }
+                } else {
+                    strongSelf.availableBalance = nil
                 }
 
             case .success(let transfer):
