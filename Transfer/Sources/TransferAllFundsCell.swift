@@ -87,6 +87,8 @@ final class TransferAllFundsCell: UITableViewCell {
     func configure(action: UIGestureRecognizer,
                    availableBalance: String?,
                    currencyCode: String?) {
+        availableFundsLabel.numberOfLines = 0
+        availableFundsLabel.adjustsFontForContentSizeCategory = true
         guard let availableBalance = availableBalance,
             let currencyCode = currencyCode else {
                 availableFundsLabel.text = "naAvailableBalance".localized()
@@ -103,8 +105,6 @@ final class TransferAllFundsCell: UITableViewCell {
                                               currencySymbol,
                                               formattedAvailableBalance,
                                               currencyCode)
-            availableFundsLabel.numberOfLines = 0
-            availableFundsLabel.adjustsFontForContentSizeCategory = true
             transferMaxAmountButton.isHidden = false
             transferMaxAmountButton.addGestureRecognizer(action)
         }
