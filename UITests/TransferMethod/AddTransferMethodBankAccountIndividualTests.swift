@@ -159,8 +159,10 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
                              filename: "BankAccountIndividualResponse",
                              method: HTTPMethod.post)
 
+        XCTAssert(addTransferMethod.navBarBankAccount.exists)
         waitForExistence(addTransferMethod.branchIdInput)
 
+        addTransferMethod.branchIdInput.tap()
         addTransferMethod.setBranchId("021000021")
         addTransferMethod.setBankAccountId("12345")
         addTransferMethod.selectAccountType("CHECKING")
