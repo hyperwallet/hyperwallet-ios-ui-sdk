@@ -160,8 +160,7 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
                              method: HTTPMethod.post)
 
         XCTAssert(addTransferMethod.navBarBankAccount.exists)
-        waitForExistence(addTransferMethod.branchIdInput)
-        XCTAssertTrue(app.tables["addTransferMethodTable"].textFields["branchId"].exists)
+        XCTAssertTrue(app.tables["addTransferMethodTable"].textFields["branchId"].waitForExistence(timeout: 20))
         app.tables["addTransferMethodTable"].textFields["branchId"].enterText(text: "021000021")
         addTransferMethod.setBankAccountId("12345")
         addTransferMethod.selectAccountType("CHECKING")
