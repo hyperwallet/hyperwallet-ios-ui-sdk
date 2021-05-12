@@ -161,9 +161,8 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
 
         XCTAssert(addTransferMethod.navBarBankAccount.exists)
         waitForExistence(addTransferMethod.branchIdInput)
-
-        addTransferMethod.branchIdInput.tap()
-        addTransferMethod.setBranchId("021000021")
+        XCTAssertTrue(app.tables["addTransferMethodTable"].textFields["branchId"].exists)
+        app.tables["addTransferMethodTable"].textFields["branchId"].enterText(text: "021000021")
         addTransferMethod.setBankAccountId("12345")
         addTransferMethod.selectAccountType("CHECKING")
         addTransferMethod.setMiddleName("Adam")

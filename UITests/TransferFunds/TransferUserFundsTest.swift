@@ -837,6 +837,7 @@ class TransferUserFundsTest: BaseTests {
         XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
     }
 
+    // swiftlint:disable function_body_length
     // MARK: Add Transfer Method Tests
     func testTransferFunds_addTransferMethodWhenNoTransferMethods() {
         mockServer.setUpEmptyResponse(url: "/rest/v3/users/usr-token/transfer-methods")
@@ -889,7 +890,7 @@ class TransferUserFundsTest: BaseTests {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "AddNewTransferMethodOneTransferMethod",
                              method: HTTPMethod.get)
-
+        waitForNonExistence(spinner)
         waitForExistence(transferFunds.addSelectDestinationLabel)
         transferFunds.addSelectDestinationLabel.tap()
 
