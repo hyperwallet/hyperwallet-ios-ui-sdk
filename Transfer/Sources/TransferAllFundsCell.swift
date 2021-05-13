@@ -27,6 +27,7 @@ final class TransferAllFundsCell: UITableViewCell {
         let label = UILabel(frame: .zero)
         label.textAlignment = .center
         label.accessibilityIdentifier = "transferAmountTitleLabel"
+        label.backgroundColor = .orange
         return label
     }()
 
@@ -37,6 +38,7 @@ final class TransferAllFundsCell: UITableViewCell {
         button.accessibilityIdentifier = "transferMaxAmountTitleLabel"
         button.setTitle("mobileTransferMax".localized(), for: .normal)
         button.setTitleColor(Theme.Button.linkColor, for: UIControl.State.normal)
+        button.backgroundColor = .yellow
         return button
     }()
 
@@ -68,6 +70,7 @@ final class TransferAllFundsCell: UITableViewCell {
         stackView.addArrangedSubview(availableFundsLabel)
         stackView.addArrangedSubview(transferMaxAmountButton)
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.backgroundColor = .red
 
         contentView.addSubview(stackView)
         let margins = self.layoutMarginsGuide
@@ -89,6 +92,7 @@ final class TransferAllFundsCell: UITableViewCell {
                    currencyCode: String?) {
         availableFundsLabel.numberOfLines = 0
         availableFundsLabel.adjustsFontForContentSizeCategory = true
+        transferMaxAmountButton.isHidden = false
         guard let availableBalance = availableBalance,
             let currencyCode = currencyCode else {
                 availableFundsLabel.text = "naAvailableBalance".localized()
