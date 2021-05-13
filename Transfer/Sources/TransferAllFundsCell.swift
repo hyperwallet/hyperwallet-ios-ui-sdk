@@ -66,7 +66,7 @@ final class TransferAllFundsCell: UITableViewCell {
         let stackView = UIStackView(frame: .zero)
         stackView.axis = .vertical
         stackView.alignment = .fill
-        stackView.distribution = .fillProportionally
+        stackView.distribution = .fill
         stackView.addArrangedSubview(availableFundsLabel)
         stackView.addArrangedSubview(transferMaxAmountButton)
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -96,7 +96,7 @@ final class TransferAllFundsCell: UITableViewCell {
         guard let availableBalance = availableBalance,
             let currencyCode = currencyCode else {
                 availableFundsLabel.text = "naAvailableBalance".localized()
-//                transferMaxAmountButton.isHidden = true
+                transferMaxAmountButton.isHidden = true
                 return
         }
 
