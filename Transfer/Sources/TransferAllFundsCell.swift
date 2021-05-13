@@ -96,7 +96,7 @@ final class TransferAllFundsCell: UITableViewCell {
         guard let availableBalance = availableBalance,
             let currencyCode = currencyCode else {
                 availableFundsLabel.text = "naAvailableBalance".localized()
-                transferMaxAmountButton.isHidden = true
+//                transferMaxAmountButton.isHidden = true
                 return
         }
 
