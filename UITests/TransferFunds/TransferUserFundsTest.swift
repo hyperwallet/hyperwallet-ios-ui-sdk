@@ -1112,4 +1112,98 @@ class TransferUserFundsTest: BaseTests {
         // Assert Prepaid Card is set as the Destination
         transferFunds.verifyPrepaidCardDestination(brandType: transferFunds.prepaidCardVisa, endingDigit: "4281")
     }
+    
+    // swiftlint:disable function_body_length
+    func testTransferFunds_switchTransferMethodWithTransactionLimitErrorForPPC() {
+        // Get the transfer method list
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+                             filename: "ListMoreThanOneTransferMethod",
+                             method: HTTPMethod.get)
+
+        // Get the Available funds
+        mockServer.setupStub(url: "/rest/v3/transfers",
+                             filename: "AvailableFundUSD",
+                             method: HTTPMethod.post)
+
+        // List the available PPC of the user to select from source
+        mockServer.setupStub(url: listppcUrl,
+                             filename: "PrepaidCardPrimaryOnlyResponse",
+                             method: HTTPMethod.get)
+
+        XCTAssertTrue(transferFundSourceMenu.exists)
+        transferFundSourceMenu.tap()
+
+        waitForNonExistence(spinner)
+        transferFunds.verifyTransferFrom(isAvailableFunds: true)
+
+        transferFunds.transferSourceTitleLabel.tap()
+        
+        mockServer.setupStubError(url: "/rest/v3/transfers",
+                                  filename: "TransferBelowTransactionLimitError",
+                                  method: HTTPMethod.post)
+
+        var ppcCell = app.tables.element.children(matching: .cell).element(boundBy: 1)
+        ppcCell.tap()
+        
+        waitForNonExistence(spinner)
+        
+        // Transfer From by PPC Section
+        transferFunds.verifyTransferFrom(isAvailableFunds: false)
+        transferFunds.verifyPPCInfo(brandType: transferFunds.prepaidCardVisa,
+                                    endingDigit: "9285",
+                                    currency: "USD")
+
+        // Transfer Destination Section - Bank Account
+        transferFunds.verifyTransferFundsTitle()
+        
+        // Assert Available available: N/A
+        XCTAssertEqual(transferFunds.transferAmountLabel.label,
+                       transferFunds.notAvailableFunds)
+        XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
+        XCTAssertFalse(transferFunds.transferMaxAllFunds.exists,
+                       "Transfer all funds switch should not exist")
+        
+        transferFunds.transferSourceTitleLabel.tap()
+        
+        mockServer.setupStub(url: "/rest/v3/transfers",
+                             filename: "AvailableFundUSD",
+                             method: HTTPMethod.post)
+
+        ppcCell = app.tables.element.children(matching: .cell).element(boundBy: 0)
+        ppcCell.tap()
+        
+        waitForNonExistence(spinner)
+        
+        XCTAssertEqual(transferFunds.transferAmount.value as? String, "0.00")
+        XCTAssertEqual(transferFunds.transferCurrency.value as? String, "USD")
+        let balance = String(format: transferFunds.availableBalanceFormat, "$", "452.14", "USD")
+        XCTAssertEqual(transferFunds.transferAmountLabel.label, balance)
+        
+        transferFunds.transferSourceTitleLabel.tap()
+        
+        mockServer.setupStubError(url: "/rest/v3/transfers",
+                                  filename: "TransferBelowTransactionLimitError",
+                                  method: HTTPMethod.post)
+
+        ppcCell = app.tables.element.children(matching: .cell).element(boundBy: 1)
+        ppcCell.tap()
+        
+        waitForNonExistence(spinner)
+        
+        // Transfer From by PPC Section
+        transferFunds.verifyTransferFrom(isAvailableFunds: false)
+        transferFunds.verifyPPCInfo(brandType: transferFunds.prepaidCardVisa,
+                                    endingDigit: "9285",
+                                    currency: "USD")
+
+        // Transfer Destination Section - Bank Account
+        transferFunds.verifyTransferFundsTitle()
+        
+        // Assert Available available: N/A
+        XCTAssertEqual(transferFunds.transferAmountLabel.label,
+                       transferFunds.notAvailableFunds)
+        XCTAssertTrue(transferFunds.addSelectDestinationSectionLabel.exists)
+        XCTAssertFalse(transferFunds.transferMaxAllFunds.exists,
+                       "Transfer all funds switch should not exist")
+    }
 }
