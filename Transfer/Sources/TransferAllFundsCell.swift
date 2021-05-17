@@ -64,7 +64,7 @@ final class TransferAllFundsCell: UITableViewCell {
         let stackView = UIStackView(frame: .zero)
         stackView.axis = .vertical
         stackView.alignment = .fill
-        stackView.distribution = .fillProportionally
+        stackView.distribution = .fill
         stackView.addArrangedSubview(availableFundsLabel)
         stackView.addArrangedSubview(transferMaxAmountButton)
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -87,6 +87,9 @@ final class TransferAllFundsCell: UITableViewCell {
     func configure(action: UIGestureRecognizer,
                    availableBalance: String?,
                    currencyCode: String?) {
+        availableFundsLabel.numberOfLines = 0
+        availableFundsLabel.adjustsFontForContentSizeCategory = true
+        transferMaxAmountButton.isHidden = false
         guard let availableBalance = availableBalance,
             let currencyCode = currencyCode else {
                 availableFundsLabel.text = "naAvailableBalance".localized()
@@ -103,8 +106,6 @@ final class TransferAllFundsCell: UITableViewCell {
                                               currencySymbol,
                                               formattedAvailableBalance,
                                               currencyCode)
-            availableFundsLabel.numberOfLines = 0
-            availableFundsLabel.adjustsFontForContentSizeCategory = true
             transferMaxAmountButton.isHidden = false
             transferMaxAmountButton.addGestureRecognizer(action)
         }
