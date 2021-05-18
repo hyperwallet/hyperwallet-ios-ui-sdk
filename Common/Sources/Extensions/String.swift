@@ -85,7 +85,7 @@ public extension String {
     /// - Returns: return string with four decimal
     func getFxRateWithFourDecimal() -> String {
         guard !self.isEmpty
-        else { return "0" }
+        else { return "" }
         let number = self.formatAmountToDouble()
         let formatter = NumberFormatter()
         formatter.usesGroupingSeparator = true
