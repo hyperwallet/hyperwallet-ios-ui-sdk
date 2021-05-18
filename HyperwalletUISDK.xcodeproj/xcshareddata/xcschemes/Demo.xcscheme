@@ -64,17 +64,6 @@
                BlueprintName = "HyperwalletUISDKUITests"
                ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "AddTransferMethodBankAccountBusinessTests">
-               </Test>
-               <Test
-                  Identifier = "AddTransferMethodBankAccountIndividualTests/testAddTransferMethod_createBankAccountInvalidRouting()">
-               </Test>
-               <Test
-                  Identifier = "AddTransferMethodBankAccountIndividualTests/testAddTransferMethod_createBankAccountUnexpectedError()">
-               </Test>
-            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>
