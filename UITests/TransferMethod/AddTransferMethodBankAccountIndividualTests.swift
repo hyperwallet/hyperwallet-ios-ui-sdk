@@ -158,10 +158,10 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/bank-accounts",
                              filename: "BankAccountIndividualResponse",
                              method: HTTPMethod.post)
-
-        waitForExistence(addTransferMethod.branchIdInput)
-
-        addTransferMethod.setBranchId("021000021")
+        
+        XCTAssert(addTransferMethod.navBarBankAccount.exists)
+        XCTAssertTrue(app.tables["addTransferMethodTable"].textFields["branchId"].waitForExistence(timeout: 20))
+        app.tables["addTransferMethodTable"].textFields["branchId"].enterText(text: "021000021")
         addTransferMethod.setBankAccountId("12345")
         addTransferMethod.selectAccountType("CHECKING")
         addTransferMethod.setMiddleName("Adam")
