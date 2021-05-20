@@ -69,31 +69,4 @@ class UpdateTransferMethodWireAccountTests: BaseTests {
         XCTAssert(updateTransferMethod.elementQuery["city_error"].exists)
         XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", cityEmptyError)).count == 1)
     }
-    
-    func testUpdateTransferMethod_returWireAccountEmptyError1() {
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/bank-accounts/trm-12345",
-                             filename: "WireAccountUpdateResponse",
-                             method: HTTPMethod.put)
-
-        updateTransferMethod.setCity("")
-        updateTransferMethod.clickUpdateTransferMethodButton()
-
-        XCTAssert(updateTransferMethod.elementQuery["city_error"].exists)
-        XCTAssert(otherElements.containing(NSPredicate(format: "label CONTAINS %@", cityEmptyError)).count == 1)
-    }
-    
-    func testUpdateTransferMethod_updateWireAccountValidResponse1() {
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/bank-accounts/trm-12345",
-                             filename: "WireAccountUpdateResponse",
-                             method: HTTPMethod.put)
-
-        updateTransferMethod.selectCountry("United States")
-        updateTransferMethod.setStateProvince("MA")
-        updateTransferMethod.setCity("Lynn")
-        updateTransferMethod.setPostalCode("1905")
-        updateTransferMethod.clickUpdateTransferMethodButton()
-        waitForNonExistence(spinner)
-
-        XCTAssert(app.navigationBars["Transfer methods"].exists)
-    }
 }
