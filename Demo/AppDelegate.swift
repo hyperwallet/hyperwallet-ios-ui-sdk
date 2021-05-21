@@ -32,7 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.tintColor = .systemBlue
         window?.backgroundColor = Theme.UITableViewController.backgroundColor
 //        ThemeManager.applyWhiteTheme()
-        
         ThemeManager.applyTheme()
         ThemeManager.applyToUINavigationBar()
         // Set the default tint color
