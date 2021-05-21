@@ -102,6 +102,29 @@ final class AddTransferMethodController: UITableViewController {
         presenter.loadTransferMethodConfigurationFields(forceUpdate ?? false)
         hideKeyboardWhenTappedAround()
         self.navigationController?.presentationController?.delegate = self
+        
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self,
+                                       selector: #selector(appMovedToBackground),
+                                       name: UIApplication.willResignActiveNotification,
+                                       object: nil)
+        notificationCenter.addObserver(self,
+                                       selector: #selector(appBecameActive),
+                                       name: UIApplication.didBecomeActiveNotification,
+                                       object: nil)
+    }
+    
+    @objc
+    func appMovedToBackground() {
+        widgets.removeAll()
+        presenter.sectionData.removeAll()
+        tableView.reloadData()
+    }
+    
+    @objc
+    func appBecameActive() {
+        presenter.loadTransferMethodConfigurationFields(forceUpdate ?? false)
+        hideKeyboardWhenTappedAround()
     }
 
     override public func viewWillAppear(_ animated: Bool) {
@@ -427,8 +450,11 @@ extension AddTransferMethodController: AddTransferMethodView {
                 fields.map({WidgetFactory.newWidget(field: $0,
                                                     pageName: AddTransferMethodPresenter.addTransferMethodPageName,
                                                     pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup
-                ) {
-                    self.updateErrorMessagesInFooter()
+                ) {[weak self] in
+                    guard let strongSelf = self else {
+                        return
+                    }
+                    strongSelf.updateErrorMessagesInFooter()
                 }})
             let section = AddTransferMethodSectionData(
                 fieldGroup: fieldGroup,
