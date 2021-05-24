@@ -102,29 +102,6 @@ final class AddTransferMethodController: UITableViewController {
         presenter.loadTransferMethodConfigurationFields(forceUpdate ?? false)
         hideKeyboardWhenTappedAround()
         self.navigationController?.presentationController?.delegate = self
-        
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self,
-                                       selector: #selector(appMovedToBackground),
-                                       name: UIApplication.willResignActiveNotification,
-                                       object: nil)
-        notificationCenter.addObserver(self,
-                                       selector: #selector(appBecameActive),
-                                       name: UIApplication.didBecomeActiveNotification,
-                                       object: nil)
-    }
-    
-    @objc
-    func appMovedToBackground() {
-        widgets.removeAll()
-        presenter.sectionData.removeAll()
-        tableView.reloadData()
-    }
-    
-    @objc
-    func appBecameActive() {
-        presenter.loadTransferMethodConfigurationFields(forceUpdate ?? false)
-        hideKeyboardWhenTappedAround()
     }
 
     override public func viewWillAppear(_ animated: Bool) {
