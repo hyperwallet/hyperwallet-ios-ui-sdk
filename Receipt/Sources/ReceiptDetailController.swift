@@ -41,6 +41,15 @@ final class ReceiptDetailController: UITableViewController {
         super.viewWillAppear(animated)
         titleDisplayMode(.never, for: "mobileTransactionDetailsHeader".localized())
     }
+    
+    override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
+        if parent == nil {
+            removeCoordinator()
+            removeFlowDelegate()
+            removeInitializedData()
+        }
+    }
 
     private func initializePresenter() {
         if let receipt = initializationData?[InitializationDataField.receipt]

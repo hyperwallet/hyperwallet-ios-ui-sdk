@@ -891,8 +891,8 @@ class TransferUserFundsTest: BaseTests {
                              filename: "AddNewTransferMethodOneTransferMethod",
                              method: HTTPMethod.get)
         waitForNonExistence(spinner)
-        waitForExistence(transferFunds.addSelectDestinationLabel)
-        transferFunds.addSelectDestinationLabel.tap()
+        transferFunds.verifyTransferFundsTitle()
+        app.tables["createTransferTableView"].staticTexts["transferDestinationSubtitleLabel"].tap()
 
         waitForNonExistence(spinner)
 

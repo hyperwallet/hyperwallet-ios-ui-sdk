@@ -427,8 +427,11 @@ extension AddTransferMethodController: AddTransferMethodView {
                 fields.map({WidgetFactory.newWidget(field: $0,
                                                     pageName: AddTransferMethodPresenter.addTransferMethodPageName,
                                                     pageGroup: AddTransferMethodPresenter.addTransferMethodPageGroup
-                ) {
-                    self.updateErrorMessagesInFooter()
+                ) {[weak self] in
+                    guard let strongSelf = self else {
+                        return
+                    }
+                    strongSelf.updateErrorMessagesInFooter()
                 }})
             let section = AddTransferMethodSectionData(
                 fieldGroup: fieldGroup,
