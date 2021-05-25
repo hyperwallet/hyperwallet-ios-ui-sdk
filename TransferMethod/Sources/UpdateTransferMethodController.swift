@@ -422,8 +422,11 @@ extension UpdateTransferMethodController: UpdateTransferMethodView {
                                                         .updateTransferMethodPageName,
                                                     pageGroup: UpdateTransferMethodPresenter
                                                         .updateTransferMethodPageGroup
-                ) {
-                    self.updateErrorMessagesInFooter()
+                ) {[weak self] in
+                    guard let strongSelf = self else {
+                        return
+                    }
+                    strongSelf.updateErrorMessagesInFooter()
                 }})
             let section = UpdateTransferMethodSectionData(
                 fieldGroup: fieldGroup,

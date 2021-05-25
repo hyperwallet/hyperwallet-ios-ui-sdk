@@ -62,6 +62,8 @@ final class ListReceiptController: UITableViewController {
         super.willMove(toParent: parent)
         if parent == nil {
             removeCoordinator()
+            removeFlowDelegate()
+            removeInitializedData()
         }
     }
 
