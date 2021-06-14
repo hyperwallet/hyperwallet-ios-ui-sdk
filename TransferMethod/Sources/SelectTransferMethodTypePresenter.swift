@@ -139,7 +139,9 @@ final class SelectTransferMethodTypePresenter {
                             ]
                             strongSelf.loadSelectedCountry(countries, with: user?.country)
                             strongSelf.loadCurrency(result)
-                            strongSelf.loadTransferMethodTypes(result)
+                            strongSelf.getFeeAndProcessingTime { (result) in
+                                strongSelf.loadTransferMethodTypes(result)
+                            }
                         },
                         failure: { strongSelf.loadTransferMethodKeys() })
                 )
@@ -229,23 +231,46 @@ final class SelectTransferMethodTypePresenter {
             self.transferMethodConfigurationRepository
                 .getKeys(completion: self.getKeysHandler(success: { (result) in
                     self.loadCurrency(result)
-                    self.loadTransferMethodTypes(result)
+                    self.getFeeAndProcessingTime { (result) in
+                        self.loadTransferMethodTypes(result)
+                    }
                 }))
         }
     }
 
     private func selectCurrencyHandler() -> SelectTransferMethodTypeView.SelectItemHandler {
-        return { (currency) in
+        return { [weak self](currency) in
+            guard let strongSelf = self
+            else { return }
             if let currency = currency.value {
-                self.selectedCurrency = currency
-                self.trackCurrencyClick()
+                strongSelf.selectedCurrency = currency
+                strongSelf.trackCurrencyClick()
             }
-            self.transferMethodConfigurationRepository.getKeys(completion: self.getKeysHandler(
-                success: { (result) in
-                    self.loadTransferMethodTypes(result)
-                    self.view?.reloadCountryCurrencyData()
-                }))
+            
+            strongSelf.getFeeAndProcessingTime { result in
+                strongSelf.loadTransferMethodTypes(result)
+                strongSelf.view?.reloadCountryCurrencyData()
+            }
         }
+    }
+    
+    private func getFeeAndProcessingTime(completion: @escaping (HyperwalletTransferMethodConfigurationKey?) -> Void) {
+        view?.showLoading()
+        transferMethodConfigurationRepository
+            .getFeeAndProcessingTime(country: selectedCountry,
+                                     currency: selectedCurrency) { [weak self] (result) in
+                guard let strongSelf = self, let view = strongSelf.view else {
+                    return
+                }
+                view.hideLoading()
+                switch result {
+                case .failure(let error):
+                    view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup, nil)
+                    
+                case .success(let keyResult):
+                    completion(keyResult)
+                }
+            }
     }
 
     private func filterContentHandler() -> SelectTransferMethodTypeView.FilterContentHandler {

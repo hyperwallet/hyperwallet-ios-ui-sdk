@@ -29,6 +29,8 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
     private lazy var fieldsResponseData = HyperwalletTestHelper
         .getDataFromJson("TransferMethodConfigurationFieldsResponse")
     private lazy var keyResponseData = HyperwalletTestHelper.getDataFromJson("TransferMethodConfigurationKeysResponse")
+    private lazy var feeAndProcessingResponseData = HyperwalletTestHelper
+        .getDataFromJson("TransferMethodConfigurationFeeAndProcessingTimeResponse")
     private static var userResponseData = HyperwalletTestHelper.getDataFromJson("UserIndividualResponse")
 
     override func setUp() {
@@ -39,6 +41,88 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
         if Hippolyte.shared.isStarted {
             Hippolyte.shared.stop()
         }
+    }
+    
+    func testGetFeeAndProcessing_success() {
+        TransferMethodConfigurationRepositoryTests
+            .setupResponseMockServer(feeAndProcessingResponseData)
+        let expectation = self.expectation(description: "Get transfer method fee and processing time")
+        var transferMethodConfigurationKey: HyperwalletTransferMethodConfigurationKey?
+        var error: HyperwalletErrorType?
+        let repository = RemoteTransferMethodConfigurationRepository()
+
+        // When
+        repository.getFeeAndProcessingTime(country: "CA", currency: "CAD") { (result) in
+            switch result {
+            case .success(let resultKey):
+                transferMethodConfigurationKey = resultKey
+
+            case .failure(let resultError):
+                error = resultError
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+
+        XCTAssertNil(error, "The error should be nil")
+        XCTAssertNotNil(transferMethodConfigurationKey, "The result should not be nil")
+        XCTAssertGreaterThan(transferMethodConfigurationKey!.countries()!.count, 0)
+        XCTAssertGreaterThan(transferMethodConfigurationKey!.currencies(from: "CA")!.count, 0)
+    }
+    
+    func testGetFeeAndProcessing_successWithResultFromCache() {
+        TransferMethodConfigurationRepositoryTests
+            .setupResponseMockServer(feeAndProcessingResponseData)
+        let repository = RemoteTransferMethodConfigurationRepository()
+
+        // Get data from the server
+        let expectation = self.expectation(description: "Get transfer method fee and processing time")
+        repository.getFeeAndProcessingTime(country: "CA", currency: "CAD") { (_) in expectation.fulfill() }
+        wait(for: [expectation], timeout: 1)
+        var transferMethodConfigurationKey: HyperwalletTransferMethodConfigurationKey?
+        var error: HyperwalletErrorType?
+
+        // When - Get from cache
+        repository.getFeeAndProcessingTime(country: "CA", currency: "CAD") { (result) in
+            switch result {
+            case .success(let resultKey):
+                transferMethodConfigurationKey = resultKey
+
+            case .failure(let resultError):
+                error = resultError
+            }
+        }
+
+        XCTAssertNil(error, "The error should be nil")
+        XCTAssertNotNil(transferMethodConfigurationKey, "The result should not be nil")
+        XCTAssertGreaterThan(transferMethodConfigurationKey!.countries()!.count,
+                             0,
+                             "The transferMethodConfigurationKey!.countries()!.count should be greater than 0")
+    }
+    
+    func testGetFeeAndProcessing_failureWithError() {
+        TransferMethodConfigurationRepositoryTests
+            .setupResponseMockServer(feeAndProcessingResponseData, NSError(domain: "", code: -1009, userInfo: nil))
+        let expectation = self.expectation(description: "Get transfer method fee and processing time")
+        var transferMethodConfigurationKey: HyperwalletTransferMethodConfigurationKey?
+        var error: HyperwalletErrorType?
+        let repository = RemoteTransferMethodConfigurationRepository()
+
+        // When
+        repository.getFeeAndProcessingTime(country: "CA", currency: "CAD") { (result) in
+            switch result {
+            case .success(let resultKey):
+                transferMethodConfigurationKey = resultKey
+
+            case .failure(let resultError):
+                error = resultError
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+
+        XCTAssertNotNil(error, "The error should not be nil")
+        XCTAssertNil(transferMethodConfigurationKey, "The result should be nil")
     }
 
     func testGetKeys_success() {
