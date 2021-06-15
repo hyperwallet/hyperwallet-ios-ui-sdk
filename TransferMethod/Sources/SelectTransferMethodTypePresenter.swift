@@ -113,7 +113,7 @@ final class SelectTransferMethodTypePresenter {
         }
 
         userRepository.getUser { [weak self] getUserResult in
-            guard let strongSelf = self else {
+            guard let strongSelf = self, let view = strongSelf.view else {
                 return
             }
             switch getUserResult {
@@ -130,6 +130,7 @@ final class SelectTransferMethodTypePresenter {
                     .getKeys(completion: strongSelf.getKeysHandler(
                         success: { (result) in
                             guard let countries = result?.countries(), countries.isNotEmpty  else {
+                                view.hideLoading()
                                 strongSelf.view?.showAlert(message: "no_country_available_error_message".localized())
                                 return
                             }
@@ -143,7 +144,10 @@ final class SelectTransferMethodTypePresenter {
                                 strongSelf.loadTransferMethodTypes(result)
                             }
                         },
-                        failure: { strongSelf.loadTransferMethodKeys() })
+                        failure: {
+                            view.hideLoading()
+                            strongSelf.loadTransferMethodKeys()
+                        })
                 )
             }
         }
@@ -188,8 +192,6 @@ final class SelectTransferMethodTypePresenter {
                 return
             }
 
-            view.hideLoading()
-
             switch result {
             case .failure(let error):
                 view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup, failure)
@@ -231,6 +233,7 @@ final class SelectTransferMethodTypePresenter {
             self.transferMethodConfigurationRepository
                 .getKeys(completion: self.getKeysHandler(success: { (result) in
                     self.loadCurrency(result)
+                    self.view?.showLoading()
                     self.getFeeAndProcessingTime { (result) in
                         self.loadTransferMethodTypes(result)
                     }
@@ -246,7 +249,7 @@ final class SelectTransferMethodTypePresenter {
                 strongSelf.selectedCurrency = currency
                 strongSelf.trackCurrencyClick()
             }
-            
+            strongSelf.view?.showLoading()
             strongSelf.getFeeAndProcessingTime { result in
                 strongSelf.loadTransferMethodTypes(result)
                 strongSelf.view?.reloadCountryCurrencyData()
@@ -255,7 +258,6 @@ final class SelectTransferMethodTypePresenter {
     }
     
     private func getFeeAndProcessingTime(completion: @escaping (HyperwalletTransferMethodConfigurationKey?) -> Void) {
-        view?.showLoading()
         transferMethodConfigurationRepository
             .getFeeAndProcessingTime(country: selectedCountry,
                                      currency: selectedCurrency) { [weak self] (result) in

@@ -140,7 +140,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
         // Then
         XCTAssertTrue(mockView.isShowLoadingPerformed, "The showLoading should be performed")
         XCTAssertTrue(mockView.isHideLoadingPerformed, "The hideLoading should be performed")
-        XCTAssertTrue(mockView.isShowAlertPerformed, "The showAlert should not be performed")
+        XCTAssertTrue(mockView.isShowAlertPerformed, "The showAlert should be performed")
 
         XCTAssertEqual(mockView.alertMessages[0], "There is no transfer method available for US and USD")
     }
