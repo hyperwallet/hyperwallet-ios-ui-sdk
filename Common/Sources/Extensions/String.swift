@@ -59,20 +59,6 @@ public extension String {
         return ceil(boundingBox.height)
     }
 
-    /// Format amount for currency code using users locale
-    /// - Parameter currencyCode: currency code
-    /// - Returns: a formatted amount string
-    func formatToCurrency(with currencyCode: String?) -> String {
-        guard let currencyCode = currencyCode, !self.isEmpty
-        else { return "0" }
-        let number = Double(self)
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.locale = Locale.current
-        formatter.currencyCode = currencyCode
-        return formatter.string(for: number) ?? self
-    }
-
     /// Format amount to double
     /// - Returns: double value
     func formatAmountToDouble() -> Double {

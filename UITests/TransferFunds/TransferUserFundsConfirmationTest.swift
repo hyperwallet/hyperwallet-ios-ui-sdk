@@ -167,7 +167,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertTrue(app.cells.element(boundBy: 12).staticTexts["\u{200E}₩1 KRW = $0.0009 USD"].exists)
 
         XCTAssertTrue(app.cells.element(boundBy: 14).staticTexts[youSell].exists)
-        XCTAssertTrue(app.cells.element(boundBy: 14).staticTexts["€1,000.00 EUR"].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 14).staticTexts["€1000,00 EUR"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 15).staticTexts[youBuy].exists)
         XCTAssertTrue(app.cells.element(boundBy: 15).staticTexts["$1,135.96 USD"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 16).staticTexts[exchangeRate].exists)
@@ -533,7 +533,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertTrue(app.cells.element(boundBy: 12).staticTexts["\u{200E}₩1 KRW = $0.0009 USD"].exists)
 
         XCTAssertTrue(app.cells.element(boundBy: 14).staticTexts[youSell].exists)
-        XCTAssertTrue(app.cells.element(boundBy: 14).staticTexts["€1,000.00 EUR"].exists)
+        XCTAssertTrue(app.cells.element(boundBy: 14).staticTexts["€1000,00 EUR"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 15).staticTexts[youBuy].exists)
         XCTAssertTrue(app.cells.element(boundBy: 15).staticTexts["$1,135.96 USD"].exists)
         XCTAssertTrue(app.cells.element(boundBy: 16).staticTexts[exchangeRate].exists)

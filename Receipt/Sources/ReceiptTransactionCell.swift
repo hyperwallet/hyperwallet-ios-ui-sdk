@@ -18,6 +18,7 @@
 
 #if !COCOAPODS
 import Common
+import Transfer 
 #endif
 import HyperwalletSDK
 import UIKit
