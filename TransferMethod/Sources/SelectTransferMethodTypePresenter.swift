@@ -140,8 +140,8 @@ final class SelectTransferMethodTypePresenter {
                             ]
                             strongSelf.loadSelectedCountry(countries, with: user?.country)
                             strongSelf.loadCurrency(result)
-                            strongSelf.getFeeAndProcessingTime { (result) in
-                                strongSelf.loadTransferMethodTypes(result)
+                            strongSelf.retrieveTransferMethodTypesFeesAndProcessingTimes { (result) in
+                                strongSelf.loadTransferMethodTypesFeesAndProcessingTimes(result)
                             }
                         },
                         failure: {
@@ -234,8 +234,8 @@ final class SelectTransferMethodTypePresenter {
                 .getKeys(completion: self.getKeysHandler(success: { (result) in
                     self.loadCurrency(result)
                     self.view?.showLoading()
-                    self.getFeeAndProcessingTime { (result) in
-                        self.loadTransferMethodTypes(result)
+                    self.retrieveTransferMethodTypesFeesAndProcessingTimes { (result) in
+                        self.loadTransferMethodTypesFeesAndProcessingTimes(result)
                     }
                 }))
         }
@@ -250,27 +250,31 @@ final class SelectTransferMethodTypePresenter {
                 strongSelf.trackCurrencyClick()
             }
             strongSelf.view?.showLoading()
-            strongSelf.getFeeAndProcessingTime { result in
-                strongSelf.loadTransferMethodTypes(result)
+            strongSelf.retrieveTransferMethodTypesFeesAndProcessingTimes { result in
+                strongSelf.loadTransferMethodTypesFeesAndProcessingTimes(result)
                 strongSelf.view?.reloadCountryCurrencyData()
             }
         }
     }
     
-    private func getFeeAndProcessingTime(completion: @escaping (HyperwalletTransferMethodConfigurationKey?) -> Void) {
+    private func retrieveTransferMethodTypesFeesAndProcessingTimes(
+        completion:@escaping ([HyperwalletTransferMethodType]?) -> Void) {
         transferMethodConfigurationRepository
-            .getFeeAndProcessingTime(country: selectedCountry,
-                                     currency: selectedCurrency) { [weak self] (result) in
+            .retrieveTransferMethodTypesFeesAndProcessingTimes(country: selectedCountry,
+                                                               currency: selectedCurrency) { [weak self] (result) in
                 guard let strongSelf = self, let view = strongSelf.view else {
                     return
                 }
                 view.hideLoading()
                 switch result {
                 case .failure(let error):
-                    view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup, nil)
+                    view.showError(error, pageName: strongSelf.pageName, pageGroup: strongSelf.pageGroup) {
+                        strongSelf.loadTransferMethodKeys()
+                    }
                     
                 case .success(let keyResult):
-                    completion(keyResult)
+                    completion(keyResult?.transferMethodTypes(countryCode: strongSelf.selectedCountry,
+                                                              currencyCode: strongSelf.selectedCurrency))
                 }
             }
     }
@@ -315,9 +319,9 @@ final class SelectTransferMethodTypePresenter {
         view?.reloadCountryCurrencyData()
     }
 
-    private func loadTransferMethodTypes(_ keys: HyperwalletTransferMethodConfigurationKey?) {
-        guard let transferMethodTypes = keys?.transferMethodTypes(countryCode: selectedCountry,
-                                                                  currencyCode: selectedCurrency),
+    private func loadTransferMethodTypesFeesAndProcessingTimes(
+        _ transferMethodTypes: [HyperwalletTransferMethodType]?) {
+        guard let transferMethodTypes = transferMethodTypes,
             transferMethodTypes.isNotEmpty  else {
             view?.showAlert(message: String(format: "no_transfer_method_available_error_message".localized(),
                                             selectedCountry,
