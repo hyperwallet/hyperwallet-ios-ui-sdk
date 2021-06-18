@@ -40,6 +40,7 @@ public struct TransferAmountCurrencyFormatter {
             let formatter = NumberFormatter()
             formatter.usesGroupingSeparator = true
             formatter.maximumFractionDigits = transferAmountCurrency.decimals
+            formatter.minimumFractionDigits = transferAmountCurrency.decimals
             formatter.numberStyle = .currency
             formatter.currencyCode = currencyCode
             formatter.locale = getLocaleIdentifer(for: currencyCode)
@@ -76,6 +77,7 @@ public struct TransferAmountCurrencyFormatter {
             let formatter = NumberFormatter()
             formatter.usesGroupingSeparator = true
             formatter.maximumFractionDigits = transferAmountCurrency.decimals
+            formatter.minimumFractionDigits = transferAmountCurrency.decimals
             formatter.numberStyle = .currency
             formatter.currencyCode = currencyCode
             formatter.locale = getLocaleIdentifer(for: currencyCode)
