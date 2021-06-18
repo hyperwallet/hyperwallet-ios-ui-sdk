@@ -238,8 +238,11 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
         mockView.expectation = expectation
         presenter.loadTransferMethodKeys(true)
         wait(for: [expectation], timeout: 1)
-        mockView.ignoreXCTestExpectation = true
+        
+        let expectation1 = self.expectation(description: "load transfer methods types, fees and processing time")
+        mockView.expectation = expectation1
         presenter.performShowSelectCountryOrCurrencyView(index: currencyIndex)
+        wait(for: [expectation1], timeout: 1)
         XCTAssertTrue(mockView.isShowGenericTableViewPerformed, "Show Generic Table View should be performed")
         XCTAssertTrue(hyperwalletInsightsMock.didTrackClick, "HyperwalletInsights.trackClick should be called")
        }
