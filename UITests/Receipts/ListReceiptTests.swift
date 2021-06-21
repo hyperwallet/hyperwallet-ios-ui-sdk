@@ -293,7 +293,7 @@ class ListReceiptTests: BaseTests {
                                       CurrencyCode.USD.0,
                                       at: 3)
         verifyCellExists("Debit Card", "2019-05-01T17:35:20", "¥1,000,000,000", "JPY", at: 11)
-        verifyCellExists("Debit Card", "2019-05-01T17:35:20", "₫1.000.000.000", "VND", at: 12)
+        verifyCellExists("Debit Card", "2019-05-01T17:35:20", "₫1.000.000.000,00", "VND", at: 12)
 
         transactionDetails.openReceipt(row: 2)
         waitForExistence(transactionDetails.detailHeaderTitle)
@@ -335,7 +335,7 @@ class ListReceiptTests: BaseTests {
         verifyCurrencyAndCurrencyCode("Payment", CurrencyCode.TND.1 + "1.000.000.000,000", CurrencyCode.TND.0, at: 9)
         verifyCurrencyAndCurrencyCode("PayPal", CurrencyCode.INR.1 + "1,00,00,00,000.99", CurrencyCode.INR.0, at: 10)
         verifyCurrencyAndCurrencyCode("Debit Card", CurrencyCode.JPY.1 + "1,000,000,000", CurrencyCode.JPY.0, at: 11)
-        verifyCurrencyAndCurrencyCode("Debit Card", CurrencyCode.VND.1 + "1.000.000.000", CurrencyCode.VND.0, at: 12)
+        verifyCurrencyAndCurrencyCode("Debit Card", CurrencyCode.VND.1 + "1.000.000.000,00", CurrencyCode.VND.0, at: 12)
     }
     
     // Verify text selection

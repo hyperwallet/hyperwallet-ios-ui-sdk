@@ -356,10 +356,10 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
             .transferMethodTypes(countryCode: "CA", currencyCode: "CAD") {
             if let bankAccount = transferMethodTypes[0].fees?.nodes {
                 XCTAssertEqual(HyperwalletFee.format(fees: bankAccount),
-                               "CA$2.20 + 8.9% (Min:CA$0.05, Max:CA$1.00) fee")
+                               "$2.20 + 8.9% (Min:$0.05, Max:$1.00) fee")
             }
             if let paypal = transferMethodTypes[1].fees?.nodes {
-                XCTAssertEqual(HyperwalletFee.format(fees: paypal), "CA$0.25 fee")
+                XCTAssertEqual(HyperwalletFee.format(fees: paypal), "$0.25 fee")
             }
         }
         
@@ -392,16 +392,16 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
         if let transferMethodTypes = transferMethodConfigurationKey?
             .transferMethodTypes(countryCode: "LK", currencyCode: "CAD") {
             if let wireAccount = transferMethodTypes[0].fees?.nodes {
-                XCTAssertEqual(HyperwalletFee.format(fees: wireAccount), "2.00% (Min:CA$4.00, Max:CA$10.00) fee")
+                XCTAssertEqual(HyperwalletFee.format(fees: wireAccount), "2.00% (Min:$4.00, Max:$10.00) fee")
             }
             if let paypal = transferMethodTypes[1].fees?.nodes {
                 XCTAssertEqual(HyperwalletFee.format(fees: paypal), "No fee")
             }
             if let bankAccount = transferMethodTypes[2].fees?.nodes {
-                XCTAssertEqual(HyperwalletFee.format(fees: bankAccount), "2.00% (Min:CA$4.00) fee")
+                XCTAssertEqual(HyperwalletFee.format(fees: bankAccount), "2.00% (Min:$4.00) fee")
             }
             if let bankCard = transferMethodTypes[3].fees?.nodes {
-                XCTAssertEqual(HyperwalletFee.format(fees: bankCard), "CA$12 fee")
+                XCTAssertEqual(HyperwalletFee.format(fees: bankCard), "$12 fee")
             }
         }
     }

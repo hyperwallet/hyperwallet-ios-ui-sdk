@@ -16,14 +16,14 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@testable import Transfer
+@testable import Common
 import XCTest
 
 class TransferAmountCurrencyFormatterTests: XCTestCase {
     // swiftlint:disable function_body_length
     func testFormatStringAmount() {
         let cases = [
-            ("Albania Currency", "1000000", "ALL", "1 000 000"),
+            ("Albania Currency", "1000000", "ALL", "1 000 000,00"),
             ("Argentina Currency", "1000000", "ARS", "1.000.000,00"),
             ("Armenia Currency", "1000000", "AMD", "1 000 000,00"),
             ("Australia Currency", "1000000", "AUD", "1,000,000.00"),
@@ -34,7 +34,7 @@ class TransferAmountCurrencyFormatterTests: XCTestCase {
             ("Canada Currency", "1000000", "CAD", "1,000,000.00"),
             ("Chile Currency", "1000000", "CLP", "1.000.000"),
             ("China Currency", "1000000", "CNY", "1,000,000.00"),
-            ("Colombia Currency", "1000000", "COP", "1.000.000"),
+            ("Colombia Currency", "1000000", "COP", "1.000.000,00"),
             ("Croatia Currency", "1000000", "HRK", "1.000.000,00"),
             ("Czech Republic Currency", "1000000", "CZK", "1 000 000,00"),
             ("Denmark Currency", "1000000", "DKK", "1.000.000,00"),
@@ -49,7 +49,7 @@ class TransferAmountCurrencyFormatterTests: XCTestCase {
             ("Jordan Currency", "1000000", "JOD", "1,000,000.00"),
             ("Kazakhstan Currency", "1000000", "KZT", "1 000 000,00"),
             ("Kenya Currency", "1000000", "KES", "1,000,000.00"),
-            ("Laos Currency", "1000000", "LAK", "1.000.000"),
+            ("Laos Currency", "1000000", "LAK", "1.000.000,00"),
             ("Malaysia Currency", "1000000", "MYR", "1,000,000.00"),
             ("Mexico Currency", "1000000", "MXN", "1,000,000.00"),
             ("Morocco Currency", "1000000", "MAD", "1 000 000,00"),
@@ -59,14 +59,14 @@ class TransferAmountCurrencyFormatterTests: XCTestCase {
             ("New Zealand Currency", "1000000", "NZD", "1,000,000.00"),
             ("Nigeria Currency", "1000000", "NGN", "1,000,000.00"),
             ("Norway Currency", "1000000", "NOK", "1 000 000,00"),
-            ("Pakistan Currency", "1000000", "PKR", "1,000,000"),
+            ("Pakistan Currency", "1000000", "PKR", "1,000,000.00"),
             ("Peru Currency", "1000000", "PEN", "1,000,000.00"),
             ("Philippines Currency", "1000000", "PHP", "1,000,000.00"),
             ("Poland Currency", "1000000", "PLN", "1 000 000,00"),
             ("Isle of Man Currency", "1000000", "GBP", "1,000,000.00"),
             ("Romania Currency", "1000000", "RON", "1.000.000,00"),
             ("Russia Currency", "1000000", "RUB", "1 000 000,00"),
-            ("Serbia Currency", "1000000", "RSD", "1.000.000"),
+            ("Serbia Currency", "1000000", "RSD", "1.000.000,00"),
             ("Singapore Currency", "1000000", "SGD", "1,000,000.00"),
             ("South Africa Currency", "1000000", "ZAR", "1 000 000,00"),
             ("South Korea Currency", "1000000", "KRW", "1,000,000"),
@@ -78,7 +78,7 @@ class TransferAmountCurrencyFormatterTests: XCTestCase {
             ("United Arab Emirates Currency", "1000000", "AED", "1,000,000.00"),
             ("Uganda Currency", "1000000", "UGX", "1,000,000"),
             ("United States Currency", "1000000", "USD", "1,000,000.00"),
-            ("Vietnam Currency", "1000000", "VND", "1.000.000")
+            ("Vietnam Currency", "1000000", "VND", "1.000.000,00")
         ]
         cases.forEach {
             XCTAssertEqual(TransferAmountCurrencyFormatter.formatStringAmount($1, with: $2),
@@ -89,7 +89,7 @@ class TransferAmountCurrencyFormatterTests: XCTestCase {
 
     func testFormatDoubleAmount() {
         let cases = [
-            ("Albania Currency", "1000000", "ALL", "1 000 000"),
+            ("Albania Currency", "1000000", "ALL", "1 000 000,00"),
             ("Argentina Currency", "1000000", "ARS", "1.000.000,00"),
             ("Armenia Currency", "1000000", "AMD", "1 000 000,00"),
             ("Australia Currency", "1000000", "AUD", "1,000,000.00"),
@@ -100,7 +100,7 @@ class TransferAmountCurrencyFormatterTests: XCTestCase {
             ("Canada Currency", "1000000", "CAD", "1,000,000.00"),
             ("Chile Currency", "1000000", "CLP", "1.000.000"),
             ("China Currency", "1000000", "CNY", "1,000,000.00"),
-            ("Colombia Currency", "1000000", "COP", "1.000.000"),
+            ("Colombia Currency", "1000000", "COP", "1.000.000,00"),
             ("Croatia Currency", "1000000", "HRK", "1.000.000,00"),
             ("Czech Republic Currency", "1000000", "CZK", "1 000 000,00"),
             ("Denmark Currency", "1000000", "DKK", "1.000.000,00"),
@@ -115,7 +115,7 @@ class TransferAmountCurrencyFormatterTests: XCTestCase {
             ("Jordan Currency", "1000000", "JOD", "1,000,000.00"),
             ("Kazakhstan Currency", "1000000", "KZT", "1 000 000,00"),
             ("Kenya Currency", "1000000", "KES", "1,000,000.00"),
-            ("Laos Currency", "1000000", "LAK", "1.000.000"),
+            ("Laos Currency", "1000000", "LAK", "1.000.000,00"),
             ("Malaysia Currency", "1000000", "MYR", "1,000,000.00"),
             ("Mexico Currency", "1000000", "MXN", "1,000,000.00"),
             ("Morocco Currency", "1000000", "MAD", "1 000 000,00"),
@@ -125,14 +125,14 @@ class TransferAmountCurrencyFormatterTests: XCTestCase {
             ("New Zealand Currency", "1000000", "NZD", "1,000,000.00"),
             ("Nigeria Currency", "1000000", "NGN", "1,000,000.00"),
             ("Norway Currency", "1000000", "NOK", "1 000 000,00"),
-            ("Pakistan Currency", "1000000", "PKR", "1,000,000"),
+            ("Pakistan Currency", "1000000", "PKR", "1,000,000.00"),
             ("Peru Currency", "1000000", "PEN", "1,000,000.00"),
             ("Philippines Currency", "1000000", "PHP", "1,000,000.00"),
             ("Poland Currency", "1000000", "PLN", "1 000 000,00"),
             ("Isle of Man Currency", "1000000", "GBP", "1,000,000.00"),
             ("Romania Currency", "1000000", "RON", "1.000.000,00"),
             ("Russia Currency", "1000000", "RUB", "1 000 000,00"),
-            ("Serbia Currency", "1000000", "RSD", "1.000.000"),
+            ("Serbia Currency", "1000000", "RSD", "1.000.000,00"),
             ("Singapore Currency", "1000000", "SGD", "1,000,000.00"),
             ("South Africa Currency", "1000000", "ZAR", "1 000 000,00"),
             ("South Korea Currency", "1000000", "KRW", "1,000,000"),
@@ -144,7 +144,7 @@ class TransferAmountCurrencyFormatterTests: XCTestCase {
             ("United Arab Emirates Currency", "1000000", "AED", "1,000,000.00"),
             ("Uganda Currency", "1000000", "UGX", "1,000,000"),
             ("United States Currency", "1000000", "USD", "1,000,000.00"),
-            ("Vietnam Currency", "1000000", "VND", "1.000.000")
+            ("Vietnam Currency", "1000000", "VND", "1.000.000,00")
         ]
         cases.forEach {
             let doubleAmount = NSString(string: $1).doubleValue

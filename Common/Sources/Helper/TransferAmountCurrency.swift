@@ -18,11 +18,11 @@
 
 import Foundation
 
-struct TransferAmountCurrencyData: Decodable {
+public struct TransferAmountCurrencyData: Decodable {
     let data: [TransferAmountCurrency]
 }
 
-struct TransferAmountCurrency: Decodable {
+public struct TransferAmountCurrency: Decodable {
     let baseUnit: String
     let currencyCode: String
     let decimals: Int
@@ -36,7 +36,7 @@ struct TransferAmountCurrency: Decodable {
     let identifier: Int
     let isoCurrencyCode: String
     let name: String
-    let symbol: String
+    public let symbol: String
 
     enum CodingKeys: String, CodingKey {
         case baseUnit = "baseunit"

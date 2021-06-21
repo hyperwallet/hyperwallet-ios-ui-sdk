@@ -162,11 +162,10 @@ public extension HyperwalletFee {
         }
 
         private func currencySymbol(currency: String?) -> String? {
-            if let currency = currency {
-                let locale = NSLocale(localeIdentifier: currency)
-                return locale.displayName(forKey: .currencySymbol, value: currency)
-            }
-            return nil
+            guard let currency = currency,
+                  let currencySymbol = TransferAmountCurrencyFormatter.getTransferAmountCurrency(for: currency)?.symbol
+            else { return nil }
+            return currencySymbol
         }
     }
 }

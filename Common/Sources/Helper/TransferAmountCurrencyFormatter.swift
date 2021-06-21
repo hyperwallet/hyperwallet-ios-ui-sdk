@@ -17,9 +17,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import Foundation
-#if !COCOAPODS
-import Common
-#endif
 
 /// Transfer Amount Currency Formatter 
 public struct TransferAmountCurrencyFormatter {
@@ -30,12 +27,20 @@ public struct TransferAmountCurrencyFormatter {
         }
         return nil
     }()
-
-    static func getTransferAmountCurrency(for currencyCode: String) -> TransferAmountCurrency? {
+    
+    /// Get Transfer Amount Currency
+    /// - Parameter currencyCode: currency code
+    /// - Returns: instance of TransferAmountCurrency
+    public static func getTransferAmountCurrency(for currencyCode: String) -> TransferAmountCurrency? {
         return transferAmountCurrencyData?.data.first(where: { $0.currencyCode == currencyCode })
     }
-
-    static func formatDoubleAmount(_ amount: Double, with currencyCode: String) -> String {
+    
+    /// Format double amount to currency string
+    /// - Parameters:
+    ///   - amount: amount
+    ///   - currencyCode: currency code
+    /// - Returns: a formatted currency string
+    public static func formatDoubleAmount(_ amount: Double, with currencyCode: String) -> String {
         if let transferAmountCurrency = getTransferAmountCurrency(for: currencyCode) {
             let formatter = NumberFormatter()
             formatter.usesGroupingSeparator = true
@@ -52,8 +57,13 @@ public struct TransferAmountCurrencyFormatter {
         }
         return "\(amount)"
     }
-
-    static func getDecimalAmount(amount: String, currencyCode: String?) -> Double {
+    
+    /// Get decimal amount from formatted currency code
+    /// - Parameters:
+    ///   - amount: amount string
+    ///   - currencyCode: currency code
+    /// - Returns: a decimal amount 
+    public static func getDecimalAmount(amount: String, currencyCode: String?) -> Double {
         let doubleAmount = NSString(string: amount).doubleValue
         if let currencyCode = currencyCode,
             let currency = getTransferAmountCurrency(for: currencyCode) {
@@ -71,7 +81,7 @@ public struct TransferAmountCurrencyFormatter {
     /// Format amount for currency code using users locale
     /// - Parameter currencyCode: currency code
     /// - Returns: a formatted amount string
-    static func formatStringAmount(_ amount: String, with currencyCode: String) -> String {
+    public static func formatStringAmount(_ amount: String, with currencyCode: String) -> String {
         if let transferAmountCurrency = getTransferAmountCurrency(for: currencyCode) {
             let number = amount.formatAmountToDouble()
             let formatter = NumberFormatter()
@@ -91,7 +101,7 @@ public struct TransferAmountCurrencyFormatter {
     /// Format currency amount by adding symbol and currency code
     /// - Parameter currencyCode: currency code
     /// - Returns: a formatted amount string
-    static func addCurrencySymbolAndCode(_ amount: String, with currencyCode: String) -> String {
+    public static func addCurrencySymbolAndCode(_ amount: String, with currencyCode: String) -> String {
         if let currencySymbol = TransferAmountCurrencyFormatter.getTransferAmountCurrency(for: currencyCode)?.symbol {
             return String(format: "%@%@ %@", currencySymbol, amount, currencyCode)
         } else {
@@ -102,7 +112,7 @@ public struct TransferAmountCurrencyFormatter {
     /// Format amount for currency code using users locale while adding symbol and currency code
     /// - Parameter currencyCode: currency code
     /// - Returns: a formatted amount string
-    static func formatCurrencyWithSymbolAndCode(_ amount: String, with currencyCode: String) -> String {
+    public static func formatCurrencyWithSymbolAndCode(_ amount: String, with currencyCode: String) -> String {
         return addCurrencySymbolAndCode(formatStringAmount(amount, with: currencyCode), with: currencyCode)
     }
     
@@ -111,7 +121,7 @@ public struct TransferAmountCurrencyFormatter {
     ///   - amount: amount to format
     ///   - currencyCode: currency code
     /// - Returns: formatted amount with currency symbol
-    static func formatCurrencyWithSymbol(_ amount: String, with currencyCode: String) -> String {
+    public static func formatCurrencyWithSymbol(_ amount: String, with currencyCode: String) -> String {
         let amount = formatStringAmount(amount, with: currencyCode)
         if let currencySymbol = TransferAmountCurrencyFormatter.getTransferAmountCurrency(for: currencyCode)?.symbol {
             return String(format: "%@%@", currencySymbol, amount)
@@ -123,7 +133,7 @@ public struct TransferAmountCurrencyFormatter {
     /// Get locale
     /// - Parameter currencyCode: currency code
     /// - Returns: a locale
-    static func getLocaleIdentifer(for currencyCode: String) -> Locale? {
+    private static func getLocaleIdentifer(for currencyCode: String) -> Locale? {
         if let identifier = currencyMappings[currencyCode] {
             return Locale(identifier: identifier)
         }
@@ -131,7 +141,7 @@ public struct TransferAmountCurrencyFormatter {
     }
     
     /// Currency code and it is locale identifier
-    static let currencyMappings: [String: String] = {
+    private static let currencyMappings: [String: String] = {
         return [
             "AED": "ar_AE",
             "ALL": "en_AL",
