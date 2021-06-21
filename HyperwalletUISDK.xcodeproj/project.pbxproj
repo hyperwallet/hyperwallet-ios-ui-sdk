@@ -709,13 +709,6 @@
 			remoteGlobalIDString = FD09389025EE252E00AAA29B;
 			remoteInfo = BalanceRepository;
 		};
-		FD13529F267A0CE5008F65D7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4A9A7BDE22E859E60022E573;
-			remoteInfo = Transfer;
-		};
 		FD48435C25EFD02E00CB8B36 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
@@ -3044,7 +3037,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				FD1352A0267A0CE5008F65D7 /* PBXTargetDependency */,
 				98FBC69323D8D90C0050E2B6 /* PBXTargetDependency */,
 				98631ED525717B9600A8CBF5 /* PBXTargetDependency */,
 				98FBC69723D8D90C0050E2B6 /* PBXTargetDependency */,
@@ -4335,12 +4327,6 @@
 			isa = PBXTargetDependency;
 			target = FD09389025EE252E00AAA29B /* BalanceRepository */;
 			targetProxy = FD09389625EE252E00AAA29B /* PBXContainerItemProxy */;
-		};
-		FD1352A0267A0CE5008F65D7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			platformFilter = ios;
-			target = 4A9A7BDE22E859E60022E573 /* Transfer */;
-			targetProxy = FD13529F267A0CE5008F65D7 /* PBXContainerItemProxy */;
 		};
 		FD48435D25EFD02E00CB8B36 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
