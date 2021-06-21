@@ -43,7 +43,7 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
         }
     }
     
-    func testGetFeeAndProcessing_success() {
+    func testGetTransferMethodTypesFeesProcessingTimes_success() {
         TransferMethodConfigurationRepositoryTests
             .setupResponseMockServer(feeAndProcessingResponseData)
         let expectation = self.expectation(description: "Get transfer method fee and processing time")
@@ -72,7 +72,7 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
         XCTAssertGreaterThan(transferMethodConfigurationKey!.currencies(from: "CA")!.count, 0)
     }
     
-    func testGetFeeAndProcessing_failureWithError() {
+    func testGetTransferMethodTypesFeesProcessingTimes_failureWithError() {
         TransferMethodConfigurationRepositoryTests
             .setupResponseMockServer(feeAndProcessingResponseData, NSError(domain: "", code: -1009, userInfo: nil))
         let expectation = self.expectation(description: "Get transfer method fee and processing time")

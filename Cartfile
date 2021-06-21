@@ -1,2 +1,2 @@
-github "hyperwallet/hyperwallet-ios-sdk" "feature/DTSERWFOUR-636-UpdateGraphQLForTransferMethodConfiguration"
+github "hyperwallet/hyperwallet-ios-sdk" "development"
 github "hyperwallet/hyperwallet-ios-insight" "development"

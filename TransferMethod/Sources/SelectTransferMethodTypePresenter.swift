@@ -260,8 +260,8 @@ final class SelectTransferMethodTypePresenter {
     private func retrieveTransferMethodTypesFeesAndProcessingTimes(
         completion:@escaping ([HyperwalletTransferMethodType]?) -> Void) {
         transferMethodConfigurationRepository
-            .retrieveTransferMethodTypesFeesAndProcessingTimes(country: selectedCountry,
-                                                               currency: selectedCurrency) { [weak self] (result) in
+            .getTransferMethodTypesFeesAndProcessingTimes(country: selectedCountry,
+                                                          currency: selectedCurrency) { [weak self] (result) in
                 guard let strongSelf = self, let view = strongSelf.view else {
                     return
                 }

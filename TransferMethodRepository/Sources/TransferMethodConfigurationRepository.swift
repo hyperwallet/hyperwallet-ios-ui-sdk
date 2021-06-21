@@ -47,7 +47,7 @@ public protocol TransferMethodConfigurationRepository {
     ///   - country: the 2 letter ISO 3166-1 country code
     ///   - currency: the 3 letter ISO 4217-1 currency code
     ///   - completion: the callback handler of responses from the Hyperwallet platform
-    func retrieveTransferMethodTypesFeesAndProcessingTimes(
+    func getTransferMethodTypesFeesAndProcessingTimes(
         country: String,
         currency: String,
         completion:@escaping (Result<HyperwalletTransferMethodConfigurationKey?, HyperwalletErrorType>) -> Void)
@@ -96,7 +96,7 @@ public final class RemoteTransferMethodConfigurationRepository: TransferMethodCo
         completion(.success(transferMethodConfigurationKeys))
     }
     
-    public func retrieveTransferMethodTypesFeesAndProcessingTimes(
+    public func getTransferMethodTypesFeesAndProcessingTimes(
         country: String,
         currency: String,
         completion:@escaping (Result<HyperwalletTransferMethodConfigurationKey?, HyperwalletErrorType>) -> Void) {
