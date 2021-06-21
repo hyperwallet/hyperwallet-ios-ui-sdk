@@ -53,8 +53,8 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
 
         // When
         repository
-            .retrieveTransferMethodTypesFeesAndProcessingTimes(country: "CA",
-                                                               currency: "CAD") { (result) in
+            .getTransferMethodTypesFeesAndProcessingTimes(country: "CA",
+                                                          currency: "CAD") { (result) in
             switch result {
             case .success(let resultKey):
                 transferMethodConfigurationKey = resultKey
@@ -81,7 +81,7 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
         let repository = RemoteTransferMethodConfigurationRepository()
 
         // When
-        repository.retrieveTransferMethodTypesFeesAndProcessingTimes(country: "CA", currency: "CAD") { (result) in
+        repository.getTransferMethodTypesFeesAndProcessingTimes(country: "CA", currency: "CAD") { (result) in
             switch result {
             case .success(let resultKey):
                 transferMethodConfigurationKey = resultKey
