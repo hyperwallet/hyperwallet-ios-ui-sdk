@@ -19,20 +19,20 @@
 import Foundation
 
 /// Transfer Amount Currency Formatter 
-public struct TransferAmountCurrencyFormatter {
-    private static let transferAmountCurrencyData: TransferAmountCurrencyData? = {
+public struct CurrencyFormatter {
+    private static let currencyData: CurrencyData? = {
         if let path = Bundle(for: HyperwalletBundle.self).path(forResource: "Currency", ofType: "json"),
             let data = NSData(contentsOfFile: path) as Data? {
-            return try? JSONDecoder().decode(TransferAmountCurrencyData.self, from: data)
+            return try? JSONDecoder().decode(CurrencyData.self, from: data)
         }
         return nil
     }()
     
-    /// Get Transfer Amount Currency
+    /// Get Currency
     /// - Parameter currencyCode: currency code
-    /// - Returns: instance of TransferAmountCurrency
-    public static func getTransferAmountCurrency(for currencyCode: String) -> TransferAmountCurrency? {
-        return transferAmountCurrencyData?.data.first(where: { $0.currencyCode == currencyCode })
+    /// - Returns: instance of Currency
+    public static func getCurrency(for currencyCode: String) -> Currency? {
+        return currencyData?.data.first(where: { $0.currencyCode == currencyCode })
     }
     
     /// Format double amount to currency string
@@ -41,7 +41,7 @@ public struct TransferAmountCurrencyFormatter {
     ///   - currencyCode: currency code
     /// - Returns: a formatted currency string
     public static func formatDoubleAmount(_ amount: Double, with currencyCode: String) -> String {
-        if let transferAmountCurrency = getTransferAmountCurrency(for: currencyCode) {
+        if let transferAmountCurrency = getCurrency(for: currencyCode) {
             let formatter = NumberFormatter()
             formatter.usesGroupingSeparator = true
             formatter.maximumFractionDigits = transferAmountCurrency.decimals
@@ -66,7 +66,7 @@ public struct TransferAmountCurrencyFormatter {
     public static func getDecimalAmount(amount: String, currencyCode: String?) -> Double {
         let doubleAmount = NSString(string: amount).doubleValue
         if let currencyCode = currencyCode,
-            let currency = getTransferAmountCurrency(for: currencyCode) {
+            let currency = getCurrency(for: currencyCode) {
             var fractionalDenominator: Double = 10
             if currency.decimals > 0 {
                 for _ in 1..<currency.decimals {
@@ -82,7 +82,7 @@ public struct TransferAmountCurrencyFormatter {
     /// - Parameter currencyCode: currency code
     /// - Returns: a formatted amount string
     public static func formatStringAmount(_ amount: String, with currencyCode: String) -> String {
-        if let transferAmountCurrency = getTransferAmountCurrency(for: currencyCode) {
+        if let transferAmountCurrency = getCurrency(for: currencyCode) {
             let number = amount.formatAmountToDouble()
             let formatter = NumberFormatter()
             formatter.usesGroupingSeparator = true
@@ -102,7 +102,7 @@ public struct TransferAmountCurrencyFormatter {
     /// - Parameter currencyCode: currency code
     /// - Returns: a formatted amount string
     public static func addCurrencySymbolAndCode(_ amount: String, with currencyCode: String) -> String {
-        if let currencySymbol = TransferAmountCurrencyFormatter.getTransferAmountCurrency(for: currencyCode)?.symbol {
+        if let currencySymbol = CurrencyFormatter.getCurrency(for: currencyCode)?.symbol {
             return String(format: "%@%@ %@", currencySymbol, amount, currencyCode)
         } else {
             return amount
@@ -123,7 +123,7 @@ public struct TransferAmountCurrencyFormatter {
     /// - Returns: formatted amount with currency symbol
     public static func formatCurrencyWithSymbol(_ amount: String, with currencyCode: String) -> String {
         let amount = formatStringAmount(amount, with: currencyCode)
-        if let currencySymbol = TransferAmountCurrencyFormatter.getTransferAmountCurrency(for: currencyCode)?.symbol {
+        if let currencySymbol = CurrencyFormatter.getCurrency(for: currencyCode)?.symbol {
             return String(format: "%@%@", currencySymbol, amount)
         } else {
             return amount

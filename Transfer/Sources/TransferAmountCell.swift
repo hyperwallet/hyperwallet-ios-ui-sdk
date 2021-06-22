@@ -144,8 +144,8 @@ final class TransferAmountCell: UITableViewCell {
     func configure(amount: String?, currency: String?, _ handler: @escaping EnteredAmountHandler) {
         currencyCode = currency
         if let amount = amount, let currencyCode = currency {
-            currencySymbolLabel.text = TransferAmountCurrencyFormatter
-                .getTransferAmountCurrency(for: currencyCode)?.symbol
+            currencySymbolLabel.text = CurrencyFormatter
+                .getCurrency(for: currencyCode)?.symbol
             currencySymbolLabel.adjustsFontForContentSizeCategory = true
             setFormattedAmount(amount.formatAmountToDouble())
             amountString = digits(amount: amountTextField.text ?? "0")
@@ -164,7 +164,7 @@ final class TransferAmountCell: UITableViewCell {
 
 extension TransferAmountCell: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        let amount = TransferAmountCurrencyFormatter.getDecimalAmount(amount: amountString, currencyCode: currencyCode)
+        let amount = CurrencyFormatter.getDecimalAmount(amount: amountString, currencyCode: currencyCode)
         enteredAmountHandler?("\(amount)")
     }
 
@@ -190,8 +190,8 @@ extension TransferAmountCell: UITextFieldDelegate {
         }
 
         if digits(amount: amountString).count <= maximumIntegerDigits {
-            let amount = TransferAmountCurrencyFormatter.getDecimalAmount(amount: amountString,
-                                                                          currencyCode: currencyCode)
+            let amount = CurrencyFormatter.getDecimalAmount(amount: amountString,
+                                                            currencyCode: currencyCode)
             setFormattedAmount(amount)
         } else {
             if !amountString.isEmpty { amountString.removeLast() }
@@ -208,7 +208,7 @@ extension TransferAmountCell: UITextFieldDelegate {
 
     private func setFormattedAmount(_ amount: Double) {
         if let currencyCode = currencyCode {
-            amountTextField.text = TransferAmountCurrencyFormatter.formatDoubleAmount(amount, with: currencyCode)
+            amountTextField.text = CurrencyFormatter.formatDoubleAmount(amount, with: currencyCode)
         } else {
             amountTextField.text = "\(amount)"
         }

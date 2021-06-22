@@ -19,7 +19,7 @@
 @testable import Common
 import XCTest
 
-class TransferAmountCurrencyFormatterTests: XCTestCase {
+class CurrencyFormatterTests: XCTestCase {
     // swiftlint:disable function_body_length
     func testFormatStringAmount() {
         let cases = [
@@ -81,7 +81,7 @@ class TransferAmountCurrencyFormatterTests: XCTestCase {
             ("Vietnam Currency", "1000000", "VND", "1.000.000,00")
         ]
         cases.forEach {
-            XCTAssertEqual(TransferAmountCurrencyFormatter.formatStringAmount($1, with: $2),
+            XCTAssertEqual(CurrencyFormatter.formatStringAmount($1, with: $2),
                            $3,
                            "\($0) \($2) test case - currency should be equal to \($3)")
         }
@@ -148,7 +148,7 @@ class TransferAmountCurrencyFormatterTests: XCTestCase {
         ]
         cases.forEach {
             let doubleAmount = NSString(string: $1).doubleValue
-            XCTAssertEqual(TransferAmountCurrencyFormatter.formatDoubleAmount(doubleAmount, with: $2),
+            XCTAssertEqual(CurrencyFormatter.formatDoubleAmount(doubleAmount, with: $2),
                            $3,
                            "\($0) test case - currency should be equal to \($3)")
         }
@@ -214,7 +214,7 @@ class TransferAmountCurrencyFormatterTests: XCTestCase {
             ("Vietnam Currency", "1000000", "VND", 10000.0)
         ]
         cases.forEach {
-            XCTAssertEqual(TransferAmountCurrencyFormatter.getDecimalAmount(amount: $1, currencyCode: $2),
+            XCTAssertEqual(CurrencyFormatter.getDecimalAmount(amount: $1, currencyCode: $2),
                            $3,
                            "\($0) test case - currency should be equal to \($3)")
         }

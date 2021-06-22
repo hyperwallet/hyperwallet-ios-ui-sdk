@@ -163,7 +163,7 @@ public extension HyperwalletFee {
 
         private func currencySymbol(currency: String?) -> String? {
             guard let currency = currency,
-                  let currencySymbol = TransferAmountCurrencyFormatter.getTransferAmountCurrency(for: currency)?.symbol
+                  let currencySymbol = CurrencyFormatter.getCurrency(for: currency)?.symbol
             else { return nil }
             return currencySymbol
         }

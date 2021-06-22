@@ -86,7 +86,7 @@ public extension String {
     func formatToCurrency(with currencyCode: String?) -> String {
         guard let currencyCode = currencyCode, !self.isEmpty
         else { return "0" }
-        return TransferAmountCurrencyFormatter.formatCurrencyWithSymbol(self, with: currencyCode)
+        return CurrencyFormatter.formatCurrencyWithSymbol(self, with: currencyCode)
     }
 }
 
