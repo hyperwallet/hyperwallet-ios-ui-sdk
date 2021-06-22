@@ -486,6 +486,7 @@
 		FD9C483B258791AC00344E93 /* TransferMethodUpdateConfigurationFieldsBankAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = FD9C483925878E6100344E93 /* TransferMethodUpdateConfigurationFieldsBankAccountResponse.json */; };
 		FD9C48462587A2E000344E93 /* BankCardUpdateResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = FD9C48452587A2E000344E93 /* BankCardUpdateResponse.json */; };
 		FDB2EF2626033A77000B4218 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB2EF2526033A77000B4218 /* UILabel.swift */; };
+		FDBCC64226726B0A002CEF55 /* TransferMethodConfigurationFeeAndProcessingTimeResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = FDBCC62D267269BA002CEF55 /* TransferMethodConfigurationFeeAndProcessingTimeResponse.json */; };
 		FDD2F4D32580CC2A008E4CFC /* TransferMethodUpdateConfigurationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD2F4D22580CC2A008E4CFC /* TransferMethodUpdateConfigurationRepository.swift */; };
 		FDD2F4D52580DA77008E4CFC /* TransferMethodUpdateConfigurationRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD2F4D42580DA77008E4CFC /* TransferMethodUpdateConfigurationRepositoryTests.swift */; };
 		FDD2F4E02580F774008E4CFC /* TransferMethodUpdateConfigurationFieldsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = FDD2F4DF2580F774008E4CFC /* TransferMethodUpdateConfigurationFieldsResponse.json */; };
@@ -1285,6 +1286,7 @@
 		FD9C483925878E6100344E93 /* TransferMethodUpdateConfigurationFieldsBankAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TransferMethodUpdateConfigurationFieldsBankAccountResponse.json; sourceTree = "<group>"; };
 		FD9C48452587A2E000344E93 /* BankCardUpdateResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BankCardUpdateResponse.json; sourceTree = "<group>"; };
 		FDB2EF2526033A77000B4218 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
+		FDBCC62D267269BA002CEF55 /* TransferMethodConfigurationFeeAndProcessingTimeResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TransferMethodConfigurationFeeAndProcessingTimeResponse.json; sourceTree = "<group>"; };
 		FDD2F4D22580CC2A008E4CFC /* TransferMethodUpdateConfigurationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodUpdateConfigurationRepository.swift; sourceTree = "<group>"; };
 		FDD2F4D42580DA77008E4CFC /* TransferMethodUpdateConfigurationRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodUpdateConfigurationRepositoryTests.swift; sourceTree = "<group>"; };
 		FDD2F4DF2580F774008E4CFC /* TransferMethodUpdateConfigurationFieldsResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TransferMethodUpdateConfigurationFieldsResponse.json; sourceTree = "<group>"; };
@@ -2180,6 +2182,7 @@
 				FDF1CF0A2588EBCF005FB4D1 /* TransferMethodUpdateConfigurationFieldsPaperCheckResponse.json */,
 				FDF1CF0F2588EED1005FB4D1 /* TransferMethodUpdateConfigurationFieldsWireAccountResponse.json */,
 				DB55206622E1498200DD65C2 /* TransferMethodConfigurationKeysOnlyPaypalAccountUsResponse.json */,
+				FDBCC62D267269BA002CEF55 /* TransferMethodConfigurationFeeAndProcessingTimeResponse.json */,
 				DB55206C22E1498200DD65C2 /* TransferMethodConfigurationKeysResponse.json */,
 				DB55206522E1498200DD65C2 /* UserIndividualResponse.json */,
 				DB55206B22E1498200DD65C2 /* WireAccountIndividualResponse.json */,
@@ -3588,6 +3591,7 @@
 				DB55207722E1498300DD65C2 /* TransferMethodConfigurationFieldsOnlyPaypalAccountUsResponse.json in Resources */,
 				DB55207622E1498300DD65C2 /* ListTransferMethodSuccessResponse.json in Resources */,
 				DB55207822E1498300DD65C2 /* WireAccountIndividualResponse.json in Resources */,
+				FDBCC64226726B0A002CEF55 /* TransferMethodConfigurationFeeAndProcessingTimeResponse.json in Resources */,
 				FDF1CEFB2588C685005FB4D1 /* PayPalAccountResponse.json in Resources */,
 				DB55207922E1498300DD65C2 /* TransferMethodConfigurationKeysResponse.json in Resources */,
 				984C47F72527EC6100CC442D /* ListPrepaidCardResponse.json in Resources */,

@@ -40,6 +40,17 @@ public protocol TransferMethodConfigurationRepository {
     /// - Parameter completion: the callback handler of responses from the Hyperwallet platform
     func getKeys(
         completion: @escaping (Result<HyperwalletTransferMethodConfigurationKey?, HyperwalletErrorType>) -> Void)
+    
+    ///  Retrieve the transfer method types and their fees and processing times based on the parameters
+    ///
+    /// - Parameters:
+    ///   - country: the 2 letter ISO 3166-1 country code
+    ///   - currency: the 3 letter ISO 4217-1 currency code
+    ///   - completion: the callback handler of responses from the Hyperwallet platform
+    func getTransferMethodTypesFeesAndProcessingTimes(
+        country: String,
+        currency: String,
+        completion:@escaping (Result<HyperwalletTransferMethodConfigurationKey?, HyperwalletErrorType>) -> Void)
 
     /// Refreshes the transfer method fields
     func refreshFields()
@@ -53,7 +64,6 @@ public final class RemoteTransferMethodConfigurationRepository: TransferMethodCo
     private var transferMethodConfigurationFieldsDictionary =
         [HyperwalletTransferMethodConfigurationFieldQuery: HyperwalletTransferMethodConfigurationField]()
     private var transferMethodConfigurationKeys: HyperwalletTransferMethodConfigurationKey?
-
     public func getFields(
         _ country: String,
         _ currency: String,
@@ -84,6 +94,19 @@ public final class RemoteTransferMethodConfigurationRepository: TransferMethodCo
             return
         }
         completion(.success(transferMethodConfigurationKeys))
+    }
+    
+    public func getTransferMethodTypesFeesAndProcessingTimes(
+        country: String,
+        currency: String,
+        completion:@escaping (Result<HyperwalletTransferMethodConfigurationKey?, HyperwalletErrorType>) -> Void) {
+        let query = HyperwalletTransferMethodTypesFeesAndProcessingTimesQuery(country: country,
+                                                                              currency: currency)
+        Hyperwallet.shared
+            .retrieveTransferMethodTypesFeesAndProcessingTimes(
+                request: query) {(result, error) in
+                TransferMethodRepositoryCompletionHelper.performHandler(error, result, completion)
+            }
     }
 
     public func refreshFields() {
