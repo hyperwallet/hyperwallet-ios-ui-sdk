@@ -18,7 +18,7 @@
 
 import Foundation
 
-/// Transfer Amount Currency Formatter 
+/// Currency Formatter
 public struct CurrencyFormatter {
     private static let currencyData: CurrencyData? = {
         if let path = Bundle(for: HyperwalletBundle.self).path(forResource: "Currency", ofType: "json"),
@@ -41,11 +41,11 @@ public struct CurrencyFormatter {
     ///   - currencyCode: currency code
     /// - Returns: a formatted currency string
     public static func formatDoubleAmount(_ amount: Double, with currencyCode: String) -> String {
-        if let transferAmountCurrency = getCurrency(for: currencyCode) {
+        if let currency = getCurrency(for: currencyCode) {
             let formatter = NumberFormatter()
             formatter.usesGroupingSeparator = true
-            formatter.maximumFractionDigits = transferAmountCurrency.decimals
-            formatter.minimumFractionDigits = transferAmountCurrency.decimals
+            formatter.maximumFractionDigits = currency.decimals
+            formatter.minimumFractionDigits = currency.decimals
             formatter.numberStyle = .currency
             formatter.currencyCode = currencyCode
             formatter.locale = getLocaleIdentifer(for: currencyCode)
@@ -82,12 +82,12 @@ public struct CurrencyFormatter {
     /// - Parameter currencyCode: currency code
     /// - Returns: a formatted amount string
     public static func formatStringAmount(_ amount: String, with currencyCode: String) -> String {
-        if let transferAmountCurrency = getCurrency(for: currencyCode) {
+        if let currency = getCurrency(for: currencyCode) {
             let number = amount.formatAmountToDouble()
             let formatter = NumberFormatter()
             formatter.usesGroupingSeparator = true
-            formatter.maximumFractionDigits = transferAmountCurrency.decimals
-            formatter.minimumFractionDigits = transferAmountCurrency.decimals
+            formatter.maximumFractionDigits = currency.decimals
+            formatter.minimumFractionDigits = currency.decimals
             formatter.numberStyle = .currency
             formatter.currencyCode = currencyCode
             formatter.locale = getLocaleIdentifer(for: currencyCode)
