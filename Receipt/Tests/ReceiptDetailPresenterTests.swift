@@ -154,11 +154,11 @@ class ReceiptDetailPresenterTests: XCTestCase {
             return
         }
 
-        XCTAssertTrue(rowEqual(section.rows[0], "amount".localized(), "R$34,003.00 BRL", "amount"))
-        XCTAssertTrue(rowEqual(section.rows[1], "mobileFeeLabel".localized(), "R$3.50 BRL", "fee"))
+        XCTAssertTrue(rowEqual(section.rows[0], "amount".localized(), "R$34.003,00 BRL", "amount"))
+        XCTAssertTrue(rowEqual(section.rows[1], "mobileFeeLabel".localized(), "R$3,50 BRL", "fee"))
         XCTAssertTrue(rowEqual(section.rows[2],
                                "mobileTransactionDetailsTotal".localized(),
-                               "R$33,999.50 BRL",
+                               "R$33.999,50 BRL",
                                "transaction"))
 
         presenterWithDifferentCurrencies = ReceiptDetailPresenter(with: receipts[1])
@@ -168,11 +168,11 @@ class ReceiptDetailPresenterTests: XCTestCase {
             return
         }
 
-        XCTAssertTrue(rowEqual(sectionOne.rows[0], "amount".localized(), "CA$272,890.00 CAD", "amount"))
-        XCTAssertTrue(rowEqual(sectionOne.rows[1], "mobileFeeLabel".localized(), "CA$0.89 CAD", "fee"))
+        XCTAssertTrue(rowEqual(sectionOne.rows[0], "amount".localized(), "$272,890.00 CAD", "amount"))
+        XCTAssertTrue(rowEqual(sectionOne.rows[1], "mobileFeeLabel".localized(), "$0.89 CAD", "fee"))
         XCTAssertTrue(rowEqual(sectionOne.rows[2],
                                "mobileTransactionDetailsTotal".localized(),
-                               "CA$272,889.11 CAD",
+                               "$272,889.11 CAD",
                                "transaction"))
     }
 

@@ -61,9 +61,9 @@ class SelectTransferMethodTypeTests: BaseTests {
             "PayPal Account"].exists)
 
         XCTAssert(app.tables["selectTransferMethodTypeTable"].cells.element(boundBy: 0).staticTexts[
-            "CA$2.20 fee \u{2022} 1-2 Business days"].exists)
+            "$2.20 fee \u{2022} 1-2 Business days"].exists)
         XCTAssert(app.tables["selectTransferMethodTypeTable"].cells.element(boundBy: 1).staticTexts[
-            "CA$0.25 fee \u{2022} IMMEDIATE"].exists)
+            "$0.25 fee \u{2022} IMMEDIATE"].exists)
     }
 
     func testSelectTransferMethodType_verifyCountrySelectionSearch() {
@@ -151,7 +151,7 @@ class SelectTransferMethodTypeTests: BaseTests {
         XCTAssert(app.tables["selectTransferMethodTypeTable"].cells.element(boundBy: 0).staticTexts[
                     "Wire Transfer"].exists)
         XCTAssert(app.tables["selectTransferMethodTypeTable"].cells.element(boundBy: 0).staticTexts[
-                    "2.00% (Min:CA$4.00, Max:CA$10.00) fee"].exists)
+                    "2.00% (Min:$4.00, Max:$10.00) fee"].exists)
         
         XCTAssert(app.tables["selectTransferMethodTypeTable"].cells.element(boundBy: 1).staticTexts[
                     "PayPal Account"].exists)
@@ -161,12 +161,12 @@ class SelectTransferMethodTypeTests: BaseTests {
         XCTAssert(app.tables["selectTransferMethodTypeTable"].cells.element(boundBy: 2).staticTexts[
                     "Bank Account"].exists)
         XCTAssert(app.tables["selectTransferMethodTypeTable"].cells.element(boundBy: 2).staticTexts[
-                    "2.00% (Min:CA$4.00) fee"].exists)
+                    "2.00% (Min:$4.00) fee"].exists)
         
         XCTAssert(app.tables["selectTransferMethodTypeTable"].cells.element(boundBy: 3).staticTexts[
                     "Debit Card"].exists)
         XCTAssert(app.tables["selectTransferMethodTypeTable"].cells.element(boundBy: 3).staticTexts[
-                    "CA$12 fee"].exists)
+                    "$12 fee"].exists)
     }
     
     private func assertAUDFeeFormatting() {

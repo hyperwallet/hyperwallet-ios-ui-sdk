@@ -91,17 +91,18 @@ struct ScheduleTransferForeignExchangeData: ScheduleTransferSectionData {
                 let destinationCurrency = foreignExchange.destinationCurrency,
                 let rate = foreignExchange.rate?.getFxRateWithFourDecimal() {
                 let sourceAmountFormatted =
-                    TransferAmountCurrencyFormatter.formatCurrencyWithSymbolAndCode(sourceAmount,
-                                                                                    with: sourceCurrency)
+                    CurrencyFormatter.formatCurrencyWithSymbolAndCode(sourceAmount,
+                                                                      with: sourceCurrency)
                 let destinationAmountFormatted =
-                    TransferAmountCurrencyFormatter.formatCurrencyWithSymbolAndCode(destinationAmount,
-                                                                                    with: destinationCurrency)
+                    CurrencyFormatter.formatCurrencyWithSymbolAndCode(destinationAmount,
+                                                                      
+                                                                      with: destinationCurrency)
 
                 let rateFormatted = String(format: "\u{200E}%@ = %@",
-                                           TransferAmountCurrencyFormatter.addCurrencySymbolAndCode(
+                                           CurrencyFormatter.addCurrencySymbolAndCode(
                                             "1",
                                             with: sourceCurrency),
-                                           TransferAmountCurrencyFormatter.addCurrencySymbolAndCode(
+                                           CurrencyFormatter.addCurrencySymbolAndCode(
                                             rate,
                                             with: destinationCurrency))
 
@@ -128,8 +129,8 @@ struct ScheduleTransferSummaryData: ScheduleTransferSectionData {
             let destinationCurrency = transfer.destinationCurrency {
             guard let feeAmount = transfer.destinationFeeAmount, Double(feeAmount) != 0 else {
                 rows.append((title: "mobileConfirmDetailsAmount".localized(),
-                             value: TransferAmountCurrencyFormatter.formatStringAmount(destinationAmount,
-                                                                                       with: destinationCurrency)))
+                             value: CurrencyFormatter.formatStringAmount(destinationAmount,
+                                                                         with: destinationCurrency)))
                 return
             }
             let transferAmountFormattedDouble = destinationAmount.formatAmountToDouble()
@@ -138,16 +139,16 @@ struct ScheduleTransferSummaryData: ScheduleTransferSectionData {
 
             rows.append((title: "mobileConfirmDetailsAmount".localized(),
                          value:
-                TransferAmountCurrencyFormatter.formatCurrencyWithSymbolAndCode(String(grossTransferAmount),
-                                                                                with: destinationCurrency)))
+                CurrencyFormatter.formatCurrencyWithSymbolAndCode(String(grossTransferAmount),
+                                                                  with: destinationCurrency)))
             rows.append((title: "mobileConfirmDetailsFee".localized(),
                          value:
-                TransferAmountCurrencyFormatter.formatCurrencyWithSymbolAndCode(feeAmount,
-                                                                                with: destinationCurrency)))
+                CurrencyFormatter.formatCurrencyWithSymbolAndCode(feeAmount,
+                                                                  with: destinationCurrency)))
             rows.append((title: "mobileConfirmDetailsTotal".localized(),
                          value:
-                TransferAmountCurrencyFormatter.formatCurrencyWithSymbolAndCode(destinationAmount,
-                                                                                with: destinationCurrency)))
+                CurrencyFormatter.formatCurrencyWithSymbolAndCode(destinationAmount,
+                                                                  with: destinationCurrency)))
             if didFxQuoteChange {
                 footer = String(format: "transfer_fx_rate_changed".localized(),
                                 String(format: "%@ %@", destinationAmount, destinationCurrency))
