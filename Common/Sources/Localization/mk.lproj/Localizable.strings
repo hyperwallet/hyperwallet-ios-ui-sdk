@@ -53,6 +53,7 @@
 "error" = "Грешка";
 "authentication_error_title" = "Грешка во автентикација";
 "authentication_error_message" = "Обидот за повикување на ознака за автентикација резултираше во грешка";
+"no_fee" = "Без провизија";
 
 // Transfer methods
 "bank_account" = "Сметка во банка";

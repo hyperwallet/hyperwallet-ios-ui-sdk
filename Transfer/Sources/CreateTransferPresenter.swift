@@ -165,6 +165,9 @@ final class CreateTransferPresenter {
                     strongSelf.transferSourceCellConfigurations
                         .first(where: { $0.isSelected })?.additionalText =
                         prepaidCard.formattedCardBrandCardNumber
+                    strongSelf.transferSourceCellConfigurations
+                        .first(where: { $0.isSelected })?.destinationCurrency =
+                        prepaidCard.transferMethodCurrency
                     strongSelf.loadCreateTransferFromSelectedTransferSource(sourceToken: token)
                 }
             }
@@ -197,7 +200,8 @@ final class CreateTransferPresenter {
     private func createTransferSourceCellConfiguration(_ isSelectedTransferSource: Bool,
                                                        _ transferSourceType: TransferSourceType,
                                                        _ token: String,
-                                                       _ additionalText: String? = nil) {
+                                                       _ additionalText: String? = nil,
+                                                       _ transferMethodCurrency: String? = nil) {
         let configuration = TransferSourceCellConfiguration(isSelectedTransferSource: isSelectedTransferSource,
                                                             type: transferSourceType,
                                                             token: token,
@@ -210,6 +214,7 @@ final class CreateTransferPresenter {
         configuration.availableBalance = availableBalance
         configuration.destinationCurrency = destinationCurrency
         if transferSourceType == .user { addCurrencyCodesToAvailableFundsConfiguration() }
+        if transferSourceType == .prepaidCard { configuration.destinationCurrency = transferMethodCurrency }
         transferSourceCellConfigurations.append(configuration)
     }
 
@@ -276,7 +281,8 @@ final class CreateTransferPresenter {
                                 .createTransferSourceCellConfiguration(isSelectedTransferSource,
                                                                        .prepaidCard,
                                                                        prepaidCard.token ?? "",
-                                                                       prepaidCard.formattedCardBrandCardNumber)
+                                                                       prepaidCard.formattedCardBrandCardNumber,
+                                                                       prepaidCard.transferMethodCurrency)
                             isSelectedTransferSource = false
                         }
                     } else if isSelectedTransferSource {
@@ -467,7 +473,8 @@ final class CreateTransferPresenter {
 
     private func updateFooterContent(_ errors: [HyperwalletError]) {
         for error in errors {
-            if let sectionData = sectionData.first(where: { $0.createTransferSectionHeader == .transferAll }) {
+            if let sectionData = sectionData.first(where: { $0.createTransferSectionHeader == .transferAll }),
+               error.fieldName != nil {
                 sectionData.errorMessage = error.message
                 view?.updateFooter(for: .transferAll)
             }

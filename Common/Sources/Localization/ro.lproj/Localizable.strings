@@ -53,6 +53,7 @@
 "error" = "Eroare";
 "authentication_error_title" = "Eroare de autentificare";
 "authentication_error_message" = "Încercare de recuperare a token-ului de autentificare a dus la o eroare";
+"no_fee" = "Nicio taxă";
 
 // Transfer methods
 "bank_account" = "Cont bancar";

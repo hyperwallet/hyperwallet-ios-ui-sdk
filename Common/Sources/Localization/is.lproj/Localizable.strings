@@ -53,6 +53,7 @@
 "error" = "Villa";
 "authentication_error_title" = "Sannvottunarvilla";
 "authentication_error_message" = "Tilraun til að sækja sannvottunartóka leiddi til villu";
+"no_fee" = "Ekkert gjald";
 
 // Transfer methods
 "bank_account" = "Bankareikningur";

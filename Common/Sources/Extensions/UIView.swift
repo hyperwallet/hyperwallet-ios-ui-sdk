@@ -115,59 +115,6 @@ public extension UIView {
         return emptyListLabel
     }
 
-    /// Setups the empty list with button
-    ///
-    /// - Parameters:
-    ///   - text: the button text
-    ///   - firstItem: the UIVIew to anchor the button
-    /// - Returns: the UIButton instance
-    func setUpEmptyListButton(text: String, firstItem: UIView) -> UIButton {
-        let emptyListButton = UIButton(type: .system)
-        emptyListButton.setTitle(text, for: .normal)
-        emptyListButton.titleLabel?.font = Theme.Button.font
-        emptyListButton.setTitleColor(Theme.Button.color, for: UIControl.State.normal)
-        emptyListButton.backgroundColor = Theme.Button.backgroundColor
-        emptyListButton.accessibilityIdentifier = "emptyListButton"
-
-        let heightConstraint = NSLayoutConstraint(item: emptyListButton,
-                                                  attribute: .height,
-                                                  relatedBy: .equal,
-                                                  toItem: nil,
-                                                  attribute: .notAnAttribute,
-                                                  multiplier: 1,
-                                                  constant: 52)
-
-        let widthConstraint = NSLayoutConstraint(item: emptyListButton,
-                                                 attribute: .width,
-                                                 relatedBy: .lessThanOrEqual,
-                                                 toItem: nil,
-                                                 attribute: .notAnAttribute,
-                                                 multiplier: 1,
-                                                 constant: 382)
-
-        emptyListButton.addConstraint(heightConstraint)
-        emptyListButton.addConstraint(widthConstraint)
-
-        self.addSubview(emptyListButton)
-        emptyListButton.translatesAutoresizingMaskIntoConstraints = false
-        let buttonCenterXConstraint = NSLayoutConstraint(item: emptyListButton,
-                                                         attribute: .centerX,
-                                                         relatedBy: .equal,
-                                                         toItem: self,
-                                                         attribute: .centerX,
-                                                         multiplier: 1.0,
-                                                         constant: 0.0)
-        let verticalConstraint = NSLayoutConstraint(item: firstItem,
-                                                    attribute: .bottom,
-                                                    relatedBy: .equal,
-                                                    toItem: emptyListButton,
-                                                    attribute: .top,
-                                                    multiplier: 1,
-                                                    constant: -8)
-        NSLayoutConstraint.activate([buttonCenterXConstraint, verticalConstraint])
-        return emptyListButton
-    }
-
     /// Check if current view is `UITableViewCellSeparatorView`
     func isSeparatorView() -> Bool {
         return type(of: self).description() == "_UITableViewCellSeparatorView"

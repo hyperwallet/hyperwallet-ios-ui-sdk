@@ -53,6 +53,7 @@
 "error" = "Fel";
 "authentication_error_title" = "Autentiseringsfel";
 "authentication_error_message" = "Autentiseringstokens hämtningsförsök resulterade i ett fel";
+"no_fee" = "Ingen avgift";
 
 // Transfer methods
 "bank_account" = "Bankkonto";

@@ -62,6 +62,8 @@ final class ListReceiptController: UITableViewController {
         super.willMove(toParent: parent)
         if parent == nil {
             removeCoordinator()
+            removeFlowDelegate()
+            removeInitializedData()
         }
     }
 
@@ -86,7 +88,12 @@ final class ListReceiptController: UITableViewController {
                                                  for: indexPath)
         if let listReceiptCell = cell as? ReceiptTransactionCell {
             listReceiptCell.configure(presenter.sectionData[indexPath.section].value[indexPath.row])
+            listReceiptCell.receiptTypeLabel.isUserInteractionEnabled = false
+            listReceiptCell.amountLabel.isUserInteractionEnabled = false
+            listReceiptCell.createdOnLabel.isUserInteractionEnabled = false
+            listReceiptCell.currencyLabel.isUserInteractionEnabled = false
             listReceiptCell.accessoryType = .disclosureIndicator
+            listReceiptCell.layoutIfNeeded()
         }
         return cell
     }
@@ -96,7 +103,7 @@ final class ListReceiptController: UITableViewController {
     }
 
     override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return Theme.Cell.height
+        return UITableView.automaticDimension
     }
 
     /// Returns title for header

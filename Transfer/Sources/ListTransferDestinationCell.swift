@@ -69,9 +69,11 @@ extension ListTransferDestinationCell {
         textLabel?.lineBreakMode = .byWordWrapping
 
         detailTextLabel?.accessibilityIdentifier = "transferDestinationSubtitleLabel"
+        let subTitle = transferMethod.isPrepaidCard() ?
+            transferMethod.transferMethodCurrency :
+            Locale.current.localizedString(forRegionCode: transferMethod.transferMethodCountry ?? "")
         detailTextLabel?.attributedText = formatDetails(
-            transferMethodCountry:
-                Locale.current.localizedString(forRegionCode: transferMethod.transferMethodCountry ?? "") ?? "",
+            transferMethodCountry: subTitle ?? "",
             additionalInfo: transferMethod.value)
         detailTextLabel?.adjustsFontForContentSizeCategory = true
         detailTextLabel?.numberOfLines = 0

@@ -104,7 +104,8 @@ extension TransferSourceCell {
         textLabel?.numberOfLines = 0
         textLabel?.lineBreakMode = .byWordWrapping
         textLabel?.accessibilityIdentifier = "transferSourceTitleLabel"
-        detailTextLabel?.text = type == .user ? currency : additionalInfo
+        detailTextLabel?.text = type == .user ?
+            currency : formatDetails(subtitle: currency ?? "", additionalInfo: additionalInfo)
         detailTextLabel?.adjustsFontSizeToFitWidth = true
         detailTextLabel?.minimumScaleFactor = 0.1
         detailTextLabel?.numberOfLines = 2
@@ -118,5 +119,16 @@ extension TransferSourceCell {
             imageView?.image = icon
             imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)
         }
+    }
+    
+    private func formatDetails(subtitle: String,
+                               additionalInfo: String? = nil) -> String {
+        var formattedString = ""
+        let stringFormat = additionalInfo != nil ? "%@\n" : "%@"
+        formattedString.append(String(format: stringFormat, subtitle))
+        if let additionalInfo = additionalInfo {
+            formattedString.append(additionalInfo)
+        }
+        return formattedString
     }
 }

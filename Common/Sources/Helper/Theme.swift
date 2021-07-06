@@ -47,6 +47,8 @@ public class Theme: NSObject {
         public static var subtitleFont = UIFont.preferredFont(forTextStyle: .subheadline)
         /// The footnote font style
         public static var footnoteFont = UIFont.preferredFont(forTextStyle: .footnote)
+        /// The text selection color
+        public static var textSelectionColor = UIColor(rgb: 0x00AFD0).withAlphaComponent(0.14)
     }
 
     /// Representation of all customizable visual style property for `UINavigationBar`.
@@ -127,6 +129,8 @@ public class Theme: NSObject {
     public struct Icon {
         /// The icon font size
         public static let size = 30
+        /// The add tranfer method icon size
+        public static let addTransferMethodIconSize = 20
         /// The icon frame
         public static let frame = CGSize(width: 30, height: 30)
         /// The icon primary color

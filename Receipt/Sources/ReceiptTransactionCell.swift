@@ -31,6 +31,10 @@ final class ReceiptTransactionCell: UITableViewCell {
     lazy var receiptTypeLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.accessibilityIdentifier = "receiptTransactionTypeLabel"
+        label.lineBreakMode = .byClipping
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        label.allowTextSelection()
         return label
     }()
 
@@ -40,12 +44,14 @@ final class ReceiptTransactionCell: UITableViewCell {
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
         label.accessibilityIdentifier = "receiptTransactionAmountLabel"
+        label.allowTextSelection()
         return label
     }()
 
     lazy var createdOnLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.accessibilityIdentifier = "receiptTransactionCreatedOnLabel"
+        label.allowTextSelection()
         return label
     }()
 
@@ -53,6 +59,7 @@ final class ReceiptTransactionCell: UITableViewCell {
         let label = UILabel(frame: .zero)
         label.textAlignment = .right
         label.accessibilityIdentifier = "receiptTransactionCurrencyLabel"
+        label.allowTextSelection()
         return label
     }()
 
@@ -101,7 +108,7 @@ final class ReceiptTransactionCell: UITableViewCell {
         stackView.axis = .horizontal
         stackView.alignment = .center
         stackView.distribution = .fill
-        stackView.spacing = 8
+        stackView.spacing = 2
 
         stackView.addArrangedSubview(leftLabel)
         stackView.addArrangedSubview(rightLabel)
@@ -113,7 +120,7 @@ final class ReceiptTransactionCell: UITableViewCell {
         leftLabel.translatesAutoresizingMaskIntoConstraints = false
         rightLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        leftLabel.widthAnchor.constraint(equalTo: rightLabel.widthAnchor).isActive = true
+        leftLabel.widthAnchor.constraint(equalTo: rightLabel.widthAnchor, constant: 30).isActive = true
 
         leftLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
         leftLabel.setContentHuggingPriority(.required, for: .vertical)

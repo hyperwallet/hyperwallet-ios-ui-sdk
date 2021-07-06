@@ -37,6 +37,7 @@ final class ReceiptFeeCell: UITableViewCell {
         textLabel?.numberOfLines = 0
         textLabel?.adjustsFontForContentSizeCategory = true
         textLabel?.accessibilityIdentifier = "\(row.field)Label"
+        textLabel?.allowTextSelection()
         detailTextLabel?.text = row.value
         detailTextLabel?.lineBreakMode = .byWordWrapping
         detailTextLabel?.numberOfLines = 0
@@ -44,6 +45,7 @@ final class ReceiptFeeCell: UITableViewCell {
         detailTextLabel?.adjustsFontSizeToFitWidth = true
         detailTextLabel?.minimumScaleFactor = 0.5
         detailTextLabel?.accessibilityIdentifier = "\(row.field)Value"
+        detailTextLabel?.allowTextSelection()
     }
 
     // MARK: Theme manager's proxy properties

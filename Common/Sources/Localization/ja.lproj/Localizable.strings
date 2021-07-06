@@ -53,6 +53,7 @@
 "error" = "エラー";
 "authentication_error_title" = "認証エラー";
 "authentication_error_message" = "認証トークンの取得の試みがエラーになりました";
+"no_fee" = "手数料なし";
 
 // Transfer methods
 "bank_account" = "銀行口座";

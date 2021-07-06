@@ -53,6 +53,7 @@
 "error" = "Errore";
 "authentication_error_title" = "Errore di autenticazione";
 "authentication_error_message" = "Il tentativo di recupero del token di autenticazione ha generato un errore";
+"no_fee" = "Nessuna commissione";
 
 // Transfer methods
 "bank_account" = "Conto bancario";

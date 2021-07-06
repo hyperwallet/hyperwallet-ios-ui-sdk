@@ -31,7 +31,13 @@ public extension HyperwalletTransferMethodType {
         let attributedText = NSMutableAttributedString()
         // Fees
         if let fees = self.fees?.nodes {
-            attributedText.append(value: HyperwalletFee.format(fees: fees), font: font, color: color)
+            attributedText.append(value: HyperwalletFee.format(fees: fees),
+                                  font: font,
+                                  color: color)
+        } else {
+            attributedText.append(value: HyperwalletFee.FeeTypes.noFee.feeDescription(),
+                                  font: font,
+                                  color: color)
         }
 
         // Processing Time

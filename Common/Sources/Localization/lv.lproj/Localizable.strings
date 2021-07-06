@@ -53,6 +53,7 @@
 "error" = "Kļūda";
 "authentication_error_title" = "Autorizācijas kļūda";
 "authentication_error_message" = "Mēģinājuma izgūt autorizācijas marķieri rezultātā radās kļūda";
+"no_fee" = "Bez maksa";
 
 // Transfer methods
 "bank_account" = "Bankas konts";

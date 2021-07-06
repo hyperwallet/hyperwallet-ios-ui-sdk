@@ -53,6 +53,7 @@
 "error" = "錯誤";
 "authentication_error_title" = "驗證錯誤";
 "authentication_error_message" = "嘗試擷取驗證權杖時導致錯誤";
+"no_fee" = "不收费";
 
 // Transfer methods
 "bank_account" = "銀行帳戶";

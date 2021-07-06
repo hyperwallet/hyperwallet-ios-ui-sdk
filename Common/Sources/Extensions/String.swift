@@ -59,20 +59,6 @@ public extension String {
         return ceil(boundingBox.height)
     }
 
-    /// Format amount for currency code using users locale
-    /// - Parameter currencyCode: currency code
-    /// - Returns: a formatted amount string
-    func formatToCurrency(with currencyCode: String?) -> String {
-        guard let currencyCode = currencyCode, !self.isEmpty
-        else { return "0" }
-        let number = Double(self)
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.locale = Locale.current
-        formatter.currencyCode = currencyCode
-        return formatter.string(for: number) ?? self
-    }
-
     /// Format amount to double
     /// - Returns: double value
     func formatAmountToDouble() -> Double {
@@ -84,17 +70,23 @@ public extension String {
     /// Get FX Rate with four decimal
     /// - Returns: return string with four decimal
     func getFxRateWithFourDecimal() -> String {
-        guard !self.isEmpty else {
-            return ""
-        }
-        let numbers = self.split(separator: ".")
-        if numbers.count == 2 {
-            let decimals = numbers[1]
-            if decimals.count > 4 {
-                return String(self.dropLast(decimals.count - 4))
-            }
-        }
-        return self
+        guard !self.isEmpty
+        else { return "" }
+        let number = self.formatAmountToDouble()
+        let formatter = NumberFormatter()
+        formatter.usesGroupingSeparator = true
+        formatter.minimumFractionDigits = 4
+        formatter.roundingMode = .halfUp
+        return formatter.string(for: number)?.trimmingCharacters(in: .whitespaces) ?? self
+    }
+    
+    /// Format amount for currency code using users locale
+    /// - Parameter currencyCode: currency code
+    /// - Returns: a formatted amount string
+    func formatToCurrency(with currencyCode: String?) -> String {
+        guard let currencyCode = currencyCode, !self.isEmpty
+        else { return "0" }
+        return CurrencyFormatter.formatCurrencyWithSymbol(self, with: currencyCode)
     }
 }
 
@@ -119,12 +111,16 @@ public extension NSMutableAttributedString {
     ///   - value: the string value
     ///   - font: the UIFont
     ///   - color: the UIColor
-    func appendParagraph(value: String, font: UIFont, color: UIColor) {
+    ///   - alignment: the NSTextAlignment
+    func appendParagraph(value: String,
+                         font: UIFont,
+                         color: UIColor,
+                         alignment: NSTextAlignment = .natural) {
         let paragraphText = self.string.isEmpty
             ? value
             : "\n\(value)"
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .natural
+        paragraphStyle.alignment = alignment
         paragraphStyle.lineBreakMode = .byWordWrapping
         paragraphStyle.paragraphSpacing = font.lineHeight
         append(value: paragraphText, attributes: [

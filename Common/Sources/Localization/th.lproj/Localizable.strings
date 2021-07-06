@@ -53,6 +53,7 @@
 "error" = "ข้อผิดพลาด";
 "authentication_error_title" = "ข้อผิดพลาดในการพิสูจน์ตัวตนถูกต้อง";
 "authentication_error_message" = "เกิดข้อผิดพลาดในการพยายามดึงข้อมูลโทเค็นการพิสูจน์ตัวตน";
+"no_fee" = "ไม่มีค่าธรรมเนียม";
 
 // Transfer methods
 "bank_account" = "บัญชีธนาคาร";

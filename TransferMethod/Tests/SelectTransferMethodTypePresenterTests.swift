@@ -140,7 +140,7 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
         // Then
         XCTAssertTrue(mockView.isShowLoadingPerformed, "The showLoading should be performed")
         XCTAssertTrue(mockView.isHideLoadingPerformed, "The hideLoading should be performed")
-        XCTAssertTrue(mockView.isShowAlertPerformed, "The showAlert should not be performed")
+        XCTAssertTrue(mockView.isShowAlertPerformed, "The showAlert should be performed")
 
         XCTAssertEqual(mockView.alertMessages[0], "There is no transfer method available for US and USD")
     }
@@ -186,6 +186,29 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
         XCTAssertFalse(mockView.isTransferMethodTypeTableViewReloadDataPerformed,
                        "The transferMethodTypeTableViewReloadData should not be performed")
     }
+    
+    func testTransferMethodTypesFeesProcessingTimes_retry() {
+        let currencyIndex = 1
+        addGetIndividualHyperwalletUserResponse()
+        HyperwalletTestHelper.setUpMockServer(request: setUpTransferMethodConfigurationKeys())
+        let expectation = self.expectation(description: "load transfer methods keys")
+        mockView.expectation = expectation
+        presenter.loadTransferMethodKeys(true)
+        wait(for: [expectation], timeout: 1)
+        
+        HyperwalletTestHelper
+            .setUpMockServer(request: setUpTransferMethodConfigurationKeys(NSError(domain: "",
+                                                                                   code: -1009,
+                                                                                   userInfo: nil)))
+        let expectation1 = self.expectation(description: "load transfer methods types, fees and processing time")
+        mockView.expectation = expectation1
+        presenter.performShowSelectCountryOrCurrencyView(index: currencyIndex)
+        wait(for: [expectation1], timeout: 1)
+        mockView.ignoreXCTestExpectation = true
+        
+        XCTAssertTrue(mockView.isShowLoadingPerformed, "The showLoading should be performed")
+        XCTAssertTrue(mockView.isShowErrorPerformed, "The showError should be performed")
+    }
 
     func testNavigateToAddTransferMethod_success() {
         let indexPath = IndexPath(row: 0, section: 0)
@@ -224,8 +247,11 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
         mockView.expectation = expectation
         presenter.loadTransferMethodKeys(true)
         wait(for: [expectation], timeout: 1)
-        mockView.ignoreXCTestExpectation = true
+        
+        let expectation1 = self.expectation(description: "load transfer methods types, fees and processing time")
+        mockView.expectation = expectation1
         presenter.performShowSelectCountryOrCurrencyView(index: countryIndex)
+        wait(for: [expectation1], timeout: 1)
         XCTAssertTrue(mockView.isShowGenericTableViewPerformed, "Show Generic Table View should be performed")
         XCTAssertTrue(hyperwalletInsightsMock.didTrackClick, "HyperwalletInsights.trackClick should be called")
     }
@@ -238,8 +264,11 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
         mockView.expectation = expectation
         presenter.loadTransferMethodKeys(true)
         wait(for: [expectation], timeout: 1)
-        mockView.ignoreXCTestExpectation = true
+        
+        let expectation1 = self.expectation(description: "load transfer methods types, fees and processing time")
+        mockView.expectation = expectation1
         presenter.performShowSelectCountryOrCurrencyView(index: currencyIndex)
+        wait(for: [expectation1], timeout: 1)
         XCTAssertTrue(mockView.isShowGenericTableViewPerformed, "Show Generic Table View should be performed")
         XCTAssertTrue(hyperwalletInsightsMock.didTrackClick, "HyperwalletInsights.trackClick should be called")
        }

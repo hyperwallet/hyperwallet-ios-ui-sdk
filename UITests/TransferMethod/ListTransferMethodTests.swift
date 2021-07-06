@@ -101,15 +101,6 @@ class ListTransferMethodTests: BaseTests {
         XCTAssertTrue(app.cells.element(boundBy: 4).staticTexts[expectedPayPalAccountCellLabel].exists)
     }
 
-    func testListTransferMethod_addTransferMethodFromEmptyScreen() {
-        mockServer.setUpEmptyResponse(url: "/rest/v3/users/usr-token/transfer-methods")
-
-        openTransferMethodsList()
-        listTransferMethod.tapAddTransferMethodEmptyScreenButton()
-
-        XCTAssertTrue(app.navigationBars["mobileAddTransferMethodHeader".localized()].exists)
-    }
-
     func testListTransferMethod_addTransferMethod() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListTransferMethodResponse",

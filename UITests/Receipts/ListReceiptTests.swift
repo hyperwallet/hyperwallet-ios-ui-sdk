@@ -293,7 +293,7 @@ class ListReceiptTests: BaseTests {
                                       CurrencyCode.USD.0,
                                       at: 3)
         verifyCellExists("Debit Card", "2019-05-01T17:35:20", "¥1,000,000,000", "JPY", at: 11)
-        verifyCellExists("Debit Card", "2019-05-01T17:35:20", "₫1,000,000,000", "VND", at: 12)
+        verifyCellExists("Debit Card", "2019-05-01T17:35:20", "₫1.000.000.000,00", "VND", at: 12)
 
         transactionDetails.openReceipt(row: 2)
         waitForExistence(transactionDetails.detailHeaderTitle)
@@ -328,14 +328,27 @@ class ListReceiptTests: BaseTests {
                                       CurrencyCode.USD.0,
                                       at: 3)
         verifyCurrencyAndCurrencyCode("Payment", CurrencyCode.CAD.1 + "1,000,000,000.99", CurrencyCode.CAD.0, at: 4)
-        verifyCurrencyAndCurrencyCode("Payment", CurrencyCode.EURO.1 + "1,000,000,000.99", CurrencyCode.EURO.0, at: 5)
-        verifyCurrencyAndCurrencyCode("Payment", CurrencyCode.JOD.1 + " 1,000,000,000.990", CurrencyCode.JOD.0, at: 6)
-        verifyCurrencyAndCurrencyCode("Payment", CurrencyCode.ZAR.1 + " 1,000,000,000.00", CurrencyCode.ZAR.0, at: 7)
-        verifyCurrencyAndCurrencyCode("Payment", CurrencyCode.SEK.1 + " 10,000,000,000.00", CurrencyCode.SEK.0, at: 8)
-        verifyCurrencyAndCurrencyCode("Payment", CurrencyCode.TND.1 + "1,000,000,000.000", CurrencyCode.TND.0, at: 9)
-        verifyCurrencyAndCurrencyCode("PayPal", CurrencyCode.INR.1 + "1,000,000,000.99", CurrencyCode.INR.0, at: 10)
+        verifyCurrencyAndCurrencyCode("Payment", CurrencyCode.EURO.1 + "1.000.000.000,99", CurrencyCode.EURO.0, at: 5)
+        verifyCurrencyAndCurrencyCode("Payment", CurrencyCode.JOD.1 + "1,000,000,000.99", CurrencyCode.JOD.0, at: 6)
+        verifyCurrencyAndCurrencyCode("Payment", CurrencyCode.ZAR.1 + "1 000 000 000,00", CurrencyCode.ZAR.0, at: 7)
+        verifyCurrencyAndCurrencyCode("Payment", CurrencyCode.SEK.1 + "10 000 000 000,00", CurrencyCode.SEK.0, at: 8)
+        verifyCurrencyAndCurrencyCode("Payment", CurrencyCode.TND.1 + "1.000.000.000,000", CurrencyCode.TND.0, at: 9)
+        verifyCurrencyAndCurrencyCode("PayPal", CurrencyCode.INR.1 + "1,00,00,00,000.99", CurrencyCode.INR.0, at: 10)
         verifyCurrencyAndCurrencyCode("Debit Card", CurrencyCode.JPY.1 + "1,000,000,000", CurrencyCode.JPY.0, at: 11)
-        verifyCurrencyAndCurrencyCode("Debit Card", CurrencyCode.VND.1 + "1,000,000,000", CurrencyCode.VND.0, at: 12)
+        verifyCurrencyAndCurrencyCode("Debit Card", CurrencyCode.VND.1 + "1.000.000.000,00", CurrencyCode.VND.0, at: 12)
+    }
+    
+    // Verify text selection
+    func testReceiptDetail_verifyTextSelection() {
+        openUpReceiptsListScreenForFewMonths()
+        transactionDetails.openReceipt(row: 0)
+        waitForExistence(transactionDetails.detailHeaderTitle)
+
+        transactionDetails.receiptIdValue.press(forDuration: 1.0)
+        app.staticTexts["Copy"].tap()
+        sleep(1)
+        let copiedText = UIPasteboard.general.string
+        XCTAssert(copiedText == transactionDetails.receiptIdValue.label, "Data should be same")
     }
 
     // MARK: Helper methods
@@ -348,10 +361,11 @@ class ListReceiptTests: BaseTests {
     }
 
     private func verifyPayment(_ type: String, _ createdOn: String, _ amount: String, _ currency: String) {
-        let typeLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionTypeLabel"].label
-        let amountLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionAmountLabel"].label
-        let createdOnLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionCreatedOnLabel"].label
-        let currencyLabel = app.tables["receiptDetailTableView"].staticTexts["receiptTransactionCurrencyLabel"].label
+        let table = app.tables["receiptDetailTableView"]
+        let typeLabel = table.buttons["receiptTransactionTypeLabel"].label
+        let amountLabel = table.buttons["receiptTransactionAmountLabel"].label
+        let createdOnLabel = table.buttons["receiptTransactionCreatedOnLabel"].label
+        let currencyLabel = table.buttons["receiptTransactionCurrencyLabel"].label
 
         XCTAssertEqual(typeLabel, type)
         XCTAssertEqual(amountLabel, amount)

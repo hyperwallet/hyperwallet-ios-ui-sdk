@@ -60,8 +60,11 @@ extension TransferDestinationCell {
         textLabel?.text = transferMethod.title
         textLabel?.adjustsFontForContentSizeCategory = true
         textLabel?.accessibilityIdentifier = "transferDestinationTitleLabel"
+        let subTitle = transferMethod.isPrepaidCard() ?
+            transferMethod.transferMethodCurrency :
+            Locale.current.localizedString(forRegionCode: transferMethod.transferMethodCountry ?? "")
         detailTextLabel?.attributedText = formatDetails(
-            subtitle: Locale.current.localizedString(forRegionCode: transferMethod.transferMethodCountry ?? "") ?? "",
+            subtitle: subTitle ?? "",
             additionalInfo: transferMethod.value)
 
         detailTextLabel?.numberOfLines = 0
@@ -89,7 +92,7 @@ extension TransferDestinationCell {
         if !UIFont.isLargeSizeCategory {
             let icon = UIImage.fontIcon(hyperwalletIcon.rawValue,
                                         Theme.Icon.frame,
-                                        CGFloat(Theme.Icon.size),
+                                        CGFloat(Theme.Icon.addTransferMethodIconSize),
                                         Theme.Icon.primaryColor)
             imageView?.image = icon
             imageView?.layer.cornerRadius = CGFloat(Theme.Icon.frame.width / 2)

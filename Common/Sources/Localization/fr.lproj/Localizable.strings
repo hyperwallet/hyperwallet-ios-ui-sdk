@@ -53,7 +53,7 @@
 "error" = "Erreur";
 "authentication_error_title" = "Erreur d’authentification";
 "authentication_error_message" = "La tentative de récupération du jeton d’authentification a donné lieu à une erreur";
-
+"no_fee" = "Pas de frais";
 // Transfer methods
 "bank_account" = "Compte bancaire";
 "bank_card" = "Carte de débit";

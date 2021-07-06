@@ -53,6 +53,7 @@
 "error" = "Chyba";
 "authentication_error_title" = "Chyba ověření";
 "authentication_error_message" = "Pokus o načtení ověřovacího tokenu způsobil chybu";
+"no_fee" = "Bez poplatku";
 
 // Transfer methods
 "bank_account" = "Bankovní účet";

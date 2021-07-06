@@ -165,8 +165,8 @@ class TransferFunds {
         XCTAssertTrue(addSelectDestinationSectionLabel.exists)
         XCTAssertEqual(addSelectDestinationLabel.label, prepaidCard)
         let destinationDetail = addSelectDestinationDetailLabel.label
-        XCTAssertTrue(destinationDetail == "United States\n\(brandType)\(numberMask)\(endingDigit)"
-            || destinationDetail == "United States \(brandType)\(numberMask)\(endingDigit)")
+        XCTAssertTrue(destinationDetail == "USD\n\(brandType)\(numberMask)\(endingDigit)"
+            || destinationDetail == "USD \(brandType)\(numberMask)\(endingDigit)")
     }
 
     func getDestinationLabel(country: String, type: String, endingDigit: String) -> String {
@@ -195,8 +195,8 @@ class TransferFunds {
     }
 
     // Verify Transfer From Source Sub-title label
-    func verifyPPCInfo(brandType: String, endingDigit: String) {
-        let info = "\(brandType)\(numberMask)\(endingDigit)"
+    func verifyPPCInfo(brandType: String, endingDigit: String, currency: String) {
+        let info = "\(currency)\n\(brandType)\(numberMask)\(endingDigit)"
         XCTAssertEqual(transferSourceSubtitleLabel.label, info)
     }
 

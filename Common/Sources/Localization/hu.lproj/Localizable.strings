@@ -53,6 +53,7 @@
 "error" = "Hiba";
 "authentication_error_title" = "Hitelesítési hiba";
 "authentication_error_message" = "A hitelesítési token lehívási kísérlete hibát eredményezett";
+"no_fee" = "Nincs díj";
 
 // Transfer methods
 "bank_account" = "Bankszámla";

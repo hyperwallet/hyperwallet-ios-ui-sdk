@@ -53,6 +53,7 @@
 "error" = "Napaka";
 "authentication_error_title" = "Napaka pri avtentifikaciji";
 "authentication_error_message" = "Pri prevzemu žetona za avtentifikacijo je prišlo do napake";
+"no_fee" = "Brez pristojbine";
 
 // Transfer methods
 "bank_account" = "Bančni račun";
