@@ -37,6 +37,7 @@
 		09795B78229D7FE000EF407F /* ListTransferMethodResponseWithoutPayPalAccount.json in Resources */ = {isa = PBXBuildFile; fileRef = 09795B77229D7FDF00EF407F /* ListTransferMethodResponseWithoutPayPalAccount.json */; };
 		09E7165022A697C400FA9B96 /* ReceiptsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7164F22A697C400FA9B96 /* ReceiptsList.swift */; };
 		09E7165622A6983400FA9B96 /* ListReceiptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7165522A6983400FA9B96 /* ListReceiptTests.swift */; };
+		11D3D7D9282C519E00732AB4 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
 		189A0B0E257A172300D95D5B /* AddTransferMethodPaperCheckAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A0B0D257A172300D95D5B /* AddTransferMethodPaperCheckAccountTests.swift */; };
 		2BF9E5F822EF8BF200BB7DA5 /* TransferRepositoryFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF9E5F722EF8BF200BB7DA5 /* TransferRepositoryFactoryTests.swift */; };
 		2E16213423987284007E140D /* HyperwalletFieldResponseWithPattern.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E1621322398727E007E140D /* HyperwalletFieldResponseWithPattern.json */; };
@@ -186,8 +187,6 @@
 		980C2E9525224D8300DFDC94 /* GetPrepaidCardSuccessResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 980C2E9225224D6D00DFDC94 /* GetPrepaidCardSuccessResponse.json */; };
 		980C2E9625224F6E00DFDC94 /* PrepaidCardRepositoryRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980C2E8D25224C8200DFDC94 /* PrepaidCardRepositoryRequestHelper.swift */; };
 		980E7A312613BED800F0834B /* Swifter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; };
-		980E7A682613CB1200F0834B /* Swifter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; };
-		980E7A692613CB1200F0834B /* Swifter.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		983EF20F2526A950000A55B3 /* ListTransferDestinationPrepaidCardsOnly.json in Resources */ = {isa = PBXBuildFile; fileRef = 983EF20D2526A8EB000A55B3 /* ListTransferDestinationPrepaidCardsOnly.json */; };
 		984C47F22527E8A600CC442D /* PrepaidCardRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984C47F02527E89900CC442D /* PrepaidCardRepositoryTests.swift */; };
 		984C47F72527EC6100CC442D /* ListPrepaidCardResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 984C47F32527EC5C00CC442D /* ListPrepaidCardResponse.json */; };
@@ -196,22 +195,6 @@
 		984C47FD252BED9A00CC442D /* ListTransferSourcePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984C47FB252BED9200CC442D /* ListTransferSourcePresenterTests.swift */; };
 		9874E68124B3981F00E95F4F /* CountryCurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9874E68024B3981F00E95F4F /* CountryCurrencyCell.swift */; };
 		98A844EB2555CCAD00D7C265 /* Currency.json in Resources */ = {isa = PBXBuildFile; fileRef = 98A844EA2555CCAD00D7C265 /* Currency.json */; };
-		98CACE1A24A6CFD10000F2B0 /* Receipt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB99C2C822E220C200E45185 /* Receipt.framework */; };
-		98CACE1B24A6CFD10000F2B0 /* Receipt.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DB99C2C822E220C200E45185 /* Receipt.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		98CACE1C24A6CFD30000F2B0 /* ReceiptRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE6B6C022D605B20009DEFE /* ReceiptRepository.framework */; };
-		98CACE1D24A6CFD30000F2B0 /* ReceiptRepository.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE6B6C022D605B20009DEFE /* ReceiptRepository.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		98CACE1E24A6CFD40000F2B0 /* Transfer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A9A7BDF22E859E60022E573 /* Transfer.framework */; };
-		98CACE1F24A6CFD40000F2B0 /* Transfer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A9A7BDF22E859E60022E573 /* Transfer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		98CACE2024A6CFD50000F2B0 /* TransferMethod.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB551FA722E1409700DD65C2 /* TransferMethod.framework */; };
-		98CACE2124A6CFD60000F2B0 /* TransferMethod.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DB551FA722E1409700DD65C2 /* TransferMethod.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		98CACE2224A6CFD70000F2B0 /* TransferMethodRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBAF929D22CFCBC7004F197A /* TransferMethodRepository.framework */; };
-		98CACE2324A6CFD70000F2B0 /* TransferMethodRepository.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DBAF929D22CFCBC7004F197A /* TransferMethodRepository.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		98CACE2424A6CFD80000F2B0 /* TransferRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 073BB98222E63DB50053C24E /* TransferRepository.framework */; };
-		98CACE2524A6CFD80000F2B0 /* TransferRepository.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 073BB98222E63DB50053C24E /* TransferRepository.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		98CACE2624A6CFDA0000F2B0 /* UserRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 643912D422DF40CB00036609 /* UserRepository.framework */; };
-		98CACE2724A6CFDA0000F2B0 /* UserRepository.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 643912D422DF40CB00036609 /* UserRepository.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		98DAF67D24B7E33600A8D7CA /* Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB551F4922E1316400DD65C2 /* Common.framework */; };
-		98DAF67E24B7E33600A8D7CA /* Common.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DB551F4922E1316400DD65C2 /* Common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		98DC5D512526A39A00729477 /* GetPrepaidCardSuccessResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98DC5D502526A39A00729477 /* GetPrepaidCardSuccessResponse.json */; };
 		98EDBF8E2474649D008A4015 /* PrepaidCardReceiptResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98EDBF89247451C0008A4015 /* PrepaidCardReceiptResponse.json */; };
 		98EDBF8F247464A1008A4015 /* UserReceiptResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98EDBF8A247451C0008A4015 /* UserReceiptResponse.json */; };
@@ -432,8 +415,6 @@
 		DCF74266257E2F7400A5295A /* PaperCheckReceiptsForFewMonths.json in Resources */ = {isa = PBXBuildFile; fileRef = DCF74265257E2F7400A5295A /* PaperCheckReceiptsForFewMonths.json */; };
 		DCF74268257E305600A5295A /* ListTransferMethodResponsePaperCheck.json in Resources */ = {isa = PBXBuildFile; fileRef = DCF74267257E305600A5295A /* ListTransferMethodResponsePaperCheck.json */; };
 		DCF7426A257E68F500A5295A /* ListTransferMethodResponseWithoutPaperCheck.json in Resources */ = {isa = PBXBuildFile; fileRef = DCF74269257E68F500A5295A /* ListTransferMethodResponseWithoutPaperCheck.json */; };
-		FD03135125E4E97200505BDA /* Insights.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD4872FE25DE97BB005855B6 /* Insights.xcframework */; };
-		FD03135225E4E97200505BDA /* Insights.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD4872FE25DE97BB005855B6 /* Insights.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FD03136425E4EA2600505BDA /* Hippolyte.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD03133D25E4E96700505BDA /* Hippolyte.xcframework */; };
 		FD03137625E4EA3600505BDA /* Hippolyte.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD03133D25E4E96700505BDA /* Hippolyte.xcframework */; };
 		FD03138825E4EA4E00505BDA /* Hippolyte.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD03133D25E4E96700505BDA /* Hippolyte.xcframework */; };
@@ -443,8 +424,6 @@
 		FD0313D025E4EA9B00505BDA /* Hippolyte.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD03133D25E4E96700505BDA /* Hippolyte.xcframework */; };
 		FD0313E225E4EAA300505BDA /* Hippolyte.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD03133D25E4E96700505BDA /* Hippolyte.xcframework */; };
 		FD09389525EE252E00AAA29B /* BalanceRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = FD09389325EE252E00AAA29B /* BalanceRepository.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FD09389825EE252E00AAA29B /* BalanceRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD09389125EE252E00AAA29B /* BalanceRepository.framework */; };
-		FD09389925EE252E00AAA29B /* BalanceRepository.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD09389125EE252E00AAA29B /* BalanceRepository.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FD0938B325EE279700AAA29B /* BalanceRepositoryFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0938B025EE279700AAA29B /* BalanceRepositoryFactory.swift */; };
 		FD0938B425EE279700AAA29B /* UserBalanceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0938B125EE279700AAA29B /* UserBalanceRepository.swift */; };
 		FD0938B525EE279700AAA29B /* PrepaidCardBalanceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0938B225EE279700AAA29B /* PrepaidCardBalanceRepository.swift */; };
@@ -458,17 +437,6 @@
 		FD4842D325EF83C700CB8B36 /* HyperwalletTestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB551FE422E1447B00DD65C2 /* HyperwalletTestHelper.swift */; };
 		FD4842F825EF99BF00CB8B36 /* AuthenticationTokenGeneratorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB551FE522E1447B00DD65C2 /* AuthenticationTokenGeneratorMock.swift */; };
 		FD48430B25EF99D600CB8B36 /* AuthenticationProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB551FE622E1447B00DD65C2 /* AuthenticationProviderMock.swift */; };
-		FD48726E25DE975D005855B6 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
-		FD48728025DE9770005855B6 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
-		FD48729225DE9787005855B6 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
-		FD4872A425DE978C005855B6 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
-		FD4872B625DE9793005855B6 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
-		FD4872C825DE9797005855B6 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
-		FD4872DA25DE979C005855B6 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
-		FD4872EC25DE97A1005855B6 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
-		FD4872FF25DE97BB005855B6 /* Insights.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD4872FE25DE97BB005855B6 /* Insights.xcframework */; };
-		FD48732325DE98D6005855B6 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
-		FD48732425DE98D6005855B6 /* HyperwalletSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FD5066242538238900640B36 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3839225E8BA900CD4137 /* UIImage.swift */; };
 		FD5066252538239100640B36 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B39E00DE24B4FB0A00E3BC4D /* icomoon.ttf */; platformFilter = ios; };
 		FD50662725382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json in Resources */ = {isa = PBXBuildFile; fileRef = FD50662625382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json */; };
@@ -479,7 +447,6 @@
 		FD8EA36B258119BB003CC5E8 /* UpdateTransferMethodButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8EA36A258119BB003CC5E8 /* UpdateTransferMethodButtonCell.swift */; };
 		FD95092D25EE2F9400585046 /* ListBalancesResponseSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = FD95091625EE2F4C00585046 /* ListBalancesResponseSuccess.json */; };
 		FD95098E25EE2F9C00585046 /* PrepaidCardBalanceResponseSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = FD95091525EE2F4C00585046 /* PrepaidCardBalanceResponseSuccess.json */; };
-		FD9509F125EE31EA00585046 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
 		FD9C483B258791AC00344E93 /* TransferMethodUpdateConfigurationFieldsBankAccountResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = FD9C483925878E6100344E93 /* TransferMethodUpdateConfigurationFieldsBankAccountResponse.json */; };
 		FD9C48462587A2E000344E93 /* BankCardUpdateResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = FD9C48452587A2E000344E93 /* BankCardUpdateResponse.json */; };
 		FDB2EF2626033A77000B4218 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB2EF2526033A77000B4218 /* UILabel.swift */; };
@@ -612,62 +579,6 @@
 			remoteGlobalIDString = 643912D322DF40CB00036609;
 			remoteInfo = UserRepository;
 		};
-		98FBC6E323D90A240050E2B6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DB551F4822E1316400DD65C2;
-			remoteInfo = Common;
-		};
-		98FBC6E723D90A240050E2B6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DB99C2C722E220C200E45185;
-			remoteInfo = Receipt;
-		};
-		98FBC6EB23D90A240050E2B6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4AE6B6BF22D605B20009DEFE;
-			remoteInfo = ReceiptRepository;
-		};
-		98FBC6EF23D90A240050E2B6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4A9A7BDE22E859E60022E573;
-			remoteInfo = Transfer;
-		};
-		98FBC6F323D90A250050E2B6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DB551FA622E1409700DD65C2;
-			remoteInfo = TransferMethod;
-		};
-		98FBC6F723D90A250050E2B6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DBAF929C22CFCBC7004F197A;
-			remoteInfo = TransferMethodRepository;
-		};
-		98FBC6FB23D90A250050E2B6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 073BB98122E63DB50053C24E;
-			remoteInfo = TransferRepository;
-		};
-		98FBC6FF23D90A250050E2B6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 643912D322DF40CB00036609;
-			remoteInfo = UserRepository;
-		};
 		DB2588002261BFF100E6236B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
@@ -703,13 +614,6 @@
 			remoteGlobalIDString = DB551F4822E1316400DD65C2;
 			remoteInfo = Common;
 		};
-		FD09389625EE252E00AAA29B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FD09389025EE252E00AAA29B;
-			remoteInfo = BalanceRepository;
-		};
 		FD48435C25EFD02E00CB8B36 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
@@ -725,31 +629,6 @@
 			remoteInfo = BalanceRepository;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		98CACE1724A6CFCC0000F2B0 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				FD09389925EE252E00AAA29B /* BalanceRepository.framework in Embed Frameworks */,
-				98CACE2124A6CFD60000F2B0 /* TransferMethod.framework in Embed Frameworks */,
-				98CACE2724A6CFDA0000F2B0 /* UserRepository.framework in Embed Frameworks */,
-				98CACE1B24A6CFD10000F2B0 /* Receipt.framework in Embed Frameworks */,
-				98CACE1D24A6CFD30000F2B0 /* ReceiptRepository.framework in Embed Frameworks */,
-				FD03135225E4E97200505BDA /* Insights.xcframework in Embed Frameworks */,
-				980E7A692613CB1200F0834B /* Swifter.xcframework in Embed Frameworks */,
-				FD48732425DE98D6005855B6 /* HyperwalletSDK.xcframework in Embed Frameworks */,
-				98CACE2524A6CFD80000F2B0 /* TransferRepository.framework in Embed Frameworks */,
-				98DAF67E24B7E33600A8D7CA /* Common.framework in Embed Frameworks */,
-				98CACE2324A6CFD70000F2B0 /* TransferMethodRepository.framework in Embed Frameworks */,
-				98CACE1F24A6CFD40000F2B0 /* Transfer.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0702673A22B308B60057D62B /* PrepaidCardReceiptResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardReceiptResponse.json; sourceTree = "<group>"; };
@@ -1312,7 +1191,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD4872DA25DE979C005855B6 /* HyperwalletSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1329,7 +1207,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD4872A425DE978C005855B6 /* HyperwalletSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1346,7 +1223,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD48729225DE9787005855B6 /* HyperwalletSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1363,7 +1239,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD4872EC25DE97A1005855B6 /* HyperwalletSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1388,18 +1263,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD09389825EE252E00AAA29B /* BalanceRepository.framework in Frameworks */,
-				98CACE1C24A6CFD30000F2B0 /* ReceiptRepository.framework in Frameworks */,
-				98CACE2624A6CFDA0000F2B0 /* UserRepository.framework in Frameworks */,
-				98CACE2224A6CFD70000F2B0 /* TransferMethodRepository.framework in Frameworks */,
-				98CACE2424A6CFD80000F2B0 /* TransferRepository.framework in Frameworks */,
-				FD03135125E4E97200505BDA /* Insights.xcframework in Frameworks */,
-				980E7A682613CB1200F0834B /* Swifter.xcframework in Frameworks */,
-				98CACE2024A6CFD50000F2B0 /* TransferMethod.framework in Frameworks */,
-				98DAF67D24B7E33600A8D7CA /* Common.framework in Frameworks */,
-				98CACE1E24A6CFD40000F2B0 /* Transfer.framework in Frameworks */,
-				FD48732325DE98D6005855B6 /* HyperwalletSDK.xcframework in Frameworks */,
-				98CACE1A24A6CFD10000F2B0 /* Receipt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1407,8 +1270,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD48726E25DE975D005855B6 /* HyperwalletSDK.xcframework in Frameworks */,
-				FD4872FF25DE97BB005855B6 /* Insights.xcframework in Frameworks */,
+				11D3D7D9282C519E00732AB4 /* HyperwalletSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1425,7 +1287,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD4872B625DE9793005855B6 /* HyperwalletSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1442,7 +1303,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD48728025DE9770005855B6 /* HyperwalletSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1459,7 +1319,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD4872C825DE9797005855B6 /* HyperwalletSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1476,7 +1335,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD9509F125EE31EA00585046 /* HyperwalletSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2930,20 +2788,10 @@
 				DB46797E2260380C00E1AF49 /* Sources */,
 				DB46797F2260380C00E1AF49 /* Frameworks */,
 				DB4679802260380C00E1AF49 /* Resources */,
-				98CACE1724A6CFCC0000F2B0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				98FBC6E423D90A240050E2B6 /* PBXTargetDependency */,
-				98FBC6E823D90A240050E2B6 /* PBXTargetDependency */,
-				98FBC6EC23D90A240050E2B6 /* PBXTargetDependency */,
-				98FBC6F023D90A250050E2B6 /* PBXTargetDependency */,
-				98FBC6F423D90A250050E2B6 /* PBXTargetDependency */,
-				98FBC6F823D90A250050E2B6 /* PBXTargetDependency */,
-				98FBC6FC23D90A250050E2B6 /* PBXTargetDependency */,
-				98FBC70023D90A250050E2B6 /* PBXTargetDependency */,
-				FD09389725EE252E00AAA29B /* PBXTargetDependency */,
 			);
 			name = Demo;
 			productName = Demo;
@@ -4262,46 +4110,6 @@
 			target = 643912D322DF40CB00036609 /* UserRepository */;
 			targetProxy = 98FBC6AC23D8D9310050E2B6 /* PBXContainerItemProxy */;
 		};
-		98FBC6E423D90A240050E2B6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DB551F4822E1316400DD65C2 /* Common */;
-			targetProxy = 98FBC6E323D90A240050E2B6 /* PBXContainerItemProxy */;
-		};
-		98FBC6E823D90A240050E2B6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DB99C2C722E220C200E45185 /* Receipt */;
-			targetProxy = 98FBC6E723D90A240050E2B6 /* PBXContainerItemProxy */;
-		};
-		98FBC6EC23D90A240050E2B6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4AE6B6BF22D605B20009DEFE /* ReceiptRepository */;
-			targetProxy = 98FBC6EB23D90A240050E2B6 /* PBXContainerItemProxy */;
-		};
-		98FBC6F023D90A250050E2B6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4A9A7BDE22E859E60022E573 /* Transfer */;
-			targetProxy = 98FBC6EF23D90A240050E2B6 /* PBXContainerItemProxy */;
-		};
-		98FBC6F423D90A250050E2B6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DB551FA622E1409700DD65C2 /* TransferMethod */;
-			targetProxy = 98FBC6F323D90A250050E2B6 /* PBXContainerItemProxy */;
-		};
-		98FBC6F823D90A250050E2B6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DBAF929C22CFCBC7004F197A /* TransferMethodRepository */;
-			targetProxy = 98FBC6F723D90A250050E2B6 /* PBXContainerItemProxy */;
-		};
-		98FBC6FC23D90A250050E2B6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 073BB98122E63DB50053C24E /* TransferRepository */;
-			targetProxy = 98FBC6FB23D90A250050E2B6 /* PBXContainerItemProxy */;
-		};
-		98FBC70023D90A250050E2B6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 643912D322DF40CB00036609 /* UserRepository */;
-			targetProxy = 98FBC6FF23D90A250050E2B6 /* PBXContainerItemProxy */;
-		};
 		DB2588012261BFF100E6236B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DB4679812260380C00E1AF49 /* Demo */;
@@ -4326,11 +4134,6 @@
 			isa = PBXTargetDependency;
 			target = DB551F4822E1316400DD65C2 /* Common */;
 			targetProxy = DBC199D722E298E2004447DD /* PBXContainerItemProxy */;
-		};
-		FD09389725EE252E00AAA29B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = FD09389025EE252E00AAA29B /* BalanceRepository */;
-			targetProxy = FD09389625EE252E00AAA29B /* PBXContainerItemProxy */;
 		};
 		FD48435D25EFD02E00CB8B36 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -4473,7 +4276,6 @@
 		073BB99322E63DB50053C24E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -4485,7 +4287,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = TransferRepository/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4507,7 +4309,6 @@
 		073BB99422E63DB50053C24E /* XCUITest */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -4519,7 +4320,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = TransferRepository/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4540,7 +4341,6 @@
 		073BB99522E63DB50053C24E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -4552,7 +4352,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = TransferRepository/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4577,7 +4377,7 @@
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = TransferRepository/Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4600,7 +4400,7 @@
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = TransferRepository/Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4623,7 +4423,7 @@
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = TransferRepository/Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4642,7 +4442,6 @@
 		4A9A7BF122E859E60022E573 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
@@ -4654,7 +4453,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Transfer/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4677,7 +4476,6 @@
 		4A9A7BF222E859E60022E573 /* XCUITest */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
@@ -4689,7 +4487,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Transfer/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4711,7 +4509,6 @@
 		4A9A7BF322E859E60022E573 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
@@ -4723,7 +4520,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Transfer/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4748,7 +4545,7 @@
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Transfer/Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4771,7 +4568,7 @@
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Transfer/Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4794,7 +4591,7 @@
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Transfer/Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4813,7 +4610,6 @@
 		4AE6B6D222D605B20009DEFE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -4824,7 +4620,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = ReceiptRepository/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4846,7 +4642,6 @@
 		4AE6B6D322D605B20009DEFE /* XCUITest */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -4857,7 +4652,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = ReceiptRepository/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4878,7 +4673,6 @@
 		4AE6B6D422D605B20009DEFE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -4889,7 +4683,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = ReceiptRepository/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4912,7 +4706,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = ReceiptRepository/Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4934,7 +4728,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = ReceiptRepository/Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4956,7 +4750,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = ReceiptRepository/Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4975,7 +4769,6 @@
 		643912E522DF40CB00036609 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -4987,7 +4780,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = UserRepository/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5008,7 +4801,6 @@
 		643912E622DF40CB00036609 /* XCUITest */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -5020,7 +4812,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = UserRepository/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5040,7 +4832,6 @@
 		643912E722DF40CB00036609 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -5052,7 +4843,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = UserRepository/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5076,7 +4867,7 @@
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = UserRepository/Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5097,7 +4888,7 @@
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = UserRepository/Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5118,7 +4909,7 @@
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = UserRepository/Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5143,7 +4934,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = UITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5171,7 +4962,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = UITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5191,7 +4982,6 @@
 		DB4679912260380D00E1AF49 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BASE_URL = "http://localhost:8080";
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -5200,7 +4990,7 @@
 				DEVELOPMENT_TEAM = 86FDS64Z83;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Demo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5222,7 +5012,6 @@
 		DB4679922260380D00E1AF49 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BASE_URL = "http://localhost:8080";
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -5231,7 +5020,7 @@
 				DEVELOPMENT_TEAM = 86FDS64Z83;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Demo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5252,7 +5041,6 @@
 		DB551F5A22E1316400DD65C2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -5264,7 +5052,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Common/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5285,7 +5073,6 @@
 		DB551F5B22E1316400DD65C2 /* XCUITest */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -5297,7 +5084,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Common/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5317,7 +5104,6 @@
 		DB551F5C22E1316400DD65C2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -5329,7 +5115,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Common/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5352,7 +5138,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Common/Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5374,7 +5160,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Common/Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5396,7 +5182,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Common/Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5415,7 +5201,6 @@
 		DB551FB922E1409700DD65C2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -5426,7 +5211,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = TransferMethod/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5447,7 +5232,6 @@
 		DB551FBA22E1409700DD65C2 /* XCUITest */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -5458,7 +5242,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = TransferMethod/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5478,7 +5262,6 @@
 		DB551FBB22E1409700DD65C2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -5489,7 +5272,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = TransferMethod/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5513,7 +5296,7 @@
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = TransferMethod/Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5536,7 +5319,7 @@
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = TransferMethod/Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5559,7 +5342,7 @@
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = TransferMethod/Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5629,7 +5412,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -5653,7 +5436,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = UITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5673,7 +5456,6 @@
 		DB5E931A2261C3CC00CD57F6 /* XCUITest */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BASE_URL = "http://localhost:8080";
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -5682,7 +5464,7 @@
 				DEVELOPMENT_TEAM = 86FDS64Z83;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Demo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5703,7 +5485,6 @@
 		DB99C2DA22E220C200E45185 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -5714,7 +5495,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Receipt/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5736,7 +5517,6 @@
 		DB99C2DB22E220C200E45185 /* XCUITest */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -5747,7 +5527,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Receipt/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5768,7 +5548,6 @@
 		DB99C2DC22E220C200E45185 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -5779,7 +5558,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Receipt/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5804,7 +5583,7 @@
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Receipt/Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5827,7 +5606,7 @@
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Receipt/Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5850,7 +5629,7 @@
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Receipt/Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5869,7 +5648,6 @@
 		DBAF92AF22CFCBC7004F197A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -5881,7 +5659,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = TransferMethodRepository/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5902,7 +5680,6 @@
 		DBAF92B022CFCBC7004F197A /* XCUITest */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -5914,7 +5691,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = TransferMethodRepository/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5934,7 +5711,6 @@
 		DBAF92B122CFCBC7004F197A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -5946,7 +5722,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = TransferMethodRepository/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5970,7 +5746,7 @@
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = TransferMethodRepository/Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5993,7 +5769,7 @@
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = TransferMethodRepository/Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -6016,7 +5792,7 @@
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = TransferMethodRepository/Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -6086,7 +5862,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -6147,7 +5923,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -6163,7 +5939,6 @@
 		FD09389B25EE252E00AAA29B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -6177,7 +5952,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = BalanceRepository/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -6198,7 +5973,6 @@
 		FD09389C25EE252E00AAA29B /* XCUITest */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -6212,7 +5986,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = BalanceRepository/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -6232,7 +6006,6 @@
 		FD09389D25EE252E00AAA29B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -6246,7 +6019,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = BalanceRepository/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -6269,7 +6042,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = BalanceRepository/Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -6289,7 +6062,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = BalanceRepository/Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -6309,7 +6082,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = BalanceRepository/Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
