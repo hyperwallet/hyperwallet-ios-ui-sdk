@@ -39,6 +39,14 @@
 		09E7165622A6983400FA9B96 /* ListReceiptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7165522A6983400FA9B96 /* ListReceiptTests.swift */; };
 		11D3D7D9282C519E00732AB4 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
 		11D3D7DC282C525D00732AB4 /* Insights.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD4872FE25DE97BB005855B6 /* Insights.xcframework */; };
+		11D3D7DF282C540200732AB4 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
+		11D3D7E2282C542000732AB4 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
+		11D3D7E5282C543D00732AB4 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
+		11D3D7E8282C545300732AB4 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
+		11D3D7EB282C546C00732AB4 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
+		11D3D7EE282C548600732AB4 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
+		11D3D7F1282C549900732AB4 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
+		11D3D7F4282C54A800732AB4 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
 		189A0B0E257A172300D95D5B /* AddTransferMethodPaperCheckAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A0B0D257A172300D95D5B /* AddTransferMethodPaperCheckAccountTests.swift */; };
 		2BF9E5F822EF8BF200BB7DA5 /* TransferRepositoryFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF9E5F722EF8BF200BB7DA5 /* TransferRepositoryFactoryTests.swift */; };
 		2E16213423987284007E140D /* HyperwalletFieldResponseWithPattern.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E1621322398727E007E140D /* HyperwalletFieldResponseWithPattern.json */; };
@@ -698,7 +706,6 @@
 		2E4D6CAC23679AB400916CDD /* HyperwalletInsights.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletInsights.swift; sourceTree = "<group>"; };
 		2E6DBB8A2326F0F800863672 /* AvailableFundMultiCurrenciesFxChange.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AvailableFundMultiCurrenciesFxChange.json; sourceTree = "<group>"; };
 		2E8AFE5B2307668F002B6D24 /* HyperwalletCoordinatorTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletCoordinatorTypes.swift; sourceTree = "<group>"; };
-		2EBD0C682375FAE400569342 /* Insights.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Insights.framework; path = Carthage/Build/iOS/Insights.framework; sourceTree = "<group>"; };
 		2EF70C53237CDEAE007E3844 /* HyperwalletFieldResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = HyperwalletFieldResponse.json; sourceTree = "<group>"; };
 		2EF70C6E237F543F007E3844 /* HyperwalletInsightsMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyperwalletInsightsMock.swift; sourceTree = "<group>"; };
 		412F723222B458C700837F8F /* TransactionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetails.swift; sourceTree = "<group>"; };
@@ -856,7 +863,6 @@
 		98F63E6C2284AD330090101D /* PayPalAccountDuplicateResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PayPalAccountDuplicateResponse.json; sourceTree = "<group>"; };
 		98F63E712284B4AF0090101D /* TransferMethodConfigurationPayPalAccountResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TransferMethodConfigurationPayPalAccountResponse.json; sourceTree = "<group>"; };
 		98F63E732284EE890090101D /* PayPalAccountResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PayPalAccountResponse.json; sourceTree = "<group>"; };
-		98FBC68923D8D8D90050E2B6 /* HyperwalletSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HyperwalletSDK.framework; path = Carthage/Build/iOS/HyperwalletSDK.framework; sourceTree = "<group>"; };
 		98FD2947256ECBAA0019C7F0 /* PrepaidCardRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrepaidCardRepository.swift; sourceTree = "<group>"; };
 		A65312CA22FC037800A83D30 /* HyperwalletCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyperwalletCoordinator.swift; sourceTree = "<group>"; };
 		A65312CB22FC037800A83D30 /* InitializationDataField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitializationDataField.swift; sourceTree = "<group>"; };
@@ -1192,6 +1198,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11D3D7EE282C548600732AB4 /* HyperwalletSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1208,6 +1215,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11D3D7E5282C543D00732AB4 /* HyperwalletSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1224,6 +1232,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11D3D7E2282C542000732AB4 /* HyperwalletSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1240,6 +1249,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11D3D7F1282C549900732AB4 /* HyperwalletSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1289,6 +1299,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11D3D7E8282C545300732AB4 /* HyperwalletSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1305,6 +1316,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11D3D7DF282C540200732AB4 /* HyperwalletSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1321,6 +1333,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11D3D7EB282C546C00732AB4 /* HyperwalletSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1337,6 +1350,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11D3D7F4282C54A800732AB4 /* HyperwalletSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2225,8 +2239,6 @@
 				FD03133D25E4E96700505BDA /* Hippolyte.xcframework */,
 				FD4872FE25DE97BB005855B6 /* Insights.xcframework */,
 				FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */,
-				98FBC68923D8D8D90050E2B6 /* HyperwalletSDK.framework */,
-				2EBD0C682375FAE400569342 /* Insights.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
