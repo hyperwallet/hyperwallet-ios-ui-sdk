@@ -1,2 +1,2 @@
-github "hyperwallet/hyperwallet-ios-sdk" "feature/DTONBWTWO-701-update-ios-min-version"
-github "hyperwallet/hyperwallet-ios-insight" "feature/DTONBWTWO-703-update-ios-min-version"
+github "hyperwallet/hyperwallet-ios-sdk" "1.0.0-beta16"
+github "hyperwallet/hyperwallet-ios-insight" "1.0.0-beta05"
