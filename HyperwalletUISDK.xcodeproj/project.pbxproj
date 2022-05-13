@@ -37,6 +37,30 @@
 		09795B78229D7FE000EF407F /* ListTransferMethodResponseWithoutPayPalAccount.json in Resources */ = {isa = PBXBuildFile; fileRef = 09795B77229D7FDF00EF407F /* ListTransferMethodResponseWithoutPayPalAccount.json */; };
 		09E7165022A697C400FA9B96 /* ReceiptsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7164F22A697C400FA9B96 /* ReceiptsList.swift */; };
 		09E7165622A6983400FA9B96 /* ListReceiptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7165522A6983400FA9B96 /* ListReceiptTests.swift */; };
+		11572910282C9976000686C7 /* BalanceRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD09389125EE252E00AAA29B /* BalanceRepository.framework */; platformFilter = ios; };
+		11572911282C9976000686C7 /* BalanceRepository.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD09389125EE252E00AAA29B /* BalanceRepository.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		11572914282C9976000686C7 /* Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB551F4922E1316400DD65C2 /* Common.framework */; platformFilter = ios; };
+		11572915282C9977000686C7 /* Common.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DB551F4922E1316400DD65C2 /* Common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		11572918282C9977000686C7 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
+		11572919282C9977000686C7 /* HyperwalletSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1157291A282C9977000686C7 /* Insights.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD4872FE25DE97BB005855B6 /* Insights.xcframework */; };
+		1157291B282C9977000686C7 /* Insights.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD4872FE25DE97BB005855B6 /* Insights.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1157291C282C9977000686C7 /* Receipt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB99C2C822E220C200E45185 /* Receipt.framework */; };
+		1157291D282C9977000686C7 /* Receipt.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DB99C2C822E220C200E45185 /* Receipt.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		11572920282C9977000686C7 /* ReceiptRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE6B6C022D605B20009DEFE /* ReceiptRepository.framework */; platformFilter = ios; };
+		11572921282C9977000686C7 /* ReceiptRepository.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE6B6C022D605B20009DEFE /* ReceiptRepository.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		11572924282C9977000686C7 /* Swifter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; };
+		11572925282C9977000686C7 /* Swifter.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		11572926282C9977000686C7 /* Transfer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A9A7BDF22E859E60022E573 /* Transfer.framework */; };
+		11572927282C9977000686C7 /* Transfer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A9A7BDF22E859E60022E573 /* Transfer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1157292A282C9977000686C7 /* TransferMethod.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB551FA722E1409700DD65C2 /* TransferMethod.framework */; };
+		1157292B282C9977000686C7 /* TransferMethod.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DB551FA722E1409700DD65C2 /* TransferMethod.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1157292E282C9977000686C7 /* TransferMethodRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBAF929D22CFCBC7004F197A /* TransferMethodRepository.framework */; platformFilter = ios; };
+		1157292F282C9977000686C7 /* TransferMethodRepository.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DBAF929D22CFCBC7004F197A /* TransferMethodRepository.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		11572932282C9977000686C7 /* TransferRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 073BB98222E63DB50053C24E /* TransferRepository.framework */; platformFilter = ios; };
+		11572933282C9977000686C7 /* TransferRepository.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 073BB98222E63DB50053C24E /* TransferRepository.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		11572936282C9977000686C7 /* UserRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 643912D422DF40CB00036609 /* UserRepository.framework */; platformFilter = ios; };
+		11572937282C9977000686C7 /* UserRepository.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 643912D422DF40CB00036609 /* UserRepository.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		11D3D7D9282C519E00732AB4 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
 		11D3D7DC282C525D00732AB4 /* Insights.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD4872FE25DE97BB005855B6 /* Insights.xcframework */; };
 		11D3D7DF282C540200732AB4 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
@@ -497,6 +521,69 @@
 			remoteGlobalIDString = 073BB98122E63DB50053C24E;
 			remoteInfo = TransferRepository;
 		};
+		11572912282C9976000686C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FD09389025EE252E00AAA29B;
+			remoteInfo = BalanceRepository;
+		};
+		11572916282C9977000686C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB551F4822E1316400DD65C2;
+			remoteInfo = Common;
+		};
+		1157291E282C9977000686C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB99C2C722E220C200E45185;
+			remoteInfo = Receipt;
+		};
+		11572922282C9977000686C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4AE6B6BF22D605B20009DEFE;
+			remoteInfo = ReceiptRepository;
+		};
+		11572928282C9977000686C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4A9A7BDE22E859E60022E573;
+			remoteInfo = Transfer;
+		};
+		1157292C282C9977000686C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB551FA622E1409700DD65C2;
+			remoteInfo = TransferMethod;
+		};
+		11572930282C9977000686C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DBAF929C22CFCBC7004F197A;
+			remoteInfo = TransferMethodRepository;
+		};
+		11572934282C9977000686C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 073BB98122E63DB50053C24E;
+			remoteInfo = TransferRepository;
+		};
+		11572938282C9977000686C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 643912D322DF40CB00036609;
+			remoteInfo = UserRepository;
+		};
 		4A9A7BE922E859E60022E573 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBCA37EC225E892400CD4137 /* Project object */;
@@ -638,6 +725,31 @@
 			remoteInfo = BalanceRepository;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1157293A282C9977000686C7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1157291B282C9977000686C7 /* Insights.xcframework in Embed Frameworks */,
+				11572921282C9977000686C7 /* ReceiptRepository.framework in Embed Frameworks */,
+				1157292F282C9977000686C7 /* TransferMethodRepository.framework in Embed Frameworks */,
+				11572911282C9976000686C7 /* BalanceRepository.framework in Embed Frameworks */,
+				11572933282C9977000686C7 /* TransferRepository.framework in Embed Frameworks */,
+				11572927282C9977000686C7 /* Transfer.framework in Embed Frameworks */,
+				11572925282C9977000686C7 /* Swifter.xcframework in Embed Frameworks */,
+				11572919282C9977000686C7 /* HyperwalletSDK.xcframework in Embed Frameworks */,
+				1157292B282C9977000686C7 /* TransferMethod.framework in Embed Frameworks */,
+				1157291D282C9977000686C7 /* Receipt.framework in Embed Frameworks */,
+				11572915282C9977000686C7 /* Common.framework in Embed Frameworks */,
+				11572937282C9977000686C7 /* UserRepository.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0702673A22B308B60057D62B /* PrepaidCardReceiptResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PrepaidCardReceiptResponse.json; sourceTree = "<group>"; };
@@ -1274,6 +1386,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1157291A282C9977000686C7 /* Insights.xcframework in Frameworks */,
+				11572920282C9977000686C7 /* ReceiptRepository.framework in Frameworks */,
+				1157292E282C9977000686C7 /* TransferMethodRepository.framework in Frameworks */,
+				11572910282C9976000686C7 /* BalanceRepository.framework in Frameworks */,
+				11572932282C9977000686C7 /* TransferRepository.framework in Frameworks */,
+				11572926282C9977000686C7 /* Transfer.framework in Frameworks */,
+				11572924282C9977000686C7 /* Swifter.xcframework in Frameworks */,
+				11572918282C9977000686C7 /* HyperwalletSDK.xcframework in Frameworks */,
+				1157292A282C9977000686C7 /* TransferMethod.framework in Frameworks */,
+				1157291C282C9977000686C7 /* Receipt.framework in Frameworks */,
+				11572914282C9976000686C7 /* Common.framework in Frameworks */,
+				11572936282C9977000686C7 /* UserRepository.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2802,10 +2926,20 @@
 				DB46797E2260380C00E1AF49 /* Sources */,
 				DB46797F2260380C00E1AF49 /* Frameworks */,
 				DB4679802260380C00E1AF49 /* Resources */,
+				1157293A282C9977000686C7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				11572913282C9976000686C7 /* PBXTargetDependency */,
+				11572917282C9977000686C7 /* PBXTargetDependency */,
+				1157291F282C9977000686C7 /* PBXTargetDependency */,
+				11572923282C9977000686C7 /* PBXTargetDependency */,
+				11572929282C9977000686C7 /* PBXTargetDependency */,
+				1157292D282C9977000686C7 /* PBXTargetDependency */,
+				11572931282C9977000686C7 /* PBXTargetDependency */,
+				11572935282C9977000686C7 /* PBXTargetDependency */,
+				11572939282C9977000686C7 /* PBXTargetDependency */,
 			);
 			name = Demo;
 			productName = Demo;
@@ -4049,6 +4183,57 @@
 			isa = PBXTargetDependency;
 			target = 073BB98122E63DB50053C24E /* TransferRepository */;
 			targetProxy = 073BB98C22E63DB50053C24E /* PBXContainerItemProxy */;
+		};
+		11572913282C9976000686C7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = FD09389025EE252E00AAA29B /* BalanceRepository */;
+			targetProxy = 11572912282C9976000686C7 /* PBXContainerItemProxy */;
+		};
+		11572917282C9977000686C7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = DB551F4822E1316400DD65C2 /* Common */;
+			targetProxy = 11572916282C9977000686C7 /* PBXContainerItemProxy */;
+		};
+		1157291F282C9977000686C7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB99C2C722E220C200E45185 /* Receipt */;
+			targetProxy = 1157291E282C9977000686C7 /* PBXContainerItemProxy */;
+		};
+		11572923282C9977000686C7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = 4AE6B6BF22D605B20009DEFE /* ReceiptRepository */;
+			targetProxy = 11572922282C9977000686C7 /* PBXContainerItemProxy */;
+		};
+		11572929282C9977000686C7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4A9A7BDE22E859E60022E573 /* Transfer */;
+			targetProxy = 11572928282C9977000686C7 /* PBXContainerItemProxy */;
+		};
+		1157292D282C9977000686C7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB551FA622E1409700DD65C2 /* TransferMethod */;
+			targetProxy = 1157292C282C9977000686C7 /* PBXContainerItemProxy */;
+		};
+		11572931282C9977000686C7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = DBAF929C22CFCBC7004F197A /* TransferMethodRepository */;
+			targetProxy = 11572930282C9977000686C7 /* PBXContainerItemProxy */;
+		};
+		11572935282C9977000686C7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = 073BB98122E63DB50053C24E /* TransferRepository */;
+			targetProxy = 11572934282C9977000686C7 /* PBXContainerItemProxy */;
+		};
+		11572939282C9977000686C7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = 643912D322DF40CB00036609 /* UserRepository */;
+			targetProxy = 11572938282C9977000686C7 /* PBXContainerItemProxy */;
 		};
 		4A9A7BEA22E859E60022E573 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

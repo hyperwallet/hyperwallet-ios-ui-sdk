@@ -44,7 +44,7 @@ class TransactionDetails {
     let prepaidCardVisa = "visa".localized()
     let prepaidCardMaster = "mastercard".localized()
     let numberMask = " \u{2022}\u{2022}\u{2022}\u{2022} "
-     let noPPCReceiptLabel: XCUIElement
+    let noPPCReceiptLabel: XCUIElement
 
     var app: XCUIApplication
 

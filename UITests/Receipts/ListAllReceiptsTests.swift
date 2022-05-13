@@ -135,9 +135,10 @@ class ListAllReceiptsTests: BaseTests {
         XCTAssertTrue(primardCardTab.exists, "Primary Card tab is exists")
         XCTAssertTrue(getTransactionsAvailableFundsTab().isSelected, "Available Funds tab is selected")
 
+        let table = app.descendants(matching: .table)
         // Assert empty placeholder text for Available funds
         let noTransaction = transactionDetails.getNoTransactionStrings()
-        XCTAssertEqual(transactionDetails.noPPCReceiptLabel.label, noTransaction)
+        XCTAssertEqual(table.firstMatch.label, noTransaction)
     }
 
     /*
@@ -170,9 +171,10 @@ class ListAllReceiptsTests: BaseTests {
 
         primardCardTab.tap()
         waitForNonExistence(spinner)
-
+        
+        let table = app.descendants(matching: .table)
         let noTransaction = transactionDetails.getPPCNoTransactionStringYear()
-        XCTAssertEqual(transactionDetails.noPPCReceiptLabel.label, noTransaction)
+        XCTAssertEqual(table.firstMatch.label, noTransaction)
     }
 
     /*
@@ -267,8 +269,10 @@ class ListAllReceiptsTests: BaseTests {
         secondaryCardTab.tap()
         waitForNonExistence(spinner)
         XCTAssertTrue(secondaryCardTab.isSelected, "Secondary Prepaid Card is selected")
+        let table = app.descendants(matching: .table)
         let noTransaction = transactionDetails.getPPCNoTransactionStringYear()
-        XCTAssertEqual(transactionDetails.noPPCReceiptLabel.label, noTransaction)
+        XCTAssertEqual(table.firstMatch.label, noTransaction)
+        
     }
 
     /*
