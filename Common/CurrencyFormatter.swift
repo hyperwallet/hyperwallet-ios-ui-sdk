@@ -81,8 +81,9 @@ class CurrencyFormatterTests: XCTestCase {
             ("Vietnam Currency", "1000000", "VND", "1.000.000,00")
         ]
         cases.forEach {
+            let expected = $3.replacingOccurrences(of: "\u{200F}", with: "", options: NSString.CompareOptions.literal, range: nil)
             XCTAssertEqual(CurrencyFormatter.formatStringAmount($1, with: $2),
-                           $3,
+                           expected,
                            "\($0) \($2) test case - currency should be equal to \($3)")
         }
     }
@@ -147,9 +148,10 @@ class CurrencyFormatterTests: XCTestCase {
             ("Vietnam Currency", "1000000", "VND", "1.000.000,00")
         ]
         cases.forEach {
+            let expected = $3.replacingOccurrences(of: "\u{200F}", with: "", options: NSString.CompareOptions.literal, range: nil)
             let doubleAmount = NSString(string: $1).doubleValue
             XCTAssertEqual(CurrencyFormatter.formatDoubleAmount(doubleAmount, with: $2),
-                           $3,
+                           expected,
                            "\($0) test case - currency should be equal to \($3)")
         }
     }
