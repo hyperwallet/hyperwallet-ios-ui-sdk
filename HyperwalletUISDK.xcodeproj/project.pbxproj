@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		0727F12C22E647500048E02C /* TransferRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BB9A022E63F8B0053C24E /* TransferRepository.swift */; };
 		0727F12D22E647ED0048E02C /* TransferRepositoryCompletionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BB99E22E63F590053C24E /* TransferRepositoryCompletionHelper.swift */; };
-		073BB98B22E63DB50053C24E /* TransferRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 073BB98222E63DB50053C24E /* TransferRepository.framework */; };
+		073BB98B22E63DB50053C24E /* TransferRepository.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 073BB98222E63DB50053C24E /* TransferRepository.xcframework */; };
 		073BB99222E63DB50053C24E /* TransferRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = 073BB98422E63DB50053C24E /* TransferRepository.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		073BB9A822E641050053C24E /* CreateTransferResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 073BB9A722E641050053C24E /* CreateTransferResponse.json */; };
 		073BB9AA22E641310053C24E /* CreateTransferBadRequestResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 073BB9A922E641310053C24E /* CreateTransferBadRequestResponse.json */; };
@@ -37,30 +37,30 @@
 		09795B78229D7FE000EF407F /* ListTransferMethodResponseWithoutPayPalAccount.json in Resources */ = {isa = PBXBuildFile; fileRef = 09795B77229D7FDF00EF407F /* ListTransferMethodResponseWithoutPayPalAccount.json */; };
 		09E7165022A697C400FA9B96 /* ReceiptsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7164F22A697C400FA9B96 /* ReceiptsList.swift */; };
 		09E7165622A6983400FA9B96 /* ListReceiptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7165522A6983400FA9B96 /* ListReceiptTests.swift */; };
-		11572945282F050E000686C7 /* BalanceRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD09389125EE252E00AAA29B /* BalanceRepository.framework */; platformFilter = ios; };
-		11572946282F050E000686C7 /* BalanceRepository.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD09389125EE252E00AAA29B /* BalanceRepository.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		11572949282F050E000686C7 /* Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB551F4922E1316400DD65C2 /* Common.framework */; platformFilter = ios; };
-		1157294A282F050E000686C7 /* Common.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DB551F4922E1316400DD65C2 /* Common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		11572945282F050E000686C7 /* BalanceRepository.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD09389125EE252E00AAA29B /* BalanceRepository.xcframework */; platformFilter = ios; };
+		11572946282F050E000686C7 /* BalanceRepository.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD09389125EE252E00AAA29B /* BalanceRepository.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		11572949282F050E000686C7 /* Common.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB551F4922E1316400DD65C2 /* Common.xcframework */; platformFilter = ios; };
+		1157294A282F050E000686C7 /* Common.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DB551F4922E1316400DD65C2 /* Common.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1157294D282F050E000686C7 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
 		1157294E282F050E000686C7 /* HyperwalletSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1157294F282F050E000686C7 /* Insights.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD4872FE25DE97BB005855B6 /* Insights.xcframework */; };
 		11572950282F050E000686C7 /* Insights.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD4872FE25DE97BB005855B6 /* Insights.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		11572951282F050E000686C7 /* Receipt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB99C2C822E220C200E45185 /* Receipt.framework */; };
-		11572952282F050E000686C7 /* Receipt.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DB99C2C822E220C200E45185 /* Receipt.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		11572955282F050E000686C7 /* ReceiptRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE6B6C022D605B20009DEFE /* ReceiptRepository.framework */; platformFilter = ios; };
-		11572956282F050E000686C7 /* ReceiptRepository.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE6B6C022D605B20009DEFE /* ReceiptRepository.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		11572951282F050E000686C7 /* Receipt.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB99C2C822E220C200E45185 /* Receipt.xcframework */; };
+		11572952282F050E000686C7 /* Receipt.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DB99C2C822E220C200E45185 /* Receipt.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		11572955282F050E000686C7 /* ReceiptRepository.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE6B6C022D605B20009DEFE /* ReceiptRepository.xcframework */; platformFilter = ios; };
+		11572956282F050E000686C7 /* ReceiptRepository.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE6B6C022D605B20009DEFE /* ReceiptRepository.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		11572959282F050E000686C7 /* Swifter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; };
 		1157295A282F050E000686C7 /* Swifter.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		1157295B282F050E000686C7 /* Transfer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A9A7BDF22E859E60022E573 /* Transfer.framework */; };
-		1157295C282F050E000686C7 /* Transfer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A9A7BDF22E859E60022E573 /* Transfer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		1157295F282F050E000686C7 /* TransferMethod.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB551FA722E1409700DD65C2 /* TransferMethod.framework */; };
-		11572960282F050E000686C7 /* TransferMethod.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DB551FA722E1409700DD65C2 /* TransferMethod.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		11572963282F050E000686C7 /* TransferMethodRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBAF929D22CFCBC7004F197A /* TransferMethodRepository.framework */; platformFilter = ios; };
-		11572964282F050E000686C7 /* TransferMethodRepository.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DBAF929D22CFCBC7004F197A /* TransferMethodRepository.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		11572967282F050E000686C7 /* TransferRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 073BB98222E63DB50053C24E /* TransferRepository.framework */; platformFilter = ios; };
-		11572968282F050E000686C7 /* TransferRepository.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 073BB98222E63DB50053C24E /* TransferRepository.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		1157296B282F050E000686C7 /* UserRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 643912D422DF40CB00036609 /* UserRepository.framework */; platformFilter = ios; };
-		1157296C282F050E000686C7 /* UserRepository.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 643912D422DF40CB00036609 /* UserRepository.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1157295B282F050E000686C7 /* Transfer.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A9A7BDF22E859E60022E573 /* Transfer.xcframework */; };
+		1157295C282F050E000686C7 /* Transfer.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A9A7BDF22E859E60022E573 /* Transfer.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1157295F282F050E000686C7 /* TransferMethod.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB551FA722E1409700DD65C2 /* TransferMethod.xcframework */; };
+		11572960282F050E000686C7 /* TransferMethod.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DB551FA722E1409700DD65C2 /* TransferMethod.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		11572963282F050E000686C7 /* TransferMethodRepository.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBAF929D22CFCBC7004F197A /* TransferMethodRepository.xcframework */; platformFilter = ios; };
+		11572964282F050E000686C7 /* TransferMethodRepository.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DBAF929D22CFCBC7004F197A /* TransferMethodRepository.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		11572967282F050E000686C7 /* TransferRepository.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 073BB98222E63DB50053C24E /* TransferRepository.xcframework */; platformFilter = ios; };
+		11572968282F050E000686C7 /* TransferRepository.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 073BB98222E63DB50053C24E /* TransferRepository.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1157296B282F050E000686C7 /* UserRepository.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 643912D422DF40CB00036609 /* UserRepository.xcframework */; platformFilter = ios; };
+		1157296C282F050E000686C7 /* UserRepository.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 643912D422DF40CB00036609 /* UserRepository.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		11572970282F051E000686C7 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
 		11572972282F051E000686C7 /* Insights.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD4872FE25DE97BB005855B6 /* Insights.xcframework */; };
 		11572975282F0547000686C7 /* HyperwalletSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */; };
@@ -159,7 +159,7 @@
 		4A31BDB722D762AE0027DACA /* PrepaidCardReceiptRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A31BDB622D762AE0027DACA /* PrepaidCardReceiptRepositoryTests.swift */; };
 		4A31BDB922D762CE0027DACA /* ReceiptRepositoryFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A31BDB822D762CE0027DACA /* ReceiptRepositoryFactoryTests.swift */; };
 		4A5C576522E73F3400F3359B /* UISearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5C576422E73F3400F3359B /* UISearchBar.swift */; };
-		4A9A7BE822E859E60022E573 /* Transfer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A9A7BDF22E859E60022E573 /* Transfer.framework */; };
+		4A9A7BE822E859E60022E573 /* Transfer.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A9A7BDF22E859E60022E573 /* Transfer.xcframework */; };
 		4A9A7BEF22E859E60022E573 /* Transfer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A9A7BE122E859E60022E573 /* Transfer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4A9A7C0422E86F580022E573 /* CreateTransferSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7BFE22E86F580022E573 /* CreateTransferSectionData.swift */; };
 		4A9A7C0522E86F580022E573 /* TransferButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A7BFF22E86F580022E573 /* TransferButtonCell.swift */; };
@@ -178,7 +178,7 @@
 		4AD300DA22F9972A005FD01F /* TransferTableViewFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD300D922F9972A005FD01F /* TransferTableViewFooterView.swift */; };
 		4ADBEC7222E9F16A00D43A48 /* TransferDestinationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBEC7122E9F16A00D43A48 /* TransferDestinationCell.swift */; };
 		4ADBEC7422E9F92800D43A48 /* TransferThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBEC7322E9F92800D43A48 /* TransferThemeManager.swift */; };
-		4AE6B6C922D605B20009DEFE /* ReceiptRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE6B6C022D605B20009DEFE /* ReceiptRepository.framework */; };
+		4AE6B6C922D605B20009DEFE /* ReceiptRepository.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE6B6C022D605B20009DEFE /* ReceiptRepository.xcframework */; };
 		4AE6B6CE22D605B20009DEFE /* UserReceiptRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE6B6CD22D605B20009DEFE /* UserReceiptRepositoryTests.swift */; };
 		4AE6B6D022D605B20009DEFE /* ReceiptRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AE6B6C222D605B20009DEFE /* ReceiptRepository.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4AE6B6DB22D620390009DEFE /* UserReceiptRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE6B6DA22D620390009DEFE /* UserReceiptRepository.swift */; };
@@ -189,7 +189,7 @@
 		641324E62295764500512816 /* AuthenticationTokenResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 641324E42295764500512816 /* AuthenticationTokenResponse.json */; };
 		641324F122958B5000512816 /* TransferMethodConfigurationBankAccountBusinessResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 641324ED22958B5000512816 /* TransferMethodConfigurationBankAccountBusinessResponse.json */; };
 		641EBE92228EE35A00D718F4 /* AddTransferMethodBankAccountBusinessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641EBE90228EE19E00D718F4 /* AddTransferMethodBankAccountBusinessTests.swift */; };
-		643912DD22DF40CB00036609 /* UserRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 643912D422DF40CB00036609 /* UserRepository.framework */; };
+		643912DD22DF40CB00036609 /* UserRepository.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 643912D422DF40CB00036609 /* UserRepository.xcframework */; };
 		643912FC22DF411700036609 /* UserRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = 643912F922DF40F200036609 /* UserRepository.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		643912FD22DF411700036609 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643912F822DF40F200036609 /* UserRepository.swift */; };
 		643912FE22DF411700036609 /* UserRepositoryFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643912FA22DF40F200036609 /* UserRepositoryFactory.swift */; };
@@ -322,8 +322,8 @@
 		DB551F5922E1316400DD65C2 /* Common.h in Headers */ = {isa = PBXBuildFile; fileRef = DB551F4B22E1316400DD65C2 /* Common.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DB551F8122E137B600DD65C2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DBCA383D225E8BAA00CD4137 /* Localizable.strings */; };
 		DB551F8C22E137D800DD65C2 /* ProcessingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBCA384B225E8BAA00CD4137 /* ProcessingView.xib */; };
-		DB551FA022E13ED000DD65C2 /* Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB551F4922E1316400DD65C2 /* Common.framework */; };
-		DB551FB022E1409700DD65C2 /* TransferMethod.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB551FA722E1409700DD65C2 /* TransferMethod.framework */; };
+		DB551FA022E13ED000DD65C2 /* Common.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB551F4922E1316400DD65C2 /* Common.xcframework */; };
+		DB551FB022E1409700DD65C2 /* TransferMethod.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB551FA722E1409700DD65C2 /* TransferMethod.xcframework */; };
 		DB551FB722E1409700DD65C2 /* TransferMethod.h in Headers */ = {isa = PBXBuildFile; fileRef = DB551FA922E1409700DD65C2 /* TransferMethod.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DB551FC922E1421E00DD65C2 /* AbstractWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA3857225E8BAA00CD4137 /* AbstractWidget.swift */; };
 		DB551FCA22E1421E00DD65C2 /* DateWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12653B2280B02900C0F59E /* DateWidget.swift */; };
@@ -380,7 +380,7 @@
 		DB6523B522DFD92900F52EA7 /* ReceiptRepositoryCompletionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A31BDB422D7356D0027DACA /* ReceiptRepositoryCompletionHelper.swift */; };
 		DB6523B922DFDAA400F52EA7 /* TransferMethodRepositoryCompletionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6523B822DFDAA400F52EA7 /* TransferMethodRepositoryCompletionHelper.swift */; };
 		DB6523BB22DFDAAD00F52EA7 /* UserRepositoryCompletionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6523BA22DFDAAC00F52EA7 /* UserRepositoryCompletionHelper.swift */; };
-		DB99C2D122E220C200E45185 /* Receipt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB99C2C822E220C200E45185 /* Receipt.framework */; };
+		DB99C2D122E220C200E45185 /* Receipt.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB99C2C822E220C200E45185 /* Receipt.xcframework */; };
 		DB99C2D822E220C200E45185 /* Receipt.h in Headers */ = {isa = PBXBuildFile; fileRef = DB99C2CA22E220C200E45185 /* Receipt.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DB99C2E222E22ADF00E45185 /* ReceiptFeeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22F1EB22A6800F00D58883 /* ReceiptFeeCell.swift */; };
 		DB99C2E322E22ADF00E45185 /* ReceiptDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22F1E522A6724800D58883 /* ReceiptDetailPresenter.swift */; };
@@ -393,7 +393,7 @@
 		DB99C2EA22E22ADF00E45185 /* ReceiptNotesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22F1E922A67FE400D58883 /* ReceiptNotesCell.swift */; };
 		DB99C2FE22E22C8400E45185 /* ReceiptRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADC4F3F22D8CE31004F3F8D /* ReceiptRequestHelper.swift */; };
 		DBA9FA5E22791B2900C1301A /* UserIndividualResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = DBA9FA5C227918B500C1301A /* UserIndividualResponse.json */; };
-		DBAF92A622CFCBC7004F197A /* TransferMethodRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBAF929D22CFCBC7004F197A /* TransferMethodRepository.framework */; };
+		DBAF92A622CFCBC7004F197A /* TransferMethodRepository.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBAF929D22CFCBC7004F197A /* TransferMethodRepository.xcframework */; };
 		DBAF92AD22CFCBC7004F197A /* TransferMethodRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = DBAF929F22CFCBC7004F197A /* TransferMethodRepository.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DBAF92B822CFCE48004F197A /* TransferMethodRepositoryFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB80BF9D22CD14F300BA5EED /* TransferMethodRepositoryFactory.swift */; };
 		DBAF92BC22D01959004F197A /* TransferMethodConfigurationRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAF922B22CDBF79004F197A /* TransferMethodConfigurationRepositoryTests.swift */; };
@@ -475,7 +475,7 @@
 		FD5066252538239100640B36 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B39E00DE24B4FB0A00E3BC4D /* icomoon.ttf */; platformFilter = ios; };
 		FD50662725382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json in Resources */ = {isa = PBXBuildFile; fileRef = FD50662625382FC800640B36 /* UserReceiptDetailsWithMultipleCurrencies.json */; };
 		FD6D1AF12583AE3C0019333E /* BankAccountIndividualUpdateResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = FD6D1AF02583AE3C0019333E /* BankAccountIndividualUpdateResponse.json */; };
-		FD8D2A2925EF72BC00A01007 /* BalanceRepository.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD09389125EE252E00AAA29B /* BalanceRepository.framework */; };
+		FD8D2A2925EF72BC00A01007 /* BalanceRepository.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD09389125EE252E00AAA29B /* BalanceRepository.xcframework */; };
 		FD8D2A2A25EF72BC00A01007 /* Hippolyte.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD03133D25E4E96700505BDA /* Hippolyte.xcframework */; };
 		FD8D99DF25C46836003FEB1E /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B39E00DE24B4FB0A00E3BC4D /* icomoon.ttf */; };
 		FD8EA36B258119BB003CC5E8 /* UpdateTransferMethodButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8EA36A258119BB003CC5E8 /* UpdateTransferMethodButtonCell.swift */; };
@@ -735,17 +735,17 @@
 			dstSubfolderSpec = 10;
 			files = (
 				11572950282F050E000686C7 /* Insights.xcframework in Embed Frameworks */,
-				11572956282F050E000686C7 /* ReceiptRepository.framework in Embed Frameworks */,
-				11572964282F050E000686C7 /* TransferMethodRepository.framework in Embed Frameworks */,
-				11572946282F050E000686C7 /* BalanceRepository.framework in Embed Frameworks */,
-				11572968282F050E000686C7 /* TransferRepository.framework in Embed Frameworks */,
-				1157295C282F050E000686C7 /* Transfer.framework in Embed Frameworks */,
+				11572956282F050E000686C7 /* ReceiptRepository.xcframework in Embed Frameworks */,
+				11572964282F050E000686C7 /* TransferMethodRepository.xcframework in Embed Frameworks */,
+				11572946282F050E000686C7 /* BalanceRepository.xcframework in Embed Frameworks */,
+				11572968282F050E000686C7 /* TransferRepository.xcframework in Embed Frameworks */,
+				1157295C282F050E000686C7 /* Transfer.xcframework in Embed Frameworks */,
 				1157295A282F050E000686C7 /* Swifter.xcframework in Embed Frameworks */,
 				1157294E282F050E000686C7 /* HyperwalletSDK.xcframework in Embed Frameworks */,
-				11572960282F050E000686C7 /* TransferMethod.framework in Embed Frameworks */,
-				11572952282F050E000686C7 /* Receipt.framework in Embed Frameworks */,
-				1157294A282F050E000686C7 /* Common.framework in Embed Frameworks */,
-				1157296C282F050E000686C7 /* UserRepository.framework in Embed Frameworks */,
+				11572960282F050E000686C7 /* TransferMethod.xcframework in Embed Frameworks */,
+				11572952282F050E000686C7 /* Receipt.xcframework in Embed Frameworks */,
+				1157294A282F050E000686C7 /* Common.xcframework in Embed Frameworks */,
+				1157296C282F050E000686C7 /* UserRepository.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -758,7 +758,7 @@
 		072A53F622838F6B00BC11D0 /* AddTransferMethodSectionData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodSectionData.swift; sourceTree = "<group>"; };
 		073BA5D222A885E6002C58BD /* AddTransferMethodController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransferMethodController.swift; sourceTree = "<group>"; };
 		073BA5D422A88612002C58BD /* ListTransferMethodController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTransferMethodController.swift; sourceTree = "<group>"; };
-		073BB98222E63DB50053C24E /* TransferRepository.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TransferRepository.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		073BB98222E63DB50053C24E /* TransferRepository.xcframework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TransferRepository.xcframework; sourceTree = BUILT_PRODUCTS_DIR; };
 		073BB98422E63DB50053C24E /* TransferRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransferRepository.h; sourceTree = "<group>"; };
 		073BB98522E63DB50053C24E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		073BB98A22E63DB50053C24E /* TransferRepositoryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TransferRepositoryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -878,7 +878,7 @@
 		4A31BDB822D762CE0027DACA /* ReceiptRepositoryFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptRepositoryFactoryTests.swift; sourceTree = "<group>"; };
 		4A5C576422E73F3400F3359B /* UISearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISearchBar.swift; sourceTree = "<group>"; };
 		4A6D7703228D805C008355C8 /* HyperwalletTransferMethodType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletTransferMethodType.swift; sourceTree = "<group>"; };
-		4A9A7BDF22E859E60022E573 /* Transfer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Transfer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A9A7BDF22E859E60022E573 /* Transfer.xcframework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Transfer.xcframework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A9A7BE122E859E60022E573 /* Transfer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Transfer.h; sourceTree = "<group>"; };
 		4A9A7BE222E859E60022E573 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A9A7BE722E859E60022E573 /* TransferTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TransferTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -898,7 +898,7 @@
 		4ADBEC7122E9F16A00D43A48 /* TransferDestinationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferDestinationCell.swift; sourceTree = "<group>"; };
 		4ADBEC7322E9F92800D43A48 /* TransferThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferThemeManager.swift; sourceTree = "<group>"; };
 		4ADC4F3F22D8CE31004F3F8D /* ReceiptRequestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptRequestHelper.swift; sourceTree = "<group>"; };
-		4AE6B6C022D605B20009DEFE /* ReceiptRepository.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReceiptRepository.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AE6B6C022D605B20009DEFE /* ReceiptRepository.xcframework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReceiptRepository.xcframework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AE6B6C222D605B20009DEFE /* ReceiptRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReceiptRepository.h; sourceTree = "<group>"; };
 		4AE6B6C322D605B20009DEFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4AE6B6C822D605B20009DEFE /* ReceiptRepositoryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReceiptRepositoryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -914,7 +914,7 @@
 		641324E42295764500512816 /* AuthenticationTokenResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AuthenticationTokenResponse.json; sourceTree = "<group>"; };
 		641324ED22958B5000512816 /* TransferMethodConfigurationBankAccountBusinessResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TransferMethodConfigurationBankAccountBusinessResponse.json; sourceTree = "<group>"; };
 		641EBE90228EE19E00D718F4 /* AddTransferMethodBankAccountBusinessTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransferMethodBankAccountBusinessTests.swift; sourceTree = "<group>"; };
-		643912D422DF40CB00036609 /* UserRepository.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UserRepository.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		643912D422DF40CB00036609 /* UserRepository.xcframework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UserRepository.xcframework; sourceTree = BUILT_PRODUCTS_DIR; };
 		643912DC22DF40CB00036609 /* UserRepositoryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UserRepositoryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		643912EF22DF40F200036609 /* UserRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryTests.swift; sourceTree = "<group>"; };
 		643912F122DF40F200036609 /* UserBusinessResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserBusinessResponse.json; sourceTree = "<group>"; };
@@ -1037,12 +1037,12 @@
 		DB4BDFDE22D40B2B00761710 /* TransferMethodRepositoryFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodRepositoryFactoryTests.swift; sourceTree = "<group>"; };
 		DB5295FB22E233AB00657F50 /* HyperwalletReceiptUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletReceiptUI.swift; sourceTree = "<group>"; };
 		DB5295FE22E2344B00657F50 /* HyperwalletTransferMethodUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletTransferMethodUI.swift; sourceTree = "<group>"; };
-		DB551F4922E1316400DD65C2 /* Common.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Common.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB551F4922E1316400DD65C2 /* Common.xcframework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Common.xcframework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB551F4B22E1316400DD65C2 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		DB551F4C22E1316400DD65C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB551F5122E1316400DD65C2 /* CommonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CommonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB551F5822E1316400DD65C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DB551FA722E1409700DD65C2 /* TransferMethod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TransferMethod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB551FA722E1409700DD65C2 /* TransferMethod.xcframework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TransferMethod.xcframework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB551FA922E1409700DD65C2 /* TransferMethod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransferMethod.h; sourceTree = "<group>"; };
 		DB551FAA22E1409700DD65C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB551FAF22E1409700DD65C2 /* TransferMethodTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TransferMethodTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1072,7 +1072,7 @@
 		DB8FEE1E22DE89390041A777 /* BankAccountConfigurationPresetValues.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BankAccountConfigurationPresetValues.json; sourceTree = "<group>"; };
 		DB8FEE1F22DE89390041A777 /* ListTransferMethodResponseWithoutPayPalAccount.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ListTransferMethodResponseWithoutPayPalAccount.json; sourceTree = "<group>"; };
 		DB8FEE2022DE89390041A777 /* TransferMethodConfigurationBankAccountResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TransferMethodConfigurationBankAccountResponse.json; sourceTree = "<group>"; };
-		DB99C2C822E220C200E45185 /* Receipt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Receipt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB99C2C822E220C200E45185 /* Receipt.xcframework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Receipt.xcframework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB99C2CA22E220C200E45185 /* Receipt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Receipt.h; sourceTree = "<group>"; };
 		DB99C2CB22E220C200E45185 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB99C2D022E220C200E45185 /* ReceiptTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReceiptTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1082,7 +1082,7 @@
 		DBA9FA5A2279143900C1301A /* UserBusinessResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UserBusinessResponse.json; sourceTree = "<group>"; };
 		DBA9FA5C227918B500C1301A /* UserIndividualResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UserIndividualResponse.json; sourceTree = "<group>"; };
 		DBAF922B22CDBF79004F197A /* TransferMethodConfigurationRepositoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferMethodConfigurationRepositoryTests.swift; sourceTree = "<group>"; };
-		DBAF929D22CFCBC7004F197A /* TransferMethodRepository.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TransferMethodRepository.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBAF929D22CFCBC7004F197A /* TransferMethodRepository.xcframework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TransferMethodRepository.xcframework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBAF929F22CFCBC7004F197A /* TransferMethodRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransferMethodRepository.h; sourceTree = "<group>"; };
 		DBAF92A022CFCBC7004F197A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DBAF92A522CFCBC7004F197A /* TransferMethodRepositoryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TransferMethodRepositoryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1259,7 +1259,7 @@
 		DCF74269257E68F500A5295A /* ListTransferMethodResponseWithoutPaperCheck.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ListTransferMethodResponseWithoutPaperCheck.json; sourceTree = "<group>"; };
 		FD03133D25E4E96700505BDA /* Hippolyte.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Hippolyte.xcframework; path = Carthage/Build/Hippolyte.xcframework; sourceTree = "<group>"; };
 		FD0313E325E4EAB600505BDA /* Swifter.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Swifter.xcframework; path = Carthage/Build/Swifter.xcframework; sourceTree = "<group>"; };
-		FD09389125EE252E00AAA29B /* BalanceRepository.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BalanceRepository.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD09389125EE252E00AAA29B /* BalanceRepository.xcframework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BalanceRepository.xcframework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD09389325EE252E00AAA29B /* BalanceRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BalanceRepository.h; sourceTree = "<group>"; };
 		FD0938B025EE279700AAA29B /* BalanceRepositoryFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceRepositoryFactory.swift; sourceTree = "<group>"; };
 		FD0938B125EE279700AAA29B /* UserBalanceRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserBalanceRepository.swift; sourceTree = "<group>"; };
@@ -1319,7 +1319,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				073BB98B22E63DB50053C24E /* TransferRepository.framework in Frameworks */,
+				073BB98B22E63DB50053C24E /* TransferRepository.xcframework in Frameworks */,
 				FD0313D025E4EA9B00505BDA /* Hippolyte.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1336,7 +1336,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A9A7BE822E859E60022E573 /* Transfer.framework in Frameworks */,
+				4A9A7BE822E859E60022E573 /* Transfer.xcframework in Frameworks */,
 				FD03139A25E4EA5D00505BDA /* Hippolyte.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1353,7 +1353,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4AE6B6C922D605B20009DEFE /* ReceiptRepository.framework in Frameworks */,
+				4AE6B6C922D605B20009DEFE /* ReceiptRepository.xcframework in Frameworks */,
 				FD03138825E4EA4E00505BDA /* Hippolyte.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1370,7 +1370,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				643912DD22DF40CB00036609 /* UserRepository.framework in Frameworks */,
+				643912DD22DF40CB00036609 /* UserRepository.xcframework in Frameworks */,
 				FD0313E225E4EAA300505BDA /* Hippolyte.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1388,17 +1388,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				1157294F282F050E000686C7 /* Insights.xcframework in Frameworks */,
-				11572955282F050E000686C7 /* ReceiptRepository.framework in Frameworks */,
-				11572963282F050E000686C7 /* TransferMethodRepository.framework in Frameworks */,
-				11572945282F050E000686C7 /* BalanceRepository.framework in Frameworks */,
-				11572967282F050E000686C7 /* TransferRepository.framework in Frameworks */,
-				1157295B282F050E000686C7 /* Transfer.framework in Frameworks */,
+				11572955282F050E000686C7 /* ReceiptRepository.xcframework in Frameworks */,
+				11572963282F050E000686C7 /* TransferMethodRepository.xcframework in Frameworks */,
+				11572945282F050E000686C7 /* BalanceRepository.xcframework in Frameworks */,
+				11572967282F050E000686C7 /* TransferRepository.xcframework in Frameworks */,
+				1157295B282F050E000686C7 /* Transfer.xcframework in Frameworks */,
 				11572959282F050E000686C7 /* Swifter.xcframework in Frameworks */,
 				1157294D282F050E000686C7 /* HyperwalletSDK.xcframework in Frameworks */,
-				1157295F282F050E000686C7 /* TransferMethod.framework in Frameworks */,
-				11572951282F050E000686C7 /* Receipt.framework in Frameworks */,
-				11572949282F050E000686C7 /* Common.framework in Frameworks */,
-				1157296B282F050E000686C7 /* UserRepository.framework in Frameworks */,
+				1157295F282F050E000686C7 /* TransferMethod.xcframework in Frameworks */,
+				11572951282F050E000686C7 /* Receipt.xcframework in Frameworks */,
+				11572949282F050E000686C7 /* Common.xcframework in Frameworks */,
+				1157296B282F050E000686C7 /* UserRepository.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1415,7 +1415,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB551FA022E13ED000DD65C2 /* Common.framework in Frameworks */,
+				DB551FA022E13ED000DD65C2 /* Common.xcframework in Frameworks */,
 				FD03136425E4EA2600505BDA /* Hippolyte.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1432,7 +1432,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB551FB022E1409700DD65C2 /* TransferMethod.framework in Frameworks */,
+				DB551FB022E1409700DD65C2 /* TransferMethod.xcframework in Frameworks */,
 				FD0313AC25E4EA6200505BDA /* Hippolyte.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1450,7 +1450,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB99C2D122E220C200E45185 /* Receipt.framework in Frameworks */,
+				DB99C2D122E220C200E45185 /* Receipt.xcframework in Frameworks */,
 				FD03137625E4EA3600505BDA /* Hippolyte.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1467,7 +1467,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBAF92A622CFCBC7004F197A /* TransferMethodRepository.framework in Frameworks */,
+				DBAF92A622CFCBC7004F197A /* TransferMethodRepository.xcframework in Frameworks */,
 				FD0313BE25E4EA9600505BDA /* Hippolyte.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1484,7 +1484,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD8D2A2925EF72BC00A01007 /* BalanceRepository.framework in Frameworks */,
+				FD8D2A2925EF72BC00A01007 /* BalanceRepository.xcframework in Frameworks */,
 				FD8D2A2A25EF72BC00A01007 /* Hippolyte.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2482,23 +2482,23 @@
 			children = (
 				DB4679822260380C00E1AF49 /* Demo.app */,
 				DB2587FB2261BFF100E6236B /* HyperwalletUISDKUITests.xctest */,
-				4AE6B6C022D605B20009DEFE /* ReceiptRepository.framework */,
+				4AE6B6C022D605B20009DEFE /* ReceiptRepository.xcframework */,
 				4AE6B6C822D605B20009DEFE /* ReceiptRepositoryTests.xctest */,
-				DBAF929D22CFCBC7004F197A /* TransferMethodRepository.framework */,
+				DBAF929D22CFCBC7004F197A /* TransferMethodRepository.xcframework */,
 				DBAF92A522CFCBC7004F197A /* TransferMethodRepositoryTests.xctest */,
-				643912D422DF40CB00036609 /* UserRepository.framework */,
+				643912D422DF40CB00036609 /* UserRepository.xcframework */,
 				643912DC22DF40CB00036609 /* UserRepositoryTests.xctest */,
-				DB551F4922E1316400DD65C2 /* Common.framework */,
+				DB551F4922E1316400DD65C2 /* Common.xcframework */,
 				DB551F5122E1316400DD65C2 /* CommonTests.xctest */,
-				DB551FA722E1409700DD65C2 /* TransferMethod.framework */,
+				DB551FA722E1409700DD65C2 /* TransferMethod.xcframework */,
 				DB551FAF22E1409700DD65C2 /* TransferMethodTests.xctest */,
-				DB99C2C822E220C200E45185 /* Receipt.framework */,
+				DB99C2C822E220C200E45185 /* Receipt.xcframework */,
 				DB99C2D022E220C200E45185 /* ReceiptTests.xctest */,
-				073BB98222E63DB50053C24E /* TransferRepository.framework */,
+				073BB98222E63DB50053C24E /* TransferRepository.xcframework */,
 				073BB98A22E63DB50053C24E /* TransferRepositoryTests.xctest */,
-				4A9A7BDF22E859E60022E573 /* Transfer.framework */,
+				4A9A7BDF22E859E60022E573 /* Transfer.xcframework */,
 				4A9A7BE722E859E60022E573 /* TransferTests.xctest */,
-				FD09389125EE252E00AAA29B /* BalanceRepository.framework */,
+				FD09389125EE252E00AAA29B /* BalanceRepository.xcframework */,
 				FD0938F025EE2C0100AAA29B /* BalanceRepositoryTests.xctest */,
 			);
 			name = Products;
@@ -2766,7 +2766,7 @@
 			);
 			name = TransferRepository;
 			productName = TransferRepository;
-			productReference = 073BB98222E63DB50053C24E /* TransferRepository.framework */;
+			productReference = 073BB98222E63DB50053C24E /* TransferRepository.xcframework */;
 			productType = "com.apple.product-type.framework";
 		};
 		073BB98922E63DB50053C24E /* TransferRepositoryTests */ = {
@@ -2808,7 +2808,7 @@
 			);
 			name = Transfer;
 			productName = Transfer;
-			productReference = 4A9A7BDF22E859E60022E573 /* Transfer.framework */;
+			productReference = 4A9A7BDF22E859E60022E573 /* Transfer.xcframework */;
 			productType = "com.apple.product-type.framework";
 		};
 		4A9A7BE622E859E60022E573 /* TransferTests */ = {
@@ -2845,7 +2845,7 @@
 			);
 			name = ReceiptRepository;
 			productName = ReceiptRepository;
-			productReference = 4AE6B6C022D605B20009DEFE /* ReceiptRepository.framework */;
+			productReference = 4AE6B6C022D605B20009DEFE /* ReceiptRepository.xcframework */;
 			productType = "com.apple.product-type.framework";
 		};
 		4AE6B6C722D605B20009DEFE /* ReceiptRepositoryTests */ = {
@@ -2882,7 +2882,7 @@
 			);
 			name = UserRepository;
 			productName = UserRepository;
-			productReference = 643912D422DF40CB00036609 /* UserRepository.framework */;
+			productReference = 643912D422DF40CB00036609 /* UserRepository.xcframework */;
 			productType = "com.apple.product-type.framework";
 		};
 		643912DB22DF40CB00036609 /* UserRepositoryTests */ = {
@@ -2964,7 +2964,7 @@
 			);
 			name = Common;
 			productName = Common;
-			productReference = DB551F4922E1316400DD65C2 /* Common.framework */;
+			productReference = DB551F4922E1316400DD65C2 /* Common.xcframework */;
 			productType = "com.apple.product-type.framework";
 		};
 		DB551F5022E1316400DD65C2 /* CommonTests */ = {
@@ -3004,7 +3004,7 @@
 			);
 			name = TransferMethod;
 			productName = TransferMethod;
-			productReference = DB551FA722E1409700DD65C2 /* TransferMethod.framework */;
+			productReference = DB551FA722E1409700DD65C2 /* TransferMethod.xcframework */;
 			productType = "com.apple.product-type.framework";
 		};
 		DB551FAE22E1409700DD65C2 /* TransferMethodTests */ = {
@@ -3044,7 +3044,7 @@
 			);
 			name = Receipt;
 			productName = Receipt;
-			productReference = DB99C2C822E220C200E45185 /* Receipt.framework */;
+			productReference = DB99C2C822E220C200E45185 /* Receipt.xcframework */;
 			productType = "com.apple.product-type.framework";
 		};
 		DB99C2CF22E220C200E45185 /* ReceiptTests */ = {
@@ -3081,7 +3081,7 @@
 			);
 			name = TransferMethodRepository;
 			productName = TransferMethodRepository;
-			productReference = DBAF929D22CFCBC7004F197A /* TransferMethodRepository.framework */;
+			productReference = DBAF929D22CFCBC7004F197A /* TransferMethodRepository.xcframework */;
 			productType = "com.apple.product-type.framework";
 		};
 		DBAF92A422CFCBC7004F197A /* TransferMethodRepositoryTests */ = {
@@ -3118,7 +3118,7 @@
 			);
 			name = BalanceRepository;
 			productName = BalanceRepository;
-			productReference = FD09389125EE252E00AAA29B /* BalanceRepository.framework */;
+			productReference = FD09389125EE252E00AAA29B /* BalanceRepository.xcframework */;
 			productType = "com.apple.product-type.framework";
 		};
 		FD0938EF25EE2C0100AAA29B /* BalanceRepositoryTests */ = {
@@ -4505,6 +4505,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = xcframework;
 			};
 			name = Debug;
 		};
@@ -4538,6 +4539,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = xcframework;
 			};
 			name = XCUITest;
 		};
@@ -4571,6 +4573,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = xcframework;
 			};
 			name = Release;
 		};
@@ -4675,6 +4678,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = xcframework;
 			};
 			name = Debug;
 		};
@@ -4709,6 +4713,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = xcframework;
 			};
 			name = XCUITest;
 		};
@@ -4742,6 +4747,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = xcframework;
 			};
 			name = Release;
 		};
@@ -4844,6 +4850,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = xcframework;
 			};
 			name = Debug;
 		};
@@ -4876,6 +4883,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = xcframework;
 			};
 			name = XCUITest;
 		};
@@ -4907,6 +4915,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = xcframework;
 			};
 			name = Release;
 		};
@@ -5006,6 +5015,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = xcframework;
 			};
 			name = Debug;
 		};
@@ -5038,6 +5048,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = xcframework;
 			};
 			name = XCUITest;
 		};
@@ -5070,6 +5081,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = xcframework;
 			};
 			name = Release;
 		};
@@ -5281,6 +5293,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = xcframework;
 			};
 			name = Debug;
 		};
@@ -5313,6 +5326,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = xcframework;
 			};
 			name = XCUITest;
 		};
@@ -5345,6 +5359,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = xcframework;
 			};
 			name = Release;
 		};
@@ -5443,6 +5458,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = xcframework;
 			};
 			name = Debug;
 		};
@@ -5474,6 +5490,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = xcframework;
 			};
 			name = XCUITest;
 		};
@@ -5505,6 +5522,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = xcframework;
 			};
 			name = Release;
 		};
@@ -5732,6 +5750,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = xcframework;
 			};
 			name = Debug;
 		};
@@ -5764,6 +5783,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = xcframework;
 			};
 			name = XCUITest;
 		};
@@ -5796,6 +5816,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = xcframework;
 			};
 			name = Release;
 		};
@@ -5898,6 +5919,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = xcframework;
 			};
 			name = Debug;
 		};
@@ -5930,6 +5952,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = xcframework;
 			};
 			name = XCUITest;
 		};
@@ -5962,6 +5985,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = xcframework;
 			};
 			name = Release;
 		};
@@ -6178,6 +6202,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.framework *.gch *.xcode* *.xcassets (*) .DS_Store CVS .svn .git .hg *.pbproj *.pbxproj *.xcframework";
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = BalanceRepository/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -6196,6 +6221,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = xcframework;
 			};
 			name = Debug;
 		};
@@ -6213,6 +6239,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.framework *.gch *.xcode* *.xcassets (*) .DS_Store CVS .svn .git .hg *.pbproj *.pbxproj *.xcframework";
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = BalanceRepository/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -6230,6 +6257,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = xcframework;
 			};
 			name = XCUITest;
 		};
@@ -6247,6 +6275,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.framework *.gch *.xcode* *.xcassets (*) .DS_Store CVS .svn .git .hg *.pbproj *.pbxproj *.xcframework";
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = BalanceRepository/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -6263,6 +6292,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = xcframework;
 			};
 			name = Release;
 		};
