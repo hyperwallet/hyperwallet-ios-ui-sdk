@@ -1,12 +1,15 @@
 Changelog
 =========
+[1.0.0-beta17](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta17)
+-------------------
+- iOS upgrade to version 13
+
 [1.0.0-beta16](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta16)
 -------------------
 - Fixed currency formatting issues
 - Fixed add transfer method qraphQL calls
 - Fixed memory leaks
 - Fixed no fee display issue
-
 
 [1.0.0-beta15](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta15)
 -------------------

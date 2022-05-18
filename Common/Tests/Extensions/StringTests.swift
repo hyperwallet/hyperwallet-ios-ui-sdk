@@ -81,7 +81,8 @@ class StringTests: XCTestCase {
                      ("Vietnam Currency", "1000000", "VND", "₫1.000.000,00")
         ]
         cases.forEach {
-            XCTAssertEqual($1.formatToCurrency(with: $2), $3, "\($0) test case - currency should be equal to \($3)")
+            let expected = $3.replacingOccurrences(of: "\u{200F}", with: "", options: NSString.CompareOptions.literal, range: nil)
+                        XCTAssertEqual($1.formatToCurrency(with: $2), expected, "\($0) test case - currency should be equal to \($3)")
         }
     }
 }
