@@ -52,7 +52,7 @@ public struct CurrencyFormatter {
             formatter.currencySymbol = ""
 
             if let amount = formatter.string(from: NSNumber(value: amount)) {
-                return amount.trimmingCharacters(in: .whitespaces)
+                return amount.replacingOccurrences(of: "\u{200F}", with: "", options: NSString.CompareOptions.literal, range: nil).trimmingCharacters(in: .whitespaces)
             }
         }
         return "\(amount)"
@@ -92,7 +92,7 @@ public struct CurrencyFormatter {
             formatter.currencyCode = currencyCode
             formatter.locale = getLocaleIdentifer(for: currencyCode)
             formatter.currencySymbol = ""
-            return formatter.string(for: number)?.trimmingCharacters(in: .whitespaces) ?? amount
+            return formatter.string(for: number)?.replacingOccurrences(of: "\u{200F}", with: "", options: NSString.CompareOptions.literal, range: nil).trimmingCharacters(in: .whitespaces) ?? amount
         } else {
             return amount
         }
