@@ -66,3 +66,20 @@ after_success:
           sh ./Scripts/travisPublishDocs.sh;
       fi
   fi
+script: |
+  echo "Downloading Polaris Start"
+  curl -fLOsS $POLARIS_SERVER_URL/api/tools/polaris_cli-linux64.zip
+  unzip -d /tmp -jo polaris_cli-linux64.zip
+  echo "Downloading Polaris Complete"
+  ​
+  echo "Setup Polaris Start"
+  /tmp/polaris setup 
+  echo "Setup Polaris End"
+  ​
+  #wget -q https://paypal.polaris.synopsys.com/api/tools/polaris_cli-linux64.zip
+  #unzip -j polaris_cli-linux64.zip -d /tmp
+  ​
+  echo "Scanning Start"
+  /tmp/polaris --persist-config --co capture.build.buildCommands="null" --co capture.build.cleanCommands="null" --co capture.fileSystem="null" --co capture.coverity.autoCapture="enable"  configure
+  /tmp/polaris analyze -w
+  echo "Scanning End"
