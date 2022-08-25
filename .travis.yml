@@ -19,23 +19,19 @@ env:
     Simulator' configuration="Debug" code_coverage="YES" publish_docs="NO" only_active_arch="YES"
   - ios_version='14.2'  ios_device='iPhone 11' scheme="$IOS_UI_TESTS_SCHEME"  platform='iOS
     Simulator' configuration="XCUITest" code_coverage="NO" publish_docs="NO" only_active_arch="NO"
-before_install:
-  # Boot the emulator by ID
-  - |
-     ios_uid=$(xcrun instruments -s devices | grep Simulator | grep "$ios_device ($ios_version)*" | grep -o "[0-9A-F]\{8\}-[0-9A-F]\{4\}-[0-9A-F]\{4\}-[0-9A-F]\{4\}-[0-9A-F]\{12\}")
-     xcrun simctl boot $ios_uid
-  
-     echo "Downloading Polaris Start"
-     curl ifconfig.me 
-     curl -fLOsS $POLARIS_SERVER_URL/api/tools/polaris_cli-macosx.zip
-     unzip -d /tmp -jo polaris_cli-macosx.zip
-     echo "Downloading Polaris Complete"
 
-     echo "Setup Polaris Start"
-     /tmp/polaris setup 
-     echo "Setup Polaris End"
+script: |
+  echo "Downloading Polaris Start"
+  curl ifconfig.me 
+  curl -fLOsS $POLARIS_SERVER_URL/api/tools/polaris_cli-macosx.zip
+  unzip -d /tmp -jo polaris_cli-macosx.zip
+  echo "Downloading Polaris Complete"
 
-     echo "Scanning Start"
-     /tmp/polaris --persist-config --co capture.build.buildCommands="null" --co capture.build.cleanCommands="null" --co capture.fileSystem="null" --co capture.coverity.autoCapture="enable"  configure
-     /tmp/polaris analyze -w
-     echo "Scanning End"
+  echo "Setup Polaris Start"
+  /tmp/polaris setup 
+  echo "Setup Polaris End"
+
+  echo "Scanning Start"
+  /tmp/polaris --persist-config --co capture.build.buildCommands="null" --co capture.build.cleanCommands="null" --co capture.fileSystem="null" --co capture.coverity.autoCapture="enable"  configure
+  /tmp/polaris analyze -w
+  echo "Scanning End"
