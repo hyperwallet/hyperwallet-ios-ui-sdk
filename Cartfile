@@ -1,2 +1,3 @@
-github "hyperwallet/hyperwallet-ios-sdk" "1.0.0-beta16"
+github "grmeyer-hw-dev/hyperwallet-ios-sdk" "feature/DTSERWONE-821-handle_http_unauthorized"
+# github "hyperwallet/hyperwallet-ios-sdk" "1.0.0-beta17"
 github "hyperwallet/hyperwallet-ios-insight" "1.0.0-beta05"

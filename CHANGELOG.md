@@ -1,5 +1,9 @@
 Changelog
 =========
+[1.0.0-beta18](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta18)
+-------------------
+- Enhanced Hyperwallet Error Group to handle HTTP 401
+
 [1.0.0-beta17](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta17)
 -------------------
 - iOS upgrade to version 13
