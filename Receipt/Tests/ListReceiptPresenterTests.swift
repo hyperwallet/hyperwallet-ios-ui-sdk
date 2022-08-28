@@ -285,7 +285,7 @@ class ListReceiptPresenterTests: XCTestCase {
                                      _ error: NSError? = nil,
                                      _ prepaidCardToken: String? = nil) -> StubRequest {
         let response = HyperwalletTestHelper.setUpMockedResponse(payload: payload, error: error)
-        let receiptUrl = prepaidCardToken == nil ? "/receipts?":"/prepaid-cards/\(prepaidCardToken!)/receipts?"
+        let receiptUrl = prepaidCardToken == nil ? "/receipts?" : "/prepaid-cards/\(prepaidCardToken!)/receipts?"
         let url = String(format: "%@%@", HyperwalletTestHelper.userRestURL, receiptUrl)
         return HyperwalletTestHelper.buildGetRequestRegexMatcher(pattern: url, response)
     }
