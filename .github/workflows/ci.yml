@@ -1,0 +1,74 @@
+name: Core SDK CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+      - support/SDK-V3
+      - feature/**
+      - bugfix/**
+  pull_request:
+    branches:
+      - master
+      - support/SDK-V3
+      - feature/**
+      - bugfix/**
+
+jobs:
+  tests:
+    name: Tests
+    strategy:
+      matrix:
+        os: [macos-latest]
+        xcode_version: [13.2.1]
+        xcode_scheme: [ 'HyperwalletUISDK', 'Demo' ]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '${{ matrix.xcode_version }}'
+
+      - name: Install dependencies
+        run: carthage update --platform ios --cache-builds --use-xcframeworks --no-use-binaries
+
+      - name: Install test coverage reports tool - slather
+        run: gem i slather
+
+      - name: Install lint tool - swiftlint
+        # Force to update the Swiftlint to the last stable version
+        run: |
+          brew outdated swiftlint || brew upgrade swiftlint
+          swiftlint version
+
+      # - name: Install documentation tool - jazzy
+      #   run: gem install jazzy
+
+      - name: Run unit tests
+        run:
+          xcodebuild -enableCodeCoverage YES clean build test
+            -project HyperwalletUISDK.xcodeproj
+            -scheme ${{ matrix.xcode_scheme }}
+            -derivedDataPath "./output"
+            -destination "platform=iOS Simulator,name=iPhone 13,OS=15.2"
+            -configuration Debug ONLY_ACTIVE_ARCH=YES ENABLE_TESTABILITY=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+
+      - name: Lint validation
+        run:
+          # Lint - Add `--strict` to fail for warning and violation
+          swiftlint lint --reporter json
+
+      - name: Convert Test Coverage Resport to lcov formart
+        uses: maxep/xcodebuild-lcov-action@0.1.0
+        with:
+            derived-data-path: ./output
+            target: HyperwalletSDK.framework
+            output-file: ./coverage/lcov.info
+
+      - name: Post to Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
