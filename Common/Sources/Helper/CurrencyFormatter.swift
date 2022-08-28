@@ -21,26 +21,28 @@ import Foundation
 /// Currency Formatter
 public struct CurrencyFormatter {
     private static let currencyData: CurrencyData? = {
-        if let path = Bundle(for: HyperwalletBundle.self).path(forResource: "Currency", ofType: "json"),
+        if let path = Bundle(for: HyperwalletBundle.self)
+            .path(forResource: "Currency", ofType: "json"),
             let data = NSData(contentsOfFile: path) as Data? {
             return try? JSONDecoder().decode(CurrencyData.self, from: data)
         }
         return nil
     }()
-    
+
     /// Get Currency
     /// - Parameter currencyCode: currency code
     /// - Returns: instance of Currency
     public static func getCurrency(for currencyCode: String) -> Currency? {
         return currencyData?.data.first(where: { $0.currencyCode == currencyCode })
     }
-    
+
     /// Format double amount to currency string
     /// - Parameters:
     ///   - amount: amount
     ///   - currencyCode: currency code
     /// - Returns: a formatted currency string
-    public static func formatDoubleAmount(_ amount: Double, with currencyCode: String) -> String {
+    public static func formatDoubleAmount(_ amount: Double,
+                                          with currencyCode: String) -> String {
         if let currency = getCurrency(for: currencyCode) {
             let formatter = NumberFormatter()
             formatter.usesGroupingSeparator = true
@@ -52,18 +54,23 @@ public struct CurrencyFormatter {
             formatter.currencySymbol = ""
 
             if let amount = formatter.string(from: NSNumber(value: amount)) {
-                return amount.replacingOccurrences(of: "\u{200F}", with: "", options: NSString.CompareOptions.literal, range: nil).trimmingCharacters(in: .whitespaces)
+                return amount.replacingOccurrences(of: "\u{200F}",
+                                                   with: "",
+                                                   options: NSString.CompareOptions.literal,
+                                                   range: nil)
+                .trimmingCharacters(in: .whitespaces)
             }
         }
         return "\(amount)"
     }
-    
+
     /// Get decimal amount from formatted currency code
     /// - Parameters:
     ///   - amount: amount string
     ///   - currencyCode: currency code
-    /// - Returns: a decimal amount 
-    public static func getDecimalAmount(amount: String, currencyCode: String?) -> Double {
+    /// - Returns: a decimal amount
+    public static func getDecimalAmount(amount: String,
+                                        currencyCode: String?) -> Double {
         let doubleAmount = NSString(string: amount).doubleValue
         if let currencyCode = currencyCode,
             let currency = getCurrency(for: currencyCode) {
@@ -81,7 +88,8 @@ public struct CurrencyFormatter {
     /// Format amount for currency code using users locale
     /// - Parameter currencyCode: currency code
     /// - Returns: a formatted amount string
-    public static func formatStringAmount(_ amount: String, with currencyCode: String) -> String {
+    public static func formatStringAmount(_ amount: String,
+                                          with currencyCode: String) -> String {
         if let currency = getCurrency(for: currencyCode) {
             let number = amount.formatAmountToDouble()
             let formatter = NumberFormatter()
@@ -92,7 +100,12 @@ public struct CurrencyFormatter {
             formatter.currencyCode = currencyCode
             formatter.locale = getLocaleIdentifer(for: currencyCode)
             formatter.currencySymbol = ""
-            return formatter.string(for: number)?.replacingOccurrences(of: "\u{200F}", with: "", options: NSString.CompareOptions.literal, range: nil).trimmingCharacters(in: .whitespaces) ?? amount
+            return formatter.string(for: number)?
+                .replacingOccurrences(of: "\u{200F}",
+                                      with: "",
+                                      options: NSString.CompareOptions.literal,
+                                      range: nil)
+                .trimmingCharacters(in: .whitespaces) ?? amount
         } else {
             return amount
         }
@@ -101,7 +114,8 @@ public struct CurrencyFormatter {
     /// Format currency amount by adding symbol and currency code
     /// - Parameter currencyCode: currency code
     /// - Returns: a formatted amount string
-    public static func addCurrencySymbolAndCode(_ amount: String, with currencyCode: String) -> String {
+    public static func addCurrencySymbolAndCode(_ amount: String,
+                                                with currencyCode: String) -> String {
         if let currencySymbol = CurrencyFormatter.getCurrency(for: currencyCode)?.symbol {
             return String(format: "%@%@ %@", currencySymbol, amount, currencyCode)
         } else {
@@ -112,16 +126,19 @@ public struct CurrencyFormatter {
     /// Format amount for currency code using users locale while adding symbol and currency code
     /// - Parameter currencyCode: currency code
     /// - Returns: a formatted amount string
-    public static func formatCurrencyWithSymbolAndCode(_ amount: String, with currencyCode: String) -> String {
-        return addCurrencySymbolAndCode(formatStringAmount(amount, with: currencyCode), with: currencyCode)
+    public static func formatCurrencyWithSymbolAndCode(_ amount: String,
+                                                       with currencyCode: String) -> String {
+        return addCurrencySymbolAndCode(formatStringAmount(amount, with: currencyCode),
+                                        with: currencyCode)
     }
-    
+
     /// Format amount for currency code and add currency symbol from Currency.json
     /// - Parameters:
     ///   - amount: amount to format
     ///   - currencyCode: currency code
     /// - Returns: formatted amount with currency symbol
-    public static func formatCurrencyWithSymbol(_ amount: String, with currencyCode: String) -> String {
+    public static func formatCurrencyWithSymbol(_ amount: String,
+                                                with currencyCode: String) -> String {
         let amount = formatStringAmount(amount, with: currencyCode)
         if let currencySymbol = CurrencyFormatter.getCurrency(for: currencyCode)?.symbol {
             return String(format: "%@%@", currencySymbol, amount)
@@ -129,7 +146,7 @@ public struct CurrencyFormatter {
             return amount
         }
     }
-    
+
     /// Get locale
     /// - Parameter currencyCode: currency code
     /// - Returns: a locale
@@ -139,7 +156,7 @@ public struct CurrencyFormatter {
         }
         return Locale.current
     }
-    
+
     /// Currency code and it is locale identifier
     private static let currencyMappings: [String: String] = {
         return [
