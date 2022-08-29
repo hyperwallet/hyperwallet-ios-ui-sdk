@@ -48,6 +48,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           platform: ios
+          noUseBinaries: true
       # - name: Install dependencies
       #   run: carthage update
       #     --platform ios

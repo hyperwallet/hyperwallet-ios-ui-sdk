@@ -1,0 +1,4 @@
+github "JanGorman/Hippolyte" "1.2.2"
+github "grmeyer-hw-dev/hyperwallet-ios-sdk" "78232550ef063cc5302112c30ae566e68e3dcb64"
+github "httpswift/swifter" "1.5.0"
+github "hyperwallet/hyperwallet-ios-insight" "1.0.0-beta05"
