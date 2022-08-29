@@ -20,9 +20,13 @@ jobs:
     name: Tests
     strategy:
       matrix:
-        os: [macos-latest]
-        xcode_version: [13.2.1]
-        xcode_scheme: [ 'HyperwalletUISDK' ]
+        include:
+          - os: macos-latest
+            xcode_version: 13.2.1
+            xcode_scheme: 'HyperwalletUISDK'
+            xcode_only_active_arch: 'YES'
+            xcode_configuration: 'Debug'
+            coverage_target: 'Common.framework'
         # , 'Demo'
     runs-on: ${{ matrix.os }}
     steps:
@@ -34,10 +38,11 @@ jobs:
           xcode-version: '${{ matrix.xcode_version }}'
 
       - name: Install dependencies
-        run: carthage update --platform ios --cache-builds --use-xcframeworks --no-use-binaries
-
-      - name: Install test coverage reports tool - slather
-        run: gem i slather
+        run: carthage update
+          --platform ios
+          --cache-builds
+          --use-xcframeworks
+          --no-use-binaries
 
       - name: Install lint tool - swiftlint
         # Force to update the Swiftlint to the last stable version
@@ -50,12 +55,14 @@ jobs:
 
       - name: Run unit tests
         run:
-          xcodebuild -enableCodeCoverage YES clean build test
+          xcodebuild clean build test
+            -enableCodeCoverage YES
             -project HyperwalletUISDK.xcodeproj
             -scheme ${{ matrix.xcode_scheme }}
             -derivedDataPath "./output"
             -destination "platform=iOS Simulator,name=iPhone 13,OS=15.2"
-            -configuration Debug ONLY_ACTIVE_ARCH=YES ENABLE_TESTABILITY=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+            -configuration "${{ xcode_configuration }}"
+            ONLY_ACTIVE_ARCH=${{ matrix.xcode_only_active_arch }} ENABLE_TESTABILITY=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
       - name: List build result
         run: ls ./output
