@@ -27,6 +27,12 @@ jobs:
             xcode_only_active_arch: 'YES'
             xcode_configuration: 'Debug'
             coverage_target: 'Common.framework'
+          - os: macos-latest
+            xcode_version: 13.2.1
+            xcode_scheme: 'Demo'
+            xcode_only_active_arch: 'NO'
+            xcode_configuration: 'Debug'
+            coverage_target: 'Common.framework'
         # , 'Demo'
     runs-on: ${{ matrix.os }}
     steps:
@@ -61,7 +67,7 @@ jobs:
             -scheme ${{ matrix.xcode_scheme }}
             -derivedDataPath "./output"
             -destination "platform=iOS Simulator,name=iPhone 13,OS=15.2"
-            -configuration "${{ xcode_configuration }}"
+            -configuration "${{ matrix.xcode_configuration }}"
             ONLY_ACTIVE_ARCH=${{ matrix.xcode_only_active_arch }} ENABLE_TESTABILITY=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
       - name: List build result
@@ -73,6 +79,7 @@ jobs:
           swiftlint lint --reporter json
 
       - name: Convert Test Coverage Resport to lcov formart
+        if: matrix.xcode_scheme == 'HyperwalletUISDK'
         uses: maxep/xcodebuild-lcov-action@0.1.0
         with:
             derived-data-path: ./output
