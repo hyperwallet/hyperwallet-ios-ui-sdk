@@ -22,7 +22,8 @@ jobs:
       matrix:
         os: [macos-latest]
         xcode_version: [13.2.1]
-        xcode_scheme: [ 'HyperwalletUISDK', 'Demo' ]
+        xcode_scheme: [ 'HyperwalletUISDK' ]
+        # , 'Demo'
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -48,7 +49,7 @@ jobs:
       #   run: gem install jazzy
 
       - name: Run unit tests
-        run: |
+        run:
           xcodebuild -enableCodeCoverage YES clean build test
             -project HyperwalletUISDK.xcodeproj
             -scheme ${{ matrix.xcode_scheme }}
@@ -56,7 +57,8 @@ jobs:
             -destination "platform=iOS Simulator,name=iPhone 13,OS=15.2"
             -configuration "$configuration" ONLY_ACTIVE_ARCH="$only_active_arch" ENABLE_TESTABILITY=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
-            ls ./output
+      - name: List build result
+        run: ls ./output
 
       - name: Lint validation
         run:
