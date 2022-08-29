@@ -69,7 +69,7 @@ jobs:
         uses: maxep/xcodebuild-lcov-action@0.1.0
         with:
             derived-data-path: ./output
-            target: ${{ matrix.xcode_scheme }}.xcframework
+            target: Common.framework
             output-file: ./coverage/lcov.info
 
       - name: Post to Coveralls
