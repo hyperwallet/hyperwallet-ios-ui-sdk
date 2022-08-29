@@ -55,7 +55,7 @@ jobs:
             -scheme ${{ matrix.xcode_scheme }}
             -derivedDataPath "./output"
             -destination "platform=iOS Simulator,name=iPhone 13,OS=15.2"
-            -configuration "$configuration" ONLY_ACTIVE_ARCH="$only_active_arch" ENABLE_TESTABILITY=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+            -configuration Debug ONLY_ACTIVE_ARCH=YES ENABLE_TESTABILITY=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
       - name: List build result
         run: ls ./output

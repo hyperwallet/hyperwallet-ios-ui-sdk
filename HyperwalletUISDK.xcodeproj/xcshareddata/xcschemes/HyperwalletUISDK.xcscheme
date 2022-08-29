@@ -335,13 +335,6 @@
          </BuildableReference>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DBCA37F4225E892400CD4137"
-            BuildableName = "HyperwalletUISDK.framework"
-            BlueprintName = "HyperwalletUISDK"
-            ReferencedContainer = "container:HyperwalletUISDK.xcodeproj">
-         </BuildableReference>
-         <BuildableReference
-            BuildableIdentifier = "primary"
             BlueprintIdentifier = "FD09389025EE252E00AAA29B"
             BuildableName = "BalanceRepository.framework"
             BlueprintName = "BalanceRepository"
