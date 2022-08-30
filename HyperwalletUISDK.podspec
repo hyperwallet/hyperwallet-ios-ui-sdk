@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name                  = 'HyperwalletUISDK'
-    spec.version               = '1.0.0-beta17'
+    spec.version               = '1.0.0-beta18'
     spec.summary               = 'Hyperwallet UI SDK for iOS to integrate with Hyperwallet Platform'
     spec.homepage              = 'https://github.com/hyperwallet/hyperwallet-ios-ui-sdk'
     spec.license               = { :type => 'MIT', :file => 'LICENSE' }
@@ -35,7 +35,7 @@ Pod::Spec.new do |spec|
     spec.subspec "UserRepository" do |userRepository|
         userRepository.source_files = "UserRepository/Sources/**/*.{swift,h}"
     end
-    
+
     spec.subspec "BalanceRepository" do |balanceRepository|
         balanceRepository.source_files = "BalanceRepository/Sources/**/*.{swift,h}"
     end
