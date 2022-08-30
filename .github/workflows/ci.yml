@@ -69,6 +69,7 @@ jobs:
             -destination "platform=iOS Simulator,name=iPhone 13,OS=15.2"
             -configuration "${{ matrix.xcode_configuration }}"
             ONLY_ACTIVE_ARCH=${{ matrix.xcode_only_active_arch }} ENABLE_TESTABILITY=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+            -quiet
 
       - name: List build result
         run: ls ./output
@@ -87,6 +88,7 @@ jobs:
             output-file: ./coverage/lcov.info
 
       - name: Post to Coveralls
+        if: matrix.xcode_scheme == 'HyperwalletUISDK'
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
