@@ -232,9 +232,11 @@ private extension GenericController {
     func scrollToSelectedRow() {
         var selectedItemIndex: Int?
 
-        for index in items.indices where shouldMarkCellAction?(retrieveItems()[index]) ?? false {
-            selectedItemIndex = index
-            break
+        for index in items.indices {
+            if (shouldMarkCellAction?(retrieveItems()[index]) ?? false) {
+                selectedItemIndex = index
+                break
+            }
         }
 
         guard let indexToScrollTo = selectedItemIndex, indexToScrollTo < items.count else {
