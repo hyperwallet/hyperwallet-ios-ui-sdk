@@ -14,7 +14,6 @@ on:
       - support/SDK-V3
       - feature/**
       - bugfix/**
-
 jobs:
   tests:
     name: Tests
@@ -31,9 +30,8 @@ jobs:
             xcode_version: 13.2.1
             xcode_scheme: 'Demo'
             xcode_only_active_arch: 'NO'
-            xcode_configuration: 'Debug'
+            xcode_configuration: 'XCUITest'
             coverage_target: 'Common.framework'
-        # , 'Demo'
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -69,7 +67,6 @@ jobs:
             -destination "platform=iOS Simulator,name=iPhone 13,OS=15.2"
             -configuration "${{ matrix.xcode_configuration }}"
             ONLY_ACTIVE_ARCH=${{ matrix.xcode_only_active_arch }} ENABLE_TESTABILITY=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
-            -quiet
 
       - name: List build result
         run: ls ./output
