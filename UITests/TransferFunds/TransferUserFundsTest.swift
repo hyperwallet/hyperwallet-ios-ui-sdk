@@ -118,8 +118,12 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.verifyTransferFundsTitle()
         
         waitForExistence(app.alerts["Unexpected Error"])
-        XCUIApplication().alerts["Unexpected Error"]
-            .scrollViews.otherElements.buttons["Done"].tap()
+        XCUIApplication()
+            .alerts["Unexpected Error"]
+            .scrollViews
+            .otherElements
+            .buttons["Done"]
+            .tap()
         waitForNonExistence(spinner)
         XCTAssertTrue(transferFundMenu.exists)
     }

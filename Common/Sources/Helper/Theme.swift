@@ -158,7 +158,7 @@ public class Theme: NSObject {
     /// Representation of all customizable visual style property for `SpinnerView`.
     public struct SpinnerView {
         /// The `UIActivityIndicatorView` style
-        public static var activityIndicatorViewStyle = UIActivityIndicatorView.Style.whiteLarge
+        public static var activityIndicatorViewStyle = UIActivityIndicatorView.Style.large
         /// The `UIActivityIndicatorView` color
         public static var activityIndicatorViewColor = Theme.themeColor
         /// The background color

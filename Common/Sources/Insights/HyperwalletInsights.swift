@@ -21,7 +21,7 @@ import HyperwalletSDK
 import Insights
 
 /// Protocol for HyperwalletInsights
-public protocol HyperwalletInsightsProtocol: class {
+public protocol HyperwalletInsightsProtocol: AnyObject {
     /// Track Clicks
     ///
     /// - Parameters:

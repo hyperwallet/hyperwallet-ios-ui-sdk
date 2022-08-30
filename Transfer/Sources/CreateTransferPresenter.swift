@@ -25,7 +25,7 @@ import UserRepository
 #endif
 import HyperwalletSDK
 
-protocol CreateTransferView: class {
+protocol CreateTransferView: AnyObject {
     func hideLoading()
     func notifyTransferCreated(_ transfer: HyperwalletTransfer)
     func reloadData()
