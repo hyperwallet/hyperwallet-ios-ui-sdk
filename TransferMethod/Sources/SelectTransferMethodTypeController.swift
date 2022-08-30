@@ -100,7 +100,7 @@ extension SelectTransferMethodTypeController {
     }
     /// Returns tableview section count
     override public func numberOfSections(in tableView: UITableView) -> Int {
-        return presenter.countryCurrencySectionData.isNotEmpty ? 1:0
+        return presenter.countryCurrencySectionData.isNotEmpty ? 1 : 0
     }
     /// Display transfer methods
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
