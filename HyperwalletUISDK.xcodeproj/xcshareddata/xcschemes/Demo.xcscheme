@@ -33,7 +33,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "defaults write com.apple.iphonesimulator ConnectHardwareKeyboard -bool NO&#10;">
+               scriptText = "killall Simulator&#10;defaults write com.apple.iphonesimulator ConnectHardwareKeyboard -bool false&#10;&#10;/usr/libexec/PlistBuddy -c &quot;Print :DevicePreferences&quot; ~/Library/Preferences/com.apple.iphonesimulator.plist | perl -lne &apos;print $1 if /^    (\S*) =/&apos; | while read -r a; do /usr/libexec/PlistBuddy -c &quot;Set :DevicePreferences:$a:ConnectHardwareKeyboard&#10;false&quot; ~/Library/Preferences/com.apple.iphonesimulator.plist || /usr/libexec/PlistBuddy -c  &quot;Add :DevicePreferences:$a:ConnectHardwareKeyboard&#10;bool false&quot; ~/Library/Preferences/com.apple.iphonesimulator.plist; done&#10;">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
