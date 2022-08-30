@@ -21,7 +21,7 @@ import HyperwalletSDK
 import TransferMethodRepository
 #endif
 
-protocol ListTransferDestinationView: class {
+protocol ListTransferDestinationView: AnyObject {
     func hideLoading()
     func showError(_ error: HyperwalletErrorType,
                    pageName: String,

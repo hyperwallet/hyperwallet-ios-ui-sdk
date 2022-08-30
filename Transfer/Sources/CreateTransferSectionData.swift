@@ -26,7 +26,7 @@ enum CreateTransferSectionHeader: String, CaseIterable {
     case button, destination, notes, transferAll, amount, source
 }
 
-protocol CreateTransferSectionData: class {
+protocol CreateTransferSectionData: AnyObject {
     var cellIdentifiers: [String] { get }
     var createTransferSectionHeader: CreateTransferSectionHeader { get }
     var errorMessage: String? { get set }

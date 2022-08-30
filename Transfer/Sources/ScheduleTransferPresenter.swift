@@ -23,7 +23,7 @@ import TransferRepository
 #endif
 import HyperwalletSDK
 
-protocol ScheduleTransferView: class {
+protocol ScheduleTransferView: AnyObject {
     func showLoading()
     func hideLoading()
     func showConfirmation(handler: @escaping (() -> Void))
