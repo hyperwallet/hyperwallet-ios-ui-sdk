@@ -282,14 +282,14 @@ class ListReceiptTests: BaseTests {
 
         openReceiptsListScreen()
 
-        verifyCurrencyAndCurrencyCode("Bank Account", "-"+CurrencyCode.USD.1 + "0.00", CurrencyCode.USD.0, at: 0)
+        verifyCurrencyAndCurrencyCode("Bank Account", "-" + CurrencyCode.USD.1 + "0.00", CurrencyCode.USD.0, at: 0)
         verifyCurrencyAndCurrencyCode("Payment", CurrencyCode.USD.1 + "1,000,000.99", CurrencyCode.USD.0, at: 1)
         verifyCurrencyAndCurrencyCode("Bank Account",
-                                      "-"+CurrencyCode.USD.1 + "1,000,000,000.99",
+                                      "-" + CurrencyCode.USD.1 + "1,000,000,000.99",
                                       CurrencyCode.USD.0,
                                       at: 2)
         verifyCurrencyAndCurrencyCode("Bank Account",
-                                      "-"+CurrencyCode.USD.1 + "10,000,000,000,000,000,000.00",
+                                      "-" + CurrencyCode.USD.1 + "10,000,000,000,000,000,000.00",
                                       CurrencyCode.USD.0,
                                       at: 3)
         verifyCellExists("Debit Card", "2019-05-01T17:35:20", "¥1,000,000,000", "JPY", at: 11)
@@ -317,14 +317,14 @@ class ListReceiptTests: BaseTests {
         openReceiptsListScreen()
 
         // add back asssertions
-        verifyCurrencyAndCurrencyCode("Bank Account", "-"+CurrencyCode.USD.1 + "0.00", CurrencyCode.USD.0, at: 0)
+        verifyCurrencyAndCurrencyCode("Bank Account", "-" + CurrencyCode.USD.1 + "0.00", CurrencyCode.USD.0, at: 0)
         verifyCurrencyAndCurrencyCode("Payment", CurrencyCode.USD.1 + "1,000,000.99", CurrencyCode.USD.0, at: 1)
         verifyCurrencyAndCurrencyCode("Bank Account",
-                                      "-"+CurrencyCode.USD.1 + "1,000,000,000.99",
+                                      "-" + CurrencyCode.USD.1 + "1,000,000,000.99",
                                       CurrencyCode.USD.0,
                                       at: 2)
         verifyCurrencyAndCurrencyCode("Bank Account",
-                                      "-"+CurrencyCode.USD.1 + "10,000,000,000,000,000,000.00",
+                                      "-" + CurrencyCode.USD.1 + "10,000,000,000,000,000,000.00",
                                       CurrencyCode.USD.0,
                                       at: 3)
         verifyCurrencyAndCurrencyCode("Payment", CurrencyCode.CAD.1 + "1,000,000,000.99", CurrencyCode.CAD.0, at: 4)

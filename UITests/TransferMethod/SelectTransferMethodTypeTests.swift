@@ -85,6 +85,21 @@ class SelectTransferMethodTypeTests: BaseTests {
         app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: bankAccount).tap()
         XCTAssert(app.navigationBars["Bank Account"].exists)
     }
+    
+    func testSelectTransferMethod_graphQL_unauthenticatedError() {
+        selectTransferMethodType.selectCountry(country: "United States")
+        mockServer.setupStubError(url: "/graphql",
+                                  filename: "JWTTokenRevolked",
+                                  method: HTTPMethod.post,
+                                  statusCode: 401)
+        
+
+
+        app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: bankAccount).tap()
+        waitForNonExistence(app.activityIndicators["activityIndicator"])
+        
+        XCTAssertEqual(app.alerts.element.label, "Authentication Error")
+    }
 
     func testSelectTransferMethod_clickBankCardOpensAddTransferMethodUi () {
         selectTransferMethodType.selectCountry(country: "United States")

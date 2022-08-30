@@ -22,6 +22,6 @@ import UIKit
 public extension UIBarButtonItem {
     /// Override the text of back button  
     static var back: UIBarButtonItem = {
-        UIBarButtonItem(title: "backBarButton".localized(), style: .plain, target: self, action: nil)
+        UIBarButtonItem(title: "backBarButton".localized(), style: .plain, target: UIBarButtonItem.self, action: nil)
     }()
 }

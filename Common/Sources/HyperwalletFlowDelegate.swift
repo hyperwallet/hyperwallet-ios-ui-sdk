@@ -18,7 +18,7 @@
 
 import Foundation
 /// Flow complete protocol
-public protocol HyperwalletFlowDelegate: class {
+public protocol HyperwalletFlowDelegate: AnyObject {
     /// Protocol method to be called after flow completes
     func didFlowComplete(with response: Any)
 }

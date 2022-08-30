@@ -153,6 +153,25 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
         XCTAssert(otherElements
             .containing(NSPredicate(format: "label CONTAINS %@", invalidRoutingNumberError)).count == 1)
     }
+    
+    func testAddTransferMethod_rest_unauthenticatedError() {
+        mockServer.setupStubError(url: "/rest/v3/users/usr-token/bank-accounts",
+                                  filename: "JWTTokenRevolked",
+                                  method: HTTPMethod.post,
+                                  statusCode: 401)
+        
+        waitForExistence(addTransferMethod.branchIdInput)
+        
+        addTransferMethod.setBranchId("021000022")
+        addTransferMethod.setBankAccountId("12345")
+        addTransferMethod.selectAccountType("CHECKING")
+
+        addTransferMethod.clickCreateTransferMethodButton()
+        waitForNonExistence(spinner)
+        
+        
+        XCTAssertEqual(app.alerts.element.label, "Authentication Error")
+    }
 
     func testAddTransferMethod_createBankAccountValidResponse() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/bank-accounts",
