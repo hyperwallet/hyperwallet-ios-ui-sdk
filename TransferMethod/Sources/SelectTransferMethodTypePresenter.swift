@@ -24,7 +24,7 @@ import TransferMethodRepository
 import UserRepository
 #endif
 
-protocol SelectTransferMethodTypeView: class {
+protocol SelectTransferMethodTypeView: AnyObject {
     typealias SelectItemHandler = (_ value: GenericCellConfiguration) -> Void
     typealias MarkCellHandler = (_ value: GenericCellConfiguration) -> Bool
     typealias FilterContentHandler = ((_ items: [GenericCellConfiguration],

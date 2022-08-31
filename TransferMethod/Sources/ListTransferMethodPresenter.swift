@@ -22,7 +22,7 @@ import Common
 import TransferMethodRepository
 #endif
 
-protocol ListTransferMethodView: class {
+protocol ListTransferMethodView: AnyObject {
     func showLoading()
     func hideLoading()
     func showProcessing()

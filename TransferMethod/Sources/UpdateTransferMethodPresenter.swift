@@ -22,7 +22,7 @@ import Common
 import TransferMethodRepository
 #endif
 
-protocol UpdateTransferMethodView: class {
+protocol UpdateTransferMethodView: AnyObject {
     func fieldValues() -> [(name: String, value: String)]
     func dismissProcessing(handler: @escaping () -> Void)
     func hideLoading()

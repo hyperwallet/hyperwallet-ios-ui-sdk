@@ -286,6 +286,7 @@
 		D4527B5A258CD22900B09019 /* BankAccountIndividualUpdateResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = FD6D1AF02583AE3C0019333E /* BankAccountIndividualUpdateResponse.json */; };
 		D4527B5D258CD3F500B09019 /* ListTransferMethodWireAccount.json in Resources */ = {isa = PBXBuildFile; fileRef = D4527B5C258CD3F500B09019 /* ListTransferMethodWireAccount.json */; };
 		D4527B5E258CD5EF00B09019 /* WireAccountUpdateResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = FDF1CF112588EF64005FB4D1 /* WireAccountUpdateResponse.json */; };
+		DB3B369428BE93DA00165220 /* JWTTokenRevolked.json in Resources */ = {isa = PBXBuildFile; fileRef = DB3B369328BE93DA00165220 /* JWTTokenRevolked.json */; };
 		DB4679852260380C00E1AF49 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4679842260380C00E1AF49 /* AppDelegate.swift */; };
 		DB4679872260380C00E1AF49 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4679862260380C00E1AF49 /* ViewController.swift */; };
 		DB46798A2260380C00E1AF49 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB4679882260380C00E1AF49 /* Main.storyboard */; };
@@ -1025,6 +1026,7 @@
 		DB2587FB2261BFF100E6236B /* HyperwalletUISDKUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HyperwalletUISDKUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB2587FF2261BFF100E6236B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB2EB66C22617A8500FBEB3D /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		DB3B369328BE93DA00165220 /* JWTTokenRevolked.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = JWTTokenRevolked.json; sourceTree = "<group>"; };
 		DB4679822260380C00E1AF49 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB4679842260380C00E1AF49 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB4679862260380C00E1AF49 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -2438,6 +2440,7 @@
 				641324E32295764500512816 /* AuthenticationTokens */,
 				C358A9A9227267C000E5AE47 /* TransferMethod */,
 				DBFB61492261E84C00C4A8AA /* UnexpectedErrorResponse.json */,
+				DB3B369328BE93DA00165220 /* JWTTokenRevolked.json */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -3441,6 +3444,7 @@
 				DCF74268257E305600A5295A /* ListTransferMethodResponsePaperCheck.json in Resources */,
 				D4527B48258B6A8E00B09019 /* TransferMethodUpdateConfigurationFieldsPaperCheckResponse.json in Resources */,
 				98F63E6E2284AD370090101D /* PayPalAccountDuplicateResponse.json in Resources */,
+				DB3B369428BE93DA00165220 /* JWTTokenRevolked.json in Resources */,
 				DC49BF15257E06B600567832 /* TransferMethodPaperCheckResponse.json in Resources */,
 				41759420239716C600921392 /* TransferMethodConfigrationUSBankAccountResponseMask.json in Resources */,
 				98F3D757230C5C1000A8195F /* AvailableFundCAD.json in Resources */,

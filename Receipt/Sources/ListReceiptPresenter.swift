@@ -23,7 +23,7 @@ import ReceiptRepository
 import TransferMethodRepository
 #endif
 
-protocol ListReceiptView: class {
+protocol ListReceiptView: AnyObject {
     func hideLoading()
     func reloadData()
     func showError(_ error: HyperwalletErrorType,
