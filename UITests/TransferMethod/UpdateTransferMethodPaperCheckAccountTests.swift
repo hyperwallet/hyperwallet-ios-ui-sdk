@@ -10,6 +10,7 @@ class UpdateTransferMethodPaPerCheckAccountTests: BaseTests {
         super.setUp()
 
         app = XCUIApplication()
+        app.launchArguments.append("-disableAnimations")
         app.launchEnvironment = [
             "COUNTRY": "US",
             "CURRENCY": "USD",

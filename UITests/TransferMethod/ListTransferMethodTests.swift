@@ -47,6 +47,7 @@ class ListTransferMethodTests: BaseTests {
         super.setUp()
 
         app = XCUIApplication()
+        app.launchArguments.append("-disableAnimations")
         app.launch()
 
         mockServer.setupStub(url: "/graphql",

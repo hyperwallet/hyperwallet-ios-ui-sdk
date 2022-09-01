@@ -24,6 +24,7 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
         super.setUp()
 
         app = XCUIApplication()
+        app.launchArguments.append("-disableAnimations")
         app.launchEnvironment = [
             "COUNTRY": "US",
             "CURRENCY": "USD",
@@ -103,7 +104,7 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
         XCTAssert(addTransferMethod.elementQuery["bankAccountId_error"].exists)
 
         XCTAssert(otherElements
-            .containing(NSPredicate(format: "label CONTAINS %@", branchIdPatternError)).count == 1)
+                              .containing(NSPredicate(format: "label CONTAINS %@", branchIdPatternError)).count == 1)
         XCTAssert(otherElements
             .containing(NSPredicate(format: "label CONTAINS %@", bankAccountIdPatternError)).count == 1)
     }

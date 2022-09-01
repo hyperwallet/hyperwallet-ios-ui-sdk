@@ -7,6 +7,7 @@ class TransferUserFundsPPCTest: BaseTests {
     override func setUp() {
         super.setUp()
         app = XCUIApplication()
+        app.launchArguments.append("-disableAnimations")
         app.launch()
         spinner = app.activityIndicators["activityIndicator"]
         transferFundPPCMenu = app.tables.cells

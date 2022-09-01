@@ -22,6 +22,7 @@ class AddTransferMethodBankCardTests: BaseTests {
         super.setUp()
 
         app = XCUIApplication()
+        app.launchArguments.append("-disableAnimations")
         selectTransferMethodType = SelectTransferMethodType(app: app)
         addTransferMethod = AddTransferMethod(app: app)
 

@@ -13,6 +13,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
     override func setUp() {
         super.setUp()
         app = XCUIApplication()
+        app.launchArguments.append("-disableAnimations")
         app.launch()
         spinner = app.activityIndicators["activityIndicator"]
 

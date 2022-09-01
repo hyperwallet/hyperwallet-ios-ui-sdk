@@ -36,6 +36,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ThemeManager.applyToUINavigationBar()
         // Set the default tint color
 
+        #if DEBUG
+        if CommandLine.arguments.contains("-disableAnimations") {
+            UIView.setAnimationsEnabled(false)
+            self.window?.layer.speed = 20.0
+        }
+        #endif
+
         return true
     }
 }
