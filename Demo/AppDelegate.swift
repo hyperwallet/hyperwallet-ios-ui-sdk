@@ -37,12 +37,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Set the default tint color
 
         #if DEBUG
-        if CommandLine.arguments.contains("-disableAnimations") {
-            UIView.setAnimationsEnabled(false)
-            self.window?.layer.speed = 2
+        if CommandLine.arguments.contains("enable-testing") {
+            configureAppForTesting()
         }
         #endif
 
         return true
+    }
+    
+    private func configureAppForTesting(){
+        // Disable animations during testing
+        UIView.setAnimationsEnabled(false)
+        // Speed cursor
+        self.window?.layer.speed = 2
     }
 }

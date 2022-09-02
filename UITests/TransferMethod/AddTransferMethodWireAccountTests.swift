@@ -22,7 +22,7 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
         super.setUp()
 
         app = XCUIApplication()
-        app.launchArguments.append("-disableAnimations")
+        app.launchArguments.append("enable-testing")
         app.launchEnvironment = [
             "COUNTRY": "US",
             "CURRENCY": "USD",
@@ -114,7 +114,7 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
 
         addTransferMethod.wireInstructionsInput.tap()
 
-        XCTAssert(addTransferMethod.bankIdError.exists)
+        XCTAssert(addTransferMethod.bankIdError.waitForExistence(timeout:1))
         XCTAssert(addTransferMethod.branchIdError.exists)
         XCTAssert(addTransferMethod.bankAccountIdError.exists)
 

@@ -45,7 +45,7 @@ class TransferUserFundsTest: BaseTests {
     override func setUp() {
         super.setUp()
         app = XCUIApplication()
-        app.launchArguments.append("-disableAnimations")
+        app.launchArguments.append("enable-testing")
         app.launch()
 
         spinner = app.activityIndicators["activityIndicator"]
@@ -938,7 +938,7 @@ class TransferUserFundsTest: BaseTests {
         transferFunds.transferSourceTitleLabel.tap()
 
         let app = XCUIApplication()
-        app.launchArguments.append("-disableAnimations")
+        app.launchArguments.append("enable-testing")
         XCTAssert(app.tables.staticTexts["CAD, EUR, USD"].exists)
 
         let ppcCell = app.tables.element.children(matching: .cell).element(boundBy: 1)

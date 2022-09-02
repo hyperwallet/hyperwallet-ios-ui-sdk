@@ -9,7 +9,7 @@ class AddTransferMethodVemoAccountTests: BaseTests {
         super.setUp()
 
         app = XCUIApplication()
-        app.launchArguments.append("-disableAnimations")
+        app.launchArguments.append("enable-testing")
         app.launchEnvironment = [
             "COUNTRY": "US",
             "CURRENCY": "USD",

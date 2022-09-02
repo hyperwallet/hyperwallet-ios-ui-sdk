@@ -6,7 +6,7 @@ class PrepaidCardListReceiptTests: BaseTests {
     override func setUp() {
         super.setUp()
         app = XCUIApplication()
-        app.launchArguments.append("-disableAnimations")
+        app.launchArguments.append("enable-testing")
         app.launch()
         spinner = app.activityIndicators["activityIndicator"]
         prepaidCardReceiptMenu = app.tables.cells

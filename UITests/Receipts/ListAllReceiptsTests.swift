@@ -11,7 +11,7 @@ class ListAllReceiptsTests: BaseTests {
         super.setUp()
 
         app = XCUIApplication()
-        app.launchArguments.append("-disableAnimations")
+        app.launchArguments.append("enable-testing")
         app.launch()
 
         receiptsList = ReceiptsList(app: app)

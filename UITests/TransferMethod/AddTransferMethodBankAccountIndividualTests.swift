@@ -24,7 +24,7 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
         super.setUp()
 
         app = XCUIApplication()
-        app.launchArguments.append("-disableAnimations")
+        app.launchArguments.append("enable-testing")
         app.launchEnvironment = [
             "COUNTRY": "US",
             "CURRENCY": "USD",
@@ -106,8 +106,12 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
         // Comment to address UI Test after migrate to Xcode 13 
 //        XCTAssert(otherElements
 //                              .containing(NSPredicate(format: "label CONTAINS %@", branchIdPatternError)).count == 1)
-//        XCTAssert(otherElements
-//            .containing(NSPredicate(format: "label CONTAINS %@", bankAccountIdPatternError)).count == 1)
+        
+        XCTAssert(app.staticTexts
+            .containing(NSPredicate(format: "label CONTAINS %@", branchIdPatternError)).firstMatch.waitForExistence(timeout: 1))
+        
+        XCTAssert(app.staticTexts
+            .containing(NSPredicate(format: "label CONTAINS %@", bankAccountIdPatternError)).count == 1)
     }
 
     func testAddTransferMethod_returnsErrorOnInvalidLength() {
