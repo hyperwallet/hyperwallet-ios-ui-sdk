@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #if DEBUG
         if CommandLine.arguments.contains("-disableAnimations") {
             UIView.setAnimationsEnabled(false)
-            self.window?.layer.speed = 20.0
+            self.window?.layer.speed = 2
         }
         #endif
 

@@ -78,8 +78,7 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
         addTransferMethod.setBankId("")
         addTransferMethod.setBranchId("")
         addTransferMethod.setBankAccountId("")
-
-        addTransferMethod.clickCreateTransferMethodButton()
+        addTransferMethod.wireInstructionsInput.tap()
 
         XCTAssert(addTransferMethod.bankIdError.exists)
         XCTAssert(addTransferMethod.branchIdError.exists)
@@ -96,7 +95,7 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
         addTransferMethod.setBranchId("abc123abc")
         addTransferMethod.setBankAccountId(".1a-31a")
 
-        addTransferMethod.clickCreateTransferMethodButton()
+        addTransferMethod.wireInstructionsInput.tap()
 
         XCTAssert(addTransferMethod.bankIdError.exists)
         XCTAssert(addTransferMethod.branchIdError.exists)
@@ -113,7 +112,7 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
         addTransferMethod.setBankId("a")
         addTransferMethod.setBankAccountId("")
 
-        addTransferMethod.clickCreateTransferMethodButton()
+        addTransferMethod.wireInstructionsInput.tap()
 
         XCTAssert(addTransferMethod.bankIdError.exists)
         XCTAssert(addTransferMethod.branchIdError.exists)

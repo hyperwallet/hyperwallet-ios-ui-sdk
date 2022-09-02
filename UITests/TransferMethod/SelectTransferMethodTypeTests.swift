@@ -54,17 +54,23 @@ class SelectTransferMethodTypeTests: BaseTests {
 
     func testSelectTransferMethodType_verifyTransferMethodSelection() {
         selectTransferMethodType.selectCountry(country: "Canada")
+        let spinner = app.activityIndicators["activityIndicator"]
+        waitForNonExistence(spinner)
         selectTransferMethodType.selectCurrency(currency: "CAD")
 
-        XCTAssert(app.tables["selectTransferMethodTypeTable"].cells.element(boundBy: 0).staticTexts[
-            "Bank Account"].exists)
-        XCTAssert(app.tables["selectTransferMethodTypeTable"].cells.element(boundBy: 1).staticTexts[
-            "PayPal Account"].exists)
+        XCTAssert(app.tables["selectTransferMethodTypeTable"]
+            .staticTexts["Bank Account"]
+            .exists)
+        XCTAssert(app.tables["selectTransferMethodTypeTable"]
+            .staticTexts["PayPal Account"]
+            .exists)
 
-        XCTAssert(app.tables["selectTransferMethodTypeTable"].cells.element(boundBy: 0).staticTexts[
-            "$2.20 fee \u{2022} 1-2 Business days"].exists)
-        XCTAssert(app.tables["selectTransferMethodTypeTable"].cells.element(boundBy: 1).staticTexts[
-            "$0.25 fee \u{2022} IMMEDIATE"].exists)
+        XCTAssert(app.tables["selectTransferMethodTypeTable"]
+            .staticTexts[ "$2.20 fee \u{2022} 1-2 Business days"]
+            .exists)
+        XCTAssert(app.tables["selectTransferMethodTypeTable"]
+            .staticTexts["$0.25 fee \u{2022} IMMEDIATE"]
+            .exists)
     }
 
     func testSelectTransferMethodType_verifyCountrySelectionSearch() {
@@ -125,7 +131,7 @@ class SelectTransferMethodTypeTests: BaseTests {
         selectTransferMethodType.selectCountry(country: "THAILAND")
 
         XCTAssertTrue(app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: wireTransfer).exists)
-        XCTAssertTrue(app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: transactionFee).exists)
+        XCTAssertTrue(app.tables["selectTransferMethodTypeTable"].staticTexts["No fee"].exists)
         XCTAssertFalse(app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: processingTime).exists)
     }
     
