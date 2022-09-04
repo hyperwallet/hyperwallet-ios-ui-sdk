@@ -26,8 +26,8 @@ jobs:
             xcode_only_active_arch: 'YES'
             xcode_configuration: 'Debug'
             coverage_target: 'Common.framework'
-          - os: macos-latest
-            xcode_version: 13.2.1
+          - os: macos-12
+            xcode_version: 13.4
             xcode_scheme: 'Demo'
             xcode_only_active_arch: 'NO'
             xcode_configuration: 'XCUITest  '
