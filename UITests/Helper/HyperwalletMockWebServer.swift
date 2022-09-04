@@ -14,7 +14,7 @@ final class HyperwalletMockWebServer {
     func setUp() {
         server = HttpServer()
         do {
-            try server.start()
+            try server.start(8432)
         } catch {
             print("Error info: \(error)")
         }
