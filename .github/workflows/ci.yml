@@ -48,12 +48,6 @@ jobs:
           --use-xcframeworks
           --no-use-binaries
 
-      - name: Install lint tool - swiftlint
-        # Force to update the Swiftlint to the last stable version
-        run: |
-          brew outdated swiftlint || brew upgrade swiftlint
-          swiftlint version
-
       - name: Run unit tests
         run:
           xcodebuild clean build test
