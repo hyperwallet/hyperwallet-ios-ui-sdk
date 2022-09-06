@@ -1,4 +1,4 @@
-name: Core SDK CI
+name: Core UI SDK CI
 
 on:
   workflow_dispatch:
