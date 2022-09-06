@@ -114,7 +114,7 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
 
         addTransferMethod.wireInstructionsInput.tap()
 
-        XCTAssert(addTransferMethod.bankIdError.waitForExistence(timeout:1))
+        XCTAssert(addTransferMethod.bankIdError.waitForExistence(timeout: 1))
         XCTAssert(addTransferMethod.branchIdError.exists)
         XCTAssert(addTransferMethod.bankAccountIdError.exists)
 

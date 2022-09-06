@@ -175,7 +175,6 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
         addTransferMethod.clickCreateTransferMethodButton()
         waitForNonExistence(spinner)
         
-        
         XCTAssertEqual(app.alerts.element.label, "Authentication Error")
     }
 

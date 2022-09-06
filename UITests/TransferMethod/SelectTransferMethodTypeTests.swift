@@ -99,8 +99,6 @@ class SelectTransferMethodTypeTests: BaseTests {
                                   filename: "JWTTokenRevolked",
                                   method: HTTPMethod.post,
                                   statusCode: 401)
-        
-
 
         app.tables["selectTransferMethodTypeTable"].staticTexts.element(matching: bankAccount).tap()
         waitForNonExistence(app.activityIndicators["activityIndicator"])

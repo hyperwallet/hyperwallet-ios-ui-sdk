@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    private func configureAppForTesting(){
+    private func configureAppForTesting() {
         // Disable animations during testing
         UIView.setAnimationsEnabled(false)
         // Speed cursor

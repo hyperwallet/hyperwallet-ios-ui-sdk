@@ -3,6 +3,19 @@ lane :beta do
   update("beta", version)
 end
 
+lane :test do
+  scan(
+      clean: true,
+      code_coverage: true,
+      device: "iPhone 13",
+  )
+  gcovr(
+    lcov: true,
+    html_details: true,
+    output: "./code-coverage/report.html"
+  )
+end
+
 lane :release_beta do
   version = updateVersion("beta")
   message = "Release #{version}"
