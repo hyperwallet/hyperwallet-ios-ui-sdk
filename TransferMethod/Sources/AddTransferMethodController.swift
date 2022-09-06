@@ -402,6 +402,8 @@ extension AddTransferMethodController: AddTransferMethodView {
     private func updateFooterView(_ footerView: UITableViewHeaderFooterView, for section: Int) {
         UIView.setAnimationsEnabled(false)
         tableView.beginUpdates()
+        footerView.textLabel?.accessibilityIdentifier = buildFooterLabelIdentifier(
+            for: presenter.sectionData[section].fieldGroup)
         footerView.textLabel?.text = presenter.sectionData[section].errorMessage
         footerView.sizeToFit()
         tableView.endUpdates()
@@ -413,6 +415,8 @@ extension AddTransferMethodController: AddTransferMethodView {
                                    willDisplayFooterView view: UIView,
                                    forSection section: Int) {
         if let footerView = view as? UITableViewHeaderFooterView {
+            footerView.textLabel?.accessibilityIdentifier = buildFooterLabelIdentifier(
+                for: presenter.sectionData[section].fieldGroup)
             footerView.textLabel?.textColor = Theme.Label.errorColor
         }
     }
@@ -491,5 +495,9 @@ extension AddTransferMethodController: AddTransferMethodView {
     private func getIndexPath(for section: AddTransferMethodSectionData) -> IndexPath {
         let sectionIndex = getSectionIndex(by: section.fieldGroup)!
         return IndexPath(row: section.rowShouldBeScrolledTo!, section: sectionIndex)
+    }
+    
+    private func buildFooterLabelIdentifier(for prefix: String) -> String {
+        return String(format: "%@_footer_label", prefix)
     }
 }
