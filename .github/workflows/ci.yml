@@ -62,7 +62,7 @@ jobs:
 
       - name: Run unit tests - UI Tests
         if: matrix.xcode_scheme == 'Demo'
-        run: fastlane ui_test
+        run: fastlane scan -s ${{ matrix.xcode_scheme }} -device 'IPhone 13 Pro Max'
 
       - name: List build result
         run: ls ./output
