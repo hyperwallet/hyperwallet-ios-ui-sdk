@@ -3,11 +3,12 @@ lane :beta do
   update("beta", version)
 end
 
-lane :test do
+lane :ui_test do
   scan(
+      scheme: 'Demo',
       clean: true,
       code_coverage: true,
-      device: "iPhone 13",
+      device: 'iPhone 13 Pro Max',
   )
   gcovr(
     lcov: true,
