@@ -23,7 +23,7 @@ lane :unit_tests do
     # max_concurrent_simulators: 4,
     # parallel_testing: true,
     # output_remove_retry_attempts: true,
-    # derived_data_path: './output',
+    derived_data_path: './output',
     scheme: "HyperwalletUISDK",
     xcargs: "ONLY_ACTIVE_ARCH=YES"
   )
@@ -31,11 +31,11 @@ lane :unit_tests do
   #   coveralls: true,
   #   output: "./coverage"
   # )
-  xcov(
-     project: "HyperwalletUISDK.xcodeproj",
-     scheme: "HyperwalletUISDK",
-     output_directory: "./coverage",
-  )
+  # xcov(
+  #    project: "HyperwalletUISDK.xcodeproj",
+  #    scheme: "HyperwalletUISDK",
+  #    output_directory: "./coverage",
+  # )
 end
 
 lane :ui_tests do
