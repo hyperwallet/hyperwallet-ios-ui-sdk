@@ -44,7 +44,7 @@ jobs:
           xcode-version: '${{ matrix.xcode_version }}'
 
       - name: Install dependencies
-        run: carthage update
+        run: carthage bootstrap
           --platform ios
           --cache-builds
           --use-xcframeworks
