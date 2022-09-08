@@ -21,6 +21,7 @@ jobs:
       matrix:
         include:
           - os: macos-12
+            fastlane_task: 'unit_tests'
             xcode_version: 13.4
             xcode_scheme: 'HyperwalletUISDK'
             xcode_only_active_arch: 'YES'
@@ -28,6 +29,7 @@ jobs:
             coverage_target: 'Common.framework'
             xcode_destination: 'platform=iOS Simulator,name=iPhone 13 Pro Max,OS=15.5'
           - os: macos-12
+            fastlane_task: 'ui_tests'
             xcode_version: 13.4
             xcode_scheme: 'Demo'
             xcode_only_active_arch: 'NO'
@@ -50,21 +52,20 @@ jobs:
           --use-xcframeworks
           --no-use-binaries
 
-      - name: Run unit tests
-        if: matrix.xcode_scheme == 'HyperwalletUISDK'
-        run:
-          xcodebuild clean build test
-            -enableCodeCoverage YES
-            -project HyperwalletUISDK.xcodeproj
-            -scheme ${{ matrix.xcode_scheme }}
-            -derivedDataPath "./output"
-            -destination "platform=iOS Simulator,name=iPhone 13,OS=15.5"
-            -configuration "${{ matrix.xcode_configuration }}"
-            ONLY_ACTIVE_ARCH=${{ matrix.xcode_only_active_arch }} ENABLE_TESTABILITY=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+      # - name: Run unit tests
+      #   if: matrix.xcode_scheme == 'HyperwalletUISDK'
+      #   run:
+      #     xcodebuild clean build test
+      #       -enableCodeCoverage YES
+      #       -project HyperwalletUISDK.xcodeproj
+      #       -scheme ${{ matrix.xcode_scheme }}
+      #       -derivedDataPath "./output"
+      #       -destination "platform=iOS Simulator,name=iPhone 13,OS=15.5"
+      #       -configuration "${{ matrix.xcode_configuration }}"
+      #       ONLY_ACTIVE_ARCH=${{ matrix.xcode_only_active_arch }} ENABLE_TESTABILITY=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
-      - name: Run unit tests - UI Tests
-        if: matrix.xcode_scheme == 'Demo'
-        run: fastlane ui_tests
+      - name: Run unit tests - {{ matrix.fastlane_task }}
+        run: fastlane {{ matrix.fastlane_task }}
 
       - name: Lint validation
         run:
