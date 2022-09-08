@@ -26,12 +26,14 @@ jobs:
             xcode_only_active_arch: 'YES'
             xcode_configuration: 'Debug'
             coverage_target: 'Common.framework'
+            xcode_destination: 'platform=iOS Simulator,name=iPhone 13 Pro Max,OS=15.5'
           - os: macos-12
             xcode_version: 13.4
             xcode_scheme: 'Demo'
             xcode_only_active_arch: 'NO'
             xcode_configuration: 'XCUITest  '
             coverage_target: 'Common.framework'
+            xcode_destination: 'platform=iOS Simulator,name=iPhone 13 Pro Max,OS=15.5'
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -62,9 +64,10 @@ jobs:
 
       - name: Run unit tests - UI Tests
         if: matrix.xcode_scheme == 'Demo'
-        run: fastlane scan -s ${{ matrix.xcode_scheme }} --destination 'platform=iOS Simulator,name=iPhone 13 Pro Max,OS=15.5'
+        run: fastlane scan -s ${{ matrix.xcode_scheme }} --destination
 
       - name: List build result
+        if: matrix.xcode_scheme == 'HyperwalletUISDK'
         run: ls ./output
 
       - name: Lint validation
