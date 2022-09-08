@@ -30,7 +30,8 @@ lane :unit_tests do
   xcov(
      project: "HyperwalletUISDK.xcodeproj",
      scheme: "HyperwalletUISDK",
-     output_directory: "./coverage"
+     output_directory: "./coverage",
+     disable_coveralls: false
   )
 end
 
