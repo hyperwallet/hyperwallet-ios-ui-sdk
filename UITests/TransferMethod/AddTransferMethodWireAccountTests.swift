@@ -135,6 +135,7 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
 
         addTransferMethod.setAdditionalWireInstructions("This is instruction")
         addTransferMethod.setIntermediaryBankId("ELREUS44")
+        addTransferMethod.addTransferMethodTableView.scroll(to: addTransferMethod.intermediaryBankAccountIdInput)
         addTransferMethod.setIntermediaryBankAccountId("246810")
 
         addTransferMethod.setFirstName("Tommy")
