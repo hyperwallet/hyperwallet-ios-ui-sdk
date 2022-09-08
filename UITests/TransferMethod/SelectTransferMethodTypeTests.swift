@@ -120,7 +120,7 @@ class SelectTransferMethodTypeTests: BaseTests {
     func testSelectTransferMethod_verifyTransferMethodsListEmptyFee () {
         selectTransferMethodType.selectCountry(country: "THAILAND")
 
-        let staticTexts = app.tables["selectTransferMethodTypeTable"].staticTexts;
+        let staticTexts = app.tables["selectTransferMethodTypeTable"].staticTexts
         XCTAssertTrue(staticTexts.element(matching: wireTransfer).waitForExistence(timeout: 1))
         XCTAssertTrue(staticTexts.element(matching: transactionFee).waitForExistence(timeout: 1))
         XCTAssertFalse(staticTexts.element(matching: processingTime).waitForExistence(timeout: 1))
