@@ -64,8 +64,8 @@ jobs:
       #       -configuration "${{ matrix.xcode_configuration }}"
       #       ONLY_ACTIVE_ARCH=${{ matrix.xcode_only_active_arch }} ENABLE_TESTABILITY=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
-      - name: Run unit tests - {{ matrix.fastlane_task }}
-        run: fastlane {{ matrix.fastlane_task }}
+      - name: Run unit tests - ${{ matrix.fastlane_task }}
+        run: fastlane ${{ matrix.fastlane_task }}
 
       - name: Lint validation
         run:
