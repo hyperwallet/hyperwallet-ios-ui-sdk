@@ -7,14 +7,47 @@ lane :ui_test do
   scan(
       scheme: 'Demo',
       clean: true,
-      code_coverage: true,
-      device: 'iPhone 13 Pro Max',
+      destination: 'platform=iOS Simulator,name=iPhone 13 Pro Max,OS=15.5',
   )
   gcovr(
     lcov: true,
     html_details: true,
     output: "./code-coverage/report.html"
   )
+end
+
+lane :tests do
+  run_tests(project: "HyperwalletUISDK.xcodeproj",
+            devices: ['iPhone 13 Pro Max'],
+            max_concurrent_simulators: 4,
+            parallel_testing: true,
+            scheme: "HyperwalletUISDK")
+end
+
+lane :ui_tests do
+  run_tests(project: "HyperwalletUISDK.xcodeproj",
+            devices: ['iPhone 13 Pro Max'],
+            max_concurrent_simulators: 4,
+            parallel_testing: true,
+            number_of_retries: 3,
+            output_remove_retry_attempts: true,
+            scheme: "Demo")
+end
+
+lane :unit_test do
+  scan(
+      code_coverage: true,
+      devices: ['iPhone 13 Pro Max'],
+      scheme: 'HyperwalletUISDK',
+      max_concurrent_simulators: 4,
+      build_for_testing: true,
+      clean: true
+  )
+  # gcovr(
+  #   lcov: true,
+  #   html_details: true,
+  #   output: "./code-coverage/report.html"
+  # )
 end
 
 lane :release_beta do
