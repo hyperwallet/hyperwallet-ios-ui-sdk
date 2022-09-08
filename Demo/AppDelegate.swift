@@ -26,8 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 #if DEBUG
-    func applicationDidBecomeActive(_ application: UIApplication)
-    {
+    func applicationDidBecomeActive(_ application: UIApplication) {
         let keyWindow = UIApplication.shared.connectedScenes
                 .filter({ $0.activationState == .foregroundActive })
                 .compactMap({ $0 as? UIWindowScene })
