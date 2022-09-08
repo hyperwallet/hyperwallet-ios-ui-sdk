@@ -66,10 +66,6 @@ jobs:
         if: matrix.xcode_scheme == 'Demo'
         run: fastlane ui_tests
 
-      - name: List build result
-        if: matrix.xcode_scheme == 'HyperwalletUISDK'
-        run: ls ./output
-
       - name: Lint validation
         run:
           # Lint - Add `--strict` to fail for warning and violation
