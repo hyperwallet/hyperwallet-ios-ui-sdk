@@ -20,22 +20,11 @@ lane :unit_tests do
   run_tests(
     project: "HyperwalletUISDK.xcodeproj",
     devices: ['iPhone 13 Pro'],
-    # max_concurrent_simulators: 4,
-    # parallel_testing: true,
-    # output_remove_retry_attempts: true,
     derived_data_path: './output',
     scheme: "HyperwalletUISDK",
+    code_coverage: true,
     xcargs: "ONLY_ACTIVE_ARCH=YES"
   )
-  # gcovr(
-  #   coveralls: true,
-  #   output: "./coverage"
-  # )
-  # xcov(
-  #    project: "HyperwalletUISDK.xcodeproj",
-  #    scheme: "HyperwalletUISDK",
-  #    output_directory: "./coverage",
-  # )
 end
 
 lane :ui_tests do
