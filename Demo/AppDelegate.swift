@@ -25,6 +25,17 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
+#if DEBUG
+    func applicationDidBecomeActive(_ application: UIApplication)
+    {
+        let keyWindow = UIApplication.shared.connectedScenes
+                .filter({ $0.activationState == .foregroundActive })
+                .compactMap({ $0 as? UIWindowScene })
+                .first?.windows
+                .filter({ $0.isKeyWindow }).first
+        keyWindow?.layer.speed = 100
+    }
+#endif
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -47,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func configureAppForTesting() {
         // Disable animations during testing
-        UIView.setAnimationsEnabled(false)
+//        UIView.setAnimationsEnabled(false)        
         // Speed cursor
         self.window?.layer.speed = 2
     }
