@@ -27,11 +27,14 @@ lane :unit_tests do
     scheme: "HyperwalletUISDK",
     xcargs: "ONLY_ACTIVE_ARCH=YES"
   )
+  # gcovr(
+  #   coveralls: true,
+  #   output: "./coverage"
+  # )
   xcov(
      project: "HyperwalletUISDK.xcodeproj",
      scheme: "HyperwalletUISDK",
      output_directory: "./coverage",
-     disable_coveralls: false
   )
 end
 
