@@ -64,7 +64,7 @@ jobs:
 
       - name: Run unit tests - UI Tests
         if: matrix.xcode_scheme == 'Demo'
-        run: fastlane scan -s ${{ matrix.xcode_scheme }} --destination
+        run: fastlane ui_tests
 
       - name: List build result
         if: matrix.xcode_scheme == 'HyperwalletUISDK'
