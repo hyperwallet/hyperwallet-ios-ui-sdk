@@ -18,6 +18,7 @@ jobs:
   tests:
     name: Tests
     strategy:
+      fail-fast: false
       matrix:
         include:
           - os: macos-12
