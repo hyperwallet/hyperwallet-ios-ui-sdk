@@ -22,21 +22,16 @@ jobs:
       matrix:
         include:
           - os: macos-12
+            fastlane_title: 'Unit Tests'
             fastlane_task: 'unit_tests'
             xcode_version: 13.4
-            xcode_scheme: 'HyperwalletUISDK'
-            xcode_only_active_arch: 'YES'
-            xcode_configuration: 'Debug'
             coverage_target: 'Common.framework'
-            xcode_destination: 'platform=iOS Simulator,name=iPhone 13 Pro Max,OS=15.5'
+
           - os: macos-12
+            fastlane_title: 'UI Tests'
             fastlane_task: 'ui_tests'
             xcode_version: 13.4
-            xcode_scheme: 'Demo'
-            xcode_only_active_arch: 'NO'
-            xcode_configuration: 'XCUITest  '
-            coverage_target: 'Common.framework'
-            xcode_destination: 'platform=iOS Simulator,name=iPhone 13 Pro Max,OS=15.5'
+            coverage_target: ''
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -53,28 +48,16 @@ jobs:
           --use-xcframeworks
           --no-use-binaries
 
-      # - name: Run unit tests
-      #   if: matrix.xcode_scheme == 'HyperwalletUISDK'
-      #   run:
-      #     xcodebuild clean build test
-      #       -enableCodeCoverage YES
-      #       -project HyperwalletUISDK.xcodeproj
-      #       -scheme ${{ matrix.xcode_scheme }}
-      #       -derivedDataPath "./output"
-      #       -destination "platform=iOS Simulator,name=iPhone 13,OS=15.5"
-      #       -configuration "${{ matrix.xcode_configuration }}"
-      #       ONLY_ACTIVE_ARCH=${{ matrix.xcode_only_active_arch }} ENABLE_TESTABILITY=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
-
       - name: Run unit tests - ${{ matrix.fastlane_task }}
         run: fastlane ${{ matrix.fastlane_task }}
 
       - name: Lint validation
+        if: matrix.fastlane_task == 'unit_tests'
         run:
-          # Lint - Add `--strict` to fail for warning and violation
-          swiftlint lint --reporter json
+          swiftlint lint --strict --reporter json
 
       - name: Convert Test Coverage Resport to lcov formart
-        if: matrix.xcode_scheme == 'HyperwalletUISDK'
+        if: matrix.fastlane_task == 'unit_tests'
         uses: maxep/xcodebuild-lcov-action@0.1.0
         with:
             target: Common.framework
@@ -82,7 +65,7 @@ jobs:
             output-file: ./coverage/lcov.info
 
       - name: Post to Coveralls
-        if: matrix.xcode_scheme == 'HyperwalletUISDK'
+        if: matrix.fastlane_task == 'unit_tests'
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
