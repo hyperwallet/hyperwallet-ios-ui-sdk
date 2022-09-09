@@ -22,13 +22,13 @@ jobs:
       matrix:
         include:
           - os: macos-12
-            fastlane_title: 'Unit Tests'
+            task_title: 'Unit Tests'
             fastlane_task: 'unit_tests'
             xcode_version: 13.4
             coverage_target: 'Common.framework'
 
           - os: macos-12
-            fastlane_title: 'UI Tests'
+            task_title: 'UI Tests'
             fastlane_task: 'ui_tests'
             xcode_version: 13.4
             coverage_target: ''
@@ -48,7 +48,7 @@ jobs:
           --use-xcframeworks
           --no-use-binaries
 
-      - name: Run unit tests - ${{ matrix.fastlane_task }}
+      - name: Run ${{ matrix.task_title }}
         run: fastlane ${{ matrix.fastlane_task }}
 
       - name: Lint validation
