@@ -9,9 +9,8 @@ lane :unit_tests do
     devices: ['iPhone 13 Pro'],
     derived_data_path: './output',
     scheme: "HyperwalletUISDK",
-    configuration: 'XCUITest',
+    configuration: 'Debug',
     code_coverage: true,
-    build_for_testing: true,
     xcargs: 'ONLY_ACTIVE_ARCH=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO'
   )
 end
@@ -20,7 +19,7 @@ lane :ui_tests do
   run_tests(
     project: "HyperwalletUISDK.xcodeproj",
     devices: ['iPhone 13 Pro Max'],
-    configuration: 'Debug',
+    configuration: 'XCUITest',
     # max_concurrent_simulators: 4,
     # parallel_testing: true,
     build_for_testing: true,
