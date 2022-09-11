@@ -50,7 +50,7 @@ public protocol TransferMethodConfigurationRepository {
     func getTransferMethodTypesFeesAndProcessingTimes(
         country: String,
         currency: String,
-        completion:@escaping (Result<HyperwalletTransferMethodConfigurationKey?, HyperwalletErrorType>) -> Void)
+        completion: @escaping (Result<HyperwalletTransferMethodConfigurationKey?, HyperwalletErrorType>) -> Void)
 
     /// Refreshes the transfer method fields
     func refreshFields()
@@ -99,7 +99,7 @@ public final class RemoteTransferMethodConfigurationRepository: TransferMethodCo
     public func getTransferMethodTypesFeesAndProcessingTimes(
         country: String,
         currency: String,
-        completion:@escaping (Result<HyperwalletTransferMethodConfigurationKey?, HyperwalletErrorType>) -> Void) {
+        completion: @escaping (Result<HyperwalletTransferMethodConfigurationKey?, HyperwalletErrorType>) -> Void) {
         let query = HyperwalletTransferMethodTypesFeesAndProcessingTimesQuery(country: country,
                                                                               currency: currency)
         Hyperwallet.shared

@@ -151,7 +151,7 @@ final class ListTransferMethodController: UITableViewController {
     }
 
     private func showConfirmationAlert(title: String?, message: String, transferMethodIndex: Int) {
-        let removeHandler = { [weak self] (_ : UIAlertAction) -> Void in
+        let removeHandler = { [weak self] (_: UIAlertAction) -> Void in
             guard let strongSelf = self else {
                 return
             }

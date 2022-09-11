@@ -258,7 +258,7 @@ final class SelectTransferMethodTypePresenter {
     }
     
     private func retrieveTransferMethodTypesFeesAndProcessingTimes(
-        completion:@escaping ([HyperwalletTransferMethodType]?) -> Void) {
+        completion: @escaping ([HyperwalletTransferMethodType]?) -> Void) {
         transferMethodConfigurationRepository
             .getTransferMethodTypesFeesAndProcessingTimes(country: selectedCountry,
                                                           currency: selectedCurrency) { [weak self] (result) in

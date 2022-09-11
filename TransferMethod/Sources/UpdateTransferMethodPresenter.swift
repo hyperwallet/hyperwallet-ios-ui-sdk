@@ -167,12 +167,12 @@ final class UpdateTransferMethodPresenter {
         let transferMethodTypeCode = transferMethodConfiguration?.transferMethodType ?? ""
         switch transferMethodTypeCode {
         case HyperwalletTransferMethod.TransferMethodType.bankAccount.rawValue,
-             HyperwalletTransferMethod.TransferMethodType.wireAccount.rawValue :
+             HyperwalletTransferMethod.TransferMethodType.wireAccount.rawValue:
             let bankAccount = HyperwalletBankAccount.Builder(token: transferMethodToken)
                 .build()
             return bankAccount
 
-        case HyperwalletTransferMethod.TransferMethodType.bankCard.rawValue :
+        case HyperwalletTransferMethod.TransferMethodType.bankCard.rawValue:
             let bankCard = HyperwalletBankCard.Builder(token: transferMethodToken)
                 .build()
             return bankCard
