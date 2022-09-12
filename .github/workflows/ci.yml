@@ -43,14 +43,15 @@ jobs:
         with:
           xcode-version: '${{ matrix.xcode_version }}'
 
-      - uses: actions/cache@v3
+      - name: Carthage [Setup cache]
+        uses: actions/cache@v3
         with:
           path: Carthage
           key: ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
           restore-keys: |
             ${{ runner.os }}-carthage-
 
-      - name: Install dependencies
+      - name: Carthage [Install dependencies]
         run: carthage bootstrap
           --platform ios
           --cache-builds
