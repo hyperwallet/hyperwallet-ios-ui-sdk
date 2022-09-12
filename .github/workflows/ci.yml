@@ -58,7 +58,7 @@ jobs:
 
       - name: Code Coverage [Build report]
         if: matrix.fastlane_task == 'unit_tests'
-        run:
+        run: |
           # Command displays a summary of the coverage of the binaries BIN,… using the profile data PROFILE.
           llvm-cov report \
           # Enable color output
@@ -88,7 +88,7 @@ jobs:
 
       - name: Code Coverage [Export report to lcov format]
         if: matrix.fastlane_task == 'unit_tests'
-        run:
+        run: |
           # Command exports coverage data of the binaries BIN,… using the profile data PROFILE in either JSON or lcov trace file format.
           llvm-cov export \
           # Export format and output source file than Coveralls Action will publish it
