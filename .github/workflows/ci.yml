@@ -87,15 +87,15 @@ jobs:
           -use-color \
           -show-instantiation-summary \
           --instr-profile=$(find ./output -name "*.profdata") \
-          --object ./output/Build/Products/Debug-iphonesimulator/Common.framework/Common \
-          --object ./output/Build/Products/Debug-iphonesimulator/TransferMethod.framework/TransferMethod \
-          --object ./output/Build/Products/Debug-iphonesimulator/TransferMethodRepository.framework/TransferMethodRepository \
-          --object ./output/Build/Products/Debug-iphonesimulator/Receipt.framework/Receipt \
-          --object ./output/Build/Products/Debug-iphonesimulator/ReceiptRepository.framework/ReceiptRepository \
-          --object ./output/Build/Products/Debug-iphonesimulator/Transfer.framework/Transfer \
-          --object ./output/Build/Products/Debug-iphonesimulator/TransferRepository.framework/TransferRepository \
-          --object ./output/Build/Products/Debug-iphonesimulator/UserRepository.framework/UserRepository \
-          --object ./output/Build/Products/Debug-iphonesimulator/BalanceRepository.framework/BalanceRepository \
+          --object $(find ./output -name "Common.framework)."/Common" \
+          --object $(find ./output -name "TransferMethod.framework)."/TransferMethod" \
+          --object $(find ./output -name "TransferMethodRepository.framework)."/TransferMethodRepository" \
+          --object $(find ./output -name "Receipt.framework)."/Receipt" \
+          --object $(find ./output -name "ReceiptRepository.framework)."/ReceiptRepository" \
+          --object $(find ./output -name "Transfer.framework)."/Transfer" \
+          --object $(find ./output -name "TransferRepository.framework)."/TransferRepository" \
+          --object $(find ./output -name "UserRepository.framework)."/UserRepository" \
+          --object $(find ./output -name "BalanceRepository.framework)."/BalanceRepository" \
           -ignore-filename-regex=/Sources/Helper/ -ignore-filename-regex=/Sources/Extensions/ \
           -ignore-filename-regex=Cell.swift -ignore-filename-regex=Controller.swift \
           -ignore-filename-regex=HyperwalletUI.swift \
@@ -110,15 +110,15 @@ jobs:
           llvm-cov export \
           --format=lcov > ./coverage/lcov.info \
           --instr-profile=$(find ./output -name "*.profdata") \
-          --object ./output/Build/Products/Debug-iphonesimulator/Common.framework/Common \
-          --object ./output/Build/Products/Debug-iphonesimulator/TransferMethod.framework/TransferMethod \
-          --object ./output/Build/Products/Debug-iphonesimulator/TransferMethodRepository.framework/TransferMethodRepository \
-          --object ./output/Build/Products/Debug-iphonesimulator/Receipt.framework/Receipt \
-          --object ./output/Build/Products/Debug-iphonesimulator/ReceiptRepository.framework/ReceiptRepository \
-          --object ./output/Build/Products/Debug-iphonesimulator/Transfer.framework/Transfer \
-          --object ./output/Build/Products/Debug-iphonesimulator/TransferRepository.framework/TransferRepository \
-          --object ./output/Build/Products/Debug-iphonesimulator/UserRepository.framework/UserRepository \
-          --object ./output/Build/Products/Debug-iphonesimulator/BalanceRepository.framework/BalanceRepository \
+          --object $(find ./output -name "Common.framework)."/Common" \
+          --object $(find ./output -name "TransferMethod.framework)."/TransferMethod" \
+          --object $(find ./output -name "TransferMethodRepository.framework)."/TransferMethodRepository" \
+          --object $(find ./output -name "Receipt.framework)."/Receipt" \
+          --object $(find ./output -name "ReceiptRepository.framework)."/ReceiptRepository" \
+          --object $(find ./output -name "Transfer.framework)."/Transfer" \
+          --object $(find ./output -name "TransferRepository.framework)."/TransferRepository" \
+          --object $(find ./output -name "UserRepository.framework)."/UserRepository" \
+          --object $(find ./output -name "BalanceRepository.framework)."/BalanceRepository" \
           -ignore-filename-regex=/Sources/Helper/ -ignore-filename-regex=/Sources/Extensions/ \
           -ignore-filename-regex=Cell.swift -ignore-filename-regex=Controller.swift \
           -ignore-filename-regex=HyperwalletUI.swift \
