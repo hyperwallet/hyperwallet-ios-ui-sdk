@@ -56,77 +56,23 @@ jobs:
         run:
           swiftlint lint --strict --reporter json
 
-      - name: Convert Test Coverage Resport to lcov formart [Common]
-        if: matrix.fastlane_task == 'unit_tests'
-        uses: maxep/xcodebuild-lcov-action@0.1.0
-        with:
-            target: Common.framework
-            derived-data-path: ./output
-            output-file: ./coverage/lcov.info
+      # - name: Convert Test Coverage Resport to lcov formart [Common]
+      #   if: matrix.fastlane_task == 'unit_tests'
+      #   uses: maxep/xcodebuild-lcov-action@0.1.0
+      #   with:
+      #       target: Common.framework
+      #       derived-data-path: ./output
+      #       output-file: ./coverage/lcov.info
 
-      - name: Convert Test Coverage Resport to lcov formart [Receipt]
+      - name: Build code coverage report
         if: matrix.fastlane_task == 'unit_tests'
-        uses: maxep/xcodebuild-lcov-action@0.1.0
-        with:
-            target: Receipt.framework
-            derived-data-path: ./output
-            output-file: ./coverage/lcov.info
+        run:
+          llvm-cov report  --instr-profile=./output/Build/ProfileData/5B68FEE6-F30F-447E-8DAA-FCB84E5E9471/Coverage.profdata --object ./output/Build/Products/Debug-iphonesimulator/Common.framework/Common --object ./output/Build/Products/Debug-iphonesimulator/TransferMethod.framework/TransferMethod --object ./output/Build/Products/Debug-iphonesimulator/TransferMethodRepository.framework/TransferMethodRepository --object ./output/Build/Products/Debug-iphonesimulator/Receipt.framework/Receipt --object ./output/Build/Products/Debug-iphonesimulator/ReceiptRepository.framework/ReceiptRepository --object ./output/Build/Products/Debug-iphonesimulator/Transfer.framework/Transfer --object ./output/Build/Products/Debug-iphonesimulator/TransferRepository.framework/TransferRepository --object ./output/Build/Products/Debug-iphonesimulator/UserRepository.framework/UserRepository --object ./output/Build/Products/Debug-iphonesimulator/BalanceRepository.framework/BalanceRepository
 
-      - name: Convert Test Coverage Resport to lcov formart [ReceiptRepository]
+      - name: Export code coverage report to lcov format
         if: matrix.fastlane_task == 'unit_tests'
-        uses: maxep/xcodebuild-lcov-action@0.1.0
-        with:
-            target: ReceiptRepository.framework
-            derived-data-path: ./output
-            output-file: ./coverage/lcov.info
-
-      - name: Convert Test Coverage Resport to lcov formart [Transfer]
-        if: matrix.fastlane_task == 'unit_tests'
-        uses: maxep/xcodebuild-lcov-action@0.1.0
-        with:
-            target: Transfer.framework
-            derived-data-path: ./output
-            output-file: ./coverage/lcov.info
-
-      - name: Convert Test Coverage Resport to lcov formart [TransferMethod]
-        if: matrix.fastlane_task == 'unit_tests'
-        uses: maxep/xcodebuild-lcov-action@0.1.0
-        with:
-            target: TransferMethod.framework
-            derived-data-path: ./output
-            output-file: ./coverage/lcov.info
-
-      - name: Convert Test Coverage Resport to lcov formart [TransferMethodRepository]
-        if: matrix.fastlane_task == 'unit_tests'
-        uses: maxep/xcodebuild-lcov-action@0.1.0
-        with:
-            target: TransferMethodRepository.framework
-            derived-data-path: ./output
-            output-file: ./coverage/lcov.info
-
-      - name: Convert Test Coverage Resport to lcov formart [TransferRepository]
-        if: matrix.fastlane_task == 'unit_tests'
-        uses: maxep/xcodebuild-lcov-action@0.1.0
-        with:
-            target: TransferRepository.framework
-            derived-data-path: ./output
-            output-file: ./coverage/lcov.info
-
-      - name: Convert Test Coverage Resport to lcov formart [UserRepository]
-        if: matrix.fastlane_task == 'unit_tests'
-        uses: maxep/xcodebuild-lcov-action@0.1.0
-        with:
-            target: UserRepository.framework
-            derived-data-path: ./output
-            output-file: ./coverage/lcov.info
-
-      - name: Convert Test Coverage Resport to lcov formart [BalanceRepository]
-        if: matrix.fastlane_task == 'unit_tests'
-        uses: maxep/xcodebuild-lcov-action@0.1.0
-        with:
-            target: BalanceRepository.framework
-            derived-data-path: ./output
-            output-file: ./coverage/lcov.info
+        run:
+          llvm-cov export  --instr-profile=./output/Build/ProfileData/5B68FEE6-F30F-447E-8DAA-FCB84E5E9471/Coverage.profdata --object ./output/Build/Products/Debug-iphonesimulator/Common.framework/Common --object ./output/Build/Products/Debug-iphonesimulator/TransferMethod.framework/TransferMethod --object ./output/Build/Products/Debug-iphonesimulator/TransferMethodRepository.framework/TransferMethodRepository --object ./output/Build/Products/Debug-iphonesimulator/Receipt.framework/Receipt --object ./output/Build/Products/Debug-iphonesimulator/ReceiptRepository.framework/ReceiptRepository --object ./output/Build/Products/Debug-iphonesimulator/Transfer.framework/Transfer --object ./output/Build/Products/Debug-iphonesimulator/TransferRepository.framework/TransferRepository --object ./output/Build/Products/Debug-iphonesimulator/UserRepository.framework/UserRepository --object ./output/Build/Products/Debug-iphonesimulator/BalanceRepository.framework/BalanceRepository --format=lcov > ./coverage/lcov.info
 
       - name: Post to Coveralls
         if: matrix.fastlane_task == 'unit_tests'
