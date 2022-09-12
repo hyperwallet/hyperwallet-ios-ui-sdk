@@ -68,7 +68,11 @@ jobs:
 
       - name: Code Coverage [Build report]
         if: matrix.code_coverage
-        uses: maxep/xcodebuild-lcov-action@0.1.0
+        run:
+          export PATH="/usr/local/opt/llvm/bin:$PATH"
+
+      - name: Code Coverage [Build report]
+        if: matrix.code_coverage
         run: |
           llvm-cov report \
           --use-color \
@@ -87,7 +91,6 @@ jobs:
 
       - name: Code Coverage [Export report to lcov format]
         if: matrix.code_coverage
-        uses: maxep/xcodebuild-lcov-action@0.1.0
         run: |
           llvm-cov export \
           --format=lcov > ./coverage/lcov.info \
