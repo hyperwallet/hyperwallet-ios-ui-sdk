@@ -56,34 +56,46 @@ jobs:
         run:
           swiftlint lint --strict --reporter json
 
-      # - name: Convert Test Coverage Resport to lcov formart [Common]
-      #   if: matrix.fastlane_task == 'unit_tests'
-      #   uses: maxep/xcodebuild-lcov-action@0.1.0
-      #   with:
-      #       target: Common.framework
-      #       derived-data-path: ./output
-      #       output-file: ./coverage/lcov.info
-
       - name: Build code coverage report
         if: matrix.fastlane_task == 'unit_tests'
         run:
+          # Command displays a summary of the coverage of the binaries BIN,… using the profile data PROFILE.
           llvm-cov report \
-          --instr-profile= $(find ./output -name "*.profdata") \
-          --object ./output/Build/Products/Debug-iphonesimulator/Common.framework/Common \
-          --object ./output/Build/Products/Debug-iphonesimulator/TransferMethod.framework/TransferMethod \
-          --object ./output/Build/Products/Debug-iphonesimulator/TransferMethodRepository.framework/TransferMethodRepository \
-          --object ./output/Build/Products/Debug-iphonesimulator/Receipt.framework/Receipt \
-          --object ./output/Build/Products/Debug-iphonesimulator/ReceiptRepository.framework/ReceiptRepository \
-          --object ./output/Build/Products/Debug-iphonesimulator/Transfer.framework/Transfer \
-          --object ./output/Build/Products/Debug-iphonesimulator/TransferRepository.framework/TransferRepository \
-          --object ./output/Build/Products/Debug-iphonesimulator/UserRepository.framework/UserRepository \
-          --object ./output/Build/Products/Debug-iphonesimulator/BalanceRepository.framework/BalanceRepository
+            # Enable color output
+            -use-color \
+            # Show statistics for all function instantiations.
+            -show-instantiation-summary \
+            # Profile data
+            --instr-profile=$(find ./output -name "*.profdata") \
+            # BIN may be an executable, object file, dynamic library, or archive
+            --object ./output/Build/Products/Debug-iphonesimulator/Common.framework/Common \
+            --object ./output/Build/Products/Debug-iphonesimulator/TransferMethod.framework/TransferMethod \
+            --object ./output/Build/Products/Debug-iphonesimulator/TransferMethodRepository.framework/TransferMethodRepository \
+            --object ./output/Build/Products/Debug-iphonesimulator/Receipt.framework/Receipt \
+            --object ./output/Build/Products/Debug-iphonesimulator/ReceiptRepository.framework/ReceiptRepository \
+            --object ./output/Build/Products/Debug-iphonesimulator/Transfer.framework/Transfer \
+            --object ./output/Build/Products/Debug-iphonesimulator/TransferRepository.framework/TransferRepository \
+            --object ./output/Build/Products/Debug-iphonesimulator/UserRepository.framework/UserRepository \
+            --object ./output/Build/Products/Debug-iphonesimulator/BalanceRepository.framework/BalanceRepository \
+            # Skip source code files
+            -ignore-filename-regex=/Sources/Helper/ -ignore-filename-regex=/Sources/Extensions/ \
+            -ignore-filename-regex=Cell.swift -ignore-filename-regex=Controller.swift \
+            -ignore-filename-regex=HyperwalletUI.swift \
+            -ignore-filename-regex=/Sources/View/ \
+            -ignore-filename-regex=Coordinators \
+            -ignore-filename-regex=AddTransferMethodSectionData \
+            -ignore-filename-regex=HyperwalletCoordinatorTypes
 
       - name: Export code coverage report to lcov format
         if: matrix.fastlane_task == 'unit_tests'
         run:
+          # Command exports coverage data of the binaries BIN,… using the profile data PROFILE in either JSON or lcov trace file format.
           llvm-cov export \
-          --instr-profile= $(find ./output -name "*.profdata") \
+          # Export format and output source file than Coveralls Action will publish it
+          --format=lcov > ./coverage/lcov.info \
+          # Profile data
+          --instr-profile=$(find ./output -name "*.profdata") \
+          # BIN may be an executable, object file, dynamic library, or archive
           --object ./output/Build/Products/Debug-iphonesimulator/Common.framework/Common \
           --object ./output/Build/Products/Debug-iphonesimulator/TransferMethod.framework/TransferMethod \
           --object ./output/Build/Products/Debug-iphonesimulator/TransferMethodRepository.framework/TransferMethodRepository \
@@ -93,7 +105,14 @@ jobs:
           --object ./output/Build/Products/Debug-iphonesimulator/TransferRepository.framework/TransferRepository \
           --object ./output/Build/Products/Debug-iphonesimulator/UserRepository.framework/UserRepository \
           --object ./output/Build/Products/Debug-iphonesimulator/BalanceRepository.framework/BalanceRepository \
-          --format=lcov > ./coverage/lcov.info
+          # Skip source code files
+          -ignore-filename-regex=/Sources/Helper/ -ignore-filename-regex=/Sources/Extensions/ \
+          -ignore-filename-regex=Cell.swift -ignore-filename-regex=Controller.swift \
+          -ignore-filename-regex=HyperwalletUI.swift \
+          -ignore-filename-regex=/Sources/View/ \
+          -ignore-filename-regex=Coordinators \
+          -ignore-filename-regex=AddTransferMethodSectionData \
+          -ignore-filename-regex=HyperwalletCoordinatorTypes
 
       - name: Post to Coveralls
         if: matrix.fastlane_task == 'unit_tests'
