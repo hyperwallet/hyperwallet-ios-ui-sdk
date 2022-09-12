@@ -67,12 +67,33 @@ jobs:
       - name: Build code coverage report
         if: matrix.fastlane_task == 'unit_tests'
         run:
-          llvm-cov report  --instr-profile=./output/Build/ProfileData/5B68FEE6-F30F-447E-8DAA-FCB84E5E9471/Coverage.profdata --object ./output/Build/Products/Debug-iphonesimulator/Common.framework/Common --object ./output/Build/Products/Debug-iphonesimulator/TransferMethod.framework/TransferMethod --object ./output/Build/Products/Debug-iphonesimulator/TransferMethodRepository.framework/TransferMethodRepository --object ./output/Build/Products/Debug-iphonesimulator/Receipt.framework/Receipt --object ./output/Build/Products/Debug-iphonesimulator/ReceiptRepository.framework/ReceiptRepository --object ./output/Build/Products/Debug-iphonesimulator/Transfer.framework/Transfer --object ./output/Build/Products/Debug-iphonesimulator/TransferRepository.framework/TransferRepository --object ./output/Build/Products/Debug-iphonesimulator/UserRepository.framework/UserRepository --object ./output/Build/Products/Debug-iphonesimulator/BalanceRepository.framework/BalanceRepository
+          llvm-cov report \
+          --instr-profile= $(find ./output -name "*.profdata") \
+          --object ./output/Build/Products/Debug-iphonesimulator/Common.framework/Common \
+          --object ./output/Build/Products/Debug-iphonesimulator/TransferMethod.framework/TransferMethod \
+          --object ./output/Build/Products/Debug-iphonesimulator/TransferMethodRepository.framework/TransferMethodRepository \
+          --object ./output/Build/Products/Debug-iphonesimulator/Receipt.framework/Receipt \
+          --object ./output/Build/Products/Debug-iphonesimulator/ReceiptRepository.framework/ReceiptRepository \
+          --object ./output/Build/Products/Debug-iphonesimulator/Transfer.framework/Transfer \
+          --object ./output/Build/Products/Debug-iphonesimulator/TransferRepository.framework/TransferRepository \
+          --object ./output/Build/Products/Debug-iphonesimulator/UserRepository.framework/UserRepository \
+          --object ./output/Build/Products/Debug-iphonesimulator/BalanceRepository.framework/BalanceRepository
 
       - name: Export code coverage report to lcov format
         if: matrix.fastlane_task == 'unit_tests'
         run:
-          llvm-cov export  --instr-profile=./output/Build/ProfileData/5B68FEE6-F30F-447E-8DAA-FCB84E5E9471/Coverage.profdata --object ./output/Build/Products/Debug-iphonesimulator/Common.framework/Common --object ./output/Build/Products/Debug-iphonesimulator/TransferMethod.framework/TransferMethod --object ./output/Build/Products/Debug-iphonesimulator/TransferMethodRepository.framework/TransferMethodRepository --object ./output/Build/Products/Debug-iphonesimulator/Receipt.framework/Receipt --object ./output/Build/Products/Debug-iphonesimulator/ReceiptRepository.framework/ReceiptRepository --object ./output/Build/Products/Debug-iphonesimulator/Transfer.framework/Transfer --object ./output/Build/Products/Debug-iphonesimulator/TransferRepository.framework/TransferRepository --object ./output/Build/Products/Debug-iphonesimulator/UserRepository.framework/UserRepository --object ./output/Build/Products/Debug-iphonesimulator/BalanceRepository.framework/BalanceRepository --format=lcov > ./coverage/lcov.info
+          llvm-cov export \
+          --instr-profile= $(find ./output -name "*.profdata") \
+          --object ./output/Build/Products/Debug-iphonesimulator/Common.framework/Common \
+          --object ./output/Build/Products/Debug-iphonesimulator/TransferMethod.framework/TransferMethod \
+          --object ./output/Build/Products/Debug-iphonesimulator/TransferMethodRepository.framework/TransferMethodRepository \
+          --object ./output/Build/Products/Debug-iphonesimulator/Receipt.framework/Receipt \
+          --object ./output/Build/Products/Debug-iphonesimulator/ReceiptRepository.framework/ReceiptRepository \
+          --object ./output/Build/Products/Debug-iphonesimulator/Transfer.framework/Transfer \
+          --object ./output/Build/Products/Debug-iphonesimulator/TransferRepository.framework/TransferRepository \
+          --object ./output/Build/Products/Debug-iphonesimulator/UserRepository.framework/UserRepository \
+          --object ./output/Build/Products/Debug-iphonesimulator/BalanceRepository.framework/BalanceRepository \
+          --format=lcov > ./coverage/lcov.info
 
       - name: Post to Coveralls
         if: matrix.fastlane_task == 'unit_tests'
