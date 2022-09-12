@@ -66,22 +66,9 @@ jobs:
         run:
           swiftlint lint --strict --reporter json
 
-      - name: Code Coverage [Cache LLVM and Clang]
-        id: cache-llvm
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./llvm
-          key: llvm-10.0
-      - name: Code Coverage [Install LLVM and Clang]
-        if: matrix.code_coverage
-        uses: KyleMayes/install-llvm-action@v1
-        with:
-          version: "10.0"
-          cached: ${{ steps.cache-llvm.outputs.cache-hit }}
-
       - name: Code Coverage [Build report]
         if: matrix.code_coverage
+        uses: maxep/xcodebuild-lcov-action@0.1.0
         run: |
           llvm-cov report \
           --use-color \
@@ -100,6 +87,7 @@ jobs:
 
       - name: Code Coverage [Export report to lcov format]
         if: matrix.code_coverage
+        uses: maxep/xcodebuild-lcov-action@0.1.0
         run: |
           llvm-cov export \
           --format=lcov > ./coverage/lcov.info \
@@ -115,6 +103,11 @@ jobs:
           --object $(find ./output -name "BalanceRepository") \
           -ignore-filename-regex="Coordinators|AddTransferMethodSectionData|HyperwalletCoordinatorTypes|Sources/Helper|Sources/Extensions|Sources/View" \
           -ignore-filename-regex="Cell.swift|HyperwalletUI.swift|Controller.swift"
+
+      - name: Code Coverage [Commmit on PR]
+        uses: romeovs/lcov-reporter-action@v0.2.16
+        with:
+          lcov-file: ./coverage/lcov.info
 
       - name: Post to Coveralls
         if: matrix.code_coverage
