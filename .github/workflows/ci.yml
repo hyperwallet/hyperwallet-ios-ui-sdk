@@ -58,7 +58,7 @@ jobs:
 
 
       - name: Run ${{ matrix.task_title }}
-        if: fastlane_task == 'ui_tests_v2'
+        if: matrix.fastlane_task == 'ui_tests_v2'
         run: fastlane add_plugin test_center
 
       - name: Run ${{ matrix.task_title }}
