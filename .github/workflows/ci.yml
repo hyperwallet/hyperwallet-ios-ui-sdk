@@ -105,11 +105,6 @@ jobs:
           -ignore-filename-regex="Coordinators|AddTransferMethodSectionData|HyperwalletCoordinatorTypes|Sources/Helper|Sources/Extensions|Sources/View" \
           -ignore-filename-regex="Cell.swift|HyperwalletUI.swift|Controller.swift"
 
-      - name: Code Coverage [Commmit on PR]
-        uses: romeovs/lcov-reporter-action@v0.2.16
-        with:
-          lcov-file: ./coverage/lcov.info
-
       - name: Post to Coveralls
         if: matrix.code_coverage
         uses: coverallsapp/github-action@master
