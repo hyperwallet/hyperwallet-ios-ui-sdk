@@ -89,6 +89,7 @@ jobs:
         if: matrix.code_coverage
         run: |
           export PATH="/usr/local/opt/llvm/bin:$PATH"
+          mkdir coverage
           llvm-cov export \
           --format=lcov > ./coverage/lcov.info \
           --instr-profile=$(find ./output -name "*.profdata") \
