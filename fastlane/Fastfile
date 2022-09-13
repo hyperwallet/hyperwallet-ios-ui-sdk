@@ -30,6 +30,45 @@ lane :ui_tests do
   )
 end
 
+test_run_block = lambda do |testrun_info|
+  failed_test_count = testrun_info[:failed].size
+  passed_test_count = testrun_info[:passing].size
+  try_attempt = testrun_info[:try_count]
+  batch = testrun_info[:batch]
+  # UI.abort _with message! ('You could conditionally abort')
+  UI.message( "everything is fine, let's continue try #{try_attempt + 1} for batch #{batch}")
+  {
+    continue: true,
+    only_testing: ['HyperwalletUISDK']
+  }
+end
+
+sim_callback = lambda do |simulator_device_udid|
+  puts "Start streaming system log for device #{simulator_device_udid}"
+end
+
+override_scan_options_callback = lambda do |options|
+  options.delete(:xctestrun) unless FastlaneCore::Helper.xcode at_least?(10)
+end
+
+lane :ui_tests_v2 do
+  multi_scan(
+    project: File.absolute_path('../HyperwalletUISDK.xcodeproj'),
+    devices: ['iPhone 13 Pro Max'],
+    scheme: "Demo",
+    configuration: 'XCUITest',
+    try_count: 3,
+    batch_count: 4,
+    fail_build: false,
+    parallel_testrun_count: 4,
+    # testrun_completed_block: test_run_block,
+    # simulator_started_callback: sim_callback,
+    # override_scan_options_block: override_scan_options_callback,
+    output_remove_retry_attempts: true,
+    xcargs: 'ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO'
+  )
+end
+
 lane :release_beta do
   version = updateVersion("beta")
   message = "Release #{version}"
