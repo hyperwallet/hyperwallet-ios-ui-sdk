@@ -21,9 +21,6 @@ lane :ui_tests do
     devices: ['iPhone 13 Pro Max'],
     scheme: "Demo",
     configuration: 'XCUITest',
-    # max_concurrent_simulators: 4,
-    # parallel_testing: true,
-    # build_for_testing: true,
     number_of_retries: 3,
     output_remove_retry_attempts: true,
     xcargs: 'ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO'
