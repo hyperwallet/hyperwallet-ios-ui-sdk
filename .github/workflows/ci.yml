@@ -25,14 +25,12 @@ jobs:
             task_title: 'Unit Tests'
             fastlane_task: 'unit_tests'
             xcode_version: 13.4
-            coverage_target: 'Common.framework'
             code_coverage: true
 
           - os: macos-12
             task_title: 'UI Tests'
             fastlane_task: 'ui_tests'
             xcode_version: 13.4
-            coverage_target: ''
             code_coverage: false
     runs-on: ${{ matrix.os }}
     steps:
