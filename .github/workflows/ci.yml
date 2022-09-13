@@ -23,13 +23,13 @@ jobs:
         include:
           - os: macos-12
             task_title: 'Unit Tests'
-            fastlane_task: 'unit_tests_v2'
+            fastlane_task: 'unit_tests'
             xcode_version: 13.4
             code_coverage: true
 
           - os: macos-12
             task_title: 'UI Tests'
-            fastlane_task: 'ui_tests'
+            fastlane_task: 'ui_tests_v2'
             xcode_version: 13.4
             code_coverage: false
     runs-on: ${{ matrix.os }}
@@ -56,8 +56,13 @@ jobs:
           --use-xcframeworks
           --no-use-binaries
 
+
       - name: Run ${{ matrix.task_title }}
-        run: bundle exec fastlane fastlane ${{ matrix.fastlane_task }}
+        if: fastlane_task == 'ui_tests_v2'
+        run: fastlane add_plugin test_center
+
+      - name: Run ${{ matrix.task_title }}
+        run: fastlane fastlane ${{ matrix.fastlane_task }}
 
       - name: Lint validation
         if: matrix.code_coverage
