@@ -62,7 +62,7 @@ jobs:
         run: fastlane add_plugin test_center
 
       - name: Run ${{ matrix.task_title }}
-        run: fastlane fastlane ${{ matrix.fastlane_task }}
+        run: fastlane fastlane ${{ matrix.fastlane_task }} --verbose
 
       - name: Lint validation
         if: matrix.code_coverage
