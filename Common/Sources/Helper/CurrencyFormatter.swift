@@ -27,14 +27,14 @@ public struct CurrencyFormatter {
         }
         return nil
     }()
-    
+
     /// Get Currency
     /// - Parameter currencyCode: currency code
     /// - Returns: instance of Currency
     public static func getCurrency(for currencyCode: String) -> Currency? {
         return currencyData?.data.first(where: { $0.currencyCode == currencyCode })
     }
-    
+
     /// Format double amount to currency string
     /// - Parameters:
     ///   - amount: amount
@@ -61,12 +61,12 @@ public struct CurrencyFormatter {
         }
         return "\(amount)"
     }
-    
+
     /// Get decimal amount from formatted currency code
     /// - Parameters:
     ///   - amount: amount string
     ///   - currencyCode: currency code
-    /// - Returns: a decimal amount 
+    /// - Returns: a decimal amount
     public static func getDecimalAmount(amount: String, currencyCode: String?) -> Double {
         let doubleAmount = NSString(string: amount).doubleValue
         if let currencyCode = currencyCode,
@@ -124,7 +124,7 @@ public struct CurrencyFormatter {
     public static func formatCurrencyWithSymbolAndCode(_ amount: String, with currencyCode: String) -> String {
         return addCurrencySymbolAndCode(formatStringAmount(amount, with: currencyCode), with: currencyCode)
     }
-    
+
     /// Format amount for currency code and add currency symbol from Currency.json
     /// - Parameters:
     ///   - amount: amount to format
@@ -138,7 +138,7 @@ public struct CurrencyFormatter {
             return amount
         }
     }
-    
+
     /// Get locale
     /// - Parameter currencyCode: currency code
     /// - Returns: a locale
@@ -148,7 +148,7 @@ public struct CurrencyFormatter {
         }
         return Locale.current
     }
-    
+
     /// Currency code and it is locale identifier
     private static let currencyMappings: [String: String] = {
         return [

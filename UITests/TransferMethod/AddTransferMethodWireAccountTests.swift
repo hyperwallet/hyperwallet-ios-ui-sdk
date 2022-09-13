@@ -22,6 +22,7 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
         super.setUp()
 
         app = XCUIApplication()
+        app.launchArguments.append("enable-testing")
         app.launchEnvironment = [
             "COUNTRY": "US",
             "CURRENCY": "USD",
@@ -77,8 +78,7 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
         addTransferMethod.setBankId("")
         addTransferMethod.setBranchId("")
         addTransferMethod.setBankAccountId("")
-
-        addTransferMethod.clickCreateTransferMethodButton()
+        addTransferMethod.wireInstructionsInput.tap()
 
         XCTAssert(addTransferMethod.bankIdError.exists)
         XCTAssert(addTransferMethod.branchIdError.exists)
@@ -95,7 +95,7 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
         addTransferMethod.setBranchId("abc123abc")
         addTransferMethod.setBankAccountId(".1a-31a")
 
-        addTransferMethod.clickCreateTransferMethodButton()
+        addTransferMethod.wireInstructionsInput.tap()
 
         XCTAssert(addTransferMethod.bankIdError.exists)
         XCTAssert(addTransferMethod.branchIdError.exists)
@@ -112,9 +112,9 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
         addTransferMethod.setBankId("a")
         addTransferMethod.setBankAccountId("")
 
-        addTransferMethod.clickCreateTransferMethodButton()
+        addTransferMethod.wireInstructionsInput.tap()
 
-        XCTAssert(addTransferMethod.bankIdError.exists)
+        XCTAssert(addTransferMethod.bankIdError.waitForExistence(timeout: 1))
         XCTAssert(addTransferMethod.branchIdError.exists)
         XCTAssert(addTransferMethod.bankAccountIdError.exists)
 
@@ -135,6 +135,7 @@ class AddTransferMethodWireAccountIndividualTests: BaseTests {
 
         addTransferMethod.setAdditionalWireInstructions("This is instruction")
         addTransferMethod.setIntermediaryBankId("ELREUS44")
+        addTransferMethod.addTransferMethodTableView.scroll(to: addTransferMethod.intermediaryBankAccountIdInput)
         addTransferMethod.setIntermediaryBankAccountId("246810")
 
         addTransferMethod.setFirstName("Tommy")

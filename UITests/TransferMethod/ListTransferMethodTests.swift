@@ -47,6 +47,7 @@ class ListTransferMethodTests: BaseTests {
         super.setUp()
 
         app = XCUIApplication()
+        app.launchArguments.append("enable-testing")
         app.launch()
 
         mockServer.setupStub(url: "/graphql",

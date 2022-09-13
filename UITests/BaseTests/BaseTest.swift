@@ -73,10 +73,10 @@ class BaseTests: XCTestCase {
 
         // speed up UI
         let keyWindow = UIApplication.shared.connectedScenes
-                .filter({$0.activationState == .foregroundActive})
-                .compactMap({$0 as? UIWindowScene})
+                .filter({ $0.activationState == .foregroundActive })
+                .compactMap({ $0 as? UIWindowScene })
                 .first?.windows
-                .filter({$0.isKeyWindow}).first
+                .first(where: { $0.isKeyWindow })
         keyWindow?.layer.speed = 100
         UIView.setAnimationsEnabled(false)
     }

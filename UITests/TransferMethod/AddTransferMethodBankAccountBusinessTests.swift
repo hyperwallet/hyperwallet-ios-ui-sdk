@@ -9,6 +9,7 @@ class AddTransferMethodBankAccountBusinessTests: BaseTests {
         super.setUp()
 
         app = XCUIApplication()
+        app.launchArguments.append("enable-testing")
         app.launchEnvironment = [
             "COUNTRY": "US",
             "CURRENCY": "USD",
@@ -82,6 +83,8 @@ class AddTransferMethodBankAccountBusinessTests: BaseTests {
         addTransferMethod.setBankAccountId("7861012347")
         addTransferMethod.selectAccountType("CHECKING")
         addTransferMethod.setBusinessName("Smith & Co")
+        
+        addTransferMethod.addTransferMethodTableView.scroll(to: addTransferMethod.phoneNumberInput)
         addTransferMethod.setPhoneNumber("+16045555555")
         addTransferMethod.setMobileNumber("+16046666666")
         addTransferMethod.selectCountry("United States")

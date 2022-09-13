@@ -7,6 +7,7 @@ class TransferUserFundsPPCTest: BaseTests {
     override func setUp() {
         super.setUp()
         app = XCUIApplication()
+        app.launchArguments.append("enable-testing")
         app.launch()
         spinner = app.activityIndicators["activityIndicator"]
         transferFundPPCMenu = app.tables.cells

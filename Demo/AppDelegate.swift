@@ -25,6 +25,16 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
+#if DEBUG
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        let keyWindow = UIApplication.shared.connectedScenes
+                .filter({ $0.activationState == .foregroundActive })
+                .compactMap({ $0 as? UIWindowScene })
+                .first?.windows
+                .first(where: { $0.isKeyWindow })
+        keyWindow?.layer.speed = 100
+    }
+#endif
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -36,6 +46,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ThemeManager.applyToUINavigationBar()
         // Set the default tint color
 
+        #if DEBUG
+        if CommandLine.arguments.contains("enable-testing") {
+            configureAppForTesting()
+        }
+        #endif
+
         return true
+    }
+    
+    private func configureAppForTesting() {
+        // Disable animations during testing
+        UIView.setAnimationsEnabled(false)        
+        // Speed cursor
+        self.window?.layer.speed = 2
     }
 }

@@ -11,6 +11,7 @@ class ListAllReceiptsTests: BaseTests {
         super.setUp()
 
         app = XCUIApplication()
+        app.launchArguments.append("enable-testing")
         app.launch()
 
         receiptsList = ReceiptsList(app: app)
@@ -137,7 +138,7 @@ class ListAllReceiptsTests: BaseTests {
 
         // Assert empty placeholder text for Available funds
         let noTransaction = transactionDetails.getNoTransactionStrings()
-        XCTAssertEqual(transactionDetails.noPPCReceiptLabel.label, noTransaction)
+        XCTAssertTrue(app.tables[noTransaction].exists)
     }
 
     /*
@@ -172,7 +173,7 @@ class ListAllReceiptsTests: BaseTests {
         waitForNonExistence(spinner)
 
         let noTransaction = transactionDetails.getPPCNoTransactionStringYear()
-        XCTAssertEqual(transactionDetails.noPPCReceiptLabel.label, noTransaction)
+        XCTAssertTrue(app.tables[noTransaction].exists)
     }
 
     /*
@@ -267,8 +268,9 @@ class ListAllReceiptsTests: BaseTests {
         secondaryCardTab.tap()
         waitForNonExistence(spinner)
         XCTAssertTrue(secondaryCardTab.isSelected, "Secondary Prepaid Card is selected")
+//        XCUIApplication().tables["No transactions in the past 365 days."].tap()
         let noTransaction = transactionDetails.getPPCNoTransactionStringYear()
-        XCTAssertEqual(transactionDetails.noPPCReceiptLabel.label, noTransaction)
+        XCTAssertTrue(app.tables[noTransaction].exists)
     }
 
     /*

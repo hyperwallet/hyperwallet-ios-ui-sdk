@@ -24,6 +24,7 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
         super.setUp()
 
         app = XCUIApplication()
+        app.launchArguments.append("enable-testing")
         app.launchEnvironment = [
             "COUNTRY": "US",
             "CURRENCY": "USD",
@@ -104,6 +105,7 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
 
         XCTAssert(otherElements
             .containing(NSPredicate(format: "label CONTAINS %@", branchIdPatternError)).count == 1)
+        
         XCTAssert(otherElements
             .containing(NSPredicate(format: "label CONTAINS %@", bankAccountIdPatternError)).count == 1)
     }
@@ -168,7 +170,6 @@ class AddTransferMethodBankAccountIndividualTests: BaseTests {
 
         addTransferMethod.clickCreateTransferMethodButton()
         waitForNonExistence(spinner)
-        
         
         XCTAssertEqual(app.alerts.element.label, "Authentication Error")
     }

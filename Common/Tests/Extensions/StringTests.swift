@@ -85,9 +85,9 @@ class StringTests: XCTestCase {
                                                    with: "",
                                                    options: NSString.CompareOptions.literal,
                                                    range: nil)
-                        XCTAssertEqual($1.formatToCurrency(with: $2),
-                                       expected,
-                                       "\($0) test case - currency should be equal to \($3)")
+            XCTAssertEqual($1.formatToCurrency(with: $2),
+                           expected,
+                           "\($0) test case - currency should be equal to \($3)")
         }
     }
 }

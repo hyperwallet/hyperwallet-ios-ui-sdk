@@ -3,6 +3,30 @@ lane :beta do
   update("beta", version)
 end
 
+lane :unit_tests do
+  run_tests(
+    project: "HyperwalletUISDK.xcodeproj",
+    devices: ['iPhone 13 Pro'],
+    derived_data_path: './output',
+    scheme: "HyperwalletUISDK",
+    configuration: 'Debug',
+    code_coverage: true,
+    xcargs: 'ONLY_ACTIVE_ARCH=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO'
+  )
+end
+
+lane :ui_tests do
+  run_tests(
+    project: "HyperwalletUISDK.xcodeproj",
+    devices: ['iPhone 13 Pro Max'],
+    scheme: "Demo",
+    configuration: 'XCUITest',
+    number_of_retries: 3,
+    output_remove_retry_attempts: true,
+    xcargs: 'ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO'
+  )
+end
+
 lane :release_beta do
   version = updateVersion("beta")
   message = "Release #{version}"

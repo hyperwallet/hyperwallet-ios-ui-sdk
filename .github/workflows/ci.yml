@@ -1,0 +1,110 @@
+name: Core UI SDK CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+      - support/SDK-V3
+      - feature/**
+      - bugfix/**
+  pull_request:
+    branches:
+      - master
+      - support/SDK-V3
+      - feature/**
+      - bugfix/**
+jobs:
+  tests:
+    name: Tests
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-12
+            task_title: 'Unit Tests'
+            fastlane_task: 'unit_tests'
+            xcode_version: 13.4
+            code_coverage: true
+
+          - os: macos-12
+            task_title: 'UI Tests'
+            fastlane_task: 'ui_tests'
+            xcode_version: 13.4
+            code_coverage: false
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '${{ matrix.xcode_version }}'
+
+      - name: Carthage [Setup cache]
+        uses: actions/cache@v3
+        with:
+          path: Carthage
+          key: ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
+
+      - name: Carthage [Install dependencies]
+        run: carthage bootstrap
+          --platform ios
+          --cache-builds
+          --use-xcframeworks
+          --no-use-binaries
+
+      - name: Run ${{ matrix.task_title }}
+        run: fastlane ${{ matrix.fastlane_task }}
+
+      - name: Lint validation
+        if: matrix.code_coverage
+        run:
+          swiftlint lint --strict --reporter json
+
+      - name: Code Coverage [Build report]
+        if: matrix.code_coverage
+        run: |
+          export PATH="/usr/local/opt/llvm/bin:$PATH"
+          llvm-cov report \
+          --use-color \
+          --instr-profile=$(find ./output -name "*.profdata") \
+          --object $(find ./output -name "Common") \
+          --object $(find ./output -name "TransferMethod") \
+          --object $(find ./output -name "TransferMethodRepository") \
+          --object $(find ./output -name "Receipt") \
+          --object $(find ./output -name "ReceiptRepository") \
+          --object $(find ./output -name "Transfer") \
+          --object $(find ./output -name "TransferRepository") \
+          --object $(find ./output -name "UserRepository") \
+          --object $(find ./output -name "BalanceRepository") \
+          -ignore-filename-regex="Coordinators|AddTransferMethodSectionData|HyperwalletCoordinatorTypes|Sources/Helper|Sources/Extensions|Sources/View" \
+          -ignore-filename-regex="Cell.swift|HyperwalletUI.swift|Controller.swift"
+
+      - name: Code Coverage [Export report to lcov format]
+        if: matrix.code_coverage
+        run: |
+          export PATH="/usr/local/opt/llvm/bin:$PATH"
+          mkdir coverage
+          llvm-cov export \
+          --format=lcov > ./coverage/lcov.info \
+          --instr-profile=$(find ./output -name "*.profdata") \
+          --object $(find ./output -name "Common") \
+          --object $(find ./output -name "TransferMethod") \
+          --object $(find ./output -name "TransferMethodRepository") \
+          --object $(find ./output -name "Receipt") \
+          --object $(find ./output -name "ReceiptRepository") \
+          --object $(find ./output -name "Transfer") \
+          --object $(find ./output -name "TransferRepository") \
+          --object $(find ./output -name "UserRepository") \
+          --object $(find ./output -name "BalanceRepository") \
+          -ignore-filename-regex="Coordinators|AddTransferMethodSectionData|HyperwalletCoordinatorTypes|Sources/Helper|Sources/Extensions|Sources/View" \
+          -ignore-filename-regex="Cell.swift|HyperwalletUI.swift|Controller.swift"
+
+      - name: Post to Coveralls
+        if: matrix.code_coverage
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
