@@ -22,7 +22,7 @@ import Common
 import UIKit
 
 /// Coordinator class for CreateTransfer
-public class CreateTransferCoordinator: NSObject, HyperwalletCoordinator  {
+public class CreateTransferCoordinator: NSObject, HyperwalletCoordinator {
     private let controller: CreateTransferController
     private var parentController: UIViewController?
 

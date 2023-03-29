@@ -2763,7 +2763,6 @@
 				073BB97E22E63DB50053C24E /* Sources */,
 				073BB97F22E63DB50053C24E /* Frameworks */,
 				073BB98022E63DB50053C24E /* Resources */,
-				073BB99C22E63E530053C24E /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -2800,7 +2799,6 @@
 				4A9A7BDB22E859E60022E573 /* Sources */,
 				4A9A7BDC22E859E60022E573 /* Frameworks */,
 				4A9A7BDD22E859E60022E573 /* Resources */,
-				4A9A7BF922E85B390022E573 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -2842,7 +2840,6 @@
 				4AE6B6BC22D605B20009DEFE /* Sources */,
 				4AE6B6BD22D605B20009DEFE /* Frameworks */,
 				4AE6B6BE22D605B20009DEFE /* Resources */,
-				4A012F5022D62EAA008C1D35 /* Swift Lint */,
 			);
 			buildRules = (
 			);
@@ -2879,7 +2876,6 @@
 				643912D022DF40CB00036609 /* Sources */,
 				643912D122DF40CB00036609 /* Frameworks */,
 				643912D222DF40CB00036609 /* Resources */,
-				DB551F6322E132C000DD65C2 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -2961,7 +2957,6 @@
 				DB551F4522E1316400DD65C2 /* Sources */,
 				DB551F4622E1316400DD65C2 /* Frameworks */,
 				DB551F4722E1316400DD65C2 /* Resources */,
-				DB551F6422E132D900DD65C2 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -2998,7 +2993,6 @@
 				DB551FA322E1409700DD65C2 /* Sources */,
 				DB551FA422E1409700DD65C2 /* Frameworks */,
 				DB551FA522E1409700DD65C2 /* Resources */,
-				DBC199FD22E29D4E004447DD /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -3038,7 +3032,6 @@
 				DB99C2C422E220C200E45185 /* Sources */,
 				DB99C2C522E220C200E45185 /* Frameworks */,
 				DB99C2C622E220C200E45185 /* Resources */,
-				DBC199FC22E29D3E004447DD /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -3078,7 +3071,6 @@
 				DBAF929922CFCBC7004F197A /* Sources */,
 				DBAF929A22CFCBC7004F197A /* Frameworks */,
 				DBAF929B22CFCBC7004F197A /* Resources */,
-				DBAF92B922CFCEF2004F197A /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -3115,7 +3107,6 @@
 				FD09388D25EE252E00AAA29B /* Sources */,
 				FD09388E25EE252E00AAA29B /* Frameworks */,
 				FD09388F25EE252E00AAA29B /* Resources */,
-				FD9509DD25EE31B300585046 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -3631,171 +3622,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		073BB99C22E63E530053C24E /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\nset -x\nif [ -z \"$CI\" ]; then\n  if ! which swiftlint > /dev/null; then\n    echo \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\n  else\n    swiftlint --fix\n    swiftlint\n  fi\nfi\n";
-		};
-		4A012F5022D62EAA008C1D35 /* Swift Lint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Swift Lint";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\nset -x\nif [ -z \"$CI\" ]; then\n  if ! which swiftlint > /dev/null; then\n    echo \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\n  else\n    swiftlint --fix\n    swiftlint\n  fi\nfi\n";
-		};
-		4A9A7BF922E85B390022E573 /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\nset -x\nif [ -z \"$CI\" ]; then\n  if ! which swiftlint > /dev/null; then\n    echo \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\n  else\n    swiftlint --fix\n    swiftlint\n  fi\nfi\n";
-		};
-		DB551F6322E132C000DD65C2 /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\nset -x\nif [ -z \"$CI\" ]; then\n  if ! which swiftlint > /dev/null; then\n    echo \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\n  else\n    swiftlint --fix\n    swiftlint\n  fi\nfi\n";
-		};
-		DB551F6422E132D900DD65C2 /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\nset -x\nif [ -z \"$CI\" ]; then\n  if ! which swiftlint > /dev/null; then\n    echo \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\n  else\n    swiftlint --fix\n    swiftlint\n  fi\nfi\n";
-		};
-		DBAF92B922CFCEF2004F197A /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\nset -x\nif [ -z \"$CI\" ]; then\n  if ! which swiftlint > /dev/null; then\n    echo \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\n  else\n    swiftlint --fix\n    swiftlint\n  fi\nfi\n";
-		};
-		DBC199FC22E29D3E004447DD /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\nset -x\nif [ -z \"$CI\" ]; then\n  if ! which swiftlint > /dev/null; then\n    echo \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\n  else\n    swiftlint --fix\n    swiftlint\n  fi\nfi\n";
-		};
-		DBC199FD22E29D4E004447DD /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\nset -x\nif [ -z \"$CI\" ]; then\n  if ! which swiftlint > /dev/null; then\n    echo \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\n  else\n    swiftlint --fix\n    swiftlint\n  fi\nfi\n";
-		};
-		FD9509DD25EE31B300585046 /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nset -e\nset -x\nif [ -z \"$CI\" ]; then\n  if ! which swiftlint > /dev/null; then\n    echo \"warning: SwiftLint is not installed. To install run `brew install SwiftLint`\"\n  else\n    swiftlint --fix\n    swiftlint\n  fi\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		073BB97E22E63DB50053C24E /* Sources */ = {

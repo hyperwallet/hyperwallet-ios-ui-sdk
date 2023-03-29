@@ -62,4 +62,5 @@ public final class HyperwalletIcon {
             return .bankAccount
         }
     }
+    // swiftlint:enable cyclomatic_complexity
 }

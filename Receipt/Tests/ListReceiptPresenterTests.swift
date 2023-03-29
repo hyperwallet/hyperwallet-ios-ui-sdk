@@ -37,7 +37,6 @@ class ListReceiptPresenterTests: XCTestCase {
         Hyperwallet.setup(HyperwalletTestHelper.authenticationProvider)
     }
 
-    // swiftlint:disable function_body_length
     func testListUserReceipt_success() {
         // Given
         HyperwalletTestHelper.setUpMockServer(request: setUpReceiptRequest(listReceiptPayload))

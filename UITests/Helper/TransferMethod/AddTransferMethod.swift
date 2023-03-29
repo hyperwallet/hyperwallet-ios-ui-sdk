@@ -199,6 +199,7 @@ class AddTransferMethod {
         bankAccountIdError = elementQuery["bankAccountId_error"]
         bankAccountPurposeError = elementQuery["bankAccountPurpose_error"]
     }
+    // swiftlint:enable function_body_length
 
     func setBankId(_ bankId: String) {
         bankIdInput.clearAndEnterText(text: bankId)

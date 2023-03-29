@@ -28,7 +28,6 @@ class TransferUserFundsConfirmationTest: BaseTests {
         transferFundsConfirmation = TransferFundsConfirmation(app: app)
     }
 
-    // swiftlint:disable function_body_length
     func testTransferFundsConfirmation_withoutFX() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
                              filename: "ListMoreThanOneTransferMethod",
@@ -194,6 +193,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
         verifyConfirmationSuccess()
         waitForNonExistence(spinner)
     }
+    // swiftlint:enable function_body_length
 
     // Tranfer Venmo Manage method
     func testTransferFundsConfirmationVenmo_withFX() {
@@ -292,6 +292,7 @@ class TransferUserFundsConfirmationTest: BaseTests {
             "label CONTAINS[c] 'The transfer request has expired on Wed Jul 24 21:38:58 GMT 2019. Please create a new transfer and commit it before 120 seconds.'")
         XCTAssert(app.alerts["Error"].staticTexts.element(matching: predicate).exists)
     }
+    // swiftlint:enable line_length
 
     func testTransferFundsConfirmation_FxChanged() {
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
@@ -331,13 +332,18 @@ class TransferUserFundsConfirmationTest: BaseTests {
         XCTAssertTrue(button.exists)
 
         // Assert the message showing the final amount to be transferred has changed
-        XCTAssertTrue(app.otherElements["Due to changes in the exchange rate, you'll now receive: 5,855.66 USD"].exists)
+        XCTAssertTrue(
+            app.otherElements["Due to changes in the exchange rate, you'll now receive: 5,855.66 USD"].exists)
     }
 
     // Transfer with no fee section test
     func testTransferFundsConfirmation_verifySummaryWithZeroFee() {
-        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods", filename: "ListMoreThanOneTransferMethod", method: HTTPMethod.get)
-        mockServer.setupStub(url: "/rest/v3/transfers", filename: "AvailableFundUSD", method: HTTPMethod.post)
+        mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
+                             filename: "ListMoreThanOneTransferMethod",
+                             method: HTTPMethod.get)
+        mockServer.setupStub(url: "/rest/v3/transfers",
+                             filename: "AvailableFundUSD",
+                             method: HTTPMethod.post)
 
         transferFundMenu.tap()
         waitForNonExistence(spinner)
@@ -358,7 +364,9 @@ class TransferUserFundsConfirmationTest: BaseTests {
         // Assert Destination Amount is automatically insert into the amount field
         XCTAssertEqual(transferFunds.transferAmount.value as? String, "452.14")
 
-        mockServer.setupStub(url: "/rest/v3/transfers", filename: "CreateTransferWithZeroFee", method: HTTPMethod.post)
+        mockServer.setupStub(url: "/rest/v3/transfers",
+                             filename: "CreateTransferWithZeroFee",
+                             method: HTTPMethod.post)
 
         // Navigate to Confirmation Detail
         transferFunds.tapContinueButton()
@@ -371,7 +379,8 @@ class TransferUserFundsConfirmationTest: BaseTests {
 
         // NOTE Section
         XCTAssertTrue(transferFundsConfirmation.noteLabel.exists)
-        XCTAssertEqual(transferFundsConfirmation.noteDescription.value as? String, "Transfer All without fee - show No fee!")
+        XCTAssertEqual(
+            transferFundsConfirmation.noteDescription.value as? String, "Transfer All without fee - show No fee!")
     }
 
     // MARK: PPC is the transfer source
@@ -380,7 +389,6 @@ class TransferUserFundsConfirmationTest: BaseTests {
      When create transfer to a Bank Account with different currency from the PPC
      Then user can create transfer successfully
      */
-    // swiftlint:disable function_body_length
     func testTransferFunds_TransferFromPrimaryPPCWithFX() {
         // Response for Transfer methods list
         mockServer.setupStub(url: "/rest/v3/users/usr-token/transfer-methods",
@@ -434,7 +442,9 @@ class TransferUserFundsConfirmationTest: BaseTests {
         waitForExistence(transferFundsConfirmation.tranferFromSectionLabel)
         // Transfer from
         transferFundsConfirmation.verifyTransferFrom(isAvailableFunds: false)
-        transferFundsConfirmation.verifyPPCInfo(brandType: transferFunds.prepaidCardVisa, endingDigit: "9285", currency: "USD")
+        transferFundsConfirmation.verifyPPCInfo(brandType: transferFunds.prepaidCardVisa,
+                                                endingDigit: "9285",
+                                                currency: "USD")
 
         // 1.  Add Destination Section
         transferFundsConfirmation.verifyDestination(country: "United States", endingDigit: "1234")
