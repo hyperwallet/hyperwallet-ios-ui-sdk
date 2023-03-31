@@ -263,7 +263,7 @@ class TransferMethodConfigurationRepositoryTests: XCTestCase {
         XCTAssertNotNil(error, "The error should not be nil")
         XCTAssertNil(transferMethodConfigurationField, "The transferMethodConfigurationField should be nil")
     }
-    // swiftlint:disable function_body_length
+
     func testRefreshKeys_refreshKeysData() {
         TransferMethodConfigurationRepositoryTests
             .setupResponseMockServer(keyResponseData)

@@ -245,6 +245,7 @@ final class CreateTransferPresenter {
         }
     }
 
+    // swiftlint:disable function_body_length
     private func loadAllAvailableSources() {
         view?.showLoading()
         transferSourceCellConfigurations.removeAll()
@@ -300,6 +301,7 @@ final class CreateTransferPresenter {
                 }
         }
     }
+    // swiftlint:enable function_body_length
 
     private func setUpPrepaidCardQueryParam() -> HyperwalletPrepaidCardQueryParam {
         let queryParam = HyperwalletPrepaidCardQueryParam()

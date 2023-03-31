@@ -293,3 +293,4 @@ class ViewController: UITableViewController {
         }
     }
 }
+// swiftlint:enable force_cast

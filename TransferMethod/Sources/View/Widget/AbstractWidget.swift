@@ -82,11 +82,14 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
     func focus() {
         fatalError("not implemented")
     }
+    // swiftlint:enable unavailable_function
 
+    // swiftlint:disable unavailable_function
     @objc
     func handleTap(sender: UITapGestureRecognizer? = nil) {
         fatalError("not implemented")
     }
+    // swiftlint:enable unavailable_function
 
     func hideError() {
         label.textColor = Theme.Text.labelColor
@@ -161,6 +164,7 @@ class AbstractWidget: UIStackView, UITextFieldDelegate {
     func value() -> String {
         fatalError("value() has not been implemented")
     }
+    // swiftlint:enable unavailable_function
 
     private func isInvalidEmptyValue() -> Bool {
         let isInvalid = field.isRequired ?? false && value().isEmpty

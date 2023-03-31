@@ -79,6 +79,7 @@ class TextWidgetTests: XCTestCase {
             testSuite.addTest(testCase)
         }
     }
+    // swiftlint:enable function_parameter_count
 
     // swiftlint:disable function_body_length
     private static func getTestParameters() -> [[String]] {
@@ -203,4 +204,5 @@ class TextWidgetTests: XCTestCase {
         ]
         return testParameters
     }
+    // swiftlint:enable function_body_length
 }

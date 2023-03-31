@@ -6,7 +6,7 @@ end
 lane :unit_tests do
   run_tests(
     project: "HyperwalletUISDK.xcodeproj",
-    devices: ['iPhone 13 Pro'],
+    devices: ['iPhone 14 Pro'],
     derived_data_path: './output',
     scheme: "HyperwalletUISDK",
     configuration: 'Debug',
