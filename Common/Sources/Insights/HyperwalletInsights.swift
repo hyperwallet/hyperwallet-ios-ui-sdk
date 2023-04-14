@@ -61,6 +61,10 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
     private init() {
         loadConfigurationAndInitializeInsights(completion: { _ in })
     }
+    
+    private init(_ configuration: Configuration) {
+        initializeInsights(configuration: configuration)
+    }
 
     /// Clears Insights SDK instance.
     public static func clearInstance() {
@@ -73,6 +77,30 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
         if instance == nil {
             instance = HyperwalletInsights()
         }
+    }
+    
+    static func setup(_ configuration: Configuration) {
+        instance = HyperwalletInsights(configuration)
+    }
+    
+    /// Set up HyperwalletInsights
+    /// - Parameter completion: the callback handler to indicate the initialization status
+    static func setup(completion: @escaping (HyperwalletErrorType?) -> Void) {
+        if let instance = instance {
+            completion(nil)
+            return
+        }
+        
+        Hyperwallet.shared.getConfiguration { configuration, error in
+            guard let configuration = configuration else {
+                completion(error)
+                return
+            }
+            
+            instance = HyperwalletInsights(configuration)
+            completion(nil)
+        }
+        
     }
 
     /// Track Clicks
