@@ -69,6 +69,7 @@ public final class HyperwalletUI: NSObject {
             }
             
             instance = HyperwalletUI()
+            completion(nil)
         })
     }
 
