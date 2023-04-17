@@ -63,24 +63,25 @@ public final class HyperwalletUI: NSObject {
         }
         
         Hyperwallet.setup(provider)
-        HyperwalletInsights.setup(completion: { error in
-            if let error = error {
-                completion(error);
+        Hyperwallet.shared.getConfiguration { configuration, error in
+            guard let configuration = configuration else {
+                completion(error)
+                return
             }
-            
-            instance = HyperwalletUI()
+
+            HyperwalletInsights.setup(configuration)
             completion(nil)
-        })
+        }
+    }
+
+    private override init() {
+        // Register custom fonts
+        UIFont.register("icomoon", type: "ttf")
     }
 
     private convenience init(_ provider: HyperwalletAuthenticationTokenProvider) {
         self.init()
         Hyperwallet.setup(provider)
         HyperwalletInsights.setup()
-    }
-    
-    private override init() {
-        // Register custom fonts
-        UIFont.register("icomoon", type: "ttf")
     }
 }

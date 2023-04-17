@@ -51,6 +51,7 @@ public protocol HyperwalletInsightsProtocol: AnyObject {
 /// It contains methods to call Insights for various actions performed by the user
 public class HyperwalletInsights: HyperwalletInsightsProtocol {
     private static var instance: HyperwalletInsights?
+    private var configuration: Configuration?
     var insights: InsightsProtocol?
 
     /// Returns the previously initialized instance of the HyperwalletInsights interface object
@@ -63,6 +64,7 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
     }
     
     private init(_ configuration: Configuration) {
+        self.configuration = configuration
         initializeInsights(configuration: configuration)
     }
 
@@ -81,26 +83,6 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
     
     static func setup(_ configuration: Configuration) {
         instance = HyperwalletInsights(configuration)
-    }
-    
-    /// Set up HyperwalletInsights
-    /// - Parameter completion: the callback handler to indicate the initialization status
-    static func setup(completion: @escaping (HyperwalletErrorType?) -> Void) {
-        if let instance = instance {
-            completion(nil)
-            return
-        }
-        
-        Hyperwallet.shared.getConfiguration { configuration, error in
-            guard let configuration = configuration else {
-                completion(error)
-                return
-            }
-            
-            instance = HyperwalletInsights(configuration)
-            completion(nil)
-        }
-        
     }
 
     /// Track Clicks
@@ -179,6 +161,11 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
     }
 
     private func loadConfiguration(completion: @escaping(Configuration?) -> Void) {
+        if configuration != nil {
+            completion(configuration)
+            return
+        }
+        
         // Fetch configuration again
         Hyperwallet.shared.getConfiguration { configuration, _ in
             if let configuration = configuration {
