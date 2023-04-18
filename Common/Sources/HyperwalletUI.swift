@@ -74,14 +74,14 @@ public final class HyperwalletUI: NSObject {
         }
     }
 
-    private override init() {
-        // Register custom fonts
-        UIFont.register("icomoon", type: "ttf")
-    }
-
     private convenience init(_ provider: HyperwalletAuthenticationTokenProvider) {
         self.init()
         Hyperwallet.setup(provider)
         HyperwalletInsights.setup()
+    }
+
+    private override init() {
+        // Register custom fonts
+        UIFont.register("icomoon", type: "ttf")
     }
 }
