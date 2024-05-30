@@ -1,9 +1,5 @@
 Changelog
 =========
-[1.0.0-beta19](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta18)
--------------------
-- add security context
-
 [1.0.0-beta18](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta18)
 -------------------
 - Handle HTTP 401
