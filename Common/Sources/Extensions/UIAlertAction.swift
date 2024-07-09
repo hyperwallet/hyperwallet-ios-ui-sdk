@@ -42,7 +42,7 @@ public extension UIAlertAction {
     /// - Parameter viewController: a view needs to show the alert dialog
     /// - Returns: a cancel alert action with a pop back handler
     static func cancel(_ viewController: UIViewController) -> UIAlertAction {
-        let handler = { (_: UIAlertAction) in
+        let handler = { (_: UIAlertAction) -> Void in
             viewController.navigationController?.popViewController(animated: true) }
         return cancel(handler)
     }
@@ -60,7 +60,7 @@ public extension UIAlertAction {
     /// - Parameter viewController: a view needs to show the alert dialog
     /// - Returns: a close alert action with a pop back handler
     static func close(_ viewController: UIViewController) -> UIAlertAction {
-        let handler = { (_: UIAlertAction) in
+        let handler = { (_: UIAlertAction) -> Void in
             viewController.navigationController?.popViewController(animated: true) }
         return close(handler)
     }

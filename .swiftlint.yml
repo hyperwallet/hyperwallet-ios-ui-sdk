@@ -9,6 +9,7 @@ disabled_rules: # rule identifiers to exclude from running
   - inclusive_language
   - trailing_whitespace
   - override_in_extension
+  - redundant_void_return
 
 type_name:
     max_length: # warning and error
