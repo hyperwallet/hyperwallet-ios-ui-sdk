@@ -92,7 +92,7 @@ final class ListTransferMethodController: UITableViewController {
                                                           preferredStyle: .actionSheet)
             actionSheetController.addAction(UIAlertAction(title: "edit".localized(),
                                                           style: .default,
-                                                          handler: { _ -> Void in
+                                                          handler: { _ in
                                                             let coordinator = HyperwalletUI
                                                                 .shared
                                                                 .updateTransferMethodCoordinator(
@@ -102,7 +102,7 @@ final class ListTransferMethodController: UITableViewController {
                                                             }))
             actionSheetController.addAction(UIAlertAction(title: "remove".localized(),
                                                           style: .default,
-                                                          handler: { _ -> Void in
+                                                          handler: { _ in
                                                             self.showConfirmationAlert(
                                                                 title: "mobileAreYouSure".localized(),
                                                                 message: "",
@@ -151,7 +151,7 @@ final class ListTransferMethodController: UITableViewController {
     }
 
     private func showConfirmationAlert(title: String?, message: String, transferMethodIndex: Int) {
-        let removeHandler = { [weak self] (_: UIAlertAction) -> Void in
+        let removeHandler = { [weak self] (_: UIAlertAction) in
             guard let strongSelf = self else {
                 return
             }

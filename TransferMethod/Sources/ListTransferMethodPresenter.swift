@@ -86,7 +86,7 @@ final class ListTransferMethodPresenter {
                 guard let statusTransition = resultStatusTransition else {
                     return
                 }
-                view.showConfirmation(handler: { () -> Void in
+                view.showConfirmation(handler: { () in
                     strongSelf.listTransferMethods(true)
                     view.notifyTransferMethodDeactivated(statusTransition)
                 })

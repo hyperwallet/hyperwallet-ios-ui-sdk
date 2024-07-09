@@ -1,8 +1,16 @@
 Changelog
 =========
-[1.0.0-beta19](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta18)
+[1.0.0-beta21](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta21)
+-------------------
+- Update privacy manifest
+
+[1.0.0-beta20](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta20)
 -------------------
 - add security context
+
+[1.0.0-beta19](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta19)
+-------------------
+- Address swift lint issues
 
 [1.0.0-beta18](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta18)
 -------------------

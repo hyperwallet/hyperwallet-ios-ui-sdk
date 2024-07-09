@@ -43,7 +43,7 @@ public final class HyperwalletUI: NSObject {
     /// it will be replaced.
     ///
     /// - Parameter provider: a provider of Hyperwallet authentication tokens.
-    public class func setup(_ provider: HyperwalletAuthenticationTokenProvider) {
+    public static func setup(_ provider: HyperwalletAuthenticationTokenProvider) {
         if instance == nil {
             instance = HyperwalletUI(provider)
         }

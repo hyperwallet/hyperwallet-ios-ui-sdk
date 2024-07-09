@@ -109,7 +109,7 @@ final class ScheduleTransferPresenter {
                 guard let statusTransition = resultStatusTransition else {
                     return
                 }
-                view.showConfirmation(handler: { () -> Void in
+                view.showConfirmation(handler: { () in
                     view.notifyTransferScheduled(statusTransition)
                 })
             }
