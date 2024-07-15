@@ -45,14 +45,39 @@ public final class HyperwalletUI: NSObject {
     /// - Parameter provider: a provider of Hyperwallet authentication tokens.
     public static func setup(_ provider: HyperwalletAuthenticationTokenProvider) {
         if instance == nil {
-            instance = HyperwalletUI(provider)
+            Hyperwallet.setup(provider)
+            HyperwalletInsights.setup()
+            instance = HyperwalletUI()
+        }
+    }
+    
+    /// Creates a new instance of the Hyperwallet UI SDK interface object. If a previously created instance exists,
+    /// it will be replaced.
+    ///
+    /// - Parameters:
+    ///   - provider: a provider of Hyperwallet authentication tokens.
+    ///   - completion: the callback handler to indicate the initialization status
+    public class func setup(_ provider: HyperwalletAuthenticationTokenProvider,
+                            completion: @escaping (HyperwalletErrorType?) -> Void) {
+        if instance != nil {
+            completion(nil)
+            return
+        }
+        
+        Hyperwallet.setup(provider)
+        Hyperwallet.shared.getConfiguration { configuration, error in
+            guard let configuration = configuration else {
+                completion(error)
+                return
+            }
+
+            HyperwalletInsights.setup(configuration)
+            completion(nil)
         }
     }
 
-    private init(_ provider: HyperwalletAuthenticationTokenProvider) {
+    override private init() {
         // Register custom fonts
         UIFont.register("icomoon", type: "ttf")
-        Hyperwallet.setup(provider)
-        HyperwalletInsights.setup()
     }
 }
