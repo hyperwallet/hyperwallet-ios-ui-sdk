@@ -24,7 +24,7 @@ jobs:
           - os: macos-15
             task_title: 'UI Tests'
             fastlane_task: 'ui_tests'
-            xcode_version: 16.4
+            xcode_version: 16.2
             code_coverage: false
     runs-on: ${{ matrix.os }}
     steps:
