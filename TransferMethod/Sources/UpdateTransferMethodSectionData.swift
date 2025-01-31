@@ -35,6 +35,7 @@ final class UpdateTransferMethodSectionData {
             return String(format: format,
                           Locale.current.localizedString(forRegionCode: country ?? "") ?? "",
                           currency ?? "").uppercased()
+
         case "UPDATE_BUTTON":
             return nil
 

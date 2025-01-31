@@ -139,7 +139,7 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
         }
     }
 
-    private func loadConfigurationAndInitializeInsights(completion: @escaping(Bool) -> Void) {
+    private func loadConfigurationAndInitializeInsights(completion: @escaping (Bool) -> Void) {
         loadConfiguration { configuration in
             if let configuration = configuration {
                 self.initializeInsights(configuration: configuration)
@@ -150,7 +150,7 @@ public class HyperwalletInsights: HyperwalletInsightsProtocol {
         }
     }
 
-    private func loadConfiguration(completion: @escaping(Configuration?) -> Void) {
+    private func loadConfiguration(completion: @escaping (Configuration?) -> Void) {
         // Fetch configuration again
         Hyperwallet.shared.getConfiguration { configuration, _ in
             if let configuration = configuration {

@@ -30,7 +30,7 @@ public class IntegratorAuthenticationProvider: HyperwalletAuthenticationTokenPro
         self.session = IntegratorAuthenticationProvider.createUrlSession(username: user, password: password)
     }
 
-    public func retrieveAuthenticationToken(completionHandler: @escaping
+    public func retrieveAuthenticationToken(completionHandler: @escaping 
         HyperwalletAuthenticationTokenProvider.CompletionHandler) {
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = "POST"
