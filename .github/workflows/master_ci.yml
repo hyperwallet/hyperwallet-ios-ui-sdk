@@ -5,9 +5,6 @@ on:
   push:
     branches:
       - master
-      - support/SDK-V3
-      - feature/**
-      - bugfix/**
 jobs:
   tests:
     name: Tests
@@ -20,6 +17,11 @@ jobs:
             fastlane_task: 'unit_tests'
             xcode_version: 16.2
             code_coverage: true
+          - os: macos-15
+            task_title: 'UI Tests'
+            fastlane_task: 'ui_tests'
+            xcode_version: 16.2
+            code_coverage: false
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
