@@ -4,6 +4,9 @@ on:
   workflow_dispatch:
   push:
     branches:
+      - support/SDK-V3
+      - feature/**
+      - bugfix/**
       - master
 
 jobs:
