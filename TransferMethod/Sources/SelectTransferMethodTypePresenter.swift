@@ -54,9 +54,9 @@ protocol SelectTransferMethodTypeView: AnyObject {
 final class SelectTransferMethodTypePresenter {
     // MARK: properties
     private weak var view: SelectTransferMethodTypeView?
-    private (set) var countryCurrencySectionData = [String]()
-    private (set) var selectedCountry = ""
-    private (set) var selectedCurrency = ""
+    private(set) var countryCurrencySectionData = [String]()
+    private(set) var selectedCountry = ""
+    private(set) var selectedCurrency = ""
     private let pageName = "transfer-method:add:select-transfer-method"
     private let pageGroup = "transfer-method"
     private let linkCountry = "select-country"
@@ -73,7 +73,7 @@ final class SelectTransferMethodTypePresenter {
         UserRepositoryFactory.shared.userRepository()
     }()
 
-    private (set) var sectionData = [HyperwalletTransferMethodType]()
+    private(set) var sectionData = [HyperwalletTransferMethodType]()
 
     /// Initialize SelectTransferMethodPresenter
     init(_ view: SelectTransferMethodTypeView,

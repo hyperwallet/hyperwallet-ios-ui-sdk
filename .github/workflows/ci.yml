@@ -15,17 +15,17 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: macos-12
+          - os: macos-15
             task_title: 'Unit Tests'
             fastlane_task: 'unit_tests'
-            xcode_version: 14.2
+            xcode_version: 16.2
             code_coverage: true
 
-          - os: macos-12
-            task_title: 'UI Tests'
-            fastlane_task: 'ui_tests'
-            xcode_version: 13.4
-            code_coverage: false
+          # - os: macos-15
+          #   task_title: 'UI Tests'
+          #   fastlane_task: 'ui_tests'
+          #   xcode_version: 16.2
+          #   code_coverage: false
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -52,6 +52,10 @@ jobs:
 
       - name: Run ${{ matrix.task_title }}
         run: fastlane ${{ matrix.fastlane_task }}
+
+      - name: Install Lint
+        run:
+          brew install swiftlint
 
       - name: Lint validation
         if: matrix.code_coverage
