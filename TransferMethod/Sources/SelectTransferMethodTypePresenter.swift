@@ -305,7 +305,8 @@ final class SelectTransferMethodTypePresenter {
         var defaultCurrencyCode: String?
         if let userCountry = userCountry, countries.contains(where: { $0.value == userCountry }) {
             selectedCountry = userCountry
-        } else if let country = countries.first, let countryValue = country.value {
+        } else if let country = countries.first,
+                    let countryValue = country.value {
             selectedCountry = countryValue
         }
         if  !selectedCountry.isEmpty{
