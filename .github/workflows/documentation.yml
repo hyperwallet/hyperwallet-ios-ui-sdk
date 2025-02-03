@@ -43,8 +43,11 @@ jobs:
       - name: Run ${{ matrix.task_title }}
         run: fastlane ${{ matrix.fastlane_task }}
 
-      - name: Install dependency
+      - name: Install sourcekitten
         run: brew install sourcekitten
+
+      - name: Install jazzy 
+        run: gem install jazzy
 
       - name: Extract comment docs
         run: |
