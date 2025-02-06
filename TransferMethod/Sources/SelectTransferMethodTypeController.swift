@@ -268,7 +268,7 @@ extension CountryCurrencyTableView: UITableViewDelegate {
 extension SelectTransferMethodTypeController {
     /// This function will navigate back from next page and pass the control back to it's caller
     override public func didFlowComplete(with response: Any) {
-        if response as? HyperwalletTransferMethod != nil {
+        if response is HyperwalletTransferMethod {
             coordinator?.navigateBackFromNextPage(with: response)
             removeCoordinator()
             flowDelegate?.didFlowComplete(with: response)

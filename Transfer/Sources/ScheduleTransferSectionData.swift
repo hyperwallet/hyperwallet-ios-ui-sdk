@@ -39,12 +39,16 @@ extension ScheduleTransferSectionData {
         switch scheduleTransferSectionHeader.rawValue {
         case "source":
             return "mobileTransferFromLabel".localized()
+
         case "destination":
             return "mobileTransferToLabel".localized()
+
         case "notes":
             return "mobileNoteLabel".localized()
+
         case "summary":
             return "mobileSummaryLabel".localized()
+
         case "foreignExchange":
             return "mobileFXlabel".localized()
 

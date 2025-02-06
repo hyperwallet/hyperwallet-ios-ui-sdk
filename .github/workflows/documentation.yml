@@ -5,9 +5,6 @@ on:
   push:
     branches:
       - master
-      - support/SDK-V3
-      - feature/**
-      - bugfix/**
 
 jobs:
   documentation:
@@ -15,9 +12,9 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: macos-12
+          - os: macos-15
             fastlane_task: 'unit_tests'
-            xcode_version: 13.4
+            xcode_version: 16.2
             code_coverage: false
     runs-on: ${{ matrix.os }}
     steps:
@@ -46,7 +43,7 @@ jobs:
       - name: Run ${{ matrix.task_title }}
         run: fastlane ${{ matrix.fastlane_task }}
 
-      - name: Install dependency
+      - name: Install sourcekitten
         run: brew install sourcekitten
 
       - name: Extract comment docs
@@ -60,6 +57,9 @@ jobs:
             sourcekitten doc --module-name Common > TempJson/Common.json
             sourcekitten doc --module-name ReceiptRepository > TempJson/ReceiptRepository.json
             sourcekitten doc --module-name Receipt > TempJson/Receipt.json
+
+      - name: Install jazzy 
+        run: gem install jazzy
 
       - name: Generate documentation
         run: |
