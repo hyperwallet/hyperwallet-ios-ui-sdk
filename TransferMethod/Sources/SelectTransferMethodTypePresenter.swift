@@ -302,22 +302,47 @@ final class SelectTransferMethodTypePresenter {
 
     private func loadSelectedCountry(_ countries: [HyperwalletCountry],
                                      with userCountry: String?) {
+        var defaultCurrencyCode: String?
         if let userCountry = userCountry, countries.contains(where: { $0.value == userCountry }) {
             selectedCountry = userCountry
         } else if let country = countries.first, let countryValue = country.value {
             selectedCountry = countryValue
         }
+        if  !selectedCountry.isEmpty{
+                        if let country = countries.first(where: { $0.code == selectedCountry }) {
+                            defaultCurrencyCode = country.defaultCurrencyCode
+                        }
+                    }
     }
 
     private func loadCurrency(_ keys: HyperwalletTransferMethodConfigurationKey?) {
-        guard let firstCurrency = keys?.currencies(from: selectedCountry)?.first,
-            let currencyCode = firstCurrency.code else {
-            view?.showAlert(message: String(format: "no_currency_available_error_message".localized(), selectedCountry))
-            return
+        guard let countries = keys?.countries(),
+              let country = countries.first(where: { $0.code == selectedCountry }) else {
+               // Handle the case when country is not found
+               let errorMessage = String(format: "no_country_found_error_message".localized(), selectedCountry ?? "Unknown Country")
+               view?.showAlert(message: errorMessage)
+               return
+           }
+        // Check if the country has a defaultCurrencyCode
+            if let defaultCurrencyCode = country.defaultCurrencyCode {
+                // If the defaultCurrencyCode exists, use it
+                selectedCurrency = defaultCurrencyCode
+            } else {
+                // If the defaultCurrencyCode is nil, fall back to the first currency in the currencyList
+                if let firstCurrency = keys?.currencies(from: selectedCountry)?.first,
+                   let currencyCode = firstCurrency.code {
+                    selectedCurrency = currencyCode
+                } else {
+                    // Show an alert if no currency is found
+                    let errorMessage = String(format: "no_currency_available_error_message".localized(), selectedCountry ?? "Unknown Country")
+                    view?.showAlert(message: errorMessage)
+                    return
+                }
+            }
+
+            // Reload the view with the updated currency data
+            view?.reloadCountryCurrencyData()
         }
-        selectedCurrency = currencyCode
-        view?.reloadCountryCurrencyData()
-    }
 
     private func loadTransferMethodTypesFeesAndProcessingTimes(
         _ transferMethodTypes: [HyperwalletTransferMethodType]?) {
