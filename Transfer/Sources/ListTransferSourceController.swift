@@ -104,7 +104,7 @@ extension ListTransferSourceController {
 extension ListTransferSourceController {
     /// The callback to refresh create transfer
     override public func didFlowComplete(with response: Any) {
-        if response as? HyperwalletTransferMethod != nil {
+        if response is HyperwalletTransferMethod {
             navigationController?.popViewController(animated: false)
             flowDelegate?.didFlowComplete(with: response)
         }

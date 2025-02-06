@@ -19,7 +19,7 @@ class AuthenticationProviderMock: HyperwalletAuthenticationTokenProvider {
         error = nil
     }
 
-    func retrieveAuthenticationToken(completionHandler authenticationTokenHandler: @escaping
+    func retrieveAuthenticationToken(completionHandler authenticationTokenHandler: @escaping 
         AuthenticationProviderMock.CompletionHandler) {
         hasRequestedClientToken = true
         authenticationTokenHandler(authorizationData, error)

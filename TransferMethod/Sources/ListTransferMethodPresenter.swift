@@ -40,7 +40,7 @@ final class ListTransferMethodPresenter {
     private weak var view: ListTransferMethodView?
     private let pageGroup = "transfer-method"
     private let pageName = "transfer-method:add:list-transfer-method"
-    private (set) var sectionData = [HyperwalletTransferMethod]()
+    private(set) var sectionData = [HyperwalletTransferMethod]()
     private lazy var transferMethodRepository = {
         TransferMethodRepositoryFactory.shared.transferMethodRepository()
     }()

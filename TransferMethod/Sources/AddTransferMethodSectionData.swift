@@ -35,8 +35,10 @@ final class AddTransferMethodSectionData {
             return String(format: format,
                           Locale.current.localizedString(forRegionCode: country ?? "") ?? "",
                           currency ?? "").uppercased()
+
         case "CREATE_BUTTON":
             return nil
+
         case "INFORMATION":
             return "mobileFeesAndProcessingTime".localized()
 
