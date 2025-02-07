@@ -302,24 +302,18 @@ final class SelectTransferMethodTypePresenter {
 
     private func loadSelectedCountry(_ countries: [HyperwalletCountry],
                                      with userCountry: String?) {
-        var defaultCurrencyCode: String?
         if let userCountry = userCountry, countries.contains(where: { $0.value == userCountry }) {
             selectedCountry = userCountry
         } else if let country = countries.first, let countryValue = country.value {
             selectedCountry = countryValue
         }
-        if  !selectedCountry.isEmpty{
-                        if let country = countries.first(where: { $0.code == selectedCountry }) {
-                            defaultCurrencyCode = country.defaultCurrencyCode
-                        }
-                    }
     }
 
     private func loadCurrency(_ keys: HyperwalletTransferMethodConfigurationKey?) {
         guard let countries = keys?.countries(),
               let country = countries.first(where: { $0.code == selectedCountry }) else {
                // Handle the case when country is not found
-               let errorMessage = String(format: "no_country_found_error_message".localized(), selectedCountry ?? "Unknown Country")
+               let errorMessage = String(format: "no_country_available_error_message".localized(), selectedCountry ?? "Unknown Country")
                view?.showAlert(message: errorMessage)
                return
            }
