@@ -315,7 +315,7 @@ final class SelectTransferMethodTypePresenter {
               let currencyCode = getCurrencyCode(country, keys) else {
             // Handle the case when country is not found
             view?.showAlert(message:
-                                String(format: "no_country_available_error_message".localized(), selectedCountry))
+                                String(format: "no_currency_available_error_message".localized(), selectedCountry))
             return
         }
         
