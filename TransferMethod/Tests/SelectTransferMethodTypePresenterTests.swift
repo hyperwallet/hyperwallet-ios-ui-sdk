@@ -227,13 +227,13 @@ class SelectTransferMethodTypePresenterTests: XCTestCase {
 
         // Then
         XCTAssertEqual(presenter.selectedCountry, "US", "The country should be US")
-        XCTAssertEqual(presenter.selectedCurrency, "CAD", "The currency should be CAD")
+        XCTAssertEqual(presenter.selectedCurrency, "USD", "The currency should be CAD")
         XCTAssertTrue(mockView.isNavigateToAddTransferMethodControllerPerformed,
                       "The navigateToAddTransferMethodControllerPerformed should be performed")
 
         XCTAssertEqual(mockView.profileType, "INDIVIDUAL", "The profileType should be INDIVIDUAL")
         XCTAssertEqual(presenter.countryCurrencySectionData.count, 2, "The countryCurrencyCount should be 2")
-        XCTAssertEqual(presenter.sectionData.count, 1, "The transferMethodTypesCount should be 1")
+        XCTAssertEqual(presenter.sectionData.count, 3, "The transferMethodTypesCount should be 3")
         XCTAssertTrue(hyperwalletInsightsMock.didTrackClick, "HyperwalletInsights.trackClick should be called")
         XCTAssertNotNil(presenter.getCountryCurrencyConfiguration(indexPath: indexPath),
                         "The country currency cell configuration should not be nil")
