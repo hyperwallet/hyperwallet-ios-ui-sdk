@@ -190,6 +190,7 @@
                 {
                     "code": "US",
                     "name": "UNITED STATES",
+                    "defaultCurrencyCode": "USD",
                     "currencies": {
                         "nodes": [
                             {
