@@ -330,17 +330,12 @@ final class SelectTransferMethodTypePresenter {
                                  _ keys: HyperwalletTransferMethodConfigurationKey?) -> String? {
         if let defaultCurrencyCode = country.defaultCurrencyCode,
            let defaultCurrency = keys?.currencies(from: selectedCountry)?
-            .contains(where: { $0.code == defaultCurrencyCode }) {
+            .first(where: { $0.code == defaultCurrencyCode }) {
             // retun the country's default currency, if it present on the currency list
-            return defaultCurrencyCode
+            return defaultCurrency.code
         }
-        // If no default currency found, return the first currency if available
-        if let currencies = keys?.currencies(from: selectedCountry), !currencies.isEmpty {
-            return currencies.first?.code
-        }
-        // Handle the error when no currencies are found
-        let errorMessage = String(format: "no_currency_available_error_message".localized(), selectedCountry)
-        return nil
+
+        return keys?.currencies(from: selectedCountry)?.first?.code
     }
     
     private func loadTransferMethodTypesFeesAndProcessingTimes(
