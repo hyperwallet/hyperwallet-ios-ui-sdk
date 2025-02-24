@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name                  = 'HyperwalletUISDK'
-    spec.version               = '1.0.0-beta21'
+    spec.version               = '1.0.1'
     spec.summary               = 'Hyperwallet UI SDK for iOS to integrate with Hyperwallet Platform'
     spec.homepage              = 'https://github.com/hyperwallet/hyperwallet-ios-ui-sdk'
     spec.license               = { :type => 'MIT', :file => 'LICENSE' }
@@ -10,7 +10,7 @@ Pod::Spec.new do |spec|
     spec.source                = { :git => 'https://github.com/hyperwallet/hyperwallet-ios-ui-sdk.git', :tag => "#{spec.version}"}
     spec.requires_arc          = true
     spec.swift_version         = '5.0'
-    spec.dependency 'HyperwalletSDK', '1.0.0-beta20'
+    spec.dependency 'HyperwalletSDK', '1.0.1'
     spec.resource_bundles = {'HyperwalletUISDK' => ['PrivacyInfo.xcprivacy']}
 
     spec.default_subspec = 'TransferMethod', 'Receipt', 'Transfer'
