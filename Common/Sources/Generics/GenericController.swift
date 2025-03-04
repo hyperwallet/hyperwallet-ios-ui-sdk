@@ -70,6 +70,7 @@ UISearchResultsUpdating, UISearchControllerDelegate {
     /// Notifies the view controller that its view is about to be added to a view hierarchy.
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = false
         tableView.reloadData()
         scrollToSelectedRow()
         setupUISearchController()

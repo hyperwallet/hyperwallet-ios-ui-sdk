@@ -38,6 +38,7 @@ final class ListTransferDestinationController: UITableViewController {
 
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = false
         navigationItem.backBarButtonItem = UIBarButtonItem.back
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                             target: self,
