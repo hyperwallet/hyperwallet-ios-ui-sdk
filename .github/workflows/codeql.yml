@@ -1,0 +1,120 @@
+name: CodeQL (Swift) - SAST
+
+on:
+  workflow_call:
+    inputs:
+      scheme:
+        description: 'xcodebuild scheme arg'
+        required: true
+        type: string
+      project:
+        description: 'xcodebuild project arg'
+        required: true
+        type: string
+      workspace:
+        description: 'Optional xcodebuild workspace arg'
+        required: false
+        type: string
+      command:
+        description: 'Optional application build command, overrides build-scheme and build-workspace'
+        required: false
+        type: string
+      timeout-minutes:
+        description: 'Optional override for larger builds'
+        required: false
+        default: 30
+        type: number
+
+permissions:
+  security-events: write
+  # required to fetch internal or private CodeQL packs
+  packages: read
+  actions: read
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  code-scanning:
+    name: Code Scanning
+    runs-on: macos-15
+    timeout-minutes: ${{ inputs.timeout-minutes }}
+    strategy:
+      fail-fast: false
+
+    steps:     
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '${{ matrix.xcode_version }}'
+      
+      - name: Carthage [Setup cache]
+        uses: actions/cache@v3
+        with:
+          path: Carthage
+          key: ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
+            
+      - name: Carthage [Install dependencies]
+        run: carthage bootstrap
+          --platform ios
+          --cache-builds
+          --use-xcframeworks
+          --no-use-binaries
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: swift
+          build-mode: manual
+          debug: true
+
+      - name: xcodebuild (default)
+        if: ${{ inputs.build-command == '' }}
+        run: |
+          project=${{ inputs.project }}
+          os_version=17.5
+          device="iPhone 15 Pro"
+          destination="platform=iOS Simulator,name=${device},OS=${os_version}"
+
+          scheme=${{ inputs.scheme }}
+          build_dir=${HOME}/Library/Developer/Xcode/DerivedData/${scheme}
+          source_packages=${build_dir}/SourcePackages
+
+          args=(
+            "-configuration Debug"
+            "-scheme ${scheme}"
+            "-project ${project}"
+            "-destination '${destination}'"
+            "-derivedDataPath ${build_dir}"
+            "-clonedSourcePackagesDirPath ${source_packages}"
+            "-disableAutomaticPackageResolution"
+            "-scmProvider system"            
+          )
+          
+          if [[ -n "${{ inputs.build-workspace }}" ]]; then
+            args+=("-workspace ${{ inputs.build-workspace }}")
+          fi
+          
+          args+=("clean")
+          args+=("build")
+          
+          build_cmd="xcodebuild ${args[*]}"
+          echo "${build_cmd}"
+          eval "${build_cmd}"
+               
+      - name: xcodebuild (custom)
+        if: ${{ inputs.build-command != '' }}
+        run: |
+          ${{ inputs.build-command }}
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:swift"
