@@ -72,7 +72,6 @@ jobs:
           args=(
             "-configuration Debug"
             "-scheme HyperwalletUISDK"
-            "-project HyperwalletUISDK.xcodeproj"
             "-destination '${destination}'"
             "-derivedDataPath ${build_dir}"
             "-clonedSourcePackagesDirPath ${source_packages}"
