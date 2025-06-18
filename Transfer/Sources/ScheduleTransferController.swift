@@ -45,6 +45,7 @@ final class ScheduleTransferController: UITableViewController, UITextFieldDelega
 
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = false
         let currentNavigationItem: UINavigationItem = tabBarController?.navigationItem ?? navigationItem
         currentNavigationItem.backBarButtonItem = UIBarButtonItem.back
         titleDisplayMode(.always, for: "mobileConfirmationHeader".localized())

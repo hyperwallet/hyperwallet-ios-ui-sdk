@@ -39,6 +39,7 @@ final class ReceiptDetailController: UITableViewController {
 
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = false
         titleDisplayMode(.never, for: "mobileTransactionDetailsHeader".localized())
     }
     

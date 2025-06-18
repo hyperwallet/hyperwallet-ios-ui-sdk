@@ -36,6 +36,7 @@ final class ListTransferSourceController: UITableViewController {
 
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = false
         navigationItem.backBarButtonItem = UIBarButtonItem.back
         titleDisplayMode(.never, for: "mobileTransferFromHeader".localized())
     }

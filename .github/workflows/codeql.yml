@@ -64,7 +64,6 @@ jobs:
           os_version=17.5
           device="iPhone 15 Pro"
           destination="platform=iOS Simulator,name=${device},OS=${os_version}"
-
           scheme=HyperwalletUISDK
           build_dir=${HOME}/Library/Developer/Xcode/DerivedData/${scheme}
           source_packages=${build_dir}/SourcePackages

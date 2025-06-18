@@ -34,7 +34,7 @@ Adding one or more of these frameworks allows users to explore the particular fu
 ### Carthage
 Specify it in your Cartfile:
 ```ogdl
-github "hyperwallet/hyperwallet-ios-ui-sdk" "1.0.1"
+github "hyperwallet/hyperwallet-ios-ui-sdk" "1.0.2"
 ```
 Add desired modules using the `Linked Frameworks and Libraries` option to make them available in the app.
 Use `import <module-name>` to add the dependency within a file
@@ -42,13 +42,13 @@ Use `import <module-name>` to add the dependency within a file
 ### CocoaPods
 - Install a specific framework (install one or more frameworks based on your requirement)
 ```ruby
-pod "HyperwalletUISDK/TransferMethod", "1.0.1"
-pod "HyperwalletUISDK/Transfer", "1.0.1"
-pod "HyperwalletUISDK/Receipt", "1.0.1"
+pod "HyperwalletUISDK/TransferMethod", "1.0.2"
+pod "HyperwalletUISDK/Transfer", "1.0.2"
+pod "HyperwalletUISDK/Receipt", "1.0.2"
 ```
 - To install all available modules (TransferMethod, Transfer, Receipt)
 ```ruby
-pod 'HyperwalletUISDK', '~> 1.0.1'
+pod 'HyperwalletUISDK', '~> 1.0.2'
 ```
 Use `import HyperwalletUISDK` to add the dependency within a file.
 
