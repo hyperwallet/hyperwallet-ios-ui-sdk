@@ -1,10 +1,14 @@
 Changelog
 =========
-[1.0.2](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta21)
+[1.0.3](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.3)
+-------------------
+- Replace dependecy Swifter by Ambassador
+
+[1.0.2](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.2)
 -------------------
 - iOS 18 Navigation Bar Display Issue Resolved it
 
-[1.0.1](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.0-beta21)
+[1.0.1](https://github.com/hyperwallet/hyperwallet-ios-ui-sdk/releases/tag/1.0.1)
 -------------------
 - Automatically select the default currency code based on the country's configuration
 

@@ -1,2 +1,3 @@
 github "JanGorman/Hippolyte" "1.4.1"
-github "httpswift/swifter" "1.5.0"
+github "envoy/Ambassador" ~> 4.0
+github "envoy/Embassy" ~> 4.0

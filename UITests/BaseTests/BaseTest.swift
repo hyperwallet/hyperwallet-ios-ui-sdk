@@ -45,7 +45,7 @@ class BaseTests: XCTestCase {
      }
 
     override func setUp() {
-        mockServer = HyperwalletMockWebServer()
+        mockServer = HyperwalletMockWebServer.shared
         mockServer.setUp()
 
         mockServer.setupStub(url: "/rest/v3/users/usr-token/authentication-token",
