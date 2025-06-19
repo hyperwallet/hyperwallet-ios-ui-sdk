@@ -1,5 +1,6 @@
 import Foundation
-import Swifter
+import Embassy
+import Ambassador
 
 enum HTTPMethod {
     case get
@@ -8,102 +9,81 @@ enum HTTPMethod {
 }
 
 final class HyperwalletMockWebServer {
-    private var server: HttpServer!
+    
+    private var server: HTTPServer!
+    private var router: Router! = Router()
+    private var loop: EventLoop!
+    private var thread: Thread!
     let testBundle = Bundle(for: HyperwalletMockWebServer.self)
+    static let shared = HyperwalletMockWebServer(port: 8432)
 
-    func setUp() {
-        server = HttpServer()
-        do {
-            try server.start(8432)
-        } catch {
-            print("Error info: \(error)")
+    private init(port: Int) {
+        loop = try! SelectorEventLoop(selector: try! KqueueSelector())
+        router = Router()
+        server = DefaultHTTPServer(eventLoop: loop, port: port, app: router.app)
+
+        try! server.start()
+
+        thread = Thread {
+            self.loop.runForever()
         }
+        thread.start()
     }
-
-    func tearDown() {
-        if server.operating {
-            server.stop()
-        }
-        server = nil
-    }
-
+    
     func setupStub(url: String, filename: String, method: HTTPMethod) {
         let filePath = testBundle.path(forResource: filename, ofType: "json")
         let fileUrl = URL(fileURLWithPath: filePath!)
+        
         do {
             let data = try Data(contentsOf: fileUrl, options: .uncached)
-            let json = dataToJSON(data: data)
-            let response: ((HttpRequest) -> HttpResponse) = { _ in
-                HttpResponse.ok(.json(json as AnyObject))
-            }
-
-            if method == .get {
-                server.GET[url] = response
-            } else if method == .put {
-                server.PUT[url] = response
-            } else {
-                server.POST[url] = response
+            guard let json = dataToJSON(data: data) else { return }
+            
+            print("ADD url:"  + url + ", JSON: \(json)")
+            router[url] = JSONResponse() { _ -> Any in
+                print("url:"  + url + ", JSON: \(json)")
+                return json
             }
         } catch {
             print("Error info: \(error)")
         }
     }
-
-    func setupStubError(url: String,
-                        filename: String,
-                        method: HTTPMethod,
-                        statusCode: Int = 400) {
+    
+    func setupStubError(url: String, filename: String, method: HTTPMethod, statusCode: Int = 400) {
         let filePath = testBundle.path(forResource: filename, ofType: "json")
         let fileUrl = URL(fileURLWithPath: filePath!)
         do {
             let data = try Data(contentsOf: fileUrl, options: .uncached)
-            let reasonPhrase = "Bad Request"
-            let headers = ["Content-Type": "application/json"]
-
-            let response: ((HttpRequest) -> HttpResponse) = { _ in
-                HttpResponse.raw(statusCode, reasonPhrase, headers, { writer in
-                    try writer.write(data)
-                })
+            guard let json = dataToJSON(data: data) else { return }
+            
+            router[url] = JSONResponse(statusCode: statusCode) { _ -> Any in
+                return json
             }
-
-            if method == .get {
-                server.GET[url] = response
-            } else if method == .put {
-                server.PUT[url] = response
-            } else {
-                server.POST[url] = response
-            }
+            
         } catch {
             print("Error info: \(error)")
         }
     }
-
+    
     func setUpEmptyResponse(url: String) {
-        let statusCode = 204
-        let headers = ["Content-Type": "application/json"]
-
-        let response: ((HttpRequest) -> HttpResponse) = { _ in
-            HttpResponse.raw(statusCode, "Empty", headers, nil)
+        router[url] = DataResponse(
+            statusCode: 204,
+            statusMessage: "No Content",
+            contentType:  "application/json",
+            headers: []
+        ) { environ, sendData in
+            sendData(Data())
         }
-
-        server.GET[url] = response
     }
+    
     func setupStubEmpty(url: String, statusCode: Int, method: HTTPMethod) {
-        let headers = ["Content-Type": "application/json"]
-
-        let response: ((HttpRequest) -> HttpResponse) = { _ in
-            HttpResponse.raw(statusCode, "Empty", headers, nil)
-        }
-
-        if method == .get {
-            server.GET[url] = response
-        } else if method == .put {
-            server.PUT[url] = response
-        } else {
-            server.POST[url] = response
-        }
+        router[url] = JSONResponse(statusCode: statusCode)
     }
-
+    
+    func shutDown() {
+        server.stop()
+        loop.stop()
+    }
+    
     func dataToJSON(data: Data) -> Any? {
         do {
             return try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
