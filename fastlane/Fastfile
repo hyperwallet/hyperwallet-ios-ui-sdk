@@ -6,7 +6,7 @@ end
 lane :unit_tests do
   run_tests(
     project: "HyperwalletUISDK.xcodeproj",
-    devices: ['iPhone 15 Pro'],
+    devices: ['iPhone 16 Pro'],
     derived_data_path: './output',
     scheme: "HyperwalletUISDK",
     configuration: 'Debug',
@@ -18,7 +18,7 @@ end
 lane :ui_tests do
   run_tests(
     project: "HyperwalletUISDK.xcodeproj",
-    devices: ['iPhone 15 Pro Max'],
+    devices: ['iPhone 16 Pro Max'],
     scheme: "Demo",
     configuration: 'XCUITest',
     number_of_retries: 3,
