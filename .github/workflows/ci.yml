@@ -20,6 +20,7 @@ jobs:
             fastlane_task: 'unit_tests'
             xcode_version: 16.2
             code_coverage: true
+            target_device: 'iPhone 16 Pro'
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -46,6 +47,10 @@ jobs:
 
       - name: List devices
         run: xcrun simctl list devices
+
+
+      - name: List simulators
+        run: xcrun simctl boot "${{ matrix.target_device }}"
 
       - name: Run ${{ matrix.task_title }}
         run: fastlane ${{ matrix.fastlane_task }}
