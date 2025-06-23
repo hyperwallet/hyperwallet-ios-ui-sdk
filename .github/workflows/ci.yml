@@ -20,7 +20,6 @@ jobs:
             fastlane_task: 'unit_tests'
             xcode_version: 16.2
             code_coverage: true
-            target_device: 'iPhone 16 Pro'
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -30,19 +29,13 @@ jobs:
         with:
           xcode-version: '${{ matrix.xcode_version }}'
 
-      - name: List devices
-        run: xcrun simctl list devices
-
-      - name: Start simulator
-        run: xcrun simctl boot "${{ matrix.target_device }}"
-
-#      - name: Carthage [Setup cache]
-#        uses: actions/cache@v3
-#        with:
-#          path: Carthage
-#          key: ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
-#          restore-keys: |
-#            ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
+      - name: Carthage [Setup cache]
+        uses: actions/cache@v3
+        with:
+          path: Carthage
+          key: ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
 
       - name: Carthage [Install dependencies]
         run: carthage bootstrap
