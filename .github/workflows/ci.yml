@@ -44,6 +44,9 @@ jobs:
           --use-xcframeworks
           --no-use-binaries
 
+      - name: List devices
+        run: xcrun simctl list devices
+
       - name: Run ${{ matrix.task_title }}
         run: fastlane ${{ matrix.fastlane_task }}
 
