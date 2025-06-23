@@ -30,13 +30,19 @@ jobs:
         with:
           xcode-version: '${{ matrix.xcode_version }}'
 
-      - name: Carthage [Setup cache]
-        uses: actions/cache@v3
-        with:
-          path: Carthage
-          key: ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
-          restore-keys: |
-            ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
+      - name: List devices
+        run: xcrun simctl list devices
+
+      - name: Start simulator
+        run: xcrun simctl boot "${{ matrix.target_device }}"
+
+#      - name: Carthage [Setup cache]
+#        uses: actions/cache@v3
+#        with:
+#          path: Carthage
+#          key: ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
+#          restore-keys: |
+#            ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
 
       - name: Carthage [Install dependencies]
         run: carthage bootstrap
@@ -44,13 +50,6 @@ jobs:
           --cache-builds
           --use-xcframeworks
           --no-use-binaries
-
-      - name: List devices
-        run: xcrun simctl list devices
-
-
-      - name: List simulators
-        run: xcrun simctl boot "${{ matrix.target_device }}"
 
       - name: Run ${{ matrix.task_title }}
         run: fastlane ${{ matrix.fastlane_task }}
