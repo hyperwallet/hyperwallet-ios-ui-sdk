@@ -46,7 +46,6 @@ class BaseTests: XCTestCase {
 
     override func setUp() {
         mockServer = HyperwalletMockWebServer.shared
-        mockServer.setUp()
 
         mockServer.setupStub(url: "/rest/v3/users/usr-token/authentication-token",
                              filename: "AuthenticationTokenWalletModelResponse",
@@ -103,9 +102,5 @@ class BaseTests: XCTestCase {
 
     func clickBackButton() {
         app.navigationBars.buttons[Common.navBackButton].tap()
-    }
-
-    override func tearDown() {
-        mockServer.tearDown()
     }
 }

@@ -201,8 +201,6 @@ class TransferUserFundsConfirmationTest: BaseTests {
                              filename: "ListTransferMethodMoreThanOneVenmo",
                              method: HTTPMethod.get)
 
-       
-
         mockServer.setupStub(url: "/rest/v3/transfers/trf-token/status-transitions",
                              filename: "TransferStatusQuoted",
                              method: HTTPMethod.post)

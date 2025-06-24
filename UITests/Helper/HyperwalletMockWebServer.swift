@@ -1,6 +1,6 @@
-import Foundation
-import Embassy
 import Ambassador
+import Embassy
+import Foundation
 
 enum HTTPMethod {
     case get
@@ -8,8 +8,8 @@ enum HTTPMethod {
     case put
 }
 
+// swiftlint:disable force_try
 final class HyperwalletMockWebServer {
-    
     private var server: HTTPServer!
     private var router: Router! = Router()
     private var loop: EventLoop!
@@ -30,17 +30,16 @@ final class HyperwalletMockWebServer {
         thread.start()
     }
     
-    func setupStub(url: String, filename: String, method: HTTPMethod) {
+    func setupStub(url: String, filename: String, method: HTTPMethod, statusCode: Int = 200) {
         let filePath = testBundle.path(forResource: filename, ofType: "json")
         let fileUrl = URL(fileURLWithPath: filePath!)
         
         do {
             let data = try Data(contentsOf: fileUrl, options: .uncached)
-            guard let json = dataToJSON(data: data) else { return }
+            guard let json = dataToJSON(data: data)
+            else { return }
             
-            print("ADD url:"  + url + ", JSON: \(json)")
-            router[url] = JSONResponse() { _ -> Any in
-                print("url:"  + url + ", JSON: \(json)")
+            router[url] = JSONResponse(statusCode: statusCode) { _ -> Any in
                 return json
             }
         } catch {
@@ -53,12 +52,12 @@ final class HyperwalletMockWebServer {
         let fileUrl = URL(fileURLWithPath: filePath!)
         do {
             let data = try Data(contentsOf: fileUrl, options: .uncached)
-            guard let json = dataToJSON(data: data) else { return }
+            guard let json = dataToJSON(data: data)
+            else { return }
             
             router[url] = JSONResponse(statusCode: statusCode) { _ -> Any in
                 return json
             }
-            
         } catch {
             print("Error info: \(error)")
         }
@@ -68,9 +67,9 @@ final class HyperwalletMockWebServer {
         router[url] = DataResponse(
             statusCode: 204,
             statusMessage: "No Content",
-            contentType:  "application/json",
+            contentType: "application/json",
             headers: []
-        ) { environ, sendData in
+        ) { _, sendData in
             sendData(Data())
         }
     }
@@ -93,3 +92,4 @@ final class HyperwalletMockWebServer {
         return nil
     }
 }
+// swiftlint:enable force_try
