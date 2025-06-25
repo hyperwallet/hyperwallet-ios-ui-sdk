@@ -325,10 +325,12 @@ class AddTransferMethod {
     }
 
     func setCity(_ city: String) {
+        app.scroll(to: cityInput)
         cityInput.clearAndEnterText(text: city)
     }
 
     func setPostalCode(_ postalCode: String) {
+        app.scroll(to: postalCodeInput)
         postalCodeInput.clearAndEnterText(text: postalCode)
     }
 

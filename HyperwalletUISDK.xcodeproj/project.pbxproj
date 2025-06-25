@@ -185,9 +185,6 @@
 		980B9AED251D446400653D1C /* ListTransferSourceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980B9AEA251D446400653D1C /* ListTransferSourceController.swift */; };
 		980C2E9525224D8300DFDC94 /* GetPrepaidCardSuccessResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 980C2E9225224D6D00DFDC94 /* GetPrepaidCardSuccessResponse.json */; };
 		980C2E9625224F6E00DFDC94 /* PrepaidCardRepositoryRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980C2E8D25224C8200DFDC94 /* PrepaidCardRepositoryRequestHelper.swift */; };
-		980E7A312613BED800F0834B /* Swifter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; };
-		980E7A682613CB1200F0834B /* Swifter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; };
-		980E7A692613CB1200F0834B /* Swifter.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD0313E325E4EAB600505BDA /* Swifter.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		983EF20F2526A950000A55B3 /* ListTransferDestinationPrepaidCardsOnly.json in Resources */ = {isa = PBXBuildFile; fileRef = 983EF20D2526A8EB000A55B3 /* ListTransferDestinationPrepaidCardsOnly.json */; };
 		984C47F22527E8A600CC442D /* PrepaidCardRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984C47F02527E89900CC442D /* PrepaidCardRepositoryTests.swift */; };
 		984C47F72527EC6100CC442D /* ListPrepaidCardResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 984C47F32527EC5C00CC442D /* ListPrepaidCardResponse.json */; };
@@ -303,6 +300,10 @@
 		DB46798F2260380D00E1AF49 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB46798D2260380D00E1AF49 /* LaunchScreen.storyboard */; };
 		DB4679992260386D00E1AF49 /* IntegratorAuthenticationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4679982260386D00E1AF49 /* IntegratorAuthenticationProvider.swift */; };
 		DB4BDFDF22D40B2B00761710 /* TransferMethodRepositoryFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4BDFDE22D40B2B00761710 /* TransferMethodRepositoryFactoryTests.swift */; };
+		DB4CA7F62E037278002896B5 /* Ambassador.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4CA7F52E037278002896B5 /* Ambassador.xcframework */; };
+		DB4CA7F72E037278002896B5 /* Ambassador.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DB4CA7F52E037278002896B5 /* Ambassador.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DB4CA7FC2E03729F002896B5 /* Embassy.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4CA7FB2E03729F002896B5 /* Embassy.xcframework */; };
+		DB4CA7FD2E03729F002896B5 /* Embassy.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DB4CA7FB2E03729F002896B5 /* Embassy.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DB5295DC22E22F0200657F50 /* UserReceiptResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 07BE415E229DE181002DECAF /* UserReceiptResponse.json */; };
 		DB5295DD22E22F0200657F50 /* UserReceiptNextPageResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 0743EFA022A59EE100C089EE /* UserReceiptNextPageResponse.json */; };
 		DB5295DE22E22F0200657F50 /* UserReceiptDetails.json in Resources */ = {isa = PBXBuildFile; fileRef = 4AEBF0FE22AA8CB000C664D3 /* UserReceiptDetails.json */; };
@@ -749,12 +750,23 @@
 				98CACE1B24A6CFD10000F2B0 /* Receipt.framework in Embed Frameworks */,
 				98CACE1D24A6CFD30000F2B0 /* ReceiptRepository.framework in Embed Frameworks */,
 				FD03135225E4E97200505BDA /* Insights.xcframework in Embed Frameworks */,
-				980E7A692613CB1200F0834B /* Swifter.xcframework in Embed Frameworks */,
 				FD48732425DE98D6005855B6 /* HyperwalletSDK.xcframework in Embed Frameworks */,
 				98CACE2524A6CFD80000F2B0 /* TransferRepository.framework in Embed Frameworks */,
 				98DAF67E24B7E33600A8D7CA /* Common.framework in Embed Frameworks */,
 				98CACE2324A6CFD70000F2B0 /* TransferMethodRepository.framework in Embed Frameworks */,
 				98CACE1F24A6CFD40000F2B0 /* Transfer.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB4CA7F82E037278002896B5 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DB4CA7FD2E03729F002896B5 /* Embassy.xcframework in Embed Frameworks */,
+				DB4CA7F72E037278002896B5 /* Ambassador.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1048,6 +1060,9 @@
 		DB4679BE2261083F00E1AF49 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		DB4679C2226113D100E1AF49 /* HyperwalletBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletBundle.swift; sourceTree = "<group>"; };
 		DB4BDFDE22D40B2B00761710 /* TransferMethodRepositoryFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodRepositoryFactoryTests.swift; sourceTree = "<group>"; };
+		DB4CA7F52E037278002896B5 /* Ambassador.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Ambassador.xcframework; path = Carthage/Build/Ambassador.xcframework; sourceTree = "<group>"; };
+		DB4CA7FB2E03729F002896B5 /* Embassy.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Embassy.xcframework; path = Carthage/Build/Embassy.xcframework; sourceTree = "<group>"; };
+		DB4CA8082E0992E2002896B5 /* Cartfile  */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Cartfile "; sourceTree = "<group>"; };
 		DB5295FB22E233AB00657F50 /* HyperwalletReceiptUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletReceiptUI.swift; sourceTree = "<group>"; };
 		DB5295FE22E2344B00657F50 /* HyperwalletTransferMethodUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletTransferMethodUI.swift; sourceTree = "<group>"; };
 		DB551F4922E1316400DD65C2 /* Common.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Common.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1271,7 +1286,6 @@
 		DCF74267257E305600A5295A /* ListTransferMethodResponsePaperCheck.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ListTransferMethodResponsePaperCheck.json; sourceTree = "<group>"; };
 		DCF74269257E68F500A5295A /* ListTransferMethodResponseWithoutPaperCheck.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ListTransferMethodResponseWithoutPaperCheck.json; sourceTree = "<group>"; };
 		FD03133D25E4E96700505BDA /* Hippolyte.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Hippolyte.xcframework; path = Carthage/Build/Hippolyte.xcframework; sourceTree = "<group>"; };
-		FD0313E325E4EAB600505BDA /* Swifter.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Swifter.xcframework; path = Carthage/Build/Swifter.xcframework; sourceTree = "<group>"; };
 		FD09389125EE252E00AAA29B /* BalanceRepository.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BalanceRepository.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD09389325EE252E00AAA29B /* BalanceRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BalanceRepository.h; sourceTree = "<group>"; };
 		FD0938B025EE279700AAA29B /* BalanceRepositoryFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceRepositoryFactory.swift; sourceTree = "<group>"; };
@@ -1392,7 +1406,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				980E7A312613BED800F0834B /* Swifter.xcframework in Frameworks */,
+				DB4CA7FC2E03729F002896B5 /* Embassy.xcframework in Frameworks */,
+				DB4CA7F62E037278002896B5 /* Ambassador.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1406,7 +1421,6 @@
 				98CACE2224A6CFD70000F2B0 /* TransferMethodRepository.framework in Frameworks */,
 				98CACE2424A6CFD80000F2B0 /* TransferRepository.framework in Frameworks */,
 				FD03135125E4E97200505BDA /* Insights.xcframework in Frameworks */,
-				980E7A682613CB1200F0834B /* Swifter.xcframework in Frameworks */,
 				98CACE2024A6CFD50000F2B0 /* TransferMethod.framework in Frameworks */,
 				98DAF67D24B7E33600A8D7CA /* Common.framework in Frameworks */,
 				98CACE1E24A6CFD40000F2B0 /* Transfer.framework in Frameworks */,
@@ -2373,7 +2387,8 @@
 		DBAE17C0225F136A00C5CC60 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FD0313E325E4EAB600505BDA /* Swifter.xcframework */,
+				DB4CA7FB2E03729F002896B5 /* Embassy.xcframework */,
+				DB4CA7F52E037278002896B5 /* Ambassador.xcframework */,
 				FD03133D25E4E96700505BDA /* Hippolyte.xcframework */,
 				FD4872FE25DE97BB005855B6 /* Insights.xcframework */,
 				FD48726D25DE975C005855B6 /* HyperwalletSDK.xcframework */,
@@ -2627,6 +2642,7 @@
 		DBD2667F2261A601002973C3 /* Deployment */ = {
 			isa = PBXGroup;
 			children = (
+				DB4CA8082E0992E2002896B5 /* Cartfile  */,
 				DBD266812261A611002973C3 /* Cartfile */,
 				DBD266832261A611002973C3 /* Cartfile.private */,
 				98541F142273D72C007D4238 /* CHANGELOG.md */,
@@ -2922,6 +2938,7 @@
 				DB2587F72261BFF100E6236B /* Sources */,
 				DB2587F82261BFF100E6236B /* Frameworks */,
 				DB2587F92261BFF100E6236B /* Resources */,
+				DB4CA7F82E037278002896B5 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -4349,7 +4366,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4383,7 +4403,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4417,7 +4440,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4522,6 +4548,10 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4557,6 +4587,10 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4592,6 +4626,10 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4693,7 +4731,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4726,7 +4767,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4759,7 +4803,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4859,7 +4906,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4892,7 +4942,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4925,7 +4978,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4997,7 +5053,6 @@
 		DB2588032261BFF100E6236B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 86FDS64Z83;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5025,7 +5080,6 @@
 		DB2588042261BFF100E6236B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 86FDS64Z83;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5068,12 +5122,16 @@
 					"@executable_path/Frameworks",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				ONLY_ACTIVE_ARCH = NO;
 				PREPAID_CARD_TOKEN = "trm-token";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ui.sdk.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_TOKEN = "usr-your-user-token";
@@ -5099,11 +5157,15 @@
 					"@executable_path/Frameworks",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PREPAID_CARD_TOKEN = "trm-token";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ui.sdk.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_TOKEN = "usr-your-user-token";
@@ -5139,7 +5201,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -5172,7 +5236,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -5205,7 +5271,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -5305,6 +5373,10 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -5337,6 +5409,10 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -5369,6 +5445,10 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -5481,7 +5561,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1.0.2;
+				CURRENT_PROJECT_VERSION = 1.0.3;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -5515,7 +5595,6 @@
 		DB5E93192261C3CC00CD57F6 /* XCUITest */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 86FDS64Z83;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5558,11 +5637,15 @@
 					"@executable_path/Frameworks",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PREPAID_CARD_TOKEN = "trm-token";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ui.sdk.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_TOKEN = "usr-token";
@@ -5599,6 +5682,10 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -5632,6 +5719,10 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -5665,6 +5756,10 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -5767,7 +5862,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -5800,7 +5898,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -5833,7 +5934,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -5946,7 +6050,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1.0.2;
+				CURRENT_PROJECT_VERSION = 1.0.3;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -6015,7 +6119,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1.0.2;
+				CURRENT_PROJECT_VERSION = 1.0.3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -6069,7 +6173,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ios.BalanceRepository;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -6104,7 +6211,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ios.BalanceRepository;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -6139,7 +6249,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperwallet.ios.BalanceRepository;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

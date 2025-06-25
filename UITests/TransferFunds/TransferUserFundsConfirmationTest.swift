@@ -108,12 +108,12 @@ class TransferUserFundsConfirmationTest: BaseTests {
                              filename: "ListMoreThanOneTransferMethod",
                              method: HTTPMethod.get)
 
-        mockServer.setupStub(url: "/rest/v3/transfers",
-                             filename: "AvailableFundMultiCurrencies",
-                             method: HTTPMethod.post)
-
         mockServer.setupStub(url: "/rest/v3/transfers/trf-token/status-transitions",
                              filename: "TransferStatusQuoted",
+                             method: HTTPMethod.post)
+        
+        mockServer.setupStub(url: "/rest/v3/transfers",
+                             filename: "AvailableFundMultiCurrencies",
                              method: HTTPMethod.post)
 
         transferFundMenu.tap()
@@ -201,12 +201,12 @@ class TransferUserFundsConfirmationTest: BaseTests {
                              filename: "ListTransferMethodMoreThanOneVenmo",
                              method: HTTPMethod.get)
 
-        mockServer.setupStub(url: "/rest/v3/transfers",
-                             filename: "AvailableFundsVenmoDetails",
-                             method: HTTPMethod.post)
-
         mockServer.setupStub(url: "/rest/v3/transfers/trf-token/status-transitions",
                              filename: "TransferStatusQuoted",
+                             method: HTTPMethod.post)
+        
+        mockServer.setupStub(url: "/rest/v3/transfers",
+                             filename: "AvailableFundsVenmoDetails",
                              method: HTTPMethod.post)
 
         transferFundMenu.tap()
