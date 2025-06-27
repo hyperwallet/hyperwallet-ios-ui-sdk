@@ -1062,7 +1062,6 @@
 		DB4BDFDE22D40B2B00761710 /* TransferMethodRepositoryFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodRepositoryFactoryTests.swift; sourceTree = "<group>"; };
 		DB4CA7F52E037278002896B5 /* Ambassador.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Ambassador.xcframework; path = Carthage/Build/Ambassador.xcframework; sourceTree = "<group>"; };
 		DB4CA7FB2E03729F002896B5 /* Embassy.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Embassy.xcframework; path = Carthage/Build/Embassy.xcframework; sourceTree = "<group>"; };
-		DB4CA8082E0992E2002896B5 /* Cartfile  */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Cartfile "; sourceTree = "<group>"; };
 		DB5295FB22E233AB00657F50 /* HyperwalletReceiptUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletReceiptUI.swift; sourceTree = "<group>"; };
 		DB5295FE22E2344B00657F50 /* HyperwalletTransferMethodUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperwalletTransferMethodUI.swift; sourceTree = "<group>"; };
 		DB551F4922E1316400DD65C2 /* Common.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Common.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1171,6 +1170,7 @@
 		DBD266832261A611002973C3 /* Cartfile.private */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.private; sourceTree = "<group>"; };
 		DBDE15DB22D655F000BD646F /* TransferMethodRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodRepositoryTests.swift; sourceTree = "<group>"; };
 		DBF89CB7227C072400AF4344 /* UserIndividualCountryCanadaResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UserIndividualCountryCanadaResponse.json; sourceTree = "<group>"; };
+		DBF97F862E0E4EE0002DBBB4 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		DBFB61452261E44C00C4A8AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DBFB61472261E84C00C4A8AA /* BankAccountInvalidRoutingResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BankAccountInvalidRoutingResponse.json; sourceTree = "<group>"; };
 		DBFB61482261E84C00C4A8AA /* BankCardInvalidDateOfExpiry.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BankCardInvalidDateOfExpiry.json; sourceTree = "<group>"; };
@@ -2641,7 +2641,7 @@
 		DBD2667F2261A601002973C3 /* Deployment */ = {
 			isa = PBXGroup;
 			children = (
-				DB4CA8082E0992E2002896B5 /* Cartfile  */,
+				DBF97F862E0E4EE0002DBBB4 /* Cartfile */,
 				DBD266832261A611002973C3 /* Cartfile.private */,
 				98541F142273D72C007D4238 /* CHANGELOG.md */,
 				DBD266822261A611002973C3 /* HyperwalletUISDK.podspec */,
