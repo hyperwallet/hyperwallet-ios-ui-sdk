@@ -1167,7 +1167,6 @@
 		DBCA3857225E8BAA00CD4137 /* AbstractWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractWidget.swift; sourceTree = "<group>"; };
 		DBCA385C225E8BAA00CD4137 /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		DBD266802261A611002973C3 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		DBD266812261A611002973C3 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		DBD266822261A611002973C3 /* HyperwalletUISDK.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HyperwalletUISDK.podspec; sourceTree = "<group>"; };
 		DBD266832261A611002973C3 /* Cartfile.private */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.private; sourceTree = "<group>"; };
 		DBDE15DB22D655F000BD646F /* TransferMethodRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMethodRepositoryTests.swift; sourceTree = "<group>"; };
@@ -2643,7 +2642,6 @@
 			isa = PBXGroup;
 			children = (
 				DB4CA8082E0992E2002896B5 /* Cartfile  */,
-				DBD266812261A611002973C3 /* Cartfile */,
 				DBD266832261A611002973C3 /* Cartfile.private */,
 				98541F142273D72C007D4238 /* CHANGELOG.md */,
 				DBD266822261A611002973C3 /* HyperwalletUISDK.podspec */,
