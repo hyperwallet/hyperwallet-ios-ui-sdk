@@ -56,6 +56,7 @@ playground.xcworkspace
 # Carthage/Checkouts
 # Cartfile.resolved
 Carthage/
+Cartfile.resolved
 # !/Carthage/Build/.Hippolyte.version
 # !/Carthage/Build/.swifter.version
 # !/Carthage/Build/iOS/Hippolyte.framework
