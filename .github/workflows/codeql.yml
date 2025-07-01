@@ -79,6 +79,7 @@ jobs:
           )
           
           if [[ -n "HyperwalletUISDK.xcodeproj" ]]; then
+            t=1
             #args+=("-workspace HyperwalletUISDK.xcodeproj")
           fi
           
