@@ -75,7 +75,8 @@ jobs:
             "-derivedDataPath ${build_dir}"
             "-clonedSourcePackagesDirPath ${source_packages}"
             "-disableAutomaticPackageResolution"
-            "-scmProvider system"            
+            "-scmProvider system"
+            "-destination 'generic/platform=iOS Simulator'"            
           )
           
           if [[ -n "HyperwalletUISDK.xcodeproj" ]]; then
