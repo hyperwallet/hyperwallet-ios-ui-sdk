@@ -71,7 +71,6 @@ jobs:
           args=(
             "-configuration Debug"
             "-scheme HyperwalletUISDK"
-            "-destination '${destination}'"
             "-derivedDataPath ${build_dir}"
             "-clonedSourcePackagesDirPath ${source_packages}"
             "-disableAutomaticPackageResolution"
