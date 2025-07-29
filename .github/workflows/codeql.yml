@@ -28,7 +28,11 @@ jobs:
     strategy:
       fail-fast: false
 
-    steps:     
+    steps:
+      - name: Capture start time
+        run: echo "start_time=$(date +%s)" >> $GITHUB_ENV
+        shell: bash
+      
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -94,3 +98,13 @@ jobs:
         uses: github/codeql-action/analyze@v3
         with:
           category: "/language:swift"
+
+      - name: DataDog
+        if: always() && github.event_name != 'merge_group'
+        uses: hyperwallet/public-security-workflows/datadog@main
+        with:
+          SOURCE: "CodeQL"
+          DATADOG_API_KEY: ${{ secrets.BUILD_SECURITY_PAYPAL_DATADOG_QA_TOKEN_PAYPAL_DATADOG_QA_TOKEN }}
+          BU_NAME: "Hyperwallet"
+          start_time: ${{ env.start_time }}
+          OUTCOME: "${{ steps.codeql.outcome }}"
